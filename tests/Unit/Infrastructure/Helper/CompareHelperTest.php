@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Infrastructure\Helper;
 
-use App\Application\Constant\CompareConstant;
-use App\Application\Helper\CompareHelper;
+use App\Infrastructure\Constant\CompareConstant;
+use App\Infrastructure\Helper\CompareHelper;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Infrastructure\Helper;
 
-use App\Application\Exception\RuntimeException;
-use App\Application\Helper\AttributeHelper;
+use App\Infrastructure\Exception\RuntimeException;
+use App\Infrastructure\Helper\AttributeHelper;
 use Doctrine\ORM\Mapping as ORM;
 use PHPUnit\Framework\TestCase;
 

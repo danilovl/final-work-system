@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\Unit\Application\Provider;
+namespace App\Tests\Unit\Infrastructure\Provider;
 
-use App\Application\Provider\LoggableProvider;
+use App\Infrastructure\Provider\LoggableProvider;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use PHPUnit\Framework\TestCase;
 

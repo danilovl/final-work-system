@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventDispatcher;
+namespace App\Tests\Unit\Infrastructure\Event\EventDispatcher;
 
-use App\Application\EventDispatcher\CacheEventDispatcher;
-use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Event\EventDispatcher\CacheEventDispatcher;
+use App\Infrastructure\Event\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Infrastructure\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 class CacheEventDispatcherTest extends TestCase
 {
@@ -29,7 +29,7 @@ class CacheEventDispatcherTest extends TestCase
             ->method('dispatch')
             ->with(
                 $this->isInstanceOf(CacheClearGenericEvent::class),
-                Events::CACHE_CLEAR_KEY
+                InfrastructureEvents::CACHE_CLEAR_KEY
             );
 
         $cacheEventDispatcher->onClearCacheKey('test_key');

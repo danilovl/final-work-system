@@ -12,12 +12,12 @@
 
 namespace App\Tests\Unit\Infrastructure\Event\EventSubscriber;
 
-use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Event\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Infrastructure\Event\EventSubscriber\CacheEventSubscriber;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 class CacheEventSubscriberTest extends TestCase
 {
@@ -49,6 +49,6 @@ class CacheEventSubscriberTest extends TestCase
 
         $subscribedEvents = $this->subscriber::getSubscribedEvents();
 
-        $this->assertEquals('onClearCacheKey', $subscribedEvents[Events::CACHE_CLEAR_KEY]);
+        $this->assertEquals('onClearCacheKey', $subscribedEvents[InfrastructureEvents::CACHE_CLEAR_KEY]);
     }
 }

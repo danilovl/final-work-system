@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Infrastructure\Service;
 
-use App\Application\EventDispatcher\EntityEventDispatcher;
+use App\Infrastructure\Event\EventDispatcher\EntityEventDispatcher;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\EntityManagerService;
 use Doctrine\DBAL\Connection;

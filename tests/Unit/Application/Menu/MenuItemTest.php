@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Application\Menu;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use App\Application\Menu\MenuItem;
 use PHPUnit\Framework\TestCase;
 

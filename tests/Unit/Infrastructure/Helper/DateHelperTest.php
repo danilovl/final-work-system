@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Infrastructure\Helper;
 
-use App\Application\Constant\DateFormatConstant;
-use App\Application\Helper\DateHelper;
+use App\Infrastructure\Constant\DateFormatConstant;
+use App\Infrastructure\Helper\DateHelper;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 

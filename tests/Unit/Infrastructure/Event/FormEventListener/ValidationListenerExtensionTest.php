@@ -12,8 +12,8 @@
 
 namespace App\Tests\Unit\Infrastructure\Event\FormEventListener;
 
-use App\Application\Constant\FormOperationTypeConstant;
-use App\Application\EventDispatcher\RequestFlashEventDispatcher;
+use App\Infrastructure\Constant\FormOperationTypeConstant;
+use App\Infrastructure\Event\EventDispatcher\RequestFlashEventDispatcher;
 use App\Infrastructure\Event\FormEventListener\ValidationListenerExtension;
 use PHPUnit\Framework\TestCase;
 use stdClass;

@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Infrastructure\Messaging;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Infrastructure\Messaging\MessengerCommandBus;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

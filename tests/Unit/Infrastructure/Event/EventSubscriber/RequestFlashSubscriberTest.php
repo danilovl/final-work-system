@@ -12,11 +12,11 @@
 
 namespace App\Tests\Unit\Infrastructure\Event\EventSubscriber;
 
-use App\Application\Constant\FlashTypeConstant;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Constant\FlashTypeConstant;
 use App\Infrastructure\Event\EventSubscriber\RequestFlashSubscriber;
 use App\Infrastructure\Service\RequestService;
 use PHPUnit\Framework\TestCase;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 class RequestFlashSubscriberTest extends TestCase
 {
@@ -34,12 +34,12 @@ class RequestFlashSubscriberTest extends TestCase
     {
         $subscribedEvents = $this->subscriber::getSubscribedEvents();
 
-        $this->assertEquals('onCreateSuccess', $subscribedEvents[Events::ENTITY_CREATE]);
-        $this->assertEquals('onDeleteSuccess', $subscribedEvents[Events::ENTITY_REMOVE]);
-        $this->assertEquals('onSaveSuccess', $subscribedEvents[Events::ENTITY_SAVE]);
-        $this->assertEquals('onCreateFailure', $subscribedEvents[Events::REQUEST_FLASH_CREATE_FAILURE]);
-        $this->assertEquals('onSaveFailure', $subscribedEvents[Events::REQUEST_FLASH_SAVE_FAILURE]);
-        $this->assertEquals('onDeleteFailure', $subscribedEvents[Events::REQUEST_FLASH_DELETE_FAILURE]);
+        $this->assertEquals('onCreateSuccess', $subscribedEvents[InfrastructureEvents::ENTITY_CREATE]);
+        $this->assertEquals('onDeleteSuccess', $subscribedEvents[InfrastructureEvents::ENTITY_REMOVE]);
+        $this->assertEquals('onSaveSuccess', $subscribedEvents[InfrastructureEvents::ENTITY_SAVE]);
+        $this->assertEquals('onCreateFailure', $subscribedEvents[InfrastructureEvents::REQUEST_FLASH_CREATE_FAILURE]);
+        $this->assertEquals('onSaveFailure', $subscribedEvents[InfrastructureEvents::REQUEST_FLASH_SAVE_FAILURE]);
+        $this->assertEquals('onDeleteFailure', $subscribedEvents[InfrastructureEvents::REQUEST_FLASH_DELETE_FAILURE]);
     }
 
     public function testOnCreateSuccess(): void

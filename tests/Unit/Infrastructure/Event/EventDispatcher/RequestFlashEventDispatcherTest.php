@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventDispatcher;
+namespace App\Tests\Unit\Infrastructure\Event\EventDispatcher;
 
-use App\Application\EventDispatcher\RequestFlashEventDispatcher;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Event\EventDispatcher\RequestFlashEventDispatcher;
 use App\Infrastructure\Service\EventDispatcherService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 class RequestFlashEventDispatcherTest extends TestCase
 {
@@ -35,7 +35,7 @@ class RequestFlashEventDispatcherTest extends TestCase
     {
         $this->assertEventDispatched(
             fn () => $this->requestFlashEventDispatcher->onCreateFailure(),
-            Events::REQUEST_FLASH_CREATE_FAILURE
+            InfrastructureEvents::REQUEST_FLASH_CREATE_FAILURE
         );
     }
 
@@ -43,7 +43,7 @@ class RequestFlashEventDispatcherTest extends TestCase
     {
         $this->assertEventDispatched(
             fn () => $this->requestFlashEventDispatcher->onSaveFailure(),
-            Events::REQUEST_FLASH_SAVE_FAILURE
+            InfrastructureEvents::REQUEST_FLASH_SAVE_FAILURE
         );
     }
 
@@ -51,7 +51,7 @@ class RequestFlashEventDispatcherTest extends TestCase
     {
         $this->assertEventDispatched(
             fn () => $this->requestFlashEventDispatcher->onRemoveFailure(),
-            Events::REQUEST_FLASH_DELETE_FAILURE
+            InfrastructureEvents::REQUEST_FLASH_DELETE_FAILURE
         );
     }
 

@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Infrastructure\Helper;
 
-use App\Application\Helper\RegexHelper;
+use App\Infrastructure\Helper\RegexHelper;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

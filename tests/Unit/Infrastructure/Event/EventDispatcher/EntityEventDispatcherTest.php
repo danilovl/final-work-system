@@ -10,15 +10,15 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventDispatcher;
+namespace App\Tests\Unit\Infrastructure\Event\EventDispatcher;
 
-use App\Application\EventDispatcher\EntityEventDispatcher;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Event\EventDispatcher\EntityEventDispatcher;
 use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 class EntityEventDispatcherTest extends TestCase
 {
@@ -56,7 +56,7 @@ class EntityEventDispatcherTest extends TestCase
 
         $this->assertCount(2, $dispatchedEvents);
 
-        $this->assertSame(Events::ENTITY_CREATE, $dispatchedEvents[0][1]);
-        $this->assertSame(Events::ENTITY_CREATE_ASYNC, $dispatchedEvents[1][1]);
+        $this->assertSame(InfrastructureEvents::ENTITY_CREATE, $dispatchedEvents[0][1]);
+        $this->assertSame(InfrastructureEvents::ENTITY_CREATE_ASYNC, $dispatchedEvents[1][1]);
     }
 }

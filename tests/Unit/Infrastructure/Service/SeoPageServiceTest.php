@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Infrastructure\Service;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Infrastructure\Service\SeoPageService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;

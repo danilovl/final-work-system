@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Infrastructure\Messaging;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Infrastructure\Messaging\MessengerQueryBus;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

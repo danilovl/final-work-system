@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Application\Middleware\EventCalendar\Ajax;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Application\Middleware\EventCalendar\Ajax\EditMiddleware;
 use App\Infrastructure\Service\TranslatorService;
 use DateTimeImmutable;

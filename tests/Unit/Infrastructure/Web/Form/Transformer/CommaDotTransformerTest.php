@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Infrastructure\Web\Form\Transformer;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Infrastructure\Web\Form\Transformer\CommaDotTransformer;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
