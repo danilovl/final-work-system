@@ -25,7 +25,7 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

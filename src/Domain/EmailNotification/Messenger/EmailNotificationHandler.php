@@ -12,7 +12,7 @@
 
 namespace App\Domain\EmailNotification\Messenger;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber;

@@ -24,7 +24,7 @@ use App\Infrastructure\Service\{
     TwigRenderService
 };
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
