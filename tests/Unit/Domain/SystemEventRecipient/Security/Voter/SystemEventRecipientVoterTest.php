@@ -32,7 +32,7 @@ class SystemEventRecipientVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $systemEventRecipient = $this->createMock(SystemEventRecipient::class);
+        $systemEventRecipient = $this->createStub(SystemEventRecipient::class);
 
         foreach (SystemEventRecipientVoter::SUPPORTS as $support) {
             $this->assertTrue($this->systemEventRecipientVoter->supportsPublic($support, $systemEventRecipient));
