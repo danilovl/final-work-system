@@ -28,7 +28,13 @@
                                             <div class="item form-group">
                                                 {{ form_label(form.type, 'app.form.label.type', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    {{ form_widget(form.type, {'attr': {'class': 'form-control'}} ) }}
+                                                    {{ form_widget(form.type, {
+                                                        'attr': {
+                                                            'data-controller': 'select2',
+                                                            'data-select2-width-value': '100%',
+                                                            'class': 'form-control'
+                                                        }
+                                                    }) }}
                                                 </div>
                                                 {% if not form.type.vars.valid %}
                                                     <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -50,7 +56,13 @@
                                             <div class="item form-group">
                                                 {{ form_label(form.address, 'app.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
+                                                    {{ form_widget(form.address, {
+                                                        'attr': {
+                                                            'data-controller': 'select2',
+                                                            'data-select2-width-value': '100%',
+                                                            'class': 'form-control'
+                                                        }
+                                                    }) }}
                                                 </div>
                                                 {% if not form.address.vars.valid %}
                                                     <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -61,7 +73,13 @@
                                             <div class="item form-group">
                                                 {{ form_label(form.participant, 'app.form.label.appointment_participant', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    {{ form_widget(form.participant, {'attr': {'class': 'form-control'}} ) }}
+                                                    {{ form_widget(form.participant, {
+                                                        'attr': {
+                                                            'data-controller': 'select2',
+                                                            'data-select2-width-value': '100%',
+                                                            'class': 'form-control'
+                                                        }
+                                                    }) }}
                                                 </div>
                                                 {% if not form.participant.vars.valid %}
                                                     <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -75,7 +93,13 @@
                                                     <i class="fa fa-calendar-o form-control-feedback left"
                                                        aria-hidden="true">
                                                     </i>
-                                                    {{ form_widget(form.start, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                                    {{ form_widget(form.start, {
+                                                        'attr': {
+                                                            'data-controller': 'datetimepicker',
+                                                            'data-datetimepicker-format-value': 'YYYY-MM-DD HH:mm',
+                                                            'class': 'form-control has-feedback-left'
+                                                        }
+                                                    }) }}
                                                 </div>
                                                 {% if not form.start.vars.valid %}
                                                     <div class="col-md-6 col-sm-6 col-xs-12 red">
@@ -89,7 +113,13 @@
                                                     <i class="fa fa-calendar-o form-control-feedback left"
                                                        aria-hidden="true">
                                                     </i>
-                                                    {{ form_widget(form.end, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                                    {{ form_widget(form.end, {
+                                                        'attr': {
+                                                            'data-controller': 'datetimepicker',
+                                                            'data-datetimepicker-format-value': 'YYYY-MM-DD HH:mm',
+                                                            'class': 'form-control has-feedback-left'
+                                                        }
+                                                    }) }}
                                                 </div>
                                                 {% if not form.end.vars.valid %}
                                                     <div class="col-md-6 col-sm-6 col-xs-12 red">
@@ -117,22 +147,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(function () {
-            $("#event_type").select2({width: '100%'});
-            $("#event_address").select2({width: '100%'});
-            $("#event_participant").select2({width: '100%'});
-            $('#event_start').datetimepicker({
-                format: 'YYYY-MM-DD HH:mm',
-                locale: '{{ app.request.locale }}'
-            });
-            $('#event_end').datetimepicker({
-                format: 'YYYY-MM-DD HH:mm',
-                locale: '{{ app.request.locale }}'
-            });
-        });
-    </script>
 {% endblock %}

@@ -20,39 +20,4 @@
 {% block javascript %}
     {{ encore_entry_script_tags('app_vue_calendar_event_detail') }}
     {% include 'other/script/google_map.twig' %}
-
-    <script type="text/javascript">
-        let locale = '{{ app.request.locale }}';
-
-        let head = document.getElementsByTagName('head')[0];
-        let insertBefore = head.insertBefore;
-        head.insertBefore = function (newElement, referenceElement) {
-            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
-                return;
-            }
-            insertBefore.call(head, newElement, referenceElement);
-        };
-
-        {% if event.address and event.address.existLocation %}
-        function googleInitMap() {
-            let myLatLng = new google.maps.LatLng( {{ event.address.latitude }}, {{ event.address.longitude }} );
-
-
-            let mapOptions = {
-                zoom: 11,
-                center: myLatLng
-            };
-            let map = new google.maps.Map(document.getElementById('event-address-map'), mapOptions);
-            let marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map
-            });
-            marker.setMap(map);
-        }
-
-        googleInitMap();
-        {% endif %}
-
-        initTinymce(locale);
-    </script>
 {% endblock %}

@@ -44,7 +44,12 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="google-map" id="event-address-map" style="height: 400px"></div>
+                    <div class="google-map" id="event-address-map" style="height: 400px"
+                         data-controller="google-map"
+                         data-google-map-target="map"
+                         data-google-map-lat-value="{{ event.address.latitude }}"
+                         data-google-map-lng-value="{{ event.address.longitude }}"
+                    ></div>
                 </div>
             </div>
         </div>

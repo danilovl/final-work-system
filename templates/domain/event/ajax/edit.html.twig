@@ -15,7 +15,14 @@
                         <div class="item form-group">
                             {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                {{ form_widget(form.type, {'attr': {'class': 'form-control'}} ) }}
+                                {{ form_widget(form.type, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
@@ -29,14 +36,28 @@
                         <div class="item form-group">
                             {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
+                                {{ form_widget(form.address, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
                         <div class="item form-group">
                             {{ form_label(form.participant,  'app.form.label.appointment_participant' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                {{ form_widget(form.participant, {'attr': {'class': 'form-control'}} ) }}
+                                {{ form_widget(form.participant, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
@@ -47,7 +68,13 @@
                                 <i class="fa fa-calendar-o form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
-                                {{ form_widget(form.start, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                {{ form_widget(form.start, {
+                                    'attr': {
+                                        'data-controller': 'datetimepicker',
+                                        'data-datetimepicker-format-value': 'YYYY-MM-DD HH:mm',
+                                        'class': 'form-control has-feedback-left'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
@@ -58,7 +85,13 @@
                                 <i class="fa fa-calendar-o form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
-                                {{ form_widget(form.end, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                {{ form_widget(form.end, {
+                                    'attr': {
+                                        'data-controller': 'datetimepicker',
+                                        'data-datetimepicker-format-value': 'YYYY-MM-DD HH:mm',
+                                        'class': 'form-control has-feedback-left'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
@@ -87,20 +120,6 @@
 </div>
 <script>
     $(document).ready(() => {
-        let locale = '{{ app.request.locale }}';
-
-        $('#event_type').select2({width: '100%', dropdownParent: modalWindow});
-        $('#event_address').select2({width: '100%', dropdownParent: modalWindow});
-        $('#event_participant').select2({width: '100%', dropdownParent: modalWindow});
-        $('#event_start').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm',
-            locale: locale
-        });
-        $('#event_end').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm',
-            locale: locale
-        });
-
         createEditContentAjax('#event_action');
         createEditContentAjax('#event_action_close', true);
     });
