@@ -15,6 +15,7 @@ namespace App\Domain\EventScheduleTemplate\Factory;
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\EventScheduleTemplate\Model\EventScheduleTemplateModel;
+use Webmozart\Assert\Assert;
 
 class EventScheduleTemplateFactory extends BaseModelFactory
 {
@@ -34,6 +35,11 @@ class EventScheduleTemplateFactory extends BaseModelFactory
         EventScheduleTemplate $eventScheduleTemplate,
         EventScheduleTemplateModel $eventScheduleTemplateModel
     ): EventScheduleTemplate {
+        Assert::notNull($eventScheduleTemplateModel->type);
+        Assert::notNull($eventScheduleTemplateModel->day);
+        Assert::notNull($eventScheduleTemplateModel->start);
+        Assert::notNull($eventScheduleTemplateModel->end);
+
         $eventScheduleTemplate->setType($eventScheduleTemplateModel->type);
         $eventScheduleTemplate->setDay($eventScheduleTemplateModel->day);
         $eventScheduleTemplate->setName($eventScheduleTemplateModel->name);
