@@ -41,7 +41,9 @@ class SystemEventQueryBuilder extends BaseQueryBuilder
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('system_event.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('system_event.createdAt', $order)
+            ->addOrderBy('system_event.id', $order);
 
         return $this;
     }

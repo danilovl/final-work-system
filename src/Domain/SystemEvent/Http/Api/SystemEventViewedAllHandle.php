@@ -39,9 +39,9 @@ readonly class SystemEventViewedAllHandle
         if ($isUnreadExist === true) {
             $this->systemEventRecipientFacade->updateViewedAll($user);
 
-            $this->cacheEventDispatcher->onClearCacheKey(
-                sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
-            );
+            $cacheKey = sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId());
+
+            $this->cacheEventDispatcher->onClearCacheKey($cacheKey);
         }
 
         return new JsonResponse(status: Response::HTTP_NO_CONTENT);

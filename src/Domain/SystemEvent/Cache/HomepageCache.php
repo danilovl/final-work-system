@@ -39,9 +39,9 @@ class HomepageCache
     {
         $span = $this->tracingSpanService->start('CreateHomepagePaginator');
 
-        $cacheItem = $this->cache->getItem(
-            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
-        );
+        $cacheKey = sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId());
+
+        $cacheItem = $this->cache->getItem($cacheKey);
         /** @var array<int, PaginationInterface>|null $pagePaginators */
         $pagePaginators = $cacheItem->get();
 
