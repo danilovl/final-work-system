@@ -12,7 +12,8 @@ class LoggableProviderTest extends TestCase
     {
         $parameterServiceMock = $this->createMock(ParameterServiceInterface::class);
 
-        $parameterServiceMock->method('getBoolean')
+        $parameterServiceMock->expects($this->once())
+            ->method('getBoolean')
             ->with('loggable.enable')
             ->willReturn(true);
 
@@ -25,7 +26,8 @@ class LoggableProviderTest extends TestCase
     {
         $parameterServiceMock = $this->createMock(ParameterServiceInterface::class);
 
-        $parameterServiceMock->method('getBoolean')
+        $parameterServiceMock->expects($this->once())
+            ->method('getBoolean')
             ->with('loggable.enable')
             ->willReturn(false);
 
