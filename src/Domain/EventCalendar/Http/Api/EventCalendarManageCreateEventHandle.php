@@ -28,7 +28,7 @@ use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Infrastructure\Service\EntityManagerService;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -82,8 +82,8 @@ readonly class EventCalendarManageCreateEventHandle
             $eventParticipant->setWork($participantWork);
         }
 
-        $startDateTime = new DateTime($input->start);
-        $endDateTime = new DateTime($input->end);
+        $startDateTime = new DateTimeImmutable($input->start);
+        $endDateTime = new DateTimeImmutable($input->end);
 
         $eventModel = new EventModel;
         $eventModel->owner = $user;

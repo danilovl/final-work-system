@@ -20,7 +20,7 @@ use App\Infrastructure\Service\{
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -37,8 +37,8 @@ readonly class EventCalendarEditHandle
 
     public function __invoke(Request $request, Event $event): JsonResponse
     {
-        $start = new DateTime($request->request->getString('start'));
-        $end = new DateTime($request->request->getString('end'));
+        $start = new DateTimeImmutable($request->request->getString('start'));
+        $end = new DateTimeImmutable($request->request->getString('end'));
 
         $event->setStart($start);
         $event->setEnd($end);

@@ -17,7 +17,7 @@ use App\Infrastructure\Service\RequestService;
 use App\Domain\Event\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\Request\GetEventRequest;
 use App\Domain\User\Service\UserService;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class EventCalendarGetEventHandle
@@ -30,8 +30,8 @@ readonly class EventCalendarGetEventHandle
 
     public function __invoke(GetEventRequest $getEventRequest, string $type): JsonResponse
     {
-        $startDate = new DateTime($getEventRequest->start)->setTime(23, 59, 59);
-        $endDate = new DateTime($getEventRequest->end)->setTime(23, 59, 59);
+        $startDate = new DateTimeImmutable($getEventRequest->start)->setTime(23, 59, 59);
+        $endDate = new DateTimeImmutable($getEventRequest->end)->setTime(23, 59, 59);
 
         $events = $this->eventCalendarFacade->listEventsByOwner(
             $this->userService->getUser(),
