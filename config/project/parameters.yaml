@@ -27,6 +27,11 @@ parameters:
     enable: '%env(bool:LOGGABLE_ENABLE)%'
   open_telemetry:
     enable: '%env(bool:OPEN_TELEMETRY_ENABLE)%'
+  database_dump:
+    active: '%env(bool:DATABASE_DUMP_ACTIVE)%'
+    path_to_save_folder: '%env(DATABASE_DUMP_PATH_TO_SAVE_FOLDER)%'
+    file_pattern: '%env(DATABASE_DUMP_FILE_PATTERN)%'
+    path_to_mysqldump_exe: '%env(DATABASE_DUMP_PATH_TO_MYSQLDUMP_EXE)%'
   task_remind:
     enable: '%env(bool:TASK_REMIND_ENABLE)%'
     translator_domain: 'email_notification'
