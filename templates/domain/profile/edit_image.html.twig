@@ -103,9 +103,6 @@
 {% block javascript %}
     <script>
         $(document).ready(() => {
-            let locale = '{{ app.request.locale }}';
-
-            initTinymce(locale);
             createImageByWebCamera('create-web-camera-image')
         });
     </script>
