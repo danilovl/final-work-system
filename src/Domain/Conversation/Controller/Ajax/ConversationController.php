@@ -16,16 +16,12 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Http\Ajax\{
-    ConversationLiveHandle,
     ConversationDeleteHandle,
     ConversationReadAllHandle,
     ConversationChangeReadMessageStatusHandle
 };
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    StreamedResponse
-};
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class ConversationController
 {
@@ -33,8 +29,7 @@ readonly class ConversationController
         private AuthorizationCheckerService $authorizationCheckerService,
         private ConversationChangeReadMessageStatusHandle $conversationChangeReadMessageStatusHandle,
         private ConversationReadAllHandle $conversationReadAllHandle,
-        private ConversationDeleteHandle $conversationDeleteHandle,
-        private ConversationLiveHandle $conversationLiveHandle
+        private ConversationDeleteHandle $conversationDeleteHandle
     ) {}
 
     public function changeReadMessageStatus(ConversationMessage $conversationMessage): JsonResponse
@@ -57,12 +52,5 @@ readonly class ConversationController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $conversation);
 
         return $this->conversationDeleteHandle->__invoke($conversation);
-    }
-
-    public function liveConversation(Conversation $conversation): StreamedResponse
-    {
-        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
-
-        return $this->conversationLiveHandle->__invoke($conversation);
     }
 }
