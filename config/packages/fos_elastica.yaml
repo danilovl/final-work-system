@@ -9,6 +9,7 @@ fos_elastica:
     work:
       client: default
       index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%work_index'
+      use_alias: true
       settings: &index_settings
         index:
           number_of_shards: 1
@@ -44,14 +45,6 @@ fos_elastica:
                   - lowercase
                   - asciifolding
                   - shingle_filter
-              html_normalized_analyzer:
-                type: custom
-                char_filter:
-                  - html_strip
-                tokenizer: keyword
-                filter:
-                  - lowercase
-                  - asciifolding
             filter:
               shingle_filter:
                 type: shingle
@@ -101,6 +94,7 @@ fos_elastica:
     conversation:
       client: default
       index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%conversation_index'
+      use_alias: true
       settings: *index_settings
       properties:
         id:
@@ -132,6 +126,7 @@ fos_elastica:
     conversation_message:
       client: default
       index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%conversation_message_index'
+      use_alias: true
       settings: *index_settings
       properties:
         id:
@@ -139,10 +134,9 @@ fos_elastica:
         content:
           type: text
           analyzer: html_shingle_analyzer
-          fields:
-            normalized:
-              type: text
-              analyzer: html_normalized_analyzer
+        content_search:
+          type: wildcard
+          property_path: false
         created_at:
           type: date
         updated_at:
@@ -168,6 +162,7 @@ fos_elastica:
     task:
       client: default
       index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%task_index'
+      use_alias: true
       settings: *index_settings
       properties:
         id:

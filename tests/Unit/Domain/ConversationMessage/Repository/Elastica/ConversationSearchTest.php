@@ -70,7 +70,7 @@ class ConversationSearchTest extends TestCase
                         'bool' => [
                             'filter' => [
                                 ['term' => ['conversation.id' => $conversation->getId()]],
-                                ['wildcard' => ['content.normalized' => '*' . $expectedSearch . '*']]
+                                ['wildcard' => ['content_search' => '*' . $expectedSearch . '*']]
                             ]
                         ]
                     ]
@@ -94,7 +94,7 @@ class ConversationSearchTest extends TestCase
                         'bool' => [
                             'filter' => [
                                 ['term' => ['conversation.participants.user.id' => $user->getId()]],
-                                ['wildcard' => ['content.normalized' => '*' . $expectedSearch . '*']]
+                                ['wildcard' => ['content_search' => '*' . $expectedSearch . '*']]
                             ]
                         ]
                     ],

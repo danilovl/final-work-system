@@ -12,6 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Repository\Elastica;
 
+use App\Domain\ConversationMessage\EventSubscriber\ConversationMessageSearchContentSubscriber;
 use App\Application\Traits\Repository\Elastica\ElasticaSearchTrait;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
@@ -58,7 +59,7 @@ readonly class ConversationMessageSearch
                 'bool' => [
                     'filter' => [
                         ['term' => ['conversation.id' => $conversation->getId()]],
-                        $this->createContainsQuery('content.normalized', $search)
+                        $this->createContainsQuery(ConversationMessageSearchContentSubscriber::FIELD, $search)
                     ]
                 ]
             ]
@@ -95,7 +96,7 @@ readonly class ConversationMessageSearch
                 'bool' => [
                     'filter' => [
                         ['term' => ['conversation.participants.user.id' => $user->getId()]],
-                        $this->createContainsQuery('content.normalized', $search)
+                        $this->createContainsQuery(ConversationMessageSearchContentSubscriber::FIELD, $search)
                     ]
                 ]
             ],
