@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Query\SkypeEventAddress;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
 
 readonly class GetSkypeEventAddressQueryHandler implements QueryHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Command\DeleteEventAddress;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 
 readonly class DeleteEventAddressHandler implements CommandHandlerInterface

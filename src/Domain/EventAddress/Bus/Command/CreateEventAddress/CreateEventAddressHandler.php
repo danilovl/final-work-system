@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Command\CreateEventAddress;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Factory\EventAddressFactory;
 use App\Domain\EventAddress\Service\EventAddressSkypeService;

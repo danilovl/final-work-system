@@ -12,8 +12,8 @@
 
 namespace App\Domain\EventAddress\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\EventAddress\Bus\Command\SwitchEventAddressSkype\SwitchEventAddressSkypeCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Infrastructure\Service\RequestService;

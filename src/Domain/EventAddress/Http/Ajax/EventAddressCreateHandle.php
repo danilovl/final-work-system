@@ -12,9 +12,9 @@
 
 namespace App\Domain\EventAddress\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\EventAddress\Bus\Command\CreateEventAddress\CreateEventAddressCommand;
 use App\Domain\EventAddress\Form\EventAddressForm;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Query\EventAddress;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
 
 readonly class GetEventAddressQueryHandler implements QueryHandlerInterface

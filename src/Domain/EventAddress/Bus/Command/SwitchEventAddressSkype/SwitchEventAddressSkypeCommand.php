@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Command\SwitchEventAddressSkype;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\EventAddress\Entity\EventAddress;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

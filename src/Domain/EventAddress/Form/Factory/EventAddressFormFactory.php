@@ -13,10 +13,7 @@
 namespace App\Domain\EventAddress\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\{
-    RuntimeException,
-    ConstantNotFoundException
-};
+use App\Infrastructure\Exception\{ConstantNotFoundException, RuntimeException};
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Form\EventAddressForm;
 use App\Domain\EventAddress\Model\EventAddressModel;

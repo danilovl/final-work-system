@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Command\CreateEventAddress;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

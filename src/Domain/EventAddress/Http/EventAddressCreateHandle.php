@@ -14,7 +14,7 @@ namespace App\Domain\EventAddress\Http;
 
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,

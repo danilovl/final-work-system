@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Query\EventAddress;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
 #[AsMessage('sync')]

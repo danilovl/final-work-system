@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Bus\Command\SwitchEventAddressSkype;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\EventAddress\Service\EventAddressSkypeService;
 use App\Infrastructure\Service\EntityManagerService;
 
