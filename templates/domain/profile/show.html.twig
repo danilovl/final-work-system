@@ -158,11 +158,11 @@
                                             <tbody>
                                             <tr>
                                                 <td>{{ 'app.form.label.message_greeting' | trans }}:</td>
-                                                <td>{{ app_user().messageGreeting|raw }}</td>
+                                                <td>{{ app_user().messageGreeting | sanitize_html('app.rich_text_sanitizer') }}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{ 'app.form.label.message_signature' | trans }}</td>
-                                                <td>{{ app_user().messageSignature|raw }}</td>
+                                                <td>{{ app_user().messageSignature | sanitize_html('app.rich_text_sanitizer') }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
