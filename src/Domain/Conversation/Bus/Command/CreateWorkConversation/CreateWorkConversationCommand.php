@@ -27,8 +27,17 @@ readonly class CreateWorkConversationCommand implements CommandInterface
         public Work $work
     ) {}
 
-    public static function create(User $userOne, User $userTwo, int $type, Work $work): self
-    {
-        return new self($userOne, $userTwo, $type, $work);
+    public static function create(
+        User $userOne,
+        User $userTwo,
+        int $type,
+        Work $work
+    ): self {
+        return new self(
+            userOne: $userOne,
+            userTwo: $userTwo,
+            type: $type,
+            work: $work
+        );
     }
 }

@@ -32,6 +32,10 @@ readonly class CreateConversationMessageCommand implements CommandInterface
         ConversationMessageModel $conversationMessageModel,
         User $user,
     ): self {
-        return new self($conversation, $conversationMessageModel, $user);
+        return new self(
+            conversation: $conversation,
+            conversationMessageModel: $conversationMessageModel,
+            user: $user
+        );
     }
 }
