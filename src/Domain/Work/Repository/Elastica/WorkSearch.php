@@ -26,6 +26,8 @@ readonly class WorkSearch
 {
     use ElasticaSearchTrait;
 
+    private const int HYDRATION_CHUNK_SIZE = 1_000;
+
     public function __construct(private TransformedFinder $transformedFinderWork) {}
 
     /**
@@ -38,9 +40,13 @@ readonly class WorkSearch
         array $filters
     ): ArrayIterator {
         $query = $this->createQuery($user, $type, $filters);
+        $results = $this->findAllRaw(
+            search: fn (array $pageQuery): array => $this->transformedFinderWork->findRaw($pageQuery),
+            query: $query
+        );
+        $workIds = $this->getDocumentIds($results);
 
-        /** @var Work[] $works */
-        $works = $this->transformedFinderWork->find($query);
+        $works = $this->findWorksByIds($workIds);
         $works = new ArrayCollection($works);
 
         $collator = new Collator('cs_CZ.UTF-8');
@@ -58,6 +64,34 @@ readonly class WorkSearch
         });
 
         return $iterator;
+    }
+
+    /**
+     * @param int[] $workIds
+     * @return Work[]
+     */
+    private function findWorksByIds(array $workIds): array
+    {
+        $works = [];
+        $workIdChunks = array_chunk($workIds, self::HYDRATION_CHUNK_SIZE);
+
+        foreach ($workIdChunks as $workIdChunk) {
+            $chunkQuery = [
+                'size' => count($workIdChunk),
+                '_source' => false,
+                'query' => [
+                    'ids' => [
+                        'values' => $workIdChunk
+                    ]
+                ]
+            ];
+
+            /** @var Work[] $chunkWorks */
+            $chunkWorks = $this->transformedFinderWork->find($chunkQuery);
+            array_push($works, ...$chunkWorks);
+        }
+
+        return $works;
     }
 
     /**
