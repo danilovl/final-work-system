@@ -36,6 +36,7 @@ class FrontendConfigRuntime
                 'error403' => $this->translatorService->trans('app.flash.error.403'),
                 'error404' => $this->translatorService->trans('app.flash.error.404'),
                 'error500' => $this->translatorService->trans('app.flash.error.500'),
+                'networkError' => $this->translatorService->trans('app.flash.error.network'),
                 'sureWantClose' => $this->translatorService->trans('app.form.validation.sure_want_close')
             ],
             'flashes' => $this->flashes()

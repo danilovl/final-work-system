@@ -843,7 +843,7 @@ window.fetch = async (input, init = {}) => {
         }
 
         closeModalWindowOnError();
-        notifyMessage('error', 'Network error or invalid response');
+        notifyMessage('error', getFrontendConfig().messages.networkError);
 
         throw error;
     }

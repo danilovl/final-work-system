@@ -23,3 +23,4 @@ app:
       403: Access denied
       404: Sorry but we couldnt find this page
       500: Internal Server Error
+      network: Network error or invalid response
