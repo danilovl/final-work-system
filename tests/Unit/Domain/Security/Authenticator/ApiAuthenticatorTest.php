@@ -12,7 +12,6 @@
 
 namespace App\Tests\Unit\Domain\Security\Authenticator;
 
-use App\Application\Model\Security\ApiKeyCredentialModel;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\Security\Authenticator\ApiAuthenticator;
@@ -20,12 +19,9 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\EntityManagerService;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
-};
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
@@ -39,11 +35,7 @@ class ApiAuthenticatorTest extends TestCase
 
     private ApiAuthenticator $authenticator;
 
-    private MockObject&UserService $userService;
-
-    private MockObject&UserFacade $userFacade;
-
-    private MockObject&ApiUserFacade $apiUserFacade;
+    private Stub&UserService $userService;
 
     protected function setUp(): void
     {
@@ -52,26 +44,42 @@ class ApiAuthenticatorTest extends TestCase
         $this->request->headers->set(ApiAuthenticator::AUTH_USER_TOKEN_KEY, 'AUTH_USER_TOKEN_KEY');
         $this->request->headers->set(ApiAuthenticator::AUTH_USER_USERNAME, 'AUTH_USER_USERNAME');
 
-        $this->userService = $this->createMock(UserService::class);
-        $this->apiUserFacade = $this->createMock(ApiUserFacade::class);
-        $this->userFacade = $this->createMock(UserFacade::class);
-        $entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->userService = $this->createStub(UserService::class);
+        /** @var Stub&ApiUserFacade $apiUserFacade */
+        $apiUserFacade = $this->createStub(ApiUserFacade::class);
+        /** @var Stub&UserFacade $userFacade */
+        $userFacade = $this->createStub(UserFacade::class);
+        /** @var Stub&EntityManagerService $entityManagerService */
+        $entityManagerService = $this->createStub(EntityManagerService::class);
+
+        $apiUserFacade
+            ->method('findByApiKey')
+            ->willReturnCallback(static function (string $key): ?ApiUser {
+                return match ($key) {
+                    'AUTH_KEY' => new ApiUser,
+                    default => null
+                };
+            });
+
+        $userFacade
+            ->method('findByToken')
+            ->willReturnCallback(static function (string $username, string $token): ?User {
+                return match ([$username, $token]) {
+                    ['AUTH_USER_USERNAME', 'AUTH_USER_TOKEN_KEY'] => new User,
+                    default => null
+                };
+            });
 
         $this->authenticator = new ApiAuthenticator(
             $this->userService,
-            $this->apiUserFacade,
-            $this->userFacade,
+            $apiUserFacade,
+            $userFacade,
             $entityManagerService
         );
     }
 
     public function testSupports(): void
     {
-        $this->apiUserFacade
-            ->expects($this->once())
-            ->method('findByApiKey')
-            ->willReturn(new ApiUser);
-
         $this->assertTrue($this->authenticator->supports($this->request));
 
         $this->request->headers->remove(ApiAuthenticator::AUTH_KEY);
@@ -82,8 +90,6 @@ class ApiAuthenticatorTest extends TestCase
     {
         $credentials = $this->authenticator->getCredentials($this->request);
 
-        $this->assertInstanceOf(ApiKeyCredentialModel::class, $credentials);
-
         $this->assertSame('AUTH_KEY', $credentials->authToken);
         $this->assertSame('AUTH_USER_TOKEN_KEY', $credentials->authUserToken);
         $this->assertSame('AUTH_USER_USERNAME', $credentials->authUserUsername);
@@ -91,24 +97,14 @@ class ApiAuthenticatorTest extends TestCase
 
     public function testAuthenticateByAuthUserTokenSuccess(): void
     {
-        $user = new User;
-
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByToken')
-            ->willReturn($user);
-
         $result = $this->authenticator->authenticate($this->request);
 
-        $this->assertSame($user, $result->getUser());
+        $this->assertInstanceOf(User::class, $result->getUser());
     }
 
     public function testAuthenticateByAuthUserTokenFailed(): void
     {
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByToken')
-            ->willReturn(null);
+        $this->request->headers->set(ApiAuthenticator::AUTH_USER_TOKEN_KEY, 'invalid');
 
         $this->expectException(CustomUserMessageAuthenticationException::class);
 
@@ -125,10 +121,10 @@ class ApiAuthenticatorTest extends TestCase
 
     public function testOnAuthenticationSuccess(): void
     {
-        $token = $this->createMock(TokenInterface::class);
+        /** @var Stub&TokenInterface $token */
+        $token = $this->createStub(TokenInterface::class);
 
         $this->userService
-            ->expects($this->once())
             ->method('getUserOrNull')
             ->willReturn(new User);
 
@@ -143,10 +139,10 @@ class ApiAuthenticatorTest extends TestCase
 
     public function testOnAuthenticationSuccessNotUser(): void
     {
-        $token = $this->createMock(TokenInterface::class);
+        /** @var Stub&TokenInterface $token */
+        $token = $this->createStub(TokenInterface::class);
 
         $this->userService
-            ->expects($this->once())
             ->method('getUserOrNull')
             ->willReturn(null);
 
@@ -166,7 +162,6 @@ class ApiAuthenticatorTest extends TestCase
             new AuthenticationException
         );
 
-        $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertSame('{"message":"An authentication exception occurred."}', $result->getContent());
     }
 }

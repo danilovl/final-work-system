@@ -17,7 +17,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\EntityManagerService;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
@@ -41,15 +41,13 @@ class AppAuthenticatorTest extends TestCase
 {
     private Request $request;
 
-    private MockObject&UserService $userService;
+    private Stub&UserService $userService;
 
-    private MockObject&UrlGeneratorInterface $urlGenerator;
+    private Stub&UrlGeneratorInterface $urlGenerator;
 
-    private MockObject&HttpUtils $httpUtils;
+    private Stub&HttpUtils $httpUtils;
 
-    private MockObject&HttpKernelInterface $httpKernel;
-
-    private MockObject&UserFacade $userFacade;
+    private Stub&HttpKernelInterface $httpKernel;
 
     private AppAuthenticator $authenticator;
 
@@ -67,16 +65,27 @@ class AppAuthenticatorTest extends TestCase
         );
         $this->request->setSession(new Session);
 
-        $this->userService = $this->createMock(UserService::class);
-        $this->userFacade = $this->createMock(UserFacade::class);
-        $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->httpUtils = $this->createMock(HttpUtils::class);
-        $this->httpKernel = $this->createMock(HttpKernelInterface::class);
-        $entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->userService = $this->createStub(UserService::class);
+        /** @var Stub&UserFacade $userFacade */
+        $userFacade = $this->createStub(UserFacade::class);
+        $this->urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $this->httpUtils = $this->createStub(HttpUtils::class);
+        $this->httpKernel = $this->createStub(HttpKernelInterface::class);
+        /** @var Stub&EntityManagerService $entityManagerService */
+        $entityManagerService = $this->createStub(EntityManagerService::class);
+
+        $userFacade
+            ->method('findByUsername')
+            ->willReturnCallback(static function (string $username): ?User {
+                return match ($username) {
+                    'username' => new User,
+                    default => null
+                };
+            });
 
         $this->authenticator = new AppAuthenticator(
             $this->userService,
-            $this->userFacade,
+            $userFacade,
             $this->urlGenerator,
             $this->httpUtils,
             $this->httpKernel,
@@ -110,11 +119,6 @@ class AppAuthenticatorTest extends TestCase
 
     public function testGetUserSuccess(): void
     {
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByUsername')
-            ->willReturn(new User);
-
         $callback = $this->authenticator->getUser(['username' => 'username']);
         $user = $callback();
 
@@ -130,41 +134,28 @@ class AppAuthenticatorTest extends TestCase
 
     public function testGetUserFacadeFailed(): void
     {
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByUsername')
-            ->willReturn(null);
-
         $this->expectException(CustomUserMessageAuthenticationException::class);
-        $callback = $this->authenticator->getUser(['username' => 'username']);
+        $callback = $this->authenticator->getUser(['username' => 'usernameNull']);
         $callback();
     }
 
     public function testAuthenticate(): void
     {
-        $user = new User;
-
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByUsername')
-            ->willReturn($user);
-
         $result = $this->authenticator->authenticate($this->request);
 
-        $this->assertSame($user, $result->getUser());
+        $this->assertInstanceOf(User::class, $result->getUser());
     }
 
     public function testOnAuthenticationSuccess(): void
     {
-        $token = $this->createMock(TokenInterface::class);
+        /** @var Stub&TokenInterface $token */
+        $token = $this->createStub(TokenInterface::class);
 
         $this->userService
-            ->expects($this->once())
             ->method('getUser')
             ->willReturn(new User);
 
         $this->urlGenerator
-            ->expects($this->once())
             ->method('generate')
             ->willReturn('url');
 
@@ -179,10 +170,10 @@ class AppAuthenticatorTest extends TestCase
 
     public function testOnAuthenticationRedirectSuccess(): void
     {
-        $token = $this->createMock(TokenInterface::class);
+        /** @var Stub&TokenInterface $token */
+        $token = $this->createStub(TokenInterface::class);
 
         $this->userService
-            ->expects($this->once())
             ->method('getUser')
             ->willReturn(new User);
 
@@ -200,7 +191,6 @@ class AppAuthenticatorTest extends TestCase
     public function testOnAuthenticationFailure(): void
     {
         $this->httpUtils
-            ->expects($this->once())
             ->method('createRedirectResponse')
             ->willReturn(new RedirectResponse('url'));
 
@@ -216,12 +206,10 @@ class AppAuthenticatorTest extends TestCase
     public function testStart(): void
     {
         $this->urlGenerator
-            ->expects($this->once())
             ->method('generate')
             ->willReturn('url');
 
         $this->httpKernel
-            ->expects($this->once())
             ->method('handle')
             ->willReturn(new Response);
 
