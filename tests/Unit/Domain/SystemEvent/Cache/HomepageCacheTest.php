@@ -34,34 +34,34 @@ class HomepageCacheTest extends TestCase
     {
         $cache = new ArrayAdapter;
 
-        $parameterService = $this->createMock(ParameterServiceInterface::class);
-        $parameterService->expects($this->any())
+        $parameterService = $this->createStub(ParameterServiceInterface::class);
+        $parameterService
             ->method('getInt')
             ->willReturn(1);
 
         $slidingPagination = new SlidingPagination([]);
 
-        $paginatorService = $this->createMock(PaginatorService::class);
-        $paginatorService->expects($this->any())
+        $paginatorService = $this->createStub(PaginatorService::class);
+        $paginatorService
             ->method('createPagination')
             ->willReturn($slidingPagination);
 
-        $configuration = $this->createMock(Configuration::class);
-        $configuration->expects($this->any())
+        $configuration = $this->createStub(Configuration::class);
+        $configuration
             ->method('getDefaultQueryHints')
             ->willReturn([]);
 
-        $configuration->expects($this->any())
+        $configuration
             ->method('isSecondLevelCacheEnabled')
             ->willReturn(false);
 
-        $entityManagerInterface = $this->createMock(EntityManagerInterface::class);
-        $entityManagerInterface->expects($this->any())
+        $entityManagerInterface = $this->createStub(EntityManagerInterface::class);
+        $entityManagerInterface
             ->method('getConfiguration')
             ->willReturn($configuration);
 
-        $systemEventRecipientFacade = $this->createMock(SystemEventRecipientFacade::class);
-        $systemEventRecipientFacade->expects($this->any())
+        $systemEventRecipientFacade = $this->createStub(SystemEventRecipientFacade::class);
+        $systemEventRecipientFacade
             ->method('queryRecipientsQueryByUser')
             ->willReturn(new Query($entityManagerInterface));
 
