@@ -20,7 +20,6 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationFacade;
-use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
@@ -70,9 +69,6 @@ readonly class GetConversationListQueryHandler
             limit: $this->parameterService->getInt('pagination.default.limit'),
             options: ['wrap-queries' => true]
         );
-
-        $this->conversationFacade->setIsReadToConversations($pagination, $user);
-        ConversationHelper::getConversationOpposite($pagination, $user);
 
         return new GetConversationListQueryResult($pagination);
     }

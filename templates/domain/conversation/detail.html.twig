@@ -48,7 +48,7 @@
                                     <div class="chat-users">
                                         <div class="users-list">
 
-                                            {% for participant in conversation.participants %}
+                                            {% for participant in participants %}
                                                 {% include 'domain/conversation/include/chat_participant.html.twig' with {
                                                     'participant': participant
                                                 } %}

@@ -1,7 +1,7 @@
 {% set user = user ?? app_user() %}
 
 {% set conversationMessageUnreadClass = null %}
-{% if message.isRead == false %}
+{% if conversation_status.isConversationMessageRead(message, user) == false %}
     {% set conversationMessageUnreadClass = 'conversation-message-unread' %}
 {% endif %}
 
@@ -22,7 +22,7 @@
                     'dataTargetUrl': path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode })
                 } %}
             {% else %}
-                {% set readDate = conversation_message_read_date_recipient(message) %}
+                {% set readDate = conversation_message_read_date_recipient(message, user) %}
                 {% if readDate is not empty %}
                     <br>
                     <i class="fa fa-eye"></i>

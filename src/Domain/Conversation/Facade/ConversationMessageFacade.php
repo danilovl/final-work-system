@@ -173,23 +173,6 @@ readonly class ConversationMessageFacade
         return $this->getTotalUnreadMessagesByUser($user) > 0;
     }
 
-    public function setIsReadToConversationMessages(iterable $conversations, User $user): void
-    {
-        /** @var ConversationMessage $conversationMessage */
-        foreach ($conversations as $conversationMessage) {
-            /** @var ConversationMessage $conversationMessageOrigin */
-            $conversationMessageOrigin = $this->entityManagerService->getReference(
-                ConversationMessage::class,
-                $conversationMessage->getId()
-            );
-
-            $isConversationMessageRead = $this->conversationStatusService
-                ->isConversationMessageRead($conversationMessageOrigin, $user);
-
-            $conversationMessage->setRead($isConversationMessageRead);
-        }
-    }
-
     /**
      * @return ConversationMessage[]
      */

@@ -13,16 +13,12 @@
 namespace App\Domain\Conversation\Entity;
 
 use App\Application\Constant\TranslationConstant;
-use App\Application\Exception\{
-    LogicException,
-    PropertyValueIsNullException
-};
+use App\Application\Exception\LogicException;
 use App\Application\Helper\ArrayMapHelper;
 use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsReadTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\Conversation\Repository\ConversationRepository;
@@ -51,7 +47,6 @@ class Conversation
     use IdTrait;
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
-    use IsReadTrait;
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: true)]
     #[Gedmo\Versioned]
@@ -91,8 +86,6 @@ class Conversation
     #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'conversation')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
-
-    private ?User $recipient = null;
 
     public function __construct()
     {
@@ -194,25 +187,6 @@ class Conversation
     public function setWork(?Work $work): void
     {
         $this->work = $work;
-    }
-
-    public function getRecipient(): ?User
-    {
-        return $this->recipient;
-    }
-
-    public function getRecipientMust(): User
-    {
-        if (!$this->recipient) {
-            throw new PropertyValueIsNullException('Recipient is null.');
-        }
-
-        return $this->recipient;
-    }
-
-    public function setRecipient(User $recipient): void
-    {
-        $this->recipient = $recipient;
     }
 
     /**

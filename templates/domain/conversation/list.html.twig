@@ -57,7 +57,7 @@
                                 {% for conversation in conversations %}
 
                                     {% set conversationUnreadClass = null %}
-                                    {% if conversation.isRead == false %}
+                                    {% if conversation_status.isConversationRead(conversation, app_user()) == false %}
                                         {% set conversationUnreadClass = 'conversation-unread' %}
                                     {% endif %}
 
@@ -67,7 +67,7 @@
                                         </td>
                                         <td class="mail-ontact">
                                             <a href="{{ path('conversation_detail', { 'id': conversation.id  | hashids_encode }) }}">
-                                                {{ conversation.recipient }}
+                                                {{ conversation_recipient(conversation, app_user()) }}
                                             </a>
                                         </td>
                                         <td class="mail-subject">

@@ -15,6 +15,7 @@ namespace App\Domain\Conversation\Http\Api;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDetailDTO;
 use App\Domain\ConversationMessage\DTO\Api\Output\ConversationMessageListOutput;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
@@ -35,7 +36,8 @@ readonly class ConversationMessageListHandle
         private ConversationMessageFacade $conversationMessageFacade,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
         private PaginatorService $paginatorService,
-        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository
+        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
+        private ConversationStatusService $conversationStatusService
     ) {}
 
     public function __invoke(Request $request, Conversation $conversation, ?string $search = null): JsonResponse
@@ -58,18 +60,17 @@ readonly class ConversationMessageListHandle
         $pagination = $this->paginatorService
             ->createPaginationRequest($request, $conversationMessagesQuery);
 
-        $this->conversationMessageFacade->setIsReadToConversationMessages($pagination, $user);
-
         $messages = [];
         /** @var ConversationMessage $message */
         foreach ($pagination as $message) {
             $ownerDto = $this->objectToDtoMapper->map($message->getOwner(), UserDTO::class);
+            $isRead = $this->conversationStatusService->isConversationMessageRead($message, $user);
 
             $messages[] = new ConversationMessageDetailDTO(
                 id: $message->getId(),
                 owner: $ownerDto,
                 content: $message->getContent(),
-                isRead: $message->isRead(),
+                isRead: $isRead,
                 createdAt: $message->getCreatedAt()->format(DateTimeInterface::ATOM)
             );
         }

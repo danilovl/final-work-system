@@ -17,7 +17,6 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsReadTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\ConversationMessage\Repository\ConversationMessageRepository;
@@ -40,7 +39,6 @@ class ConversationMessage
     use IdTrait;
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
-    use IsReadTrait;
 
     #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'messages')]
     #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]

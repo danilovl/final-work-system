@@ -36,7 +36,6 @@ class WorkConversationMessageDTOFactoryTest extends TestCase
         $message->setId(826);
         $message->setContent('<p>Dobrý den</p>');
         $message->setOwner($this->createUser(36));
-        $message->setRead(true);
         $message->setCreatedAt(new DateTimeImmutable('2017-04-02 07:45:22'));
 
         $status = new ConversationMessageStatus;
@@ -46,7 +45,10 @@ class WorkConversationMessageDTOFactoryTest extends TestCase
         $status->setMessage($message);
         $message->setStatuses(new ArrayCollection([$status]));
 
-        $dto = new WorkConversationMessageDTOFactory($this->createWorkDetailDTOFactory())->create($message);
+        $dto = new WorkConversationMessageDTOFactory($this->createWorkDetailDTOFactory())->create(
+            message: $message,
+            isRead: true
+        );
 
         $this->assertSame(['id', 'read', 'content', 'owner', 'statuses', 'createdAt'], array_keys(get_object_vars($dto)));
         $this->assertSame(826, $dto->id);
@@ -66,10 +68,12 @@ class WorkConversationMessageDTOFactoryTest extends TestCase
         $message->setId(1);
         $message->setContent('text');
         $message->setOwner($this->createUser(36));
-        $message->setRead(false);
         $message->setCreatedAt(new DateTimeImmutable('2020-01-01 00:00:00'));
 
-        $dto = new WorkConversationMessageDTOFactory($this->createWorkDetailDTOFactory())->create($message);
+        $dto = new WorkConversationMessageDTOFactory($this->createWorkDetailDTOFactory())->create(
+            message: $message,
+            isRead: false
+        );
 
         $this->assertSame([], $dto->statuses);
         $this->assertFalse($dto->read);

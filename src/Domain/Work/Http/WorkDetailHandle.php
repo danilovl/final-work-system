@@ -17,7 +17,6 @@ use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkDetailTabService;
@@ -32,7 +31,6 @@ readonly class WorkDetailHandle
     public function __construct(
         private UserService $userService,
         private WorkDetailTabService $workDetailTabService,
-        private ConversationMessageFacade $conversationMessageFacade,
         private SeoPageService $seoPageService,
         private TwigRenderService $twigRenderService,
         private FormDeleteFactory $deleteFactory
@@ -48,8 +46,6 @@ readonly class WorkDetailHandle
         $paginationVersion = $tabService->getTabPagination($request, TabTypeConstant::TAB_VERSION->value, $work);
         $paginationEvent = $tabService->getTabPagination($request, TabTypeConstant::TAB_EVENT->value, $work);
         $paginationMessage = $tabService->getTabPagination($request, TabTypeConstant::TAB_MESSAGE->value, $work, $user);
-
-        $this->conversationMessageFacade->setIsReadToConversationMessages($paginationMessage, $user);
 
         $this->seoPageService->setTitle($work->getTitle());
 

@@ -18,10 +18,7 @@ use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcher;
 use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Repository\ConversationRepository;
-use App\Domain\Conversation\Service\{
-    ConversationStatusService,
-    ConversationVariationService
-};
+use App\Domain\Conversation\Service\ConversationVariationService;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
@@ -40,7 +37,6 @@ readonly class ConversationFacade
     public function __construct(
         private EntityManagerService $entityManagerService,
         private ConversationMessageFacade $conversationMessageFacade,
-        private ConversationStatusService $conversationStatusService,
         private ConversationVariationService $conversationVariationService,
         private ConversationEventDispatcher $conversationEventDispatcher,
         private ConversationFactory $conversationFactory,
@@ -87,24 +83,6 @@ readonly class ConversationFacade
             ->getOneOrNullResult();
 
         return $result;
-    }
-
-    /**
-     * @param Conversation[] $conversations
-     */
-    public function setIsReadToConversations(
-        iterable $conversations,
-        User $user
-    ): void {
-        Assert::allIsInstanceOf($conversations, Conversation::class);
-
-        /** @var Conversation $conversation */
-        foreach ($conversations as $conversation) {
-            $isConversationRead = $this->conversationStatusService
-                ->isConversationRead($conversation, $user);
-
-            $conversation->setRead($isConversationRead);
-        }
     }
 
     /**
@@ -177,8 +155,9 @@ readonly class ConversationFacade
             $conversationParticipantArray[] = $user;
 
             foreach ($modelConversation as $conversation) {
-                if (!in_array($conversation->getRecipient(), $conversationParticipantArray, true)) {
-                    $conversationParticipantArray[] = $conversation->getRecipient();
+                $recipient = ConversationHelper::getRecipient($conversation, $user);
+                if ($recipient !== null && !in_array($recipient, $conversationParticipantArray, true)) {
+                    $conversationParticipantArray[] = $recipient;
                 }
             }
 

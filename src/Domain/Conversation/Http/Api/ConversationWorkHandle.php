@@ -15,6 +15,8 @@ namespace App\Domain\Conversation\Http\Api;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\Conversation\Facade\ConversationFacade;
+use App\Domain\Conversation\Helper\ConversationHelper;
+use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\ConversationType\DTO\Api\ConversationTypeDTO;
@@ -33,7 +35,8 @@ readonly class ConversationWorkHandle
     public function __construct(
         private UserService $userService,
         private ConversationFacade $conversationFacade,
-        private ObjectToDtoMapperInterface $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
+        private ConversationStatusService $conversationStatusService
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -58,10 +61,14 @@ readonly class ConversationWorkHandle
             );
         }
 
+        $recipient = ConversationHelper::getRecipient($conversation, $user);
+
         $recipientDto = null;
-        if ($conversation->getRecipient() !== null) {
-            $recipientDto = $this->objectToDtoMapper->map($conversation->getRecipient(), UserDTO::class);
+        if ($recipient !== null) {
+            $recipientDto = $this->objectToDtoMapper->map($recipient, UserDTO::class);
         }
+
+        $isRead = $this->conversationStatusService->isConversationRead($conversation, $user);
 
         $workDto = null;
         if ($conversation->getWork() !== null) {
@@ -81,7 +88,7 @@ readonly class ConversationWorkHandle
         $conversationDto = new ConversationDTO(
             id: $conversation->getId(),
             name: $conversation->getName(),
-            isRead: $conversation->isRead(),
+            isRead: $isRead,
             recipient: $recipientDto,
             work: $workDto,
             participants: $participants,

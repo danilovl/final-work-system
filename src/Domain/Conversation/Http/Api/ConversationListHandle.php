@@ -20,7 +20,11 @@ use App\Domain\Conversation\Bus\Query\ConversationList\{
 };
 use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\Conversation\DTO\Api\Output\ConversationListOutput;
-use App\Domain\Conversation\Service\ConversationService;
+use App\Domain\Conversation\Helper\ConversationHelper;
+use App\Domain\Conversation\Service\{
+    ConversationService,
+    ConversationStatusService
+};
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDTO;
 use App\Domain\ConversationType\DTO\Api\ConversationTypeDTO;
 use App\Domain\User\DTO\Api\UserDTO;
@@ -38,7 +42,8 @@ readonly class ConversationListHandle
         private UserService $userService,
         private QueryBusInterface $queryBus,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
-        private ConversationService $conversationService
+        private ConversationService $conversationService,
+        private ConversationStatusService $conversationStatusService
     ) {}
 
     public function __invoke(Request $request, ?string $search = null): JsonResponse
@@ -70,10 +75,14 @@ readonly class ConversationListHandle
                 );
             }
 
+            $recipient = ConversationHelper::getRecipient($conversation, $user);
+
             $recipientDto = null;
-            if ($conversation->getRecipient() !== null) {
-                $recipientDto = $this->objectToDtoMapper->map($conversation->getRecipient(), UserDTO::class);
+            if ($recipient !== null) {
+                $recipientDto = $this->objectToDtoMapper->map($recipient, UserDTO::class);
             }
+
+            $isRead = $this->conversationStatusService->isConversationRead($conversation, $user);
 
             $workDto = null;
             if ($conversation->getWork() !== null) {
@@ -89,7 +98,7 @@ readonly class ConversationListHandle
             $conversations[] = new ConversationDTO(
                 id: $conversation->getId(),
                 name: $conversation->getName(),
-                isRead: $conversation->isRead(),
+                isRead: $isRead,
                 recipient: $recipientDto,
                 work: $workDto,
                 lastMessage: $lastMessageDto,

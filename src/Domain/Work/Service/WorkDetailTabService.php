@@ -22,7 +22,6 @@ use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };
-use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Media\Entity\Media;
@@ -77,17 +76,6 @@ class WorkDetailTabService
         );
 
         $this->setActiveTabByPagination($tab, $paginator);
-
-        if ($tab === TabTypeConstant::TAB_MESSAGE->value) {
-            if ($paginator->count() > 0 && $user !== null) {
-                /** @var ConversationMessage $message */
-                $message = $paginator[0];
-                ConversationHelper::getConversationOpposite(
-                    [$message->getConversation()],
-                    $user
-                );
-            }
-        }
 
         return $paginator;
     }

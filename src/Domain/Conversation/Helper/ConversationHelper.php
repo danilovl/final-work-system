@@ -107,37 +107,37 @@ class ConversationHelper
         return $result;
     }
 
-    public static function getConversationOpposite(iterable $conversations, User $user): void
+    public static function getRecipient(Conversation $conversation, User $user): ?User
     {
-        foreach ($conversations as $conversation) {
-            if ($conversation->getType()->getId() !== ConversationTypeConstant::WORK->value) {
-                continue;
-            }
+        if ($conversation->getType()->getId() !== ConversationTypeConstant::WORK->value) {
+            return null;
+        }
 
-            /** @var Conversation $conversation */
-            $participants = $conversation->getParticipants();
-            if ($participants->count() > 2) {
-                throw new LogicException('Conversation must have only two user');
-            }
+        $participants = $conversation->getParticipants();
+        if ($participants->count() > 2) {
+            throw new LogicException('Conversation must have only two user');
+        }
 
-            foreach ($participants as $participant) {
-                if ($participant->getUser()->getId() !== $user->getId()) {
-                    $conversation->setRecipient($participant->getUser());
-                }
+        $recipient = null;
+        foreach ($participants as $participant) {
+            if ($participant->getUser()->getId() !== $user->getId()) {
+                $recipient = $participant->getUser();
             }
         }
+
+        return $recipient;
     }
 
     /**
      * @param Conversation[] $array
      */
-    public static function usortCzechArray(array &$array): void
+    public static function usortCzechArray(array &$array, User $user): void
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
-        usort($array, static function (Conversation $first, Conversation $second) use ($collator): int {
-            $f = (string) $first->getRecipient();
-            $s = (string) $second->getRecipient();
+        usort($array, static function (Conversation $first, Conversation $second) use ($collator, $user): int {
+            $f = (string) self::getRecipient($first, $user);
+            $s = (string) self::getRecipient($second, $user);
 
             /** @var int $compare */
             $compare = $collator->compare($f, $s);

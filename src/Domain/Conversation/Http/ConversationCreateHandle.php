@@ -54,8 +54,7 @@ readonly class ConversationCreateHandle
         $conversationParticipants = $this->conversationFacade
             ->listConversationParticipants($user);
 
-        ConversationHelper::getConversationOpposite($conversationParticipants, $user);
-        ConversationHelper::usortCzechArray($conversationParticipants);
+        ConversationHelper::usortCzechArray($conversationParticipants, $user);
 
         if (UserRoleHelper::isSupervisor($user)) {
             $conversationParticipants = ConversationHelper::groupConversationsByCategorySorting($conversationParticipants);

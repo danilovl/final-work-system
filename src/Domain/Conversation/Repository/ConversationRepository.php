@@ -91,15 +91,10 @@ class ConversationRepository extends ServiceEntityRepository
         User $user
     ): QueryBuilder {
         return $this->createConversationQueryBuilder()
-            ->selectRelations()
             ->joinType()
             ->leftJoinWork()
-            ->leftJoinWorkStatus()
-            ->leftJoinWorkType()
             ->leftJoinParticipants()
-            ->leftJoinParticipantsUser()
             ->leftJoinMessages()
-            ->leftJoinMessagesOwner()
             ->whereByWorkAndParticipantUser($work, $user)
             ->orderByMessagesCreatedAt()
             ->setMaxResultsOne()

@@ -16,6 +16,7 @@ use App\Application\Constant\TabTypeConstant;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkDetailTabService;
+use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\Factory\WorkConversationMessageDTOFactory;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -27,7 +28,8 @@ readonly class ConversationWorkMessageListHandle
     public function __construct(
         private UserService $userService,
         private WorkDetailTabService $workDetailTabService,
-        private WorkConversationMessageDTOFactory $workConversationMessageDTOFactory
+        private WorkConversationMessageDTOFactory $workConversationMessageDTOFactory,
+        private ConversationStatusService $conversationStatusService
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -43,7 +45,12 @@ readonly class ConversationWorkMessageListHandle
 
         $messages = [];
         foreach ($pagination as $message) {
-            $messages[] = $this->workConversationMessageDTOFactory->create($message);
+            $isRead = $this->conversationStatusService->isConversationMessageRead($message, $user);
+
+            $messages[] = $this->workConversationMessageDTOFactory->create(
+                message: $message,
+                isRead: $isRead
+            );
         }
 
         return new JsonResponse([

@@ -13,16 +13,21 @@
 namespace App\Domain\Conversation\Twig\Runtime;
 
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use DateTime;
 
 class ConversationRuntime
 {
-    public function __construct(private readonly ConversationService $conversationService) {}
+    public function __construct(
+        private readonly ConversationService $conversationService,
+        private readonly EntityManagerService $entityManagerService
+    ) {}
 
     #[AsTwigFunction('check_work_users_conversation')]
     public function checkWorkUsersConversation(Work $work, User $userOne, User $userTwo): ?Conversation
@@ -36,10 +41,22 @@ class ConversationRuntime
         return $this->conversationService->getLastMessage($conversation);
     }
 
-    #[AsTwigFunction('conversation_message_read_date_recipient')]
-    public function getMessageReadDateByRecipient(ConversationMessage $conversationMessage): ?DateTime
+    #[AsTwigFunction('conversation_recipient')]
+    public function getRecipient(Conversation $conversation, User $user): ?User
     {
-        $recipient = $conversationMessage->getConversation()->getRecipient();
+        return ConversationHelper::getRecipient($conversation, $user);
+    }
+
+    #[AsTwigFunction('conversation_message_read_date_recipient')]
+    public function getMessageReadDateByRecipient(ConversationMessage $conversationMessage, User $user): ?DateTime
+    {
+        /** @var Conversation $conversation */
+        $conversation = $this->entityManagerService->getReference(
+            Conversation::class,
+            $conversationMessage->getConversation()->getId()
+        );
+
+        $recipient = ConversationHelper::getRecipient($conversation, $user);
         if ($recipient === null) {
             return null;
         }

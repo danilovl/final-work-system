@@ -24,7 +24,7 @@ readonly class WorkConversationMessageDTOFactory
 {
     public function __construct(private WorkDetailDTOFactory $workDetailDTOFactory) {}
 
-    public function create(ConversationMessage $message): WorkConversationMessageDTO
+    public function create(ConversationMessage $message, bool $isRead): WorkConversationMessageDTO
     {
         $statuses = [];
 
@@ -45,7 +45,7 @@ readonly class WorkConversationMessageDTOFactory
 
         return new WorkConversationMessageDTO(
             id: $message->getId(),
-            read: $message->isRead(),
+            read: $isRead,
             content: $message->getContent(),
             owner: $this->workDetailDTOFactory->createUser($message->getOwner()),
             statuses: $statuses,

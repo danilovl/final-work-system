@@ -61,6 +61,8 @@ services:
       - '9000'
     env_file:
       - ./docker/opentelemetry/opentelemetry.env
+    environment:
+      - E2E_TEST_ENABLE=1
     volumes:
       - './:/var/www/html/app'
       - './docker/php/conf/php-fpm.conf:/etc/php-fpm.conf'

@@ -14,6 +14,7 @@ namespace App\Domain\ConversationMessage\Form;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\ConversationMessage\Validation\Constraint\ConversationMessageName;
 use App\Domain\User\Entity\User;
@@ -57,7 +58,7 @@ class ConversationComposeMessageForm extends AbstractType
                 'required' => true,
                 'multiple' => UserRoleHelper::isSupervisor($user),
                 'choices' => $options['conversations'],
-                'choice_label' => fn (Conversation $conversation): string => $this->choiceLabelConversation($conversation),
+                'choice_label' => fn (Conversation $conversation): string => $this->choiceLabelConversation($conversation, $user),
                 'constraints' => [
                     new NotBlank
                 ]
@@ -97,7 +98,7 @@ class ConversationComposeMessageForm extends AbstractType
         return self::NAME;
     }
 
-    private function choiceLabelConversation(Conversation $conversation): string
+    private function choiceLabelConversation(Conversation $conversation, User $user): string
     {
         $title = '';
         $work = $conversation->getWork();
@@ -105,8 +106,12 @@ class ConversationComposeMessageForm extends AbstractType
             return $title;
         }
 
+        $recipient = ConversationHelper::getRecipient($conversation, $user);
+        if ($recipient === null) {
+            return $title;
+        }
+
         $type = null;
-        $recipient = $conversation->getRecipientMust();
 
         $author = $work->getAuthor();
         if ($author->getId() === $recipient->getId()) {

@@ -24,7 +24,6 @@ use App\Infrastructure\Service\{
 use App\Domain\Conversation\Bus\Command\CreateConversationMessage\CreateConversationMessageCommand;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Service\MessageHighlightService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
@@ -62,6 +61,7 @@ readonly class ConversationDetailHandle
         $user = $this->userService->getUser();
         $form = null;
         $createForm = false;
+        $participants = $conversation->getParticipants();
 
         $conversationMessageModel = new ConversationMessageModel;
         $conversationMessageModel->conversation = $conversation;
@@ -76,7 +76,7 @@ readonly class ConversationDetailHandle
                 if ($conversation->isOwner($user)) {
                     $createForm = true;
                 } else {
-                    $conversation->setParticipants(new ArrayCollection);
+                    $participants = new ArrayCollection;
                 }
 
                 break;
@@ -103,8 +103,6 @@ readonly class ConversationDetailHandle
             ]);
         }
 
-        ConversationHelper::getConversationOpposite([$conversation], $user);
-
         $conversationMessagesQuery = $this->conversationMessageFacade
             ->queryMessagesByConversation($conversation);
 
@@ -125,13 +123,13 @@ readonly class ConversationDetailHandle
         $pagination = $this->paginatorService
             ->createPaginationRequest($request, $conversationMessagesQuery);
 
-        $this->conversationMessageFacade->setIsReadToConversationMessages($pagination, $user);
         $this->seoPageService->setTitle($conversation->getTitle());
 
         $this->messageHighlightService->addHighlight($pagination, $searchModel->search);
 
         return $this->twigRenderService->renderToResponse('domain/conversation/detail.html.twig', [
             'conversation' => $conversation,
+            'participants' => $participants,
             'conversationMessages' => $pagination,
             'form' => $form?->createView(),
             'searchForm' => $searchForm->createView(),
