@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Domain\SystemEvent\Service\HomeDashboardService;
 
 readonly class HomeController
 {
@@ -30,7 +31,8 @@ readonly class HomeController
         private UserService $userService,
         private HomepageCache $homepageCache,
         private ParameterServiceInterface $parameterService,
-        private SystemEventFacade $systemEventFacade
+        private SystemEventFacade $systemEventFacade,
+        private HomeDashboardService $homeDashboardService
     ) {}
 
     #[PermissionMiddleware(date: ['from' => '01-01-2023'])]
@@ -45,7 +47,10 @@ readonly class HomeController
         $isUnreadExist = $this->systemEventFacade
             ->isUnreadSystemEventsByRecipient($user);
 
+        $dashboard = $this->homeDashboardService->create($user);
+
         return $this->twigRenderService->renderToResponse('application/home/index.html.twig', [
+            'dashboard' => $dashboard,
             'isSystemEventUnreadExist' => $isUnreadExist,
             'paginator' => $pagePaginators[$page]
         ]);
