@@ -42,6 +42,8 @@ class EventRepository extends ServiceEntityRepository
     public function allByWork(Work $work): QueryBuilder
     {
         return $this->createEventQueryBuilder()
+            ->selectParticipantUser()
+            ->leftJoinParticipantUser()
             ->whereByParticipantWork($work)
             ->orderByStart(SortDirection::Descending)
             ->getQueryBuilder();

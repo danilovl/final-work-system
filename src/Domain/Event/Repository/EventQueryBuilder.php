@@ -35,6 +35,13 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    public function selectParticipantUser(): self
+    {
+        $this->queryBuilder->addSelect('participant, user');
+
+        return $this;
+    }
+
     public function selectParticipantWorkAddressUser(): self
     {
         $this->queryBuilder->addSelect('participant, work, address, user');
@@ -71,14 +78,18 @@ class EventQueryBuilder extends BaseQueryBuilder
 
     public function orderByStart(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('event.start', $order);
+        $this->queryBuilder
+            ->orderBy('event.start', $order)
+            ->addOrderBy('event.id', $order);
 
         return $this;
     }
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('event.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('event.createdAt', $order)
+            ->addOrderBy('event.id', $order);
 
         return $this;
     }
