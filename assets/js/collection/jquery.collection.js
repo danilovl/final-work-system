@@ -179,14 +179,14 @@
                 let jqNode = $(node);
                 if (typeof node === 'object' && 'attributes' in node) {
                     $.each(node.attributes, function (i, attrib) {
-                        if ($.type(attrib.value) === 'string') {
+                        if (typeof attrib.value === 'string') {
                             jqNode.attr(attrib.name.replace(toReplace, replaceWith), attrib.value.replace(toReplace, replaceWith));
                         }
                     });
                 }
                 if (jqNode.length > 0) {
                     $.each(jqNode.data(), function (name, value) {
-                        if ($.type(value) === 'string') {
+                        if (typeof value === 'string') {
                             jqNode.data(name.replace(toReplace, replaceWith), value.replace(toReplace, replaceWith));
                         }
                     });

@@ -21,7 +21,7 @@
         "@fullcalendar/vue3": "^6.1.17",
         "bootstrap": "^5.3.9",
         "inputmask": "^5.0.10",
-        "jquery": "^3.5.1",
+        "jquery": "^4.1.0",
         "jquery-ui": "^1.14.2",
         "jszip": "^3.10.2",
         "select2": "^4.1.1",
