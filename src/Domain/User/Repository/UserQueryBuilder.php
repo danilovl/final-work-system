@@ -50,6 +50,35 @@ class UserQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    public function searchByTerm(string $search): self
+    {
+        $search = mb_trim($search);
+        $words = preg_split('~\s+~', $search);
+
+        if ($words !== false && count($words) > 1) {
+            $expr = $this->queryBuilder->expr();
+            $andX = $expr->andX();
+
+            foreach ($words as $idx => $word) {
+                $param = 'search_word_' . $idx;
+
+                $andX->add($expr->orX(
+                    $expr->like('user.username', ':' . $param),
+                    $expr->like('user.firstname', ':' . $param),
+                    $expr->like('user.lastname', ':' . $param)
+                ));
+                $this->queryBuilder->setParameter($param, '%' . $word . '%');
+            }
+            $this->queryBuilder->andWhere($andX);
+        } else {
+            $this->queryBuilder
+                ->andWhere('user.username LIKE :search OR user.firstname LIKE :search OR user.lastname LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $this;
+    }
+
     public function joinGroups(): self
     {
         $this->queryBuilder

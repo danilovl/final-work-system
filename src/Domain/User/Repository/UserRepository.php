@@ -130,6 +130,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQueryBuilder();
     }
 
+    public function allByUserRoleAndSearch(string $role, ?string $search = null, bool $enable = true): QueryBuilder
+    {
+        $userQueryBuilder = $this->createUserQueryBuilder()
+            ->filterRoleLike($role)
+            ->filterEnabled($enable);
+
+        if ($search !== null && mb_trim($search) !== '') {
+            $userQueryBuilder->searchByTerm($search);
+        }
+
+        return $userQueryBuilder
+            ->orderByName()
+            ->getQueryBuilder();
+    }
+
     public function oneByUsername(string $username, ?bool $enable = null): QueryBuilder
     {
         return $this->createUserQueryBuilder()
