@@ -183,24 +183,28 @@ readonly class ConversationFacade
             }
 
             $newConversation = $this->conversationFactory->createConversation(
-                $user,
-                ConversationTypeConstant::GROUP->value,
-                null,
-                $name
+                owner: $user,
+                type: ConversationTypeConstant::GROUP->value,
+                name: $name
             );
 
-            $this->conversationFactory
-                ->createConversationParticipant($newConversation, $conversationParticipantArray);
+            $this->conversationFactory->createConversationParticipant(
+                conversation: $newConversation,
+                participants: $conversationParticipantArray
+            );
 
-            $conversationMessage = $this->conversationFactory
-                ->createConversationMessage($newConversation, $user, $content);
+            $conversationMessage = $this->conversationFactory->createConversationMessage(
+                conversation: $newConversation,
+                owner: $user,
+                content: $content
+            );
 
             $this->conversationFactory->createConversationMessageStatus(
-                $newConversation,
-                $conversationMessage,
-                $user,
-                $conversationParticipantArray,
-                ConversationMessageStatusTypeConstant::UNREAD->value
+                conversation: $newConversation,
+                message: $conversationMessage,
+                user: $user,
+                participants: $conversationParticipantArray,
+                type: ConversationMessageStatusTypeConstant::UNREAD->value
             );
 
             $this->entityManagerService->clear();
@@ -218,17 +222,20 @@ readonly class ConversationFacade
                     ConversationHelper::getParticipantIds($modelConversation) === ConversationHelper::getParticipantIds($conversation)
                 ) {
                     $conversationMessage = $this->conversationFactory
-                        ->createConversationMessage($conversation, $user, $content);
+                        ->createConversationMessage(
+                            conversation: $conversation,
+                            owner: $user,
+                            content: $content
+                        );
 
                     $participants = $conversation->getParticipants();
-                    $this->conversationFactory
-                        ->createConversationMessageStatus(
-                            $conversation,
-                            $conversationMessage,
-                            $user,
-                            $participants,
-                            ConversationMessageStatusTypeConstant::UNREAD->value
-                        );
+                    $this->conversationFactory->createConversationMessageStatus(
+                        conversation: $conversation,
+                        message: $conversationMessage,
+                        user: $user,
+                        participants: $participants,
+                        type: ConversationMessageStatusTypeConstant::UNREAD->value
+                    );
                     $createdNewConversation = true;
 
                     $message = $this->conversationMessageFacade
