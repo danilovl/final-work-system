@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Bus\Query\ConversationIdsByParticipantAndSearch;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 
 readonly class GetConversationIdsByParticipantAndSearchQueryHandler implements QueryHandlerInterface

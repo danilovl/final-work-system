@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Bus\Query\HasUnreadMessagesByRecipient;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\ConversationMessage\Facade\ConversationMessageFacade;
 
 readonly class GetHasUnreadMessagesByRecipientQueryHandler implements QueryHandlerInterface

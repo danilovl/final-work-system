@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByWorkUser;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\ConversationMessage\Facade\ConversationMessageFacade;
 
 readonly class GetConversationMessageQueryByWorkUserQueryHandler implements QueryHandlerInterface

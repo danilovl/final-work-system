@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Form;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;

@@ -15,7 +15,7 @@ namespace App\Domain\ConversationMessage\Bus\Command\CreateConversationMessage;
 use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcher;
 use App\Domain\ConversationMessage\Factory\ConversationMessageFactory;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
-use App\Application\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\ConversationMessageStatus\Bus\Command\CreateConversationMessageStatus\CreateConversationMessageStatusCommand;
 
 readonly class CreateConversationMessageHandler implements CommandHandlerInterface

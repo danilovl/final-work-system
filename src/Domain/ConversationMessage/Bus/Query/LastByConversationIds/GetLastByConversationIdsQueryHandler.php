@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Bus\Query\LastByConversationIds;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\ConversationMessage\Facade\ConversationMessageFacade;
 
 readonly class GetLastByConversationIdsQueryHandler implements QueryHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Factory;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\ConversationMessage\DTO\Api\WorkConversationMessageDTO;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatus\DTO\Api\ConversationMessageStatusDTO;

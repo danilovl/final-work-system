@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Bus\Query\MessagesByConversation;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Conversation\Entity\Conversation;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
