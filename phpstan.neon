@@ -13,6 +13,9 @@ parameters:
     doctrine:
         objectManagerLoader: bin/phpstan/doctrine-orm-bootstrap.php
 
+    parallel:
+        maximumNumberOfProcesses: 2
+
     level: 9
     paths:
         - src
