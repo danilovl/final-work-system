@@ -41,7 +41,11 @@ readonly class ConversationCreateMessageHandle
 
         $conversation->createUpdateAblePreUpdate();
 
-        $command = CreateConversationMessageCommand::create($conversation, $conversationMessageModel, $user);
+        $command = CreateConversationMessageCommand::create(
+            conversation: $conversation,
+            conversationMessageModel: $conversationMessageModel,
+            user: $user
+        );
         $this->commandBus->dispatch($command);
 
         return new JsonResponse(status: Response::HTTP_CREATED);

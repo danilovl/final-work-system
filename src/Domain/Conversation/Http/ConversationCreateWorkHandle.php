@@ -51,7 +51,12 @@ readonly class ConversationCreateWorkHandle
                 ->checkWorkUsersConversation($work, $userOne, $userTwo);
 
             if ($workConversation === null) {
-                $command = CreateWorkConversationCommand::create($userOne, $userTwo, ConversationTypeConstant::WORK->value, $work);
+                $command = CreateWorkConversationCommand::create(
+                    userOne: $userOne,
+                    userTwo: $userTwo,
+                    type: ConversationTypeConstant::WORK->value,
+                    work: $work
+                );
                 /** @var Conversation $conversation */
                 $conversation = $this->commandBus->dispatchResult($command);
 
