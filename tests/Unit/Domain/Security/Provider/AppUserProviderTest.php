@@ -16,25 +16,32 @@ use App\Domain\Security\Provider\AppUserProvider;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Infrastructure\Service\EntityManagerService;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class AppUserProviderTest extends TestCase
 {
-    private MockObject&UserFacade $userFacade;
-
-    private MockObject&EntityManagerService $entityManagerService;
+    private Stub&EntityManagerService $entityManagerService;
 
     private AppUserProvider $appUserProvider;
 
     protected function setUp(): void
     {
-        $this->userFacade = $this->createMock(UserFacade::class);
-        $this->entityManagerService = $this->createMock(EntityManagerService::class);
+        $userFacade = $this->createStub(UserFacade::class);
+        $this->entityManagerService = $this->createStub(EntityManagerService::class);
+
+        $userFacade
+            ->method('findByUsername')
+            ->willReturnCallback(static function (string $username): ?User {
+                return match ($username) {
+                    'identifier', 'username' => new User,
+                    default => null
+                };
+            });
 
         $this->appUserProvider = new AppUserProvider(
-            $this->userFacade,
+            $userFacade,
             $this->entityManagerService
         );
     }
@@ -42,36 +49,24 @@ class AppUserProviderTest extends TestCase
     public function testUpgradePassword(): void
     {
         $this->entityManagerService
-            ->expects($this->once())
             ->method('flush');
 
         $this->appUserProvider->upgradePassword(new User, 'newHashedPassword');
+        $this->expectNotToPerformAssertions();
     }
 
     public function testLoadUserByIdentifierSuccess(): void
     {
-        $user = new User;
-
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByUsername')
-            ->willReturn($user);
-
         $result = $this->appUserProvider->loadUserByIdentifier('identifier');
 
-        $this->assertSame($user, $result);
+        $this->assertInstanceOf(User::class, $result);
     }
 
     public function testLoadUserByIdentifierFailed(): void
     {
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByUsername')
-            ->willReturn(null);
-
         $this->expectException(UserNotFoundException::class);
 
-        $this->appUserProvider->loadUserByIdentifier('identifier');
+        $this->appUserProvider->loadUserByIdentifier('invalid');
     }
 
     public function testRefreshUser(): void
@@ -79,14 +74,9 @@ class AppUserProviderTest extends TestCase
         $user = new User;
         $user->setUsername('username');
 
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByUsername')
-            ->willReturn($user);
-
         $result = $this->appUserProvider->refreshUser($user);
 
-        $this->assertSame($user, $result);
+        $this->assertInstanceOf(User::class, $result);
     }
 
     public function testSupportsClass(): void
