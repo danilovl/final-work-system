@@ -35,14 +35,16 @@ readonly class EventListOwnerHandle
     {
         $user = $this->userService->getUser();
 
-        $eventData = new EventRepositoryDTO(
-            user: $user
-        );
+        $eventData = new EventRepositoryDTO(user: $user);
 
         $eventsQuery = $this->eventFacade
             ->queryEventsByOwner($eventData);
 
-        $pagination = $this->paginatorService->createPaginationRequest($request, $eventsQuery, limit: 1);
+        $pagination = $this->paginatorService->createPaginationRequest(
+            request: $request,
+            target: $eventsQuery,
+            limit: 1
+        );
 
         $result = [];
 
@@ -52,10 +54,10 @@ readonly class EventListOwnerHandle
         }
 
         return new EventListOwnerOutput(
-            $pagination->getItemNumberPerPage(),
-            $pagination->getTotalItemCount(),
-            $pagination->count(),
-            $result
+            numItemsPerPage: $pagination->getItemNumberPerPage(),
+            totalCount: $pagination->getTotalItemCount(),
+            currentItemCount: $pagination->count(),
+            result: $result
         );
     }
 }

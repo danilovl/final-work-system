@@ -24,7 +24,11 @@ readonly class EventDetailHandler
     public function __invoke(Event $event): JsonResponse
     {
         $ignoreAttributes = ['user:read:author', 'user:read:supervisor', 'user:read:opponent', 'user:read:consultant'];
-        $eventDetailDTO = $this->objectToDtoMapper->map($event, EventDetailDTO::class, ignoreGroups: $ignoreAttributes);
+        $eventDetailDTO = $this->objectToDtoMapper->map(
+            source: $event,
+            target: EventDetailDTO::class,
+            ignoreGroups: $ignoreAttributes
+        );
 
         return new JsonResponse($eventDetailDTO);
     }
