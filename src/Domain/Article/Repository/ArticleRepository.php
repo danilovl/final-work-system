@@ -34,6 +34,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->where('article.active = :active')
             ->andWhere('categories = :articleCategory')
             ->orderBy('article.createdAt', SortDirection::Descending)
+            ->addOrderBy('article.id', SortDirection::Descending)
             ->setParameter('active', true)
             ->setParameter('articleCategory', $articleCategory);
     }
