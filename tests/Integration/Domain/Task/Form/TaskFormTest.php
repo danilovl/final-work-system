@@ -34,9 +34,13 @@ class TaskFormTest extends KernelTestCase
         array $data,
         bool $isValid
     ): void {
-        $form = $this->formFactory->create(TaskForm::class, new TaskModel, [
-            'csrf_protection' => false
-        ]);
+        $form = $this->formFactory->create(
+            type: TaskForm::class,
+            data: new TaskModel,
+            options: [
+                'csrf_protection' => false
+            ]
+        );
         $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
