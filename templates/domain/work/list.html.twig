@@ -26,7 +26,9 @@
                                         <li>
                                             <a class="float-start date deadline-date collapse-link">
                                                 <p class="day">
-                                                    {{ groupName }} ({{ groupsArray['works']|length }})
+                                                    <i class="fa-regular fa-folder-open"></i>
+                                                    <span class="work-group-name">{{ groupName }}</span>
+                                                    <span class="work-group-count">{{ groupsArray['works'] | length }}</span>
                                                 </p>
                                             </a>
                                         </li>
