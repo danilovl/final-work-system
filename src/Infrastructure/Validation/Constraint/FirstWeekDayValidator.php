@@ -46,7 +46,7 @@ class FirstWeekDayValidator extends ConstraintValidator
         }
 
         $startWeekTest = DateHelper::actualWeekStartByDate(clone $value);
-        if (!CompareHelper::compareDateTime($value, $startWeekTest, CompareConstant::NOT_EQUAL)) {
+        if (!CompareHelper::compareDateTime(first: $value, second: $startWeekTest, condition: CompareConstant::NOT_EQUAL)) {
             return;
         }
 
