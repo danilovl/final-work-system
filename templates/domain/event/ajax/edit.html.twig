@@ -98,12 +98,15 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button class="btn btn-success"
-                                        id="event_action">
+                                        id="event_action"
+                                        data-controller="ajax-form">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ 'app.form.action.update' | trans }}
                                 </button>
                                 <button class="btn btn-primary"
-                                        id="event_action_close">
+                                        id="event_action_close"
+                                        data-controller="ajax-form"
+                                        data-ajax-form-close-value="true">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ 'app.form.action.update_and_close' | trans }}
                                 </button>
@@ -118,10 +121,4 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(() => {
-        createEditContentAjax('#event_action');
-        createEditContentAjax('#event_action_close', true);
-    });
-</script>
 

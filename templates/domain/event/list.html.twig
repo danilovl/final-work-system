@@ -15,7 +15,7 @@
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="x_content">
+                        <div class="x_content" data-controller="table-fix">
 
                             {% if events is not empty %}
                                 {% include 'domain/event/include/events.html.twig' %}
@@ -33,12 +33,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(function () {
-            $("table").tableFix();
-        });
-    </script>
 {% endblock %}

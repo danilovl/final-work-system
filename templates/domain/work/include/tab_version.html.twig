@@ -56,7 +56,6 @@
                                role="tab"
                                id="heading-version-description-{{ version.id | hashids_encode }}"
                                data-toggle="collapse"
-                               data-parent="#accordion-version-descrition-{{ version.id | hashids_encode }}"
                                href="#tab-version-description-{{ version.id | hashids_encode }}"
                                aria-expanded="true"
                                aria-controls="tab-version-description-{{ version.id | hashids_encode }}">
@@ -69,14 +68,16 @@
                            role="tab"
                            id="heading-content-description-{{ version.id | hashids_encode }}"
                            data-toggle="collapse"
-                           data-parent="#accordion-content-descrition-{{ version.id | hashids_encode }}"
                            href="#tab-version-content-{{ version.id | hashids_encode }}"
                            aria-expanded="true"
                            aria-controls="tab-version-content-{{ version.id | hashids_encode }}"
 
                                 {% if media_is_file_exist(version) and version.mimeType.extension != 'zip' and version.mimeType.extension != 'rar' %}
                                     {% set frameLink =  absolute_url(path('version_google_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode })) %}
-                                    onclick="showGoogleDocs( '#iframe-version-content-{{ version.id | hashids_encode }}', '{{ frameLink }}')"
+                                    data-controller="google-docs"
+                                    data-action="google-docs#show"
+                                    data-google-docs-iframe-param="#iframe-version-content-{{ version.id | hashids_encode }}"
+                                    data-google-docs-url-param="{{ frameLink }}"
                                 {% endif %}
                         >
                             <i class="fa fa-file-text-o"></i>

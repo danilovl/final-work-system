@@ -56,7 +56,7 @@
                                 </div>
                             {% endif %}
                         </div>
-                        <div class="x_content">
+                        <div class="x_content" data-controller="table-fix">
 
                             {% if tasks is not empty %}
                                 {% include 'domain/task/include/tasks.html.twig' with {
@@ -76,12 +76,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(function () {
-            $("table").tableFix();
-        });
-    </script>
 {% endblock %}

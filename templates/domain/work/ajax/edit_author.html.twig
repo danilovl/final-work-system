@@ -77,12 +77,15 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                                 <button class="btn btn-success"
-                                        id="user-button-action">
+                                        id="user-button-action"
+                                        data-controller="ajax-form">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button class="btn btn-primary"
-                                        id="user-button-action-close">
+                                        id="user-button-action-close"
+                                        data-controller="ajax-form"
+                                        data-ajax-form-close-value="true">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
@@ -97,9 +100,3 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(() => {
-        createEditContentAjax('#user-button-action');
-        createEditContentAjax('#user-button-action-close', true);
-    });
-</script>

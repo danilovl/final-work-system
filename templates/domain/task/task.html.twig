@@ -33,7 +33,7 @@
 
                                         {{ form_start(form, {
                                             'attr': {
-                                                'data-controller': 'tinymce',
+                                                'data-controller': 'tinymce calendar-helper',
                                                 'class': 'form-horizontal'
                                             }
                                         }) }}
@@ -177,7 +177,9 @@
                                                                                 <button type="button"
                                                                                         class="btn btn-primary form-control"
                                                                                         data-dismiss="modal"
-                                                                                        onclick="changeCalendarDate('#task_deadline','{{ taskDeadline | date('Y-m-d') }}')">
+                                                                                        data-action="calendar-helper#pick"
+                                                                                        data-calendar-helper-input-param="#task_deadline"
+                                                                                        data-calendar-helper-date-param="{{ taskDeadline | date('Y-m-d') }}">
                                                                                     {{ 'app.form.action.select' | trans }}
                                                                                 </button>
                                                                             </td>

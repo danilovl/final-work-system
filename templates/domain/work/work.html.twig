@@ -25,7 +25,12 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                        {{ form_start(form, {
+                                            'attr': {
+                                                'data-controller': 'calendar-helper',
+                                                'class': 'form-horizontal'
+                                            }
+                                        }) }}
                                         <div class="item form-group">
                                             {{ form_label(form.title,  'app.form.label.title' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -209,7 +214,9 @@
                                                                                 <button type="button"
                                                                                         class="btn btn-primary form-control"
                                                                                         data-dismiss="modal"
-                                                                                        onclick="changeCalendarDate('#work_deadline', '{{ workDeadline | date('Y-m-d') }}')">
+                                                                                        data-action="calendar-helper#pick"
+                                                                                        data-calendar-helper-input-param="#work_deadline"
+                                                                                        data-calendar-helper-date-param="{{ workDeadline | date('Y-m-d') }}">
                                                                                     {{ 'app.form.action.select' | trans }}
                                                                                 </button>
                                                                             </td>
@@ -294,7 +301,9 @@
                                                                                 <button type="button"
                                                                                         class="btn btn-primary form-control"
                                                                                         data-dismiss="modal"
-                                                                                        onclick="changeCalendarDate('#work_deadlineProgram','{{ workProgramDeadline | date('Y-m-d') }}')">
+                                                                                        data-action="calendar-helper#pick"
+                                                                                        data-calendar-helper-input-param="#work_deadlineProgram"
+                                                                                        data-calendar-helper-date-param="{{ workProgramDeadline | date('Y-m-d') }}">
                                                                                     {{ 'app.form.action.select' | trans }}
                                                                                 </button>
                                                                             </td>

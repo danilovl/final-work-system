@@ -24,7 +24,7 @@
                             </button>
 
                             {% include 'other/common_part/simple_search.html.twig' with {
-                                'imputGroupClass': 'mt-lsmal',
+                                'inputGroupClass': 'mt-small',
                                 'clearSearchUrl':  path('conversation_list')
                             } %}
                         </div>
@@ -62,10 +62,10 @@
                                     {% endif %}
 
                                     <tr class="{{ conversationUnreadClass }}" data-delete-row="conversation-{{ conversation.id | hashids_encode }}">
-                                        <td class="check-mail">
+                                        <td class="check-mail" data-controller="icheck">
                                             <input type="checkbox" class="i-checks" title="">
                                         </td>
-                                        <td class="mail-ontact">
+                                        <td class="mail-contact">
                                             <a href="{{ path('conversation_detail', { 'id': conversation.id  | hashids_encode }) }}">
                                                 {{ conversation_recipient(conversation, app_user()) }}
                                             </a>
@@ -106,10 +106,10 @@
                                                href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}"
                                                target="_blank">
                                                 <i class="fa fa-comments-o"></i>
-                                                [{{ conversation.messages | length }}]
+                                                [{{ messageCounts[conversation.id] }}]
                                             </a>
                                         </td>
-                                        {% set lastMessage = conversation_last_message(conversation) %}
+                                        {% set lastMessage = lastMessages[conversation.id] %}
                                         <td>
                                             {% if lastMessage is not empty %}
                                                 <img src="{{ lastMessage.owner | profile_image }}"
@@ -164,15 +164,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(() => {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
-            });
-        });
-    </script>
 {% endblock %}

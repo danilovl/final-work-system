@@ -40,7 +40,7 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="x_content">
+                        <div class="x_content" data-controller="table-fix">
 
                             {% if mediaCategories is not empty %}
 
@@ -118,12 +118,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(() => {
-            $("table").tableFix()
-        });
-    </script>
 {% endblock %}

@@ -63,7 +63,9 @@
                         </dt>
                         <dd>
                           <span class="label label-danger"
-                                id="countdownDeadline">
+                                id="countdownDeadline"
+                                data-work-detail-target="countdown"
+                                data-deadline="{{ work.deadline | date('Y-m-d') }}">
                           </span>
                         </dd>
 
@@ -95,7 +97,9 @@
                             </dt>
                             <dd>
                                <span class="label label-danger"
-                                     id="countdownDeadlineProgram">
+                                     id="countdownDeadlineProgram"
+                                     data-work-detail-target="countdown"
+                                     data-deadline="{{ work.deadlineProgram | date('Y-m-d') }}">
                                </span>
                             </dd>
                         {% endif %}

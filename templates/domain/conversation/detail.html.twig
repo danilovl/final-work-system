@@ -32,7 +32,13 @@
                             <div class="row">
                                 <div class="col-md-9 ">
                                     <div class="chat-discussion">
-                                        <div id="chat">
+                                        {% set topics = 'conversation/' ~ conversation.id | hashids_encode %}
+                                        {% set topics = topics ~ '/user/' ~ app.user().id | hashids_encode %}
+                                        <div id="chat"
+                                             {% if parameter_get('event_source.conversation.detail.active') == true %}
+                                                 data-controller="conversation-stream"
+                                                 data-conversation-stream-url-value="{{ mercure(topics) }}"
+                                             {% endif %}>
                                             {% for message in conversationMessages %}
                                                 {% include 'domain/conversation/include/chat_message.html.twig' with {
                                                     'message': message
@@ -109,18 +115,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(function () {
-            {% if parameter_get('event_source.conversation.detail.active') == true %}
-
-            {% set topics = 'conversation/' ~ conversation.id | hashids_encode %}
-            {% set topics = topics ~ '/user/' ~ app.user().id | hashids_encode %}
-
-            conversationEventSource("{{ mercure(topics)|escape('js') }}", $('#chat'));
-            {% endif %}
-        });
-    </script>
 {% endblock %}

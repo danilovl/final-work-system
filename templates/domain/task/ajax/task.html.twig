@@ -15,7 +15,7 @@
 
                         {{ form_start(form, {
                             'attr': {
-                                'data-controller': 'tinymce',
+                                'data-controller': 'tinymce calendar-helper',
                                 'class': 'form-horizontal'
                             }
                         }) }}
@@ -106,13 +106,16 @@
                             {% if taskDeadlines is not empty %}
                                 <div class="col-md-2 col-sm-2 col-xs-12">
                                     <a class="btn btn-warning btn-xs"
-                                       id="show-deadline-calendar-helper-date">
+                                       id="show-deadline-calendar-helper-date"
+                                       data-action="calendar-helper#show"
+                                       data-calendar-helper-panel-param="#deadline-calendar-helper-date">
                                         <i class="fa fa-calendar-o"></i>
                                         {{ 'app.text.deadline' | trans }}
                                     </a>
                                 </div>
                                 <div class="modal fade bs-example-modal-sm"
-                                     id="deadline-calendar-helper-date">
+                                     id="deadline-calendar-helper-date"
+                                     data-calendar-helper-target="panel">
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -132,7 +135,9 @@
                                                             <td>
                                                                 <button type="button"
                                                                         class="btn btn-primary form-control"
-                                                                        onclick="changeCalendarDate('#task_deadline','{{ taskDeadline | date('Y-m-d') }}')">
+                                                                        data-action="calendar-helper#pick"
+                                                                        data-calendar-helper-input-param="#task_deadline"
+                                                                        data-calendar-helper-date-param="{{ taskDeadline | date('Y-m-d') }}">
                                                                     {{ 'app.form.action.select' | trans }}
                                                                 </button>
                                                             </td>
@@ -165,12 +170,15 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                                 <button id="task-button-action"
-                                        class="btn btn-success">
+                                        class="btn btn-success"
+                                        data-controller="ajax-form">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button id="task-button-action-close"
-                                        class="btn btn-primary">
+                                        class="btn btn-primary"
+                                        data-controller="ajax-form"
+                                        data-ajax-form-close-value="true">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
@@ -184,22 +192,3 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        initTooltip();
-        createEditContentAjax('#task-button-action');
-        createEditContentAjax('#task-button-action-close', true);
-
-        $("#show-deadline-calendar-helper-date").click(function () {
-            $("#deadline-calendar-helper-date").show();
-            $("#deadline-calendar-helper-date").addClass('in');
-        });
-    });
-
-    function changeCalendarDate(selector, date) {
-        $(selector).data("DateTimePicker").date(date);
-
-        $("#deadline-calendar-helper-date").hide();
-        $("#deadline-calendar-helper-date").removeClass('in');
-    }
-</script>

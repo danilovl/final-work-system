@@ -31,12 +31,15 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                                 <button class="btn btn-success"
-                                        id="document_category_action">
+                                        id="document_category_action"
+                                        data-controller="ajax-form">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button class="btn btn-primary"
-                                        id="document_category_action_close">
+                                        id="document_category_action_close"
+                                        data-controller="ajax-form"
+                                        data-ajax-form-close-value="true">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
@@ -51,9 +54,3 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(() => {
-        createEditContentAjax('#document_category_action');
-        createEditContentAjax('#document_category_action_close', true);
-    });
-</script>

@@ -42,7 +42,7 @@
                                         {{ form_start(form, {
                                             'method': 'POST',
                                             'attr': {
-                                                'data-controller': 'tinymce',
+                                                'data-controller': 'tinymce collection',
                                                 'class': 'form-horizontal'
                                             }
                                         }) }}
@@ -87,15 +87,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(() => {
-            $('.collection').collection({
-                drag_drop: true,
-                allow_duplicate: true
-            });
-        });
-    </script>
 {% endblock %}
