@@ -55,11 +55,11 @@ readonly class GetConversationListQueryHandler
         $conversationsQuery = $this->conversationFacade->queryAllByParticipantUserTypes($user, $types);
 
         if ($query->search) {
-            $messageIds = $this->elasticaConversationMessageRepository
-                ->getMessageIdsByParticipantAndSearch($user, $query->search);
+            $messageConversationIds = $this->elasticaConversationMessageRepository
+                ->getConversationIdsByParticipantAndSearch($user, $query->search);
 
             $conversationIds = $this->elasticaConversationRepository
-                ->getIdsByParticipantAndSearch($user, $messageIds, $query->search);
+                ->getIdsByParticipantAndSearch($user, $messageConversationIds, $query->search);
 
             $conversationsQuery = $this->conversationFacade->queryAllByIds($conversationIds);
         }

@@ -23,78 +23,40 @@ readonly class ConversationSearch
     public function __construct(private TransformedFinder $transformedFinderConversation) {}
 
     /**
-     * @param int[] $messageIds
+     * @param int[] $conversationIds
      * @return int[]
      */
-    public function getIdsByParticipantAndSearch(User $user, array $messageIds, string $search): array
+    public function getIdsByParticipantAndSearch(User $user, array $conversationIds, string $search): array
     {
-        $query = $this->createQueryGetIdsByParticipantAndSearch($user, $messageIds, $search);
+        $query = $this->createQueryGetIdsByParticipantAndSearch($user, $conversationIds, $search);
         $results = $this->transformedFinderConversation->findRaw($query);
 
         return $this->getDocumentIds($results);
     }
 
     /**
-     * @param int[] $messageIds
+     * @param int[] $conversationIds
      * @return array{
      *      size: int,
-     *      _source: array<string>,
+     *      _source: false,
      *      query: array
      *  }
      */
-    public function createQueryGetIdsByParticipantAndSearch(User $user, array $messageIds, string $search): array
+    public function createQueryGetIdsByParticipantAndSearch(User $user, array $conversationIds, string $search): array
     {
-        $search = $this->transformSearch($search);
-
         return [
             'size' => 1_000,
-            '_source' => ['id'],
+            '_source' => false,
             'query' => [
                 'bool' => [
-                    'must' => [
-                        [
-                            'nested' => [
-                                'path' => 'participants',
-                                'query' => [
-                                    'nested' => [
-                                        'path' => 'participants.user',
-                                        'query' => [
-                                            'term' => [
-                                                'participants.user.id' => $user->getId()
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
+                    'filter' => [
+                        ['term' => ['participants.user.id' => $user->getId()]],
                         [
                             'bool' => [
                                 'should' => [
-                                    [
-                                        'wildcard' => [
-                                            'name' => '*' . $search . '*'
-                                        ]
-                                    ],
-                                    [
-                                        'nested' => [
-                                            'path' => 'messages',
-                                            'query' => [
-                                                'terms' => [
-                                                    'messages.id' => $messageIds
-                                                ]
-                                            ]
-                                        ]
-                                    ],
-                                    [
-                                        'nested' => [
-                                            'path' => 'work',
-                                            'query' => [
-                                                'wildcard' => [
-                                                    'work.title' => '*' . $search . '*'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
+                                    $this->createContainsQuery('name.normalized', $search),
+                                    ['terms' => ['id' => $conversationIds]],
+                                    $this->createContainsQuery('work.title.normalized', $search)
                                 ]
                             ]
                         ]

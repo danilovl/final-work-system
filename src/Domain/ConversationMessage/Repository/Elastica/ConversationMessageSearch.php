@@ -15,13 +15,21 @@ namespace App\Domain\ConversationMessage\Repository\Elastica;
 use App\Application\Traits\Repository\Elastica\ElasticaSearchTrait;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
+use Elastica\Index;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 
 readonly class ConversationMessageSearch
 {
     use ElasticaSearchTrait;
 
-    public function __construct(private TransformedFinder $transformedFinderConversationMessage) {}
+    private const string CONVERSATION_AGGREGATION = 'conversations';
+
+    private const int SIZE = 1_000;
+
+    public function __construct(
+        private TransformedFinder $transformedFinderConversationMessage,
+        private Index $indexConversationMessage
+    ) {}
 
     /**
      * @return int[]
@@ -37,32 +45,20 @@ readonly class ConversationMessageSearch
     /**
      * @return array{
      *     size: int,
+     *     _source: false,
      *     query: array
      * }
      */
     public function createQueryGetMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
     {
         return [
-            'size' => 1_000,
-            '_source' => ['id'],
+            'size' => self::SIZE,
+            '_source' => false,
             'query' => [
                 'bool' => [
-                    'must' => [
-                        [
-                            'nested' => [
-                                'path' => 'conversation',
-                                'query' => [
-                                    'term' => [
-                                        'conversation.id' => $conversation->getId()
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'wildcard' => [
-                                'content.normalized' => '*' . $this->transformSearch($search) . '*'
-                            ]
-                        ]
+                    'filter' => [
+                        ['term' => ['conversation.id' => $conversation->getId()]],
+                        $this->createContainsQuery('content.normalized', $search)
                     ]
                 ]
             ]
@@ -72,56 +68,42 @@ readonly class ConversationMessageSearch
     /**
      * @return int[]
      */
-    public function getMessageIdsByParticipantAndSearch(User $user, string $search): array
+    public function getConversationIdsByParticipantAndSearch(User $user, string $search): array
     {
-        $query = $this->createQueryGetIdsByParticipantAndSearch($user, $search);
-        $results = $this->transformedFinderConversationMessage->findRaw($query);
+        $query = $this->createQueryGetConversationIdsByParticipantAndSearch($user, $search);
+        $resultSet = $this->indexConversationMessage->search($query);
+        $aggregation = $resultSet->getAggregation(self::CONVERSATION_AGGREGATION);
 
-        return $this->getDocumentIds($results);
+        /** @var array<array{key: int|string}> $buckets */
+        $buckets = $aggregation['buckets'];
+
+        return array_map(static fn (array $bucket): int => (int) $bucket['key'], $buckets);
     }
 
     /**
      * @return array{
      *     size: int,
-     *     _source: array<string>,
-     *     query: array
+     *     query: array,
+     *     aggs: array
      * }
      */
-    public function createQueryGetIdsByParticipantAndSearch(User $user, string $search): array
+    public function createQueryGetConversationIdsByParticipantAndSearch(User $user, string $search): array
     {
-        $search = $this->transformSearch($search);
-
         return [
-            'size' => 1_000,
-            '_source' => ['id'],
+            'size' => 0,
             'query' => [
                 'bool' => [
-                    'must' => [
-                        [
-                            'nested' => [
-                                'path' => 'conversation',
-                                'query' => [
-                                    'nested' => [
-                                        'path' => 'conversation.participants',
-                                        'query' => [
-                                            'nested' => [
-                                                'path' => 'conversation.participants.user',
-                                                'query' => [
-                                                    'term' => [
-                                                        'conversation.participants.user.id' => $user->getId()
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'wildcard' => [
-                                'content.normalized' => '*' . $search . '*'
-                            ]
-                        ]
+                    'filter' => [
+                        ['term' => ['conversation.participants.user.id' => $user->getId()]],
+                        $this->createContainsQuery('content.normalized', $search)
+                    ]
+                ]
+            ],
+            'aggs' => [
+                self::CONVERSATION_AGGREGATION => [
+                    'terms' => [
+                        'field' => 'conversation.id',
+                        'size' => self::SIZE
                     ]
                 ]
             ]

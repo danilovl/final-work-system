@@ -17,6 +17,18 @@ use Webmozart\Assert\Assert;
 
 trait ElasticaSearchTrait
 {
+    /**
+     * @return array{wildcard: array<string, string>}
+     */
+    private function createContainsQuery(string $field, string $search): array
+    {
+        $transformedSearch = $this->transformSearch($search);
+        $escapedSearch = addcslashes($transformedSearch, '\\*?');
+        $pattern = sprintf('*%s*', $escapedSearch);
+
+        return ['wildcard' => [$field => $pattern]];
+    }
+
     private function transformSearch(string $search): string
     {
         $search = mb_strtolower($search);

@@ -54,7 +54,7 @@ readonly class WorkSearch
                 $second->getAuthor()->getLastname()
             );
 
-            return $result;
+            return $result !== 0 ? $result : $first->getId() <=> $second->getId();
         });
 
         return $iterator;
@@ -68,38 +68,15 @@ readonly class WorkSearch
         string $type,
         array $filters
     ): array {
-        $query = [
-            'size' => 1_000,
-            'query' => [
-                'bool' => [
-                    'must' => [
-                        [
-                            'nested' => [
-                                'path' => $type,
-                                'query' => [
-                                    'term' => ["{$type}.id" => $user->getId()]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+        $filter = [
+            ['term' => ["{$type}.id" => $user->getId()]]
         ];
 
         if (empty($filters)) {
-            $query['query']['bool']['must'][] = [
-                'nested' => [
-                    'path' => 'status',
-                    'query' => [
-                        'term' => ['status.id' => WorkStatusConstant::ACTIVE->value]
-                    ]
-                ]
-            ];
+            $filter[] = ['term' => ['status.id' => WorkStatusConstant::ACTIVE->value]];
         }
 
-        $filter = [];
         $filterDates = [];
-
         foreach ($filters as $field => $value) {
             if (empty($value)) {
                 continue;
@@ -111,7 +88,6 @@ readonly class WorkSearch
 
             if (is_iterable($value)) {
                 $filedValues = [];
-
                 foreach ($value as $item) {
                     if ($field === 'deadline') {
                         $filedValues[] = $item;
@@ -135,18 +111,11 @@ readonly class WorkSearch
                                     'lte' => $filedValue . '||+1d',
                                     'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value
                                 ]
-                            ],
+                            ]
                         ];
                     }
                 } else {
-                    $filter['must'][] = [
-                        'nested' => [
-                            'path' => $field,
-                            'query' => [
-                                'terms' => ["{$field}.id" => $filedValues]
-                            ]
-                        ]
-                    ];
+                    $filter[] = ['terms' => ["{$field}.id" => $filedValues]];
                 }
             } elseif (is_string($value)) {
                 $trimmedValue = mb_trim($value);
@@ -154,40 +123,31 @@ readonly class WorkSearch
                     continue;
                 }
 
-                $filter['must'][] = [
-                    'wildcard' => [
-                        $field => '*' . $this->transformSearch($trimmedValue) . '*'
-                    ]
-                ];
+                $filter[] = $this->createContainsQuery("{$field}.normalized", $trimmedValue);
             } elseif (in_array($field, ['status', 'type', 'author', 'supervisor', 'opponent', 'consultant'], true)) {
                 $id = is_object($value) && method_exists($value, 'getId') ? $value->getId() : $value;
                 if (is_numeric($id)) {
                     $id = (int) $id;
                 }
 
-                $filter['must'][] = [
-                    'nested' => [
-                        'path' => $field,
-                        'query' => [
-                            'term' => ["{$field}.id" => $id]
-                        ]
-                    ]
-                ];
+                $filter[] = ['term' => ["{$field}.id" => $id]];
             } else {
-                $filter['must'][] = [
-                    'term' => [$field => $value]
-                ];
+                $filter[] = ['term' => [$field => $value]];
             }
         }
 
-        if (!empty($filter)) {
-            $query['query']['bool']['must'][]['bool'] = $filter;
-        }
-
         if (!empty($filterDates)) {
-            $query['query']['bool']['filter']['bool']['should'] = $filterDates;
+            $filter[] = ['bool' => ['should' => $filterDates]];
         }
 
-        return $query;
+        return [
+            'size' => 1_000,
+            '_source' => false,
+            'query' => [
+                'bool' => [
+                    'filter' => $filter
+                ]
+            ]
+        ];
     }
 }

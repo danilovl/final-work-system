@@ -35,9 +35,9 @@ class ElasticaConversationMessageRepository
     /**
      * @return int[]
      */
-    public function getMessageIdsByParticipantAndSearch(User $user, string $search): array
+    public function getConversationIdsByParticipantAndSearch(User $user, string $search): array
     {
-        $result = $this->conversationSearch->getMessageIdsByParticipantAndSearch($user, $search);
+        $result = $this->conversationSearch->getConversationIdsByParticipantAndSearch($user, $search);
 
         Assert::allInteger($result);
 

@@ -12,12 +12,14 @@
 
 namespace App\Domain\Task\Repository\Elastica;
 
+use App\Application\Traits\Repository\Elastica\ElasticaSearchTrait;
 use App\Domain\User\Entity\User;
-use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 
 readonly class TaskSearch
 {
+    use ElasticaSearchTrait;
+
     public function __construct(private TransformedFinder $transformedFinderTask) {}
 
     /**
@@ -28,49 +30,30 @@ readonly class TaskSearch
         $query = $this->createQuery($user, $search);
         $results = $this->transformedFinderTask->findRaw($query);
 
-        return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
+        return $this->getDocumentIds($results);
     }
 
     /**
      * @return array{
      *     size: int,
-     *     _source: array<string>,
+     *     _source: false,
      *     query: array
      * }
      */
     public function createQuery(User $user, string $search): array
     {
-        $search = mb_strtolower($search);
-
         return [
             'size' => 1_000,
-            '_source' => ['id'],
+            '_source' => false,
             'query' => [
                 'bool' => [
-                    'must' => [
-                        [
-                            'nested' => [
-                                'path' => 'owner',
-                                'query' => [
-                                    'term' => [
-                                        'owner.id' => $user->getId()
-                                    ]
-                                ]
-                            ]
-                        ],
+                    'filter' => [
+                        ['term' => ['owner.id' => $user->getId()]],
                         [
                             'bool' => [
                                 'should' => [
-                                    [
-                                        'wildcard' => [
-                                            'name' => '*' . $search . '*'
-                                        ]
-                                    ],
-                                    [
-                                        'wildcard' => [
-                                            'description' => '*' . $search . '*'
-                                        ]
-                                    ]
+                                    $this->createContainsQuery('name.normalized', $search),
+                                    $this->createContainsQuery('description', $search)
                                 ]
                             ]
                         ]
