@@ -18,7 +18,7 @@ use App\Application\Traits\Entity\{
     CreateUpdateAbleTrait
 };
 use App\Domain\ResetPassword\Repository\ResetPasswordRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,8 +37,8 @@ class ResetPassword
     #[ORM\Column(name: 'hashed_token', type: Types::STRING, length: 100, unique: true, nullable: false)]
     private string $hashedToken;
 
-    #[ORM\Column(name: 'expires_at', type: Types::DATETIME_MUTABLE, nullable: false)]
-    private DateTime $expiresAt;
+    #[ORM\Column(name: 'expires_at', type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    private DateTimeImmutable $expiresAt;
 
     public function getUser(): User
     {
@@ -60,12 +60,12 @@ class ResetPassword
         $this->hashedToken = $hashedToken;
     }
 
-    public function getExpiresAt(): DateTime
+    public function getExpiresAt(): DateTimeImmutable
     {
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(DateTime $expiresAt): void
+    public function setExpiresAt(DateTimeImmutable $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }

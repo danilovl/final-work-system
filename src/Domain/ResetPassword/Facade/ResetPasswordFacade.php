@@ -15,7 +15,7 @@ namespace App\Domain\ResetPassword\Facade;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\Repository\ResetPasswordRepository;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 
 readonly class ResetPasswordFacade
 {
@@ -51,7 +51,7 @@ readonly class ResetPasswordFacade
             ->execute();
     }
 
-    public function findMostRecentNonExpiredRequestDate(User $user): ?DateTime
+    public function findMostRecentNonExpiredRequestDate(User $user): ?DateTimeImmutable
     {
         /** @var ResetPassword|null $resetPassword */
         $resetPassword = $this->resetPasswordRepository
@@ -60,7 +60,7 @@ readonly class ResetPasswordFacade
             ->getOneorNullResult();
 
         if ($resetPassword !== null && !$resetPassword->isExpired()) {
-            return DateTime::createFromImmutable($resetPassword->getCreatedAt());
+            return $resetPassword->getCreatedAt();
         }
 
         return null;

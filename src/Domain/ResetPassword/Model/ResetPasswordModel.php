@@ -13,7 +13,7 @@
 namespace App\Domain\ResetPassword\Model;
 
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 
 class ResetPasswordModel
 {
@@ -21,5 +21,5 @@ class ResetPasswordModel
 
     public string $hashedToken;
 
-    public DateTime $expiresAt;
+    public DateTimeImmutable $expiresAt;
 }

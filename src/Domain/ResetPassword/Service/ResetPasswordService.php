@@ -29,7 +29,6 @@ use App\Domain\ResetPassword\Model\{
 use App\Domain\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateInterval;
-use DateTime;
 
 readonly class ResetPasswordService
 {
@@ -55,7 +54,7 @@ readonly class ResetPasswordService
     }
 
     public function createToken(
-        DateTime $expiresAt,
+        DateTimeImmutable $expiresAt,
         User $user,
         ?string $verifier = null
     ): ResetPasswordTokenModel {
@@ -75,7 +74,7 @@ readonly class ResetPasswordService
             throw new TooManyPasswordRequestsException($availableAt);
         }
 
-        $expiresAt = new DateTime(sprintf('+%d seconds', $this->resetRequestLifetime));
+        $expiresAt = new DateTimeImmutable(sprintf('+%d seconds', $this->resetRequestLifetime));
 
         $resetPasswordTokenModel = $this->createToken($expiresAt, $user);
 
@@ -116,14 +115,14 @@ readonly class ResetPasswordService
         return $this->resetPasswordFacade->findByToken($token);
     }
 
-    private function hasUserHitThrottling(User $user): ?DateTime
+    private function hasUserHitThrottling(User $user): ?DateTimeImmutable
     {
         $lastRequestDate = $this->resetPasswordFacade->findMostRecentNonExpiredRequestDate($user);
         if ($lastRequestDate === null) {
             return null;
         }
 
-        $availableAt = (clone $lastRequestDate)->add(new DateInterval("PT{$this->requestThrottleTime}S"));
+        $availableAt = $lastRequestDate->add(new DateInterval("PT{$this->requestThrottleTime}S"));
 
         return $availableAt > new DateTimeImmutable ? $availableAt : null;
     }
