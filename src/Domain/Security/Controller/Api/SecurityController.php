@@ -14,19 +14,20 @@ namespace App\Domain\Security\Controller\Api;
 
 use App\Application\Helper\HashHelper;
 use App\Infrastructure\Service\EntityManagerService;
-use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserByUsername\{GetUserByUsernameQuery, GetUserByUsernameQueryResult};
 
 readonly class SecurityController
 {
     public function __construct(
         private EntityManagerService $entityManagerService,
-        private UserFacade $userFacade,
+        private QueryBusInterface $queryBus,
         private UserPasswordHasherInterface $userPasswordHasher
     ) {}
 
@@ -35,7 +36,10 @@ readonly class SecurityController
         $username = $request->getPayload()->getString('username');
         $password = $request->getPayload()->getString('password');
 
-        $user = $this->userFacade->findByUsername($username);
+        $getUserByUsernameQuery = GetUserByUsernameQuery::create($username);
+        /** @var GetUserByUsernameQueryResult $getUserByUsernameQueryResult */
+        $getUserByUsernameQueryResult = $this->queryBus->handle($getUserByUsernameQuery);
+        $user = $getUserByUsernameQueryResult->user;
         if ($user === null) {
             throw new CustomUserMessageAuthenticationException('User could not be found.');
         }

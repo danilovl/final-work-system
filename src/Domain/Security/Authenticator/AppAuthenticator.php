@@ -14,7 +14,6 @@ namespace App\Domain\Security\Authenticator;
 
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use Override;
 use Symfony\Component\HttpFoundation\{
@@ -42,6 +41,8 @@ use Symfony\Component\Security\Http\{
     SecurityRequestAttributes
 };
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserByUsername\{GetUserByUsernameQuery, GetUserByUsernameQueryResult};
 
 class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
@@ -49,7 +50,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
 
     public function __construct(
         private readonly UserService $userService,
-        private readonly UserFacade $userFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly HttpUtils $httpUtils,
         private readonly HttpKernelInterface $httpKernel,
@@ -86,7 +87,10 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
                 throw new CustomUserMessageAuthenticationException('Invalid credentials.');
             }
 
-            $user = $this->userFacade->findByUsername($credentials['username']);
+            $getUserByUsernameQuery = GetUserByUsernameQuery::create($credentials['username']);
+            /** @var GetUserByUsernameQueryResult $getUserByUsernameQueryResult */
+            $getUserByUsernameQueryResult = $this->queryBus->handle($getUserByUsernameQuery);
+            $user = $getUserByUsernameQueryResult->user;
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException('Invalid credentials.');
             }

@@ -14,7 +14,6 @@ namespace App\Domain\Security\Provider;
 
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use Override;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\{
@@ -23,11 +22,13 @@ use Symfony\Component\Security\Core\User\{
     PasswordUpgraderInterface,
     PasswordAuthenticatedUserInterface
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserByUsername\{GetUserByUsernameQuery, GetUserByUsernameQueryResult};
 
 class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
     public function __construct(
-        private readonly UserFacade $userFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly EntityManagerService $entityManagerService
     ) {}
 
@@ -51,7 +52,10 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
 
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userFacade->findByUsername($username);
+        $getUserByUsernameQuery = GetUserByUsernameQuery::create($username);
+        /** @var GetUserByUsernameQueryResult $getUserByUsernameQueryResult */
+        $getUserByUsernameQueryResult = $this->queryBus->handle($getUserByUsernameQuery);
+        $user = $getUserByUsernameQueryResult->user;
 
         return $user ?? throw new UserNotFoundException;
     }
@@ -59,7 +63,11 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
     #[Override]
     public function refreshUser(UserInterface $user): UserInterface
     {
-        $user = $this->userFacade->findByUsername($user->getUserIdentifier());
+        $userIdentifier = $user->getUserIdentifier();
+        $getUserByUsernameQuery = GetUserByUsernameQuery::create($userIdentifier);
+        /** @var GetUserByUsernameQueryResult $getUserByUsernameQueryResult */
+        $getUserByUsernameQueryResult = $this->queryBus->handle($getUserByUsernameQuery);
+        $user = $getUserByUsernameQueryResult->user;
 
         return $user ?? throw new UserNotFoundException;
     }

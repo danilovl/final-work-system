@@ -13,7 +13,6 @@
 namespace App\Domain\Security\Provider;
 
 use App\Domain\ApiUser\Entity\ApiUser;
-use App\Domain\ApiUser\Facade\ApiUserFacade;
 use Override;
 use Symfony\Component\Security\Core\Exception\{
     UnsupportedUserException,
@@ -23,10 +22,12 @@ use Symfony\Component\Security\Core\User\{
     UserInterface,
     UserProviderInterface
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{GetApiUserByKeyQuery, GetApiUserByKeyQueryResult};
 
 readonly class ApiKeyUserProvider implements UserProviderInterface
 {
-    public function __construct(private ApiUserFacade $apiUserFacade) {}
+    public function __construct(private QueryBusInterface $queryBus) {}
 
     #[Override]
     public function loadUserByIdentifier(string $identifier): UserInterface
@@ -36,7 +37,10 @@ readonly class ApiKeyUserProvider implements UserProviderInterface
 
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->apiUserFacade->findByApiKey($username);
+        $getApiUserByKeyQuery = GetApiUserByKeyQuery::create($username);
+        /** @var GetApiUserByKeyQueryResult $getApiUserByKeyQueryResult */
+        $getApiUserByKeyQueryResult = $this->queryBus->handle($getApiUserByKeyQuery);
+        $user = $getApiUserByKeyQueryResult->apiUser;
 
         return $user ?? throw new UserNotFoundException;
     }

@@ -14,11 +14,9 @@ namespace App\Domain\Security\Authenticator;
 
 use App\Application\Model\Security\ApiKeyCredentialModel;
 use App\Infrastructure\Service\EntityManagerService;
-use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use Override;
 use Symfony\Component\HttpFoundation\{
@@ -34,6 +32,9 @@ use Symfony\Component\Security\Core\Exception\{
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserByToken\{GetUserByTokenQuery, GetUserByTokenQueryResult};
+use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{GetApiUserByKeyQuery, GetApiUserByKeyQueryResult};
 
 class ApiAuthenticator extends AbstractAuthenticator
 {
@@ -45,8 +46,7 @@ class ApiAuthenticator extends AbstractAuthenticator
 
     public function __construct(
         private readonly UserService $userService,
-        private readonly ApiUserFacade $apiUserFacade,
-        private readonly UserFacade $userFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly EntityManagerService $entityManagerService
     ) {}
 
@@ -61,7 +61,10 @@ class ApiAuthenticator extends AbstractAuthenticator
             return false;
         }
 
-        $apiUser = $this->apiUserFacade->findByApiKey($authKey);
+        $getApiUserByKeyQuery = GetApiUserByKeyQuery::create($authKey);
+        /** @var GetApiUserByKeyQueryResult $getApiUserByKeyQueryResult */
+        $getApiUserByKeyQueryResult = $this->queryBus->handle($getApiUserByKeyQuery);
+        $apiUser = $getApiUserByKeyQueryResult->apiUser;
 
         return $apiUser !== null;
     }
@@ -106,7 +109,13 @@ class ApiAuthenticator extends AbstractAuthenticator
             $username = $apiKeyCredentialModel->authUserUsername;
             $userToken = $apiKeyCredentialModel->authUserToken;
 
-            $user = $this->userFacade->findByToken($username, $userToken);
+            $getUserByTokenQuery = GetUserByTokenQuery::create(
+                username: $username,
+                token: $userToken
+            );
+            /** @var GetUserByTokenQueryResult $getUserByTokenQueryResult */
+            $getUserByTokenQueryResult = $this->queryBus->handle($getUserByTokenQuery);
+            $user = $getUserByTokenQueryResult->user;
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException('Username by token could not be found.');
             }
