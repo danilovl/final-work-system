@@ -24,7 +24,7 @@ use App\Domain\EmailNotification\Messenger\{
 use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
 use App\Infrastructure\Service\EntityManagerService;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\{MockObject};
 use PHPUnit\Framework\TestCase;
 
 class EmailNotificationHandlerTest extends TestCase
@@ -32,8 +32,6 @@ class EmailNotificationHandlerTest extends TestCase
     private MockObject&EmailNotificationSendProvider $emailNotificationSendProvider;
 
     private MockObject&SendEmailNotificationService $sendEmailNotificationService;
-
-    private MockObject&EmailNotificationFactory $emailNotificationFactory;
 
     private MockObject&EmailNotificationFacade $emailNotificationFacade;
 
@@ -47,22 +45,19 @@ class EmailNotificationHandlerTest extends TestCase
     {
         $this->emailNotificationSendProvider = $this->createMock(EmailNotificationSendProvider::class);
         $this->sendEmailNotificationService = $this->createMock(SendEmailNotificationService::class);
-        $baseEmailNotificationSubscriber = $this->createMock(BaseEmailNotificationSubscriber::class);
+        $baseEmailNotificationSubscriber = $this->createStub(BaseEmailNotificationSubscriber::class);
 
-        $baseEmailNotificationSubscriber->expects($this->any())
-            ->method('trans')
+        $baseEmailNotificationSubscriber->method('trans')
             ->willReturn('trans');
 
-        $baseEmailNotificationSubscriber->expects($this->any())
-            ->method('renderBody')
+        $baseEmailNotificationSubscriber->method('renderBody')
             ->willReturn('body');
 
         $emailNotification = new EmailNotification;
         $emailNotification->setId(1);
 
-        $this->emailNotificationFactory = $this->createMock(EmailNotificationFactory::class);
-        $this->emailNotificationFactory
-            ->expects($this->any())
+        $emailNotificationFactory = $this->createStub(EmailNotificationFactory::class);
+        $emailNotificationFactory
             ->method('createFromModel')
             ->willReturn($emailNotification);
 
@@ -71,7 +66,7 @@ class EmailNotificationHandlerTest extends TestCase
 
         $this->emailNotificationHandler = new EmailNotificationHandler(
             $this->sendEmailNotificationService,
-            $this->emailNotificationFactory,
+            $emailNotificationFactory,
             $baseEmailNotificationSubscriber,
             $this->emailNotificationFacade,
             $this->entityManagerService,
@@ -79,14 +74,14 @@ class EmailNotificationHandlerTest extends TestCase
         );
 
         $this->emailNotificationMessage = new EmailNotificationMessage(
+            locale: 'en',
             subject: 'subject',
+            to: 'test@example.com',
+            from: 'test@example.com',
             template: 'template',
             templateParameters: [
                 'key' => 'value',
             ],
-            locale: 'en',
-            from: 'test@example.com',
-            to: 'test@example.com',
             uuid: 'uuid'
         );
     }
@@ -99,6 +94,18 @@ class EmailNotificationHandlerTest extends TestCase
             ->expects($this->once())
             ->method('isEnable')
             ->willReturn(false);
+
+        $this->sendEmailNotificationService
+            ->expects($this->never())
+            ->method('sendEmailNotificationBool');
+
+        $this->emailNotificationFacade
+            ->expects($this->never())
+            ->method('findByUuid');
+
+        $this->entityManagerService
+            ->expects($this->never())
+            ->method('flush');
 
         $this->expectOutputString('Email notification sending is not enable');
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
@@ -125,6 +132,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->expects($this->once())
             ->method('findByUuid')
             ->willReturn($emailNotification);
+
+        $this->entityManagerService
+            ->expects($this->never())
+            ->method('flush');
 
         $this->expectOutputString('Failed send email to test@example.com. ' . PHP_EOL);
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
@@ -176,9 +187,6 @@ class EmailNotificationHandlerTest extends TestCase
         $this->entityManagerService
             ->expects($this->never())
             ->method('flush');
-
-        $emailNotification = new EmailNotification;
-        $emailNotification->setId(1);
 
         $this->emailNotificationFacade
             ->expects($this->once())
