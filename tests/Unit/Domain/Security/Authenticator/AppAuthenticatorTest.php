@@ -14,10 +14,7 @@ namespace App\Tests\Unit\Domain\Security\Authenticator;
 
 use App\Domain\Security\Authenticator\AppAuthenticator;
 use App\Domain\User\Entity\User;
-use App\Application\Interfaces\Bus\{
-    QueryBusInterface,
-    QueryInterface
-};
+use App\Infrastructure\Interfaces\Bus\{QueryBusInterface, QueryInterface};
 use App\Domain\User\Bus\Query\UserByUsername\{
     GetUserByUsernameQuery,
     GetUserByUsernameQueryResult

@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Domain\Security\Util;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\Security\Util\TokenStorageUtil;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;

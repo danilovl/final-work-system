@@ -13,10 +13,7 @@
 namespace App\Tests\Unit\Domain\Security\Provider;
 
 use App\Domain\ApiUser\Entity\ApiUser;
-use App\Application\Interfaces\Bus\{
-    QueryBusInterface,
-    QueryInterface
-};
+use App\Infrastructure\Interfaces\Bus\{QueryBusInterface, QueryInterface};
 use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{
     GetApiUserByKeyQuery,
     GetApiUserByKeyQueryResult
