@@ -14,7 +14,7 @@ namespace App\Domain\EventScheduleTemplate\Validation\Constraint;
 
 use App\Application\Constant\CompareConstant;
 use App\Application\Helper\CompareHelper;
-use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
+use App\Domain\EventScheduleTemplate\Model\EventScheduleTemplateModel;
 use App\Domain\EventType\Constant\EventTypeConstant;
 use Symfony\Component\Validator\{
     Constraint,
@@ -36,11 +36,18 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, EventScheduleTemplateTime::class);
         }
 
-        if (!$value instanceof EventScheduleTemplate) {
-            throw new UnexpectedTypeException($value, EventScheduleTemplate::class);
+        if (!$value instanceof EventScheduleTemplateModel) {
+            throw new UnexpectedTypeException($value, EventScheduleTemplateModel::class);
         }
 
-        if (CompareHelper::compareDateTime($value->getStart(), $value->getEnd(), CompareConstant::MORE)) {
+        $start = $value->start;
+        $end = $value->end;
+        $type = $value->type;
+        if ($start === null || $end === null || $type === null) {
+            return;
+        }
+
+        if (CompareHelper::compareDateTime($start, $end, CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('app.form.validation.date_start_more_end')
                 ->setTranslationDomain('messages')
@@ -48,9 +55,9 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
                 ->addViolation();
         }
 
-        switch ($value->getType()->getId()) {
+        switch ($type->getId()) {
             case EventTypeConstant::CONSULTATION->value:
-                if ($value->getAddress() === null) {
+                if ($value->address === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
                         ->atPath('address')
@@ -59,7 +66,7 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
 
                 break;
             case EventTypeConstant::PERSONAL->value:
-                if ($value->getName() === null) {
+                if ($value->name === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
                         ->atPath('name')
@@ -67,18 +74,18 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
                 }
         }
 
-        if (CompareHelper::compareDateTime($value->getStart(), $value->getEnd(), CompareConstant::EQUAL)) {
+        if (CompareHelper::compareDateTime($start, $end, CompareConstant::EQUAL)) {
             $this->context
                 ->buildViolation('This value should not be equal to {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $value->getStart()->format('H:i'))
+                ->setParameter('{{ compared_value }}', $start->format('H:i'))
                 ->atPath('end')
                 ->addViolation();
         }
 
-        if (CompareHelper::compareDateTime($value->getStart(), $value->getEnd(), CompareConstant::MORE)) {
+        if (CompareHelper::compareDateTime($start, $end, CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('This value should be greater than {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $value->getStart()->format('H:i'))
+                ->setParameter('{{ compared_value }}', $start->format('H:i'))
                 ->atPath('start')
                 ->addViolation();
         }
