@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkStatus\Bus\Query\WorkStatusList;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 
 readonly class GetWorkStatusListQueryHandler implements QueryHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkStatus\Facade;
 
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
