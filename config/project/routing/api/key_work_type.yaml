@@ -1,0 +1,5 @@
+api_key_get_work_types:
+  path: ''
+  defaults:
+    _controller: App\Domain\WorkType\Controller\Api\WorkTypeController::list
+  methods: [GET]
