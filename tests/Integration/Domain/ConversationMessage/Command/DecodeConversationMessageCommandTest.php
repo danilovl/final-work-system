@@ -20,7 +20,6 @@ use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepository;
 use App\Infrastructure\Service\EntityManagerService;
-use Doctrine\Common\Collections\Order;
 use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -91,7 +90,7 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
         /** @var UserRepository $userRepository */
         $userRepository = $this->entityManagerService->getRepository(User::class);
         /** @var User $user */
-        $user = $userRepository->findOneBy([], ['id' => Order::Ascending->value]);
+        $user = $userRepository->findOneBy([], ['id' => 'ASC']);
 
         $conversation = new Conversation;
         $conversation->setName('kernel test');
