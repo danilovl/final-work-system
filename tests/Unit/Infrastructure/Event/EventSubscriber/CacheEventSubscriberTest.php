@@ -45,6 +45,8 @@ class CacheEventSubscriberTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
+        $this->cache->expects($this->never())->method('delete');
+
         $subscribedEvents = $this->subscriber::getSubscribedEvents();
 
         $this->assertEquals('onClearCacheKey', $subscribedEvents[Events::CACHE_CLEAR_KEY]);

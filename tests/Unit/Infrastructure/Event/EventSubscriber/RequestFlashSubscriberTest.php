@@ -16,18 +16,17 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Infrastructure\Event\EventSubscriber\RequestFlashSubscriber;
 use App\Infrastructure\Service\RequestService;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class RequestFlashSubscriberTest extends TestCase
 {
-    private MockObject&RequestService $requestService;
+    private RequestService $requestService;
 
     private RequestFlashSubscriber $subscriber;
 
     protected function setUp(): void
     {
-        $this->requestService = $this->createMock(RequestService::class);
+        $this->requestService = $this->createStub(RequestService::class);
         $this->subscriber = new RequestFlashSubscriber($this->requestService);
     }
 
@@ -45,6 +44,9 @@ class RequestFlashSubscriberTest extends TestCase
 
     public function testOnCreateSuccess(): void
     {
+        $this->requestService = $this->createMock(RequestService::class);
+        $this->subscriber = new RequestFlashSubscriber($this->requestService);
+
         $this->requestService
             ->expects($this->once())
             ->method('addFlashTransAutoType')
@@ -55,6 +57,9 @@ class RequestFlashSubscriberTest extends TestCase
 
     public function testOnDeleteSuccess(): void
     {
+        $this->requestService = $this->createMock(RequestService::class);
+        $this->subscriber = new RequestFlashSubscriber($this->requestService);
+
         $this->requestService
             ->expects($this->once())
             ->method('addFlashTransAutoType')
@@ -65,6 +70,9 @@ class RequestFlashSubscriberTest extends TestCase
 
     public function testOnSaveSuccess(): void
     {
+        $this->requestService = $this->createMock(RequestService::class);
+        $this->subscriber = new RequestFlashSubscriber($this->requestService);
+
         $this->requestService
             ->expects($this->once())
             ->method('addFlashTransAutoType')
@@ -75,6 +83,9 @@ class RequestFlashSubscriberTest extends TestCase
 
     public function testOnCreateFailure(): void
     {
+        $this->requestService = $this->createMock(RequestService::class);
+        $this->subscriber = new RequestFlashSubscriber($this->requestService);
+
         $this->requestService
             ->expects($this->exactly(2))
             ->method('addFlashTransAutoType')
@@ -95,6 +106,9 @@ class RequestFlashSubscriberTest extends TestCase
 
     public function testOnSaveFailure(): void
     {
+        $this->requestService = $this->createMock(RequestService::class);
+        $this->subscriber = new RequestFlashSubscriber($this->requestService);
+
         $this->requestService
             ->expects($this->exactly(2))
             ->method('addFlashTransAutoType')
@@ -115,6 +129,9 @@ class RequestFlashSubscriberTest extends TestCase
 
     public function testOnDeleteFailure(): void
     {
+        $this->requestService = $this->createMock(RequestService::class);
+        $this->subscriber = new RequestFlashSubscriber($this->requestService);
+
         $this->requestService
             ->expects($this->exactly(2))
             ->method('addFlashTransAutoType')
