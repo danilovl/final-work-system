@@ -3,15 +3,6 @@
     "description": "Thesis management system based on Symfony",
     "type": "project",
     "license": "proprietary",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/friendsofsymfony/elastica-bundle",
-            "options": {
-                "symlink": false
-            }
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
@@ -49,7 +40,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^3.6",
         "easycorp/easyadmin-bundle": "^4.27",
-        "friendsofsymfony/elastica-bundle": "^8.0.0",
+        "friendsofsymfony/elastica-bundle": "^7.1.0",
         "gedmo/doctrine-extensions": "^3.14",
         "hashids/hashids": "^5.0.0",
         "knplabs/knp-paginator-bundle": "^6.0.1",

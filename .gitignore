@@ -50,3 +50,5 @@ node_modules/
 /playwright/.cache/
 
 config/reference.php
+
+.junie/memory
