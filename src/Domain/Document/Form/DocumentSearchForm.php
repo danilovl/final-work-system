@@ -12,6 +12,7 @@
 
 namespace App\Domain\Document\Form;
 
+use App\Domain\Document\Model\DocumentSearchModel;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Override;
@@ -58,6 +59,7 @@ class DocumentSearchForm extends AbstractType
     {
         $resolver
             ->setDefaults([
+                'data_class' => DocumentSearchModel::class,
                 'categories' => [],
                 'mimeType' => []
             ])
