@@ -13,10 +13,9 @@
 namespace App\Tests\Unit\Domain\Work\Service;
 
 use App\Domain\User\Entity\User;
-use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Service\{UserWorkService, WorkListService};
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Service\WorkListService;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
