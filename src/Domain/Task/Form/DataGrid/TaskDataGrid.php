@@ -15,7 +15,7 @@ namespace App\Domain\Task\Form\DataGrid;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use Doctrine\ORM\QueryBuilder;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\WorkQueryBuilderBySupervisor\{GetWorkQueryBuilderBySupervisorQuery, GetWorkQueryBuilderBySupervisorQueryResult};
 
 class TaskDataGrid

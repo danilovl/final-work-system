@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Bus\Query\ActiveTasksPreload;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Task\Service\TaskService;
 
 readonly class GetActiveTasksPreloadQueryHandler implements QueryHandlerInterface

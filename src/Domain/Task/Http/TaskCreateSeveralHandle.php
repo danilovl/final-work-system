@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Http;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
 use App\Domain\Task\DTO\Form\Factory\TaskFormFactoryDTO;
 use App\Domain\Task\Facade\TaskDeadlineFacade;

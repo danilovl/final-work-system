@@ -12,8 +12,8 @@
 
 namespace App\Domain\Task\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\NotifyCompleteTask\NotifyCompleteTaskCommand;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Task\Entity\Task;

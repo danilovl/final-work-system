@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\NotifyCompleteTask\NotifyCompleteTaskCommand;
 use App\Domain\Task\Entity\Task;
 use Symfony\Component\HttpFoundation\{

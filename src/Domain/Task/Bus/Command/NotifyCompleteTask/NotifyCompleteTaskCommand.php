@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Bus\Command\NotifyCompleteTask;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Task\Entity\Task;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

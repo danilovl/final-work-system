@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Controller\Api;
 
-use App\Application\Attribute\EntityRelationValidatorAttribute;
+use App\Infrastructure\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\DTO\Api\TaskDTO;
@@ -45,9 +45,9 @@ use App\Domain\Task\Http\Api\{
 use App\Domain\Work\Entity\Work;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\Work\{GetWorkQuery, GetWorkQueryResult};
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 
 #[OA\Tag(name: 'Task')]
 readonly class TaskController

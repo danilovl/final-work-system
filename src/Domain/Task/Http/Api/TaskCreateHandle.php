@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
 use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\DTO\Api\TaskDTO;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Controller;
 
-use App\Application\Attribute\EntityRelationValidatorAttribute;
+use App\Infrastructure\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;

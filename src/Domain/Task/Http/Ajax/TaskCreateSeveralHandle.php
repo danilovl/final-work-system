@@ -12,12 +12,10 @@
 
 namespace App\Domain\Task\Http\Ajax;
 
-use App\Application\Constant\{
-    AjaxJsonTypeConstant,
-    ControllerMethodConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
 use App\Domain\Task\DTO\Form\Factory\TaskFormFactoryDTO;
 use App\Domain\Task\Form\Factory\TaskFormFactory;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Bus\Command\DeleteTask;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 
 readonly class DeleteTaskHandler implements CommandHandlerInterface

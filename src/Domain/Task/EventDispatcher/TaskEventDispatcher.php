@@ -13,7 +13,7 @@
 namespace App\Domain\Task\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Infrastructure\Service\EventDispatcherService;
 use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;

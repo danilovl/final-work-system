@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Bus\Command\ChangeStatusTask;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Task\Service\TaskStatusService;
 

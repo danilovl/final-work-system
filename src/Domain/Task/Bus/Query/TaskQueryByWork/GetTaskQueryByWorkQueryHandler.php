@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Bus\Query\TaskQueryByWork;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Task\Facade\TaskFacade;
 
 readonly class GetTaskQueryByWorkQueryHandler implements QueryHandlerInterface

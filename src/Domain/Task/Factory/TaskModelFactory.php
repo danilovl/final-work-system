@@ -16,9 +16,9 @@ use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Entity\User;
 use DateTimeImmutable;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\Work\{GetWorkQuery, GetWorkQueryResult};
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Domain\Work\Entity\Work;
 
 readonly class TaskModelFactory

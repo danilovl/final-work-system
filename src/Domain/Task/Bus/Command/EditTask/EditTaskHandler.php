@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Bus\Command\EditTask;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Factory\TaskFactory;
 
