@@ -23,7 +23,8 @@ use App\Infrastructure\Service\{
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\EmailNotification\Model\EmailNotificationModel;
-use App\Domain\User\Facade\UserFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserByEmail\{GetUserByEmailQuery, GetUserByEmailQueryResult};
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -38,7 +39,7 @@ class BaseEmailNotificationSubscriber
     protected string $translatorDomain;
 
     public function __construct(
-        protected UserFacade $userFacade,
+        protected QueryBusInterface $queryBus,
         protected TwigRenderService $twigRenderService,
         protected TranslatorService $translator,
         protected EmailNotificationFactory $emailNotificationFactory,
@@ -76,7 +77,13 @@ class BaseEmailNotificationSubscriber
 
         $emailNotificationMessage->generateUuid();
         $to = $emailNotificationMessage->to;
-        $userTo = $this->userFacade->findByEmail($to);
+        $getUserByEmailQuery = GetUserByEmailQuery::create(
+            email: $to,
+            enable: null
+        );
+        /** @var GetUserByEmailQueryResult $getUserByEmailQueryResult */
+        $getUserByEmailQueryResult = $this->queryBus->handle($getUserByEmailQuery);
+        $userTo = $getUserByEmailQueryResult->user;
 
         if ($userTo && !$userTo->isEnabledEmailNotification()) {
             return;

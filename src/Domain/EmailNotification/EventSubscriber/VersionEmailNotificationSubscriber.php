@@ -24,28 +24,29 @@ use App\Infrastructure\Service\{
     TwigRenderService
 };
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
-use App\Domain\User\Facade\UserFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
-use App\Domain\Work\Service\WorkService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use App\Domain\Work\Bus\Query\WorkUsers\WorkUsersQueryTrait;
 
 class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
+    use WorkUsersQueryTrait;
+
     public function __construct(
-        protected UserFacade $userFacade,
+        protected QueryBusInterface $queryBus,
         protected TwigRenderService $twigRenderService,
         protected TranslatorService $translator,
         protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
-        private readonly WorkService $workService,
         protected MessageBusInterface $bus,
         protected EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider,
         protected EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider
     ) {
         parent::__construct(
-            $userFacade,
+            $queryBus,
             $twigRenderService,
             $translator,
             $emailNotificationFactory,
@@ -72,7 +73,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
     ): void {
         $media = $event->media;
         $work = $media->getWorkMust();
-        $workUsers = $this->workService->getAllUsers($work);
+        $workUsers = $this->getAllWorkUsers($work);
 
         foreach ($workUsers as $user) {
             if ($user->getId() === $media->getOwner()->getId()) {

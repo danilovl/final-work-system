@@ -25,28 +25,27 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
-use App\Domain\User\Facade\UserFacade;
-use App\Domain\User\Service\UserWorkService;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use App\Domain\Work\Bus\Query\ActiveAuthors\{GetActiveAuthorsQuery, GetActiveAuthorsQueryResult};
 
 class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected UserFacade $userFacade,
+        protected QueryBusInterface $queryBus,
         protected TwigRenderService $twigRenderService,
         protected TranslatorService $translator,
         protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
-        private readonly UserWorkService $userWorkService,
         protected MessageBusInterface $bus,
         protected EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider,
         protected EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider
     ) {
         parent::__construct(
-            $userFacade,
+            $queryBus,
             $twigRenderService,
             $translator,
             $emailNotificationFactory,
@@ -70,7 +69,13 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         $media = $event->media;
         $owner = $media->getOwner();
 
-        $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR->value);
+        $getActiveAuthorsQuery = GetActiveAuthorsQuery::create(
+            user: $owner,
+            userType: WorkUserTypeConstant::SUPERVISOR->value
+        );
+        /** @var GetActiveAuthorsQueryResult $getActiveAuthorsQueryResult */
+        $getActiveAuthorsQueryResult = $this->queryBus->handle($getActiveAuthorsQuery);
+        $recipientArray = $getActiveAuthorsQueryResult->authors;
 
         $templateParameters = [
             'mediaOwner' => $media->getOwner()->getFullNameDegree(),
