@@ -24,6 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Table(name: 'system_event_recipient')]
+#[ORM\Index(name: 'system_event_recipient_user_viewed', columns: ['user_id', 'viewed'])]
 #[ORM\Entity(repositoryClass: SystemEventRecipientRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Gedmo\Loggable]

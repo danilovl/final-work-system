@@ -26,6 +26,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Table(name: 'conversation_message_status')]
 #[ORM\UniqueConstraint(name: 'conversation_message_status', columns: ['conversation_id', 'conversation_message_id', 'user_id'])]
+#[ORM\Index(name: 'conversation_message_status_user_type', columns: ['user_id', 'conversation_message_status_type_id'])]
 #[ORM\Entity(repositoryClass: ConversationMessageStatusRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Gedmo\Loggable]
