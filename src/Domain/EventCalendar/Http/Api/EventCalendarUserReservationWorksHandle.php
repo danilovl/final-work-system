@@ -14,22 +14,23 @@ namespace App\Domain\EventCalendar\Http\Api;
 
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Infrastructure\Service\EntityManagerService;
-use App\Domain\User\Service\{
-    UserService,
-    UserWorkService
-};
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventCalendarUserReservationWorksHandle
 {
+    use UserWorksQueryTrait;
+
     public function __construct(
         private EntityManagerService $entityManagerService,
         private UserService $userService,
-        private UserWorkService $userWorkService,
+        private QueryBusInterface $queryBus,
         private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
@@ -38,7 +39,7 @@ readonly class EventCalendarUserReservationWorksHandle
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
-        $userWorks = $this->userWorkService->getWorkBy(
+        $userWorks = $this->getUserWorks(
             $this->userService->getUser(),
             WorkUserTypeConstant::AUTHOR->value,
             null,

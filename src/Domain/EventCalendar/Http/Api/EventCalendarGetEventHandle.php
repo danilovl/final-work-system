@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http\Api;
 
-use App\Domain\Event\Facade\EventCalendarFacade;
+use App\Domain\EventCalendar\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\DTO\Api\EventCalendarDTO;
 use App\Domain\User\Service\UserService;
 use DateTimeImmutable;

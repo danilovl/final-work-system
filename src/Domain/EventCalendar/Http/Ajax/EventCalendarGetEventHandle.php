@@ -14,7 +14,7 @@ namespace App\Domain\EventCalendar\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Infrastructure\Service\RequestService;
-use App\Domain\Event\Facade\EventCalendarFacade;
+use App\Domain\EventCalendar\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\Request\GetEventRequest;
 use App\Domain\User\Service\UserService;
 use DateTimeImmutable;

@@ -13,21 +13,18 @@
 namespace App\Domain\EventCalendar\Http\Api;
 
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
-use App\Domain\Event\Facade\EventCalendarFacade;
-use App\Domain\Event\Factory\EventFactory;
+use App\Domain\EventCalendar\Facade\EventCalendarFacade;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\User\Bus\Query\User\{GetUserQuery, GetUserQueryResult};
+use App\Domain\Work\Bus\Query\Work\{GetWorkQuery, GetWorkQueryResult};
+use App\Domain\EventType\Bus\Query\EventType\{GetEventTypeQuery, GetEventTypeQueryResult};
+use App\Domain\EventAddress\Bus\Query\EventAddress\{GetEventAddressQuery, GetEventAddressQueryResult};
+use App\Domain\Event\Bus\Command\CreateEvent\CreateEventCommand;
+use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Model\EventModel;
-use App\Domain\EventAddress\Entity\EventAddress;
-use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Domain\EventCalendar\DTO\Api\Input\EventCalendarEventInput;
 use App\Domain\EventParticipant\Entity\EventParticipant;
-use App\Domain\EventType\Entity\EventType;
-use App\Domain\EventType\Facade\EventTypeFacade;
-use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Facade\WorkFacade;
-use App\Infrastructure\Service\EntityManagerService;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -35,29 +32,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 readonly class EventCalendarManageCreateEventHandle
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
         private UserService $userService,
-        private EventFactory $eventFactory,
+        private CommandBusInterface $commandBus,
         private EventEventDispatcher $eventEventDispatcher,
-        private EventCalendarFacade $eventCalendarFacade,
-        private UserFacade $userFacade,
-        private WorkFacade $workFacade,
-        private EventAddressFacade $eventAddressFacade,
-        private EventTypeFacade $eventTypeFacade
+        private EventCalendarFacade $eventCalendarFacade,
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(EventCalendarEventInput $input): JsonResponse
     {
         $user = $this->userService->getUser();
 
-        /** @var EventType|null $eventType */
-        $eventType = $this->eventTypeFacade->findById($input->typeId);
+        $getEventTypeQuery = GetEventTypeQuery::create($input->typeId);
+        /** @var GetEventTypeQueryResult $getEventTypeQueryResult */
+        $getEventTypeQueryResult = $this->queryBus->handle($getEventTypeQuery);
+        $eventType = $getEventTypeQueryResult->eventType;
         if ($eventType === null) {
             throw new NotFoundHttpException('Event type not found');
         }
 
-        /** @var EventAddress|null $eventAddress */
-        $eventAddress = $this->eventAddressFacade->findById($input->addressId);
+        $getEventAddressQuery = GetEventAddressQuery::create($input->addressId);
+        /** @var GetEventAddressQueryResult $getEventAddressQueryResult */
+        $getEventAddressQueryResult = $this->queryBus->handle($getEventAddressQuery);
+        $eventAddress = $getEventAddressQueryResult->eventAddress;
         if ($eventAddress === null) {
             throw new NotFoundHttpException('Event address not found');
         }
@@ -65,14 +62,18 @@ readonly class EventCalendarManageCreateEventHandle
         $eventParticipant = null;
         
         if ($input->userId !== null && $input->workId !== null) {
-            /** @var User|null $participantUser */
-            $participantUser = $this->userFacade->findById($input->userId);
+            $getUserQuery = GetUserQuery::create($input->userId);
+            /** @var GetUserQueryResult $getUserQueryResult */
+            $getUserQueryResult = $this->queryBus->handle($getUserQuery);
+            $participantUser = $getUserQueryResult->user;
             if ($participantUser === null) {
                 throw new NotFoundHttpException('Participant user not found');
             }
 
-            /** @var Work|null $participantWork */
-            $participantWork = $this->workFacade->findById($input->workId);
+            $getWorkQuery = GetWorkQuery::create($input->workId);
+            /** @var GetWorkQueryResult $getWorkQueryResult */
+            $getWorkQueryResult = $this->queryBus->handle($getWorkQuery);
+            $participantWork = $getWorkQueryResult->work;
             if ($participantWork === null) {
                 throw new NotFoundHttpException('Participant work not found');
             }
@@ -94,13 +95,9 @@ readonly class EventCalendarManageCreateEventHandle
         $eventModel->start = $startDateTime;
         $eventModel->end = $endDateTime;
 
-        $event = $this->eventFactory->flushFromModel($eventModel);
-
-        if ($eventParticipant !== null) {
-            $eventParticipant->setEvent($event);
-            $this->entityManagerService->flush();
-            $event->setParticipant($eventParticipant);
-        }
+        $createEventCommand = CreateEventCommand::create($eventModel);
+        /** @var Event $event */
+        $event = $this->commandBus->dispatchResult($createEventCommand);
 
         $this->eventEventDispatcher->onEventCalendarCreate($event);
         $event = $this->eventCalendarFacade->convertEventCreateToArray(event: $event, isApi: true);;

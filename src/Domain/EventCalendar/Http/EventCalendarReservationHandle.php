@@ -18,22 +18,23 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\EventCalendar\Form\EventWorkReservationForm;
 use App\Domain\EventWorkReservation\Model\EventWorkReservationModel;
-use App\Domain\User\Service\{
-    UserService,
-    UserWorkService
-};
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventCalendarReservationHandle
 {
+    use UserWorksQueryTrait;
+
     public function __construct(
         private EntityManagerService $entityManagerService,
         private UserService $userService,
-        private UserWorkService $userWorkService,
+        private QueryBusInterface $queryBus,
         private TwigRenderService $twigRenderService,
         private FormFactoryInterface $formFactory
     ) {}
@@ -43,7 +44,7 @@ readonly class EventCalendarReservationHandle
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
-        $userWorks = $this->userWorkService->getWorkBy(
+        $userWorks = $this->getUserWorks(
             $this->userService->getUser(),
             WorkUserTypeConstant::AUTHOR->value,
             null,

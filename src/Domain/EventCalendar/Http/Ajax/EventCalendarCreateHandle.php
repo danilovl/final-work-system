@@ -21,15 +21,14 @@ use App\Infrastructure\Service\{
     EntityManagerService
 };
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
-use App\Domain\Event\Facade\EventCalendarFacade;
-use App\Domain\Event\Factory\EventFactory;
+use App\Domain\EventCalendar\Facade\EventCalendarFacade;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\Event\Bus\Command\CreateEvent\CreateEventCommand;
+use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\EventParticipant\Entity\EventParticipant;
-use App\Domain\User\Service\{
-    UserService,
-    UserWorkService
-};
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
@@ -39,16 +38,19 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventCalendarCreateHandle
 {
+    use UserWorksQueryTrait;
+
     public function __construct(
         private EntityManagerService $entityManagerService,
         private RequestService $requestService,
         private EventCalendarFacade $eventCalendarFacade,
         private UserService $userService,
-        private UserWorkService $userWorkService,
-        private EventFactory $eventFactory,
+        private QueryBusInterface $queryBus,
+        private CommandBusInterface $commandBus,
         private FormFactoryInterface $formFactory,
         private EventEventDispatcher $eventEventDispatcherService
     ) {}
@@ -59,7 +61,7 @@ readonly class EventCalendarCreateHandle
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
-        $userWorks = $this->userWorkService->getWorkBy(
+        $userWorks = $this->getUserWorks(
             $user,
             WorkUserTypeConstant::SUPERVISOR->value,
             null,
@@ -92,15 +94,9 @@ readonly class EventCalendarCreateHandle
                 throw new AjaxRuntimeException('Form not valid');
             }
 
-            $event = $this->eventFactory->flushFromModel($eventModel);
-
-            $eventParticipant = $eventModel->participant;
-            if ($eventParticipant !== null) {
-                $eventParticipant->setEvent($event);
-
-                $this->entityManagerService->flush();
-                $event->setParticipant($eventParticipant);
-            }
+            $createEventCommand = CreateEventCommand::create($eventModel);
+            /** @var Event $event */
+            $event = $this->commandBus->dispatchResult($createEventCommand);
 
             $this->eventEventDispatcherService->onEventCalendarCreate($event);
         } catch (AjaxRuntimeException) {

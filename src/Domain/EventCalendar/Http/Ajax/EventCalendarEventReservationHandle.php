@@ -20,14 +20,11 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
-use App\Domain\Event\Facade\EventCalendarFacade;
+use App\Domain\EventCalendar\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\Form\EventWorkReservationForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventWorkReservation\Model\EventWorkReservationModel;
-use App\Domain\User\Service\{
-    UserService,
-    UserWorkService
-};
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
@@ -36,15 +33,19 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventCalendarEventReservationHandle
 {
+    use UserWorksQueryTrait;
+
     public function __construct(
         private EntityManagerService $entityManagerService,
         private RequestService $requestService,
         private EventCalendarFacade $eventCalendarFacade,
         private UserService $userService,
-        private UserWorkService $userWorkService,
+        private QueryBusInterface $queryBus,
         private FormFactoryInterface $formFactory,
         private EventEventDispatcher $eventEventDispatcherService
     ) {}
@@ -56,7 +57,7 @@ readonly class EventCalendarEventReservationHandle
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
-        $userWorks = $this->userWorkService->getWorkBy(
+        $userWorks = $this->getUserWorks(
             $user,
             WorkUserTypeConstant::AUTHOR->value,
             null,

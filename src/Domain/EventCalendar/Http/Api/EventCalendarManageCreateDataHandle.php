@@ -17,28 +17,28 @@ use App\Domain\EventAddress\DTO\Api\EventAddressDTO;
 use App\Domain\EventCalendar\DTO\Api\Output\EventCalendarManageCreateDataOutput;
 use App\Domain\EventParticipant\DTO\Api\EventParticipantDTO;
 use App\Domain\EventType\DTO\Api\EventTypeDTO;
-use App\Domain\EventType\Facade\EventTypeFacade;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventParticipant\Helper\SortFunctionHelper;
-use App\Domain\User\Service\{
-    UserService,
-    UserWorkService
-};
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Service\EntityManagerService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\EventType\Bus\Query\EventTypeList\{GetEventTypeListQuery, GetEventTypeListQueryResult};
+use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventCalendarManageCreateDataHandle
 {
+    use UserWorksQueryTrait;
+
     public function __construct(
         private EntityManagerService $entityManagerService,
-        private UserService $userService,
-        private UserWorkService $userWorkService,
+        private UserService $userService,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
-        private EventTypeFacade $eventTypeFacade
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(): JsonResponse
@@ -48,7 +48,7 @@ readonly class EventCalendarManageCreateDataHandle
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
-        $userWorks = $this->userWorkService->getWorkBy(
+        $userWorks = $this->getUserWorks(
             $user,
             WorkUserTypeConstant::SUPERVISOR->value,
             null,
@@ -76,7 +76,10 @@ readonly class EventCalendarManageCreateDataHandle
             $addresses[] = $this->objectToDtoMapper->map($address, EventAddressDTO::class);
         }
 
-        $eventTypes = $this->eventTypeFacade->findAll();
+        $getEventTypeListQuery = GetEventTypeListQuery::create();
+        /** @var GetEventTypeListQueryResult $getEventTypeListQueryResult */
+        $getEventTypeListQueryResult = $this->queryBus->handle($getEventTypeListQuery);
+        $eventTypes = $getEventTypeListQueryResult->eventTypes;
         $types = [];
         foreach ($eventTypes as $eventType) {
             $types[] = $this->objectToDtoMapper->map($eventType, EventTypeDTO::class);
