@@ -25,7 +25,11 @@ readonly class TaskDetailHandle
     {
         $ignoreAttributes = ['user:read:author', 'user:read:supervisor', 'user:read:opponent', 'user:read:consultant'];
         /** @var TaskDTO $result */
-        $result = $this->objectToDtoMapper->map($task, TaskDTO::class, ignoreGroups: $ignoreAttributes);
+        $result = $this->objectToDtoMapper->map(
+            source: $task,
+            target: TaskDTO::class,
+            ignoreGroups: $ignoreAttributes
+        );
 
         return new JsonResponse($result);
     }
