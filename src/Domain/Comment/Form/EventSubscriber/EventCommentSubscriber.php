@@ -14,7 +14,7 @@ namespace App\Domain\Comment\Form\EventSubscriber;
 
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\{
@@ -40,7 +40,7 @@ readonly class EventCommentSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $formEvent): void
     {
         $form = $formEvent->getForm();
-        if (!$this->event->isOwner($this->user) && $this->event->getStart() < new DateTime) {
+        if (!$this->event->isOwner($this->user) && $this->event->getStart() < new DateTimeImmutable) {
             $form->remove('content');
         }
     }
