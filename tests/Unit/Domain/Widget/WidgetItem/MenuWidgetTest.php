@@ -16,7 +16,6 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\MenuWidget;
 use App\Infrastructure\Service\TwigRenderService;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\RouterInterface;
@@ -24,31 +23,31 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MenuWidgetTest extends TestCase
 {
-    private MockObject&Security $security;
+    private Security $security;
 
     private MenuWidget $menuWidget;
 
     protected function setUp(): void
     {
-        $translator = $this->createMock(TranslatorInterface::class);
-        $translator->expects($this->any())
+        $translator = $this->createStub(TranslatorInterface::class);
+        $translator
             ->method('trans')
             ->willReturn('trans');
 
-        $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->any())
+        $router = $this->createStub(RouterInterface::class);
+        $router
             ->method('generate')
             ->willReturn('url');
 
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->any())
+        $userService = $this->createStub(UserService::class);
+        $userService
             ->method('getUser')
             ->willReturn(new User);
 
-        $this->security = $this->createMock(Security::class);
+        $this->security = $this->createStub(Security::class);
 
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('content');
 
@@ -71,8 +70,22 @@ class MenuWidgetTest extends TestCase
 
     public function testRenderAccess(): void
     {
+        $this->security = $this->createStub(Security::class);
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
+            ->method('render')
+            ->willReturn('content');
+
+        $this->menuWidget = new MenuWidget(
+            $this->getMenu(),
+            $this->createStub(TranslatorInterface::class),
+            $this->createStub(RouterInterface::class),
+            $this->createStub(UserService::class),
+            $this->security,
+            $twigRenderService
+        );
+
         $this->security
-            ->expects($this->any())
             ->method('isGranted')
             ->willReturn(true);
 
@@ -83,8 +96,22 @@ class MenuWidgetTest extends TestCase
 
     public function testRenderNoAccess(): void
     {
+        $this->security = $this->createStub(Security::class);
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
+            ->method('render')
+            ->willReturn('content');
+
+        $this->menuWidget = new MenuWidget(
+            $this->getMenu(),
+            $this->createStub(TranslatorInterface::class),
+            $this->createStub(RouterInterface::class),
+            $this->createStub(UserService::class),
+            $this->security,
+            $twigRenderService
+        );
+
         $this->security
-            ->expects($this->any())
             ->method('isGranted')
             ->willReturn(false);
 

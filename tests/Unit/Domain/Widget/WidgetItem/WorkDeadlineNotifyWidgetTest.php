@@ -25,37 +25,36 @@ use App\Infrastructure\Service\{
 use App\Infrastructure\Service\TwigRenderService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class WorkDeadlineNotifyWidgetTest extends TestCase
 {
-    private MockObject&UserService $userService;
+    private UserService $userService;
 
-    private MockObject&WorkService $workService;
+    private WorkService $workService;
 
-    private MockObject&WorkFacade $workFacade;
+    private WorkFacade $workFacade;
 
     private WorkDeadlineNotifyWidget $widget;
 
     protected function setUp(): void
     {
-        $this->userService = $this->createMock(UserService::class);
-        $this->workService = $this->createMock(WorkService::class);
-        $this->workFacade = $this->createMock(WorkFacade::class);
+        $this->userService = $this->createStub(UserService::class);
+        $this->workService = $this->createStub(WorkService::class);
+        $this->workFacade = $this->createStub(WorkFacade::class);
 
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('content');
 
-        $parameterService = $this->createMock(ParameterServiceInterface::class);
-        $parameterService->expects($this->any())
+        $parameterService = $this->createStub(ParameterServiceInterface::class);
+        $parameterService
             ->method('getString')
             ->willReturn('info');
 
-        $translator = $this->createMock(TranslatorService::class);
-        $translator->expects($this->any())
+        $translator = $this->createStub(TranslatorService::class);
+        $translator
             ->method('trans')
             ->willReturn('trans');
 
@@ -71,11 +70,28 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
     public function testRender(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->workFacade = $this->createMock(WorkFacade::class);
+        $this->workService = $this->createMock(WorkService::class);
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
+            ->method('render')
+            ->willReturn('content');
+
+        $this->widget = new WorkDeadlineNotifyWidget(
+            $this->userService,
+            $this->workService,
+            $this->createStub(ParameterServiceInterface::class),
+            $this->createStub(TranslatorService::class),
+            $twigRenderService,
+            $this->workFacade
+        );
+
         $user = new User;
         $user->setRoles([UserRoleConstant::STUDENT->value]);
 
         $this->userService
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn($user);
 
@@ -83,12 +99,12 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
         $work->setDeadline(new DateTime);
 
         $this->workFacade
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('listByAuthorStatus')
             ->willReturn([$work]);
 
         $this->workService
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getDeadlineDays')
             ->willReturn(10);
 
@@ -97,11 +113,21 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
     public function testRenderNullAuthor(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->widget = new WorkDeadlineNotifyWidget(
+            $this->userService,
+            $this->workService,
+            $this->createStub(ParameterServiceInterface::class),
+            $this->createStub(TranslatorService::class),
+            $this->createStub(TwigRenderService::class),
+            $this->workFacade
+        );
+
         $user = new User;
         $user->setRoles([UserRoleConstant::SUPERVISOR->value]);
 
         $this->userService
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn($user);
 
@@ -110,16 +136,27 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
     public function testRenderNoWorks(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->workFacade = $this->createMock(WorkFacade::class);
+        $this->widget = new WorkDeadlineNotifyWidget(
+            $this->userService,
+            $this->createStub(WorkService::class),
+            $this->createStub(ParameterServiceInterface::class),
+            $this->createStub(TranslatorService::class),
+            $this->createStub(TwigRenderService::class),
+            $this->workFacade
+        );
+
         $user = new User;
         $user->setRoles([UserRoleConstant::STUDENT->value]);
 
         $this->userService
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn($user);
 
         $this->workFacade
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('listByAuthorStatus')
             ->willReturn([]);
 
@@ -128,11 +165,23 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
     public function testRenderDeadlines(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->workFacade = $this->createMock(WorkFacade::class);
+        $this->workService = $this->createMock(WorkService::class);
+        $this->widget = new WorkDeadlineNotifyWidget(
+            $this->userService,
+            $this->workService,
+            $this->createStub(ParameterServiceInterface::class),
+            $this->createStub(TranslatorService::class),
+            $this->createStub(TwigRenderService::class),
+            $this->workFacade
+        );
+
         $user = new User;
         $user->setRoles([UserRoleConstant::STUDENT->value]);
 
         $this->userService
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn($user);
 
@@ -140,12 +189,12 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
         $work->setDeadline(new DateTime);
 
         $this->workFacade
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('listByAuthorStatus')
             ->willReturn([$work]);
 
         $this->workService
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getDeadlineDays')
             ->willReturn(100);
 

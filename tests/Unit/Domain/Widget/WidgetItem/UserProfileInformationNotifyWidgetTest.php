@@ -20,31 +20,30 @@ use App\Infrastructure\Service\{
 };
 use App\Infrastructure\Service\TwigRenderService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class UserProfileInformationNotifyWidgetTest extends TestCase
 {
-    private MockObject&UserService $userService;
+    private UserService $userService;
 
     private UserProfileInformationNotifyWidget $widget;
 
     protected function setUp(): void
     {
-        $this->userService = $this->createMock(UserService::class);
+        $this->userService = $this->createStub(UserService::class);
 
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('content');
 
-        $parameterService = $this->createMock(ParameterServiceInterface::class);
-        $parameterService->expects($this->any())
+        $parameterService = $this->createStub(ParameterServiceInterface::class);
+        $parameterService
             ->method('getString')
             ->willReturn('info');
 
-        $translator = $this->createMock(TranslatorService::class);
-        $translator->expects($this->any())
+        $translator = $this->createStub(TranslatorService::class);
+        $translator
             ->method('trans')
             ->willReturn('trans');
 
@@ -58,11 +57,20 @@ class UserProfileInformationNotifyWidgetTest extends TestCase
 
     public function testRenderNoEmptyPhoneSkype(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->widget = new UserProfileInformationNotifyWidget(
+            $this->userService,
+            $this->createStub(ParameterServiceInterface::class),
+            $this->createStub(TranslatorService::class),
+            $this->createStub(TwigRenderService::class),
+        );
+
         $user = new User;
         $user->setPhone('1111111111');
         $user->setSkype('skype');
 
-        $this->userService->expects($this->any())
+        $this->userService
+            ->expects($this->exactly(2))
             ->method('getUser')
             ->willReturn($user);
 
@@ -71,11 +79,25 @@ class UserProfileInformationNotifyWidgetTest extends TestCase
 
     public function testRender(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
+            ->method('render')
+            ->willReturn('content');
+
+        $this->widget = new UserProfileInformationNotifyWidget(
+            $this->userService,
+            $this->createStub(ParameterServiceInterface::class),
+            $this->createStub(TranslatorService::class),
+            $twigRenderService,
+        );
+
         $user = new User;
         $user->setPhone(null);
         $user->setSkype(null);
 
-        $this->userService->expects($this->any())
+        $this->userService
+            ->expects($this->exactly(2))
             ->method('getUser')
             ->willReturn($user);
 

@@ -25,22 +25,22 @@ class UnreadConversationMessageWidgetTest extends TestCase
 
     protected function setUp(): void
     {
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->any())
+        $userService = $this->createStub(UserService::class);
+        $userService
             ->method('getUser')
             ->willReturn(new User);
 
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('content');
 
-        $conversationMessageFacade = $this->createMock(ConversationMessageFacade::class);
-        $conversationMessageFacade->expects($this->any())
+        $conversationMessageFacade = $this->createStub(ConversationMessageFacade::class);
+        $conversationMessageFacade
             ->method('getTotalUnreadMessagesByUser')
             ->willReturn(1);
 
-        $conversationMessageFacade->expects($this->any())
+        $conversationMessageFacade
             ->method('getUnreadMessagesByUser')
             ->willReturn([]);
 

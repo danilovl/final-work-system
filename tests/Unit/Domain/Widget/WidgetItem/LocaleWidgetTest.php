@@ -23,8 +23,8 @@ class LocaleWidgetTest extends TestCase
 
     protected function setUp(): void
     {
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('twig');
 

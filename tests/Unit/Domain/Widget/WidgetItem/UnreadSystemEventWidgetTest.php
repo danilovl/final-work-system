@@ -28,23 +28,23 @@ class UnreadSystemEventWidgetTest extends TestCase
 
     protected function setUp(): void
     {
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->any())
+        $userService = $this->createStub(UserService::class);
+        $userService
             ->method('getUser')
             ->willReturn(new User);
 
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('content');
 
-        $systemEventFacade = $this->createMock(SystemEventFacade::class);
-        $systemEventFacade->expects($this->any())
+        $systemEventFacade = $this->createStub(SystemEventFacade::class);
+        $systemEventFacade
             ->method('getTotalUnreadSystemEventsByRecipient')
             ->willReturn(1);
 
-        $systemEventRecipientFacade = $this->createMock(SystemEventRecipientFacade::class);
-        $systemEventRecipientFacade->expects($this->any())
+        $systemEventRecipientFacade = $this->createStub(SystemEventRecipientFacade::class);
+        $systemEventRecipientFacade
             ->method('getUnreadSystemEventsByRecipient')
             ->willReturn([]);
 

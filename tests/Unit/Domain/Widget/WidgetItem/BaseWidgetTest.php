@@ -22,8 +22,8 @@ class BaseWidgetTest extends TestCase
 
     protected function setUp(): void
     {
-        $twigRenderService = $this->createMock(TwigRenderService::class);
-        $twigRenderService->expects($this->any())
+        $twigRenderService = $this->createStub(TwigRenderService::class);
+        $twigRenderService
             ->method('render')
             ->willReturn('twig');
 
@@ -46,7 +46,7 @@ class BaseWidgetTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        $this->widget->setParameters(['key' => 'value']);
+        $this->widget->setParameters(['key' => 'value', 'menu' => 'menu']);
     }
 
     public function testHetRenderParameters(): void
