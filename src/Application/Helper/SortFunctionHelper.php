@@ -20,6 +20,9 @@ class SortFunctionHelper
 {
     private const string PATH_CZECH_CHARS = __DIR__ . '/../../../config/project/sorter_chars.yaml';
 
+    /** @var array<string, string>|null */
+    private static ?array $czechChars = null;
+
     public static function usortCzechArray(array &$array): void
     {
         $collator = new Collator('cs_CZ.UTF-8');
@@ -36,15 +39,29 @@ class SortFunctionHelper
         /** @var string $b */
         $b = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $b);
 
-        $file = new File(self::PATH_CZECH_CHARS);
-
-        /** @var array<string, array> $sorterChars */
-        $sorterChars = Yaml::parse($file->getContent());
-        $czechChars = $sorterChars['czech'] ?? [];
+        $czechChars = self::getCzechChars();
 
         $a = strtr($a, $czechChars);
         $b = strtr($b, $czechChars);
 
         return strnatcasecmp($a, $b);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private static function getCzechChars(): array
+    {
+        if (self::$czechChars !== null) {
+            return self::$czechChars;
+        }
+
+        $file = new File(self::PATH_CZECH_CHARS);
+
+        /** @var array<string, array<string, string>> $sorterChars */
+        $sorterChars = Yaml::parse($file->getContent());
+        self::$czechChars = $sorterChars['czech'] ?? [];
+
+        return self::$czechChars;
     }
 }
