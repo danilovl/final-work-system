@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventType\Bus\Query\SystemEventType;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
 
 readonly class GetSystemEventTypeQueryHandler implements QueryHandlerInterface

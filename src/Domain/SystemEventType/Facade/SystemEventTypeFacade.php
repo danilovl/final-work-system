@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventType\Facade;
 
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Infrastructure\Service\EntityManagerService;
 
