@@ -70,7 +70,8 @@ class ConversationService
 
         $criteria = Criteria::create()
             ->orderBy([
-                'createdAt' => SortDirection::Descending
+                'createdAt' => SortDirection::Descending,
+                'id' => SortDirection::Descending
             ])
             ->setMaxResults(1);
 
