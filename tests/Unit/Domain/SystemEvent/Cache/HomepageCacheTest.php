@@ -16,6 +16,7 @@ use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\PaginatorService;
+use Danilovl\OpenTelemetryBundle\OpenTelemetry\Interfaces\TracingSpanServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\ORM\{
     Configuration,
@@ -65,11 +66,18 @@ class HomepageCacheTest extends TestCase
             ->method('queryRecipientsQueryByUser')
             ->willReturn(new Query($entityManagerInterface));
 
+        $tracingSpan = $this->createStub(TracingSpanServiceInterface::class);
+        $tracingSpanService = $this->createStub(TracingSpanServiceInterface::class);
+        $tracingSpanService
+            ->method('start')
+            ->willReturn($tracingSpan);
+
         $this->homepageCache = new HomepageCache(
             cache: $cache,
             parameterService: $parameterService,
             paginatorService: $paginatorService,
-            systemEventRecipientFacade: $systemEventRecipientFacade
+            systemEventRecipientFacade: $systemEventRecipientFacade,
+            tracingSpanService: $tracingSpanService
         );
     }
 

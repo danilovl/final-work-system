@@ -20,6 +20,7 @@ use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Infrastructure\Service\EventDispatcherService;
 use Closure;
 use Danilovl\AsyncBundle\Service\AsyncService;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -36,7 +37,7 @@ class WorkEventDispatcherTest extends TestCase
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherService::class);
-        $this->asyncService = new AsyncService;
+        $this->asyncService = new AsyncService($this->createMock(EventDispatcherInterface::class));
         $this->workEventDispatcher = new WorkEventDispatcher(
             eventDispatcher: $this->eventDispatcher,
             asyncService: $this->asyncService

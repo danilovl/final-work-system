@@ -17,6 +17,7 @@ use App\Domain\User\EventListener\RequestListener;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\AsyncBundle\Service\AsyncService;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\{
@@ -40,7 +41,7 @@ class RequestListenerTest extends TestCase
     {
         $this->userService = $this->createStub(UserService::class);
         $this->entityManagerService = $this->createStub(EntityManagerService::class);
-        $this->asyncService = new AsyncService;
+        $this->asyncService = new AsyncService($this->createMock(EventDispatcherInterface::class));
 
         $this->listener = new RequestListener(
             $this->userService,

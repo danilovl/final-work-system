@@ -20,6 +20,7 @@ use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Infrastructure\Service\EventDispatcherService;
 use Closure;
 use Danilovl\AsyncBundle\Service\AsyncService;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -36,7 +37,7 @@ class EventEventDispatcherTest extends TestCase
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherService::class);
-        $this->asyncService = new AsyncService;
+        $this->asyncService = new AsyncService($this->createMock(EventDispatcherInterface::class));
         $this->eventEventDispatcher = new EventEventDispatcher(
             eventDispatcher: $this->eventDispatcher,
             asyncService: $this->asyncService
