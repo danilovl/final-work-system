@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Domain\Media\Command;
 
 use App\Domain\Media\Command\S3CreateBucketCommand;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\MediaType\Bus\Query\MediaTypeList\GetMediaTypeListQueryResult;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Infrastructure\Service\S3ClientService;
