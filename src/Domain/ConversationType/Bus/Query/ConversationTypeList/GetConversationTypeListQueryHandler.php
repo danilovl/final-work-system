@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationType\Bus\Query\ConversationTypeList;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 
 readonly class GetConversationTypeListQueryHandler implements QueryHandlerInterface
