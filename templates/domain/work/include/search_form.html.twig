@@ -34,13 +34,25 @@
         <div class="item form-group">
             {{ form_label(form.status, 'app.form.label.status', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
             <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.status, {
+                    'attr': {
+                        'data-controller': 'select2',
+                        'data-select2-width-value': '100%',
+                        'class': 'form-control'
+                    }
+                }) }}
             </div>
         </div>
         <div class="item form-group">
             {{ form_label(form.type, 'app.form.label.type', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
             <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.type, {
+                    'attr': {
+                        'data-controller': 'select2',
+                        'data-select2-width-value': '100%',
+                        'class': 'form-control'
+                    }
+                }) }}
             </div>
         </div>
 
