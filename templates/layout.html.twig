@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="csrf-token" content="{{ csrf_token('ajax') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
         {% block title %} {{ seo_title() }} {% endblock %}
         {% block stylesheets %}
@@ -60,8 +61,13 @@
     </div>
 
     <script>
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
         document.addEventListener('DOMContentLoaded', () => {
-            $.ajaxSetup({'global': true});
+            $.ajaxSetup({
+                'global': true,
+                'headers': {'X-CSRF-Token': csrfToken}
+            });
             initSidebar();
             initValidator();
             initAutosize();
@@ -171,7 +177,8 @@
 
             init.headers = {
                 ...(init.headers || {}),
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': csrfToken
             };
 
             try {
