@@ -32,7 +32,7 @@ event_switch_to_skype:
   path: /switch-skype/{id}
   defaults:
     _controller: App\Domain\Event\Controller\EventController::switchToSkype
-  methods: [GET,POST]
+  methods: [POST]
 
 event_delete:
   path: /delete/{id}
@@ -48,7 +48,7 @@ event_delete_ajax:
     id: '%hashid%'
   defaults:
     _controller: App\Domain\Event\Controller\Ajax\EventController::delete
-  methods: [GET, POST]
+  methods: [POST]
 
 event_detail_events_ajax:
   path: /detail/{id}/calendar/events/ajax
