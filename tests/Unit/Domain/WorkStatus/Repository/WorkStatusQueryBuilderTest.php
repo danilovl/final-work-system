@@ -12,66 +12,73 @@
 
 namespace App\Tests\Unit\Domain\WorkStatus\Repository;
 
-use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Repository\WorkStatusQueryBuilder;
 use Doctrine\ORM\{
     EntityManagerInterface,
     QueryBuilder
 };
+use Doctrine\ORM\Query\Expr;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Generator;
 
 class WorkStatusQueryBuilderTest extends TestCase
 {
-    #[DataProvider('provideUserIsBoundByIdCases')]
-    public function testUserIsBoundById(string $type, string $expectedWhere): void
+    #[DataProvider('provideUsersAreBoundByIdCases')]
+    public function testUsersAreBoundById(string $type, string $expectedWhere): void
     {
-        $queryBuilder = new QueryBuilder($this->createStub(EntityManagerInterface::class));
-        $queryBuilder->select('work_status')->from('WorkStatus', 'work_status');
+        $queryBuilder = $this->createQueryBuilder();
 
-        $user = new User;
-        $user->setId(36);
+        new WorkStatusQueryBuilder($queryBuilder)->byUsersAndType(
+            type: $type,
+            userIds: [36, 155]
+        );
 
-        new WorkStatusQueryBuilder($queryBuilder)->byUserAndType($type, $user);
-
-        $this->assertSame(36, $queryBuilder->getParameter('user')?->getValue());
+        $this->assertSame([36, 155], $queryBuilder->getParameter('userIds')?->getValue());
         $this->assertStringContainsString($expectedWhere, $queryBuilder->getDQL());
     }
 
-    /**
-     * Users from the paginator are runtime DTO subclasses of User (doctrine-entity-dto-bundle).
-     * Doctrine cannot map such a class, so the id has to be bound, not the object.
-     */
-    public function testRuntimeSubclassOfUserIsBoundById(): void
+    public static function provideUsersAreBoundByIdCases(): Generator
     {
-        $queryBuilder = new QueryBuilder($this->createStub(EntityManagerInterface::class));
+        yield 'author' => [
+            'type' => WorkUserTypeConstant::AUTHOR->value,
+            'expectedWhere' => 'author.id IN(:userIds)'
+        ];
+
+        yield 'opponent' => [
+            'type' => WorkUserTypeConstant::OPPONENT->value,
+            'expectedWhere' => 'opponent.id IN(:userIds)'
+        ];
+
+        yield 'consultant' => [
+            'type' => WorkUserTypeConstant::CONSULTANT->value,
+            'expectedWhere' => 'consultant.id IN(:userIds)'
+        ];
+    }
+
+    public function testGroupByUserIdAndName(): void
+    {
+        $queryBuilder = $this->createQueryBuilder();
+
+        new WorkStatusQueryBuilder($queryBuilder)
+            ->selectUserIdNameAndCount(WorkUserTypeConstant::AUTHOR->value)
+            ->groupByUserIdAndName();
+
+        $dql = $queryBuilder->getDQL();
+
+        $this->assertStringContainsString('IDENTITY(work.author) AS userId', $dql);
+        $this->assertStringContainsString('GROUP BY userId, work_status.name', $dql);
+    }
+
+    private function createQueryBuilder(): QueryBuilder
+    {
+        $entityManager = $this->createStub(EntityManagerInterface::class);
+        $entityManager->method('getExpressionBuilder')->willReturn(new Expr);
+
+        $queryBuilder = new QueryBuilder($entityManager);
         $queryBuilder->select('work_status')->from('WorkStatus', 'work_status');
 
-        $user = new class() extends User {};
-        $user->setId(155);
-
-        new WorkStatusQueryBuilder($queryBuilder)->byUserAndType(WorkUserTypeConstant::AUTHOR->value, $user);
-
-        $this->assertSame(155, $queryBuilder->getParameter('user')?->getValue());
-    }
-
-    public function testWithoutTypeOrUserNothingIsAdded(): void
-    {
-        $queryBuilder = new QueryBuilder($this->createStub(EntityManagerInterface::class));
-
-        new WorkStatusQueryBuilder($queryBuilder)->byUserAndType(null, new User);
-        new WorkStatusQueryBuilder($queryBuilder)->byUserAndType(WorkUserTypeConstant::AUTHOR->value, null);
-
-        $this->assertNull($queryBuilder->getParameter('user'));
-        $this->assertNull($queryBuilder->getDQLPart('where'));
-    }
-
-    public static function provideUserIsBoundByIdCases(): Generator
-    {
-        yield [WorkUserTypeConstant::AUTHOR->value, 'author = :user'];
-        yield [WorkUserTypeConstant::OPPONENT->value, 'opponent = :user'];
-        yield [WorkUserTypeConstant::CONSULTANT->value, 'consultant = :user'];
+        return $queryBuilder;
     }
 }
