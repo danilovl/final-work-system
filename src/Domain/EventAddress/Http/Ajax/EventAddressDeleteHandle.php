@@ -28,6 +28,10 @@ readonly class EventAddressDeleteHandle
 
     public function __invoke(EventAddress $eventAddress): JsonResponse
     {
+        if (count($eventAddress->getEvents()) > 0) {
+            return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_FAILURE);
+        }
+
         $command = DeleteEventAddressCommand::create($eventAddress);
         $this->messageBus->dispatch($command);
 

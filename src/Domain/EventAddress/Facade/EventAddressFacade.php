@@ -15,6 +15,7 @@ namespace App\Domain\EventAddress\Facade;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Repository\EventAddressRepository;
 use App\Domain\User\Entity\User;
+use Doctrine\ORM\Query;
 
 readonly class EventAddressFacade
 {
@@ -26,6 +27,13 @@ readonly class EventAddressFacade
         $result = $this->eventAddressRepository->find($id);
 
         return $result;
+    }
+
+    public function queryAllByOwner(User $user): Query
+    {
+        return $this->eventAddressRepository
+            ->allByOwner($user)
+            ->getQuery();
     }
 
     public function findSkypeByOwner(User $user): ?EventAddress

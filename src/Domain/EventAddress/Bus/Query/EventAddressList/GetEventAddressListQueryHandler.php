@@ -12,19 +12,25 @@
 
 namespace App\Domain\EventAddress\Bus\Query\EventAddressList;
 
+use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 readonly class GetEventAddressListQueryHandler
 {
-    public function __construct(private PaginatorService $paginatorService) {}
+    public function __construct(
+        private PaginatorService $paginatorService,
+        private EventAddressFacade $eventAddressFacade
+    ) {}
 
     public function __invoke(GetEventAddressListQuery $query): GetEventAddressListQueryResult
     {
+        $eventAddressesQuery = $this->eventAddressFacade->queryAllByOwner($query->user);
+
         $pagination = $this->paginatorService->createPaginationRequest(
-            $query->request,
-            $query->user->getEventAddressOwner()
+            request: $query->request,
+            target: $eventAddressesQuery
         );
 
         return new GetEventAddressListQueryResult($pagination);

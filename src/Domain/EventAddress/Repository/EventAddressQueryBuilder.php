@@ -14,9 +14,26 @@ namespace App\Domain\EventAddress\Repository;
 
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
+use SortDirection;
 
 class EventAddressQueryBuilder extends BaseQueryBuilder
 {
+    public function whereByOwner(User $user): self
+    {
+        $this->queryBuilder
+            ->andWhere('event_address.owner = :user')
+            ->setParameter('user', $user);
+
+        return $this;
+    }
+
+    public function orderById(SortDirection $order = SortDirection::Ascending): self
+    {
+        $this->queryBuilder->orderBy('event_address.id', $order);
+
+        return $this;
+    }
+
     public function whereBySkypeOwner(User $user): self
     {
         $this->queryBuilder
