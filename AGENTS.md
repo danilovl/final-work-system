@@ -1,118 +1,119 @@
 # Project Guidelines and Agent Instructions
 
-## Стек
+## Stack
 
 - **PHP** 8.5, **Symfony** 8.1, **Doctrine ORM** 3 (MariaDB 10.9, `server_version: mariadb-10.9.7`), Twig, Vite (`pentatrion/vite-bundle`).
-- Основные бандлы: EasyAdmin, KnpPaginator, API Platform, NelmioApiDoc, Overblog GraphQL, FOSElastica (Elasticsearch), Gedmo Doctrine Extensions, Messenger (AMQP), Mercure, `doctrine/orm-plugin-second-level-cache`, а также собственные `danilovl/*` бандлы (`hashids`, `doctrine-entity-dto`, `object-dto-mapper`, `render-service-twig-extension`, `select-autocompleter`, `async`, `cache-response`, `parameter`, `permission-middleware`, `translator`, `open-telemetry`).
-- Окружение — `docker-compose.yml`: `php` (php-fpm, пользователь `www-data` uid 1000), `nginx` (`localhost:7100`), `mysql` (MariaDB), `redis`, `rabbitmq`, `elasticsearch`, `kibana`, `minio` (S3), `mercure`, `node` (сборка и Playwright), `supervisor` (воркеры Messenger), `otel-collector`, `apm-server`.
-- Автозагрузка PSR-4: `App\` → `src/`, `App\Tests\` → `tests/`.
+- Main bundles: EasyAdmin, KnpPaginator, API Platform, NelmioApiDoc, Overblog GraphQL, FOSElastica (Elasticsearch), Gedmo Doctrine Extensions, Messenger (AMQP), Mercure, `doctrine/orm-plugin-second-level-cache`, plus our own `danilovl/*` bundles (`hashids`, `doctrine-entity-dto`, `object-dto-mapper`, `render-service-twig-extension`, `select-autocompleter`, `async`, `cache-response`, `parameter`, `permission-middleware`, `translator`, `open-telemetry`).
+- Environment — `docker-compose.yml`: `php` (php-fpm, user `www-data` uid 1000), `nginx` (`localhost:7100`), `mysql` (MariaDB), `redis`, `rabbitmq`, `elasticsearch`, `kibana`, `minio` (S3), `mercure`, `node` (build and Playwright), `supervisor` (Messenger workers), `otel-collector`, `apm-server`.
+- PSR-4 autoloading: `App\` → `src/`, `App\Tests\` → `tests/`.
 
-## Архитектура проекта
+## Project Architecture
 
-Проект построен по DDD, код в `src/` разделён на три слоя:
+The project follows DDD; code in `src/` is split into three layers:
 
-- **Domain/**: бизнес-логика по доменам (`Work`, `Task`, `Conversation`, `ConversationMessage`, `Event`, `Media`, `User`, `SystemEvent` и др.).
-  - `Controller/`: `readonly`-контроллеры только принимают `Request` и сущности и делегируют работу в `Http/XxxHandle` через `->__invoke(...)`. API — `Controller/Api/`, AJAX — `Controller/Ajax/`.
-  - `Http/`: invokable-классы обработки запроса (`readonly class XxxHandle`), API — `Http/Api/`, AJAX — `Http/Ajax/`.
-  - `Bus/Command/<Name>/` и `Bus/Query/<Name>/`: команды и запросы с обработчиками (`XxxCommand` + `XxxHandler`, `GetXxxQuery` + `GetXxxQueryHandler` + `GetXxxQueryResult`); шины `command.bus` и `query.bus`.
-  - `Entity/`: Doctrine-сущности на атрибутах; общие поля — трейты из `Application/Traits/Entity` (`IdTrait`, `CreateUpdateAbleTrait` и др.).
-  - `Facade/`: высокоуровневый доступ к данным домена; обработчики и сервисы работают с фасадами, а не с репозиториями напрямую.
-  - `Repository/`: `XxxRepository` (наследует `ServiceEntityRepository`) собирает запросы из методов `XxxQueryBuilder` (наследует `Infrastructure/Persistence/Doctrine/Repository/BaseQueryBuilder`); алиас корневой сущности — имя сущности в snake_case. Поиск — `Repository/Elastica/`.
-  - `Security/Voter/`: проверки прав (`VoterSupportConstant`, `AuthorizationCheckerService::denyAccessUnlessGranted()`).
-  - `DTO/`, `DTO/Api/`, `Model/` (модели форм), `Form/`, `Factory/`, `Service/`, `Helper/`, `Constant/`, `EventDispatcher/`, `EventSubscriber/`, `EventListener/`, `Twig/Runtime/` (`#[AsTwigFunction]`, `#[AsTwigFilter]`), `Admin/` (EasyAdmin), `Command/`, `Autocompleter/`, `GraphQL/`.
-- **Application/**: общие константы (`VoterSupportConstant` и др.), интерфейсы шин, атрибуты (`EntityRelationValidatorAttribute`), трейты, исключения, хелперы, DTO, миграции (`src/Application/Migrations`).
-- **Infrastructure/**: сервисы (`EntityManagerService`, `TwigRenderService`, `RequestService`, `PaginatorService`, `S3ClientService`, `AuthorizationCheckerService` и др.), персистентность (`Persistence/Doctrine`: DBAL-типы, `BaseQueryBuilder`), веб-слой (`Web/`: формы, Twig-расширения), слушатели (`Event/EventListener`), консоль, Messenger, GraphQL.
-- **Направление зависимостей**: `Domain` → `Application` → `Infrastructure`. `Infrastructure` не ссылается на `Application` и `Domain`, `Application` — на `Domain`; доменная логика (слушатели, compiler pass, админка) живёт в своём домене. Проверяет правило PHPStan `tests/PHPStan/Rule/LayerDependencyRule.php`, текущие нарушения — в `phpstan-layer-baseline.neon`, новые туда не добавлять.
-- **Независимость доменов**: домен не использует фасады, сервисы, репозитории и фабрики другого домена — дополнительные данные читаются через `query.bus`, запись идёт через `command.bus`; данные, загруженные в SQL через JOIN, остаются в запросе. Исключения — `UserService`, DTO-фабрики и `EventScheduleTemplateFactory` (`ALLOWED_CLASSES`); сущности, GenericEvent и статические хелперы других доменов разрешены. Проверяет правило PHPStan `tests/PHPStan/Rule/DomainDependencyRule.php`.
+- **Domain/**: business logic by domain (`Work`, `Task`, `Conversation`, `ConversationMessage`, `Event`, `Media`, `User`, `SystemEvent`, etc.).
+  - `Controller/`: `readonly` controllers only accept `Request` and entities and delegate the work to `Http/XxxHandle` via `->__invoke(...)`. API — `Controller/Api/`, AJAX — `Controller/Ajax/`.
+  - `Http/`: invokable request handling classes (`readonly class XxxHandle`), API — `Http/Api/`, AJAX — `Http/Ajax/`.
+  - `Bus/Command/<Name>/` and `Bus/Query/<Name>/`: commands and queries with handlers (`XxxCommand` + `XxxHandler`, `GetXxxQuery` + `GetXxxQueryHandler` + `GetXxxQueryResult`); buses `command.bus` and `query.bus`.
+  - `Entity/`: Doctrine entities mapped with attributes; shared fields come from traits in `Application/Traits/Entity` (`IdTrait`, `CreateUpdateAbleTrait`, etc.).
+  - `Facade/`: high-level access to domain data; handlers and services work with facades, not with repositories directly.
+  - `Repository/`: `XxxRepository` (extends `ServiceEntityRepository`) builds queries from `XxxQueryBuilder` methods (extends `Infrastructure/Persistence/Doctrine/Repository/BaseQueryBuilder`); the root entity alias is the entity name in snake_case. Search — `Repository/Elastica/`.
+  - `Security/Voter/`: permission checks (`VoterSupportConstant`, `AuthorizationCheckerService::denyAccessUnlessGranted()`).
+  - `DTO/`, `DTO/Api/`, `Model/` (form models), `Form/`, `Factory/`, `Service/`, `Helper/`, `Constant/`, `EventDispatcher/`, `EventSubscriber/`, `EventListener/`, `Twig/Runtime/` (`#[AsTwigFunction]`, `#[AsTwigFilter]`), `Admin/` (EasyAdmin), `Command/`, `Autocompleter/`, `GraphQL/`.
+- **Application/**: shared constants (`VoterSupportConstant`, etc.), bus interfaces, attributes (`EntityRelationValidatorAttribute`), traits, exceptions, helpers, DTOs, migrations (`src/Application/Migrations`).
+- **Infrastructure/**: services (`EntityManagerService`, `TwigRenderService`, `RequestService`, `PaginatorService`, `S3ClientService`, `AuthorizationCheckerService`, etc.), persistence (`Persistence/Doctrine`: DBAL types, `BaseQueryBuilder`), web layer (`Web/`: forms, Twig extensions), listeners (`Event/EventListener`), console, Messenger, GraphQL.
+- **Dependency direction**: `Domain` → `Application` → `Infrastructure`. `Infrastructure` does not reference `Application` or `Domain`, `Application` does not reference `Domain`; domain logic (listeners, compiler passes, admin) lives in its own domain. Enforced by the PHPStan rule `tests/PHPStan/Rule/LayerDependencyRule.php`; current violations are in `phpstan-layer-baseline.neon`, do not add new ones there.
+- **Domain independence**: a domain does not use facades, services, repositories or factories of another domain — additional data is read via `query.bus`, writes go through `command.bus`; data loaded in SQL via JOIN stays in the query. Exceptions — `UserService`, DTO factories and `EventScheduleTemplateFactory` (`ALLOWED_CLASSES`); entities, GenericEvent and static helpers of other domains are allowed. Enforced by the PHPStan rule `tests/PHPStan/Rule/DomainDependencyRule.php`.
 
-## Конфигурация
+## Configuration
 
-- `config/services.yaml`: autowire и autoconfigure для `App\Infrastructure\`, `App\Application\`, `App\Domain\` с исключениями (DTO, Entity, Constant, Model, Helper, Migrations и т. п.).
-- `config/project/`: параметры (`parameters.yaml`), сервисы (`services/*.yaml`, Doctrine-слушатели — `services/entity_listener.yaml`), меню, виджеты.
-- **Маршруты** описываются в YAML: `config/project/routing.yaml` + `config/project/routing/<domain>.yaml`; API — `routing/api`, `api_key.yaml`, `api_platform`, `api_public`.
-- **ID в URL** кодируются Hashids: в шаблонах `{{ entity.id | hashids_encode }}`, в контроллерах `#[HashidsRequestConverterAttribute]` (`danilovl/hashids-bundle`) + `#[MapEntity]`. Текущий пользователь — `Domain/User/Service/UserService`. Принадлежность сущностей из URL друг другу проверяется `#[EntityRelationValidatorAttribute]` (при нескольких подходящих свойствах указывать `property`).
-- **Doctrine-маппинг**: каждый домен с сущностями явно зарегистрирован в `config/packages/doctrine.yaml` (`orm.mappings`). Новый домен — новая запись.
-- Вторичный кэш Doctrine и сессии — Redis (`doctrine.redis_adapter`, номер базы — `%env(REDIS_CACHE_DB)%`).
-- Индексы Elasticsearch — `config/packages/fos_elastica.yaml`, имя индекса с префиксом `%env(ELASTICSEARCH_INDEX_PREFIX)%`; работа через алиасы (`use_alias: true`), `populate` строит новый индекс и переключает алиас. Если на окружении остался обычный индекс с именем алиаса, его один раз удалить и запустить `populate`.
+- `config/services.yaml`: autowire and autoconfigure for `App\Infrastructure\`, `App\Application\`, `App\Domain\` with exclusions (DTO, Entity, Constant, Model, Helper, Migrations, etc.).
+- `config/project/`: parameters (`parameters.yaml`), services (`services/*.yaml`, Doctrine listeners — `services/entity_listener.yaml`), menu, widgets.
+- **Routes** are defined in YAML: `config/project/routing.yaml` + `config/project/routing/<domain>.yaml`; API — `routing/api`, `api_key.yaml`, `api_platform`, `api_public`.
+- **IDs in URLs** are encoded with Hashids: in templates `{{ entity.id | hashids_encode }}`, in controllers `#[HashidsRequestConverterAttribute]` (`danilovl/hashids-bundle`) + `#[MapEntity]`. Current user — `Domain/User/Service/UserService`. Ownership between entities from the URL is checked with `#[EntityRelationValidatorAttribute]` (specify `property` when several properties match).
+- **Doctrine mapping**: every domain with entities is registered explicitly in `config/packages/doctrine.yaml` (`orm.mappings`). New domain — new entry.
+- Doctrine second-level cache and sessions — Redis (`doctrine.redis_adapter`, database number — `%env(REDIS_CACHE_DB)%`).
+- Elasticsearch indexes — `config/packages/fos_elastica.yaml`, index name prefixed with `%env(ELASTICSEARCH_INDEX_PREFIX)%`; aliases are used (`use_alias: true`), `populate` builds a new index and switches the alias. If an environment still has a plain index named like the alias, delete it once and run `populate`.
 
-## Окружения и базы данных
+## Environments and Databases
 
-- **dev**: база `final_work_system`, индексы без префикса, Redis 13 (`.env` + `.env.local`).
-- **PHPUnit** (`APP_ENV=test`): база `final_work_system_test`, индексы `test_*`, Redis 14 — значения задаются в локальном `.env.test.local` (в `.gitignore`).
-- **E2E** (Playwright): запросы с cookie `e2e_test=1` (задаётся в `playwright.config.ts`; заголовок `X-E2E-TEST: 1` тоже принимается) из частной сети при `E2E_TEST_ENABLE=1` (контейнер `php`) переключают приложение на `.env.test` (`public/index.php`); каталог кэша — `var/cache/e2e_*` (`Kernel::getCacheDir()`).
-- **CI** (GitHub Actions): одна обычная база `final_work_system` с `docker/mysql/data/dump.sql`, `.env.test.local` нет — поэтому в `.env.test` указаны общие база, индексы и Redis. Не менять это без учёта CI.
-- **Работа с данными**: любые эксперименты и проверки с записью — только на `final_work_system_test` или на временной копии. dev-базу `final_work_system` не изменять без явного подтверждения пользователя.
-- Скрипты вне PHPUnit, которые сами вызывают `Dotenv::bootEnv()`, запускать с `APP_ENV=test`, иначе подключится dev-база.
-- **Деструктивные операции** (`DROP`, `TRUNCATE`, `DELETE`/`UPDATE` без `WHERE`, `doctrine:schema:drop`, переиндексация dev-индексов) — только после явного подтверждения пользователя.
-- **Схема**: при изменении маппинга создавать миграцию в `src/Application/Migrations`; `doctrine:schema:validate` должен быть без ошибок.
+- **dev**: database `final_work_system`, indexes without prefix, Redis 13 (`.env` + `.env.local`).
+- **PHPUnit** (`APP_ENV=test`): database `final_work_system_test`, indexes `test_*`, Redis 14 — values are set in the local `.env.test.local` (in `.gitignore`).
+- **E2E** (Playwright): requests with the cookie `e2e_test=1` (set in `playwright.config.ts`; the header `X-E2E-TEST: 1` is accepted too) from a private network with `E2E_TEST_ENABLE=1` (container `php`) switch the application to `.env.test` (`public/index.php`); cache directory — `var/cache/e2e_*` (`Kernel::getCacheDir()`).
+- **CI** (GitHub Actions): a single regular database `final_work_system` with `docker/mysql/data/dump.sql`, there is no `.env.test.local` — that is why `.env.test` specifies the shared database, indexes and Redis. Do not change this without considering CI.
+- **Working with data**: any experiments and checks that write data — only on `final_work_system_test` or on a temporary copy. Do not modify the dev database `final_work_system` without explicit user confirmation.
+- Scripts outside PHPUnit that call `Dotenv::bootEnv()` themselves must be run with `APP_ENV=test`, otherwise they connect to the dev database.
+- **Destructive operations** (`DROP`, `TRUNCATE`, `DELETE`/`UPDATE` without `WHERE`, `doctrine:schema:drop`, reindexing dev indexes) — only after explicit user confirmation.
+- **Schema**: when the mapping changes, create a migration in `src/Application/Migrations`; `doctrine:schema:validate` must pass without errors.
 
-## Данные и запросы
+## Data and Queries
 
-- **Elasticsearch и БД**: списки работ и поиск идут из Elasticsearch, детальные страницы — из БД. Удаления, выполняемые каскадом в БД (`onDelete: 'CASCADE'`), FOSElastica не видит — документы зависимых записей удаляет `Domain/Work/EventListener/Entity/ElasticaCascadeRemoveListener` (собирает id в `preRemove` через DBAL, удаляет в `postFlush`). Новые каскады для индексируемых сущностей добавлять туда же.
-- **Doctrine-слушатели**: в `preRemove`/`onFlush` не загружать связанные сущности (коллекции, прокси) — только скалярные запросы через DBAL, иначе `flush` падает с `ORMInvalidArgumentException`.
-- **N+1**: данные для списков загружаются пакетно (`IN (:ids)`) в обработчике или фасаде, а не в цикле по строкам; статусы прочтения диалогов — `ConversationStatusService` (кэш на время запроса, `ResetInterface`).
-- **Fetch-join коллекций**: не сочетать `addSelect` коллекции с `setMaxResults`/`getOneOrNullResult` и не фильтровать по алиасу выбранной коллекции — коллекция гидрируется урезанной.
-- **Сортировка**: к каждой сортировке по неуникальному полю добавлять `addOrderBy('<alias>.id', $order)`, иначе пагинация нестабильна.
-- **Обход больших таблиц** с изменением данных — по ключу (`id > :lastId ORDER BY id`), не через `OFFSET`.
-- **Кастомная гидрация**: `setHydrationMode(Entity::class)` (`danilovl/doctrine-entity-dto`) создаёт неуправляемые объекты с неполными связями — для логики, которой нужны связи, брать сущность через `EntityManagerService::getReference()`.
-- **Оптимизация запросов**: шаблоны и выходные данные не меняются — результат до и после сравнивается 1:1.
+- **Elasticsearch and DB**: work lists and search come from Elasticsearch, detail pages — from the DB. Deletions performed by DB cascade (`onDelete: 'CASCADE'`) are invisible to FOSElastica — documents of dependent records are removed by `Domain/Work/EventListener/Entity/ElasticaCascadeRemoveListener` (collects ids in `preRemove` via DBAL, deletes in `postFlush`). Add new cascades for indexed entities there as well.
+- **Doctrine listeners**: in `preRemove`/`onFlush` do not load related entities (collections, proxies) — only scalar queries via DBAL, otherwise `flush` fails with `ORMInvalidArgumentException`.
+- **N+1**: data for lists is loaded in batches (`IN (:ids)`) in the handler or facade, not in a loop over rows; conversation read statuses — `ConversationStatusService` (per-request cache, `ResetInterface`).
+- **Fetch-joining collections**: do not combine `addSelect` of a collection with `setMaxResults`/`getOneOrNullResult` and do not filter by the alias of the selected collection — the collection gets hydrated truncated.
+- **Sorting**: add `addOrderBy('<alias>.id', $order)` to every sort by a non-unique field, otherwise pagination is unstable.
+- **Iterating large tables** while modifying data — by key (`id > :lastId ORDER BY id`), not via `OFFSET`.
+- **Custom hydration**: `setHydrationMode(Entity::class)` (`danilovl/doctrine-entity-dto`) creates unmanaged objects with incomplete associations — for logic that needs associations, get the entity via `EntityManagerService::getReference()`.
+- **Query optimization**: templates and output do not change — the result before and after is compared 1:1.
 
-## Стандарты PHP и стиль кода
+## PHP Standards and Code Style
 
-- Каждый файл начинается с `<?php declare(strict_types=1);` и шапки лицензии проекта.
-- Строгая типизация свойств, параметров, возвращаемых значений; типизированные константы (`private const int LIMIT = 500;`).
-- `readonly class` для сервисов, фасадов, контроллеров и обработчиков; если классу нужно изменяемое состояние, `readonly` ставится на свойства конструктора.
-- **Импорты**: групповые из одного пространства имён (`use Symfony\Component\HttpFoundation\{Request, Response};`), глобальные классы — через `use` (`use DateTimeImmutable;`, `use SortDirection;`).
-- **Даты**: только `DateTimeImmutable` и `Types::*_IMMUTABLE`; в формах `'input' => 'datetime_immutable'`.
-- `new ArrayCollection`, `new DateTimeImmutable` без пустых скобок.
-- **Именованные аргументы** — для вызовов с несколькими параметрами; каждый аргумент на своей строке.
-- Вместо циклов поиска — `array_find()`, `array_any()`, `array_filter()`; промежуточные результаты — в отдельных переменных.
-- **`sprintf` как аргумент** запрещён: `$message = sprintf(...); throw new LogicException($message);`, `$cacheKey = sprintf(...); $this->cache->getItem($cacheKey);`.
-- **Цепочки вызовов в аргументах** запрещены: результат сначала в переменную. Один вызов допустим.
-- **Вызовы с аргументами в условиях** `if`/`foreach`/`match` запрещены — результат сначала в переменную.
-- `match` всегда с веткой `default` (PHPStan).
-- **Сущности не используются как view-model**: вычисляемые для отображения значения (собеседник, прочитанность) не хранятся в сущностях, а считаются в PHP (сервис, хелпер, Twig-runtime).
-- **Комментарии к коду** не добавляются.
-- **Окончания строк**: в репозитории файлы с LF, CRLF и смешанным шаблоном (CRLF, кроме строк `namespace`, пустой строки после него и последней `}`). При правке сохранять окончания строк как в `HEAD`; проверка — `git diff --numstat` совпадает с `git diff --numstat --ignore-cr-at-eol`.
-- **Качество**: PHPStan (`composer phpstan`) без новых записей в baseline, php-cs-fixer (`composer cs-fixer-check`).
+- Every file starts with `<?php declare(strict_types=1);` and the project license header.
+- Strict typing of properties, parameters, return values; typed constants (`private const int LIMIT = 500;`).
+- `readonly class` for services, facades, controllers and handlers; if a class needs mutable state, `readonly` is put on the constructor properties.
+- **Imports**: grouped from the same namespace (`use Symfony\Component\HttpFoundation\{Request, Response};`), global classes — via `use` (`use DateTimeImmutable;`, `use SortDirection;`).
+- **Dates**: only `DateTimeImmutable` and `Types::*_IMMUTABLE`; in forms `'input' => 'datetime_immutable'`.
+- `new ArrayCollection`, `new DateTimeImmutable` without empty parentheses.
+- **Named arguments** — for calls with several parameters; each argument on its own line.
+- Instead of search loops — `array_find()`, `array_any()`, `array_filter()`; intermediate results — in separate variables.
+- **`sprintf` as an argument** is forbidden: `$message = sprintf(...); throw new LogicException($message);`, `$cacheKey = sprintf(...); $this->cache->getItem($cacheKey);`.
+- **Call chains in arguments** are forbidden: put the result in a variable first. A single call is allowed.
+- **Calls with arguments in `if`/`foreach`/`match` conditions** are forbidden — put the result in a variable first.
+- `match` always has a `default` branch (PHPStan).
+- **Entities are not used as view models**: values computed for display (conversation partner, read status) are not stored in entities but computed in PHP (service, helper, Twig runtime).
+- **Code comments** are not added.
+- **Line endings**: the repository has files with LF, CRLF and a mixed pattern (CRLF except the `namespace` line, the empty line after it and the last `}`). When editing, keep line endings as in `HEAD`; check — `git diff --numstat` matches `git diff --numstat --ignore-cr-at-eol`.
+- **Quality**: PHPStan (`composer phpstan`) without new baseline entries, php-cs-fixer (`composer cs-fixer-check`).
 
-## Шаблоны
+## Templates
 
-- Twig: `templates/domain/<domain_snake_case>/`, общие — `templates/application/`, `templates/other/`.
-- Фильтры с пробелами вокруг `|`: `{{ value | trans }}`.
-- Длинные хэши атрибутов (`form_widget`, `form_start`, `path(...)`) — по одному ключу на строку.
-- Данные для шаблона готовятся в PHP: никаких `| default(...)`, вычислений и обработки `null` в шаблоне. HTML пользователя выводится через `sanitize_html('app.rich_text_sanitizer')` (null-безопасен, `Infrastructure/Web/Twig/Extension/HtmlSanitizerExtension`).
-- Ссылки с параметрами строятся только через `path(...)`, без склеивания строк запроса.
-- Действия, меняющие данные, — только POST (формы, AJAX), не ссылки GET.
+- Twig: `templates/domain/<domain_snake_case>/`, shared — `templates/application/`, `templates/other/`.
+- Filters with spaces around `|`: `{{ value | trans }}`.
+- Long attribute hashes (`form_widget`, `form_start`, `path(...)`) — one key per line.
+- Template data is prepared in PHP: no `| default(...)`, computations or `null` handling in templates. User HTML is output via `sanitize_html('app.rich_text_sanitizer')` (null-safe, `Infrastructure/Web/Twig/Extension/HtmlSanitizerExtension`).
+- Links with parameters are built only via `path(...)`, without concatenating query strings.
+- Actions that modify data — only POST (forms, AJAX), not GET links.
 
-## Тесты
+## Tests
 
-- `tests/Unit` — без ядра и БД (`TestCase`, `createStub()`); `tests/Integration`, `tests/Functional` — с ядром; `tests/Mock` — вспомогательные классы; `tests/EndToEnd/Playwright` — E2E.
-- Структура тестов повторяет `src/`: `tests/Unit/Domain/<Domain>/Repository/XxxQueryBuilderTest.php`.
-- Data provider — `Generator` с именованными ключами в `yield`, имя — `provide<TestName>Cases`.
-- Ассерты через `$this->`; проверяемое значение сначала в переменную, без вызовов внутри ассерта.
-- Моки `readonly`-классов PHPUnit создаёт сам; `final` с классов `src/` снимает на лету `dg/bypass-finals` (расширение в `phpunit.xml.dist`), файлы на диске не меняются. Внутри тестов чтение файлов `src/` через PHP возвращает код уже без `final`.
-- **Playwright**: сценарии регистрируются в `tests/EndToEnd/Playwright/tests.ts` (порядок важен: создание → редактирование → проверки данных → удаление), общие страницы — `page/`, данные — `fixtures/`. Проверки чтения данных (`test/data/`) не завязываются на конкретное содержимое базы: целостность пагинации, совпадение списка и детали, «записали — прочитали». Запуск — `docker compose exec node npx playwright test`.
-- Тест, который ловит найденный баг, не ослабляется под текущее поведение — исправляется код.
+- `tests/Unit` — without kernel and DB (`TestCase`, `createStub()`); `tests/Integration`, `tests/Functional` — with kernel; `tests/Mock` — helper classes; `tests/EndToEnd/Playwright` — E2E.
+- Test structure mirrors `src/`: `tests/Unit/Domain/<Domain>/Repository/XxxQueryBuilderTest.php`.
+- Data provider — `Generator` with named keys in `yield`, name — `provide<TestName>Cases`.
+- Assertions via `$this->`; the checked value goes into a variable first, no calls inside the assertion.
+- PHPUnit creates mocks of `readonly` classes itself; `final` on `src/` classes is stripped on the fly by `dg/bypass-finals` (extension in `phpunit.xml.dist`), files on disk are not changed. Inside tests, reading `src/` files via PHP returns code already without `final`.
+- **Playwright**: scenarios are registered in `tests/EndToEnd/Playwright/tests.ts` (order matters: create → edit → data checks → delete), shared pages — `page/`, data — `fixtures/`. Data read checks (`test/data/`) do not depend on specific database content: pagination integrity, list matches detail, "write — read back". Run — `docker compose exec node npx playwright test`.
+- A test that catches a found bug is not weakened to match current behavior — the code is fixed.
 
-## Команды
+## Commands
 
 - `composer cs-fixer` / `composer cs-fixer-check`, `composer phpstan`.
-- `composer test-unit`, `composer test-integration`, `composer test-all`, `composer test-web`; весь набор — `vendor/bin/phpunit --testsuite tests`.
-- `npm run playwright:test` (в контейнере `node`).
-- Переиндексация: `bin/console fos:elastica:populate` (dev), `APP_ENV=test bin/console fos:elastica:populate -e test` (тестовые индексы).
-- Всё запускается в контейнере: `docker compose exec php ...`, `docker compose exec node ...`.
-- **Контроль ресурсов** (WSL: 10 ГБ памяти, 5 ядер): PHPUnit, PHPStan, Playwright и сборки запускать в фоне, а во время прогона каждые несколько секунд проверять диск (`/proc/diskstats`), память (`MemAvailable` в `/proc/meminfo`) и CPU контейнеров (`docker stats --no-stream`). Прогон останавливать сразу, если обмен с диском держится выше 100 МБ/с три замера подряд (в нормальном прогоне PHPUnit — до ~20 МБ/с), свободной памяти меньше 1,5 ГБ или контейнер `supervisor` выше 150% CPU; потом искать причину, а не перезапускать. Высокий CPU у `supervisor` обычно значит, что воркеры Messenger падают при старте (сломан контейнер Symfony) и перезапускаются по кругу — проверить `docker compose exec supervisor tail /var/log/supervisor/supervisord.log` и `bin/console lint:container`. Покрытие (`bin/phpunit.sh` с pcov) без необходимости не включать — для проверки достаточно `vendor/bin/phpunit`.
+- `composer test-unit`, `composer test-integration`, `composer test-all`, `composer test-web`; full suite — `vendor/bin/phpunit --testsuite tests`.
+- `npm run playwright:test` (in the `node` container).
+- Reindexing: `bin/console fos:elastica:populate` (dev), `APP_ENV=test bin/console fos:elastica:populate -e test` (test indexes).
+- Everything runs in containers: `docker compose exec php ...`, `docker compose exec node ...`.
+- **Resource control** (WSL: 10 GB memory, 5 cores): run PHPUnit, PHPStan, Playwright and builds in the background, and during the run check disk (`/proc/diskstats`), memory (`MemAvailable` in `/proc/meminfo`) and container CPU (`docker stats --no-stream`) every few seconds. Stop the run immediately if disk I/O stays above 100 MB/s for three consecutive samples (a normal PHPUnit run is up to ~20 MB/s), free memory drops below 1.5 GB, or the `supervisor` container goes above 150% CPU; then look for the cause instead of restarting. High CPU on `supervisor` usually means Messenger workers crash on startup (broken Symfony container) and restart in a loop — check `docker compose exec supervisor tail /var/log/supervisor/supervisord.log` and `bin/console lint:container`. Do not enable coverage (`bin/phpunit.sh` with pcov) unless needed — `vendor/bin/phpunit` is enough for verification.
 
-## Коммиты
+## Commits
 
-- Сообщение — одна короткая строка `<Area> - <what>` (до ~70 символов), без перечисления изменений и без строк `Co-Authored-By`.
-- В коммит входят все изменённые файлы, включая lock-файлы.
-- Коммиты делаются только по просьбе пользователя.
+- Message — one short line `<Area> - <what>` (up to ~70 characters), without listing changes and without `Co-Authored-By` lines.
+- A commit includes all changed files, including lock files.
+- Commits are made only when the user asks.
 
-## Принципы внесения изменений
+## Change Principles
 
-- **Минимализм**: точечные изменения без лишних абстракций; новый код повторяет устройство соседних доменов (Controller → Handle → Facade → Repository/QueryBuilder).
-- Каждое изменение проверяется: PHPUnit, PHPStan, php-cs-fixer, при изменении страниц — Playwright; для изменений чтения данных — сравнение ответов до и после.
-- Тесты создаются только по запросу пользователя.
-- Новые исключения в `phpstan-baseline.neon` — только с явного подтверждения пользователя.
+- **Minimalism**: targeted changes without extra abstractions; new code follows the structure of neighboring domains (Controller → Handle → Facade → Repository/QueryBuilder).
+- Every change is verified: PHPUnit, PHPStan, php-cs-fixer, Playwright when pages change; for data read changes — compare responses before and after.
+- Tests are created only at the user's request.
+- New exceptions in `phpstan-baseline.neon` — only with explicit user confirmation.
+- **Language**: documentation and instructions for agents (`AGENTS.md`, etc.) are written in English.
