@@ -28,7 +28,7 @@ use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
@@ -215,7 +215,7 @@ class Media
     public function setUploadMedia(?UploadedFile $uploadMedia): void
     {
         $this->uploadMedia = $uploadMedia;
-        $this->setUpdatedAt(new DateTime);
+        $this->setUpdatedAt(new DateTimeImmutable);
     }
 
     public function getUploadMedia(): ?UploadedFile
