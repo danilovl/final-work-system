@@ -22,6 +22,9 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class EventDetailDTO
 {
+    /**
+     * @param CommentDTO[] $comment
+     */
     public function __construct(
         #[Groups(['event:read'])]
         public int $id,
@@ -39,6 +42,7 @@ readonly class EventDetailDTO
         public ?EventAddressDTO $address = null,
         #[Groups(['event:event-participant:read'])]
         public ?EventParticipantDTO $participant = null,
+        /** @var CommentDTO[] */
         #[Map(target: CommentDTO::class)]
         #[Groups(['event:comment:read'])]
         public array $comment = []
