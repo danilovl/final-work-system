@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkType\Bus\Query\WorkType;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\WorkType\Facade\WorkTypeFacade;
 
 readonly class GetWorkTypeQueryHandler implements QueryHandlerInterface
