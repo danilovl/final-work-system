@@ -243,6 +243,8 @@ readonly class ConversationController
     )]
     public function listWorkMessage(Request $request, Work $work): JsonResponse
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
+
         return $this->conversationWorkMessageListHandle->__invoke($request, $work);
     }
 
@@ -265,6 +267,8 @@ readonly class ConversationController
     )]
     public function conversationWork(Request $request, Work $work): JsonResponse
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
+
         return $this->conversationWorkHandle->__invoke($request, $work);
     }
 
