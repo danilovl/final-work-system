@@ -5,6 +5,10 @@ framework:
     cookie_secure: false
     cookie_samesite: lax
     cookie_lifetime: 43200
+  csrf_protection:
+    stateless_token_ids:
+      - ajax
+      - action_form
   php_errors:
     log: true
   cache:
