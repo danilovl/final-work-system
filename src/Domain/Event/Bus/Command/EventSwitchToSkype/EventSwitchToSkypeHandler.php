@@ -12,24 +12,28 @@
 
 namespace App\Domain\Event\Bus\Command\EventSwitchToSkype;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Application\Interfaces\Bus\{CommandHandlerInterface, QueryBusInterface};
+use App\Domain\EventAddress\Bus\Query\SkypeEventAddress\{GetSkypeEventAddressQuery, GetSkypeEventAddressQueryResult};
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
-use App\Domain\EventAddress\Facade\EventAddressFacade;
 
 readonly class EventSwitchToSkypeHandler implements CommandHandlerInterface
 {
     public function __construct(
         private EntityManagerService $entityManagerService,
-        private EventAddressFacade $eventAddressFacade,
+        private QueryBusInterface $queryBus,
         private EventEventDispatcher $eventEventDispatcher
     ) {}
 
     public function __invoke(EventSwitchToSkypeCommand $command): ?Event
     {
         $event = $command->event;
-        $eventAddressSkype = $this->eventAddressFacade->findSkypeByOwner($event->getOwner());
+        $eventOwner = $event->getOwner();
+        $getSkypeEventAddressQuery = GetSkypeEventAddressQuery::create($eventOwner);
+        /** @var GetSkypeEventAddressQueryResult $getSkypeEventAddressQueryResult */
+        $getSkypeEventAddressQueryResult = $this->queryBus->handle($getSkypeEventAddressQuery);
+        $eventAddressSkype = $getSkypeEventAddressQueryResult->eventAddress;
 
         if ($eventAddressSkype === null) {
             return null;

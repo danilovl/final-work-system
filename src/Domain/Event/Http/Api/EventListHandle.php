@@ -15,28 +15,37 @@ namespace App\Domain\Event\Http\Api;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Work\Service\WorkDetailTabService;
-use App\Application\Constant\TabTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use App\Domain\Event\Facade\EventFacade;
+use App\Infrastructure\Service\PaginatorService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 readonly class EventListHandle
 {
     public function __construct(
-        private WorkDetailTabService $workDetailTabService,
+        private EventFacade $eventFacade,
+        private PaginatorService $paginatorService,
+        private ParameterServiceInterface $parameterService,
         private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
     {
-        $pagination = $this->workDetailTabService->getTabPagination(
+        $query = $this->eventFacade->queryByWork($work);
+        $page = $this->parameterService->getInt('pagination.work_detail_tab.event.page');
+        $limit = $this->parameterService->getInt('pagination.work_detail_tab.event.limit');
+
+        $pagination = $this->paginatorService->createPaginationRequest(
             request: $request,
-            tab: TabTypeConstant::TAB_EVENT->value,
-            work: $work,
-            isApi: true
+            target: $query,
+            page: $page,
+            limit: $limit,
+            options: [PaginatorInterface::DISTINCT => true]
         );
 
         $events = [];

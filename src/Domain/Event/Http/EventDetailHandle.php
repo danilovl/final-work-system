@@ -12,17 +12,17 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\Comment\Bus\Query\EventComment\{GetEventCommentQuery, GetEventCommentQueryResult};
+use App\Domain\EventAddress\Bus\Query\SkypeEventAddress\{GetSkypeEventAddressQuery, GetSkypeEventAddressQueryResult};
 use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };
 use App\Domain\Comment\Bus\Command\CreateComment\CreateCommentCommand;
-use App\Domain\Comment\Facade\CommentFacade;
 use App\Domain\Comment\Form\CommentForm;
 use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
-use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -36,10 +36,9 @@ readonly class EventDetailHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private CommentFacade $commentFacade,
+        private QueryBusInterface $queryBus,
         private SeoPageService $seoPageService,
         private FormFactoryInterface $formFactory,
-        private EventAddressFacade $eventAddressFacade,
         private FormDeleteFactory $formDeleteFactory,
         private CommandBusInterface $commandBus
     ) {}
@@ -47,8 +46,13 @@ readonly class EventDetailHandle
     public function __invoke(Request $request, Event $event): Response
     {
         $user = $this->userService->getUser();
-        $eventCommentExist = $this->commentFacade
-            ->findByOwnerEvent($user, $event);
+        $getEventCommentQuery = GetEventCommentQuery::create(
+            user: $user,
+            event: $event
+        );
+        /** @var GetEventCommentQueryResult $getEventCommentQueryResult */
+        $getEventCommentQueryResult = $this->queryBus->handle($getEventCommentQuery);
+        $eventCommentExist = $getEventCommentQueryResult->comment;
 
         $eventCommentModel = new CommentModel(owner: $user, event: $event);
 
@@ -68,8 +72,11 @@ readonly class EventDetailHandle
             $this->commandBus->dispatch($command);
         }
 
-        $eventAddressSkype = $this->eventAddressFacade
-            ->findSkypeByOwner($event->getOwner());
+        $eventOwner = $event->getOwner();
+        $getSkypeEventAddressQuery = GetSkypeEventAddressQuery::create($eventOwner);
+        /** @var GetSkypeEventAddressQueryResult $getSkypeEventAddressQueryResult */
+        $getSkypeEventAddressQueryResult = $this->queryBus->handle($getSkypeEventAddressQuery);
+        $eventAddressSkype = $getSkypeEventAddressQueryResult->eventAddress;
 
         $this->seoPageService->setTitle($event->toString());
 

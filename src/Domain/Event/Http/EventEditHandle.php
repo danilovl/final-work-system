@@ -12,7 +12,8 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\EventParticipant\Bus\Query\EventParticipantsByUserEvent\{GetEventParticipantsByUserEventQuery, GetEventParticipantsByUserEventQueryResult};
 use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService,
@@ -21,7 +22,6 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\Event\Bus\Command\EditEvent\EditEventCommand;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\User\Service\UserService;
@@ -43,7 +43,7 @@ readonly class EventEditHandle
         private SeoPageService $seoPageService,
         private FormFactoryInterface $formFactory,
         private HashidsServiceInterface $hashidsService,
-        private EventParticipantFacade $eventParticipantFacade,
+        private QueryBusInterface $queryBus,
         private RouterInterface $router,
         private CommandBusInterface $commandBus
     ) {}
@@ -51,8 +51,13 @@ readonly class EventEditHandle
     public function __invoke(Request $request, Event $event): Response
     {
         $user = $this->userService->getUser();
-        $eventParticipantArray = $this->eventParticipantFacade
-            ->listByUserEvent($user, $event);
+        $getEventParticipantsByUserEventQuery = GetEventParticipantsByUserEventQuery::create(
+            user: $user,
+            event: $event
+        );
+        /** @var GetEventParticipantsByUserEventQueryResult $getEventParticipantsByUserEventQueryResult */
+        $getEventParticipantsByUserEventQueryResult = $this->queryBus->handle($getEventParticipantsByUserEventQuery);
+        $eventParticipantArray = $getEventParticipantsByUserEventQueryResult->eventParticipants;
 
         $eventModel = EventModel::fromEvent($event);
         $eventModel->setActualParticipant($eventParticipantArray);

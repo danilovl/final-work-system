@@ -17,18 +17,18 @@ use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Model\EventModel;
-use App\Domain\EventAddress\Facade\EventAddressFacade;
-use App\Domain\EventType\Facade\EventTypeFacade;
 use App\Domain\User\Service\UserService;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use DateTimeZone;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\EventType\Bus\Query\EventType\{GetEventTypeQuery, GetEventTypeQueryResult};
+use App\Domain\EventAddress\Bus\Query\EventAddress\{GetEventAddressQuery, GetEventAddressQueryResult};
 
 readonly class EventCreateHandle
 {
     public function __construct(
-        private EventTypeFacade $eventTypeFacade,
-        private EventAddressFacade $eventAddressFacade,
+        private QueryBusInterface $queryBus,
         private UserService $userService,
         private EventFactory $eventFactory,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
@@ -39,14 +39,20 @@ readonly class EventCreateHandle
     {
         $user = $this->userService->getUser();
 
-        $eventType = $this->eventTypeFacade->findById($input->typeId);
+        $getEventTypeQuery = GetEventTypeQuery::create($input->typeId);
+        /** @var GetEventTypeQueryResult $getEventTypeQueryResult */
+        $getEventTypeQueryResult = $this->queryBus->handle($getEventTypeQuery);
+        $eventType = $getEventTypeQueryResult->eventType;
         if ($eventType === null) {
             throw new NotFoundHttpException('Event type not found');
         }
 
         $eventAddress = null;
         if ($input->addressId !== null) {
-            $eventAddress = $this->eventAddressFacade->findById($input->addressId);
+            $getEventAddressQuery = GetEventAddressQuery::create($input->addressId);
+            /** @var GetEventAddressQueryResult $getEventAddressQueryResult */
+            $getEventAddressQueryResult = $this->queryBus->handle($getEventAddressQuery);
+            $eventAddress = $getEventAddressQueryResult->eventAddress;
             if ($eventAddress === null) {
                 throw new NotFoundHttpException('Event address not found');
             }

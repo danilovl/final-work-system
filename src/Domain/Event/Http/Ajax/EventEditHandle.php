@@ -14,14 +14,14 @@ namespace App\Domain\Event\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\EventParticipant\Bus\Query\EventParticipantsByUserEvent\{GetEventParticipantsByUserEventQuery, GetEventParticipantsByUserEventQueryResult};
 use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService
 };
 use App\Domain\Event\Bus\Command\EditEvent\EditEventCommand;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\User\Service\UserService;
@@ -38,15 +38,20 @@ readonly class EventEditHandle
         private UserService $userService,
         private EntityManagerService $entityManagerService,
         private FormFactoryInterface $formFactory,
-        private EventParticipantFacade $eventParticipantFacade,
+        private QueryBusInterface $queryBus,
         private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Event $event): JsonResponse
     {
         $user = $this->userService->getUser();
-        $eventParticipantArray = $this->eventParticipantFacade
-            ->listByUserEvent($user, $event);
+        $getEventParticipantsByUserEventQuery = GetEventParticipantsByUserEventQuery::create(
+            user: $user,
+            event: $event
+        );
+        /** @var GetEventParticipantsByUserEventQueryResult $getEventParticipantsByUserEventQueryResult */
+        $getEventParticipantsByUserEventQueryResult = $this->queryBus->handle($getEventParticipantsByUserEventQuery);
+        $eventParticipantArray = $getEventParticipantsByUserEventQueryResult->eventParticipants;
 
         $eventModel = EventModel::fromEvent($event);
         $eventModel->setActualParticipant($eventParticipantArray);

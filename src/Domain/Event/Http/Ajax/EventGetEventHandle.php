@@ -15,10 +15,7 @@ namespace App\Domain\Event\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\Facade\{
-    EventFacade,
-    EventCalendarFacade
-};
+use App\Domain\Event\Facade\EventFacade;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\RequestService;
 use DateTimeImmutable;
@@ -26,6 +23,8 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\EventCalendar\Bus\Query\UserEventsCalendar\{GetUserEventsCalendarQuery, GetUserEventsCalendarQueryResult};
 
 readonly class EventGetEventHandle
 {
@@ -33,7 +32,7 @@ readonly class EventGetEventHandle
         private RequestService $requestService,
         private UserService $userService,
         private EventFacade $eventFacade,
-        private EventCalendarFacade $eventCalendarFacade
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request, Event $event): JsonResponse
@@ -55,8 +54,13 @@ readonly class EventGetEventHandle
             $userEvents = $this->eventFacade->listByParticipant($mediaData);
         }
 
-        $events = $this->eventCalendarFacade
-            ->convertUserEventsToArray($event, $userEvents);
+        $getUserEventsCalendarQuery = GetUserEventsCalendarQuery::create(
+            event: $event,
+            userEvents: $userEvents
+        );
+        /** @var GetUserEventsCalendarQueryResult $getUserEventsCalendarQueryResult */
+        $getUserEventsCalendarQueryResult = $this->queryBus->handle($getUserEventsCalendarQuery);
+        $events = $getUserEventsCalendarQueryResult->events;
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS, [
             'events' => $events
