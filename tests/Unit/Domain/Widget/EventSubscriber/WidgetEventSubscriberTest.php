@@ -16,24 +16,26 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use App\Domain\Widget\EventSubscriber\WidgetEventSubscriber;
 use App\Domain\Widget\Service\WidgetManagerService;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class WidgetEventSubscriberTest extends TestCase
 {
-    private MockObject&WidgetManagerService $widgetManagerService;
+    private WidgetManagerService $widgetManagerService;
 
     private WidgetEventSubscriber $subscriber;
 
     protected function setUp(): void
     {
-        $this->widgetManagerService = $this->createMock(WidgetManagerService::class);
+        $this->widgetManagerService = $this->createStub(WidgetManagerService::class);
 
         $this->subscriber = new WidgetEventSubscriber($this->widgetManagerService);
     }
 
     public function testOnGroupReorder(): void
     {
+        $this->widgetManagerService = $this->createMock(WidgetManagerService::class);
+        $this->subscriber = new WidgetEventSubscriber($this->widgetManagerService);
+
         $event = new WidgetGenericGenericEvent;
         $event->groupName = 'group';
         $event->groupWidgets = [];
