@@ -80,7 +80,10 @@ abstract class AbstractAjaxJsonRequest
             $handleResult = $this->handle($this->getRequest());
 
             if ($handleResult === false) {
-                $this->sendJsonResponse(notifyMessage: $this->getNotifyMessage());
+                $this->sendJsonResponse(
+                    errors: [],
+                    notifyMessage: $this->getNotifyMessage()
+                );
             }
 
             if ($handleResult === true) {
@@ -104,7 +107,10 @@ abstract class AbstractAjaxJsonRequest
             return;
         }
 
-        $this->sendJsonResponse($errors, $this->getNotifyMessage());
+        $this->sendJsonResponse(
+            errors: $errors,
+            notifyMessage: $this->getNotifyMessage()
+        );
     }
 
     protected function sendJsonResponse(
@@ -112,7 +118,11 @@ abstract class AbstractAjaxJsonRequest
         array $notifyMessage = [],
         bool $send = true
     ): void {
-        $response = $this->createJsonResponse(false, $errors, $notifyMessage);
+        $response = $this->createJsonResponse(
+            valid: false,
+            errors: $errors,
+            notifyMessage: $notifyMessage
+        );
 
         if ($send) {
             $response->send();
