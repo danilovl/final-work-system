@@ -71,6 +71,10 @@ class WorkCategoryFormFactory
                 throw new ConstantNotFoundException('Controller method type not found');
         }
 
-        return $this->formFactory->create(WorkCategoryForm::class, $workCategoryModel, $parameters);
+        return $this->formFactory->create(
+            type: WorkCategoryForm::class,
+            data: $workCategoryModel,
+            options: $parameters
+        );
     }
 }
