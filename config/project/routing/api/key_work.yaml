@@ -13,3 +13,9 @@ api_key_get_work_detail:
   defaults:
     _controller: App\Domain\Work\Controller\Api\WorkController::detail
   methods: [GET]
+
+api_key_post_work_create:
+  path: /create
+  defaults:
+    _controller: App\Domain\Work\Controller\Api\WorkController::create
+  methods: [POST]
