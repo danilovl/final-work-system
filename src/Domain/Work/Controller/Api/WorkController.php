@@ -13,12 +13,15 @@
 namespace App\Domain\Work\Controller\Api;
 
 use App\Domain\Work\DTO\Api\WorkDTO;
-use App\Domain\Work\DTO\Api\Input\WorkInput;
+use App\Domain\Work\DTO\Api\Input\{
+    WorkInput,
+    WorkSearchInput
+};
 use App\Domain\Work\Entity\Work;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpKernel\Attribute\{
-    MapQueryParameter,
+    MapQueryString,
     MapRequestPayload
 };
 use App\Domain\Work\Http\Api\{
@@ -42,7 +45,7 @@ readonly class WorkController
 
     #[OA\Get(
         path: '/api/key/works/{type}',
-        description: 'Retrieves paginated list of works for the current user filtered by relation type.',
+        description: 'Retrieves paginated list of works for the current user filtered by relation type and optional search criteria (matching WorkSearchForm: title, shortcut, status, type, author, supervisor, opponent, consultant, deadline).',
         summary: 'List works'
     )]
     #[OA\Parameter(
@@ -53,11 +56,67 @@ readonly class WorkController
         schema: new OA\Schema(type: 'string', enum: ['author', 'opponent', 'consultant', 'supervisor'])
     )]
     #[OA\Parameter(
-        name: 'search',
-        description: 'Search term to filter works by title',
+        name: 'title',
+        description: 'Filter works by title',
         in: 'query',
         required: false,
         schema: new OA\Schema(type: 'string')
+    )]
+    #[OA\Parameter(
+        name: 'shortcut',
+        description: 'Filter works by shortcut',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'string')
+    )]
+    #[OA\Parameter(
+        name: 'status',
+        description: 'Filter works by status ID(s)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'integer'))
+    )]
+    #[OA\Parameter(
+        name: 'type',
+        description: 'Filter works by work type ID(s)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'integer'))
+    )]
+    #[OA\Parameter(
+        name: 'author',
+        description: 'Filter works by author user ID(s)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'integer'))
+    )]
+    #[OA\Parameter(
+        name: 'supervisor',
+        description: 'Filter works by supervisor user ID(s)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'integer'))
+    )]
+    #[OA\Parameter(
+        name: 'opponent',
+        description: 'Filter works by opponent user ID(s)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'integer'))
+    )]
+    #[OA\Parameter(
+        name: 'consultant',
+        description: 'Filter works by consultant user ID(s)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'integer'))
+    )]
+    #[OA\Parameter(
+        name: 'deadline',
+        description: 'Filter works by deadline date string(s) (YYYY-MM-DD)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'array', items: new OA\Items(type: 'string', format: 'date'))
     )]
     #[OA\Parameter(
         name: 'page',
@@ -93,9 +152,13 @@ readonly class WorkController
     public function list(
         Request $request,
         string $type,
-        #[MapQueryParameter] ?string $search = null
+        #[MapQueryString] ?WorkSearchInput $workSearchInput = null
     ): JsonResponse {
-        return $this->workListHandle->__invoke($request, $type, $search);
+        return $this->workListHandle->__invoke(
+            request: $request,
+            type: $type,
+            workSearchInput: $workSearchInput
+        );
     }
 
     #[OA\Get(

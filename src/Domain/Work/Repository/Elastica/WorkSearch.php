@@ -13,6 +13,7 @@
 namespace App\Domain\Work\Repository\Elastica;
 
 use App\Application\Constant\DateFormatConstant;
+use App\Application\Traits\Repository\Elastica\ElasticaSearchTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
@@ -23,6 +24,8 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 
 readonly class WorkSearch
 {
+    use ElasticaSearchTrait;
+
     public function __construct(private TransformedFinder $transformedFinderWork) {}
 
     /**
@@ -114,7 +117,13 @@ readonly class WorkSearch
                         $filedValues[] = $item;
                     } elseif (is_object($item) && method_exists($item, 'getId')) {
                         $filedValues[] = $item->getId();
+                    } elseif (is_scalar($item)) {
+                        $filedValues[] = is_numeric($item) ? (int) $item : $item;
                     }
+                }
+
+                if (count($filedValues) === 0) {
+                    continue;
                 }
 
                 if ($field === 'deadline') {
@@ -140,8 +149,29 @@ readonly class WorkSearch
                     ];
                 }
             } elseif (is_string($value)) {
+                $trimmedValue = mb_trim($value);
+                if ($trimmedValue === '') {
+                    continue;
+                }
+
                 $filter['must'][] = [
-                    'match' => [$field => $value]
+                    'wildcard' => [
+                        $field => '*' . $this->transformSearch($trimmedValue) . '*'
+                    ]
+                ];
+            } elseif (in_array($field, ['status', 'type', 'author', 'supervisor', 'opponent', 'consultant'], true)) {
+                $id = is_object($value) && method_exists($value, 'getId') ? $value->getId() : $value;
+                if (is_numeric($id)) {
+                    $id = (int) $id;
+                }
+
+                $filter['must'][] = [
+                    'nested' => [
+                        'path' => $field,
+                        'query' => [
+                            'term' => ["{$field}.id" => $id]
+                        ]
+                    ]
                 ];
             } else {
                 $filter['must'][] = [

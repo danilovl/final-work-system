@@ -18,6 +18,7 @@ use App\Domain\Work\Bus\Query\WorkList\{
     GetWorkListQuery,
     GetWorkListQueryResult
 };
+use App\Domain\Work\DTO\Api\Input\WorkSearchInput;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -32,13 +33,24 @@ readonly class WorkListHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function __invoke(Request $request, string $type, ?string $search = null): JsonResponse
-    {
+    public function __invoke(
+        Request $request,
+        string $type,
+        ?WorkSearchInput $workSearchInput = null
+    ): JsonResponse {
         $user = $this->userService->getUser();
 
+        if ($workSearchInput?->page !== null) {
+            $request->query->set('page', (string) $workSearchInput->page);
+        }
+        if ($workSearchInput?->limit !== null) {
+            $request->query->set('limit', (string) $workSearchInput->limit);
+        }
+
         $searchParams = [];
-        if ($search !== null) {
-            $searchParams = ['title' => $search];
+        if ($workSearchInput !== null) {
+            $searchParams = $workSearchInput->toArray();
+            unset($searchParams[$type]);
         }
 
         $query = GetWorkListQuery::create(
