@@ -13,7 +13,7 @@
 namespace App\Domain\Conversation\Http\Api;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Domain\Conversation\Bus\Command\ChangeReadMessageStatus\ChangeReadMessageStatusCommand;
+use App\Domain\ConversationMessageStatus\Bus\Command\ChangeReadMessageStatus\ChangeReadMessageStatusCommand;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{

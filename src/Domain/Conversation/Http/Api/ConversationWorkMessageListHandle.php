@@ -12,22 +12,27 @@
 
 namespace App\Domain\Conversation\Http\Api;
 
-use App\Application\Constant\TabTypeConstant;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Service\WorkDetailTabService;
 use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\Factory\WorkConversationMessageDTOFactory;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByWorkUser\{GetConversationMessageQueryByWorkUserQuery, GetConversationMessageQueryByWorkUserQueryResult};
+use App\Infrastructure\Service\PaginatorService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 readonly class ConversationWorkMessageListHandle
 {
     public function __construct(
         private UserService $userService,
-        private WorkDetailTabService $workDetailTabService,
+        private QueryBusInterface $queryBus,
+        private PaginatorService $paginatorService,
+        private ParameterServiceInterface $parameterService,
         private WorkConversationMessageDTOFactory $workConversationMessageDTOFactory,
         private ConversationStatusService $conversationStatusService
     ) {}
@@ -35,12 +40,24 @@ readonly class ConversationWorkMessageListHandle
     public function __invoke(Request $request, Work $work): JsonResponse
     {
         $user = $this->userService->getUser();
-        $pagination = $this->workDetailTabService->getTabPagination(
-            request: $request,
-            tab: TabTypeConstant::TAB_MESSAGE->value,
+
+        $getConversationMessageQueryByWorkUserQuery = GetConversationMessageQueryByWorkUserQuery::create(
             work: $work,
-            user: $user,
-            isApi: true
+            user: $user
+        );
+        /** @var GetConversationMessageQueryByWorkUserQueryResult $getConversationMessageQueryByWorkUserQueryResult */
+        $getConversationMessageQueryByWorkUserQueryResult = $this->queryBus->handle($getConversationMessageQueryByWorkUserQuery);
+        $query = $getConversationMessageQueryByWorkUserQueryResult->query;
+
+        $page = $this->parameterService->getInt('pagination.work_detail_tab.message.page');
+        $limit = $this->parameterService->getInt('pagination.work_detail_tab.message.limit');
+
+        $pagination = $this->paginatorService->createPaginationRequest(
+            request: $request,
+            target: $query,
+            page: $page,
+            limit: $limit,
+            options: [PaginatorInterface::DISTINCT => true]
         );
 
         $messages = [];

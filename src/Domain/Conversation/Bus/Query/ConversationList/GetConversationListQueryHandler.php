@@ -13,30 +13,29 @@
 namespace App\Domain\Conversation\Bus\Query\ConversationList;
 
 use App\Domain\Conversation\Repository\Elastica\ElasticaConversationRepository;
-use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\Facade\{
-    ConversationFacade,
-    ConversationMessageFacade
-};
+use App\Domain\Conversation\Facade\ConversationFacade;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ConversationMessage\Bus\Query\LastByConversationIds\{GetLastByConversationIdsQuery, GetLastByConversationIdsQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\CountsByConversationIds\{GetCountsByConversationIdsQuery, GetCountsByConversationIdsQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\ConversationIdsByParticipantAndSearch\{GetConversationIdsByParticipantAndSearchQuery, GetConversationIdsByParticipantAndSearchQueryResult};
 
 #[AsMessageHandler]
 readonly class GetConversationListQueryHandler
 {
     public function __construct(
         private ConversationFacade $conversationFacade,
-        private ConversationMessageFacade $conversationMessageFacade,
+        private QueryBusInterface $queryBus,
         private PaginatorService $paginatorService,
         private ElasticaConversationRepository $elasticaConversationRepository,
-        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
         private EntityManagerService $entityManagerService,
         private ParameterServiceInterface $parameterService
     ) {}
@@ -55,8 +54,13 @@ readonly class GetConversationListQueryHandler
         $conversationsQuery = $this->conversationFacade->queryAllByParticipantUserTypes($user, $types);
 
         if ($query->search) {
-            $messageConversationIds = $this->elasticaConversationMessageRepository
-                ->getConversationIdsByParticipantAndSearch($user, $query->search);
+            $getConversationIdsByParticipantAndSearchQuery = GetConversationIdsByParticipantAndSearchQuery::create(
+                user: $user,
+                search: $query->search
+            );
+            /** @var GetConversationIdsByParticipantAndSearchQueryResult $getConversationIdsByParticipantAndSearchQueryResult */
+            $getConversationIdsByParticipantAndSearchQueryResult = $this->queryBus->handle($getConversationIdsByParticipantAndSearchQuery);
+            $messageConversationIds = $getConversationIdsByParticipantAndSearchQueryResult->ids;
 
             $conversationIds = $this->elasticaConversationRepository
                 ->getIdsByParticipantAndSearch($user, $messageConversationIds, $query->search);
@@ -80,8 +84,15 @@ readonly class GetConversationListQueryHandler
             $conversationIds[] = $conversation->getId();
         }
 
-        $messageCounts = $this->conversationMessageFacade->getCountsByConversationIds($conversationIds);
-        $lastMessages = $this->conversationMessageFacade->getLastByConversationIds($conversationIds);
+        $getCountsByConversationIdsQuery = GetCountsByConversationIdsQuery::create($conversationIds);
+        /** @var GetCountsByConversationIdsQueryResult $getCountsByConversationIdsQueryResult */
+        $getCountsByConversationIdsQueryResult = $this->queryBus->handle($getCountsByConversationIdsQuery);
+        $messageCounts = $getCountsByConversationIdsQueryResult->counts;
+
+        $getLastByConversationIdsQuery = GetLastByConversationIdsQuery::create($conversationIds);
+        /** @var GetLastByConversationIdsQueryResult $getLastByConversationIdsQueryResult */
+        $getLastByConversationIdsQueryResult = $this->queryBus->handle($getLastByConversationIdsQuery);
+        $lastMessages = $getLastByConversationIdsQueryResult->messages;
 
         return new GetConversationListQueryResult(
             conversations: $pagination,

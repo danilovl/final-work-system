@@ -31,16 +31,20 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessage\{GetConversationMessageQuery, GetConversationMessageQueryResult};
+use App\Domain\ConversationMessageStatus\Bus\Command\CreateConversationMessageStatus\CreateConversationMessageStatusCommand;
 
 readonly class ConversationFacade
 {
     public function __construct(
         private EntityManagerService $entityManagerService,
-        private ConversationMessageFacade $conversationMessageFacade,
+        private QueryBusInterface $queryBus,
         private ConversationVariationService $conversationVariationService,
         private ConversationEventDispatcher $conversationEventDispatcher,
         private ConversationFactory $conversationFactory,
-        private ConversationRepository $conversationRepository
+        private ConversationRepository $conversationRepository,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function queryAllByParticipantUser(User $user): Query
@@ -193,18 +197,22 @@ readonly class ConversationFacade
                 content: $content
             );
 
-            $this->conversationFactory->createConversationMessageStatus(
+            $createConversationMessageStatusCommand = CreateConversationMessageStatusCommand::create(
                 conversation: $newConversation,
                 message: $conversationMessage,
                 user: $user,
                 participants: $conversationParticipantArray,
                 type: ConversationMessageStatusTypeConstant::UNREAD->value
             );
+            $this->commandBus->dispatch($createConversationMessageStatusCommand);
 
             $this->entityManagerService->clear();
 
-            $message = $this->conversationMessageFacade
-                ->getConversationMessage($conversationMessage->getId());
+            $conversationMessageId = $conversationMessage->getId();
+            $getConversationMessageQuery = GetConversationMessageQuery::create($conversationMessageId);
+            /** @var GetConversationMessageQueryResult $getConversationMessageQueryResult */
+            $getConversationMessageQueryResult = $this->queryBus->handle($getConversationMessageQuery);
+            $message = $getConversationMessageQueryResult->conversationMessage;
 
             $this->conversationEventDispatcher->onConversationMessageCreate($message);
         } else {
@@ -223,17 +231,21 @@ readonly class ConversationFacade
                         );
 
                     $participants = $conversation->getParticipants();
-                    $this->conversationFactory->createConversationMessageStatus(
+                    $createConversationMessageStatusCommand = CreateConversationMessageStatusCommand::create(
                         conversation: $conversation,
                         message: $conversationMessage,
                         user: $user,
                         participants: $participants,
                         type: ConversationMessageStatusTypeConstant::UNREAD->value
                     );
+                    $this->commandBus->dispatch($createConversationMessageStatusCommand);
                     $createdNewConversation = true;
 
-                    $message = $this->conversationMessageFacade
-                        ->getConversationMessage($conversationMessage->getId());
+                    $conversationMessageId = $conversationMessage->getId();
+                    $getConversationMessageQuery = GetConversationMessageQuery::create($conversationMessageId);
+                    /** @var GetConversationMessageQueryResult $getConversationMessageQueryResult */
+                    $getConversationMessageQueryResult = $this->queryBus->handle($getConversationMessageQuery);
+                    $message = $getConversationMessageQueryResult->conversationMessage;
 
                     $this->conversationEventDispatcher->onConversationMessageCreate($message);
 
@@ -261,13 +273,14 @@ readonly class ConversationFacade
             $conversationMessage = $this->conversationFactory
                 ->createConversationMessage($newConversation, $user, $content);
 
-            $this->conversationFactory->createConversationMessageStatus(
-                $newConversation,
-                $conversationMessage,
-                $user,
-                $participants,
-                ConversationMessageStatusTypeConstant::UNREAD->value
+            $createConversationMessageStatusCommand = CreateConversationMessageStatusCommand::create(
+                conversation: $newConversation,
+                message: $conversationMessage,
+                user: $user,
+                participants: $participants,
+                type: ConversationMessageStatusTypeConstant::UNREAD->value
             );
+            $this->commandBus->dispatch($createConversationMessageStatusCommand);
 
             $this->entityManagerService->clear();
         }

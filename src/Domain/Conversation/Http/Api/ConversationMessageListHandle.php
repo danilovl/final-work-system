@@ -14,12 +14,10 @@ namespace App\Domain\Conversation\Http\Api;
 
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDetailDTO;
 use App\Domain\ConversationMessage\DTO\Api\Output\ConversationMessageListOutput;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\PaginatorService;
@@ -28,15 +26,18 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByIds\{GetConversationMessageQueryByIdsQuery, GetConversationMessageQueryByIdsQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\MessageIdsByConversationAndSearch\{GetMessageIdsByConversationAndSearchQuery, GetMessageIdsByConversationAndSearchQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByConversation\{GetConversationMessageQueryByConversationQuery, GetConversationMessageQueryByConversationQueryResult};
 
 readonly class ConversationMessageListHandle
 {
     public function __construct(
         private UserService $userService,
-        private ConversationMessageFacade $conversationMessageFacade,
+        private QueryBusInterface $queryBus,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
         private PaginatorService $paginatorService,
-        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
         private ConversationStatusService $conversationStatusService
     ) {}
 
@@ -44,15 +45,25 @@ readonly class ConversationMessageListHandle
     {
         $user = $this->userService->getUser();
 
-        $conversationMessagesQuery = $this->conversationMessageFacade
-            ->queryMessagesByConversation($conversation);
+        $getConversationMessageQueryByConversationQuery = GetConversationMessageQueryByConversationQuery::create($conversation);
+        /** @var GetConversationMessageQueryByConversationQueryResult $getConversationMessageQueryByConversationQueryResult */
+        $getConversationMessageQueryByConversationQueryResult = $this->queryBus->handle($getConversationMessageQueryByConversationQuery);
+        $conversationMessagesQuery = $getConversationMessageQueryByConversationQueryResult->query;
 
         $search ??= '';
         if (!empty(mb_trim($search))) {
-            $conversationMessageIds = $this->elasticaConversationMessageRepository
-                ->getMessageIdsByConversationAndSearch($conversation, $search);
+            $getMessageIdsByConversationAndSearchQuery = GetMessageIdsByConversationAndSearchQuery::create(
+                conversation: $conversation,
+                search: $search
+            );
+            /** @var GetMessageIdsByConversationAndSearchQueryResult $getMessageIdsByConversationAndSearchQueryResult */
+            $getMessageIdsByConversationAndSearchQueryResult = $this->queryBus->handle($getMessageIdsByConversationAndSearchQuery);
+            $conversationMessageIds = $getMessageIdsByConversationAndSearchQueryResult->ids;
 
-            $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
+            $getConversationMessageQueryByIdsQuery = GetConversationMessageQueryByIdsQuery::create($conversationMessageIds);
+            /** @var GetConversationMessageQueryByIdsQueryResult $getConversationMessageQueryByIdsQueryResult */
+            $getConversationMessageQueryByIdsQueryResult = $this->queryBus->handle($getConversationMessageQueryByIdsQuery);
+            $conversationMessagesQuery = $getConversationMessageQueryByIdsQueryResult->query;
         }
 
         $conversationMessagesQuery->setHydrationMode(ConversationMessage::class);

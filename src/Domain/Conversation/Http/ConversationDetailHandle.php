@@ -13,7 +13,10 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Exception\ConstantNotFoundException;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByIds\{GetConversationMessageQueryByIdsQuery, GetConversationMessageQueryByIdsQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\MessageIdsByConversationAndSearch\{GetMessageIdsByConversationAndSearchQuery, GetMessageIdsByConversationAndSearchQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByConversation\{GetConversationMessageQueryByConversationQuery, GetConversationMessageQueryByConversationQueryResult};
 use App\Application\Model\SearchModel;
 use App\Infrastructure\Service\{
     PaginatorService,
@@ -21,14 +24,12 @@ use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };
-use App\Domain\Conversation\Bus\Command\CreateConversationMessage\CreateConversationMessageCommand;
+use App\Domain\ConversationMessage\Bus\Command\CreateConversationMessage\CreateConversationMessageCommand;
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Service\MessageHighlightService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
 use App\Domain\ConversationMessage\Model\ConversationMessageModel;
-use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Web\Form\SimpleSearchForm;
@@ -45,12 +46,11 @@ readonly class ConversationDetailHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private ConversationMessageFacade $conversationMessageFacade,
+        private QueryBusInterface $queryBus,
         private FormFactoryInterface $formFactory,
         private PaginatorService $paginatorService,
         private SeoPageService $seoPageService,
         private MessageHighlightService $messageHighlightService,
-        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
         private CommandBusInterface $commandBus,
         private RequestService $requestService,
         private HashidsServiceInterface $hashidsService
@@ -103,8 +103,10 @@ readonly class ConversationDetailHandle
             ]);
         }
 
-        $conversationMessagesQuery = $this->conversationMessageFacade
-            ->queryMessagesByConversation($conversation);
+        $getConversationMessageQueryByConversationQuery = GetConversationMessageQueryByConversationQuery::create($conversation);
+        /** @var GetConversationMessageQueryByConversationQueryResult $getConversationMessageQueryByConversationQueryResult */
+        $getConversationMessageQueryByConversationQueryResult = $this->queryBus->handle($getConversationMessageQueryByConversationQuery);
+        $conversationMessagesQuery = $getConversationMessageQueryByConversationQueryResult->query;
 
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
@@ -112,10 +114,18 @@ readonly class ConversationDetailHandle
             ->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
-            $conversationMessageIds = $this->elasticaConversationMessageRepository
-                ->getMessageIdsByConversationAndSearch($conversation, $searchModel->search);
+            $getMessageIdsByConversationAndSearchQuery = GetMessageIdsByConversationAndSearchQuery::create(
+                conversation: $conversation,
+                search: $searchModel->search
+            );
+            /** @var GetMessageIdsByConversationAndSearchQueryResult $getMessageIdsByConversationAndSearchQueryResult */
+            $getMessageIdsByConversationAndSearchQueryResult = $this->queryBus->handle($getMessageIdsByConversationAndSearchQuery);
+            $conversationMessageIds = $getMessageIdsByConversationAndSearchQueryResult->ids;
 
-            $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
+            $getConversationMessageQueryByIdsQuery = GetConversationMessageQueryByIdsQuery::create($conversationMessageIds);
+            /** @var GetConversationMessageQueryByIdsQueryResult $getConversationMessageQueryByIdsQueryResult */
+            $getConversationMessageQueryByIdsQueryResult = $this->queryBus->handle($getConversationMessageQueryByIdsQuery);
+            $conversationMessagesQuery = $getConversationMessageQueryByIdsQueryResult->query;
         }
 
         $conversationMessagesQuery->setHydrationMode(ConversationMessage::class);

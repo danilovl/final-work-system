@@ -16,7 +16,6 @@ use App\Application\EventSubscriber\Events;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\User\Service\UserService;
-use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
 use Danilovl\HashidsBundle\Service\HashidsService;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -31,7 +30,6 @@ readonly class MercureSubscriber implements EventSubscriberInterface
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private HashidsService $hashidsService,
-        private UnreadConversationMessageWidget $unreadConversationMessageWidget,
         private HubInterface $hub
     ) {}
 
@@ -39,10 +37,7 @@ readonly class MercureSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::MESSAGE_CREATE => [
-                ['onMessageCreateConversation', -10],
-                ['onMessageCreateUnreadConversationMessageWidget', -10]
-            ]
+            Events::MESSAGE_CREATE => ['onMessageCreateConversation', -10]
         ];
     }
 
@@ -70,27 +65,6 @@ readonly class MercureSubscriber implements EventSubscriberInterface
             $update = new Update(
                 $topics,
                 (string) json_encode(['message' => $message]),
-            );
-
-            $this->hub->publish($update);
-        }
-    }
-
-    public function onMessageCreateUnreadConversationMessageWidget(ConversationMessageGenericEvent $event): void
-    {
-        $user = $this->userService->getUser();
-
-        $conversationMessage = $event->conversationMessage;
-        $participants = $conversationMessage->getConversation()->getParticipantsExceptUsers([$user]);
-
-        foreach ($participants as $participant) {
-            $participantUser = $participant->getUser();
-
-            $update = new Update(
-                'unread-conversation-message-widget/' . $this->hashidsService->encode($participantUser->getId()),
-                (string) json_encode([
-                    'content' => $this->unreadConversationMessageWidget->renderForUser($participantUser)
-                ]),
             );
 
             $this->hub->publish($update);

@@ -12,17 +12,14 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\ConversationType\Bus\Query\ConversationTypeList\{GetConversationTypeListQuery, GetConversationTypeListQueryResult};
 use App\Domain\Conversation\Bus\Command\CreateConversation\CreateConversationCommand;
-use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Infrastructure\Service\{
     RequestService,
     TwigRenderService
 };
-use App\Domain\Conversation\Facade\{
-    ConversationFacade,
-    ConversationMessageFacade
-};
+use App\Domain\Conversation\Facade\ConversationFacade;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Form\ConversationComposeMessageForm;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
@@ -33,6 +30,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Domain\ConversationMessage\Bus\Query\HasUnreadMessagesByRecipient\{GetHasUnreadMessagesByRecipientQuery, GetHasUnreadMessagesByRecipientQueryResult};
 
 readonly class ConversationCreateHandle
 {
@@ -41,9 +39,8 @@ readonly class ConversationCreateHandle
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private ConversationFacade $conversationFacade,
-        private ConversationMessageFacade $conversationMessageFacade,
         private FormFactoryInterface $formFactory,
-        private ConversationTypeFacade $conversationTypeFacade,
+        private QueryBusInterface $queryBus,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -75,10 +72,15 @@ readonly class ConversationCreateHandle
             return $this->requestService->redirectToRoute('conversation_list');
         }
 
-        $isUnreadMessages = $this->conversationMessageFacade
-            ->isUnreadMessagesByRecipient($user);
+        $getHasUnreadMessagesByRecipientQuery = GetHasUnreadMessagesByRecipientQuery::create($user);
+        /** @var GetHasUnreadMessagesByRecipientQueryResult $getHasUnreadMessagesByRecipientQueryResult */
+        $getHasUnreadMessagesByRecipientQueryResult = $this->queryBus->handle($getHasUnreadMessagesByRecipientQuery);
+        $isUnreadMessages = $getHasUnreadMessagesByRecipientQueryResult->hasUnread;
 
-        $conversationTypes = $this->conversationTypeFacade->list();
+        $getConversationTypeListQuery = GetConversationTypeListQuery::create();
+        /** @var GetConversationTypeListQueryResult $getConversationTypeListQueryResult */
+        $getConversationTypeListQueryResult = $this->queryBus->handle($getConversationTypeListQuery);
+        $conversationTypes = $getConversationTypeListQueryResult->conversationTypes;
 
         return $this->twigRenderService->renderToResponse('domain/conversation/create.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,

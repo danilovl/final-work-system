@@ -13,13 +13,13 @@
 namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Domain\Conversation\Bus\Command\UpdateAllToStatus\UpdateAllToStatusCommand;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\ConversationMessage\Bus\Query\HasUnreadMessagesByRecipient\{GetHasUnreadMessagesByRecipientQuery, GetHasUnreadMessagesByRecipientQueryResult};
+use App\Domain\ConversationMessageStatus\Bus\Command\UpdateAllToStatus\UpdateAllToStatusCommand;
 use App\Infrastructure\Service\{
     RequestService,
     EntityManagerService
 };
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Service\UserService;
@@ -31,7 +31,7 @@ readonly class ConversationReadAllHandle
         private RequestService $requestService,
         private UserService $userService,
         private EntityManagerService $entityManagerService,
-        private ConversationMessageFacade $conversationMessageFacade,
+        private QueryBusInterface $queryBus,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -39,8 +39,10 @@ readonly class ConversationReadAllHandle
     {
         $user = $this->userService->getUser();
 
-        $isUnreadExist = $this->conversationMessageFacade
-            ->isUnreadMessagesByRecipient($user);
+        $getHasUnreadMessagesByRecipientQuery = GetHasUnreadMessagesByRecipientQuery::create($user);
+        /** @var GetHasUnreadMessagesByRecipientQueryResult $getHasUnreadMessagesByRecipientQueryResult */
+        $getHasUnreadMessagesByRecipientQueryResult = $this->queryBus->handle($getHasUnreadMessagesByRecipientQuery);
+        $isUnreadExist = $getHasUnreadMessagesByRecipientQueryResult->hasUnread;
 
         if ($isUnreadExist) {
             /** @var ConversationMessageStatusType $conversationMessageStatusType */

@@ -14,13 +14,15 @@ namespace App\Domain\Conversation\Service;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
-use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\EntityManagerService;
 use Symfony\Contracts\Service\ResetInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ConversationMessageStatus\Bus\Query\ConversationIdsByUserType\{GetConversationIdsByUserTypeQuery, GetConversationIdsByUserTypeQueryResult};
+use App\Domain\ConversationMessageStatus\Bus\Query\MessageTypesByConversationUser\{GetMessageTypesByConversationUserQuery, GetMessageTypesByConversationUserQueryResult};
+use App\Domain\ConversationMessageStatus\Bus\Query\ConversationMessageStatusByMessageUser\{GetConversationMessageStatusByMessageUserQuery, GetConversationMessageStatusByMessageUserQueryResult};
 
 class ConversationStatusService implements ResetInterface
 {
@@ -36,7 +38,7 @@ class ConversationStatusService implements ResetInterface
 
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
-        private readonly ConversationMessageStatusFacade $conversationMessageStatusFacade
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     public function isConversationRead(
@@ -69,13 +71,6 @@ class ConversationStatusService implements ResetInterface
         return $typeId === ConversationMessageStatusTypeConstant::READ->value;
     }
 
-    public function getConversationMessageStatus(
-        ConversationMessage $conversationMessage,
-        User $user
-    ): ?ConversationMessageStatus {
-        return $this->conversationMessageStatusFacade->findByMessageUser($conversationMessage, $user);
-    }
-
     public function reset(): void
     {
         $this->unreadConversationIds = [];
@@ -98,7 +93,13 @@ class ConversationStatusService implements ResetInterface
             ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
-        $conversationIds = $this->conversationMessageStatusFacade->listConversationIdsByUserType($user, $type);
+        $getConversationIdsByUserTypeQuery = GetConversationIdsByUserTypeQuery::create(
+            user: $user,
+            type: $type
+        );
+        /** @var GetConversationIdsByUserTypeQueryResult $getConversationIdsByUserTypeQueryResult */
+        $getConversationIdsByUserTypeQueryResult = $this->queryBus->handle($getConversationIdsByUserTypeQuery);
+        $conversationIds = $getConversationIdsByUserTypeQueryResult->conversationIds;
 
         $unreadConversationIds = [];
         foreach ($conversationIds as $conversationId) {
@@ -120,7 +121,13 @@ class ConversationStatusService implements ResetInterface
             return $this->messageTypeIds[$userId][$conversationId];
         }
 
-        $rows = $this->conversationMessageStatusFacade->listMessageTypesByConversationUser($conversationId, $user);
+        $getMessageTypesByConversationUserQuery = GetMessageTypesByConversationUserQuery::create(
+            conversationId: $conversationId,
+            user: $user
+        );
+        /** @var GetMessageTypesByConversationUserQueryResult $getMessageTypesByConversationUserQueryResult */
+        $getMessageTypesByConversationUserQueryResult = $this->queryBus->handle($getMessageTypesByConversationUserQuery);
+        $rows = $getMessageTypesByConversationUserQueryResult->rows;
 
         $messageTypeIds = [];
         foreach ($rows as $row) {
@@ -136,7 +143,13 @@ class ConversationStatusService implements ResetInterface
         ConversationMessage $conversationMessage,
         User $user
     ): bool {
-        $conversationMessageStatus = $this->conversationMessageStatusFacade->findByMessageUser($conversationMessage, $user);
+        $getConversationMessageStatusByMessageUserQuery = GetConversationMessageStatusByMessageUserQuery::create(
+            conversationMessage: $conversationMessage,
+            user: $user
+        );
+        /** @var GetConversationMessageStatusByMessageUserQueryResult $getConversationMessageStatusByMessageUserQueryResult */
+        $getConversationMessageStatusByMessageUserQueryResult = $this->queryBus->handle($getConversationMessageStatusByMessageUserQuery);
+        $conversationMessageStatus = $getConversationMessageStatusByMessageUserQueryResult->conversationMessageStatus;
 
         if ($conversationMessageStatus === null) {
             return true;

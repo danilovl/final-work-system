@@ -49,15 +49,7 @@ class ConversationService
         Conversation $conversation,
         User $user
     ): bool {
-        $participants = $conversation->getParticipants();
-
-        foreach ($participants as $participant) {
-            if ($participant->getUser()->getId() === $user->getId()) {
-                return true;
-            }
-        }
-
-        return false;
+        return ConversationHelper::isParticipant($conversation, $user);
     }
 
     public function getLastMessage(Conversation $conversation): ?ConversationMessage

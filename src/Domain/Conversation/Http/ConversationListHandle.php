@@ -19,8 +19,6 @@ use App\Domain\Conversation\Bus\Query\ConversationList\{
     GetConversationListQuery,
     GetConversationListQueryResult
 };
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Web\Form\SimpleSearchForm;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -28,14 +26,14 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Domain\ConversationType\Bus\Query\ConversationTypeList\{GetConversationTypeListQuery, GetConversationTypeListQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\HasUnreadMessagesByRecipient\{GetHasUnreadMessagesByRecipientQuery, GetHasUnreadMessagesByRecipientQueryResult};
 
 readonly class ConversationListHandle
 {
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private ConversationTypeFacade $conversationTypeFacade,
-        private ConversationMessageFacade $conversationMessageFacade,
         private FormFactoryInterface $formFactory,
         private QueryBusInterface $queryBus
     ) {}
@@ -50,9 +48,15 @@ readonly class ConversationListHandle
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        $isUnreadMessages = $this->conversationMessageFacade->isUnreadMessagesByRecipient($user);
+        $getHasUnreadMessagesByRecipientQuery = GetHasUnreadMessagesByRecipientQuery::create($user);
+        /** @var GetHasUnreadMessagesByRecipientQueryResult $getHasUnreadMessagesByRecipientQueryResult */
+        $getHasUnreadMessagesByRecipientQueryResult = $this->queryBus->handle($getHasUnreadMessagesByRecipientQuery);
+        $isUnreadMessages = $getHasUnreadMessagesByRecipientQueryResult->hasUnread;
 
-        $conversationTypes = $this->conversationTypeFacade->list();
+        $getConversationTypeListQuery = GetConversationTypeListQuery::create();
+        /** @var GetConversationTypeListQueryResult $getConversationTypeListQueryResult */
+        $getConversationTypeListQueryResult = $this->queryBus->handle($getConversationTypeListQuery);
+        $conversationTypes = $getConversationTypeListQueryResult->conversationTypes;
 
         $query = GetConversationListQuery::create(
             request: $request,

@@ -15,8 +15,6 @@ namespace App\Domain\Conversation\Factory;
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
-use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
@@ -76,34 +74,6 @@ class ConversationFactory extends BaseModelFactory
             $conversation->getParticipants()->add($conversationParticipant);
             $this->entityManagerService->persistAndFlush($conversationParticipant);
         }
-    }
-
-    public function createConversationMessageStatus(
-        Conversation $conversation,
-        ConversationMessage $message,
-        User $user,
-        iterable $participants,
-        int $type
-    ): void {
-        /** @var ConversationMessageStatusType $conversationMessageStatusType */
-        $conversationMessageStatusType = $this->entityManagerService->getReference(ConversationMessageStatusType::class, $type);
-
-        foreach ($participants as $participant) {
-            $participant = $this->getUser($participant);
-            if ($participant->getId() === $user->getId()) {
-                continue;
-            }
-
-            $messageStatus = new ConversationMessageStatus;
-            $messageStatus->setConversation($conversation);
-            $messageStatus->setMessage($message);
-            $messageStatus->setType($conversationMessageStatusType);
-            $messageStatus->setUser($participant);
-
-            $this->entityManagerService->persist($messageStatus);
-        }
-
-        $this->entityManagerService->flush();
     }
 
     public function getUser(ConversationParticipant|User $user): User

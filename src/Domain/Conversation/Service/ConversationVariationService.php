@@ -14,16 +14,17 @@ namespace App\Domain\Conversation\Service;
 
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
-use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Helper\WorkRoleHelper;
-use App\Domain\Work\Service\WorkService;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
 use Symfony\Contracts\Service\ResetInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
+use App\Domain\Work\Bus\Query\WorkUsers\WorkUsersQueryTrait;
 
 /**
  * @phpstan-type ConversationVariation array{
@@ -55,14 +56,16 @@ use Symfony\Contracts\Service\ResetInterface;
  */
 class ConversationVariationService implements ResetInterface
 {
+    use WorkUsersQueryTrait;
+    use UserWorksQueryTrait;
+
     /**
      * @var ConversationVariation|null
      */
     private ?array $newPermission = null;
 
     public function __construct(
-        private readonly UserWorkService $userWorkService,
-        private readonly WorkService $workService,
+        private readonly QueryBusInterface $queryBus,
         private readonly ParameterServiceInterface $parameterService
     ) {}
 
@@ -94,22 +97,22 @@ class ConversationVariationService implements ResetInterface
         };
 
         if (UserRoleHelper::isAuthor($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::AUTHOR->value, null, $workStatus);
+            $userWorks = $this->getUserWorks($user, WorkUserTypeConstant::AUTHOR->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
         if (UserRoleHelper::isOpponent($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::OPPONENT->value, null, $workStatus);
+            $userWorks = $this->getUserWorks($user, WorkUserTypeConstant::OPPONENT->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
         if (UserRoleHelper::isConsultant($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::CONSULTANT->value, null, $workStatus);
+            $userWorks = $this->getUserWorks($user, WorkUserTypeConstant::CONSULTANT->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
         if (UserRoleHelper::isSupervisor($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::SUPERVISOR->value, null, $workStatus);
+            $userWorks = $this->getUserWorks($user, WorkUserTypeConstant::SUPERVISOR->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
@@ -137,28 +140,28 @@ class ConversationVariationService implements ResetInterface
         if (WorkRoleHelper::isAuthor($work, $user)) {
             [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::AUTHOR->value);
 
-            $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
+            $workUsers = $this->getWorkUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isOpponent($work, $user)) {
             [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT->value);
 
-            $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
+            $workUsers = $this->getWorkUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isSupervisor($work, $user)) {
             [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::SUPERVISOR->value);
 
-            $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
+            $workUsers = $this->getWorkUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isConsultant($work, $user)) {
             [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::CONSULTANT->value);
 
-            $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
+            $workUsers = $this->getWorkUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 

@@ -12,16 +12,17 @@
 
 namespace App\Domain\Conversation\Bus\Query\ConversationLastMessage;
 
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Service\MessageHighlightService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ConversationMessage\Bus\Query\MessagesByConversation\{GetMessagesByConversationQuery, GetMessagesByConversationQueryResult};
 
 #[AsMessageHandler]
 readonly class GetConversationLastMessageQueryHandler
 {
     public function __construct(
-        private ConversationMessageFacade $conversationMessageFacade,
+        private QueryBusInterface $queryBus,
         private ParameterServiceInterface $parameterService,
         private MessageHighlightService $messageHighlightService
     ) {}
@@ -30,7 +31,13 @@ readonly class GetConversationLastMessageQueryHandler
     {
         $limit = $this->parameterService->getInt('pagination.conversation.message_list');
 
-        $conversationMessages = $this->conversationMessageFacade->getMessagesByConversation($query->conversation, $limit);
+        $getMessagesByConversationQuery = GetMessagesByConversationQuery::create(
+            conversation: $query->conversation,
+            limit: $limit
+        );
+        /** @var GetMessagesByConversationQueryResult $getMessagesByConversationQueryResult */
+        $getMessagesByConversationQueryResult = $this->queryBus->handle($getMessagesByConversationQuery);
+        $conversationMessages = $getMessagesByConversationQueryResult->messages;
         if ($query->search) {
             $this->messageHighlightService->addHighlight($conversationMessages, $query->search);
         }
