@@ -28,15 +28,14 @@ use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Api\WorkDTO;
-use App\Domain\Work\Facade\WorkFacade;
+use App\Domain\Work\Bus\Query\WorksByUsersSupervisorStatus\{GetWorksByUsersSupervisorStatusQuery, GetWorksByUsersSupervisorStatusQueryResult};
 
 readonly class UserListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private WorkFacade $workFacade,
+        private UserService $userService,
         private QueryBusInterface $queryBus,
-        private ObjectToDtoMapperInterface $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request, string $type): JsonResponse
@@ -63,12 +62,15 @@ readonly class UserListHandle
                 $userIds[] = $paginationUser->getId();
             }
 
-            $worksByUser = $this->workFacade->listByUsersSupervisorStatus(
+            $getWorksByUsersSupervisorStatusQuery = GetWorksByUsersSupervisorStatusQuery::create(
                 userIds: $userIds,
                 supervisor: $user,
                 type: $type,
                 workStatus: null
             );
+            /** @var GetWorksByUsersSupervisorStatusQueryResult $getWorksByUsersSupervisorStatusQueryResult */
+            $getWorksByUsersSupervisorStatusQueryResult = $this->queryBus->handle($getWorksByUsersSupervisorStatusQuery);
+            $worksByUser = $getWorksByUsersSupervisorStatusQueryResult->works;
         }
 
         /** @var User $paginationUser */

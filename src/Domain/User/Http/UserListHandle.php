@@ -27,15 +27,15 @@ use App\Infrastructure\Service\{
 use App\Domain\User\Helper\UserHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Form\WorkSearchStatusForm;
-use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Domain\Work\Bus\Query\WorksByUsersSupervisorStatus\{GetWorksByUsersSupervisorStatusQuery, GetWorksByUsersSupervisorStatusQueryResult};
+use App\Domain\WorkStatus\Bus\Query\WorkStatusCountsByUsers\{GetWorkStatusCountsByUsersQuery, GetWorkStatusCountsByUsersQueryResult};
 
 readonly class UserListHandle
 {
@@ -44,8 +44,6 @@ readonly class UserListHandle
         private TranslatorService $translatorService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
-        private WorkFacade $workFacade,
-        private WorkStatusFacade $workStatusFacade,
         private SeoPageService $seoPageService,
         private QueryBusInterface $queryBus
     ) {}
@@ -113,19 +111,25 @@ readonly class UserListHandle
                 $userIds[] = $paginationUser->getId();
             }
 
-            $worksByUser = $this->workFacade->listByUsersSupervisorStatus(
+            $getWorksByUsersSupervisorStatusQuery = GetWorksByUsersSupervisorStatusQuery::create(
                 userIds: $userIds,
                 supervisor: $user,
                 type: $type,
                 workStatus: $workStatus
             );
+            /** @var GetWorksByUsersSupervisorStatusQueryResult $getWorksByUsersSupervisorStatusQueryResult */
+            $getWorksByUsersSupervisorStatusQueryResult = $this->queryBus->handle($getWorksByUsersSupervisorStatusQuery);
+            $worksByUser = $getWorksByUsersSupervisorStatusQueryResult->works;
 
-            $workStatusCountsByUser = $this->workStatusFacade->listCountByUsers(
+            $getWorkStatusCountsByUsersQuery = GetWorkStatusCountsByUsersQuery::create(
                 userIds: $userIds,
                 supervisor: $user,
                 type: $type,
                 workStatus: $workStatus
             );
+            /** @var GetWorkStatusCountsByUsersQueryResult $getWorkStatusCountsByUsersQueryResult */
+            $getWorkStatusCountsByUsersQueryResult = $this->queryBus->handle($getWorkStatusCountsByUsersQuery);
+            $workStatusCountsByUser = $getWorkStatusCountsByUsersQueryResult->counts;
 
             foreach ($userIds as $userId) {
                 $works->set($userId, $worksByUser[$userId] ?? []);

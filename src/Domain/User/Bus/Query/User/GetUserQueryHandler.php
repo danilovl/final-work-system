@@ -1,0 +1,28 @@
+<?php declare(strict_types=1);
+
+/**
+ *
+ * This file is part of the FinalWorkSystem project.
+ * (c) Vladimir Danilov
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
+namespace App\Domain\User\Bus\Query\User;
+
+use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Domain\User\Facade\UserFacade;
+
+readonly class GetUserQueryHandler implements QueryHandlerInterface
+{
+    public function __construct(private UserFacade $userFacade) {}
+
+    public function __invoke(GetUserQuery $query): GetUserQueryResult
+    {
+        $user = $this->userFacade->findById($query->id);
+
+        return new GetUserQueryResult($user);
+    }
+}

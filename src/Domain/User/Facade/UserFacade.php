@@ -17,12 +17,9 @@ use App\Application\Exception\{
     UserNotExistException
 };
 use App\Domain\User\Entity\User;
-use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Repository\UserRepository;
-use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\{
     Query,
     QueryBuilder
@@ -31,8 +28,7 @@ use Doctrine\ORM\{
 readonly class UserFacade
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserWorkService $userWorkService
+        private UserRepository $userRepository
     ) {}
 
     public function findById(int $id): ?User
@@ -52,47 +48,6 @@ readonly class UserFacade
         }
 
         return $user;
-    }
-
-    /**
-     * @return ArrayCollection<User>
-     */
-    public function listUserActiveSupervisors(User $user): ArrayCollection
-    {
-        /** @var ArrayCollection<User> $userActiveSupervisors */
-        $userActiveSupervisors = new ArrayCollection;
-
-        if (UserRoleHelper::isAuthor($user)) {
-            $authorSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::AUTHOR->value);
-
-            foreach ($authorSupervisors as $supervisor) {
-                if (!$userActiveSupervisors->contains($supervisor)) {
-                    $userActiveSupervisors->add($supervisor);
-                }
-            }
-        }
-
-        if (UserRoleHelper::isOpponent($user)) {
-            $opponentSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::OPPONENT->value);
-
-            foreach ($opponentSupervisors as $supervisor) {
-                if (!$userActiveSupervisors->contains($supervisor)) {
-                    $userActiveSupervisors->add($supervisor);
-                }
-            }
-        }
-
-        if (UserRoleHelper::isConsultant($user)) {
-            $consultantSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::CONSULTANT->value);
-
-            foreach ($consultantSupervisors as $supervisor) {
-                if (!$userActiveSupervisors->contains($supervisor)) {
-                    $userActiveSupervisors->add($supervisor);
-                }
-            }
-        }
-
-        return $userActiveSupervisors;
     }
 
     public function queryBySupervisor(
