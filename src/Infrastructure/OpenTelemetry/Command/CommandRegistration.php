@@ -22,7 +22,8 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
+use OpenTelemetry\SemConv\Attributes\CodeAttributes;
+use OpenTelemetry\SemConv\Incubating\Attributes\DeploymentIncubatingAttributes;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
@@ -57,8 +58,7 @@ class CommandRegistration implements OpenTelemetryRegistrationInterface
                 ->setSpanKind(SpanKind::KIND_SERVER)
                 ->setParent($parentContext)
                 ->setAttributes([
-                    TraceAttributes::CODE_FUNCTION => $function,
-                    TraceAttributes::CODE_NAMESPACE => $class,
+                    CodeAttributes::CODE_FUNCTION_NAME => $function,
                     'type' => 'console-command',
                     'console.command.class' => $command::class
                 ])
@@ -85,14 +85,12 @@ class CommandRegistration implements OpenTelemetryRegistrationInterface
 
             $scope->detach();
             $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+            $span->setAttribute(DeploymentIncubatingAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
             $status = $exitCode !== 0 || $exception !== null ? StatusCode::STATUS_ERROR : StatusCode::STATUS_OK;
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
             }
 
             $exitCode = (int) $exitCode;
