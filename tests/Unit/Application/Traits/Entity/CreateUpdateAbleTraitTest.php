@@ -13,7 +13,6 @@
 namespace App\Tests\Unit\Application\Traits\Entity;
 
 use App\Application\Traits\Entity\CreateUpdateAbleTrait;
-use DateTime;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +25,7 @@ class CreateUpdateAbleTraitTest extends TestCase
         };
 
         $dateTimeImmutable = new DateTimeImmutable;
-        $date = new DateTime;
+        $date = new DateTimeImmutable;
 
         $class->setCreatedAt($dateTimeImmutable);
         $this->assertSame($dateTimeImmutable, $class->getCreatedAt());

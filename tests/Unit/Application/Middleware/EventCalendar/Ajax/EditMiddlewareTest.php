@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Application\Middleware\EventCalendar\Ajax;
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Middleware\EventCalendar\Ajax\EditMiddleware;
 use App\Infrastructure\Service\TranslatorService;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -29,8 +29,8 @@ class EditMiddlewareTest extends TestCase
     public function testAttributeHandleSuccess(): void
     {
         $request = new Request;
-        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
-        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
+        $request->request->set('start', (new DateTimeImmutable('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
+        $request->request->set('end', (new DateTimeImmutable)->format(DateFormatConstant::DATE_TIME->value));
 
         $controllerEvent = $this->getMockControllerEvent($request);
         $result = $this->editMiddleware->__invoke($controllerEvent);
@@ -41,8 +41,8 @@ class EditMiddlewareTest extends TestCase
     public function testHandleFailsDateForm(): void
     {
         $request = new Request;
-        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE->value));
-        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE->value));
+        $request->request->set('start', (new DateTimeImmutable('now -1 minute'))->format(DateFormatConstant::DATABASE->value));
+        $request->request->set('end', (new DateTimeImmutable)->format(DateFormatConstant::DATABASE->value));
 
         $controllerEvent = $this->getMockControllerEvent($request);
         $this->editMiddleware->__invoke($controllerEvent);
@@ -53,8 +53,8 @@ class EditMiddlewareTest extends TestCase
     public function testAttributeHandleFailsDateStart(): void
     {
         $request = new Request;
-        $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
-        $request->request->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
+        $request->request->set('start', (new DateTimeImmutable)->format(DateFormatConstant::DATE_TIME->value));
+        $request->request->set('end', (new DateTimeImmutable('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
 
         $controllerEvent = $this->getMockControllerEvent($request);
         $this->editMiddleware->__invoke($controllerEvent);

@@ -14,7 +14,7 @@ namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Helper\DateHelper;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class DateHelperTest extends TestCase
@@ -30,15 +30,15 @@ class DateHelperTest extends TestCase
 
     public function testActualWeekStartByDate(): void
     {
-        $date = new DateTime('2023-07-15');
-        $expectedWeekStart = new DateTime('2023-07-10');
+        $date = new DateTimeImmutable('2023-07-15');
+        $expectedWeekStart = new DateTimeImmutable('2023-07-10');
 
         $actualWeekStart = DateHelper::actualWeekStartByDate($date);
 
         $this->assertEquals($expectedWeekStart, $actualWeekStart);
 
-        $date = new DateTime('2023-07-16');
-        $expectedWeekStart = new DateTime('2023-07-10');
+        $date = new DateTimeImmutable('2023-07-16');
+        $expectedWeekStart = new DateTimeImmutable('2023-07-10');
 
         $actualWeekStart = DateHelper::actualWeekStartByDate($date);
 
