@@ -58,7 +58,10 @@ export async function createStudentWork(browser: Browser, baseUrl: string): Prom
     const csrfToken = await conversationForm
         .locator('input[name="action_form[_token]"]')
         .getAttribute('value') as string
-    const conversationResponse = await page.request.post(conversationAction, {form: {'action_form[_token]': csrfToken}})
+    const conversationResponse = await page.request.post(conversationAction, {
+        form: {'action_form[_token]': csrfToken},
+        headers: {Origin: new URL(baseUrl).origin}
+    })
     const conversationPath = new URL(conversationResponse.url()).pathname
 
     expect(conversationPath).toContain('/conversation/detail/')

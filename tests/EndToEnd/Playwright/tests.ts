@@ -37,8 +37,10 @@ import studentRead from '@playwright-test/test/data/student-read.spec'
 import pageCoverage from '@playwright-test/test/coverage/page-coverage.spec'
 
 import liveUpdate from '@playwright-test/test/live/live-update.spec'
+import sidebarMenu from '@playwright-test/test/layout/sidebar-menu.spec'
 
 test.describe(checkCommonUrl)
+test.describe(sidebarMenu)
 
 test.describe(editProfile)
 test.describe(changeProfileImage)

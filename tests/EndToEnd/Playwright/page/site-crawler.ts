@@ -31,6 +31,12 @@ const SKIPPED_URL_PARTS = [
 
 const ADMIN_QUERY_KEYS = ['crudControllerFqcn', 'crudAction']
 
+const DOM_STABILITY_SETTLE = 1000
+
+const DOM_STABILITY_INTERVAL = 1000
+
+const DOM_STABILITY_MAX_MUTATIONS = 200
+
 export default class SiteCrawler {
     private readonly origin: string
 
@@ -68,7 +74,7 @@ export default class SiteCrawler {
         return visited
     }
 
-    async visit(url: string, from = ''): Promise<VisitedPage> {
+    async visit(url: string, from = '', checkDomStability = true): Promise<VisitedPage> {
         const errors: string[] = []
         const onPageError = (error: Error): void => {
             errors.push(error.message)
@@ -77,11 +83,39 @@ export default class SiteCrawler {
         this.page.on('pageerror', onPageError)
         const response = await this.page.goto(url)
         await this.page.waitForLoadState('load')
+        const mutationCount = checkDomStability ? await this.countDomMutations() : 0
         this.page.off('pageerror', onPageError)
+
+        if (mutationCount > DOM_STABILITY_MAX_MUTATIONS) {
+            errors.push(`DOM is not stable: ${mutationCount} mutations in ${DOM_STABILITY_INTERVAL} ms`)
+        }
 
         const status = response === null ? 0 : response.status()
 
         return {url, from, status, errors}
+    }
+
+    private async countDomMutations(): Promise<number> {
+        await this.page.waitForTimeout(DOM_STABILITY_SETTLE)
+
+        return this.page.evaluate(interval => new Promise<number>(resolve => {
+            let count = 0
+            const observer = new MutationObserver(records => {
+                const pageRecords = records.filter(record => {
+                    const target = record.target instanceof Element ? record.target : record.target.parentElement
+
+                    return target === null || target.closest('.sf-toolbar') === null
+                })
+
+                count += pageRecords.length
+            })
+
+            observer.observe(document.body, {childList: true, subtree: true, attributes: true})
+            setTimeout(() => {
+                observer.disconnect()
+                resolve(count)
+            }, interval)
+        }), DOM_STABILITY_INTERVAL)
     }
 
     private async collectLinks(currentUrl: string): Promise<string[]> {

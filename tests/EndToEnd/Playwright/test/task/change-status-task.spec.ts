@@ -13,7 +13,7 @@ export default function createTests() {
 
         for (let i = 1; i < count; i++) {
             await switches.nth(i).click()
-            await expect(page.locator('.alert-success')).toBeVisible()
+            await expect(page.locator('.alert-success').first()).toBeVisible()
             await page.waitForTimeout(2000)
         }
     })

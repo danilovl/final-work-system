@@ -73,7 +73,7 @@ async function assertPagesForbidden(page: Page, forbiddenPaths: string[]): Promi
     const statuses: Record<string, number> = {}
 
     for (const path of forbiddenPaths) {
-        const visitedPage = await crawler.visit(path)
+        const visitedPage = await crawler.visit(path, '', false)
         statuses[path] = visitedPage.status
     }
 

@@ -13,8 +13,8 @@ export default function createTests() {
             .setInputFiles('tests/EndToEnd/Cypress/fixtures/user/image/profile.jpg')
 
         await page.locator('#upload-profile-image-button-action').click()
-        await page.waitForTimeout(1000)
+        await page.waitForLoadState('load')
 
-        await expect(page.locator('.alert-success').first()).toBeVisible()
+        await expect(page.locator('.alert-success').first()).toBeVisible({timeout: 10000})
     })
 }

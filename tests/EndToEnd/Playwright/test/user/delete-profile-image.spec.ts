@@ -9,9 +9,8 @@ export default function createTests() {
         await page.goto('/en/user/profile/image')
 
         await page.locator('#delete-profile-image').click()
+        await page.waitForLoadState('load')
 
-        await page.waitForTimeout(1000)
-
-        await expect(page.locator('.alert-success')).toBeVisible()
+        await expect(page.locator('.alert-success').first()).toBeVisible({timeout: 10000})
     })
 }
