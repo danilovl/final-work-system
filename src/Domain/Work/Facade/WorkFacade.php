@@ -12,6 +12,7 @@
 
 namespace App\Domain\Work\Facade;
 
+use App\Application\Exception\EntityNotFoundException;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
@@ -30,6 +31,16 @@ readonly class WorkFacade
         $result = $this->workRepository->find($id);
 
         return $result;
+    }
+
+    public function getById(int $id): Work
+    {
+        $work = $this->findById($id);
+        if ($work === null) {
+            throw new EntityNotFoundException("Work with id {$id} not found.");
+        }
+
+        return $work;
     }
 
     /**
