@@ -35,12 +35,11 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
 
     private function getTransMock(): TranslatorService
     {
-        $mockObject = $this->createMock(TranslatorService::class);
-        $mockObject->expects($this->any())
-            ->method('trans')
+        $translator = $this->createStub(TranslatorService::class);
+        $translator->method('trans')
             ->willReturn(self::MESSAGE);
 
-        return $mockObject;
+        return $translator;
     }
 
     #[DataProvider('provideValidateSuccessCases')]
