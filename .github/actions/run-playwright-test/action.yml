@@ -4,6 +4,6 @@ description: Run playwright test
 runs:
   using: 'composite'
   steps:
-    - name: Run psalm
+    - name: Run playwright test
       shell: bash
       run: docker compose exec -T node npm run playwright:test
