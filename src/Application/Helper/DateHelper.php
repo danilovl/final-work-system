@@ -15,31 +15,30 @@ namespace App\Application\Helper;
 use App\Application\Constant\DateFormatConstant;
 use DateInterval;
 use DatePeriod;
-use DateTime;
 use DateTimeImmutable;
 
 class DateHelper
 {
     public static function actualDay(): string
     {
-        return (new DateTime)->format(DateFormatConstant::DATABASE->value);
+        return (new DateTimeImmutable)->format(DateFormatConstant::DATABASE->value);
     }
 
-    public static function actualWeekStartByDate(DateTime $date): DateTime
+    public static function actualWeekStartByDate(DateTimeImmutable $date): DateTimeImmutable
     {
-        return (clone $date)->modify('this week monday');
+        return $date->modify('this week monday');
     }
 
     public static function actualWeekStart(): string
     {
-        return (new DateTime)
+        return (new DateTimeImmutable)
             ->modify('this week monday')
             ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function actualWeekEnd(): string
     {
-        return (new DateTime)
+        return (new DateTimeImmutable)
             ->modify('this week sunday')
             ->format(DateFormatConstant::DATABASE->value);
     }
@@ -113,13 +112,13 @@ class DateHelper
 
     public static function firstDayMonth(): string
     {
-        return (new DateTime('first day of this month'))
+        return (new DateTimeImmutable('first day of this month'))
             ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function lastDayMonth(): string
     {
-        return (new DateTime('last day of this month'))
+        return (new DateTimeImmutable('last day of this month'))
             ->format(DateFormatConstant::DATABASE->value);
     }
 

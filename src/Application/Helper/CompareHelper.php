@@ -16,7 +16,7 @@ use App\Application\Constant\{
     CompareConstant,
     DateFormatConstant
 };
-use DateTime;
+use DateTimeImmutable;
 
 class CompareHelper
 {
@@ -36,8 +36,8 @@ class CompareHelper
     }
 
     public static function compareDateTime(
-        DateTime $first,
-        DateTime $second,
+        DateTimeImmutable $first,
+        DateTimeImmutable $second,
         CompareConstant $condition
     ): bool {
         return self::compare(
