@@ -21,7 +21,6 @@ use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
-use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
@@ -189,7 +188,7 @@ readonly class ConversationMessageFacade
         return $result;
     }
 
-    public function getTotalUnreadMessagesAfterDateByUser(User $user, DateTime $date): int
+    public function getTotalUnreadMessagesAfterDateByUser(User $user, DateTimeImmutable $date): int
     {
         /** @var ConversationMessageStatusType $conversationMessageStatusType */
         $conversationMessageStatusType = $this->entityManagerService->getReference(

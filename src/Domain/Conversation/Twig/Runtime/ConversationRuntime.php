@@ -20,7 +20,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
-use DateTime;
+use DateTimeImmutable;
 
 class ConversationRuntime
 {
@@ -48,7 +48,7 @@ class ConversationRuntime
     }
 
     #[AsTwigFunction('conversation_message_read_date_recipient')]
-    public function getMessageReadDateByRecipient(ConversationMessage $conversationMessage, User $user): ?DateTime
+    public function getMessageReadDateByRecipient(ConversationMessage $conversationMessage, User $user): ?DateTimeImmutable
     {
         /** @var Conversation $conversation */
         $conversation = $this->entityManagerService->getReference(
