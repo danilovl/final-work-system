@@ -34,9 +34,13 @@ class MediaCategoryFormTest extends KernelTestCase
         array $data,
         bool $isValid
     ): void {
-        $form = $this->formFactory->create(MediaCategoryForm::class, new MediaCategoryModel, [
-            'csrf_protection' => false
-        ]);
+        $form = $this->formFactory->create(
+            type: MediaCategoryForm::class,
+            data: new MediaCategoryModel,
+            options: [
+                'csrf_protection' => false
+            ]
+        );
         $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
