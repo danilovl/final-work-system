@@ -21,7 +21,6 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\ScopeInterface;
-use OpenTelemetry\SemConv\TraceAttributes;
 use Throwable;
 
 readonly class TracingSpan
@@ -92,7 +91,7 @@ readonly class TracingSpan
     public function recordHandledException(Throwable $exception, array $attributes = []): self
     {
         $this->state->recordException($exception, [
-            TraceAttributes::EXCEPTION_ESCAPED => false,
+            'exception.escaped' => false,
             ...TracingHelper::normalizeAttributeValues($attributes),
             ...TracingHelper::extractTracingAttributesFromObject($exception),
             SpanAttributes::RECORDED_LOCATION->value => self::calledFrom()

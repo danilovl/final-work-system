@@ -18,7 +18,6 @@ use OpenTelemetry\API\Trace\{
     Span,
     StatusCode
 };
-use OpenTelemetry\SemConv\TraceAttributes;
 use Throwable;
 
 readonly class TracingHelper
@@ -57,7 +56,7 @@ readonly class TracingHelper
         $span = Span::getCurrent();
 
         $attributes = [
-            TraceAttributes::EXCEPTION_ESCAPED => false,
+            'exception.escaped' => false,
             ...self::normalizeAttributeValues($attributes),
             ...self::extractTracingAttributesFromObject($exception),
             SpanAttributes::RECORDED_LOCATION->value => self::calledFrom()
