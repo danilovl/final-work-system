@@ -25,7 +25,7 @@ class TaskSearchTest extends TestCase
 
     protected function setUp(): void
     {
-        $transformedFinder = $this->createMock(TransformedFinder::class);
+        $transformedFinder = $this->createStub(TransformedFinder::class);
         $this->taskSearch = new TaskSearch($transformedFinder);
     }
 
