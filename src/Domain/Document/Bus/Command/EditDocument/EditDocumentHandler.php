@@ -12,10 +12,7 @@
 
 namespace App\Domain\Document\Bus\Command\EditDocument;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\Media\Bus\Command\SaveMedia\SaveMediaCommand;
 
 readonly class EditDocumentHandler implements CommandHandlerInterface

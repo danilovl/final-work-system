@@ -12,7 +12,7 @@ namespace App\Domain\Document\Http;
 
 use App\Domain\Document\Model\DocumentSearchModel;
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Entity\User;
 use App\Domain\Document\Bus\Query\DocumentList\{

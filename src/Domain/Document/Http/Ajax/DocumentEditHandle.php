@@ -12,12 +12,10 @@
 
 namespace App\Domain\Document\Http\Ajax;
 
-use App\Application\Constant\{
-    AjaxJsonTypeConstant,
-    ControllerMethodConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Document\Bus\Command\EditDocument\EditDocumentCommand;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;

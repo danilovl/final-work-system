@@ -10,7 +10,7 @@ use App\Infrastructure\Service\{
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Media\Bus\Query\MediaQueryByUserFilter\{GetMediaQueryByUserFilterQuery, GetMediaQueryByUserFilterQueryResult};
 
 #[AsMessageHandler]

@@ -14,7 +14,7 @@ namespace App\Domain\Document\Http;
 
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Media\Bus\Query\MediaFile\{GetMediaFileQuery, GetMediaFileQueryResult};
 
 readonly class DocumentDownloadHandle
