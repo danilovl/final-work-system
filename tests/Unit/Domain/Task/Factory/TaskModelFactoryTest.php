@@ -16,20 +16,24 @@ use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\Factory\TaskModelFactory;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Facade\WorkFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\Work\{
+    GetWorkQuery,
+    GetWorkQueryResult
+};
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class TaskModelFactoryTest extends TestCase
 {
-    private MockObject&WorkFacade $workFacade;
+    private MockObject&QueryBusInterface $queryBus;
 
     private TaskModelFactory $taskModelFactory;
 
     protected function setUp(): void
     {
-        $this->workFacade = $this->createMock(WorkFacade::class);
-        $this->taskModelFactory = new TaskModelFactory(workFacade: $this->workFacade);
+        $this->queryBus = $this->createMock(QueryBusInterface::class);
+        $this->taskModelFactory = new TaskModelFactory(queryBus: $this->queryBus);
     }
 
     public function testFromTaskInput(): void
@@ -46,11 +50,11 @@ class TaskModelFactoryTest extends TestCase
             active: false
         );
 
-        $this->workFacade
+        $this->queryBus
             ->expects($this->once())
-            ->method('getById')
-            ->with(10)
-            ->willReturn($work);
+            ->method('handle')
+            ->with($this->callback(static fn (GetWorkQuery $query): bool => $query->id === 10))
+            ->willReturn(new GetWorkQueryResult($work));
 
         $taskModel = $this->taskModelFactory->fromTaskInput($taskInput, $owner);
 
