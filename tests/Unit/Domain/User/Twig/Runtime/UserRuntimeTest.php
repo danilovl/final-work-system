@@ -34,10 +34,10 @@ class UserRuntimeTest extends TestCase
             ->method('getUserOrNull')
             ->willReturn($user);
 
-        $router = $this->createMock(RouterInterface::class);
-        $hashidsService = $this->createMock(HashidsServiceInterface::class);
-        $parameterService = $this->createMock(ParameterServiceInterface::class);
-        $s3ClientService = $this->createMock(S3ClientService::class);
+        $router = $this->createStub(RouterInterface::class);
+        $hashidsService = $this->createStub(HashidsServiceInterface::class);
+        $parameterService = $this->createStub(ParameterServiceInterface::class);
+        $s3ClientService = $this->createStub(S3ClientService::class);
 
         $this->userRuntime = new UserRuntime(
             $userService,
