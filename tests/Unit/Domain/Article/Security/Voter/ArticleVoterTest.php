@@ -33,7 +33,7 @@ class ArticleVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $articleVoterSubject = $this->createMock(ArticleVoterSubject::class);
+        $articleVoterSubject = $this->createStub(ArticleVoterSubject::class);
 
         foreach (ArticleCategoryVoter::SUPPORTS as $support) {
             $this->assertTrue($this->articleVoter->supportsPublic($support, $articleVoterSubject));
