@@ -16,7 +16,7 @@ use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,7 +43,7 @@ class EventRepository extends ServiceEntityRepository
     {
         return $this->createEventQueryBuilder()
             ->whereByParticipantWork($work)
-            ->orderByStart(Order::Descending->value)
+            ->orderByStart(SortDirection::Descending)
             ->getQueryBuilder();
     }
 
@@ -54,7 +54,7 @@ class EventRepository extends ServiceEntityRepository
             ->leftJoinParticipantWork()
             ->leftJoinParticipantUser()
             ->whereByOwner($eventData->getUserNotNull())
-            ->orderByCreatedAt(Order::Descending->value);
+            ->orderByCreatedAt(SortDirection::Descending);
 
         if ($eventData->startDate !== null && $eventData->endDate !== null) {
             $builder = $builder->whereByBetweenDate($eventData->startDate, $eventData->endDate);

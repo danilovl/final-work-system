@@ -17,7 +17,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 use DateTimeInterface;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class EventQueryBuilder extends BaseQueryBuilder
 {
@@ -69,14 +69,14 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByStart(string $order = Order::Descending->value): self
+    public function orderByStart(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('event.start', $order);
 
         return $this;
     }
 
-    public function orderByCreatedAt(string $order = Order::Descending->value): self
+    public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('event.createdAt', $order);
 
