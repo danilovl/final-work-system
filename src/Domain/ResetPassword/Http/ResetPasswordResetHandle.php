@@ -13,8 +13,8 @@
 namespace App\Domain\ResetPassword\Http;
 
 use App\Domain\ResetPassword\Model\ResetChangePasswordModel;
-use App\Application\Constant\FlashTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\FlashTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,

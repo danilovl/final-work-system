@@ -13,7 +13,7 @@
 namespace App\Domain\ResetPassword\Http;
 
 use App\Domain\ResetPassword\Model\ResetPasswordRequestModel;
-use App\Application\Constant\FlashTypeConstant;
+use App\Infrastructure\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\{
     Response,
     RedirectResponse
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserByEmail\{GetUserByEmailQuery, GetUserByEmailQueryResult};
 
 readonly class ResetPasswordRequestHandle
