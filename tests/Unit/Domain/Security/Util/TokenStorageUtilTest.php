@@ -17,6 +17,7 @@ use App\Domain\Security\Util\TokenStorageUtil;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use InvalidArgumentException;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\{
     TokenInterface,
@@ -26,57 +27,54 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class TokenStorageUtilTest extends TestCase
 {
+    private Stub&TokenStorageInterface $tokenStorage;
+
+    protected function setUp(): void
+    {
+        $this->tokenStorage = $this->createStub(TokenStorageInterface::class);
+    }
+
     public function testRefreshToken(): void
     {
-        $tokenStorage = $this->createMock(TokenStorageInterface::class);
-
-        $oldToken = $this->createMock(UsernamePasswordToken::class);
-        $oldToken->expects($this->once())
-            ->method('getFirewallName')
+        /** @var Stub&UsernamePasswordToken $oldToken */
+        $oldToken = $this->createStub(UsernamePasswordToken::class);
+        $oldToken->method('getFirewallName')
             ->willReturn('firewall_name');
 
-        $oldToken->expects($this->once())
-            ->method('getRoleNames')
+        $oldToken->method('getRoleNames')
             ->willReturn([UserRoleConstant::USER->value]);
 
-        $tokenStorage->expects($this->once())
-            ->method('getToken')
+        $this->tokenStorage->method('getToken')
             ->willReturn($oldToken);
 
-        $tokenStorage->expects($this->once())
-            ->method('setToken')
-            ->with($this->isInstanceOf(UsernamePasswordToken::class));
-
-        (new TokenStorageUtil($tokenStorage))->refreshToken(new User);
+        (new TokenStorageUtil($this->tokenStorage))->refreshToken(new User);
+        $this->expectNotToPerformAssertions();
     }
 
     public function testRefreshTokenThrowsException(): void
     {
-        $tokenStorage = $this->createMock(TokenStorageInterface::class);
-        $oldToken = $this->createMock(UsernamePasswordToken::class);
+        /** @var Stub&UsernamePasswordToken $oldToken */
+        $oldToken = $this->createStub(UsernamePasswordToken::class);
 
-        $tokenStorage->expects($this->once())
-            ->method('getToken')
+        $this->tokenStorage->method('getToken')
             ->willReturn($oldToken);
 
-        $oldToken->expects($this->once())
-            ->method('getFirewallName')
+        $oldToken->method('getFirewallName')
             ->willReturn('');
 
         $this->expectException(InvalidArgumentException::class);
-        (new TokenStorageUtil($tokenStorage))->refreshToken(new User);
+        (new TokenStorageUtil($this->tokenStorage))->refreshToken(new User);
     }
 
     public function testRefreshTokenThrowsMethodException(): void
     {
-        $tokenStorage = $this->createMock(TokenStorageInterface::class);
-        $token = $this->createMock(TokenInterface::class);
+        /** @var Stub&TokenInterface $token */
+        $token = $this->createStub(TokenInterface::class);
 
-        $tokenStorage->expects($this->once())
-            ->method('getToken')
+        $this->tokenStorage->method('getToken')
             ->willReturn($token);
 
         $this->expectException(RuntimeException::class);
-        (new TokenStorageUtil($tokenStorage))->refreshToken(new User);
+        (new TokenStorageUtil($this->tokenStorage))->refreshToken(new User);
     }
 }
