@@ -12,15 +12,23 @@
 
 namespace App\Domain\Profile\Bus\Command\EditProfile;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\User\Factory\UserFactory;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\User\Bus\Command\SaveUser\SaveUserCommand;
 
 readonly class EditProfileHandler implements CommandHandlerInterface
 {
-    public function __construct(private UserFactory $userFactory) {}
+    public function __construct(private CommandBusInterface $commandBus) {}
 
     public function __invoke(EditProfileCommand $command): void
     {
-        $this->userFactory->flushFromModel($command->userModel, $command->user);
+        $saveUserCommand = SaveUserCommand::create(
+            userModel: $command->userModel,
+            user: $command->user
+        );
+
+        $this->commandBus->dispatch($saveUserCommand);
     }
 }

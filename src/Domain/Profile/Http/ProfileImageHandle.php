@@ -12,23 +12,30 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Domain\Media\Service\MediaService;
 use App\Domain\User\Entity\User;
 use Symfony\Component\HttpFoundation\{
     Response,
     BinaryFileResponse
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Media\Bus\Query\MediaFile\{GetMediaFileQuery, GetMediaFileQueryResult};
 
 readonly class ProfileImageHandle
 {
-    public function __construct(private MediaService $mediaService) {}
+    public function __construct(private QueryBusInterface $queryBus) {}
 
     public function __invoke(User $user): BinaryFileResponse|Response
     {
-        if (!$user->getProfileImage()) {
+        $profileImage = $user->getProfileImage();
+        if ($profileImage === null) {
             return new Response(status: Response::HTTP_NO_CONTENT);
         }
 
-        return $this->mediaService->download($user->getProfileImage());
+        $getMediaFileQuery = GetMediaFileQuery::create($profileImage);
+        /** @var GetMediaFileQueryResult $getMediaFileQueryResult */
+        $getMediaFileQueryResult = $this->queryBus->handle($getMediaFileQuery);
+        $response = $getMediaFileQueryResult->response;
+
+        return $response;
     }
 }

@@ -12,32 +12,23 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileChangePassword;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\User\Model\UserModel;
-use App\Domain\User\Service\PasswordUpdater;
-use App\Infrastructure\Service\EntityManagerService;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\User\Bus\Command\ChangeUserPassword\ChangeUserPasswordCommand;
 
 readonly class ProfileChangePasswordHandler implements CommandHandlerInterface
 {
-    public function __construct(
-        private PasswordUpdater $passwordUpdater,
-        private EntityManagerService $entityManagerService
-    ) {}
+    public function __construct(private CommandBusInterface $commandBus) {}
 
     public function __invoke(ProfileChangePasswordCommand $command): void
     {
-        $user = $command->user;
-        $userModel = UserModel::fromUser($user);
-
-        $this->passwordUpdater->hashPassword(
-            plainPassword: $command->plainPassword,
-            user: $user,
-            userModel: $userModel
+        $changeUserPasswordCommand = ChangeUserPasswordCommand::create(
+            user: $command->user,
+            plainPassword: $command->plainPassword
         );
 
-        $user->setPassword($userModel->password);
-        $user->setSalt($userModel->salt);
-
-        $this->entityManagerService->flush();
+        $this->commandBus->dispatch($changeUserPasswordCommand);
     }
 }

@@ -12,57 +12,44 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileChangeImage;
 
-use App\Application\Exception\RuntimeException;
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Infrastructure\Service\EntityManagerService;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\Media\Bus\Command\SaveUserProfileImage\SaveUserProfileImageCommand;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Facade\MediaTypeFacade;
-use App\Domain\MediaMimeType\Facade\MediaMimeTypeFacade;
-use App\Domain\MediaType\Constant\MediaTypeConstant;
-use App\Domain\MediaType\Entity\MediaType;
+use App\Domain\User\Bus\Command\ChangeUserProfileImage\ChangeUserProfileImageCommand;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 readonly class ProfileChangeImageHandler implements CommandHandlerInterface
 {
-    public function __construct(
-        private EntityManagerService $entityManagerService,
-        private MediaTypeFacade $mediaTypeFacade,
-        private MediaMimeTypeFacade $mediaMimeTypeFacade
-    ) {}
+    public function __construct(private CommandBusInterface $commandBus) {}
 
     public function __invoke(ProfileChangeImageCommand $command): void
     {
-        $mediaModel = $command->mediaModel;
         $user = $command->user;
         $profileImage = $user->getProfileImage();
 
         /** @var UploadedFile $uploadMedia */
-        $uploadMedia = $mediaModel->uploadMedia;
-        $mimeType = $uploadMedia->getMimeType();
+        $uploadMedia = $command->mediaModel->uploadMedia;
 
-        $mediaMimeType = $this->mediaMimeTypeFacade->findByName($mimeType);
+        $saveProfileImageCommand = SaveUserProfileImageCommand::create(
+            owner: $user,
+            uploadMedia: $uploadMedia,
+            profileImage: $profileImage,
+            name: $uploadMedia->getFilename()
+        );
 
-        if ($mediaMimeType === null) {
-            throw new RuntimeException("FileMimeType don't exist");
-        }
-
-        $media = $profileImage ?? new Media;
-        if ($profileImage === null) {
-            /** @var MediaType $mediaType */
-            $mediaType = $this->mediaTypeFacade->findById(MediaTypeConstant::USER_PROFILE_IMAGE->value);
-
-            $media = new Media;
-            $media->setName($uploadMedia->getFilename());
-            $media->setType($mediaType);
-            $media->setOwner($user);
-        }
-
-        $media->setUploadMedia($uploadMedia);
-        $this->entityManagerService->persistAndFlush($media);
+        /** @var Media $media */
+        $media = $this->commandBus->dispatchResult($saveProfileImageCommand);
 
         if ($profileImage === null) {
-            $user->setProfileImage($media);
-            $this->entityManagerService->flush();
+            $changeProfileImageCommand = ChangeUserProfileImageCommand::create(
+                user: $user,
+                profileImage: $media
+            );
+
+            $this->commandBus->dispatch($changeProfileImageCommand);
         }
     }
 }

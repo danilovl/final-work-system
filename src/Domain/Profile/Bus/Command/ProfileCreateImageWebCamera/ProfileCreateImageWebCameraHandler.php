@@ -14,23 +14,23 @@ namespace App\Domain\Profile\Bus\Command\ProfileCreateImageWebCamera;
 
 use App\Application\Exception\RuntimeException;
 use App\Application\Helper\FileHelper;
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
 use App\Application\Service\ResizeImageService;
-use App\Infrastructure\Service\EntityManagerService;
+use App\Domain\Media\Bus\Command\SaveUserProfileImage\SaveUserProfileImageCommand;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Facade\MediaTypeFacade;
+use App\Domain\User\Bus\Command\ChangeUserProfileImage\ChangeUserProfileImageCommand;
 use App\Domain\MediaMimeType\Constant\MediaMimeTypeTypeConstant;
-use App\Domain\MediaType\Constant\MediaTypeConstant;
-use App\Domain\MediaType\Entity\MediaType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 readonly class ProfileCreateImageWebCameraHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
+        private CommandBusInterface $commandBus,
         private ResizeImageService $resizeImageService,
-        private MediaTypeFacade $mediaTypeFacade,
         private ParameterServiceInterface $parameterService
     ) {}
 
@@ -39,16 +39,6 @@ readonly class ProfileCreateImageWebCameraHandler implements CommandHandlerInter
         $user = $command->user;
         $imageData = $command->imageData;
         $profileImage = $user->getProfileImage();
-
-        $media = $profileImage ?? new Media;
-        if ($profileImage === null) {
-            /** @var MediaType $mediaType */
-            $mediaType = $this->mediaTypeFacade->findById(MediaTypeConstant::USER_PROFILE_IMAGE->value);
-
-            $media = new Media;
-            $media->setType($mediaType);
-            $media->setOwner($user);
-        }
 
         $maxImageWidth = $this->parameterService
             ->getInt('constraints.profile.image.maxWidth');
@@ -73,12 +63,23 @@ readonly class ProfileCreateImageWebCameraHandler implements CommandHandlerInter
             true
         );
 
-        $media->setUploadMedia($uploadMedia);
-        $this->entityManagerService->persistAndFlush($media);
+        $saveProfileImageCommand = SaveUserProfileImageCommand::create(
+            owner: $user,
+            uploadMedia: $uploadMedia,
+            profileImage: $profileImage,
+            name: null
+        );
+
+        /** @var Media $media */
+        $media = $this->commandBus->dispatchResult($saveProfileImageCommand);
 
         if ($profileImage === null) {
-            $user->setProfileImage($media);
-            $this->entityManagerService->flush();
+            $changeProfileImageCommand = ChangeUserProfileImageCommand::create(
+                user: $user,
+                profileImage: $media
+            );
+
+            $this->commandBus->dispatch($changeProfileImageCommand);
         }
     }
 }
