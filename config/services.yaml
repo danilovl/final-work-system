@@ -21,6 +21,12 @@ services:
       - '../src/Infrastructure/Persistence/Doctrine'
       - '../src/Infrastructure/GraphQL'
       - '../src/Infrastructure/Messaging/*/*Message.php'
+      - '../src/Infrastructure/Attribute'
+      - '../src/Infrastructure/Constant'
+      - '../src/Infrastructure/Event/EventDispatcher/GenericEvent'
+      - '../src/Infrastructure/Exception'
+      - '../src/Infrastructure/Helper'
+      - '../src/Infrastructure/Web/Form/Model'
 
   App\Application\:
     resource: '../src/Application'
@@ -91,11 +97,11 @@ services:
       $cache: '@cache.app'
 
   _instanceof:
-    App\Application\Interfaces\Bus\CommandHandlerInterface:
+    App\Infrastructure\Interfaces\Bus\CommandHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: command.bus }
 
-    App\Application\Interfaces\Bus\QueryHandlerInterface:
+    App\Infrastructure\Interfaces\Bus\QueryHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
 
