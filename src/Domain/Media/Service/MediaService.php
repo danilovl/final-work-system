@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\{
     BinaryFileResponse,
     ResponseHeaderBag
 };
-use GuzzleHttp\Psr7\Stream;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaService
@@ -30,12 +29,18 @@ class MediaService
 
     public function download(Media $media): BinaryFileResponse
     {
+        /** @var string $temporaryFilePath */
+        $temporaryFilePath = tempnam(sys_get_temp_dir(), 'media-download');
+
         $object = $this->s3ClientService->getObject(
-            $media->getType()->getFolder(),
-            $media->getMediaName()
+            bucket: $media->getType()->getFolder(),
+            key: $media->getMediaName(),
+            saveAs: $temporaryFilePath
         );
 
         if (!$object) {
+            unlink($temporaryFilePath);
+
             throw new NotFoundHttpException("File doesn't exist");
         }
 
@@ -49,15 +54,9 @@ class MediaService
             $fileName = sprintf('%s_%s_%s.%s', $date, $type, $name, $extension);
         }
 
-        /** @var Stream $body */
-        $body = $object->get('Body');
-
-        /** @var string $temporaryFilePath */
-        $temporaryFilePath = tempnam(sys_get_temp_dir(), 'media-download');
-        file_put_contents($temporaryFilePath, $body->getContents());
-
         $response = $this->createBinaryFileResponse($temporaryFilePath, $fileName);
         $response->headers->set('Content-Type', $media->getMimeType()->getName());
+        $response->deleteFileAfterSend();
 
         return $response;
     }

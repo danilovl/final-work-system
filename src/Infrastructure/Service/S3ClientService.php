@@ -16,15 +16,11 @@ use Aws\Result;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-class S3ClientService
+class S3ClientService implements ResetInterface
 {
     private const int EXIST_CACHE_TTL = 3_600;
-
-    /**
-     * @var Result[]
-     */
-    private array $cache = [];
 
     /**
      * @var array<string, bool>
@@ -43,22 +39,19 @@ class S3ClientService
         ]);
     }
 
-    public function getObject(string $bucket, string $key): ?Result
+    public function getObject(string $bucket, string $key, ?string $saveAs = null): ?Result
     {
-        $result = $this->getFromCache($bucket, $key);
-        if ($result) {
-            return $result;
+        $args = [
+            'Bucket' => $bucket,
+            'Key' => $key
+        ];
+
+        if ($saveAs !== null) {
+            $args['SaveAs'] = $saveAs;
         }
 
         try {
-            $result = $this->s3Client->getObject([
-                'Bucket' => $bucket,
-                'Key' => $key
-            ]);
-
-            $this->saveToCache(result: $result, bucket: $bucket, key: $key);
-
-            return $result;
+            return $this->s3Client->getObject($args);
         } catch (S3Exception) {
             return null;
         }
@@ -127,21 +120,16 @@ class S3ClientService
         return 's3_object_exist_' . hash('xxh128', $this->getCacheKey($bucket, $key));
     }
 
-    private function getFromCache(string $bucket, string $key): ?Result
-    {
-        return $this->cache[$this->getCacheKey($bucket, $key)] ?? null;
-    }
-
-    private function saveToCache(Result $result, string $bucket, string $key): void
-    {
-        $this->cache[$this->getCacheKey($bucket, $key)] = $result;
-    }
-
     private function clearCacheKey(string $bucket, string $key): void
     {
         $cacheKey = $this->getCacheKey($bucket, $key);
 
-        unset($this->cache[$cacheKey], $this->existCache[$cacheKey]);
+        unset($this->existCache[$cacheKey]);
         $this->appCache->deleteItem($this->getExistCacheKey($bucket, $key));
+    }
+
+    public function reset(): void
+    {
+        $this->existCache = [];
     }
 }

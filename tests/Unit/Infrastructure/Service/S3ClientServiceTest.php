@@ -50,19 +50,44 @@ class S3ClientServiceTest extends TestCase
         $this->s3ClientService->createBucket('test');
     }
 
-    public function testGetObject(): void
+    #[DataProvider('provideGetObjectCases')]
+    public function testGetObject(?string $saveAs, array $expectedArgs): void
     {
         $this->s3Client
-            ->expects($this->once())
-            ->method('getObject');
+            ->expects($this->exactly(2))
+            ->method('getObject')
+            ->with($expectedArgs);
 
-        $this->s3ClientService->getObject('test', 'test');
+        $this->s3ClientService->getObject(
+            bucket: 'bucket',
+            key: 'key',
+            saveAs: $saveAs
+        );
+        $this->s3ClientService->getObject(
+            bucket: 'bucket',
+            key: 'key',
+            saveAs: $saveAs
+        );
+    }
 
-        $this->s3Client
-            ->expects($this->never())
-            ->method('getObject');
+    public static function provideGetObjectCases(): Generator
+    {
+        yield 'into memory' => [
+            'saveAs' => null,
+            'expectedArgs' => [
+                'Bucket' => 'bucket',
+                'Key' => 'key'
+            ]
+        ];
 
-        $this->s3ClientService->getObject('test', 'test');
+        yield 'into file' => [
+            'saveAs' => '/tmp/file',
+            'expectedArgs' => [
+                'Bucket' => 'bucket',
+                'Key' => 'key',
+                'SaveAs' => '/tmp/file'
+            ]
+        ];
     }
 
     public function testGetObjectS3Exception(): void
@@ -182,6 +207,21 @@ class S3ClientServiceTest extends TestCase
             'method' => 'deleteObject',
             'arguments' => ['test', 'test']
         ];
+    }
+
+    public function testResetClearsRequestCache(): void
+    {
+        $this->s3Client
+            ->expects($this->exactly(2))
+            ->method('doesObjectExist')
+            ->willReturn(true);
+
+        $this->s3ClientService->doesObjectExist('test', 'test');
+
+        $this->s3ClientService->reset();
+        $this->appCache->clear();
+
+        $this->s3ClientService->doesObjectExist('test', 'test');
     }
 
     public function testPutObject(): void
