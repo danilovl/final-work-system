@@ -38,7 +38,7 @@
         "danilovl/hashids-bundle": "^2.0.0",
         "danilovl/object-dto-mapper": "^1.0.0",
         "danilovl/object-to-array-transform-bundle": "^4.0.0",
-        "danilovl/open-telemetry-bundle": "^0.0.7",
+        "danilovl/open-telemetry-bundle": "^0.0.8",
         "danilovl/parameter-bundle": "^5.0.1",
         "danilovl/permission-middleware-bundle": "^3.0.0",
         "danilovl/render-service-twig-extension-bundle": "^5.0.0",

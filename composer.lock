@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7b9be8bef135261a6534887c4c5539d",
+    "content-hash": "7c9b3e6f5803553219694d6323187705",
     "packages": [
         {
             "name": "api-platform/core",
@@ -286,16 +286,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.373.5",
+            "version": "3.373.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "978964f417f3617a6ced691110af6fc5d496fb4e"
+                "reference": "adad2a5f7785e71928b4a9eb1eaadf5d0ede5edc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/978964f417f3617a6ced691110af6fc5d496fb4e",
-                "reference": "978964f417f3617a6ced691110af6fc5d496fb4e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/adad2a5f7785e71928b4a9eb1eaadf5d0ede5edc",
+                "reference": "adad2a5f7785e71928b4a9eb1eaadf5d0ede5edc",
                 "shasum": ""
             },
             "require": {
@@ -377,9 +377,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.373.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.373.6"
             },
-            "time": "2026-03-18T18:22:37+00:00"
+            "time": "2026-03-19T19:38:25+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -982,16 +982,16 @@
         },
         {
             "name": "danilovl/open-telemetry-bundle",
-            "version": "v0.0.7",
+            "version": "v0.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/open-telemetry-bundle.git",
-                "reference": "627eeffc9a07c422e5d756e49204fcaadd5c4ddc"
+                "reference": "15bc0326ab55f2744ba0843c494599ff6e184fa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/627eeffc9a07c422e5d756e49204fcaadd5c4ddc",
-                "reference": "627eeffc9a07c422e5d756e49204fcaadd5c4ddc",
+                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/15bc0326ab55f2744ba0843c494599ff6e184fa1",
+                "reference": "15bc0326ab55f2744ba0843c494599ff6e184fa1",
                 "shasum": ""
             },
             "require": {
@@ -1058,9 +1058,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/open-telemetry-bundle/issues",
-                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.7"
+                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.8"
             },
-            "time": "2026-03-18T22:18:49+00:00"
+            "time": "2026-03-20T07:38:58+00:00"
         },
         {
             "name": "danilovl/parameter-bundle",
