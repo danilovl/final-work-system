@@ -17,7 +17,6 @@ use App\Infrastructure\Service\PaginatorService;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
-use App\Infrastructure\OpenTelemetry\Helper\TracingSpan;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
@@ -36,8 +35,6 @@ class HomepageCache
      */
     public function createHomepagePaginator(User $user, int $page = 1): array
     {
-        $span = TracingSpan::start('CreateHomepagePaginator');
-
         $cacheItem = $this->cache->getItem(
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
@@ -63,8 +60,6 @@ class HomepageCache
 
             $this->cache->save($cacheItem);
         }
-
-        $span->end();
 
         return $pagePaginators;
     }
