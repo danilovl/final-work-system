@@ -44,13 +44,14 @@ class S3CreateBucketCommandTest extends TestCase
 
     public function testExecute(): void
     {
-        $mediaType1 = $this->createMock(MediaType::class);
+        $mediaType1 = $this->createStub(MediaType::class);
         $mediaType1->method('getFolder')->willReturn('testFolder1');
 
-        $mediaType2 = $this->createMock(MediaType::class);
+        $mediaType2 = $this->createStub(MediaType::class);
         $mediaType2->method('getFolder')->willReturn('testFolder2');
 
         $this->mediaTypeFacade
+            ->expects($this->once())
             ->method('list')
             ->willReturn([$mediaType1, $mediaType2]);
 
