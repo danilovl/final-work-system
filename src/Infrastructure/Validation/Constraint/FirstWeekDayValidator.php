@@ -18,7 +18,7 @@ use App\Application\Helper\{
     DateHelper
 };
 use App\Infrastructure\Service\TranslatorService;
-use DateTime;
+use DateTimeImmutable;
 use Override;
 use Symfony\Component\Validator\{
     Constraint,
@@ -41,8 +41,8 @@ class FirstWeekDayValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, FirstWeekDay::class);
         }
 
-        if (!$value instanceof DateTime) {
-            throw new UnexpectedTypeException($value, DateTime::class);
+        if (!$value instanceof DateTimeImmutable) {
+            throw new UnexpectedTypeException($value, DateTimeImmutable::class);
         }
 
         $startWeekTest = DateHelper::actualWeekStartByDate(clone $value);

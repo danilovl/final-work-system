@@ -30,6 +30,7 @@ final class FirstWeekDayType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'input' => 'datetime_immutable',
             'widget' => 'single_text',
             'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
             'html5' => false
