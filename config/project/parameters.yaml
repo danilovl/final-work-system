@@ -100,10 +100,8 @@ parameters:
     conversation:
       detail:
         active: true
-        sleep: 60
     widget:
       top_nav:
         active: true
-        sleep: 60
   cache:
     homepage_time: 86400
