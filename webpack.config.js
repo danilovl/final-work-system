@@ -73,6 +73,7 @@ Encore
                     './assets/js/main.js'
                 ]
             },
+            hash: true,
             transform: {
                 'js/main.js': code => {
                     return code;
@@ -87,12 +88,14 @@ Encore
                     './node_modules/jquery/dist/jquery.min.js',
                     './node_modules/bootstrap/dist/js/bootstrap.min.js'
                 ]
-            }
+            },
+            hash: true
         })
     )
     .splitEntryChunks()
     .enableStimulusBridge('./assets/controllers.json')
     .addEntry('app', './assets/app.js')
+    .addEntry('analytics', './assets/js/analytics.js')
     .enableVueLoader(() => {}, { version: 3 })
     .addEntry('app_vue_calendar_manage', './assets/vue/app-calendar-manage.ts')
     .addEntry('app_vue_calendar_reservation', './assets/vue/app-calendar-reservation.ts')
