@@ -6038,3 +6038,17 @@ ul.msg_list li .time {
 .notify-item-hide {
     opacity: 0;
 }
+
+@media (max-width: 767.98px) {
+    .x_content, .mail-box {
+        overflow-x: auto;
+    }
+
+    .mail-box {
+        clear: both;
+    }
+
+    .table-header-fixed, .work-table-header-fixed {
+        display: none !important;
+    }
+}
