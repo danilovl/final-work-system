@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Bus\Query\UserEventsCalendar;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\EventCalendar\Facade\EventCalendarFacade;
 
 readonly class GetUserEventsCalendarQueryHandler implements QueryHandlerInterface

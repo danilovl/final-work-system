@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\AjaxRuntimeException;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Domain\EventParticipant\Helper\SortFunctionHelper;
@@ -22,7 +22,7 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\EventCalendar\Facade\EventCalendarFacade;
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\Event\Bus\Command\CreateEvent\CreateEventCommand;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Form\EventForm;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Bus\Query\UserEventsCalendar;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Event\Entity\Event;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

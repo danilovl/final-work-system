@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\AjaxRuntimeException;
 use App\Infrastructure\Service\{
     EntityManagerService,
@@ -33,7 +33,7 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventCalendarEventReservationHandle

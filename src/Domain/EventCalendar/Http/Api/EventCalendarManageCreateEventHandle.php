@@ -14,7 +14,7 @@ namespace App\Domain\EventCalendar\Http\Api;
 
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\EventCalendar\Facade\EventCalendarFacade;
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\User\Bus\Query\User\{GetUserQuery, GetUserQueryResult};
 use App\Domain\Work\Bus\Query\Work\{GetWorkQuery, GetWorkQueryResult};
 use App\Domain\EventType\Bus\Query\EventType\{GetEventTypeQuery, GetEventTypeQueryResult};

@@ -26,7 +26,7 @@ use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Service\EntityManagerService;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\EventType\Bus\Query\EventTypeList\{GetEventTypeListQuery, GetEventTypeListQueryResult};
 use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
