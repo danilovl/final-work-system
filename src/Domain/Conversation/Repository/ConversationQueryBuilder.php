@@ -15,7 +15,7 @@ namespace App\Domain\Conversation\Repository;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class ConversationQueryBuilder extends BaseQueryBuilder
 {
@@ -114,7 +114,7 @@ class ConversationQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByMessagesCreatedAt(string $order = Order::Descending->value): self
+    public function orderByMessagesCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('messages.createdAt', $order);
 
