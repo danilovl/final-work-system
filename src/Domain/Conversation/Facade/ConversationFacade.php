@@ -242,6 +242,8 @@ readonly class ConversationFacade
                         ->getConversationMessage($conversationMessage->getId());
 
                     $this->conversationEventDispatcher->onConversationMessageCreate($message);
+
+                    break;
                 }
             }
 
