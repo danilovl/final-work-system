@@ -37,7 +37,10 @@ class EventEventDispatcherTest extends TestCase
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherService::class);
         $this->asyncService = new AsyncService;
-        $this->eventEventDispatcher = new EventEventDispatcher($this->eventDispatcher, $this->asyncService);
+        $this->eventEventDispatcher = new EventEventDispatcher(
+            eventDispatcher: $this->eventDispatcher,
+            asyncService: $this->asyncService
+        );
     }
 
     #[DataProvider('provideDispatchCases')]
