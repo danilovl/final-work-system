@@ -24,6 +24,7 @@ class WorkStatusDataGrid
     {
         return $this->workStatusRepository
             ->createQueryBuilder('status')
-            ->orderBy('status.name', SortDirection::Ascending);
+            ->orderBy('status.name', SortDirection::Ascending)
+            ->addOrderBy('status.id', SortDirection::Ascending);
     }
 }

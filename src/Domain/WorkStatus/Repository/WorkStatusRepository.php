@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkStatus\Repository;
 
-use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
+use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -35,16 +35,24 @@ class WorkStatusRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work_status');
     }
 
-    public function countByUser(WorkStatusRepositoryDTO $workStatusData): QueryBuilder
-    {
+    /**
+     * @param int[] $userIds
+     * @param WorkStatus[]|null $workStatus
+     */
+    public function countByUsers(
+        array $userIds,
+        User $supervisor,
+        string $type,
+        ?array $workStatus
+    ): QueryBuilder {
         return $this->createWorkStatusQueryBuilder()
-            ->selectNameAndCount()
+            ->selectUserIdNameAndCount($type)
             ->leftJoinWorks()
             ->leftJoinSupervisor()
-            ->bySupervisor($workStatusData->supervisor)
-            ->byUserAndType($workStatusData->type, $workStatusData->user)
-            ->byWorkStatusRoot($workStatusData->workStatus)
-            ->groupByName()
+            ->bySupervisor($supervisor)
+            ->byUsersAndType($type, $userIds)
+            ->byWorkStatusRoot($workStatus)
+            ->groupByUserIdAndName()
             ->getQueryBuilder();
     }
 }

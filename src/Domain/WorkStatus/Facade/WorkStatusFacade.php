@@ -13,7 +13,7 @@
 namespace App\Domain\WorkStatus\Facade;
 
 use App\Application\Exception\EntityNotFoundException;
-use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
+use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
 
@@ -65,13 +65,34 @@ readonly class WorkStatusFacade
     /**
      * @return array<string, int>
      */
-    public function listCountByUser(WorkStatusRepositoryDTO $workStatusData): array
-    {
-        /** @var array<string, int> $result */
-        $result = $this->workStatusRepository
-            ->countByUser($workStatusData)
+    /**
+     * @param int[] $userIds
+     * @param WorkStatus[]|null $workStatus
+     * @return array<int, array<array{name: string, count: int|string}>>
+     */
+    public function listCountByUsers(
+        array $userIds,
+        User $supervisor,
+        string $type,
+        ?array $workStatus
+    ): array {
+        if (count($userIds) === 0) {
+            return [];
+        }
+
+        /** @var array<array{userId: int|string, name: string, count: int|string}> $rows */
+        $rows = $this->workStatusRepository
+            ->countByUsers($userIds, $supervisor, $type, $workStatus)
             ->getQuery()
             ->getResult();
+
+        $result = [];
+        foreach ($rows as $row) {
+            $userId = (int) $row['userId'];
+            unset($row['userId']);
+
+            $result[$userId][] = $row;
+        }
 
         return $result;
     }

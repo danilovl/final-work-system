@@ -12,20 +12,11 @@
 
 namespace App\Domain\WorkStatus\Repository;
 
-use App\Domain\User\Entity\User;
-use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 
 class WorkStatusQueryBuilder extends BaseQueryBuilder
 {
-    public function selectNameAndCount(): self
-    {
-        $this->queryBuilder->select('work_status.name, COUNT(work.id) as count');
-
-        return $this;
-    }
-
     public function leftJoinWorks(): self
     {
         $this->queryBuilder->leftJoin('work_status.works', 'work');
@@ -49,40 +40,6 @@ class WorkStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUserAndType(?string $type, ?User $user): self
-    {
-        if ($type === null || $user === null) {
-            return $this;
-        }
-
-        switch ($type) {
-            case WorkUserTypeConstant::AUTHOR->value:
-                $this->queryBuilder
-                    ->leftJoin('work.author', 'author')
-                    ->andWhere('author = :user');
-
-                break;
-            case WorkUserTypeConstant::OPPONENT->value:
-                $this->queryBuilder
-                    ->leftJoin('work.opponent', 'opponent')
-                    ->andWhere('opponent = :user');
-
-                break;
-            case WorkUserTypeConstant::CONSULTANT->value:
-                $this->queryBuilder
-                    ->leftJoin('work.consultant', 'consultant')
-                    ->andWhere('consultant = :user');
-
-                break;
-            default:
-                return $this;
-        }
-
-        $this->queryBuilder->setParameter('user', $user->getId());
-
-        return $this;
-    }
-
     public function byWorkStatusRoot(WorkStatus|iterable|null $workStatus): self
     {
         if ($workStatus instanceof WorkStatus) {
@@ -98,9 +55,31 @@ class WorkStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function groupByName(): self
+    public function selectUserIdNameAndCount(string $type): self
     {
-        $this->queryBuilder->groupBy('work_status.name');
+        $this->queryBuilder->select(sprintf('IDENTITY(work.%s) AS userId, work_status.name, COUNT(work.id) as count', $type));
+
+        return $this;
+    }
+
+    /**
+     * @param int[] $userIds
+     */
+    public function byUsersAndType(string $type, array $userIds): self
+    {
+        $this->queryBuilder
+            ->leftJoin('work.' . $type, $type)
+            ->andWhere($this->queryBuilder->expr()->in($type . '.id', ':userIds'))
+            ->setParameter('userIds', $userIds);
+
+        return $this;
+    }
+
+    public function groupByUserIdAndName(): self
+    {
+        $this->queryBuilder
+            ->groupBy('userId')
+            ->addGroupBy('work_status.name');
 
         return $this;
     }
