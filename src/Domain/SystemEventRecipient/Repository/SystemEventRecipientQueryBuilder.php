@@ -32,9 +32,22 @@ class SystemEventRecipientQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    public function selectSystemEventWithEventParticipant(): self
+    {
+        $this->queryBuilder
+            ->addSelect('systemEvent', 'owner', 'ownerProfileImage', 'event', 'eventParticipant', 'eventParticipantUser')
+            ->leftJoin('owner.profileImage', 'ownerProfileImage')
+            ->leftJoin('event.participant', 'eventParticipant')
+            ->leftJoin('eventParticipant.user', 'eventParticipantUser');
+
+        return $this;
+    }
+
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('systemEvent.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('systemEvent.createdAt', $order)
+            ->addOrderBy('systemEvent.id', $order);
 
         return $this;
     }

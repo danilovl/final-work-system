@@ -35,6 +35,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
     {
         return $this->createSystemEventRecipientQueryBuilder()
             ->leftJoinAll()
+            ->selectSystemEventWithEventParticipant()
             ->byRecipient($recipient)
             ->orderByCreatedAt()
             ->getQueryBuilder();
@@ -44,6 +45,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
     {
         return $this->createSystemEventRecipientQueryBuilder()
             ->leftJoinAll()
+            ->selectSystemEventWithEventParticipant()
             ->byRecipient($recipient)
             ->byViewed(false)
             ->orderByCreatedAt()
@@ -68,6 +70,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
     {
         $builder = $this->createSystemEventRecipientQueryBuilder()
             ->leftJoinAll()
+            ->selectSystemEventWithEventParticipant()
             ->byRecipient($systemEventsByTypeRecipient->getRecipientNotNull())
             ->orderByCreatedAt()
             ->paginate($systemEventsByTypeRecipient->limit, $systemEventsByTypeRecipient->offset);
