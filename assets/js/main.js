@@ -1,31 +1,3 @@
-(function ($, sr) {
-    let debounce = function (func, threshold, execAsap) {
-        let timeout;
-
-        return function debounced() {
-            let obj = this, args = arguments;
-
-            function delayed() {
-                if (!execAsap)
-                    func.apply(obj, args);
-                timeout = null;
-            }
-
-            if (timeout)
-                clearTimeout(timeout);
-            else if (execAsap)
-                func.apply(obj, args);
-
-            timeout = setTimeout(delayed, threshold || 100);
-        };
-    };
-
-    jQuery.fn[sr] = function (fn) {
-        return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
-    };
-
-})(jQuery, 'smartresize');
-
 function initSidebar() {
     const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
     const bodyElement = $('body');
@@ -88,39 +60,8 @@ function initSidebar() {
         setContentHeight();
     }).parent().addClass('active');
 
-    $(window).smartresize(function () {
-        setContentHeight();
-    });
-
     setContentHeight();
 
-    if ($.fn.mCustomScrollbar) {
-        $('.menu_fixed').mCustomScrollbar({
-            autoHideScrollbar: true,
-            theme: 'minimal',
-            mouseWheel: {preventDefault: true}
-        });
-    }
-}
-
-function countChecked() {
-    if (checkState === 'all') {
-        $(".bulk_action input[name='table_records']").iCheck('check');
-    }
-    if (checkState === 'none') {
-        $(".bulk_action input[name='table_records']").iCheck('uncheck');
-    }
-
-    let checkCount = $(".bulk_action input[name='table_records']:checked").length;
-
-    if (checkCount) {
-        $('.column-title').hide();
-        $('.bulk-actions').show();
-        $('.action-cnt').html(checkCount + ' Records Selected');
-    } else {
-        $('.column-title').show();
-        $('.bulk-actions').hide();
-    }
 }
 
 let originalLeave = $.fn.popover.Constructor.prototype.leave;
@@ -143,12 +84,6 @@ $.fn.popover.Constructor.prototype.leave = function (obj) {
         });
     }
 };
-
-function initAutosize() {
-    if (typeof $.fn.autosize !== 'undefined') {
-        autosize($('.resizable_textarea'));
-    }
-}
 
 function initValidator() {
     if (typeof (validator) === 'undefined') {
@@ -184,17 +119,31 @@ function initValidator() {
 }
 
 function notifyMessage(notifyType, notifyText) {
-    if (typeof (PNotify) === 'undefined') {
-        return;
+    const alertTypes = {
+        error: 'danger',
+        notice: 'warning'
+    };
+    const alertType = alertTypes[notifyType] || notifyType;
+
+    let container = document.getElementById('notify-container');
+    if (container === null) {
+        container = document.createElement('div');
+        container.id = 'notify-container';
+        container.className = 'notify-container';
+        document.body.appendChild(container);
     }
 
-    new PNotify({
-        title: notifyText,
-        type: notifyType,
-        hide: true,
-        styling: 'bootstrap3',
-        delay: 2000
-    });
+    const item = document.createElement('div');
+    item.className = `alert alert-${alertType} notify-item`;
+    item.setAttribute('role', 'alert');
+    item.textContent = notifyText;
+    item.addEventListener('click', () => item.remove());
+    container.appendChild(item);
+
+    setTimeout(() => {
+        item.classList.add('notify-item-hide');
+        setTimeout(() => item.remove(), 300);
+    }, 3000);
 }
 
 function showGoogleDocs(id, url) {
@@ -467,35 +416,6 @@ function initModalDraggable() {
     $(".modal-dialog").draggable({
         handle: ".modal-header",
         cursor: "move"
-    });
-}
-
-function initChecked() {
-    const tableInputElement = $('table input')
-
-    tableInputElement.on('ifChecked', function () {
-        checkState = '';
-        $(this).parent().parent().parent().addClass('selected');
-        countChecked();
-    });
-
-    tableInputElement.on('ifUnchecked', function () {
-        checkState = '';
-        $(this).parent().parent().parent().removeClass('selected');
-        countChecked();
-    });
-}
-
-function initFlat() {
-    if (!$("input.flat")[0]) {
-        return
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        $('input.flat').iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass: 'iradio_flat-green'
-        });
     });
 }
 
@@ -810,10 +730,7 @@ function initLayout() {
     });
     initSidebar();
     initValidator();
-    initAutosize();
     initTooltip();
-    initChecked();
-    initFlat();
     initHideShow();
     initPopover();
     initModalDraggable();

@@ -1,5 +1,5 @@
-const Encore = require('@symfony/webpack-encore');
-const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
+import Encore from '@symfony/webpack-encore';
+import MergeIntoSingleFilePlugin from 'webpack-merge-and-include-globally';
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -32,14 +32,7 @@ Encore
     .addStyleEntry('app/css', [
         'bootstrap/dist/css/bootstrap.css',
         'font-awesome/css/font-awesome.min.css',
-        'pnotify/dist/pnotify.css',
-        'pnotify/dist/pnotify.buttons.css',
-        'pnotify/dist/pnotify.nonblock.css',
-        'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
-        'switchery-latest/dist/switchery.min.css',
         'select2/dist/css/select2.min.css',
-        'icheck/skins/flat/green.css',
-        'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
         './assets/css/main.css'
     ])
     .addStyleEntry('app_security/css', [
@@ -52,20 +45,11 @@ Encore
             files: {
                 'js/main.js': [
                     './node_modules/jquery/dist/jquery.min.js',
-                    './node_modules/jquery-ui-dist/jquery-ui.min.js',
+                    './node_modules/jquery-ui/dist/jquery-ui.min.js',
                     './node_modules/inputmask/dist/jquery.inputmask.js',
-                    './node_modules/smartresize.js/dist/smartresize.min.js',
                     './node_modules/bootstrap/dist/js/bootstrap.min.js',
                     './node_modules/tinymce/tinymce.min.js',
-                    './node_modules/pnotify/dist/pnotify.js',
-                    './node_modules/pnotify/dist/pnotify.buttons.js',
-                    './node_modules/pnotify/dist/pnotify.nonblock.js',
-                    './node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
                     './node_modules/select2/dist/js/select2.full.min.js',
-                    './node_modules/moment/min/moment-with-locales.js',
-                    './node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-                    './node_modules/switchery-latest/dist/switchery.min.js',
-                    './node_modules/icheck/icheck.min.js',
                     './node_modules/jszip/dist/jszip.js',
                     './assets/js/collection/jquery.collection.js',
                     './assets/js/optgroup/select2.optgroupSelect.js',
@@ -103,10 +87,6 @@ Encore
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
-    .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
-        config.corejs = 3;
-    })
 
 Encore.addLoader({
     test: /\.ts$/,
@@ -117,4 +97,4 @@ Encore.addLoader({
     }
 });
 
-module.exports = Encore.getWebpackConfig();
+export default await Encore.getWebpackConfig();

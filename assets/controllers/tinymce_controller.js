@@ -31,6 +31,7 @@ export default class extends Controller {
         this.editors = [];
         elements.forEach(element => {
             tinymce.init({
+                license_key: 'gpl',
                 target: element,
                 height: this.heightValue,
                 theme: 'silver',

@@ -1,46 +1,28 @@
 import { Controller } from '@hotwired/stimulus';
 
 /**
- * Switchery toggle for a checkbox.
+ * Toggle switch for a checkbox. The look comes from the "js-switch" CSS class, the element is not wrapped.
  *
- *   <input type="checkbox" data-controller="switch">
+ *   <input type="checkbox" class="js-switch" data-controller="switch">
  *
  * With data-target-url the new state is sent right away:
  *   POST data-target-url, body type=<data-target-type>; notifyMessage from the JSON response is shown.
  */
 export default class extends Controller {
     connect() {
-        if (typeof Switchery === 'undefined' || this.switchery) {
+        if (!this.element.hasAttribute('data-target-url')) {
             return;
         }
 
-        this.switchery = new Switchery(this.element, {
-            color: '#26B99A',
-            secondaryColor: '#ff0000'
-        });
-
-        if (this.element.hasAttribute('data-target-url')) {
-            this.onChange = () => this.send();
-            this.element.addEventListener('change', this.onChange);
-        }
+        this.onChange = () => this.send();
+        this.element.addEventListener('change', this.onChange);
     }
 
     disconnect() {
-        if (!this.switchery) {
-            return;
-        }
-
         if (this.onChange) {
             this.element.removeEventListener('change', this.onChange);
             this.onChange = null;
         }
-
-        this.switchery.destroy();
-        if (this.switchery.switcher) {
-            this.switchery.switcher.remove();
-        }
-        this.element.style.display = '';
-        this.switchery = null;
     }
 
     send() {

@@ -20,7 +20,9 @@ export default class extends Controller {
     }
 
     pick(event) {
-        $(event.params.input).data('DateTimePicker').date(String(event.params.date));
+        const input = document.querySelector(event.params.input);
+        input.value = String(event.params.date);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
 
         this.panelTargets.forEach(panel => {
             $(panel).hide().removeClass('in');

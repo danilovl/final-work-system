@@ -954,6 +954,13 @@ a {
     padding: 9px
 }
 
+.main_menu .nav.child_menu .fa {
+    width: 16px;
+    margin-right: 4px;
+    font-size: 14px;
+    text-align: center
+}
+
 .panel_toolbox {
     float: right;
     min-width: 70px
@@ -4110,14 +4117,49 @@ div[data-role=editor-toolbar] {
     border: 1px solid #ccc
 }
 
-.switchery {
-    width: 32px !important;
-    height: 20px !important;
+.js-switch {
+    appearance: none;
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
+    border-radius: 20px;
+    background-color: #ff0000;
+    cursor: pointer;
+    transition: background-color .2s;
 }
 
-.switchery > small {
-    width: 20px !important;
-    height: 20px !important;
+.js-switch::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    transition: left .2s;
+}
+
+.js-switch:checked {
+    background-color: #26B99A;
+}
+
+.js-switch:checked::before {
+    left: 12px;
+}
+
+.js-switch:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+input[type="checkbox"]:not(.js-switch),
+input[type="radio"] {
+    accent-color: #26B99A;
 }
 
 .switchery-very-small > span {
@@ -4566,11 +4608,6 @@ ul.verticle_bars li {
     border-color: rgba(231, 76, 60, .88)
 }
 
-.ui-pnotify.dark .ui-pnotify-container {
-    color: #E9EDEF;
-    background-color: rgba(52, 73, 94, .88);
-    border-color: rgba(52, 73, 94, .88)
-}
 
 .custom-notifications {
     position: fixed;
@@ -5565,6 +5602,25 @@ ul.msg_list li .time {
     height: 400px;
 }
 
-.ui-pnotify {
-    width: 320px !important;
+[data-vc-input] {
+    z-index: 1100;
+}
+
+.notify-container {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10000;
+    width: 320px;
+}
+
+.notify-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    transition: opacity .3s;
+}
+
+.notify-item-hide {
+    opacity: 0;
 }
