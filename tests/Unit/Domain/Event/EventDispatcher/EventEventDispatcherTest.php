@@ -43,9 +43,8 @@ class EventEventDispatcherTest extends TestCase
     #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
-        $event = $this->createMock(Event::class);
+        $event = $this->createStub(Event::class);
         $event
-            ->expects($this->any())
             ->method('getParticipant')
             ->willReturn(new EventParticipant);
 
