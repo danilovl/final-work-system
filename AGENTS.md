@@ -102,6 +102,7 @@
 - `npm run playwright:test` (в контейнере `node`).
 - Переиндексация: `bin/console fos:elastica:populate` (dev), `APP_ENV=test bin/console fos:elastica:populate -e test` (тестовые индексы).
 - Всё запускается в контейнере: `docker compose exec php ...`, `docker compose exec node ...`.
+- **Контроль ресурсов** (WSL: 10 ГБ памяти, 5 ядер): PHPUnit, PHPStan, Playwright и сборки запускать в фоне, а во время прогона каждые несколько секунд проверять диск (`/proc/diskstats`), память (`MemAvailable` в `/proc/meminfo`) и CPU контейнеров (`docker stats --no-stream`). Прогон останавливать сразу, если обмен с диском держится выше 100 МБ/с три замера подряд (в нормальном прогоне PHPUnit — до ~20 МБ/с), свободной памяти меньше 1,5 ГБ или контейнер `supervisor` выше 150% CPU; потом искать причину, а не перезапускать. Высокий CPU у `supervisor` обычно значит, что воркеры Messenger падают при старте (сломан контейнер Symfony) и перезапускаются по кругу — проверить `docker compose exec supervisor tail /var/log/supervisor/supervisord.log` и `bin/console lint:container`. Покрытие (`bin/phpunit.sh` с pcov) без необходимости не включать — для проверки достаточно `vendor/bin/phpunit`.
 
 ## Коммиты
 
