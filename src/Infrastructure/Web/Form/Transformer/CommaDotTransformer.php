@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Web\Form\Transformer;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use Override;
 use Symfony\Component\Form\DataTransformerInterface;
 

@@ -12,11 +12,11 @@
 
 namespace App\Infrastructure\Event\EventSubscriber;
 
-use App\Application\Constant\FlashTypeConstant;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\RequestService;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 readonly class RequestFlashSubscriber implements EventSubscriberInterface
 {
@@ -26,12 +26,12 @@ readonly class RequestFlashSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::ENTITY_CREATE => 'onCreateSuccess',
-            Events::ENTITY_REMOVE => 'onDeleteSuccess',
-            Events::ENTITY_SAVE => 'onSaveSuccess',
-            Events::REQUEST_FLASH_CREATE_FAILURE => 'onCreateFailure',
-            Events::REQUEST_FLASH_SAVE_FAILURE => 'onSaveFailure',
-            Events::REQUEST_FLASH_DELETE_FAILURE => 'onDeleteFailure'
+            InfrastructureEvents::ENTITY_CREATE => 'onCreateSuccess',
+            InfrastructureEvents::ENTITY_REMOVE => 'onDeleteSuccess',
+            InfrastructureEvents::ENTITY_SAVE => 'onSaveSuccess',
+            InfrastructureEvents::REQUEST_FLASH_CREATE_FAILURE => 'onCreateFailure',
+            InfrastructureEvents::REQUEST_FLASH_SAVE_FAILURE => 'onSaveFailure',
+            InfrastructureEvents::REQUEST_FLASH_DELETE_FAILURE => 'onDeleteFailure'
         ];
     }
 

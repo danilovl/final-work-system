@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Event\EventListener;
 
-use App\Application\Provider\LoggableProvider;
+use App\Infrastructure\Provider\LoggableProvider;
 use App\Infrastructure\Messaging\Loggable\LoggableMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Doctrine\Common\EventArgs;

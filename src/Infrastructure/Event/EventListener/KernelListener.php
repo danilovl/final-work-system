@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Event\EventListener;
 
-use App\Application\Attribute\EntityRelationValidatorAttribute;
+use App\Infrastructure\Attribute\EntityRelationValidatorAttribute;
 use LogicException;
 use ReflectionClass;
 use ReflectionMethod;

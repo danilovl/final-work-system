@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Web\Twig\Runtime;
 
-use App\Application\Helper\RegexHelper;
+use App\Infrastructure\Helper\RegexHelper;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFilter;
 use Symfony\Component\Routing\RouterInterface;
 

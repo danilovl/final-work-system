@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Console;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use App\Infrastructure\Service\EntityManagerService;
 use Symfony\Component\Console\Attribute\{
     Argument,

@@ -12,7 +12,7 @@
 
 namespace App\Application\Menu;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use App\Application\Interfaces\Menu\MenuItemInterface;
 
 class MenuItem implements MenuItemInterface

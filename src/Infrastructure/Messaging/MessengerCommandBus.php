@@ -12,10 +12,7 @@
 
 namespace App\Infrastructure\Messaging;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandInterface};
 use Symfony\Component\Messenger\{
     HandleTrait,
     MessageBusInterface

@@ -12,4 +12,6 @@
 
 namespace App\Application\Exception;
 
+use App\Infrastructure\Exception\EntityNotFoundException;
+
 class UserNotExistException extends EntityNotFoundException {}

@@ -38,17 +38,7 @@ enum Events
     public const string EVENT_COMMENT_EDIT = 'event.comment.edit';
     public const string EVENT_RESERVATION = 'event.reservation';
 
-    public const string CACHE_CLEAR_KEY = 'cache.clear.key';
     public const string CACHE_CREATE_HOMEPAGE = 'cache.create.homepage';
-
-    public const string ENTITY_CREATE = 'entity.create';
-    public const string ENTITY_CREATE_ASYNC = 'entity.create.async';
-    public const string ENTITY_REMOVE = 'entity.remove';
-    public const string ENTITY_SAVE = 'entity.save';
-
-    public const string REQUEST_FLASH_CREATE_FAILURE = 'request.flash.create.failure';
-    public const string REQUEST_FLASH_SAVE_FAILURE = 'request.flash.save.failure';
-    public const string REQUEST_FLASH_DELETE_FAILURE = 'request.flash.delete.failure';
 
     public const string MESSAGE_CREATE = 'message.create';
     public const string DOCUMENT_CREATE = 'document.create';

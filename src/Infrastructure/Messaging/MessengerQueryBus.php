@@ -12,10 +12,7 @@
 
 namespace App\Infrastructure\Messaging;
 
-use App\Application\Interfaces\Bus\{
-    QueryBusInterface,
-    QueryInterface
-};
+use App\Infrastructure\Interfaces\Bus\{QueryBusInterface, QueryInterface};
 use LogicException;
 use Symfony\Component\DependencyInjection\Attribute\Target;
 use Symfony\Component\Messenger\{

@@ -12,8 +12,8 @@
 
 namespace App\Infrastructure\Service;
 
-use App\Application\EventDispatcher\EntityEventDispatcher;
-use App\Application\Helper\AttributeHelper;
+use App\Infrastructure\Event\EventDispatcher\EntityEventDispatcher;
+use App\Infrastructure\Helper\AttributeHelper;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\{
     EntityManagerInterface,

@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Event\FormEventListener;
 
-use App\Application\Constant\FormOperationTypeConstant;
+use App\Infrastructure\Constant\FormOperationTypeConstant;
 use Override;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\{
     FormEvents,
     FormBuilderInterface
 };
-use App\Application\EventDispatcher\RequestFlashEventDispatcher;
+use App\Infrastructure\Event\EventDispatcher\RequestFlashEventDispatcher;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 

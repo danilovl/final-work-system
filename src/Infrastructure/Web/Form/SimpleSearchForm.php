@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Web\Form;
 
-use App\Application\Model\SearchModel;
+use App\Infrastructure\Web\Form\Model\SearchModel;
 use App\Infrastructure\Web\Form\Transformer\TrimTransformer;
 use Override;
 use Symfony\Component\Form\{

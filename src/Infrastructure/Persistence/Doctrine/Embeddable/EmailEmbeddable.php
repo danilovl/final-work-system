@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Persistence\Doctrine\Embeddable;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\{
     Column,

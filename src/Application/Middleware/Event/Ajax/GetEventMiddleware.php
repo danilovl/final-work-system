@@ -12,11 +12,8 @@
 
 namespace App\Application\Middleware\Event\Ajax;
 
-use App\Application\Constant\{
-    FlashTypeConstant,
-    DateFormatConstant
-};
-use App\Application\Helper\DateHelper;
+use App\Infrastructure\Constant\{DateFormatConstant, FlashTypeConstant};
+use App\Infrastructure\Helper\DateHelper;
 use App\Infrastructure\Service\TranslatorService;
 use Symfony\Component\HttpFoundation\{
     Response,

@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Service;
 
-use App\Application\Constant\TranslationConstant;
+use App\Infrastructure\Constant\TranslationConstant;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

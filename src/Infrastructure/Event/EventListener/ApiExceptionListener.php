@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Event\EventListener;
 
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 use Doctrine\ORM\{
     NonUniqueResultException,
     NoResultException

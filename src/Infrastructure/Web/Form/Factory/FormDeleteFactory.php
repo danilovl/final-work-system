@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Web\Form\Factory;
 
-use App\Application\Constant\FormOperationTypeConstant;
+use App\Infrastructure\Constant\FormOperationTypeConstant;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Form\{

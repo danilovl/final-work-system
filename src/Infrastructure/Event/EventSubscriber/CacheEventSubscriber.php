@@ -12,11 +12,11 @@
 
 namespace App\Infrastructure\Event\EventSubscriber;
 
-use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
-use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Event\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Cache\CacheInterface;
+use App\Infrastructure\Event\InfrastructureEvents;
 
 readonly class CacheEventSubscriber implements EventSubscriberInterface
 {
@@ -26,7 +26,7 @@ readonly class CacheEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::CACHE_CLEAR_KEY => 'onClearCacheKey'
+            InfrastructureEvents::CACHE_CLEAR_KEY => 'onClearCacheKey'
         ];
     }
 

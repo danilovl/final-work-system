@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\GraphQL\Type;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use DateTimeImmutable;
 use DateTimeInterface;
 use GraphQL\Error\InvariantViolation;

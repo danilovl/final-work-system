@@ -12,8 +12,8 @@
 
 namespace App\Infrastructure\Service;
 
-use App\Application\Constant\TranslationConstant;
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Constant\TranslationConstant;
+use App\Infrastructure\Exception\RuntimeException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Contracts\Service\ResetInterface;
 
