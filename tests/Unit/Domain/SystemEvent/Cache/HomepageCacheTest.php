@@ -65,7 +65,12 @@ class HomepageCacheTest extends TestCase
             ->method('queryRecipientsQueryByUser')
             ->willReturn(new Query($entityManagerInterface));
 
-        $this->homepageCache = new HomepageCache($cache, $parameterService, $paginatorService, $systemEventRecipientFacade);
+        $this->homepageCache = new HomepageCache(
+            cache: $cache,
+            parameterService: $parameterService,
+            paginatorService: $paginatorService,
+            systemEventRecipientFacade: $systemEventRecipientFacade
+        );
     }
 
     public function testCreateHomepagePaginator(): void
