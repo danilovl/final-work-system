@@ -57,7 +57,9 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('conversation_message.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('conversation_message.createdAt', $order)
+            ->addOrderBy('conversation_message.id', $order);
 
         return $this;
     }

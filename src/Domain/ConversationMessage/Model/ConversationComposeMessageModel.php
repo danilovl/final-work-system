@@ -38,4 +38,11 @@ class ConversationComposeMessageModel
 
         return $result;
     }
+
+    public function getFirstConversation(): ?Conversation
+    {
+        $conversations = $this->getConversations();
+
+        return $conversations[0] ?? null;
+    }
 }

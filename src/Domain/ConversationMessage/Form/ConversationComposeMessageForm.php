@@ -46,6 +46,21 @@ class ConversationComposeMessageForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $options['user'];
+        $isMultiple = UserRoleHelper::isSupervisor($user);
+
+        $conversationOptions = [
+            'required' => true,
+            'multiple' => $isMultiple,
+            'choices' => $options['conversations'],
+            'choice_label' => fn (Conversation $conversation): string => $this->choiceLabelConversation($conversation, $user),
+            'constraints' => [
+                new NotBlank
+            ]
+        ];
+
+        if (!$isMultiple) {
+            $conversationOptions['getter'] = static fn (ConversationComposeMessageModel $model): ?Conversation => $model->getFirstConversation();
+        }
 
         $builder
             ->add('name', TextType::class, [
@@ -54,15 +69,7 @@ class ConversationComposeMessageForm extends AbstractType
                     new ConversationMessageName
                 ],
             ])
-            ->add('conversation', ChoiceType::class, [
-                'required' => true,
-                'multiple' => UserRoleHelper::isSupervisor($user),
-                'choices' => $options['conversations'],
-                'choice_label' => fn (Conversation $conversation): string => $this->choiceLabelConversation($conversation, $user),
-                'constraints' => [
-                    new NotBlank
-                ]
-            ])
+            ->add('conversation', ChoiceType::class, $conversationOptions)
             ->add('content', TextareaType::class, [
                 'required' => true,
                 'data' => $user->getMessageHeaderFooter(),
