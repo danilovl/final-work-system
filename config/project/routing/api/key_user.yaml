@@ -17,3 +17,19 @@ api_key_get_user_profile_image:
   defaults:
     _controller: App\Domain\Profile\Controller\Api\ProfileController::image
   methods: [GET]
+
+api_key_get_user_search:
+  path: /search/{type}
+  requirements:
+    type: 'author|opponent|consultant'
+  defaults:
+    _controller: App\Domain\User\Controller\Api\UserController::search
+  methods: [GET]
+
+api_key_get_user_type_search:
+  path: /{type}/search
+  requirements:
+    type: 'author|opponent|consultant'
+  defaults:
+    _controller: App\Domain\User\Controller\Api\UserController::search
+  methods: [GET]
