@@ -17,7 +17,10 @@ use App\Domain\ConversationMessage\Form\ConversationMessageForm;
 use App\Domain\ConversationMessage\Model\ConversationMessageModel;
 use App\Domain\User\Entity\User;
 use Generator;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\{
+    DataProvider,
+    AllowMockObjectsWithoutExpectations
+};
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -28,22 +31,25 @@ class ConversationMessageFormTest extends TypeTestCase
 
     private function getUserMock(): MockObject
     {
-        $user = $this->createMock(User::class);
-        $user->expects($this->any())
-            ->method('getMessageHeaderFooter')
+        $user = $this->getMockBuilder(User::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $user->method('getMessageHeaderFooter')
             ->willReturn('');
 
         return $user;
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     #[DataProvider('provideSubmitValidDataCases')]
     public function testSubmitValidData(
         array $data,
         bool $isValid
     ): void {
         $conversationMessageModel = new ConversationMessageModel;
-        $conversationMessageModel->conversation = $this->createMock(Conversation::class);
-        $conversationMessageModel->owner = $this->createMock(User::class);
+        $conversationMessageModel->conversation = $this->createStub(Conversation::class);
+        $conversationMessageModel->owner = $this->createStub(User::class);
 
         $form = $this->factory->create(ConversationMessageForm::class, $conversationMessageModel, [
             'user' => $this->getUserMock()
