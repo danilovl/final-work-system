@@ -12,7 +12,7 @@
 
 namespace App\Domain\ApiUser\Entity;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateUpdateAbleTrait

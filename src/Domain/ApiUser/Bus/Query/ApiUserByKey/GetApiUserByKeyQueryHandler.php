@@ -12,7 +12,7 @@
 
 namespace App\Domain\ApiUser\Bus\Query\ApiUserByKey;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 
 readonly class GetApiUserByKeyQueryHandler implements QueryHandlerInterface
