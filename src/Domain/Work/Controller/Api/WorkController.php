@@ -13,13 +13,18 @@
 namespace App\Domain\Work\Controller\Api;
 
 use App\Domain\Work\DTO\Api\WorkDTO;
+use App\Domain\Work\DTO\Api\Input\WorkInput;
 use App\Domain\Work\Entity\Work;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
-use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
+use Symfony\Component\HttpKernel\Attribute\{
+    MapQueryParameter,
+    MapRequestPayload
+};
 use App\Domain\Work\Http\Api\{
     WorkListHandle,
-    WorkDetailHandle
+    WorkDetailHandle,
+    WorkCreateHandle
 };
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -31,7 +36,8 @@ readonly class WorkController
 {
     public function __construct(
         private WorkListHandle $workListHandle,
-        private WorkDetailHandle $workDetailHandle
+        private WorkDetailHandle $workDetailHandle,
+        private WorkCreateHandle $workCreateHandle
     ) {}
 
     #[OA\Get(
@@ -116,5 +122,29 @@ readonly class WorkController
     public function detail(Work $work): JsonResponse
     {
         return $this->workDetailHandle->__invoke($work);
+    }
+
+    #[OA\Post(
+        path: '/api/key/works/create',
+        description: 'Creates a new work.',
+        summary: 'Create work'
+    )]
+    #[OA\RequestBody(
+        content: new OA\JsonContent(ref: new Model(type: WorkInput::class))
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Work created',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(property: 'result', ref: new Model(type: WorkDTO::class))
+            ],
+            type: 'object'
+        )
+    )]
+    public function create(#[MapRequestPayload] WorkInput $workInput): JsonResponse
+    {
+        return $this->workCreateHandle->__invoke($workInput);
     }
 }
