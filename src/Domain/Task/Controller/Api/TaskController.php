@@ -43,16 +43,18 @@ use App\Domain\Task\Http\Api\{
     TaskDeleteHandle
 };
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Facade\WorkFacade;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\Work\{GetWorkQuery, GetWorkQueryResult};
+use App\Application\Exception\EntityNotFoundException;
 
 #[OA\Tag(name: 'Task')]
 readonly class TaskController
 {
     public function __construct(
         private AuthorizationCheckerService $authorizationCheckerService,
-        private WorkFacade $workFacade,
+        private QueryBusInterface $queryBus,
         private TaskListOwnerHandle $taskListHandle,
         private TaskListSolverHandle $taskListSolverHandle,
         private TaskDetailApiPlatformHandle $taskDetailApiPlatformHandle,
@@ -262,9 +264,23 @@ readonly class TaskController
     )]
     public function create(#[MapRequestPayload] TaskInput $taskInput): JsonResponse
     {
-        $work = $this->workFacade->getById($taskInput->workId);
+        $work = $this->getWork($taskInput->workId);
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->taskCreateHandle->__invoke($taskInput);
+    }
+
+    private function getWork(int $id): Work
+    {
+        $getWorkQuery = GetWorkQuery::create($id);
+        /** @var GetWorkQueryResult $getWorkQueryResult */
+        $getWorkQueryResult = $this->queryBus->handle($getWorkQuery);
+        $work = $getWorkQueryResult->work;
+
+        if ($work === null) {
+            throw new EntityNotFoundException("Work with id {$id} not found.");
+        }
+
+        return $work;
     }
 }

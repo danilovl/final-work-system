@@ -14,12 +14,13 @@ namespace App\Domain\Task\Form\DataGrid;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
-use App\Domain\Work\Facade\WorkFacade;
 use Doctrine\ORM\QueryBuilder;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\WorkQueryBuilderBySupervisor\{GetWorkQueryBuilderBySupervisorQuery, GetWorkQueryBuilderBySupervisorQueryResult};
 
 class TaskDataGrid
 {
-    public function __construct(private readonly WorkFacade $workFacade) {}
+    public function __construct(private readonly QueryBusInterface $queryBus) {}
 
     public function queryBuilderWorksBySupervisor(
         User $user,
@@ -30,6 +31,11 @@ class TaskDataGrid
             workStatus: $workStatus
         );
 
-        return $this->workFacade->queryBuilderBySupervisor($workData);
+        $getWorkQueryBuilderBySupervisorQuery = GetWorkQueryBuilderBySupervisorQuery::create($workData);
+        /** @var GetWorkQueryBuilderBySupervisorQueryResult $getWorkQueryBuilderBySupervisorQueryResult */
+        $getWorkQueryBuilderBySupervisorQueryResult = $this->queryBus->handle($getWorkQueryBuilderBySupervisorQuery);
+        $queryBuilder = $getWorkQueryBuilderBySupervisorQueryResult->queryBuilder;
+
+        return $queryBuilder;
     }
 }

@@ -15,12 +15,15 @@ namespace App\Domain\Task\Factory;
 use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Entity\User;
-use App\Domain\Work\Facade\WorkFacade;
 use DateTimeImmutable;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\Work\{GetWorkQuery, GetWorkQueryResult};
+use App\Application\Exception\EntityNotFoundException;
+use App\Domain\Work\Entity\Work;
 
 readonly class TaskModelFactory
 {
-    public function __construct(private WorkFacade $workFacade) {}
+    public function __construct(private QueryBusInterface $queryBus) {}
 
     public function fromTaskInput(TaskInput $input, User $owner): TaskModel
     {
@@ -30,9 +33,23 @@ readonly class TaskModelFactory
         $taskModel->complete = $input->complete;
         $taskModel->active = $input->active;
         $taskModel->deadline = new DateTimeImmutable($input->deadline);
-        $taskModel->work = $this->workFacade->getById($input->workId);
+        $taskModel->work = $this->getWork($input->workId);
         $taskModel->owner = $owner;
 
         return $taskModel;
+    }
+
+    private function getWork(int $id): Work
+    {
+        $getWorkQuery = GetWorkQuery::create($id);
+        /** @var GetWorkQueryResult $getWorkQueryResult */
+        $getWorkQueryResult = $this->queryBus->handle($getWorkQuery);
+        $work = $getWorkQueryResult->work;
+
+        if ($work === null) {
+            throw new EntityNotFoundException("Work with id {$id} not found.");
+        }
+
+        return $work;
     }
 }
