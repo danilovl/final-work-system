@@ -23,7 +23,7 @@ class WorkSystemEventSubscriberTest extends BaseSystemEventSubscriber
     {
         parent::setUp();
 
-        $workService = $this->createMock(WorkService::class);
+        $workService = $this->createStub(WorkService::class);
 
         $this->subscriber = new WorkSystemEventSubscriber(
             $this->entityManagerService,

@@ -34,7 +34,7 @@ class BaseSystemEventSubscriber extends TestCase
     protected function setUp(): void
     {
         $this->dispatcher = new EventDispatcher;
-        $this->entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->entityManagerService = $this->createStub(EntityManagerService::class);
     }
 
     #[DataProvider('subscribedEvents')]

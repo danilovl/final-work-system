@@ -46,6 +46,8 @@ class CacheEventSubscriberTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
+        $this->homepageCache->expects($this->never())->method('createHomepagePaginator');
+
         $subscribedEvents = $this->subscriber::getSubscribedEvents();
 
         $this->assertEquals('onCreateHomepageCache', $subscribedEvents[Events::CACHE_CREATE_HOMEPAGE]);

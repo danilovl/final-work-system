@@ -23,7 +23,7 @@ class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
     {
         parent::setUp();
 
-        $userWorkService = $this->createMock(UserWorkService::class);
+        $userWorkService = $this->createStub(UserWorkService::class);
 
         $this->subscriber = new DocumentSystemEventSubscriber(
             $this->entityManagerService,
