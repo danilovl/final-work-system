@@ -32,7 +32,7 @@ class DocumentVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $media = $this->createMock(Media::class);
+        $media = $this->createStub(Media::class);
 
         foreach (DocumentVoter::SUPPORTS as $support) {
             $this->assertTrue($this->documentVoter->supportsPublic($support, $media));
