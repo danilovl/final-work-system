@@ -117,6 +117,8 @@ readonly class EventController
     )]
     public function list(Request $request, Work $work): JsonResponse
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
+
         return $this->eventListHandle->__invoke($request, $work);
     }
 
