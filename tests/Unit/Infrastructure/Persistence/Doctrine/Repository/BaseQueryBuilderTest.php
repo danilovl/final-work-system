@@ -24,7 +24,7 @@ class BaseQueryBuilderTest extends TestCase
 
     public function testGetQueryBuilder(): void
     {
-        $queryBuilderMock = $this->createMock(QueryBuilder::class);
+        $queryBuilderMock = $this->createStub(QueryBuilder::class);
 
         $baseQueryBuilder = new BaseQueryBuilder($queryBuilderMock);
 
