@@ -12,7 +12,7 @@
 
 namespace App\Domain\Article\Bus\Query\ArticleQueryByCategory;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Article\Facade\ArticleFacade;
 
 readonly class GetArticleQueryByCategoryQueryHandler implements QueryHandlerInterface

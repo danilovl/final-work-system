@@ -12,7 +12,7 @@
 
 namespace App\Domain\Article\Bus\Query\ArticleQueryByCategory;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
