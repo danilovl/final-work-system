@@ -13,7 +13,7 @@
 namespace App\Domain\ConversationMessage\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Domain\Conversation\Service\ConversationService;
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use LogicException;
@@ -29,8 +29,6 @@ class ConversationMessageVoter extends Voter
     public const array SUPPORTS = [
         VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value
     ];
-
-    public function __construct(private readonly ConversationService $conversationService) {}
 
     #[Override]
     protected function supports(string $attribute, mixed $subject): bool
@@ -61,6 +59,6 @@ class ConversationMessageVoter extends Voter
     {
         $conversation = $conversationMessage->getConversation();
 
-        return $this->conversationService->isParticipant($conversation, $user) && !$conversationMessage->isOwner($user);
+        return ConversationHelper::isParticipant($conversation, $user) && !$conversationMessage->isOwner($user);
     }
 }
