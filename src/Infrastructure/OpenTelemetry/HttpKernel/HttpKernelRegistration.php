@@ -23,7 +23,18 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
+use OpenTelemetry\SemConv\Attributes\{
+    CodeAttributes,
+    HttpAttributes,
+    NetworkAttributes,
+    ServerAttributes,
+    UrlAttributes,
+    UserAgentAttributes
+};
+use OpenTelemetry\SemConv\Incubating\Attributes\{
+    DeploymentIncubatingAttributes,
+    HttpIncubatingAttributes
+};
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -59,7 +70,7 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
 
             Span::getCurrent()
                 ->recordException($throwable, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
+                    'exception.escaped' => true
                 ]);
 
             self::$isHandleThrowable = true;
@@ -82,10 +93,9 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                 ->tracer()
                 ->spanBuilder($name)
                 ->setSpanKind(($type === HttpKernelInterface::SUB_REQUEST) ? SpanKind::KIND_INTERNAL : SpanKind::KIND_SERVER)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(CodeAttributes::CODE_FILE_PATH, $filename)
+                ->setAttribute(CodeAttributes::CODE_LINE_NUMBER, $lineno)
                 ->setAttribute('type', 'request');
 
             $parent = Context::getCurrent();
@@ -93,14 +103,14 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                 $parent = Globals::propagator()->extract($request, RequestPropagationGetter::instance());
                 $span = $builder
                     ->setParent($parent)
-                    ->setAttribute(TraceAttributes::URL_FULL, $request->getUri())
-                    ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $request->getMethod())
-                    ->setAttribute(TraceAttributes::HTTP_REQUEST_BODY_SIZE, $request->headers->get('Content-Length'))
-                    ->setAttribute(TraceAttributes::URL_SCHEME, $request->getScheme())
-                    ->setAttribute(TraceAttributes::URL_PATH, $request->getPathInfo())
-                    ->setAttribute(TraceAttributes::USER_AGENT_ORIGINAL, $request->headers->get('User-Agent'))
-                    ->setAttribute(TraceAttributes::SERVER_ADDRESS, $request->getHost())
-                    ->setAttribute(TraceAttributes::SERVER_PORT, $request->getPort())
+                    ->setAttribute(UrlAttributes::URL_FULL, $request->getUri())
+                    ->setAttribute(HttpAttributes::HTTP_REQUEST_METHOD, $request->getMethod())
+                    ->setAttribute(HttpIncubatingAttributes::HTTP_REQUEST_BODY_SIZE, $request->headers->get('Content-Length'))
+                    ->setAttribute(UrlAttributes::URL_SCHEME, $request->getScheme())
+                    ->setAttribute(UrlAttributes::URL_PATH, $request->getPathInfo())
+                    ->setAttribute(UserAgentAttributes::USER_AGENT_ORIGINAL, $request->headers->get('User-Agent'))
+                    ->setAttribute(ServerAttributes::SERVER_ADDRESS, $request->getHost())
+                    ->setAttribute(ServerAttributes::SERVER_PORT, $request->getPort())
                     ->startSpan();
 
                 $request->attributes->set(SpanInterface::class, $span);
@@ -127,7 +137,7 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
             }
 
             $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+            $span->setAttribute(DeploymentIncubatingAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
             $request = ($params[0] instanceof Request) ? $params[0] : null;
             if ($request !== null) {
@@ -136,12 +146,12 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                 if ($routeName !== '') {
                     $span
                         ->updateName(sprintf('%s %s', $request->getMethod(), $routeName))
-                        ->setAttribute(TraceAttributes::HTTP_ROUTE, $routeName);
+                        ->setAttribute(HttpAttributes::HTTP_ROUTE, $routeName);
                 }
             }
 
             if ($exception !== null) {
-                $span->recordException($exception, [TraceAttributes::EXCEPTION_ESCAPED => true]);
+                $span->recordException($exception);
 
                 if ($response !== null && $response->getStatusCode() >= Response::HTTP_INTERNAL_SERVER_ERROR) {
                     $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
@@ -158,15 +168,15 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                 $span->setStatus(StatusCode::STATUS_ERROR);
             }
 
-            $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
-            $span->setAttribute(TraceAttributes::NETWORK_PROTOCOL_VERSION, $response->getProtocolVersion());
+            $span->setAttribute(HttpAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
+            $span->setAttribute(NetworkAttributes::NETWORK_PROTOCOL_VERSION, $response->getProtocolVersion());
             $contentLength = $response->headers->get('Content-Length');
 
             if ($contentLength === null && is_string($response->getContent())) {
                 $contentLength = mb_strlen($response->getContent());
             }
 
-            $span->setAttribute(TraceAttributes::HTTP_RESPONSE_BODY_SIZE, $contentLength);
+            $span->setAttribute(HttpIncubatingAttributes::HTTP_RESPONSE_BODY_SIZE, $contentLength);
 
             $span->end();
         };
