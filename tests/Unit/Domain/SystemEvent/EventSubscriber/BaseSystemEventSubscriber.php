@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
-use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -30,7 +30,7 @@ class BaseSystemEventSubscriber extends TestCase
 
     protected EntityManagerService $entityManagerService;
 
-    protected SystemEventTypeFacade $systemEventTypeFacade;
+    protected QueryBusInterface $queryBus;
 
     protected EventSubscriberInterface $subscriber;
 
@@ -38,7 +38,7 @@ class BaseSystemEventSubscriber extends TestCase
     {
         $this->dispatcher = new EventDispatcher;
         $this->entityManagerService = $this->createStub(EntityManagerService::class);
-        $this->systemEventTypeFacade = $this->createStub(SystemEventTypeFacade::class);
+        $this->queryBus = $this->createStub(QueryBusInterface::class);
     }
 
     #[DataProvider('subscribedEvents')]

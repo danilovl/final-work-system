@@ -13,7 +13,6 @@
 namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
 use App\Domain\SystemEvent\EventSubscriber\VersionSystemEventSubscriber;
-use App\Domain\Work\Service\WorkService;
 
 class VersionSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
@@ -23,12 +22,10 @@ class VersionSystemEventSubscriberTest extends BaseSystemEventSubscriber
     {
         parent::setUp();
 
-        $workService = $this->createStub(WorkService::class);
 
         $this->subscriber = new VersionSystemEventSubscriber(
             $this->entityManagerService,
-            $this->systemEventTypeFacade,
-            $workService
+            $this->queryBus
         );
     }
 }

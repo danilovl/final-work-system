@@ -16,7 +16,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
-use App\Domain\User\EventSubscriber\CacheEventSubscriber;
+use App\Domain\SystemEvent\EventSubscriber\CacheEventSubscriber;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

@@ -13,7 +13,8 @@
 namespace App\Tests\Unit\Domain\SystemEvent\Cache;
 
 use App\Domain\SystemEvent\Cache\HomepageCache;
-use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\SystemEventRecipient\Bus\Query\RecipientsQueryByUser\GetRecipientsQueryByUserQueryResult;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\PaginatorService;
 use Danilovl\OpenTelemetryBundle\OpenTelemetry\Interfaces\TracingSpanServiceInterface;
@@ -61,10 +62,10 @@ class HomepageCacheTest extends TestCase
             ->method('getConfiguration')
             ->willReturn($configuration);
 
-        $systemEventRecipientFacade = $this->createStub(SystemEventRecipientFacade::class);
-        $systemEventRecipientFacade
-            ->method('queryRecipientsQueryByUser')
-            ->willReturn(new Query($entityManagerInterface));
+        $queryBus = $this->createStub(QueryBusInterface::class);
+        $queryBus
+            ->method('handle')
+            ->willReturn(new GetRecipientsQueryByUserQueryResult(new Query($entityManagerInterface)));
 
         $tracingSpan = $this->createStub(TracingSpanServiceInterface::class);
         $tracingSpanService = $this->createStub(TracingSpanServiceInterface::class);
@@ -76,7 +77,7 @@ class HomepageCacheTest extends TestCase
             cache: $cache,
             parameterService: $parameterService,
             paginatorService: $paginatorService,
-            systemEventRecipientFacade: $systemEventRecipientFacade,
+            queryBus: $queryBus,
             tracingSpanService: $tracingSpanService
         );
     }

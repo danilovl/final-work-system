@@ -13,7 +13,6 @@
 namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
 use App\Domain\SystemEvent\EventSubscriber\DocumentSystemEventSubscriber;
-use App\Domain\User\Service\UserWorkService;
 
 class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
@@ -23,12 +22,9 @@ class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
     {
         parent::setUp();
 
-        $userWorkService = $this->createStub(UserWorkService::class);
-
         $this->subscriber = new DocumentSystemEventSubscriber(
             $this->entityManagerService,
-            $this->systemEventTypeFacade,
-            $userWorkService,
+            $this->queryBus
         );
     }
 }
