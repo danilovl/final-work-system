@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'select2/dist/css/select2.min.css';
 import './css/main.css';
+import './css/theme.css';
 
 import './js/jquery.js';
 import 'inputmask/dist/jquery.inputmask.js';
