@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Domain\SystemEvent\Cache;
 
 use App\Domain\SystemEvent\Cache\HomepageCache;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\SystemEventRecipient\Bus\Query\RecipientsQueryByUser\GetRecipientsQueryByUserQueryResult;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\PaginatorService;

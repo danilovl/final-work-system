@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
