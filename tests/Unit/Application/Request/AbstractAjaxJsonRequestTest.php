@@ -69,7 +69,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 ValidatorInterface $validator,
                 RequestStack $requestStack
             ) {
-                parent::__construct($validator, $requestStack);
+                parent::__construct(validator: $validator, requestStack: $requestStack);
             }
 
             protected function getConstraints(): Collection
@@ -125,7 +125,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 array $notifyMessage = [],
                 bool $send = true
             ): void {
-                parent::sendJsonResponse($errors, $notifyMessage, false);
+                parent::sendJsonResponse(errors: $errors, notifyMessage: $notifyMessage, send: false);
             }
         };
     }
@@ -152,7 +152,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 array $notifyMessage = [],
                 bool $send = true
             ): void {
-                parent::sendJsonResponse($errors, $notifyMessage, false);
+                parent::sendJsonResponse(errors: $errors, notifyMessage: $notifyMessage, send: false);
             }
         };
     }
@@ -184,7 +184,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 array $notifyMessage = [],
                 bool $send = true
             ): void {
-                parent::sendJsonResponse($errors, $notifyMessage, false);
+                parent::sendJsonResponse(errors: $errors, notifyMessage: $notifyMessage, send: false);
             }
         };
     }
