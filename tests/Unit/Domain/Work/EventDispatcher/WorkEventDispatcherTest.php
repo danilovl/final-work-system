@@ -43,7 +43,7 @@ class WorkEventDispatcherTest extends TestCase
     #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
-        $work = $this->createMock(Work::class);
+        $work = $this->createStub(Work::class);
 
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
