@@ -12,8 +12,10 @@
 
 namespace App\Domain\Version\Controller\Api;
 
+use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Version\Http\Api\VersionListHandle;
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -23,7 +25,10 @@ use Symfony\Component\HttpFoundation\{
 #[OA\Tag(name: 'Version')]
 readonly class VersionController
 {
-    public function __construct(private VersionListHandle $versionListHandle) {}
+    public function __construct(
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private VersionListHandle $versionListHandle
+    ) {}
 
     #[OA\Get(
         path: '/api/key/versions/works/{id}',
@@ -79,6 +84,8 @@ readonly class VersionController
     )]
     public function list(Request $request, Work $work): JsonResponse
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
+
         return $this->versionListHandle->__invoke($request, $work);
     }
 }
