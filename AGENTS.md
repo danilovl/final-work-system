@@ -21,7 +21,8 @@
   - `Security/Voter/`: проверки прав (`VoterSupportConstant`, `AuthorizationCheckerService::denyAccessUnlessGranted()`).
   - `DTO/`, `DTO/Api/`, `Model/` (модели форм), `Form/`, `Factory/`, `Service/`, `Helper/`, `Constant/`, `EventDispatcher/`, `EventSubscriber/`, `EventListener/`, `Twig/Runtime/` (`#[AsTwigFunction]`, `#[AsTwigFilter]`), `Admin/` (EasyAdmin), `Command/`, `Autocompleter/`, `GraphQL/`.
 - **Application/**: общие константы (`VoterSupportConstant` и др.), интерфейсы шин, атрибуты (`EntityRelationValidatorAttribute`), трейты, исключения, хелперы, DTO, миграции (`src/Application/Migrations`).
-- **Infrastructure/**: сервисы (`EntityManagerService`, `TwigRenderService`, `RequestService`, `PaginatorService`, `S3ClientService`, `AuthorizationCheckerService` и др.), персистентность (`Persistence/Doctrine`: DBAL-типы, `BaseQueryBuilder`), веб-слой (`Web/`: формы, Twig-расширения), слушатели (`Event/EventListener`), консоль, Messenger, GraphQL, EasyAdmin.
+- **Infrastructure/**: сервисы (`EntityManagerService`, `TwigRenderService`, `RequestService`, `PaginatorService`, `S3ClientService`, `AuthorizationCheckerService` и др.), персистентность (`Persistence/Doctrine`: DBAL-типы, `BaseQueryBuilder`), веб-слой (`Web/`: формы, Twig-расширения), слушатели (`Event/EventListener`), консоль, Messenger, GraphQL.
+- **Направление зависимостей**: `Domain` → `Application` → `Infrastructure`. `Infrastructure` не ссылается на `Application` и `Domain`, `Application` — на `Domain`; доменная логика (слушатели, compiler pass, админка) живёт в своём домене. Проверяет правило PHPStan `tests/PHPStan/Rule/LayerDependencyRule.php`, текущие нарушения — в `phpstan-layer-baseline.neon`, новые туда не добавлять.
 
 ## Конфигурация
 
@@ -31,7 +32,7 @@
 - **ID в URL** кодируются Hashids: в шаблонах `{{ entity.id | hashids_encode }}`, в контроллерах `#[HashidsRequestConverterAttribute]` (`danilovl/hashids-bundle`) + `#[MapEntity]`. Текущий пользователь — `Domain/User/Service/UserService`. Принадлежность сущностей из URL друг другу проверяется `#[EntityRelationValidatorAttribute]` (при нескольких подходящих свойствах указывать `property`).
 - **Doctrine-маппинг**: каждый домен с сущностями явно зарегистрирован в `config/packages/doctrine.yaml` (`orm.mappings`). Новый домен — новая запись.
 - Вторичный кэш Doctrine и сессии — Redis (`doctrine.redis_adapter`, номер базы — `%env(REDIS_CACHE_DB)%`).
-- Индексы Elasticsearch — `config/packages/fos_elastica.yaml`, имя индекса с префиксом `%env(ELASTICSEARCH_INDEX_PREFIX)%`.
+- Индексы Elasticsearch — `config/packages/fos_elastica.yaml`, имя индекса с префиксом `%env(ELASTICSEARCH_INDEX_PREFIX)%`; работа через алиасы (`use_alias: true`), `populate` строит новый индекс и переключает алиас. Если на окружении остался обычный индекс с именем алиаса, его один раз удалить и запустить `populate`.
 
 ## Окружения и базы данных
 
@@ -46,7 +47,7 @@
 
 ## Данные и запросы
 
-- **Elasticsearch и БД**: списки работ и поиск идут из Elasticsearch, детальные страницы — из БД. Удаления, выполняемые каскадом в БД (`onDelete: 'CASCADE'`), FOSElastica не видит — документы зависимых записей удаляет `ElasticaCascadeRemoveListener` (собирает id в `preRemove` через DBAL, удаляет в `postFlush`). Новые каскады для индексируемых сущностей добавлять туда же.
+- **Elasticsearch и БД**: списки работ и поиск идут из Elasticsearch, детальные страницы — из БД. Удаления, выполняемые каскадом в БД (`onDelete: 'CASCADE'`), FOSElastica не видит — документы зависимых записей удаляет `Domain/Work/EventListener/Entity/ElasticaCascadeRemoveListener` (собирает id в `preRemove` через DBAL, удаляет в `postFlush`). Новые каскады для индексируемых сущностей добавлять туда же.
 - **Doctrine-слушатели**: в `preRemove`/`onFlush` не загружать связанные сущности (коллекции, прокси) — только скалярные запросы через DBAL, иначе `flush` падает с `ORMInvalidArgumentException`.
 - **N+1**: данные для списков загружаются пакетно (`IN (:ids)`) в обработчике или фасаде, а не в цикле по строкам; статусы прочтения диалогов — `ConversationStatusService` (кэш на время запроса, `ResetInterface`).
 - **Fetch-join коллекций**: не сочетать `addSelect` коллекции с `setMaxResults`/`getOneOrNullResult` и не фильтровать по алиасу выбранной коллекции — коллекция гидрируется урезанной.

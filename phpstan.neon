@@ -1,5 +1,9 @@
 includes:
     - phpstan-baseline.neon
+    - phpstan-layer-baseline.neon
+
+rules:
+    - App\Tests\PHPStan\Rule\LayerDependencyRule
 
 parameters:
     symfony:

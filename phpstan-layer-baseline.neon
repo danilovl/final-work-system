@@ -1,0 +1,193 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Exception\\InvalidArgumentException\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Console/ImportSqlCommand.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Exception\\EntityNotFoundException\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventListener/ApiExceptionListener.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Attribute\\EntityRelationValidatorAttribute\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventListener/KernelListener.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Provider\\LoggableProvider\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventListener/LoggableListener.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\EventDispatcher\\GenericEvent\\CacheClearGenericEvent\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventSubscriber/CacheEventSubscriber.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\EventSubscriber\\Events\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventSubscriber/CacheEventSubscriber.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\FlashTypeConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventSubscriber/RequestFlashSubscriber.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\EventSubscriber\\Events\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/EventSubscriber/RequestFlashSubscriber.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\FormOperationTypeConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/FormEventListener/ValidationListenerExtension.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\EventDispatcher\\RequestFlashEventDispatcher\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Event/FormEventListener/ValidationListenerExtension.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\DateFormatConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/GraphQL/Type/DateTimeType.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Interfaces\\Bus\\CommandBusInterface\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Messaging/MessengerCommandBus.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Interfaces\\Bus\\CommandInterface\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Messaging/MessengerCommandBus.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Interfaces\\Bus\\QueryBusInterface\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Messaging/MessengerQueryBus.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Interfaces\\Bus\\QueryInterface\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Messaging/MessengerQueryBus.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Exception\\InvalidArgumentException\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Persistence/Doctrine/Embeddable/EmailEmbeddable.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\EventDispatcher\\EntityEventDispatcher\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/EntityManagerService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Helper\\AttributeHelper\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/EntityManagerService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\AjaxJsonTypeConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/RequestService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\FlashTypeConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/RequestService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Exception\\ConstantNotFoundException\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/RequestService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\TranslationConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/SeoPageService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Exception\\RuntimeException\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/SeoPageService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\TranslationConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Service/TranslatorService.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\CompareConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Validation/Constraint/FirstWeekDayValidator.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Helper\\CompareHelper\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Validation/Constraint/FirstWeekDayValidator.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Helper\\DateHelper\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Validation/Constraint/FirstWeekDayValidator.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\FormOperationTypeConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Web/Form/Factory/FormDeleteFactory.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Model\\SearchModel\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Web/Form/SimpleSearchForm.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Exception\\RuntimeException\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Web/Form/Transformer/CommaDotTransformer.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Constant\\DateFormatConstant\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Web/Form/Type/FirstWeekDayType.php
+
+		-
+			message: '#^Layer App\\Infrastructure must not depend on App\\Application \(App\\Application\\Helper\\RegexHelper\)\.$#'
+			identifier: app.layerDependency
+			count: 1
+			path: src/Infrastructure/Web/Twig/Runtime/AwayRuntime.php
