@@ -1,0 +1,5 @@
+app:
+  validator:
+    entity_exists: 'Entita třídy "{{ class }}" s {{ property }} "{{ value }}" neexistuje.'
+    user_has_role: 'Uživatel s ID "{{ value }}" neexistuje, je zakázán nebo nemá požadovanou roli "{{ role }}".'
+    work_category_owner: 'Jedna nebo více kategorií práce neexistuje nebo vám nepatří.'
