@@ -14,13 +14,13 @@ namespace App\Domain\Version\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeList\{GetMediaMimeTypeListQuery, GetMediaMimeTypeListQueryResult};
 use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
 use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService
 };
-use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
@@ -38,7 +38,7 @@ readonly class VersionCreateHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private QueryBusInterface $queryBus,
         private EntityManagerService $entityManagerService,
         private FormFactoryInterface $formFactory,
         private CommandBusInterface $commandBus
@@ -54,10 +54,15 @@ readonly class VersionCreateHandle
         $mediaModel->work = $work;
         $mediaModel->type = $type;
 
+        $getMediaMimeTypeListQuery = GetMediaMimeTypeListQuery::create(true);
+        /** @var GetMediaMimeTypeListQueryResult $getMediaMimeTypeListQueryResult */
+        $getMediaMimeTypeListQueryResult = $this->queryBus->handle($getMediaMimeTypeListQuery);
+        $mimeTypes = $getMediaMimeTypeListQueryResult->mediaMimeTypes;
+
         $form = $this->formFactory
             ->create(VersionForm::class, $mediaModel, [
                 'uploadMedia' => true,
-                'mimeTypes' => $this->mediaMimeTypeFacade->list(true)
+                'mimeTypes' => $mimeTypes
             ])
             ->handleRequest($request);
 

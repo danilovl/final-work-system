@@ -12,25 +12,53 @@
 
 namespace App\Domain\Version\Http\Api;
 
-use App\Domain\Work\Service\WorkDetailTabService;
 use App\Domain\Media\Factory\MediaDTOFactory;
-use App\Application\Constant\TabTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Media\Bus\Query\MediaQueryByWork\{GetMediaQueryByWorkQuery, GetMediaQueryByWorkQueryResult};
+use App\Infrastructure\Service\PaginatorService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 readonly class VersionListHandle
 {
     public function __construct(
-        private WorkDetailTabService $workDetailTabService,
+        private QueryBusInterface $queryBus,
+        private PaginatorService $paginatorService,
+        private ParameterServiceInterface $parameterService,
         private MediaDTOFactory $mediaDTOFactory
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
     {
-        $paginationVersion = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_VERSION->value, $work);
+        $getMediaQueryByWorkQuery = GetMediaQueryByWorkQuery::create($work);
+        /** @var GetMediaQueryByWorkQueryResult $getMediaQueryByWorkQueryResult */
+        $getMediaQueryByWorkQueryResult = $this->queryBus->handle($getMediaQueryByWorkQuery);
+        $query = $getMediaQueryByWorkQueryResult->query;
+
+        $options = [
+            PaginatorInterface::PAGE_PARAMETER_NAME => 'page_version',
+            PaginatorInterface::SORT_FIELD_PARAMETER_NAME => 'sort_version',
+            PaginatorInterface::SORT_DIRECTION_PARAMETER_NAME => 'direction_version',
+            PaginatorInterface::FILTER_FIELD_PARAMETER_NAME => 'filterParam_version',
+            PaginatorInterface::FILTER_VALUE_PARAMETER_NAME => 'filterValue_version',
+            PaginatorInterface::DISTINCT => true
+        ];
+
+        $page = $this->parameterService->getInt('pagination.work_detail_tab.version.page');
+        $limit = $this->parameterService->getInt('pagination.work_detail_tab.version.limit');
+
+        $paginationVersion = $this->paginatorService->createPaginationRequest(
+            request: $request,
+            target: $query,
+            page: $page,
+            limit: $limit,
+            options: $options
+        );
 
         $versions = [];
         foreach ($paginationVersion as $version) {

@@ -18,7 +18,6 @@ use App\Application\Exception\{
 };
 use App\Application\Exception\RuntimeException;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\Version\Form\VersionForm;
 use App\Domain\Work\Entity\Work;
@@ -29,12 +28,14 @@ use Symfony\Component\Form\{
 };
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeList\{GetMediaMimeTypeListQuery, GetMediaMimeTypeListQueryResult};
 
 class VersionFormFactory
 {
     public function __construct(
         private readonly RouterInterface $router,
-        private readonly MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormFactoryInterface $formFactory
     ) {}
@@ -45,8 +46,10 @@ class VersionFormFactory
         ?Media $media = null,
         ?Work $work = null
     ): FormInterface {
-        $mimeTypes = $this->mediaMimeTypeFacade
-            ->list(true);
+        $getMediaMimeTypeListQuery = GetMediaMimeTypeListQuery::create(true);
+        /** @var GetMediaMimeTypeListQueryResult $getMediaMimeTypeListQueryResult */
+        $getMediaMimeTypeListQueryResult = $this->queryBus->handle($getMediaMimeTypeListQuery);
+        $mimeTypes = $getMediaMimeTypeListQueryResult->mediaMimeTypes;
 
         $parameters = [
             'mimeTypes' => $mimeTypes

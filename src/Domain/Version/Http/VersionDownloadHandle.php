@@ -13,15 +13,21 @@
 namespace App\Domain\Version\Http;
 
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Service\MediaService;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Media\Bus\Query\MediaFile\{GetMediaFileQuery, GetMediaFileQueryResult};
 
 readonly class VersionDownloadHandle
 {
-    public function __construct(private MediaService $mediaService) {}
+    public function __construct(private QueryBusInterface $queryBus) {}
 
     public function __invoke(Media $media): BinaryFileResponse
     {
-        return $this->mediaService->download($media);
+        $getMediaFileQuery = GetMediaFileQuery::create($media);
+        /** @var GetMediaFileQueryResult $getMediaFileQueryResult */
+        $getMediaFileQueryResult = $this->queryBus->handle($getMediaFileQuery);
+        $response = $getMediaFileQueryResult->response;
+
+        return $response;
     }
 }

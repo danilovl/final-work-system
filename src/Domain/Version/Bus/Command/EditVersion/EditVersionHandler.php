@@ -12,21 +12,28 @@
 
 namespace App\Domain\Version\Bus\Command\EditVersion;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\Media\Factory\MediaFactory;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\Media\Bus\Command\SaveMedia\SaveMediaCommand;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 
 readonly class EditVersionHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private MediaFactory $mediaFactory,
+        private CommandBusInterface $commandBus,
         private VersionEventDispatcherService $versionEventDispatcherService,
     ) {}
 
     public function __invoke(EditVersionCommand $command): void
     {
         $media = $command->media;
-        $this->mediaFactory->flushFromModel($command->mediaModel, $media);
+        $saveMediaCommand = SaveMediaCommand::create(
+            mediaModel: $command->mediaModel,
+            media: $media
+        );
+        $this->commandBus->dispatchResult($saveMediaCommand);
 
         $media->setOwner($command->user);
         $this->versionEventDispatcherService->onVersionEdit($media);

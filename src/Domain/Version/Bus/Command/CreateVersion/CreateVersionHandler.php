@@ -12,20 +12,30 @@
 
 namespace App\Domain\Version\Bus\Command\CreateVersion;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\Media\Factory\MediaFactory;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\Media\Bus\Command\SaveMedia\SaveMediaCommand;
+use App\Domain\Media\Entity\Media;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 
 readonly class CreateVersionHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private MediaFactory $mediaFactory,
+        private CommandBusInterface $commandBus,
         private VersionEventDispatcherService $versionEventDispatcherService,
     ) {}
 
     public function __invoke(CreateVersionCommand $command): void
     {
-        $media = $this->mediaFactory->flushFromModel($command->mediaModel);
+        $saveMediaCommand = SaveMediaCommand::create(
+            mediaModel: $command->mediaModel,
+            media: null
+        );
+
+        /** @var Media $media */
+        $media = $this->commandBus->dispatchResult($saveMediaCommand);
         $this->versionEventDispatcherService->onVersionCreate($media);
     }
 }
