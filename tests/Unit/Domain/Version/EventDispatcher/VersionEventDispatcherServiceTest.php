@@ -42,7 +42,7 @@ class VersionEventDispatcherServiceTest extends TestCase
     #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
-        $media = $this->createMock(Media::class);
+        $media = $this->createStub(Media::class);
 
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
