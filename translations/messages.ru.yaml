@@ -78,6 +78,13 @@ app:
     profile_edit: Редактирование профиля
     profile_image_change: Изменение изображения профиля
     task: Задание|Задания
+    theme: Оформление
+    theme_auto: Как контент
+    theme_content: Контент
+    theme_dark: Тёмная
+    theme_light: Светлая
+    theme_sidebar: Меню
+    theme_system: Как в системе
     unused_user_list: Список неиспользуемых пользователей
     user: Пользователь|Пользователи
     user_create: Создать пользователя

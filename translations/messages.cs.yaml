@@ -78,6 +78,13 @@ app:
     profile_edit: Upravit profil
     profile_image_change: Změnit profilový obrázek
     task: Úkol|Úkoly
+    theme: Vzhled
+    theme_auto: Stejně jako obsah
+    theme_content: Obsah
+    theme_dark: Tmavý
+    theme_light: Světlý
+    theme_sidebar: Menu
+    theme_system: Podle systému
     unused_user_list: Seznam nepoužívaných uživatelů
     user: Uživatel|Uživatelé
     user_create: Vytvoření uživatele

@@ -78,6 +78,13 @@ app:
     profile_edit: Edit profile
     profile_image_change: Change profile image
     task: Task|Tasks
+    theme: Appearance
+    theme_auto: Same as content
+    theme_content: Content
+    theme_dark: Dark
+    theme_light: Light
+    theme_sidebar: Menu
+    theme_system: System
     unused_user_list: List of unused users
     user: User|Users
     user_create: Create user
