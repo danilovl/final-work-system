@@ -34,9 +34,13 @@ class EventAddressFormTest extends KernelTestCase
         array $data,
         bool $isValid
     ): void {
-        $form = $this->formFactory->create(EventAddressForm::class, new EventAddressModel, [
-            'csrf_protection' => false
-        ]);
+        $form = $this->formFactory->create(
+            type: EventAddressForm::class,
+            data: new EventAddressModel,
+            options: [
+                'csrf_protection' => false
+            ]
+        );
         $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
