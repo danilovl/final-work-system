@@ -32,10 +32,11 @@ class SystemEventRecipientQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function selectSystemEventWithEventParticipant(): self
+    public function selectSystemEventRelations(): self
     {
         $this->queryBuilder
-            ->addSelect('systemEvent', 'owner', 'ownerProfileImage', 'event', 'eventParticipant', 'eventParticipantUser')
+            ->addSelect('systemEvent', 'type', 'conversation', 'task', 'work', 'media', 'owner', 'ownerProfileImage', 'event', 'eventParticipant', 'eventParticipantUser')
+            ->leftJoin('systemEvent.media', 'media')
             ->leftJoin('owner.profileImage', 'ownerProfileImage')
             ->leftJoin('event.participant', 'eventParticipant')
             ->leftJoin('eventParticipant.user', 'eventParticipantUser');
