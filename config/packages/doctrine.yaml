@@ -5,7 +5,7 @@ doctrine:
     default_table_options:
       charset: utf8mb4
       collate:  utf8mb4_unicode_ci
-    server_version: '8.0.34'
+    server_version: 'mariadb-10.9.7'
     schema_filter: "~^(doctrine_migration)$~"
     types:
       array: App\Infrastructure\Persistence\Doctrine\DBAL\Types\ArrayType
@@ -187,7 +187,6 @@ doctrine:
 
           loggable:
             type: attribute
-            alias: Gedmo
             prefix: Gedmo\Loggable\Entity
             dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Loggable/Entity/"
             is_bundle: false
