@@ -5,7 +5,7 @@ namespace App\Domain\DocumentCategory\Bus\Query\DocumentCategoryList;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\MediaCategory\Bus\Query\MediaCategoryQueryByOwner\{GetMediaCategoryQueryByOwnerQuery, GetMediaCategoryQueryByOwnerQueryResult};
 
 #[AsMessageHandler]

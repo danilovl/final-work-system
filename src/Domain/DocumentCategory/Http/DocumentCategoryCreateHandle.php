@@ -12,7 +12,7 @@
 
 namespace App\Domain\DocumentCategory\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\DocumentCategory\Bus\Command\CreateDocumentCategory\CreateDocumentCategoryCommand;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{

@@ -12,7 +12,7 @@
 
 namespace App\Domain\DocumentCategory\Bus\Command\EditDocumentCategory;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;

@@ -12,8 +12,8 @@
 
 namespace App\Domain\DocumentCategory\Http;
 
-use App\Application\Constant\FlashTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\FlashTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\DocumentCategory\Bus\Command\DeleteDocumentCategory\DeleteDocumentCategoryCommand;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\MediaCategory\Entity\MediaCategory;

@@ -12,10 +12,7 @@
 
 namespace App\Domain\DocumentCategory\Bus\Command\CreateDocumentCategory;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\MediaCategory\Bus\Command\SaveMediaCategory\SaveMediaCategoryCommand;
 
 readonly class CreateDocumentCategoryHandler implements CommandHandlerInterface

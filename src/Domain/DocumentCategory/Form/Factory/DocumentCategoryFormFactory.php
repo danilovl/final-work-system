@@ -13,7 +13,7 @@
 namespace App\Domain\DocumentCategory\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Form\MediaCategoryForm;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
