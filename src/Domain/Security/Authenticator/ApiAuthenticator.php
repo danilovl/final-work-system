@@ -32,7 +32,7 @@ use Symfony\Component\Security\Core\Exception\{
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserByToken\{GetUserByTokenQuery, GetUserByTokenQueryResult};
 use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{GetApiUserByKeyQuery, GetApiUserByKeyQueryResult};
 

@@ -41,7 +41,7 @@ use Symfony\Component\Security\Http\{
     SecurityRequestAttributes
 };
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserByUsername\{GetUserByUsernameQuery, GetUserByUsernameQueryResult};
 
 class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface

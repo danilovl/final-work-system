@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\User\{
     UserInterface,
     UserProviderInterface
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{GetApiUserByKeyQuery, GetApiUserByKeyQueryResult};
 
 readonly class ApiKeyUserProvider implements UserProviderInterface

@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\User\{
     PasswordUpgraderInterface,
     PasswordAuthenticatedUserInterface
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserByUsername\{GetUserByUsernameQuery, GetUserByUsernameQueryResult};
 
 class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterface
