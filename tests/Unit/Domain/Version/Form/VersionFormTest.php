@@ -47,6 +47,6 @@ class VersionFormTest extends TypeTestCase
         $this->assertArrayHasKey('uploadMedia', $children);
 
         $this->assertSame('Test Name', $mediaModel->name);
-        $this->assertSame('Test Name', $mediaModel->name);
+        $this->assertSame('Test Description', $mediaModel->description);
     }
 }
