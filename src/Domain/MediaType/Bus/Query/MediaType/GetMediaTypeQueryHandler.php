@@ -12,7 +12,7 @@
 
 namespace App\Domain\MediaType\Bus\Query\MediaType;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\MediaType\Facade\MediaTypeFacade;
 
 readonly class GetMediaTypeQueryHandler implements QueryHandlerInterface
