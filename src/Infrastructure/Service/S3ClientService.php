@@ -15,15 +15,26 @@ namespace App\Infrastructure\Service;
 use Aws\Result;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
+use Psr\Cache\CacheItemPoolInterface;
 
 class S3ClientService
 {
+    private const int EXIST_CACHE_TTL = 3_600;
+
     /**
      * @var Result[]
      */
     private array $cache = [];
 
-    public function __construct(private readonly S3Client $s3Client) {}
+    /**
+     * @var array<string, bool>
+     */
+    private array $existCache = [];
+
+    public function __construct(
+        private readonly S3Client $s3Client,
+        private readonly CacheItemPoolInterface $appCache
+    ) {}
 
     public function createBucket(string $bucket): void
     {
@@ -58,9 +69,31 @@ class S3ClientService
         return $this->s3Client->doesBucketExist($bucket);
     }
 
-    public function doesObjectExist(string $bucket, string $key): bool
+    public function doesObjectExist(string $bucket, string $key, bool $useCache = true): bool
     {
-        return $this->s3Client->doesObjectExist($bucket, $key);
+        if (!$useCache) {
+            return $this->s3Client->doesObjectExist($bucket, $key);
+        }
+
+        $cacheKey = $this->getCacheKey($bucket, $key);
+        if (isset($this->existCache[$cacheKey])) {
+            return $this->existCache[$cacheKey];
+        }
+
+        $cacheItem = $this->appCache->getItem($this->getExistCacheKey($bucket, $key));
+        if ($cacheItem->isHit()) {
+            $isExist = (bool) $cacheItem->get();
+        } else {
+            $isExist = $this->s3Client->doesObjectExist($bucket, $key);
+
+            $cacheItem->set($isExist);
+            $cacheItem->expiresAfter(self::EXIST_CACHE_TTL);
+            $this->appCache->save($cacheItem);
+        }
+
+        $this->existCache[$cacheKey] = $isExist;
+
+        return $isExist;
     }
 
     public function putObject(string $bucket, string $key, string $filePath): void
@@ -70,6 +103,8 @@ class S3ClientService
             'Key' => $key,
             'SourceFile' => $filePath
         ]);
+
+        $this->clearCacheKey($bucket, $key);
     }
 
     public function deleteObject(string $bucket, string $key): void
@@ -87,6 +122,11 @@ class S3ClientService
         return sprintf('%s:%s', $bucket, $key);
     }
 
+    private function getExistCacheKey(string $bucket, string $key): string
+    {
+        return 's3_object_exist_' . hash('xxh128', $this->getCacheKey($bucket, $key));
+    }
+
     private function getFromCache(string $bucket, string $key): ?Result
     {
         return $this->cache[$this->getCacheKey($bucket, $key)] ?? null;
@@ -99,6 +139,9 @@ class S3ClientService
 
     private function clearCacheKey(string $bucket, string $key): void
     {
-        unset($this->cache[$this->getCacheKey($bucket, $key)]);
+        $cacheKey = $this->getCacheKey($bucket, $key);
+
+        unset($this->cache[$cacheKey], $this->existCache[$cacheKey]);
+        $this->appCache->deleteItem($this->getExistCacheKey($bucket, $key));
     }
 }
