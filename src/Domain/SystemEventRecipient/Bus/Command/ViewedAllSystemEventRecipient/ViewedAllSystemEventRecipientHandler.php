@@ -1,0 +1,26 @@
+<?php declare(strict_types=1);
+
+/**
+ *
+ * This file is part of the FinalWorkSystem project.
+ * (c) Vladimir Danilov
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
+namespace App\Domain\SystemEventRecipient\Bus\Command\ViewedAllSystemEventRecipient;
+
+use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Domain\SystemEventRecipient\Facade\SystemEventRecipientFacade;
+
+readonly class ViewedAllSystemEventRecipientHandler implements CommandHandlerInterface
+{
+    public function __construct(private SystemEventRecipientFacade $systemEventRecipientFacade) {}
+
+    public function __invoke(ViewedAllSystemEventRecipientCommand $command): void
+    {
+        $this->systemEventRecipientFacade->updateViewedAll($command->recipient);
+    }
+}
