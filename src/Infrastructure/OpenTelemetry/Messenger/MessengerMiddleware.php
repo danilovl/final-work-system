@@ -23,10 +23,8 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\SDK\Trace\TracerProvider;
-use OpenTelemetry\SemConv\{
-    TraceAttributes,
-    TraceAttributeValues
-};
+use OpenTelemetry\SemConv\Attributes\CodeAttributes;
+use OpenTelemetry\SemConv\Incubating\Attributes\MessagingIncubatingAttributes;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Middleware\{
@@ -55,17 +53,16 @@ class MessengerMiddleware implements MiddlewareInterface
             SymfonyMessengerPropagationGetterSetter::instance(),
         );
 
-        $messagingSystem = TraceAttributeValues::MESSAGING_SYSTEM_RABBITMQ;
+        $messagingSystem = MessagingIncubatingAttributes::MESSAGING_SYSTEM_VALUE_RABBITMQ;
 
         $span = Globals::tracerProvider()
             ->getTracer(__CLASS__)
             ->spanBuilder(sprintf('Consume %s', $messageClass))
             ->setParent($producerContext)
             ->setSpanKind(SpanKind::KIND_CONSUMER)
-            ->setAttribute(TraceAttributes::CODE_FUNCTION, 'handle')
-            ->setAttribute(TraceAttributes::CODE_NAMESPACE, self::class)
-            ->setAttribute(TraceAttributes::MESSAGING_SYSTEM, $messagingSystem)
-            ->setAttribute(TraceAttributes::MESSAGING_OPERATION_TYPE, 'messaging.operation.type.deliver')
+            ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, 'handle')
+            ->setAttribute(MessagingIncubatingAttributes::MESSAGING_SYSTEM, $messagingSystem)
+            ->setAttribute(MessagingIncubatingAttributes::MESSAGING_OPERATION_TYPE, MessagingIncubatingAttributes::MESSAGING_OPERATION_TYPE_VALUE_RECEIVE)
             ->setAttribute('type', 'messenger')
             ->addLink(Span::fromContext($producerContext)->getContext())
             ->startSpan();
@@ -76,7 +73,7 @@ class MessengerMiddleware implements MiddlewareInterface
         $redeliveryStamp = $envelope->last(RedeliveryStamp::class);
 
         if ($transportMessageIdStamp instanceof TransportMessageIdStamp) {
-            $span->setAttribute(TraceAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
+            $span->setAttribute(MessagingIncubatingAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
         }
 
         if ($redeliveryStamp instanceof RedeliveryStamp) {
@@ -100,7 +97,7 @@ class MessengerMiddleware implements MiddlewareInterface
             }
 
             $span->recordException($exceptionToRecord, [
-                TraceAttributes::EXCEPTION_ESCAPED => true
+                'exception.escaped' => true
             ]);
 
             throw $exception;
