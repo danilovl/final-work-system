@@ -10,7 +10,7 @@ export default function createTests() {
         await page.waitForTimeout(2000)
 
         const deleteButton = page.locator('.btn.btn-danger').first()
-        const dataTarget = await deleteButton.getAttribute('data-target')
+        const dataTarget = await deleteButton.getAttribute('data-bs-target')
 
         await deleteButton.click()
         await page.locator(`${dataTarget} .delete-element`).click()
