@@ -26,9 +26,9 @@ class CreateTaskTest extends WebTestCase
         $client = static::createClient();
 
         $this->login(
-            $client,
-            LoginData::SUPERVISOR_USERNAME->value,
-            LoginData::SUPERVISOR_PASSWORD->value
+            client: $client,
+            username: LoginData::SUPERVISOR_USERNAME->value,
+            password: LoginData::SUPERVISOR_PASSWORD->value
         );
 
         $crawler = $client->request(Request::METHOD_GET, '/en/work/supervisor/list');
