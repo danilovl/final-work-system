@@ -62,15 +62,19 @@ class CommentFormTest extends KernelTestCase
         bool $isContentShow
     ): void {
         $commentModel = new CommentModel(
-            $this->getUserMock($userId),
-            $this->getEventMock($isOwner, $dateTime)
+            owner: $this->getUserMock($userId),
+            event: $this->getEventMock($isOwner, $dateTime)
         );
 
-        $form = $this->formFactory->create(CommentForm::class, $commentModel, [
-            'user' => $this->getUserMock($userId),
-            'event' => $this->getEventMock($isOwner, $dateTime),
-            'csrf_protection' => false
-        ]);
+        $form = $this->formFactory->create(
+            type: CommentForm::class,
+            data: $commentModel,
+            options: [
+                'user' => $this->getUserMock($userId),
+                'event' => $this->getEventMock($isOwner, $dateTime),
+                'csrf_protection' => false
+            ]
+        );
 
         $form->submit($submitData);
         $isContentFieldExist = $form->has('content');
