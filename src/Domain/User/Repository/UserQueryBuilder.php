@@ -17,7 +17,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class UserQueryBuilder extends BaseQueryBuilder
 {
@@ -35,8 +35,8 @@ class UserQueryBuilder extends BaseQueryBuilder
     public function orderByName(): self
     {
         $this->queryBuilder
-            ->addOrderBy('user.lastname', Order::Ascending->value)
-            ->addOrderBy('user.firstname', Order::Ascending->value);
+            ->addOrderBy('user.lastname', SortDirection::Ascending)
+            ->addOrderBy('user.firstname', SortDirection::Ascending);
 
         return $this;
     }
@@ -168,7 +168,7 @@ class UserQueryBuilder extends BaseQueryBuilder
         }
 
         $this->queryBuilder
-            ->orderBy('user.lastname', Order::Ascending->value)
+            ->orderBy('user.lastname', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('supervisor', $user);
 
@@ -217,7 +217,7 @@ class UserQueryBuilder extends BaseQueryBuilder
         }
 
         $this->queryBuilder
-            ->orderBy('user.lastname', Order::Ascending->value)
+            ->orderBy('user.lastname', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
@@ -256,7 +256,7 @@ class UserQueryBuilder extends BaseQueryBuilder
         }
 
         $this->queryBuilder
-            ->orderBy('user.lastname', Order::Ascending->value)
+            ->orderBy('user.lastname', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
@@ -295,7 +295,7 @@ class UserQueryBuilder extends BaseQueryBuilder
         }
 
         $this->queryBuilder
-            ->orderBy('user.lastname', Order::Ascending->value)
+            ->orderBy('user.lastname', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
@@ -334,7 +334,7 @@ class UserQueryBuilder extends BaseQueryBuilder
         }
 
         $this->queryBuilder
-            ->orderBy('user.lastname', Order::Ascending->value)
+            ->orderBy('user.lastname', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
