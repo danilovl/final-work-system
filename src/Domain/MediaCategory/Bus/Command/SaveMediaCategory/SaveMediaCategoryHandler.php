@@ -12,7 +12,7 @@
 
 namespace App\Domain\MediaCategory\Bus\Command\SaveMediaCategory;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
 

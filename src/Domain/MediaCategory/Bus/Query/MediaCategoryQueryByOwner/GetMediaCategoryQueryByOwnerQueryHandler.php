@@ -12,7 +12,7 @@
 
 namespace App\Domain\MediaCategory\Bus\Query\MediaCategoryQueryByOwner;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
 
 readonly class GetMediaCategoryQueryByOwnerQueryHandler implements QueryHandlerInterface
