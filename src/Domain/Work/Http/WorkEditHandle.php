@@ -24,7 +24,7 @@ use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\Work\Model\WorkModel;
-use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
+use App\Domain\Work\Facade\WorkDeadlineFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{

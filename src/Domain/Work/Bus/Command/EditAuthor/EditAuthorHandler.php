@@ -12,20 +12,28 @@
 
 namespace App\Domain\Work\Bus\Command\EditAuthor;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\User\Factory\UserFactory;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\User\Bus\Command\SaveUser\SaveUserCommand;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 
 readonly class EditAuthorHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private UserFactory $userFactory,
+        private CommandBusInterface $commandBus,
         private WorkEventDispatcher $workEventDispatcher
     ) {}
 
     public function __invoke(EditAuthorCommand $command): void
     {
-        $this->userFactory->flushFromModel($command->userModel, $command->user);
+        $saveUserCommand = SaveUserCommand::create(
+            userModel: $command->userModel,
+            user: $command->user
+        );
+        $this->commandBus->dispatch($saveUserCommand);
+
         $this->workEventDispatcher->onWorkEditAuthor($command->work);
     }
 }

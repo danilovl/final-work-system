@@ -14,7 +14,6 @@ namespace App\Domain\Work\Service;
 
 use App\Application\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Doctrine\Common\Collections\{
     Collection,

@@ -15,16 +15,18 @@ namespace App\Domain\Work\GraphQL\Resolver;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\WorkStatus\Entity\WorkStatus;
-use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 use Override;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\WorkStatus\Bus\Query\WorkStatus\{GetWorkStatusQuery, GetWorkStatusQueryResult};
+use App\Domain\WorkStatus\Bus\Query\WorkStatusList\{GetWorkStatusListQuery, GetWorkStatusListQueryResult};
 
 class WorkResolverMap extends ResolverMap
 {
     public function __construct(
         private readonly WorkFacade $workFacade,
-        private readonly WorkStatusFacade $workStatusFacade
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     #[Override]
@@ -42,13 +44,21 @@ class WorkResolverMap extends ResolverMap
                     /** @var int $id */
                     $id = $args['id'];
 
-                    return $this->workStatusFacade->findById($id);
+                    $getWorkStatusQuery = GetWorkStatusQuery::create($id);
+                    /** @var GetWorkStatusQueryResult $getWorkStatusQueryResult */
+                    $getWorkStatusQueryResult = $this->queryBus->handle($getWorkStatusQuery);
+
+                    return $getWorkStatusQueryResult->workStatus;
                 },
                 'workStatusList' => function ($value, ArgumentInterface $args): array {
                     /** @var int|null $limit */
                     $limit = $args['limit'] ?? null;
 
-                    return $this->workStatusFacade->list($limit);
+                    $getWorkStatusListQuery = GetWorkStatusListQuery::create($limit);
+                    /** @var GetWorkStatusListQueryResult $getWorkStatusListQueryResult */
+                    $getWorkStatusListQueryResult = $this->queryBus->handle($getWorkStatusListQuery);
+
+                    return $getWorkStatusListQueryResult->workStatuses;
                 }
             ]
         ];

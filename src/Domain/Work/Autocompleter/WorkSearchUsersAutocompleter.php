@@ -13,7 +13,6 @@
 namespace App\Domain\Work\Autocompleter;
 
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use Danilovl\SelectAutocompleterBundle\Model\Autocompleter\AutocompleterQuery;
 use Danilovl\SelectAutocompleterBundle\Model\SelectDataFormat\Item;
@@ -22,6 +21,8 @@ use Danilovl\SelectAutocompleterBundle\Service\OrmAutocompleter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Override;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserSearchQueryBuilder\{GetUserSearchQueryBuilderQuery, GetUserSearchQueryBuilderQueryResult};
 
 class WorkSearchUsersAutocompleter extends OrmAutocompleter
 {
@@ -29,7 +30,7 @@ class WorkSearchUsersAutocompleter extends OrmAutocompleter
         ManagerRegistry $registry,
         AutocompleterConfigResolver $resolver,
         private readonly UserService $userService,
-        private readonly UserFacade $userFacade
+        private readonly QueryBusInterface $queryBus
     ) {
         parent::__construct($registry, $resolver);
     }
@@ -47,11 +48,14 @@ class WorkSearchUsersAutocompleter extends OrmAutocompleter
         /** @var string $lookingUsers */
         $lookingUsers = str_replace('work-search-', '', $this->config->name);
 
-        $queryBuilder = $this->userFacade->queryBuilderBySearchType(
+        $getUserSearchQueryBuilderQuery = GetUserSearchQueryBuilderQuery::create(
             user: $user,
             lookingUsers: $lookingUsers,
             whoLooking: $whoLooking
         );
+        /** @var GetUserSearchQueryBuilderQueryResult $getUserSearchQueryBuilderQueryResult */
+        $getUserSearchQueryBuilderQueryResult = $this->queryBus->handle($getUserSearchQueryBuilderQuery);
+        $queryBuilder = $getUserSearchQueryBuilderQueryResult->queryBuilder;
 
         if (!empty($query->search)) {
             $queryBuilder

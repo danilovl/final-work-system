@@ -14,10 +14,6 @@ namespace App\Domain\Work\Service;
 
 use App\Application\Constant\TabTypeConstant;
 use App\Application\Exception\RuntimeException;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\Event\Facade\EventFacade;
-use App\Domain\Media\Facade\MediaFacade;
-use App\Domain\Task\Facade\TaskFacade;
 use App\Infrastructure\Service\PaginatorService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\Event\Entity\Event;
@@ -32,6 +28,11 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Service\ResetInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Task\Bus\Query\TaskQueryByWork\{GetTaskQueryByWorkQuery, GetTaskQueryByWorkQueryResult};
+use App\Domain\Event\Bus\Query\EventQueryByWork\{GetEventQueryByWorkQuery, GetEventQueryByWorkQueryResult};
+use App\Domain\Media\Bus\Query\MediaQueryByWork\{GetMediaQueryByWorkQuery, GetMediaQueryByWorkQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByWorkUser\{GetConversationMessageQueryByWorkUserQuery, GetConversationMessageQueryByWorkUserQueryResult};
 
 class WorkDetailTabService implements ResetInterface
 {
@@ -39,10 +40,7 @@ class WorkDetailTabService implements ResetInterface
 
     public function __construct(
         private readonly PaginatorService $paginator,
-        private readonly TaskFacade $taskFacade,
-        private readonly MediaFacade $mediaFacade,
-        private readonly EventFacade $eventFacade,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly ParameterServiceInterface $parameterService
     ) {}
 
@@ -168,17 +166,32 @@ class WorkDetailTabService implements ResetInterface
 
     private function getTaskQuery(Work $work, bool $isSupervisor): Query
     {
-        return $this->taskFacade->queryByWork($work, !$isSupervisor);
+        $getTaskQueryByWorkQuery = GetTaskQueryByWorkQuery::create(
+            work: $work,
+            active: !$isSupervisor
+        );
+        /** @var GetTaskQueryByWorkQueryResult $getTaskQueryByWorkQueryResult */
+        $getTaskQueryByWorkQueryResult = $this->queryBus->handle($getTaskQueryByWorkQuery);
+
+        return $getTaskQueryByWorkQueryResult->query;
     }
 
     private function getVersionQuery(Work $work): Query
     {
-        return $this->mediaFacade->queryByWork($work);
+        $getMediaQueryByWorkQuery = GetMediaQueryByWorkQuery::create($work);
+        /** @var GetMediaQueryByWorkQueryResult $getMediaQueryByWorkQueryResult */
+        $getMediaQueryByWorkQueryResult = $this->queryBus->handle($getMediaQueryByWorkQuery);
+
+        return $getMediaQueryByWorkQueryResult->query;
     }
 
     private function getEventQuery(Work $work): Query
     {
-        return $this->eventFacade->queryByWork($work);
+        $getEventQueryByWorkQuery = GetEventQueryByWorkQuery::create($work);
+        /** @var GetEventQueryByWorkQueryResult $getEventQueryByWorkQueryResult */
+        $getEventQueryByWorkQueryResult = $this->queryBus->handle($getEventQueryByWorkQuery);
+
+        return $getEventQueryByWorkQueryResult->query;
     }
 
     private function getMessageQuery(Work $work, ?User $user): Query
@@ -187,7 +200,14 @@ class WorkDetailTabService implements ResetInterface
             throw new RuntimeException('User is required for message tab');
         }
 
-        return $this->conversationMessageFacade->queryByWorkUser($work, $user);
+        $getConversationMessageQueryByWorkUserQuery = GetConversationMessageQueryByWorkUserQuery::create(
+            work: $work,
+            user: $user
+        );
+        /** @var GetConversationMessageQueryByWorkUserQueryResult $getConversationMessageQueryByWorkUserQueryResult */
+        $getConversationMessageQueryByWorkUserQueryResult = $this->queryBus->handle($getConversationMessageQueryByWorkUserQuery);
+
+        return $getConversationMessageQueryByWorkUserQueryResult->query;
     }
 
     public function reset(): void

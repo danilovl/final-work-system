@@ -15,7 +15,6 @@ namespace App\Domain\Work\Http;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
-use App\Domain\Task\Service\TaskService;
 use App\Domain\Work\Bus\Query\GroupWorkList\{
     GetGroupWorkListQuery,
     GetGroupWorkListQueryResult
@@ -28,6 +27,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Domain\Task\Bus\Query\ActiveTasksPreload\GetActiveTasksPreloadQuery;
 
 readonly class WorkListHandle
 {
@@ -36,8 +36,7 @@ readonly class WorkListHandle
         private TwigRenderService $twigRenderService,
         private FormDeleteFactory $deleteFactory,
         private WorkFormFactory $workFormFactory,
-        private QueryBusInterface $queryBus,
-        private TaskService $taskService
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request, string $type): Response
@@ -73,7 +72,8 @@ readonly class WorkListHandle
             }
         }
 
-        $this->taskService->preloadActiveTasks($works);
+        $getActiveTasksPreloadQuery = GetActiveTasksPreloadQuery::create($works);
+        $this->queryBus->handle($getActiveTasksPreloadQuery);
 
         return $this->twigRenderService->renderToResponse('domain/work/list.html.twig', [
             'form' => $form->createView(),
