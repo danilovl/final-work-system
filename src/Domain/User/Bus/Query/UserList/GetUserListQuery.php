@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Bus\Query\UserList;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\HttpFoundation\Request;

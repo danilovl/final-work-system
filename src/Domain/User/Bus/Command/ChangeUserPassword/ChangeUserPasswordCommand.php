@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Bus\Command\ChangeUserPassword;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

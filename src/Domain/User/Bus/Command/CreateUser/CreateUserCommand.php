@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Bus\Command\CreateUser;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\User\Model\UserModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

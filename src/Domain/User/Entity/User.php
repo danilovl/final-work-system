@@ -13,7 +13,7 @@
 namespace App\Domain\User\Entity;
 
 use App\Application\Constant\GenderConstant;
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Application\Traits\Entity\CreateUpdateAbleTrait;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Conversation\Entity\Conversation;

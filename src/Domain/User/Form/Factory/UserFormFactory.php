@@ -13,7 +13,7 @@
 namespace App\Domain\User\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Form\{
     UserEditForm,

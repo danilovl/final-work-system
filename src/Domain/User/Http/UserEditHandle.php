@@ -16,7 +16,7 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     SeoPageConstant
 };
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
     SeoPageService,

@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Http\Api;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Entity\User;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\User\Bus\Query\UserList\{

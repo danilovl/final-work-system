@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Bus\Command\CreateUser;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\UserEventDispatcher;
 use App\Domain\User\Facade\UserFacade;

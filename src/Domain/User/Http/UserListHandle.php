@@ -13,7 +13,7 @@
 namespace App\Domain\User\Http;
 
 use App\Domain\Work\Model\WorkSearchStatusModel;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserList\{
     GetUserListQuery,
     GetUserListQueryResult

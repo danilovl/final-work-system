@@ -12,10 +12,8 @@
 
 namespace App\Domain\User\Facade;
 
-use App\Application\Exception\{
-    RuntimeException,
-    UserNotExistException
-};
+use App\Application\Exception\UserNotExistException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepository;
 use App\Domain\Work\Constant\WorkUserTypeConstant;

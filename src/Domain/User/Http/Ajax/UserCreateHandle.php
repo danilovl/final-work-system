@@ -12,12 +12,9 @@
 
 namespace App\Domain\User\Http\Ajax;
 
-use App\Application\Constant\{
-    FlashTypeConstant,
-    AjaxJsonTypeConstant
-};
+use App\Infrastructure\Constant\{AjaxJsonTypeConstant, FlashTypeConstant};
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\User\Bus\Command\CreateUser\CreateUserCommand;
 use App\Domain\User\Form\UserForm;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Bus\Command\ChangeUserProfileImage;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 
 readonly class ChangeUserProfileImageHandler implements CommandHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Bus\Command\SaveUser;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\User\Factory\UserFactory;
 
 readonly class SaveUserHandler implements CommandHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Http\Api;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\DTO\Api\Output\UserSearchOutput;
 use App\Domain\User\DTO\Api\UserDTO;

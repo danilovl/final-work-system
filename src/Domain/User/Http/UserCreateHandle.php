@@ -12,11 +12,9 @@
 
 namespace App\Domain\User\Http;
 
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Constant\ControllerMethodConstant;
+use App\Infrastructure\Constant\FlashTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
