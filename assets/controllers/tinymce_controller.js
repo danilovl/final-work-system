@@ -5,7 +5,7 @@ import { Controller } from '@hotwired/stimulus';
  *
  *   {{ form_start(form, {'attr': {'data-controller': 'tinymce'}}) }}
  *
- * Language is taken from <html lang="…">.
+ * Language is taken from <html lang="…">. TinyMCE is loaded only on pages that use it.
  */
 export default class extends Controller {
     static values = {
@@ -13,16 +13,20 @@ export default class extends Controller {
         height: { type: Number, default: 300 }
     };
 
-    connect() {
-        if (typeof tinymce === 'undefined') {
-            return;
-        }
-
+    async connect() {
         const elements = this.element.matches(this.selectorValue)
             ? [this.element]
             : Array.from(this.element.querySelectorAll(this.selectorValue));
 
         if (elements.length === 0) {
+            return;
+        }
+
+        await import('tinymce');
+
+        const tinymce = window.tinymce;
+
+        if (!this.element.isConnected) {
             return;
         }
 

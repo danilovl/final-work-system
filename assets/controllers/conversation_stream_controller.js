@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { conversationEventSource } from '../js/main.js';
 
 /**
  * Prepends new conversation messages published to Mercure.

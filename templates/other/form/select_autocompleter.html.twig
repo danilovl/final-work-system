@@ -1,0 +1,6 @@
+{% extends '@SelectAutocompleter/Form/versions.html.twig' %}
+
+{% block script %}
+    {% set autocompleterScript %}{{ parent() }}{% endset %}
+    {{ autocompleterScript | replace({'<script type="text/javascript">': '<script type="module">'}) | raw }}
+{% endblock %}

@@ -1,3 +1,5 @@
+import { Modal, Tooltip } from 'bootstrap';
+
 function findSectionMenuLink(sidebarMenuElement, currentUrl) {
     const minimumSharedSegments = 2;
     const pathSegments = url => new URL(url, window.location.origin).pathname.split('/').filter(segment => segment !== '');
@@ -126,7 +128,7 @@ function initValidator() {
     }));
 }
 
-function notifyMessage(notifyType, notifyText) {
+export function notifyMessage(notifyType, notifyText) {
     const alertTypes = {
         error: 'danger',
         notice: 'warning'
@@ -154,7 +156,7 @@ function notifyMessage(notifyType, notifyText) {
     }, 3000);
 }
 
-function showGoogleDocs(id, url) {
+export function showGoogleDocs(id, url) {
     let container = $(id);
 
     if (container.length === 0 || !container.is(':empty')) {
@@ -166,24 +168,15 @@ function showGoogleDocs(id, url) {
     container.append(iframe);
 }
 
-function showArchiveContent(archiveUrl, idContent, idContentInfo) {
+export function showArchiveContent(archiveUrl, idContent, idContentInfo) {
     let contentElement = $(idContent);
     let fileContentElement = $("<ul>");
     let zipInfoElement = $(idContentInfo);
 
     contentElement.append(fileContentElement);
 
-    let promise = new JSZip.external.Promise(function (resolve, reject) {
-        JSZipUtils.getBinaryContent(archiveUrl, function (err, data) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(data);
-            }
-        });
-    });
-
-    promise.then(JSZip.loadAsync)
+    Promise.all([import('jszip'), fetch(archiveUrl)])
+        .then(([{default: JSZip}, response]) => response.arrayBuffer().then(data => JSZip.loadAsync(data)))
         .then(function (zip) {
             zip.forEach(function (relativePath, zipEntry) {
                 fileContentElement.append($("<li>", {
@@ -206,7 +199,6 @@ function showArchiveContent(archiveUrl, idContent, idContentInfo) {
 
 const processCalendarManagerCreateNotValidFormResponse = function (response) {
     const form = $('#calendar-manager-create-form');
-    console.log(form)
     processNotValidFormResponse(form, response)
 }
 
@@ -216,11 +208,11 @@ const processNotValidFormResponse = function (form, response) {
     }
 
     for (const key in response.data) {
-        $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
+        $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-12 validation-error red">' + response.data[key] + '</div>');
     }
 }
 
-function createEditContentAjax(buttonId, close = false, reload = false) {
+export function createEditContentAjax(buttonId, close = false, reload = false) {
     let buttonCreate = $(buttonId),
         loadingIcon = $(buttonCreate.children()[0]),
         form = buttonCreate.parents('form');
@@ -265,7 +257,7 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
                     if (close) {
                         window.automaticModalWindowClose = true;
                         setTimeout(function () {
-                            $('#modalWindow').modal('toggle');
+                            Modal.getOrCreateInstance('#modalWindow').toggle();
                         }, 1000);
                     }
                 }
@@ -287,7 +279,7 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
     }));
 }
 
-function createEditContentFileAjax(buttonId, close = false, reload = false) {
+export function createEditContentFileAjax(buttonId, close = false, reload = false) {
     let buttonCreate = $(buttonId);
     let loadingIcon = $(buttonCreate.children()[0]);
     let form = buttonCreate.parents('form');
@@ -331,7 +323,7 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
                     if (close) {
                         window.automaticModalWindowClose = true;
                         setTimeout(function () {
-                            $('#modalWindow').modal('toggle');
+                            Modal.getOrCreateInstance('#modalWindow').toggle();
                         }, 1000);
                     }
                 }
@@ -377,7 +369,7 @@ function initAjaxDeleteContent() {
                     timeout: 10000,
                     success: function (response) {
                         if (response.delete === true) {
-                            $('.modal').modal('hide');
+                            hideOpenModals();
                             setTimeout(function () {
                                 $(row).remove();
                             }, 1000);
@@ -394,7 +386,7 @@ function initAjaxDeleteContent() {
                 }).fail(function () {
                     loadingIcon.classList.add('d-none');
                     element.disabled = false;
-                    $('.modal').modal('hide');
+                    hideOpenModals();
                 });
             };
         });
@@ -402,8 +394,16 @@ function initAjaxDeleteContent() {
 }
 
 function initTooltip() {
-    $('[data-bs-toggle="tooltip"]').tooltip({
-        container: 'body'
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(element => {
+        Tooltip.getOrCreateInstance(element, {
+            container: 'body'
+        });
+    });
+}
+
+function hideOpenModals() {
+    document.querySelectorAll('.modal.show').forEach(element => {
+        Modal.getOrCreateInstance(element).hide();
     });
 }
 
@@ -467,7 +467,7 @@ function atob64DecodeUnicode(str) {
     }).join(''))
 }
 
-function conversationEventSource(url, $chat) {
+export function conversationEventSource(url, $chat) {
     const eventSource = new EventSource(url);
     eventSource.onmessage = event => {
         let data = JSON.parse(event.data);
@@ -558,7 +558,7 @@ function conversationEventSource(url, $chat) {
     };
 })(jQuery);
 
-function widgetEventSource(url, id) {
+export function widgetEventSource(url, id) {
     const eventSource = new EventSource(url);
     eventSource.onmessage = event => {
         let data = JSON.parse(event.data);
@@ -572,7 +572,7 @@ function widgetEventSource(url, id) {
     return eventSource;
 }
 
-function createImageByWebCamera(id) {
+export function createImageByWebCamera(id) {
     let webCameraImageContainerElement = $(`#${id}`);
     let idCanvas = webCameraImageContainerElement.data('id-canvas');
     let elementCanvasElement = document.getElementById(idCanvas);
@@ -696,7 +696,7 @@ function closeModalWindowOnError() {
     }
 
     window.automaticModalWindowClose = true;
-    $(modalWindow).modal('hide');
+    Modal.getOrCreateInstance(modalWindow).hide();
 }
 
 function hideAjaxLoader() {
@@ -847,3 +847,6 @@ window.addEventListener('load', () => {
         });
     }
 });
+
+window.notifyMessage = notifyMessage;
+window.processCalendarManagerCreateNotValidFormResponse = processCalendarManagerCreateNotValidFormResponse;

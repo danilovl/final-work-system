@@ -22,6 +22,7 @@ import {
   createFetchEventsFunction,
   createHandleDateSelectFunction
 } from './function';
+import {showModal} from '../../modal';
 
 type CalendarReservationProps = CalendarBaseProps;
 
@@ -98,7 +99,7 @@ function handleEventClick(clickInfo: EventClickArg): void {
     $('#modal-work-form').hide();
   }
 
-  $('#reservation-event-modal').modal('show');
+  showModal('reservation-event-modal');
 }
 
 

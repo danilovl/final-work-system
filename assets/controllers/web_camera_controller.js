@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { createImageByWebCamera } from '../js/main.js';
 
 /**
  * Profile image from the web camera.

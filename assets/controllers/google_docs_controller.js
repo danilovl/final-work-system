@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { showGoogleDocs } from '../js/main.js';
 
 /**
  * Shows a file in the Google Docs viewer on click.

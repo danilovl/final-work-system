@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { notifyMessage } from '../js/main.js';
 
 /**
  * Toggle switch for a checkbox. The look comes from the "js-switch" CSS class, the element is not wrapped.

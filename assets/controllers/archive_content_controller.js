@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { showArchiveContent } from '../js/main.js';
 
 /**
  * Lists the files of a zip archive in the element.

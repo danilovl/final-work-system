@@ -1,4 +1,5 @@
 import {ApiResponse, CalendarEvent, FetchInfo, RawEvent, SelectInfo} from './interface';
+import {showModal} from '../../modal';
 
 export function dateFormat(date: Date): string {
     const year = date.getFullYear();
@@ -70,6 +71,6 @@ export function createHandleDateSelectFunction() {
         if (startElement) startElement.value = start;
         if (endElement) endElement.value = end;
 
-        $('#create-new-event-modal').modal('show');
+        showModal('create-new-event-modal');
     };
 }

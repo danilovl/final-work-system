@@ -772,8 +772,9 @@
             // it is possible to use this plugin with a selector that will contain the collection id
             // in a data attribute
             let elem = $(this);
+            let collection;
             if (elem.data('collection') !== undefined) {
-                let collection = $('#' + elem.data('collection'));
+                collection = $('#' + elem.data('collection'));
                 if (collection.length === 0) {
                     console.log("jquery.collection.js: given collection id does not exist.");
                     return true;

@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { widgetEventSource } from '../js/main.js';
 
 /**
  * Replaces a top navigation widget with the content published to Mercure.

@@ -24,6 +24,7 @@ import {
   createFetchEventsFunction,
   createHandleDateSelectFunction
 } from './function';
+import {showModal, hideModal} from '../../modal';
 
 const {
   locale,
@@ -77,7 +78,7 @@ function handleEventClick(clickInfo: EventClickArg): void {
     eventDelete.setAttribute('data-event-id', event.id);
   }
 
-  $('#event-detail-modal').modal('show');
+  showModal('event-detail-modal');
 }
 
 function handleEventDrop(info: EventDropInfo): void {
@@ -143,7 +144,7 @@ function createEvent(): void {
       .then((response: ApiResponse) => {
         const calendarApi = fullCalendar.value?.getApi();
         if (calendarApi && response.event) {
-          $('#create-new-event-modal').modal('hide');
+          hideModal('create-new-event-modal');
 
           calendarApi.addEvent({
             id: response.event.id,

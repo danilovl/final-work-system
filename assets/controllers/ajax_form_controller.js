@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { createEditContentAjax, createEditContentFileAjax } from '../js/main.js';
 
 /**
  * Submits the parent form of the button via AJAX.

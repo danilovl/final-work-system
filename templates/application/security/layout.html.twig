@@ -9,11 +9,11 @@
     {% block title %} {{ seo_title() }} {% endblock %}
 
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app_security/css') }}
+        {{ vite_entry_link_tags('security') }}
     {% endblock %}
 
     {% block javascripts %}
-        <script src="{{ asset('build/js/login.js') }}"></script>
+        {{ vite_entry_script_tags('security') }}
     {% endblock %}
 </head>
 <body class="login">

@@ -2,5 +2,5 @@
 {% if parameter_get_string('google_analytics_code') is not empty  %}
 <meta name="google-analytics-code" content="{{ parameter_get_string('google_analytics_code') }}">
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ parameter_get_string('google_analytics_code') }}"></script>
-{{ encore_entry_script_tags('analytics') }}
+{{ vite_entry_script_tags('analytics') }}
 {% endif %}

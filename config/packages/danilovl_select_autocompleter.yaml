@@ -1,5 +1,6 @@
 danilovl_select_autocompleter:
   default_option:
+    base_template: 'other/form/select_autocompleter.html.twig'
     select_option:
       width: '100%'
       placeholder: ''
