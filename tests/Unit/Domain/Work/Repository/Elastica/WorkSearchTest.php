@@ -33,11 +33,11 @@ class WorkSearchTest extends KernelTestCase
         array $formData,
         array $expectedQuery
     ): void {
-        $form = $this->createMock(FormInterface::class);
+        $form = $this->createStub(FormInterface::class);
         $form->method('getData')->willReturn($formData);
         $form->method('isSubmitted')->willReturn(!empty($formData));
 
-        $transformedFinder = $this->createMock(TransformedFinder::class);
+        $transformedFinder = $this->createStub(TransformedFinder::class);
 
         $workSearch = new WorkSearch($transformedFinder);
 
