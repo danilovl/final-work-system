@@ -25,7 +25,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            {{ article.content | away_to | raw }}
+                            {{ article.content | sanitize_html('app.rich_text_sanitizer') | away_to | raw }}
                         </div>
                     </div>
                 </div>
