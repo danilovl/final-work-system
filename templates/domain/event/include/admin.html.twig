@@ -99,10 +99,13 @@
                                             {{ 'app.form.action.close' | trans }}
                                         </button>
 
-                                        <a class="btn btn-danger"
-                                           href="{{ path('event_switch_to_skype', { 'id': event.id | hashids_encode }) }}">
-                                            {{ 'app.form.action.switch_to_skype' | trans }}
-                                        </a>
+                                        <form method="post"
+                                              action="{{ path('event_switch_to_skype', { 'id': event.id | hashids_encode }) }}"
+                                              style="display: inline">
+                                            <button type="submit" class="btn btn-danger">
+                                                {{ 'app.form.action.switch_to_skype' | trans }}
+                                            </button>
+                                        </form>
 
                                     </div>
                                 </div>
