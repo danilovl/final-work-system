@@ -35,9 +35,13 @@ class UserFormTest extends KernelTestCase
         array $data,
         bool $isValid
     ): void {
-        $form = $this->formFactory->create(UserForm::class, new UserModel, [
-            'csrf_protection' => false
-        ]);
+        $form = $this->formFactory->create(
+            type: UserForm::class,
+            data: new UserModel,
+            options: [
+                'csrf_protection' => false
+            ]
+        );
         $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
