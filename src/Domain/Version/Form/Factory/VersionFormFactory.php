@@ -91,6 +91,6 @@ class VersionFormFactory
                 throw new ConstantNotFoundException('Controller method type not found');
         }
 
-        return $this->formFactory->create(VersionForm::class, $mediaModel, $parameters);
+        return $this->formFactory->create(type: VersionForm::class, data: $mediaModel, options: $parameters);
     }
 }
