@@ -12,6 +12,8 @@
 
 namespace App\Domain\Work\Form;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Domain\Work\Model\WorkSearchStatusModel;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,6 +37,14 @@ class WorkSearchStatusForm extends AbstractType
             'constraints' => [
                 new NotBlank
             ]
+        ]);
+    }
+
+    #[Override]
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => WorkSearchStatusModel::class
         ]);
     }
 
