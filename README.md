@@ -5,7 +5,7 @@
 FinalWork web application
 ========================
 
-Thesis management system based on Symfony 7.4 and PHP 8.5
+Thesis management system based on Symfony 8.1 and PHP 8.5
 
 Demonstration of the system from the student's perspective.
 

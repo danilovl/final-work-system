@@ -70,8 +70,8 @@ class Media
     /** @var Collection<MediaCategory> */
     #[ORM\ManyToMany(targetEntity: MediaCategory::class, inversedBy: 'medias')]
     #[ORM\JoinTable(name: 'media_to_media_category')]
-    #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
-    #[ORM\InverseJoinColumn(name: 'media_category_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', onDelete: 'RESTRICT')]
+    #[ORM\InverseJoinColumn(name: 'media_category_id', referencedColumnName: 'id')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $categories;
 

@@ -78,8 +78,8 @@ class Work
     /** @var Collection<WorkCategory> */
     #[ORM\ManyToMany(targetEntity: WorkCategory::class, inversedBy: 'works')]
     #[ORM\JoinTable(name: 'work_to_work_category')]
-    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\InverseJoinColumn(name: 'work_category_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', onDelete: 'RESTRICT')]
+    #[ORM\InverseJoinColumn(name: 'work_category_id', referencedColumnName: 'id')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $categories;
 
