@@ -1,0 +1,22 @@
+<script>
+    (() => {
+        const read = key => {
+            try {
+                return localStorage.getItem(key);
+            } catch {
+                return null;
+            }
+        };
+
+        const root = document.documentElement;
+        const content = read('fws-theme') ?? 'system';
+        const sidebar = read('fws-sidebar-theme') ?? 'auto';
+        const isDark = content === 'dark' || (content === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        root.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+
+        if (sidebar === 'light' || sidebar === 'dark') {
+            root.setAttribute('data-fws-sidebar', sidebar);
+        }
+    })();
+</script>

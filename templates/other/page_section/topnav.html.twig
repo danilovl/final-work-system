@@ -8,6 +8,82 @@
 			</div>
 			<div class="navbar-nav-right">
 				<ul id="widget-navbar" class="nav navbar-nav navbar-right">
+					<li class="dropdown" data-controller="theme">
+						<button type="button"
+								class="theme-toggle"
+								title="{{ 'app.menu.theme' | trans }}"
+								data-bs-toggle="dropdown"
+								data-bs-display="static"
+								aria-expanded="false">
+							<i class="fa-solid fa-circle-half-stroke"></i>
+							<span class="visually-hidden">{{ 'app.menu.theme' | trans }}</span>
+						</button>
+						<div class="dropdown-menu dropdown-menu-end theme-menu">
+							<h6 class="dropdown-header">{{ 'app.menu.theme_content' | trans }}</h6>
+							<button type="button"
+									class="dropdown-item"
+									data-theme-target="option"
+									data-action="theme#set"
+									data-theme-area-param="content"
+									data-theme-value-param="light">
+								<i class="fa-solid fa-sun"></i>
+								{{ 'app.menu.theme_light' | trans }}
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<button type="button"
+									class="dropdown-item"
+									data-theme-target="option"
+									data-action="theme#set"
+									data-theme-area-param="content"
+									data-theme-value-param="dark">
+								<i class="fa-solid fa-moon"></i>
+								{{ 'app.menu.theme_dark' | trans }}
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<button type="button"
+									class="dropdown-item"
+									data-theme-target="option"
+									data-action="theme#set"
+									data-theme-area-param="content"
+									data-theme-value-param="system">
+								<i class="fa-solid fa-desktop"></i>
+								{{ 'app.menu.theme_system' | trans }}
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<div class="dropdown-divider"></div>
+							<h6 class="dropdown-header">{{ 'app.menu.theme_sidebar' | trans }}</h6>
+							<button type="button"
+									class="dropdown-item"
+									data-theme-target="option"
+									data-action="theme#set"
+									data-theme-area-param="sidebar"
+									data-theme-value-param="light">
+								<i class="fa-solid fa-sun"></i>
+								{{ 'app.menu.theme_light' | trans }}
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<button type="button"
+									class="dropdown-item"
+									data-theme-target="option"
+									data-action="theme#set"
+									data-theme-area-param="sidebar"
+									data-theme-value-param="dark">
+								<i class="fa-solid fa-moon"></i>
+								{{ 'app.menu.theme_dark' | trans }}
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<button type="button"
+									class="dropdown-item"
+									data-theme-target="option"
+									data-action="theme#set"
+									data-theme-area-param="sidebar"
+									data-theme-value-param="auto">
+								<i class="fa-solid fa-link"></i>
+								{{ 'app.menu.theme_auto' | trans }}
+								<i class="fa-solid fa-check"></i>
+							</button>
+						</div>
+					</li>
 					{{ widget_group('top_nav',{
 						menu: {menu: 'profile'}
 					}) }}
