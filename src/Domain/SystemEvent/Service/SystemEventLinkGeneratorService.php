@@ -48,8 +48,8 @@ readonly class SystemEventLinkGeneratorService
         $systemEvent = $systemEventRecipient->getSystemEvent();
 
         return $this->twigRenderService->render(
-            $this->getTemplate($type, $systemEvent->getType()->getId()),
-            $this->getTemplateParameters($systemEvent)
+            view: $this->getTemplate($type, $systemEvent->getType()->getId()),
+            parameters: $this->getTemplateParameters($systemEvent)
         );
     }
 
