@@ -14,7 +14,7 @@ namespace App\Domain\SystemEvent\Repository;
 
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class SystemEventQueryBuilder extends BaseQueryBuilder
 {
@@ -39,7 +39,7 @@ class SystemEventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByCreatedAt(string $order = Order::Descending->value): self
+    public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('system_event.createdAt', $order);
 
