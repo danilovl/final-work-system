@@ -13,7 +13,12 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        {{ form_start(form, {
+                            'attr': {
+                                'data-controller': 'tinymce',
+                                'class': 'form-horizontal'
+                            }
+                        }) }}
 
                         <div class="item form-group">
                             {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
@@ -42,7 +47,12 @@
                                 }
                             ) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.complete, {'attr': {'class': 'form-control js-switch'}}) }}
+                                {{ form_widget(form.complete, {
+                                    'attr': {
+                                        'data-controller': 'switch',
+                                        'class': 'form-control js-switch'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
@@ -59,7 +69,12 @@
                                 }
                             ) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.active, {'attr': {'class': 'form-control js-switch'}}) }}
+                                {{ form_widget(form.active, {
+                                    'attr': {
+                                        'data-controller': 'switch',
+                                        'class': 'form-control js-switch'
+                                    }
+                                }) }}
                             </div>
                         </div>
 
@@ -79,7 +94,13 @@
                                 <i class="fa fa-calendar-o form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
-                                {{ form_widget(form.deadline, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                {{ form_widget(form.deadline, {
+                                    'attr': {
+                                        'data-controller': 'datetimepicker',
+                                        'data-datetimepicker-format-value': 'YYYY-MM-DD',
+                                        'class': 'form-control has-feedback-left'
+                                    }
+                                }) }}
                             </div>
 
                             {% if taskDeadlines is not empty %}
@@ -131,7 +152,12 @@
                             <div class="item form-group">
                                 {{ form_label(form.works, 'app.form.label.work', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                                 <div class="col-md-10 col-sm-10 col-xs-12">
-                                    {{ form_widget(form.works, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.works, {
+                                        'attr': {
+                                            'data-controller': 'select2',
+                                            'class': 'form-control'
+                                        }
+                                    }) }}
                                 </div>
                             </div>
                         {% endif %}
@@ -160,18 +186,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        let locale = '{{ app.request.locale }}';
-
-        $('#task_deadline').datetimepicker({
-            format: 'YYYY-MM-DD',
-            locale: '{{ app.request.locale }}'
-        });
-        $("#task_works").select2();
-
-        tinymce.remove();
-        initTinymce(locale);
         initTooltip();
-        initJsSwitch('.ajax .js-switch');
         createEditContentAjax('#task-button-action');
         createEditContentAjax('#task-button-action-close', true);
 
