@@ -18,10 +18,8 @@ use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use Doctrine\Common\Collections\{
-    Order,
-    Criteria
-};
+use Doctrine\Common\Collections\Criteria;
+use SortDirection;
 
 class ConversationService
 {
@@ -72,7 +70,7 @@ class ConversationService
 
         $criteria = Criteria::create()
             ->orderBy([
-                'createdAt' => Order::Descending->value
+                'createdAt' => SortDirection::Descending
             ])
             ->setMaxResults(1);
 
