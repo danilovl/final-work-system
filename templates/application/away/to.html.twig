@@ -7,9 +7,11 @@
 				<div class="text-center text-center">
 					<h2>{{ 'app.text.are_you_sure_want_to_leave' | trans }}</h2>
 					<p>{{ 'app.text.link_outside_web' | trans }}</p>
-					<p>
-						<a href="{{ url }}">{{ url }}</a>
-					</p>
+					{% if url is not null %}
+						<p>
+							<a href="{{ url }}" rel="noopener noreferrer nofollow">{{ url }}</a>
+						</p>
+					{% endif %}
 				</div>
 			</div>
 		</div>

@@ -24,8 +24,13 @@ readonly class AwayController
 
     public function to(Request $request): Response
     {
+        $url = mb_trim($request->query->getString('url'));
+        if (preg_match('#^https?://#i', $url) !== 1) {
+            $url = null;
+        }
+
         return $this->twigRenderService->renderToResponse('application/away/to.html.twig', [
-            'url' => $request->query->get('url')
+            'url' => $url
         ]);
     }
 }
