@@ -25,7 +25,22 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                        {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal'}}) }}
+                                        {% set googleMapAttr = {
+                                            'data-controller': 'google-map tinymce',
+                                            'data-google-map-editable-value': 'true'
+                                        } %}
+                                        {% if eventAddress is defined and eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
+                                            {% set googleMapAttr = googleMapAttr|merge({
+                                                'data-google-map-lat-value': eventAddress.latitude,
+                                                'data-google-map-lng-value': eventAddress.longitude
+                                            }) %}
+                                        {% endif %}
+                                        {{ form_start(form, {
+                                            'method': 'POST',
+                                            'attr': {
+                                                'class': 'form-horizontal'
+                                            }|merge(googleMapAttr)
+                                        }) }}
                                         <div class="item form-group">
                                             {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -51,7 +66,12 @@
                                         <div class="item form-group">
                                             {{ form_label(form.street, 'app.form.label.street', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                {{ form_widget(form.street, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_widget(form.street, {
+                                                    'attr': {
+                                                        'class': 'form-control',
+                                                        'data-google-map-target': 'street'
+                                                    }
+                                                }) }}
                                             </div>
                                             {% if not form.street.vars.valid %}
                                                 <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -62,7 +82,12 @@
                                         <div class="item form-group">
                                             {{ form_label(form.latitude, 'app.form.label.latitude', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_widget(form.latitude, {
+                                                    'attr': {
+                                                        'class': 'form-control',
+                                                        'data-google-map-target': 'latitude'
+                                                    }
+                                                }) }}
                                             </div>
                                             {% if not form.latitude.vars.valid %}
                                                 <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -73,7 +98,12 @@
                                         <div class="item form-group">
                                             {{ form_label(form.longitude, 'app.form.label.longitude', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_widget(form.longitude, {
+                                                    'attr': {
+                                                        'class': 'form-control',
+                                                        'data-google-map-target': 'longitude'
+                                                    }
+                                                }) }}
                                             </div>
                                             {% if not form.longitude.vars.valid %}
                                                 <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -84,7 +114,12 @@
                                         <div class="item form-group">
                                             {{ form_label(form.skype, 'app.form.label.skype', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                {{ form_widget(form.skype, {'attr': {'class': 'form-control js-switch'}}) }}
+                                                {{ form_widget(form.skype, {
+                                                    'attr': {
+                                                        'data-controller': 'switch',
+                                                        'class': 'form-control js-switch'
+                                                    }
+                                                }) }}
                                             </div>
                                             {% if not form.skype.vars.valid %}
                                                 <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -95,7 +130,7 @@
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <div class="x_content">
-                                                    <div class="google-map" id="map" style="height: 400px"></div>
+                                                    <div class="google-map" id="map" style="height: 400px" data-google-map-target="map"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,60 +157,4 @@
 
 {% block javascript %}
     {% include 'other/script/google_map.twig' %}
-    <script>
-        $(document).ready(() => {
-            let locale = '{{ app.request.locale }}';
-
-            initTinymce(locale);
-        });
-
-        let head = document.getElementsByTagName('head')[0];
-        let insertBefore = head.insertBefore;
-        head.insertBefore = function (newElement, referenceElement) {
-            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
-                return;
-            }
-            insertBefore.call(head, newElement, referenceElement);
-        };
-
-        let street = document.getElementById('event_address_street');
-        let inputLatitude = document.getElementById('event_address_latitude');
-        let inputLongitude = document.getElementById('event_address_longitude');
-        let geocoder = new google.maps.Geocoder();
-
-        {% if eventAddress is defined and eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
-        let myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
-        {% else %}
-        let myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
-        {% endif %}
-
-        function googleInitMap() {
-            let mapOptions = {
-                zoom: 11,
-                center: myLatLng
-            };
-            let map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            let marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: 'Hello World!'
-            });
-
-            google.maps.event.addListener(map, 'click', event => {
-                marker.setPosition(event.latLng);
-                let latitude = event.latLng.lat();
-                let longitude = event.latLng.lng();
-                inputLatitude.value = latitude;
-                inputLongitude.value = longitude;
-
-                geocoder.geocode({'latLng': event.latLng}, (results, status) => {
-                    if (status === google.maps.GeocoderStatus.OK && results[0]) {
-                        street.value = results[0].formatted_address;
-                    }
-                });
-            });
-        }
-
-        googleInitMap();
-    </script>
 {% endblock %}

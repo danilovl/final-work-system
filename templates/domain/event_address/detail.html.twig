@@ -113,7 +113,14 @@
                             </div>
 
                             <div class="x_content">
-                                <div class="google-map" id="google-map" style="height: 400px"></div>
+                                <div class="google-map" id="google-map" style="height: 400px"
+                                     data-controller="google-map"
+                                     data-google-map-target="map"
+                                     {% if eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
+                                     data-google-map-lat-value="{{ eventAddress.latitude }}"
+                                     data-google-map-lng-value="{{ eventAddress.longitude }}"
+                                     {% endif %}
+                                ></div>
                             </div>
                         </div>
                     </div>
@@ -126,36 +133,4 @@
 
 {% block javascript %}
     {% include 'other/script/google_map.twig' %}
-
-    <script type="text/javascript">
-        let head = document.getElementsByTagName('head')[0];
-        let insertBefore = head.insertBefore;
-        head.insertBefore = function (newElement, referenceElement) {
-            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
-                return;
-            }
-            insertBefore.call(head, newElement, referenceElement);
-        };
-
-        function googleInitMap() {
-            {% if eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
-            let myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
-            {% else %}
-            let myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
-            {% endif %}
-
-            let mapOptions = {
-                zoom: 11,
-                center: myLatLng
-            };
-            let map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
-            let marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map
-            });
-            marker.setMap(map);
-        }
-
-        googleInitMap();
-    </script>
 {% endblock %}
