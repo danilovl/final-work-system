@@ -25,7 +25,7 @@ class ConversationSearchTest extends TestCase
 
     protected function setUp(): void
     {
-        $transformedFinder = $this->createMock(TransformedFinder::class);
+        $transformedFinder = $this->createStub(TransformedFinder::class);
         $this->conversationSearch = new ConversationSearch($transformedFinder);
     }
 
