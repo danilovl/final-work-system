@@ -40,4 +40,30 @@ class WorkCategoryRepository extends ServiceEntityRepository
             ->orderByName(Order::Ascending->value)
             ->getQueryBuilder();
     }
+
+    /**
+     * @param int[] $ids
+     */
+    public function countByOwnerAndIds(User $user, array $ids): int
+    {
+        return $this->count([
+            'id' => $ids,
+            'owner' => $user
+        ]);
+    }
+
+    /**
+     * @param int[] $ids
+     * @return WorkCategory[]
+     */
+    public function findByOwnerAndIds(User $user, array $ids): array
+    {
+        /** @var WorkCategory[] $result */
+        $result = $this->findBy([
+            'id' => $ids,
+            'owner' => $user
+        ]);
+
+        return $result;
+    }
 }
