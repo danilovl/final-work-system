@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Domain\SystemEventRecipient\EventListener\Entity;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\EventDispatcher\CacheEventDispatcher;
+use App\Infrastructure\Event\EventDispatcher\CacheEventDispatcher;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\EventListener\Entity\SystemEventRecipientListener;
 use App\Domain\User\Entity\User;
