@@ -46,7 +46,7 @@ class ArticleCategory
     #[Gedmo\Versioned]
     private array $access;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'workCategoriesOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;

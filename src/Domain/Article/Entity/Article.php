@@ -49,7 +49,7 @@ class Article
     #[Gedmo\Versioned]
     private string $content;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'comments')]
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
