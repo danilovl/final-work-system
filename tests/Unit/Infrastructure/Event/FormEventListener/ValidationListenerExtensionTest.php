@@ -15,7 +15,6 @@ namespace App\Tests\Unit\Infrastructure\Event\FormEventListener;
 use App\Application\Constant\FormOperationTypeConstant;
 use App\Application\EventDispatcher\RequestFlashEventDispatcher;
 use App\Infrastructure\Event\FormEventListener\ValidationListenerExtension;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -29,13 +28,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ValidationListenerExtensionTest extends TestCase
 {
-    private MockObject&RequestFlashEventDispatcher $requestFlashEventDispatcher;
+    private RequestFlashEventDispatcher $requestFlashEventDispatcher;
 
     private ValidationListenerExtension $validationListenerExtension;
 
     protected function setUp(): void
     {
-        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->requestFlashEventDispatcher = $this->createStub(RequestFlashEventDispatcher::class);
         $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
     }
 
@@ -108,6 +107,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithValidForm(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $event = $this->createMock(FormEvent::class);
 
@@ -132,6 +134,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithInvalidFormAndCreateOperationType(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
@@ -166,6 +171,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithInvalidFormAndEditOperationType(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
@@ -200,6 +208,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithInvalidFormAndDeleteOperationType(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
@@ -234,6 +245,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithInvalidFormAndNoOperationTypeWithNullId(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
@@ -275,6 +289,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithInvalidFormAndNoOperationTypeWithId(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
@@ -316,6 +333,9 @@ class ValidationListenerExtensionTest extends TestCase
 
     public function testOnPostSubmitWithInvalidFormAndNoOperationTypeWithNonObjectData(): void
     {
+        $this->requestFlashEventDispatcher = $this->createMock(RequestFlashEventDispatcher::class);
+        $this->validationListenerExtension = new ValidationListenerExtension($this->requestFlashEventDispatcher);
+
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
