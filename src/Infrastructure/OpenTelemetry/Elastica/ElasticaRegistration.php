@@ -14,9 +14,9 @@ namespace App\Infrastructure\OpenTelemetry\Elastica;
 
 use App\Infrastructure\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use Elastica\Exception\ExceptionInterface;
-use Elasticsearch\Client as ElasticsearchClient;
-use Elasticsearch\Common\Exceptions\Missing404Exception;
-use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elastic\Elasticsearch\Client as ElasticsearchClient;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Psr\Http\Message\RequestInterface;
 use FOS\ElasticaBundle\Elastica\Client as FOSElastica;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
@@ -25,11 +25,13 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\{
-    TraceAttributes,
-    TraceAttributeValues
+use OpenTelemetry\SemConv\Attributes\{
+    CodeAttributes,
+    DbAttributes,
+    HttpAttributes,
+    UrlAttributes
 };
-use ReflectionClass;
+use OpenTelemetry\SemConv\Incubating\Attributes\DbIncubatingAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
@@ -45,50 +47,39 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
 
     private static function hookElasticsearchClient(): void
     {
-        hook(ElasticsearchClient::class, 'performRequest', pre: self::getPreCallback(), post: self::getPostCallback());
+        hook(ElasticsearchClient::class, 'sendRequest', pre: self::getPreCallback(), post: self::getPostCallback());
     }
 
     private static function getPreCallback(): callable
     {
         return static function (ElasticsearchClient $client, array $params, string $class, string $function): void {
             $instrumentation = new CachedInstrumentation(__CLASS__);
-            [$endpoint] = $params;
+            [$request] = $params;
 
-            assert($endpoint instanceof AbstractEndpoint);
+            assert($request instanceof RequestInterface);
 
-            $endpointReflection = new ReflectionClass($endpoint::class);
-            $endpointOperation = mb_strtolower($endpointReflection->getShortName());
-            $endpointDocId = $endpointReflection->getProperty('id')->getValue($endpoint);
+            $method = $request->getMethod();
+            $uri = (string) $request->getUri();
 
-            $spanName = self::makeSpanName($endpoint);
+            $spanName = self::makeSpanName($method, $uri);
             $spanName = sprintf('ELASTICA %s', $spanName);
 
             $spanBuilder = $instrumentation
                 ->tracer()
                 ->spanBuilder($spanName)
                 ->setSpanKind(SpanKind::KIND_CLIENT)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::DB_SYSTEM, TraceAttributeValues::DB_SYSTEM_ELASTICSEARCH)
-                ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $endpoint->getMethod())
-                ->setAttribute(TraceAttributes::URL_FULL, $endpoint->getURI())
-                ->setAttribute(TraceAttributes::DB_OPERATION_NAME, $endpointOperation)
-                ->setAttribute('db.elasticsearch.path_parts.index', $endpoint->getIndex())
-                ->setAttribute('db.elasticsearch.path_parts.doc_id', $endpointDocId);
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(DbAttributes::DB_SYSTEM_NAME, DbIncubatingAttributes::DB_SYSTEM_NAME_VALUE_ELASTICSEARCH)
+                ->setAttribute(HttpAttributes::HTTP_REQUEST_METHOD, $method)
+                ->setAttribute(UrlAttributes::URL_FULL, $uri);
 
-            $body = $endpoint->getBody();
+            $body = (string) $request->getBody();
 
-            if (is_array($body)) {
-                try {
-                    $spanBuilder->setAttribute(
-                        TraceAttributes::DB_QUERY_TEXT,
-                        json_encode($body, JSON_THROW_ON_ERROR)
-                    );
-                } catch (Throwable) {
-                }
-            } elseif (is_string($body)) {
-                $spanBuilder->setAttribute(TraceAttributes::DB_QUERY_TEXT, $body);
+            if ($body !== '') {
+                $spanBuilder->setAttribute(DbAttributes::DB_QUERY_TEXT, $body);
             }
+
+            $request->getBody()->rewind();
 
             $span = $spanBuilder->startSpan();
             $context = $span->storeInContext(Context::getCurrent());
@@ -100,7 +91,7 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
     private static function getPostCallback(): callable
     {
         return static function (FOSElastica $client, array $params, $result, ?Throwable $exception): void {
-            if ($exception instanceof Missing404Exception) {
+            if ($exception instanceof ClientResponseException && $exception->getResponse()->getStatusCode() === 404) {
                 $exception = null;
             }
 
@@ -113,9 +104,7 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
             $span = Span::fromContext($scope->context());
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
@@ -142,22 +131,21 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
                 ->tracer()
                 ->spanBuilder($spanName)
                 ->setSpanKind(SpanKind::KIND_CLIENT)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::DB_SYSTEM, TraceAttributeValues::DB_SYSTEM_ELASTICSEARCH)
-                ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $method)
-                ->setAttribute(TraceAttributes::URL_FULL, $path);
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(DbAttributes::DB_SYSTEM_NAME, DbIncubatingAttributes::DB_SYSTEM_NAME_VALUE_ELASTICSEARCH)
+                ->setAttribute(HttpAttributes::HTTP_REQUEST_METHOD, $method)
+                ->setAttribute(UrlAttributes::URL_FULL, $path);
 
             if (is_array($data)) {
                 try {
                     $spanBuilder->setAttribute(
-                        TraceAttributes::DB_QUERY_TEXT,
+                        DbAttributes::DB_QUERY_TEXT,
                         json_encode($data, JSON_THROW_ON_ERROR)
                     );
                 } catch (Throwable) {
                 }
             } elseif (is_string($data)) {
-                $spanBuilder->setAttribute(TraceAttributes::DB_QUERY_TEXT, $data);
+                $spanBuilder->setAttribute(DbAttributes::DB_QUERY_TEXT, $data);
             }
 
             $span = $spanBuilder->startSpan();
@@ -183,9 +171,7 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
             $span = Span::fromContext($scope->context());
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
@@ -195,15 +181,15 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
         };
     }
 
-    private static function makeSpanName(AbstractEndpoint $endpoint): string
+    private static function makeSpanName(string $method, string $uri): string
     {
-        if ($endpoint->getMethod() === '') {
+        if ($method === '') {
             return 'Search elasticsearch';
         }
 
-        $uri = (string) preg_replace('~/_doc/\d+~', '/_doc/{docId}', $endpoint->getURI());
+        $uri = (string) preg_replace('~/_doc/\d+~', '/_doc/{docId}', $uri);
         $uri = (string) preg_replace('~/scroll/[A-Za-z0-9_-]+~', '/scroll/{scrollId}', $uri);
 
-        return sprintf('%s %s', $endpoint->getMethod(), $uri);
+        return sprintf('%s %s', $method, $uri);
     }
 }
