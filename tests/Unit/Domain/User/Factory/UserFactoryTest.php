@@ -30,7 +30,7 @@ class UserFactoryTest extends TestCase
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerService::class);
-        $userPasswordHasher = $this->createMock(UserPasswordHasherInterface::class);
+        $userPasswordHasher = $this->createStub(UserPasswordHasherInterface::class);
         $this->userFactory = new UserFactory($this->entityManager, $userPasswordHasher);
     }
 
