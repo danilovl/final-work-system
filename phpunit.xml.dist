@@ -6,6 +6,8 @@
          colors="true"
          bootstrap="tests/bootstrap.php"
          cacheDirectory=".phpunit.cache"
+         failOnAllIssues="true"
+         displayDetailsOnAllIssues="true"
 >
     <php>
         <ini name="error_reporting" value="-1"/>

@@ -83,15 +83,15 @@ class UserControllerTest extends BaseApiTestCase
 
     public function testListPagination(): void
     {
+        $secondStudentId = $this->createStudent();
+        $this->createWork($this->uniqueName('API user page work'));
+        $this->createWork($this->uniqueName('API user page work'), $secondStudentId);
+
         $firstPage = $this->requestApi(Request::METHOD_GET, '/api/key/users/author?limit=1&page=1', self::SUPERVISOR);
         $secondPage = $this->requestApi(Request::METHOD_GET, '/api/key/users/author?limit=1&page=2', self::SUPERVISOR);
         $allPage = $this->requestApi(Request::METHOD_GET, '/api/key/users/author?limit=2&page=1', self::SUPERVISOR);
 
         $totalCount = $this->getInt($allPage, 'totalCount');
-        if ($totalCount < 2) {
-            $this->markTestSkipped('Not enough authors for pagination.');
-        }
-
         $firstId = $this->getInt($firstPage, 'result', 0, 'user', 'id');
         $secondId = $this->getInt($secondPage, 'result', 0, 'user', 'id');
         $allIds = [
@@ -99,6 +99,8 @@ class UserControllerTest extends BaseApiTestCase
             $this->getInt($allPage, 'result', 1, 'user', 'id')
         ];
 
+        $this->assertGreaterThanOrEqual(2, $totalCount);
+        $this->assertNotSame($firstId, $secondId);
         $this->assertSame($allIds, [$firstId, $secondId]);
     }
 

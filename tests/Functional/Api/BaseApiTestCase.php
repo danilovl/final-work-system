@@ -58,6 +58,9 @@ abstract class BaseApiTestCase extends WebTestCase
 
     private ?int $createdEventAddressId = null;
 
+    /** @var int[] */
+    private array $createdUserIds = [];
+
     protected function setUp(): void
     {
         $this->client = static::createClient();
@@ -93,6 +96,7 @@ abstract class BaseApiTestCase extends WebTestCase
 
             $command = DeleteWorkCommand::create($work);
             $commandBus->dispatch($command);
+            $entityManager->clear();
         }
 
         $apiUser = $entityManager
@@ -107,6 +111,15 @@ abstract class BaseApiTestCase extends WebTestCase
             $eventAddress = $entityManager->find(EventAddress::class, $this->createdEventAddressId);
             if ($eventAddress !== null) {
                 $entityManager->remove($eventAddress);
+            }
+        }
+
+        $entityManager->flush();
+
+        foreach ($this->createdUserIds as $userId) {
+            $user = $entityManager->find(User::class, $userId);
+            if ($user !== null) {
+                $entityManager->remove($user);
             }
         }
 
@@ -209,7 +222,7 @@ abstract class BaseApiTestCase extends WebTestCase
     /**
      * @return array<mixed>
      */
-    protected function createWork(string $title): array
+    protected function createWork(string $title, ?int $authorId = null): array
     {
         $data = $this->requestApi(
             method: Request::METHOD_POST,
@@ -220,7 +233,7 @@ abstract class BaseApiTestCase extends WebTestCase
                 'shortcut' => 'API',
                 'statusId' => 1,
                 'typeId' => 1,
-                'authorId' => $this->getUserId(self::STUDENT),
+                'authorId' => $authorId ?? $this->getUserId(self::STUDENT),
                 'opponentId' => null,
                 'consultantId' => null,
                 'deadline' => '2035-06-30',
@@ -235,6 +248,33 @@ abstract class BaseApiTestCase extends WebTestCase
         $this->createdWorkIds[] = $this->getInt($work, 'id');
 
         return $work;
+    }
+
+    protected function createStudent(): int
+    {
+        $username = 'api-test-' . bin2hex(random_bytes(4));
+        $email = $username . '@example.com';
+
+        $student = new User;
+        $student->setUsername($username);
+        $student->setUsernameCanonical($username);
+        $student->setEmail($email);
+        $student->setEmailCanonical($email);
+        $student->setFirstname('API');
+        $student->setLastname($username);
+        $student->setGender('u');
+        $student->setRoles(['ROLE_STUDENT']);
+        $student->setPassword('!');
+        $student->setEnabled(true);
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($student);
+        $entityManager->flush();
+
+        $studentId = $student->getId();
+        $this->createdUserIds[] = $studentId;
+
+        return $studentId;
     }
 
     protected function createWorkConversation(int $workId, bool $withStudent = true): int

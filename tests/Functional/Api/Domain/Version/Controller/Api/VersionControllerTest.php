@@ -14,13 +14,19 @@ namespace App\Tests\Functional\Api\Domain\Version\Controller\Api;
 
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
+use App\Domain\MediaType\Entity\MediaType;
+use App\Domain\User\Entity\User;
+use App\Domain\Work\Entity\Work;
 use App\Tests\Functional\Api\BaseApiTestCase;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class VersionControllerTest extends BaseApiTestCase
 {
+    private const string VERSION_FILE = __DIR__ . '/../../../../../../Mock/image/test_png.png';
+
     #[DataProvider('provideListCases')]
     public function testList(string $username): void
     {
@@ -43,44 +49,28 @@ class VersionControllerTest extends BaseApiTestCase
         $this->assertSame([], $result);
     }
 
-    public function testListMatchesDatabase(): void
+    public function testListContainsUploadedVersions(): void
     {
-        $supervisorId = $this->getUserId(self::SUPERVISOR);
-        $mediaRepository = $this->getEntityManager()->getRepository(Media::class);
-        /** @var Media[] $versions */
-        $versions = $mediaRepository->findBy(['type' => MediaTypeConstant::WORK_VERSION->value]);
+        $work = $this->createWork($this->uniqueName('API version upload work'));
+        $workId = $this->getInt($work, 'id');
+        $firstVersionId = $this->createVersion($workId, 'API version first');
+        $secondVersionId = $this->createVersion($workId, 'API version second');
 
-        $version = array_find(
-            $versions,
-            static fn (Media $media): bool => $media->getWork()?->getSupervisor()?->getId() === $supervisorId
-        );
-
-        if ($version === null) {
-            $this->markTestSkipped('Test supervisor has no work version.');
-        }
-
-        $work = $version->getWork();
-        $this->assertNotNull($work);
-
-        /** @var Media[] $workVersions */
-        $workVersions = $mediaRepository->findBy([
-            'work' => $work,
-            'type' => MediaTypeConstant::WORK_VERSION->value
-        ]);
-
-        $expectedIds = array_map(static fn (Media $media): int => $media->getId(), $workVersions);
-        $uri = sprintf('/api/key/versions/works/%d?limit=1000', $work->getId());
-        $data = $this->requestApi(Request::METHOD_GET, $uri, self::SUPERVISOR);
+        $uri = sprintf('/api/key/versions/works/%d', $workId);
+        $data = $this->requestApi(Request::METHOD_GET, $uri, self::STUDENT);
 
         $this->assertResponseStatusCodeSame(200);
 
         $ids = $this->getIds($data, 'result');
+        $count = $this->getInt($data, 'count');
         $totalCount = $this->getInt($data, 'totalCount');
-        sort($expectedIds);
+        $expectedIds = [$firstVersionId, $secondVersionId];
         sort($ids);
+        sort($expectedIds);
 
         $this->assertSame($expectedIds, $ids);
-        $this->assertCount($totalCount, $ids);
+        $this->assertSame(2, $count);
+        $this->assertSame(2, $totalCount);
     }
 
     public function testListNotFound(): void
@@ -94,5 +84,43 @@ class VersionControllerTest extends BaseApiTestCase
     {
         yield 'supervisor' => [self::SUPERVISOR];
         yield 'author' => [self::STUDENT];
+    }
+
+    private function createVersion(int $workId, string $name): int
+    {
+        $supervisorId = $this->getUserId(self::SUPERVISOR);
+        $entityManager = $this->getEntityManager();
+
+        $work = $entityManager->find(Work::class, $workId);
+        $owner = $entityManager->find(User::class, $supervisorId);
+        $type = $entityManager->find(MediaType::class, MediaTypeConstant::WORK_VERSION->value);
+        $this->assertNotNull($work);
+        $this->assertNotNull($owner);
+        $this->assertNotNull($type);
+
+        $filePath = tempnam(sys_get_temp_dir(), 'api-version');
+        $this->assertIsString($filePath);
+        copy(self::VERSION_FILE, $filePath);
+
+        $uploadedFile = new UploadedFile(
+            path: $filePath,
+            originalName: 'version.png',
+            mimeType: 'image/png',
+            test: true
+        );
+
+        $version = new Media;
+        $version->setName($name);
+        $version->setOwner($owner);
+        $version->setType($type);
+        $version->setWork($work);
+        $version->setActive(true);
+        $version->setUploadMedia($uploadedFile);
+
+        $entityManager->persist($version);
+        $entityManager->flush();
+        unlink($filePath);
+
+        return $version->getId();
     }
 }
