@@ -4,9 +4,9 @@ services:
     autowire: true
 
   app.facade.conversation_message:
-    class: App\Domain\Conversation\Facade\ConversationMessageFacade
+    class: App\Domain\ConversationMessage\Facade\ConversationMessageFacade
 
-  App\Domain\Conversation\Facade\ConversationMessageFacade: '@app.facade.conversation_message'
+  App\Domain\ConversationMessage\Facade\ConversationMessageFacade: '@app.facade.conversation_message'
 
   app.facade.system_event:
     class: App\Domain\SystemEvent\Facade\SystemEventFacade
@@ -14,6 +14,6 @@ services:
   App\Domain\SystemEvent\Facade\SystemEventFacade: '@app.facade.system_event'
 
   app.facade.system_event_recipient:
-    class: App\Domain\SystemEvent\Facade\SystemEventRecipientFacade
+    class: App\Domain\SystemEventRecipient\Facade\SystemEventRecipientFacade
 
-  App\Domain\SystemEvent\Facade\SystemEventRecipientFacade: '@app.facade.system_event_recipient'
+  App\Domain\SystemEventRecipient\Facade\SystemEventRecipientFacade: '@app.facade.system_event_recipient'
