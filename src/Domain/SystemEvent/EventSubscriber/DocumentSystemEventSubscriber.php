@@ -13,26 +13,25 @@
 namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
-use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Domain\Work\Bus\Query\ActiveAuthors\{GetActiveAuthorsQuery, GetActiveAuthorsQueryResult};
 
 class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         EntityManagerService $entityManagerService,
-        SystemEventTypeFacade $systemEventTypeFacade,
-        private readonly UserWorkService $userWorkService
+        QueryBusInterface $queryBus,
     ) {
-        parent::__construct($entityManagerService, $systemEventTypeFacade);
+        parent::__construct($entityManagerService, $queryBus);
     }
 
     #[Override]
@@ -48,14 +47,20 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
         $media = $event->media;
         $owner = $media->getOwner();
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::DOCUMENT_CREATE->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::DOCUMENT_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);
         $systemEvent->setMedia($media);
         $systemEvent->setType($systemEventType);
 
-        $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR->value);
+        $getActiveAuthorsQuery = GetActiveAuthorsQuery::create(
+            user: $owner,
+            userType: WorkUserTypeConstant::SUPERVISOR->value
+        );
+        /** @var GetActiveAuthorsQueryResult $getActiveAuthorsQueryResult */
+        $getActiveAuthorsQueryResult = $this->queryBus->handle($getActiveAuthorsQuery);
+        $recipientArray = $getActiveAuthorsQueryResult->authors;
 
         /** @var User $user */
         foreach ($recipientArray as $user) {

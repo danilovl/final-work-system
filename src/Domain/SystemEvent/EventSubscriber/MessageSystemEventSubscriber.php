@@ -37,7 +37,7 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $massageOwner = $conversationMessage->getOwner();
         $conversation = $conversationMessage->getConversation();
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::MESSAGE_CREATE->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::MESSAGE_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($massageOwner);

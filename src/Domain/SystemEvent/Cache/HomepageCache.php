@@ -14,7 +14,6 @@ namespace App\Domain\SystemEvent\Cache;
 
 use App\Application\Constant\CacheKeyConstant;
 use App\Infrastructure\Service\PaginatorService;
-use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
 use Danilovl\OpenTelemetryBundle\OpenTelemetry\Interfaces\TracingSpanServiceInterface;
@@ -22,6 +21,8 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\SystemEventRecipient\Bus\Query\RecipientsQueryByUser\{GetRecipientsQueryByUserQuery, GetRecipientsQueryByUserQueryResult};
 
 class HomepageCache
 {
@@ -31,7 +32,7 @@ class HomepageCache
         private readonly AdapterInterface $cache,
         private readonly ParameterServiceInterface $parameterService,
         private readonly PaginatorService $paginatorService,
-        private readonly SystemEventRecipientFacade $systemEventRecipientFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly TracingSpanServiceInterface $tracingSpanService
     ) {}
 
@@ -49,8 +50,10 @@ class HomepageCache
         $pagePaginators = $cacheItem->get();
 
         if (!$cacheItem->isHit() || empty($pagePaginators[$page])) {
-            $systemEventsQuery = $this->systemEventRecipientFacade
-                ->queryRecipientsQueryByUser($user);
+            $getRecipientsQueryByUserQuery = GetRecipientsQueryByUserQuery::create($user);
+            /** @var GetRecipientsQueryByUserQueryResult $getRecipientsQueryByUserQueryResult */
+            $getRecipientsQueryByUserQueryResult = $this->queryBus->handle($getRecipientsQueryByUserQuery);
+            $systemEventsQuery = $getRecipientsQueryByUserQueryResult->query;
 
             $pagination = $this->paginatorService->createPagination(
                 $systemEventsQuery,

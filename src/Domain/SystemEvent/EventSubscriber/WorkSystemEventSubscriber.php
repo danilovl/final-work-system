@@ -13,24 +13,25 @@
 namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
-use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
-use App\Domain\Work\Service\WorkService;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Domain\Work\Bus\Query\WorkUsers\WorkUsersQueryTrait;
 
 class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
+    use WorkUsersQueryTrait;
+
     public function __construct(
         EntityManagerService $entityManagerService,
-        SystemEventTypeFacade $systemEventTypeFacade,
-        private readonly WorkService $workService
+        QueryBusInterface $queryBus,
     ) {
-        parent::__construct($entityManagerService, $systemEventTypeFacade);
+        parent::__construct($entityManagerService, $queryBus);
     }
 
     #[Override]
@@ -48,14 +49,14 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::WORK_CREATE->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::WORK_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
         $systemEvent->setOwner($work->getSupervisor());
         $systemEvent->setType($systemEventType);
 
-        $workUsers = $this->workService->getAllUsers($work);
+        $workUsers = $this->getAllWorkUsers($work);
 
         foreach ($workUsers as $user) {
             if ($user->getId() === $work->getSupervisor()->getId()) {
@@ -74,7 +75,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::WORK_EDIT->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::WORK_EDIT->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
@@ -104,7 +105,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::USER_EDIT->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::USER_EDIT->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($work->getSupervisor());
@@ -122,7 +123,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::WORK_REMIND_DEADLINE->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::WORK_REMIND_DEADLINE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($work->getSupervisor());

@@ -35,7 +35,7 @@ class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $user = $event->user;
         $owner = $event->getOwnerMust();
 
-        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::USER_EDIT->value);
+        $systemEventType = $this->getSystemEventType(SystemEventTypeConstant::USER_EDIT->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);

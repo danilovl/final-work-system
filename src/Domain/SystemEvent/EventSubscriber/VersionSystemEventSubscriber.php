@@ -13,24 +13,25 @@
 namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
-use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
-use App\Domain\Work\Service\WorkService;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Domain\Work\Bus\Query\WorkUsers\WorkUsersQueryTrait;
 
 class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
+    use WorkUsersQueryTrait;
+
     public function __construct(
         EntityManagerService $entityManagerService,
-        SystemEventTypeFacade $systemEventTypeFacade,
-        private readonly WorkService $workService
+        QueryBusInterface $queryBus,
     ) {
-        parent::__construct($entityManagerService, $systemEventTypeFacade);
+        parent::__construct($entityManagerService, $queryBus);
     }
 
     #[Override]
@@ -50,7 +51,7 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $media = $event->media;
         $work = $media->getWorkMust();
 
-        $systemEventType = $this->systemEventTypeFacade->getById($systemEventTypeId);
+        $systemEventType = $this->getSystemEventType($systemEventTypeId);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($media->getOwner());
@@ -58,7 +59,7 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $systemEvent->setMedia($media);
         $systemEvent->setType($systemEventType);
 
-        $workUsers = $this->workService->getUsers($work, ...$users);
+        $workUsers = $this->getWorkUsers($work, ...$users);
         foreach ($workUsers as $user) {
             if ($user->getId() === $media->getOwner()->getId()) {
                 continue;

@@ -18,10 +18,9 @@ use App\Application\Constant\{
 };
 use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Infrastructure\Service\RequestService;
-use App\Domain\SystemEvent\Facade\{
-    SystemEventFacade,
-    SystemEventRecipientFacade
-};
+use App\Domain\SystemEvent\Facade\SystemEventFacade;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\SystemEventRecipient\Bus\Command\ViewedAllSystemEventRecipient\ViewedAllSystemEventRecipientCommand;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -31,7 +30,7 @@ readonly class SystemEventViewedAllHandle
         private RequestService $requestService,
         private UserService $userService,
         private SystemEventFacade $systemEventFacade,
-        private SystemEventRecipientFacade $systemEventRecipientFacade,
+        private CommandBusInterface $commandBus,
         private CacheEventDispatcher $cacheEventDispatcher
     ) {}
 
@@ -42,7 +41,8 @@ readonly class SystemEventViewedAllHandle
             ->isUnreadSystemEventsByRecipient($user);
 
         if ($isUnreadExist === true) {
-            $this->systemEventRecipientFacade->updateViewedAll($user);
+            $viewedAllCommand = ViewedAllSystemEventRecipientCommand::create($user);
+            $this->commandBus->dispatch($viewedAllCommand);
 
             $cacheKey = sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId());
 

@@ -16,7 +16,6 @@ use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\InvalidArgumentException;
 use App\Domain\SystemEvent\Constant\SystemEventStatusConstant;
 use App\Domain\SystemEvent\DTO\Repository\SystemEventRepositoryDTO;
-use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Service\SystemEventLinkGeneratorService;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Service\UserService;
@@ -25,13 +24,15 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\SystemEventRecipient\Bus\Query\SystemEventsQueryByStatus\{GetSystemEventsQueryByStatusQuery, GetSystemEventsQueryByStatusQueryResult};
 
 readonly class SystemEventTypeEventsHandle
 {
     public function __construct(
         private UserService $userService,
         private PaginatorService $paginatorService,
-        private SystemEventRecipientFacade $systemEventRecipientFacade,
+        private QueryBusInterface $queryBus,
         private SystemEventLinkGeneratorService $systemEventLinkGeneratorService
     ) {}
 
@@ -49,7 +50,10 @@ readonly class SystemEventTypeEventsHandle
             viewed: $viewed
         );
 
-        $worksQuery = $this->systemEventRecipientFacade->querySystemEventsByStatus($systemEventRepositoryData);
+        $getSystemEventsQueryByStatusQuery = GetSystemEventsQueryByStatusQuery::create($systemEventRepositoryData);
+        /** @var GetSystemEventsQueryByStatusQueryResult $getSystemEventsQueryByStatusQueryResult */
+        $getSystemEventsQueryByStatusQueryResult = $this->queryBus->handle($getSystemEventsQueryByStatusQuery);
+        $worksQuery = $getSystemEventsQueryByStatusQueryResult->query;
         $pagination = $this->paginatorService->createPaginationRequest($request, $worksQuery);
 
         $systemEvents = [];
