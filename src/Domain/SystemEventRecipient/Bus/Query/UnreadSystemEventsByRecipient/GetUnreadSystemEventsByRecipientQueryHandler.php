@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventRecipient\Bus\Query\UnreadSystemEventsByRecipient;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\SystemEventRecipient\Facade\SystemEventRecipientFacade;
 
 readonly class GetUnreadSystemEventsByRecipientQueryHandler implements QueryHandlerInterface

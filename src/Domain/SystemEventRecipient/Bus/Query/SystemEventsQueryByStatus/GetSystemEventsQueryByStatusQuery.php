@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventRecipient\Bus\Query\SystemEventsQueryByStatus;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\SystemEvent\DTO\Repository\SystemEventRepositoryDTO;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

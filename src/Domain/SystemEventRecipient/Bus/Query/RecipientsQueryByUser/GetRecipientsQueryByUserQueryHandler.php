@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventRecipient\Bus\Query\RecipientsQueryByUser;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\SystemEventRecipient\Facade\SystemEventRecipientFacade;
 
 readonly class GetRecipientsQueryByUserQueryHandler implements QueryHandlerInterface

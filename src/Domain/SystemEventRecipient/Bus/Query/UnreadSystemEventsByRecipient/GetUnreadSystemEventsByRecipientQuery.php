@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventRecipient\Bus\Query\UnreadSystemEventsByRecipient;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEventRecipient\Bus\Command\ViewedAllSystemEventRecipient;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\SystemEventRecipient\Facade\SystemEventRecipientFacade;
 
 readonly class ViewedAllSystemEventRecipientHandler implements CommandHandlerInterface
