@@ -16,6 +16,8 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import Sortable from 'sortablejs';
+
 (function ($) {
     $.fn.collection = function (options) {
         let defaults = {
@@ -76,9 +78,7 @@
             init_with_n_elements: 0,
             hide_useless_buttons: true,
             drag_drop: true,
-            drag_drop_options: {
-                'placeholder': 'ui-state-highlight'
-            },
+            drag_drop_options: {},
             drag_drop_start: function (event, ui) {
                 return true;
             },
@@ -869,43 +869,42 @@
             // drag & drop support: this is a bit more complex than pressing "up" or
             // "down" buttons because we can move elements more than one place ahead
             // or below...
-            if ((typeof jQuery.ui !== 'undefined' && typeof jQuery.ui.sortable !== 'undefined')
-                && collection.data('sortable')) {
-                collection.sortable('disable');
+            let sortable = collection.data('collection-sortable');
+            if (sortable) {
+                sortable.destroy();
+                collection.removeData('collection-sortable');
             }
             if (settings.drag_drop && settings.allow_up && settings.allow_down) {
                 let oldPosition;
-                let newPosition;
-                if (typeof jQuery.ui === 'undefined' || typeof jQuery.ui.sortable === 'undefined') {
-                    settings.drag_drop = false;
-                } else {
-                    collection.sortable($.extend(true, {}, {
-                        start: function (event, ui) {
-                            let elements = collection.find(settings.elements_selector);
-                            let element = ui.item;
-                            let that = $(this);
-                            if (!trueOrUndefined(settings.drag_drop_start(event, ui, elements, element))) {
-                                that.sortable("cancel");
-                                return;
-                            }
-                            ui.placeholder.height(ui.item.height());
-                            ui.placeholder.width(ui.item.width());
-                            oldPosition = elements.index(element);
-                        },
-                        update: function (event, ui) {
-                            let elements = collection.find(settings.elements_selector);
-                            let element = ui.item;
-                            let that = $(this);
-                            that.sortable("cancel");
-                            if (false === settings.drag_drop_update(event, ui, elements, element) || !(newPosition - oldPosition > 0 ? trueOrUndefined(settings.before_up(collection, element)) : trueOrUndefined(settings.before_down(collection, element)))) {
-                                return;
-                            }
-                            newPosition = elements.index(element);
-                            elements = collection.find(settings.elements_selector);
-                            doMove(collection, settings, elements, element, oldPosition, newPosition);
+                let originalNextSibling;
+                let isCancelled;
+                sortable = Sortable.create(collection[0], $.extend(true, {}, {
+                    forceFallback: true,
+                    filter: 'input, textarea, select, option, button, a',
+                    preventOnFilter: false,
+                    onStart: function (event) {
+                        let elements = collection.find(settings.elements_selector);
+                        let element = $(event.item);
+                        originalNextSibling = event.item.nextSibling;
+                        oldPosition = elements.index(element);
+                        isCancelled = !trueOrUndefined(settings.drag_drop_start(event, {item: element}, elements, element));
+                    },
+                    onEnd: function (event) {
+                        let elements = collection.find(settings.elements_selector);
+                        let element = $(event.item);
+                        let newPosition = elements.index(element);
+                        event.from.insertBefore(event.item, originalNextSibling);
+                        if (isCancelled || newPosition === oldPosition) {
+                            return;
                         }
-                    }, settings.drag_drop_options));
-                }
+                        if (false === settings.drag_drop_update(event, {item: element}, elements, element) || !(newPosition - oldPosition > 0 ? trueOrUndefined(settings.before_up(collection, element)) : trueOrUndefined(settings.before_down(collection, element)))) {
+                            return;
+                        }
+                        elements = collection.find(settings.elements_selector);
+                        doMove(collection, settings, elements, element, oldPosition, newPosition);
+                    }
+                }, settings.drag_drop_options));
+                collection.data('collection-sortable', sortable);
             }
 
             collection.data('collection-settings', settings);

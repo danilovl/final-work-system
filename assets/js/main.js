@@ -407,14 +407,35 @@ function hideOpenModals() {
     });
 }
 
-function initModalResize() {
-    $('.modal-content').resizable();
-}
-
 function initModalDraggable() {
-    $(".modal-dialog").draggable({
-        handle: ".modal-header",
-        cursor: "move"
+    document.addEventListener('pointerdown', event => {
+        const header = event.target.closest('.modal-header');
+        const isControl = event.target.closest('button, a, input, select, textarea') !== null;
+
+        if (header === null || isControl || event.button !== 0) {
+            return;
+        }
+
+        const dialog = header.closest('.modal-dialog');
+        const startX = event.clientX - (parseFloat(dialog.style.left) || 0);
+        const startY = event.clientY - (parseFloat(dialog.style.top) || 0);
+
+        const onMove = moveEvent => {
+            dialog.style.left = `${moveEvent.clientX - startX}px`;
+            dialog.style.top = `${moveEvent.clientY - startY}px`;
+        };
+
+        const onUp = () => {
+            document.removeEventListener('pointermove', onMove);
+            document.removeEventListener('pointerup', onUp);
+            document.body.style.cursor = '';
+        };
+
+        event.preventDefault();
+        dialog.style.position = 'relative';
+        document.body.style.cursor = 'move';
+        document.addEventListener('pointermove', onMove);
+        document.addEventListener('pointerup', onUp);
     });
 }
 
@@ -701,8 +722,6 @@ function closeModalWindowOnError() {
 
 function hideAjaxLoader() {
     document.getElementById('ajax-loader').style.display = 'none';
-    initModalResize();
-    initModalDraggable();
 }
 
 function initLayout() {
@@ -769,8 +788,6 @@ function initLayout() {
 
     $(document).ajaxStop(() => {
         $('#ajax-loader').hide();
-        initModalResize();
-        initModalDraggable();
     });
 
     $(document).ajaxError((event, jqXHR) => {

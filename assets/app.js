@@ -4,7 +4,6 @@ import 'select2/dist/css/select2.min.css';
 import './css/main.css';
 
 import './js/jquery.js';
-import 'jquery-ui/dist/jquery-ui.js';
 import 'inputmask/dist/jquery.inputmask.js';
 import 'bootstrap';
 import './js/select2.js';
