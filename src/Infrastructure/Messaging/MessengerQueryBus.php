@@ -16,12 +16,16 @@ use App\Application\Interfaces\Bus\{
     QueryBusInterface,
     QueryInterface
 };
+use Symfony\Component\DependencyInjection\Attribute\Target;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class MessengerQueryBus implements QueryBusInterface
 {
-    public function __construct(private MessageBusInterface $queryBus) {}
+    public function __construct(
+        #[Target('query.bus')]
+        private MessageBusInterface $queryBus
+    ) {}
 
     public function handle(QueryInterface $query): object
     {
