@@ -98,7 +98,7 @@ services:
       MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
       MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
       MERCURE_EXTRA_DIRECTIVES: |
-        cors_origins "http://localhost:7100"
+        cors_origins "http://localhost:7100" "http://nginx"
         anonymous
     ports:
       - '7107:80'
