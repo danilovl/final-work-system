@@ -21,9 +21,10 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\{
-    TraceAttributes,
-    TraceAttributeValues
+use OpenTelemetry\SemConv\Attributes\{
+    CodeAttributes,
+    DbAttributes,
+    ServerAttributes
 };
 use PDO;
 use PDOStatement;
@@ -148,13 +149,12 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         $spanBuilder = $instrumentation->tracer()
             ->spanBuilder($spanName)
             ->setSpanKind(SpanKind::KIND_INTERNAL)
-            ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-            ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-            ->setAttribute(TraceAttributes::DB_SYSTEM, TraceAttributeValues::DB_SYSTEM_MYSQL)
-            ->setAttribute(TraceAttributes::DB_QUERY_TEXT, $sql)
-            ->setAttribute(TraceAttributes::DB_OPERATION_NAME, strtok($sql, ' '))
-            ->setAttribute(TraceAttributes::SERVER_ADDRESS, $databaseParams->host)
-            ->setAttribute(TraceAttributes::DB_NAMESPACE, $databaseParams->dbname)
+            ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+            ->setAttribute(DbAttributes::DB_SYSTEM_NAME, DbAttributes::DB_SYSTEM_NAME_VALUE_MYSQL)
+            ->setAttribute(DbAttributes::DB_QUERY_TEXT, $sql)
+            ->setAttribute(DbAttributes::DB_OPERATION_NAME, strtok($sql, ' '))
+            ->setAttribute(ServerAttributes::SERVER_ADDRESS, $databaseParams->host)
+            ->setAttribute(DbAttributes::DB_NAMESPACE, $databaseParams->dbname)
             ->setAttribute('db.user', $databaseParams->username);
 
         $span = $spanBuilder->startSpan();
@@ -175,9 +175,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
             $span = Span::fromContext($scope->context());
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
