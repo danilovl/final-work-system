@@ -1,0 +1,9 @@
+name: Run API tests
+description: Run API tests
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run API tests
+      shell: bash
+      run: docker compose exec -T php composer test-api
