@@ -19,6 +19,7 @@ use App\Application\Constant\{
     FlashTypeConstant
 };
 use App\Infrastructure\Service\RequestService;
+use App\Infrastructure\Web\Form\Factory\FormActionFactory;
 use App\Domain\Conversation\Service\{
     ConversationService,
     ConversationVariationService
@@ -27,7 +28,11 @@ use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    RedirectResponse
+};
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 readonly class ConversationCreateWorkHandle
 {
@@ -36,14 +41,21 @@ readonly class ConversationCreateWorkHandle
         private HashidsServiceInterface $hashidsService,
         private ConversationService $conversationService,
         private ConversationVariationService $conversationVariationService,
-        private CommandBusInterface $commandBus
+        private CommandBusInterface $commandBus,
+        private FormActionFactory $formActionFactory
     ) {}
 
     public function __invoke(
+        Request $request,
         Work $work,
         User $userOne,
         User $userTwo
     ): RedirectResponse {
+        $isValidActionForm = $this->formActionFactory->isSubmittedAndValid($request);
+        if (!$isValidActionForm) {
+            throw new AccessDeniedHttpException('Invalid CSRF token.');
+        }
+
         $isCheck = $this->conversationVariationService->checker($work, $userOne, $userTwo);
 
         if ($isCheck) {

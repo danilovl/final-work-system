@@ -48,14 +48,17 @@
             {{ 'app.text.conversation' | trans }}
         </a>
     {% else %}
-        <form method="post"
-              action="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.author.id | hashids_encode }) }}"
-              target="_blank"
-              style="display: inline">
+        {% set actionForm = action_form(path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.author.id | hashids_encode })) %}
+        {{ form_start(actionForm, {
+            'attr': {
+                'target': '_blank',
+                'style': 'display: inline'
+            }
+        }) }}
             <button type="submit" class="btn btn-app">
                 <i class="fa fa-comments-o"></i>
                 {{ 'app.text.conversation' | trans }}
             </button>
-        </form>
+        {{ form_end(actionForm) }}
     {% endif %}
 {% endif %}

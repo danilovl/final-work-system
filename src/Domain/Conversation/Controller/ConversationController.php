@@ -62,11 +62,12 @@ readonly class ConversationController
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_user_one', 'id_user_two'])]
     public function createWorkConversation(
+        Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_user_one' => 'id'])] User $userOne,
         #[MapEntity(mapping: ['id_user_two' => 'id'])] User $userTwo
     ): RedirectResponse {
-        return $this->conversationCreateWorkHandle->__invoke($work, $userOne, $userTwo);
+        return $this->conversationCreateWorkHandle->__invoke($request, $work, $userOne, $userTwo);
     }
 
     public function lastMessage(Request $request, Conversation $conversation): Response
