@@ -1,6 +1,7 @@
 app:
   system_name: System for conducting bachelor and diploma theses
   page:
+    appointment_address_edit: Editing appointment place
     leave_web: Leaving web
     appointment_address_create: Creating appointment place
     appointment_address_list: List of appointments
@@ -261,6 +262,9 @@ app:
     read: Read
     remaining_time: Remaining time
     reminding_work_deadline_submission: We remind you that the approaching deadline for the works
+    reset_password_check_spam: 'If you don''t receive an email please check your spam folder or'
+    reset_password_email_sent: 'An email has been sent that contains a link that you can click to reset your password. This link will expire in %hours% hour(s).'
+    reset_password_try_again: try again
     role: role
     search: Search
     search_form: Search form
@@ -353,3 +357,63 @@ app:
     cs: Czech
     en: English
     ru: Russian
+  system_event:
+    document_create:
+      message: '%user% added a new %link% "%document%"'
+      target: 'information material'
+    event_comment_create:
+      message: '%user% added a comment to the %link% with you'
+      target: 'appointment'
+    event_comment_edit:
+      message: '%user% edited a comment on the %link% with you'
+      target: 'appointment'
+    event_create:
+      message: '%user% created a new %link% with you'
+      target: 'appointment'
+    event_edit:
+      message: '%user% changed the details of the %link% with you'
+      target: 'appointment'
+    event_switch_skype:
+      message: '%user% switched the place of the %link% with you to Skype'
+      target: 'appointment'
+    message_create:
+      message: '%user% sent you a new %link%'
+      target: 'message'
+    task_complete:
+      message: '%user% marked the task "%task%" as complete for the %link%'
+      target: 'work'
+    task_create:
+      message: '%user% assigned you a new task "%task%" for your %link%'
+      target: 'work'
+    task_edit:
+      message: '%user% changed the task "%task%" of your %link%'
+      target: 'work'
+    task_incomplete:
+      message: '%user% marked the task "%task%" as incomplete for the %link%'
+      target: 'work'
+    task_notify_complete:
+      message: '%user% reported completion of the task "%task%" for the %link%'
+      target: 'work'
+    task_notify_incomplete:
+      message: '%user% returned the task "%task%" for rework on your %link%'
+      target: 'work'
+    task_remind_deadline:
+      message: 'Deadline reminder for the task "%task%" of the %link%'
+      target: 'work'
+    user_edit:
+      message: '%user% updated your personal details'
+    version_create:
+      message: '%user% added a new version "%version%" to the %link%'
+      target: 'work'
+    version_edit:
+      message: '%user% updated the version "%version%" of the %link%'
+      target: 'work'
+    work_create:
+      message: '%user% created %link%'
+      target: 'a new work'
+    work_edit:
+      message: '%user% changed the details of your %link%'
+      target: 'work'
+    work_remind_deadline:
+      message: 'Deadline reminder for the %link%'
+      target: 'work'

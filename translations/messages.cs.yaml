@@ -123,7 +123,6 @@ app:
       new_password: Nové heslo
       new_password_confirmation: Potvrzení nového hesla
       opponent: Oponent
-      original_file_name: Původní název souboru
       password: Heslo
       phone: Telefon
       program_deadline: Termín programu
@@ -196,6 +195,7 @@ app:
     author_like: Autora
     author_list: Seznam autorů
     back_to_revision: Zpět k přepracování
+    consultant: Konzultant
     group_mail: Hromadná pošta
     category: Kategorie
     comment: Komentář
@@ -262,6 +262,9 @@ app:
     read: Číst
     remaining_time: Zbývající čas
     reminding_work_deadline_submission: Připomínáme, že se blíží termín odevzdání prací
+    reset_password_check_spam: 'Pokud e-mail nedorazí, zkontrolujte složku se spamem nebo'
+    reset_password_email_sent: 'Odeslali jsme e-mail s odkazem pro obnovení hesla. Odkaz vyprší za %hours% h.'
+    reset_password_try_again: zkuste to znovu
     role: Role
     search: Vyhledávání
     search_form: Vyhledávací formulář
@@ -354,3 +357,63 @@ app:
     cs: Český
     en: Anglický
     ru: Ruský
+  system_event:
+    document_create:
+      message: '%user% přidal nový %link% "%document%"'
+      target: 'informační materiál'
+    event_comment_create:
+      message: '%user% přidal komentář ke %link% s Vámi'
+      target: 'schůzce'
+    event_comment_edit:
+      message: '%user% upravil komentář u %link% s Vámi'
+      target: 'schůzky'
+    event_create:
+      message: '%user% vytvořil novou %link% s Vámi'
+      target: 'schůzku'
+    event_edit:
+      message: '%user% změnil údaje o %link% s Vámi'
+      target: 'schůzce'
+    event_switch_skype:
+      message: '%user% přepnul místo schůzky na Skype u %link% s Vámi'
+      target: 'schůzky'
+    message_create:
+      message: '%user% Vám poslal novou %link%'
+      target: 'zprávu'
+    task_complete:
+      message: '%user% označil úkol "%task%" jako splněný u %link%'
+      target: 'práce'
+    task_create:
+      message: '%user% Vám zadal nový úkol "%task%" k Vaší %link%'
+      target: 'práci'
+    task_edit:
+      message: '%user% změnil úkol "%task%" u Vaší %link%'
+      target: 'práce'
+    task_incomplete:
+      message: '%user% označil úkol "%task%" jako nesplněný u %link%'
+      target: 'práce'
+    task_notify_complete:
+      message: '%user% ohlásil splnění úkolu "%task%" u %link%'
+      target: 'práce'
+    task_notify_incomplete:
+      message: '%user% vrátil úkol "%task%" k přepracování u Vaší %link%'
+      target: 'práce'
+    task_remind_deadline:
+      message: 'Připomenutí o uplynutí lhůty splnění úkolu "%task%" u %link%'
+      target: 'práce'
+    user_edit:
+      message: '%user% aktualizoval Vaše osobní údaje'
+    version_create:
+      message: '%user% přidal novou verzi "%version%" k %link%'
+      target: 'práci'
+    version_edit:
+      message: '%user% aktualizoval údaje verze "%version%" u %link%'
+      target: 'práce'
+    work_create:
+      message: '%user% vytvořil %link%'
+      target: 'novou práci'
+    work_edit:
+      message: '%user% změnil údaje o Vaší %link%'
+      target: 'práci'
+    work_remind_deadline:
+      message: 'Připomenutí o uplynutí lhůty u %link%'
+      target: 'práce'
