@@ -25,6 +25,8 @@ readonly class ConversationMessageSearch
 
     private const string CONVERSATION_AGGREGATION = 'conversations';
 
+    private const string CONVERSATION_SOURCE = 'conversation';
+
     private const int SIZE = 1_000;
 
     public function __construct(
@@ -38,7 +40,10 @@ readonly class ConversationMessageSearch
     public function getMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
     {
         $query = $this->createQueryGetMessageIdsByConversationAndSearch($conversation, $search);
-        $results = $this->transformedFinderConversationMessage->findRaw($query);
+        $results = $this->findAllRaw(
+            search: fn (array $pageQuery): array => $this->transformedFinderConversationMessage->findRaw($pageQuery),
+            query: $query
+        );
 
         return $this->getDocumentIds($results);
     }
@@ -72,13 +77,24 @@ readonly class ConversationMessageSearch
     public function getConversationIdsByParticipantAndSearch(User $user, string $search): array
     {
         $query = $this->createQueryGetConversationIdsByParticipantAndSearch($user, $search);
-        $resultSet = $this->indexConversationMessage->search($query);
-        $aggregation = $resultSet->getAggregation(self::CONVERSATION_AGGREGATION);
+        $conversationIds = [];
 
-        /** @var array<array{key: int|string}> $buckets */
-        $buckets = $aggregation['buckets'];
+        do {
+            $resultSet = $this->indexConversationMessage->search($query);
+            $aggregation = $resultSet->getAggregation(self::CONVERSATION_AGGREGATION);
 
-        return array_map(static fn (array $bucket): int => (int) $bucket['key'], $buckets);
+            /** @var array<array{key: array<string, int|string>}> $buckets */
+            $buckets = $aggregation['buckets'];
+            foreach ($buckets as $bucket) {
+                $conversationIds[] = (int) $bucket['key'][self::CONVERSATION_SOURCE];
+            }
+
+            /** @var array<string, int|string>|null $afterKey */
+            $afterKey = $aggregation['after_key'] ?? null;
+            $query['aggs'][self::CONVERSATION_AGGREGATION]['composite']['after'] = $afterKey;
+        } while ($afterKey !== null);
+
+        return $conversationIds;
     }
 
     /**
@@ -102,9 +118,11 @@ readonly class ConversationMessageSearch
             ],
             'aggs' => [
                 self::CONVERSATION_AGGREGATION => [
-                    'terms' => [
-                        'field' => 'conversation.id',
-                        'size' => self::SIZE
+                    'composite' => [
+                        'size' => self::SIZE,
+                        'sources' => [
+                            [self::CONVERSATION_SOURCE => ['terms' => ['field' => 'conversation.id']]]
+                        ]
                     ]
                 ]
             ]
