@@ -17,7 +17,7 @@ class TextHighlightWordUtil
     public static function highlightEntireWords(string $text, array $words): string
     {
         foreach ($words as $word) {
-            $text = self::replaceWord($text, $word);
+            $text = self::replaceWord(text: $text, word: $word);
         }
 
         return $text;
@@ -26,7 +26,7 @@ class TextHighlightWordUtil
     public static function highlightPartWords(string $text, array $words): string
     {
         foreach ($words as $word) {
-            $text = self::replaceWord($text, $word, false);
+            $text = self::replaceWord(text: $text, word: $word, entireWord: false);
         }
 
         return $text;
@@ -37,7 +37,7 @@ class TextHighlightWordUtil
         $highlightedWord = '<span style="background-color: yellow;">$0</span>';
         $pattern = sprintf('~%2$s(%1$s)%2$s~iu', preg_quote($word), $entireWord === true ? '\b' : '');
         /** @var string $text */
-        $text = preg_replace($pattern, $highlightedWord, $text);
+        $text = preg_replace(pattern: $pattern, replacement: $highlightedWord, subject: $text);
 
         return $text;
     }
