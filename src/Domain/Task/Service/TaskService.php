@@ -37,13 +37,13 @@ class TaskService
             return;
         }
 
+        /** @var Task[] $activeTasks */
         $activeTasks = $this->taskFacade->queryByWorks($works, true)->getResult();
 
         foreach ($works as $work) {
             $this->activeTasksCache[$work->getId()] = new ArrayCollection;
         }
 
-        /** @var Task $task */
         foreach ($activeTasks as $task) {
             $workId = $task->getWork()->getId();
             if (isset($this->activeTasksCache[$workId])) {
