@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fcfa04dc48c073c81d85c3d1516df6a",
+    "content-hash": "4f19715d84628428fb7c2489222e949b",
     "packages": [
         {
             "name": "api-platform/core",
@@ -982,16 +982,16 @@
         },
         {
             "name": "danilovl/open-telemetry-bundle",
-            "version": "v0.0.4",
+            "version": "v0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/open-telemetry-bundle.git",
-                "reference": "e067626404dd96e8ad7a9dc567a79d9f929f95a7"
+                "reference": "3519abc5fe57d6ace6520d32ecceecee9db753c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/e067626404dd96e8ad7a9dc567a79d9f929f95a7",
-                "reference": "e067626404dd96e8ad7a9dc567a79d9f929f95a7",
+                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/3519abc5fe57d6ace6520d32ecceecee9db753c7",
+                "reference": "3519abc5fe57d6ace6520d32ecceecee9db753c7",
                 "shasum": ""
             },
             "require": {
@@ -1058,9 +1058,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/open-telemetry-bundle/issues",
-                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.4"
+                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.6"
             },
-            "time": "2026-03-17T21:35:20+00:00"
+            "time": "2026-03-18T16:37:38+00:00"
         },
         {
             "name": "danilovl/parameter-bundle",
