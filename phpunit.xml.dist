@@ -30,6 +30,9 @@
         <testsuite name="tests-functional">
             <directory>tests/Functional/Infrastructure</directory>
         </testsuite>
+        <testsuite name="tests-functional-api">
+            <directory>tests/Functional/Api</directory>
+        </testsuite>
         <testsuite name="tests-functional-web">
             <directory>tests/Functional/Web</directory>
         </testsuite>

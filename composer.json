@@ -148,6 +148,7 @@
             "@php bin/console cache:warmup --env=dev",
             "bash bin/phpunit.sh '--testsuite tests-unit,tests-integration,tests-functional'"
         ],
+        "test-api": "bash bin/phpunit.sh '--testsuite tests-functional-api'",
         "test-web": [
             "@php bin/console cache:warmup --env=dev",
             "bash bin/web-test.sh"
