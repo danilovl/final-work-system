@@ -12,7 +12,7 @@
 
 namespace App\Domain\Comment\Bus\Command\CreateComment;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Comment\Factory\CommentFactory;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 

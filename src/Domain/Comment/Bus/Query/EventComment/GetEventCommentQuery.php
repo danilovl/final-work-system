@@ -12,7 +12,7 @@
 
 namespace App\Domain\Comment\Bus\Query\EventComment;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Messenger\Attribute\AsMessage;

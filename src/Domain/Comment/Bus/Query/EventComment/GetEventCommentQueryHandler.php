@@ -12,7 +12,7 @@
 
 namespace App\Domain\Comment\Bus\Query\EventComment;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Comment\Facade\CommentFacade;
 
 readonly class GetEventCommentQueryHandler implements QueryHandlerInterface

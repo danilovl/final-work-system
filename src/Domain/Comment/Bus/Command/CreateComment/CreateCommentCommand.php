@@ -12,7 +12,7 @@
 
 namespace App\Domain\Comment\Bus\Command\CreateComment;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Comment\Model\CommentModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Comment\Entity;
 
-use App\Application\Constant\TranslationConstant;
+use App\Infrastructure\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateUpdateAbleTrait
