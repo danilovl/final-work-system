@@ -13,7 +13,6 @@
 namespace App\Tests\Unit\Domain\ConversationMessage\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Security\Voter\ConversationMessageVoter;
 use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
@@ -25,7 +24,7 @@ class ConversationMessageVoterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->conversationMessageVoter = new class(new ConversationService) extends ConversationMessageVoter implements VoterInterfaceMock {
+        $this->conversationMessageVoter = new class() extends ConversationMessageVoter implements VoterInterfaceMock {
             public function supportsPublic(string $attribute, mixed $subject): bool
             {
                 return $this->supports($attribute, $subject);
