@@ -34,7 +34,13 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
+use OpenTelemetry\SemConv\Attributes\{
+    CodeAttributes,
+    HttpAttributes,
+    NetworkAttributes,
+    UrlAttributes,
+    UserAgentAttributes
+};
 use Psr\Http\Message\{
     RequestInterface,
     ResponseInterface
@@ -116,13 +122,12 @@ class GuzzleRegistration implements OpenTelemetryRegistrationInterface
             ->spanBuilder(self::makeSpanName($instance, $request))
             ->setSpanKind(SpanKind::KIND_CLIENT)
             ->setAttributes([
-                TraceAttributes::CODE_FUNCTION => $function,
-                TraceAttributes::CODE_NAMESPACE => $class,
-                TraceAttributes::URL_FULL => $requestUrl,
-                TraceAttributes::HTTP_REQUEST_METHOD => $request->getMethod(),
-                TraceAttributes::NETWORK_PROTOCOL_VERSION => $request->getProtocolVersion(),
-                TraceAttributes::USER_AGENT_ORIGINAL => $request->getHeaderLine('User-Agent'),
-                TraceAttributes::HTTP_REQUEST_BODY_SIZE => $request->getHeaderLine('Content-Length'),
+                CodeAttributes::CODE_FUNCTION_NAME => $class . $function,
+                UrlAttributes::URL_FULL => $requestUrl,
+                HttpAttributes::HTTP_REQUEST_METHOD => $request->getMethod(),
+                NetworkAttributes::NETWORK_PROTOCOL_VERSION => $request->getProtocolVersion(),
+                UserAgentAttributes::USER_AGENT_ORIGINAL => $request->getHeaderLine('User-Agent'),
+                'http.request.body.size' => $request->getHeaderLine('Content-Length'),
                 RequestOptions::TIMEOUT => $options[RequestOptions::TIMEOUT] ?? null,
                 RequestOptions::CONNECT_TIMEOUT => $options[RequestOptions::CONNECT_TIMEOUT] ?? null,
                 RequestOptions::READ_TIMEOUT => $options[RequestOptions::READ_TIMEOUT] ?? null,
@@ -172,9 +177,9 @@ class GuzzleRegistration implements OpenTelemetryRegistrationInterface
         $promise->then(
             onFulfilled: static function (ResponseInterface $response) use ($span) {
                 $span->setAttributes([
-                    TraceAttributes::HTTP_RESPONSE_STATUS_CODE => $response->getStatusCode(),
-                    TraceAttributes::NETWORK_PROTOCOL_VERSION => $response->getProtocolVersion(),
-                    TraceAttributes::HTTP_RESPONSE_BODY_SIZE => $response->getHeaderLine('Content-Length')
+                    HttpAttributes::HTTP_RESPONSE_STATUS_CODE => $response->getStatusCode(),
+                    NetworkAttributes::NETWORK_PROTOCOL_VERSION => $response->getProtocolVersion(),
+                    'http.response.body.size' => $response->getHeaderLine('Content-Length')
                 ]);
 
                 if ($response->getStatusCode() >= 400) {
@@ -200,9 +205,9 @@ class GuzzleRegistration implements OpenTelemetryRegistrationInterface
                     $response = $exception->getResponse();
 
                     $span->setAttributes([
-                        TraceAttributes::HTTP_RESPONSE_STATUS_CODE => $response->getStatusCode(),
-                        TraceAttributes::NETWORK_PROTOCOL_VERSION => $response->getProtocolVersion(),
-                        TraceAttributes::HTTP_RESPONSE_BODY_SIZE => $response->getHeaderLine('Content-Length')
+                        HttpAttributes::HTTP_RESPONSE_STATUS_CODE => $response->getStatusCode(),
+                        NetworkAttributes::NETWORK_PROTOCOL_VERSION => $response->getProtocolVersion(),
+                        'http.response.body.size' => $response->getHeaderLine('Content-Length')
                     ]);
                 }
 
@@ -239,7 +244,7 @@ class GuzzleRegistration implements OpenTelemetryRegistrationInterface
         }
 
         $attributes = [
-            TraceAttributes::EXCEPTION_ESCAPED => true
+            'exception.escaped' => true
         ];
 
         $span->recordException($throwable, $attributes);
