@@ -2,177 +2,116 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa-solid fa-chevron-up"></i></a></li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <div class="col-md-3 col-sm-3 col-12 profile_left">
-                            <div class="profile_img">
-                                <div id="crop-avatar">
-                                    <img class="img-fluid avatar-view"
-                                         src="{{ app_user() | profile_image }}"
-                                         alt="Avatar"
-                                         title="Change the avatar">
-                                </div>
-                            </div>
-                            <h3>{{ app_user() }}</h3>
-                            <ul class="list-unstyled user_data">
-                                <li>
-                                    <i class="fa-solid fa-user user-profile-icon"></i>:
-                                    {{ app_user().username }}
-                                </li>
-                                <li class="m-top-xs">
-                                    <i class="fa-solid fa-at user-profile-icon"></i>:
-                                    {{ app_user().email }}
-                                </li>
+        <section class="profile-hero">
+            <div class="profile-hero-cover"></div>
+            <div class="profile-hero-body">
+                <img class="profile-hero-avatar"
+                     src="{{ app_user() | profile_image }}"
+                     alt="{{ app_user() }}">
 
-                                {% if  app_user().skype is not empty %}
-                                    <li class="m-top-xs">
-                                        <i class="fa-solid fa-skype user-profile-icon"></i>:
-                                        {{ app_user().skype }}
-                                    </li>
-                                {% endif %}
-                            </ul>
-                            <ul class="list-unstyled user_data">
-                                <li>
-                                    <a class="btn btn-primary" href="{{ path('profile_edit') }}">
-                                        <i class="fa-regular fa-pen-to-square m-right-xs"></i>
-                                        {{ 'app.menu.profile_edit' | trans }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-warning" href="{{ path('profile_change_password') }}">
-                                        <i class="fa-regular fa-pen-to-square m-right-xs"></i>
-                                        {{ 'app.menu.profile_change_password' | trans }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-warning" href="{{ path('profile_change_image') }}">
-                                        <i class="fa-regular fa-pen-to-square m-right-xs"></i>
-                                        {{ 'app.menu.profile_image_change' | trans }}
-                                    </a>
-                                </li>
-                            </ul>
-                            <br/>
-                        </div>
+                <div class="profile-hero-info">
+                    <h1 class="profile-hero-name">{{ app_user() }}</h1>
+                    <ul class="profile-hero-meta">
+                        <li>
+                            <i class="fa-regular fa-user"></i>{{ app_user().username }}
+                        </li>
+                        <li>
+                            <i class="fa-regular fa-envelope"></i>{{ app_user().email }}
+                        </li>
+                        {% if app_user().skype is not empty %}
+                            <li>
+                                <i class="fa-brands fa-skype"></i>{{ app_user().skype }}
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
 
-                        <div class="col-md-9 col-sm-9 col-12">
-                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                    <li role="presentation">
-                                        <a class="active" href="#tab_content1"
-                                           id="home-tab"
-                                           role="tab" data-bs-toggle="tab"
-                                           aria-expanded="true">
-                                            {{ 'app.menu.contact_information' | trans }}
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#tab_content2"
-                                           role="tab"
-                                           id="profile-tab" data-bs-toggle="tab"
-                                           aria-expanded="false">
-                                            {{ 'app.menu.personal_information' | trans }}
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#tab_content3"
-                                           role="tab"
-                                           id="profile-tab2"
-                                           data-bs-toggle="tab"
-                                           aria-expanded="false">
-                                            {{ 'app.menu.mail_template' | trans }}
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <div id="myTabContent" class="tab-content">
-                                    <div role="tabpanel"
-                                         class="tab-pane fade active show"
-                                         id="tab_content1"
-                                         aria-labelledby="home-tab">
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td>{{ 'app.form.label.email' | trans }}:</td>
-                                                <td>{{ app_user().email }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'app.form.label.phone' | trans }}</td>
-                                                <td>{{ app_user().phone }}</td>
-                                            </tr>
-
-                                            {% if  app_user().skype is not empty %}
-                                                <tr>
-                                                    <td>{{ 'app.form.label.skype' | trans }}</td>
-                                                    <td>{{ app_user().skype }}</td>
-                                                </tr>
-                                            {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div role="tabpanel"
-                                         class="tab-pane fade"
-                                         id="tab_content2"
-                                         aria-labelledby="profile-tab">
-
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td>{{ 'app.form.label.username' | trans }}:</td>
-                                                <td>{{ app_user().username }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'app.form.label.degree_before' | trans }}:</td>
-                                                <td>{{ app_user().degreeBefore }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'app.form.label.first_name' | trans }}</td>
-                                                <td>{{ app_user().firstName }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'app.form.label.last_name' | trans }}</td>
-                                                <td>{{ app_user().lastName }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'app.form.label.degree_after' | trans }}</td>
-                                                <td>{{ app_user().degreeAfter }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div role="tabpanel"
-                                         class="tab-pane fade"
-                                         id="tab_content3"
-                                         aria-labelledby="profile-tab">
-
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td>{{ 'app.form.label.message_greeting' | trans }}:</td>
-                                                <td>{{ app_user().messageGreeting | sanitize_html('app.rich_text_sanitizer') }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'app.form.label.message_signature' | trans }}</td>
-                                                <td>{{ app_user().messageSignature | sanitize_html('app.rich_text_sanitizer') }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="profile-hero-actions">
+                    <a class="btn btn-primary" href="{{ path('profile_edit') }}">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        {{ 'app.menu.profile_edit' | trans }}
+                    </a>
+                    <a class="btn btn-default" href="{{ path('profile_change_password') }}">
+                        <i class="fa-solid fa-key"></i>
+                        {{ 'app.menu.profile_change_password' | trans }}
+                    </a>
+                    <a class="btn btn-default" href="{{ path('profile_change_image') }}">
+                        <i class="fa-regular fa-image"></i>
+                        {{ 'app.menu.profile_image_change' | trans }}
+                    </a>
                 </div>
             </div>
+        </section>
+
+        <div class="profile-grid">
+            <section class="info-card">
+                <h2 class="info-card-header">
+                    <i class="fa-regular fa-address-card"></i>
+                    {{ 'app.menu.contact_information' | trans }}
+                </h2>
+                <dl class="info-list">
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.email' | trans }}</dt>
+                        <dd>{{ app_user().email }}</dd>
+                    </div>
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.phone' | trans }}</dt>
+                        <dd>{{ app_user().phone }}</dd>
+                    </div>
+                    {% if app_user().skype is not empty %}
+                        <div class="info-list-row">
+                            <dt>{{ 'app.form.label.skype' | trans }}</dt>
+                            <dd>{{ app_user().skype }}</dd>
+                        </div>
+                    {% endif %}
+                </dl>
+            </section>
+
+            <section class="info-card">
+                <h2 class="info-card-header">
+                    <i class="fa-regular fa-id-badge"></i>
+                    {{ 'app.menu.personal_information' | trans }}
+                </h2>
+                <dl class="info-list">
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.username' | trans }}</dt>
+                        <dd>{{ app_user().username }}</dd>
+                    </div>
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.degree_before' | trans }}</dt>
+                        <dd>{{ app_user().degreeBefore }}</dd>
+                    </div>
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.first_name' | trans }}</dt>
+                        <dd>{{ app_user().firstName }}</dd>
+                    </div>
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.last_name' | trans }}</dt>
+                        <dd>{{ app_user().lastName }}</dd>
+                    </div>
+                    <div class="info-list-row">
+                        <dt>{{ 'app.form.label.degree_after' | trans }}</dt>
+                        <dd>{{ app_user().degreeAfter }}</dd>
+                    </div>
+                </dl>
+            </section>
         </div>
+
+        <section class="info-card">
+            <h2 class="info-card-header">
+                <i class="fa-regular fa-envelope-open"></i>
+                {{ 'app.menu.mail_template' | trans }}
+            </h2>
+            <dl class="info-list">
+                <div class="info-list-row">
+                    <dt>{{ 'app.form.label.message_greeting' | trans }}</dt>
+                    <dd>{{ app_user().messageGreeting | sanitize_html('app.rich_text_sanitizer') }}</dd>
+                </div>
+                <div class="info-list-row">
+                    <dt>{{ 'app.form.label.message_signature' | trans }}</dt>
+                    <dd>{{ app_user().messageSignature | sanitize_html('app.rich_text_sanitizer') }}</dd>
+                </div>
+            </dl>
+        </section>
     </div>
 {% endblock content %}

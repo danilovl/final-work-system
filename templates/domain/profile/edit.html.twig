@@ -2,318 +2,211 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div>
+        <div class="settings-layout">
+            {% include 'domain/profile/include/settings_nav.html.twig' with {
+                'active': 'edit'
+            } %}
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa-solid fa-chevron-up"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <div class="col-md-3 col-sm-3 col-12 profile_left">
-                                <div class="profile_img">
-                                    <div id="crop-avatar">
-                                        <img class="img-fluid avatar-view"
-                                             src="{{ app_user() | profile_image }}"
-                                             alt="Avatar"
-                                             title="Change the avatar">
-                                    </div>
-                                </div>
-                                <h3>{{ app_user() }}</h3>
-                                <ul class="list-unstyled user_data">
-                                    <li>
-                                        <i class="fa-solid fa-user user-profile-icon"></i>
-                                        {{ app_user().username }}
-                                    </li>
-                                    <li class="m-top-xs">
-                                        <i class="fa-solid fa-at user-profile-icon"></i>
-                                        {{ app_user().email }}
-                                    </li>
-                                    {% if  app_user().skype is not empty %}
-                                        <li class="m-top-xs">
-                                            <i class="fa-solid fa-skype user-profile-icon"></i>:
-                                            {{ app_user().skype }}
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                                <ul class="list-unstyled user_data">
-                                    <li>
-                                        <a class="btn btn-primary" href="{{ path('profile_show') }}">
-                                            <i class="fa-solid fa-backward"></i>
-                                            {{ 'app.menu.profile' | trans }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-warning" href="{{ path('profile_change_password') }}">
-                                            <i class="fa-regular fa-pen-to-square m-right-xs"></i>
-                                            {{ 'app.menu.profile_change_password' | trans }}
-                                        </a>
-                                    </li>
-                                </ul>
-                                <br/>
-                            </div>
+            <section class="info-card settings-content">
+                <h2 class="info-card-header">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    {{ 'app.menu.profile_edit' | trans }}
+                </h2>
 
-                            <div class="col-md-9 col-sm-9 col-12">
+                {{ form_start(form, {
+                    'action': path('profile_edit'),
+                    'attr': {
+                        'data-controller': 'tinymce',
+                        'class': 'settings-form'
+                    }
+                }) }}
 
-                                {{ form_start(form, {
-                                    'action': path('profile_edit'),
+                <ul class="nav nav-tabs settings-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active"
+                           href="#tab_content1"
+                           id="home-tab"
+                           role="tab"
+                           data-bs-toggle="tab"
+                           aria-selected="true">
+                            <i class="fa-regular fa-address-card"></i>
+                            {{ 'app.menu.contact_information' | trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link"
+                           href="#tab_content2"
+                           id="profile-tab"
+                           role="tab"
+                           data-bs-toggle="tab"
+                           aria-selected="false">
+                            <i class="fa-regular fa-id-badge"></i>
+                            {{ 'app.menu.personal_information' | trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link"
+                           href="#tab_content3"
+                           id="profile-tab2"
+                           role="tab"
+                           data-bs-toggle="tab"
+                           aria-selected="false">
+                            <i class="fa-regular fa-envelope-open"></i>
+                            {{ 'app.menu.mail_template' | trans }}
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade active show"
+                         id="tab_content1"
+                         role="tabpanel"
+                         aria-labelledby="home-tab">
+                        <div class="settings-form-body">
+                            <div class="settings-field-row">
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.email,
+                                    'label': 'app.form.label.email',
                                     'attr': {
-                                        'data-controller': 'tinymce',
-                                        'class': 'form-horizontal form-label-left'
+                                        'data-controller': 'input-mask',
+                                        'class': 'form-control',
+                                        'data-inputmask': "'alias' : 'email'"
+                                    }
+                                } %}
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.phone,
+                                    'label': 'app.form.label.phone',
+                                    'attr': {
+                                        'data-controller': 'input-mask',
+                                        'class': 'form-control',
+                                        'data-inputmask': "'mask' : '+(*{1,3}) *{1,15}'"
+                                    }
+                                } %}
+                            </div>
+                            <div class="settings-field-row">
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.skype,
+                                    'label': 'app.form.label.skype',
+                                    'attr': {
+                                        'class': 'form-control'
+                                    }
+                                } %}
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.locale,
+                                    'label': 'app.form.label.system_language',
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'class': 'form-control'
+                                    }
+                                } %}
+                            </div>
+                            <div class="settings-switch">
+                                {{ form_widget(form.enabledEmailNotification, {
+                                    'attr': {
+                                        'data-controller': 'switch',
+                                        'class': 'js-switch'
                                     }
                                 }) }}
-
-                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                        <li role="presentation">
-                                            <a class="active" href="#tab_content1"
-                                               id="home-tab"
-                                               role="tab" data-bs-toggle="tab"
-                                               aria-expanded="true">
-                                                {{ 'app.menu.contact_information' | trans }}
-                                            </a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a href="#tab_content2"
-                                               role="tab"
-                                               id="profile-tab" data-bs-toggle="tab"
-                                               aria-expanded="false">
-                                                {{ 'app.menu.personal_information' | trans }}
-                                            </a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a href="#tab_content3"
-                                               role="tab"
-                                               id="profile-tab2"
-                                               data-bs-toggle="tab"
-                                               aria-expanded="false">
-                                                {{ 'app.menu.mail_template' | trans }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div id="myTabContent" class="tab-content">
-                                        <div role="tabpanel"
-                                             class="tab-pane fade active show"
-                                             id="tab_content1"
-                                             aria-labelledby="home-tab">
-                                            <div class="item form-group row">
-                                                {{ form_label(form.email, 'app.form.label.email', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.email, {
-                                                        'attr': {
-                                                            'data-controller': 'input-mask',
-                                                            'class': 'form-control',
-                                                            'data-inputmask': "'alias' : 'email'"
-                                                        }
-                                                    }) }}
-                                                </div>
-
-                                                {% if not form.email.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.email) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.phone, 'app.form.label.phone', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.phone, {
-                                                        'attr': {
-                                                            'data-controller': 'input-mask',
-                                                            'class': 'form-control',
-                                                            'data-inputmask': "'mask' : '+(*{1,3}) *{1,15}'"
-                                                        }
-                                                    }) }}
-                                                </div>
-
-                                                {% if not form.phone.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.phone) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.skype, 'app.form.label.skype', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.skype, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.skype.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.skype) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.locale, 'app.form.label.system_language', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.locale, {
-                                                        'attr': {
-                                                            'data-controller': 'select2',
-                                                            'data-select2-width-value': '100%',
-                                                            'class': 'form-control'
-                                                        }
-                                                    }) }}
-                                                </div>
-
-                                                {% if not form.locale.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.locale) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.enabledEmailNotification, 'app.form.label.email_motification', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.enabledEmailNotification, {
-                                                        'attr': {
-                                                            'data-controller': 'switch',
-                                                            'class': 'form-control mt-small js-switch'
-                                                        }
-                                                    }) }}
-                                                </div>
-
-                                                {% if not form.enabledEmailNotification.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.enabledEmailNotification) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="ln_solid"></div>
-                                        </div>
-
-                                        <div role="tabpanel"
-                                             class="tab-pane fade"
-                                             id="tab_content2"
-                                             aria-labelledby="profile-tab">
-                                            <div class="item form-group row">
-                                                {{ form_label(form.username, 'app.form.label.username', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.username.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.username) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.degreeBefore, 'app.form.label.degree_before', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.degreeBefore, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.degreeBefore.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.degreeBefore) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.firstName, 'app.form.label.first_name', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.firstName.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.firstName) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.lastName, 'app.form.label.last_name', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.lastName.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.lastName) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="item form-group row">
-                                                {{ form_label(form.degreeAfter, 'app.form.label.degree_after', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    {{ form_widget(form.degreeAfter, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.degreeAfter.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.degreeAfter) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                        </div>
-
-                                        <div role="tabpanel"
-                                             class="tab-pane fade"
-                                             id="tab_content3"
-                                             aria-labelledby="profile-tab">
-                                            <div class="form-group row">
-                                                <div class="col-md-12 col-sm-12 col-12">
-                                                    {{ form_label(form.messageGreeting,'app.form.label.message_greeting') }}
-                                                </div>
-                                                <div class="col-md-12 col-sm-12 col-12">
-                                                    {{ form_widget(form.messageGreeting, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.messageGreeting.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.messageGreeting) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                            <div class="ln_solid"></div>
-                                            <div class="form-group row">
-                                                <div class="col-md-12 col-sm-12 col-12">
-                                                    {{ form_label(form.messageSignature,'app.form.label.message_signature') }}
-                                                </div>
-                                                <div class="col-md-12 col-sm-12 col-12">
-                                                    {{ form_widget(form.messageSignature, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-
-                                                {% if not form.messageSignature.vars.valid %}
-                                                    <div class="col-md-3 col-sm-3 col-12 red">
-                                                        {{ form_errors(form.messageSignature) }}
-                                                    </div>
-                                                {% endif %}
-
-                                            </div>
-                                        </div>
+                                {{ form_label(form.enabledEmailNotification, 'app.form.label.email_motification', {
+                                    'label_attr': {
+                                        'class': 'form-label mb-0'
+                                    }
+                                }) }}
+                                {% if not form.enabledEmailNotification.vars.valid %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form_errors(form.enabledEmailNotification) }}
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit"
-                                           id="user-edit-profile-button-action"
-                                           class="btn btn-success "
-                                           value="{{ 'app.form.action.save' | trans }}"/>
-                                </div>
-
-                                {{ form_end(form) }}
-
+                                {% endif %}
                             </div>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade"
+                         id="tab_content2"
+                         role="tabpanel"
+                         aria-labelledby="profile-tab">
+                        <div class="settings-form-body">
+                            {% include 'domain/profile/include/form_field.html.twig' with {
+                                'field': form.username,
+                                'label': 'app.form.label.username',
+                                'attr': {
+                                    'class': 'form-control'
+                                }
+                            } %}
+                            <div class="settings-field-row">
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.firstName,
+                                    'label': 'app.form.label.first_name',
+                                    'attr': {
+                                        'class': 'form-control'
+                                    }
+                                } %}
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.lastName,
+                                    'label': 'app.form.label.last_name',
+                                    'attr': {
+                                        'class': 'form-control'
+                                    }
+                                } %}
+                            </div>
+                            <div class="settings-field-row">
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.degreeBefore,
+                                    'label': 'app.form.label.degree_before',
+                                    'attr': {
+                                        'class': 'form-control'
+                                    }
+                                } %}
+                                {% include 'domain/profile/include/form_field.html.twig' with {
+                                    'field': form.degreeAfter,
+                                    'label': 'app.form.label.degree_after',
+                                    'attr': {
+                                        'class': 'form-control'
+                                    }
+                                } %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade"
+                         id="tab_content3"
+                         role="tabpanel"
+                         aria-labelledby="profile-tab2">
+                        <div class="settings-form-body settings-form-body-wide">
+                            {% include 'domain/profile/include/form_field.html.twig' with {
+                                'field': form.messageGreeting,
+                                'label': 'app.form.label.message_greeting',
+                                'attr': {
+                                    'class': 'form-control'
+                                }
+                            } %}
+                            {% include 'domain/profile/include/form_field.html.twig' with {
+                                'field': form.messageSignature,
+                                'label': 'app.form.label.message_signature',
+                                'attr': {
+                                    'class': 'form-control'
+                                }
+                            } %}
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <div class="settings-form-footer">
+                    <a class="btn btn-default" href="{{ path('profile_show') }}">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        {{ 'app.menu.profile' | trans }}
+                    </a>
+                    <button type="submit"
+                            id="user-edit-profile-button-action"
+                            class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i>
+                        {{ 'app.form.action.save' | trans }}
+                    </button>
+                </div>
+
+                {{ form_end(form) }}
+            </section>
         </div>
     </div>
 {% endblock content %}

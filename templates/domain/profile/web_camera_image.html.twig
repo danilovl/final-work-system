@@ -1,4 +1,4 @@
-<div class="row mt-60"
+<div class="web-camera"
      id="create-web-camera-image"
      data-controller="web-camera"
      data-id-web-camera-video="webCameraVideo"
@@ -8,33 +8,30 @@
      data-id-button-save="btnSave"
      data-max-show-width="400"
 >
-    <p class="ta-center">{{ 'app.text.you_can_create_by_web_camera' | trans }}</p>
-    <div class="col-lg-6">
-        <h4>
-            <input type="button"
-                   class="btn btn-primary"
-                   id="btnCapture"
-                   name="btnSave"
-                   value="{{ 'app.form.action.take_photo' | trans }}"
-            />
-        </h4>
+    <div class="web-camera-pane">
         <video id="webCameraVideo"
                class="profile-web-camera-area"
                playsinline
                autoplay
         >
         </video>
+        <button type="button"
+                class="btn btn-default"
+                id="btnCapture"
+                name="btnSave">
+            <i class="fa-solid fa-camera"></i>
+            {{ 'app.form.action.take_photo' | trans }}
+        </button>
     </div>
 
-    <div class="col-lg-6">
-        <h4>
-            <input type="button"
-                   class="btn btn-primary"
-                   id="btnSave"
-                   name="btnSave"
-                   value="{{ 'app.form.action.save' | trans }}"
-            />
-        </h4>
+    <div class="web-camera-pane">
         <canvas id="webCameraCanvas"></canvas>
+        <button type="button"
+                class="btn btn-primary"
+                id="btnSave"
+                name="btnSave">
+            <i class="fa-solid fa-check"></i>
+            {{ 'app.form.action.save' | trans }}
+        </button>
     </div>
 </div>

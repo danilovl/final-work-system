@@ -1,0 +1,34 @@
+<aside class="settings-aside">
+    <div class="settings-user">
+        <img class="settings-user-avatar"
+             src="{{ app_user() | profile_image }}"
+             alt="{{ app_user() }}">
+        <div class="settings-user-info">
+            <div class="settings-user-name">{{ app_user() }}</div>
+            <div class="settings-user-email">{{ app_user().email }}</div>
+        </div>
+    </div>
+
+    <nav class="settings-nav">
+        <a class="settings-nav-link{% if active == 'profile' %} active{% endif %}"
+           href="{{ path('profile_show') }}">
+            <i class="fa-regular fa-user"></i>
+            {{ 'app.menu.profile' | trans }}
+        </a>
+        <a class="settings-nav-link{% if active == 'edit' %} active{% endif %}"
+           href="{{ path('profile_edit') }}">
+            <i class="fa-regular fa-pen-to-square"></i>
+            {{ 'app.menu.profile_edit' | trans }}
+        </a>
+        <a class="settings-nav-link{% if active == 'password' %} active{% endif %}"
+           href="{{ path('profile_change_password') }}">
+            <i class="fa-solid fa-key"></i>
+            {{ 'app.menu.profile_change_password' | trans }}
+        </a>
+        <a class="settings-nav-link{% if active == 'image' %} active{% endif %}"
+           href="{{ path('profile_change_image') }}">
+            <i class="fa-regular fa-image"></i>
+            {{ 'app.menu.profile_image_change' | trans }}
+        </a>
+    </nav>
+</aside>

@@ -1,0 +1,15 @@
+<div class="settings-field">
+    {{ form_label(field, label, {
+        'label_attr': {
+            'class': 'form-label'
+        }
+    }) }}
+    {{ form_widget(field, {
+        'attr': attr
+    }) }}
+    {% if not field.vars.valid %}
+        <div class="invalid-feedback d-block">
+            {{ form_errors(field) }}
+        </div>
+    {% endif %}
+</div>
