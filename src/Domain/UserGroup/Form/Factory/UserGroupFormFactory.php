@@ -68,6 +68,6 @@ class UserGroupFormFactory
                 throw new RuntimeException('Controller method type not found');
         }
 
-        return $this->formFactory->create(UserGroupForm::class, $userGroupModel, $parameters);
+        return $this->formFactory->create(type: UserGroupForm::class, data: $userGroupModel, options: $parameters);
     }
 }
