@@ -75,9 +75,9 @@ parameters:
   hashid: '^[a-zA-Z0-9]{10}$'
   default_user_image: 'build/images/user.png'
   event_calendar:
-    free_color: '#3b91ad'
-    reserved_color: '#f00'
-    detail_reserved_color: '#4bd44d'
+    free_color: '#4f86bd'
+    reserved_color: '#c2524d'
+    detail_reserved_color: '#5f9a6e'
   constraints:
     profile:
       file:
