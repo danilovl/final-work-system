@@ -19,7 +19,7 @@ use App\Domain\Work\Model\WorkModel;
 use App\Domain\WorkCategory\Facade\WorkCategoryFacade;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use App\Domain\WorkType\Facade\WorkTypeFacade;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 readonly class WorkModelFactory
@@ -50,9 +50,9 @@ readonly class WorkModelFactory
             $workModel->consultant = $this->userFacade->getById($input->consultantId);
         }
 
-        $workModel->deadline = new DateTime($input->deadline);
+        $workModel->deadline = new DateTimeImmutable($input->deadline);
         if ($input->deadlineProgram !== null) {
-            $workModel->deadlineProgram = new DateTime($input->deadlineProgram);
+            $workModel->deadlineProgram = new DateTimeImmutable($input->deadlineProgram);
         }
 
         if ($input->categoriesIds !== null) {

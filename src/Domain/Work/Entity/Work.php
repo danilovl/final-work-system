@@ -26,7 +26,7 @@ use App\Domain\Work\Repository\WorkRepository;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     ArrayCollection,
     Collection,
@@ -103,13 +103,13 @@ class Work
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: SystemEvent::class)]
     private Collection $systemEvents;
 
-    #[ORM\Column(name: 'deadline', type: Types::DATE_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'deadline', type: Types::DATE_IMMUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private DateTime $deadline;
+    private DateTimeImmutable $deadline;
 
-    #[ORM\Column(name: 'deadline_program', type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(name: 'deadline_program', type: Types::DATE_IMMUTABLE, nullable: true)]
     #[Gedmo\Versioned]
-    private ?DateTime $deadlineProgram = null;
+    private ?DateTimeImmutable $deadlineProgram = null;
 
     /** @var Collection<Conversation> */
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Conversation::class)]
@@ -121,7 +121,7 @@ class Work
 
     public function __construct()
     {
-        $this->deadline = new DateTime;
+        $this->deadline = new DateTimeImmutable;
         $this->tasks = new ArrayCollection;
         $this->medias = new ArrayCollection;
         $this->categories = new ArrayCollection;
@@ -249,22 +249,22 @@ class Work
         $this->medias = $media;
     }
 
-    public function getDeadline(): DateTime
+    public function getDeadline(): DateTimeImmutable
     {
         return $this->deadline;
     }
 
-    public function setDeadline(DateTime $deadline): void
+    public function setDeadline(DateTimeImmutable $deadline): void
     {
         $this->deadline = $deadline;
     }
 
-    public function getDeadlineProgram(): ?DateTime
+    public function getDeadlineProgram(): ?DateTimeImmutable
     {
         return $this->deadlineProgram;
     }
 
-    public function setDeadlineProgram(?DateTime $deadlineProgram): void
+    public function setDeadlineProgram(?DateTimeImmutable $deadlineProgram): void
     {
         $this->deadlineProgram = $deadlineProgram;
     }

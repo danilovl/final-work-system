@@ -16,7 +16,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
@@ -42,16 +42,16 @@ class WorkModel
 
     public ?User $consultant = null;
 
-    public DateTime $deadline;
+    public DateTimeImmutable $deadline;
 
-    public ?DateTime $deadlineProgram = null;
+    public ?DateTimeImmutable $deadlineProgram = null;
 
     public Collection $categories;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection;
-        $this->deadline = new DateTime('now');
+        $this->deadline = new DateTimeImmutable('now');
     }
 
     public static function fromWork(Work $work): self

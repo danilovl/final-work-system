@@ -113,6 +113,7 @@ class WorkForm extends AbstractType
                 'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('deadline', DateType::class, [
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
                 'html5' => false,
@@ -122,6 +123,7 @@ class WorkForm extends AbstractType
                 ]
             ])
             ->add('deadlineProgram', DateType::class, [
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
                 'required' => false,
