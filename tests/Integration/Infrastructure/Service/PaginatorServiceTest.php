@@ -29,12 +29,21 @@ class PaginatorServiceTest extends KernelTestCase
 
     public function testCreatePagination(): void
     {
-        $pagination = $this->paginatorService->createPagination(range(0, 100), 1, 10);
+        $pagination = $this->paginatorService->createPagination(
+            target: range(0, 100),
+            page: 1,
+            limit: 10
+        );
 
         $this->assertSame(1, $pagination->getCurrentPageNumber());
         $this->assertSame(10, $pagination->count());
 
-        $this->paginatorService->createPagination([new User], 1, 10, detachEntity: true);
+        $this->paginatorService->createPagination(
+            target: [new User],
+            page: 1,
+            limit: 10,
+            detachEntity: true
+        );
     }
 
     public function testCreatePaginationRequest(): void

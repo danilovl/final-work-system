@@ -37,7 +37,11 @@ class TranslatorServiceTest extends KernelTestCase
     #[DataProvider('provideTransCases')]
     public function testTrans(string $key, string $domain, string $locale, string $result): void
     {
-        $trans = $this->translatorService->trans($key, [], $domain, $locale);
+        $trans = $this->translatorService->trans(
+            id: $key,
+            domain: $domain,
+            locale: $locale
+        );
         $this->assertEquals($trans, $result);
     }
 
