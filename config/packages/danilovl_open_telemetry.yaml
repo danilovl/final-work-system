@@ -67,7 +67,7 @@ danilovl_open_telemetry:
         enabled: true
 
     predis:
-      enabled: true
+      enabled: ~
       tracing:
         enabled: true
       metering:
