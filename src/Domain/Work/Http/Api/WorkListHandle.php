@@ -19,7 +19,7 @@ use App\Domain\Work\Bus\Query\WorkList\{
     GetWorkListQueryResult
 };
 use App\Domain\Work\DTO\Api\Input\WorkSearchInput;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
+use App\Domain\Work\Factory\WorkDetailDTOFactory;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
@@ -30,7 +30,7 @@ readonly class WorkListHandle
     public function __construct(
         private UserService $userService,
         private QueryBusInterface $queryBus,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private WorkDetailDTOFactory $workDetailDTOFactory
     ) {}
 
     public function __invoke(
@@ -65,7 +65,7 @@ readonly class WorkListHandle
 
         $works = [];
         foreach ($result->works as $work) {
-            $works[] = $this->objectToArrayTransformService->transform('api_key_field', $work);
+            $works[] = $this->workDetailDTOFactory->create($work);
         }
 
         return new JsonResponse([

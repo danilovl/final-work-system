@@ -13,16 +13,16 @@
 namespace App\Domain\Work\Http\Api;
 
 use App\Domain\Work\Entity\Work;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
+use App\Domain\Work\Factory\WorkDetailDTOFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class WorkDetailHandle
 {
-    public function __construct(private ObjectToArrayTransformService $objectToArrayTransformService) {}
+    public function __construct(private WorkDetailDTOFactory $workDetailDTOFactory) {}
 
     public function __invoke(Work $work): JsonResponse
     {
-        $result = $this->objectToArrayTransformService->transform('api_key_field', $work);
+        $result = $this->workDetailDTOFactory->create($work);
 
         return new JsonResponse($result);
     }
