@@ -20,6 +20,7 @@ use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
 use App\Domain\WorkStatus\Entity\WorkStatus;
+use App\Domain\WorkType\Entity\WorkType;
 use Doctrine\ORM\{
     Query,
     QueryBuilder
@@ -103,6 +104,29 @@ readonly class WorkFacade
 
             $result[$workUser->getId()][] = $work;
         }
+
+        return $result;
+    }
+
+    /**
+     * @return Work[]
+     */
+    public function listByUserRole(
+        User $user,
+        string $type,
+        ?WorkType $workType = null,
+        ?WorkStatus $workStatus = null
+    ): array {
+        /** @var Work[] $result */
+        $result = $this->workRepository
+            ->allByUserRole(
+                user: $user,
+                type: $type,
+                workType: $workType,
+                workStatus: $workStatus
+            )
+            ->getQuery()
+            ->getResult();
 
         return $result;
     }

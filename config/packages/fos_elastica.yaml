@@ -83,6 +83,8 @@ fos_elastica:
         finder: ~
         provider: ~
         listener: ~
+        elastica_to_model_transformer:
+          query_builder_method: createSearchQueryBuilder
 
     conversation:
       client: default

@@ -16,6 +16,7 @@ use InvalidArgumentException;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
+use App\Domain\WorkType\Entity\WorkType;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 use SortDirection;
 
@@ -45,6 +46,13 @@ class WorkQueryBuilder extends BaseQueryBuilder
     public function joinStatus(): self
     {
         $this->queryBuilder->join('work.status', 'status');
+
+        return $this;
+    }
+
+    public function selectSupervisor(): self
+    {
+        $this->queryBuilder->addSelect('supervisor');
 
         return $this;
     }
@@ -144,6 +152,7 @@ class WorkQueryBuilder extends BaseQueryBuilder
         };
 
         $this->queryBuilder
+            ->addSelect($alias)
             ->leftJoin('work.' . $alias, $alias)
             ->andWhere($this->queryBuilder->expr()->in($alias . '.id', ':userIds'))
             ->setParameter('userIds', $userIds);
@@ -162,6 +171,57 @@ class WorkQueryBuilder extends BaseQueryBuilder
                 ->andWhere($this->queryBuilder->expr()->in('status', ':statuses'))
                 ->setParameter('statuses', $workStatus);
         }
+
+        return $this;
+    }
+
+    public function selectUsers(): self
+    {
+        $this->queryBuilder
+            ->addSelect('author', 'supervisor', 'opponent', 'consultant')
+            ->join('work.author', 'author')
+            ->join('work.supervisor', 'supervisor')
+            ->leftJoin('work.opponent', 'opponent')
+            ->leftJoin('work.consultant', 'consultant');
+
+        return $this;
+    }
+
+    public function whereByUserRole(string $type, User $user): self
+    {
+        $alias = match ($type) {
+            WorkUserTypeConstant::AUTHOR->value => 'author',
+            WorkUserTypeConstant::SUPERVISOR->value => 'supervisor',
+            WorkUserTypeConstant::OPPONENT->value => 'opponent',
+            WorkUserTypeConstant::CONSULTANT->value => 'consultant',
+            default => throw new InvalidArgumentException('Unsupported work user type.')
+        };
+
+        $condition = sprintf('%s = :user', $alias);
+
+        $this->queryBuilder
+            ->andWhere($condition)
+            ->setParameter('user', $user);
+
+        return $this;
+    }
+
+    public function whereByWorkType(?WorkType $workType): self
+    {
+        if ($workType === null) {
+            return $this;
+        }
+
+        $this->queryBuilder
+            ->andWhere('work.type = :workType')
+            ->setParameter('workType', $workType);
+
+        return $this;
+    }
+
+    public function orderById(SortDirection $order = SortDirection::Descending): self
+    {
+        $this->queryBuilder->orderBy('work.id', $order);
 
         return $this;
     }

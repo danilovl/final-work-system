@@ -17,6 +17,7 @@ use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
+use App\Domain\WorkType\Entity\WorkType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use SortDirection;
 use Doctrine\ORM\QueryBuilder;
@@ -39,6 +40,19 @@ class WorkRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work');
     }
 
+    public function createSearchQueryBuilder(string $alias): QueryBuilder
+    {
+        return $this->createQueryBuilder($alias)
+            ->addSelect('type', 'status', 'author', 'supervisor', 'opponent', 'consultant', 'categories')
+            ->join("{$alias}.type", 'type')
+            ->join("{$alias}.status", 'status')
+            ->join("{$alias}.author", 'author')
+            ->join("{$alias}.supervisor", 'supervisor')
+            ->leftJoin("{$alias}.opponent", 'opponent')
+            ->leftJoin("{$alias}.consultant", 'consultant')
+            ->leftJoin("{$alias}.categories", 'categories');
+    }
+
     public function workDeadlineBySupervisor(User $user): QueryBuilder
     {
         return $this->createWorkQueryBuilder()
@@ -57,6 +71,23 @@ class WorkRepository extends ServiceEntityRepository
             ->whereBySupervisor($user)
             ->whereProgramDeadlineNotNull()
             ->orderByProgramDeadline(SortDirection::Descending)
+            ->getQueryBuilder();
+    }
+
+    public function allByUserRole(
+        User $user,
+        string $type,
+        ?WorkType $workType,
+        ?WorkStatus $workStatus
+    ): QueryBuilder {
+        return $this->createWorkQueryBuilder()
+            ->selectStatus()
+            ->selectUsers()
+            ->joinStatus()
+            ->whereByUserRole($type, $user)
+            ->whereByWorkType($workType)
+            ->whereByWorkStatus($workStatus)
+            ->orderById()
             ->getQueryBuilder();
     }
 
@@ -91,6 +122,7 @@ class WorkRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createWorkQueryBuilder()
             ->selectStatus()
+            ->selectSupervisor()
             ->joinStatus()
             ->leftJoinSupervisor()
             ->whereBySupervisorFilter($supervisor)
