@@ -3,26 +3,117 @@
 {% block content %}
 	<div class="right_col" role="main">
 		<div class="x_content bs-example-popovers">
-			 {{ widget_homepage_notify() }}
+			{{ widget_homepage_notify() }}
 		</div>
-		<div>
-			<div class="clearfix"></div>
-			{% if  isSystemEventUnreadExist %}
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-12 mb-small">
+
+		<section class="dashboard-stats">
+			{% if dashboard.activeWorksType is not null %}
+				<a class="dashboard-stat" href="{{ path('work_list', { 'type': dashboard.activeWorksType }) }}">
+			{% else %}
+				<div class="dashboard-stat">
+			{% endif %}
+				<span class="dashboard-stat-icon">
+					<i class="fa-solid fa-book"></i>
+				</span>
+				<span class="dashboard-stat-body">
+					<span class="dashboard-stat-value">{{ dashboard.activeWorksCount }}</span>
+					<span class="dashboard-stat-label">{{ 'app.text.dashboard_active_works' | trans }}</span>
+				</span>
+			{% if dashboard.activeWorksType is not null %}
+				</a>
+			{% else %}
+				</div>
+			{% endif %}
+
+			<a class="dashboard-stat" href="#dashboard-deadlines">
+				<span class="dashboard-stat-icon dashboard-stat-icon-warning">
+					<i class="fa-regular fa-clock"></i>
+				</span>
+				<span class="dashboard-stat-body">
+					<span class="dashboard-stat-value">{{ dashboard.upcomingCount }}</span>
+					<span class="dashboard-stat-label">{{ 'app.text.dashboard_upcoming_deadlines' | trans }}</span>
+				</span>
+			</a>
+
+			<a class="dashboard-stat" href="{{ path('conversation_list') }}">
+				<span class="dashboard-stat-icon dashboard-stat-icon-info">
+					<i class="fa-regular fa-envelope"></i>
+				</span>
+				<span class="dashboard-stat-body">
+					<span class="dashboard-stat-value">{{ dashboard.unreadMessagesCount }}</span>
+					<span class="dashboard-stat-label">{{ 'app.text.dashboard_unread_messages' | trans }}</span>
+				</span>
+			</a>
+
+			<a class="dashboard-stat" href="#dashboard-alerts">
+				<span class="dashboard-stat-icon dashboard-stat-icon-danger">
+					<i class="fa-regular fa-bell"></i>
+				</span>
+				<span class="dashboard-stat-body">
+					<span class="dashboard-stat-value">{{ dashboard.unreadAlertsCount }}</span>
+					<span class="dashboard-stat-label">{{ 'app.text.dashboard_unread_alerts' | trans }}</span>
+				</span>
+			</a>
+		</section>
+
+		<section class="info-card dashboard-section" id="dashboard-deadlines">
+			<h2 class="info-card-header">
+				<i class="fa-regular fa-clock"></i>
+				{{ 'app.text.dashboard_upcoming_deadlines' | trans }}
+			</h2>
+
+			{% if dashboard.upcoming is not empty %}
+				<ul class="dashboard-list">
+					{% for item in dashboard.upcoming %}
+						<li class="dashboard-list-item">
+							<span class="dashboard-list-icon">
+								<i class="{{ item.icon }}"></i>
+							</span>
+							<span class="dashboard-list-main">
+								<a class="dashboard-list-title" href="{{ path(item.route, { 'id': item.id | hashids_encode }) }}">
+									{{ item.title }}
+								</a>
+								<span class="dashboard-list-meta">
+									{% if item.labelKey is not null %}
+										{{ item.labelKey | trans }}
+									{% else %}
+										{{ item.label }}
+									{% endif %}
+									· {{ item.date | date('d.m.Y H:i') }}
+								</span>
+							</span>
+							<span class="badge {{ item.badgeClass }}">
+								{{ 'app.text.dashboard_days_left' | trans({ '%count%': item.days }) }}
+							</span>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p class="dashboard-empty">
+					{{ 'app.text.dashboard_no_deadlines' | trans }}
+				</p>
+			{% endif %}
+		</section>
+
+		<section class="dashboard-alerts" id="dashboard-alerts">
+			<div class="dashboard-alerts-header">
+				<h2>{{ 'app.text.dashboard_alerts' | trans }}</h2>
+
+				{% if isSystemEventUnreadExist %}
+					<div class="dashboard-alerts-action">
 						{{ 'app.text.set_alerts_all_viewed' | trans }}
 
 						{% include 'other/common_part/button/js-switch.html.twig' with {
 							'dataTargetUrl': path('system_event_all_change_to_viewed_ajax')
 						} %}
 					</div>
-				</div>
-			{% endif %}
+				{% endif %}
+			</div>
 
 			<div class="row">
 				{% for key,group in paginator %}
 					<div class="col-md-6 col-sm-6 col-12">
-						<div class="x_panel tile fixed_height_320">
+						<div class="x_panel">
 							<div class="x_title">
 								<h2>
 									{{ key }}
@@ -38,7 +129,6 @@
 							</div>
 							<div class="x_content">
 								<div class="system-event-table">
-
 									<table class="table">
 										<thead>
 										<tr>
@@ -55,19 +145,15 @@
 										</tr>
 										</thead>
 										<tbody>
-
 										{% for systemEventRecipient in group %}
-											<tr class="table-active">
+											<tr>
 												<td>
 													{{ systemEventRecipient.createdAt | date("d.m.Y H:i") }}
 												</td>
 												<td>
-													<ul class="list-inline">
-														<li class="list-inline-item">
-															<img src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
-																 class="avatar" alt="Avatar">
-														</li>
-													</ul>
+													<img src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
+														 class="avatar"
+														 alt="Avatar">
 												</td>
 												<td>
 													{{ system_event_generate_link(systemEventRecipient) | raw }}
@@ -80,19 +166,24 @@
 												</td>
 											</tr>
 										{% endfor %}
-
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
 					</div>
+				{% else %}
+					<div class="col-12">
+						<p class="dashboard-empty info-card">
+							{{ 'app.text.dashboard_no_alerts' | trans }}
+						</p>
+					</div>
 				{% endfor %}
-
 			</div>
+
 			<div class="navigation">
 				{{ knp_pagination_render(paginator) }}
 			</div>
-		</div>
+		</section>
 	</div>
 {% endblock %}
