@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f19715d84628428fb7c2489222e949b",
+    "content-hash": "e7b9be8bef135261a6534887c4c5539d",
     "packages": [
         {
             "name": "api-platform/core",
@@ -286,16 +286,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.373.4",
+            "version": "3.373.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "902f23313c949a8f25f0982064f318b69ae69382"
+                "reference": "978964f417f3617a6ced691110af6fc5d496fb4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/902f23313c949a8f25f0982064f318b69ae69382",
-                "reference": "902f23313c949a8f25f0982064f318b69ae69382",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/978964f417f3617a6ced691110af6fc5d496fb4e",
+                "reference": "978964f417f3617a6ced691110af6fc5d496fb4e",
                 "shasum": ""
             },
             "require": {
@@ -377,9 +377,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.373.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.373.5"
             },
-            "time": "2026-03-17T18:11:35+00:00"
+            "time": "2026-03-18T18:22:37+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -982,16 +982,16 @@
         },
         {
             "name": "danilovl/open-telemetry-bundle",
-            "version": "v0.0.6",
+            "version": "v0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/open-telemetry-bundle.git",
-                "reference": "3519abc5fe57d6ace6520d32ecceecee9db753c7"
+                "reference": "627eeffc9a07c422e5d756e49204fcaadd5c4ddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/3519abc5fe57d6ace6520d32ecceecee9db753c7",
-                "reference": "3519abc5fe57d6ace6520d32ecceecee9db753c7",
+                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/627eeffc9a07c422e5d756e49204fcaadd5c4ddc",
+                "reference": "627eeffc9a07c422e5d756e49204fcaadd5c4ddc",
                 "shasum": ""
             },
             "require": {
@@ -1058,9 +1058,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/open-telemetry-bundle/issues",
-                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.6"
+                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.7"
             },
-            "time": "2026-03-18T16:37:38+00:00"
+            "time": "2026-03-18T22:18:49+00:00"
         },
         {
             "name": "danilovl/parameter-bundle",
@@ -3035,23 +3035,23 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.33.5",
+            "version": "v4.33.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "ebe8010a61b2ae0cff0d246fe1c4d44e9f7dfa6d"
+                "reference": "84b008c23915ed94536737eae46f41ba3bccfe67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/ebe8010a61b2ae0cff0d246fe1c4d44e9f7dfa6d",
-                "reference": "ebe8010a61b2ae0cff0d246fe1c4d44e9f7dfa6d",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/84b008c23915ed94536737eae46f41ba3bccfe67",
+                "reference": "84b008c23915ed94536737eae46f41ba3bccfe67",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": ">=5.0.0 <8.5.27"
+                "phpunit/phpunit": ">=10.5.62 <11.0.0"
             },
             "suggest": {
                 "ext-bcmath": "Need to support JSON deserialization"
@@ -3073,9 +3073,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.33.5"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.33.6"
             },
-            "time": "2026-01-29T20:49:00+00:00"
+            "time": "2026-03-18T17:32:05+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -5109,16 +5109,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.6.6",
+            "version": "5.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "5cee1d3dfc2d2aa6599834520911d246f656bcb8"
+                "reference": "31a105931bc8ffa3a123383829772e832fd8d903"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/5cee1d3dfc2d2aa6599834520911d246f656bcb8",
-                "reference": "5cee1d3dfc2d2aa6599834520911d246f656bcb8",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/31a105931bc8ffa3a123383829772e832fd8d903",
+                "reference": "31a105931bc8ffa3a123383829772e832fd8d903",
                 "shasum": ""
             },
             "require": {
@@ -5167,9 +5167,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.6"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.7"
             },
-            "time": "2025-12-22T21:13:58+00:00"
+            "time": "2026-03-18T20:47:46+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -15993,19 +15993,20 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.66.0",
+            "version": "v1.67.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "b5b4afa2a570b926682e9f34615a6766dd560ff4"
+                "reference": "6ce8b313845f16bcf385ee3cb31d8b24e30d5516"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/b5b4afa2a570b926682e9f34615a6766dd560ff4",
-                "reference": "b5b4afa2a570b926682e9f34615a6766dd560ff4",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/6ce8b313845f16bcf385ee3cb31d8b24e30d5516",
+                "reference": "6ce8b313845f16bcf385ee3cb31d8b24e30d5516",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "^2.1",
                 "doctrine/inflector": "^2.0",
                 "nikic/php-parser": "^5.0",
                 "php": ">=8.1",
@@ -16067,7 +16068,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.66.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.67.0"
             },
             "funding": [
                 {
@@ -16087,7 +16088,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-09T08:55:54+00:00"
+            "time": "2026-03-18T13:39:06+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
