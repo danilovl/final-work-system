@@ -12,7 +12,15 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
+};
+use App\Domain\ConversationMessage\Bus\Query\TotalUnreadMessagesByUser\{
+    GetTotalUnreadMessagesByUserQuery,
+    GetTotalUnreadMessagesByUserQueryResult
+};
+use App\Domain\ConversationMessage\Bus\Query\UnreadMessagesByUser\GetUnreadMessagesByUserQueryResult;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
@@ -35,19 +43,18 @@ class UnreadConversationMessageWidgetTest extends TestCase
             ->method('render')
             ->willReturn('content');
 
-        $conversationMessageFacade = $this->createStub(ConversationMessageFacade::class);
-        $conversationMessageFacade
-            ->method('getTotalUnreadMessagesByUser')
-            ->willReturn(1);
-
-        $conversationMessageFacade
-            ->method('getUnreadMessagesByUser')
-            ->willReturn([]);
+        $queryBus = $this->createStub(QueryBusInterface::class);
+        $queryBus
+            ->method('handle')
+            ->willReturnCallback(static fn (QueryInterface $query): object => match (true) {
+                $query instanceof GetTotalUnreadMessagesByUserQuery => new GetTotalUnreadMessagesByUserQueryResult(1),
+                default => new GetUnreadMessagesByUserQueryResult([])
+            });
 
         $this->widget = new UnreadConversationMessageWidget(
             $twigRenderService,
             $userService,
-            $conversationMessageFacade
+            $queryBus
         );
     }
 

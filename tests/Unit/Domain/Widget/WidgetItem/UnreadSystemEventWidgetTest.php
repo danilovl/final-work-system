@@ -12,10 +12,15 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Domain\SystemEvent\Facade\{
-    SystemEventFacade,
-    SystemEventRecipientFacade
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
 };
+use App\Domain\SystemEvent\Bus\Query\TotalUnreadSystemEventsByRecipient\{
+    GetTotalUnreadSystemEventsByRecipientQuery,
+    GetTotalUnreadSystemEventsByRecipientQueryResult
+};
+use App\Domain\SystemEventRecipient\Bus\Query\UnreadSystemEventsByRecipient\GetUnreadSystemEventsByRecipientQueryResult;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;
@@ -38,21 +43,18 @@ class UnreadSystemEventWidgetTest extends TestCase
             ->method('render')
             ->willReturn('content');
 
-        $systemEventFacade = $this->createStub(SystemEventFacade::class);
-        $systemEventFacade
-            ->method('getTotalUnreadSystemEventsByRecipient')
-            ->willReturn(1);
-
-        $systemEventRecipientFacade = $this->createStub(SystemEventRecipientFacade::class);
-        $systemEventRecipientFacade
-            ->method('getUnreadSystemEventsByRecipient')
-            ->willReturn([]);
+        $queryBus = $this->createStub(QueryBusInterface::class);
+        $queryBus
+            ->method('handle')
+            ->willReturnCallback(static fn (QueryInterface $query): object => match (true) {
+                $query instanceof GetTotalUnreadSystemEventsByRecipientQuery => new GetTotalUnreadSystemEventsByRecipientQueryResult(1),
+                default => new GetUnreadSystemEventsByRecipientQueryResult([])
+            });
 
         $this->widget = new UnreadSystemEventWidget(
             $twigRenderService,
             $userService,
-            $systemEventFacade,
-            $systemEventRecipientFacade
+            $queryBus
         );
     }
 

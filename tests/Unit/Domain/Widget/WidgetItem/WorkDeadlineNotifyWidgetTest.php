@@ -12,13 +12,13 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Facade\WorkFacade;
-use App\Domain\Work\Service\WorkService;
+use App\Domain\Work\Bus\Query\WorksByAuthorStatus\GetWorksByAuthorStatusQueryResult;
 use App\Infrastructure\Service\{
     TranslatorService
 };
@@ -31,17 +31,14 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 {
     private UserService $userService;
 
-    private WorkService $workService;
-
-    private WorkFacade $workFacade;
+    private QueryBusInterface $queryBus;
 
     private WorkDeadlineNotifyWidget $widget;
 
     protected function setUp(): void
     {
         $this->userService = $this->createStub(UserService::class);
-        $this->workService = $this->createStub(WorkService::class);
-        $this->workFacade = $this->createStub(WorkFacade::class);
+        $this->queryBus = $this->createStub(QueryBusInterface::class);
 
         $twigRenderService = $this->createStub(TwigRenderService::class);
         $twigRenderService
@@ -60,19 +57,17 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
         $this->widget = new WorkDeadlineNotifyWidget(
             $this->userService,
-            $this->workService,
             $parameterService,
             $translator,
             $twigRenderService,
-            $this->workFacade
+            $this->queryBus
         );
     }
 
     public function testRender(): void
     {
         $this->userService = $this->createMock(UserService::class);
-        $this->workFacade = $this->createMock(WorkFacade::class);
-        $this->workService = $this->createMock(WorkService::class);
+        $this->queryBus = $this->createMock(QueryBusInterface::class);
         $twigRenderService = $this->createStub(TwigRenderService::class);
         $twigRenderService
             ->method('render')
@@ -80,11 +75,10 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
         $this->widget = new WorkDeadlineNotifyWidget(
             $this->userService,
-            $this->workService,
             $this->createStub(ParameterServiceInterface::class),
             $this->createStub(TranslatorService::class),
             $twigRenderService,
-            $this->workFacade
+            $this->queryBus
         );
 
         $user = new User;
@@ -96,17 +90,12 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->willReturn($user);
 
         $work = new Work;
-        $work->setDeadline(new DateTimeImmutable);
+        $work->setDeadline(new DateTimeImmutable('+10 days'));
 
-        $this->workFacade
+        $this->queryBus
             ->expects($this->once())
-            ->method('listByAuthorStatus')
-            ->willReturn([$work]);
-
-        $this->workService
-            ->expects($this->once())
-            ->method('getDeadlineDays')
-            ->willReturn(10);
+            ->method('handle')
+            ->willReturn(new GetWorksByAuthorStatusQueryResult([$work]));
 
         $this->assertEquals('content', $this->widget->render());
     }
@@ -116,11 +105,10 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
         $this->userService = $this->createMock(UserService::class);
         $this->widget = new WorkDeadlineNotifyWidget(
             $this->userService,
-            $this->workService,
             $this->createStub(ParameterServiceInterface::class),
             $this->createStub(TranslatorService::class),
             $this->createStub(TwigRenderService::class),
-            $this->workFacade
+            $this->queryBus
         );
 
         $user = new User;
@@ -137,14 +125,13 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
     public function testRenderNoWorks(): void
     {
         $this->userService = $this->createMock(UserService::class);
-        $this->workFacade = $this->createMock(WorkFacade::class);
+        $this->queryBus = $this->createMock(QueryBusInterface::class);
         $this->widget = new WorkDeadlineNotifyWidget(
             $this->userService,
-            $this->createStub(WorkService::class),
             $this->createStub(ParameterServiceInterface::class),
             $this->createStub(TranslatorService::class),
             $this->createStub(TwigRenderService::class),
-            $this->workFacade
+            $this->queryBus
         );
 
         $user = new User;
@@ -155,10 +142,10 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->method('getUser')
             ->willReturn($user);
 
-        $this->workFacade
+        $this->queryBus
             ->expects($this->once())
-            ->method('listByAuthorStatus')
-            ->willReturn([]);
+            ->method('handle')
+            ->willReturn(new GetWorksByAuthorStatusQueryResult([]));
 
         $this->assertNull($this->widget->render());
     }
@@ -166,15 +153,13 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
     public function testRenderDeadlines(): void
     {
         $this->userService = $this->createMock(UserService::class);
-        $this->workFacade = $this->createMock(WorkFacade::class);
-        $this->workService = $this->createMock(WorkService::class);
+        $this->queryBus = $this->createMock(QueryBusInterface::class);
         $this->widget = new WorkDeadlineNotifyWidget(
             $this->userService,
-            $this->workService,
             $this->createStub(ParameterServiceInterface::class),
             $this->createStub(TranslatorService::class),
             $this->createStub(TwigRenderService::class),
-            $this->workFacade
+            $this->queryBus
         );
 
         $user = new User;
@@ -186,17 +171,12 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->willReturn($user);
 
         $work = new Work;
-        $work->setDeadline(new DateTimeImmutable);
+        $work->setDeadline(new DateTimeImmutable('+100 days'));
 
-        $this->workFacade
+        $this->queryBus
             ->expects($this->once())
-            ->method('listByAuthorStatus')
-            ->willReturn([$work]);
-
-        $this->workService
-            ->expects($this->once())
-            ->method('getDeadlineDays')
-            ->willReturn(100);
+            ->method('handle')
+            ->willReturn(new GetWorksByAuthorStatusQueryResult([$work]));
 
         $this->assertNull($this->widget->render());
     }
