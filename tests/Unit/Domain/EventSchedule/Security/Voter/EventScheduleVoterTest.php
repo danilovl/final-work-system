@@ -32,7 +32,7 @@ class EventScheduleVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $eventSchedule = $this->createMock(EventSchedule::class);
+        $eventSchedule = $this->createStub(EventSchedule::class);
 
         foreach (EventScheduleVoter::SUPPORTS as $support) {
             $this->assertTrue($this->eventScheduleVoter->supportsPublic($support, $eventSchedule));
