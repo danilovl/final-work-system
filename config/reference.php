@@ -1681,6 +1681,83 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         serializer?: scalar|null|Param, // Default: "serializer"
  *     },
  * }
+ * @psalm-type OverblogGraphqlConfig = array{
+ *     batching_method?: "relay"|"apollo"|Param, // Default: "relay"
+ *     definitions?: array{
+ *         argument_class?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\Definition\\Argument"
+ *         default_field_resolver?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\Resolver\\FieldResolver"
+ *         class_namespace?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\__DEFINITIONS__"
+ *         cache_dir?: scalar|null|Param, // Default: null
+ *         cache_dir_permissions?: scalar|null|Param, // Default: null
+ *         use_classloader_listener?: bool|Param, // Default: true
+ *         auto_compile?: scalar|null|Param, // Default: true
+ *         show_debug_info?: bool|Param, // Show some performance stats in extensions // Default: false
+ *         config_validation?: bool|Param, // Default: true
+ *         schema?: array<string, array{ // Default: []
+ *             query?: scalar|null|Param, // Default: null
+ *             mutation?: scalar|null|Param, // Default: null
+ *             subscription?: scalar|null|Param, // Default: null
+ *             types?: list<scalar|null|Param>,
+ *         }>,
+ *         mappings?: array{
+ *             auto_discover?: array{
+ *                 bundles?: bool|Param, // Default: false
+ *                 root_dir?: bool|Param, // Default: false
+ *                 built_in?: bool|Param, // Default: true
+ *             },
+ *             types?: list<array{ // Default: []
+ *                 types?: list<"yaml"|"graphql"|"annotation"|"attribute"|Param>,
+ *                 dir?: scalar|null|Param, // Default: null
+ *                 suffix?: scalar|null|Param, // Default: ".types"
+ *             }>,
+ *         },
+ *         builders?: array{
+ *             field?: list<array{ // Default: []
+ *                 alias: scalar|null|Param,
+ *                 class: scalar|null|Param,
+ *             }>,
+ *             fields?: list<array{ // Default: []
+ *                 alias: scalar|null|Param,
+ *                 class: scalar|null|Param,
+ *             }>,
+ *             args?: list<array{ // Default: []
+ *                 alias: scalar|null|Param,
+ *                 class: scalar|null|Param,
+ *             }>,
+ *         },
+ *     },
+ *     errors_handler?: array{
+ *         enabled?: bool|Param, // Default: true
+ *         internal_error_message?: scalar|null|Param, // Default: "Internal server Error"
+ *         rethrow_internal_exceptions?: bool|Param, // Default: false
+ *         debug?: bool|Param, // Default: true
+ *         log?: bool|Param, // Default: true
+ *         logger_service?: scalar|null|Param, // Default: "logger"
+ *         map_exceptions_to_parent?: bool|Param, // Default: false
+ *         exceptions?: array{
+ *             warnings?: list<scalar|null|Param>,
+ *             errors?: list<scalar|null|Param>,
+ *         },
+ *     },
+ *     services?: array{
+ *         executor?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\Executor\\Executor"
+ *         promise_adapter?: scalar|null|Param, // Default: "GraphQL\\Executor\\Promise\\Adapter\\SyncPromiseAdapter"
+ *         expression_language?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\ExpressionLanguage\\ExpressionLanguage"
+ *         cache_expression_language_parser?: scalar|null|Param,
+ *     },
+ *     security?: array{
+ *         query_max_depth?: scalar|null|Param, // Disabled if equal to false. // Default: 0
+ *         query_max_complexity?: scalar|null|Param, // Disabled if equal to false. // Default: 0
+ *         enable_introspection?: bool|Param, // Default: true
+ *         handle_cors?: bool|Param, // Default: false
+ *     },
+ *     doctrine?: array{
+ *         types_mapping?: list<scalar|null|Param>,
+ *     },
+ *     profiler?: array{
+ *         query_match?: scalar|null|Param, // Default: null
+ *     },
+ * }
  * @psalm-type NelmioCorsConfig = array{
  *     defaults?: array{
  *         allow_credentials?: bool|Param, // Default: false
@@ -14840,6 +14917,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     knp_paginator?: KnpPaginatorConfig,
  *     webpack_encore?: WebpackEncoreConfig,
  *     fos_elastica?: FosElasticaConfig,
+ *     overblog_graphql?: OverblogGraphqlConfig,
  *     nelmio_cors?: NelmioCorsConfig,
  *     api_platform?: ApiPlatformConfig,
  *     mercure?: MercureConfig,
@@ -14873,6 +14951,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_paginator?: KnpPaginatorConfig,
  *         webpack_encore?: WebpackEncoreConfig,
  *         fos_elastica?: FosElasticaConfig,
+ *         overblog_graphql?: OverblogGraphqlConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         api_platform?: ApiPlatformConfig,
  *         mercure?: MercureConfig,
@@ -14906,6 +14985,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_paginator?: KnpPaginatorConfig,
  *         webpack_encore?: WebpackEncoreConfig,
  *         fos_elastica?: FosElasticaConfig,
+ *         overblog_graphql?: OverblogGraphqlConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         api_platform?: ApiPlatformConfig,
  *         mercure?: MercureConfig,

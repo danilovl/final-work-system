@@ -64,7 +64,6 @@ services:
       - '../src/Domain/Comment/Form/EventSubscriber'
       - '../src/Domain/Widget/WidgetItem'
       - '../src/Domain/EmailNotification/Messenger/EmailNotificationMessage.php'
-      - '../src/Domain/*/GraphQL'
 
   App\Domain\Work\Repository\Elastica\WorkSearch:
     arguments:

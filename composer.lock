@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "762e60abc06e73b78c6940738d1e8fe8",
+    "content-hash": "23b0a927d4c199a8d851e2d103caa61a",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3790,6 +3790,51 @@
             "time": "2024-09-04T18:46:31+00:00"
         },
         {
+            "name": "murtukov/php-code-generator",
+            "version": "v0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/murtukov/php-code-generator.git",
+                "reference": "89b6063daa42870bc08e4ce6e670f2ae62634bba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/murtukov/php-code-generator/zipball/89b6063daa42870bc08e4ce6e670f2ae62634bba",
+                "reference": "89b6063daa42870bc08e4ce6e670f2ae62634bba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.58",
+                "phpunit/phpunit": "^9.4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Murtukov\\PHPCodeGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Timur Murtukov",
+                    "email": "murtukov@gmail.com"
+                }
+            ],
+            "description": "A library to generate php code",
+            "support": {
+                "issues": "https://github.com/murtukov/php-code-generator/issues",
+                "source": "https://github.com/murtukov/php-code-generator/tree/v0.1.6"
+            },
+            "time": "2021-05-04T16:39:00+00:00"
+        },
+        {
             "name": "nelmio/api-doc-bundle",
             "version": "v5.9.2",
             "source": {
@@ -4533,6 +4578,106 @@
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
             "time": "2025-09-03T12:08:10+00:00"
+        },
+        {
+            "name": "overblog/graphql-bundle",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overblog/GraphQLBundle.git",
+                "reference": "76d9709f3a09d9f5bf637cd81a056af8b504132c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/76d9709f3a09d9f5bf637cd81a056af8b504132c",
+                "reference": "76d9709f3a09d9f5bf637cd81a056af8b504132c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "murtukov/php-code-generator": "^0.1.5",
+                "php": ">=8.1",
+                "phpdocumentor/reflection-docblock": "^5.2",
+                "phpdocumentor/type-resolver": "^1.6.1",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "symfony/config": "^5.4.46 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/dependency-injection": "^5.4.48 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/event-dispatcher": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/expression-language": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/framework-bundle": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/http-foundation": "^5.4.50 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/http-kernel": "^5.4.50 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/options-resolver": "^5.4.45 || ^6.4.30 || ^7.0 || ^8.0",
+                "symfony/property-access": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "webonyx/graphql-php": "^15.24"
+            },
+            "conflict": {
+                "react/promise": "<2.8"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.14|^2.0",
+                "doctrine/orm": "^2.20.9 || ^3.6",
+                "monolog/monolog": "^2.8.0 || ^3.0",
+                "php-cs-fixer/shim": "^3.93",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "1.8.4",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-symfony": "^1.0",
+                "phpunit/phpunit": "^10.5.63",
+                "react/promise": "^2.5",
+                "symfony/asset": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/browser-kit": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/console": "^5.4.47 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/css-selector": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0",
+                "symfony/dom-crawler": "^5.4.48 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/finder": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/monolog-bundle": "^3.7 || ^4.0",
+                "symfony/phpunit-bridge": "^7.4.3",
+                "symfony/process": "^5.4.47 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/routing": "^5.4.48 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/security-bundle": "^5.4.45 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/validator": "^5.4.48 || ^6.4.31 || ^7.0 || ^8.0",
+                "symfony/var-dumper": "^5.4.48 || ^6.4.32 || ^7.0 || ^8.0",
+                "symfony/yaml": "^5.4.45 || ^6.4.30 || ^7.0 || ^8.0",
+                "twig/twig": "^2.10|^3.0"
+            },
+            "suggest": {
+                "nelmio/cors-bundle": "For more flexibility when using CORS prefight",
+                "overblog/graphiql-bundle": "If you want to use graphiQL.",
+                "react/promise": "To use ReactPHP promise adapter",
+                "symfony/translation": "If you want validation error messages to be translated."
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overblog\\GraphQLBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Overblog",
+                    "homepage": "http://www.over-blog.com"
+                }
+            ],
+            "description": "This bundle provides tools to build a GraphQL server in your Symfony App.",
+            "keywords": [
+                "Relay",
+                "graphql"
+            ],
+            "support": {
+                "issues": "https://github.com/overblog/GraphQLBundle/issues",
+                "source": "https://github.com/overblog/GraphQLBundle/tree/v1.9.0"
+            },
+            "time": "2026-01-29T07:39:51+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
