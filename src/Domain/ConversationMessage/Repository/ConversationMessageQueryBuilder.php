@@ -13,6 +13,7 @@
 namespace App\Domain\ConversationMessage\Repository;
 
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
@@ -150,6 +151,46 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
     public function setMaxResults(int $maxResults): self
     {
         $this->queryBuilder->setMaxResults($maxResults);
+
+        return $this;
+    }
+
+    public function selectConversationIdAndCount(): self
+    {
+        $this->queryBuilder->select('IDENTITY(conversation_message.conversation) AS conversationId, COUNT(conversation_message.id) AS messageCount');
+
+        return $this;
+    }
+
+    /**
+     * @param int[] $conversationIds
+     */
+    public function whereByConversationIds(array $conversationIds): self
+    {
+        Assert::allInteger($conversationIds);
+
+        $this->queryBuilder
+            ->andWhere('conversation_message.conversation IN (:conversationIds)')
+            ->setParameter('conversationIds', $conversationIds);
+
+        return $this;
+    }
+
+    public function whereByLastCreatedAtInConversation(): self
+    {
+        $lastCreatedAt = sprintf(
+            'conversation_message.createdAt = (SELECT MAX(last_message.createdAt) FROM %s last_message WHERE last_message.conversation = conversation_message.conversation)',
+            ConversationMessage::class
+        );
+
+        $this->queryBuilder->andWhere($lastCreatedAt);
+
+        return $this;
+    }
+
+    public function groupByConversation(): self
+    {
+        $this->queryBuilder->groupBy('conversation_message.conversation');
 
         return $this;
     }

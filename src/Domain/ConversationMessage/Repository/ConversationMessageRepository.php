@@ -114,6 +114,32 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->getQueryBuilder();
     }
 
+    /**
+     * @param int[] $conversationIds
+     */
+    public function countByConversationIds(array $conversationIds): QueryBuilder
+    {
+        return $this->createConversationMessageQueryBuilder()
+            ->selectConversationIdAndCount()
+            ->whereByConversationIds($conversationIds)
+            ->groupByConversation()
+            ->getQueryBuilder();
+    }
+
+    /**
+     * @param int[] $conversationIds
+     */
+    public function lastByConversationIds(array $conversationIds): QueryBuilder
+    {
+        return $this->createConversationMessageQueryBuilder()
+            ->selectOwner()
+            ->joinOwner()
+            ->whereByConversationIds($conversationIds)
+            ->whereByLastCreatedAtInConversation()
+            ->orderByCreatedAt(SortDirection::Descending)
+            ->getQueryBuilder();
+    }
+
     public function countMessagesByUserStatus(
         User $user,
         ConversationMessageStatusType $statusType
