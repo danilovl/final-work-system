@@ -22,9 +22,10 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\{
-    TraceAttributes,
-    TraceAttributeValues
+use OpenTelemetry\SemConv\Attributes\CodeAttributes;
+use OpenTelemetry\SemConv\Incubating\Attributes\{
+    DeploymentIncubatingAttributes,
+    MessagingIncubatingAttributes
 };
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Messenger\{
@@ -74,10 +75,9 @@ class MessageBusRegistration implements OpenTelemetryRegistrationInterface
             $builder = $instrumentation->tracer()
                 ->spanBuilder(sprintf('MESSENGER %s %s', mb_strtoupper($function), $messageClass))
                 ->setSpanKind(SpanKind::KIND_PRODUCER)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(CodeAttributes::CODE_FILE_PATH, $filename)
+                ->setAttribute(CodeAttributes::CODE_LINE_NUMBER, $lineno)
                 ->setAttribute('symfony.messenger.bus', $class)
                 ->setAttribute('symfony.messenger.message', $messageClass)
                 ->setAttribute('type', 'dispatch');
@@ -87,7 +87,7 @@ class MessageBusRegistration implements OpenTelemetryRegistrationInterface
                 : null;
 
             if ($transportMessageIdStamp instanceof TransportMessageIdStamp) {
-                $builder->setAttribute(TraceAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
+                $builder->setAttribute(MessagingIncubatingAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
             }
 
             $parent = Context::getCurrent();
@@ -118,12 +118,10 @@ class MessageBusRegistration implements OpenTelemetryRegistrationInterface
 
             $scope->detach();
             $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+            $span->setAttribute(DeploymentIncubatingAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true,
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
@@ -147,18 +145,17 @@ class MessageBusRegistration implements OpenTelemetryRegistrationInterface
                 ->tracer()
                 ->spanBuilder(sprintf('MESSENGER SEND %s', $messageClass))
                 ->setSpanKind(SpanKind::KIND_PRODUCER)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
-                ->setAttribute(TraceAttributes::MESSAGING_SYSTEM, TraceAttributeValues::MESSAGING_SYSTEM_RABBITMQ)
-                ->setAttribute(TraceAttributes::MESSAGING_OPERATION_TYPE, TraceAttributeValues::MESSAGING_OPERATION_TYPE_PUBLISH)
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(CodeAttributes::CODE_FILE_PATH, $filename)
+                ->setAttribute(CodeAttributes::CODE_LINE_NUMBER, $lineno)
+                ->setAttribute(MessagingIncubatingAttributes::MESSAGING_SYSTEM, MessagingIncubatingAttributes::MESSAGING_SYSTEM_VALUE_RABBITMQ)
+                ->setAttribute(MessagingIncubatingAttributes::MESSAGING_OPERATION_TYPE, MessagingIncubatingAttributes::MESSAGING_OPERATION_TYPE_VALUE_SEND)
                 ->setAttribute('symfony.messenger.transport', $class)
                 ->setAttribute('symfony.messenger.message', $messageClass)
                 ->setAttribute('type', 'dispatch');
 
             if ($transportMessageIdStamp instanceof TransportMessageIdStamp) {
-                $builder->setAttribute(TraceAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
+                $builder->setAttribute(MessagingIncubatingAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
             }
 
             $parent = Context::getCurrent();
@@ -186,12 +183,10 @@ class MessageBusRegistration implements OpenTelemetryRegistrationInterface
 
             $scope->detach();
             $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+            $span->setAttribute(DeploymentIncubatingAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
