@@ -13,7 +13,7 @@
 namespace App\Domain\WorkDeadline\Facade;
 
 use App\Domain\Work\Repository\WorkRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Domain\User\Entity\User;
 
@@ -22,7 +22,7 @@ readonly class WorkDeadlineFacade
     public function __construct(private WorkRepository $workRepository) {}
 
     /**
-     * @return ArrayCollection<DateTime>
+     * @return ArrayCollection<DateTimeImmutable>
      */
     public function listWorkDeadlinesBySupervisor(User $user, ?int $limit = null): ArrayCollection
     {
@@ -46,7 +46,7 @@ readonly class WorkDeadlineFacade
     }
 
     /**
-     * @return ArrayCollection<DateTime>
+     * @return ArrayCollection<DateTimeImmutable>
      */
     public function listWorkProgramDeadlinesBySupervisor(User $user, ?int $limit = null): ArrayCollection
     {
