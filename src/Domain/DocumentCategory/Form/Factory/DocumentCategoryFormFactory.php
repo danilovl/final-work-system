@@ -68,6 +68,6 @@ class DocumentCategoryFormFactory
                 throw new RuntimeException('Controller method type not found');
         }
 
-        return $this->formFactory->create(MediaCategoryForm::class, $mediaCategoryModel, $parameters);
+        return $this->formFactory->create(type: MediaCategoryForm::class, data: $mediaCategoryModel, options: $parameters);
     }
 }
