@@ -1,7 +1,7 @@
 away_to:
   path: /to
   defaults:
-    _controller: App\Application\Controller\AwayController::to
+    _controller: App\Infrastructure\Web\Controller\AwayController::to
     _seo:
       title: 'app.page.leave_web'
   methods: GET
