@@ -58,7 +58,11 @@ class RequestServiceTest extends TestCase
         $translator->method('trans')
             ->willReturn('trans');
 
-        $this->requestService = new RequestService($this->requestStack, $router, $translator);
+        $this->requestService = new RequestService(
+            requestStack: $this->requestStack,
+            router: $router,
+            translatorService: $translator
+        );
     }
 
     public function testAddFlash(): void
@@ -102,7 +106,10 @@ class RequestServiceTest extends TestCase
     public function testCreateAjaxJson(AjaxJsonTypeConstant $type, array $expectedResult, int $expectedStatus): void
     {
         $expectedResult = array_merge($expectedResult, ['test' => 'test']);
-        $result = $this->requestService->createAjaxJson($type, ['test' => 'test']);
+        $result = $this->requestService->createAjaxJson(
+            type: $type,
+            extraData: ['test' => 'test']
+        );
         /** @var string $content */
         $content = $result->getContent();
 

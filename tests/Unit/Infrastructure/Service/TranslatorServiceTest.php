@@ -35,9 +35,9 @@ class TranslatorServiceTest extends TestCase
         $this->requestStack = $this->createStub(RequestStack::class);
 
         $this->translatorService = new TranslatorService(
-            $this->translator,
-            $this->requestStack,
-            'en'
+            translator: $this->translator,
+            requestStack: $this->requestStack,
+            locale: 'en'
         );
     }
 
@@ -62,7 +62,12 @@ class TranslatorServiceTest extends TestCase
             ->with($id, $parameters, $domain, $locale)
             ->willReturn('Translated string');
 
-        $result = $this->translatorService->trans($id, $parameters, $domain, $locale);
+        $result = $this->translatorService->trans(
+            id: $id,
+            parameters: $parameters,
+            domain: $domain,
+            locale: $locale
+        );
 
         $this->assertEquals('Translated string', $result);
     }
