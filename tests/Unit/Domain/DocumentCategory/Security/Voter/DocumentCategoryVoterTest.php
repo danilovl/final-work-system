@@ -32,7 +32,7 @@ class DocumentCategoryVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $mediaCategory = $this->createMock(MediaCategory::class);
+        $mediaCategory = $this->createStub(MediaCategory::class);
 
         foreach (DocumentCategoryVoter::SUPPORTS as $support) {
             $this->assertTrue($this->documentCategoryVoter->supportsPublic($support, $mediaCategory));
