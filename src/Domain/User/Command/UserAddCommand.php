@@ -15,6 +15,7 @@ namespace App\Domain\User\Command;
 use App\Application\Helper\HashHelper;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
+use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Console\Attribute\{
     Argument,
@@ -34,6 +35,7 @@ class UserAddCommand
 
     public function __construct(
         private readonly EntityManagerService $entityManager,
+        private readonly UserFacade $userFacade,
         private readonly UserPasswordHasherInterface $userPasswordHasher,
         private readonly UserValidator $validator
     ) {}
@@ -197,9 +199,7 @@ class UserAddCommand
         string $firstName,
         string $lastName
     ): void {
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['username' => $username]);
+        $user = $this->userFacade->findByUsername($username);
 
         if ($user !== null) {
             throw new RuntimeException(sprintf('There is already a user registered with the "%s" username.', $username));

@@ -16,6 +16,7 @@ use App\Application\Exception\EntityNotFoundException;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
+use Doctrine\ORM\QueryBuilder;
 
 readonly class WorkStatusFacade
 {
@@ -95,5 +96,10 @@ readonly class WorkStatusFacade
         }
 
         return $result;
+    }
+
+    public function queryBuilderAllOrderedByName(): QueryBuilder
+    {
+        return $this->workStatusRepository->allOrderedByName();
     }
 }

@@ -12,9 +12,13 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
+use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
 use App\Infrastructure\Service\EntityManagerService;
 
 class BaseSystemEventSubscriber
 {
-    public function __construct(protected EntityManagerService $entityManagerService) {}
+    public function __construct(
+        protected EntityManagerService $entityManagerService,
+        protected SystemEventTypeFacade $systemEventTypeFacade
+    ) {}
 }

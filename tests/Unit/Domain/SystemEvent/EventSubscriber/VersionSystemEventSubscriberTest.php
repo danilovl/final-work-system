@@ -27,6 +27,7 @@ class VersionSystemEventSubscriberTest extends BaseSystemEventSubscriber
 
         $this->subscriber = new VersionSystemEventSubscriber(
             $this->entityManagerService,
+            $this->systemEventTypeFacade,
             $workService
         );
     }

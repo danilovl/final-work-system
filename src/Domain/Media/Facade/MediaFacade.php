@@ -17,6 +17,7 @@ use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Repository\MediaRepository;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Entity\Work;
 use Doctrine\ORM\Query;
 
 readonly class MediaFacade
@@ -29,6 +30,13 @@ readonly class MediaFacade
         $result = $this->mediaRepository->find($id);
 
         return $result;
+    }
+
+    public function queryByWork(Work $work): Query
+    {
+        return $this->mediaRepository
+            ->allByWork($work)
+            ->getQuery();
     }
 
     public function findByMediaName(string $mediaName): ?Media

@@ -12,13 +12,12 @@
 
 namespace App\Domain\User\Command\Validator;
 
-use App\Domain\User\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 readonly class UserValidator
 {
-    public function __construct(private EntityManagerInterface $entityManager) {}
+    public function __construct(private UserFacade $userFacade) {}
 
     public function validateUsername(?string $username): string
     {
@@ -30,9 +29,7 @@ readonly class UserValidator
             throw new InvalidArgumentException('The username must contain only lowercase latin characters and underscores');
         }
 
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['username' => $username]);
+        $user = $this->userFacade->findByUsername($username);
 
         if ($user !== null) {
             throw new InvalidArgumentException('The username is already used');
@@ -47,9 +44,7 @@ readonly class UserValidator
             throw new InvalidArgumentException('The username can not be empty');
         }
 
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['username' => $username]);
+        $user = $this->userFacade->findByUsername($username);
 
         if ($user === null) {
             throw new InvalidArgumentException('The username is not exist');
@@ -81,9 +76,7 @@ readonly class UserValidator
             throw new InvalidArgumentException('The email should look like a real email');
         }
 
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['email' => $email]);
+        $user = $this->userFacade->findByEmail($email);
 
         if ($user !== null) {
             throw new InvalidArgumentException('The email is already used');

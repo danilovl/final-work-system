@@ -12,19 +12,15 @@
 
 namespace App\Domain\WorkStatus\Form\DataGrid;
 
-use App\Domain\WorkStatus\Repository\WorkStatusRepository;
-use SortDirection;
+use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Doctrine\ORM\QueryBuilder;
 
 class WorkStatusDataGrid
 {
-    public function __construct(private readonly WorkStatusRepository $workStatusRepository) {}
+    public function __construct(private readonly WorkStatusFacade $workStatusFacade) {}
 
     public function queryBuilder(): QueryBuilder
     {
-        return $this->workStatusRepository
-            ->createQueryBuilder('status')
-            ->orderBy('status.name', SortDirection::Ascending)
-            ->addOrderBy('status.id', SortDirection::Ascending);
+        return $this->workStatusFacade->queryBuilderAllOrderedByName();
     }
 }

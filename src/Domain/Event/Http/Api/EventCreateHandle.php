@@ -12,14 +12,13 @@
 
 namespace App\Domain\Event\Http\Api;
 
-use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Model\EventModel;
-use App\Domain\EventAddress\Entity\EventAddress;
-use App\Domain\EventType\Entity\EventType;
+use App\Domain\EventAddress\Facade\EventAddressFacade;
+use App\Domain\EventType\Facade\EventTypeFacade;
 use App\Domain\User\Service\UserService;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use DateTimeZone;
@@ -28,7 +27,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 readonly class EventCreateHandle
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
+        private EventTypeFacade $eventTypeFacade,
+        private EventAddressFacade $eventAddressFacade,
         private UserService $userService,
         private EventFactory $eventFactory,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
@@ -39,16 +39,14 @@ readonly class EventCreateHandle
     {
         $user = $this->userService->getUser();
 
-        /** @var EventType|null $eventType */
-        $eventType = $this->entityManagerService->getRepository(EventType::class)->find($input->typeId);
+        $eventType = $this->eventTypeFacade->findById($input->typeId);
         if ($eventType === null) {
             throw new NotFoundHttpException('Event type not found');
         }
 
         $eventAddress = null;
         if ($input->addressId !== null) {
-            /** @var EventAddress|null $eventAddress */
-            $eventAddress = $this->entityManagerService->getRepository(EventAddress::class)->find($input->addressId);
+            $eventAddress = $this->eventAddressFacade->findById($input->addressId);
             if ($eventAddress === null) {
                 throw new NotFoundHttpException('Event address not found');
             }

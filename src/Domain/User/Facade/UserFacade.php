@@ -12,7 +12,10 @@
 
 namespace App\Domain\User\Facade;
 
-use App\Application\Exception\UserNotExistException;
+use App\Application\Exception\{
+    RuntimeException,
+    UserNotExistException
+};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Repository\UserRepository;
@@ -20,7 +23,10 @@ use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\{
+    Query,
+    QueryBuilder
+};
 
 readonly class UserFacade
 {
@@ -144,5 +150,57 @@ readonly class UserFacade
         return $this->userRepository
             ->allByUserRoleAndSearch($role, $search, $enable)
             ->getQuery();
+    }
+
+    public function queryBuilderAllByUserRole(string $role): QueryBuilder
+    {
+        return $this->userRepository->allByUserRole($role);
+    }
+
+    public function queryBuilderBySearchType(
+        User $user,
+        string $lookingUsers,
+        string $whoLooking
+    ): QueryBuilder {
+        return match ($lookingUsers) {
+            WorkUserTypeConstant::AUTHOR->value => $this->userRepository->bySearchAuthors($user, $whoLooking),
+            WorkUserTypeConstant::SUPERVISOR->value => $this->userRepository->bySearchSupervisors($user, $whoLooking),
+            WorkUserTypeConstant::OPPONENT->value => $this->userRepository->bySearchOpponents($user, $whoLooking),
+            WorkUserTypeConstant::CONSULTANT->value => $this->userRepository->bySearchConsultants($user, $whoLooking),
+            default => throw new RuntimeException('Type not found'),
+        };
+    }
+
+    public function hasUserRole(int|string $id, string $role, bool $enabled = true): bool
+    {
+        $queryBuilder = $this->userRepository->allByUserRole($role, $enabled);
+        $rootAliases = $queryBuilder->getRootAliases();
+        $rootAlias = $rootAliases[0];
+        $select = sprintf('count(%s.id)', $rootAlias);
+        $condition = sprintf('%s.id = :id', $rootAlias);
+
+        $count = (int) $queryBuilder
+            ->select($select)
+            ->andWhere($condition)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $count > 0;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function listLatest(int $limit): array
+    {
+        /** @var User[] $result */
+        $result = $this->userRepository->findBy(
+            criteria: [],
+            orderBy: ['id' => 'DESC'],
+            limit: $limit
+        );
+
+        return $result;
     }
 }

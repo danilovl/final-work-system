@@ -17,7 +17,7 @@ use App\Application\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaTypeFacade;
-use App\Domain\MediaMimeType\Entity\MediaMimeType;
+use App\Domain\MediaMimeType\Facade\MediaMimeTypeFacade;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,7 +26,8 @@ readonly class ProfileChangeImageHandler implements CommandHandlerInterface
 {
     public function __construct(
         private EntityManagerService $entityManagerService,
-        private MediaTypeFacade $mediaTypeFacade
+        private MediaTypeFacade $mediaTypeFacade,
+        private MediaMimeTypeFacade $mediaMimeTypeFacade
     ) {}
 
     public function __invoke(ProfileChangeImageCommand $command): void
@@ -39,9 +40,7 @@ readonly class ProfileChangeImageHandler implements CommandHandlerInterface
         $uploadMedia = $mediaModel->uploadMedia;
         $mimeType = $uploadMedia->getMimeType();
 
-        $mediaMimeType = $this->entityManagerService
-            ->getRepository(MediaMimeType::class)
-            ->findOneBy(['name' => $mimeType]);
+        $mediaMimeType = $this->mediaMimeTypeFacade->findByName($mimeType);
 
         if ($mediaMimeType === null) {
             throw new RuntimeException("FileMimeType don't exist");

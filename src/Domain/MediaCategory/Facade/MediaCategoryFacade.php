@@ -14,7 +14,10 @@ namespace App\Domain\MediaCategory\Facade;
 
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Repository\MediaCategoryRepository;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\{
+    Query,
+    QueryBuilder
+};
 use App\Domain\User\Entity\User;
 
 readonly class MediaCategoryFacade
@@ -54,5 +57,10 @@ readonly class MediaCategoryFacade
             ->getResult();
 
         return $result;
+    }
+
+    public function queryBuilderByOwner(User $user): QueryBuilder
+    {
+        return $this->mediaCategoryRepository->allByOwner($user);
     }
 }

@@ -18,7 +18,6 @@ use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
-use App\Domain\SystemEventType\Entity\SystemEventType;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -38,10 +37,7 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $massageOwner = $conversationMessage->getOwner();
         $conversation = $conversationMessage->getConversation();
 
-        /** @var SystemEventType $systemEventType */
-        $systemEventType = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::MESSAGE_CREATE->value);
+        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::MESSAGE_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($massageOwner);

@@ -13,14 +13,14 @@
 namespace App\Domain\Conversation\Bus\Command\UpdateAllToStatus;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\ConversationMessageStatus\Repository\ConversationMessageStatusRepository;
+use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 
 readonly class UpdateAllToStatusHandler implements CommandHandlerInterface
 {
-    public function __construct(private ConversationMessageStatusRepository $conversationMessageStatusRepository) {}
+    public function __construct(private ConversationMessageStatusFacade $conversationMessageStatusFacade) {}
 
     public function __invoke(UpdateAllToStatusCommand $command): void
     {
-        $this->conversationMessageStatusRepository->updateAllToStatus($command->user, $command->type);
+        $this->conversationMessageStatusFacade->updateAllToStatus($command->user, $command->type);
     }
 }

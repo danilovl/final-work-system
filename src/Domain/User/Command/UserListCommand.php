@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Command;
 
-use App\Infrastructure\Service\EntityManagerService;
+use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Console\Attribute\{
     Option,
@@ -44,7 +44,7 @@ class UserListCommand
 {
     final public const string COMMAND_NAME = 'app:user-list';
 
-    public function __construct(private readonly EntityManagerService $entityManager) {}
+    public function __construct(private readonly UserFacade $userFacade) {}
 
     public function __invoke(
         SymfonyStyle $io,
@@ -55,9 +55,7 @@ class UserListCommand
         )]
         int $maxResult = 50
     ): int {
-        $users = $this->entityManager
-            ->getRepository(User::class)
-            ->findBy([], ['id' => 'DESC'], $maxResult);
+        $users = $this->userFacade->listLatest($maxResult);
 
         $usersAsPlainArrays = array_map(fn (User $user): array => $this->userToArray($user), $users);
 

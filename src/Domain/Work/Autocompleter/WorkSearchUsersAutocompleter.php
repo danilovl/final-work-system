@@ -12,11 +12,9 @@
 
 namespace App\Domain\Work\Autocompleter;
 
-use App\Application\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Repository\UserRepository;
+use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Danilovl\SelectAutocompleterBundle\Model\Autocompleter\AutocompleterQuery;
 use Danilovl\SelectAutocompleterBundle\Model\SelectDataFormat\Item;
 use Danilovl\SelectAutocompleterBundle\Resolver\Config\AutocompleterConfigResolver;
@@ -31,7 +29,7 @@ class WorkSearchUsersAutocompleter extends OrmAutocompleter
         ManagerRegistry $registry,
         AutocompleterConfigResolver $resolver,
         private readonly UserService $userService,
-        private readonly UserRepository $userRepository
+        private readonly UserFacade $userFacade
     ) {
         parent::__construct($registry, $resolver);
     }
@@ -49,13 +47,11 @@ class WorkSearchUsersAutocompleter extends OrmAutocompleter
         /** @var string $lookingUsers */
         $lookingUsers = str_replace('work-search-', '', $this->config->name);
 
-        $queryBuilder = match ($lookingUsers) {
-            WorkUserTypeConstant::AUTHOR->value => $this->userRepository->bySearchAuthors($user, $whoLooking),
-            WorkUserTypeConstant::SUPERVISOR->value => $this->userRepository->bySearchSupervisors($user, $whoLooking),
-            WorkUserTypeConstant::OPPONENT->value => $this->userRepository->bySearchOpponents($user, $whoLooking),
-            WorkUserTypeConstant::CONSULTANT->value => $this->userRepository->bySearchConsultants($user, $whoLooking),
-            default => throw new RuntimeException('Type not found'),
-        };
+        $queryBuilder = $this->userFacade->queryBuilderBySearchType(
+            user: $user,
+            lookingUsers: $lookingUsers,
+            whoLooking: $whoLooking
+        );
 
         if (!empty($query->search)) {
             $queryBuilder

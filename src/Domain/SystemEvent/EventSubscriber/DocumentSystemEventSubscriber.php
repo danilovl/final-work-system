@@ -13,12 +13,12 @@
 namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
+use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
-use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
@@ -29,9 +29,10 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
 {
     public function __construct(
         EntityManagerService $entityManagerService,
+        SystemEventTypeFacade $systemEventTypeFacade,
         private readonly UserWorkService $userWorkService
     ) {
-        parent::__construct($entityManagerService);
+        parent::__construct($entityManagerService, $systemEventTypeFacade);
     }
 
     #[Override]
@@ -47,10 +48,7 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
         $media = $event->media;
         $owner = $media->getOwner();
 
-        /** @var SystemEventType $systemEventType */
-        $systemEventType = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::DOCUMENT_CREATE->value);
+        $systemEventType = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::DOCUMENT_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);

@@ -27,6 +27,7 @@ class WorkSystemEventSubscriberTest extends BaseSystemEventSubscriber
 
         $this->subscriber = new WorkSystemEventSubscriber(
             $this->entityManagerService,
+            $this->systemEventTypeFacade,
             $workService
         );
     }

@@ -151,4 +151,9 @@ readonly class WorkFacade
             ->allByUserStatus($workData)
             ->getQuery();
     }
+
+    public function queryBuilderDeadlineBySupervisor(User $user): QueryBuilder
+    {
+        return $this->workRepository->workDeadlineBySupervisor($user);
+    }
 }

@@ -14,14 +14,11 @@ namespace App\Domain\Work\Service;
 
 use App\Application\Constant\TabTypeConstant;
 use App\Application\Exception\RuntimeException;
-use App\Domain\ConversationMessage\Repository\ConversationMessageRepository;
-use App\Domain\Event\Repository\EventRepository;
-use App\Domain\Media\Repository\MediaRepository;
-use App\Domain\Task\Repository\TaskRepository;
-use App\Infrastructure\Service\{
-    PaginatorService,
-    EntityManagerService
-};
+use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\Event\Facade\EventFacade;
+use App\Domain\Media\Facade\MediaFacade;
+use App\Domain\Task\Facade\TaskFacade;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Media\Entity\Media;
@@ -41,8 +38,11 @@ class WorkDetailTabService implements ResetInterface
     private ?string $activeTab = null;
 
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
         private readonly PaginatorService $paginator,
+        private readonly TaskFacade $taskFacade,
+        private readonly MediaFacade $mediaFacade,
+        private readonly EventFacade $eventFacade,
+        private readonly ConversationMessageFacade $conversationMessageFacade,
         private readonly ParameterServiceInterface $parameterService
     ) {}
 
@@ -168,26 +168,17 @@ class WorkDetailTabService implements ResetInterface
 
     private function getTaskQuery(Work $work, bool $isSupervisor): Query
     {
-        /** @var TaskRepository $taskRepository */
-        $taskRepository = $this->entityManagerService->getRepository(Task::class);
-
-        return $taskRepository->allByWork($work, !$isSupervisor)->getQuery();
+        return $this->taskFacade->queryByWork($work, !$isSupervisor);
     }
 
     private function getVersionQuery(Work $work): Query
     {
-        /** @var MediaRepository $mediaRepository */
-        $mediaRepository = $this->entityManagerService->getRepository(Media::class);
-
-        return $mediaRepository->allByWork($work)->getQuery();
+        return $this->mediaFacade->queryByWork($work);
     }
 
     private function getEventQuery(Work $work): Query
     {
-        /** @var EventRepository $eventRepository */
-        $eventRepository = $this->entityManagerService->getRepository(Event::class);
-
-        return $eventRepository->allByWork($work)->getQuery();
+        return $this->eventFacade->queryByWork($work);
     }
 
     private function getMessageQuery(Work $work, ?User $user): Query
@@ -196,10 +187,7 @@ class WorkDetailTabService implements ResetInterface
             throw new RuntimeException('User is required for message tab');
         }
 
-        /** @var ConversationMessageRepository $conversationMessageRepository */
-        $conversationMessageRepository = $this->entityManagerService->getRepository(ConversationMessage::class);
-
-        return $conversationMessageRepository->allByWorkUser($work, $user)->getQuery();
+        return $this->conversationMessageFacade->queryByWorkUser($work, $user);
     }
 
     public function reset(): void

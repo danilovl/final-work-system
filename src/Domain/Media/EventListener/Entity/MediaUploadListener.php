@@ -13,12 +13,9 @@
 namespace App\Domain\Media\EventListener\Entity;
 
 use App\Application\Exception\RuntimeException;
-use App\Infrastructure\Service\{
-    S3ClientService,
-    EntityManagerService
-};
+use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
-use App\Domain\MediaMimeType\Entity\MediaMimeType;
+use App\Domain\MediaMimeType\Facade\MediaMimeTypeFacade;
 use Doctrine\ORM\Event\{
     PrePersistEventArgs,
     PreRemoveEventArgs,
@@ -28,7 +25,7 @@ use Doctrine\ORM\Event\{
 readonly class MediaUploadListener
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
+        private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private S3ClientService $s3ClientService
     ) {}
 
@@ -71,10 +68,7 @@ readonly class MediaUploadListener
         $mimeType = $uploadMedia->getMimeType();
         $mediaSize = $uploadMedia->getSize();
 
-        /** @var MediaMimeType|null $mediaMimeType */
-        $mediaMimeType = $this->entityManagerService
-            ->getRepository(MediaMimeType::class)
-            ->findOneBy(['name' => $mimeType]);
+        $mediaMimeType = $this->mediaMimeTypeFacade->findByName($mimeType);
 
         if ($mediaMimeType === null) {
             throw new RuntimeException("MediaMimeType doesn't exist");
@@ -110,10 +104,7 @@ readonly class MediaUploadListener
         $mimeType = $uploadMedia->getMimeType();
         $mediaSize = $uploadMedia->getSize();
 
-        /** @var MediaMimeType|null $mediaMimeType */
-        $mediaMimeType = $this->entityManagerService
-            ->getRepository(MediaMimeType::class)
-            ->findOneBy(['name' => $mimeType]);
+        $mediaMimeType = $this->mediaMimeTypeFacade->findByName($mimeType);
 
         if ($mediaMimeType === null) {
             throw new RuntimeException("MediaMimeType doesn't exist");

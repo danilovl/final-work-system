@@ -14,6 +14,7 @@ namespace App\Domain\WorkStatus\Repository;
 
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
+use SortDirection;
 
 class WorkStatusQueryBuilder extends BaseQueryBuilder
 {
@@ -80,6 +81,15 @@ class WorkStatusQueryBuilder extends BaseQueryBuilder
         $this->queryBuilder
             ->groupBy('userId')
             ->addGroupBy('work_status.name');
+
+        return $this;
+    }
+
+    public function orderByName(): self
+    {
+        $this->queryBuilder
+            ->orderBy('work_status.name', SortDirection::Ascending)
+            ->addOrderBy('work_status.id', SortDirection::Ascending);
 
         return $this;
     }

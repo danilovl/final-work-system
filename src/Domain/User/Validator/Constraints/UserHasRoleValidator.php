@@ -12,16 +12,14 @@
 
 namespace App\Domain\User\Validator\Constraints;
 
-use App\Domain\User\Entity\User;
-use App\Domain\User\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Domain\User\Facade\UserFacade;
 use Stringable;
 use Symfony\Component\Validator\{Constraint, ConstraintValidator};
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UserHasRoleValidator extends ConstraintValidator
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager) {}
+    public function __construct(private readonly UserFacade $userFacade) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {
@@ -33,19 +31,14 @@ class UserHasRoleValidator extends ConstraintValidator
             return;
         }
 
-        /** @var UserRepository $repository */
-        $repository = $this->entityManager->getRepository(User::class);
-        $qb = $repository->allByUserRole($constraint->role, $constraint->enabled);
-        
-        $rootAlias = $qb->getRootAliases()[0];
-        $qb->andWhere("{$rootAlias}.id = :id")
-            ->setParameter('id', $value);
+        $isValidId = is_int($value) || is_string($value);
+        $hasRole = $isValidId && $this->userFacade->hasUserRole(
+            id: $value,
+            role: $constraint->role,
+            enabled: $constraint->enabled
+        );
 
-        $count = (int) $qb->select("count({$rootAlias}.id)")
-            ->getQuery()
-            ->getSingleScalarResult();
-
-        if ($count === 0) {
+        if (!$hasRole) {
             $valueString = is_scalar($value) || $value instanceof Stringable ? (string) $value : '';
 
             $this->context->buildViolation($constraint->message)

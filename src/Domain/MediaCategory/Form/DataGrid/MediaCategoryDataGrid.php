@@ -12,16 +12,16 @@
 
 namespace App\Domain\MediaCategory\Form\DataGrid;
 
-use App\Domain\MediaCategory\Repository\MediaCategoryRepository;
+use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
 use Doctrine\ORM\QueryBuilder;
 use App\Domain\User\Entity\User;
 
 class MediaCategoryDataGrid
 {
-    public function __construct(private readonly MediaCategoryRepository $mediaCategoryRepository) {}
+    public function __construct(private readonly MediaCategoryFacade $mediaCategoryFacade) {}
 
     public function queryBuilderFindAllByOwner(User $user): QueryBuilder
     {
-        return $this->mediaCategoryRepository->allByOwner($user);
+        return $this->mediaCategoryFacade->queryBuilderByOwner($user);
     }
 }

@@ -16,7 +16,6 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
-use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -45,10 +44,7 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $task = $event->task;
         $work = $task->getWork();
 
-        /** @var SystemEventType $systemEventType */
-        $systemEventType = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find($systemEventId);
+        $systemEventType = $this->systemEventTypeFacade->getById($systemEventId);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($recipientAuthor ? $task->getOwner() : $work->getAuthor());

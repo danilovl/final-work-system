@@ -15,7 +15,7 @@ namespace App\Domain\Conversation\Service;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
-use App\Domain\ConversationMessageStatus\Repository\ConversationMessageStatusRepository;
+use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
@@ -36,7 +36,7 @@ class ConversationStatusService implements ResetInterface
 
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
-        private readonly ConversationMessageStatusRepository $conversationMessageStatusRepository
+        private readonly ConversationMessageStatusFacade $conversationMessageStatusFacade
     ) {}
 
     public function isConversationRead(
@@ -73,13 +73,7 @@ class ConversationStatusService implements ResetInterface
         ConversationMessage $conversationMessage,
         User $user
     ): ?ConversationMessageStatus {
-        /** @var ConversationMessageStatus|null $result */
-        $result = $this->conversationMessageStatusRepository
-            ->oneByMessageUser($conversationMessage, $user)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        return $result;
+        return $this->conversationMessageStatusFacade->findByMessageUser($conversationMessage, $user);
     }
 
     public function reset(): void
@@ -104,11 +98,7 @@ class ConversationStatusService implements ResetInterface
             ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
-        /** @var array<int|string> $conversationIds */
-        $conversationIds = $this->conversationMessageStatusRepository
-            ->conversationIdsByUserType($user, $type)
-            ->getQuery()
-            ->getSingleColumnResult();
+        $conversationIds = $this->conversationMessageStatusFacade->listConversationIdsByUserType($user, $type);
 
         $unreadConversationIds = [];
         foreach ($conversationIds as $conversationId) {
@@ -130,11 +120,7 @@ class ConversationStatusService implements ResetInterface
             return $this->messageTypeIds[$userId][$conversationId];
         }
 
-        /** @var array<array{messageId: int|string, typeId: int|string}> $rows */
-        $rows = $this->conversationMessageStatusRepository
-            ->messageTypesByConversationUser($conversationId, $user)
-            ->getQuery()
-            ->getArrayResult();
+        $rows = $this->conversationMessageStatusFacade->listMessageTypesByConversationUser($conversationId, $user);
 
         $messageTypeIds = [];
         foreach ($rows as $row) {
@@ -150,11 +136,7 @@ class ConversationStatusService implements ResetInterface
         ConversationMessage $conversationMessage,
         User $user
     ): bool {
-        /** @var ConversationMessageStatus|null $conversationMessageStatus */
-        $conversationMessageStatus = $this->conversationMessageStatusRepository
-            ->oneByMessageUser($conversationMessage, $user)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $conversationMessageStatus = $this->conversationMessageStatusFacade->findByMessageUser($conversationMessage, $user);
 
         if ($conversationMessageStatus === null) {
             return true;

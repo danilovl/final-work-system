@@ -15,7 +15,10 @@ namespace App\Domain\WorkCategory\Facade;
 use App\Application\Exception\EntityNotFoundException;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Repository\WorkCategoryRepository;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\{
+    Query,
+    QueryBuilder
+};
 use App\Domain\User\Entity\User;
 
 readonly class WorkCategoryFacade
@@ -97,5 +100,10 @@ readonly class WorkCategoryFacade
     public function findByOwnerAndIds(User $user, array $ids): array
     {
         return $this->workCategoryRepository->findByOwnerAndIds($user, $ids);
+    }
+
+    public function queryBuilderByOwner(User $user): QueryBuilder
+    {
+        return $this->workCategoryRepository->allByOwner($user);
     }
 }

@@ -20,7 +20,6 @@ use App\Domain\Event\EventDispatcher\GenericEvent\{
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
-use App\Domain\SystemEventType\Entity\SystemEventType;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -42,10 +41,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
     public function onEventCreate(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
-        /** @var SystemEventType $type */
-        $type = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_CREATE->value);
+        $type = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::EVENT_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
@@ -74,10 +70,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
             return;
         }
 
-        /** @var SystemEventType $type */
-        $type = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_EDIT->value);
+        $type = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::EVENT_EDIT->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
@@ -94,10 +87,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
     public function onEventSwitchSkype(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
-        /** @var SystemEventType $type */
-        $type = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_SWITCH_SKYPE->value);
+        $type = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::EVENT_SWITCH_SKYPE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipantMust()->getUserMust());
@@ -125,10 +115,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
             $systemEvent->setWork($work);
         }
 
-        /** @var SystemEventType $type */
-        $type = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_COMMENT_CREATE->value);
+        $type = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::EVENT_COMMENT_CREATE->value);
 
         $systemEvent->setType($type);
 
@@ -159,10 +146,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
             $systemEvent->setWork($work);
         }
 
-        /** @var SystemEventType $type */
-        $type = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_COMMENT_EDIT->value);
+        $type = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::EVENT_COMMENT_EDIT->value);
 
         $systemEvent->setType($type);
 
@@ -182,10 +166,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
     public function onEventReservation(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
-        /** @var SystemEventType $type */
-        $type = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_CREATE->value);
+        $type = $this->systemEventTypeFacade->getById(SystemEventTypeConstant::EVENT_CREATE->value);
 
         $owner = $event->getParticipantMust()->getUserMust();
 

@@ -13,11 +13,11 @@
 namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
+use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
-use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Service\WorkService;
 use Override;
@@ -27,9 +27,10 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
 {
     public function __construct(
         EntityManagerService $entityManagerService,
+        SystemEventTypeFacade $systemEventTypeFacade,
         private readonly WorkService $workService
     ) {
-        parent::__construct($entityManagerService);
+        parent::__construct($entityManagerService, $systemEventTypeFacade);
     }
 
     #[Override]
@@ -49,10 +50,7 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $media = $event->media;
         $work = $media->getWorkMust();
 
-        /** @var SystemEventType $systemEventType */
-        $systemEventType = $this->entityManagerService
-            ->getRepository(SystemEventType::class)
-            ->find($systemEventTypeId);
+        $systemEventType = $this->systemEventTypeFacade->getById($systemEventTypeId);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($media->getOwner());

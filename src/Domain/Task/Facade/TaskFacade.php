@@ -121,4 +121,11 @@ readonly class TaskFacade
             ->allByWorks($works, $active)
             ->getQuery();
     }
+
+    public function queryByWork(Work $work, bool $active = false): Query
+    {
+        return $this->taskRepository
+            ->allByWork($work, $active)
+            ->getQuery();
+    }
 }

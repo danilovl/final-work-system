@@ -12,6 +12,7 @@
 
 namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
+use App\Domain\SystemEventType\Facade\SystemEventTypeFacade;
 use App\Infrastructure\Service\EntityManagerService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -29,12 +30,15 @@ class BaseSystemEventSubscriber extends TestCase
 
     protected EntityManagerService $entityManagerService;
 
+    protected SystemEventTypeFacade $systemEventTypeFacade;
+
     protected EventSubscriberInterface $subscriber;
 
     protected function setUp(): void
     {
         $this->dispatcher = new EventDispatcher;
         $this->entityManagerService = $this->createStub(EntityManagerService::class);
+        $this->systemEventTypeFacade = $this->createStub(SystemEventTypeFacade::class);
     }
 
     #[DataProvider('subscribedEvents')]

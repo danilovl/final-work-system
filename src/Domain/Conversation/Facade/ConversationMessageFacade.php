@@ -21,6 +21,7 @@ use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Entity\Work;
 use DateTimeImmutable;
 use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
@@ -106,6 +107,13 @@ readonly class ConversationMessageFacade
             ->getResult();
 
         return $result;
+    }
+
+    public function queryByWorkUser(Work $work, User $user): Query
+    {
+        return $this->conversationMessageRepository
+            ->allByWorkUser($work, $user)
+            ->getQuery();
     }
 
     public function queryMessagesByConversation(Conversation $conversation): Query

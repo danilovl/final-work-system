@@ -27,6 +27,7 @@ class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
 
         $this->subscriber = new DocumentSystemEventSubscriber(
             $this->entityManagerService,
+            $this->systemEventTypeFacade,
             $userWorkService,
         );
     }

@@ -12,16 +12,16 @@
 
 namespace App\Domain\WorkCategory\Form\DataGrid;
 
-use App\Domain\WorkCategory\Repository\WorkCategoryRepository;
+use App\Domain\WorkCategory\Facade\WorkCategoryFacade;
 use Doctrine\ORM\QueryBuilder;
 use App\Domain\User\Entity\User;
 
 class WorkCategoryDataGrid
 {
-    public function __construct(private readonly WorkCategoryRepository $workCategoryRepository) {}
+    public function __construct(private readonly WorkCategoryFacade $workCategoryFacade) {}
 
     public function queryBuilderWorkCategoriesByOwner(User $user): QueryBuilder
     {
-        return $this->workCategoryRepository->allByOwner($user);
+        return $this->workCategoryFacade->queryBuilderByOwner($user);
     }
 }

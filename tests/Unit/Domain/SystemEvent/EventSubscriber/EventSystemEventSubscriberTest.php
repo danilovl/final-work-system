@@ -22,6 +22,6 @@ class EventSystemEventSubscriberTest extends BaseSystemEventSubscriber
     {
         parent::setUp();
 
-        $this->subscriber = new EventSystemEventSubscriber($this->entityManagerService);
+        $this->subscriber = new EventSystemEventSubscriber($this->entityManagerService, $this->systemEventTypeFacade);
     }
 }

@@ -22,6 +22,6 @@ class TaskSystemEventSubscriberTest extends BaseSystemEventSubscriber
     {
         parent::setUp();
 
-        $this->subscriber = new TaskSystemEventSubscriber($this->entityManagerService);
+        $this->subscriber = new TaskSystemEventSubscriber($this->entityManagerService, $this->systemEventTypeFacade);
     }
 }

@@ -55,4 +55,11 @@ class WorkStatusRepository extends ServiceEntityRepository
             ->groupByUserIdAndName()
             ->getQueryBuilder();
     }
+
+    public function allOrderedByName(): QueryBuilder
+    {
+        return $this->createWorkStatusQueryBuilder()
+            ->orderByName()
+            ->getQueryBuilder();
+    }
 }

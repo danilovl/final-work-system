@@ -14,7 +14,7 @@ namespace App\Domain\User\Command;
 
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
-use App\Domain\User\Entity\User;
+use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\Console\Attribute\{
     Argument,
     AsCommand
@@ -29,6 +29,7 @@ class UserDeleteCommand
 
     public function __construct(
         private readonly EntityManagerService $entityManager,
+        private readonly UserFacade $userFacade,
         private readonly UserValidator $validator
     ) {}
 
@@ -48,10 +49,7 @@ class UserDeleteCommand
             });
         }
 
-        /** @var User|null $user */
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['username' => $username]);
+        $user = $this->userFacade->findByUsername($username);
 
         if ($user === null) {
             $io->success(sprintf('User with username "%s" not found', $username));

@@ -14,7 +14,7 @@ namespace App\Domain\Work\Autocompleter;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\Repository\WorkRepository;
+use App\Domain\Work\Facade\WorkFacade;
 use Danilovl\SelectAutocompleterBundle\Attribute\AsAutocompleter;
 use Danilovl\SelectAutocompleterBundle\Model\Autocompleter\AutocompleterQuery;
 use Danilovl\SelectAutocompleterBundle\Model\SelectDataFormat\Item;
@@ -34,7 +34,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
         ManagerRegistry $registry,
         AutocompleterConfigResolver $resolver,
         private readonly UserService $userService,
-        private readonly WorkRepository $workRepository
+        private readonly WorkFacade $workFacade
     ) {
         parent::__construct($registry, $resolver);
     }
@@ -114,7 +114,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
     protected function createAutocompleterQueryBuilder(AutocompleterQuery $query): QueryBuilder
     {
         $user = $this->userService->getUser();
-        $queryBuilder = $this->workRepository->workDeadlineBySupervisor($user);
+        $queryBuilder = $this->workFacade->queryBuilderDeadlineBySupervisor($user);
 
         $queryBuilder
             ->setFirstResult($this->getOffset($query))

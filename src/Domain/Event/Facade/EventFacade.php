@@ -15,6 +15,7 @@ namespace App\Domain\Event\Facade;
 use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
+use App\Domain\Work\Entity\Work;
 use Doctrine\ORM\Query;
 
 readonly class EventFacade
@@ -27,6 +28,13 @@ readonly class EventFacade
         $result = $this->eventRepository->find($id);
 
         return $result;
+    }
+
+    public function queryByWork(Work $work): Query
+    {
+        return $this->eventRepository
+            ->allByWork($work)
+            ->getQuery();
     }
 
     /**

@@ -12,15 +12,15 @@
 
 namespace App\Domain\User\Form\DataGrid;
 
-use App\Domain\User\Repository\UserRepository;
+use App\Domain\User\Facade\UserFacade;
 use Doctrine\ORM\QueryBuilder;
 
 class UserDataGrid
 {
-    public function __construct(private readonly UserRepository $userRepository) {}
+    public function __construct(private readonly UserFacade $userFacade) {}
 
     public function queryBuilderAllByRole(string $userRole): QueryBuilder
     {
-        return $this->userRepository->allByUserRole($userRole);
+        return $this->userFacade->queryBuilderAllByUserRole($userRole);
     }
 }
