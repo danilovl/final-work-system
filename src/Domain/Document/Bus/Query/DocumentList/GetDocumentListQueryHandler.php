@@ -7,16 +7,17 @@ use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };
-use App\Domain\Media\Facade\MediaFacade;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Media\Bus\Query\MediaQueryByUserFilter\{GetMediaQueryByUserFilterQuery, GetMediaQueryByUserFilterQueryResult};
 
 #[AsMessageHandler]
 readonly class GetDocumentListQueryHandler
 {
     public function __construct(
-        private MediaFacade $mediaFacade,
+        private QueryBusInterface $queryBus,
         private EntityManagerService $entityManagerService,
         private PaginatorService $paginatorService
     ) {}
@@ -33,7 +34,10 @@ readonly class GetDocumentListQueryHandler
             criteria: $query->criteria
         );
 
-        $documents = $this->mediaFacade->queryByUserFilter($mediaData);
+        $getMediaQueryByUserFilterQuery = GetMediaQueryByUserFilterQuery::create($mediaData);
+        /** @var GetMediaQueryByUserFilterQueryResult $getMediaQueryByUserFilterQueryResult */
+        $getMediaQueryByUserFilterQueryResult = $this->queryBus->handle($getMediaQueryByUserFilterQuery);
+        $documents = $getMediaQueryByUserFilterQueryResult->query;
         $pagination = $this->paginatorService->createPaginationRequest(
             $query->request,
             $documents,

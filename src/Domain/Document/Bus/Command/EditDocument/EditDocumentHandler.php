@@ -12,15 +12,23 @@
 
 namespace App\Domain\Document\Bus\Command\EditDocument;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\Media\Factory\MediaFactory;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\Media\Bus\Command\SaveMedia\SaveMediaCommand;
 
 readonly class EditDocumentHandler implements CommandHandlerInterface
 {
-    public function __construct(private MediaFactory $mediaFactory) {}
+    public function __construct(private CommandBusInterface $commandBus) {}
 
     public function __invoke(EditDocumentCommand $command): void
     {
-        $this->mediaFactory->flushFromModel($command->mediaModel, $command->media);
+        $saveMediaCommand = SaveMediaCommand::create(
+            mediaModel: $command->mediaModel,
+            media: $command->media
+        );
+
+        $this->commandBus->dispatchResult($saveMediaCommand);
     }
 }

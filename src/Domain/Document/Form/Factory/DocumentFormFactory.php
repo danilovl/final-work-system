@@ -22,12 +22,9 @@ use App\Domain\Document\Form\{
     DocumentSearchForm
 };
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Model\MediaModel;
-use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormInterface,
@@ -35,6 +32,12 @@ use Symfony\Component\Form\{
 };
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\ActiveSupervisors\{GetActiveSupervisorsQuery, GetActiveSupervisorsQueryResult};
+use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeList\{GetMediaMimeTypeListQuery, GetMediaMimeTypeListQueryResult};
+use App\Domain\MediaCategory\Bus\Query\MediaCategoryListByOwner\{GetMediaCategoryListByOwnerQuery, GetMediaCategoryListByOwnerQueryResult};
+use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeListByOwner\{GetMediaMimeTypeListByOwnerQuery, GetMediaMimeTypeListByOwnerQueryResult};
+use App\Domain\MediaCategory\Bus\Query\MediaCategoryListByOwners\{GetMediaCategoryListByOwnersQuery, GetMediaCategoryListByOwnersQueryResult};
 
 class DocumentFormFactory
 {
@@ -44,9 +47,7 @@ class DocumentFormFactory
         private readonly FormFactoryInterface $formFactory,
         private readonly RouterInterface $router,
         private readonly HashidsServiceInterface $hashIds,
-        private readonly UserFacade $userService,
-        private readonly MediaMimeTypeFacade $mediaMimeTypeFacade,
-        private readonly MediaCategoryFacade $mediaCategoryFacade
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     public function setUser(User $user): self
@@ -63,7 +64,10 @@ class DocumentFormFactory
     ): FormInterface {
         $user = $this->user;
         $formClass = DocumentForm::class;
-        $mimeTypes = $this->mediaMimeTypeFacade->list(true);
+        $getMediaMimeTypeListQuery = GetMediaMimeTypeListQuery::create(true);
+        /** @var GetMediaMimeTypeListQueryResult $getMediaMimeTypeListQueryResult */
+        $getMediaMimeTypeListQueryResult = $this->queryBus->handle($getMediaMimeTypeListQuery);
+        $mimeTypes = $getMediaMimeTypeListQueryResult->mediaMimeTypes;
 
         switch ($type) {
             case ControllerMethodConstant::CREATE:
@@ -117,14 +121,24 @@ class DocumentFormFactory
 
                 break;
             case ControllerMethodConstant::LIST:
-                $userActiveSupervisors = $this->userService
-                    ->listUserActiveSupervisors($user);
+                $getActiveSupervisorsQuery = GetActiveSupervisorsQuery::create($user);
+                /** @var GetActiveSupervisorsQueryResult $getActiveSupervisorsQueryResult */
+                $getActiveSupervisorsQueryResult = $this->queryBus->handle($getActiveSupervisorsQuery);
+                $userActiveSupervisors = $getActiveSupervisorsQueryResult->supervisors;
 
-                $categories = $this->mediaCategoryFacade
-                    ->listByOwners($userActiveSupervisors);
+                $getMediaCategoryListByOwnersQuery = GetMediaCategoryListByOwnersQuery::create($userActiveSupervisors);
+                /** @var GetMediaCategoryListByOwnersQueryResult $getMediaCategoryListByOwnersQueryResult */
+                $getMediaCategoryListByOwnersQueryResult = $this->queryBus->handle($getMediaCategoryListByOwnersQuery);
+                $categories = $getMediaCategoryListByOwnersQueryResult->mediaCategories;
 
-                $mimeType = $this->mediaMimeTypeFacade
-                    ->listByOwner($userActiveSupervisors, MediaTypeConstant::INFORMATION_MATERIAL->value);
+                $getSupervisorsMimeTypeQuery = GetMediaMimeTypeListByOwnerQuery::create(
+                    user: $userActiveSupervisors,
+                    mediaType: MediaTypeConstant::INFORMATION_MATERIAL->value,
+                    onlyKey: false
+                );
+                /** @var GetMediaMimeTypeListByOwnerQueryResult $getSupervisorsMimeTypeQueryResult */
+                $getSupervisorsMimeTypeQueryResult = $this->queryBus->handle($getSupervisorsMimeTypeQuery);
+                $mimeType = $getSupervisorsMimeTypeQueryResult->mediaMimeTypes;
 
                 $formClass = DocumentSearchForm::class;
                 $parameters = [
@@ -134,11 +148,19 @@ class DocumentFormFactory
 
                 break;
             case ControllerMethodConstant::LIST_OWNER:
-                $categories = $this->mediaCategoryFacade
-                    ->listByOwner($user);
+                $getMediaCategoryListByOwnerQuery = GetMediaCategoryListByOwnerQuery::create($user);
+                /** @var GetMediaCategoryListByOwnerQueryResult $getMediaCategoryListByOwnerQueryResult */
+                $getMediaCategoryListByOwnerQueryResult = $this->queryBus->handle($getMediaCategoryListByOwnerQuery);
+                $categories = $getMediaCategoryListByOwnerQueryResult->mediaCategories;
 
-                $mimeType = $this->mediaMimeTypeFacade
-                    ->listByOwner($user, MediaTypeConstant::INFORMATION_MATERIAL->value);
+                $getMediaMimeTypeListByOwnerQuery = GetMediaMimeTypeListByOwnerQuery::create(
+                    user: $user,
+                    mediaType: MediaTypeConstant::INFORMATION_MATERIAL->value,
+                    onlyKey: false
+                );
+                /** @var GetMediaMimeTypeListByOwnerQueryResult $getMediaMimeTypeListByOwnerQueryResult */
+                $getMediaMimeTypeListByOwnerQueryResult = $this->queryBus->handle($getMediaMimeTypeListByOwnerQuery);
+                $mimeType = $getMediaMimeTypeListByOwnerQueryResult->mediaMimeTypes;
 
                 $formClass = DocumentSearchForm::class;
                 $parameters = [

@@ -15,7 +15,6 @@ use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
 use App\Domain\Document\Bus\Query\DocumentList\{
     GetDocumentListQuery,
     GetDocumentListQueryResult
@@ -26,12 +25,12 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Domain\Work\Bus\Query\ActiveSupervisors\{GetActiveSupervisorsQuery, GetActiveSupervisorsQueryResult};
 
 readonly class DocumentListHandle
 {
     public function __construct(
         private UserService $userService,
-        private UserFacade $userFacade,
         private TwigRenderService $twigRenderService,
         private DocumentFormFactory $documentFormFactory,
         private QueryBusInterface $queryBus
@@ -51,7 +50,10 @@ readonly class DocumentListHandle
             $openSearchTab = true;
         }
 
-        $users = $this->userFacade->listUserActiveSupervisors($user);
+        $getActiveSupervisorsQuery = GetActiveSupervisorsQuery::create($user);
+        /** @var GetActiveSupervisorsQueryResult $getActiveSupervisorsQueryResult */
+        $getActiveSupervisorsQueryResult = $this->queryBus->handle($getActiveSupervisorsQuery);
+        $users = $getActiveSupervisorsQueryResult->supervisors;
         /** @var User[] $usersArray */
         $usersArray = $users->toArray();
         /** @var DocumentSearchModel|null $documentSearchModel */

@@ -12,20 +12,30 @@
 
 namespace App\Domain\Document\Bus\Command\CreateDocument;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
 use App\Domain\Document\EventDispatcher\DocumentEventDispatcher;
-use App\Domain\Media\Factory\MediaFactory;
+use App\Domain\Media\Bus\Command\SaveMedia\SaveMediaCommand;
+use App\Domain\Media\Entity\Media;
 
 readonly class CreateDocumentHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private MediaFactory $mediaFactory,
+        private CommandBusInterface $commandBus,
         private DocumentEventDispatcher $documentEventDispatcher
     ) {}
 
     public function __invoke(CreateDocumentCommand $command): void
     {
-        $media = $this->mediaFactory->flushFromModel($command->mediaModel);
+        $saveMediaCommand = SaveMediaCommand::create(
+            mediaModel: $command->mediaModel,
+            media: null
+        );
+
+        /** @var Media $media */
+        $media = $this->commandBus->dispatchResult($saveMediaCommand);
         $this->documentEventDispatcher->onDocumentCreate($media);
     }
 }
