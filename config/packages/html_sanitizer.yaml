@@ -1,0 +1,14 @@
+framework:
+  html_sanitizer:
+    sanitizers:
+      # User HTML from TinyMCE (messages, descriptions, comments, articles) rendered with |raw.
+      app.rich_text_sanitizer:
+        allow_safe_elements: true
+        allowed_link_schemes: ['http', 'https', 'mailto']
+        # links rewritten by the away_to filter are relative: /cs/away/to?url=…
+        allow_relative_links: true
+        allowed_media_schemes: ['http', 'https']
+        allow_relative_medias: true
+        allow_attributes:
+          title: '*'
+        max_input_length: 200000
