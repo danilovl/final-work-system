@@ -18,6 +18,7 @@ use App\Application\Traits\Entity\{
     SimpleInformationTrait
 };
 use App\Domain\Work\Entity\Work;
+use App\Domain\WorkType\Repository\WorkTypeRepository;
 use Doctrine\Common\Collections\{
     ArrayCollection,
     Collection
@@ -27,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Table(name: 'work_type')]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: WorkTypeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
