@@ -222,7 +222,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
      * @var Collection<EventAddress>
      */
     #[ORM\OneToMany(targetEntity: EventAddress::class, mappedBy: 'owner', cascade: ['persist'])]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $eventAddressOwner;
 
     /**
