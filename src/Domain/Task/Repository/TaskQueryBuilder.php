@@ -85,14 +85,18 @@ class TaskQueryBuilder extends BaseQueryBuilder
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('task.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('task.createdAt', $order)
+            ->addOrderBy('task.id', $order);
 
         return $this;
     }
 
     public function orderByDeadline(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('task.deadline', $order);
+        $this->queryBuilder
+            ->orderBy('task.deadline', $order)
+            ->addOrderBy('task.id', $order);
 
         return $this;
     }
