@@ -13,6 +13,11 @@
 namespace App\Tests\Unit\Infrastructure\Event\EventListener;
 
 use App\Infrastructure\Event\EventListener\KernelListener;
+use Doctrine\Common\Collections\ArrayCollection;
+use Generator;
+use LogicException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Throwable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +29,7 @@ use Symfony\Component\HttpKernel\{
 use App\Tests\Mock\Unit\Infrastructure\Event\EventListener\{
     MockSourceEntity,
     MockControllerMethod,
+    MockMultiRelationEntity,
     MockTargetEntity,
     MockTargetEmptyEntity
 };
@@ -54,11 +60,11 @@ class KernelListenerTest extends TestCase
     public function testHandlesNonArrayController(): void
     {
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            static function (): void {},
-            [],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: static function (): void {},
+            arguments: [],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->expectNotToPerformAssertions();
@@ -71,11 +77,11 @@ class KernelListenerTest extends TestCase
         $controller = [new MockControllerMethod, 'testEmptyMethod'];
 
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            $controller,
-            [],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->expectNotToPerformAssertions();
@@ -88,11 +94,11 @@ class KernelListenerTest extends TestCase
         $controller = [new MockControllerMethod, 'testMethod'];
 
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            $controller,
-            [],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->expectNotToPerformAssertions();
@@ -107,11 +113,11 @@ class KernelListenerTest extends TestCase
         $targetEntity = new MockTargetEntity(1);
 
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            $controller,
-            [$sourceEntity, $targetEntity],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [$sourceEntity, $targetEntity],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->expectException(BadRequestException::class);
@@ -133,11 +139,11 @@ class KernelListenerTest extends TestCase
         $sourceEntity = new MockSourceEntity(1, new MockTargetEntity(1));
 
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            $controller,
-            [$sourceEntity, $targetEntity],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [$sourceEntity, $targetEntity],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->expectException(BadRequestException::class);
@@ -159,11 +165,11 @@ class KernelListenerTest extends TestCase
         $sourceEntity = new MockSourceEntity(1, targetEmptyEntity: new MockTargetEmptyEntity);
 
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            $controller,
-            [$sourceEntity, $targetEntity],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [$sourceEntity, $targetEntity],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->expectException(BadRequestException::class);
@@ -179,14 +185,153 @@ class KernelListenerTest extends TestCase
         $sourceEntity = new MockSourceEntity(1, new MockTargetEntity(1));
 
         $event = new ControllerArgumentsEvent(
-            $this->kernel,
-            $controller,
-            [$sourceEntity, $targetEntity],
-            $this->request,
-            HttpKernelInterface::MAIN_REQUEST
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [$sourceEntity, $targetEntity],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
         );
 
         $this->listener->onKernelController($event);
         $this->expectNotToPerformAssertions();
+    }
+
+    #[DataProvider('providePassesValidRelationCases')]
+    public function testPassesValidRelation(callable $controller, object $source, object $target): void
+    {
+        $event = $this->createEvent(
+            controller: $controller,
+            source: $source,
+            target: $target
+        );
+
+        $this->listener->onKernelController($event);
+        $this->expectNotToPerformAssertions();
+    }
+
+    /**
+     * @param class-string<Throwable> $exception
+     */
+    #[DataProvider('provideThrowsOnInvalidRelationCases')]
+    public function testThrowsOnInvalidRelation(
+        callable $controller,
+        object $source,
+        object $target,
+        string $exception,
+        string $message
+    ): void {
+        $event = $this->createEvent(
+            controller: $controller,
+            source: $source,
+            target: $target
+        );
+
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
+
+        $this->listener->onKernelController($event);
+    }
+
+    public static function providePassesValidRelationCases(): Generator
+    {
+        yield 'property from attribute' => [
+            'controller' => [new MockControllerMethod, 'testMethodSecondProperty'],
+            'source' => new MockMultiRelationEntity(
+                first: new MockTargetEntity(2),
+                second: new MockTargetEntity(1)
+            ),
+            'target' => new MockTargetEntity(1)
+        ];
+
+        yield 'target in collection' => [
+            'controller' => [new MockControllerMethod, 'testMethodCollection'],
+            'source' => new MockMultiRelationEntity(
+                targets: new ArrayCollection([new MockTargetEntity(1), new MockTargetEntity(2)])
+            ),
+            'target' => new MockTargetEntity(2)
+        ];
+    }
+
+    public static function provideThrowsOnInvalidRelationCases(): Generator
+    {
+        yield 'several properties of target type' => [
+            'controller' => [new MockControllerMethod, 'testMethodSeveralProperties'],
+            'source' => new MockMultiRelationEntity,
+            'target' => new MockTargetEntity(1),
+            'exception' => LogicException::class,
+            'message' => 'has several properties of type'
+        ];
+
+        yield 'property from attribute does not match' => [
+            'controller' => [new MockControllerMethod, 'testMethodSecondProperty'],
+            'source' => new MockMultiRelationEntity(
+                first: new MockTargetEntity(1),
+                second: new MockTargetEntity(2)
+            ),
+            'target' => new MockTargetEntity(1),
+            'exception' => BadRequestException::class,
+            'message' => 'IDs do not match (2 !== 1)'
+        ];
+
+        yield 'property from attribute is null' => [
+            'controller' => [new MockControllerMethod, 'testMethodSecondProperty'],
+            'source' => new MockMultiRelationEntity(first: new MockTargetEntity(1)),
+            'target' => new MockTargetEntity(1),
+            'exception' => BadRequestException::class,
+            'message' => 'related entity is null'
+        ];
+
+        yield 'target not in collection' => [
+            'controller' => [new MockControllerMethod, 'testMethodCollection'],
+            'source' => new MockMultiRelationEntity(
+                targets: new ArrayCollection([new MockTargetEntity(1)])
+            ),
+            'target' => new MockTargetEntity(2),
+            'exception' => BadRequestException::class,
+            'message' => 'related entity is null'
+        ];
+
+        yield 'empty collection' => [
+            'controller' => [new MockControllerMethod, 'testMethodCollection'],
+            'source' => new MockMultiRelationEntity(targets: new ArrayCollection),
+            'target' => new MockTargetEntity(1),
+            'exception' => BadRequestException::class,
+            'message' => 'related entity is null'
+        ];
+
+        yield 'uninitialized property' => [
+            'controller' => [new MockControllerMethod, 'testMethodUninitialized'],
+            'source' => new MockMultiRelationEntity,
+            'target' => new MockTargetEntity(1),
+            'exception' => BadRequestException::class,
+            'message' => 'related entity is null'
+        ];
+
+        yield 'unknown property' => [
+            'controller' => [new MockControllerMethod, 'testMethodUnknownProperty'],
+            'source' => new MockMultiRelationEntity,
+            'target' => new MockTargetEntity(1),
+            'exception' => LogicException::class,
+            'message' => 'Property "unknown" not found'
+        ];
+
+        yield 'no property of target type' => [
+            'controller' => [new MockControllerMethod, 'testMethodNoPropertyOfType'],
+            'source' => new MockTargetEmptyEntity,
+            'target' => new MockTargetEntity(1),
+            'exception' => LogicException::class,
+            'message' => 'has no property of type'
+        ];
+    }
+
+    private function createEvent(callable $controller, object $source, object $target): ControllerArgumentsEvent
+    {
+        return new ControllerArgumentsEvent(
+            kernel: $this->kernel,
+            controller: $controller,
+            arguments: [$source, $target],
+            request: $this->request,
+            requestType: HttpKernelInterface::MAIN_REQUEST
+        );
     }
 }

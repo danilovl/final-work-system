@@ -31,7 +31,7 @@ readonly class ArticleController
     ) {}
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_article', 'id_category'])]
-    #[EntityRelationValidatorAttribute(sourceEntity: Article::class, targetEntity: ArticleCategory::class)]
+    #[EntityRelationValidatorAttribute(sourceEntity: Article::class, targetEntity: ArticleCategory::class, property: 'categories')]
     public function detail(
         #[MapEntity(mapping: ['id_article' => 'id'])] Article $article,
         #[MapEntity(mapping: ['id_category' => 'id'])] ArticleCategory $articleCategory

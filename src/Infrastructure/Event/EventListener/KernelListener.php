@@ -13,8 +13,12 @@
 namespace App\Infrastructure\Event\EventListener;
 
 use App\Application\Attribute\EntityRelationValidatorAttribute;
+use LogicException;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionNamedType;
+use ReflectionProperty;
+use ReflectionUnionType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
@@ -64,20 +68,14 @@ readonly class KernelListener implements EventSubscriberInterface
             return;
         }
 
-        $sourceReflection = new ReflectionClass($sourceEntity);
-        $sourceProperties = $sourceReflection->getProperties();
+        $relationProperty = $this->findRelationProperty($sourceEntity, $targetEntityClass, $entityRelationValidator->property);
 
-        $relatedEntity = null;
-
-        foreach ($sourceProperties as $property) {
-            $propertyValue = $property->getValue($sourceEntity);
-
-            if (is_object($propertyValue) && is_a($propertyValue, $targetEntityClass)) {
-                $relatedEntity = $propertyValue;
-
-                break;
-            }
+        $relatedValue = $relationProperty->isInitialized($sourceEntity) ? $relationProperty->getValue($sourceEntity) : null;
+        if (is_iterable($relatedValue)) {
+            $relatedValue = $this->findInCollection($relatedValue, $targetEntity);
         }
+
+        $relatedEntity = is_object($relatedValue) && is_a($relatedValue, $targetEntityClass) ? $relatedValue : null;
 
         if ($relatedEntity === null) {
             $message = sprintf(
@@ -107,6 +105,85 @@ readonly class KernelListener implements EventSubscriberInterface
 
             throw new BadRequestException($message);
         }
+    }
+
+    private function findRelationProperty(object $sourceEntity, string $targetEntityClass, ?string $propertyName): ReflectionProperty
+    {
+        $sourceReflection = new ReflectionClass($sourceEntity);
+
+        if ($propertyName !== null) {
+            if (!$sourceReflection->hasProperty($propertyName)) {
+                $message = sprintf('Property "%s" not found in "%s".', $propertyName, $sourceEntity::class);
+
+                throw new LogicException($message);
+            }
+
+            return $sourceReflection->getProperty($propertyName);
+        }
+
+        $properties = $sourceReflection->getProperties();
+        $filteredProperties = array_filter(
+            $properties,
+            fn (ReflectionProperty $property): bool => $this->acceptsClass($property, $targetEntityClass)
+        );
+        $candidates = array_values($filteredProperties);
+
+        if (count($candidates) === 0) {
+            $message = sprintf('Entity "%s" has no property of type "%s".', $sourceEntity::class, $targetEntityClass);
+
+            throw new LogicException($message);
+        }
+
+        if (count($candidates) > 1) {
+            $names = array_map(static fn (ReflectionProperty $property): string => $property->getName(), $candidates);
+            $message = sprintf(
+                'Entity "%s" has several properties of type "%s" (%s), set "property" in %s.',
+                $sourceEntity::class,
+                $targetEntityClass,
+                implode(', ', $names),
+                EntityRelationValidatorAttribute::class
+            );
+
+            throw new LogicException($message);
+        }
+
+        return $candidates[0];
+    }
+
+    /**
+     * @param iterable<mixed> $collection
+     */
+    private function findInCollection(iterable $collection, object $targetEntity): ?object
+    {
+        if (!method_exists($targetEntity, 'getId')) {
+            return null;
+        }
+
+        $items = is_array($collection) ? $collection : iterator_to_array($collection, false);
+
+        /** @var object|null $item */
+        $item = array_find(
+            $items,
+            static fn (mixed $item): bool => is_object($item) &&
+                is_a($item, $targetEntity::class) &&
+                method_exists($item, 'getId') &&
+                $item->getId() === $targetEntity->getId()
+        );
+
+        return $item;
+    }
+
+    private function acceptsClass(ReflectionProperty $property, string $class): bool
+    {
+        $type = $property->getType();
+        $types = $type instanceof ReflectionUnionType ? $type->getTypes() : [$type];
+
+        return array_any(
+            $types,
+            static fn (mixed $namedType): bool => $namedType instanceof ReflectionNamedType &&
+                !$namedType->isBuiltin() &&
+                is_a($class, $namedType->getName(), true)
+        );
     }
 
     public static function getSubscribedEvents(): array

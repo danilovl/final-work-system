@@ -17,8 +17,12 @@ use Attribute;
 #[Attribute(Attribute::TARGET_METHOD)]
 readonly class EntityRelationValidatorAttribute
 {
+    /**
+     * @param string|null $property
+     */
     public function __construct(
         public string $sourceEntity,
-        public string $targetEntity
+        public string $targetEntity,
+        public ?string $property = null
     ) {}
 }
