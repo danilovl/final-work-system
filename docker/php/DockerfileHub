@@ -27,7 +27,7 @@ RUN apt-get update \
      libonig-dev \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && pecl install redis \
-  && pecl install -f xdebug-3.5.0 \
+  && pecl install -f pcov \
   && pecl install -f opentelemetry \
   && pecl install -f protobuf
 
@@ -52,7 +52,7 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install tidy \
     && docker-php-ext-install xsl \
     && docker-php-source delete \
-    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable pcov \
     && docker-php-ext-enable opentelemetry \
     && docker-php-ext-enable protobuf \
     && docker-php-ext-enable redis
