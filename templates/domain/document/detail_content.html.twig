@@ -3,9 +3,9 @@
     <div id="document-content-info-{{ document.id | hashids_encode }}"></div>
     <script>
         {
-            let archiveUrl = '{{ path('document_download', { 'id': document.id | hashids_encode }) }}';
-            let idContent = '#document-content-{{ document.id | hashids_encode }}';
-            let idContentInfo = 'document-content-info-{{ document.id | hashids_encode }}';
+            let archiveUrl = '{{ path('document_download', { 'id': document.id | hashids_encode })|e('js') }}';
+            let idContent = '#document-content-{{ document.id | hashids_encode|e('js') }}';
+            let idContentInfo = 'document-content-info-{{ document.id | hashids_encode|e('js') }}';
 
             showArchiveContent(archiveUrl, idContent, idContentInfo);
         }
