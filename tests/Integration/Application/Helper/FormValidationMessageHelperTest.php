@@ -20,7 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\{
     DateType,
     TextType
 };
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints\{
     Date,
@@ -41,20 +40,30 @@ class FormValidationMessageHelperTest extends KernelTestCase
     public function testGetErrorMessages(array $submitData, array $expectedErrors): void
     {
         $form = $this->formFactory
-            ->createBuilder(FormType::class, null, [
-                'csrf_protection' => false
-            ])
-            ->add('text', TextType::class, [
-                'constraints' => [
-                    new NotBlank
+            ->createBuilder(
+                options: [
+                    'csrf_protection' => false
                 ]
-            ])
-            ->add('date', DateType::class, [
-                'constraints' => [
-                    new NotBlank,
-                    new Date
+            )
+            ->add(
+                child: 'text',
+                type: TextType::class,
+                options: [
+                    'constraints' => [
+                        new NotBlank
+                    ]
                 ]
-            ])
+            )
+            ->add(
+                child: 'date',
+                type: DateType::class,
+                options: [
+                    'constraints' => [
+                        new NotBlank,
+                        new Date
+                    ]
+                ]
+            )
             ->getForm();
 
         $form->submit($submitData);
