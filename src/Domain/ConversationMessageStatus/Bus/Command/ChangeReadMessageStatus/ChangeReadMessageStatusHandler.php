@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessageStatus\Bus\Command\ChangeReadMessageStatus;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;

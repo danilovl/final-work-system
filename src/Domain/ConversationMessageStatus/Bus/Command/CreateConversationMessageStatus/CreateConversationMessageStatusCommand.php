@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessageStatus\Bus\Command\CreateConversationMessageStatus;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;

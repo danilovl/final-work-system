@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessageStatus\Bus\Command\UpdateAllToStatus;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 
 readonly class UpdateAllToStatusHandler implements CommandHandlerInterface
