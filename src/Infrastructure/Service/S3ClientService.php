@@ -45,7 +45,7 @@ class S3ClientService
                 'Key' => $key
             ]);
 
-            $this->saveToCache($result, $bucket, $key);
+            $this->saveToCache(result: $result, bucket: $bucket, key: $key);
 
             return $result;
         } catch (S3Exception) {
