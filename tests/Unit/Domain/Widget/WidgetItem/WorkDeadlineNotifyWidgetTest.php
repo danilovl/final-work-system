@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;

@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Domain\Widget\Service;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use App\Domain\Widget\Interfaces\WidgetInterface;
 use App\Domain\Widget\Service\WidgetManagerService;
 use PHPUnit\Framework\MockObject\MockObject;

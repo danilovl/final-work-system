@@ -12,10 +12,7 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Application\Interfaces\Bus\{
-    QueryBusInterface,
-    QueryInterface
-};
+use App\Infrastructure\Interfaces\Bus\{QueryBusInterface, QueryInterface};
 use App\Domain\ConversationMessage\Bus\Query\TotalUnreadMessagesByUser\{
     GetTotalUnreadMessagesByUserQuery,
     GetTotalUnreadMessagesByUserQueryResult
