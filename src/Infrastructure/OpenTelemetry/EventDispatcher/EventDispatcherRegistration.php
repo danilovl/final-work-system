@@ -21,7 +21,7 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
+use OpenTelemetry\SemConv\Attributes\CodeAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
@@ -48,8 +48,7 @@ class EventDispatcherRegistration implements OpenTelemetryRegistrationInterface
             $builder = $instrumentation->tracer()
                 ->spanBuilder(sprintf('EVENT DISPATCH %s', $event::class))
                 ->setSpanKind(SpanKind::KIND_INTERNAL)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
                 ->setAttribute('type', 'event');
 
             $span = $builder->startSpan();
@@ -75,9 +74,7 @@ class EventDispatcherRegistration implements OpenTelemetryRegistrationInterface
             $span = Span::fromContext($scope->context());
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
