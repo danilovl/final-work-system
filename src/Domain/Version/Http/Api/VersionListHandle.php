@@ -13,7 +13,7 @@
 namespace App\Domain\Version\Http\Api;
 
 use App\Domain\Work\Service\WorkDetailTabService;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
+use App\Domain\Media\Factory\MediaDTOFactory;
 use App\Application\Constant\TabTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
@@ -25,7 +25,7 @@ readonly class VersionListHandle
 {
     public function __construct(
         private WorkDetailTabService $workDetailTabService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private MediaDTOFactory $mediaDTOFactory
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -34,7 +34,7 @@ readonly class VersionListHandle
 
         $versions = [];
         foreach ($paginationVersion as $version) {
-            $versions[] = $this->objectToArrayTransformService->transform('api_key_field', $version);
+            $versions[] = $this->mediaDTOFactory->create($version);
         }
 
         return new JsonResponse([
