@@ -13,7 +13,7 @@
 namespace App\Domain\EventScheduleTemplate\Form;
 
 use App\Domain\EventAddress\Entity\EventAddress;
-use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
+use App\Domain\EventScheduleTemplate\Model\EventScheduleTemplateModel;
 use App\Domain\EventScheduleTemplate\Validation\Constraint\EventScheduleTemplateTime;
 use App\Domain\EventType\Entity\EventType;
 use App\Infrastructure\Web\Form\Type\WeekDaysType;
@@ -84,7 +84,7 @@ class EventScheduleTemplateForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => EventScheduleTemplate::class,
+                'data_class' => EventScheduleTemplateModel::class,
                 'constraints' => [
                     new EventScheduleTemplateTime
                 ]
