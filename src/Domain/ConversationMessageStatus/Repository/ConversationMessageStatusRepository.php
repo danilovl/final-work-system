@@ -58,18 +58,6 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->getQueryBuilder();
     }
 
-    public function oneByConversationUser(
-        Conversation $conversation,
-        User $user
-    ): QueryBuilder {
-        return $this->createConversationMessageStatusQueryBuilder()
-            ->leftJoinMessage()
-            ->whereByUser($user)
-            ->whereByConversation($conversation)
-            ->orderByMessageCreatedAt(SortDirection::Descending)
-            ->getQueryBuilder();
-    }
-
     public function oneByMessageUser(
         ConversationMessage $conversationMessage,
         User $user

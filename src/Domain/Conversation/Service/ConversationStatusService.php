@@ -59,32 +59,6 @@ readonly class ConversationStatusService
         return empty($conversationStatus);
     }
 
-    public function changeConversationStatus(
-        Conversation $conversation,
-        User $user,
-        int $status
-    ): void {
-        /** @var ConversationMessageStatus|null $conversationStatus */
-        $conversationStatus = $this->conversationMessageStatusRepository
-            ->oneByConversationUser($conversation, $user)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        if ($conversationStatus === null) {
-            return;
-        }
-
-        /** @var ConversationMessageStatusType $conversationMessageStatusType */
-        $conversationMessageStatusType = $this->entityManagerService->getReference(
-            ConversationMessageStatusType::class,
-            $status
-        );
-
-        $conversationStatus->setType($conversationMessageStatusType);
-
-        $this->entityManagerService->persistAndFlush($conversationStatus);
-    }
-
     public function isConversationMessageRead(
         ConversationMessage $conversationMessage,
         User $user,
@@ -117,38 +91,6 @@ readonly class ConversationStatusService
         }
 
         return true;
-    }
-
-    public function changeConversationMessageStatus(
-        ConversationMessage $conversationMessage,
-        User $user,
-        int $status
-    ): void {
-        /** @var ConversationMessageStatus|null $conversationMessageStatus */
-        $conversationMessageStatus = $this->conversationMessageStatusRepository
-            ->oneByMessageUser($conversationMessage, $user)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        if ($conversationMessageStatus === null) {
-            return;
-        }
-
-        /** @var ConversationMessageStatusType $conversationMessageStatusType */
-        $conversationMessageStatusType = $this->entityManagerService->getReference(
-            ConversationMessageStatusType::class,
-            $status
-        );
-
-        $conversationMessageStatus->setType($conversationMessageStatusType);
-        $this->entityManagerService->persistAndFlush($conversationMessageStatus);
-    }
-
-    public function setReadConversationMessage(
-        ConversationMessage $conversationMessage,
-        User $user
-    ): void {
-        $this->changeConversationMessageStatus($conversationMessage, $user, ConversationMessageStatusTypeConstant::READ->value);
     }
 
     public function getConversationMessageStatus(
