@@ -30,7 +30,7 @@ conversation_work_create:
     id_user_two: '%hashid%'
   defaults:
     _controller: App\Domain\Conversation\Controller\ConversationController::createWorkConversation
-  methods: [GET, POST]
+  methods: [POST]
 
 conversation_message_change_read_status_ajax:
   path: /message/{id}/change/read/status/ajax
