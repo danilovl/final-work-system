@@ -180,7 +180,7 @@
                          role="tabpanel"
                          aria-labelledby="heading-task-description-{{ task.id | hashids_encode }}">
                         <div class="panel-body text-muted well well-sm no-shadow">
-                            {{ task.description | away_to | raw }}
+                            {{ task.description | sanitize_html('app.rich_text_sanitizer') | away_to | raw }}
                         </div>
                     </div>
                 </td>
