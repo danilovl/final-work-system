@@ -36,6 +36,8 @@ import studentRead from '@playwright-test/test/data/student-read.spec'
 
 import pageCoverage from '@playwright-test/test/coverage/page-coverage.spec'
 
+import liveUpdate from '@playwright-test/test/live/live-update.spec'
+
 test.describe(checkCommonUrl)
 
 test.describe(editProfile)
@@ -60,6 +62,7 @@ test.describe(editRead)
 test.describe(listIntegrity)
 test.describe(studentRead)
 test.describe(pageCoverage)
+test.describe(liveUpdate)
 
 test.describe(deleteEventCalendar)
 test.describe(deleteEventAddress)
