@@ -4,6 +4,7 @@ includes:
 
 rules:
     - App\Tests\PHPStan\Rule\LayerDependencyRule
+    - App\Tests\PHPStan\Rule\DomainDependencyRule
 
 parameters:
     symfony:
