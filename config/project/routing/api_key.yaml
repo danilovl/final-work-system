@@ -6,6 +6,18 @@ api_key_work:
   resource: api/key_work.yaml
   prefix: /api/key/works
 
+api_key_work_type:
+  resource: api/key_work_type.yaml
+  prefix: /api/key/work-types
+
+api_key_work_status:
+  resource: api/key_work_status.yaml
+  prefix: /api/key/work-statuses
+
+api_key_work_category:
+  resource: api/key_work_category.yaml
+  prefix: /api/key/work-categories
+
 api_key_endpoint:
   resource: api/key_endpoint.yaml
   prefix: /api/key/endpoint
