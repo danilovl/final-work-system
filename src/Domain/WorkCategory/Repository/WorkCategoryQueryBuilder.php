@@ -14,7 +14,7 @@ namespace App\Domain\WorkCategory\Repository;
 
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class WorkCategoryQueryBuilder extends BaseQueryBuilder
 {
@@ -41,7 +41,7 @@ class WorkCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByName(string $order = Order::Ascending->value): self
+    public function orderByName(SortDirection $order = SortDirection::Ascending): self
     {
         $this->queryBuilder->orderBy('work_category.name', $order);
 

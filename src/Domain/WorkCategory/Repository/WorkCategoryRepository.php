@@ -15,7 +15,7 @@ namespace App\Domain\WorkCategory\Repository;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -37,7 +37,7 @@ class WorkCategoryRepository extends ServiceEntityRepository
             ->selectWorks()
             ->leftJoinWorks()
             ->byOwner($user)
-            ->orderByName(Order::Ascending->value)
+            ->orderByName(SortDirection::Ascending)
             ->getQueryBuilder();
     }
 
