@@ -32,7 +32,7 @@ class EventAddressVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $event = $this->createMock(Event::class);
+        $event = $this->createStub(Event::class);
 
         foreach (EventVoter::SUPPORTS as $support) {
             $this->assertTrue($this->eventVoter->supportsPublic($support, $event));
