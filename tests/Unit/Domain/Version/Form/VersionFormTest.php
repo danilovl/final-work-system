@@ -14,9 +14,11 @@ namespace App\Tests\Unit\Domain\Version\Form;
 
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\Version\Form\VersionForm;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+#[AllowMockObjectsWithoutExpectations]
 class VersionFormTest extends TypeTestCase
 {
     use ValidatorExtensionTrait;
