@@ -38,6 +38,7 @@ import pageCoverage from '@playwright-test/test/coverage/page-coverage.spec'
 
 import liveUpdate from '@playwright-test/test/live/live-update.spec'
 import sidebarMenu from '@playwright-test/test/layout/sidebar-menu.spec'
+import theme from '@playwright-test/test/layout/theme.spec'
 import datetimepicker from '@playwright-test/test/layout/datetimepicker.spec'
 import recipientSelect from '@playwright-test/test/conversation/recipient-select.spec'
 
@@ -54,6 +55,7 @@ test.describe(createTask)
 test.describe(createConversation)
 test.describe(searchConversation)
 test.describe(sidebarMenu)
+test.describe(theme)
 test.describe(recipientSelect)
 test.describe(createEventAddress)
 test.describe(createEventCalendar)
