@@ -14,7 +14,7 @@ namespace App\Tests\Unit\Domain\User\Entity;
 
 use App\Domain\Media\Entity\Media;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -39,7 +39,7 @@ class UserTest extends TestCase
         yield [1, 'setId', 'getId'];
         yield ['First name', 'setFirstname', 'getFirstname'];
         yield ['Last name', 'setLastname', 'getLastname'];
-        yield [new DateTime, 'setLastLogin', 'getLastLogin'];
+        yield [new DateTimeImmutable, 'setLastLogin', 'getLastLogin'];
         yield ['test@test.test', 'setEmail', 'getEmail'];
         yield [true, 'setEnabled', 'isEnabled'];
         yield ['test@test.com', 'setSalt', 'getSalt'];

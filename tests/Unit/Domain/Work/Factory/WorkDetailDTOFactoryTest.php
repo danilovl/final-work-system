@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Domain\Work\Factory;
 
 use App\Tests\Mock\Domain\Work\WorkApiDTOTraitMock;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class WorkDetailDTOFactoryTest extends TestCase
@@ -39,7 +39,7 @@ class WorkDetailDTOFactoryTest extends TestCase
     public function testKeysOfFormerApiOutputArePresent(): void
     {
         $work = $this->createWork();
-        $work->setDeadlineProgram(new DateTime('2026-05-01 08:00:00'));
+        $work->setDeadlineProgram(new DateTimeImmutable('2026-05-01 08:00:00'));
         $work->setOpponent($this->createUser(11));
 
         $dto = $this->createWorkDetailDTOFactory()->create($work);

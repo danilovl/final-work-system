@@ -21,7 +21,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\DTO\Api\WorkTypeDTO;
 use App\Domain\WorkType\Entity\WorkType;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
-use DateTime;
+use DateTimeImmutable;
 use LogicException;
 
 /**
@@ -68,7 +68,7 @@ trait WorkApiDTOTraitMock
         $work->setTitle('Thesis');
         $work->setType(new WorkType);
         $work->setStatus(new WorkStatus);
-        $work->setDeadline(new DateTime('2026-06-30 14:05:09'));
+        $work->setDeadline(new DateTimeImmutable('2026-06-30 14:05:09'));
         $work->setDeadlineProgram(null);
         $work->setAuthor($this->createUser(37));
         $work->setSupervisor($this->createUser(36));

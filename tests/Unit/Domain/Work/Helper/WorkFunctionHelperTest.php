@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Domain\Work\Helper;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Helper\WorkFunctionHelper;
 use App\Domain\WorkCategory\Entity\WorkCategory;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class WorkFunctionHelperTest extends TestCase
@@ -26,17 +26,17 @@ class WorkFunctionHelperTest extends TestCase
         $expectedResult = [];
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-01'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-01'));
         $works[] = $work;
         $expectedResult['2023-01-01']['works'][] = $work;
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-01'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-01'));
         $works[] = $work;
         $expectedResult['2023-01-01']['works'][] = $work;
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-02'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-02'));
         $works[] = $work;
         $expectedResult['2023-01-02']['works'][] = $work;
 
@@ -51,7 +51,7 @@ class WorkFunctionHelperTest extends TestCase
         $works = [];
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-01'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-01'));
 
         $category = new WorkCategory;
         $category->setId(1);
@@ -72,7 +72,7 @@ class WorkFunctionHelperTest extends TestCase
         $works[] = $work;
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-01'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-01'));
         $works[] = $work;
         $expectedResult['-']['works'][] = $work;
 
@@ -87,7 +87,7 @@ class WorkFunctionHelperTest extends TestCase
         $works = [];
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-01'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-01'));
 
         $category = new WorkCategory;
         $category->setId(1);
@@ -110,7 +110,7 @@ class WorkFunctionHelperTest extends TestCase
         $works[] = $work;
 
         $work = new Work;
-        $work->setDeadline(new DateTime('2023-01-01'));
+        $work->setDeadline(new DateTimeImmutable('2023-01-01'));
         $works[] = $work;
         $expectedResult['-']['works'][] = $work;
 

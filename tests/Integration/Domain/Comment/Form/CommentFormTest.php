@@ -16,7 +16,7 @@ use App\Domain\Comment\Form\CommentForm;
 use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -45,7 +45,7 @@ class CommentFormTest extends KernelTestCase
     {
         $event = $this->createStub(Event::class);
         $event->method('getStart')
-            ->willReturn(new DateTime($dateTime));
+            ->willReturn(new DateTimeImmutable($dateTime));
 
         $event->method('isOwner')
             ->willReturn($isOwner);

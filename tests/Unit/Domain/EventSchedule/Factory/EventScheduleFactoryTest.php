@@ -21,7 +21,7 @@ use App\Domain\EventScheduleTemplate\Model\EventScheduleTemplateModel;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\EntityManagerService;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -130,8 +130,8 @@ class EventScheduleFactoryTest extends TestCase
         $template->setName($name);
         $template->setType(new EventType);
         $template->setDay(1);
-        $template->setStart(new DateTime('1970-01-01 09:00'));
-        $template->setEnd(new DateTime('1970-01-01 10:00'));
+        $template->setStart(new DateTimeImmutable('1970-01-01 09:00'));
+        $template->setEnd(new DateTimeImmutable('1970-01-01 10:00'));
 
         return $template;
     }
@@ -143,8 +143,8 @@ class EventScheduleFactoryTest extends TestCase
         $model->type = new EventType;
         $model->day = $day;
         $model->name = $name;
-        $model->start = new DateTime('1970-01-01 09:00');
-        $model->end = new DateTime('1970-01-01 10:00');
+        $model->start = new DateTimeImmutable('1970-01-01 09:00');
+        $model->end = new DateTimeImmutable('1970-01-01 10:00');
 
         return $model;
     }

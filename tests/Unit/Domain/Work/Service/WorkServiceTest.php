@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Domain\Work\Service;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkService;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class WorkServiceTest extends TestCase
@@ -115,9 +115,9 @@ class WorkServiceTest extends TestCase
 
     public function testGetDeadlineDays(): void
     {
-        $deadline = new DateTime;
-        $diff = (int) ($deadline)->diff(new DateTime)->format('%a');
-        $dayCount = $deadline->diff(new DateTime)->invert ? $diff : -$diff;
+        $deadline = new DateTimeImmutable;
+        $diff = (int) ($deadline)->diff(new DateTimeImmutable)->format('%a');
+        $dayCount = $deadline->diff(new DateTimeImmutable)->invert ? $diff : -$diff;
 
         $this->work->setDeadline($deadline);
         $deadlineDays = $this->workService->getDeadlineDays($this->work);
@@ -127,8 +127,8 @@ class WorkServiceTest extends TestCase
 
     public function testGetDeadlineProgramDays(): void
     {
-        $deadlineProgram = new DateTime;
-        $now = new DateTime;
+        $deadlineProgram = new DateTimeImmutable;
+        $now = new DateTimeImmutable;
         $d = $now->diff($deadlineProgram)->d;
 
         $dayCount = $now->diff($deadlineProgram)->invert ? -$d : $d;

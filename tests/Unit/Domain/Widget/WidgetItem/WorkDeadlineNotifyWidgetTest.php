@@ -24,7 +24,7 @@ use App\Infrastructure\Service\{
 };
 use App\Infrastructure\Service\TwigRenderService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class WorkDeadlineNotifyWidgetTest extends TestCase
@@ -96,7 +96,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->willReturn($user);
 
         $work = new Work;
-        $work->setDeadline(new DateTime);
+        $work->setDeadline(new DateTimeImmutable);
 
         $this->workFacade
             ->expects($this->once())
@@ -186,7 +186,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->willReturn($user);
 
         $work = new Work;
-        $work->setDeadline(new DateTime);
+        $work->setDeadline(new DateTimeImmutable);
 
         $this->workFacade
             ->expects($this->once())

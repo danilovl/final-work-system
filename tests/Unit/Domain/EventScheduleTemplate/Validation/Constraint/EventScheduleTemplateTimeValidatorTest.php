@@ -20,7 +20,7 @@ use App\Domain\EventScheduleTemplate\Validation\Constraint\{
 };
 use App\Domain\EventType\Constant\EventTypeConstant;
 use App\Domain\EventType\Entity\EventType;
-use DateTime;
+use DateTimeImmutable;
 use stdClass;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
@@ -137,8 +137,8 @@ class EventScheduleTemplateTimeValidatorTest extends ConstraintValidatorTestCase
         $model->day = 1;
         $model->name = $name;
         $model->address = $address;
-        $model->start = new DateTime('1970-01-01 ' . $start);
-        $model->end = new DateTime('1970-01-01 ' . $end);
+        $model->start = new DateTimeImmutable('1970-01-01 ' . $start);
+        $model->end = new DateTimeImmutable('1970-01-01 ' . $end);
 
         return $model;
     }
