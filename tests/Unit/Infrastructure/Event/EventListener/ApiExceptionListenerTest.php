@@ -222,12 +222,30 @@ class ApiExceptionListenerTest extends TestCase
         $this->listener = new ApiExceptionListener('prod', $this->logger);
 
         $violations = new ConstraintViolationList([
-            new ConstraintViolation('Error 1', null, [], null, 'property1', null),
-            new ConstraintViolation('Error 2', null, [], null, 'property2', null)
+            new ConstraintViolation(
+                message: 'Error 1',
+                messageTemplate: null,
+                parameters: [],
+                root: null,
+                propertyPath: 'property1',
+                invalidValue: null
+            ),
+            new ConstraintViolation(
+                message: 'Error 2',
+                messageTemplate: null,
+                parameters: [],
+                root: null,
+                propertyPath: 'property2',
+                invalidValue: null
+            )
         ]);
 
         $validationException = new ValidationFailedException('Validation failed', $violations);
-        $exception = new Exception('Wrapper exception', 0, $validationException);
+        $exception = new Exception(
+            message: 'Wrapper exception',
+            code: 0,
+            previous: $validationException
+        );
 
         $this->logger
             ->expects($this->once())
