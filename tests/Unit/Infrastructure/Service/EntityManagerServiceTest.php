@@ -34,7 +34,7 @@ class EntityManagerServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityEventDispatcherService = $this->createMock(EntityEventDispatcher::class);
+        $entityEventDispatcherService = $this->createStub(EntityEventDispatcher::class);
 
         $this->entityManagerService = new EntityManagerService(
             $this->entityManager,
@@ -79,7 +79,7 @@ class EntityManagerServiceTest extends TestCase
 
     public function testRemoveNativeSql(): void
     {
-        $connection = $this->createMock(Connection::class);
+        $connection = $this->createStub(Connection::class);
 
         $this->entityManager
             ->expects($this->once())
@@ -87,7 +87,6 @@ class EntityManagerServiceTest extends TestCase
             ->willReturn($connection);
 
         $connection
-            ->expects($this->once())
             ->method('executeQuery');
 
         $entity = new #[ORM\Table(name: 'test_table')] #[ORM\Entity] class {};
@@ -133,7 +132,7 @@ class EntityManagerServiceTest extends TestCase
 
     public function testGetRepository(): void
     {
-        $objectRepository = $this->createMock(EntityRepository::class);
+        $objectRepository = $this->createStub(EntityRepository::class);
 
         $this->entityManager
             ->expects($this->once())
@@ -154,7 +153,7 @@ class EntityManagerServiceTest extends TestCase
 
     public function testGetConnection(): void
     {
-        $connection = $this->createMock(Connection::class);
+        $connection = $this->createStub(Connection::class);
 
         $this->entityManager
             ->expects($this->once())

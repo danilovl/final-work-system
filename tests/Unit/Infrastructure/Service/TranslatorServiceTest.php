@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Infrastructure\Service;
 
 use App\Infrastructure\Service\TranslatorService;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -25,18 +25,18 @@ class TranslatorServiceTest extends TestCase
 {
     private TranslatorService $translatorService;
 
-    private MockObject&TranslatorInterface $translatorMock;
+    private Stub&TranslatorInterface $translator;
 
-    private MockObject&RequestStack $requestStackMock;
+    private Stub&RequestStack $requestStack;
 
     protected function setUp(): void
     {
-        $this->translatorMock = $this->createMock(TranslatorInterface::class);
-        $this->requestStackMock = $this->createMock(RequestStack::class);
+        $this->translator = $this->createStub(TranslatorInterface::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
 
         $this->translatorService = new TranslatorService(
-            $this->translatorMock,
-            $this->requestStackMock,
+            $this->translator,
+            $this->requestStack,
             'en'
         );
     }
@@ -48,18 +48,16 @@ class TranslatorServiceTest extends TestCase
         $domain = 'messages';
         $locale = 'ru';
 
-        $requestMock = $this->createMock(Request::class);
-        $requestMock->expects($this->any())
-            ->method('getLocale')
+        /** @var Stub&Request $request */
+        $request = $this->createStub(Request::class);
+        $request->method('getLocale')
             ->willReturn($locale);
 
-        $this->requestStackMock
-            ->expects($this->any())
+        $this->requestStack
             ->method('getCurrentRequest')
-            ->willReturn($requestMock);
+            ->willReturn($request);
 
-        $this->translatorMock
-            ->expects($this->any())
+        $this->translator
             ->method('trans')
             ->with($id, $parameters, $domain, $locale)
             ->willReturn('Translated string');

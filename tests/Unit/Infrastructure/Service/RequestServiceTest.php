@@ -50,14 +50,12 @@ class RequestServiceTest extends TestCase
         $this->requestStack = new RequestStack;
         $this->requestStack->push($request);
 
-        $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->any())
-            ->method('generate')
+        $router = $this->createStub(RouterInterface::class);
+        $router->method('generate')
             ->willReturn('url');
 
-        $translator = $this->createMock(TranslatorService::class);
-        $translator->expects($this->any())
-            ->method('trans')
+        $translator = $this->createStub(TranslatorService::class);
+        $translator->method('trans')
             ->willReturn('trans');
 
         $this->requestService = new RequestService($this->requestStack, $router, $translator);

@@ -23,9 +23,8 @@ class SeoPageServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $translator = $this->createMock(TranslatorInterface::class);
-        $translator->expects($this->any())
-            ->method('trans')
+        $translator = $this->createStub(TranslatorInterface::class);
+        $translator->method('trans')
             ->willReturn('trans');
 
         $this->seoPageService = new SeoPageService($translator);
