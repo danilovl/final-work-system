@@ -12,6 +12,7 @@
 
 namespace App\Domain\ResetPassword\Http;
 
+use App\Domain\ResetPassword\Model\ResetChangePasswordModel;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
@@ -59,13 +60,14 @@ readonly class ResetPasswordResetHandle
             return $this->requestService->redirectToRoute('security_login');
         }
 
+        $resetChangePasswordModel = new ResetChangePasswordModel;
         $form = $this->formFactory
-            ->create(ResetChangePasswordForm::class)
+            ->create(ResetChangePasswordForm::class, $resetChangePasswordModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
+            $plainPassword = $resetChangePasswordModel->plainPassword;
 
             $command = ResetPasswordCommand::create($user, $plainPassword, $token);
             $this->commandBus->dispatchResult($command);

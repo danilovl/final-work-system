@@ -12,6 +12,7 @@
 
 namespace App\Domain\ResetPassword\Http;
 
+use App\Domain\ResetPassword\Model\ResetPasswordRequestModel;
 use App\Application\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\{
     RequestService,
@@ -44,13 +45,14 @@ readonly class ResetPasswordRequestHandle
 
     public function __invoke(Request $request): Response
     {
+        $resetPasswordRequestModel = new ResetPasswordRequestModel;
         $form = $this->formFactory
-            ->create(ResetPasswordRequestForm::class)
+            ->create(ResetPasswordRequestForm::class, $resetPasswordRequestModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $email */
-            $email = $form->get('email')->getData();
+            $email = $resetPasswordRequestModel->email;
 
             return $this->processSendingPasswordResetEmail($email);
         }
