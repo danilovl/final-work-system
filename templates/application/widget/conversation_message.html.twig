@@ -1,50 +1,41 @@
 <li id="top-nav-unread-conversation-messages" role="presentation" class="dropdown">
-	<a href="javascript:"
-	   class="info-number"
-	   data-bs-toggle="dropdown"
-	   data-bs-display="static"
-	   aria-expanded="false">
-		<i class="fa-regular fa-envelope"></i>
+    <a href="javascript:"
+       class="info-number"
+       data-bs-toggle="dropdown"
+       data-bs-display="static"
+       aria-expanded="false">
+        <i class="fa-regular fa-envelope"></i>
 
-		{% set countUnreadConversationMessageClass = 'bg-green' %}
-		{% if countUnreadConversationMessage > 0 %}
-			{% set countUnreadConversationMessageClass = 'bg-red' %}
-		{% endif %}
-		<span class="badge {{ countUnreadConversationMessageClass }}">
+        {% set countUnreadConversationMessageClass = 'bg-green' %}
+        {% if countUnreadConversationMessage > 0 %}
+            {% set countUnreadConversationMessageClass = 'bg-red' %}
+        {% endif %}
+        <span class="badge {{ countUnreadConversationMessageClass }}">
             {{ countUnreadConversationMessage }}
         </span>
-	</a>
-	<ul class="dropdown-menu list-unstyled msg_list" role="menu">
-		{% if countUnreadConversationMessage is not empty %}
-			{% for message in unreadConversationMessages | slice(0, 5) %}
-				<li>
-					<a href="{{ path('conversation_detail', { 'id': message.conversation.id | hashids_encode }) }}">
-						<span class="image">
-							<img src="{{ message.owner | profile_image }}"
-								 alt="profile image"/>
-						</span>
-						<span class="message">
-                        	<b>{{ message.owner }} :</b>
+    </a>
+    <ul class="dropdown-menu list-unstyled msg_list topnav-feed" role="menu">
+        {% if countUnreadConversationMessage is not empty %}
+            {% for message in unreadConversationMessages | slice(0, 5) %}
+                <li>
+                    <a class="topnav-feed-item" href="{{ path('conversation_detail', {'id': message.conversation.id | hashids_encode}) }}">
+                        <img class="topnav-feed-avatar"
+                             src="{{ message.owner | profile_image }}"
+                             alt="profile image"/>
+                        <span class="topnav-feed-body">
+                            <span class="topnav-feed-title">{{ message.owner }}</span>
+                            <span class="topnav-feed-text">{{ conversation_message_preview(message) }}</span>
+                            <span class="topnav-feed-time">{{ message.createdAt | date('d.m.Y H:i') }}</span>
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
 
-                        	{% if message.content  | length > 150 %}
-								<p>{{ message.content | sanitize_html('app.rich_text_sanitizer') | striptags | slice(0, 150) | raw }}.....</p>
-                        	{% else %}
-								<p> {{ message.content | sanitize_html('app.rich_text_sanitizer') }}</p>
-							{% endif %}
-
-                      	</span>
-						<span class="time">{{ message.createdAt | date }}</span>
-					</a>
-				</li>
-			{% endfor %}
-
-			<li>
-				<div class="text-center">
-					<a href="{{ path('conversation_list') }}">
-						<strong>{{ 'app.text.see_all_messages' | trans }}</strong>
-					</a>
-				</div>
-			</li>
-		{% endif %}
-	</ul>
+            <li class="topnav-feed-footer">
+                <a href="{{ path('conversation_list') }}">
+                    {{ 'app.text.see_all_messages' | trans }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
 </li>

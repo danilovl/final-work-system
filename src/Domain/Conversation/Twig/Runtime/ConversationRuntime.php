@@ -26,9 +26,12 @@ use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use DateTimeImmutable;
+use function Symfony\Component\String\u;
 
 class ConversationRuntime
 {
+    private const int MESSAGE_PREVIEW_LENGTH = 80;
+
     public function __construct(
         private readonly ConversationService $conversationService,
         private readonly EntityManagerService $entityManagerService,
@@ -51,6 +54,19 @@ class ConversationRuntime
         $getLastByConversationIdsQueryResult = $this->queryBus->handle($getLastByConversationIdsQuery);
 
         return $getLastByConversationIdsQueryResult->messages[$conversationId] ?? null;
+    }
+
+    #[AsTwigFunction('conversation_message_preview')]
+    public function getMessagePreview(ConversationMessage $conversationMessage): string
+    {
+        $content = $conversationMessage->getContent();
+        $text = strip_tags($content);
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5);
+
+        return u($text)
+            ->collapseWhitespace()
+            ->truncate(self::MESSAGE_PREVIEW_LENGTH, '…', false)
+            ->toString();
     }
 
     #[AsTwigFunction('conversation_recipient')]

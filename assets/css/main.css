@@ -1270,48 +1270,6 @@ td.details {
     text-decoration: none
 }
 
-ul.msg_list li {
-    background: #f7f7f7;
-    padding: 5px;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 6px 6px 0;
-    width: 96% !important
-}
-
-ul.msg_list li:last-child {
-    margin-bottom: 6px;
-    padding: 10px
-}
-
-ul.msg_list li a {
-    padding: 3px 5px !important
-}
-
-ul.msg_list li a .image img {
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    float: left;
-    margin-right: 10px;
-    width: 11%
-}
-
-ul.msg_list li a .time {
-    font-size: 11px;
-    font-style: italic;
-    font-weight: 700 !important;
-    right: 35px
-}
-
-ul.msg_list li a .message {
-    display: block !important;
-    font-size: 11px
-}
-
-.dropdown-menu.msg_list span {
-    white-space: normal
-}
-
 .dropdown-menu {
     box-shadow: none;
     display: none;
@@ -1342,10 +1300,6 @@ ul.msg_list li a .message {
     right: 0;
     left: auto;
     width: 220px
-}
-
-.navbar-nav .dropdown-menu.show.msg_list {
-    width: 300px
 }
 
 .info-number .badge {
@@ -2939,21 +2893,6 @@ img.avatar {
 
 .select2-results {
     border: 1px solid #767dff !important;
-}
-
-.msg_list .image img {
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    float: left;
-    margin-right: 10px;
-    width: 11%;
-}
-
-ul.msg_list li .time {
-    font-size: 11px;
-    font-style: italic;
-    font-weight: 700 !important;
-    right: 35px;
 }
 
 .system-event-table {

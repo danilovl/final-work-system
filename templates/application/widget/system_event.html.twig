@@ -1,45 +1,40 @@
 <li id="top-nav-unread-system-events" role="presentation" class="dropdown">
-	<a href="javascript:" class="info-number" data-bs-toggle="dropdown"
-	   data-bs-display="static"
-	   aria-expanded="false">
-		<i class="fa-regular fa-bell"></i>
+    <a href="javascript:"
+       class="info-number"
+       data-bs-toggle="dropdown"
+       data-bs-display="static"
+       aria-expanded="false">
+        <i class="fa-regular fa-bell"></i>
 
-		{% set countUnreadSystemEventsClass = 'bg-green' %}
-		{% if countUnreadSystemEventMessage > 0 %}
-			{% set countUnreadSystemEventsClass = 'bg-red' %}
-		{% endif %}
-		<span class="badge {{ countUnreadSystemEventsClass }}">
-        	{{ countUnreadSystemEventMessage }}
+        {% set countUnreadSystemEventsClass = 'bg-green' %}
+        {% if countUnreadSystemEventMessage > 0 %}
+            {% set countUnreadSystemEventsClass = 'bg-red' %}
+        {% endif %}
+        <span class="badge {{ countUnreadSystemEventsClass }}">
+            {{ countUnreadSystemEventMessage }}
         </span>
-	</a>
-	<ul class="dropdown-menu list-unstyled msg_list" role="menu">
-		{% if countUnreadSystemEventMessage is not empty %}
+    </a>
+    <ul class="dropdown-menu list-unstyled msg_list topnav-feed" role="menu">
+        {% if countUnreadSystemEventMessage is not empty %}
+            {% for systemEventRecipient in systemEventRecipients | slice(0, 5) %}
+                <li>
+                    <div class="topnav-feed-item">
+                        <img class="topnav-feed-avatar"
+                             src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
+                             alt="profile image"/>
+                        <span class="topnav-feed-body">
+                            <span class="topnav-feed-text">{{ system_event_generate_link(systemEventRecipient) | raw }}</span>
+                            <span class="topnav-feed-time">{{ systemEventRecipient.createdAt | date('d.m.Y H:i') }}</span>
+                        </span>
+                    </div>
+                </li>
+            {% endfor %}
 
-			{% for systemEventRecipient in systemEventRecipients | slice(0, 5) %}
-				<li>
-                    <span class="image">
-                        <img src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
-							 alt="profile image"/>
-                    </span>
-					<span class="message">
-                        {{ system_event_generate_link(systemEventRecipient) | raw }}
-                    </span>
-					<br>
-					<span class="time">
-                       {{ systemEventRecipient.createdAt | date }}
-                    </span>
-				</li>
-			{% endfor %}
-
-			<li>
-				<div class="text-center">
-					<a href="{{ path('homepage') }}">
-						<strong>
-							{{ 'app.text.see_all_alerts' | trans }}
-						</strong>
-					</a>
-				</div>
-			</li>
-		{% endif %}
-	</ul>
+            <li class="topnav-feed-footer">
+                <a href="{{ path('homepage') }}">
+                    {{ 'app.text.see_all_alerts' | trans }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
 </li>

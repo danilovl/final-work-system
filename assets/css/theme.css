@@ -734,6 +734,111 @@ a:hover {
     color: var(--fws-text);
 }
 
+/* Top navigation feed (messages, alerts) */
+
+.top_nav .dropdown-menu.topnav-feed,
+.navbar-nav .dropdown-menu.show.topnav-feed {
+    width: 22rem;
+    max-width: calc(100vw - 1rem);
+    padding: .375rem;
+}
+
+.topnav-feed > li + li {
+    margin-top: .125rem;
+}
+
+.top_nav .topnav-feed .topnav-feed-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    width: 100%;
+    min-height: 0;
+    padding: .625rem .75rem;
+    border-radius: var(--fws-radius-sm);
+    color: var(--fws-text);
+    font-size: .8125rem;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+.top_nav .topnav-feed a.topnav-feed-item:hover,
+.top_nav .topnav-feed div.topnav-feed-item:hover {
+    background: var(--fws-sidebar-hover);
+    color: var(--fws-text);
+}
+
+.topnav-feed .topnav-feed-avatar {
+    flex: 0 0 2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.topnav-feed .topnav-feed-body {
+    display: flex;
+    flex-direction: column;
+    gap: .125rem;
+    min-width: 0;
+}
+
+.topnav-feed .topnav-feed-title {
+    overflow: hidden;
+    color: var(--fws-heading);
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topnav-feed .topnav-feed-text {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--fws-text);
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
+}
+
+.topnav-feed a.topnav-feed-item .topnav-feed-text {
+    color: var(--fws-muted);
+    -webkit-line-clamp: 1;
+}
+
+.top_nav .topnav-feed .topnav-feed-text a {
+    display: inline;
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    color: var(--bs-primary);
+}
+
+.topnav-feed .topnav-feed-time {
+    color: var(--fws-muted);
+    font-size: .75rem;
+    white-space: nowrap;
+}
+
+.topnav-feed .topnav-feed-footer {
+    margin-top: .25rem;
+    padding-top: .25rem;
+    border-top: 1px solid var(--fws-border);
+}
+
+.top_nav .topnav-feed .topnav-feed-footer a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: .5rem;
+    border-radius: var(--fws-radius-sm);
+    color: var(--bs-primary);
+    font-size: .8125rem;
+    font-weight: 500;
+}
+
+.top_nav .topnav-feed .topnav-feed-footer a:hover {
+    background: var(--fws-sidebar-hover);
+}
+
 /* Content */
 
 body .container.body .right_col,
