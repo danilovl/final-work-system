@@ -51,7 +51,7 @@ Features
 * Multiple languages
 * An API that covers most of the data
 * Unit tests
-* Cypress tests
+* Playwright end-to-end tests
 * and many other features
 
 Project uses extra bundles

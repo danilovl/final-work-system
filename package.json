@@ -8,8 +8,6 @@
         "build": "encore production --progress",
         "lint": "eslint assets/vue",
         "type-check": "vue-tsc --noEmit -p tsconfig.json",
-        "cypress:run": "cypress run --browser chromium --config video=true",
-        "cypress:open": "cypress open --config video=false",
         "playwright:test": "npx playwright test --update-snapshots",
         "playwright:test-ui": "npx playwright test --ui-host=0.0.0.0 --ui-port=35825"
     },
@@ -51,7 +49,6 @@
         "@typescript-eslint/parser": "^8.32.1",
         "babel-loader": "^9.1.3",
         "core-js": "^3.0.0",
-        "cypress": "^15.12.0",
         "eslint": "^9.39.5",
         "eslint-plugin-vue": "^10.12.1",
         "file-loader": "^6.0.0",

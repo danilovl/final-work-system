@@ -17,10 +17,17 @@ export default function createTests() {
         await page.locator('#create-event-address-button-action').click()
         await page.waitForURL(/\/event\/address\/detail\//)
 
-        await page.goto('/en/event/address/list')
-        await page.addStyleTag({content: '.sf-toolbar, .ui-pnotify { display: none !important; }'})
-
         const row = page.locator('tr', {hasText: name})
+
+        for (let pageNumber = 1; pageNumber <= 20; pageNumber++) {
+            await page.goto(`/en/event/address/list?page=${pageNumber}`)
+
+            if (await row.count() > 0) {
+                break
+            }
+        }
+
+        await page.addStyleTag({content: '.sf-toolbar, .ui-pnotify { display: none !important; }'})
         await row.locator('.btn.btn-danger.btn-xs').click()
         await page.locator('.btn.btn-danger.delete-element:visible').click()
 

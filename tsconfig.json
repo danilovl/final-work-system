@@ -8,13 +8,12 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@playwright-test/*": ["tests/EndToEnd/Playwright/*"],
-            "@cypress-test/*": ["tests/EndToEnd/Cypress/*"]
+            "@playwright-test/*": ["tests/EndToEnd/Playwright/*"]
         },
         "types": [
             "node",
             "playwright",
-            "cypress",
+            "jquery"
         ],
         "sourceMap": true,
         "allowJs": true,

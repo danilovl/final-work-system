@@ -17,6 +17,7 @@ use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkListService;
+use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -32,7 +33,8 @@ class WorkListServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->workListService = new WorkListService(new UserWorkService);
+        $workFacade = $this->createStub(WorkFacade::class);
+        $this->workListService = new WorkListService(new UserWorkService($workFacade));
         $this->user = new User;
 
         $supervisorWorks = new ArrayCollection;
