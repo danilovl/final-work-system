@@ -12,6 +12,7 @@
 
 namespace App\Domain\Event\DTO\Api\Output;
 
+use App\Application\DTO\Api\Output\BaseListOutput;
 use App\Domain\Event\DTO\Api\EventDTO;
 
 readonly class EventListOwnerOutput extends BaseListOutput
