@@ -28,7 +28,10 @@ readonly class TaskSearch
     public function getIdsByOwnerAndSearch(User $user, string $search): array
     {
         $query = $this->createQuery($user, $search);
-        $results = $this->transformedFinderTask->findRaw($query);
+        $results = $this->findAllRaw(
+            search: fn (array $pageQuery): array => $this->transformedFinderTask->findRaw($pageQuery),
+            query: $query
+        );
 
         return $this->getDocumentIds($results);
     }
