@@ -136,8 +136,8 @@
                                             <td>
                                                 {% if userStatusWorkCounts[user.id] is defined and userStatusWorkCounts[user.id] is not empty %}
                                                     {% set workStatuses = userStatusWorkCounts[user.id] %}
-                                                    {% for workStatuse in workStatuses %}
-                                                        {{ workStatuse['name'] }}: {{ workStatuse['count'] }}<br>
+                                                    {% for workStatus in workStatuses %}
+                                                        {{ workStatus['name'] }}: {{ workStatus['count'] }}<br>
                                                     {% endfor %}
                                                 {% endif %}
                                             </td>
@@ -153,7 +153,6 @@
                                                    role="tab"
                                                    id="heading-user-description-{{ user.id | hashids_encode }}"
                                                    data-toggle="collapse"
-                                                   data-parent="#accordion-user-descrition-{{ user.id | hashids_encode }}"
                                                    href="#tab-user-description-{{ user.id | hashids_encode }}"
                                                    aria-expanded="true"
                                                    aria-controls="tab-user-description-{{ user.id | hashids_encode }}">
