@@ -21,7 +21,8 @@ class EmailNotificationQueryBuilder extends BaseQueryBuilder
     {
         $this->queryBuilder
             ->andWhere('email_notification.sendedAt IS NULL')
-            ->orderBy('email_notification.createdAt', SortDirection::Ascending);
+            ->orderBy('email_notification.createdAt', SortDirection::Ascending)
+            ->addOrderBy('email_notification.id', SortDirection::Ascending);
 
         return $this;
     }
@@ -37,7 +38,9 @@ class EmailNotificationQueryBuilder extends BaseQueryBuilder
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('email_notification.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('email_notification.createdAt', $order)
+            ->addOrderBy('email_notification.id', $order);
 
         return $this;
     }
