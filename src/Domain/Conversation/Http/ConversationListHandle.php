@@ -66,6 +66,8 @@ readonly class ConversationListHandle
         return $this->twigRenderService->renderToResponse('domain/conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
             'conversations' => $result->conversations,
+            'messageCounts' => $result->messageCounts,
+            'lastMessages' => $result->lastMessages,
             'conversationTypes' => $conversationTypes,
             'searchForm' => $searchForm->createView(),
             'enableClearSearch' => !empty($searchModel->search)

@@ -21,10 +21,7 @@ use App\Domain\Conversation\Bus\Query\ConversationList\{
 use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\Conversation\DTO\Api\Output\ConversationListOutput;
 use App\Domain\Conversation\Helper\ConversationHelper;
-use App\Domain\Conversation\Service\{
-    ConversationService,
-    ConversationStatusService
-};
+use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDTO;
 use App\Domain\ConversationType\DTO\Api\ConversationTypeDTO;
 use App\Domain\User\DTO\Api\UserDTO;
@@ -42,7 +39,6 @@ readonly class ConversationListHandle
         private UserService $userService,
         private QueryBusInterface $queryBus,
         private ObjectToDtoMapperInterface $objectToDtoMapper,
-        private ConversationService $conversationService,
         private ConversationStatusService $conversationStatusService
     ) {}
 
@@ -62,7 +58,7 @@ readonly class ConversationListHandle
 
         $conversations = [];
         foreach ($pagination as $conversation) {
-            $lastMessage = $this->conversationService->getLastMessage($conversation);
+            $lastMessage = $result->lastMessages[$conversation->getId()];
 
             $lastMessageDto = null;
             if ($lastMessage !== null) {

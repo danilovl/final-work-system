@@ -19,7 +19,10 @@ use App\Infrastructure\Service\{
     EntityManagerService
 };
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\Facade\ConversationFacade;
+use App\Domain\Conversation\Facade\{
+    ConversationFacade,
+    ConversationMessageFacade
+};
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
@@ -30,6 +33,7 @@ readonly class GetConversationListQueryHandler
 {
     public function __construct(
         private ConversationFacade $conversationFacade,
+        private ConversationMessageFacade $conversationMessageFacade,
         private PaginatorService $paginatorService,
         private ElasticaConversationRepository $elasticaConversationRepository,
         private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
@@ -70,6 +74,19 @@ readonly class GetConversationListQueryHandler
             options: ['wrap-queries' => true]
         );
 
-        return new GetConversationListQueryResult($pagination);
+        $conversationIds = [];
+        /** @var Conversation $conversation */
+        foreach ($pagination as $conversation) {
+            $conversationIds[] = $conversation->getId();
+        }
+
+        $messageCounts = $this->conversationMessageFacade->getCountsByConversationIds($conversationIds);
+        $lastMessages = $this->conversationMessageFacade->getLastByConversationIds($conversationIds);
+
+        return new GetConversationListQueryResult(
+            conversations: $pagination,
+            messageCounts: $messageCounts,
+            lastMessages: $lastMessages
+        );
     }
 }

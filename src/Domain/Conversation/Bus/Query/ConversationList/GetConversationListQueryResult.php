@@ -13,12 +13,19 @@
 namespace App\Domain\Conversation\Bus\Query\ConversationList;
 
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 readonly class GetConversationListQueryResult
 {
     /**
      * @param PaginationInterface<int, Conversation> $conversations
+     * @param array<int, int> $messageCounts
+     * @param array<int, ConversationMessage|null> $lastMessages
      */
-    public function __construct(public PaginationInterface $conversations) {}
+    public function __construct(
+        public PaginationInterface $conversations,
+        public array $messageCounts,
+        public array $lastMessages
+    ) {}
 }

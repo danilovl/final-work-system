@@ -57,9 +57,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoinWorkType()
             ->leftJoinParticipants()
             ->leftJoinParticipantsUser()
-            ->leftJoinMessages()
-            ->leftJoinMessagesOwner()
-            ->orderByMessagesCreatedAt()
+            ->orderByLastMessageCreatedAt()
             ->byCallback($callback)
             ->getQueryBuilder();
     }
@@ -79,10 +77,8 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoinWorkType()
             ->leftJoinParticipants()
             ->leftJoinParticipantsUser()
-            ->leftJoinMessages()
-            ->leftJoinMessagesOwner()
             ->whereByIds($ids)
-            ->orderByMessagesCreatedAt()
+            ->orderByLastMessageCreatedAt()
             ->getQueryBuilder();
     }
 

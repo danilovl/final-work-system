@@ -12,6 +12,7 @@
 
 namespace App\Domain\Conversation\Repository;
 
+use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
@@ -22,14 +23,12 @@ class ConversationQueryBuilder extends BaseQueryBuilder
     public function selectRelations(): self
     {
         $this->queryBuilder->addSelect('
-            messages, 
             type, 
             work, 
             work_status, 
             work_type, 
             participants, 
-            participantsUser, 
-            messagesOwner
+            participantsUser
         ');
 
         return $this;
@@ -84,13 +83,6 @@ class ConversationQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function leftJoinMessagesOwner(): self
-    {
-        $this->queryBuilder->leftJoin('messages.owner', 'messagesOwner');
-
-        return $this;
-    }
-
     /**
      * @param int[] $ids
      */
@@ -110,6 +102,28 @@ class ConversationQueryBuilder extends BaseQueryBuilder
             ->andWhere('participants.user = :user')
             ->setParameter('work', $work)
             ->setParameter('user', $user);
+
+        return $this;
+    }
+
+    public function orderByLastMessageCreatedAt(SortDirection $order = SortDirection::Descending): self
+    {
+        $lastMessageCreatedAt = sprintf(
+            '(SELECT MAX(last_message.createdAt) FROM %s last_message WHERE last_message.conversation = conversation) AS HIDDEN lastMessageCreatedAt',
+            ConversationMessage::class
+        );
+
+        $lastMessageId = sprintf(
+            '(SELECT MAX(last_message_id.id) FROM %1$s last_message_id WHERE last_message_id.conversation = conversation AND last_message_id.createdAt = (SELECT MAX(last_message_date.createdAt) FROM %1$s last_message_date WHERE last_message_date.conversation = conversation)) AS HIDDEN lastMessageId',
+            ConversationMessage::class
+        );
+
+        $this->queryBuilder
+            ->addSelect($lastMessageCreatedAt)
+            ->addSelect($lastMessageId)
+            ->orderBy('lastMessageCreatedAt', $order)
+            ->addOrderBy('lastMessageId', $order)
+            ->addOrderBy('conversation.id', $order);
 
         return $this;
     }

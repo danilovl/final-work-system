@@ -128,6 +128,55 @@ readonly class ConversationMessageFacade
     }
 
     /**
+     * @param int[] $conversationIds
+     * @return array<int, int>
+     */
+    public function getCountsByConversationIds(array $conversationIds): array
+    {
+        $counts = array_fill_keys($conversationIds, 0);
+        if (count($conversationIds) === 0) {
+            return $counts;
+        }
+
+        /** @var array<array{conversationId: int|string, messageCount: int|string}> $rows */
+        $rows = $this->conversationMessageRepository
+            ->countByConversationIds($conversationIds)
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($rows as $row) {
+            $counts[(int) $row['conversationId']] = (int) $row['messageCount'];
+        }
+
+        return $counts;
+    }
+
+    /**
+     * @param int[] $conversationIds
+     * @return array<int, ConversationMessage|null>
+     */
+    public function getLastByConversationIds(array $conversationIds): array
+    {
+        $lastMessages = array_fill_keys($conversationIds, null);
+        if (count($conversationIds) === 0) {
+            return $lastMessages;
+        }
+
+        /** @var ConversationMessage[] $messages */
+        $messages = $this->conversationMessageRepository
+            ->lastByConversationIds($conversationIds)
+            ->getQuery()
+            ->getResult();
+
+        foreach ($messages as $message) {
+            $conversationId = $message->getConversation()->getId();
+            $lastMessages[$conversationId] ??= $message;
+        }
+
+        return $lastMessages;
+    }
+
+    /**
      * @return ConversationMessage[]
      */
     public function getUnreadMessagesByUser(User $user, ?int $limit = null): array
