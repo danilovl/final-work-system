@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Bus\Command\EditUserGroup;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\UserGroup\Factory\UserGroupFactory;
 
 readonly class EditUserGroupHandler implements CommandHandlerInterface

@@ -12,9 +12,9 @@
 
 namespace App\Domain\UserGroup\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService

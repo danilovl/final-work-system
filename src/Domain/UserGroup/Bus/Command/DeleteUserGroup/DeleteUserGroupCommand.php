@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Bus\Command\DeleteUserGroup;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\UserGroup\Entity\Group;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

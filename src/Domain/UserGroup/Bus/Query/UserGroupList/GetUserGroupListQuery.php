@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Bus\Query\UserGroupList;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

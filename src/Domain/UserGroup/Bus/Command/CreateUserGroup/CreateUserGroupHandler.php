@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Bus\Command\CreateUserGroup;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\UserGroup\Entity\Group;
 use App\Domain\UserGroup\Factory\UserGroupFactory;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Http;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\UserGroup\Bus\Query\UserGroupList\{
     GetUserGroupListQuery,
     GetUserGroupListQueryResult
