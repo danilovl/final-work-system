@@ -91,7 +91,7 @@ class EventScheduleTemplate
         return $this->address;
     }
 
-    public function setAddress(EventAddress $address): void
+    public function setAddress(?EventAddress $address): void
     {
         $this->address = $address;
     }
@@ -111,7 +111,7 @@ class EventScheduleTemplate
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
