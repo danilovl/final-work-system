@@ -42,10 +42,14 @@
                             <ul class="list-unstyled user_data">
                                 {% if app_user().profileImage is not null %}
                                     <li>
-                                        <a class="btn btn-danger" id="delete-profile-image" href="{{ path('profile_delete_image') }}">
-                                            <i class="fa fa-picture-o"></i>
-                                            {{ 'app.text.delete' | trans }}
-                                        </a>
+                                        <form method="post"
+                                              action="{{ path('profile_delete_image') }}"
+                                              style="display: inline">
+                                            <button type="submit" class="btn btn-danger" id="delete-profile-image">
+                                                <i class="fa fa-picture-o"></i>
+                                                {{ 'app.text.delete' | trans }}
+                                            </button>
+                                        </form>
                                     </li>
                                 {% endif %}
                                 <li>
