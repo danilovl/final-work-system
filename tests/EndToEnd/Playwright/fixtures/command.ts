@@ -6,6 +6,8 @@ const test = base.extend<{
     loginSupervisor: Page
     loginStudent: Page
     loginAdmin: Page
+    loginOpponent: Page
+    loginConsultant: Page
     login: (username: string, password: string) => Promise<void>
 }>({
     loginSupervisor: async (
@@ -40,6 +42,30 @@ const test = base.extend<{
         await loginPageInstance.login(
             loginData.admin.username,
             loginData.admin.password
+        )
+
+        await use(page)
+    },
+    loginOpponent: async (
+        {page}: { page: Page },
+        use: (page: Page) => Promise<void>
+    ) => {
+        const loginPageInstance = new LoginPage(page)
+        await loginPageInstance.login(
+            loginData.opponent.username,
+            loginData.opponent.password
+        )
+
+        await use(page)
+    },
+    loginConsultant: async (
+        {page}: { page: Page },
+        use: (page: Page) => Promise<void>
+    ) => {
+        const loginPageInstance = new LoginPage(page)
+        await loginPageInstance.login(
+            loginData.consultant.username,
+            loginData.consultant.password
         )
 
         await use(page)

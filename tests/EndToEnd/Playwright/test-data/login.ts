@@ -14,5 +14,13 @@ export default {
     admin: {
         username: 'admin',
         password: 'adminadmin'
+    },
+    opponent: {
+        username: 'opponent',
+        password: 'opponentopponent'
+    },
+    consultant: {
+        username: 'consultant',
+        password: 'consultantconsultant'
     }
 }
