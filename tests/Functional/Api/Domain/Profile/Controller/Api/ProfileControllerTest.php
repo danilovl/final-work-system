@@ -206,7 +206,7 @@ class ProfileControllerTest extends BaseApiTestCase
     /**
      * @param array<string, mixed> $body
      */
-    #[DataProvider('provideMissingFieldCases')]
+    #[DataProvider('provideChangePasswordMissingFieldCases')]
     public function testChangePasswordMissingField(array $body): void
     {
         $data = $this->requestApi(
@@ -271,14 +271,14 @@ class ProfileControllerTest extends BaseApiTestCase
         $this->assertResponseStatusCodeSame(405);
     }
 
-    public static function provideMissingFieldCases(): Generator
+    public static function provideChangePasswordMissingFieldCases(): Generator
     {
         yield 'empty body' => [[]];
         yield 'missing new password' => [['currentPassword' => 'secret']];
         yield 'missing current password' => [['newPassword' => 'new-password-123']];
         yield 'empty current password' => [['currentPassword' => '', 'newPassword' => 'new-password-123']];
         yield 'empty new password' => [['currentPassword' => 'secret', 'newPassword' => '']];
-        yield 'non string value' => [['currentPassword' => 'secret', 'newPassword' => 123456]];
+        yield 'non string value' => [['currentPassword' => 'secret', 'newPassword' => 123_456]];
     }
 
     private function findStudent(): User

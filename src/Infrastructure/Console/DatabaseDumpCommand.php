@@ -13,7 +13,7 @@
 namespace App\Infrastructure\Console;
 
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,6 +29,7 @@ class DatabaseDumpCommand
 
     private string $path;
 
+    /** @var array{dbname: string, user: string, password: string} */
     private array $dbParams;
 
     private bool $isActive;
@@ -37,8 +38,13 @@ class DatabaseDumpCommand
         private readonly EntityManagerInterface $entityManager,
         private readonly ParameterServiceInterface $parameterService
     ) {
-        $this->dbParams = $this->entityManager->getConnection()->getParams();
-        $this->isActive = $this->parameterService->get('database_dump.active');
+        $params = $this->entityManager->getConnection()->getParams();
+        $this->dbParams = [
+            'dbname' => $params['dbname'] ?? '',
+            'user' => $params['user'] ?? '',
+            'password' => $params['password'] ?? ''
+        ];
+        $this->isActive = $this->parameterService->getBoolean('database_dump.active');
     }
 
     public function __invoke(SymfonyStyle $io, OutputInterface $output): int
@@ -49,7 +55,8 @@ class DatabaseDumpCommand
 
         $this->path = $this->getSaveFileName();
 
-        $text = sprintf('Dumping %s to %s',
+        $text = sprintf(
+            'Dumping %s to %s',
             $this->dbParams['dbname'],
             $this->path
         );
@@ -57,7 +64,10 @@ class DatabaseDumpCommand
 
         $start = microtime(true);
 
-        $progressBar = new ProgressBar($output, 2);
+        $progressBar = new ProgressBar(
+            output: $output,
+            max: 2
+        );
         $progressBar->start();
 
         $this->createDirectoryIfRequired();
@@ -71,7 +81,8 @@ class DatabaseDumpCommand
         $time = number_format(($end - $start), 2);
 
         $io->newLine();
-        $io->success(sprintf('Done in %s seconds', $time));
+        $message = sprintf('Done in %s seconds', $time);
+        $io->success($message);
 
         return Command::SUCCESS;
     }
@@ -86,12 +97,19 @@ class DatabaseDumpCommand
 
     private function dumpDatabaseUbuntu(): void
     {
-        $cmd = sprintf('%s -u %s -p%s %s > %s',
-            $this->parameterService->get('database_dump.path_to_mysqldump_exe'),
-            $this->dbParams['user'],
-            $this->dbParams['password'],
-            $this->dbParams['dbname'],
-            $this->getSaveFileName()
+        $mysqldump = $this->parameterService->getString('database_dump.path_to_mysqldump_exe');
+        $user = escapeshellarg($this->dbParams['user']);
+        $password = escapeshellarg($this->dbParams['password']);
+        $database = escapeshellarg($this->dbParams['dbname']);
+        $file = escapeshellarg($this->path);
+
+        $cmd = sprintf(
+            '%s -u %s -p%s %s > %s',
+            $mysqldump,
+            $user,
+            $password,
+            $database,
+            $file
         );
 
         shell_exec($cmd);
@@ -99,9 +117,10 @@ class DatabaseDumpCommand
 
     private function getSaveFileName(): string
     {
-        return sprintf('%s/' . $this->parameterService->get('database_dump.file_pattern'),
-            $this->parameterService->get('database_dump.path_to_save_folder'),
-            (new DateTime)->format('d.m.Y')
-        );
+        $folder = $this->parameterService->getString('database_dump.path_to_save_folder');
+        $filePattern = $this->parameterService->getString('database_dump.file_pattern');
+        $date = new DateTimeImmutable()->format('d.m.Y');
+
+        return $folder . '/' . sprintf($filePattern, $date);
     }
 }
