@@ -26,9 +26,9 @@
                         	<b>{{ message.owner }} :</b>
 
                         	{% if message.content  | length > 150 %}
-								<p>{{ message.content | away_to | striptags | slice(0,150) | raw }}.....</p>
+								<p>{{ message.content | sanitize_html('app.rich_text_sanitizer') | striptags | slice(0, 150) | raw }}.....</p>
                         	{% else %}
-								<p> {{ message.content|raw }}</p>
+								<p> {{ message.content | sanitize_html('app.rich_text_sanitizer') }}</p>
 							{% endif %}
 
                       	</span>
