@@ -17,11 +17,11 @@ export default function createTests() {
 
         await page.click('.select2-search__field')
         await page.fill(
-            'input.select2-search__field',
+            '.select2-search__field',
             conversationData.composeMessage.text
         )
         await page.keyboard.press('Enter')
-        await page.keyboard.press('Enter')
+        await page.keyboard.press('Escape')
 
         await page.click(conversationData.bodyMessage.id)
 

@@ -5,7 +5,7 @@ import loginData from '@playwright-test/test-data/login'
 
 export default function createTests() {
     test.beforeEach(async ({page}) => {
-        await page.context().clearCookies()
+        await page.context().clearCookies({name: 'PHPSESSID'})
         await page.goto('/en/login')
     })
 

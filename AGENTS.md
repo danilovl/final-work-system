@@ -37,7 +37,7 @@
 
 - **dev**: база `final_work_system`, индексы без префикса, Redis 13 (`.env` + `.env.local`).
 - **PHPUnit** (`APP_ENV=test`): база `final_work_system_test`, индексы `test_*`, Redis 14 — значения задаются в локальном `.env.test.local` (в `.gitignore`).
-- **E2E** (Playwright): запросы с заголовком `X-E2E-TEST: 1` из частной сети при `E2E_TEST_ENABLE=1` (контейнер `php`) переключают приложение на `.env.test` (`public/index.php`); каталог кэша — `var/cache/e2e_*` (`Kernel::getCacheDir()`).
+- **E2E** (Playwright): запросы с cookie `e2e_test=1` (задаётся в `playwright.config.ts`; заголовок `X-E2E-TEST: 1` тоже принимается) из частной сети при `E2E_TEST_ENABLE=1` (контейнер `php`) переключают приложение на `.env.test` (`public/index.php`); каталог кэша — `var/cache/e2e_*` (`Kernel::getCacheDir()`).
 - **CI** (GitHub Actions): одна обычная база `final_work_system` с `docker/mysql/data/dump.sql`, `.env.test.local` нет — поэтому в `.env.test` указаны общие база, индексы и Redis. Не менять это без учёта CI.
 - **Работа с данными**: любые эксперименты и проверки с записью — только на `final_work_system_test` или на временной копии. dev-базу `final_work_system` не изменять без явного подтверждения пользователя.
 - Скрипты вне PHPUnit, которые сами вызывают `Dotenv::bootEnv()`, запускать с `APP_ENV=test`, иначе подключится dev-база.

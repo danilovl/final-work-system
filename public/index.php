@@ -7,7 +7,7 @@ if (!is_file(dirname(__DIR__) . '/vendor/autoload_runtime.php')) {
 }
 
 $isE2eTestEnabled = ($_SERVER['E2E_TEST_ENABLE'] ?? null) === '1';
-$isE2eTestRequest = ($_SERVER['HTTP_X_E2E_TEST'] ?? null) === '1';
+$isE2eTestRequest = ($_SERVER['HTTP_X_E2E_TEST'] ?? $_COOKIE['e2e_test'] ?? null) === '1';
 $isPrivateNetwork = filter_var(
     $_SERVER['REMOTE_ADDR'] ?? '',
     FILTER_VALIDATE_IP,

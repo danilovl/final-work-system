@@ -11,8 +11,18 @@ export default defineConfig({
     reporter: 'html',
     use: {
         baseURL: 'http://nginx:80',
-        extraHTTPHeaders: {
-            'X-E2E-TEST': '1'
+        storageState: {
+            cookies: [{
+                name: 'e2e_test',
+                value: '1',
+                domain: 'nginx',
+                path: '/',
+                expires: -1,
+                httpOnly: false,
+                secure: false,
+                sameSite: 'Lax'
+            }],
+            origins: []
         },
         actionTimeout: 10000,
         trace: 'on-first-retry',

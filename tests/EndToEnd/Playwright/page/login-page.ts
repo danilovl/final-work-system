@@ -5,7 +5,12 @@ export default class LoginPage {
     }
 
     async login(username: string, password: string): Promise<void> {
-        await this.page.context().clearCookies()
+        const context = this.page.context()
+        const cookies = await context.cookies()
+        const e2eCookies = cookies.filter(cookie => cookie.name === 'e2e_test')
+
+        await context.clearCookies()
+        await context.addCookies(e2eCookies)
 
         await this.page.goto('/en/login')
         await this.page.fill('#username', username)

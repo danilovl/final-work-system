@@ -8,7 +8,7 @@ export default function createTests() {
     test('Change status task success ajax', async ({page}) => {
         await page.goto('/en/work/task/list')
 
-        const switches = page.locator('.switchery')
+        const switches = page.locator('.js-switch')
         const count = Math.min(await switches.count() / 2, 6)
 
         for (let i = 1; i < count; i++) {
