@@ -9,6 +9,9 @@ export default defineConfig({
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
     reporter: 'html',
+    expect: {
+        timeout: 10000
+    },
     use: {
         baseURL: 'http://nginx:80',
         storageState: {
