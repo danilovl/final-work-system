@@ -41,7 +41,9 @@ class RequestListenerTest extends TestCase
     {
         $this->userService = $this->createStub(UserService::class);
         $this->entityManagerService = $this->createStub(EntityManagerService::class);
-        $this->asyncService = new AsyncService($this->createMock(EventDispatcherInterface::class));
+
+        $stubEventDispatcher = $this->createStub(EventDispatcherInterface::class);
+        $this->asyncService = new AsyncService($stubEventDispatcher);
 
         $this->listener = new RequestListener(
             $this->userService,

@@ -36,7 +36,9 @@ class VersionEventDispatcherServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherService::class);
-        $this->asyncService = new AsyncService($this->createMock(EventDispatcherInterface::class));
+        $stubEventDispatcher = $this->createStub(EventDispatcherInterface::class);
+        $this->asyncService = new AsyncService($stubEventDispatcher);
+
         $this->versionEventDispatcherService = new VersionEventDispatcherService(
             eventDispatcher: $this->eventDispatcher,
             asyncService: $this->asyncService

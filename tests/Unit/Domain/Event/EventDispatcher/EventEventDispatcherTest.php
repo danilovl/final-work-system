@@ -37,7 +37,10 @@ class EventEventDispatcherTest extends TestCase
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherService::class);
-        $this->asyncService = new AsyncService($this->createMock(EventDispatcherInterface::class));
+
+        $stubEventDispatcher = $this->createStub(EventDispatcherInterface::class);
+        $this->asyncService = new AsyncService($stubEventDispatcher);
+
         $this->eventEventDispatcher = new EventEventDispatcher(
             eventDispatcher: $this->eventDispatcher,
             asyncService: $this->asyncService

@@ -13,7 +13,10 @@
 namespace App\Tests\Unit\Infrastructure\Service;
 
 use App\Infrastructure\Service\TranslatorService;
-use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\MockObject\{
+    Stub,
+    MockObject
+};
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -48,6 +51,14 @@ class TranslatorServiceTest extends TestCase
         $domain = 'messages';
         $locale = 'ru';
 
+        /** @var MockObject&TranslatorInterface $translator */
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translatorService = new TranslatorService(
+            translator: $translator,
+            requestStack: $this->requestStack,
+            locale: 'en'
+        );
+
         /** @var Stub&Request $request */
         $request = $this->createStub(Request::class);
         $request->method('getLocale')
@@ -57,12 +68,12 @@ class TranslatorServiceTest extends TestCase
             ->method('getCurrentRequest')
             ->willReturn($request);
 
-        $this->translator
+        $translator
             ->method('trans')
             ->with($id, $parameters, $domain, $locale)
             ->willReturn('Translated string');
 
-        $result = $this->translatorService->trans(
+        $result = $translatorService->trans(
             id: $id,
             parameters: $parameters,
             domain: $domain,
