@@ -22,7 +22,6 @@ use App\Domain\Work\Bus\Query\GroupWorkList\{
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
-use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -34,7 +33,6 @@ readonly class WorkListHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private FormDeleteFactory $deleteFactory,
         private WorkFormFactory $workFormFactory,
         private QueryBusInterface $queryBus
     ) {}
@@ -59,16 +57,12 @@ readonly class WorkListHandle
         $result = $this->queryBus->handle($query);
 
         $works = [];
-        $deleteForms = [];
         foreach ($result->workGroups as $entities) {
             $entities = $entities['works'] ?? $entities;
 
             /** @var Work $entity */
             foreach ($entities as $entity) {
                 $works[] = $entity;
-                $deleteForms[$entity->getId()] = $this->deleteFactory
-                    ->createDeleteForm($entity, 'work_delete')
-                    ->createView();
             }
         }
 
@@ -78,8 +72,7 @@ readonly class WorkListHandle
         return $this->twigRenderService->renderToResponse('domain/work/list.html.twig', [
             'form' => $form->createView(),
             'openSearchTab' => $form->isSubmitted(),
-            'workGroups' => $result->workGroups,
-            'deleteForms' => $deleteForms
+            'workGroups' => $result->workGroups
         ]);
     }
 }
