@@ -21,7 +21,7 @@ use App\Domain\Event\Facade\{
 };
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\RequestService;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -40,8 +40,8 @@ readonly class EventGetEventHandle
     {
         $user = $this->userService->getUser();
 
-        $startDate = new DateTime($request->request->getString('start'));
-        $endDate = new DateTime($request->request->getString('end'));
+        $startDate = new DateTimeImmutable($request->request->getString('start'));
+        $endDate = new DateTimeImmutable($request->request->getString('end'));
 
         $mediaData = new EventRepositoryDTO(
             user: $user,

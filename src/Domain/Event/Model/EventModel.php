@@ -17,7 +17,7 @@ use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 
 class EventModel
 {
@@ -31,9 +31,9 @@ class EventModel
 
     public ?EventParticipant $participant = null;
 
-    public DateTime $start;
+    public DateTimeImmutable $start;
 
-    public DateTime $end;
+    public DateTimeImmutable $end;
 
     public User $owner;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\DTO\Api\Input;
 
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 readonly class EventCreateInput
@@ -22,12 +22,12 @@ readonly class EventCreateInput
         public ?string $name,
 
         #[Assert\NotBlank]
-        #[Assert\Type(DateTime::class)]
-        public DateTime $start,
+        #[Assert\Type(DateTimeImmutable::class)]
+        public DateTimeImmutable $start,
 
         #[Assert\NotBlank]
-        #[Assert\Type(DateTime::class)]
-        public DateTime $end,
+        #[Assert\Type(DateTimeImmutable::class)]
+        public DateTimeImmutable $end,
 
         #[Assert\NotBlank]
         #[Assert\Positive]

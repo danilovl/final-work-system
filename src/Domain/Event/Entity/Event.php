@@ -26,7 +26,7 @@ use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
@@ -65,13 +65,13 @@ class Event
     #[Gedmo\Versioned]
     private ?string $name = null;
 
-    #[ORM\Column(name: 'start', type: Types::DATETIME_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'start', type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private DateTime $start;
+    private DateTimeImmutable $start;
 
-    #[ORM\Column(name: 'end', type: Types::DATETIME_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'end', type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private DateTime $end;
+    private DateTimeImmutable $end;
 
     #[ORM\OneToOne(targetEntity: EventParticipant::class, mappedBy: 'event', cascade: ['persist'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -115,22 +115,22 @@ class Event
         $this->comment = $comment;
     }
 
-    public function getStart(): DateTime
+    public function getStart(): DateTimeImmutable
     {
         return $this->start;
     }
 
-    public function setStart(DateTime $start): void
+    public function setStart(DateTimeImmutable $start): void
     {
         $this->start = $start;
     }
 
-    public function getEnd(): DateTime
+    public function getEnd(): DateTimeImmutable
     {
         return $this->end;
     }
 
-    public function setEnd(DateTime $end): void
+    public function setEnd(DateTimeImmutable $end): void
     {
         $this->end = $end;
     }

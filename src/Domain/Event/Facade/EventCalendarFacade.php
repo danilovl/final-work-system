@@ -30,7 +30,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
@@ -71,8 +71,8 @@ class EventCalendarFacade
     public function listEventsByOwner(
         User $user,
         string $type,
-        DateTime $startDate,
-        DateTime $endDate,
+        DateTimeImmutable $startDate,
+        DateTimeImmutable $endDate,
         bool $isApi = false
     ): array {
         $events = [];

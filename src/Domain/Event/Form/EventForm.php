@@ -76,6 +76,7 @@ class EventForm extends AbstractType
                 'choice_label' => static fn (EventParticipant $participant): string => (string) $participant
             ])
             ->add('start', DateType::class, [
+                'input' => 'datetime_immutable',
                 'required' => true,
                 'widget' => 'single_text',
                 'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME->value,
@@ -85,6 +86,7 @@ class EventForm extends AbstractType
                 ],
             ])
             ->add('end', DateType::class, [
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME->value,
                 'required' => true,

@@ -14,15 +14,15 @@ namespace App\Domain\Event\DTO\Repository;
 
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
-use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 
 class EventRepositoryDTO
 {
     public function __construct(
         public ?User $user = null,
-        public ?DateTime $startDate = null,
-        public ?DateTime $endDate = null,
+        public ?DateTimeImmutable $startDate = null,
+        public ?DateTimeImmutable $endDate = null,
         public ?EventType $eventType = null,
     ) {}
 
