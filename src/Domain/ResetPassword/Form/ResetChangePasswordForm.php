@@ -49,7 +49,7 @@ class ResetChangePasswordForm extends AbstractType
             'second_options' => [
                 'label' => 'Repeat Password'
             ],
-            'invalid_message' => 'The password fields must match.'
+            'invalid_message' => 'app.validator.reset_password_password_mismatch'
         ]);
     }
 

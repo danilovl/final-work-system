@@ -7,5 +7,6 @@ app:
     reset_password_email_blank: Please enter your email.
     reset_password_password_blank: Please enter a password.
     reset_password_password_min_length: 'Your password should be at least {{ limit }} characters.'
+    reset_password_password_mismatch: "The entered passwords don't match."
     user_has_role: 'The user with ID "{{ value }}" does not exist, is disabled, or does not have the required role "{{ role }}".'
     work_category_owner: 'One or more work categories do not exist or do not belong to you.'

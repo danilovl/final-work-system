@@ -11,7 +11,7 @@
 
                 {% if not form.plainPassword.first.vars.valid %}
                     <div class="alert alert-danger" role="alert">
-                        {{ 'app.form.validation.password_mismatch' | trans }}
+                        {{ form_errors(form.plainPassword.first) }}
                     </div>
                 {% endif %}
 

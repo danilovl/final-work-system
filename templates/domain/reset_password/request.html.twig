@@ -9,6 +9,12 @@
                     <div class="alert alert-danger" role="alert">{{ flashError }}</div>
                 {% endfor %}
 
+                {% if not form.email.vars.valid %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form_errors(form.email) }}
+                    </div>
+                {% endif %}
+
                 {{ form_start(form, {'attr': {'class': 'fos_user_resetting_request'}} ) }}
                 <h1>{{ 'app.form.label.new_password' | trans }}</h1>
                 <div>
