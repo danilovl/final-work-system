@@ -68,7 +68,10 @@ class MediaService
         string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT
     ): BinaryFileResponse {
         $response = new BinaryFileResponse($file);
-        $response->setContentDisposition($disposition, null === $fileName ? $response->getFile()->getFilename() : $fileName);
+        $response->setContentDisposition(
+            disposition: $disposition,
+            filename: $fileName === null ? $response->getFile()->getFilename() : $fileName
+        );
 
         return $response;
     }
