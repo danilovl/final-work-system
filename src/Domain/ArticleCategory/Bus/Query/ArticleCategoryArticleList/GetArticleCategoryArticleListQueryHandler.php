@@ -14,7 +14,7 @@ namespace App\Domain\ArticleCategory\Bus\Query\ArticleCategoryArticleList;
 
 use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use App\Application\Interfaces\Bus\{QueryBusInterface, QueryHandlerInterface};
+use App\Infrastructure\Interfaces\Bus\{QueryBusInterface, QueryHandlerInterface};
 use App\Domain\Article\Bus\Query\ArticleQueryByCategory\{GetArticleQueryByCategoryQuery, GetArticleQueryByCategoryQueryResult};
 
 #[AsMessageHandler]
