@@ -77,7 +77,12 @@
                                     <div class="chat-message-form">
 
                                         {% if form is not null %}
-                                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                            {{ form_start(form, {
+                                                'attr': {
+                                                    'data-controller': 'tinymce',
+                                                    'class': 'form-horizontal'
+                                                }
+                                            }) }}
                                             <div class="item form-group">
                                                 {{ form_widget(form.content, {'attr': {'class': 'form-control'}} ) }}
                                                 {% if not form.content.vars.valid %}
@@ -109,9 +114,6 @@
 {% block javascript %}
     <script>
         $(document).ready(function () {
-            let locale = '{{ app.request.locale }}';
-
-            initTinymce(locale);
             {% if parameter_get('event_source.conversation.detail.active') == true %}
 
             {% set topics = 'conversation/' ~ conversation.id | hashids_encode %}
