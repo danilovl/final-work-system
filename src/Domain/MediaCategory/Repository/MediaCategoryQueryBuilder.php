@@ -34,14 +34,18 @@ class MediaCategoryQueryBuilder extends BaseQueryBuilder
 
     public function orderByName(SortDirection $order = SortDirection::Ascending): self
     {
-        $this->queryBuilder->orderBy('media_category.name', $order);
+        $this->queryBuilder
+            ->orderBy('media_category.name', $order)
+            ->addOrderBy('media_category.id', $order);
 
         return $this;
     }
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('media_category.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('media_category.createdAt', $order)
+            ->addOrderBy('media_category.id', $order);
 
         return $this;
     }
