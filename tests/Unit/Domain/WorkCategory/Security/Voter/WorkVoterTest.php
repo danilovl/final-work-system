@@ -32,7 +32,7 @@ class WorkVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $workCategory = $this->createMock(WorkCategory::class);
+        $workCategory = $this->createStub(WorkCategory::class);
 
         foreach (WorkCategoryVoter::SUPPORTS as $support) {
             $this->assertTrue($this->workCategoryVoter->supportsPublic($support, $workCategory));
