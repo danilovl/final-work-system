@@ -8,7 +8,7 @@ fos_elastica:
   indexes:
     work:
       client: default
-      index_name: work_index
+      index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%work_index'
       settings:
         index:
           analysis:
@@ -86,7 +86,7 @@ fos_elastica:
 
     conversation:
       client: default
-      index_name: conversation_index
+      index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%conversation_index'
       settings:
         index:
           analysis:
@@ -148,7 +148,7 @@ fos_elastica:
 
     conversation_message:
       client: default
-      index_name: conversation_message_index
+      index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%conversation_message_index'
       settings:
         index:
           analysis:
@@ -210,7 +210,7 @@ fos_elastica:
 
     task:
       client: default
-      index_name: task_index
+      index_name: '%env(ELASTICSEARCH_INDEX_PREFIX)%task_index'
       settings:
         index:
           analysis:

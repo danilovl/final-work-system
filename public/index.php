@@ -16,6 +16,7 @@ $isPrivateNetwork = filter_var(
 
 if ($isE2eTestEnabled && $isE2eTestRequest && $isPrivateNetwork) {
     $_SERVER['APP_RUNTIME_OPTIONS'] = ['dotenv_path' => '.env.test'];
+    $_SERVER['APP_E2E_TEST'] = '1';
 }
 
 require_once dirname(__DIR__) . '/vendor/autoload_runtime.php';

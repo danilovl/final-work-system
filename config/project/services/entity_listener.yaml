@@ -28,3 +28,14 @@ services:
         event: postPersist
         entity: App\Entity\SystemEventRecipient
         method: postPersist
+
+  app.entity_listener.elastica_cascade_remove:
+    class: App\Infrastructure\Event\EventListener\ElasticaCascadeRemoveListener
+    tags:
+      - name: doctrine.event_listener
+        event: preRemove
+        method: preRemove
+
+      - name: doctrine.event_listener
+        event: postFlush
+        method: postFlush

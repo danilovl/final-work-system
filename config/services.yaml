@@ -11,7 +11,6 @@ services:
       $locale: '%locale%'
       $locales: '%locales%'
       $domain: '%domain%'
-      $container: '@service_container'
       $systemInfo: '%system_info%'
       $kernelEnvironment: '%kernel.environment%'
 
@@ -103,3 +102,11 @@ services:
       $container: '@service_container'
 
   Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface: '@Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapper'
+
+  App\Domain\Widget\Service\WidgetManagerService:
+    arguments:
+      $container: '@service_container'
+
+  App\Domain\Widget\Twig\Runtime\HomepageNotifyWidgetRuntime:
+    arguments:
+      $container: '@service_container'

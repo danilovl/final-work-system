@@ -13,6 +13,7 @@
 namespace App;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Override;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 class Kernel extends BaseKernel
@@ -22,5 +23,15 @@ class Kernel extends BaseKernel
     public function __construct(string $environment, bool $debug)
     {
         parent::__construct($environment, $debug);
+    }
+
+    #[Override]
+    public function getCacheDir(): string
+    {
+        if (($_SERVER['APP_E2E_TEST'] ?? null) === '1') {
+            return $this->getProjectDir() . '/var/cache/e2e_' . $this->environment;
+        }
+
+        return parent::getCacheDir();
     }
 }
