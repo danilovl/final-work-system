@@ -77,22 +77,26 @@
                                             </a>
                                         </td>
                                         <td>
-                                            {% set simpleSearch = '' %}
+                                            {% set searchParams = {} %}
                                             {% if enableClearSearch %}
-                                                {% set simpleSearch = '?simple_search[search]=' ~ app.request.query.all['simple_search']['search'] %}
+                                                {% set searchParams = {
+                                                    'simple_search': {
+                                                        'search': searchForm.search.vars.value
+                                                    }
+                                                } %}
                                             {% endif %}
 
                                             <a data-toggle="modal"
                                                data-target="#modalWindow"
                                                class="btn btn-primary btn-xs"
-                                               href="{{ path('conversation_message_last', { 'id': conversation.id | hashids_encode }) }}{{ simpleSearch }}"
+                                               href="{{ path('conversation_message_last', { 'id': conversation.id | hashids_encode } | merge(searchParams)) }}"
                                                target="_blank">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
                                             {% if enableClearSearch %}
                                                 <a class="btn btn-primary btn-xs"
-                                                   href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}{{ simpleSearch }}"
+                                                   href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode } | merge(searchParams)) }}"
                                                    target="_blank">
                                                     <i class="fa fa-search"></i>
                                                 </a>
