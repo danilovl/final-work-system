@@ -203,6 +203,14 @@ app:
     author_list: Seznam autorů
     back_to_revision: Zpět k přepracování
     consultant: Konzultant
+    dashboard_active_works: Aktivní práce
+    dashboard_alerts: Upozornění
+    dashboard_days_left: '{0} Dnes|{1} Zbývá 1 den|]1,Inf[ Zbývá dní: %count%'
+    dashboard_no_alerts: Zatím žádná upozornění
+    dashboard_no_deadlines: Žádné termíny ani schůzky v příštích 30 dnech
+    dashboard_unread_alerts: Nepřečtená upozornění
+    dashboard_unread_messages: Nepřečtené zprávy
+    dashboard_upcoming_deadlines: Blížící se termíny a schůzky
     group_mail: Hromadná pošta
     category: Kategorie
     comment: Komentář

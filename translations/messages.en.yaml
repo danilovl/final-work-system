@@ -202,6 +202,14 @@ app:
     author_like: Author
     author_list: Author list
     back_to_revision: Back to revision
+    dashboard_active_works: Active works
+    dashboard_alerts: Notifications
+    dashboard_days_left: '{0} Today|{1} 1 day left|]1,Inf[ %count% days left'
+    dashboard_no_alerts: No notifications yet
+    dashboard_no_deadlines: Nothing planned in the next 30 days
+    dashboard_unread_alerts: Unread notifications
+    dashboard_unread_messages: Unread messages
+    dashboard_upcoming_deadlines: Upcoming deadlines and appointments
     group_mail: Group mailing
     category: Category
     comment: Comment

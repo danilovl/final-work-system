@@ -202,6 +202,14 @@ app:
     author_like: Автора
     author_list: Список авторов
     back_to_revision: Вернуть на доработку
+    dashboard_active_works: Активные работы
+    dashboard_alerts: Уведомления
+    dashboard_days_left: '{0} Сегодня|{1} Остался 1 день|]1,Inf[ Осталось дней: %count%'
+    dashboard_no_alerts: Уведомлений пока нет
+    dashboard_no_deadlines: На ближайшие 30 дней ничего не запланировано
+    dashboard_unread_alerts: Непрочитанные уведомления
+    dashboard_unread_messages: Непрочитанные сообщения
+    dashboard_upcoming_deadlines: Ближайшие сроки и встречи
     group_mail: Массовая рассылка
     category: Категория
     comment: Комментарий
