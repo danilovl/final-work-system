@@ -16,7 +16,7 @@ use App\Application\Constant\TabTypeConstant;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkDetailTabService;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
+use App\Domain\ConversationMessage\Factory\WorkConversationMessageDTOFactory;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
@@ -27,7 +27,7 @@ readonly class ConversationWorkMessageListHandle
     public function __construct(
         private UserService $userService,
         private WorkDetailTabService $workDetailTabService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private WorkConversationMessageDTOFactory $workConversationMessageDTOFactory
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -43,7 +43,7 @@ readonly class ConversationWorkMessageListHandle
 
         $messages = [];
         foreach ($pagination as $message) {
-            $messages[] = $this->objectToArrayTransformService->transform('api_key_field', $message);
+            $messages[] = $this->workConversationMessageDTOFactory->create($message);
         }
 
         return new JsonResponse([
