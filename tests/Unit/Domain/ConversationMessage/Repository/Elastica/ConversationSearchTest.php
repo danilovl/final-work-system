@@ -100,9 +100,11 @@ class ConversationSearchTest extends TestCase
                     ],
                     'aggs' => [
                         'conversations' => [
-                            'terms' => [
-                                'field' => 'conversation.id',
-                                'size' => 1_000
+                            'composite' => [
+                                'size' => 1_000,
+                                'sources' => [
+                                    ['conversation' => ['terms' => ['field' => 'conversation.id']]]
+                                ]
                             ]
                         ]
                     ]
