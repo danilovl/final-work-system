@@ -30,6 +30,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Table(name: 'conversation_message')]
+#[ORM\Index(name: 'conversation_message_conversation_created_at', columns: ['conversation_id', 'created_at'])]
 #[ORM\Entity(repositoryClass: ConversationMessageRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Gedmo\Loggable]
