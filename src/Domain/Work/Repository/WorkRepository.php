@@ -17,7 +17,7 @@ use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -44,7 +44,7 @@ class WorkRepository extends ServiceEntityRepository
             ->selectDistinctDeadline()
             ->leftJoinSupervisor()
             ->whereBySupervisor($user)
-            ->orderByDeadline(Order::Descending->value)
+            ->orderByDeadline(SortDirection::Descending)
             ->getQueryBuilder();
     }
 
@@ -55,7 +55,7 @@ class WorkRepository extends ServiceEntityRepository
             ->leftJoinSupervisor()
             ->whereBySupervisor($user)
             ->whereProgramDeadlineNotNull()
-            ->orderByProgramDeadline(Order::Descending->value)
+            ->orderByProgramDeadline(SortDirection::Descending)
             ->getQueryBuilder();
     }
 

@@ -16,7 +16,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class WorkQueryBuilder extends BaseQueryBuilder
 {
@@ -152,14 +152,14 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByDeadline(string $order = Order::Descending->value): self
+    public function orderByDeadline(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('work.deadline', $order);
 
         return $this;
     }
 
-    public function orderByProgramDeadline(string $order = Order::Descending->value): self
+    public function orderByProgramDeadline(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('work.deadlineProgram', $order);
 
