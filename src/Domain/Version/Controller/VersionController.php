@@ -12,7 +12,7 @@
 
 namespace App\Domain\Version\Controller;
 
-use App\Application\Attribute\EntityRelationValidatorAttribute;
+use App\Infrastructure\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Media\Entity\Media;

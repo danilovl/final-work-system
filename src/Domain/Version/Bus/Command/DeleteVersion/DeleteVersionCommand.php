@@ -12,7 +12,7 @@
 
 namespace App\Domain\Version\Bus\Command\DeleteVersion;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

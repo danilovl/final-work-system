@@ -12,8 +12,8 @@
 
 namespace App\Domain\Version\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Version\Bus\Command\DeleteVersion\DeleteVersionCommand;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Media\Entity\Media;

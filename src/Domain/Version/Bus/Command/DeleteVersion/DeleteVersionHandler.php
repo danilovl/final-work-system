@@ -12,7 +12,7 @@
 
 namespace App\Domain\Version\Bus\Command\DeleteVersion;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 
 readonly class DeleteVersionHandler implements CommandHandlerInterface

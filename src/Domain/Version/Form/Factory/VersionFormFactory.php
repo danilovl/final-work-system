@@ -13,10 +13,7 @@
 namespace App\Domain\Version\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\{
-    ConstantNotFoundException
-};
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\{ConstantNotFoundException, RuntimeException};
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\Version\Form\VersionForm;
@@ -28,7 +25,7 @@ use Symfony\Component\Form\{
 };
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeList\{GetMediaMimeTypeListQuery, GetMediaMimeTypeListQueryResult};
 
 class VersionFormFactory

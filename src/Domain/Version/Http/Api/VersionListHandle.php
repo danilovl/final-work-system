@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Media\Bus\Query\MediaQueryByWork\{GetMediaQueryByWorkQuery, GetMediaQueryByWorkQueryResult};
 use App\Infrastructure\Service\PaginatorService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;

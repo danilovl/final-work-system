@@ -12,7 +12,7 @@
 
 namespace App\Domain\Version\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Version\Bus\Command\EditVersion\EditVersionCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,

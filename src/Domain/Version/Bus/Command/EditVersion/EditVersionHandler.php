@@ -12,10 +12,7 @@
 
 namespace App\Domain\Version\Bus\Command\EditVersion;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\Media\Bus\Command\SaveMedia\SaveMediaCommand;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 
