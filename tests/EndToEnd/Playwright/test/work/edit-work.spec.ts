@@ -27,7 +27,6 @@ export default function createTests() {
         }
 
         await page.click('#work-button-action')
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })
@@ -54,7 +53,6 @@ export default function createTests() {
         }
 
         await page.click('#work-button-action')
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

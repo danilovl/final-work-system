@@ -7,7 +7,7 @@ export default function createTests() {
 
     test('Delete conversation success', async ({page}) => {
         await page.goto('/en/conversation/list')
-        await page.waitForTimeout(2000)
+        await page.waitForLoadState('networkidle')
 
         const deleteButton = page.locator('.btn.btn-danger').first()
         const dataTarget = await deleteButton.getAttribute('data-bs-target')
@@ -15,7 +15,6 @@ export default function createTests() {
         await deleteButton.click()
         await page.locator(`${dataTarget} .delete-element`).click()
 
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

@@ -31,7 +31,6 @@ export default function createTests() {
         }
 
         await page.locator('#user-button-action').click()
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

@@ -11,7 +11,6 @@ export default function createTests() {
         await page.locator('.btn.btn-danger.btn-xs').first().click()
         await page.locator('.btn.btn-danger.delete-element').first().click()
 
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

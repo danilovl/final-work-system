@@ -7,12 +7,11 @@ export default function createTests() {
 
     test('Delete event calendar success', async ({page}) => {
         await page.goto('/en/event/calendar/manage')
-        await page.waitForTimeout(2000)
+        await page.waitForLoadState('networkidle')
 
         await page.locator('.fc-event-draggable').first().click()
         await page.click('#event-delete')
 
-        await page.waitForTimeout(2000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

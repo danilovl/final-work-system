@@ -23,7 +23,6 @@ export default function createTests() {
         await setEditorContent(page, `<strong>${taskData.description.text}</strong>`)
 
         await page.click('#task-button-action')
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })
@@ -45,7 +44,6 @@ export default function createTests() {
         await setEditorContent(page, `<strong>${taskData.description.text}</strong>`)
 
         await page.click('#task-button-action')
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

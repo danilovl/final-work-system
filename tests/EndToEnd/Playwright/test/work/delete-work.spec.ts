@@ -11,9 +11,13 @@ export default function createTests() {
 
         await page.click('#toggle-search-work-form')
         await page.fill('#work_search_shortcut', workData.shortcut.text)
-        await page.click('#search-work-button')
+        const searchResponsePromise = page.waitForResponse(response => {
+            return response.request().method() === 'POST' && response.url().includes('/work/supervisor/list')
+        })
 
-        await page.waitForTimeout(1000)
+        await page.click('#search-work-button')
+        await searchResponsePromise
+        await page.waitForLoadState('networkidle')
 
         await page.locator('.work-group-list').first().click()
         await page.click('#toggle-search-work-form')
@@ -21,7 +25,6 @@ export default function createTests() {
         await page.locator('.btn.btn-danger.btn-xs').first().click()
         await page.locator('.btn.btn-danger.delete-element').first().click()
 
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

@@ -9,7 +9,7 @@ export default function createTests() {
 
     test('Create conversation success', async ({page}) => {
         await page.goto('/en/conversation/create')
-        await page.waitForTimeout(2000)
+        await page.waitForLoadState('networkidle')
 
         await page.fill(
             conversationData.messageName.id,

@@ -9,7 +9,7 @@ export default function createTests() {
 
     test('Create event address success', async ({page}) => {
         await page.goto('/en/event/address/create')
-        await page.waitForTimeout(2000)
+        await page.waitForLoadState('networkidle')
 
         for (const prop in addressData) {
             const propKey = prop as keyof typeof addressData
@@ -25,7 +25,6 @@ export default function createTests() {
         }
 
         await page.click('#create-event-address-button-action')
-        await page.waitForTimeout(2000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })

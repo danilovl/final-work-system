@@ -13,7 +13,6 @@ export default function createTests() {
         await page.locator(userGroupData.name.id).fill(userGroupData.name.text.toString())
 
         await page.locator('#group-button-action').click()
-        await page.waitForTimeout(1000)
 
         await expect(page.locator('.alert-success')).toBeVisible()
     })
