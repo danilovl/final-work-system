@@ -12,14 +12,10 @@
 
 namespace App;
 
-use App\Infrastructure\Config\DependencyInjection\Boot\OpenTelemetryBoot;
-use App\Infrastructure\Provider\OpenTelemetryExtensionProvider;
 use App\Infrastructure\Config\DependencyInjection\Compiler\{
     WidgetCompilerPass,
-    OpenTelemetryCompilerPass,
     ServicePublicCompilerPass
 };
-use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -29,16 +25,7 @@ class AppBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new OpenTelemetryCompilerPass(new OpenTelemetryExtensionProvider));
         $container->addCompilerPass(new ServicePublicCompilerPass);
         $container->addCompilerPass(new WidgetCompilerPass);
-    }
-
-    public function boot(): void
-    {
-        /** @var ContainerInterface $container */
-        $container = $this->container;
-
-        OpenTelemetryBoot::process($container);
     }
 }
