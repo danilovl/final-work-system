@@ -23,13 +23,14 @@ use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcher;
 use App\Domain\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use App\Domain\ResetPassword\Form\ResetPasswordRequestForm;
 use App\Domain\ResetPassword\Service\ResetPasswordService;
-use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
     RedirectResponse
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserByEmail\{GetUserByEmailQuery, GetUserByEmailQueryResult};
 
 readonly class ResetPasswordRequestHandle
 {
@@ -38,7 +39,7 @@ readonly class ResetPasswordRequestHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private FormFactoryInterface $formFactory,
-        private UserFacade $userFacade,
+        private QueryBusInterface $queryBus,
         private SecurityDispatcher $securityDispatcher,
         private ResetPasswordService $resetPasswordService
     ) {}
@@ -64,7 +65,13 @@ readonly class ResetPasswordRequestHandle
 
     private function processSendingPasswordResetEmail(string $email): RedirectResponse
     {
-        $user = $this->userFacade->findByEmail($email, true);
+        $getUserByEmailQuery = GetUserByEmailQuery::create(
+            email: $email,
+            enable: true
+        );
+        /** @var GetUserByEmailQueryResult $getUserByEmailQueryResult */
+        $getUserByEmailQueryResult = $this->queryBus->handle($getUserByEmailQuery);
+        $user = $getUserByEmailQueryResult->user;
 
         $this->requestService
             ->getSession()
