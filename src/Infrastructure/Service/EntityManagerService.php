@@ -38,6 +38,11 @@ readonly class EntityManagerService
         return $this->entityManager->getReference($entityName, $id);
     }
 
+    public function persist(object $entity): void
+    {
+        $this->entityManager->persist($entity);
+    }
+
     public function persistAndFlush(object $entity): void
     {
         $this->entityManager->persist($entity);

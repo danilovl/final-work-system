@@ -84,20 +84,22 @@ class ConversationFactory extends BaseModelFactory
         iterable $participants,
         int $type
     ): void {
+        /** @var ConversationMessageStatusType $conversationMessageStatusType */
+        $conversationMessageStatusType = $this->entityManagerService->getReference(ConversationMessageStatusType::class, $type);
+
         foreach ($participants as $participant) {
             $participant = $this->getUser($participant);
-
-            if ($participant->getId() !== $user->getId()) {
-                /** @var ConversationMessageStatusType $conversationMessageStatusType */
-                $conversationMessageStatusType = $this->entityManagerService->getReference(ConversationMessageStatusType::class, $type);
-
-                $messageStatus = new ConversationMessageStatus;
-                $messageStatus->setConversation($conversation);
-                $messageStatus->setMessage($message);
-                $messageStatus->setType($conversationMessageStatusType);
-                $messageStatus->setUser($participant);
-                $this->entityManagerService->persistAndFlush($messageStatus);
+            if ($participant->getId() === $user->getId()) {
+                continue;
             }
+
+            $messageStatus = new ConversationMessageStatus;
+            $messageStatus->setConversation($conversation);
+            $messageStatus->setMessage($message);
+            $messageStatus->setType($conversationMessageStatusType);
+            $messageStatus->setUser($participant);
+
+            $this->entityManagerService->persist($messageStatus);
         }
 
         $this->entityManagerService->flush();

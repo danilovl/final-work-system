@@ -51,6 +51,19 @@ class EntityManagerServiceTest extends TestCase
         $this->entityManagerService->getReference(stdClass::class, 1);
     }
 
+    public function testPersist(): void
+    {
+        $this->entityManager
+            ->expects($this->once())
+            ->method('persist');
+
+        $this->entityManager
+            ->expects($this->never())
+            ->method('flush');
+
+        $this->entityManagerService->persist(new stdClass);
+    }
+
     public function testPersistAndFlush(): void
     {
         $this->entityManager
