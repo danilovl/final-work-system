@@ -38,8 +38,17 @@ class SerializerHelper
         array $deserializeContext = [],
     ): object {
         $serializer = self::getBaseSerializer();
-        $jsonContent = $serializer->serialize($object, 'json', $serializeContext);
+        $jsonContent = $serializer->serialize(
+            data: $object,
+            format: 'json',
+            context: $serializeContext
+        );
 
-        return $serializer->deserialize($jsonContent, $toClass, 'json', $deserializeContext);
+        return $serializer->deserialize(
+            data: $jsonContent,
+            type: $toClass,
+            format: 'json',
+            context: $deserializeContext
+        );
     }
 }

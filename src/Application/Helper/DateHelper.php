@@ -48,7 +48,11 @@ class DateHelper
     {
         $from = new DateTimeImmutable($from);
         $to = (new DateTimeImmutable($to))->modify('+1 day');
-        $period = new DatePeriod($from, new DateInterval('P1D'), $to);
+        $period = new DatePeriod(
+            start: $from,
+            interval: new DateInterval('P1D'),
+            end: $to
+        );
 
         $dates = iterator_to_array($period);
         $formattedDates = array_map(
