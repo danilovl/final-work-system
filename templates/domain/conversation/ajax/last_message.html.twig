@@ -36,7 +36,7 @@
                                 {% endif %}
                             </span>
                             <span class="message-content">
-                                {{ message.content | away_to | raw }}
+                                {{ message.content | sanitize_html('app.rich_text_sanitizer') | away_to | raw }}
                             </span>
                         </div>
                     </div>
