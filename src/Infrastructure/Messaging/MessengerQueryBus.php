@@ -16,24 +16,33 @@ use App\Application\Interfaces\Bus\{
     QueryBusInterface,
     QueryInterface
 };
+use LogicException;
 use Symfony\Component\DependencyInjection\Attribute\Target;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Messenger\{
+    HandleTrait,
+    MessageBusInterface
+};
 
 class MessengerQueryBus implements QueryBusInterface
 {
+    use HandleTrait {
+        handle as private handleMessage;
+    }
+
     public function __construct(
         #[Target('query.bus')]
-        private MessageBusInterface $queryBus
+        private MessageBusInterface $messageBus
     ) {}
 
     public function handle(QueryInterface $query): object
     {
-        $envelope = $this->queryBus->dispatch($query);
-        $handledStamps = $envelope->all(HandledStamp::class);
+        $result = $this->handleMessage($query);
 
-        /** @var object $result */
-        $result = $handledStamps[0]->getResult();
+        if (!is_object($result)) {
+            $message = sprintf('Query "%s" handler must return an object, "%s" returned.', $query::class, get_debug_type($result));
+
+            throw new LogicException($message);
+        }
 
         return $result;
     }
