@@ -12,7 +12,7 @@
 
 namespace App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeListByOwner;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\MediaMimeType\Facade\MediaMimeTypeFacade;
 
 readonly class GetMediaMimeTypeListByOwnerQueryHandler implements QueryHandlerInterface
