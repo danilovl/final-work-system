@@ -12,15 +12,23 @@
 
 namespace App\Domain\DocumentCategory\Bus\Command\EditDocumentCategory;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
+use App\Application\Interfaces\Bus\{
+    CommandBusInterface,
+    CommandHandlerInterface
+};
+use App\Domain\MediaCategory\Bus\Command\SaveMediaCategory\SaveMediaCategoryCommand;
 
 readonly class EditDocumentCategoryHandler implements CommandHandlerInterface
 {
-    public function __construct(private MediaCategoryFactory $mediaCategoryFactory) {}
+    public function __construct(private CommandBusInterface $commandBus) {}
 
     public function __invoke(EditDocumentCategoryCommand $command): void
     {
-        $this->mediaCategoryFactory->flushFromModel($command->mediaCategoryModel, $command->mediaCategory);
+        $saveMediaCategoryCommand = SaveMediaCategoryCommand::create(
+            mediaCategoryModel: $command->mediaCategoryModel,
+            mediaCategory: $command->mediaCategory
+        );
+
+        $this->commandBus->dispatchResult($saveMediaCategoryCommand);
     }
 }

@@ -2,25 +2,31 @@
 
 namespace App\Domain\DocumentCategory\Bus\Query\DocumentCategoryList;
 
-use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\MediaCategory\Bus\Query\MediaCategoryQueryByOwner\{GetMediaCategoryQueryByOwnerQuery, GetMediaCategoryQueryByOwnerQueryResult};
 
 #[AsMessageHandler]
 readonly class GetDocumentCategoryListQueryHandler
 {
     public function __construct(
         private PaginatorService $paginatorService,
-        private MediaCategoryFacade $mediaCategoryFacade,
+        private QueryBusInterface $queryBus,
         private ParameterServiceInterface $parameterService,
     ) {}
 
     public function __invoke(GetDocumentCategoryListQuery $query): GetDocumentCategoryListQueryResult
     {
+        $getMediaCategoryQueryByOwnerQuery = GetMediaCategoryQueryByOwnerQuery::create($query->user);
+        /** @var GetMediaCategoryQueryByOwnerQueryResult $getMediaCategoryQueryByOwnerQueryResult */
+        $getMediaCategoryQueryByOwnerQueryResult = $this->queryBus->handle($getMediaCategoryQueryByOwnerQuery);
+        $mediaCategoriesQuery = $getMediaCategoryQueryByOwnerQueryResult->query;
+
         $pagination = $this->paginatorService->createPaginationRequest(
             $query->request,
-            $this->mediaCategoryFacade->queryByOwner($query->user),
+            $mediaCategoriesQuery,
             $this->parameterService->getInt('pagination.default.page'),
             $this->parameterService->getInt('pagination.document_category.limit'),
             detachEntity: true
