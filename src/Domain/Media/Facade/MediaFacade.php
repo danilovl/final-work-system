@@ -44,13 +44,11 @@ readonly class MediaFacade
     /**
      * @return Media[]
      */
-    public function list(int $offset, int $limit): array
+    public function listAfterId(int $id, int $limit): array
     {
         /** @var Media[] $result */
         $result = $this->mediaRepository
-            ->baseQueryBuilder()
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->allAfterId($id, $limit)
             ->getQuery()
             ->getResult();
 

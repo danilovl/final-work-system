@@ -19,6 +19,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Doctrine\Persistence\ManagerRegistry;
 
 class MediaRepository extends ServiceEntityRepository
@@ -33,11 +34,13 @@ class MediaRepository extends ServiceEntityRepository
         return new MediaQueryBuilder($this->createQueryBuilder('media'));
     }
 
-    public function baseQueryBuilder(): QueryBuilder
+    public function allAfterId(int $id, int $limit): QueryBuilder
     {
         return $this->createQueryBuilder('media')
-            ->leftJoin('media.mimeType', 'mime_type')
-            ->leftJoin('media.categories', 'categories');
+            ->where('media.id > :id')
+            ->orderBy('media.id', SortDirection::Ascending)
+            ->setParameter('id', $id)
+            ->setMaxResults($limit);
     }
 
     public function mediaListByUserFilter(MediaRepositoryDTO $mediaData): QueryBuilder

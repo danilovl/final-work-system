@@ -63,7 +63,9 @@ class MediaQueryBuilder extends BaseQueryBuilder
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('media.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('media.createdAt', $order)
+            ->addOrderBy('media.id', $order);
 
         return $this;
     }

@@ -56,15 +56,17 @@ class SyncDatabaseMediaWithRealFileCommand
 
     private function syncMedia(SymfonyStyle $io): void
     {
-        $offset = 0;
+        $lastId = 0;
         $count = 0;
         while (true) {
-            $medias = $this->mediaFacade->list($offset, self::LIMIT);
+            $medias = $this->mediaFacade->listAfterId($lastId, self::LIMIT);
             if (count($medias) === 0) {
                 break;
             }
 
             foreach ($medias as $media) {
+                $lastId = $media->getId();
+
                 $isExist = $this->s3ClientService->doesObjectExist(
                     bucket: $media->getType()->getFolder(),
                     key: $media->getMediaName(),
@@ -78,8 +80,6 @@ class SyncDatabaseMediaWithRealFileCommand
                 $this->entityManagerService->remove($media);
                 $count++;
             }
-
-            $offset += self::LIMIT;
         }
 
         $io->success(sprintf('%d media were deleted', $count));
