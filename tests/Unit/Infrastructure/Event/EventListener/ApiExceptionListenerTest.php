@@ -18,7 +18,6 @@ use Doctrine\ORM\{
     NonUniqueResultException
 };
 use Exception;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\{
@@ -44,16 +43,16 @@ class ApiExceptionListenerTest extends TestCase
 {
     private ApiExceptionListener $listener;
 
-    private MockObject&HttpKernelInterface $kernel;
+    private HttpKernelInterface $kernel;
 
     private Request $request;
 
-    private MockObject&LoggerInterface $logger;
+    private LoggerInterface $logger;
 
     protected function setUp(): void
     {
-        $this->kernel = $this->createMock(HttpKernelInterface::class);
-        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->kernel = $this->createStub(HttpKernelInterface::class);
+        $this->logger = $this->createStub(LoggerInterface::class);
         $this->request = new Request;
         $this->request->server->set('REQUEST_URI', '/api/test');
         $this->listener = new ApiExceptionListener('prod', $this->logger);
@@ -69,6 +68,7 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testDevEnvironment(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
         $listener = new ApiExceptionListener('dev', $this->logger);
         $exception = new Exception('Test exception');
 
@@ -90,6 +90,9 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testNonApiRoute(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->listener = new ApiExceptionListener('prod', $this->logger);
+
         $request = new Request;
         $request->server->set('REQUEST_URI', '/non-api/route');
 
@@ -113,6 +116,9 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testNotFoundExceptions(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->listener = new ApiExceptionListener('prod', $this->logger);
+
         $exceptions = [
             new NotFoundHttpException('Not found'),
             new NoResultException,
@@ -150,6 +156,8 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testAccessDeniedException(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->listener = new ApiExceptionListener('prod', $this->logger);
         $exception = new AccessDeniedException('Access denied');
 
         $this->logger
@@ -179,6 +187,8 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testMethodNotAllowedException(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->listener = new ApiExceptionListener('prod', $this->logger);
         $exception = new MethodNotAllowedHttpException(['GET'], 'Method not allowed');
 
         $this->logger
@@ -208,6 +218,9 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testValidationException(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->listener = new ApiExceptionListener('prod', $this->logger);
+
         $violations = new ConstraintViolationList([
             new ConstraintViolation('Error 1', null, [], null, 'property1', null),
             new ConstraintViolation('Error 2', null, [], null, 'property2', null)
@@ -248,6 +261,8 @@ class ApiExceptionListenerTest extends TestCase
 
     public function testGenericException(): void
     {
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->listener = new ApiExceptionListener('prod', $this->logger);
         $exception = new Exception('Generic exception');
 
         $this->logger

@@ -39,7 +39,7 @@ class KernelListenerTest extends TestCase
     protected function setUp(): void
     {
         $this->listener = new KernelListener;
-        $this->kernel = $this->createMock(HttpKernelInterface::class);
+        $this->kernel = $this->createStub(HttpKernelInterface::class);
         $this->request = new Request;
     }
 

@@ -14,7 +14,6 @@ namespace App\Tests\Unit\Infrastructure\Event\EventListener;
 
 use App\Infrastructure\Event\EventListener\RequestListener;
 use App\Infrastructure\Service\SeoPageService;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -26,25 +25,28 @@ use Symfony\Component\HttpKernel\{
 
 class RequestListenerTest extends TestCase
 {
-    private MockObject&SeoPageService $seoPageService;
+    private SeoPageService $seoPageService;
 
     private RequestListener $listener;
 
     protected function setUp(): void
     {
-        $this->seoPageService = $this->createMock(SeoPageService::class);
+        $this->seoPageService = $this->createStub(SeoPageService::class);
 
         $this->listener = new RequestListener($this->seoPageService);
     }
 
     public function testOnKernelRequest(): void
     {
+        $this->seoPageService = $this->createMock(SeoPageService::class);
+        $this->listener = new RequestListener($this->seoPageService);
+
         $request = new Request(attributes: [
-            'seo' => ['title' => 'test'],
+            '_seo' => ['title' => 'test'],
         ]);
 
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             $request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -58,12 +60,15 @@ class RequestListenerTest extends TestCase
 
     public function testOnKernelRequestNotUser(): void
     {
+        $this->seoPageService = $this->createMock(SeoPageService::class);
+        $this->listener = new RequestListener($this->seoPageService);
+
         $request = new Request(attributes: [
-            'seo' => ['title' => 'test'],
+            '_seo' => ['title' => 'test'],
         ]);
 
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             $request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -77,12 +82,15 @@ class RequestListenerTest extends TestCase
 
     public function testOnKernelRequestNotMain(): void
     {
+        $this->seoPageService = $this->createMock(SeoPageService::class);
+        $this->listener = new RequestListener($this->seoPageService);
+
         $request = new Request(attributes: [
-            'seo' => ['title' => 'test'],
+            '_seo' => ['title' => 'test'],
         ]);
 
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             $request,
             HttpKernelInterface::SUB_REQUEST
         );
@@ -96,6 +104,9 @@ class RequestListenerTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
+        $this->seoPageService = $this->createStub(SeoPageService::class);
+        $this->listener = new RequestListener($this->seoPageService);
+
         $subscribedEvents = $this->listener::getSubscribedEvents();
 
         $this->assertEquals('onKernelRequest', $subscribedEvents[KernelEvents::REQUEST]);
