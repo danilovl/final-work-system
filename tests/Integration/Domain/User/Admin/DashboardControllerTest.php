@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Integration\Infrastructure\Admin;
+namespace App\Tests\Integration\Domain\User\Admin;
 
-use App\Infrastructure\Admin\DashboardController;
+use App\Domain\User\Admin\DashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;

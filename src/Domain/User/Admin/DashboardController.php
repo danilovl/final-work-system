@@ -10,10 +10,9 @@
  *
  */
 
-namespace App\Infrastructure\Admin;
+namespace App\Domain\User\Admin;
 
 use App\Domain\EmailNotification\Entity\EmailNotification;
-use App\Domain\User\Admin\UserCrudController;
 use App\Domain\User\Entity\User;
 use App\Domain\UserGroup\Entity\Group;
 use Danilovl\TranslatorBundle\Entity\Translator;

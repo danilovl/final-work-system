@@ -47,6 +47,7 @@ services:
     resource: '../src/Domain'
     exclude:
       - '../src/Domain/*/Bus/Query/*/*QueryResult.php'
+      - '../src/Domain/*/DependencyInjection'
       - '../src/Domain/*/DataTransferObject/'
       - '../src/Domain/*/DTO/'
       - '../src/Domain/*/Entity/'

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Infrastructure\Event\EventListener;
+namespace App\Domain\Work\EventListener\Entity;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Work\Entity\Work;

@@ -12,10 +12,8 @@
 
 namespace App;
 
-use App\Infrastructure\Config\DependencyInjection\Compiler\{
-    WidgetCompilerPass,
-    ServicePublicCompilerPass
-};
+use App\Domain\Widget\DependencyInjection\Compiler\WidgetCompilerPass;
+use App\Infrastructure\Config\DependencyInjection\Compiler\ServicePublicCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -10,11 +10,11 @@
  *
  */
 
-namespace App\Tests\Unit\Infrastructure\Event\EventListener;
+namespace App\Tests\Unit\Domain\Work\EventListener\Entity;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Work\Entity\Work;
-use App\Infrastructure\Event\EventListener\ElasticaCascadeRemoveListener;
+use App\Domain\Work\EventListener\Entity\ElasticaCascadeRemoveListener;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
