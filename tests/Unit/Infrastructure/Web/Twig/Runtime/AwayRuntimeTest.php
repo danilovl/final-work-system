@@ -22,9 +22,8 @@ class AwayRuntimeTest extends TestCase
 
     protected function setUp(): void
     {
-        $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->any())
-            ->method('generate')
+        $router = $this->createStub(RouterInterface::class);
+        $router->method('generate')
             ->willReturn('https://final-work.com?to=https://another-web.com');
 
         $this->awayRuntime = new AwayRuntime($router, 'final-work.com');
