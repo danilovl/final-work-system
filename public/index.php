@@ -23,6 +23,5 @@ return function (array $context) {
     return new Kernel(
         $context['APP_ENV'],
         (bool) $context['APP_DEBUG'],
-        (bool) $context['OPEN_TELEMETRY_ENABLE']
     );
 };
