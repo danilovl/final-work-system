@@ -20,7 +20,7 @@ use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 
 readonly class EventParticipantFacade

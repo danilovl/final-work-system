@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventParticipant\Entity;
 
-use App\Application\Constant\TranslationConstant;
+use App\Infrastructure\Constant\TranslationConstant;
 use App\Application\Exception\PropertyValueIsNullException;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
