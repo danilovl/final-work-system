@@ -27,8 +27,15 @@ readonly class EditVersionCommand implements CommandInterface
         public User $user
     ) {}
 
-    public static function create(Media $media, MediaModel $mediaModel, User $user): self
-    {
-        return new self($media, $mediaModel, $user);
+    public static function create(
+        Media $media,
+        MediaModel $mediaModel,
+        User $user
+    ): self {
+        return new self(
+            media: $media,
+            mediaModel: $mediaModel,
+            user: $user
+        );
     }
 }
