@@ -15,7 +15,7 @@ namespace App\Domain\Conversation\Bus\Query\ConversationLastMessage;
 use App\Domain\Conversation\Service\MessageHighlightService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessage\Bus\Query\MessagesByConversation\{GetMessagesByConversationQuery, GetMessagesByConversationQueryResult};
 
 #[AsMessageHandler]

@@ -12,12 +12,12 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Exception\ConstantNotFoundException;
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Exception\ConstantNotFoundException;
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByIds\{GetConversationMessageQueryByIdsQuery, GetConversationMessageQueryByIdsQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\MessageIdsByConversationAndSearch\{GetMessageIdsByConversationAndSearchQuery, GetMessageIdsByConversationAndSearchQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByConversation\{GetConversationMessageQueryByConversationQuery, GetConversationMessageQueryByConversationQueryResult};
-use App\Application\Model\SearchModel;
+use App\Infrastructure\Web\Form\Model\SearchModel;
 use App\Infrastructure\Service\{
     PaginatorService,
     RequestService,

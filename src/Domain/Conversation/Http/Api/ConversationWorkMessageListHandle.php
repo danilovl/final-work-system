@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByWorkUser\{GetConversationMessageQueryByWorkUserQuery, GetConversationMessageQueryByWorkUserQueryResult};
 use App\Infrastructure\Service\PaginatorService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Bus\Command\DeleteConversation;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Conversation\Entity\Conversation;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

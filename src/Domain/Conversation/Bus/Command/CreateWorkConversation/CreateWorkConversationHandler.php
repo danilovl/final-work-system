@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Bus\Command\CreateWorkConversation;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Factory\ConversationFactory;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Http\Api;
 
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\ConversationMessage\Bus\Query\HasUnreadMessagesByRecipient\{GetHasUnreadMessagesByRecipientQuery, GetHasUnreadMessagesByRecipientQueryResult};
 use App\Domain\ConversationMessageStatus\Bus\Command\UpdateAllToStatus\UpdateAllToStatusCommand;
 use App\Infrastructure\Service\EntityManagerService;

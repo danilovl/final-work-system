@@ -19,7 +19,7 @@ use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusTyp
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\EntityManagerService;
 use Symfony\Contracts\Service\ResetInterface;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessageStatus\Bus\Query\ConversationIdsByUserType\{GetConversationIdsByUserTypeQuery, GetConversationIdsByUserTypeQueryResult};
 use App\Domain\ConversationMessageStatus\Bus\Query\MessageTypesByConversationUser\{GetMessageTypesByConversationUserQuery, GetMessageTypesByConversationUserQueryResult};
 use App\Domain\ConversationMessageStatus\Bus\Query\ConversationMessageStatusByMessageUser\{GetConversationMessageStatusByMessageUserQuery, GetConversationMessageStatusByMessageUserQueryResult};

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Bus\Command\CreateConversation;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Conversation\Facade\ConversationFacade;
 
 readonly class CreateConversationHandler implements CommandHandlerInterface

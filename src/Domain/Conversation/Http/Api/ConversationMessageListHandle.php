@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByIds\{GetConversationMessageQueryByIdsQuery, GetConversationMessageQueryByIdsQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\MessageIdsByConversationAndSearch\{GetMessageIdsByConversationAndSearchQuery, GetMessageIdsByConversationAndSearchQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\ConversationMessageQueryByConversation\{GetConversationMessageQueryByConversationQuery, GetConversationMessageQueryByConversationQueryResult};

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Http\Api;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\Bus\Query\ConversationList\{
     GetConversationListQuery,

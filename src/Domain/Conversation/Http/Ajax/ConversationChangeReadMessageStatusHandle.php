@@ -12,8 +12,8 @@
 
 namespace App\Domain\Conversation\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\ConversationMessageStatus\Bus\Command\ChangeReadMessageStatus\ChangeReadMessageStatusCommand;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;

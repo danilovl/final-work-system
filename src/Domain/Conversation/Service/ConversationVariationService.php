@@ -22,7 +22,7 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
 use Symfony\Contracts\Service\ResetInterface;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\UserWorks\UserWorksQueryTrait;
 use App\Domain\Work\Bus\Query\WorkUsers\WorkUsersQueryTrait;
 

@@ -31,7 +31,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\ConversationMessage\Bus\Query\ConversationMessage\{GetConversationMessageQuery, GetConversationMessageQueryResult};
 use App\Domain\ConversationMessageStatus\Bus\Command\CreateConversationMessageStatus\CreateConversationMessageStatusCommand;
 

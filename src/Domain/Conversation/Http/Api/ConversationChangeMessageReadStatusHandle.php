@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Http\Api;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\ConversationMessageStatus\Bus\Command\ChangeReadMessageStatus\ChangeReadMessageStatusCommand;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Service\UserService;

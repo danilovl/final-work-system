@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\ConversationType\Bus\Query\ConversationTypeList\{GetConversationTypeListQuery, GetConversationTypeListQueryResult};
 use App\Domain\Conversation\Bus\Command\CreateConversation\CreateConversationCommand;
 use App\Infrastructure\Service\{

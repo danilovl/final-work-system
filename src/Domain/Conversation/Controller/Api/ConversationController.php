@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Controller\Api;
 
-use App\Application\Attribute\EntityRelationValidatorAttribute;
+use App\Infrastructure\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;

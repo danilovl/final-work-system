@@ -12,8 +12,8 @@
 
 namespace App\Domain\Conversation\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\ConversationMessage\Bus\Query\HasUnreadMessagesByRecipient\{GetHasUnreadMessagesByRecipientQuery, GetHasUnreadMessagesByRecipientQueryResult};
 use App\Domain\ConversationMessageStatus\Bus\Command\UpdateAllToStatus\UpdateAllToStatusCommand;
 use App\Infrastructure\Service\{

@@ -12,12 +12,10 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Conversation\Bus\Command\CreateWorkConversation\CreateWorkConversationCommand;
 use App\Domain\Conversation\Entity\Conversation;
-use App\Application\Constant\{
-    FlashTypeConstant
-};
+use App\Infrastructure\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\RequestService;
 use App\Infrastructure\Web\Form\Factory\FormActionFactory;
 use App\Domain\Conversation\Service\{

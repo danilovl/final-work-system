@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Bus\Command\CreateConversation;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Messenger\Attribute\AsMessage;

@@ -23,7 +23,7 @@ use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessage\Bus\Query\LastByConversationIds\{GetLastByConversationIdsQuery, GetLastByConversationIdsQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\CountsByConversationIds\{GetCountsByConversationIdsQuery, GetCountsByConversationIdsQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\ConversationIdsByParticipantAndSearch\{GetConversationIdsByParticipantAndSearchQuery, GetConversationIdsByParticipantAndSearchQueryResult};
