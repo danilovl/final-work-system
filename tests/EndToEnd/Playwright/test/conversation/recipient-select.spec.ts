@@ -35,7 +35,7 @@ export default function createTests() {
         const selectedAfterGroupUnselect = await selectedCount()
         expect(selectedAfterGroupUnselect).toBe(0)
 
-        const option = groupOptions.nth(1)
+        const option = groupOptions.first()
         await option.click()
         await expect(option).toHaveClass(/select2-results__option--selected/)
 

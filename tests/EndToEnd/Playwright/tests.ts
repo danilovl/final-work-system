@@ -42,9 +42,7 @@ import datetimepicker from '@playwright-test/test/layout/datetimepicker.spec'
 import recipientSelect from '@playwright-test/test/conversation/recipient-select.spec'
 
 test.describe(checkCommonUrl)
-test.describe(sidebarMenu)
 test.describe(datetimepicker)
-test.describe(recipientSelect)
 
 test.describe(editProfile)
 test.describe(changeProfileImage)
@@ -55,6 +53,8 @@ test.describe(createWork)
 test.describe(createTask)
 test.describe(createConversation)
 test.describe(searchConversation)
+test.describe(sidebarMenu)
+test.describe(recipientSelect)
 test.describe(createEventAddress)
 test.describe(createEventCalendar)
 
