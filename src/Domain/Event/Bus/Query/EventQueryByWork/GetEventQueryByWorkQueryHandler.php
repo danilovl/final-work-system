@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Query\EventQueryByWork;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Event\Facade\EventFacade;
 
 readonly class GetEventQueryByWorkQueryHandler implements QueryHandlerInterface

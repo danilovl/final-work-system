@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Command\EditEvent;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Model\EventModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;

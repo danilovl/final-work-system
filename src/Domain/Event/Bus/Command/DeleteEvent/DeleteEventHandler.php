@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Command\DeleteEvent;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\Entity\Event;
 

@@ -21,7 +21,7 @@ use App\Domain\User\Service\UserService;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use DateTimeZone;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\EventType\Bus\Query\EventType\{GetEventTypeQuery, GetEventTypeQueryResult};
 use App\Domain\EventAddress\Bus\Query\EventAddress\{GetEventAddressQuery, GetEventAddressQueryResult};
 

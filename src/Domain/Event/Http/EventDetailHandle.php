@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\Comment\Bus\Query\EventComment\{GetEventCommentQuery, GetEventCommentQueryResult};
 use App\Domain\EventAddress\Bus\Query\SkypeEventAddress\{GetSkypeEventAddressQuery, GetSkypeEventAddressQueryResult};
 use App\Infrastructure\Service\{

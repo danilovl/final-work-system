@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, QueryBusInterface};
 use App\Domain\EventParticipant\Bus\Query\EventParticipantsByUserEvent\{GetEventParticipantsByUserEventQuery, GetEventParticipantsByUserEventQueryResult};
 use App\Infrastructure\Service\{
     EntityManagerService,

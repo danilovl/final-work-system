@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Command\EditEvent;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Factory\EventFactory;
 

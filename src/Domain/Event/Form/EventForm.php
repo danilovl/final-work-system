@@ -12,10 +12,8 @@
 
 namespace App\Domain\Event\Form;
 
-use App\Application\Constant\{
-    DateFormatConstant,
-    FormConstant
-};
+use App\Application\Constant\FormConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\Event\Validation\Constraint\EventTime;
 use App\Domain\EventAddress\Entity\EventAddress;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Command\DeleteEvent;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Event\Entity\Event;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

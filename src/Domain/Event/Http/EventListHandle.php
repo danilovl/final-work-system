@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Event\Bus\Query\EventList\{
     GetEventListQuery,
     GetEventListQueryResult

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Command\EventSwitchToSkype;
 
-use App\Application\Interfaces\Bus\{CommandHandlerInterface, QueryBusInterface};
+use App\Infrastructure\Interfaces\Bus\{CommandHandlerInterface, QueryBusInterface};
 use App\Domain\EventAddress\Bus\Query\SkypeEventAddress\{GetSkypeEventAddressQuery, GetSkypeEventAddressQueryResult};
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\Entity\Event;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\EventFacade;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\EventCalendar\Bus\Query\UserEventsCalendar\{GetUserEventsCalendarQuery, GetUserEventsCalendarQueryResult};
 
 readonly class EventGetEventHandle

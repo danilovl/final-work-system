@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Bus\Command\CreateEvent;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Factory\EventFactory;
 use App\Infrastructure\Service\EntityManagerService;
