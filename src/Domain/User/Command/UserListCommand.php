@@ -14,7 +14,6 @@ namespace App\Domain\User\Command;
 
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
-use Doctrine\Common\Collections\Order;
 use Symfony\Component\Console\Attribute\{
     Option,
     AsCommand
@@ -58,7 +57,7 @@ class UserListCommand
     ): int {
         $users = $this->entityManager
             ->getRepository(User::class)
-            ->findBy([], ['id' => Order::Descending->value], $maxResult);
+            ->findBy([], ['id' => 'DESC'], $maxResult);
 
         $usersAsPlainArrays = array_map(fn (User $user): array => $this->userToArray($user), $users);
 
