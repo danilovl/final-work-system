@@ -1,0 +1,5 @@
+api_key_get_work_categories:
+  path: ''
+  defaults:
+    _controller: App\Domain\WorkCategory\Controller\Api\WorkCategoryController::list
+  methods: [GET]
