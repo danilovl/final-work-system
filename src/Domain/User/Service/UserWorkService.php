@@ -18,17 +18,19 @@ use App\Domain\Work\Constant\{
     WorkUserTypeConstant
 };
 use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection,
-    Criteria
+    Collection
 };
 
 class UserWorkService
 {
+    public function __construct(private readonly WorkFacade $workFacade) {}
+
     /**
      * @return ArrayCollection<User>
      */
@@ -98,35 +100,14 @@ class UserWorkService
         ?WorkType $type = null,
         ?WorkStatus $status = null
     ): ArrayCollection {
-        /** @var ArrayCollection<Work> $collectionWorks */
-        $collectionWorks = new ArrayCollection;
-        $criteria = Criteria::create();
+        $works = $this->workFacade->listByUserRole(
+            user: $user,
+            type: $userType,
+            workType: $type,
+            workStatus: $status
+        );
 
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR->value => $user->getAuthorWorks(),
-            WorkUserTypeConstant::SUPERVISOR->value => $user->getSupervisorWorks(),
-            WorkUserTypeConstant::OPPONENT->value => $user->getOpponentWorks(),
-            WorkUserTypeConstant::CONSULTANT->value => $user->getConsultantWorks(),
-            default => throw new RuntimeException("UserType '{$userType}' not found")
-        };
-
-        if ($type !== null) {
-            $criteria->where(Criteria::expr()->eq('type', $type));
-            $userWorks = $userWorks->matching($criteria);
-        }
-
-        if ($status !== null) {
-            $criteria->andWhere(Criteria::expr()->eq('status', $status));
-            $userWorks = $userWorks->matching($criteria);
-        }
-
-        if (!$userWorks->isEmpty()) {
-            foreach ($userWorks as $work) {
-                $collectionWorks->add($work);
-            }
-        }
-
-        return $collectionWorks;
+        return new ArrayCollection($works);
     }
 
     /**
