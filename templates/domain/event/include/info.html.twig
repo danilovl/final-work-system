@@ -21,7 +21,7 @@
 
                     {% if event.address.description %}
                         <dt>{{ 'app.text.description' | trans }}:</dt>
-                        <dd> {{ event.address.description|raw }}</dd>
+                        <dd> {{ event.address.description | sanitize_html('app.rich_text_sanitizer') }}</dd>
                     {% endif %}
 
                     {% if event.address.street %}
