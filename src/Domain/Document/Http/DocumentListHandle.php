@@ -10,6 +10,7 @@
 
 namespace App\Domain\Document\Http;
 
+use App\Domain\Document\Model\DocumentSearchModel;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
@@ -53,8 +54,9 @@ readonly class DocumentListHandle
         $users = $this->userFacade->listUserActiveSupervisors($user);
         /** @var User[] $usersArray */
         $usersArray = $users->toArray();
-        /** @var array<string, mixed>|null $criteria */
-        $criteria = $form->isSubmitted() && $form->isValid() ? $form->getData() : null;
+        /** @var DocumentSearchModel|null $documentSearchModel */
+        $documentSearchModel = $form->getData();
+        $criteria = $form->isSubmitted() && $form->isValid() && $documentSearchModel !== null ? $documentSearchModel->toArray() : null;
 
         $query = GetDocumentListQuery::create(
             request: $request,
