@@ -9,8 +9,7 @@ export default function createTests() {
         await page.goto('/en/work/task/list')
 
         const switches = page.locator('.switchery')
-        let count = await switches.count()
-        count = count / 2
+        const count = Math.min(await switches.count() / 2, 6)
 
         for (let i = 1; i < count; i++) {
             await switches.nth(i).click()

@@ -10,5 +10,9 @@ export default {
     supervisor: {
         username: 'supervisor',
         password: 'supervisorsupervisor'
+    },
+    admin: {
+        username: 'admin',
+        password: 'adminadmin'
     }
 }

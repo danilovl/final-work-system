@@ -30,6 +30,12 @@ import deleteWork from '@playwright-test/test/work/delete-work.spec'
 import editWork from '@playwright-test/test/work/edit-work.spec'
 import editWorkAuthor from '@playwright-test/test/work/edit-work-author.spec'
 
+import editRead from '@playwright-test/test/data/edit-read.spec'
+import listIntegrity from '@playwright-test/test/data/list-integrity.spec'
+import studentRead from '@playwright-test/test/data/student-read.spec'
+
+import pageCoverage from '@playwright-test/test/coverage/page-coverage.spec'
+
 test.describe(checkCommonUrl)
 
 test.describe(editProfile)
@@ -49,6 +55,11 @@ test.describe(changeTaskStatus)
 test.describe(searchTask)
 test.describe(editWork)
 test.describe(editWorkAuthor)
+
+test.describe(editRead)
+test.describe(listIntegrity)
+test.describe(studentRead)
+test.describe(pageCoverage)
 
 test.describe(deleteEventCalendar)
 test.describe(deleteEventAddress)
