@@ -74,9 +74,9 @@ class ConversationService
             ])
             ->setMaxResults(1);
 
-        /** @var ConversationMessage|null $message */
-        $message = $messages->matching($criteria)[0] ?? null;
+        /** @var ConversationMessage|false $message */
+        $message = $messages->matching($criteria)->first();
 
-        return $message;
+        return $message === false ? null : $message;
     }
 }
