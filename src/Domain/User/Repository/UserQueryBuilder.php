@@ -36,7 +36,8 @@ class UserQueryBuilder extends BaseQueryBuilder
     {
         $this->queryBuilder
             ->addOrderBy('user.lastname', SortDirection::Ascending)
-            ->addOrderBy('user.firstname', SortDirection::Ascending);
+            ->addOrderBy('user.firstname', SortDirection::Ascending)
+            ->addOrderBy('user.id', SortDirection::Ascending);
 
         return $this;
     }
@@ -169,6 +170,7 @@ class UserQueryBuilder extends BaseQueryBuilder
 
         $this->queryBuilder
             ->orderBy('user.lastname', SortDirection::Ascending)
+            ->addOrderBy('user.id', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('supervisor', $user);
 
@@ -218,6 +220,7 @@ class UserQueryBuilder extends BaseQueryBuilder
 
         $this->queryBuilder
             ->orderBy('user.lastname', SortDirection::Ascending)
+            ->addOrderBy('user.id', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
@@ -257,6 +260,7 @@ class UserQueryBuilder extends BaseQueryBuilder
 
         $this->queryBuilder
             ->orderBy('user.lastname', SortDirection::Ascending)
+            ->addOrderBy('user.id', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
@@ -296,6 +300,7 @@ class UserQueryBuilder extends BaseQueryBuilder
 
         $this->queryBuilder
             ->orderBy('user.lastname', SortDirection::Ascending)
+            ->addOrderBy('user.id', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 
@@ -335,6 +340,7 @@ class UserQueryBuilder extends BaseQueryBuilder
 
         $this->queryBuilder
             ->orderBy('user.lastname', SortDirection::Ascending)
+            ->addOrderBy('user.id', SortDirection::Ascending)
             ->groupBy('user.id')
             ->setParameter('user', $user);
 

@@ -28,7 +28,6 @@ use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Api\WorkDTO;
-use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
 
 readonly class UserListHandle
@@ -55,26 +54,30 @@ readonly class UserListHandle
         $pagination = $result->users;
 
         $userListItems = [];
-        $getUserWorkAndStatus = $this->shouldGetUserWorkAndStatus($type);
+        $worksByUser = [];
+
+        if ($this->shouldGetUserWorkAndStatus($type)) {
+            $userIds = [];
+            /** @var User $paginationUser */
+            foreach ($pagination as $paginationUser) {
+                $userIds[] = $paginationUser->getId();
+            }
+
+            $worksByUser = $this->workFacade->listByUsersSupervisorStatus(
+                userIds: $userIds,
+                supervisor: $user,
+                type: $type,
+                workStatus: null
+            );
+        }
 
         /** @var User $paginationUser */
         foreach ($pagination as $paginationUser) {
             $userDTO = $this->objectToDtoMapper->map($paginationUser, UserDTO::class);
             $userWorks = [];
 
-            if ($getUserWorkAndStatus === true) {
-                $workRepositoryDTO = new WorkRepositoryDTO(
-                    user: $paginationUser,
-                    supervisor: $user,
-                    type: $type
-                );
-
-                $paginationUserWorks = $this->workFacade->listByAuthorSupervisorStatus($workRepositoryDTO);
-                
-                foreach ($paginationUserWorks as $work) {
-                    $userWorks[] = $this->objectToDtoMapper->map($work, WorkDTO::class);
-
-                }
+            foreach ($worksByUser[$paginationUser->getId()] ?? [] as $work) {
+                $userWorks[] = $this->objectToDtoMapper->map($work, WorkDTO::class);
             }
 
             $userListItems[] = new UserListItemDTO(

@@ -27,7 +27,7 @@ readonly class UserDetailDTO
         public string $lastname,
         public string $fullName,
         public string $email,
-        public string $token,
+        public ?string $token,
         public ?string $degreeBefore,
         public ?string $degreeAfter,
         public array $roles = [],

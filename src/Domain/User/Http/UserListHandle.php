@@ -27,10 +27,8 @@ use App\Infrastructure\Service\{
 use App\Domain\User\Helper\UserHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Form\WorkSearchStatusForm;
-use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -110,26 +108,28 @@ readonly class UserListHandle
         $userStatusWorkCounts = new ArrayCollection;
 
         if ($getUserWorkAndStatus === true) {
+            $userIds = [];
             foreach ($result->users as $paginationUser) {
-                $workRepositoryDTO = new WorkRepositoryDTO(
-                    user: $paginationUser,
-                    supervisor: $user,
-                    type: $type,
-                    workStatus: $workStatus
-                );
+                $userIds[] = $paginationUser->getId();
+            }
 
-                $paginationUserWorks = $this->workFacade->listByAuthorSupervisorStatus($workRepositoryDTO);
-                $works->set($paginationUser->getId(), $paginationUserWorks);
+            $worksByUser = $this->workFacade->listByUsersSupervisorStatus(
+                userIds: $userIds,
+                supervisor: $user,
+                type: $type,
+                workStatus: $workStatus
+            );
 
-                $workStatusData = new WorkStatusRepositoryDTO(
-                    user: $paginationUser,
-                    supervisor: $user,
-                    type: $type,
-                    workStatus: $workStatus
-                );
+            $workStatusCountsByUser = $this->workStatusFacade->listCountByUsers(
+                userIds: $userIds,
+                supervisor: $user,
+                type: $type,
+                workStatus: $workStatus
+            );
 
-                $workStatusCount = $this->workStatusFacade->listCountByUser($workStatusData);
-                $userStatusWorkCounts->set($paginationUser->getId(), $workStatusCount);
+            foreach ($userIds as $userId) {
+                $works->set($userId, $worksByUser[$userId] ?? []);
+                $userStatusWorkCounts->set($userId, $workStatusCountsByUser[$userId] ?? []);
             }
         }
 
