@@ -54,6 +54,14 @@ event_address_delete:
     _controller: App\Domain\EventAddress\Controller\EventAddressController::delete
   methods: [DELETE]
 
+event_address_switch_skype_ajax:
+  path: /switch-skype/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Domain\EventAddress\Controller\Ajax\EventAddressController::switchSkype
+  methods: [POST]
+
 event_address_delete_ajax:
   path: /delete/{id}/ajax
   requirements:

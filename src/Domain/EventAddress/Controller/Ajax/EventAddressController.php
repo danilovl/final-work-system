@@ -18,7 +18,8 @@ use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Http\Ajax\{
     EventAddressEditHandle,
     EventAddressCreateHandle,
-    EventAddressDeleteHandle
+    EventAddressDeleteHandle,
+    EventAddressSwitchSkypeHandle
 };
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -31,7 +32,8 @@ readonly class EventAddressController
         private AuthorizationCheckerService $authorizationCheckerService,
         private EventAddressCreateHandle $eventAddressCreateHandle,
         private EventAddressEditHandle $eventAddressEditHandle,
-        private EventAddressDeleteHandle $eventAddressDeleteHandle
+        private EventAddressDeleteHandle $eventAddressDeleteHandle,
+        private EventAddressSwitchSkypeHandle $eventAddressSwitchSkypeHandle
     ) {}
 
     public function create(Request $request): JsonResponse
@@ -53,5 +55,12 @@ readonly class EventAddressController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
         return $this->eventAddressDeleteHandle->__invoke($eventAddress);
+    }
+
+    public function switchSkype(EventAddress $eventAddress): JsonResponse
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
+
+        return $this->eventAddressSwitchSkypeHandle->__invoke($eventAddress);
     }
 }

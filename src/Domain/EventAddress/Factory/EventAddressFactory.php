@@ -39,6 +39,7 @@ class EventAddressFactory extends BaseModelFactory
         $eventAddress->setStreet($eventAddressModel->street);
         $eventAddress->setLatitude($eventAddressModel->latitude);
         $eventAddress->setLongitude($eventAddressModel->longitude);
+        $eventAddress->setSkype($eventAddressModel->skype);
         $eventAddress->setOwner($eventAddressModel->owner);
 
         return $eventAddress;

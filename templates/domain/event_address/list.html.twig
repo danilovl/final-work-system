@@ -77,7 +77,7 @@
                                                 {% include 'other/common_part/button/js-switch.html.twig' with {
                                                     'checked': eventAddress.skype == true,
                                                     'dataSwitchery': 'false',
-                                                    'dataTargetUrl': path('event_switch_to_skype', { 'id': eventAddress.id | hashids_encode })
+                                                    'dataTargetUrl': path('event_address_switch_skype_ajax', { 'id': eventAddress.id | hashids_encode })
                                                 } %}
                                             </td>
                                             <td>

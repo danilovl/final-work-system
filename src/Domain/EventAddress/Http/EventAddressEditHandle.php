@@ -20,10 +20,8 @@ use App\Infrastructure\Service\{
 };
 use App\Domain\EventAddress\Bus\Command\EditEventAddress\EditEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
-use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Domain\EventAddress\Form\Factory\EventAddressFormFactory;
 use App\Domain\EventAddress\Model\EventAddressModel;
-use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -34,17 +32,14 @@ readonly class EventAddressEditHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private UserService $userService,
         private TwigRenderService $twigRenderService,
         private EventAddressFormFactory $eventAddressFormFactory,
-        private EventAddressFacade $eventAddressFacade,
         private TranslatorService $translatorService,
         private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(Request $request, EventAddress $eventAddress): Response
     {
-        $user = $this->userService->getUser();
         $eventAddressModel = EventAddressModel::fromEventAddress($eventAddress);
 
         $form = $this->eventAddressFormFactory
@@ -55,13 +50,6 @@ readonly class EventAddressEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($eventAddress->isSkype()) {
-                $eventAddressSkype = $this->eventAddressFacade
-                    ->findSkypeByOwner($user);
-
-                $eventAddressSkype?->setSkype(false);
-            }
-
             $command = EditEventAddressCommand::create($eventAddressModel, $eventAddress);
             $this->messageBus->dispatch($command);
 

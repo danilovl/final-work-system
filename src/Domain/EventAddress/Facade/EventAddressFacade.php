@@ -36,6 +36,20 @@ readonly class EventAddressFacade
             ->getQuery();
     }
 
+    /**
+     * @return EventAddress[]
+     */
+    public function listSkypeByOwner(User $user): array
+    {
+        /** @var EventAddress[] $result */
+        $result = $this->eventAddressRepository
+            ->skypeByOwner($user)
+            ->getQuery()
+            ->getResult();
+
+        return $result;
+    }
+
     public function findSkypeByOwner(User $user): ?EventAddress
     {
         /** @var EventAddress|null $result */
