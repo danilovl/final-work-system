@@ -18,11 +18,21 @@ use App\Application\Helper\DateHelper;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
+use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
+use App\Domain\EventScheduleTemplate\Factory\EventScheduleTemplateFactory;
 use App\Domain\User\Entity\User;
+use App\Infrastructure\Service\EntityManagerService;
 use DateTime;
 
 class EventScheduleFactory extends BaseModelFactory
 {
+    public function __construct(
+        EntityManagerService $entityManagerService,
+        private readonly EventScheduleTemplateFactory $eventScheduleTemplateFactory
+    ) {
+        parent::__construct($entityManagerService);
+    }
+
     public function cloneEventSchedule(
         User $user,
         EventSchedule $eventSchedule,
@@ -79,8 +89,40 @@ class EventScheduleFactory extends BaseModelFactory
         $eventSchedule->setName($eventScheduleModel->name);
         $eventSchedule->setDescription($eventScheduleModel->description);
         $eventSchedule->setOwner($eventScheduleModel->owner);
-        $eventSchedule->setTemplates($eventScheduleModel->templates);
+        $this->syncTemplates($eventSchedule, $eventScheduleModel);
 
         return $eventSchedule;
+    }
+
+    private function syncTemplates(EventSchedule $eventSchedule, EventScheduleModel $eventScheduleModel): void
+    {
+        /** @var array<int, EventScheduleTemplate> $existingTemplates */
+        $existingTemplates = [];
+        foreach ($eventSchedule->getTemplates() as $template) {
+            $existingTemplates[$template->getId()] = $template;
+        }
+
+        $keepTemplateIds = [];
+        foreach ($eventScheduleModel->templates as $templateModel) {
+            $template = $templateModel->id !== null ? ($existingTemplates[$templateModel->id] ?? null) : null;
+
+            if ($template === null) {
+                $template = new EventScheduleTemplate;
+                $eventSchedule->addTemplate($template);
+            } else {
+                $keepTemplateIds[$templateModel->id] = true;
+            }
+
+            $this->eventScheduleTemplateFactory->fromModel($template, $templateModel);
+        }
+
+        foreach ($existingTemplates as $id => $template) {
+            if (isset($keepTemplateIds[$id])) {
+                continue;
+            }
+
+            $eventSchedule->removeTemplate($template);
+            $this->entityManagerService->remove($template);
+        }
     }
 }
