@@ -35,6 +35,13 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    public function selectParticipant(): self
+    {
+        $this->queryBuilder->addSelect('participant');
+
+        return $this;
+    }
+
     public function selectParticipantUser(): self
     {
         $this->queryBuilder->addSelect('participant, user');

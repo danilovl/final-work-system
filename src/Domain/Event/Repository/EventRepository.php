@@ -72,6 +72,7 @@ class EventRepository extends ServiceEntityRepository
     public function allByParticipant(EventRepositoryDTO $eventData): QueryBuilder
     {
         $builder = $this->createEventQueryBuilder()
+            ->selectParticipant()
             ->whereByParticipantUser($eventData->getUserNotNull())
             ->groupByEventId();
 
