@@ -15,6 +15,7 @@ namespace App\Domain\Work\Http;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
+use App\Domain\Task\Service\TaskService;
 use App\Domain\Work\Bus\Query\GroupWorkList\{
     GetGroupWorkListQuery,
     GetGroupWorkListQueryResult
@@ -35,7 +36,8 @@ readonly class WorkListHandle
         private TwigRenderService $twigRenderService,
         private FormDeleteFactory $deleteFactory,
         private WorkFormFactory $workFormFactory,
-        private QueryBusInterface $queryBus
+        private QueryBusInterface $queryBus,
+        private TaskService $taskService
     ) {}
 
     public function __invoke(Request $request, string $type): Response
@@ -57,17 +59,21 @@ readonly class WorkListHandle
         /** @var GetGroupWorkListQueryResult $result */
         $result = $this->queryBus->handle($query);
 
+        $works = [];
         $deleteForms = [];
         foreach ($result->workGroups as $entities) {
             $entities = $entities['works'] ?? $entities;
 
             /** @var Work $entity */
             foreach ($entities as $entity) {
+                $works[] = $entity;
                 $deleteForms[$entity->getId()] = $this->deleteFactory
                     ->createDeleteForm($entity, 'work_delete')
                     ->createView();
             }
         }
+
+        $this->taskService->preloadActiveTasks($works);
 
         return $this->twigRenderService->renderToResponse('domain/work/list.html.twig', [
             'form' => $form->createView(),

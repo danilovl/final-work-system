@@ -28,4 +28,10 @@ class TaskRuntime
     ): float {
         return $this->taskService->getCompleteTaskPercentage($work, $tasks);
     }
+
+    #[AsTwigFunction('get_active_work_tasks')]
+    public function getActiveWorkTasks(Work $work): Collection
+    {
+        return $this->taskService->getActiveWorkTask($work);
+    }
 }

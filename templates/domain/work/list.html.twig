@@ -138,7 +138,7 @@
                                                     {{ work.opponent }}
                                                 </td>
 
-                                                {% set  activeTask = work.getActiveTask %}
+                                                {% set  activeTask = get_active_work_tasks(work) %}
                                                 {% if activeTask is not empty %}
                                                     <td class="project_progress">
                                                         <div class="progress progress_sm">

@@ -101,12 +101,12 @@ readonly class TaskFacade
     /**
      * @param Work[] $works
      */
-    public function queryByWorks(array $works): Query
+    public function queryByWorks(array $works, bool $active = false): Query
     {
         Assert::allIsInstanceOf($works, Work::class);
 
         return $this->taskRepository
-            ->allByWorks($works)
+            ->allByWorks($works, $active)
             ->getQuery();
     }
 }
