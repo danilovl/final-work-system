@@ -16,9 +16,11 @@ use App\Application\Exception\InvalidArgumentException;
 use App\Domain\Widget\Interfaces\WidgetInterface;
 use App\Domain\Widget\Service\WidgetManagerService;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 class WidgetManagerServiceTest extends TestCase
 {
     private MockObject&ContainerInterface $container;
