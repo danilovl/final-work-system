@@ -6,10 +6,6 @@ framework:
       command.bus: ~
       query.bus: ~
 
-      messenger.bus.default:
-        middleware:
-          - App\Infrastructure\OpenTelemetry\Messenger\MessengerMiddleware
-
     failure_transport: failed
 
     transports:

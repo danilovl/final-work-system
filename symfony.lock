@@ -43,6 +43,9 @@
     "danilovl/object-to-array-transform-bundle": {
         "version": "v3.0.5"
     },
+    "danilovl/open-telemetry-bundle": {
+        "version": "dev-master"
+    },
     "danilovl/parameter-bundle": {
         "version": "v2.2.1"
     },

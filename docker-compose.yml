@@ -164,6 +164,8 @@ services:
 #    restart: always
     ports:
       - '7130:9001'
+    env_file:
+      - ./docker/opentelemetry/opentelemetry.env
     depends_on:
       - rabbitmq
       - mysql
