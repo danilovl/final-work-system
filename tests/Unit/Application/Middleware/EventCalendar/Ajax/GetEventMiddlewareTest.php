@@ -20,10 +20,8 @@ class GetEventMiddlewareTest extends TestCase
 
     protected function setUp(): void
     {
-        $translatorService = $this->createMock(TranslatorService::class);
-        $translatorService->expects($this->any())
-            ->method('trans')
-            ->willReturn('content');
+        $translatorService = $this->createStub(TranslatorService::class);
+        $translatorService->method('trans')->willReturn('content');
 
         $this->getEventMiddleware = new GetEventMiddleware($translatorService);
     }
@@ -83,7 +81,7 @@ class GetEventMiddlewareTest extends TestCase
     private function getMockControllerEvent(Request $request): ControllerEvent
     {
         return new ControllerEvent(
-            $this->createMock(HttpKernelInterface::class),
+            $this->createStub(HttpKernelInterface::class),
             static fn (): bool => true,
             $request,
             HttpKernelInterface::MAIN_REQUEST
