@@ -151,6 +151,6 @@ class DocumentFormFactory
                 throw new ConstantNotFoundException('Controller method type constant not found');
         }
 
-        return $this->formFactory->create($formClass, $mediaModel, $parameters);
+        return $this->formFactory->create(type: $formClass, data: $mediaModel, options: $parameters);
     }
 }
