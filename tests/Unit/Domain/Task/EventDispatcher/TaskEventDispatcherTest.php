@@ -49,12 +49,12 @@ class TaskEventDispatcherTest extends TestCase
         array $expectEvents,
         array $expectNames
     ): void {
-        $task = $this->createMock(Task::class);
-        $task->expects($this->any())
+        $task = $this->createStub(Task::class);
+        $task
             ->method('isActive')
             ->willReturn(true);
 
-        $task->expects($this->any())
+        $task
             ->method('getSystemEvents')
             ->willReturn(new ArrayCollection([]));
 
