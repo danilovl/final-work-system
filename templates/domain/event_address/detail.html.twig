@@ -79,7 +79,7 @@
                                             {{ 'app.text.description' | trans }}
                                         </dt>
                                         <dd>
-                                            {{ eventAddress.description|raw }}
+                                            {{ eventAddress.description | sanitize_html('app.rich_text_sanitizer') }}
                                         </dd>
                                     {% endif %}
 
