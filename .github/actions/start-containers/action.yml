@@ -8,4 +8,5 @@ runs:
       shell: bash
       run: |
         docker network create dockernet
+        chown -R 1000:1000 ./docker-data/elasticsearch/data 2>/dev/null || chmod -R 0777 ./docker-data/elasticsearch/data
         GITHUB_ACTION_UUID=1001 docker compose -f docker-compose.yml up -d

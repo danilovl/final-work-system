@@ -70,6 +70,12 @@ jobs:
       - name: Run kernel tests
         uses: ./.github/actions/run-integration-test
 
+      - name: Dump Elasticsearch logs (for debugging)
+        if: failure()
+        run: |
+          docker compose logs elasticsearch --tail=500 || true
+          docker compose ps -a || true
+
       - name: View dev log file
         if: always()
         uses: ./.github/actions/view-dev-log-file
