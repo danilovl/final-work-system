@@ -10,7 +10,15 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        {{ form_start(form, {'action': path('version_create_ajax', { 'id': work.id }), 'method': 'POST','attr': {'class': 'form-horizontal', 'id': 'myform'}}) }}
+                        {{ form_start(form, {
+                            'action': path('version_create_ajax', { 'id': work.id }),
+                            'method': 'POST',
+                            'attr': {
+                                'data-controller': 'tinymce',
+                                'class': 'form-horizontal',
+                                'id': 'myform'
+                            }
+                        }) }}
 
                         <div class="item form-group">
                             {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
@@ -30,7 +38,13 @@
                             <div class="item form-group">
                                 {{ form_label(form.category, 'app.form.label.category', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                                 <div class="col-md-10 col-sm-10 col-xs-12">
-                                    {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.category, {
+                                        'attr': {
+                                            'data-controller': 'select2',
+                                            'data-select2-width-value': '100%',
+                                            'class': 'form-control'
+                                        }
+                                    }) }}
                                 </div>
                             </div>
                         {% endif %}
@@ -39,7 +53,12 @@
                             <div class="item form-group">
                                 {{ form_label(form.active, 'app.form.label.active', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                                 <div class="col-md-10 col-sm-10 col-xs-12">
-                                    {{ form_widget(form.active, {'attr': {'class': 'form-control js-switch'}}) }}
+                                    {{ form_widget(form.active, {
+                                        'attr': {
+                                            'data-controller': 'switch',
+                                            'class': 'form-control js-switch'
+                                        }
+                                    }) }}
                                 </div>
                             </div>
                         {% endif %}
@@ -72,14 +91,6 @@
 
 <script>
     $(document).ready(() => {
-        let locale = '{{ app.request.locale }}';
-
-        initTinymce(locale);
-
-        $('#media_type').select2({width: '100%'});
-        $('#media_category').select2({width: '100%'});
-
-        initJsSwitch('.ajax .js-switch');
         createEditContentAjax('#media_create');
     });
 </script>
