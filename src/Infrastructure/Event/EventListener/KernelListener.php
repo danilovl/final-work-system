@@ -51,11 +51,11 @@ readonly class KernelListener implements EventSubscriberInterface
         $targetEntity = null;
 
         foreach ($arguments as $argument) {
-            if (is_a($argument, $sourceEntityClass)) {
+            if (is_object($argument) && is_a($argument, $sourceEntityClass)) {
                 $sourceEntity = $argument;
             }
 
-            if (is_a($argument, $targetEntityClass)) {
+            if (is_object($argument) && is_a($argument, $targetEntityClass)) {
                 $targetEntity = $argument;
             }
         }

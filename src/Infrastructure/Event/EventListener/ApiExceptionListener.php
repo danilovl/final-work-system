@@ -12,6 +12,7 @@
 
 namespace App\Infrastructure\Event\EventListener;
 
+use App\Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\{
     NonUniqueResultException,
     NoResultException
@@ -66,6 +67,7 @@ readonly class ApiExceptionListener implements EventSubscriberInterface
 
         $message = match (true) {
             $exception instanceof NotFoundHttpException,
+                $exception instanceof EntityNotFoundException,
                 $exception instanceof NoResultException,
                 $exception instanceof NonUniqueResultException,
                 $exception instanceof ResourceNotFoundException => 'Resource not found',
@@ -78,9 +80,10 @@ readonly class ApiExceptionListener implements EventSubscriberInterface
         $statusCode = match (true) {
             $exception instanceof NotFoundHttpException,
                 $exception instanceof MethodNotAllowedHttpException => $exception->getStatusCode(),
+            $exception instanceof EntityNotFoundException,
             $exception instanceof NoResultException,
-                $exception instanceof NonUniqueResultException,
-                $exception instanceof ResourceNotFoundException => Response::HTTP_NOT_FOUND,
+            $exception instanceof NonUniqueResultException,
+            $exception instanceof ResourceNotFoundException => Response::HTTP_NOT_FOUND,
             $exception instanceof AccessDeniedException => Response::HTTP_FORBIDDEN,
             $exception instanceof HttpExceptionInterface => $exception->getStatusCode(),
             default => Response::HTTP_INTERNAL_SERVER_ERROR
