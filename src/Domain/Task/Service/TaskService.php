@@ -20,8 +20,9 @@ use Doctrine\Common\Collections\{
     ArrayCollection
 };
 use App\Domain\Work\Entity\Work;
+use Symfony\Contracts\Service\ResetInterface;
 
-class TaskService
+class TaskService implements ResetInterface
 {
     /** @var array<int, Collection<Task>> */
     private array $activeTasksCache = [];
@@ -92,5 +93,10 @@ class TaskService
         }
 
         return round(($completeTasks / $taskCount) * 100);
+    }
+
+    public function reset(): void
+    {
+        $this->activeTasksCache = [];
     }
 }

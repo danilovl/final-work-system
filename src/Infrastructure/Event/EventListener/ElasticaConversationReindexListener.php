@@ -22,8 +22,9 @@ use Doctrine\ORM\Event\{
 };
 use FOS\ElasticaBundle\Persister\ObjectPersisterInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\Service\ResetInterface;
 
-class ElasticaConversationReindexListener
+class ElasticaConversationReindexListener implements ResetInterface
 {
     /**
      * @var array<int, int>
@@ -84,5 +85,11 @@ class ElasticaConversationReindexListener
         }
 
         $this->conversationPersister->replaceMany(array_values($conversations));
+    }
+
+    public function reset(): void
+    {
+        $this->workIds = [];
+        $this->conversations = [];
     }
 }

@@ -40,6 +40,9 @@ services:
         event: postFlush
         method: postFlush
 
+      - name: kernel.reset
+        method: reset
+
   app.entity_listener.elastica_conversation_reindex:
     class: App\Infrastructure\Event\EventListener\ElasticaConversationReindexListener
     tags:
@@ -54,3 +57,6 @@ services:
       - name: doctrine.event_listener
         event: postFlush
         method: postFlush
+
+      - name: kernel.reset
+        method: reset

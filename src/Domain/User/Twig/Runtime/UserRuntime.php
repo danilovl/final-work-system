@@ -25,8 +25,9 @@ use Danilovl\RenderServiceTwigExtensionBundle\Attribute\{
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
+use Symfony\Contracts\Service\ResetInterface;
 
-class UserRuntime
+class UserRuntime implements ResetInterface
 {
     private array $cache = [];
 
@@ -84,5 +85,10 @@ class UserRuntime
         $this->cache[$cacheKey] = $url;
 
         return $url;
+    }
+
+    public function reset(): void
+    {
+        $this->cache = [];
     }
 }

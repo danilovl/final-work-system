@@ -22,6 +22,7 @@ services:
       $menuConfig: '%menu%'
     tags:
       - { name: app.widgets, alias: menu }
+      - { name: kernel.reset, method: reset }
 
   App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget:
   App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget:

@@ -23,6 +23,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * @phpstan-type ConversationVariation array{
@@ -52,7 +53,7 @@ use Webmozart\Assert\Assert;
  *      }
  *  }
  */
-class ConversationVariationService
+class ConversationVariationService implements ResetInterface
 {
     /**
      * @var ConversationVariation|null
@@ -199,5 +200,10 @@ class ConversationVariationService
         $variations = $this->parameterService->getArray('conversation.variation');
 
         return $variations;
+    }
+
+    public function reset(): void
+    {
+        $this->newPermission = null;
     }
 }

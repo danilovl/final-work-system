@@ -19,8 +19,9 @@ use App\Domain\User\Service\UserService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-class MenuWidget extends BaseWidget
+class MenuWidget extends BaseWidget implements ResetInterface
 {
     private ?array $factory = null;
 
@@ -35,12 +36,12 @@ class MenuWidget extends BaseWidget
         private readonly UserService $userService,
         private readonly Security $security,
         private readonly TwigRenderService $twigRenderService
-    ) {
-        $this->user = $this->userService->getUser();
-    }
+    ) {}
 
     private function build(): void
     {
+        $this->user = $this->userService->getUser();
+
         foreach ($this->menuConfig as $name => $item) {
             $this->factory[$name] = $this->buildMenu($item);
         }
@@ -129,5 +130,10 @@ class MenuWidget extends BaseWidget
     public function render(): string
     {
         return $this->twigRenderService->render("application/widget/menu/{$this->menu}.html.twig", $this->getRenderParameters());
+    }
+
+    public function reset(): void
+    {
+        $this->factory = null;
     }
 }

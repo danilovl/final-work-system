@@ -34,8 +34,9 @@ use Doctrine\ORM\Query;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Service\ResetInterface;
 
-class WorkDetailTabService
+class WorkDetailTabService implements ResetInterface
 {
     private ?string $activeTab = null;
 
@@ -199,5 +200,10 @@ class WorkDetailTabService
         $conversationMessageRepository = $this->entityManagerService->getRepository(ConversationMessage::class);
 
         return $conversationMessageRepository->allByWorkUser($work, $user)->getQuery();
+    }
+
+    public function reset(): void
+    {
+        $this->activeTab = null;
     }
 }

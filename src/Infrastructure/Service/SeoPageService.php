@@ -15,8 +15,9 @@ namespace App\Infrastructure\Service;
 use App\Application\Constant\TranslationConstant;
 use App\Application\Exception\RuntimeException;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-class SeoPageService
+class SeoPageService implements ResetInterface
 {
     final public const string DEFAULT_SEPARATOR = '';
 
@@ -28,14 +29,7 @@ class SeoPageService
 
     public function __construct(private readonly TranslatorInterface $translator)
     {
-        $this->separator = self::DEFAULT_SEPARATOR;
-        $this->metas = [
-            'http-equiv' => [],
-            'name' => [],
-            'schema' => [],
-            'charset' => [],
-            'property' => [],
-        ];
+        $this->reset();
     }
 
     public function setTitle(?string $title): self
@@ -117,5 +111,18 @@ class SeoPageService
     private function normalize(string|array $meta): array
     {
         return is_string($meta) ? [$meta, []] : $meta;
+    }
+
+    public function reset(): void
+    {
+        $this->title = null;
+        $this->separator = self::DEFAULT_SEPARATOR;
+        $this->metas = [
+            'http-equiv' => [],
+            'name' => [],
+            'schema' => [],
+            'charset' => [],
+            'property' => [],
+        ];
     }
 }

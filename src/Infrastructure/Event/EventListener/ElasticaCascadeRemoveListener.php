@@ -19,8 +19,9 @@ use Doctrine\ORM\Event\PreRemoveEventArgs;
 use FOS\ElasticaBundle\Persister\ObjectPersisterInterface;
 use LogicException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\Service\ResetInterface;
 
-class ElasticaCascadeRemoveListener
+class ElasticaCascadeRemoveListener implements ResetInterface
 {
     /**
      * @var array<string, array<int, string>>
@@ -94,5 +95,10 @@ class ElasticaCascadeRemoveListener
         foreach ($ids as $id) {
             $this->identifiers[$index][(int) $id] = (string) $id;
         }
+    }
+
+    public function reset(): void
+    {
+        $this->identifiers = [];
     }
 }
