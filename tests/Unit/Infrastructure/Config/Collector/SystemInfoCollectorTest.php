@@ -30,8 +30,8 @@ class SystemInfoCollectorTest extends TestCase
             'version' => '1.0.0'
         ];
 
-        $request = $this->createMock(Request::class);
-        $response = $this->createMock(Response::class);
+        $request = $this->createStub(Request::class);
+        $response = $this->createStub(Response::class);
 
         $this->collector = new SystemInfoCollector($systemInfo);
         $this->collector->collect($request, $response);
