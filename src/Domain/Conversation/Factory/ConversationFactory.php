@@ -73,6 +73,7 @@ class ConversationFactory extends BaseModelFactory
             $conversationParticipant = new ConversationParticipant;
             $conversationParticipant->setConversation($conversation);
             $conversationParticipant->setUser($this->getUser($participant));
+            $conversation->getParticipants()->add($conversationParticipant);
             $this->entityManagerService->persistAndFlush($conversationParticipant);
         }
     }

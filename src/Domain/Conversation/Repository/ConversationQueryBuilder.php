@@ -95,6 +95,18 @@ class ConversationQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    /**
+     * @param int[] $workIds
+     */
+    public function whereByWorkIds(array $workIds): self
+    {
+        $this->queryBuilder
+            ->andWhere('conversation.work IN (:workIds)')
+            ->setParameter('workIds', $workIds);
+
+        return $this;
+    }
+
     public function whereByWorkAndParticipantUser(Work $work, User $user): self
     {
         $this->queryBuilder

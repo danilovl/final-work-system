@@ -39,3 +39,18 @@ services:
       - name: doctrine.event_listener
         event: postFlush
         method: postFlush
+
+  app.entity_listener.elastica_conversation_reindex:
+    class: App\Infrastructure\Event\EventListener\ElasticaConversationReindexListener
+    tags:
+      - name: doctrine.event_listener
+        event: preUpdate
+        method: preUpdate
+
+      - name: doctrine.event_listener
+        event: postPersist
+        method: postPersist
+
+      - name: doctrine.event_listener
+        event: postFlush
+        method: postFlush

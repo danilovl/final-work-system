@@ -82,6 +82,25 @@ class ConversationRepository extends ServiceEntityRepository
             ->getQueryBuilder();
     }
 
+    /**
+     * @param int[] $workIds
+     */
+    public function allByWorkIds(array $workIds): QueryBuilder
+    {
+        Assert::allInteger($workIds);
+
+        return $this->createConversationQueryBuilder()
+            ->selectRelations()
+            ->joinType()
+            ->leftJoinWork()
+            ->leftJoinWorkStatus()
+            ->leftJoinWorkType()
+            ->leftJoinParticipants()
+            ->leftJoinParticipantsUser()
+            ->whereByWorkIds($workIds)
+            ->getQueryBuilder();
+    }
+
     public function oneByWorkUser(
         Work $work,
         User $user

@@ -74,6 +74,21 @@ readonly class ConversationFacade
             ->getQuery();
     }
 
+    /**
+     * @param int[] $workIds
+     * @return Conversation[]
+     */
+    public function findAllByWorkIds(array $workIds): array
+    {
+        /** @var Conversation[] $result */
+        $result = $this->conversationRepository
+            ->allByWorkIds($workIds)
+            ->getQuery()
+            ->getResult();
+
+        return $result;
+    }
+
     public function findByWorkUser(Work $work, User $user): ?Conversation
     {
         /** @var Conversation|null $result */
