@@ -43,7 +43,9 @@ class WorkCategoryQueryBuilder extends BaseQueryBuilder
 
     public function orderByName(SortDirection $order = SortDirection::Ascending): self
     {
-        $this->queryBuilder->orderBy('work_category.name', $order);
+        $this->queryBuilder
+            ->orderBy('work_category.name', $order)
+            ->addOrderBy('work_category.id', $order);
 
         return $this;
     }
