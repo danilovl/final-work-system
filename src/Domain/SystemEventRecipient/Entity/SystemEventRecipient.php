@@ -26,21 +26,18 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'system_event_recipient')]
 #[ORM\Entity(repositoryClass: SystemEventRecipientRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class SystemEventRecipient
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
-    #[ORM\ManyToOne(targetEntity: SystemEvent::class, fetch: 'EAGER', inversedBy: 'recipient')]
+    #[ORM\ManyToOne(targetEntity: SystemEvent::class, inversedBy: 'recipient')]
     #[ORM\JoinColumn(name: 'system_event_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private SystemEvent $systemEvent;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'systemEventsRecipient')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'systemEventsRecipient')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $recipient;
 
     #[ORM\Column(name: 'viewed', type: Types::BOOLEAN, options: ['default' => '0'])]

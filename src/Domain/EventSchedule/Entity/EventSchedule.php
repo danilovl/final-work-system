@@ -31,7 +31,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'event_schedule')]
 #[ORM\Entity(repositoryClass: EventScheduleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class EventSchedule
 {
@@ -40,14 +39,12 @@ class EventSchedule
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsSchedule')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventsSchedule')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     /** @var Collection<EventScheduleTemplate> */
     #[ORM\OneToMany(targetEntity: EventScheduleTemplate::class, mappedBy: 'schedule', cascade: ['persist'])]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $templates;
 
     public function __construct()

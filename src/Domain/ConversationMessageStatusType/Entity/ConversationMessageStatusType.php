@@ -40,7 +40,6 @@ class ConversationMessageStatusType
 
     /** @var Collection<ConversationMessageStatus> */
     #[ORM\OneToMany(targetEntity: ConversationMessageStatus::class, mappedBy: 'type')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $conversationMessageStatus;
 
     public function __construct()

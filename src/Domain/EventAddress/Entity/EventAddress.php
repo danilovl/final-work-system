@@ -33,7 +33,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'event_address')]
 #[ORM\Entity(repositoryClass: EventAddressRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class EventAddress
 {
@@ -43,9 +42,8 @@ class EventAddress
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventAddressOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventAddressOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     #[ORM\Column(name: 'street', type: Types::STRING, nullable: true)]
@@ -58,7 +56,6 @@ class EventAddress
 
     /** @var Collection<Event> */
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'address')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $events;
 
     public function __construct()

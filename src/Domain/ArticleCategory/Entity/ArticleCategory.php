@@ -33,7 +33,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'article_category')]
 #[ORM\Entity(repositoryClass: ArticleCategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class ArticleCategory
 {
@@ -48,12 +47,10 @@ class ArticleCategory
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     /** @var Collection<Article> */
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $articles;
 
     public function __construct()

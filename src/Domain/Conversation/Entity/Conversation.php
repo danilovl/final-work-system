@@ -40,7 +40,6 @@ use Webmozart\Assert\Assert;
 #[ORM\Table(name: 'conversation')]
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class Conversation
 {
@@ -52,39 +51,32 @@ class Conversation
     #[Gedmo\Versioned]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationsOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'conversationsOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     /** @var Collection<ConversationMessage> */
     #[ORM\OneToMany(targetEntity: ConversationMessage::class, mappedBy: 'conversation')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $messages;
 
-    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'conversations')]
+    #[ORM\ManyToOne(targetEntity: Work::class, inversedBy: 'conversations')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
-    #[ORM\ManyToOne(targetEntity: ConversationType::class, fetch: 'EAGER', inversedBy: 'conversations')]
+    #[ORM\ManyToOne(targetEntity: ConversationType::class, inversedBy: 'conversations')]
     #[ORM\JoinColumn(name: 'conversation_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ConversationType $type;
 
     /** @var Collection<ConversationMessageStatus> */
     #[ORM\OneToMany(targetEntity: ConversationMessageStatus::class, mappedBy: 'conversation')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $statuses;
 
     /** @var Collection<ConversationParticipant> */
     #[ORM\OneToMany(targetEntity: ConversationParticipant::class, mappedBy: 'conversation')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $participants;
 
     /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'conversation')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
     public function __construct()

@@ -48,7 +48,6 @@ class MediaMimeType
 
     /** @var Collection<Media> */
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'mimeType')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;
 
     public function __construct()

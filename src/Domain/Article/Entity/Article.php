@@ -31,7 +31,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Table(name: 'article')]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[ORM\HasLifecycleCallbacks]
 #[Gedmo\Loggable]
 class Article
@@ -49,17 +48,15 @@ class Article
     #[Gedmo\Versioned]
     private string $content;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     /** @var Collection<ArticleCategory> */
-    #[ORM\ManyToMany(targetEntity: ArticleCategory::class, inversedBy: 'articles', fetch: 'EAGER')]
+    #[ORM\ManyToMany(targetEntity: ArticleCategory::class, inversedBy: 'articles')]
     #[ORM\JoinTable(name: 'article_to_article_category')]
     #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'article_category_id', referencedColumnName: 'id')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $categories;
 
     public function __construct()

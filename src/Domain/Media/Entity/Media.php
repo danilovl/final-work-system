@@ -42,7 +42,6 @@ use Symfony\Component\Serializer\Attribute\Ignore;
 #[ORM\Table(name: 'media')]
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class Media
 {
@@ -52,19 +51,16 @@ class Media
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'mediaOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], inversedBy: 'mediaOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
-    #[ORM\ManyToOne(targetEntity: MediaType::class, fetch: 'EAGER', inversedBy: 'medias')]
+    #[ORM\ManyToOne(targetEntity: MediaType::class, inversedBy: 'medias')]
     #[ORM\JoinColumn(name: 'media_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private MediaType $type;
 
-    #[ORM\ManyToOne(targetEntity: MediaMimeType::class, fetch: 'EAGER', inversedBy: 'medias')]
+    #[ORM\ManyToOne(targetEntity: MediaMimeType::class, inversedBy: 'medias')]
     #[ORM\JoinColumn(name: 'media_mime_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private MediaMimeType $mimeType;
 
     /** @var Collection<MediaCategory> */
@@ -72,12 +68,10 @@ class Media
     #[ORM\JoinTable(name: 'media_to_media_category')]
     #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', onDelete: 'RESTRICT')]
     #[ORM\InverseJoinColumn(name: 'media_category_id', referencedColumnName: 'id')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $categories;
 
-    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'medias')]
+    #[ORM\ManyToOne(targetEntity: Work::class, inversedBy: 'medias')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
     #[ORM\Column(name: 'media_name', type: Types::STRING, unique: true, nullable: false)]
@@ -100,7 +94,6 @@ class Media
 
     /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'media')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
     public function __construct()

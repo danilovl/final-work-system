@@ -32,7 +32,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'conversation_message')]
 #[ORM\Entity(repositoryClass: ConversationMessageRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class ConversationMessage
 {
@@ -42,17 +41,14 @@ class ConversationMessage
 
     #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'messages')]
     #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Conversation $conversation;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationMessages')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'conversationMessages')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     /** @var Collection<ConversationMessageStatus> */
     #[ORM\OneToMany(targetEntity: ConversationMessageStatus::class, mappedBy: 'message')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $statuses;
 
     #[ORM\Column(name: 'content', type: Types::TEXT, nullable: false)]

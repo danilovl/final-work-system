@@ -34,7 +34,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'task')]
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class Task
 {
@@ -51,19 +50,16 @@ class Task
     #[Gedmo\Versioned]
     private bool $notifyComplete = false;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'tasksOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasksOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
-    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'tasks')]
+    #[ORM\ManyToOne(targetEntity: Work::class, inversedBy: 'tasks')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Work $work;
 
     /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'task')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
     #[ORM\Column(name: 'deadline', type: Types::DATE_IMMUTABLE, nullable: true)]

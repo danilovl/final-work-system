@@ -40,7 +40,6 @@ class ConversationType
 
     /** @var Collection<Conversation> */
     #[ORM\OneToMany(targetEntity: Conversation::class, mappedBy: 'type')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $conversations;
 
     public function __construct()

@@ -28,7 +28,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'event_participant')]
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class EventParticipant
 {
@@ -49,17 +48,14 @@ class EventParticipant
 
     #[ORM\OneToOne(targetEntity: Event::class, inversedBy: 'participant')]
     #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Event $event = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsParticipant')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventsParticipant')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(targetEntity: Work::class, inversedBy: 'eventParticipants')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
     public function getFirstName(): ?string

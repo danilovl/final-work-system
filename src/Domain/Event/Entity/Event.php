@@ -38,7 +38,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'event')]
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class Event
 {
@@ -46,19 +45,16 @@ class Event
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    #[ORM\ManyToOne(targetEntity: EventType::class, fetch: 'EAGER', inversedBy: 'events')]
+    #[ORM\ManyToOne(targetEntity: EventType::class, inversedBy: 'events')]
     #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private EventType $type;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventsOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
-    #[ORM\ManyToOne(targetEntity: EventAddress::class, fetch: 'EAGER', inversedBy: 'events')]
+    #[ORM\ManyToOne(targetEntity: EventAddress::class, inversedBy: 'events')]
     #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventAddress $address = null;
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: true)]
@@ -74,12 +70,10 @@ class Event
     private DateTimeImmutable $end;
 
     #[ORM\OneToOne(targetEntity: EventParticipant::class, mappedBy: 'event', cascade: ['persist'])]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventParticipant $participant = null;
 
     /** @var Collection<Comment> */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'event', cascade: ['persist'])]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $comment;
 
     /** @var Collection<SystemEvent> */

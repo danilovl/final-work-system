@@ -36,7 +36,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'system_event')]
 #[ORM\Entity(repositoryClass: SystemEventRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class SystemEvent
 {
@@ -44,44 +43,36 @@ class SystemEvent
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    #[ORM\ManyToOne(targetEntity: SystemEventType::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
+    #[ORM\ManyToOne(targetEntity: SystemEventType::class, inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'type_id', referencedColumnName: 'id', nullable: false)]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private SystemEventType $type;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'systemEventsOwner')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'systemEventsOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
-    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
+    #[ORM\ManyToOne(targetEntity: Work::class, inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
-    #[ORM\ManyToOne(targetEntity: Media::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
+    #[ORM\ManyToOne(targetEntity: Media::class, inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Media $media = null;
 
-    #[ORM\ManyToOne(targetEntity: Task::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
+    #[ORM\ManyToOne(targetEntity: Task::class, inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'task_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Task $task = null;
 
-    #[ORM\ManyToOne(targetEntity: Event::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
+    #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Event $event = null;
 
-    #[ORM\ManyToOne(targetEntity: Conversation::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
+    #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Conversation $conversation = null;
 
     /** @var Collection<SystemEventRecipient> */
-    #[ORM\OneToMany(targetEntity: SystemEventRecipient::class, mappedBy: 'systemEvent', cascade: ['persist'], fetch: 'EAGER')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
+    #[ORM\OneToMany(targetEntity: SystemEventRecipient::class, mappedBy: 'systemEvent', cascade: ['persist'])]
     private Collection $recipient;
 
     public function __construct()

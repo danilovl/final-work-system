@@ -44,7 +44,6 @@ class WorkType
 
     /** @var Collection<Work> */
     #[ORM\OneToMany(targetEntity: Work::class, mappedBy: 'type')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $works;
 
     public function __construct()

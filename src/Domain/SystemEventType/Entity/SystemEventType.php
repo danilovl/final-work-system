@@ -45,7 +45,6 @@ class SystemEventType
 
     /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'type')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
     public function __construct()

@@ -31,7 +31,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'media_category')]
 #[ORM\Entity(repositoryClass: MediaCategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class MediaCategory
 {
@@ -42,12 +41,10 @@ class MediaCategory
 
     /** @var Collection<Media> */
     #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'categories')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'mediaCategoriesOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     public function __construct()

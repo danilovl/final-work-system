@@ -49,7 +49,6 @@ class EventType
 
     /** @var Collection<Event> */
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'type')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $events;
 
     public function __construct()

@@ -28,7 +28,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'event_schedule_template')]
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class EventScheduleTemplate
 {
@@ -37,17 +36,14 @@ class EventScheduleTemplate
 
     #[ORM\ManyToOne(targetEntity: EventSchedule::class, inversedBy: 'templates')]
     #[ORM\JoinColumn(name: 'event_schedule_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private EventSchedule $schedule;
 
     #[ORM\ManyToOne(targetEntity: EventType::class)]
     #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private EventType $type;
 
     #[ORM\ManyToOne(targetEntity: EventAddress::class)]
     #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventAddress $address = null;
 
     #[ORM\Column(name: 'day', type: Types::INTEGER, nullable: false)]

@@ -21,7 +21,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Table(name: 'conversation_participant')]
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 #[Gedmo\Loggable]
 class ConversationParticipant
 {
@@ -29,12 +28,10 @@ class ConversationParticipant
 
     #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'participants')]
     #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Conversation $conversation;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationsParticipant')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'conversationsParticipant')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $user;
 
     public function getConversation(): Conversation
