@@ -9,20 +9,20 @@
 <table class="table table-striped projects" {% if tableTaskId is not empty %}id="{{ tableTaskId }}"{% endif %}>
     <thead>
     <tr>
-        <th{% if tasks.isSorted('task.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+        <th{% if tasks.isSorted('task.name') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
             {{ knp_pagination_sortable(tasks, 'app.text.name' | trans, 'task.name', {}, {'tab':'task'}) }}
         </th>
 
         {% if isWorkTab == false %}
-            <th{% if tasks.isSorted('work.title') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+            <th{% if tasks.isSorted('work.title') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                 {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans, 'work.title', {}, {'tab':'task'}) }}
             </th>
         {% endif %}
 
-        <th{% if tasks.isSorted('task.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+        <th{% if tasks.isSorted('task.createdAt') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
             {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans, 'task.createdAt', {}, {'tab':'task'}) }}
         </th>
-        <th{% if tasks.isSorted('task.deadline') %} class="fa fa-sort-{{ direction }}"{% endif %}
+        <th{% if tasks.isSorted('task.deadline') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
                 data-toggle="tooltip"
                 data-placement="top"
                 data-original-title="{{ 'app.tooltip.task_deadline' | trans }}">
@@ -30,13 +30,13 @@
         </th>
 
         {% if isSupervisor %}
-            <th {% if tasks.isSorted('task.active') %} class="fa fa-sort-{{ direction }}"{% endif %}
+            <th {% if tasks.isSorted('task.active') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
                     data-toggle="tooltip"
                     data-placement="top"
                     data-original-title="{{ 'app.tooltip.task_active' | trans }}">
                 {{ knp_pagination_sortable(tasks, 'app.text.active' | trans, 'task.active', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
-            <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+            <th{% if tasks.isSorted('task.notifyComplete') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
                     data-toggle="tooltip"
                     data-placement="top"
                     data-original-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans }}">
@@ -45,7 +45,7 @@
         {% endif %}
 
         {% if isAuthor %}
-            <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+            <th{% if tasks.isSorted('task.notifyComplete') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
                     data-toggle="tooltip"
                     data-placement="top"
                     data-original-title="{{ 'app.tooltip.task_back_to_revision' | trans }}">
@@ -53,7 +53,7 @@
             </th>
         {% endif %}
 
-        <th{% if tasks.isSorted('task.complete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+        <th{% if tasks.isSorted('task.complete') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
                 data-toggle="tooltip"
                 data-placement="top"
                 data-original-title="{{ 'app.tooltip.task_complete' | trans }}">
@@ -137,7 +137,7 @@
                        href="#tab-task-description-{{ task.id | hashids_encode }}"
                        aria-expanded="true"
                        aria-controls="tab-task-description-{{ task.id | hashids_encode }}">
-                        <i class="fa fa-desktop"></i>
+                        <i class="fa-solid fa-desktop"></i>
                         {{ 'app.form.action.show_detail' | trans }}
                     </a>
                 {% endif %}
@@ -146,7 +146,7 @@
                     <a class="btn btn-primary btn-xs"
                        href="{{ path('work_detail', { 'id': task.work.id | hashids_encode }) }}"
                        target="_blank">
-                        <i class="fa fa-folder"></i>
+                        <i class="fa-solid fa-folder"></i>
                         {{ 'app.text.work' | trans }}
                     </a>
                 {% endif %}
@@ -156,7 +156,7 @@
                        data-target="#modalWindow"
                        class="btn btn-warning btn-xs"
                        href="{{ path('task_edit', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode }) }}">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa-solid fa-pencil"></i>
                         {{ 'app.form.action.edit' | trans }}
                     </a>
 

@@ -19,11 +19,14 @@ use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
 use Danilovl\OpenTelemetryBundle\OpenTelemetry\Interfaces\TracingSpanServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class HomepageCache
 {
+    private const string HOMEPAGE_ROUTE = 'homepage';
+
     public function __construct(
         private readonly AdapterInterface $cache,
         private readonly ParameterServiceInterface $parameterService,
@@ -56,6 +59,7 @@ class HomepageCache
             );
 
             $pagination->setItems(SystemEventHelper::groupSystemEventByType($pagination));
+            $this->bindToHomepage($pagination);
 
             $pagePaginators[$page] = $pagination;
 
@@ -68,5 +72,18 @@ class HomepageCache
         $span->end();
 
         return $pagePaginators;
+    }
+
+    private function bindToHomepage(PaginationInterface $pagination): void
+    {
+        if (!$pagination instanceof SlidingPagination) {
+            return;
+        }
+
+        $pagination->setUsedRoute(self::HOMEPAGE_ROUTE);
+
+        foreach (array_keys($pagination->getParams()) as $name) {
+            $pagination->setParam($name, null);
+        }
     }
 }

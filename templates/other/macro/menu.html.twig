@@ -12,12 +12,12 @@
         <a {% if menuItem.uri %}href="{{ menuItem.uri }}" {% endif %}>
 
             {% if menuItem.attribute('icon') is not empty %}
-                <i class="fa {{ menuItem.attribute('icon') }}"></i>
+                <i class="{{ menuItem.attribute('icon') }}"></i>
             {% endif %}
             {{ menuItem.label }}
 
             {% if menuItem.children | length %}
-                <span class="fa fa-chevron-down"></span>
+                <span class="fa-solid fa-chevron-down"></span>
             {% endif %}
         </a>
 

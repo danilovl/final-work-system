@@ -4,7 +4,7 @@
        data-toggle="modal"
        data-target="#modalWindow"
        href="{{ path('task_create', { 'id': work.id | hashids_encode }) }}">
-        <i class="fa fa-tasks"></i>
+        <i class="fa-solid fa-bars-progress"></i>
         {{ 'app.form.action.task_create' | trans }}
     </a>
 {% endif %}
@@ -15,7 +15,7 @@
        data-toggle="modal"
        data-target="#modalWindow"
        href="{{ path('version_create', { 'id': work.id | hashids_encode }) }}">
-        <i class="fa fa-file-text-o"></i>
+        <i class="fa-regular fa-file-lines"></i>
         {{ 'app.form.action.add_work_version' | trans }}
     </a>
 {% endif %}
@@ -24,7 +24,7 @@
     <a class="btn btn-app"
        href="{{ path('event_calendar_manage') }}"
        target="_blank">
-        <i class="fa fa-calendar"></i>
+        <i class="fa-solid fa-calendar-days"></i>
         {{ 'app.text.appointment_calendar_manage' | trans }}
     </a>
 {% endif %}
@@ -33,7 +33,7 @@
     <a class="btn btn-app"
        href="{{ path('event_calendar_reservation') }}"
        target="_blank">
-        <i class="fa fa-calendar"></i>
+        <i class="fa-solid fa-calendar-days"></i>
         {{ 'app.text.appointment_calendar' | trans }}
     </a>
 {% endif %}
@@ -44,7 +44,7 @@
         <a href="{{ path('conversation_detail', { 'id': conversationWithAuthor.id | hashids_encode }) }}"
            target="_blank"
            class="btn btn-app">
-            <i class="fa fa-comments-o"></i>
+            <i class="fa-regular fa-comments"></i>
             {{ 'app.text.conversation' | trans }}
         </a>
     {% else %}
@@ -56,7 +56,7 @@
             }
         }) }}
             <button type="submit" class="btn btn-app">
-                <i class="fa fa-comments-o"></i>
+                <i class="fa-regular fa-comments"></i>
                 {{ 'app.text.conversation' | trans }}
             </button>
         {{ form_end(actionForm) }}

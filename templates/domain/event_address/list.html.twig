@@ -19,14 +19,14 @@
                                        data-toggle="dropdown"
                                        role="button"
                                        aria-expanded="false">
-                                        <i class="fa fa-wrench"></i>
+                                        <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <a href="{{ path('event_address_create') }}"
                                                data-toggle="modal"
                                                data-target="#modalWindow">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa-regular fa-pen-to-square"></i>
                                                 {{ 'app.form.action.create' | trans }}
                                             </a>
                                         </li>
@@ -34,7 +34,7 @@
                                 </li>
                                 <li>
                                     <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -84,14 +84,14 @@
                                                 <a class="btn btn-primary btn-xs"
                                                    href="{{ path('event_address_detail', { 'id': eventAddress.id | hashids_encode }) }}"
                                                    target="_blank">
-                                                    <i class="fa fa-folder"></i>
+                                                    <i class="fa-solid fa-folder"></i>
                                                     {{ 'app.form.action.show_detail' | trans }}
                                                 </a>
                                                 <a data-toggle="modal"
                                                    data-target="#modalWindow"
                                                    class="btn btn-warning btn-xs"
                                                    href="{{ path('event_address_edit', { 'id': eventAddress.id | hashids_encode }) }}">
-                                                    <i class="fa fa-pencil"></i>
+                                                    <i class="fa-solid fa-pencil"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
 

@@ -11,7 +11,7 @@
             <ul class="nav navbar-right panel_toolbox">
                 <li>
                     <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-up"></i>
                     </a>
                 </li>
             </ul>
@@ -26,7 +26,7 @@
                            data-toggle="modal"
                            data-target="#modalWindow"
                            href="{{ path('task_create', { 'id': event.participant.work.id | hashids_encode, 'taskName': event.start | date('Y-m-d') ~ ' Konzultace' }) }}">
-                            <i class="fa fa-tasks"></i>
+                            <i class="fa-solid fa-bars-progress"></i>
                             {{ 'app.form.action.task_create' | trans }}
                         </a>
                     {% endif %}
@@ -34,14 +34,14 @@
                     <a class="btn btn-app"
                        href="{{ path('event_calendar_manage') }}"
                        target="_blank">
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa-solid fa-calendar-days"></i>
                         {{ 'app.text.appointment_calendar' | trans }}
                     </a>
                     <a class="btn btn-app"
                        href="{{ path('event_edit', { 'id': event.id | hashids_encode }) }}"
                        data-toggle="modal"
                        data-target="#modalWindow">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa-regular fa-pen-to-square"></i>
                         {{ 'app.form.action.edit' | trans }}
                     </a>
 
@@ -56,7 +56,7 @@
                     <a class="btn btn-app"
                        href="{{ path('event_calendar_reservation') }}"
                        target="_blank">
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa-solid fa-calendar-days"></i>
                         {{ 'app.text.appointment_calendar' | trans }}
                     </a>
 
@@ -64,7 +64,7 @@
                         <a class="btn btn-app"
                            data-toggle="modal"
                            data-target="#event-switch-to-skype-modal-{{ event.id | hashids_encode }}">
-                            <i class="fa fa-skype"></i>
+                            <i class="fa-solid fa-skype"></i>
                             {{ 'app.text.switch_to_skype' | trans }}
                         </a>
                         <div class="modal fade bs-example-modal-sm"

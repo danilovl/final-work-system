@@ -11,7 +11,7 @@
                 <ul class="folder-list m-b-md" style="padding: 0">
                     <li>
                         <a href="">
-                            <i class="fa fa-inbox "></i>
+                            <i class="fa-solid fa-inbox "></i>
                             {{ 'app.text.inbox' | trans }}
 
                             {% set countUnreadConversationMessage = conversation_message.getTotalUnreadMessagesByUser(app_user()) %}
@@ -32,7 +32,7 @@
                 <ul class="category-list" style="padding: 0">
                     <li>
                         <a href="{{ path('conversation_list') }}">
-                            <i class="fa fa-circle text-navy"></i>
+                            <i class="fa-solid fa-circle text-navy"></i>
                             ***
                         </a>
                     </li>
@@ -42,7 +42,7 @@
 
                         <li>
                             <a href="{{ path('conversation_list', {type: type}) }}">
-                                <i class="fa fa-circle message-type-{{ type }}"></i>
+                                <i class="fa-solid fa-circle message-type-{{ type }}"></i>
                                 {{ ('app.text.' ~ type) | trans }}
                             </a>
                         </li>

@@ -91,7 +91,7 @@
                                 }
                             ) }}
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <i class="fa fa-calendar-o form-control-feedback left"
+                                <i class="fa-regular fa-calendar form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
                                 {{ form_widget(form.deadline, {
@@ -108,7 +108,7 @@
                                        id="show-deadline-calendar-helper-date"
                                        data-action="calendar-helper#show"
                                        data-calendar-helper-panel-param="#deadline-calendar-helper-date">
-                                        <i class="fa fa-calendar-o"></i>
+                                        <i class="fa-regular fa-calendar"></i>
                                         {{ 'app.text.deadline' | trans }}
                                     </a>
                                 </div>
@@ -171,14 +171,14 @@
                                 <button id="task-button-action"
                                         class="btn btn-success"
                                         data-controller="ajax-form">
-                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button id="task-button-action-close"
                                         class="btn btn-primary"
                                         data-controller="ajax-form"
                                         data-ajax-form-close-value="true">
-                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
                             </div>

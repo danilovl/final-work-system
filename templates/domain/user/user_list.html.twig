@@ -12,9 +12,9 @@
                             <li>
                                 <a class="collapse-link">
                                     {% if openSearchTab == false %}
-                                        <i class="fa fa-chevron-down"></i>
+                                        <i class="fa-solid fa-chevron-down"></i>
                                     {% else %}
-                                        <i class="fa fa-chevron-up"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
                                     {% endif %}
                                 </a>
                             </li>
@@ -61,7 +61,7 @@
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -77,10 +77,10 @@
                                 <table class="table table-striped projects">
                                     <thead>
                                     <tr>
-                                        <th{% if users.isSorted('user.lastname') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if users.isSorted('user.lastname') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(users, 'app.form.label.first_name' | trans, 'user.lastname') }}
                                         </th>
-                                        <th{% if users.isSorted('user.username') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if users.isSorted('user.username') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(users, 'app.form.label.username' | trans, 'user.username') }}
                                         </th>
                                         <th>
@@ -146,7 +146,7 @@
                                                    href="{{ path('user_edit', { 'id': user.id | hashids_encode }) }}"
                                                    data-toggle="modal"
                                                    data-target="#modalWindow">
-                                                    <i class="fa fa-edit"></i>
+                                                    <i class="fa-regular fa-pen-to-square"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
                                                 <a class="btn btn-info btn-xs"
@@ -156,7 +156,7 @@
                                                    href="#tab-user-description-{{ user.id | hashids_encode }}"
                                                    aria-expanded="true"
                                                    aria-controls="tab-user-description-{{ user.id | hashids_encode }}">
-                                                    <i class="fa fa-desktop"></i>
+                                                    <i class="fa-solid fa-desktop"></i>
                                                     {{ 'app.form.action.show_detail' | trans }}
                                                 </a>
                                             </td>
@@ -188,11 +188,11 @@
                                                                                     <h3>{{ user }}</h3>
                                                                                     <ul class="list-unstyled user_data">
                                                                                         <li>
-                                                                                            <i class="fa fa-user user-profile-icon"></i>:
+                                                                                            <i class="fa-solid fa-user user-profile-icon"></i>:
                                                                                             {{ user.username }}
                                                                                         </li>
                                                                                         <li class="m-top-xs">
-                                                                                            <i class="fa fa-at user-profile-icon"></i>:
+                                                                                            <i class="fa-solid fa-at user-profile-icon"></i>:
                                                                                             <a href="mailto:{{ user.email }}">
                                                                                                 {{ user.email }}
                                                                                             </a>
@@ -200,13 +200,13 @@
 
                                                                                         {% if  user.phone is not empty %}
                                                                                             <li class="m-top-xs">
-                                                                                                <i class="fa fa-phone user-profile-icon"></i>:
+                                                                                                <i class="fa-solid fa-phone user-profile-icon"></i>:
                                                                                                 {{ user.phone }}
                                                                                             </li>
                                                                                         {% endif %}
                                                                                         {% if user.skype is not empty %}
                                                                                             <li class="m-top-xs">
-                                                                                                <i class="fa fa-skype user-profile-icon"></i>:
+                                                                                                <i class="fa-solid fa-skype user-profile-icon"></i>:
                                                                                                 {{ user.skype }}
                                                                                             </li>
                                                                                         {% endif %}
@@ -297,7 +297,7 @@
                                                                                         <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}"
                                                                                            target="_blank"
                                                                                            class="btn btn-primary btn-xs">
-                                                                                            <i class="fa fa-folder"></i>
+                                                                                            <i class="fa-solid fa-folder"></i>
                                                                                             {{ 'app.form.action.show' | trans }}
                                                                                         </a>
                                                                                     </td>

@@ -1,4 +1,4 @@
-{% set deleteIcon = 'fa-trash-o' %}
+{% set deleteIcon = 'fa-regular fa-trash-can' %}
 {% set deleteClass = 'btn btn-danger btn-xs' %}
 {% if modalDataTargetDeleteIcon is defined %}
     {% set deleteIcon = modalDataTargetDeleteIcon %}
@@ -11,7 +11,7 @@
 <a data-toggle="modal"
    data-target="#{{ modalDataTarget }}-delete-modal-{{ modalDataTargetId | hashids_encode }}"
    class="{{ deleteClass }}">
-    <i class="fa {{ deleteIcon }}"></i>
+    <i class="{{ deleteIcon }}"></i>
     {% if modalDataTargetDeleteText is defined %}
         {{ modalDataTargetDeleteText }}
     {% endif %}

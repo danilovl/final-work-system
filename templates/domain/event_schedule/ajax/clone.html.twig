@@ -9,7 +9,7 @@
                         <div class="item form-group">
                             {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                    <span class="fa fa-calendar-o form-control-feedback left"
+                                    <span class="fa-regular fa-calendar form-control-feedback left"
                                           aria-hidden="true">
                                     </span>
                                 {{ form_widget(form.start, {
@@ -25,7 +25,7 @@
                                 <button class="btn btn-success"
                                         id="event_schedule_clone"
                                         data-controller="ajax-form">
-                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
                                     {{ 'app.form.action.clonning' | trans }}
                                 </button>
                             </div>

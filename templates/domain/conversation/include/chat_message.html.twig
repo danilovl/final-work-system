@@ -25,7 +25,7 @@
                 {% set readDate = conversation_message_read_date_recipient(message, user) %}
                 {% if readDate is not empty %}
                     <br>
-                    <i class="fa fa-eye"></i>
+                    <i class="fa-regular fa-eye"></i>
                     {{ readDate | date }}
                 {% endif %}
             {% endif %}

@@ -179,7 +179,7 @@
             this.$results.on('mouseup', '.select2-results__group', function (evt) {
                 let $this = $(this);
                 let data = $this.data('data');
-                let trigger = ($this.attr('aria-selected') === 'true') ? 'optgroup:unselect' : 'optgroup:select';
+                let trigger = $this.hasClass('select2-results__group--selected') ? 'optgroup:unselect' : 'optgroup:select';
 
                 self.trigger(trigger, {
                     originalEvent: evt,
@@ -240,17 +240,15 @@
                     }
                 });
 
-                let $options = self.$results.find('.select2-results__option[aria-selected]');
+                let $options = self.$results.find('.select2-results__option--selectable, .select2-results__option[aria-selected]');
 
                 $options.each(function () {
                     let $option = $(this);
                     let id = $option.attr('id');
+                    let isSelected = $.inArray(id, selectedIds) > -1;
 
-                    if ($.inArray(id, selectedIds) > -1) {
-                        $option.attr('aria-selected', 'true');
-                    } else {
-                        $option.attr('aria-selected', 'false');
-                    }
+                    $option.attr('aria-selected', isSelected ? 'true' : 'false');
+                    $option.toggleClass('select2-results__option--selected', isSelected);
                 });
 
 
@@ -262,15 +260,14 @@
                     let text = item.text;
                     let $element = $(item.element);
 
-                    if ($element.hasClass('selected-custom') || $.inArray(text, optgroupLabels) > -1) {
-                        $optgroup.attr('aria-selected', 'true');
-                    } else {
-                        $optgroup.attr('aria-selected', 'false');
-                    }
+                    let isSelected = $element.hasClass('selected-custom') || $.inArray(text, optgroupLabels) > -1;
+
+                    $optgroup.attr('aria-selected', isSelected ? 'true' : 'false');
+                    $optgroup.toggleClass('select2-results__group--selected', isSelected);
                 });
 
                 if (!self.getHighlightedResults().length) {
-                    $('.select2-results__option[aria-selected]').first().trigger('mouseenter');
+                    self.$results.find('.select2-results__option--selectable').first().trigger('mouseenter');
                 }
             });
         };

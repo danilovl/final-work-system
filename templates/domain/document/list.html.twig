@@ -19,9 +19,9 @@
                                 <li>
                                     <a class="collapse-link">
                                         {% if openSearchTab == false %}
-                                            <i class="fa fa-chevron-down"></i>
+                                            <i class="fa-solid fa-chevron-down"></i>
                                         {% else %}
-                                            <i class="fa fa-chevron-up"></i>
+                                            <i class="fa-solid fa-chevron-up"></i>
                                         {% endif %}
                                     </a>
                                 </li>
@@ -79,7 +79,7 @@
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
-                                        <i class="fa fa-chevron-down"></i>
+                                        <i class="fa-solid fa-chevron-down"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -96,20 +96,20 @@
                                 <table class="table projects">
                                     <thead>
                                     <tr>
-                                        <th{% if documents.isSorted('media.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if documents.isSorted('media.name') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(documents, 'app.text.name' | trans, 'media.name') }}
                                         </th>
-                                        <th{% if documents.isSorted('media.author') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if documents.isSorted('media.author') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(documents, 'app.text.author' | trans, 'media.author') }}
                                         </th>
                                         <th>{{ 'app.text.category' | trans }}</th>
-                                        <th{% if documents.isSorted('media.type') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if documents.isSorted('media.type') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(documents, 'app.text.type' | trans, 'media.type') }}
                                         </th>
-                                        <th{% if documents.isSorted('media.mediaSize') %} class="fa fa-sort-{{ direction }}" {% endif %}>
+                                        <th{% if documents.isSorted('media.mediaSize') %} class="fa-solid fa-sort-{{ direction }}" {% endif %}>
                                             {{ knp_pagination_sortable(documents, 'app.text.file_size' | trans, 'media.mediaSize') }}
                                         </th>
-                                        <th{% if documents.isSorted('media.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if documents.isSorted('media.createdAt') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(documents, 'app.text.date_added' | trans, 'media.createdAt') }}
                                         </th>
                                         <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
@@ -161,7 +161,7 @@
                                                        href="#tab-document-description-{{ document.id | hashids_encode }}"
                                                        aria-expanded="true"
                                                        aria-controls="tab-document-description-{{ document.id | hashids_encode }}">
-                                                        <i class="fa fa-desktop"></i>
+                                                        <i class="fa-solid fa-desktop"></i>
                                                         {{ 'app.form.action.show_detail' | trans }}
                                                     </a>
                                                 {% endif %}
@@ -183,19 +183,19 @@
                                                             data-google-docs-url-param="{{ frameLink }}"
                                                         {% endif %}
                                                 >
-                                                    <i class="fa fa-file-text-o"></i>
+                                                    <i class="fa-regular fa-file-lines"></i>
                                                     {{ 'app.form.action.show_content' | trans }}
                                                 </a>
 
                                                 {% if media_is_file_exist(document) %}
                                                     <a class="btn btn-success btn-xs"
                                                        href="{{ path('document_download', { 'id': document.id | hashids_encode }) }}">
-                                                        <i class="fa fa-download"></i>
+                                                        <i class="fa-solid fa-download"></i>
                                                         {{ 'app.form.action.download' | trans }}
                                                     </a>
                                                 {% else %}
                                                     <a class="btn btn-success btn-xs">
-                                                        <i class="fa fa-download"></i>
+                                                        <i class="fa-solid fa-download"></i>
                                                         {{ 'app.text.file_not_found' | trans }}
                                                     </a>
                                                 {% endif %}

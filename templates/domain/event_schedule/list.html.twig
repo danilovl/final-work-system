@@ -19,20 +19,20 @@
                                        data-toggle="dropdown"
                                        role="button"
                                        aria-expanded="false">
-                                        <i class="fa fa-wrench"></i>
+                                        <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <a target="_blank"
                                                href="{{ path('event_schedule_create') }}">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa-regular fa-pen-to-square"></i>
                                                 {{ 'app.form.action.create' | trans }}
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li><a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -71,20 +71,20 @@
                                                 <a class="btn btn-primary btn-xs"
                                                    href="{{ path('event_schedule_detail', { 'id': eventSchedule.id | hashids_encode }) }}"
                                                    target="_blank">
-                                                    <i class="fa fa-folder"></i>
+                                                    <i class="fa-solid fa-folder"></i>
                                                     {{ 'app.form.action.show_detail' | trans }}
                                                 </a>
                                                 <a class="btn btn-warning btn-xs"
                                                    target="_blank"
                                                    href="{{ path('event_schedule_edit', { 'id': eventSchedule.id | hashids_encode }) }}">
-                                                    <i class="fa fa-pencil"></i>
+                                                    <i class="fa-solid fa-pencil"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
                                                 <a data-toggle="modal"
                                                    data-target="#modalWindow"
                                                    class="btn btn-success btn-xs"
                                                    href="{{ path('event_schedule_clone', { 'id': eventSchedule.id | hashids_encode }) }}">
-                                                    <i class="fa fa-retweet"></i>
+                                                    <i class="fa-solid fa-retweet"></i>
                                                     {{ 'app.form.action.clonning' | trans }}
                                                 </a>
 

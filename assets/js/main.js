@@ -1,3 +1,28 @@
+function findSectionMenuLink(sidebarMenuElement, currentUrl) {
+    const minimumSharedSegments = 2;
+    const pathSegments = url => new URL(url, window.location.origin).pathname.split('/').filter(segment => segment !== '');
+    const currentSegments = pathSegments(currentUrl);
+
+    let bestLink = null;
+    let bestScore = minimumSharedSegments - 1;
+
+    sidebarMenuElement.find('a[href]').each(function () {
+        const linkSegments = pathSegments(this.href);
+        let score = 0;
+
+        while (score < linkSegments.length && linkSegments[score] === currentSegments[score]) {
+            score++;
+        }
+
+        if (score > bestScore) {
+            bestScore = score;
+            bestLink = this;
+        }
+    });
+
+    return bestLink === null ? $() : $(bestLink);
+}
+
 function initSidebar() {
     const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
     const bodyElement = $('body');
@@ -52,11 +77,15 @@ function initSidebar() {
         });
     });
 
-    sidebarMenuElement.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
-
-    sidebarMenuElement.find('a').filter(function () {
+    let currentLinks = sidebarMenuElement.find('a').filter(function () {
         return this.href === CURRENT_URL;
-    }).parent('li').addClass('current-page').parents('ul').slideDown(function () {
+    });
+
+    if (currentLinks.length === 0) {
+        currentLinks = findSectionMenuLink(sidebarMenuElement, CURRENT_URL);
+    }
+
+    currentLinks.parent('li').addClass('current-page').parents('ul').slideDown(function () {
         setContentHeight();
     }).parent().addClass('active');
 

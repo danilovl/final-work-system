@@ -31,7 +31,7 @@
                 {% if modalDataTargetDeleteUrl is not defined and deleteForm is defined and deleteForm %}
                     {{ form_start(deleteForm, {'attr': {'class': 'delete-form-button'}}) }}
                     <button class="btn btn-danger">
-                        <i class="fa fa-trash-o"></i>
+                        <i class="fa-regular fa-trash-can"></i>
                         {{ 'app.form.action.delete' | trans }}
                     </button>
                     {{ form_end(deleteForm) }}
@@ -41,8 +41,8 @@
                             data-delete-target-row="{{ modalDataTarget }}-{{ modalDataTargetId | hashids_encode }}"
                             type="button"
                             class="btn btn-danger delete-element">
-                        <i class="fa fa-refresh fa-spin hide"></i>
-                        <i class="fa fa-trash-o"></i>
+                        <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
+                        <i class="fa-regular fa-trash-can"></i>
                         {{ 'app.form.action.delete' | trans }}
                     </button>
                 {% endif %}

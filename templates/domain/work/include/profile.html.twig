@@ -10,7 +10,7 @@
             <ul class="nav navbar-right panel_toolbox">
                 <li>
                     <a class="collapse-link">
-                        <i class="fa fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </a>
                 </li>
             </ul>
@@ -32,11 +32,11 @@
                     </h3>
                     <ul class="list-unstyled user_data">
                         <li>
-                            <i class="fa fa-user user-profile-icon"></i>:
+                            <i class="fa-solid fa-user user-profile-icon"></i>:
                             {{ work.author.username }}
                         </li>
                         <li class="m-top-xs">
-                            <i class="fa fa-at user-profile-icon"></i>:
+                            <i class="fa-solid fa-at user-profile-icon"></i>:
                             <a href="mailto:{{ app_user().email }}">
                                 {{ work.author.email }}
                             </a>
@@ -44,14 +44,14 @@
 
                         {% if work.author.phone is not empty %}
                             <li class="m-top-xs">
-                                <i class="fa fa-phone user-profile-icon"></i>:
+                                <i class="fa-solid fa-phone user-profile-icon"></i>:
                                 {{ work.author.phone }}
                             </li>
                         {% endif %}
 
                         {% if work.author.skype is not empty %}
                             <li class="m-top-xs">
-                                <i class="fa fa-skype user-profile-icon"></i>:
+                                <i class="fa-solid fa-skype user-profile-icon"></i>:
                                 {{ work.author.skype }}
                             </li>
                         {% endif %}
@@ -66,7 +66,7 @@
                                 <a href="{{ path('conversation_detail', { 'id': conversationWithAuthor.id | hashids_encode }) }}"
                                    target="_blank"
                                    class="btn btn-sm btn-primary">
-                                    <i class="fa fa-comments-o"></i>
+                                    <i class="fa-regular fa-comments"></i>
                                     {{ 'app.text.conversation' | trans }}
                                 </a>
                             {% else %}
@@ -78,7 +78,7 @@
                                     }
                                 }) }}
                                     <button type="submit" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-comments-o"></i>
+                                        <i class="fa-regular fa-comments"></i>
                                         {{ 'app.text.conversation' | trans }}
                                     </button>
                                 {{ form_end(actionForm) }}

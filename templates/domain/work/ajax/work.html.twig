@@ -109,7 +109,7 @@
                         <div class="item form-group">
                             {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <i class="col-md-4 col-sm-4 col-xs-12">
-                                <i class="fa fa-calendar-o form-control-feedback left"
+                                <i class="fa-regular fa-calendar form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
                                 {{ form_widget(form.deadline, {
@@ -126,7 +126,7 @@
                                        id="show-deadline-calendar-helper-date"
                                        data-action="calendar-helper#show"
                                        data-calendar-helper-panel-param="#deadline-calendar-helper-date">
-                                        <i class="fa fa-calendar-o"></i>
+                                        <i class="fa-regular fa-calendar"></i>
                                         {{ 'app.text.deadline' | trans }}
                                     </a>
                                 </div>
@@ -174,7 +174,7 @@
                         <div class="item form-group">
                             {{ form_label(form.deadlineProgram, 'app.form.label.program_deadline', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <i class="col-md-4 col-sm-4 col-xs-12">
-                                <i class="fa fa-calendar-o form-control-feedback left"
+                                <i class="fa-regular fa-calendar form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
                                 {{ form_widget(form.deadlineProgram, {
@@ -191,7 +191,7 @@
                                        id="show-program-deadline-calendar-helper-date"
                                        data-action="calendar-helper#show"
                                        data-calendar-helper-panel-param="#program-deadline-calendar-helper-date">
-                                        <i class="fa fa-calendar-o"></i>
+                                        <i class="fa-regular fa-calendar"></i>
                                         {{ 'app.text.term_for_testing' | trans }}
                                     </a>
                                 </div>
@@ -239,14 +239,14 @@
                                 <button class="btn btn-success"
                                         id="work-button-action"
                                         data-controller="ajax-form">
-                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button class="btn btn-primary"
                                         id="work-button-action-close"
                                         data-controller="ajax-form"
                                         data-ajax-form-close-value="true">
-                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
                             </div>

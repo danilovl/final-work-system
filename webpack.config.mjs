@@ -31,13 +31,13 @@ Encore
     }])
     .addStyleEntry('app/css', [
         'bootstrap/dist/css/bootstrap.css',
-        'font-awesome/css/font-awesome.min.css',
+        '@fortawesome/fontawesome-free/css/all.min.css',
         'select2/dist/css/select2.min.css',
         './assets/css/main.css'
     ])
     .addStyleEntry('app_security/css', [
         'bootstrap/dist/css/bootstrap.min.css',
-        'font-awesome/css/font-awesome.min.css',
+        '@fortawesome/fontawesome-free/css/all.min.css',
         './assets/css/main.css'
     ])
     .addPlugin(

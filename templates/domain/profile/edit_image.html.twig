@@ -7,7 +7,7 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            <li><a class="collapse-link"><i class="fa-solid fa-chevron-up"></i></a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -25,16 +25,16 @@
                             <h3>{{ app_user() }}</h3>
                             <ul class="list-unstyled user_data">
                                 <li>
-                                    <i class="fa fa-user user-profile-icon"></i>
+                                    <i class="fa-solid fa-user user-profile-icon"></i>
                                     {{ app_user().username }}
                                 </li>
                                 <li class="m-top-xs">
-                                    <i class="fa fa-at user-profile-icon"></i>
+                                    <i class="fa-solid fa-at user-profile-icon"></i>
                                     {{ app_user().email }}
                                 </li>
                                 {% if  app_user().skype is not empty %}
                                     <li class="m-top-xs">
-                                        <i class="fa fa-skype user-profile-icon"></i>:
+                                        <i class="fa-solid fa-skype user-profile-icon"></i>:
                                         {{ app_user().skype }}
                                     </li>
                                 {% endif %}
@@ -49,7 +49,7 @@
                                             }
                                         }) }}
                                             <button type="submit" class="btn btn-danger" id="delete-profile-image">
-                                                <i class="fa fa-picture-o"></i>
+                                                <i class="fa-regular fa-image"></i>
                                                 {{ 'app.text.delete' | trans }}
                                             </button>
                                         {{ form_end(actionForm) }}
@@ -57,13 +57,13 @@
                                 {% endif %}
                                 <li>
                                     <a class="btn btn-primary" href="{{ path('profile_show') }}">
-                                        <i class="fa fa-backward"></i>
+                                        <i class="fa-solid fa-backward"></i>
                                         {{ 'app.menu.profile' | trans }}
                                     </a>
                                 </li>
                                 <li>
                                     <a class="btn btn-warning" href="{{ path('profile_change_password') }}">
-                                        <i class="fa fa-edit m-right-xs"></i>
+                                        <i class="fa-regular fa-pen-to-square m-right-xs"></i>
                                         {{ 'app.menu.profile_change_password' | trans }}
                                     </a>
                                 </li>

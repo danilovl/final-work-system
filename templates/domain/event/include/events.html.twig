@@ -11,13 +11,13 @@
         <th>
             {{ 'app.text.name' | trans }}
         </th>
-        <th{% if events.isSorted('event.start') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+        <th{% if events.isSorted('event.start') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
             {{ knp_pagination_sortable(events, 'app.text.start' | trans, 'event.start') }}
         </th>
-        <th{% if events.isSorted('event.end') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+        <th{% if events.isSorted('event.end') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
             {{ knp_pagination_sortable(events, 'app.text.end' | trans, 'event.end') }}
         </th>
-        <th{% if events.isSorted('event.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+        <th{% if events.isSorted('event.createdAt') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
             {{ knp_pagination_sortable(events, 'app.text.date_added' | trans, 'event.createdAt') }}
         </th>
         <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
@@ -47,7 +47,7 @@
                 <a target="_blank"
                    href="{{ path('event_detail', { 'id': event.id | hashids_encode  }) }}"
                    class="btn btn-primary btn-xs">
-                    <i class="fa fa-desktop"></i>
+                    <i class="fa-solid fa-desktop"></i>
                     {{ 'app.form.action.show_detail' | trans }}
                 </a>
 
@@ -55,7 +55,7 @@
                     <a class="btn btn-primary btn-xs"
                        href="{{ path('work_detail', { 'id': event.participant.work.id | hashids_encode }) }}"
                        target="_blank">
-                        <i class="fa fa-folder"></i>
+                        <i class="fa-solid fa-folder"></i>
                         {{ 'app.text.work' | trans }}
                     </a>
                 {% endif %}
@@ -64,7 +64,7 @@
                    data-target="#modalWindow"
                    class="btn btn-warning btn-xs"
                    href="{{ path('event_edit', { 'id': event.id | hashids_encode }) }}">
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa-solid fa-pencil"></i>
                     {{ 'app.form.action.edit' | trans }}
                 </a>
 

@@ -3,7 +3,7 @@ parameters:
     main:
       - label: 'app.menu.work'
         attributes:
-          icon: 'fa-book'
+          icon: 'fa-solid fa-book'
         roles:
           - 'ROLE_STUDENT'
           - 'ROLE_OPPONENT'
@@ -15,7 +15,7 @@ parameters:
               type: 'author'
             label: 'app.menu.work_author_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_STUDENT'
 
@@ -24,7 +24,7 @@ parameters:
               type: 'opponent'
             label: 'app.menu.work_opponent_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_OPPONENT'
 
@@ -33,28 +33,28 @@ parameters:
               type: 'supervisor'
             label: 'app.menu.work_opponent_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'work_category_list'
             label: 'app.menu.work_category_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'work_create'
             label: 'app.menu.work_create'
             attributes:
-              icon: 'fa-pencil'
+              icon: 'fa-solid fa-pencil'
             roles:
               - 'ROLE_SUPERVISOR'
 
       - label: 'app.menu.user'
         transchoice: 2
         attributes:
-          icon: 'fa-users'
+          icon: 'fa-solid fa-users'
         roles:
           - 'ROLE_SUPERVISOR'
         children:
@@ -63,48 +63,48 @@ parameters:
               type: 'author'
             label: 'app.menu.author_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
 
           - path: 'user_list'
             path_option:
               type: 'opponent'
             label: 'app.menu.opponent_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
 
           - path: 'user_list'
             path_option:
               type: 'consultant'
             label: 'app.menu.consultant_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
 
           - path: 'user_list'
             path_option:
               type: 'unused'
             label: 'app.menu.unused_user_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
 
           - path: 'user_group_create'
             label: 'app.menu.user_group_create'
             attributes:
-              icon: 'fa-pencil'
+              icon: 'fa-solid fa-pencil'
 
           - path: 'user_group_list'
             label: 'app.menu.user_group_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
 
           - path: 'user_create'
             label: 'app.menu.user_create'
             attributes:
-              icon: 'fa-user'
+              icon: 'fa-solid fa-user'
 
       - path: 'conversation_list'
         label: 'app.menu.conversation'
         attributes:
-          icon: 'fa-comments'
+          icon: 'fa-solid fa-comments'
         roles:
           - 'ROLE_STUDENT'
           - 'ROLE_OPPONENT'
@@ -114,7 +114,7 @@ parameters:
       - label: 'app.menu.appointment'
         transchoice: 2
         attributes:
-          icon: 'fa-calendar'
+          icon: 'fa-solid fa-calendar-days'
         roles:
           - 'ROLE_SUPERVISOR'
           - 'ROLE_STUDENT'
@@ -123,49 +123,49 @@ parameters:
           - path: 'event_list'
             label: 'app.menu.event_list'
             attributes:
-              icon: 'fa fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'event_calendar_reservation'
             label: 'app.menu.appointment_calendar'
             attributes:
-              icon: 'fa-calendar'
+              icon: 'fa-solid fa-calendar-days'
             roles:
               - 'ROLE_STUDENT'
 
           - path: 'event_calendar_manage'
             label: 'app.menu.appointment_calendar_manage'
             attributes:
-              icon: 'fa-calendar'
+              icon: 'fa-solid fa-calendar-days'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'event_address_create'
             label: 'app.menu.appointment_address_create'
             attributes:
-              icon: 'fa-pencil'
+              icon: 'fa-solid fa-pencil'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'event_address_list'
             label: 'app.menu.appointment_address_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'event_schedule_create'
             label: 'app.menu.event_schedule_create'
             attributes:
-              icon: 'fa-pencil'
+              icon: 'fa-solid fa-pencil'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'event_schedule_list'
             label: 'app.menu.event_schedule_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
@@ -173,13 +173,13 @@ parameters:
         label: 'app.menu.task'
         transchoice: 2
         attributes:
-          icon: 'fa-tasks'
+          icon: 'fa-solid fa-bars-progress'
         roles:
           - 'ROLE_SUPERVISOR'
 
       - label: 'app.menu.information_materials'
         attributes:
-          icon: 'fa-info'
+          icon: 'fa-solid fa-info'
         roles:
           - 'ROLE_SUPERVISOR'
           - 'ROLE_STUDENT'
@@ -188,39 +188,39 @@ parameters:
           - path: 'document_list'
             label: 'app.menu.information_materials_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_STUDENT'
 
           - path: 'document_list_owner'
             label: 'app.menu.information_materials_list_my'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'document_create'
             label: 'app.menu.information_material_create'
             attributes:
-              icon: 'fa-pencil'
+              icon: 'fa-solid fa-pencil'
             roles:
               - 'ROLE_SUPERVISOR'
 
           - path: 'document_category_list'
             label: 'app.menu.information_materials_category_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
             roles:
               - 'ROLE_SUPERVISOR'
 
       - label: 'app.menu.articles'
         attributes:
-          icon: 'fa-newspaper-o'
+          icon: 'fa-regular fa-newspaper'
         children:
           - path: 'article_category_list'
             label: 'app.menu.article_category_list'
             attributes:
-              icon: 'fa-ellipsis-v'
+              icon: 'fa-solid fa-ellipsis-v'
         roles:
           - 'ROLE_STUDENT'
           - 'ROLE_OPPONENT'
@@ -230,7 +230,7 @@ parameters:
       - path: 'admin_dashboard'
         label: 'app.menu.admin'
         attributes:
-          icon: 'fa-desktop'
+          icon: 'fa-solid fa-desktop'
         roles:
           - 'ROLE_ADMIN'
 
@@ -249,11 +249,11 @@ parameters:
           _switch_user: '_exit'
         label: 'app.menu.logout_switch_user'
         attributes:
-          icon: 'fa-sign-out pull-right'
+          icon: 'fa-solid fa-right-from-bracket pull-right'
         roles:
           - 'IS_IMPERSONATOR'
 
       - path: 'security_logout'
         label: 'app.menu.logout'
         attributes:
-          icon: 'fa-sign-out pull-right'
+          icon: 'fa-solid fa-right-from-bracket pull-right'

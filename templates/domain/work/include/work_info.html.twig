@@ -6,7 +6,7 @@
         <ul class="nav navbar-rul panel_toolbox">
             <li>
                 <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
+                    <i class="fa-solid fa-chevron-up"></i>
                 </a>
             </li>
         </ul>
@@ -191,7 +191,7 @@
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
                                         <a class="collapse-link">
-                                            <i class="fa fa-chevron-down"></i>
+                                            <i class="fa-solid fa-chevron-down"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -208,19 +208,19 @@
                                         </h2>
                                         <ul class="list-unstyled">
                                             <li>
-                                                <i class="fa fa-at"></i> :
+                                                <i class="fa-solid fa-at"></i> :
                                                 {{ work.supervisor.email }}
                                             </li>
                                             {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                 {% if  work.supervisor.phone is not empty %}
                                                     <li class="m-top-xs">
-                                                        <i class="fa fa-phone user-profile-icon"></i>:
+                                                        <i class="fa-solid fa-phone user-profile-icon"></i>:
                                                         {{ work.supervisor.phone }}
                                                     </li>
                                                 {% endif %}
                                                 {% if  work.supervisor.skype is not empty %}
                                                     <li class="m-top-xs">
-                                                        <i class="fa fa-skype user-profile-icon"></i>:
+                                                        <i class="fa-solid fa-skype user-profile-icon"></i>:
                                                         {{ work.supervisor.skype }}
                                                     </li>
                                                 {% endif %}
@@ -241,7 +241,7 @@
                                                 <a href="{{ path('conversation_detail', { 'id': conversationWithSupervisor.id | hashids_encode }) }}"
                                                    target="_blank"
                                                    class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-comments-o"></i>
+                                                    <i class="fa-regular fa-comments"></i>
                                                     {{ 'app.text.conversation' | trans }}
                                                 </a>
                                             {% else %}
@@ -253,7 +253,7 @@
                                                     }
                                                 }) }}
                                                     <button type="submit" class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-comments-o"></i>
+                                                        <i class="fa-regular fa-comments"></i>
                                                         {{ 'app.text.conversation' | trans }}
                                                     </button>
                                                 {{ form_end(actionForm) }}
@@ -275,7 +275,7 @@
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
                                             <a class="collapse-link">
-                                                <i class="fa fa-chevron-down"></i>
+                                                <i class="fa-solid fa-chevron-down"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -292,19 +292,19 @@
                                             </h2>
                                             <ul class="list-unstyled">
                                                 <li>
-                                                    <i class="fa fa-at"></i> :
+                                                    <i class="fa-solid fa-at"></i> :
                                                     {{ work.opponent.email }}
                                                 </li>
                                                 {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                     {% if  work.opponent.phone is not empty %}
                                                         <li class="m-top-xs">
-                                                            <i class="fa fa-phone user-profile-icon"></i>:
+                                                            <i class="fa-solid fa-phone user-profile-icon"></i>:
                                                             {{ work.opponent.phone }}
                                                         </li>
                                                     {% endif %}
                                                     {% if  work.opponent.skype is not empty %}
                                                         <li class="m-top-xs">
-                                                            <i class="fa fa-skype user-profile-icon"></i>:
+                                                            <i class="fa-solid fa-skype user-profile-icon"></i>:
                                                             {{ work.opponent.skype }}
                                                         </li>
                                                     {% endif %}
@@ -325,7 +325,7 @@
                                                     <a href="{{ path('conversation_detail', { 'id': conversationWithOpponent.id | hashids_encode }) }}"
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-comments-o"></i>
+                                                        <i class="fa-regular fa-comments"></i>
                                                         {{ 'app.text.conversation' | trans }}
                                                     </a>
                                                 {% else %}
@@ -337,7 +337,7 @@
                                                         }
                                                     }) }}
                                                         <button type="submit" class="btn btn-sm btn-primary">
-                                                            <i class="fa fa-comments-o"></i>
+                                                            <i class="fa-regular fa-comments"></i>
                                                             {{ 'app.text.conversation' | trans }}
                                                         </button>
                                                     {{ form_end(actionForm) }}
@@ -360,7 +360,7 @@
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
                                             <a class="collapse-link">
-                                                <i class="fa fa-chevron-down"></i>
+                                                <i class="fa-solid fa-chevron-down"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -377,20 +377,20 @@
                                             </h2>
                                             <ul class="list-unstyled">
                                                 <li>
-                                                    <i class="fa fa-at"></i> :
+                                                    <i class="fa-solid fa-at"></i> :
                                                     {{ work.consultant.email }}
                                                 </li>
 
                                                 {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                     {% if  work.consultant.phone is not empty %}
                                                         <li class="m-top-xs">
-                                                            <i class="fa fa-phone user-profile-icon"></i>:
+                                                            <i class="fa-solid fa-phone user-profile-icon"></i>:
                                                             {{ work.consultant.phone }}
                                                         </li>
                                                     {% endif %}
                                                     {% if  work.consultant.skype is not empty %}
                                                         <li class="m-top-xs">
-                                                            <i class="fa fa-skype user-profile-icon"></i>:
+                                                            <i class="fa-solid fa-skype user-profile-icon"></i>:
                                                             {{ work.consultant.skype }}
                                                         </li>
                                                     {% endif %}
@@ -412,7 +412,7 @@
                                                     <a href="{{ path('conversation_detail', { 'id': conversationWithConsultant.id | hashids_encode }) }}"
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-comments-o"></i>
+                                                        <i class="fa-regular fa-comments"></i>
                                                         {{ 'app.text.conversation' | trans }}
                                                     </a>
                                                 {% else %}
@@ -424,7 +424,7 @@
                                                         }
                                                     }) }}
                                                         <button type="submit" class="btn btn-sm btn-primary">
-                                                            <i class="fa fa-comments-o"></i>
+                                                            <i class="fa-regular fa-comments"></i>
                                                             {{ 'app.text.conversation' | trans }}
                                                         </button>
                                                     {{ form_end(actionForm) }}

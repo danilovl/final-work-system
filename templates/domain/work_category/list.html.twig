@@ -19,14 +19,14 @@
                                        data-toggle="dropdown"
                                        role="button"
                                        aria-expanded="false">
-                                        <i class="fa fa-wrench"></i>
+                                        <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <a href="{{ path('work_category_create') }}"
                                                data-toggle="modal"
                                                data-target="#modalWindow">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa-regular fa-pen-to-square"></i>
                                                 {{ 'app.form.action.create' | trans }}
                                             </a>
                                         </li>
@@ -34,7 +34,7 @@
                                 </li>
                                 <li>
                                     <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -50,16 +50,16 @@
                                 <table class="table table-striped projects">
                                     <thead>
                                     <tr>
-                                        <th{% if workCategories.isSorted('work_category.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if workCategories.isSorted('work_category.name') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(workCategories, 'app.text.name' | trans, 'work_category.name') }}
                                         </th>
                                         <th>
                                             {{ 'app.text.work' | trans }}
                                         </th>
-                                        <th{% if workCategories.isSorted('work_category.sorting') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if workCategories.isSorted('work_category.sorting') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(workCategories, 'app.text.sorting' | trans, 'work_category.sorting') }}
                                         </th>
-                                        <th{% if workCategories.isSorted('work_category.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                        <th{% if workCategories.isSorted('work_category.createdAt') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}>
                                             {{ knp_pagination_sortable(workCategories, 'app.text.date_added' | trans, 'work_category.createdAt') }}
                                         </th>
                                         <th style="width: 20%">
@@ -88,7 +88,7 @@
                                                    data-target="#modalWindow"
                                                    class="btn btn-warning btn-xs"
                                                    href="{{ path('work_category_edit', { 'id': workCategory.id | hashids_encode }) }}">
-                                                    <i class="fa fa-pencil"></i>
+                                                    <i class="fa-solid fa-pencil"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
 

@@ -12,6 +12,7 @@ import 'vanilla-calendar-pro/styles/index.css';
  *   format – "YYYY-MM-DD" (default) or "YYYY-MM-DD HH:mm" with a 24-hour time picker
  *
  * Language is taken from <html lang="…">. Setting the input value and dispatching "change" updates the calendar.
+ * Typing in the input, Escape and Tab close the calendar.
  */
 export default class extends Controller {
     static values = {
@@ -66,10 +67,22 @@ export default class extends Controller {
             }
         };
         this.element.addEventListener('change', this.onChange);
+
+        this.onKeydown = event => {
+            if (event.key === 'Escape' || event.key === 'Tab') {
+                this.calendar.hide();
+            }
+        };
+        this.element.addEventListener('keydown', this.onKeydown);
+
+        this.onInput = () => this.calendar.hide();
+        this.element.addEventListener('input', this.onInput);
     }
 
     disconnect() {
         this.element.removeEventListener('change', this.onChange);
+        this.element.removeEventListener('keydown', this.onKeydown);
+        this.element.removeEventListener('input', this.onInput);
         this.calendar.destroy();
     }
 }

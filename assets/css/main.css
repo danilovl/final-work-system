@@ -21,7 +21,7 @@
     text-decoration: none
 }
 
-.byline, .main_menu .fa {
+.byline, .main_menu :is(.fa-solid, .fa-regular, .fa-brands) {
     -webkit-font-smoothing: antialiased
 }
 
@@ -262,7 +262,7 @@
     display: none !important
 }
 
-.nav-sm .menu_section h3, .nav-sm .profile, .nav-sm span.fa {
+.nav-sm .menu_section h3, .nav-sm .profile, .nav-sm span:is(.fa-solid, .fa-regular, .fa-brands) {
     display: none
 }
 
@@ -367,7 +367,7 @@
     float: left
 }
 
-.main_menu span.fa {
+.main_menu span:is(.fa-solid, .fa-regular, .fa-brands) {
     float: right;
     text-align: center;
     margin-top: 5px;
@@ -376,7 +376,7 @@
     color: #C4CFDA
 }
 
-.active a span.fa {
+.active a span:is(.fa-solid, .fa-regular, .fa-brands) {
     text-align: right !important;
     margin-right: 4px
 }
@@ -385,7 +385,7 @@
     margin: 0
 }
 
-.nav-sm li li span.fa {
+.nav-sm li li span:is(.fa-solid, .fa-regular, .fa-brands) {
     display: inline-block
 }
 
@@ -954,7 +954,7 @@ a {
     padding: 9px
 }
 
-.main_menu .nav.child_menu .fa {
+.main_menu .nav.child_menu :is(.fa-solid, .fa-regular, .fa-brands) {
     width: 16px;
     margin-right: 4px;
     font-size: 14px;
@@ -2038,12 +2038,12 @@ h4.graph_title {
     border-radius: 4px
 }
 
-.fontawesome-icon-list .fa-hover a:hover .fa {
+.fontawesome-icon-list .fa-hover a:hover :is(.fa-solid, .fa-regular, .fa-brands) {
     font-size: 28px;
     vertical-align: -6px
 }
 
-.fontawesome-icon-list .fa-hover a .fa {
+.fontawesome-icon-list .fa-hover a :is(.fa-solid, .fa-regular, .fa-brands) {
     width: 32px;
     font-size: 16px;
     display: inline-block;
@@ -2051,13 +2051,11 @@ h4.graph_title {
     margin-right: 10px
 }
 
-.main_menu .fa {
+.main_menu :is(.fa-solid, .fa-regular, .fa-brands) {
     width: 26px;
     opacity: .99;
     display: inline-block;
-    font-family: FontAwesome !important;
     font-style: normal;
-    font-weight: 400 !important;
     font-size: 18px;
     -moz-osx-font-smoothing: grayscale
 }
@@ -2650,9 +2648,10 @@ a.btn-danger, a.btn-primary, a.btn-success, a.btn-warning {
     font-size: 12px
 }
 
-.btn.btn-app > .fa, .btn.btn-app > .glyphicon, .btn.btn-app > .ion {
+.btn.btn-app > :is(.fa-solid, .fa-regular, .fa-brands), .btn.btn-app > .glyphicon, .btn.btn-app > .ion {
     font-size: 20px;
-    display: block
+    display: block;
+    margin: 0 auto
 }
 
 .btn.btn-app:hover {
@@ -4113,6 +4112,38 @@ div[data-role=editor-toolbar] {
     padding: 3px 5px
 }
 
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    position: static;
+    margin-right: 4px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover,
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:focus {
+    background: transparent;
+    color: #fff;
+    outline: none;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+    padding: 0;
+}
+
+.select2-container--default .select2-results__group[role="treeitem"] {
+    cursor: pointer;
+}
+
+.select2-container--default .select2-results__group[role="treeitem"]:hover {
+    background-color: #f1f1f1;
+}
+
+.select2-container--default .select2-results__group--selected {
+    background-color: #ddd;
+}
+
 .select2-container--default.select2-container--focus .select2-selection--multiple {
     border: 1px solid #ccc
 }
@@ -4748,11 +4779,11 @@ ul.notifications {
     display: none;
 }
 
-.ibox.collapsed .fa.fa-chevron-up:before {
+.ibox.collapsed :is(.fa-solid, .fa-regular, .fa-brands).fa-chevron-up:before {
     content: "\f078";
 }
 
-.ibox.collapsed .fa.fa-chevron-down:before {
+.ibox.collapsed :is(.fa-solid, .fa-regular, .fa-brands).fa-chevron-down:before {
     content: "\f077";
 }
 

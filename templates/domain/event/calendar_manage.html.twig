@@ -11,7 +11,7 @@
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -97,7 +97,7 @@
                                             <div class="item form-group">
                                                 {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <i class="fa fa-calendar-o form-control-feedback left"
+                                                    <i class="fa-regular fa-calendar form-control-feedback left"
                                                        aria-hidden="true">
                                                     </i>
                                                     {{ form_widget(form.start, {
@@ -112,7 +112,7 @@
                                             <div class="item form-group">
                                                 {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <span class="fa fa-calendar-o form-control-feedback left"
+                                                <span class="fa-regular fa-calendar form-control-feedback left"
                                                       aria-hidden="true">
                                                 </span>
                                                     {{ form_widget(form.end, {
@@ -132,7 +132,7 @@
                                         <button type="button"
                                                 id="event_create"
                                                 class="btn btn-primary">
-                                            <i id="event_create_load" class="fa fa-refresh fa-spin hide"></i>
+                                            <i id="event_create_load" class="fa-solid fa-arrows-rotate fa-spin hide"></i>
                                             {{ 'app.form.action.create' | trans }}
                                         </button>
                                         <button type="button" class="btn btn-default antoclose" data-dismiss="modal">

@@ -12,6 +12,7 @@
         "playwright:test-ui": "npx playwright test --ui-host=0.0.0.0 --ui-port=35825"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^7.3.1",
         "@fullcalendar/core": "^6.1.17",
         "@fullcalendar/daygrid": "^6.1.17",
         "@fullcalendar/interaction": "^6.1.17",
@@ -19,7 +20,6 @@
         "@fullcalendar/timegrid": "^6.1.17",
         "@fullcalendar/vue3": "^6.1.17",
         "bootstrap": "^3.3.7",
-        "font-awesome": "^4.6.1",
         "inputmask": "^5.0.10",
         "jquery": "^3.5.1",
         "jquery-ui": "^1.14.2",
