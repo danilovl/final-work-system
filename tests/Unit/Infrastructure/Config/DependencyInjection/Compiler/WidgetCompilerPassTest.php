@@ -28,7 +28,7 @@ class WidgetCompilerPassTest extends TestCase
     {
         $containerBuilder = new ContainerBuilder;
 
-        $container = $this->createMock(ContainerInterface::class);
+        $container = $this->createStub(ContainerInterface::class);
         $widgetManagerDefinition = new Definition(WidgetManagerService::class);
         $widgetManagerDefinition->setArguments([$container]);
 
