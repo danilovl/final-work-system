@@ -38,7 +38,9 @@ class ResetPasswordQueryBuilder extends BaseQueryBuilder
 
     public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('reset_password.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('reset_password.createdAt', $order)
+            ->addOrderBy('reset_password.id', $order);
 
         return $this;
     }
