@@ -22,7 +22,7 @@ use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\EventScheduleTemplate\Factory\EventScheduleTemplateFactory;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Service\EntityManagerService;
-use DateTime;
+use DateTimeImmutable;
 
 class EventScheduleFactory extends BaseModelFactory
 {
@@ -36,7 +36,7 @@ class EventScheduleFactory extends BaseModelFactory
     public function cloneEventSchedule(
         User $user,
         EventSchedule $eventSchedule,
-        DateTime $startDate
+        DateTimeImmutable $startDate
     ): void {
         $templates = $eventSchedule->getTemplates();
 
@@ -61,10 +61,10 @@ class EventScheduleFactory extends BaseModelFactory
             );
 
             $eventStartDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
-            $event->setStart(new DateTime($eventStartDate));
+            $event->setStart(new DateTimeImmutable($eventStartDate));
 
             $eventEndDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
-            $event->setEnd(new DateTime($eventEndDate));
+            $event->setEnd(new DateTimeImmutable($eventEndDate));
 
             $this->entityManagerService->persistAndFlush($event);
         }

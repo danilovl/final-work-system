@@ -12,9 +12,9 @@
 
 namespace App\Domain\EventSchedule\Model;
 
-use DateTime;
+use DateTimeImmutable;
 
 class EventScheduleCloneModel
 {
-    public DateTime $start;
+    public DateTimeImmutable $start;
 }
