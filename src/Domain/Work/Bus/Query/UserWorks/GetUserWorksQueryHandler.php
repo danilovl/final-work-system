@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\UserWorks;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Work\Service\UserWorkService;
 
 readonly class GetUserWorksQueryHandler implements QueryHandlerInterface

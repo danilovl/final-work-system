@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Service;
 
 use App\Application\Constant\TabTypeConstant;
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Infrastructure\Service\PaginatorService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\Event\Entity\Event;
@@ -28,7 +28,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Service\ResetInterface;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Task\Bus\Query\TaskQueryByWork\{GetTaskQueryByWorkQuery, GetTaskQueryByWorkQueryResult};
 use App\Domain\Event\Bus\Query\EventQueryByWork\{GetEventQueryByWorkQuery, GetEventQueryByWorkQueryResult};
 use App\Domain\Media\Bus\Query\MediaQueryByWork\{GetMediaQueryByWorkQuery, GetMediaQueryByWorkQueryResult};

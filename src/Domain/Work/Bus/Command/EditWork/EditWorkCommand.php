@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Command\EditWork;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Model\WorkModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Http\Api;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Bus\Query\WorkList\{
     GetWorkListQuery,

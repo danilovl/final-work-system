@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
 use App\Domain\Work\Constant\WorkUserTypeConstant;

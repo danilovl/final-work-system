@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Work\Bus\Command\CreateWork\CreateWorkCommand;
 use App\Domain\Work\Entity\Work;
 use App\Application\Constant\ControllerMethodConstant;

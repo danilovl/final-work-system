@@ -12,10 +12,8 @@
 
 namespace App\Domain\Work\Form;
 
-use App\Application\Constant\{
-    FormConstant,
-    DateFormatConstant
-};
+use App\Application\Constant\FormConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Form\DataGrid\UserDataGrid;

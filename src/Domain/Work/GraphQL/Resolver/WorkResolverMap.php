@@ -18,7 +18,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 use Override;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\WorkStatus\Bus\Query\WorkStatus\{GetWorkStatusQuery, GetWorkStatusQueryResult};
 use App\Domain\WorkStatus\Bus\Query\WorkStatusList\{GetWorkStatusListQuery, GetWorkStatusListQueryResult};
 

@@ -21,7 +21,7 @@ use Danilovl\SelectAutocompleterBundle\Service\OrmAutocompleter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Override;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserSearchQueryBuilder\{GetUserSearchQueryBuilderQuery, GetUserSearchQueryBuilderQueryResult};
 
 class WorkSearchUsersAutocompleter extends OrmAutocompleter

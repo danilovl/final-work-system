@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Autocompleter;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Facade\WorkFacade;
 use Danilovl\SelectAutocompleterBundle\Attribute\AsAutocompleter;

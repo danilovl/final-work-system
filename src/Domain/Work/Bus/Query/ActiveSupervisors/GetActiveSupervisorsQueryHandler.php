@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\ActiveSupervisors;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Work\Service\UserWorkService;
 
 readonly class GetActiveSupervisorsQueryHandler implements QueryHandlerInterface

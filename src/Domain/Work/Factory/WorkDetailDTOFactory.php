@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Factory;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\DTO\Api\WorkDetailDTO;

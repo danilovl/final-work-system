@@ -12,10 +12,7 @@
 
 namespace App\Domain\Work\Bus\Command\EditAuthor;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\User\Bus\Command\SaveUser\SaveUserCommand;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Helper;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\UserWorks;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\WorksByAuthorStatus;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Work\Facade\WorkFacade;
 
 readonly class GetWorksByAuthorStatusQueryHandler implements QueryHandlerInterface

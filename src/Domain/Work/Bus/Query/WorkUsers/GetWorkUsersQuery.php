@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\WorkUsers;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

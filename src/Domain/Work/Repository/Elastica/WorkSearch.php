@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Repository\Elastica;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Application\Traits\Repository\Elastica\ElasticaSearchTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;

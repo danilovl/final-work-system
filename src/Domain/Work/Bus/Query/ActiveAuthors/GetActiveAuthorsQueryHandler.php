@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\ActiveAuthors;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Work\Service\UserWorkService;
 
 readonly class GetActiveAuthorsQueryHandler implements QueryHandlerInterface

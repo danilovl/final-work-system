@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Facade;
 
 use InvalidArgumentException;
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;

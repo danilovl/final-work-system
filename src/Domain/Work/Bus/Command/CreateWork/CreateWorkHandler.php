@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Command\CreateWork;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Factory\WorkFactory;

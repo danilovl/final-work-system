@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Http\Api;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Bus\Command\CreateWork\CreateWorkCommand;
 use App\Domain\Work\DTO\Api\Input\WorkInput;

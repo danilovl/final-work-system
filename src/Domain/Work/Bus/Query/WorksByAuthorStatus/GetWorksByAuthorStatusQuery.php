@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Query\WorksByAuthorStatus;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

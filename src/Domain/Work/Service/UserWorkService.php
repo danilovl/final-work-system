@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Service;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\{
     WorkUserTypeConstant

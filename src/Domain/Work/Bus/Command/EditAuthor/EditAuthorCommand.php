@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Command\EditAuthor;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Model\UserModel;
 use App\Domain\Work\Entity\Work;

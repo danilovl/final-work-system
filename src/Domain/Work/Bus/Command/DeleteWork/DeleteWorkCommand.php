@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Bus\Command\DeleteWork;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
