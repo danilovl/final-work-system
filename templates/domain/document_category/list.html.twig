@@ -74,7 +74,7 @@
                                                 {{ mediaCategory.name }}
                                             </td>
                                             <td>
-                                                {{ mediaCategory.description | away_to | raw }}
+                                                {{ mediaCategory.description | sanitize_html('app.rich_text_sanitizer') | away_to | raw }}
                                             </td>
                                             <td>
                                                 {{ mediaCategory.medias | length }}
