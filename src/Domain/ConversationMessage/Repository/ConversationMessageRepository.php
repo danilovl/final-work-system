@@ -19,7 +19,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Webmozart\Assert\Assert;
@@ -48,7 +48,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->leftJoinConversationParticipants()
             ->whereByConversationWork($work)
             ->whereByParticipantsUser($user)
-            ->orderByCreatedAt(Order::Descending->value)
+            ->orderByCreatedAt(SortDirection::Descending)
             ->getQueryBuilder();
     }
 
@@ -76,7 +76,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->whereByStatusUser($user)
             ->whereByStatusMessageNotNull()
             ->whereByStatusConversationNotNull()
-            ->orderByCreatedAt(Order::Descending->value)
+            ->orderByCreatedAt(SortDirection::Descending)
             ->getQueryBuilder();
     }
 
@@ -88,7 +88,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->joinOwner()
             ->joinConversation()
             ->whereByConversation($conversation)
-            ->orderByCreatedAt(Order::Descending->value);
+            ->orderByCreatedAt(SortDirection::Descending);
 
         if ($limit !== null) {
             $builder = $builder->setMaxResults($limit);
@@ -110,7 +110,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->joinOwner()
             ->joinConversation()
             ->whereByIds($ids)
-            ->orderByCreatedAt(Order::Descending->value)
+            ->orderByCreatedAt(SortDirection::Descending)
             ->getQueryBuilder();
     }
 
@@ -126,7 +126,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->whereByStatusUser($user)
             ->whereByStatusMessageNotNull()
             ->whereByStatusConversationNotNull()
-            ->orderByCreatedAt(Order::Descending->value)
+            ->orderByCreatedAt(SortDirection::Descending)
             ->getQueryBuilder();
     }
 
@@ -138,7 +138,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->selectMessageOnly()
             ->whereByConversation($conversation)
             ->whereByCreatedAfter($date)
-            ->orderByCreatedAt(Order::Descending->value)
+            ->orderByCreatedAt(SortDirection::Descending)
             ->getQueryBuilder();
     }
 }
