@@ -90,14 +90,13 @@
                 let minutes = Math.floor((distance % hour) / minute);
                 let seconds = Math.floor((distance % minute) / second);
 
-                element.innerHTML = days + ' {{ 'app.calendar.day.day' | trans({'%count%': 2}) }} ';
-                element.innerHTML += hours + ' {{ 'app.calendar.hour' | trans({'%count%': 2}) }} ';
-                element.innerHTML += minutes + ' {{ 'app.calendar.minute' | trans({'%count%': 2}) }} ';
-                element.innerHTML += seconds + ' {{ 'app.calendar.second' | trans({'%count%': 2}) }} ';
+                element.innerHTML = days + ' {{ 'app.calendar.day.day' | trans({'%count%': 2})|e('js') }} ';
+                element.innerHTML += hours + ' {{ 'app.calendar.hour' | trans({'%count%': 2})|e('js') }} ';
+                element.innerHTML += minutes + ' {{ 'app.calendar.minute' | trans({'%count%': 2})|e('js') }} ';
+                element.innerHTML += seconds + ' {{ 'app.calendar.second' | trans({'%count%': 2})|e('js') }} ';
             }
 
-
-            let deadline = '{{ work.deadline | date('Y-m-d') }}';
+            let deadline = '{{ work.deadline | date('Y-m-d')|e('js') }}';
             let end = new Date(deadline);
 
             setInterval(deadline => {
@@ -106,8 +105,7 @@
 
             {% if work.deadlineProgram %}
 
-
-            let deadlineProgram = '{{ work.deadlineProgram | date('Y-m-d') }}';
+            let deadlineProgram = '{{ work.deadlineProgram | date('Y-m-d')|e('js') }}';
             let endProgram = new Date(deadlineProgram);
 
             setInterval(deadline => {

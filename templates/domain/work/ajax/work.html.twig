@@ -26,37 +26,79 @@
                         <div class="item form-group">
                             {{ form_label(form.status, 'app.form.label.status', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.status, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
                         <div class="item form-group">
                             {{ form_label(form.type, 'app.form.label.type', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.type, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
                         <div class="item form-group">
                             {{ form_label(form.categories, 'app.form.label.category', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.categories, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
                         <div class="item form-group">
                             {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.author, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
                         <div class="item form-group">
                             {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.opponent, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.opponent, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
                         <div class="item form-group">
                             {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
-                                {{ form_widget(form.consultant, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.consultant, {
+                                    'attr': {
+                                        'data-controller': 'select2',
+                                        'data-select2-width-value': '100%',
+                                        'data-select2-dropdown-parent-value': '#modalWindow',
+                                        'class': 'form-control'
+                                    }
+                                }) }}
                             </div>
                         </div>
                         <div class="item form-group">
@@ -65,7 +107,13 @@
                                 <i class="fa fa-calendar-o form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
-                                {{ form_widget(form.deadline, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                {{ form_widget(form.deadline, {
+                                    'attr': {
+                                        'data-controller': 'datetimepicker',
+                                        'data-datetimepicker-format-value': 'YYYY-MM-DD',
+                                        'class': 'form-control has-feedback-left'
+                                    }
+                                }) }}
                             </i>
 
                             {% if workDeadlines is not empty %}
@@ -120,7 +168,13 @@
                                 <i class="fa fa-calendar-o form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
-                                {{ form_widget(form.deadlineProgram, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                {{ form_widget(form.deadlineProgram, {
+                                    'attr': {
+                                        'data-controller': 'datetimepicker',
+                                        'data-datetimepicker-format-value': 'YYYY-MM-DD',
+                                        'class': 'form-control has-feedback-left'
+                                    }
+                                }) }}
                             </i>
 
                             {% if workProgramDeadlines is not empty %}
@@ -192,24 +246,6 @@
 
 <script>
     $(document).ready(() => {
-        let modalWindow = $('#modalWindow');
-
-        $('#work_status').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_type').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_categories').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_author').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_supervisor').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_opponent').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_consultant').select2({width: '100%', dropdownParent: modalWindow});
-        $('#work_deadline').datetimepicker({
-            format: 'YYYY-MM-DD',
-            locale: '{{ app.request.locale }}'
-        });
-        $('#work_deadlineProgram').datetimepicker({
-            format: 'YYYY-MM-DD',
-            locale: '{{ app.request.locale }}'
-        });
-
         createEditContentAjax('#work-button-action');
         createEditContentAjax('#work-button-action-close', true);
 
