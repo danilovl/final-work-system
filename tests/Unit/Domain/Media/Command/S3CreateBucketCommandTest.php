@@ -13,7 +13,8 @@
 namespace App\Tests\Unit\Domain\Media\Command;
 
 use App\Domain\Media\Command\S3CreateBucketCommand;
-use App\Domain\Media\Facade\MediaTypeFacade;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\MediaType\Bus\Query\MediaTypeList\GetMediaTypeListQueryResult;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Infrastructure\Service\S3ClientService;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -26,7 +27,7 @@ use Symfony\Component\TypeInfo\Exception\LogicException;
 
 class S3CreateBucketCommandTest extends TestCase
 {
-    private MockObject&MediaTypeFacade $mediaTypeFacade;
+    private MockObject&QueryBusInterface $queryBus;
 
     private MockObject&S3ClientService $s3ClientService;
 
@@ -34,10 +35,10 @@ class S3CreateBucketCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->mediaTypeFacade = $this->createMock(MediaTypeFacade::class);
+        $this->queryBus = $this->createMock(QueryBusInterface::class);
         $this->s3ClientService = $this->createMock(S3ClientService::class);
         $this->s3CreateBucketCommand = new S3CreateBucketCommand(
-            $this->mediaTypeFacade,
+            $this->queryBus,
             $this->s3ClientService
         );
     }
@@ -50,10 +51,10 @@ class S3CreateBucketCommandTest extends TestCase
         $mediaType2 = $this->createStub(MediaType::class);
         $mediaType2->method('getFolder')->willReturn('testFolder2');
 
-        $this->mediaTypeFacade
+        $this->queryBus
             ->expects($this->once())
-            ->method('list')
-            ->willReturn([$mediaType1, $mediaType2]);
+            ->method('handle')
+            ->willReturn(new GetMediaTypeListQueryResult([$mediaType1, $mediaType2]));
 
         $this->s3ClientService
             ->expects($this->exactly(2))
