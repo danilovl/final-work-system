@@ -76,6 +76,6 @@ class UserFormFactory
                 throw new RuntimeException('Controller method type not found');
         }
 
-        return $this->formFactory->create($formClass, $userModel, $parameters);
+        return $this->formFactory->create(type: $formClass, data: $userModel, options: $parameters);
     }
 }
