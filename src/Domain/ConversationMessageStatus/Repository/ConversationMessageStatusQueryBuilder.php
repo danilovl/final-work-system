@@ -17,7 +17,7 @@ use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
 {
@@ -64,7 +64,7 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByMessageCreatedAt(string $order = Order::Descending->value): self
+    public function orderByMessageCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('message.createdAt', $order);
 
