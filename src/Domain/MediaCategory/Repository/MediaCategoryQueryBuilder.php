@@ -14,7 +14,7 @@ namespace App\Domain\MediaCategory\Repository;
 
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
-use Doctrine\Common\Collections\Order;
+use SortDirection;
 
 class MediaCategoryQueryBuilder extends BaseQueryBuilder
 {
@@ -32,14 +32,14 @@ class MediaCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByName(string $order = Order::Ascending->value): self
+    public function orderByName(SortDirection $order = SortDirection::Ascending): self
     {
         $this->queryBuilder->orderBy('media_category.name', $order);
 
         return $this;
     }
 
-    public function orderByCreatedAt(string $order = Order::Descending->value): self
+    public function orderByCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
         $this->queryBuilder->orderBy('media_category.createdAt', $order);
 
