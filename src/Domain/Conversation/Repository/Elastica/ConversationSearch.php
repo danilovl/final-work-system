@@ -29,7 +29,10 @@ readonly class ConversationSearch
     public function getIdsByParticipantAndSearch(User $user, array $conversationIds, string $search): array
     {
         $query = $this->createQueryGetIdsByParticipantAndSearch($user, $conversationIds, $search);
-        $results = $this->transformedFinderConversation->findRaw($query);
+        $results = $this->findAllRaw(
+            search: fn (array $pageQuery): array => $this->transformedFinderConversation->findRaw($pageQuery),
+            query: $query
+        );
 
         return $this->getDocumentIds($results);
     }
