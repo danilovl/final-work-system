@@ -42,7 +42,7 @@ class UserEventDispatcherTest extends TestCase
     #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
 
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
