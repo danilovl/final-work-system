@@ -61,11 +61,11 @@ class ElasticaSearchTraitTest extends TestCase
 
     public function testGetDocumentIdsExceptionClass(): void
     {
-        $resultMock1 = $this->createMock(Result::class);
-        $resultMock2 = $this->createMock(Result::class);
+        $resultStub1 = $this->createStub(Result::class);
+        $resultStub2 = $this->createStub(Result::class);
         $resultMock3 = new stdClass;
 
-        $results = [$resultMock1, $resultMock2, $resultMock3];
+        $results = [$resultStub1, $resultStub2, $resultMock3];
 
         $this->expectException(InvalidArgumentException::class);
 
