@@ -13,12 +13,11 @@
 namespace App\Domain\Widget\WidgetItem;
 
 use App\Infrastructure\Service\TwigRenderService;
-use App\Domain\SystemEvent\Facade\{
-    SystemEventFacade,
-    SystemEventRecipientFacade
-};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\SystemEvent\Bus\Query\TotalUnreadSystemEventsByRecipient\{GetTotalUnreadSystemEventsByRecipientQuery, GetTotalUnreadSystemEventsByRecipientQueryResult};
+use App\Domain\SystemEventRecipient\Bus\Query\UnreadSystemEventsByRecipient\{GetUnreadSystemEventsByRecipientQuery, GetUnreadSystemEventsByRecipientQueryResult};
 
 class UnreadSystemEventWidget extends BaseWidget
 {
@@ -29,19 +28,25 @@ class UnreadSystemEventWidget extends BaseWidget
     public function __construct(
         private readonly TwigRenderService $twigRenderService,
         private readonly UserService $userService,
-        private readonly SystemEventFacade $systemEventFacade,
-        private readonly SystemEventRecipientFacade $systemEventRecipientFacade
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     public function getRenderParameters(): array
     {
         $user = $this->user ?? $this->userService->getUser();
 
-        $countUnreadSystemEventMessage = $this->systemEventFacade
-            ->getTotalUnreadSystemEventsByRecipient($user);
+        $getTotalUnreadSystemEventsByRecipientQuery = GetTotalUnreadSystemEventsByRecipientQuery::create($user);
+        /** @var GetTotalUnreadSystemEventsByRecipientQueryResult $getTotalUnreadSystemEventsByRecipientQueryResult */
+        $getTotalUnreadSystemEventsByRecipientQueryResult = $this->queryBus->handle($getTotalUnreadSystemEventsByRecipientQuery);
+        $countUnreadSystemEventMessage = $getTotalUnreadSystemEventsByRecipientQueryResult->count;
 
-        $systemEventRecipients = $this->systemEventRecipientFacade
-            ->getUnreadSystemEventsByRecipient($user, self::COUNT_VIEW);
+        $getUnreadSystemEventsByRecipientQuery = GetUnreadSystemEventsByRecipientQuery::create(
+            user: $user,
+            limit: self::COUNT_VIEW
+        );
+        /** @var GetUnreadSystemEventsByRecipientQueryResult $getUnreadSystemEventsByRecipientQueryResult */
+        $getUnreadSystemEventsByRecipientQueryResult = $this->queryBus->handle($getUnreadSystemEventsByRecipientQuery);
+        $systemEventRecipients = $getUnreadSystemEventsByRecipientQueryResult->systemEventRecipients;
 
         return [
             'countUnreadSystemEventMessage' => $countUnreadSystemEventMessage,

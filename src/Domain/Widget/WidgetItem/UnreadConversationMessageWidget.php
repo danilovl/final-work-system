@@ -13,9 +13,11 @@
 namespace App\Domain\Widget\WidgetItem;
 
 use App\Infrastructure\Service\TwigRenderService;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ConversationMessage\Bus\Query\UnreadMessagesByUser\{GetUnreadMessagesByUserQuery, GetUnreadMessagesByUserQueryResult};
+use App\Domain\ConversationMessage\Bus\Query\TotalUnreadMessagesByUser\{GetTotalUnreadMessagesByUserQuery, GetTotalUnreadMessagesByUserQueryResult};
 
 class UnreadConversationMessageWidget extends BaseWidget
 {
@@ -26,18 +28,25 @@ class UnreadConversationMessageWidget extends BaseWidget
     public function __construct(
         private readonly TwigRenderService $twigRenderService,
         private readonly UserService $userService,
-        private readonly ConversationMessageFacade $conversationMessageFacade
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     public function getRenderParameters(): array
     {
         $user = $this->user ?? $this->userService->getUser();
 
-        $countUnreadConversationMessage = $this->conversationMessageFacade
-            ->getTotalUnreadMessagesByUser($user);
+        $getTotalUnreadMessagesByUserQuery = GetTotalUnreadMessagesByUserQuery::create($user);
+        /** @var GetTotalUnreadMessagesByUserQueryResult $getTotalUnreadMessagesByUserQueryResult */
+        $getTotalUnreadMessagesByUserQueryResult = $this->queryBus->handle($getTotalUnreadMessagesByUserQuery);
+        $countUnreadConversationMessage = $getTotalUnreadMessagesByUserQueryResult->count;
 
-        $unreadConversationMessages = $this->conversationMessageFacade
-            ->getUnreadMessagesByUser($user, self::COUNT_VIEW);
+        $getUnreadMessagesByUserQuery = GetUnreadMessagesByUserQuery::create(
+            user: $user,
+            limit: self::COUNT_VIEW
+        );
+        /** @var GetUnreadMessagesByUserQueryResult $getUnreadMessagesByUserQueryResult */
+        $getUnreadMessagesByUserQueryResult = $this->queryBus->handle($getUnreadMessagesByUserQuery);
+        $unreadConversationMessages = $getUnreadMessagesByUserQueryResult->messages;
 
         return [
             'countUnreadConversationMessage' => $countUnreadConversationMessage,

@@ -20,20 +20,20 @@ use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
-use App\Domain\Work\Facade\WorkFacade;
-use App\Domain\Work\Service\WorkService;
+use App\Domain\Work\Helper\WorkDeadlineHelper;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Work\Bus\Query\WorksByAuthorStatus\{GetWorksByAuthorStatusQuery, GetWorksByAuthorStatusQueryResult};
 
 class WorkDeadlineNotifyWidget extends BaseWidget
 {
     public function __construct(
         private readonly UserService $userService,
-        private readonly WorkService $workService,
         private readonly ParameterServiceInterface $parameterService,
         private readonly TranslatorService $translatorService,
         private readonly TwigRenderService $twigRenderService,
-        private readonly WorkFacade $workFacade
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     public function render(): ?string
@@ -50,14 +50,17 @@ class WorkDeadlineNotifyWidget extends BaseWidget
             workStatus: [WorkStatusConstant::ACTIVE->value]
         );
 
-        $works = $this->workFacade->listByAuthorStatus($workRepositoryDTO);
+        $getWorksByAuthorStatusQuery = GetWorksByAuthorStatusQuery::create($workRepositoryDTO);
+        /** @var GetWorksByAuthorStatusQueryResult $getWorksByAuthorStatusQueryResult */
+        $getWorksByAuthorStatusQueryResult = $this->queryBus->handle($getWorksByAuthorStatusQuery);
+        $works = $getWorksByAuthorStatusQueryResult->works;
         if (count($works) === 0) {
             return null;
         }
 
         $type = null;
         foreach ($works as $work) {
-            $deadlineDays = $this->workService->getDeadlineDays($work);
+            $deadlineDays = WorkDeadlineHelper::getDeadlineDays($work);
             if ($deadlineDays < 0 || $deadlineDays > 30) {
                 continue;
             }
