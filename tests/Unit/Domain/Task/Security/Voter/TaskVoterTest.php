@@ -32,7 +32,7 @@ class TaskVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $task = $this->createMock(Task::class);
+        $task = $this->createStub(Task::class);
 
         foreach (TaskVoter::SUPPORTS as $support) {
             $this->assertTrue($this->taskVoter->supportsPublic($support, $task));
