@@ -12,10 +12,14 @@
 
 namespace App\Domain\Work\Facade;
 
+use InvalidArgumentException;
 use App\Application\Exception\EntityNotFoundException;
+use App\Domain\User\Entity\User;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
+use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\ORM\{
     Query,
     QueryBuilder
@@ -64,15 +68,41 @@ readonly class WorkFacade
     }
 
     /**
-     * @return Work[]
+     * @param int[] $userIds
+     * @param WorkStatus[]|null $workStatus
+     * @return array<int, Work[]>
      */
-    public function listByAuthorSupervisorStatus(WorkRepositoryDTO $workRepositoryDTO): array
-    {
-        /** @var Work[] $result */
-        $result = $this->workRepository
-            ->allByUserStatus($workRepositoryDTO)
+    public function listByUsersSupervisorStatus(
+        array $userIds,
+        User $supervisor,
+        string $type,
+        ?array $workStatus
+    ): array {
+        if (count($userIds) === 0) {
+            return [];
+        }
+
+        /** @var Work[] $works */
+        $works = $this->workRepository
+            ->allByUsersSupervisorStatus($userIds, $supervisor, $type, $workStatus)
             ->getQuery()
             ->getResult();
+
+        $result = [];
+        foreach ($works as $work) {
+            $workUser = match ($type) {
+                WorkUserTypeConstant::AUTHOR->value => $work->getAuthor(),
+                WorkUserTypeConstant::OPPONENT->value => $work->getOpponent(),
+                WorkUserTypeConstant::CONSULTANT->value => $work->getConsultant(),
+                default => throw new InvalidArgumentException('Unsupported work user type.')
+            };
+
+            if ($workUser === null) {
+                continue;
+            }
+
+            $result[$workUser->getId()][] = $work;
+        }
 
         return $result;
     }

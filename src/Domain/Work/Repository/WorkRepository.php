@@ -16,6 +16,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
+use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use SortDirection;
 use Doctrine\ORM\QueryBuilder;
@@ -76,6 +77,26 @@ class WorkRepository extends ServiceEntityRepository
             ->whereByWorkStatus($workData->workStatus);
 
         return $builder->getQueryBuilder();
+    }
+
+    /**
+     * @param int[] $userIds
+     * @param WorkStatus[]|null $workStatus
+     */
+    public function allByUsersSupervisorStatus(
+        array $userIds,
+        User $supervisor,
+        string $type,
+        ?array $workStatus
+    ): QueryBuilder {
+        return $this->createWorkQueryBuilder()
+            ->selectStatus()
+            ->joinStatus()
+            ->leftJoinSupervisor()
+            ->whereBySupervisorFilter($supervisor)
+            ->whereByUsersAndType($type, $userIds)
+            ->whereByWorkStatus($workStatus)
+            ->getQueryBuilder();
     }
 
     public function getWorksAfterDeadline(): QueryBuilder

@@ -12,6 +12,7 @@
 
 namespace App\Domain\Work\Repository;
 
+use InvalidArgumentException;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
@@ -130,6 +131,26 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    /**
+     * @param int[] $userIds
+     */
+    public function whereByUsersAndType(string $type, array $userIds): self
+    {
+        $alias = match ($type) {
+            WorkUserTypeConstant::AUTHOR->value => 'author',
+            WorkUserTypeConstant::OPPONENT->value => 'opponent',
+            WorkUserTypeConstant::CONSULTANT->value => 'consultant',
+            default => throw new InvalidArgumentException('Unsupported work user type.')
+        };
+
+        $this->queryBuilder
+            ->leftJoin('work.' . $alias, $alias)
+            ->andWhere($this->queryBuilder->expr()->in($alias . '.id', ':userIds'))
+            ->setParameter('userIds', $userIds);
+
+        return $this;
+    }
+
     public function whereByWorkStatus(WorkStatus|iterable|null $workStatus): self
     {
         if ($workStatus instanceof WorkStatus) {
@@ -154,14 +175,18 @@ class WorkQueryBuilder extends BaseQueryBuilder
 
     public function orderByDeadline(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('work.deadline', $order);
+        $this->queryBuilder
+            ->orderBy('work.deadline', $order)
+            ->addOrderBy('work.id', $order);
 
         return $this;
     }
 
     public function orderByProgramDeadline(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('work.deadlineProgram', $order);
+        $this->queryBuilder
+            ->orderBy('work.deadlineProgram', $order)
+            ->addOrderBy('work.id', $order);
 
         return $this;
     }
