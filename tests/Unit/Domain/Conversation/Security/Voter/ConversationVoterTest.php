@@ -35,7 +35,7 @@ class ConversationVoterTest extends TestCase
 
     public function testSupports(): void
     {
-        $conversationMessage = $this->createMock(Conversation::class);
+        $conversationMessage = $this->createStub(Conversation::class);
 
         foreach (ConversationVoter::SUPPORTS as $support) {
             $this->assertTrue($this->conversationVoter->supportsPublic($support, $conversationMessage));
