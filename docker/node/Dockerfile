@@ -1,4 +1,4 @@
-FROM danilovl/final-work-system:node
+FROM danilovl/final-work-system:node24
 
 COPY ./ /var/www/html/app
 WORKDIR /var/www/html/app
