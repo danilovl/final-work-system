@@ -13,8 +13,10 @@
 namespace App\Tests\Unit\Application\Service;
 
 use App\Application\Service\ResizeImageService;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 
+#[AllowMockObjectsWithoutExpectations]
 class ResizeImageServiceTest extends TestCase
 {
     private string $originImage;
@@ -42,6 +44,10 @@ class ResizeImageServiceTest extends TestCase
         $resizeImageService = $this->getMockBuilder(ResizeImageService::class)
             ->onlyMethods(['getGdImage'])
             ->getMock();
+
+        $resizeImageService
+            ->method('getGdImage')
+            ->willReturn(false);
 
         $resizedImage = $resizeImageService->resizeBase64Image($this->originImage, 500);
 
