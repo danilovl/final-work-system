@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Command\CloneEventSchedule;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 
 readonly class CloneEventScheduleHandler implements CommandHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Command\DeleteEventSchedule;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\EventSchedule\Command\DeleteEventSchedule\DeleteEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;

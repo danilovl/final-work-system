@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Command\CloneEventSchedule;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
 use App\Domain\User\Entity\User;

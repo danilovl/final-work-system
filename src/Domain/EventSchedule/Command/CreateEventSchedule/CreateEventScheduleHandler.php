@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Command\CreateEventSchedule;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 

@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Command\CreateEventSchedule;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
