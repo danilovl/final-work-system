@@ -12,6 +12,7 @@
 
 namespace App\Domain\WorkStatus\Repository;
 
+use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
@@ -48,7 +49,7 @@ class WorkStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUserAndType(?string $type, mixed $user): self
+    public function byUserAndType(?string $type, ?User $user): self
     {
         if ($type === null || $user === null) {
             return $this;
@@ -77,7 +78,7 @@ class WorkStatusQueryBuilder extends BaseQueryBuilder
                 return $this;
         }
 
-        $this->queryBuilder->setParameter('user', $user);
+        $this->queryBuilder->setParameter('user', $user->getId());
 
         return $this;
     }
