@@ -12,6 +12,7 @@
 
 namespace App\Domain\ResetPassword\Form;
 
+use App\Domain\ResetPassword\Model\ResetChangePasswordModel;
 use Override;
 use Symfony\Component\Form\{
     AbstractType,
@@ -48,14 +49,15 @@ class ResetChangePasswordForm extends AbstractType
             'second_options' => [
                 'label' => 'Repeat Password'
             ],
-            'invalid_message' => 'The password fields must match.',
-            'mapped' => false
+            'invalid_message' => 'The password fields must match.'
         ]);
     }
 
     #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'data_class' => ResetChangePasswordModel::class
+        ]);
     }
 }
