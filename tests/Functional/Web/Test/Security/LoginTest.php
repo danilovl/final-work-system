@@ -25,9 +25,9 @@ class LoginTest extends WebTestCase
         $client = static::createClient();
 
         $this->login(
-            $client,
-            LoginData::STUDENT_USERNAME->value,
-            LoginData::STUDENT_PASSWORD->value
+            client: $client,
+            username: LoginData::STUDENT_USERNAME->value,
+            password: LoginData::STUDENT_PASSWORD->value
         );
 
         $this->assertEquals('/', $client->getRequest()->getPathInfo());
