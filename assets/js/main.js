@@ -150,14 +150,6 @@ function initAutosize() {
     }
 }
 
-function initInputMask() {
-    if (typeof ($.fn.inputmask) === 'undefined') {
-        return;
-    }
-
-    $(":input").inputmask();
-}
-
 function initValidator() {
     if (typeof (validator) === 'undefined') {
         return;
@@ -189,42 +181,6 @@ function initValidator() {
 
         return false;
     }));
-}
-
-function initTinymce(locale, selector) {
-    let defaultSelector = 'textarea';
-
-    if (selector) {
-        defaultSelector = selector;
-    }
-
-    tinymce.baseURL = window.location.origin + '/build/tinymce';
-    tinymce.init({
-        selector: defaultSelector,
-        height: 300,
-        theme: 'silver',
-        language: locale,
-        image_advtab: true,
-        templates: [
-            {title: 'Test template 1', content: 'Test 1'},
-            {title: 'Test template 2', content: 'Test 2'}
-        ],
-        content_css: [
-            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        ],
-        setup: function (editor) {
-            editor.on("init", function () {
-                editor.contentParent = $(this.contentAreaContainer.parentElement);
-                editor.contentParent.find("div.mce-toolbar-grp").hide();
-            });
-            editor.on('focus', function () {
-                editor.contentParent.find("div.mce-toolbar-grp").show();
-            });
-            editor.on('change', function () {
-                tinymce.triggerSave();
-            });
-        }
-    });
 }
 
 function notifyMessage(notifyType, notifyText) {
@@ -437,48 +393,6 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
     }));
 }
 
-function initAjaxChangeStatus() {
-    if ($(".js-switch")) {
-        let switch_elements = Array.prototype.slice.call(document.querySelectorAll('.js-switch'))
-            .filter(function (item) {
-                return item.style.display !== "none"
-            });
-
-        const processResponse = function (response) {
-            for (let type in response.notifyMessage) {
-                notifyMessage(type, response.notifyMessage[type]);
-            }
-        }
-
-        switch_elements.forEach(function (element) {
-            new Switchery(element, {
-                color: '#26B99A',
-                secondaryColor: '#ff0000'
-            });
-
-            if (element.hasAttribute('data-target-url')) {
-                element.onchange = function () {
-                    let url = element.getAttribute('data-target-url');
-                    let type = {'type': element.getAttribute('data-target-type')};
-
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: type,
-                        timeout: 10000,
-                        success: function (response) {
-                            processResponse(response)
-                        },
-                        error: function (response) {
-                            processResponse(response.responseJSON)
-                        }
-                    });
-                };
-            }
-        });
-    }
-}
-
 function initAjaxDeleteContent() {
     let delete_elements = Array.prototype.slice.call(document.querySelectorAll('.delete-element'));
     if (delete_elements.length > 0) {
@@ -538,20 +452,6 @@ function initAjaxDeleteContent() {
             };
         });
     }
-}
-
-function initJsSwitch(selector = '.js-switch') {
-    if (!$(selector)) {
-        return
-    }
-
-    let elems = Array.prototype.slice.call(document.querySelectorAll(selector));
-    elems.forEach(function (html) {
-        new Switchery(html, {
-            color: '#26B99A',
-            secondaryColor: '#ff0000'
-        });
-    });
 }
 
 function initTooltip() {
@@ -670,7 +570,6 @@ function conversationEventSource(url, $chat) {
         let data = JSON.parse(event.data);
         if (data.message !== undefined) {
             $chat.prepend((data.message));
-            initAjaxChangeStatus();
         }
     };
 }
