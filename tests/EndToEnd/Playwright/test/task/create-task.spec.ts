@@ -1,6 +1,7 @@
 import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
 import {taskData} from '@playwright-test//fixtures/task/task'
+import {setEditorContent} from '@playwright-test/page/tinymce'
 
 export default function createTests() {
     test.beforeEach(async ({loginSupervisor}) => {
@@ -19,9 +20,7 @@ export default function createTests() {
         await page.fill(taskData.deadline.id, taskData.deadline.text)
         await page.keyboard.press('Escape')
 
-        await page.evaluate((content) => {
-            (window as any).tinymce.activeEditor.setContent(`<strong>${content}</strong>`)
-        }, taskData.description.text)
+        await setEditorContent(page, `<strong>${taskData.description.text}</strong>`)
 
         await page.click('#task-button-action')
         await page.waitForTimeout(1000)
@@ -43,9 +42,7 @@ export default function createTests() {
         await page.fill(taskData.deadline.id, taskData.deadline.text)
         await page.keyboard.press('Escape')
 
-        await page.evaluate((content) => {
-            (window as any).tinymce.activeEditor.setContent(`<strong>${content}</strong>`)
-        }, taskData.description.text)
+        await setEditorContent(page, `<strong>${taskData.description.text}</strong>`)
 
         await page.click('#task-button-action')
         await page.waitForTimeout(1000)

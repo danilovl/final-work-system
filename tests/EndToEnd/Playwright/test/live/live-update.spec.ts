@@ -3,6 +3,7 @@ import {test} from '@playwright-test/fixtures/command'
 import LoginPage from '@playwright-test/page/login-page'
 import {createStudentWork} from '@playwright-test/page/student-work'
 import loginData from '@playwright-test/test-data/login'
+import {setEditorContent} from '@playwright-test/page/tinymce'
 
 const LIVE_TIMEOUT = 15000
 
@@ -36,10 +37,7 @@ export default function createTests() {
 
         const text = 'Live message ' + Math.random().toString(36).substring(2, 10)
         await supervisorPage.goto(conversationPath)
-        await supervisorPage.waitForFunction(() => (window as any).tinymce?.activeEditor?.initialized === true)
-        await supervisorPage.evaluate(content => {
-            (window as any).tinymce.activeEditor.setContent(content)
-        }, text)
+        await setEditorContent(supervisorPage, text)
         await supervisorPage.locator('.chat-message-form input[type="submit"]').click()
         await expect(supervisorPage.locator('#chat')).toContainText(text)
         await supervisorContext.close()

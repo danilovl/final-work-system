@@ -1,6 +1,7 @@
 import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
 import {conversationData} from '@playwright-test/fixtures/conversation/conversation'
+import {setEditorContent} from '@playwright-test/page/tinymce'
 
 export default function createTests() {
     test.beforeEach(async ({loginSupervisor}) => {
@@ -25,9 +26,7 @@ export default function createTests() {
 
         await page.click(conversationData.bodyMessage.id)
 
-        await page.evaluate((content) => {
-            (window as any).tinymce.activeEditor.setContent(`<strong>${content}</strong>`)
-        }, conversationData.bodyMessage.text)
+        await setEditorContent(page, `<strong>${conversationData.bodyMessage.text}</strong>`)
 
         await page.click('#btn-conversation-create')
 

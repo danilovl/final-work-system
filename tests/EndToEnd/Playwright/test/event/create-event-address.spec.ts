@@ -1,6 +1,7 @@
 import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
 import {addressData} from '@playwright-test//fixtures/event/address'
+import {setEditorContent} from '@playwright-test/page/tinymce'
 
 export default function createTests() {
     test.beforeEach(async ({loginSupervisor}) => {
@@ -14,12 +15,7 @@ export default function createTests() {
             const propKey = prop as keyof typeof addressData
 
             if (addressData[propKey].tinymce) {
-                await page.evaluate(
-                    (content) => {
-                        (window as any).tinymce.activeEditor.setContent(`<strong>${content}</strong>`)
-                    },
-                    addressData[propKey].text
-                )
+                await setEditorContent(page, `<strong>${addressData[propKey].text}</strong>`)
             } else {
                 await page.fill(
                     addressData[propKey].id,

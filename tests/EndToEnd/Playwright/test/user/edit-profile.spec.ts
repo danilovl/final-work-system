@@ -6,6 +6,7 @@ import {
     messageData,
     tabData
 } from '@playwright-test/fixtures/user/user-profile'
+import {setEditorContent} from '@playwright-test/page/tinymce'
 
 export default function createTests() {
     test.beforeEach(async ({loginSupervisor}) => {
@@ -47,17 +48,10 @@ export default function createTests() {
         for (const prop in messageData) {
             const propKey = prop as keyof typeof messageData
 
-            await page.evaluate(
-                ({id, text}) => {
-                    const editor = (window as any).tinymce.get(id)
-                    if (editor) {
-                        editor.setContent(`<strong>${text}</strong>`)
-                    }
-                },
-                {
-                    id: messageData[propKey].id,
-                    text: messageData[propKey].text.toString()
-                }
+            await setEditorContent(
+                page,
+                `<strong>${messageData[propKey].text.toString()}</strong>`,
+                messageData[propKey].id
             )
         }
 
