@@ -23,6 +23,7 @@
 - **Application/**: общие константы (`VoterSupportConstant` и др.), интерфейсы шин, атрибуты (`EntityRelationValidatorAttribute`), трейты, исключения, хелперы, DTO, миграции (`src/Application/Migrations`).
 - **Infrastructure/**: сервисы (`EntityManagerService`, `TwigRenderService`, `RequestService`, `PaginatorService`, `S3ClientService`, `AuthorizationCheckerService` и др.), персистентность (`Persistence/Doctrine`: DBAL-типы, `BaseQueryBuilder`), веб-слой (`Web/`: формы, Twig-расширения), слушатели (`Event/EventListener`), консоль, Messenger, GraphQL.
 - **Направление зависимостей**: `Domain` → `Application` → `Infrastructure`. `Infrastructure` не ссылается на `Application` и `Domain`, `Application` — на `Domain`; доменная логика (слушатели, compiler pass, админка) живёт в своём домене. Проверяет правило PHPStan `tests/PHPStan/Rule/LayerDependencyRule.php`, текущие нарушения — в `phpstan-layer-baseline.neon`, новые туда не добавлять.
+- **Независимость доменов**: домен не использует фасады, сервисы, репозитории и фабрики другого домена — дополнительные данные читаются через `query.bus`, запись идёт через `command.bus`; данные, загруженные в SQL через JOIN, остаются в запросе. Исключения — `UserService`, DTO-фабрики и `EventScheduleTemplateFactory` (`ALLOWED_CLASSES`); сущности, GenericEvent и статические хелперы других доменов разрешены. Проверяет правило PHPStan `tests/PHPStan/Rule/DomainDependencyRule.php`.
 
 ## Конфигурация
 
