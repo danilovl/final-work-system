@@ -2602,6 +2602,12 @@ table.table-mail tr td {
 
 /* Page forms (legacy form-horizontal) */
 
+.right_col .x_panel:has(> .x_content form.form-horizontal:not(.mail-search, [name$="_search"])):not(:has(.fc, .x_content .table:not(.modal .table))) {
+    display: block;
+    max-width: 49rem;
+    margin-inline: auto;
+}
+
 .x_panel .x_content form.form-horizontal:not(.mail-search) .form-group.row {
     flex-direction: column;
     gap: .4rem;
@@ -2658,6 +2664,34 @@ table.table-mail tr td {
     justify-content: flex-end;
     gap: .5rem;
     width: auto;
+}
+
+.x_panel .x_content form.form-horizontal:not(.mail-search) .form-group.row > [class*="col-"]:has(> .form-control-feedback.left) {
+    position: relative;
+}
+
+.x_panel .x_content form.form-horizontal:not(.mail-search) .form-control-feedback.left {
+    top: 50%;
+    right: auto;
+    left: .75rem;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    padding-right: .6rem;
+    color: var(--fws-muted);
+    font-size: .875rem;
+    line-height: 1;
+    border-right-color: var(--fws-border);
+    transform: translateY(-50%);
+}
+
+.form-control-feedback:has(~ [data-controller~="datetimepicker"]) {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.x_panel .x_content form.form-horizontal:not(.mail-search) .form-control.has-feedback-left {
+    padding-left: 2.75rem;
 }
 
 .x_panel .x_content form.form-horizontal:not(.mail-search) .ln_solid {

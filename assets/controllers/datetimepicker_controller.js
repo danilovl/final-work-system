@@ -25,7 +25,7 @@ export default class extends Controller {
 
         const options = {
             inputMode: true,
-            positionToInput: 'auto',
+            positionToInput: ['bottom', 'left'],
             selectedTheme: 'light',
             locale: document.documentElement.lang || 'en',
             selectedDates: date ? [date] : [],
@@ -77,12 +77,38 @@ export default class extends Controller {
 
         this.onInput = () => this.calendar.hide();
         this.element.addEventListener('input', this.onInput);
+
+        this.onBeforeShow = () => this.updatePosition();
+        this.element.addEventListener('mousedown', this.onBeforeShow);
+        this.element.addEventListener('focus', this.onBeforeShow);
+
+        this.icon = this.element.parentElement.querySelector(':scope > .form-control-feedback');
+        this.onIconClick = () => {
+            this.updatePosition();
+            this.element.focus();
+            this.calendar.show();
+        };
+        this.icon?.addEventListener('click', this.onIconClick);
+    }
+
+    updatePosition() {
+        const rect = this.element.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        const spaceAbove = rect.top;
+        const calendarHeight = this.calendar.context.mainElement?.offsetHeight ?? 0;
+        const fitsBelow = calendarHeight > 0 && spaceBelow >= calendarHeight;
+        const vertical = fitsBelow || spaceBelow >= spaceAbove ? 'bottom' : 'top';
+
+        this.calendar.positionToInput = [vertical, 'left'];
     }
 
     disconnect() {
         this.element.removeEventListener('change', this.onChange);
         this.element.removeEventListener('keydown', this.onKeydown);
         this.element.removeEventListener('input', this.onInput);
+        this.element.removeEventListener('mousedown', this.onBeforeShow);
+        this.element.removeEventListener('focus', this.onBeforeShow);
+        this.icon?.removeEventListener('click', this.onIconClick);
         this.calendar.destroy();
     }
 }
