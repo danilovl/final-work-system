@@ -1,10 +1,14 @@
 <template>
-  <FullCalendar ref="fullCalendar" :options="calendarOptions"/>
+  <FullCalendar
+    ref="fullCalendar"
+    :options="calendarOptions"
+  />
 </template>
 
 <script lang="ts" setup>
 import {onMounted, onUnmounted, ref} from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
+import type {CalendarOptions, EventClickArg} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -12,7 +16,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import {
   CalendarBaseProps,
   RawEvent,
-  ClickInfo,
   ApiResponse
 } from './interface';
 import {
@@ -20,9 +23,7 @@ import {
   createHandleDateSelectFunction
 } from './function';
 
-declare function notifyMessage(type: string, message: string): void;
-
-interface CalendarReservationProps extends CalendarBaseProps {}
+type CalendarReservationProps = CalendarBaseProps;
 
 const {
   locale,
@@ -43,7 +44,7 @@ const fetchEvents = createFetchEventsFunction(
   mapEventExtendedProps
 );
 
-const calendarOptions: Record<string, any> = {
+const calendarOptions: CalendarOptions = {
   plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
   headerToolbar: {
     left: 'prev,next today',
@@ -63,7 +64,7 @@ const calendarOptions: Record<string, any> = {
   eventColor: '#59ff00',
 };
 
-function handleEventClick(clickInfo: ClickInfo): void {
+function handleEventClick(clickInfo: EventClickArg): void {
   const event = clickInfo.event;
   const modalTitle = document.getElementById('modal-title');
   const eventDetail = document.getElementById('event-detail');
@@ -117,7 +118,7 @@ const handleReservationClick = function (this: HTMLElement): void {
         try {
           return await response.json();
         } catch (error) {
-          throw new Error('Error parsing JSON response: ' + error.message);
+          throw new Error('Error parsing JSON response: ' + (error as Error).message);
         }
       })
       .then((response: ApiResponse) => {

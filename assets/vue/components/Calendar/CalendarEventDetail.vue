@@ -1,10 +1,14 @@
 <template>
-  <FullCalendar ref="fullCalendar" :options="calendarOptions"/>
+  <FullCalendar
+    ref="fullCalendar"
+    :options="calendarOptions"
+  />
 </template>
 
 <script lang="ts" setup>
 import {ref} from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
+import type {CalendarOptions} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -29,7 +33,7 @@ const fetchEvents = createFetchEventsFunction(
     mapEventExtendedProps
 );
 
-const calendarOptions: Record<string, any> = {
+const calendarOptions: CalendarOptions = {
   plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
   headerToolbar: {
     left: 'prev,next today',

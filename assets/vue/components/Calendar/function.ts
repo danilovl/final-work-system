@@ -1,3 +1,5 @@
+import {ApiResponse, CalendarEvent, FetchInfo, RawEvent, SelectInfo} from './interface';
+
 export function dateFormat(date: Date): string {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -10,12 +12,12 @@ export function dateFormat(date: Date): string {
 
 export function createFetchEventsFunction(
     endpointEventCalendarEventsAjax: string,
-    mapEventExtendedProps: (event: RawEvent) => any
+    mapEventExtendedProps: (event: RawEvent) => CalendarEvent['extendedProps']
 ) {
     return function fetchEvents(
         fetchInfo: FetchInfo,
         successCallback: (events: CalendarEvent[]) => void,
-        failureCallback: (error: any) => void
+        failureCallback: (error: Error) => void
     ): void {
         const start = dateFormat(fetchInfo.start);
         const end = dateFormat(fetchInfo.end);
@@ -29,7 +31,7 @@ export function createFetchEventsFunction(
                 try {
                     return await response.json();
                 } catch (error) {
-                    throw new Error('Error parsing JSON response: ' + error.message);
+                    throw new Error('Error parsing JSON response: ' + (error as Error).message);
                 }
             })
             .then((response: ApiResponse) => {
@@ -71,5 +73,3 @@ export function createHandleDateSelectFunction() {
         $('#create-new-event-modal').modal('show');
     };
 }
-
-declare function notifyMessage(type: string, message: string): void;

@@ -43,24 +43,10 @@ export interface SelectInfo {
   end: Date;
 }
 
-export interface ClickInfo {
-  event: {
-    id: string;
-    title: string;
-    start: Date;
-    end: Date | null;
-    extendedProps: {
-      detail_url: string;
-      delete_url?: string;
-      reservation_url?: string;
-    };
-  };
-}
-
 export interface EventDropInfo {
   event: {
     id: string;
-    start: Date;
+    start: Date | null;
     end: Date | null;
   };
   revert: () => void;
@@ -73,5 +59,3 @@ export interface ApiResponse {
   delete?: boolean;
   notifyMessage: Record<string, string>;
 }
-
-declare function notifyMessage(type: string, message: string): void;

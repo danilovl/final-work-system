@@ -1,10 +1,14 @@
 <template>
-  <FullCalendar ref="fullCalendar" :options="calendarOptions"/>
+  <FullCalendar
+    ref="fullCalendar"
+    :options="calendarOptions"
+  />
 </template>
 
 <script lang="ts" setup>
 import {onMounted, onUnmounted, ref} from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
+import type {CalendarOptions, EventClickArg} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -12,7 +16,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import {
   CalendarManageProps,
   RawEvent,
-  ClickInfo,
   EventDropInfo,
   ApiResponse
 } from './interface';
@@ -39,7 +42,7 @@ const fetchEvents = createFetchEventsFunction(
     })
 );
 
-const calendarOptions: Record<string, any> = {
+const calendarOptions: CalendarOptions = {
   plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
   headerToolbar: {
     left: 'prev,next today',
@@ -61,7 +64,7 @@ const calendarOptions: Record<string, any> = {
   eventColor: '#59ff00',
 };
 
-function handleEventClick(clickInfo: ClickInfo): void {
+function handleEventClick(clickInfo: EventClickArg): void {
   const event = clickInfo.event;
   const modalTitle = document.getElementById('modal-title');
   const eventDetail = document.getElementById('event-detail');
@@ -70,7 +73,7 @@ function handleEventClick(clickInfo: ClickInfo): void {
   if (modalTitle) modalTitle.innerHTML = event.title.replace(/\n/g, '<br>');
   if (eventDetail) eventDetail.setAttribute('href', event.extendedProps.detail_url);
   if (eventDelete) {
-    eventDelete.setAttribute('href', event.extendedProps.delete_url);
+    eventDelete.setAttribute('href', event.extendedProps.delete_url ?? '');
     eventDelete.setAttribute('data-event-id', event.id);
   }
 
@@ -79,6 +82,12 @@ function handleEventClick(clickInfo: ClickInfo): void {
 
 function handleEventDrop(info: EventDropInfo): void {
   const event = info.event;
+  if (event.start === null) {
+    info.revert();
+
+    return;
+  }
+
   const start = dateFormat(event.start);
   const end = event.end ? dateFormat(event.end) : start;
   const url = endpointEventCalendarEditAjax.replace('Ynvr2lgdAJ', event.id);
@@ -92,7 +101,7 @@ function handleEventDrop(info: EventDropInfo): void {
         try {
           return await response.json();
         } catch (error) {
-          throw new Error('Error parsing JSON response: ' + error.message);
+          throw new Error('Error parsing JSON response: ' + (error as Error).message);
         }
       })
       .then((response: ApiResponse) => {
@@ -128,7 +137,7 @@ function createEvent(): void {
         try {
           return await response.json();
         } catch (error) {
-          throw new Error('Error parsing JSON response: ' + error.message);
+          throw new Error('Error parsing JSON response: ' + (error as Error).message);
         }
       })
       .then((response: ApiResponse) => {
@@ -180,7 +189,7 @@ function deleteEvent(): void {
         try {
           return await response.json();
         } catch (error) {
-          throw new Error('Error parsing JSON response: ' + error.message);
+          throw new Error('Error parsing JSON response: ' + (error as Error).message);
         }
       })
       .then((response: ApiResponse) => {
