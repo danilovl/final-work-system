@@ -12,19 +12,17 @@
 
 namespace App\Domain\ConversationType\Constant;
 
-use App\Application\Exception\InvalidArgumentException;
-
 enum ConversationTypeConstant: int
 {
     case WORK = 1;
     case GROUP = 2;
 
-    public static function getIdByType(string $type): int
+    public static function tryIdByType(string $type): ?int
     {
         return match ($type) {
             'work' => self::WORK->value,
             'group' => self::GROUP->value,
-            default => throw new InvalidArgumentException('Invalid conversation type.')
+            default => null
         };
     }
 }

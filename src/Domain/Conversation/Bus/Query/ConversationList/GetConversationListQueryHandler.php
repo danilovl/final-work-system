@@ -44,11 +44,11 @@ readonly class GetConversationListQueryHandler
     public function __invoke(GetConversationListQuery $query): GetConversationListQueryResult
     {
         $user = $query->user;
-        $type = $query->request->query->get('type');
+        $type = $query->request->query->getString('type');
+        $typeId = ConversationTypeConstant::tryIdByType($type);
         $types = [];
 
-        if (!empty($type)) {
-            $typeId = ConversationTypeConstant::getIdByType($type);
+        if ($typeId !== null) {
             $types[] = $this->entityManagerService->getReference(ConversationType::class, $typeId);
         }
 
