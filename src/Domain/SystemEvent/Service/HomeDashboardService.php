@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\Service;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessage\Bus\Query\TotalUnreadMessagesByUser\{
     GetTotalUnreadMessagesByUserQuery,
     GetTotalUnreadMessagesByUserQueryResult

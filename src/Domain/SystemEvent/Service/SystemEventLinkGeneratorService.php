@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\Service;
 
-use App\Application\Exception\ConstantNotFoundException;
+use App\Infrastructure\Exception\ConstantNotFoundException;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;

@@ -13,7 +13,7 @@
 namespace App\Domain\SystemEvent\Http\Api;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\EventDispatcher\CacheEventDispatcher;
+use App\Infrastructure\Event\EventDispatcher\CacheEventDispatcher;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Service\UserService;

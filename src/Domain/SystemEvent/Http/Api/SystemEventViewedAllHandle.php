@@ -13,9 +13,9 @@
 namespace App\Domain\SystemEvent\Http\Api;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\EventDispatcher\CacheEventDispatcher;
+use App\Infrastructure\Event\EventDispatcher\CacheEventDispatcher;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\SystemEventRecipient\Bus\Command\ViewedAllSystemEventRecipient\ViewedAllSystemEventRecipientCommand;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{JsonResponse, Response};

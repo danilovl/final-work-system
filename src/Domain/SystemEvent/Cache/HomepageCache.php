@@ -21,7 +21,7 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\SystemEventRecipient\Bus\Query\RecipientsQueryByUser\{GetRecipientsQueryByUserQuery, GetRecipientsQueryByUserQueryResult};
 
 class HomepageCache

@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\DTO\Repository;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use App\Domain\User\Entity\User;
 
 class SystemEventRepositoryDTO

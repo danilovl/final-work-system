@@ -12,14 +12,12 @@
 
 namespace App\Domain\SystemEvent\Http\Ajax;
 
-use App\Application\Constant\{
-    CacheKeyConstant,
-    AjaxJsonTypeConstant
-};
-use App\Application\EventDispatcher\CacheEventDispatcher;
+use App\Application\Constant\CacheKeyConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Event\EventDispatcher\CacheEventDispatcher;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\SystemEventRecipient\Bus\Command\ViewedAllSystemEventRecipient\ViewedAllSystemEventRecipientCommand;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;

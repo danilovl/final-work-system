@@ -12,11 +12,9 @@
 
 namespace App\Domain\SystemEvent\Http\Ajax;
 
-use App\Application\Constant\{
-    CacheKeyConstant,
-    AjaxJsonTypeConstant
-};
-use App\Application\EventDispatcher\CacheEventDispatcher;
+use App\Application\Constant\CacheKeyConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Event\EventDispatcher\CacheEventDispatcher;
 use App\Infrastructure\Service\{
     RequestService,
     EntityManagerService

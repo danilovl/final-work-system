@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\SystemEventType\Bus\Query\SystemEventType\{GetSystemEventTypeQuery, GetSystemEventTypeQueryResult};
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Infrastructure\Service\EntityManagerService;
