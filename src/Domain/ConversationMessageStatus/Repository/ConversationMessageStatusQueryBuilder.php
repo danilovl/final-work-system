@@ -55,6 +55,34 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    public function selectConversationId(): self
+    {
+        $this->queryBuilder
+            ->select('IDENTITY(conversation_message_status.conversation) AS conversationId')
+            ->distinct();
+
+        return $this;
+    }
+
+    public function selectMessageIdAndTypeId(): self
+    {
+        $this->queryBuilder->select(
+            'IDENTITY(conversation_message_status.message) AS messageId',
+            'IDENTITY(conversation_message_status.type) AS typeId'
+        );
+
+        return $this;
+    }
+
+    public function whereByMessageConversationId(int $conversationId): self
+    {
+        $this->queryBuilder
+            ->andWhere('message.conversation = :messageConversationId')
+            ->setParameter('messageConversationId', $conversationId);
+
+        return $this;
+    }
+
     public function whereByMessage(ConversationMessage $conversationMessage): self
     {
         $this->queryBuilder
@@ -66,7 +94,9 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
 
     public function orderByMessageCreatedAt(SortDirection $order = SortDirection::Descending): self
     {
-        $this->queryBuilder->orderBy('message.createdAt', $order);
+        $this->queryBuilder
+            ->orderBy('message.createdAt', $order)
+            ->addOrderBy('message.id', $order);
 
         return $this;
     }

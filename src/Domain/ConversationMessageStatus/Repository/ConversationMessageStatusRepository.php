@@ -14,7 +14,6 @@ namespace App\Domain\ConversationMessageStatus\Repository;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessageStatus\DTO\Repository\ConversationMessageStatusRepositoryDTO;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
@@ -46,14 +45,26 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->getQueryBuilder();
     }
 
-    public function oneByConversationUserType(ConversationMessageStatusRepositoryDTO $data): QueryBuilder
-    {
+    public function conversationIdsByUserType(
+        User $user,
+        ConversationMessageStatusType $type
+    ): QueryBuilder {
         return $this->createConversationMessageStatusQueryBuilder()
+            ->selectConversationId()
+            ->whereByUser($user)
+            ->whereByType($type)
+            ->getQueryBuilder();
+    }
+
+    public function messageTypesByConversationUser(
+        int $conversationId,
+        User $user
+    ): QueryBuilder {
+        return $this->createConversationMessageStatusQueryBuilder()
+            ->selectMessageIdAndTypeId()
             ->leftJoinMessage()
-            ->whereByUser($data->getUserNotNull())
-            ->whereByConversation($data->getConversationNotNull())
-            ->whereByType($data->getTypeNotNull())
-            ->orderByMessageCreatedAt()
+            ->whereByUser($user)
+            ->whereByMessageConversationId($conversationId)
             ->getQueryBuilder();
     }
 
