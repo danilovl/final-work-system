@@ -20,10 +20,13 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\{
-    TraceAttributes,
-    TraceAttributeValues
+use OpenTelemetry\SemConv\Attributes\{
+    CodeAttributes,
+    DbAttributes,
+    NetworkAttributes,
+    ServerAttributes
 };
+use OpenTelemetry\SemConv\Incubating\Attributes\DeploymentIncubatingAttributes;
 use Predis\Command\CommandInterface;
 use Predis\Command\Redis\AUTH;
 use Predis\Connection\{
@@ -101,17 +104,15 @@ class RedisRegistration implements OpenTelemetryRegistrationInterface
                 ->tracer()
                 ->spanBuilder($spanName)
                 ->setSpanKind(SpanKind::KIND_INTERNAL)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::SERVER_ADDRESS, $connectionParameters->host)
-                ->setAttribute(TraceAttributes::NETWORK_TRANSPORT, $connectionParameters->scheme)
-                ->setAttribute(TraceAttributes::NETWORK_PEER_ADDRESS, $connectionParameters->host)
-                ->setAttribute(TraceAttributes::NETWORK_PEER_PORT, $connectionParameters->port)
-                ->setAttribute(TraceAttributes::DB_SYSTEM, TraceAttributeValues::DB_SYSTEM_REDIS)
-                ->setAttribute(TraceAttributes::DB_NAMESPACE, $connectionParameters->database)
-                ->setAttribute(TraceAttributes::DB_NAMESPACE, $connectionParameters->database)
-                ->setAttribute(TraceAttributes::DB_OPERATION_NAME, $command->getId())
-                ->setAttribute(TraceAttributes::DB_QUERY_TEXT, self::makeDbStatement($command))
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(ServerAttributes::SERVER_ADDRESS, $connectionParameters->host)
+                ->setAttribute(NetworkAttributes::NETWORK_TRANSPORT, $connectionParameters->scheme)
+                ->setAttribute(NetworkAttributes::NETWORK_PEER_ADDRESS, $connectionParameters->host)
+                ->setAttribute(NetworkAttributes::NETWORK_PEER_PORT, $connectionParameters->port)
+                ->setAttribute(DbAttributes::DB_SYSTEM_NAME, 'redis')
+                ->setAttribute(DbAttributes::DB_NAMESPACE, $connectionParameters->database)
+                ->setAttribute(DbAttributes::DB_OPERATION_NAME, $command->getId())
+                ->setAttribute(DbAttributes::DB_QUERY_TEXT, self::makeDbStatement($command))
                 ->setAttribute('command.class', $command::class);
 
             $parent = Context::getCurrent();
@@ -152,12 +153,10 @@ class RedisRegistration implements OpenTelemetryRegistrationInterface
 
             $scope->detach();
             $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+            $span->setAttribute(DeploymentIncubatingAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
             } else {
                 $span->setStatus(StatusCode::STATUS_OK);
