@@ -85,7 +85,7 @@ class FormValidationMessageHelperTest extends KernelTestCase
             [
                 'text' => ['This value should not be blank.'],
                 'date' => [
-                    'Please enter a valid date.'
+                    'This value is not a valid date.'
                 ]
             ]
         ];
