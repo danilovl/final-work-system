@@ -17,10 +17,7 @@ use App\Infrastructure\Service\{
     S3ClientService,
     EntityManagerService
 };
-use App\Domain\Media\Facade\{
-    MediaFacade,
-    MediaTypeFacade
-};
+use App\Domain\Media\Facade\MediaFacade;
 use App\Domain\MediaType\Entity\MediaType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -29,6 +26,8 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\MediaType\Bus\Query\MediaTypeList\{GetMediaTypeListQuery, GetMediaTypeListQueryResult};
 
 #[AsCommand(name: 'app:sync-database-media-with-real-file', description: 'Sync database media with real file')]
 class SyncDatabaseMediaWithRealFileCommand
@@ -40,7 +39,7 @@ class SyncDatabaseMediaWithRealFileCommand
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
         private readonly MediaFacade $mediaFacade,
-        private readonly MediaTypeFacade $mediaTypeFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly ParameterServiceInterface $parameterService,
         private readonly S3ClientService $s3ClientService
     ) {}
@@ -88,7 +87,10 @@ class SyncDatabaseMediaWithRealFileCommand
     private function syncMediaFile(SymfonyStyle $io): void
     {
         $uploadFolder = $this->parameterService->getString('minio_data_directory');
-        $mediaTypes = $this->mediaTypeFacade->list();
+        $getMediaTypeListQuery = GetMediaTypeListQuery::create();
+        /** @var GetMediaTypeListQueryResult $getMediaTypeListQueryResult */
+        $getMediaTypeListQueryResult = $this->queryBus->handle($getMediaTypeListQuery);
+        $mediaTypes = $getMediaTypeListQueryResult->mediaTypes;
 
         $count = 0;
         foreach ($mediaTypes as $mediaType) {
@@ -118,7 +120,10 @@ class SyncDatabaseMediaWithRealFileCommand
         $finder = new Finder;
         $finder->directories()->in($uploadFolder)->depth(0);
 
-        $mediaTypes = $this->mediaTypeFacade->list();
+        $getMediaTypeListQuery = GetMediaTypeListQuery::create();
+        /** @var GetMediaTypeListQueryResult $getMediaTypeListQueryResult */
+        $getMediaTypeListQueryResult = $this->queryBus->handle($getMediaTypeListQuery);
+        $mediaTypes = $getMediaTypeListQueryResult->mediaTypes;
         $mediaTypeFolders = array_map(static fn (MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
 
         $progressBar = new ProgressBar($output, $finder->count());

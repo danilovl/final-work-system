@@ -15,17 +15,18 @@ namespace App\Domain\Media\EventListener\Entity;
 use App\Application\Exception\RuntimeException;
 use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
-use App\Domain\MediaMimeType\Facade\MediaMimeTypeFacade;
 use Doctrine\ORM\Event\{
     PrePersistEventArgs,
     PreRemoveEventArgs,
     PreUpdateEventArgs
 };
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeByName\{GetMediaMimeTypeByNameQuery, GetMediaMimeTypeByNameQueryResult};
 
 readonly class MediaUploadListener
 {
     public function __construct(
-        private MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private QueryBusInterface $queryBus,
         private S3ClientService $s3ClientService
     ) {}
 
@@ -68,7 +69,10 @@ readonly class MediaUploadListener
         $mimeType = $uploadMedia->getMimeType();
         $mediaSize = $uploadMedia->getSize();
 
-        $mediaMimeType = $this->mediaMimeTypeFacade->findByName($mimeType);
+        $getMediaMimeTypeByNameQuery = GetMediaMimeTypeByNameQuery::create($mimeType);
+        /** @var GetMediaMimeTypeByNameQueryResult $getMediaMimeTypeByNameQueryResult */
+        $getMediaMimeTypeByNameQueryResult = $this->queryBus->handle($getMediaMimeTypeByNameQuery);
+        $mediaMimeType = $getMediaMimeTypeByNameQueryResult->mediaMimeType;
 
         if ($mediaMimeType === null) {
             throw new RuntimeException("MediaMimeType doesn't exist");
@@ -104,7 +108,10 @@ readonly class MediaUploadListener
         $mimeType = $uploadMedia->getMimeType();
         $mediaSize = $uploadMedia->getSize();
 
-        $mediaMimeType = $this->mediaMimeTypeFacade->findByName($mimeType);
+        $getMediaMimeTypeByNameQuery = GetMediaMimeTypeByNameQuery::create($mimeType);
+        /** @var GetMediaMimeTypeByNameQueryResult $getMediaMimeTypeByNameQueryResult */
+        $getMediaMimeTypeByNameQueryResult = $this->queryBus->handle($getMediaMimeTypeByNameQuery);
+        $mediaMimeType = $getMediaMimeTypeByNameQueryResult->mediaMimeType;
 
         if ($mediaMimeType === null) {
             throw new RuntimeException("MediaMimeType doesn't exist");

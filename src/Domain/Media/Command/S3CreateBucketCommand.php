@@ -13,10 +13,11 @@
 namespace App\Domain\Media\Command;
 
 use App\Infrastructure\Service\S3ClientService;
-use App\Domain\Media\Facade\MediaTypeFacade;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\MediaType\Bus\Query\MediaTypeList\{GetMediaTypeListQuery, GetMediaTypeListQueryResult};
 
 #[AsCommand(name: 'app:s3-create-buckets', description: 'Create s3 buckets.')]
 class S3CreateBucketCommand
@@ -24,13 +25,16 @@ class S3CreateBucketCommand
     final public const string COMMAND_NAME = 'app:s3-create-buckets';
 
     public function __construct(
-        private readonly MediaTypeFacade $mediaTypeFacade,
+        private readonly QueryBusInterface $queryBus,
         private readonly S3ClientService $s3ClientService
     ) {}
 
     public function __invoke(SymfonyStyle $io): int
     {
-        $mediaTypes = $this->mediaTypeFacade->list();
+        $getMediaTypeListQuery = GetMediaTypeListQuery::create();
+        /** @var GetMediaTypeListQueryResult $getMediaTypeListQueryResult */
+        $getMediaTypeListQueryResult = $this->queryBus->handle($getMediaTypeListQuery);
+        $mediaTypes = $getMediaTypeListQueryResult->mediaTypes;
 
         $io->title('Creating S3 buckets');
 
