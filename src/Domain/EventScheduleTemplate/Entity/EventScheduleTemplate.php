@@ -20,7 +20,7 @@ use App\Application\Traits\Entity\{
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventType\Entity\EventType;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -58,13 +58,13 @@ class EventScheduleTemplate
     #[Gedmo\Versioned]
     private ?string $name = null;
 
-    #[ORM\Column(name: 'start', type: Types::TIME_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'start', type: Types::TIME_IMMUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private DateTime $start;
+    private DateTimeImmutable $start;
 
-    #[ORM\Column(name: 'end', type: Types::TIME_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'end', type: Types::TIME_IMMUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private DateTime $end;
+    private DateTimeImmutable $end;
 
     public function getSchedule(): EventSchedule
     {
@@ -116,22 +116,22 @@ class EventScheduleTemplate
         $this->name = $name;
     }
 
-    public function getStart(): DateTime
+    public function getStart(): DateTimeImmutable
     {
         return $this->start;
     }
 
-    public function setStart(DateTime $start): void
+    public function setStart(DateTimeImmutable $start): void
     {
         $this->start = $start;
     }
 
-    public function getEnd(): DateTime
+    public function getEnd(): DateTimeImmutable
     {
         return $this->end;
     }
 
-    public function setEnd(DateTime $end): void
+    public function setEnd(DateTimeImmutable $end): void
     {
         $this->end = $end;
     }

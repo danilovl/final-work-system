@@ -15,7 +15,7 @@ namespace App\Domain\EventScheduleTemplate\Model;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\EventType\Entity\EventType;
-use DateTime;
+use DateTimeImmutable;
 
 class EventScheduleTemplateModel
 {
@@ -29,9 +29,9 @@ class EventScheduleTemplateModel
 
     public ?EventAddress $address = null;
 
-    public ?DateTime $start = null;
+    public ?DateTimeImmutable $start = null;
 
-    public ?DateTime $end = null;
+    public ?DateTimeImmutable $end = null;
 
     public static function fromEventScheduleTemplate(EventScheduleTemplate $eventScheduleTemplate): self
     {

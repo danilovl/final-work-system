@@ -64,6 +64,7 @@ class EventScheduleTemplateForm extends AbstractType
                 'choice_label' => static fn (EventAddress $address): string => $address->getName()
             ])
             ->add('start', TimeType::class, [
+                'input' => 'datetime_immutable',
                 'required' => true,
                 'widget' => 'choice',
                 'constraints' => [
@@ -71,6 +72,7 @@ class EventScheduleTemplateForm extends AbstractType
                 ]
             ])
             ->add('end', TimeType::class, [
+                'input' => 'datetime_immutable',
                 'required' => true,
                 'widget' => 'choice',
                 'constraints' => [
