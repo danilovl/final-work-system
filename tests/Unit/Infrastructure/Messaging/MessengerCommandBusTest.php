@@ -27,14 +27,14 @@ class MessengerCommandBusTest extends TestCase
 {
     private MockObject&MessageBusInterface $messageBus;
 
-    private MockObject&CommandInterface $command;
+    private CommandInterface $command;
 
     private MessengerCommandBus $messengerCommandBus;
 
     protected function setUp(): void
     {
         $this->messageBus = $this->createMock(MessageBusInterface::class);
-        $this->command = $this->createMock(CommandInterface::class);
+        $this->command = $this->createStub(CommandInterface::class);
         $this->messengerCommandBus = new MessengerCommandBus($this->messageBus);
     }
 

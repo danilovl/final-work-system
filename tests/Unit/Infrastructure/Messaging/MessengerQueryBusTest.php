@@ -27,14 +27,14 @@ class MessengerQueryBusTest extends TestCase
 {
     private MockObject&MessageBusInterface $queryBus;
 
-    private MockObject&QueryInterface $query;
+    private QueryInterface $query;
 
     private MessengerQueryBus $messengerQueryBus;
 
     protected function setUp(): void
     {
         $this->queryBus = $this->createMock(MessageBusInterface::class);
-        $this->query = $this->createMock(QueryInterface::class);
+        $this->query = $this->createStub(QueryInterface::class);
         $this->messengerQueryBus = new MessengerQueryBus($this->queryBus);
     }
 
