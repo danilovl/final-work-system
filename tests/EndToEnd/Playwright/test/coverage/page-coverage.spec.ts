@@ -96,11 +96,14 @@ async function createStudentWork(browser: Browser): Promise<void> {
     await expect(page.locator('.alert-success')).toBeVisible()
 
     await page.goto(detailHref)
-    const conversationAction = await page
+    const conversationForm = page
         .locator('form[action*="/conversation/create/work/"]')
         .first()
-        .getAttribute('action') as string
-    await page.request.post(conversationAction)
+    const conversationAction = await conversationForm.getAttribute('action') as string
+    const csrfToken = await conversationForm
+        .locator('input[name="action_form[_token]"]')
+        .getAttribute('value') as string
+    await page.request.post(conversationAction, {form: {'action_form[_token]': csrfToken}})
 
     await context.close()
 }
