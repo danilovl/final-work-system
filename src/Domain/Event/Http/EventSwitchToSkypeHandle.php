@@ -15,21 +15,32 @@ namespace App\Domain\Event\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
+use App\Infrastructure\Web\Form\Factory\FormActionFactory;
 use App\Domain\Event\Bus\Command\EventSwitchToSkype\EventSwitchToSkypeCommand;
 use App\Domain\Event\Entity\Event;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    RedirectResponse
+};
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 readonly class EventSwitchToSkypeHandle
 {
     public function __construct(
         private RequestService $requestService,
         private HashidsServiceInterface $hashidsService,
-        private CommandBusInterface $commandBus
+        private CommandBusInterface $commandBus,
+        private FormActionFactory $formActionFactory
     ) {}
 
-    public function __invoke(Event $event): RedirectResponse
+    public function __invoke(Request $request, Event $event): RedirectResponse
     {
+        $isValidActionForm = $this->formActionFactory->isSubmittedAndValid($request);
+        if (!$isValidActionForm) {
+            throw new AccessDeniedHttpException('Invalid CSRF token.');
+        }
+
         $command = EventSwitchToSkypeCommand::create($event);
         $updatedEvent = $this->commandBus->dispatchResult($command);
 

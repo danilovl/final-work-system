@@ -63,10 +63,10 @@ readonly class EventController
         return $this->eventDeleteHandle->__invoke($event);
     }
 
-    public function switchToSkype(Event $event): RedirectResponse
+    public function switchToSkype(Request $request, Event $event): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
-        return $this->eventSwitchToSkypeHandle->__invoke($event);
+        return $this->eventSwitchToSkypeHandle->__invoke($request, $event);
     }
 }
