@@ -1,5 +1,8 @@
 app:
   validator:
+    api_field_required: 'Pole "{{ field }}" je povinné.'
+    api_invalid_json: 'Tělo požadavku musí být platný JSON objekt.'
+    current_password_invalid: 'Současné heslo není správné.'
     entity_exists: 'Entita třídy "{{ class }}" s {{ property }} "{{ value }}" neexistuje.'
     reset_password_email_blank: Zadejte prosím svůj e-mail.
     reset_password_password_blank: Zadejte prosím heslo.

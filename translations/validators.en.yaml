@@ -1,5 +1,8 @@
 app:
   validator:
+    api_field_required: 'The field "{{ field }}" is required.'
+    api_invalid_json: 'The request body must be a valid JSON object.'
+    current_password_invalid: 'The current password is incorrect.'
     entity_exists: 'The entity of class "{{ class }}" with {{ property }} "{{ value }}" does not exist.'
     reset_password_email_blank: Please enter your email.
     reset_password_password_blank: Please enter a password.

@@ -4,6 +4,12 @@ api_key_get_user_info:
     _controller: App\Domain\User\Controller\Api\UserController::detail
   methods: [GET]
 
+api_key_put_user_password:
+  path: /password
+  defaults:
+    _controller: App\Domain\Profile\Controller\Api\ProfileController::changePassword
+  methods: [PUT]
+
 api_key_get_user_list:
   path: /{type}
   requirements:

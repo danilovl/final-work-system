@@ -1,5 +1,8 @@
 app:
   validator:
+    api_field_required: 'Поле "{{ field }}" обязательно.'
+    api_invalid_json: 'Тело запроса должно быть корректным JSON-объектом.'
+    current_password_invalid: 'Текущий пароль указан неверно.'
     entity_exists: 'Сущность класса "{{ class }}" с {{ property }} "{{ value }}" не существует.'
     reset_password_email_blank: 'Пожалуйста, введите ваш e-mail.'
     reset_password_password_blank: 'Пожалуйста, введите пароль.'
