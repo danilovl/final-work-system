@@ -18,6 +18,7 @@ use App\Domain\Task\DTO\Api\Output\TaskListOwnerOutput;
 use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Facade\TaskFacade;
+use App\Domain\Task\Repository\Elastica\ElasticaTaskRepository;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,14 +28,21 @@ readonly class TaskListOwnerHandle
         private UserService $userService,
         private TaskFacade $taskFacade,
         private PaginatorService $paginatorService,
-        private ObjectToDtoMapperInterface $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
+        private ElasticaTaskRepository $elasticaTaskRepository
     ) {}
 
     public function __invoke(Request $request): TaskListOwnerOutput
     {
         $user = $this->userService->getUser();
-        $tasksQuery = $this->taskFacade
-            ->queryByOwner($user);
+        $search = $request->query->getString('search');
+        $search = mb_trim($search);
+        $tasksQuery = $this->taskFacade->queryByOwner($user);
+
+        if ($search !== '') {
+            $taskIds = $this->elasticaTaskRepository->getIdsByOwnerAndSearch($user, $search);
+            $tasksQuery = $this->taskFacade->queryByOwnerAndIds($user, $taskIds);
+        }
 
         $tasksQuery->setHydrationMode(Task::class);
 

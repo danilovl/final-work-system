@@ -56,6 +56,18 @@ readonly class TaskFacade
     /**
      * @param int[] $ids
      */
+    public function queryByOwnerAndIds(User $user, array $ids): Query
+    {
+        Assert::allInteger($ids);
+
+        return $this->taskRepository
+            ->allByOwnerAndIds($user, $ids)
+            ->getQuery();
+    }
+
+    /**
+     * @param int[] $ids
+     */
     public function queryByIds(array $ids): Query
     {
         Assert::allInteger($ids);

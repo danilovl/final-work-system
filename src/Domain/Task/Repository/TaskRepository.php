@@ -40,6 +40,26 @@ class TaskRepository extends ServiceEntityRepository
 
     public function allByOwner(User $user): QueryBuilder
     {
+        return $this->createOwnerTaskQueryBuilder($user)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
+    }
+
+    /**
+     * @param int[] $ids
+     */
+    public function allByOwnerAndIds(User $user, array $ids): QueryBuilder
+    {
+        Assert::allInteger($ids);
+
+        return $this->createOwnerTaskQueryBuilder($user)
+            ->whereByIds($ids)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
+    }
+
+    private function createOwnerTaskQueryBuilder(User $user): TaskQueryBuilder
+    {
         return $this->createTaskQueryBuilder()
             ->selectWork()
             ->selectWorkStatus()
@@ -49,9 +69,7 @@ class TaskRepository extends ServiceEntityRepository
             ->joinWorkStatus()
             ->joinWorkTypes()
             ->joinWorkAuthor()
-            ->whereByOwner($user)
-            ->orderByCreatedAt()
-            ->getQueryBuilder();
+            ->whereByOwner($user);
     }
 
     /**
