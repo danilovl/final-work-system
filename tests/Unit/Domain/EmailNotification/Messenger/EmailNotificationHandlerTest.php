@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Domain\EmailNotification\Messenger;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;

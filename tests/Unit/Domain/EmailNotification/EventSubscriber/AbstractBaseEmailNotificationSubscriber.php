@@ -18,10 +18,7 @@ use App\Domain\EmailNotification\Provider\{
     EmailNotificationAddToQueueProvider,
     EmailNotificationEnableMessengerProvider
 };
-use App\Application\Interfaces\Bus\{
-    QueryBusInterface,
-    QueryInterface
-};
+use App\Infrastructure\Interfaces\Bus\{QueryBusInterface, QueryInterface};
 use App\Domain\Work\Bus\Query\ActiveAuthors\{
     GetActiveAuthorsQuery,
     GetActiveAuthorsQueryResult
