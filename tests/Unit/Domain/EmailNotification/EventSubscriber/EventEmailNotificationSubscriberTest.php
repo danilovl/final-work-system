@@ -39,7 +39,7 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
         parent::setUp();
 
         $this->subscriber = new EventEmailNotificationSubscriber(
-            $this->userFacade,
+            $this->queryBus,
             $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,

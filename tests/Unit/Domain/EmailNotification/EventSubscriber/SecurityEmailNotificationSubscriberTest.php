@@ -30,7 +30,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
         parent::setUp();
 
         $this->subscriber = new SecurityEmailNotificationSubscriber(
-            $this->userFacade,
+            $this->queryBus,
             $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,

@@ -17,8 +17,6 @@ use App\Domain\EmailNotification\EventSubscriber\DocumentEmailNotificationSubscr
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Service\UserWorkService;
-use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
 #[AllowMockObjectsWithoutExpectations]
@@ -35,17 +33,14 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
         $recipient = new User;
         $recipient->setEmail('test@example.com');
 
-        $userWorkService = $this->createStub(UserWorkService::class);
-        $userWorkService->method('getActiveAuthor')
-            ->willReturn(new ArrayCollection([$recipient]));
+        $this->queryBusActiveAuthors = [$recipient];
 
         $this->subscriber = new DocumentEmailNotificationSubscriber(
-            $this->userFacade,
+            $this->queryBus,
             $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $userWorkService,
             $this->bus,
             $this->emailNotificationAddToQueueProvider,
             $this->emailNotificationEnableMessengerProvider
@@ -67,10 +62,11 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
         $event = new MediaGenericEvent($media);
 
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findByEmail')
-            ->willReturn($user);
+        $this->queryBusUser = $user;
+
+        $this->queryBus
+            ->expects($this->exactly(2))
+            ->method('handle');
 
         $this->documentEmailNotificationSubscriber->onDocumentCreate($event);
     }

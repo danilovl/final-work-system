@@ -18,7 +18,19 @@ use App\Domain\EmailNotification\Provider\{
     EmailNotificationAddToQueueProvider,
     EmailNotificationEnableMessengerProvider
 };
-use App\Domain\User\Facade\UserFacade;
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
+};
+use App\Domain\Work\Bus\Query\ActiveAuthors\{
+    GetActiveAuthorsQuery,
+    GetActiveAuthorsQueryResult
+};
+use App\Domain\Work\Bus\Query\WorkUsers\{
+    GetWorkUsersQuery,
+    GetWorkUsersQueryResult
+};
+use App\Domain\Work\Service\WorkService;
 use App\Infrastructure\Service\{
     TranslatorService
 };
@@ -42,6 +54,9 @@ use Symfony\Component\Messenger\{
     Envelope,
     MessageBusInterface
 };
+use App\Domain\User\Bus\Query\UserByEmail\GetUserByEmailQueryResult;
+use App\Domain\User\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[AllowMockObjectsWithoutExpectations]
 abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
@@ -50,7 +65,12 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 
     protected EventDispatcher $dispatcher;
 
-    protected MockObject&UserFacade $userFacade;
+    protected MockObject&QueryBusInterface $queryBus;
+
+    protected ?User $queryBusUser = null;
+
+    /** @var User[] */
+    protected array $queryBusActiveAuthors = [];
 
     protected TwigRenderService $twigRenderService;
 
@@ -76,7 +96,20 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
     {
         $this->dispatcher = new EventDispatcher;
 
-        $this->userFacade = $this->createMock(UserFacade::class);
+        $this->queryBus = $this->createMock(QueryBusInterface::class);
+        $this->queryBus
+            ->method('handle')
+            ->willReturnCallback(fn (QueryInterface $query): object => match (true) {
+                $query instanceof GetActiveAuthorsQuery => new GetActiveAuthorsQueryResult(new ArrayCollection($this->queryBusActiveAuthors)),
+                $query instanceof GetWorkUsersQuery => new GetWorkUsersQueryResult(new WorkService()->getUsers(
+                    work: $query->work,
+                    author: $query->author,
+                    supervisor: $query->supervisor,
+                    consultant: $query->consultant,
+                    opponent: $query->opponent
+                )),
+                default => new GetUserByEmailQueryResult($this->queryBusUser)
+            });
         $this->twigRenderService = $this->createStub(TwigRenderService::class);
         $this->translator = $this->createStub(TranslatorService::class);
         $this->translator

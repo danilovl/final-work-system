@@ -17,7 +17,6 @@ use App\Domain\Media\Entity\Media;
 use App\Domain\User\Entity\User;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Service\WorkService;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
 #[AllowMockObjectsWithoutExpectations]
@@ -32,12 +31,11 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
         parent::setUp();
 
         $this->subscriber = new VersionEmailNotificationSubscriber(
-            $this->userFacade,
+            $this->queryBus,
             $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            new WorkService,
             $this->bus,
             $this->emailNotificationAddToQueueProvider,
             $this->emailNotificationEnableMessengerProvider

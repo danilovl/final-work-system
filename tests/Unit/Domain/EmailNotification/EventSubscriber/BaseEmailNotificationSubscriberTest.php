@@ -48,7 +48,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         );
 
         $this->subscriber = new class (
-            $this->userFacade,
+            $this->queryBus,
             $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
@@ -86,10 +86,12 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $user = new User;
         $user->setEnabledEmailNotification(false);
 
-        $this->userFacade
+        $this->queryBusUser = $user;
+
+
+        $this->queryBus
             ->expects($this->once())
-            ->method('findByEmail')
-            ->willReturn($user);
+            ->method('handle');
 
         $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($this->emailNotificationMessage);
     }
@@ -115,10 +117,12 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $user = new User;
         $user->setEnabledEmailNotification(true);
 
-        $this->userFacade
+        $this->queryBusUser = $user;
+
+
+        $this->queryBus
             ->expects($this->once())
-            ->method('findByEmail')
-            ->willReturn($user);
+            ->method('handle');
 
         $this->emailNotificationFactory
             ->expects($this->once())

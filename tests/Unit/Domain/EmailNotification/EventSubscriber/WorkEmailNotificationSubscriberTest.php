@@ -30,7 +30,7 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         parent::setUp();
 
         $this->subscriber = new WorkEmailNotificationSubscriber(
-            $this->userFacade,
+            $this->queryBus,
             $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
