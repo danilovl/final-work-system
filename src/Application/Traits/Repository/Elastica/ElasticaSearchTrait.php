@@ -48,6 +48,34 @@ trait ElasticaSearchTrait
     }
 
     /**
+     * @param callable(array<string, mixed>): Result[] $search
+     * @param array<string, mixed> $query
+     * @return Result[]
+     */
+    private function findAllRaw(callable $search, array $query): array
+    {
+        $query['sort'] = [['id' => 'asc']];
+        /** @var int $pageSize */
+        $pageSize = $query['size'];
+        $results = [];
+
+        do {
+            $pageResults = $search($query);
+            array_push($results, ...$pageResults);
+
+            $lastResult = end($pageResults);
+            if ($lastResult === false) {
+                break;
+            }
+
+            $query['search_after'] = $lastResult->getSort();
+            $isFullPage = count($pageResults) === $pageSize;
+        } while ($isFullPage);
+
+        return $results;
+    }
+
+    /**
      * @param Result[] $results
      * @return int[]
      */
