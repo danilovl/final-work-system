@@ -12,6 +12,7 @@
 
 namespace App\Domain\WorkStatus\Facade;
 
+use App\Application\Exception\EntityNotFoundException;
 use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
@@ -28,6 +29,16 @@ readonly class WorkStatusFacade
         return $result;
     }
 
+    public function getById(int $id): WorkStatus
+    {
+        $status = $this->findById($id);
+        if ($status === null) {
+            throw new EntityNotFoundException("WorkStatus with id {$id} not found.");
+        }
+
+        return $status;
+    }
+
     /**
      * @return WorkStatus[]
      */
@@ -41,6 +52,14 @@ readonly class WorkStatusFacade
             ->getResult();
 
         return $result;
+    }
+
+    /**
+     * @return WorkStatus[]
+     */
+    public function getAll(): array
+    {
+        return $this->list();
     }
 
     /**
