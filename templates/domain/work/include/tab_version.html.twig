@@ -124,7 +124,7 @@
                                  aria-labelledby="heading-version-description-{{ version.id | hashids_encode }}"
                                  role="tabpanel">
                                 <div class="panel-body text-muted well well-sm no-shadow">
-                                    {{ version.description|raw }}
+                                    {{ version.description | sanitize_html('app.rich_text_sanitizer') }}
                                 </div>
                             </div>
                         </td>
