@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Bus\Command\SaveMedia;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Factory\MediaFactory;
 

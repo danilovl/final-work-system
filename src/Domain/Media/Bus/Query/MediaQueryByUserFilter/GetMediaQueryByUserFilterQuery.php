@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Bus\Query\MediaQueryByUserFilter;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Media\DTO\Repository\MediaRepositoryDTO;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

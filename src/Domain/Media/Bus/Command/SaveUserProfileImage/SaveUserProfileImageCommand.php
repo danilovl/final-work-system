@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Bus\Command\SaveUserProfileImage;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Media\Entity\Media;
 use App\Domain\User\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

@@ -16,7 +16,7 @@ use App\Infrastructure\Service\S3ClientService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\MediaType\Bus\Query\MediaTypeList\{GetMediaTypeListQuery, GetMediaTypeListQueryResult};
 
 #[AsCommand(name: 'app:s3-create-buckets', description: 'Create s3 buckets.')]

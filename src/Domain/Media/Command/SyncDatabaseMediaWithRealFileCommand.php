@@ -26,7 +26,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\MediaType\Bus\Query\MediaTypeList\{GetMediaTypeListQuery, GetMediaTypeListQueryResult};
 
 #[AsCommand(name: 'app:sync-database-media-with-real-file', description: 'Sync database media with real file')]

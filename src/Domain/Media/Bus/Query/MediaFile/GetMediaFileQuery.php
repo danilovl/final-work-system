@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Bus\Query\MediaFile;
 
-use App\Application\Interfaces\Bus\QueryInterface;
+use App\Infrastructure\Interfaces\Bus\QueryInterface;
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

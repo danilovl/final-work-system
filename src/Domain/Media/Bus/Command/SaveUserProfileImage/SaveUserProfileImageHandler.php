@@ -12,8 +12,8 @@
 
 namespace App\Domain\Media\Bus\Command\SaveUserProfileImage;
 
-use App\Application\Exception\RuntimeException;
-use App\Application\Interfaces\Bus\{CommandHandlerInterface, QueryBusInterface};
+use App\Infrastructure\Exception\RuntimeException;
+use App\Infrastructure\Interfaces\Bus\{CommandHandlerInterface, QueryBusInterface};
 use App\Domain\MediaType\Bus\Query\MediaType\{GetMediaTypeQuery, GetMediaTypeQueryResult};
 use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeByName\{GetMediaMimeTypeByNameQuery, GetMediaMimeTypeByNameQueryResult};
 use App\Domain\MediaType\Constant\MediaTypeConstant;

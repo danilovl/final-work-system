@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Service;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Infrastructure\Constant\DateFormatConstant;
 use App\Application\Helper\FunctionHelper;
 use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;

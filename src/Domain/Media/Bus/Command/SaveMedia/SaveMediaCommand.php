@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Bus\Command\SaveMedia;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Model\MediaModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;

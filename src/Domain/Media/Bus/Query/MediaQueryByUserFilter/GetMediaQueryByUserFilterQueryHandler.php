@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Bus\Query\MediaQueryByUserFilter;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\Media\Facade\MediaFacade;
 
 readonly class GetMediaQueryByUserFilterQueryHandler implements QueryHandlerInterface

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\EventListener\Entity;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
 use Doctrine\ORM\Event\{
@@ -20,7 +20,7 @@ use Doctrine\ORM\Event\{
     PreRemoveEventArgs,
     PreUpdateEventArgs
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\MediaMimeType\Bus\Query\MediaMimeTypeByName\{GetMediaMimeTypeByNameQuery, GetMediaMimeTypeByNameQueryResult};
 
 readonly class MediaUploadListener
