@@ -17,6 +17,7 @@ use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Model\SearchModel;
 use App\Infrastructure\Service\{
     PaginatorService,
+    RequestService,
     SeoPageService,
     TwigRenderService
 };
@@ -32,6 +33,7 @@ use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessa
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Web\Form\SimpleSearchForm;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
@@ -50,7 +52,9 @@ readonly class ConversationDetailHandle
         private SeoPageService $seoPageService,
         private MessageHighlightService $messageHighlightService,
         private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
-        private CommandBusInterface $commandBus
+        private CommandBusInterface $commandBus,
+        private RequestService $requestService,
+        private HashidsServiceInterface $hashidsService
     ) {}
 
     public function __invoke(Request $request, Conversation $conversation): Response
@@ -93,6 +97,10 @@ readonly class ConversationDetailHandle
 
             $command = CreateConversationMessageCommand::create($conversation, $conversationMessageModel, $user);
             $this->commandBus->dispatch($command);
+
+            return $this->requestService->redirectToRoute('conversation_detail', [
+                'id' => $this->hashidsService->encode($conversation->getId())
+            ]);
         }
 
         ConversationHelper::getConversationOpposite([$conversation], $user);
