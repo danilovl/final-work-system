@@ -2,7 +2,7 @@
 
 ## Стек
 
-- **PHP** 8.5, **Symfony** 8.1, **Doctrine ORM** 3 (MariaDB 10.9, `server_version: mariadb-10.9.7`), Twig, Webpack Encore.
+- **PHP** 8.5, **Symfony** 8.1, **Doctrine ORM** 3 (MariaDB 10.9, `server_version: mariadb-10.9.7`), Twig, Vite (`pentatrion/vite-bundle`).
 - Основные бандлы: EasyAdmin, KnpPaginator, API Platform, NelmioApiDoc, Overblog GraphQL, FOSElastica (Elasticsearch), Gedmo Doctrine Extensions, Messenger (AMQP), Mercure, `doctrine/orm-plugin-second-level-cache`, а также собственные `danilovl/*` бандлы (`hashids`, `doctrine-entity-dto`, `object-dto-mapper`, `render-service-twig-extension`, `select-autocompleter`, `async`, `cache-response`, `parameter`, `permission-middleware`, `translator`, `open-telemetry`).
 - Окружение — `docker-compose.yml`: `php` (php-fpm, пользователь `www-data` uid 1000), `nginx` (`localhost:7100`), `mysql` (MariaDB), `redis`, `rabbitmq`, `elasticsearch`, `kibana`, `minio` (S3), `mercure`, `node` (сборка и Playwright), `supervisor` (воркеры Messenger), `otel-collector`, `apm-server`.
 - Автозагрузка PSR-4: `App\` → `src/`, `App\Tests\` → `tests/`.

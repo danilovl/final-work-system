@@ -234,6 +234,9 @@
     "pagerfanta/pagerfanta": {
         "version": "v3.2.0"
     },
+    "pentatrion/vite-bundle": {
+        "version": "v8.2.4"
+    },
     "phar-io/manifest": {
         "version": "1.0.3"
     },
@@ -753,25 +756,6 @@
             "./config/packages/dev/web_profiler.yaml",
             "./config/packages/test/web_profiler.yaml",
             "./config/routes/dev/web_profiler.yaml"
-        ]
-    },
-    "symfony/webpack-encore-bundle": {
-        "version": "1.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.6",
-            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
-        },
-        "files": [
-            "./assets/css/app.css",
-            "./assets/js/app.js",
-            "./config/packages/assets.yaml",
-            "./config/packages/prod/webpack_encore.yaml",
-            "./config/packages/test/webpack_encore.yaml",
-            "./config/packages/webpack_encore.yaml",
-            "./package.json",
-            "./webpack.config.js"
         ]
     },
     "symfony/yaml": {
