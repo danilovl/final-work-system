@@ -15,6 +15,13 @@ namespace App\Infrastructure\OpenTelemetry\HttpClient;
 use App\Infrastructure\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
+use OpenTelemetry\SemConv\Attributes\{
+    ServiceAttributes,
+    UrlAttributes,
+    HttpAttributes,
+    CodeAttributes
+};
+use OpenTelemetry\SemConv\Incubating\Attributes\DeploymentIncubatingAttributes;
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
@@ -22,7 +29,6 @@ use OpenTelemetry\API\Trace\{
 };
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\Context\Propagation\ArrayAccessGetterSetter;
-use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Contracts\HttpClient\{
     HttpClientInterface,
@@ -55,13 +61,12 @@ class HttpClientRegistration implements OpenTelemetryRegistrationInterface
                 ->tracer()
                 ->spanBuilder(sprintf('%s', $params[0]))
                 ->setSpanKind(SpanKind::KIND_CLIENT)
-                ->setAttribute(TraceAttributes::PEER_SERVICE, parse_url((string) $params[1])['host'] ?? null)
-                ->setAttribute(TraceAttributes::URL_FULL, (string) $params[1])
-                ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $params[0])
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
+                ->setAttribute(ServiceAttributes::SERVICE_NAME, parse_url((string) $params[1])['host'] ?? null)
+                ->setAttribute(UrlAttributes::URL_FULL, (string) $params[1])
+                ->setAttribute(HttpAttributes::HTTP_REQUEST_METHOD, $params[0])
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $class . $function)
+                ->setAttribute(CodeAttributes::CODE_FILE_PATH, $filename)
+                ->setAttribute(CodeAttributes::CODE_LINE_NUMBER, $lineno)
                 ->setAttribute('type', 'request');
 
             $propagator = Globals::propagator();
@@ -96,7 +101,7 @@ class HttpClientRegistration implements OpenTelemetryRegistrationInterface
                 $statusCode = $info['http_code'];
 
                 if ($statusCode !== 0 && $statusCode !== null && $span->isRecording()) {
-                    $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $statusCode);
+                    $span->setAttribute(HttpAttributes::HTTP_RESPONSE_STATUS_CODE, $statusCode);
 
                     if ($statusCode >= 400 && $statusCode < 600) {
                         $span->setStatus(StatusCode::STATUS_ERROR);
@@ -126,12 +131,10 @@ class HttpClientRegistration implements OpenTelemetryRegistrationInterface
 
             $scope->detach();
             $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+            $span->setAttribute(DeploymentIncubatingAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
             if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
+                $span->recordException($exception);
                 $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
                 $span->end();
 
@@ -139,7 +142,7 @@ class HttpClientRegistration implements OpenTelemetryRegistrationInterface
             }
 
             if ($response !== null && self::supportsProgress(get_class($client)) === false) {
-                $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
+                $span->setAttribute(HttpAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
 
                 if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 600) {
                     $span->setStatus(StatusCode::STATUS_ERROR);
