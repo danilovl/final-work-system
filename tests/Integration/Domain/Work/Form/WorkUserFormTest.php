@@ -34,9 +34,13 @@ class WorkUserFormTest extends KernelTestCase
         array $data,
         bool $isValid
     ): void {
-        $form = $this->formFactory->create(WorkUserForm::class, new User, [
-            'csrf_protection' => false
-        ]);
+        $form = $this->formFactory->create(
+            type: WorkUserForm::class,
+            data: new User,
+            options: [
+                'csrf_protection' => false
+            ]
+        );
         $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
