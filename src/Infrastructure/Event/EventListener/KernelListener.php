@@ -70,7 +70,6 @@ readonly class KernelListener implements EventSubscriberInterface
         $relatedEntity = null;
 
         foreach ($sourceProperties as $property) {
-            $property->setAccessible(true);
             $propertyValue = $property->getValue($sourceEntity);
 
             if (is_object($propertyValue) && is_a($propertyValue, $targetEntityClass)) {
