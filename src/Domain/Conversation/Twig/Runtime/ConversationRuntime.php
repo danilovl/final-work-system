@@ -15,9 +15,14 @@ namespace App\Domain\Conversation\Twig\Runtime;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Service\ConversationService;
+use App\Domain\ConversationMessage\Bus\Query\LastByConversationIds\{
+    GetLastByConversationIdsQuery,
+    GetLastByConversationIdsQueryResult
+};
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use DateTimeImmutable;
@@ -26,7 +31,8 @@ class ConversationRuntime
 {
     public function __construct(
         private readonly ConversationService $conversationService,
-        private readonly EntityManagerService $entityManagerService
+        private readonly EntityManagerService $entityManagerService,
+        private readonly QueryBusInterface $queryBus
     ) {}
 
     #[AsTwigFunction('check_work_users_conversation')]
@@ -38,7 +44,13 @@ class ConversationRuntime
     #[AsTwigFunction('conversation_last_message')]
     public function getLastMessage(Conversation $conversation): ?ConversationMessage
     {
-        return $this->conversationService->getLastMessage($conversation);
+        $conversationId = $conversation->getId();
+        $getLastByConversationIdsQuery = GetLastByConversationIdsQuery::create([$conversationId]);
+
+        /** @var GetLastByConversationIdsQueryResult $getLastByConversationIdsQueryResult */
+        $getLastByConversationIdsQueryResult = $this->queryBus->handle($getLastByConversationIdsQuery);
+
+        return $getLastByConversationIdsQueryResult->messages[$conversationId] ?? null;
     }
 
     #[AsTwigFunction('conversation_recipient')]

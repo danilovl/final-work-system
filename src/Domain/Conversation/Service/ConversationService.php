@@ -15,11 +15,8 @@ namespace App\Domain\Conversation\Service;
 use App\Application\Helper\FunctionHelper;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Helper\ConversationHelper;
-use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use Doctrine\Common\Collections\Criteria;
-use SortDirection;
 
 class ConversationService
 {
@@ -50,26 +47,5 @@ class ConversationService
         User $user
     ): bool {
         return ConversationHelper::isParticipant($conversation, $user);
-    }
-
-    public function getLastMessage(Conversation $conversation): ?ConversationMessage
-    {
-        $messages = $conversation->getMessages();
-
-        if ($messages->count() === 0) {
-            return null;
-        }
-
-        $criteria = Criteria::create()
-            ->orderBy([
-                'createdAt' => SortDirection::Descending,
-                'id' => SortDirection::Descending
-            ])
-            ->setMaxResults(1);
-
-        /** @var ConversationMessage|false $message */
-        $message = $messages->matching($criteria)->first();
-
-        return $message === false ? null : $message;
     }
 }
