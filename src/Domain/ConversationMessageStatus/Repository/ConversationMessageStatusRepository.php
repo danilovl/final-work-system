@@ -19,7 +19,6 @@ use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use SortDirection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,7 +42,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->leftJoinMessage()
             ->whereByUser($user)
             ->whereByConversation($conversation)
-            ->orderByMessageCreatedAt(SortDirection::Descending)
+            ->orderByMessageCreatedAt()
             ->getQueryBuilder();
     }
 
@@ -54,7 +53,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->whereByUser($data->getUserNotNull())
             ->whereByConversation($data->getConversationNotNull())
             ->whereByType($data->getTypeNotNull())
-            ->orderByMessageCreatedAt(SortDirection::Descending)
+            ->orderByMessageCreatedAt()
             ->getQueryBuilder();
     }
 
@@ -66,7 +65,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->leftJoinMessage()
             ->whereByUser($user)
             ->whereByMessage($conversationMessage)
-            ->orderByMessageCreatedAt(SortDirection::Descending)
+            ->orderByMessageCreatedAt()
             ->getQueryBuilder();
     }
 
