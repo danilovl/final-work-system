@@ -26,7 +26,7 @@ profile_delete_image:
   path: /profile/image/delete
   defaults:
     _controller: App\Domain\Profile\Controller\ProfileController::deleteImage
-  methods: [GET, POST]
+  methods: [POST]
 
 profile_change_password:
   path: /profile/change-password
