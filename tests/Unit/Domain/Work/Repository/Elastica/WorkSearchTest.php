@@ -54,37 +54,24 @@ class WorkSearchTest extends KernelTestCase
         $user = new User;
         $user->setId(1);
 
-        yield [
-            $user,
-            WorkUserTypeConstant::SUPERVISOR->value,
-            [],
-            [
+        $supervisorFilter = ['term' => [WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1]];
+
+        yield 'active works without filters' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => [],
+            'expectedQuery' => [
                 'size' => 1_000,
+                '_source' => false,
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                    'query' => [
-                                        'term' => [
-                                            WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'nested' => [
-                                    'path' => 'status',
-                                    'query' => [
-                                        'term' => ['status.id' => WorkStatusConstant::ACTIVE->value]
-                                    ]
-                                ]
-                            ]
+                        'filter' => [
+                            $supervisorFilter,
+                            ['term' => ['status.id' => WorkStatusConstant::ACTIVE->value]]
                         ]
                     ]
                 ]
-            ],
+            ]
         ];
 
         $supervisors = [];
@@ -109,10 +96,10 @@ class WorkSearchTest extends KernelTestCase
         $workType = new WorkType;
         $workType->setId(2);
 
-        yield [
-            $user,
-            WorkUserTypeConstant::SUPERVISOR->value,
-            [
+        yield 'entity filters and texts' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => [
                 'title' => 'title text',
                 'shortcut' => 'shortcut text',
                 'status' => [$workStatus],
@@ -120,87 +107,29 @@ class WorkSearchTest extends KernelTestCase
                 'supervisor' => $supervisors,
                 'opponent' => $opponents
             ],
-            [
+            'expectedQuery' => [
                 'size' => 1_000,
+                '_source' => false,
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                    'query' => [
-                                        'term' => [
-                                            WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'bool' => [
-                                    'must' => [
-                                        [
-                                            'wildcard' => [
-                                                'title' => '*title text*'
-                                            ]
-                                        ],
-                                        [
-                                            'wildcard' => [
-                                                'shortcut' => '*shortcut text*'
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'status',
-                                                'query' => [
-                                                    'terms' => [
-                                                        'status.id' => [WorkStatusConstant::ARCHIVE->value]
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'type',
-                                                'query' => [
-                                                    'terms' => [
-                                                        'type.id' => [2]
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                                'query' => [
-                                                    'terms' => [
-                                                        WorkUserTypeConstant::SUPERVISOR->value . '.id' => [4, 5]
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => WorkUserTypeConstant::OPPONENT->value,
-                                                'query' => [
-                                                    'terms' => [
-                                                        WorkUserTypeConstant::OPPONENT->value . '.id' => [11, 12]
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
+                        'filter' => [
+                            $supervisorFilter,
+                            ['wildcard' => ['title.normalized' => '*title text*']],
+                            ['wildcard' => ['shortcut.normalized' => '*shortcut text*']],
+                            ['terms' => ['status.id' => [WorkStatusConstant::ARCHIVE->value]]],
+                            ['terms' => ['type.id' => [2]]],
+                            ['terms' => [WorkUserTypeConstant::SUPERVISOR->value . '.id' => [4, 5]]],
+                            ['terms' => [WorkUserTypeConstant::OPPONENT->value . '.id' => [11, 12]]]
                         ]
                     ]
                 ]
             ]
         ];
 
-        yield [
-            $user,
-            WorkUserTypeConstant::SUPERVISOR->value,
-            [
+        yield 'scalar filters and deadline' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => [
                 'title' => 'scalar search',
                 'shortcut' => 'SS',
                 'status' => [WorkStatusConstant::ARCHIVE->value],
@@ -209,87 +138,29 @@ class WorkSearchTest extends KernelTestCase
                 'opponent' => [11, 12],
                 'deadline' => ['2026-05-30']
             ],
-            [
+            'expectedQuery' => [
                 'size' => 1_000,
+                '_source' => false,
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                    'query' => [
-                                        'term' => [
-                                            WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1
-                                        ]
-                                    ]
-                                ]
-                            ],
+                        'filter' => [
+                            $supervisorFilter,
+                            ['wildcard' => ['title.normalized' => '*scalar search*']],
+                            ['wildcard' => ['shortcut.normalized' => '*ss*']],
+                            ['terms' => ['status.id' => [WorkStatusConstant::ARCHIVE->value]]],
+                            ['terms' => ['type.id' => [2]]],
+                            ['terms' => [WorkUserTypeConstant::SUPERVISOR->value . '.id' => [4, 5]]],
+                            ['terms' => [WorkUserTypeConstant::OPPONENT->value . '.id' => [11, 12]]],
                             [
                                 'bool' => [
-                                    'must' => [
+                                    'should' => [
                                         [
-                                            'wildcard' => [
-                                                'title' => '*scalar search*'
-                                            ]
-                                        ],
-                                        [
-                                            'wildcard' => [
-                                                'shortcut' => '*ss*'
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'status',
-                                                'query' => [
-                                                    'terms' => [
-                                                        'status.id' => [WorkStatusConstant::ARCHIVE->value]
-                                                    ]
+                                            'range' => [
+                                                'deadline' => [
+                                                    'gte' => '2026-05-30||-1d',
+                                                    'lte' => '2026-05-30||+1d',
+                                                    'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value
                                                 ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'type',
-                                                'query' => [
-                                                    'terms' => [
-                                                        'type.id' => [2]
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                                'query' => [
-                                                    'terms' => [
-                                                        WorkUserTypeConstant::SUPERVISOR->value . '.id' => [4, 5]
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => WorkUserTypeConstant::OPPONENT->value,
-                                                'query' => [
-                                                    'terms' => [
-                                                        WorkUserTypeConstant::OPPONENT->value . '.id' => [11, 12]
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'filter' => [
-                            'bool' => [
-                                'should' => [
-                                    [
-                                        'range' => [
-                                            'deadline' => [
-                                                'gte' => '2026-05-30||-1d',
-                                                'lte' => '2026-05-30||+1d',
-                                                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value
                                             ]
                                         ]
                                     ]
@@ -301,147 +172,80 @@ class WorkSearchTest extends KernelTestCase
             ]
         ];
 
-        yield [
-            $user,
-            WorkUserTypeConstant::SUPERVISOR->value,
-            [
+        yield 'single scalar values' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => [
                 'title' => 'single scalar search',
                 'status' => WorkStatusConstant::ARCHIVE->value,
                 'type' => 2,
                 'author' => 10
             ],
-            [
+            'expectedQuery' => [
                 'size' => 1_000,
+                '_source' => false,
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                    'query' => [
-                                        'term' => [
-                                            WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'bool' => [
-                                    'must' => [
-                                        [
-                                            'wildcard' => [
-                                                'title' => '*single scalar search*'
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'status',
-                                                'query' => [
-                                                    'term' => [
-                                                        'status.id' => WorkStatusConstant::ARCHIVE->value
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'type',
-                                                'query' => [
-                                                    'term' => [
-                                                        'type.id' => 2
-                                                    ]
-                                                ]
-                                            ]
-                                        ],
-                                        [
-                                            'nested' => [
-                                                'path' => 'author',
-                                                'query' => [
-                                                    'term' => [
-                                                        'author.id' => 10
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
+                        'filter' => [
+                            $supervisorFilter,
+                            ['wildcard' => ['title.normalized' => '*single scalar search*']],
+                            ['term' => ['status.id' => WorkStatusConstant::ARCHIVE->value]],
+                            ['term' => ['type.id' => 2]],
+                            ['term' => ['author.id' => 10]]
                         ]
                     ]
                 ]
             ]
         ];
 
-        yield [
-            $user,
-            WorkUserTypeConstant::SUPERVISOR->value,
-            [
-                'title' => 'syst'
-            ],
-            [
+        yield 'part of word' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => ['title' => 'syst'],
+            'expectedQuery' => [
                 'size' => 1_000,
+                '_source' => false,
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                    'query' => [
-                                        'term' => [
-                                            WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'bool' => [
-                                    'must' => [
-                                        [
-                                            'wildcard' => [
-                                                'title' => '*syst*'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
+                        'filter' => [
+                            $supervisorFilter,
+                            ['wildcard' => ['title.normalized' => '*syst*']]
                         ]
                     ]
                 ]
             ]
         ];
 
-        yield [
-            $user,
-            WorkUserTypeConstant::SUPERVISOR->value,
-            [
-                'title' => 'Systém '
-            ],
-            [
+        yield 'diacritics and case are normalized' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => ['title' => 'Systém '],
+            'expectedQuery' => [
                 'size' => 1_000,
+                '_source' => false,
                 'query' => [
                     'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => WorkUserTypeConstant::SUPERVISOR->value,
-                                    'query' => [
-                                        'term' => [
-                                            WorkUserTypeConstant::SUPERVISOR->value . '.id' => 1
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'bool' => [
-                                    'must' => [
-                                        [
-                                            'wildcard' => [
-                                                'title' => '*system*'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
+                        'filter' => [
+                            $supervisorFilter,
+                            ['wildcard' => ['title.normalized' => '*system*']]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        yield 'wildcard characters are escaped' => [
+            'user' => $user,
+            'type' => WorkUserTypeConstant::SUPERVISOR->value,
+            'formData' => ['title' => 'a*b?'],
+            'expectedQuery' => [
+                'size' => 1_000,
+                '_source' => false,
+                'query' => [
+                    'bool' => [
+                        'filter' => [
+                            $supervisorFilter,
+                            ['wildcard' => ['title.normalized' => '*a\*b\?*']]
                         ]
                     ]
                 ]

@@ -30,81 +30,44 @@ class ConversationSearchTest extends TestCase
     }
 
     /**
-     * @param int[] $messageIds
+     * @param int[] $conversationIds
      */
     #[DataProvider('provideCreateQueryGetIdsByParticipantAndSearchCases')]
     public function testCreateQueryGetIdsByParticipantAndSearch(
         User $user,
-        array $messageIds,
+        array $conversationIds,
         string $search,
         array $expectedQuery
     ): void {
-        $result = $this->conversationSearch->createQueryGetIdsByParticipantAndSearch($user, $messageIds, $search);
+        $result = $this->conversationSearch->createQueryGetIdsByParticipantAndSearch($user, $conversationIds, $search);
 
         $this->assertEquals($expectedQuery, $result);
     }
 
     public static function provideCreateQueryGetIdsByParticipantAndSearchCases(): Generator
     {
-        foreach (['test', 'apple'] as $search) {
+        foreach (['test' => 'test', 'Práce' => 'prace'] as $search => $expectedSearch) {
             $user = new User;
             $user->setId(random_int(1, 100));
+            $conversationIds = [1, 2, 3];
 
-            $messageIds = [1, 2, 3];
-
-            yield [
-                $user,
-                $messageIds,
-                $search,
-                [
+            yield $search => [
+                'user' => $user,
+                'conversationIds' => $conversationIds,
+                'search' => $search,
+                'expectedQuery' => [
                     'size' => 1_000,
-                    '_source' => ['id'],
+                    '_source' => false,
                     'query' => [
                         'bool' => [
-                            'must' => [
-                                [
-                                    'nested' => [
-                                        'path' => 'participants',
-                                        'query' => [
-                                            'nested' => [
-                                                'path' => 'participants.user',
-                                                'query' => [
-                                                    'term' => [
-                                                        'participants.user.id' => $user->getId()
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
+                            'filter' => [
+                                ['term' => ['participants.user.id' => $user->getId()]],
                                 [
                                     'bool' => [
                                         'should' => [
-                                            [
-                                                'wildcard' => [
-                                                    'name' => '*' . $search . '*'
-                                                ]
-                                            ],
-                                            [
-                                                'nested' => [
-                                                    'path' => 'messages',
-                                                    'query' => [
-                                                        'terms' => [
-                                                            'messages.id' => $messageIds
-                                                        ]
-                                                    ]
-                                                ]
-                                            ],
-                                            [
-                                                'nested' => [
-                                                    'path' => 'work',
-                                                    'query' => [
-                                                        'wildcard' => [
-                                                            'work.title' => '*' . $search . '*'
-                                                        ]
-                                                    ]
-                                                ]
-                                            ]
+                                            ['wildcard' => ['name.normalized' => '*' . $expectedSearch . '*']],
+                                            ['terms' => ['id' => $conversationIds]],
+                                            ['wildcard' => ['work.title.normalized' => '*' . $expectedSearch . '*']]
                                         ]
                                     ]
                                 ]

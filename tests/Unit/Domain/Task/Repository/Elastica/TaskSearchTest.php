@@ -42,41 +42,27 @@ class TaskSearchTest extends TestCase
 
     public static function provideCreateQueryCases(): Generator
     {
-        $user = new User;
-        $user->setId(1);
-        $search = 'test';
+        foreach (['test' => 1, 'apple' => 1_000, 'Úkol' => 5] as $search => $userId) {
+            $user = new User;
+            $user->setId($userId);
 
-        yield [
-            $user,
-            $search,
-            [
-                'size' => 1_000,
-                '_source' => ['id'],
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => 'owner',
-                                    'query' => [
-                                        'term' => [
-                                            'owner.id' => $user->getId()
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'bool' => [
-                                    'should' => [
-                                        [
-                                            'wildcard' => [
-                                                'name' => '*' . $search . '*'
-                                            ]
-                                        ],
-                                        [
-                                            'wildcard' => [
-                                                'description' => '*' . $search . '*'
-                                            ]
+            $expectedSearch = $search === 'Úkol' ? 'ukol' : $search;
+
+            yield $search => [
+                'user' => $user,
+                'search' => $search,
+                'expectedQuery' => [
+                    'size' => 1_000,
+                    '_source' => false,
+                    'query' => [
+                        'bool' => [
+                            'filter' => [
+                                ['term' => ['owner.id' => $userId]],
+                                [
+                                    'bool' => [
+                                        'should' => [
+                                            ['wildcard' => ['name.normalized' => '*' . $expectedSearch . '*']],
+                                            ['wildcard' => ['description' => '*' . $expectedSearch . '*']]
                                         ]
                                     ]
                                 ]
@@ -84,52 +70,7 @@ class TaskSearchTest extends TestCase
                         ]
                     ]
                 ]
-            ],
-        ];
-
-        $user = new User;
-        $user->setId(1_000);
-        $search = 'apple';
-
-        yield [
-            $user,
-            $search,
-            [
-                'size' => 1_000,
-                '_source' => ['id'],
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            [
-                                'nested' => [
-                                    'path' => 'owner',
-                                    'query' => [
-                                        'term' => [
-                                            'owner.id' => $user->getId()
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            [
-                                'bool' => [
-                                    'should' => [
-                                        [
-                                            'wildcard' => [
-                                                'name' => '*' . $search . '*'
-                                            ]
-                                        ],
-                                        [
-                                            'wildcard' => [
-                                                'description' => '*' . $search . '*'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-        ];
+            ];
+        }
     }
 }

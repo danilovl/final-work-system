@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\ConversationMessage\Repository\Elastica;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Repository\Elastica\ConversationMessageSearch;
 use App\Domain\User\Entity\User;
+use Elastica\Index;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -27,7 +28,8 @@ class ConversationSearchTest extends TestCase
     protected function setUp(): void
     {
         $transformedFinder = $this->createStub(TransformedFinder::class);
-        $this->conversationMessageSearch = new ConversationMessageSearch($transformedFinder);
+        $index = $this->createStub(Index::class);
+        $this->conversationMessageSearch = new ConversationMessageSearch($transformedFinder, $index);
     }
 
     #[DataProvider('provideCreateQueryGetMessageIdsByConversationAndSearchCases')]
@@ -41,47 +43,34 @@ class ConversationSearchTest extends TestCase
         $this->assertEquals($expectedQuery, $result);
     }
 
-    #[DataProvider('provideCreateQueryGetIdsByParticipantAndSearchCases')]
-    public function testCreateQueryGetIdsByParticipantAndSearch(
+    #[DataProvider('provideCreateQueryGetConversationIdsByParticipantAndSearchCases')]
+    public function testCreateQueryGetConversationIdsByParticipantAndSearch(
         User $user,
         string $search,
         array $expectedQuery
     ): void {
-        $result = $this->conversationMessageSearch->createQueryGetIdsByParticipantAndSearch($user, $search);
+        $result = $this->conversationMessageSearch->createQueryGetConversationIdsByParticipantAndSearch($user, $search);
 
         $this->assertEquals($expectedQuery, $result);
     }
 
     public static function provideCreateQueryGetMessageIdsByConversationAndSearchCases(): Generator
     {
-        foreach (['test', 'apple'] as $search) {
+        foreach (['test' => 'test', 'Zpráva' => 'zprava'] as $search => $expectedSearch) {
             $conversation = new Conversation;
             $conversation->setId(random_int(1, 100));
 
-            yield [
-                $conversation,
-                $search,
-                [
+            yield $search => [
+                'conversation' => $conversation,
+                'search' => $search,
+                'expectedQuery' => [
                     'size' => 1_000,
-                    '_source' => ['id'],
+                    '_source' => false,
                     'query' => [
                         'bool' => [
-                            'must' => [
-                                [
-                                    'nested' => [
-                                        'path' => 'conversation',
-                                        'query' => [
-                                            'term' => [
-                                                'conversation.id' => $conversation->getId()
-                                            ]
-                                        ],
-                                    ]
-                                ],
-                                [
-                                    'wildcard' => [
-                                        'content.normalized' => '*' . $search . '*'
-                                    ]
-                                ]
+                            'filter' => [
+                                ['term' => ['conversation.id' => $conversation->getId()]],
+                                ['wildcard' => ['content.normalized' => '*' . $expectedSearch . '*']]
                             ]
                         ]
                     ]
@@ -90,46 +79,30 @@ class ConversationSearchTest extends TestCase
         }
     }
 
-    public static function provideCreateQueryGetIdsByParticipantAndSearchCases(): Generator
+    public static function provideCreateQueryGetConversationIdsByParticipantAndSearchCases(): Generator
     {
-        foreach (['test', 'apple'] as $search) {
+        foreach (['test' => 'test', 'Zpráva' => 'zprava'] as $search => $expectedSearch) {
             $user = new User;
             $user->setId(random_int(1, 100));
 
-            yield [
-                $user,
-                $search,
-                [
-                    'size' => 1_000,
-                    '_source' => ['id'],
+            yield $search => [
+                'user' => $user,
+                'search' => $search,
+                'expectedQuery' => [
+                    'size' => 0,
                     'query' => [
                         'bool' => [
-                            'must' => [
-                                [
-                                    'nested' => [
-                                        'path' => 'conversation',
-                                        'query' => [
-                                            'nested' => [
-                                                'path' => 'conversation.participants',
-                                                'query' => [
-                                                    'nested' => [
-                                                        'path' => 'conversation.participants.user',
-                                                        'query' => [
-                                                            'term' => [
-                                                                'conversation.participants.user.id' => $user->getId()
-                                                            ]
-                                                        ]
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'wildcard' => [
-                                        'content.normalized' => '*' . $search . '*'
-                                    ]
-                                ]
+                            'filter' => [
+                                ['term' => ['conversation.participants.user.id' => $user->getId()]],
+                                ['wildcard' => ['content.normalized' => '*' . $expectedSearch . '*']]
+                            ]
+                        ]
+                    ],
+                    'aggs' => [
+                        'conversations' => [
+                            'terms' => [
+                                'field' => 'conversation.id',
+                                'size' => 1_000
                             ]
                         ]
                     ]
