@@ -48,6 +48,6 @@ const calendarOptions: CalendarOptions = {
   weekends: true,
   events: fetchEvents,
   locale,
-  eventColor: '#59ff00',
+  eventColor: '#5f9a6e',
 };
 </script>

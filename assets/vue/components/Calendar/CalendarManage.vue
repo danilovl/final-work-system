@@ -62,7 +62,7 @@ const calendarOptions: CalendarOptions = {
   eventDrop: handleEventDrop,
   eventResize: handleEventResize,
   locale,
-  eventColor: '#59ff00',
+  eventColor: '#5f9a6e',
 };
 
 function handleEventClick(clickInfo: EventClickArg): void {

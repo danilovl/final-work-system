@@ -62,7 +62,7 @@ const calendarOptions: CalendarOptions = {
   eventClick: handleEventClick,
   events: fetchEvents,
   locale,
-  eventColor: '#59ff00',
+  eventColor: '#5f9a6e',
 };
 
 function handleEventClick(clickInfo: EventClickArg): void {
