@@ -1,5 +1,8 @@
 app:
   validator:
     entity_exists: 'Entita třídy "{{ class }}" s {{ property }} "{{ value }}" neexistuje.'
+    reset_password_email_blank: Zadejte prosím svůj e-mail.
+    reset_password_password_blank: Zadejte prosím heslo.
+    reset_password_password_min_length: 'Heslo musí mít alespoň {{ limit }} znaků.'
     user_has_role: 'Uživatel s ID "{{ value }}" neexistuje, je zakázán nebo nemá požadovanou roli "{{ role }}".'
     work_category_owner: 'Jedna nebo více kategorií práce neexistuje nebo vám nepatří.'

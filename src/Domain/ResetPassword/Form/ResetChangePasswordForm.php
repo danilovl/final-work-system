@@ -37,11 +37,11 @@ class ResetChangePasswordForm extends AbstractType
             'type' => PasswordType::class,
             'first_options' => [
                 'constraints' => [
-                    new NotBlank(message: 'Please enter a password'),
+                    new NotBlank(message: 'app.validator.reset_password_password_blank'),
                     new Length(
                         min: 6,
                         max: 4_096,
-                        minMessage: 'Your password should be at least {{ limit }} characters'
+                        minMessage: 'app.validator.reset_password_password_min_length'
                     ),
                 ],
                 'label' => 'New password'

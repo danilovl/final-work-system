@@ -5,12 +5,11 @@
         <div id="register" class="form">
             <section class="login_content">
                 <p>
-                    An email has been sent that contains a link that you can click to reset your password. This link
-                    will expire in {{ tokenLifetime | date('g') }} hour(s).
+                    {{ 'app.text.reset_password_email_sent' | trans({'%hours%': tokenLifetime | date('g')}) }}
                 </p>
                 <p>
-                    If you don't receive an email please check your spam folder or
-                    <a href="{{ path('reset_password_forgot_request') }}">try again</a>.
+                    {{ 'app.text.reset_password_check_spam' | trans }}
+                    <a href="{{ path('reset_password_forgot_request') }}">{{ 'app.text.reset_password_try_again' | trans }}</a>.
                 </p>
             </section>
         </div>
