@@ -22,7 +22,6 @@
         "api-platform/symfony": "*",
         "aws/aws-sdk-php": "^3.279",
         "aws/aws-sdk-php-symfony": "^2.7",
-        "composer/package-versions-deprecated": "1.11.99.3",
         "danilovl/async-bundle": "^1.0.1",
         "danilovl/cache-response-bundle": "^1.0.0",
         "danilovl/doctrine-entity-dto-bundle": "^1.0.0",
@@ -55,7 +54,6 @@
         "predis/predis": "^2.3",
         "symfony/amqp-messenger": "8.1.*",
         "symfony/asset": "8.1.*",
-        "symfony/asset-mapper": "8.1.*",
         "symfony/console": "8.1.*",
         "symfony/doctrine-messenger": "8.1.*",
         "symfony/dotenv": "8.1.*",
@@ -82,8 +80,6 @@
         "symfony/string": "8.1.*",
         "symfony/translation": "8.1.*",
         "symfony/twig-bundle": "8.1.*",
-        "symfony/ux-autocomplete": "^2.33.0",
-        "symfony/ux-live-component": "^2.22",
         "symfony/validator": "8.1.*",
         "symfony/web-link": "8.1.*",
         "symfony/webpack-encore-bundle": "^2.1.1",
@@ -115,7 +111,6 @@
         },
         "sort-packages": true,
         "allow-plugins": {
-            "composer/package-versions-deprecated": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
             "symfony/flex": true,
@@ -167,8 +162,7 @@
         "pre-push": "@phpunit",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": "@auto-scripts",
         "post-update-cmd": "@auto-scripts"
