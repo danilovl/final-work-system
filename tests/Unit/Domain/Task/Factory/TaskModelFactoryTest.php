@@ -16,7 +16,7 @@ use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\Factory\TaskModelFactory;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\Work\{
     GetWorkQuery,
     GetWorkQueryResult
