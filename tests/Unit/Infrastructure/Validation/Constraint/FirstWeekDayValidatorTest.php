@@ -17,7 +17,7 @@ use App\Infrastructure\Validation\Constraint\{
     FirstWeekDay,
     FirstWeekDayValidator
 };
-use DateTime;
+use DateTimeImmutable;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\Constraint;
@@ -45,7 +45,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
     #[DataProvider('provideValidateSuccessCases')]
     public function testValidateSuccess(string $startDate): void
     {
-        $date = new DateTime($startDate);
+        $date = new DateTimeImmutable($startDate);
         $this->validator->initialize($this->context);
         $this->validator->validate($date, new FirstWeekDay);
 
@@ -55,7 +55,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
     #[DataProvider('provideValidateFailedCases')]
     public function testValidateFailed(string $startDate): void
     {
-        $date = new DateTime($startDate);
+        $date = new DateTimeImmutable($startDate);
         $this->validator->initialize($this->context);
         $this->validator->validate($date, new FirstWeekDay);
 
@@ -75,7 +75,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->expectException(UnexpectedTypeException::class);
 
         $this->validator->initialize($this->context);
-        $this->validator->validate(new DateTime, new class ( ) extends Constraint {});
+        $this->validator->validate(new DateTimeImmutable, new class ( ) extends Constraint {});
     }
 
     public function testDateTimeType(): void
