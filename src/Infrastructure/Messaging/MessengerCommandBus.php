@@ -20,6 +20,7 @@ use Symfony\Component\Messenger\{
     HandleTrait,
     MessageBusInterface
 };
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 class MessengerCommandBus implements CommandBusInterface
 {
@@ -29,7 +30,11 @@ class MessengerCommandBus implements CommandBusInterface
 
     public function dispatch(CommandInterface $command): void
     {
-        $this->messageBus->dispatch($command);
+        try {
+            $this->messageBus->dispatch($command);
+        } catch (HandlerFailedException $exception) {
+            $this->throwWrappedException($exception);
+        }
     }
 
     /**
@@ -38,9 +43,22 @@ class MessengerCommandBus implements CommandBusInterface
      */
     public function dispatchResult(CommandInterface $command): ?object
     {
-        /** @var object|null $result */
-        $result = $this->handle($command);
+        try {
+            /** @var object|null $result */
+            $result = $this->handle($command);
+        } catch (HandlerFailedException $exception) {
+            $this->throwWrappedException($exception);
+        }
 
         return $result;
+    }
+
+    private function throwWrappedException(HandlerFailedException $exception): never
+    {
+        $wrappedExceptions = $exception->getWrappedExceptions();
+
+        $firstException = reset($wrappedExceptions);
+
+        throw $firstException !== false ? $firstException : $exception;
     }
 }

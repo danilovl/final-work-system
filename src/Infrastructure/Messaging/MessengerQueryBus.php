@@ -22,6 +22,7 @@ use Symfony\Component\Messenger\{
     HandleTrait,
     MessageBusInterface
 };
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 class MessengerQueryBus implements QueryBusInterface
 {
@@ -36,7 +37,15 @@ class MessengerQueryBus implements QueryBusInterface
 
     public function handle(QueryInterface $query): object
     {
-        $result = $this->handleMessage($query);
+        try {
+            $result = $this->handleMessage($query);
+        } catch (HandlerFailedException $exception) {
+            $wrappedExceptions = $exception->getWrappedExceptions();
+
+            $firstException = reset($wrappedExceptions);
+
+            throw $firstException !== false ? $firstException : $exception;
+        }
 
         if (!is_object($result)) {
             $message = sprintf('Query "%s" handler must return an object, "%s" returned.', $query::class, get_debug_type($result));
