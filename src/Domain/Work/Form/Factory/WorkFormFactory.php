@@ -85,7 +85,7 @@ class WorkFormFactory
                 throw new ConstantNotFoundException('Controller method type constant not found');
         }
 
-        return $this->formFactory->create(WorkForm::class, $workModel, $parameters);
+        return $this->formFactory->create(type: WorkForm::class, data: $workModel, options: $parameters);
     }
 
     public function getSearchForm(
