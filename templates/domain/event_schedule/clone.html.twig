@@ -42,7 +42,13 @@
                                                 <span class="fa fa-calendar-o form-control-feedback left"
                                                       aria-hidden="true">
                                                 </span>
-                                                {{ form_widget(form.start, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                                {{ form_widget(form.start, {
+                                                    'attr': {
+                                                        'data-controller': 'datetimepicker',
+                                                        'data-datetimepicker-format-value': 'YYYY-MM-DD',
+                                                        'class': 'form-control has-feedback-left'
+                                                    }
+                                                }) }}
                                             </div>
                                             {% if not form.start.vars.valid %}
                                                 <div class="col-md-3 col-sm-3 col-xs-12 red">
@@ -68,15 +74,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        $(document).ready(() => {
-            $('#event_schedule_clone_start').datetimepicker({
-                format: 'YYYY-MM-DD',
-                locale: '{{ app.request.locale }}'
-            });
-        });
-    </script>
 {% endblock %}

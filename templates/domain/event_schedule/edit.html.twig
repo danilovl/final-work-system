@@ -39,7 +39,13 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                        {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal'}}) }}
+                                        {{ form_start(form, {
+                                            'method': 'POST',
+                                            'attr': {
+                                                'data-controller': 'tinymce',
+                                                'class': 'form-horizontal'
+                                            }
+                                        }) }}
                                         <div class="item form-group">
                                             {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -86,13 +92,6 @@
 {% block javascript %}
     <script>
         $(document).ready(() => {
-            let locale = '{{ app.request.locale }}';
-
-            initTinymce(locale);
-
-            $('#event_type').select2({width: '100%'});
-            $('#event_address').select2({width: '100%'});
-            $('#event_participant').select2({width: '100%'});
             $('.collection').collection({
                 drag_drop: true,
                 allow_duplicate: true
