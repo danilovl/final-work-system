@@ -14,6 +14,7 @@ parameters:
   locales: 'en|cs|ru'
   locale: 'en'
   upload_directory: '%kernel.project_dir%/public/upload/'
+  minio_data_directory: '%kernel.project_dir%/docker-data/minio/'
   email_notification:
     sender: '%env(EMAIL_NOTIFICATION_SENDER)%'
     enable_send: '%env(bool:EMAIL_NOTIFICATION_ENABLE_SEND)%'

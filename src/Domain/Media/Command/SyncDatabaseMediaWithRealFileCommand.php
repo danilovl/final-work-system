@@ -86,7 +86,7 @@ class SyncDatabaseMediaWithRealFileCommand
 
     private function syncMediaFile(SymfonyStyle $io): void
     {
-        $uploadFolder = $this->parameterService->getString('upload_directory');
+        $uploadFolder = $this->parameterService->getString('minio_data_directory');
         $mediaTypes = $this->mediaTypeFacade->list();
 
         $count = 0;
@@ -113,7 +113,7 @@ class SyncDatabaseMediaWithRealFileCommand
 
     private function syncMediaTypeFolder(OutputInterface $output, SymfonyStyle $io): void
     {
-        $uploadFolder = $this->parameterService->getString('upload_directory');
+        $uploadFolder = $this->parameterService->getString('minio_data_directory');
         $finder = new Finder;
         $finder->directories()->in($uploadFolder)->depth(0);
 

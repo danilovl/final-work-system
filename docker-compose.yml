@@ -112,7 +112,7 @@ services:
       MINIO_ROOT_USER: MINIO_ROOT_USER
       MINIO_ROOT_PASSWORD: MINIO_ROOT_PASSWORD
     volumes:
-      - ./public/upload:/data
+      - ./docker-data/minio:/data
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://php:9000/minio/health/live']
       interval: 30s
