@@ -37,8 +37,8 @@ class OpenTelemetryBootTest extends TestCase
             ->method('isEnable')
             ->willReturn(false);
 
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->any())
+        $container = $this->createStub(ContainerInterface::class);
+        $container
             ->method('get')
             ->willReturnCallback(function (string $id) use ($provider) {
                 if ($id === OpenTelemetryProvider::class) {
@@ -64,8 +64,8 @@ class OpenTelemetryBootTest extends TestCase
         $manager->addRegistration(MockRegistrationA::class);
         $manager->addRegistration(MockRegistrationB::class);
 
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->any())
+        $container = $this->createStub(ContainerInterface::class);
+        $container
             ->method('get')
             ->willReturnCallback(function (string $id) use ($provider, $manager) {
                 return match ($id) {
