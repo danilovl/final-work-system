@@ -43,6 +43,7 @@ use App\Domain\Task\Http\Api\{
     TaskDeleteHandle
 };
 use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Facade\WorkFacade;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 
@@ -51,6 +52,7 @@ readonly class TaskController
 {
     public function __construct(
         private AuthorizationCheckerService $authorizationCheckerService,
+        private WorkFacade $workFacade,
         private TaskListOwnerHandle $taskListHandle,
         private TaskListSolverHandle $taskListSolverHandle,
         private TaskDetailApiPlatformHandle $taskDetailApiPlatformHandle,
@@ -260,6 +262,9 @@ readonly class TaskController
     )]
     public function create(#[MapRequestPayload] TaskInput $taskInput): JsonResponse
     {
+        $work = $this->workFacade->getById($taskInput->workId);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
+
         return $this->taskCreateHandle->__invoke($taskInput);
     }
 }

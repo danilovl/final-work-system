@@ -13,6 +13,7 @@
 namespace App\Domain\Work\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\Work\DTO\Api\Input\{
     WorkInput,
@@ -213,6 +214,8 @@ readonly class WorkController
     )]
     public function create(#[MapRequestPayload] WorkInput $workInput): JsonResponse
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(UserRoleConstant::SUPERVISOR->value);
+
         return $this->workCreateHandle->__invoke($workInput);
     }
 }

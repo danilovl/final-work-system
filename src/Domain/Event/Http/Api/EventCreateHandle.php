@@ -22,6 +22,7 @@ use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Service\UserService;
 use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
+use DateTimeZone;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 readonly class EventCreateHandle
@@ -58,8 +59,9 @@ readonly class EventCreateHandle
         $eventModel->type = $eventType;
         $eventModel->name = $input->name;
         $eventModel->address = $eventAddress;
-        $eventModel->start = $input->start;
-        $eventModel->end = $input->end;
+        $timezone = new DateTimeZone(date_default_timezone_get());
+        $eventModel->start = $input->start->setTimezone($timezone);
+        $eventModel->end = $input->end->setTimezone($timezone);
 
         $event = $this->eventFactory->flushFromModel($eventModel);
 

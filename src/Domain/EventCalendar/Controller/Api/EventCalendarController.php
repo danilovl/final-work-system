@@ -60,7 +60,7 @@ readonly class EventCalendarController
         description: 'Calendar type',
         in: 'path',
         required: true,
-        schema: new OA\Schema(type: 'string', enum: ['manage', 'reservation', 'detail'])
+        schema: new OA\Schema(type: 'string', enum: ['manage', 'reservation'])
     )]
     #[OA\Parameter(
         name: 'start',

@@ -18,6 +18,7 @@ use App\Domain\Event\DTO\Api\{EventDTO, EventDetailDTO};
 use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
 use App\Domain\Event\Entity\Event;
+use App\Domain\User\Constant\UserRoleConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Event\Http\Api\{
     EventListHandle,
@@ -129,6 +130,8 @@ readonly class EventController
 
     public function create(EventCreateInput $input): EventDTO
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(UserRoleConstant::SUPERVISOR->value);
+
         $violations = $this->validator->validate($input);
         if (count($violations) > 0) {
             throw new ValidationException($violations);

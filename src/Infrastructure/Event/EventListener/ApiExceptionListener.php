@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\{
 };
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\{
+    AccessDeniedHttpException,
     HttpExceptionInterface,
     MethodNotAllowedHttpException,
     NotFoundHttpException
@@ -71,9 +72,10 @@ readonly class ApiExceptionListener implements EventSubscriberInterface
                 $exception instanceof NoResultException,
                 $exception instanceof NonUniqueResultException,
                 $exception instanceof ResourceNotFoundException => 'Resource not found',
-            $exception instanceof AccessDeniedException => 'Access denied',
+            $exception instanceof AccessDeniedException,
+                $exception instanceof AccessDeniedHttpException => 'Access denied',
             $exception instanceof MethodNotAllowedHttpException => 'Method not allowed',
-            $exception instanceof HttpExceptionInterface => 'Internal Server Error',
+            $exception instanceof HttpExceptionInterface => Response::$statusTexts[$exception->getStatusCode()] ?? 'Internal Server Error',
             default => 'Unexpected error occurred'
         };
 

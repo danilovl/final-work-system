@@ -26,7 +26,7 @@ readonly class ProfileImageHandle
     public function __invoke(User $user): BinaryFileResponse|Response
     {
         if (!$user->getProfileImage()) {
-            return new Response;
+            return new Response(status: Response::HTTP_NO_CONTENT);
         }
 
         return $this->mediaService->download($user->getProfileImage());
