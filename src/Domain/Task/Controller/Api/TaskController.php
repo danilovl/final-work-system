@@ -14,11 +14,14 @@ namespace App\Domain\Task\Controller\Api;
 
 use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
+use App\Domain\Task\DTO\Api\Input\TaskInput;
+use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use App\Domain\Task\DTO\Api\Output\{
     TaskDetailOutput,
     TaskListWorkOutput,
@@ -29,6 +32,7 @@ use App\Domain\Task\Entity\Task;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\Api\{
+    TaskCreateHandle,
     TaskDetailApiPlatformHandle,
     TaskDetailHandle,
     TaskListWorkHandle,
@@ -54,7 +58,8 @@ readonly class TaskController
         private TaskListWorkHandle $taskListWorkHandle,
         private TaskChangeStatusHandle $taskChangeStatusHandle,
         private TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
-        private TaskDeleteHandle $taskDeleteHandle
+        private TaskDeleteHandle $taskDeleteHandle,
+        private TaskCreateHandle $taskCreateHandle
     ) {}
 
     public function listOwner(Request $request): TaskListOwnerOutput
@@ -232,5 +237,29 @@ readonly class TaskController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $task);
 
         return $this->taskDeleteHandle->__invoke($task);
+    }
+
+    #[OA\Post(
+        path: '/api/key/tasks/create',
+        description: 'Creates a new task.',
+        summary: 'Create task'
+    )]
+    #[OA\RequestBody(
+        content: new OA\JsonContent(ref: new Model(type: TaskInput::class))
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Task created',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(property: 'result', ref: new Model(type: TaskDTO::class))
+            ],
+            type: 'object'
+        )
+    )]
+    public function create(#[MapRequestPayload] TaskInput $taskInput): JsonResponse
+    {
+        return $this->taskCreateHandle->__invoke($taskInput);
     }
 }

@@ -13,6 +13,7 @@
 namespace App\Domain\Task\Bus\Command\CreateTask;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Factory\TaskFactory;
 
@@ -23,9 +24,11 @@ readonly class CreateTaskHandler implements CommandHandlerInterface
         private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
-    public function __invoke(CreateTaskCommand $command): void
+    public function __invoke(CreateTaskCommand $command): Task
     {
         $task = $this->taskFactory->flushFromModel($command->taskModel);
         $this->taskEventDispatcher->onTaskCreate($task);
+
+        return $task;
     }
 }

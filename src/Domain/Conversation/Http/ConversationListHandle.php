@@ -44,6 +44,7 @@ readonly class ConversationListHandle
     {
         $user = $this->userService->getUser();
 
+
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
             ->create(SimpleSearchForm::class, $searchModel)
