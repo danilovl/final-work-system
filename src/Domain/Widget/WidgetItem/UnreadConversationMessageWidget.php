@@ -15,7 +15,7 @@ namespace App\Domain\Widget\WidgetItem;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\ConversationMessage\Bus\Query\UnreadMessagesByUser\{GetUnreadMessagesByUserQuery, GetUnreadMessagesByUserQueryResult};
 use App\Domain\ConversationMessage\Bus\Query\TotalUnreadMessagesByUser\{GetTotalUnreadMessagesByUserQuery, GetTotalUnreadMessagesByUserQueryResult};
 

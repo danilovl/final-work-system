@@ -23,7 +23,7 @@ use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Helper\WorkDeadlineHelper;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Work\Bus\Query\WorksByAuthorStatus\{GetWorksByAuthorStatusQuery, GetWorksByAuthorStatusQueryResult};
 
 class WorkDeadlineNotifyWidget extends BaseWidget

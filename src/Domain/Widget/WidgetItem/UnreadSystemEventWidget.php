@@ -15,7 +15,7 @@ namespace App\Domain\Widget\WidgetItem;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\SystemEvent\Bus\Query\TotalUnreadSystemEventsByRecipient\{GetTotalUnreadSystemEventsByRecipientQuery, GetTotalUnreadSystemEventsByRecipientQueryResult};
 use App\Domain\SystemEventRecipient\Bus\Query\UnreadSystemEventsByRecipient\{GetUnreadSystemEventsByRecipientQuery, GetUnreadSystemEventsByRecipientQueryResult};
 

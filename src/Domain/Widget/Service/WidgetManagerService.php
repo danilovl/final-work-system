@@ -12,7 +12,7 @@
 
 namespace App\Domain\Widget\Service;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use Webmozart\Assert\Assert;
 use App\Domain\Widget\Interfaces\{
     WidgetManagerInterface

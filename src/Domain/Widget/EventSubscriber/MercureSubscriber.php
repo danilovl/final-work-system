@@ -12,7 +12,7 @@
 
 namespace App\Domain\Widget\EventSubscriber;
 
-use App\Application\EventDispatcher\GenericEvent\EntityCreateEvent;
+use App\Infrastructure\Event\EventDispatcher\GenericEvent\EntityCreateEvent;
 use App\Application\EventSubscriber\Events;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\SystemEvent\Entity\SystemEvent;
@@ -28,6 +28,7 @@ use Symfony\Component\Mercure\{
     Update,
     HubInterface
 };
+use App\Infrastructure\Event\InfrastructureEvents;
 
 readonly class MercureSubscriber implements EventSubscriberInterface
 {
@@ -44,7 +45,7 @@ readonly class MercureSubscriber implements EventSubscriberInterface
     {
         return [
             Events::MESSAGE_CREATE => ['onMessageCreateUnreadConversationMessageWidget', -10],
-            Events::ENTITY_CREATE_ASYNC => ['onSystemEventCreate', -10]
+            InfrastructureEvents::ENTITY_CREATE_ASYNC => ['onSystemEventCreate', -10]
         ];
     }
 
