@@ -38,6 +38,7 @@ services:
       - 'MYSQL_DATABASE=final_work_system'
       - 'MYSQL_USER=root'
       - 'MYSQL_PASSWORD='
+      - 'MARIADB_AUTO_UPGRADE=1'
 
   node:
     build:

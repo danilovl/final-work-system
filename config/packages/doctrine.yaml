@@ -5,7 +5,7 @@ doctrine:
     default_table_options:
       charset: utf8mb4
       collate:  utf8mb4_unicode_ci
-    server_version: 'mariadb-10.9.7'
+    server_version: 'mariadb-11.8.9'
     schema_filter: "~^(doctrine_migration)$~"
     types:
       array: App\Infrastructure\Persistence\Doctrine\DBAL\Types\ArrayType

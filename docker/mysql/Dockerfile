@@ -1,5 +1,5 @@
-FROM mariadb:10.9.7
+FROM mariadb:11.8
 
-CMD ["mysqld"]
+CMD ["mariadbd"]
 
 EXPOSE 3307/tcp
