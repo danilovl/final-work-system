@@ -12,12 +12,14 @@
 
 namespace App\Domain\Work\Controller\Api;
 
+use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\Work\DTO\Api\Input\{
     WorkInput,
     WorkSearchInput
 };
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpKernel\Attribute\{
@@ -38,6 +40,7 @@ use Symfony\Component\HttpFoundation\{
 readonly class WorkController
 {
     public function __construct(
+        private AuthorizationCheckerService $authorizationCheckerService,
         private WorkListHandle $workListHandle,
         private WorkDetailHandle $workDetailHandle,
         private WorkCreateHandle $workCreateHandle
@@ -184,6 +187,8 @@ readonly class WorkController
     )]
     public function detail(Work $work): JsonResponse
     {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
+
         return $this->workDetailHandle->__invoke($work);
     }
 
