@@ -54,9 +54,9 @@ readonly class ProfileController
         return $this->profileChangeImageHandle->__invoke($request);
     }
 
-    public function deleteImage(): RedirectResponse
+    public function deleteImage(Request $request): RedirectResponse
     {
-        return $this->profileDeleteImageHandle->__invoke();
+        return $this->profileDeleteImageHandle->__invoke($request);
     }
 
     public function changePassword(Request $request): Response
