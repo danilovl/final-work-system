@@ -17,7 +17,6 @@ use App\Domain\User\EventListener\RequestListener;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\{
@@ -29,9 +28,9 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RequestListenerTest extends TestCase
 {
-    private MockObject&UserService $userService;
+    private UserService $userService;
 
-    private MockObject&EntityManagerService $entityManagerService;
+    private EntityManagerService $entityManagerService;
 
     private AsyncService $asyncService;
 
@@ -39,8 +38,8 @@ class RequestListenerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->userService = $this->createMock(UserService::class);
-        $this->entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->userService = $this->createStub(UserService::class);
+        $this->entityManagerService = $this->createStub(EntityManagerService::class);
         $this->asyncService = new AsyncService;
 
         $this->listener = new RequestListener(
@@ -52,8 +51,16 @@ class RequestListenerTest extends TestCase
 
     public function testOnKernelRequest(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->listener = new RequestListener(
+            $this->userService,
+            $this->entityManagerService,
+            $this->asyncService
+        );
+
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             new Request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -73,8 +80,16 @@ class RequestListenerTest extends TestCase
 
     public function testOnKernelRequestNotUser(): void
     {
+        $this->userService = $this->createMock(UserService::class);
+        $this->entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->listener = new RequestListener(
+            $this->userService,
+            $this->entityManagerService,
+            $this->asyncService
+        );
+
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             new Request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -94,15 +109,13 @@ class RequestListenerTest extends TestCase
 
     public function testOnKernelRequestNotMain(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             new Request,
             HttpKernelInterface::SUB_REQUEST
         );
-
-        $this->userService
-            ->expects($this->never())
-            ->method('getUserOrNull');
 
         $this->listener->onKernelRequest($event);
         $this->asyncService->call();

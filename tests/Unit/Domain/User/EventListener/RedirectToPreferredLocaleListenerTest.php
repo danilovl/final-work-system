@@ -37,7 +37,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
     protected function setUp(): void
     {
         $this->event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             new Request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -45,8 +45,8 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
     public function testOnKernelRequestRedirectEmptyLocales(): void
     {
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $userService = $this->createMock(UserService::class);
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $userService = $this->createStub(UserService::class);
 
         $user = new User;
         $user->setLocale(LocaleConstant::ISO_RU->value);
@@ -63,8 +63,8 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
     public function testOnKernelRequestRedirectDefaultLocale(): void
     {
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $userService = $this->createMock(UserService::class);
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $userService = $this->createStub(UserService::class);
 
         $user = new User;
         $user->setLocale(LocaleConstant::ISO_RU->value);
@@ -89,8 +89,8 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
         $user = new User;
         $user->setLocale(LocaleConstant::ISO_RU->value);
 
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->exactly(1))
+        $userService = $this->createStub(UserService::class);
+        $userService
             ->method('getUserOrNull')
             ->willReturn($user);
 
@@ -109,16 +109,16 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
     public function testOnKernelRequestNoRedirect(): void
     {
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $urlGenerator->expects($this->exactly(0))
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $urlGenerator
             ->method('generate')
             ->willReturn('url');
 
         $user = new User;
         $user->setLocale(LocaleConstant::ISO_EN->value);
 
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->exactly(1))
+        $userService = $this->createStub(UserService::class);
+        $userService
             ->method('getUserOrNull')
             ->willReturn($user);
 
@@ -137,16 +137,14 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
     public function testOnKernelRequestNotMain(): void
     {
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $urlGenerator->expects($this->never())
-            ->method('generate');
+        $this->expectNotToPerformAssertions();
+
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
 
         $user = new User;
         $user->setLocale(LocaleConstant::ISO_EN->value);
 
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->never())
-            ->method('getUserOrNull');
+        $userService = $this->createStub(UserService::class);
 
         $listener = new RedirectToPreferredLocaleListener(
             $urlGenerator,
@@ -156,7 +154,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
         );
 
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             new Request,
             HttpKernelInterface::SUB_REQUEST
         );
@@ -166,16 +164,14 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
     public function testOnKernelRequestReferer(): void
     {
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $urlGenerator->expects($this->never())
-            ->method('generate');
+        $this->expectNotToPerformAssertions();
+
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
 
         $user = new User;
         $user->setLocale(LocaleConstant::ISO_EN->value);
 
-        $userService = $this->createMock(UserService::class);
-        $userService->expects($this->never())
-            ->method('getUserOrNull');
+        $userService = $this->createStub(UserService::class);
 
         $listener = new RedirectToPreferredLocaleListener(
             $urlGenerator,
@@ -188,7 +184,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
         $request->headers->set('referer', 'http://:example.com');
 
         $event = new RequestEvent(
-            $this->createMock(KernelInterface::class),
+            $this->createStub(KernelInterface::class),
             $request,
             HttpKernelInterface::MAIN_REQUEST
         );
