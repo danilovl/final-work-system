@@ -13,7 +13,12 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        {{ form_start(form, {
+                            'attr': {
+                                'data-controller': 'tinymce',
+                                'class': 'form-horizontal'
+                            }
+                        }) }}
                         <div class="item form-group">
                             {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
                             <div class="col-md-10 col-sm-10 col-xs-12">
@@ -56,10 +61,6 @@
 </div>
 <script>
     $(document).ready(() => {
-        let locale = '{{ app.request.locale }}';
-
-        initTinymce(locale);
-        initJsSwitch('.ajax .js-switch');
         createEditContentFileAjax('#media_action');
         createEditContentFileAjax('#media_action_close', true);
     });

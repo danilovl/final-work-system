@@ -4,9 +4,9 @@
 
     <script>
         {
-            let archiveUrl = '{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}';
-            let idContent = "#version-content-{{ version.id | hashids_encode }}";
-            let idContentInfo = "version-content-info-{{ version.id | hashids_encode }}";
+            let archiveUrl = '{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode })|e('js') }}';
+            let idContent = "#version-content-{{ version.id | hashids_encode|e('js') }}";
+            let idContentInfo = "version-content-info-{{ version.id | hashids_encode|e('js') }}";
 
             showArchiveContent(archiveUrl, idContent, idContentInfo);
         }
