@@ -12,6 +12,7 @@
 
 namespace App\Domain\User\Facade;
 
+use App\Application\Exception\UserNotExistException;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Repository\UserRepository;
@@ -38,8 +39,11 @@ readonly class UserFacade
 
     public function getById(int $id): User
     {
-        /** @var User $user */
+        /** @var User|null $user */
         $user = $this->userRepository->find($id);
+        if ($user === null) {
+            throw new UserNotExistException("User with id {$id} not found.");
+        }
 
         return $user;
     }
@@ -133,5 +137,12 @@ readonly class UserFacade
             ->getOneOrNullResult();
 
         return $result;
+    }
+
+    public function queryAllByUserRoleAndSearch(string $role, ?string $search = null, bool $enable = true): Query
+    {
+        return $this->userRepository
+            ->allByUserRoleAndSearch($role, $search, $enable)
+            ->getQuery();
     }
 }
