@@ -14,7 +14,6 @@ parameters:
         - tests
     excludePaths:
         - src/Infrastructure/Persistence/Doctrine/DBAL
-        - src/Infrastructure/OpenTelemetry
         - tests/bootstrap.php
         - tests/Mock
         - src/Infrastructure/GraphQL/Resolver/NotDoctrineResolverMap.php

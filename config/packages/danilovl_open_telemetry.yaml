@@ -1,0 +1,104 @@
+danilovl_open_telemetry:
+  service:
+    namespace: FinalWorkSystemNamespace
+    name: FinalWorkSystem
+    version: 1.0.0
+    environment: '%kernel.environment%'
+
+  instrumentation:
+    http_server:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+      default_trace_ignore_enabled: true
+
+    messenger:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+      long_running_command_enabled: true
+
+    console:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    traceable:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    twig:
+      enabled: false
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    cache:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    doctrine:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+      default_trace_ignore_enabled: true
+      default_span_name_handler_enabled: true
+
+    redis:
+      enabled: false
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    predis:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    mailer:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    events:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+      default_trace_ignore_enabled: true
+      default_span_name_handler_enabled: true
+
+    async:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true
+
+    http_client:
+      enabled: true
+      tracing:
+        enabled: true
+      metering:
+        enabled: true

@@ -80,6 +80,7 @@ Project uses custom bundles
 * [SelectAutocompleterBundle](https://github.com/danilovl/select-autocompleter-bundle) - Symfony bundle provides simple integration with Select2
 * [Symfony console input validation](https://github.com/danilovl/symfony-console-input-validation) - Provides a simple method for adding input validation to Symfony console commands
 * [TranslatorBundle](https://github.com/danilovl/translator-bundle) - Symfony bundle provides simple management of system translations
+* [OpenTelemetryBundle](https://github.com/danilovl/open-telemetry-bundle) - OpenTelemetry bundle for Symfony
 
 ERD diagram
 ------------
@@ -97,7 +98,7 @@ Test coverage
 Kibana
 ------------
 
-This project uses the OpenTelemetry API SDK, manually configured with hooks.
+This project uses the OpenTelemetry API SDK.
 
 ![Alt text](/git/readme/kibana.png?raw=true "Kibana")
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0837786523e0700ed5c028d8bd036e6c",
+    "content-hash": "7c59a7cee06e5e3ab54a12e257fde9de",
     "packages": [
         {
             "name": "api-platform/core",
@@ -286,16 +286,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.373.2",
+            "version": "3.373.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "483fba51c28b3a0c0647bf5100e0edca82090b18"
+                "reference": "d23edc4cf9cd81cb98b5beb9c1fb3737f535b1e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/483fba51c28b3a0c0647bf5100e0edca82090b18",
-                "reference": "483fba51c28b3a0c0647bf5100e0edca82090b18",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d23edc4cf9cd81cb98b5beb9c1fb3737f535b1e5",
+                "reference": "d23edc4cf9cd81cb98b5beb9c1fb3737f535b1e5",
                 "shasum": ""
             },
             "require": {
@@ -377,9 +377,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.373.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.373.3"
             },
-            "time": "2026-03-13T18:08:30+00:00"
+            "time": "2026-03-16T18:15:27+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -979,6 +979,88 @@
                 "source": "https://github.com/danilovl/object-to-array-transform-bundle/tree/v4.0.0"
             },
             "time": "2026-01-17T09:39:05+00:00"
+        },
+        {
+            "name": "danilovl/open-telemetry-bundle",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danilovl/open-telemetry-bundle.git",
+                "reference": "eb690d375947e43aaae3bf311045c5cd84769ede"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danilovl/open-telemetry-bundle/zipball/eb690d375947e43aaae3bf311045c5cd84769ede",
+                "reference": "eb690d375947e43aaae3bf311045c5cd84769ede",
+                "shasum": ""
+            },
+            "require": {
+                "ext-opentelemetry": "*",
+                "nyholm/psr7": "^1.8",
+                "open-telemetry/api": "^1.8",
+                "open-telemetry/exporter-otlp": "^1.4",
+                "open-telemetry/sdk": "^1.8",
+                "open-telemetry/sem-conv": "^1.38",
+                "php": "^8.5",
+                "symfony/framework-bundle": "^8.0"
+            },
+            "require-dev": {
+                "danilovl/async-bundle": "^1.0",
+                "doctrine/doctrine-bundle": "^3.2",
+                "doctrine/orm": "^3.4.4",
+                "ext-redis": "*",
+                "friendsofphp/php-cs-fixer": "^3.92.5",
+                "guzzlehttp/guzzle": "^7.10",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.1.33",
+                "phpstan/phpstan-symfony": "^2.0.9",
+                "phpunit/phpunit": "^12.5.6",
+                "predis/predis": "^3.4",
+                "symfony/console": "^8.0",
+                "symfony/http-client": "^8.0",
+                "symfony/mailer": "^8.0",
+                "symfony/messenger": "^8.0",
+                "symfony/yaml": "^8.0",
+                "twig/twig": "^3.23"
+            },
+            "suggest": {
+                "danilovl/async-bundle": "For Async instrumentation",
+                "doctrine/doctrine-bundle": "For Doctrine instrumentation",
+                "predis/predis": "For Redis instrumentation",
+                "symfony/console": "For Console instrumentation",
+                "symfony/event-dispatcher": "For EventDispatcher instrumentation",
+                "symfony/framework-bundle": "For full Symfony integration",
+                "symfony/http-client": "For HTTP client instrumentation",
+                "symfony/mailer": "For Mailer instrumentation",
+                "symfony/messenger": "For Messenger instrumentation",
+                "twig/twig": "For Twig instrumentation"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Danilovl\\OpenTelemetryBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Danilov"
+                }
+            ],
+            "description": "OpenTelemetry bundle for Symfony",
+            "keywords": [
+                "bundle",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/danilovl/open-telemetry-bundle/issues",
+                "source": "https://github.com/danilovl/open-telemetry-bundle/tree/v0.0.3"
+            },
+            "time": "2026-03-16T19:05:04+00:00"
         },
         {
             "name": "danilovl/parameter-bundle",
@@ -4175,16 +4257,16 @@
         },
         {
             "name": "open-telemetry/api",
-            "version": "dev-main",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/api.git",
-                "reference": "04c85a1"
+                "reference": "df5197c6fd0ddd8e9883b87de042d9341300e2ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/api/zipball/04c85a1",
-                "reference": "04c85a1",
+                "url": "https://api.github.com/repos/opentelemetry-php/api/zipball/df5197c6fd0ddd8e9883b87de042d9341300e2ad",
+                "reference": "df5197c6fd0ddd8e9883b87de042d9341300e2ad",
                 "shasum": ""
             },
             "require": {
@@ -4196,7 +4278,6 @@
             "conflict": {
                 "open-telemetry/sdk": "<=1.11"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "spi": {
@@ -4242,7 +4323,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2026-02-25T13:24:05+00:00"
+            "time": "2026-01-21T04:14:03+00:00"
         },
         {
             "name": "open-telemetry/context",
@@ -4304,17 +4385,81 @@
             "time": "2025-09-19T00:05:49+00:00"
         },
         {
-            "name": "open-telemetry/gen-otlp-protobuf",
-            "version": "dev-main",
+            "name": "open-telemetry/exporter-otlp",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/opentelemetry-php/gen-otlp-protobuf.git",
-                "reference": "66c3b98"
+                "url": "https://github.com/opentelemetry-php/exporter-otlp.git",
+                "reference": "283a0d66522f2adc6d8d7debfd7686be91c282be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/gen-otlp-protobuf/zipball/66c3b98",
-                "reference": "66c3b98",
+                "url": "https://api.github.com/repos/opentelemetry-php/exporter-otlp/zipball/283a0d66522f2adc6d8d7debfd7686be91c282be",
+                "reference": "283a0d66522f2adc6d8d7debfd7686be91c282be",
+                "shasum": ""
+            },
+            "require": {
+                "open-telemetry/api": "^1.0",
+                "open-telemetry/gen-otlp-protobuf": "^1.1",
+                "open-telemetry/sdk": "^1.0",
+                "php": "^8.1",
+                "php-http/discovery": "^1.14"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "_register.php"
+                ],
+                "psr-4": {
+                    "OpenTelemetry\\Contrib\\Otlp\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "opentelemetry-php contributors",
+                    "homepage": "https://github.com/open-telemetry/opentelemetry-php/graphs/contributors"
+                }
+            ],
+            "description": "OTLP exporter for OpenTelemetry.",
+            "keywords": [
+                "Metrics",
+                "exporter",
+                "gRPC",
+                "http",
+                "opentelemetry",
+                "otel",
+                "otlp",
+                "tracing"
+            ],
+            "support": {
+                "chat": "https://app.slack.com/client/T08PSQ7BQ/C01NFPCV44V",
+                "docs": "https://opentelemetry.io/docs/languages/php",
+                "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
+                "source": "https://github.com/open-telemetry/opentelemetry-php"
+            },
+            "time": "2026-02-05T09:44:52+00:00"
+        },
+        {
+            "name": "open-telemetry/gen-otlp-protobuf",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opentelemetry-php/gen-otlp-protobuf.git",
+                "reference": "673af5b06545b513466081884b47ef15a536edde"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opentelemetry-php/gen-otlp-protobuf/zipball/673af5b06545b513466081884b47ef15a536edde",
+                "reference": "673af5b06545b513466081884b47ef15a536edde",
                 "shasum": ""
             },
             "require": {
@@ -4324,7 +4469,6 @@
             "suggest": {
                 "ext-protobuf": "For better performance, when dealing with the protobuf format"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4361,30 +4505,30 @@
             ],
             "support": {
                 "chat": "https://app.slack.com/client/T08PSQ7BQ/C01NFPCV44V",
-                "docs": "https://opentelemetry.io/docs/languages/php",
+                "docs": "https://opentelemetry.io/docs/php",
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2025-10-19T06:44:33+00:00"
+            "time": "2025-09-17T23:10:12+00:00"
         },
         {
             "name": "open-telemetry/sdk",
-            "version": "dev-main",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/sdk.git",
-                "reference": "f0457fe"
+                "reference": "c76f91203bf7ef98ab3f4e0a82ca21699af185e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/sdk/zipball/f0457fe",
-                "reference": "f0457fe",
+                "url": "https://api.github.com/repos/opentelemetry-php/sdk/zipball/c76f91203bf7ef98ab3f4e0a82ca21699af185e1",
+                "reference": "c76f91203bf7ef98ab3f4e0a82ca21699af185e1",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "nyholm/psr7-server": "^1.1",
-                "open-telemetry/api": "^1.8",
+                "open-telemetry/api": "^1.7",
                 "open-telemetry/context": "^1.4",
                 "open-telemetry/sem-conv": "^1.0",
                 "php": "^8.1",
@@ -4404,7 +4548,6 @@
                 "ext-mbstring": "To increase performance of string operations",
                 "open-telemetry/sdk-configuration": "File-based OpenTelemetry SDK configuration"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "spi": {
@@ -4463,7 +4606,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2026-02-10T10:47:59+00:00"
+            "time": "2026-01-28T11:38:11+00:00"
         },
         {
             "name": "open-telemetry/sem-conv",
@@ -12508,16 +12651,16 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v15.31.0",
+            "version": "v15.31.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "ef79ce18c14dd0d88bfc3a6c02a00f2adcbdf1bd"
+                "reference": "8b446b55a30680f105eb5c4d25ccbc015926d398"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/ef79ce18c14dd0d88bfc3a6c02a00f2adcbdf1bd",
-                "reference": "ef79ce18c14dd0d88bfc3a6c02a00f2adcbdf1bd",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/8b446b55a30680f105eb5c4d25ccbc015926d398",
+                "reference": "8b446b55a30680f105eb5c4d25ccbc015926d398",
                 "shasum": ""
             },
             "require": {
@@ -12571,7 +12714,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webonyx/graphql-php/issues",
-                "source": "https://github.com/webonyx/graphql-php/tree/v15.31.0"
+                "source": "https://github.com/webonyx/graphql-php/tree/v15.31.1"
             },
             "funding": [
                 {
@@ -12583,7 +12726,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2026-03-14T18:44:21+00:00"
+            "time": "2026-03-16T15:32:01+00:00"
         },
         {
             "name": "willdurand/negotiation",
@@ -13431,11 +13574,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.40",
+            "version": "2.1.41",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
-                "reference": "9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a2eae8f20856b3afe74bf1f9726ce8c11438e300",
+                "reference": "a2eae8f20856b3afe74bf1f9726ce8c11438e300",
                 "shasum": ""
             },
             "require": {
@@ -13480,7 +13623,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-23T15:04:35+00:00"
+            "time": "2026-03-16T18:24:10+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -16330,11 +16473,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "open-telemetry/api": 20,
-        "open-telemetry/gen-otlp-protobuf": 20,
-        "open-telemetry/sdk": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -17,6 +17,7 @@ use App\Infrastructure\Service\PaginatorService;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
+use Danilovl\OpenTelemetryBundle\OpenTelemetry\Interfaces\TracingSpanServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
@@ -27,7 +28,8 @@ class HomepageCache
         private readonly AdapterInterface $cache,
         private readonly ParameterServiceInterface $parameterService,
         private readonly PaginatorService $paginatorService,
-        private readonly SystemEventRecipientFacade $systemEventRecipientFacade
+        private readonly SystemEventRecipientFacade $systemEventRecipientFacade,
+        private readonly TracingSpanServiceInterface $tracingSpanService
     ) {}
 
     /**
@@ -35,6 +37,8 @@ class HomepageCache
      */
     public function createHomepagePaginator(User $user, int $page = 1): array
     {
+        $span = $this->tracingSpanService->start('CreateHomepagePaginator');
+
         $cacheItem = $this->cache->getItem(
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
@@ -60,6 +64,8 @@ class HomepageCache
 
             $this->cache->save($cacheItem);
         }
+
+        $span->end();
 
         return $pagePaginators;
     }
