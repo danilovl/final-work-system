@@ -26,7 +26,7 @@ class SecurityDispatcherTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherService::class);
         $securityDispatcher = new SecurityDispatcher($eventDispatcher);
 
-        $resetPassword = $this->createMock(ResetPassword::class);
+        $resetPassword = $this->createStub(ResetPassword::class);
 
         $eventDispatcher->expects($this->once())
             ->method('dispatch')
