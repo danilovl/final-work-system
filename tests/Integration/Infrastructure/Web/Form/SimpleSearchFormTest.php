@@ -12,7 +12,7 @@
 
 namespace App\Tests\Integration\Infrastructure\Web\Form;
 
-use App\Application\Model\SearchModel;
+use App\Infrastructure\Web\Form\Model\SearchModel;
 use App\Infrastructure\Web\Form\SimpleSearchForm;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormInterface;
