@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Bus\Command\CreateWorkCategory;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
 

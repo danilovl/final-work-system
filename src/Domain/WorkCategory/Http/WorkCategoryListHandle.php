@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Http;
 
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\WorkCategory\Bus\Query\WorkCategoryList\{
     GetWorkCategoryListQuery,
     GetWorkCategoryListQueryResult

@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Bus\Command\CreateWorkCategory;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 

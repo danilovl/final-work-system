@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Bus\Query\WorkCategories;
 
-use App\Application\Interfaces\Bus\QueryHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\QueryHandlerInterface;
 use App\Domain\WorkCategory\Facade\WorkCategoryFacade;
 
 readonly class GetWorkCategoriesQueryHandler implements QueryHandlerInterface

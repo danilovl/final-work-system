@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
 use App\Infrastructure\Service\{
     RequestService,
     EntityManagerService

@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Facade;
 
-use App\Application\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Repository\WorkCategoryRepository;
 use Doctrine\ORM\{

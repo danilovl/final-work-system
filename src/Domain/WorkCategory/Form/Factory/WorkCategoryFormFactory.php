@@ -13,10 +13,7 @@
 namespace App\Domain\WorkCategory\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\{
-    RuntimeException,
-    ConstantNotFoundException
-};
+use App\Infrastructure\Exception\{ConstantNotFoundException, RuntimeException};
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;
 use App\Domain\WorkCategory\Model\WorkCategoryModel;

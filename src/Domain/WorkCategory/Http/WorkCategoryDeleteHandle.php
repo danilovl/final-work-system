@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkCategory\Http;
 
-use App\Application\Constant\FlashTypeConstant;
+use App\Infrastructure\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\{
     RequestService,
     EntityManagerService
