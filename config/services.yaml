@@ -73,6 +73,7 @@ services:
   App\Domain\ConversationMessage\Repository\Elastica\ConversationMessageSearch:
     arguments:
       $transformedFinderConversationMessage: '@fos_elastica.finder.conversation_message'
+      $indexConversationMessage: '@fos_elastica.index.conversation_message'
 
   App\Domain\Task\Repository\Elastica\TaskSearch:
     arguments:
