@@ -35,13 +35,12 @@ use App\Domain\User\Repository\UserRepository;
 use App\Domain\UserGroup\Entity\Group;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkCategory\Entity\WorkCategory;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     Criteria,
     Collection,
     ArrayCollection
 };
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -78,17 +77,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     private ?string $plainPassword = null;
 
-    #[ORM\Column(name: 'last_login', type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $lastLogin = null;
+    #[ORM\Column(name: 'last_login', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $lastLogin = null;
 
-    #[ORM\Column(name: 'last_requested_at', type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $lastRequestedAt = null;
+    #[ORM\Column(name: 'last_requested_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $lastRequestedAt = null;
 
     #[ORM\Column(name: 'confirmation_token', type: Types::STRING, nullable: true)]
     private ?string $confirmationToken = null;
 
-    #[ORM\Column(name: 'password_requested_at', type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $passwordRequestedAt = null;
+    #[ORM\Column(name: 'password_requested_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $passwordRequestedAt = null;
 
     #[ORM\Column(name: 'username_canonical', type: Types::STRING, nullable: true)]
     private ?string $usernameCanonical = null;
@@ -105,8 +104,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'enabled_email_notification', type: Types::BOOLEAN, options: ['default' => '1'])]
     private bool $enabledEmailNotification = true;
 
-    #[ORM\Column(name: 'date_of_birth', type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $dateOfBirth = null;
+    #[ORM\Column(name: 'date_of_birth', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $dateOfBirth = null;
 
     #[ORM\Column(name: 'firstname', type: Types::STRING, nullable: false)]
     private string $firstname;
@@ -486,37 +485,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->plainPassword = $plainPassword;
     }
 
-    public function getLastLogin(): ?DateTime
+    public function getLastLogin(): ?DateTimeImmutable
     {
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?DateTime $lastLogin): void
+    public function setLastLogin(?DateTimeImmutable $lastLogin): void
     {
         $this->lastLogin = $lastLogin;
     }
 
     public function updateLastLogin(): void
     {
-        $this->lastLogin = new DateTime;
+        $this->lastLogin = new DateTimeImmutable;
     }
 
-    public function getLastRequestedAt(): ?DateTime
+    public function getLastRequestedAt(): ?DateTimeImmutable
     {
         return $this->lastRequestedAt;
     }
 
-    public function setLastRequestedAt(?DateTime $lastRequestedAt): void
+    public function setLastRequestedAt(?DateTimeImmutable $lastRequestedAt): void
     {
         $this->lastRequestedAt = $lastRequestedAt;
     }
 
-    public function getPasswordRequestedAt(): ?DateTime
+    public function getPasswordRequestedAt(): ?DateTimeImmutable
     {
         return $this->passwordRequestedAt;
     }
 
-    public function setPasswordRequestedAt(?DateTime $passwordRequestedAt): void
+    public function setPasswordRequestedAt(?DateTimeImmutable $passwordRequestedAt): void
     {
         $this->passwordRequestedAt = $passwordRequestedAt;
     }
@@ -864,7 +863,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
             return false;
         }
 
-        return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTimeImmutable;
+        return $this->lastRequestedAt->modify('+5 min') > new DateTimeImmutable;
     }
 
     public function serialize(): string

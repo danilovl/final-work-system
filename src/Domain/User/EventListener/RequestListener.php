@@ -16,7 +16,7 @@ use Override;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Service\UserService;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -55,7 +55,7 @@ readonly class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $user->setLastRequestedAt(new DateTime);
+        $user->setLastRequestedAt(new DateTimeImmutable);
         $this->entityManagerService->flush();
     }
 }
