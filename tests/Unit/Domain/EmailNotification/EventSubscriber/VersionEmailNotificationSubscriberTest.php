@@ -18,7 +18,9 @@ use App\Domain\User\Entity\User;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkService;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = VersionEmailNotificationSubscriber::class;
@@ -44,7 +46,7 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
         $this->versionEmailNotificationSubscriber = $this->subscriber;
     }
 
-    public function testOnResetPasswordToken(): void
+    public function testOnVersionEvents(): void
     {
         $this->expectNotToPerformAssertions();
 

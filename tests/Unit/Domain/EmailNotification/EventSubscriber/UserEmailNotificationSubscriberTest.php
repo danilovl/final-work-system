@@ -15,7 +15,9 @@ namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 use App\Domain\EmailNotification\EventSubscriber\UserEmailNotificationSubscriber;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = UserEmailNotificationSubscriber::class;
@@ -40,7 +42,7 @@ class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $this->userEmailNotificationSubscriber = $this->subscriber;
     }
 
-    public function testOnResetPasswordToken(): void
+    public function testOnUserEvents(): void
     {
         $this->expectNotToPerformAssertions();
 

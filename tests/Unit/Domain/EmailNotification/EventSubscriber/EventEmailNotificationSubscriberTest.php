@@ -21,7 +21,9 @@ use App\Domain\Event\EventDispatcher\GenericEvent\{
 };
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Entity\User;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = EventEmailNotificationSubscriber::class;

@@ -17,7 +17,9 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = TaskEmailNotificationSubscriber::class;
@@ -42,7 +44,7 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $this->taskEmailNotificationSubscriber = $this->subscriber;
     }
 
-    public function testOnResetPasswordToken(): void
+    public function testOnTaskEvents(): void
     {
         $this->expectNotToPerformAssertions();
 

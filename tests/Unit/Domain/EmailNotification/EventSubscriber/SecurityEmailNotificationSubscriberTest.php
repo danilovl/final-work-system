@@ -16,7 +16,9 @@ use App\Domain\EmailNotification\EventSubscriber\SecurityEmailNotificationSubscr
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Domain\User\Entity\User;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = SecurityEmailNotificationSubscriber::class;

@@ -16,7 +16,9 @@ use App\Domain\EmailNotification\EventSubscriber\WorkEmailNotificationSubscriber
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = WorkEmailNotificationSubscriber::class;
@@ -41,7 +43,7 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $this->workEmailNotificationSubscriber = $this->subscriber;
     }
 
-    public function testOnResetPasswordToken(): void
+    public function testOnWorkEvents(): void
     {
         $this->expectNotToPerformAssertions();
 

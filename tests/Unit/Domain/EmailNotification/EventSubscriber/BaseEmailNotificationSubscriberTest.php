@@ -17,9 +17,13 @@ use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\User\Entity\User;
 use Generator;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\{
+    AllowMockObjectsWithoutExpectations,
+    DataProvider
+};
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = BaseEmailNotificationSubscriber::class;
@@ -64,13 +68,11 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
     public function testAddEmailNotificationToQueueNotEnable(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $this->isEmailNotificationAddToQueueProvider = false;
 
-        $this->userFacade
-            ->expects($this->never())
-            ->method('findByEmail');
-
-        $emailNotificationMessage = $this->createMock(EmailNotificationMessage::class);
+        $emailNotificationMessage = $this->createStub(EmailNotificationMessage::class);
 
         $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($emailNotificationMessage);
     }

@@ -19,7 +19,9 @@ use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = DocumentEmailNotificationSubscriber::class;
@@ -33,9 +35,8 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
         $recipient = new User;
         $recipient->setEmail('test@example.com');
 
-        $userWorkService = $this->createMock(UserWorkService::class);
-        $userWorkService->expects($this->any())
-            ->method('getActiveAuthor')
+        $userWorkService = $this->createStub(UserWorkService::class);
+        $userWorkService->method('getActiveAuthor')
             ->willReturn(new ArrayCollection([$recipient]));
 
         $this->subscriber = new DocumentEmailNotificationSubscriber(

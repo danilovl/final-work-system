@@ -26,7 +26,10 @@ use App\Infrastructure\Service\TwigRenderService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Generator;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\{
+    AllowMockObjectsWithoutExpectations,
+    DataProvider
+};
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -40,6 +43,7 @@ use Symfony\Component\Messenger\{
     MessageBusInterface
 };
 
+#[AllowMockObjectsWithoutExpectations]
 abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 {
     protected static string $classSubscriber;
@@ -48,15 +52,15 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 
     protected MockObject&UserFacade $userFacade;
 
-    protected MockObject&TwigRenderService $twigRenderService;
+    protected TwigRenderService $twigRenderService;
 
-    protected MockObject&TranslatorService $translator;
+    protected TranslatorService $translator;
 
     protected MockObject&EmailNotificationFactory $emailNotificationFactory;
 
-    protected MockObject&EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider;
+    protected EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider;
 
-    protected MockObject&EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider;
+    protected EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider;
 
     protected ParameterServiceInterface $parameterService;
 
@@ -73,17 +77,15 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
         $this->dispatcher = new EventDispatcher;
 
         $this->userFacade = $this->createMock(UserFacade::class);
-        $this->twigRenderService = $this->createMock(TwigRenderService::class);
-        $this->translator = $this->createMock(TranslatorService::class);
+        $this->twigRenderService = $this->createStub(TwigRenderService::class);
+        $this->translator = $this->createStub(TranslatorService::class);
         $this->translator
-            ->expects($this->any())
             ->method('trans')
             ->willReturn('trans');
 
         $this->emailNotificationFactory = $this->createMock(EmailNotificationFactory::class);
 
         $this->emailNotificationFactory
-            ->expects($this->any())
             ->method('createFromModel')
             ->willReturn(new EmailNotification);
 
@@ -91,7 +93,6 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
         $envelope = new Envelope(new stdClass);
 
         $this->bus
-            ->expects($this->any())
             ->method('dispatch')
             ->willReturn($envelope);
 
@@ -108,17 +109,15 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
         $this->isEmailNotificationAddToQueueProvider = true;
         $this->isEmailNotificationEnableMessengerProvider = true;
 
-        $this->emailNotificationAddToQueueProvider = $this->createMock(EmailNotificationAddToQueueProvider::class);
+        $this->emailNotificationAddToQueueProvider = $this->createStub(EmailNotificationAddToQueueProvider::class);
         $this->emailNotificationAddToQueueProvider
-            ->expects($this->any())
             ->method('isEnable')
             ->willReturnCallback(function (): bool {
                 return $this->isEmailNotificationAddToQueueProvider;
             });
 
-        $this->emailNotificationEnableMessengerProvider = $this->createMock(EmailNotificationEnableMessengerProvider::class);
-        $this->emailNotificationAddToQueueProvider
-            ->expects($this->any())
+        $this->emailNotificationEnableMessengerProvider = $this->createStub(EmailNotificationEnableMessengerProvider::class);
+        $this->emailNotificationEnableMessengerProvider
             ->method('isEnable')
             ->willReturnCallback(function (): bool {
                 return $this->isEmailNotificationEnableMessengerProvider;
