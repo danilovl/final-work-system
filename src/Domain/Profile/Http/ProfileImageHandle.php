@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\{
     Response,
     BinaryFileResponse
 };
-use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Infrastructure\Interfaces\Bus\QueryBusInterface;
 use App\Domain\Media\Bus\Query\MediaFile\{GetMediaFileQuery, GetMediaFileQueryResult};
 
 readonly class ProfileImageHandle

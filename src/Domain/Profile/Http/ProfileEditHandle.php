@@ -12,7 +12,7 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
     TwigRenderService

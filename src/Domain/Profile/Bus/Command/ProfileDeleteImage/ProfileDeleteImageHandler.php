@@ -12,7 +12,7 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileDeleteImage;
 
-use App\Application\Interfaces\Bus\CommandHandlerInterface;
+use App\Infrastructure\Interfaces\Bus\CommandHandlerInterface;
 use App\Infrastructure\Service\EntityManagerService;
 
 readonly class ProfileDeleteImageHandler implements CommandHandlerInterface

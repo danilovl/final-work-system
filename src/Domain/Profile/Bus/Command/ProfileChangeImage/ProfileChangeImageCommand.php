@@ -12,7 +12,7 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileChangeImage;
 
-use App\Application\Interfaces\Bus\CommandInterface;
+use App\Infrastructure\Interfaces\Bus\CommandInterface;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Messenger\Attribute\AsMessage;

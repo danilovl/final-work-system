@@ -12,12 +12,9 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileCreateImageWebCamera;
 
-use App\Application\Exception\RuntimeException;
+use App\Infrastructure\Exception\RuntimeException;
 use App\Application\Helper\FileHelper;
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Application\Service\ResizeImageService;
 use App\Domain\Media\Bus\Command\SaveUserProfileImage\SaveUserProfileImageCommand;
 use App\Domain\Media\Entity\Media;

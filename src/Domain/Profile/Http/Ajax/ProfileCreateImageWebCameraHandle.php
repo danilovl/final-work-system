@@ -12,8 +12,8 @@
 
 namespace App\Domain\Profile\Http\Ajax;
 
-use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Constant\AjaxJsonTypeConstant;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Profile\Bus\Command\ProfileCreateImageWebCamera\ProfileCreateImageWebCameraCommand;
 use App\Domain\User\Service\UserService;

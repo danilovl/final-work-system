@@ -12,10 +12,7 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileChangeImage;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\Media\Bus\Command\SaveUserProfileImage\SaveUserProfileImageCommand;
 use App\Domain\Media\Entity\Media;
 use App\Domain\User\Bus\Command\ChangeUserProfileImage\ChangeUserProfileImageCommand;

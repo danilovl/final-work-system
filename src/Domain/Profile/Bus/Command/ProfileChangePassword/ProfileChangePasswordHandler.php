@@ -12,10 +12,7 @@
 
 namespace App\Domain\Profile\Bus\Command\ProfileChangePassword;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\User\Bus\Command\ChangeUserPassword\ChangeUserPasswordCommand;
 
 readonly class ProfileChangePasswordHandler implements CommandHandlerInterface

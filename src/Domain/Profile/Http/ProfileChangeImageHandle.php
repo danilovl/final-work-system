@@ -12,7 +12,7 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\Profile\Bus\Command\ProfileChangeImage\ProfileChangeImageCommand;

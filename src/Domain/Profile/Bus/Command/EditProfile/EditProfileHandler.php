@@ -12,10 +12,7 @@
 
 namespace App\Domain\Profile\Bus\Command\EditProfile;
 
-use App\Application\Interfaces\Bus\{
-    CommandBusInterface,
-    CommandHandlerInterface
-};
+use App\Infrastructure\Interfaces\Bus\{CommandBusInterface, CommandHandlerInterface};
 use App\Domain\User\Bus\Command\SaveUser\SaveUserCommand;
 
 readonly class EditProfileHandler implements CommandHandlerInterface
