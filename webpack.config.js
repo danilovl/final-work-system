@@ -29,7 +29,6 @@ Encore
         to: './tinymce/langs/[name].[ext]',
         pattern: /.*/
     }])
-    .enableVersioning()
     .addStyleEntry('app/css', [
         'bootstrap/dist/css/bootstrap.css',
         'font-awesome/css/font-awesome.min.css',
@@ -37,7 +36,7 @@ Encore
         'pnotify/dist/pnotify.buttons.css',
         'pnotify/dist/pnotify.nonblock.css',
         'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
-        'switchery/standalone/switchery.css',
+        'switchery-latest/dist/switchery.min.css',
         'select2/dist/css/select2.min.css',
         'icheck/skins/flat/green.css',
         'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
@@ -58,7 +57,6 @@ Encore
                     './node_modules/smartresize.js/dist/smartresize.min.js',
                     './node_modules/bootstrap/dist/js/bootstrap.min.js',
                     './node_modules/tinymce/tinymce.min.js',
-                    './node_modules/tinymce/themes/modern/theme.js',
                     './node_modules/pnotify/dist/pnotify.js',
                     './node_modules/pnotify/dist/pnotify.buttons.js',
                     './node_modules/pnotify/dist/pnotify.nonblock.js',

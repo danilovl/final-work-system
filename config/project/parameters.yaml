@@ -67,7 +67,7 @@ parameters:
         page: 1
         limit: 15
   hashid: '^[a-zA-Z0-9]{10}$'
-  default_user_image: 'images/user.png'
+  default_user_image: 'build/images/user.png'
   event_calendar:
     free_color: '#3b91ad'
     reserved_color: '#f00'
