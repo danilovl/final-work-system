@@ -12,6 +12,7 @@
 
 namespace App\Domain\User\Http;
 
+use App\Domain\Work\Model\WorkSearchStatusModel;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserList\{
     GetUserListQuery,
@@ -59,18 +60,17 @@ readonly class UserListHandle
         $showSearchTab = true;
         $workStatus = null;
 
+        $workSearchStatusModel = new WorkSearchStatusModel;
         $form = $this->formFactory
-            ->create(WorkSearchStatusForm::class)
+            ->create(WorkSearchStatusForm::class, $workSearchStatusModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $openSearchTab = true;
 
             if ($form->isValid()) {
-                /** @var ArrayCollection<WorkStatus> $workStatuses */
-                $workStatuses = $form->get('status')->getData();
                 /** @var WorkStatus[] $workStatus */
-                $workStatus = $workStatuses->toArray();
+                $workStatus = $workSearchStatusModel->status->toArray();
             }
         }
 
