@@ -13,11 +13,15 @@
 namespace App\Domain\User\Controller\Api;
 
 use App\Domain\User\Constant\UserRoleConstant;
-use App\Domain\User\DTO\Api\Output\UserListOutput;
+use App\Domain\User\DTO\Api\Output\{
+    UserListOutput,
+    UserSearchOutput
+};
 use App\Domain\User\DTO\Api\UserDetailDTO;
 use App\Domain\User\Http\Api\{
     UserListHandle,
-    UserDetailHandle
+    UserDetailHandle,
+    UserSearchHandle
 };
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use Nelmio\ApiDocBundle\Attribute\Model;
@@ -33,7 +37,8 @@ readonly class UserController
     public function __construct(
         private AuthorizationCheckerService $authorizationCheckerService,
         private UserDetailHandle $userDetailHandle,
-        private UserListHandle $userListHandle
+        private UserListHandle $userListHandle,
+        private UserSearchHandle $userSearchHandle
     ) {}
 
     #[OA\Get(
@@ -92,5 +97,50 @@ readonly class UserController
         $this->authorizationCheckerService->denyAccessUnlessGranted(UserRoleConstant::SUPERVISOR->value);
 
         return $this->userListHandle->__invoke($request, $type);
+    }
+
+    #[OA\Get(
+        path: '/api/key/users/search/{type}',
+        description: 'Searches users by term with pagination filtered by role (author, opponent, consultant).',
+        summary: 'User search'
+    )]
+    #[OA\Parameter(
+        name: 'type',
+        description: 'User relation to a work to filter by (author, opponent, consultant)',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'string', enum: ['author', 'opponent', 'consultant'])
+    )]
+    #[OA\Parameter(
+        name: 'search',
+        description: 'Search query for username, firstname, or lastname',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'string')
+    )]
+    #[OA\Parameter(
+        name: 'page',
+        description: 'Page number for pagination',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1)
+    )]
+    #[OA\Parameter(
+        name: 'limit',
+        description: 'Items per page for pagination',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User search result',
+        content: new OA\JsonContent(ref: new Model(type: UserSearchOutput::class))
+    )]
+    public function search(Request $request, string $type): JsonResponse
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(UserRoleConstant::SUPERVISOR->value);
+
+        return $this->userSearchHandle->__invoke($request, $type);
     }
 }
