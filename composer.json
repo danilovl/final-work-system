@@ -90,6 +90,7 @@
         "webonyx/graphql-php": "^15.0.1"
     },
     "require-dev": {
+        "dg/bypass-finals": "^1.11",
         "friendsofphp/php-cs-fixer": "^3.92.5",
         "phpstan/extension-installer": "^1.4.3",
         "phpstan/phpstan": "^2.1.33",

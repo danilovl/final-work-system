@@ -61,4 +61,12 @@
             <file>src/Application/EventListener/LoggableListener.php</file>
         </exclude>
     </source>
+    <extensions>
+        <bootstrap class="DG\BypassFinals\PHPUnitExtension">
+            <parameter name="allowPaths" value="*/src/*"/>
+            <parameter name="bypassFinal" value="true"/>
+            <parameter name="bypassReadOnly" value="false"/>
+            <parameter name="cacheDirectory" value="var/cache/bypass-finals"/>
+        </bootstrap>
+    </extensions>
 </phpunit>
