@@ -13,6 +13,7 @@
 namespace App\Domain\EventSchedule\Model;
 
 use App\Domain\EventSchedule\Entity\EventSchedule;
+use App\Domain\EventScheduleTemplate\Model\EventScheduleTemplateModel;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\{
     Collection,
@@ -29,6 +30,9 @@ class EventScheduleModel
 
     public User $owner;
 
+    /**
+     * @var Collection<int, EventScheduleTemplateModel>
+     */
     public Collection $templates;
 
     public function __construct()
@@ -43,7 +47,9 @@ class EventScheduleModel
         $model->name = $eventSchedule->getName();
         $model->description = $eventSchedule->getDescription();
         $model->owner = $eventSchedule->getOwner();
-        $model->templates = $eventSchedule->getTemplates();
+        foreach ($eventSchedule->getTemplates() as $template) {
+            $model->templates->add(EventScheduleTemplateModel::fromEventScheduleTemplate($template));
+        }
 
         return $model;
     }
