@@ -16,7 +16,7 @@ use App\Application\Traits\Model\ActiveTrait;
 use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
@@ -34,7 +34,7 @@ class TaskModel
 
     public bool $complete = false;
 
-    public ?DateTime $deadline = null;
+    public ?DateTimeImmutable $deadline = null;
 
     public User $owner;
 

@@ -53,6 +53,7 @@ class TaskForm extends AbstractType
                 'required' => false
             ])
             ->add('deadline', DateType::class, [
+                'input' => 'datetime_immutable',
                 'required' => true,
                 'html5' => false,
                 'widget' => 'single_text',

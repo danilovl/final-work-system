@@ -22,7 +22,7 @@ use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\Task\Repository\TaskRepository;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\{
     ArrayCollection,
     Collection
@@ -66,8 +66,8 @@ class Task
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
-    #[ORM\Column(name: 'deadline', type: Types::DATE_MUTABLE, nullable: true)]
-    private ?DateTime $deadline = null;
+    #[ORM\Column(name: 'deadline', type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $deadline = null;
 
     public function __construct()
     {
@@ -114,12 +114,12 @@ class Task
         $this->notifyComplete = $notifyComplete;
     }
 
-    public function getDeadline(): ?DateTime
+    public function getDeadline(): ?DateTimeImmutable
     {
         return $this->deadline;
     }
 
-    public function setDeadline(?DateTime $deadline): void
+    public function setDeadline(?DateTimeImmutable $deadline): void
     {
         $this->deadline = $deadline;
     }

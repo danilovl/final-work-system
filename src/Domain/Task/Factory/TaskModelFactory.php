@@ -16,7 +16,7 @@ use App\Domain\Task\DTO\Api\Input\TaskInput;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Facade\WorkFacade;
-use DateTime;
+use DateTimeImmutable;
 
 readonly class TaskModelFactory
 {
@@ -29,7 +29,7 @@ readonly class TaskModelFactory
         $taskModel->description = $input->description;
         $taskModel->complete = $input->complete;
         $taskModel->active = $input->active;
-        $taskModel->deadline = new DateTime($input->deadline);
+        $taskModel->deadline = new DateTimeImmutable($input->deadline);
         $taskModel->work = $this->workFacade->getById($input->workId);
         $taskModel->owner = $owner;
 
