@@ -4,7 +4,7 @@
     <div class="right_col" role="main">
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>
@@ -22,56 +22,56 @@
                     <div class="x_content">
                         <div class="ibox-content">
                             <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-12">
 
                                     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                                    <div class="item form-group">
-                                        {{ form_label(form.degreeBefore,  'app.form.label.degree_before' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.degreeBefore,  'app.form.label.degree_before' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.degreeBefore, {'attr': {'class': 'form-control'}} ) }}
                                         </div>
                                         {% if not form.degreeBefore.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.degreeBefore) }}
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <div class="item form-group">
-                                        {{ form_label(form.firstName,  'app.form.label.first_name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.firstName,  'app.form.label.first_name' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}} ) }}
                                         </div>
                                         {% if not form.firstName.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.firstName) }}
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <div class="item form-group">
-                                        {{ form_label(form.lastName, 'app.form.label.last_name', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.lastName, 'app.form.label.last_name', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                         {% if not form.lastName.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.lastName) }}
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <div class="item form-group">
-                                        {{ form_label(form.degreeAfter, 'app.form.label.degree_after', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.degreeAfter, 'app.form.label.degree_after', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.degreeAfter, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                         {% if not form.degreeAfter.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.degreeAfter) }}
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <div class="item form-group">
-                                        {{ form_label(form.phone, 'app.form.label.phone', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.phone, 'app.form.label.phone', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.phone, {
                                                 'attr': {
                                                     'data-controller': 'input-mask',
@@ -81,14 +81,14 @@
                                             }) }}
                                         </div>
                                         {% if not form.phone.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.phone) }}
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <div class="item form-group">
-                                        {{ form_label(form.email, 'app.form.label.email', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.email, 'app.form.label.email', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.email, {
                                                 'attr': {
                                                     'data-controller': 'input-mask',
@@ -98,20 +98,20 @@
                                             }) }}
                                         </div>
                                         {% if not form.email.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.email) }}
                                             </div>
                                         {% endif %}
                                     </div>
 
                                     {% if form.username is defined %}
-                                        <div class="item form-group">
-                                            {{ form_label(form.username, 'app.form.label.username', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.username, 'app.form.label.username', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
                                             </div>
                                             {% if not form.username.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.username) }}
                                                 </div>
                                             {% endif %}
@@ -119,9 +119,9 @@
                                     {% endif %}
 
                                     {% if form.role is defined %}
-                                        <div class="item form-group">
-                                            {{ form_label(form.role, 'app.form.label.role', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.role, 'app.form.label.role', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.role, {
                                                     'attr': {
                                                         'data-controller': 'select2',
@@ -130,16 +130,16 @@
                                                 }) }}
                                             </div>
                                             {% if not form.role.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.role) }}
                                                 </div>
                                             {% endif %}
                                         </div>
                                     {% endif %}
 
-                                    <div class="item form-group">
-                                        {{ form_label(form.groups, 'app.form.label.group', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group row">
+                                        {{ form_label(form.groups, 'app.form.label.group', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-12">
                                             {{ form_widget(form.groups, {
                                                 'attr': {
                                                     'data-controller': 'select2',
@@ -148,14 +148,14 @@
                                             }) }}
                                         </div>
                                         {% if not form.groups.vars.valid %}
-                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                            <div class="col-md-3 col-sm-3 col-12 red">
                                                 {{ form_errors(form.groups) }}
                                             </div>
                                         {% endif %}
                                     </div>
 
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <div class="form-group row">
+                                        <div class="col-md-6 col-sm-6 col-12 offset-md-3">
                                             <input id="user-button-action"
                                                    type="submit"
                                                    class="btn btn-success"

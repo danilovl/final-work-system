@@ -17,16 +17,16 @@
 
                 {{ form_start(form) }}
                 <h1>{{ 'app.form.label.new_password' | trans }}</h1>
-                <div class="item form-group">
-                    {{ form_label(form.plainPassword.first,  'app.form.label.new_password' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="item form-group row">
+                    {{ form_label(form.plainPassword.first,  'app.form.label.new_password' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-12'}}) }}
+                    <div class="col-md-12 col-sm-12 col-12">
                         {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}} ) }}
                     </div>
                 </div>
 
-                <div class="item form-group">
-                    {{ form_label(form.plainPassword.second,  'app.form.label.new_password_confirmation' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="item form-group row">
+                    {{ form_label(form.plainPassword.second,  'app.form.label.new_password_confirmation' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-12'}}) }}
+                    <div class="col-md-12 col-sm-12 col-12">
                         {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}} ) }}
                     </div>
                 </div>

@@ -38,20 +38,15 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button"
-                                                class="close"
-                                                data-dismiss="modal"
-                                                aria-hidden="true">
-                                            ×
-                                        </button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div style="padding: 5px 20px;">
 
                                             {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'calendar-manager-create-form'}}) }}
-                                            <div class="item form-group">
-                                                {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <div class="item form-group row">
+                                                {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-12">
                                                     {{ form_widget(form.type, {
                                                         'attr': {
                                                             'data-controller': 'select2',
@@ -62,15 +57,15 @@
                                                     }) }}
                                                 </div>
                                             </div>
-                                            <div class="item form-group">
-                                                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <div class="item form-group row">
+                                                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-12">
                                                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                                                 </div>
                                             </div>
-                                            <div class="item form-group">
-                                                {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <div class="item form-group row">
+                                                {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-12">
                                                     {{ form_widget(form.address, {
                                                         'attr': {
                                                             'data-controller': 'select2',
@@ -81,9 +76,9 @@
                                                     }) }}
                                                 </div>
                                             </div>
-                                            <div class="item form-group">
-                                                {{ form_label(form.participant,  'app.form.label.appointment_participant' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <div class="item form-group row">
+                                                {{ form_label(form.participant,  'app.form.label.appointment_participant' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-12">
                                                     {{ form_widget(form.participant, {
                                                         'attr': {
                                                             'data-controller': 'select2',
@@ -94,9 +89,9 @@
                                                     }) }}
                                                 </div>
                                             </div>
-                                            <div class="item form-group">
-                                                {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="item form-group row">
+                                                {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-12">
                                                     <i class="fa-regular fa-calendar form-control-feedback left"
                                                        aria-hidden="true">
                                                     </i>
@@ -109,9 +104,9 @@
                                                     }) }}
                                                 </div>
                                             </div>
-                                            <div class="item form-group">
-                                                {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="item form-group row">
+                                                {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-12">
                                                 <span class="fa-regular fa-calendar form-control-feedback left"
                                                       aria-hidden="true">
                                                 </span>
@@ -132,10 +127,10 @@
                                         <button type="button"
                                                 id="event_create"
                                                 class="btn btn-primary">
-                                            <i id="event_create_load" class="fa-solid fa-arrows-rotate fa-spin hide"></i>
+                                            <i id="event_create_load" class="fa-solid fa-arrows-rotate fa-spin d-none"></i>
                                             {{ 'app.form.action.create' | trans }}
                                         </button>
-                                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">
+                                        <button type="button" class="btn btn-default antoclose" data-bs-dismiss="modal">
                                             {{ 'app.form.action.close' | trans }}
                                         </button>
                                     </div>
@@ -146,20 +141,15 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button"
-                                                class="close"
-                                                data-dismiss="modal">
-                                            <span aria-hidden="true">×</span>
-                                            <span class="sr-only"> {{ 'app.form.action.close' | trans }} </span>
-                                        </button>
                                         <h4 id="modal-title" class="modal-title"></h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-footer">
                                         <button id="event-delete"
                                                 type="button"
                                                 class="btn btn-danger"
                                                 data-event-id=""
-                                                data-dismiss="modal">
+                                                data-bs-dismiss="modal">
                                             {{ 'app.form.action.delete' | trans }}
                                         </button>
 
@@ -170,7 +160,7 @@
                                         </a>
                                         <button type="button"
                                                 class="btn btn-default"
-                                                data-dismiss="modal">
+                                                data-bs-dismiss="modal">
                                             {{ 'app.form.action.close' | trans }}
                                         </button>
                                     </div>

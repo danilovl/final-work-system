@@ -30,20 +30,15 @@
                              <div class="modal-dialog">
                                  <div class="modal-content">
                                      <div class="modal-header">
-                                         <button type="button"
-                                                 class="close"
-                                                 data-dismiss="modal">
-                                             <span aria-hidden="true">×</span>
-                                             <span class="sr-only">close</span>
-                                         </button>
                                          <h4 id="modal-title" class="modal-title"></h4>
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                      </div>
                                      <div id="modal-work-form">
 
                                          {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                                         <div class="item form-group">
-                                             {{ form_label(form.work,  'app.form.label.work' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                             <div class="col-md-9 col-sm-9 col-xs-12">
+                                         <div class="item form-group row">
+                                             {{ form_label(form.work,  'app.form.label.work' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                             <div class="col-md-9 col-sm-9 col-12">
                                                  {{ form_widget(form.work, {
                                                      'attr': {
                                                          'data-controller': 'select2',
@@ -53,7 +48,7 @@
                                                  }) }}
                                              </div>
                                              {% if not form.work.vars.valid %}
-                                                 <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                 <div class="col-md-3 col-sm-3 col-12 red">
                                                      {{ form_errors(form.work) }}
                                                  </div>
                                              {% endif %}
@@ -65,7 +60,7 @@
                                          <a id="event-reservation"
                                             type="button"
                                             class="btn btn-success"
-                                            data-dismiss="modal">
+                                            data-bs-dismiss="modal">
                                              {{ 'app.form.action.reserve' | trans }}
                                          </a>
                                          <a id="event-detail"
@@ -75,7 +70,7 @@
                                          </a>
                                          <button type="button"
                                                  class="btn btn-default"
-                                                 data-dismiss="modal">
+                                                 data-bs-dismiss="modal">
                                              {{ 'app.form.action.close' | trans }}
                                          </button>
                                      </div>

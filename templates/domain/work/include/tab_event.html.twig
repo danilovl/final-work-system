@@ -1,6 +1,6 @@
 {% if is_work_role(work, app_user(), 'isAuthorSupervisor') %}
     <div role="tabpanel"
-            {% if activeTab == 'event' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+            {% if activeTab == 'event' %}  class="tab-pane fade active show" {% else %} class="tab-pane fade" {% endif %}
          id="tab-event"
          aria-labelledby="profile-tab">
 

@@ -60,8 +60,8 @@
                     </a>
                 {% endif %}
 
-                <a data-toggle="modal"
-                   data-target="#modalWindow"
+                <a data-bs-toggle="modal"
+                   data-bs-target="#modalWindow"
                    class="btn btn-warning btn-xs"
                    href="{{ path('event_edit', { 'id': event.id | hashids_encode }) }}">
                     <i class="fa-solid fa-pencil"></i>

@@ -19,21 +19,21 @@
     <div class="x_content" {% if openSearchTab == false %} style="display: none;" {% endif %}>
 
         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-        <div class="item form-group">
-            {{ form_label(form.title,  'app.form.label.title' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="item form-group row">
+            {{ form_label(form.title,  'app.form.label.title' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-12">
                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}} ) }}
             </div>
         </div>
-        <div class="item form-group">
-            {{ form_label(form.shortcut,  'app.form.label.shortcut' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="item form-group row">
+            {{ form_label(form.shortcut,  'app.form.label.shortcut' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-12">
                 {{ form_widget(form.shortcut, {'attr': {'class': 'form-control'}} ) }}
             </div>
         </div>
-        <div class="item form-group">
-            {{ form_label(form.status, 'app.form.label.status', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="item form-group row">
+            {{ form_label(form.status, 'app.form.label.status', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-12">
                 {{ form_widget(form.status, {
                     'attr': {
                         'data-controller': 'select2',
@@ -43,9 +43,9 @@
                 }) }}
             </div>
         </div>
-        <div class="item form-group">
-            {{ form_label(form.type, 'app.form.label.type', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="item form-group row">
+            {{ form_label(form.type, 'app.form.label.type', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-12">
                 {{ form_widget(form.type, {
                     'attr': {
                         'data-controller': 'select2',
@@ -57,9 +57,9 @@
         </div>
 
         {% if form.supervisor is defined %}
-            <div class="item form-group">
-                {{ form_label(form.supervisor, 'app.form.label.supervisor', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.supervisor, 'app.form.label.supervisor', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-12">
                     {{ form_widget(form.supervisor, {'attr': {'class': 'form-control'}}) }}
 
                     {% if not form.supervisor.vars.valid %}
@@ -72,9 +72,9 @@
         {% endif %}
 
         {% if form.author is defined %}
-            <div class="item form-group">
-                {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-12">
                     {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
 
                     {% if not form.author.vars.valid %}
@@ -87,9 +87,9 @@
         {% endif %}
 
         {% if form.opponent is defined %}
-            <div class="item form-group">
-                {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-12">
                     {{ form_widget(form.opponent, {'attr': {'class': 'form-control'}}) }}
 
                     {% if not form.opponent.vars.valid %}
@@ -102,9 +102,9 @@
         {% endif %}
 
         {% if form.consultant is defined %}
-            <div class="item form-group">
-                {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-12">
                     {{ form_widget(form.consultant, {'attr': {'class': 'form-control'}}) }}
 
                     {% if not form.consultant.vars.valid %}
@@ -117,9 +117,9 @@
         {% endif %}
 
         {% if form.deadline is defined %}
-            <div class="item form-group">
-                {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-12">
                     {{ form_widget(form.deadline, {'attr': {'class': 'form-control has-feedback-left'}}) }}
 
                     {% if not form.deadline.vars.valid %}
@@ -131,8 +131,8 @@
             </div>
         {% endif %}
 
-        <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+        <div class="form-group row">
+            <div class="col-md-6 col-sm-6 col-12 offset-md-3">
                 <input type="submit"
                        id="search-work-button"
                        class="btn btn-success"

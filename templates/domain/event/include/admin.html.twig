@@ -1,4 +1,4 @@
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-12">
     <div class="x_panel">
         <div class="x_title">
 
@@ -18,13 +18,13 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-12">
 
                 {% if event.isOwner(app_user()) %}
                     {% if event.participant and event.participant.work %}
                         <a class="btn btn-app"
-                           data-toggle="modal"
-                           data-target="#modalWindow"
+                           data-bs-toggle="modal"
+                           data-bs-target="#modalWindow"
                            href="{{ path('task_create', { 'id': event.participant.work.id | hashids_encode, 'taskName': event.start | date('Y-m-d') ~ ' Konzultace' }) }}">
                             <i class="fa-solid fa-bars-progress"></i>
                             {{ 'app.form.action.task_create' | trans }}
@@ -39,8 +39,8 @@
                     </a>
                     <a class="btn btn-app"
                        href="{{ path('event_edit', { 'id': event.id | hashids_encode }) }}"
-                       data-toggle="modal"
-                       data-target="#modalWindow">
+                       data-bs-toggle="modal"
+                       data-bs-target="#modalWindow">
                         <i class="fa-regular fa-pen-to-square"></i>
                         {{ 'app.form.action.edit' | trans }}
                     </a>
@@ -62,8 +62,8 @@
 
                     {% if event.address.skype == false and event.start | date('Y-m-d H:i') > "now" | date('Y-m-d H:i') and switchToSkype %}
                         <a class="btn btn-app"
-                           data-toggle="modal"
-                           data-target="#event-switch-to-skype-modal-{{ event.id | hashids_encode }}">
+                           data-bs-toggle="modal"
+                           data-bs-target="#event-switch-to-skype-modal-{{ event.id | hashids_encode }}">
                             <i class="fa-solid fa-skype"></i>
                             {{ 'app.text.switch_to_skype' | trans }}
                         </a>
@@ -75,16 +75,11 @@
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button"
-                                                class="close"
-                                                data-dismiss="modal"
-                                                aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
                                         <h4 class="modal-title">
                                             {{ 'app.text.switch_to_skype' | trans }}
                                             | {{ event }}
                                         </h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <h4>
@@ -95,7 +90,7 @@
                                     <div class="modal-footer">
                                         <button type="button"
                                                 class="btn btn-default"
-                                                data-dismiss="modal">
+                                                data-bs-dismiss="modal">
                                             {{ 'app.form.action.close' | trans }}
                                         </button>
 

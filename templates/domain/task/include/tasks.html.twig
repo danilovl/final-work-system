@@ -23,40 +23,40 @@
             {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans, 'task.createdAt', {}, {'tab':'task'}) }}
         </th>
         <th{% if tasks.isSorted('task.deadline') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
-                data-toggle="tooltip"
-                data-placement="top"
-                data-original-title="{{ 'app.tooltip.task_deadline' | trans }}">
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="{{ 'app.tooltip.task_deadline' | trans }}">
             {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans, 'task.deadline', {}, {'tab':'task'}) }}
         </th>
 
         {% if isSupervisor %}
             <th {% if tasks.isSorted('task.active') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    data-original-title="{{ 'app.tooltip.task_active' | trans }}">
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="{{ 'app.tooltip.task_active' | trans }}">
                 {{ knp_pagination_sortable(tasks, 'app.text.active' | trans, 'task.active', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
             <th{% if tasks.isSorted('task.notifyComplete') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    data-original-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans }}">
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans }}">
                 {{ knp_pagination_sortable(tasks, 'app.text.back_to_revision' | trans, 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
         {% endif %}
 
         {% if isAuthor %}
             <th{% if tasks.isSorted('task.notifyComplete') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    data-original-title="{{ 'app.tooltip.task_back_to_revision' | trans }}">
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="{{ 'app.tooltip.task_back_to_revision' | trans }}">
                 {{ knp_pagination_sortable(tasks, 'app.text.notify_completed' | trans, 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
         {% endif %}
 
         <th{% if tasks.isSorted('task.complete') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
-                data-toggle="tooltip"
-                data-placement="top"
-                data-original-title="{{ 'app.tooltip.task_complete' | trans }}">
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="{{ 'app.tooltip.task_complete' | trans }}">
             {{ knp_pagination_sortable(tasks, 'app.text.complete' | trans, 'task.complete') }}
         </th>
         <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
@@ -133,7 +133,7 @@
                     <a class="btn btn-info btn-xs"
                        role="tab"
                        id="heading-task-description-{{ task.id | hashids_encode }}"
-                       data-toggle="collapse"
+                       data-bs-toggle="collapse"
                        href="#tab-task-description-{{ task.id | hashids_encode }}"
                        aria-expanded="true"
                        aria-controls="tab-task-description-{{ task.id | hashids_encode }}">
@@ -152,8 +152,8 @@
                 {% endif %}
 
                 {% if isSupervisor %}
-                    <a data-toggle="modal"
-                       data-target="#modalWindow"
+                    <a data-bs-toggle="modal"
+                       data-bs-target="#modalWindow"
                        class="btn btn-warning btn-xs"
                        href="{{ path('task_edit', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode }) }}">
                         <i class="fa-solid fa-pencil"></i>
@@ -178,7 +178,7 @@
                          id="tab-task-description-{{ task.id | hashids_encode }}"
                          role="tabpanel"
                          aria-labelledby="heading-task-description-{{ task.id | hashids_encode }}">
-                        <div class="panel-body text-muted well well-sm no-shadow">
+                        <div class="panel-body text-muted card card-body bg-light p-2 mb-3 no-shadow">
                             {{ task.description | sanitize_html('app.rich_text_sanitizer') | away_to | raw }}
                         </div>
                     </div>

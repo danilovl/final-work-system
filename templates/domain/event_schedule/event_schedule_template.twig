@@ -7,9 +7,9 @@
 {% block event_schedule_template_widget %}
     <div class="row">
         <div class="col-md-3">
-            <div class="item form-group">
-                {{ form_label(form.day,  'app.calendar.day.day' | trans({'%count%': 1}) , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.day,  'app.calendar.day.day' | trans({'%count%': 1}) , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-9 col-sm-9 col-12">
                     {{ form_widget(form.day, {'attr': {'class': 'form-control'}} ) }}
                     {% if not form.day.vars.valid %}
                         <div class="red">
@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="item form-group">
-                {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-9 col-sm-9 col-12">
                     {{ form_widget(form.type, {'attr': {'class': 'form-control'}} ) }}
                     {% if not form.type.vars.valid %}
                         <div class="red">
@@ -33,9 +33,9 @@
                 </div>
 
             </div>
-            <div class="item form-group">
-                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-9 col-sm-9 col-12">
                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                     {% if not form.name.vars.valid %}
                         <div class="red">
@@ -45,9 +45,9 @@
                 </div>
 
             </div>
-            <div class="item form-group">
-                {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-9 col-sm-9 col-12">
                     {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
                     {% if not form.address.vars.valid %}
                         <div class="red">
@@ -57,9 +57,9 @@
                 </div>
 
             </div>
-            <div class="item form-group">
-                {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-3 col-sm-3 col-12">
                     <i class="fa-regular fa-calendar form-control-feedback left"
                        aria-hidden="true">
                     </i>
@@ -71,9 +71,9 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="item form-group">
-                {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="item form-group row">
+                {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                <div class="col-md-3 col-sm-3 col-12">
                     <i class="fa-regular fa-calendar form-control-feedback left"
                        aria-hidden="true">
                     </i>
@@ -89,19 +89,19 @@
         </div>
         <div class="col-md-1">
             <a href="#" class="collection-up btn btn-default">
-                <span class="glyphicon glyphicon-arrow-up"></span>
+                <i class="fa-solid fa-arrow-up"></i>
             </a>
             <a href="#" class="collection-down btn btn-default">
-                <span class="glyphicon glyphicon-arrow-down"></span>
+                <i class="fa-solid fa-arrow-down"></i>
             </a>
             <a href="#" class="collection-remove btn btn-default">
-                <span class="glyphicon glyphicon-trash"></span>
+                <i class="fa-solid fa-trash"></i>
             </a>
             <a href="#" class="collection-add btn btn-default">
-                <span class="glyphicon glyphicon-plus-sign"></span>
+                <i class="fa-solid fa-circle-plus"></i>
             </a>
             <a href="#" class="collection-duplicate btn btn-default">
-                <span class="glyphicon glyphicon-th-large"></span>
+                <i class="fa-solid fa-table-cells-large"></i>
             </a>
         </div>
     </div>

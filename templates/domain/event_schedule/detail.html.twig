@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
@@ -70,7 +70,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-12">
                                     <a class="btn btn-app"
                                        href="{{ path('event_schedule_edit', { 'id': eventSchedule.id | hashids_encode }) }}">
                                         <i class="fa-regular fa-pen-to-square"></i>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
@@ -111,53 +111,53 @@
                                     {% for  template in eventSchedule.templates %}
                                         <div class="row">
                                             <div class="col-md-7">
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                                                <div class="item form-group row">
+                                                    <label class="col-form-label col-md-1 col-sm-1 col-12">
                                                         {{ 'app.calendar.day.day' | trans({'%count%': 1}) }}
                                                     </label>
-                                                    <div class="col-md-11 col-sm-11 col-xs-12">
+                                                    <div class="col-md-11 col-sm-11 col-12">
                                                         {{ weekDay[template.day] }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="row">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 col-12">
                                                         {{ 'app.form.label.type' | trans }}
                                                     </label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <div class="col-md-9 col-sm-9 col-12">
                                                         {{ template.type }}
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 col-12">
                                                         {{ 'app.form.label.name' | trans }}
                                                     </label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <div class="col-md-9 col-sm-9 col-12">
                                                         {{ template.name }}
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 col-12">
                                                         {{ 'app.form.label.appointment_address' | trans }}
                                                     </label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <div class="col-md-9 col-sm-9 col-12">
                                                         {{ template.address }}
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 col-12">
                                                         {{ 'app.form.label.start' | trans }}
                                                     </label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <div class="col-md-9 col-sm-9 col-12">
                                                         {{ template.start | date("H:i") }}
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 col-12">
                                                         {{ 'app.form.label.end' | trans }}
                                                     </label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <div class="col-md-9 col-sm-9 col-12">
                                                         {{ template.end | date("H:i") }}
                                                     </div>
                                                 </div>

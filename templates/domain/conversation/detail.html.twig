@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="ibox chat-view">
                         <div class="ibox-title">
-                            <small class="pull-right text-muted">
+                            <small class="float-end text-muted">
                                 {% set lastMessage = conversation_last_message(conversation) %}
                                 {% if lastMessage is not empty %}
                                     {{ 'app.text.date_last_message' | trans }}: {{ lastMessage.createdAt | date }}
@@ -92,7 +92,7 @@
                                             <div class="item form-group">
                                                 {{ form_widget(form.content, {'attr': {'class': 'form-control'}} ) }}
                                                 {% if not form.content.vars.valid %}
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                                    <div class="col-md-12 col-sm-12 col-12 red">
                                                         {{ form_errors(form.content) }}
                                                     </div>
                                                 {% endif %}

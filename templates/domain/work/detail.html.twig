@@ -6,7 +6,7 @@
          data-work-detail-hour-label-value="{{ 'app.calendar.hour' | trans({'%count%': 2}) }}"
          data-work-detail-minute-label-value="{{ 'app.calendar.minute' | trans({'%count%': 2}) }}"
          data-work-detail-second-label-value="{{ 'app.calendar.second' | trans({'%count%': 2}) }}">
-        <div class="top_nav hide"
+        <div class="top_nav d-none"
              id="work-info-fixed"
              data-work-detail-target="fixedInfo">
             <div class="top-info-fixed">
@@ -19,18 +19,18 @@
             <div>
                 <div class="clearfix"></div>
                 <div class="row">
-                    <div class="col-md-9 col-sm-9 col-xs-12"
+                    <div class="col-md-9 col-sm-9 col-12"
                          id="work-main-info"
                          data-work-detail-target="mainInfo">
                         {% include 'domain/work/include/work_info.html.twig' %}
                     </div>
 
-                    <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="col-md-3 col-sm-3 col-12">
                         {% include 'domain/work/include/admin.html.twig' %}
                         {% include 'domain/work/include/profile.html.twig' %}
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12" id="tabs-area">
+                        <div class="col-md-12 col-sm-12 col-12" id="tabs-area">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <ul class="nav navbar-right panel_toolbox">

@@ -1,5 +1,5 @@
 <div role="tabpanel"
-        {% if activeTab == 'version' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+        {% if activeTab == 'version' %}  class="tab-pane fade active show" {% else %} class="tab-pane fade" {% endif %}
      id="tab-version"
      aria-labelledby="profile-tab">
 
@@ -55,7 +55,7 @@
                             <a class="btn btn-info btn-xs"
                                role="tab"
                                id="heading-version-description-{{ version.id | hashids_encode }}"
-                               data-toggle="collapse"
+                               data-bs-toggle="collapse"
                                href="#tab-version-description-{{ version.id | hashids_encode }}"
                                aria-expanded="true"
                                aria-controls="tab-version-description-{{ version.id | hashids_encode }}">
@@ -67,7 +67,7 @@
                         <a class="btn btn-primary btn-xs"
                            role="tab"
                            id="heading-content-description-{{ version.id | hashids_encode }}"
-                           data-toggle="collapse"
+                           data-bs-toggle="collapse"
                            href="#tab-version-content-{{ version.id | hashids_encode }}"
                            aria-expanded="true"
                            aria-controls="tab-version-content-{{ version.id | hashids_encode }}"
@@ -98,8 +98,8 @@
                         {% endif %}
 
                         {% if is_work_role(work, app_user(), 'isSupervisor') or version.isOwner(app_user()) %}
-                            <a data-toggle="modal"
-                               data-target="#modalWindow"
+                            <a data-bs-toggle="modal"
+                               data-bs-target="#modalWindow"
                                class="btn btn-warning btn-xs"
                                href="{{ path('version_edit', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}">
                                 <i class="fa-solid fa-pencil"></i>
@@ -124,7 +124,7 @@
                                  class="panel-collapse collapse"
                                  aria-labelledby="heading-version-description-{{ version.id | hashids_encode }}"
                                  role="tabpanel">
-                                <div class="panel-body text-muted well well-sm no-shadow">
+                                <div class="panel-body text-muted card card-body bg-light p-2 mb-3 no-shadow">
                                     {{ version.description | sanitize_html('app.rich_text_sanitizer') }}
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                              class="panel-collapse collapse"
                              aria-labelledby="heading-version-content-{{ version.id | hashids_encode }}"
                              role="tabpanel">
-                            <div class="panel-body text-muted well well-sm no-shadow">
+                            <div class="panel-body text-muted card card-body bg-light p-2 mb-3 no-shadow">
 
                                 {% if media_is_file_exist(version) %}
                                     {{ document_detail_content(version) }}

@@ -2,7 +2,7 @@
     <div class="ibox float-e-margins"  >
         <div class="ibox-content mailbox-content">
             <div class="file-manager">
-                <a class="btn btn-block btn-primary compose-mail"
+                <a class="btn w-100 btn-primary compose-mail"
                    href="{{ path('conversation_create') }}">
                     {{ 'app.text.write_message' | trans }}
                 </a>
@@ -16,11 +16,11 @@
 
                             {% set countUnreadConversationMessage = conversation_message.getTotalUnreadMessagesByUser(app_user()) %}
 
-                            {% set countUnreadConversationMessageClass = 'label-success' %}
+                            {% set countUnreadConversationMessageClass = 'text-bg-success' %}
                             {% if countUnreadConversationMessage > 0 %}
-                                {% set countUnreadConversationMessageClass = 'label-warning' %}
+                                {% set countUnreadConversationMessageClass = 'text-bg-warning' %}
                             {% endif %}
-                            <span class="label pull-right {{ countUnreadConversationMessageClass }}">
+                            <span class="badge float-end {{ countUnreadConversationMessageClass }}">
                                 {{ countUnreadConversationMessage }}
                             </span>
                         </a>

@@ -1,17 +1,15 @@
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">
-        <span aria-hidden="true">×</span>
-    </button>
     <h4 class="modal-title">
         {{ title }} - {% if work is defined and work is not empty %}{{ work.title }}{% endif %}
     </h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="row ajax">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-12">
         <div class="x_content">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-12">
 
                         {{ form_start(form, {
                             'attr': {
@@ -20,33 +18,33 @@
                             }
                         }) }}
 
-                        <div class="item form-group">
-                            {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
-                            <div class="col-md-10 col-sm-10 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'col-form-label col-md-2 col-sm-2 col-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-12">
                                 {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                             </div>
                         </div>
 
-                        <div class="item form-group">
-                            {{ form_label(form.description,  'app.form.label.description' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
-                            <div class="col-md-10 col-sm-10 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.description,  'app.form.label.description' , {'label_attr': {'class': 'col-form-label col-md-2 col-sm-2 col-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-12">
                                 {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
                             </div>
                         </div>
 
-                        <div class="item form-group">
+                        <div class="item form-group row">
                             {{ form_label(form.complete, 'app.form.label.complete',
                                 {
                                     'label_attr':
                                     {
-                                        'class': 'control-label col-md-2 col-sm-2 col-xs-12',
-                                        'data-toggle': 'tooltip',
-                                        'data-placement': 'top',
-                                        'data-original-title': 'app.tooltip.task_complete' | trans
+                                        'class': 'col-form-label col-md-2 col-sm-2 col-12',
+                                        'data-bs-toggle': 'tooltip',
+                                        'data-bs-placement': 'top',
+                                        'data-bs-title': 'app.tooltip.task_complete' | trans
                                     }
                                 }
                             ) }}
-                            <div class="col-md-10 col-sm-10 col-xs-12">
+                            <div class="col-md-10 col-sm-10 col-12">
                                 {{ form_widget(form.complete, {
                                     'attr': {
                                         'data-controller': 'switch',
@@ -56,19 +54,19 @@
                             </div>
                         </div>
 
-                        <div class="item form-group">
+                        <div class="item form-group row">
                             {{ form_label(form.active, 'app.form.label.active',
                                 {
                                     'label_attr':
                                     {
-                                        'class': 'control-label col-md-2 col-sm-2 col-xs-12',
-                                        'data-toggle': 'tooltip',
-                                        'data-placement': 'top',
-                                        'data-original-title': 'app.tooltip.task_active' | trans
+                                        'class': 'col-form-label col-md-2 col-sm-2 col-12',
+                                        'data-bs-toggle': 'tooltip',
+                                        'data-bs-placement': 'top',
+                                        'data-bs-title': 'app.tooltip.task_active' | trans
                                     }
                                 }
                             ) }}
-                            <div class="col-md-10 col-sm-10 col-xs-12">
+                            <div class="col-md-10 col-sm-10 col-12">
                                 {{ form_widget(form.active, {
                                     'attr': {
                                         'data-controller': 'switch',
@@ -78,19 +76,19 @@
                             </div>
                         </div>
 
-                        <div class="item form-group">
+                        <div class="item form-group row">
                             {{ form_label(form.deadline, 'app.form.label.deadline',
                                 {
                                     'label_attr':
                                     {
-                                        'class': 'control-label col-md-2 col-sm-2 col-xs-12',
-                                        'data-toggle': 'tooltip',
-                                        'data-placement': 'top',
-                                        'data-original-title': 'app.tooltip.task_deadline' | trans
+                                        'class': 'col-form-label col-md-2 col-sm-2 col-12',
+                                        'data-bs-toggle': 'tooltip',
+                                        'data-bs-placement': 'top',
+                                        'data-bs-title': 'app.tooltip.task_deadline' | trans
                                     }
                                 }
                             ) }}
-                            <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-md-4 col-sm-4 col-12">
                                 <i class="fa-regular fa-calendar form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
@@ -103,7 +101,7 @@
                             </div>
 
                             {% if taskDeadlines is not empty %}
-                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-md-2 col-sm-2 col-12">
                                     <a class="btn btn-warning btn-xs"
                                        id="show-deadline-calendar-helper-date"
                                        data-action="calendar-helper#show"
@@ -153,9 +151,9 @@
                         </div>
 
                         {% if form.works is defined %}
-                            <div class="item form-group">
-                                {{ form_label(form.works, 'app.form.label.work', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
-                                <div class="col-md-10 col-sm-10 col-xs-12">
+                            <div class="item form-group row">
+                                {{ form_label(form.works, 'app.form.label.work', {'label_attr': {'class': 'col-form-label col-md-2 col-sm-2 col-12'}}) }}
+                                <div class="col-md-10 col-sm-10 col-12">
                                     {{ form_widget(form.works, {
                                         'attr': {
                                             'data-controller': 'select2',
@@ -166,19 +164,19 @@
                             </div>
                         {% endif %}
 
-                        <div class="form-group">
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
+                        <div class="form-group row">
+                            <div class="col-md-12 col-sm-12 col-12 offset-md-2">
                                 <button id="task-button-action"
                                         class="btn btn-success"
                                         data-controller="ajax-form">
-                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin d-none"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button id="task-button-action-close"
                                         class="btn btn-primary"
                                         data-controller="ajax-form"
                                         data-ajax-form-close-value="true">
-                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin d-none"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
                             </div>

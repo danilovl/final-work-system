@@ -16,7 +16,7 @@ export default class extends Controller {
     static targets = ['panel'];
 
     show(event) {
-        $(event.params.panel).show().addClass('in');
+        $(event.params.panel).show().addClass('show');
     }
 
     pick(event) {
@@ -25,7 +25,7 @@ export default class extends Controller {
         input.dispatchEvent(new Event('change', { bubbles: true }));
 
         this.panelTargets.forEach(panel => {
-            $(panel).hide().removeClass('in');
+            $(panel).hide().removeClass('show');
         });
     }
 }

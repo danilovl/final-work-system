@@ -128,7 +128,7 @@ function createEvent(): void {
   }
 
   button.disabled = true;
-  loading.classList.remove('hide');
+  loading.classList.remove('d-none');
 
   const formData = new FormData(form);
 
@@ -169,7 +169,7 @@ function createEvent(): void {
         console.error(error);
       })
       .finally(() => {
-        loading.classList.add('hide');
+        loading.classList.add('d-none');
         button.disabled = false;
       });
 }

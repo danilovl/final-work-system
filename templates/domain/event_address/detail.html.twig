@@ -5,7 +5,7 @@
         <div>
             {% if eventAddress is defined %}
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content text-center">
                                 <h2>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
@@ -31,17 +31,17 @@
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li class="dropdown">
                                         <a href="#"
-                                           class="dropdown-toggle"
-                                           data-toggle="dropdown"
+                                           data-bs-toggle="dropdown"
+                                           data-bs-display="static"
                                            role="button"
                                            aria-expanded="false">
                                             <i class="fa-solid fa-wrench"></i>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a href="{{ path('event_address_edit', { 'id': eventAddress.id | hashids_encode }) }}"
-                                                   data-toggle="modal"
-                                                   data-target="#modalWindow">
+                                                <a class="dropdown-item" href="{{ path('event_address_edit', { 'id': eventAddress.id | hashids_encode }) }}"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#modalWindow">
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>

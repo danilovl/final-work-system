@@ -1,11 +1,11 @@
 <li id="top-nav-locales" class="dropdown">
     <a href="javascript:"
        class="dropdown-toggle info-number"
-       data-toggle="dropdown"
+       data-bs-toggle="dropdown"
+       data-bs-display="static"
        aria-expanded="false">
         <i class="fa-solid fa-earth-americas"></i>
-        <span class="caret"></span>
-        <span class="sr-only">
+        <span class="visually-hidden">
             {{ 'app.menu.choose_language' | trans }}
         </span>
     </a>
@@ -13,12 +13,12 @@
         {% for locale in locales() %}
             <li
                     {% if app.request.locale == locale.code %}
-                        aria-checked="true" class="active"
+                        aria-checked="true"
                     {% else %}
                         aria-checked="false"
                     {% endif %} role="menuitem"
             >
-                <a href="{{ path(app.request.attributes.get('_route', 'homepage'), app.request.attributes.get('_route_params', []) | merge({ _locale: locale.code })) }}">
+                <a class="dropdown-item{% if app.request.locale == locale.code %} active{% endif %}" href="{{ path(app.request.attributes.get('_route', 'homepage'), app.request.attributes.get('_route_params', []) | merge({ _locale: locale.code })) }}">
                     {{ locale.name | capitalize }}
                 </a>
             </li>

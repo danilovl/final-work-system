@@ -2,14 +2,15 @@
 
 <li class="">
     <a href="javascript:"
-       class="user-profile dropdown-toggle"
-       data-toggle="dropdown"
+       class="user-profile"
+       data-bs-toggle="dropdown"
+       data-bs-display="static"
        aria-expanded="false">
         <img src="{{ app_user() | profile_image }}" alt="profile image">
         {{ app_user() }}
         <span class=" fa-solid fa-angle-down"></span>
     </a>
     {% if menu is defined and menu is not empty %}
-        {{ renderMenu(menu, 'dropdown-menu dropdown-usermenu pull-right') }}
+        {{ renderMenu(menu, 'dropdown-menu dropdown-menu-end dropdown-usermenu', 'nav child_menu', 'dropdown-item') }}
     {% endif %}
 </li>

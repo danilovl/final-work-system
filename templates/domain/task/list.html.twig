@@ -9,22 +9,22 @@
                 <div class="row">
                     <div class="x_panel">
                         <div class="x_title" style="height: auto;">
-                            <div class="row">
+                            <div class="clearfix">
                                 <h2>{{ 'app.text.task_list' | trans }}</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li class="dropdown">
                                         <a href="#"
-                                           class="dropdown-toggle"
-                                           data-toggle="dropdown"
+                                           data-bs-toggle="dropdown"
+                                           data-bs-display="static"
                                            role="button"
                                            aria-expanded="false">
                                             <i class="fa-solid fa-wrench"></i>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a href="{{ path('task_create_several') }}"
-                                                   data-toggle="modal"
-                                                   data-target="#modalWindow">
+                                                <a class="dropdown-item" href="{{ path('task_create_several') }}"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#modalWindow">
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                     {{ 'app.text.task_create' | trans }}
                                                 </a>
@@ -44,7 +44,7 @@
                                 } %}
                             </div>
                             {% if isTasksInComplete %}
-                                <div class="row">
+                                <div>
                                 <span>
                     			    {{ 'app.text.change_all_tasks_to_complete' | trans }}
                     		    </span>

@@ -24,7 +24,7 @@
                                 <div class="media event deadline-date-media">
                                     <ul class="nav panel_toolbox">
                                         <li>
-                                            <a class="pull-left date deadline-date collapse-link">
+                                            <a class="float-start date deadline-date collapse-link">
                                                 <p class="day">
                                                     {{ groupName }} ({{ groupsArray['works']|length }})
                                                 </p>
@@ -32,9 +32,9 @@
                                         </li>
                                         {% if groupsArray['id'] is defined and groupsArray['id'] is not empty %}
                                             <li>
-                                                <a data-toggle="modal"
+                                                <a data-bs-toggle="modal"
                                                    href="{{ path('work_category_edit', { 'id': groupsArray['id'] | hashids_encode }) }}"
-                                                   data-target="#modalWindow">
+                                                   data-bs-target="#modalWindow">
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                 </a>
                                             </li>
@@ -83,12 +83,12 @@
                                             <tr data-delete-row="work-{{ work.id | hashids_encode }}">
                                                 <td>
                                                     <ul class="list-inline">
-                                                        <li>
+                                                        <li class="list-inline-item">
                                                             <img src="{{ work.author | profile_image }}"
                                                                  class="avatar"
                                                                  alt="Avatar">
                                                         </li>
-                                                        <li>
+                                                        <li class="list-inline-item">
                                                             {{ work.author }}
                                                         </li>
                                                     </ul>
@@ -111,10 +111,10 @@
 
                                                 </td>
                                                 <td>
-                                                    <span data-toggle="tooltip"
-                                                          data-placement="top"
+                                                    <span data-bs-toggle="tooltip"
+                                                          data-bs-placement="top"
                                                           title=""
-                                                          data-original-title=" {{ work.type.name }}">
+                                                          data-bs-title=" {{ work.type.name }}">
                                                         {{ work.type.shortcut }}
                                                     </span>
                                                 </td>
@@ -122,14 +122,14 @@
                                                     <ul class="list-inline">
 
                                                         {% if app_user().id != work.supervisor.id %}
-                                                            <li>
+                                                            <li class="list-inline-item">
                                                                 <img src="{{ work.supervisor | profile_image }}"
                                                                      class="avatar"
                                                                      alt="{{ work.supervisor }}">
                                                             </li>
                                                         {% endif %}
 
-                                                        <li>
+                                                        <li class="list-inline-item">
                                                             {{ work.supervisor }}
                                                         </li>
                                                     </ul>
@@ -169,15 +169,15 @@
                                                     {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                         <a class="btn btn-warning btn-xs"
                                                            href="{{ path('work_edit', { 'id': work.id | hashids_encode }) }}"
-                                                           data-toggle="modal"
-                                                           data-target="#modalWindow">
+                                                           data-bs-toggle="modal"
+                                                           data-bs-target="#modalWindow">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                             {{ 'app.form.action.edit' | trans }}
                                                         </a>
                                                         <a class="btn btn-warning btn-xs"
                                                            href="{{ path('work_edit_author', { 'id': work.id | hashids_encode }) }}"
-                                                           data-toggle="modal"
-                                                           data-target="#modalWindow">
+                                                           data-bs-toggle="modal"
+                                                           data-bs-target="#modalWindow">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                             {{ 'app.form.action.edit_author' | trans }}
                                                         </a>

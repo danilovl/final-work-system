@@ -1,8 +1,6 @@
-<div class="alert {{ class }} alert-dismissible fade in" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        {% if allowClose is defined and allowClose %}
-            <span aria-hidden="true">×</span>
-        {% endif %}
-    </button>
+<div class="alert {{ class }} alert-dismissible fade show" role="alert">
+    {% if allowClose is defined and allowClose %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% endif %}
     {{ message }}
 </div>

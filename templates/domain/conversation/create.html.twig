@@ -25,12 +25,12 @@
                                 }) }}
 
                                 {% if form.name is defined %}
-                                    <div class="form-group">
-                                        {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                    <div class="form-group row">
+                                        {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
                                         <div class="col-sm-10">
                                             {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                                             {% if not form.name.vars.valid %}
-                                                <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                                <div class="col-md-12 col-sm-12 col-12 red">
                                                     {{ form_errors(form.name) }}
                                                 </div>
                                             {% endif %}
@@ -38,8 +38,8 @@
                                     </div>
                                 {% endif %}
 
-                                <div class="form-group">
-                                    {{ form_label(form.conversation, 'app.form.label.whom' , {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                <div class="form-group row">
+                                    {{ form_label(form.conversation, 'app.form.label.whom' , {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
                                     <div class="col-sm-10">
                                         {{ form_widget(form.conversation, {
                                             'attr': {
@@ -49,23 +49,23 @@
                                             }
                                         }) }}
                                         {% if not form.conversation.vars.valid %}
-                                            <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                            <div class="col-md-12 col-sm-12 col-12 red">
                                                 {{ form_errors(form.conversation) }}
                                             </div>
                                         {% endif %}
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <div class="col-sm-12">
                                         {{ form_widget(form.content, {'attr': {'class': 'form-control'}} ) }}
                                         {% if not form.content.vars.valid %}
-                                            <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                            <div class="col-md-12 col-sm-12 col-12 red">
                                                 {{ form_errors(form.content) }}
                                             </div>
                                         {% endif %}
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <div class="col-sm-2">
                                         <input id="btn-conversation-create"
                                                type="submit"

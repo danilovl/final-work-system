@@ -19,7 +19,7 @@
         "@fullcalendar/list": "^6.1.17",
         "@fullcalendar/timegrid": "^6.1.17",
         "@fullcalendar/vue3": "^6.1.17",
-        "bootstrap": "^3.3.7",
+        "bootstrap": "^5.3.9",
         "inputmask": "^5.0.10",
         "jquery": "^3.5.1",
         "jquery-ui": "^1.14.2",

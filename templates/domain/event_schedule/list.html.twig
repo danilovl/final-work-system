@@ -15,15 +15,15 @@
                             <ul class="nav navbar-right panel_toolbox">
                                 <li class="dropdown">
                                     <a href="#"
-                                       class="dropdown-toggle"
-                                       data-toggle="dropdown"
+                                       data-bs-toggle="dropdown"
+                                       data-bs-display="static"
                                        role="button"
                                        aria-expanded="false">
                                         <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a target="_blank"
+                                            <a class="dropdown-item" target="_blank"
                                                href="{{ path('event_schedule_create') }}">
                                                 <i class="fa-regular fa-pen-to-square"></i>
                                                 {{ 'app.form.action.create' | trans }}
@@ -80,8 +80,8 @@
                                                     <i class="fa-solid fa-pencil"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
-                                                <a data-toggle="modal"
-                                                   data-target="#modalWindow"
+                                                <a data-bs-toggle="modal"
+                                                   data-bs-target="#modalWindow"
                                                    class="btn btn-success btn-xs"
                                                    href="{{ path('event_schedule_clone', { 'id': eventSchedule.id | hashids_encode }) }}">
                                                     <i class="fa-solid fa-retweet"></i>

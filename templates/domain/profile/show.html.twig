@@ -3,7 +3,7 @@
 {% block content %}
     <div class="right_col" role="main">
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <ul class="nav navbar-right panel_toolbox">
@@ -12,10 +12,10 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div class="col-md-3 col-sm-3 col-12 profile_left">
                             <div class="profile_img">
                                 <div id="crop-avatar">
-                                    <img class="img-responsive avatar-view"
+                                    <img class="img-fluid avatar-view"
                                          src="{{ app_user() | profile_image }}"
                                          alt="Avatar"
                                          title="Change the avatar">
@@ -62,30 +62,30 @@
                             <br/>
                         </div>
 
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="col-md-9 col-sm-9 col-12">
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#tab_content1"
+                                    <li role="presentation">
+                                        <a class="active" href="#tab_content1"
                                            id="home-tab"
-                                           role="tab" data-toggle="tab"
+                                           role="tab" data-bs-toggle="tab"
                                            aria-expanded="true">
                                             {{ 'app.menu.contact_information' | trans }}
                                         </a>
                                     </li>
-                                    <li role="presentation" class="">
+                                    <li role="presentation">
                                         <a href="#tab_content2"
                                            role="tab"
-                                           id="profile-tab" data-toggle="tab"
+                                           id="profile-tab" data-bs-toggle="tab"
                                            aria-expanded="false">
                                             {{ 'app.menu.personal_information' | trans }}
                                         </a>
                                     </li>
-                                    <li role="presentation" class="">
+                                    <li role="presentation">
                                         <a href="#tab_content3"
                                            role="tab"
                                            id="profile-tab2"
-                                           data-toggle="tab"
+                                           data-bs-toggle="tab"
                                            aria-expanded="false">
                                             {{ 'app.menu.mail_template' | trans }}
                                         </a>
@@ -94,7 +94,7 @@
 
                                 <div id="myTabContent" class="tab-content">
                                     <div role="tabpanel"
-                                         class="tab-pane fade active in"
+                                         class="tab-pane fade active show"
                                          id="tab_content1"
                                          aria-labelledby="home-tab">
                                         <table class="table">

@@ -3,7 +3,7 @@
 {% block content %}
     <div class="right_col" role="main">
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <ul class="nav navbar-right panel_toolbox">
@@ -12,11 +12,11 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div class="col-md-3 col-sm-3 col-12 profile_left">
                             <div class="profile_img">
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
-                                    <img class="img-responsive avatar-view"
+                                    <img class="img-fluid avatar-view"
                                          src="{{ app_user() | profile_image }}"
                                          alt="Avatar"
                                          title="Change the avatar">
@@ -71,24 +71,24 @@
                             <br/>
                         </div>
 
-                        <div class="col-md-9 col-sm-9 col-xs-12 mt-medium ">
+                        <div class="col-md-9 col-sm-9 col-12 mt-medium ">
                             <div class="row">
                                 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                                <div class="item form-group">
-                                    {{ form_label(form.uploadMedia, 'app.form.label.file', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="item form-group row">
+                                    {{ form_label(form.uploadMedia, 'app.form.label.file', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                    <div class="col-md-6 col-sm-6 col-12">
                                         {{ form_widget(form.uploadMedia, {'attr': {'class': 'form-control'}}) }}
                                     </div>
 
                                     {% if not form.uploadMedia.vars.valid %}
-                                        <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                        <div class="col-md-3 col-sm-3 col-12 red">
                                             {{ form_errors(form.uploadMedia) }}
                                         </div>
                                     {% endif %}
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="form-group row">
+                                    <div class="col-md-6 col-sm-6 col-12 offset-md-3">
                                         <input type="submit"
                                                id="upload-profile-image-button-action"
                                                class="btn btn-success"

@@ -28,15 +28,15 @@
                         <div class="x_content" {% if openSearchTab == false %} style="display: none;" {% endif %}>
 
                             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                            <div class="item form-group">
-                                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="item form-group row">
+                                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                <div class="col-md-6 col-sm-6 col-12">
                                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                {{ form_label(form.categories, 'app.form.label.category', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="item form-group row">
+                                {{ form_label(form.categories, 'app.form.label.category', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                <div class="col-md-6 col-sm-6 col-12">
                                     {{ form_widget(form.categories, {
                                         'attr': {
                                             'data-controller': 'select2',
@@ -46,9 +46,9 @@
                                     }) }}
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                {{ form_label(form.mimeType, 'app.form.label.type', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="item form-group row">
+                                {{ form_label(form.mimeType, 'app.form.label.type', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                <div class="col-md-6 col-sm-6 col-12">
                                     {{ form_widget(form.mimeType, {
                                         'attr': {
                                             'data-controller': 'select2',
@@ -58,8 +58,8 @@
                                     }) }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <div class="form-group row">
+                                <div class="col-md-6 col-sm-6 col-12 offset-md-3">
                                     <input type="submit"
                                            class="btn btn-success"
                                            value="{{ 'app.form.action.search' | trans }}"/>
@@ -79,8 +79,8 @@
                             <ul class="nav navbar-right panel_toolbox">
                                 <li class="dropdown">
                                     <a href="#"
-                                       class="dropdown-toggle"
-                                       data-toggle="dropdown"
+                                       data-bs-toggle="dropdown"
+                                       data-bs-display="static"
                                        role="button"
                                        aria-expanded="false">
                                         <i class="fa-solid fa-wrench"></i>
@@ -88,9 +88,9 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             {% if is_granted('ROLE_SUPERVISOR') %}
-                                                <a href="{{ path('document_create') }}"
-                                                   data-toggle="modal"
-                                                   data-target="#modalWindow">
+                                                <a class="dropdown-item" href="{{ path('document_create') }}"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#modalWindow">
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                     {{ 'app.form.action.create' | trans }}
                                                 </a>
@@ -131,9 +131,9 @@
                                             {{ knp_pagination_sortable(documents, 'app.text.date_added' | trans, 'media.createdAt') }}
                                         </th>
                                         <th{% if documents.isSorted('media.active') %} class="fa-solid fa-sort-{{ direction }}"{% endif %}
-                                                data-toggle="tooltip"
-                                                data-placement="top"
-                                                data-original-title="{{ 'app.tooltip.document_active' | trans }}">
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="{{ 'app.tooltip.document_active' | trans }}">
                                             {{ knp_pagination_sortable(documents, 'app.text.active' | trans, 'media.active') }}
                                         </th>
                                         <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
@@ -152,7 +152,7 @@
                                                         <dd>
                                                             <ul class="list-inline prod_size">
                                                                 {% for category in document.categories %}
-                                                                    <li>
+                                                                    <li class="list-inline-item">
                                                                         <button type="button"
                                                                                 class="btn btn-default btn-xs">
                                                                             {{ category.name }}
@@ -190,7 +190,7 @@
                                                     <a class="btn btn-info btn-xs"
                                                        role="tab"
                                                        id="heading-document-description-{{ document.id | hashids_encode }}"
-                                                       data-toggle="collapse"
+                                                       data-bs-toggle="collapse"
                                                        href="#tab-document-description-{{ document.id | hashids_encode }}"
                                                        aria-expanded="true"
                                                        aria-controls="tab-document-description-{{ document.id | hashids_encode }}">
@@ -202,8 +202,7 @@
                                                 <a class="btn btn-primary btn-xs"
                                                    role="tab"
                                                    id="heading-content-description-{{ document.id | hashids_encode }}"
-                                                   data-toggle="collapse"
-                                                   data-parent="#accordion-document-content-{{ document.id | hashids_encode }}"
+                                                   data-bs-toggle="collapse"
                                                    href="#tab-document-content-{{ document.id | hashids_encode }}"
                                                    aria-expanded="true"
                                                    aria-controls="tab-document-content-{{ document.id | hashids_encode }}"
@@ -234,8 +233,8 @@
                                                 {% endif %}
 
                                                 {% if document.isOwner(app_user()) %}
-                                                    <a data-toggle="modal"
-                                                       data-target="#modalWindow"
+                                                    <a data-bs-toggle="modal"
+                                                       data-bs-target="#modalWindow"
                                                        class="btn btn-warning btn-xs"
                                                        href="{{ path('document_edit', { 'id': document.id | hashids_encode }) }}">
                                                         <i class="fa-solid fa-pencil"></i>
@@ -260,7 +259,7 @@
                                                          id="tab-document-description-{{ document.id | hashids_encode }}"
                                                          role="tabpanel"
                                                          aria-labelledby="heading-document-description-{{ document.id | hashids_encode }}">
-                                                        <div class="panel-body text-muted well well-sm no-shadow">
+                                                        <div class="panel-body text-muted card card-body bg-light p-2 mb-3 no-shadow">
                                                             {{ document.description | sanitize_html('app.rich_text_sanitizer') }}
                                                         </div>
                                                     </div>
@@ -278,7 +277,7 @@
                                                      class="panel-collapse collapse"
                                                      aria-labelledby="heading-document-content-{{ document.id | hashids_encode }}"
                                                      role="tabpanel">
-                                                    <div class="panel-body text-muted well well-sm no-shadow">
+                                                    <div class="panel-body text-muted card card-body bg-light p-2 mb-3 no-shadow">
 
                                                         {% if media_is_file_exist(document) %}
                                                             {{ document_detail_content(document) }}

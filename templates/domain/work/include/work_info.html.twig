@@ -15,13 +15,13 @@
     <div class="x_content">
         <div class="ibox-content">
             <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-12 col-12">
                     <dl class="dl-horizontal">
                         <dt>
                             {{ 'app.text.status' | trans }}:
                         </dt>
                         <dd>
-                           <span class="label"
+                           <span class="badge"
                                  style="background-color: {{ work.status.color }}">
                                {{ work.status.name }}
                            </span>
@@ -34,35 +34,35 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-12 col-12">
                     <dl class="dl-horizontal">
                         <dt>
                             {{ 'app.text.work_deadline' | trans }}:
                         </dt>
                         <dd>
                             {% if work_deadline_days(work) >= 14 %}
-                                <span class="label label-success"
-                                      data-toggle="tooltip"
-                                      data-placement="top"
-                                      data-original-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
+                                <span class="badge text-bg-success"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-placement="top"
+                                      data-bs-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
                                                         {{ work.deadline | date('Y-m-d') }}
                                  </span>
                             {% elseif work_deadline_days(work) <= 14 and work_deadline_days(work) >= 7 %}
-                                <span class="label label-warning"
-                                      data-toggle="tooltip"
-                                      data-placement="top"
-                                      data-original-title="{{ 'app.text.less_then_day' | trans({'%day%': 14 }) }}">
+                                <span class="badge text-bg-warning"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-placement="top"
+                                      data-bs-title="{{ 'app.text.less_then_day' | trans({'%day%': 14 }) }}">
                                                         {{ work.deadline | date('Y-m-d') }}
                                 </span>
                             {% else %}
-                                <span class="label label-danger">{{ work.deadline | date('Y-m-d') }}</span>
+                                <span class="badge text-bg-danger">{{ work.deadline | date('Y-m-d') }}</span>
                             {% endif %}
                         </dd>
                         <dt>
                             {{ 'app.text.remaining_time' | trans }}:
                         </dt>
                         <dd>
-                          <span class="label label-danger"
+                          <span class="badge text-bg-danger"
                                 id="countdownDeadline"
                                 data-work-detail-target="countdown"
                                 data-deadline="{{ work.deadline | date('Y-m-d') }}">
@@ -75,28 +75,28 @@
                             </dt>
                             <dd>
                                 {% if work_deadline_program_days(work) >= 14 %}
-                                    <span class="label label-success"
-                                          data-toggle="tooltip"
-                                          data-placement="top"
-                                          data-original-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
+                                    <span class="badge text-bg-success"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          data-bs-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
                                                             {{ work.deadlineProgram | date('Y-m-d') }}
                                     </span>
                                 {% elseif work_deadline_program_days(work) <= 14 and work_deadline_program_days(work) >= 7 %}
-                                    <span class="label label-warning"
-                                          data-toggle="tooltip"
-                                          data-placement="top"
-                                          data-original-title="{{ 'app.text.less_then_day' | trans({'%day%': 7 }) }}">
+                                    <span class="badge text-bg-warning"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          data-bs-title="{{ 'app.text.less_then_day' | trans({'%day%': 7 }) }}">
                                                             {{ work.deadlineProgram | date('Y-m-d') }}
                                     </span>
                                 {% else %}
-                                    <span class="label label-danger">{{ work.deadlineProgram | date('Y-m-d') }}</span>
+                                    <span class="badge text-bg-danger">{{ work.deadlineProgram | date('Y-m-d') }}</span>
                                 {% endif %}
                             </dd>
                             <dt>
                                 {{ 'app.text.remaining_time' | trans }}:
                             </dt>
                             <dd>
-                               <span class="label label-danger"
+                               <span class="badge text-bg-danger"
                                      id="countdownDeadlineProgram"
                                      data-work-detail-target="countdown"
                                      data-deadline="{{ work.deadlineProgram | date('Y-m-d') }}">
@@ -138,7 +138,7 @@
                                 <dd>
                                     <ul class="list-inline prod_size">
                                         {% for category in work.categories %}
-                                            <li>
+                                            <li class="list-inline-item">
                                                 <button type="button"
                                                         class="btn btn-default btn-xs">
                                                     {{ category.name }}
@@ -162,9 +162,9 @@
                                 {{ 'app.text.task' | trans({'%count%': 2}) }}:
                             </dt>
                             <dd>
-                                <div class="progress progress-striped active m-b-sm">
+                                <div class="progress m-b-sm">
                                     <div style="width: {{ task_work_complete_percentage(work, activeTask) }}%;"
-                                         class="progress-bar">
+                                         class="progress-bar progress-bar-striped progress-bar-animated">
                                     </div>
                                 </div>
                                 <small>
@@ -182,7 +182,7 @@
 
             {% if work.supervisor.id != app_user().id %}
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                    <div class="col-md-6 col-sm-6 col-12 profile_details">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
@@ -199,7 +199,7 @@
                             </div>
                             <div class="x_content" style="display: none;">
                                 <div class="col-sm-12">
-                                    <div class="left col-xs-9">
+                                    <div class="left col-9">
                                         <h2>
                                             {% include 'other/common_part/user_online_status.html.twig' with {
                                                 'user': work.supervisor
@@ -227,14 +227,14 @@
                                             {% endif %}
                                         </ul>
                                     </div>
-                                    <div class="right col-xs-3 text-center">
+                                    <div class="right col-3 text-center">
                                         <img src="{{ work.supervisor | profile_image }}"
                                              alt=""
-                                             class="img-circle img-responsive">
+                                             class="rounded-circle img-fluid">
                                     </div>
                                 </div>
-                                <div class="col-xs-12 bottom text-center">
-                                    <div class="col-xs-12 col-sm-12 emphasis">
+                                <div class="col-12 bottom text-center">
+                                    <div class="col-12 col-sm-12 emphasis">
                                         {% if  conversation_variation.checker(work, app_user(), work.supervisor) %}
                                             {% set conversationWithSupervisor = check_work_users_conversation(work, app_user(), work.supervisor) %}
                                             {% if conversationWithSupervisor %}
@@ -266,7 +266,7 @@
                     </div>
 
                     {% if  work.opponent is not empty %}
-                        <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                        <div class="col-md-6 col-sm-6 col-12 profile_details">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
@@ -283,7 +283,7 @@
                                 </div>
                                 <div class="x_content" style="display: none;">
                                     <div class="col-sm-12">
-                                        <div class="left col-xs-9">
+                                        <div class="left col-9">
                                             <h2>
                                                 {% include 'other/common_part/user_online_status.html.twig' with {
                                                     'user': work.opponent
@@ -311,14 +311,14 @@
                                                 {% endif %}
                                             </ul>
                                         </div>
-                                        <div class="right col-xs-3 text-center">
+                                        <div class="right col-3 text-center">
                                             <img src="{{ work.opponent | profile_image }}"
                                                  alt=""
-                                                 class="img-circle img-responsive">
+                                                 class="rounded-circle img-fluid">
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 bottom text-center">
-                                        <div class="col-xs-12 col-sm-12 emphasis">
+                                    <div class="col-12 bottom text-center">
+                                        <div class="col-12 col-sm-12 emphasis">
                                             {% if  conversation_variation.checker(work, app_user(), work.opponent) %}
                                                 {% set conversationWithOpponent = check_work_users_conversation(work, app_user(), work.opponent) %}
                                                 {% if conversationWithOpponent %}
@@ -351,7 +351,7 @@
                     {% endif %}
 
                     {% if  work.consultant is not empty %}
-                        <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                        <div class="col-md-6 col-sm-6 col-12 profile_details">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
@@ -368,7 +368,7 @@
                                 </div>
                                 <div class="x_content" style="display: none;">
                                     <div class="col-sm-12">
-                                        <div class="left col-xs-9">
+                                        <div class="left col-9">
                                             <h2>
                                                 {% include 'other/common_part/user_online_status.html.twig' with {
                                                     'user': work.consultant
@@ -398,14 +398,14 @@
 
                                             </ul>
                                         </div>
-                                        <div class="right col-xs-3 text-center">
+                                        <div class="right col-3 text-center">
                                             <img src="{{ work.consultant | profile_image }}"
                                                  alt=""
-                                                 class="img-circle img-responsive">
+                                                 class="rounded-circle img-fluid">
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 bottom text-center">
-                                        <div class="col-xs-12 col-sm-12 emphasis">
+                                    <div class="col-12 bottom text-center">
+                                        <div class="col-12 col-sm-12 emphasis">
                                             {% if  conversation_variation.checker(work, app_user(), work.consultant) %}
                                                 {% set conversationWithConsultant = check_work_users_conversation(work, app_user(), work.consultant) %}
                                                 {% if conversationWithConsultant %}

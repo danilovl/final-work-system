@@ -47,7 +47,7 @@ Encore
                     './node_modules/jquery/dist/jquery.min.js',
                     './node_modules/jquery-ui/dist/jquery-ui.min.js',
                     './node_modules/inputmask/dist/jquery.inputmask.js',
-                    './node_modules/bootstrap/dist/js/bootstrap.min.js',
+                    './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
                     './node_modules/tinymce/tinymce.min.js',
                     './node_modules/select2/dist/js/select2.full.min.js',
                     './node_modules/jszip/dist/jszip.js',
@@ -70,7 +70,7 @@ Encore
             files: {
                 'js/login.js': [
                     './node_modules/jquery/dist/jquery.min.js',
-                    './node_modules/bootstrap/dist/js/bootstrap.min.js'
+                    './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
                 ]
             },
             hash: true

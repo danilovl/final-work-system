@@ -1,20 +1,18 @@
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">
-        <span aria-hidden="true">×</span>
-    </button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="row ajax">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-12">
         <div class="x_content">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-12">
 
                         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-                        <div class="item form-group">
-                            {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                            <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-12">
                                 {{ form_widget(form.type, {
                                     'attr': {
                                         'data-controller': 'select2',
@@ -26,16 +24,16 @@
                             </div>
                         </div>
 
-                        <div class="item form-group">
-                            {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                            <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-12">
                                 {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                             </div>
                         </div>
 
-                        <div class="item form-group">
-                            {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                            <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-12">
                                 {{ form_widget(form.address, {
                                     'attr': {
                                         'data-controller': 'select2',
@@ -47,9 +45,9 @@
                             </div>
                         </div>
 
-                        <div class="item form-group">
-                            {{ form_label(form.participant,  'app.form.label.appointment_participant' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                            <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.participant,  'app.form.label.appointment_participant' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-12">
                                 {{ form_widget(form.participant, {
                                     'attr': {
                                         'data-controller': 'select2',
@@ -61,10 +59,10 @@
                             </div>
                         </div>
 
-                        <div class="item form-group">
-                            {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="item form-group row">
+                            {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <div class="col-md-6 col-sm-6 col-12 form-group has-feedback">
                                 <i class="fa-regular fa-calendar form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
@@ -78,10 +76,10 @@
                             </div>
                         </div>
 
-                        <div class="item form-group">
-                            {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="item form-group row">
+                            {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <div class="col-md-6 col-sm-6 col-12 form-group has-feedback">
                                 <i class="fa-regular fa-calendar form-control-feedback left"
                                    aria-hidden="true">
                                 </i>
@@ -95,19 +93,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-3">
+                        <div class="form-group row">
+                            <div class="col-md-12 col-sm-6 col-12 offset-md-3">
                                 <button class="btn btn-success"
                                         id="event_action"
                                         data-controller="ajax-form">
-                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin d-none"></i>
                                     {{ 'app.form.action.update' | trans }}
                                 </button>
                                 <button class="btn btn-primary"
                                         id="event_action_close"
                                         data-controller="ajax-form"
                                         data-ajax-form-close-value="true">
-                                    <i class="fa-solid fa-arrows-rotate fa-spin hide"></i>
+                                    <i class="fa-solid fa-arrows-rotate fa-spin d-none"></i>
                                     {{ 'app.form.action.update_and_close' | trans }}
                                 </button>
                             </div>

@@ -93,27 +93,6 @@ function initSidebar() {
 
 }
 
-let originalLeave = $.fn.popover.Constructor.prototype.leave;
-$.fn.popover.Constructor.prototype.leave = function (obj) {
-    let self = obj instanceof this.constructor ?
-        obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
-    let container, timeout;
-
-    originalLeave.call(this, obj);
-
-    if (obj.currentTarget) {
-        container = $(obj.currentTarget).siblings('.popover');
-        timeout = self.timeout;
-        container.one('mouseenter', function () {
-            clearTimeout(timeout);
-
-            container.one('mouseleave', function () {
-                $.fn.popover.Constructor.prototype.leave.call(self, self);
-            });
-        });
-    }
-};
-
 function initValidator() {
     if (typeof (validator) === 'undefined') {
         return;
@@ -261,7 +240,7 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
 
         let data = new FormData(form[0]);
         buttonCreate.prop('disabled', true);
-        loadingIcon.removeClass('hide');
+        loadingIcon.removeClass('d-none');
 
         $.ajax({
             type: form.attr('method'),
@@ -295,7 +274,7 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
                 processResponse(response.responseJSON)
             }
         }).done(function () {
-            loadingIcon.addClass('hide');
+            loadingIcon.addClass('d-none');
             buttonCreate.prop('disabled', false);
             setTimeout(function () {
                 $('.validation-error').remove();
@@ -327,7 +306,7 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
 
         let data = new FormData(form[0]);
         buttonCreate.prop('disabled', true);
-        loadingIcon.removeClass('hide');
+        loadingIcon.removeClass('d-none');
 
         $.ajax({
             type: form.attr('method'),
@@ -361,7 +340,7 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
                 processResponse(response.responseJSON)
             }
         }).done(function () {
-            loadingIcon.addClass('hide');
+            loadingIcon.addClass('d-none');
             buttonCreate.prop('disabled', false);
             setTimeout(function () {
                 $('.validation-error').remove();
@@ -385,12 +364,10 @@ function initAjaxDeleteContent() {
 
                 let url = element.getAttribute('data-delete-target-url');
                 let row = $('tr').filter('[data-delete-row="' + element.getAttribute('data-delete-target-row') + '"]');
-                let modalWindow = $('.modal');
-                let modalBackdrop = $('.modal-backdrop');
 
                 element.disabled = true;
                 let loadingIcon = element.childNodes[1];
-                loadingIcon.classList.remove('hide');
+                loadingIcon.classList.remove('d-none');
 
                 window.automaticModalWindowClose = true;
 
@@ -412,19 +389,12 @@ function initAjaxDeleteContent() {
                         processResponse(response.responseJSON)
                     }
                 }).done(function () {
-                    loadingIcon.classList.add('hide');
+                    loadingIcon.classList.add('d-none');
                     element.disabled = false;
                 }).fail(function () {
-                    loadingIcon.classList.add('hide');
+                    loadingIcon.classList.add('d-none');
                     element.disabled = false;
-
-                    if (modalBackdrop.hasClass('in')) {
-                        modalBackdrop.removeClass('in');
-                    }
-
-                    if (modalWindow.hasClass('in')) {
-                        modalWindow.removeClass('in');
-                    }
+                    $('.modal').modal('hide');
                 });
             };
         });
@@ -432,7 +402,7 @@ function initAjaxDeleteContent() {
 }
 
 function initTooltip() {
-    $('[data-toggle="tooltip"]').tooltip({
+    $('[data-bs-toggle="tooltip"]').tooltip({
         container: 'body'
     });
 }
@@ -469,17 +439,6 @@ function initHideShow() {
     $('.close-link').on('click', (function () {
         $(this).closest('.x_panel').remove();
     }));
-}
-
-function initPopover() {
-    $('body').popover({
-        selector: '[data-popover]',
-        trigger: 'click hover',
-        delay: {
-            show: 50,
-            hide: 400
-        }
-    });
 }
 
 function backToTop() {
@@ -730,20 +689,14 @@ function getErrorMessage(status) {
 }
 
 function closeModalWindowOnError() {
-    const modalBackdrop = document.querySelector('.modal-backdrop');
     const modalWindow = document.getElementById('modalWindow');
-    const modalWindowContent = document.querySelector('#modalWindow .modal-content');
 
-    if (modalBackdrop && modalBackdrop.classList.contains('in')) {
-        modalBackdrop.classList.remove('in');
+    if (modalWindow === null || !modalWindow.classList.contains('show')) {
+        return;
     }
 
-    if (modalWindow && modalWindow.classList.contains('in')) {
-        modalWindow.classList.remove('in');
-        if (modalWindowContent) {
-            modalWindowContent.innerHTML = '';
-        }
-    }
+    window.automaticModalWindowClose = true;
+    $(modalWindow).modal('hide');
 }
 
 function hideAjaxLoader() {
@@ -761,22 +714,31 @@ function initLayout() {
     initValidator();
     initTooltip();
     initHideShow();
-    initPopover();
     initModalDraggable();
     initBackToTop();
     initAjaxDeleteContent();
 
+    $('#modalWindow').on('show.bs.modal', function (event) {
+        const trigger = event.relatedTarget;
+        const url = trigger ? trigger.getAttribute('href') : null;
+
+        if (url === null || url === '' || url === '#') {
+            return;
+        }
+
+        $(this).find('.modal-content').load(url);
+    });
+
     $('body').on('hidden.bs.modal', '.modal', function () {
-        $(this).removeData('bs.modal');
         $('#modalWindow .modal-dialog').html('<div class="modal-content"></div>');
         $('.modal-dialog').attr('style', '');
     });
 
-    $(document).on('focusin', function (event) {
-        if ($(event.target).closest('.mce-window').length) {
+    document.addEventListener('focusin', function (event) {
+        if (event.target.closest('.tox-tinymce, .tox-tinymce-aux, .tox-dialog') !== null) {
             event.stopImmediatePropagation();
         }
-    });
+    }, true);
 
     $('#modalWindow').on('hide.bs.modal', function () {
         if (window.automaticModalWindowClose === true) {
@@ -818,19 +780,7 @@ function initLayout() {
         }
 
         const message = getErrorMessage(jqXHR.status);
-        let modalBackdrop = $('.modal-backdrop');
-        let modalWindow = $('#modalWindow');
-        let modalWindowContent = $('#modalWindow .modal-content');
-
-        if (modalBackdrop.hasClass('in')) {
-            modalBackdrop.removeClass('in');
-        }
-
-        if (modalWindow.hasClass('in')) {
-            modalWindow.removeClass('in');
-            modalWindowContent.empty();
-        }
-
+        closeModalWindowOnError();
         notifyMessage('error', message);
     });
 }

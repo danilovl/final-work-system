@@ -23,9 +23,9 @@
                     </div>
                     <div class="x_content" {% if openSearchTab == false %} style="display: none;" {% endif %}>
                         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                        <div class="item form-group">
-                            {{ form_label(form.status, 'app.form.label.work_status', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="item form-group row">
+                            {{ form_label(form.status, 'app.form.label.work_status', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                            <div class="col-md-6 col-sm-6 col-12">
                                 {{ form_widget(form.status, {
                                     'attr': {
                                         'data-controller': 'select2',
@@ -35,8 +35,8 @@
                                 }) }}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <div class="form-group row">
+                            <div class="col-md-6 col-sm-6 col-12 offset-md-3">
                                 <input type="submit"
                                        class="btn btn-success"
                                        value="{{ 'app.form.action.search' | trans }}"/>
@@ -111,7 +111,7 @@
                                                 <ul class="list-inline prod_size">
                                                     {% for role in user.roles %}
                                                         {% if userHelper.getRealRoleName(role) is not empty %}
-                                                            <li>
+                                                            <li class="list-inline-item">
                                                                 <button type="button"
                                                                         class="btn btn-default btn-xs">
                                                                     {{ ('app.roles.' ~ userHelper.getRealRoleName(role)) | trans }}
@@ -124,7 +124,7 @@
                                             <td>
                                                 <ul class="list-inline prod_size">
                                                     {% for category in user.groups %}
-                                                        <li>
+                                                        <li class="list-inline-item">
                                                             <button type="button"
                                                                     class="btn btn-default btn-xs">
                                                                 {{ category.name }}
@@ -144,15 +144,15 @@
                                             <td>
                                                 <a class="btn btn-warning btn-xs"
                                                    href="{{ path('user_edit', { 'id': user.id | hashids_encode }) }}"
-                                                   data-toggle="modal"
-                                                   data-target="#modalWindow">
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#modalWindow">
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                     {{ 'app.form.action.edit' | trans }}
                                                 </a>
                                                 <a class="btn btn-info btn-xs"
                                                    role="tab"
                                                    id="heading-user-description-{{ user.id | hashids_encode }}"
-                                                   data-toggle="collapse"
+                                                   data-bs-toggle="collapse"
                                                    href="#tab-user-description-{{ user.id | hashids_encode }}"
                                                    aria-expanded="true"
                                                    aria-controls="tab-user-description-{{ user.id | hashids_encode }}">
@@ -169,21 +169,21 @@
                                                      aria-labelledby="heading-user-description-{{ user.id | hashids_encode }}">
                                                     <div class="tab-content">
                                                         <div class="row">
-                                                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                                            <div class="col-md-5 col-sm-5 col-5">
                                                                 <div class="x_panel">
                                                                     <div class="x_content">
-                                                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                                                        <div class="col-md-12 col-sm-12 col-12">
+                                                                            <div class="col-md-4 col-sm-4 col-4">
                                                                                 <div class="profile_img">
                                                                                     <div id="crop-avatar">
-                                                                                        <img class="img-responsive avatar-view center-margin"
+                                                                                        <img class="img-fluid avatar-view center-margin"
                                                                                              src="{{ user | profile_image }}"
                                                                                              alt="profile image"
                                                                                              title="profile image">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                                                            <div class="col-md-8 col-sm-8 col-8">
                                                                                 <div>
                                                                                     <h3>{{ user }}</h3>
                                                                                     <ul class="list-unstyled user_data">
@@ -222,7 +222,7 @@
                                                                                                     <div>
                                                                                                         <ul class="list-inline prod_size">
                                                                                                             {% for category in user.groups %}
-                                                                                                                <li>
+                                                                                                                <li class="list-inline-item">
                                                                                                                     <button type="button"
                                                                                                                             class="btn btn-default btn-xs">
                                                                                                                         {{ category.name }}
@@ -246,7 +246,7 @@
 
                                                             {% if userWorks[user.id] is defined and userWorks[user.id] is not empty %}
                                                                 {% set works = userWorks[user.id] %}
-                                                                <div class="col-md-7 col-sm-7 col-xs-7">
+                                                                <div class="col-md-7 col-sm-7 col-7">
                                                                     <div class="chat-discussion"
                                                                          style="height: 250px !important;">
                                                                         <table class="table table-striped projects">
@@ -283,10 +283,10 @@
                                                                                         {{ work.author }}
                                                                                     </td>
                                                                                     <td>
-                                                                                        <span data-toggle="tooltip"
-                                                                                              data-placement="top"
+                                                                                        <span data-bs-toggle="tooltip"
+                                                                                              data-bs-placement="top"
                                                                                               title=""
-                                                                                              data-original-title=" {{ work.type.name }}">
+                                                                                              data-bs-title=" {{ work.type.name }}">
                                                                                             {{ work.type.shortcut }}
                                                                                         </span>
                                                                                     </td>

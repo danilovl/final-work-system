@@ -9,7 +9,7 @@
 			<div class="clearfix"></div>
 			{% if  isSystemEventUnreadExist %}
 				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 mb-small">
+					<div class="col-md-12 col-sm-12 col-12 mb-small">
 						{{ 'app.text.set_alerts_all_viewed' | trans }}
 
 						{% include 'other/common_part/button/js-switch.html.twig' with {
@@ -21,7 +21,7 @@
 
 			<div class="row">
 				{% for key,group in paginator %}
-					<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="col-md-6 col-sm-6 col-12">
 						<div class="x_panel tile fixed_height_320">
 							<div class="x_title">
 								<h2>
@@ -57,13 +57,13 @@
 										<tbody>
 
 										{% for systemEventRecipient in group %}
-											<tr class="active">
+											<tr class="table-active">
 												<td>
 													{{ systemEventRecipient.createdAt | date("d.m.Y H:i") }}
 												</td>
 												<td>
 													<ul class="list-inline">
-														<li>
+														<li class="list-inline-item">
 															<img src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
 																 class="avatar" alt="Avatar">
 														</li>

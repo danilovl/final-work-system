@@ -49,7 +49,7 @@ export default class extends Controller {
         const mainInfoTop = $(this.mainInfoTarget).offset().top;
         const isScrolledBelow = $(window).scrollTop() > mainInfoTop;
 
-        $(this.fixedInfoTarget).toggleClass('hide', !isScrolledBelow);
+        $(this.fixedInfoTarget).toggleClass('d-none', !isScrolledBelow);
     }
 
     showRemaining(deadline, element, interval) {

@@ -8,8 +8,8 @@
     {% set deleteClass = modalDataTargetDeleteClass %}
 {% endif %}
 
-<a data-toggle="modal"
-   data-target="#{{ modalDataTarget }}-delete-modal-{{ modalDataTargetId | hashids_encode }}"
+<a data-bs-toggle="modal"
+   data-bs-target="#{{ modalDataTarget }}-delete-modal-{{ modalDataTargetId | hashids_encode }}"
    class="{{ deleteClass }}">
     <i class="{{ deleteIcon }}"></i>
     {% if modalDataTargetDeleteText is defined %}

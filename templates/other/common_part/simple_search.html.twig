@@ -1,17 +1,15 @@
 {% set inputGroupClass = inputGroupClass is defined ? inputGroupClass : '' %}
 
-{{ form_start(searchForm, {'attr': {'class': 'pull-right mail-search'}}) }}
+{{ form_start(searchForm, {'attr': {'class': 'float-end mail-search'}}) }}
 
 <div class="input-group {{ inputGroupClass }}">
-    {{ form_widget(searchForm.search, {'attr': {'class': 'form-control input-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
-    <div class="input-group-btn">
-        <button type="submit"
-                id="simple-search-button-action"
-                class="btn btn-sm btn-primary"
-        >
-            {{ 'app.text.search' | trans }}
-        </button>
-    </div>
+    {{ form_widget(searchForm.search, {'attr': {'class': 'form-control form-control-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
+    <button type="submit"
+            id="simple-search-button-action"
+            class="btn btn-sm btn-primary"
+    >
+        {{ 'app.text.search' | trans }}
+    </button>
 </div>
 
 {{ form_end(searchForm) }}
@@ -19,7 +17,7 @@
 {% if enableClearSearch %}
     <a href="{{ clearSearchUrl }}"
        id="clear-simple-search-button-action"
-       class="btn btn-danger btn-xs pull-right"
+       class="btn btn-danger btn-xs float-end"
     >
         <i class="fa-solid fa-xmark"></i>
     </a>

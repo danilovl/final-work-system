@@ -5,7 +5,7 @@
         <div>
             <div class="clearfix"></div>
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-12">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
@@ -23,7 +23,7 @@
                         <div class="x_content">
                             <div class="ibox-content">
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-12">
 
                                         {% set googleMapAttr = {
                                             'data-controller': 'google-map tinymce',
@@ -41,31 +41,31 @@
                                                 'class': 'form-horizontal'
                                             }|merge(googleMapAttr)
                                         }) }}
-                                        <div class="item form-group">
-                                            {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
                                             </div>
                                             {% if not form.name.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.name) }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="item form-group">
-                                            {{ form_label(form.description, 'app.form.label.description' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.description, 'app.form.label.description' , {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
                                             </div>
                                             {% if not form.description.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.description) }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="item form-group">
-                                            {{ form_label(form.street, 'app.form.label.street', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.street, 'app.form.label.street', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.street, {
                                                     'attr': {
                                                         'class': 'form-control',
@@ -74,14 +74,14 @@
                                                 }) }}
                                             </div>
                                             {% if not form.street.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.street) }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="item form-group">
-                                            {{ form_label(form.latitude, 'app.form.label.latitude', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.latitude, 'app.form.label.latitude', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.latitude, {
                                                     'attr': {
                                                         'class': 'form-control',
@@ -90,14 +90,14 @@
                                                 }) }}
                                             </div>
                                             {% if not form.latitude.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.latitude) }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="item form-group">
-                                            {{ form_label(form.longitude, 'app.form.label.longitude', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.longitude, 'app.form.label.longitude', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.longitude, {
                                                     'attr': {
                                                         'class': 'form-control',
@@ -106,14 +106,14 @@
                                                 }) }}
                                             </div>
                                             {% if not form.longitude.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.longitude) }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="item form-group">
-                                            {{ form_label(form.skype, 'app.form.label.skype', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="item form-group row">
+                                            {{ form_label(form.skype, 'app.form.label.skype', {'label_attr': {'class': 'col-form-label col-md-3 col-sm-3 col-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-12">
                                                 {{ form_widget(form.skype, {
                                                     'attr': {
                                                         'data-controller': 'switch',
@@ -122,20 +122,20 @@
                                                 }) }}
                                             </div>
                                             {% if not form.skype.vars.valid %}
-                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                <div class="col-md-3 col-sm-3 col-12 red">
                                                     {{ form_errors(form.skype) }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-12 col-sm-12 col-12">
                                                 <div class="x_content">
                                                     <div class="google-map" id="map" style="height: 400px" data-google-map-target="map"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-sm-6 col-12 offset-md-3">
                                                 <input type="submit"
                                                        id="create-event-address-button-action"
                                                        class="btn btn-success"
