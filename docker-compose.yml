@@ -103,6 +103,7 @@ services:
 
   minio:
     build: docker/minio
+    user: root
     command: server --console-address ":9001" /data/
     ports:
       - '7108:9000'
