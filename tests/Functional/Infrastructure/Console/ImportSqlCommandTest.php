@@ -12,7 +12,7 @@
 
 namespace App\Tests\Functional\Infrastructure\Console;
 
-use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Exception\InvalidArgumentException;
 use App\Infrastructure\Console\ImportSqlCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

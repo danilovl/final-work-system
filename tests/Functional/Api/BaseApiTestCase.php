@@ -12,7 +12,7 @@
 
 namespace App\Tests\Functional\Api;
 
-use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Infrastructure\Interfaces\Bus\CommandBusInterface;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Factory\ConversationFactory;
