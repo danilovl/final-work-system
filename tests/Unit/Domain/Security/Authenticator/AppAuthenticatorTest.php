@@ -14,7 +14,14 @@ namespace App\Tests\Unit\Domain\Security\Authenticator;
 
 use App\Domain\Security\Authenticator\AppAuthenticator;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
+};
+use App\Domain\User\Bus\Query\UserByUsername\{
+    GetUserByUsernameQuery,
+    GetUserByUsernameQueryResult
+};
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\Stub;
@@ -66,26 +73,26 @@ class AppAuthenticatorTest extends TestCase
         $this->request->setSession(new Session);
 
         $this->userService = $this->createStub(UserService::class);
-        /** @var Stub&UserFacade $userFacade */
-        $userFacade = $this->createStub(UserFacade::class);
+        /** @var Stub&QueryBusInterface $queryBus */
+        $queryBus = $this->createStub(QueryBusInterface::class);
         $this->urlGenerator = $this->createStub(UrlGeneratorInterface::class);
         $this->httpUtils = $this->createStub(HttpUtils::class);
         $this->httpKernel = $this->createStub(HttpKernelInterface::class);
         /** @var Stub&EntityManagerService $entityManagerService */
         $entityManagerService = $this->createStub(EntityManagerService::class);
 
-        $userFacade
-            ->method('findByUsername')
-            ->willReturnCallback(static function (string $username): ?User {
-                return match ($username) {
-                    'username' => new User,
-                    default => null
-                };
+        $queryBus
+            ->method('handle')
+            ->willReturnCallback(static function (QueryInterface $query): GetUserByUsernameQueryResult {
+                $isKnownUser = $query instanceof GetUserByUsernameQuery && $query->username === 'username';
+                $user = $isKnownUser ? new User : null;
+
+                return new GetUserByUsernameQueryResult($user);
             });
 
         $this->authenticator = new AppAuthenticator(
             $this->userService,
-            $userFacade,
+            $queryBus,
             $this->urlGenerator,
             $this->httpUtils,
             $this->httpKernel,

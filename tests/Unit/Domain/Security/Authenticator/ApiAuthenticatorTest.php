@@ -13,10 +13,20 @@
 namespace App\Tests\Unit\Domain\Security\Authenticator;
 
 use App\Domain\ApiUser\Entity\ApiUser;
-use App\Domain\ApiUser\Facade\ApiUserFacade;
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
+};
+use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{
+    GetApiUserByKeyQuery,
+    GetApiUserByKeyQueryResult
+};
 use App\Domain\Security\Authenticator\ApiAuthenticator;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
+use App\Domain\User\Bus\Query\UserByToken\{
+    GetUserByTokenQuery,
+    GetUserByTokenQueryResult
+};
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\Stub;
@@ -45,35 +55,31 @@ class ApiAuthenticatorTest extends TestCase
         $this->request->headers->set(ApiAuthenticator::AUTH_USER_USERNAME, 'AUTH_USER_USERNAME');
 
         $this->userService = $this->createStub(UserService::class);
-        /** @var Stub&ApiUserFacade $apiUserFacade */
-        $apiUserFacade = $this->createStub(ApiUserFacade::class);
-        /** @var Stub&UserFacade $userFacade */
-        $userFacade = $this->createStub(UserFacade::class);
+        /** @var Stub&QueryBusInterface $queryBus */
+        $queryBus = $this->createStub(QueryBusInterface::class);
         /** @var Stub&EntityManagerService $entityManagerService */
         $entityManagerService = $this->createStub(EntityManagerService::class);
 
-        $apiUserFacade
-            ->method('findByApiKey')
-            ->willReturnCallback(static function (string $key): ?ApiUser {
-                return match ($key) {
-                    'AUTH_KEY' => new ApiUser,
-                    default => null
-                };
-            });
+        $queryBus
+            ->method('handle')
+            ->willReturnCallback(static function (QueryInterface $query): object {
+                if ($query instanceof GetApiUserByKeyQuery) {
+                    $apiUser = $query->apiKey === 'AUTH_KEY' ? new ApiUser : null;
 
-        $userFacade
-            ->method('findByToken')
-            ->willReturnCallback(static function (string $username, string $token): ?User {
-                return match ([$username, $token]) {
-                    ['AUTH_USER_USERNAME', 'AUTH_USER_TOKEN_KEY'] => new User,
-                    default => null
-                };
+                    return new GetApiUserByKeyQueryResult($apiUser);
+                }
+
+                $isTokenValid = $query instanceof GetUserByTokenQuery
+                    && $query->username === 'AUTH_USER_USERNAME'
+                    && $query->token === 'AUTH_USER_TOKEN_KEY';
+                $user = $isTokenValid ? new User : null;
+
+                return new GetUserByTokenQueryResult($user);
             });
 
         $this->authenticator = new ApiAuthenticator(
             $this->userService,
-            $apiUserFacade,
-            $userFacade,
+            $queryBus,
             $entityManagerService
         );
     }

@@ -14,7 +14,14 @@ namespace App\Tests\Unit\Domain\Security\Provider;
 
 use App\Domain\Security\Provider\AppUserProvider;
 use App\Domain\User\Entity\User;
-use App\Domain\User\Facade\UserFacade;
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
+};
+use App\Domain\User\Bus\Query\UserByUsername\{
+    GetUserByUsernameQuery,
+    GetUserByUsernameQueryResult
+};
 use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -28,20 +35,21 @@ class AppUserProviderTest extends TestCase
 
     protected function setUp(): void
     {
-        $userFacade = $this->createStub(UserFacade::class);
+        $queryBus = $this->createStub(QueryBusInterface::class);
         $this->entityManagerService = $this->createStub(EntityManagerService::class);
 
-        $userFacade
-            ->method('findByUsername')
-            ->willReturnCallback(static function (string $username): ?User {
-                return match ($username) {
-                    'identifier', 'username' => new User,
-                    default => null
-                };
+        $queryBus
+            ->method('handle')
+            ->willReturnCallback(static function (QueryInterface $query): GetUserByUsernameQueryResult {
+                $isKnownUser = $query instanceof GetUserByUsernameQuery
+                    && in_array($query->username, ['identifier', 'username'], true);
+                $user = $isKnownUser ? new User : null;
+
+                return new GetUserByUsernameQueryResult($user);
             });
 
         $this->appUserProvider = new AppUserProvider(
-            $userFacade,
+            $queryBus,
             $this->entityManagerService
         );
     }

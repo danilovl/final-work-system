@@ -13,7 +13,14 @@
 namespace App\Tests\Unit\Domain\Security\Provider;
 
 use App\Domain\ApiUser\Entity\ApiUser;
-use App\Domain\ApiUser\Facade\ApiUserFacade;
+use App\Application\Interfaces\Bus\{
+    QueryBusInterface,
+    QueryInterface
+};
+use App\Domain\ApiUser\Bus\Query\ApiUserByKey\{
+    GetApiUserByKeyQuery,
+    GetApiUserByKeyQueryResult
+};
 use App\Domain\Security\Provider\ApiKeyUserProvider;
 use App\Domain\User\Entity\User;
 use PHPUnit\Framework\TestCase;
@@ -24,24 +31,25 @@ use Symfony\Component\Security\Core\Exception\{
 
 class ApiKeyUserProviderTest extends TestCase
 {
-    private ApiUserFacade $apiUserFacade;
+    private QueryBusInterface $queryBus;
 
     private ApiKeyUserProvider $apiKeyUserProvider;
 
     protected function setUp(): void
     {
-        $this->apiUserFacade = $this->createStub(ApiUserFacade::class);
+        $queryBus = $this->createStub(QueryBusInterface::class);
 
-        $this->apiUserFacade
-            ->method('findByApiKey')
-            ->willReturnCallback(static function (string $key): ?ApiUser {
-                return match ($key) {
-                    'identifier' => new ApiUser,
-                    default => null
-                };
+        $queryBus
+            ->method('handle')
+            ->willReturnCallback(static function (QueryInterface $query): GetApiUserByKeyQueryResult {
+                $isKnownKey = $query instanceof GetApiUserByKeyQuery && $query->apiKey === 'identifier';
+                $apiUser = $isKnownKey ? new ApiUser : null;
+
+                return new GetApiUserByKeyQueryResult($apiUser);
             });
 
-        $this->apiKeyUserProvider = new ApiKeyUserProvider($this->apiUserFacade);
+        $this->queryBus = $queryBus;
+        $this->apiKeyUserProvider = new ApiKeyUserProvider($this->queryBus);
     }
 
     public function testLoadUserByIdentifierSuccess(): void
