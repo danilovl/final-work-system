@@ -45,7 +45,18 @@ class ResizeImageService
             return null;
         }
 
-        imagecopyresized($thumb, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagecopyresized(
+            dst_image: $thumb,
+            src_image: $image,
+            dst_x: 0,
+            dst_y: 0,
+            src_x: 0,
+            src_y: 0,
+            dst_width: $newWidth,
+            dst_height: $newHeight,
+            src_width: $width,
+            src_height: $height
+        );
 
         $contents = $this->getContent($thumb);
         if ($contents === false) {
