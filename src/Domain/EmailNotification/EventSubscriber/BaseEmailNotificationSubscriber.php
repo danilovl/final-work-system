@@ -26,7 +26,11 @@ use App\Domain\EmailNotification\Model\EmailNotificationModel;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Bus\Query\UserByEmail\{GetUserByEmailQuery, GetUserByEmailQueryResult};
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\{
+    Envelope,
+    MessageBusInterface
+};
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 class BaseEmailNotificationSubscriber
 {
@@ -136,6 +140,8 @@ class BaseEmailNotificationSubscriber
 
     protected function sendToMessenger(EmailNotificationMessage $queueData): void
     {
-        $this->bus->dispatch($queueData);
+        $envelope = new Envelope($queueData, [new DispatchAfterCurrentBusStamp]);
+
+        $this->bus->dispatch($envelope);
     }
 }
