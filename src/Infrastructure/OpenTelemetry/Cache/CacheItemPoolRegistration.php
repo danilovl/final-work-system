@@ -19,7 +19,7 @@ use OpenTelemetry\API\Trace\{
     SpanKind
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
+use OpenTelemetry\SemConv\Attributes\CodeAttributes;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use function OpenTelemetry\Instrumentation\hook;
@@ -62,10 +62,9 @@ class CacheItemPoolRegistration implements OpenTelemetryRegistrationInterface
             $builder = $instrumentation->tracer()
                 ->spanBuilder($spanName)
                 ->setSpanKind(SpanKind::KIND_INTERNAL)
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
+                ->setAttribute(CodeAttributes::CODE_FUNCTION_NAME, $function)
+                ->setAttribute(CodeAttributes::CODE_FILE_PATH, $filename)
+                ->setAttribute(CodeAttributes::CODE_LINE_NUMBER, $lineno)
                 ->setAttribute('cache.key', $key);
 
             $span = $builder->startSpan();
