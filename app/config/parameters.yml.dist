@@ -8,11 +8,6 @@ parameters:
     database_user: ~
     database_password: ~
 
-    mailer_transport: smtp
-    mailer_host: ~
-    mailer_user: ~
-    mailer_password: ~
-
     mailer_transport: ~
     mailer_host: ~
     mailer_user: ~
