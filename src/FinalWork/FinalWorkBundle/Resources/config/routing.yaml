@@ -127,14 +127,6 @@ system_event:
   defaults:
     _locale: '%locale%'
 
-insis:
-  resource: "@FinalWorkBundle/Resources/config/routing/insis.yml"
-  prefix:   /{_locale}/work/insis
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
 user:
   resource: "@FinalWorkBundle/Resources/config/routing/user.yml"
   prefix:   /{_locale}/user/
