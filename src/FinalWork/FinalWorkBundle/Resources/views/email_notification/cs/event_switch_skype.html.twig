@@ -1,0 +1,15 @@
+{% block content %}
+    <body>
+    <div>
+        Dobrý den,
+        <br><br>
+        {{ event.participant.user }} přepnoul místo schůzky na skype u
+        <a href="{{ absolute_url(path('event_detail', {'_locale': default_locale, 'id': event.id | hashids_encode })) }}">schůzky</a>
+        s Vámi.
+        <br><br>
+        S pozdravem
+        <br><br>
+        Systém pro vedení bakalářských a diplomových prací
+    </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+    <head>
+        {% include 'FinalWorkBundle::analitics.html.twig' %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        {% block title %} {{ seo_title() }} {% endblock %}
+        {% block stylesheets %}
+            {% stylesheets filter='cssrewrite,scssphp'
+                'vendor/bootstrap/dist/css/bootstrap.min.css'
+                'vendor/jquery-ui/themes/base/jquery-ui.css'
+                'vendor/font-awesome/css/font-awesome.min.css'
+                'vendor/pnotify/dist/pnotify.css'
+                'vendor/pnotify/dist/pnotify.buttons.css'
+                'vendor/pnotify/dist/pnotify.nonblock.css'
+                'vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css'
+                'css/main.css' %}
+                <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+            {% endstylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% javascripts filter='jsqueeze'
+                'vendor/jquery/dist/jquery.min.js'
+                'vendor/jquery-ui/jquery-ui.min.js'
+                'vendor/bootstrap/dist/js/bootstrap.min.js'
+                'vendor/fastclick/lib/fastclick.js'
+                'vendor/pnotify/dist/pnotify.js'
+                'vendor/pnotify/dist/pnotify.buttons.js'
+                'vendor/pnotify/dist/pnotify.nonblock.js'
+                'vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'
+                'vendor/moment/min/moment-with-locales.min.js'
+                'js/main.js' %}
+                <script src="/compiled{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </head>
+{% endblock %}
+
+{% block body %}
+    <body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+
+            {% block sidebar %}
+                {% include 'FinalWorkBundle::sidebar.html.twig' %}
+            {% endblock %}
+
+            {% block topnav %}
+                {% include 'FinalWorkBundle::topnav.html.twig' %}
+            {% endblock %}
+
+            {% block content %}{% endblock %}
+
+            {% block footer %}
+                {% include 'FinalWorkBundle::footer.html.twig' %}
+            {% endblock %}
+
+        </div>
+    </div>
+
+    <div class="modal fade"
+         id="modalWindow"
+         tabindex="-1"
+         role="dialog"
+         data-keyboard="false"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
+
+    <div id='ajax-loader' style="position: fixed; left: 48%; top: 40%; display: none; z-index: 9999">
+        <img src="{{ asset('images/loading.gif') }}" width="50px" height="50px"/>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({'global': true});
+            initSidebar();
+            initValidator();
+            initAutosize();
+            initTooltip();
+            initChecked();
+            initFlat();
+            initHideShow();
+            initPopover();
+            initModalDraggable();
+            initBackToTop();
+
+            $('body').on('hidden.bs.modal', '.modal', function () {
+                $(this).removeData('bs.modal');
+                $('#modalWindow .modal-dialog').html('<div class="modal-content"></div>');
+                $('.modal-dialog').attr('style', '');
+            });
+
+            $(document).on('focusin', function (event) {
+                if ($(event.target).closest(".mce-window").length) {
+                    event.stopImmediatePropagation();
+                }
+            });
+
+            $('#modalWindow').on("hide.bs.modal", function (e) {
+                if (window.automaticModalWindowClose === true) {
+                    window.automaticModalWindowClose = false;
+                } else {
+                    var empty = true;
+                    $(":text, :file, select, textarea").each(function () {
+                        if ($(this).val() !== "") {
+                            empty = false;
+                        }
+                    });
+                    if (empty === false) {
+                        if (!confirm("{{ 'finalwork.form.validation.sure_want_close' | trans }}")) {
+                            return false;
+                        }
+                    }
+                }
+            });
+        });
+
+        $(window).on('scroll', function () {
+            backToTop();
+        });
+
+        $(document).ajaxStart(function () {
+            $("#ajax-loader").show();
+        });
+
+        $(document).ajaxStop(function () {
+            $("#ajax-loader").hide();
+            initModalResize();
+            initModalDraggable();
+        });
+
+        $(document).ajaxError(function (obj, status) {
+            var errors = [];
+            var modalBackdrop = $('.modal-backdrop');
+            var modalWindow = $('#modalWindow');
+            var modalWindowContent = $('#modalWindow .modal-content');
+
+            errors[403] = '{{ 'finalwork.flash.error.403' | trans([], "flashes") }}';
+            errors[404] = '{{ 'finalwork.flash.error.404' | trans([], "flashes") }}';
+            errors[500] = '{{ 'finalwork.flash.error.500' | trans([], "flashes") }}';
+
+            if (modalBackdrop.hasClass('in')) {
+                modalBackdrop.removeClass('in');
+            }
+
+            if (modalWindow.hasClass('in')) {
+                modalWindow.removeClass('in');
+                modalWindowContent.empty();
+            }
+
+            notifyMessage('error', errors[status.status]);
+        });
+
+        {% for type, messages in app.flashes %}
+        {% for message in messages %}
+        $(document).ready(function () {
+            var notifyType = '{{ type }}';
+            var notifyText = '{{ message }}';
+            notifyMessage(notifyType, notifyText);
+        });
+        {% endfor %}
+        {% endfor %}
+    </script>
+
+    {% block javascript %}{% endblock %}
+
+    </body>
+{% endblock %}

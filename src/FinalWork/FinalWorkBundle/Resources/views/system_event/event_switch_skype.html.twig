@@ -1,0 +1,7 @@
+<b>{{ user }}</b> přepnoul místo schůzky na skype u
+<a class="titleToolTip blue"
+   target="_blank"
+   href="{{ (path('event_detail', { 'id': event.id | hashids_encode })) }}">
+    schůzky
+</a>
+s Vámi

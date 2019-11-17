@@ -1,0 +1,5 @@
+{% from '@FinalWork/macro/menu.html.twig' import renderMenu %}
+
+{% if menu is defined and menu is not empty %}
+    {{ renderMenu(menu, 'dropdown-menu dropdown-usermenu pull-right') }}
+{% endif %}

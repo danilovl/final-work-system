@@ -1,0 +1,22 @@
+article_category_list:
+  path: /category/list
+  defaults:
+      _controller: FinalWorkBundle:ArticleCategory:list
+  methods:  [GET, POST]
+
+article_list:
+  path: /category/{id}/article-list
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:ArticleCategory:articleList
+  methods:  [GET, POST]
+
+article_detail:
+  path: /category/{id_category}/article/{id_article}
+#  requirements:
+#      id_article: \d+
+#      id_category: \d+
+  defaults:
+      _controller: FinalWorkBundle:Article:detail
+  methods:  [GET, POST]

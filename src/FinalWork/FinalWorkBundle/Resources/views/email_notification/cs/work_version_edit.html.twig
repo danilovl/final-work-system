@@ -1,0 +1,16 @@
+{% block content %}
+    <body>
+    <div>
+        Dobrý den,
+        <br><br>
+        {{  media.owner }} zaktualizoval údaje verzi "{{ media.name }}" u
+        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}">
+            práci "{{ work }}".
+        </a>
+        <br><br>
+        S pozdravem
+        <br><br>
+        Systém pro vedení bakalářských a diplomových prací
+    </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/fullcalendar/dist/fullcalendar.min.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            {% if event is defined %}
+                {% include '@FinalWork/event/include/header_info.html.twig' %}
+                <div class="row">
+                    {% include '@FinalWork/event/include/info.html.twig' %}
+                    {% include '@FinalWork/event/include/admin.html.twig' %}
+                </div>
+
+                {% include '@FinalWork/event/include/comment.html.twig' %}
+                {% include '@FinalWork/event/include/calendar.html.twig' %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts  filter='jsqueeze'
+        'vendor/fullcalendar/dist/fullcalendar.min.js'
+        'vendor/fullcalendar/dist/lang-all.js' %}
+        <script src="/compiled{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&language={{ app.request.locale }}&region=CS"></script>
+
+    <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+
+    <script type="text/javascript">
+        var locale = '{{ app.request.locale }}';
+
+        var head = document.getElementsByTagName('head')[0];
+        var insertBefore = head.insertBefore;
+        head.insertBefore = function (newElement, referenceElement) {
+            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+                return;
+            }
+            insertBefore.call(head, newElement, referenceElement);
+        };
+
+
+        {% if event.address and event.address.existLocation %}
+        function googleInitMap() {
+            var myLatLng = new google.maps.LatLng( {{ event.address.latitude }}, {{ event.address.longitude }} );
+
+
+            var mapOptions = {
+                zoom: 11,
+                center: myLatLng
+            };
+            var map = new google.maps.Map(document.getElementById('event-address-map'), mapOptions);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map
+            });
+            marker.setMap(map);
+        }
+
+        googleInitMap();
+        {% endif %}
+
+
+        function initAppointmentCalendar(locale) {
+
+            if (typeof ($.fn.fullCalendar) === 'undefined') {
+                return;
+            }
+
+            $('#eventCalendar').fullCalendar({
+                    header: {
+                        left: 'prev,next, today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay,listMonth'
+                    },
+                    defaultDate: '{{ event.start | date('Y-m-d') }}',
+                    lang: locale,
+                    selectable: false,
+                    selectHelper: false,
+                    editable: false,
+                    droppable: false,
+                    events: function (start, end, timezone, callback) {
+                        var startDate = start.format("YYYY-MM-DD HH:mm");
+                        var endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
+
+                        $.ajax({
+                            url: "{{ path('event_detail_events_ajax',{'id' : event.id | hashids_encode}) }}",
+                            data: 'start=' + startDate + '&end=' + endDate,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.valid === true) {
+                                    var events = [];
+                                    var respEvents = response.events;
+
+                                    $.each($.parseJSON(respEvents), function () {
+                                        events.push({
+                                            id: this.id,
+                                            title: this.title,
+                                            start: this.start,
+                                            end: this.end,
+                                            color: this.color,
+                                            allDay: false
+                                        });
+                                    });
+
+                                    callback(events);
+                                }
+
+                                for (var type in response.notifyMessage) {
+                                    notifyMessage(type, response.notifyMessage[type]);
+                                }
+                            }
+                        });
+                    }
+                }
+            );
+        }
+
+        initTinymce(locale);
+        initAppointmentCalendar(locale);
+    </script>
+{% endblock %}

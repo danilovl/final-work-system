@@ -1,0 +1,319 @@
+finalwork:
+  system_name: Systém pro vedení bakalářských a diplomových prací
+  page:
+    appointment_address_create: Vytváření místa schůzky
+    appointment_address_edit: Upravování místa schůzky
+    appointment_address_list: Seznam míst schůzek
+    appointment_calendar: Kalendar schůzek
+    appointment_calendar_manage: Spravovat kalendář schůzek
+    article_category_list: Seznam kategorií článků
+    article_list: Seznam článků
+    conversation_list: Seznam konverzací
+    event_schedule_create: Vytvoření plánu událostí
+    event_schedule_list: Seznam plánu událostí
+    home: Hlavní stránka
+    information_material_create: Vytváření informačního materiálu
+    information_material_edit: Upravování informačního materiálu
+    information_materials: Seznam informačních materiálů
+    information_materials_category_create: Vytvořit kategorií pro informační materiály
+    information_materials_category_edit: Upravování kategorií pro informační materiály
+    information_materials_category_list: Seznam kategorií informačních materiálů
+    insis_filter: Výběr prací podle kritéria
+    insis_login: Přihlášení do systému InSIS
+    login: Přihlašovací stránka
+    message_create: Stránka vytvoření zprávy
+    profile: Profilu
+    profile_edit: Editace profilu
+    task_create: Vyvoření úkolu
+    task_edit: Upravování úkolu
+    task_list: Seznam úkolů
+    user_create: Vytvoření uživatele
+    user_edit: Úprava uživatele
+    user_group_create: Vytvořit skupinu uživatelů
+    user_group_edit: Upravování uživatelské skupiny
+    user_group_list: Seznam uživatelských skupin
+    version_add: Přidání verze
+    version_edit: Upravování verze
+    work_category_create: Vyvoření pracovní kategorie
+    work_category_edit: Upravování pracovní kategorie
+    work_category_list: Seznam pracovních kategorií
+    work_create: Vytvoření práci
+    work_edit: Upravování práci
+  menu:
+    admin: Admin
+    appointment: Schůzka|Schůzky
+    appointment_address_create: Vytvořit místo schůzky
+    appointment_address_list: Seznam míst schůzek
+    appointment_calendar: Kalendář schůzek
+    appointment_calendar_manage: Spravovat kalendář schůzek
+    article_category_list: Seznam kategorií článků
+    article_list: Seznam článků
+    articles: Články
+    author_list: Seznam autorů
+    choose_language: Zvolit jazyk
+    consultant_list: Seznam konzultantů
+    contact_information: Kontaktní informace
+    conversation: Konverzace
+    event_schedule_create: Vytvoření plánu událostí
+    event_schedule_list: Seznam plánu událostí
+    filter: Filtr
+    information_material_create: Vytvořit informační materiál
+    information_materials: Informační materiály
+    information_materials_category_create: Vytvořit kategorií pro informační materiály
+    information_materials_category_list: Seznam kategorií informačních materiálů
+    information_materials_list: Seznam informačních materiálů
+    information_materials_list_my: Seznam mých informačních materiálů
+    logout: Odhlásit se
+    mail_template: Šablona zpráv
+    menu: Menu
+    opponent_list: Seznam oponentů
+    personal_information: Osobní údaje
+    profile: Profil
+    profile_change_password: Změnit heslo
+    profile_edit: Upravit profil
+    profile_image_change: Změnit profilový obrázek
+    task: Úkol|Úkoly
+    unused_user_list: Seznam nepoužívaných uživatelů
+    user: Uživatel|Uživatelé
+    user_create: Vytvoření uživatele
+    user_group_create: Vytvořit skupinu uživatelů
+    user_group_list: Seznam uživatelských skupin
+    work: Prace
+    work_author_list: Seznam aktivních práci
+    work_category_list: Seznam pracovních kategorií
+    work_consultant_list: Seznam konzultovaných práci
+    work_create: Založit novou práci
+    work_from_insis: Přenést práci z InSIS
+    work_list: Seznam prací
+    work_opponent_list: Seznam oponovaných práci
+    work_supervisor_list: Seznam vedených práci
+  form:
+    label:
+      active: Aktivní
+      appointment_address: Místo schůzky
+      appointment_participant: Účastník schůzky
+      author: Autor
+      category: Kategorie
+      complete: Kompletní
+      consultant: Konzultant
+      deadline: Termín
+      degree_after: Titul za jménem
+      degree_before: Titul před jménem
+      description: Popis
+      email: Email
+      end: Konec
+      facebook: Facebook
+      file: Soubor
+      first_name: Jméno
+      group: Skupina
+      last_name: Příjmení
+      latitude: Latitude
+      login_form: Přihlašovací formulář
+      longitude: Longitude
+      message_greeting: Pozdrav zprávy
+      message_signature: Podpis zprávy
+      name: Název
+      opponent: Oponent
+      original_file_name: Původní název souboru
+      password: Heslo
+      phone: Telefon
+      program_deadline: Termín programu
+      role: Role
+      shortcut: Zkratka
+      skype: Skype
+      sorting: Řazení
+      start: Start
+      status: Status
+      street: Ulice
+      supervisor: Vedoucí
+      term_for_testing: Termín pro testování
+      title: Název
+      type: Typ
+      username: Uživatelské jméno
+      version: Verze
+      whom: Komu
+      work: Prace
+      work_status: Status práce
+      work_deadline: Termín práce
+      year: Rok
+    action:
+      activate: Aktivovat
+      add_work_version: Přidat novou verzi
+      archivate: Archivovat
+      clonning: Klonovat
+      close: Zavřít
+      create: Vytvořit
+      edit_and_close: Upravit a zavřít
+      create_and_close: Vytvořit a zavřít
+      delete: Smazat
+      download: Stáhnout
+      edit: Upravit
+      edit_author: Upravit autora
+      login: Přihlásit se
+      reserve: Rezervovat
+      save: Uložit
+      search: Hledat
+      select: Vybrat
+      send: Odeslat
+      show: Zobrazit
+      show_content: Zobrazit obsah
+      show_detail: Zobrazit detail
+      switch_to_skype: Přepnout na skype
+      task_create: Vytvořit úkol
+      update: Aktualizovat
+      update_and_close: Aktualizovat a zavřít
+      user_create: Vytvořit uživatele
+      work_create: Vytvořit práci
+    validation:
+      date_start_more_end: Začátek se začíná později než konec
+      invalid_username_email: Neplatné jméno uživatele nebo email
+      sure_want_close: Jste si jisti, že chcete zavřít?
+  text:
+    active: Aktivní
+    admin_panel: Administrativní panel
+    appointment: Schůzka|Schůzky
+    appointment_address: Místo schůzky
+    appointment_calendar: Kalendář schůzek
+    appointment_calendar_manage: Spravovat kalendář schůzek
+    are_you_sure_delete: Opravdu chcete smazat
+    are_you_sure_switch_to_skype: Opravdu chcete zmenit misto schůzky na Skype
+    attachment: Příloha
+    author: Autor
+    author_list: Seznam autorů
+    back_to_revision: Zpět k přepracování
+    group_mail: Hromadná pošta
+    category: Kategorie
+    comment: Komentář
+    complete: Kompletní
+    consultant_list: Seznam konzultantů
+    conversation: Konverzace
+    conversation_attachment: Přílohy z konverzace
+    created: Vytvořeno
+    created_by: Vytvořil
+    date_added: Datum přidání
+    date_last_message: Datum poslední zprávy
+    deadline: Termín
+    delete: Smazat
+    deleting: Odstranění
+    description: Popis
+    end: Konec
+    event: Událost
+    event_list: Seznam událostí
+    fast_access: Rychlý přístup
+    file_not_found: Soubor nenalezen
+    file_size: Velikost souboru
+    first_name: Jméno
+    group: Skupina
+    inactive: Neaktivní
+    inbox: Doručené
+    information_material_create: Vytvořit informační materiál
+    information_materials: Informační materiály
+    information_materials_list: Seznam informačních materiálů
+    last_message_from: Poslední zpráva od
+    last_update: Poslední aktualizace
+    latitude: Latitude
+    less_then_day: mene než %day% dnů
+    list_converted_insis_jobs: Seznam převedených prací ze systému InSIS
+    list_non_converted_insis_jobs: Seznam nepřevedených prací ze systému InSIS
+    longitude: Longitude
+    map: Mapa
+    message: Zpráva|Zprávy
+    more_then_day: více než %day% dnů
+    name: Název
+    name_conversation: Název konverzace
+    new_message: Nová zpráva
+    no_result: Žádný výsledek
+    no_tasks: Žádné úkoly
+    notify_completed: Oznámení dokončení
+    open_conversation_in_new_window: Otevřit konverzace v novém okně
+    opponent: Oponent
+    opponent_list: Seznam oponentů
+    option: Možnost
+    options: Možnosti
+    original_file_name: Původní název souboru
+    personal_information_author: Osobní údaje autora
+    personal_information_consultant: Osobní údaje konzultanta
+    personal_information_opponent: Osobní údaje oponenta
+    priority: Priorita
+    program_deadline: Termín programu
+    quantity: Množství
+    read: Číst
+    remaining_time: Zbývající čas
+    role: Role
+    search: Vyhledávání
+    search_form: Vyhledávací formulář
+    see_all_alerts: Zobrazit všechny výstrahy
+    see_all_messages: Zobrazit všechny zprávy
+    show_last_messages: Zobrazit poslední zprávy
+    skype: Skype
+    sorting: Řazení
+    start: Start
+    state: Stav
+    status: Status
+    street: Ulice
+    supervisor: Vedoucí
+    switch_to_skype: Přepnout na skype
+    task: Úkol|Úkoly
+    task_completed: Dokončené úkoly
+    task_list: Seznam úkolů
+    term_for_testing: Termín pro testování
+    type: Typ
+    unused_user_list: Seznam nepoužívaných uživatelů
+    user: Uživatel
+    version: Verze|Verze
+    work: Práce
+    work_category_list: Seznam pracovních kategorií
+    work_deadline: Termín práce
+    work_list: Seznam prací
+    work_title: Název práce
+    work_type: Typ práce
+    write_message: Napsat zprávu
+  tooltip:
+    document_active: Informační materiál se zobrazují studentům(zelená barva)
+    task_deadline: Termín do kdy musí být úkol splněn
+    task_complete: Úkol je vyřešen(zelená barva)
+    task_active: Úkol se zobrazují studentům(zelená barva)
+    task_back_to_revision_supervisor: Úkol ve stavu kontroly(červená barva)/ Úkol vrácen k přepracování(zelená barva)
+    task_back_to_revision: Úkol lze označít jako dokončený(červená barva)/Úkol označen jako dokončený(zelená barva)
+  error:
+    403: Přístup zamítnut
+    404: Je nám líto, ale nemůžeme najít tuto stránku
+    500: Interní chyba serveru
+  calendar:
+    month:
+      month: Měsíc|Měsíců
+      january: Únor
+      february: Březen
+      march: Duben
+      april: Květen
+      may: Červenec
+      june: Červenec
+      july: Červenec
+      august: Srpen
+      september: Září
+      october: Říjen
+      november: Listopad
+      december: Prosinec
+    day:
+      day: Den|Dnů
+      su: Ne
+      mo: Po
+      tu: Út
+      we: Stř
+      th: Čt
+      fr: Pá
+      sa: So
+    hour: Hodina|Hodin
+    minute: Minuta|Minut
+    second: Sekunda|Sekund
+  roles:
+    student: Student
+    supervisor: Vedoucí
+    opponent: Oponent
+    consultant: Konzultant
+
+
+
+
+
+

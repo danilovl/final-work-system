@@ -1,0 +1,5 @@
+api_key_work_list:
+  path: /list
+  defaults:
+    _controller: FinalWorkBundle:Api\Work:list
+  methods:  [GET, POST]

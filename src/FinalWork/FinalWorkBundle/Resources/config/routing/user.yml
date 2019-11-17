@@ -1,0 +1,35 @@
+user_create:
+  path: /create
+  defaults:
+      _controller: FinalWorkBundle:User:create
+  methods:  [GET, POST]
+
+user_edit:
+  path: /edit/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:User:edit
+  methods:  [GET, POST]
+
+user_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\User:edit
+  methods:  [GET, POST]
+
+user_list:
+  path: /{type}/list
+  requirements:
+      type: "author|opponent|consultant|unused"
+  defaults:
+      _controller: FinalWorkBundle:User:userList
+  methods:  [GET, POST]
+
+user_create_ajax:
+  path: /create/ajax
+  defaults:
+      _controller: FinalWorkBundle:Ajax\User:create
+  methods:  [POST]

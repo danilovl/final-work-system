@@ -1,0 +1,200 @@
+services:
+  #   Simple services
+  slugger:
+    class: FinalWork\FinalWorkBundle\Utils\Slugger
+
+  markdown:
+    class: FinalWork\FinalWorkBundle\Utils\Markdown
+
+  final_work.redirect_to_preferred_locale_listener:
+    class: FinalWork\FinalWorkBundle\EventListener\RedirectToPreferredLocaleListener
+    arguments:
+      - '@router'
+      - '%app_locales%'
+      - '%locale%'
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  final_work.menu:
+    class: FinalWork\FinalWorkBundle\Services\MenuService
+    arguments:
+      - '%menu%'
+      - '@translator'
+      - '@router'
+      - '@security.helper'
+      - '@twig'
+    tags:
+      - { name: twig.runtime }
+
+  final_work.twig.language_extension:
+    public: false
+    class: FinalWork\FinalWorkBundle\Twig\ChangeLanguageExtension
+    arguments:
+      - '@markdown'
+      - '%app_locales%'
+    tags:
+      - { name: twig.extension }
+
+  final_work.twig.app_extension:
+    public: false
+    class: FinalWork\FinalWorkBundle\Twig\TwigExtension
+    arguments:
+      - '@service_container'
+    tags:
+      - { name: twig.extension }
+
+  final_work.twig.seo_extension:
+    public: false
+    class: FinalWork\FinalWorkBundle\Twig\SeoExtension
+    tags:
+      - { name: twig.extension }
+
+  final_work.twig.seo_runtime:
+    public: false
+    class: FinalWork\FinalWorkBundle\Twig\SeoRuntime
+    arguments:
+      - '@final_work.seo_page'
+    tags:
+      - { name: twig.runtime }
+
+  final_work.email_notification:
+    class: FinalWork\FinalWorkBundle\EventListener\EmailNotificationSubscriber
+    arguments:
+      - '@mailer'
+      - '@templating'
+      - '@translator'
+      - '%email_notification_subscriber%'
+    autoconfigure: true
+    autowire: true
+
+  final_work.system_notification:
+    class: FinalWork\FinalWorkBundle\EventListener\SystemEventSubscriber
+    arguments:
+      - '@final_work.entity_manager'
+      - '@security.helper'
+    autoconfigure: true
+    autowire: true
+
+  final_work.conversation_variation:
+    class: FinalWork\FinalWorkBundle\Services\ConversationVariationService
+    arguments:
+      - '@final_work.parameters'
+
+  final_work.facade.conversation_status:
+    class: FinalWork\FinalWorkBundle\Services\ConversationStatusService
+    arguments:
+      - '@final_work.entity_manager'
+
+  final_work.system_event_link_generator:
+    class: FinalWork\FinalWorkBundle\Services\SystemEventLinkGeneratorService
+    arguments:
+      - '@twig'
+      - '@router'
+    tags:
+      - { name: twig.runtime }
+
+  final_work.paginator:
+    class: FinalWork\FinalWorkBundle\Services\PaginatorService
+    shared: false
+    arguments:
+      - '@knp_paginator'
+      - '@final_work.parameters'
+
+  final_work.work.detail_tab:
+    class: FinalWork\FinalWorkBundle\Services\WorkDetailTabService
+    arguments:
+      - '@final_work.entity_manager'
+      - '@final_work.paginator'
+      - '@final_work.parameters'
+
+  final_work.work.list:
+    class: FinalWork\FinalWorkBundle\Services\WorkListService
+    arguments:
+      - '@final_work.entity_manager'
+
+  final_work.seo_page:
+    class: FinalWork\FinalWorkBundle\Services\Seo\SeoPageService
+    arguments:
+      - '@translator'
+
+  final_work.event_dispatcher.work:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\WorkEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.event_dispatcher.version:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\VersionEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.event_dispatcher.document:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\DocumentEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.event_dispatcher.user:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\UserEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.event_dispatcher.event:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\EventEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.event_dispatcher.task:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\TaskEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.event_dispatcher.conversation:
+    class: FinalWork\FinalWorkBundle\Services\EventDispatcher\ConversationEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  final_work.date:
+    class: FinalWork\FinalWorkBundle\Services\DateService
+    arguments:
+      - '@translator'
+
+  final_work.parameters:
+    class: FinalWork\FinalWorkBundle\Services\ParametersService
+    arguments:
+      - '@service_container'
+
+  final_work.document_form:
+    class: FinalWork\FinalWorkBundle\Services\DocumentFormService
+    arguments:
+      - '@form.factory'
+      - '@router'
+      - '@hashids'
+      - "@final_work.facade.user"
+      - '@final_work.facade.media.mime_type'
+      - '@final_work.facade.media_category'
+
+  final_work.entity_manager:
+    class: FinalWork\FinalWorkBundle\Services\EntityManagerService
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  #   ParamConverter
+  hashids.converter:
+    class: FinalWork\FinalWorkBundle\EventListener\HashidsParamConverterListener
+    arguments:
+      - '@hashids'
+      - '@doctrine'
+      - '%hashids.autowire%'
+    tags:
+      - { name: request.param_converter, priority: 1, converter: hashids.converter }
+
+  #   Provider
+  final_work.provider.api_key:
+    class: FinalWork\FinalWorkBundle\Security\Provider\ApiKeyUserProvider
+    arguments:
+      - '@final_work.facade.api.user'
+
+  #  Transformer
+  final_work.transformer.api:
+    class: FinalWork\FinalWorkBundle\Transformer\Api\Transformer
+    arguments:
+      - '@final_work.parameters'

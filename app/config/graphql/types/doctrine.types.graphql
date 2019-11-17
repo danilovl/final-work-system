@@ -1,0 +1,58 @@
+type doctrine {
+    user(id: ID!): User
+    work(id: ID!): Work
+    workType(id: ID!): WorkType
+    workStatus(id: ID!): WorkStatus
+    workStatusList(limit: Int): [WorkStatus]
+    task(id: ID!): Task
+    taskList(limit: Int): [Task]
+}
+
+interface simpleInformation{
+    id: ID!
+    name: String!
+    description: String
+}
+
+type Work {
+    id: ID!
+    title: String!
+    type: WorkType
+    status: WorkStatus
+}
+
+type Task implements simpleInformation{
+    id: ID!
+    name: String!
+    description: String
+    complete: Boolean!
+    notifyComplete: Boolean!
+    deadline: DateTime
+    owner: User!
+    work: Work!
+}
+
+type WorkStatus implements simpleInformation{
+    id: ID!
+    name: String!
+    description: String
+    color: String!
+}
+
+type WorkType implements simpleInformation{
+    id: ID!
+    name: String!
+    description: String
+    shortcut: String!
+}
+
+type User{
+    id: ID!
+    email: String!
+    firstname: String!
+    lastname: String!
+    authorWorks: [Work]
+    supervisorWorks: [Work]
+    opponentWorks: [Work]
+    consultantWorks: [Work]
+}

@@ -1,0 +1,69 @@
+# Doctrine Configuration
+doctrine:
+  dbal:
+    driver:      pdo_mysql
+    host:       '%database_host%'
+    port:       '%database_port%'
+    dbname:     '%database_name%'
+    user:       '%database_user%'
+    password:   '%database_password%'
+    charset: utf8
+    default_table_options:
+      charset: utf8
+      collate: utf8_czech_ci
+    types:
+      json:     Sonata\Doctrine\Types\JsonType
+  orm:
+    auto_generate_proxy_classes: "%kernel.debug%"
+    entity_managers:
+      default:
+        mappings:
+          FinalWorkBundle: ~
+          FinalWorkSonataUserBundle: ~
+          SonataUserBundle: ~
+          FOSUserBundle: ~
+          loggable:
+            type: annotation
+            alias: Gedmo
+            prefix: Gedmo\Loggable\Entity
+            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity/"
+            is_bundle: false
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        result_cache_driver:
+          type: service
+          id: doctrine_cache.providers.redis_provider
+        query_cache_driver:
+          type: service
+          id: doctrine_cache.providers.redis_provider
+        metadata_cache_driver:
+          type: service
+          id: doctrine_cache.providers.redis_provider
+        second_level_cache:
+          enabled: true
+          regions:
+            default:
+              lock_lifetime: 10
+              lifetime: 10
+              cache_driver:
+                type: service
+                id: doctrine_cache.providers.redis_provider
+            cache_long_time:
+              lock_lifetime: 60
+              lifetime: 86400  # 1 day
+              cache_driver:
+                type: service
+                id: doctrine_cache.providers.redis_provider
+
+doctrine_cache:
+  aliases:
+    redis_cache: redis_provider
+  providers:
+    redis_provider:
+      type: redis
+      redis:
+        host: "%redis_host%"
+        port: "%redis_port%"
+        database: 0
+        timeout: 10
+        persistent: false

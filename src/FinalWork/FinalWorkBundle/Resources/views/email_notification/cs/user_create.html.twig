@@ -1,0 +1,29 @@
+{% block content %}
+    <body>
+    <div>
+        Dobrý den,
+        <br><br>
+
+        Vaše přihlašovací údaje jsou uvedeny níže.
+        <br>Do systému se přihlásíte
+        <a target="_blank" href="{{ absolute_url(path('fos_user_security_login', {'_locale': default_locale})) }}">zde</a>.
+        <br><br>
+        <table>
+            <tr>
+                <td><b>Uživatelské jméno: <b>
+                <td>
+                <td>{{ username }}</td>
+            </tr>
+            <tr>
+                <td><b>Heslo: <b>
+                <td>
+                <td>{{ password }}</td>
+            </tr>
+        </table>
+        <br><br>
+        S pozdravem
+        <br><br>
+        Systém pro vedení bakalářských a diplomových prací
+    </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>403</title>
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/bootstrap/dist/css/bootstrap.min.css'
+        'vendor/font-awesome/css/font-awesome.min.css'
+        'css/main.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-12">
+            <div class="col-middle">
+                <div class="text-center text-center">
+                    <h1 class="error-number">403</h1>
+                    <h2>{{ 'finalwork.error.403' | trans }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

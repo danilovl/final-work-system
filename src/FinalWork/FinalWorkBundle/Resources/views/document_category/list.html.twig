@@ -1,0 +1,181 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/switchery/dist/switchery.min.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+
+            {% if mediaCategories is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <h2>
+                                {{ 'finalwork.page.information_materials_category_list' | trans() }}
+                            </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li class="dropdown">
+                                    <a href="#"
+                                       class="dropdown-toggle"
+                                       data-toggle="dropdown"
+                                       role="button"
+                                       aria-expanded="false">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ path('document_category_create') }}"
+                                               data-toggle="modal"
+                                               data-target="#modalWindow">
+                                                <i class="fa fa-edit"></i>
+                                                {{ 'finalwork.form.action.create' | trans() }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if mediaCategories is not empty %}
+
+                                {% set directionParam = mediaCategories.getPaginatorOption('sortDirectionParameterName') %}
+                                {% set params = mediaCategories.getParams() %}
+                                {% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th{% if mediaCategories.isSorted('media_category.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(mediaCategories, 'finalwork.text.name' | trans(), 'work_category.name') }}
+                                        </th>
+                                        <th{% if mediaCategories.isSorted('media_category.description') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(mediaCategories, 'finalwork.text.description' | trans(), 'media_category.description') }}
+                                        </th>
+                                        <th>
+                                            {{ 'finalwork.text.information_materials' | trans() }}
+                                        </th>
+                                        <th{% if mediaCategories.isSorted('media_category.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(mediaCategories, 'finalwork.text.date_added' | trans(), 'media_category.createdAt') }}
+                                        </th>
+                                        <th style="width: 20%">{{ 'finalwork.text.options' | trans() }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for mediaCategory in mediaCategories %}
+                                        <tr data-delete-row="document-category-{{ mediaCategory.id | hashids_encode }}">
+                                            <td>
+                                                {{ mediaCategory.name }}
+                                            </td>
+                                            <td>
+                                                {{ mediaCategory.description | raw }}
+                                            </td>
+                                            <td>
+                                                {{ mediaCategory.medias | length }}
+                                            </td>
+                                            <td>
+                                                {{ mediaCategory.createdAt | date("d.m.Y H:i") }}
+                                            </td>
+                                            <td>
+                                                <a data-toggle="modal"
+                                                   data-target="#modalWindow"
+                                                   class="btn btn-warning btn-xs"
+                                                   href="{{ path('document_category_edit', { 'id': mediaCategory.id | hashids_encode }) }}">
+                                                    <i class="fa fa-pencil"></i>
+                                                    {{ 'finalwork.form.action.edit' | trans() }}
+                                                </a>
+                                                <a data-toggle="modal"
+                                                   data-target="#document-delete-modal-{{ mediaCategory.id | hashids_encode }}"
+                                                   class="btn btn-danger btn-xs">
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ 'finalwork.form.action.delete' | trans() }}
+                                                </a>
+                                                <div class="modal fade bs-example-modal-sm"
+                                                     tabindex="-1"
+                                                     role="dialog"
+                                                     id="document-delete-modal-{{ mediaCategory.id | hashids_encode }}"
+                                                     aria-hidden="true">
+
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button"
+                                                                        class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                                <h4 class="modal-title">
+                                                                    {{ 'finalwork.text.deleting' | trans() }}
+                                                                    | {{ mediaCategory.name }}
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>
+                                                                    {{ 'finalwork.text.are_you_sure_delete' | trans() }}
+                                                                    ?
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                        class="btn btn-default"
+                                                                        data-dismiss="modal">
+                                                                    {{ 'finalwork.form.action.close' | trans() }}
+                                                                </button>
+                                                                <button
+                                                                        data-delete-target-url="{{ path('document_category_delete_ajax', { 'id': mediaCategory.id | hashids_encode }) }}"
+                                                                        data-delete-target-row="document-category-{{ mediaCategory.id | hashids_encode }}"
+                                                                        type="button"
+                                                                        class="btn btn-danger delete-element">
+                                                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                                                    <i class="fa fa-trash-o"></i>
+                                                                    {{ 'finalwork.form.action.delete' | trans() }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'finalwork.text.no_result' | trans() }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(mediaCategories) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            initAjaxDeleteContent();
+            $("table").tableFix()
+        });
+    </script>
+{% endblock %}

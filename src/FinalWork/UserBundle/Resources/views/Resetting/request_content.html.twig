@@ -1,0 +1,49 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div>
+    <div class="login_wrapper">
+        <div id="register" class="form">
+            <section class="login_content">
+
+                {% if app.request.get("invalid") %}
+                    <p class="red">
+                        {{ 'finalwork.form.validation.invalid_username_email' | trans({}, 'messages') }}
+                    </p>
+                {% endif %}
+
+                <form class="fos_user_resetting_request"
+                      action="{{ path('fos_user_resetting_send_email') }}"
+                      method="POST">
+                    <h1>{{ 'form.new_password' | trans }}</h1>
+                    <div>
+                        <label for="username">{{ 'resetting.request.username' | trans }}</label>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="{{ 'security.login.username' | trans }}"
+                               id="username"
+                               name="username"
+                               required="required"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-default submit"
+                               id="submit"
+                               type="submit"
+                               value="{{ 'resetting.request.submit' | trans }}"/>
+                        <a class="btn btn-default submit"
+                           href="{{ path('fos_user_security_login') }}">
+                            {{ 'layout.login' | trans() }}
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="separator">
+                        <div>
+                            <h1><i class="fa fa-book"></i>{{ 'finalwork.system_name' | trans({}, 'messages') }}
+                            </h1>
+                            <p>©{{ "now"|date("Y") }}</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

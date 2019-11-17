@@ -1,0 +1,312 @@
+finalwork:
+  system_name: System for conducting bachelor and diploma theses
+  page:
+    appointment_address_create: Creating appointment place
+    appointment_address_list: List of appointments
+    appointment_calendar: Appointment calendar
+    appointment_calendar_manage: Manage appointment calendar
+    article_category_list: List of article categories
+    article_list: Article list
+    conversation_list: Conversation list
+    event_schedule_create: Creating event schedule
+    event_schedule_list: List of events
+    home: Home page
+    information_material_create: Creating information material
+    information_material_edit: Edit information material
+    information_materials: Information materials page
+    information_materials_category_create: Create categories for information materials
+    information_materials_category_edit: Edit categories for information materials
+    information_materials_category_list: List of categories information materials
+    insis_filter: Selection of works according to criteria
+    insis_login: Log in to system InSIS
+    login: Login page
+    message_create: Create message
+    profile: Profile page
+    profile_edit: Edit profile
+    task_create: Create task
+    task_edit: Edit task
+    task_list: Task list
+    user_create: Create user
+    user_edit: Edit user
+    user_group_create: Create user group
+    user_group_edit: Edit user group
+    user_group_list: List of user groups
+    version_add: Add version
+    version_edit: Edit version
+    work_category_create: Create work category
+    work_category_edit: Edit work category
+    work_category_list: List of work categories
+    work_create: Create work
+    work_edit: Edit work
+  menu:
+    admin: Admin
+    appointment: Appointment|Appointments
+    appointment_address_create: Create appointment place
+    appointment_address_list: List of appointment places
+    appointment_calendar: Appointment calendar
+    appointment_calendar_manage: Manage appointment calendar
+    article_category_list: Article category list
+    article_list: List of articles
+    articles: Articles
+    author_list: List of authors
+    choose_language: Choose language
+    consultant_list: List of consultants
+    contact_information: Contact information
+    conversation: Conversation
+    event_schedule_create: Create event schedule
+    event_schedule_list: List of event schedules
+    filter: Filter
+    information_material_create: Create information material
+    information_materials: Information materials
+    information_materials_category_create: Create categories for information materials
+    information_materials_category_list: List of categories information materials
+    information_materials_list: List of information materials
+    information_materials_list_my: List of my information materials
+    logout: Logout
+    mail_template: Mail template
+    menu: Menu
+    opponent_list: List of opponents
+    personal_information: Personal information
+    profile: Profile
+    profile_change_password: Сhange password
+    profile_edit: Edit profile
+    profile_image_change: Change profile image
+    task: Task|Tasks
+    unused_user_list: List of unused users
+    user: User|Users
+    user_create: Create user
+    user_group_create: Create user group
+    user_group_list: List of user group
+    work: Work
+    work_author_list: List of active work
+    work_category_list: List of work categories
+    work_consultant_list: List of consulted works
+    work_create: Create work
+    work_from_insis: Transfer work from InSIS
+    work_list: List of works
+    work_opponent_list: List of opposed work
+    work_supervisor_list: List of conducted work
+  form:
+    label:
+      active: Active
+      appointment_address: Appointment place
+      appointment_participant: Appointment participant
+      author: Author
+      category: Category
+      complete: Complete
+      consultant: Consultant
+      deadline: Deadline
+      degree_after: Degree after name
+      degree_before: Degree before name
+      description: Description
+      email: Email
+      end: End
+      facebook: Facebook
+      file: File
+      first_name: First name
+      group: Group
+      last_name: Last name
+      latitude: Latitude
+      login_form: Login form
+      longitude: Longitude
+      message_greeting: Message greeting
+      message_signature: Message signature
+      name: Name
+      opponent: Opponent
+      password: Password
+      phone: Phone
+      program_deadline: Program deadline
+      role: Role
+      shortcut: Shortcut
+      skype: Skype
+      sorting: Sorting
+      start: Start
+      status: Status
+      street: Street
+      supervisor: Supervisor
+      term_for_testing: Term for testing
+      title: Name
+      type: Type
+      username: Username
+      version: Version
+      whom: To whom
+      work: Work
+      work_status: Work status
+      work_deadline: Work deadline
+      year: Year
+    action:
+      activate: Activate
+      add_work_version: Add new version
+      archivate: Archive
+      clonning: Clonning
+      close: Close
+      create: Create
+      edit_and_close: Edit and close
+      create_and_close: Create and close
+      delete: Delete
+      download: Download
+      edit: Edit
+      edit_author: Edit author
+      login: Log in
+      reserve: Rezervovat
+      save: Save
+      search: Search
+      select: Select
+      send: Send
+      show: Show
+      show_content: Show content
+      show_detail: Show detail
+      switch_to_skype: Switch to skype
+      task_create: Create task
+      update: Update
+      update_and_close: Update and clos
+      user_create: Create user
+      work_create: Create work
+    validation:
+      date_start_more_end: The start begins later than the end
+      invalid_username_email: Invalid username or email
+      sure_want_close: Are you sure, you want to close?
+  text:
+    active: Active
+    admin_panel: Admin panel
+    appointment: Appointment|Appointments
+    appointment_address: Appointment place
+    appointment_calendar: Appointment calendar
+    appointment_calendar_manage: Manage appointment calendar
+    are_you_sure_delete: Are you sure you want to delete this item
+    are_you_sure_switch_to_skype: Are you sure you want to change appointment place to Skype
+    attachment: Attachment
+    author: Author
+    author_list: Author list
+    back_to_revision: Back to revision
+    group_mail: Group mailing
+    category: Category
+    comment: Comment
+    complete: Complete
+    consultant: Consultant
+    consultant_list: List of consultants
+    conversation: Conversation
+    conversation_attachment: Attachments from the conversation
+    created: Created
+    created_by: Created by
+    date_added: Date added
+    date_last_message: Date of last message
+    deadline: Deadline
+    delete: Delete
+    deleting: Deleting
+    description: Description
+    end: End
+    event: Event
+    event_list: List of events
+    fast_access: Fast access
+    file_not_found: File not found
+    file_size: File size
+    first_name: First name
+    group: Group
+    inactive: Inactive
+    inbox: Inbox
+    information_material_create: Create information material
+    information_materials: Information materials
+    information_materials_list: List of information materials
+    last_message_from: Last message from
+    last_update: Last update
+    latitude: Latitude
+    less_then_day: less then %day% days
+    list_converted_insis_jobs: List of converted InSIS jobs
+    list_non_converted_insis_jobs: List of non-converted InSIS jobs
+    longitude: Longitude
+    map: Map
+    message: Message|Messages
+    more_then_day: more then %day% days
+    name: Name
+    name_conversation: Name of the conversation
+    new_message: New message
+    no_result: No result
+    no_tasks: No tasks
+    notify_completed: Notify completed
+    open_conversation_in_new_window: Open conversation in new window
+    opponent: Opponent
+    opponent_list: Opponent list
+    option: Option
+    options: Options
+    original_file_name: Original file name
+    personal_information_author: Personal information about author
+    personal_information_consultant: Personal information about consultant
+    personal_information_opponent: Personal information about opponent
+    priority: Priority
+    program_deadline: Program deadline
+    quantity: Quantity
+    read: Read
+    remaining_time: Remaining time
+    role: role
+    search: Search
+    search_form: Search form
+    see_all_alerts: See all alerts
+    see_all_messages: See all messages
+    show_last_messages: Show last messages
+    skype: Skype
+    sorting: Sorting
+    start: Start
+    state: State
+    status: Status
+    street: Street
+    supervisor: Supervisor
+    switch_to_skype: Switch to skype
+    task: Task|Tasks
+    task_completed: Task completed
+    task_list: Task list
+    term_for_testing: Term for testing
+    type: Type
+    unused_user_list: List of unused users
+    user: User
+    version: Version|Versions
+    work: Work
+    work_category_list: Work category list
+    work_deadline: Work deadline
+    work_list: List of works
+    work_title: Work title
+    work_type: Type of work
+    write_message: Write a message
+  tooltip:
+    document_active: Information materia is shown to students(green color)
+    task_deadline: The deadline by which the task must be fulfilled
+    task_complete: Task solved(green color)
+    task_active: Task is shown to students(green color)
+    task_back_to_revision_supervisor: Task in Check Status(red color)/Task returned to reprocessing(green color)
+    task_back_to_revision: Task can be marked as finished(red)/Task marked as completed(green color)
+  error:
+    403: Access denied
+    404: Sorry but we couldnt find this page
+    500: Internal Server Error
+  calendar:
+    month:
+      month: Month|Months
+      january: January
+      february: ebruary
+      march: March
+      april: April
+      may: May
+      june: June
+      july: July
+      august: August
+      september: Septembeк
+      october: October
+      november: November
+      december: December
+    day:
+      day: Day|Days
+      su: Su
+      mo: Mo
+      tu: Tu
+      we: We
+      th: Th
+      fr: Fr
+      sa: Sa
+    hour: Hour|Hours
+    minute: Minute|minutes
+    second: Second|Seconds
+  roles:
+    student: Student
+    supervisor: Supervisor
+    opponent: Opponent
+    consultant: Consultant

@@ -1,0 +1,23 @@
+finalwork:
+  email_notification:
+    subject:
+      user_create: 'Vytvoření nového účtu'
+      work_create: 'Vytvoření prace'
+      work_edit: 'Editace práce'
+      user_edit: 'Editace osobních údajů'
+      task_create: 'Vytvoření nového úkolu'
+      task_edit: 'Editace úkolu'
+      task_complete: 'Označení úkolu za splněný'
+      task_in_complete: 'Označení úkolu za nesplněný'
+      task_notify_complete: 'Ohlášení splnění úkolu'
+      task_notify_in_complete: 'Vracení úkolů k přepracování'
+      version_create: 'Vytvoření nové verze'
+      version_edit: 'Editace verze'
+      document_create: 'Nový informační materiál'
+      message_create: 'Nová zpráva'
+      event_create: 'Nová schůzka'
+      event_edit: 'Aktualizace údajů schůzky'
+      event_switch_skype: 'Přepnuti místno schůzky na skype'
+      event_comment_create: 'Nový komentář u schůzky'
+      event_comment_edit: 'Editace komentáře u schůzky'
+      event_reservation: 'Nová schůzka'

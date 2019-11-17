@@ -1,0 +1,8 @@
+services:
+  final_work.profiler:
+    class: FinalWork\FinalWorkBundle\Collector\SystemInfoCollector
+    arguments:
+      - '%system_info%'
+    tags:
+      - { name: data_collector, id: final_work_info, template: '@FinalWork/profiler/template.html.twig' }
+    public: false

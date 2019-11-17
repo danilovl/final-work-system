@@ -1,0 +1,60 @@
+version_create:
+  path: /{id}/version/create
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Version:create
+  methods:  [GET,POST]
+
+version_create_ajax:
+  path: /{id}/version/create/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Version:create
+  methods:  [POST]
+
+version_edit:
+  path: /{id_work}/version/edit/{id_media}
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_media: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Version:edit
+  methods:  [GET,POST]
+
+version_edit_ajax:
+  path: /{id_work}/version/edit/{id_media}/ajax
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_media: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Version:edit
+  methods:  [POST]
+
+version_download:
+  path:     /{id_work}/version/download/{id_media}
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_media: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Version:download
+  methods:  [GET,POST]
+
+version_google_download:
+  path:     /{id_work}/version/google/download/{id_media}
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_media: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Version:downloadGoogle
+  methods:  [GET,POST]
+
+version_delete_ajax:
+  path:  /{id_work}/version/delete/{id_media}/ajax
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_media: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Version:delete
+  methods:  [POST, DELETE]

@@ -1,0 +1,169 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+
+            {% if eventSchedules is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <h2>
+                                {{ 'finalwork.page.event_schedule_list' | trans() }}
+                            </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li class="dropdown">
+                                    <a href="#"
+                                       class="dropdown-toggle"
+                                       data-toggle="dropdown"
+                                       role="button"
+                                       aria-expanded="false">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a target="_blank"
+                                               href="{{ path('event_schedule_create') }}">
+                                                <i class="fa fa-edit"></i>
+                                                {{ 'finalwork.form.action.create' | trans() }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if eventSchedules is not empty %}
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ 'finalwork.text.name' | trans() }}
+                                        </th>
+                                        <th>
+                                            {{ 'finalwork.text.created' | trans() }}
+                                        </th>
+                                        <th style="width: 20%">
+                                            {{ 'finalwork.text.options' | trans() }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for  eventSchedule in eventSchedules %}
+                                        <tr id="event-schedule-{{ eventSchedule.id | hashids_encode }}"
+                                            data-delete-row="event-schedule-{{ eventSchedule.id | hashids_encode }}">
+                                            <td>
+                                                <a target="_blank"
+                                                   href="{{ path('event_schedule_detail', { 'id': eventSchedule.id | hashids_encode}) }}">
+                                                    {{ eventSchedule.name }}
+                                                </a>
+                                            </td>
+                                            <td>{{ eventSchedule.createdAt | date("d.m.Y") }}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-xs"
+                                                   href="{{ path('event_schedule_detail', { 'id': eventSchedule.id | hashids_encode }) }}"
+                                                   target="_blank">
+                                                    <i class="fa fa-folder"></i>
+                                                    {{ 'finalwork.form.action.show_detail' | trans() }}
+                                                </a>
+                                                <a class="btn btn-warning btn-xs"
+                                                   target="_blank"
+                                                   href="{{ path('event_schedule_edit', { 'id': eventSchedule.id | hashids_encode }) }}">
+                                                    <i class="fa fa-pencil"></i>
+                                                    {{ 'finalwork.form.action.edit' | trans() }}
+                                                </a>
+                                                <a data-toggle="modal"
+                                                   data-target="#modalWindow"
+                                                   class="btn btn-success btn-xs"
+                                                   href="{{ path('event_schedule_clone', { 'id': eventSchedule.id | hashids_encode }) }}">
+                                                    <i class="fa fa-retweet"></i>
+                                                    {{ 'finalwork.form.action.clonning' | trans() }}
+                                                </a>
+                                                <a data-toggle="modal"
+                                                   data-target="#event-schedule-delete-modal-{{ eventSchedule.id | hashids_encode }}"
+                                                   class="btn btn-danger btn-xs">
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ 'finalwork.form.action.delete' | trans() }}
+                                                </a>
+                                                <div class="modal fade bs-example-modal-sm"
+                                                     tabindex="-1"
+                                                     role="dialog"
+                                                     id="event-schedule-delete-modal-{{ eventSchedule.id | hashids_encode }}"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button"
+                                                                        class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                                <h4 class="modal-title">
+                                                                    {{ 'finalwork.text.deleting' | trans() }}
+                                                                    | {{ eventSchedule.name }}
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>{{ 'finalwork.text.are_you_sure_delete' | trans() }}
+                                                                    ?</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                        class="btn btn-default"
+                                                                        data-dismiss="modal">
+                                                                    {{ 'finalwork.form.action.close' | trans() }}
+                                                                </button>
+                                                                <button
+                                                                        data-delete-target-url="{{ path('event_schedule_delete_ajax', { 'id': eventSchedule.id | hashids_encode }) }}"
+                                                                        data-delete-target-row="event-schedule-{{ eventSchedule.id | hashids_encode }}"
+                                                                        type="button"
+                                                                        class="btn btn-danger delete-element">
+                                                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                                                    <i class="fa fa-trash-o"></i>
+                                                                    {{ 'finalwork.form.action.delete' | trans() }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'finalwork.text.no_result' | trans() }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(eventSchedules) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            initAjaxDeleteContent();
+        });
+    </script>
+{% endblock %}
+
+
+

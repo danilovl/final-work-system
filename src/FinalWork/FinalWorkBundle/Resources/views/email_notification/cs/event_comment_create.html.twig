@@ -1,0 +1,15 @@
+{% block content %}
+    <body>
+    <div>
+        Dobrý den,
+        <br><br>
+        {{ user }} přidal komentář ke
+        <a href="{{ url('event_detail', {'_locale': default_locale, 'id': event.id | hashids_encode }) }}">schůzce</a>
+        s Vámi.
+        <br><br>
+        S pozdravem
+        <br><br>
+        Systém pro vedení bakalářských a diplomových prací
+    </div>
+    </body>
+{% endblock %}

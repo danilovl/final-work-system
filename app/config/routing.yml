@@ -1,0 +1,18 @@
+homepage:
+  path: /{_locale}
+  defaults:
+    _controller: FinalWorkBundle:Home:index
+    _locale:     '%locale%'
+  requirements:
+    _locale: '%app_locales%'
+
+final_work_app:
+  resource: "@FinalWorkBundle/Resources/config/routing.yaml"
+
+overblog_graphql_single_endpoint:
+  resource: "@OverblogGraphQLBundle/Resources/config/routing/single.yaml"
+  prefix: api/graphql
+
+overblog_graphql_multiple_endpoint:
+  resource: "@OverblogGraphQLBundle/Resources/config/routing/multiple.yaml"
+  prefix: /graphql

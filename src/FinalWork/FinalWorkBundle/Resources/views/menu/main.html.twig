@@ -1,0 +1,13 @@
+{% from '@FinalWork/macro/menu.html.twig' import renderMenu %}
+
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>
+            {{ 'finalwork.menu.menu' | trans() }}
+        </h3>
+
+        {% if menu is defined and menu is not empty %}
+            {{ renderMenu(menu) }}
+        {% endif %}
+    </div>
+</div>

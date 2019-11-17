@@ -1,0 +1,25 @@
+services:
+  #  Command
+  final_work.command.add_user:
+    class: FinalWork\FinalWorkBundle\Command\AddUserCommand
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@security.password_encoder'
+      - '@final_work.validator.user'
+    tags:
+      - { name: console.command }
+
+  final_work.command.delete_user:
+    class: FinalWork\FinalWorkBundle\Command\DeleteUserCommand
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@final_work.validator.user'
+    tags:
+      - { name: console.command }
+
+  final_work.command.list_user:
+    class: FinalWork\FinalWorkBundle\Command\ListUsersCommand
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: console.command }

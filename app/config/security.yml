@@ -1,0 +1,170 @@
+#app/config/security.yml
+parameters:
+    security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
+
+security:
+  # Uncomment for ACL support
+  acl:
+    connection: default
+
+  role_hierarchy:
+      ROLE_GUEST:       [ROLE_USER]
+      ROLE_STUDENT:     [ROLE_USER]
+      ROLE_OPPONENT:    [ROLE_USER]
+      ROLE_SUPERVISOR:  [ROLE_USER]
+      ROLE_CONSULTANT:  [ROLE_USER]
+      ROLE_ADMIN:
+        - ROLE_SONATA_ADMIN
+
+      ROLE_SUPER_ADMIN:
+        - ROLE_ADMIN
+        - ROLE_ALLOWED_TO_SWITCH
+        - ROLE_SONATA_USER_ADMIN_USER_VIEW
+        - ROLE_SONATA_USER_ADMIN_USER_EXPORT
+        - ROLE_SONATA_USER_ADMIN_USER_OPERATOR
+        - ROLE_SONATA_USER_ADMIN_USER_MASTER
+        - ROLE_SONATA_USER_ADMIN_USER_CREATE
+        - ROLE_SONATA_USER_ADMIN_USER_DELETE
+        - ROLE_SONATA_USER_ADMIN_USER_EDIT
+        - ROLE_SONATA_USER_ADMIN_USER_LIST
+
+  providers:
+    fos_userbundle:
+      id: fos_user.user_provider.username
+
+    api_key_user_provider:
+      id: final_work.provider.api_key
+
+    token_key_user_provider:
+      entity:
+        class: FinalWork\FinalWorkBundle\Entity\ApiUser
+        property: apiKey
+
+  encoders:
+    FOS\UserBundle\Model\UserInterface: sha512
+
+  firewalls:
+    dev:
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+
+    api_token:
+      pattern: ^/api/token
+      anonymous: ~
+      stateless: false
+      provider: api_key_user_provider
+      logout_on_user_change: true
+      guard:
+        authenticators:
+          - final_work.authenticator.api_token
+
+    api_key:
+      pattern: ^/api/key
+      anonymous: ~
+      stateless: false
+      provider: api_key_user_provider
+      logout_on_user_change: true
+      simple_preauth:
+        authenticator: final_work.authenticator.api_key
+
+    main:
+      anonymous:  ~
+      pattern: ^/(.*)
+      context:  user
+      form_login:
+        provider: fos_userbundle
+        login_path: fos_user_security_login
+        check_path: fos_user_security_check
+        csrf_token_generator: security.csrf.token_manager
+      logout:
+        path:  fos_user_security_logout
+        target: fos_user_security_login
+      switch_user: true
+
+  access_control:
+
+    # URL of FOSUserBundle which need to be available to anonymous users
+    - { path: ^/(%app_locales%)/login$,                         roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/register,                       roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/resetting,                      roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/login_check$,                   roles: IS_AUTHENTICATED_ANONYMOUSLY } # for the case of a failed login
+    - { path: ^/(%app_locales%)/user/new$,                      roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/check-confirmation-email$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/confirm/,                  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/confirmed$,                roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/request-reset-password$,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/send-resetting-email$,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/check-resetting-email$,    roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/user/reset-password/,           roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    # Admin login page needs to be access without credential
+    - { path: ^/(%app_locales%)/admin/login$,       roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/admin/logout$,      roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/admin/login_check$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    # Secured part of the site
+    # This config requires being logged for the whole site
+    # and having the admin roles for the admin part.
+    # Change these rules to adapt them to your needs
+    - { path: ^/(%app_locales%)/admin/, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+
+    # API
+    - { path: ^/api/key, roles: ROLE_API }
+    - { path: ^/api/token, roles: ROLE_API }
+
+    # Google docs
+    - { path: ^/(%app_locales%)/document/google/download/,                      roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(%app_locales%)/work/(\w+)/version/google/download/,            roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    # Work pages
+    - { path: ^/(%app_locales%)/work/author/list,                                      roles: [ROLE_STUDENT] }
+    - { path: ^/(%app_locales%)/work/(\w+)/task/notify/(complete|active)/(\w+)/ajax ,  roles: [ROLE_STUDENT] }
+    - { path: ^/(%app_locales%)/work/(\w+)/version/create,                             roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/(\w+)/version/detail/,                            roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/(\w+)/version/edit/(\w+),                         roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/(\w+)/version/download/,                          roles: [ROLE_STUDENT, ROLE_SUPERVISOR, ROLE_OPPONENT] }
+    - { path: ^/(%app_locales%)/work/(\w+)/version/delete/(\w+),                       roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/(\w+)/task/change/(complete|active)/(\w+)/ajax ,  roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/detail/(\w+),                                     roles: [ROLE_STUDENT, ROLE_OPPONENT, ROLE_SUPERVISOR ] }
+    - { path: ^/(%app_locales%)/work/task/list,               roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/supervisor/list,         roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/category,                roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/work/opponent/list,           roles: [ROLE_OPPONENT] }
+    - { path: ^/(%app_locales%)/work/consultant/list,         roles: [ROLE_CONSULTANT] }
+    - { path: ^/(%app_locales%)/work/,                        roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/user,                         roles: [ROLE_SUPERVISOR] }
+
+    # Document pages
+    - { path: ^/(%app_locales%)/document/edit,                roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/document/create,              roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/document/delete,              roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/document/list/owner,          roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/document/change/active/ajax,  roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/document/category,            roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/document/list,                roles: [ROLE_STUDENT, ROLE_OPPONENT] }
+
+    # Conversation pages
+    - { path: ^/(%app_locales%)/conversation/,        roles: [IS_AUTHENTICATED_FULLY] }
+
+    # Event
+    - { path: ^/(%app_locales%)/event/detail/,        roles:  [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/event/edit/,          roles:  [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/event/switch-skype/,  roles:  [ROLE_STUDENT] }
+    - { path: ^/(%app_locales%)/event/delete,         roles:  [ROLE_SUPERVISOR] }
+
+    # Event address
+    - { path: ^/(%app_locales%)/event/address/,               roles:  [ROLE_SUPERVISOR] }
+
+    # Event calendar
+    - { path: ^/(%app_locales%)/event/calendar/manage,        roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/event/calendar/create,        roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/event/calendar/edit,          roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/event/calendar/events,        roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%app_locales%)/event/calendar/reservation,   roles: [ROLE_STUDENT] }
+    - { path: ^/(%app_locales%)/event/calendar/switch-skype,  roles: [ROLE_STUDENT] }
+
+    # Event schedule
+    - { path: ^/(%app_locales%)/event/schedule/, roles:  [ROLE_SUPERVISOR] }
+
+    # All pages
+    - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY  }

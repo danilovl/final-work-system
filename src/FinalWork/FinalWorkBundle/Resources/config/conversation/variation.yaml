@@ -1,0 +1,23 @@
+parameters:
+  conversation:
+    variation:
+      author:
+        author: false
+        supervisor: true
+        opponent: false
+        consultant: false
+      opponent:
+        author: false
+        supervisor: true
+        opponent: false
+        consultant: false
+      supervisor:
+        author: true
+        consultant: true
+        opponent: true
+        supervisor: false
+      consultant:
+        author: false
+        consultant: false
+        opponent: false
+        supervisor: true

@@ -1,0 +1,308 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/nprogress/nprogress.css'
+        'vendor/select2/dist/css/select2.min.css'
+        'vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>
+                        {{ 'finalwork.text.work_list' | trans() }}
+                    </h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            {% if workGroups is defined %}
+                <div class="row">
+                    {% include '@FinalWork/work/include/search_form.html.twig' %}
+                </div>
+
+                {% for groupName,groupsArray in workGroups %}
+                    <div class="row">
+                        <div class="x_panel">
+                            <div class="x_title" style="height: auto;">
+                                <div class="media event deadline-date-media">
+                                    <ul class="nav panel_toolbox">
+                                        <li>
+                                            <a class="pull-left date deadline-date collapse-link">
+                                                <p class="day">
+                                                    {{ groupName }} ({{ groupsArray['works']|length }})
+                                                </p>
+                                            </a>
+                                        </li>
+                                        {% if groupsArray['id'] is defined and groupsArray['id'] is not empty %}
+                                            <li>
+                                                <a data-toggle="modal"
+                                                   href="{{ path('work_category_edit', { 'id': groupsArray['id'] | hashids_encode }) }}"
+                                                   data-target="#modalWindow">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" style="display: none;">
+                                {% if groupsArray['works'] is not empty %}
+                                    <table class="table table-striped projects">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                {{ 'finalwork.text.author' | trans() }}
+                                            </th>
+                                            <th style="width: 20%">
+                                                {{ 'finalwork.text.work_title' | trans() }}
+                                            </th>
+                                            <th>
+                                                {{ 'finalwork.text.work_type' | trans() }}
+                                            </th>
+                                            <th>
+                                                {{ 'finalwork.text.supervisor' | trans() }}
+                                            </th>
+                                            <th>
+                                                {{ 'finalwork.text.opponent' | trans() }}
+                                            </th>
+                                            <th>
+                                                {{ 'finalwork.text.task' | transchoice(2) }}
+                                            </th>
+                                            <th style="width: 15%">
+                                                {{ 'finalwork.text.options' | trans() }}
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for work in groupsArray['works'] %}
+                                            <tr data-delete-row="work-{{ work.id | hashids_encode }}">
+                                                <td>
+                                                    <ul class="list-inline">
+                                                        <li>
+                                                            <img src="{{ asset(work.author.getProfileImagePath) }}"
+                                                                 class="avatar"
+                                                                 alt="Avatar">
+                                                        </li>
+                                                        <li>
+                                                            {{ work.author }}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+
+                                                <td>
+                                                    <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}">{{ work.title }}</a>
+                                                    <br/>
+                                                    <small>
+                                                        {{ 'finalwork.text.deadline' | trans() }}
+                                                        : {{ work.deadline | date('Y-m-d') }}
+                                                    </small>
+                                                    <br/>
+                                                    {% if work.deadlineProgram %}
+                                                        <small>
+                                                            {{ 'finalwork.form.label.program_deadline' | trans() }}
+                                                            : {{ work.deadlineProgram | date('Y-m-d') }}
+                                                        </small>
+                                                    {% endif %}
+
+                                                </td>
+                                                <td>
+                                                    <span data-toggle="tooltip"
+                                                          data-placement="top"
+                                                          title=""
+                                                          data-original-title=" {{ work.type.name }}">
+                                                        {{ work.type.shortcut }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline">
+
+                                                        {% if app.user.id != work.supervisor.id %}
+                                                            <li>
+                                                                <img src="{{ asset(work.supervisor.getProfileImagePath) }}"
+                                                                     class="avatar"
+                                                                     alt="{{ work.supervisor }}">
+                                                            </li>
+                                                        {% endif %}
+
+                                                        <li>
+                                                            {{ work.supervisor }}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    {{ work.opponent }}
+                                                </td>
+
+                                                {% set  activeTask = work.getActiveTask %}
+                                                {% if activeTask is not empty %}
+                                                    <td class="project_progress">
+                                                        <div class="progress progress_sm">
+                                                            <div class="progress-bar bg-green"
+                                                                 role="progressbar"
+                                                                 data-transitiongoal="{{ work.getCompleteTaskPercentage(activeTask) }}">
+                                                            </div>
+                                                        </div>
+                                                        <small>
+                                                            {{ work.getCompleteTaskPercentage(activeTask) }}%
+                                                        </small>
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        {{ 'finalwork.text.no_tasks' | trans() }}
+                                                    </td>
+                                                {% endif %}
+
+                                                <td>
+                                                    <a class="btn btn-primary btn-xs"
+                                                       href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}"
+                                                       target="_blank">
+                                                        <i class="fa fa-folder"></i>
+                                                        {{ 'finalwork.form.action.show' | trans() }}
+                                                    </a>
+
+                                                    {% if work.isSupervisor(app.user) %}
+                                                        <a class="btn btn-warning btn-xs"
+                                                           href="{{ path('work_edit', { 'id': work.id | hashids_encode }) }}"
+                                                           data-toggle="modal"
+                                                           data-target="#modalWindow">
+                                                            <i class="fa fa-edit"></i>
+                                                            {{ 'finalwork.form.action.edit' | trans() }}
+                                                        </a>
+                                                        <a class="btn btn-warning btn-xs"
+                                                           href="{{ path('work_edit_author', { 'id': work.id | hashids_encode }) }}"
+                                                           data-toggle="modal"
+                                                           data-target="#modalWindow">
+                                                            <i class="fa fa-edit"></i>
+                                                            {{ 'finalwork.form.action.edit_author' | trans() }}
+                                                        </a>
+                                                        <a class="btn btn-danger btn-xs"
+                                                           data-toggle="modal"
+                                                           data-target="#work-delete-modal-{{ work.id | hashids_encode }}">
+                                                            <i class="fa fa-trash-o"></i>
+                                                            {{ 'finalwork.form.action.delete' | trans() }}
+                                                        </a>
+                                                        <div class="modal fade bs-example-modal-sm"
+                                                             tabindex="-1"
+                                                             role="dialog"
+                                                             id="work-delete-modal-{{ work.id | hashids_encode }}"
+                                                             aria-hidden="true">
+
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button"
+                                                                                class="close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                        <h4 class="modal-title">
+                                                                            {{ 'finalwork.text.deleting' | trans() }}
+                                                                            | {{ work.title }}
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h4>{{ 'finalwork.text.are_you_sure_delete' | trans() }}
+                                                                            ?
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                                class="btn btn-default"
+                                                                                data-dismiss="modal">
+                                                                            {{ 'finalwork.form.action.close' | trans() }}
+                                                                        </button>
+                                                                        <button class="btn btn-danger delete-element"
+                                                                                data-delete-target-url="{{ path('work_delete_ajax', {'id': work.id | hashids_encode}) }}"
+                                                                                data-delete-target-row="work-{{ work.id | hashids_encode }}">
+                                                                            <i class="fa fa-refresh fa-spin hide"></i>
+                                                                            <i class="fa fa-trash-o"></i>
+                                                                            {{ 'finalwork.form.action.delete' | trans() }}
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    {{ 'finalwork.text.no_result' | trans() }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {{ 'finalwork.text.no_result' | trans() }}
+                {% endfor %}
+
+                <div class="navigation">
+                    {{ knp_pagination_render(workGroups) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='jsqueeze'
+        'vendor/nprogress/nprogress.js'
+        'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js'
+        'vendor/select2/dist/js/select2.full.min.js'
+        'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}
+        <script src="/compiled{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $("#work_search_status").select2({
+                width: '100%'
+            });
+            $("#work_search_type").select2({
+                width: '100%'
+            });
+            $("#work_search_author").select2({
+                width: '100%'
+            });
+            $("#work_search_supervisor").select2({
+                width: '100%'
+            });
+            $("#work_search_opponent").select2({
+                width: '100%'
+            });
+            $("#work_search_consultant").select2({
+                width: '100%'
+            });
+            $("#work_search_deadline").select2({
+                width: '100%'
+            });
+            if ($(".progress .progress-bar")[0]) {
+                $('.progress .progress-bar').progressbar();
+                NProgress.start();
+            }
+            initAjaxDeleteContent();
+            NProgress.done();
+        });
+    </script>
+{% endblock %}

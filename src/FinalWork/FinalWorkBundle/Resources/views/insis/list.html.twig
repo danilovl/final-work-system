@@ -1,0 +1,204 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block title %} {{ 'finalwork.page.work_create' | trans() }} {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/select2/dist/css/select2.min.css'
+        'vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> {{ 'finalwork.text.work_list' | trans() }}</h2>
+                            <ul class="nav navbar-rul c panel_toolbox">
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="x_content">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <a class="btn btn-primary"
+                                       href="{{ path('insis_filter') }}">
+                                        <i class="fa fa-filter"></i>
+                                        {{ 'finalwork.menu.filter' | trans() }}
+                                    </a>
+                                </div>
+
+                                {% if works['no'] is not empty %}
+                                    <div class="row">
+                                        <span class="label label-warning">
+                                            {{ 'finalwork.text.list_non_converted_insis_jobs' | trans() }}
+                                        </span>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="mainContainer">
+                                            <table class="table table-striped jambo_table bulk_action work-insis-list">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ 'finalwork.text.author' | trans() }}</th>
+                                                    <th>{{ 'finalwork.text.work_title' | trans() }}</th>
+                                                    <th>{{ 'finalwork.text.work_type' | trans() }}</th>
+                                                    <th>{{ 'finalwork.text.deadline' | trans() }}</th>
+                                                    <th style="width: 20%">{{ 'finalwork.text.options' | trans() }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for work in works['no'] %}
+                                                    <tr>
+                                                        <td>
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <img src="{{ work["authorImage"] }}"
+                                                                         class=""
+                                                                         style="width: 100px"
+                                                                         alt="Avatar">
+                                                                </li>
+                                                                <li>
+                                                                    {{ work["authorFullName"] }}
+
+                                                                    {% if work["authorExist"] %}
+                                                                        <i class="fa fa-check-circle-o"></i>
+                                                                    {% endif %}
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>{{ work["workTitle"] }}</td>
+                                                        <td>{{ work["workType"] }}</td>
+                                                        <td>{{ work["workDate"] }}</td>
+                                                        <td>
+                                                            <a data-toggle="modal"
+                                                               data-target="#modalWindow"
+                                                               class="btn btn-primary btn-xs"
+                                                               href="{{ path('insis_user_create_form', { 'authorFirstName': work['authorFirstName'], 'authorLastName': work['authorLastName'], 'authorDegree': work['authorDegree'] }) }}">
+                                                                <i class="fa fa-edit"></i>
+                                                                {{ 'finalwork.form.action.user_create' | trans() }}
+                                                            </a>
+
+                                                            <a data-toggle="modal"
+                                                               data-target="#modalWindow"
+                                                               class="btn btn-success btn-xs"
+                                                               href="{{ path('insis_work_create_form', { 'workTitle': work['workTitle'], 'workType': work['workType'], 'authorFirstName': work['authorFirstName'], 'authorLastName': work['authorLastName'] }) }}">
+                                                                <i class="fa fa-edit"></i>
+                                                                {{ 'finalwork.form.action.work_create' | trans() }}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if works['yes'] is not empty %}
+                                    <div class="row">
+                                          <span class="label label-success">
+                                            {{ 'finalwork.text.list_converted_insis_jobs' | trans() }}
+                                         </span>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="mainContainer">
+                                            <table id="work-list-from-insis"
+                                                   class="table table-striped jambo_table bulk_action work-insis-list">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ 'finalwork.text.author' | trans() }}</th>
+                                                    <th>{{ 'finalwork.text.work_title' | trans() }}</th>
+                                                    <th>{{ 'finalwork.text.work_type' | trans() }}</th>
+                                                    <th>{{ 'finalwork.text.deadline' | trans() }}</th>
+                                                    <th style="width: 20%">{{ 'finalwork.text.options' | trans() }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for work in works['yes'] %}
+                                                    <tr>
+                                                        <td>
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <img src="{{ work["authorImage"] }}"
+                                                                         class=""
+                                                                         style="width: 100px"
+                                                                         alt="Avatar">
+                                                                </li>
+                                                                <li>
+                                                                    {{ work["authorFullName"] }}
+
+                                                                    {% if work["authorExist"] %}
+                                                                        <i class="fa fa-check-circle-o"></i>
+                                                                    {% endif %}
+
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>{{ work["workTitle"] | raw }}</td>
+                                                        <td>{{ work["workType"] }}</td>
+                                                        <td>{{ work["workDate"] }}</td>
+                                                        <td>
+                                                            <a data-toggle="modal"
+                                                               data-target="#modalWindow"
+                                                               class="btn btn-primary btn-xs"
+                                                               href="{{ path('insis_user_create_form', { 'authorFirstName': work['authorFirstName'], 'authorLastName': work['authorLastName'], 'authorDegree': work['authorDegree'] }) }}">
+                                                                <i class="fa fa-edit"></i>
+                                                                {{ 'finalwork.form.action.user_create' | trans() }}
+                                                            </a>
+
+                                                            <a data-toggle="modal"
+                                                               data-target="#modalWindow"
+                                                               class="btn btn-success btn-xs"
+                                                               href="{{ path('insis_work_create_form', { 'workTitle': work['workTitle'], 'workType': work['workType'], 'authorFirstName': work['authorFirstName'], 'authorLastName': work['authorLastName'] }) }}">
+                                                                <i class="fa fa-edit"></i>
+                                                                {{ 'finalwork.form.action.work_create' | trans() }}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+
+                                <div class="row">
+                                    <a class="btn btn-danger"
+                                       href="{{ path('insis_logout') }}">
+                                        <i class="fa fa-sign-out"></i>
+                                        {{ 'finalwork.menu.logout' | trans }}
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='jsqueeze'
+        'vendor/select2/dist/js/select2.full.min.js'
+        'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}
+        <script src="/compiled{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

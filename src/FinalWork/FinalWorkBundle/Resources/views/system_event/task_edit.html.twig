@@ -1,0 +1,6 @@
+<b>{{ user }}</b> změnil "{{ task }}"  úkol
+<a class="titleToolTip blue"
+   target="_blank"
+   href="{{ (path('work_detail', { 'id': work.id | hashids_encode })) }}">
+    u Vaší práce.
+</a>

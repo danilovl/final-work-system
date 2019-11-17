@@ -1,0 +1,134 @@
+services:
+  #   Administration
+  final_work.admin.article:
+    class: FinalWork\FinalWorkBundle\Admin\ArticleAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Article, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: article, label: Article }
+    public: true
+
+  final_work.admin.article_category:
+    class: FinalWork\FinalWorkBundle\Admin\ArticleCategoryAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\ArticleCategory, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: article, label: ArticleCategory }
+    public: true
+
+  final_work.admin.work:
+    class: FinalWork\FinalWorkBundle\Admin\WorkAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Work, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: work, label: Work }
+    public:    true
+
+  final_work.admin.work_type:
+    class: FinalWork\FinalWorkBundle\Admin\WorkTypeAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\WorkType, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: work, label: WorkType }
+    public:    true
+
+  final_work.admin.work_status:
+    class: FinalWork\FinalWorkBundle\Admin\WorkStatusAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\WorkStatus, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: work, label: WorkStatus }
+    public:    true
+
+  final_work.admin.work_category:
+    class: FinalWork\FinalWorkBundle\Admin\WorkCategoryAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\WorkCategory, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: work, label: WorkCategory }
+    public:    true
+
+  final_work.admin.task:
+    class: FinalWork\FinalWorkBundle\Admin\TaskAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Task, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: work, label: Task }
+    public:    true
+
+  final_work.admin.media:
+    class: FinalWork\FinalWorkBundle\Admin\MediaAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Media, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: media, label: Media }
+    public:    true
+
+  final_work.admin.media_type:
+    class: FinalWork\FinalWorkBundle\Admin\MediaTypeAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\MediaType, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: media, label: MediaType }
+    public:    true
+
+  final_work.admin.media_mime_type:
+    class: FinalWork\FinalWorkBundle\Admin\MediaMimeTypeAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\MediaMimeType, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: media, label: MediaMimeType }
+    public:    true
+
+  final_work.admin.media_category:
+    class: FinalWork\FinalWorkBundle\Admin\MediaCategoryAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\MediaCategory, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: media, label: MediaCategory }
+    public:    true
+
+  final_work.admin.event:
+    class: FinalWork\FinalWorkBundle\Admin\EventAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Event, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: event, label: Event }
+    public: true
+
+  final_work.admin.event_type:
+    class: FinalWork\FinalWorkBundle\Admin\EventTypeAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\EventType, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: event, label: EventType }
+    public:    true
+
+  final_work.admin.event_address:
+    class: FinalWork\FinalWorkBundle\Admin\EventAddressAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\EventAddress, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: event, label: EventAddress }
+    public: true
+
+  final_work.admin.comment:
+    class: FinalWork\FinalWorkBundle\Admin\CommentAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Comment, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: comment, label: Comment }
+    public: true
+
+  final_work.admin.conversation:
+    class: FinalWork\FinalWorkBundle\Admin\ConversationAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\Conversation, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: conversation, label: Conversation }
+    public: true
+
+  final_work.admin.conversation_type:
+    class: FinalWork\FinalWorkBundle\Admin\ConversationTypeAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\ConversationType, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: conversation, label: ConversationType }
+    public: true
+
+  final_work.admin.conversation_message:
+    class: FinalWork\FinalWorkBundle\Admin\ConversationMessageAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\ConversationMessage, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: conversation, label: ConversationMessage }
+    public: true
+
+  final_work.admin.conversation_message_status_type:
+    class: FinalWork\FinalWorkBundle\Admin\ConversationMessageStatusTypeAdmin
+    arguments: [~, FinalWork\FinalWorkBundle\Entity\ConversationMessageStatusType, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: conversation, label: ConversationMessageStatusType }
+    public: true

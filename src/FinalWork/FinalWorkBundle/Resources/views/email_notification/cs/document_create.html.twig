@@ -1,0 +1,14 @@
+{% block content %}
+    <body>
+    <div>
+        Dobrý den,
+        <br><br>
+        {{ media.owner }} přidal nový
+        <a href="{{ absolute_url(path('document_list', {'_locale': default_locale})) }}">informační materiál</a> - "{{ media.name }}".
+        <br><br>
+        S pozdravem
+        <br><br>
+        Systém pro vedení bakalářských a diplomových prací
+    </div>
+    </body>
+{% endblock %}

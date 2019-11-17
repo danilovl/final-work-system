@@ -1,0 +1,67 @@
+task_list:
+  path: /task/list
+  defaults:
+      _controller: FinalWorkBundle:Task:list
+  methods:  [GET]
+
+task_create:
+  path: /{id}/task/create
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Task:create
+  methods:  [GET,POST]
+
+task_create_ajax:
+  path: /{id}/task/create/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Task:create
+  methods:  [POST]
+
+task_edit:
+  path: /{id_work}/task/edit/{id_task}
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_task: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Task:edit
+  methods:  [GET, POST]
+
+task_edit_ajax:
+  path: /{id_work}/task/edit/{id_task}/ajax
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_task: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Task:edit
+  methods:  [POST]
+
+task_change_status_ajax:
+  path: /{id_work}/task/change/{type}/{id_task}/ajax
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_task: "^[a-zA-Z0-9]{10}$"
+      type: "complete|active|notify"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Task:changeStatus
+  methods:  [POST]
+
+task_notify_complete_ajax:
+  path: /{id_work}/task/notify/complete/{id_task}/ajax
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_task: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Task:notifyComplete
+  methods:  [POST]
+
+task_delete:
+  path:     /{id_work}/task/delete/{id_task}
+  requirements:
+      id_work: "^[a-zA-Z0-9]{10}$"
+      id_task: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Task:delete
+  methods:  [POST, DELETE]

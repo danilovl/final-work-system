@@ -1,0 +1,143 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="row ajax">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_content">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="item form-group">
+                            {{ form_label(form.name,  'finalwork.form.label.name' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.description,  'finalwork.form.label.description' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.street, 'finalwork.form.label.street', {'label_attr': {'class': 'control-label col-md-2 col-sm-2  col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.street, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.latitude, 'finalwork.form.label.latitude', {'label_attr': {'class': 'control-label col-md-2 col-sm-2  col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10  col-xs-12">
+                                {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.longitude, 'finalwork.form.label.longitude', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10  col-xs-12">
+                                {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.skype, 'finalwork.form.label.skype', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(form.skype, {'attr': {'class': 'form-control js-switch'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_content">
+                                    <div class="google-map" id="google-map-ajax" style="height: 400px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
+                                <button class="btn btn-success"
+                                        id="event_address_action">
+                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    {{ buttonActionTitle }}
+                                </button>
+                                <button class="btn btn-primary"
+                                        id="event_address_action_close">
+                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    {{ buttonActionCloseTitle }}
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+<script>
+    var locale = '{{ app.request.locale }}';
+
+    $(document).ready(function () {
+        initTinymce(locale);
+        initJsSwitch('.ajax .js-switch');
+        createEditContentAjax('#event_address_action');
+        createEditContentAjax('#event_address_action_clos0e', true);
+
+        var head = document.getElementsByTagName('head')[0];
+        var insertBefore = head.insertBefore;
+        head.insertBefore = function (newElement, referenceElement) {
+            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+                return;
+            }
+            insertBefore.call(head, newElement, referenceElement);
+        };
+
+        var street = document.getElementById('event_address_street');
+        var inputLatitude = document.getElementById('event_address_latitude');
+        var inputLongitude = document.getElementById('event_address_longitude');
+        var geocoder = new google.maps.Geocoder();
+
+        {% if eventAddress is defined and eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
+        var myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
+        {% else %}
+        var myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
+        {% endif %}
+
+        function googleInitMap() {
+            var mapOptions = {
+                zoom: 11,
+                center: myLatLng
+            };
+            var map = new google.maps.Map(document.getElementById('google-map-ajax'), mapOptions);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+
+            google.maps.event.addListener(map, "click", function (event) {
+                marker.setPosition(event.latLng);
+                var latitude = event.latLng.lat();
+                var longitude = event.latLng.lng();
+                inputLatitude.value = latitude;
+                inputLongitude.value = longitude;
+
+                geocoder.geocode({
+                    'latLng': event.latLng
+                }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            street.value = results[0].formatted_address;
+                        }
+                    }
+                });
+            });
+        }
+
+        googleInitMap();
+    });
+</script>

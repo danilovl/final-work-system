@@ -1,0 +1,43 @@
+user_group_create:
+  path: /create
+  defaults:
+      _controller: FinalWorkBundle:UserGroup:create
+  methods:  [GET, POST]
+
+user_group_create_ajax:
+  path: /create/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\UserGroup:create
+  methods:  [GET, POST]
+
+user_group_edit:
+  path: /edit/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:UserGroup:edit
+  methods:  [GET, POST]
+
+user_group_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\UserGroup:edit
+  methods:  [GET, POST]
+
+user_group_list:
+  path: /list
+  defaults:
+      _controller: FinalWorkBundle:UserGroup:list
+  methods:  [GET, POST]
+
+user_group_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\UserGroup:delete
+  methods:  [POST, DELETE]

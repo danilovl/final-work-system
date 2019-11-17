@@ -1,0 +1,16 @@
+# Twig Configuration
+twig:
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  form_themes:
+    - 'SonataFormatterBundle:Form:formatter.html.twig'
+    - 'FinalWorkBundle:form:fields.html.twig'
+  globals:
+    default_locale: '%locale%'
+    conversation_variation: "@final_work.conversation_variation"
+    conversation_status: "@final_work.facade.conversation_status"
+    conversation_message: "@final_work.facade.conversation_message"
+    system_event: "@final_work.facade.system_event"
+    system_event_recipient: "@final_work.facade.system_event_recipient"
+    goole_analitics_code: "%google_analytics_code%"
+    google_maps_key: "%google_maps_key%"

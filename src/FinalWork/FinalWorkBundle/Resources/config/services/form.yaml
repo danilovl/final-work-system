@@ -1,0 +1,38 @@
+services:
+  #  Form
+  final_work.form.work:
+    class: FinalWork\FinalWorkBundle\Form\WorkForm
+    arguments:
+      - '@final_work.data_grid.work_status'
+      - '@final_work.data_grid.work_category'
+      - '@final_work.data_grid.user'
+    tags:
+      - { name: form.type }
+
+  final_work.form.document:
+    class: FinalWork\FinalWorkBundle\Form\DocumentForm
+    arguments:
+      - '@final_work.data_grid.media_category'
+    tags:
+      - { name: form.type }
+
+  final_work.form.conversation_compose_message:
+    class: FinalWork\FinalWorkBundle\Form\ConversationComposeMessageForm
+    arguments:
+      - '@translator'
+    tags:
+      - { name: form.type }
+
+  #  Form Extension
+  final_work.form_extension.conversation_compose_message:
+    class: FinalWork\FinalWorkBundle\Form\Extension\ImageEntityExtension
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Bridge\Doctrine\Form\Type\EntityType }
+
+  # Constrains
+  final_work.validator.first_week_day:
+    class: FinalWork\FinalWorkBundle\Form\Constraint\FirstWeekDayValidator
+    arguments:
+      - '@translator'
+    tags:
+      - { name: validator.constraint_validator }

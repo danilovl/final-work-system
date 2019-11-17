@@ -1,0 +1,24 @@
+finalwork:
+  flash:
+    form:
+      save:
+        success: Information is updated
+        warning: Verify that the data entered is correct
+        error: Information was not updated
+      create:
+        success: Creation was successful
+        warning: Verify that the data entered is correct
+        error: Failed to create
+      delete:
+        success: Deletion was successful
+        warning: Verify that the data entered is correct
+        error: Failed to delete
+    user:
+      create:
+        success: User successfully created
+        warning: Verify that the data entered is correct
+        error: Username or email already exists
+    error:
+      403: Access denied
+      404: Sorry but we couldnt find this page
+      500: Internal Server Error

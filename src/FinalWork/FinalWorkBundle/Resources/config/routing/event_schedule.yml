@@ -1,0 +1,61 @@
+event_schedule_create:
+  path:     /create
+  defaults:
+    _controller: FinalWorkBundle:EventSchedule:create
+  methods:  [GET,POST]
+
+event_schedule_detail:
+  path:     /detail/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+    _controller: FinalWorkBundle:EventSchedule:detail
+  methods:  GET
+
+event_schedule_edit:
+  path:     /edit/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+    _controller: FinalWorkBundle:EventSchedule:edit
+  methods: [GET,POST]
+
+event_schedule_list:
+  path:     /list
+  defaults:
+    _controller: FinalWorkBundle:EventSchedule:list
+  methods:  GET
+
+event_schedule_clone:
+  path:     /clone/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+    _controller: FinalWorkBundle:EventSchedule:clone
+  methods:  [GET,POST]
+
+event_schedule_clone_ajax:
+  path:     /clone/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+    _controller: FinalWorkBundle:Ajax\EventSchedule:clone
+  methods:  [GET,POST]
+
+event_schedule_delete:
+  path:     /delete/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+    _controller: FinalWorkBundle:EventSchedule:delete
+  methods:  [POST, DELETE]
+
+event_schedule_delete_ajax:
+  path:     /delete/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+    _controller: FinalWorkBundle:Ajax\EventSchedule:delete
+  methods:  [POST, DELETE]
+    
+ 

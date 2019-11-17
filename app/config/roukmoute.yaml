@@ -1,0 +1,11 @@
+# Hash id Configuration
+roukmoute_hashids:
+  # if set, the hashids will differ from everyone else's
+  salt:               "fce7055"
+  # if set, will generate minimum length for the id
+  # 0 — meaning hashes will be the shortest possible length
+  min_hash_length:    10
+  # if set, will use only characters of alphabet string
+  alphabet:           "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+  # if set to true, guess automatically hashid
+  autowire:           true

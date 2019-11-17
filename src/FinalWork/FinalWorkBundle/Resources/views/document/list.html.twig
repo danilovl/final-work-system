@@ -1,0 +1,275 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/switchery/dist/switchery.min.css'
+        'vendor/select2/dist/css/select2.min.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ 'finalwork.text.information_materials_list' | trans() }}</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            {% if documents is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{{ 'finalwork.text.search_form' | trans() }} </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link">
+                                        {% if openSearchTab == false %}
+                                            <i class="fa fa-chevron-down"></i>
+                                        {% else %}
+                                            <i class="fa fa-chevron-up"></i>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" {% if openSearchTab == false %} style="display: none;" {% endif %}>
+
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                            <div class="item form-group">
+                                {{ form_label(form.name,  'finalwork.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                {{ form_label(form.categories, 'finalwork.form.label.category', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                {{ form_label(form.mimeType, 'finalwork.form.label.type', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{ form_widget(form.mimeType, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <input type="submit"
+                                           class="btn btn-success"
+                                           value="{{ 'finalwork.form.action.search' | trans() }}"/>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if documents is not empty %}
+
+                                {% set directionParam = documents.getPaginatorOption('sortDirectionParameterName') %}
+                                {% set params = documents.getParams() %}
+                                {% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+                                <table class="table projects">
+                                    <thead>
+                                    <tr>
+                                        <th{% if documents.isSorted('media.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(documents, 'finalwork.text.name' | trans(), 'media.name') }}
+                                        </th>
+                                        <th{% if documents.isSorted('media.author') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(documents, 'finalwork.text.author' | trans(), 'media.author') }}
+                                        </th>
+                                        <th>{{ 'finalwork.text.category' | trans() }}</th>
+                                        <th{% if documents.isSorted('media.type') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(documents, 'finalwork.text.type' | trans(), 'media.type') }}
+                                        </th>
+                                        <th{% if documents.isSorted('media.mediaSize') %} class="fa fa-sort-{{ direction }}" {% endif %}>
+                                            {{ knp_pagination_sortable(documents, 'finalwork.text.file_size' | trans(), 'media.mediaSize') }}
+                                        </th>
+                                        <th{% if documents.isSorted('media.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(documents, 'finalwork.text.date_added' | trans(), 'media.createdAt') }}
+                                        </th>
+                                        <th style="width: 20%">{{ 'finalwork.text.options' | trans() }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for document in documents %}
+                                        <tr id="document-{{ document.id | hashids_encode }}" class="active">
+                                            <td>
+                                                {{ document.name }}
+                                            </td>
+                                            <td>
+                                                {{ document.owner }}
+                                            </td>
+                                            <td>
+                                                {% if document.categories is not empty %}
+                                                    <dl>
+                                                        <dd>
+                                                            <ul class="list-inline prod_size">
+                                                                {% for category in document.categories %}
+                                                                    <li>
+                                                                        <button type="button"
+                                                                                class="btn btn-default btn-xs">
+                                                                            {{ category.name }}
+                                                                        </button>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </dd>
+                                                    </dl>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ document.mimeType.extension }}
+                                            </td>
+                                            <td>
+                                                {{ document.getMediaSizeFormatted }}
+                                            </td>
+                                            <td>
+                                                {{ document.createdAt | date("d.m.Y H:i") }}
+                                            </td>
+                                            <td>
+
+                                                {% if document.description is not empty %}
+                                                    <a class="btn btn-info btn-xs"
+                                                       role="tab"
+                                                       id="heading-document-description-{{ document.id | hashids_encode }}"
+                                                       data-toggle="collapse"
+                                                       data-parent="#accordion-document-descrition-{{ document.id | hashids_encode }}"
+                                                       href="#tab-document-description-{{ document.id | hashids_encode }}"
+                                                       aria-expanded="true"
+                                                       aria-controls="tab-document-description-{{ document.id | hashids_encode }}">
+                                                        <i class="fa fa-desktop"></i>
+                                                        {{ 'finalwork.form.action.show_detail' | trans() }}
+                                                    </a>
+                                                {% endif %}
+
+                                                <a class="btn btn-primary btn-xs"
+                                                   role="tab"
+                                                   id="heading-content-description-{{ document.id | hashids_encode }}"
+                                                   data-toggle="collapse"
+                                                   data-parent="#accordion-document-content-{{ document.id | hashids_encode }}"
+                                                   href="#tab-document-content-{{ document.id | hashids_encode }}"
+                                                   aria-expanded="true"
+                                                   aria-controls="tab-document-content-{{ document.id | hashids_encode }}"
+
+                                                        {% if document.existMediaFile and document.mimeType.extension != 'zip' and document.mimeType.extension != 'rar' %}
+                                                            {% set frameLink = absolute_url(path('document_google_download', { 'id': document.id | hashids_encode })) %}
+                                                            onclick="showGoogleDocs( '#iframe-document-content-{{ document.id | hashids_encode }}', '{{ frameLink }}')"
+                                                        {% endif %}
+                                                >
+                                                    <i class="fa fa-file-text-o"></i>
+                                                    {{ 'finalwork.form.action.show_content' | trans() }}
+                                                </a>
+
+                                                {% if document.existMediaFile %}
+                                                    <a class="btn btn-success btn-xs"
+                                                       href="{{ path('document_download', { 'id': document.id | hashids_encode }) }}">
+                                                        <i class="fa fa-download"></i>
+                                                        {{ 'finalwork.form.action.download' | trans() }}
+                                                    </a>
+                                                {% else %}
+                                                    <a class="btn btn-success btn-xs">
+                                                        <i class="fa fa-download"></i>
+                                                        {{ 'finalwork.text.file_not_found' | trans() }}
+                                                    </a>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+
+                                        {% if document.description is not empty %}
+                                            <tr>
+                                                <td colspan="7" style="border: none !important;">
+                                                    <div class="panel-collapse collapse"
+                                                         id="tab-document-description-{{ document.id | hashids_encode }}"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-document-description-{{ document.id | hashids_encode }}">
+                                                        <div class="panel-body text-muted well well-sm no-shadow">
+                                                            {{ document.description | raw }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="7" style="border: none !important;"></td>
+                                            </tr>
+                                        {% endif %}
+
+                                        <tr>
+                                            <td colspan="7" style="border: none !important;">
+                                                <div id="tab-document-content-{{ document.id | hashids_encode }}"
+                                                     class="panel-collapse collapse"
+                                                     aria-labelledby="heading-document-content-{{ document.id | hashids_encode }}"
+                                                     role="tabpanel">
+                                                    <div class="panel-body text-muted well well-sm no-shadow">
+
+                                                        {% if  document.existMediaFile %}
+                                                            {{ renderServiceMethod('final_work.controller.document', 'detailContentAction', {'media': document}) }}
+                                                        {% else %}
+                                                            {{ 'finalwork.text.file_not_found' | trans() }}
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'finalwork.text.no_result' | trans() }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    {{ knp_pagination_render(documents) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='jsqueeze'
+        'vendor/switchery/dist/switchery.min.js'
+        'vendor/select2/dist/js/select2.full.min.js'
+        'vendor/jszip/dist/jszip.js'
+        'js/jszip/jszip-utils.js' %}
+        <script src="/compiled{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $("#document_search_categories").select2({width: '100%'});
+            $("#document_search_mimeType").select2({width: '100%'});
+            $("table").tableFix()
+        });
+    </script>
+{% endblock %}

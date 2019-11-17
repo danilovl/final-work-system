@@ -1,0 +1,13 @@
+{% if document.mimeType.extension == 'zip' %}
+    <div id="document-content-{{ document.id | hashids_encode }}"></div>
+    <div id="document-content-info-{{ document.id | hashids_encode }}"></div>
+    <script>
+        var archiveUrl = '{{ path('document_download', { 'id': document.id | hashids_encode }) }}';
+        var idContent = "#document-content-{{ document.id | hashids_encode }}";
+        var idContentInfo = "document-content-info-{{ document.id | hashids_encode }}";
+
+        showArchiveContent(archiveUrl, idContent, idContentInfo)
+    </script>
+{% elseif document.mimeType.extension != 'zip' and document.mimeType.extension != 'rar' %}
+    <div id="iframe-document-content-{{ document.id | hashids_encode }}"></div>
+{% endif %}

@@ -1,0 +1,19 @@
+# FosUser Configuration
+fos_user:
+  db_driver:      orm # can be orm or odm
+  firewall_name:  main
+  user_class:     FinalWork\SonataUserBundle\Entity\User
+
+  group:
+    group_class:    FinalWork\SonataUserBundle\Entity\Group
+    group_manager:  sonata.user.orm.group_manager
+
+  service:
+    user_manager: sonata.user.orm.user_manager
+
+  from_email:
+    address:     you@example.com
+    sender_name: You
+  profile:
+    form:
+      type: FinalWork\UserBundle\Form\Type\ProfileFormType

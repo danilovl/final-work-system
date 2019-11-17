@@ -1,0 +1,212 @@
+{% extends 'FinalWorkBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,scssphp'
+        'vendor/switchery/dist/switchery.min.css' %}
+        <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            {% if eventAddress is defined %}
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content text-center">
+                                <h2>
+                                    {{ eventAddress.name }}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    {{ 'finalwork.text.appointment_address' | trans() }}
+                                </h2>
+                                <div class="modal fade bs-example-modal-sm"
+                                     tabindex="-1"
+                                     role="dialog"
+                                     id="appointment-address-delete-modal-{{ eventAddress.id | hashids_encode }}"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button"
+                                                        class="close"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">
+                                                    {{ 'finalwork.text.deleting' | trans() }} | {{ eventAddress.name }}
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>
+                                                    {{ 'finalwork.text.are_you_sure_delete' | trans() }}
+                                                    ?
+                                                </h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                        class="btn btn-default"
+                                                        data-dismiss="modal">
+                                                    {{ 'finalwork.form.action.close' | trans() }}
+                                                </button>
+
+                                                {{ form_start(deleteForm, {'attr': {'class': 'delete-form-button'}}) }}
+                                                <button class="btn btn-danger">
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ 'finalwork.form.action.delete' | trans() }}
+                                                </button>
+                                                {{ form_end(deleteForm) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li class="dropdown">
+                                        <a href="#"
+                                           class="dropdown-toggle"
+                                           data-toggle="dropdown"
+                                           role="button"
+                                           aria-expanded="false">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="{{ path('event_address_edit', { 'id': eventAddress.id | hashids_encode }) }}"
+                                                   data-toggle="modal"
+                                                   data-target="#modalWindow">
+                                                    <i class="fa fa-edit"></i>
+                                                    {{ 'finalwork.form.action.edit' | trans() }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="modal"
+                                                   data-target="#appointment-address-delete-modal-{{ eventAddress.id | hashids_encode }}">
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ 'finalwork.form.action.delete' | trans() }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        {{ 'finalwork.text.name' | trans() }}
+                                    </dt>
+                                    <dd>
+                                        {{ eventAddress.name }}
+                                    </dd>
+
+                                    {% if eventAddress.description %}
+                                        <dt>
+                                            {{ 'finalwork.text.description' | trans() }}
+                                        </dt>
+                                        <dd>
+                                            {{ eventAddress.description|raw }}
+                                        </dd>
+                                    {% endif %}
+
+                                    {% if eventAddress.street %}
+                                        <dt>
+                                            {{ 'finalwork.text.street' | trans() }}
+                                        </dt>
+                                        <dd>
+                                            {{ eventAddress.street }}
+                                        </dd>
+                                    {% endif %}
+
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    {{ 'finalwork.text.map' | trans() }}
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+                                <div class="google-map" id="google-map" style="height: 400px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='jsqueeze'
+        'vendor/switchery/dist/switchery.min.js' %}
+        <script src="/compiled{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key={{google_maps_key}}&language={{ app.request.locale }}&region=CS">
+    </script>
+    <script type="text/javascript">
+        var head = document.getElementsByTagName('head')[0];
+        var insertBefore = head.insertBefore;
+        head.insertBefore = function (newElement, referenceElement) {
+            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+                return;
+            }
+            insertBefore.call(head, newElement, referenceElement);
+        };
+
+        function googleInitMap() {
+            {% if eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
+            var myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
+            {% else %}
+            var myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
+            {% endif %}
+
+            var mapOptions = {
+                zoom: 11,
+                center: myLatLng
+            };
+            var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map
+            });
+            marker.setMap(map);
+        }
+
+        googleInitMap();
+    </script>
+{% endblock %}

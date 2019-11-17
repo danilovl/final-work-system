@@ -1,0 +1,7 @@
+<b>{{ user }}</b> přidal novou verzi "{{ version }}"
+<a class="titleToolTip blue"
+   title="Název verze:  <br> Popis verze: "
+   target="_blank"
+   href="{{ (path('work_detail', { 'id': work.id | hashids_encode })) }}">
+    k práci
+</a>

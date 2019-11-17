@@ -1,0 +1,35 @@
+insis_login:
+  path: /login
+  defaults:
+      _controller: FinalWorkBundle:Insis:login
+  methods:  [GET,POST]
+
+insis_logout:
+  path: /logout
+  defaults:
+      _controller: FinalWorkBundle:Insis:logout
+  methods:  [GET,POST]
+
+insis_filter:
+  path: /filter
+  defaults:
+      _controller: FinalWorkBundle:Insis:filter
+  methods:  [GET,POST]
+
+insis_work_list:
+  path: /list
+  defaults:
+      _controller: FinalWorkBundle:Insis:list
+  methods:  [GET,POST]
+
+insis_user_create_form:
+  path: /create/user/form
+  defaults:
+      _controller: FinalWorkBundle:Insis:createFormUserInsis
+  methods:  [GET,POST]
+
+insis_work_create_form:
+  path: /create/work/form
+  defaults:
+      _controller: FinalWorkBundle:Insis:createFormWorkInsis
+  methods:  [GET,POST]

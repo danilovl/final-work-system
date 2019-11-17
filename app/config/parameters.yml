@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: final_work_system
+    database_user: root
+    database_password: null
+    mailer_transport: null
+    mailer_host: null
+    mailer_user: null
+    mailer_password: null
+    secret: KtwzomqebjkBGYja0hwm
+    redis_host: 127.0.0.1
+    redis_port: 6379

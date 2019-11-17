@@ -1,0 +1,123 @@
+{% stylesheets filter='cssrewrite,scssphp'
+    'vendor/select2/dist/css/select2.min.css'
+    'vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' %}
+    <link rel="stylesheet" href="/compiled{{ asset_url }}"/>
+{% endstylesheets %}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="row ajax">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_content">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                        <div class="item form-group">
+                            {{ form_label(form.type,  'finalwork.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                {{ form_widget(form.type, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            {{ form_label(form.name,  'finalwork.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            {{ form_label(form.address,  'finalwork.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            {{ form_label(form.participant,  'finalwork.form.label.appointment_participant' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                {{ form_widget(form.participant, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            {{ form_label(form.start, 'finalwork.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                <i class="fa fa-calendar-o form-control-feedback left"
+                                   aria-hidden="true">
+                                </i>
+                                {{ form_widget(form.start, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            {{ form_label(form.end, 'finalwork.form.label.end', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                <i class="fa fa-calendar-o form-control-feedback left"
+                                   aria-hidden="true">
+                                </i>
+                                {{ form_widget(form.end, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button class="btn btn-success"
+                                        id="event_action">
+                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    {{ 'finalwork.form.action.update' | trans() }}
+                                </button>
+                                <button class="btn btn-primary"
+                                        id="event_action_close">
+                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    {{ 'finalwork.form.action.update_and_close' | trans() }}
+                                </button>
+                            </div>
+                        </div>
+
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% javascripts filter='jsqueeze'
+    'vendor/select2/dist/js/select2.full.min.js'
+    'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}
+    <script src="/compiled{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script>
+    var locale = '{{ app.request.locale }}';
+
+    var modalWindow = $('#modalWindow');
+
+    $(document).ready(function () {
+        $("#event_type").select2({width: '100%', dropdownParent: modalWindow});
+        $("#event_address").select2({width: '100%', dropdownParent: modalWindow});
+        $("#event_participant").select2({width: '100%', dropdownParent: modalWindow});
+        $('#event_start').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: locale
+        });
+        $('#event_end').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: locale
+        });
+
+        createEditContentAjax('#event_action');
+        createEditContentAjax('#event_action_close', true);
+    });
+</script>
+

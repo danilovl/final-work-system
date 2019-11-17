@@ -1,0 +1,75 @@
+work_create:
+  path: /create
+  defaults:
+      _controller: FinalWorkBundle:Work:create
+  methods:  [GET, POST]
+
+work_create_ajax:
+  path: /create/ajax
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Work:create
+  methods:  [POST]
+
+work_edit:
+  path: /edit/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Work:edit
+  methods:  [GET, POST]
+
+work_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Work:edit
+  methods:  [POST]
+
+work_edit_author:
+  path: /{id}/edit/author
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Work:editAuthor
+  methods:  [GET, POST]
+
+work_edit_author_ajax:
+  path: /{id}/edit/author/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Work:editAuthor
+  methods:  [POST]
+
+work_detail:
+  path: /detail/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Work:detail
+  methods:  GET
+
+work_list:
+  path: /{type}/list
+  requirements:
+      type: "supervisor|author|opponent|consultant"
+  defaults:
+      _controller: FinalWorkBundle:Work:list
+  methods:  [GET, POST]
+
+work_delete:
+  path: /delete/{id}
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Work:delete
+  methods:  [POST, DELETE]
+
+work_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+      id: "^[a-zA-Z0-9]{10}$"
+  defaults:
+      _controller: FinalWorkBundle:Ajax\Work:delete
+  methods:  [POST, DELETE]

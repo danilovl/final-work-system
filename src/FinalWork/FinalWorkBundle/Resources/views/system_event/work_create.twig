@@ -1,0 +1,5 @@
+<b>{{ user }}</b> vytvořil
+<a target="_blank"
+   href="{{ (path('work_detail', { 'id': work.id | hashids_encode })) }}">
+    novou práci
+</a>

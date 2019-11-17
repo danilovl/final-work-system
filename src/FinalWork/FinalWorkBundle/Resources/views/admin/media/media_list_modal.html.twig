@@ -1,0 +1,39 @@
+{# Media list modal template #}
+<div class="modal fade" id="mediaList_{{ id }}" data-target-id="{{ id }}" tabindex="-1" role="dialog"
+     aria-labelledby="mediaList_{{ id }}" aria-hidden="true">
+    <div id="media-list-modal" class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row form-inline">
+                    <div class="col-md-9">
+                        <h4 class="modal-title"
+                            id="myModalLabel_{{ id }}">
+                            {{ 'finalwork.admin.section.select_image' | trans }}
+                        </h4>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <input type="text"
+                                   class="form-control input"
+                                   id="media-list-search-{{ id }}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button"
+                                class="close close-modal-{{ id }}"
+                                data-target-id="{{ id }}"
+                                aria-hidden="true">
+                            x
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="media-list-body" class="modal-body m-body-{{ id }}">
+                <img src="{{ asset('bundles/fenix/gfx/spinner-transparent.gif') }}" class="center-block modal-spinner"/>
+            </div>
+        </div>
+    </div>
+</div>

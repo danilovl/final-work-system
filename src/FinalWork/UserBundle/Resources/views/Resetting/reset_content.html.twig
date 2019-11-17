@@ -1,0 +1,39 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div>
+    <div class="login_wrapper">
+        <div id="register" class="form">
+
+            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'form-horizontal' } }) }}
+
+            <div class="item form-group">
+                {{ form_label(form.plainPassword.first,  'form.new_password' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+            </div>
+
+            <div class="item form-group">
+                {{ form_label(form.plainPassword.second,  'form.new_password_confirmation' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+            </div>
+
+            {% if not form.plainPassword.first.vars.valid %}
+                <div class="col-md-12 col-sm-12 col-xs-12 red">
+                    {{ 'fos_user.password.mismatch' | trans({},'validators') }}
+                </div>
+            {% endif %}
+
+            <div class="form-group login_content">
+                <input class="btn btn-default submit"
+                       id="submit"
+                       type="submit"
+                       value="{{ 'resetting.reset.submit' | trans }}"/>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>

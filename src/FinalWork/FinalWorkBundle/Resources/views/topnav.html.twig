@@ -1,0 +1,153 @@
+<div class="top_nav">
+    <div class="nav_menu">
+        <nav>
+            <div class="nav toggle">
+                <a id="menu_toggle">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="javascript:"
+                       class="user-profile dropdown-toggle"
+                       data-toggle="dropdown"
+                       aria-expanded="false">
+                        <img src="{{ asset(app.user.getProfileImagePath) }}" alt="profile image">
+                        {{ app.user }}
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    {{ renderMenu('profile') }}
+                </li>
+                <li role="presentation" class="dropdown">
+                    {% set countUnreadConversationMessage = conversation_message.getTotalUnreadMessagesByUser(app.user) %}
+
+                    <a href="javascript:"
+                       class="dropdown-toggle info-number"
+                       data-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+
+                        {% set countUnreadConversationMessageClass = 'bg-green' %}
+                        {% if countUnreadConversationMessage > 0 %}
+                            {% set countUnreadConversationMessageClass = 'bg-red' %}
+                        {% endif %}
+                        <span class="badge {{ countUnreadConversationMessageClass }}">
+                            {{ countUnreadConversationMessage }}
+                        </span>
+                    </a>
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        {% if countUnreadConversationMessage is not empty %}
+
+                            {% set conversationMessage = conversation_message.getUnreadMessagesByUser(app.user, 6) %}
+                            {% for message in conversationMessage | slice(0, 5) %}
+                                <li>
+                                    <a href="{{ path('conversation_detail', { 'id': message.conversation.id | hashids_encode }) }}">
+                                    <span class="image">
+                                       <img src="{{ asset(message.owner.getProfileImagePath) }}"
+                                            alt="profile image"/>
+                                    </span>
+                                        <span class="message">
+                                            <b>{{ message.owner }} :</b>
+
+                                            {% if message.content  | length > 150 %}
+                                                <p>{{ message.content | striptags | slice(0,150) | raw }}.....</p>
+                                            {% else %}
+                                                <p> {{ message.content|raw }}</p>
+                                            {% endif %}
+
+                                     </span>
+                                        <span class="time">{{ message.createdAt | date('Y-m-d H:i:s') }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+
+                            <li>
+                                <div class="text-center">
+                                    <a href="{{ path('conversation_list') }}">
+                                        <strong>{{ 'finalwork.text.see_all_messages' | trans }}</strong>
+                                    </a>
+                                </div>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                    {% set countUnreadSystemEvents = system_event.getTotalUnreadSystemEventsByRecipient(app.user) %}
+
+                    <a href="javascript:" class="dropdown-toggle info-number" data-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fa fa-bell-o"></i>
+
+                        {% set countUnreadSystemEventsClass = 'bg-green' %}
+                        {% if countUnreadSystemEvents > 0 %}
+                            {% set countUnreadSystemEventsClass = 'bg-red' %}
+                        {% endif %}
+                        <span class="badge {{ countUnreadSystemEventsClass }}">
+                            {{ countUnreadSystemEvents }}
+                        </span>
+                    </a>
+                    <ul id="menu2" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        {% if countUnreadSystemEvents is not empty %}
+
+                            {% set unreadSystemEvents = system_event_recipient.getUnreadSystemEventsByRecipient(app.user, 6) %}
+                            {% for systemEventRecipient in unreadSystemEvents | slice(0, 5) %}
+                                <li>
+                                    <span class="image">
+                                       <img src="{{ asset(systemEventRecipient.systemEvent.owner.getProfileImagePath) }}"
+                                            alt="profile image"/>
+                                    </span>
+                                    <span class="message">
+                                        {{ systemEventGenerateLink(systemEventRecipient) | raw }}
+                                     </span>
+                                    <br>
+                                    <span class="time">
+                                        {{ systemEventRecipient.createdAt | date('Y-m-d H:i:s') }}
+                                    </span>
+                                </li>
+                            {% endfor %}
+
+                            <li>
+                                <div class="text-center">
+                                    <a href="{{ path('homepage') }}">
+                                        <strong>
+                                            {{ 'finalwork.text.see_all_alerts' | trans }}
+                                        </strong>
+                                    </a>
+                                </div>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:"
+                       class="dropdown-toggle info-number"
+                       data-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fa fa-globe"></i>
+                        <span class="caret"></span>
+                        <span class="sr-only">
+                            {{ 'finalwork.menu.choose_language' | trans }}
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu" role="menu">
+                        {% for locale in locales() %}
+                            <li
+                                    {% if app.request.locale == locale.code %}
+                                        aria-checked="true" class="active"
+                                    {% else %}
+                                        aria-checked="false"
+                                    {% endif %} role="menuitem"
+                            >
+                                <a href="{{ path(app.request.get('_route', 'homepage'), app.request.get('_route_params', []) | merge({ _locale: locale.code })) }}">
+                                    {{ locale.name | capitalize }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

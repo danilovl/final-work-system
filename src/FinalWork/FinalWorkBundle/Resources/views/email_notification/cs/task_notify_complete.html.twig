@@ -1,0 +1,14 @@
+{% block content %}
+    <body>
+    <div>
+        Dobrý den,
+        <br><br>
+        {{ work.author }} ohlásil splnění úkolu "{{ task }}" u
+        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}">"{{ work }}".</a>
+        <br><br>
+        S pozdravem
+        <br><br>
+        Systém pro vedení bakalářských a diplomových prací
+    </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,55 @@
+<ul class="nav nav-tabs bar_tabs" role="tablist">
+    {% if tasks is defined and tasks is not empty %}
+        <li role="presentation"
+                {% if activeTab == 'task' %} class="active" {% endif %}
+        >
+            <a href="#tab-task"
+               role="tab"
+               data-toggle="tab"
+               aria-expanded="true">
+                {{ 'finalwork.text.task' | transchoice(2) }}
+            </a>
+        </li>
+    {% endif %}
+
+    {% if versions is defined and versions is not empty %}
+        <li role="presentation"
+                {% if activeTab == 'version' %} class="active" {% endif %}
+        >
+            <a href="#tab-version"
+               role="tab"
+               data-toggle="tab"
+               aria-expanded="false">
+                {{ 'finalwork.text.version' | transchoice(2) }}
+            </a>
+        </li>
+    {% endif %}
+
+    {% if events is defined and events is not empty %}
+        {% if work.authorSupervisor(app.user) %}
+            <li role="presentation"
+                    {% if activeTab == 'event' %} class="active" {% endif %}
+            >
+                <a href="#tab-event"
+                   role="tab"
+                   data-toggle="tab"
+                   aria-expanded="false">
+                    {{ 'finalwork.text.appointment' | transchoice(2) }}
+                </a>
+            </li>
+        {% endif %}
+    {% endif %}
+
+    {% if messages is defined and messages is not empty %}
+        <li role="presentation"
+                {% if activeTab == 'message' %} class="active" {% endif %}
+        >
+            <a href="#tab-message"
+               role="tab"
+               data-toggle="tab"
+               aria-expanded="false">
+                {{ 'finalwork.text.message' | transchoice(2) }}
+            </a>
+        </li>
+    {% endif %}
+</ul>

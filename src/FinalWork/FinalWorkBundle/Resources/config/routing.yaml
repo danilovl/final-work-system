@@ -1,0 +1,152 @@
+final_work_admin_app:
+  resource: "@FinalWorkBundle/Resources/config/sonata/routing.yml"
+
+final_work_user_app:
+  resource: "@FinalWorkBundle/Resources/config/user/routing.yml"
+
+final_work_sonata:
+  resource: "@FinalWorkBundle/Resources/config/sonata/routing.yml"
+
+article:
+  resource: "@FinalWorkBundle/Resources/config/routing/article.yml"
+  prefix:   /{_locale}/article
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+profile:
+  resource: "@FinalWorkBundle/Resources/config/routing/profile.yml"
+  prefix:   /{_locale}/profile
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+work:
+  resource: "@FinalWorkBundle/Resources/config/routing/work.yml"
+  prefix:   /{_locale}/work
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_group:
+  resource: "@FinalWorkBundle/Resources/config/routing/user_group.yml"
+  prefix:   /{_locale}/user/group
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+work_category:
+  resource: "@FinalWorkBundle/Resources/config/routing/work_category.yml"
+  prefix:   /{_locale}/work/category
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+task:
+  resource: "@FinalWorkBundle/Resources/config/routing/task.yml"
+  prefix:   /{_locale}/work
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+version:
+  resource: "@FinalWorkBundle/Resources/config/routing/version.yml"
+  prefix:   /{_locale}/work
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+conversation:
+  resource: "@FinalWorkBundle/Resources/config/routing/conversation.yml"
+  prefix:   /{_locale}/conversation
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+document:
+  resource: "@FinalWorkBundle/Resources/config/routing/document.yml"
+  prefix:   /{_locale}/document
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+document_category:
+  resource: "@FinalWorkBundle/Resources/config/routing/document_category.yml"
+  prefix:   /{_locale}/document/category
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+event:
+  resource: "@FinalWorkBundle/Resources/config/routing/event.yml"
+  prefix:   /{_locale}/event
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+event_calendar:
+  resource: "@FinalWorkBundle/Resources/config/routing/event_calendar.yml"
+  prefix:   /{_locale}/event/calendar
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+event_address:
+  resource: "@FinalWorkBundle/Resources/config/routing/event_address.yml"
+  prefix:   /{_locale}/event/address
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+event_schedule:
+  resource: "@FinalWorkBundle/Resources/config/routing/event_schedule.yml"
+  prefix:   /{_locale}/event/schedule
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+system_event:
+  resource: "@FinalWorkBundle/Resources/config/routing/system_event.yml"
+  prefix:   /{_locale}/system/event
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+insis:
+  resource: "@FinalWorkBundle/Resources/config/routing/insis.yml"
+  prefix:   /{_locale}/work/insis
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user:
+  resource: "@FinalWorkBundle/Resources/config/routing/user.yml"
+  prefix:   /{_locale}/user/
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+api_key:
+  resource: "@FinalWorkBundle/Resources/config/routing/api/key_work.yaml"
+  prefix:   /api/key/work
+
+api_token:
+  resource: "@FinalWorkBundle/Resources/config/routing/api/token_work.yaml"
+  prefix:   /api/token/work
