@@ -13,34 +13,42 @@
 namespace FinalWork\FinalWorkBundle\Model\Media;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FinalWork\FinalWorkBundle\Entity\Media;
+use FinalWork\FinalWorkBundle\Entity\{
+    Work,
+    Media,
+    MediaType,
+    MediaMimeType
+};
 use FinalWork\FinalWorkBundle\Model\Traits\SimpleInformationTrait;
+use FinalWork\SonataUserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class MediaModel
 {
     use SimpleInformationTrait;
 
+    /**
+     * @var User|null
+     */
     public $owner;
 
     /**
-     * @Assert\NotBlank()
+     * @var MediaType|null
      */
     public $type;
 
     /**
-     * @Assert\NotBlank()
+     * @var MediaMimeType|null
      */
     public $mimeType;
 
     /**
-     * @Assert\NotBlank()
+     * @var ArrayCollection
      */
     public $categories;
 
     /**
-     * @Assert\NotBlank()
+     * @var Work|null
      */
     public $work;
 
@@ -87,6 +95,7 @@ class MediaModel
         $model->name = $media->getName();
         $model->description = $media->getDescription();
         $model->owner = $media->getOwner();
+        $model->type = $media->getType();
         $model->mimeType = $media->getMimeType();
         $model->categories = $media->getCategories();
         $model->work = $media->getWork();
