@@ -125,8 +125,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             }
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -151,8 +150,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipientAuthor->setRecipient($user);
         $systemEvent->addRecipient($recipientAuthor);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -178,8 +176,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipientAuthor->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipientAuthor);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -217,8 +214,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             $systemEvent->addRecipient($recipientConsultant);
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -248,8 +244,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -279,8 +274,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -310,8 +304,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -341,8 +334,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -372,8 +364,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($task->getOwner());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -403,8 +394,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -440,8 +430,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             }
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -478,8 +467,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             }
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -513,8 +501,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             $systemEvent->addRecipient($recipientAuthor);
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -554,8 +541,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             }
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -589,8 +575,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
             }
         }
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -616,8 +601,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($event->getParticipant()->getUser());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -642,8 +626,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($event->getOwner());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -683,8 +666,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($recipientUser);
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -724,8 +706,7 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($recipientUser);
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 
     /**
@@ -750,7 +731,6 @@ class SystemEventSubscriber implements EventSubscriberInterface
         $recipient->setRecipient($event->getOwner());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persist($systemEvent);
-        $this->em->flush();
+        $this->em->persistAndFlush($systemEvent);
     }
 }
