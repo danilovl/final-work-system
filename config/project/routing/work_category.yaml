@@ -1,0 +1,49 @@
+work_category_create:
+  path: /create
+  defaults:
+    _controller: App\Controller\WorkCategoryController:create
+  methods: [GET, POST]
+
+work_category_create_ajax:
+  path: /create/ajax
+  defaults:
+    _controller: App\Controller\Ajax\WorkCategoryController:create
+  methods: [POST]
+
+work_category_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\WorkCategoryController:edit
+  methods: [GET, POST]
+
+work_category_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\WorkCategoryController:edit
+  methods: [POST]
+
+work_category_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\WorkCategoryController:list
+  methods: [GET, POST]
+
+work_category_delete:
+  path: /delete/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\WorkCategoryController:delete
+  methods: [POST, DELETE]
+
+work_category_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\WorkCategoryController:delete
+  methods: [POST, DELETE]

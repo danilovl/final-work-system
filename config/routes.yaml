@@ -1,0 +1,11 @@
+homepage:
+  path: /{_locale}
+  controller: App\Controller\HomeController::index
+  defaults:
+    _locale: '%locale%'
+  requirements:
+    _locale: '%locales%'
+  methods: [GET]
+
+app:
+  resource: project/routing.yaml

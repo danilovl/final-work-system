@@ -1,0 +1,49 @@
+document_category_create:
+  path: /create
+  defaults:
+    _controller: App\Controller\DocumentCategoryController:create
+  methods: [GET, POST]
+
+document_category_create_ajax:
+  path: /create/ajax
+  defaults:
+    _controller: App\Controller\Ajax\DocumentCategoryController:create
+  methods: [POST]
+
+document_category_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\DocumentCategoryController:edit
+  methods: [GET, POST]
+
+document_category_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\DocumentCategoryController:edit
+  methods: [POST]
+
+document_category_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\DocumentCategoryController:list
+  methods: [GET, POST]
+
+document_category_delete:
+  path: /delete/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\DocumentCategoryController:delete
+  methods: [POST, DELETE]
+
+document_category_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\DocumentCategoryController:delete
+  methods: [POST, DELETE]

@@ -1,0 +1,39 @@
+services:
+  #  Form
+  app.form.work:
+    class: App\Form\WorkForm
+    arguments:
+      - '@app.data_grid.work_status'
+      - '@app.data_grid.work_category'
+      - '@app.data_grid.user'
+    tags:
+      - { name: form.type }
+
+  app.form.document:
+    class: App\Form\DocumentForm
+    arguments:
+      - '@app.data_grid.media_category'
+    tags:
+      - { name: form.type }
+
+  app.form.conversation_compose_message:
+    class: App\Form\ConversationComposeMessageForm
+    arguments:
+      - '@app.translator'
+    tags:
+      - { name: form.type }
+
+  app.form.locales:
+    class: App\Form\Type\LocaleType
+    arguments:
+      - '%locales%'
+    tags:
+      - { name: form.type }
+
+  # Constrains
+  app.validator.first_week_day:
+    class: App\Form\Constraint\FirstWeekDayValidator
+    arguments:
+      - '@app.translator'
+    tags:
+      - { name: validator.constraint_validator }

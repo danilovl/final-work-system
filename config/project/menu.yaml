@@ -1,0 +1,243 @@
+parameters:
+  menu:
+    main:
+      - label: 'app.menu.work'
+        attributes:
+          icon: 'fa-book'
+        roles:
+          - 'ROLE_STUDENT'
+          - 'ROLE_OPPONENT'
+          - 'ROLE_SUPERVISOR'
+          - 'ROLE_CONSULTANT'
+        children:
+          - path: 'work_list'
+            path_option:
+              type: 'author'
+            label: 'app.menu.work_author_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_STUDENT'
+
+          - path: 'work_list'
+            path_option:
+              type: 'opponent'
+            label: 'app.menu.work_opponent_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_OPPONENT'
+
+          - path: 'work_list'
+            path_option:
+              type: 'supervisor'
+            label: 'app.menu.work_opponent_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'work_category_list'
+            label: 'app.menu.work_category_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'work_create'
+            label: 'app.menu.work_create'
+            attributes:
+              icon: 'fa-pencil'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+      - label: 'app.menu.user'
+        transchoice: 2
+        attributes:
+          icon: 'fa-users'
+        roles:
+          - 'ROLE_SUPERVISOR'
+        children:
+          - path: 'user_list'
+            path_option:
+              type: 'author'
+            label: 'app.menu.author_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+
+          - path: 'user_list'
+            path_option:
+              type: 'opponent'
+            label: 'app.menu.opponent_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+
+          - path: 'user_list'
+            path_option:
+              type: 'consultant'
+            label: 'app.menu.consultant_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+
+          - path: 'user_list'
+            path_option:
+              type: 'unused'
+            label: 'app.menu.unused_user_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+
+          - path: 'user_group_create'
+            label: 'app.menu.user_group_create'
+            attributes:
+              icon: 'fa-pencil'
+
+          - path: 'user_group_list'
+            label: 'app.menu.user_group_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+
+          - path: 'user_create'
+            label: 'app.menu.user_create'
+            attributes:
+              icon: 'fa-user'
+
+      - path: 'conversation_list'
+        label: 'app.menu.conversation'
+        attributes:
+          icon: 'fa-comments'
+        roles:
+          - 'ROLE_STUDENT'
+          - 'ROLE_OPPONENT'
+          - 'ROLE_SUPERVISOR'
+          - 'ROLE_CONSULTANT'
+
+      - label: 'app.menu.appointment'
+        transchoice: 2
+        attributes:
+          icon: 'fa-calendar'
+        roles:
+          - 'ROLE_SUPERVISOR'
+          - 'ROLE_STUDENT'
+
+        children:
+          - path: 'event_calendar_reservation'
+            label: 'app.menu.appointment_calendar'
+            attributes:
+              icon: 'fa-calendar'
+            roles:
+              - 'ROLE_STUDENT'
+              -
+          - path: 'event_calendar_manage'
+            label: 'app.menu.appointment_calendar_manage'
+            attributes:
+              icon: 'fa-calendar'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'event_address_create'
+            label: 'app.menu.appointment_address_create'
+            attributes:
+              icon: 'fa-pencil'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'event_address_list'
+            label: 'app.menu.appointment_address_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'event_schedule_create'
+            label: 'app.menu.event_schedule_create'
+            attributes:
+              icon: 'fa-pencil'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'event_schedule_list'
+            label: 'app.menu.event_schedule_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+      - path: 'task_list'
+        label: 'app.menu.task'
+        transchoice: 2
+        attributes:
+          icon: 'fa-tasks'
+        roles:
+          - 'ROLE_SUPERVISOR'
+
+      - label: 'app.menu.information_materials'
+        attributes:
+          icon: 'fa-info'
+        roles:
+          - 'ROLE_SUPERVISOR'
+          - 'ROLE_STUDENT'
+
+        children:
+          - path: 'document_list'
+            label: 'app.menu.information_materials_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_STUDENT'
+
+          - path: 'document_list_owner'
+            label: 'app.menu.information_materials_list_my'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'document_create'
+            label: 'app.menu.information_material_create'
+            attributes:
+              icon: 'fa-pencil'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+          - path: 'document_category_list'
+            label: 'app.menu.information_materials_category_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
+      - label: 'app.menu.articles'
+        attributes:
+          icon: 'fa-newspaper-o'
+        children:
+          - path: 'article_category_list'
+            label: 'app.menu.article_category_list'
+            attributes:
+              icon: 'fa-ellipsis-v'
+        roles:
+          - 'ROLE_STUDENT'
+          - 'ROLE_OPPONENT'
+          - 'ROLE_SUPERVISOR'
+          - 'ROLE_CONSULTANT'
+
+      - path: 'admin_dashboard'
+        label: 'app.menu.admin'
+        attributes:
+          icon: 'fa-desktop'
+        roles:
+          - 'ROLE_ADMIN'
+
+    profile:
+      - path: 'profile_show'
+        label: 'app.menu.profile'
+
+      - path: 'profile_edit'
+        label: 'app.menu.profile_edit'
+
+      - path: 'profile_change_password'
+        label: 'app.menu.profile_change_password'
+
+      - path: 'security_logout'
+        label: 'app.menu.logout'
+        attributes:
+          icon: 'fa-sign-out pull-right'

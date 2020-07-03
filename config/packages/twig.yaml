@@ -1,0 +1,11 @@
+twig:
+  default_path: '%kernel.project_dir%/templates'
+  globals:
+    default_locale: '%locale%'
+    conversation_variation: "@app.conversation_variation"
+    conversation_status: "@app.conversation_status"
+    conversation_message: "@app.facade.conversation_message"
+    system_event: "@app.facade.system_event"
+    system_event_recipient: "@app.facade.system_event_recipient"
+    goole_analitics_code: "%google_analytics_code%"
+    google_maps_key: "%google_maps_key%"

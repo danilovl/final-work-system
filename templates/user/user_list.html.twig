@@ -1,0 +1,338 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+
+        {% if showSearchTab %}
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{{ 'app.text.search_form' | trans() }} </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    {% if openSearchTab == false %}
+                                        <i class="fa fa-chevron-down"></i>
+                                    {% else %}
+                                        <i class="fa fa-chevron-up"></i>
+                                    {% endif %}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content" {% if openSearchTab == false %} style="display: none;" {% endif %}>
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="item form-group">
+                            {{ form_label(form.status, 'app.form.label.work_status', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <input type="submit"
+                                       class="btn btn-success"
+                                       value="{{ 'app.form.action.search' | trans() }}"/>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="">
+            <div class="clearfix"></div>
+
+            {% if users is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <h2>
+                                {{ title }}
+                            </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if users is not empty %}
+                                {% set directionParam = users.getPaginatorOption('sortDirectionParameterName') %}
+                                {% set params = users.getParams() %}
+                                {% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th{% if users.isSorted('user.lastname') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(users, 'app.form.label.first_name' | trans(), 'user.lastname') }}
+                                        </th>
+                                        <th{% if users.isSorted('user.username') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(users, 'app.form.label.username' | trans(), 'user.username') }}
+                                        </th>
+                                        <th>
+                                            {{ 'app.text.role' | trans() }}
+                                        </th>
+                                        <th>
+                                            {{ 'app.text.group' | trans() }}
+                                        </th>
+                                        <th>
+                                            {{ 'app.form.label.work_status' | trans() }}/
+                                            {{ 'app.text.quantity' | trans() }}
+                                        </th>
+                                        <th style="width: 20%">
+                                            {{ 'app.text.options' | trans() }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>
+                                                {{ user }}
+                                            </td>
+                                            <td>
+                                                {{ user.username }}
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline prod_size">
+                                                    {% for role in user.roles %}
+                                                        {% if userHelper.getRealRoleName(role) is not empty %}
+                                                            <li>
+                                                                <button type="button"
+                                                                        class="btn btn-default btn-xs">
+                                                                    {{ ('app.roles.' ~ userHelper.getRealRoleName(role)) | trans() }}
+                                                                </button>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline prod_size">
+                                                    {% for category in user.groups %}
+                                                        <li>
+                                                            <button type="button"
+                                                                    class="btn btn-default btn-xs">
+                                                                {{ category.name }}
+                                                            </button>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                {% if userStatusWorkCounts[user.id] is defined and userStatusWorkCounts[user.id] is not empty %}
+                                                    {% set workStatuses = userStatusWorkCounts[user.id] %}
+                                                    {% for workStatuse in workStatuses %}
+                                                        {{ workStatuse['name'] }}: {{ workStatuse['count'] }}<br>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-warning btn-xs"
+                                                   href="{{ path('user_edit', { 'id': user.id | hashids_encode }) }}"
+                                                   data-toggle="modal"
+                                                   data-target="#modalWindow">
+                                                    <i class="fa fa-edit"></i>
+                                                    {{ 'app.form.action.edit' | trans() }}
+                                                </a>
+                                                <a class="btn btn-info btn-xs"
+                                                   role="tab"
+                                                   id="heading-user-description-{{ user.id | hashids_encode }}"
+                                                   data-toggle="collapse"
+                                                   data-parent="#accordion-user-descrition-{{ user.id | hashids_encode }}"
+                                                   href="#tab-user-description-{{ user.id | hashids_encode }}"
+                                                   aria-expanded="true"
+                                                   aria-controls="tab-user-description-{{ user.id | hashids_encode }}">
+                                                    <i class="fa fa-desktop"></i>
+                                                    {{ 'app.form.action.show_detail' | trans() }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10">
+                                                <div class="panel-collapse collapse"
+                                                     id="tab-user-description-{{ user.id | hashids_encode }}"
+                                                     role="tabpanel"
+                                                     aria-labelledby="heading-user-description-{{ user.id | hashids_encode }}">
+                                                    <div class="tab-content">
+                                                        <div class="row">
+                                                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                                                <div class="x_panel">
+                                                                    <div class="x_content">
+                                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                                                                <div class="profile_img">
+                                                                                    <div id="crop-avatar">
+                                                                                        <img class="img-responsive avatar-view center-margin"
+                                                                                             src="{{ asset(user.getProfileImagePath) }}"
+                                                                                             alt="profile image"
+                                                                                             title="profile image">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                                                                <div>
+                                                                                    <h3>{{ user }}</h3>
+                                                                                    <ul class="list-unstyled user_data">
+                                                                                        <li>
+                                                                                            <i class="fa fa-user user-profile-icon"></i>:
+                                                                                            {{ user.username }}
+                                                                                        </li>
+                                                                                        <li class="m-top-xs">
+                                                                                            <i class="fa fa-at user-profile-icon"></i>:
+                                                                                            <a href="mailto:{{ user.email }}">
+                                                                                                {{ user.email }}
+                                                                                            </a>
+                                                                                        </li>
+
+                                                                                        {% if  user.phone is not empty %}
+                                                                                            <li class="m-top-xs">
+                                                                                                <i class="fa fa-phone user-profile-icon"></i>:
+                                                                                                {{ user.phone }}
+                                                                                            </li>
+                                                                                        {% endif %}
+                                                                                        {% if user.skype is not empty %}
+                                                                                            <li class="m-top-xs">
+                                                                                                <i class="fa fa-skype user-profile-icon"></i>:
+                                                                                                {{ user.skype }}
+                                                                                            </li>
+                                                                                        {% endif %}
+                                                                                    </ul>
+
+                                                                                    {% if user.groups is not empty %}
+                                                                                        <div class="row">
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="dl-horizontal">
+                                                                                                <span>{{ 'app.text.category' | trans() }}
+                                                                                                    :
+                                                                                                </span>
+                                                                                                    <div>
+                                                                                                        <ul class="list-inline prod_size">
+                                                                                                            {% for category in user.groups %}
+                                                                                                                <li>
+                                                                                                                    <button type="button"
+                                                                                                                            class="btn btn-default btn-xs">
+                                                                                                                        {{ category.name }}
+                                                                                                                    </button>
+                                                                                                                </li>
+                                                                                                            {% endfor %}
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endif %}
+
+                                                                                    <br/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {% if userWorks[user.id] is defined and userWorks[user.id] is not empty %}
+                                                                {% set works = userWorks[user.id] %}
+                                                                <div class="col-md-7 col-sm-7 col-xs-7">
+                                                                    <div class="chat-discussion"
+                                                                         style="height: 250px !important;">
+                                                                        <table class="table table-striped projects">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th width="60%">
+                                                                                    {{ 'app.text.work_title' | trans() }}
+                                                                                </th>
+                                                                                <th width="15%">
+                                                                                    {{ 'app.text.author' | trans() }}
+                                                                                </th>
+                                                                                <th width="15%">
+                                                                                    {{ 'app.text.work_type' | trans() }}
+                                                                                </th>
+                                                                                <th width="5%">
+                                                                                    {{ 'app.text.status' | trans() }}
+                                                                                </th>
+                                                                                <th style="width: 20%">
+                                                                                    {{ 'app.text.options' | trans() }}
+                                                                                </th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            {% for work in works %}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}">{{ work.title }}</a>
+                                                                                        <br/>
+                                                                                        <small>
+                                                                                            {{ 'app.text.deadline' | trans() }} {{ work.deadline | date('Y-m-d') }}
+                                                                                        </small>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ work.author }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span data-toggle="tooltip"
+                                                                                              data-placement="top"
+                                                                                              title=""
+                                                                                              data-original-title=" {{ work.type.name }}">
+                                                                                            {{ work.type.shortcut }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ work.status }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}"
+                                                                                           target="_blank"
+                                                                                           class="btn btn-primary btn-xs">
+                                                                                            <i class="fa fa-folder"></i>
+                                                                                            {{ 'app.form.action.show' | trans() }}
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'app.text.no_result' | trans() }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(users) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $("#work_search_status").select2({
+                width: '100%'
+            });
+        });
+    </script>
+{% endblock %}

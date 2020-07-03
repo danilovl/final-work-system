@@ -1,0 +1,44 @@
+services:
+  app.widget.unread_conversation_message:
+    class: App\Widget\UnreadConversationMessageWidget
+    autowire: true
+    public: true
+    tags:
+      - { name: app.widgets, alias: unread_conversation_message }
+
+  app.widget.unread_system_event:
+    class: App\Widget\UnreadSystemEventWidget
+    autowire: true
+    public: true
+    tags:
+      - { name: app.widgets, alias: unread_system_event }
+
+  app.widget.locales:
+    class: App\Widget\LocalesWidget
+    autowire: true
+    public: true
+    arguments:
+      $locales: '%locales%'
+    tags:
+      - { name: app.widgets, alias: locales }
+
+  app.widget.menu:
+    class: App\Widget\MenuWidget
+    autowire: true
+    public: true
+    arguments:
+      - '%menu%'
+      - '@app.translator'
+      - '@router'
+      - '@app.user'
+      - '@security.helper'
+      - '@twig'
+    tags:
+      - { name: app.widgets, alias: menu }
+
+  app.event_listener.widget:
+    class: App\EventListener\WidgetEventSubscriber
+    arguments:
+      - '@app.widget'
+    autoconfigure: true
+    autowire: true

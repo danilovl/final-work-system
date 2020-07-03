@@ -1,0 +1,123 @@
+security:
+#  enable_authenticator_manager: true
+
+  encoders:
+    App\Entity\User:
+      algorithm: sha512
+
+  providers:
+    user_provider:
+      entity:
+        class: App\Entity\User
+        property: username
+
+    api_key_user_provider:
+      id: app.provider.api_key
+
+  role_hierarchy:
+    ROLE_STUDENT:     [ROLE_USER]
+    ROLE_OPPONENT:    [ROLE_USER]
+    ROLE_SUPERVISOR:  [ROLE_USER]
+    ROLE_CONSULTANT:  [ROLE_USER]
+    ROLE_ADMIN:       [ROLE_USER]
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    api_key:
+      anonymous: ~
+      pattern: ^/api/key
+      stateless: false
+      provider: api_key_user_provider
+      guard:
+        authenticators:
+          - app.authenticator.api_token
+
+    main:
+      anonymous:  ~
+      pattern: ^/(.*)
+      lazy: true
+      context:  user
+      switch_user: true
+      provider: user_provider
+      form_login:
+        check_path: security_login
+        login_path: security_login
+        csrf_token_generator: security.csrf.token_manager
+        default_target_path: homepage
+      logout:
+        path:  security_logout
+        target: security_login
+
+  access_control:
+    - { path: ^/(%locales%)/login$,                       roles: PUBLIC_ACCESS }
+    - { path: ^/(%locales%)/reset-password/request$,      roles: PUBLIC_ACCESS }
+    - { path: ^/(%locales%)/reset-password/check-email$,  roles: PUBLIC_ACCESS }
+    - { path: ^/(%locales%)/reset-password/reset$,        roles: PUBLIC_ACCESS }
+
+    # Admin login page needs to be access without credential
+    - { path: ^/(%locales%)/admin/, roles: [ROLE_STUDENT] }
+
+    # API
+    - { path: ^/api/key, roles: ROLE_API }
+    - { path: ^/api/token, roles: ROLE_API }
+
+    # Google docs
+    - { path: ^/(%locales%)/document/google/download/,            roles: PUBLIC_ACCESS }
+    - { path: ^/(%locales%)/work/(\w+)/version/google/download/,  roles: PUBLIC_ACCESS }
+
+    # Work pages
+    - { path: ^/(%locales%)/work/author/list,                                      roles: [ROLE_STUDENT] }
+    - { path: ^/(%locales%)/work/(\w+)/task/notify/(complete|active)/(\w+)/ajax ,  roles: [ROLE_STUDENT] }
+    - { path: ^/(%locales%)/work/(\w+)/version/create,                             roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/version/detail/,                            roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/version/edit/(\w+),                         roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/version/download/,                          roles: [ROLE_STUDENT, ROLE_SUPERVISOR, ROLE_OPPONENT] }
+    - { path: ^/(%locales%)/work/(\w+)/version/delete/(\w+),                       roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/task/change/(complete|active)/(\w+)/ajax ,  roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/tasks/change-all-to-complete/ajax ,         roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/detail/(\w+),                                     roles: [ROLE_STUDENT, ROLE_OPPONENT, ROLE_SUPERVISOR ] }
+    - { path: ^/(%locales%)/work/task/list,        roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/supervisor/list,  roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/category,         roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/opponent/list,    roles: [ROLE_OPPONENT] }
+    - { path: ^/(%locales%)/work/consultant/list,  roles: [ROLE_CONSULTANT] }
+    - { path: ^/(%locales%)/work/,                 roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/user/profile/,         roles: [ROLE_USER] }
+
+    # Document pages
+    - { path: ^/(%locales%)/document/edit,                roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/document/create,              roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/document/delete,              roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/document/list/owner,          roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/document/change/active/ajax,  roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/document/category,            roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/document/list,                roles: [ROLE_STUDENT, ROLE_OPPONENT] }
+
+    # Conversation pages
+    - { path: ^/(%locales%)/conversation/,        roles: [IS_AUTHENTICATED_FULLY] }
+
+    # Event
+    - { path: ^/(%locales%)/event/detail/,        roles:  [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/edit/,          roles:  [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/switch-skype/,  roles:  [ROLE_STUDENT] }
+    - { path: ^/(%locales%)/event/delete,         roles:  [ROLE_SUPERVISOR] }
+
+    # Event address
+    - { path: ^/(%locales%)/event/address/,       roles:  [ROLE_SUPERVISOR] }
+
+    # Event calendar
+    - { path: ^/(%locales%)/event/calendar/manage,        roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/calendar/create,        roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/calendar/edit,          roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/calendar/events,        roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/calendar/reservation,   roles: [ROLE_STUDENT] }
+    - { path: ^/(%locales%)/event/calendar/switch-skype,  roles: [ROLE_STUDENT] }
+
+    # Event schedule
+    - { path: ^/(%locales%)/event/schedule/, roles:  [ROLE_SUPERVISOR] }
+
+    # All pages
+    - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY  }

@@ -1,0 +1,98 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="row">
+
+                {% include('conversation/include/menu_info.html.twig') %}
+
+                <div class="col-lg-10">
+                    <div class="mail-box">
+                        <div class="mail-box-header">
+                            <h2>
+                                {{ 'app.text.new_message' | trans() }}
+                            </h2>
+                        </div>
+                        <div class="mail-box">
+                            <div class="mail-body">
+
+                                {{ form_start(form, {'attr': {'class': 'form-horizontal'}} ) }}
+
+                                {% if form.name is defined %}
+                                    <div class="form-group">
+                                        {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                        <div class="col-sm-10">
+                                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                                            {% if not form.name.vars.valid %}
+                                                <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                                    {{ form_errors(form.name) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <div class="form-group">
+                                    {{ form_label(form.conversation, 'app.form.label.whom' , {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(form.conversation, {'attr': {'class': 'form-control'}} ) }}
+                                        {% if not form.conversation.vars.valid %}
+                                            <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                                {{ form_errors(form.conversation) }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        {{ form_widget(form.content, {'attr': {'class': 'form-control'}} ) }}
+                                        {% if not form.content.vars.valid %}
+                                            <div class="col-md-12 col-sm-12 col-xs-12 red">
+                                                {{ form_errors(form.content) }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <input type="submit"
+                                               class="btn btn-success"
+                                               value="{{ 'app.form.action.send' | trans() }}"/>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var locale = '{{ app.request.locale }}';
+        $(document).ready(function () {
+
+            {% if app.user.isSupervisor %}
+            $(function () {
+                $.fn.select2.amd.require(["optgroup-data", "optgroup-results"],
+                    function (OptgroupData, OptgroupResults) {
+                        $('#conversation_compose_message_conversation').select2({
+                            dataAdapter: OptgroupData,
+                            resultsAdapter: OptgroupResults,
+                            closeOnSelect: false,
+                        });
+                    });
+            });
+            {% else %}
+            $('#conversation_compose_message_conversation').select2();
+            {% endif %}
+
+            initTinymce(locale);
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,46 @@
+services:
+  app.twig.language_extension:
+    class: App\Twig\ChangeLanguageExtension
+    public: false
+    arguments:
+      - '%locales%'
+    tags:
+      - { name: twig.extension }
+
+  app.twig.app_extension:
+    class: App\Twig\TwigExtension
+    public: false
+    arguments:
+      - '@service_container'
+    tags:
+      - { name: twig.extension }
+
+  app.twig.widget_extension:
+    class: App\Twig\WidgetExtension
+    public: false
+    autowire: true
+    tags:
+      - { name: twig.extension }
+
+  app.twig.seo_extension:
+    class: App\Twig\SeoExtension
+    public: false
+    tags:
+      - { name: twig.extension }
+
+  app.twig.seo_runtime:
+    class: App\Twig\Runtime\SeoRuntime
+    public: false
+    arguments:
+      - '@app.seo_page'
+    tags:
+      - { name: twig.runtime }
+
+  app.twig.away_runtime:
+    class: App\Twig\Runtime\AwayRuntime
+    public: false
+    arguments:
+      - '@router'
+      - '%domain%'
+    tags:
+      - { name: twig.runtime }

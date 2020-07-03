@@ -1,7 +1,0 @@
-services:
-  #  Validator
-  final_work.validator.user:
-    class: FinalWork\FinalWorkBundle\Utils\Validator\UserValidator
-    arguments:
-      - '@doctrine.orm.entity_manager'
-

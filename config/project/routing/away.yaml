@@ -1,0 +1,5 @@
+away_to:
+  path: /to
+  defaults:
+    _controller: App\Controller\AwayController:to
+  methods: GET

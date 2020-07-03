@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content text-center">
+                <h3>
+                    {{ 'app.text.appointment' | trans({'%count%': 1}) }}
+                </h3>
+                <span>
+                    {{ event.type }}
+                </span>
+                <hr>
+                <h2>
+                    {% if event.name %}
+                        {{ event.name }}
+                        <br>
+                    {% endif %}
+
+                    {% if event.participant %}
+                        {% if event.participant.work %}
+                            <a target="_blank"
+                               href="{{ path('work_detail', {'id': event.participant.work.id | hashids_encode}) }}">
+                                {{ event.participant.work }}
+                                <i class="fa fa-book"></i>
+                            </a>
+                            <br>
+                        {% endif %}
+
+                        {% if event.owner.id  == app.user.id %}
+                            {{ event.participant.user }}
+                            <br>
+                        {% else %}
+                            {{ event.owner }}
+                            <br>
+                        {% endif %}
+                    {% endif %}
+
+                    <strong>
+                        {{ event.start | date('Y-m-d H:i') }} - {{ event.end | date('Y-m-d H:i') }}
+                    </strong>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>

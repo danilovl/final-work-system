@@ -1,0 +1,71 @@
+services:
+  #  Voter
+  app.voter.event:
+    class: App\Security\Voter\EventVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.event_address:
+    class: App\Security\Voter\EventAddressVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.event_schedule:
+    class: App\Security\Voter\EventScheduleVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.work:
+    class: App\Security\Voter\WorkVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.work_category:
+    class: App\Security\Voter\WorkCategoryVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.task:
+    class: App\Security\Voter\TaskVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.conversation:
+    class: App\Security\Voter\ConversationVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.conversation_message:
+    class: App\Security\Voter\ConversationMessageVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.version:
+    class: App\Security\Voter\VersionVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.document:
+    class: App\Security\Voter\DocumentVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.document_cateogry:
+    class: App\Security\Voter\DocumentCategoryVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.article:
+    class: App\Security\Voter\ArticleVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.article_category:
+    class: App\Security\Voter\ArticleCategoryVoter
+    tags:
+      - { name: security.voter }
+
+  app.voter.system_event_recipient:
+    class: App\Security\Voter\SystemEventRecipientVoter
+    tags:
+      - { name: security.voter }

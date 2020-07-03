@@ -1,4 +1,0 @@
-homepage:
-  path: /
-  defaults:
-      _controller: FinalWorkBundle:Home:index

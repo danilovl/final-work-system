@@ -1,0 +1,215 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{{ 'app.page.appointment_calendar' | trans() }}</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id='event-calendar'></div>
+                        </div>
+                        <div id="reservation-event-modal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button"
+                                                class="close"
+                                                data-dismiss="modal">
+                                            <span aria-hidden="true">×</span>
+                                            <span class="sr-only">close</span>
+                                        </button>
+                                        <h4 id="modal-title" class="modal-title"></h4>
+                                    </div>
+                                    <div id="modal-work-form">
+
+                                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                        <div class="item form-group">
+                                            {{ form_label(form.work,  'app.form.label.work' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                {{ form_widget(form.work, {'attr': {'class': 'form-control'}} ) }}
+                                            </div>
+                                            {% if not form.work.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.work) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        {{ form_end(form) }}
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a id="event-reservation"
+                                           type="button"
+                                           class="btn btn-success"
+                                           data-dismiss="modal">
+                                            {{ 'app.form.action.reserve' | trans() }}
+                                        </a>
+                                        <a id="event-detail"
+                                           class="btn btn-primary"
+                                           target="_blank">
+                                            {{ 'app.form.action.show_detail' | trans() }}
+                                        </a>
+                                        <button type="button"
+                                                class="btn btn-default"
+                                                data-dismiss="modal">
+                                            {{ 'app.form.action.close' | trans() }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var locale = '{{ app.request.locale }}';
+
+        function initEventCalendar() {
+
+            if (typeof ($.fn.fullCalendar) === 'undefined') {
+                return;
+            }
+
+            var start,
+                end;
+
+            var calendar = $('#event-calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaFourteenDay,agendaWeek,agendaDay,listMonth,'
+                    },
+                    views: {
+                        agendaFourteenDay: {
+                            type: 'agenda',
+                            duration: {days: 14},
+                            buttonText: '14 {{ 'app.calendar.day.day' | trans({'%count%': 2}) }}'
+                        }
+                    },
+                    lang: locale,
+                    selectable: false,
+                    selectHelper: true,
+                    editable: false,
+                    droppable: false,
+                    eventClick: function (event, jsEvent, view) {
+                        $('#modal-title').html(event.title.replace(/\n/g, "<br>"));
+                        var eventDetail = $('#event-detail');
+                        var eventReservation = $('#event-reservation');
+                        var modalWorkForm = $('#modal-work-form');
+
+                        if (event.detail_url) {
+                            eventDetail.show();
+                            $('#event-detail').attr('href', '');
+                            $('#event-detail').attr('href', event.detail_url);
+                        } else {
+                            eventDetail.hide();
+                        }
+
+                        if (event.reservation_url) {
+                            modalWorkForm.show();
+                            eventReservation.show();
+                            eventReservation.attr('href', '');
+                            eventReservation.attr('href', event.reservation_url);
+                            eventReservation.attr('data-event-id', '');
+                            eventReservation.attr("data-event-id", event.id);
+                        } else {
+                            eventReservation.hide();
+                            modalWorkForm.hide();
+                        }
+
+                        $('#reservation-event-modal').modal();
+                    },
+                    events: function (start, end, timezone, callback) {
+                        var startDate = start.format("YYYY-MM-DD HH:mm");
+                        var endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
+
+                        $.ajax({
+                            url: "{{ path('event_calendar_events_ajax', {'type' : 'reservation'}) }}",
+                            data: 'start=' + startDate + '&end=' + endDate,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.valid === true) {
+                                    var events = [];
+                                    var respEvents = response.events;
+
+                                    $.each($.parseJSON(respEvents), function () {
+                                        events.push({
+                                            id: this.id,
+                                            title: this.title,
+                                            start: this.start,
+                                            end: this.end,
+                                            color: this.color,
+                                            detail_url: this.detail_url,
+                                            reservation_url: this.reservation_url,
+                                            allDay: false
+                                        });
+                                    });
+
+                                    callback(events);
+                                }
+
+                                for (var type in response.notifyMessage) {
+                                    notifyMessage(type, response.notifyMessage[type]);
+                                }
+                            }
+                        });
+                    }
+                }
+            );
+
+            $('#event-reservation').on("click", function () {
+                var href = $(this).attr('href');
+                var form = $('form');
+                var eventId = $(this).attr('data-event-id');
+
+                $.ajax({
+                    url: href,
+                    data: form.serialize(),
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        for (var type in response.notifyMessage) {
+                            notifyMessage(type, response.notifyMessage[type]);
+                        }
+
+                        if (response.valid === true) {
+                            $('#event-calendar').fullCalendar('removeEvents', eventId);
+
+                            calendar.fullCalendar('renderEvent', {
+                                    id: response.event.id,
+                                    title: response.event.title,
+                                    start: response.event.start,
+                                    end: response.event.end,
+                                    color: response.event.color,
+                                    detail_url: response.event.detail_url,
+                                    allDay: false
+                                },
+                                true // make the event "stick"
+                            );
+                        }
+                    }
+                });
+            });
+        }
+
+        $(document).ready(function () {
+            initEventCalendar();
+            $("#event_participant_work").select2({width: '100%'});
+        });
+    </script>
+{% endblock %}

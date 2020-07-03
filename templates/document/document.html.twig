@@ -1,0 +1,123 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> {{ title }} </h2>
+                            <ul class="nav navbar-rul c panel_toolbox">
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                        <div class="item form-group">
+                                            {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                                            </div>
+                                            {% if not form.name.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.name) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item form-group">
+                                            {{ form_label(form.description,  'app.form.label.description' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
+                                            </div>
+                                            {% if not form.description.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.description) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        {% if  form.categories is defined %}
+                                            <div class="item form-group">
+                                                {{ form_label(form.categories, 'app.form.label.category', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
+                                                </div>
+
+                                                {% if not form.categories.vars.valid %}
+                                                    <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                        {{ form_errors(form.categories) }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% if  form.active is defined %}
+                                            <div class="item form-group">
+                                                {{ form_label(form.active, 'app.form.label.active', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.active, {'attr': {'class': 'form-control js-switch'}}) }}
+                                                </div>
+
+                                                {% if not form.active.vars.valid %}
+                                                    <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                        {{ form_errors(form.active) }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="item form-group">
+                                            {{ form_label(form.uploadMedia, 'app.form.label.file', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.uploadMedia, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            {% if not form.uploadMedia.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.uploadMedia) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <input type="submit"
+                                                       class="btn btn-success"
+                                                       value="{{ buttonActionTitle }}"/>
+                                            </div>
+                                        </div>
+                                        {{ form_end(form) }}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var locale = '{{ app.request.locale }}';
+
+        $(document).ready(function () {
+            $("#media_type").select2();
+            $("#media_categories").select2();
+
+            initJsSwitch();
+            initTinymce(locale);
+        });
+    </script>
+{% endblock %}

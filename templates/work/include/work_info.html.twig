@@ -1,0 +1,412 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h2>
+            {{ work.title }}
+        </h2>
+        <ul class="nav navbar-rul panel_toolbox">
+            <li>
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            {{ 'app.text.status' | trans() }}:
+                        </dt>
+                        <dd>
+                           <span class="label"
+                                 style="background-color: {{ work.status.color }}">
+                               {{ work.status.name }}
+                           </span>
+                        </dd>
+                        <dt>
+                            {{ 'app.text.type' | trans() }}:
+                        </dt>
+                        <dd>
+                            {{ work.type.name }}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            {{ 'app.text.work_deadline' | trans() }}:
+                        </dt>
+                        <dd>
+                            {% if work.getDeadlineDays >= 14 %}
+                                <span class="label label-success"
+                                      data-toggle="tooltip"
+                                      data-placement="top"
+                                      data-original-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
+                                                        {{ work.deadline | date('Y-m-d') }}
+                                 </span>
+                            {% elseif work.getDeadlineDays <= 14 and work.getDeadlineDays >= 7 %}
+                                <span class="label label-warning"
+                                      data-toggle="tooltip"
+                                      data-placement="top"
+                                      data-original-title="{{ 'app.text.less_then_day' | trans({'%day%': 14 }) }}">
+                                                        {{ work.deadline | date('Y-m-d') }}
+                                </span>
+                            {% else %}
+                                <span class="label label-danger">{{ work.deadline | date('Y-m-d') }}</span>
+                            {% endif %}
+                        </dd>
+                        <dt>
+                            {{ 'app.text.remaining_time' | trans() }}:
+                        </dt>
+                        <dd>
+                          <span class="label label-danger"
+                                id="countdownDeadline">
+                          </span>
+                        </dd>
+
+                        {% if work.deadlineProgram is not empty %}
+                            <dt>
+                                {{ 'app.text.program_deadline' | trans() }}:
+                            </dt>
+                            <dd>
+                                {% if  work.getDeadlineProgramDays >= 14 %}
+                                    <span class="label label-success"
+                                          data-toggle="tooltip"
+                                          data-placement="top"
+                                          data-original-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
+                                                            {{ work.deadlineProgram | date('Y-m-d') }}
+                                    </span>
+                                {% elseif work.getDeadlineProgramDays <= 14 and work.getDeadlineProgramDays >= 7 %}
+                                    <span class="label label-warning"
+                                          data-toggle="tooltip"
+                                          data-placement="top"
+                                          data-original-title="{{ 'app.text.less_then_day' | trans({'%day%': 7 }) }}">
+                                                            {{ work.deadlineProgram | date('Y-m-d') }}
+                                    </span>
+                                {% else %}
+                                    <span class="label label-danger">{{ work.deadlineProgram | date('Y-m-d') }}</span>
+                                {% endif %}
+                            </dd>
+                            <dt>
+                                {{ 'app.text.remaining_time' | trans() }}:
+                            </dt>
+                            <dd>
+                               <span class="label label-danger"
+                                     id="countdownDeadlineProgram">
+                               </span>
+                            </dd>
+                        {% endif %}
+
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+
+                {% if work.isSupervisor(app.user) %}
+                    <div class="col-lg-7" id="cluster_info">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                {{ 'app.text.created' | trans() }}:
+                            </dt>
+                            <dd>
+                                {{ work.createdAt | date('Y-m-d H:i:s') }}
+                            </dd>
+                            {% if work.updatedAt is not empty %}
+                                <dt>{{ 'app.text.last_update' | trans() }}:</dt>
+                                <dd>{{ work.updatedAt | date('Y-m-d H:i:s') }}</dd>
+                            {% endif %}
+                        </dl>
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if work.isSupervisor(app.user) %}
+                {% if work.categories is not empty %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    {{ 'app.text.category' | trans() }}:
+                                </dt>
+                                <dd>
+                                    <ul class="list-inline prod_size">
+                                        {% for category in work.categories %}
+                                            <li>
+                                                <button type="button"
+                                                        class="btn btn-default btn-xs">
+                                                    {{ category.name }}
+                                                </button>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% set activeTask = work.getActiveTask %}
+            {% if activeTask is not empty %}
+                <div class="row">
+                    <div class="col-lg-9">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                {{ 'app.text.task' | trans({'%count%': 2}) }}:
+                            </dt>
+                            <dd>
+                                <div class="progress progress-striped active m-b-sm">
+                                    <div style="width: {{ work.getCompleteTaskPercentage(activeTask) }}%;"
+                                         class="progress-bar">
+                                    </div>
+                                </div>
+                                <small>
+                                    {{ 'app.text.task_completed' | trans() }}
+                                    <strong>
+                                        {{ work.getCompleteTaskPercentage(activeTask) }}
+                                        %
+                                    </strong>
+                                </small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if work.supervisor.id != app.user.id %}
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    {{ 'app.text.supervisor' | trans() }}
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" style="display: none;">
+                                <div class="col-sm-12">
+                                    <div class="left col-xs-9">
+                                        <h2>
+                                            {{ work.supervisor }}
+                                        </h2>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <i class="fa fa-at"></i> :
+                                                {{ work.supervisor.email }}
+                                            </li>
+                                            {% if work.isSupervisor(app.user) %}
+                                                {% if  work.supervisor.phone is not empty %}
+                                                    <li class="m-top-xs">
+                                                        <i class="fa fa-phone user-profile-icon"></i>:
+                                                        {{ work.supervisor.phone }}
+                                                    </li>
+                                                {% endif %}
+                                                {% if  work.supervisor.skype is not empty %}
+                                                    <li class="m-top-xs">
+                                                        <i class="fa fa-skype user-profile-icon"></i>:
+                                                        {{ work.supervisor.skype }}
+                                                    </li>
+                                                {% endif %}
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="right col-xs-3 text-center">
+                                        <img src="{{ asset(work.supervisor.getProfileImagePath) }}"
+                                             alt=""
+                                             class="img-circle img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 bottom text-center">
+                                    <div class="col-xs-12 col-sm-12 emphasis">
+                                        {% if  conversation_variation.checker(work, app.user, work.supervisor) %}
+                                            {% set conversationWithSupervisor = work.checkConversation(app.user, work.supervisor) %}
+                                            {% if conversationWithSupervisor %}
+                                                <a href="{{ path('conversation_detail', { 'id': conversationWithSupervisor.id | hashids_encode }) }}"
+                                                   target="_blank"
+                                                   class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-comments-o"></i>
+                                                    {{ 'app.text.conversation' | trans() }}
+                                                </a>
+                                            {% else %}
+                                                <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.supervisor.id | hashids_encode }) }}"
+                                                   target="_blank"
+                                                   class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-comments-o"></i>
+                                                    {{ 'app.text.conversation' | trans() }}
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if  work.opponent is not empty %}
+                        <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>
+                                        {{ 'app.text.opponent' | trans() }}
+                                    </h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content" style="display: none;">
+                                    <div class="col-sm-12">
+                                        <div class="left col-xs-9">
+                                            <h2>
+                                                {{ work.opponent }}
+                                            </h2>
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <i class="fa fa-at"></i> :
+                                                    {{ work.opponent.email }}
+                                                </li>
+                                                {% if work.isSupervisor(app.user) %}
+                                                    {% if  work.opponent.phone is not empty %}
+                                                        <li class="m-top-xs">
+                                                            <i class="fa fa-phone user-profile-icon"></i>:
+                                                            {{ work.opponent.phone }}
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if  work.opponent.skype is not empty %}
+                                                        <li class="m-top-xs">
+                                                            <i class="fa fa-skype user-profile-icon"></i>:
+                                                            {{ work.opponent.skype }}
+                                                        </li>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                        <div class="right col-xs-3 text-center">
+                                            <img src="{{ asset(work.opponent.getProfileImagePath) }}"
+                                                 alt=""
+                                                 class="img-circle img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 bottom text-center">
+                                        <div class="col-xs-12 col-sm-12 emphasis">
+                                            {% if  conversation_variation.checker(work, app.user, work.opponent) %}
+                                                {% set conversationWithOpponent = work.checkConversation(app.user, work.opponent) %}
+                                                {% if conversationWithOpponent %}
+                                                    <a href="{{ path('conversation_detail', { 'id': conversationWithOpponent.id | hashids_encode }) }}"
+                                                       target="_blank"
+                                                       class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-comments-o"></i>
+                                                        {{ 'app.text.conversation' | trans() }}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.opponent.id | hashids_encode }) }}"
+                                                       target="_blank"
+                                                       class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-comments-o"></i>
+                                                        {{ 'app.text.conversation' | trans() }}
+                                                    </a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if  work.consultant is not empty %}
+                        <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>
+                                        {{ 'app.text.consultant' | trans() }}
+                                    </h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content" style="display: none;">
+                                    <div class="col-sm-12">
+                                        <div class="left col-xs-9">
+                                            <h2>
+                                                {{ work.consultant }}
+                                            </h2>
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <i class="fa fa-at"></i> :
+                                                    {{ work.consultant.email }}
+                                                </li>
+
+                                                {% if work.isSupervisor(app.user) %}
+                                                    {% if  work.consultant.phone is not empty %}
+                                                        <li class="m-top-xs">
+                                                            <i class="fa fa-phone user-profile-icon"></i>:
+                                                            {{ work.consultant.phone }}
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if  work.consultant.skype is not empty %}
+                                                        <li class="m-top-xs">
+                                                            <i class="fa fa-skype user-profile-icon"></i>:
+                                                            {{ work.consultant.skype }}
+                                                        </li>
+                                                    {% endif %}
+                                                {% endif %}
+
+                                            </ul>
+                                        </div>
+                                        <div class="right col-xs-3 text-center">
+                                            <img src="{{ asset(work.consultant.getProfileImagePath) }}"
+                                                 alt=""
+                                                 class="img-circle img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 bottom text-center">
+                                        <div class="col-xs-12 col-sm-12 emphasis">
+                                            {% if  conversation_variation.checker(work, app.user, work.consultant) %}
+                                                {% set conversationWithConsultant = work.checkConversation(app.user, work.consultant) %}
+                                                {% if conversationWithConsultant %}
+                                                    <a href="{{ path('conversation_detail', { 'id': conversationWithConsultant.id | hashids_encode }) }}"
+                                                       target="_blank"
+                                                       class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-comments-o"></i>
+                                                        {{ 'app.text.conversation' | trans() }}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.consultant.id | hashids_encode }) }}"
+                                                       target="_blank"
+                                                       class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-comments-o"></i>
+                                                        {{ 'app.text.conversation' | trans() }}
+                                                    </a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<li role="presentation" class="dropdown">
+	<a href="javascript:" class="dropdown-toggle info-number" data-toggle="dropdown"
+	   aria-expanded="false">
+		<i class="fa fa-bell-o"></i>
+
+		{% set countUnreadSystemEventsClass = 'bg-green' %}
+		{% if countUnreadSystemEventMessage > 0 %}
+			{% set countUnreadSystemEventsClass = 'bg-red' %}
+		{% endif %}
+		<span class="badge {{ countUnreadSystemEventsClass }}">
+        	{{ countUnreadSystemEventMessage }}
+        </span>
+	</a>
+	<ul id="menu2" class="dropdown-menu list-unstyled msg_list" role="menu">
+		{% if countUnreadSystemEventMessage is not empty %}
+
+			{% for systemEventRecipient in systemEventRecipients | slice(0, 5) %}
+				<li>
+                    <span class="image">
+                        <img src="{{ asset(systemEventRecipient.systemEvent.owner.getProfileImagePath) }}"
+							 alt="profile image"/>
+                    </span>
+					<span class="message">
+                        {{ systemEventGenerateLink(systemEventRecipient) | raw }}
+                    </span>
+					<br>
+					<span class="time">
+                       {{ systemEventRecipient.createdAt | date('Y-m-d H:i:s') }}
+                    </span>
+				</li>
+			{% endfor %}
+
+			<li>
+				<div class="text-center">
+					<a href="{{ path('homepage') }}">
+						<strong>
+							{{ 'app.text.see_all_alerts' | trans }}
+						</strong>
+					</a>
+				</div>
+			</li>
+		{% endif %}
+	</ul>
+</li>

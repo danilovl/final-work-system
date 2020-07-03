@@ -1,0 +1,49 @@
+<li role="presentation" class="dropdown">
+	<a href="javascript:"
+	   class="dropdown-toggle info-number"
+	   data-toggle="dropdown"
+	   aria-expanded="false">
+		<i class="fa fa-envelope-o"></i>
+
+		{% set countUnreadConversationMessageClass = 'bg-green' %}
+		{% if countUnreadConversationMessage > 0 %}
+			{% set countUnreadConversationMessageClass = 'bg-red' %}
+		{% endif %}
+		<span class="badge {{ countUnreadConversationMessageClass }}">
+            {{ countUnreadConversationMessage }}
+        </span>
+	</a>
+	<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+		{% if countUnreadConversationMessage is not empty %}
+			{% for message in unreadConversationMessages | slice(0, 5) %}
+				<li>
+					<a href="{{ path('conversation_detail', { 'id': message.conversation.id | hashids_encode }) }}">
+						<span class="image">
+							<img src="{{ asset(message.owner.getProfileImagePath) }}"
+								 alt="profile image"/>
+						</span>
+						<span class="message">
+                        	<b>{{ message.owner }} :</b>
+
+                        	{% if message.content  | length > 150 %}
+								<p>{{ message.content | away_to | striptags | slice(0,150) | raw }}.....</p>
+                        	{% else %}
+								<p> {{ message.content|raw }}</p>
+							{% endif %}
+
+                      	</span>
+						<span class="time">{{ message.createdAt | date('Y-m-d H:i:s') }}</span>
+					</a>
+				</li>
+			{% endfor %}
+
+			<li>
+				<div class="text-center">
+					<a href="{{ path('conversation_list') }}">
+						<strong>{{ 'app.text.see_all_messages' | trans }}</strong>
+					</a>
+				</div>
+			</li>
+		{% endif %}
+	</ul>
+</li>

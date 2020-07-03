@@ -1,0 +1,180 @@
+final_work_user_app:
+  resource: routing/user.yaml
+
+app_security:
+  prefix: /{_locale}
+  resource: routing/security.yaml
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+security_login:
+  path: /{_locale}/login
+  controller: App\Controller\SecurityController::login
+  defaults:
+    _locale: '%locale%'
+  requirements:
+    _locale: '%locales%'
+  methods: [GET,POST]
+
+security_logout:
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+  methods: GET
+
+app_admin:
+  prefix: /{_locale}/admin
+  resource: routing/admin.yaml
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+app_reset_password:
+  prefix: /{_locale}/reset-password
+  resource: routing/reset_password.yaml
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+article:
+  resource: routing/article.yaml
+  prefix: /{_locale}/article
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+profile:
+  resource: routing/profile.yaml
+  prefix: /{_locale}/user
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+work:
+  resource: routing/work.yaml
+  prefix: /{_locale}/work
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_group:
+  resource: routing/user_group.yaml
+  prefix: /{_locale}/user/group
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+work_category:
+  resource: routing/work_category.yaml
+  prefix: /{_locale}/work/category
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+task:
+  resource: routing/task.yaml
+  prefix: /{_locale}/work
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+version:
+  resource: routing/version.yaml
+  prefix: /{_locale}/work
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+conversation:
+  resource: routing/conversation.yaml
+  prefix: /{_locale}/conversation
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+document:
+  resource: routing/document.yaml
+  prefix: /{_locale}/document
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+document_category:
+  resource: routing/document_category.yaml
+  prefix: /{_locale}/document/category
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+event:
+  resource: routing/event.yaml
+  prefix: /{_locale}/event
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+event_calendar:
+  resource: routing/event_calendar.yaml
+  prefix: /{_locale}/event/calendar
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+event_address:
+  resource: routing/event_address.yaml
+  prefix: /{_locale}/event/address
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+event_schedule:
+  resource: routing/event_schedule.yaml
+  prefix: /{_locale}/event/schedule
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+system_event:
+  resource: routing/system_event.yaml
+  prefix: /{_locale}/system/event
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+user:
+  resource: routing/user.yaml
+  prefix: /{_locale}/user/
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+away:
+  resource: routing/away.yaml
+  prefix: /{_locale}/away/
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
+api_key:
+  resource: routing/api/key_work.yaml
+  prefix: /api/key/work

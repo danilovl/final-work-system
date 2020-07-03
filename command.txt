@@ -1,0 +1,114 @@
+php bin/console doctrine:database:drop --force
+php bin/console doctrine:schema:validate
+php bin/console doctrine:schema:update --force
+php bin/console doctrine:schema:update --dump-sql
+
+php bin/console fos:user:create --super-admin admin admin@yoursite.dev admin
+
+php bin/console assetic:dump
+php bin/console assetic:dump --env=prod --no-debug
+php bin/console assetic:dump /home/httpd/virtual/xdanv09-dp/web/  --env=prod --no-debug
+
+php bin/console sonata:admin:generate FinalWork\FinalWorkBundle\Entity\MediaType
+
+
+php bin/console generate:doctrine:crud  FinalWorkBundle:AppointmentAddress
+
+FinalWorkFinalWorkBundle:Appointment/Address
+
+php bin/console assets:install
+php bin/console assets:install web
+
+php bin/console debug:event-dispatcher
+ php bin/console debug:router
+
+bower prune
+
+bower install ninsuo/symfony-collection --save
+
+php bin/console cache:clear --env=prod
+php bin/console cache:warmup --env=prod
+
+php bin/console fos:elastica:populate
+
+git shortlog -s -n
+
+SET @rand = 276821;
+SET @min_year = 1900;
+SET @max_year = 2000;
+UPDATE user_test
+SET first_name  =
+        CASE
+            WHEN gender = 'female' THEN ELT(FLOOR(1 + RAND() * 64),
+                                            'Ada', 'Adalberta', 'Adéla', 'Adelaida', 'Adina', 'Adolfa',
+                                            'Adriana', 'Afra', 'Agáta', 'Aglaja', 'Aida', 'Alana', 'Albena',
+                                            'Alberta', 'Albína', 'Alena', 'Aleška', 'Alexandra', 'Alfréda',
+                                            'Alice', 'Alida', 'Alina', 'Alma', 'Lenka', 'Leokádie', 'Leona',
+                                            'Leontýna', 'Leopolda', 'Leticie', 'Liběna', 'Libora',
+                                            'Liboslava', 'Libuše', 'Liliana', 'Lina', 'Linda', 'Livie',
+                                            'Ljuba', 'Lola', 'Selena', 'Selma', 'Senta', 'Serafína',
+                                            'Serena', 'Scholastika', 'Sibyla', 'Sidonie', 'Silvána',
+                                            'Silvie', 'Simona', 'Skarlet', 'Slavěna', 'Slávka', 'Zora',
+                                            'Zoroslava', 'Zuzana', 'Zvonimíra', 'Žakelína', 'Žaneta',
+                                            'Ždana', 'Želimíra', 'Želislava', 'Žitomíra', 'Živa'
+                )
+            ELSE ELT(FLOOR(1 + RAND() * 59),
+                     'Drahoš', 'Drahotín', 'Dušan', 'Edgar', 'Edmond', 'Edvard', 'Edvín', 'Egmont', 'Egon', 'Eliáš',
+                     'Elizej', 'Elmar', 'Elvis', 'Gordon', 'Gothard', 'Gracián', 'Gunter', 'Gustav', 'Hanuš', 'Harald',
+                     'Haštal', 'Havel', 'Helmut', 'Herbert', 'Heřman', 'Hilar', 'Hjalmar', 'Homér', 'Honor', 'Horác',
+                     'Horst', 'Vlastimil', 'Vlastimír', 'Vlastislav', 'Vlk', 'Vojen', 'Vojmil', 'Vojmír', 'Vojslav',
+                     'Vojtěch', 'Volfgang', 'Vratislav', 'Vsevolod', 'Všebor', 'Všerad', 'Všeslav', 'Záboj', 'Zachar',
+                     'Záviš', 'Zbyhněv', 'Zbyněk', 'Zbyslav', 'Zdeněk', 'Zderad', 'Zdislav', 'Zeno', 'Zikmund',
+                     'Zlatan', 'Zlatomír'
+                )
+            END,
+    last_name   =
+        CASE
+            WHEN gender = 'female' THEN ELT(FLOOR(1 + RAND() * 12),
+                                            'Pospíšilová', 'Hájková', 'Jelínková', 'Králová', 'Růžička', 'Růžičková',
+                                            'Zemanová', 'Benešová', 'Fiala', 'Fialová', 'Musilová', 'Bartošová'
+                )
+            ELSE ELT(FLOOR(1 + RAND() * 17),
+                     'Hájek', 'Jelínek', 'Král', 'Beneš', 'Sedláček', 'Doležal', 'Navráti', 'Čermák', 'Kříž', 'Blažek',
+                     'Vaněk', 'Polák', 'Polákov', 'Šimek', 'Šimkov', 'Urban'
+                )
+            END,
+    birth_date  =
+        CASE
+            WHEN birth_date IS NOT NULL
+                THEN MAKEDATE(FLOOR(RAND() * (@max_year - @min_year + 1) + @min_year), FLOOR(RAND() * 365))
+            ELSE null
+            END,
+    facebook_id =
+        CASE
+            WHEN facebook_id IS NOT NULL THEN id
+            ELSE NULL
+            END,
+    owa_login   =
+        CASE
+            WHEN owa_login IS NOT NULL THEN id
+            ELSE NULL
+            END,
+    owa_id   =
+        CASE
+            WHEN owa_id IS NOT NULL THEN id
+            ELSE NULL
+            END,
+    password    =
+        CASE
+            WHEN email LIKE "%@meditorial.cz" THEN password
+            ELSE 'password'
+            END,
+    email       =
+        CASE
+            WHEN email LIKE "%@meditorial.cz" THEN email
+            ELSE CONCAT('md-', id, '@meditorial.cz')
+            END;
+
+SET @phone_number_start = 111111111;
+UPDATE phone_number
+SET number = @phone_number_start := @phone_number_start + 1;
+
+
+
+/\*(\*)?(((?!\*/)[\s\S])+)?\*/

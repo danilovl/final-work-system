@@ -1,0 +1,152 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="row">
+
+                {% include('conversation/include/menu_info.html.twig') %}
+
+                <div class="col-lg-10">
+                    <div class="mail-box-header">
+                        <div class="mail-tools tooltip-demo m-t-md">
+                            <button class="btn btn-white btn-sm"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="{{ 'app.text.show_last_messages' | trans }}">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="{{ 'app.text.open_conversation_in_new_window' | trans }}">
+                                <i class="fa fa-comments-o"></i>
+                            </button>
+                            <form method="get" action=""
+                                  class="pull-right mail-search">
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control input-sm"
+                                           name="search"
+                                           placeholder="{{ 'app.text.search_form' | trans() }}">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            {{ 'app.text.search' | trans() }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="mail-box">
+                        {% if conversations is defined and conversations is not empty %}
+                            <table class="table table-hover table-mail">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        {{ 'app.text.user' | trans() }}
+                                    </th>
+                                    <th>
+                                        {{ 'app.text.name_conversation' | trans() }}
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        {{ 'app.text.last_message_from' | trans() }}
+                                    </th>
+                                    <th>
+                                        {{ 'app.text.date_last_message' | trans() }}
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for conversation in conversations %}
+
+                                    {% set conversationUnreadClass = null %}
+                                    {% if conversation.isRead == false %}
+                                        {% set conversationUnreadClass = 'conversation-unread' %}
+                                    {% endif %}
+
+                                    <tr class="{{ conversationUnreadClass }}">
+                                        <td class="check-mail">
+                                            <input type="checkbox" class="i-checks" title="">
+                                        </td>
+                                        <td class="mail-ontact">
+                                            <a href="{{ path('conversation_detail', { 'id': conversation.id  | hashids_encode }) }}">{{ conversation.recipient }}</a>
+                                        </td>
+                                        <td class="mail-subject">
+                                            <i class="fa fa-circle message-type-{{ conversation.type.constant | lower }}"></i>
+                                            <a href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}">
+                                                {{ conversation }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal"
+                                               data-target="#modalWindow"
+                                               class="btn btn-primary btn-xs"
+                                               href="{{ path('conversation_message_last', { 'id': conversation.id | hashids_encode }) }}"
+                                               target="_blank">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"
+                                               href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}"
+                                               target="_blank">
+                                                <i class="fa fa-comments-o"></i>
+                                            </a>
+                                        </td>
+                                        {% set lastMessage = conversation.getLastMessage %}
+                                        <td class="">
+                                            {% if lastMessage is not empty %}
+                                                {{ lastMessage.owner }}
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-right mail-date">
+                                            {% if lastMessage is not empty %}
+                                                {{ lastMessage.createdAt | date('Y-m-d H:i:s') }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                            <div class="navigation">
+                                {{ knp_pagination_render(conversations) }}
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4">
+                                    <a class="btn btn-block btn-primary compose-mail"
+                                       href="{{ path('conversation_create') }}">
+                                        {{ 'app.text.write_message' | trans() }}
+                                    </a>
+                                </div>
+                                <div class="col-lg-4"></div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            });
+            new Sticky('#sticky');
+            $("table").tableFix();
+        });
+    </script>
+{% endblock %}
+

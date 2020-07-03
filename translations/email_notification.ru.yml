@@ -1,0 +1,23 @@
+app:
+  email_notification:
+    subject:
+      user_create: 'Создание новой учетной записи'
+      work_create: 'Создание работы'
+      work_edit: 'Редактирование работы'
+      user_edit: 'Редактирование личной информации'
+      task_create: 'Создание нового задания'
+      task_edit: 'Редактирование задания'
+      task_complete: 'Пометить задачи как выполненную'
+      task_in_complete: 'Означение задачи как невыполненную'
+      task_notify_complete: 'Информаирование о выполнении задачи'
+      task_notify_in_complete: 'Возращение задачи к переделыванию'
+      version_create: 'Создание новой версии'
+      version_edit: 'Редактирование версии'
+      document_create: 'Новый информационный материал'
+      message_create: 'Новое сообщение'
+      event_create: 'Новая встреча'
+      event_edit: 'Обновление данных встречи'
+      event_switch_skype: 'Переключить встречу на скайп'
+      event_comment_create: 'Новый комментарий у втречи'
+      event_comment_edit: 'Редактирование комментария у встречи'
+      event_reservation: 'Новая встреча'

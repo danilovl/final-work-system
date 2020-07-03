@@ -1,0 +1,148 @@
+services:
+  _defaults:
+    public: true
+
+  app.redirect_to_preferred_locale_listener:
+    class: App\EventListener\RedirectToPreferredLocaleListener
+    arguments:
+      - '@router'
+      - '@security.helper'
+      - '%locales%'
+      - '%locale%'
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  app.mailer:
+    class: App\Services\MailerService
+    arguments:
+      - '@mailer'
+    autowire: true
+    public: true
+
+  app.translator:
+    class: App\Services\TranslatorService
+    arguments:
+      - '@translator'
+      - '@request_stack'
+    autowire: true
+    public: true
+
+  app.user_password_encoder:
+    class: Symfony\Component\Security\Core\Encoder\UserPasswordEncoder
+    autowire: true
+    public: true
+
+  app.reset_password:
+    class: App\Services\ResetPasswordService
+    arguments:
+      - '@app.factory.reset_password'
+      - '@app.facade.reset_password'
+      - '45679'
+      - 3600
+      - 3600
+    public: true
+
+  app.user:
+    class: App\Services\UserService
+    public: true
+    arguments:
+      - '@security.token_storage'
+
+  App\Services\UserService: '@app.user'
+
+  app.widget:
+    class: App\Services\WidgetManagerService
+    autowire: true
+    public: true
+
+  App\Services\WidgetManagerService: '@app.widget'
+
+  app.conversation_variation:
+    class: App\Services\ConversationVariationService
+    arguments:
+      - '@danilovl.parameter'
+
+  App\Services\ConversationVariationService: '@app.conversation_variation'
+
+  app.conversation_status:
+    class: App\Services\ConversationStatusService
+    arguments:
+      - '@app.entity_manager'
+
+  App\Services\ConversationStatusService: '@app.conversation_status'
+
+  app.system_event_link_generator:
+    class: App\Services\SystemEventLinkGeneratorService
+    arguments:
+      - '@twig'
+      - '@router'
+    tags:
+      - { name: twig.runtime }
+
+  app.paginator:
+    class: App\Services\PaginatorService
+    public: true
+    shared: false
+    arguments:
+      - '@knp_paginator'
+      - '@danilovl.parameter'
+
+  app.work.detail_tab:
+    class: App\Services\WorkDetailTabService
+    arguments:
+      - '@app.entity_manager'
+      - '@app.paginator'
+      - '@danilovl.parameter'
+
+  app.work.list:
+    class: App\Services\WorkListService
+    arguments:
+      - '@app.entity_manager'
+
+  app.seo_page:
+    class: App\Services\SeoPageService
+    public: true
+    arguments:
+      - '@app.translator'
+
+  app.date:
+    class: App\Services\DateService
+    arguments:
+      - '@app.translator'
+
+  app.document_form:
+    class: App\Services\DocumentFormService
+    arguments:
+      - '@form.factory'
+      - '@router'
+      - '@hashids'
+      - "@app.facade.user"
+      - '@app.facade.media.mime_type'
+      - '@app.facade.media_category'
+
+  app.entity_manager:
+    class: App\Services\EntityManagerService
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  App\Services\EntityManagerService: '@app.entity_manager'
+
+  #   ParamConverter
+  hashids.converter:
+    class: App\EventListener\HashidsParamConverterListener
+    arguments:
+      - '@hashids'
+      - '@doctrine'
+    tags:
+      - { name: request.param_converter, priority: 1, converter: hashids.converter }
+
+  #  Transformer
+  app.transformer.api:
+    class: App\Transformer\Api\Transformer
+    arguments:
+      - '@danilovl.parameter'
+
+  app.password_updater:
+    class: App\Services\PasswordUpdater
+    arguments:
+      - '@security.encoder_factory'

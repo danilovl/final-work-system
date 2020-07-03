@@ -1,16 +1,18 @@
 FinalWork Web Application
 ========================
 
-Thesis management system based on Symfony Framework 3.4 
+Thesis management system based on Symfony Framework 5.1 
+
+![Alt text](/gif/demo.gif?raw=true "Project example")
 
 Requirements
 ------------
 
-  * PHP 7.3.0 or higher
-  * MySql
+  * PHP 7.4.4 or higher
+  * MySQL
   * Redis server
   * Composer
-  * Npm/bower
+  * NPM
 
 Features
 ------------
@@ -26,6 +28,7 @@ Features
   * Email notification of new events in the system
   * Multi languages
   * An API that covers most of the data
+  * and more other features
    
 Who is it for?
 ------------
@@ -36,18 +39,17 @@ This is especially true for those teachers who carry out the final theses of sev
 Project uses extra bundles
 ------------
 
-* [SonataCoreBundle](https://github.com/sonata-project/SonataCoreBundle) -  Symfony SonataCoreBundle.
-* [SonataAdminBundle](https://github.com/sonata-project/SonataAdminBundle) - AdminBundle - The missing Symfony2 Admin Generator
-* [SonataUserBundle](https://github.com/sonata-project/SonataUserBundle) - Symfony SonataUserBundle.
-* [IvoryCKEditorBundle](https://github.com/egeloen/IvoryCKEditorBundle) - CKEditor integration in Symfony.
+* [EasyAdmin](https://github.com/EasyCorp/EasyAdminBundle) - EasyAdmin creates administration backends.
 * [HashidsBundle](https://github.com/roukmoute/HashidsBundle) - Integrates hashids/hashids in a Symfony project.
-* [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) - Adds support for a database-backed user system.
 * [KnpMenuBundle](https://github.com/KnpLabs/KnpMenuBundle) - The KnpMenuBundle integrates the KnpMenu PHP library with Symfony.
 * [KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) - Provide markdown conversion (based on Michel Fortin work) to your Symfony projects.
 * [RedisBundle](https://github.com/snc/SncRedisBundle) - This bundle integrates Predis and phpredis into your Symfony application.
 * [OverblogGraphQLBundle](https://github.com/overblog/GraphQLBundle) - This Symfony bundle provides integration of GraphQL.
 * [OverblogGraphiQLBundle](https://github.com/overblog/GraphiQLBundle) - This Symfony bundle provides integration of GraphiQL interface to your Symfony application.
 * [Doctrine Behavioral Extensions](https://github.com/Atlantic18/DoctrineExtensions) - This package contains extensions tools to use Doctrine more efficiently.
+* [Doctrine Behavioral Extensions](https://github.com/Atlantic18/DoctrineExtensions) - This package contains extensions tools to use Doctrine more efficiently.
+* [RenderServiceTwigExtensionBundle](https://github.com/danilovl/render-service-twig-extension-bundle) - Symfony twig extension bundle provides rendering service method.
+* [ParameterBundle](https://github.com/danilovl/parameter-bundle) - Symfony bundle provides comfortable getting parameters from config.
 
 Installation
 ------------
@@ -55,45 +57,34 @@ Installation
 Configure the database connection and SMTP in the file:
 
 ```text
-path: app/config/parametrs.yml 
+file: .env 
 ```
-``` yaml
-parameters:
-    database_host:  YOUR DATABASE HOST
-    database_port:  YOUR DATABASE PORT
-    database_name:  YOUR DATABASE NAME
-    database_user:  YOUR DATABASE USER
-    database_password:  YOUR DATABASE PASSWORD
-    mailer_transport:  YOUR MAILER TRANSPORT
-    mailer_host:  YOUR MAILER HOST
-    mailer_user:  YOUR MAILER USER
-    mailer_password:  YOUR MAILER PASSWORD
-    secret: YOUR SECRET RANDOM KEY
-    redis_host:  YOUR REDIS HOST
-    redis_port:  YOUR REDIS PORT
+``` env
+DATABASE_URL=mysql://username:password@host:port/final_work_system?serverVersion=5.7
+MAILER_DSN=smtp://user:pass@localhost:25
+REDIS_HOST='127.0.0.1'
+REDIS_PORT=6379
 ``````
 
 Configure the google api keys:
 
 ``` text
-path: app/config/config.yml 
+file: .env 
 ```
-``` yaml
-parameters:
-    google_maps_key:  YOUR GOOGLE MAP KEY
-    google_analytics_code: YOUR GOOGLE ANALYTICS CODE
+``` env
+GOOGLE_ANALYTICS_CODE='GOOGLE_ANALYTICS_CODE'
+GOOGLE_MAPS_KEY='GOOGLE_MAPS_KEY'
 ```
 
 Enable\Disable email notifications:
 
 ```text
-path: app/config/config.yml 
+file: .env 
 ```
-``` yaml
-parameters:
-    email_notification_subscriber:
-        sender: YOUR SENDER EMAIL 
-        enable: true or false
+``` env
+EMAIL_NOTIFICATION_SENDER='test@test.com'
+EMAIL_NOTIFICATION_ENABLE_SEND=true
+EMAIL_NOTIFICATION_ENABLE_ADD_TO_QUEUE=true
 ```
 
 Install all the necessary dependencies by Composer:
@@ -102,18 +93,12 @@ Install all the necessary dependencies by Composer:
 $ composer install
 ```
 
-Install all the necessary css and js dependencies by Bower:
+Install all the necessary css and js dependencies by NPM:
 
 ```bash
-$ bower install
+$ npm install
 ```
-
-Set language for tinymce plugin(temporary problems):
-
-```bash
-copy folder setup/langs => web/vendor/tinymce
-```
-
+ 
 Creating the database:
 
 ```bash
@@ -129,20 +114,21 @@ $ bin/console doctrine:schema:update --force
 Import default data to database:
 
 ```bash
-$ bin/console doctrine:database:import setup/sql.sql
+$ bin/console doctrine:migrations:sync-metadata-storage
+$ bin/console doctrine:migrations:migrate
 ```
 
 Generating assets:
 
 ```bash
-$ bin/console assetic:dump
-$ bin/console assets:install web
+$ npm run build
+$ bin/console assets:install public
 ```
 
-Create admin user:
+Create user:
 
 ```bash
-$ bin/console fos:user:create --super-admin LOGIN EMAIL PASSWORD
+$ bin/console app:user-add
 ```
 
 Clear cache:
@@ -151,12 +137,53 @@ Clear cache:
 $ bin/console cache:clear
 ```
 
+Docker
+------------
+
+Change Redis server to `redis` in `config\project\services\redis.yaml`:
+
+``` yaml
+   ....
+   arguments:
+    - 'redis'
+```
+
+Change DATABASE_URL in `.envl` for docker:
+
+``` env
+DATABASE_URL=mysql://final_work_system:password@mariadb:3306/final_work_system
+```
+
+Run docker:
+
+```bash
+$ docker-compose up -d
+```
+
+Run commands under docker CLI:
+
+``` bash
+$ composer install
+$ npm install
+$ bin/console doctrine:database:create --if-not-exists
+$ bin/console doctrine:schema:update --force
+$ bin/console doctrine:migrations:sync-metadata-storage
+$ bin/console doctrine:migrations:migrate
+$ npm run build
+$ bin/console assets:install public
+$ bin/console app:user-add
+$ bin/console cache:clear
+
+```
+
+Now you can access the application via [localhost:9090](localhost:9090).
+
 MIT License
 -----------
 
 FinalWork application is completely free and released under the [MIT License](https://github.com/danilovl/finalwork/LICENSE).
 
-Authors
+Author
 -------
 
 Created by [Vladimir Danilov](https://github.com/danilovl).

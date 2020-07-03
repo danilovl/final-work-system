@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block fos_user_content %}
+    <div>
+        <div class="login_wrapper">
+            <div id="register" class="form">
+                <section class="login_content">
+                    <p>
+                        {{ 'resetting.check_email' | trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                    </p>
+                    <a class="btn btn-default submit"
+                       href="{{ path('fos_user_security_login') }}">
+                        {{ 'layout.login' | trans() }}
+                    </a>
+                    <div class="separator">
+                        <div>
+                            <h1><i class="fa fa-book"></i>{{ 'app.system_name' | trans({}, 'messages') }}
+                            </h1>
+                            <p>©{{ "now"|date("Y") }}</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+<div {% if activeTab == 'message' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+        id="tab-message"
+        aria-labelledby="profile-tab">
+
+    {% if messages is defined and messages is not empty %}
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="chat-discussion">
+
+                        {% for message in messages %}
+                            <div class="{% if message.owner.id | hashids_encode == app.user.id | hashids_encode %} chat-message-left {% else %} chat-message-right {% endif %}">
+                                <img class="message-avatar"
+                                     src="{{ asset(message.owner.getProfileImagePath) }}"
+                                     alt="{{ message.owner }}">
+                                <div class="message">
+                                    <a class="message-author"
+                                       href="#"> {{ message.owner }} </a>
+                                    <span class="message-date"> {{ message.createdAt | date('Y-m-d H:i:s') }} </span>
+                                    <span class="message-content">{{ message.content | away_to | raw }}</span>
+                                </div>
+                            </div>
+                        {% else %}
+                            {{ 'app.text.no_result' | trans() }}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(messages, null ,{'tab':'message', '_fragment':'tabs-area'}) }}
+        </div>
+    {% endif %}
+</div>

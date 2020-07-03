@@ -1,0 +1,57 @@
+event_address_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\EventAddressController:list
+  methods: GET
+
+event_address_detail:
+  path: /detail/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventAddressController:detail
+  methods: GET
+
+event_address_create:
+  path: /create
+  defaults:
+    _controller: App\Controller\EventAddressController:create
+  methods: [GET, POST]
+
+event_address_create_ajax:
+  path: /create/ajax
+  defaults:
+    _controller: App\Controller\Ajax\EventAddressController:create
+  methods: [POST]
+
+event_address_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventAddressController:edit
+  methods: [GET, POST]
+
+event_address_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventAddressController:edit
+  methods: [POST]
+
+event_address_delete:
+  path: /delete/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventAddressController:delete
+  methods: [DELETE]
+
+event_address_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventAddressController:delete
+  methods: [POST]

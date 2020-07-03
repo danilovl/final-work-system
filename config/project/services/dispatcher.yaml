@@ -1,0 +1,48 @@
+services:
+  _defaults:
+    public: true
+
+  app.event_dispatcher.work:
+    class: App\EventDispatcher\WorkEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.version:
+    class: App\EventDispatcher\VersionEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.document:
+    class: App\EventDispatcher\DocumentEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.user:
+    class: App\EventDispatcher\UserEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.event:
+    class: App\EventDispatcher\EventEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.task:
+    class: App\EventDispatcher\TaskEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.conversation:
+    class: App\EventDispatcher\ConversationEventDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.security:
+    class: App\EventDispatcher\SecurityDispatcherService
+    arguments:
+      - '@event_dispatcher'
+
+  app.event_dispatcher.widget:
+    class: App\EventDispatcher\WidgetEventDispatcherService
+    arguments:
+      - '@event_dispatcher'

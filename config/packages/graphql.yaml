@@ -1,0 +1,19 @@
+overblog_graphql:
+  definitions:
+    schema:
+      doctrine:
+        query: doctrine
+        resolver_maps:
+          - 'app.graph_ql.resolver.user'
+          - 'app.graph_ql.resolver.task'
+          - 'app.graph_ql.resolver.work'
+      not_doctrine:
+        query: not_doctrine
+        resolver_maps:
+          - 'app.graph_ql.resolver.not_doctrine'
+    mappings:
+      auto_discover: false
+      types:
+        - type: graphql
+          dir: '%kernel.project_dir%/config/graphql/types'
+          suffix: ~

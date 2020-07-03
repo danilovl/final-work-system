@@ -1,0 +1,268 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+
+            {% if tasks is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <div class="row">
+                                <h2>{{ 'app.text.task_list' | trans() }}</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            {% if isTasksInComplete %}
+                                <div class="row">
+                                <span>
+                    			    {{ 'app.text.change_all_tasks_to_complete' | trans() }}
+                    		    </span>
+                                    <span>
+                                    <input class="js-switch"
+                                           data-switchery="true"
+                                           data-target-type="active"
+                                           data-target-url="{{ path('task_change_all_to_complete_ajax') }}"
+                                           title=""
+                                           type="checkbox">
+                                </span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="x_content">
+
+                            {% if tasks is not empty %}
+                                {% set directionParam = tasks.getPaginatorOption('sortDirectionParameterName') %}
+                                {% set params = tasks.getParams() %}
+                                {% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th{% if tasks.isSorted('task.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(tasks, 'app.text.name' | trans(), 'task.name') }}
+                                        </th>
+                                        <th{% if tasks.isSorted('work.title') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans(), 'work.title') }}
+                                        </th>
+                                        <th{% if tasks.isSorted('task.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans(), 'task.createdAt') }}
+                                        </th>
+                                        <th{% if tasks.isSorted('task.deadline') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                data-original-title="{{ 'app.tooltip.task_deadline' | trans() }}">
+                                            {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans(), 'task.deadline') }}
+                                        </th>
+                                        <th{% if tasks.isSorted('task.active') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                data-original-title="{{ 'app.tooltip.task_active' | trans() }}">
+                                            {{ knp_pagination_sortable(tasks, 'app.text.active' | trans(), 'task.active') }}
+                                        </th>
+                                        <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                data-original-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans() }}">
+                                            {{ knp_pagination_sortable(tasks, 'app.text.back_to_revision' | trans(), 'task.notifyComplete') }}
+                                        </th>
+                                        <th{% if tasks.isSorted('task.complete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                data-original-title="{{ 'app.tooltip.task_complete' | trans() }}">
+                                            {{ knp_pagination_sortable(tasks, 'app.text.complete' | trans(), 'task.complete') }}
+                                        </th>
+                                        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for task in tasks %}
+                                        <tr data-delete-row="task-{{ task.id | hashids_encode }}">
+                                            <td>
+                                                {{ task.name }}
+                                            </td>
+                                            <td>
+                                                <a target="_blank"
+                                                   href="{{ path('work_detail', { 'id': task.work.id | hashids_encode }) }}">
+                                                    {{ task.work }} | {{ task.work.author }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ task.createdAt | date("d.m.Y H:i") }}
+                                            </td>
+                                            <td>
+                                                {% if task.deadline is not empty %}
+                                                    {% if date("U") > task.deadline | date("U") %}
+                                                        <p class="red">
+                                                            {{ task.deadline | date("d.m.Y") }}
+                                                        </p>
+                                                    {% else %}
+                                                        {{ task.deadline | date("d.m.Y") }}
+                                                    {% endif %}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <input class="js-switch"
+                                                        {% if  task.active %} checked {% endif %}
+                                                       data-switchery="true"
+                                                       data-target-type="active"
+                                                       data-target-url="{{ path('task_change_status_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode, 'type': 'active' }) }}"
+                                                       title=""
+                                                       type="checkbox">
+                                            </td>
+                                            <td>
+
+                                                {% if  task.notifyComplete and task.complete == false %}
+                                                    <input class="js-switch"
+                                                            {% if  task.notifyComplete == false %} checked {% endif %}
+                                                           data-switchery="true"
+                                                           data-target-type="active"
+                                                           data-target-url="{{ path('task_change_status_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode, 'type':'notify'  }) }}"
+                                                           title=""
+                                                           type="checkbox">
+                                                {% endif %}
+
+                                            </td>
+                                            <td>
+                                                <input class="js-switch"
+                                                        {% if  task.complete %} checked {% endif %}
+                                                       data-switchery="true"
+                                                       data-target-type="complete"
+                                                       data-target-url="{{ path('task_change_status_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode, 'type': 'complete' }) }}"
+                                                       title=""
+                                                       type="checkbox">
+                                            </td>
+                                            <td>
+                                                {% if task.description is not empty %}
+                                                    <a class="btn btn-info btn-xs"
+                                                       role="tab"
+                                                       id="heading-task-description-{{ task.id | hashids_encode }}"
+                                                       data-toggle="collapse"
+                                                       data-parent="#accordion-task-descrition-{{ task.id | hashids_encode }}"
+                                                       href="#tab-task-description-{{ task.id | hashids_encode }}"
+                                                       aria-expanded="true"
+                                                       aria-controls="tab-task-description-{{ task.id | hashids_encode }}">
+                                                        <i class="fa fa-desktop"></i>
+                                                        {{ 'app.form.action.show_detail' | trans() }}
+                                                    </a>
+                                                {% endif %}
+
+                                                <a class="btn btn-primary btn-xs"
+                                                   href="{{ path('work_detail', { 'id': task.work.id | hashids_encode }) }}"
+                                                   target="_blank">
+                                                    <i class="fa fa-folder"></i>
+                                                    {{ 'app.text.work' | trans() }}
+                                                </a>
+                                                <a data-toggle="modal"
+                                                   data-target="#modalWindow"
+                                                   class="btn btn-warning btn-xs"
+                                                   href="{{ path('task_edit', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode }) }}">
+                                                    <i class="fa fa-pencil"></i>
+                                                    {{ 'app.form.action.edit' | trans() }}
+                                                </a>
+                                                <a data-toggle="modal"
+                                                   data-target="#task-delete-modal-{{ task.id | hashids_encode }}"
+                                                   class="btn btn-danger btn-xs">
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ 'app.form.action.delete' | trans() }}
+                                                </a>
+                                                <div class="modal fade bs-example-modal-sm"
+                                                     tabindex="-1"
+                                                     role="dialog"
+                                                     id="task-delete-modal-{{ task.id | hashids_encode }}"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button"
+                                                                        class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                                <h4 class="modal-title">
+                                                                    {{ 'app.text.deleting' | trans() }}
+                                                                    | {{ task.name }}
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>
+                                                                    {{ 'app.text.are_you_sure_delete' | trans() }}
+                                                                    ?
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                        class="btn btn-default"
+                                                                        data-dismiss="modal">
+                                                                    {{ 'app.form.action.close' | trans() }}
+                                                                </button>
+                                                                <button
+                                                                        data-delete-target-url="{{ path('task_delete', { 'id_work': task.work.id | hashids_encode,  'id_task': task.id | hashids_encode }) }}"
+                                                                        data-delete-target-row="task-{{ task.id | hashids_encode }}"
+                                                                        type="button"
+                                                                        class="btn btn-danger delete-element">
+                                                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                                                    <i class="fa fa-trash-o"></i>
+                                                                    {{ 'app.form.action.delete' | trans() }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        {% if task.description is not empty %}
+                                            <tr data-delete-row="task-{{ task.id | hashids_encode }}">
+                                                <td colspan="10">
+                                                    <div class="panel-collapse collapse"
+                                                         id="tab-task-description-{{ task.id | hashids_encode }}"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-task-description-{{ task.id | hashids_encode }}">
+                                                        <div class="panel-body text-muted well well-sm no-shadow">
+                                                            {{ task.description | away_to | raw }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="10"></td>
+                                            </tr>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'app.text.no_result' | trans() }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(tasks) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $("table").tableFix();
+        });
+    </script>
+{% endblock %}

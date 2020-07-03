@@ -1,5 +1,0 @@
-fos_user_change_image:
-  path: /image
-  defaults:
-      _controller: FinalWorkUserBundle:Profile:changeImage
-  methods:  [GET, POST]

@@ -1,0 +1,39 @@
+services:
+  #  Command
+  app.command.add_user:
+    class: App\Command\UserAddCommand
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@security.password_encoder'
+      - '@app.validator.user'
+    tags:
+      - { name: console.command }
+
+  app.command.delete_user:
+    class: App\Command\UserDeleteCommand
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.validator.user'
+    tags:
+      - { name: console.command }
+
+  app.command.list_user:
+    class: App\Command\UserListCommand
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: console.command }
+
+  app.command.email_notification:
+    class: App\Command\EmailNotificationQueueCommand
+    arguments:
+      - '@app.entity_manager'
+      - '@app.facade.email_notification_queue'
+      - '@app.mailer'
+      - '@danilovl.parameter'
+    tags:
+      - { name: console.command }
+    public: true

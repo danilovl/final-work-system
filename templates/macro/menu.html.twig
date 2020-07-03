@@ -1,0 +1,32 @@
+{% macro renderMenu(menu, dropDownClass = 'nav side-menu', childdropDownClass = 'nav child_menu') %}
+    <ul class="{{ dropDownClass }}">
+        {% for item in menu %}
+            {{ _self.recursiveMenu(item, childdropDownClass) }}
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro recursiveMenu(menuItem, dropDownClass) %}
+    {#  @var menuItem App\Menu\MenuItem#}
+    <li>
+        <a {% if menuItem.uri %}href="{{ menuItem.uri }}" {% endif %}>
+
+            {% if menuItem.attribute('icon') is not empty %}
+                <i class="fa {{ menuItem.attribute('icon') }}"></i>
+            {% endif %}
+            {{ menuItem.label }}
+
+            {% if menuItem.children | length %}
+                <span class="fa fa-chevron-down"></span>
+            {% endif %}
+        </a>
+
+        {% if menuItem.children | length %}
+            <ul class="{{ dropDownClass }}">
+                {% for child in menuItem.children %}
+                    {{ _self.recursiveMenu(child, dropDownClass) }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endmacro %}

@@ -1,0 +1,61 @@
+event_schedule_create:
+  path: /create
+  defaults:
+    _controller: App\Controller\EventScheduleController:create
+  methods: [GET,POST]
+
+event_schedule_detail:
+  path: /detail/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventScheduleController:detail
+  methods: [GET]
+
+event_schedule_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventScheduleController:edit
+  methods: [GET,POST]
+
+event_schedule_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\EventScheduleController:list
+  methods: [GET]
+
+event_schedule_clone:
+  path: /clone/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventScheduleController:clone
+  methods: [GET,POST]
+
+event_schedule_clone_ajax:
+  path: /clone/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventScheduleController:clone
+  methods: [GET,POST]
+
+event_schedule_delete:
+  path: /delete/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventScheduleController:delete
+  methods: [POST, DELETE]
+
+event_schedule_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventScheduleController:delete
+  methods: [POST, DELETE]
+    
+ 

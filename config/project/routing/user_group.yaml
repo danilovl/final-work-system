@@ -1,0 +1,43 @@
+user_group_create:
+  path: /create
+  defaults:
+    _controller: App\Controller\UserGroupController:create
+  methods: [GET, POST]
+
+user_group_create_ajax:
+  path: /create/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\UserGroupController:create
+  methods: [GET, POST]
+
+user_group_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\UserGroupController:edit
+  methods: [GET, POST]
+
+user_group_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\UserGroupController:edit
+  methods: [GET, POST]
+
+user_group_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\UserGroupController:list
+  methods: [GET, POST]
+
+user_group_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\UserGroupController:delete
+  methods: [POST, DELETE]

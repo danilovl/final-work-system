@@ -1,9 +1,0 @@
-services:
-  #   Authenticator
-  final_work.authenticator.api_key:
-    class: FinalWork\FinalWorkBundle\Security\Authenticator\ApiKeyAuthenticator
-    arguments:
-      - '@final_work.facade.api.user'
-
-  final_work.authenticator.api_token:
-    class: FinalWork\FinalWorkBundle\Security\Authenticator\TokenAuthenticator

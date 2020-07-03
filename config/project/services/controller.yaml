@@ -1,0 +1,13 @@
+services:
+  #  Controller
+  app.controller.version:
+    class: App\Controller\VersionController
+    public: true
+    calls:
+      - [setContainer, ["@service_container"]]
+
+  app.controller.document:
+    class: App\Controller\DocumentController
+    public: true
+    calls:
+      - [setContainer, ["@service_container"]]

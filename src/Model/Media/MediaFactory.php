@@ -1,0 +1,53 @@
+<?php declare(strict_types=1);
+
+/**
+ *
+ * This file is part of the FinalWorkSystem project.
+ * (c) Vladimir Danilov
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
+namespace App\Model\Media;
+
+use App\Entity\Media;
+use App\Model\BaseModelFactory;
+
+class MediaFactory extends BaseModelFactory
+{
+    public function flushFromModel(
+        MediaModel $mediaModel,
+        Media $media = null
+    ): Media {
+        $media = $media ?? new Media;
+        $media = $this->fromModel($media, $mediaModel);
+
+        $this->em->persistAndFlush($media);
+
+        return $media;
+    }
+
+    public function fromModel(
+        Media $media,
+        MediaModel $mediaModel
+    ): Media {
+        $media->setName($mediaModel->name);
+        $media->setDescription($mediaModel->description);
+        $media->setOwner($mediaModel->owner);
+        $media->setCategories($mediaModel->categories);
+        $media->setWork($mediaModel->work);
+        $media->setActive($mediaModel->active);
+        $media->setUploadMedia($mediaModel->uploadMedia);
+
+        if($mediaModel->mimeType){
+            $media->setMediaName($mediaModel->mediaName);
+            $media->setMimeType($mediaModel->mimeType);
+            $media->setOriginalExtension($mediaModel->originalExtension);
+            $media->setOriginalMediaName($mediaModel->originalMediaName);
+        }
+
+        return $media;
+    }
+}

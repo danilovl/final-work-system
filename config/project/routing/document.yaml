@@ -1,0 +1,72 @@
+document_create:
+  path: /create
+  defaults:
+    _controller: App\Controller\DocumentController:create
+  methods: [GET, POST]
+
+document_create_ajax:
+  path: /create/ajax
+  defaults:
+    _controller: App\Controller\Ajax\DocumentController:create
+  methods:  [POST]
+
+document_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\DocumentController:edit
+  methods: [GET, POST]
+
+document_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\DocumentController:edit
+  methods: [GET, POST]
+
+document_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\DocumentController:list
+  methods: [GET, POST]
+
+document_list_owner:
+  path: /list/owner
+  defaults:
+    _controller: App\Controller\DocumentController:listOwner
+  methods:  [GET, POST]
+
+document_change_active_ajax:
+  path: /change/{id}/active/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\DocumentController:changeActive
+  methods:  [POST]
+
+document_download:
+  path: /download/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\DocumentController:download
+  methods:  [GET,POST]
+
+document_google_download:
+  path: /google/download/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\DocumentController:download
+  methods:  [GET,POST]
+
+document_delete_ajax:
+  path: /document/delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\DocumentController:delete
+  methods:  [POST, DELETE]
+

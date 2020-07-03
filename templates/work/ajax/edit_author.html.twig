@@ -1,0 +1,91 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">
+        {{ 'app.form.label.username' | trans }}: {{ user.username }}
+    </h4>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_content">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        {{ form_start(form, {'action': path('work_edit_author_ajax', { 'id': work.id | hashids_encode }), 'method': 'POST','attr': {'class': 'form-horizontal'}}) }}
+                        <div class="item form-group">
+                            {{ form_label(form.degreeBefore,  'app.form.label.degree_before' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.degreeBefore, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.firstName,  'app.form.label.first_name' , {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}} ) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.lastName, 'app.form.label.last_name', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.degreeAfter, 'app.form.label.degree_after', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.degreeAfter, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.phone, 'app.form.label.phone', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'data-inputmask' : "'mask' : '+(*{1,3}) *{1,15}'"}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.email, 'app.form.label.email', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'data-inputmask' : "'alias' : 'email'"}}) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            {{ form_label(form.groups, 'app.form.label.group', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                {{ form_widget(form.groups, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
+                                <button class="btn btn-success"
+                                        id="edit_user_action">
+                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    {{ buttonActionTitle }}
+                                </button>
+                                <button class="btn btn-primary"
+                                        id="edit_user_action_close">
+                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                    {{ buttonActionCloseTitle }}
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        initInputMask();
+        $("#user_groups").select2({
+            width: '100%'
+        });
+        createEditContentAjax('#edit_user_action');
+        createEditContentAjax('#edit_user_action_close', true);
+    });
+</script>

@@ -1,0 +1,29 @@
+imports:
+  - { resource: project/parameters.yaml }
+  - { resource: project/services.yaml }
+
+services:
+  _defaults:
+    public: true
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+#    App\:
+#      resource: '../src'
+#      exclude:
+#        - '../src/Entity/*'
+
+  App\Admin\:
+    resource: '../src/Admin'
+    public: true
+
+  App\Controller\:
+    resource: '../src/Controller'
+    public: true
+    tags: ['controller.service_arguments']
+    calls:
+      - [setContainer, ["@service_container"]]
+
+  App\Repository\:
+    resource: '../src/Repository'
+    public: true

@@ -1,0 +1,5 @@
+api_key_work_list:
+  path: /list
+  defaults:
+    _controller: App\Controller\Api\WorkController:list
+  methods: [GET, POST]

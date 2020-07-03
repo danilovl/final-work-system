@@ -1,0 +1,60 @@
+version_create:
+  path: /{id}/version/create
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\VersionController:create
+  methods: [GET,POST]
+
+version_create_ajax:
+  path: /{id}/version/create/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\VersionController:create
+  methods: [POST]
+
+version_edit:
+  path: /{id_work}/version/edit/{id_media}
+  requirements:
+    id_work: '%hashid%'
+    id_media: '%hashid%'
+  defaults:
+    _controller: App\Controller\VersionController:edit
+  methods: [GET,POST]
+
+version_edit_ajax:
+  path: /{id_work}/version/edit/{id_media}/ajax
+  requirements:
+    id_work: '%hashid%'
+    id_media: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\VersionController:edit
+  methods: [POST]
+
+version_download:
+  path:     /{id_work}/version/download/{id_media}
+  requirements:
+    id_work: '%hashid%'
+    id_media: '%hashid%'
+  defaults:
+    _controller: App\Controller\VersionController:download
+  methods:  [GET,POST]
+
+version_google_download:
+  path:     /{id_work}/version/google/download/{id_media}
+  requirements:
+    id_work: '%hashid%'
+    id_media: '%hashid%'
+  defaults:
+    _controller: App\Controller\VersionController:downloadGoogle
+  methods:  [GET,POST]
+
+version_delete_ajax:
+  path:  /{id_work}/version/delete/{id_media}/ajax
+  requirements:
+    id_work: '%hashid%'
+    id_media: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\VersionController:delete
+  methods:  [POST, DELETE]

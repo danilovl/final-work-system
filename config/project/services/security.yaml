@@ -1,0 +1,10 @@
+services:
+  #   Authenticator
+  app.authenticator.api_token:
+    class: App\Security\Authenticator\ApiKeyAuthenticator
+
+  #   Provider
+  app.provider.api_key:
+    class: App\Security\Provider\ApiKeyUserProvider
+    arguments:
+      - '@app.facade.api.user'

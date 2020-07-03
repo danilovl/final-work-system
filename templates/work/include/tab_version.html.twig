@@ -1,0 +1,206 @@
+<div role="tabpanel"
+        {% if activeTab == 'version' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+     id="tab-version"
+     aria-labelledby="profile-tab">
+
+    {% if versions is defined and versions is not empty %}
+        {% set directionParamVersion = versions.getPaginatorOption('sortDirectionParameterName') %}
+        {% set paramsVersion = versions.getParams() %}
+        {% set directionVersion = paramsVersion[directionParamVersion] is defined ? paramsVersion[directionParamVersion] : null %}
+
+        <table class="table projects" id="table-version">
+            <thead>
+            <tr>
+                <th{% if versions.isSorted('media.name') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
+                    {{ knp_pagination_sortable(versions, 'app.text.name' | trans(), 'media.name', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                </th>
+                <th{% if versions.isSorted('media.originalMediaName') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
+                    {{ knp_pagination_sortable(versions, 'app.text.original_file_name' | trans(), 'media.originalMediaName', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                </th>
+                <th{% if versions.isSorted('media.type') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
+                    {{ knp_pagination_sortable(versions, 'app.text.type' | trans(), 'media.type', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                </th>
+                <th{% if versions.isSorted('media.mediaSize') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
+                    {{ knp_pagination_sortable(versions, 'app.text.file_size' | trans(), 'media.mediaSize', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                </th>
+                <th{% if versions.isSorted('media.createdAt') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
+                    {{ knp_pagination_sortable(versions, 'app.text.date_added' | trans(), 'media.createdAt', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                </th>
+                <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for version in versions %}
+                <tr data-delete-row="version-{{ version.id | hashids_encode }}"
+                    class="active">
+                    <td>
+                        {{ version.name }}
+                    </td>
+                    <td>
+                        {{ version.originalMediaName }}
+                    </td>
+                    <td>
+                        {{ version.mimeType.extension }}
+                    </td>
+                    <td>
+                        {{ version.getMediaSizeFormatted }}
+                    </td>
+                    <td>
+                        {{ version.createdAt | date("d.m.Y H:i") }}
+                    </td>
+                    <td>
+
+                        {% if version.description is not empty %}
+                            <a class="btn btn-info btn-xs"
+                               role="tab"
+                               id="heading-version-description-{{ version.id | hashids_encode }}"
+                               data-toggle="collapse"
+                               data-parent="#accordion-version-descrition-{{ version.id | hashids_encode }}"
+                               href="#tab-version-description-{{ version.id | hashids_encode }}"
+                               aria-expanded="true"
+                               aria-controls="tab-version-description-{{ version.id | hashids_encode }}">
+                                <i class="fa fa-desktop"></i>
+                                {{ 'app.form.action.show_detail' | trans() }}
+                            </a>
+                        {% endif %}
+
+                        <a class="btn btn-primary btn-xs"
+                           role="tab"
+                           id="heading-content-description-{{ version.id | hashids_encode }}"
+                           data-toggle="collapse"
+                           data-parent="#accordion-content-descrition-{{ version.id | hashids_encode }}"
+                           href="#tab-version-content-{{ version.id | hashids_encode }}"
+                           aria-expanded="true"
+                           aria-controls="tab-version-content-{{ version.id | hashids_encode }}"
+
+                                {% if version.existMediaFile and version.mimeType.extension != 'zip' and version.mimeType.extension != 'rar' %}
+                                    {% set frameLink =  absolute_url(path('version_google_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode })) %}
+                                    onclick="showGoogleDocs( '#iframe-version-content-{{ version.id | hashids_encode }}', '{{ frameLink }}')"
+                                {% endif %}
+                        >
+                            <i class="fa fa-file-text-o"></i>
+                            {{ 'app.form.action.show_content' | trans() }}
+                        </a>
+
+                        {% if version.existMediaFile %}
+                            <a class="btn btn-success btn-xs"
+                               href="{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}">
+                                <i class="fa fa-download"></i>
+                                {{ 'app.form.action.download' | trans() }}
+                            </a>
+                        {% else %}
+                            <a class="btn btn-success btn-xs">
+                                <i class="fa fa-download"></i>
+                                {{ 'app.text.file_not_found' | trans() }}
+                            </a>
+                        {% endif %}
+
+                        {% if work.isSupervisor(app.user) or version.isOwner(app.user) %}
+                            <a data-toggle="modal"
+                               data-target="#modalWindow"
+                               class="btn btn-warning btn-xs"
+                               href="{{ path('version_edit', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}">
+                                <i class="fa fa-pencil"></i>
+                                {{ 'app.form.action.edit' | trans() }}
+                            </a>
+                            <a data-toggle="modal"
+                               data-target="#version-delete-modal-{{ version.id | hashids_encode }}"
+                               class="btn btn-danger btn-xs">
+                                <i class="fa fa-refresh fa-spin hide"></i>
+                                <i class="fa fa-trash-o"></i>
+                                {{ 'app.form.action.delete' | trans() }}
+                            </a>
+                            <div class="modal fade bs-example-modal-sm"
+                                 tabindex="-1"
+                                 role="dialog"
+                                 id="version-delete-modal-{{ version.id | hashids_encode }}"
+                                 aria-hidden="true">
+
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button"
+                                                    class="close"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <h4 class="modal-title">
+                                                {{ 'app.text.deleting' | trans() }}
+                                                | {{ version.name }}
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>{{ 'app.text.are_you_sure_delete' | trans() }}
+                                                ?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"
+                                                    class="btn btn-default"
+                                                    data-dismiss="modal">
+                                                {{ 'app.form.action.close' | trans() }}
+                                            </button>
+                                            <button type="button"
+                                                    data-delete-target-url="{{ path('version_delete_ajax', { 'id_work': work.id | hashids_encode,  'id_media': version.id | hashids_encode }) }}"
+                                                    data-delete-target-row="version-{{ version.id | hashids_encode }}"
+                                                    class="btn btn-danger delete-element">
+                                                <i class="fa fa-refresh fa-spin hide"></i>
+                                                <i class="fa fa-trash-o"></i>
+                                                {{ 'app.form.action.delete' | trans() }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </td>
+                </tr>
+
+                {% if version.description is not empty %}
+                    <tr data-delete-row="version-{{ version.id | hashids_encode }}">
+                        <td colspan="6" style="border: none !important;">
+                            <div id="tab-version-description-{{ version.id | hashids_encode }}"
+                                 class="panel-collapse collapse"
+                                 aria-labelledby="heading-version-description-{{ version.id | hashids_encode }}"
+                                 role="tabpanel">
+                                <div class="panel-body text-muted well well-sm no-shadow">
+                                    {{ version.description|raw }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" style="border: none !important;">
+                    </tr>
+                {% endif %}
+
+                <tr data-delete-row="version-{{ version.id | hashids_encode }}">
+                    <td colspan="6" style="border: none !important;">
+                        <div id="tab-version-content-{{ version.id | hashids_encode }}"
+                             class="panel-collapse collapse"
+                             aria-labelledby="heading-version-content-{{ version.id | hashids_encode }}"
+                             role="tabpanel">
+                            <div class="panel-body text-muted well well-sm no-shadow">
+
+                                {% if version.existMediaFile %}asdasdas
+                                    {{ render_service('app.controller.version', 'detailContent', {'version': version}) }}
+                                {% else %}
+                                    {{ 'app.text.file_not_found' | trans() }}
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(versions, null ,{'tab':'version', '_fragment':'tabs-area'}) }}
+        </div>
+    {% endif %}
+</div>

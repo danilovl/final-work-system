@@ -1,0 +1,51 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.30.2",
+    "bower": "^1.8.8",
+    "browser-sync": "^2.26.7",
+    "core-js": "^3.0.0",
+    "regenerator-runtime": "^0.13.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-notifier": "^1.6.0"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "animate.css": "^3.5.1",
+    "bootstrap": "^3.3.7",
+    "bootstrap-progressbar": "^0.9.0",
+    "dist": "^0.1.2",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "fastclick": "^1.0.6",
+    "font-awesome": "^4.6.1",
+    "fullcalendar": "^2.6.1",
+    "icheck": "^1.0.2",
+    "inputmask": "^5.0.3",
+    "jquery": "^2.2.3",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-dist": "^1.12.1",
+    "jszip": "Stuk/jszip",
+    "malihu-custom-scrollbar-plugin": "^3.1.3",
+    "moment": "2.20.1",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "parsleyjs": "^2.3.10",
+    "pnotify": "^3.2.1",
+    "select2": "4.0.5",
+    "smartresize.js": "0.0.1",
+    "sticky-js": "^1.3.0",
+    "switchery": "^0.0.2",
+    "switchery-latest": "^0.8.2",
+    "symfony-collection": "ninsuo/symfony-collection",
+    "tinymce": "^4.7.4",
+    "webpack-concat-plugin": "^3.0.0",
+    "webpack-merge-and-include-globally": "^2.1.24"
+  }
+}

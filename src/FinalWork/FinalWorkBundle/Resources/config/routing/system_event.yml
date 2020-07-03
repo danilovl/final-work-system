@@ -1,7 +1,0 @@
-system_event_change_viewed_ajax:
-  path: /{id}/viewed/ajax
-  requirements:
-      id: "^[a-zA-Z0-9]{10}$"
-  defaults:
-      _controller: FinalWorkBundle:Ajax\Home:viewed
-  methods:  [POST]

@@ -1,0 +1,188 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>
+                                {{ title }}
+                            </h2>
+                            <ul class="nav navbar-rul c panel_toolbox">
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                        {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal'}}) }}
+                                        <div class="item form-group">
+                                            {{ form_label(form.name, 'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                                            </div>
+                                            {% if not form.name.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.name) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item form-group">
+                                            {{ form_label(form.description, 'app.form.label.description' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
+                                            </div>
+                                            {% if not form.description.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.description) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item form-group">
+                                            {{ form_label(form.street, 'app.form.label.street', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.street, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            {% if not form.street.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.street) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item form-group">
+                                            {{ form_label(form.latitude, 'app.form.label.latitude', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            {% if not form.latitude.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.latitude) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item form-group">
+                                            {{ form_label(form.longitude, 'app.form.label.longitude', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            {% if not form.longitude.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.longitude) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item form-group">
+                                            {{ form_label(form.skype, 'app.form.label.skype', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.skype, {'attr': {'class': 'form-control js-switch'}}) }}
+                                            </div>
+                                            {% if not form.skype.vars.valid %}
+                                                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                    {{ form_errors(form.skype) }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="x_content">
+                                                    <div class="google-map" id="map" style="height: 400px"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <input type="submit"
+                                                       class="btn btn-success"
+                                                       value="{{ buttonActionTitle }}"/>
+                                            </div>
+                                        </div>
+                                        {{ form_end(form) }}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&language={{ app.request.locale }}&region=CS">
+    </script>
+    <script>
+        var locale = '{{ app.request.locale }}';
+
+        $(document).ready(function () {
+            initTinymce(locale);
+        });
+
+        var head = document.getElementsByTagName('head')[0];
+        var insertBefore = head.insertBefore;
+        head.insertBefore = function (newElement, referenceElement) {
+            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+                return;
+            }
+            insertBefore.call(head, newElement, referenceElement);
+        };
+
+        var street = document.getElementById('event_address_street');
+        var inputLatitude = document.getElementById('event_address_latitude');
+        var inputLongitude = document.getElementById('event_address_longitude');
+        var geocoder = new google.maps.Geocoder();
+
+        {% if eventAddress is defined and eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
+        var myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
+        {% else %}
+        var myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
+        {% endif %}
+
+        function googleInitMap() {
+            var mapOptions = {
+                zoom: 11,
+                center: myLatLng
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+
+            google.maps.event.addListener(map, "click", function (event) {
+                marker.setPosition(event.latLng);
+                var latitude = event.latLng.lat();
+                var longitude = event.latLng.lng();
+                inputLatitude.value = latitude;
+                inputLongitude.value = longitude;
+
+                geocoder.geocode({
+                    'latLng': event.latLng
+                }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            street.value = results[0].formatted_address;
+                        }
+                    }
+                });
+
+            });
+        }
+
+        googleInitMap();
+    </script>
+{% endblock %}

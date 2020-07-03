@@ -1,0 +1,180 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <img class="img-responsive avatar-view"
+                                             src="{{ asset(app.user.getProfileImagePath) }}"
+                                             alt="Avatar"
+                                             title="Change the avatar">
+                                    </div>
+                                </div>
+                                <h3>{{ app.user }}</h3>
+                                <ul class="list-unstyled user_data">
+                                    <li>
+                                        <i class="fa fa-user user-profile-icon"></i>:
+                                        {{ app.user.username }}
+                                    </li>
+                                    <li class="m-top-xs">
+                                        <i class="fa fa-at user-profile-icon"></i>:
+                                        {{ app.user.email }}
+                                    </li>
+
+                                    {% if  app.user.skype is not empty %}
+                                        <li class="m-top-xs">
+                                            <i class="fa fa-skype user-profile-icon"></i>:
+                                            {{ app.user.skype }}
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                <ul class="list-unstyled user_data">
+                                    <li>
+                                        <a class="btn btn-primary" href="{{ path('profile_edit') }}">
+                                            <i class="fa fa-edit m-right-xs"></i>
+                                            {{ 'app.menu.profile_edit' | trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-warning" href="{{ path('profile_change_password') }}">
+                                            <i class="fa fa-edit m-right-xs"></i>
+                                            {{ 'app.menu.profile_change_password' | trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-warning" href="{{ path('profile_change_image') }}">
+                                            <i class="fa fa-edit m-right-xs"></i>
+                                            {{ 'app.menu.profile_image_change' | trans }}
+                                        </a>
+                                    </li>
+                                </ul>
+                                <br/>
+                            </div>
+
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#tab_content1"
+                                               id="home-tab"
+                                               role="tab" data-toggle="tab"
+                                               aria-expanded="true">
+                                                {{ 'app.menu.contact_information' | trans }}
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content2"
+                                               role="tab"
+                                               id="profile-tab" data-toggle="tab"
+                                               aria-expanded="false">
+                                                {{ 'app.menu.personal_information' | trans }}
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content3"
+                                               role="tab"
+                                               id="profile-tab2"
+                                               data-toggle="tab"
+                                               aria-expanded="false">
+                                                {{ 'app.menu.mail_template' | trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel"
+                                             class="tab-pane fade active in"
+                                             id="tab_content1"
+                                             aria-labelledby="home-tab">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.email' | trans }}:</td>
+                                                    <td>{{ app.user.email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.phone' | trans }}</td>
+                                                    <td>{{ app.user.phone }}</td>
+                                                </tr>
+
+                                                {% if  app.user.skype is not empty %}
+                                                    <tr>
+                                                        <td>{{ 'app.form.label.skype' | trans }}</td>
+                                                        <td>{{ app.user.skype }}</td>
+                                                    </tr>
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div role="tabpanel"
+                                             class="tab-pane fade"
+                                             id="tab_content2"
+                                             aria-labelledby="profile-tab">
+
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.username' | trans }}:</td>
+                                                    <td>{{ app.user.username }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.degree_before' | trans }}:</td>
+                                                    <td>{{ app.user.degreeBefore }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.first_name' | trans }}</td>
+                                                    <td>{{ app.user.firstName }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.last_name' | trans }}</td>
+                                                    <td>{{ app.user.lastName }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.degree_after' | trans }}</td>
+                                                    <td>{{ app.user.degreeAfter }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div role="tabpanel"
+                                             class="tab-pane fade"
+                                             id="tab_content3"
+                                             aria-labelledby="profile-tab">
+
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.message_greeting' | trans }}:</td>
+                                                    <td>{{ app.user.messageGreeting|raw }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'app.form.label.message_signature' | trans }}</td>
+                                                    <td>{{ app.user.messageSignature|raw }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,96 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h2>
+            {{ 'app.text.search_form' | trans() }}
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li>
+                <a class="collapse-link">
+                    {% if openSearchTab == false %}
+                        <i class="fa fa-chevron-down"></i>
+                    {% else %}
+                        <i class="fa fa-chevron-up"></i>
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content" {% if openSearchTab == false %} style="display: none;" {% endif %}>
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        <div class="item form-group">
+            {{ form_label(form.title,  'app.form.label.title' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}} ) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.shortcut,  'app.form.label.shortcut' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.shortcut, {'attr': {'class': 'form-control'}} ) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.status, 'app.form.label.status', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.type, 'app.form.label.type', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.supervisor, 'app.form.label.supervisor', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.supervisor, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.opponent, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.consultant, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            {% if not form.consultant.vars.valid %}
+                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                    {{ form_errors(form.consultant) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="item form-group">
+            {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {{ form_widget(form.deadline, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+            </div>
+            {% if not form.deadline.vars.valid %}
+                <div class="col-md-3 col-sm-3 col-xs-12 red">
+                    {{ form_errors(form.deadline) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <input type="submit"
+                       class="btn btn-success"
+                       value="{{ 'app.form.action.search' | trans() }}"/>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+</div>

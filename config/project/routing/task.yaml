@@ -1,0 +1,73 @@
+task_list:
+  path: /task/list
+  defaults:
+    _controller: App\Controller\TaskController:list
+  methods: [GET]
+
+task_create:
+  path: /{id}/task/create
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\TaskController:create
+  methods:  [GET,POST]
+
+task_create_ajax:
+  path: /{id}/task/create/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\TaskController:create
+  methods: [POST]
+
+task_edit:
+  path: /{id_work}/task/edit/{id_task}
+  requirements:
+    id_work: '%hashid%'
+    id_TaskController: '%hashid%'
+  defaults:
+    _controller: App\Controller\TaskController:edit
+  methods: [GET, POST]
+
+task_edit_ajax:
+  path: /{id_work}/task/edit/{id_task}/ajax
+  requirements:
+    id_work: '%hashid%'
+    id_TaskController: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\TaskController:edit
+  methods: [POST]
+
+task_change_status_ajax:
+  path: /{id_work}/task/change/{type}/{id_task}/ajax
+  requirements:
+    id_work: '%hashid%'
+    id_TaskController: '%hashid%'
+    type: "complete|active|notify"
+  defaults:
+    _controller: App\Controller\Ajax\TaskController:changeStatus
+  methods: [POST]
+
+task_change_all_to_complete_ajax:
+  path: /tasks/change-all-to-complete/ajax
+  defaults:
+    _controller: App\Controller\Ajax\TaskController:completeAll
+  methods: [POST]
+
+task_notify_complete_ajax:
+  path: /{id_work}/task/notify/complete/{id_task}/ajax
+  requirements:
+    id_work: '%hashid%'
+    id_TaskController: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\TaskController:notifyComplete
+  methods: [POST]
+
+task_delete:
+  path: /{id_work}/task/delete/{id_task}
+  requirements:
+    id_work: '%hashid%'
+    id_TaskController: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\TaskController:delete
+  methods: [POST, DELETE]

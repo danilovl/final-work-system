@@ -1,0 +1,8 @@
+services:
+  app.profiler:
+    class: App\Collector\SystemInfoCollector
+    arguments:
+      - '%system_info%'
+    tags:
+      - { name: data_collector, id: final_work_info, template: 'profiler/template.html.twig' }
+    public: false

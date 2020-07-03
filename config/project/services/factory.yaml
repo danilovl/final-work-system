@@ -1,0 +1,92 @@
+services:
+  app.factory.conversation:
+    class: App\Model\Conversation\ConversationFactory
+    autowire: true
+    public: true\
+
+  App\Model\Conversation\ConversationFactory: '@app.factory.conversation'
+
+  app.factory.event_schedule:
+    class: App\Model\EventSchedule\EventScheduleFactory
+    autowire: true
+    public: true
+
+  app.factory.comment:
+    class: App\Model\Comment\CommentFactory
+    autowire: true
+    public: true
+
+  app.factory.document:
+    class: App\Model\Document\DocumentFactory
+    autowire: true
+    public: true
+
+  app.factory.event:
+    class: App\Model\Event\EventFactory
+    autowire: true
+    public: true
+
+  app.factory.event_address:
+    class: App\Model\EventAddress\EventAddressFactory
+    autowire: true
+    public: true
+
+  app.factory.event_schedule_template:
+    class: App\Model\EventScheduleTemplate\EventScheduleTemplateFactory
+    autowire: true
+    public: true
+
+  app.factory.task:
+    class: App\Model\Task\TaskFactory
+    autowire: true
+    public: true
+
+  app.factory.media_category:
+    class: App\Model\MediaCategory\MediaCategoryFactory
+    autowire: true
+    public: true
+
+  app.factory.version:
+    class: App\Model\Version\VersionFactory
+    autowire: true
+    public: true
+
+  app.factory.conversation_message:
+    class: App\Model\ConversationMessage\ConversationMessageFactory
+    autowire: true
+    public: true
+
+  app.factory.user_group:
+    class: App\Model\UserGroup\UserGroupFactory
+    autowire: true
+    public: true
+
+  app.factory.work:
+    class: App\Model\Work\WorkFactory
+    autowire: true
+    public: true
+
+  app.factory.work_category:
+    class: App\Model\WorkCategory\WorkCategoryFactory
+    autowire: true
+    public: true
+
+  app.factory.media:
+    class: App\Model\Media\MediaFactory
+    autowire: true
+    public: true
+
+  app.factory.user:
+    class: App\Model\User\UserFactory
+    autowire: true
+    public: true
+
+  app.factory.reset_password:
+    class: App\Model\ResetPassword\ResetPasswordFactory
+    autowire: true
+    public: true
+
+  app.factory.email_notification_queue:
+    class: App\Model\EmailNotificationQueue\EmailNotificationQueueFactory
+    autowire: true
+    public: true

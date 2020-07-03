@@ -1,0 +1,382 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{{ 'app.page.appointment_calendar' | trans() }}</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id='event-calendar'></div>
+                        </div>
+                        <div id="create-new-event-modal"
+                             class="modal fade"
+                             tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="myModalLabel"
+                             aria-hidden="true"
+                        >
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true">
+                                            ×
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="testmodal" style="padding: 5px 20px;">
+
+                                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                            <div class="item form-group">
+                                                {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    {{ form_widget(form.type, {'attr': {'class': 'form-control'}} ) }}
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
+                                                {{ form_label(form.name,  'app.form.label.name' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
+                                                {{ form_label(form.address,  'app.form.label.appointment_address' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
+                                                {{ form_label(form.participant,  'app.form.label.appointment_participant' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    {{ form_widget(form.participant, {'attr': {'class': 'form-control'}} ) }}
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
+                                                {{ form_label(form.start, 'app.form.label.start', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <i class="fa fa-calendar-o form-control-feedback left"
+                                                       aria-hidden="true">
+                                                    </i>
+                                                    {{ form_widget(form.start, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
+                                                {{ form_label(form.end, 'app.form.label.end', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <span class="fa fa-calendar-o form-control-feedback left"
+                                                      aria-hidden="true">
+                                                </span>
+                                                    {{ form_widget(form.end, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+                                                </div>
+                                            </div>
+                                            {{ form_end(form) }}
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button"
+                                                id="event_create"
+                                                class="btn btn-primary">
+                                            <i id="event_create_load" class="fa fa-refresh fa-spin hide"></i>
+                                            {{ 'app.form.action.create' | trans() }}
+                                        </button>
+                                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">
+                                            {{ 'app.form.action.close' | trans() }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="event-detail-modal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button"
+                                                class="close"
+                                                data-dismiss="modal">
+                                            <span aria-hidden="true">×</span>
+                                            <span class="sr-only"> {{ 'app.form.action.close' | trans() }} </span>
+                                        </button>
+                                        <h4 id="modal-title" class="modal-title"></h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="event-delete"
+                                                type="button"
+                                                class="btn btn-danger"
+                                                data-event-id=""
+                                                data-dismiss="modal">
+                                            {{ 'app.form.action.delete' | trans() }}
+                                        </button>
+
+                                        <a id="event-detail"
+                                           class="btn btn-primary"
+                                           target="_blank">
+                                            {{ 'app.form.action.show_detail' | trans() }}
+                                        </a>
+                                        <button type="button"
+                                                class="btn btn-default"
+                                                data-dismiss="modal">
+                                            {{ 'app.form.action.close' | trans() }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var locale = '{{ app.request.locale }}';
+        var startForm = $('#event_start');
+        var endForm = $('#event_end');
+
+        function initEventCalendar(locale) {
+
+            if (typeof ($.fn.fullCalendar) === 'undefined') {
+                return;
+            }
+
+            var calendar = $('#event-calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaFourteenDay,agendaWeek,agendaDay,listMonth,'
+                    },
+                    views: {
+                        agendaFourteenDay: {
+                            type: 'agenda',
+                            duration: {days: 14},
+                            buttonText: '14 {{ 'app.calendar.day.day' | trans({'%count%': 2}) }}'
+                        }
+                    },
+                    lang: locale,
+                    selectable: true,
+                    selectHelper: true,
+                    editable: true,
+                    droppable: true,
+                    select: function (start, end, allDay) {
+                        $('#create-new-event-modal').modal();
+                        startForm.val(start.format("YYYY-MM-DD HH:mm"));
+                        endForm.val(end.format("YYYY-MM-DD HH:mm"));
+                    },
+                    eventClick: function (event, jsEvent, view) {
+                        var eventDetailButton = $('#event-detail');
+                        var eventDeleteButton = $('#event-delete');
+
+                        $('#modal-title').html(event.title.replace(/\n/g, "<br>"));
+                        eventDetailButton.attr('href', '');
+                        eventDetailButton.attr('href', event.detail_url);
+
+                        eventDeleteButton.attr('href', '');
+                        eventDeleteButton.attr('href', event.delete_url);
+                        eventDeleteButton.attr('data-event-id', '');
+                        eventDeleteButton.attr("data-event-id", event.id);
+
+                        $('#event-detail-modal').modal();
+                    },
+                    eventDrop: function (event, delta, revertFunc) {
+                        var start = event.start.format("YYYY-MM-DD HH:mm");
+                        var end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
+                        var url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
+                        url = url.replace('Ynvr2lgdAJ', event.id);
+
+                        $.ajax({
+                            url: url,
+                            data: 'start=' + start + '&end=' + end,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.valid === false) {
+                                    revertFunc();
+                                }
+
+                                for (var type in response.notifyMessage) {
+                                    notifyMessage(type, response.notifyMessage[type]);
+                                }
+                            },
+                            error: function () {
+                                revertFunc();
+                            }
+                        });
+                    },
+                    eventResize: function (event, delta, revertFunc) {
+                        var start = event.start.format("YYYY-MM-DD HH:mm");
+                        var end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
+                        var url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
+                        url = url.replace('Ynvr2lgdAJ', event.id);
+
+                        $.ajax({
+                            url: url,
+                            data: 'start=' + start + '&end=' + end,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.valid === false) {
+                                    revertFunc();
+                                }
+
+                                for (var type in response.notifyMessage) {
+                                    notifyMessage(type, response.notifyMessage[type]);
+                                }
+                            },
+                            error: function () {
+                                revertFunc();
+                            }
+                        });
+                    },
+                    events: function (start, end, timezone, callback) {
+                        var startDate = start.format("YYYY-MM-DD HH:mm");
+                        var endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
+
+                        $.ajax({
+                            url: "{{ path('event_calendar_events_ajax', {'type' : 'manage'}) }}",
+                            data: 'start=' + startDate + '&end=' + endDate,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.valid === true) {
+                                    var events = [];
+                                    var respEvents = response.events;
+
+                                    $.each($.parseJSON(respEvents), function () {
+                                        events.push({
+                                            id: this.id,
+                                            title: this.title,
+                                            start: this.start,
+                                            end: this.end,
+                                            color: this.color,
+                                            detail_url: this.detail_url,
+                                            delete_url: this.delete_url,
+                                            allDay: false
+                                        });
+                                    });
+
+                                    callback(events);
+                                }
+
+                                for (var type in response.notifyMessage) {
+                                    notifyMessage(type, response.notifyMessage[type]);
+                                }
+                            }
+                        });
+                    }
+                }
+            );
+
+            var loading = $('#event_create_load');
+            var button_event_create = $('#event_create');
+
+            button_event_create.on("click", function () {
+                var form = $('form');
+
+                button_event_create.prop('disabled', true);
+                loading.removeClass('hide');
+
+                $.ajax({
+                    url: "{{ path('event_calendar_create_ajax') }}",
+                    data: form.serialize(),
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.valid === true) {
+                            $('.antoclose').click();
+                            calendar.fullCalendar('renderEvent', {
+                                    id: response.event.id,
+                                    title: response.event.title,
+                                    start: response.event.start,
+                                    end: response.event.end,
+                                    color: response.event.color,
+                                    detail_url: response.event.detail_url,
+                                    delete_url: response.event.delete_url,
+                                    allDay: false
+                                },
+                                true // make the event "stick"
+                            );
+                        }
+
+                        if (response.valid === false) {
+                            for (var key in response.data) {
+                                $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
+                            }
+                        }
+
+                        for (var type in response.notifyMessage) {
+                            notifyMessage(type, response.notifyMessage[type]);
+                        }
+                    }
+                }).done(function () {
+                    loading.addClass('hide');
+                    button_event_create.prop('disabled', false);
+                    setTimeout(function () {
+                        $('.validation-error').remove();
+                    }, 3000);
+                });
+
+                calendar.fullCalendar('unselect');
+
+                return false;
+            });
+
+            $('#event-delete').on("click", function () {
+                var href = $(this).attr('href');
+                var eventId = $(this).attr('data-event-id');
+
+                $.ajax({
+                    url: href,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.delete === false) {
+                            revertFunc();
+                        }
+
+                        if (response.delete === true) {
+                            $('#event-calendar').fullCalendar('removeEvents', eventId);
+                        }
+
+                        for (var type in response.notifyMessage) {
+                            notifyMessage(type, response.notifyMessage[type]);
+                        }
+                    },
+                    error: function () {
+                        revertFunc();
+                    }
+                });
+            });
+        }
+
+        $(document).ready(function () {
+            initEventCalendar(locale);
+
+            var modalWindow = $('#create-new-event-modal');
+
+            $("#event_type").select2({width: '100%', dropdownParent: modalWindow});
+            $("#event_address").select2({width: '100%', dropdownParent: modalWindow});
+            $("#event_participant").select2({width: '100%', dropdownParent: modalWindow});
+            $('#event_start').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                locale: locale
+            });
+            $('#event_end').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                locale: locale
+            });
+        });
+    </script>
+{% endblock %}

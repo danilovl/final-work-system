@@ -1,0 +1,42 @@
+services:
+  app.event_listener.system_notification.base:
+    class: App\EventListener\SystemEvent\BaseSystemEventSubscriber
+    arguments:
+      - '@app.entity_manager'
+      - '@security.helper'
+    autowire: true
+
+  app.event_listener.system_notification.document:
+    class: App\EventListener\SystemEvent\DocumentSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true
+
+  app.event_listener.system_notification.event:
+    class: App\EventListener\SystemEvent\EventSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true
+
+  app.event_listener.system_notification.message:
+    class: App\EventListener\SystemEvent\MessageSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true
+
+  app.event_listener.system_notification.task:
+    class: App\EventListener\SystemEvent\TaskSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true
+
+  app.event_listener.system_notification.user:
+    class: App\EventListener\SystemEvent\UserSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true
+
+  app.event_listener.system_notification.version:
+    class: App\EventListener\SystemEvent\VersionSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true
+
+  app.event_listener.system_notification.work:
+    class: App\EventListener\SystemEvent\WorkSystemEventSubscriber
+    parent: 'app.event_listener.system_notification.base'
+    autoconfigure: true

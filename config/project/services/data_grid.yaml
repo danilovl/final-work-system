@@ -1,0 +1,25 @@
+services:
+  #  DataGrid
+  app.data_grid.user:
+    class: App\DataGrid\UserDataGrid
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  app.data_grid.work_category:
+    class: App\DataGrid\WorkCategoryDataGrid
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  app.data_grid.media_category:
+    class: App\DataGrid\MediaCategoryDataGrid
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  app.data_grid.work_status:
+    class: App\DataGrid\WorkStatusDataGrid
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'

@@ -1,0 +1,53 @@
+event_detail:
+  path: /detail/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventController:detail
+  methods: [GET,POST]
+
+event_edit:
+  path: /edit/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventController:edit
+  methods: [GET,POST]
+
+event_edit_ajax:
+  path: /edit/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventController:edit
+  methods: [POST]
+
+event_switch_to_skype:
+  path: /switch-skype/{id}
+  defaults:
+    _controller: App\Controller\EventController:switchToSkype
+  methods: [GET,POST]
+
+event_delete:
+  path: /delete/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\EventController:delete
+  methods: [DELETE]
+
+event_delete_ajax:
+  path: /delete/{id}/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventController:delete
+  methods: [GET, POST]
+
+event_detail_events_ajax:
+  path: /detail/{id}/calendar/events/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\EventController:getEvent
+  methods: [POST]

@@ -1,0 +1,22 @@
+article_category_list:
+  path: /category/list
+  defaults:
+    _controller: App\Controller\ArticleCategoryController:list
+  methods: [GET, POST]
+
+article_list:
+  path: /category/{id}/article-list
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\ArticleCategoryController:articleList
+  methods: [GET, POST]
+
+article_detail:
+  path: /category/{id_category}/article/{id_article}
+  requirements:
+    id_article: '%hashid%'
+    id_category: '%hashid%'
+  defaults:
+    _controller: App\Controller\ArticleController:detail
+  methods: [GET, POST]

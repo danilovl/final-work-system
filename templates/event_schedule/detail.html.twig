@@ -1,0 +1,219 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+
+            {% if eventSchedule is defined %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content text-center">
+                                <h2>
+                                    {{ eventSchedule.name }}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    {{ 'app.form.label.name' | trans() }}
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        {{ 'app.text.name' | trans() }}
+                                    </dt>
+                                    <dd>
+                                        {{ eventSchedule.name }}
+                                    </dd>
+
+                                    {% if eventSchedule.description %}
+                                        <dt>
+                                            {{ 'app.text.description' | trans() }}
+                                        </dt>
+                                        <dd>
+                                            {{ eventSchedule.description | away_to | raw }}
+                                        </dd>
+                                    {% endif %}
+
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    {{ 'app.text.admin_panel' | trans() }}
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <a class="btn btn-app"
+                                       href="{{ path('event_schedule_edit', { 'id': eventSchedule.id | hashids_encode }) }}">
+                                        <i class="fa fa-edit"></i>
+                                        {{ 'app.form.action.edit' | trans() }}
+                                    </a>
+                                    <a class="btn btn-app"
+                                       data-toggle="modal"
+                                       data-target="#event-schedule-delete-modal-{{ eventSchedule.id | hashids_encode }}">
+                                        <i class="fa fa-trash-o"></i>
+                                        {{ 'app.form.action.delete' | trans() }}
+                                    </a>
+                                    <div class="modal fade bs-example-modal-sm"
+                                         tabindex="-1"
+                                         role="dialog"
+                                         id="event-schedule-delete-modal-{{ eventSchedule.id | hashids_encode }}"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button"
+                                                            class="close"
+                                                            data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="modal-title">
+                                                        {{ 'app.text.deleting' | trans() }}
+                                                        | {{ eventSchedule.name }}
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4>
+                                                        {{ 'app.text.are_you_sure_delete' | trans() }}
+                                                        ?
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button"
+                                                            class="btn btn-default"
+                                                            data-dismiss="modal">
+                                                        {{ 'app.form.action.close' | trans() }}
+                                                    </button>
+
+                                                    {{ form_start(deleteForm, {'attr': {'class': 'delete-form-button'}}) }}
+                                                    <button class="btn btn-danger">
+                                                        {{ 'app.form.action.delete' | trans() }}
+                                                    </button>
+                                                    {{ form_end(deleteForm) }}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    {{ 'app.text.event_list' | trans() }}
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="ibox-content">
+
+                                    {% for  template in eventSchedule.templates %}
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                                                        {{ 'app.calendar.day.day' | trans({'%count%': 1}) }}
+                                                    </label>
+                                                    <div class="col-md-11 col-sm-11 col-xs-12">
+                                                        {{ weekDay[template.day] }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        {{ 'app.form.label.type' | trans() }}
+                                                    </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        {{ template.type }}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        {{ 'app.form.label.name' | trans() }}
+                                                    </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        {{ template.name }}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        {{ 'app.form.label.appointment_address' | trans() }}
+                                                    </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        {{ template.address }}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        {{ 'app.form.label.start' | trans() }}
+                                                    </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        {{ template.start | date("H:i") }}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        {{ 'app.form.label.end' | trans() }}
+                                                    </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        {{ template.end | date("H:i") }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+services:
+  app.graph_ql.resolver.user:
+    class: App\GraphQL\Resolver\UserResolverMap
+    arguments:
+      - '@app.facade.user'
+
+  app.graph_ql.resolver.work:
+    class: App\GraphQL\Resolver\WorkResolverMap
+    arguments:
+      - '@app.facade.work'
+      - '@app.facade.work_status'
+
+  app.graph_ql.resolver.task:
+    class: App\GraphQL\Resolver\TaskResolverMap
+    arguments:
+      - '@app.facade.task'
+
+  app.graph_ql.resolver.not_doctrine:
+    class: App\GraphQL\Resolver\NotDoctrineResolverMap
+
+  app.graph_ql.definition.datetime_type:
+    class: App\GraphQL\Type\DateTimeType
+    tags:
+      - { name: overblog_graphql.type, alias: DateTime }

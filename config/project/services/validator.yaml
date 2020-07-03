@@ -1,0 +1,7 @@
+services:
+  #  Validator
+  app.validator.user:
+    class: App\Utils\Validator\UserValidator
+    arguments:
+      - '@doctrine.orm.entity_manager'
+

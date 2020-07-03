@@ -1,0 +1,23 @@
+app:
+  email_notification:
+    subject:
+      user_create: 'Create a new account'
+      work_create: 'Creating work'
+      work_edit: 'Editing work'
+      user_edit: 'Editing personal information'
+      task_create: 'Create a new task'
+      task_edit: 'Editing a task'
+      task_complete: 'Mark a job complete'
+      task_in_complete: 'Mark a job as not completed'
+      task_notify_complete: 'Announcement of task completion'
+      task_notify_in_complete: 'Returning tasks for rework'
+      version_create: 'Create a new version'
+      version_edit: 'Editace verze'
+      document_create: 'New information material'
+      message_create: 'New message'
+      event_create: 'New meeting'
+      event_edit: 'Updating meeting data'
+      event_switch_skype: 'Toggle local meeting on skype'
+      event_comment_create: 'New comment for meeting'
+      event_comment_edit: 'Edit a comment for a meeting'
+      event_reservation: 'New meeting'

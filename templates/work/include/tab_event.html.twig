@@ -1,0 +1,117 @@
+{% if work.authorSupervisor(app.user) %}
+    <div role="tabpanel"
+            {% if activeTab == 'event' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+         id="tab-event"
+         aria-labelledby="profile-tab">
+
+        {% if events is defined and events is not empty %}
+            {% set directionParamEvent = events.getPaginatorOption('sortDirectionParameterName') %}
+            {% set paramsEvent = events.getParams() %}
+            {% set directionEvent = paramsEvent[directionParamEvent] is defined ? paramsEvent[directionParamEvent] : null %}
+
+            <table class="table projects" id="table-event">
+                <thead>
+                <tr>
+                    <th{% if events.isSorted('address.name') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
+                        {{ knp_pagination_sortable(events, 'app.text.appointment_address' | trans(), 'address.name', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                    </th>
+                    <th{% if events.isSorted('event.start') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
+                        {{ knp_pagination_sortable(events, 'app.text.start' | trans(), 'event.start', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                    </th>
+                    <th{% if events.isSorted('event.end') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
+                        {{ knp_pagination_sortable(events, 'app.text.end' | trans(), 'event.end', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                    </th>
+                    <th{% if events.isSorted('event.createdAt') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
+                        {{ knp_pagination_sortable(events, 'app.text.date_added' | trans(), 'event.createdAt', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                    </th>
+                    <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for event in events %}
+                    <tr data-delete-row="event-{{ event.id | hashids_encode }}"
+                        class="active">
+                        <td>
+                            {{ event.address }}
+                        </td>
+                        <td>
+                            {{ event.start | date("d.m.Y H:i") }}
+                        </td>
+                        <td>
+                            {{ event.end | date("d.m.Y H:i") }}
+                        </td>
+                        <td>
+                            {{ event.createdAt | date("d.m.Y H:i") }}
+                        </td>
+                        <td>
+                            <a target="_blank"
+                               href="{{ path('event_detail', { 'id': event.id | hashids_encode  }) }}"
+                               class="btn btn-primary btn-xs">
+                                <i class="fa fa-desktop"></i>
+                                {{ 'app.form.action.show_detail' | trans() }}
+                            </a>
+                            {% if work.isSupervisor(app.user) and event.isOwner(app.user) %}
+                                <a data-toggle="modal"
+                                   data-target="#event-delete-modal-{{ event.id | hashids_encode }}"
+                                   class="btn btn-danger btn-xs">
+                                    <i class="fa fa-trash-o"></i>
+                                    {{ 'app.form.action.delete' | trans() }}
+                                </a>
+                                <div class="modal fade bs-example-modal-sm"
+                                     tabindex="-1"
+                                     role="dialog"
+                                     id="event-delete-modal-{{ event.id | hashids_encode }}"
+                                     aria-hidden="true">
+
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button"
+                                                        class="close"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">
+                                                    {{ 'app.text.deleting' | trans() }}
+                                                    | {{ event }}
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>{{ 'app.text.are_you_sure_delete' | trans() }}
+                                                    ?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                        class="btn btn-default"
+                                                        data-dismiss="modal">
+                                                    {{ 'app.form.action.close' | trans() }}
+                                                </button>
+                                                <button type="button"
+                                                        data-delete-target-url="{{ path('event_delete_ajax', { 'id': event.id | hashids_encode  }) }}"
+                                                        data-delete-target-row="event-{{ event.id | hashids_encode }}"
+                                                        class="btn btn-danger delete-element">
+                                                    <i class="fa fa-refresh fa-spin hide"></i>
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ 'app.form.action.delete' | trans() }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <div class="navigation">
+                {{ knp_pagination_render(events, null ,{'tab':'event', '_fragment':'tabs-area'}) }}
+            </div>
+        {% endif %}
+
+    </div>
+{% endif %}
