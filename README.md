@@ -148,7 +148,7 @@ Change Redis server to `redis` in `config\project\services\redis.yaml`:
     - 'redis'
 ```
 
-Change DATABASE_URL in `.envl` for docker:
+Change DATABASE_URL in `.env` for docker:
 
 ``` env
 DATABASE_URL=mysql://final_work_system:password@mariadb:3306/final_work_system
