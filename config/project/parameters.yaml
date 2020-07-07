@@ -7,7 +7,7 @@ imports:
 
 parameters:
   container.build_id: "a fake build id"
-  domain: 'work-system.local'
+  domain: '%env(PROJECT_DOMAIN)%'
   system_info:
     name: 'FinalWork System'
     version: '2.0.0'
