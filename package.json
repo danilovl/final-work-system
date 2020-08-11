@@ -44,7 +44,7 @@
     "switchery": "^0.0.2",
     "switchery-latest": "^0.8.2",
     "symfony-collection": "ninsuo/symfony-collection",
-    "tinymce": "^4.7.4",
+    "tinymce": "^4.9.11",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-merge-and-include-globally": "^2.1.24",
     "uglify-js": ">=2.6.0"
