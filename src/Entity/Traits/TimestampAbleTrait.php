@@ -22,12 +22,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait TimestampAbleTrait
 {
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private ?DateTime $createdAt = null;
 
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private ?DateTime $updatedAt = null;
 
@@ -48,7 +48,7 @@ trait TimestampAbleTrait
         $this->updatedAt = new DateTime;
     }
 
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
@@ -58,7 +58,7 @@ trait TimestampAbleTrait
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }

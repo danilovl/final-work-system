@@ -58,7 +58,7 @@ security:
     - { path: ^/(%locales%)/reset-password/reset$,        roles: PUBLIC_ACCESS }
 
     # Admin login page needs to be access without credential
-    - { path: ^/(%locales%)/admin/, roles: [ROLE_STUDENT] }
+    - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
 
     # API
     - { path: ^/api/key, roles: ROLE_API }

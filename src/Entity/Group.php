@@ -31,8 +31,6 @@ class Group
     use TimestampAbleTrait;
 
     /**
-     * @var int $id
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
