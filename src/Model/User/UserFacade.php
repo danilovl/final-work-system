@@ -95,7 +95,7 @@ class UserFacade
 
     public function findUserByUsername(
         string $username,
-        bool $enable = true
+        bool $enable = null
     ): ?User {
         return $this->userRepository
             ->byUsername($username, $enable)
@@ -106,7 +106,7 @@ class UserFacade
 
     public function findUserByEmail(
         string $email,
-        bool $enable = true
+        bool $enable = null
     ): ?User {
         return $this->userRepository
             ->byEmail($email, $enable)

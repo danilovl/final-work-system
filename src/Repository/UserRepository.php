@@ -114,23 +114,32 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function byUsername(
         string $username,
-        bool $enable = true
+        ?bool $enable = null
     ): ?QueryBuilder {
-        return $this->createQueryBuilder('user')
+        $builder = $this->createQueryBuilder('user')
             ->andWhere('user.username = :username')
-            ->andWhere('user.enabled = :enable')
-            ->setParameter('username', $username)
-            ->setParameter('enable', $enable);
+            ->setParameter('username', $username);
+
+        if ($enable !== null) {
+            $builder->andWhere('user.enabled = :enable')
+                ->setParameter('enable', $enable);
+        }
+
+        return $builder;
     }
 
     public function byEmail(
         string $email,
-        bool $enable = true
+        ?bool $enable = null
     ): ?QueryBuilder {
-        return $this->createQueryBuilder('user')
+        $builder = $this->createQueryBuilder('user')
             ->andWhere('user.email = :email')
-            ->andWhere('user.enabled = :enable')
-            ->setParameter('email', $email)
-            ->setParameter('enable', $enable);
+            ->setParameter('email', $email);
+
+        if ($enable !== null) {
+            $builder->andWhere('user.enabled = :enable')
+                ->setParameter('enable', $enable);
+        }
+        return $builder;
     }
 }

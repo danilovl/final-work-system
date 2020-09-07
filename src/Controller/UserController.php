@@ -49,7 +49,7 @@ class UserController extends BaseController
                 $email = $userModel->email;
                 $username = $userModel->username;
 
-                if ($userFacade->findUserByUsername($username, false) || $userFacade->findUserByEmail($email, false)) {
+                if ($userFacade->findUserByUsername($username) || $userFacade->findUserByEmail($email)) {
                     $this->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.user.create.error');
                     $this->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.user.create.warning');
                 } else {
