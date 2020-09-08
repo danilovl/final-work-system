@@ -12,7 +12,6 @@
 
 namespace App\Model\ConversationMessage;
 
-use Doctrine\Common\Collections\Collection;
 use App\Model\Traits\ContentAwareTrait;
 
 class ConversationComposeMessageModel
@@ -20,5 +19,5 @@ class ConversationComposeMessageModel
     use ContentAwareTrait;
 
     public ?string $name = null;
-    public ?Collection $conversation = null;
+    public ?iterable $conversation = null;
 }

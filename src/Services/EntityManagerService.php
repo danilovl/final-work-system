@@ -51,8 +51,13 @@ class EntityManagerService
         $this->entityManager->flush($entity);
     }
 
-    public function getRepository($entityName)
+    public function getRepository(string $entityName)
     {
         return $this->entityManager->getRepository($entityName);
+    }
+
+    public function clear(string $entityName = null): void
+    {
+        $this->entityManager->clear($entityName);
     }
 }
