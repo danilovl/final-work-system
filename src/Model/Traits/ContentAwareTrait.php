@@ -12,8 +12,6 @@
 
 namespace App\Model\Traits;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 trait ContentAwareTrait
 {
     public ?string $content = null;
