@@ -17,7 +17,7 @@
 			{% for systemEventRecipient in systemEventRecipients | slice(0, 5) %}
 				<li>
                     <span class="image">
-                        <img src="{{ asset(systemEventRecipient.systemEvent.owner.getProfileImagePath) }}"
+                        <img src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
 							 alt="profile image"/>
                     </span>
 					<span class="message">

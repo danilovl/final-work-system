@@ -18,7 +18,7 @@
 
                     <div class="{% if message.owner.id == app.user.id %} chat-message-left {% else %} chat-message-right {% endif %}">
                         <img class="message-avatar"
-                             src="{{ asset(message.owner.getProfileImagePath) }}"
+                             src="{{ message.owner | profile_image }}"
                              alt="{{ message.owner }}">
                         <div class="{{ conversationMessageUnreadClass }} message">
                             <a class="message-author" href="#">

@@ -18,7 +18,7 @@
                 <div class="profile_img">
                     <div id="crop-avatar">
                         <img class="img-responsive avatar-view center-margin"
-                             src="{{ asset(work.author.getProfileImagePath) }}"
+                             src="{{ work.author | profile_image }}"
                              alt="profile image"
                              title="profile image">
                     </div>

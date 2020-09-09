@@ -10,8 +10,7 @@ services:
   app.twig.app_extension:
     class: App\Twig\TwigExtension
     public: false
-    arguments:
-      - '@service_container'
+    autowire: true
     tags:
       - { name: twig.extension }
 

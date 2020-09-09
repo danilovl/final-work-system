@@ -89,7 +89,7 @@ class User implements UserInterface
     private ?string $usernameCanonical = null;
 
     /**
-     * @ORM\Column(name="email", type="string", nullable=false)
+     * @ORM\Column(name="email", type="string", nullable=false, unique=true)
      */
     private ?string $email = null;
 
@@ -1213,15 +1213,6 @@ class User implements UserInterface
     public function setProfileImage(Media $profileImage): void
     {
         $this->profileImage = $profileImage;
-    }
-
-    public function getProfileImagePath(): ?string
-    {
-        if ($this->profileImage !== null) {
-            return $this->profileImage->getWebPath();
-        }
-
-        return 'images/user.png';
     }
 
     public function getMessageHeaderFooter(): string

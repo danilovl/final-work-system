@@ -17,7 +17,7 @@
                                 <div class="profile_img">
                                     <div id="crop-avatar">
                                         <img class="img-responsive avatar-view"
-                                             src="{{ asset(app.user.getProfileImagePath) }}"
+                                             src="{{ app.user | profile_image }}"
                                              alt="Avatar"
                                              title="Change the avatar">
                                     </div>

@@ -5,7 +5,7 @@
        class="user-profile dropdown-toggle"
        data-toggle="dropdown"
        aria-expanded="false">
-        <img src="{{ asset(app.user.getProfileImagePath) }}" alt="profile image">
+        <img src="{{ app.user | profile_image }}" alt="profile image">
         {{ app.user }}
         <span class=" fa fa-angle-down"></span>
     </a>

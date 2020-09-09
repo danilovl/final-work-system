@@ -11,7 +11,7 @@
                         {% for message in messages %}
                             <div class="{% if message.owner.id | hashids_encode == app.user.id | hashids_encode %} chat-message-left {% else %} chat-message-right {% endif %}">
                                 <img class="message-avatar"
-                                     src="{{ asset(message.owner.getProfileImagePath) }}"
+                                     src="{{ message.owner | profile_image }}"
                                      alt="{{ message.owner }}">
                                 <div class="message">
                                     <a class="message-author"

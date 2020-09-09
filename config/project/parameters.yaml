@@ -53,3 +53,4 @@ parameters:
         page: 1
         limit: 15
   hashid: '^[a-zA-Z0-9]{10}$'
+  default_user_image: 'images/user.png'

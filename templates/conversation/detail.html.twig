@@ -37,7 +37,7 @@
                                             {% endif %}
                                             <div class="{% if message.owner.id == app.user.id %} chat-message-left {% else %} chat-message-right {% endif %}">
                                                 <img class="message-avatar"
-                                                     src="{{ asset(message.owner.getProfileImagePath) }}"
+                                                     src="{{ message.owner | profile_image }}"
                                                      alt="{{ message.owner }}">
                                                 <div class="{{ conversationMessageUnreadClass }} message">
                                                     <a class="message-author" href="#"> {{ message.owner }} </a>
@@ -82,7 +82,7 @@
                                                 {% if participant.user.id != app.user.id %}
                                                     <div class="chat-user">
                                                         <img class="chat-avatar"
-                                                             src="{{ asset(participant.user.getProfileImagePath) }}"
+                                                             src="{{ participant.user | profile_image }}"
                                                              alt="">
                                                         <div class="chat-user-name">
                                                             {{ participant.user }}
@@ -93,7 +93,7 @@
                                                 {% if conversation.isOwner(app.user) == false %}
                                                     <div class="chat-user">
                                                         <img class="chat-avatar"
-                                                             src="{{ asset(conversation.owner.getProfileImagePath) }}"
+                                                             src="{{ conversation.owner | profile_image }}"
                                                              alt="">
                                                         <div class="chat-user-name">
                                                             {{ conversation.owner }}

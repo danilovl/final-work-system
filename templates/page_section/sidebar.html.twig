@@ -9,7 +9,7 @@
         <div class="clearfix"></div>
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="{{ asset(app.user.getProfileImagePath) }}"
+                <img src="{{ app.user | profile_image }}"
                      alt="profile image"
                      class="img-circle profile_img">
             </div>

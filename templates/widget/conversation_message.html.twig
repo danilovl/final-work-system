@@ -19,7 +19,7 @@
 				<li>
 					<a href="{{ path('conversation_detail', { 'id': message.conversation.id | hashids_encode }) }}">
 						<span class="image">
-							<img src="{{ asset(message.owner.getProfileImagePath) }}"
+							<img src="{{ message.owner | profile_image }}"
 								 alt="profile image"/>
 						</span>
 						<span class="message">

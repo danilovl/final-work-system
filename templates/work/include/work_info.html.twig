@@ -221,7 +221,7 @@
                                         </ul>
                                     </div>
                                     <div class="right col-xs-3 text-center">
-                                        <img src="{{ asset(work.supervisor.getProfileImagePath) }}"
+                                        <img src="{{ asset(work.supervisor | profile_image }}"
                                              alt=""
                                              class="img-circle img-responsive">
                                     </div>
@@ -296,7 +296,7 @@
                                             </ul>
                                         </div>
                                         <div class="right col-xs-3 text-center">
-                                            <img src="{{ asset(work.opponent.getProfileImagePath) }}"
+                                            <img src="{{ work.opponent | profile_image }}"
                                                  alt=""
                                                  class="img-circle img-responsive">
                                         </div>
@@ -374,7 +374,7 @@
                                             </ul>
                                         </div>
                                         <div class="right col-xs-3 text-center">
-                                            <img src="{{ asset(work.consultant.getProfileImagePath) }}"
+                                            <img src="{{ work.consultant | profile_image }}"
                                                  alt=""
                                                  class="img-circle img-responsive">
                                         </div>
