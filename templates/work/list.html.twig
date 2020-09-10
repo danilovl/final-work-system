@@ -123,7 +123,7 @@
 
                                                         {% if app.user.id != work.supervisor.id %}
                                                             <li>
-                                                                <img src="{{ asset(work.supervisor | profile_image }}"
+                                                                <img src="{{ work.supervisor | profile_image }}"
                                                                      class="avatar"
                                                                      alt="{{ work.supervisor }}">
                                                             </li>
