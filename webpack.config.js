@@ -54,7 +54,7 @@ Encore
             // uglify: Encore.isProduction(),
             uglify: false,
             sourceMap: false,
-            name: "breakpoints",
+            name: "main",
             outputPath: "js/",
             fileName: "[name].js",
             filesToConcat: [

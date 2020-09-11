@@ -170,12 +170,12 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                                 <button class="btn btn-success"
-                                        id="work_action">
+                                        id="work-button-action">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button class="btn btn-primary"
-                                        id="work_action_close">
+                                        id="work-button-action-close">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
@@ -210,8 +210,8 @@
             locale: '{{ app.request.locale }}'
         });
 
-        createEditContentAjax('#work_action');
-        createEditContentAjax('#work_action_close', true);
+        createEditContentAjax('#work-button-action');
+        createEditContentAjax('#work-button-action-close', true);
 
         $("#show-deadline-calendar-helper-date").click(function () {
             $("#deadline-calendar-helper-date").show();

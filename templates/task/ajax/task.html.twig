@@ -128,13 +128,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
-                                <button class="btn btn-success"
-                                        id="task_action">
+                                <button id="task-button-action"
+                                        class="btn btn-success">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
-                                <button class="btn btn-primary"
-                                        id="task_action_close">
+                                <button id="task-button-action-close"
+                                        class="btn btn-primary">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
@@ -161,8 +161,8 @@
         initTinymce(locale);
         initTooltip();
         initJsSwitch('.ajax .js-switch');
-        createEditContentAjax('#task_action');
-        createEditContentAjax('#task_action_close', true);
+        createEditContentAjax('#task-button-action');
+        createEditContentAjax('#task-button-action-close', true);
 
         $("#show-deadline-calendar-helper-date").click(function () {
             $("#deadline-calendar-helper-date").show();

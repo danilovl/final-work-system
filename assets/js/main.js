@@ -386,6 +386,10 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
             setTimeout(function () {
                 $('.validation-error').remove();
             }, 3000);
+
+            if (close) {
+                window.automaticModalWindowClose = true;
+            }
         });
     });
 }
@@ -504,6 +508,8 @@ function initAjaxDeleteContent() {
                 var loadingIcon = element.childNodes[1];
                 loadingIcon.classList.remove("hide");
 
+                window.automaticModalWindowClose = true;
+
                 $.ajax({
                     type: method,
                     url: url,
@@ -521,8 +527,8 @@ function initAjaxDeleteContent() {
                     }
                 }).done(function () {
                     loadingIcon.classList.add("hide");
-                    element.disabled = false
-                }).error(function () {
+                    element.disabled = false;
+                }).fail(function () {
                     loadingIcon.classList.add("hide");
                     element.disabled = false;
 

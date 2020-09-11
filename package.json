@@ -2,8 +2,9 @@
   "devDependencies": {
     "@symfony/webpack-encore": "^0.30.2",
     "bower": "^1.8.8",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.26.12",
     "core-js": "^3.0.0",
+    "cypress": "^5.1.0",
     "regenerator-runtime": "^0.13.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
@@ -15,7 +16,8 @@
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
-    "build": "encore production --progress"
+    "build": "encore production --progress",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "animate.css": "^3.5.1",

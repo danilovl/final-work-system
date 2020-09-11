@@ -28,6 +28,8 @@ Features
   * Email notification of new events in the system
   * Multi languages
   * An API that covers most of the data
+  * Unit test
+  * Cypress test
   * and more other features
    
 Who is it for?
@@ -148,7 +150,7 @@ Change Redis server to `redis` in `config\project\services\redis.yaml`:
     - 'redis'
 ```
 
-Change DATABASE_URL in `.env` for docker:
+Change DATABASE_URL in `.envl` for docker:
 
 ``` env
 DATABASE_URL=mysql://final_work_system:password@mariadb:3306/final_work_system

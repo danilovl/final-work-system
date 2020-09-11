@@ -4,7 +4,7 @@
             {{ 'app.text.search_form' | trans() }}
         </h2>
         <ul class="nav navbar-right panel_toolbox">
-            <li>
+            <li id="toggle-search-work-form">
                 <a class="collapse-link">
                     {% if openSearchTab == false %}
                         <i class="fa fa-chevron-down"></i>
@@ -86,6 +86,7 @@
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <input type="submit"
+                       id="search-work-button"
                        class="btn btn-success"
                        value="{{ 'app.form.action.search' | trans() }}"/>
             </div>

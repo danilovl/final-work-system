@@ -1,5 +1,6 @@
 {% if work.isSupervisor(app.user) %}
     <a class="btn btn-app"
+       id="task-create"
        data-toggle="modal"
        data-target="#modalWindow"
        href="{{ path('task_create', { 'id': work.id | hashids_encode }) }}">
@@ -10,6 +11,7 @@
 
  {% if work.authorSupervisor(app.user) %}
      <a class="btn btn-app"
+        id="version-create"
         data-toggle="modal"
         data-target="#modalWindow"
         href="{{ path('version_create', { 'id': work.id | hashids_encode }) }}">

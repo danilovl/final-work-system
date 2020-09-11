@@ -1,0 +1,22 @@
+{
+  "env": {
+    "domain": "http://work-system.local",
+    "workData": {
+      "hashId": ""
+    },
+    "loginData": {
+      "failed": {
+        "username": "username",
+        "password": "password"
+      },
+      "student": {
+        "username": "username",
+        "password": "password"
+      },
+      "supervisor": {
+        "username": "username",
+        "password": "password"
+      }
+    }
+  }
+}

@@ -59,12 +59,12 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                                 <button class="btn btn-success"
-                                        id="edit_user_action">
+                                        id="user-button-action">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionTitle }}
                                 </button>
                                 <button class="btn btn-primary"
-                                        id="edit_user_action_close">
+                                        id="user-button-action-close">
                                     <i class="fa fa-refresh fa-spin hide"></i>
                                     {{ buttonActionCloseTitle }}
                                 </button>
@@ -85,7 +85,7 @@
         $("#user_groups").select2({
             width: '100%'
         });
-        createEditContentAjax('#edit_user_action');
-        createEditContentAjax('#edit_user_action_close', true);
+        createEditContentAjax('#user-button-action');
+        createEditContentAjax('#user-button-action-close', true);
     });
 </script>
