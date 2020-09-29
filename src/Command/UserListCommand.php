@@ -68,17 +68,15 @@ HELP
             ->getRepository(User::class)
             ->findBy([], ['id' => 'DESC'], $maxResults);
 
-        $usersAsPlainArrays = array_map(function (User $user) {
-            return [
-                $user->getId(),
-                $user->isEnabled(),
-                $user->getFirstName(),
-                $user->getLastName(),
-                $user->getUsername(),
-                $user->getEmail(),
-                implode(', ', $user->getRoles()),
-            ];
-        }, $allUsers);
+        $usersAsPlainArrays = array_map(fn(User $user) => [
+            $user->getId(),
+            $user->isEnabled(),
+            $user->getFirstName(),
+            $user->getLastName(),
+            $user->getUsername(),
+            $user->getEmail(),
+            implode(', ', $user->getRoles()),
+        ], $allUsers);
 
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
