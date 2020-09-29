@@ -41,10 +41,6 @@ final class LocaleType extends AbstractType
         }
 
         return $shoices;
-
-//        return array_map(function (string $locale){
-//            return "app.roles.{$locale}" => $locale;
-//        }, $this->locales)
     }
 
     public function getParent(): string
