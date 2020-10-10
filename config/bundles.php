@@ -20,5 +20,6 @@ return [
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Overblog\GraphiQLBundle\OverblogGraphiQLBundle::class => ['dev' => true],
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
+    Danilovl\PermissionMiddlewareBundle\PermissionMiddlewareBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true],
 ];

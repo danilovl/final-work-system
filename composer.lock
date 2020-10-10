@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fa402264cea201695927c8244d234fd",
+    "content-hash": "9aaae4e6a92c6e51e75400d8732a82c5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -90,6 +90,45 @@
                 "twig extension"
             ],
             "time": "2020-06-11T20:15:16+00:00"
+        },
+        {
+            "name": "danilovl/permission-middleware-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danilovl/permission-middleware-bundle.git",
+                "reference": "a563148d69ea2f3c835da30c212b1d72ed97ffae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/a563148d69ea2f3c835da30c212b1d72ed97ffae",
+                "reference": "a563148d69ea2f3c835da30c212b1d72ed97ffae",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "^1.0",
+                "php": "^7.4.0",
+                "symfony/framework-bundle": "^5.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Danilovl\\PermissionMiddlewareBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Vladimir Danilov"
+                }
+            ],
+            "description": "Symfony bundle provides simple mechanism control permission for class or his method.",
+            "keywords": [
+                "bundle",
+                "php",
+                "symfony"
+            ],
+            "time": "2020-10-10T08:52:30+00:00"
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
@@ -9073,6 +9112,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-06-27T06:36:25+00:00"
         },
         {
@@ -10587,7 +10627,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "danilovl/permission-middleware-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

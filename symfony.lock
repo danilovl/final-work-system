@@ -5,6 +5,9 @@
     "danilovl/parameter-bundle": {
         "version": "v2.2.1"
     },
+    "danilovl/permission-middleware-bundle": {
+        "version": "dev-master"
+    },
     "danilovl/render-service-twig-extension-bundle": {
         "version": "v2.0.1"
     },

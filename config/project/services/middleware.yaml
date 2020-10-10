@@ -6,11 +6,3 @@ services:
       - "@app.translator"
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}
-
-  app.middleware.permission:
-    class: App\EventListener\Middleware\PermissionListener
-    arguments:
-      - "@annotation_reader"
-      - "@security.helper"
-    tags:
-      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}

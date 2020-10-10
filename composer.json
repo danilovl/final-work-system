@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "danilovl/parameter-bundle": "^2.2",
+        "danilovl/permission-middleware-bundle": "dev-master",
         "danilovl/render-service-twig-extension-bundle": "2.0.3",
         "easycorp/easyadmin-bundle": "^3.0",
         "gedmo/doctrine-extensions": "^2.4",

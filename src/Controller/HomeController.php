@@ -12,7 +12,6 @@
 
 namespace App\Controller;
 
-use App\Annotation\PermissionMiddleware;
 use App\Helper\SystemEventHelper;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -21,9 +20,6 @@ use Symfony\Component\HttpFoundation\{
 
 class HomeController extends BaseController
 {
-    /**
-     * @PermissionMiddleware(roles={"ROLE_USER"})
-     */
     public function index(Request $request): Response
     {
         $user = $this->getUser();
