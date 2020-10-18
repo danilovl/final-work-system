@@ -47,7 +47,7 @@ class AjaxRequestListener
             return;
         }
 
-        list($controller, $methodName) = $controllers;
+        [$controller, $methodName] = $controllers;
 
         $reflectionClass = new ReflectionClass($controller);
         /** @var AjaxRequestMiddleware $classAnnotation */
@@ -67,8 +67,6 @@ class AjaxRequestListener
         if ($methodAnnotation !== null) {
             $this->handleRequest($event, $methodAnnotation, $request);
         }
-
-        return;
     }
 
     private function handleRequest(
