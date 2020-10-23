@@ -13,7 +13,7 @@ namespace App\GraphQL\Type;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use App\Constant\DateTimeConstant;
+use App\Constant\DateFormatConstant;
 use GraphQL\Error\InvariantViolation;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
@@ -35,12 +35,12 @@ class DateTimeType extends ScalarType
             throw new InvariantViolation('DateTime is not an instance of DateTimeInterface: ' . Utils::printSafe($value));
         }
 
-        return $value->format(DateTimeConstant::MYSQL);
+        return $value->format(DateFormatConstant::DATABASE);
     }
 
     public function parseValue($value): ?DateTimeInterface
     {
-        return DateTimeImmutable::createFromFormat(DateTimeConstant::MYSQL, $value) ?: null;
+        return DateTimeImmutable::createFromFormat(DateFormatConstant::DATABASE, $value) ?: null;
     }
 
     public function parseLiteral($valueNode, ?array $variables = null): ?string

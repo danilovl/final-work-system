@@ -13,8 +13,10 @@
 namespace App\Model\Event;
 
 use App\Services\EntityManagerService;
+use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
 use App\Constant\{
+    DateFormatConstant,
     EventTypeConstant,
     WorkStatusConstant,
     WorkUserTypeConstant,
@@ -35,8 +37,8 @@ use App\Entity\User;
 
 class EventCalendarFacade
 {
-    private const CALENDAR_EVENT_RESERVED_COLOR = '#f00';
-    private const CALENDAR_EVENT_DETAIL_RESERVED_COLOR = '#4bd44d';
+    private string $calendarEventReservedColor;
+    private string $calendarEventDetailReservedColor;
 
     private EntityManagerService $em;
     private RouterInterface $router;
@@ -46,12 +48,16 @@ class EventCalendarFacade
     public function __construct(
         EntityManagerService $entityManager,
         RouterInterface $router,
-        HashidsInterface $hashIds
+        HashidsInterface $hashIds,
+        ParameterService $parameterService
     ) {
         $this->em = $entityManager;
         $this->router = $router;
         $this->hashIds = $hashIds;
         $this->eventRepository = $entityManager->getRepository(Event::class);
+
+        $this->calendarEventReservedColor = $parameterService->get('event_calendar.reserved_color');
+        $this->calendarEventDetailReservedColor = $parameterService->get('event_calendar.detail_reserved_color');
     }
 
     public function getEventsByOwner(
@@ -75,8 +81,8 @@ class EventCalendarFacade
                     $event['id'] = $this->hashIds->encode($appointment->getId());
                     $event['title'] = (string) $appointment;
                     $event['color'] = $appointment->getType()->getColor();
-                    $event['start'] = $appointment->getStart()->format('Y-m-d H:i:s');
-                    $event['end'] = $appointment->getEnd()->format('Y-m-d H:i:s');
+                    $event['start'] = $appointment->getStart()->format(DateFormatConstant::DATABASE);
+                    $event['end'] = $appointment->getEnd()->format(DateFormatConstant::DATABASE);
                     $event['detail_url'] = $this->router->generate('event_detail', [
                         'id' => $this->hashIds->encode($appointment->getId())
                     ]);
@@ -87,7 +93,7 @@ class EventCalendarFacade
                     $participant = $appointment->getParticipant();
 
                     if ($participant) {
-                        $event['color'] = self::CALENDAR_EVENT_RESERVED_COLOR;
+                        $event['color'] = $this->calendarEventReservedColor;
                     }
 
                     $events[] = $event;
@@ -127,8 +133,8 @@ class EventCalendarFacade
                     foreach ($supervisorAppointments as $supervisorAppointment) {
                         $event = [];
                         $event['id'] = $this->hashIds->encode($supervisorAppointment->getId());
-                        $event['start'] = $supervisorAppointment->getStart()->format('Y-m-d H:i:s');
-                        $event['end'] = $supervisorAppointment->getEnd()->format('Y-m-d H:i:s');
+                        $event['start'] = $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE);
+                        $event['end'] = $supervisorAppointment->getEnd()->format(DateFormatConstant::DATABASE);
 
                         if ($supervisorAppointment->getAddress()) {
                             $event['title'] = $supervisorAppointment->getAddress()->getName() . "\n" . $supervisorAppointment->getOwner();
@@ -139,7 +145,7 @@ class EventCalendarFacade
                         $participant = $supervisorAppointment->getParticipant();
                         if ($participant) {
                             if ($participant->getUser()->getId() === $user->getId()) {
-                                $event['color'] = self::CALENDAR_EVENT_RESERVED_COLOR;
+                                $event['color'] = $this->calendarEventReservedColor;
                                 $event['title'] = $event['title'] . "\n" . (string) $participant;
                                 $event['detail_url'] = $this->router->generate('event_detail', [
                                     'id' => $this->hashIds->encode($supervisorAppointment->getId())
@@ -148,7 +154,7 @@ class EventCalendarFacade
                                 continue;
                             }
                         } else {
-                            if (DateHelper::actualDay() > $supervisorAppointment->getStart()->format('Y-m-d H:i:s')) {
+                            if (DateHelper::actualDay() > $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE)) {
                                 continue;
                             }
                             $event['reservation_url'] = $this->router->generate('event_calendar_reservation_ajax', [
@@ -179,7 +185,7 @@ class EventCalendarFacade
         ]);
 
         if ($event->getParticipant() !== null) {
-            $eventCalendar['color'] = self::CALENDAR_EVENT_RESERVED_COLOR;
+            $eventCalendar['color'] = $this->calendarEventReservedColor;
             $eventCalendar['detail_url'] = $this->router->generate('event_detail', [
                 'id' => $this->hashIds->encode($event->getId())
             ]);
@@ -202,7 +208,7 @@ class EventCalendarFacade
         $participant = $event->getParticipant();
 
         if ($participant) {
-            $eventCalendar['color'] = self::CALENDAR_EVENT_RESERVED_COLOR;
+            $eventCalendar['color'] = $this->calendarEventReservedColor;
         }
 
         return $eventCalendar;
@@ -219,14 +225,14 @@ class EventCalendarFacade
             $participant = $userEvent->getParticipant();
 
             if ($participant) {
-                $eventCalendar['color'] = self::CALENDAR_EVENT_RESERVED_COLOR;
+                $eventCalendar['color'] = $this->calendarEventReservedColor;
                 $eventCalendar['detail_url'] = $this->router->generate('event_detail', [
                     'id' => $this->hashIds->encode($userEvent->getId())
                 ]);
             }
 
             if ($userEvent->getId() === $event->getId()) {
-                $eventCalendar['color'] = self::CALENDAR_EVENT_DETAIL_RESERVED_COLOR;
+                $eventCalendar['color'] = $this->calendarEventDetailReservedColor;
             }
 
             $events[] = $eventCalendar;
@@ -242,8 +248,8 @@ class EventCalendarFacade
         $eventCalendar['id'] = $this->hashIds->encode($event->getId());
         $eventCalendar['title'] = $event->toString();
         $eventCalendar['color'] = $event->getType()->getColor();
-        $eventCalendar['start'] = $event->getStart()->format('Y-m-d H:i:s');
-        $eventCalendar['end'] = $event->getEnd()->format('Y-m-d H:i:s');
+        $eventCalendar['start'] = $event->getStart()->format(DateFormatConstant::DATABASE);
+        $eventCalendar['end'] = $event->getEnd()->format(DateFormatConstant::DATABASE);
 
         return $eventCalendar;
     }

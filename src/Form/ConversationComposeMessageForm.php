@@ -12,6 +12,7 @@
 
 namespace App\Form;
 
+use App\Constant\DateFormatConstant;
 use App\Entity\Conversation;
 use App\Form\Constraint\ConversationMessageName;
 use App\Model\ConversationMessage\ConversationComposeMessageModel;
@@ -122,7 +123,7 @@ class ConversationComposeMessageForm extends AbstractType
                     $recipient->getFullNameDegree(),
                     mb_strtolower($type),
                     $work->getTitle(),
-                    $work->getDeadline()->format('Y-m-d')
+                    $work->getDeadline()->format(DateFormatConstant::DATE)
                 );
             }
         }

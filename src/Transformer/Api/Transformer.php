@@ -12,6 +12,7 @@
 
 namespace App\Transformer\Api;
 
+use App\Constant\DateFormatConstant;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
 use ReflectionClass;
@@ -57,7 +58,7 @@ class Transformer implements TransformerInterface
                     $result[$field] = $this->transform($domain, $subFields, $fieldValue);
                 } else {
                     if ($fieldValue instanceof DateTime) {
-                        $fieldValue = $fieldValue->format('Y-m-d');
+                        $fieldValue = $fieldValue->format(DateFormatConstant::DATE);
                     }
 
                     $result[$field] = $fieldValue;

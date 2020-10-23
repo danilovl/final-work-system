@@ -51,7 +51,6 @@ class UnreadConversationMessageWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment
-            ->render('widget/conversation_message.html.twig', $this->getRenderParameters());
+        return $this->environment->render('widget/conversation_message.html.twig', $this->getRenderParameters());
     }
 }

@@ -12,6 +12,7 @@
 
 namespace App\Form\Type;
 
+use App\Constant\DateFormatConstant;
 use App\Form\Constraint\FirstWeekDay;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -28,7 +29,7 @@ final class FirstWeekDayType extends AbstractType
     {
         $resolver->setDefaults([
             'widget' => 'single_text',
-            'format' => 'yyyy-MM-dd',
+            'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
             'html5' => false
         ]);
 

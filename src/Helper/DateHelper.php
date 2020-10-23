@@ -12,6 +12,7 @@
 
 namespace App\Helper;
 
+use App\Constant\DateFormatConstant;
 use DatePeriod;
 use DateTime;
 use DateInterval;
@@ -23,7 +24,7 @@ class DateHelper
      */
     public static function actualDay()
     {
-        return date('Y-m-d H:i:s');
+        return date(DateFormatConstant::DATABASE);
     }
 
     public static function actualWeekStartByDate(DateTime $date): DateTime
@@ -39,7 +40,7 @@ class DateHelper
         $cur_time = time();
         $week_start = date('w') === 1 ? strtotime('0 hours 0 seconds') : strtotime('last Monday', mktime(0, 0, 0, date('n', $cur_time), date('j', $cur_time), date('Y', $cur_time)));
 
-        return date('Y-m-d H:i:s', $week_start);
+        return date(DateFormatConstant::DATABASE, $week_start);
     }
 
     /**
@@ -51,7 +52,7 @@ class DateHelper
         $week_start = date('w') === 1 ? strtotime('0 hours 0 seconds') : strtotime('last Monday', mktime(0, 0, 0, date('n', $cur_time), date('j', $cur_time), date('Y', $cur_time)));
         $week_end = $week_start + 6 * 24 * 60 * 60;
 
-        return date('Y-m-d H:i:s', $week_end);
+        return date(DateFormatConstant::DATABASE, $week_end);
     }
 
     public static function datePeriod($from, $to, $mode = false): array
@@ -63,7 +64,7 @@ class DateHelper
         $period = new DatePeriod($from, new DateInterval('P1D'), $to);
 
         $arrayOfDates = array_map(static function ($item) {
-            return $item->format('Y-m-d');
+            return $item->format(DateFormatConstant::DATE);
         }, iterator_to_array($period));
 
         if ($mode === true) {
@@ -86,8 +87,7 @@ class DateHelper
         $nextWeek = strtotime($week);
         $nextWeek += 7 * 24 * 60 * 60;
 
-        return date('Y-m-d H:i:s', $nextWeek);
-
+        return date(DateFormatConstant::DATABASE, $nextWeek);
     }
 
     /**
@@ -99,7 +99,7 @@ class DateHelper
         $previousWeek = strtotime($week);
         $previousWeek -= 7 * 24 * 60 * 60;
 
-        return date('Y-m-d H:i:s', $previousWeek);
+        return date(DateFormatConstant::DATABASE, $previousWeek);
     }
 
     /**
@@ -111,7 +111,7 @@ class DateHelper
         $endWeek = strtotime($week);
         $endWeek += 6 * 24 * 60 * 60;
 
-        return date('Y-m-d H:i:s', $endWeek);
+        return date(DateFormatConstant::DATABASE, $endWeek);
     }
 
     /**
@@ -151,7 +151,7 @@ class DateHelper
      */
     public static function firstDayMonth()
     {
-        return date('Y-m-d H:i:s', strtotime('first day of this month'));
+        return date(DateFormatConstant::DATABASE, strtotime('first day of this month'));
     }
 
     /**
@@ -159,7 +159,7 @@ class DateHelper
      */
     public static function lastDayMonth()
     {
-        return date('Y-m-d H:i:s', strtotime('last day of this month'));
+        return date(DateFormatConstant::DATABASE, strtotime('last day of this month'));
     }
 
     /**
@@ -169,7 +169,7 @@ class DateHelper
      */
     public static function plusDayDate($date, $quantity)
     {
-        return date('Y-m-d H:i:s', strtotime($date . ' + ' . $quantity . ' days'));
+        return date(DateFormatConstant::DATABASE, strtotime($date . ' + ' . $quantity . ' days'));
     }
 
     /**
@@ -179,7 +179,7 @@ class DateHelper
      */
     public static function minusDayDate($date, $quantity)
     {
-        return date('Y-m-d H:i:s', strtotime($date . ' - ' . $quantity . ' days'));
+        return date(DateFormatConstant::DATABASE, strtotime($date . ' - ' . $quantity . ' days'));
     }
 }
  

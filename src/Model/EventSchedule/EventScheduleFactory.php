@@ -12,6 +12,7 @@
 
 namespace App\Model\EventSchedule;
 
+use App\Constant\DateFormatConstant;
 use DateTime;
 use App\Model\BaseModelFactory;
 use App\Entity\{
@@ -47,17 +48,16 @@ class EventScheduleFactory extends BaseModelFactory
                 $event->setAddress($address);
             }
 
-            $startDate = DateHelper::plusDayDate(
-                $startDate->format('Y-m-d') . ' ' . $template->getStart()->format('H:i:s'),
-                $template->getDay()
+            $dateFormat = sprintf('%s %s',
+                $startDate->format(DateFormatConstant::DATE),
+                $template->getStart()->format(DateFormatConstant::TIME)
             );
+
+            $startDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
             $start = new DateTime($startDate);
             $event->setStart($start);
 
-            $endDate = DateHelper::plusDayDate(
-                $startDate->format('Y-m-d') . ' ' . $template->getEnd()->format('H:i:s'),
-                $template->getDay()
-            );
+            $endDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
             $end = new DateTime($endDate);
             $event->setEnd($end);
 

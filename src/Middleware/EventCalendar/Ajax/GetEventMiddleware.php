@@ -12,6 +12,7 @@
 
 namespace App\Middleware\EventCalendar\Ajax;
 
+use App\Constant\DateFormatConstant;
 use App\Middleware\Interfaces\RequestMiddlewareInterface;
 use App\Exception\AjaxRuntimeException;
 use App\Helper\DateHelper;
@@ -29,8 +30,8 @@ class GetEventMiddleware implements RequestMiddlewareInterface
             throw new AjaxRuntimeException('Empty type');
         }
 
-        if (DateHelper::validateDate('Y-m-d H:i', $startDate) === false ||
-            DateHelper::validateDate('Y-m-d H:i', $endDate) === false
+        if (DateHelper::validateDate(DateFormatConstant::DATE_TIME, $startDate) === false ||
+            DateHelper::validateDate(DateFormatConstant::DATE_TIME, $endDate) === false
         ) {
             throw new AjaxRuntimeException('Bad format date');
         }

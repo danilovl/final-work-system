@@ -23,7 +23,7 @@ class SeoExtension extends AbstractExtension
         return [
             new TwigFunction('set_seo_title', [SeoRuntime::class, 'setTitle'], ['is_safe' => ['html']]),
             new TwigFunction('seo_title', [SeoRuntime::class, 'getTitle'], ['is_safe' => ['html']]),
-            new TwigFunction('seo_meta_data', [SeoRuntime::class, 'getMetaData'], ['is_safe' => ['html']]),
+            new TwigFunction('seo_meta_data', [SeoRuntime::class, 'getMetaData'], ['is_safe' => ['html']])
         ];
     }
 }

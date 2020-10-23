@@ -12,6 +12,7 @@
 
 namespace App\Form;
 
+use App\Constant\DateFormatConstant;
 use DateTime;
 use App\Model\WorkSearch\WorkSearchModel;
 use App\Entity\User;
@@ -79,12 +80,8 @@ class WorkSearchForm extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'choices' => $options['deadlines'],
-                'choice_label' => static function (DateTime $deadline): string {
-                    return (string)$deadline->format('Y-m-d');
-                },
-                'choice_value' => static function (DateTime $deadline): string {
-                    return (string)$deadline->format('Y-m-d');
-                }
+                'choice_label' => static fn(DateTime $deadline): string => (string) $deadline->format(DateFormatConstant::DATE),
+                'choice_value' => static fn(DateTime $deadline): string => (string) $deadline->format(DateFormatConstant::DATE)
             ]);
     }
 

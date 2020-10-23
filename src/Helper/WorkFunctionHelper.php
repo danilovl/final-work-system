@@ -12,6 +12,7 @@
 
 namespace App\Helper;
 
+use App\Constant\DateFormatConstant;
 use App\Entity\{
     Work,
     WorkCategory
@@ -25,7 +26,7 @@ class WorkFunctionHelper
 
         /** @var Work $work */
         foreach ($works as $work) {
-            $deadline = $work->getDeadline()->format('Y-m-d');
+            $deadline = $work->getDeadline()->format(DateFormatConstant::DATE);
 
             if (!isset($deadlineGroup[$deadline])) {
                 $deadlineGroup[$deadline] = [];

@@ -12,7 +12,10 @@
 
 namespace App\Form\Constraint;
 
-use App\Constant\EventTypeConstant;
+use App\Constant\{
+    EventTypeConstant,
+    DateFormatConstant
+};
 use App\Model\Event\EventModel;
 use Symfony\Component\Validator\{
     Constraint,
@@ -53,7 +56,7 @@ class EventTimeValidator extends ConstraintValidator
         if ($eventModel->start === $eventModel->end) {
             $this->context
                 ->buildViolation('This value should not be equal to {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $eventModel->start->format('Y-m-d H:i'))
+                ->setParameter('{{ compared_value }}', $eventModel->start->format(DateFormatConstant::DATE_TIME))
                 ->atPath('end')
                 ->addViolation();
         }
@@ -61,7 +64,7 @@ class EventTimeValidator extends ConstraintValidator
         if ($eventModel->start > $eventModel->end) {
             $this->context
                 ->buildViolation('This value should be greater than {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $eventModel->start->format('Y-m-d H:i'))
+                ->setParameter('{{ compared_value }}', $eventModel->start->format(DateFormatConstant::DATE_TIME))
                 ->atPath('start')
                 ->addViolation();
         }

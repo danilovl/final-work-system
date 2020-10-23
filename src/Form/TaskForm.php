@@ -12,6 +12,7 @@
 
 namespace App\Form;
 
+use App\Constant\DateFormatConstant;
 use App\Model\Task\TaskModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
@@ -50,7 +51,7 @@ class TaskForm extends AbstractType
                 'required' => true,
                 'html5' => false,
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
                 'constraints' => [
                     new NotBlank
                 ]

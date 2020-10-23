@@ -2,24 +2,19 @@ services:
   #  Form
   app.form.work:
     class: App\Form\WorkForm
-    arguments:
-      - '@app.data_grid.work_status'
-      - '@app.data_grid.work_category'
-      - '@app.data_grid.user'
+    autowire: true
     tags:
       - { name: form.type }
 
   app.form.document:
     class: App\Form\DocumentForm
-    arguments:
-      - '@app.data_grid.media_category'
+    autowire: true
     tags:
       - { name: form.type }
 
   app.form.conversation_compose_message:
     class: App\Form\ConversationComposeMessageForm
-    arguments:
-      - '@app.translator'
+    autowire: true
     tags:
       - { name: form.type }
 
@@ -27,6 +22,12 @@ services:
     class: App\Form\Type\LocaleType
     arguments:
       - '%locales%'
+    tags:
+      - { name: form.type }
+
+  app.form.profile_media:
+    class: App\Form\ProfileMediaForm
+    autowire: true
     tags:
       - { name: form.type }
 

@@ -12,7 +12,10 @@
 
 namespace App\Security\Voter;
 
-use App\Constant\VoterSupportConstant;
+use App\Constant\{
+    DateFormatConstant,
+    VoterSupportConstant
+};
 use App\Entity\{
     User,
     Event
@@ -91,7 +94,7 @@ class EventVoter extends Voter
     {
         return $event->getParticipant() === null &&
             $event->getType()->isRegistrable() &&
-            DateHelper::actualDay() < $event->getStart()->format('Y-m-d H:i:s');
+            DateHelper::actualDay() < $event->getStart()->format(DateFormatConstant::DATABASE);
     }
 
     private function switchToSkype(Event $event, User $user): bool

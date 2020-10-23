@@ -56,9 +56,7 @@ class EventScheduleTemplateForm extends AbstractType
             ->add('address', ChoiceType::class, [
                 'required' => false,
                 'choices' => $options['addresses'],
-                'choice_label' => static function (EventAddress $address): string {
-                    return $address->getName();
-                }
+                'choice_label' => static fn(EventAddress $address): string => $address->getName()
             ])
             ->add('start', TimeType::class, [
                 'required' => true,

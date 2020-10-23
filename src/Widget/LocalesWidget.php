@@ -45,7 +45,6 @@ class LocalesWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment
-            ->render('widget/locales.html.twig', $this->getRenderParameters());
+        return $this->environment->render('widget/locales.html.twig', $this->getRenderParameters());
     }
 }

@@ -54,3 +54,16 @@ parameters:
         limit: 15
   hashid: '^[a-zA-Z0-9]{10}$'
   default_user_image: 'images/user.png'
+  event_calendar:
+    reserved_color: '#f00'
+    detail_reserved_color: '#4bd44d'
+  constraints:
+    profile:
+      file:
+        maxSize: '500k'
+        mimeTypes: [ 'image/jpeg', 'image/png' ]
+      image:
+        minWidth: 200
+        maxWidth: 1200
+        minHeight: 200
+        maxHeight: 1200

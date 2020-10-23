@@ -44,7 +44,7 @@ class TwigExtension extends AbstractExtension
     {
         return [
             new TwigFilter('away_to', [AwayRuntime::class, 'to'], ['is_safe' => ['html']]),
-            new TwigFilter('profile_image', [$this, 'profileImage'], ['needs_environment' => true, 'is_safe' => ['html']]),
+            new TwigFilter('profile_image', [$this, 'profileImage'], ['needs_environment' => true, 'is_safe' => ['html']])
         ];
     }
 

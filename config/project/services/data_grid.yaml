@@ -6,11 +6,15 @@ services:
     arguments:
       - '@doctrine.orm.entity_manager'
 
+  'App\DataGrid\UserDataGrid': '@app.data_grid.user'
+
   app.data_grid.work_category:
     class: App\DataGrid\WorkCategoryDataGrid
     public: true
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  'App\DataGrid\WorkCategoryDataGrid': '@app.data_grid.work_category'
 
   app.data_grid.media_category:
     class: App\DataGrid\MediaCategoryDataGrid
@@ -18,8 +22,12 @@ services:
     arguments:
       - '@doctrine.orm.entity_manager'
 
+  'App\DataGrid\MediaCategoryDataGrid': '@app.data_grid.media_category'
+
   app.data_grid.work_status:
     class: App\DataGrid\WorkStatusDataGrid
     public: true
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  'App\DataGrid\WorkStatusDataGrid': '@app.data_grid.work_status'

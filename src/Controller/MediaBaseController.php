@@ -12,7 +12,10 @@
 
 namespace App\Controller;
 
-use App\Constant\MediaTypeConstant;
+use App\Constant\{
+    MediaTypeConstant,
+    DateFormatConstant
+};
 use App\Exception\RuntimeException;
 use App\Helper\{
     MediaHelper,
@@ -131,7 +134,7 @@ class MediaBaseController extends BaseController implements MediaInterface
         }
 
         $name = FunctionHelper::sanitizeFileName($media->getName());
-        $date = $media->getCreatedAt()->format('Y-m-d');
+        $date = $media->getCreatedAt()->format(DateFormatConstant::DATE);
         $extension = $media->getMimeType()->getExtension();
 
         if ($media->getType()->getId() === MediaTypeConstant::WORK_VERSION) {

@@ -28,9 +28,7 @@ class EventWorkReservationForm extends AbstractType
     {
         $builder->add('work', ChoiceType::class, [
             'choices' => $options['works'],
-            'choice_label' => static function (Work $work): string {
-                return $work->getTitle();
-            },
+            'choice_label' => static fn(Work $work): string => $work->getTitle(),
             'required' => true,
             'constraints' => [
                 new NotBlank

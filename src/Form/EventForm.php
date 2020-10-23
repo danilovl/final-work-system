@@ -12,6 +12,7 @@
 
 namespace App\Form;
 
+use App\Constant\DateFormatConstant;
 use App\Entity\{
     EventType,
     EventAddress,
@@ -34,7 +35,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class EventForm extends AbstractType
 {
     public const NAME = 'event';
-    public const DATE_FORMAT = 'yyyy-MM-dd HH:mm';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -55,23 +55,19 @@ class EventForm extends AbstractType
                 'required' => false,
                 'choices' => $options['addresses'],
                 'placeholder' => FormConstant::PLACEHOLDER,
-                'choice_label' => static function (EventAddress $address): string {
-                    return (string)$address;
-                }
+                'choice_label' => static fn(EventAddress $address): string => (string) $address
             ])
             ->add('participant', ChoiceType::class, [
                 'required' => false,
                 'choices' => $participants,
                 'placeholder' => FormConstant::PLACEHOLDER,
-                'choice_label' => static function (EventParticipant $participant): string {
-                    return (string)$participant;
-                },
+                'choice_label' => static fn(EventParticipant $participant): string => (string) $participant,
                 'preferred_choices' => $participants
             ])
             ->add('start', DateType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => self::DATE_FORMAT,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME,
                 'html5' => false,
                 'constraints' => [
                     new NotBlank
@@ -79,7 +75,7 @@ class EventForm extends AbstractType
             ])
             ->add('end', DateType::class, [
                 'widget' => 'single_text',
-                'format' => self::DATE_FORMAT,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME,
                 'required' => true,
                 'html5' => false,
                 'constraints' => [

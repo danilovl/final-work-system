@@ -57,7 +57,6 @@ class UnreadSystemEventWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment
-            ->render('widget/system_event.html.twig', $this->getRenderParameters());
+        return $this->environment->render('widget/system_event.html.twig', $this->getRenderParameters());
     }
 }

@@ -12,8 +12,12 @@
 
 namespace App\Form;
 
+use App\Constant\{
+    FormConstant,
+    DateFormatConstant,
+    UserRoleConstant
+};
 use Doctrine\ORM\QueryBuilder;
-use App\Constant\FormConstant;
 use App\Model\Work\WorkModel;
 use App\DataGrid\{
     UserDataGrid,
@@ -26,7 +30,6 @@ use App\Entity\{
     WorkStatus,
     WorkCategory
 };
-use App\Constant\UserRoleConstant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
@@ -75,17 +78,13 @@ class WorkForm extends AbstractType
                 'constraints' => [
                     new NotBlank
                 ],
-                'query_builder' => function (): QueryBuilder {
-                    return $this->workStatusDataGridHelper->queryBuilder();
-                },
+                'query_builder' => fn(): QueryBuilder => $this->workStatusDataGridHelper->queryBuilder(),
             ])
             ->add('categories', EntityType::class, [
                 'class' => WorkCategory::class,
                 'multiple' => true,
                 'required' => false,
-                'query_builder' => function () use ($user): QueryBuilder {
-                    return $this->workCategoryDataGridHelper->queryBuilderWorkCategoriesByOwner($user);
-                },
+                'query_builder' => fn(): QueryBuilder => $this->workCategoryDataGridHelper->queryBuilderWorkCategoriesByOwner($user),
             ])
             ->add('type', EntityType::class, [
                 'class' => WorkType::class,
@@ -100,38 +99,26 @@ class WorkForm extends AbstractType
                 'constraints' => [
                     new NotBlank
                 ],
-                'query_builder' => function (): QueryBuilder {
-                    return $this->userDataGridHelper->queryBuilderAllByRole(UserRoleConstant::STUDENT);
-                },
-                'choice_label' => static function (User $user): string {
-                    return sprintf('%s (%s)', $user->getFullNameDegree(), $user->getUsername());
-                }
+                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::STUDENT),
+                'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('opponent', EntityType::class, [
                 'class' => User::class,
                 'required' => false,
                 'placeholder' => FormConstant::PLACEHOLDER,
-                'query_builder' => function (): QueryBuilder {
-                    return $this->userDataGridHelper->queryBuilderAllByRole(UserRoleConstant::OPPONENT);
-                },
-                'choice_label' => static function (User $user): string {
-                    return sprintf('%s (%s)', $user->getFullNameDegree(), $user->getUsername());
-                }
+                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::OPPONENT),
+                'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('consultant', EntityType::class, [
                 'class' => User::class,
                 'required' => false,
                 'placeholder' => FormConstant::PLACEHOLDER,
-                'query_builder' => function (): QueryBuilder {
-                    return $this->userDataGridHelper->queryBuilderAllByRole(UserRoleConstant::CONSULTANT);
-                },
-                'choice_label' => static function (User $user): string {
-                    return sprintf('%s (%s)', $user->getFullNameDegree(), $user->getUsername());
-                }
+                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::CONSULTANT),
+                'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
                 'html5' => false,
                 'required' => true,
                 'constraints' => [
@@ -140,7 +127,7 @@ class WorkForm extends AbstractType
             ])
             ->add('deadlineProgram', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
                 'required' => false,
                 'html5' => false
             ]);
@@ -161,5 +148,15 @@ class WorkForm extends AbstractType
     public function getBlockPrefix(): string
     {
         return self::NAME;
+    }
+
+    private function callbackQueryBuilder(string $role): callable
+    {
+        return fn(): QueryBuilder => $this->userDataGridHelper->queryBuilderAllByRole($role);
+    }
+
+    private function callbackChoiceLabel(): callable
+    {
+        return static fn(User $user): string => sprintf('%s (%s)', $user->getFullNameDegree(), $user->getUsername());
     }
 }

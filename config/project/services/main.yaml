@@ -27,6 +27,8 @@ services:
     autowire: true
     public: true
 
+  'App\Services\TranslatorService': '@app.translator'
+
   app.user_password_encoder:
     class: Symfony\Component\Security\Core\Encoder\UserPasswordEncoder
     autowire: true

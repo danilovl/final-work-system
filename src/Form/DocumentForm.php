@@ -58,9 +58,7 @@ class DocumentForm extends AbstractType
                 'class' => MediaCategory::class,
                 'multiple' => true,
                 'required' => false,
-                'query_builder' => function () use ($user): QueryBuilder {
-                    return $this->categoryDataGridHelper->queryBuilderFindAllByOwner($user);
-                },
+                'query_builder' => fn(): QueryBuilder => $this->categoryDataGridHelper->queryBuilderFindAllByOwner($user),
                 'constraints' => [
                     new NotBlank
                 ]
