@@ -181,6 +181,11 @@ class BaseController extends AbstractController
         return $this->get('app.entity_manager')->getReference($entityName, $id);
     }
 
+    protected function getRepository(string $entityName)
+    {
+        return $this->get('app.entity_manager')->getRepository($entityName);
+    }
+
     protected function getParam(string $key)
     {
         return $this->get('danilovl.parameter')->get($key);

@@ -57,16 +57,12 @@ class ConversationController extends BaseController
         }
 
         $conversationModel = new ConversationComposeMessageModel;
-        $form = $this->createForm(ConversationComposeMessageForm::class, $conversationModel, [
-            'user' => $user,
-            'conversations' => $conversationParticipants
-        ]);
-
-        if ($user->isSupervisor() === false) {
-            $form->remove('name');
-        }
-
-        $form->handleRequest($request);
+        $form = $this
+            ->createForm(ConversationComposeMessageForm::class, $conversationModel, [
+                'user' => $user,
+                'conversations' => $conversationParticipants
+            ])
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $conversationService->processCreateConversation($user, $conversationModel);

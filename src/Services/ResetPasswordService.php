@@ -64,10 +64,7 @@ class ResetPasswordService
         User $user,
         string $verifier = null
     ): ResetPasswordTokenModel {
-        if ($verifier === null) {
-            $verifier = HashHelper::generateDefaultHash();
-        }
-
+        $verifier = $verifier ?? HashHelper::generateDefaultHash();
         $encodedData = json_encode([$verifier, $user->getId(), $expiresAt->getTimestamp()]);
 
         $resetPasswordModel = new ResetPasswordTokenModel;
@@ -97,7 +94,6 @@ class ResetPasswordService
     public function validateTokenAndFetchUser(string $fullToken): User
     {
         $resetRequest = $this->findResetPasswordRequest($fullToken);
-
         if ($resetRequest === null) {
             throw new InvalidResetPasswordTokenException;
         }
@@ -106,13 +102,12 @@ class ResetPasswordService
             throw new ExpiredResetPasswordTokenException;
         }
 
-        return  $resetRequest->getUser();
+        return $resetRequest->getUser();
     }
 
     public function removeResetRequest(string $fullToken): void
     {
         $request = $this->findResetPasswordRequest($fullToken);
-
         if ($request === null) {
             throw new InvalidResetPasswordTokenException();
         }
@@ -128,17 +123,12 @@ class ResetPasswordService
     private function hasUserHitThrottling(User $user): ?DateTime
     {
         $lastRequestDate = $this->resetPasswordFacade->getMostRecentNonExpiredRequestDate($user);
-
         if ($lastRequestDate === null) {
             return null;
         }
 
         $availableAt = (clone $lastRequestDate)->add(new DateInterval("PT{$this->requestThrottleTime}S"));
 
-        if ($availableAt > new DateTime('now')) {
-            return $availableAt;
-        }
-
-        return null;
+        return $availableAt > new DateTime ? $availableAt : null;
     }
 }

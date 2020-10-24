@@ -42,7 +42,7 @@ final class SimpleInformationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'inherit_data' => true,
+            'inherit_data' => true
         ]);
     }
 }

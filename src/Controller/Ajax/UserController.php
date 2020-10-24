@@ -18,7 +18,10 @@ use App\Constant\{
     AjaxJsonTypeConstant
 };
 use App\Controller\BaseController;
-use App\Form\UserForm;
+use App\Form\{
+    UserForm,
+    UserEditForm
+};
 use App\Model\User\UserModel;
 use App\Helper\FormValidationMessageHelper;
 use App\Entity\User;
@@ -67,9 +70,7 @@ class UserController extends BaseController
         User $user
     ): JsonResponse {
         $userModel = UserModel::fromUser($user);
-        $form = $this->createForm(UserForm::class, $userModel)
-            ->remove('username')
-            ->remove('role')
+        $form = $this->createForm(UserEditForm::class, $userModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

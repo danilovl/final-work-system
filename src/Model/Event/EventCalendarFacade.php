@@ -205,9 +205,7 @@ class EventCalendarFacade
             'id' => $this->hashIds->encode($event->getId())
         ]);
 
-        $participant = $event->getParticipant();
-
-        if ($participant) {
+        if ($event->getParticipant() !== null) {
             $eventCalendar['color'] = $this->calendarEventReservedColor;
         }
 
@@ -222,9 +220,7 @@ class EventCalendarFacade
         foreach ($userEvents as $userEvent) {
             $eventCalendar = $this->baseEventArray($userEvent);
 
-            $participant = $userEvent->getParticipant();
-
-            if ($participant) {
+            if ($userEvent->getParticipant() !== null) {
                 $eventCalendar['color'] = $this->calendarEventReservedColor;
                 $eventCalendar['detail_url'] = $this->router->generate('event_detail', [
                     'id' => $this->hashIds->encode($userEvent->getId())
@@ -243,14 +239,12 @@ class EventCalendarFacade
 
     private function baseEventArray(Event $event): array
     {
-        $eventCalendar = [];
-
-        $eventCalendar['id'] = $this->hashIds->encode($event->getId());
-        $eventCalendar['title'] = $event->toString();
-        $eventCalendar['color'] = $event->getType()->getColor();
-        $eventCalendar['start'] = $event->getStart()->format(DateFormatConstant::DATABASE);
-        $eventCalendar['end'] = $event->getEnd()->format(DateFormatConstant::DATABASE);
-
-        return $eventCalendar;
+        return [
+            'id' => $this->hashIds->encode($event->getId()),
+            'title' => $event->toString(),
+            'color' => $event->getType()->getColor(),
+            'start' => $event->getStart()->format(DateFormatConstant::DATABASE),
+            'end' => $event->getEnd()->format(DateFormatConstant::DATABASE)
+        ];
     }
 }

@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait CreateAbleTrait
 {
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private ?DateTime $createdAt = null;
 

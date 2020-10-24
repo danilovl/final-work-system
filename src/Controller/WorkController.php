@@ -26,7 +26,7 @@ use App\Constant\{
 };
 use App\Entity\Work;
 use App\Form\{
-    UserForm,
+    UserEditForm,
     WorkForm,
     WorkSearchForm
 };
@@ -240,9 +240,7 @@ class WorkController extends BaseController
         $author = $work->getAuthor();
         $userModel = UserModel::fromUser($author);
 
-        $form = $this->createForm(UserForm::class, $userModel)
-            ->remove('username')
-            ->remove('role')
+        $form = $this->createForm(UserEditForm::class, $userModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -344,7 +342,7 @@ class WorkController extends BaseController
                     'action' => $this->generateUrl('work_edit_ajax', [
                         'id' => $this->hashIdEncode($work->getId())
                     ]),
-                    'method' => Request::METHOD_POST,
+                    'method' => Request::METHOD_POST
                 ]);
                 break;
             default:

@@ -12,7 +12,8 @@
 
 namespace App\Form\Constraint;
 
-use App\Constant\DateFormatConstant;
+use App\Constant\CompareConstant;
+use App\Helper\CompareHelper;
 use DateTime;
 use App\Helper\DateHelper;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -42,7 +43,7 @@ class FirstWeekDayValidator extends ConstraintValidator
         }
 
         $startWeekTest = DateHelper::actualWeekStartByDate(clone $startDate);
-        if ($startDate->format(DateFormatConstant::DATE) !== $startWeekTest->format(DateFormatConstant::DATE)) {
+        if (CompareHelper::compareDateTime($startDate, $startWeekTest, CompareConstant::NOT_EQUAL)) {
             $this->context
                 ->buildViolation($this->translator->trans($constraint->message))
                 ->setTranslationDomain('messages')

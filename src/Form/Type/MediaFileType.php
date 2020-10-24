@@ -72,11 +72,7 @@ final class MediaFileType extends AbstractType
 
     private function uploadMediaRequired(Options $options): bool
     {
-        if ($options['uploadMedia']) {
-            return true;
-        }
-
-        return false;
+        return $options['uploadMedia'];
     }
 
     public function getParent(): string

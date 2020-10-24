@@ -12,6 +12,7 @@
 
 namespace App\Interfaces;
 
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Entity\{
     Work,
     Media
@@ -21,6 +22,6 @@ interface MediaInterface
 {
     public function createMedia(Media $media, int $mediaType, Work $work = null): void;
     public function editMedia(Media $media, Work $work = null): void;
-    public function downloadMedia(Media $media): void;
+    public function downloadMedia(Media $media): BinaryFileResponse;
     public function deleteMedia(Media $media): void;
 }

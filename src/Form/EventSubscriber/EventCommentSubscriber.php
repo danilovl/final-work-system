@@ -13,9 +13,10 @@
 namespace App\Form\EventSubscriber;
 
 use DateTime;
-use Excepton;
-use App\Entity\Event;
-use App\Entity\User;
+use App\Entity\{
+    User,
+    Event
+};
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\{
     FormEvent,
@@ -43,7 +44,7 @@ class EventCommentSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $formEvent): void
     {
         $form = $formEvent->getForm();
-        if (!$this->event->isOwner($this->user) && $this->event->getStart() < new DateTime('now')) {
+        if (!$this->event->isOwner($this->user) && $this->event->getStart() < new DateTime) {
             $form->remove('content');
         }
     }

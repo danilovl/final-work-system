@@ -12,8 +12,12 @@
 
 namespace App\Form\Constraint;
 
-use App\Constant\EventTypeConstant;
+use App\Constant\{
+    CompareConstant,
+    EventTypeConstant
+};
 use App\Entity\EventScheduleTemplate;
+use App\Helper\CompareHelper;
 use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
@@ -32,7 +36,7 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
             throw new UnexpectedTypeException($data, EventScheduleTemplate::class);
         }
 
-        if ($data->getStart() > $data->getEnd()) {
+        if (CompareHelper::compareDateTime($data->getStart(), $data->getEnd(), CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('app.form.validation.date_start_more_end')
                 ->setTranslationDomain('messages')
@@ -58,7 +62,7 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
                 }
         }
 
-        if ($data->getStart() == $data->getEnd()) {
+        if (CompareHelper::compareDateTime($data->getStart(), $data->getEnd(), CompareConstant::EQUAL)) {
             $this->context
                 ->buildViolation('This value should not be equal to {{ compared_value }}.')
                 ->setParameter('{{ compared_value }}', $data->getStart()->format('H:i'))
@@ -66,7 +70,7 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
                 ->addViolation();
         }
 
-        if ($data->getStart() > $data->getEnd()) {
+        if (CompareHelper::compareDateTime($data->getStart(), $data->getEnd(), CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('This value should be greater than {{ compared_value }}.')
                 ->setParameter('{{ compared_value }}', $data->getStart()->format('H:i'))

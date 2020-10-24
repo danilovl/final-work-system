@@ -21,8 +21,8 @@ use App\Controller\BaseController;
 use App\Entity\Work;
 use App\Model\Work\WorkModel;
 use App\Form\{
-    UserForm,
-    WorkForm
+    WorkForm,
+    UserEditForm
 };
 use App\Helper\FormValidationMessageHelper;
 use Symfony\Component\HttpFoundation\{
@@ -91,9 +91,7 @@ class WorkController extends BaseController
         $author = $work->getAuthor();
         $userModel = UserModel::fromUser($author);
 
-        $form = $this->createForm(UserForm::class, $userModel)
-            ->remove('username')
-            ->remove('role')
+        $form = $this->createForm(UserEditForm::class, $userModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -40,7 +40,7 @@ final class FirstWeekDayType extends AbstractType
     {
         $resolver->setNormalizer('constraints', static function (Options $options, $value): array {
             return array_merge($value, [
-                new FirstWeekDay,
+                new FirstWeekDay
             ]);
         });
     }

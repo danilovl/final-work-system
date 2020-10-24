@@ -69,6 +69,10 @@ class ConversationComposeMessageForm extends AbstractType
                     new NotBlank
                 ]
             ]);
+
+        if ($user->isSupervisor() === false) {
+            $builder->remove('name');
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

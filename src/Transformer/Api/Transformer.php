@@ -52,8 +52,7 @@ class Transformer implements TransformerInterface
                 }
 
                 if ($fieldValueClass !== null && isset($apiFields[$fieldValueClass])) {
-                    $subFields = $subFields ?? $this->parameterService
-                            ->get("api_fields.{$domain}.{$fieldValueClass}");
+                    $subFields = $subFields ?? $this->parameterService->get("api_fields.{$domain}.{$fieldValueClass}");
 
                     $result[$field] = $this->transform($domain, $subFields, $fieldValue);
                 } else {

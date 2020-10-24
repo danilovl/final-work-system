@@ -85,7 +85,7 @@ class ResetPasswordController extends BaseController
             );
 
             $user->setPassword($encodedPassword);
-            $this->getDoctrine()->getManager()->flush();
+            $this->flushEntity($encodedPassword);
 
             $this->cleanSessionAfterReset();
 
@@ -101,8 +101,7 @@ class ResetPasswordController extends BaseController
 
     private function processSendingPasswordResetEmail(string $email): RedirectResponse
     {
-        $user = $this->getDoctrine()
-            ->getRepository(User::class)
+        $user = $this->getRepository(User::class)
             ->findOneBy([
                 'email' => $email,
             ]);

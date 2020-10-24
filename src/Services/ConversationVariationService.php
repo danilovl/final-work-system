@@ -14,6 +14,7 @@ namespace App\Services;
 
 use App\Constant\WorkUserTypeConstant;
 use Danilovl\ParameterBundle\Services\ParameterService;
+use Doctrine\Common\Collections\Collection;
 use App\Entity\{
     Work,
     WorkStatus
@@ -40,8 +41,7 @@ class ConversationVariationService
         WorkStatus $workStatus
     ): array {
         $works = [];
-
-        $addWorks = function ($userWorks) use (&$works) {
+        $addWorks = function (Collection $userWorks) use (&$works): void {
             foreach ($userWorks as $work) {
                 if (!in_array($work, $works, true)) {
                     $works[] = $work;
@@ -77,7 +77,7 @@ class ConversationVariationService
         User $user
     ): array {
         $conversationUsers = [];
-        $addConversationUser = function ($workUsers) use (&$conversationUsers) {
+        $addConversationUser = function (array $workUsers) use (&$conversationUsers): void {
             foreach ($workUsers as $workUser) {
                 if (!in_array($workUser, $conversationUsers, true)) {
                     $conversationUsers[] = $workUser;
@@ -121,23 +121,20 @@ class ConversationVariationService
         User $userOne,
         User $userTwo
     ): bool {
-        $users = $this->getConversationsByWorkUser($work, $userOne);
-
-        return in_array($userTwo, $users, true);
+        return in_array(
+            $userTwo,
+            $this->getConversationsByWorkUser($work, $userOne),
+            true
+        );
     }
 
     private function getVariationType(
         string $type,
         bool $onlyValue = false
     ): array {
-        $permission = $this->getConversationVariationPermissions();
-        $variations = $permission[$type];
+        $variations = $this->getConversationVariationPermissions()[$type] ?? [];
 
-        if ($onlyValue === true) {
-            return array_values($variations);
-        }
-
-        return $variations;
+        return $onlyValue === true ? array_values($variations) : $variations;
     }
 
     public function getConversationVariationPermissions(): array

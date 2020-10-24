@@ -53,12 +53,12 @@ class EventCalendarController extends BaseController
         $startDate = new DateTime($request->get('start'));
         $endDate = new DateTime($request->get('end'));
 
-        $events = $this->get('app.facade.event_calendar')
-            ->getEventsByOwner(
-                $this->getUser(),
-                $request->get('type'),
-                $startDate, $endDate
-            );
+        $events = $this->get('app.facade.event_calendar')->getEventsByOwner(
+            $this->getUser(),
+            $request->get('type'),
+            $startDate,
+            $endDate
+        );
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS, [
             'events' => json_encode($events, JSON_PRETTY_PRINT),

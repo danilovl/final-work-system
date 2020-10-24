@@ -87,11 +87,9 @@ class ProfileController extends BaseController
     public function changeImage(Request $request): Response
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-
-        $media = $em->getRepository(Media::class)->findOneBy([
+        $media = $this->getRepository(Media::class)->findOneBy([
             'owner' => $user,
-            'type' => $em->getReference(MediaType::class, MediaTypeConstant::USER_PROFILE_IMAGE)
+            'type' => $this->getReference(MediaType::class, MediaTypeConstant::USER_PROFILE_IMAGE)
         ]);
 
         $mediaModel = new MediaModel;
@@ -103,7 +101,7 @@ class ProfileController extends BaseController
                 $uploadMedia = $mediaModel->uploadMedia;
                 $mimeType = $uploadMedia->getMimeType();
 
-                $mediaMimeType = $em->getRepository(MediaMimeType::class)->findOneBy(['name' => $mimeType]);
+                $mediaMimeType = $this->getRepository(MediaMimeType::class)->findOneBy(['name' => $mimeType]);
                 if ($mediaMimeType === null || empty($mediaMimeType)) {
                     throw new RuntimeException("FileMimeType don't exist");
                 }
@@ -149,7 +147,7 @@ class ProfileController extends BaseController
 
     public function changePassword(Request $request): Response
     {
-        $user = $this->get('app.user')->getUser();
+        $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }

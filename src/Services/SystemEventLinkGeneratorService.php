@@ -48,117 +48,99 @@ class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
                     'user' => $user,
                     'work' => $work
                 ]);
-                break;
             case SystemEventTypeConstant::WORK_EDIT:
                 return $this->twig->render('system_event/work_edit.html.twig', [
                     'user' => $user,
                     'work' => $work
                 ]);
-                break;
             case SystemEventTypeConstant::USER_EDIT:
                 return $this->twig->render('system_event/user_edit.html.twig', [
                     'user' => $user
                 ]);
-                break;
             case SystemEventTypeConstant::TASK_CREATE:
                 return $this->twig->render('system_event/task_create.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'task' => $task
                 ]);
-                break;
             case SystemEventTypeConstant::TASK_EDIT:
                 return $this->twig->render('system_event/task_edit.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'task' => $task
                 ]);
-                break;
             case SystemEventTypeConstant::TASK_COMPLETE:
                 return $this->twig->render('system_event/task_complete.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'task' => $task
                 ]);
-                break;
             case SystemEventTypeConstant::TASK_INCOMPLETE:
                 return $this->twig->render('system_event/task_incomplete.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'task' => $task
                 ]);
-                break;
             case SystemEventTypeConstant::TASK_NOTIFY_COMPLETE:
                 return $this->twig->render('system_event/task_notify_complete.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'task' => $task
                 ]);
-                break;
             case SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE:
                 return $this->twig->render('system_event/task_notify_incomplete.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'task' => $task
                 ]);
-                break;
             case SystemEventTypeConstant::VERSION_CREATE:
                 return $this->twig->render('system_event/version_create.twig', [
                     'user' => $user,
                     'work' => $work,
                     'version' => $version
                 ]);
-                break;
             case SystemEventTypeConstant::VERSION_EDIT:
                 return $this->twig->render('system_event/version_edit.twig', [
                     'user' => $user,
                     'work' => $work,
                     'version' => $version
                 ]);
-                break;
             case SystemEventTypeConstant::DOCUMENT_CREATE:
                 return $this->twig->render('system_event/document_create.html.twig', [
                     'user' => $user,
                     'work' => $work,
                     'document' => $document
                 ]);
-                break;
             case SystemEventTypeConstant::MESSAGE_CREATE:
                 return $this->twig->render('system_event/message_create.html.twig', [
                     'user' => $user,
                     'conversation' => $conversation
                 ]);
-                break;
             case SystemEventTypeConstant::EVENT_CREATE:
                 return $this->twig->render('system_event/event_create.html.twig', [
                     'user' => $user,
                     'event' => $event
                 ]);
-                break;
             case SystemEventTypeConstant::EVENT_EDIT:
                 return $this->twig->render('system_event/event_edit.html.twig', [
                     'user' => $user,
                     'event' => $event
                 ]);
-                break;
             case SystemEventTypeConstant::EVENT_SWITCH_SKYPE:
                 return $this->twig->render('system_event/event_switch_skype.html.twig', [
                     'user' => $user,
                     'event' => $event
                 ]);
-                break;
             case SystemEventTypeConstant::EVENT_COMMENT_CREATE:
                 return $this->twig->render('system_event/event_comment_create.html.twig', [
                     'user' => $user,
                     'event' => $event
                 ]);
-                break;
             case SystemEventTypeConstant::EVENT_COMMENT_EDIT:
                 return $this->twig->render('system_event/event_comment_edit.html.twig', [
                     'user' => $user,
                     'event' => $event
                 ]);
-                break;
             default:
                 throw new ConstantNotFoundException('Event type constant not found');
         }

@@ -34,7 +34,8 @@ use App\Entity\{
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    Response,
+    BinaryFileResponse
 };
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -152,8 +153,7 @@ class VersionController extends MediaBaseController
 
     public function detailContent(Media $version): Response
     {
-        $versionVoterSubject = (new VersionVoterSubject)
-            ->setMedia($version);
+        $versionVoterSubject = (new VersionVoterSubject)->setMedia($version);
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $versionVoterSubject, 'The work media does not exist');
 
@@ -170,16 +170,14 @@ class VersionController extends MediaBaseController
     public function download(
         Work $work,
         Media $media
-    ): Response {
+    ): BinaryFileResponse {
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $versionVoterSubject);
 
-        $this->downloadMedia($media);
-
-        return new Response;
+        return $this->downloadMedia($media);
     }
 
     /**
@@ -189,10 +187,8 @@ class VersionController extends MediaBaseController
     public function downloadGoogle(
         Work $work,
         Media $media
-    ): Response {
-        $this->downloadMedia($media);
-
-        return new Response;
+    ): BinaryFileResponse {
+        return $this->downloadMedia($media);
     }
 
     public function getVersionForm(
@@ -224,7 +220,7 @@ class VersionController extends MediaBaseController
                         'id' => $this->hashIdEncode($work->getId())
                     ]),
                     'method' => Request::METHOD_POST,
-                    'uploadMedia' => true,
+                    'uploadMedia' => true
                 ]);
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
@@ -237,7 +233,7 @@ class VersionController extends MediaBaseController
                         'id_work' => $this->hashIdEncode($work->getId()),
                         'id_media' => $this->hashIdEncode($media->getId())
                     ]),
-                    'method' => Request::METHOD_POST,
+                    'method' => Request::METHOD_POST
                 ]);
                 break;
             default:

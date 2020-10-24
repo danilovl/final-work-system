@@ -23,6 +23,7 @@ use App\Constant\{
 };
 use App\Form\{
     UserForm,
+    UserEditForm,
     WorkSearchStatusForm
 };
 use App\Helper\UserHelper;
@@ -87,8 +88,6 @@ class UserController extends BaseController
     ): Response {
         $userModel = UserModel::fromUser($user);
         $form = $this->getUserForm(ControllerMethodConstant::EDIT, $userModel)
-            ->remove('username')
-            ->remove('role')
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -111,9 +110,7 @@ class UserController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getUserForm(ControllerMethodConstant::EDIT_AJAX, $userModel, $user)
-                ->remove('username')
-                ->remove('role');
+            $form = $this->getUserForm(ControllerMethodConstant::EDIT_AJAX, $userModel, $user);
         }
 
         $this->get('app.seo_page')
@@ -207,7 +204,7 @@ class UserController extends BaseController
             'form' => $form->createView(),
             'openSearchTab' => $openSearchTab,
             'showSearchTab' => $showSearchTab,
-            'userHelper' => new UserHelper()
+            'userHelper' => new UserHelper
         ]);
     }
 
@@ -218,8 +215,11 @@ class UserController extends BaseController
     ): FormInterface {
         $parameters = [];
 
+        $formClass = UserForm::class;
         switch ($type) {
             case ControllerMethodConstant::EDIT:
+                $formClass = UserEditForm::class;
+                break;
             case ControllerMethodConstant::CREATE:
                 break;
             case ControllerMethodConstant::CREATE_AJAX:
@@ -229,6 +229,7 @@ class UserController extends BaseController
                 ];
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
+                $formClass = UserEditForm::class;
                 $parameters = [
                     'action' => $this->generateUrl('user_edit_ajax', [
                         'id' => $this->hashIdEncode($user->getId())
@@ -240,6 +241,6 @@ class UserController extends BaseController
                 throw new RuntimeException('Controller method type not found');
         }
 
-        return $this->createForm(UserForm::class, $userModel, $parameters);
+        return $this->createForm($formClass, $userModel, $parameters);
     }
 }

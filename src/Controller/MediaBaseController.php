@@ -21,6 +21,7 @@ use App\Helper\{
     MediaHelper,
     FunctionHelper
 };
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Entity\{
     Work,
     Media
@@ -124,7 +125,7 @@ class MediaBaseController extends BaseController implements MediaInterface
         $this->flushEntity();
     }
 
-    public function downloadMedia(Media $media): void
+    public function downloadMedia(Media $media): BinaryFileResponse
     {
         $filePath = $media->getWebPath();
         $isExistFile = (new Filesystem)->exists($filePath);
@@ -137,24 +138,16 @@ class MediaBaseController extends BaseController implements MediaInterface
         $date = $media->getCreatedAt()->format(DateFormatConstant::DATE);
         $extension = $media->getMimeType()->getExtension();
 
+        $fileName = sprintf('%s.%s', $name, $extension);
         if ($media->getType()->getId() === MediaTypeConstant::WORK_VERSION) {
             $type = $media->getWork() ? $media->getWork()->getType()->getShortcut() : '';
             $fileName = sprintf('%s_%s_%s.%s', $date, $type, $name, $extension);
-        } else {
-            $fileName = sprintf('%s.%s', $name, $extension);
         }
 
-        header('Content-Description: File Transfer');
-        header('Content-Type:' . $media->getMimeType());
-        header('Content-Disposition: attachment; filename=' . $fileName);
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . $media->getMediaSize());
-        @ob_clean();
-        flush();
-        readfile($filePath);
+        $response = $this->file($filePath, $fileName);
+        $response->headers->set('Content-Type', $media->getMimeType());
+
+        return $response->send();
     }
 
     public function deleteMedia(Media $media): void

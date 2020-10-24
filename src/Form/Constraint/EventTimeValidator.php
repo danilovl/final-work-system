@@ -12,7 +12,9 @@
 
 namespace App\Form\Constraint;
 
+use App\Helper\CompareHelper;
 use App\Constant\{
+    CompareConstant,
     EventTypeConstant,
     DateFormatConstant
 };
@@ -53,7 +55,7 @@ class EventTimeValidator extends ConstraintValidator
                 }
         }
 
-        if ($eventModel->start === $eventModel->end) {
+        if (CompareHelper::compareDateTime($eventModel->start, $eventModel->end, CompareConstant::EQUAL)) {
             $this->context
                 ->buildViolation('This value should not be equal to {{ compared_value }}.')
                 ->setParameter('{{ compared_value }}', $eventModel->start->format(DateFormatConstant::DATE_TIME))
@@ -61,7 +63,7 @@ class EventTimeValidator extends ConstraintValidator
                 ->addViolation();
         }
 
-        if ($eventModel->start > $eventModel->end) {
+        if (CompareHelper::compareDateTime($eventModel->start, $eventModel->end, CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('This value should be greater than {{ compared_value }}.')
                 ->setParameter('{{ compared_value }}', $eventModel->start->format(DateFormatConstant::DATE_TIME))

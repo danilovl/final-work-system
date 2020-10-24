@@ -63,11 +63,12 @@ class ConversationStatusService
             ->getQuery()
             ->getOneOrNullResult();
 
-        if ($conversationStatus !== null) {
-            $conversationStatus->setType($this->em->getReference(ConversationMessageStatusType::class, $status));
-
-            $this->em->persistAndFlush($conversationStatus);
+        if ($conversationStatus === null) {
+            return;
         }
+
+        $conversationStatus->setType($this->em->getReference(ConversationMessageStatusType::class, $status));
+        $this->em->persistAndFlush($conversationStatus);
     }
 
     public function isConversationMessageRead(
@@ -112,11 +113,12 @@ class ConversationStatusService
             ->getQuery()
             ->getOneOrNullResult();
 
-        if ($conversationMessageStatus !== null) {
-            $conversationMessageStatus->setType($this->em->getReference(ConversationMessageStatusType::class, $status));
-
-            $this->em->persistAndFlush($conversationMessageStatus);
+        if ($conversationMessageStatus === null) {
+            return;
         }
+
+        $conversationMessageStatus->setType($this->em->getReference(ConversationMessageStatusType::class, $status));
+        $this->em->persistAndFlush($conversationMessageStatus);
     }
 
     public function setReadConversationMessage(

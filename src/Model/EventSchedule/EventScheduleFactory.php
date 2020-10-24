@@ -54,12 +54,10 @@ class EventScheduleFactory extends BaseModelFactory
             );
 
             $startDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
-            $start = new DateTime($startDate);
-            $event->setStart($start);
+            $event->setStart(new DateTime($startDate));
 
             $endDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
-            $end = new DateTime($endDate);
-            $event->setEnd($end);
+            $event->setEnd(new DateTime($endDate));
 
             $this->em->persistAndFlush($event);
         }

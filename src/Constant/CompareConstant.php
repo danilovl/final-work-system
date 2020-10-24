@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-/**
+/*
  *
  * This file is part of the FinalWorkSystem project.
  * (c) Vladimir Danilov
@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Model\EmailNotificationQueue;
+namespace App\Constant;
 
-class EmailNotificationQueueModel
+class CompareConstant
 {
-    public string $subject;
-    public string $to;
-    public string $from;
-    public string $body;
-    public bool $success = false;
+    public const MORE = '>';
+    public const LESS = '<';
+    public const EQUAL = '===';
+    public const NOT_EQUAL = '!==';
+    public const MORE_EQUAL = '>=';
+    public const LESS_EQUAL = '<=';
 }
-

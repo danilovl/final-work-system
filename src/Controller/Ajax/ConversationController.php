@@ -18,8 +18,10 @@ use App\Constant\{
     VoterSupportConstant
 };
 use App\Controller\BaseController;
-use App\Entity\ConversationMessage;
-use App\Entity\ConversationMessageStatusType;
+use App\Entity\{
+    ConversationMessage,
+    ConversationMessageStatusType
+};
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ConversationController extends BaseController
