@@ -40,7 +40,7 @@ security:
       pattern: ^/(.*)
       lazy: true
       context:  user
-      switch_user: true
+      switch_user: { role: ROLE_ADMIN }
       provider: user_provider
       form_login:
         check_path: security_login

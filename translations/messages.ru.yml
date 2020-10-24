@@ -64,6 +64,7 @@ app:
     information_materials_list: Список информационных материалов
     information_materials_list_my: Список моих информационных материалов
     logout: Выйти
+    logout_switch_user: Выход из другого пользователя
     mail_template: Шаблон сообщений
     menu: Меню
     opponent_list: Список оппонентов
@@ -334,6 +335,8 @@ app:
         user: User
         group: Group
         email_notification_queue: Email notification
+    label:
+      impersonate: Воплотиться в пользователя
   locales:
     cs: Чешский
     en: Английский

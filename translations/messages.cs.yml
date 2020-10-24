@@ -65,6 +65,7 @@ app:
     information_materials_list: Seznam informačních materiálů
     information_materials_list_my: Seznam mých informačních materiálů
     logout: Odhlásit se
+    logout_switch_user: Odhlásit se z jiného uživatele
     mail_template: Šablona zpráv
     menu: Menu
     opponent_list: Seznam oponentů
@@ -335,6 +336,8 @@ app:
         user: User
         group: Group
         email_notification_queue: Email notification
+    label:
+      impersonate: Přepnout uživatele
   locales:
     cs: Český
     en: Anglický

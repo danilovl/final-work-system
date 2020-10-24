@@ -14,15 +14,21 @@ namespace App\Admin;
 
 use App\Entity\User;
 use Doctrine\Common\Collections\Criteria;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\{
+    Crud,
+    Action,
+    Actions
+};
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\{
+    TextField,
+    FormField,
+    ArrayField,
+    IntegerField,
+    BooleanField,
+    DateTimeField,
+    AssociationField
+};
 
 class UserCrudController extends AbstractCrudController
 {
@@ -65,5 +71,15 @@ class UserCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setCrudController(GroupCrudController::class)
             ->autocomplete();
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $impersonate = Action::new('impersonate', 'app.admin.label.impersonate')
+            ->linkToRoute('profile_edit', fn(User $user): array => ['_switch_user' => $user->getUsername()]);
+
+        return parent::configureActions($actions)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_INDEX, $impersonate);
     }
 }

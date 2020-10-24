@@ -237,6 +237,15 @@ parameters:
       - path: 'profile_change_password'
         label: 'app.menu.profile_change_password'
 
+      - path: 'homepage'
+        path_option:
+          _switch_user: '_exit'
+        label: 'app.menu.logout_switch_user'
+        attributes:
+          icon: 'fa-sign-out pull-right'
+        roles:
+          - 'IS_IMPERSONATOR'
+
       - path: 'security_logout'
         label: 'app.menu.logout'
         attributes:

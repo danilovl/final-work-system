@@ -64,6 +64,7 @@ app:
     information_materials_list: List of information materials
     information_materials_list_my: List of my information materials
     logout: Logout
+    logout_switch_user: Logout from another user
     mail_template: Mail template
     menu: Menu
     opponent_list: List of opponents
@@ -334,6 +335,8 @@ app:
         user: User
         group: Group
         email_notification_queue: Email notification
+    label:
+      impersonate: Switch user
   locales:
     cs: Czech
     en: English
