@@ -9,14 +9,14 @@
         <div class="clearfix"></div>
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="{{ app.user | profile_image }}"
+                <img src="{{ app_user() | profile_image }}"
                      alt="profile image"
                      class="img-circle profile_img">
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
                 <h2>
-                    {{ app.user }}
+                    {{ app_user() }}
                 </h2>
             </div>
         </div>

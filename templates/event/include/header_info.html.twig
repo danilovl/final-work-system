@@ -25,7 +25,7 @@
                             <br>
                         {% endif %}
 
-                        {% if event.owner.id  == app.user.id %}
+                        {% if event.owner.id  == app_user().id %}
                             {{ event.participant.user }}
                             <br>
                         {% else %}

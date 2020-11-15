@@ -78,7 +78,7 @@
         var locale = '{{ app.request.locale }}';
         $(document).ready(function () {
 
-            {% if app.user.isSupervisor %}
+            {% if app_user().isSupervisor %}
             $(function () {
                 $.fn.select2.amd.require(["optgroup-data", "optgroup-results"],
                     function (OptgroupData, OptgroupResults) {

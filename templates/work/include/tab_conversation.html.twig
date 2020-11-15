@@ -9,7 +9,7 @@
                     <div class="chat-discussion">
 
                         {% for message in messages %}
-                            <div class="{% if message.owner.id | hashids_encode == app.user.id | hashids_encode %} chat-message-left {% else %} chat-message-right {% endif %}">
+                            <div class="{% if message.owner.id | hashids_encode == app_user().id | hashids_encode %} chat-message-left {% else %} chat-message-right {% endif %}">
                                 <img class="message-avatar"
                                      src="{{ message.owner | profile_image }}"
                                      alt="{{ message.owner }}">

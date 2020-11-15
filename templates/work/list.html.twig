@@ -121,7 +121,7 @@
                                                 <td>
                                                     <ul class="list-inline">
 
-                                                        {% if app.user.id != work.supervisor.id %}
+                                                        {% if app_user().id != work.supervisor.id %}
                                                             <li>
                                                                 <img src="{{ work.supervisor | profile_image }}"
                                                                      class="avatar"
@@ -165,7 +165,7 @@
                                                         {{ 'app.form.action.show' | trans() }}
                                                     </a>
 
-                                                    {% if work.isSupervisor(app.user) %}
+                                                    {% if work.isSupervisor(app_user()) %}
                                                         <a class="btn btn-warning btn-xs"
                                                            href="{{ path('work_edit', { 'id': work.id | hashids_encode }) }}"
                                                            data-toggle="modal"

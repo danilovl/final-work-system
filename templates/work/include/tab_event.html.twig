@@ -1,4 +1,4 @@
-{% if work.authorSupervisor(app.user) %}
+{% if work.authorSupervisor(app_user()) %}
     <div role="tabpanel"
             {% if activeTab == 'event' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
          id="tab-event"
@@ -51,7 +51,7 @@
                                 <i class="fa fa-desktop"></i>
                                 {{ 'app.form.action.show_detail' | trans() }}
                             </a>
-                            {% if work.isSupervisor(app.user) and event.isOwner(app.user) %}
+                            {% if work.isSupervisor(app_user()) and event.isOwner(app_user()) %}
                                 <a data-toggle="modal"
                                    data-target="#event-delete-modal-{{ event.id | hashids_encode }}"
                                    class="btn btn-danger btn-xs">

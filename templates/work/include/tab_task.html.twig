@@ -24,7 +24,7 @@
                     {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans(), 'task.deadline', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
                 </th>
 
-                {% if work.isSupervisor(app.user) %}
+                {% if work.isSupervisor(app_user()) %}
                     <th {% if tasks.isSorted('task.active') %} class="fa fa-sort-{{ directionTask }}"{% endif %}
                             data-toggle="tooltip"
                             data-placement="top"
@@ -39,7 +39,7 @@
                     </th>
                 {% endif %}
 
-                {% if work.isAuthor(app.user) %}
+                {% if work.isAuthor(app_user()) %}
                     <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ directionTask }}"{% endif %}
                             data-toggle="tooltip"
                             data-placement="top"
@@ -80,7 +80,7 @@
                         {% endif %}
                     </td>
 
-                    {% if work.isSupervisor(app.user) %}
+                    {% if work.isSupervisor(app_user()) %}
                         <td>
                             <input class="js-switch"
                                     {% if task.active %} checked {% endif %}
@@ -103,7 +103,7 @@
                         </td>
                     {% endif %}
 
-                    {% if work.isAuthor(app.user) %}
+                    {% if work.isAuthor(app_user()) %}
                         <td>
                             {% if task.notifyComplete == false and task.complete == false %}
                                 <input class="js-switch"
@@ -118,7 +118,7 @@
                     {% endif %}
 
                     <td>
-                        {% if work.isSupervisor(app.user) %}
+                        {% if work.isSupervisor(app_user()) %}
                             <input class="js-switch"
                                     {% if task.complete %} checked {% endif %}
                                    data-switchery="true"
@@ -150,7 +150,7 @@
                             </a>
                         {% endif %}
 
-                        {% if work.isSupervisor(app.user) %}
+                        {% if work.isSupervisor(app_user()) %}
                             <a data-toggle="modal"
                                data-target="#modalWindow"
                                class="btn btn-warning btn-xs"

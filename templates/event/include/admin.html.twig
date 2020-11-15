@@ -2,7 +2,7 @@
     <div class="x_panel">
         <div class="x_title">
 
-            {% if event.isOwner(app.user) %}
+            {% if event.isOwner(app_user()) %}
                 <h2>{{ 'app.text.admin_panel' | trans() }}</h2>
             {% else %}
                 <h2>{{ 'app.text.fast_access' | trans() }}</h2>
@@ -20,7 +20,7 @@
         <div class="x_content">
             <div class="col-md-12 col-sm-12 col-xs-12">
 
-                {% if event.isOwner(app.user) %}
+                {% if event.isOwner(app_user()) %}
                     {% if event.participant and event.participant.work %}
                         <a class="btn btn-app"
                            data-toggle="modal"

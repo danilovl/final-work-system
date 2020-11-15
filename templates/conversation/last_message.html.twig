@@ -30,11 +30,11 @@
                                                 {% for message in conversationMessages %}
 
                                                     {% set conversationMessageUnreadClass = null %}
-                                                    {% if conversation_status.isConversationMessageRead(message, app.user, false) == false %}
+                                                    {% if conversation_status.isConversationMessageRead(message, app_user(), false) == false %}
                                                         {% set conversationMessageUnreadClass = 'conversation-message-unread' %}
                                                     {% endif %}
 
-                                                    <div class="{% if message.owner.id == app.user.id %} chat-message-left {% else %} chat-message-right {% endif %}">
+                                                    <div class="{% if message.owner.id == app_user().id %} chat-message-left {% else %} chat-message-right {% endif %}">
                                                         <img class="message-avatar"
                                                              src="{{ message.owner | profile_image }}"
                                                              alt="{{ message.owner }}">
@@ -45,7 +45,7 @@
                                                             <span class="message-date">
                                                                 {{ message.createdAt | date('Y-m-d H:i:s') }}
 
-                                                                {% if message.isOwner(app.user) == false %}
+                                                                {% if message.isOwner(app_user()) == false %}
                                                                     {% if conversationMessageUnreadClass is not empty %}
                                                                         <input class="js-switch small"
                                                                                data-switchery="true"

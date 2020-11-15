@@ -1,4 +1,4 @@
-{% if work.isSupervisor(app.user) %}
+{% if work.isSupervisor(app_user()) %}
     <a class="btn btn-app"
        id="task-create"
        data-toggle="modal"
@@ -9,7 +9,7 @@
     </a>
 {% endif %}
 
- {% if work.authorSupervisor(app.user) %}
+ {% if work.authorSupervisor(app_user()) %}
      <a class="btn btn-app"
         id="version-create"
         data-toggle="modal"
@@ -20,7 +20,7 @@
      </a>
  {% endif %}
 
- {% if work.isSupervisor(app.user) %}
+ {% if work.isSupervisor(app_user()) %}
      <a class="btn btn-app"
         href="{{ path('event_calendar_manage') }}"
         target="_blank">
@@ -29,7 +29,7 @@
      </a>
  {% endif %}
 
- {% if work.isAuthor(app.user) %}
+ {% if work.isAuthor(app_user()) %}
      <a class="btn btn-app"
         href="{{ path('event_calendar_reservation') }}"
         target="_blank">
@@ -38,7 +38,7 @@
      </a>
  {% endif %}
 
-{% if  conversation_variation.checker(work, app.user, work.author) %}
+{% if  conversation_variation.checker(work, app_user(), work.author) %}
     {% set conversationWithAuthor = work.checkConversation(work.supervisor, work.author) %}
     {% if conversationWithAuthor %}
         <a href="{{ path('conversation_detail', { 'id': conversationWithAuthor.id | hashids_encode }) }}"
@@ -48,7 +48,7 @@
             {{ 'app.text.conversation' | trans() }}
         </a>
     {% else %}
-        <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.author.id | hashids_encode }) }}"
+        <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.author.id | hashids_encode }) }}"
            target="_blank"
            class="btn btn-app">
             <i class="fa fa-comments-o"></i>

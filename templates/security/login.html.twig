@@ -15,9 +15,9 @@
 						<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 					{% endfor %}
 
-					{% if app.user %}
+					{% if app_user() %}
 						<div class="mb-3">
-							You are logged in as {{ app.user.username }}, <a href="{{ path('security_logout') }}">Logout</a>
+							You are logged in as {{ app_user().username }}, <a href="{{ path('security_logout') }}">Logout</a>
 						</div>
 					{% endif %}
 

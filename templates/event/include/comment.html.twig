@@ -1,4 +1,4 @@
-{% if event.comment is not empty or event.isOwner(app.user) or event.start > date('now') %}
+{% if event.comment is not empty or event.isOwner(app_user()) or event.start > date('now') %}
     <div class="row">
         <div class="x_panel">
             <div class="x_title">

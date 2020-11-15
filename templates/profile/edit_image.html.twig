@@ -19,30 +19,30 @@
 									<div id="crop-avatar">
 										<!-- Current avatar -->
 										<img class="img-responsive avatar-view"
-											 src="{{ app.user | profile_image }}"
+											 src="{{ app_user() | profile_image }}"
 											 alt="Avatar"
 											 title="Change the avatar">
 									</div>
 								</div>
-								<h3>{{ app.user }}</h3>
+								<h3>{{ app_user() }}</h3>
 								<ul class="list-unstyled user_data">
 									<li>
 										<i class="fa fa-user user-profile-icon"></i>
-										{{ app.user.username }}
+										{{ app_user().username }}
 									</li>
 									<li class="m-top-xs">
 										<i class="fa fa-at user-profile-icon"></i>
-										{{ app.user.email }}
+										{{ app_user().email }}
 									</li>
-									{% if  app.user.skype is not empty %}
+									{% if  app_user().skype is not empty %}
 										<li class="m-top-xs">
 											<i class="fa fa-skype user-profile-icon"></i>:
-											{{ app.user.skype }}
+											{{ app_user().skype }}
 										</li>
 									{% endif %}
 								</ul>
 								<ul class="list-unstyled user_data">
-									{% if app.user.profileImage is not null %}
+									{% if app_user().profileImage is not null %}
 										<li>
 											<a class="btn btn-danger" href="{{ path('profile_delete_image') }}">
 												<i class="fa fa-picture-o"></i>

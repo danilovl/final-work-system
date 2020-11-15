@@ -14,7 +14,7 @@
                             <i class="fa fa-inbox "></i>
                             {{ 'app.text.inbox' | trans() }}
 
-                            {% set countUnreadConversationMessage = conversation_message.getTotalUnreadMessagesByUser(app.user) %}
+                            {% set countUnreadConversationMessage = conversation_message.getTotalUnreadMessagesByUser(app_user()) %}
 
                             {% set countUnreadConversationMessageClass = 'label-success' %}
                             {% if countUnreadConversationMessage > 0 %}

@@ -217,7 +217,7 @@
                                                     </a>
                                                 {% endif %}
 
-                                                {% if document.isOwner(app.user) %}
+                                                {% if document.isOwner(app_user()) %}
                                                     <a data-toggle="modal"
                                                        data-target="#modalWindow"
                                                        class="btn btn-warning btn-xs"

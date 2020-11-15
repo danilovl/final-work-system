@@ -5,8 +5,8 @@
        class="user-profile dropdown-toggle"
        data-toggle="dropdown"
        aria-expanded="false">
-        <img src="{{ app.user | profile_image }}" alt="profile image">
-        {{ app.user }}
+        <img src="{{ app_user() | profile_image }}" alt="profile image">
+        {{ app_user() }}
         <span class=" fa fa-angle-down"></span>
     </a>
     {% if menu is defined and menu is not empty %}

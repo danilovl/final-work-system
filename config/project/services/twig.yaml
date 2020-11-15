@@ -43,3 +43,12 @@ services:
       - '%domain%'
     tags:
       - { name: twig.runtime }
+
+  app.twig.user_runtime:
+    class: App\Twig\Runtime\UserRuntime
+    public: false
+    arguments:
+      - '@app.user'
+      - '@danilovl.parameter'
+    tags:
+      - { name: twig.runtime }

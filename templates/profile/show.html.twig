@@ -17,26 +17,26 @@
                                 <div class="profile_img">
                                     <div id="crop-avatar">
                                         <img class="img-responsive avatar-view"
-                                             src="{{ app.user | profile_image }}"
+                                             src="{{ app_user() | profile_image }}"
                                              alt="Avatar"
                                              title="Change the avatar">
                                     </div>
                                 </div>
-                                <h3>{{ app.user }}</h3>
+                                <h3>{{ app_user() }}</h3>
                                 <ul class="list-unstyled user_data">
                                     <li>
                                         <i class="fa fa-user user-profile-icon"></i>:
-                                        {{ app.user.username }}
+                                        {{ app_user().username }}
                                     </li>
                                     <li class="m-top-xs">
                                         <i class="fa fa-at user-profile-icon"></i>:
-                                        {{ app.user.email }}
+                                        {{ app_user().email }}
                                     </li>
 
-                                    {% if  app.user.skype is not empty %}
+                                    {% if  app_user().skype is not empty %}
                                         <li class="m-top-xs">
                                             <i class="fa fa-skype user-profile-icon"></i>:
-                                            {{ app.user.skype }}
+                                            {{ app_user().skype }}
                                         </li>
                                     {% endif %}
                                 </ul>
@@ -102,17 +102,17 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>{{ 'app.form.label.email' | trans }}:</td>
-                                                    <td>{{ app.user.email }}</td>
+                                                    <td>{{ app_user().email }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ 'app.form.label.phone' | trans }}</td>
-                                                    <td>{{ app.user.phone }}</td>
+                                                    <td>{{ app_user().phone }}</td>
                                                 </tr>
 
-                                                {% if  app.user.skype is not empty %}
+                                                {% if  app_user().skype is not empty %}
                                                     <tr>
                                                         <td>{{ 'app.form.label.skype' | trans }}</td>
-                                                        <td>{{ app.user.skype }}</td>
+                                                        <td>{{ app_user().skype }}</td>
                                                     </tr>
                                                 {% endif %}
                                                 </tbody>
@@ -128,23 +128,23 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>{{ 'app.form.label.username' | trans }}:</td>
-                                                    <td>{{ app.user.username }}</td>
+                                                    <td>{{ app_user().username }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ 'app.form.label.degree_before' | trans }}:</td>
-                                                    <td>{{ app.user.degreeBefore }}</td>
+                                                    <td>{{ app_user().degreeBefore }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ 'app.form.label.first_name' | trans }}</td>
-                                                    <td>{{ app.user.firstName }}</td>
+                                                    <td>{{ app_user().firstName }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ 'app.form.label.last_name' | trans }}</td>
-                                                    <td>{{ app.user.lastName }}</td>
+                                                    <td>{{ app_user().lastName }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ 'app.form.label.degree_after' | trans }}</td>
-                                                    <td>{{ app.user.degreeAfter }}</td>
+                                                    <td>{{ app_user().degreeAfter }}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -159,11 +159,11 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>{{ 'app.form.label.message_greeting' | trans }}:</td>
-                                                    <td>{{ app.user.messageGreeting|raw }}</td>
+                                                    <td>{{ app_user().messageGreeting|raw }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ 'app.form.label.message_signature' | trans }}</td>
-                                                    <td>{{ app.user.messageSignature|raw }}</td>
+                                                    <td>{{ app_user().messageSignature|raw }}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

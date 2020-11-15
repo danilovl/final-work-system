@@ -12,16 +12,16 @@
 
 namespace App\Twig;
 
-use App\Entity\User;
-use App\Twig\Runtime\AwayRuntime;
+use App\Twig\Runtime\{
+    UserRuntime,
+    AwayRuntime
+};
 use Danilovl\ParameterBundle\Services\ParameterService;
 use Twig\{
     TwigFilter,
-    Environment,
     TwigFunction
 };
 use App\Services\SystemEventLinkGeneratorService;
-use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Twig\Extension\AbstractExtension;
 
 class TwigExtension extends AbstractExtension
@@ -36,6 +36,7 @@ class TwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('app_user', [UserRuntime::class, 'appUser']),
             new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink'])
         ];
     }
@@ -44,21 +45,7 @@ class TwigExtension extends AbstractExtension
     {
         return [
             new TwigFilter('away_to', [AwayRuntime::class, 'to'], ['is_safe' => ['html']]),
-            new TwigFilter('profile_image', [$this, 'profileImage'], ['needs_environment' => true, 'is_safe' => ['html']])
+            new TwigFilter('profile_image', [UserRuntime::class, 'profileImage'], ['needs_environment' => true, 'is_safe' => ['html']])
         ];
-    }
-
-    public function profileImage(Environment $env, ?User $user): string
-    {
-        $defaultImagePath = $this->parameterService->get('default_user_image');
-
-        if ($user !== null) {
-            $imageProfile = $user->getProfileImage();
-            if ($imageProfile !== null && $imageProfile->existMediaFile()) {
-                $defaultImagePath = $imageProfile->getWebPath();
-            }
-        }
-
-        return $env->getExtension(AssetExtension::class)->getAssetUrl($defaultImagePath);
     }
 }

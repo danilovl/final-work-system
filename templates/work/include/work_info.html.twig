@@ -105,7 +105,7 @@
             </div>
             <div class="row">
 
-                {% if work.isSupervisor(app.user) %}
+                {% if work.isSupervisor(app_user()) %}
                     <div class="col-lg-7" id="cluster_info">
                         <dl class="dl-horizontal">
                             <dt>
@@ -123,7 +123,7 @@
                 {% endif %}
             </div>
 
-            {% if work.isSupervisor(app.user) %}
+            {% if work.isSupervisor(app_user()) %}
                 {% if work.categories is not empty %}
                     <div class="row">
                         <div class="col-lg-12">
@@ -176,7 +176,7 @@
                 </div>
             {% endif %}
 
-            {% if work.supervisor.id != app.user.id %}
+            {% if work.supervisor.id != app_user().id %}
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
                         <div class="x_panel">
@@ -204,7 +204,7 @@
                                                 <i class="fa fa-at"></i> :
                                                 {{ work.supervisor.email }}
                                             </li>
-                                            {% if work.isSupervisor(app.user) %}
+                                            {% if work.isSupervisor(app_user()) %}
                                                 {% if  work.supervisor.phone is not empty %}
                                                     <li class="m-top-xs">
                                                         <i class="fa fa-phone user-profile-icon"></i>:
@@ -228,8 +228,8 @@
                                 </div>
                                 <div class="col-xs-12 bottom text-center">
                                     <div class="col-xs-12 col-sm-12 emphasis">
-                                        {% if  conversation_variation.checker(work, app.user, work.supervisor) %}
-                                            {% set conversationWithSupervisor = work.checkConversation(app.user, work.supervisor) %}
+                                        {% if  conversation_variation.checker(work, app_user(), work.supervisor) %}
+                                            {% set conversationWithSupervisor = work.checkConversation(app_user(), work.supervisor) %}
                                             {% if conversationWithSupervisor %}
                                                 <a href="{{ path('conversation_detail', { 'id': conversationWithSupervisor.id | hashids_encode }) }}"
                                                    target="_blank"
@@ -238,7 +238,7 @@
                                                     {{ 'app.text.conversation' | trans() }}
                                                 </a>
                                             {% else %}
-                                                <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.supervisor.id | hashids_encode }) }}"
+                                                <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.supervisor.id | hashids_encode }) }}"
                                                    target="_blank"
                                                    class="btn btn-sm btn-primary">
                                                     <i class="fa fa-comments-o"></i>
@@ -279,7 +279,7 @@
                                                     <i class="fa fa-at"></i> :
                                                     {{ work.opponent.email }}
                                                 </li>
-                                                {% if work.isSupervisor(app.user) %}
+                                                {% if work.isSupervisor(app_user()) %}
                                                     {% if  work.opponent.phone is not empty %}
                                                         <li class="m-top-xs">
                                                             <i class="fa fa-phone user-profile-icon"></i>:
@@ -303,8 +303,8 @@
                                     </div>
                                     <div class="col-xs-12 bottom text-center">
                                         <div class="col-xs-12 col-sm-12 emphasis">
-                                            {% if  conversation_variation.checker(work, app.user, work.opponent) %}
-                                                {% set conversationWithOpponent = work.checkConversation(app.user, work.opponent) %}
+                                            {% if  conversation_variation.checker(work, app_user(), work.opponent) %}
+                                                {% set conversationWithOpponent = work.checkConversation(app_user(), work.opponent) %}
                                                 {% if conversationWithOpponent %}
                                                     <a href="{{ path('conversation_detail', { 'id': conversationWithOpponent.id | hashids_encode }) }}"
                                                        target="_blank"
@@ -313,7 +313,7 @@
                                                         {{ 'app.text.conversation' | trans() }}
                                                     </a>
                                                 {% else %}
-                                                    <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.opponent.id | hashids_encode }) }}"
+                                                    <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.opponent.id | hashids_encode }) }}"
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="fa fa-comments-o"></i>
@@ -356,7 +356,7 @@
                                                     {{ work.consultant.email }}
                                                 </li>
 
-                                                {% if work.isSupervisor(app.user) %}
+                                                {% if work.isSupervisor(app_user()) %}
                                                     {% if  work.consultant.phone is not empty %}
                                                         <li class="m-top-xs">
                                                             <i class="fa fa-phone user-profile-icon"></i>:
@@ -381,8 +381,8 @@
                                     </div>
                                     <div class="col-xs-12 bottom text-center">
                                         <div class="col-xs-12 col-sm-12 emphasis">
-                                            {% if  conversation_variation.checker(work, app.user, work.consultant) %}
-                                                {% set conversationWithConsultant = work.checkConversation(app.user, work.consultant) %}
+                                            {% if  conversation_variation.checker(work, app_user(), work.consultant) %}
+                                                {% set conversationWithConsultant = work.checkConversation(app_user(), work.consultant) %}
                                                 {% if conversationWithConsultant %}
                                                     <a href="{{ path('conversation_detail', { 'id': conversationWithConsultant.id | hashids_encode }) }}"
                                                        target="_blank"
@@ -391,7 +391,7 @@
                                                         {{ 'app.text.conversation' | trans() }}
                                                     </a>
                                                 {% else %}
-                                                    <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app.user.id | hashids_encode, 'id_user_two': work.consultant.id | hashids_encode }) }}"
+                                                    <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.consultant.id | hashids_encode }) }}"
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="fa fa-comments-o"></i>
