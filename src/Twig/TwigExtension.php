@@ -36,7 +36,7 @@ class TwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('systemEventGenerateLink', [SystemEventLinkGeneratorService::class, 'generateLink'])
+            new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink'])
         ];
     }
 
