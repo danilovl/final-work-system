@@ -11,6 +11,7 @@ app:
       task_in_complete: 'Mark a job as not completed'
       task_notify_complete: 'Announcement of task completion'
       task_notify_in_complete: 'Returning tasks for rework'
+      task_reminder_deadline: 'A reminder about the expiration of the deadline for the task'
       version_create: 'Create a new version'
       version_edit: 'Editace verze'
       document_create: 'New information material'

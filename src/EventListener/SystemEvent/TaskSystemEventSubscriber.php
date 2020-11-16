@@ -17,7 +17,6 @@ use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     Task,
-    Work,
     SystemEvent,
     SystemEventType,
     SystemEventRecipient
@@ -34,145 +33,68 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
             Events::SYSTEM_TASK_COMPLETE => 'onTaskComplete',
             Events::SYSTEM_TASK_INCOMPLETE => 'onTaskInComplete',
             Events::SYSTEM_TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
-            Events::SYSTEM_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete'
+            Events::SYSTEM_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
+            Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE => 'onTaskReminderDeadlineCreate'
         ];
+    }
+
+    private function baseEvent(
+        GenericEvent $event,
+        int $systemEventId,
+        bool $recipientAuthor = true
+
+    ): void {
+        /** @var Task $task */
+        $task = $event->getSubject();
+        $work = $task->getWork();
+
+        $systemEvent = new SystemEvent;
+        $systemEvent->setOwner($recipientAuthor ? $task->getOwner() : $work->getAuthor());
+        $systemEvent->setWork($work);
+        $systemEvent->setTask($task);
+        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+            ->find($systemEventId)
+        );
+
+        $recipient = new SystemEventRecipient;
+        $recipient->setRecipient($recipientAuthor ? $work->getAuthor() : $task->getOwner());
+        $systemEvent->addRecipient($recipient);
+
+        $this->em->persistAndFlush($systemEvent);
     }
 
     public function onTaskCreate(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-
-        /** @var Work $work */
-        $work = $task->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($task->getOwner());
-        $systemEvent->setWork($work);
-        $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::TASK_CREATE)
-        );
-
-        $recipient = new SystemEventRecipient;
-        $recipient->setRecipient($work->getAuthor());
-        $systemEvent->addRecipient($recipient);
-
-        $this->em->persistAndFlush($systemEvent);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_CREATE);
     }
 
     public function onTaskEdit(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-
-        /** @var Work $work */
-        $work = $task->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($task->getOwner());
-        $systemEvent->setWork($work);
-        $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::TASK_EDIT)
-        );
-
-        $recipient = new SystemEventRecipient;
-        $recipient->setRecipient($work->getAuthor());
-        $systemEvent->addRecipient($recipient);
-
-        $this->em->persistAndFlush($systemEvent);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_EDIT);
     }
 
     public function onTaskComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-
-        /** @var Work $work */
-        $work = $task->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($task->getOwner());
-        $systemEvent->setWork($work);
-        $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::TASK_COMPLETE)
-        );
-
-        $recipient = new SystemEventRecipient;
-        $recipient->setRecipient($work->getAuthor());
-        $systemEvent->addRecipient($recipient);
-
-        $this->em->persistAndFlush($systemEvent);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_COMPLETE);
     }
 
     public function onTaskInComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-
-        /** @var Work $work */
-        $work = $task->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($task->getOwner());
-        $systemEvent->setWork($work);
-        $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::TASK_INCOMPLETE)
-        );
-
-        $recipient = new SystemEventRecipient;
-        $recipient->setRecipient($work->getAuthor());
-        $systemEvent->addRecipient($recipient);
-
-        $this->em->persistAndFlush($systemEvent);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_INCOMPLETE);
     }
 
     public function onTaskNotifyComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-
-        /** @var Work $work */
-        $work = $task->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($work->getAuthor());
-        $systemEvent->setWork($work);
-        $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::TASK_NOTIFY_COMPLETE)
-        );
-
-        $recipient = new SystemEventRecipient;
-        $recipient->setRecipient($task->getOwner());
-        $systemEvent->addRecipient($recipient);
-
-        $this->em->persistAndFlush($systemEvent);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_COMPLETE, false);
     }
 
     public function onTaskNotifyInComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE);
+    }
 
-        /** @var Work $work */
-        $work = $task->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($task->getOwner());
-        $systemEvent->setWork($work);
-        $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE)
-        );
-
-        $recipient = new SystemEventRecipient;
-        $recipient->setRecipient($work->getAuthor());
-        $systemEvent->addRecipient($recipient);
-
-        $this->em->persistAndFlush($systemEvent);
+    public function onTaskReminderDeadlineCreate(GenericEvent $event): void
+    {
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_REMIND_DEADLINE);
     }
 }

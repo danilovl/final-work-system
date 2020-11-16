@@ -22,6 +22,7 @@ final class Events
     public const NOTIFICATION_TASK_INCOMPLETE = 'notification.task.incomplete';
     public const NOTIFICATION_TASK_NOTIFY_COMPLETE = 'notification.task.notify.complete';
     public const NOTIFICATION_TASK_NOTIFY_INCOMPLETE = 'notification.task.notify.incomplete';
+    public const NOTIFICATION_TASK_REMIND_DEADLINE_CREATE = 'notification.task.remind_deadline.create';
     public const NOTIFICATION_VERSION_CREATE = 'notification.work.version.create';
     public const NOTIFICATION_VERSION_EDIT = 'notification.work.version.edit';
     public const NOTIFICATION_DOCUMENT_CREATE = 'notification.document.create';
@@ -46,6 +47,7 @@ final class Events
     public const SYSTEM_TASK_INCOMPLETE = 'system.task.incomplete';
     public const SYSTEM_TASK_NOTIFY_COMPLETE = 'system.task.notify.complete';
     public const SYSTEM_TASK_NOTIFY_INCOMPLETE = 'system.task.notify.incomplete';
+    public const SYSTEM_TASK_REMIND_CREATE = 'system.task.remind.create';
     public const SYSTEM_VERSION_CREATE = 'system.work.version.create';
     public const SYSTEM_VERSION_EDIT = 'system.work.version.edit';
     public const SYSTEM_DOCUMENT_CREATE = 'system.document.create';

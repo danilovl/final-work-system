@@ -23,6 +23,7 @@ class SystemEventTypeConstant
     public const TASK_INCOMPLETE = 7;
     public const TASK_NOTIFY_COMPLETE = 8;
     public const TASK_NOTIFY_INCOMPLETE = 9;
+    public const TASK_REMIND_DEADLINE = 19;
     public const VERSION_CREATE = 10;
     public const VERSION_EDIT = 11;
     public const DOCUMENT_CREATE = 12;

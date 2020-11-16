@@ -11,6 +11,7 @@ app:
       task_in_complete: 'Означение задачи как невыполненную'
       task_notify_complete: 'Информаирование о выполнении задачи'
       task_notify_in_complete: 'Возращение задачи к переделыванию'
+      task_reminder_deadline: 'Напоминание о истечении крайнего срока выполнения задания'
       version_create: 'Создание новой версии'
       version_edit: 'Редактирование версии'
       document_create: 'Новый информационный материал'

@@ -87,4 +87,12 @@ class TaskEventDispatcherService
                 break;
         }
     }
+
+    public function onTaskReminderCreate(Task $task): void
+    {
+        $genericEvent = new GenericEvent($task);
+
+        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
+        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);
+    }
 }

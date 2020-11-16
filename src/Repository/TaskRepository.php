@@ -92,4 +92,16 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->setParameter('isComplete', $isComplete);
     }
+
+    public function getTasksAfterDeadline(): QueryBuilder
+    {
+        return $this->baseQueryBuilder()
+            ->andWhere('task.complete = :complete')
+            ->andWhere('task.notifyComplete = :notifyComplete')
+            ->andWhere('task.active = :active')
+            ->andWhere('task.deadline < CURRENT_DATE()')
+            ->setParameter('active', true)
+            ->setParameter('complete', false)
+            ->setParameter('notifyComplete', false);
+    }
 }

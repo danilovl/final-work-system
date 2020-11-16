@@ -93,6 +93,12 @@ class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
                     'work' => $work,
                     'task' => $task
                 ]);
+            case SystemEventTypeConstant::TASK_REMIND_DEADLINE:
+                return $this->twig->render('system_event/task_remind_deadline.html.twig', [
+                    'user' => $user,
+                    'work' => $work,
+                    'task' => $task
+                ]);
             case SystemEventTypeConstant::VERSION_CREATE:
                 return $this->twig->render('system_event/version_create.twig', [
                     'user' => $user,

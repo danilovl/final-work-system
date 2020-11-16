@@ -29,103 +29,63 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
             Events::NOTIFICATION_TASK_COMPLETE => 'onTaskComplete',
             Events::NOTIFICATION_TASK_INCOMPLETE => 'onTaskInComplete',
             Events::NOTIFICATION_TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
-            Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete'
+            Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
+            Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE => 'onTaskReminderDeadlineCreate'
         ];
+    }
+
+    private function baseEvent(
+        GenericEvent $event,
+        string $subject,
+        string $template,
+        bool $isAuthorEmail = true
+    ): void {
+        /** @var Task $task */
+        $task = $event->getSubject();
+        $work = $task->getWork();
+
+        $subject = $this->trans($subject);
+        $to = $isAuthorEmail ? $work->getAuthor()->getEmail() : $work->getSupervisor()->getEmail();
+        $body = $this->twig->render($this->getTemplate($template), [
+            'work' => $work,
+            'task' => $task
+        ]);
+
+        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
     public function onTaskCreate(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-        $work = $task->getWork();
-
-        $subject = $this->trans('subject.task_create');
-        $to = $work->getAuthor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('task_create'), [
-            'work' => $work,
-            'task' => $task
-        ]);
-
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->baseEvent($event, 'subject.task_create', 'task_create');
     }
 
     public function onTaskEdit(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-        $work = $task->getWork();
-
-        $subject = $this->trans('subject.task_edit');
-        $to = $work->getAuthor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('task_edit'), [
-            'work' => $work,
-            'task' => $task
-        ]);
-
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->baseEvent($event, 'subject.task_edit', 'task_edit');
     }
 
     public function onTaskComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-        $work = $task->getWork();
-
-        $subject = $this->trans('subject.task_complete');
-        $to = $work->getAuthor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('task_complete'), [
-            'work' => $work,
-            'task' => $task
-        ]);
-
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->baseEvent($event, 'subject.task_complete', 'task_complete');
     }
 
     public function onTaskInComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-        $work = $task->getWork();
-
-        $subject = $this->trans('subject.task_in_complete');
-        $to = $work->getAuthor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('task_incomplete'), [
-            'work' => $work,
-            'task' => $task
-        ]);
-
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->baseEvent($event, 'subject.task_in_complete', 'task_incomplete');
     }
 
     public function onTaskNotifyComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-        $work = $task->getWork();
-
-        $subject = $this->trans('subject.task_notify_complete');
-        $to = $work->getSupervisor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('task_notify_complete'), [
-            'work' => $work,
-            'task' => $task
-        ]);
-
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->baseEvent($event, 'subject.task_notify_complete', 'task_notify_complete', false);
     }
 
     public function onTaskNotifyInComplete(GenericEvent $event): void
     {
-        /** @var Task $task */
-        $task = $event->getSubject();
-        $work = $task->getWork();
+        $this->baseEvent($event, 'subject.task_notify_in_complete', 'task_notify_incomplete');
+    }
 
-        $subject = $this->trans('subject.task_notify_in_complete');
-        $to = $work->getAuthor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('task_notify_incomplete'), [
-            'work' => $work,
-            'task' => $task
-        ]);
-
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+    public function onTaskReminderDeadlineCreate(GenericEvent $event): void
+    {
+        $this->baseEvent($event, 'subject.task_reminder_deadline', 'task_reminder_deadline');
     }
 }

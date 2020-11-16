@@ -48,4 +48,14 @@ class TaskDeadlineFacade
 
         return $taskDeadLines;
     }
+
+    public function getTasksAfterDeadline(int $offset, int $limit): array
+    {
+        return $this->taskRepository
+            ->getTasksAfterDeadline()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
