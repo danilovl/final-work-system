@@ -18,9 +18,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ParametersServiceTest extends KernelTestCase
 {
-    /**
-     * @var ParameterService
-     */
     private ParameterService $parametersService;
 
     public function setUp(): void
