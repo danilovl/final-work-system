@@ -43,7 +43,7 @@
                                                                 {{ message.owner }}
                                                             </a>
                                                             <span class="message-date">
-                                                                {{ message.createdAt | date('Y-m-d H:i:s') }}
+                                                                {{ message.createdAt | date }}
 
                                                                 {% if message.isOwner(app_user()) == false %}
                                                                     {% if conversationMessageUnreadClass is not empty %}

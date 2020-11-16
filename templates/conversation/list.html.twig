@@ -106,7 +106,7 @@
                                         </td>
                                         <td class="text-right mail-date">
                                             {% if lastMessage is not empty %}
-                                                {{ lastMessage.createdAt | date('Y-m-d H:i:s') }}
+                                                {{ lastMessage.createdAt | date }}
                                             {% endif %}
                                         </td>
                                     </tr>

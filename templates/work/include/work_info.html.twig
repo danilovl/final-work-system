@@ -112,11 +112,11 @@
                                 {{ 'app.text.created' | trans() }}:
                             </dt>
                             <dd>
-                                {{ work.createdAt | date('Y-m-d H:i:s') }}
+                                {{ work.createdAt | date }}
                             </dd>
                             {% if work.updatedAt is not empty %}
                                 <dt>{{ 'app.text.last_update' | trans() }}:</dt>
-                                <dd>{{ work.updatedAt | date('Y-m-d H:i:s') }}</dd>
+                                <dd>{{ work.updatedAt | date }}</dd>
                             {% endif %}
                         </dl>
                     </div>

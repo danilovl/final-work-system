@@ -10,7 +10,7 @@
                             <small class="pull-right text-muted">
                                 {% set lastMessage = conversation.getLastMessage %}
                                 {% if lastMessage is not empty %}
-                                    {{ 'app.text.date_last_message' | trans() }}: {{ lastMessage.createdAt | date('Y-m-d H:i:s') }}
+                                    {{ 'app.text.date_last_message' | trans() }}: {{ lastMessage.createdAt | date }}
                                 {% endif %}
                             </small>
 
@@ -42,7 +42,7 @@
                                                 <div class="{{ conversationMessageUnreadClass }} message">
                                                     <a class="message-author" href="#"> {{ message.owner }} </a>
                                                     <span class="message-date">
-                                                        {{ message.createdAt | date('Y-m-d H:i:s') }}
+                                                        {{ message.createdAt | date }}
 
                                                         {% if message.isOwner(app_user()) == false %}
                                                             {% if conversationMessageUnreadClass is not empty %}

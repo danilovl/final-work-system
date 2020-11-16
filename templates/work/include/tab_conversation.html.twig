@@ -16,7 +16,7 @@
                                 <div class="message">
                                     <a class="message-author"
                                        href="#"> {{ message.owner }} </a>
-                                    <span class="message-date"> {{ message.createdAt | date('Y-m-d H:i:s') }} </span>
+                                    <span class="message-date"> {{ message.createdAt | date }} </span>
                                     <span class="message-content">{{ message.content | away_to | raw }}</span>
                                 </div>
                             </div>

@@ -9,3 +9,5 @@ twig:
     system_event_recipient: "@app.facade.system_event_recipient"
     goole_analitics_code: "%google_analytics_code%"
     google_maps_key: "%google_maps_key%"
+  date:
+    format: 'Y-m-d H:i:s'
