@@ -12,17 +12,15 @@
 
 namespace App\EventListener\SystemEvent;
 
+use App\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use App\Entity\{
-    Event,
-    Comment,
     SystemEvent,
     SystemEventRecipient,
     SystemEventType
 };
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -38,10 +36,9 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         ];
     }
 
-    public function onEventCreate(GenericEvent $genericEvent): void
+    public function onEventCreate(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
@@ -65,10 +62,9 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onEventEdit(GenericEvent $genericEvent): void
+    public function onEventEdit(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
@@ -84,10 +80,9 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onEventSwitchSkype(GenericEvent $genericEvent): void
+    public function onEventSwitchSkype(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipant()->getUser());
@@ -103,12 +98,9 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onEventCommentCreate(GenericEvent $genericEvent): void
+    public function onEventCommentCreate(EventGenericEvent $genericEvent): void
     {
-        /** @var Comment $eventComment */
-        $eventComment = $genericEvent->getSubject();
-
-        /** @var Event $event */
+        $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
         $systemEvent = new SystemEvent;
@@ -136,12 +128,9 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onEventCommentEdit(GenericEvent $genericEvent): void
+    public function onEventCommentEdit(EventGenericEvent $genericEvent): void
     {
-        /** @var Comment $eventComment */
-        $eventComment = $genericEvent->getSubject();
-
-        /** @var Event $event */
+        $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
         $systemEvent = new SystemEvent;
@@ -169,10 +158,9 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onEventReservation(GenericEvent $genericEvent): void
+    public function onEventReservation(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipant()->getUser());

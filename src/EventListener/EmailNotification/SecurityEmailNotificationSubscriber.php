@@ -14,10 +14,7 @@ namespace App\EventListener\EmailNotification;
 
 use App\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -28,17 +25,15 @@ class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         ];
     }
 
-    public function onResetPasswordToken(GenericEvent $genericEvent): void
+    public function onResetPasswordToken(ResetPasswordGenericEvent $genericEvent): void
     {
-        /** @var ResetPasswordGenericEvent $resetPasswordGenericEvent */
-        $resetPasswordGenericEvent = $genericEvent->getSubject();
-        $resetPassword = $resetPasswordGenericEvent->resetPassword;
+        $resetPassword = $genericEvent->resetPassword;
 
         $subject = $this->trans('subject.event_reservation');
         $to = $resetPassword->getUser()->getEmail();
         $body = $this->twig->render($this->getTemplate('reset_password_token_create'), [
             'resetPassword' => $resetPassword,
-            'tokenLifetime' => $resetPasswordGenericEvent->tokenLifetime
+            'tokenLifetime' => $genericEvent->tokenLifetime
         ]);
 
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);

@@ -14,10 +14,7 @@ namespace App\EventListener;
 
 use App\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use App\Services\WidgetManagerService;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WidgetEventSubscriber implements EventSubscriberInterface
 {
@@ -31,18 +28,15 @@ class WidgetEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::WIDGET_GROUP_REPLACE => 'onGroupReorder',
+            Events::WIDGET_GROUP_REPLACE => 'onGroupReorder'
         ];
     }
 
-    public function onGroupReorder(GenericEvent $event): void
+    public function onGroupReorder(WidgetGenericGenericEvent $event): void
     {
-        /** @var WidgetGenericGenericEvent $widgetGenericEventSubject */
-        $widgetGenericEventSubject = $event->getSubject();
-
         $this->widgetManagerService->replaceWidgetGroup(
-            $widgetGenericEventSubject->groupName,
-            $widgetGenericEventSubject->groupWidgets
+            $event->groupName,
+            $event->groupWidgets
         );
     }
 }

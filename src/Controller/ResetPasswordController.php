@@ -123,10 +123,7 @@ class ResetPasswordController extends BaseController
         }
 
         $this->get('app.event_dispatcher.security')
-            ->onResetPasswordTokenCreate(new ResetPasswordGenericEvent(
-                $resetToken,
-                $this->get('app.reset_password')->getTokenLifetime()
-            ));
+            ->onResetPasswordTokenCreate($resetToken, $this->get('app.reset_password')->getTokenLifetime());
 
         return $this->redirectToRoute('app_reset_password_check_email');
     }

@@ -16,10 +16,4 @@ class WidgetGenericGenericEvent
 {
     public string $groupName;
     public array $groupWidgets;
-
-    public function __construct(string $groupName, array $groupWidgets)
-    {
-        $this->groupName = $groupName;
-        $this->groupWidgets = $groupWidgets;
-    }
 }

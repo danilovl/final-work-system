@@ -13,11 +13,10 @@
 namespace App\EventDispatcher;
 
 use App\Entity\Work;
+use App\EventDispatcher\GenericEvent\UserGenericEvent;
+use App\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class WorkEventDispatcherService
 {
@@ -30,24 +29,31 @@ class WorkEventDispatcherService
 
     public function onWorkCreate(Work $work): void
     {
-        $genericEvent = new GenericEvent($work);
+        $genericEvent = new WorkGenericEvent;
+        $genericEvent->work = $work;
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_CREATE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_CREATE);
     }
 
     public function onWorkEdit(Work $work): void
     {
-        $genericEvent = new GenericEvent($work);
+        $genericEvent = new WorkGenericEvent;
+        $genericEvent->work = $work;
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_EDIT);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_EDIT);
     }
 
     public function onWorkEditAuthor(Work $work): void
     {
-        $genericEvent = new GenericEvent($work->getAuthor());
+        $genericEvent = new UserGenericEvent();
+        $genericEvent->user = $work->getAuthor();
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
 
-        $genericEvent = new GenericEvent($work);
+        $genericEvent = new WorkGenericEvent;
+        $genericEvent->work = $work;
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_AUTHOR_EDIT);
     }
 }

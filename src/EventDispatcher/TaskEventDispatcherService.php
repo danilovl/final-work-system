@@ -14,11 +14,10 @@ namespace App\EventDispatcher;
 
 use App\Constant\TaskStatusConstant;
 use App\Entity\Task;
+use App\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use App\Exception\RuntimeException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TaskEventDispatcherService
 {
@@ -31,7 +30,8 @@ class TaskEventDispatcherService
 
     public function onTaskCreate(Task $task): void
     {
-        $genericEvent = new GenericEvent($task);
+        $genericEvent = new TaskGenericEvent;
+        $genericEvent->task = $task;
 
         if ($task->isActive()) {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
@@ -41,22 +41,25 @@ class TaskEventDispatcherService
 
     public function onTaskEdit(Task $task): void
     {
-        $genericEvent = new GenericEvent($task);
+        $genericEvent = new TaskGenericEvent;
+        $genericEvent->task = $task;
 
         if ($task->isActive()) {
-            if ($task->getSystemEvents()) {
-                $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_EDIT);
-                $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_EDIT);
-            } else {
-                $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
-                $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
-            }
+            $this->eventDispatcher->dispatch(
+                $genericEvent,
+                !$task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_EDIT : Events::NOTIFICATION_TASK_CREATE
+            );
+            $this->eventDispatcher->dispatch(
+                $genericEvent,
+                !$task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_EDIT : Events::SYSTEM_TASK_CREATE
+            );
         }
     }
 
     public function onTaskNotifyComplete(Task $task): void
     {
-        $genericEvent = new GenericEvent($task);
+        $genericEvent = new TaskGenericEvent;
+        $genericEvent->task = $task;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_NOTIFY_COMPLETE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_NOTIFY_COMPLETE);
@@ -64,33 +67,40 @@ class TaskEventDispatcherService
 
     public function onTaskChangeStatus(Task $task, string $type): void
     {
+        $genericEvent = new TaskGenericEvent;
+        $genericEvent->task = $task;
+        $genericEvent->type = $type;
+
         switch ($type) {
             case TaskStatusConstant::ACTIVE:
-                $genericEvent = new GenericEvent($task);
-                $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
-                $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
+                $notificationEvent = Events::NOTIFICATION_TASK_CREATE;
+                $systemEvent = Events::SYSTEM_TASK_CREATE;
                 break;
             case TaskStatusConstant::COMPLETE:
-                $genericEvent = new GenericEvent($task);
                 if ($task->isComplete()) {
-                    $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_COMPLETE);
-                    $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_COMPLETE);
+                    $notificationEvent = Events::NOTIFICATION_TASK_COMPLETE;
+                    $systemEvent = Events::SYSTEM_TASK_COMPLETE;
                 } else {
-                    $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_INCOMPLETE);
-                    $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_INCOMPLETE);
+                    $notificationEvent = Events::NOTIFICATION_TASK_INCOMPLETE;
+                    $systemEvent = Events::SYSTEM_TASK_INCOMPLETE;
                 }
                 break;
             case TaskStatusConstant::NOTIFY:
-                $genericEvent = new GenericEvent($task);
-                $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE);
-                $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_NOTIFY_INCOMPLETE);
+                $notificationEvent = Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE;
+                $systemEvent = Events::SYSTEM_TASK_NOTIFY_INCOMPLETE;
                 break;
+            default:
+                throw new RuntimeException(sprintf('Type event "%s" for onTaskChangeStatus not exist', $type));
         }
+
+        $this->eventDispatcher->dispatch($genericEvent, $notificationEvent);
+        $this->eventDispatcher->dispatch($genericEvent, $systemEvent);
     }
 
     public function onTaskReminderCreate(Task $task): void
     {
-        $genericEvent = new GenericEvent($task);
+        $genericEvent = new TaskGenericEvent;
+        $genericEvent->task = $task;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);

@@ -13,11 +13,9 @@
 namespace App\EventDispatcher;
 
 use App\Entity\Media;
+use App\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DocumentEventDispatcherService
 {
@@ -30,7 +28,8 @@ class DocumentEventDispatcherService
 
     public function onDocumentCreate(Media $media): void
     {
-        $genericEvent = new GenericEvent($media);
+        $genericEvent = new MediaGenericEvent;
+        $genericEvent->media = $media;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_DOCUMENT_CREATE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_DOCUMENT_CREATE);

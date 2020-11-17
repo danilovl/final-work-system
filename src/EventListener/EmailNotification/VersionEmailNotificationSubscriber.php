@@ -12,15 +12,10 @@
 
 namespace App\EventListener\EmailNotification;
 
-use App\Entity\{
-    User,
-    Media
-};
+use App\EventDispatcher\GenericEvent\VersionGenericEvent;
+use App\Entity\User;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -32,14 +27,16 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         ];
     }
 
-    public function onVersionCreate(GenericEvent $event): void
-    {
-        /** @var Media $media */
-        $media = $event->getSubject();
+    private function onBaseEvent(
+        VersionGenericEvent $event,
+        string $subject,
+        string $template
+    ): void {
+        $media = $event->media;
         $work = $media->getWork();
 
-        $subject = $this->trans('subject.version_create');
-        $body = $this->twig->render($this->getTemplate('work_version_create'), [
+        $subject = $this->trans($subject);
+        $body = $this->twig->render($this->getTemplate($template), [
             'media' => $media,
             'work' => $work
         ]);
@@ -55,26 +52,13 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         }
     }
 
-    public function onVersionEdit(GenericEvent $event): void
+    public function onVersionCreate(VersionGenericEvent $event): void
     {
-        /** @var Media $media */
-        $media = $event->getSubject();
-        $work = $media->getWork();
+        $this->onBaseEvent($event, 'subject.version_create', 'work_version_create');
+    }
 
-        $subject = $this->trans('subject.version_edit');
-        $body = $this->twig->render($this->getTemplate('work_version_edit'), [
-            'media' => $media,
-            'work' => $work
-        ]);
-
-        $workUsers = $work->getAllUsers();
-
-        /** @var User $user */
-        foreach ($workUsers as $user) {
-            if ($user->getId() !== $media->getOwner()->getId()) {
-                $to = $user->getEmail();
-                $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
-            }
-        }
+    public function onVersionEdit(VersionGenericEvent $event): void
+    {
+        $this->onBaseEvent($event, 'subject.version_edit', 'work_version_edit');
     }
 }

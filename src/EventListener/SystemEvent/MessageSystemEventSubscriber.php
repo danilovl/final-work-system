@@ -12,17 +12,16 @@
 
 namespace App\EventListener\SystemEvent;
 
+use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     SystemEvent,
     SystemEventType,
-    ConversationMessage,
-    ConversationParticipant,
-    SystemEventRecipient
+    SystemEventRecipient,
+    ConversationParticipant
 };
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -33,10 +32,9 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         ];
     }
 
-    public function onMessageCreate(GenericEvent $event): void
+    public function onMessageCreate(ConversationMessageGenericEvent $event): void
     {
-        /** @var ConversationMessage $conversationMessage */
-        $conversationMessage = $event->getSubject();
+        $conversationMessage = $event->conversationMessage;
         $massageOwner = $conversationMessage->getOwner();
         $conversation = $conversationMessage->getConversation();
 
@@ -54,11 +52,11 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
 
         $participantArray = $conversation->getParticipants();
 
-        /** @var ConversationParticipant $parcipant */
-        foreach ($participantArray as $parcipant) {
-            if ($massageOwner->getId() !== $parcipant->getUser()->getId()) {
+        /** @var ConversationParticipant $participant */
+        foreach ($participantArray as $participant) {
+            if ($massageOwner->getId() !== $participant->getUser()->getId()) {
                 $recipientAuthor = new SystemEventRecipient;
-                $recipientAuthor->setRecipient($parcipant->getUser());
+                $recipientAuthor->setRecipient($participant->getUser());
                 $systemEvent->addRecipient($recipientAuthor);
             }
         }

@@ -12,7 +12,6 @@
 
 namespace App\Controller\Ajax;
 
-use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\Constant\{
     FlashTypeConstant,
     AjaxJsonTypeConstant
@@ -78,7 +77,7 @@ class UserController extends BaseController
                 ->flushFromModel($userModel, $user);
 
             $this->get('app.event_dispatcher.user')
-                ->onUserEdit(new UserGenericEvent($user, $this->getUser()));
+                ->onUserEdit($user, $this->getUser());
 
             return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

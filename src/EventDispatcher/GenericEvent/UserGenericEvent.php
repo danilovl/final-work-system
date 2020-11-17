@@ -18,10 +18,4 @@ class UserGenericEvent
 {
     public User $user;
     public User $owner;
-
-    public function __construct(User $user, User $owner)
-    {
-        $this->user = $user;
-        $this->owner = $owner;
-    }
 }

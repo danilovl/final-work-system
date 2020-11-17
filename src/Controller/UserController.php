@@ -12,7 +12,6 @@
 
 namespace App\Controller;
 
-use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\User\UserModel;
 use App\Constant\{
@@ -96,7 +95,7 @@ class UserController extends BaseController
                     ->flushFromModel($userModel, $user);
 
                 $this->get('app.event_dispatcher.user')
-                    ->onUserEdit(new UserGenericEvent($user, $this->getUser()));
+                    ->onUserEdit($user, $this->getUser());
 
                 $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
 

@@ -12,12 +12,9 @@
 
 namespace App\EventListener\EmailNotification;
 
+use App\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\EventListener\Events;
-use App\Entity\Work;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -29,10 +26,9 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         ];
     }
 
-    public function onWorkCreate(GenericEvent $event): void
+    public function onWorkCreate(WorkGenericEvent $event): void
     {
-        /** @var Work $work */
-        $work = $event->getSubject();
+        $work = $event->work;
 
         $subject = $this->trans('subject.work_create');
         $author = $work->getAuthor();
@@ -71,10 +67,9 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         }
     }
 
-    public function onWorkEdit(GenericEvent $event): void
+    public function onWorkEdit(WorkGenericEvent $event): void
     {
-        /** @var Work $work */
-        $work = $event->getSubject();
+        $work = $event->work;
 
         $subject = $this->trans('subject.work_edit');
         $to = $work->getAuthor()->getEmail();

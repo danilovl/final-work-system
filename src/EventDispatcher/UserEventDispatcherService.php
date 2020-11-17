@@ -15,10 +15,7 @@ namespace App\EventDispatcher;
 use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\EventListener\Events;
 use App\Entity\User;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UserEventDispatcherService
 {
@@ -31,13 +28,18 @@ class UserEventDispatcherService
 
     public function onUserCreate(User $user): void
     {
-        $genericEvent = new GenericEvent($user);
+        $genericEvent = new UserGenericEvent;
+        $genericEvent->user = $user;
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_CREATE);
     }
 
-    public function onUserEdit(UserGenericEvent $userGenericEvent): void
+    public function onUserEdit(User $user, User $owner): void
     {
-        $genericEvent = new GenericEvent($userGenericEvent);
+        $genericEvent = new UserGenericEvent;
+        $genericEvent->user = $user;
+        $genericEvent->owner = $owner;
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_USER_EDIT);
     }

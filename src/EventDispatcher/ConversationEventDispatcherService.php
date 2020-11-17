@@ -13,11 +13,9 @@
 namespace App\EventDispatcher;
 
 use App\Entity\ConversationMessage;
+use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConversationEventDispatcherService
 {
@@ -30,7 +28,8 @@ class ConversationEventDispatcherService
 
     public function onConversationMessageCreate(ConversationMessage $conversationMessage): void
     {
-        $genericEvent = new GenericEvent($conversationMessage);
+        $genericEvent = new ConversationMessageGenericEvent;
+        $genericEvent->conversationMessage = $conversationMessage;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_MESSAGE_CREATE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_MESSAGE_CREATE);

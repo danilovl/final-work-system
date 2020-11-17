@@ -21,7 +21,6 @@ use App\Entity\{
     SystemEventType,
     SystemEventRecipient
 };
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -32,12 +31,10 @@ class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         ];
     }
 
-    public function onUserEdit(GenericEvent $event): void
+    public function onUserEdit(UserGenericEvent $event): void
     {
-        /** @var UserGenericEvent $userGenericEvent */
-        $userGenericEvent = $event->getSubject();
-        $user = $userGenericEvent->user;
-        $owner = $userGenericEvent->owner;
+        $user = $event->user;
+        $owner = $event->owner;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);

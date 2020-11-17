@@ -12,16 +12,15 @@
 
 namespace App\EventListener\SystemEvent;
 
+use App\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
-    Task,
     SystemEvent,
     SystemEventType,
     SystemEventRecipient
 };
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -39,13 +38,11 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     }
 
     private function baseEvent(
-        GenericEvent $event,
+        TaskGenericEvent $event,
         int $systemEventId,
         bool $recipientAuthor = true
-
     ): void {
-        /** @var Task $task */
-        $task = $event->getSubject();
+        $task = $event->task;
         $work = $task->getWork();
 
         $systemEvent = new SystemEvent;
@@ -63,37 +60,37 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onTaskCreate(GenericEvent $event): void
+    public function onTaskCreate(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_CREATE);
     }
 
-    public function onTaskEdit(GenericEvent $event): void
+    public function onTaskEdit(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_EDIT);
     }
 
-    public function onTaskComplete(GenericEvent $event): void
+    public function onTaskComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_COMPLETE);
     }
 
-    public function onTaskInComplete(GenericEvent $event): void
+    public function onTaskInComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_INCOMPLETE);
     }
 
-    public function onTaskNotifyComplete(GenericEvent $event): void
+    public function onTaskNotifyComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_COMPLETE, false);
     }
 
-    public function onTaskNotifyInComplete(GenericEvent $event): void
+    public function onTaskNotifyInComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE);
     }
 
-    public function onTaskReminderDeadlineCreate(GenericEvent $event): void
+    public function onTaskReminderDeadlineCreate(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, SystemEventTypeConstant::TASK_REMIND_DEADLINE);
     }

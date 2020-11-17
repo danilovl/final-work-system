@@ -12,15 +12,13 @@
 
 namespace App\EventDispatcher;
 
+use App\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\Entity\{
     Event,
     Comment
 };
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventEventDispatcherService
 {
@@ -33,21 +31,25 @@ class EventEventDispatcherService
 
     public function onEventComment(Comment $comment, bool $isEventCommentExist): void
     {
-        $genericEvent = new GenericEvent($comment);
+        $genericEvent = new EventGenericEvent;
+        $genericEvent->comment = $comment;
 
-        if ($isEventCommentExist) {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_COMMENT_EDIT);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_COMMENT_EDIT);
-        } else {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_COMMENT_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_COMMENT_CREATE);
-        }
+        $this->eventDispatcher->dispatch(
+            $genericEvent,
+            $isEventCommentExist ? Events::NOTIFICATION_EVENT_COMMENT_EDIT : Events::NOTIFICATION_EVENT_COMMENT_CREATE
+        );
+
+        $this->eventDispatcher->dispatch(
+            $genericEvent,
+            $isEventCommentExist ? Events::SYSTEM_EVENT_COMMENT_EDIT : Events::SYSTEM_EVENT_COMMENT_CREATE
+        );
     }
 
     public function onEventEdit(Event $event): void
     {
         if ($event->getParticipant()) {
-            $genericEvent = new GenericEvent($event);
+            $genericEvent = new EventGenericEvent;
+            $genericEvent->event = $event;
 
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
 
@@ -59,7 +61,8 @@ class EventEventDispatcherService
 
     public function onEventSwitchToSkype(Event $event): void
     {
-        $genericEvent = new GenericEvent($event);
+        $genericEvent = new EventGenericEvent;
+        $genericEvent->event = $event;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_SWITCH_SKYPE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_SWITCH_SKYPE);
@@ -67,7 +70,8 @@ class EventEventDispatcherService
 
     public function onEventCalendarCreate(Event $event, bool $eventParticipant): void
     {
-        $genericEvent = new GenericEvent($event);
+        $genericEvent = new EventGenericEvent;
+        $genericEvent->event = $event;
 
         if ($eventParticipant) {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_CREATE);
@@ -77,7 +81,8 @@ class EventEventDispatcherService
 
     public function onEventCalendarReservation(Event $event): void
     {
-        $genericEvent = new GenericEvent($event);
+        $genericEvent = new EventGenericEvent;
+        $genericEvent->event = $event;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_RESERVATION);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_RESERVATION);
@@ -86,7 +91,8 @@ class EventEventDispatcherService
     public function onEventCalendarEdit(Event $event): void
     {
         if ($event->getParticipant()) {
-            $genericEvent = new GenericEvent($event);
+            $genericEvent = new EventGenericEvent;
+            $genericEvent->event = $event;
 
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
             $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);

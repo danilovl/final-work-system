@@ -12,12 +12,9 @@
 
 namespace App\EventListener\EmailNotification;
 
-use App\Entity\User;
+use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -29,10 +26,9 @@ class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         ];
     }
 
-    public function onUserCreate(GenericEvent $event): void
+    public function onUserCreate(UserGenericEvent $event): void
     {
-        /** @var User $user */
-        $user = $event->getSubject();
+        $user = $event->user;
 
         $subject = $this->trans('subject.user_create');
         $to = $user->getEmail();
@@ -44,10 +40,9 @@ class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onUserEdit(GenericEvent $event): void
+    public function onUserEdit(UserGenericEvent $event): void
     {
-        /** @var User $user */
-        $user = $event->getSubject();
+        $user = $event->user;
 
         $subject = $this->trans('subject.user_edit');
         $to = $user->getEmail();

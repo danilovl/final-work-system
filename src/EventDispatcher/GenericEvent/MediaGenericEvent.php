@@ -12,10 +12,9 @@
 
 namespace App\EventDispatcher\GenericEvent;
 
-use App\Entity\ResetPassword;
+use App\Entity\Media;
 
-class ResetPasswordGenericEvent
+class MediaGenericEvent
 {
-    public ResetPassword $resetPassword;
-    public int $tokenLifetime;
+    public Media $media;
 }

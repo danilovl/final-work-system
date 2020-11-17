@@ -12,12 +12,9 @@
 
 namespace App\EventListener\EmailNotification;
 
-use App\Entity\Task;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use App\EventDispatcher\GenericEvent\TaskGenericEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -35,13 +32,12 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     }
 
     private function baseEvent(
-        GenericEvent $event,
+        TaskGenericEvent $event,
         string $subject,
         string $template,
         bool $isAuthorEmail = true
     ): void {
-        /** @var Task $task */
-        $task = $event->getSubject();
+        $task = $event->task;
         $work = $task->getWork();
 
         $subject = $this->trans($subject);
@@ -54,37 +50,37 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onTaskCreate(GenericEvent $event): void
+    public function onTaskCreate(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_create', 'task_create');
     }
 
-    public function onTaskEdit(GenericEvent $event): void
+    public function onTaskEdit(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_edit', 'task_edit');
     }
 
-    public function onTaskComplete(GenericEvent $event): void
+    public function onTaskComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_complete', 'task_complete');
     }
 
-    public function onTaskInComplete(GenericEvent $event): void
+    public function onTaskInComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_in_complete', 'task_incomplete');
     }
 
-    public function onTaskNotifyComplete(GenericEvent $event): void
+    public function onTaskNotifyComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_notify_complete', 'task_notify_complete', false);
     }
 
-    public function onTaskNotifyInComplete(GenericEvent $event): void
+    public function onTaskNotifyInComplete(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_notify_in_complete', 'task_notify_incomplete');
     }
 
-    public function onTaskReminderDeadlineCreate(GenericEvent $event): void
+    public function onTaskReminderDeadlineCreate(TaskGenericEvent $event): void
     {
         $this->baseEvent($event, 'subject.task_reminder_deadline', 'task_reminder_deadline');
     }

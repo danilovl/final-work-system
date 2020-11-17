@@ -12,15 +12,9 @@
 
 namespace App\EventListener\EmailNotification;
 
-use App\Entity\{
-    Event,
-    Comment
-};
+use App\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -36,10 +30,9 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         ];
     }
 
-    public function onEventCreate(GenericEvent $genericEvent): void
+    public function onEventCreate(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $subject = $this->trans('subject.event_create');
         $to = $event->getParticipant()->getUser()->getEmail();
@@ -51,10 +44,9 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onEventEdit(GenericEvent $genericEvent): void
+    public function onEventEdit(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $subject = $this->trans('subject.event_edit');
         $to = $event->getParticipant()->getUser()->getEmail();
@@ -65,10 +57,9 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onEventSwitchSkype(GenericEvent $genericEvent): void
+    public function onEventSwitchSkype(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $subject = $this->trans('subject.event_switch_skype');
         $to = $event->getOwner()->getEmail();
@@ -79,10 +70,9 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onEventCommentCreate(GenericEvent $genericEvent): void
+    public function onEventCommentCreate(EventGenericEvent $genericEvent): void
     {
-        /** @var Comment $eventComment */
-        $eventComment = $genericEvent->getSubject();
+        $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
         $to = $event->getParticipant()->getUser()->getEmail();
@@ -102,10 +92,9 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onEventCommentEdit(GenericEvent $genericEvent): void
+    public function onEventCommentEdit(EventGenericEvent $genericEvent): void
     {
-        /** @var Comment $eventComment */
-        $eventComment = $genericEvent->getSubject();
+        $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
         $to = $event->getParticipant()->getUser()->getEmail();
@@ -125,10 +114,9 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
     }
 
-    public function onEventReservation(GenericEvent $genericEvent): void
+    public function onEventReservation(EventGenericEvent $genericEvent): void
     {
-        /** @var Event $event */
-        $event = $genericEvent->getSubject();
+        $event = $genericEvent->event;
 
         $subject = $this->trans('subject.event_reservation');
         $to = $event->getOwner()->getEmail();

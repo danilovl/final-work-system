@@ -12,6 +12,7 @@
 
 namespace App\EventListener\SystemEvent;
 
+use App\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -92,10 +93,9 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onWorkAuthorEdit(GenericEvent $event): void
+    public function onWorkAuthorEdit(WorkGenericEvent $event): void
     {
-        /** @var Work $work */
-        $work = $event->getSubject();
+        $work = $event->work;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($work->getSupervisor());

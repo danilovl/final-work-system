@@ -12,10 +12,11 @@
 
 namespace App\EventDispatcher\GenericEvent;
 
-use App\Entity\ResetPassword;
+use App\Entity\Comment;
+use App\Entity\Event;
 
-class ResetPasswordGenericEvent
+class EventGenericEvent
 {
-    public ResetPassword $resetPassword;
-    public int $tokenLifetime;
-}
+    public Comment $comment;
+    public Event $event;
+ }

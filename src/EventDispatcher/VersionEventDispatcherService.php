@@ -13,11 +13,9 @@
 namespace App\EventDispatcher;
 
 use App\Entity\Media;
+use App\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventDispatcherInterface
-};
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class VersionEventDispatcherService
 {
@@ -30,14 +28,18 @@ class VersionEventDispatcherService
 
     public function onVersionCreate(Media $media): void
     {
-        $genericEvent = new GenericEvent($media);
+        $genericEvent = new VersionGenericEvent;
+        $genericEvent->media = $media;
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_CREATE);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_CREATE);
     }
 
     public function onVersionEdit(Media $media): void
     {
-        $genericEvent = new GenericEvent($media);
+        $genericEvent = new VersionGenericEvent;
+        $genericEvent->media = $media;
+
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_EDIT);
         $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_EDIT);
     }

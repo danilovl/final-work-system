@@ -13,15 +13,10 @@
 namespace App\EventListener\EmailNotification;
 
 use App\Constant\WorkUserTypeConstant;
-use App\Entity\{
-    User,
-    Media
-};
+use App\EventDispatcher\GenericEvent\MediaGenericEvent;
+use App\Entity\User;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -32,10 +27,9 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         ];
     }
 
-    public function onDocumentCreate(GenericEvent $event): void
+    public function onDocumentCreate(MediaGenericEvent $event): void
     {
-        /** @var Media $media */
-        $media = $event->getSubject();
+        $media = $event->media;
         $owner = $media->getOwner();
 
         $subject = $this->trans('subject.document_create');

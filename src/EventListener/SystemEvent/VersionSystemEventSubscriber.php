@@ -12,18 +12,16 @@
 
 namespace App\EventListener\SystemEvent;
 
+use App\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     User,
-    Work,
-    Media,
     SystemEvent,
     SystemEventType,
     SystemEventRecipient
 };
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -35,12 +33,12 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         ];
     }
 
-    public function onVersionCreate(GenericEvent $event): void
-    {
-        /** @var Media $media */
-        $media = $event->getSubject();
-
-        /** @var Work $work */
+    private function onBaseEvent(
+        VersionGenericEvent $event,
+        int $systemEventTypeId,
+        array $users = [true, true, true, true]
+    ): void {
+        $media = $event->media;
         $work = $media->getWork();
 
         $systemEvent = new SystemEvent;
@@ -48,10 +46,10 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $systemEvent->setWork($work);
         $systemEvent->setMedia($media);
         $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::VERSION_CREATE)
+            ->find($systemEventTypeId)
         );
 
-        $workUsers = $work->getUsers(true, true, true, true);
+        $workUsers = $work->getUsers(...$users);
         /** @var User $user */
         foreach ($workUsers as $user) {
             if ($user->getId() !== $media->getOwner()->getId()) {
@@ -64,32 +62,13 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onVersionEdit(GenericEvent $event): void
+    public function onVersionCreate(VersionGenericEvent $event): void
     {
-        /** @var Media $media */
-        $media = $event->getSubject();
+        $this->onBaseEvent($event, SystemEventTypeConstant::VERSION_CREATE);
+    }
 
-        /** @var Work $work */
-        $work = $media->getWork();
-
-        $systemEvent = new SystemEvent;
-        $systemEvent->setOwner($media->getOwner());
-        $systemEvent->setWork($work);
-        $systemEvent->setMedia($media);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::VERSION_EDIT)
-        );
-
-        $workUsers = $work->getUsers(true, true, true, true);
-        /** @var User $user */
-        foreach ($workUsers as $user) {
-            if ($user->getId() !== $media->getOwner()->getId()) {
-                $recipient = new SystemEventRecipient;
-                $recipient->setRecipient($user);
-                $systemEvent->addRecipient($recipient);
-            }
-        }
-
-        $this->em->persistAndFlush($systemEvent);
+    public function onVersionEdit(VersionGenericEvent $event): void
+    {
+        $this->onBaseEvent($event, SystemEventTypeConstant::VERSION_EDIT);
     }
 }

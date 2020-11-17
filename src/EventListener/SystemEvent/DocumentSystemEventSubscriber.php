@@ -13,17 +13,16 @@
 namespace App\EventListener\SystemEvent;
 
 use App\Constant\WorkUserTypeConstant;
+use App\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     User,
-    Media,
     SystemEvent,
     SystemEventRecipient,
     SystemEventType
 };
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -34,12 +33,9 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
         ];
     }
 
-    public function onDocumentCreate(GenericEvent $event): void
+    public function onDocumentCreate(MediaGenericEvent $event): void
     {
-        /** @var Media $media */
-        $media = $event->getSubject();
-
-        /** @var User $owner */
+        $media = $event->media;
         $owner = $media->getOwner();
 
         $systemEvent = new SystemEvent;

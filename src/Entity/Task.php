@@ -71,7 +71,7 @@ class Task
      * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="task")
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $systemEvents = null;
+    private ?Collection $systemEvents;
 
     /**
      * @ORM\Column(type="date", nullable=true)

@@ -12,15 +12,10 @@
 
 namespace App\EventListener\EmailNotification;
 
-use App\Entity\{
-    ConversationMessage,
-    ConversationParticipant
-};
+use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
+use App\Entity\ConversationParticipant;
 use App\EventListener\Events;
-use Symfony\Component\EventDispatcher\{
-    GenericEvent,
-    EventSubscriberInterface
-};
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
@@ -31,18 +26,17 @@ class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         ];
     }
 
-    public function onMessageCreate(GenericEvent $event): void
+    public function onMessageCreate(ConversationMessageGenericEvent $event): void
     {
-        /** @var ConversationMessage $conversationMessage */
-        $conversationMessage = $event->getSubject();
+        $conversationMessage = $event->conversationMessage;
         $conversation = $conversationMessage->getConversation();
 
         $subject = $this->trans('subject.message_create');
-        /** @var ConversationParticipant $parcipant */
-        foreach ($conversation->getParticipants() as $parcipant) {
-            $to = $parcipant->getUser()->getEmail();
+        /** @var ConversationParticipant $participant */
+        foreach ($conversation->getParticipants() as $participant) {
+            $to = $participant->getUser()->getEmail();
 
-            if ($conversationMessage->getOwner()->getId() !== $parcipant->getUser()->getId()) {
+            if ($conversationMessage->getOwner()->getId() !== $participant->getUser()->getId()) {
                 $body = $this->twig->render($this->getTemplate('message_create'), [
                     'sender' => $conversationMessage->getOwner(),
                     'conversation' => $conversation
