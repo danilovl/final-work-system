@@ -19,6 +19,7 @@ use App\Constant\{
 };
 use App\Controller\BaseController;
 use App\Entity\{
+    Conversation,
     ConversationMessage,
     ConversationMessageStatusType
 };
@@ -57,5 +58,14 @@ class ConversationController extends BaseController
         }
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
+    }
+
+    public function delete(Conversation $conversation): JsonResponse
+    {
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $conversation);
+
+        $this->removeEntity($conversation);
+
+        return $this->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
 }

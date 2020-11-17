@@ -49,3 +49,11 @@ conversation_message_last:
   defaults:
     _controller: App\Controller\ConversationController:lastMessage
   methods: [GET, POST]
+
+conversation_delete_ajax:
+  path: /{id}/delete/ajax
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\ConversationController:delete
+  methods: [POST, DELETE]

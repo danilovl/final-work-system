@@ -1,0 +1,55 @@
+{% set deleteIcon = 'fa-trash-o' %}
+{% if modalDataTargetDeleteIcon is defined %}
+    {% set deleteIcon = modalDataTargetDeleteIcon %}
+{% endif %}
+
+<a data-toggle="modal"
+   data-target="#{{ modalDataTarget }}-delete-modal-{{ modalDataTargetId | hashids_encode }}"
+   class="btn btn-danger btn-xs">
+    <i class="fa {{ deleteIcon }}"></i>
+    {% if modalDataTargetDeleteText is defined %}
+        {{ modalDataTargetDeleteText }}
+    {% endif %}
+</a>
+<div class="modal fade bs-example-modal-sm"
+     tabindex="-1"
+     role="dialog"
+     id="{{ modalDataTarget }}-delete-modal-{{ modalDataTargetId | hashids_encode }}"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">
+                    {{ 'app.text.deleting' | trans() }} | {{ modalDataTargetName }}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <h4>
+                    {{ 'app.text.are_you_sure_delete' | trans() }}?
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    {{ 'app.form.action.close' | trans() }}
+                </button>
+                <button
+                        data-delete-target-url="{{ modalDataTargetDeleteUrl }}"
+                        data-delete-target-row="{{ modalDataTarget }}-{{ modalDataTargetId | hashids_encode }}"
+                        type="button"
+                        class="btn btn-danger delete-element">
+                    <i class="fa fa-refresh fa-spin hide"></i>
+                    <i class="fa fa-trash-o"></i>
+                    {{ 'app.form.action.delete' | trans() }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

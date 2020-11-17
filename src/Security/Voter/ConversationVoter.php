@@ -24,7 +24,8 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class ConversationVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW
+        VoterSupportConstant::VIEW,
+        VoterSupportConstant::DELETE
     ];
 
     protected function supports($attribute, $subject): bool
@@ -47,8 +48,11 @@ class ConversationVoter extends Voter
             return false;
         }
 
-        if ($attribute === VoterSupportConstant::VIEW) {
-            return $this->canView($subject, $user);
+        switch ($attribute) {
+            case VoterSupportConstant::VIEW:
+                return $this->canView($subject, $user);
+            case VoterSupportConstant::DELETE:
+                return $this->canDelete($subject, $user);
         }
 
         throw new LogicException('This code should not be reached!');
@@ -57,5 +61,10 @@ class ConversationVoter extends Voter
     private function canView(Conversation $conversation, User $user): bool
     {
         return $conversation->isParticipant($user);
+    }
+
+    private function canDelete(Conversation $conversation, User $user): bool
+    {
+        return $conversation->isOwner($user) || $conversation->getWork()->getSupervisor()->getId() === $user->getId();
     }
 }

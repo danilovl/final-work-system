@@ -50,8 +50,7 @@
                                     <th>
                                         {{ 'app.text.name_conversation' | trans() }}
                                     </th>
-                                    <th></th>
-                                    <th></th>
+                                    <th width="120px"></th>
                                     <th>
                                         {{ 'app.text.last_message_from' | trans() }}
                                     </th>
@@ -69,7 +68,7 @@
                                         {% set conversationUnreadClass = 'conversation-unread' %}
                                     {% endif %}
 
-                                    <tr class="{{ conversationUnreadClass }}">
+                                    <tr class="{{ conversationUnreadClass }}" data-delete-row="conversation-{{ conversation.id | hashids_encode }}">
                                         <td class="check-mail">
                                             <input type="checkbox" class="i-checks" title="">
                                         </td>
@@ -90,13 +89,21 @@
                                                target="_blank">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                        </td>
-                                        <td>
                                             <a class="btn btn-primary btn-xs"
                                                href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}"
                                                target="_blank">
                                                 <i class="fa fa-comments-o"></i>
                                             </a>
+
+                                            {% if app_user().isSupervisor %}
+                                                {% include 'common_part/ajax_delete_button.html.twig' with {
+                                                    'modalDataTargetDeleteIcon': 'fa-remove',
+                                                    'modalDataTarget': 'conversation',
+                                                    'modalDataTargetId': conversation.id,
+                                                    'modalDataTargetName': conversation.name,
+                                                    'modalDataTargetDeleteUrl': path('conversation_delete_ajax', { 'id': conversation.id | hashids_encode })
+                                                } %}
+                                            {% endif %}
                                         </td>
                                         {% set lastMessage = conversation.getLastMessage %}
                                         <td class="">
