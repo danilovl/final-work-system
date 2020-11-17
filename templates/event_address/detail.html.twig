@@ -22,48 +22,12 @@
                                 <h2>
                                     {{ 'app.text.appointment_address' | trans() }}
                                 </h2>
-                                <div class="modal fade bs-example-modal-sm"
-                                     tabindex="-1"
-                                     role="dialog"
-                                     id="appointment-address-delete-modal-{{ eventAddress.id | hashids_encode }}"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button"
-                                                        class="close"
-                                                        data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">
-                                                    {{ 'app.text.deleting' | trans() }} | {{ eventAddress.name }}
-                                                </h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h4>
-                                                    {{ 'app.text.are_you_sure_delete' | trans() }}
-                                                    ?
-                                                </h4>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button"
-                                                        class="btn btn-default"
-                                                        data-dismiss="modal">
-                                                    {{ 'app.form.action.close' | trans() }}
-                                                </button>
-
-                                                {{ form_start(deleteForm, {'attr': {'class': 'delete-form-button'}}) }}
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash-o"></i>
-                                                    {{ 'app.form.action.delete' | trans() }}
-                                                </button>
-                                                {{ form_end(deleteForm) }}
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% include 'common_part/ajax_delete_modal.html.twig' with {
+                                    'modalDataTarget': 'appointment-address',
+                                    'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                                    'modalDataTargetId': eventAddress.id,
+                                    'modalDataTargetName': eventAddress.name,
+                                } %}
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li class="dropdown">
                                         <a href="#"
@@ -83,11 +47,13 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a data-toggle="modal"
-                                                   data-target="#appointment-address-delete-modal-{{ eventAddress.id | hashids_encode }}">
-                                                    <i class="fa fa-trash-o"></i>
-                                                    {{ 'app.form.action.delete' | trans() }}
-                                                </a>
+                                                {% include 'common_part/ajax_delete_button.html.twig' with {
+                                                    'modalDataTargetDeleteClass': '',
+                                                    'modalDataTarget': 'appointment-address',
+                                                    'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                                                    'modalDataTargetId': eventAddress.id,
+                                                    'modalDataTargetName': eventAddress.name,
+                                                 } %}
                                             </li>
                                         </ul>
                                     </li>

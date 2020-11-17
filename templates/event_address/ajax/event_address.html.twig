@@ -77,7 +77,6 @@
     </div>
 </div>
 
-{#<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>#}
 <script>
     var locale = '{{ app.request.locale }}';
 
@@ -85,7 +84,7 @@
         initTinymce(locale);
         initJsSwitch('.ajax .js-switch');
         createEditContentAjax('#event_address_action');
-        createEditContentAjax('#event_address_action_clos0e', true);
+        createEditContentAjax('#event_address_action_close', true);
 
         var head = document.getElementsByTagName('head')[0];
         var insertBefore = head.insertBefore;

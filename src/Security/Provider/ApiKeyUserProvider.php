@@ -34,7 +34,6 @@ class ApiKeyUserProvider implements UserProviderInterface
 
     public function loadUserByUsername($username): UserInterface
     {
-        /** @var ApiUser|null $user */
         $user = $this->apiUserFacade->findByApiKey($username);
         if ($user === null) {
             throw new UsernameNotFoundException();

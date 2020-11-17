@@ -96,7 +96,7 @@
                                             </a>
 
                                             {% if app_user().isSupervisor %}
-                                                {% include 'common_part/ajax_delete_button.html.twig' with {
+                                                {% include 'common_part/ajax_delete.html.twig' with {
                                                     'modalDataTargetDeleteIcon': 'fa-remove',
                                                     'modalDataTarget': 'conversation',
                                                     'modalDataTargetId': conversation.id,

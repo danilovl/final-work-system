@@ -225,59 +225,15 @@
                                                         <i class="fa fa-pencil"></i>
                                                         {{ 'app.form.action.edit' | trans() }}
                                                     </a>
-                                                    <a data-toggle="modal"
-                                                       data-target="#document-delete-modal-{{ document.id | hashids_encode }}"
-                                                       class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-trash-o"></i>
-                                                        {{ 'app.form.action.delete' | trans() }}
-                                                    </a>
-                                                    <div class="modal fade bs-example-modal-sm"
-                                                         tabindex="-1"
-                                                         role="dialog"
-                                                         id="document-delete-modal-{{ document.id | hashids_encode }}"
-                                                         aria-hidden="true">
 
-                                                        <div class="modal-dialog modal-sm">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button"
-                                                                            class="close"
-                                                                            data-dismiss="modal"
-                                                                            aria-label="Close">
-                                                                        <span aria-hidden="true">×</span>
-                                                                    </button>
-                                                                    <h4 class="modal-title">
-                                                                        {{ 'app.text.deleting' | trans() }}
-                                                                        | {{ document.name }}
-                                                                    </h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <h4>
-                                                                        {{ 'app.text.are_you_sure_delete' | trans() }}
-                                                                        ?
-                                                                    </h4>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button"
-                                                                            class="btn btn-default"
-                                                                            data-dismiss="modal">
-                                                                        {{ 'app.form.action.close' | trans() }}
-                                                                    </button>
-                                                                    <button
-                                                                            data-delete-target-url="{{ path('document_delete_ajax', { 'id': document.id | hashids_encode }) }}"
-                                                                            data-delete-target-row="document-{{ document.id | hashids_encode }}"
-                                                                            type="button"
-                                                                            class="btn btn-danger delete-element">
-                                                                        <i class="fa fa-refresh fa-spin hide"></i>
-                                                                        <i class="fa fa-trash-o"></i>
-                                                                        {{ 'app.form.action.delete' | trans() }}
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {% include 'common_part/ajax_delete.html.twig' with {
+                                                        'modalDataTarget': 'document',
+                                                        'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                                                        'modalDataTargetId': document.id,
+                                                        'modalDataTargetName': document.name,
+                                                        'modalDataTargetDeleteUrl': path('document_delete_ajax', { 'id': document.id | hashids_encode })
+                                                    } %}
                                                 {% endif %}
-
                                             </td>
                                         </tr>
 
