@@ -59,7 +59,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(name="roles", type="array")
      */
-    private array $roles = [];
+    private array $roles;
 
     /**
      * @ORM\Column(name="password", type="string")
@@ -72,6 +72,11 @@ class User implements UserInterface
      * @ORM\Column(name="last_login", type="datetime", nullable=true)
      */
     private ?DateTime $lastLogin = null;
+
+    /**
+     * @ORM\Column(name="last_requested_at", type="datetime", nullable=true)
+     */
+    private ?DateTime $lastRequestedAt = null;
 
     /**
      * @ORM\Column(name="confirmation_token", type="string", nullable=true)
@@ -171,7 +176,7 @@ class User implements UserInterface
      * )
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $groups = null;
+    private ?Collection $groups;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Media", cascade={"persist", "remove"}, fetch="EAGER")
@@ -209,7 +214,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $mediaOwner = null;
+    private ?Collection $mediaOwner;
 
     /**
      * @var Collection|MediaCategory[]
@@ -217,7 +222,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\MediaCategory", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $mediaCategoriesOwner = null;
+    private ?Collection $mediaCategoriesOwner;
 
     /**
      * @var Collection|Work[]
@@ -225,7 +230,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="author", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $authorWorks = null;
+    private ?Collection $authorWorks;
 
     /**
      * @var Collection|Work[]
@@ -233,7 +238,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="supervisor", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $supervisorWorks = null;
+    private ?Collection $supervisorWorks;
 
     /**
      * @var Collection|Work[]
@@ -241,7 +246,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="opponent", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $opponentWorks = null;
+    private ?Collection $opponentWorks;
 
     /**
      * @var Collection|Work[]
@@ -249,7 +254,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="consultant", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $consultantWorks = null;
+    private ?Collection $consultantWorks;
 
     /**
      * @var Collection|Task[]
@@ -257,7 +262,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $tasksOwner = null;
+    private ?Collection $tasksOwner;
 
     /**
      * @var Collection|WorkCategory[]
@@ -265,7 +270,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\WorkCategory", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $workCategoriesOwner = null;
+    private ?Collection $workCategoriesOwner;
 
     /**
      * @var Collection|EventAddress[]
@@ -273,7 +278,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\EventAddress", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $eventAddressOwner = null;
+    private ?Collection $eventAddressOwner;
 
     /**
      * @var Collection|Event[]
@@ -281,7 +286,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $eventsOwner = null;
+    private ?Collection $eventsOwner;
 
     /**
      * @var Collection|EventParticipant[]
@@ -289,7 +294,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\EventParticipant", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $eventsParticipant = null;
+    private ?Collection $eventsParticipant;
 
     /**
      * @var Collection|Conversation[]
@@ -297,7 +302,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Conversation", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $conversationsOwner = null;
+    private ?Collection $conversationsOwner;
 
     /**
      * @var Collection|ConversationParticipant[]
@@ -305,7 +310,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\ConversationParticipant", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $conversationsParticipant = null;
+    private ?Collection $conversationsParticipant;
 
     /**
      * @var Collection|ConversationMessage[]
@@ -313,7 +318,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessage", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $conversationMessages = null;
+    private ?Collection $conversationMessages;
 
     /**
      * @var Collection|ConversationMessageStatus[]
@@ -321,7 +326,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessageStatus", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $conversationMessageStatus = null;
+    private ?Collection $conversationMessageStatus;
 
     /**
      * @var Collection|Comment[]
@@ -329,7 +334,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $comments = null;
+    private ?Collection $comments;
 
     /**
      * @var Collection|EventSchedule[]
@@ -337,7 +342,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\EventSchedule", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $eventsSchedule = null;
+    private ?Collection $eventsSchedule;
 
     /**
      * @var Collection|SystemEvent[]
@@ -345,7 +350,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $systemEventsOwner = null;
+    private ?Collection $systemEventsOwner;
 
     /**
      * @var Collection|SystemEventRecipient[]
@@ -353,7 +358,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\SystemEventRecipient", mappedBy="recipient", cascade={"persist", "remove"})
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $systemEventsRecipient = null;
+    private ?Collection $systemEventsRecipient;
 
     public function __construct()
     {
@@ -553,6 +558,16 @@ class User implements UserInterface
     public function setLastLogin(?DateTime $lastLogin): void
     {
         $this->lastLogin = $lastLogin;
+    }
+
+    public function getLastRequestedAt(): ?DateTime
+    {
+        return $this->lastRequestedAt;
+    }
+
+    public function setLastRequestedAt(?DateTime $lastRequestedAt): void
+    {
+        $this->lastRequestedAt = $lastRequestedAt;
     }
 
     public function getConfirmationToken(): ?string
