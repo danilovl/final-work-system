@@ -1270,6 +1270,15 @@ class User implements UserInterface
         return $this;
     }
 
+    public function isOnline(): bool
+    {
+        if ($this->lastRequestedAt === null) {
+            return false;
+        }
+
+        return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTime;
+    }
+
     public function serialize()
     {
         return serialize(array(

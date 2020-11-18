@@ -108,6 +108,9 @@
                                         {% set lastMessage = conversation.getLastMessage %}
                                         <td class="">
                                             {% if lastMessage is not empty %}
+                                                {% include 'common_part/user_online_status.html.twig' with {
+                                                    'user': lastMessage.owner
+                                                } %}
                                                 {{ lastMessage.owner }}
                                             {% endif %}
                                         </td>

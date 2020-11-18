@@ -12,6 +12,7 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\{
     User,
     Work,
@@ -111,5 +112,18 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->orderBy('conversation_message.createdAt', Criteria::DESC)
             ->setParameter('user', $user)
             ->setParameter('type', $statusType);
+    }
+
+    public function allByConversationAfterDate(
+        Conversation $conversation,
+        DateTime $date
+    ): QueryBuilder {
+        return $this->createQueryBuilder('conversation_message')
+            ->select('conversation_message')
+            ->where('conversation_message.conversation = :conversation')
+            ->andWhere('conversation_message.createdAt > :date')
+            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->setParameter('conversation', $conversation)
+            ->setParameter('date', $date);
     }
 }

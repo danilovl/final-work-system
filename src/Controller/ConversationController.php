@@ -182,7 +182,7 @@ class ConversationController extends BaseController
 
         return $this->render('conversation/detail.html.twig', [
             'conversation' => $conversation,
-            'conversationMessage' => $pagination,
+            'conversationMessages' => $pagination,
             'form' => $form ? $form->createView() : null
         ]);
     }

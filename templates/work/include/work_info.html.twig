@@ -197,6 +197,9 @@
                                 <div class="col-sm-12">
                                     <div class="left col-xs-9">
                                         <h2>
+                                            {% include 'common_part/user_online_status.html.twig' with {
+                                                'user': work.supervisor
+                                            } %}
                                             {{ work.supervisor }}
                                         </h2>
                                         <ul class="list-unstyled">
@@ -272,6 +275,9 @@
                                     <div class="col-sm-12">
                                         <div class="left col-xs-9">
                                             <h2>
+                                                {% include 'common_part/user_online_status.html.twig' with {
+                                                    'user': work.opponent
+                                                } %}
                                                 {{ work.opponent }}
                                             </h2>
                                             <ul class="list-unstyled">
@@ -348,6 +354,9 @@
                                     <div class="col-sm-12">
                                         <div class="left col-xs-9">
                                             <h2>
+                                                {% include 'common_part/user_online_status.html.twig' with {
+                                                    'user': work.consultant
+                                                } %}
                                                 {{ work.consultant }}
                                             </h2>
                                             <ul class="list-unstyled">

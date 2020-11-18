@@ -29,48 +29,15 @@
                             <div class="row">
                                 <div class="col-md-9 ">
                                     <div class="chat-discussion">
-
-                                        {% for message in conversationMessage %}
-                                            {% set conversationMessageUnreadClass = null %}
-                                            {% if message.isRead == false %}
-                                                {% set conversationMessageUnreadClass = 'conversation-message-unread' %}
-                                            {% endif %}
-                                            <div class="{% if message.owner.id == app_user().id %} chat-message-left {% else %} chat-message-right {% endif %}">
-                                                <img class="message-avatar"
-                                                     src="{{ message.owner | profile_image }}"
-                                                     alt="{{ message.owner }}">
-                                                <div class="{{ conversationMessageUnreadClass }} message">
-                                                    <a class="message-author" href="#"> {{ message.owner }} </a>
-                                                    <span class="message-date">
-                                                        {{ message.createdAt | date }}
-
-                                                        {% if message.isOwner(app_user()) == false %}
-                                                            {% if conversationMessageUnreadClass is not empty %}
-                                                                <input class="js-switch small"
-                                                                       data-switchery="true"
-                                                                       data-target-type="complete"
-                                                                       data-target-url="{{ path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode }) }}"
-                                                                       title=""
-                                                                       type="checkbox">
-                                                                {% else %}
-                                                                <input class="js-switch small"
-                                                                       checked
-                                                                       data-switchery="true"
-                                                                       data-target-type="complete"
-                                                                       data-target-url="{{ path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode }) }}"
-                                                                       title=""
-                                                                       type="checkbox">
-                                                            {% endif %}
-                                                        {% endif %}
-
-                                                    </span>
-                                                    <span class="message-content">{{ message.content | away_to | raw }}</span>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
+                                        <div id="chat">
+                                            {% for message in conversationMessages %}
+                                                {% include 'conversation/include/chat_message.html.twig' with {
+                                                    'message': message
+                                                } %}
+                                            {% endfor %}
+                                        </div>
                                         <div class="navigation">
-                                            {{ knp_pagination_render(conversationMessage) }}
+                                            {{ knp_pagination_render(conversationMessages) }}
                                         </div>
                                     </div>
                                 </div>
@@ -79,16 +46,9 @@
                                         <div class="users-list">
 
                                             {% for participant in conversation.participants %}
-                                                {% if participant.user.id != app_user().id %}
-                                                    <div class="chat-user">
-                                                        <img class="chat-avatar"
-                                                             src="{{ participant.user | profile_image }}"
-                                                             alt="">
-                                                        <div class="chat-user-name">
-                                                            {{ participant.user }}
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
+                                                {% include 'conversation/include/chat_participant.html.twig' with {
+                                                    'participant': participant
+                                                } %}
                                             {% else %}
                                                 {% if conversation.isOwner(app_user()) == false %}
                                                     <div class="chat-user">
@@ -96,6 +56,9 @@
                                                              src="{{ conversation.owner | profile_image }}"
                                                              alt="">
                                                         <div class="chat-user-name">
+                                                            {% include 'common_part/user_online_status.html.twig' with {
+                                                                'user': conversation.owner
+                                                            } %}
                                                             {{ conversation.owner }}
                                                         </div>
                                                     </div>
@@ -146,6 +109,7 @@
 
         $(document).ready(function () {
             initTinymce(locale);
+            conversationEventSource("{{ path('conversation_live_ajax', {'id': conversation.id | hashids_encode }) }}", $('#chat'));
         });
     </script>
 {% endblock %}

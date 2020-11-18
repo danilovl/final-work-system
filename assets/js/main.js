@@ -658,6 +658,23 @@ function initBackToTop() {
     });
 }
 
+function atob64DecodeUnicode(str) {
+    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+    }).join(''))
+}
+
+function conversationEventSource(url, $chat) {
+    var eventSource = new EventSource(url);
+    eventSource.onmessage = function (event) {
+        var data = event.data;
+        if (data.length > 0) {
+            $chat.prepend(atob64DecodeUnicode(data));
+            initAjaxChangeStatus();
+        }
+    };
+}
+
 (function ($) {
     $.fn.tableFix = function () {
         return this.each(function () {

@@ -3,6 +3,9 @@
         <div class="x_title">
             <h2>
                 {{ work.author | slice(0,20) }}
+                {% include 'common_part/user_online_status.html.twig' with {
+                    'user': work.author
+                } %}
             </h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li>

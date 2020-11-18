@@ -24,6 +24,7 @@ use App\Entity\{
     ConversationMessageStatusType
 };
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ConversationController extends BaseController
 {
@@ -67,5 +68,17 @@ class ConversationController extends BaseController
         $this->removeEntity($conversation);
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
+    }
+
+    public function liveConversation(Conversation $conversation): StreamedResponse
+    {
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
+
+        $response = new StreamedResponse($this->get('app.conversation_stream')->handle($conversation));
+        $response->headers->set('Content-Type', 'text/event-stream');
+        $response->headers->set('X-Accel-Buffering', 'no');
+        $response->headers->set('Cach-Control', 'no-cache');
+
+        return $response;
     }
 }

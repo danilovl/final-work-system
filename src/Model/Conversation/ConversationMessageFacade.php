@@ -13,6 +13,7 @@
 namespace App\Model\Conversation;
 
 use App\Repository\ConversationMessageRepository;
+use DateTime;
 use App\Services\{
     EntityManagerService,
     ConversationStatusService
@@ -156,5 +157,15 @@ class ConversationMessageFacade
                     ->isConversationMessageRead($conversationMessage, $user)
             );
         }
+    }
+
+    public function getMessagesByConversationAfterDate(
+        Conversation $conversation,
+        DateTime $date
+    ): array {
+        return $this->conversationMessageRepository
+            ->allByConversationAfterDate($conversation, $date)
+            ->getQuery()
+            ->getResult();
     }
 }

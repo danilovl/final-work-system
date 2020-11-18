@@ -169,11 +169,7 @@ class Task
 
     public function changeNotifyComplete(): void
     {
-        if ($this->isNotifyComplete()) {
-            $this->setNotifyComplete(false);
-        } else {
-            $this->setNotifyComplete(true);
-        }
+        $this->setNotifyComplete($this->isNotifyComplete() ? false : true);
     }
 
     public function __toString(): string

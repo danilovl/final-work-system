@@ -1,0 +1,38 @@
+{% set conversationMessageUnreadClass = null %}
+{% if message.isRead == false %}
+    {% set conversationMessageUnreadClass = 'conversation-message-unread' %}
+{% endif %}
+<div class="{% if message.owner.id == app_user().id %} chat-message-left {% else %} chat-message-right {% endif %}">
+    <img class="message-avatar"
+         src="{{ message.owner | profile_image }}"
+         alt="{{ message.owner }}"
+    >
+    <div class="{{ conversationMessageUnreadClass }} message">
+        <a class="message-author" href="#"> {{ message.owner }} </a>
+        <span class="message-date">
+            {{ message.createdAt | date }}
+
+            {% if message.isOwner(app_user()) == false %}
+                {% if conversationMessageUnreadClass is not empty %}
+                    <input class="js-switch small"
+                           data-switchery="true"
+                           data-target-type="complete"
+                           data-target-url="{{ path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode }) }}"
+                           title=""
+                           type="checkbox"
+                    >
+                {% else %}
+                    <input class="js-switch small"
+                           checked
+                           data-switchery="true"
+                           data-target-type="complete"
+                           data-target-url="{{ path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode }) }}"
+                           title=""
+                           type="checkbox"
+                    >
+                {% endif %}
+            {% endif %}
+            </span>
+        <span class="message-content">{{ message.content | away_to | raw }}</span>
+    </div>
+</div>
