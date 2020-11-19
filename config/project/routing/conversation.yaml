@@ -57,3 +57,11 @@ conversation_delete_ajax:
   defaults:
     _controller: App\Controller\Ajax\ConversationController:delete
   methods: [POST, DELETE]
+
+conversation_live_ajax:
+  path:  /{id}/live
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Controller\Ajax\ConversationController:liveConversation
+  methods: [GET, POST]

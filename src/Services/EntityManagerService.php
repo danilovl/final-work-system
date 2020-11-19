@@ -37,13 +37,13 @@ class EntityManagerService
     public function remove($entity): void
     {
         $this->entityManager->remove($entity);
-        $this->entityManager->flush();
+        $this->entityManager->flush($entity);
     }
 
     public function create($entity): void
     {
         $this->entityManager->persist($entity);
-        $this->entityManager->flush();
+        $this->entityManager->flush($entity);
     }
 
     public function flush($entity = null): void

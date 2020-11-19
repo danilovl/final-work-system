@@ -3,8 +3,6 @@
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/public/upload/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -17,7 +15,6 @@
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
-/public/build/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
@@ -29,3 +26,6 @@ yarn-error.log
 
 .idea
 .idea/
+/public/build/
+/public/bundles/
+/public/upload/

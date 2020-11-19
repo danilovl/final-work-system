@@ -14,10 +14,10 @@ services:
 
   app.mailer:
     class: App\Services\MailerService
-    arguments:
-      - '@mailer'
     autowire: true
     public: true
+
+  App\Services\MailerService: '@app.mailer'
 
   app.translator:
     class: App\Services\TranslatorService
@@ -72,6 +72,10 @@ services:
       - '@app.entity_manager'
 
   App\Services\ConversationStatusService: '@app.conversation_status'
+
+  app.conversation_stream:
+    class: App\Services\ConversationStreamService
+    autowire: true
 
   app.system_event_link_generator:
     class: App\Services\SystemEventLinkGeneratorService

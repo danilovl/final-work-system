@@ -2,6 +2,6 @@ services:
   #  Validator
   app.validator.user:
     class: App\Utils\Validator\UserValidator
-    arguments:
-      - '@doctrine.orm.entity_manager'
+    autowire: true
 
+  App\Utils\Validator\UserValidator: '@app.validator.user'

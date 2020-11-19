@@ -65,10 +65,14 @@ services:
     autowire: true
     public: true
 
+  App\Model\Media\MediaFacade: '@app.facade.media'
+
   app.facade.media_type:
     class: App\Model\Media\MediaTypeFacade
     autowire: true
     public: true
+
+  App\Model\Media\MediaTypeFacade: '@app.facade.media_type'
 
   app.facade.system_event_recipient:
     class: App\Model\SystemEvent\SystemEventRecipientFacade
@@ -88,6 +92,8 @@ services:
     class: App\Model\Task\TaskDeadlineFacade
     autowire: true
     public: true
+
+  App\Model\Task\TaskDeadlineFacade: '@app.facade.task_deadline'
 
   app.facade.task:
     class: App\Model\Task\TaskFacade
@@ -145,6 +151,8 @@ services:
     class: App\Model\EmailNotificationQueue\EmailNotificationQueueFacade
     autowire: true
     public: true
+
+  App\Model\EmailNotificationQueue\EmailNotificationQueueFacade: '@app.facade.email_notification_queue'
 
   app.facade.conversation_message_status:
     class: App\Model\ConversationMessageStatus\ConversationMessageStatusFacade

@@ -28,4 +28,12 @@ class MediaTypeFacade
     {
         return $this->mediaTypeRepository->find($id);
     }
+
+    /**
+     * @return MediaType[]
+     */
+    public function findAll(): array
+    {
+        return $this->mediaTypeRepository->findAll();
+    }
 }

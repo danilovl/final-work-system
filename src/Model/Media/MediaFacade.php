@@ -34,6 +34,26 @@ class MediaFacade
         return $this->mediaRepository->find($id);
     }
 
+    public function findByMediaName(string $mediaName): ?Media
+    {
+        return $this->mediaRepository->findOneBy([
+            'mediaName' => $mediaName
+        ]);
+    }
+
+    /**
+     * @return Media[]
+     */
+    public function findAll(int $offset, int $limit): array
+    {
+        return $this->mediaRepository
+            ->baseQueryBuilder()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function queryMediasByType(MediaType $mediaType): Query
     {
         return $this->mediaRepository

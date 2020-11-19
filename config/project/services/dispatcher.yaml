@@ -32,6 +32,8 @@ services:
     arguments:
       - '@event_dispatcher'
 
+  App\EventDispatcher\TaskEventDispatcherService: '@app.event_dispatcher.task'
+
   app.event_dispatcher.conversation:
     class: App\EventDispatcher\ConversationEventDispatcherService
     arguments:
