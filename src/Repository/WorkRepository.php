@@ -57,17 +57,20 @@ class WorkRepository extends ServiceEntityRepository
 
     public function allByUserStatus(
         User $user,
-        User $supervisor,
+        ?User $supervisor,
         string $type,
         $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('work')
             ->addSelect('status')
             ->innerJoin('work.status', 'status')
-            ->where('work.supervisor = :supervisor')
             ->setParameter('user', $user)
-            ->setParameter('supervisor', $supervisor)
             ->setCacheable(true);
+
+        if ($supervisor !== null) {
+            $queryBuilder->where('work.supervisor = :supervisor')
+                ->setParameter('supervisor', $supervisor);
+        }
 
         switch ($type) {
             case WorkUserTypeConstant::AUTHOR:

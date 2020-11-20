@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    public: true
+
+  app.homepage_notify.user_profile_information:
+    class: App\Utils\HomepageNotify\UserProfileInformationNotify
+    autowire: true
+    public: true
+
+  app.homepage_notify.work_deadline_information:
+    class: App\Utils\HomepageNotify\WorkDeadlineNotify
+    autowire: true
+    public: true

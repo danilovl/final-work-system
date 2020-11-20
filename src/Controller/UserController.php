@@ -177,7 +177,7 @@ class UserController extends BaseController
         if ($getUserWorkAndStatus === true) {
             foreach ($pagination as $paginationUser) {
                 $paginationUserWorks = $this->get('app.facade.work')
-                    ->getWorksByUserStatus($paginationUser, $user, $type, $workStatus);
+                    ->getWorksByAuthorSupervisorStatus($paginationUser, $user, $type, $workStatus);
 
                 if ($works->get($paginationUser->getId()) === null) {
                     $works->set($paginationUser->getId(), $paginationUserWorks);

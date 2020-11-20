@@ -125,6 +125,8 @@ services:
     autowire: true
     public: true
 
+  App\Model\Work\WorkFacade: '@app.facade.work'
+
   app.facade.work_status:
     class: App\Model\WorkStatus\WorkStatusFacade
     autowire: true

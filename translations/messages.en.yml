@@ -247,10 +247,13 @@ app:
     personal_information_consultant: Personal information about consultant
     personal_information_opponent: Personal information about opponent
     priority: Priority
+    please_fill_phone_number_before_use_app: Please fill in the user's phone number in the personal settings before you start working with the application
+    please_fill_skype_before_use_app: Please fill in the user's skype in the personal settings before you start working with the application
     program_deadline: Program deadline
     quantity: Quantity
     read: Read
     remaining_time: Remaining time
+    reminding_work_deadline_submission: We remind you that the approaching deadline for the works
     role: role
     search: Search
     search_form: Search form

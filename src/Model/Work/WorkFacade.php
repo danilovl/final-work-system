@@ -33,6 +33,9 @@ class WorkFacade
             ->find($id);
     }
 
+    /**
+     * @return Work[]
+     */
     public function findAll(?int $limit = null): array
     {
         return $this->workRepository
@@ -42,7 +45,10 @@ class WorkFacade
             ->getResult();
     }
 
-    public function getWorksByUserStatus(
+    /**
+     * @return Work[]
+     */
+    public function getWorksByAuthorSupervisorStatus(
         User $user,
         User $supervisor,
         string $type,
@@ -50,6 +56,20 @@ class WorkFacade
     ): array {
         return $this->workRepository
             ->allByUserStatus($user, $supervisor, $type, $workStatus)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Work[]
+     */
+    public function getWorksByAuthorStatus(
+        User $user,
+        string $type,
+        $workStatus = null
+    ): array {
+        return $this->workRepository
+            ->allByUserStatus($user, null, $type, $workStatus)
             ->getQuery()
             ->getResult();
     }

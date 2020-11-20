@@ -71,3 +71,12 @@ parameters:
         maxWidth: 1200
         minHeight: 200
         maxHeight: 1200
+  homepage_notify:
+    type_class:
+      info: 'alert-info'
+      danger: 'alert-danger'
+      success: 'alert-success'
+      warning: 'alert-warning'
+    notifies:
+      - 'app.homepage_notify.user_profile_information'
+      - 'app.homepage_notify.work_deadline_information'

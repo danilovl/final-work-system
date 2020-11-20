@@ -17,13 +17,11 @@ use App\EventListener\Events;
 use App\Constant\SystemEventTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
-    Work,
     SystemEvent,
     SystemEventType,
     SystemEventRecipient
 };
 use App\Entity\User;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
@@ -36,10 +34,9 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         ];
     }
 
-    public function onWorkCreate(GenericEvent $event): void
+    public function onWorkCreate(WorkGenericEvent $event): void
     {
-        /** @var Work $work */
-        $work = $event->getSubject();
+        $work = $event->work;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
@@ -62,10 +59,9 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $this->em->persistAndFlush($systemEvent);
     }
 
-    public function onWorkEdit(GenericEvent $event): void
+    public function onWorkEdit(WorkGenericEvent $event): void
     {
-        /** @var Work $work */
-        $work = $event->getSubject();
+        $work = $event->work;
 
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);

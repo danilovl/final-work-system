@@ -248,10 +248,13 @@ app:
     personal_information_consultant: Osobní údaje konzultanta
     personal_information_opponent: Osobní údaje oponenta
     priority: Priorita
+    please_fill_phone_number_before_use_app: Prosím, vyplňte v osobním nastavení telefonní číslo uživatele dříve, než začnete pracovat s aplikací
+    please_fill_skype_before_use_app: Prosím, vyplňte v osobním nastavení skype uživatele dříve, než začnete pracovat s aplikací
     program_deadline: Termín programu
     quantity: Množství
     read: Číst
     remaining_time: Zbývající čas
+    reminding_work_deadline_submission: Připomínáme, že se blíží termín odevzdání prací
     role: Role
     search: Vyhledávání
     search_form: Vyhledávací formulář

@@ -52,3 +52,10 @@ services:
       - '@danilovl.parameter'
     tags:
       - { name: twig.runtime }
+
+  app.twig.homepage_notify:
+    class: App\Twig\Runtime\HomepageNotifyRuntime
+    public: false
+    autowire: true
+    tags:
+      - { name: twig.runtime }

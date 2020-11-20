@@ -246,10 +246,13 @@ app:
     personal_information_consultant: Личная информация об консультанте
     personal_information_opponent: Личная информация об оппоненте
     priority: Приоритет
+    please_fill_phone_number_before_use_app: Заполните, пожалуйста, номер телефона пользователя в личных настройках, прежде чем приступить к работе с приложением
+    please_fill_skype_before_use_app: Заполните, пожалуйста, skype пользователя в личных настройках, прежде чем приступить к работе с приложением
     program_deadline: Термин программы
     quantity: Колличество
     read: Читать
     remaining_time: Осталось времени
+    reminding_work_deadline_submission: Напоминаем, что приближается срок подачи работ
     role: Роль
     search: Поиск
     search_form: Форма поиска

@@ -14,7 +14,8 @@ namespace App\Twig;
 
 use App\Twig\Runtime\{
     UserRuntime,
-    AwayRuntime
+    AwayRuntime,
+    HomepageNotifyRuntime
 };
 use Danilovl\ParameterBundle\Services\ParameterService;
 use Twig\{
@@ -37,7 +38,8 @@ class TwigExtension extends AbstractExtension
     {
         return [
             new TwigFunction('app_user', [UserRuntime::class, 'appUser']),
-            new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink'])
+            new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink']),
+            new TwigFunction('homepage_notify', [HomepageNotifyRuntime::class, 'renderNotify'], ['is_safe' => ['html']])
         ];
     }
 

@@ -462,9 +462,9 @@ class Work
     public function getDeadlineDays(): int
     {
         $now = new DateTime;
-        $d = $now->diff($this->getDeadline())->d;
+        $diff = (int) $this->getDeadline()->diff($now)->format('%a');
 
-        return $now->diff($this->getDeadline())->invert ? -$d : $d;
+        return $this->getDeadline()->diff($now)->invert ? $diff : -$diff;
     }
 
     public function getDeadlineProgramDays(): int
