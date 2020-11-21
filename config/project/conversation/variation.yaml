@@ -13,9 +13,9 @@ parameters:
         consultant: false
       supervisor:
         author: true
-        consultant: true
-        opponent: true
         supervisor: false
+        opponent: true
+        consultant: true
       consultant:
         author: false
         consultant: false

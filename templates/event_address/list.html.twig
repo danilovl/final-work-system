@@ -74,12 +74,12 @@
                                                 {{ eventAddress.street }}
                                             </td>
                                             <td>
-                                                <input class="js-switch"
-                                                        {% if  eventAddress.skype %} checked {% endif %}
-                                                       data-switchery="false"
-                                                       disabled="disabled"
-                                                       title=""
-                                                       type="checkbox">
+                                                {% include 'common_part/button/js-switch.html.twig' with {
+                                                    'checked': eventAddress.skype is not null,
+                                                    'disabled': true,
+                                                    'dataSwitchery': 'false',
+                                                    'dataTargetUrl': path('system_event_change_viewed_ajax',{'id': systemEventRecipient.id | hashids_encode })
+                                                } %}
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary btn-xs"

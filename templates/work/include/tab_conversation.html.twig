@@ -9,17 +9,9 @@
                     <div class="chat-discussion">
 
                         {% for message in messages %}
-                            <div class="{% if message.owner.id | hashids_encode == app_user().id | hashids_encode %} chat-message-left {% else %} chat-message-right {% endif %}">
-                                <img class="message-avatar"
-                                     src="{{ message.owner | profile_image }}"
-                                     alt="{{ message.owner }}">
-                                <div class="message">
-                                    <a class="message-author"
-                                       href="#"> {{ message.owner }} </a>
-                                    <span class="message-date"> {{ message.createdAt | date }} </span>
-                                    <span class="message-content">{{ message.content | away_to | raw }}</span>
-                                </div>
-                            </div>
+                            {% include 'conversation/include/chat_message.html.twig' with {
+                                'message': message
+                            } %}
                         {% else %}
                             {{ 'app.text.no_result' | trans() }}
                         {% endfor %}

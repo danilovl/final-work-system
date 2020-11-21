@@ -46,24 +46,14 @@
                                                                 {{ message.createdAt | date }}
 
                                                                 {% if message.isOwner(app_user()) == false %}
-                                                                    {% if conversationMessageUnreadClass is not empty %}
-                                                                        <input class="js-switch small"
-                                                                               data-switchery="true"
-                                                                               data-target-type="complete"
-                                                                               data-target-url="{{ path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode }) }}"
-                                                                               title=""
-                                                                               type="checkbox">
-                                                                    {% else %}
-                                                                        <input class="js-switch small"
-                                                                               checked
-                                                                               data-switchery="true"
-                                                                               data-target-type="complete"
-                                                                               data-target-url="{{ path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode }) }}"
-                                                                               title=""
-                                                                               type="checkbox">
-                                                                    {% endif %}
+                                                                    {% include 'common_part/button/js-switch.html.twig' with {
+                                                                        'checked': conversationMessageUnreadClass is empty,
+                                                                        'class': 'small',
+                                                                        'checked': eventAddress.skype is not null,
+                                                                        'dataTargetType': 'complete',
+                                                                        'dataTargetUrl': path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode })
+                                                                    } %}
                                                                 {% endif %}
-
                                                             </span>
                                                             <span class="message-content">
                                                                 {{ message.content | away_to | raw }}

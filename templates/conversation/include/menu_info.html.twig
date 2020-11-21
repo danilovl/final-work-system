@@ -48,12 +48,10 @@
                     <span>
                     {{ 'app.text.change_all_messages_to_read' | trans() }}
                     </span>
-                    <input class="js-switch"
-                           data-switchery="true"
-                           data-target-type="active"
-                           data-target-url="{{ path('conversation_message_all_change_to_read_ajax') }}"
-                           title=""
-                           type="checkbox">
+                    {% include 'common_part/button/js-switch.html.twig' with {
+                        'disabled': true,
+                        'dataTargetUrl': path('conversation_message_all_change_to_read_ajax')
+                    } %}
                 {% endif %}
                 <div class="clearfix"></div>
             </div>

@@ -1,0 +1,20 @@
+{% set checked = checked is defined ? checked : false %}
+{% set disabled = disabled is defined ? disabled : false %}
+{% set dataSwitchery = dataSwitchery is defined and dataSwitchery is not empty ? dataSwitchery : 'true' %}
+{% set dataTargetType = dataTargetType is defined and dataTargetUrl is not empty ? dataTargetType : 'active' %}
+{% set dataTargetUrl = dataTargetUrl is defined ? dataTargetUrl : null %}
+
+<input class="js-switch{{ class is defined ? class : '' }}"
+       title=""
+       type="checkbox"
+       autocomplete="off"
+       data-switchery="{{ dataSwitchery }}"
+       data-target-type="{{ dataTargetType }}"
+        {% if checked %} checked {% endif %}
+        {% if dataTargetUrl is not empty %}
+            data-target-url="{{ dataTargetUrl }}"
+        {% endif %}
+        {% if disabled %}
+            disabled="disabled"
+        {% endif %}
+>

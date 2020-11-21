@@ -93,7 +93,7 @@ class ConversationVariationService
         }
 
         if ($work->isOpponent($user)) {
-            [$a, $o, $s, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT, true);
 
             $workUsers = $work->getUsers($a, $s, $o, $c);
             $addConversationUser($workUsers);

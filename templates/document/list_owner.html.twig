@@ -164,6 +164,7 @@
                                             <td>
                                                 <input class="js-switch"
                                                         {% if  document.active %} checked {% endif %}
+                                                       autocomplete="off"
                                                        data-switchery="true"
                                                        data-target-type="active"
                                                        data-target-url="{{ path('document_change_active_ajax', { 'id': document.id | hashids_encode }) }}"

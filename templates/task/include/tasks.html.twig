@@ -1,0 +1,195 @@
+{% set tableTaskId = tableTaskId is defined and tableTaskId is not empty ? tableTaskId : null %}
+{% set isSupervisor = isSupervisor is defined and isSupervisor is not empty ? isSupervisor : false %}
+{% set isAuthor = isAuthor is defined and isAuthor is not empty ? isAuthor : false %}
+{% set isWorkTab = isWorkTab is defined and isWorkTab is not empty ? isWorkTab : false %}
+{% set directionParam = tasks.getPaginatorOption('sortDirectionParameterName') %}
+{% set params = tasks.getParams() %}
+{% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+<table class="table table-striped projects" {% if tableTaskId is not empty %}id="{{ tableTaskId }}"{% endif %}>
+    <thead>
+    <tr>
+        <th{% if tasks.isSorted('task.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+            {{ knp_pagination_sortable(tasks, 'app.text.name' | trans(), 'task.name') }}
+        </th>
+
+        {% if isWorkTab == false %}
+            <th{% if tasks.isSorted('work.title') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans(), 'work.title') }}
+            </th>
+        {% endif %}
+
+        <th{% if tasks.isSorted('task.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+            {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans(), 'task.createdAt') }}
+        </th>
+        <th{% if tasks.isSorted('task.deadline') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                data-toggle="tooltip"
+                data-placement="top"
+                data-original-title="{{ 'app.tooltip.task_deadline' | trans() }}">
+            {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans(), 'task.deadline') }}
+        </th>
+
+        {% if isSupervisor %}
+            <th {% if tasks.isSorted('task.active') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-original-title="{{ 'app.tooltip.task_active' | trans() }}">
+                {{ knp_pagination_sortable(tasks, 'app.text.active' | trans(), 'task.active', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
+            </th>
+            <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-original-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans() }}">
+                {{ knp_pagination_sortable(tasks, 'app.text.back_to_revision' | trans(), 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
+            </th>
+        {% endif %}
+
+        {% if isAuthor %}
+            <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-original-title="{{ 'app.tooltip.task_back_to_revision' | trans() }}">
+                {{ knp_pagination_sortable(tasks, 'app.text.notify_completed' | trans(), 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
+            </th>
+        {% endif %}
+
+        <th{% if tasks.isSorted('task.complete') %} class="fa fa-sort-{{ direction }}"{% endif %}
+                data-toggle="tooltip"
+                data-placement="top"
+                data-original-title="{{ 'app.tooltip.task_complete' | trans() }}">
+            {{ knp_pagination_sortable(tasks, 'app.text.complete' | trans(), 'task.complete') }}
+        </th>
+        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for task in tasks %}
+        <tr data-delete-row="task-{{ task.id | hashids_encode }}">
+            <td>
+                {{ task.name }}
+            </td>
+            {% if isWorkTab == false %}
+                <td>
+                    <a target="_blank"
+                       href="{{ path('work_detail', { 'id': task.work.id | hashids_encode }) }}">
+                        {{ task.work }} | {{ task.work.author }}
+                    </a>
+                </td>
+            {% endif %}
+            <td>
+                {{ task.createdAt | date("d.m.Y H:i") }}
+            </td>
+            <td>
+                {% if task.deadline is not empty %}
+                    {% if date("U") > task.deadline | date("U") %}
+                        <p class="red">
+                            {{ task.deadline | date("d.m.Y") }}
+                        </p>
+                    {% else %}
+                        {{ task.deadline | date("d.m.Y") }}
+                    {% endif %}
+                {% endif %}
+            </td>
+
+            {% if isSupervisor %}
+                <td>
+                    {% include 'common_part/button/js-switch.html.twig' with {
+                        'checked': task.active,
+                        'dataTargetUrl': path('task_change_status_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode, 'type':'active' })
+                    } %}
+                </td>
+                <td>
+                    {% if task.notifyComplete and task.complete == false %}
+                        {% include 'common_part/button/js-switch.html.twig' with {
+                            'checked': task.notifyComplete == false,
+                            'dataTargetUrl': path('task_change_status_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode, 'type':'notify' })
+                        } %}
+                    {% endif %}
+                </td>
+            {% endif %}
+
+            {% if isAuthor %}
+                <td>
+                    {% if task.notifyComplete == false and task.complete == false %}
+                        {% include 'common_part/button/js-switch.html.twig' with {
+                            'checked': task.notifyComplete,
+                            'dataTargetUrl': path('task_notify_complete_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode })
+                        } %}
+                    {% endif %}
+                </td>
+            {% endif %}
+
+            <td>
+                {% include 'common_part/button/js-switch.html.twig' with {
+                    'checked': task.complete,
+                    'dataTargetType':  isSupervisor ? 'complete' : null,
+                    'disabled':  isSupervisor ? false : true,
+                    'dataTargetUrl': isSupervisor ? path('task_change_status_ajax', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode, 'type': 'complete' }) : null
+                } %}
+            </td>
+            <td>
+                {% if task.description is not empty %}
+                    <a class="btn btn-info btn-xs"
+                       role="tab"
+                       id="heading-task-description-{{ task.id | hashids_encode }}"
+                       data-toggle="collapse"
+                       data-parent="#accordion-task-descrition-{{ task.id | hashids_encode }}"
+                       href="#tab-task-description-{{ task.id | hashids_encode }}"
+                       aria-expanded="true"
+                       aria-controls="tab-task-description-{{ task.id | hashids_encode }}">
+                        <i class="fa fa-desktop"></i>
+                        {{ 'app.form.action.show_detail' | trans() }}
+                    </a>
+                {% endif %}
+
+                {% if isWorkTab == false %}
+                    <a class="btn btn-primary btn-xs"
+                       href="{{ path('work_detail', { 'id': task.work.id | hashids_encode }) }}"
+                       target="_blank">
+                        <i class="fa fa-folder"></i>
+                        {{ 'app.text.work' | trans() }}
+                    </a>
+                {% endif %}
+
+                {% if isSupervisor %}
+                    <a data-toggle="modal"
+                       data-target="#modalWindow"
+                       class="btn btn-warning btn-xs"
+                       href="{{ path('task_edit', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode }) }}">
+                        <i class="fa fa-pencil"></i>
+                        {{ 'app.form.action.edit' | trans() }}
+                    </a>
+
+                    {% include 'common_part/ajax_delete.html.twig' with {
+                        'modalDataTarget': 'task',
+                        'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                        'modalDataTargetId': task.id,
+                        'modalDataTargetName': task.name,
+                        'modalDataTargetDeleteUrl': path('task_delete', { 'id_work': task.work.id | hashids_encode,  'id_task': task.id | hashids_encode })
+                    } %}
+                {% endif %}
+            </td>
+        </tr>
+
+        {% if task.description is not empty %}
+            <tr data-delete-row="task-{{ task.id | hashids_encode }}">
+                <td colspan="10">
+                    <div class="panel-collapse collapse"
+                         id="tab-task-description-{{ task.id | hashids_encode }}"
+                         role="tabpanel"
+                         aria-labelledby="heading-task-description-{{ task.id | hashids_encode }}">
+                        <div class="panel-body text-muted well well-sm no-shadow">
+                            {{ task.description | away_to | raw }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10"></td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

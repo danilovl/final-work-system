@@ -109,6 +109,8 @@ class WorkController extends BaseController
         $paginationEvent = $tabService->getTabPagination($request, TabTypeConstant::TAB_EVENT, $work);
         $paginationMessage = $tabService->getTabPagination($request, TabTypeConstant::TAB_MESSAGE, $work, $user);
 
+        $this->get('app.facade.conversation_message')->setIsReadToConversationMessages($paginationMessage, $user);
+
         $this->get('app.seo_page')->setTitle($work->getTitle());
 
         return $this->render('work/detail.html.twig', [
