@@ -83,7 +83,7 @@ class DocumentController extends MediaBaseController
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
         $mediaModel = MediaModel::fromMedia($media);
-        $form = $this->getDocumentForm(ControllerMethodConstant::EDIT, $mediaModel)
+        $form = $this->getDocumentForm(ControllerMethodConstant::EDIT, $mediaModel, $media)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -106,6 +106,7 @@ class DocumentController extends MediaBaseController
 
         return $this->render($this->ajaxOrNormalFolder($request, 'document/document.html.twig'), [
             'media' => $media,
+            'title' => $this->trans('app.page.information_material_edit'),
             'form' => $form->createView(),
             'buttonActionTitle' => $this->trans('app.form.action.edit'),
             'buttonActionCloseTitle' => $this->trans('app.form.action.create_and_close')
