@@ -12,10 +12,7 @@
 
 namespace App\EventListener;
 
-use App\Services\{
-    UserService,
-    EntityManagerService
-};
+use App\Services\{SeoPageService, UserService, EntityManagerService};
 use DateTime;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
@@ -23,13 +20,16 @@ class RequestListener
 {
     private UserService $userService;
     private EntityManagerService $entityManagerService;
+    private SeoPageService $seoPageService;
 
     public function __construct(
         UserService $userService,
-        EntityManagerService $entityManagerService
+        EntityManagerService $entityManagerService,
+        SeoPageService $seoPageService
     ) {
         $this->userService = $userService;
         $this->entityManagerService = $entityManagerService;
+        $this->seoPageService = $seoPageService;
     }
 
     public function onKernelRequest(RequestEvent $requestEvent): void
@@ -38,6 +38,12 @@ class RequestListener
             return;
         }
 
+        $this->userLastRequestedAt();
+        $this->defaultRouteSeoPage($requestEvent);
+    }
+
+    private function userLastRequestedAt(): void
+    {
         $user = $this->userService->getUser();
         if ($user === null) {
             return;
@@ -45,5 +51,11 @@ class RequestListener
 
         $user->setLastRequestedAt(new DateTime);
         $this->entityManagerService->flush($user);
+    }
+
+    private function defaultRouteSeoPage(RequestEvent $requestEvent): void
+    {
+        $seo = $requestEvent->getRequest()->attributes->get('_seo');
+        $this->seoPageService->setTitle($seo['title'] ?? null);
     }
 }

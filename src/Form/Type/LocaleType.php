@@ -35,12 +35,12 @@ final class LocaleType extends AbstractType
 
     private function getChoices(): array
     {
-        $shoices = [];
+        $choices = [];
         foreach ($this->locales as $locale) {
-            $shoices["app.locales.{$locale}"] = $locale;
+            $choices["app.locales.{$locale}"] = $locale;
         }
 
-        return $shoices;
+        return $choices;
     }
 
     public function getParent(): string

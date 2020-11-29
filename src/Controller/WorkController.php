@@ -83,8 +83,6 @@ class WorkController extends BaseController
             $this->getParam('pagination.work.program_deadline_limit')
         );
 
-        $this->get('app.seo_page')->setTitle('app.page.work_create');
-
         return $this->render('work/work.html.twig', [
             'form' => $form->createView(),
             'title' => $this->trans('app.page.work_create'),
@@ -162,8 +160,6 @@ class WorkController extends BaseController
             }
         }
 
-        $this->get('app.seo_page')->setTitle('app.text.work_list');
-
         return $this->render('work/list.html.twig', [
             'form' => $form->createView(),
             'workGroups' => $pagination,
@@ -220,8 +216,6 @@ class WorkController extends BaseController
             $form = $this->getWorkForm(ControllerMethodConstant::EDIT_AJAX, $workModel, $work);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.work_edit');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'work/work.html.twig'), [
             'work' => $work,
             'form' => $form->createView(),
@@ -264,9 +258,7 @@ class WorkController extends BaseController
             $this->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
         }
 
-        $this->get('app.seo_page')
-            ->setTitle('app.page.profile_edit')
-            ->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
+        $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
 
         return $this->render($this->ajaxOrNormalFolder($request, 'work/edit_author.html.twig'), [
             'work' => $work,

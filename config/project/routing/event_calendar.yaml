@@ -2,12 +2,16 @@ event_calendar_reservation:
   path: /reservation
   defaults:
     _controller: App\Controller\EventCalendarController:reservation
+    _seo:
+      title: 'app.page.appointment_calendar'
   methods: [GET]
 
 event_calendar_manage:
   path: /manage
   defaults:
     _controller: App\Controller\EventCalendarController:manage
+    _seo:
+      title: 'app.page.appointment_calendar'
   methods: [GET]
 
 event_calendar_create_ajax:

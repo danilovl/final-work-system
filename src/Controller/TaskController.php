@@ -42,8 +42,6 @@ class TaskController extends BaseController
         $tasksQuery = $this->get('app.facade.task')
             ->queryTasksByOwner($user);
 
-        $this->get('app.seo_page')->setTitle('app.page.task_list');
-
         $isTasksInComplete = $this->get('app.facade.task')
             ->isTasksCompleteByOwner($user, false);
 
@@ -99,8 +97,6 @@ class TaskController extends BaseController
             $form = $this->getTaskForm(ControllerMethodConstant::CREATE_AJAX, $taskModel, null, $work);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.task_create');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'task/task.html.twig'), [
             'work' => $work,
             'form' => $form->createView(),
@@ -149,8 +145,6 @@ class TaskController extends BaseController
         if ($request->isXmlHttpRequest()) {
             $form = $form = $this->getTaskForm(ControllerMethodConstant::EDIT_AJAX, $taskModel, $task, $work);
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.task_edit');
 
         return $this->render($this->ajaxOrNormalFolder($request, 'task/task.html.twig'), [
             'work' => $work,

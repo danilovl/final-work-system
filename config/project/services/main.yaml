@@ -111,6 +111,8 @@ services:
     arguments:
       - '@app.translator'
 
+  App\Services\SeoPageService: '@app.seo_page'
+
   app.date:
     class: App\Services\DateService
     arguments:

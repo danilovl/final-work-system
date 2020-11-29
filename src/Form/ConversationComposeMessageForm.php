@@ -49,9 +49,7 @@ class ConversationComposeMessageForm extends AbstractType
                 'required' => true,
                 'multiple' => $user->isSupervisor(),
                 'choices' => $options['conversations'],
-                'choice_label' => function (Conversation $conversation): string {
-                    return $this->choiceLabelConversation($conversation);
-                },
+                'choice_label' => fn(Conversation $conversation): string => $this->choiceLabelConversation($conversation),
                 'constraints' => [
                     new NotBlank
                 ]

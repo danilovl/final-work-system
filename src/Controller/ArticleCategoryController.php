@@ -29,8 +29,6 @@ class ArticleCategoryController extends BaseController
         $articleCategoriesQuery = $this->get('app.facade.article_category')
             ->queryCategoriesByRoles($this->getUser()->getRoles());
 
-        $this->get('app.seo_page')->setTitle('app.page.article_category_list');
-
         return $this->render('article_category/list.html.twig', [
             'articleCategories' => $this->createPagination($request, $articleCategoriesQuery)
         ]);

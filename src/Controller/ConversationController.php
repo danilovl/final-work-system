@@ -73,8 +73,6 @@ class ConversationController extends BaseController
         $isUnreadMessages = $this->get('app.facade.conversation_message')
             ->isUnreadMessagesByRecipient($user);
 
-        $this->get('app.seo_page')->setTitle('app.page.message_create');
-
         return $this->render('conversation/create.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
             'form' => $form->createView()
@@ -103,8 +101,6 @@ class ConversationController extends BaseController
 
         $isUnreadMessages = $this->get('app.facade.conversation_message')
             ->isUnreadMessagesByRecipient($user);
-
-        $this->get('app.seo_page')->setTitle('app.page.conversation_list');
 
         return $this->render('conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,

@@ -2,6 +2,8 @@ user_group_create:
   path: /create
   defaults:
     _controller: App\Controller\UserGroupController:create
+    _seo:
+      title: 'app.page.user_group_create'
   methods: [GET, POST]
 
 user_group_create_ajax:
@@ -18,6 +20,8 @@ user_group_edit:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\UserGroupController:edit
+    _seo:
+      title: 'app.page.user_group_edit'
   methods: [GET, POST]
 
 user_group_edit_ajax:
@@ -32,6 +36,8 @@ user_group_list:
   path: /list
   defaults:
     _controller: App\Controller\UserGroupController:list
+    _seo:
+      title: 'app.page.leave_web'
   methods: [GET, POST]
 
 user_group_delete_ajax:

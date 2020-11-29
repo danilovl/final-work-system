@@ -27,8 +27,6 @@ class SecurityController extends BaseController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $this->get('app.seo_page')->setTitle('app.page.login');
-
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error

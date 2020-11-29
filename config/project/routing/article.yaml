@@ -2,6 +2,8 @@ article_category_list:
   path: /category/list
   defaults:
     _controller: App\Controller\ArticleCategoryController:list
+    _seo:
+      title: 'app.page.article_category_list'
   methods: [GET, POST]
 
 article_list:

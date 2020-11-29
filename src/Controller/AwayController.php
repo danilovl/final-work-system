@@ -21,8 +21,6 @@ class AwayController extends BaseController
 {
     public function to(Request $request): Response
     {
-        $this->get('app.seo_page')->setTitle('app.page.leave_web');
-
         return $this->render('away/to.html.twig', [
             'url' => $request->get('url')
         ]);

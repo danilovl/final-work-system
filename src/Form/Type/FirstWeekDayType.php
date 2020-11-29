@@ -38,11 +38,7 @@ final class FirstWeekDayType extends AbstractType
 
     private function fixingOptions(OptionsResolver $resolver): void
     {
-        $resolver->setNormalizer('constraints', static function (Options $options, $value): array {
-            return array_merge($value, [
-                new FirstWeekDay
-            ]);
-        });
+        $resolver->setNormalizer('constraints', static fn(Options $options, $value): array => array_merge($value, [new FirstWeekDay]));
     }
 
     public function getParent(): string

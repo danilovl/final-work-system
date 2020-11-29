@@ -123,8 +123,8 @@ class ConversationHelper
             /** @var Conversation $first
              * @var Conversation $second
              */
-            $f = (string)$first->getRecipient();
-            $s = (string)$second->getRecipient();
+            $f = (string) $first->getRecipient();
+            $s = (string) $second->getRecipient();
 
             return $collator->compare($f, $s);
         });

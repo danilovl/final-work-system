@@ -36,21 +36,9 @@ class WorkResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'work' => function ($value, ArgumentInterface $args) {
-                    $id = (int) $args['id'];
-
-                    return $this->workFacade->find($id);
-                },
-                'workStatus' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {
-                    $id = (int) $args['id'];
-
-                    return $this->workStatusFacade->find($id);
-                },
-                'workStatusList' => function ($value, ArgumentInterface $args) {
-                    $limit = $args['limit'] ?? null;
-
-                    return $this->workStatusFacade->findAll($limit);
-                }
+                'work' => fn($value, ArgumentInterface $args) => $this->workFacade->find((int) $args['id']),
+                'workStatus' => fn($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) => $this->workStatusFacade->find((int) $args['id']),
+                'workStatusList' => fn($value, ArgumentInterface $args) => $this->workStatusFacade->findAll($args['limit'] ?? null)
             ]
         ];
     }

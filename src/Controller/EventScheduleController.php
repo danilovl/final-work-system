@@ -60,8 +60,6 @@ class EventScheduleController extends BaseController
             $this->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.event_schedule_create');
-
         return $this->render('event_schedule/create.html.twig', [
             'form' => $form->createView()
         ]);
@@ -71,8 +69,6 @@ class EventScheduleController extends BaseController
     {
         $eventSchedulesQuery = $this->get('app.facade.event_schedule')
             ->queryEventSchedulesByOwner($this->getUser());
-
-        $this->get('app.seo_page')->setTitle('app.page.event_schedule_list');
 
         return $this->render('event_schedule/list.html.twig', [
             'eventSchedules' => $this->createPagination($request, $eventSchedulesQuery)
@@ -121,7 +117,7 @@ class EventScheduleController extends BaseController
             $this->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.event_schedule_create');
+        $this->get('app.seo_page')->setTitle($eventSchedule->getName());
 
         return $this->render('event_schedule/edit.html.twig', [
             'eventSchedule' => $eventSchedule,

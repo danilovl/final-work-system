@@ -3,6 +3,8 @@ homepage:
   controller: App\Controller\HomeController::index
   defaults:
     _locale: '%locale%'
+    _seo:
+      title: 'app.page.home'
   requirements:
     _locale: '%locales%'
   methods: [GET]

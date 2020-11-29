@@ -56,8 +56,6 @@ class DocumentCategoryController extends BaseController
             $form = $this->getDocumentCategoryForm(ControllerMethodConstant::CREATE_AJAX, $mediaCategoryModel);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.information_materials_category_create');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'document_category/document_category.html.twig'), [
             'form' => $form->createView(),
             'title' => $this->trans('app.page.information_materials_category_create'),
@@ -68,8 +66,6 @@ class DocumentCategoryController extends BaseController
 
     public function list(Request $request): Response
     {
-        $this->get('app.seo_page')->setTitle('app.page.information_materials_category_list');
-
         return $this->render('document_category/list.html.twig', [
             'mediaCategories' => $this->createPagination(
                 $request,
@@ -111,8 +107,6 @@ class DocumentCategoryController extends BaseController
                 $mediaCategory
             );
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.information_materials_category_edit');
 
         return $this->render($this->ajaxOrNormalFolder($request, 'document_category/document_category.html.twig'), [
             'form' => $form->createView(),

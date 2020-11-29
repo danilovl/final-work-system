@@ -38,8 +38,6 @@ class ResetPasswordController extends BaseController
             return $this->processSendingPasswordResetEmail($form->get('email')->getData());
         }
 
-        $this->get('app.seo_page')->setTitle('Reset your password');
-
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
@@ -50,8 +48,6 @@ class ResetPasswordController extends BaseController
         if (!$this->getSession()->get('reset_password_check_email')) {
             return $this->redirectToRoute('app_reset_password_forgot_request');
         }
-
-        $this->get('app.seo_page')->setTitle('Password Reset Email Sent');
 
         return $this->render('reset_password/check_email.html.twig', [
             'tokenLifetime' => $this->get('app.reset_password')->getTokenLifetime(),
@@ -91,8 +87,6 @@ class ResetPasswordController extends BaseController
 
             return $this->redirectToRoute('homepage');
         }
-
-        $this->get('app.seo_page')->setTitle('Reset your password');
 
         return $this->render('reset_password/reset.html.twig', [
             'form' => $form->createView(),

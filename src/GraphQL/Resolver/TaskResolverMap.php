@@ -29,16 +29,8 @@ class TaskResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'task' => function ($value, ArgumentInterface $args) {
-                    $id = (int)$args['id'];
-
-                    return $this->taskService->find($id);
-                },
-                'taskList' => function ($value, ArgumentInterface $args) {
-                    $limit = $args['limit'] ?? null;
-
-                    return $this->taskService->findAll($limit);
-                },
+                'task' => fn($value, ArgumentInterface $args) => $this->taskService->find((int) $args['id']),
+                'taskList' => fn($value, ArgumentInterface $args) => $this->taskService->findAll($args['limit'] ?? null),
             ]
         ];
     }

@@ -19,14 +19,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoPageService implements SeoPageInterface
 {
+    public const DEFAULT_SEPARATOR = '';
+
     private ?string $title = null;
     private array $metas;
-    private string $separator = ' ';
+    private string $separator;
     private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
+        $this->separator = self::DEFAULT_SEPARATOR;
         $this->metas = [
             'http-equiv' => [],
             'name' => [],

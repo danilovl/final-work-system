@@ -29,11 +29,7 @@ class UserResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'user' => function ($value, ArgumentInterface $args) {
-                    $id = (int) $args['id'];
-
-                    return $this->userService->find($id);
-                }
+                'user' => fn($value, ArgumentInterface $args) => $this->userService->find((int) $args['id'])
             ]
         ];
     }

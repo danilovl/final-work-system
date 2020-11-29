@@ -61,8 +61,6 @@ class DocumentController extends MediaBaseController
             $form = $this->getDocumentForm(ControllerMethodConstant::CREATE_AJAX, $mediaModel);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.information_material_create');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'document/document.html.twig'), [
             'form' => $form->createView(),
             'title' => $this->trans('app.page.information_material_create'),
@@ -106,8 +104,6 @@ class DocumentController extends MediaBaseController
             $form = $this->getDocumentForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel, $media);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.information_material_edit');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'document/document.html.twig'), [
             'media' => $media,
             'form' => $form->createView(),
@@ -136,8 +132,6 @@ class DocumentController extends MediaBaseController
             $criteria
         );
 
-        $this->get('app.seo_page')->setTitle('app.page.information_materials');
-
         return $this->render('document/list.html.twig', [
             'openSearchTab' => $openSearchTab,
             'documents' => $this->createPagination($request, $documents),
@@ -165,8 +159,6 @@ class DocumentController extends MediaBaseController
             null,
             $criteria
         );
-
-        $this->get('app.seo_page')->setTitle('app.page.information_materials');
 
         return $this->render('document/list_owner.html.twig', [
             'openSearchTab' => $openSearchTab,

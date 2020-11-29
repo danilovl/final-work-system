@@ -70,8 +70,6 @@ class UserController extends BaseController
             $form = $this->getUserForm(ControllerMethodConstant::CREATE_AJAX, $userModel);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.user_create');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'user/user.html.twig'), [
             'reload' => true,
             'form' => $form->createView(),
@@ -112,9 +110,7 @@ class UserController extends BaseController
             $form = $this->getUserForm(ControllerMethodConstant::EDIT_AJAX, $userModel, $user);
         }
 
-        $this->get('app.seo_page')
-            ->setTitle('app.page.user_edit')
-            ->addTitle($user->getUsername(), SeoPageConstant::VERTICAL_SEPARATOR);
+        $this->get('app.seo_page')->addTitle($user->getUsername(), SeoPageConstant::VERTICAL_SEPARATOR);
 
         return $this->render($this->ajaxOrNormalFolder($request, 'user/user.html.twig'), [
             'reload' => true,

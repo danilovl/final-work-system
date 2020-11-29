@@ -24,6 +24,7 @@ app:
     message_create: Create message
     profile: Profile page
     profile_edit: Edit profile
+    reset_password: Reset password
     task_create: Create task
     task_edit: Edit task
     task_list: Task list

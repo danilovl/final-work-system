@@ -44,8 +44,6 @@ class EventCalendarController extends BaseController
             'works' => $userWorks
         ]);
 
-        $this->get('app.seo_page')->setTitle('app.page.appointment_calendar');
-
         return $this->render('event/calendar_reservation.html.twig', [
             'form' => $form->createView()
         ]);
@@ -79,8 +77,6 @@ class EventCalendarController extends BaseController
             'addresses' => $user->getEventAddressOwner(),
             'participants' => $eventParticipantArray
         ]);
-
-        $this->get('app.seo_page')->setTitle('app.page.appointment_calendar');
 
         return $this->render('event/calendar_manage.html.twig', [
             'form' => $form->createView()

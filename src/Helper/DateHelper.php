@@ -63,9 +63,7 @@ class DateHelper
 
         $period = new DatePeriod($from, new DateInterval('P1D'), $to);
 
-        $arrayOfDates = array_map(static function ($item) {
-            return $item->format(DateFormatConstant::DATE);
-        }, iterator_to_array($period));
+        $arrayOfDates = array_map(static fn($item) => $item->format(DateFormatConstant::DATE), iterator_to_array($period));
 
         if ($mode === true) {
             $arrayNameDay = [];

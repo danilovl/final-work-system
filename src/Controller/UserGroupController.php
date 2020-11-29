@@ -54,8 +54,6 @@ class UserGroupController extends BaseController
             $form = $this->getUserGroupForm(ControllerMethodConstant::CREATE_AJAX, $userGroupModel);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.user_group_create');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'user_group/user_group.html.twig'), [
             'form' => $form->createView(),
             'title' => $this->trans('app.page.user_group_create'),
@@ -89,8 +87,6 @@ class UserGroupController extends BaseController
         if ($request->isXmlHttpRequest()) {
             $form = $this->getUserGroupForm(ControllerMethodConstant::EDIT_AJAX, $userGroupModel, $group);
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.user_group_edit');
 
         return $this->render($this->ajaxOrNormalFolder($request, 'user_group/user_group.html.twig'), [
             'group' => $group,

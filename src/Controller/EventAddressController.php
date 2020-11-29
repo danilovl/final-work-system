@@ -32,8 +32,6 @@ class EventAddressController extends BaseController
 {
     public function list(Request $request): Response
     {
-        $this->get('app.seo_page')->setTitle('app.page.appointment_address_list');
-
         return $this->render('event_address/list.html.twig', [
             'eventAddresses' => $this->createPagination(
                 $request,
@@ -62,8 +60,6 @@ class EventAddressController extends BaseController
         if ($request->isXmlHttpRequest()) {
             $form = $this->getEventAddressForm(ControllerMethodConstant::CREATE_AJAX, $eventAddressModel);
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.appointment_address_create');
 
         return $this->render($this->ajaxOrNormalFolder($request, 'event_address/event_address.html.twig'), [
             'form' => $form->createView(),
@@ -117,8 +113,6 @@ class EventAddressController extends BaseController
                 $eventAddress
             );
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.appointment_address_edit');
 
         return $this->render($this->ajaxOrNormalFolder($request, 'event_address/event_address.html.twig'), [
             'form' => $form->createView(),

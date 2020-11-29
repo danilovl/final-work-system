@@ -56,8 +56,6 @@ class WorkCategoryController extends BaseController
             $form = $this->getWorkCategoryForm(ControllerMethodConstant::CREATE_AJAX, $workCategoryModel);
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.work_category_create');
-
         return $this->render($this->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig'), [
             'form' => $form->createView(),
             'title' => $this->trans('app.page.work_category_create'),
@@ -68,8 +66,6 @@ class WorkCategoryController extends BaseController
 
     public function list(Request $request): Response
     {
-        $this->get('app.seo_page')->setTitle('app.page.work_category_list');
-
         return $this->render('work_category/list.html.twig', [
             'workCategories' => $this->createPagination(
                 $request,
@@ -105,8 +101,6 @@ class WorkCategoryController extends BaseController
         if ($request->isXmlHttpRequest()) {
             $form = $this->getWorkCategoryForm(ControllerMethodConstant::EDIT_AJAX, $workCategoryModel, $workCategory);
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.work_category_edit');
 
         return $this->render($this->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig'), [
             'form' => $form->createView(),

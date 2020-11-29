@@ -2,6 +2,8 @@ event_address_list:
   path: /list
   defaults:
     _controller: App\Controller\EventAddressController:list
+    _seo:
+      title: 'app.page.appointment_address_list'
   methods: GET
 
 event_address_detail:
@@ -16,6 +18,8 @@ event_address_create:
   path: /create
   defaults:
     _controller: App\Controller\EventAddressController:create
+    _seo:
+      title: 'app.page.appointment_address_create'
   methods: [GET, POST]
 
 event_address_create_ajax:
@@ -30,6 +34,8 @@ event_address_edit:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\EventAddressController:edit
+    _seo:
+      title: 'app.page.appointment_address_edit'
   methods: [GET, POST]
 
 event_address_edit_ajax:

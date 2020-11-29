@@ -20,9 +20,7 @@ class NotDoctrineResolverMap extends ResolverMap
     {
         return [
             'not_doctrine' => [
-                'getRandomValue' => static function (): int {
-                    return rand(0, 100);
-                },
+                'getRandomValue' => static fn(): int => rand(0, 100),
             ]
         ];
     }

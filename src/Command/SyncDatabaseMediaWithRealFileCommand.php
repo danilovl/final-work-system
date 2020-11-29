@@ -130,9 +130,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         $finder->directories()->in($uploadFolder);
 
         $mediaTypes = $this->mediaTypeFacade->findAll();
-        $mediaTypeFolders = array_map(function (MediaType $mediaType): string {
-            return $mediaType->getFolder();
-        }, $mediaTypes);
+        $mediaTypeFolders = array_map(fn(MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
 
         $progressBar = new ProgressBar($output, $finder->count());
 

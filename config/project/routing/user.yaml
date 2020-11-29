@@ -2,6 +2,8 @@ user_create:
   path: /create
   defaults:
     _controller: App\Controller\UserController:create
+    _seo:
+      title: 'app.page.user_create'
   methods: [GET, POST]
 
 user_edit:
@@ -10,6 +12,8 @@ user_edit:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\UserController:edit
+    _seo:
+      title: 'app.page.user_edit'
   methods: [GET, POST]
 
 user_edit_ajax:

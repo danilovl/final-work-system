@@ -2,6 +2,8 @@ document_create:
   path: /create
   defaults:
     _controller: App\Controller\DocumentController:create
+    _seo:
+      title: 'app.page.information_material_create'
   methods: [GET, POST]
 
 document_create_ajax:
@@ -16,6 +18,8 @@ document_edit:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\DocumentController:edit
+    _seo:
+      title: 'app.page.information_material_edit'
   methods: [GET, POST]
 
 document_edit_ajax:
@@ -30,12 +34,16 @@ document_list:
   path: /list
   defaults:
     _controller: App\Controller\DocumentController:list
+    _seo:
+      title: 'app.page.information_materials'
   methods: [GET, POST]
 
 document_list_owner:
   path: /list/owner
   defaults:
     _controller: App\Controller\DocumentController:listOwner
+    _seo:
+      title: 'app.page.information_materials'
   methods:  [GET, POST]
 
 document_change_active_ajax:

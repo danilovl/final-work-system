@@ -81,9 +81,7 @@ class VersionController extends MediaBaseController
             $form = $this->getVersionForm(ControllerMethodConstant::CREATE_AJAX, $mediaModel, null, $work);
         }
 
-        $this->get('app.seo_page')
-            ->setTitle('app.page.version_add')
-            ->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
+        $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
 
         return $this->render($this->ajaxOrNormalFolder($request, 'version/version.html.twig'), [
             'work' => $work,
@@ -137,9 +135,7 @@ class VersionController extends MediaBaseController
             $form = $this->getVersionForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel, $media, $work);
         }
 
-        $this->get('app.seo_page')
-            ->setTitle('app.page.version_edit')
-            ->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
+        $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
 
         return $this->render($this->ajaxOrNormalFolder($request, 'version/version.html.twig'), [
             'work' => $work,

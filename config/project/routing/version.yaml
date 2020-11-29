@@ -4,6 +4,8 @@ version_create:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\VersionController:create
+    _seo:
+      title: 'app.page.version_add'
   methods: [GET,POST]
 
 version_create_ajax:
@@ -21,6 +23,8 @@ version_edit:
     id_media: '%hashid%'
   defaults:
     _controller: App\Controller\VersionController:edit
+    _seo:
+      title: 'app.page.version_edit'
   methods: [GET,POST]
 
 version_edit_ajax:

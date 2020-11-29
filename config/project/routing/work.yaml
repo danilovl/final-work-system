@@ -2,6 +2,8 @@ work_create:
   path: /create
   defaults:
     _controller: App\Controller\WorkController:create
+    _seo:
+      title: 'app.page.work_create'
   methods: [GET, POST]
 
 work_create_ajax:
@@ -16,6 +18,8 @@ work_edit:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\WorkController:edit
+    _seo:
+      title: 'app.page.work_edit'
   methods: [GET, POST]
 
 work_edit_ajax:
@@ -32,6 +36,8 @@ work_edit_author:
     id: '%hashid%'
   defaults:
     _controller: App\Controller\WorkController:editAuthor
+    _seo:
+      title: 'app.page.profile_edit'
   methods: [GET, POST]
 
 work_edit_author_ajax:
@@ -56,6 +62,8 @@ work_list:
     type: "supervisor|author|opponent|consultant"
   defaults:
     _controller: App\Controller\WorkController:list
+    _seo:
+      title: 'app.text.work_list'
   methods: [GET, POST]
 
 work_delete:

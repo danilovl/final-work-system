@@ -39,8 +39,6 @@ class ProfileController extends BaseController
 {
     public function show(): Response
     {
-        $this->get('app.seo_page')->setTitle('app.page.profile');
-
         return $this->render('profile/show.html.twig', array(
             'user' => $this->getUser()
         ));
@@ -76,8 +74,6 @@ class ProfileController extends BaseController
                 $this->addFlash('error', $this->get('translator')->trans('app.flash.form.save.error', [], 'flashes'));
             }
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.profile_edit');
 
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView()
@@ -125,8 +121,6 @@ class ProfileController extends BaseController
             }
         }
 
-        $this->get('app.seo_page')->setTitle('app.page.profile_edit');
-
         return $this->render('profile/edit_image.html.twig', [
             'form' => $form->createView()
         ]);
@@ -173,8 +167,6 @@ class ProfileController extends BaseController
                 $this->addFlash('error', $this->get('translator')->trans('app.flash.form.save.error', array(), 'flashes'));
             }
         }
-
-        $this->get('app.seo_page')->setTitle('app.page.profile_edit');
 
         return $this->render('profile/change_password.html.twig', [
             'form' => $form->createView()

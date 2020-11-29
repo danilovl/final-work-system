@@ -47,8 +47,6 @@ class HomeController extends BaseController
         $systemEventPagination = $pagination;
         $pagination->setItems(SystemEventHelper::groupSystemEventByType($pagination));
 
-        $this->get('app.seo_page')->setTitle('app.page.home');
-
         return $this->render('home/index.html.twig', [
             'isSystemEventUnreadExist' => $isUnreadExist,
             'systemEventGroup' => $pagination,

@@ -25,6 +25,7 @@ app:
     message_create: Stránka vytvoření zprávy
     profile: Profilu
     profile_edit: Editace profilu
+    reset_password: Nastavit nové heslo
     task_create: Vyvoření úkolu
     task_edit: Upravování úkolu
     task_list: Seznam úkolů
