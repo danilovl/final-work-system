@@ -61,20 +61,14 @@ class UserAddCommand extends Command
             ->addArgument('roles', InputArgument::OPTIONAL, 'Roles');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function interact(InputInterface $input, OutputInterface $output)
+    protected function interact(InputInterface $input, OutputInterface $output): void
     {
-        if ($input->getArgument('username') !== null &&
-            $input->getArgument('password') !== null &&
-            $input->getArgument('email') !== null &&
-            $input->getArgument('first-name') !== null &&
-            $input->getArgument('last-name') !== null  &&
-            $input->getArgument('roles') !== null
-        ) {
+        if ($this->validInteractInputArguments($input)) {
             return;
         }
 
@@ -129,7 +123,7 @@ class UserAddCommand extends Command
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $stopwatch = new Stopwatch;
         $stopwatch->start('add-user-command');
@@ -180,7 +174,7 @@ class UserAddCommand extends Command
             ->getRepository(User::class)
             ->findOneBy(['username' => $username]);
 
-        if (null !== $existingUser) {
+        if ($existingUser !== null) {
             throw new RuntimeException(sprintf('There is already a user registered with the "%s" username.', $username));
         }
 
@@ -189,5 +183,16 @@ class UserAddCommand extends Command
         $this->validator->validateEmail($email);
         $this->validator->validateFullName($firstName);
         $this->validator->validateFullName($lastName);
+    }
+
+    private function validInteractInputArguments(InputInterface $input): bool
+    {
+        foreach (['username', 'password', 'email', 'first-name', 'last-name', 'roles'] as $argument) {
+            if ($input->getArgument($argument) === null) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

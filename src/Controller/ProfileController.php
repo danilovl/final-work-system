@@ -39,9 +39,9 @@ class ProfileController extends BaseController
 {
     public function show(): Response
     {
-        return $this->render('profile/show.html.twig', array(
+        return $this->render('profile/show.html.twig', [
             'user' => $this->getUser()
-        ));
+        ]);
     }
 
     public function edit(Request $request): Response
@@ -163,8 +163,8 @@ class ProfileController extends BaseController
 
                 $this->addFlash('success', $this->get('translator')->trans('app.flash.form.create.success', [], 'flashes'));
             } else {
-                $this->addFlash('warning', $this->get('translator')->trans('app.flash.form.save.warning', array(), 'flashes'));
-                $this->addFlash('error', $this->get('translator')->trans('app.flash.form.save.error', array(), 'flashes'));
+                $this->addFlash('warning', $this->get('translator')->trans('app.flash.form.save.warning', [], 'flashes'));
+                $this->addFlash('error', $this->get('translator')->trans('app.flash.form.save.error', [], 'flashes'));
             }
         }
 

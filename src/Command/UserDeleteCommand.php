@@ -66,19 +66,21 @@ class UserDeleteCommand extends Command
     {
         $username = $input->getArgument('username');
 
-        /** @var User $user */
+        /** @var User|null $user */
         $user = $this->entityManager
             ->getRepository(User::class)
-            ->findOneBy([
-                'username' => $username
-            ]);
+            ->findOneBy(['username' => $username]);
 
-        $userId = $user->getId();
+        if ($user === null) {
+            $this->io->success(sprintf('User with username "%s" not found', $username));
+
+            return Command::SUCCESS;
+        }
 
         $this->entityManager->remove($user);
         $this->entityManager->flush();
 
-        $this->io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted', $user->getUsername(), $userId, $user->getEmail()));
+        $this->io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted', $user->getUsername(), $user->getId(), $user->getEmail()));
 
         return Command::SUCCESS;
     }

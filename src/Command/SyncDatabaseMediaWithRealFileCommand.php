@@ -54,7 +54,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Sync-database-media-with-real-file');
+        $this->setDescription('Sync database media with real file');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -99,7 +99,6 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
     private function syncMediaFile(): void
     {
         $uploadFolder = $this->parameterService->get('upload_directory');
-
         $mediaTypes = $this->mediaTypeFacade->findAll();
 
         $count = 0;
@@ -126,7 +125,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
     private function syncMediaTypeFolder(OutputInterface $output): void
     {
         $uploadFolder = $this->parameterService->get('upload_directory');
-        $finder = new Finder();
+        $finder = new Finder;
         $finder->directories()->in($uploadFolder);
 
         $mediaTypes = $this->mediaTypeFacade->findAll();

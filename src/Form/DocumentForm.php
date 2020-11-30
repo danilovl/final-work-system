@@ -54,7 +54,7 @@ class DocumentForm extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false
             ])
-            ->add('categories', EntityType::class, array(
+            ->add('categories', EntityType::class, [
                 'class' => MediaCategory::class,
                 'multiple' => true,
                 'required' => false,
@@ -62,7 +62,7 @@ class DocumentForm extends AbstractType
                 'constraints' => [
                     new NotBlank
                 ]
-            ))
+            ])
             ->add('active', CheckboxType::class, [
                 'required' => false
             ])

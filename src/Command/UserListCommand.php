@@ -13,6 +13,7 @@
 namespace App\Command;
 
 use App\Entity\User;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputInterface,
@@ -66,7 +67,7 @@ HELP
         $maxResults = $input->getOption('max-results');
         $allUsers = $this->entityManager
             ->getRepository(User::class)
-            ->findBy([], ['id' => 'DESC'], $maxResults);
+            ->findBy([], ['id' => Criteria::DESC], $maxResults);
 
         $usersAsPlainArrays = array_map(fn(User $user) => [
             $user->getId(),
