@@ -73,7 +73,7 @@ Encore
                 './node_modules/select2/dist/js/select2.full.min.js',
                 './node_modules/moment/min/moment-with-locales.js',
                 './node_modules/fullcalendar/dist/fullcalendar.min.js',
-                './node_modules/fullcalendar/dist/lang-all.js',
+                './node_modules/fullcalendar/dist/locale-all.js',
                 './node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                 './node_modules/switchery-latest/dist/switchery.min.js',
                 './node_modules/icheck/icheck.min.js',

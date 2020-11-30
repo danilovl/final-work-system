@@ -27,7 +27,7 @@
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "fastclick": "^1.0.6",
     "font-awesome": "^4.6.1",
-    "fullcalendar": "^2.6.1",
+    "fullcalendar": "^3.10.2",
     "icheck": "^1.0.2",
     "inputmask": "^5.0.3",
     "jquery": "^3.5.1",
