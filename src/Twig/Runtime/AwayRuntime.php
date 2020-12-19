@@ -18,15 +18,10 @@ use Twig\Extension\AbstractExtension;
 
 class AwayRuntime extends AbstractExtension
 {
-    private RouterInterface $router;
-    private string $domain;
-
     public function __construct(
-        RouterInterface $router,
-        string $domain
+        private RouterInterface $router,
+        private string $domain
     ) {
-        $this->router = $router;
-        $this->domain = $domain;
     }
 
     public function to(?string $text): ?string

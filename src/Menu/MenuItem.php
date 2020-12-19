@@ -17,7 +17,6 @@ use InvalidArgumentException;
 
 class MenuItem implements MenuItemInterface
 {
-    private string $name;
     private ?string $label = null;
     private ?string $uri = null;
     private bool $isDisplayed = true;
@@ -25,9 +24,8 @@ class MenuItem implements MenuItemInterface
     private ?array $attributes = [];
     private ?MenuItemInterface $parent = null;
 
-    public function __construct(string $name)
+    public function __construct(private string $name)
     {
-        $this->name = $name;
     }
 
     public function getName(): ?string

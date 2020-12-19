@@ -26,30 +26,21 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 
     public const LOGIN_ROUTE = 'app_login';
 
-    private EntityManagerInterface $entityManager;
-    private UrlGeneratorInterface $urlGenerator;
-    private CsrfTokenManagerInterface $csrfTokenManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        UrlGeneratorInterface $urlGenerator,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        private EntityManagerInterface $entityManager,
+        private UrlGeneratorInterface $urlGenerator,
+        private CsrfTokenManagerInterface $csrfTokenManager,
+        private UserPasswordEncoderInterface $passwordEncoder
     ) {
-        $this->entityManager = $entityManager;
-        $this->urlGenerator = $urlGenerator;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+            && $request->isMethod(Request::METHOD_POST);
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): mixed
     {
         $credentials = [
             'username' => $request->request->get('username'),
@@ -64,7 +55,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser(mixed $credentials, UserProviderInterface $userProvider): ?UserInterface
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -82,12 +73,12 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user): bool
+    public function checkCredentials(mixed $credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
-    public function getPassword($credentials): ?string
+    public function getPassword(mixed $credentials): ?string
     {
         return $credentials['password'];
     }

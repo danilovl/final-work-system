@@ -21,11 +21,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TaskEventDispatcherService
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function onTaskCreate(Task $task): void

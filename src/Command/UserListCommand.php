@@ -29,16 +29,13 @@ use Doctrine\ORM\EntityManagerInterface;
 class UserListCommand extends Command
 {
     protected static $defaultName = 'app:user-list';
-    private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
         parent::__construct();
-
-        $this->entityManager = $em;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Lists all the existing users')
@@ -62,7 +59,7 @@ HELP
             ->addOption('max-results', 'mr', InputOption::VALUE_OPTIONAL, 'Limits the number of users listed', 50);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $maxResults = $input->getOption('max-results');
         $allUsers = $this->entityManager

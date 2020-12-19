@@ -18,11 +18,8 @@ use Twig\Extension\AbstractExtension;
 
 class WidgetExtension extends AbstractExtension
 {
-    private WidgetManagerService $widgetManager;
-
-    public function __construct(WidgetManagerService $widgetManager)
+    public function __construct(private WidgetManagerService $widgetManager)
     {
-        $this->widgetManager = $widgetManager;
     }
 
     public function getFunctions(): array

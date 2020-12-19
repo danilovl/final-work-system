@@ -23,19 +23,14 @@ use function Symfony\Component\String\u;
 
 class RedirectToPreferredLocaleListener implements EventSubscriberInterface
 {
-    private UrlGeneratorInterface $urlGenerator;
-    private Security $security;
     private array $locales;
-    private ?string $defaultLocale;
 
     public function __construct(
-        UrlGeneratorInterface $urlGenerator,
-        Security $security,
+        private UrlGeneratorInterface $urlGenerator,
+        private Security $security,
         string $locales,
-        string $defaultLocale = null
+        private ?string $defaultLocale = null
     ) {
-        $this->urlGenerator = $urlGenerator;
-        $this->security = $security;
         $this->locales = explode('|', trim($locales));
 
         if (empty($this->locales)) {

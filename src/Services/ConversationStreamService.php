@@ -22,16 +22,12 @@ use App\Entity\{
 
 class ConversationStreamService
 {
-    private Environment $twig;
-    private ConversationMessageFacade $conversationMessageFacade;
     private ?DateTime $date;
 
     public function __construct(
-        Environment $twig,
-        ConversationMessageFacade $conversationMessageFacade
+        private Environment $twig,
+        private ConversationMessageFacade $conversationMessageFacade
     ) {
-        $this->twig = $twig;
-        $this->conversationMessageFacade = $conversationMessageFacade;
     }
 
     public function getLastMessage(Conversation $conversation): string

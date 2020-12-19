@@ -25,24 +25,18 @@ use Symfony\Component\Security\Core\User\{
 
 class ApiKeyUserProvider implements UserProviderInterface
 {
-    private ApiUserFacade $apiUserFacade;
-
-    public function __construct(ApiUserFacade $apiUserFacade)
+    public function __construct(private ApiUserFacade $apiUserFacade)
     {
-        $this->apiUserFacade = $apiUserFacade;
     }
 
     public function loadUserByUsername($username): UserInterface
     {
         $user = $this->apiUserFacade->findByApiKey($username);
-        if ($user === null) {
-            throw new UsernameNotFoundException();
-        }
 
-        return $user;
+        return $user ?? throw new UsernameNotFoundException;
     }
 
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         throw new UnsupportedUserException();
     }

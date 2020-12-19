@@ -16,12 +16,12 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class CommaDotTransformer implements DataTransformerInterface
 {
-    public function transform($number)
+    public function transform(mixed $number): mixed
     {
         return str_replace(',', '.', $number);
     }
 
-    public function reverseTransform($number)
+    public function reverseTransform(mixed $number): mixed
     {
         return $number;
     }

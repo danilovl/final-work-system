@@ -21,20 +21,11 @@ use Twig\Environment;
 
 class BaseNotify
 {
-    protected UserService $userService;
-    protected ParameterService $parameterService;
-    protected Environment $twig;
-    protected TranslatorService $translatorService;
-
     public function __construct(
-        UserService $userService,
-        ParameterService $parameterService,
-        TranslatorService $translatorService,
-        Environment $twig
+        protected UserService $userService,
+        protected ParameterService $parameterService,
+        protected TranslatorService $translatorService,
+        protected Environment $twig
     ) {
-        $this->userService = $userService;
-        $this->translatorService = $translatorService;
-        $this->twig = $twig;
-        $this->parameterService = $parameterService;
     }
 }

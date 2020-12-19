@@ -21,11 +21,8 @@ class SeoRuntime extends AbstractExtension
     private const META = '<meta %s="%s" />';
     private const META_CONTENT = '<meta %s="%s" content="%s" />';
 
-    protected SeoPageInterface $page;
-
-    public function __construct(SeoPageInterface $page)
+    public function __construct(protected SeoPageInterface $page)
     {
-        $this->page = $page;
     }
 
     public function setTitle(string $title): void
@@ -46,7 +43,7 @@ class SeoRuntime extends AbstractExtension
     {
         $html = '';
         foreach ($this->page->getMetas() as $type => $metas) {
-            foreach ((array)$metas as $name => $meta) {
+            foreach ((array) $metas as $name => $meta) {
                 [$content, $extras] = $meta;
 
                 if (!empty($content)) {

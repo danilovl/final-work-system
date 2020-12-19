@@ -23,30 +23,17 @@ use Twig\Environment;
 class MenuWidget extends BaseWidget
 {
     private ?array $factory = null;
-    private array $menuConfig;
-    private Router $router;
-    private TranslatorInterface $translator;
     private ?User $user;
-    private UserService $userService;
-    private Environment $environment;
-    private Security $security;
-
     private ?string $menu;
 
     public function __construct(
-        array $menu,
-        TranslatorInterface $dataCollectorTranslator,
-        Router $router,
-        UserService $userService,
-        Security $security,
-        Environment $environment
+        private array $menuConfig,
+        private TranslatorInterface $translator,
+        private Router $router,
+        private UserService $userService,
+        private Security $security,
+        private Environment $environment
     ) {
-        $this->menuConfig = $menu;
-        $this->translator = $dataCollectorTranslator;
-        $this->router = $router;
-        $this->userService = $userService;
-        $this->security = $security;
-        $this->environment = $environment;
         $this->user = $this->userService->getUser();
     }
 

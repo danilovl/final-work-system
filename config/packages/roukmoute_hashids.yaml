@@ -1,5 +1,0 @@
-# Read the documentation: https://github.com/roukmoute/HashidsBundle/blob/master/README.md
-roukmoute_hashids:
-  salt:               "fce7055"
-  min_hash_length:    10
-  alphabet:           "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"

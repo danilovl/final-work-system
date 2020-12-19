@@ -23,11 +23,9 @@ class WidgetManagerService implements WidgetManagerInterface
 {
     private array $widgets = [];
     private array $widgetsGroup = [];
-    private ContainerInterface $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(private ContainerInterface $container)
     {
-        $this->container = $container;
     }
 
     public function addWidget(string $name, string $serviceName): void

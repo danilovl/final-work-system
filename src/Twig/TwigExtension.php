@@ -27,11 +27,8 @@ use Twig\Extension\AbstractExtension;
 
 class TwigExtension extends AbstractExtension
 {
-    private ParameterService $parameterService;
-
-    public function __construct(ParameterService $parameterService)
+    public function __construct(private ParameterService $parameterService)
     {
-        $this->parameterService = $parameterService;
     }
 
     public function getFunctions(): array

@@ -18,7 +18,7 @@ use Twig\TwigFunction;
 
 class SeoExtension extends AbstractExtension
 {
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('set_seo_title', [SeoRuntime::class, 'setTitle'], ['is_safe' => ['html']]),

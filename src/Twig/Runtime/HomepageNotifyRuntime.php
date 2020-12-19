@@ -19,15 +19,10 @@ use Twig\Extension\AbstractExtension;
 
 class HomepageNotifyRuntime extends AbstractExtension
 {
-    private ParameterService $parameterService;
-    private ContainerInterface $container;
-
     public function __construct(
-        ContainerInterface $container,
-        ParameterService $parameterService
+        private ContainerInterface $container,
+        private ParameterService $parameterService
     ) {
-        $this->parameterService = $parameterService;
-        $this->container = $container;
     }
 
     public function renderNotify(): ?string

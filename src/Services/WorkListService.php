@@ -32,11 +32,8 @@ use Symfony\Component\Form\FormInterface;
 
 class WorkListService
 {
-    private EntityManagerService $em;
-
-    public function __construct(EntityManagerService $entityManagerService)
+    public function __construct(private EntityManagerService $em)
     {
-        $this->em = $entityManagerService;
     }
 
     public function getWorkList(User $user, string $type): Collection

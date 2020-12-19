@@ -18,11 +18,9 @@ class FormValidationMessageHelper
 {
     public static function getErrorMessages(FormInterface $form): array
     {
-        $errors = [];
-
-        foreach ($form->getErrors() as $key => $error) {
-            $errors[] = $error->getMessage();
-        }
+        $errors = array_map(function ($error): string {
+            return $error->getMessage();
+        }, iterator_to_array($form->getErrors()));
 
         foreach ($form->all() as $child) {
             if (!$child->isValid()) {

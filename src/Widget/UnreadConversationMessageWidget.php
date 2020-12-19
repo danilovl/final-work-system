@@ -20,18 +20,11 @@ class UnreadConversationMessageWidget extends BaseWidget
 {
     private const COUNT_VIEW = 6;
 
-    private Environment $environment;
-    private UserService $userService;
-    private ConversationMessageFacade $conversationMessageFacade;
-
     public function __construct(
-        Environment $environment,
-        UserService $userService,
-        ConversationMessageFacade $conversationMessageFacade
+        private Environment $environment,
+        private UserService $userService,
+        private ConversationMessageFacade $conversationMessageFacade
     ) {
-        $this->environment = $environment;
-        $this->conversationMessageFacade = $conversationMessageFacade;
-        $this->userService = $userService;
     }
 
     public function getRenderParameters(): array

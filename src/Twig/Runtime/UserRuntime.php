@@ -21,15 +21,10 @@ use Twig\Extension\AbstractExtension;
 
 class UserRuntime extends AbstractExtension
 {
-    private UserService $userService;
-    private ParameterService $parameterService;
-
     public function __construct(
-        UserService $userService,
-        ParameterService $parameterService
+        private UserService $userService,
+        private ParameterService $parameterService
     ) {
-        $this->userService = $userService;
-        $this->parameterService = $parameterService;
     }
 
     public function appUser(): ?User

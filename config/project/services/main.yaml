@@ -123,7 +123,7 @@ services:
     arguments:
       - '@form.factory'
       - '@router'
-      - '@hashids'
+      - '@danilovl.hashids'
       - "@app.facade.user"
       - '@app.facade.media.mime_type'
       - '@app.facade.media_category'
@@ -139,7 +139,7 @@ services:
   hashids.converter:
     class: App\EventListener\HashidsParamConverterListener
     arguments:
-      - '@hashids'
+      - '@danilovl.hashids'
       - '@doctrine'
     tags:
       - { name: request.param_converter, priority: 1, converter: hashids.converter }

@@ -24,11 +24,9 @@ class SeoPageService implements SeoPageInterface
     private ?string $title = null;
     private array $metas;
     private string $separator;
-    private TranslatorInterface $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(private TranslatorInterface $translator)
     {
-        $this->translator = $translator;
         $this->separator = self::DEFAULT_SEPARATOR;
         $this->metas = [
             'http-equiv' => [],

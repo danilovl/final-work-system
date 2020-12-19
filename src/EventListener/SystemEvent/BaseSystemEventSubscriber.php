@@ -16,10 +16,7 @@ use App\Services\EntityManagerService;
 
 class BaseSystemEventSubscriber
 {
-    protected EntityManagerService $em;
-
-    public function __construct(EntityManagerService $entityManagerService)
+    public function __construct(protected EntityManagerService $em)
     {
-        $this->em = $entityManagerService;
     }
 }

@@ -16,7 +16,7 @@ class IpHelper
 {
     public static function isIpInRange(string $ip, string $range): bool
     {
-        if (strpos($range, '/') === false) {
+        if (!str_contains($range, '/')) {
             $range .= '/32';
         }
         // $range is in IP/CIDR format eg 127.0.0.1/24

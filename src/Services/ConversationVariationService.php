@@ -24,11 +24,9 @@ use App\Entity\User;
 class ConversationVariationService
 {
     private ?array $newPermission = null;
-    private ParameterService $parameterService;
 
-    public function __construct(ParameterService $parameterService)
+    public function __construct(private ParameterService $parameterService)
     {
-        $this->parameterService = $parameterService;
     }
 
     public function setNewPermission(?array $newPermission): void

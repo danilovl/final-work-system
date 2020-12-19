@@ -44,18 +44,11 @@ class WorkForm extends AbstractType
 {
     public const NAME = 'work';
 
-    private WorkStatusDataGrid $workStatusDataGridHelper;
-    private WorkCategoryDataGrid $workCategoryDataGridHelper;
-    private UserDataGrid $userDataGridHelper;
-
     public function __construct(
-        WorkStatusDataGrid $workStatusDataGridHelper,
-        WorkCategoryDataGrid $workCategoryDataGridHelper,
-        UserDataGrid $userDataGridHelper
+        private WorkStatusDataGrid $workStatusDataGridHelper,
+        private WorkCategoryDataGrid $workCategoryDataGridHelper,
+        private UserDataGrid $userDataGridHelper
     ) {
-        $this->workStatusDataGridHelper = $workStatusDataGridHelper;
-        $this->workCategoryDataGridHelper = $workCategoryDataGridHelper;
-        $this->userDataGridHelper = $userDataGridHelper;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

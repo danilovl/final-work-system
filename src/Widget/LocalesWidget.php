@@ -17,14 +17,12 @@ use Twig\Environment;
 
 class LocalesWidget extends BaseWidget
 {
-    private Environment $environment;
     private array $locales;
 
     public function __construct(
-        Environment $environment,
+        private Environment $environment,
         string $locales
     ) {
-        $this->environment = $environment;
         $this->locales = explode('|', $locales);
     }
 

@@ -34,24 +34,13 @@ use DateInterval;
 
 class ResetPasswordService
 {
-    private ResetPasswordFacade $resetPasswordFacade;
-    private ResetPasswordFactory $resetPasswordFactory;
-    private string $cryptographicallySecureKey;
-    private int $resetRequestLifetime;
-    private int $requestThrottleTime;
-
     public function __construct(
-        ResetPasswordFactory $resetPasswordFactory,
-        ResetPasswordFacade $resetPasswordFacade,
-        string $cryptographicallySecureKey,
-        int $resetRequestLifetime,
-        int $requestThrottleTime
+        private ResetPasswordFactory $resetPasswordFactory,
+        private ResetPasswordFacade $resetPasswordFacade,
+        private string $cryptographicallySecureKey,
+        private int $resetRequestLifetime,
+        private int $requestThrottleTime
     ) {
-        $this->resetPasswordFactory = $resetPasswordFactory;
-        $this->resetPasswordFacade = $resetPasswordFacade;
-        $this->cryptographicallySecureKey = $cryptographicallySecureKey;
-        $this->resetRequestLifetime = $resetRequestLifetime;
-        $this->requestThrottleTime = $requestThrottleTime;
     }
 
     public function getTokenLifetime(): int

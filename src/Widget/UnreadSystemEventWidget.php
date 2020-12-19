@@ -23,21 +23,12 @@ class UnreadSystemEventWidget extends BaseWidget
 {
     private const COUNT_VIEW = 6;
 
-    private Environment $environment;
-    private UserService $userService;
-    private SystemEventFacade $systemEventFacade;
-    private SystemEventRecipientFacade $systemEventRecipientFacade;
-
     public function __construct(
-        Environment $environment,
-        UserService $userService,
-        SystemEventFacade $systemEventFacade,
-        SystemEventRecipientFacade $systemEventRecipientFacade
+        private Environment $environment,
+        private UserService $userService,
+        private SystemEventFacade $systemEventFacade,
+        private SystemEventRecipientFacade $systemEventRecipientFacade
     ) {
-        $this->environment = $environment;
-        $this->userService = $userService;
-        $this->systemEventFacade = $systemEventFacade;
-        $this->systemEventRecipientFacade = $systemEventRecipientFacade;
     }
 
     public function getRenderParameters(): array

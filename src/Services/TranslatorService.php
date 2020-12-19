@@ -18,15 +18,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TranslatorService implements TranslatorInterface
 {
-    private TranslatorInterface $translator;
-    private RequestStack $requestStack;
-
     public function __construct(
-        TranslatorInterface $translator,
-        RequestStack $requestStack
+        private TranslatorInterface $translator,
+        private RequestStack $requestStack
     ) {
-        $this->translator = $translator;
-        $this->requestStack = $requestStack;
     }
 
     public function trans(
@@ -35,7 +30,7 @@ class TranslatorService implements TranslatorInterface
         string $domain = null,
         string $locale = null
     ) {
-        if (strpos($id, TranslationConstant::FLASH_START_KEY) !== false) {
+        if (str_contains($id, TranslationConstant::FLASH_START_KEY)) {
             $domain = TranslationConstant::FLASH_DOMAIN;
             $locale = $locale ?? $this->requestStack->getCurrentRequest()->getLocale();
         }

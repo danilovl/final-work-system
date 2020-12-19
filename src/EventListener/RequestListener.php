@@ -18,18 +18,11 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RequestListener
 {
-    private UserService $userService;
-    private EntityManagerService $entityManagerService;
-    private SeoPageService $seoPageService;
-
     public function __construct(
-        UserService $userService,
-        EntityManagerService $entityManagerService,
-        SeoPageService $seoPageService
+        private UserService $userService,
+        private EntityManagerService $entityManagerService,
+        private SeoPageService $seoPageService
     ) {
-        $this->userService = $userService;
-        $this->entityManagerService = $entityManagerService;
-        $this->seoPageService = $seoPageService;
     }
 
     public function onKernelRequest(RequestEvent $requestEvent): void

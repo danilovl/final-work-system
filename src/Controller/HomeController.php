@@ -13,7 +13,7 @@
 namespace App\Controller;
 
 use App\Helper\SystemEventHelper;
-use Danilovl\PermissionMiddlewareBundle\Annotation\PermissionMiddleware;
+use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -21,13 +21,7 @@ use Symfony\Component\HttpFoundation\{
 
 class HomeController extends BaseController
 {
-    /**
-     * @PermissionMiddleware(
-     *      date={
-     *          "from": "31-01-2020"
-     *      }
-     * )
-     */
+    #[PermissionMiddleware(['date' => ['from' => '31-01-2020']])]
     public function index(Request $request): Response
     {
         $user = $this->getUser();

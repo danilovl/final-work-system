@@ -18,11 +18,8 @@ use Twig\TwigFunction;
 
 class ChangeLanguageExtension extends AbstractExtension
 {
-    private string $locales;
-
-    public function __construct(string $locales)
+    public function __construct(private string $locales)
     {
-        $this->locales = $locales;
     }
 
     public function getFunctions(): array

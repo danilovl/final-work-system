@@ -18,7 +18,7 @@ class FirstWeekDay extends Constraint
 {
     public string $message = 'It is not first day of the week';
 
-    public function getTargets()
+    public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;
     }

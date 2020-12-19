@@ -24,13 +24,11 @@ use App\Repository\ConversationMessageStatusRepository;
 
 class ConversationStatusService
 {
-    private EntityManagerService $em;
     private ConversationMessageStatusRepository $conversationMessageStatusRepository;
 
-    public function __construct(EntityManagerService $entityManagerService)
+    public function __construct(private EntityManagerService $em)
     {
-        $this->em = $entityManagerService;
-        $this->conversationMessageStatusRepository = $entityManagerService->getRepository(ConversationMessageStatus::class);
+        $this->conversationMessageStatusRepository = $this->em->getRepository(ConversationMessageStatus::class);
     }
 
     public function isConversationRead(

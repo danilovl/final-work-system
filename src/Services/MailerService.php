@@ -20,11 +20,8 @@ use Symfony\Component\Mime\RawMessage;
 
 class MailerService implements MailerInterface
 {
-    private MailerInterface $mailer;
-
-    public function __construct(MailerInterface $mailer)
+    public function __construct(private MailerInterface $mailer)
     {
-        $this->mailer = $mailer;
     }
 
     public function send(RawMessage $message, Envelope $envelope = null): void

@@ -13,7 +13,6 @@ return [
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
-    Roukmoute\HashidsBundle\RoukmouteHashidsBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Danilovl\ParameterBundle\ParameterBundle::class => ['all' => true],
     Danilovl\RenderServiceTwigExtensionBundle\RenderServiceTwigExtensionBundle::class => ['all' => true],
@@ -21,5 +20,6 @@ return [
     Overblog\GraphiQLBundle\OverblogGraphiQLBundle::class => ['dev' => true],
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
     Danilovl\PermissionMiddlewareBundle\PermissionMiddlewareBundle::class => ['all' => true],
+    Danilovl\HashidsBundle\HashidsBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true],
 ];

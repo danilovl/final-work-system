@@ -33,36 +33,27 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
     private const LIMIT = 500;
 
     private SymfonyStyle $io;
-    private EntityManagerService $entityManagerService;
-    private ParameterService $parameterService;
-    private MediaFacade $mediaFacade;
-    private MediaTypeFacade $mediaTypeFacade;
 
     public function __construct(
-        EntityManagerService $entityManagerService,
-        MediaFacade $mediaFacade,
-        MediaTypeFacade $mediaTypeFacade,
-        ParameterService $parameterService
+        private EntityManagerService $entityManagerService,
+        private MediaFacade $mediaFacade,
+        private MediaTypeFacade $mediaTypeFacade,
+        private ParameterService $parameterService
     ) {
         parent::__construct();
-
-        $this->parameterService = $parameterService;
-        $this->mediaFacade = $mediaFacade;
-        $this->mediaTypeFacade = $mediaTypeFacade;
-        $this->entityManagerService = $entityManagerService;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Sync database media with real file');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->syncMediaTypeFolder($output);
         $this->syncMediaFile();

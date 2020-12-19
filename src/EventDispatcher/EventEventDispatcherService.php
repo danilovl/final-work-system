@@ -22,11 +22,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventEventDispatcherService
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function onEventComment(Comment $comment, bool $isEventCommentExist): void

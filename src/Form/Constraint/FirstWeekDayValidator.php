@@ -25,14 +25,11 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class FirstWeekDayValidator extends ConstraintValidator
 {
-    private TranslatorInterface $translator;
-
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(private TranslatorInterface $translator)
     {
-        $this->translator = $translator;
     }
 
-    public function validate($startDate, Constraint $constraint): void
+    public function validate(mixed $startDate, Constraint $constraint): void
     {
         if ($startDate === null) {
             return;

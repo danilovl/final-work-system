@@ -26,33 +26,26 @@ class TaskRemindDeadlineCommand extends Command
     private const LIMIT = 500;
 
     private SymfonyStyle $io;
-    private TaskEventDispatcherService $taskEventDispatcherService;
-    private ParameterService $parameterService;
-    private TaskDeadlineFacade $taskDeadlineFacade;
 
     public function __construct(
-        TaskEventDispatcherService $taskEventDispatcherService,
-        TaskDeadlineFacade $taskDeadlineFacade,
-        ParameterService $parameterService
+        private TaskEventDispatcherService $taskEventDispatcherService,
+        private TaskDeadlineFacade $taskDeadlineFacade,
+        private ParameterService $parameterService
     ) {
         parent::__construct();
-
-        $this->parameterService = $parameterService;
-        $this->taskDeadlineFacade = $taskDeadlineFacade;
-        $this->taskEventDispatcherService = $taskEventDispatcherService;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Create reminder notification emails for tasks');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->parameterService->get('task_remind.enable')) {
             $this->io->error('Task reminder is not unable');

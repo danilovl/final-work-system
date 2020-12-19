@@ -27,7 +27,7 @@ class SystemEventRecipientVoter extends Voter
         VoterSupportConstant::CHANGE_VIEWED
     ];
 
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
             return false;
@@ -40,7 +40,7 @@ class SystemEventRecipientVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         if (!$user instanceof User) {

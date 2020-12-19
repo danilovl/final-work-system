@@ -19,15 +19,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaginatorService
 {
-    private PaginatorInterface $pagination;
-    private ParameterService $parameterService;
-
     public function __construct(
-        PaginatorInterface $pagination,
-        ParameterService $parameterService
+        private PaginatorInterface $pagination,
+        private ParameterService $parameterService
     ) {
-        $this->pagination = $pagination;
-        $this->parameterService = $parameterService;
     }
 
     public function createPagination(

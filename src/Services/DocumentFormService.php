@@ -43,27 +43,15 @@ use Symfony\Component\Routing\Router;
 class DocumentFormService
 {
     private ?User $user = null;
-    private FormFactoryInterface $formFactory;
-    private Router $router;
-    private Hashids $hashIds;
-    private UserFacade $userService;
-    private MediaMimeTypeFacade $mediaMimeTypeFacade;
-    private MediaCategoryFacade $mediaCategoryFacade;
 
     public function __construct(
-        FormFactoryInterface $formFactory,
-        Router $router,
-        Hashids $hashIds,
-        UserFacade $userService,
-        MediaMimeTypeFacade $mediaMimeTypeFacade,
-        MediaCategoryFacade $mediaCategoryFacade
+        private FormFactoryInterface $formFactory,
+        private Router $router,
+        private Hashids $hashIds,
+        private UserFacade $userService,
+        private MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private MediaCategoryFacade $mediaCategoryFacade
     ) {
-        $this->formFactory = $formFactory;
-        $this->router = $router;
-        $this->hashIds = $hashIds;
-        $this->userService = $userService;
-        $this->mediaMimeTypeFacade = $mediaMimeTypeFacade;
-        $this->mediaCategoryFacade = $mediaCategoryFacade;
     }
 
     public function getUser(): ?User

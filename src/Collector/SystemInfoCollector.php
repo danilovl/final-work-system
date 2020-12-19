@@ -21,18 +21,15 @@ use Throwable;
 
 class SystemInfoCollector extends DataCollector
 {
-    private array $systemInfo;
-
-    public function __construct(array $systemInfo)
+    public function __construct(private array $systemInfo)
     {
-        $this->systemInfo = $systemInfo;
     }
 
     public function collect(
         Request $request,
         Response $response,
         Throwable $exception = null
-    ) {
+    ): void {
         $this->data = [
             'system_info' => $this->systemInfo
         ];

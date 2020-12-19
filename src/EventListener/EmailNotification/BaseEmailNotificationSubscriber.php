@@ -21,28 +21,18 @@ use Twig\Environment;
 
 class BaseEmailNotificationSubscriber
 {
-    private UserFacade $userFacade;
-    private ParameterService $parameterService;
-    protected EmailNotificationQueueFactory $emailNotificationQueueFactory;
-    protected Environment $twig;
-    protected TranslatorInterface $translator;
-
     protected ?string $sender;
     protected string $locale;
     protected ?string $translatorDomain;
     protected bool $enableAddToQueue;
 
     public function __construct(
-        UserFacade $userFacade,
-        Environment $twig,
-        TranslatorInterface $translator,
-        EmailNotificationQueueFactory $emailNotificationQueueFactory,
-        ParameterService $parameterService
+        protected UserFacade $userFacade,
+        protected Environment $twig,
+        protected TranslatorInterface $translator,
+        protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
+        protected ParameterService $parameterService
     ) {
-        $this->userFacade = $userFacade;
-        $this->emailNotificationQueueFactory = $emailNotificationQueueFactory;
-        $this->twig = $twig;
-        $this->parameterService = $parameterService;
         $this->translator = clone $translator;
 
         $this->initParameters();

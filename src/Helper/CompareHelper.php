@@ -21,9 +21,9 @@ use DateTime;
 class CompareHelper
 {
     public static function compare(
-        $value1,
-        $value2,
-        $operator
+        mixed $value1,
+        mixed $value2,
+        string $operator
     ): bool {
         switch ($operator) {
             case CompareConstant::LESS:

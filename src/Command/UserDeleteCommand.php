@@ -28,29 +28,26 @@ class UserDeleteCommand extends Command
     protected static $defaultName = 'app:user-delete';
 
     private SymfonyStyle $io;
-    private EntityManagerInterface $entityManager;
-    private UserValidator $validator;
 
-    public function __construct(EntityManagerInterface $em, UserValidator $userValidator)
-    {
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private UserValidator $validator
+    ) {
         parent::__construct();
-
-        $this->entityManager = $em;
-        $this->validator = $userValidator;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Deletes users from the database')
             ->addArgument('username', InputArgument::REQUIRED, 'The username of an existing user');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function interact(InputInterface $input, OutputInterface $output)
+    protected function interact(InputInterface $input, OutputInterface $output): void
     {
         if ($input->getArgument('username') !== null) {
             return;
@@ -62,7 +59,7 @@ class UserDeleteCommand extends Command
         $input->setArgument('username', $username);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
 

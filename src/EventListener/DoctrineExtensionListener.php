@@ -19,15 +19,10 @@ use Symfony\Component\Security\Core\Security;
 
 class DoctrineExtensionListener
 {
-    private Security $security;
-    private LoggableListener $loggableListener;
-
     public function __construct(
-        Security $security,
-        LoggableListener $loggableListener
+        private Security $security,
+        private LoggableListener $loggableListener
     ) {
-        $this->security = $security;
-        $this->loggableListener = $loggableListener;
     }
 
     public function onKernelRequest(RequestEvent $event): void

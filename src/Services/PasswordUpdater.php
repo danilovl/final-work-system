@@ -18,11 +18,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class PasswordUpdater
 {
-    private EncoderFactoryInterface $encoderFactory;
-
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(private EncoderFactoryInterface $encoderFactory)
     {
-        $this->encoderFactory = $encoderFactory;
     }
 
     public function hashPassword(

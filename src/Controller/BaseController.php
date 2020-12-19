@@ -62,12 +62,12 @@ class BaseController extends AbstractController
 
     protected function hashIdEncode(int $id): string
     {
-        return $this->get('hashids')->encode($id);
+        return $this->get('danilovl.hashids')->encode($id);
     }
 
     protected function hashIdDecode(string $id): array
     {
-        return $this->get('hashids')->decode($id);
+        return $this->get('danilovl.hashids')->decode($id);
     }
 
     protected function flushEntity($entity = null): void

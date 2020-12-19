@@ -12,9 +12,9 @@
 
 namespace App\EventListener;
 
+use Danilovl\HashidsBundle\Services\HashidsService;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Exception;
-use Hashids\HashidsInterface;
 use LogicException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +22,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HashidsParamConverterListener extends DoctrineParamConverter
 {
-    private HashidsInterface $hashids;
     private bool $autowire;
 
-    public function __construct(HashidsInterface $hashids, ManagerRegistry $registry)
-    {
+    public function __construct(
+        private HashidsService $hashids,
+        ManagerRegistry $registry
+    ) {
         parent::__construct($registry);
 
-        $this->hashids = $hashids;
         $this->autowire = true;
     }
 

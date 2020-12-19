@@ -31,18 +31,12 @@ use Symfony\Component\HttpFoundation\Request;
 class WorkDetailTabService
 {
     private ?string $activeTab = null;
-    private EntityManagerService $em;
-    private PaginatorService $paginator;
-    private ParameterService $parameterService;
 
     public function __construct(
-        EntityManagerService $entityManagerService,
-        PaginatorService $paginator,
-        ParameterService $parameterService
+        private EntityManagerService $em,
+        private PaginatorService $paginator,
+        private ParameterService $parameterService
     ) {
-        $this->em = $entityManagerService;
-        $this->paginator = $paginator;
-        $this->parameterService = $parameterService;
     }
 
     public function getActiveTab(): string

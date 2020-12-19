@@ -21,15 +21,10 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
 {
-    private Environment $twig;
-    private UrlGeneratorInterface $urlGenerator;
-
     public function __construct(
-        Environment $twig,
-        UrlGeneratorInterface $urlGenerator
+        private Environment $twig,
+        private UrlGeneratorInterface $urlGenerator
     ) {
-        $this->twig = $twig;
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function generateLink(SystemEventRecipient $systemEventRecipient): string

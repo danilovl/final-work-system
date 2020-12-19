@@ -16,11 +16,8 @@ use Doctrine\ORM\EntityManager;
 
 class EntityManagerService
 {
-    private EntityManager $entityManager;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(private EntityManager $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function getReference(string $entityName, int $id): ?object
@@ -28,25 +25,25 @@ class EntityManagerService
         return $this->entityManager->getReference($entityName, $id);
     }
 
-    public function persistAndFlush($entity): void
+    public function persistAndFlush(mixed $entity): void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush($entity);
     }
 
-    public function remove($entity): void
+    public function remove(mixed $entity): void
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush($entity);
     }
 
-    public function create($entity): void
+    public function create(mixed $entity): void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush($entity);
     }
 
-    public function flush($entity = null): void
+    public function flush(mixed $entity = null): void
     {
         $this->entityManager->flush($entity);
     }

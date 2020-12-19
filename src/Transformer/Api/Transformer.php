@@ -19,14 +19,11 @@ use ReflectionClass;
 
 class Transformer implements TransformerInterface
 {
-    private ParameterService $parameterService;
-
-    public function __construct(ParameterService $parameterService)
+    public function __construct(private ParameterService $parameterService)
     {
-        $this->parameterService = $parameterService;
     }
 
-    public function transform(string $domain, array $fields, $object): array
+    public function transform(string $domain, array $fields, mixed $object): array
     {
         $result = [];
 

@@ -18,11 +18,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WidgetEventSubscriber implements EventSubscriberInterface
 {
-    private WidgetManagerService $widgetManagerService;
-
-    public function __construct(WidgetManagerService $widgetManagerService)
+    public function __construct(private WidgetManagerService $widgetManagerService)
     {
-        $this->widgetManagerService = $widgetManagerService;
     }
 
     public static function getSubscribedEvents(): array

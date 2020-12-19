@@ -27,18 +27,14 @@ use Twig\Environment;
 
 class WorkDeadlineNotify extends BaseNotify implements HomepageNotifyInterface
 {
-    private WorkFacade $workFacade;
-
     public function __construct(
         UserService $userService,
         ParameterService $parameterService,
         TranslatorService $translatorService,
         Environment $twig,
-        WorkFacade $workFacade
+        protected WorkFacade $workFacade
     ) {
         parent::__construct($userService, $parameterService, $translatorService, $twig);
-
-        $this->workFacade = $workFacade;
     }
 
     public function renderNotify(): ?string

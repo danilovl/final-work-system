@@ -19,7 +19,7 @@ use App\Constant\{
 
 class UserHelper
 {
-    public static function getRealRoleName($role): ?string
+    public static function getRealRoleName(string $role): ?string
     {
         $rolesName = [
             UserRoleConstant::STUDENT => 'student',

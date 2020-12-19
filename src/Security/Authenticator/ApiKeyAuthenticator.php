@@ -35,14 +35,14 @@ class ApiKeyAuthenticator extends AbstractGuardAuthenticator
         return $request->headers->has(self::AUTH_KEY);
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): mixed
     {
         return [
             self::CREDENTIALS_KEY => $request->headers->get(self::AUTH_KEY)
         ];
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
         $apiKey = $credentials[self::CREDENTIALS_KEY];
         if ($apiKey === null) {

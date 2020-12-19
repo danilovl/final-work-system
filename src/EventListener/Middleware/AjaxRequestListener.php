@@ -25,15 +25,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AjaxRequestListener
 {
-    private Reader $reader;
-    private TranslatorInterface $translator;
-
     public function __construct(
-        Reader $reader,
-        TranslatorInterface $translator
+        private Reader $reader,
+        private TranslatorInterface $translator
     ) {
-        $this->reader = $reader;
-        $this->translator = $translator;
     }
 
     public function onKernelController(ControllerEvent $event)

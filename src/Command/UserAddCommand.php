@@ -33,23 +33,16 @@ class UserAddCommand extends Command
     protected static $defaultName = 'app:user-add';
 
     private ?SymfonyStyle $io = null;
-    private EntityManagerInterface $entityManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
-    private UserValidator $validator;
 
     public function __construct(
-        EntityManagerInterface $em,
-        UserPasswordEncoderInterface $encoder,
-        UserValidator $userValidator
+        private EntityManagerInterface $entityManager,
+        private UserPasswordEncoderInterface $passwordEncoder,
+        private UserValidator $validator
     ) {
         parent::__construct();
-
-        $this->entityManager = $em;
-        $this->passwordEncoder = $encoder;
-        $this->validator = $userValidator;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Creates users and stores them in the database')

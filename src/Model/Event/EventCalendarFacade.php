@@ -13,6 +13,7 @@
 namespace App\Model\Event;
 
 use App\Services\EntityManagerService;
+use Danilovl\HashidsBundle\Services\HashidsService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
 use App\Constant\{
@@ -23,7 +24,6 @@ use App\Constant\{
     EventCalendarActionTypeConstant
 };
 use App\Exception\ConstantNotFoundException;
-use Hashids\HashidsInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Entity\{
     Work,
@@ -40,20 +40,14 @@ class EventCalendarFacade
     private string $calendarEventReservedColor;
     private string $calendarEventDetailReservedColor;
 
-    private EntityManagerService $em;
-    private RouterInterface $router;
-    private HashidsInterface $hashIds;
     private EventRepository $eventRepository;
 
     public function __construct(
-        EntityManagerService $entityManager,
-        RouterInterface $router,
-        HashidsInterface $hashIds,
-        ParameterService $parameterService
+        private EntityManagerService $entityManager,
+        private RouterInterface $router,
+        private HashidsService $hashIds,
+        private ParameterService $parameterService
     ) {
-        $this->em = $entityManager;
-        $this->router = $router;
-        $this->hashIds = $hashIds;
         $this->eventRepository = $entityManager->getRepository(Event::class);
 
         $this->calendarEventReservedColor = $parameterService->get('event_calendar.reserved_color');

@@ -34,38 +34,29 @@ class EmailNotificationQueueCommand extends Command
     protected static $defaultName = 'app:email-notification-queue-send';
 
     private SymfonyStyle $io;
-    private MailerService $mailer;
-    private EntityManagerService $entityManagerService;
-    private EmailNotificationQueueFacade $emailNotificationQueueFacade;
-    private ParameterService $parameterService;
 
     public function __construct(
-        EntityManagerService $entityManagerService,
-        EmailNotificationQueueFacade $emailNotificationQueueFacade,
-        MailerService $mailer,
-        ParameterService $parameterService
+        private EntityManagerService $entityManagerService,
+        private EmailNotificationQueueFacade $emailNotificationQueueFacade,
+        private MailerService $mailer,
+        private ParameterService $parameterService
     ) {
         parent::__construct();
-
-        $this->mailer = $mailer;
-        $this->emailNotificationQueueFacade = $emailNotificationQueueFacade;
-        $this->entityManagerService = $entityManagerService;
-        $this->parameterService = $parameterService;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Send notification emails');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if(!$this->parameterService->get('email_notification.enable_send')){
+        if (!$this->parameterService->get('email_notification.enable_send')) {
             $this->io->error('Email notification sending is unable');
 
             return Command::FAILURE;
