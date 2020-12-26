@@ -12,7 +12,7 @@
 
 namespace App\Controller\Ajax;
 
-use App\Annotation\AjaxRequestMiddleware;
+use App\Attribute\AjaxRequestMiddlewareAttribute;
 use DateTime;
 use App\Constant\{
     AjaxJsonTypeConstant,
@@ -33,9 +33,9 @@ use Symfony\Component\HttpFoundation\{
 
 class EventController extends BaseController
 {
-    /**
-     * @AjaxRequestMiddleware(class="App\Middleware\Event\Ajax\GetEventMiddleware")
-     */
+    #[AjaxRequestMiddlewareAttribute([
+        'class' => 'App\Middleware\Event\Ajax\GetEventMiddleware'
+    ])]
     public function getEvent(
         Request $request,
         Event $event

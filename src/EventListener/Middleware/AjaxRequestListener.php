@@ -12,14 +12,15 @@
 
 namespace App\EventListener\Middleware;
 
-use App\Annotation\AjaxRequestMiddleware;
+use App\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Constant\FlashTypeConstant;
 use App\Exception\AjaxRuntimeException;
 use Doctrine\Common\Annotations\Reader;
 use ReflectionClass;
-use ReflectionObject;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -42,35 +43,42 @@ class AjaxRequestListener
             return;
         }
 
-        [$controller, $methodName] = $controllers;
+        [$controller, $method] = $controllers;
 
-        $reflectionClass = new ReflectionClass($controller);
-        /** @var AjaxRequestMiddleware $classAnnotation */
-        $classAnnotation = $this->reader
-            ->getClassAnnotation($reflectionClass, AjaxRequestMiddleware::class);
+        $this->controllerMiddleware($controller, $event, $request);
+        $this->methodMiddleware($controller, $method, $event, $request);
+    }
 
-        if ($classAnnotation !== null) {
-            $this->handleRequest($event, $classAnnotation, $request);
+    private function controllerMiddleware(
+        object $controller,
+        ControllerEvent $event,
+        Request $request
+    ): void {
+        $attributes = (new ReflectionClass($controller))->getAttributes(AjaxRequestMiddlewareAttribute::class);
+        foreach ($attributes as $attribute) {
+            $this->handleRequest($event, $attribute->newInstance(), $request);
         }
+    }
 
-        $reflectionObject = new ReflectionObject($controller);
-        $reflectionMethod = $reflectionObject->getMethod($methodName);
-        /** @var AjaxRequestMiddleware $methodAnnotation */
-        $methodAnnotation = $this->reader
-            ->getMethodAnnotation($reflectionMethod, AjaxRequestMiddleware::class);
-
-        if ($methodAnnotation !== null) {
-            $this->handleRequest($event, $methodAnnotation, $request);
+    private function methodMiddleware(
+        object $controller,
+        string $method,
+        ControllerEvent $event,
+        Request $request
+    ): void {
+        $attributes = (new ReflectionClass($controller))->getMethod($method)->getAttributes(AjaxRequestMiddlewareAttribute::class);
+        foreach ($attributes as $attribute) {
+            $this->handleRequest($event, $attribute->newInstance(), $request);
         }
     }
 
     private function handleRequest(
         ControllerEvent $event,
-        AjaxRequestMiddleware $ajaxRequestMiddleware,
+        AjaxRequestMiddlewareAttribute $ajaxRequestMiddlewareAttribute,
         Request $request
     ): void {
         try {
-            call_user_func([$ajaxRequestMiddleware->class, 'handle'], $request);
+            call_user_func([$ajaxRequestMiddlewareAttribute->class, 'handle'], $request);
         } catch (AjaxRuntimeException $exception) {
             $event->setController(
                 function () {

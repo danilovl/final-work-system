@@ -12,7 +12,7 @@
 
 namespace App\Controller\Ajax;
 
-use App\Annotation\AjaxRequestMiddleware;
+use App\Attribute\AjaxRequestMiddlewareAttribute;
 use DateTime;
 use App\Exception\AjaxRuntimeException;
 use App\Model\Event\EventModel;
@@ -45,9 +45,9 @@ use Symfony\Component\HttpFoundation\{
 
 class EventCalendarController extends BaseController
 {
-    /**
-     * @AjaxRequestMiddleware(class="App\Middleware\EventCalendar\Ajax\GetEventMiddleware")
-     */
+    #[AjaxRequestMiddlewareAttribute([
+        'class' => 'App\Middleware\EventCalendar\Ajax\GetEventMiddleware'
+    ])]
     public function getEvent(Request $request): JsonResponse
     {
         $startDate = new DateTime($request->get('start'));
@@ -178,9 +178,9 @@ class EventCalendarController extends BaseController
         ]);
     }
 
-    /**
-     * @AjaxRequestMiddleware(class="App\Middleware\EventCalendar\Ajax\EditMiddleware")
-     */
+    #[AjaxRequestMiddlewareAttribute([
+        'class' => 'App\Middleware\EventCalendar\Ajax\EditMiddleware'
+    ])]
     public function edit(Request $request, Event $event): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);
