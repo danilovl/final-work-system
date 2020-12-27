@@ -16,9 +16,9 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class CommaDotTransformer implements DataTransformerInterface
 {
-    public function transform(mixed $number): mixed
+    public function transform(mixed $number): string
     {
-        return str_replace(',', '.', $number);
+        return str_replace(',', '.', (string) $number);
     }
 
     public function reverseTransform(mixed $number): mixed

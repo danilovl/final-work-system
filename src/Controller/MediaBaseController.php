@@ -122,7 +122,7 @@ class MediaBaseController extends BaseController implements MediaInterface
             );
         }
 
-        $this->flushEntity();
+        $this->flushEntity($media);
     }
 
     public function downloadMedia(Media $media): BinaryFileResponse

@@ -23,8 +23,10 @@ use App\Entity\{
     ConversationMessage,
     ConversationMessageStatusType
 };
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\{
+    JsonResponse,
+    StreamedResponse
+};
 
 class ConversationController extends BaseController
 {

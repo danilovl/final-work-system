@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use App\Exception\RuntimeException;
 use App\Constant\{
     GenderConstant,
     TranslationConstant,
@@ -789,7 +790,7 @@ class User implements UserInterface
      */
     public function getEventByParticipant(): Collection
     {
-        $event = new ArrayCollection();
+        $event = new ArrayCollection;
 
         /** @var EventParticipant $eventParticipant */
         foreach ($this->getEventsParticipant() as $eventParticipant) {
@@ -1012,20 +1013,14 @@ class User implements UserInterface
 
     public function getActiveSupervisor(string $userType): ArrayCollection
     {
-        $supervisors = new ArrayCollection();
-        $userWorks = [];
+        $supervisors = new ArrayCollection;
 
-        switch ($userType) {
-            case WorkUserTypeConstant::AUTHOR:
-                $userWorks = $this->arrayGenerator($this->getAuthorWorks());
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $userWorks = $this->arrayGenerator($this->getOpponentWorks());
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userWorks = $this->arrayGenerator($this->getConsultantWorks());
-                break;
-        }
+        $userWorks = match ($userType) {
+            WorkUserTypeConstant::AUTHOR => $this->arrayGenerator($this->getAuthorWorks()),
+            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($this->getOpponentWorks()),
+            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getConsultantWorks()),
+            default => new ArrayCollection,
+        };
 
         foreach ($userWorks as $work) {
             /** @var Work $work */
@@ -1046,20 +1041,14 @@ class User implements UserInterface
 
     public function getActiveAuthor(string $userType): ArrayCollection
     {
-        $authors = new ArrayCollection();
-        $userWorks = [];
+        $authors = new ArrayCollection;
 
-        switch ($userType) {
-            case WorkUserTypeConstant::OPPONENT:
-                $userWorks = $this->arrayGenerator($this->getOpponentWorks());
-                break;
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userWorks = $this->arrayGenerator($this->getSupervisorWorks());
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userWorks = $this->arrayGenerator($this->getConsultantWorks());
-                break;
-        }
+        $userWorks = match ($userType) {
+            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($this->getOpponentWorks()),
+            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($this->getSupervisorWorks()),
+            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getConsultantWorks()),
+            default => new ArrayCollection,
+        };
 
         foreach ($userWorks as $work) {
             /** @var Work $work */
@@ -1081,19 +1070,13 @@ class User implements UserInterface
     public function getActiveOpponent(string $userType): ArrayCollection
     {
         $opponents = new ArrayCollection;
-        $userWorks = [];
 
-        switch ($userType) {
-            case WorkUserTypeConstant::AUTHOR:
-                $userWorks = $this->arrayGenerator($this->getAuthorWorks());
-                break;
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userWorks = $this->arrayGenerator($this->getSupervisorWorks());
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userWorks = $this->arrayGenerator($this->getConsultantWorks());
-                break;
-        }
+        $userWorks = match ($userType) {
+            WorkUserTypeConstant::AUTHOR => $this->arrayGenerator($this->getAuthorWorks()),
+            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($this->getSupervisorWorks()),
+            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getConsultantWorks()),
+            default => new ArrayCollection,
+        };
 
         foreach ($userWorks as $work) {
             /** @var Work $work */
@@ -1115,19 +1098,13 @@ class User implements UserInterface
     public function getActiveConsultant(string $userType): ArrayCollection
     {
         $consultants = new ArrayCollection;
-        $userWorks = [];
 
-        switch ($userType) {
-            case WorkUserTypeConstant::CONSULTANT:
-                $userWorks = $this->arrayGenerator($this->getAuthorWorks());
-                break;
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userWorks = $this->arrayGenerator($this->getSupervisorWorks());
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $userWorks = $this->arrayGenerator($this->getOpponentWorks());
-                break;
-        }
+        $userWorks = match ($userType) {
+            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getAuthorWorks()),
+            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($this->getSupervisorWorks()),
+            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($this->getOpponentWorks()),
+            default => new ArrayCollection,
+        };
 
         foreach ($userWorks as $work) {
             /** @var Work $work */
@@ -1152,23 +1129,15 @@ class User implements UserInterface
         $status = null
     ): ArrayCollection {
         $collectionWorks = new ArrayCollection;
-        $userWorks = new ArrayCollection;
         $criteria = Criteria::create();
 
-        switch ($userType) {
-            case WorkUserTypeConstant::AUTHOR:
-                $userWorks = $this->getAuthorWorks();
-                break;
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userWorks = $this->getSupervisorWorks();
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $userWorks = $this->getOpponentWorks();
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userWorks = $this->getConsultantWorks();
-                break;
-        }
+        $userWorks = match ($userType) {
+            WorkUserTypeConstant::AUTHOR => $this->getAuthorWorks(),
+            WorkUserTypeConstant::SUPERVISOR => $this->getSupervisorWorks(),
+            WorkUserTypeConstant::OPPONENT => $this->getOpponentWorks(),
+            WorkUserTypeConstant::CONSULTANT => $this->getConsultantWorks(),
+            default => throw new RuntimeException("UserType '{$userType}' not found")
+        };
 
         if ($type !== null) {
             $criteria->where(Criteria::expr()->eq('type', $type));

@@ -85,7 +85,7 @@ class DocumentController extends MediaBaseController
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
         $media->changeActive();
-        $this->flushEntity();
+        $this->flushEntity($media);
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }

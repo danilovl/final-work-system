@@ -109,10 +109,10 @@ class ProfileController extends BaseController
                 $media->setUploadMedia($uploadMedia);
                 $media->setOwner($user);
 
-                $this->flushEntity();
+                $this->flushEntity($media);
 
                 $user->setProfileImage($media);
-                $this->flushEntity();
+                $this->flushEntity($user);
 
                 $this->addFlash('success', $this->get('translator')->trans('app.flash.form.create.success', [], 'flashes'));
             } else {
@@ -131,7 +131,7 @@ class ProfileController extends BaseController
         try {
             $this->removeEntity($this->getUser()->getProfileImage());
             $this->addFlash('success', $this->get('translator')->trans('app.flash.form.delete.success', [], 'flashes'));
-        } catch (Exception $e) {
+        } catch (Exception) {
             $this->addFlash('error', $this->get('translator')->trans('app.flash.form.delete.error', [], 'flashes'));
             $this->addFlash('warning', $this->get('translator')->trans('app.flash.form.delete.warning', [], 'flashes'));
         }

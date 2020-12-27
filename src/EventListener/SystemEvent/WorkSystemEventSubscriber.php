@@ -49,11 +49,13 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
 
         /** @var User $user */
         foreach ($workUsers as $user) {
-            if ($user->getId() !== $work->getSupervisor()->getId()) {
-                $recipient = new SystemEventRecipient;
-                $recipient->setRecipient($user);
-                $systemEvent->addRecipient($recipient);
+            if ($user->getId() === $work->getSupervisor()->getId()) {
+                continue;
             }
+
+            $recipient = new SystemEventRecipient;
+            $recipient->setRecipient($user);
+            $systemEvent->addRecipient($recipient);
         }
 
         $this->em->persistAndFlush($systemEvent);

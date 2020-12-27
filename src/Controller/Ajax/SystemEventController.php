@@ -27,7 +27,7 @@ class SystemEventController extends BaseController
         $this->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED, $systemEventRecipient);
 
         $systemEventRecipient->changeViewed();
-        $this->flushEntity();
+        $this->flushEntity($systemEventRecipient);
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }

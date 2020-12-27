@@ -97,7 +97,7 @@ class EventCalendarFacade
                 $userWorks = $user->getWorkBy(
                     WorkUserTypeConstant::AUTHOR,
                     null,
-                    $this->em->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+                    $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
                 );
 
                 $supervisors = [];
@@ -118,7 +118,7 @@ class EventCalendarFacade
                             $supervisor,
                             $startDate,
                             $endDate,
-                            $this->em->getReference(EventType::class, EventTypeConstant::CONSULTATION)
+                            $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION)
                         )
                         ->getQuery()
                         ->getResult();

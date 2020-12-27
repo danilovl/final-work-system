@@ -12,6 +12,7 @@
 
 namespace App\Services;
 
+use App\Exception\RuntimeException;
 use ArrayIterator;
 use Collator;
 use Doctrine\Common\Collections\{
@@ -38,102 +39,53 @@ class WorkListService
 
     public function getWorkList(User $user, string $type): Collection
     {
-        $works = new ArrayCollection;
-
-        switch ($type) {
-            case WorkUserTypeConstant::SUPERVISOR:
-                $works = $user->getSupervisorWorks();
-                break;
-            case WorkUserTypeConstant::AUTHOR:
-                $works = $user->getAuthorWorks();
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $works = $user->getOpponentWorks();
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $works = $user->getConsultantWorks();
-                break;
-        }
-
-        return $works;
+        return match ($type) {
+            WorkUserTypeConstant::SUPERVISOR => $user->getSupervisorWorks(),
+            WorkUserTypeConstant::AUTHOR => $user->getAuthorWorks(),
+            WorkUserTypeConstant::OPPONENT => $user->getOpponentWorks(),
+            WorkUserTypeConstant::CONSULTANT => $user->getConsultantWorks(),
+            default => throw new RuntimeException("Type '{$type}' not found")
+        };
     }
 
     public function getUserAuthors(User $user, string $type): Collection
     {
-        $userAuthorArray = new ArrayCollection;
-
-        switch ($type) {
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userAuthorArray = $user->getActiveAuthor(WorkUserTypeConstant::SUPERVISOR);
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $userAuthorArray = $user->getActiveAuthor(WorkUserTypeConstant::OPPONENT);
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userAuthorArray = $user->getActiveAuthor(WorkUserTypeConstant::CONSULTANT);
-                break;
-        }
-
-        return $userAuthorArray;
+        return match ($type) {
+            WorkUserTypeConstant::SUPERVISOR => $user->getActiveAuthor(WorkUserTypeConstant::SUPERVISOR),
+            WorkUserTypeConstant::OPPONENT => $user->getActiveAuthor(WorkUserTypeConstant::OPPONENT),
+            WorkUserTypeConstant::CONSULTANT => $user->getActiveAuthor(WorkUserTypeConstant::CONSULTANT),
+            default => new ArrayCollection,
+        };
     }
 
     public function getUserOpponents(User $user, string $type): Collection
     {
-        $userOpponentArray = new ArrayCollection;
-
-        switch ($type) {
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userOpponentArray = $user->getActiveOpponent(WorkUserTypeConstant::SUPERVISOR);
-                break;
-            case WorkUserTypeConstant::AUTHOR:
-                $userOpponentArray = $user->getActiveOpponent(WorkUserTypeConstant::AUTHOR);
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                break;
-        }
-
-        return $userOpponentArray;
+        return match ($type) {
+            WorkUserTypeConstant::SUPERVISOR => $user->getActiveOpponent(WorkUserTypeConstant::SUPERVISOR),
+            WorkUserTypeConstant::AUTHOR => $user->getActiveOpponent(WorkUserTypeConstant::AUTHOR),
+            default => new ArrayCollection,
+        };
     }
 
     public function getUserConsultants(User $user, string $type): Collection
     {
-        $userConsultantArray = new ArrayCollection;
-
-        switch ($type) {
-            case WorkUserTypeConstant::SUPERVISOR:
-                $userConsultantArray = $user->getActiveConsultant(WorkUserTypeConstant::SUPERVISOR);
-                break;
-            case WorkUserTypeConstant::AUTHOR:
-                $userConsultantArray = $user->getActiveConsultant(WorkUserTypeConstant::AUTHOR);
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $userConsultantArray = $user->getActiveConsultant(WorkUserTypeConstant::OPPONENT);
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userConsultantArray = $user->getActiveOpponent(WorkUserTypeConstant::CONSULTANT);
-                break;
-        }
-
-        return $userConsultantArray;
+        return match ($type) {
+            WorkUserTypeConstant::SUPERVISOR => $user->getActiveConsultant(WorkUserTypeConstant::SUPERVISOR),
+            WorkUserTypeConstant::AUTHOR => $user->getActiveConsultant(WorkUserTypeConstant::AUTHOR),
+            WorkUserTypeConstant::OPPONENT => $user->getActiveConsultant(WorkUserTypeConstant::OPPONENT),
+            WorkUserTypeConstant::CONSULTANT => $user->getActiveOpponent(WorkUserTypeConstant::CONSULTANT),
+            default => throw new RuntimeException("Type '{$type}' not found")
+        };
     }
 
     public function getUserSupervisors(User $user, string $type): Collection
     {
-        $userSupervisorArray = new ArrayCollection;
-
-        switch ($type) {
-            case WorkUserTypeConstant::AUTHOR:
-                $userSupervisorArray = $user->getActiveSupervisor(WorkUserTypeConstant::AUTHOR);
-                break;
-            case WorkUserTypeConstant::OPPONENT:
-                $userSupervisorArray = $user->getActiveSupervisor(WorkUserTypeConstant::OPPONENT);
-                break;
-            case WorkUserTypeConstant::CONSULTANT:
-                $userSupervisorArray = $user->getActiveSupervisor(WorkUserTypeConstant::CONSULTANT);
-                break;
-        }
-
-        return $userSupervisorArray;
+        return match ($type) {
+            WorkUserTypeConstant::AUTHOR => $user->getActiveSupervisor(WorkUserTypeConstant::AUTHOR),
+            WorkUserTypeConstant::OPPONENT => $user->getActiveSupervisor(WorkUserTypeConstant::OPPONENT),
+            WorkUserTypeConstant::CONSULTANT => $user->getActiveSupervisor(WorkUserTypeConstant::CONSULTANT),
+            default => new ArrayCollection,
+        };
     }
 
     public function filter(FormInterface $form, Collection $works): ArrayIterator

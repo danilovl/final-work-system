@@ -29,8 +29,10 @@ class DoctrineExtensionListener
     {
         /** @var User $user */
         $user = $this->security->getUser();
-        if ($user !== null) {
-            $this->loggableListener->setUsername($user->getUsername());
+        if ($user === null) {
+            return;
         }
+
+        $this->loggableListener->setUsername($user->getUsername());
     }
 }

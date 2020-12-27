@@ -30,10 +30,12 @@ class TaskEventDispatcherService
         $genericEvent = new TaskGenericEvent;
         $genericEvent->task = $task;
 
-        if ($task->isActive()) {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
+        if (!$task->isActive()) {
+            return;
         }
+
+        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
+        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
     }
 
     public function onTaskEdit(Task $task): void
@@ -41,16 +43,19 @@ class TaskEventDispatcherService
         $genericEvent = new TaskGenericEvent;
         $genericEvent->task = $task;
 
-        if ($task->isActive()) {
-            $this->eventDispatcher->dispatch(
-                $genericEvent,
-                !$task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_EDIT : Events::NOTIFICATION_TASK_CREATE
-            );
-            $this->eventDispatcher->dispatch(
-                $genericEvent,
-                !$task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_EDIT : Events::SYSTEM_TASK_CREATE
-            );
+        if (!$task->isActive()) {
+            return;
         }
+
+        $this->eventDispatcher->dispatch(
+            $genericEvent,
+            !$task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_EDIT : Events::NOTIFICATION_TASK_CREATE
+        );
+
+        $this->eventDispatcher->dispatch(
+            $genericEvent,
+            !$task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_EDIT : Events::SYSTEM_TASK_CREATE
+        );
     }
 
     public function onTaskNotifyComplete(Task $task): void
@@ -74,12 +79,12 @@ class TaskEventDispatcherService
                 $systemEvent = Events::SYSTEM_TASK_CREATE;
                 break;
             case TaskStatusConstant::COMPLETE:
+                $notificationEvent = Events::NOTIFICATION_TASK_INCOMPLETE;
+                $systemEvent = Events::SYSTEM_TASK_INCOMPLETE;
+
                 if ($task->isComplete()) {
                     $notificationEvent = Events::NOTIFICATION_TASK_COMPLETE;
                     $systemEvent = Events::SYSTEM_TASK_COMPLETE;
-                } else {
-                    $notificationEvent = Events::NOTIFICATION_TASK_INCOMPLETE;
-                    $systemEvent = Events::SYSTEM_TASK_INCOMPLETE;
                 }
                 break;
             case TaskStatusConstant::NOTIFY:

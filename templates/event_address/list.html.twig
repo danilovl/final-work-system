@@ -61,7 +61,7 @@
                                     </thead>
                                     <tbody>
 
-                                    {% for  eventAddress in eventAddresses %}
+                                    {% for eventAddress in eventAddresses %}
                                         <tr id="appointment-address-{{ eventAddress.id | hashids_encode }}"
                                             data-delete-row="appointment-address-{{ eventAddress.id | hashids_encode }}">
                                             <td>
@@ -75,10 +75,9 @@
                                             </td>
                                             <td>
                                                 {% include 'common_part/button/js-switch.html.twig' with {
-                                                    'checked': eventAddress.skype is not null,
-                                                    'disabled': true,
+                                                    'checked': eventAddress.skype == true,
                                                     'dataSwitchery': 'false',
-                                                    'dataTargetUrl': path('system_event_change_viewed_ajax',{'id': systemEventRecipient.id | hashids_encode })
+                                                    'dataTargetUrl': path('event_switch_to_skype', { 'id': eventAddress.id | hashids_encode })
                                                 } %}
                                             </td>
                                             <td>

@@ -45,8 +45,7 @@ class EmailNotificationQueueCrudController extends AbstractCrudController
         yield TextField::new('subject');
         yield TextField::new('to');
         yield TextField::new('from');
-        yield TextEditorField::new('body')
-            ->hideOnIndex();
+        yield TextEditorField::new('body')->hideOnIndex();
         yield DateTimeField::new('sendedAt');
         yield BooleanField::new('success');
     }

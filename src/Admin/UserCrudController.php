@@ -52,16 +52,13 @@ class UserCrudController extends AbstractCrudController
         yield IntegerField::new('id', 'ID')->onlyOnIndex();
         yield TextField::new('firstname');
         yield TextField::new('lastname');
-        yield TextField::new('phone')
-            ->setRequired(false);
+        yield TextField::new('phone')->setRequired(false);
         yield TextField::new('username');
         yield TextField::new('email');
         yield DateTimeField::new('lastLogin');
         yield BooleanField::new('enabled');
-        yield DateTimeField::new('createdAt')
-            ->hideOnIndex();
-        yield DateTimeField::new('updatedAt')
-            ->hideOnIndex();;
+        yield DateTimeField::new('createdAt')->hideOnIndex();
+        yield DateTimeField::new('updatedAt')->hideOnIndex();;
 
         yield FormField::addPanel('Security');
         yield ArrayField::new('roles');

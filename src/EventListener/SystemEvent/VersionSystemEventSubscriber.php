@@ -52,11 +52,13 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $workUsers = $work->getUsers(...$users);
         /** @var User $user */
         foreach ($workUsers as $user) {
-            if ($user->getId() !== $media->getOwner()->getId()) {
-                $recipient = new SystemEventRecipient;
-                $recipient->setRecipient($user);
-                $systemEvent->addRecipient($recipient);
+            if ($user->getId() === $media->getOwner()->getId()) {
+                continue;
             }
+
+            $recipient = new SystemEventRecipient;
+            $recipient->setRecipient($user);
+            $systemEvent->addRecipient($recipient);
         }
 
         $this->em->persistAndFlush($systemEvent);

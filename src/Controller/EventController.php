@@ -163,7 +163,7 @@ class EventController extends BaseController
         if ($eventAddressSkype !== null) {
             $event->setAddress($eventAddressSkype);
 
-            $this->flushEntity();
+            $this->flushEntity($event);
 
             $this->get('app.event_dispatcher.event')
                 ->onEventSwitchToSkype($event);

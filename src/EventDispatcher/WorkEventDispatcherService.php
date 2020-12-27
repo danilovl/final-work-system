@@ -44,7 +44,7 @@ class WorkEventDispatcherService
 
     public function onWorkEditAuthor(Work $work): void
     {
-        $genericEvent = new UserGenericEvent();
+        $genericEvent = new UserGenericEvent;
         $genericEvent->user = $work->getAuthor();
 
         $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);

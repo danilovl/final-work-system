@@ -37,12 +37,9 @@ class GroupCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addPanel('Information');
-        yield IntegerField::new('id', 'ID')
-            ->onlyOnIndex();
+        yield IntegerField::new('id', 'ID')->onlyOnIndex();
         yield TextField::new('name');
-        yield DateTimeField::new('createdAt')
-            ->hideOnIndex();
-        yield DateTimeField::new('updatedAt')
-            ->hideOnIndex();;
+        yield DateTimeField::new('createdAt')->hideOnIndex();
+        yield DateTimeField::new('updatedAt')->hideOnIndex();;
     }
 }

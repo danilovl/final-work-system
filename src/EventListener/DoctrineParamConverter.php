@@ -44,7 +44,7 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
         ];
     }
 
-    protected function find($class, Request $request, $options, $name)
+    protected function find(string $class, Request $request, array $options, string $name): mixed
     {
         if ($options['mapping'] || $options['exclude']) {
             return false;
@@ -62,13 +62,14 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
             if (is_int($id)) {
                 return $this->getManager($options['entity_manager'], $class)->getRepository($class)->$method($id);
             }
-            throw new NoResultException();
-        } catch (NoResultException $e) {
+
+            throw new NoResultException;
+        } catch (NoResultException) {
             return false;
         }
     }
 
-    protected function getOptionsReplace(ParamConverter $configuration, $strict = true)
+    protected function getOptionsReplace(ParamConverter $configuration, bool $strict = true): array
     {
         $passedOptions = $configuration->getOptions();
 
@@ -88,7 +89,7 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
         return array_replace($this->defaultOptions, $passedOptions);
     }
 
-    protected function getIdentifierReplace(Request $request, $options, $name)
+    protected function getIdentifierReplace(Request $request, array $options, string $name): mixed
     {
         if (null !== $options['id']) {
             if (!is_array($options['id'])) {
@@ -97,7 +98,6 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
                 $id = [];
                 foreach ($options['id'] as $field) {
                     if (false !== strstr($field, '%s')) {
-                        // Convert "%s_uuid" to "foobar_uuid"
                         $field = sprintf($field, $name);
                     }
                     $id[$field] = $request->attributes->get($field);
@@ -118,7 +118,7 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
         return false;
     }
 
-    private function getManager($name, $class): ObjectManager
+    private function getManager(string $name, string $class): ObjectManager
     {
         if ($name === null) {
             return $this->registry->getManagerForClass($class);
@@ -127,10 +127,8 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
         return $this->registry->getManager($name);
     }
 
-    private function getAnnotationName(ParamConverter $configuration)
+    private function getAnnotationName(ParamConverter $configuration): string
     {
-        $r = new ReflectionClass($configuration);
-
-        return $r->getShortName();
+        return (new ReflectionClass($configuration))->getShortName();
     }
 }

@@ -79,7 +79,7 @@ class AjaxRequestListener
     ): void {
         try {
             call_user_func([$ajaxRequestMiddlewareAttribute->class, 'handle'], $request);
-        } catch (AjaxRuntimeException $exception) {
+        } catch (AjaxRuntimeException) {
             $event->setController(
                 function () {
                     return new JsonResponse([

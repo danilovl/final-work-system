@@ -129,7 +129,7 @@ class TaskController extends BaseController
                     break;
             }
 
-            $this->flushEntity();
+            $this->flushEntity($task);
 
             return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
@@ -149,7 +149,7 @@ class TaskController extends BaseController
 
         if (!$task->isNotifyComplete()) {
             $task->changeNotifyComplete();
-            $this->flushEntity();
+            $this->flushEntity($task);
 
             $this->get('app.event_dispatcher.task')
                 ->onTaskNotifyComplete($task);

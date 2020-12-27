@@ -106,34 +106,25 @@ class WorkDetailTabService
         Work $work,
         ?User $user = null
     ): Query {
-        $queryPagination = null;
-
-        switch ($tab) {
-            case TabTypeConstant::TAB_TASK:
-                $queryPagination = $this->em
-                    ->getRepository(Task::class)
-                    ->allByWork($work, $work->isSupervisor($user) ? false : true)
-                    ->getQuery();
-                break;
-            case TabTypeConstant::TAB_VERSION:
-                $queryPagination = $this->em
-                    ->getRepository(Media::class)
-                    ->allByWork($work)
-                    ->getQuery();
-                break;
-            case TabTypeConstant::TAB_EVENT:
-                $queryPagination = $this->em
-                    ->getRepository(Event::class)
-                    ->allByWork($work)
-                    ->getQuery();
-                break;
-            case TabTypeConstant::TAB_MESSAGE:
-                $queryPagination = $this->em
-                    ->getRepository(ConversationMessage::class)
-                    ->allByWorkUser($work, $user)
-                    ->getQuery();
-                break;
-        }
+        $queryPagination = match ($tab) {
+            TabTypeConstant::TAB_TASK => $this->em
+                ->getRepository(Task::class)
+                ->allByWork($work, $work->isSupervisor($user) ? false : true)
+                ->getQuery(),
+            TabTypeConstant::TAB_VERSION => $this->em
+                ->getRepository(Media::class)
+                ->allByWork($work)
+                ->getQuery(),
+            TabTypeConstant::TAB_EVENT => $this->em
+                ->getRepository(Event::class)
+                ->allByWork($work)
+                ->getQuery(),
+            TabTypeConstant::TAB_MESSAGE => $this->em
+                ->getRepository(ConversationMessage::class)
+                ->allByWorkUser($work, $user)
+                ->getQuery(),
+            default => null
+        };
 
         if ($queryPagination === null) {
             throw new RuntimeException('Query for tab pagination was not created');

@@ -126,27 +126,19 @@ class WorkController extends BaseController
         Request $request,
         string $type
     ): Response {
-        $openSearchTab = false;
-
         $workListService = $this->get('app.work.list');
         $works = $workListService->getWorkList($this->getUser(), $type);
 
         $form = $this->getSearchForm($type, new WorkSearchModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $openSearchTab = true;
-        }
+        $openSearchTab = $form->isSubmitted();
 
         $works = $workListService->filter($form, $works);
-        switch ($type) {
-            case WorkUserTypeConstant::SUPERVISOR:
-                $workGroups = WorkFunctionHelper::groupWorksByCategoryAndSorting($works);
-                break;
-            default:
-                $workGroups = WorkFunctionHelper::groupWorksByDeadline($works);
-                break;
-        }
+        $workGroups = match ($type) {
+            WorkUserTypeConstant::SUPERVISOR => WorkFunctionHelper::groupWorksByCategoryAndSorting($works),
+            default => WorkFunctionHelper::groupWorksByDeadline($works),
+        };
 
         $pagination = $this->createPagination($request, $workGroups);
 
