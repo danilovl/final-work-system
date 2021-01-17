@@ -112,7 +112,7 @@ class EventCalendarController extends BaseController
 
             $this->get('app.event_dispatcher.event')
                 ->onEventCalendarCreate($event, $eventParticipant !== null);
-        } catch (AjaxRuntimeException $exception) {
+        } catch (AjaxRuntimeException) {
             return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
                 'data' => FormValidationMessageHelper::getErrorMessages($form)
             ]);
@@ -166,7 +166,7 @@ class EventCalendarController extends BaseController
 
             $this->get('app.event_dispatcher.event')
                 ->onEventCalendarReservation($event);
-        } catch (AjaxRuntimeException $exception) {
+        } catch (AjaxRuntimeException) {
             return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE);
         }
 
