@@ -23,27 +23,27 @@ doctrine:
             prefix: Gedmo\Loggable\Entity
             dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity/"
             is_bundle: false
-#        result_cache_driver:
-#          type: service
-#          id: doctrine_cache.providers.redis_provider
-#        query_cache_driver:
-#          type: service
-#          id: doctrine_cache.providers.redis_provider
-#        metadata_cache_driver:
-#          type: service
-#          id: doctrine_cache.providers.redis_provider
-#        second_level_cache:
-#          enabled: true
-#          regions:
-#            default:
-#              lock_lifetime: 10
-#              lifetime: 10
-#              cache_driver:
-#                type: service
-#                id: doctrine_cache.providers.redis_provider
-#            cache_long_time:
-#              lock_lifetime: 60
-#              lifetime: 86400  # 1 day
-#              cache_driver:
-#                type: service
-#                id: doctrine_cache.providers.redis_provider
+        result_cache_driver:
+          type: service
+          id: doctrine_cache.providers.redis_provider
+        query_cache_driver:
+          type: service
+          id: doctrine_cache.providers.redis_provider
+        metadata_cache_driver:
+          type: service
+          id: doctrine_cache.providers.redis_provider
+        second_level_cache:
+          enabled: true
+          regions:
+            default:
+              lock_lifetime: 10
+              lifetime: 10
+              cache_driver:
+                type: service
+                id: doctrine_cache.providers.redis_provider
+            cache_long_time:
+              lock_lifetime: 60
+              lifetime: 86400  # 1 day
+              cache_driver:
+                type: service
+                id: doctrine_cache.providers.redis_provider

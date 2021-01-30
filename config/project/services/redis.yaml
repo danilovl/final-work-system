@@ -1,19 +1,19 @@
 services:
-#  doctrine_cache.providers.redis_provider:
-#    class: Doctrine\Common\Cache\RedisCache
-#    calls:
-#      - ["setRedis", ["@redis"]]
-#      - ["setNamespace", ["DoctrineSecondLevelCache"]]
-#    tags:
-#      - { name: snc_redis.client }
-#
-#  redis:
-#    class: Redis
-#    public: false
-#    calls:
-#      - method: connect
-#        arguments:
-#          - '127.0.0.1'
-#      - method: select
-#        arguments:
-#          - 13 # change database by index
+  doctrine_cache.providers.redis_provider:
+    class: Doctrine\Common\Cache\RedisCache
+    calls:
+      - ["setRedis", ["@redis"]]
+      - ["setNamespace", ["DoctrineSecondLevelCache"]]
+    tags:
+      - { name: snc_redis.client }
+
+  redis:
+    class: Redis
+    public: false
+    calls:
+      - method: connect
+        arguments:
+          - '127.0.0.1'
+      - method: select
+        arguments:
+          - 13 # change database by index
