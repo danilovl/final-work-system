@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class WorkCategoryFacade
 {
-    private WorkCategoryRepository $workCategoryRepository;
-
-    public function __construct(WorkCategoryRepository $workCategoryRepository)
+    public function __construct(private WorkCategoryRepository $workCategoryRepository)
     {
-        $this->workCategoryRepository = $workCategoryRepository;
     }
 
     public function queryWorkCategoriesByOwner(User $user): Query

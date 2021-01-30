@@ -22,11 +22,8 @@ use App\Entity\User;
 
 class MediaFacade
 {
-    private MediaRepository $mediaRepository;
-
-    public function __construct(MediaRepository $mediaRepository)
+    public function __construct(private MediaRepository $mediaRepository)
     {
-        $this->mediaRepository = $mediaRepository;
     }
 
     public function find(int $id): ?Media

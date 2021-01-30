@@ -12,6 +12,8 @@
 
 namespace App\Model\User;
 
+use App\Helper\UserRoleHelper;
+use App\Service\UserWorkService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use App\Constant\WorkUserTypeConstant;
@@ -20,11 +22,10 @@ use App\Repository\UserRepository;
 
 class UserFacade
 {
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
+    public function __construct(
+        private UserRepository $userRepository,
+        private UserWorkService $userWorkService
+    ) {
     }
 
     public function find(int $id): ?User
@@ -43,8 +44,8 @@ class UserFacade
     {
         $userActiveSupervisors = new ArrayCollection;
 
-        if ($user->isAuthor()) {
-            $authorSupervisors = $user->getActiveSupervisor(WorkUserTypeConstant::AUTHOR);
+        if (UserRoleHelper::isAuthor($user)) {
+            $authorSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::AUTHOR);
 
             foreach ($authorSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {
@@ -53,8 +54,8 @@ class UserFacade
             }
         }
 
-        if ($user->isOpponent()) {
-            $opponentSupervisors = $user->getActiveSupervisor(WorkUserTypeConstant::OPPONENT);
+        if (UserRoleHelper::isOpponent($user)) {
+            $opponentSupervisors =$this->userWorkService->getActiveSupervisor($user,WorkUserTypeConstant::OPPONENT);
 
             foreach ($opponentSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {
@@ -63,8 +64,8 @@ class UserFacade
             }
         }
 
-        if ($user->isConsultant()) {
-            $consultantSupervisors = $user->getActiveSupervisor(WorkUserTypeConstant::CONSULTANT);
+        if (UserRoleHelper::isConsultant($user)) {
+            $consultantSupervisors = $this->userWorkService->getActiveSupervisor($user,WorkUserTypeConstant::CONSULTANT);
 
             foreach ($consultantSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {
@@ -99,7 +100,6 @@ class UserFacade
     ): ?User {
         return $this->userRepository
             ->byUsername($username, $enable)
-            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -110,7 +110,6 @@ class UserFacade
     ): ?User {
         return $this->userRepository
             ->byEmail($email, $enable)
-            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }

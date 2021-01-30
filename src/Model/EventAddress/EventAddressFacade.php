@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class EventAddressFacade
 {
-    private EventAddressRepository $eventAddressRepository;
-
-    public function __construct(EventAddressRepository $eventAddressRepository)
+    public function __construct(private EventAddressRepository $eventAddressRepository)
     {
-        $this->eventAddressRepository = $eventAddressRepository;
     }
 
     public function getSkypeByOwner(User $user): ?EventAddress

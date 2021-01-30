@@ -17,11 +17,8 @@ use App\Repository\ArticleCategoryRepository;
 
 class ArticleCategoryFacade
 {
-    private ArticleCategoryRepository $articleCategoryRepository;
-
-    public function __construct(ArticleCategoryRepository $articleCategoryRepository)
+    public function __construct(private ArticleCategoryRepository $articleCategoryRepository)
     {
-        $this->articleCategoryRepository = $articleCategoryRepository;
     }
 
     public function queryCategoriesByRoles(iterable $roles): Query

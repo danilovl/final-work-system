@@ -137,8 +137,11 @@ class EventScheduleController extends BaseController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->get('app.factory.event_schedule')
-                    ->cloneEventSchedule($this->getUser(), $eventSchedule, $eventScheduleCloneModel->start);
+                $this->get('app.factory.event_schedule')->cloneEventSchedule(
+                    $this->getUser(),
+                    $eventSchedule,
+                    $eventScheduleCloneModel->start
+                );
 
                 $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
 

@@ -90,3 +90,5 @@ services:
     class: App\Model\EmailNotificationQueue\EmailNotificationQueueFactory
     autowire: true
     public: true
+
+  App\Model\EmailNotificationQueue\EmailNotificationQueueFactory: '@app.factory.email_notification_queue'

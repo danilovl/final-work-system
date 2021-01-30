@@ -21,11 +21,8 @@ use App\Entity\User;
 
 class CommentFacade
 {
-    private CommentRepository $commentRepository;
-
-    public function __construct(CommentRepository $commentRepository)
+    public function __construct(private CommentRepository $commentRepository)
     {
-        $this->commentRepository = $commentRepository;
     }
 
     public function getCommentByOwnerEvent(

@@ -13,6 +13,7 @@
 namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
+use App\Helper\WorkRoleHelper;
 use App\Entity\{
     User,
     Task
@@ -65,7 +66,7 @@ class TaskVoter extends Voter
     {
         $work = $task->getWork();
 
-        return $work->isSupervisor($user) && $task->getOwner() === $user;
+        return WorkRoleHelper::isSupervisor($work, $user) && $task->getOwner() === $user;
     }
 
     private function canDelete(Task $task, User $user): bool

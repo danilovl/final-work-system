@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class ConversationMessageStatusFacade
 {
-    private ConversationMessageStatusRepository $conversationMessageStatusRepository;
-
-    public function __construct(ConversationMessageStatusRepository $conversationMessageStatusRepository)
+    public function __construct(private ConversationMessageStatusRepository $conversationMessageStatusRepository)
     {
-        $this->conversationMessageStatusRepository = $conversationMessageStatusRepository;
     }
 
     public function updateAllToStatus(

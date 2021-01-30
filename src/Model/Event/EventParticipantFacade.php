@@ -12,7 +12,10 @@
 
 namespace App\Model\Event;
 
-use App\Services\EntityManagerService;
+use App\Service\{
+    UserWorkService,
+    EntityManagerService
+};
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant
@@ -27,18 +30,18 @@ use App\Entity\User;
 
 class EventParticipantFacade
 {
-    private EntityManagerService $em;
-
-    public function __construct(EntityManagerService $entityManager)
-    {
-        $this->em = $entityManager;
+    public function __construct(
+        private EntityManagerService $em,
+        private UserWorkService $userWorkService
+    ) {
     }
 
     public function getEventParticipantsByUserEvent(
         User $user,
         Event $event
     ): array {
-        $userWorks = $user->getWorkBy(
+        $userWorks = $this->userWorkService->getWorkBy(
+            $user,
             WorkUserTypeConstant::SUPERVISOR,
             null,
             $this->em->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)

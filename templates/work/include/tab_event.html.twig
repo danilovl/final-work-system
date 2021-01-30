@@ -1,4 +1,4 @@
-{% if work.authorSupervisor(app_user()) %}
+{% if is_work_role(work, app_user(), 'isAuthorSupervisor') %}
     <div role="tabpanel"
             {% if activeTab == 'event' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
          id="tab-event"
@@ -51,7 +51,7 @@
                                 <i class="fa fa-desktop"></i>
                                 {{ 'app.form.action.show_detail' | trans() }}
                             </a>
-                            {% if work.isSupervisor(app_user()) and event.isOwner(app_user()) %}
+                            {% if is_work_role(work, app_user(), 'isSupervisor') and event.isOwner(app_user()) %}
                                 {% include 'common_part/ajax_delete.html.twig' with {
                                     'modalDataTarget': 'event',
                                     'modalDataTargetDeleteText': 'app.form.action.delete' | trans,

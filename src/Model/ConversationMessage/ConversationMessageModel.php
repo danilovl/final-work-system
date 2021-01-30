@@ -35,7 +35,7 @@ class ConversationMessageModel
 
     public function __construct()
     {
-        $this->status = new ArrayCollection();
+        $this->status = new ArrayCollection;
     }
 
     public static function fromConversationMessage(ConversationMessage $conversationMessage): self

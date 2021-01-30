@@ -1,7 +1,7 @@
 services:
   #  Validator
   app.validator.user:
-    class: App\Utils\Validator\UserValidator
+    class: App\Util\Validator\UserValidator
     autowire: true
 
-  App\Utils\Validator\UserValidator: '@app.validator.user'
+  App\Util\Validator\UserValidator: '@app.validator.user'

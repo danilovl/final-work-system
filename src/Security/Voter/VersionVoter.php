@@ -13,6 +13,7 @@
 namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
+use App\Helper\WorkRoleHelper;
 use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\User;
 use LogicException;
@@ -69,7 +70,7 @@ class VersionVoter extends Voter
     {
         $work = $versionVoterSubject->getWork();
 
-        return $work->isAuthorSupervisor($user);
+        return WorkRoleHelper::isAuthorSupervisor($work, $user);
     }
 
     private function canEdit(VersionVoterSubject $versionVoterSubject, User $user): bool
@@ -77,7 +78,7 @@ class VersionVoter extends Voter
         $work = $versionVoterSubject->getWork();
         $media = $versionVoterSubject->getMedia();
 
-        return $work->isAuthorSupervisor($user) && $media->getWork()->getId() === $work->getId();
+        return WorkRoleHelper::isAuthorSupervisor($work, $user) && $media->getWork()->getId() === $work->getId();
     }
 
     private function canView(VersionVoterSubject $versionVoterSubject): bool
@@ -92,7 +93,7 @@ class VersionVoter extends Voter
         $work = $versionVoterSubject->getWork();
         $media = $versionVoterSubject->getMedia();
 
-        return $work->isAuthorSupervisorOpponent($user) && $work->getMedias()->contains($media);
+        return WorkRoleHelper::isAuthorSupervisorOpponent($work, $user) && $work->getMedias()->contains($media);
     }
 
     private function canDelete(VersionVoterSubject $versionVoterSubject, User $user): bool

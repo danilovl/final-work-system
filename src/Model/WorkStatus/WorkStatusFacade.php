@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class WorkStatusFacade
 {
-    private WorkStatusRepository $workStatusRepository;
-
-    public function __construct(WorkStatusRepository $workStatusRepository)
+    public function __construct(private WorkStatusRepository $workStatusRepository)
     {
-        $this->workStatusRepository = $workStatusRepository;
     }
 
     public function find(int $id): ?WorkStatus

@@ -68,7 +68,8 @@ class EventCalendarController extends BaseController
     public function create(Request $request): JsonResponse
     {
         $user = $this->getUser();
-        $userWorks = $user->getWorkBy(
+        $userWorks = $this->get('app.user_work')->getWorkBy(
+            $user,
             WorkUserTypeConstant::SUPERVISOR,
             null,
             $this->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
@@ -130,7 +131,8 @@ class EventCalendarController extends BaseController
         $this->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION, $event);
 
         $user = $this->getUser();
-        $userWorks = $user->getWorkBy(
+        $userWorks = $this->get('app.user_work')->getWorkBy(
+            $user,
             WorkUserTypeConstant::AUTHOR,
             null,
             $this->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
@@ -190,8 +192,7 @@ class EventCalendarController extends BaseController
 
         $this->flushEntity();
 
-        $this->get('app.event_dispatcher.event')
-            ->onEventCalendarEdit($event);
+        $this->get('app.event_dispatcher.event')->onEventCalendarEdit($event);
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS, [
             'event_id' => $this->hashIdEncode($event->getId())

@@ -14,16 +14,19 @@ namespace App\Helper;
 
 use Collator;
 use App\Entity\EventParticipant;
+use Symfony\Component\Yaml\Yaml;
 
 class SortFunctionHelper
 {
+    private const PATH_CZECH_CHARS = __DIR__ . '/../../config/project/sorter_chars.yaml';
+
     public static function usortCzechArray(array &$array): void
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
         usort($array, static function ($first, $second) use ($collator) {
-            $f = (string)$first;
-            $s = (string)$second;
+            $f = (string) $first;
+            $s = (string) $second;
 
             return $collator->compare($f, $s);
         });
@@ -33,24 +36,7 @@ class SortFunctionHelper
     {
         $a = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $a);
         $b = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $b);
-        static $czechChars = [
-            'A' => 'A', 'Á' => 'AZ', 'B' => 'B', 'C' => 'C', 'Č' => 'CZ',
-            'D' => 'D', 'Ď' => 'DZ', 'E' => 'E', 'É' => 'EZ', 'Ě' => 'EZZ',
-            'F' => 'F', 'G' => 'G', 'H' => 'H', 'I' => 'I', 'Í' => 'IZ', 'J' => 'J',
-            'K' => 'K', 'L' => 'L', 'M' => 'M', 'N' => 'N', 'Ň' => 'NZ',
-            'O' => 'O', 'Ó' => 'OZ', 'P' => 'P', 'Q' => 'Q', 'R' => 'R',
-            'Ř' => 'RZ', 'S' => 'S', 'Š' => 'SZ', 'T' => 'T', 'Ť' => 'TZ',
-            'U' => 'U', 'Ú' => 'UZ', 'Ů' => 'UZZ', 'V' => 'V', 'W' => 'W',
-            'X' => 'X', 'Y' => 'Y', 'Ý' => 'YZ', 'Z' => 'Z', 'Ž' => 'ZZ',
-            'a' => 'a', 'á' => 'az', 'b' => 'b', 'c' => 'c', 'č' => 'cz',
-            'd' => 'd', 'ď' => 'dz', 'e' => 'e', 'é' => 'ez', 'ě' => 'ezz',
-            'f' => 'f', 'g' => 'g', 'h' => 'h', 'i' => 'i', 'í' => 'iz', 'j' => 'j',
-            'k' => 'k', 'l' => 'l', 'm' => 'm', 'n' => 'n', 'ň' => 'nz', 'o' => 'o',
-            'ó' => 'oz', 'p' => 'p', 'q' => 'q', 'r' => 'r', 'ř' => 'rz', 's' => 's',
-            'š' => 'sz', 't' => 't', 'ť' => 'tz', 'u' => 'u', 'ú' => 'uz', 'ů' => 'uzz',
-            'v' => 'v', 'w' => 'w', 'x' => 'x', 'y' => 'y', 'ý' => 'yz', 'z' => 'z',
-            'ž' => 'zz'
-        ];
+        $czechChars = Yaml::parse(file_get_contents(self::PATH_CZECH_CHARS))['czech'] ?? [];
 
         $A = strtr($a, $czechChars);
         $B = strtr($b, $czechChars);
@@ -63,8 +49,8 @@ class SortFunctionHelper
         usort($eventParticipantArray, function ($first, $second) {
             /** @var EventParticipant $a */
             /** @var EventParticipant $b */
-            $f = iconv('UTF-8', 'ASCII//TRANSLIT', (string)$first->getUser());
-            $s = iconv('UTF-8', 'ASCII//TRANSLIT', (string)$second->getUser());
+            $f = iconv('UTF-8', 'ASCII//TRANSLIT', (string) $first->getUser());
+            $s = iconv('UTF-8', 'ASCII//TRANSLIT', (string) $second->getUser());
 
             return self::sortCzechChars($f, $s);
         });

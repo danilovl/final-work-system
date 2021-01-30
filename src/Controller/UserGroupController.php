@@ -38,8 +38,8 @@ class UserGroupController extends BaseController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
-                $this->get('app.factory.user_group')->flushFromModel($userGroupModel);
+                $this->get('app.factory.user_group')
+                    ->flushFromModel($userGroupModel);
 
                 $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
 

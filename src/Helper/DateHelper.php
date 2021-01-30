@@ -137,4 +137,3 @@ class DateHelper
         return date(DateFormatConstant::DATABASE, strtotime($date . ' - ' . $quantity . ' days'));
     }
 }
- 

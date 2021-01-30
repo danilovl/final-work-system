@@ -13,6 +13,7 @@
 namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
+use App\Service\ConversationService;
 use App\Entity\{
     User,
     Conversation
@@ -27,6 +28,10 @@ class ConversationVoter extends Voter
         VoterSupportConstant::VIEW,
         VoterSupportConstant::DELETE
     ];
+
+    public function __construct(private ConversationService $conversationService)
+    {
+    }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -60,7 +65,7 @@ class ConversationVoter extends Voter
 
     private function canView(Conversation $conversation, User $user): bool
     {
-        return $conversation->isParticipant($user);
+        return $this->conversationService->isParticipant($conversation, $user);
     }
 
     private function canDelete(Conversation $conversation, User $user): bool

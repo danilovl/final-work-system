@@ -13,21 +13,21 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
   app.mailer:
-    class: App\Services\MailerService
+    class: App\Service\MailerService
     autowire: true
     public: true
 
-  App\Services\MailerService: '@app.mailer'
+  App\Service\MailerService: '@app.mailer'
 
   app.translator:
-    class: App\Services\TranslatorService
+    class: App\Service\TranslatorService
     arguments:
       - '@translator'
       - '@request_stack'
     autowire: true
     public: true
 
-  'App\Services\TranslatorService': '@app.translator'
+  'App\Service\TranslatorService': '@app.translator'
 
   app.user_password_encoder:
     class: Symfony\Component\Security\Core\Encoder\UserPasswordEncoder
@@ -35,7 +35,7 @@ services:
     public: true
 
   app.reset_password:
-    class: App\Services\ResetPasswordService
+    class: App\Service\ResetPasswordService
     arguments:
       - '@app.factory.reset_password'
       - '@app.facade.reset_password'
@@ -45,40 +45,63 @@ services:
     public: true
 
   app.user:
-    class: App\Services\UserService
+    class: App\Service\UserService
     public: true
     arguments:
       - '@security.token_storage'
 
-  App\Services\UserService: '@app.user'
+  App\Service\UserService: '@app.user'
+
+  app.user_work:
+    class: App\Service\UserWorkService
+    public: true
+
+  App\Service\UserWorkService: '@app.user_work'
+
+  app.work:
+    class: App\Service\WorkService
+    public: true
+
+  App\Service\WorkService: '@app.work'
+
+  app.task:
+    class: App\Service\TaskService
+    public: true
+
+  App\Service\TaskService: '@app.task'
 
   app.widget:
-    class: App\Services\WidgetManagerService
+    class: App\Service\WidgetManagerService
     autowire: true
     public: true
 
-  App\Services\WidgetManagerService: '@app.widget'
+  App\Service\WidgetManagerService: '@app.widget'
+
+  app.conversation:
+    class: App\Service\ConversationService
+    autowire: true
+
+  App\Service\ConversationService: '@app.conversation'
 
   app.conversation_variation:
-    class: App\Services\ConversationVariationService
-    arguments:
-      - '@danilovl.parameter'
+    class: App\Service\ConversationVariationService
+    autowire: true
 
-  App\Services\ConversationVariationService: '@app.conversation_variation'
+  App\Service\ConversationVariationService: '@app.conversation_variation'
 
   app.conversation_status:
-    class: App\Services\ConversationStatusService
+    class: App\Service\ConversationStatusService
     arguments:
       - '@app.entity_manager'
 
-  App\Services\ConversationStatusService: '@app.conversation_status'
+  App\Service\ConversationStatusService: '@app.conversation_status'
 
   app.conversation_stream:
-    class: App\Services\ConversationStreamService
+    class: App\Service\ConversationStreamService
     autowire: true
 
   app.system_event_link_generator:
-    class: App\Services\SystemEventLinkGeneratorService
+    class: App\Service\SystemEventLinkGeneratorService
     arguments:
       - '@twig'
       - '@router'
@@ -86,7 +109,7 @@ services:
       - { name: twig.runtime }
 
   app.paginator:
-    class: App\Services\PaginatorService
+    class: App\Service\PaginatorService
     public: true
     shared: false
     arguments:
@@ -94,32 +117,31 @@ services:
       - '@danilovl.parameter'
 
   app.work.detail_tab:
-    class: App\Services\WorkDetailTabService
+    class: App\Service\WorkDetailTabService
     arguments:
       - '@app.entity_manager'
       - '@app.paginator'
       - '@danilovl.parameter'
 
   app.work.list:
-    class: App\Services\WorkListService
-    arguments:
-      - '@app.entity_manager'
+    class: App\Service\WorkListService
+    autowire: true
 
   app.seo_page:
-    class: App\Services\SeoPageService
+    class: App\Service\SeoPageService
     public: true
     arguments:
       - '@app.translator'
 
-  App\Services\SeoPageService: '@app.seo_page'
+  App\Service\SeoPageService: '@app.seo_page'
 
   app.date:
-    class: App\Services\DateService
+    class: App\Service\DateService
     arguments:
       - '@app.translator'
 
   app.document_form:
-    class: App\Services\DocumentFormService
+    class: App\Service\DocumentFormService
     arguments:
       - '@form.factory'
       - '@router'
@@ -129,11 +151,11 @@ services:
       - '@app.facade.media_category'
 
   app.entity_manager:
-    class: App\Services\EntityManagerService
+    class: App\Service\EntityManagerService
     arguments:
       - '@doctrine.orm.entity_manager'
 
-  App\Services\EntityManagerService: '@app.entity_manager'
+  App\Service\EntityManagerService: '@app.entity_manager'
 
   #   ParamConverter
   hashids.converter:
@@ -151,6 +173,6 @@ services:
       - '@danilovl.parameter'
 
   app.password_updater:
-    class: App\Services\PasswordUpdater
+    class: App\Service\PasswordUpdater
     arguments:
       - '@security.encoder_factory'

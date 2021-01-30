@@ -12,7 +12,7 @@
 
 namespace App\Twig;
 
-use App\Services\WidgetManagerService;
+use App\Service\WidgetManagerService;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 

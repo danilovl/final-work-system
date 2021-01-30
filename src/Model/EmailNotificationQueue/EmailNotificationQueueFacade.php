@@ -17,12 +17,8 @@ use App\Repository\EmailNotificationQueueRepository;
 
 class EmailNotificationQueueFacade
 {
-    private EmailNotificationQueueRepository $emailNotificationQueueRepository;
-
-    public function __construct(
-        EmailNotificationQueueRepository $emailNotificationQueueRepository
-    ) {
-        $this->emailNotificationQueueRepository = $emailNotificationQueueRepository;
+    public function __construct(private EmailNotificationQueueRepository $emailNotificationQueueRepository)
+    {
     }
 
     public function getOneReadyForSender(): ?EmailNotificationQueue

@@ -13,6 +13,8 @@
 namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
+use App\Helper\WorkRoleHelper;
+use App\Service\WorkService;
 use App\Entity\{
     User,
     Work
@@ -28,6 +30,10 @@ class WorkVoter extends Voter
         VoterSupportConstant::EDIT,
         VoterSupportConstant::DELETE
     ];
+
+    public function __construct(private WorkService $workService)
+    {
+    }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -63,12 +69,12 @@ class WorkVoter extends Voter
 
     private function canView(Work $work, User $user): bool
     {
-        return $work->isParticipant($user);
+        return $this->workService->isParticipant($work, $user);
     }
 
     private function canEdit(Work $work, User $user): bool
     {
-        return $work->isSupervisor($user);
+        return WorkRoleHelper::isSupervisor($work, $user);
     }
 
     private function canDelete(Work $work, User $user): bool

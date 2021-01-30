@@ -95,10 +95,9 @@ class ResetPasswordController extends BaseController
 
     private function processSendingPasswordResetEmail(string $email): RedirectResponse
     {
-        $user = $this->getRepository(User::class)
-            ->findOneBy([
-                'email' => $email,
-            ]);
+        $user = $this->getRepository(User::class)->findOneBy([
+            'email' => $email
+        ]);
 
         $this->getSession()->set('reset_password_check_email', true);
 
@@ -116,8 +115,10 @@ class ResetPasswordController extends BaseController
             return $this->redirectToRoute('app_reset_password_forgot_request');
         }
 
-        $this->get('app.event_dispatcher.security')
-            ->onResetPasswordTokenCreate($resetToken, $this->get('app.reset_password')->getTokenLifetime());
+        $this->get('app.event_dispatcher.security')->onResetPasswordTokenCreate(
+            $resetToken,
+            $this->get('app.reset_password')->getTokenLifetime()
+        );
 
         return $this->redirectToRoute('app_reset_password_check_email');
     }

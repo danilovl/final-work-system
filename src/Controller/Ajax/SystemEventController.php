@@ -38,7 +38,7 @@ class SystemEventController extends BaseController
         $isUnreadExist = $this->get('app.facade.system_event')
             ->isUnreadSystemEventsByRecipient($user);
 
-        if ($isUnreadExist) {
+        if ($isUnreadExist === true) {
             $this->get('app.facade.system_event_recipient')->updateViewedAll($user);
         }
 

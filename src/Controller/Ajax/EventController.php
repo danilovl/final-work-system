@@ -84,12 +84,12 @@ class EventController extends BaseController
             $eventParticipantForm = $eventModel->participant;
 
             $eventParticipant = $origin->getParticipant() ?? new EventParticipant;
-            if ($eventParticipantForm) {
+            if ($eventParticipantForm !== null) {
                 $eventParticipant->setWork($eventParticipantForm->getWork());
                 $eventParticipant->setUser($eventParticipantForm->getUser());
                 $eventParticipant->setEvent($event);
                 $eventModel->participant = $eventParticipant;
-            } elseif ($eventParticipant->getId()) {
+            } elseif ($eventParticipant->getId() !== null) {
                 $this->removeEntity($eventParticipant);
                 $eventModel->participant = null;
             }

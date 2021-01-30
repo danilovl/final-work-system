@@ -16,7 +16,7 @@ use App\Model\SystemEvent\{
     SystemEventFacade,
     SystemEventRecipientFacade
 };
-use App\Services\UserService;
+use App\Service\UserService;
 use Twig\Environment;
 
 class UnreadSystemEventWidget extends BaseWidget

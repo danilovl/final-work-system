@@ -22,11 +22,8 @@ use App\Entity\User;
 
 class EventFacade
 {
-    private EventRepository $eventRepository;
-
-    public function __construct(EventRepository $eventRepository)
+    public function __construct(private EventRepository $eventRepository)
     {
-        $this->eventRepository = $eventRepository;
     }
 
     public function find(int $id): ?Event

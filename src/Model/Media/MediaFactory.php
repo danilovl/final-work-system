@@ -33,6 +33,7 @@ class MediaFactory extends BaseModelFactory
         Media $media,
         MediaModel $mediaModel
     ): Media {
+        $media->setType($mediaModel->type);
         $media->setName($mediaModel->name);
         $media->setDescription($mediaModel->description);
         $media->setOwner($mediaModel->owner);

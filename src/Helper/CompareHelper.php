@@ -25,22 +25,15 @@ class CompareHelper
         mixed $value2,
         string $operator
     ): bool {
-        switch ($operator) {
-            case CompareConstant::LESS:
-                return $value1 < $value2;
-            case CompareConstant::LESS_EQUAL:
-                return $value1 <= $value2;
-            case CompareConstant::MORE:
-                return $value1 > $value2;
-            case  CompareConstant::MORE_EQUAL:
-                return $value1 >= $value2;
-            case CompareConstant::EQUAL:
-                return $value1 === $value2;
-            case CompareConstant::NOT_EQUAL:
-                return $value1 != $value2;
-            default:
-                return false;
-        }
+        return match ($operator) {
+            CompareConstant::LESS => $value1 < $value2,
+            CompareConstant::LESS_EQUAL => $value1 <= $value2,
+            CompareConstant::MORE => $value1 > $value2,
+            CompareConstant::MORE_EQUAL => $value1 >= $value2,
+            CompareConstant::EQUAL => $value1 === $value2,
+            CompareConstant::NOT_EQUAL => $value1 != $value2,
+            default => false,
+        };
     }
 
     public static function compareDateTime(
@@ -55,4 +48,3 @@ class CompareHelper
         );
     }
 }
- 

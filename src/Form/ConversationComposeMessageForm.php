@@ -15,6 +15,7 @@ namespace App\Form;
 use App\Constant\DateFormatConstant;
 use App\Entity\Conversation;
 use App\Form\Constraint\ConversationMessageName;
+use App\Helper\UserRoleHelper;
 use App\Model\ConversationMessage\ConversationComposeMessageModel;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -44,7 +45,7 @@ class ConversationComposeMessageForm extends AbstractType
         $builder
             ->add('conversation', ChoiceType::class, [
                 'required' => true,
-                'multiple' => $user->isSupervisor(),
+                'multiple' => UserRoleHelper::isSupervisor($user),
                 'choices' => $options['conversations'],
                 'choice_label' => fn(Conversation $conversation): string => $this->choiceLabelConversation($conversation),
                 'constraints' => [
@@ -65,7 +66,7 @@ class ConversationComposeMessageForm extends AbstractType
                 ]
             ]);
 
-        if ($user->isSupervisor() === false) {
+        if (!UserRoleHelper::isSupervisor($user)) {
             $builder->remove('name');
         }
     }

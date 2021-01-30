@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class MediaCategoryFacade
 {
-    private MediaCategoryRepository $mediaCategoryRepository;
-
-    public function __construct(MediaCategoryRepository $mediaCategoryRepository)
+    public function __construct(private MediaCategoryRepository $mediaCategoryRepository)
     {
-        $this->mediaCategoryRepository = $mediaCategoryRepository;
     }
 
     public function queryMediaCategoriesByOwner(User $user): Query

@@ -47,14 +47,14 @@ class UserController extends BaseController
                 return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
                     'data' => FormValidationMessageHelper::getErrorMessages($form)
                 ]);
-            } else {
-                $newUser = $this->get('app.factory.user')->createNewUser($userModel);
-
-                $this->get('app.event_dispatcher.user')
-                    ->onUserCreate($newUser);
-
-                $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.user.create.success');
             }
+
+            $newUser = $this->get('app.factory.user')->createNewUser($userModel);
+
+            $this->get('app.event_dispatcher.user')
+                ->onUserCreate($newUser);
+
+            $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.user.create.success');
 
             return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

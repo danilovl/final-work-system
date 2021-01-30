@@ -5,13 +5,8 @@ imports:
 services:
   _defaults:
     public: true
-    autowire: true      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
-#    App\:
-#      resource: '../src'
-#      exclude:
-#        - '../src/Entity/*'
+    autowire: true
+    autoconfigure: true
 
   App\Admin\:
     resource: '../src/Admin'

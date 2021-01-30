@@ -12,7 +12,7 @@
 
 namespace App\Twig\Runtime;
 
-use App\Services\Interfaces\SeoPageInterface;
+use App\Service\SeoPageService;
 use Twig\Extension\AbstractExtension;
 
 class SeoRuntime extends AbstractExtension
@@ -21,28 +21,28 @@ class SeoRuntime extends AbstractExtension
     private const META = '<meta %s="%s" />';
     private const META_CONTENT = '<meta %s="%s" content="%s" />';
 
-    public function __construct(protected SeoPageInterface $page)
+    public function __construct(protected SeoPageService $seoPageService)
     {
     }
 
     public function setTitle(string $title): void
     {
-        $this->page->setTitle($title);
+        $this->seoPageService->setTitle($title);
     }
 
     public function getTitle(): ?string
     {
-        if ($this->page->getTitle() === null) {
+        if ($this->seoPageService->getTitle() === null) {
             return null;
         }
 
-        return sprintf(self::TITLE, $this->stripTags($this->page->getTransTitle()));
+        return sprintf(self::TITLE, $this->stripTags($this->seoPageService->getTransTitle()));
     }
 
     public function getMetaData(): string
     {
         $html = '';
-        foreach ($this->page->getMetas() as $type => $metas) {
+        foreach ($this->seoPageService->getMetas() as $type => $metas) {
             foreach ((array) $metas as $name => $meta) {
                 [$content, $extras] = $meta;
 

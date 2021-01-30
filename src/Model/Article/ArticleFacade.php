@@ -18,11 +18,8 @@ use App\Repository\ArticleRepository;
 
 class ArticleFacade
 {
-    private ArticleRepository $articleRepository;
-
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(private ArticleRepository $articleRepository)
     {
-        $this->articleRepository = $articleRepository;
     }
 
     public function queryArticlesByCategory(ArticleCategory $articleCategory): Query

@@ -70,22 +70,22 @@ class BaseController extends AbstractController
         return $this->get('danilovl.hashids')->decode($id);
     }
 
-    protected function flushEntity($entity = null): void
+    protected function flushEntity(object $entity = null): void
     {
         $this->get('app.entity_manager')->flush($entity);
     }
 
-    protected function persistAndFlush($entity): void
+    protected function persistAndFlush(object $entity): void
     {
         $this->get('app.entity_manager')->persistAndFlush($entity);
     }
 
-    protected function createEntity($entity): void
+    protected function createEntity(object $entity): void
     {
         $this->get('app.entity_manager')->create($entity);
     }
 
-    protected function removeEntity($entity): void
+    protected function removeEntity(object $entity): void
     {
         $this->get('app.entity_manager')->remove($entity);
     }

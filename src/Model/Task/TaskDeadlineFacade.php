@@ -18,15 +18,10 @@ use App\Repository\TaskRepository;
 
 class TaskDeadlineFacade
 {
-    private TaskRepository $taskRepository;
-    private ParameterService $parameterService;
-
     public function __construct(
-        TaskRepository $taskRepository,
-        ParameterService $parameterService
+        private TaskRepository $taskRepository,
+        private ParameterService $parameterService
     ) {
-        $this->taskRepository = $taskRepository;
-        $this->parameterService = $parameterService;
     }
 
     public function getDeadlinesByOwner(

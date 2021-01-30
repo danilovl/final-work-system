@@ -1,4 +1,4 @@
-{% if work.isSupervisor(app_user()) %}
+{% if is_work_role(work, app_user(), 'isSupervisor') %}
     <a class="btn btn-app"
        id="task-create"
        data-toggle="modal"
@@ -9,37 +9,37 @@
     </a>
 {% endif %}
 
- {% if work.authorSupervisor(app_user()) %}
-     <a class="btn btn-app"
-        id="version-create"
-        data-toggle="modal"
-        data-target="#modalWindow"
-        href="{{ path('version_create', { 'id': work.id | hashids_encode }) }}">
-         <i class="fa fa-file-text-o"></i>
-         {{ 'app.form.action.add_work_version' | trans() }}
-     </a>
- {% endif %}
+{% if is_work_role(work, app_user(), 'isAuthorSupervisor') %}
+    <a class="btn btn-app"
+       id="version-create"
+       data-toggle="modal"
+       data-target="#modalWindow"
+       href="{{ path('version_create', { 'id': work.id | hashids_encode }) }}">
+        <i class="fa fa-file-text-o"></i>
+        {{ 'app.form.action.add_work_version' | trans() }}
+    </a>
+{% endif %}
 
- {% if work.isSupervisor(app_user()) %}
-     <a class="btn btn-app"
-        href="{{ path('event_calendar_manage') }}"
-        target="_blank">
-         <i class="fa fa-calendar"></i>
-         {{ 'app.text.appointment_calendar_manage' | trans() }}
-     </a>
- {% endif %}
+{% if is_work_role(work, app_user(), 'isSupervisor') %}
+    <a class="btn btn-app"
+       href="{{ path('event_calendar_manage') }}"
+       target="_blank">
+        <i class="fa fa-calendar"></i>
+        {{ 'app.text.appointment_calendar_manage' | trans() }}
+    </a>
+{% endif %}
 
- {% if work.isAuthor(app_user()) %}
-     <a class="btn btn-app"
-        href="{{ path('event_calendar_reservation') }}"
-        target="_blank">
-         <i class="fa fa-calendar"></i>
-         {{ 'app.text.appointment_calendar' | trans() }}
-     </a>
- {% endif %}
+{% if is_work_role(work, app_user(), 'isAuthor') %}
+    <a class="btn btn-app"
+       href="{{ path('event_calendar_reservation') }}"
+       target="_blank">
+        <i class="fa fa-calendar"></i>
+        {{ 'app.text.appointment_calendar' | trans() }}
+    </a>
+{% endif %}
 
 {% if  conversation_variation.checker(work, app_user(), work.author) %}
-    {% set conversationWithAuthor = work.checkConversation(work.supervisor, work.author) %}
+    {% set conversationWithAuthor = check_work_users_conversation(work, work.supervisor, work.author) %}
     {% if conversationWithAuthor %}
         <a href="{{ path('conversation_detail', { 'id': conversationWithAuthor.id | hashids_encode }) }}"
            target="_blank"

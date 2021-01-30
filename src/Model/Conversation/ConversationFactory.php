@@ -12,7 +12,7 @@
 
 namespace App\Model\Conversation;
 
-use App\Services\{
+use App\Service\{
     EntityManagerService,
     ConversationStatusService,
     ConversationVariationService
@@ -33,21 +33,17 @@ use App\Entity\{
 class ConversationFactory extends BaseModelFactory
 {
     private ConversationRepository $conversationRepository;
-    private ConversationStatusService $conversationStatusService;
-    private ConversationVariationService $conversationVariationService;
     private ConversationMessageFacade $conversationMessageService;
 
     public function __construct(
-        EntityManagerService $entityManager,
-        ConversationMessageFacade $conversationMessageFacade,
-        ConversationStatusService $conversationStatusService,
-        ConversationVariationService $conversationVariationService
+        private EntityManagerService $entityManager,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private ConversationStatusService $conversationStatusService,
+        private ConversationVariationService $conversationVariationService
     ) {
         parent::__construct($entityManager);
 
-        $this->conversationRepository = $entityManager->getRepository(Conversation::class);
-        $this->conversationStatusService = $conversationStatusService;
-        $this->conversationVariationService = $conversationVariationService;
+        $this->conversationRepository = $this->entityManager->getRepository(Conversation::class);
         $this->conversationMessageService = $conversationMessageFacade;
     }
 

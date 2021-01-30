@@ -36,8 +36,8 @@ services:
     tags:
       - { name: app.widgets, alias: menu }
 
-  app.event_listener.widget:
-    class: App\EventListener\WidgetEventSubscriber
+  app.event_subscriber.widget:
+    class: App\EventSubscriber\WidgetEventSubscriber
     arguments:
       - '@app.widget'
     autoconfigure: true

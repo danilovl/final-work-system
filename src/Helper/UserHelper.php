@@ -31,4 +31,3 @@ class UserHelper
         return $rolesName[$role] ?? null;
     }
 }
- 

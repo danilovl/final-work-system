@@ -17,11 +17,8 @@ use App\Repository\ApiUserRepository;
 
 class ApiUserFacade
 {
-    private ApiUserRepository $apiUserRepository;
-
-    public function __construct(ApiUserRepository $apiUserRepository)
+    public function __construct(private ApiUserRepository $apiUserRepository)
     {
-        $this->apiUserRepository = $apiUserRepository;
     }
 
     public function findByApiKey(string $apiKey): ?ApiUser

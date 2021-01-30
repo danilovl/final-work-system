@@ -12,13 +12,10 @@
 
 namespace App\Entity;
 
-use App\Exception\RuntimeException;
 use App\Constant\{
     GenderConstant,
     TranslationConstant,
-    UserRoleConstant,
-    WorkStatusConstant,
-    WorkUserTypeConstant
+    UserRoleConstant
 };
 use App\Entity\Traits\TimestampAbleTrait;
 use App\Repository\UserRepository;
@@ -29,7 +26,6 @@ use Doctrine\Common\Collections\{
     ArrayCollection
 };
 use Doctrine\ORM\Mapping as ORM;
-use Generator;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -471,26 +467,6 @@ class User implements UserInterface
         $this->lastname = $lastname;
     }
 
-    public function getWebsite(): ?string
-    {
-        return $this->website;
-    }
-
-    public function setWebsite(?string $website): void
-    {
-        $this->website = $website;
-    }
-
-    public function getBiography(): ?string
-    {
-        return $this->biography;
-    }
-
-    public function setBiography(?string $biography): void
-    {
-        $this->biography = $biography;
-    }
-
     public function getGender(): ?string
     {
         return $this->gender;
@@ -569,26 +545,6 @@ class User implements UserInterface
     public function setLastRequestedAt(?DateTime $lastRequestedAt): void
     {
         $this->lastRequestedAt = $lastRequestedAt;
-    }
-
-    public function getConfirmationToken(): ?string
-    {
-        return $this->confirmationToken;
-    }
-
-    public function setConfirmationToken(?string $confirmationToken): void
-    {
-        $this->confirmationToken = $confirmationToken;
-    }
-
-    public function getPasswordRequestedAt(): ?DateTime
-    {
-        return $this->passwordRequestedAt;
-    }
-
-    public function setPasswordRequestedAt(?DateTime $passwordRequestedAt): void
-    {
-        $this->passwordRequestedAt = $passwordRequestedAt;
     }
 
     public function getUsernameCanonical(): ?string
@@ -682,55 +638,11 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|WorkCategory[]
-     */
-    public function getWorkCategoriesOwner(): Collection
-    {
-        return $this->workCategoriesOwner;
-    }
-
-    public function setWorkCategoriesOwner(Collection $workCategoriesOwner): void
-    {
-        $this->workCategoriesOwner = $workCategoriesOwner;
-    }
-
-    /**
-     * @return Collection|Task[]
-     */
-    public function getTasksOwner(): Collection
-    {
-        return $this->tasksOwner;
-    }
-
-    public function setTasksOwner(Collection $tasksOwner): void
-    {
-        $this->tasksOwner = $tasksOwner;
-    }
-
-    /**
      * @return Collection|Media[]
      */
     public function getMediaOwner(): Collection
     {
         return $this->mediaOwner;
-    }
-
-    public function setMediaOwner(Collection $mediaOwner): void
-    {
-        $this->mediaOwner = $mediaOwner;
-    }
-
-    /**
-     * @return Collection|MediaCategory[]
-     */
-    public function getMediaCategoriesOwner(): Collection
-    {
-        return $this->mediaCategoriesOwner;
-    }
-
-    public function setMediaCategoriesOwner(Collection $mediaCategoriesOwner): void
-    {
-        $this->mediaCategoriesOwner = $mediaCategoriesOwner;
     }
 
     /**
@@ -780,11 +692,6 @@ class User implements UserInterface
         return $this->eventsParticipant;
     }
 
-    public function setEventsParticipant(Collection $eventsParticipant): void
-    {
-        $this->eventsParticipant = $eventsParticipant;
-    }
-
     /**
      * @return Collection|EventParticipant[]
      */
@@ -801,29 +708,11 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|EventSchedule[]
-     */
-    public function getEventsSchedule(): Collection
-    {
-        return $this->eventsSchedule;
-    }
-
-    public function setEventsSchedule(Collection $eventsSchedule): void
-    {
-        $this->eventsSchedule = $eventsSchedule;
-    }
-
-    /**
      * @return Collection|Work[]
      */
     public function getOpponentWorks(): Collection
     {
         return $this->opponentWorks;
-    }
-
-    public function setOpponentWorks($opponentWorks): void
-    {
-        $this->opponentWorks = $opponentWorks;
     }
 
     /**
@@ -834,100 +723,12 @@ class User implements UserInterface
         return $this->supervisorWorks;
     }
 
-    public function setSupervisorWorks($supervisorWorks): void
-    {
-        $this->supervisorWorks = $supervisorWorks;
-    }
-
     /**
      * @return Collection|Work[]
      */
     public function getConsultantWorks(): Collection
     {
         return $this->consultantWorks;
-    }
-
-    public function setConsultantWorks($consultantWorks): void
-    {
-        $this->consultantWorks = $consultantWorks;
-    }
-
-    /**
-     * @return Collection|SystemEvent[]
-     */
-    public function getSystemEventsOwner(): Collection
-    {
-        return $this->systemEventsOwner;
-    }
-
-    public function setSystemEventsOwner($systemEventsOwner): void
-    {
-        $this->systemEventsOwner = $systemEventsOwner;
-    }
-
-    /**
-     * @return Collection|SystemEventRecipient[]
-     */
-    public function getSystemEventsRecipient(): Collection
-    {
-        return $this->systemEventsRecipient;
-    }
-
-    public function setSystemEventsRecipient($systemEventsRecipient): void
-    {
-        $this->systemEventsRecipient = $systemEventsRecipient;
-    }
-
-    /**
-     * @return Collection|Conversation[]
-     */
-    public function getConversationsOwner(): Collection
-    {
-        return $this->conversationsOwner;
-    }
-
-    public function setConversationsOwner(Collection $conversationsOwner): void
-    {
-        $this->conversationsOwner = $conversationsOwner;
-    }
-
-    /**
-     * @return Collection|ConversationParticipant[]
-     */
-    public function getConversationsParticipant(): Collection
-    {
-        return $this->conversationsParticipant;
-    }
-
-    public function setConversationsParticipant(Collection $conversationsParticipant): void
-    {
-        $this->conversationsParticipant = $conversationsParticipant;
-    }
-
-    /**
-     * @return Collection|ConversationMessage[]
-     */
-    public function getConversationMessages(): Collection
-    {
-        return $this->conversationMessages;
-    }
-
-    public function setConversationMessages(Collection $conversationMessages): void
-    {
-        $this->conversationMessages = $conversationMessages;
-    }
-
-    /**
-     * @return Collection|ConversationMessageStatus[]
-     */
-    public function getConversationMessageStatus(): Collection
-    {
-        return $this->conversationMessageStatus;
-    }
-
-    public function setConversationMessageStatus(Collection $conversationMessageStatus): void
-    {
-        $this->conversationMessageStatus = $conversationMessageStatus;
     }
 
     /**
@@ -969,198 +770,6 @@ class User implements UserInterface
     public function addGroups(Group $group)
     {
         $this->groups->add($group);
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->hasRole(UserRoleConstant::ADMIN);
-    }
-
-    public function isAuthorSupervisorOpponent(): bool
-    {
-        return $this->isAuthor() || $this->isSupervisor() || $this->isOpponent();
-    }
-
-    public function isAuthorSupervisorOpponentConsultant(): bool
-    {
-        return $this->isAuthor() || $this->isSupervisor() || $this->isOpponent() || $this->isConsultant();
-    }
-
-    public function isAuthorSupervisor(): bool
-    {
-        return $this->isAuthor() || $this->isSupervisor();
-    }
-
-    public function isAuthor(): bool
-    {
-        return $this->hasRole(UserRoleConstant::STUDENT);
-    }
-
-    public function isSupervisor(): bool
-    {
-        return $this->hasRole(UserRoleConstant::SUPERVISOR);
-    }
-
-    public function isOpponent(): bool
-    {
-        return $this->hasRole(UserRoleConstant::OPPONENT);
-    }
-
-    public function isConsultant(): bool
-    {
-        return $this->hasRole(UserRoleConstant::CONSULTANT);
-    }
-
-    public function getActiveSupervisor(string $userType): ArrayCollection
-    {
-        $supervisors = new ArrayCollection;
-
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $this->arrayGenerator($this->getAuthorWorks()),
-            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($this->getOpponentWorks()),
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getConsultantWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var \App\Entity\User|null $supervisor */
-                $supervisor = $work->getSupervisor();
-                if ($supervisor !== null &&
-                    $supervisors->contains($supervisor) === false &&
-                    $supervisor->isEnabled()
-                ) {
-                    $supervisors->add($supervisor);
-                }
-            }
-        }
-
-        return $supervisors;
-    }
-
-    public function getActiveAuthor(string $userType): ArrayCollection
-    {
-        $authors = new ArrayCollection;
-
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($this->getOpponentWorks()),
-            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($this->getSupervisorWorks()),
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getConsultantWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $supervisor */
-                $author = $work->getAuthor();
-                if ($author !== null &&
-                    $authors->contains($author) === false &&
-                    $author->isEnabled()
-                ) {
-                    $authors->add($author);
-                }
-            }
-        }
-
-        return $authors;
-    }
-
-    public function getActiveOpponent(string $userType): ArrayCollection
-    {
-        $opponents = new ArrayCollection;
-
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $this->arrayGenerator($this->getAuthorWorks()),
-            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($this->getSupervisorWorks()),
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getConsultantWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $supervisor */
-                $opponent = $work->getOpponent();
-                if ($opponent !== null &&
-                    $opponents->contains($opponent) === false &&
-                    $opponent->isEnabled()
-                ) {
-                    $opponents->add($opponent);
-                }
-            }
-        }
-
-        return $opponents;
-    }
-
-    public function getActiveConsultant(string $userType): ArrayCollection
-    {
-        $consultants = new ArrayCollection;
-
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($this->getAuthorWorks()),
-            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($this->getSupervisorWorks()),
-            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($this->getOpponentWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $consultant */
-                $consultant = $work->getConsultant();
-                if ($consultant !== null &&
-                    $consultants->contains($consultant) === false &&
-                    $consultant->isEnabled()
-                ) {
-                    $consultants->add($consultant);
-                }
-            }
-        }
-
-        return $consultants;
-    }
-
-    public function getWorkBy(
-        string $userType,
-        $type = null,
-        $status = null
-    ): ArrayCollection {
-        $collectionWorks = new ArrayCollection;
-        $criteria = Criteria::create();
-
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $this->getAuthorWorks(),
-            WorkUserTypeConstant::SUPERVISOR => $this->getSupervisorWorks(),
-            WorkUserTypeConstant::OPPONENT => $this->getOpponentWorks(),
-            WorkUserTypeConstant::CONSULTANT => $this->getConsultantWorks(),
-            default => throw new RuntimeException("UserType '{$userType}' not found")
-        };
-
-        if ($type !== null) {
-            $criteria->where(Criteria::expr()->eq('type', $type));
-            $userWorks = $userWorks->matching($criteria);
-        }
-
-        if ($status !== null) {
-            $criteria->andWhere(Criteria::expr()->eq('status', $status));
-            $userWorks = $userWorks->matching($criteria);
-        }
-
-        if (!$userWorks->isEmpty()) {
-            foreach ($userWorks as $work) {
-                $collectionWorks->add($work);
-            }
-        }
-
-        return $userWorks;
-    }
-
-    public function arrayGenerator(Collection $array): Generator
-    {
-        yield from $array;
     }
 
     public function getMediaBy(?MediaType $type = null, ?bool $active = null): ArrayCollection
@@ -1220,15 +829,10 @@ class User implements UserInterface
         return sprintf('%s %s %s', $this->getFullName(), $before, $after);
     }
 
-    public function hasRole(string $role): bool
-    {
-        return in_array(strtoupper($role), $this->getRoles(), true);
-    }
-
-    public function addRole($role)
+    public function addRole(string $role): self
     {
         $role = strtoupper($role);
-        if ($role === 'ROLE_USER') {
+        if ($role === UserRoleConstant::USER) {
             return $this;
         }
 

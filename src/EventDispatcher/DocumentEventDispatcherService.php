@@ -14,7 +14,7 @@ namespace App\EventDispatcher;
 
 use App\Entity\Media;
 use App\EventDispatcher\GenericEvent\MediaGenericEvent;
-use App\EventListener\Events;
+use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DocumentEventDispatcherService

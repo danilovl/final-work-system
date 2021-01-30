@@ -13,7 +13,7 @@
 namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Utils\Validator\UserValidator;
+use App\Util\Validator\UserValidator;
 use App\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{

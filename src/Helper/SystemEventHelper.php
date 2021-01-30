@@ -24,10 +24,10 @@ class SystemEventHelper
         foreach ($events as $recipient) {
             $systemEventType = $recipient->getSystemEvent()->getType()->getGroup();
 
-            if (isset($systemEventGroup[$systemEventType]) === false) {
-                $systemEventGroup[$systemEventType] = [];
+            if (isset($systemEventGroup[$systemEventType])) {
                 $systemEventGroup[$systemEventType][] = $recipient;
             } else {
+                $systemEventGroup[$systemEventType] = [];
                 $systemEventGroup[$systemEventType][] = $recipient;
             }
         }

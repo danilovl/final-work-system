@@ -147,17 +147,17 @@ class TaskController extends BaseController
     ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE, $task);
 
-        if (!$task->isNotifyComplete()) {
-            $task->changeNotifyComplete();
-            $this->flushEntity($task);
-
-            $this->get('app.event_dispatcher.task')
-                ->onTaskNotifyComplete($task);
-
-            return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
+        if ($task->isNotifyComplete()) {
+            return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE);
         }
 
-        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE);
+        $task->changeNotifyComplete();
+        $this->flushEntity($task);
+
+        $this->get('app.event_dispatcher.task')
+            ->onTaskNotifyComplete($task);
+
+        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }
 
     /**
@@ -185,7 +185,6 @@ class TaskController extends BaseController
         }
 
         $tasks = $taskFacade->findAllByOwnerComplete($user, false);
-
         foreach ($tasks as $task) {
             $task->changeComplete();
             $this->flushEntity($task);

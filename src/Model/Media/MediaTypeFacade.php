@@ -17,11 +17,8 @@ use App\Repository\MediaTypeRepository;
 
 class MediaTypeFacade
 {
-    private MediaTypeRepository $mediaTypeRepository;
-
-    public function __construct(MediaTypeRepository $mediaTypeRepository)
+    public function __construct(private MediaTypeRepository $mediaTypeRepository)
     {
-        $this->mediaTypeRepository = $mediaTypeRepository;
     }
 
     public function find(int $id): ?MediaType

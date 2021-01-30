@@ -50,14 +50,13 @@ class ConversationController extends BaseController
             ->isUnreadMessagesByRecipient($user);
 
         if ($isUnreadExist) {
-            $this->get('app.facade.conversation_message_status')
-                ->updateAllToStatus(
-                    $user,
-                    $this->getReference(
-                        ConversationMessageStatusType::class,
-                        ConversationMessageStatusTypeConstant::READ
-                    )
-                );
+            $this->get('app.facade.conversation_message_status')->updateAllToStatus(
+                $user,
+                $this->getReference(
+                    ConversationMessageStatusType::class,
+                    ConversationMessageStatusTypeConstant::READ
+                )
+            );
         }
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

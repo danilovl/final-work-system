@@ -19,7 +19,7 @@ class IpHelper
         if (!str_contains($range, '/')) {
             $range .= '/32';
         }
-        // $range is in IP/CIDR format eg 127.0.0.1/24
+
         [$range, $netmask] = explode('/', $range, 2);
 
         $range_decimal = ip2long($range);

@@ -7,9 +7,7 @@ security:
 
   providers:
     user_provider:
-      entity:
-        class: App\Entity\User
-        property: username
+      id: app.provider.user
 
     api_key_user_provider:
       id: app.provider.api_key
@@ -42,6 +40,9 @@ security:
       context:  user
       switch_user: { role: ROLE_ADMIN }
       provider: user_provider
+      guard:
+        authenticators:
+          - app.authenticator
       form_login:
         check_path: security_login
         login_path: security_login

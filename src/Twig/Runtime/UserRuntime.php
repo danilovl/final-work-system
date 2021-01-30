@@ -13,7 +13,8 @@
 namespace App\Twig\Runtime;
 
 use App\Entity\User;
-use App\Services\UserService;
+use App\Helper\UserRoleHelper;
+use App\Service\UserService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Twig\Environment;
@@ -30,6 +31,11 @@ class UserRuntime extends AbstractExtension
     public function appUser(): ?User
     {
         return $this->userService->getUser();
+    }
+
+    public function isUserRole(User $user, string $method): bool
+    {
+        return UserRoleHelper::$method($user);
     }
 
     public function profileImage(Environment $env, ?User $user): string

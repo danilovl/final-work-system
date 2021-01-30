@@ -21,11 +21,8 @@ use App\Entity\{
 
 class TaskFacade
 {
-    private TaskRepository $taskRepository;
-
-    public function __construct(TaskRepository $taskRepository)
+    public function __construct(private TaskRepository $taskRepository)
     {
-        $this->taskRepository = $taskRepository;
     }
 
     public function find(int $id): ?Task

@@ -303,30 +303,17 @@ class Media
 
     public function existMediaFile(): bool
     {
-        $pathToFile = $this->getAbsolutePath();
-        if (file_exists($pathToFile)) {
-            return true;
-        }
-
-        return false;
+        return file_exists($this->getAbsolutePath());
     }
 
     public function getFolder(): ?string
     {
-        if ($this->getType() === null) {
-            return null;
-        }
-
-        return $this->getType()->getFolder();
+        return $this->getType()?->getFolder();
     }
 
     public function changeActive(): void
     {
-        if ($this->isActive()) {
-            $this->setActive(false);
-        } else {
-            $this->setActive(true);
-        }
+        $this->setActive(!$this->isActive());
     }
 
     public function __toString(): string

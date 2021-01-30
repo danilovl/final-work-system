@@ -129,4 +129,18 @@ class ConversationHelper
             return $collator->compare($f, $s);
         });
     }
+
+    public static function getParticipantIds(Conversation $conversation): array
+    {
+        $participantIds = [];
+        $participants = $conversation->getParticipants();
+
+        foreach ($participants as $participant) {
+            $participantIds[] = $participant->getUser()->getId();
+        }
+
+        sort($participantIds);
+
+        return $participantIds;
+    }
 }

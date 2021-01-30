@@ -37,8 +37,11 @@ class EventScheduleController extends BaseController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.factory.event_schedule')
-                ->cloneEventSchedule($this->getUser(), $eventSchedule, $eventScheduleCloneModel->start);
+            $this->get('app.factory.event_schedule')->cloneEventSchedule(
+                $this->getUser(),
+                $eventSchedule,
+                $eventScheduleCloneModel->start
+            );
 
             return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

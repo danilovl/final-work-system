@@ -12,10 +12,11 @@
 
 namespace App\Model\Conversation;
 
+use App\Helper\ConversationHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\ConversationMessage\ConversationComposeMessageModel;
 use App\EventDispatcher\ConversationEventDispatcherService;
-use App\Services\{
+use App\Service\{
     ConversationStatusService,
     ConversationVariationService,
     EntityManagerService
@@ -38,29 +39,17 @@ use App\Entity\User;
 
 class ConversationFacade
 {
-    private EntityManagerService $em;
     private ConversationRepository $conversationRepository;
-    private ConversationStatusService $conversationStatusService;
-    private ConversationVariationService $conversationVariationService;
-    private ConversationMessageFacade $conversationMessageFacade;
-    private ConversationEventDispatcherService $conversationEventDispatcherService;
-    private ConversationFactory $conversationFactory;
 
     public function __construct(
-        EntityManagerService $entityManager,
-        ConversationMessageFacade $conversationMessageFacade,
-        ConversationStatusService $conversationStatusService,
-        ConversationVariationService $conversationVariationService,
-        ConversationEventDispatcherService $conversationEventDispatcherService,
-        ConversationFactory $conversationFactory
+        private EntityManagerService $em,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private ConversationStatusService $conversationStatusService,
+        private ConversationVariationService $conversationVariationService,
+        private ConversationEventDispatcherService $conversationEventDispatcherService,
+        private ConversationFactory $conversationFactory
     ) {
-        $this->em = $entityManager;
-        $this->conversationRepository = $entityManager->getRepository(Conversation::class);
-        $this->conversationStatusService = $conversationStatusService;
-        $this->conversationVariationService = $conversationVariationService;
-        $this->conversationMessageFacade = $conversationMessageFacade;
-        $this->conversationEventDispatcherService = $conversationEventDispatcherService;
-        $this->conversationFactory = $conversationFactory;
+        $this->conversationRepository = $this->em->getRepository(Conversation::class);
     }
 
     public function queryConversationsByUser(User $user): Query
@@ -189,7 +178,7 @@ class ConversationFacade
             /** @var Conversation $conversation */
             foreach ($conversations as $conversation) {
                 if ($modelConversation->getWork() === $conversation->getWork() &&
-                    $modelConversation->getParticipantIds() === $conversation->getParticipantIds()
+                    ConversationHelper::getParticipantIds($modelConversation) === ConversationHelper::getParticipantIds($conversation)
                 ) {
                     $conversationMessage = $this->conversationFactory
                         ->createConversationMessage($conversation, $user, $content);

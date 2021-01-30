@@ -28,11 +28,11 @@ class WorkFunctionHelper
         foreach ($works as $work) {
             $deadline = $work->getDeadline()->format(DateFormatConstant::DATE);
 
-            if (!isset($deadlineGroup[$deadline])) {
-                $deadlineGroup[$deadline] = [];
-                $deadlineGroup[$deadline]['works'] = [];
+            if (isset($deadlineGroup[$deadline])) {
                 $deadlineGroup[$deadline]['works'][] = $work;
             } else {
+                $deadlineGroup[$deadline] = [];
+                $deadlineGroup[$deadline]['works'] = [];
                 $deadlineGroup[$deadline]['works'][] = $work;
             }
         }
@@ -55,6 +55,7 @@ class WorkFunctionHelper
                         $categoryGroup[$category->getName()] = [];
                         $categoryGroup[$category->getName()]['works'] = [];
                     }
+
                     $categoryGroup[$category->getName()]['works'][] = $work;
                 }
             } else {
@@ -62,6 +63,7 @@ class WorkFunctionHelper
                     $categoryGroup['-'] = [];
                     $categoryGroup['-']['works'] = [];
                 }
+
                 $categoryGroup['-']['works'][] = $work;
             }
         }
@@ -107,6 +109,7 @@ class WorkFunctionHelper
                     $categoryGroupWithoutSorting['-'] = [];
                     $categoryGroupWithoutSorting['-']['works'] = [];
                 }
+
                 $categoryGroupWithoutSorting['-']['works'][] = $work;
             }
         }

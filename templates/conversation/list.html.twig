@@ -95,7 +95,7 @@
                                                 <i class="fa fa-comments-o"></i>
                                             </a>
 
-                                            {% if app_user().isSupervisor %}
+                                            {% if is_user_role(app_user(), 'isSupervisor') %}
                                                 {% include 'common_part/ajax_delete.html.twig' with {
                                                     'modalDataTargetDeleteIcon': 'fa-remove',
                                                     'modalDataTarget': 'conversation',
@@ -105,7 +105,7 @@
                                                 } %}
                                             {% endif %}
                                         </td>
-                                        {% set lastMessage = conversation.getLastMessage %}
+                                        {% set lastMessage = conversation_last_message(conversation) %}
                                         <td class="">
                                             {% if lastMessage is not empty %}
                                                 {% include 'common_part/user_online_status.html.twig' with {

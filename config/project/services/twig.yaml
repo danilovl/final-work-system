@@ -27,15 +27,14 @@ services:
     tags:
       - { name: twig.extension }
 
-  app.twig.seo_runtime:
+  app.twig.runtime.seo:
     class: App\Twig\Runtime\SeoRuntime
+    autowire: true
     public: false
-    arguments:
-      - '@app.seo_page'
     tags:
       - { name: twig.runtime }
 
-  app.twig.away_runtime:
+  app.twig.runtime.away:
     class: App\Twig\Runtime\AwayRuntime
     public: false
     arguments:
@@ -44,18 +43,37 @@ services:
     tags:
       - { name: twig.runtime }
 
-  app.twig.user_runtime:
+  app.twig.runtime.user:
     class: App\Twig\Runtime\UserRuntime
+    autowire: true
     public: false
-    arguments:
-      - '@app.user'
-      - '@danilovl.parameter'
     tags:
       - { name: twig.runtime }
 
-  app.twig.homepage_notify:
+  app.twig.runtime.homepage_notify:
     class: App\Twig\Runtime\HomepageNotifyRuntime
     public: false
     autowire: true
+    tags:
+      - { name: twig.runtime }
+
+  app.twig.runtime.work:
+    class: App\Twig\Runtime\WorkRuntime
+    autowire: true
+    public: false
+    tags:
+      - { name: twig.runtime }
+
+  app.twig.runtime.conversation:
+    class: App\Twig\Runtime\ConversationRuntime
+    autowire: true
+    public: false
+    tags:
+      - { name: twig.runtime }
+
+  app.twig.runtime.task:
+    class: App\Twig\Runtime\TaskRuntime
+    autowire: true
+    public: false
     tags:
       - { name: twig.runtime }

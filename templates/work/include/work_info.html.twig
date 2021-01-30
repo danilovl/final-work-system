@@ -40,14 +40,14 @@
                             {{ 'app.text.work_deadline' | trans() }}:
                         </dt>
                         <dd>
-                            {% if work.getDeadlineDays >= 14 %}
+                            {% if work_deadline_days(work) >= 14 %}
                                 <span class="label label-success"
                                       data-toggle="tooltip"
                                       data-placement="top"
                                       data-original-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
                                                         {{ work.deadline | date('Y-m-d') }}
                                  </span>
-                            {% elseif work.getDeadlineDays <= 14 and work.getDeadlineDays >= 7 %}
+                            {% elseif work_deadline_days(work) <= 14 and work_deadline_days(work) >= 7 %}
                                 <span class="label label-warning"
                                       data-toggle="tooltip"
                                       data-placement="top"
@@ -72,14 +72,14 @@
                                 {{ 'app.text.program_deadline' | trans() }}:
                             </dt>
                             <dd>
-                                {% if  work.getDeadlineProgramDays >= 14 %}
+                                {% if work_deadline_program_days(work) >= 14 %}
                                     <span class="label label-success"
                                           data-toggle="tooltip"
                                           data-placement="top"
                                           data-original-title="{{ 'app.text.more_then_day' | trans({'%day%': 14 }) }}">
                                                             {{ work.deadlineProgram | date('Y-m-d') }}
                                     </span>
-                                {% elseif work.getDeadlineProgramDays <= 14 and work.getDeadlineProgramDays >= 7 %}
+                                {% elseif work_deadline_program_days(work) <= 14 and work_deadline_program_days(work) >= 7 %}
                                     <span class="label label-warning"
                                           data-toggle="tooltip"
                                           data-placement="top"
@@ -105,7 +105,7 @@
             </div>
             <div class="row">
 
-                {% if work.isSupervisor(app_user()) %}
+                {% if is_work_role(work, app_user(), 'isSupervisor') %}
                     <div class="col-lg-7" id="cluster_info">
                         <dl class="dl-horizontal">
                             <dt>
@@ -123,7 +123,7 @@
                 {% endif %}
             </div>
 
-            {% if work.isSupervisor(app_user()) %}
+            {% if is_work_role(work, app_user(), 'isSupervisor') %}
                 {% if work.categories is not empty %}
                     <div class="row">
                         <div class="col-lg-12">
@@ -159,14 +159,14 @@
                             </dt>
                             <dd>
                                 <div class="progress progress-striped active m-b-sm">
-                                    <div style="width: {{ work.getCompleteTaskPercentage(activeTask) }}%;"
+                                    <div style="width: {{ task_work_complete_percentage(work, activeTask) }}%;"
                                          class="progress-bar">
                                     </div>
                                 </div>
                                 <small>
                                     {{ 'app.text.task_completed' | trans() }}
                                     <strong>
-                                        {{ work.getCompleteTaskPercentage(activeTask) }}
+                                        {{ task_work_complete_percentage(work, activeTask) }}
                                         %
                                     </strong>
                                 </small>
@@ -207,7 +207,7 @@
                                                 <i class="fa fa-at"></i> :
                                                 {{ work.supervisor.email }}
                                             </li>
-                                            {% if work.isSupervisor(app_user()) %}
+                                            {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                 {% if  work.supervisor.phone is not empty %}
                                                     <li class="m-top-xs">
                                                         <i class="fa fa-phone user-profile-icon"></i>:
@@ -232,7 +232,7 @@
                                 <div class="col-xs-12 bottom text-center">
                                     <div class="col-xs-12 col-sm-12 emphasis">
                                         {% if  conversation_variation.checker(work, app_user(), work.supervisor) %}
-                                            {% set conversationWithSupervisor = work.checkConversation(app_user(), work.supervisor) %}
+                                            {% set conversationWithSupervisor = check_work_users_conversation(work, app_user(), work.supervisor) %}
                                             {% if conversationWithSupervisor %}
                                                 <a href="{{ path('conversation_detail', { 'id': conversationWithSupervisor.id | hashids_encode }) }}"
                                                    target="_blank"
@@ -285,7 +285,7 @@
                                                     <i class="fa fa-at"></i> :
                                                     {{ work.opponent.email }}
                                                 </li>
-                                                {% if work.isSupervisor(app_user()) %}
+                                                {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                     {% if  work.opponent.phone is not empty %}
                                                         <li class="m-top-xs">
                                                             <i class="fa fa-phone user-profile-icon"></i>:
@@ -310,7 +310,7 @@
                                     <div class="col-xs-12 bottom text-center">
                                         <div class="col-xs-12 col-sm-12 emphasis">
                                             {% if  conversation_variation.checker(work, app_user(), work.opponent) %}
-                                                {% set conversationWithOpponent = work.checkConversation(app_user(), work.opponent) %}
+                                                {% set conversationWithOpponent = check_work_users_conversation(work, app_user(), work.opponent) %}
                                                 {% if conversationWithOpponent %}
                                                     <a href="{{ path('conversation_detail', { 'id': conversationWithOpponent.id | hashids_encode }) }}"
                                                        target="_blank"
@@ -365,7 +365,7 @@
                                                     {{ work.consultant.email }}
                                                 </li>
 
-                                                {% if work.isSupervisor(app_user()) %}
+                                                {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                     {% if  work.consultant.phone is not empty %}
                                                         <li class="m-top-xs">
                                                             <i class="fa fa-phone user-profile-icon"></i>:
@@ -391,7 +391,7 @@
                                     <div class="col-xs-12 bottom text-center">
                                         <div class="col-xs-12 col-sm-12 emphasis">
                                             {% if  conversation_variation.checker(work, app_user(), work.consultant) %}
-                                                {% set conversationWithConsultant = work.checkConversation(app_user(), work.consultant) %}
+                                                {% set conversationWithConsultant = check_work_users_conversation(work, app_user(), work.consultant) %}
                                                 {% if conversationWithConsultant %}
                                                     <a href="{{ path('conversation_detail', { 'id': conversationWithConsultant.id | hashids_encode }) }}"
                                                        target="_blank"

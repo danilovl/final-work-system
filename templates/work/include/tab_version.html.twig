@@ -96,7 +96,7 @@
                             </a>
                         {% endif %}
 
-                        {% if work.isSupervisor(app_user()) or version.isOwner(app_user()) %}
+                        {% if is_work_role(work, app_user(), 'isSupervisor') or version.isOwner(app_user()) %}
                             <a data-toggle="modal"
                                data-target="#modalWindow"
                                class="btn btn-warning btn-xs"

@@ -149,22 +149,15 @@ class Task
 
     public function changeActive(): void
     {
-        if ($this->isActive()) {
-            $this->setActive(false);
-        } else {
-            $this->setActive(true);
-        }
+        $this->setActive(!$this->isActive());
     }
 
     public function changeComplete(): void
     {
-        if ($this->isComplete()) {
-            $this->setComplete(false);
-            $this->setNotifyComplete(false);
-        } else {
-            $this->setComplete(true);
-            $this->setNotifyComplete(true);
-        }
+        $isComplete = !$this->isComplete();
+
+        $this->setComplete($isComplete);
+        $this->setNotifyComplete($isComplete);
     }
 
     public function changeNotifyComplete(): void

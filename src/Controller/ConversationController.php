@@ -13,6 +13,7 @@
 namespace App\Controller;
 
 use App\Exception\ConstantNotFoundException;
+use App\Helper\UserRoleHelper;
 use App\Model\ConversationMessage\{
     ConversationMessageModel,
     ConversationComposeMessageModel
@@ -52,7 +53,7 @@ class ConversationController extends BaseController
         ConversationHelper::getConversationOpposite($conversationParticipants, $user);
         ConversationHelper::usortCzechArray($conversationParticipants);
 
-        if ($user->isSupervisor()) {
+        if (UserRoleHelper::isSupervisor($user)) {
             $conversationParticipants = ConversationHelper::groupConversationsByCategorySorting($conversationParticipants);
         }
 
@@ -196,7 +197,7 @@ class ConversationController extends BaseController
         $conversationVariationService = $this->get('app.conversation_variation');
 
         if ($conversationVariationService->checker($work, $userOne, $userTwo)) {
-            $workConversation = $work->checkConversation($userOne, $userTwo);
+            $workConversation = $this->get('app.conversation')->checkConversation($work, $userOne, $userTwo);
 
             if ($workConversation !== null) {
                 $conversationService = $this->get('app.factory.conversation');

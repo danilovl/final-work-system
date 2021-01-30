@@ -14,7 +14,7 @@ namespace App\EventDispatcher;
 
 use App\Entity\ConversationMessage;
 use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
-use App\EventListener\Events;
+use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConversationEventDispatcherService

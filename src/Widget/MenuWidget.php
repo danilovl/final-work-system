@@ -14,7 +14,7 @@ namespace App\Widget;
 
 use App\Entity\User;
 use App\Menu\MenuItem;
-use App\Services\UserService;
+use App\Service\UserService;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -73,10 +73,9 @@ class MenuWidget extends BaseWidget
                 $transParameters = [];
                 if (isset($item['transchoice'])) {
                     $transParameters = ['%count%' => $item['transchoice']];
-                    $menu->setLabel($this->translator->trans($item['label'], $transParameters));
-                } else {
-                    $menu->setLabel($this->translator->trans($item['label'], $transParameters));
                 }
+
+                $menu->setLabel($this->translator->trans($item['label'], $transParameters));
             }
 
             $path = $item['path'] ?? null;

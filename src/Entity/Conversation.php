@@ -20,7 +20,6 @@ use App\Entity\Traits\{
     CreateUpdateAbleTrait
 };
 use Doctrine\Common\Collections\{
-    Criteria,
     Collection,
     ArrayCollection
 };
@@ -212,48 +211,6 @@ class Conversation
     public function setSystemEvents(Collection $systemEvents): void
     {
         $this->systemEvents = $systemEvents;
-    }
-
-    public function getLastMessage(): ?ConversationMessage
-    {
-        $messages = $this->getMessages();
-
-        if ($messages->count() > 0) {
-            $criteria = Criteria::create()->orderBy([
-                'createdAt' => Criteria::DESC
-            ])->setMaxResults(1);
-
-            return $messages->matching($criteria)[0];
-        }
-
-        return null;
-    }
-
-    public function isParticipant(User $user): bool
-    {
-        $participants = $this->getParticipants();
-
-        foreach ($participants as $participant) {
-            if ($participant->getUser()->getId() === $user->getId()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function getParticipantIds(): array
-    {
-        $participantIds = [];
-        $participants = $this->getParticipants();
-
-        foreach ($participants as $participant) {
-            $participantIds[] = $participant->getUser()->getId();
-        }
-
-        sort($participantIds);
-
-        return $participantIds;
     }
 
     public function getTitle(): string

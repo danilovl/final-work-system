@@ -29,6 +29,7 @@
                                         {% include 'common_part/button/js-switch.html.twig' with {
                                             'dataTargetUrl': path('task_change_all_to_complete_ajax')
                                         } %}
+                                    </span>
                                 </div>
                             {% endif %}
                         </div>
@@ -36,7 +37,7 @@
 
                             {% if tasks is not empty %}
                                 {% include 'task/include/tasks.html.twig' with {
-                                    'isSupervisor': true,
+                                    'isSupervisor': true
                                 } %}
                             {% else %}
                                 {{ 'app.text.no_result' | trans() }}

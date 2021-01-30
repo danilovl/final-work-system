@@ -55,7 +55,7 @@ class EventController extends BaseController
         $form = $this
             ->createForm(CommentForm::class, $eventCommentModel, [
                 'user' => $user,
-                'event' => $event,
+                'event' => $event
             ])
             ->handleRequest($request);
 

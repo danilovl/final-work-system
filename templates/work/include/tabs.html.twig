@@ -26,7 +26,7 @@
     {% endif %}
 
     {% if events is defined and events is not empty %}
-        {% if work.authorSupervisor(app_user()) %}
+        {% if is_work_role(work, app_user(), 'isAuthorSupervisor') %}
             <li role="presentation"
                     {% if activeTab == 'event' %} class="active" {% endif %}
             >

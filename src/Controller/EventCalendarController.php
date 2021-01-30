@@ -34,7 +34,8 @@ class EventCalendarController extends BaseController
 {
     public function reservation(): Response
     {
-        $userWorks = $this->getUser()->getWorkBy(
+        $userWorks = $this->get('app.user_work')->getWorkBy(
+            $this->getUser(),
             WorkUserTypeConstant::AUTHOR,
             null,
             $this->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
@@ -53,7 +54,8 @@ class EventCalendarController extends BaseController
     {
         $user = $this->getUser();
 
-        $userWorks = $user->getWorkBy(
+        $userWorks = $this->get('app.user_work')->getWorkBy(
+            $user,
             WorkUserTypeConstant::SUPERVISOR,
             null,
             $this->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)

@@ -17,11 +17,8 @@ use App\Entity\User;
 
 class SystemEventFacade
 {
-    private SystemEventRepository $systemEventRepository;
-
-    public function __construct(SystemEventRepository $systemEventRepository)
+    public function __construct(private SystemEventRepository $systemEventRepository)
     {
-        $this->systemEventRepository = $systemEventRepository;
     }
 
     public function getUnreadSystemEventsByRecipient(User $user, int $limit = null): array

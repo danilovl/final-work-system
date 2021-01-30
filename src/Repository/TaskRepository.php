@@ -38,7 +38,7 @@ class TaskRepository extends ServiceEntityRepository
     public function allByOwner(User $user): QueryBuilder
     {
         return $this->createQueryBuilder('task')
-            ->innerJoin('task.work', 'work')
+            ->join('task.work', 'work')
             ->where('task.owner = :user')
             ->orderBy('task.createdAt', Criteria::DESC)
             ->setParameter('user', $user);

@@ -12,7 +12,7 @@
 
 namespace App\Model\User;
 
-use App\Services\EntityManagerService;
+use App\Service\EntityManagerService;
 use App\Helper\{
     HashHelper,
     FunctionHelper
@@ -23,15 +23,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFactory extends BaseModelFactory
 {
-    private UserPasswordEncoderInterface $userPasswordEncoder;
-
     public function __construct(
-        EntityManagerService $entityManager,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        private EntityManagerService $entityManager,
+        private UserPasswordEncoderInterface $userPasswordEncoder
     ) {
         parent::__construct($entityManager);
-
-        $this->userPasswordEncoder = $userPasswordEncoder;
     }
 
     public function flushFromModel(

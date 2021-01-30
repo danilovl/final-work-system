@@ -17,7 +17,7 @@ use App\Model\Media\{
     MediaFacade,
     MediaTypeFacade
 };
-use App\Services\EntityManagerService;
+use App\Service\EntityManagerService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DirectoryIterator;
 use Symfony\Component\Console\Command\Command;

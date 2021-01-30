@@ -54,10 +54,7 @@ class ProfileController extends BaseController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $refreshPage = false;
-                if ($userModel->locale !== null && $userModel->locale !== $user->getLocale()) {
-                    $refreshPage = true;
-                }
+                $refreshPage = $userModel->locale !== null && $userModel->locale !== $user->getLocale();
 
                 $this->get('app.factory.user')
                     ->flushFromModel($userModel, $user);
@@ -102,9 +99,7 @@ class ProfileController extends BaseController
                     throw new RuntimeException("FileMimeType don't exist");
                 }
 
-                if ($media === null) {
-                    $media = new Media;
-                }
+                $media = $media ?? new Media;
 
                 $media->setUploadMedia($uploadMedia);
                 $media->setOwner($user);

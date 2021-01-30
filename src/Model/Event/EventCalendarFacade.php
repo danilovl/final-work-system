@@ -12,7 +12,8 @@
 
 namespace App\Model\Event;
 
-use App\Services\EntityManagerService;
+use App\Service\EntityManagerService;
+use App\Service\UserWorkService;
 use Danilovl\HashidsBundle\Services\HashidsService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
@@ -43,6 +44,7 @@ class EventCalendarFacade
     private EventRepository $eventRepository;
 
     public function __construct(
+        private UserWorkService $userWorkService,
         private EntityManagerService $entityManager,
         private RouterInterface $router,
         private HashidsService $hashIds,
@@ -94,7 +96,8 @@ class EventCalendarFacade
                 }
                 break;
             case EventCalendarActionTypeConstant::RESERVATION:
-                $userWorks = $user->getWorkBy(
+                $userWorks = $this->userWorkService->getWorkBy(
+                    $user,
                     WorkUserTypeConstant::AUTHOR,
                     null,
                     $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)

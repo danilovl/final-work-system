@@ -17,11 +17,8 @@ use App\Repository\UserGroupRepository;
 
 class UserGroupFacade
 {
-    private UserGroupRepository $userGroupRepository;
-
-    public function __construct(UserGroupRepository $userGroupRepository)
+    public function __construct(private UserGroupRepository $userGroupRepository)
     {
-        $this->userGroupRepository = $userGroupRepository;
     }
 
     public function queryAll(): Query

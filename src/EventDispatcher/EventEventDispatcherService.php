@@ -17,7 +17,7 @@ use App\Entity\{
     Event,
     Comment
 };
-use App\EventListener\Events;
+use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventEventDispatcherService

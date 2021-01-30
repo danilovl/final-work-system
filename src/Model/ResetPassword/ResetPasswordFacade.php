@@ -21,11 +21,8 @@ use DateTime;
 
 class ResetPasswordFacade
 {
-    private ResetPasswordRepository $resetPasswordRepository;
-
-    public function __construct(ResetPasswordRepository $resetPasswordRepository)
+    public function __construct(private ResetPasswordRepository $resetPasswordRepository)
     {
-        $this->resetPasswordRepository = $resetPasswordRepository;
     }
 
     public function find(int $id): ?ResetPassword

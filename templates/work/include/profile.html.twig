@@ -61,7 +61,7 @@
                     <div class="text-center mtop20">
 
                         {% if conversation_variation.checker(work, app_user(), work.author) %}
-                            {% set conversationWithAuthor = work.checkConversation(work.supervisor, work.author) %}
+                            {% set conversationWithAuthor = check_work_users_conversation(work, work.supervisor, work.author) %}
                             {% if conversationWithAuthor %}
                                 <a href="{{ path('conversation_detail', { 'id': conversationWithAuthor.id | hashids_encode }) }}"
                                    target="_blank"

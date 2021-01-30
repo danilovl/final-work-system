@@ -59,7 +59,6 @@ class MediaUploadListener
         $mediaName = sha1(uniqid((string) mt_rand(), true)) . '.' . $mediaMimeType->getExtension();
 
         $media->setName($media->getName() ?? self::DEFAULT_NAME);
-        $media->setType($em->getReference(MediaType::class, MediaTypeConstant::USER_PROFILE_IMAGE));
         $media->setMediaName($mediaName);
         $media->setMimeType($mediaMimeType);
         $media->setOriginalMediaName($originalMediaName);

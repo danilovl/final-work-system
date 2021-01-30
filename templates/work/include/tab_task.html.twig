@@ -6,8 +6,8 @@
     {% if tasks is defined and tasks is not empty %}
         {% include 'task/include/tasks.html.twig' with {
             'tableTaskId': 'table-task',
-            'isSupervisor': work.isSupervisor(app_user()),
-            'isAuthor': work.isAuthor(app_user()),
+            'isSupervisor': is_work_role(work, app_user(), 'isSupervisor'),
+            'isAuthor': is_work_role(work, app_user(), 'isAuthor'),
             'isWorkTab': true,
         } %}
         <div class="navigation">

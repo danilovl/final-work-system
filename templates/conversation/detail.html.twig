@@ -8,7 +8,7 @@
                     <div class="ibox chat-view">
                         <div class="ibox-title">
                             <small class="pull-right text-muted">
-                                {% set lastMessage = conversation.getLastMessage %}
+                                {% set lastMessage = conversation_last_message(conversation) %}
                                 {% if lastMessage is not empty %}
                                     {{ 'app.text.date_last_message' | trans() }}: {{ lastMessage.createdAt | date }}
                                 {% endif %}

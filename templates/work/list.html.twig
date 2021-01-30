@@ -144,11 +144,11 @@
                                                         <div class="progress progress_sm">
                                                             <div class="progress-bar bg-green"
                                                                  role="progressbar"
-                                                                 data-transitiongoal="{{ work.getCompleteTaskPercentage(activeTask) }}">
+                                                                 data-transitiongoal="{{ task_work_complete_percentage(work, activeTask) }}">
                                                             </div>
                                                         </div>
                                                         <small>
-                                                            {{ work.getCompleteTaskPercentage(activeTask) }}%
+                                                            {{ task_work_complete_percentage(work, activeTask) }}%
                                                         </small>
                                                     </td>
                                                 {% else %}
@@ -165,7 +165,7 @@
                                                         {{ 'app.form.action.show' | trans() }}
                                                     </a>
 
-                                                    {% if work.isSupervisor(app_user()) %}
+                                                    {% if is_work_role(work, app_user(), 'isSupervisor') %}
                                                         <a class="btn btn-warning btn-xs"
                                                            href="{{ path('work_edit', { 'id': work.id | hashids_encode }) }}"
                                                            data-toggle="modal"

@@ -1,50 +1,45 @@
 services:
   app.event_listener.email_notification.base:
-    class: App\EventListener\EmailNotification\BaseEmailNotificationSubscriber
-    arguments:
-      - '@app.facade.user'
-      - '@twig'
-      - '@app.translator'
-      - '@app.factory.email_notification_queue'
-      - '@danilovl.parameter'
+    class: App\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber
+    autowire: true
     public: false
 
   app.event_listener.email_notification.document:
-    class: App\EventListener\EmailNotification\DocumentEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\DocumentEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.event:
-    class: App\EventListener\EmailNotification\EventEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\EventEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.message:
-    class: App\EventListener\EmailNotification\MessageEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\MessageEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.security:
-    class: App\EventListener\EmailNotification\SecurityEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\SecurityEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.task:
-    class: App\EventListener\EmailNotification\TaskEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\TaskEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.user:
-    class: App\EventListener\EmailNotification\UserEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\UserEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.version:
-    class: App\EventListener\EmailNotification\VersionEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\VersionEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true
 
   app.event_listener.email_notification.work:
-    class: App\EventListener\EmailNotification\WorkEmailNotificationSubscriber
+    class: App\EventSubscriber\EmailNotification\WorkEmailNotificationSubscriber
     parent: 'app.event_listener.email_notification.base'
     autoconfigure: true

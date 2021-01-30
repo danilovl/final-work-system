@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class EventScheduleFacade
 {
-    private EventScheduleRepository $eventScheduleRepository;
-
-    public function __construct(EventScheduleRepository $eventScheduleRepository)
+    public function __construct(private EventScheduleRepository $eventScheduleRepository)
     {
-        $this->eventScheduleRepository = $eventScheduleRepository;
     }
 
     public function queryEventSchedulesByOwner(User $user): Query

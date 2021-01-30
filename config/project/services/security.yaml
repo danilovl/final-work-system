@@ -1,10 +1,17 @@
 services:
   #   Authenticator
+  app.authenticator:
+    class: App\Security\Authenticator\AppAuthenticator
+    autowire: true
+
   app.authenticator.api_token:
     class: App\Security\Authenticator\ApiKeyAuthenticator
 
   #   Provider
+  app.provider.user:
+    class: App\Security\Provider\AppUserProvider
+    autowire: true
+
   app.provider.api_key:
     class: App\Security\Provider\ApiKeyUserProvider
-    arguments:
-      - '@app.facade.api.user'
+    autowire: true

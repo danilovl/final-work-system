@@ -13,9 +13,7 @@
 namespace App\Entity;
 
 use DateTime;
-use Exception;
 use App\Constant\TranslationConstant;
-use App\Helper\FunctionHelper;
 use Doctrine\Common\Collections\{
     Criteria,
     Collection,
@@ -142,7 +140,7 @@ class Work
 
     public function __construct()
     {
-        $this->deadline = new DateTime('now');
+        $this->deadline = new DateTime;
         $this->tasks = new ArrayCollection;
         $this->medias = new ArrayCollection;
         $this->categories = new ArrayCollection;
@@ -303,24 +301,6 @@ class Work
         $this->conversations = $conversations;
     }
 
-    /**
-     * @return Collection|EventParticipant[]
-     */
-    public function getEventParticipants(): Collection
-    {
-        return $this->eventParticipants;
-    }
-
-    public function getEvent(): Collection
-    {
-        $events = new ArrayCollection;
-        foreach ($this->getEventParticipants() as $eventParticipant) {
-            $events->add($eventParticipant->getEvent());
-        }
-
-        return $events;
-    }
-
     public function setEventParticipants(Collection $eventParticipants): void
     {
         $this->eventParticipants = $eventParticipants;
@@ -332,147 +312,6 @@ class Work
         $criteriaActive = Criteria::create()->where(Criteria::expr()->eq('active', true));
 
         return $allTask->matching($criteriaActive);
-    }
-
-    public function getCompleteTaskPercentage(Collection $tasks = null): float
-    {
-        if ($tasks === null) {
-            $tasks = $this->getActiveTask();
-        }
-
-        $taskCount = $tasks->count();
-        $completeTasks = 0;
-
-        foreach ($tasks as $task) {
-            if ($task->isComplete()) {
-                $completeTasks++;
-            }
-        }
-
-        return round(($completeTasks / $taskCount) * 100, 0);
-    }
-
-    public function isAuthorSupervisorOpponent(User $user): bool
-    {
-        return $this->isAuthor($user) || $this->isSupervisor($user) || $this->isOpponent($user);
-    }
-
-    public function isAuthorSupervisor(User $user): bool
-    {
-        return ($this->isAuthor($user) || $this->isSupervisor($user));
-    }
-
-    public function isAuthor(User $user): bool
-    {
-        return $this->getAuthor()->getId() === $user->getId();
-    }
-
-    public function isSupervisor(User $user): bool
-    {
-        if ($this->getSupervisor()) {
-            return $this->getSupervisor()->getId() === $user->getId();
-        }
-
-        return false;
-    }
-
-    public function isOpponent(User $user): bool
-    {
-        if ($this->getOpponent()) {
-            return $this->getOpponent()->getId() === $user->getId();
-        }
-
-        return false;
-    }
-
-    public function isConsultant(User $user): bool
-    {
-        if ($this->getConsultant()) {
-            return $this->getConsultant()->getId() === $user->getId();
-        }
-
-        return false;
-    }
-
-    public function getUsers(
-        bool $author = null,
-        bool $supervisor = null,
-        bool $consultant = null,
-        bool $opponent = null
-    ): array {
-        $users = [];
-
-        if ($author === true && $this->getAuthor() !== null) {
-            $users[] = $this->getAuthor();
-        }
-
-        if ($opponent === true && $this->getOpponent() !== null) {
-            $users[] = $this->getOpponent();
-        }
-
-        if ($supervisor === true && $this->getSupervisor() !== null) {
-            $users[] = $this->getSupervisor();
-        }
-
-        if ($consultant === true && $this->getConsultant() !== null) {
-            $users[] = $this->getConsultant();
-        }
-
-        return $users;
-    }
-
-    public function getAllUsers(): array
-    {
-        return $this->getUsers(true, true, true, true);
-    }
-
-    public function isParticipant(User $user): bool
-    {
-        $participants = $this->getAllUsers();
-
-        foreach ($participants as $participant) {
-            if ($participant->getId() === $user->getId()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function checkConversation(
-        User $userOne,
-        User $userTwo
-    ): ?Conversation {
-        $workConversations = $this->getConversations();
-
-        $conversationUserArray = [$userOne->getId(), $userTwo->getId()];
-        if ($workConversations) {
-            /** @var Conversation $workConversation */
-            foreach ($workConversations as $workConversation) {
-                $isCompare = FunctionHelper::compareSimpleTwoArray($workConversation->getParticipantIds(), $conversationUserArray);
-                if ($isCompare) {
-                    return $workConversation;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    public function getDeadlineDays(): int
-    {
-        $now = new DateTime;
-        $diff = (int) $this->getDeadline()->diff($now)->format('%a');
-
-        return $this->getDeadline()->diff($now)->invert ? $diff : -$diff;
-    }
-
-    public function getDeadlineProgramDays(): int
-    {
-        $now = new DateTime;
-        $d = $now->diff($this->getDeadlineProgram())->d;
-
-        return $now->diff($this->getDeadline())->invert ? -$d : $d;
     }
 
     public function __toString(): string

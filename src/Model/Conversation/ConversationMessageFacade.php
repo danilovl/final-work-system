@@ -14,7 +14,7 @@ namespace App\Model\Conversation;
 
 use App\Repository\ConversationMessageRepository;
 use DateTime;
-use App\Services\{
+use App\Service\{
     EntityManagerService,
     ConversationStatusService
 };
@@ -30,17 +30,13 @@ use App\Entity\User;
 
 class ConversationMessageFacade
 {
-    private EntityManagerService $em;
     private ConversationMessageRepository $conversationMessageRepository;
-    private ConversationStatusService $conversationStatusService;
 
     public function __construct(
-        EntityManagerService $entityManager,
-        ConversationStatusService $conversationStatusService
+        private EntityManagerService $em,
+        private ConversationStatusService $conversationStatusService
     ) {
-        $this->em = $entityManager;
-        $this->conversationMessageRepository = $entityManager->getRepository(ConversationMessage::class);
-        $this->conversationStatusService = $conversationStatusService;
+        $this->conversationMessageRepository = $em->getRepository(ConversationMessage::class);
     }
 
     public function find(int $id): ?ConversationMessage

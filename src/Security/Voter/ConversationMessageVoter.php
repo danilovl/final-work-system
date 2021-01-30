@@ -13,6 +13,7 @@
 namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
+use App\Service\ConversationService;
 use App\Entity\{
     User,
     ConversationMessage
@@ -26,6 +27,10 @@ class ConversationMessageVoter extends Voter
     private const SUPPORTS = [
         VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS
     ];
+
+    public function __construct(private ConversationService $conversationService)
+    {
+    }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -58,6 +63,6 @@ class ConversationMessageVoter extends Voter
     {
         $conversation = $conversationMessage->getConversation();
 
-        return $conversation->isParticipant($user) && !$conversationMessage->isOwner($user);
+        return $this->conversationService->isParticipant($conversation, $user) && !$conversationMessage->isOwner($user);
     }
 }

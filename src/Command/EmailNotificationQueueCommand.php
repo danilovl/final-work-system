@@ -15,7 +15,7 @@ namespace App\Command;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueFacade;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
-use App\Services\{
+use App\Service\{
     MailerService,
     EntityManagerService
 };

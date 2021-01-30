@@ -1,42 +1,39 @@
 services:
   app.event_listener.system_notification.base:
-    class: App\EventListener\SystemEvent\BaseSystemEventSubscriber
-    arguments:
-      - '@app.entity_manager'
-      - '@security.helper'
+    class: App\EventSubscriber\SystemEvent\BaseSystemEventSubscriber
     autowire: true
 
   app.event_listener.system_notification.document:
-    class: App\EventListener\SystemEvent\DocumentSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\DocumentSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true
 
   app.event_listener.system_notification.event:
-    class: App\EventListener\SystemEvent\EventSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\EventSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true
 
   app.event_listener.system_notification.message:
-    class: App\EventListener\SystemEvent\MessageSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\MessageSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true
 
   app.event_listener.system_notification.task:
-    class: App\EventListener\SystemEvent\TaskSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\TaskSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true
 
   app.event_listener.system_notification.user:
-    class: App\EventListener\SystemEvent\UserSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\UserSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true
 
   app.event_listener.system_notification.version:
-    class: App\EventListener\SystemEvent\VersionSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\VersionSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true
 
   app.event_listener.system_notification.work:
-    class: App\EventListener\SystemEvent\WorkSystemEventSubscriber
+    class: App\EventSubscriber\SystemEvent\WorkSystemEventSubscriber
     parent: 'app.event_listener.system_notification.base'
     autoconfigure: true

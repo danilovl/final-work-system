@@ -15,7 +15,7 @@ namespace App\EventDispatcher;
 use App\Entity\Work;
 use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\EventDispatcher\GenericEvent\WorkGenericEvent;
-use App\EventListener\Events;
+use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class WorkEventDispatcherService

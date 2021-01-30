@@ -4,6 +4,8 @@ services:
     autowire: true
     public: true
 
+  App\Model\ApiUser\ApiUserFacade: '@app.facade.api.user'
+
   app.facade.article_category:
     class: App\Model\Article\ArticleCategoryFacade
     autowire: true
@@ -109,6 +111,8 @@ services:
     class: App\Model\User\UserFacade
     autowire: true
     public: true
+
+  App\Model\User\UserFacade: '@app.facade.user'
 
   app.facade.work.category:
     class: App\Model\WorkCategory\WorkCategoryFacade

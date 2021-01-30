@@ -63,9 +63,7 @@ class EventAddressController extends BaseController
                 $eventAddressSkype = $this->get('app.facade.event_address')
                     ->getSkypeByOwner($this->getUser());
 
-                if ($eventAddressSkype !== null) {
-                    $eventAddressSkype->setSkype(false);
-                }
+                $eventAddressSkype?->setSkype(false);
             }
 
             $this->get('app.factory.event_address')

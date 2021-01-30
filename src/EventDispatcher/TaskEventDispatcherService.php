@@ -15,7 +15,7 @@ namespace App\EventDispatcher;
 use App\Constant\TaskStatusConstant;
 use App\Entity\Task;
 use App\EventDispatcher\GenericEvent\TaskGenericEvent;
-use App\EventListener\Events;
+use App\EventSubscriber\Events;
 use App\Exception\RuntimeException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

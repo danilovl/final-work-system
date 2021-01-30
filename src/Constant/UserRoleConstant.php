@@ -24,6 +24,7 @@ class UserRoleConstant
     public const OPPONENT = 'ROLE_OPPONENT';
     public const CONSULTANT = 'ROLE_CONSULTANT';
     public const GUEST = 'ROLE_GUEST';
+    public const USER = 'ROLE_USER';
 
     /**
      * @return mixed

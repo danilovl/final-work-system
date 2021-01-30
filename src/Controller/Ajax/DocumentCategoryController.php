@@ -37,8 +37,7 @@ class DocumentCategoryController extends BaseController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.factory.media_category')
-                ->flushFromModel($mediaCategoryModel);
+            $this->get('app.factory.media_category')->flushFromModel($mediaCategoryModel);
 
             return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

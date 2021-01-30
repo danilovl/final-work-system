@@ -12,14 +12,11 @@
 
 namespace App\Model;
 
-use App\Services\EntityManagerService;
+use App\Service\EntityManagerService;
 
 class BaseModelFactory
 {
-    protected EntityManagerService $em;
-
-    public function __construct(EntityManagerService $entityManager)
+    public function __construct(protected EntityManagerService $em)
     {
-        $this->em = $entityManager;
     }
 }

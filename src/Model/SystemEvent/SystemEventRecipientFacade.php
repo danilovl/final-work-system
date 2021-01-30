@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class SystemEventRecipientFacade
 {
-    private SystemEventRecipientRepository $systemEventRecipientRepository;
-
-    public function __construct(SystemEventRecipientRepository $systemEventRecipientRepository)
+    public function __construct(private SystemEventRecipientRepository $systemEventRecipientRepository)
     {
-        $this->systemEventRecipientRepository = $systemEventRecipientRepository;
     }
 
     public function queryRecipientsByUser(User $user): Query

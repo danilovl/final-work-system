@@ -18,11 +18,8 @@ use App\Entity\User;
 
 class WorkDeadlineFacade
 {
-    private WorkRepository $workRepository;
-
-    public function __construct(WorkRepository $workRepository)
+    public function __construct(private WorkRepository $workRepository)
     {
-        $this->workRepository = $workRepository;
     }
 
     public function getWorkDeadlinesBySupervisor(User $user, int $limit = null): ArrayCollection

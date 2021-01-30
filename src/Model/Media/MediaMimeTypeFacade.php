@@ -17,11 +17,8 @@ use App\Repository\MediaMimeTypeRepository;
 
 class MediaMimeTypeFacade
 {
-    private MediaMimeTypeRepository $mediaMimeTypeRepository;
-
-    public function __construct(MediaMimeTypeRepository $mediaMimeTypeRepository)
+    public function __construct(private MediaMimeTypeRepository $mediaMimeTypeRepository)
     {
-        $this->mediaMimeTypeRepository = $mediaMimeTypeRepository;
     }
 
     public function getFormValidationMimeTypes(bool $onlyKey = false): array
