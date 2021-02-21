@@ -49,17 +49,16 @@ class MediaRepository extends ServiceEntityRepository
             ->leftJoin('media.categories', 'categories')->addSelect('categories')
             ->orderBy('media.createdAt', Criteria::DESC);
 
-        if ($users) {
+        if ($users !== null) {
             $queryBuilder
                 ->andWhere(
-                    $queryBuilder->expr()->in('media.owner', ':user')
+                    $queryBuilder->expr()->in('media.owner', ':users')
                 )
-                ->setParameter('user', $users);
+                ->setParameter('users', $users);
         }
 
         if ($criteria !== null) {
             foreach ($criteria as $field => $value) {
-
                 if ($field === 'name' && !empty($value)) {
                     $queryBuilder->andWhere('media.name LIKE :m_name')
                         ->setParameter('m_name', '%' . $value . '%');
@@ -111,7 +110,7 @@ class MediaRepository extends ServiceEntityRepository
             ->orderBy('media.createdAt', Criteria::DESC)
             ->setParameter('user', $user);
 
-        if ($type) {
+        if ($type !== null) {
             $queryBuilder->leftJoin('media.type', 'type')->addSelect('type')
                 ->andWhere('type = :type')
                 ->setParameter('type', $type);

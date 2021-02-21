@@ -16,7 +16,10 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\{
+    Email,
+    NotBlank
+};
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorkUserForm extends AbstractType
@@ -48,7 +51,11 @@ class WorkUserForm extends AbstractType
                 'required' => false
             ])
             ->add('email', TextType::class, [
-                'required' => false
+                'required' => true,
+                'constraints' => [
+                    new NotBlank,
+                    new Email
+                ]
             ]);
     }
 

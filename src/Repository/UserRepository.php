@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use App\Constant\{
     UserRoleConstant,
     WorkUserTypeConstant
@@ -67,7 +68,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $queryBuilder
-            ->orderBy('user.lastname', 'ASC')
+            ->orderBy('user.lastname', Criteria::ASC)
             ->setParameter('supervisor', $user);
 
         if ($workStatus instanceof WorkStatus) {
@@ -94,7 +95,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('author_work is NULL')
             ->andWhere('opponent_work is NULL')
             ->andWhere('consultant_work is NULL')
-            ->orderBy('user.lastname', 'ASC')
+            ->orderBy('user.lastname', Criteria::ASC)
             ->setParameter('user', $user)
             ->setParameter('roleStudent', '%' . UserRoleConstant::STUDENT . '%')
             ->setParameter('roleOpponent', '%' . UserRoleConstant::OPPONENT . '%')
@@ -106,9 +107,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('user')
             ->where('user.roles LIKE :roles')
             ->andWhere('user.enabled = :enable')
-            ->addOrderBy('user.lastname', 'ASC')
-            ->addOrderBy('user.firstname', 'ASC')
-            ->setParameter('roles', '%' . $role . '%')
+            ->addOrderBy('user.lastname', Criteria::ASC)
+            ->addOrderBy('user.firstname', Criteria::ASC)
+            ->setParameter('roles', "%{$role}%")
             ->setParameter('enable', $enable);
     }
 

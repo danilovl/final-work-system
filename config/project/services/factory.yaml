@@ -2,7 +2,7 @@ services:
   app.factory.conversation:
     class: App\Model\Conversation\ConversationFactory
     autowire: true
-    public: true\
+    public: true
 
   App\Model\Conversation\ConversationFactory: '@app.factory.conversation'
 
@@ -85,6 +85,8 @@ services:
     class: App\Model\ResetPassword\ResetPasswordFactory
     autowire: true
     public: true
+
+  App\Model\ResetPassword\ResetPasswordFactory: '@app.factory.reset_password'
 
   app.factory.email_notification_queue:
     class: App\Model\EmailNotificationQueue\EmailNotificationQueueFactory

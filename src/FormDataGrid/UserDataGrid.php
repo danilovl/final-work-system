@@ -10,22 +10,15 @@
  *
  */
 
-namespace App\DataGrid;
+namespace App\FormDataGrid;
 
-use Doctrine\ORM\{
-    QueryBuilder,
-    EntityManager
-};
+use Doctrine\ORM\QueryBuilder;
 use App\Repository\UserRepository;
-use App\Entity\User;
 
 class UserDataGrid
 {
-    private UserRepository $userRepository;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->userRepository = $entityManager->getRepository(User::class);
     }
 
     public function queryBuilderAllByRole(string $userRole): QueryBuilder

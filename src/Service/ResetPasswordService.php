@@ -12,6 +12,7 @@
 
 namespace App\Service;
 
+use Danilovl\ParameterBundle\Services\ParameterService;
 use App\Entity\{
     User,
     ResetPassword
@@ -22,7 +23,6 @@ use App\Exception\{
     InvalidResetPasswordTokenException
 };
 use App\Helper\HashHelper;
-
 use App\Model\ResetPassword\{
     ResetPasswordModel,
     ResetPasswordFacade,
@@ -34,13 +34,18 @@ use DateInterval;
 
 class ResetPasswordService
 {
+    private string $cryptographicallySecureKey;
+    private int $resetRequestLifetime;
+    private int $requestThrottleTime;
+
     public function __construct(
         private ResetPasswordFactory $resetPasswordFactory,
         private ResetPasswordFacade $resetPasswordFacade,
-        private string $cryptographicallySecureKey,
-        private int $resetRequestLifetime,
-        private int $requestThrottleTime
+        private ParameterService $parameterService
     ) {
+        $this->cryptographicallySecureKey = $parameterService->get('reset_password.cryptographically_secure_key');
+        $this->resetRequestLifetime = $parameterService->get('reset_password.reset_request_lifetime');
+        $this->requestThrottleTime = $parameterService->get('reset_password.request_throttle_time');
     }
 
     public function getTokenLifetime(): int

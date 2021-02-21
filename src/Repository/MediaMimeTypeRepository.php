@@ -30,7 +30,7 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
             ->setCacheable(true);
     }
 
-    public function allBy($user, $mediaType = false): QueryBuilder
+    public function allBy(mixed $user, mixed $mediaType = null): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->leftJoin('media_mime_type.medias', 'medias');
@@ -43,7 +43,7 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
                 ->setParameter('user', $user);
         }
 
-        if ($mediaType) {
+        if ($mediaType !== null) {
             if (is_iterable($mediaType)) {
                 $queryBuilder->andWhere('medias.type IN(:mediaType)')
                     ->setParameter('mediaType', $mediaType);

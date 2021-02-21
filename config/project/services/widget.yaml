@@ -27,18 +27,11 @@ services:
     autowire: true
     public: true
     arguments:
-      - '%menu%'
-      - '@app.translator'
-      - '@router'
-      - '@app.user'
-      - '@security.helper'
-      - '@twig'
+      $menuConfig: '%menu%'
     tags:
       - { name: app.widgets, alias: menu }
 
   app.event_subscriber.widget:
     class: App\EventSubscriber\WidgetEventSubscriber
-    arguments:
-      - '@app.widget'
     autoconfigure: true
     autowire: true

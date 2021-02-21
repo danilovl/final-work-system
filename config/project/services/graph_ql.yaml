@@ -1,19 +1,15 @@
 services:
   app.graph_ql.resolver.user:
     class: App\GraphQL\Resolver\UserResolverMap
-    arguments:
-      - '@app.facade.user'
+    autowire: true
 
   app.graph_ql.resolver.work:
     class: App\GraphQL\Resolver\WorkResolverMap
-    arguments:
-      - '@app.facade.work'
-      - '@app.facade.work_status'
+    autowire: true
 
   app.graph_ql.resolver.task:
     class: App\GraphQL\Resolver\TaskResolverMap
-    arguments:
-      - '@app.facade.task'
+    autowire: true
 
   app.graph_ql.resolver.not_doctrine:
     class: App\GraphQL\Resolver\NotDoctrineResolverMap

@@ -31,11 +31,11 @@ class ArticleCategoryRepository extends ServiceEntityRepository
 
         foreach ($roles as $key => $role) {
             if ($key === 0) {
-                $queryBuilder->andWhere("article_category.access LIKE :value_$key");
+                $queryBuilder->andWhere("article_category.access LIKE :value_{$key}");
             } else {
-                $queryBuilder->orWhere("article_category.access LIKE :value_$key");
+                $queryBuilder->orWhere("article_category.access LIKE :value_{$key}");
             }
-            $queryBuilder->setParameter("value_$key", '%' . $role . '%');
+            $queryBuilder->setParameter("value_{$key}", "%{$role}%");
         }
 
         $queryBuilder->andWhere('article_category.active = :active')

@@ -1,8 +1,6 @@
 services:
   app.middleware.ajax.request:
     class: App\EventListener\Middleware\AjaxRequestListener
-    arguments:
-      - "@annotation_reader"
-      - "@app.translator"
+    autowire: true
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}

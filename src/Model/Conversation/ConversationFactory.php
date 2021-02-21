@@ -12,13 +12,7 @@
 
 namespace App\Model\Conversation;
 
-use App\Service\{
-    EntityManagerService,
-    ConversationStatusService,
-    ConversationVariationService
-};
 use App\Model\BaseModelFactory;
-use App\Repository\ConversationRepository;
 use App\Entity\{
     User,
     Work,
@@ -32,21 +26,6 @@ use App\Entity\{
 
 class ConversationFactory extends BaseModelFactory
 {
-    private ConversationRepository $conversationRepository;
-    private ConversationMessageFacade $conversationMessageService;
-
-    public function __construct(
-        private EntityManagerService $entityManager,
-        private ConversationMessageFacade $conversationMessageFacade,
-        private ConversationStatusService $conversationStatusService,
-        private ConversationVariationService $conversationVariationService
-    ) {
-        parent::__construct($entityManager);
-
-        $this->conversationRepository = $this->entityManager->getRepository(Conversation::class);
-        $this->conversationMessageService = $conversationMessageFacade;
-    }
-
     public function createConversation(
         User $owner,
         int $type,
@@ -120,7 +99,7 @@ class ConversationFactory extends BaseModelFactory
         $this->em->flush();
     }
 
-    public function getUser($user)
+    public function getUser(ConversationParticipant|User $user): User
     {
         if ($user instanceof ConversationParticipant) {
             return $user instanceof User ? $user : $user->getUser();

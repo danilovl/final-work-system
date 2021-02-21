@@ -12,6 +12,7 @@
 
 namespace App\Service;
 
+use Danilovl\HashidsBundle\Services\HashidsService;
 use App\Exception\{
     RuntimeException,
     ConstantNotFoundException
@@ -32,13 +33,12 @@ use App\Form\{
     DocumentSearchForm
 };
 use App\Entity\User;
-use Hashids\Hashids;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class DocumentFormService
 {
@@ -46,8 +46,8 @@ class DocumentFormService
 
     public function __construct(
         private FormFactoryInterface $formFactory,
-        private Router $router,
-        private Hashids $hashIds,
+        private RouterInterface $router,
+        private HashidsService $hashIds,
         private UserFacade $userService,
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private MediaCategoryFacade $mediaCategoryFacade

@@ -4,11 +4,10 @@ services:
 
   app.redirect_to_preferred_locale_listener:
     class: App\EventListener\RedirectToPreferredLocaleListener
+    autowire: true
     arguments:
-      - '@router'
-      - '@security.helper'
-      - '%locales%'
-      - '%locale%'
+      $locales: '%locales%'
+      $defaultLocale: '%locale%'
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
@@ -21,13 +20,10 @@ services:
 
   app.translator:
     class: App\Service\TranslatorService
-    arguments:
-      - '@translator'
-      - '@request_stack'
     autowire: true
     public: true
 
-  'App\Service\TranslatorService': '@app.translator'
+  App\Service\TranslatorService: '@app.translator'
 
   app.user_password_encoder:
     class: Symfony\Component\Security\Core\Encoder\UserPasswordEncoder
@@ -36,19 +32,13 @@ services:
 
   app.reset_password:
     class: App\Service\ResetPasswordService
-    arguments:
-      - '@app.factory.reset_password'
-      - '@app.facade.reset_password'
-      - '45679'
-      - 3600
-      - 3600
+    autowire: true
     public: true
 
   app.user:
     class: App\Service\UserService
     public: true
-    arguments:
-      - '@security.token_storage'
+    autowire: true
 
   App\Service\UserService: '@app.user'
 
@@ -91,8 +81,7 @@ services:
 
   app.conversation_status:
     class: App\Service\ConversationStatusService
-    arguments:
-      - '@app.entity_manager'
+    autowire: true
 
   App\Service\ConversationStatusService: '@app.conversation_status'
 
@@ -102,9 +91,7 @@ services:
 
   app.system_event_link_generator:
     class: App\Service\SystemEventLinkGeneratorService
-    arguments:
-      - '@twig'
-      - '@router'
+    autowire: true
     tags:
       - { name: twig.runtime }
 
@@ -112,16 +99,13 @@ services:
     class: App\Service\PaginatorService
     public: true
     shared: false
-    arguments:
-      - '@knp_paginator'
-      - '@danilovl.parameter'
+    autowire: true
+
+  App\Service\PaginatorService: '@app.paginator'
 
   app.work.detail_tab:
     class: App\Service\WorkDetailTabService
-    arguments:
-      - '@app.entity_manager'
-      - '@app.paginator'
-      - '@danilovl.parameter'
+    autowire: true
 
   app.work.list:
     class: App\Service\WorkListService
@@ -130,49 +114,36 @@ services:
   app.seo_page:
     class: App\Service\SeoPageService
     public: true
-    arguments:
-      - '@app.translator'
+    autowire: true
 
   App\Service\SeoPageService: '@app.seo_page'
 
   app.date:
     class: App\Service\DateService
-    arguments:
-      - '@app.translator'
+    autowire: true
 
   app.document_form:
     class: App\Service\DocumentFormService
-    arguments:
-      - '@form.factory'
-      - '@router'
-      - '@danilovl.hashids'
-      - "@app.facade.user"
-      - '@app.facade.media.mime_type'
-      - '@app.facade.media_category'
+    autowire: true
 
   app.entity_manager:
     class: App\Service\EntityManagerService
-    arguments:
-      - '@doctrine.orm.entity_manager'
+    autowire: true
 
   App\Service\EntityManagerService: '@app.entity_manager'
 
   #   ParamConverter
   hashids.converter:
     class: App\EventListener\HashidsParamConverterListener
-    arguments:
-      - '@danilovl.hashids'
-      - '@doctrine'
+    autowire: true
     tags:
       - { name: request.param_converter, priority: 1, converter: hashids.converter }
 
   #  Transformer
   app.transformer.api:
     class: App\Transformer\Api\Transformer
-    arguments:
-      - '@danilovl.parameter'
+    autowire: true
 
   app.password_updater:
     class: App\Service\PasswordUpdater
-    arguments:
-      - '@security.encoder_factory'
+    autowire: true

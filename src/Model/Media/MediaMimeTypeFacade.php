@@ -37,7 +37,7 @@ class MediaMimeTypeFacade
 
     public function getMimeTypesByOwner(
         $user,
-        $mediaType = false,
+        $mediaType = null,
         bool $onlyKey = false
     ): array {
         $mimeTypes = $this->mediaMimeTypeRepository

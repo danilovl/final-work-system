@@ -10,28 +10,22 @@
  *
  */
 
-namespace App\DataGrid;
+namespace App\FormDataGrid;
 
-use Doctrine\ORM\{
-    QueryBuilder,
-    EntityManager
-};
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\QueryBuilder;
 use App\Repository\WorkStatusRepository;
-use App\Entity\WorkStatus;
 
 class WorkStatusDataGrid
 {
-    private WorkStatusRepository $workStatusRepository;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(private WorkStatusRepository $workStatusRepository)
     {
-        $this->workStatusRepository = $entityManager->getRepository(WorkStatus::class);
     }
 
     public function queryBuilder(): QueryBuilder
     {
         return $this->workStatusRepository
             ->createQueryBuilder('status')
-            ->orderBy('status.name', 'ASC');
+            ->orderBy('status.name', Criteria::ASC);
     }
 }

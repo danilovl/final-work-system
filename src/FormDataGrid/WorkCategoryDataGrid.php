@@ -10,25 +10,16 @@
  *
  */
 
-namespace App\DataGrid;
+namespace App\FormDataGrid;
 
-use Doctrine\ORM\{
-    QueryBuilder,
-    EntityManager
-};
+use Doctrine\ORM\QueryBuilder;
 use App\Repository\WorkCategoryRepository;
-use App\Entity\{
-    User,
-    WorkCategory
-};
+use App\Entity\User;
 
 class WorkCategoryDataGrid
 {
-    private WorkCategoryRepository $workCategoryRepository;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(private WorkCategoryRepository $workCategoryRepository)
     {
-        $this->workCategoryRepository = $entityManager->getRepository(WorkCategory::class);
     }
 
     public function queryBuilderWorkCategoriesByOwner(User $user): QueryBuilder

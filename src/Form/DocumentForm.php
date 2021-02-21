@@ -14,7 +14,7 @@ namespace App\Form;
 
 use App\Model\Media\MediaModel;
 use Doctrine\ORM\QueryBuilder;
-use App\DataGrid\MediaCategoryDataGrid;
+use App\FormDataGrid\MediaCategoryDataGrid;
 use App\Form\Type\MediaFileType;
 use App\Entity\MediaCategory;
 use App\Entity\User;

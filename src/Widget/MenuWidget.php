@@ -15,7 +15,7 @@ namespace App\Widget;
 use App\Entity\User;
 use App\Menu\MenuItem;
 use App\Service\UserService;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -29,7 +29,7 @@ class MenuWidget extends BaseWidget
     public function __construct(
         private array $menuConfig,
         private TranslatorInterface $translator,
-        private Router $router,
+        private RouterInterface $router,
         private UserService $userService,
         private Security $security,
         private Environment $environment

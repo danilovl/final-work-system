@@ -10,25 +10,16 @@
  *
  */
 
-namespace App\DataGrid;
+namespace App\FormDataGrid;
 
-use Doctrine\ORM\{
-    QueryBuilder,
-    EntityManager
-};
-use App\Entity\{
-    User,
-    MediaCategory
-};
+use Doctrine\ORM\QueryBuilder;
+use App\Entity\User;
 use App\Repository\MediaCategoryRepository;
 
 class MediaCategoryDataGrid
 {
-    private MediaCategoryRepository $mediaCategoryRepository;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(private MediaCategoryRepository $mediaCategoryRepository)
     {
-        $this->mediaCategoryRepository = $entityManager->getRepository(MediaCategory::class);
     }
 
     public function queryBuilderFindAllByOwner(User $user): QueryBuilder

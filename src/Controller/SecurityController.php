@@ -20,9 +20,9 @@ class SecurityController extends BaseController
 {
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('homepage');
-         }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
 
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -33,7 +33,7 @@ class SecurityController extends BaseController
         ]);
     }
 
-    public function logout()
+    public function logout(): void
     {
         throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }

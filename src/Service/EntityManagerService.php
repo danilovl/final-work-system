@@ -12,11 +12,11 @@
 
 namespace App\Service;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class EntityManagerService
 {
-    public function __construct(private EntityManager $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
     }
 

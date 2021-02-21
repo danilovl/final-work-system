@@ -90,7 +90,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->orderBy('conversation_message.createdAt', Criteria::DESC)
             ->setParameter('conversation', $conversation);
 
-        if ($limit) {
+        if ($limit !== null) {
             $queryBuilder->setMaxResults($limit);
         }
 

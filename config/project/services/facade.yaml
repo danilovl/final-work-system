@@ -57,10 +57,14 @@ services:
     autowire: true
     public: true
 
+  App\Model\Media\MediaCategoryFacade: '@app.facade.media_category'
+
   app.facade.media.mime_type:
     class: App\Model\Media\MediaMimeTypeFacade
     autowire: true
     public: true
+
+  App\Model\Media\MediaMimeTypeFacade: '@app.facade.media.mime_type'
 
   app.facade.media:
     class: App\Model\Media\MediaFacade
@@ -102,6 +106,8 @@ services:
     autowire: true
     public: true
 
+  App\Model\Task\TaskFacade: '@app.facade.task'
+
   app.facade.user_group:
     class: App\Model\UserGroup\UserGroupFacade
     autowire: true
@@ -136,6 +142,8 @@ services:
     autowire: true
     public: true
 
+  App\Model\WorkStatus\WorkStatusFacade: '@app.facade.work_status'
+
   app.facade.event:
     class: App\Model\Event\EventFacade
     autowire: true
@@ -152,6 +160,8 @@ services:
     class: App\Model\ResetPassword\ResetPasswordFacade
     autowire: true
     public: true
+
+  App\Model\ResetPassword\ResetPasswordFacade: '@app.facade.reset_password'
 
   app.facade.email_notification_queue:
     class: App\Model\EmailNotificationQueue\EmailNotificationQueueFacade
