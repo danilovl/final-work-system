@@ -15,7 +15,6 @@ namespace App\EventListener\Middleware;
 use App\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Constant\FlashTypeConstant;
 use App\Exception\AjaxRuntimeException;
-use Doctrine\Common\Annotations\Reader;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -26,10 +25,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AjaxRequestListener
 {
-    public function __construct(
-        private Reader $reader,
-        private TranslatorInterface $translator
-    ) {
+    public function __construct(private TranslatorInterface $translator)
+    {
     }
 
     public function onKernelController(ControllerEvent $event)
@@ -66,7 +63,10 @@ class AjaxRequestListener
         ControllerEvent $event,
         Request $request
     ): void {
-        $attributes = (new ReflectionClass($controller))->getMethod($method)->getAttributes(AjaxRequestMiddlewareAttribute::class);
+        $attributes = (new ReflectionClass($controller))
+            ->getMethod($method)
+            ->getAttributes(AjaxRequestMiddlewareAttribute::class);
+
         foreach ($attributes as $attribute) {
             $this->handleRequest($event, $attribute->newInstance(), $request);
         }
