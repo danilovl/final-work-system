@@ -66,7 +66,6 @@ HELP
             ->getRepository(User::class)
             ->findBy([], ['id' => Criteria::DESC], $maxResults);
 
-
         $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $allUsers);
 
         $bufferedOutput = new BufferedOutput();
