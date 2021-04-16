@@ -66,15 +66,8 @@ HELP
             ->getRepository(User::class)
             ->findBy([], ['id' => Criteria::DESC], $maxResults);
 
-        $usersAsPlainArrays = array_map(fn(User $user) => [
-            $user->getId(),
-            $user->isEnabled(),
-            $user->getFirstName(),
-            $user->getLastName(),
-            $user->getUsername(),
-            $user->getEmail(),
-            implode(', ', $user->getRoles()),
-        ], $allUsers);
+
+        $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $allUsers);
 
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
@@ -87,5 +80,18 @@ HELP
         $output->write($usersAsATable);
 
         return Command::SUCCESS;
+    }
+
+    private function userToArray(User $user): array
+    {
+        return [
+            $user->getId(),
+            $user->isEnabled(),
+            $user->getFirstName(),
+            $user->getLastName(),
+            $user->getUsername(),
+            $user->getEmail(),
+            implode(', ', $user->getRoles())
+        ];
     }
 }
