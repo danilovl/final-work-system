@@ -13,6 +13,7 @@
 namespace App\Command;
 
 use App\Entity\User;
+use App\Service\EntityManagerService;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
@@ -24,13 +25,12 @@ use Symfony\Component\Console\Output\{
     OutputInterface
 };
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Doctrine\ORM\EntityManagerInterface;
 
 class UserListCommand extends Command
 {
     protected static $defaultName = 'app:user-list';
 
-    public function __construct(private EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerService $entityManager)
     {
         parent::__construct();
     }
@@ -56,17 +56,17 @@ the email address specified in the <comment>--send-to</comment> option:
 
 HELP
             )
-            ->addOption('max-results', 'mr', InputOption::VALUE_OPTIONAL, 'Limits the number of users listed', 50);
+            ->addOption('max-result', 'mr', InputOption::VALUE_OPTIONAL, 'Limits the number of users listed', 50);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $maxResults = $input->getOption('max-results');
-        $allUsers = $this->entityManager
+        $maxResult = $input->getOption('max-result');
+        $users = $this->entityManager
             ->getRepository(User::class)
-            ->findBy([], ['id' => Criteria::DESC], $maxResults);
+            ->findBy([], ['id' => Criteria::DESC], $maxResult);
 
-        $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $allUsers);
+        $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $users);
 
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
@@ -75,8 +75,7 @@ HELP
             $usersAsPlainArrays
         );
 
-        $usersAsATable = $bufferedOutput->fetch();
-        $output->write($usersAsATable);
+        $output->write($bufferedOutput->fetch());
 
         return Command::SUCCESS;
     }

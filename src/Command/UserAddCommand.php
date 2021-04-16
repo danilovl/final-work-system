@@ -13,13 +13,12 @@
 namespace App\Command;
 
 use App\Helper\HashHelper;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\EntityManagerService;
 use App\Util\Validator\UserValidator;
 use App\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\{
-    InputOption,
     InputArgument,
     InputInterface
 };
@@ -35,7 +34,7 @@ class UserAddCommand extends Command
     private ?SymfonyStyle $io = null;
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
+        private EntityManagerService $entityManager,
         private UserPasswordEncoderInterface $passwordEncoder,
         private UserValidator $validator
     ) {
@@ -143,8 +142,7 @@ class UserAddCommand extends Command
         $encodedPassword = $this->passwordEncoder->encodePassword($user, $plainPassword);
         $user->setPassword($encodedPassword);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->entityManager->persistAndFlush($user);
 
         $this->io->success(sprintf('User was successfully created: %s (%s)', $user->getUsername(), $user->getEmail()));
 
@@ -163,11 +161,11 @@ class UserAddCommand extends Command
         string $firstName,
         string $lastName
     ): void {
-        $existingUser = $this->entityManager
+        $user = $this->entityManager
             ->getRepository(User::class)
             ->findOneBy(['username' => $username]);
 
-        if ($existingUser !== null) {
+        if ($user !== null) {
             throw new RuntimeException(sprintf('There is already a user registered with the "%s" username.', $username));
         }
 

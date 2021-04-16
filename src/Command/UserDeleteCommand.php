@@ -12,7 +12,7 @@
 
 namespace App\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\EntityManagerService;
 use App\Util\Validator\UserValidator;
 use App\Entity\User;
 use Symfony\Component\Console\Command\Command;
@@ -30,7 +30,7 @@ class UserDeleteCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
+        private EntityManagerService $entityManager,
         private UserValidator $validator
     ) {
         parent::__construct();
@@ -75,7 +75,6 @@ class UserDeleteCommand extends Command
         }
 
         $this->entityManager->remove($user);
-        $this->entityManager->flush();
 
         $this->io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted', $user->getUsername(), $user->getId(), $user->getEmail()));
 
