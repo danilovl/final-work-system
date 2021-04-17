@@ -102,6 +102,13 @@
                     }
                 }
             });
+
+            {% if parameter_get('event_source.widget.top_nav.active') == true %}
+            widgetEventSource("{{ path('widget_data_live_ajax') }}", {
+                'conversation': 'top-nav-unread-conversation-messages',
+                'systemEvent': 'top-nav-unread-system-events'
+            });
+            {% endif %}
         });
 
         $(window).on('scroll', function () {

@@ -33,12 +33,12 @@ class UnreadConversationMessageWidget extends BaseWidget
         $countUnreadConversationMessage = $this->conversationMessageFacade
             ->getTotalUnreadMessagesByUser($user);
 
-        $conversationMessages = $this->conversationMessageFacade
+        $unreadConversationMessages = $this->conversationMessageFacade
             ->getUnreadMessagesByUser($user, self::COUNT_VIEW);
 
         return [
             'countUnreadConversationMessage' => $countUnreadConversationMessage,
-            'unreadConversationMessages' => $conversationMessages,
+            'unreadConversationMessages' => $unreadConversationMessages,
         ];
     }
 

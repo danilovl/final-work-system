@@ -39,7 +39,6 @@ function initSidebar() {
         $NAV_MENU = $('.nav_menu'),
         $FOOTER = $('footer');
 
-// TODO: This is some kind of easy fix, maybe we can improve this
     var setContentHeight = function () {
         // reset height
         $RIGHT_COL.css('min-height', $(window).height());
@@ -659,7 +658,7 @@ function initBackToTop() {
 }
 
 function atob64DecodeUnicode(str) {
-    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+    return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
     }).join(''))
 }
@@ -668,7 +667,7 @@ function conversationEventSource(url, $chat) {
     var eventSource = new EventSource(url);
     eventSource.onmessage = function (event) {
         var data = event.data;
-        if (data.length > 0) {
+        if (data !== null && data !== undefined && data.length > 0) {
             $chat.prepend(atob64DecodeUnicode(data));
             initAjaxChangeStatus();
         }
@@ -711,3 +710,29 @@ function conversationEventSource(url, $chat) {
         });
     };
 })(jQuery);
+
+function widgetEventSource(url, widgetsParam) {
+    let eventSource = new EventSource(url);
+    eventSource.onmessage = function (event) {
+        let eventData = event.data;
+        if (eventData.length === 0) {
+            return;
+        }
+
+        let data = $.parseJSON(event.data);
+        if (data === null || data.length === 0) {
+            return;
+        }
+
+        let widgets = Object.entries(widgetsParam);
+        for (let widget of widgets) {
+            let message = data[widget[0]];
+            if (message === null || message === undefined || message.length === 0) {
+                continue;
+            }
+
+            let id = widget[1];
+            $(`#${id}`).replaceWith(message);
+        }
+    }
+}

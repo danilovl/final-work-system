@@ -6,12 +6,16 @@ services:
     tags:
       - { name: app.widgets, alias: unread_conversation_message }
 
+  App\Widget\UnreadConversationMessageWidget: '@app.widget.unread_conversation_message'
+
   app.widget.unread_system_event:
     class: App\Widget\UnreadSystemEventWidget
     autowire: true
     public: true
     tags:
       - { name: app.widgets, alias: unread_system_event }
+
+  App\Widget\UnreadSystemEventWidget: '@app.widget.unread_system_event'
 
   app.widget.locales:
     class: App\Widget\LocalesWidget

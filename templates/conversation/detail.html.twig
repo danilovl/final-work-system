@@ -109,7 +109,9 @@
 
         $(document).ready(function () {
             initTinymce(locale);
+            {% if parameter_get('event_source.conversation.detail.active') == true %}
             conversationEventSource("{{ path('conversation_live_ajax', {'id': conversation.id | hashids_encode }) }}", $('#chat'));
+            {% endif %}
         });
     </script>
 {% endblock %}

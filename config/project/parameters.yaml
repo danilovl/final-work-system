@@ -10,7 +10,7 @@ parameters:
   domain: '%env(PROJECT_DOMAIN)%'
   system_info:
     name: 'FinalWork System'
-    version: '3.2.0'
+    version: '3.3.0'
   locales: 'en|cs|ru'
   locale: 'cs'
   upload_directory: '%kernel.project_dir%/public/upload/'
@@ -84,3 +84,12 @@ parameters:
     cryptographically_secure_key: '45679'
     reset_request_lifetime: 3600
     request_throttle_time: 3600
+  event_source:
+    conversation:
+      detail:
+        active: true
+        sleep: 60
+    widget:
+      top_nav:
+        active: true
+        sleep: 60

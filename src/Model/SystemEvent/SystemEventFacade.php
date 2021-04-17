@@ -14,6 +14,7 @@ namespace App\Model\SystemEvent;
 
 use App\Repository\SystemEventRepository;
 use App\Entity\User;
+use DateTime;
 
 class SystemEventFacade
 {
@@ -37,6 +38,18 @@ class SystemEventFacade
     {
         return (int) $this->systemEventRepository
             ->countUnreadByRecipient($user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getTotalUnreadSystemEventsAfterDateByRecipient(
+        User $user,
+        DateTime $date
+    ): ?int {
+        return (int) $this->systemEventRepository
+            ->countUnreadByRecipient($user)
+            ->andWhere('system_event.createdAt >= :afterDate')
+            ->setParameter('afterDate', $date)
             ->getQuery()
             ->getSingleScalarResult();
     }

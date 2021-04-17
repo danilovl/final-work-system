@@ -728,13 +728,11 @@ a {
 
 .top_nav .navbar-right {
     margin: 0;
-    width: 70%;
     float: right
 }
 
 .top_nav .navbar-right li {
     display: inline-block;
-    float: right;
     position: static
 }
 
@@ -5530,4 +5528,9 @@ ul.msg_list li .time {
 
 .mt-small {
     margin-top: 10px;
+}
+
+.navbar-nav-right {
+    width: 70%;
+    float: right;
 }

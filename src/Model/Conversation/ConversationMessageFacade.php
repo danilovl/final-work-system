@@ -164,4 +164,20 @@ class ConversationMessageFacade
             ->getQuery()
             ->getResult();
     }
+
+    public function getTotalUnreadMessagesAfterDateByUser(User $user, DateTime $date): int
+    {
+        return (int) $this->conversationMessageRepository
+            ->countMessagesByUserStatus(
+                $user,
+                $this->em->getReference(
+                    ConversationMessageStatusType::class,
+                    ConversationMessageStatusTypeConstant::UNREAD
+                )
+            )
+            ->andWhere('conversation_message.createdAt >= :afterDate')
+            ->setParameter('afterDate', $date)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

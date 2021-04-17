@@ -1,7 +1,7 @@
 parameters:
   widget_group:
     top_nav:
-      - 'menu'
-      - 'unread_conversation_message'
-      - 'unread_system_event'
-      - 'locales'
+        - 'locales'
+        - 'unread_system_event'
+        - 'unread_conversation_message'
+        - 'menu'

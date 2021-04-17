@@ -1,4 +1,4 @@
-<li role="presentation" class="dropdown">
+<li id="top-nav-unread-conversation-messages" role="presentation" class="dropdown">
 	<a href="javascript:"
 	   class="dropdown-toggle info-number"
 	   data-toggle="dropdown"
@@ -13,7 +13,7 @@
             {{ countUnreadConversationMessage }}
         </span>
 	</a>
-	<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+	<ul class="dropdown-menu list-unstyled msg_list" role="menu">
 		{% if countUnreadConversationMessage is not empty %}
 			{% for message in unreadConversationMessages | slice(0, 5) %}
 				<li>

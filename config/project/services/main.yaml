@@ -85,8 +85,12 @@ services:
 
   App\Service\ConversationStatusService: '@app.conversation_status'
 
-  app.conversation_stream:
+  app.stream.conversation:
     class: App\Service\ConversationStreamService
+    autowire: true
+
+  app.stream.widget:
+    class: App\Service\WidgetStreamService
     autowire: true
 
   app.system_event_link_generator:

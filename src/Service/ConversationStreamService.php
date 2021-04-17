@@ -13,6 +13,7 @@
 namespace App\Service;
 
 use App\Model\Conversation\ConversationMessageFacade;
+use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
 use Twig\Environment;
 use App\Entity\{
@@ -25,19 +26,20 @@ class ConversationStreamService
     private ?DateTime $date;
 
     public function __construct(
+        private ParameterService $parameterService,
         private Environment $twig,
         private ConversationMessageFacade $conversationMessageFacade
     ) {
     }
 
-    public function getLastMessage(Conversation $conversation): string
+    private function getLastMessage(Conversation $conversation): ?string
     {
         $this->date = $this->date ?? new DateTime;
 
         /** @var ConversationMessage[] $messages */
         $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate($conversation, $this->date);
 
-        $chatMessageHtml = '';
+        $chatMessageHtml = null;
         foreach ($messages as $message) {
             $chatMessageHtml .= $this->twig->render('conversation/include/chat_message.html.twig', [
                 'message' => $message
@@ -46,17 +48,19 @@ class ConversationStreamService
             $this->date = $message->getCreatedAt();
         }
 
-        return base64_encode($chatMessageHtml);
+        return $chatMessageHtml !== null ? base64_encode($chatMessageHtml) : null;
     }
 
     public function handle(Conversation $conversation): callable
     {
-        return function () use ($conversation): void {
+        $sleepSecond = $this->parameterService->get('event_source.conversation.detail.sleep');
+
+        return function () use ($conversation, $sleepSecond): void {
             while (true) {
                 echo 'data: ' . $this->getLastMessage($conversation) . "\n\n";
                 ob_flush();
                 flush();
-                sleep(3);
+                sleep($sleepSecond);
             }
         };
     }

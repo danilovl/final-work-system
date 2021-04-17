@@ -75,7 +75,7 @@ class ConversationController extends BaseController
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
 
-        $response = new StreamedResponse($this->get('app.conversation_stream')->handle($conversation));
+        $response = new StreamedResponse($this->get('app.stream.conversation')->handle($conversation));
         $response->headers->set('Content-Type', 'text/event-stream');
         $response->headers->set('X-Accel-Buffering', 'no');
         $response->headers->set('Cach-Control', 'no-cache');

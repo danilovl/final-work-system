@@ -1,4 +1,4 @@
-<li role="presentation" class="dropdown">
+<li id="top-nav-unread-system-events" role="presentation" class="dropdown">
 	<a href="javascript:" class="dropdown-toggle info-number" data-toggle="dropdown"
 	   aria-expanded="false">
 		<i class="fa fa-bell-o"></i>
@@ -11,7 +11,7 @@
         	{{ countUnreadSystemEventMessage }}
         </span>
 	</a>
-	<ul id="menu2" class="dropdown-menu list-unstyled msg_list" role="menu">
+	<ul class="dropdown-menu list-unstyled msg_list" role="menu">
 		{% if countUnreadSystemEventMessage is not empty %}
 
 			{% for systemEventRecipient in systemEventRecipients | slice(0, 5) %}

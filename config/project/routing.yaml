@@ -177,6 +177,14 @@ away:
   defaults:
     _locale: '%locale%'
 
+widget:
+  resource: routing/widget.yaml
+  prefix: /{_locale}/widget/
+  requirements:
+    _locale: '%locales%'
+  defaults:
+    _locale: '%locale%'
+
 api_key:
   resource: routing/api/key_work.yaml
   prefix: /api/key/work
