@@ -12,12 +12,12 @@
 
 namespace App\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use InvalidArgumentException;
 use ReflectionClass;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter as BaseDoctrineParamConverter;
 
@@ -44,8 +44,12 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
         ];
     }
 
-    protected function find(string $class, Request $request, array $options, string $name): mixed
-    {
+    protected function find(
+        string $class,
+        Request $request,
+        array $options,
+        string $name
+    ): mixed {
         if ($options['mapping'] || $options['exclude']) {
             return false;
         }

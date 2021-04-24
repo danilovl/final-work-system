@@ -13,7 +13,7 @@
 namespace App\EventListener;
 
 use Danilovl\HashidsBundle\Services\HashidsService;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use LogicException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

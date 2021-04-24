@@ -17,7 +17,7 @@ security:
     ROLE_OPPONENT:    [ROLE_USER]
     ROLE_SUPERVISOR:  [ROLE_USER]
     ROLE_CONSULTANT:  [ROLE_USER]
-    ROLE_ADMIN:       [ROLE_USER]
+    ROLE_ADMIN:       [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
 
   firewalls:
     dev:

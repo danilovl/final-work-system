@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PaginatorService
 {
     public function __construct(
-        private PaginatorInterface $pagination,
+        private PaginatorInterface $paginator,
         private ParameterService $parameterService
     ) {
     }
@@ -39,19 +39,16 @@ class PaginatorService
         $defaultLimitName = 'limit';
 
         if ($options !== null) {
-            $this->pagination->setDefaultPaginatorOptions($options);
-
             if (isset($options['pageParameterName'])) {
                 $defaultPageName = $options['pageParameterName'];
             }
         }
 
-        $pagination = $this->pagination->paginate(
+        return $this->paginator->paginate(
             $target,
             $request->query->getInt($defaultPageName, $page),
-            $request->query->getInt($defaultLimitName, $limit)
+            $request->query->getInt($defaultLimitName, $limit),
+            $options !== null ? $options : []
         );
-
-        return $pagination;
     }
 }

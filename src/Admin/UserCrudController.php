@@ -19,7 +19,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\{
     Action,
     Actions
 };
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
     TextField,
     FormField,
@@ -73,10 +75,18 @@ class UserCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $impersonate = Action::new('impersonate', 'app.admin.label.impersonate')
-            ->linkToRoute('profile_edit', fn(User $user): array => ['_switch_user' => $user->getUsername()]);
+            ->linkToCrudAction('switchUserAction');
 
         return parent::configureActions($actions)
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->add(Crud::PAGE_INDEX, $impersonate);
+    }
+
+    public function switchUserAction(AdminContext $context): RedirectResponse
+    {
+        /** @var User $user */
+        $user = $context->getEntity()->getInstance();
+
+        return $this->redirectToRoute('profile_edit', ['_switch_user' => $user->getUsername()]);
     }
 }

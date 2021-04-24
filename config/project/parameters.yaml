@@ -10,7 +10,7 @@ parameters:
   domain: '%env(PROJECT_DOMAIN)%'
   system_info:
     name: 'FinalWork System'
-    version: '3.3.0'
+    version: '3.3.1'
   locales: 'en|cs|ru'
   locale: 'cs'
   upload_directory: '%kernel.project_dir%/public/upload/'

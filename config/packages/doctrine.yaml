@@ -21,7 +21,7 @@ doctrine:
             type: annotation
             alias: Gedmo
             prefix: Gedmo\Loggable\Entity
-            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity/"
+            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Loggable/Entity/"
             is_bundle: false
         result_cache_driver:
           type: service
