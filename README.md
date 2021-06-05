@@ -1,7 +1,7 @@
 FinalWork Web Application
 ========================
 
-Thesis management system based on Symfony Framework 5.2 
+Thesis management system based on Symfony Framework 5.3 
 
 ![Alt text](/gif/demo.gif?raw=true "Project example")
 
