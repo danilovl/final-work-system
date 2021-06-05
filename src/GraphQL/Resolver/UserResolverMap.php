@@ -25,7 +25,7 @@ class UserResolverMap extends ResolverMap
         $this->userService = $userService;
     }
 
-    protected function map()
+    protected function map(): array
     {
         return [
             'doctrine' => [

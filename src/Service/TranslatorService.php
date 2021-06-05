@@ -20,7 +20,8 @@ class TranslatorService implements TranslatorInterface
 {
     public function __construct(
         private TranslatorInterface $translator,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
+        private string $defaultLocale,
     ) {
     }
 
@@ -29,7 +30,7 @@ class TranslatorService implements TranslatorInterface
         array $parameters = [],
         string $domain = null,
         string $locale = null
-    ) {
+    ): string {
         if (str_contains($id, TranslationConstant::FLASH_START_KEY)) {
             $domain = TranslationConstant::FLASH_DOMAIN;
             $locale = $locale ?? $this->requestStack->getCurrentRequest()->getLocale();
@@ -41,5 +42,10 @@ class TranslatorService implements TranslatorInterface
     public function setLocale(string $locale)
     {
         $this->translator->setLocale($locale);
+    }
+
+    public function getLocale(): string
+    {
+        return $this->defaultLocale;
     }
 }

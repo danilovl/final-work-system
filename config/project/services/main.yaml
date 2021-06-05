@@ -20,13 +20,15 @@ services:
 
   app.translator:
     class: App\Service\TranslatorService
+    arguments:
+      $defaultLocale: '%locale%'
     autowire: true
     public: true
 
   App\Service\TranslatorService: '@app.translator'
 
   app.user_password_encoder:
-    class: Symfony\Component\Security\Core\Encoder\UserPasswordEncoder
+    class: Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher
     autowire: true
     public: true
 

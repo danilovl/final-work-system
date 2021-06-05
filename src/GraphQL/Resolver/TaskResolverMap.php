@@ -25,7 +25,7 @@ class TaskResolverMap extends ResolverMap
         $this->taskService = $taskService;
     }
 
-    protected function map()
+    protected function map(): array
     {
         return [
             'doctrine' => [

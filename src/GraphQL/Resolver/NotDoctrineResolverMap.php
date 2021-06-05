@@ -16,7 +16,7 @@ use Overblog\GraphQLBundle\Resolver\ResolverMap;
 
 class NotDoctrineResolverMap extends ResolverMap
 {
-    protected function map()
+    protected function map(): array
     {
         return [
             'not_doctrine' => [

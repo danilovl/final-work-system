@@ -13,6 +13,7 @@
 namespace App\Controller;
 
 use App\Exception\ConstantNotFoundException;
+use Doctrine\Persistence\ObjectRepository;
 use App\Constant\{
     FlashTypeConstant,
     AjaxJsonTypeConstant
@@ -95,61 +96,48 @@ class BaseController extends AbstractController
         ?array $extraData = null,
         int $statusCode = Response::HTTP_OK
     ): JsonResponse {
-        switch ($type) {
-            case AjaxJsonTypeConstant::CREATE_SUCCESS:
-                $data = [
-                    'valid' => true,
-                    'notifyMessage' => [
-                        FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.create.success')
-                    ]
-                ];
-                break;
-            case AjaxJsonTypeConstant::CREATE_FAILURE:
-                $data = [
-                    'valid' => false,
-                    'notifyMessage' => [
-                        FlashTypeConstant::ERROR => $this->trans('app.flash.form.create.error'),
-                        FlashTypeConstant::WARNING => $this->trans('app.flash.form.create.warning')
-                    ],
-                ];
-                break;
-            case AjaxJsonTypeConstant::SAVE_SUCCESS:
-                $data = [
-                    'valid' => true,
-                    'notifyMessage' => [
-                        FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.save.success'),
-                    ]
-                ];
-                break;
-            case AjaxJsonTypeConstant::SAVE_FAILURE:
-                $data = [
-                    'valid' => false,
-                    'notifyMessage' => [
-                        FlashTypeConstant::ERROR => $this->trans('app.flash.form.save.error'),
-                        FlashTypeConstant::WARNING => $this->trans('app.flash.form.save.warning')
-                    ]
-                ];
-                break;
-            case AjaxJsonTypeConstant::DELETE_SUCCESS:
-                $data = [
-                    'delete' => true,
-                    'notifyMessage' => [
-                        FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.delete.success')
-                    ]
-                ];
-                break;
-            case AjaxJsonTypeConstant::DELETE_FAILURE:
-                $data = [
-                    'delete' => false,
-                    'notifyMessage' => [
-                        FlashTypeConstant::ERROR => $this->trans('app.flash.form.delete.error'),
-                        FlashTypeConstant::WARNING => $this->trans('app.flash.form.delete.warning')
-                    ]
-                ];
-                break;
-            default:
-                throw new ConstantNotFoundException('AjaxJson constant type not found');
-        }
+        $data = match ($type) {
+            AjaxJsonTypeConstant::CREATE_SUCCESS => [
+                'valid' => true,
+                'notifyMessage' => [
+                    FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.create.success')
+                ]
+            ],
+            AjaxJsonTypeConstant::CREATE_FAILURE => [
+                'valid' => false,
+                'notifyMessage' => [
+                    FlashTypeConstant::ERROR => $this->trans('app.flash.form.create.error'),
+                    FlashTypeConstant::WARNING => $this->trans('app.flash.form.create.warning')
+                ],
+            ],
+            AjaxJsonTypeConstant::SAVE_SUCCESS => [
+                'valid' => true,
+                'notifyMessage' => [
+                    FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.save.success'),
+                ]
+            ],
+            AjaxJsonTypeConstant::SAVE_FAILURE => [
+                'valid' => false,
+                'notifyMessage' => [
+                    FlashTypeConstant::ERROR => $this->trans('app.flash.form.save.error'),
+                    FlashTypeConstant::WARNING => $this->trans('app.flash.form.save.warning')
+                ]
+            ],
+            AjaxJsonTypeConstant::DELETE_SUCCESS => [
+                'delete' => true,
+                'notifyMessage' => [
+                    FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.delete.success')
+                ]
+            ],
+            AjaxJsonTypeConstant::DELETE_FAILURE => [
+                'delete' => false,
+                'notifyMessage' => [
+                    FlashTypeConstant::ERROR => $this->trans('app.flash.form.delete.error'),
+                    FlashTypeConstant::WARNING => $this->trans('app.flash.form.delete.warning')
+                ]
+            ],
+            default => throw new ConstantNotFoundException('AjaxJson constant type not found'),
+        };
 
         if (!empty($extraData)) {
             $data = array_merge($data, $extraData);
@@ -176,12 +164,12 @@ class BaseController extends AbstractController
         return $this->get('app.user')->getUser();
     }
 
-    protected function getReference(string $entityName, int $id)
+    protected function getReference(string $entityName, int $id): ?object
     {
         return $this->get('app.entity_manager')->getReference($entityName, $id);
     }
 
-    protected function getRepository(string $entityName)
+    protected function getRepository(string $entityName): ObjectRepository
     {
         return $this->get('app.entity_manager')->getRepository($entityName);
     }

@@ -56,7 +56,7 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        if (!$event->isMasterRequest() || '/' !== $request->getPathInfo()) {
+        if (!$event->isMainRequest() || '/' !== $request->getPathInfo()) {
             return;
         }
 

@@ -33,7 +33,7 @@ class HashidsParamConverterListener extends DoctrineParamConverter
         $this->autowire = true;
     }
 
-    public function apply(Request $request, ParamConverter $configuration): mixed
+    public function apply(Request $request, ParamConverter $configuration): bool
     {
         $exception = null;
 

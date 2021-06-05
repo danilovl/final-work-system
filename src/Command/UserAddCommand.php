@@ -24,7 +24,7 @@ use Symfony\Component\Console\Input\{
 };
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class UserAddCommand extends Command
@@ -35,7 +35,7 @@ class UserAddCommand extends Command
 
     public function __construct(
         private EntityManagerService $entityManager,
-        private UserPasswordEncoderInterface $passwordEncoder,
+        private UserPasswordHasherInterface $userPasswordHasher,
         private UserValidator $validator
     ) {
         parent::__construct();
@@ -139,7 +139,7 @@ class UserAddCommand extends Command
         $user->setRoles(explode(',', $roles));
         $user->setSalt(HashHelper::generateUserSalt());
 
-        $encodedPassword = $this->passwordEncoder->encodePassword($user, $plainPassword);
+        $encodedPassword = $this->userPasswordHasher->hashPassword($user, $plainPassword);
         $user->setPassword($encodedPassword);
 
         $this->entityManager->persistAndFlush($user);

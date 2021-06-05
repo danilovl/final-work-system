@@ -6,6 +6,7 @@ services:
 
   app.authenticator.api_token:
     class: App\Security\Authenticator\ApiKeyAuthenticator
+    autowire: true
 
   #   Provider
   app.provider.user:

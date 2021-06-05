@@ -197,9 +197,9 @@ class ConversationController extends BaseController
         $conversationVariationService = $this->get('app.conversation_variation');
 
         if ($conversationVariationService->checker($work, $userOne, $userTwo)) {
-            $workConversation = $this->get('app.conversation')->checkConversation($work, $userOne, $userTwo);
+            $workConversation = $this->get('app.conversation')->checkWorkUsersConversation($work, $userOne, $userTwo);
 
-            if ($workConversation !== null) {
+            if ($workConversation === null) {
                 $conversationService = $this->get('app.factory.conversation');
                 $conversation = $conversationService->createConversation($userOne, ConversationTypeConstant::WORK, $work);
                 $conversationService->createConversationParticipant($conversation, [$userOne, $userTwo]);

@@ -32,7 +32,7 @@ class WorkResolverMap extends ResolverMap
         $this->workStatusFacade = $workStatusFacade;
     }
 
-    protected function map()
+    protected function map(): array
     {
         return [
             'doctrine' => [

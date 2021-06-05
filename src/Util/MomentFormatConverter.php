@@ -14,7 +14,7 @@ namespace App\Util;
 
 class MomentFormatConverter
 {
-    private static $formatConvertRules = [
+    private static array $formatConvertRules = [
         'yyyy' => 'YYYY',
         'yy' => 'YY',
         'y' => 'YYYY',

@@ -1,9 +1,14 @@
 security:
-#  enable_authenticator_manager: true
+  enable_authenticator_manager: true
 
-  encoders:
-    App\Entity\User:
+  password_hashers:
+    legacy:
       algorithm: sha512
+
+    App\Entity\User:
+      algorithm: sodium
+      migrate_from:
+        - legacy
 
   providers:
     user_provider:
@@ -25,28 +30,23 @@ security:
       security: false
 
     api_key:
-      anonymous: ~
       pattern: ^/api/key
       stateless: false
       provider: api_key_user_provider
-      guard:
-        authenticators:
+      custom_authenticators:
           - app.authenticator.api_token
 
     main:
-      anonymous:  ~
       pattern: ^/(.*)
       lazy: true
       context:  user
       switch_user: { role: ROLE_ADMIN }
       provider: user_provider
-      guard:
-        authenticators:
+      custom_authenticators:
           - app.authenticator
       form_login:
         check_path: security_login
         login_path: security_login
-        csrf_token_generator: security.csrf.token_manager
         default_target_path: homepage
       logout:
         path:  security_logout

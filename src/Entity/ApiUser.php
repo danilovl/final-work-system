@@ -23,6 +23,7 @@ use App\Entity\Traits\{
     CreateUpdateAbleTrait
 };
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -35,7 +36,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
  */
-class ApiUser implements UserInterface
+class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
@@ -91,6 +92,11 @@ class ApiUser implements UserInterface
     public function setApiKey(string $apiKey)
     {
         $this->apiKey = $apiKey;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 
     public function getRoles(): array

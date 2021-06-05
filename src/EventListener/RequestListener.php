@@ -27,7 +27,7 @@ class RequestListener
 
     public function onKernelRequest(RequestEvent $requestEvent): void
     {
-        if (!$requestEvent->isMasterRequest()) {
+        if (!$requestEvent->isMainRequest()) {
             return;
         }
 

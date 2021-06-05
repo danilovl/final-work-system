@@ -80,11 +80,11 @@ class ArticleCategory
         return $this;
     }
 
-    public function addRole($role)
+    public function addRole($role): self
     {
         $role = strtoupper($role);
 
-        if (!\in_array($role, $this->getAccess(), true)) {
+        if (!in_array($role, $this->getAccess(), true)) {
             $this->access[] = $role;
         }
 
@@ -121,7 +121,7 @@ class ArticleCategory
 
     public function hasAccess($role): bool
     {
-        return \in_array(strtoupper($role), $this->getArrayAccess(), true);
+        return in_array(strtoupper($role), $this->getArrayAccess(), true);
     }
 
     public function __toString(): string

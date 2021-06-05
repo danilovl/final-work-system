@@ -12,55 +12,72 @@
 
 namespace App\Security\Authenticator;
 
+use App\Model\ApiUser\ApiUserFacade;
+use App\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
     JsonResponse
 };
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\User\{
-    UserInterface,
-    UserProviderInterface
+use Symfony\Component\Security\Core\Exception\{
+    AuthenticationException,
+    CustomUserMessageAuthenticationException
 };
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\{
+    Passport,
+    PassportInterface
+};
 
-class ApiKeyAuthenticator extends AbstractGuardAuthenticator
+class ApiKeyAuthenticator extends AbstractAuthenticator
 {
     private const CREDENTIALS_KEY = 'api_key';
     private const AUTH_KEY = 'X-AUTH-API-KEY';
+
+    public function __construct(private ApiUserFacade $apiUserFacade)
+    {
+    }
 
     public function supports(Request $request): bool
     {
         return $request->headers->has(self::AUTH_KEY);
     }
 
-    public function getCredentials(Request $request): mixed
+    public function authenticate(Request $request): PassportInterface
+    {
+        $credentials = $this->getCredentials($request);
+
+        $userBadge = new UserBadge('api_user', $this->getUser($credentials));
+        $passwordCredentials = new CustomApiKeyCredentials;
+
+        return new Passport($userBadge, $passwordCredentials);
+    }
+
+    public function getCredentials(Request $request): array
     {
         return [
             self::CREDENTIALS_KEY => $request->headers->get(self::AUTH_KEY)
         ];
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
+    public function getUser(array $credentials): callable
     {
-        $apiKey = $credentials[self::CREDENTIALS_KEY];
-        if ($apiKey === null) {
-            return null;
-        }
+        return function () use ($credentials) {
+            $apiKey = $credentials[self::CREDENTIALS_KEY];
+            if ($apiKey === null) {
+                throw new CustomUserMessageAuthenticationException('Apikey could not be found.');
+            }
 
-        return $userProvider->loadUserByUsername($apiKey);
-    }
-
-    public function checkCredentials($credentials, UserInterface $user): bool
-    {
-        return true;
+            return $this->apiUserFacade->findByApiKey($apiKey);
+        };
     }
 
     public function onAuthenticationSuccess(
         Request $request,
         TokenInterface $token,
-        $providerKey
+        $firewallName
     ): ?Response {
         return null;
     }
@@ -74,21 +91,5 @@ class ApiKeyAuthenticator extends AbstractGuardAuthenticator
         ];
 
         return new JsonResponse($data, Response::HTTP_FORBIDDEN);
-    }
-
-    public function start(
-        Request $request,
-        AuthenticationException $authException = null
-    ): JsonResponse {
-        $data = [
-            'message' => 'Authentication Required'
-        ];
-
-        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
-    }
-
-    public function supportsRememberMe(): bool
-    {
-        return false;
     }
 }

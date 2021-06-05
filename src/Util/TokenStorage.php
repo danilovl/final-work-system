@@ -10,29 +10,30 @@
  *
  */
 
-namespace App\Service;
+namespace App\Util;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class UserService
+class TokenStorage
 {
     public function __construct(private TokenStorageInterface $tokenStorage)
     {
     }
 
-    public function getUser(): ?User
+    public function refreshToken(User $user): void
     {
-        $token = $this->tokenStorage->getToken();
-        if ($token === null) {
-            return null;
-        }
+        $oldToken = $this->tokenStorage->getToken();
 
-        $user = $token->getUser();
-        if (!is_object($user) || !$user instanceof User) {
-            return null;
-        }
+        $token = new UsernamePasswordToken(
+            $user,
+            null,
+            $oldToken->getProviderKey(),
+            $oldToken->getRoleNames()
+        );
 
-        return $user;
+        $this->tokenStorage->setToken($token);
     }
 }
+

@@ -15,13 +15,14 @@ namespace App\Security\Provider;
 use App\Entity\User;
 use App\Model\User\UserFacade;
 use App\Service\EntityManagerService;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\{
     UserInterface,
-    UserProviderInterface
+    UserProviderInterface,
+    PasswordUpgraderInterface
 };
 
-class AppUserProvider implements UserProviderInterface
+class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
     public function __construct(
         private UserFacade $userFacade,
@@ -29,16 +30,29 @@ class AppUserProvider implements UserProviderInterface
     ) {
     }
 
+    public function upgradePassword(User $user, string $newHashedPassword): void
+    {
+        $user->setPassword($newHashedPassword);
+        $user->setSalt(null);
+
+        $this->entityManagerService->flush($user);
+    }
+
+    public function loadUserByIdentifier(string $identifier): UserInterface
+    {
+        return $this->loadUserByUsername($identifier);
+    }
+
     public function loadUserByUsername($username): UserInterface
     {
         $user = $this->userFacade->findUserByUsername($username);
 
-        return $user ?? throw new UsernameNotFoundException;
+        return $user ?? throw new UserNotFoundException;
     }
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        return $this->userFacade->findUserByUsername($user->getUsername());
+        return $this->userFacade->findUserByUsername($user->getUserIdentifier());
     }
 
     public function supportsClass($class): bool

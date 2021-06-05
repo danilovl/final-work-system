@@ -14,11 +14,11 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Model\User\UserModel;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 class PasswordUpdater
 {
-    public function __construct(private EncoderFactoryInterface $encoderFactory)
+    public function __construct(private PasswordHasherFactoryInterface $passwordHasherFactory)
     {
     }
 
@@ -31,11 +31,10 @@ class PasswordUpdater
             return;
         }
 
-        $encoder = $this->encoderFactory->getEncoder($user);
-        $salt = rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '=');
-        $userModel->salt = $salt;
+        $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user);
+        $userModel->salt = '';
 
-        $hashedPassword = $encoder->encodePassword($plainPassword, $userModel->salt);
+        $hashedPassword = $passwordHasher->hash($plainPassword);
         $userModel->password = $hashedPassword;
     }
 }

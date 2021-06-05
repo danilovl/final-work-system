@@ -26,7 +26,11 @@ use Doctrine\Common\Collections\{
     ArrayCollection
 };
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\{
+    UserInterface,
+    LegacyPasswordAuthenticatedUserInterface,
+    PasswordAuthenticatedUserInterface
+};
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -37,7 +41,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @ORM\HasLifecycleCallbacks
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyPasswordAuthenticatedUserInterface
 {
     use TimestampAbleTrait;
 
@@ -392,6 +396,11 @@ class User implements UserInterface
         return $this->id;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
+    }
+
     public function getUsername(): string
     {
         return (string) $this->username;
@@ -404,7 +413,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
@@ -431,12 +440,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return $this->salt;
     }
 
-    public function setSalt(string $salt): void
+    public function setSalt(?string $salt): void
     {
         $this->salt = $salt;
     }
@@ -852,9 +861,9 @@ class User implements UserInterface
         return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTime;
     }
 
-    public function serialize()
+    public function serialize(): string
     {
-        return serialize(array(
+        return serialize([
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -863,7 +872,7 @@ class User implements UserInterface
             $this->id,
             $this->email,
             $this->emailCanonical,
-        ));
+        ]);
     }
 
     public function __toString(): string

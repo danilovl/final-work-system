@@ -19,13 +19,13 @@ use App\Helper\{
 };
 use App\Model\BaseModelFactory;
 use App\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFactory extends BaseModelFactory
 {
     public function __construct(
         private EntityManagerService $entityManager,
-        private UserPasswordEncoderInterface $userPasswordEncoder
+        private UserPasswordHasherInterface $userPasswordHasher
     ) {
         parent::__construct($entityManager);
     }
@@ -81,7 +81,7 @@ class UserFactory extends BaseModelFactory
         $userModel->usernameCanonical = $userModel->username;
         $userModel->roles = [$userModel->role];
         $userModel->plainPassword = FunctionHelper::randomPassword(8);
-        $userModel->password = $this->userPasswordEncoder->encodePassword(
+        $userModel->password = $this->userPasswordHasher->hashPassword(
             $newUser,
             $userModel->plainPassword
         );
