@@ -273,7 +273,7 @@ class Media
 
     private function getUploadRootDir(): string
     {
-        return MediaConstant::SERVER_PATH_TO_PUBLIC_FOLDER. DIRECTORY_SEPARATOR . $this->getUploadDir();
+        return MediaConstant::SERVER_PATH_TO_PUBLIC_FOLDER . DIRECTORY_SEPARATOR . $this->getUploadDir();
     }
 
     public function getMediaSizeFormatted(): string
@@ -281,14 +281,14 @@ class Media
         $size = $this->getMediaSize();
         $power = $size > 0 ? floor(log($size, 1024)) : 0;
 
-        return number_format(
-                $size / (1024 ** $power),
-                2,
-                '.',
-                ','
-            ) .
-            ' ' .
-            FileSizeConstant::FILE_SIZES[$power];
+        $number = number_format(
+            $size / (1024 ** $power),
+            2,
+            '.',
+            ','
+        );
+
+        return sprintf('%s %s', $number, FileSizeConstant::FILE_SIZES[$power]);
     }
 
     public function removeMediaFile(): bool

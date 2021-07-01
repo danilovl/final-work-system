@@ -37,7 +37,7 @@ class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
         $conversation = $systemEventRecipient->getSystemEvent()->getConversation();
         $event = $systemEventRecipient->getSystemEvent()->getEvent();
 
-        $link =  match ($systemEventRecipient->getSystemEvent()->getType()->getId()) {
+        $link = match ($systemEventRecipient->getSystemEvent()->getType()->getId()) {
             SystemEventTypeConstant::WORK_CREATE => $this->twig->render('system_event/work_create.twig', [
                 'user' => $user,
                 'work' => $work

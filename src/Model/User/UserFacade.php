@@ -33,13 +33,6 @@ class UserFacade
         return $this->userRepository->find($id);
     }
 
-    public function findByEmail(string $email): ?User
-    {
-        return $this->userRepository->findOneBy([
-            'email' => $email
-        ]);
-    }
-
     public function getAllUserActiveSupervisors(User $user): ArrayCollection
     {
         $userActiveSupervisors = new ArrayCollection;
@@ -94,7 +87,7 @@ class UserFacade
             ->getQuery();
     }
 
-    public function findUserByUsername(
+    public function findOneByUsername(
         string $username,
         bool $enable = null
     ): ?User {
@@ -104,7 +97,7 @@ class UserFacade
             ->getOneOrNullResult();
     }
 
-    public function findUserByEmail(
+    public function findOneByEmail(
         string $email,
         bool $enable = null
     ): ?User {

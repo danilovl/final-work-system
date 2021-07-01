@@ -89,7 +89,7 @@
                 if (window.automaticModalWindowClose === true) {
                     window.automaticModalWindowClose = false;
                 } else {
-                    var empty = true;
+                    let empty = true;
                     $(":text, :file, select, textarea").each(function () {
                         if ($(this).val() !== "") {
                             empty = false;
@@ -126,10 +126,10 @@
         });
 
         $(document).ajaxError(function (obj, status) {
-            var errors = [];
-            var modalBackdrop = $('.modal-backdrop');
-            var modalWindow = $('#modalWindow');
-            var modalWindowContent = $('#modalWindow .modal-content');
+            let errors = [];
+            let modalBackdrop = $('.modal-backdrop');
+            let modalWindow = $('#modalWindow');
+            let modalWindowContent = $('#modalWindow .modal-content');
 
             errors[403] = '{{ 'app.flash.error.403' | trans([], "flashes") }}';
             errors[404] = '{{ 'app.flash.error.404' | trans([], "flashes") }}';
@@ -150,8 +150,8 @@
         {% for type, messages in app.flashes %}
         {% for message in messages %}
         $(document).ready(function () {
-            var notifyType = '{{ type }}';
-            var notifyText = '{{ message }}';
+            let notifyType = '{{ type }}';
+            let notifyText = '{{ message }}';
             notifyMessage(notifyType, notifyText);
         });
         {% endfor %}

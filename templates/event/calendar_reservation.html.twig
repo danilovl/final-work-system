@@ -76,7 +76,7 @@
 
 {% block javascript %}
     <script>
-        var locale = '{{ app.request.locale }}';
+        let locale = '{{ app.request.locale }}';
 
         function initEventCalendar() {
 
@@ -84,7 +84,7 @@
                 return;
             }
 
-            var start,
+            let start,
                 end;
 
             var calendar = $('#event-calendar').fullCalendar({

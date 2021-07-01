@@ -32,7 +32,7 @@ class SortFunctionHelper
         });
     }
 
-    public static function sortCzechChars($a, $b): int
+    public static function sortCzechChars(string $a, string $b): int
     {
         $a = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $a);
         $b = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $b);
@@ -46,11 +46,9 @@ class SortFunctionHelper
 
     public static function eventParticipantSort(array &$eventParticipantArray): void
     {
-        usort($eventParticipantArray, function ($first, $second) {
-            /** @var EventParticipant $a */
-            /** @var EventParticipant $b */
-            $f = iconv('UTF-8', 'ASCII//TRANSLIT', (string) $first->getUser());
-            $s = iconv('UTF-8', 'ASCII//TRANSLIT', (string) $second->getUser());
+        usort($eventParticipantArray, static function (EventParticipant $first, EventParticipant $second): int {
+            $f = iconv('UTF-8', 'ASCII//TRANSLIT', $first->getUser()->getFullNameDegree());
+            $s = iconv('UTF-8', 'ASCII//TRANSLIT', $second->getUser()->getFullNameDegree());
 
             return self::sortCzechChars($f, $s);
         });

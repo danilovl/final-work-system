@@ -34,7 +34,7 @@ class WorkDetailTabService
     private ?string $activeTab = null;
 
     public function __construct(
-        private EntityManagerService $em,
+        private EntityManagerService $entityManagerService,
         private PaginatorService $paginator,
         private ParameterService $parameterService
     ) {
@@ -110,19 +110,19 @@ class WorkDetailTabService
         $isSupervisor = $user !== null ? WorkRoleHelper::isSupervisor($work, $user) : false;
 
         $queryPagination = match ($tab) {
-            TabTypeConstant::TAB_TASK => $this->em
+            TabTypeConstant::TAB_TASK => $this->entityManagerService
                 ->getRepository(Task::class)
                 ->allByWork($work, $isSupervisor ? false : true)
                 ->getQuery(),
-            TabTypeConstant::TAB_VERSION => $this->em
+            TabTypeConstant::TAB_VERSION => $this->entityManagerService
                 ->getRepository(Media::class)
                 ->allByWork($work)
                 ->getQuery(),
-            TabTypeConstant::TAB_EVENT => $this->em
+            TabTypeConstant::TAB_EVENT => $this->entityManagerService
                 ->getRepository(Event::class)
                 ->allByWork($work)
                 ->getQuery(),
-            TabTypeConstant::TAB_MESSAGE => $this->em
+            TabTypeConstant::TAB_MESSAGE => $this->entityManagerService
                 ->getRepository(ConversationMessage::class)
                 ->allByWorkUser($work, $user)
                 ->getQuery(),

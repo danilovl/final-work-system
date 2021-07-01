@@ -12,13 +12,16 @@
 
 namespace App\Helper;
 
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\{
+    FormError,
+    FormInterface
+};
 
 class FormValidationMessageHelper
 {
     public static function getErrorMessages(FormInterface $form): array
     {
-        $errors = array_map(function ($error): string {
+        $errors = array_map(static function (FormError $error): string {
             return $error->getMessage();
         }, iterator_to_array($form->getErrors()));
 

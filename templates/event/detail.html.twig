@@ -22,10 +22,10 @@
             src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&language={{ app.request.locale }}&region=CS"></script>
 
     <script type="text/javascript">
-        var locale = '{{ app.request.locale }}';
+        let locale = '{{ app.request.locale }}';
 
-        var head = document.getElementsByTagName('head')[0];
-        var insertBefore = head.insertBefore;
+        let head = document.getElementsByTagName('head')[0];
+        let insertBefore = head.insertBefore;
         head.insertBefore = function (newElement, referenceElement) {
             if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
                 return;
@@ -36,15 +36,15 @@
 
         {% if event.address and event.address.existLocation %}
         function googleInitMap() {
-            var myLatLng = new google.maps.LatLng( {{ event.address.latitude }}, {{ event.address.longitude }} );
+            let myLatLng = new google.maps.LatLng( {{ event.address.latitude }}, {{ event.address.longitude }} );
 
 
-            var mapOptions = {
+            let mapOptions = {
                 zoom: 11,
                 center: myLatLng
             };
-            var map = new google.maps.Map(document.getElementById('event-address-map'), mapOptions);
-            var marker = new google.maps.Marker({
+            let map = new google.maps.Map(document.getElementById('event-address-map'), mapOptions);
+            let marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map
             });
@@ -74,8 +74,8 @@
                     editable: false,
                     droppable: false,
                     events: function (start, end, timezone, callback) {
-                        var startDate = start.format("YYYY-MM-DD HH:mm");
-                        var endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
+                        let startDate = start.format("YYYY-MM-DD HH:mm");
+                        let endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
 
                         $.ajax({
                             url: "{{ path('event_detail_events_ajax',{'id' : event.id | hashids_encode}) }}",
@@ -84,7 +84,7 @@
                             dataType: 'json',
                             success: function (response) {
                                 if (response.valid === true) {
-                                    var events = [];
+                                    let events = [];
                                     var respEvents = response.events;
 
                                     $.each($.parseJSON(respEvents), function () {

@@ -45,14 +45,14 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
 
     public function loadUserByUsername($username): UserInterface
     {
-        $user = $this->userFacade->findUserByUsername($username);
+        $user = $this->userFacade->findOneByUsername($username);
 
         return $user ?? throw new UserNotFoundException;
     }
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        return $this->userFacade->findUserByUsername($user->getUserIdentifier());
+        return $this->userFacade->findOneByUsername($user->getUserIdentifier());
     }
 
     public function supportsClass($class): bool

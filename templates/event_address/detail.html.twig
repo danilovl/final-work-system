@@ -129,8 +129,8 @@
             src="https://maps.googleapis.com/maps/api/js?key={{google_maps_key}}&language={{ app.request.locale }}&region=CS">
     </script>
     <script type="text/javascript">
-        var head = document.getElementsByTagName('head')[0];
-        var insertBefore = head.insertBefore;
+        let head = document.getElementsByTagName('head')[0];
+        let insertBefore = head.insertBefore;
         head.insertBefore = function (newElement, referenceElement) {
             if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
                 return;
@@ -140,17 +140,17 @@
 
         function googleInitMap() {
             {% if eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
-            var myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
+            let myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
             {% else %}
-            var myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
+            let myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
             {% endif %}
 
-            var mapOptions = {
+            let mapOptions = {
                 zoom: 11,
                 center: myLatLng
             };
-            var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
-            var marker = new google.maps.Marker({
+            let map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+            let marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map
             });

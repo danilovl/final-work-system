@@ -78,7 +78,7 @@ class AppAuthenticator extends AbstractAuthenticator
                 throw new CustomUserMessageAuthenticationException('Username is empty.');
             }
 
-            $user = $this->userFacade->findUserByUsername($credentials['username']);
+            $user = $this->userFacade->findOneByUsername($credentials['username']);
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException('Username could not be found.');
             }

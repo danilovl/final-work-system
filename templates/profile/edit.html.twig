@@ -290,7 +290,7 @@
 {% block javascript %}
     <script>
         $(document).ready(function () {
-            var locale = '{{ app.request.locale }}';
+            let locale = '{{ app.request.locale }}';
             initTinymce(locale);
             initInputMask();
             $("#app_user_profile_locale").select2({width: '100%'});

@@ -1,9 +1,9 @@
 (function ($, sr) {
-    var debounce = function (func, threshold, execAsap) {
-        var timeout;
+    let debounce = function (func, threshold, execAsap) {
+        let timeout;
 
         return function debounced() {
-            var obj = this, args = arguments;
+            let obj = this, args = arguments;
 
             function delayed() {
                 if (!execAsap)
@@ -29,7 +29,7 @@
 
 // Sidebar
 function initSidebar() {
-    var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
+    let CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
         $BODY = $('body'),
         $MENU_TOGGLE = $('#menu_toggle'),
         $SIDEBAR_MENU = $('#sidebar-menu'),
@@ -39,11 +39,11 @@ function initSidebar() {
         $NAV_MENU = $('.nav_menu'),
         $FOOTER = $('footer');
 
-    var setContentHeight = function () {
+    let setContentHeight = function () {
         // reset height
         $RIGHT_COL.css('min-height', $(window).height());
 
-        var bodyHeight = $BODY.outerHeight(),
+        let bodyHeight = $BODY.outerHeight(),
             footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
             leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
             contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
@@ -56,7 +56,7 @@ function initSidebar() {
 
     $SIDEBAR_MENU.find('a').on('click', function (ev) {
         console.log('clicked - sidebar_menu');
-        var $li = $(this).parent();
+        let $li = $(this).parent();
 
         if ($li.is('.active')) {
             $li.removeClass('active active-sm');
@@ -137,7 +137,7 @@ function countChecked() {
         $(".bulk_action input[name='table_records']").iCheck('uncheck');
     }
 
-    var checkCount = $(".bulk_action input[name='table_records']:checked").length;
+    let checkCount = $(".bulk_action input[name='table_records']:checked").length;
 
     if (checkCount) {
         $('.column-title').hide();
@@ -150,11 +150,11 @@ function countChecked() {
 }
 
 //hover and retain popover when on popover content
-var originalLeave = $.fn.popover.Constructor.prototype.leave;
+let originalLeave = $.fn.popover.Constructor.prototype.leave;
 $.fn.popover.Constructor.prototype.leave = function (obj) {
-    var self = obj instanceof this.constructor ?
+    let self = obj instanceof this.constructor ?
         obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
-    var container, timeout;
+    let container, timeout;
 
     originalLeave.call(this, obj);
 
@@ -211,7 +211,7 @@ function initValidator() {
 
     $('form').submit(function (e) {
         e.preventDefault();
-        var submit = true;
+        let submit = true;
 
         // evaluate the form using generic validaing
         if (!validator.checkAll($(this))) {
@@ -226,7 +226,7 @@ function initValidator() {
 }
 
 function initTinymce(locale, selector) {
-    var defaultSelector = 'textarea';
+    let defaultSelector = 'textarea';
 
     if (selector) {
         defaultSelector = selector;
@@ -284,25 +284,25 @@ function notifyMessage(notify_type, notify_text) {
 }
 
 function showGoogleDocs(id, url) {
-    var ifram = $(id);
+    let ifram = $(id);
 
     if (ifram) {
-        var googleUrl = 'https://docs.google.com/viewer?embedded=true&url=' + url;
+        let googleUrl = 'https://docs.google.com/viewer?embedded=true&url=' + url;
 
         if (ifram.is(':empty')) {
-            var iframe = '<iframe src="' + googleUrl + '" width="100%" height="780" style="border: none;"></iframe>';
+            let iframe = '<iframe src="' + googleUrl + '" width="100%" height="780" style="border: none;"></iframe>';
             ifram.html(iframe);
         }
     }
 }
 
 function showArchiveContent(archiveUrl, idContent, idContentInfo) {
-    var content = $(idContent);
-    var fileContent = $("<ul>");
-    var zipInfo = $(idContentInfo);
+    let content = $(idContent);
+    let fileContent = $("<ul>");
+    let zipInfo = $(idContentInfo);
     content.append(fileContent);
 
-    var promise = new JSZip.external.Promise(function (resolve, reject) {
+    let promise = new JSZip.external.Promise(function (resolve, reject) {
         JSZipUtils.getBinaryContent(archiveUrl, function (err, data) {
             if (err) {
                 reject(err);
@@ -334,14 +334,14 @@ function showArchiveContent(archiveUrl, idContent, idContentInfo) {
 }
 
 function createEditContentAjax(buttonId, close = false, reload = false) {
-    var buttonCreate = $(buttonId),
+    let buttonCreate = $(buttonId),
         loadingIcon = $(buttonCreate.children()[0]),
         form = buttonCreate.parents('form');
 
     buttonCreate.click(function (e) {
         e.preventDefault();
 
-        var data = new FormData(form[0]);
+        let data = new FormData(form[0]);
         buttonCreate.prop('disabled', true);
         loadingIcon.removeClass('hide');
 
@@ -357,11 +357,11 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
             dataType: "json",
             success: function (response) {
                 if (response.valid === false) {
-                    for (var key in response.data) {
+                    for (let key in response.data) {
                         $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
                     }
                 }
-                for (var type in response.notifyMessage) {
+                for (let type in response.notifyMessage) {
                     notifyMessage(type, response.notifyMessage[type]);
                 }
                 if (response.valid === true) {
@@ -394,14 +394,14 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
 }
 
 function createEditContentFileAjax(buttonId, close = false, reload = false) {
-    var buttonCreate = $(buttonId),
+    let buttonCreate = $(buttonId),
         loadingIcon = $(buttonCreate.children()[0]),
         form = buttonCreate.parents('form');
 
     buttonCreate.click(function (e) {
         e.preventDefault();
 
-        var data = new FormData(form[0]);
+        let data = new FormData(form[0]);
         buttonCreate.prop('disabled', true);
         loadingIcon.removeClass('hide');
 
@@ -417,11 +417,11 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
             dataType: "json",
             success: function (response) {
                 if (response.valid === false) {
-                    for (var key in response.data) {
+                    for (let key in response.data) {
                         $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
                     }
                 }
-                for (var type in response.notifyMessage) {
+                for (let type in response.notifyMessage) {
                     notifyMessage(type, response.notifyMessage[type]);
                 }
                 if (response.valid === true) {
@@ -451,7 +451,7 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
 
 function initAjaxChangeStatus() {
     if ($(".js-switch")) {
-        var switch_elements = Array.prototype.slice.call(document.querySelectorAll('.js-switch'))
+        let switch_elements = Array.prototype.slice.call(document.querySelectorAll('.js-switch'))
             .filter(function (item, index) {
                 return item.style.display !== "none"
             });
@@ -464,9 +464,9 @@ function initAjaxChangeStatus() {
 
             if (element.hasAttribute('data-target-url')) {
                 element.onchange = function () {
-                    var method = "POST";
-                    var url = element.getAttribute('data-target-url');
-                    var type = {'type': element.getAttribute('data-target-type')};
+                    let method = "POST";
+                    let url = element.getAttribute('data-target-url');
+                    let type = {'type': element.getAttribute('data-target-type')};
 
                     $.ajax({
                         type: method,
@@ -475,11 +475,11 @@ function initAjaxChangeStatus() {
                         timeout: 10000,
                         success: function (obj) {
                             if (obj.valid === false) {
-                                for (var key in obj.data) {
+                                for (let key in obj.data) {
                                     $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + obj.data[key] + '</div>');
                                 }
                             }
-                            for (var type in obj.notifyMessage) {
+                            for (let type in obj.notifyMessage) {
                                 notifyMessage(type, obj.notifyMessage[type]);
                             }
                         }
@@ -491,20 +491,20 @@ function initAjaxChangeStatus() {
 }
 
 function initAjaxDeleteContent() {
-    var delete_elements = Array.prototype.slice.call(document.querySelectorAll('.delete-element'));
+    let delete_elements = Array.prototype.slice.call(document.querySelectorAll('.delete-element'));
     if (delete_elements.length > 0) {
         delete_elements.forEach(function (element) {
             element.onclick = function (e) {
                 e.preventDefault();
 
-                var method = "POST";
-                var url = element.getAttribute('data-delete-target-url');
-                var row = $('tr').filter('[data-delete-row="' + element.getAttribute('data-delete-target-row') + '"]');
-                var modalWindow = $('.modal');
-                var modalBackdrop = $('.modal-backdrop');
+                let method = "POST";
+                let url = element.getAttribute('data-delete-target-url');
+                let row = $('tr').filter('[data-delete-row="' + element.getAttribute('data-delete-target-row') + '"]');
+                let modalWindow = $('.modal');
+                let modalBackdrop = $('.modal-backdrop');
 
                 element.disabled = true;
-                var loadingIcon = element.childNodes[1];
+                let loadingIcon = element.childNodes[1];
                 loadingIcon.classList.remove("hide");
 
                 window.automaticModalWindowClose = true;
@@ -520,7 +520,7 @@ function initAjaxDeleteContent() {
                                 $(row).remove();
                             }, 1000);
                         }
-                        for (var type in obj.notifyMessage) {
+                        for (let type in obj.notifyMessage) {
                             notifyMessage(type, obj.notifyMessage[type]);
                         }
                     }
@@ -546,7 +546,7 @@ function initAjaxDeleteContent() {
 
 function initJsSwitch(selector = '.js-switch') {
     if ($(selector)) {
-        var elems = Array.prototype.slice.call(document.querySelectorAll(selector));
+        let elems = Array.prototype.slice.call(document.querySelectorAll(selector));
         elems.forEach(function (html) {
             new Switchery(html, {
                 color: '#26B99A',
@@ -599,7 +599,7 @@ function initFlat() {
 
 function initHideShow() {
     $('.collapse-link').on('click', function () {
-        var $BOX_PANEL = $(this).closest('.x_panel'),
+        let $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
             $BOX_CONTENT = $BOX_PANEL.find('.x_content');
 
@@ -617,7 +617,7 @@ function initHideShow() {
     });
 
     $('.close-link').click(function () {
-        var $BOX_PANEL = $(this).closest('.x_panel');
+        let $BOX_PANEL = $(this).closest('.x_panel');
 
         $BOX_PANEL.remove();
     });
@@ -639,8 +639,8 @@ function changeCalendarDate(selector, date) {
 }
 
 function backToTop() {
-    var scrollTrigger = 100;
-    var scrollTop = $(window).scrollTop();
+    let scrollTrigger = 100;
+    let scrollTop = $(window).scrollTop();
     if (scrollTop > scrollTrigger) {
         $('#back-to-top').addClass('show');
     } else {
@@ -664,9 +664,9 @@ function atob64DecodeUnicode(str) {
 }
 
 function conversationEventSource(url, $chat) {
-    var eventSource = new EventSource(url);
+    let eventSource = new EventSource(url);
     eventSource.onmessage = function (event) {
-        var data = event.data;
+        let data = event.data;
         if (data !== null && data !== undefined && data.length > 0) {
             $chat.prepend(atob64DecodeUnicode(data));
             initAjaxChangeStatus();
@@ -677,7 +677,7 @@ function conversationEventSource(url, $chat) {
 (function ($) {
     $.fn.tableFix = function () {
         return this.each(function () {
-            var $this = $(this),
+            let $this = $(this),
                 $t_fixed;
 
             function init() {
@@ -694,7 +694,7 @@ function conversationEventSource(url, $chat) {
             }
 
             function scrollFixed() {
-                var offset = $(this).scrollTop(),
+                let offset = $(this).scrollTop(),
                     tableOffsetTop = $this.offset().top,
                     tableOffsetBottom = tableOffsetTop + $this.height() - $this.find("thead").height();
                 if (offset < tableOffsetTop || offset > tableOffsetBottom) {

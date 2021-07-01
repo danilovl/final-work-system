@@ -12,6 +12,8 @@
 
 namespace App\Helper;
 
+use App\Constant\PlatformConstant;
+
 class FunctionHelper
 {
     public static function compareSimpleTwoArray(array $one, array $two): bool
@@ -43,9 +45,11 @@ class FunctionHelper
         return implode($pass);
     }
 
-    public static function sanitizeFileName(string $dangerousFilename, string $platform = 'Unix'): string
-    {
-        if (in_array(strtolower($platform), ['unix', 'linux'])) {
+    public static function sanitizeFileName(
+        string $dangerousFilename,
+        string $platform = PlatformConstant::UNIX
+    ): string {
+        if (in_array(strtolower($platform), [PlatformConstant::UNIX, PlatformConstant::LINUX])) {
             $dangerousCharacters = [' ', '"', "'", '&', '/', "\\", '?', '#'];
         } else {
             return $dangerousFilename;

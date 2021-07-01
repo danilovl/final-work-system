@@ -34,7 +34,7 @@ use Symfony\Component\Form\FormInterface;
 class WorkListService
 {
     public function __construct(
-        private EntityManagerService $em,
+        private EntityManagerService $entityManagerService,
         private UserWorkService $userWorkService
     ) {
     }
@@ -125,16 +125,14 @@ class WorkListService
                 ->where(
                     Criteria::expr()->eq(
                         'status',
-                        $this->em->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE))
+                        $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE))
                 );
             $works = $works->matching($criteria);
         }
 
         $collator = new Collator('cs_CZ.UTF-8');
         $iterator = $works->getIterator();
-        $iterator->uasort(function ($first, $second) use ($collator) {
-            /** @var Work $first */
-            /** @var Work $second */
+        $iterator->uasort(static function (Work $first, Work $second) use ($collator): bool|int {
             $f = $first->getAuthor()->getLastname();
             $s = $second->getAuthor()->getLastname();
 

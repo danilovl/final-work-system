@@ -34,21 +34,21 @@ class ResetChangePasswordForm extends AbstractType
                 'first_options' => [
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Please enter a password',
+                            'message' => 'Please enter a password'
                         ]),
                         new Length([
                             'min' => 6,
                             'minMessage' => 'Your password should be at least {{ limit }} characters',
-                            'max' => 4096,
+                            'max' => 4096
                         ]),
                     ],
-                    'label' => 'New password',
+                    'label' => 'New password'
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'label' => 'Repeat Password'
                 ],
                 'invalid_message' => 'The password fields must match.',
-                'mapped' => false,
+                'mapped' => false
             ]);
     }
 

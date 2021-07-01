@@ -10,11 +10,11 @@
 						<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 					{% endfor %}
 
-					{{ form_start(requestForm, {'attr': {'class': 'fos_user_resetting_request'}} ) }}
+					{{ form_start(form, {'attr': {'class': 'fos_user_resetting_request'}} ) }}
 					<h1>{{ 'app.form.label.new_password' | trans }}</h1>
 					<div>
-						{{ form_label(requestForm.email, 'app.form.label.email') }}
-						{{ form_widget(requestForm.email, {'attr': {'class': 'form-control', 'placeholder': 'app.form.label.email'}} ) }}
+						{{ form_label(form.email, 'app.form.label.email') }}
+						{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'app.form.label.email'}} ) }}
 					</div>
 					<div>
 						<input class="btn btn-default submit"
@@ -35,7 +35,7 @@
 							<p>©{{ "now"|date("Y") }}</p>
 						</div>
 					</div>
-					{{ form_end(requestForm) }}
+					{{ form_end(form) }}
 				</section>
 			</div>
 		</div>

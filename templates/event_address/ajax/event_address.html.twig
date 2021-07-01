@@ -78,7 +78,7 @@
 </div>
 
 <script>
-    var locale = '{{ app.request.locale }}';
+    let locale = '{{ app.request.locale }}';
 
     $(document).ready(function () {
         initTinymce(locale);
@@ -86,8 +86,8 @@
         createEditContentAjax('#event_address_action');
         createEditContentAjax('#event_address_action_close', true);
 
-        var head = document.getElementsByTagName('head')[0];
-        var insertBefore = head.insertBefore;
+        let head = document.getElementsByTagName('head')[0];
+        let insertBefore = head.insertBefore;
         head.insertBefore = function (newElement, referenceElement) {
             if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
                 return;
@@ -95,24 +95,24 @@
             insertBefore.call(head, newElement, referenceElement);
         };
 
-        var street = document.getElementById('event_address_street');
-        var inputLatitude = document.getElementById('event_address_latitude');
-        var inputLongitude = document.getElementById('event_address_longitude');
-        var geocoder = new google.maps.Geocoder();
+        let street = document.getElementById('event_address_street');
+        let inputLatitude = document.getElementById('event_address_latitude');
+        let inputLongitude = document.getElementById('event_address_longitude');
+        let geocoder = new google.maps.Geocoder();
 
         {% if eventAddress is defined and eventAddress.latitude is not empty and eventAddress.longitude is not empty %}
-        var myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
+        let myLatLng = new google.maps.LatLng( {{ eventAddress.latitude }}, {{ eventAddress.longitude }} );
         {% else %}
-        var myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
+        let myLatLng = new google.maps.LatLng(50.0712572, 14.4092035);
         {% endif %}
 
         function googleInitMap() {
-            var mapOptions = {
+            let mapOptions = {
                 zoom: 11,
                 center: myLatLng
             };
-            var map = new google.maps.Map(document.getElementById('google-map-ajax'), mapOptions);
-            var marker = new google.maps.Marker({
+            let map = new google.maps.Map(document.getElementById('google-map-ajax'), mapOptions);
+            let marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
                 title: 'Hello World!'
@@ -120,8 +120,8 @@
 
             google.maps.event.addListener(map, "click", function (event) {
                 marker.setPosition(event.latLng);
-                var latitude = event.latLng.lat();
-                var longitude = event.latLng.lng();
+                let latitude = event.latLng.lat();
+                let longitude = event.latLng.lng();
                 inputLatitude.value = latitude;
                 inputLongitude.value = longitude;
 

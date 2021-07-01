@@ -43,7 +43,7 @@ class UserController extends BaseController
             $email = $userModel->email;
             $username = $userModel->username;
 
-            if ($userFacade->findUserByUsername($username) || $userFacade->findUserByEmail($email)) {
+            if ($userFacade->findOneByUsername($username) || $userFacade->findOneByEmail($email)) {
                 return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
                     'data' => FormValidationMessageHelper::getErrorMessages($form)
                 ]);

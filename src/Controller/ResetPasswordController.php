@@ -13,8 +13,6 @@
 namespace App\Controller;
 
 use App\Constant\FlashTypeConstant;
-use App\Entity\User;
-use App\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Exception\ResetPasswordExceptionInterface;
 use App\Form\{
     ResetChangePasswordForm,
@@ -39,14 +37,14 @@ class ResetPasswordController extends BaseController
         }
 
         return $this->render('reset_password/request.html.twig', [
-            'requestForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
     public function checkEmail(): Response
     {
         if (!$this->getSession()->get('reset_password_check_email')) {
-            return $this->redirectToRoute('app_reset_password_forgot_request');
+            return $this->redirectToRoute('reset_password_forgot_request');
         }
 
         return $this->render('reset_password/check_email.html.twig', [
@@ -75,13 +73,13 @@ class ResetPasswordController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->get('app.reset_password')->removeResetRequest($token);
 
-            $encodedPassword = $this->get('app.user_password_encoder')->encodePassword(
+            $encodedPassword = $this->get('app.user_password_encoder')->hashPassword(
                 $user,
                 $form->get('plainPassword')->getData()
             );
 
             $user->setPassword($encodedPassword);
-            $this->flushEntity($encodedPassword);
+            $this->flushEntity($user);
 
             $this->cleanSessionAfterReset();
 
@@ -95,16 +93,14 @@ class ResetPasswordController extends BaseController
 
     private function processSendingPasswordResetEmail(string $email): RedirectResponse
     {
-        $user = $this->getRepository(User::class)->findOneBy([
-            'email' => $email
-        ]);
+        $user = $this->get('app.facade.user')->findOneByEmail($email, true);
 
         $this->getSession()->set('reset_password_check_email', true);
 
         if (!$user) {
             $this->addFlashTrans(FlashTypeConstant::ERROR, 'Bad email');
 
-            return $this->redirectToRoute('app_reset_password_forgot_request');
+            return $this->redirectToRoute('reset_password_forgot_request');
         }
 
         try {
@@ -112,7 +108,7 @@ class ResetPasswordController extends BaseController
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlashTrans(FlashTypeConstant::ERROR, $this->trans($e->getReason()));
 
-            return $this->redirectToRoute('app_reset_password_forgot_request');
+            return $this->redirectToRoute('reset_password_forgot_request');
         }
 
         $this->get('app.event_dispatcher.security')->onResetPasswordTokenCreate(
@@ -120,7 +116,7 @@ class ResetPasswordController extends BaseController
             $this->get('app.reset_password')->getTokenLifetime()
         );
 
-        return $this->redirectToRoute('app_reset_password_check_email');
+        return $this->redirectToRoute('reset_password_check_email');
     }
 
     private function cleanSessionAfterReset(): void

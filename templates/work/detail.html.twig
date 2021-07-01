@@ -58,8 +58,8 @@
 {% block javascript %}
     <script>
         $(document).ready(function () {
-            var fixedTopInfo = $('#work-info-fixed');
-            var mainWorkInfo = $('#work-main-info').offset().top;
+            let fixedTopInfo = $('#work-info-fixed');
+            let mainWorkInfo = $('#work-main-info').offset().top;
             $(window).scroll(function () {
                 if ($(window).scrollTop() > mainWorkInfo) {
                     fixedTopInfo.removeClass('hide');
@@ -74,22 +74,22 @@
             }
 
             function showRemaining(deadline, id) {
-                var now = new Date();
-                var distance = deadline - now;
-                var second = 1000;
-                var minute = second * 60;
-                var hour = minute * 60;
-                var day = hour * 24;
+                let now = new Date();
+                let distance = deadline - now;
+                let second = 1000;
+                let minute = second * 60;
+                let hour = minute * 60;
+                let day = hour * 24;
 
-                var element = document.getElementById(id);
+                let element = document.getElementById(id);
                 if (distance < 0) {
                     clearInterval(id);
                     element.innerHTML = 'EXPIRED!';
                     return;
                 }
 
-                var days = Math.floor(distance / day);
-                var hours = Math.floor((distance % day) / hour);
+                let days = Math.floor(distance / day);
+                let hours = Math.floor((distance % day) / hour);
                 var minutes = Math.floor((distance % hour) / minute);
                 var seconds = Math.floor((distance % minute) / second);
 

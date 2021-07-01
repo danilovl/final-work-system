@@ -104,7 +104,7 @@
 {% block javascript %}
 	<script>
         $(document).ready(function () {
-            var locale = '{{ app.request.locale }}';
+            let locale = '{{ app.request.locale }}';
             initTinymce(locale);
         });
 	</script>

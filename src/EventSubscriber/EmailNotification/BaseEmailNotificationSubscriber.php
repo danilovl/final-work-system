@@ -72,7 +72,7 @@ class BaseEmailNotificationSubscriber
             return;
         }
 
-        $userTo = $this->userFacade->findUserByEmail($to);
+        $userTo = $this->userFacade->findOneByEmail($to);
         if ($userTo && !$userTo->isEnabledEmailNotification()) {
             return;
         }

@@ -3,11 +3,13 @@
     <div id="version-content-info-{{ version.id | hashids_encode }}"></div>
 
     <script>
-        var archiveUrl = '{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}';
-        var idContent = "#version-content-{{ version.id | hashids_encode }}";
-        var idContentInfo = "version-content-info-{{ version.id | hashids_encode }}";
+        {
+            let archiveUrl = '{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}';
+            let idContent = "#version-content-{{ version.id | hashids_encode }}";
+            let idContentInfo = "version-content-info-{{ version.id | hashids_encode }}";
 
-        showArchiveContent(archiveUrl, idContent, idContentInfo)
+            showArchiveContent(archiveUrl, idContent, idContentInfo);
+        }
     </script>
 
 {% elseif version.mimeType.extension != 'zip' and version.mimeType.extension != 'rar' %}

@@ -12,7 +12,11 @@
 
 namespace App\EventListener;
 
-use App\Service\{SeoPageService, UserService, EntityManagerService};
+use App\Service\{
+    UserService,
+    SeoPageService,
+    EntityManagerService
+};
 use DateTime;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 

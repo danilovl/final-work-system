@@ -21,6 +21,8 @@ use Throwable;
 
 class SystemInfoCollector extends DataCollector
 {
+    public const NAME_COLLECTOR = 'final_work_info';
+
     public function __construct(private array $systemInfo)
     {
     }
@@ -42,7 +44,7 @@ class SystemInfoCollector extends DataCollector
 
     public function getName(): string
     {
-        return 'final_work_info';
+        return self::NAME_COLLECTOR;
     }
 
     public function getSystemName(): string

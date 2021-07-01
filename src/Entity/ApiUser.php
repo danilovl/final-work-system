@@ -58,7 +58,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->rules = new ArrayCollection();
+        $this->rules = new ArrayCollection;
     }
 
     public function getName(): string

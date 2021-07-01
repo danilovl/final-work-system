@@ -142,9 +142,9 @@
 
 {% block javascript %}
     <script>
-        var locale = '{{ app.request.locale }}';
-        var startForm = $('#event_start');
-        var endForm = $('#event_end');
+        let locale = '{{ app.request.locale }}';
+        let startForm = $('#event_start');
+        let endForm = $('#event_end');
 
         function initEventCalendar(locale) {
 
@@ -152,7 +152,7 @@
                 return;
             }
 
-            var calendar = $('#event-calendar').fullCalendar({
+            let calendar = $('#event-calendar').fullCalendar({
                     header: {
                         left: 'prev,next today',
                         center: 'title',
@@ -176,8 +176,8 @@
                         endForm.val(end.format("YYYY-MM-DD HH:mm"));
                     },
                     eventClick: function (event, jsEvent, view) {
-                        var eventDetailButton = $('#event-detail');
-                        var eventDeleteButton = $('#event-delete');
+                        let eventDetailButton = $('#event-detail');
+                        let eventDeleteButton = $('#event-delete');
 
                         $('#modal-title').html(event.title.replace(/\n/g, "<br>"));
                         eventDetailButton.attr('href', '');
@@ -191,9 +191,9 @@
                         $('#event-detail-modal').modal();
                     },
                     eventDrop: function (event, delta, revertFunc) {
-                        var start = event.start.format("YYYY-MM-DD HH:mm");
-                        var end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
-                        var url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
+                        let start = event.start.format("YYYY-MM-DD HH:mm");
+                        let end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
+                        let url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
                         url = url.replace('Ynvr2lgdAJ', event.id);
 
                         $.ajax({
@@ -206,7 +206,7 @@
                                     revertFunc();
                                 }
 
-                                for (var type in response.notifyMessage) {
+                                for (let type in response.notifyMessage) {
                                     notifyMessage(type, response.notifyMessage[type]);
                                 }
                             },
@@ -216,7 +216,7 @@
                         });
                     },
                     eventResize: function (event, delta, revertFunc) {
-                        var start = event.start.format("YYYY-MM-DD HH:mm");
+                        let start = event.start.format("YYYY-MM-DD HH:mm");
                         var end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
                         var url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
                         url = url.replace('Ynvr2lgdAJ', event.id);
