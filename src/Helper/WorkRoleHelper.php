@@ -31,7 +31,7 @@ class WorkRoleHelper
 
     public static function isAuthor(Work $work, User $user): bool
     {
-        return $work->getAuthor()->getId() === $user->getId();
+        return $work->getAuthor()?->getId() === $user->getId();
     }
 
     public static function isSupervisor(Work $work, User $user): bool

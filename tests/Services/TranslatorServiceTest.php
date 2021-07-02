@@ -12,7 +12,7 @@
 
 namespace App\Tests\Services;
 
-use App\Services\TranslatorService;
+use App\Service\TranslatorService;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

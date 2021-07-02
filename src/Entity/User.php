@@ -662,7 +662,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         return $this->authorWorks;
     }
 
-    public function setAuthorWorks($authorWorks): void
+    public function setAuthorWorks(Collection $authorWorks): void
     {
         $this->authorWorks = $authorWorks;
     }

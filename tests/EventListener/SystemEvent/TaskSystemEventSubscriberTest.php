@@ -12,7 +12,7 @@
 
 namespace App\Tests\EventListener\SystemEvent;
 
-use App\EventListener\SystemEvent\TaskSystemEventSubscriber;
+use App\EventSubscriber\SystemEvent\TaskSystemEventSubscriber;
 
 class TaskSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {

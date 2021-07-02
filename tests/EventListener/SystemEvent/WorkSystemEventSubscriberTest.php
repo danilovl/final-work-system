@@ -12,10 +12,21 @@
 
 namespace App\Tests\EventListener\SystemEvent;
 
-use App\EventListener\SystemEvent\WorkSystemEventSubscriber;
+use App\EventSubscriber\SystemEvent\WorkSystemEventSubscriber;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class WorkSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected string $classSubscriber = WorkSystemEventSubscriber::class;
+
+    protected function setUp(): void
+    {
+        $kernel = self::bootKernel();
+        $this->dispatcher = new EventDispatcher;
+        $this->eventSubscriber = new $this->classSubscriber(
+            $kernel->getContainer()->get('app.entity_manager'),
+            $kernel->getContainer()->get('app.work')
+        );
+    }
 }
 

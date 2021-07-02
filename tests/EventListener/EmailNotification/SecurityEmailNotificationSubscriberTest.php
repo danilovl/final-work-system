@@ -12,7 +12,7 @@
 
 namespace App\Tests\EventListener\EmailNotification;
 
-use App\EventListener\EmailNotification\SecurityEmailNotificationSubscriber;
+use App\EventSubscriber\EmailNotification\SecurityEmailNotificationSubscriber;
 
 class SecurityEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
 {

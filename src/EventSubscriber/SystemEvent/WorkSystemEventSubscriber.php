@@ -30,8 +30,8 @@ use App\Entity\User;
 class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private WorkService $workService,
-        protected EntityManagerService $em
+        protected EntityManagerService $em,
+        private WorkService $workService
     ) {
         parent::__construct($em);
     }

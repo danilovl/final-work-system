@@ -12,7 +12,6 @@
 
 namespace App\Tests\EventListener\EmailNotification;
 
-
 use App\Tests\EventListener\BaseEventSubscriber;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

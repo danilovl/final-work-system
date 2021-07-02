@@ -12,8 +12,12 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\User;
+use App\Entity\{
+    User,
+    Media
+};
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -38,10 +42,25 @@ class UserTest extends TestCase
         yield [1, 'setId', 'getId'];
         yield ['First name', 'setFirstname', 'getFirstname'];
         yield ['Last name', 'setLastname', 'getLastname'];
-        yield [new DateTime('now'), 'setLastLogin', 'getLastLogin'];
+        yield [new DateTime, 'setLastLogin', 'getLastLogin'];
         yield ['test@test.test', 'setEmail', 'getEmail'];
         yield [true, 'setEnabled', 'isEnabled'];
-        yield ['asdakj@KLldjla2jd', 'setSalt', 'getSalt'];
+        yield ['test@test.com', 'setSalt', 'getSalt'];
         yield [null, 'setLocale', 'getLocale'];
+        yield ['username', 'setUsername', 'getUserIdentifier'];
+        yield [null, 'setSalt', 'getSalt'];
+        yield ['en', 'setLocale', 'getLocale'];
+        yield [null, 'setLocale', 'getLocale'];
+        yield ['888-888-888', 'setPhone', 'getPhone'];
+        yield [null, 'setPhone', 'getPhone'];
+        yield ['token', 'setToken', 'getToken'];
+        yield [null, 'setToken', 'getToken'];
+        yield ['username-canonical', 'setUsernameCanonical', 'getUsernameCanonical'];
+        yield [null, 'setUsernameCanonical', 'getUsernameCanonical'];
+        yield [new ArrayCollection, 'setAuthorWorks', 'getAuthorWorks'];
+        yield [new ArrayCollection, 'setEventsOwner', 'getEventsOwner'];
+        yield [new ArrayCollection, 'setComments', 'getComments'];
+        yield [new ArrayCollection, 'setGroups', 'getGroups'];
+        yield [new class extends Media {}, 'setProfileImage', 'getProfileImage'];
     }
 }

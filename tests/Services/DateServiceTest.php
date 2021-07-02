@@ -12,7 +12,7 @@
 
 namespace App\Tests\Services;
 
-use App\Services\DateService;
+use App\Service\DateService;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;

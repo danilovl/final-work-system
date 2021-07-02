@@ -24,7 +24,7 @@ use App\Repository\{
     WorkRepository,
     ConversationRepository
 };
-use App\Services\EntityManagerService;
+use App\Service\EntityManagerService;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

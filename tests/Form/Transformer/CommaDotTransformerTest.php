@@ -10,8 +10,9 @@
  *
  */
 
-namespace App\Form\Transformer;
+namespace App\Tests\Form\Transformer;
 
+use App\Form\Transformer\CommaDotTransformer;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
