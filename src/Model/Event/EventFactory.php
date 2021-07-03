@@ -24,7 +24,7 @@ class EventFactory extends BaseModelFactory
         $event = $event ?? new Event;
         $event = $this->fromModel($event, $eventModel);
 
-        $this->em->persistAndFlush($event);
+        $this->entityManagerService->persistAndFlush($event);
 
         return $event;
     }

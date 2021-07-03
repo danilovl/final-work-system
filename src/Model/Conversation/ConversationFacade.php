@@ -42,14 +42,14 @@ class ConversationFacade
     private ConversationRepository $conversationRepository;
 
     public function __construct(
-        private EntityManagerService $em,
+        private EntityManagerService $entityManagerService,
         private ConversationMessageFacade $conversationMessageFacade,
         private ConversationStatusService $conversationStatusService,
         private ConversationVariationService $conversationVariationService,
         private ConversationEventDispatcherService $conversationEventDispatcherService,
         private ConversationFactory $conversationFactory
     ) {
-        $this->conversationRepository = $this->em->getRepository(Conversation::class);
+        $this->conversationRepository = $this->entityManagerService->getRepository(Conversation::class);
     }
 
     public function queryConversationsByUser(User $user): Query
@@ -78,7 +78,7 @@ class ConversationFacade
 
         $workArray = $this->conversationVariationService->getWorkConversationsByUser(
             $user,
-            $this->em->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
         );
 
         /** @var Work $work */
@@ -105,7 +105,7 @@ class ConversationFacade
 
                 $newConversation->setName($work->getTitle());
                 $newConversation->setWork($work);
-                $newConversation->setType($this->em->getReference(ConversationType::class, ConversationTypeConstant::WORK));
+                $newConversation->setType($this->entityManagerService->getReference(ConversationType::class, ConversationTypeConstant::WORK));
                 $newConversation->setParticipants($participants);
 
                 if (!in_array($newConversation, $conversationArray, true)) {
@@ -163,7 +163,7 @@ class ConversationFacade
                 ConversationMessageStatusTypeConstant::UNREAD
             );
 
-            $this->em->clear();
+            $this->entityManagerService->clear();
 
             $message = $this->conversationMessageFacade
                 ->find($conversationMessage->getId());
@@ -172,6 +172,7 @@ class ConversationFacade
                 ->onConversationMessageCreate($message);
         } else {
             if (is_array($modelConversation)) {
+                /** @var Conversation $modelConversation */
                 $modelConversation = $modelConversation[0];
             }
 
@@ -227,7 +228,7 @@ class ConversationFacade
                     ConversationMessageStatusTypeConstant::UNREAD
                 );
 
-                $this->em->clear();
+                $this->entityManagerService->clear();
             }
         }
     }

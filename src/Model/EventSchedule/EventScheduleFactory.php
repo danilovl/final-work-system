@@ -59,7 +59,7 @@ class EventScheduleFactory extends BaseModelFactory
             $endDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
             $event->setEnd(new DateTime($endDate));
 
-            $this->em->persistAndFlush($event);
+            $this->entityManagerService->persistAndFlush($event);
         }
     }
 
@@ -70,7 +70,7 @@ class EventScheduleFactory extends BaseModelFactory
         $eventSchedule = $eventSchedule ?? new EventSchedule;
         $eventSchedule = $this->fromModel($eventSchedule, $eventAddressModel);
 
-        $this->em->persistAndFlush($eventSchedule);
+        $this->entityManagerService->persistAndFlush($eventSchedule);
 
         return $eventSchedule;
     }

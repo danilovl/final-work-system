@@ -12,6 +12,10 @@
 
 namespace App\Controller;
 
+use App\DataTransferObject\Repository\{
+    WorkData,
+    WorkStatusData
+};
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\User\UserModel;
 use App\Constant\{
@@ -172,15 +176,28 @@ class UserController extends BaseController
 
         if ($getUserWorkAndStatus === true) {
             foreach ($pagination as $paginationUser) {
-                $paginationUserWorks = $this->get('app.facade.work')
-                    ->getWorksByAuthorSupervisorStatus($paginationUser, $user, $type, $workStatus);
+
+                $workData = WorkData::createFromArray([
+                    'user' => $paginationUser,
+                    'supervisor' => $user,
+                    'type' => $type,
+                    'workStatus' => $workStatus
+                ]);
+
+                $paginationUserWorks = $this->get('app.facade.work')->getWorksByAuthorSupervisorStatus($workData);
 
                 if ($works->get($paginationUser->getId()) === null) {
                     $works->set($paginationUser->getId(), $paginationUserWorks);
                 }
 
-                $workStatusCount = $this->get('app.facade.work_status')
-                    ->getCountByUser($paginationUser, $user, $type, $workStatus);
+                $workStatusData = WorkStatusData::createFromArray([
+                    'user' => $paginationUser,
+                    'supervisor' => $user,
+                    'type' => $type,
+                    'workStatus' => $workStatus
+                ]);
+
+                $workStatusCount = $this->get('app.facade.work_status')->getCountByUser($workStatusData);
 
                 if ($userStatusWorkCounts->get($paginationUser->getId()) === null) {
                     $userStatusWorkCounts->set($paginationUser->getId(), $workStatusCount);

@@ -31,7 +31,7 @@ use App\Entity\User;
 class EventParticipantFacade
 {
     public function __construct(
-        private EntityManagerService $em,
+        private EntityManagerService $entityManagerService,
         private UserWorkService $userWorkService
     ) {
     }
@@ -44,7 +44,7 @@ class EventParticipantFacade
             $user,
             WorkUserTypeConstant::SUPERVISOR,
             null,
-            $this->em->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
         );
         $eventParticipantArray = [];
 

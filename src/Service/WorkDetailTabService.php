@@ -107,12 +107,12 @@ class WorkDetailTabService
         Work $work,
         ?User $user = null
     ): Query {
-        $isSupervisor = $user !== null ? WorkRoleHelper::isSupervisor($work, $user) : false;
+        $isSupervisor = $user !== null && WorkRoleHelper::isSupervisor($work, $user);
 
         $queryPagination = match ($tab) {
             TabTypeConstant::TAB_TASK => $this->entityManagerService
                 ->getRepository(Task::class)
-                ->allByWork($work, $isSupervisor ? false : true)
+                ->allByWork($work, !$isSupervisor)
                 ->getQuery(),
             TabTypeConstant::TAB_VERSION => $this->entityManagerService
                 ->getRepository(Media::class)

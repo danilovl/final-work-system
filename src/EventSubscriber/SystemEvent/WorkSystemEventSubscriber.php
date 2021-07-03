@@ -30,10 +30,10 @@ use App\Entity\User;
 class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected EntityManagerService $em,
+        protected EntityManagerService $entityManagerService,
         private WorkService $workService
     ) {
-        parent::__construct($em);
+        parent::__construct($entityManagerService);
     }
 
     public static function getSubscribedEvents(): array
@@ -52,7 +52,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
         $systemEvent->setOwner($work->getSupervisor());
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::WORK_CREATE)
         );
 
@@ -69,7 +69,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
             $systemEvent->addRecipient($recipient);
         }
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onWorkEdit(WorkGenericEvent $event): void
@@ -79,7 +79,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
         $systemEvent->setOwner($work->getSupervisor());
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::WORK_EDIT)
         );
 
@@ -99,7 +99,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
             $systemEvent->addRecipient($recipientConsultant);
         }
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onWorkAuthorEdit(WorkGenericEvent $event): void
@@ -108,7 +108,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($work->getSupervisor());
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::USER_EDIT)
         );
         $systemEvent->setWork($work);
@@ -117,6 +117,6 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $recipientAuthor->setRecipient($work->getAuthor());
         $systemEvent->addRecipient($recipientAuthor);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 }

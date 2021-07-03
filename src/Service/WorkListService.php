@@ -132,11 +132,12 @@ class WorkListService
 
         $collator = new Collator('cs_CZ.UTF-8');
         $iterator = $works->getIterator();
-        $iterator->uasort(static function (Work $first, Work $second) use ($collator): bool|int {
-            $f = $first->getAuthor()->getLastname();
-            $s = $second->getAuthor()->getLastname();
 
-            return $collator->compare($f, $s);
+        $iterator->uasort(static function (Work $first, Work $second) use ($collator): bool|int {
+            return $collator->compare(
+                $first->getAuthor()->getLastname(),
+                $second->getAuthor()->getLastname()
+            );
         });
 
         return $iterator;

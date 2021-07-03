@@ -17,10 +17,8 @@ use App\Twig\Runtime\{
     TaskRuntime,
     WorkRuntime,
     AwayRuntime,
-    ConversationRuntime,
-    HomepageNotifyRuntime
+    ConversationRuntime
 };
-use Danilovl\ParameterBundle\Services\ParameterService;
 use Twig\{
     TwigFilter,
     TwigFunction
@@ -30,7 +28,7 @@ use Twig\Extension\AbstractExtension;
 
 class TwigExtension extends AbstractExtension
 {
-    public function __construct(private ParameterService $parameterService)
+    public function __construct()
     {
     }
 
@@ -46,7 +44,6 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('check_work_users_conversation', [ConversationRuntime::class, 'checkWorkUsersConversation']),
             new TwigFunction('conversation_last_message', [ConversationRuntime::class, 'getLastMessage']),
             new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink']),
-            new TwigFunction('homepage_notify', [HomepageNotifyRuntime::class, 'renderNotify'], ['is_safe' => ['html']])
         ];
     }
 

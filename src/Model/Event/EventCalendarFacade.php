@@ -12,6 +12,7 @@
 
 namespace App\Model\Event;
 
+use App\DataTransferObject\Repository\EventData;
 use App\Service\EntityManagerService;
 use App\Service\UserWorkService;
 use Danilovl\HashidsBundle\Services\HashidsService;
@@ -66,8 +67,14 @@ class EventCalendarFacade
 
         switch ($type) {
             case EventCalendarActionTypeConstant::MANAGE:
+                $mediaData = EventData::createFromArray([
+                    'user' => $user,
+                    'startDate' => $startDate,
+                    'endDate' => $endDate
+                ]);
+
                 $userEvents = $this->eventRepository
-                    ->allByOwner($user, $startDate, $endDate)
+                    ->allByOwner($mediaData)
                     ->getQuery()
                     ->getResult();
 
@@ -116,13 +123,15 @@ class EventCalendarFacade
 
                 /** @var User $supervisor */
                 foreach ($supervisors as $supervisor) {
+                    $mediaData = EventData::createFromArray([
+                        'user' => $supervisor,
+                        'startDate' => $startDate,
+                        'endDate' => $endDate,
+                        'eventType' => $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION)
+                    ]);
+
                     $supervisorAppointments = $this->eventRepository
-                        ->allByOwner(
-                            $supervisor,
-                            $startDate,
-                            $endDate,
-                            $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION)
-                        )
+                        ->allByOwner($mediaData)
                         ->getQuery()
                         ->getResult();
 

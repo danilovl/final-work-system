@@ -12,6 +12,7 @@
 
 namespace App\Model\Work;
 
+use App\DataTransferObject\Repository\WorkData;
 use App\Entity\{
     User,
     Work
@@ -44,14 +45,10 @@ class WorkFacade
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorSupervisorStatus(
-        User $user,
-        User $supervisor,
-        string $type,
-        $workStatus = null
-    ): array {
+    public function getWorksByAuthorSupervisorStatus(WorkData $workData): array
+    {
         return $this->workRepository
-            ->allByUserStatus($user, $supervisor, $type, $workStatus)
+            ->allByUserStatus($workData)
             ->getQuery()
             ->getResult();
     }
@@ -59,13 +56,10 @@ class WorkFacade
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorStatus(
-        User $user,
-        string $type,
-        $workStatus = null
-    ): array {
+    public function getWorksByAuthorStatus(WorkData $workData): array
+    {
         return $this->workRepository
-            ->allByUserStatus($user, null, $type, $workStatus)
+            ->allByUserStatus($workData)
             ->getQuery()
             ->getResult();
     }

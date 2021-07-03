@@ -39,3 +39,13 @@ services:
     class: App\EventSubscriber\WidgetEventSubscriber
     autoconfigure: true
     autowire: true
+
+  app.widget.user_profile_information:
+    class: App\Widget\UserProfileInformationNotifyWidget
+    autowire: true
+    public: true
+
+  app.widget.work_deadline_information:
+    class: App\Widget\WorkDeadlineNotifyWidget
+    autowire: true
+    public: true

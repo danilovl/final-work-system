@@ -24,7 +24,7 @@ class CommentFactory extends BaseModelFactory
         $comment = $comment ?? new Comment;
         $comment = $this->fromModel($comment, $commentModel);
 
-        $this->em->persistAndFlush($comment);
+        $this->entityManagerService->persistAndFlush($comment);
 
         return $comment;
     }

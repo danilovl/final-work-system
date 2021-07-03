@@ -15,117 +15,52 @@ namespace App\Service;
 use App\Constant\SystemEventTypeConstant;
 use App\Entity\SystemEventRecipient;
 use App\Exception\ConstantNotFoundException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
 {
-    public function __construct(
-        private Environment $twig,
-        private UrlGeneratorInterface $urlGenerator
-    ) {
+    public function __construct(private Environment $twig)
+    {
     }
 
     public function generateLink(SystemEventRecipient $systemEventRecipient): string
     {
-        $user = $systemEventRecipient->getSystemEvent()->getOwner();
-        $work = $systemEventRecipient->getSystemEvent()->getWork();
-        $task = $systemEventRecipient->getSystemEvent()->getTask();
-        $version = $systemEventRecipient->getSystemEvent()->getMedia();
-        $document = $systemEventRecipient->getSystemEvent()->getMedia();
-        $conversation = $systemEventRecipient->getSystemEvent()->getConversation();
-        $event = $systemEventRecipient->getSystemEvent()->getEvent();
+        $systemEvent = $systemEventRecipient->getSystemEvent();
 
-        $link = match ($systemEventRecipient->getSystemEvent()->getType()->getId()) {
-            SystemEventTypeConstant::WORK_CREATE => $this->twig->render('system_event/work_create.twig', [
-                'user' => $user,
-                'work' => $work
-            ]),
-            SystemEventTypeConstant::WORK_EDIT => $this->twig->render('system_event/work_edit.html.twig', [
-                'user' => $user,
-                'work' => $work
-            ]),
-            SystemEventTypeConstant::USER_EDIT => $this->twig->render('system_event/user_edit.html.twig', [
-                'user' => $user
-            ]),
-            SystemEventTypeConstant::TASK_CREATE => $this->twig->render('system_event/task_create.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::TASK_EDIT => $this->twig->render('system_event/task_edit.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::TASK_COMPLETE => $this->twig->render('system_event/task_complete.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::TASK_INCOMPLETE => $this->twig->render('system_event/task_incomplete.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::TASK_NOTIFY_COMPLETE => $this->twig->render('system_event/task_notify_complete.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE => $this->twig->render('system_event/task_notify_incomplete.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::TASK_REMIND_DEADLINE => $this->twig->render('system_event/task_remind_deadline.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'task' => $task
-            ]),
-            SystemEventTypeConstant::VERSION_CREATE => $this->twig->render('system_event/version_create.twig', [
-                'user' => $user,
-                'work' => $work,
-                'version' => $version
-            ]),
-            SystemEventTypeConstant::VERSION_EDIT => $this->twig->render('system_event/version_edit.twig', [
-                'user' => $user,
-                'work' => $work,
-                'version' => $version
-            ]),
-            SystemEventTypeConstant::DOCUMENT_CREATE => $this->twig->render('system_event/document_create.html.twig', [
-                'user' => $user,
-                'work' => $work,
-                'document' => $document
-            ]),
-            SystemEventTypeConstant::MESSAGE_CREATE => $this->twig->render('system_event/message_create.html.twig', [
-                'user' => $user,
-                'conversation' => $conversation
-            ]),
-            SystemEventTypeConstant::EVENT_CREATE => $this->twig->render('system_event/event_create.html.twig', [
-                'user' => $user,
-                'event' => $event
-            ]),
-            SystemEventTypeConstant::EVENT_EDIT => $this->twig->render('system_event/event_edit.html.twig', [
-                'user' => $user,
-                'event' => $event
-            ]),
-            SystemEventTypeConstant::EVENT_SWITCH_SKYPE => $this->twig->render('system_event/event_switch_skype.html.twig', [
-                'user' => $user,
-                'event' => $event
-            ]),
-            SystemEventTypeConstant::EVENT_COMMENT_CREATE => $this->twig->render('system_event/event_comment_create.html.twig', [
-                'user' => $user,
-                'event' => $event
-            ]),
-            SystemEventTypeConstant::EVENT_COMMENT_EDIT => $this->twig->render('system_event/event_comment_edit.html.twig', [
-                'user' => $user,
-                'event' => $event
-            ]),
+        $templateParameters = [
+            'user' => $systemEvent->getOwner(),
+            'work' => $systemEvent->getWork(),
+            'task' => $systemEvent->getTask(),
+            'version' => $systemEvent->getMedia(),
+            'document' => $systemEvent->getMedia(),
+            'conversation' => $systemEvent->getConversation(),
+            'event' => $systemEvent->getEvent()
+        ];
+
+        $template = match ($systemEvent->getType()->getId()) {
+            SystemEventTypeConstant::WORK_CREATE => 'system_event/work_create.twig',
+            SystemEventTypeConstant::WORK_EDIT => 'system_event/work_edit.html.twig',
+            SystemEventTypeConstant::USER_EDIT => 'system_event/user_edit.html.twig',
+            SystemEventTypeConstant::TASK_CREATE => 'system_event/task_create.html.twig',
+            SystemEventTypeConstant::TASK_EDIT => 'system_event/task_edit.html.twig',
+            SystemEventTypeConstant::TASK_COMPLETE => 'system_event/task_complete.html.twig',
+            SystemEventTypeConstant::TASK_INCOMPLETE => 'system_event/task_incomplete.html.twig',
+            SystemEventTypeConstant::TASK_NOTIFY_COMPLETE => 'system_event/task_notify_complete.html.twig',
+            SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE => 'system_event/task_notify_incomplete.html.twig',
+            SystemEventTypeConstant::TASK_REMIND_DEADLINE => 'system_event/task_remind_deadline.html.twig',
+            SystemEventTypeConstant::VERSION_CREATE => 'system_event/version_create.twig',
+            SystemEventTypeConstant::VERSION_EDIT => 'system_event/version_edit.twig',
+            SystemEventTypeConstant::DOCUMENT_CREATE => 'system_event/document_create.html.twig',
+            SystemEventTypeConstant::MESSAGE_CREATE => 'system_event/message_create.html.twig',
+            SystemEventTypeConstant::EVENT_CREATE => 'system_event/event_create.html.twig',
+            SystemEventTypeConstant::EVENT_EDIT => 'system_event/event_edit.html.twig',
+            SystemEventTypeConstant::EVENT_SWITCH_SKYPE => 'system_event/event_switch_skype.html.twig',
+            SystemEventTypeConstant::EVENT_COMMENT_CREATE => 'system_event/event_comment_create.html.twig',
+            SystemEventTypeConstant::EVENT_COMMENT_EDIT => 'system_event/event_comment_edit.html.twig',
             default => throw new ConstantNotFoundException('Event type constant not found'),
         };
 
-        return $link;
+        return $this->twig->render($template, $templateParameters);
     }
 }

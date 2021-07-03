@@ -12,6 +12,7 @@
 
 namespace App\Model\Media;
 
+use App\DataTransferObject\Repository\MediaData;
 use Doctrine\ORM\Query;
 use App\Entity\{
     Media,
@@ -58,14 +59,10 @@ class MediaFacade
             ->getQuery();
     }
 
-    public function getMediaListQueryByUserFilter(
-        $users,
-        MediaType $type,
-        $active = null,
-        ?array $criteria = null
-    ): Query {
+    public function getMediaListQueryByUserFilter(MediaData $mediaData): Query
+    {
         return $this->mediaRepository
-            ->mediaListByUserFilter($users, $type, $active, $criteria)
+            ->mediaListByUserFilter($mediaData)
             ->getQuery();
     }
 

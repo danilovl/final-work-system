@@ -34,7 +34,7 @@ class ConversationFactory extends BaseModelFactory
     ): Conversation {
         $conversation = new Conversation;
         $conversation->setOwner($owner);
-        $conversation->setType($this->em->getReference(ConversationType::class, $type));
+        $conversation->setType($this->entityManagerService->getReference(ConversationType::class, $type));
 
         if ($work !== null) {
             $conversation->setWork($work);
@@ -44,7 +44,7 @@ class ConversationFactory extends BaseModelFactory
             $conversation->setName($name);
         }
 
-        $this->em->persistAndFlush($conversation);
+        $this->entityManagerService->persistAndFlush($conversation);
 
         return $conversation;
     }
@@ -59,7 +59,7 @@ class ConversationFactory extends BaseModelFactory
         $conversationMessage->setContent($content);
         $conversationMessage->setOwner($owner);
 
-        $this->em->persistAndFlush($conversationMessage);
+        $this->entityManagerService->persistAndFlush($conversationMessage);
 
         return $conversationMessage;
     }
@@ -72,7 +72,7 @@ class ConversationFactory extends BaseModelFactory
             $conversationParticipant = new ConversationParticipant;
             $conversationParticipant->setConversation($conversation);
             $conversationParticipant->setUser($this->getUser($participant));
-            $this->em->persistAndFlush($conversationParticipant);
+            $this->entityManagerService->persistAndFlush($conversationParticipant);
         }
     }
 
@@ -90,13 +90,13 @@ class ConversationFactory extends BaseModelFactory
                 $messageStatus = new ConversationMessageStatus;
                 $messageStatus->setConversation($conversation);
                 $messageStatus->setMessage($message);
-                $messageStatus->setType($this->em->getReference(ConversationMessageStatusType::class, $type));
+                $messageStatus->setType($this->entityManagerService->getReference(ConversationMessageStatusType::class, $type));
                 $messageStatus->setUser($participant);
-                $this->em->persistAndFlush($messageStatus);
+                $this->entityManagerService->persistAndFlush($messageStatus);
             }
         }
 
-        $this->em->flush();
+        $this->entityManagerService->flush();
     }
 
     public function getUser(ConversationParticipant|User $user): User

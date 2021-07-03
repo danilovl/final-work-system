@@ -24,7 +24,7 @@ class TaskFactory extends BaseModelFactory
         $task = $task ?? new Task;
         $task = $this->fromModel($task, $taskModel);
 
-        $this->em->persistAndFlush($task);
+        $this->entityManagerService->persistAndFlush($task);
 
         return $task;
     }

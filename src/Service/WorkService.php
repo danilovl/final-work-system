@@ -24,9 +24,7 @@ class WorkService
         Work $work,
         User $user
     ): bool {
-        $participants = $this->getAllUsers($work);
-
-        foreach ($participants as $participant) {
+        foreach ($this->getAllUsers($work) as $participant) {
             if ($participant->getId() === $user->getId()) {
                 return true;
             }

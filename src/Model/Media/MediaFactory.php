@@ -24,7 +24,7 @@ class MediaFactory extends BaseModelFactory
         $media = $media ?? new Media;
         $media = $this->fromModel($media, $mediaModel);
 
-        $this->em->persistAndFlush($media);
+        $this->entityManagerService->persistAndFlush($media);
 
         return $media;
     }

@@ -49,7 +49,7 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $systemEvent->setOwner($recipientAuthor ? $task->getOwner() : $work->getAuthor());
         $systemEvent->setWork($work);
         $systemEvent->setTask($task);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find($systemEventId)
         );
 
@@ -57,7 +57,7 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $recipient->setRecipient($recipientAuthor ? $work->getAuthor() : $task->getOwner());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onTaskCreate(TaskGenericEvent $event): void

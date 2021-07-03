@@ -43,7 +43,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
         $systemEvent->setEvent($event);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::EVENT_CREATE)
         );
 
@@ -59,7 +59,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
             }
         }
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onEventEdit(EventGenericEvent $genericEvent): void
@@ -69,7 +69,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
         $systemEvent->setEvent($event);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::EVENT_EDIT)
         );
 
@@ -77,7 +77,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $recipient->setRecipient($event->getParticipant()->getUser());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onEventSwitchSkype(EventGenericEvent $genericEvent): void
@@ -87,7 +87,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipant()->getUser());
         $systemEvent->setEvent($event);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::EVENT_SWITCH_SKYPE)
         );
 
@@ -95,7 +95,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $recipient->setRecipient($event->getOwner());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onEventCommentCreate(EventGenericEvent $genericEvent): void
@@ -111,7 +111,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
             $systemEvent->setWork($event->getParticipant()->getWork());
         }
 
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::EVENT_COMMENT_CREATE)
         );
 
@@ -125,7 +125,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $recipient->setRecipient($recipientUser);
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onEventCommentEdit(EventGenericEvent $genericEvent): void
@@ -141,7 +141,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
             $systemEvent->setWork($event->getParticipant()->getWork());
         }
 
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::EVENT_COMMENT_EDIT)
         );
 
@@ -155,7 +155,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $recipient->setRecipient($recipientUser);
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onEventReservation(EventGenericEvent $genericEvent): void
@@ -165,7 +165,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipant()->getUser());
         $systemEvent->setEvent($event);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::EVENT_CREATE)
         );
 
@@ -173,6 +173,6 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $recipient->setRecipient($event->getOwner());
         $systemEvent->addRecipient($recipient);
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 }

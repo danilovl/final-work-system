@@ -24,7 +24,7 @@ class WorkCategoryFactory extends BaseModelFactory
         $workCategory = $workCategory ?? new WorkCategory;
         $workCategory = $this->fromModel($workCategory, $workCategoryModel);
 
-        $this->em->persistAndFlush($workCategory);
+        $this->entityManagerService->persistAndFlush($workCategory);
 
         return $workCategory;
     }

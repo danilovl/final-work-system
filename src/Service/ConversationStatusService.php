@@ -12,6 +12,7 @@
 
 namespace App\Service;
 
+use App\DataTransferObject\Repository\ConversationMessageStatusData;
 use App\Entity\{
     User,
     Conversation,
@@ -34,15 +35,17 @@ class ConversationStatusService
         Conversation $conversation,
         User $user
     ): bool {
-        $conversationStatus = $this->conversationMessageStatusRepository
-            ->oneByConversationUserType(
-                $conversation,
-                $user,
-                $this->entityManagerService->getReference(
-                    ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::UNREAD
-                )
+        $conversationMessageStatusData = ConversationMessageStatusData::createFromArray([
+            'user' => $user,
+            'conversation' => $conversation,
+            'type' => $this->entityManagerService->getReference(
+                ConversationMessageStatusType::class,
+                ConversationMessageStatusTypeConstant::UNREAD
             )
+        ]);
+
+        $conversationStatus = $this->conversationMessageStatusRepository
+            ->oneByConversationUserType($conversationMessageStatusData)
             ->getQuery()
             ->getResult();
 
@@ -52,7 +55,7 @@ class ConversationStatusService
     public function changeConversationStatus(
         Conversation $conversation,
         User $user,
-        $status
+        int $status
     ): void {
         /** @var ConversationMessageStatus|null $conversationStatus */
         $conversationStatus = $this->conversationMessageStatusRepository
@@ -75,7 +78,7 @@ class ConversationStatusService
     public function isConversationMessageRead(
         ConversationMessage $conversationMessage,
         User $user,
-        $switchToRead = false
+        bool $switchToRead = false
     ): bool {
         /** @var ConversationMessageStatus|null $conversationMessageStatus */
         $conversationMessageStatus = $this->conversationMessageStatusRepository
@@ -106,7 +109,7 @@ class ConversationStatusService
     public function changeConversationMessageStatus(
         ConversationMessage $conversationMessage,
         User $user,
-        $status
+        int $status
     ): void {
         /** @var ConversationMessageStatus|null $conversationMessageStatus */
         $conversationMessageStatus = $this->conversationMessageStatusRepository

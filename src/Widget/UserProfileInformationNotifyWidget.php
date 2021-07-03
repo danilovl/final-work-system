@@ -10,13 +10,26 @@
  *
  */
 
-namespace App\Util\HomepageNotify;
+namespace App\Widget;
 
-use App\Interfaces\HomepageNotifyInterface;
+use App\Service\{
+    UserService,
+    TranslatorService
+};
+use Danilovl\ParameterBundle\Services\ParameterService;
+use Twig\Environment;
 
-class UserProfileInformationNotify extends BaseNotify implements HomepageNotifyInterface
+class UserProfileInformationNotifyWidget extends BaseWidget
 {
-    public function renderNotify(): ?string
+    public function __construct(
+        protected UserService $userService,
+        protected ParameterService $parameterService,
+        protected TranslatorService $translatorService,
+        protected Environment $twig
+    ) {
+    }
+
+    public function render(): ?string
     {
         $result = null;
         foreach (['checkPhone', 'checkSkype'] as $method) {
@@ -33,7 +46,7 @@ class UserProfileInformationNotify extends BaseNotify implements HomepageNotifyI
             return null;
         }
 
-        return $this->twig->render('homepage_notify/notify.html.twig', [
+        return $this->twig->render('widget/notify.html.twig', [
             'class' => $this->parameterService->get('homepage_notify.type_class.info'),
             'message' => $this->translatorService->trans('app.text.please_fill_phone_number_before_use_app')
         ]);
@@ -46,7 +59,7 @@ class UserProfileInformationNotify extends BaseNotify implements HomepageNotifyI
             return null;
         }
 
-        return $this->twig->render('homepage_notify/notify.html.twig', [
+        return $this->twig->render('widget/notify.html.twig', [
             'class' => $this->parameterService->get('homepage_notify.type_class.info'),
             'message' => $this->translatorService->trans('app.text.please_fill_skype_before_use_app')
         ]);

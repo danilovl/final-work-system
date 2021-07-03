@@ -12,6 +12,7 @@
 
 namespace App\Repository;
 
+use App\DataTransferObject\Repository\MediaData;
 use App\Entity\{
     User,
     Work,
@@ -38,27 +39,23 @@ class MediaRepository extends ServiceEntityRepository
             ->setCacheable(true);
     }
 
-    public function mediaListByUserFilter(
-        $users = null,
-        MediaType $type = null,
-        $active = null,
-        array $criteria = null
-    ): QueryBuilder {
+    public function mediaListByUserFilter(MediaData $mediaData): QueryBuilder
+    {
         $queryBuilder = $this->createQueryBuilder('media')
             ->leftJoin('media.mimeType', 'mime_type')->addSelect('mime_type')
             ->leftJoin('media.categories', 'categories')->addSelect('categories')
             ->orderBy('media.createdAt', Criteria::DESC);
 
-        if ($users !== null) {
+        if ($mediaData->users !== null) {
             $queryBuilder
                 ->andWhere(
                     $queryBuilder->expr()->in('media.owner', ':users')
                 )
-                ->setParameter('users', $users);
+                ->setParameter('users', $mediaData->users);
         }
 
-        if ($criteria !== null) {
-            foreach ($criteria as $field => $value) {
+        if ($mediaData->criteria !== null) {
+            foreach ($mediaData->criteria as $field => $value) {
                 if ($field === 'name' && !empty($value)) {
                     $queryBuilder->andWhere('media.name LIKE :m_name')
                         ->setParameter('m_name', '%' . $value . '%');
@@ -82,14 +79,14 @@ class MediaRepository extends ServiceEntityRepository
             }
         }
 
-        if ($type !== null) {
+        if ($mediaData->type !== null) {
             $queryBuilder->andWhere('media.type = :type')
-                ->setParameter('type', $type);
+                ->setParameter('type', $mediaData->type);
         }
 
-        if ($active) {
+        if ($mediaData->active) {
             $queryBuilder->andWhere('media.active = :active')
-                ->setParameter('active', $active);
+                ->setParameter('active', $mediaData->type);
         }
 
         return $queryBuilder;

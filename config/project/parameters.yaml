@@ -78,8 +78,8 @@ parameters:
       success: 'alert-success'
       warning: 'alert-warning'
     notifies:
-      - 'app.homepage_notify.user_profile_information'
-      - 'app.homepage_notify.work_deadline_information'
+      - 'app.widget.user_profile_information'
+      - 'app.widget.work_deadline_information'
   reset_password:
     cryptographically_secure_key: '45679'
     reset_request_lifetime: 3600

@@ -16,7 +16,7 @@ use App\Service\EntityManagerService;
 
 class BaseModelFactory
 {
-    public function __construct(protected EntityManagerService $em)
+    public function __construct(protected EntityManagerService $entityManagerService)
     {
     }
 }

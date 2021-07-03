@@ -13,6 +13,7 @@
 namespace App\Controller\Ajax;
 
 use App\Attribute\AjaxRequestMiddlewareAttribute;
+use App\DataTransferObject\Repository\EventData;
 use DateTime;
 use App\Constant\{
     AjaxJsonTypeConstant,
@@ -45,13 +46,16 @@ class EventController extends BaseController
         $user = $this->getUser();
         $eventService = $this->get('app.facade.event');
 
-        $startDate = new DateTime($request->get('start'));
-        $endDate = new DateTime($request->get('end'));
+        $mediaData = EventData::createFromArray([
+            'user' => $user,
+            'startDate' => new DateTime($request->get('start')),
+            'endDate' => new DateTime($request->get('end'))
+        ]);
 
         if ($event->isOwner($user)) {
-            $userEvents = $eventService->getEventsByOwner($user, $startDate, $endDate);
+            $userEvents = $eventService->getEventsByOwner($mediaData);
         } else {
-            $userEvents = $eventService->getEventsByParticipant($user, $startDate, $endDate);
+            $userEvents = $eventService->getEventsByParticipant($mediaData);
         }
 
         $events = $this->get('app.facade.event_calendar')

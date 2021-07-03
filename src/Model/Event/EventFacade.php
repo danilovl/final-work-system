@@ -12,13 +12,9 @@
 
 namespace App\Model\Event;
 
-use DateTime;
-use App\Entity\{
-    Event,
-    EventType
-};
+use App\DataTransferObject\Repository\EventData;
+use App\Entity\Event;
 use App\Repository\EventRepository;
-use App\Entity\User;
 
 class EventFacade
 {
@@ -31,26 +27,18 @@ class EventFacade
         return $this->eventRepository->find($id);
     }
 
-    public function getEventsByOwner(
-        User $user,
-        ?DateTime $startDate = null,
-        ?DateTime $endDate = null,
-        ?EventType $eventType = null
-    ): array {
+    public function getEventsByOwner(EventData $eventData): array
+    {
         return $this->eventRepository
-            ->allByOwner($user, $startDate, $endDate, $eventType)
+            ->allByOwner($eventData)
             ->getQuery()
             ->getResult();
     }
 
-    public function getEventsByParticipant(
-        User $user,
-        ?DateTime $startDate = null,
-        ?DateTime $endDate = null,
-        ?EventType $eventType = null
-    ): array {
+    public function getEventsByParticipant(EventData $eventData): array
+    {
         return $this->eventRepository
-            ->allByParticipant($user, $startDate, $endDate, $eventType)
+            ->allByParticipant($eventData)
             ->getQuery()
             ->getResult();
     }

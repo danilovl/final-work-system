@@ -12,14 +12,13 @@
 
 namespace App\Service;
 
-use Generator;
-use App\Constant\{
-    WorkStatusConstant,
-    WorkUserTypeConstant
-};
 use App\Entity\{
     User,
     Work
+};
+use App\Constant\{
+    WorkStatusConstant,
+    WorkUserTypeConstant
 };
 use App\Exception\RuntimeException;
 use Doctrine\Common\Collections\{
@@ -35,27 +34,9 @@ class UserWorkService
         string $userType
     ): ArrayCollection {
         $supervisors = new ArrayCollection;
+        $userWorks = $this->getUserWorks($user, $userType);
 
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $this->arrayGenerator($user->getAuthorWorks()),
-            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($user->getOpponentWorks()),
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($user->getConsultantWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $supervisor */
-                $supervisor = $work->getSupervisor();
-                if ($supervisor !== null &&
-                    $supervisors->contains($supervisor) === false &&
-                    $supervisor->isEnabled()
-                ) {
-                    $supervisors->add($supervisor);
-                }
-            }
-        }
+        $this->addUserToCollection($supervisors, $userWorks, WorkUserTypeConstant::SUPERVISOR);
 
         return $supervisors;
     }
@@ -65,27 +46,9 @@ class UserWorkService
         string $userType
     ): ArrayCollection {
         $authors = new ArrayCollection;
+        $userWorks = $this->getUserWorks($user, $userType);
 
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($user->getOpponentWorks()),
-            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($user->getSupervisorWorks()),
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($user->getConsultantWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $supervisor */
-                $author = $work->getAuthor();
-                if ($author !== null &&
-                    $authors->contains($author) === false &&
-                    $author->isEnabled()
-                ) {
-                    $authors->add($author);
-                }
-            }
-        }
+        $this->addUserToCollection($authors, $userWorks, WorkUserTypeConstant::AUTHOR);
 
         return $authors;
     }
@@ -95,27 +58,9 @@ class UserWorkService
         string $userType
     ): ArrayCollection {
         $opponents = new ArrayCollection;
+        $userWorks = $this->getUserWorks($user, $userType);
 
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $this->arrayGenerator($user->getAuthorWorks()),
-            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($user->getSupervisorWorks()),
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($user->getConsultantWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $supervisor */
-                $opponent = $work->getOpponent();
-                if ($opponent !== null &&
-                    $opponents->contains($opponent) === false &&
-                    $opponent->isEnabled()
-                ) {
-                    $opponents->add($opponent);
-                }
-            }
-        }
+        $this->addUserToCollection($opponents, $userWorks, WorkUserTypeConstant::OPPONENT);
 
         return $opponents;
     }
@@ -125,27 +70,9 @@ class UserWorkService
         string $userType
     ): ArrayCollection {
         $consultants = new ArrayCollection;
+        $userWorks = $this->getUserWorks($user, $userType);
 
-        $userWorks = match ($userType) {
-            WorkUserTypeConstant::CONSULTANT => $this->arrayGenerator($user->getAuthorWorks()),
-            WorkUserTypeConstant::SUPERVISOR => $this->arrayGenerator($user->getSupervisorWorks()),
-            WorkUserTypeConstant::OPPONENT => $this->arrayGenerator($user->getOpponentWorks()),
-            default => new ArrayCollection,
-        };
-
-        foreach ($userWorks as $work) {
-            /** @var Work $work */
-            if ($work->getStatus()->getId() === WorkStatusConstant::ACTIVE) {
-                /** @var User|null $consultant */
-                $consultant = $work->getConsultant();
-                if ($consultant !== null &&
-                    $consultants->contains($consultant) === false &&
-                    $consultant->isEnabled()
-                ) {
-                    $consultants->add($consultant);
-                }
-            }
-        }
+        $this->addUserToCollection($consultants, $userWorks, WorkUserTypeConstant::CONSULTANT);
 
         return $consultants;
     }
@@ -186,8 +113,47 @@ class UserWorkService
         return $userWorks;
     }
 
-    public function arrayGenerator(Collection $array): Generator
+    /**
+     * @return Collection|Work[]
+     */
+    private function getUserWorks(User $user, string $userType): Collection
     {
-        yield from $array;
+        return match ($userType) {
+            WorkUserTypeConstant::AUTHOR => $user->getAuthorWorks(),
+            WorkUserTypeConstant::OPPONENT => $user->getOpponentWorks(),
+            WorkUserTypeConstant::CONSULTANT => $user->getConsultantWorks(),
+            WorkUserTypeConstant::SUPERVISOR => $user->getSupervisorWorks(),
+            default => new ArrayCollection,
+        };
+    }
+
+    /**
+     * @param Collection|Work[] $userWorks
+     */
+    private function addUserToCollection(
+        Collection $collection,
+        Collection $userWorks,
+        string $userType
+    ): void {
+        foreach ($userWorks as $work) {
+            if ($work->getStatus()->getId() !== WorkStatusConstant::ACTIVE) {
+                continue;
+            }
+
+            $user = match ($userType) {
+                WorkUserTypeConstant::AUTHOR => $work->getAuthor(),
+                WorkUserTypeConstant::OPPONENT => $work->getOpponent(),
+                WorkUserTypeConstant::CONSULTANT => $work->getConsultant(),
+                WorkUserTypeConstant::SUPERVISOR => $work->getSupervisor(),
+                default => throw new RuntimeException("UserType '{$userType}' not found")
+            };
+
+            if ($user !== null &&
+                $collection->contains($user) === false &&
+                $user->isEnabled()
+            ) {
+                $collection->add($user);
+            }
+        }
     }
 }

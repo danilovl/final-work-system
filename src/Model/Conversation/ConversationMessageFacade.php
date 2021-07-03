@@ -33,10 +33,10 @@ class ConversationMessageFacade
     private ConversationMessageRepository $conversationMessageRepository;
 
     public function __construct(
-        private EntityManagerService $em,
+        private EntityManagerService $entityManagerService,
         private ConversationStatusService $conversationStatusService
     ) {
-        $this->conversationMessageRepository = $em->getRepository(ConversationMessage::class);
+        $this->conversationMessageRepository = $entityManagerService->getRepository(ConversationMessage::class);
     }
 
     public function find(int $id): ?ConversationMessage
@@ -58,7 +58,7 @@ class ConversationMessageFacade
             switch ($conversationMessageStatus->getType()->getId()) {
                 case ConversationMessageStatusTypeConstant::READ:
                     $conversationMessageStatus->setType(
-                        $this->em->getReference(
+                        $this->entityManagerService->getReference(
                             ConversationMessageStatusType::class,
                             ConversationMessageStatusTypeConstant::UNREAD
                         )
@@ -66,7 +66,7 @@ class ConversationMessageFacade
                     break;
                 case  ConversationMessageStatusTypeConstant::UNREAD:
                     $conversationMessageStatus->setType(
-                        $this->em->getReference(
+                        $this->entityManagerService->getReference(
                             ConversationMessageStatusType::class,
                             ConversationMessageStatusTypeConstant::READ
                         )
@@ -74,21 +74,21 @@ class ConversationMessageFacade
                     break;
             }
 
-            $this->em->flush($conversationMessageStatus);
+            $this->entityManagerService->flush($conversationMessageStatus);
         } else {
             $newConversationMessageStatus = new ConversationMessageStatus();
             $newConversationMessageStatus->setConversation($conversation);
             $newConversationMessageStatus->setMessage($conversationMessage);
             $newConversationMessageStatus->setUser($user);
             $newConversationMessageStatus->setType(
-                $this->em->getReference(
+                $this->entityManagerService->getReference(
                     ConversationMessageStatusType::class,
                     ConversationMessageStatusTypeConstant::UNREAD
                 )
             );
 
-            $this->em->persist($newConversationMessageStatus);
-            $this->em->flush($newConversationMessageStatus);
+            $this->entityManagerService->persist($newConversationMessageStatus);
+            $this->entityManagerService->flush($newConversationMessageStatus);
         }
     }
 
@@ -112,7 +112,7 @@ class ConversationMessageFacade
         $conversationMessage = $this->conversationMessageRepository
             ->allByUserStatus(
                 $user,
-                $this->em->getReference(
+                $this->entityManagerService->getReference(
                     ConversationMessageStatusType::class,
                     ConversationMessageStatusTypeConstant::UNREAD
                 )
@@ -130,7 +130,7 @@ class ConversationMessageFacade
         return (int) $this->conversationMessageRepository
             ->countMessagesByUserStatus(
                 $user,
-                $this->em->getReference(
+                $this->entityManagerService->getReference(
                     ConversationMessageStatusType::class,
                     ConversationMessageStatusTypeConstant::UNREAD
                 )
@@ -170,7 +170,7 @@ class ConversationMessageFacade
         return (int) $this->conversationMessageRepository
             ->countMessagesByUserStatus(
                 $user,
-                $this->em->getReference(
+                $this->entityManagerService->getReference(
                     ConversationMessageStatusType::class,
                     ConversationMessageStatusTypeConstant::UNREAD
                 )

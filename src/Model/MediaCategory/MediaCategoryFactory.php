@@ -24,7 +24,7 @@ class MediaCategoryFactory extends BaseModelFactory
         $mediaCategory = $mediaCategory ?? new MediaCategory;
         $mediaCategory = $this->fromModel($mediaCategory, $mediaCategoryModel);
 
-        $this->em->persistAndFlush($mediaCategory);
+        $this->entityManagerService->persistAndFlush($mediaCategory);
 
         return $mediaCategory;
     }

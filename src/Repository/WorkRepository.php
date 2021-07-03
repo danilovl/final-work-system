@@ -13,6 +13,7 @@
 namespace App\Repository;
 
 use App\Constant\WorkUserTypeConstant;
+use App\DataTransferObject\Repository\WorkData;
 use App\Entity\{
     User,
     Work,
@@ -55,24 +56,20 @@ class WorkRepository extends ServiceEntityRepository
             ->setParameter('user', $user);
     }
 
-    public function allByUserStatus(
-        User $user,
-        ?User $supervisor,
-        string $type,
-        $workStatus = null
-    ): QueryBuilder {
+    public function allByUserStatus(WorkData $workData): QueryBuilder
+    {
         $queryBuilder = $this->createQueryBuilder('work')
             ->addSelect('status')
             ->innerJoin('work.status', 'status')
-            ->setParameter('user', $user)
+            ->setParameter('user', $workData->user)
             ->setCacheable(true);
 
-        if ($supervisor !== null) {
+        if ($workData->supervisor !== null) {
             $queryBuilder->where('work.supervisor = :supervisor')
-                ->setParameter('supervisor', $supervisor);
+                ->setParameter('supervisor', $workData->supervisor);
         }
 
-        switch ($type) {
+        switch ($workData->type) {
             case WorkUserTypeConstant::AUTHOR:
                 $queryBuilder->leftJoin('work.author', 'author')
                     ->andWhere('author = :user');
@@ -87,6 +84,7 @@ class WorkRepository extends ServiceEntityRepository
                 break;
         }
 
+        $workStatus = $workData->workStatus;
         if ($workStatus instanceof WorkStatus) {
             $queryBuilder->andWhere('status = :status')
                 ->setParameter('status', $workStatus);

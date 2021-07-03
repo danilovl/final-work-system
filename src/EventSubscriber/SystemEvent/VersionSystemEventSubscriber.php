@@ -30,10 +30,10 @@ use App\Entity\{
 class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected EntityManagerService $em,
+        protected EntityManagerService $entityManagerService,
         private WorkService $workService
     ) {
-        parent::__construct($em);
+        parent::__construct($entityManagerService);
     }
 
     public static function getSubscribedEvents(): array
@@ -56,7 +56,7 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $systemEvent->setOwner($media->getOwner());
         $systemEvent->setWork($work);
         $systemEvent->setMedia($media);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find($systemEventTypeId)
         );
 
@@ -72,7 +72,7 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
             $systemEvent->addRecipient($recipient);
         }
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
     public function onVersionCreate(VersionGenericEvent $event): void

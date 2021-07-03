@@ -12,13 +12,11 @@
 
 namespace App\Repository;
 
+use App\DataTransferObject\Repository\EventData;
 use App\Entity\{
-    User,
     Work,
-    Event,
-    EventType
+    Event
 };
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
@@ -47,58 +45,50 @@ class EventRepository extends ServiceEntityRepository
             ->setParameter('work', $work);
     }
 
-    public function allByOwner(
-        User $user,
-        ?DateTime $startDate = null,
-        ?DateTime $endDate = null,
-        ?EventType $eventType = null
-    ): QueryBuilder {
+    public function allByOwner(EventData $eventData): QueryBuilder
+    {
         $queryBuilder = $this->baseQueryBuilder()
             ->where('event.owner = :owner')
-            ->setParameter('owner', $user);
+            ->setParameter('owner', $eventData->user);
 
-        if ($startDate !== null && $endDate !== null) {
+        if ($eventData->startDate !== null && $eventData->endDate !== null) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->andX(
                     $queryBuilder->expr()->gte('event.start', ':start'),
                     $queryBuilder->expr()->lte('event.end', ':end')
                 ))
-                ->setParameter('start', $startDate)
-                ->setParameter('end', $endDate);
+                ->setParameter('start', $eventData->startDate)
+                ->setParameter('end', $eventData->endDate);
         }
 
-        if ($eventType !== null) {
+        if ($eventData->eventType !== null) {
             $queryBuilder->andWhere('event.type = :eventType')
-                ->setParameter('eventType', $eventType);
+                ->setParameter('eventType', $eventData->eventType);
         }
 
         return $queryBuilder;
     }
 
-    public function allByParticipant(
-        User $user,
-        ?DateTime $startDate = null,
-        ?DateTime $endDate = null,
-        ?EventType $eventType = null
-    ): QueryBuilder {
+    public function allByParticipant(EventData $eventData): QueryBuilder
+    {
         $queryBuilder = $this->baseQueryBuilder()
             ->where('participant.user = :participant')
             ->groupBy('event.id')
-            ->setParameter('participant', $user);
+            ->setParameter('participant', $eventData->user);
 
-        if ($startDate !== null && $endDate !== null) {
+        if ($eventData->startDate !== null && $eventData->endDate !== null) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->andX(
                     $queryBuilder->expr()->gte('event.start', ':start'),
                     $queryBuilder->expr()->lte('event.end', ':end')
                 ))
-                ->setParameter('start', $startDate)
-                ->setParameter('end', $endDate);
+                ->setParameter('start', $eventData->startDate)
+                ->setParameter('end', $eventData->endDate);
         }
 
-        if ($eventType !== null) {
+        if ($eventData->eventType !== null) {
             $queryBuilder->andWhere('event.type = :eventType')
-                ->setParameter('eventType', $eventType);
+                ->setParameter('eventType', $eventData->eventType);
         }
 
         return $queryBuilder;

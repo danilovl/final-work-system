@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-/*
+/**
  *
  * This file is part of the FinalWorkSystem project.
  * (c) Vladimir Danilov
@@ -10,13 +10,10 @@
  *
  */
 
-namespace App\EventSubscriber\SystemEvent;
+namespace App\Exception;
 
-use App\Service\EntityManagerService;
+use Exception;
 
-class BaseSystemEventSubscriber
+final class PropertyNotExistException extends Exception
 {
-    public function __construct(protected EntityManagerService $entityManagerService)
-    {
-    }
 }

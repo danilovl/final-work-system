@@ -24,7 +24,7 @@ class EventAddressFactory extends BaseModelFactory
         $eventAddress = $eventAddress ?? new EventAddress;
         $eventAddress = $this->fromModel($eventAddress, $addressModel);
 
-        $this->em->persistAndFlush($eventAddress);
+        $this->entityManagerService->persistAndFlush($eventAddress);
 
         return $eventAddress;
     }

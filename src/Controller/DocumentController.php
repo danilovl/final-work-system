@@ -12,6 +12,7 @@
 
 namespace App\Controller;
 
+use App\DataTransferObject\Repository\MediaData;
 use App\Model\Media\MediaModel;
 use App\Constant\{
     FlashTypeConstant,
@@ -154,12 +155,13 @@ class DocumentController extends MediaBaseController
             $criteria = $form->getData();
         }
 
-        $documents = $this->get('app.facade.media')->getMediaListQueryByUserFilter(
-            $user,
-            $this->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
-            null,
-            $criteria
-        );
+        $mediaData = MediaData::createFromArray([
+            'users' => $user,
+            'type' => $this->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
+            'criteria' => $criteria
+        ]);
+
+        $documents = $this->get('app.facade.media')->getMediaListQueryByUserFilter($mediaData);
 
         return $this->render('document/list_owner.html.twig', [
             'openSearchTab' => $openSearchTab,

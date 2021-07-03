@@ -46,7 +46,7 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         }
 
         $systemEvent->setConversation($conversation);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::MESSAGE_CREATE)
         );
 
@@ -61,6 +61,6 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
             }
         }
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 }

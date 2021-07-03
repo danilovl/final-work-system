@@ -24,7 +24,7 @@ class VersionFactory extends BaseModelFactory
         $media = $media ?? new Media;
         $media = $this->fromModel($media, $versionModel);
 
-        $this->em->persistAndFlush($media);
+        $this->entityManagerService->persistAndFlush($media);
 
         return $media;
     }

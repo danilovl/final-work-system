@@ -28,7 +28,7 @@ class UserGroupController extends BaseController
     public function create(Request $request): JsonResponse
     {
         $userGroupModel = new UserGroupModel;
-        $userGroupModel->name = 'Name';
+        $userGroupModel->name = $this->trans('app.text.name');
 
         $form = $this->createForm(UserGroupForm::class, $userGroupModel)
             ->handleRequest($request);

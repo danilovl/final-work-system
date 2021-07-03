@@ -77,8 +77,8 @@ class EventController extends BaseController
         return $this->render('event/detail.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
-            'deleteForm' => $deleteForm = $this->createDeleteForm($event, 'event_delete')->createView(),
-            'switchToSkype' => $eventAddressSkype ? true : false
+            'deleteForm' => $this->createDeleteForm($event, 'event_delete')->createView(),
+            'switchToSkype' => $eventAddressSkype !== null
         ]);
     }
 

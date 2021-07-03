@@ -12,9 +12,9 @@
 
 namespace App\Model\WorkStatus;
 
+use App\DataTransferObject\Repository\WorkStatusData;
 use App\Entity\WorkStatus;
 use App\Repository\WorkStatusRepository;
-use App\Entity\User;
 
 class WorkStatusFacade
 {
@@ -37,14 +37,10 @@ class WorkStatusFacade
             ->getResult();
     }
 
-    public function getCountByUser(
-        User $user,
-        User $supervisor,
-        string $type,
-        $workStatus
-    ): array {
+    public function getCountByUser(WorkStatusData $workStatusData): array
+    {
         return $this->workStatusRepository
-            ->countByUser($user, $supervisor, $type, $workStatus)
+            ->countByUser($workStatusData)
             ->getQuery()
             ->getResult();
     }

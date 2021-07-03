@@ -24,7 +24,7 @@ class EmailNotificationQueueFactory extends BaseModelFactory
         $emailNotificationQueue = $emailNotificationQueue ?? new EmailNotificationQueue;
         $emailNotificationQueue = $this->fromModel($emailNotificationQueue, $emailNotificationQueueModel);
 
-        $this->em->persistAndFlush($emailNotificationQueue);
+        $this->entityManagerService->persistAndFlush($emailNotificationQueue);
 
         return $emailNotificationQueue;
     }

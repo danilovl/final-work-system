@@ -12,6 +12,7 @@
 
 namespace App\Repository;
 
+use App\DataTransferObject\Repository\ConversationMessageStatusData;
 use App\Entity\{
     User,
     Conversation,
@@ -50,19 +51,16 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->setParameter('conversation', $conversation);
     }
 
-    public function oneByConversationUserType(
-        Conversation $conversation,
-        User $user,
-        ConversationMessageStatusType $type
-    ): QueryBuilder {
+    public function oneByConversationUserType(ConversationMessageStatusData $data): QueryBuilder
+    {
         return $this->baseQueryBuilder()
             ->where('conversation_message_status.user = :user')
             ->andWhere('conversation_message_status.conversation = :conversation')
             ->andWhere('conversation_message_status.type = :type')
             ->orderBy('message.createdAt', Criteria::DESC)
-            ->setParameter('user', $user)
-            ->setParameter('conversation', $conversation)
-            ->setParameter('type', $type);
+            ->setParameter('user', $data->user)
+            ->setParameter('conversation', $data->conversation)
+            ->setParameter('type', $data->type);
     }
 
     public function oneByConversationUser(

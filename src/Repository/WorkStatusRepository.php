@@ -13,10 +13,8 @@
 namespace App\Repository;
 
 use App\Constant\WorkUserTypeConstant;
-use App\Entity\{
-    User,
-    WorkStatus
-};
+use App\DataTransferObject\Repository\WorkStatusData;
+use App\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -33,22 +31,17 @@ class WorkStatusRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work_status');
     }
 
-    public function countByUser(
-        User $user,
-        User $supervisor,
-        string $type,
-        $workStatus
-    ): QueryBuilder {
+    public function countByUser(WorkStatusData $workStatusData): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('work_status')
             ->select('work_status.name, COUNT(work.id) as count')
             ->leftJoin('work_status.works', 'work')
             ->leftJoin('work.supervisor', 'supervisor')
             ->where('supervisor = :supervisor')
-            ->setParameter('user', $user)
-            ->setParameter('supervisor', $supervisor)
+            ->setParameter('user', $workStatusData->user)
+            ->setParameter('supervisor', $workStatusData->supervisor)
             ->groupBy('work_status.name');
 
-        switch ($type) {
+        switch ($workStatusData->type) {
             case WorkUserTypeConstant::AUTHOR:
                 $queryBuilder->leftJoin('work.author', 'author')
                     ->andWhere('author = :user');
@@ -63,6 +56,7 @@ class WorkStatusRepository extends ServiceEntityRepository
                 break;
         }
 
+        $workStatus = $workStatusData->workStatus;
         if ($workStatus instanceof WorkStatus) {
             $queryBuilder->andWhere('work_status = :status')
                 ->setParameter('status', $workStatus);

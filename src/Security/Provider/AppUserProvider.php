@@ -43,7 +43,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         return $this->loadUserByUsername($identifier);
     }
 
-    public function loadUserByUsername($username): UserInterface
+    public function loadUserByUsername(string $username): UserInterface
     {
         $user = $this->userFacade->findOneByUsername($username);
 
@@ -55,7 +55,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         return $this->userFacade->findOneByUsername($user->getUserIdentifier());
     }
 
-    public function supportsClass($class): bool
+    public function supportsClass(string $class): bool
     {
         return User::class === $class;
     }

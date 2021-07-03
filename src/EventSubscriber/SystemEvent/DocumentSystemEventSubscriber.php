@@ -31,10 +31,10 @@ use App\Entity\{
 class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected EntityManagerService $em,
+        protected EntityManagerService $entityManagerService,
         private UserWorkService $userWorkService
     ) {
-        parent::__construct($em);
+        parent::__construct($entityManagerService);
     }
 
     public static function getSubscribedEvents(): array
@@ -52,7 +52,7 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);
         $systemEvent->setMedia($media);
-        $systemEvent->setType($this->em->getRepository(SystemEventType::class)
+        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::DOCUMENT_CREATE)
         );
 
@@ -65,6 +65,6 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
             $systemEvent->addRecipient($recipientAuthor);
         }
 
-        $this->em->persistAndFlush($systemEvent);
+        $this->entityManagerService->persistAndFlush($systemEvent);
     }
 }

@@ -24,7 +24,7 @@ class UserGroupFactory extends BaseModelFactory
         $group = $group ?? new Group;
         $group = $this->fromModel($group, $userGroupModel);
 
-        $this->em->persistAndFlush($group);
+        $this->entityManagerService->persistAndFlush($group);
 
         return $group;
     }
