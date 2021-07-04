@@ -15,7 +15,6 @@ namespace App\Controller;
 use App\Constant\CacheKeyConstant;
 use App\Helper\SystemEventHelper;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
-use DateTime;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -53,7 +52,7 @@ class HomeController extends BaseController
             $pagePaginators[$page] = $pagination;
 
             $cacheItem->set($pagePaginators);
-            $cacheItem->expiresAfter(new DateTime('tomorrow'));
+            $cacheItem->expiresAfter($this->getParam('cache.homepage_time'));
 
             $this->get('cache.app')->save($cacheItem);
         }
