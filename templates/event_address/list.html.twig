@@ -10,7 +10,7 @@
                     <div class="x_panel">
                         <div class="x_title" style="height: auto;">
                             <h2>
-                                {{ 'app.page.appointment_address_list' | trans() }}
+                                {{ 'app.page.appointment_address_list' | trans }}
                             </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li class="dropdown">
@@ -27,7 +27,7 @@
                                                data-toggle="modal"
                                                data-target="#modalWindow">
                                                 <i class="fa fa-edit"></i>
-                                                {{ 'app.form.action.create' | trans() }}
+                                                {{ 'app.form.action.create' | trans }}
                                             </a>
                                         </li>
                                     </ul>
@@ -47,15 +47,15 @@
                                     <thead>
                                     <tr>
                                         <th>
-                                            {{ 'app.text.name' | trans() }}
+                                            {{ 'app.text.name' | trans }}
                                         </th>
                                         <th>
-                                            {{ 'app.text.street' | trans() }}
+                                            {{ 'app.text.street' | trans }}
                                         </th>
                                         <th>
-                                            {{ 'app.text.skype' | trans() }}</th>
+                                            {{ 'app.text.skype' | trans }}</th>
                                         <th style="width: 20%">
-                                            {{ 'app.text.options' | trans() }}
+                                            {{ 'app.text.options' | trans }}
                                         </th>
                                     </tr>
                                     </thead>
@@ -85,14 +85,14 @@
                                                    href="{{ path('event_address_detail', { 'id': eventAddress.id | hashids_encode }) }}"
                                                    target="_blank">
                                                     <i class="fa fa-folder"></i>
-                                                    {{ 'app.form.action.show_detail' | trans() }}
+                                                    {{ 'app.form.action.show_detail' | trans }}
                                                 </a>
                                                 <a data-toggle="modal"
                                                    data-target="#modalWindow"
                                                    class="btn btn-warning btn-xs"
                                                    href="{{ path('event_address_edit', { 'id': eventAddress.id | hashids_encode }) }}">
                                                     <i class="fa fa-pencil"></i>
-                                                    {{ 'app.form.action.edit' | trans() }}
+                                                    {{ 'app.form.action.edit' | trans }}
                                                 </a>
 
                                                 {% include 'common_part/ajax_delete.html.twig' with {
@@ -109,7 +109,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                {{ 'app.text.no_result' | trans() }}
+                                {{ 'app.text.no_result' | trans }}
                             {% endif %}
 
                         </div>

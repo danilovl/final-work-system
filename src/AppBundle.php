@@ -12,7 +12,10 @@
 
 namespace App;
 
-use App\DependencyInjection\Compiler\WidgetCompilerPass;
+use App\DependencyInjection\Compiler\{
+    WidgetCompilerPass,
+    ServicePublicCompilerPass
+};
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -22,6 +25,7 @@ class AppBundle extends Bundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new ServicePublicCompilerPass);
         $container->addCompilerPass(new WidgetCompilerPass);
     }
 }

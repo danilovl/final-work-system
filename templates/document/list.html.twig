@@ -5,7 +5,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>{{ 'app.text.information_materials_list' | trans() }}</h3>
+                    <h3>{{ 'app.text.information_materials_list' | trans }}</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{{ 'app.text.search_form' | trans() }} </h2>
+                            <h2>{{ 'app.text.search_form' | trans }} </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
@@ -53,7 +53,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                     <input type="submit"
                                            class="btn btn-success"
-                                           value="{{ 'app.form.action.search' | trans() }}"/>
+                                           value="{{ 'app.form.action.search' | trans }}"/>
                                 </div>
                             </div>
                             {{ form_end(form) }}
@@ -85,22 +85,22 @@
                                     <thead>
                                     <tr>
                                         <th{% if documents.isSorted('media.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(documents, 'app.text.name' | trans(), 'media.name') }}
+                                            {{ knp_pagination_sortable(documents, 'app.text.name' | trans, 'media.name') }}
                                         </th>
                                         <th{% if documents.isSorted('media.author') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(documents, 'app.text.author' | trans(), 'media.author') }}
+                                            {{ knp_pagination_sortable(documents, 'app.text.author' | trans, 'media.author') }}
                                         </th>
-                                        <th>{{ 'app.text.category' | trans() }}</th>
+                                        <th>{{ 'app.text.category' | trans }}</th>
                                         <th{% if documents.isSorted('media.type') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(documents, 'app.text.type' | trans(), 'media.type') }}
+                                            {{ knp_pagination_sortable(documents, 'app.text.type' | trans, 'media.type') }}
                                         </th>
                                         <th{% if documents.isSorted('media.mediaSize') %} class="fa fa-sort-{{ direction }}" {% endif %}>
-                                            {{ knp_pagination_sortable(documents, 'app.text.file_size' | trans(), 'media.mediaSize') }}
+                                            {{ knp_pagination_sortable(documents, 'app.text.file_size' | trans, 'media.mediaSize') }}
                                         </th>
                                         <th{% if documents.isSorted('media.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(documents, 'app.text.date_added' | trans(), 'media.createdAt') }}
+                                            {{ knp_pagination_sortable(documents, 'app.text.date_added' | trans, 'media.createdAt') }}
                                         </th>
-                                        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                                        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -151,7 +151,7 @@
                                                        aria-expanded="true"
                                                        aria-controls="tab-document-description-{{ document.id | hashids_encode }}">
                                                         <i class="fa fa-desktop"></i>
-                                                        {{ 'app.form.action.show_detail' | trans() }}
+                                                        {{ 'app.form.action.show_detail' | trans }}
                                                     </a>
                                                 {% endif %}
 
@@ -170,19 +170,19 @@
                                                         {% endif %}
                                                 >
                                                     <i class="fa fa-file-text-o"></i>
-                                                    {{ 'app.form.action.show_content' | trans() }}
+                                                    {{ 'app.form.action.show_content' | trans }}
                                                 </a>
 
                                                 {% if document.existMediaFile %}
                                                     <a class="btn btn-success btn-xs"
                                                        href="{{ path('document_download', { 'id': document.id | hashids_encode }) }}">
                                                         <i class="fa fa-download"></i>
-                                                        {{ 'app.form.action.download' | trans() }}
+                                                        {{ 'app.form.action.download' | trans }}
                                                     </a>
                                                 {% else %}
                                                     <a class="btn btn-success btn-xs">
                                                         <i class="fa fa-download"></i>
-                                                        {{ 'app.text.file_not_found' | trans() }}
+                                                        {{ 'app.text.file_not_found' | trans }}
                                                     </a>
                                                 {% endif %}
 
@@ -219,7 +219,7 @@
                                                         {% if  document.existMediaFile %}
                                                             {{ render_service('app.controller.document', 'detailContent', {'media': document}) }}
                                                         {% else %}
-                                                            {{ 'app.text.file_not_found' | trans() }}
+                                                            {{ 'app.text.file_not_found' | trans }}
                                                         {% endif %}
 
                                                     </div>
@@ -230,7 +230,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                {{ 'app.text.no_result' | trans() }}
+                                {{ 'app.text.no_result' | trans }}
                             {% endif %}
                         </div>
                     </div>

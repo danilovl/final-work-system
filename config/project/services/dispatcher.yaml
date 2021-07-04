@@ -39,3 +39,9 @@ services:
   app.event_dispatcher.widget:
     class: App\EventDispatcher\WidgetEventDispatcherService
     autowire: true
+
+  app.event_dispatcher.cache:
+    class: App\EventDispatcher\CacheEventDispatcherService
+    autowire: true
+
+  App\EventDispatcher\CacheEventDispatcherService: '@app.event_dispatcher.cache'

@@ -20,7 +20,7 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
-                                    {{ 'app.text.appointment_address' | trans() }}
+                                    {{ 'app.text.appointment_address' | trans }}
                                 </h2>
                                 {% include 'common_part/ajax_delete_modal.html.twig' with {
                                     'modalDataTarget': 'appointment-address',
@@ -43,7 +43,7 @@
                                                    data-toggle="modal"
                                                    data-target="#modalWindow">
                                                     <i class="fa fa-edit"></i>
-                                                    {{ 'app.form.action.edit' | trans() }}
+                                                    {{ 'app.form.action.edit' | trans }}
                                                 </a>
                                             </li>
                                             <li>
@@ -68,7 +68,7 @@
                             <div class="x_content">
                                 <dl class="dl-horizontal">
                                     <dt>
-                                        {{ 'app.text.name' | trans() }}
+                                        {{ 'app.text.name' | trans }}
                                     </dt>
                                     <dd>
                                         {{ eventAddress.name }}
@@ -76,7 +76,7 @@
 
                                     {% if eventAddress.description %}
                                         <dt>
-                                            {{ 'app.text.description' | trans() }}
+                                            {{ 'app.text.description' | trans }}
                                         </dt>
                                         <dd>
                                             {{ eventAddress.description|raw }}
@@ -85,7 +85,7 @@
 
                                     {% if eventAddress.street %}
                                         <dt>
-                                            {{ 'app.text.street' | trans() }}
+                                            {{ 'app.text.street' | trans }}
                                         </dt>
                                         <dd>
                                             {{ eventAddress.street }}
@@ -100,7 +100,7 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
-                                    {{ 'app.text.map' | trans() }}
+                                    {{ 'app.text.map' | trans }}
                                 </h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>

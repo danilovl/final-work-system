@@ -10,7 +10,7 @@
                             <small class="pull-right text-muted">
                                 {% set lastMessage = conversation_last_message(conversation) %}
                                 {% if lastMessage is not empty %}
-                                    {{ 'app.text.date_last_message' | trans() }}: {{ lastMessage.createdAt | date }}
+                                    {{ 'app.text.date_last_message' | trans }}: {{ lastMessage.createdAt | date }}
                                 {% endif %}
                             </small>
 
@@ -87,7 +87,7 @@
                                             <div class="form-group">
                                                 <input type="submit"
                                                        class="btn btn-success"
-                                                       value="{{ 'app.form.action.send' | trans() }}"/>
+                                                       value="{{ 'app.form.action.send' | trans }}"/>
                                             </div>
                                             {{ form_end(form) }}
                                         {% endif %}

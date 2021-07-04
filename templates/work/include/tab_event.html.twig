@@ -13,18 +13,18 @@
                 <thead>
                 <tr>
                     <th{% if events.isSorted('address.name') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
-                        {{ knp_pagination_sortable(events, 'app.text.appointment_address' | trans(), 'address.name', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                        {{ knp_pagination_sortable(events, 'app.text.appointment_address' | trans, 'address.name', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
                     </th>
                     <th{% if events.isSorted('event.start') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
-                        {{ knp_pagination_sortable(events, 'app.text.start' | trans(), 'event.start', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                        {{ knp_pagination_sortable(events, 'app.text.start' | trans, 'event.start', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
                     </th>
                     <th{% if events.isSorted('event.end') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
-                        {{ knp_pagination_sortable(events, 'app.text.end' | trans(), 'event.end', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                        {{ knp_pagination_sortable(events, 'app.text.end' | trans, 'event.end', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
                     </th>
                     <th{% if events.isSorted('event.createdAt') %} class="fa fa-sort-{{ directionEvent }}" {% endif %}>
-                        {{ knp_pagination_sortable(events, 'app.text.date_added' | trans(), 'event.createdAt', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
+                        {{ knp_pagination_sortable(events, 'app.text.date_added' | trans, 'event.createdAt', {} ,{'tab':'event', '_fragment':'tabs-area'}) }}
                     </th>
-                    <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                    <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,7 @@
                                href="{{ path('event_detail', { 'id': event.id | hashids_encode  }) }}"
                                class="btn btn-primary btn-xs">
                                 <i class="fa fa-desktop"></i>
-                                {{ 'app.form.action.show_detail' | trans() }}
+                                {{ 'app.form.action.show_detail' | trans }}
                             </a>
                             {% if is_work_role(work, app_user(), 'isSupervisor') and event.isOwner(app_user()) %}
                                 {% include 'common_part/ajax_delete.html.twig' with {

@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="title_left">
                     <h3>
-                        {{ 'app.text.work_list' | trans() }}
+                        {{ 'app.text.work_list' | trans }}
                     </h3>
                 </div>
             </div>
@@ -56,25 +56,25 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                                {{ 'app.text.author' | trans() }}
+                                                {{ 'app.text.author' | trans }}
                                             </th>
                                             <th style="width: 20%">
-                                                {{ 'app.text.work_title' | trans() }}
+                                                {{ 'app.text.work_title' | trans }}
                                             </th>
                                             <th>
-                                                {{ 'app.text.work_type' | trans() }}
+                                                {{ 'app.text.work_type' | trans }}
                                             </th>
                                             <th>
-                                                {{ 'app.text.supervisor' | trans() }}
+                                                {{ 'app.text.supervisor' | trans }}
                                             </th>
                                             <th>
-                                                {{ 'app.text.opponent' | trans() }}
+                                                {{ 'app.text.opponent' | trans }}
                                             </th>
                                             <th>
                                                 {{ 'app.text.task' | trans({'%count%': 2}) }}
                                             </th>
                                             <th style="width: 15%">
-                                                {{ 'app.text.options' | trans() }}
+                                                {{ 'app.text.options' | trans }}
                                             </th>
                                         </tr>
                                         </thead>
@@ -98,13 +98,13 @@
                                                     <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}">{{ work.title }}</a>
                                                     <br/>
                                                     <small>
-                                                        {{ 'app.text.deadline' | trans() }}
+                                                        {{ 'app.text.deadline' | trans }}
                                                         : {{ work.deadline | date('Y-m-d') }}
                                                     </small>
                                                     <br/>
                                                     {% if work.deadlineProgram %}
                                                         <small>
-                                                            {{ 'app.form.label.program_deadline' | trans() }}
+                                                            {{ 'app.form.label.program_deadline' | trans }}
                                                             : {{ work.deadlineProgram | date('Y-m-d') }}
                                                         </small>
                                                     {% endif %}
@@ -153,7 +153,7 @@
                                                     </td>
                                                 {% else %}
                                                     <td>
-                                                        {{ 'app.text.no_tasks' | trans() }}
+                                                        {{ 'app.text.no_tasks' | trans }}
                                                     </td>
                                                 {% endif %}
 
@@ -162,7 +162,7 @@
                                                        href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}"
                                                        target="_blank">
                                                         <i class="fa fa-folder"></i>
-                                                        {{ 'app.form.action.show' | trans() }}
+                                                        {{ 'app.form.action.show' | trans }}
                                                     </a>
 
                                                     {% if is_work_role(work, app_user(), 'isSupervisor') %}
@@ -171,14 +171,14 @@
                                                            data-toggle="modal"
                                                            data-target="#modalWindow">
                                                             <i class="fa fa-edit"></i>
-                                                            {{ 'app.form.action.edit' | trans() }}
+                                                            {{ 'app.form.action.edit' | trans }}
                                                         </a>
                                                         <a class="btn btn-warning btn-xs"
                                                            href="{{ path('work_edit_author', { 'id': work.id | hashids_encode }) }}"
                                                            data-toggle="modal"
                                                            data-target="#modalWindow">
                                                             <i class="fa fa-edit"></i>
-                                                            {{ 'app.form.action.edit_author' | trans() }}
+                                                            {{ 'app.form.action.edit_author' | trans }}
                                                         </a>
 
                                                         {% include 'common_part/ajax_delete.html.twig' with {
@@ -195,13 +195,13 @@
                                         </tbody>
                                     </table>
                                 {% else %}
-                                    {{ 'app.text.no_result' | trans() }}
+                                    {{ 'app.text.no_result' | trans }}
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 {% else %}
-                    {{ 'app.text.no_result' | trans() }}
+                    {{ 'app.text.no_result' | trans }}
                 {% endfor %}
 
                 <div class="navigation">

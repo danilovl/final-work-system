@@ -3,9 +3,9 @@
         <div class="x_title">
 
             {% if event.isOwner(app_user()) %}
-                <h2>{{ 'app.text.admin_panel' | trans() }}</h2>
+                <h2>{{ 'app.text.admin_panel' | trans }}</h2>
             {% else %}
-                <h2>{{ 'app.text.fast_access' | trans() }}</h2>
+                <h2>{{ 'app.text.fast_access' | trans }}</h2>
             {% endif %}
 
             <ul class="nav navbar-right panel_toolbox">
@@ -27,7 +27,7 @@
                            data-target="#modalWindow"
                            href="{{ path('task_create', { 'id': event.participant.work.id | hashids_encode, 'taskName': event.start | date('Y-m-d') ~ ' Konzultace' }) }}">
                             <i class="fa fa-tasks"></i>
-                            {{ 'app.form.action.task_create' | trans() }}
+                            {{ 'app.form.action.task_create' | trans }}
                         </a>
                     {% endif %}
 
@@ -35,14 +35,14 @@
                        href="{{ path('event_calendar_manage') }}"
                        target="_blank">
                         <i class="fa fa-calendar"></i>
-                        {{ 'app.text.appointment_calendar' | trans() }}
+                        {{ 'app.text.appointment_calendar' | trans }}
                     </a>
                     <a class="btn btn-app"
                        href="{{ path('event_edit', { 'id': event.id | hashids_encode }) }}"
                        data-toggle="modal"
                        data-target="#modalWindow">
                         <i class="fa fa-edit"></i>
-                        {{ 'app.form.action.edit' | trans() }}
+                        {{ 'app.form.action.edit' | trans }}
                     </a>
 
                     {% include 'common_part/ajax_delete.html.twig' with {
@@ -57,7 +57,7 @@
                        href="{{ path('event_calendar_reservation') }}"
                        target="_blank">
                         <i class="fa fa-calendar"></i>
-                        {{ 'app.text.appointment_calendar' | trans() }}
+                        {{ 'app.text.appointment_calendar' | trans }}
                     </a>
 
                     {% if event.address.skype == false and event.start | date('Y-m-d H:i') > "now" | date('Y-m-d H:i') and switchToSkype %}
@@ -65,7 +65,7 @@
                            data-toggle="modal"
                            data-target="#event-switch-to-skype-modal-{{ event.id | hashids_encode }}">
                             <i class="fa fa-skype"></i>
-                            {{ 'app.text.switch_to_skype' | trans() }}
+                            {{ 'app.text.switch_to_skype' | trans }}
                         </a>
                         <div class="modal fade bs-example-modal-sm"
                              tabindex="-1"
@@ -82,13 +82,13 @@
                                             <span aria-hidden="true">×</span>
                                         </button>
                                         <h4 class="modal-title">
-                                            {{ 'app.text.switch_to_skype' | trans() }}
+                                            {{ 'app.text.switch_to_skype' | trans }}
                                             | {{ event }}
                                         </h4>
                                     </div>
                                     <div class="modal-body">
                                         <h4>
-                                            {{ 'app.text.are_you_sure_switch_to_skype' | trans() }}
+                                            {{ 'app.text.are_you_sure_switch_to_skype' | trans }}
                                             ?
                                         </h4>
                                     </div>
@@ -96,12 +96,12 @@
                                         <button type="button"
                                                 class="btn btn-default"
                                                 data-dismiss="modal">
-                                            {{ 'app.form.action.close' | trans() }}
+                                            {{ 'app.form.action.close' | trans }}
                                         </button>
 
                                         <a class="btn btn-danger"
                                            href="{{ path('event_switch_to_skype', { 'id': event.id | hashids_encode }) }}">
-                                            {{ 'app.form.action.switch_to_skype' | trans() }}
+                                            {{ 'app.form.action.switch_to_skype' | trans }}
                                         </a>
 
                                     </div>

@@ -18,7 +18,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <dl class="dl-horizontal">
                         <dt>
-                            {{ 'app.text.status' | trans() }}:
+                            {{ 'app.text.status' | trans }}:
                         </dt>
                         <dd>
                            <span class="label"
@@ -27,7 +27,7 @@
                            </span>
                         </dd>
                         <dt>
-                            {{ 'app.text.type' | trans() }}:
+                            {{ 'app.text.type' | trans }}:
                         </dt>
                         <dd>
                             {{ work.type.name }}
@@ -37,7 +37,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <dl class="dl-horizontal">
                         <dt>
-                            {{ 'app.text.work_deadline' | trans() }}:
+                            {{ 'app.text.work_deadline' | trans }}:
                         </dt>
                         <dd>
                             {% if work_deadline_days(work) >= 14 %}
@@ -59,7 +59,7 @@
                             {% endif %}
                         </dd>
                         <dt>
-                            {{ 'app.text.remaining_time' | trans() }}:
+                            {{ 'app.text.remaining_time' | trans }}:
                         </dt>
                         <dd>
                           <span class="label label-danger"
@@ -69,7 +69,7 @@
 
                         {% if work.deadlineProgram is not empty %}
                             <dt>
-                                {{ 'app.text.program_deadline' | trans() }}:
+                                {{ 'app.text.program_deadline' | trans }}:
                             </dt>
                             <dd>
                                 {% if work_deadline_program_days(work) >= 14 %}
@@ -91,7 +91,7 @@
                                 {% endif %}
                             </dd>
                             <dt>
-                                {{ 'app.text.remaining_time' | trans() }}:
+                                {{ 'app.text.remaining_time' | trans }}:
                             </dt>
                             <dd>
                                <span class="label label-danger"
@@ -109,13 +109,13 @@
                     <div class="col-lg-7" id="cluster_info">
                         <dl class="dl-horizontal">
                             <dt>
-                                {{ 'app.text.created' | trans() }}:
+                                {{ 'app.text.created' | trans }}:
                             </dt>
                             <dd>
                                 {{ work.createdAt | date }}
                             </dd>
                             {% if work.updatedAt is not empty %}
-                                <dt>{{ 'app.text.last_update' | trans() }}:</dt>
+                                <dt>{{ 'app.text.last_update' | trans }}:</dt>
                                 <dd>{{ work.updatedAt | date }}</dd>
                             {% endif %}
                         </dl>
@@ -129,7 +129,7 @@
                         <div class="col-lg-12">
                             <dl class="dl-horizontal">
                                 <dt>
-                                    {{ 'app.text.category' | trans() }}:
+                                    {{ 'app.text.category' | trans }}:
                                 </dt>
                                 <dd>
                                     <ul class="list-inline prod_size">
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                                 <small>
-                                    {{ 'app.text.task_completed' | trans() }}
+                                    {{ 'app.text.task_completed' | trans }}
                                     <strong>
                                         {{ task_work_complete_percentage(work, activeTask) }}
                                         %
@@ -182,7 +182,7 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
-                                    {{ 'app.text.supervisor' | trans() }}
+                                    {{ 'app.text.supervisor' | trans }}
                                 </h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
@@ -238,14 +238,14 @@
                                                    target="_blank"
                                                    class="btn btn-sm btn-primary">
                                                     <i class="fa fa-comments-o"></i>
-                                                    {{ 'app.text.conversation' | trans() }}
+                                                    {{ 'app.text.conversation' | trans }}
                                                 </a>
                                             {% else %}
                                                 <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.supervisor.id | hashids_encode }) }}"
                                                    target="_blank"
                                                    class="btn btn-sm btn-primary">
                                                     <i class="fa fa-comments-o"></i>
-                                                    {{ 'app.text.conversation' | trans() }}
+                                                    {{ 'app.text.conversation' | trans }}
                                                 </a>
                                             {% endif %}
                                         {% endif %}
@@ -260,7 +260,7 @@
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
-                                        {{ 'app.text.opponent' | trans() }}
+                                        {{ 'app.text.opponent' | trans }}
                                     </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
@@ -316,14 +316,14 @@
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="fa fa-comments-o"></i>
-                                                        {{ 'app.text.conversation' | trans() }}
+                                                        {{ 'app.text.conversation' | trans }}
                                                     </a>
                                                 {% else %}
                                                     <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.opponent.id | hashids_encode }) }}"
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="fa fa-comments-o"></i>
-                                                        {{ 'app.text.conversation' | trans() }}
+                                                        {{ 'app.text.conversation' | trans }}
                                                     </a>
                                                 {% endif %}
                                             {% endif %}
@@ -339,7 +339,7 @@
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
-                                        {{ 'app.text.consultant' | trans() }}
+                                        {{ 'app.text.consultant' | trans }}
                                     </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
@@ -397,14 +397,14 @@
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="fa fa-comments-o"></i>
-                                                        {{ 'app.text.conversation' | trans() }}
+                                                        {{ 'app.text.conversation' | trans }}
                                                     </a>
                                                 {% else %}
                                                     <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.consultant.id | hashids_encode }) }}"
                                                        target="_blank"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="fa fa-comments-o"></i>
-                                                        {{ 'app.text.conversation' | trans() }}
+                                                        {{ 'app.text.conversation' | trans }}
                                                     </a>
                                                 {% endif %}
                                             {% endif %}

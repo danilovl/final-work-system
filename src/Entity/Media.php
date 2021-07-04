@@ -36,7 +36,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
- * @ORM\EntityListeners({"App\Entity\Listener\MediaUploadListener"})
  * @ORM\HasLifecycleCallbacks
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable

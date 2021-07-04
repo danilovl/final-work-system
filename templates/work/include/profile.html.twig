@@ -67,14 +67,14 @@
                                    target="_blank"
                                    class="btn btn-sm btn-primary">
                                     <i class="fa fa-comments-o"></i>
-                                    {{ 'app.text.conversation' | trans() }}
+                                    {{ 'app.text.conversation' | trans }}
                                 </a>
                             {% else %}
                                 <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.author.id | hashids_encode }) }}"
                                    target="_blank"
                                    class="btn btn-sm btn-primary">
                                     <i class="fa fa-comments-o"></i>
-                                    {{ 'app.text.conversation' | trans() }}
+                                    {{ 'app.text.conversation' | trans }}
                                 </a>
                             {% endif %}
                         {% endif %}

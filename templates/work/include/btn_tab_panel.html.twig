@@ -5,7 +5,7 @@
        data-target="#modalWindow"
        href="{{ path('task_create', { 'id': work.id | hashids_encode }) }}">
         <i class="fa fa-tasks"></i>
-        {{ 'app.form.action.task_create' | trans() }}
+        {{ 'app.form.action.task_create' | trans }}
     </a>
 {% endif %}
 
@@ -16,7 +16,7 @@
        data-target="#modalWindow"
        href="{{ path('version_create', { 'id': work.id | hashids_encode }) }}">
         <i class="fa fa-file-text-o"></i>
-        {{ 'app.form.action.add_work_version' | trans() }}
+        {{ 'app.form.action.add_work_version' | trans }}
     </a>
 {% endif %}
 
@@ -25,7 +25,7 @@
        href="{{ path('event_calendar_manage') }}"
        target="_blank">
         <i class="fa fa-calendar"></i>
-        {{ 'app.text.appointment_calendar_manage' | trans() }}
+        {{ 'app.text.appointment_calendar_manage' | trans }}
     </a>
 {% endif %}
 
@@ -34,7 +34,7 @@
        href="{{ path('event_calendar_reservation') }}"
        target="_blank">
         <i class="fa fa-calendar"></i>
-        {{ 'app.text.appointment_calendar' | trans() }}
+        {{ 'app.text.appointment_calendar' | trans }}
     </a>
 {% endif %}
 
@@ -45,14 +45,14 @@
            target="_blank"
            class="btn btn-app">
             <i class="fa fa-comments-o"></i>
-            {{ 'app.text.conversation' | trans() }}
+            {{ 'app.text.conversation' | trans }}
         </a>
     {% else %}
         <a href="{{ path('conversation_work_create', { 'id_work': work.id | hashids_encode, 'id_user_one': app_user().id | hashids_encode, 'id_user_two': work.author.id | hashids_encode }) }}"
            target="_blank"
            class="btn btn-app">
             <i class="fa fa-comments-o"></i>
-            {{ 'app.text.conversation' | trans() }}
+            {{ 'app.text.conversation' | trans }}
         </a>
     {% endif %}
 {% endif %}

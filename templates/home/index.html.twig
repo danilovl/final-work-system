@@ -20,7 +20,7 @@
 			{% endif %}
 
 			<div class="row">
-				{% for key,group in systemEventGroup %}
+				{% for key,group in paginator %}
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="x_panel tile fixed_height_320">
 							<div class="x_title">
@@ -39,23 +39,36 @@
 							<div class="x_content">
 								<div class="system-event-table">
 
-									{% set directionParam = systemEventPagination.getPaginatorOption('sortDirectionParameterName') %}
-									{% set params = systemEventPagination.getParams() %}
-									{% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+{#									{% set directionParam = systemEventPagination.getPaginatorOption('sortDirectionParameterName') %}#}
+{#									{% set params = systemEventPagination.getParams() %}#}
+{#									{% set direction = params[directionParam] is defined ? params[directionParam] : null %}#}
 
 									<table class="table">
 										<thead>
+{#										<tr>#}
+{#											<th style="width: 22%" {% if systemEventPagination.isSorted('system_event_recipient.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>#}
+{#												{{ knp_pagination_sortable(systemEventPagination, 'app.text.date_added' | trans, 'system_event_recipient.createdAt') }}#}
+{#											</th>#}
+{#											<th style="width: 10%"></th>#}
+{#											<th>#}
+{#												{{ 'app.text.event' | trans }}#}
+{#											</th>#}
+{#											<th{% if systemEventPagination.isSorted('system_event_recipient.viewed') %} class="fa fa-sort-{{ direction }}"{% endif %}>#}
+{#												{{ knp_pagination_sortable(systemEventPagination, 'app.text.state' | trans, 'system_event_recipient.viewed') }}#}
+{#											</th>#}
+{#										</tr>	#}
 										<tr>
-											<th style="width: 22%" {% if systemEventPagination.isSorted('system_event_recipient.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-												{{ knp_pagination_sortable(systemEventPagination, 'app.text.date_added' | trans(), 'system_event_recipient.createdAt') }}
+											<th style="width: 22%">
+												{{ 'app.text.date_added' | trans }}
 											</th>
 											<th style="width: 10%"></th>
 											<th>
-												{{ 'app.text.event' | trans() }}
+												{{ 'app.text.event' | trans }}
 											</th>
-											<th{% if systemEventPagination.isSorted('system_event_recipient.viewed') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-												{{ knp_pagination_sortable(systemEventPagination, 'app.text.state' | trans(), 'system_event_recipient.viewed') }}
+											<th>
+												{{ 'app.text.state' | trans }}
 											</th>
+										</tr>
 										</thead>
 										<tbody>
 
@@ -94,7 +107,7 @@
 
 			</div>
 			<div class="navigation">
-				{{ knp_pagination_render(systemEventGroup) }}
+				{{ knp_pagination_render(paginator) }}
 			</div>
 		</div>
 	</div>

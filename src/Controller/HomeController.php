@@ -12,8 +12,10 @@
 
 namespace App\Controller;
 
+use App\Constant\CacheKeyConstant;
 use App\Helper\SystemEventHelper;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
+use DateTime;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -25,26 +27,40 @@ class HomeController extends BaseController
     public function index(Request $request): Response
     {
         $user = $this->getUser();
-        $systemEventsQuery = $this->get('app.facade.system_event_recipient')
-            ->queryRecipientsQueryByUser($user);
+        $page = $request->query->getInt('page', $this->getParam('pagination.default.page'));
+
+        $cacheItem = $this->get('cache.app')->getItem(
+            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $user->getId())
+        );
+        $pagePaginators = $cacheItem->get();
 
         $isUnreadExist = $this->get('app.facade.system_event')
             ->isUnreadSystemEventsByRecipient($user);
 
-        $pagination = $this->createPagination(
-            $request,
-            $systemEventsQuery,
-            $this->getParam('pagination.default.page'),
-            $this->getParam('pagination.home.limit')
-        );
+        if (!$cacheItem->isHit() || empty($pagePaginators[$page])) {
+            $systemEventsQuery = $this->get('app.facade.system_event_recipient')
+                ->queryRecipientsQueryByUser($user);
 
-        $systemEventPagination = $pagination;
-        $pagination->setItems(SystemEventHelper::groupSystemEventByType($pagination));
+            $pagination = $this->createPagination(
+                $request,
+                $systemEventsQuery,
+                $page,
+                $this->getParam('pagination.home.limit')
+            );
+
+            $pagination->setItems(SystemEventHelper::groupSystemEventByType($pagination));
+
+            $pagePaginators[$page] = $pagination;
+
+            $cacheItem->set($pagePaginators);
+            $cacheItem->expiresAfter(new DateTime('tomorrow'));
+
+            $this->get('cache.app')->save($cacheItem);
+        }
 
         return $this->render('home/index.html.twig', [
             'isSystemEventUnreadExist' => $isUnreadExist,
-            'systemEventGroup' => $pagination,
-            'systemEventPagination' => $systemEventPagination
+            'paginator' => $pagePaginators[$page]
         ]);
     }
 }

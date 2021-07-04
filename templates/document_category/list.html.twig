@@ -10,7 +10,7 @@
                     <div class="x_panel">
                         <div class="x_title" style="height: auto;">
                             <h2>
-                                {{ 'app.page.information_materials_category_list' | trans() }}
+                                {{ 'app.page.information_materials_category_list' | trans }}
                             </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li class="dropdown">
@@ -27,7 +27,7 @@
                                                data-toggle="modal"
                                                data-target="#modalWindow">
                                                 <i class="fa fa-edit"></i>
-                                                {{ 'app.form.action.create' | trans() }}
+                                                {{ 'app.form.action.create' | trans }}
                                             </a>
                                         </li>
                                     </ul>
@@ -52,18 +52,18 @@
                                     <thead>
                                     <tr>
                                         <th{% if mediaCategories.isSorted('media_category.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.name' | trans(), 'work_category.name') }}
+                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.name' | trans, 'work_category.name') }}
                                         </th>
                                         <th{% if mediaCategories.isSorted('media_category.description') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.description' | trans(), 'media_category.description') }}
+                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.description' | trans, 'media_category.description') }}
                                         </th>
                                         <th>
-                                            {{ 'app.text.information_materials' | trans() }}
+                                            {{ 'app.text.information_materials' | trans }}
                                         </th>
                                         <th{% if mediaCategories.isSorted('media_category.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.date_added' | trans(), 'media_category.createdAt') }}
+                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.date_added' | trans, 'media_category.createdAt') }}
                                         </th>
-                                        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                                        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -88,7 +88,7 @@
                                                    class="btn btn-warning btn-xs"
                                                    href="{{ path('document_category_edit', { 'id': mediaCategory.id | hashids_encode }) }}">
                                                     <i class="fa fa-pencil"></i>
-                                                    {{ 'app.form.action.edit' | trans() }}
+                                                    {{ 'app.form.action.edit' | trans }}
                                                 </a>
 
                                                 {% include 'common_part/ajax_delete.html.twig' with {
@@ -105,7 +105,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                {{ 'app.text.no_result' | trans() }}
+                                {{ 'app.text.no_result' | trans }}
                             {% endif %}
 
                         </div>

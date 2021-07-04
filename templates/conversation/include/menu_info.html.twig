@@ -4,7 +4,7 @@
             <div class="file-manager">
                 <a class="btn btn-block btn-primary compose-mail"
                    href="{{ path('conversation_create') }}">
-                    {{ 'app.text.write_message' | trans() }}
+                    {{ 'app.text.write_message' | trans }}
                 </a>
                 <div class="space-25"></div>
                 <h5></h5>
@@ -12,7 +12,7 @@
                     <li>
                         <a href="">
                             <i class="fa fa-inbox "></i>
-                            {{ 'app.text.inbox' | trans() }}
+                            {{ 'app.text.inbox' | trans }}
 
                             {% set countUnreadConversationMessage = conversation_message.getTotalUnreadMessagesByUser(app_user()) %}
 
@@ -27,26 +27,26 @@
                     </li>
                 </ul>
                 <h5>
-                    {{ 'app.text.category' | trans() }}
+                    {{ 'app.text.category' | trans }}
                 </h5>
                 <ul class="category-list" style="padding: 0">
                     <li>
                         <a href="#">
                             <i class="fa fa-circle text-warning"></i>
-                            {{ 'app.text.work' | trans() }}
+                            {{ 'app.text.work' | trans }}
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-circle text-primary"></i>
-                            {{ 'app.text.group_mail' | trans() }}
+                            {{ 'app.text.group_mail' | trans }}
                         </a>
                     </li>
                 </ul>
 
                 {% if isUnreadMessages %}
                     <span>
-                    {{ 'app.text.change_all_messages_to_read' | trans() }}
+                    {{ 'app.text.change_all_messages_to_read' | trans }}
                     </span>
                     {% include 'common_part/button/js-switch.html.twig' with {
                          'dataTargetUrl': path('conversation_message_all_change_to_read_ajax')

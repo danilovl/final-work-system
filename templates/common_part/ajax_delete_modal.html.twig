@@ -13,26 +13,26 @@
                     <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title">
-                    {{ 'app.text.deleting' | trans() }} | {{ modalDataTargetName }}
+                    {{ 'app.text.deleting' | trans }} | {{ modalDataTargetName }}
                 </h4>
             </div>
             <div class="modal-body">
                 <h4>
-                    {{ 'app.text.are_you_sure_delete' | trans() }}?
+                    {{ 'app.text.are_you_sure_delete' | trans }}?
                 </h4>
             </div>
             <div class="modal-footer">
                 <button type="button"
                         class="btn btn-default"
                         data-dismiss="modal">
-                    {{ 'app.form.action.close' | trans() }}
+                    {{ 'app.form.action.close' | trans }}
                 </button>
 
                 {% if modalDataTargetDeleteUrl is not defined and deleteForm is defined and deleteForm %}
                     {{ form_start(deleteForm, {'attr': {'class': 'delete-form-button'}}) }}
                     <button class="btn btn-danger">
                         <i class="fa fa-trash-o"></i>
-                        {{ 'app.form.action.delete' | trans() }}
+                        {{ 'app.form.action.delete' | trans }}
                     </button>
                     {{ form_end(deleteForm) }}
                 {% elseif modalDataTargetDeleteUrl is defined %}
@@ -43,7 +43,7 @@
                             class="btn btn-danger delete-element">
                         <i class="fa fa-refresh fa-spin hide"></i>
                         <i class="fa fa-trash-o"></i>
-                        {{ 'app.form.action.delete' | trans() }}
+                        {{ 'app.form.action.delete' | trans }}
                     </button>
                 {% endif %}
             </div>

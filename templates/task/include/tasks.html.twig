@@ -10,37 +10,37 @@
     <thead>
     <tr>
         <th{% if tasks.isSorted('task.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-            {{ knp_pagination_sortable(tasks, 'app.text.name' | trans(), 'task.name') }}
+            {{ knp_pagination_sortable(tasks, 'app.text.name' | trans, 'task.name') }}
         </th>
 
         {% if isWorkTab == false %}
             <th{% if tasks.isSorted('work.title') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans(), 'work.title') }}
+                {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans, 'work.title') }}
             </th>
         {% endif %}
 
         <th{% if tasks.isSorted('task.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-            {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans(), 'task.createdAt') }}
+            {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans, 'task.createdAt') }}
         </th>
         <th{% if tasks.isSorted('task.deadline') %} class="fa fa-sort-{{ direction }}"{% endif %}
                 data-toggle="tooltip"
                 data-placement="top"
-                data-original-title="{{ 'app.tooltip.task_deadline' | trans() }}">
-            {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans(), 'task.deadline') }}
+                data-original-title="{{ 'app.tooltip.task_deadline' | trans }}">
+            {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans, 'task.deadline') }}
         </th>
 
         {% if isSupervisor %}
             <th {% if tasks.isSorted('task.active') %} class="fa fa-sort-{{ direction }}"{% endif %}
                     data-toggle="tooltip"
                     data-placement="top"
-                    data-original-title="{{ 'app.tooltip.task_active' | trans() }}">
-                {{ knp_pagination_sortable(tasks, 'app.text.active' | trans(), 'task.active', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
+                    data-original-title="{{ 'app.tooltip.task_active' | trans }}">
+                {{ knp_pagination_sortable(tasks, 'app.text.active' | trans, 'task.active', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
             <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
                     data-toggle="tooltip"
                     data-placement="top"
-                    data-original-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans() }}">
-                {{ knp_pagination_sortable(tasks, 'app.text.back_to_revision' | trans(), 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
+                    data-original-title="{{ 'app.tooltip.task_back_to_revision_supervisor' | trans }}">
+                {{ knp_pagination_sortable(tasks, 'app.text.back_to_revision' | trans, 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
         {% endif %}
 
@@ -48,18 +48,18 @@
             <th{% if tasks.isSorted('task.notifyComplete') %} class="fa fa-sort-{{ direction }}"{% endif %}
                     data-toggle="tooltip"
                     data-placement="top"
-                    data-original-title="{{ 'app.tooltip.task_back_to_revision' | trans() }}">
-                {{ knp_pagination_sortable(tasks, 'app.text.notify_completed' | trans(), 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
+                    data-original-title="{{ 'app.tooltip.task_back_to_revision' | trans }}">
+                {{ knp_pagination_sortable(tasks, 'app.text.notify_completed' | trans, 'task.notifyComplete', {} ,{'tab':'task', '_fragment':'tabs-area'}) }}
             </th>
         {% endif %}
 
         <th{% if tasks.isSorted('task.complete') %} class="fa fa-sort-{{ direction }}"{% endif %}
                 data-toggle="tooltip"
                 data-placement="top"
-                data-original-title="{{ 'app.tooltip.task_complete' | trans() }}">
-            {{ knp_pagination_sortable(tasks, 'app.text.complete' | trans(), 'task.complete') }}
+                data-original-title="{{ 'app.tooltip.task_complete' | trans }}">
+            {{ knp_pagination_sortable(tasks, 'app.text.complete' | trans, 'task.complete') }}
         </th>
-        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
     </tr>
     </thead>
     <tbody>
@@ -139,7 +139,7 @@
                        aria-expanded="true"
                        aria-controls="tab-task-description-{{ task.id | hashids_encode }}">
                         <i class="fa fa-desktop"></i>
-                        {{ 'app.form.action.show_detail' | trans() }}
+                        {{ 'app.form.action.show_detail' | trans }}
                     </a>
                 {% endif %}
 
@@ -148,7 +148,7 @@
                        href="{{ path('work_detail', { 'id': task.work.id | hashids_encode }) }}"
                        target="_blank">
                         <i class="fa fa-folder"></i>
-                        {{ 'app.text.work' | trans() }}
+                        {{ 'app.text.work' | trans }}
                     </a>
                 {% endif %}
 
@@ -158,7 +158,7 @@
                        class="btn btn-warning btn-xs"
                        href="{{ path('task_edit', { 'id_work': task.work.id | hashids_encode, 'id_task': task.id | hashids_encode }) }}">
                         <i class="fa fa-pencil"></i>
-                        {{ 'app.form.action.edit' | trans() }}
+                        {{ 'app.form.action.edit' | trans }}
                     </a>
 
                     {% include 'common_part/ajax_delete.html.twig' with {

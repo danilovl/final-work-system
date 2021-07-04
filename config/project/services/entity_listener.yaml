@@ -1,0 +1,31 @@
+services:
+  _defaults:
+    public: true
+
+  app.entity_listener.media:
+    class: App\EventListener\Entity\MediaUploadListener
+    autowire: true
+    tags:
+      - name: doctrine.event_listener
+        event: prePersist
+        entity: App\Entity\Media
+        method: prePersist
+
+      - name: doctrine.event_listener
+        event: preUpdate
+        entity: App\Entity\Media
+        method: preUpdate
+
+      - name: doctrine.event_listener
+        event: preRemove
+        entity: App\Entity\Media
+        method: preRemove
+
+  app.entity_listener.system_event:
+    class: App\EventListener\Entity\SystemEventListener
+    autowire: true
+    tags:
+      - name: doctrine.event_listener
+        event: postPersist
+        entity: App\Entity\SystemEvent
+        method: postPersist

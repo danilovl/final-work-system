@@ -13,6 +13,7 @@
 namespace App\Controller\Ajax;
 
 use App\Constant\{
+    CacheKeyConstant,
     AjaxJsonTypeConstant,
     VoterSupportConstant
 };
@@ -29,6 +30,10 @@ class SystemEventController extends BaseController
         $systemEventRecipient->changeViewed();
         $this->flushEntity($systemEventRecipient);
 
+        $this->get('app.event_dispatcher.cache')->onClearCacheKey(
+            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $this->getUser()->getId())
+        );
+
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }
 
@@ -40,6 +45,10 @@ class SystemEventController extends BaseController
 
         if ($isUnreadExist === true) {
             $this->get('app.facade.system_event_recipient')->updateViewedAll($user);
+
+            $this->get('app.event_dispatcher.cache')->onClearCacheKey(
+                sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $this->getUser()->getId())
+            );
         }
 
         return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

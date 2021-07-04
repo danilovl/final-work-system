@@ -1,0 +1,11 @@
+services:
+  app.event_subscriber.widget:
+    class: App\EventSubscriber\WidgetEventSubscriber
+    autoconfigure: true
+    autowire: true
+
+  app.event_subscriber.cache:
+    class: App\EventSubscriber\CacheEventSubscriber
+    autoconfigure: true
+    arguments:
+      - '@cache.app'

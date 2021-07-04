@@ -10,7 +10,7 @@
                     <div class="x_panel">
                         <div class="x_title" style="height: auto;">
                             <h2>
-                                {{ 'app.page.user_group_list' | trans() }}
+                                {{ 'app.page.user_group_list' | trans }}
                             </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li class="dropdown">
@@ -27,7 +27,7 @@
                                                data-toggle="modal"
                                                data-target="#modalWindow">
                                                 <i class="fa fa-edit"></i>
-                                                {{ 'app.form.action.create' | trans() }}
+                                                {{ 'app.form.action.create' | trans }}
                                             </a>
                                         </li>
                                     </ul>
@@ -52,9 +52,9 @@
                                     <thead>
                                     <tr>
                                         <th{% if groups.isSorted('name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                                            {{ knp_pagination_sortable(groups, 'app.text.name' | trans(), 'name') }}
+                                            {{ knp_pagination_sortable(groups, 'app.text.name' | trans, 'name') }}
                                         </th>
-                                        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                                        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -70,7 +70,7 @@
                                                    class="btn btn-warning btn-xs"
                                                    href="{{ path('user_group_edit', { 'id': group.id | hashids_encode }) }}">
                                                     <i class="fa fa-pencil"></i>
-                                                    {{ 'app.form.action.edit' | trans() }}
+                                                    {{ 'app.form.action.edit' | trans }}
                                                 </a>
 
                                                 {% include 'common_part/ajax_delete.html.twig' with {
@@ -87,7 +87,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                {{ 'app.text.no_result' | trans() }}
+                                {{ 'app.text.no_result' | trans }}
                             {% endif %}
 
                         </div>

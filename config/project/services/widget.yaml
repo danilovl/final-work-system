@@ -35,11 +35,6 @@ services:
     tags:
       - { name: app.widgets, alias: menu }
 
-  app.event_subscriber.widget:
-    class: App\EventSubscriber\WidgetEventSubscriber
-    autoconfigure: true
-    autowire: true
-
   app.widget.user_profile_information:
     class: App\Widget\UserProfileInformationNotifyWidget
     autowire: true

@@ -26,7 +26,7 @@ class WidgetStreamService
     private ?DateTime $date;
     private array $lastCountUnread = [
         'conversation' => 0,
-        'systemEvent' => 0,
+        'systemEvent' => 0
     ];
 
     public function __construct(
@@ -66,7 +66,7 @@ class WidgetStreamService
 
         return [
             'conversation' => $conversation,
-            'systemEvent' => $systemEvent,
+            'systemEvent' => $systemEvent
         ];
     }
 

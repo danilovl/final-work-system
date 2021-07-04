@@ -60,4 +60,6 @@ final class Events
     public const SYSTEM_MESSAGE_CREATE = 'system.message.create';
 
     public const WIDGET_GROUP_REPLACE = 'widget.group.replace';
+
+    public const CACHE_CLEAR_KEY = 'cache.clear_key';
 }

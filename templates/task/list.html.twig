@@ -10,7 +10,7 @@
                     <div class="x_panel">
                         <div class="x_title" style="height: auto;">
                             <div class="row">
-                                <h2>{{ 'app.text.task_list' | trans() }}</h2>
+                                <h2>{{ 'app.text.task_list' | trans }}</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
                                         <a class="collapse-link">
@@ -23,7 +23,7 @@
                             {% if isTasksInComplete %}
                                 <div class="row">
                                 <span>
-                    			    {{ 'app.text.change_all_tasks_to_complete' | trans() }}
+                    			    {{ 'app.text.change_all_tasks_to_complete' | trans }}
                     		    </span>
                                     <span>
                                         {% include 'common_part/button/js-switch.html.twig' with {
@@ -40,7 +40,7 @@
                                     'isSupervisor': true
                                 } %}
                             {% else %}
-                                {{ 'app.text.no_result' | trans() }}
+                                {{ 'app.text.no_result' | trans }}
                             {% endif %}
 
                         </div>

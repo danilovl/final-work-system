@@ -120,7 +120,7 @@ class TaskController extends BaseController
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
         $taskModel = TaskModel::fromTask($task);
-        $form = $form = $this->getTaskForm(ControllerMethodConstant::EDIT, $taskModel)
+        $form = $this->getTaskForm(ControllerMethodConstant::EDIT, $taskModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {

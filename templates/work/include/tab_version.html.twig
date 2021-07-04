@@ -12,21 +12,21 @@
             <thead>
             <tr>
                 <th{% if versions.isSorted('media.name') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
-                    {{ knp_pagination_sortable(versions, 'app.text.name' | trans(), 'media.name', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                    {{ knp_pagination_sortable(versions, 'app.text.name' | trans, 'media.name', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
                 </th>
                 <th{% if versions.isSorted('media.originalMediaName') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
-                    {{ knp_pagination_sortable(versions, 'app.text.original_file_name' | trans(), 'media.originalMediaName', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                    {{ knp_pagination_sortable(versions, 'app.text.original_file_name' | trans, 'media.originalMediaName', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
                 </th>
                 <th{% if versions.isSorted('media.type') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
-                    {{ knp_pagination_sortable(versions, 'app.text.type' | trans(), 'media.type', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                    {{ knp_pagination_sortable(versions, 'app.text.type' | trans, 'media.type', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
                 </th>
                 <th{% if versions.isSorted('media.mediaSize') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
-                    {{ knp_pagination_sortable(versions, 'app.text.file_size' | trans(), 'media.mediaSize', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                    {{ knp_pagination_sortable(versions, 'app.text.file_size' | trans, 'media.mediaSize', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
                 </th>
                 <th{% if versions.isSorted('media.createdAt') %} class="fa fa-sort-{{ directionVersion }}" {% endif %}>
-                    {{ knp_pagination_sortable(versions, 'app.text.date_added' | trans(), 'media.createdAt', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
+                    {{ knp_pagination_sortable(versions, 'app.text.date_added' | trans, 'media.createdAt', {} ,{'tab':'version', '_fragment':'tabs-area'}) }}
                 </th>
-                <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
                                aria-expanded="true"
                                aria-controls="tab-version-description-{{ version.id | hashids_encode }}">
                                 <i class="fa fa-desktop"></i>
-                                {{ 'app.form.action.show_detail' | trans() }}
+                                {{ 'app.form.action.show_detail' | trans }}
                             </a>
                         {% endif %}
 
@@ -80,19 +80,19 @@
                                 {% endif %}
                         >
                             <i class="fa fa-file-text-o"></i>
-                            {{ 'app.form.action.show_content' | trans() }}
+                            {{ 'app.form.action.show_content' | trans }}
                         </a>
 
                         {% if version.existMediaFile %}
                             <a class="btn btn-success btn-xs"
                                href="{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}">
                                 <i class="fa fa-download"></i>
-                                {{ 'app.form.action.download' | trans() }}
+                                {{ 'app.form.action.download' | trans }}
                             </a>
                         {% else %}
                             <a class="btn btn-success btn-xs">
                                 <i class="fa fa-download"></i>
-                                {{ 'app.text.file_not_found' | trans() }}
+                                {{ 'app.text.file_not_found' | trans }}
                             </a>
                         {% endif %}
 
@@ -102,7 +102,7 @@
                                class="btn btn-warning btn-xs"
                                href="{{ path('version_edit', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}">
                                 <i class="fa fa-pencil"></i>
-                                {{ 'app.form.action.edit' | trans() }}
+                                {{ 'app.form.action.edit' | trans }}
                             </a>
 
                             {% include 'common_part/ajax_delete.html.twig' with {
@@ -146,7 +146,7 @@
                                 {% if version.existMediaFile %}asdasdas
                                     {{ render_service('app.controller.version', 'detailContent', {'version': version}) }}
                                 {% else %}
-                                    {{ 'app.text.file_not_found' | trans() }}
+                                    {{ 'app.text.file_not_found' | trans }}
                                 {% endif %}
 
                             </div>

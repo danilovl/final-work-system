@@ -21,7 +21,7 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
-                                    {{ 'app.form.label.name' | trans() }}
+                                    {{ 'app.form.label.name' | trans }}
                                 </h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
@@ -35,7 +35,7 @@
                             <div class="x_content">
                                 <dl class="dl-horizontal">
                                     <dt>
-                                        {{ 'app.text.name' | trans() }}
+                                        {{ 'app.text.name' | trans }}
                                     </dt>
                                     <dd>
                                         {{ eventSchedule.name }}
@@ -43,7 +43,7 @@
 
                                     {% if eventSchedule.description %}
                                         <dt>
-                                            {{ 'app.text.description' | trans() }}
+                                            {{ 'app.text.description' | trans }}
                                         </dt>
                                         <dd>
                                             {{ eventSchedule.description | away_to | raw }}
@@ -58,7 +58,7 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
-                                    {{ 'app.text.admin_panel' | trans() }}
+                                    {{ 'app.text.admin_panel' | trans }}
                                 </h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
@@ -74,7 +74,7 @@
                                     <a class="btn btn-app"
                                        href="{{ path('event_schedule_edit', { 'id': eventSchedule.id | hashids_encode }) }}">
                                         <i class="fa fa-edit"></i>
-                                        {{ 'app.form.action.edit' | trans() }}
+                                        {{ 'app.form.action.edit' | trans }}
                                     </a>
 
                                     {% include 'common_part/ajax_delete.html.twig' with {
@@ -94,7 +94,7 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>
-                                    {{ 'app.text.event_list' | trans() }}
+                                    {{ 'app.text.event_list' | trans }}
                                 </h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
@@ -123,7 +123,7 @@
                                             <div class="col-md-5">
                                                 <div class="row">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                        {{ 'app.form.label.type' | trans() }}
+                                                        {{ 'app.form.label.type' | trans }}
                                                     </label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         {{ template.type }}
@@ -131,7 +131,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                        {{ 'app.form.label.name' | trans() }}
+                                                        {{ 'app.form.label.name' | trans }}
                                                     </label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         {{ template.name }}
@@ -139,7 +139,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                        {{ 'app.form.label.appointment_address' | trans() }}
+                                                        {{ 'app.form.label.appointment_address' | trans }}
                                                     </label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         {{ template.address }}
@@ -147,7 +147,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                        {{ 'app.form.label.start' | trans() }}
+                                                        {{ 'app.form.label.start' | trans }}
                                                     </label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         {{ template.start | date("H:i") }}
@@ -155,7 +155,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                        {{ 'app.form.label.end' | trans() }}
+                                                        {{ 'app.form.label.end' | trans }}
                                                     </label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         {{ template.end | date("H:i") }}

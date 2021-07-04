@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="x_panel">
                         <div class="x_title" style="height: auto;">
-                            <h2>{{ 'app.page.article_list' | trans() }} | {{ articleCategory.name }}</h2>
+                            <h2>{{ 'app.page.article_list' | trans }} | {{ articleCategory.name }}</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
@@ -25,8 +25,8 @@
                                 <table class="table table-striped projects">
                                     <thead>
                                     <tr>
-                                        <th>{{ 'app.text.name' | trans() }}</th>
-                                        <th style="width: 20%">{{ 'app.text.options' | trans() }}</th>
+                                        <th>{{ 'app.text.name' | trans }}</th>
+                                        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -39,7 +39,7 @@
                                                    target="_blank"
                                                    href="{{ path('article_detail', { 'id_category': articleCategory.id | hashids_encode, 'id_article': article.id | hashids_encode }) }}">
                                                     <i class="fa fa-desktop"></i>
-                                                    {{ 'app.text.read' | trans() }}
+                                                    {{ 'app.text.read' | trans }}
                                                 </a>
                                             </td>
                                         </tr>
@@ -48,7 +48,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                {{ 'app.text.no_result' | trans() }}
+                                {{ 'app.text.no_result' | trans }}
                             {% endif %}
 
                         </div>

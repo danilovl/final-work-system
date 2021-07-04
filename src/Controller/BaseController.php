@@ -32,7 +32,7 @@ class BaseController extends AbstractController
 {
     protected function createPagination(
         Request $request,
-        $target,
+        mixed $target,
         int $page = null,
         int $limit = null,
         array $options = null

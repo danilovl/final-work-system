@@ -10,38 +10,53 @@
  *
  */
 
-namespace App\Entity\Listener;
+namespace App\EventListener\Entity;
 
-use App\Constant\MediaTypeConstant;
 use App\Exception\RuntimeException;
 use Doctrine\ORM\Event\{
     LifecycleEventArgs,
     PreUpdateEventArgs
 };
-use App\Entity\Media;
-use App\Entity\MediaType;
-use App\Entity\MediaMimeType;
+use App\Entity\{
+    Media,
+    MediaMimeType
+};
 
 class MediaUploadListener
 {
     private const DEFAULT_NAME = 'default media name';
 
-    public function prePersist(Media $media, LifecycleEventArgs $eventArgs): void
+    public function prePersist(LifecycleEventArgs $eventArgs): void
     {
-        $this->create($media, $eventArgs);
+        $entity = $eventArgs->getEntity();
+        if (!$entity instanceof Media){
+            return;
+        }
+
+        $this->create($entity, $eventArgs);
     }
 
-    public function preUpdate(Media $media, PreUpdateEventArgs $eventArgs): void
+    public function preUpdate(PreUpdateEventArgs $eventArgs): void
     {
-        $this->update($media, $eventArgs);
+        $entity = $eventArgs->getEntity();
+        if (!$entity instanceof Media){
+            return;
+        }
+
+        $this->update($entity, $eventArgs);
     }
 
-    public function preRemove(Media $media): void
+    public function preRemove(LifecycleEventArgs $eventArgs): void
     {
-        $this->remove($media);
+        $entity = $eventArgs->getEntity();
+        if (!$entity instanceof Media){
+            return;
+        }
+
+        $this->remove($entity);
     }
 
-    public function create(Media $media, LifecycleEventArgs $eventArgs): void
+    private function create(Media $media, LifecycleEventArgs $eventArgs): void
     {
         $uploadMedia = $media->getUploadMedia();
         $media->setUploadMedia(null);
@@ -71,7 +86,7 @@ class MediaUploadListener
         );
     }
 
-    public function update(Media $media, PreUpdateEventArgs $eventArgs): void
+    private function update(Media $media, PreUpdateEventArgs $eventArgs): void
     {
         $uploadMedia = $media->getUploadMedia();
         if ($uploadMedia) {
@@ -105,7 +120,7 @@ class MediaUploadListener
         }
     }
 
-    public function remove(Media $media): void
+    private function remove(Media $media): void
     {
         $media->removeMediaFile();
     }
