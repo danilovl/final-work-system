@@ -34,8 +34,6 @@ class EntityManagerServiceTest extends KernelTestCase
 
     public function setUp(): void
     {
-        parent::setUp();
-
         $kernel = self::bootKernel();
         $this->entityManagerService = $kernel->getContainer()->get('app.entity_manager');
     }

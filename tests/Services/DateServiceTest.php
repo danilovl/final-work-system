@@ -23,8 +23,6 @@ class DateServiceTest extends KernelTestCase
 
     public function setUp(): void
     {
-        parent::setUp();
-
         $kernel = self::bootKernel();
         $this->translator = $kernel->getContainer()->get('translator');
     }

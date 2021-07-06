@@ -21,6 +21,7 @@ trait ExtensionsTrait
     {
         $validator = Validation::createValidatorBuilder()
             ->enableAnnotationMapping()
+            ->addDefaultDoctrineAnnotationReader()
             ->getValidator();
 
         return [

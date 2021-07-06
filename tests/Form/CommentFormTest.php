@@ -12,6 +12,7 @@
 
 namespace App\Tests\Form;
 
+use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use App\Entity\{
     User,
     Event
@@ -19,14 +20,13 @@ use App\Entity\{
 use DateTime;
 use App\Form\CommentForm;
 use App\Model\Comment\CommentModel;
-use App\Tests\Form\Traits\ExtensionsTrait;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class CommentFormTest extends TypeTestCase
 {
-    use ExtensionsTrait;
+    use ValidatorExtensionTrait;
 
     private function getUserMock(int $id): MockObject
     {
@@ -70,8 +70,8 @@ class CommentFormTest extends TypeTestCase
         $form->submit(['content' => 'text']);
         $isContentFieldExist = $form->has('content');
 
-        $this->assertEquals($isContentFieldExist, $isContentShow);
         $this->assertTrue($form->isSynchronized());
+        $this->assertEquals($isContentShow, $isContentFieldExist);
     }
 
     public function commentProvider(): Generator

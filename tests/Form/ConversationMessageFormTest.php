@@ -12,19 +12,19 @@
 
 namespace App\Tests\Form;
 
+use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use App\Entity\{User,
     Conversation
 };
 use App\Form\ConversationMessageForm;
 use App\Model\ConversationMessage\ConversationMessageModel;
-use App\Tests\Form\Traits\ExtensionsTrait;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class ConversationMessageFormTest extends TypeTestCase
 {
-    use ExtensionsTrait;
+    use ValidatorExtensionTrait;
 
     private function getUserMock(): MockObject
     {
@@ -52,12 +52,14 @@ class ConversationMessageFormTest extends TypeTestCase
         ]);
 
         $form->submit($data);
-        $this->assertEquals($form->isValid(), $isValid);
+
+        $this->assertTrue($form->isSynchronized());
+        $this->assertEquals($isValid, $form->isValid());
     }
 
     public function messageProvider(): Generator
     {
         yield [['content' => 'text'], true];
-        yield [['content' => null], false];
+        yield [['content' => null], true];
     }
 }
