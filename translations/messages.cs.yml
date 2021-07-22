@@ -190,12 +190,14 @@ app:
     are_you_sure_want_to_leave: Jste si jisti, že chcete odejít?
     attachment: Příloha
     author: Autor
+    author_like: Autora
     author_list: Seznam autorů
     back_to_revision: Zpět k přepracování
     group_mail: Hromadná pošta
     category: Kategorie
     comment: Komentář
     complete: Kompletní
+    consultant_like: Konzultanta
     consultant_list: Seznam konzultantů
     conversation: Konverzace
     conversation_attachment: Přílohy z konverzace
@@ -241,6 +243,7 @@ app:
     notify_completed: Oznámení dokončení
     open_conversation_in_new_window: Otevřit konverzace v novém okně
     opponent: Oponent
+    opponent_like: Oponenta
     opponent_list: Seznam oponentů
     option: Možnost
     options: Možnosti

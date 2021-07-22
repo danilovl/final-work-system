@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ work.author }} ohlásil splnění úkolu "{{ task }}" u
-        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}">"{{ work }}".</a>
+        {{ workAuthor }} ohlásil splnění úkolu "{{ taskName }}" u
+        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': workId | hashids_encode })) }}">"{{ workTitle }}".</a>
         <br><br>
         S pozdravem
         <br><br>

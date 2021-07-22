@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        připomenutí o uplynutí lhůty splnění úkolu "{{ task }}" u Vaší
-        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}"> práce.</a>
+        připomenutí o uplynutí lhůty splnění úkolu "{{ taskName }}" u Vaší
+        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': workId | hashids_encode })) }}"> práce.</a>
         <br><br>
         S pozdravem
         <br><br>

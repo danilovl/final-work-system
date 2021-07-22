@@ -12,6 +12,7 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -34,40 +35,57 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     {
         $event = $genericEvent->event;
 
-        $subject = $this->trans('subject.event_create');
-        $to = $event->getParticipant()->getUser()->getEmail();
-        $body = $this->twig->render($this->getTemplate('event_create'), [
-            'user' => $event->getOwner(),
-            'event' => $event
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.event_create'),
+            'to' => $event->getParticipant()->getUser()->getEmail(),
+            'from' => $this->sender,
+            'template' => 'event_create',
+            'templateParameters' => [
+                'eventOwner' => $event->getOwner()->getFullNameDegree(),
+                'eventId' => $event->getId()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onEventEdit(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
 
-        $subject = $this->trans('subject.event_edit');
-        $to = $event->getParticipant()->getUser()->getEmail();
-        $body = $this->twig->render($this->getTemplate('event_edit'), [
-            'event' => $event
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.event_edit'),
+            'to' => $event->getParticipant()->getUser()->getEmail(),
+            'from' => $this->sender,
+            'template' => 'event_edit',
+            'templateParameters' => [
+                'eventOwner' => $event->getOwner()->getFullNameDegree(),
+                'eventId' => $event->getId()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onEventSwitchSkype(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
 
-        $subject = $this->trans('subject.event_switch_skype');
-        $to = $event->getOwner()->getEmail();
-        $body = $this->twig->render($this->getTemplate('event_switch_skype'), [
-            'event' => $event
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.event_switch_skype'),
+            'to' => $event->getOwner()->getEmail(),
+            'from' => $this->sender,
+            'template' => 'event_switch_skype',
+            'templateParameters' => [
+                'eventParticipant' => $event->getParticipant()->getUser()->getFullNameDegree(),
+                'eventId' => $event->getId()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onEventCommentCreate(EventGenericEvent $genericEvent): void
@@ -83,13 +101,19 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $user = $eventComment->getOwner();
         }
 
-        $subject = $this->trans('subject.event_comment_create');
-        $body = $this->twig->render($this->getTemplate('event_comment_create'), [
-            'user' => $user,
-            'event' => $event
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.event_comment_create'),
+            'to' => $to,
+            'from' => $this->sender,
+            'template' => 'event_comment_create',
+            'templateParameters' => [
+                'commentOwner' => $user->getFullNameDegree(),
+                'eventId' => $event->getId()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onEventCommentEdit(EventGenericEvent $genericEvent): void
@@ -105,26 +129,37 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $user = $eventComment->getOwner();
         }
 
-        $subject = $this->trans('subject.event_comment_edit');
-        $body = $this->twig->render($this->getTemplate('event_comment_edit'), [
-            'user' => $user,
-            'event' => $event
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.event_comment_edit'),
+            'to' => $to,
+            'from' => $this->sender,
+            'template' => 'event_comment_edit',
+            'templateParameters' => [
+                'commentOwner' => $user->getFullNameDegree(),
+                'eventId' => $event->getId()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onEventReservation(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
 
-        $subject = $this->trans('subject.event_reservation');
-        $to = $event->getOwner()->getEmail();
-        $body = $this->twig->render($this->getTemplate('event_create'), [
-            'user' => $event->getParticipant()->getUser(),
-            'event' => $event
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.event_reservation'),
+            'to' => $event->getOwner()->getEmail(),
+            'from' => $this->sender,
+            'template' => 'event_create',
+            'templateParameters' => [
+                'eventOwner' => $event->getOwner()->getFullNameDegree(),
+                'eventId' => $event->getId()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 }

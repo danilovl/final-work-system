@@ -12,6 +12,7 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -30,53 +31,63 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     {
         $work = $event->work;
 
-        $subject = $this->trans('subject.work_create');
         $author = $work->getAuthor();
         $opponent = $work->getOpponent();
         $consultant = $work->getConsultant();
 
         $to = null;
-        $bodyParams = [];
+        $templateParameters = [
+            'workId' => $work->getId(),
+            'workSupervisor' => $work->getSupervisor()->getFullNameDegree(),
+        ];
+
         if ($author !== null) {
             $to = $author->getEmail();
-            $bodyParams = [
-                'work' => $work,
-                'role' => 'autora'
-            ];
+            $templateParameters['role'] = $this->translator->trans('app.text.author_like');
         }
 
         if ($opponent !== null) {
             $to = $opponent->getEmail();
-            $bodyParams = [
-                'work' => $work,
-                'role' => 'opponenta'
-            ];
+            $templateParameters['role'] = $this->translator->trans('app.text.opponent_like');;
         }
 
         if ($consultant !== null) {
             $to = $consultant->getEmail();
-            $bodyParams = [
-                'work' => $work,
-                'role' => 'konzultanta'
-            ];
+            $templateParameters['role'] = $this->translator->trans('app.text.consultant_like');;
         }
 
-        if ($to !== null) {
-            $body = $this->twig->render($this->getTemplate('work_create'), $bodyParams);
-            $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        if ($to === null) {
+            return;
         }
+
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.work_create'),
+            'to' => $to,
+            'from' => $this->sender,
+            'template' => 'work_create',
+            'templateParameters' => $templateParameters
+        ]);
+
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onWorkEdit(WorkGenericEvent $event): void
     {
         $work = $event->work;
 
-        $subject = $this->trans('subject.work_edit');
-        $to = $work->getAuthor()->getEmail();
-        $body = $this->twig->render($this->getTemplate('work_edit'), [
-            'work' => $work
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.work_edit'),
+            'to' => $work->getAuthor()->getEmail(),
+            'from' => $this->sender,
+            'template' => 'work_edit',
+            'templateParameters' => [
+                'workId' => $work->getId(),
+                'workSupervisor' => $work->getSupervisor()->getFullNameDegree()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 }

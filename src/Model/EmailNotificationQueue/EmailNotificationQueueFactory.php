@@ -38,6 +38,7 @@ class EmailNotificationQueueFactory extends BaseModelFactory
         $emailNotificationQueue->setFrom($notificationQueueModel->from);
         $emailNotificationQueue->setBody($notificationQueueModel->body);
         $emailNotificationQueue->setSuccess($notificationQueueModel->success);
+        $emailNotificationQueue->setSendedAt($notificationQueueModel->sendedAt);
 
         return $emailNotificationQueue;
     }

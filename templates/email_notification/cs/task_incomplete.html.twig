@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ task.owner }} označil úkol "{{ task }}" za nesplněný u Vaší
-        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}"> práce.</a>
+        {{ taskOwner }} označil úkol "{{ taskName }}" za nesplněný u Vaší
+        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': workId | hashids_encode })) }}"> práce.</a>
         <br><br>
         S pozdravem
         <br><br>

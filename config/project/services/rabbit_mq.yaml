@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    public: true
+
+  app.rabbit_mq.consumer.email_notification:
+    class: App\RabbitMq\Consumer\EmailNotificationConsumer
+    autowire: true
+    public: true
+
+  App\RabbitMq\Consumer\EmailNotificationConsumer: '@app.rabbit_mq.consumer.email_notification'

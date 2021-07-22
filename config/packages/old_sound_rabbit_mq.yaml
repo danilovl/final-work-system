@@ -1,0 +1,15 @@
+old_sound_rabbit_mq:
+  connections:
+    default:
+      url: '%env(RABBITMQ_URL)%'
+  producers:
+    email_notification:
+      connection: default
+      exchange_options: { name: 'final_work.email_notification', type: direct }
+
+  consumers:
+    email_notification:
+      connection: default
+      exchange_options: { name: 'final_work.email_notification', type: direct }
+      queue_options: { name: 'final_work.email_notification' }
+      callback: app.rabbit_mq.consumer.email_notification

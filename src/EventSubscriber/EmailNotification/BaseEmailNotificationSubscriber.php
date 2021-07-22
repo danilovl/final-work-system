@@ -12,10 +12,12 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueModel;
 use App\Model\User\UserFacade;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueFactory;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
@@ -25,13 +27,15 @@ class BaseEmailNotificationSubscriber
     protected string $locale;
     protected ?string $translatorDomain;
     protected bool $enableAddToQueue;
+    protected bool $enableRabbitMq;
 
     public function __construct(
         protected UserFacade $userFacade,
         protected Environment $twig,
         protected TranslatorInterface $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
-        protected ParameterService $parameterService
+        protected ParameterService $parameterService,
+        protected ProducerInterface $emailNotificationProducer
     ) {
         $this->translator = clone $translator;
 
@@ -45,6 +49,7 @@ class BaseEmailNotificationSubscriber
         $this->locale = $this->parameterService->get('email_notification.default_locale');
         $this->translatorDomain = $this->parameterService->get('email_notification.translator_domain');
         $this->enableAddToQueue = $this->parameterService->get('email_notification.enable_add_to_queue');
+        $this->enableRabbitMq = $this->parameterService->get('email_notification.enable_rabbit_mq');
     }
 
     protected function initTranslatorLocale(string $locale): void
@@ -52,9 +57,9 @@ class BaseEmailNotificationSubscriber
         $this->translator->setLocale($locale);
     }
 
-    protected function getTemplate(string $name): string
+    protected function getTemplate(string $locale, string $name): string
     {
-        return "email_notification/{$this->locale}/{$name}.html.twig";
+        return "email_notification/{$locale}/{$name}.html.twig";
     }
 
     protected function trans(string $trans): string
@@ -62,27 +67,58 @@ class BaseEmailNotificationSubscriber
         return $this->translator->trans("app.email_notification.{$trans}", [], $this->translatorDomain);
     }
 
-    protected function addEmailNotificationToQueue(
-        string $subject,
-        string $to,
-        string $from,
-        string $body
-    ): void {
+    protected function addEmailNotificationToQueue(EmailNotificationToQueueData $queueData): void
+    {
         if (!$this->enableAddToQueue) {
             return;
         }
 
+        $to = $queueData->to;
         $userTo = $this->userFacade->findOneByEmail($to);
+
         if ($userTo && !$userTo->isEnabledEmailNotification()) {
             return;
         }
 
+        if ($this->enableRabbitMq) {
+            $this->sendToRabbitQueue($queueData);
+
+            return;
+        }
+
+        $this->saveLocal($queueData);
+    }
+
+    public function renderBody(
+        string $locale,
+        string $template,
+        array $templateParameters = []
+    ): string {
+        return $this->twig->render(
+            $this->getTemplate($locale, $template),
+            $templateParameters
+        );
+    }
+
+    protected function saveLocal(EmailNotificationToQueueData $queueData): void
+    {
+        $body = $this->renderBody(
+            $queueData->locale,
+            $queueData->template,
+            $queueData->templateParameters
+        );
+
         $emailNotificationQueueModel = new EmailNotificationQueueModel;
-        $emailNotificationQueueModel->subject = $subject;
-        $emailNotificationQueueModel->to = $to;
-        $emailNotificationQueueModel->from = $from;
+        $emailNotificationQueueModel->subject = $queueData->subject;
+        $emailNotificationQueueModel->to = $queueData->to;
+        $emailNotificationQueueModel->from = $queueData->from;
         $emailNotificationQueueModel->body = $body;
 
         $this->emailNotificationQueueFactory->createFromModel($emailNotificationQueueModel);
+    }
+
+    protected function sendToRabbitQueue(EmailNotificationToQueueData $queueData): void
+    {
+        $this->emailNotificationProducer->publish($queueData->toJson());
     }
 }

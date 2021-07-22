@@ -187,6 +187,7 @@ app:
     are_you_sure_want_to_leave: Вы уверены, что хотите уйти?
     attachment: Вложения
     author: Автор
+    author_like: Автора
     author_list: Список авторов
     back_to_revision: Вернуть на доработку
     group_mail: Массовая рассылка
@@ -194,6 +195,7 @@ app:
     comment: Комментарий
     complete: Завершенный
     consultant: Консультант
+    consultant_like: Консультанта
     consultant_list: Список консультантов
     conversation: Переписка
     conversation_attachment: Вложения из переписки
@@ -239,6 +241,7 @@ app:
     notify_completed: Уведомить о завершении
     open_conversation_in_new_window: Открыть диалог в новом окне
     opponent: Оппонент
+    opponent_like: Оппонента
     opponent_list: Список оппонентов
     option: Опция
     options: Опции

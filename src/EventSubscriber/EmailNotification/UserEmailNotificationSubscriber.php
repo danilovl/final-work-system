@@ -12,6 +12,7 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -30,24 +31,33 @@ class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     {
         $user = $event->user;
 
-        $subject = $this->trans('subject.user_create');
-        $to = $user->getEmail();
-        $body = $this->twig->render($this->getTemplate('user_create'), [
-            'username' => $user->getUsername(),
-            'password' => $user->getPlainPassword()
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.user_create'),
+            'to' => $user->getEmail(),
+            'from' => $this->sender,
+            'template' => 'user_create',
+            'templateParameters' => [
+                'username' => $user->getUsername(),
+                'password' => $user->getPlainPassword()
+            ]
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onUserEdit(UserGenericEvent $event): void
     {
         $user = $event->user;
 
-        $subject = $this->trans('subject.user_edit');
-        $to = $user->getEmail();
-        $body = $this->twig->render($this->getTemplate('user_edit'));
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $this->trans('subject.user_edit'),
+            'to' => $user->getEmail(),
+            'from' => $this->sender,
+            'template' => 'user_edit'
+        ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 }

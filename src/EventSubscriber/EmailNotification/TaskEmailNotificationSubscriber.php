@@ -12,6 +12,7 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventSubscriber\Events;
 use App\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -42,12 +43,24 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
 
         $subject = $this->trans($subject);
         $to = $isAuthorEmail ? $work->getAuthor()->getEmail() : $work->getSupervisor()->getEmail();
-        $body = $this->twig->render($this->getTemplate($template), [
-            'work' => $work,
-            'task' => $task
+        $templateParameters = [
+            'taskOwner' => $task->getOwner()->getFullNameDegree(),
+            'taskName' => $task->getName(),
+            'workId' => $work->getId(),
+            'workTitle' => $work->getTitle(),
+            'workAuthor' => $work->getAuthor()->getFullNameDegree()
+        ];
+
+        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            'locale' => $this->locale,
+            'subject' => $subject,
+            'to' => $to,
+            'from' => $this->sender,
+            'template' => $template,
+            'templateParameters' => $templateParameters
         ]);
 
-        $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
     public function onTaskCreate(TaskGenericEvent $event): void

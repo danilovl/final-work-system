@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ sender }} Vám poslal novou
-        <a href="{{ absolute_url(path('conversation_detail', {'_locale': default_locale, 'id': conversation.id | hashids_encode })) }}">zprávu</a>.
+        {{ messageOwner }} Vám poslal novou
+        <a href="{{ absolute_url(path('conversation_detail', {'_locale': default_locale, 'id': conversationId | hashids_encode })) }}">zprávu</a>.
         <br><br>
         S pozdravem
         <br><br>

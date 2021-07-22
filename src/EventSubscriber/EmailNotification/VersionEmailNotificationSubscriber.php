@@ -12,6 +12,7 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Entity\User;
 use App\EventSubscriber\Events;
@@ -19,6 +20,7 @@ use App\Model\EmailNotificationQueue\EmailNotificationQueueFactory;
 use App\Model\User\UserFacade;
 use App\Service\WorkService;
 use Danilovl\ParameterBundle\Services\ParameterService;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -31,14 +33,16 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         protected TranslatorInterface $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterService $parameterService,
-        private WorkService $workService
+        private WorkService $workService,
+        protected ProducerInterface $emailNotificationProducer
     ) {
         parent::__construct(
             $userFacade,
             $twig,
             $translator,
             $emailNotificationQueueFactory,
-            $parameterService
+            $parameterService,
+            $emailNotificationProducer
         );
     }
 
@@ -57,21 +61,29 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
     ): void {
         $media = $event->media;
         $work = $media->getWork();
-
-        $subject = $this->trans($subject);
-        $body = $this->twig->render($this->getTemplate($template), [
-            'media' => $media,
-            'work' => $work
-        ]);
-
         $workUsers = $this->workService->getAllUsers($work);
 
         /** @var User $user */
         foreach ($workUsers as $user) {
-            if ($user->getId() !== $media->getOwner()->getId()) {
-                $to = $user->getEmail();
-                $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+            if ($user->getId() === $media->getOwner()->getId()) {
+                continue;
             }
+
+            $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+                'locale' => $this->locale,
+                'subject' => $this->trans($subject),
+                'to' => $user->getEmail(),
+                'from' => $this->sender,
+                'template' => $template,
+                'templateParameters' => [
+                    'mediaOwner' => $media->getOwner()->getFullNameDegree(),
+                    'mediaName' => $media->getName(),
+                    'workTitle' => $work->getTitle(),
+                    'workId' => $work->getId()
+                ]
+            ]);
+
+            $this->addEmailNotificationToQueue($emailNotificationToQueueData);
         }
     }
 

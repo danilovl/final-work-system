@@ -23,11 +23,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mime\{
     Email,
     Address
 };
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class EmailNotificationQueueCommand extends Command
 {
@@ -84,7 +84,7 @@ class EmailNotificationQueueCommand extends Command
             $message = sprintf("Email notification with ID: %d was send",
                 $emailNotificationQueue->getId()
             );
-        } catch (TransportException $transportException) {
+        } catch (TransportExceptionInterface $transportException) {
             $status = false;
             $message = $transportException->getMessage();
         }

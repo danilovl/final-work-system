@@ -3,9 +3,9 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ media.owner }} přidal novou verzi "{{ media.name }}" k
-        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}">
-            práci "{{ work }}".
+        {{ mediaOwner }} přidal novou verzi "{{ mediaName }}" k
+        <a href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': workId | hashids_encode })) }}">
+            práci "{{ workTitle }}".
         </a>
         <br><br>
         S pozdravem

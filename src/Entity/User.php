@@ -832,10 +832,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     public function getFullNameDegree(): string
     {
-        $before = $this->getDegreeBefore() ?? '';
-        $after = $this->getDegreeAfter() ?? '';
+        $titles = '';
 
-        return sprintf('%s %s %s', $this->getFullName(), $before, $after);
+        if (!empty($this->getDegreeBefore())) {
+            $titles .= ' ' . $this->getDegreeBefore();
+        }
+
+        if (!empty($this->getDegreeAfter())) {
+            $titles .= ' ' . $this->getDegreeAfter();
+        }
+
+        return sprintf('%s%s', $this->getFullName(), $titles);
     }
 
     public function addRole(string $role): self

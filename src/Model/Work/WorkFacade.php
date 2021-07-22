@@ -13,10 +13,7 @@
 namespace App\Model\Work;
 
 use App\DataTransferObject\Repository\WorkData;
-use App\Entity\{
-    User,
-    Work
-};
+use App\Entity\Work;
 use App\Repository\WorkRepository;
 
 class WorkFacade

@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ user }} vytvořil novou
-        <a href="{{ absolute_url(path('event_detail', {'_locale': default_locale, 'id': event.id | hashids_encode })) }}">
+        {{ eventOwner }} vytvořil novou
+        <a href="{{ absolute_url(path('event_detail', {'_locale': default_locale, 'id': eventId | hashids_encode })) }}">
             schůzku
         </a> s Vámi.
         <br><br>

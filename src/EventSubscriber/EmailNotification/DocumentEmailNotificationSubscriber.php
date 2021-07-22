@@ -13,6 +13,7 @@
 namespace App\EventSubscriber\EmailNotification;
 
 use App\Constant\WorkUserTypeConstant;
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Entity\User;
 use App\EventSubscriber\Events;
@@ -20,6 +21,7 @@ use App\Model\EmailNotificationQueue\EmailNotificationQueueFactory;
 use App\Model\User\UserFacade;
 use App\Service\UserWorkService;
 use Danilovl\ParameterBundle\Services\ParameterService;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -32,14 +34,16 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         protected TranslatorInterface $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterService $parameterService,
-        private UserWorkService $userWorkService
+        private UserWorkService $userWorkService,
+        protected ProducerInterface $emailNotificationProducer
     ) {
         parent::__construct(
             $userFacade,
             $twig,
             $translator,
             $emailNotificationQueueFactory,
-            $parameterService
+            $parameterService,
+            $emailNotificationProducer
         );
     }
 
@@ -55,15 +59,25 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         $media = $event->media;
         $owner = $media->getOwner();
 
-        $subject = $this->trans('subject.document_create');
-        $body = $this->twig->render($this->getTemplate('document_create'), [
-            'media' => $media
-        ]);
         $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR);
+
+        $templateParameters = [
+            'mediaOwner' => $media->getOwner()->getFullNameDegree(),
+            'mediaName' => $media->getName()
+        ];
 
         /** @var User $user */
         foreach ($recipientArray as $user) {
-            $this->addEmailNotificationToQueue($subject, $user->getEmail(), $this->sender, $body);
+            $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+                'locale' => $this->locale,
+                'subject' => $this->trans('subject.document_create'),
+                'to' => $user->getEmail(),
+                'from' => $this->sender,
+                'template' => 'document_create',
+                'templateParameters' => $templateParameters
+            ]);
+
+            $this->addEmailNotificationToQueue($emailNotificationToQueueData);
         }
     }
 }

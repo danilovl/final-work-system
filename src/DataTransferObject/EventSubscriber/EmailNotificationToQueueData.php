@@ -10,17 +10,16 @@
  *
  */
 
-namespace App\Model\EmailNotificationQueue;
+namespace App\DataTransferObject\EventSubscriber;
 
-use DateTime;
+use App\DataTransferObject\BaseDataTransferObject;
 
-class EmailNotificationQueueModel
+class EmailNotificationToQueueData extends BaseDataTransferObject
 {
+    public string $locale;
     public string $subject;
     public string $to;
     public string $from;
-    public string $body;
-    public bool $success = false;
-    public ?DateTime $sendedAt = null;
+    public string $template;
+    public array $templateParameters = [];
 }
-

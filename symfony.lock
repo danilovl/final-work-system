@@ -130,12 +130,6 @@
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
-    "laminas/laminas-eventmanager": {
-        "version": "3.2.1"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.0.4"
-    },
     "monolog/monolog": {
         "version": "2.1.0"
     },
@@ -177,6 +171,9 @@
             "./config/routes/graphql.yaml"
         ]
     },
+    "paragonie/constant_time_encoding": {
+        "version": "v2.4.0"
+    },
     "phar-io/manifest": {
         "version": "1.0.3"
     },
@@ -186,6 +183,22 @@
     "php": {
         "version": "8.0"
     },
+    "php-amqplib/php-amqplib": {
+        "version": "v3.0.0"
+    },
+    "php-amqplib/rabbitmq-bundle": {
+        "version": "1.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.12",
+            "ref": "ce3ca2e4577270c4f518539aa6b9e878998fcfef"
+        },
+        "files": [
+            "./config/packages/old_sound_rabbit_mq.yaml",
+            "./src/Consumer/.gitignore"
+        ]
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
     },
@@ -194,6 +207,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
+    },
+    "phpseclib/phpseclib": {
+        "version": "3.0.9"
     },
     "phpspec/prophecy": {
         "version": "v1.10.3"

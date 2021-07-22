@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ user}} změnil komentář u
-        <a href="{{ url('event_detail', {'_locale': default_locale, 'id': event.id | hashids_encode }) }}">schůzky</a>
+        {{ commentOwner }} změnil komentář u
+        <a href="{{ url('event_detail', {'_locale': default_locale, 'id': eventId | hashids_encode }) }}">schůzky</a>
         s Vámi.
         <br><br>
         S pozdravem

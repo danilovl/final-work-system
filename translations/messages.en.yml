@@ -188,6 +188,7 @@ app:
     are_you_sure_want_to_leave: Are you sure that you want to leave?
     attachment: Attachment
     author: Author
+    author_like: Author
     author_list: Author list
     back_to_revision: Back to revision
     group_mail: Group mailing
@@ -195,6 +196,7 @@ app:
     comment: Comment
     complete: Complete
     consultant: Consultant
+    consultant_like: Consultant
     consultant_list: List of consultants
     conversation: Conversation
     conversation_attachment: Attachments from the conversation
@@ -240,6 +242,7 @@ app:
     notify_completed: Notify completed
     open_conversation_in_new_window: Open conversation in new window
     opponent: Opponent
+    opponent_like: Opponent
     opponent_list: Opponent list
     option: Option
     options: Options

@@ -3,8 +3,8 @@
     <div>
         Dobrý den,
         <br><br>
-        {{ work.supervisor }} vytvořil
-        <a target="_blank" href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': work.id | hashids_encode })) }}">novou práci</a>
+        {{ workSupervisor }} vytvořil
+        <a target="_blank" href="{{ absolute_url(path('work_detail', {'_locale': default_locale, 'id': workId | hashids_encode })) }}">novou práci</a>
         v systému pro vedení bakalářských a diplomových prací a uvedl Vás jako {{ role }}.
         <br><br>
         S pozdravem

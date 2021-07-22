@@ -3,6 +3,10 @@ services:
     class: App\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber
     autowire: true
     public: false
+    arguments:
+      $emailNotificationProducer: '@old_sound_rabbit_mq.email_notification_producer'
+
+  App\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber: '@app.event_listener.email_notification.base'
 
   app.event_listener.email_notification.document:
     class: App\EventSubscriber\EmailNotification\DocumentEmailNotificationSubscriber

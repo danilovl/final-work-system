@@ -12,6 +12,7 @@
 
 namespace App\EventSubscriber\EmailNotification;
 
+use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Entity\ConversationParticipant;
 use App\EventSubscriber\Events;
@@ -31,18 +32,25 @@ class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         $conversationMessage = $event->conversationMessage;
         $conversation = $conversationMessage->getConversation();
 
-        $subject = $this->trans('subject.message_create');
         /** @var ConversationParticipant $participant */
         foreach ($conversation->getParticipants() as $participant) {
-            $to = $participant->getUser()->getEmail();
-
-            if ($conversationMessage->getOwner()->getId() !== $participant->getUser()->getId()) {
-                $body = $this->twig->render($this->getTemplate('message_create'), [
-                    'sender' => $conversationMessage->getOwner(),
-                    'conversation' => $conversation
-                ]);
-                $this->addEmailNotificationToQueue($subject, $to, $this->sender, $body);
+            if ($conversationMessage->getOwner()->getId() === $participant->getUser()->getId()) {
+                continue;
             }
+
+            $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+                'locale' => $this->locale,
+                'subject' => $this->trans('subject.message_create'),
+                'to' => $participant->getUser()->getEmail(),
+                'from' => $this->sender,
+                'template' => 'message_create',
+                'templateParameters' => [
+                    'messageOwner' => $conversationMessage->getOwner()->getFullNameDegree(),
+                    'conversationId' => $conversation->getId()
+                ]
+            ]);
+
+            $this->addEmailNotificationToQueue($emailNotificationToQueueData);
         }
     }
 }

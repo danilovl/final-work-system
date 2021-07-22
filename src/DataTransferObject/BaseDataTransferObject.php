@@ -39,9 +39,21 @@ abstract class BaseDataTransferObject implements DataTransferObjectInterface
         return $dataTransferObject;
     }
 
+    public static function createFromJson(
+        string $json,
+        array|bool $requiredParamNames = true
+    ): static {
+        return static::createFromArray(json_decode($json, true), $requiredParamNames);
+    }
+
     public function toArray(): array
     {
         return get_object_vars($this);
+    }
+
+    public function toJson(): string
+    {
+        return json_encode($this->toArray());
     }
 
     protected static function setValue(

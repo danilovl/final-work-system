@@ -11,6 +11,7 @@ Requirements
   * PHP 8.0.0 or higher
   * MySQL
   * Redis server
+  * RabbitMq server
   * Composer
   * NPM
 
