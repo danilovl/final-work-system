@@ -40,6 +40,6 @@ class GroupCrudController extends AbstractCrudController
         yield IntegerField::new('id', 'ID')->onlyOnIndex();
         yield TextField::new('name');
         yield DateTimeField::new('createdAt')->hideOnIndex();
-        yield DateTimeField::new('updatedAt')->hideOnIndex();;
+        yield DateTimeField::new('updatedAt')->hideOnIndex();
     }
 }

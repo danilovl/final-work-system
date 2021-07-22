@@ -23,7 +23,7 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     {
         return [
             Events::NOTIFICATION_WORK_CREATE => 'onWorkCreate',
-            Events::NOTIFICATION_WORK_EDIT => 'onWorkEdit',
+            Events::NOTIFICATION_WORK_EDIT => 'onWorkEdit'
         ];
     }
 
@@ -48,12 +48,12 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
 
         if ($opponent !== null) {
             $to = $opponent->getEmail();
-            $templateParameters['role'] = $this->translator->trans('app.text.opponent_like');;
+            $templateParameters['role'] = $this->translator->trans('app.text.opponent_like');
         }
 
         if ($consultant !== null) {
             $to = $consultant->getEmail();
-            $templateParameters['role'] = $this->translator->trans('app.text.consultant_like');;
+            $templateParameters['role'] = $this->translator->trans('app.text.consultant_like');
         }
 
         if ($to === null) {

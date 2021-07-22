@@ -60,7 +60,7 @@ class UserCrudController extends AbstractCrudController
         yield DateTimeField::new('lastLogin');
         yield BooleanField::new('enabled');
         yield DateTimeField::new('createdAt')->hideOnIndex();
-        yield DateTimeField::new('updatedAt')->hideOnIndex();;
+        yield DateTimeField::new('updatedAt')->hideOnIndex();
 
         yield FormField::addPanel('Security');
         yield ArrayField::new('roles');
