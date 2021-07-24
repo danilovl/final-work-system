@@ -14,10 +14,8 @@ fos_elastica:
           type: 'text'
         deadline:
           type: 'date'
-#          format: 'yyyy-MM-dd'
         deadlineProgram:
           type: 'date'
-#          format: 'yyyy-MM-dd'
           null_value: 'NULL'
         type:
           type: 'nested'
