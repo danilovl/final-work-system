@@ -12,6 +12,7 @@ Requirements
   * MySQL
   * Redis server
   * RabbitMq server
+  * Elasticsearch server
   * Composer
   * NPM
 
