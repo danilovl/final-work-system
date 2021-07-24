@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\FormDataGrid;
+namespace App\Form\DataGrid;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;

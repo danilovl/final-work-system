@@ -2,5 +2,6 @@ services:
   app.event_listener.request:
     class: App\EventListener\RequestListener
     autowire: true
+    public: false
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

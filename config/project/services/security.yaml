@@ -1,18 +1,18 @@
 services:
+  _defaults:
+    public: true
+    autowire: true
+
   #   Authenticator
   app.authenticator:
     class: App\Security\Authenticator\AppAuthenticator
-    autowire: true
 
   app.authenticator.api_token:
     class: App\Security\Authenticator\ApiKeyAuthenticator
-    autowire: true
 
   #   Provider
   app.provider.user:
     class: App\Security\Provider\AppUserProvider
-    autowire: true
 
   app.provider.api_key:
     class: App\Security\Provider\ApiKeyUserProvider
-    autowire: true

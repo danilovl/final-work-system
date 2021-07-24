@@ -127,12 +127,14 @@ class DocumentController extends MediaBaseController
             $criteria = $form->getData();
         }
 
-        $documents = $this->get('app.facade.media')->getMediaListQueryByUserFilter(
-            $this->get('app.facade.user')->getAllUserActiveSupervisors($this->getUser()),
-            $this->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
-            true,
-            $criteria
-        );
+        $mediaData = MediaData::createFromArray([
+            'users' => $this->get('app.facade.user')->getAllUserActiveSupervisors($this->getUser()),
+            'type' => $this->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
+            'active' => true,
+            'criteria' => $criteria
+        ]);
+
+        $documents = $this->get('app.facade.media')->getMediaListQueryByUserFilter($mediaData);
 
         return $this->render('document/list.html.twig', [
             'openSearchTab' => $openSearchTab,
@@ -193,7 +195,7 @@ class DocumentController extends MediaBaseController
         MediaModel $mediaModel = null,
         Media $media = null
     ): FormInterface {
-        return $this->get('app.document_form')
+        return $this->get('app.form_factory.document')
             ->setUser($this->getUser())
             ->getDocumentForm($type, $mediaModel, $media);
     }

@@ -1,15 +1,16 @@
 services:
+  _defaults:
+    public: true
+    autowire: true
+
   app.graph_ql.resolver.user:
     class: App\GraphQL\Resolver\UserResolverMap
-    autowire: true
 
   app.graph_ql.resolver.work:
     class: App\GraphQL\Resolver\WorkResolverMap
-    autowire: true
 
   app.graph_ql.resolver.task:
     class: App\GraphQL\Resolver\TaskResolverMap
-    autowire: true
 
   app.graph_ql.resolver.not_doctrine:
     class: App\GraphQL\Resolver\NotDoctrineResolverMap

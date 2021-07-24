@@ -3,6 +3,10 @@ version: '2.3'
 services:
   redis:
     build: docker/redis
+  elasticsearch:
+    build: docker/elasticsearch
+  rabbitmq:
+    build: docker/rabbitmq
   mariadb:
     build: docker/mysql
     restart: always

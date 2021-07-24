@@ -1,4 +1,7 @@
 services:
+  _defaults:
+    public: true
+
   extension.listener:
     class: App\EventListener\DoctrineExtensionListener
     arguments:

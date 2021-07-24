@@ -12,16 +12,13 @@
 
 namespace App\Controller;
 
-use App\Exception\ConstantNotFoundException;
 use App\Model\EventAddress\EventAddressModel;
 use App\Constant\{
     FlashTypeConstant,
     VoterSupportConstant,
     ControllerMethodConstant
 };
-use App\Form\EventAddressForm;
 use App\Entity\EventAddress;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -42,11 +39,16 @@ class EventAddressController extends BaseController
 
     public function create(Request $request): Response
     {
+        $eventAddressFormFactory = $this->get('app.form_factory.event_address');
+
         $eventAddressModel = new EventAddressModel;
         $eventAddressModel->owner = $this->getUser();
 
-        $form = $this->getEventAddressForm(ControllerMethodConstant::CREATE, $eventAddressModel)
-            ->handleRequest($request);
+        $form = $eventAddressFormFactory->getEventAddressForm(
+            ControllerMethodConstant::CREATE,
+            $eventAddressModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventAddress = $this->get('app.factory.event_address')
@@ -58,7 +60,10 @@ class EventAddressController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getEventAddressForm(ControllerMethodConstant::CREATE_AJAX, $eventAddressModel);
+            $form = $eventAddressFormFactory->getEventAddressForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $eventAddressModel
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'event_address/event_address.html.twig'), [
@@ -87,9 +92,14 @@ class EventAddressController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $eventAddress);
 
+        $eventAddressFormFactory = $this->get('app.form_factory.event_address');
         $eventAddressModel = EventAddressModel::fromEventAddress($eventAddress);
-        $form = $this->getEventAddressForm(ControllerMethodConstant::EDIT, $eventAddressModel)
-            ->handleRequest($request);
+
+        $form = $eventAddressFormFactory->getEventAddressForm(
+            ControllerMethodConstant::EDIT,
+            $eventAddressModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($eventAddress->isSkype()) {
@@ -105,7 +115,7 @@ class EventAddressController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getEventAddressForm(
+            $form = $eventAddressFormFactory->getEventAddressForm(
                 ControllerMethodConstant::EDIT_AJAX,
                 $eventAddressModel,
                 $eventAddress
@@ -144,37 +154,5 @@ class EventAddressController extends BaseController
         }
 
         return $this->redirectToRoute('event_address_list');
-    }
-
-    public function getEventAddressForm(
-        string $type,
-        EventAddressModel $eventAddressModel,
-        EventAddress $eventAddress = null
-    ): FormInterface {
-        $parameters = [];
-
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('event_address_create_ajax'),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('event_address_edit_ajax', [
-                        'id' => $this->hashIdEncode($eventAddress->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            default:
-                throw new ConstantNotFoundException('Controller method type constant not found');
-        }
-
-        return $this->createForm(EventAddressForm::class, $eventAddressModel, $parameters);
     }
 }

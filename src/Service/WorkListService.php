@@ -13,30 +13,17 @@
 namespace App\Service;
 
 use App\Exception\RuntimeException;
-use ArrayIterator;
-use Collator;
 use Doctrine\Common\Collections\{
-    Criteria,
     Collection,
     ArrayCollection
 };
-use App\Constant\{
-    WorkStatusConstant,
-    WorkUserTypeConstant
-};
-use App\Entity\{
-    Work,
-    WorkStatus
-};
+use App\Constant\WorkUserTypeConstant;
 use App\Entity\User;
-use Symfony\Component\Form\FormInterface;
 
 class WorkListService
 {
-    public function __construct(
-        private EntityManagerService $entityManagerService,
-        private UserWorkService $userWorkService
-    ) {
+    public function __construct(private UserWorkService $userWorkService)
+    {
     }
 
     public function getWorkList(User $user, string $type): Collection
@@ -89,57 +76,5 @@ class WorkListService
             default => new ArrayCollection,
         };
     }
-
-    public function filter(FormInterface $form, Collection $works): ArrayIterator
-    {
-        if ($form->isSubmitted() && $form->isValid()) {
-            $criteria = Criteria::create();
-
-            foreach ($form->getData() as $field => $value) {
-                if (!empty($value)) {
-
-                    if (is_iterable($value) && count($value) > 0) {
-                        foreach ($value as $item) {
-                            if ($field === 'deadline') {
-                                $criteria->orWhere(
-                                    Criteria::expr()->andX(
-                                        Criteria::expr()->gte('deadline', $item),
-                                        Criteria::expr()->lte('deadline', $item)
-                                    )
-                                );
-                            } else {
-                                $criteria->orWhere(Criteria::expr()->eq($field, $item));
-                            }
-                        }
-                    } elseif (is_string($value)) {
-                        $criteria->orWhere(Criteria::expr()->contains($field, $value));
-                    } else {
-                        $criteria->orWhere(Criteria::expr()->eq($field, $value));
-                    }
-                }
-            }
-            $works = $works->matching($criteria);
-
-        } else {
-            $criteria = Criteria::create()
-                ->where(
-                    Criteria::expr()->eq(
-                        'status',
-                        $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE))
-                );
-            $works = $works->matching($criteria);
-        }
-
-        $collator = new Collator('cs_CZ.UTF-8');
-        $iterator = $works->getIterator();
-
-        $iterator->uasort(static function (Work $first, Work $second) use ($collator): bool|int {
-            return $collator->compare(
-                $first->getAuthor()->getLastname(),
-                $second->getAuthor()->getLastname()
-            );
-        });
-
-        return $iterator;
-    }
 }
+

@@ -1,29 +1,24 @@
 services:
-  #  DataGrid
-  app.form.data_grid.user:
-    class: App\FormDataGrid\UserDataGrid
+  _defaults:
     public: true
     autowire: true
 
-  'App\FormDataGrid\UserDataGrid': '@app.form.data_grid.user'
+  app.form.data_grid.user:
+    class: App\Form\DataGrid\UserDataGrid
+
+  'App\Form\DataGrid\UserDataGrid': '@app.form.data_grid.user'
 
   app.form.data_grid.work_category:
-    class: App\FormDataGrid\WorkCategoryDataGrid
-    public: true
-    autowire: true
+    class: App\Form\DataGrid\WorkCategoryDataGrid
 
-  'App\FormDataGrid\WorkCategoryDataGrid': '@app.form.data_grid.work_category'
+  'App\Form\DataGrid\WorkCategoryDataGrid': '@app.form.data_grid.work_category'
 
   app.form.data_grid.media_category:
-    class: App\FormDataGrid\MediaCategoryDataGrid
-    public: true
-    autowire: true
+    class: App\Form\DataGrid\MediaCategoryDataGrid
 
-  'App\FormDataGrid\MediaCategoryDataGrid': '@app.form.data_grid.media_category'
+  'App\Form\DataGrid\MediaCategoryDataGrid': '@app.form.data_grid.media_category'
 
   app.form.data_grid.work_status:
-    class: App\FormDataGrid\WorkStatusDataGrid
-    public: true
-    autowire: true
+    class: App\Form\DataGrid\WorkStatusDataGrid
 
-  'App\FormDataGrid\WorkStatusDataGrid': '@app.form.data_grid.work_status'
+  'App\Form\DataGrid\WorkStatusDataGrid': '@app.form.data_grid.work_status'

@@ -17,10 +17,7 @@ use App\Constant\{
     FlashTypeConstant,
     ControllerMethodConstant
 };
-use App\Form\UserGroupForm;
 use App\Entity\Group;
-use RuntimeException;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -30,11 +27,16 @@ class UserGroupController extends BaseController
 {
     public function create(Request $request): Response
     {
+        $userGroupFormFactory = $this->get('app.form_factory.user_group');
+
         $userGroupModel = new UserGroupModel;
         $userGroupModel->name = 'Name';
 
-        $form = $this->getUserGroupForm(ControllerMethodConstant::CREATE, $userGroupModel)
-            ->handleRequest($request);
+        $form = $userGroupFormFactory->getUserGroupForm(
+            ControllerMethodConstant::CREATE,
+            $userGroupModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -51,7 +53,10 @@ class UserGroupController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getUserGroupForm(ControllerMethodConstant::CREATE_AJAX, $userGroupModel);
+            $form = $userGroupFormFactory->getUserGroupForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $userGroupModel
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'user_group/user_group.html.twig'), [
@@ -66,9 +71,14 @@ class UserGroupController extends BaseController
         Request $request,
         Group $group
     ): Response {
+        $userGroupFormFactory = $this->get('app.form_factory.user_group');
         $userGroupModel = UserGroupModel::fromGroup($group);
-        $form = $this->getUserGroupForm(ControllerMethodConstant::EDIT, $userGroupModel)
-            ->handleRequest($request);
+
+        $form = $userGroupFormFactory->getUserGroupForm(
+            ControllerMethodConstant::EDIT,
+            $userGroupModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -85,7 +95,11 @@ class UserGroupController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getUserGroupForm(ControllerMethodConstant::EDIT_AJAX, $userGroupModel, $group);
+            $form = $userGroupFormFactory->getUserGroupForm(
+                ControllerMethodConstant::EDIT_AJAX,
+                $userGroupModel,
+                $group
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'user_group/user_group.html.twig'), [
@@ -107,37 +121,5 @@ class UserGroupController extends BaseController
                 $this->get('app.facade.user_group')->queryAll()
             ),
         ]);
-    }
-
-    public function getUserGroupForm(
-        string $type,
-        UserGroupModel $userGroupModel,
-        Group $group = null
-    ): FormInterface {
-        $parameters = [];
-
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('user_group_create_ajax'),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('user_group_edit_ajax', [
-                        'id' => $this->hashIdEncode($group->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            default:
-                throw new RuntimeException('Controller method type not found');
-        }
-
-        return $this->createForm(UserGroupForm::class, $userGroupModel, $parameters);
     }
 }

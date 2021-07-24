@@ -1,7 +1,10 @@
 services:
+  _defaults:
+    public: true
+    autowire: true
+
   app.event_listener.system_notification.base:
     class: App\EventSubscriber\SystemEvent\BaseSystemEventSubscriber
-    autowire: true
 
   app.event_listener.system_notification.document:
     class: App\EventSubscriber\SystemEvent\DocumentSystemEventSubscriber

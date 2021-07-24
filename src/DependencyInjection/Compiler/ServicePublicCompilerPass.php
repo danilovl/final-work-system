@@ -17,7 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ServicePublicCompilerPass implements CompilerPassInterface
 {
-	private const SERVICES = [];
+	private const SERVICES = [
+	    'fos_elastica.finder.work'
+    ];
 
 	/**
 	 * @param ContainerBuilder $container

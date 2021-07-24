@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+
+  app.elastic_search.work:
+    class: App\ElasticSearch\WorkSearch
+    arguments:
+      $transformedFinderWork: '@fos_elastica.finder.work'

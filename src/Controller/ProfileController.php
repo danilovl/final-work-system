@@ -80,7 +80,7 @@ class ProfileController extends BaseController
     public function changeImage(Request $request): Response
     {
         $user = $this->getUser();
-        $media = $this->getRepository(Media::class)->findOneBy([
+        $mediaUser = $this->getRepository(Media::class)->findOneBy([
             'owner' => $user,
             'type' => $this->getReference(MediaType::class, MediaTypeConstant::USER_PROFILE_IMAGE)
         ]);
@@ -99,15 +99,22 @@ class ProfileController extends BaseController
                     throw new RuntimeException("FileMimeType don't exist");
                 }
 
-                $media = $media ?? new Media;
+                $media = $mediaUser ?? new Media;
+                if ($mediaUser === null) {
+                    $mediaType = $this->get('app.facade.media_type')->find(MediaTypeConstant::USER_PROFILE_IMAGE);
+
+                    $media = new Media;
+                    $media->setType($mediaType);
+                    $media->setOwner($user);
+                }
 
                 $media->setUploadMedia($uploadMedia);
-                $media->setOwner($user);
+                $this->persistAndFlush($media);
 
-                $this->flushEntity($media);
-
-                $user->setProfileImage($media);
-                $this->flushEntity($user);
+                if ($mediaUser === null) {
+                    $user->setProfileImage($media);
+                    $this->flushEntity($user);
+                }
 
                 $this->addFlash('success', $this->get('translator')->trans('app.flash.form.create.success', [], 'flashes'));
             } else {
@@ -121,7 +128,7 @@ class ProfileController extends BaseController
         ]);
     }
 
-    public function deleteImage(Request $request): RedirectResponse
+    public function deleteImage(): RedirectResponse
     {
         try {
             $this->removeEntity($this->getUser()->getProfileImage());

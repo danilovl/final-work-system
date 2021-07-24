@@ -1,176 +1,129 @@
 services:
+  _defaults:
+    public: true
+    autowire: true
+
   app.facade.api.user:
     class: App\Model\ApiUser\ApiUserFacade
-    autowire: true
-    public: true
 
   App\Model\ApiUser\ApiUserFacade: '@app.facade.api.user'
 
   app.facade.article_category:
     class: App\Model\Article\ArticleCategoryFacade
-    autowire: true
-    public: true
 
   app.facade.article:
     class: App\Model\Article\ArticleFacade
-    autowire: true
-    public: true
 
   app.facade.comment:
     class: App\Model\Comment\CommentFacade
-    autowire: true
-    public: true
 
   app.facade.conversation:
     class: App\Model\Conversation\ConversationFacade
+    autowire: false
     arguments:
       - '@app.entity_manager'
-      - "@app.facade.conversation_message"
-      - "@app.conversation_status"
-      - "@app.conversation_variation"
-      - "@app.event_dispatcher.conversation"
-      - "@app.factory.conversation"
-    public: true
+      - '@app.facade.conversation_message'
+      - '@app.conversation_status'
+      - '@app.conversation_variation'
+      - '@app.event_dispatcher.conversation'
+      - '@app.factory.conversation'
 
   app.facade.event_address:
     class: App\Model\EventAddress\EventAddressFacade
-    autowire: true
-    public: true
 
   app.facade.event_calendar:
     class: App\Model\Event\EventCalendarFacade
-    autowire: true
-    public: true
 
   app.facade.event_participant:
     class: App\Model\Event\EventParticipantFacade
-    autowire: true
-    public: true
 
   app.facade.event_schedule:
     class: App\Model\EventSchedule\EventScheduleFacade
-    autowire: true
-    public: true
 
   app.facade.media_category:
     class: App\Model\Media\MediaCategoryFacade
-    autowire: true
-    public: true
 
   App\Model\Media\MediaCategoryFacade: '@app.facade.media_category'
 
   app.facade.media.mime_type:
     class: App\Model\Media\MediaMimeTypeFacade
-    autowire: true
-    public: true
 
   App\Model\Media\MediaMimeTypeFacade: '@app.facade.media.mime_type'
 
   app.facade.media:
     class: App\Model\Media\MediaFacade
-    autowire: true
-    public: true
 
   App\Model\Media\MediaFacade: '@app.facade.media'
 
   app.facade.media_type:
     class: App\Model\Media\MediaTypeFacade
-    autowire: true
-    public: true
 
   App\Model\Media\MediaTypeFacade: '@app.facade.media_type'
 
   app.facade.system_event_recipient:
     class: App\Model\SystemEvent\SystemEventRecipientFacade
-    autowire: true
-    public: true
 
   App\Model\SystemEvent\SystemEventRecipientFacade: '@app.facade.system_event_recipient'
 
   app.facade.system_event:
     class: App\Model\SystemEvent\SystemEventFacade
-    autowire: true
-    public: true
 
   App\Model\SystemEvent\SystemEventFacade: '@app.facade.system_event'
 
   app.facade.task_deadline:
     class: App\Model\Task\TaskDeadlineFacade
-    autowire: true
-    public: true
 
   App\Model\Task\TaskDeadlineFacade: '@app.facade.task_deadline'
 
   app.facade.task:
     class: App\Model\Task\TaskFacade
-    autowire: true
-    public: true
 
   App\Model\Task\TaskFacade: '@app.facade.task'
 
   app.facade.user_group:
     class: App\Model\UserGroup\UserGroupFacade
-    autowire: true
-    public: true
 
   app.facade.user:
     class: App\Model\User\UserFacade
-    autowire: true
-    public: true
 
   App\Model\User\UserFacade: '@app.facade.user'
 
   app.facade.work.category:
     class: App\Model\WorkCategory\WorkCategoryFacade
     autowire: true
-    public: true
 
   app.facade.work.deadline:
     class: App\Model\WorkDeadline\WorkDeadlineFacade
-    autowire: true
-    public: true
+
+  App\Model\WorkDeadline\WorkDeadlineFacade: '@app.facade.work.deadline'
 
   app.facade.work:
     class: App\Model\Work\WorkFacade
-    autowire: true
-    public: true
 
   App\Model\Work\WorkFacade: '@app.facade.work'
 
   app.facade.work_status:
     class: App\Model\WorkStatus\WorkStatusFacade
-    autowire: true
-    public: true
 
   App\Model\WorkStatus\WorkStatusFacade: '@app.facade.work_status'
 
   app.facade.event:
     class: App\Model\Event\EventFacade
-    autowire: true
-    public: true
 
   app.facade.conversation_message:
     class: App\Model\Conversation\ConversationMessageFacade
-    autowire: true
-    public: true
 
   App\Model\Conversation\ConversationMessageFacade: '@app.facade.conversation_message'
 
   app.facade.reset_password:
     class: App\Model\ResetPassword\ResetPasswordFacade
-    autowire: true
-    public: true
 
   App\Model\ResetPassword\ResetPasswordFacade: '@app.facade.reset_password'
 
   app.facade.email_notification_queue:
     class: App\Model\EmailNotificationQueue\EmailNotificationQueueFacade
-    autowire: true
-    public: true
 
   App\Model\EmailNotificationQueue\EmailNotificationQueueFacade: '@app.facade.email_notification_queue'
 
   app.facade.conversation_message_status:
     class: App\Model\ConversationMessageStatus\ConversationMessageStatusFacade
-    autowire: true
-    public: true

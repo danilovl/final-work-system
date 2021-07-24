@@ -14,7 +14,6 @@ namespace App\Controller;
 
 use App\Model\User\UserModel;
 use App\Model\WorkSearch\WorkSearchModel;
-use App\Exception\ConstantNotFoundException;
 use App\Model\Work\WorkModel;
 use App\Constant\{
     SeoPageConstant,
@@ -25,17 +24,9 @@ use App\Constant\{
     ControllerMethodConstant
 };
 use App\Entity\Work;
-use App\Form\{
-    UserEditForm,
-    WorkForm,
-    WorkSearchForm
-};
-use App\Helper\{
-    SortFunctionHelper,
-    WorkFunctionHelper
-};
+use App\Form\UserEditForm;
+use App\Helper\WorkFunctionHelper;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -51,7 +42,8 @@ class WorkController extends BaseController
         $workModel = new WorkModel;
         $workModel->supervisor = $user;
 
-        $form = $this->getWorkForm(ControllerMethodConstant::CREATE, $workModel)
+        $form = $this->get('app.form_factory.work')
+            ->getWorkForm($user, ControllerMethodConstant::CREATE, $workModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -126,15 +118,15 @@ class WorkController extends BaseController
         Request $request,
         string $type
     ): Response {
-        $workListService = $this->get('app.work.list');
-        $works = $workListService->getWorkList($this->getUser(), $type);
+        $user = $this->getUser();
 
-        $form = $this->getSearchForm($type, new WorkSearchModel)
+        $form = $this->get('app.form_factory.work')
+            ->getSearchForm($user, $type, new WorkSearchModel)
             ->handleRequest($request);
 
-        $openSearchTab = $form->isSubmitted();
+        $works = $this->get('app.elastic_search.work')
+            ->filterWorkList($user, $type, $form);
 
-        $works = $workListService->filter($form, $works);
         $workGroups = match ($type) {
             WorkUserTypeConstant::SUPERVISOR => WorkFunctionHelper::groupWorksByCategoryAndSorting($works),
             default => WorkFunctionHelper::groupWorksByDeadline($works),
@@ -154,8 +146,8 @@ class WorkController extends BaseController
 
         return $this->render('work/list.html.twig', [
             'form' => $form->createView(),
+            'openSearchTab' => $form->isSubmitted(),
             'workGroups' => $pagination,
-            'openSearchTab' => $openSearchTab,
             'deleteForms' => $deleteForms
         ]);
     }
@@ -169,7 +161,8 @@ class WorkController extends BaseController
         $user = $this->getUser();
 
         $workModel = WorkModel::fromWork($work);
-        $form = $this->getWorkForm(ControllerMethodConstant::EDIT, $workModel)
+        $form = $this->get('app.form_factory.work')
+            ->getWorkForm($user, ControllerMethodConstant::EDIT, $workModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -205,7 +198,12 @@ class WorkController extends BaseController
             )->toArray();
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getWorkForm(ControllerMethodConstant::EDIT_AJAX, $workModel, $work);
+            $form = $this->get('app.form_factory.work')->getWorkForm(
+                $user,
+                ControllerMethodConstant::EDIT_AJAX,
+                $workModel,
+                $work
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'work/work.html.twig'), [
@@ -299,71 +297,6 @@ class WorkController extends BaseController
 
         return $this->redirectToRoute('work_list', [
             'type' => WorkUserTypeConstant::SUPERVISOR
-        ]);
-    }
-
-    public function getWorkForm(
-        string $type,
-        WorkModel $workModel,
-        Work $work = null
-    ): FormInterface {
-        $parameters = [
-            'user' => $this->getUser()
-        ];
-
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('task_create_ajax', [
-                        'id' => $this->hashIdEncode($work->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                $parameters = array_merge($parameters, [
-                    'action' => $this->generateUrl('work_edit_ajax', [
-                        'id' => $this->hashIdEncode($work->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ]);
-                break;
-            default:
-                throw new ConstantNotFoundException('Controller method type constant not found');
-        }
-
-        return $this->createForm(WorkForm::class, $workModel, $parameters);
-    }
-
-    public function getSearchForm(string $type, WorkSearchModel $workSearchModel): FormInterface
-    {
-        $user = $this->getUser();
-
-        $workListService = $this->get('app.work.list');
-
-        $userAuthorArray = $workListService->getUserAuthors($user, $type)->toArray();
-        $userOpponentArray = $workListService->getUserOpponents($user, $type)->toArray();
-        $userConsultantArray = $workListService->getUserConsultants($user, $type)->toArray();
-        $userSupervisorArray = $workListService->getUserSupervisors($user, $type)->toArray();
-
-        SortFunctionHelper::usortCzechArray($userAuthorArray);
-        SortFunctionHelper::usortCzechArray($userOpponentArray);
-        SortFunctionHelper::usortCzechArray($userConsultantArray);
-        SortFunctionHelper::usortCzechArray($userSupervisorArray);
-
-        $workDeadLines = $this->get('app.facade.work.deadline')
-            ->getWorkDeadlinesBySupervisor($user)
-            ->toArray();
-
-        return $this->createForm(WorkSearchForm::class, $workSearchModel, [
-            'authors' => $userAuthorArray,
-            'opponents' => $userOpponentArray,
-            'consultants' => $userConsultantArray,
-            'supervisors' => $userSupervisorArray,
-            'deadlines' => $workDeadLines
         ]);
     }
 }

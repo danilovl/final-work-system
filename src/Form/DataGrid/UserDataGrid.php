@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\FormDataGrid;
+namespace App\Form\DataGrid;
 
 use Doctrine\ORM\QueryBuilder;
 use App\Repository\UserRepository;

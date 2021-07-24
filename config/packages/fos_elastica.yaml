@@ -1,0 +1,57 @@
+fos_elastica:
+  clients:
+    default: { url: '%env(ELASTICSEARCH_URL)%' }
+  indexes:
+    work:
+      client: default
+      index_name: post_%kernel.environment%
+      properties:
+        id:
+          type: 'integer'
+        title:
+          type: 'text'
+        shortcut:
+          type: 'text'
+        deadline:
+          type: 'date'
+#          format: 'yyyy-MM-dd'
+        deadlineProgram:
+          type: 'date'
+#          format: 'yyyy-MM-dd'
+          null_value: 'NULL'
+        type:
+          type: 'nested'
+          properties:
+            id:
+              type: 'integer'
+        status:
+          type: 'nested'
+          properties:
+            id:
+              type: 'integer'
+        author:
+          type: 'nested'
+          properties:
+            id:
+              type: 'integer'
+        supervisor:
+          type: 'nested'
+          properties:
+            id:
+              type: 'integer'
+        opponent:
+          type: 'nested'
+          properties:
+            id:
+              type: 'integer'
+        consultant:
+          type: 'nested'
+          properties:
+            id:
+              type: 'integer'
+      persistence:
+        driver: orm
+        model: App\Entity\Work
+        finder: ~
+        provider: ~
+        listener: ~

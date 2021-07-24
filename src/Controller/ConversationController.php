@@ -117,6 +117,7 @@ class ConversationController extends BaseController
 
         $user = $this->getUser();
         $form = null;
+        $createForm = false;
 
         $conversationMessageModel = new ConversationMessageModel;
         $conversationMessageModel->conversation = $conversation;
@@ -124,25 +125,27 @@ class ConversationController extends BaseController
 
         switch ($conversation->getType()->getId()) {
             case ConversationTypeConstant::WORK:
-                $form = $this
-                    ->createForm(ConversationMessageForm::class, $conversationMessageModel, [
-                        'user' => $user
-                    ])
-                    ->handleRequest($request);
+                $createForm = true;
+
                 break;
             case ConversationTypeConstant::GROUP:
                 if ($conversation->isOwner($user)) {
-                    $form = $this
-                        ->createForm(ConversationMessageForm::class, $conversationMessageModel, [
-                            'user' => $user
-                        ])
-                        ->handleRequest($request);
+                    $createForm = true;
                 } else {
                     $conversation->setParticipants(null);
                 }
+
                 break;
             default:
                 throw new ConstantNotFoundException('Conversation type constant not found');
+        }
+
+        if ($createForm) {
+            $form = $this
+                ->createForm(ConversationMessageForm::class, $conversationMessageModel, [
+                    'user' => $user
+                ])
+                ->handleRequest($request);
         }
 
         if ($form !== null && $form->isSubmitted()) {
@@ -150,14 +153,13 @@ class ConversationController extends BaseController
                 $conversationMessage = $this->get('app.factory.conversation_message')
                     ->flushFromModel($conversationMessageModel);
 
-                $this->get('app.factory.conversation')
-                    ->createConversationMessageStatus(
-                        $conversation,
-                        $conversationMessage,
-                        $user,
-                        $conversation->getParticipants(),
-                        ConversationMessageStatusTypeConstant::UNREAD
-                    );
+                $this->get('app.factory.conversation')->createConversationMessageStatus(
+                    $conversation,
+                    $conversationMessage,
+                    $user,
+                    $conversation->getParticipants(),
+                    ConversationMessageStatusTypeConstant::UNREAD
+                );
 
                 $this->get('app.event_dispatcher.conversation')
                     ->onConversationMessageCreate($conversationMessage);
@@ -230,8 +232,10 @@ class ConversationController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
 
-        $conversationMessages = $this->get('app.facade.conversation_message')
-            ->getMessagesByConversation($conversation, $this->getParam('pagination.conversation.message_list'));
+        $conversationMessages = $this->get('app.facade.conversation_message')->getMessagesByConversation(
+            $conversation,
+            $this->getParam('pagination.conversation.message_list')
+        );
 
         $this->get('app.seo_page')->setTitle($conversation->getTitle());
 

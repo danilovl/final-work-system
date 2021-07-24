@@ -1,10 +1,10 @@
 services:
   _defaults:
     public: true
+    autowire: true
 
   app.entity_listener.media:
     class: App\EventListener\Entity\MediaUploadListener
-    autowire: true
     tags:
       - name: doctrine.event_listener
         event: prePersist
@@ -23,7 +23,6 @@ services:
 
   app.entity_listener.system_event:
     class: App\EventListener\Entity\SystemEventListener
-    autowire: true
     tags:
       - name: doctrine.event_listener
         event: postPersist

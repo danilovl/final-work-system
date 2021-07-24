@@ -19,9 +19,6 @@ use App\Constant\{
     ControllerMethodConstant
 };
 use App\Entity\MediaCategory;
-use App\Form\MediaCategoryForm;
-use RuntimeException;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -32,11 +29,16 @@ class DocumentCategoryController extends BaseController
 {
     public function create(Request $request): Response
     {
+        $documentCategoryFormFactory = $this->get('app.form_factory.document_category');
+
         $mediaCategoryModel = new MediaCategoryModel;
         $mediaCategoryModel->owner = $this->getUser();
 
-        $form = $this->getDocumentCategoryForm(ControllerMethodConstant::CREATE, $mediaCategoryModel)
-            ->handleRequest($request);
+        $form = $documentCategoryFormFactory->getDocumentCategoryForm(
+            ControllerMethodConstant::CREATE,
+            $mediaCategoryModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -53,7 +55,10 @@ class DocumentCategoryController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getDocumentCategoryForm(ControllerMethodConstant::CREATE_AJAX, $mediaCategoryModel);
+            $form = $documentCategoryFormFactory->getDocumentCategoryForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $mediaCategoryModel
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'document_category/document_category.html.twig'), [
@@ -82,9 +87,14 @@ class DocumentCategoryController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $mediaCategory);
 
+        $documentCategoryFormFactory = $this->get('app.form_factory.document_category');
         $mediaCategoryModel = MediaCategoryModel::fromMediaCategory($mediaCategory);
-        $form = $this->getDocumentCategoryForm(ControllerMethodConstant::EDIT, $mediaCategoryModel)
-            ->handleRequest($request);
+
+        $form = $documentCategoryFormFactory->getDocumentCategoryForm(
+            ControllerMethodConstant::EDIT,
+            $mediaCategoryModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -101,7 +111,7 @@ class DocumentCategoryController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getDocumentCategoryForm(
+            $form = $documentCategoryFormFactory->getDocumentCategoryForm(
                 ControllerMethodConstant::EDIT_AJAX,
                 $mediaCategoryModel,
                 $mediaCategory
@@ -130,37 +140,5 @@ class DocumentCategoryController extends BaseController
         }
 
         return $this->redirectToRoute('document_category_list');
-    }
-
-    public function getDocumentCategoryForm(
-        string $type,
-        MediaCategoryModel $mediaCategoryModel,
-        MediaCategory $mediaCategory = null
-    ): FormInterface {
-        $parameters = [];
-
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('document_category_create_ajax'),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('document_category_edit_ajax', [
-                        'id' => $this->hashIdEncode($mediaCategory->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            default:
-                throw new RuntimeException('Controller method type not found');
-        }
-
-        return $this->createForm(MediaCategoryForm::class, $mediaCategoryModel, $parameters);
     }
 }

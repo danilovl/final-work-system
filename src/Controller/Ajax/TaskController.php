@@ -114,6 +114,7 @@ class TaskController extends BaseController
                     if ($task->isActive()) {
                         $taskEventDispatcherService->onTaskChangeStatus($task, $type);
                     }
+
                     break;
                 case TaskStatusConstant::COMPLETE:
                     $task->changeComplete();

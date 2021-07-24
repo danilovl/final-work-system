@@ -2,20 +2,20 @@
   "env": {
     "domain": "http://work-system.local",
     "workData": {
-      "hashId": ""
+      "hashId": "Ynvr2lgdAJ"
     },
     "loginData": {
       "failed": {
-        "username": "username",
-        "password": "password"
+        "username": "admin",
+        "password": "admin"
       },
       "student": {
-        "username": "username",
-        "password": "password"
+        "username": "xdanv09",
+        "password": "6det99bPb"
       },
       "supervisor": {
-        "username": "username",
-        "password": "password"
+        "username": "pecinovr",
+        "password": "6det99bPb"
       }
     }
   }

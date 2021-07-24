@@ -1,8 +1,10 @@
 services:
+  _defaults:
+    public: true
+    autowire: true
+
   app.widget.unread_conversation_message:
     class: App\Widget\UnreadConversationMessageWidget
-    autowire: true
-    public: true
     tags:
       - { name: app.widgets, alias: unread_conversation_message }
 
@@ -10,8 +12,6 @@ services:
 
   app.widget.unread_system_event:
     class: App\Widget\UnreadSystemEventWidget
-    autowire: true
-    public: true
     tags:
       - { name: app.widgets, alias: unread_system_event }
 
@@ -19,8 +19,6 @@ services:
 
   app.widget.locales:
     class: App\Widget\LocalesWidget
-    autowire: true
-    public: true
     arguments:
       $locales: '%locales%'
     tags:
@@ -28,8 +26,6 @@ services:
 
   app.widget.menu:
     class: App\Widget\MenuWidget
-    autowire: true
-    public: true
     arguments:
       $menuConfig: '%menu%'
     tags:
@@ -37,10 +33,6 @@ services:
 
   app.widget.user_profile_information:
     class: App\Widget\UserProfileInformationNotifyWidget
-    autowire: true
-    public: true
 
   app.widget.work_deadline_information:
     class: App\Widget\WorkDeadlineNotifyWidget
-    autowire: true
-    public: true

@@ -1,47 +1,38 @@
 services:
   _defaults:
     public: true
+    autowire: true
 
   app.event_dispatcher.work:
     class: App\EventDispatcher\WorkEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.version:
     class: App\EventDispatcher\VersionEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.document:
     class: App\EventDispatcher\DocumentEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.user:
     class: App\EventDispatcher\UserEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.event:
     class: App\EventDispatcher\EventEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.task:
     class: App\EventDispatcher\TaskEventDispatcherService
-    autowire: true
 
   App\EventDispatcher\TaskEventDispatcherService: '@app.event_dispatcher.task'
 
   app.event_dispatcher.conversation:
     class: App\EventDispatcher\ConversationEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.security:
     class: App\EventDispatcher\SecurityDispatcherService
-    autowire: true
 
   app.event_dispatcher.widget:
     class: App\EventDispatcher\WidgetEventDispatcherService
-    autowire: true
 
   app.event_dispatcher.cache:
     class: App\EventDispatcher\CacheEventDispatcherService
-    autowire: true
 
   App\EventDispatcher\CacheEventDispatcherService: '@app.event_dispatcher.cache'

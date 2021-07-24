@@ -1,5 +1,8 @@
 services:
-  #  Voter
+  _defaults:
+    public: true
+    autowire: true
+
   app.voter.event:
     class: App\Security\Voter\EventVoter
     tags:
@@ -17,7 +20,6 @@ services:
 
   app.voter.work:
     class: App\Security\Voter\WorkVoter
-    autowire: true
     tags:
       - { name: security.voter }
 
@@ -33,13 +35,11 @@ services:
 
   app.voter.conversation:
     class: App\Security\Voter\ConversationVoter
-    autowire: true
     tags:
       - { name: security.voter }
 
   app.voter.conversation_message:
     class: App\Security\Voter\ConversationMessageVoter
-    autowire: true
     tags:
       - { name: security.voter }
 

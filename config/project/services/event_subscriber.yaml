@@ -1,11 +1,14 @@
 services:
+  _defaults:
+    public: true
+    autowire: true
+    autoconfigure: true
+
   app.event_subscriber.widget:
     class: App\EventSubscriber\WidgetEventSubscriber
-    autoconfigure: true
-    autowire: true
 
   app.event_subscriber.cache:
     class: App\EventSubscriber\CacheEventSubscriber
-    autoconfigure: true
+    autowire: false
     arguments:
       - '@cache.app'

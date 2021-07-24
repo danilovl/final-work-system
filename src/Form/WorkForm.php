@@ -19,7 +19,7 @@ use App\Constant\{
 };
 use Doctrine\ORM\QueryBuilder;
 use App\Model\Work\WorkModel;
-use App\FormDataGrid\{
+use App\Form\DataGrid\{
     UserDataGrid,
     WorkCategoryDataGrid,
     WorkStatusDataGrid

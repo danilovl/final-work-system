@@ -12,7 +12,6 @@
 
 namespace App\Controller;
 
-use App\Exception\ConstantNotFoundException;
 use App\Model\WorkCategory\WorkCategoryModel;
 use App\Constant\{
     FlashTypeConstant,
@@ -20,8 +19,6 @@ use App\Constant\{
     ControllerMethodConstant
 };
 use App\Entity\WorkCategory;
-use App\Form\WorkCategoryForm;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -32,11 +29,16 @@ class WorkCategoryController extends BaseController
 {
     public function create(Request $request): Response
     {
+        $workCategoryFormFactory = $this->get('app.form_factory.work_category');
+
         $workCategoryModel = new WorkCategoryModel;
         $workCategoryModel->owner = $this->getUser();
 
-        $form = $this->getWorkCategoryForm(ControllerMethodConstant::CREATE, $workCategoryModel)
-            ->handleRequest($request);
+        $form = $workCategoryFormFactory->getWorkCategoryForm(
+            ControllerMethodConstant::CREATE,
+            $workCategoryModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -53,7 +55,10 @@ class WorkCategoryController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getWorkCategoryForm(ControllerMethodConstant::CREATE_AJAX, $workCategoryModel);
+            $form = $workCategoryFormFactory->getWorkCategoryForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $workCategoryModel
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig'), [
@@ -80,9 +85,14 @@ class WorkCategoryController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $workCategory);
 
+        $workCategoryFormFactory = $this->get('app.form_factory.work_category');
         $workCategoryModel = WorkCategoryModel::fromMedia($workCategory);
-        $form = $this->getWorkCategoryForm(ControllerMethodConstant::EDIT, $workCategoryModel)
-            ->handleRequest($request);
+
+        $form = $workCategoryFormFactory->getWorkCategoryForm(
+            ControllerMethodConstant::EDIT,
+            $workCategoryModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -99,7 +109,11 @@ class WorkCategoryController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getWorkCategoryForm(ControllerMethodConstant::EDIT_AJAX, $workCategoryModel, $workCategory);
+            $form = $workCategoryFormFactory->getWorkCategoryForm(
+                ControllerMethodConstant::EDIT_AJAX,
+                $workCategoryModel,
+                $workCategory
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig'), [
@@ -124,37 +138,5 @@ class WorkCategoryController extends BaseController
         }
 
         return $this->redirectToRoute('work_category_list');
-    }
-
-    public function getWorkCategoryForm(
-        string $type,
-        WorkCategoryModel $workCategoryModel,
-        WorkCategory $workCategory = null
-    ): FormInterface {
-        $parameters = [];
-
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('work_category_create_ajax'),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('work_category_edit_ajax', [
-                        'id' => $this->hashIdEncode($workCategory->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            default:
-                throw new ConstantNotFoundException('Controller method type not found');
-        }
-
-        return $this->createForm(WorkCategoryForm::class, $workCategoryModel, $parameters);
     }
 }

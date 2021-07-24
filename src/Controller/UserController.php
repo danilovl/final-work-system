@@ -24,15 +24,9 @@ use App\Constant\{
     WorkUserTypeConstant,
     ControllerMethodConstant
 };
-use App\Form\{
-    UserForm,
-    UserEditForm,
-    WorkSearchStatusForm
-};
+use App\Form\WorkSearchStatusForm;
 use App\Helper\UserHelper;
 use App\Entity\User;
-use RuntimeException;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -42,10 +36,11 @@ class UserController extends BaseController
 {
     public function create(Request $request): Response
     {
+        $userFormFactory = $this->get('app.form_factory.user');
         $userFacade = $this->get('app.facade.user');
         $userModel = new UserModel;
 
-        $form = $this->getUserForm(ControllerMethodConstant::CREATE, $userModel)
+        $form = $userFormFactory->getUserForm(ControllerMethodConstant::CREATE, $userModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -71,7 +66,10 @@ class UserController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getUserForm(ControllerMethodConstant::CREATE_AJAX, $userModel);
+            $form = $userFormFactory->getUserForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $userModel
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'user/user.html.twig'), [
@@ -87,8 +85,10 @@ class UserController extends BaseController
         Request $request,
         User $user
     ): Response {
+        $userFormFactory = $this->get('app.form_factory.user');
         $userModel = UserModel::fromUser($user);
-        $form = $this->getUserForm(ControllerMethodConstant::EDIT, $userModel)
+
+        $form = $userFormFactory->getUserForm(ControllerMethodConstant::EDIT, $userModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -111,7 +111,11 @@ class UserController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getUserForm(ControllerMethodConstant::EDIT_AJAX, $userModel, $user);
+            $form = $userFormFactory->getUserForm(
+                ControllerMethodConstant::EDIT_AJAX,
+                $userModel,
+                $user
+            );
         }
 
         $this->get('app.seo_page')->addTitle($user->getUsername(), SeoPageConstant::VERTICAL_SEPARATOR);
@@ -132,7 +136,6 @@ class UserController extends BaseController
         $userService = $this->get('app.facade.user');
 
         $type = $request->get('type');
-        $title = null;
         $openSearchTab = false;
         $showSearchTab = true;
         $workStatus = null;
@@ -155,18 +158,22 @@ class UserController extends BaseController
         switch ($type) {
             case WorkUserTypeConstant::AUTHOR:
                 $title = $this->trans('app.text.author_list');
+
                 break;
             case WorkUserTypeConstant::OPPONENT:
                 $title = $this->trans('app.text.opponent_list');
+
                 break;
             case WorkUserTypeConstant::CONSULTANT:
                 $title = $this->trans('app.text.consultant_list');
+
                 break;
             default:
                 $showSearchTab = false;
                 $getUserWorkAndStatus = false;
                 $usersQuery = $userService->queryUnusedUsers($user);
                 $title = $this->trans('app.text.unused_user_list');
+
                 break;
         }
 
@@ -218,41 +225,5 @@ class UserController extends BaseController
             'showSearchTab' => $showSearchTab,
             'userHelper' => new UserHelper
         ]);
-    }
-
-    public function getUserForm(
-        string $type,
-        UserModel $userModel,
-        User $user = null
-    ): FormInterface {
-        $parameters = [];
-
-        $formClass = UserForm::class;
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-                $formClass = UserEditForm::class;
-                break;
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                $parameters = [
-                    'action' => $this->generateUrl('user_create_ajax'),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                $formClass = UserEditForm::class;
-                $parameters = [
-                    'action' => $this->generateUrl('user_edit_ajax', [
-                        'id' => $this->hashIdEncode($user->getId())
-                    ]),
-                    'method' => Request::METHOD_POST,
-                ];
-                break;
-            default:
-                throw new RuntimeException('Controller method type not found');
-        }
-
-        return $this->createForm($formClass, $userModel, $parameters);
     }
 }

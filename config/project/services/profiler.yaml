@@ -1,4 +1,7 @@
 services:
+  _defaults:
+    public: true
+
   app.profiler:
     class: App\Collector\SystemInfoCollector
     arguments:

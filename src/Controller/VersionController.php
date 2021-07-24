@@ -12,10 +12,6 @@
 
 namespace App\Controller;
 
-use App\Exception\{
-    RuntimeException,
-    ConstantNotFoundException
-};
 use App\Model\Media\MediaModel;
 use App\Constant\{
     SeoPageConstant,
@@ -24,14 +20,12 @@ use App\Constant\{
     VoterSupportConstant,
     ControllerMethodConstant
 };
-use App\Form\VersionForm;
 use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\{
     Work,
     Media,
     MediaType
 };
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -45,6 +39,8 @@ class VersionController extends MediaBaseController
         Request $request,
         Work $work
     ): Response {
+        $versionFormFactory = $this->get('app.form_factory.version');
+
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
 
@@ -55,8 +51,11 @@ class VersionController extends MediaBaseController
         $mediaModel->work = $work;
         $mediaModel->type = $this->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION);
 
-        $form = $this->getVersionForm(ControllerMethodConstant::CREATE, $mediaModel)
-            ->handleRequest($request);
+        $form = $versionFormFactory->getVersionForm(
+            ControllerMethodConstant::CREATE,
+            $mediaModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -78,7 +77,12 @@ class VersionController extends MediaBaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getVersionForm(ControllerMethodConstant::CREATE_AJAX, $mediaModel, null, $work);
+            $form = $versionFormFactory->getVersionForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $mediaModel,
+                null,
+                $work
+            );
         }
 
         $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
@@ -107,9 +111,14 @@ class VersionController extends MediaBaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
 
+        $versionFormFactory = $this->get('app.form_factory.version');
         $mediaModel = MediaModel::fromMedia($media);
-        $form = $this->getVersionForm(ControllerMethodConstant::EDIT, $mediaModel)
-            ->handleRequest($request);
+
+        $form = $versionFormFactory->getVersionForm(
+            ControllerMethodConstant::EDIT,
+            $mediaModel
+        );
+        $form = $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -132,7 +141,12 @@ class VersionController extends MediaBaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getVersionForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel, $media, $work);
+            $form = $versionFormFactory->getVersionForm(
+                ControllerMethodConstant::EDIT_AJAX,
+                $mediaModel,
+                $media,
+                $work
+            );
         }
 
         $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
@@ -185,57 +199,5 @@ class VersionController extends MediaBaseController
         Media $media
     ): BinaryFileResponse {
         return $this->downloadMedia($media);
-    }
-
-    public function getVersionForm(
-        string $type,
-        MediaModel $mediaModel,
-        ?Media $media = null,
-        Work $work = null
-    ): FormInterface {
-        $mimeTypes = $this->get('app.facade.media.mime_type')
-            ->getFormValidationMimeTypes(true);
-
-        $parameters = [
-            'mimeTypes' => $mimeTypes
-        ];
-
-        switch ($type) {
-            case ControllerMethodConstant::CREATE:
-                $parameters['uploadMedia'] = true;
-                break;
-            case ControllerMethodConstant::EDIT:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                if ($work === null) {
-                    throw new RuntimeException('Work must not be null for edit ajax');
-                }
-
-                $parameters = array_merge($parameters, [
-                    'action' => $this->generateUrl('version_create_ajax', [
-                        'id' => $this->hashIdEncode($work->getId())
-                    ]),
-                    'method' => Request::METHOD_POST,
-                    'uploadMedia' => true
-                ]);
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                if ($work === null) {
-                    throw new RuntimeException('Work must not be null for edit ajax');
-                }
-
-                $parameters = array_merge($parameters, [
-                    'action' => $this->generateUrl('version_edit_ajax', [
-                        'id_work' => $this->hashIdEncode($work->getId()),
-                        'id_media' => $this->hashIdEncode($media->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ]);
-                break;
-            default:
-                throw new ConstantNotFoundException('Controller method type not found');
-        }
-
-        return $this->createForm(VersionForm::class, $mediaModel, $parameters);
     }
 }

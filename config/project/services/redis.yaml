@@ -1,4 +1,7 @@
 services:
+  _defaults:
+    public: true
+
   doctrine_cache.providers.redis_provider:
     class: App\Redis\Provider\RedisCache
     calls:

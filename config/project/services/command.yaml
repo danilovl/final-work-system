@@ -1,43 +1,34 @@
 services:
-  #  Command
-  app.command.add_user:
-    class: App\Command\UserAddCommand
+  _defaults:
     public: true
     autowire: true
+
+  app.command.add_user:
+    class: App\Command\UserAddCommand
     tags:
       - { name: console.command }
 
   app.command.delete_user:
     class: App\Command\UserDeleteCommand
-    public: true
-    autowire: true
     tags:
       - { name: console.command }
 
   app.command.list_user:
     class: App\Command\UserListCommand
-    public: true
-    autowire: true
     tags:
       - { name: console.command }
 
   app.command.email_notification:
     class: App\Command\EmailNotificationQueueCommand
-    autowire: true
     tags:
       - { name: console.command }
-    public: true
 
   app.command.task_reminder:
     class: App\Command\TaskRemindDeadlineCommand
-    autowire: true
     tags:
       - { name: console.command }
-    public: true
 
   app.command.sync_database_media_with_real_file:
     class: App\Command\SyncDatabaseMediaWithRealFileCommand
-    autowire: true
     tags:
       - { name: console.command }
-    public: true

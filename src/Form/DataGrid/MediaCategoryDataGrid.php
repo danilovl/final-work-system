@@ -10,20 +10,20 @@
  *
  */
 
-namespace App\FormDataGrid;
+namespace App\Form\DataGrid;
 
 use Doctrine\ORM\QueryBuilder;
-use App\Repository\WorkCategoryRepository;
 use App\Entity\User;
+use App\Repository\MediaCategoryRepository;
 
-class WorkCategoryDataGrid
+class MediaCategoryDataGrid
 {
-    public function __construct(private WorkCategoryRepository $workCategoryRepository)
+    public function __construct(private MediaCategoryRepository $mediaCategoryRepository)
     {
     }
 
-    public function queryBuilderWorkCategoriesByOwner(User $user): QueryBuilder
+    public function queryBuilderFindAllByOwner(User $user): QueryBuilder
     {
-        return $this->workCategoryRepository->allByOwner($user);
+        return $this->mediaCategoryRepository->allByOwner($user);
     }
 }

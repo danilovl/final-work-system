@@ -13,10 +13,6 @@
 namespace App\Controller;
 
 use App\Model\Task\TaskModel;
-use App\Exception\{
-    RuntimeException,
-    ConstantNotFoundException
-};
 use App\Constant\{
     FlashTypeConstant,
     VoterSupportConstant,
@@ -26,9 +22,7 @@ use App\Entity\{
     Task,
     Work
 };
-use App\Form\TaskForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -57,6 +51,7 @@ class TaskController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
+        $taskFormFactory = $this->get('app.form_factory.task');
         $user = $this->getUser();
         $taskName = $request->get('taskName');
 
@@ -71,7 +66,7 @@ class TaskController extends BaseController
             $createFromEvent = true;
         }
 
-        $form = $this->getTaskForm(ControllerMethodConstant::CREATE, $taskModel)
+        $form = $taskFormFactory->getTaskForm(ControllerMethodConstant::CREATE, $taskModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -94,7 +89,12 @@ class TaskController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $this->getTaskForm(ControllerMethodConstant::CREATE_AJAX, $taskModel, null, $work);
+            $form = $taskFormFactory->getTaskForm(
+                ControllerMethodConstant::CREATE_AJAX,
+                $taskModel,
+                null,
+                $work
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'task/task.html.twig'), [
@@ -119,8 +119,10 @@ class TaskController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
+        $taskFormFactory = $this->get('app.form_factory.task');
         $taskModel = TaskModel::fromTask($task);
-        $form = $this->getTaskForm(ControllerMethodConstant::EDIT, $taskModel)
+
+        $form = $taskFormFactory->getTaskForm(ControllerMethodConstant::EDIT, $taskModel)
             ->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -143,7 +145,12 @@ class TaskController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $form = $form = $this->getTaskForm(ControllerMethodConstant::EDIT_AJAX, $taskModel, $task, $work);
+            $form = $taskFormFactory->getTaskForm(
+                ControllerMethodConstant::EDIT_AJAX,
+                $taskModel,
+                $task,
+                $work
+            );
         }
 
         return $this->render($this->ajaxOrNormalFolder($request, 'task/task.html.twig'), [
@@ -156,49 +163,5 @@ class TaskController extends BaseController
             'buttonActionTitle' => $this->trans('app.form.action.edit'),
             'buttonActionCloseTitle' => $this->trans('app.form.action.update_and_close')
         ]);
-    }
-
-    public function getTaskForm(
-        string $type,
-        TaskModel $taskModel,
-        ?Task $task = null,
-        ?Work $work = null
-    ): FormInterface {
-        $parameters = [];
-
-        switch ($type) {
-            case ControllerMethodConstant::EDIT:
-            case ControllerMethodConstant::CREATE:
-                break;
-            case ControllerMethodConstant::CREATE_AJAX:
-                if ($work === null) {
-                    throw new RuntimeException('Work must not be null for create ajax');
-                }
-
-                $parameters = [
-                    'action' => $this->generateUrl('task_create_ajax', [
-                        'id' => $this->hashIdEncode($work->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            case ControllerMethodConstant::EDIT_AJAX:
-                if ($work === null) {
-                    throw new RuntimeException('Work must not be null for edit ajax');
-                }
-
-                $parameters = [
-                    'action' => $this->generateUrl('task_edit_ajax', [
-                        'id_task' => $this->hashIdEncode($task->getId()),
-                        'id_work' => $this->hashIdEncode($work->getId())
-                    ]),
-                    'method' => Request::METHOD_POST
-                ];
-                break;
-            default:
-                throw new ConstantNotFoundException('Controller method type constant not found');
-        }
-
-        return $this->createForm(TaskForm::class, $taskModel, $parameters);
     }
 }

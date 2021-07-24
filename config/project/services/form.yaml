@@ -1,25 +1,26 @@
 services:
-  #  Form
+  _defaults:
+    public: true
+    autowire: true
+
   app.form.work:
     class: App\Form\WorkForm
-    autowire: true
     tags:
       - { name: form.type }
 
   app.form.document:
     class: App\Form\DocumentForm
-    autowire: true
     tags:
       - { name: form.type }
 
   app.form.conversation_compose_message:
     class: App\Form\ConversationComposeMessageForm
-    autowire: true
     tags:
       - { name: form.type }
 
   app.form.locales:
     class: App\Form\Type\LocaleType
+    autowire: false
     arguments:
       - '%locales%'
     tags:
@@ -27,13 +28,13 @@ services:
 
   app.form.profile_media:
     class: App\Form\ProfileMediaForm
-    autowire: true
     tags:
       - { name: form.type }
 
   # Constrains
   app.validator.first_week_day:
     class: App\Form\Constraint\FirstWeekDayValidator
+    autowire: false
     arguments:
       - '@app.translator'
     tags:

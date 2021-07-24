@@ -1,10 +1,10 @@
 services:
   _defaults:
     public: true
+    autowire: true
 
   app.redirect_to_preferred_locale_listener:
     class: App\EventListener\RedirectToPreferredLocaleListener
-    autowire: true
     arguments:
       $locales: '%locales%'
       $defaultLocale: '%locale%'
@@ -13,8 +13,6 @@ services:
 
   app.mailer:
     class: App\Service\MailerService
-    autowire: true
-    public: true
 
   App\Service\MailerService: '@app.mailer'
 
@@ -22,134 +20,102 @@ services:
     class: App\Service\TranslatorService
     arguments:
       $defaultLocale: '%locale%'
-    autowire: true
-    public: true
 
   App\Service\TranslatorService: '@app.translator'
 
   app.user_password_encoder:
     class: Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher
-    autowire: true
-    public: true
 
   app.reset_password:
     class: App\Service\ResetPasswordService
-    autowire: true
-    public: true
 
   app.user:
     class: App\Service\UserService
-    public: true
-    autowire: true
 
   App\Service\UserService: '@app.user'
 
   app.user_work:
     class: App\Service\UserWorkService
-    public: true
 
   App\Service\UserWorkService: '@app.user_work'
 
   app.work:
     class: App\Service\WorkService
-    public: true
 
   App\Service\WorkService: '@app.work'
 
   app.task:
     class: App\Service\TaskService
-    public: true
 
   App\Service\TaskService: '@app.task'
 
   app.widget:
     class: App\Service\WidgetManagerService
-    autowire: true
-    public: true
 
   App\Service\WidgetManagerService: '@app.widget'
 
   app.conversation:
     class: App\Service\ConversationService
-    autowire: true
 
   App\Service\ConversationService: '@app.conversation'
 
   app.conversation_variation:
     class: App\Service\ConversationVariationService
-    autowire: true
 
   App\Service\ConversationVariationService: '@app.conversation_variation'
 
   app.conversation_status:
     class: App\Service\ConversationStatusService
-    autowire: true
 
   App\Service\ConversationStatusService: '@app.conversation_status'
 
   app.stream.conversation:
     class: App\Service\ConversationStreamService
-    autowire: true
 
   app.stream.widget:
     class: App\Service\WidgetStreamService
-    autowire: true
 
   app.system_event_link_generator:
     class: App\Service\SystemEventLinkGeneratorService
-    autowire: true
     tags:
       - { name: twig.runtime }
 
   app.paginator:
     class: App\Service\PaginatorService
-    public: true
     shared: false
-    autowire: true
 
   App\Service\PaginatorService: '@app.paginator'
 
   app.work.detail_tab:
     class: App\Service\WorkDetailTabService
-    autowire: true
 
   app.work.list:
     class: App\Service\WorkListService
-    autowire: true
+
+  App\Service\WorkListService: '@app.work.list'
 
   app.seo_page:
     class: App\Service\SeoPageService
-    public: true
-    autowire: true
 
   App\Service\SeoPageService: '@app.seo_page'
 
   app.date:
     class: App\Service\DateService
-    autowire: true
-
-  app.document_form:
-    class: App\Service\DocumentFormService
-    autowire: true
 
   app.entity_manager:
     class: App\Service\EntityManagerService
-    autowire: true
 
   App\Service\EntityManagerService: '@app.entity_manager'
 
   #   ParamConverter
   hashids.converter:
     class: App\EventListener\HashidsParamConverterListener
-    autowire: true
     tags:
       - { name: request.param_converter, priority: 1, converter: hashids.converter }
 
   #  Transformer
   app.transformer.api:
     class: App\Transformer\Api\Transformer
-    autowire: true
 
   app.password_updater:
     class: App\Service\PasswordUpdater
-    autowire: true

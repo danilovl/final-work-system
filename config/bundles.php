@@ -22,5 +22,6 @@ return [
     Danilovl\PermissionMiddlewareBundle\PermissionMiddlewareBundle::class => ['all' => true],
     Danilovl\HashidsBundle\HashidsBundle::class => ['all' => true],
     OldSound\RabbitMqBundle\OldSoundRabbitMqBundle::class => ['all' => true],
+    FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true],
 ];

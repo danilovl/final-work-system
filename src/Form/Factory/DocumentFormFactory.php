@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Service;
+namespace App\Form\Factory;
 
 use Danilovl\HashidsBundle\Services\HashidsService;
 use App\Exception\{
@@ -40,7 +40,7 @@ use Symfony\Component\Form\{
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class DocumentFormService
+class DocumentFormFactory
 {
     private ?User $user = null;
 
