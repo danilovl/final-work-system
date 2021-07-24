@@ -63,7 +63,7 @@ class WorkSearch
                     'query' => [
                         'term' => ['status.id' => WorkStatusConstant::ACTIVE]
                     ]
-                ],
+                ]
             ];
         }
 
@@ -104,7 +104,7 @@ class WorkSearch
                             'query' => [
                                 'terms' => ["{$field}.id" => $filedValues]
                             ]
-                        ],
+                        ]
                     ];
                 }
             } elseif (is_string($value)) {
