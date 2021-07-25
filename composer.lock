@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1f8dc7f9e1439763b5caceeaf221325",
+    "content-hash": "d7447b81745835e63fda89d7a70dce7c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -219,16 +219,16 @@
         },
         {
             "name": "danilovl/permission-middleware-bundle",
-            "version": "v2.0.2",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/permission-middleware-bundle.git",
-                "reference": "4bb829cf3f300eaa7c262430c76dd2a56e880792"
+                "reference": "38358b952ca75771086e8e81de34d23f1d85af08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/4bb829cf3f300eaa7c262430c76dd2a56e880792",
-                "reference": "4bb829cf3f300eaa7c262430c76dd2a56e880792",
+                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/38358b952ca75771086e8e81de34d23f1d85af08",
+                "reference": "38358b952ca75771086e8e81de34d23f1d85af08",
                 "shasum": ""
             },
             "require": {
@@ -255,9 +255,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/permission-middleware-bundle/issues",
-                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.0.2"
+                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.1.0"
             },
-            "time": "2021-07-17T17:40:49+00:00"
+            "time": "2021-07-25T11:34:01+00:00"
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
@@ -2572,16 +2572,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe"
+                "reference": "71312564759a7db5b789296369c1a264efc43aad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9738e495f288eec0b187e310b7cdbbb285777dbe",
-                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/71312564759a7db5b789296369c1a264efc43aad",
+                "reference": "71312564759a7db5b789296369c1a264efc43aad",
                 "shasum": ""
             },
             "require": {
@@ -2652,7 +2652,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.3.1"
+                "source": "https://github.com/Seldaek/monolog/tree/2.3.2"
             },
             "funding": [
                 {
@@ -2664,7 +2664,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-14T11:56:39+00:00"
+            "time": "2021-07-23T07:42:52+00:00"
         },
         {
             "name": "nikic/php-parser",

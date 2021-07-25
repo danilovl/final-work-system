@@ -12,7 +12,7 @@
         "ext-sodium": "*",
         "danilovl/hashids-bundle": "^1.0.4",
         "danilovl/parameter-bundle": "^3.0.1",
-        "danilovl/permission-middleware-bundle": "^2.0.1",
+        "danilovl/permission-middleware-bundle": "^2.1.0",
         "danilovl/render-service-twig-extension-bundle": "^3.0.1",
         "easycorp/easyadmin-bundle": "^3.2.8",
         "friendsofsymfony/elastica-bundle": "dev-master",
