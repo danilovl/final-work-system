@@ -37,8 +37,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
             ->leftJoin('systemEvent.event', 'event')
             ->leftJoin('systemEvent.owner', 'owner')
             ->leftJoin('systemEvent.task', 'task')
-            ->leftJoin('systemEvent.work', 'work')
-            ->setCacheable(true);
+            ->leftJoin('systemEvent.work', 'work');
     }
 
     public function allByRecipient(User $recipient): QueryBuilder

@@ -9,6 +9,5 @@ services:
 
   app.event_subscriber.cache:
     class: App\EventSubscriber\CacheEventSubscriber
-    autowire: false
     arguments:
       - '@cache.app'

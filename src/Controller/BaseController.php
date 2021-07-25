@@ -37,7 +37,7 @@ class BaseController extends AbstractController
         int $limit = null,
         array $options = null
     ): PaginationInterface {
-        return $this->get('app.paginator')->createPagination(
+        return $this->get('app.paginator')->createPaginationRequest(
             $request,
             $target,
             $page ?? $this->getParam('pagination.default.page'),

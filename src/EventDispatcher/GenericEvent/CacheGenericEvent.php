@@ -12,7 +12,10 @@
 
 namespace App\EventDispatcher\GenericEvent;
 
+use App\Entity\User;
+
 class CacheGenericEvent
 {
     public string $key;
+    public ?User $user = null;
 }

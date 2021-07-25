@@ -12,6 +12,7 @@
 
 namespace App\EventDispatcher;
 
+use App\Entity\User;
 use App\EventDispatcher\GenericEvent\CacheGenericEvent;
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,5 +29,13 @@ class CacheEventDispatcherService
         $genericEvent->key = $key;
 
         $this->eventDispatcher->dispatch($genericEvent, Events::CACHE_CLEAR_KEY);
+    }
+
+    public function onCreateHomepageCache(User $user): void
+    {
+        $genericEvent = new CacheGenericEvent;
+        $genericEvent->user = $user;
+
+        $this->eventDispatcher->dispatch($genericEvent, Events::CACHE_CREATE_HOMEPAGE);
     }
 }

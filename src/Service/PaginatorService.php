@@ -26,6 +26,20 @@ class PaginatorService
     }
 
     public function createPagination(
+        mixed $target,
+        int $page = null,
+        int $limit = null,
+        array $options = []
+    ): PaginationInterface {
+        return $this->paginator->paginate(
+            $target,
+            $page,
+            $limit,
+            $options
+        );
+    }
+
+    public function createPaginationRequest(
         Request $request,
         mixed $target,
         int $page = null,
@@ -38,13 +52,11 @@ class PaginatorService
         $defaultPageName = 'page';
         $defaultLimitName = 'limit';
 
-        if ($options !== null) {
-            if (isset($options['pageParameterName'])) {
-                $defaultPageName = $options['pageParameterName'];
-            }
+        if (isset($options['pageParameterName'])) {
+            $defaultPageName = $options['pageParameterName'];
         }
 
-        return $this->paginator->paginate(
+        return $this->createPagination(
             $target,
             $request->query->getInt($defaultPageName, $page),
             $request->query->getInt($defaultLimitName, $limit),

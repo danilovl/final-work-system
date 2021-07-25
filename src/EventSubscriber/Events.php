@@ -61,5 +61,6 @@ final class Events
 
     public const WIDGET_GROUP_REPLACE = 'widget.group.replace';
 
-    public const CACHE_CLEAR_KEY = 'cache.clear_key';
+    public const CACHE_CLEAR_KEY = 'cache.clear.key';
+    public const CACHE_CREATE_HOMEPAGE = 'cache.create.homepage';
 }

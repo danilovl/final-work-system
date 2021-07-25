@@ -21,10 +21,10 @@ services:
         entity: App\Entity\Media
         method: preRemove
 
-  app.entity_listener.system_event:
-    class: App\EventListener\Entity\SystemEventListener
+  app.entity_listener.system_event_recipient:
+    class: App\EventListener\Entity\SystemEventRecipientListener
     tags:
       - name: doctrine.event_listener
         event: postPersist
-        entity: App\Entity\SystemEvent
+        entity: App\Entity\SystemEventRecipient
         method: postPersist
