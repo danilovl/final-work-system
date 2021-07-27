@@ -60,7 +60,7 @@ class WorkDetailTabService
         Work $work,
         ?User $user = null
     ): PaginationInterface {
-        $paginator = $this->paginator->createPagination(
+        $paginator = $this->paginator->createPaginationRequest(
             $request,
             $this->getQueryPagination($tab, $work, $user),
             $this->getPaginationPage($tab),
