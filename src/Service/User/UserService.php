@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

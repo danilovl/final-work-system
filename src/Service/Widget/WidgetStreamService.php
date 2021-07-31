@@ -10,10 +10,11 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Widget;
 
 use App\Model\Conversation\ConversationMessageFacade;
 use App\Model\SystemEvent\SystemEventFacade;
+use App\Service\User\UserService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;
 use App\Widget\{

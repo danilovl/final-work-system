@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Work;
 
 use DateTime;
 use App\Entity\{

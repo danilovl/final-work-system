@@ -12,7 +12,7 @@
 
 namespace App\Twig;
 
-use App\Service\WidgetManagerService;
+use App\Service\Widget\WidgetManagerService;
 use App\Twig\Runtime\HomepageNotifyWidgetRuntime;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;

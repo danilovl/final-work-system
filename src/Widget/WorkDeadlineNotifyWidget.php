@@ -14,24 +14,22 @@ namespace App\Widget;
 
 use App\DataTransferObject\Repository\WorkData;
 use App\Helper\UserRoleHelper;
+use App\Service\User\UserService;
+use App\Service\Work\WorkService;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant
 };
 use App\Model\Work\WorkFacade;
 use Danilovl\ParameterBundle\Services\ParameterService;
-use App\Service\{
-    UserService,
-    WorkService,
-    TranslatorService
-};
+use App\Service\TranslatorService;
 use Twig\Environment;
 
 class WorkDeadlineNotifyWidget extends BaseWidget
 {
     public function __construct(
         private UserService $userService,
-        private WorkService $workService,
+        private WorkService$workService,
         private ParameterService $parameterService,
         private TranslatorService $translatorService,
         private Environment $twig,

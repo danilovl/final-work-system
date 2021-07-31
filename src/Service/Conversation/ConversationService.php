@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Conversation;
 
 use Doctrine\Common\Collections\Criteria;
 use App\Helper\{

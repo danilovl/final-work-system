@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Conversation;
 
 use App\Model\Conversation\ConversationMessageFacade;
 use Danilovl\ParameterBundle\Services\ParameterService;

@@ -13,7 +13,7 @@
 namespace App\Model\User;
 
 use App\Helper\UserRoleHelper;
-use App\Service\UserWorkService;
+use App\Service\User\UserWorkService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use App\Constant\WorkUserTypeConstant;

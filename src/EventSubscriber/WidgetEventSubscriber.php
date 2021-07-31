@@ -13,7 +13,7 @@
 namespace App\EventSubscriber;
 
 use App\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
-use App\Service\WidgetManagerService;
+use App\Service\Widget\WidgetManagerService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WidgetEventSubscriber implements EventSubscriberInterface

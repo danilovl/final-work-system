@@ -12,7 +12,7 @@
 
 namespace App\Twig\Runtime;
 
-use App\Service\ConversationService;
+use App\Service\Conversation\ConversationService;
 use App\Entity\{
     User,
     Work,

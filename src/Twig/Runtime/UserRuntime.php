@@ -14,7 +14,7 @@ namespace App\Twig\Runtime;
 
 use App\Entity\User;
 use App\Helper\UserRoleHelper;
-use App\Service\UserService;
+use App\Service\User\UserService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Twig\Environment;

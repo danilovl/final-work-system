@@ -12,10 +12,8 @@
 
 namespace App\Model\Event;
 
-use App\Service\{
-    UserWorkService,
-    EntityManagerService
-};
+use App\Service\EntityManagerService;
+use App\Service\User\UserWorkService;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant

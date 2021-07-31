@@ -10,9 +10,10 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Conversation;
 
 use App\DataTransferObject\Repository\ConversationMessageStatusData;
+use App\Service\EntityManagerService;
 use App\Entity\{
     User,
     Conversation,

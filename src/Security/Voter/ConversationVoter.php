@@ -13,7 +13,7 @@
 namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
-use App\Service\ConversationService;
+use App\Service\Conversation\ConversationService;
 use App\Entity\{
     User,
     Conversation

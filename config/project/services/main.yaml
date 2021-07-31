@@ -30,50 +30,50 @@ services:
     class: App\Service\ResetPasswordService
 
   app.user:
-    class: App\Service\UserService
+    class: App\Service\User\UserService
 
-  App\Service\UserService: '@app.user'
+  App\Service\User\UserService: '@app.user'
 
   app.user_work:
-    class: App\Service\UserWorkService
+    class: App\Service\User\UserWorkService
 
-  App\Service\UserWorkService: '@app.user_work'
+  App\Service\User\UserWorkService: '@app.user_work'
 
   app.work:
-    class: App\Service\WorkService
+    class: App\Service\Work\WorkService
 
-  App\Service\WorkService: '@app.work'
+  App\Service\Work\WorkService: '@app.work'
 
   app.task:
-    class: App\Service\TaskService
+    class: App\Service\Task\TaskService
 
-  App\Service\TaskService: '@app.task'
-
-  app.widget:
-    class: App\Service\WidgetManagerService
-
-  App\Service\WidgetManagerService: '@app.widget'
+  App\Service\Task\TaskService: '@app.task'
 
   app.conversation:
-    class: App\Service\ConversationService
+    class: App\Service\Conversation\ConversationService
 
-  App\Service\ConversationService: '@app.conversation'
+  App\Service\Conversation\ConversationService: '@app.conversation'
 
   app.conversation_variation:
-    class: App\Service\ConversationVariationService
+    class: App\Service\Conversation\ConversationVariationService
 
-  App\Service\ConversationVariationService: '@app.conversation_variation'
+  App\Service\Conversation\ConversationVariationService: '@app.conversation_variation'
 
   app.conversation_status:
-    class: App\Service\ConversationStatusService
+    class: App\Service\Conversation\ConversationStatusService
 
-  App\Service\ConversationStatusService: '@app.conversation_status'
+  App\Service\Conversation\ConversationStatusService: '@app.conversation_status'
 
   app.stream.conversation:
-    class: App\Service\ConversationStreamService
+    class: App\Service\Conversation\ConversationStreamService
+
+  app.widget:
+    class: App\Service\Widget\WidgetManagerService
+
+  App\Service\Widget\WidgetManagerService: '@app.widget'
 
   app.stream.widget:
-    class: App\Service\WidgetStreamService
+    class: App\Service\Widget\WidgetStreamService
 
   app.system_event_link_generator:
     class: App\Service\SystemEventLinkGeneratorService
@@ -87,12 +87,12 @@ services:
   App\Service\PaginatorService: '@app.paginator'
 
   app.work.detail_tab:
-    class: App\Service\WorkDetailTabService
+    class: App\Service\Work\WorkDetailTabService
 
   app.work.list:
-    class: App\Service\WorkListService
+    class: App\Service\Work\WorkListService
 
-  App\Service\WorkListService: '@app.work.list'
+  App\Service\Work\WorkListService: '@app.work.list'
 
   app.seo_page:
     class: App\Service\SeoPageService
@@ -113,9 +113,9 @@ services:
   App\Service\ResizeImageService: '@app.resize_image'
 
   app.task_status:
-    class: App\Service\TaskStatusService
+    class: App\Service\Task\TaskStatusService
 
-  App\Service\TaskStatusService: '@app.task_status'
+  App\Service\Task\TaskStatusService: '@app.task_status'
 
   #   ParamConverter
   hashids.converter:

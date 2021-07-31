@@ -10,9 +10,10 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Work;
 
 use App\Exception\RuntimeException;
+use App\Service\User\UserWorkService;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection

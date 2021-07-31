@@ -12,10 +12,8 @@
 
 namespace App\Widget;
 
-use App\Service\{
-    UserService,
-    TranslatorService
-};
+use App\Service\TranslatorService;
+use App\Service\User\UserService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use Twig\Environment;
 

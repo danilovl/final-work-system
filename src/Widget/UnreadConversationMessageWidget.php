@@ -13,7 +13,7 @@
 namespace App\Widget;
 
 use App\Model\Conversation\ConversationMessageFacade;
-use App\Service\UserService;
+use App\Service\User\UserService;
 use Twig\Environment;
 
 class UnreadConversationMessageWidget extends BaseWidget

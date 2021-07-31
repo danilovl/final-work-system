@@ -10,10 +10,14 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Work;
 
 use App\Exception\RuntimeException;
 use App\Helper\WorkRoleHelper;
+use App\Service\{
+    PaginatorService,
+    EntityManagerService
+};
 use Danilovl\ParameterBundle\Services\ParameterService;
 use Doctrine\ORM\Query;
 use App\Constant\TabTypeConstant;

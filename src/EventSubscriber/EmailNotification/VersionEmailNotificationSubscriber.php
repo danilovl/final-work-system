@@ -18,7 +18,7 @@ use App\Entity\User;
 use App\EventSubscriber\Events;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueFactory;
 use App\Model\User\UserFacade;
-use App\Service\WorkService;
+use App\Service\Work\WorkService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

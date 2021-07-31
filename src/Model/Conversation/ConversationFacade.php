@@ -13,14 +13,14 @@
 namespace App\Model\Conversation;
 
 use App\Helper\ConversationHelper;
+use App\Service\Conversation\{
+    ConversationStatusService,
+    ConversationVariationService
+};
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\ConversationMessage\ConversationComposeMessageModel;
 use App\EventDispatcher\ConversationEventDispatcherService;
-use App\Service\{
-    ConversationStatusService,
-    ConversationVariationService,
-    EntityManagerService
-};
+use App\Service\EntityManagerService;
 use Doctrine\ORM\Query;
 use App\Constant\{
     WorkStatusConstant,

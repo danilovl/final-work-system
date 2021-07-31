@@ -13,11 +13,9 @@
 namespace App\Model\Conversation;
 
 use App\Repository\ConversationMessageRepository;
+use App\Service\Conversation\ConversationStatusService;
 use DateTime;
-use App\Service\{
-    EntityManagerService,
-    ConversationStatusService
-};
+use App\Service\EntityManagerService;
 use Doctrine\ORM\Query;
 use App\Constant\ConversationMessageStatusTypeConstant;
 use App\Entity\{

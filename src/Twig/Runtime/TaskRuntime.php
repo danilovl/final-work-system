@@ -12,7 +12,7 @@
 
 namespace App\Twig\Runtime;
 
-use App\Service\TaskService;
+use App\Service\Task\TaskService;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\Work;
 use Twig\Extension\AbstractExtension;

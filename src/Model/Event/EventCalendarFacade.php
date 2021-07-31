@@ -14,7 +14,7 @@ namespace App\Model\Event;
 
 use App\DataTransferObject\Repository\EventData;
 use App\Service\EntityManagerService;
-use App\Service\UserWorkService;
+use App\Service\User\UserWorkService;
 use Danilovl\HashidsBundle\Services\HashidsService;
 use Danilovl\ParameterBundle\Services\ParameterService;
 use DateTime;

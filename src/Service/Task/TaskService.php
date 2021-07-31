@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Service;
+namespace App\Service\Task;
 
 use Doctrine\Common\Collections\{
     Criteria,
