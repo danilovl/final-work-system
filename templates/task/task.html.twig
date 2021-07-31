@@ -9,10 +9,13 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                {{ title }} -
-                                <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}">
-                                    {{ work.title }}
-                                </a> | {{ work.author }}
+                                {{ title }}
+                                {% if work is defined and work is not empty %}
+                                    -
+                                    <a href="{{ path('work_detail', { 'id': work.id | hashids_encode }) }}">
+                                        {{ work.title }}
+                                    </a> | {{ work.author }}
+                                {% endif %}
                             </h2>
                             <ul class="nav navbar-rul c panel_toolbox">
                                 <li>
@@ -181,10 +184,25 @@
                                                 </div>
                                             {% endif %}
                                         </div>
+
+                                        {% if form.works is defined %}
+                                            <div class="item form-group">
+                                                {{ form_label(form.works, 'app.form.label.work', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.works, {'attr': {'class': 'form-control'}} ) }}
+                                                </div>
+                                                {% if not form.works.vars.valid %}
+                                                    <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                        {{ form_errors(form.works) }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                                 <input id="task-button-action"
-                                                        type="submit"
+                                                       type="submit"
                                                        class="btn btn-success"
                                                        value="{{ buttonActionTitle }}"/>
                                             </div>
@@ -211,6 +229,7 @@
                 format: 'YYYY-MM-DD',
                 locale: '{{ app.request.locale }}'
             });
+            $("#task_works").select2();
 
             initTinymce(locale);
         });

@@ -80,13 +80,15 @@ security:
     - { path: ^/(%locales%)/work/(\w+)/task/change/(complete|active)/(\w+)/ajax ,  roles: [ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/(\w+)/tasks/change-all-to-complete/ajax ,         roles: [ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/detail/(\w+),                                     roles: [ROLE_STUDENT, ROLE_OPPONENT, ROLE_SUPERVISOR ] }
-    - { path: ^/(%locales%)/work/task/list,        roles: [ROLE_SUPERVISOR] }
-    - { path: ^/(%locales%)/work/supervisor/list,  roles: [ROLE_SUPERVISOR] }
-    - { path: ^/(%locales%)/work/category,         roles: [ROLE_SUPERVISOR] }
-    - { path: ^/(%locales%)/work/opponent/list,    roles: [ROLE_OPPONENT] }
-    - { path: ^/(%locales%)/work/consultant/list,  roles: [ROLE_CONSULTANT] }
-    - { path: ^/(%locales%)/work/,                 roles: [ROLE_SUPERVISOR] }
-    - { path: ^/(%locales%)/user/profile/,         roles: [ROLE_USER] }
+    - { path: ^/(%locales%)/work/task/create,           roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/task/create-several,   roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/task/list,             roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/supervisor/list,       roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/category,              roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/opponent/list,         roles: [ROLE_OPPONENT] }
+    - { path: ^/(%locales%)/work/consultant/list,       roles: [ROLE_CONSULTANT] }
+    - { path: ^/(%locales%)/work/,                      roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/user/profile/,              roles: [ROLE_USER] }
 
     # Document pages
     - { path: ^/(%locales%)/document/edit,                roles: [ROLE_SUPERVISOR] }

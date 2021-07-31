@@ -167,6 +167,7 @@ app:
       show_detail: Show detail
       switch_to_skype: Switch to skype
       task_create: Create task
+      take_photo: Take photo
       update: Update
       update_and_close: Update and close
       user_create: Create user
@@ -275,6 +276,7 @@ app:
     set_alerts_all_viewed: Switch all alerts to viewed
     task: Task|Tasks
     task_completed: Task completed
+    task_create: Create tast
     task_list: Task list
     term_for_testing: Term for testing
     type: Type
@@ -288,6 +290,7 @@ app:
     work_title: Work title
     work_type: Type of work
     write_message: Write a message
+    you_can_create_by_web_camera: Or you can create by web camera
   tooltip:
     document_active: Information materia is shown to students(green color)
     task_deadline: The deadline by which the task must be fulfilled

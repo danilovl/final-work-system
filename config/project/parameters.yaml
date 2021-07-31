@@ -10,7 +10,7 @@ parameters:
   domain: '%env(PROJECT_DOMAIN)%'
   system_info:
     name: 'FinalWork System'
-    version: '3.7.3'
+    version: '3.7.4'
   locales: 'en|cs|ru'
   locale: 'en'
   upload_directory: '%kernel.project_dir%/public/upload/'
@@ -21,6 +21,7 @@ parameters:
     enable_add_to_queue: '%env(bool:EMAIL_NOTIFICATION_ENABLE_ADD_TO_QUEUE)%'
     translator_domain: 'email_notification'
     default_locale: '%locale%'
+    sure_exist_template_locale: 'cs'
   task_remind:
     enable: '%env(bool:TASK_REMIND_ENABLE)%'
     translator_domain: 'email_notification'

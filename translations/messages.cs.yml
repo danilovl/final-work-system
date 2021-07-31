@@ -169,6 +169,7 @@ app:
       show_detail: Zobrazit detail
       switch_to_skype: Přepnout na skype
       task_create: Vytvořit úkol
+      take_photo: Vyfotit
       update: Aktualizovat
       update_and_close: Aktualizovat a zavřít
       user_create: Vytvořit uživatele
@@ -276,6 +277,7 @@ app:
     set_alerts_all_viewed: Označít všechny výstrahy za přečtené
     task: Úkol|Úkoly
     task_completed: Dokončené úkoly
+    task_create: Vytvořit úkol
     task_list: Seznam úkolů
     term_for_testing: Termín pro testování
     type: Typ
@@ -289,6 +291,7 @@ app:
     work_title: Název práce
     work_type: Typ práce
     write_message: Napsat zprávu
+    you_can_create_by_web_camera: Nebo můžete vytvořit pomocí webové kamery
   tooltip:
     document_active: Informační materiál se zobrazují studentům(zelená barva)
     task_deadline: Termín do kdy musí být úkol splněn

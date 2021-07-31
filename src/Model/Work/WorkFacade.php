@@ -15,6 +15,7 @@ namespace App\Model\Work;
 use App\DataTransferObject\Repository\WorkData;
 use App\Entity\Work;
 use App\Repository\WorkRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class WorkFacade
 {
@@ -37,6 +38,11 @@ class WorkFacade
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getQueryBuilderWorksBySupervisor(WorkData $workData): QueryBuilder
+    {
+        return $this->workRepository->allByUserStatus($workData);
     }
 
     /**

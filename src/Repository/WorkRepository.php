@@ -61,8 +61,11 @@ class WorkRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('work')
             ->addSelect('status')
             ->innerJoin('work.status', 'status')
-            ->setParameter('user', $workData->user)
             ->setCacheable(true);
+
+        if ($workData->user !== null) {
+            $queryBuilder->setParameter('user', $workData->user);
+        }
 
         if ($workData->supervisor !== null) {
             $queryBuilder->where('work.supervisor = :supervisor')
@@ -73,14 +76,17 @@ class WorkRepository extends ServiceEntityRepository
             case WorkUserTypeConstant::AUTHOR:
                 $queryBuilder->leftJoin('work.author', 'author')
                     ->andWhere('author = :user');
+
                 break;
             case WorkUserTypeConstant::OPPONENT:
                 $queryBuilder->leftJoin('work.opponent', 'opponent')
                     ->andWhere('opponent = :user');
+
                 break;
             case WorkUserTypeConstant::CONSULTANT:
                 $queryBuilder->leftJoin('work.consultant', 'consultant')
                     ->andWhere('consultant = :user');
+
                 break;
         }
 

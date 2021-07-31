@@ -31,6 +31,11 @@ services:
     tags:
       - { name: form.type }
 
+  app.form.task_several:
+    class: App\Form\TaskSeveralForm
+    tags:
+      - { name: form.type }
+
   # Constrains
   app.validator.first_week_day:
     class: App\Form\Constraint\FirstWeekDayValidator

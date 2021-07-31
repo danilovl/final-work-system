@@ -3,7 +3,7 @@
         <span aria-hidden="true">×</span>
     </button>
     <h4 class="modal-title">
-        {{ title }} - {{ work.title }}
+        {{ title }} - {% if work is defined and work is not empty %}{{ work.title }}{% endif %}
     </h4>
 </div>
 <div class="row ajax">
@@ -126,6 +126,16 @@
                                 </div>
                             {% endif %}
                         </div>
+
+                        {% if form.works is defined %}
+                            <div class="item form-group">
+                                {{ form_label(form.works, 'app.form.label.work', {'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'}}) }}
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    {{ form_widget(form.works, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        {% endif %}
+
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                                 <button id="task-button-action"
@@ -156,6 +166,7 @@
             format: 'YYYY-MM-DD',
             locale: '{{ app.request.locale }}'
         });
+        $("#task_works").select2();
 
         tinymce.remove();
         initTinymce(locale);

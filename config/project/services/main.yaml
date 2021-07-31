@@ -112,6 +112,11 @@ services:
 
   App\Service\ResizeImageService: '@app.resize_image'
 
+  app.task_status:
+    class: App\Service\TaskStatusService
+
+  App\Service\TaskStatusService: '@app.task_status'
+
   #   ParamConverter
   hashids.converter:
     class: App\EventListener\HashidsParamConverterListener

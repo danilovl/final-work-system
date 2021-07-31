@@ -167,6 +167,7 @@ app:
       show_detail: Показать подробности
       switch_to_skype: Переключиться на Skype
       task_create: Создать задание
+      take_photo: Cфотографировать
       update: Обновить
       update_and_close: Обновить и закрыть
       user_create: Создать пользователя
@@ -288,6 +289,7 @@ app:
     work_title: Название работы
     work_type: Тип работы
     write_message: Написать сообщение
+    you_can_create_by_web_camera: Или вы можете создать с помощью веб-камеры
   tooltip:
     document_active: Информационный материал показан учащимся(зеленый цвет)
     task_deadline: Крайний срок выполнения задачи

@@ -25,6 +25,7 @@ class BaseEmailNotificationSubscriber
 {
     protected ?string $sender;
     protected string $locale;
+    private string $sureExistTemplateLocale;
     protected ?string $translatorDomain;
     protected bool $enableAddToQueue;
     protected bool $enableRabbitMq;
@@ -47,6 +48,7 @@ class BaseEmailNotificationSubscriber
     {
         $this->sender = $this->parameterService->get('email_notification.sender');
         $this->locale = $this->parameterService->get('email_notification.default_locale');
+        $this->sureExistTemplateLocale = $this->parameterService->get('email_notification.sure_exist_template_locale');
         $this->translatorDomain = $this->parameterService->get('email_notification.translator_domain');
         $this->enableAddToQueue = $this->parameterService->get('email_notification.enable_add_to_queue');
         $this->enableRabbitMq = $this->parameterService->get('email_notification.enable_rabbit_mq');
@@ -94,6 +96,11 @@ class BaseEmailNotificationSubscriber
         string $template,
         array $templateParameters = []
     ): string {
+        $templatePath = $this->getTemplate($locale, $template);
+        if (!$this->twig->getLoader()->exists($templatePath)) {
+            $locale = $this->sureExistTemplateLocale;
+        }
+
         return $this->twig->render(
             $this->getTemplate($locale, $template),
             $templateParameters

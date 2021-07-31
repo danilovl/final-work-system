@@ -48,7 +48,7 @@ class UserFacade
         }
 
         if (UserRoleHelper::isOpponent($user)) {
-            $opponentSupervisors =$this->userWorkService->getActiveSupervisor($user,WorkUserTypeConstant::OPPONENT);
+            $opponentSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::OPPONENT);
 
             foreach ($opponentSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {
@@ -58,7 +58,7 @@ class UserFacade
         }
 
         if (UserRoleHelper::isConsultant($user)) {
-            $consultantSupervisors = $this->userWorkService->getActiveSupervisor($user,WorkUserTypeConstant::CONSULTANT);
+            $consultantSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::CONSULTANT);
 
             foreach ($consultantSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {

@@ -22,3 +22,8 @@ services:
     class: App\Form\DataGrid\WorkStatusDataGrid
 
   'App\Form\DataGrid\WorkStatusDataGrid': '@app.form.data_grid.work_status'
+
+  app.form.data_grid.task:
+    class: App\Form\DataGrid\TaskDataGrid
+
+  'App\Form\DataGrid\TaskDataGrid': '@app.form.data_grid.task'

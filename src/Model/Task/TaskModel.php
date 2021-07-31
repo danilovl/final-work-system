@@ -20,6 +20,7 @@ use App\Model\Traits\{
 };
 use App\Entity\Work;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class TaskModel
 {
@@ -30,6 +31,7 @@ class TaskModel
     public ?DateTime $deadline = null;
     public ?User $owner = null;
     public ?Work $work = null;
+    public iterable|ArrayCollection|null $works = null;
 
     public static function fromTask(Task $task): self
     {

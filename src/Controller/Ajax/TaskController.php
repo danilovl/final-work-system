@@ -12,11 +12,13 @@
 
 namespace App\Controller\Ajax;
 
+use App\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Model\Task\TaskModel;
 use App\Constant\{
     TaskStatusConstant,
     AjaxJsonTypeConstant,
-    VoterSupportConstant
+    VoterSupportConstant,
+    ControllerMethodConstant
 };
 use App\Controller\BaseController;
 use App\Entity\{
@@ -53,6 +55,45 @@ class TaskController extends BaseController
 
             $this->get('app.event_dispatcher.task')
                 ->onTaskCreate($task);
+
+            return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
+        }
+
+        return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
+            'data' => FormValidationMessageHelper::getErrorMessages($form)
+        ]);
+    }
+
+    public function createSeveral(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+
+        $taskModel = new TaskModel;
+        $taskModel->active = true;
+        $taskModel->owner = $user;
+
+        $taskFormFactoryData = TaskFormFactoryData::createFromArray([
+            'type' => ControllerMethodConstant::CREATE_SEVERAL_AJAX,
+            'taskModel' => $taskModel,
+            'options' => [
+                'supervisor' => $user
+            ]
+        ]);
+
+        $form = $this->get('app.form_factory.task')
+            ->getTaskForm($taskFormFactoryData)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($taskModel->works as $work) {
+                $taskModel->work = $work;
+
+                $task = $this->get('app.factory.task')
+                    ->flushFromModel($taskModel);
+
+                $this->get('app.event_dispatcher.task')
+                    ->onTaskCreate($task);
+            }
 
             return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }
@@ -105,30 +146,8 @@ class TaskController extends BaseController
 
         $type = $request->get('type');
         if (!empty($type)) {
-            $taskEventDispatcherService = $this->get('app.event_dispatcher.task');
-
-            switch ($type) {
-                case TaskStatusConstant::ACTIVE:
-                    $task->changeActive();
-
-                    if ($task->isActive()) {
-                        $taskEventDispatcherService->onTaskChangeStatus($task, $type);
-                    }
-
-                    break;
-                case TaskStatusConstant::COMPLETE:
-                    $task->changeComplete();
-
-                    $taskEventDispatcherService->onTaskChangeStatus($task, $type);
-                    break;
-                case TaskStatusConstant::NOTIFY:
-                    if ($task->isNotifyComplete()) {
-                        $task->changeNotifyComplete();
-
-                        $taskEventDispatcherService->onTaskChangeStatus($task, $type);
-                    }
-                    break;
-            }
+            $this->get('app.task_status')
+                ->changeStatus($type, $task);
 
             $this->flushEntity($task);
 
