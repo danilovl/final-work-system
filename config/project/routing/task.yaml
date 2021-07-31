@@ -17,7 +17,7 @@ task_create:
   methods:  [GET,POST]
 
 task_create_ajax:
-  path: /task/create/ajax
+  path: /{id}/task/create/ajax
   requirements:
     id: '%hashid%'
   defaults:

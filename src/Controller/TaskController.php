@@ -67,7 +67,8 @@ class TaskController extends BaseController
 
         $taskFormFactoryData = TaskFormFactoryData::createFromArray([
             'type' => ControllerMethodConstant::CREATE,
-            'taskModel' => $taskModel
+            'taskModel' => $taskModel,
+            'work' => $work
         ]);
 
         $form = $taskFormFactory->getTaskForm($taskFormFactoryData)
@@ -93,11 +94,7 @@ class TaskController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $taskFormFactoryData = TaskFormFactoryData::createFromArray([
-                'type' => ControllerMethodConstant::CREATE_AJAX,
-                'taskModel' => $taskModel,
-                'work' => $taskModel
-            ]);
+            $taskFormFactoryData->type = ControllerMethodConstant::CREATE_AJAX;
 
             $form = $taskFormFactory->getTaskForm($taskFormFactoryData);
         }
@@ -184,7 +181,9 @@ class TaskController extends BaseController
 
         $taskFormFactoryData = TaskFormFactoryData::createFromArray([
             'type' => ControllerMethodConstant::EDIT,
-            'taskModel' => $taskModel
+            'taskModel' => $taskModel,
+            'task' => $task,
+            'work' => $work
         ]);
 
         $form = $taskFormFactory->getTaskForm($taskFormFactoryData)->handleRequest($request);
@@ -209,12 +208,7 @@ class TaskController extends BaseController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $taskFormFactoryData = TaskFormFactoryData::createFromArray([
-                'type' => ControllerMethodConstant::EDIT_AJAX,
-                'taskModel' => $taskModel,
-                'task' => $task,
-                'work' => $work
-            ]);
+            $taskFormFactoryData->type = ControllerMethodConstant::EDIT_AJAX;
 
             $form = $taskFormFactory->getTaskForm($taskFormFactoryData);
         }

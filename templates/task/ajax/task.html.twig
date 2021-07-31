@@ -159,9 +159,9 @@
     </div>
 </div>
 <script>
-    let locale = '{{ app.request.locale }}';
-
     $(document).ready(function () {
+        let locale = '{{ app.request.locale }}';
+
         $('#task_deadline').datetimepicker({
             format: 'YYYY-MM-DD',
             locale: '{{ app.request.locale }}'
