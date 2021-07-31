@@ -1,113 +1,115 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	<div class="right_col" role="main">
-		<div class="">
+    <div class="right_col" role="main">
+        <div class="">
 
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="x_panel">
-						<div class="x_title">
-							<ul class="nav navbar-right panel_toolbox">
-								<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<div class="x_content">
-							<div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-								<div class="profile_img">
-									<div id="crop-avatar">
-										<!-- Current avatar -->
-										<img class="img-responsive avatar-view"
-											 src="{{ app_user() | profile_image }}"
-											 alt="Avatar"
-											 title="Change the avatar">
-									</div>
-								</div>
-								<h3>{{ app_user() }}</h3>
-								<ul class="list-unstyled user_data">
-									<li>
-										<i class="fa fa-user user-profile-icon"></i>
-										{{ app_user().username }}
-									</li>
-									<li class="m-top-xs">
-										<i class="fa fa-at user-profile-icon"></i>
-										{{ app_user().email }}
-									</li>
-									{% if  app_user().skype is not empty %}
-										<li class="m-top-xs">
-											<i class="fa fa-skype user-profile-icon"></i>:
-											{{ app_user().skype }}
-										</li>
-									{% endif %}
-								</ul>
-								<ul class="list-unstyled user_data">
-									{% if app_user().profileImage is not null %}
-										<li>
-											<a class="btn btn-danger" href="{{ path('profile_delete_image') }}">
-												<i class="fa fa-picture-o"></i>
-												{{ 'app.text.delete' | trans }}
-											</a>
-										</li>
-									{% endif %}
-									<li>
-										<a class="btn btn-primary" href="{{ path('profile_show') }}">
-											<i class="fa fa-backward"></i>
-											{{ 'app.menu.profile' | trans }}
-										</a>
-									</li>
-									<li>
-										<a class="btn btn-warning" href="{{ path('profile_change_password') }}">
-											<i class="fa fa-edit m-right-xs"></i>
-											{{ 'app.menu.profile_change_password' | trans }}
-										</a>
-									</li>
-								</ul>
-								<br/>
-							</div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <!-- Current avatar -->
+                                        <img class="img-responsive avatar-view"
+                                             src="{{ app_user() | profile_image }}"
+                                             alt="Avatar"
+                                             title="Change the avatar">
+                                    </div>
+                                </div>
+                                <h3>{{ app_user() }}</h3>
+                                <ul class="list-unstyled user_data">
+                                    <li>
+                                        <i class="fa fa-user user-profile-icon"></i>
+                                        {{ app_user().username }}
+                                    </li>
+                                    <li class="m-top-xs">
+                                        <i class="fa fa-at user-profile-icon"></i>
+                                        {{ app_user().email }}
+                                    </li>
+                                    {% if  app_user().skype is not empty %}
+                                        <li class="m-top-xs">
+                                            <i class="fa fa-skype user-profile-icon"></i>:
+                                            {{ app_user().skype }}
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                <ul class="list-unstyled user_data">
+                                    {% if app_user().profileImage is not null %}
+                                        <li>
+                                            <a class="btn btn-danger" href="{{ path('profile_delete_image') }}">
+                                                <i class="fa fa-picture-o"></i>
+                                                {{ 'app.text.delete' | trans }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    <li>
+                                        <a class="btn btn-primary" href="{{ path('profile_show') }}">
+                                            <i class="fa fa-backward"></i>
+                                            {{ 'app.menu.profile' | trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-warning" href="{{ path('profile_change_password') }}">
+                                            <i class="fa fa-edit m-right-xs"></i>
+                                            {{ 'app.menu.profile_change_password' | trans }}
+                                        </a>
+                                    </li>
+                                </ul>
+                                <br/>
+                            </div>
 
-							<div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="col-md-9 col-sm-9 col-xs-12 mt-medium ">
+                                <div class="row">
+                                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                    <div class="item form-group">
+                                        {{ form_label(form.uploadMedia, 'app.form.label.file', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.uploadMedia, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
 
-								{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                        {% if not form.uploadMedia.vars.valid %}
+                                            <div class="col-md-3 col-sm-3 col-xs-12 red">
+                                                {{ form_errors(form.uploadMedia) }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
 
-								<div class="item form-group">
-									{{ form_label(form.uploadMedia, 'app.form.label.file', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										{{ form_widget(form.uploadMedia, {'attr': {'class': 'form-control'}}) }}
-									</div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <input type="submit"
+                                                   class="btn btn-success"
+                                                   value="{{ 'app.form.action.create' | trans }}"/>
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
 
-									{% if not form.uploadMedia.vars.valid %}
-										<div class="col-md-3 col-sm-3 col-xs-12 red">
-											{{ form_errors(form.uploadMedia) }}
-										</div>
-									{% endif %}
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-										<input type="submit"
-											   class="btn btn-success"
-											   value="{{ 'app.form.action.create' | trans }}"/>
-									</div>
-								</div>
-
-								{{ form_end(form) }}
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                {% include('profile/web_camera_image.html.twig') %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 {% block javascript %}
-	<script>
+    <script>
         $(document).ready(function () {
             let locale = '{{ app.request.locale }}';
             initTinymce(locale);
+
+            createImageByWebCamera('create-web-camera-image')
         });
-	</script>
+    </script>
 {% endblock %}
 
 

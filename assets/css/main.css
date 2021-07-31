@@ -5530,7 +5530,22 @@ ul.msg_list li .time {
     margin-top: 10px;
 }
 
+.mt-60 {
+    margin-top: 60px;
+}
+
+.ta-center {
+    text-align: center
+}
+
 .navbar-nav-right {
     width: 70%;
     float: right;
+}
+
+.profile-web-camera-area {
+    border: solid 1px #ddd;
+    background-color: white;
+    width: 400px;
+    height: 400px;
 }

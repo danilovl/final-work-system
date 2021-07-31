@@ -1,0 +1,39 @@
+<div class="row mt-60"
+     id="create-web-camera-image"
+     data-id-web-camera-video="webCameraVideo"
+     data-id-canvas="webCameraCanvas"
+     data-url="{{ path('profile_create_image_web_camera_ajax') }}"
+     data-id-button-capture="btnCapture"
+     data-id-button-save="btnSave"
+     data-max-show-width="400"
+>
+    <p class="ta-center">{{ 'app.text.you_can_create_by_web_camera' | trans }}</p>
+    <div class="col-lg-6">
+        <h4>
+            <input type="button"
+                   class="btn btn-primary"
+                   id="btnCapture"
+                   name="btnSave"
+                   value="{{ 'app.form.action.take_photo' | trans }}"
+            />
+        </h4>
+        <video id="webCameraVideo"
+               class="profile-web-camera-area"
+               playsinline
+               autoplay
+        >
+        </video>
+    </div>
+
+    <div class="col-lg-6">
+        <h4>
+            <input type="button"
+                   class="btn btn-primary"
+                   id="btnSave"
+                   name="btnSave"
+                   value="{{ 'app.form.action.save' | trans }}"
+            />
+        </h4>
+        <canvas id="webCameraCanvas"></canvas>
+    </div>
+</div>

@@ -23,7 +23,6 @@ use App\Form\{
 };
 use App\Entity\{
     Media,
-    MediaType,
     MediaMimeType
 };
 use Symfony\Component\HttpFoundation\{
@@ -80,10 +79,7 @@ class ProfileController extends BaseController
     public function changeImage(Request $request): Response
     {
         $user = $this->getUser();
-        $mediaUser = $this->getRepository(Media::class)->findOneBy([
-            'owner' => $user,
-            'type' => $this->getReference(MediaType::class, MediaTypeConstant::USER_PROFILE_IMAGE)
-        ]);
+        $profileImage = $user->getProfileImage();
 
         $mediaModel = new MediaModel;
         $form = $this->createForm(ProfileMediaForm::class, $mediaModel)
@@ -99,8 +95,8 @@ class ProfileController extends BaseController
                     throw new RuntimeException("FileMimeType don't exist");
                 }
 
-                $media = $mediaUser ?? new Media;
-                if ($mediaUser === null) {
+                $media = $profileImage ?? new Media;
+                if ($profileImage === null) {
                     $mediaType = $this->get('app.facade.media_type')->find(MediaTypeConstant::USER_PROFILE_IMAGE);
 
                     $media = new Media;
@@ -111,7 +107,7 @@ class ProfileController extends BaseController
                 $media->setUploadMedia($uploadMedia);
                 $this->persistAndFlush($media);
 
-                if ($mediaUser === null) {
+                if ($profileImage === null) {
                     $user->setProfileImage($media);
                     $this->flushEntity($user);
                 }

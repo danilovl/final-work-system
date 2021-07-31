@@ -736,3 +736,88 @@ function widgetEventSource(url, widgetsParam) {
         }
     }
 }
+
+function createImageByWebCamera(id) {
+    let webCameraImageContainer = $(`#${id}`);
+    let idCanvas = webCameraImageContainer.data('id-canvas');
+    let elementCanvas = document.getElementById(idCanvas);
+    let idWebCameraVideo = webCameraImageContainer.data('id-web-camera-video');
+    let video = document.querySelector(`#${idWebCameraVideo}`);
+    let url = webCameraImageContainer.data('url');
+    let idBtnCapture = webCameraImageContainer.data('id-button-capture');
+    let idBtnSave = webCameraImageContainer.data('id-button-save');
+    let maxShowWidth = webCameraImageContainer.data('max-show-width');
+
+    const mediaStreamConstraints = {
+        audio: false,
+        video: {
+            width: video.offsetWidth,
+            height: video.offsetHeight
+        }
+    };
+
+    function clickBtnCapture(width, height) {
+        $(`#${idBtnCapture}`).click(() => {
+            if (width > maxShowWidth) {
+                width = maxShowWidth;
+                height = width / (4 / 3);
+            }
+
+            let context = elementCanvas.getContext('2d');
+            elementCanvas.style.setProperty('width', width);
+            elementCanvas.style.setProperty('height', height);
+
+            elementCanvas.height = height;
+            elementCanvas.width = width;
+
+            context.drawImage(video, 0, 0, width, height);
+        });
+    }
+
+    function clickBtnSave(width, height) {
+        $(`#${idBtnSave}`).click(() => {
+            let context = elementCanvas.getContext('2d');
+            context.drawImage(video, 0, 0, width, height);
+
+            let imageBase64Data = elementCanvas.toDataURL('image/png');
+            imageBase64Data = imageBase64Data.replace('data:image/png;base64,', '');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify({'imageData': imageBase64Data}),
+                timeout: 10000,
+                dataType: 'json',
+                contentType: 'application/json',
+                processData: false,
+                success: (response) => {
+                    for (let type in response.notifyMessage) {
+                        notifyMessage(type, response.notifyMessage[type]);
+                    }
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                }
+            });
+        });
+    }
+
+    if (navigator.mediaDevices !== undefined && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(mediaStreamConstraints)
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+
+                let {width, height} = stream.getTracks()[0].getSettings();
+
+                clickBtnCapture(width, height);
+                clickBtnSave(width, height);
+            })
+            .catch(() => {
+                webCameraImageContainer.hide();
+            });
+    } else {
+        webCameraImageContainer.hide();
+    }
+}
