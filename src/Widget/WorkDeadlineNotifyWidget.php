@@ -29,7 +29,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
 {
     public function __construct(
         private UserService $userService,
-        private WorkService$workService,
+        private WorkService $workService,
         private ParameterService $parameterService,
         private TranslatorService $translatorService,
         private Environment $twig,
