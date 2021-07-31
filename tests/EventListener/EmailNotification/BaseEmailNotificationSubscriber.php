@@ -26,7 +26,8 @@ class BaseEmailNotificationSubscriber extends BaseEventSubscriber
             $kernel->getContainer()->get('twig'),
             $kernel->getContainer()->get('translator'),
             $kernel->getContainer()->get('app.factory.email_notification_queue'),
-            $kernel->getContainer()->get('danilovl.parameter')
+            $kernel->getContainer()->get('danilovl.parameter'),
+            $kernel->getContainer()->get('old_sound_rabbit_mq.email_notification_producer')
         );
     }
 }

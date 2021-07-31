@@ -29,7 +29,8 @@ class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubsc
             $kernel->getContainer()->get('translator'),
             $kernel->getContainer()->get('app.factory.email_notification_queue'),
             $kernel->getContainer()->get('danilovl.parameter'),
-            $kernel->getContainer()->get('app.user_work')
+            $kernel->getContainer()->get('app.user_work'),
+            $kernel->getContainer()->get('old_sound_rabbit_mq.email_notification_producer')
         );
     }
 }

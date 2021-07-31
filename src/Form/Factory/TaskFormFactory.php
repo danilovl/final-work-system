@@ -49,6 +49,7 @@ class TaskFormFactory
         switch ($taskFormFactoryData->type) {
             case ControllerMethodConstant::EDIT:
             case ControllerMethodConstant::CREATE:
+                break;
             case ControllerMethodConstant::CREATE_AJAX:
                 if ($work === null) {
                     throw new RuntimeException('Work must not be null for create ajax');
