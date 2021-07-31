@@ -35,3 +35,9 @@ profile_change_password:
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]
+
+profile_create_image_web_camera_ajax:
+  path: /profile/image/create-web-camera/ajax
+  defaults:
+    _controller: App\Controller\Ajax\ProfileController::createImageWebCamera
+  methods: [POST]

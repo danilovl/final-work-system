@@ -107,6 +107,11 @@ services:
 
   App\Service\EntityManagerService: '@app.entity_manager'
 
+  app.resize_image:
+    class: App\Service\ResizeImageService
+
+  App\Service\ResizeImageService: '@app.resize_image'
+
   #   ParamConverter
   hashids.converter:
     class: App\EventListener\HashidsParamConverterListener
