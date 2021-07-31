@@ -63,7 +63,7 @@ class ParametersServiceTest extends KernelTestCase
     public function keyStringProvider(): Generator
     {
         yield ['template.ajax', 'ajax/'];
-        yield ['locale', 'cs'];
+        yield ['locale', 'en'];
         yield ['locales', 'en|cs|ru'];
     }
 
