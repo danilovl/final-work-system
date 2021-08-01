@@ -36,7 +36,7 @@ class ConversationMessageFactory extends BaseModelFactory
         $conversationMessage->setConversation($conversationMessageModel->conversation);
         $conversationMessage->setContent($conversationMessageModel->content);
         $conversationMessage->setOwner($conversationMessageModel->owner);
-        $conversationMessage->setStatus($conversationMessageModel->status);
+        $conversationMessage->setStatuses($conversationMessageModel->statuses);
 
         return $conversationMessage;
     }

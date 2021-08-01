@@ -13,6 +13,7 @@
 namespace App\Twig\Runtime;
 
 use App\Service\Conversation\ConversationService;
+use DateTime;
 use App\Entity\{
     User,
     Work,
@@ -39,5 +40,23 @@ class ConversationRuntime extends AbstractExtension
     {
         return $this->conversationService->getLastMessage($conversation);
     }
-}
 
+    public function getMessageReadDateByRecipient(ConversationMessage $conversationMessage): ?DateTime
+    {
+        $recipient = $conversationMessage->getConversation()->getRecipient();
+        if ($recipient === null) {
+            return null;
+        }
+
+        $recipientStatus = null;
+        foreach ($conversationMessage->getStatuses() as $status) {
+            if ($recipient->getId() === $status->getUser()->getId()) {
+                $recipientStatus = $status;
+
+                break;
+            }
+        }
+
+        return $recipientStatus?->getUpdatedAt();
+    }
+}

@@ -70,9 +70,9 @@
     </div>
 </div>
 <script>
-    let locale = '{{ app.request.locale }}';
-
     $(document).ready(function () {
+        let locale = '{{ app.request.locale }}';
+
         initTinymce(locale);
 
         $("#media_type").select2({width: '100%'});

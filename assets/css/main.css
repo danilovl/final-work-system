@@ -4115,6 +4115,16 @@ div[data-role=editor-toolbar] {
     height: 20px !important;
 }
 
+.switchery-very-small > span {
+    width: 25px !important;
+    height: 12px !important;
+}
+
+.switchery-very-small > span > small {
+    width: 10px !important;
+    height: 10px !important;
+}
+
 fieldset {
     border: none;
     margin: 0;

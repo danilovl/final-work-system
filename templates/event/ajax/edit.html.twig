@@ -86,11 +86,9 @@
     </div>
 </div>
 <script>
-    let locale = '{{ app.request.locale }}';
-
-    let modalWindow = $('#modalWindow');
-
     $(document).ready(function () {
+        let locale = '{{ app.request.locale }}';
+
         $("#event_type").select2({width: '100%', dropdownParent: modalWindow});
         $("#event_address").select2({width: '100%', dropdownParent: modalWindow});
         $("#event_participant").select2({width: '100%', dropdownParent: modalWindow});

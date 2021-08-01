@@ -58,7 +58,7 @@ class ConversationMessage
      * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessageStatus", mappedBy="message")
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
-    private ?Collection $status = null;
+    private ?Collection $statuses = null;
 
     /**
      * @ORM\Column(name="content", type="text", nullable=false)
@@ -68,7 +68,7 @@ class ConversationMessage
 
     public function __construct()
     {
-        $this->status = new ArrayCollection;
+        $this->statuses = new ArrayCollection;
     }
 
     public function getConversation(): ?Conversation
@@ -102,16 +102,16 @@ class ConversationMessage
     }
 
     /**
-     * @return Collection|ConversationMessageStatus|[]
+     * @return Collection|ConversationMessageStatus[]
      */
-    public function getStatus(): ?Collection
+    public function getStatuses(): ?Collection
     {
-        return $this->status;
+        return $this->statuses;
     }
 
-    public function setStatus(Collection $status): void
+    public function setStatuses(Collection $statuses): void
     {
-        $this->status = $status;
+        $this->statuses = $statuses;
     }
 
     public function __toString(): string

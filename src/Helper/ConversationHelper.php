@@ -97,18 +97,19 @@ class ConversationHelper
     public static function getConversationOpposite(iterable $conversations, User $user): void
     {
         foreach ($conversations as $conversation) {
-            if ($conversation->getType()->getId() === ConversationTypeConstant::WORK) {
-                /** @var Conversation $conversation */
-                $participants = $conversation->getParticipants();
+            if ($conversation->getType()->getId() !== ConversationTypeConstant::WORK) {
+                continue;
+            }
 
-                if ($participants->count() > 2) {
-                    throw new LogicException('Conversation must have only two user');
-                }
+            /** @var Conversation $conversation */
+            $participants = $conversation->getParticipants();
+            if ($participants->count() > 2) {
+                throw new LogicException('Conversation must have only two user');
+            }
 
-                foreach ($participants as $participant) {
-                    if ($participant->getUser()->getId() !== $user->getId()) {
-                        $conversation->setRecipient($participant->getUser());
-                    }
+            foreach ($participants as $participant) {
+                if ($participant->getUser()->getId() !== $user->getId()) {
+                    $conversation->setRecipient($participant->getUser());
                 }
             }
         }

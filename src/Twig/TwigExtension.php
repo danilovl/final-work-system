@@ -34,16 +34,37 @@ class TwigExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [
+        $userFunctions = [
             new TwigFunction('app_user', [UserRuntime::class, 'appUser']),
-            new TwigFunction('is_user_role', [UserRuntime::class, 'isUserRole']),
+            new TwigFunction('is_user_role', [UserRuntime::class, 'isUserRole'])
+        ];
+
+        $workFunctions = [
             new TwigFunction('is_work_role', [WorkRuntime::class, 'isWorkRole']),
             new TwigFunction('work_deadline_days', [WorkRuntime::class, 'getDeadlineDays']),
-            new TwigFunction('work_deadline_program_days', [WorkRuntime::class, 'getDeadlineProgramDays']),
-            new TwigFunction('task_work_complete_percentage', [TaskRuntime::class, 'getCompleteTaskPercentage']),
+            new TwigFunction('work_deadline_program_days', [WorkRuntime::class, 'getDeadlineProgramDays'])
+        ];
+
+       $taskFunctions = [
+            new TwigFunction('task_work_complete_percentage', [TaskRuntime::class, 'getCompleteTaskPercentage'])
+        ];
+
+        $conversationFunctions = [
             new TwigFunction('check_work_users_conversation', [ConversationRuntime::class, 'checkWorkUsersConversation']),
             new TwigFunction('conversation_last_message', [ConversationRuntime::class, 'getLastMessage']),
-            new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink']),
+            new TwigFunction('conversation_message_read_date_recipient', [ConversationRuntime::class, 'getMessageReadDateByRecipient'])
+        ];
+
+        $systemEventFunctions = [
+            new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink'])
+        ];
+
+        return [
+            ...$userFunctions,
+            ...$workFunctions,
+            ...$taskFunctions,
+            ...$conversationFunctions,
+            ...$systemEventFunctions
         ];
     }
 

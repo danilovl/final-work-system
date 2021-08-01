@@ -110,9 +110,9 @@
 
 {% block javascript %}
     <script>
-        let locale = '{{ app.request.locale }}';
-
         $(document).ready(function () {
+            let locale = '{{ app.request.locale }}';
+
             $("#media_type").select2();
             $("#media_category").select2();
 

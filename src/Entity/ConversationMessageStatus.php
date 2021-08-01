@@ -44,7 +44,7 @@ class ConversationMessageStatus
     private ?Conversation $conversation = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ConversationMessage", inversedBy="status", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ConversationMessage", inversedBy="statuses", fetch="EAGER")
      * @ORM\JoinColumn(name="conversation_message_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */

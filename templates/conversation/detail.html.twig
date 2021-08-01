@@ -105,9 +105,9 @@
 
 {% block javascript %}
     <script>
-        let locale = '{{ app.request.locale }}';
-
         $(document).ready(function () {
+            let locale = '{{ app.request.locale }}';
+
             initTinymce(locale);
             {% if parameter_get('event_source.conversation.detail.active') == true %}
             conversationEventSource("{{ path('conversation_live_ajax', {'id': conversation.id | hashids_encode }) }}", $('#chat'));
@@ -115,4 +115,3 @@
         });
     </script>
 {% endblock %}
-

@@ -58,7 +58,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createQueryBuilder('conversation_message')
             ->select('count(conversation_message.id)')
-            ->leftJoin('conversation_message.status', 'status')
+            ->leftJoin('conversation_message.statuses', 'status')
             ->where('status.type = :type')
             ->andWhere('status.user = :user')
             ->andWhere('status.message IS NOT NULL')
@@ -72,7 +72,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
         ConversationMessageStatusType $statusType
     ): QueryBuilder {
         return $this->createQueryBuilder('conversation_message')
-            ->leftJoin('conversation_message.status', 'status')
+            ->leftJoin('conversation_message.statuses', 'status')
             ->where('status.type = :type')
             ->andWhere('status.user = :user')
             ->andWhere('status.message IS NOT NULL')
@@ -104,7 +104,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('conversation_message')
             ->distinct()
             ->select('count(conversation_message.id)')
-            ->leftJoin('conversation_message.status', 'status')
+            ->leftJoin('conversation_message.statuses', 'status')
             ->where('status.type = :type')
             ->andWhere('status.user = :user')
             ->andWhere('status.message IS NOT NULL')

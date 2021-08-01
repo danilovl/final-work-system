@@ -78,9 +78,9 @@
 </div>
 
 <script>
-    let locale = '{{ app.request.locale }}';
-
     $(document).ready(function () {
+        let locale = '{{ app.request.locale }}';
+
         initTinymce(locale);
         initJsSwitch('.ajax .js-switch');
         createEditContentAjax('#event_address_action');

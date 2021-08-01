@@ -2,14 +2,15 @@
 {% if message.isRead == false %}
     {% set conversationMessageUnreadClass = 'conversation-message-unread' %}
 {% endif %}
-<div class="{% if message.owner.id == app_user().id %} chat-message-left {% else %} chat-message-right {% endif %}">
+
+<div class="{% if message.isOwner(app_user()) %}chat-message-left{% else %}chat-message-right{% endif %}">
     <img class="message-avatar"
          src="{{ message.owner | profile_image }}"
          alt="{{ message.owner }}"
     >
     <div class="{{ conversationMessageUnreadClass }} message">
         <a class="message-author" href="#"> {{ message.owner }} </a>
-        <span class="message-date">
+        <span class="message-date switchery-very-small">
             {{ message.createdAt | date }}
 
             {% if message.isOwner(app_user()) == false %}
@@ -18,6 +19,13 @@
                     'dataTargetType': 'complete',
                     'dataTargetUrl': path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode })
                 } %}
+            {% else %}
+                {% set readDate = conversation_message_read_date_recipient(message) %}
+                {% if readDate is not empty %}
+                    <br>
+                    <i class="fa fa-eye"></i>
+                    {{ readDate | date }}
+                {% endif %}
             {% endif %}
         </span>
         <span class="message-content">{{ message.content | away_to | raw }}</span>

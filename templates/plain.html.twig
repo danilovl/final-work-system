@@ -1,21 +1,19 @@
-{#{% apply spaceless %}#}
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		{% include 'analytics/analitics.html.twig' %}
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-		{% block title %} {{ seo_title() }} {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'analytics/analitics.html.twig' %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block title %} {{ seo_title() }} {% endblock %}
 
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app_security/css') }}
-		{% endblock %}
-	</head>
-	<body class="login">
-	{% block content %}
-	{% endblock content %}
-	</body>
-	</html>
-{#{% endapply %}#}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app_security/css') }}
+    {% endblock %}
+</head>
+<body class="login">
+{% block content %}
+{% endblock content %}
+</body>
+</html>

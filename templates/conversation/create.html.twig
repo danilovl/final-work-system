@@ -75,8 +75,8 @@
 
 {% block javascript %}
     <script>
-        let locale = '{{ app.request.locale }}';
         $(document).ready(function () {
+            let locale = '{{ app.request.locale }}';
 
             {% if is_user_role(app_user(), 'isSupervisor') %}
             $(function () {

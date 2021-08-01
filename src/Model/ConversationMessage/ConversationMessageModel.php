@@ -31,11 +31,11 @@ class ConversationMessageModel
     use OwnerAwareTrait;
 
     public ?Conversation $conversation = null;
-    public ?Collection $status = null;
+    public ?Collection $statuses = null;
 
     public function __construct()
     {
-        $this->status = new ArrayCollection;
+        $this->statuses = new ArrayCollection;
     }
 
     public static function fromConversationMessage(ConversationMessage $conversationMessage): self
@@ -44,7 +44,7 @@ class ConversationMessageModel
         $model->conversation = $conversationMessage->getConversation();
         $model->content = $conversationMessage->getContent();
         $model->owner = $conversationMessage->getOwner();
-        $model->status = $conversationMessage->getStatus();
+        $model->statuses = $conversationMessage->getStatuses();
 
         return $model;
     }

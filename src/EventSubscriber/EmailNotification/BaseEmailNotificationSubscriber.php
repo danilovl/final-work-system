@@ -99,6 +99,7 @@ class BaseEmailNotificationSubscriber
         $templatePath = $this->getTemplate($locale, $template);
         if (!$this->twig->getLoader()->exists($templatePath)) {
             $locale = $this->sureExistTemplateLocale;
+            $this->initTranslatorLocale($locale);
         }
 
         return $this->twig->render(

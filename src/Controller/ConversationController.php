@@ -171,6 +171,8 @@ class ConversationController extends BaseController
             }
         }
 
+        ConversationHelper::getConversationOpposite([$conversation], $user);
+
         $conversationMessagesQuery = $this->get('app.facade.conversation_message')
             ->queryMessagesByConversation($conversation);
 
