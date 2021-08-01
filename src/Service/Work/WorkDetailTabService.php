@@ -13,6 +13,7 @@
 namespace App\Service\Work;
 
 use App\Exception\RuntimeException;
+use App\Helper\ConversationHelper;
 use App\Helper\WorkRoleHelper;
 use App\Service\{
     PaginatorService,
@@ -73,6 +74,15 @@ class WorkDetailTabService
         );
 
         $this->setActiveTabByPagination($tab, $paginator);
+
+        if ($tab === TabTypeConstant::TAB_MESSAGE) {
+            if ($paginator->count() > 0) {
+                ConversationHelper::getConversationOpposite(
+                    [$paginator[0]->getConversation()],
+                    $user
+                );
+            }
+        }
 
         return $paginator;
     }
