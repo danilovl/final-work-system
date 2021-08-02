@@ -14,7 +14,7 @@ namespace App\Command;
 
 use App\EventDispatcher\TaskEventDispatcherService;
 use App\Model\Task\TaskDeadlineFacade;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -30,7 +30,7 @@ class TaskRemindDeadlineCommand extends Command
     public function __construct(
         private TaskEventDispatcherService $taskEventDispatcherService,
         private TaskDeadlineFacade $taskDeadlineFacade,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
     }

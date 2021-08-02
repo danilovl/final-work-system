@@ -13,7 +13,7 @@
 namespace App\Twig\Runtime;
 
 use App\Interfaces\WidgetInterface;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 
@@ -21,7 +21,7 @@ class HomepageNotifyWidgetRuntime extends AbstractExtension
 {
     public function __construct(
         private ContainerInterface $container,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
     }
 

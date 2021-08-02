@@ -15,7 +15,7 @@ namespace App\Service\Widget;
 use App\Model\Conversation\ConversationMessageFacade;
 use App\Model\SystemEvent\SystemEventFacade;
 use App\Service\User\UserService;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use App\Widget\{
     UnreadSystemEventWidget,
@@ -31,7 +31,7 @@ class WidgetStreamService
     ];
 
     public function __construct(
-        private ParameterService $parameterService,
+        private ParameterServiceInterface $parameterService,
         private UserService $userService,
         private ConversationMessageFacade $conversationMessageFacade,
         private SystemEventFacade $systemEventFacade,

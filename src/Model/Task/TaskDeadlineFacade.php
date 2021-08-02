@@ -12,7 +12,7 @@
 
 namespace App\Model\Task;
 
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Entity\User;
 use App\Repository\TaskRepository;
 
@@ -20,7 +20,7 @@ class TaskDeadlineFacade
 {
     public function __construct(
         private TaskRepository $taskRepository,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
     }
 

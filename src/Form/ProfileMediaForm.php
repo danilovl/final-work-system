@@ -13,7 +13,7 @@
 namespace App\Form;
 
 use App\Model\Media\MediaModel;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +28,7 @@ class ProfileMediaForm extends AbstractType
 {
     public const NAME = 'user_profile_image';
 
-    public function __construct(private ParameterService $parameterService)
+    public function __construct(private ParameterServiceInterface $parameterService)
     {
     }
 

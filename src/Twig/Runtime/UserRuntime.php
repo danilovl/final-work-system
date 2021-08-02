@@ -15,7 +15,7 @@ namespace App\Twig\Runtime;
 use App\Entity\User;
 use App\Helper\UserRoleHelper;
 use App\Service\User\UserService;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -24,7 +24,7 @@ class UserRuntime extends AbstractExtension
 {
     public function __construct(
         private UserService $userService,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
     }
 

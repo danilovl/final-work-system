@@ -19,7 +19,7 @@ use App\EventSubscriber\Events;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueFactory;
 use App\Model\User\UserFacade;
 use App\Service\Work\WorkService;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -32,7 +32,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         protected Environment $twig,
         protected TranslatorInterface $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
-        protected ParameterService $parameterService,
+        protected ParameterServiceInterface $parameterService,
         private WorkService $workService,
         protected ProducerInterface $emailNotificationProducer
     ) {

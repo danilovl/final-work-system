@@ -12,7 +12,7 @@
 
 namespace App\Service;
 
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class PaginatorService
 {
     public function __construct(
         private PaginatorInterface $paginator,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
     }
 

@@ -13,13 +13,13 @@
 namespace App\Transformer\Api;
 
 use App\Constant\DateFormatConstant;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use ReflectionClass;
 
 class Transformer implements TransformerInterface
 {
-    public function __construct(private ParameterService $parameterService)
+    public function __construct(private ParameterServiceInterface $parameterService)
     {
     }
 

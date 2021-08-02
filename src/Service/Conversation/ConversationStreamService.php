@@ -13,7 +13,7 @@
 namespace App\Service\Conversation;
 
 use App\Model\Conversation\ConversationMessageFacade;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use Twig\Environment;
 use App\Entity\{
@@ -26,7 +26,7 @@ class ConversationStreamService
     private ?DateTime $date;
 
     public function __construct(
-        private ParameterService $parameterService,
+        private ParameterServiceInterface $parameterService,
         private Environment $twig,
         private ConversationMessageFacade $conversationMessageFacade
     ) {

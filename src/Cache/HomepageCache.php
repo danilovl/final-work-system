@@ -17,14 +17,14 @@ use App\Entity\User;
 use App\Helper\SystemEventHelper;
 use App\Model\SystemEvent\SystemEventRecipientFacade;
 use App\Service\PaginatorService;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class HomepageCache
 {
     public function __construct(
         private AdapterInterface $cache,
-        private ParameterService $parameterService,
+        private ParameterServiceInterface $parameterService,
         private PaginatorService $paginatorService,
         private SystemEventRecipientFacade $systemEventRecipientFacade
     ) {

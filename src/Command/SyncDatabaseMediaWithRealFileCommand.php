@@ -18,7 +18,7 @@ use App\Model\Media\{
     MediaTypeFacade
 };
 use App\Service\EntityManagerService;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DirectoryIterator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -38,7 +38,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         private EntityManagerService $entityManagerService,
         private MediaFacade $mediaFacade,
         private MediaTypeFacade $mediaTypeFacade,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
     }

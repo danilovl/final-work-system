@@ -14,14 +14,14 @@ namespace App\Widget;
 
 use App\Service\TranslatorService;
 use App\Service\User\UserService;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Twig\Environment;
 
 class UserProfileInformationNotifyWidget extends BaseWidget
 {
     public function __construct(
         protected UserService $userService,
-        protected ParameterService $parameterService,
+        protected ParameterServiceInterface $parameterService,
         protected TranslatorService $translatorService,
         protected Environment $twig
     ) {

@@ -12,7 +12,7 @@
 
 namespace App\Service;
 
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Entity\{
     User,
     ResetPassword
@@ -41,7 +41,7 @@ class ResetPasswordService
     public function __construct(
         private ResetPasswordFactory $resetPasswordFactory,
         private ResetPasswordFacade $resetPasswordFacade,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
         $this->cryptographicallySecureKey = $parameterService->get('reset_password.cryptographically_secure_key');
         $this->resetRequestLifetime = $parameterService->get('reset_password.reset_request_lifetime');

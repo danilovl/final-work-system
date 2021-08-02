@@ -19,7 +19,7 @@ use App\Service\{
     PaginatorService,
     EntityManagerService
 };
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\ORM\Query;
 use App\Constant\TabTypeConstant;
 use App\Entity\{
@@ -41,7 +41,7 @@ class WorkDetailTabService
     public function __construct(
         private EntityManagerService $entityManagerService,
         private PaginatorService $paginator,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
     }
 

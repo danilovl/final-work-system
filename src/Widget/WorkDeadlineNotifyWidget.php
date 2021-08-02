@@ -21,7 +21,7 @@ use App\Constant\{
     WorkUserTypeConstant
 };
 use App\Model\Work\WorkFacade;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Service\TranslatorService;
 use Twig\Environment;
 
@@ -30,7 +30,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
     public function __construct(
         private UserService $userService,
         private WorkService $workService,
-        private ParameterService $parameterService,
+        private ParameterServiceInterface $parameterService,
         private TranslatorService $translatorService,
         private Environment $twig,
         private WorkFacade $workFacade

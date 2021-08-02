@@ -19,7 +19,7 @@ use App\Helper\{
     UserRoleHelper,
     WorkRoleHelper
 };
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\{
     Work,
@@ -34,7 +34,7 @@ class ConversationVariationService
     public function __construct(
         private UserWorkService $userWorkService,
         private WorkService $workService,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
     }
 

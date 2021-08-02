@@ -15,7 +15,7 @@ namespace App\RabbitMq\Consumer;
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Entity\EmailNotificationQueue;
 use App\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Model\EmailNotificationQueue\{
     EmailNotificationQueueModel,
     EmailNotificationQueueFactory
@@ -33,7 +33,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class EmailNotificationConsumer implements ConsumerInterface
 {
     public function __construct(
-        private ParameterService $parameterService,
+        private ParameterServiceInterface $parameterService,
         private MailerService $mailer,
         private EmailNotificationQueueFactory $emailNotificationQueueFactory,
         private BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,

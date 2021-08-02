@@ -13,7 +13,7 @@
 namespace App\Command;
 
 use App\Model\EmailNotificationQueue\EmailNotificationQueueFacade;
-use Danilovl\ParameterBundle\Services\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use App\Service\{
     MailerService,
@@ -39,7 +39,7 @@ class EmailNotificationQueueCommand extends Command
         private EntityManagerService $entityManagerService,
         private EmailNotificationQueueFacade $emailNotificationQueueFacade,
         private MailerService $mailer,
-        private ParameterService $parameterService
+        private ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
     }
