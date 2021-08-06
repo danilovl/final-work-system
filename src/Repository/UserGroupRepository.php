@@ -24,7 +24,7 @@ class UserGroupRepository extends ServiceEntityRepository
         parent::__construct($registry, Group::class);
     }
 
-	public function all(): QueryBuilder
+    public function all(): QueryBuilder
     {
         return $this->createQueryBuilder('user_group');
     }

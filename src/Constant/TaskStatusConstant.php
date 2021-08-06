@@ -14,7 +14,7 @@ namespace App\Constant;
 
 class TaskStatusConstant
 {
-	public const ACTIVE = 'active';
+    public const ACTIVE = 'active';
     public const COMPLETE = 'complete';
     public const NOTIFY = 'notify';
 }

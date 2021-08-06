@@ -17,23 +17,23 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ServicePublicCompilerPass implements CompilerPassInterface
 {
-	private const SERVICES = [
-	    'fos_elastica.finder.work'
+    private const SERVICES = [
+        'fos_elastica.finder.work'
     ];
 
-	/**
-	 * @param ContainerBuilder $container
-	 */
-	public function process(ContainerBuilder $container)
-	{
-		foreach (self::SERVICES as $service) {
-			if ($container->hasDefinition($service)) {
-				$container->getDefinition($service)->setPublic(true);
-			}
+    /**
+     * @param ContainerBuilder $container
+     */
+    public function process(ContainerBuilder $container)
+    {
+        foreach (self::SERVICES as $service) {
+            if ($container->hasDefinition($service)) {
+                $container->getDefinition($service)->setPublic(true);
+            }
 
-			if ($container->hasAlias($service)) {
-				$container->getAlias($service)->setPublic(true);
-			}
-		}
-	}
+            if ($container->hasAlias($service)) {
+                $container->getAlias($service)->setPublic(true);
+            }
+        }
+    }
 }
