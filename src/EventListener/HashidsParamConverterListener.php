@@ -12,7 +12,7 @@
 
 namespace App\EventListener;
 
-use Danilovl\HashidsBundle\Services\HashidsService;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use LogicException;
@@ -25,7 +25,7 @@ class HashidsParamConverterListener extends DoctrineParamConverter
     private bool $autowire;
 
     public function __construct(
-        private HashidsService $hashids,
+        private HashidsServiceInterface $hashids,
         ManagerRegistry $registry
     ) {
         parent::__construct($registry);

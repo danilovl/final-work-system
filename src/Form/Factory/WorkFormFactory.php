@@ -16,6 +16,7 @@ use App\Constant\ControllerMethodConstant;
 use App\Entity\Work;
 use App\Exception\ConstantNotFoundException;
 use App\Service\Work\WorkListService;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\{
     WorkForm,
@@ -30,8 +31,7 @@ use Symfony\Component\Form\{
 use App\Model\Work\WorkModel;
 use App\Model\WorkDeadline\WorkDeadlineFacade;
 use App\Model\WorkSearch\WorkSearchModel;
-use Danilovl\HashidsBundle\Services\HashidsService;
-use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Request;
 
 class WorkFormFactory
 {
@@ -39,7 +39,7 @@ class WorkFormFactory
         private RouterInterface $router,
         private WorkListService $workListService,
         private WorkDeadlineFacade $deadlineFacade,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }

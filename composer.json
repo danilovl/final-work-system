@@ -11,7 +11,7 @@
         "ext-sockets": "*",
         "ext-sodium": "*",
         "ext-gd": "*",
-        "danilovl/hashids-bundle": "^1.0.4",
+        "danilovl/hashids-bundle": "^1.1.0",
         "danilovl/parameter-bundle": "^3.0.4",
         "danilovl/permission-middleware-bundle": "^2.1.0",
         "danilovl/render-service-twig-extension-bundle": "^3.0.1",

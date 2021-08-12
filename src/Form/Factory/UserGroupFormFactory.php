@@ -16,20 +16,20 @@ use App\Constant\ControllerMethodConstant;
 use App\Entity\Group;
 use App\Exception\RuntimeException;
 use App\Model\UserGroup\UserGroupModel;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\UserGroupForm;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
-use Danilovl\HashidsBundle\Services\HashidsService;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserGroupFormFactory
 {
     public function __construct(
         private RouterInterface $router,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }

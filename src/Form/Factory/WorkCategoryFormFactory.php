@@ -16,20 +16,20 @@ use App\Constant\ControllerMethodConstant;
 use App\Entity\WorkCategory;
 use App\Exception\ConstantNotFoundException;
 use App\Model\WorkCategory\WorkCategoryModel;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\WorkCategoryForm;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
-use Danilovl\HashidsBundle\Services\HashidsService;
 use Symfony\Component\HttpFoundation\Request;
 
 class WorkCategoryFormFactory
 {
     public function __construct(
         private RouterInterface $router,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }

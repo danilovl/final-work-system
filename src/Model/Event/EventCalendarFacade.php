@@ -15,7 +15,7 @@ namespace App\Model\Event;
 use App\DataTransferObject\Repository\EventData;
 use App\Service\EntityManagerService;
 use App\Service\User\UserWorkService;
-use Danilovl\HashidsBundle\Services\HashidsService;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use App\Constant\{
@@ -48,7 +48,7 @@ class EventCalendarFacade
         private UserWorkService $userWorkService,
         private EntityManagerService $entityManager,
         private RouterInterface $router,
-        private HashidsService $hashIds,
+        private HashidsServiceInterface $hashIds,
         private ParameterServiceInterface $parameterService
     ) {
         $this->eventRepository = $entityManager->getRepository(Event::class);

@@ -15,6 +15,7 @@ namespace App\Form\Factory;
 use App\Constant\ControllerMethodConstant;
 use App\Exception\RuntimeException;
 use App\Model\User\UserModel;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\{
     UserForm,
@@ -25,14 +26,13 @@ use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
-use Danilovl\HashidsBundle\Services\HashidsService;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserFormFactory
 {
     public function __construct(
         private RouterInterface $router,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }

@@ -15,6 +15,7 @@ namespace App\Form\Factory;
 use App\Constant\ControllerMethodConstant;
 use App\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Form\TaskSeveralForm;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Exception\{
     RuntimeException,
     ConstantNotFoundException
@@ -25,14 +26,13 @@ use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
-use Danilovl\HashidsBundle\Services\HashidsService;
 use Symfony\Component\HttpFoundation\Request;
 
 class TaskFormFactory
 {
     public function __construct(
         private RouterInterface $router,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }

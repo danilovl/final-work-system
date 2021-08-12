@@ -12,7 +12,7 @@
 
 namespace App\Form\Factory;
 
-use Danilovl\HashidsBundle\Services\HashidsService;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Exception\{
     RuntimeException,
     ConstantNotFoundException
@@ -47,7 +47,7 @@ class DocumentFormFactory
     public function __construct(
         private FormFactoryInterface $formFactory,
         private RouterInterface $router,
-        private HashidsService $hashIds,
+        private HashidsServiceInterface $hashIds,
         private UserFacade $userService,
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private MediaCategoryFacade $mediaCategoryFacade

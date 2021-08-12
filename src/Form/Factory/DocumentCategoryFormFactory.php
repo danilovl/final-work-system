@@ -16,20 +16,20 @@ use App\Constant\ControllerMethodConstant;
 use App\Entity\MediaCategory;
 use App\Exception\RuntimeException;
 use App\Model\MediaCategory\MediaCategoryModel;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\MediaCategoryForm;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
-use Danilovl\HashidsBundle\Services\HashidsService;
 use Symfony\Component\HttpFoundation\Request;
 
 class DocumentCategoryFormFactory
 {
     public function __construct(
         private RouterInterface $router,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }

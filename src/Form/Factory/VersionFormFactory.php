@@ -13,6 +13,7 @@
 namespace App\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Entity\{
     Work,
     Media
@@ -21,15 +22,16 @@ use App\Exception\{
     RuntimeException,
     ConstantNotFoundException
 };
-use App\Model\Media\MediaMimeTypeFacade;
-use App\Model\Media\MediaModel;
+use App\Model\Media\{
+    MediaModel,
+    MediaMimeTypeFacade
+};
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\VersionForm;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface
 };
-use Danilovl\HashidsBundle\Services\HashidsService;
 use Symfony\Component\HttpFoundation\Request;
 
 class VersionFormFactory
@@ -37,7 +39,7 @@ class VersionFormFactory
     public function __construct(
         private RouterInterface $router,
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
-        private HashidsService $hashidsService,
+        private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory
     ) {
     }
