@@ -10,12 +10,12 @@
         "password": "admin"
       },
       "student": {
-        "username": "xdanv09",
-        "password": "6det99bPb"
+        "username": "student",
+        "password": "student"
       },
       "supervisor": {
-        "username": "pecinovr",
-        "password": "6det99bPb"
+        "username": "supervisor",
+        "password": "supervisor"
       }
     }
   }
