@@ -15,17 +15,17 @@ namespace App\EventListener\Middleware;
 use App\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Constant\FlashTypeConstant;
 use App\Exception\AjaxRuntimeException;
+use App\Service\TranslatorService;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AjaxRequestListener
 {
-    public function __construct(private TranslatorInterface $translator)
+    public function __construct(private TranslatorService $translator)
     {
     }
 
@@ -80,17 +80,20 @@ class AjaxRequestListener
         try {
             call_user_func([$ajaxRequestMiddlewareAttribute->class, 'handle'], $request);
         } catch (AjaxRuntimeException) {
-            $event->setController(
-                function () {
-                    return new JsonResponse([
-                        'valid' => false,
-                        'notifyMessage' => [
-                            FlashTypeConstant::ERROR => $this->translator->trans('app.flash.form.create.error'),
-                            FlashTypeConstant::WARNING => $this->translator->trans('app.flash.form.create.warning')
-                        ]
-                    ]);
-                }
-            );
+            $event->setController($this->getControllerJsonErrorCallable());
         }
+    }
+
+    private function getControllerJsonErrorCallable(): callable
+    {
+        return function (): JsonResponse {
+            return new JsonResponse([
+                'valid' => false,
+                'notifyMessage' => [
+                    FlashTypeConstant::ERROR => $this->translator->trans('app.flash.form.create.error'),
+                    FlashTypeConstant::WARNING => $this->translator->trans('app.flash.form.create.warning')
+                ]
+            ]);
+        };
     }
 }
