@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eeded3ce9a08210b95e0c44835e98de7",
+    "content-hash": "07bccf2759c42ba4eae146c307a5973f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1426,16 +1426,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.9.4",
+            "version": "2.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "b19a13f4edfaa5806109cd899f5912a7df1547b5"
+                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/b19a13f4edfaa5806109cd899f5912a7df1547b5",
-                "reference": "b19a13f4edfaa5806109cd899f5912a7df1547b5",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
+                "reference": "77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da",
                 "shasum": ""
             },
             "require": {
@@ -1514,9 +1514,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.9.4"
+                "source": "https://github.com/doctrine/orm/tree/2.9.5"
             },
-            "time": "2021-08-11T20:53:03+00:00"
+            "time": "2021-08-23T10:20:22+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -1664,16 +1664,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v3.5.6",
+            "version": "v3.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "263cf54119497f5ea32f02af1dba2e4999a002ae"
+                "reference": "3499d3e954f95f3e12bebafbdafb71289f1a1435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/263cf54119497f5ea32f02af1dba2e4999a002ae",
-                "reference": "263cf54119497f5ea32f02af1dba2e4999a002ae",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/3499d3e954f95f3e12bebafbdafb71289f1a1435",
+                "reference": "3499d3e954f95f3e12bebafbdafb71289f1a1435",
                 "shasum": ""
             },
             "require": {
@@ -1747,7 +1747,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.6"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.7"
             },
             "funding": [
                 {
@@ -1755,7 +1755,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-11T18:47:50+00:00"
+            "time": "2021-08-17T10:36:05+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3427,16 +3427,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.9",
+            "version": "3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "a127a5133804ff2f47ae629dd529b129da616ad7"
+                "reference": "62fcc5a94ac83b1506f52d7558d828617fac9187"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/a127a5133804ff2f47ae629dd529b129da616ad7",
-                "reference": "a127a5133804ff2f47ae629dd529b129da616ad7",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/62fcc5a94ac83b1506f52d7558d828617fac9187",
+                "reference": "62fcc5a94ac83b1506f52d7558d828617fac9187",
                 "shasum": ""
             },
             "require": {
@@ -3518,7 +3518,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.9"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.10"
             },
             "funding": [
                 {
@@ -3534,7 +3534,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-14T06:54:45+00:00"
+            "time": "2021-08-16T04:24:45+00:00"
         },
         {
             "name": "psr/cache",
@@ -5171,7 +5171,7 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.13.4",
+            "version": "v1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
@@ -5219,7 +5219,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.13.4"
+                "source": "https://github.com/symfony/flex/tree/v1.14.1"
             },
             "funding": [
                 {
@@ -11653,23 +11653,26 @@
         },
         {
             "name": "symfony/debug-pack",
-            "version": "v1.0.9",
+            "version": "v1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug-pack.git",
-                "reference": "cfd5093378e9cafe500f05c777a22fe8a64a9342"
+                "reference": "98ef3cb02f9adb54b98d8bc95c84b896513a51d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug-pack/zipball/cfd5093378e9cafe500f05c777a22fe8a64a9342",
-                "reference": "cfd5093378e9cafe500f05c777a22fe8a64a9342",
+                "url": "https://api.github.com/repos/symfony/debug-pack/zipball/98ef3cb02f9adb54b98d8bc95c84b896513a51d5",
+                "reference": "98ef3cb02f9adb54b98d8bc95c84b896513a51d5",
                 "shasum": ""
             },
             "require": {
                 "symfony/debug-bundle": "*",
                 "symfony/monolog-bundle": "^3.0",
-                "symfony/profiler-pack": "*",
-                "symfony/var-dumper": "*"
+                "symfony/profiler-pack": "*"
+            },
+            "require-dev": {
+                "symfony/debug-bundle": "*",
+                "symfony/profiler-pack": "*"
             },
             "type": "symfony-pack",
             "notification-url": "https://packagist.org/downloads/",
@@ -11679,7 +11682,7 @@
             "description": "A debug pack for Symfony projects",
             "support": {
                 "issues": "https://github.com/symfony/debug-pack/issues",
-                "source": "https://github.com/symfony/debug-pack/tree/v1.0.9"
+                "source": "https://github.com/symfony/debug-pack/tree/v1.0.10"
             },
             "funding": [
                 {
@@ -11695,7 +11698,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-19T08:51:51+00:00"
+            "time": "2021-08-20T17:29:57+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -11945,21 +11948,24 @@
         },
         {
             "name": "symfony/profiler-pack",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/profiler-pack.git",
-                "reference": "29ec66471082b4eb068db11eb4f0a48c277653f7"
+                "reference": "bcd6e80af9819454ac18594362e7875fd1d771c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/profiler-pack/zipball/29ec66471082b4eb068db11eb4f0a48c277653f7",
-                "reference": "29ec66471082b4eb068db11eb4f0a48c277653f7",
+                "url": "https://api.github.com/repos/symfony/profiler-pack/zipball/bcd6e80af9819454ac18594362e7875fd1d771c7",
+                "reference": "bcd6e80af9819454ac18594362e7875fd1d771c7",
                 "shasum": ""
             },
             "require": {
                 "symfony/stopwatch": "*",
-                "symfony/twig-bundle": "*",
+                "symfony/web-profiler-bundle": "*"
+            },
+            "require-dev": {
+                "symfony/stopwatch": "*",
                 "symfony/web-profiler-bundle": "*"
             },
             "type": "symfony-pack",
@@ -11970,7 +11976,7 @@
             "description": "A pack for the Symfony web profiler",
             "support": {
                 "issues": "https://github.com/symfony/profiler-pack/issues",
-                "source": "https://github.com/symfony/profiler-pack/tree/v1.0.5"
+                "source": "https://github.com/symfony/profiler-pack/tree/v1.0.6"
             },
             "funding": [
                 {
@@ -11986,23 +11992,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-12T06:50:46+00:00"
+            "time": "2021-08-20T17:27:58+00:00"
         },
         {
             "name": "symfony/test-pack",
-            "version": "v1.0.8",
+            "version": "v1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/test-pack.git",
-                "reference": "d6da9926f785b0c4ebf3b0c6965398aac80e95ce"
+                "reference": "66a2b0a5c9152128b42feb439a735130a9b4d3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/test-pack/zipball/d6da9926f785b0c4ebf3b0c6965398aac80e95ce",
-                "reference": "d6da9926f785b0c4ebf3b0c6965398aac80e95ce",
+                "url": "https://api.github.com/repos/symfony/test-pack/zipball/66a2b0a5c9152128b42feb439a735130a9b4d3dc",
+                "reference": "66a2b0a5c9152128b42feb439a735130a9b4d3dc",
                 "shasum": ""
             },
             "require": {
+                "phpunit/phpunit": "*",
+                "symfony/browser-kit": "*",
+                "symfony/css-selector": "*",
+                "symfony/phpunit-bridge": "*"
+            },
+            "require-dev": {
                 "phpunit/phpunit": "*",
                 "symfony/browser-kit": "*",
                 "symfony/css-selector": "*",
@@ -12016,7 +12028,7 @@
             "description": "A pack for functional and end-to-end testing within a Symfony app",
             "support": {
                 "issues": "https://github.com/symfony/test-pack/issues",
-                "source": "https://github.com/symfony/test-pack/tree/v1.0.8"
+                "source": "https://github.com/symfony/test-pack/tree/v1.0.9"
             },
             "funding": [
                 {
@@ -12032,7 +12044,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-31T14:58:13+00:00"
+            "time": "2021-08-20T17:29:16+00:00"
         },
         {
             "name": "symfony/web-profiler-bundle",
