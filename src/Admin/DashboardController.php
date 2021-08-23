@@ -12,21 +12,24 @@
 
 namespace App\Admin;
 
-use App\Entity\User;
-use App\Entity\Group;
-use App\Entity\EmailNotificationQueue;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use App\Entity\{
+    User,
+    Group,
+    EmailNotificationQueue
+};
+use EasyCorp\Bundle\EasyAdminBundle\Config\{
+    MenuItem,
+    Dashboard
+};
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        $url = $this->get(CrudUrlGenerator::class)
-            ->build()
+        $url = $this->get(AdminUrlGenerator::class)
             ->setController(UserCrudController::class)
             ->generateUrl();
 
