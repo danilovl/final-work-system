@@ -54,7 +54,7 @@
     <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
 
     <div id='ajax-loader' style="position: fixed; left: 48%; top: 40%; display: none; z-index: 9999">
-        <img src="{{ asset('images/loading.gif') }}" width="50px" height="50px"/>
+        <img src="{{ asset('images/loading.gif') }}" width="50px" height="50px" alt="loading"/>
     </div>
 
     <script>
@@ -85,7 +85,7 @@
                 }
             });
 
-            $('#modalWindow').on("hide.bs.modal", function (e) {
+            $('#modalWindow').on('hide.bs.modal', function () {
                 if (window.automaticModalWindowClose === true) {
                     window.automaticModalWindowClose = false;
                 } else {
@@ -111,21 +111,21 @@
             {% endif %}
         });
 
-        $(window).on('scroll', function () {
+        $(window).on('scroll', () => {
             backToTop();
         });
 
-        $(document).ajaxStart(function () {
+        $(document).ajaxStart(() => {
             $("#ajax-loader").show();
         });
 
-        $(document).ajaxStop(function () {
+        $(document).ajaxStop(() => {
             $("#ajax-loader").hide();
             initModalResize();
             initModalDraggable();
         });
 
-        $(document).ajaxError(function (obj, status) {
+        $(document).ajaxError((obj, status) => {
             let errors = [];
             let modalBackdrop = $('.modal-backdrop');
             let modalWindow = $('#modalWindow');
@@ -149,10 +149,8 @@
 
         {% for type, messages in app.flashes %}
         {% for message in messages %}
-        $(document).ready(function () {
-            let notifyType = '{{ type }}';
-            let notifyText = '{{ message }}';
-            notifyMessage(notifyType, notifyText);
+        $(document).ready(() => {
+            notifyMessage('{{ type }}', '{{ message }}');
         });
         {% endfor %}
         {% endfor %}

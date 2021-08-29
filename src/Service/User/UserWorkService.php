@@ -131,7 +131,7 @@ class UserWorkService
      * @param Collection|Work[] $userWorks
      */
     private function addUserToCollection(
-        Collection $collection,
+        Collection $users,
         Collection $userWorks,
         string $userType
     ): void {
@@ -148,12 +148,11 @@ class UserWorkService
                 default => throw new RuntimeException("UserType '{$userType}' not found")
             };
 
-            if ($user !== null &&
-                $collection->contains($user) === false &&
-                $user->isEnabled()
-            ) {
-                $collection->add($user);
+            if ($user === null || !$user->isEnabled() || $users->contains($user)) {
+                continue;
             }
+
+            $users->add($user);
         }
     }
 }

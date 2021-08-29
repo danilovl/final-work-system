@@ -13,7 +13,10 @@
 namespace App\Service;
 
 use App\Constant\SystemEventTypeConstant;
-use App\Entity\SystemEventRecipient;
+use App\Entity\{
+    SystemEvent,
+    SystemEventRecipient
+};
 use App\Exception\ConstantNotFoundException;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
@@ -28,7 +31,15 @@ class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
     {
         $systemEvent = $systemEventRecipient->getSystemEvent();
 
-        $templateParameters = [
+        return $this->twig->render(
+            $this->getTemplate($systemEvent->getType()->getId()),
+            $this->getTemplateParameters($systemEvent)
+        );
+    }
+
+    private function getTemplateParameters(SystemEvent $systemEvent): array
+    {
+        return [
             'user' => $systemEvent->getOwner(),
             'work' => $systemEvent->getWork(),
             'task' => $systemEvent->getTask(),
@@ -37,8 +48,11 @@ class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
             'conversation' => $systemEvent->getConversation(),
             'event' => $systemEvent->getEvent()
         ];
+    }
 
-        $template = match ($systemEvent->getType()->getId()) {
+    private function getTemplate(int $systemEventTypeId): string
+    {
+        return match ($systemEventTypeId) {
             SystemEventTypeConstant::WORK_CREATE => 'system_event/work_create.twig',
             SystemEventTypeConstant::WORK_EDIT => 'system_event/work_edit.html.twig',
             SystemEventTypeConstant::USER_EDIT => 'system_event/user_edit.html.twig',
@@ -60,7 +74,5 @@ class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
             SystemEventTypeConstant::EVENT_COMMENT_EDIT => 'system_event/event_comment_edit.html.twig',
             default => throw new ConstantNotFoundException('Event type constant not found'),
         };
-
-        return $this->twig->render($template, $templateParameters);
     }
 }
