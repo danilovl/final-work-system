@@ -16,9 +16,11 @@ use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
-use App\Entity\EventSchedule;
+use App\Entity\{
+    User,
+    EventSchedule
+};
 use App\Model\Traits\SimpleInformationTrait;
-use App\Entity\User;
 
 class EventScheduleModel
 {

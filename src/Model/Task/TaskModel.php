@@ -13,13 +13,15 @@
 namespace App\Model\Task;
 
 use DateTime;
-use App\Entity\Task;
+use App\Entity\{
+    User,
+    Task,
+    Work
+};
 use App\Model\Traits\{
     ActiveTrait,
     SimpleInformationTrait
 };
-use App\Entity\Work;
-use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class TaskModel

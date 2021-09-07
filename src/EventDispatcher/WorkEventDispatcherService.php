@@ -13,8 +13,10 @@
 namespace App\EventDispatcher;
 
 use App\Entity\Work;
-use App\EventDispatcher\GenericEvent\UserGenericEvent;
-use App\EventDispatcher\GenericEvent\WorkGenericEvent;
+use App\EventDispatcher\GenericEvent\{
+    UserGenericEvent,
+    WorkGenericEvent
+};
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

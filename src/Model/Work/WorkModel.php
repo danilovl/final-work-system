@@ -18,12 +18,12 @@ use Doctrine\Common\Collections\{
 };
 use DateTime;
 use App\Entity\{
+    User,
     Work,
     WorkType,
     WorkStatus
 };
 use App\Model\Traits\TitleAwareTrait;
-use App\Entity\User;
 
 class WorkModel
 {

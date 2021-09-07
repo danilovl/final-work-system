@@ -15,9 +15,11 @@ namespace App\Form;
 use App\Model\ConversationMessage\ConversationMessageModel;
 use App\Entity\User;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ConversationMessageForm extends AbstractType

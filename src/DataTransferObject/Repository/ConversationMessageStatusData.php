@@ -13,9 +13,11 @@
 namespace App\DataTransferObject\Repository;
 
 use App\DataTransferObject\BaseDataTransferObject;
-use App\Entity\User;
-use App\Entity\Conversation;
-use App\Entity\ConversationMessageStatusType;
+use App\Entity\{
+    User,
+    Conversation,
+    ConversationMessageStatusType
+};
 
 class ConversationMessageStatusData extends BaseDataTransferObject
 {

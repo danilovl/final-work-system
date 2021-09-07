@@ -12,9 +12,11 @@
 
 namespace App\Model\ConversationMessageStatus;
 
-use App\Entity\ConversationMessageStatusType;
+use App\Entity\{
+    User,
+    ConversationMessageStatusType
+};
 use App\Repository\ConversationMessageStatusRepository;
-use App\Entity\User;
 
 class ConversationMessageStatusFacade
 {

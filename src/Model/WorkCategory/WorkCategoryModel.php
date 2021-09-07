@@ -16,9 +16,11 @@ use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
-use App\Entity\WorkCategory;
+use App\Entity\{
+    User,
+    WorkCategory
+};
 use App\Model\Traits\SimpleInformationTrait;
-use App\Entity\User;
 
 class WorkCategoryModel
 {

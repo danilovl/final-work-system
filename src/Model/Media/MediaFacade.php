@@ -15,11 +15,11 @@ namespace App\Model\Media;
 use App\DataTransferObject\Repository\MediaData;
 use Doctrine\ORM\Query;
 use App\Entity\{
+    User,
     Media,
     MediaType
 };
 use App\Repository\MediaRepository;
-use App\Entity\User;
 
 class MediaFacade
 {

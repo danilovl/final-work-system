@@ -13,8 +13,10 @@
 namespace App\Model\MediaCategory;
 
 use App\Model\Traits\SimpleInformationTrait;
-use App\Entity\MediaCategory;
-use App\Entity\User;
+use App\Entity\{
+    User,
+    MediaCategory
+};
 
 class MediaCategoryModel
 {

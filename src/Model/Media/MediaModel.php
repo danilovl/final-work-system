@@ -17,13 +17,13 @@ use Doctrine\Common\Collections\{
     ArrayCollection
 };
 use App\Entity\{
+    User,
     Work,
     Media,
     MediaType,
     MediaMimeType
 };
 use App\Model\Traits\SimpleInformationTrait;
-use App\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel

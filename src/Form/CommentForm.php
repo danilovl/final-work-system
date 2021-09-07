@@ -12,10 +12,12 @@
 
 namespace App\Form;
 
-use App\Entity\Event;
+use App\Entity\{
+    User,
+    Event
+};
 use App\Form\EventSubscriber\EventCommentSubscriber;
 use App\Model\Comment\CommentModel;
-use App\Entity\User;
 use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
