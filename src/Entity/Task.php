@@ -12,11 +12,13 @@
 
 namespace App\Entity;
 
+use App\Repository\TaskRepository;
 use DateTime;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -28,12 +30,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="task")
- * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'task')]
+#[ORM\Entity(repositoryClass: TaskRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class Task
 {
     use IdTrait;
@@ -42,42 +44,33 @@ class Task
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="complete", type="boolean", options={"default":"0"})
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'complete', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $complete = false;
 
     /**
-     * @ORM\Column(name="notify_complete", type="boolean", options={"default":"0"})
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'notify_complete', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $notifyComplete = false;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tasksOwner", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'tasksOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Work", inversedBy="tasks", fetch="EAGER")
-     * @ORM\JoinColumn(name="work_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'tasks')]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="task")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'task', targetEntity: SystemEvent::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $systemEvents;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
+    #[ORM\Column(name: 'deadline', type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $deadline = null;
-
 
     public function __construct()
     {

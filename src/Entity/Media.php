@@ -12,11 +12,13 @@
 
 namespace App\Entity;
 
+use App\Repository\MediaRepository;
 use DateTime;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use App\Constant\{
     MediaConstant,
     FileSizeConstant,
@@ -34,12 +36,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @ORM\Table(name="media")
- * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'media')]
+#[ORM\Entity(repositoryClass: MediaRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class Media
 {
     use IdTrait;
@@ -48,74 +50,61 @@ class Media
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="mediaOwner", cascade={"persist"}, fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'mediaOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MediaType", inversedBy="medias", fetch="EAGER")
-     * @ORM\JoinColumn(name="media_type_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: MediaType::class, fetch: 'EAGER', inversedBy: 'medias')]
+    #[ORM\JoinColumn(name: 'media_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?MediaType $type = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MediaMimeType", inversedBy="medias", fetch="EAGER")
-     * @ORM\JoinColumn(name="media_mime_type_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: MediaMimeType::class, fetch: 'EAGER', inversedBy: 'medias')]
+    #[ORM\JoinColumn(name: 'media_mime_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?MediaMimeType $mimeType = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\MediaCategory", inversedBy="medias")
-     * @ORM\JoinTable(name="media_to_media_category",
-     *      joinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="media_category_id", referencedColumnName="id", nullable=true)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToMany(targetEntity: MediaCategory::class, inversedBy: 'medias')]
+    #[ORM\JoinTable(name: 'media_to_media_category')]
+    #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'media_category_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $categories = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Work", inversedBy="medias", fetch="EAGER")
-     * @ORM\JoinColumn(name="work_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'medias')]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
     /**
-     * @ORM\Column(name="media_name", type="string", nullable=false, unique=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'media_name', type: Types::STRING, unique: true, nullable: false)]
     private ?string $mediaName = null;
 
     /**
-     * @ORM\Column(name="original_name", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'original_name', type: Types::STRING, nullable: true)]
     private ?string $originalMediaName = null;
 
     /**
-     * @ORM\Column(name="original_extension", type="string", length=5, nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'original_extension', type: Types::STRING, length: 5, nullable: true)]
     private ?string $originalExtension = null;
 
     /**
-     * @ORM\Column(name="media_size", type="integer", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'media_size', type: Types::INTEGER, nullable: true)]
     private ?int $mediaSize = null;
 
     private ?UploadedFile $uploadMedia = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="media")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'media', targetEntity: SystemEvent::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $systemEvents = null;
 
     public function __construct()

@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use App\Repository\EventScheduleRepository;
 use Doctrine\Common\Collections\{
     ArrayCollection,
     Collection
@@ -27,12 +28,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="event_schedule")
- * @ORM\Entity(repositoryClass="App\Repository\EventScheduleRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'event_schedule')]
+#[ORM\Entity(repositoryClass: EventScheduleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class EventSchedule
 {
     use IdTrait;
@@ -40,19 +41,13 @@ class EventSchedule
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="eventsSchedule", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsSchedule')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventScheduleTemplate", mappedBy="schedule", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'schedule', targetEntity: EventScheduleTemplate::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $templates = null;
 
     public function __construct()

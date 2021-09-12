@@ -12,13 +12,12 @@
 
 namespace App\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait ConstantAwareTrait
 {
-    /**
-     * @ORM\Column(name="constant", type="string", nullable=false))
-     */
+    #[ORM\Column(name: 'constant', type: Types::STRING, nullable: false)]
     private ?string $constant = null;
 
     public function getConstant(): ?string

@@ -12,6 +12,8 @@
 
 namespace App\Entity;
 
+use App\Repository\SystemEventRecipientRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Entity\Traits\{
@@ -20,35 +22,31 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="system_event_recipient")
- * @ORM\Entity(repositoryClass="App\Repository\SystemEventRecipientRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'system_event_recipient')]
+#[ORM\Entity(repositoryClass: SystemEventRecipientRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class SystemEventRecipient
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SystemEvent", inversedBy="recipient", fetch="EAGER")
-     * @ORM\JoinColumn(name="system_event_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: SystemEvent::class, fetch: 'EAGER', inversedBy: 'recipient')]
+    #[ORM\JoinColumn(name: 'system_event_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?SystemEvent $systemEvent = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="systemEventsRecipient", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'systemEventsRecipient')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $recipient = null;
 
     /**
-     * @ORM\Column(name="viewed", type="boolean", options={"default":"0"})
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'viewed', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $viewed = false;
 
     public function getSystemEvent(): ?SystemEvent

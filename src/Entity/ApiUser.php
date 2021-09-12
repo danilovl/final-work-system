@@ -12,10 +12,12 @@
 
 namespace App\Entity;
 
+use App\Repository\ApiUserRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Constant\TranslationConstant;
 use App\Entity\Traits\{
@@ -27,33 +29,24 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="api_user",
- *     uniqueConstraints={
- *         @ORM\UniqueConstraint(name="api_key_unique", columns={"api_key"}),
- *     }
- * )
- * @ORM\Entity(repositoryClass="App\Repository\ApiUserRepository")
- * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
  */
+#[ORM\Table(name: 'api_user')]
+#[ORM\UniqueConstraint(name: 'api_key_unique', columns: ['api_key'])]
+#[ORM\Entity(repositoryClass: ApiUserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
-    /**
-     * @ORM\Column(name="name", type="string", nullable=false)
-     */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     protected ?string $name = null;
 
-    /**
-     * @ORM\Column(name="api_key", type="string", nullable=false, length=32)
-     */
+    #[ORM\Column(name: 'api_key', type: Types::STRING, length: 32, nullable: false)]
     protected ?string $apiKey = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ApiUserRule", mappedBy="apiUser", cascade={"persist", "remove"})
-     */
+    #[ORM\OneToMany(mappedBy: 'apiUser', targetEntity: ApiUserRule::class, cascade: ['persist', 'remove'])]
     protected Collection $rules;
 
     public function __construct()

@@ -13,6 +13,7 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -22,66 +23,54 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="event_schedule_template")
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'event_schedule_template')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class EventScheduleTemplate
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EventSchedule", inversedBy="templates")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="event_schedule_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: EventSchedule::class, inversedBy: 'templates')]
+    #[ORM\JoinColumn(name: 'event_schedule_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventSchedule $schedule = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EventType")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="event_type_id", referencedColumnName="id", nullable=false)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: EventType::class)]
+    #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventType $type = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EventAddress")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="event_address_id", referencedColumnName="id", nullable=true)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: EventAddress::class)]
+    #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventAddress $address = null;
 
     /**
-     * @ORM\Column(name="day", type="integer",  nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'day', type: Types::INTEGER, nullable: false)]
     private ?int $day = null;
 
     /**
-     * @ORM\Column(name="name", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: true)]
     private ?string $name = null;
 
     /**
-     * @ORM\Column(name="start", type="time", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'start', type: Types::TIME_MUTABLE, nullable: false)]
     private ?DateTime $start = null;
 
     /**
-     * @ORM\Column(name="end", type="time", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'end', type: Types::TIME_MUTABLE, nullable: false)]
     private ?DateTime $end = null;
 
     public function getSchedule(): ?EventSchedule

@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\{
@@ -26,12 +27,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="work_type")
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'work_type')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class WorkType
 {
     use IdTrait;
@@ -39,15 +40,13 @@ class WorkType
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="shortcut", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'shortcut', type: Types::STRING, nullable: false)]
     private ?string $shortcut = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="type")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Work::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $works = null;
 
     public function __construct()

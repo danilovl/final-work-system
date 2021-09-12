@@ -12,29 +12,22 @@
 
 namespace App\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait UserInformationTrait
 {
-    /**
-     * @ORM\Column(name="degree_before", type="string", nullable=true))
-     */
+    #[ORM\Column(name: 'degree_before', type: Types::STRING, nullable: true)]
     private ?string $degreeBefore = null;
 
-    /**
-     * @ORM\Column(name="first_name", type="string", nullable=false))
-     */
+    #[ORM\Column(name: 'first_name', type: Types::STRING, nullable: false)]
     private ?string $firstName = null;
 
-    /**
-     * @ORM\Column(name="second_name", type="string", type="string", nullable=false))
-     */
-    private ?string$secondName = null;
+    #[ORM\Column(name: 'second_name', type: Types::STRING, nullable: false)]
+    private ?string $secondName = null;
 
-    /**
-     * @ORM\Column(name="degree_after", type="string", nullable=true))
-     */
-    private ?string$degreeAfter = null;
+    #[ORM\Column(name: 'degree_after', type: Types::STRING, nullable: true)]
+    private ?string $degreeAfter = null;
 
     public function getDegreeBefore(): ?string
     {

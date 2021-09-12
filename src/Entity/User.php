@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Constant\{
     GenderConstant,
     TranslationConstant,
@@ -33,332 +34,247 @@ use Symfony\Component\Security\Core\User\{
 };
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * @ORM\Table(name="user")
- * @UniqueEntity("email")
- * @UniqueEntity("username")
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Table(name: 'user')]
+#[UniqueEntity(fields: ['email'])]
+#[UniqueEntity(fields: ['username'])]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyPasswordAuthenticatedUserInterface
 {
     use TimestampAbleTrait;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(name="id", type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(name: 'id', type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(name="username", type="string", length=180, unique=true)
-     */
+    #[ORM\Column(name: 'username', type: Types::STRING, length: 180, nullable: true)]
     private ?string $username = null;
 
-    /**
-     * @ORM\Column(name="roles", type="array")
-     */
+    #[ORM\Column(name: 'roles', type: Types::ARRAY)]
     private array $roles;
 
-    /**
-     * @ORM\Column(name="password", type="string")
-     */
+    #[ORM\Column(name: 'password', type: Types::STRING)]
     private ?string $password = null;
 
     private ?string $plainPassword = null;
 
-    /**
-     * @ORM\Column(name="last_login", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'last_login', type: Types::DATE_MUTABLE, nullable: false)]
     private ?DateTime $lastLogin = null;
 
-    /**
-     * @ORM\Column(name="last_requested_at", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'last_requested_at', type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $lastRequestedAt = null;
 
-    /**
-     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'confirmation_token', type: Types::STRING, nullable: true)]
     private ?string $confirmationToken = null;
 
-    /**
-     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'password_requested_at', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $passwordRequestedAt = null;
 
-    /**
-     * @ORM\Column(name="username_canonical", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'username_canonical', type: Types::STRING, nullable: true)]
     private ?string $usernameCanonical = null;
 
-    /**
-     * @ORM\Column(name="email", type="string", nullable=false, unique=true)
-     */
+    #[ORM\Column(name: 'email', type: Types::STRING, unique: true, nullable: false)]
     private ?string $email = null;
 
-    /**
-     * @ORM\Column(name="email_canonical", type="string", nullable=false)
-     */
+    #[ORM\Column(name: 'email_canonical', type: Types::STRING, nullable: false)]
     private ?string $emailCanonical = null;
 
-    /**
-     * @ORM\Column(name="enabled", type="boolean", options={"default":"0"})
-     */
+    #[ORM\Column(name: 'enabled', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $enabled = false;
 
-    /**
-     * @ORM\Column(name="enabled_email_notification", type="boolean", options={"default":"1"})
-     */
+    #[ORM\Column(name: 'enabled_email_notification', type: Types::BOOLEAN, options: ['default' => '1'])]
     private bool $enabledEmailNotification = true;
 
-    /**
-     * @ORM\Column(name="date_of_birth", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'date_of_birth', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $dateOfBirth = null;
 
-    /**
-     * @ORM\Column(name="firstname", type="string")
-     */
+    #[ORM\Column(name: 'firstname', type: Types::STRING, nullable: false)]
     private ?string $firstname = null;
 
-    /**
-     * @ORM\Column(name="lastname", type="string")
-     */
+    #[ORM\Column(name: 'lastname', type: Types::STRING, nullable: false)]
     private ?string $lastname = null;
 
-    /**
-     * @ORM\Column(name="website", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'website', type: Types::STRING, nullable: true)]
     private ?string $website = null;
 
-    /**
-     * @ORM\Column(name="biography", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'biography', type: Types::STRING, nullable: true)]
     private ?string $biography = null;
 
-    /**
-     * @ORM\Column(name="gender", type="string")
-     */
+    #[ORM\Column(name: 'gender', type: Types::STRING, nullable: false)]
     private ?string $gender = GenderConstant::GENDER_UNKNOWN;
 
-    /**
-     * @ORM\Column(name="locale", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'locale', type: Types::STRING, nullable: true)]
     private ?string $locale = null;
 
-    /**
-     * @ORM\Column(name="timezone", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'timezone', type: Types::STRING, nullable: true)]
     private ?string $timezone = null;
 
-    /**
-     * @ORM\Column(name="phone", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'phone', type: Types::STRING, nullable: true)]
     private ?string $phone = null;
 
-    /**
-     * @ORM\Column(name="token", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'token', type: Types::STRING, nullable: true)]
     private ?string $token = null;
 
-    /**
-     * @ORM\Column(name="salt", type="string")
-     */
+    #[ORM\Column(name: 'salt', type: Types::STRING, nullable: true)]
     private ?string $salt = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", inversedBy="users")
-     * @ORM\JoinTable(name="user_to_user_group",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
-     * )
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToMany(targetEntity: Group::class, inversedBy: 'users')]
+    #[ORM\JoinTable(name: 'user_to_user_group')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'group_id', referencedColumnName: 'id')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $groups;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Media", cascade={"persist", "remove"}, fetch="EAGER")
-     * @ORM\JoinColumn(name="profile_image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToOne(targetEntity: Media::class, cascade: ['persist', 'remove'], fetch: "EAGER")]
+    #[ORM\JoinColumn(name: 'profile_image_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Media $profileImage = null;
 
-    /**
-     * @ORM\Column(name="skype", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'skype', type: Types::STRING, nullable: true)]
     private ?string $skype = null;
 
-    /**
-     * @ORM\Column(name="degree_before", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'degree_before', type: Types::STRING, nullable: true)]
     private ?string $degreeBefore = null;
 
-    /**
-     * @ORM\Column(name="degree_after", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'degree_after', type: Types::STRING, nullable: true)]
     private ?string $degreeAfter = null;
 
-    /**
-     * @ORM\Column(name="message_greeting", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'message_greeting', type: Types::STRING, nullable: true)]
     private ?string $messageGreeting = null;
 
-    /**
-     * @ORM\Column(name="message_signature", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'message_signature', type: Types::STRING, nullable: true)]
     private ?string $messageSignature = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Media::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $mediaOwner;
 
     /**
      * @var Collection|MediaCategory[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\MediaCategory", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: MediaCategory::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $mediaCategoriesOwner;
 
     /**
      * @var Collection|Work[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="author", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Work::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $authorWorks;
 
     /**
      * @var Collection|Work[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="supervisor", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'supervisor', targetEntity: Work::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $supervisorWorks;
 
     /**
      * @var Collection|Work[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="opponent", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'opponent', targetEntity: Work::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $opponentWorks;
 
     /**
      * @var Collection|Work[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="consultant", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'consultant', targetEntity: Work::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $consultantWorks;
 
     /**
      * @var Collection|Task[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Task::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $tasksOwner;
 
     /**
      * @var Collection|WorkCategory[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\WorkCategory", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: WorkCategory::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $workCategoriesOwner;
 
     /**
      * @var Collection|EventAddress[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\EventAddress", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: EventAddress::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $eventAddressOwner;
 
     /**
      * @var Collection|Event[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Event::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $eventsOwner;
 
     /**
      * @var Collection|EventParticipant[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\EventParticipant", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: EventParticipant::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $eventsParticipant;
 
     /**
      * @var Collection|Conversation[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Conversation", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Conversation::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $conversationsOwner;
 
     /**
      * @var Collection|ConversationParticipant[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationParticipant", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConversationParticipant::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $conversationsParticipant;
 
     /**
      * @var Collection|ConversationMessage[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessage", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: ConversationMessage::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $conversationMessages;
 
     /**
      * @var Collection|ConversationMessageStatus[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessageStatus", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConversationMessageStatus::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $conversationMessageStatus;
 
     /**
      * @var Collection|Comment[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $comments;
 
     /**
      * @var Collection|EventSchedule[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\EventSchedule", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: EventSchedule::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $eventsSchedule;
 
     /**
      * @var Collection|SystemEvent[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: SystemEvent::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $systemEventsOwner;
 
     /**
      * @var Collection|SystemEventRecipient[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEventRecipient", mappedBy="recipient", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: SystemEventRecipient::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $systemEventsRecipient;
 
     public function __construct()

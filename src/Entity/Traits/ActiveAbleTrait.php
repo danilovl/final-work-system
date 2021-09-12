@@ -12,15 +12,16 @@
 
 namespace App\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 trait ActiveAbleTrait
 {
     /**
-     * @ORM\Column(name="active", type="boolean", options={"default":"0"})
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'active', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $active = false;
 
     public function isActive(): bool

@@ -12,10 +12,12 @@
 
 namespace App\Entity;
 
+use App\Repository\WorkStatusRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -27,12 +29,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="work_status")
- * @ORM\Entity(repositoryClass="App\Repository\WorkStatusRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'work_status')]
+#[ORM\Entity(repositoryClass: WorkStatusRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class WorkStatus
 {
     use IdTrait;
@@ -41,15 +43,13 @@ class WorkStatus
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="color", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'color', type: Types::STRING, nullable: false)]
     private ?string $color = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="status")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: Work::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $works = null;
 
     public function __construct()

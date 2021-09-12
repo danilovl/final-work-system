@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use App\Repository\WorkRepository;
 use DateTime;
 use App\Constant\TranslationConstant;
 use Doctrine\Common\Collections\{
@@ -19,6 +20,7 @@ use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use App\Entity\Traits\{
     IdTrait,
     CreateUpdateAbleTrait
@@ -27,115 +29,90 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="work")
- * @ORM\Entity(repositoryClass="App\Repository\WorkRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'work')]
+#[ORM\Entity(repositoryClass: WorkRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class Work
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\WorkType", inversedBy="works", fetch="EAGER")
-     * @ORM\JoinColumn(name="work_type_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: WorkType::class, fetch: 'EAGER', inversedBy: 'works')]
+    #[ORM\JoinColumn(name: 'work_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?WorkType $type = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\WorkStatus", inversedBy="works", fetch="EAGER")
-     * @ORM\JoinColumn(name="work_status_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: WorkStatus::class, fetch: 'EAGER', inversedBy: 'works')]
+    #[ORM\JoinColumn(name: 'work_status_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?WorkStatus $status = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="authorWorks", fetch="EAGER")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'authorWorks')]
+    #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $author = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="supervisorWorks", fetch="EAGER")
-     * @ORM\JoinColumn(name="supervisor_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'supervisorWorks')]
+    #[ORM\JoinColumn(name: 'supervisor_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $supervisor = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="opponentWorks", fetch="EAGER")
-     * @ORM\JoinColumn(name="opponent_id", referencedColumnName="id", nullable=true)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'opponentWorks')]
+    #[ORM\JoinColumn(name: 'opponent_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $opponent = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="consultantWorks", fetch="EAGER")
-     * @ORM\JoinColumn(name="consultant_id", referencedColumnName="id", nullable=true)
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'consultantWorks')]
+    #[ORM\JoinColumn(name: 'consultant_id', referencedColumnName: 'id', nullable: true)]
     private ?User $consultant = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\WorkCategory", inversedBy="works")
-     * @ORM\JoinTable(name="work_to_work_category",
-     *      joinColumns={@ORM\JoinColumn(name="work_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="work_category_id", nullable=false, referencedColumnName="id")}
-     * )
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToMany(targetEntity: WorkCategory::class, inversedBy: '"works"')]
+    #[ORM\JoinTable(name: 'work_to_work_category')]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'work_category_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $categories = null;
 
     /**
-     * @ORM\Column(name="title", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'title', type: Types::STRING, nullable: false)]
     private ?string $title = null;
 
     /**
-     * @ORM\Column(name="shortcut", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'shortcut', type: Types::STRING, nullable: true)]
     private ?string $shortcut = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="work")
-     */
+    #[ORM\OneToMany(mappedBy: 'work', targetEntity: Task::class)]
     private ?Collection $tasks = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="work")
-     */
+    #[ORM\OneToMany(mappedBy: 'work', targetEntity: Media::class)]
     private ?Collection $medias = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="work")
-     */
+    #[ORM\OneToMany(mappedBy: 'work', targetEntity: SystemEvent::class)]
     private ?Collection $systemEvents = null;
 
     /**
-     * @ORM\Column(name="deadline", type="date", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'deadline', type: Types::DATE_MUTABLE, nullable: false)]
     private ?DateTime $deadline = null;
 
     /**
-     * @ORM\Column(name="deadline_program", type="date", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'deadline_program', type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $deadlineProgram = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Conversation", mappedBy="work")
-     */
+    #[ORM\OneToMany(mappedBy: 'work', targetEntity: Conversation::class)]
     private ?Collection $conversations = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventParticipant", mappedBy="work")
-     */
+    #[ORM\OneToMany(mappedBy: 'work', targetEntity: EventParticipant::class)]
     private ?Collection $eventParticipants = null;
 
     public function __construct()

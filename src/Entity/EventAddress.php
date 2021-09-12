@@ -12,7 +12,9 @@
 
 namespace App\Entity;
 
+use App\Repository\EventAddressRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -26,12 +28,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="event_address")
- * @ORM\Entity(repositoryClass="App\Repository\EventAddressRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'event_address')]
+#[ORM\Entity(repositoryClass: EventAddressRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class EventAddress
 {
     use IdTrait;
@@ -40,31 +42,25 @@ class EventAddress
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="eventAddressOwner", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventAddressOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
     /**
-     * @ORM\Column(name="street", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'street', type: Types::STRING, nullable: true)]
     private ?string $street = null;
 
     /**
-     * @ORM\Column(name="skype", type="boolean", options={"default":"0"})
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'skype', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $skype = false;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="address")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Event::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $events = null;
 
     public function __construct()

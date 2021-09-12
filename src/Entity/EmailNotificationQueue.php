@@ -12,7 +12,9 @@
 
 namespace App\Entity;
 
+use App\Repository\EmailNotificationQueueRepository;
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Constant\TranslationConstant;
 use App\Entity\Traits\{
@@ -20,44 +22,30 @@ use App\Entity\Traits\{
     CreateAbleTrait
 };
 
-/**
- * @ORM\Table(name="email_notification")
- * @ORM\Entity(repositoryClass="App\Repository\EmailNotificationQueueRepository")
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Table(name: 'email_notification')]
+#[ORM\Entity(repositoryClass: EmailNotificationQueueRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class EmailNotificationQueue
 {
     use IdTrait;
     use CreateAbleTrait;
 
-    /**
-     * @ORM\Column(name="`subject`", type="string", nullable=false)
-     */
+    #[ORM\Column(name: '`subject`', type: Types::STRING, nullable: false)]
     private ?string $subject = null;
 
-    /**
-     * @ORM\Column(name="`to`", type="string", nullable=false)
-     */
+    #[ORM\Column(name: '`to`', type: Types::STRING, nullable: false)]
     private ?string $to = null;
 
-    /**
-     * @ORM\Column(name="`from`", type="string", nullable=false)
-     */
+    #[ORM\Column(name: '`from`', type: Types::STRING, nullable: false)]
     private ?string $from = null;
 
-    /**
-     * @ORM\Column(name="body", type="text", nullable=false)
-     */
+    #[ORM\Column(name: 'body', type: Types::TEXT, nullable: false)]
     private ?string $body = null;
 
-    /**
-     * @ORM\Column(name="success", type="boolean", options={"default":"0"})
-     */
+    #[ORM\Column(name: 'success', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $success = false;
 
-    /**
-     * @ORM\Column(name="sended_at", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'sended_at', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $sendedAt = null;
 
     public function getSubject(): ?string

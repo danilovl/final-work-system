@@ -12,10 +12,12 @@
 
 namespace App\Entity;
 
+use App\Repository\MediaTypeRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -27,12 +29,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="media_type")
- * @ORM\Entity(repositoryClass="App\Repository\MediaTypeRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'media_type')]
+#[ORM\Entity(repositoryClass: MediaTypeRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class MediaType
 {
     use IdTrait;
@@ -41,15 +43,13 @@ class MediaType
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="folder", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'folder', type: Types::STRING, nullable: false)]
     private ?string $folder = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="type")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Media::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $medias = null;
 
     public function __construct()

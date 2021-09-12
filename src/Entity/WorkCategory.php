@@ -12,6 +12,8 @@
 
 namespace App\Entity;
 
+use App\Repository\WorkCategoryRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\{
@@ -27,12 +29,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="work_category")
- * @ORM\Entity(repositoryClass="App\Repository\WorkCategoryRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'work_category')]
+#[ORM\Entity(repositoryClass: WorkCategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class WorkCategory
 {
     use IdTrait;
@@ -40,23 +42,19 @@ class WorkCategory
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="workCategoriesOwner")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'workCategoriesOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Work", mappedBy="categories")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToMany(targetEntity: Work::class, mappedBy: 'categories')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $works = null;
 
     /**
-     * @ORM\Column(name="sorting", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'sorting', type: Types::STRING, nullable: true)]
     private ?string $sorting = null;
 
     public function __construct()

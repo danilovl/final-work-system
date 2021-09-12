@@ -12,13 +12,12 @@
 
 namespace App\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait PriorityTrait
 {
-    /**
-     * @ORM\Column(name="priority", type="integer", nullable=false, options={"default": 1})
-     */
+    #[ORM\Column(name: 'priority', type: Types::INTEGER, nullable: false, options: ['default' => '1'])]
     private int $priority = 1;
 
     public function getPriority(): int

@@ -12,6 +12,8 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleCategoryRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\{
@@ -27,12 +29,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="article_category")
- * @ORM\Entity(repositoryClass="App\Repository\ArticleCategoryRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'article_category')]
+#[ORM\Entity(repositoryClass: ArticleCategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class ArticleCategory
 {
     use IdTrait;
@@ -41,22 +43,18 @@ class ArticleCategory
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="access", type="array", nullable=false))
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'access', type: Types::ARRAY, nullable: false)]
     private ?array $access = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="workCategoriesOwner")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'workCategoriesOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $articles = null;
 
     public function __construct()

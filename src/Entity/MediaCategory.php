@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use App\Repository\MediaCategoryRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
@@ -27,12 +28,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="media_category")
- * @ORM\Entity(repositoryClass="App\Repository\MediaCategoryRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'media_category')]
+#[ORM\Entity(repositoryClass: MediaCategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class MediaCategory
 {
     use IdTrait;
@@ -40,17 +41,13 @@ class MediaCategory
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Media", mappedBy="categories")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'categories')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $medias = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="mediaCategoriesOwner")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'mediaCategoriesOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     public function __construct()

@@ -13,21 +13,16 @@
 namespace App\Entity\Traits;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\HasLifecycleCallbacks]
 trait CreateAbleTrait
 {
-    /**
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
+    #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $createdAt = null;
 
-    /**
-     * @ORM\PrePersist()
-     */
+    #[ORM\PrePersist]
     public function createAblePrePersist(): void
     {
         $this->createdAt = new DateTime;

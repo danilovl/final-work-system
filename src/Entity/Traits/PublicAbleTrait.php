@@ -13,18 +13,15 @@
 namespace App\Entity\Traits;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Orm\Mapping as ORM;
 
 trait PublicAbleTrait
 {
-    /**
-     * @ORM\Column(name="public_from", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'public_from', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $publicFrom = null;
 
-    /**
-     * @ORM\Column(name="public_to", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'public_to', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $publicTo = null;
 
     public function getPublicFrom(): ?DateTime

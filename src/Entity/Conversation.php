@@ -13,6 +13,8 @@
 namespace App\Entity;
 
 use App\Constant\TranslationConstant;
+use App\Repository\ConversationRepository;
+use Doctrine\DBAL\Types\Types;
 use App\Entity\Traits\{
     IdTrait,
     IsReadTrait,
@@ -27,12 +29,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="conversation")
- * @ORM\Entity(repositoryClass="App\Repository\ConversationRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'conversation')]
+#[ORM\Entity(repositoryClass: ConversationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class Conversation
 {
     use IdTrait;
@@ -41,54 +43,40 @@ class Conversation
     use IsReadTrait;
 
     /**
-     * @ORM\Column(name="name", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: true)]
     private ?string $name = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conversationsOwner", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationsOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessage", mappedBy="conversation")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessage::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $messages = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Work", inversedBy="conversations", fetch="EAGER", fetch="EAGER")
-     * @ORM\JoinColumn(name="work_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'conversations')]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ConversationType", inversedBy="conversations", fetch="EAGER")
-     * @ORM\JoinColumn(name="conversation_type_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: ConversationType::class, fetch: 'EAGER', inversedBy: 'conversations')]
+    #[ORM\JoinColumn(name: 'conversation_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?ConversationType $type = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessageStatus", mappedBy="conversation")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessageStatus::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $statuses = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationParticipant", mappedBy="conversation")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationParticipant::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $participants = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="conversation")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: SystemEvent::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $systemEvents = null;
 
     private ?User $recipient = null;

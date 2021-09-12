@@ -12,6 +12,8 @@
 
 namespace App\Entity;
 
+use App\Repository\ResetPasswordRepository;
+use Doctrine\DBAL\Types\Types;
 use App\Entity\Traits\{
     IdTrait,
     TimestampAbleTrait
@@ -19,30 +21,22 @@ use App\Entity\Traits\{
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Table(name="reset_password")
- * @ORM\Entity(repositoryClass="App\Repository\ResetPasswordRepository")
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Table(name: 'reset_password')]
+#[ORM\Entity(repositoryClass: ResetPasswordRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class ResetPassword
 {
     use IdTrait;
     use TimestampAbleTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private ?User $user = null;
 
-    /**
-     * @ORM\Column(name="hashed_token", type="string", length=100, nullable=false, unique=true)
-     */
+    #[ORM\Column(name: 'hashed_token', type: Types::STRING, length: 100, unique: true, nullable: false)]
     private ?string $hashedToken = null;
 
-    /**
-     * @ORM\Column(name="expires_at", type="datetime", nullable=false)
-     */
+    #[ORM\Column(name: 'expires_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $expiresAt = null;
 
     /**

@@ -12,6 +12,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -21,56 +22,48 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="event_participant")
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'event_participant')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class EventParticipant
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="first_name", type="string", nullable=true))
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'first_name', type: Types::STRING, nullable: true)]
     private ?string $firstName = null;
 
     /**
-     * @ORM\Column(name="second_name", type="string", type="string", nullable=true))
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'second_name', type: Types::STRING, nullable: true)]
     private ?string $secondName = null;
 
     /**
-     * @ORM\Column(name="email", type="string", type="string", nullable=true))
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'email', type: Types::STRING, nullable: true)]
     private ?string $email = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Event", inversedBy="participant")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id",  nullable=true, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToOne(inversedBy: 'participant', targetEntity: Event::class)]
+    #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Event $event = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="eventsParticipant")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventsParticipant')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $user = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Work", inversedBy="eventParticipants")
-     * @ORM\JoinColumn(name="work_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: Work::class, inversedBy: 'eventParticipants')]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Work $work = null;
 
     public function getFirstName(): ?string

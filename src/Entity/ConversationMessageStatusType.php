@@ -27,12 +27,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="conversation_message_status_type")
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'conversation_message_status_type')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class ConversationMessageStatusType
 {
     use IdTrait;
@@ -40,10 +40,8 @@ class ConversationMessageStatusType
     use ConstantAwareTrait;
     use CreateUpdateAbleTrait;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessageStatus", mappedBy="type")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: ConversationMessageStatus::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $conversationMessageStatus = null;
 
     public function __construct()

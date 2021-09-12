@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -27,12 +28,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="event_type")
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'event_type')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class EventType
 {
     use IdTrait;
@@ -41,21 +42,21 @@ class EventType
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="color", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'color', type: Types::STRING, nullable: false)]
     private ?string $color = null;
 
     /**
-     * @ORM\Column(name="registrable", type="boolean", options={"default":"0"})
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'registrable', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $registrable = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="type")
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
      */
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Event::class)]
     private ?Collection $events = null;
 
     public function __construct()

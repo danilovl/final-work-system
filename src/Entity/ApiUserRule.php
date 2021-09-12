@@ -12,6 +12,8 @@
 
 namespace App\Entity;
 
+use App\Repository\ApiUserRuleRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\{
     IdTrait,
@@ -20,25 +22,21 @@ use App\Entity\Traits\{
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="api_user_rule")
- * @ORM\Entity(repositoryClass="App\Repository\ApiUserRuleRepository")
- * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
  */
+#[ORM\Table(name: 'api_user_rule')]
+#[ORM\Entity(repositoryClass: ApiUserRuleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class ApiUserRule
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
 
-    /**
-     * @ORM\Column(name="range_ip", type="string", nullable=false)
-     */
+    #[ORM\Column(name: 'range_ip', type: Types::STRING, nullable: false)]
     protected ?string $rangeIp = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ApiUser", inversedBy="rules", cascade={"persist"})
-     * @ORM\JoinColumn(name="api_user_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
-     */
+    #[ORM\OneToMany(mappedBy: 'rules', targetEntity: ApiUser::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(name: 'api_user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     protected ?ApiUser $apiUser = null;
 
     public function getRangeIp(): string

@@ -13,34 +13,25 @@
 namespace App\Entity\Traits;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\HasLifecycleCallbacks]
 trait CreateUpdateAbleTrait
 {
-    /**
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
+    #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $createdAt = null;
 
-    /**
-     * @ORM\Column(name="update_at", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'update_at', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $updatedAt = null;
 
-    /**
-     * @ORM\PrePersist()
-     */
+    #[ORM\PrePersist]
     public function createUpdateAblePrePersist(): void
     {
         $this->createdAt = new DateTime;
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PreUpdate]
     public function createUpdateAblePreUpdate(): void
     {
         $this->updatedAt = new DateTime;

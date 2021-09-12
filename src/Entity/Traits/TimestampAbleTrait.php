@@ -15,9 +15,7 @@ namespace App\Entity\Traits;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\HasLifecycleCallbacks]
 trait TimestampAbleTrait
 {
     /**

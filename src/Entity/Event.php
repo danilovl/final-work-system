@@ -12,11 +12,13 @@
 
 namespace App\Entity;
 
+use App\Repository\EventRepository;
 use DateTime;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -27,78 +29,60 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="event")
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'event')]
+#[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class Event
 {
     use IdTrait;
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EventType", inversedBy="events", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="event_type_id", referencedColumnName="id", nullable=false)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: EventType::class, fetch: 'EAGER', inversedBy: 'events')]
+    #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventType $type = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="eventsOwner", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsOwner')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EventAddress", inversedBy="events", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="event_address_id", referencedColumnName="id", nullable=true)
-     * })
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: EventAddress::class, fetch: 'EAGER', inversedBy: 'events')]
+    #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventAddress $address = null;
 
     /**
-     * @ORM\Column(name="name", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: true)]
     private ?string $name = null;
 
     /**
-     * @ORM\Column(name="start", type="datetime", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'start', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $start = null;
 
     /**
-     * @ORM\Column(name="end", type="datetime", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'end', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $end = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\EventParticipant", mappedBy="event", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToOne(mappedBy: 'event', targetEntity: EventParticipant::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventParticipant $participant = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="event", cascade={"persist", "remove"})
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $comment = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SystemEvent", mappedBy="event")
-     */
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: SystemEvent::class)]
     private ?Collection $systemEvents = null;
 
     public function __construct()

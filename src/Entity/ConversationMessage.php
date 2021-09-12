@@ -12,10 +12,12 @@
 
 namespace App\Entity;
 
+use App\Repository\ConversationMessageRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -27,12 +29,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="conversation_message")
- * @ORM\Entity(repositoryClass="App\Repository\ConversationMessageRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'conversation_message')]
+#[ORM\Entity(repositoryClass: ConversationMessageRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class ConversationMessage
 {
     use IdTrait;
@@ -40,30 +42,24 @@ class ConversationMessage
     use IsOwnerTrait;
     use IsReadTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Conversation", inversedBy="messages")
-     * @ORM\JoinColumn(name="conversation_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'messages')]
+    #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Conversation $conversation = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conversationMessages", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationMessages')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConversationMessageStatus", mappedBy="message")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'message', targetEntity: ConversationMessageStatus::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $statuses = null;
 
     /**
-     * @ORM\Column(name="content", type="text", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'content', type: Types::TEXT, nullable: false)]
     private ?string $content = null;
 
     public function __construct()

@@ -12,10 +12,12 @@
 
 namespace App\Entity;
 
+use App\Repository\MediaMimeTypeRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Constant\TranslationConstant;
@@ -26,12 +28,12 @@ use App\Entity\Traits\{
 };
 
 /**
- * @ORM\Table(name="media_mime_type")
- * @ORM\Entity(repositoryClass="App\Repository\MediaMimeTypeRepository")
- * @ORM\HasLifecycleCallbacks()
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
  * @Gedmo\Loggable
  */
+#[ORM\Table(name: 'media_mime_type')]
+#[ORM\Entity(repositoryClass: MediaMimeTypeRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class MediaMimeType
 {
     use IdTrait;
@@ -39,21 +41,19 @@ class MediaMimeType
     use CreateUpdateAbleTrait;
 
     /**
-     * @ORM\Column(name="name", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     private ?string $name = null;
 
     /**
-     * @ORM\Column(name="extension", type="string", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'extension', type: Types::STRING, nullable: true)]
     private ?string $extension = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="mimeType")
-     * @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="default")
-     */
+    #[ORM\OneToMany(mappedBy: 'mimeType', targetEntity: Media::class)]
+    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Collection $medias = null;
 
     public function __construct()

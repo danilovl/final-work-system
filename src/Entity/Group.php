@@ -13,48 +13,40 @@
 namespace App\Entity;
 
 use App\Constant\TranslationConstant;
-use App\Entity\Traits\TimestampAbleTrait;
+use App\Entity\Traits\{
+    IdTrait,
+    TimestampAbleTrait
+};
 use App\Repository\UserGroupRepository;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Table(name="user_group")
- * @ORM\Entity(repositoryClass=UserGroupRepository::class)
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Table(name: 'user_group')]
+#[ORM\Entity(repositoryClass: UserGroupRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Group
 {
+    use IdTrait;
     use TimestampAbleTrait;
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected ?int $id = null;
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(name: 'id', type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(name="name", type="string")
-     */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     protected ?string $name = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="groups")
-     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'groups')]
     protected Collection $users;
 
     public function __construct()
     {
         $this->users = new ArrayCollection;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getName(): ?string

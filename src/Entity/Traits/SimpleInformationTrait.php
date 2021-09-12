@@ -12,21 +12,22 @@
 
 namespace App\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 trait SimpleInformationTrait
 {
     /**
-     * @ORM\Column(name="name", type="string", nullable=false)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     private ?string $name = null;
 
     /**
-     * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Versioned
      */
+    #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     public function getName(): ?string
