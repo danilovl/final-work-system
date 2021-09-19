@@ -12,21 +12,12 @@
 
 namespace App\Controller\Ajax;
 
-use App\DataTransferObject\Form\Factory\TaskFormFactoryData;
-use App\Model\Task\TaskModel;
-use App\Constant\{
-    TaskStatusConstant,
-    AjaxJsonTypeConstant,
-    VoterSupportConstant,
-    ControllerMethodConstant
-};
+use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\{
     Task,
     Work
 };
-use App\Form\TaskForm;
-use App\Helper\FormValidationMessageHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
     Request,

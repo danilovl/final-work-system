@@ -12,27 +12,11 @@
 
 namespace App\Controller;
 
-use App\Constant\MediaTypeConstant;
-use App\Model\Media\MediaModel;
-use App\Model\User\UserModel;
-use Exception;
-use App\Form\{
-    ProfileFormType,
-    ProfileMediaForm,
-    ProfileChangePasswordFormType
-};
-use App\Entity\{
-    Media,
-    MediaMimeType
-};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
     RedirectResponse
 };
-use RuntimeException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfileController extends BaseController
 {

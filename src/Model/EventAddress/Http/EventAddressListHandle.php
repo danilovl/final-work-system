@@ -12,7 +12,6 @@
 
 namespace App\Model\EventAddress\Http;
 
-use App\Entity\Event;
 use App\Service\{PaginatorService,
     UserService,
     TwigRenderService
