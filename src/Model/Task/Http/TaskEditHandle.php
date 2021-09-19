@@ -100,8 +100,8 @@ class TaskEditHandle
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.task_edit'),
             'taskDeadlines' => $this->taskDeadlineFacade->getDeadlinesByOwner($user),
-            'buttonActionTitle' => $this->translatorService->trans('app.form.action.edit'),
-            'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.edit_and_close')
+            'buttonActionTitle' => $this->translatorService->trans('app.form.action.update'),
+            'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.update_and_close')
         ]);
     }
 }

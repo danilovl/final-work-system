@@ -48,9 +48,9 @@ class VersionController extends BaseController
         Work $work,
         Media $media
     ): Response {
-        $versionVoterSubject = (new VersionVoterSubject)
-            ->setWork($work)
-            ->setMedia($media);
+        $versionVoterSubject = new VersionVoterSubject;
+        $versionVoterSubject->setWork($work);
+        $versionVoterSubject->setMedia($media);
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
 

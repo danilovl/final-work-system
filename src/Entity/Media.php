@@ -186,7 +186,7 @@ class Media
         return $this->originalMediaName;
     }
 
-    public function setOriginalMediaName(string $originalMediaName): void
+    public function setOriginalMediaName(?string $originalMediaName): void
     {
         $this->originalMediaName = $originalMediaName;
     }
@@ -196,7 +196,7 @@ class Media
         return $this->originalExtension;
     }
 
-    public function setOriginalExtension(string $originalExtension): void
+    public function setOriginalExtension(?string $originalExtension): void
     {
         $this->originalExtension = $originalExtension;
     }

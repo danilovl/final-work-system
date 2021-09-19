@@ -53,6 +53,7 @@ class MediaModel
         $model->name = $media->getName();
         $model->description = $media->getDescription();
         $model->owner = $media->getOwner();
+        $model->type = $media->getType();
         $model->mimeType = $media->getMimeType();
         $model->categories = $media->getCategories();
         $model->work = $media->getWork();

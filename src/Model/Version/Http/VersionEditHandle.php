@@ -102,7 +102,7 @@ class VersionEditHandle
             'media' => $media,
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.version_edit'),
-            'buttonActionTitle' => $this->translatorService->trans('app.form.action.edit'),
+            'buttonActionTitle' => $this->translatorService->trans('app.form.action.update'),
             'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.update_and_close')
         ]);
     }

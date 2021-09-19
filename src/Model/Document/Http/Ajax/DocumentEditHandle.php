@@ -45,7 +45,7 @@ class DocumentEditHandle
         $mediaModel = MediaModel::fromMedia($media);
         $form = $this->documentFormFactory
             ->setUser($this->userService->getUser())
-            ->getDocumentForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel)
+            ->getDocumentForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel, $media)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -78,8 +78,8 @@ class DocumentEditHandle
             'media' => $media,
             'title' => $this->translatorService->trans('app.page.information_material_edit'),
             'form' => $form->createView(),
-            'buttonActionTitle' => $this->translatorService->trans('app.form.action.edit'),
-            'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.create_and_close')
+            'buttonActionTitle' => $this->translatorService->trans('app.form.action.update'),
+            'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.update_and_close')
         ]);
     }
 }
