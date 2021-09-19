@@ -29,43 +29,47 @@ services:
   app.reset_password:
     class: App\Service\ResetPasswordService
 
-  app.user:
-    class: App\Service\User\UserService
+  App\Service\ResetPasswordService: '@app.reset_password'
 
-  App\Service\User\UserService: '@app.user'
+  app.user:
+    class: App\Service\UserService
+
+  App\Service\UserService: '@app.user'
 
   app.user_work:
-    class: App\Service\User\UserWorkService
+    class: App\Model\User\Service\UserWorkService
 
-  App\Service\User\UserWorkService: '@app.user_work'
+  App\Model\User\Service\UserWorkService: '@app.user_work'
 
   app.work:
-    class: App\Service\Work\WorkService
+    class: App\Model\Work\Service\WorkService
 
-  App\Service\Work\WorkService: '@app.work'
+  App\Model\Work\Service\WorkService: '@app.work'
 
   app.task:
-    class: App\Service\Task\TaskService
+    class: App\Model\Task\Service\TaskService
 
-  App\Service\Task\TaskService: '@app.task'
+  App\Model\Task\Service\TaskService: '@app.task'
 
   app.conversation:
-    class: App\Service\Conversation\ConversationService
+    class: App\Model\Conversation\Service\ConversationService
 
-  App\Service\Conversation\ConversationService: '@app.conversation'
+  App\Model\Conversation\Service\ConversationService: '@app.conversation'
 
   app.conversation_variation:
-    class: App\Service\Conversation\ConversationVariationService
+    class: App\Model\Conversation\Service\ConversationVariationService
 
-  App\Service\Conversation\ConversationVariationService: '@app.conversation_variation'
+  App\Model\Conversation\Service\ConversationVariationService: '@app.conversation_variation'
 
   app.conversation_status:
-    class: App\Service\Conversation\ConversationStatusService
+    class: App\Model\Conversation\Service\ConversationStatusService
 
-  App\Service\Conversation\ConversationStatusService: '@app.conversation_status'
+  App\Model\Conversation\Service\ConversationStatusService: '@app.conversation_status'
 
   app.stream.conversation:
-    class: App\Service\Conversation\ConversationStreamService
+    class: App\Model\Conversation\Service\ConversationStreamService
+
+  App\Model\Conversation\Service\ConversationStreamService: '@app.stream.conversation'
 
   app.widget:
     class: App\Service\Widget\WidgetManagerService
@@ -74,6 +78,8 @@ services:
 
   app.stream.widget:
     class: App\Service\Widget\WidgetStreamService
+
+  App\Service\Widget\WidgetStreamService: '@app.stream.widget'
 
   app.system_event_link_generator:
     class: App\Service\SystemEventLinkGeneratorService
@@ -87,12 +93,14 @@ services:
   App\Service\PaginatorService: '@app.paginator'
 
   app.work.detail_tab:
-    class: App\Service\Work\WorkDetailTabService
+    class: App\Model\Work\Service\WorkDetailTabService
+
+  App\Model\Work\Service\WorkDetailTabService: '@app.work.detail_tab'
 
   app.work.list:
-    class: App\Service\Work\WorkListService
+    class: App\Model\Work\Service\WorkListService
 
-  App\Service\Work\WorkListService: '@app.work.list'
+  App\Model\Work\Service\WorkListService: '@app.work.list'
 
   app.seo_page:
     class: App\Service\SeoPageService
@@ -101,6 +109,8 @@ services:
 
   app.date:
     class: App\Service\DateService
+
+  App\Service\DateService: '@app.date'
 
   app.entity_manager:
     class: App\Service\EntityManagerService
@@ -113,9 +123,29 @@ services:
   App\Service\ResizeImageService: '@app.resize_image'
 
   app.task_status:
-    class: App\Service\Task\TaskStatusService
+    class: App\Model\Task\Service\TaskStatusService
 
-  App\Service\Task\TaskStatusService: '@app.task_status'
+  App\Model\Task\Service\TaskStatusService: '@app.task_status'
+
+  app.request:
+    class: App\Service\RequestService
+
+  App\Service\RequestService: '@app.request'
+
+  app.twig_render:
+    class: App\Service\TwigRenderService
+
+  App\Service\TwigRenderService: '@app.twig_render'
+
+  app.media:
+    class: App\Service\MediaService
+
+  App\Service\MediaService: '@app.media'
+
+  app.password_updater:
+    class: App\Service\PasswordUpdater
+
+  App\Service\PasswordUpdater: '@app.password_updater'
 
   #   ParamConverter
   hashids.converter:
@@ -127,5 +157,4 @@ services:
   app.transformer.api:
     class: App\Transformer\Api\Transformer
 
-  app.password_updater:
-    class: App\Service\PasswordUpdater
+  App\Transformer\Api\Transformer: '@app.transformer.api'

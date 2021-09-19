@@ -13,6 +13,7 @@
 namespace App\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
+use App\Model\Media\Facade\MediaMimeTypeFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Entity\{
     Work,
@@ -22,10 +23,7 @@ use App\Exception\{
     RuntimeException,
     ConstantNotFoundException
 };
-use App\Model\Media\{
-    MediaModel,
-    MediaMimeTypeFacade
-};
+use App\Model\Media\MediaModel;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\VersionForm;
 use Symfony\Component\Form\{

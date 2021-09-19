@@ -19,11 +19,6 @@ class WidgetController extends BaseController
 {
     public function live(): StreamedResponse
     {
-        $response = new StreamedResponse($this->get('app.stream.widget')->handle());
-        $response->headers->set('Content-Type', 'text/event-stream');
-        $response->headers->set('X-Accel-Buffering', 'no');
-        $response->headers->set('Cach-Control', 'no-cache');
-
-        return $response;
+        return $this->get('app.http_handle_ajax.widget.live')->handle();
     }
 }

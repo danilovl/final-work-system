@@ -14,7 +14,7 @@ namespace App\Form\DataGrid;
 
 use App\DataTransferObject\Repository\WorkData;
 use App\Entity\User;
-use App\Model\Work\WorkFacade;
+use App\Model\Work\Facade\WorkFacade;
 use Doctrine\ORM\QueryBuilder;
 
 class TaskDataGrid

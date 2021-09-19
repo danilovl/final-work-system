@@ -27,20 +27,14 @@ class ArticleController extends BaseController
      * @ParamConverter("article", class="App\Entity\Article", options={"id" = "id_article"})
      * @ParamConverter("articleCategory", class="App\Entity\ArticleCategory", options={"id" = "id_category"})
      */
-    public function detail(
-        Article $article,
-        ArticleCategory $articleCategory
-    ): Response {
+    public function detail(Article $article, ArticleCategory $articleCategory): Response
+    {
         $articleVoterSubject = (new ArticleVoterSubject)
             ->setArticle($article)
             ->setArticleCategory($articleCategory);
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $articleVoterSubject);
-        $this->get('app.seo_page')->setTitle($article->getTitle());
 
-        return $this->render('article/detail.html.twig', [
-            'article' => $article,
-            'articleCategory' => $articleCategory
-        ]);
+        return $this->get('app.http_handle.article.detail')->handle($article, $articleCategory);
     }
 }

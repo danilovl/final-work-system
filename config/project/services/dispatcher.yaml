@@ -6,17 +6,27 @@ services:
   app.event_dispatcher.work:
     class: App\EventDispatcher\WorkEventDispatcherService
 
+  App\EventDispatcher\WorkEventDispatcherService: '@app.event_dispatcher.work'
+
   app.event_dispatcher.version:
     class: App\EventDispatcher\VersionEventDispatcherService
+
+  App\EventDispatcher\VersionEventDispatcherService: '@app.event_dispatcher.version'
 
   app.event_dispatcher.document:
     class: App\EventDispatcher\DocumentEventDispatcherService
 
+  App\EventDispatcher\DocumentEventDispatcherService: '@app.event_dispatcher.document'
+
   app.event_dispatcher.user:
     class: App\EventDispatcher\UserEventDispatcherService
 
+  App\EventDispatcher\UserEventDispatcherService: '@app.event_dispatcher.user'
+
   app.event_dispatcher.event:
     class: App\EventDispatcher\EventEventDispatcherService
+
+  App\EventDispatcher\EventEventDispatcherService: '@app.event_dispatcher.event'
 
   app.event_dispatcher.task:
     class: App\EventDispatcher\TaskEventDispatcherService
@@ -26,8 +36,12 @@ services:
   app.event_dispatcher.conversation:
     class: App\EventDispatcher\ConversationEventDispatcherService
 
+  App\EventDispatcher\ConversationEventDispatcherService: '@app.event_dispatcher.conversation'
+
   app.event_dispatcher.security:
     class: App\EventDispatcher\SecurityDispatcherService
+
+  App\EventDispatcher\SecurityDispatcherService: '@app.event_dispatcher.security'
 
   app.event_dispatcher.widget:
     class: App\EventDispatcher\WidgetEventDispatcherService

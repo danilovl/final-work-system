@@ -12,7 +12,7 @@
 
 namespace App\Command;
 
-use App\Model\EmailNotificationQueue\EmailNotificationQueueFacade;
+use App\Model\EmailNotificationQueue\Facade\EmailNotificationQueueFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use App\Service\{

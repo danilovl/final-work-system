@@ -29,7 +29,7 @@ class MediaUploadListener
     public function prePersist(LifecycleEventArgs $eventArgs): void
     {
         $entity = $eventArgs->getEntity();
-        if (!$entity instanceof Media){
+        if (!$entity instanceof Media) {
             return;
         }
 
@@ -39,7 +39,7 @@ class MediaUploadListener
     public function preUpdate(PreUpdateEventArgs $eventArgs): void
     {
         $entity = $eventArgs->getEntity();
-        if (!$entity instanceof Media){
+        if (!$entity instanceof Media) {
             return;
         }
 
@@ -49,7 +49,7 @@ class MediaUploadListener
     public function preRemove(LifecycleEventArgs $eventArgs): void
     {
         $entity = $eventArgs->getEntity();
-        if (!$entity instanceof Media){
+        if (!$entity instanceof Media) {
             return;
         }
 

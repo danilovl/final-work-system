@@ -14,13 +14,13 @@ namespace App\Widget;
 
 use App\DataTransferObject\Repository\WorkData;
 use App\Helper\UserRoleHelper;
-use App\Service\User\UserService;
-use App\Service\Work\WorkService;
+use App\Model\Work\Facade\WorkFacade;
+use App\Service\UserService;
+use App\Model\Work\Service\WorkService;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant
 };
-use App\Model\Work\WorkFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Service\TranslatorService;
 use Twig\Environment;

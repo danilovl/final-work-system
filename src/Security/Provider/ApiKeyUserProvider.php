@@ -13,7 +13,7 @@
 namespace App\Security\Provider;
 
 use App\Entity\ApiUser;
-use App\Model\ApiUser\ApiUserFacade;
+use App\Model\ApiUser\Facade\ApiUserFacade;
 use Symfony\Component\Security\Core\Exception\{
     UnsupportedUserException,
     UserNotFoundException

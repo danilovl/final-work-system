@@ -6,26 +6,49 @@ services:
   app.form_factory.work:
     class: App\Form\Factory\WorkFormFactory
 
+  App\Form\Factory\WorkFormFactory: '@app.form_factory.work'
+
   app.form_factory.work_category:
     class: App\Form\Factory\WorkCategoryFormFactory
+
+  App\Form\Factory\WorkCategoryFormFactory: '@app.form_factory.work_category'
 
   app.form_factory.document_category:
     class: App\Form\Factory\DocumentCategoryFormFactory
 
+  App\Form\Factory\DocumentCategoryFormFactory: '@app.form_factory.document_category'
+
   app.form_factory.document:
     class: App\Form\Factory\DocumentFormFactory
+
+  App\Form\Factory\DocumentFormFactory: '@app.form_factory.document'
 
   app.form_factory.event_address:
     class: App\Form\Factory\EventAddressFormFactory
 
+  App\Form\Factory\EventAddressFormFactory: '@app.form_factory.event_address'
+
   app.form_factory.task:
     class: App\Form\Factory\TaskFormFactory
+
+  App\Form\Factory\TaskFormFactory: '@app.form_factory.task'
 
   app.form_factory.user:
     class: App\Form\Factory\UserFormFactory
 
+  App\Form\Factory\UserFormFactory: '@app.form_factory.user'
+
   app.form_factory.user_group:
     class: App\Form\Factory\UserGroupFormFactory
 
+  App\Form\Factory\UserGroupFormFactory: '@app.form_factory.user_group'
+
   app.form_factory.version:
     class: App\Form\Factory\VersionFormFactory
+
+  App\Form\Factory\VersionFormFactory: '@app.form_factory.version'
+
+  app.form_factory.delete:
+    class: App\Form\Factory\FormDeleteFactory
+
+  App\Form\Factory\FormDeleteFactory: '@app.form_factory.delete'

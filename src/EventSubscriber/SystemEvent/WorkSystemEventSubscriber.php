@@ -16,7 +16,7 @@ use App\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
 use App\Service\EntityManagerService;
-use App\Service\Work\WorkService;
+use App\Model\Work\Service\WorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     SystemEvent,

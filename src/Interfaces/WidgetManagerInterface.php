@@ -15,11 +15,16 @@ namespace App\Interfaces;
 interface WidgetManagerInterface
 {
     public function addWidget(string $name, string $serviceName): void;
+
     public function hasWidget(string $name): bool;
+
     public function getWidget(string $name): WidgetInterface;
 
     public function addWidgetGroup(string $name, array $widgets): void;
+
     public function replaceWidgetGroup(string $name, array $widgets): void;
+
     public function hasWidgetGroup(string $name): bool;
+
     public function getWidgetGroup(string $name): array;
 }

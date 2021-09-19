@@ -14,9 +14,9 @@ namespace App\EventSubscriber\EmailNotification;
 
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueModel;
-use App\Model\User\UserFacade;
+use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Model\User\Facade\UserFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Model\EmailNotificationQueue\EmailNotificationQueueFactory;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;

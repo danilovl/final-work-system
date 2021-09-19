@@ -17,7 +17,7 @@ use App\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
 use App\Service\EntityManagerService;
-use App\Service\User\UserWorkService;
+use App\Model\User\Service\UserWorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     User,

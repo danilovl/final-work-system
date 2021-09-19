@@ -4,21 +4,27 @@ services:
     autowire: true
 
   app.facade.api.user:
-    class: App\Model\ApiUser\ApiUserFacade
+    class: App\Model\ApiUser\Facade\ApiUserFacade
 
-  App\Model\ApiUser\ApiUserFacade: '@app.facade.api.user'
+  App\Model\ApiUser\Facade\ApiUserFacade: '@app.facade.api.user'
 
   app.facade.article_category:
-    class: App\Model\Article\ArticleCategoryFacade
+    class: App\Model\Article\Facade\ArticleCategoryFacade
+
+  App\Model\Article\Facade\ArticleCategoryFacade: '@app.facade.article_category'
 
   app.facade.article:
-    class: App\Model\Article\ArticleFacade
+    class: App\Model\Article\Facade\ArticleFacade
+
+  App\Model\Article\Facade\ArticleFacade: '@app.facade.article'
 
   app.facade.comment:
-    class: App\Model\Comment\CommentFacade
+    class: App\Model\Comment\Facade\CommentFacade
+
+  App\Model\Comment\Facade\CommentFacade: '@app.facade.comment'
 
   app.facade.conversation:
-    class: App\Model\Conversation\ConversationFacade
+    class: App\Model\Conversation\Facade\ConversationFacade
     autowire: false
     arguments:
       - '@app.entity_manager'
@@ -28,102 +34,120 @@ services:
       - '@app.event_dispatcher.conversation'
       - '@app.factory.conversation'
 
+  App\Model\Conversation\Facade\ConversationFacade: '@app.facade.conversation'
+
   app.facade.event_address:
-    class: App\Model\EventAddress\EventAddressFacade
+    class: App\Model\EventAddress\Facade\EventAddressFacade
+
+  App\Model\EventAddress\Facade\EventAddressFacade: '@app.facade.event_address'
 
   app.facade.event_calendar:
-    class: App\Model\Event\EventCalendarFacade
+    class: App\Model\Event\Facade\EventCalendarFacade
+
+  App\Model\Event\Facade\EventCalendarFacade: '@app.facade.event_calendar'
 
   app.facade.event_participant:
-    class: App\Model\Event\EventParticipantFacade
+    class: App\Model\Event\Facade\EventParticipantFacade
+
+  App\Model\Event\Facade\EventParticipantFacade: '@app.facade.event_participant'
 
   app.facade.event_schedule:
-    class: App\Model\EventSchedule\EventScheduleFacade
+    class: App\Model\EventSchedule\Facade\EventScheduleFacade
+
+  App\Model\EventSchedule\Facade\EventScheduleFacade: '@app.facade.event_schedule'
 
   app.facade.media_category:
-    class: App\Model\Media\MediaCategoryFacade
+    class: App\Model\MediaCategory\Facade\MediaCategoryFacade
 
-  App\Model\Media\MediaCategoryFacade: '@app.facade.media_category'
+  App\Model\MediaCategory\Facade\MediaCategoryFacade: '@app.facade.media_category'
 
   app.facade.media.mime_type:
-    class: App\Model\Media\MediaMimeTypeFacade
+    class: App\Model\Media\Facade\MediaMimeTypeFacade
 
-  App\Model\Media\MediaMimeTypeFacade: '@app.facade.media.mime_type'
+  App\Model\Media\Facade\MediaMimeTypeFacade: '@app.facade.media.mime_type'
 
   app.facade.media:
-    class: App\Model\Media\MediaFacade
+    class: App\Model\Media\Facade\MediaFacade
 
-  App\Model\Media\MediaFacade: '@app.facade.media'
+  App\Model\Media\Facade\MediaFacade: '@app.facade.media'
 
   app.facade.media_type:
-    class: App\Model\Media\MediaTypeFacade
+    class: App\Model\Media\Facade\MediaTypeFacade
 
-  App\Model\Media\MediaTypeFacade: '@app.facade.media_type'
+  App\Model\Media\Facade\MediaTypeFacade: '@app.facade.media_type'
 
   app.facade.system_event_recipient:
-    class: App\Model\SystemEvent\SystemEventRecipientFacade
+    class: App\Model\SystemEvent\Facade\SystemEventRecipientFacade
 
-  App\Model\SystemEvent\SystemEventRecipientFacade: '@app.facade.system_event_recipient'
+  App\Model\SystemEvent\Facade\SystemEventRecipientFacade: '@app.facade.system_event_recipient'
 
   app.facade.system_event:
-    class: App\Model\SystemEvent\SystemEventFacade
+    class: App\Model\SystemEvent\Facade\SystemEventFacade
 
-  App\Model\SystemEvent\SystemEventFacade: '@app.facade.system_event'
+  App\Model\SystemEvent\Facade\SystemEventFacade: '@app.facade.system_event'
 
   app.facade.task_deadline:
-    class: App\Model\Task\TaskDeadlineFacade
+    class: App\Model\Task\Facade\TaskDeadlineFacade
 
-  App\Model\Task\TaskDeadlineFacade: '@app.facade.task_deadline'
+  App\Model\Task\Facade\TaskDeadlineFacade: '@app.facade.task_deadline'
 
   app.facade.task:
-    class: App\Model\Task\TaskFacade
+    class: App\Model\Task\Facade\TaskFacade
 
-  App\Model\Task\TaskFacade: '@app.facade.task'
+  App\Model\Task\Facade\TaskFacade: '@app.facade.task'
 
   app.facade.user_group:
-    class: App\Model\UserGroup\UserGroupFacade
+    class: App\Model\UserGroup\Facade\UserGroupFacade
+
+  App\Model\UserGroup\Facade\UserGroupFacade: '@app.facade.user_group'
 
   app.facade.user:
-    class: App\Model\User\UserFacade
+    class: App\Model\User\Facade\UserFacade
 
-  App\Model\User\UserFacade: '@app.facade.user'
+  App\Model\User\Facade\UserFacade: '@app.facade.user'
 
   app.facade.work.category:
-    class: App\Model\WorkCategory\WorkCategoryFacade
+    class: App\Model\WorkCategory\Facade\WorkCategoryFacade
     autowire: true
 
-  app.facade.work.deadline:
-    class: App\Model\WorkDeadline\WorkDeadlineFacade
+  App\Model\WorkCategory\Facade\WorkCategoryFacade: '@app.facade.work.category'
 
-  App\Model\WorkDeadline\WorkDeadlineFacade: '@app.facade.work.deadline'
+  app.facade.work.deadline:
+    class: App\Model\WorkDeadline\Facade\WorkDeadlineFacade
+
+  App\Model\WorkDeadline\Facade\WorkDeadlineFacade: '@app.facade.work.deadline'
 
   app.facade.work:
-    class: App\Model\Work\WorkFacade
+    class: App\Model\Work\Facade\WorkFacade
 
-  App\Model\Work\WorkFacade: '@app.facade.work'
+  App\Model\Work\Facade\WorkFacade: '@app.facade.work'
 
   app.facade.work_status:
-    class: App\Model\WorkStatus\WorkStatusFacade
+    class: App\Model\WorkStatus\Facade\WorkStatusFacade
 
-  App\Model\WorkStatus\WorkStatusFacade: '@app.facade.work_status'
+  App\Model\WorkStatus\Facade\WorkStatusFacade: '@app.facade.work_status'
 
   app.facade.event:
-    class: App\Model\Event\EventFacade
+    class: App\Model\Event\Facade\EventFacade
+
+  App\Model\Event\Facade\EventFacade: '@app.facade.event'
 
   app.facade.conversation_message:
-    class: App\Model\Conversation\ConversationMessageFacade
+    class: App\Model\Conversation\Facade\ConversationMessageFacade
 
-  App\Model\Conversation\ConversationMessageFacade: '@app.facade.conversation_message'
+  App\Model\Conversation\Facade\ConversationMessageFacade: '@app.facade.conversation_message'
 
   app.facade.reset_password:
-    class: App\Model\ResetPassword\ResetPasswordFacade
+    class: App\Model\ResetPassword\Facade\ResetPasswordFacade
 
-  App\Model\ResetPassword\ResetPasswordFacade: '@app.facade.reset_password'
+  App\Model\ResetPassword\Facade\ResetPasswordFacade: '@app.facade.reset_password'
 
   app.facade.email_notification_queue:
-    class: App\Model\EmailNotificationQueue\EmailNotificationQueueFacade
+    class: App\Model\EmailNotificationQueue\Facade\EmailNotificationQueueFacade
 
-  App\Model\EmailNotificationQueue\EmailNotificationQueueFacade: '@app.facade.email_notification_queue'
+  App\Model\EmailNotificationQueue\Facade\EmailNotificationQueueFacade: '@app.facade.email_notification_queue'
 
   app.facade.conversation_message_status:
-    class: App\Model\ConversationMessageStatus\ConversationMessageStatusFacade
+    class: App\Model\ConversationMessageStatus\Facade\ConversationMessageStatusFacade
+
+  App\Model\ConversationMessageStatus\Facade\ConversationMessageStatusFacade: '@app.facade.conversation_message_status'

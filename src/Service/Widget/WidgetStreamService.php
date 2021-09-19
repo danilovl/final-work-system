@@ -12,9 +12,9 @@
 
 namespace App\Service\Widget;
 
-use App\Model\Conversation\ConversationMessageFacade;
-use App\Model\SystemEvent\SystemEventFacade;
-use App\Service\User\UserService;
+use App\Model\Conversation\Facade\ConversationMessageFacade;
+use App\Model\SystemEvent\Facade\SystemEventFacade;
+use App\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use App\Widget\{

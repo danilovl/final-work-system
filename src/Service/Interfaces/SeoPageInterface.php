@@ -15,11 +15,18 @@ namespace App\Service\Interfaces;
 interface SeoPageInterface
 {
     public function setTitle(?string $title): SeoPageInterface;
+
     public function addTitle(string $title, string $separator = null): SeoPageInterface;
+
     public function getTitle(): ?string;
+
     public function getTransTitle(string $title = null): ?string;
+
     public function addMeta(string $type, string $name, string $value, array $extras = []): self;
+
     public function hasMeta(string $type, string $name): bool;
+
     public function getMetas(): array;
+
     public function setMetas(array $metas): self;
 }

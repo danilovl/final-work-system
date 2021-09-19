@@ -12,7 +12,7 @@
 
 namespace App\Security\Authenticator;
 
-use App\Model\User\UserFacade;
+use App\Model\User\Facade\UserFacade;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -112,6 +112,6 @@ class AppAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return  null;
+        return null;
     }
 }

@@ -12,6 +12,8 @@
 
 namespace App\Service;
 
+use App\Model\ResetPassword\Facade\ResetPasswordFacade;
+use App\Model\ResetPassword\Factory\ResetPasswordFactory;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Entity\{
     User,
@@ -25,8 +27,6 @@ use App\Exception\{
 use App\Helper\HashHelper;
 use App\Model\ResetPassword\{
     ResetPasswordModel,
-    ResetPasswordFacade,
-    ResetPasswordFactory,
     ResetPasswordTokenModel
 };
 use DateTime;
@@ -41,7 +41,7 @@ class ResetPasswordService
     public function __construct(
         private ResetPasswordFactory $resetPasswordFactory,
         private ResetPasswordFacade $resetPasswordFacade,
-        private ParameterServiceInterface $parameterService
+        ParameterServiceInterface $parameterService
     ) {
         $this->cryptographicallySecureKey = $parameterService->get('reset_password.cryptographically_secure_key');
         $this->resetRequestLifetime = $parameterService->get('reset_password.reset_request_lifetime');

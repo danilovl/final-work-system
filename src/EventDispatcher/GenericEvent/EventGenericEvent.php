@@ -19,4 +19,4 @@ class EventGenericEvent
 {
     public Comment $comment;
     public Event $event;
- }
+}

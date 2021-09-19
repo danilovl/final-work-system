@@ -4,61 +4,85 @@ services:
     autowire: true
 
   app.factory.conversation:
-    class: App\Model\Conversation\ConversationFactory
+    class: App\Model\Conversation\Factory\ConversationFactory
 
-  App\Model\Conversation\ConversationFactory: '@app.factory.conversation'
+  App\Model\Conversation\Factory\ConversationFactory: '@app.factory.conversation'
 
   app.factory.event_schedule:
-    class: App\Model\EventSchedule\EventScheduleFactory
+    class: App\Model\EventSchedule\Factory\EventScheduleFactory
+
+  App\Model\EventSchedule\Factory\EventScheduleFactory: '@app.factory.event_schedule'
 
   app.factory.comment:
-    class: App\Model\Comment\CommentFactory
+    class: App\Model\Comment\Factory\CommentFactory
+
+  App\Model\Comment\Factory\CommentFactory: '@app.factory.comment'
 
   app.factory.document:
-    class: App\Model\Document\DocumentFactory
+    class: App\Model\Document\Factory\DocumentFactory
 
   app.factory.event:
-    class: App\Model\Event\EventFactory
+    class: App\Model\Event\Factory\EventFactory
+
+  App\Model\Event\Factory\EventFactory: '@app.factory.event'
 
   app.factory.event_address:
-    class: App\Model\EventAddress\EventAddressFactory
+    class: App\Model\EventAddress\Factory\EventAddressFactory
+
+  App\Model\EventAddress\Factory\EventAddressFactory: '@app.factory.event_address'
 
   app.factory.event_schedule_template:
-    class: App\Model\EventScheduleTemplate\EventScheduleTemplateFactory
+    class: App\Model\EventScheduleTemplate\Factory\EventScheduleTemplateFactory
 
   app.factory.task:
-    class: App\Model\Task\TaskFactory
+    class: App\Model\Task\Factory\TaskFactory
+
+  App\Model\Task\Factory\TaskFactory: '@app.factory.task'
 
   app.factory.media_category:
-    class: App\Model\MediaCategory\MediaCategoryFactory
+    class: App\Model\MediaCategory\Factory\MediaCategoryFactory
+
+  App\Model\MediaCategory\Factory\MediaCategoryFactory: '@app.factory.media_category'
 
   app.factory.version:
-    class: App\Model\Version\VersionFactory
+    class: App\Model\Version\Factory\VersionFactory
 
   app.factory.conversation_message:
-    class: App\Model\ConversationMessage\ConversationMessageFactory
+    class: App\Model\ConversationMessage\Factory\ConversationMessageFactory
+
+  App\Model\ConversationMessage\Factory\ConversationMessageFactory: '@app.factory.conversation_message'
 
   app.factory.user_group:
-    class: App\Model\UserGroup\UserGroupFactory
+    class: App\Model\UserGroup\Factory\UserGroupFactory
+
+  App\Model\UserGroup\Factory\UserGroupFactory: '@app.factory.user_group'
 
   app.factory.work:
-    class: App\Model\Work\WorkFactory
+    class: App\Model\Work\Factory\WorkFactory
+
+  App\Model\Work\Factory\WorkFactory: '@app.factory.work'
 
   app.factory.work_category:
-    class: App\Model\WorkCategory\WorkCategoryFactory
+    class: App\Model\WorkCategory\Factory\WorkCategoryFactory
+
+  App\Model\WorkCategory\Factory\WorkCategoryFactory: '@app.factory.work_category'
 
   app.factory.media:
-    class: App\Model\Media\MediaFactory
+    class: App\Model\Media\Factory\MediaFactory
+
+  App\Model\Media\Factory\MediaFactory: '@app.factory.media'
 
   app.factory.user:
-    class: App\Model\User\UserFactory
+    class: App\Model\User\Factory\UserFactory
+
+  App\Model\User\Factory\UserFactory: '@app.factory.user'
 
   app.factory.reset_password:
-    class: App\Model\ResetPassword\ResetPasswordFactory
+    class: App\Model\ResetPassword\Factory\ResetPasswordFactory
 
-  App\Model\ResetPassword\ResetPasswordFactory: '@app.factory.reset_password'
+  App\Model\ResetPassword\Factory\ResetPasswordFactory: '@app.factory.reset_password'
 
   app.factory.email_notification_queue:
-    class: App\Model\EmailNotificationQueue\EmailNotificationQueueFactory
+    class: App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory
 
-  App\Model\EmailNotificationQueue\EmailNotificationQueueFactory: '@app.factory.email_notification_queue'
+  App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory: '@app.factory.email_notification_queue'

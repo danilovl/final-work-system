@@ -45,7 +45,7 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('work_deadline_program_days', [WorkRuntime::class, 'getDeadlineProgramDays'])
         ];
 
-       $taskFunctions = [
+        $taskFunctions = [
             new TwigFunction('task_work_complete_percentage', [TaskRuntime::class, 'getCompleteTaskPercentage'])
         ];
 

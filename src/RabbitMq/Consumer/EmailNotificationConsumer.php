@@ -15,11 +15,9 @@ namespace App\RabbitMq\Consumer;
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Entity\EmailNotificationQueue;
 use App\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
+use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Model\EmailNotificationQueue\{
-    EmailNotificationQueueModel,
-    EmailNotificationQueueFactory
-};
+use App\Model\EmailNotificationQueue\EmailNotificationQueueModel;
 use App\Service\MailerService;
 use DateTime;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;

@@ -61,7 +61,7 @@ class SeoPageService implements SeoPageInterface
     {
         $title = $title ?? $this->title;
 
-        if (str_contains($title, TranslationConstant::DEFAULT_START_KEY)) {
+        if ($title !== null && str_contains($title, TranslationConstant::DEFAULT_START_KEY)) {
             return $this->translator->trans($title);
         }
 

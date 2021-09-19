@@ -55,7 +55,7 @@ class TaskFormFactory
                     throw new RuntimeException('Work must not be null for create ajax');
                 }
 
-            $typeOptions = [
+                $typeOptions = [
                     'action' => $this->router->generate('task_create_ajax', [
                         'id' => $this->hashidsService->encode($work->getId())
                     ]),

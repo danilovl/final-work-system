@@ -13,7 +13,7 @@
 namespace App\Widget;
 
 use App\Service\TranslatorService;
-use App\Service\User\UserService;
+use App\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Twig\Environment;
 

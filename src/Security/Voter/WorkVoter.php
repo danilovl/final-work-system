@@ -14,7 +14,7 @@ namespace App\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
 use App\Helper\WorkRoleHelper;
-use App\Service\Work\WorkService;
+use App\Model\Work\Service\WorkService;
 use App\Entity\{
     User,
     Work

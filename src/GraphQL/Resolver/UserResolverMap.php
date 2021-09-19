@@ -12,17 +12,14 @@
 
 namespace App\GraphQL\Resolver;
 
-use App\Model\User\UserFacade;
+use App\Model\User\Facade\UserFacade;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 
 class UserResolverMap extends ResolverMap
 {
-    private UserFacade $userService;
-
-    public function __construct(UserFacade $userService)
+    public function __construct(private UserFacade $userService)
     {
-        $this->userService = $userService;
     }
 
     protected function map(): array

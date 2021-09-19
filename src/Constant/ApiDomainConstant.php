@@ -14,5 +14,5 @@ namespace App\Constant;
 
 class ApiDomainConstant
 {
-    public const DEFAULT  = 'default';
+    public const DEFAULT = 'default';
 }

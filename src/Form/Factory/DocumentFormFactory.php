@@ -12,17 +12,15 @@
 
 namespace App\Form\Factory;
 
+use App\Model\Media\Facade\MediaMimeTypeFacade;
+use App\Model\MediaCategory\Facade\MediaCategoryFacade;
+use App\Model\User\Facade\UserFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Exception\{
     RuntimeException,
     ConstantNotFoundException
 };
-use App\Model\Media\{
-    MediaModel,
-    MediaCategoryFacade,
-    MediaMimeTypeFacade
-};
-use App\Model\User\UserFacade;
+use App\Model\Media\MediaModel;
 use App\Constant\{
     MediaTypeConstant,
     ControllerMethodConstant

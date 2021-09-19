@@ -12,16 +12,11 @@
 
 namespace App\Controller\Ajax;
 
-use App\Constant\{
-    AjaxJsonTypeConstant,
-    ConversationMessageStatusTypeConstant,
-    VoterSupportConstant
-};
+use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\{
     Conversation,
-    ConversationMessage,
-    ConversationMessageStatusType
+    ConversationMessage
 };
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -37,49 +32,25 @@ class ConversationController extends BaseController
             $conversationMessage
         );
 
-        $this->get('app.facade.conversation_message')
-            ->changeReadMessageStatus($this->getUser(), $conversationMessage);
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
+        return $this->get('app.http_handle_ajax.conversation.change_read_message_status')->handle($conversationMessage);
     }
 
     public function readAll(): JsonResponse
     {
-        $user = $this->getUser();
-        $isUnreadExist = $this->get('app.facade.conversation_message')
-            ->isUnreadMessagesByRecipient($user);
-
-        if ($isUnreadExist) {
-            $this->get('app.facade.conversation_message_status')->updateAllToStatus(
-                $user,
-                $this->getReference(
-                    ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::READ
-                )
-            );
-        }
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
+        return $this->get('app.http_handle_ajax.conversation.read_all')->handle();
     }
 
     public function delete(Conversation $conversation): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $conversation);
 
-        $this->removeEntity($conversation);
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
+        return $this->get('app.http_handle_ajax.conversation.delete')->handle($conversation);
     }
 
     public function liveConversation(Conversation $conversation): StreamedResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
 
-        $response = new StreamedResponse($this->get('app.stream.conversation')->handle($conversation));
-        $response->headers->set('Content-Type', 'text/event-stream');
-        $response->headers->set('X-Accel-Buffering', 'no');
-        $response->headers->set('Cach-Control', 'no-cache');
-
-        return $response;
+        return $this->get('app.http_handle_ajax.conversation.live')->handle($conversation);
     }
 }

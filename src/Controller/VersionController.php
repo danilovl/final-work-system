@@ -12,19 +12,11 @@
 
 namespace App\Controller;
 
-use App\Model\Media\MediaModel;
-use App\Constant\{
-    SeoPageConstant,
-    FlashTypeConstant,
-    MediaTypeConstant,
-    VoterSupportConstant,
-    ControllerMethodConstant
-};
+use App\Constant\VoterSupportConstant;
 use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\{
     Work,
-    Media,
-    MediaType
+    Media
 };
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -33,67 +25,18 @@ use Symfony\Component\HttpFoundation\{
 };
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class VersionController extends MediaBaseController
+class VersionController extends BaseController
 {
     public function create(
         Request $request,
         Work $work
     ): Response {
-        $versionFormFactory = $this->get('app.form_factory.version');
-
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE, $versionVoterSubject);
 
-        $mediaModel = new MediaModel;
-        $mediaModel->owner = $this->getUser();
-        $mediaModel->work = $work;
-        $mediaModel->type = $this->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION);
-
-        $form = $versionFormFactory->getVersionForm(
-            ControllerMethodConstant::CREATE,
-            $mediaModel
-        );
-        $form = $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $media = $this->get('app.factory.media')
-                    ->flushFromModel($mediaModel);
-
-                $this->get('app.event_dispatcher.version')
-                    ->onVersionCreate($media);
-
-                $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
-
-                return $this->redirectToRoute('work_detail', [
-                    'id' => $this->hashIdEncode($work->getId())
-                ]);
-            }
-
-            $this->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
-            $this->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-        }
-
-        if ($request->isXmlHttpRequest()) {
-            $form = $versionFormFactory->getVersionForm(
-                ControllerMethodConstant::CREATE_AJAX,
-                $mediaModel,
-                null,
-                $work
-            );
-        }
-
-        $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
-
-        return $this->render($this->ajaxOrNormalFolder($request, 'version/version.html.twig'), [
-            'work' => $work,
-            'form' => $form->createView(),
-            'title' => $this->trans('app.page.version_add'),
-            'buttonActionTitle' => $this->trans('app.form.action.create'),
-            'buttonActionCloseTitle' => $this->trans('app.form.action.create_and_close')
-        ]);
+        return $this->get('app.http_handle.version.create')->handle($request, $work);
     }
 
     /**
@@ -111,54 +54,7 @@ class VersionController extends MediaBaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
 
-        $versionFormFactory = $this->get('app.form_factory.version');
-        $mediaModel = MediaModel::fromMedia($media);
-
-        $form = $versionFormFactory->getVersionForm(
-            ControllerMethodConstant::EDIT,
-            $mediaModel
-        );
-        $form = $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $this->get('app.factory.media')
-                    ->flushFromModel($mediaModel, $media);
-
-                $media->setOwner($this->getUser());
-                $this->get('app.event_dispatcher.version')
-                    ->onVersionEdit($media);
-
-                $this->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
-
-                return $this->redirectToRoute('work_detail', [
-                    'id' => $this->hashIdEncode($work->getId())
-                ]);
-            }
-
-            $this->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-            $this->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
-        }
-
-        if ($request->isXmlHttpRequest()) {
-            $form = $versionFormFactory->getVersionForm(
-                ControllerMethodConstant::EDIT_AJAX,
-                $mediaModel,
-                $media,
-                $work
-            );
-        }
-
-        $this->get('app.seo_page')->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
-
-        return $this->render($this->ajaxOrNormalFolder($request, 'version/version.html.twig'), [
-            'work' => $work,
-            'media' => $media,
-            'form' => $form->createView(),
-            'title' => $this->trans('app.page.version_edit'),
-            'buttonActionTitle' => $this->trans('app.form.action.edit'),
-            'buttonActionCloseTitle' => $this->trans('app.form.action.update_and_close')
-        ]);
+        return $this->get('app.http_handle.version.edit')->handle($request, $work, $media);
     }
 
     public function detailContent(Media $version): Response
@@ -167,10 +63,7 @@ class VersionController extends MediaBaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $versionVoterSubject, 'The work media does not exist');
 
-        return $this->render('version/detail_content.html.twig', [
-            'version' => $version,
-            'work' => $version->getWork()
-        ]);
+        return $this->get('app.http_handle.version.detail_content')->handle($version);
     }
 
     /**
@@ -187,7 +80,7 @@ class VersionController extends MediaBaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $versionVoterSubject);
 
-        return $this->downloadMedia($media);
+        return $this->get('app.http_handle.version.download')->handle($media);
     }
 
     /**
@@ -198,6 +91,6 @@ class VersionController extends MediaBaseController
         Work $work,
         Media $media
     ): BinaryFileResponse {
-        return $this->downloadMedia($media);
+        return $this->get('app.http_handle.version.download')->handle($media);
     }
 }

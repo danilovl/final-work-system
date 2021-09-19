@@ -31,7 +31,8 @@ class WorkStatusRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work_status');
     }
 
-    public function countByUser(WorkStatusData $workStatusData): QueryBuilder {
+    public function countByUser(WorkStatusData $workStatusData): QueryBuilder
+    {
         $queryBuilder = $this->createQueryBuilder('work_status')
             ->select('work_status.name, COUNT(work.id) as count')
             ->leftJoin('work_status.works', 'work')

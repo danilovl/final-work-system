@@ -12,7 +12,6 @@
 
 namespace App\Controller\Api;
 
-use App\Constant\ApiDomainConstant;
 use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -23,23 +22,6 @@ class WorkController extends BaseController
 {
     public function list(Request $request): JsonResponse
     {
-        $limit = $request->query->getInt('limit');
-        $limit = $limit !== 0 ? $limit : null;
-
-        $works = $this->get('app.facade.work')
-            ->findAll($limit);
-
-        $apiFields = $this->get('danilovl.parameter')
-            ->get('api_fields.default.Work');
-
-        $result = [];
-        foreach ($works as $work) {
-            $transformer = $this->get('app.transformer.api')
-                ->transform(ApiDomainConstant::DEFAULT, $apiFields, $work);
-
-            array_push($result, $transformer);
-        }
-
-        return new JsonResponse($result);
+        return $this->get('app.http_handle_api.work.list')->handle($request);
     }
 }

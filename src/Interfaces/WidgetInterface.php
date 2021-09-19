@@ -15,8 +15,12 @@ namespace App\Interfaces;
 interface WidgetInterface
 {
     public function getName(): ?string;
-    public function setName(string $name): void ;
+
+    public function setName(string $name): void;
+
     public function render(): ?string;
+
     public function getRenderParameters(): array;
+
     public function setParameters(array $parameters): void;
 }

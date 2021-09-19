@@ -12,7 +12,7 @@
 
 namespace App\GraphQL\Resolver;
 
-use App\Model\Task\TaskFacade;
+use App\Model\Task\Facade\TaskFacade;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 

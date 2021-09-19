@@ -29,7 +29,7 @@ user_list:
   requirements:
     type: "author|opponent|consultant|unused"
   defaults:
-    _controller: App\Controller\UserController:userList
+    _controller: App\Controller\UserController:list
   methods: [GET, POST]
 
 user_create_ajax:

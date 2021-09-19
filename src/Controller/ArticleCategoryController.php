@@ -12,10 +12,7 @@
 
 namespace App\Controller;
 
-use App\Constant\{
-    SeoPageConstant,
-    VoterSupportConstant
-};
+use App\Constant\VoterSupportConstant;
 use App\Entity\ArticleCategory;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -26,30 +23,13 @@ class ArticleCategoryController extends BaseController
 {
     public function list(Request $request): Response
     {
-        $articleCategoriesQuery = $this->get('app.facade.article_category')
-            ->queryCategoriesByRoles($this->getUser()->getRoles());
-
-        return $this->render('article_category/list.html.twig', [
-            'articleCategories' => $this->createPagination($request, $articleCategoriesQuery)
-        ]);
+        return $this->get('app.http_handle.article_category.list')->handle($request);
     }
 
-    public function articleList(
-        Request $request,
-        ArticleCategory $articleCategory
-    ): Response {
+    public function articleList(Request $request, ArticleCategory $articleCategory): Response
+    {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $articleCategory);
 
-        $articlesQuery = $this->get('app.facade.article')
-            ->queryArticlesByCategory($articleCategory);
-
-        $this->get('app.seo_page')
-            ->setTitle('app.page.article_list')
-            ->addTitle($articleCategory->getName(), SeoPageConstant::VERTICAL_SEPARATOR);
-
-        return $this->render('article_category/article_list.html.twig', [
-            'articles' => $this->createPagination($request, $articlesQuery),
-            'articleCategory' => $articleCategory
-        ]);
+        return $this->get('app.http_handle.article_category.article_list')->handle($request, $articleCategory);
     }
 }

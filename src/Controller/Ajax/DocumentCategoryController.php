@@ -12,15 +12,9 @@
 
 namespace App\Controller\Ajax;
 
-use App\Constant\{
-    AjaxJsonTypeConstant,
-    VoterSupportConstant
-};
+use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\MediaCategory;
-use App\Form\MediaCategoryForm;
-use App\Helper\FormValidationMessageHelper;
-use App\Model\MediaCategory\MediaCategoryModel;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -30,55 +24,20 @@ class DocumentCategoryController extends BaseController
 {
     public function create(Request $request): JsonResponse
     {
-        $mediaCategoryModel = new MediaCategoryModel;
-        $mediaCategoryModel->owner = $this->getUser();
-
-        $form = $this->createForm(MediaCategoryForm::class, $mediaCategoryModel)
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.factory.media_category')->flushFromModel($mediaCategoryModel);
-
-            return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
-        }
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
-            'data' => FormValidationMessageHelper::getErrorMessages($form)
-        ]);
+        return $this->get('app.http_handle_ajax.document_category.create')->handle($request);
     }
 
-    public function edit(
-        Request $request,
-        MediaCategory $mediaCategory
-    ): JsonResponse {
+    public function edit(Request $request, MediaCategory $mediaCategory): JsonResponse
+    {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $mediaCategory);
 
-        $mediaCategoryModel = MediaCategoryModel::fromMediaCategory($mediaCategory);
-        $form = $this->createForm(MediaCategoryForm::class, $mediaCategoryModel)
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.factory.media_category')
-                ->flushFromModel($mediaCategoryModel, $mediaCategory);
-
-            return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
-        }
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE, [
-            'data' => FormValidationMessageHelper::getErrorMessages($form)
-        ]);
+        return $this->get('app.http_handle_ajax.document_category.edit')->handle($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $mediaCategory);
 
-        if (count($mediaCategory->getMedias()) === 0) {
-            $this->removeEntity($mediaCategory);
-
-            return $this->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
-        }
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::DELETE_FAILURE);
+        return $this->get('app.http_handle_ajax.document_category.delete')->handle($mediaCategory);
     }
 }

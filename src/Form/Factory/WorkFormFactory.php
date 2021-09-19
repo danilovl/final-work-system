@@ -15,7 +15,8 @@ namespace App\Form\Factory;
 use App\Constant\ControllerMethodConstant;
 use App\Entity\Work;
 use App\Exception\ConstantNotFoundException;
-use App\Service\Work\WorkListService;
+use App\Model\WorkDeadline\Facade\WorkDeadlineFacade;
+use App\Model\Work\Service\WorkListService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Routing\RouterInterface;
 use App\Form\{
@@ -29,9 +30,8 @@ use Symfony\Component\Form\{
     FormFactoryInterface
 };
 use App\Model\Work\WorkModel;
-use App\Model\WorkDeadline\WorkDeadlineFacade;
 use App\Model\WorkSearch\WorkSearchModel;
- use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class WorkFormFactory
 {

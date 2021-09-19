@@ -1,0 +1,239 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+
+  # Work
+
+  app.http_handle.work.list:
+    class: App\Model\Work\Http\WorkListHandle
+
+  app.http_handle.work.create:
+    class: App\Model\Work\Http\WorkCreateHandle
+
+  app.http_handle.work.edit:
+    class: App\Model\Work\Http\WorkEditHandle
+
+  app.http_handle.work.edit_author:
+    class: App\Model\Work\Http\WorkEditAuthorHandle
+
+  app.http_handle.work.detail:
+    class: App\Model\Work\Http\WorkDetailHandle
+
+  app.http_handle.work.delete:
+    class: App\Model\Work\Http\WorkDeleteHandle
+
+  # Work Category
+
+  app.http_handle.work_category.list:
+    class: App\Model\WorkCategory\Http\WorkCategoryListHandle
+
+  app.http_handle.work_category.create:
+    class: App\Model\WorkCategory\Http\WorkCategoryCreateHandle
+
+  app.http_handle.work_category.edit:
+    class: App\Model\WorkCategory\Http\WorkCategoryEditHandle
+
+  app.http_handle.work_category.delete:
+    class: App\Model\WorkCategory\Http\WorkCategoryDeleteHandle
+
+  # User Group
+
+  app.http_handle.user_group.list:
+    class: App\Model\UserGroup\Http\UserGroupListHandle
+
+  app.http_handle.user_group.create:
+    class: App\Model\UserGroup\Http\UserGroupCreateHandle
+
+  app.http_handle.user_group.edit:
+    class: App\Model\UserGroup\Http\UserGroupEditHandle
+
+  # User
+
+  app.http_handle.user.list:
+    class: App\Model\User\Http\UserListHandle
+
+  app.http_handle.user.create:
+    class: App\Model\User\Http\UserCreateHandle
+
+  app.http_handle.user.edit:
+    class: App\Model\User\Http\UserEditHandle
+
+  # Task
+
+  app.http_handle.task.list:
+    class: App\Model\Task\Http\TaskListHandle
+
+  app.http_handle.task.create:
+    class: App\Model\Task\Http\TaskCreateHandle
+
+  app.http_handle.task.create_several:
+    class: App\Model\Task\Http\TaskCreateSeveralHandle
+
+  app.http_handle.task.edit:
+    class: App\Model\Task\Http\TaskEditHandle
+
+  # Reset password
+
+  app.http_handle.reset_password.request:
+    class: App\Model\ResetPassword\Http\ResetPasswordRequestHandle
+
+  app.http_handle.reset_password.check_email:
+    class: App\Model\ResetPassword\Http\ResetPasswordCheckEmailHandle
+
+  app.http_handle.reset_password.reset:
+    class: App\Model\ResetPassword\Http\ResetPasswordResetHandle
+
+  # Event schedule
+
+  app.http_handle.event_schedule.create:
+    class: App\Model\EventSchedule\Http\EventScheduleCreateHandle
+
+  app.http_handle.event_schedule.edit:
+    class: App\Model\EventSchedule\Http\EventScheduleEditHandle
+
+  app.http_handle.event_schedule.list:
+    class: App\Model\EventSchedule\Http\EventScheduleListHandle
+
+  app.http_handle.event_schedule.detail:
+    class: App\Model\EventSchedule\Http\EventScheduleDetailHandle
+
+  app.http_handle.event_schedule.clone:
+    class: App\Model\EventSchedule\Http\EventScheduleCloneHandle
+
+  app.http_handle.event_schedule.delete:
+    class: App\Model\EventSchedule\Http\EventScheduleDeleteHandle
+
+  # Event
+
+  app.http_handle.event.detail:
+    class: App\Model\Event\Http\EventDetailHandle
+
+  app.http_handle.event.edit:
+    class: App\Model\Event\Http\EventEditHandle
+
+  app.http_handle.event.switch_to_skype:
+    class: App\Model\Event\Http\EventSwitchToSkypeHandle
+
+  app.http_handle.event.delete:
+    class: App\Model\Event\Http\EventDeleteHandle
+
+  # Event address
+
+  app.http_handle.event_address.create:
+    class: App\Model\EventAddress\Http\EventAddressCreateHandle
+
+  app.http_handle.event_address.edit:
+    class: App\Model\EventAddress\Http\EventAddressEditHandle
+
+  app.http_handle.event_address.list:
+    class: App\Model\EventAddress\Http\EventAddressListHandle
+
+  app.http_handle.event_address.detail:
+    class: App\Model\EventAddress\Http\EventAddressDetailHandle
+
+  app.http_handle.event_address.delete:
+    class: App\Model\EventAddress\Http\EventAddressDeleteHandle
+
+  # Conversation
+
+  app.http_handle.conversation.create:
+    class: App\Model\Conversation\Http\ConversationCreateHandle
+
+  app.http_handle.conversation.detail:
+    class: App\Model\Conversation\Http\ConversationDetailHandle
+
+  app.http_handle.conversation.list:
+    class: App\Model\Conversation\Http\ConversationListHandle
+
+  app.http_handle.conversation.last_message:
+    class: App\Model\Conversation\Http\ConversationLastMessageHandle
+
+  app.http_handle.conversation.create_work:
+    class: App\Model\Conversation\Http\ConversationCreateWorkHandle
+
+  # Article
+
+  app.http_handle.article.detail:
+    class: App\Model\Article\Http\ArticleDetailHandle
+
+  # Article category
+
+  app.http_handle.article_category.list:
+    class: App\Model\ArticleCategory\Http\ArticleCategoryListHandle
+
+  app.http_handle.article_category.article_list:
+    class: App\Model\ArticleCategory\Http\ArticleCategoryArticleListHandle
+
+  # Document category
+
+  app.http_handle.document_category.create:
+    class: App\Model\DocumentCategory\Http\DocumentCategoryCreateHandle
+
+  app.http_handle.document_category.edit:
+    class: App\Model\DocumentCategory\Http\DocumentCategoryEditHandle
+
+  app.http_handle.document_category.list:
+    class: App\Model\DocumentCategory\Http\DocumentCategoryListHandle
+
+  app.http_handle.document_category.delete:
+    class: App\Model\DocumentCategory\Http\DocumentCategoryDeleteHandle
+
+  # Document
+
+  app.http_handle.document.create:
+    class: App\Model\Document\Http\DocumentCreateHandle
+
+  app.http_handle.document.detail_content:
+    class: App\Model\Document\Http\DocumentDetailContentHandle
+
+  app.http_handle.document.download:
+    class: App\Model\Document\Http\DocumentDownloadHandle
+
+  app.http_handle.document.edit:
+    class: App\Model\Document\Http\DocumentEditHandle
+
+  app.http_handle.document.list:
+    class: App\Model\Document\Http\DocumentListHandle
+
+  app.http_handle.document.list_owner:
+    class: App\Model\Document\Http\DocumentListOwnerHandle
+
+  # Version
+
+  app.http_handle.version.create:
+    class: App\Model\Version\Http\VersionCreateHandle
+
+  app.http_handle.version.detail_content:
+    class: App\Model\Version\Http\VersionDetailContentHandle
+
+  app.http_handle.version.download:
+    class: App\Model\Version\Http\VersionDownloadHandle
+
+  app.http_handle.version.edit:
+    class: App\Model\Version\Http\VersionEditHandle
+
+  # Event calendar
+
+  app.http_handle.event_calendar.reservation:
+    class: App\Model\EventCalendar\Http\EventCalendarReservationHandle
+
+  app.http_handle.event_calendar.manage:
+    class: App\Model\EventCalendar\Http\EventCalendarManageHandle
+
+  # Profile
+
+  app.http_handle.profile.show:
+    class: App\Model\Profile\Http\ProfileShowHandle
+
+  app.http_handle.profile.edit:
+    class: App\Model\Profile\Http\ProfileEditHandle
+
+  app.http_handle.profile.change_password:
+    class: App\Model\Profile\Http\ProfileChangePasswordHandle
+
+  app.http_handle.profile.change_image:
+    class: App\Model\Profile\Http\ProfileChangeImageHandle
+
+  app.http_handle.profile.delete_image:
+    class: App\Model\Profile\Http\ProfileDeleteImageHandle

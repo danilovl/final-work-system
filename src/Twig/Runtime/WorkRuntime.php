@@ -12,7 +12,7 @@
 
 namespace App\Twig\Runtime;
 
-use App\Service\Work\WorkService;
+use App\Model\Work\Service\WorkService;
 use App\Entity\{
     User,
     Work

@@ -12,100 +12,40 @@
 
 namespace App\Controller\Ajax;
 
-use App\Model\Media\MediaModel;
-use App\Constant\{
-    MediaTypeConstant,
-    AjaxJsonTypeConstant,
-    VoterSupportConstant,
-    ControllerMethodConstant
-};
-use App\Controller\MediaBaseController;
-use App\Entity\{
-    Media,
-    MediaType
-};
-use App\Helper\FormValidationMessageHelper;
-use Symfony\Component\Form\FormInterface;
+use App\Constant\VoterSupportConstant;
+use App\Controller\BaseController;
+use App\Entity\Media;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
     JsonResponse
 };
 
-class DocumentController extends MediaBaseController
+class DocumentController extends BaseController
 {
     public function create(Request $request): JsonResponse
     {
-        $mediaModel = new MediaModel;
-        $mediaModel->owner = $this->getUser();
-        $mediaModel->type = $this->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL);
-
-        $form = $this->getDocumentForm(ControllerMethodConstant::CREATE_AJAX, $mediaModel)
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $media = $this->get('app.factory.media')
-                ->flushFromModel($mediaModel);
-
-            $this->get('app.event_dispatcher.document')
-                ->onDocumentCreate($media);
-
-            return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
-        }
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
-            'data' => FormValidationMessageHelper::getErrorMessages($form)
-        ]);
+        return $this->get('app.http_handle_ajax.document.create')->handle($request);
     }
 
-    public function edit(
-        Request $request,
-        Media $media
-    ): Response {
+    public function edit(Request $request, Media $media): Response
+    {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
-        $mediaModel = MediaModel::fromMedia($media);
-        $form = $this->getDocumentForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel)
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.factory.media')
-                ->flushFromModel($mediaModel, $media);
-
-            return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
-        }
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE, [
-            'data' => FormValidationMessageHelper::getErrorMessages($form)
-        ]);
+        return $this->get('app.http_handle_ajax.document.edit')->handle($request, $media);
     }
 
     public function changeActive(Media $media): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
-        $media->changeActive();
-        $this->flushEntity($media);
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
+        return $this->get('app.http_handle_ajax.document.change_active')->handle($media);
     }
 
     public function delete(Media $media): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $media);
 
-        $this->removeEntity($media);
-
-        return $this->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
-    }
-
-    public function getDocumentForm(
-        string $type,
-        MediaModel $mediaModel = null,
-        Media $media = null
-    ): FormInterface {
-        return $this->get('app.document_form')
-            ->setUser($this->getUser())
-            ->getDocumentForm($type, $mediaModel, $media);
+        return $this->get('app.http_handle_ajax.document.delete')->handle($media);
     }
 }

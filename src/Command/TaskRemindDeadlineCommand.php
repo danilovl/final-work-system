@@ -13,7 +13,7 @@
 namespace App\Command;
 
 use App\EventDispatcher\TaskEventDispatcherService;
-use App\Model\Task\TaskDeadlineFacade;
+use App\Model\Task\Facade\TaskDeadlineFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

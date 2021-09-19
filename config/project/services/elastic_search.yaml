@@ -7,3 +7,5 @@ services:
     class: App\ElasticSearch\WorkSearch
     arguments:
       $transformedFinderWork: '@fos_elastica.finder.work'
+
+  App\ElasticSearch\WorkSearch: '@app.elastic_search.work'

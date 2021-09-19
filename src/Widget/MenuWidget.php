@@ -14,7 +14,7 @@ namespace App\Widget;
 
 use App\Entity\User;
 use App\Menu\MenuItem;
-use App\Service\User\UserService;
+use App\Service\UserService;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;

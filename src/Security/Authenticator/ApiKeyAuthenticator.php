@@ -12,7 +12,7 @@
 
 namespace App\Security\Authenticator;
 
-use App\Model\ApiUser\ApiUserFacade;
+use App\Model\ApiUser\Facade\ApiUserFacade;
 use App\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use Symfony\Component\HttpFoundation\{
     Request,

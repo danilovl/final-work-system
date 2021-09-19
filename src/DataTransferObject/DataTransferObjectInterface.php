@@ -17,6 +17,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 interface DataTransferObjectInterface
 {
     public function toArray(): array;
+
     public static function createFromArray(array $params, array|bool $requiredParamNames = true): static;
+
     public static function configureResolver(OptionsResolver $resolver, array $requiredOptionNames): void;
 }
