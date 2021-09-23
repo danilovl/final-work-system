@@ -36,11 +36,13 @@ class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $user = $event->user;
         $owner = $event->owner;
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find(SystemEventTypeConstant::USER_EDIT);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::USER_EDIT)
-        );
+        $systemEvent->setType($systemEventType);
 
         $recipientAuthor = new SystemEventRecipient;
         $recipientAuthor->setRecipient($user);

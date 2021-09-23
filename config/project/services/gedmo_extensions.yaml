@@ -5,7 +5,7 @@ services:
   extension.listener:
     class: App\EventListener\DoctrineExtensionListener
     arguments:
-      - '@security.helper'
+      - '@app.user'
       - '@gedmo.listener.loggable'
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

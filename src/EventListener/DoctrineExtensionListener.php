@@ -12,23 +12,20 @@
 
 namespace App\EventListener;
 
-use App\Entity\User;
+use App\Service\UserService;
 use Gedmo\Loggable\LoggableListener;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Security\Core\Security;
 
 class DoctrineExtensionListener
 {
     public function __construct(
-        private Security $security,
+        private UserService $userService,
         private LoggableListener $loggableListener
     ) {
     }
 
-    public function onKernelRequest(RequestEvent $event): void
+    public function onKernelRequest(): void
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
+        $user = $this->userService->getUser();
         if ($user === null) {
             return;
         }

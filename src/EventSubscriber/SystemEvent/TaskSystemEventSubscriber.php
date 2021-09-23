@@ -45,13 +45,15 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $task = $event->task;
         $work = $task->getWork();
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find($systemEventId);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($recipientAuthor ? $task->getOwner() : $work->getAuthor());
         $systemEvent->setWork($work);
         $systemEvent->setTask($task);
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find($systemEventId)
-        );
+        $systemEvent->setType($systemEventType);
 
         $recipient = new SystemEventRecipient;
         $recipient->setRecipient($recipientAuthor ? $work->getAuthor() : $task->getOwner());

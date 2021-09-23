@@ -44,15 +44,17 @@ class EventEventDispatcherService
 
     public function onEventEdit(Event $event): void
     {
-        if ($event->getParticipant()) {
-            $genericEvent = new EventGenericEvent;
-            $genericEvent->event = $event;
+        if ($event->getParticipant() === null) {
+            return;
+        }
 
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
+        $genericEvent = new EventGenericEvent;
+        $genericEvent->event = $event;
 
-            if ($event->getParticipant()->getUser()) {
-                $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);
-            }
+        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
+
+        if ($event->getParticipant()->getUser()) {
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);
         }
     }
 
@@ -87,12 +89,14 @@ class EventEventDispatcherService
 
     public function onEventCalendarEdit(Event $event): void
     {
-        if ($event->getParticipant()) {
-            $genericEvent = new EventGenericEvent;
-            $genericEvent->event = $event;
-
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);
+        if ($event->getParticipant() === null) {
+            return;
         }
+
+        $genericEvent = new EventGenericEvent;
+        $genericEvent->event = $event;
+
+        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
+        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);
     }
 }

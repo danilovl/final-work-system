@@ -38,6 +38,10 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $massageOwner = $conversationMessage->getOwner();
         $conversation = $conversationMessage->getConversation();
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find(SystemEventTypeConstant::MESSAGE_CREATE);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($massageOwner);
 
@@ -46,9 +50,7 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         }
 
         $systemEvent->setConversation($conversation);
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::MESSAGE_CREATE)
-        );
+        $systemEvent->setType($systemEventType);
 
         $participantArray = $conversation->getParticipants();
 

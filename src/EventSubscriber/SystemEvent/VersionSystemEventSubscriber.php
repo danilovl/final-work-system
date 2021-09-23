@@ -28,7 +28,7 @@ use App\Entity\{
 class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected EntityManagerService $entityManagerService,
+        EntityManagerService $entityManagerService,
         private WorkService $workService
     ) {
         parent::__construct($entityManagerService);
@@ -50,13 +50,15 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $media = $event->media;
         $work = $media->getWork();
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find($systemEventTypeId);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($media->getOwner());
         $systemEvent->setWork($work);
         $systemEvent->setMedia($media);
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find($systemEventTypeId)
-        );
+        $systemEvent->setType($systemEventType);
 
         $workUsers = $this->workService->getUsers(...[$work, ...$users]);
         /** @var User $user */

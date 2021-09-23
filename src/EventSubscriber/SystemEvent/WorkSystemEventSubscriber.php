@@ -28,7 +28,7 @@ use App\Entity\User;
 class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected EntityManagerService $entityManagerService,
+        EntityManagerService $entityManagerService,
         private WorkService $workService
     ) {
         parent::__construct($entityManagerService);
@@ -47,12 +47,14 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find(SystemEventTypeConstant::WORK_CREATE);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
         $systemEvent->setOwner($work->getSupervisor());
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::WORK_CREATE)
-        );
+        $systemEvent->setType($systemEventType);
 
         $workUsers = $this->workService->getAllUsers($work);
 
@@ -74,12 +76,14 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find(SystemEventTypeConstant::WORK_EDIT);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setWork($work);
         $systemEvent->setOwner($work->getSupervisor());
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::WORK_EDIT)
-        );
+        $systemEvent->setType($systemEventType);
 
         $recipientAuthor = new SystemEventRecipient;
         $recipientAuthor->setRecipient($work->getAuthor());
@@ -104,11 +108,13 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find(SystemEventTypeConstant::USER_EDIT);
+
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($work->getSupervisor());
-        $systemEvent->setType($this->entityManagerService->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::USER_EDIT)
-        );
+        $systemEvent->setType($systemEventType);
         $systemEvent->setWork($work);
 
         $recipientAuthor = new SystemEventRecipient;
