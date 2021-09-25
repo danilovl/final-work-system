@@ -1,0 +1,26 @@
+parameters:
+    symfony:
+        container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
+        console_application_loader: bin/phpstan/console-loader.php
+    doctrine:
+        objectManagerLoader: bin/phpstan/doctrine-orm-bootstrap.php
+
+    level: max
+    paths:
+        - src
+        - bin
+        - tests
+    excludePaths:
+        - tests/bootstrap.php
+
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+
+    ignoreErrors:
+        - '~^Unsafe usage of new static(.*)$~'
+        - '~^Property(.*)type mapping mismatch: property can contain(.*)but database expects(.*)$~'
+        - '~^Property(.*)type mapping mismatch: database can contain(.*)but property expects(.*)$~'
+        - '~^Method(.*)::find\(\) should return(.*)but returns(.*)$~'
+        - '~^Parameter(.*)of method(.*)::setType\(\) expects(.*), object|null given$~'
+        - '~^Parameter(.*)of function(.*)expects string, string|false given$~'
+        - '~^Parameter(.*)of method(.*)::getWorkBy\(\) expects(.*), object|null given$~'

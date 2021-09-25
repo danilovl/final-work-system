@@ -29,7 +29,6 @@ class WidgetExtension extends AbstractExtension
             new TwigFunction('widget', [$this, 'widget'], ['is_safe' => ['html']]),
             new TwigFunction('widget_group', [$this, 'widgetGroup'], ['is_safe' => ['html']]),
             new TwigFunction('widget_homepage_notify', [HomepageNotifyWidgetRuntime::class, 'renderNotify'], ['is_safe' => ['html']])
-
         ];
     }
 
