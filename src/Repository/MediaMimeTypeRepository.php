@@ -12,7 +12,11 @@
 
 namespace App\Repository;
 
-use App\Entity\MediaMimeType;
+use App\Entity\{
+    User,
+    MediaType,
+    MediaMimeType
+};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -30,7 +34,10 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
             ->setCacheable(true);
     }
 
-    public function allBy(mixed $user, mixed $mediaType = null): QueryBuilder
+    public function allBy(
+        iterable|User $user,
+        iterable|MediaType $mediaType = null
+    ): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->leftJoin('media_mime_type.medias', 'medias');

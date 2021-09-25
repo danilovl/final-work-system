@@ -80,10 +80,10 @@ class Event
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $comment = null;
+    private Collection $comment;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: SystemEvent::class)]
-    private ?Collection $systemEvents = null;
+    private Collection $systemEvents;
 
     public function __construct()
     {

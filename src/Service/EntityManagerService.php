@@ -25,25 +25,25 @@ class EntityManagerService
         return $this->entityManager->getReference($entityName, $id);
     }
 
-    public function persistAndFlush(mixed $entity): void
+    public function persistAndFlush(object $entity): void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush($entity);
     }
 
-    public function remove(mixed $entity): void
+    public function remove(object $entity): void
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush($entity);
     }
 
-    public function create(mixed $entity): void
+    public function create(object $entity): void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush($entity);
     }
 
-    public function flush(mixed $entity = null): void
+    public function flush(object $entity = null): void
     {
         $this->entityManager->flush($entity);
     }

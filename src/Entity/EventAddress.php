@@ -61,7 +61,7 @@ class EventAddress
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Event::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $events = null;
+    private Collection $events ;
 
     public function __construct()
     {

@@ -48,11 +48,11 @@ class ConversationMessageFacade
     ): void {
         $conversation = $conversationMessage->getConversation();
 
-        /** @var ConversationMessageStatus $conversationMessageStatus */
+        /** @var ConversationMessageStatus|null $conversationMessageStatus */
         $conversationMessageStatus = $this->conversationStatusService
             ->getConversationMessageStatus($conversationMessage, $user);
 
-        if ($conversationMessageStatus) {
+        if ($conversationMessageStatus !== null) {
             switch ($conversationMessageStatus->getType()->getId()) {
                 case ConversationMessageStatusTypeConstant::READ:
                     $conversationMessageStatus->setType(
@@ -85,8 +85,7 @@ class ConversationMessageFacade
                 )
             );
 
-            $this->entityManagerService->persist($newConversationMessageStatus);
-            $this->entityManagerService->flush($newConversationMessageStatus);
+            $this->entityManagerService->persistAndFlush($newConversationMessageStatus);
         }
     }
 

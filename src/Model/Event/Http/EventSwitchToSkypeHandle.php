@@ -21,7 +21,7 @@ use App\Service\{
     RequestService,
     EntityManagerService
 };
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EventSwitchToSkypeHandle
 {
@@ -34,7 +34,7 @@ class EventSwitchToSkypeHandle
     ) {
     }
 
-    public function handle(Event $event): Response
+    public function handle(Event $event): RedirectResponse
     {
         $eventAddressSkype = $this->eventAddressFacade
             ->getSkypeByOwner($event->getOwner());

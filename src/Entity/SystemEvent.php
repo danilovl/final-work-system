@@ -75,7 +75,7 @@ class SystemEvent
 
     #[ORM\OneToMany(mappedBy: 'systemEvent', targetEntity: SystemEventRecipient::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $recipient = null;
+    private Collection $recipient;
 
     public function __construct()
     {

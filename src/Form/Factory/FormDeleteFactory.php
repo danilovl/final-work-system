@@ -13,6 +13,7 @@
 namespace App\Form\Factory;
 
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Form\{
     FormInterface,
@@ -29,8 +30,12 @@ class FormDeleteFactory
     ) {
     }
 
-    public function createDeleteForm($entity, string $route): FormInterface
+    public function createDeleteForm(object $entity, string $route): FormInterface
     {
+        if (!method_exists($entity, 'getId')) {
+            throw new RuntimeException(sprintf('Object "%s" does not contains method getId.', $entity::class));
+        }
+
         return $this->formFactory->createBuilder()
             ->setAction($this->router->generate($route, [
                 'id' => $this->hashidsService->encode($entity->getId())

@@ -25,7 +25,7 @@ use App\Entity\{
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Constant\FlashTypeConstant;
 use App\Service\RequestService;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ConversationCreateWorkHandle
 {
@@ -42,7 +42,7 @@ class ConversationCreateWorkHandle
         Work $work,
         User $userOne,
         User $userTwo
-    ): Response {
+    ): RedirectResponse {
         $isCheck = $this->conversationVariationService->checker($work, $userOne, $userTwo);
 
         if ($isCheck) {

@@ -42,7 +42,7 @@ class ConversationType
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Conversation::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $conversations = null;
+    private Collection $conversations;
 
     public function __construct()
     {

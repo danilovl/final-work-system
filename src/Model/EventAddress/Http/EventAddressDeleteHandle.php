@@ -21,7 +21,7 @@ use App\Service\{
 };
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    RedirectResponse
 };
 
 class EventAddressDeleteHandle
@@ -33,7 +33,7 @@ class EventAddressDeleteHandle
     ) {
     }
 
-    public function handle(Request $request, EventAddress $eventAddress): Response
+    public function handle(Request $request, EventAddress $eventAddress): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($eventAddress, 'event_address_delete')

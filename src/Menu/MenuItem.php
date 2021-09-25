@@ -165,7 +165,7 @@ class MenuItem implements MenuItemInterface
         return $this;
     }
 
-    public function addAttribute(string $key, $value): MenuItemInterface
+    public function addAttribute(string $key, mixed $value): MenuItemInterface
     {
         if (!isset($this->attributes[$key])) {
             $this->attributes[$key] = $value;
@@ -174,7 +174,7 @@ class MenuItem implements MenuItemInterface
         return $this;
     }
 
-    public function getAttribute(string $key)
+    public function getAttribute(string $key): mixed
     {
         return $this->attributes[$key] ?? null;
     }

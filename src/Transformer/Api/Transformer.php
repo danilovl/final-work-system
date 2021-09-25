@@ -14,7 +14,7 @@ namespace App\Transformer\Api;
 
 use App\Constant\DateFormatConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use DateTime;
+use DateTimeImmutable;
 use ReflectionClass;
 
 class Transformer implements TransformerInterface
@@ -23,7 +23,7 @@ class Transformer implements TransformerInterface
     {
     }
 
-    public function transform(string $domain, array $fields, mixed $object): array
+    public function transform(string $domain, array $fields, object $object): array
     {
         $result = [];
 
@@ -41,7 +41,7 @@ class Transformer implements TransformerInterface
             $getMethod = 'get' . ucfirst($field);
 
             if (method_exists($object, $getMethod)) {
-                $fieldValue = call_user_func_array([$object, $getMethod], []);
+                $fieldValue = $object->$getMethod();
 
                 $fieldValueClass = null;
                 if (is_object($fieldValue)) {
@@ -53,8 +53,8 @@ class Transformer implements TransformerInterface
 
                     $result[$field] = $this->transform($domain, $subFields, $fieldValue);
                 } else {
-                    if ($fieldValue instanceof DateTime) {
-                        $fieldValue = $fieldValue->format(DateFormatConstant::DATE);
+                    if ($fieldValue instanceof DateTimeImmutable) {
+                        $fieldValue = DateTimeImmutable::createFromInterface($fieldValue)->format(DateFormatConstant::DATE);
                     }
 
                     $result[$field] = $fieldValue;

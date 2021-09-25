@@ -24,7 +24,7 @@ class ServicePublicCompilerPass implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         foreach (self::SERVICES as $service) {
             if ($container->hasDefinition($service)) {

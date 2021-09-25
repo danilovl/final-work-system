@@ -12,12 +12,15 @@
 
 namespace App\Model\User\Facade;
 
+use App\Entity\{
+    User,
+    WorkStatus
+};
 use App\Helper\UserRoleHelper;
 use App\Model\User\Service\UserWorkService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use App\Constant\WorkUserTypeConstant;
-use App\Entity\User;
 use App\Repository\UserRepository;
 
 class UserFacade
@@ -73,7 +76,7 @@ class UserFacade
     public function getUsersQueryBySupervisor(
         User $user,
         string $type,
-        $workStatus = null
+        iterable|WorkStatus $workStatus = null
     ): Query {
         return $this->userRepository
             ->bySupervisor($user, $type, $workStatus)

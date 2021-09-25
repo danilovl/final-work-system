@@ -50,7 +50,7 @@ class WorkStatus
 
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Work::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $works = null;
+    private Collection $works;
 
     public function __construct()
     {

@@ -101,10 +101,6 @@ class ConversationFactory extends BaseModelFactory
 
     public function getUser(ConversationParticipant|User $user): User
     {
-        if ($user instanceof ConversationParticipant) {
-            return $user instanceof User ? $user : $user->getUser();
-        }
-
-        return $user;
+        return $user instanceof ConversationParticipant ? $user->getUser() : $user;
     }
 }

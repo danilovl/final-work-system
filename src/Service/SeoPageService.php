@@ -112,7 +112,7 @@ class SeoPageService implements SeoPageInterface
         return $this;
     }
 
-    private function normalize($meta): array
+    private function normalize(mixed $meta): array
     {
         return is_string($meta) ? [$meta, []] : $meta;
     }

@@ -70,7 +70,7 @@ class Media
     #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'media_category_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $categories = null;
+    private Collection $categories;
 
     #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'medias')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
@@ -105,7 +105,7 @@ class Media
 
     #[ORM\OneToMany(mappedBy: 'media', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $systemEvents = null;
+    private Collection $systemEvents;
 
     public function __construct()
     {

@@ -5,15 +5,23 @@ services:
 
   app.graph_ql.resolver.user:
     class: App\GraphQL\Resolver\UserResolverMap
+    tags:
+      - { name: overblog_graphql.resolver_map, schema: doctrine }
 
   app.graph_ql.resolver.work:
     class: App\GraphQL\Resolver\WorkResolverMap
+    tags:
+      - { name: overblog_graphql.resolver_map, schema: doctrine }
 
   app.graph_ql.resolver.task:
     class: App\GraphQL\Resolver\TaskResolverMap
+    tags:
+      - { name: overblog_graphql.resolver_map, schema: doctrine }
 
   app.graph_ql.resolver.not_doctrine:
     class: App\GraphQL\Resolver\NotDoctrineResolverMap
+    tags:
+      - { name: overblog_graphql.resolver_map, schema: not_doctrine }
 
   app.graph_ql.definition.datetime_type:
     class: App\GraphQL\Type\DateTimeType

@@ -29,11 +29,10 @@ class TokenStorage
         $token = new UsernamePasswordToken(
             $user,
             null,
-            $oldToken->getProviderKey(),
+            $oldToken->getFirewallName(),
             $oldToken->getRoleNames()
         );
 
         $this->tokenStorage->setToken($token);
     }
 }
-

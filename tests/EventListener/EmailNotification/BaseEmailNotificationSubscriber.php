@@ -24,7 +24,7 @@ class BaseEmailNotificationSubscriber extends BaseEventSubscriber
         $this->eventSubscriber = new $this->classSubscriber(
             $kernel->getContainer()->get('app.facade.user'),
             $kernel->getContainer()->get('twig'),
-            $kernel->getContainer()->get('translator'),
+            $kernel->getContainer()->get('app.translator'),
             $kernel->getContainer()->get('app.factory.email_notification_queue'),
             $kernel->getContainer()->get('danilovl.parameter'),
             $kernel->getContainer()->get('old_sound_rabbit_mq.email_notification_producer')

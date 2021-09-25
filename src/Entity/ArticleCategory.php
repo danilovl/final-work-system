@@ -55,7 +55,7 @@ class ArticleCategory
 
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $articles = null;
+    private Collection $articles;
 
     public function __construct()
     {
@@ -78,7 +78,7 @@ class ArticleCategory
         return $this;
     }
 
-    public function addRole($role): self
+    public function addRole(string $role): self
     {
         $role = strtoupper($role);
 
@@ -117,9 +117,9 @@ class ArticleCategory
         return $this->getOwner()->getId() === $user->getId();
     }
 
-    public function hasAccess($role): bool
+    public function hasAccess(string $role): bool
     {
-        return in_array(strtoupper($role), $this->getArrayAccess(), true);
+        return in_array(strtoupper($role), $this->access, true);
     }
 
     public function __toString(): string

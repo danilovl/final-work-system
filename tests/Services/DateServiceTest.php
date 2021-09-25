@@ -12,19 +12,21 @@
 
 namespace App\Tests\Services;
 
-use App\Service\DateService;
+use App\Service\{
+    DateService,
+    TranslatorService
+};
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DateServiceTest extends KernelTestCase
 {
-    private TranslatorInterface $translator;
+    private TranslatorService $translator;
 
     public function setUp(): void
     {
         $kernel = self::bootKernel();
-        $this->translator = $kernel->getContainer()->get('translator');
+        $this->translator = $kernel->getContainer()->get('app.translator');
     }
 
     /**

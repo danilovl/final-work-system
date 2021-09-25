@@ -62,9 +62,9 @@ class Article
     #[ORM\ManyToMany(targetEntity: ArticleCategory::class, inversedBy: 'articles', fetch: 'EAGER')]
     #[ORM\JoinTable(name: 'article_to_article_category')]
     #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    #[ORM\inverseJoinColumn(name: 'article_category_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\InverseJoinColumn(name: 'article_category_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $categories = null;
+    private Collection $categories;
 
     public function __construct()
     {

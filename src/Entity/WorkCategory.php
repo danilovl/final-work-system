@@ -49,7 +49,7 @@ class WorkCategory
 
     #[ORM\ManyToMany(targetEntity: Work::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $works = null;
+    private Collection $works;
 
     /**
      * @Gedmo\Versioned

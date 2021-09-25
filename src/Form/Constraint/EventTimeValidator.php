@@ -27,19 +27,23 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EventTimeValidator extends ConstraintValidator
 {
-    public function validate($eventModel, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
-        if ($eventModel === null) {
+        if ($value === null) {
             return;
         }
 
-        if (!$eventModel instanceof EventModel) {
-            throw new UnexpectedTypeException($eventModel, EventModel::class);
+        if (!$constraint instanceof EventTime) {
+            throw new UnexpectedTypeException($constraint, EventTime::class);
         }
 
-        switch ($eventModel->type->getId()) {
+        if (!$value instanceof EventModel) {
+            throw new UnexpectedTypeException($value, EventModel::class);
+        }
+
+        switch ($value->type->getId()) {
             case EventTypeConstant::CONSULTATION:
-                if ($eventModel->address === null) {
+                if ($value->address === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
                         ->atPath('address')
@@ -47,7 +51,7 @@ class EventTimeValidator extends ConstraintValidator
                 }
                 break;
             case EventTypeConstant::PERSONAL:
-                if ($eventModel->name === null) {
+                if ($value->name === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
                         ->atPath('name')
@@ -55,18 +59,18 @@ class EventTimeValidator extends ConstraintValidator
                 }
         }
 
-        if (CompareHelper::compareDateTime($eventModel->start, $eventModel->end, CompareConstant::EQUAL)) {
+        if (CompareHelper::compareDateTime($value->start, $value->end, CompareConstant::EQUAL)) {
             $this->context
                 ->buildViolation('This value should not be equal to {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $eventModel->start->format(DateFormatConstant::DATE_TIME))
+                ->setParameter('{{ compared_value }}', $value->start->format(DateFormatConstant::DATE_TIME))
                 ->atPath('end')
                 ->addViolation();
         }
 
-        if (CompareHelper::compareDateTime($eventModel->start, $eventModel->end, CompareConstant::MORE)) {
+        if (CompareHelper::compareDateTime($value->start, $value->end, CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('This value should be greater than {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $eventModel->start->format(DateFormatConstant::DATE_TIME))
+                ->setParameter('{{ compared_value }}', $value->start->format(DateFormatConstant::DATE_TIME))
                 ->atPath('start')
                 ->addViolation();
         }

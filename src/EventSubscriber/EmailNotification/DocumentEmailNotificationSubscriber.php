@@ -20,10 +20,10 @@ use App\EventSubscriber\Events;
 use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Model\User\Facade\UserFacade;
 use App\Model\User\Service\UserWorkService;
+use App\Service\TranslatorService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
@@ -31,7 +31,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
     public function __construct(
         protected UserFacade $userFacade,
         protected Environment $twig,
-        protected TranslatorInterface $translator,
+        protected TranslatorService $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterServiceInterface $parameterService,
         private UserWorkService $userWorkService,

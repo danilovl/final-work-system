@@ -119,11 +119,7 @@ class ConversationHelper
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
-        /** @var Conversation $second */
-        usort($array, function ($first, $second) use ($collator) {
-            /** @var Conversation $first
-             * @var Conversation $second
-             */
+        usort($array, static function (Conversation $first, Conversation $second) use ($collator): int|bool {
             $f = (string) $first->getRecipient();
             $s = (string) $second->getRecipient();
 

@@ -20,7 +20,7 @@ use App\Service\{
     UserService,
     RequestService
 };
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EventCalendarGetEventHandle
 {
@@ -31,7 +31,7 @@ class EventCalendarGetEventHandle
     ) {
     }
 
-    public function handle(Request $request): Response
+    public function handle(Request $request): JsonResponse
     {
         $startDate = new DateTime($request->get('start'));
         $endDate = new DateTime($request->get('end'));

@@ -16,7 +16,7 @@ use App\Constant\{
     CompareConstant,
     EventTypeConstant
 };
-use App\Entity\EventScheduleTemplate;
+use App\Entity\EventScheduleTemplate as EventScheduleTemplateEntity;
 use App\Helper\CompareHelper;
 use Symfony\Component\Validator\{
     Constraint,
@@ -26,14 +26,18 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EventScheduleTemplateTimeValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if ($value === null) {
             return;
         }
 
-        if (!$value instanceof EventScheduleTemplate) {
-            throw new UnexpectedTypeException($value, EventScheduleTemplate::class);
+        if (!$constraint instanceof EventScheduleTemplateTime) {
+            throw new UnexpectedTypeException($constraint, EventScheduleTemplateTime::class);
+        }
+
+        if (!$value instanceof EventScheduleTemplateEntity) {
+            throw new UnexpectedTypeException($value, EventScheduleTemplateEntity::class);
         }
 
         if (CompareHelper::compareDateTime($value->getStart(), $value->getEnd(), CompareConstant::MORE)) {

@@ -14,9 +14,9 @@ namespace App\Form\Constraint;
 
 use App\Constant\CompareConstant;
 use App\Helper\CompareHelper;
+use App\Service\TranslatorService;
 use DateTime;
 use App\Helper\DateHelper;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
@@ -25,22 +25,26 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class FirstWeekDayValidator extends ConstraintValidator
 {
-    public function __construct(private TranslatorInterface $translator)
+    public function __construct(private TranslatorService $translator)
     {
     }
 
-    public function validate(mixed $startDate, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
-        if ($startDate === null) {
+        if ($value === null) {
             return;
         }
 
-        if (!$startDate instanceof DateTime) {
-            throw new UnexpectedTypeException($startDate, DateTime::class);
+        if (!$constraint instanceof FirstWeekDay) {
+            throw new UnexpectedTypeException($constraint, FirstWeekDay::class);
         }
 
-        $startWeekTest = DateHelper::actualWeekStartByDate(clone $startDate);
-        if (CompareHelper::compareDateTime($startDate, $startWeekTest, CompareConstant::NOT_EQUAL)) {
+        if (!$value instanceof DateTime) {
+            throw new UnexpectedTypeException($value, DateTime::class);
+        }
+
+        $startWeekTest = DateHelper::actualWeekStartByDate(clone $value);
+        if (CompareHelper::compareDateTime($value, $startWeekTest, CompareConstant::NOT_EQUAL)) {
             $this->context
                 ->buildViolation($this->translator->trans($constraint->message))
                 ->setTranslationDomain('messages')

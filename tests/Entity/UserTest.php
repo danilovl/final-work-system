@@ -27,10 +27,10 @@ class UserTest extends TestCase
      * @dataProvider gettersAndSettersProvider
      */
     public function testGettersAndSetters(
-        $value,
+        mixed $value,
         string $set,
         string $get
-    ) {
+    ): void {
         $entity = new class extends User {};
         $entity->$set($value);
 
@@ -61,6 +61,7 @@ class UserTest extends TestCase
         yield [new ArrayCollection, 'setEventsOwner', 'getEventsOwner'];
         yield [new ArrayCollection, 'setComments', 'getComments'];
         yield [new ArrayCollection, 'setGroups', 'getGroups'];
-        yield [new class extends Media {}, 'setProfileImage', 'getProfileImage'];
+        yield [new class extends Media {
+        }, 'setProfileImage', 'getProfileImage'];
     }
 }

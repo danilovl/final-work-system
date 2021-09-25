@@ -23,7 +23,7 @@ class ParametersServiceTest extends KernelTestCase
     public function setUp(): void
     {
         $kernel = self::bootKernel();
-        $this->parametersService = new ParameterService($kernel->getContainer());
+        $this->parametersService = $kernel->getContainer()->get('danilovl.parameter');
     }
 
     /**

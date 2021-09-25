@@ -14,7 +14,9 @@ namespace App\Model\User\Service;
 
 use App\Entity\{
     User,
-    Work
+    Work,
+    WorkStatus,
+    WorkType
 };
 use App\Constant\{
     WorkStatusConstant,
@@ -80,8 +82,8 @@ class UserWorkService
     public function getWorkBy(
         User $user,
         string $userType,
-        $type = null,
-        $status = null
+        WorkType $type = null,
+        WorkStatus $status = null
     ): ArrayCollection {
         $collectionWorks = new ArrayCollection;
         $criteria = Criteria::create();

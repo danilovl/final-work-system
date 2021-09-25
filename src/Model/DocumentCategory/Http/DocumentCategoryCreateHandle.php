@@ -22,6 +22,7 @@ use App\Constant\{
 use App\Service\{
     UserService,
     RequestService,
+    TranslatorService,
     TwigRenderService
 };
 use Symfony\Component\HttpFoundation\{
@@ -34,6 +35,7 @@ class DocumentCategoryCreateHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
+        private TranslatorService $translatorService,
         private TwigRenderService $twigRenderService,
         private DocumentCategoryFormFactory $documentCategoryFormFactory,
         private MediaCategoryFactory $mediaCategoryFactory
@@ -76,9 +78,9 @@ class DocumentCategoryCreateHandle
 
         return $this->twigRenderService->render($template, [
             'form' => $form->createView(),
-            'title' => $this->trans('app.page.information_materials_category_create'),
-            'buttonActionTitle' => $this->trans('app.form.action.create'),
-            'buttonActionCloseTitle' => $this->trans('app.form.action.create_and_close')
+            'title' => $this->translatorService->trans('app.page.information_materials_category_create'),
+            'buttonActionTitle' => $this->translatorService->trans('app.form.action.create'),
+            'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.create_and_close')
         ]);
     }
 }

@@ -54,7 +54,7 @@ class ConversationMessage
 
     #[ORM\OneToMany(mappedBy: 'message', targetEntity: ConversationMessageStatus::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $statuses = null;
+    private Collection $statuses;
 
     /**
      * @Gedmo\Versioned
@@ -100,7 +100,7 @@ class ConversationMessage
     /**
      * @return Collection|ConversationMessageStatus[]
      */
-    public function getStatuses(): ?Collection
+    public function getStatuses(): Collection
     {
         return $this->statuses;
     }

@@ -18,7 +18,7 @@ use App\Service\{
     RequestService,
     EntityManagerService
 };
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class WorkCategoryDeleteHandle
 {
@@ -28,7 +28,7 @@ class WorkCategoryDeleteHandle
     ) {
     }
 
-    public function handle(WorkCategory $workCategory): Response
+    public function handle(WorkCategory $workCategory): RedirectResponse
     {
         if (count($workCategory->getWorks()) === 0) {
             $this->entityManagerService->remove($workCategory);

@@ -22,7 +22,7 @@ use App\Service\{
     RequestService,
     EntityManagerService
 };
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EventCalendarEditHandle
 {
@@ -34,7 +34,7 @@ class EventCalendarEditHandle
     ) {
     }
 
-    public function handle(Request $request, Event $event): Response
+    public function handle(Request $request, Event $event): JsonResponse
     {
         $event->setStart(new DateTime($request->get('start')));
         $event->setEnd(new DateTime($request->get('end')));

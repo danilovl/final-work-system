@@ -66,7 +66,7 @@ class RedisCache extends CacheProvider
 
             $succeeded = array_filter($multi->exec());
 
-            return count($succeeded) == count($keysAndValues);
+            return count($succeeded) === count($keysAndValues);
         }
 
         return $this->redis->mset($keysAndValues);

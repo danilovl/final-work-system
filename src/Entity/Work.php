@@ -69,12 +69,12 @@ class Work
     #[ORM\JoinColumn(name: 'consultant_id', referencedColumnName: 'id', nullable: true)]
     private ?User $consultant = null;
 
-    #[ORM\ManyToMany(targetEntity: WorkCategory::class, inversedBy: '"works"')]
+    #[ORM\ManyToMany(targetEntity: WorkCategory::class, inversedBy: 'works')]
     #[ORM\JoinTable(name: 'work_to_work_category')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'work_category_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $categories = null;
+    private Collection $categories;
 
     /**
      * @Gedmo\Versioned
@@ -89,13 +89,13 @@ class Work
     private ?string $shortcut = null;
 
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Task::class)]
-    private ?Collection $tasks = null;
+    private Collection $tasks;
 
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Media::class)]
-    private ?Collection $medias = null;
+    private Collection $medias;
 
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: SystemEvent::class)]
-    private ?Collection $systemEvents = null;
+    private Collection $systemEvents;
 
     /**
      * @Gedmo\Versioned
@@ -110,10 +110,10 @@ class Work
     private ?DateTime $deadlineProgram = null;
 
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Conversation::class)]
-    private ?Collection $conversations = null;
+    private Collection $conversations;
 
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: EventParticipant::class)]
-    private ?Collection $eventParticipants = null;
+    private Collection $eventParticipants;
 
     public function __construct()
     {

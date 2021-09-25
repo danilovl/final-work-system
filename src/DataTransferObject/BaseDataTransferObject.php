@@ -51,7 +51,7 @@ abstract class BaseDataTransferObject implements DataTransferObjectInterface
         return get_object_vars($this);
     }
 
-    public function toJson(): string
+    public function toJson(): string|false
     {
         return json_encode($this->toArray());
     }

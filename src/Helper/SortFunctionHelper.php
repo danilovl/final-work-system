@@ -24,7 +24,7 @@ class SortFunctionHelper
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
-        usort($array, static function ($first, $second) use ($collator) {
+        usort($array, static function (mixed $first, mixed $second) use ($collator): int|false {
             $f = (string) $first;
             $s = (string) $second;
 
@@ -38,10 +38,10 @@ class SortFunctionHelper
         $b = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $b);
         $czechChars = Yaml::parse(file_get_contents(self::PATH_CZECH_CHARS))['czech'] ?? [];
 
-        $A = strtr($a, $czechChars);
-        $B = strtr($b, $czechChars);
+        $a = strtr($a, $czechChars);
+        $b = strtr($b, $czechChars);
 
-        return strnatcasecmp($A, $B);
+        return strnatcasecmp($a, $b);
     }
 
     public static function eventParticipantSort(array &$eventParticipantArray): void

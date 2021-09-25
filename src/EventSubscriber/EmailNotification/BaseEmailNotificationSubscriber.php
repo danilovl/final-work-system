@@ -16,9 +16,9 @@ use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueModel;
 use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Model\User\Facade\UserFacade;
+use App\Service\TranslatorService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class BaseEmailNotificationSubscriber
@@ -33,7 +33,7 @@ class BaseEmailNotificationSubscriber
     public function __construct(
         protected UserFacade $userFacade,
         protected Environment $twig,
-        protected TranslatorInterface $translator,
+        protected TranslatorService $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterServiceInterface $parameterService,
         protected ProducerInterface $emailNotificationProducer

@@ -48,7 +48,7 @@ class EventSchedule
 
     #[ORM\OneToMany(mappedBy: 'schedule', targetEntity: EventScheduleTemplate::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $templates = null;
+    private Collection $templates;
 
     public function __construct()
     {

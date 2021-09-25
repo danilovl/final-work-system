@@ -14,6 +14,7 @@ namespace App\Model\Version\Http;
 
 use App\Entity\Media;
 use App\Service\MediaService;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class VersionDownloadHandle
 {
@@ -21,8 +22,8 @@ class VersionDownloadHandle
     {
     }
 
-    public function handle(Media $media): void
+    public function handle(Media $media): BinaryFileResponse
     {
-        $this->mediaService->download($media);
+        return $this->mediaService->download($media);
     }
 }

@@ -31,7 +31,7 @@ use App\Service\{
 };
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    JsonResponse
 };
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -48,7 +48,7 @@ class VersionCreateHandle
     ) {
     }
 
-    public function handle(Request $request, Work $work): Response
+    public function handle(Request $request, Work $work): JsonResponse
     {
         $mediaModel = new MediaModel;
         $mediaModel->owner = $this->userService->getUser();

@@ -77,7 +77,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     public function onAuthenticationSuccess(
         Request $request,
         TokenInterface $token,
-        $firewallName
+        string $firewallName
     ): ?Response {
         return null;
     }

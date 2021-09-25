@@ -18,7 +18,7 @@ use App\Service\{
     RequestService,
     EntityManagerService
 };
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DocumentCategoryDeleteHandle
 {
@@ -28,7 +28,7 @@ class DocumentCategoryDeleteHandle
     ) {
     }
 
-    public function handle(MediaCategory $mediaCategory): Response
+    public function handle(MediaCategory $mediaCategory): RedirectResponse
     {
         if (count($mediaCategory->getMedias()) === 0) {
             $this->entityManagerService->remove($mediaCategory);

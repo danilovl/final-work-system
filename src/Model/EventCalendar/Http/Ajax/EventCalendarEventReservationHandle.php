@@ -35,7 +35,7 @@ use App\Service\{
     EntityManagerService
 };
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EventCalendarEventReservationHandle
 {
@@ -50,7 +50,7 @@ class EventCalendarEventReservationHandle
     ) {
     }
 
-    public function handle(Request $request, Event $event): Response
+    public function handle(Request $request, Event $event): JsonResponse
     {
         $user = $this->userService->getUser();
         $userWorks = $this->userWorkService->getWorkBy(

@@ -48,7 +48,7 @@ interface MenuItemInterface
 
     public function setAttributes(?array $attributes): self;
 
-    public function addAttribute(string $key, $value): self;
+    public function addAttribute(string $key, mixed $value): self;
 
-    public function getAttribute(string $key);
+    public function getAttribute(string $key): mixed;
 }

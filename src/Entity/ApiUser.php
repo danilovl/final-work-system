@@ -59,7 +59,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -82,7 +82,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->apiKey;
     }
 
-    public function setApiKey(string $apiKey)
+    public function setApiKey(string $apiKey): void
     {
         $this->apiKey = $apiKey;
     }
@@ -112,7 +112,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
         return 'api_user';
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 

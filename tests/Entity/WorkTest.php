@@ -29,7 +29,7 @@ class WorkTest extends TestCase
      * @dataProvider gettersAndSettersProvider
      */
     public function testGettersAndSetters(
-        $value,
+        mixed $value,
         string $set,
         string $get
     ): void {

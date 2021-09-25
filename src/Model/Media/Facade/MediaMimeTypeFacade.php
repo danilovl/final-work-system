@@ -12,7 +12,11 @@
 
 namespace App\Model\Media\Facade;
 
-use App\Entity\MediaMimeType;
+use App\Entity\{
+    User,
+    MediaType,
+    MediaMimeType
+};
 use App\Repository\MediaMimeTypeRepository;
 
 class MediaMimeTypeFacade
@@ -36,8 +40,8 @@ class MediaMimeTypeFacade
     }
 
     public function getMimeTypesByOwner(
-        $user,
-        $mediaType = null,
+        iterable|User $user,
+        iterable|MediaType $mediaType = null,
         bool $onlyKey = false
     ): array {
         $mimeTypes = $this->mediaMimeTypeRepository

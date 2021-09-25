@@ -14,5 +14,5 @@ namespace App\Transformer\Api;
 
 interface TransformerInterface
 {
-    public function transform(string $domain, array $fields, $object): array;
+    public function transform(string $domain, array $fields, object $object): array;
 }

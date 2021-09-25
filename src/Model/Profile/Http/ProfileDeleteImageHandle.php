@@ -18,7 +18,7 @@ use App\Service\{
     EntityManagerService,
     RequestService
 };
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Exception;
 
 class ProfileDeleteImageHandle
@@ -30,7 +30,7 @@ class ProfileDeleteImageHandle
     ) {
     }
 
-    public function handle(): Response
+    public function handle(): RedirectResponse
     {
         $user = $this->userService->getUser();
 

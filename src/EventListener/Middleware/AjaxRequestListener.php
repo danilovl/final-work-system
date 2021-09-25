@@ -29,7 +29,7 @@ class AjaxRequestListener
     {
     }
 
-    public function onKernelController(ControllerEvent $event)
+    public function onKernelController(ControllerEvent $event): void
     {
         if (!is_array($controllers = $event->getController())) {
             return;

@@ -26,7 +26,7 @@ use App\Service\{
 };
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    RedirectResponse
 };
 
 class WorkDeleteHandle
@@ -39,7 +39,7 @@ class WorkDeleteHandle
     ) {
     }
 
-    public function handle(Request $request, Work $work): Response
+    public function handle(Request $request, Work $work): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($work, 'work_delete')

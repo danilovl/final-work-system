@@ -55,7 +55,7 @@ class Conversation
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessage::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $messages = null;
+    private Collection $messages;
 
     #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'conversations')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
@@ -69,15 +69,15 @@ class Conversation
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessageStatus::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $statuses = null;
+    private Collection $statuses;
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationParticipant::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $participants = null;
+    private Collection $participants;
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $systemEvents = null;
+    private Collection $systemEvents;
 
     private ?User $recipient = null;
 
@@ -123,14 +123,14 @@ class Conversation
     }
 
     /**
-     * @return Collection|ConversationParticipant[]|null
+     * @return Collection|ConversationParticipant[]
      */
-    public function getParticipants(): ?Collection
+    public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    public function setParticipants(?Collection $participants): void
+    public function setParticipants(Collection $participants): void
     {
         $this->participants = $participants;
     }

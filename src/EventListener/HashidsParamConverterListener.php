@@ -65,16 +65,19 @@ class HashidsParamConverterListener extends DoctrineParamConverter
 
         $id = $hashid;
 
-        if (is_int($hashid) === false) {
+        if (!is_int($hashid)) {
             $decodeHashids = $this->hashids->decode($hashid);
+            $id = $decodeHashids[0];
 
             if (!is_array($decodeHashids) ||
                 !isset($decodeHashids[0]) ||
-                ($id = $decodeHashids[0]) === false || is_int($id) === false
+                $id === false ||
+                !is_int($id)
             ) {
                 if ($exception) {
                     throw new $exception;
                 }
+
                 throw new LogicException('Unable to guess hashid from the request information.');
             }
         }

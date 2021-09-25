@@ -12,21 +12,11 @@
 
 namespace App\Controller;
 
-use App\Exception\ConstantNotFoundException;
 use Doctrine\Persistence\ObjectRepository;
-use App\Constant\{
-    FlashTypeConstant,
-    AjaxJsonTypeConstant
-};
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Symfony\Component\HttpFoundation\{
-    Request,
-    Response,
-    JsonResponse
-};
+use Symfony\Component\HttpFoundation\Request;
 
 class BaseController extends AbstractController
 {
@@ -44,16 +34,6 @@ class BaseController extends AbstractController
             $limit ?? $this->getParam('pagination.default.limit'),
             $options
         );
-    }
-
-    protected function createDeleteForm($entity, string $route): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl($route, [
-                'id' => $this->hashIdEncode($entity->getId())
-            ]))
-            ->setMethod(Request::METHOD_DELETE)
-            ->getForm();
     }
 
     protected function trans(string $translation, array $option = [], string $domain = null): string
@@ -91,74 +71,6 @@ class BaseController extends AbstractController
         $this->get('app.entity_manager')->remove($entity);
     }
 
-    protected function createAjaxJson(
-        string $type,
-        ?array $extraData = null,
-        int $statusCode = Response::HTTP_OK
-    ): JsonResponse {
-        $data = match ($type) {
-            AjaxJsonTypeConstant::CREATE_SUCCESS => [
-                'valid' => true,
-                'notifyMessage' => [
-                    FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.create.success')
-                ]
-            ],
-            AjaxJsonTypeConstant::CREATE_FAILURE => [
-                'valid' => false,
-                'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->trans('app.flash.form.create.error'),
-                    FlashTypeConstant::WARNING => $this->trans('app.flash.form.create.warning')
-                ],
-            ],
-            AjaxJsonTypeConstant::SAVE_SUCCESS => [
-                'valid' => true,
-                'notifyMessage' => [
-                    FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.save.success'),
-                ]
-            ],
-            AjaxJsonTypeConstant::SAVE_FAILURE => [
-                'valid' => false,
-                'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->trans('app.flash.form.save.error'),
-                    FlashTypeConstant::WARNING => $this->trans('app.flash.form.save.warning')
-                ]
-            ],
-            AjaxJsonTypeConstant::DELETE_SUCCESS => [
-                'delete' => true,
-                'notifyMessage' => [
-                    FlashTypeConstant::SUCCESS => $this->trans('app.flash.form.delete.success')
-                ]
-            ],
-            AjaxJsonTypeConstant::DELETE_FAILURE => [
-                'delete' => false,
-                'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->trans('app.flash.form.delete.error'),
-                    FlashTypeConstant::WARNING => $this->trans('app.flash.form.delete.warning')
-                ]
-            ],
-            default => throw new ConstantNotFoundException('AjaxJson constant type not found'),
-        };
-
-        if (!empty($extraData)) {
-            $data = array_merge($data, $extraData);
-        }
-
-        return new JsonResponse($data, $statusCode);
-    }
-
-    protected function ajaxOrNormalFolder(Request $request, string $templateName): string
-    {
-        $file = basename($templateName);
-        $fileAjax = sprintf('%s%s', $this->getParam('template.ajax'), $file);
-        $templateNameAjax = str_replace($file, $fileAjax, $templateName);
-
-        if ($request->isXmlHttpRequest()) {
-            return $templateNameAjax;
-        }
-
-        return $templateName;
-    }
-
     protected function getUser(): ?User
     {
         return $this->get('app.user')->getUser();
@@ -174,7 +86,7 @@ class BaseController extends AbstractController
         return $this->get('app.entity_manager')->getRepository($entityName);
     }
 
-    protected function getParam(string $key)
+    protected function getParam(string $key): mixed
     {
         return $this->get('danilovl.parameter')->get($key);
     }

@@ -12,12 +12,12 @@
 
 namespace App\EventListener;
 
+use App\Service\UserService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Security;
 use UnexpectedValueException;
 use function Symfony\Component\String\u;
 
@@ -27,7 +27,7 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
 
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
-        private Security $security,
+        private UserService $userService,
         string $locales,
         private ?string $defaultLocale = null
     ) {
@@ -66,8 +66,10 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
         }
 
         $preferredLanguage = $request->getPreferredLanguage($this->locales);
-        if ($this->security->getUser() !== null && $this->security->getUser()->getLocale()) {
-            $preferredLanguage = $this->security->getUser()->getLocale();
+        $user = $this->userService->getUser();
+
+        if ($user !== null && $user->getLocale()) {
+            $preferredLanguage = $user->getLocale();
         }
 
         if ($preferredLanguage !== $this->defaultLocale) {

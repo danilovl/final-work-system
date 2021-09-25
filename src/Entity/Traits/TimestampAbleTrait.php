@@ -13,33 +13,26 @@
 namespace App\Entity\Traits;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\HasLifecycleCallbacks]
 trait TimestampAbleTrait
 {
-    /**
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
+    #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $createdAt = null;
 
-    /**
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
+    #[ORM\Column(name: 'updated_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $updatedAt = null;
 
-    /**
-     * @ORM\PrePersist()
-     */
+    #[ORM\PrePersist]
     public function timestampAblePrePersist(): void
     {
         $this->createdAt = new DateTime;
         $this->updatedAt = new DateTime;
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PreUpdate]
     public function timestampAblePreUpdate(): void
     {
         $this->updatedAt = new DateTime;

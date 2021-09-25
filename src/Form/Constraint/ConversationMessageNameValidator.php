@@ -16,12 +16,17 @@ use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
 };
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use App\Model\ConversationMessage\ConversationComposeMessageModel;
 
 class ConversationMessageNameValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
+        if (!$constraint instanceof ConversationMessageName) {
+            throw new UnexpectedTypeException($constraint, ConversationMessageName::class);
+        }
+
         $form = $this->context->getRoot();
         /** @var ConversationComposeMessageModel $data */
         $data = $form->getData();

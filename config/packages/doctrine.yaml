@@ -29,9 +29,6 @@ doctrine:
         query_cache_driver:
           type: service
           id: doctrine_cache.providers.redis_provider
-        metadata_cache_driver:
-          type: service
-          id: doctrine_cache.providers.redis_provider
 
         second_level_cache:
           enabled: true

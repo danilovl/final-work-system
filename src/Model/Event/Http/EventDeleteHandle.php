@@ -22,7 +22,7 @@ use App\Service\{
 };
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    RedirectResponse
 };
 
 class EventDeleteHandle
@@ -35,7 +35,7 @@ class EventDeleteHandle
     ) {
     }
 
-    public function handle(Request $request, Event $event): Response
+    public function handle(Request $request, Event $event): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($event, 'event_schedule_delete')

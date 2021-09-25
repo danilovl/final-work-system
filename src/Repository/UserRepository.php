@@ -49,7 +49,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function bySupervisor(
         User $user,
         string $type,
-        $workStatus = null
+        iterable|WorkStatus $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
             ->addSelect('work');

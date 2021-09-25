@@ -50,7 +50,7 @@ class MediaType
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Media::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $medias = null;
+    private Collection $medias;
 
     public function __construct()
     {

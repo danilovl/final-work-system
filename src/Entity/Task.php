@@ -67,7 +67,7 @@ class Task
 
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $systemEvents;
+    private Collection $systemEvents;
 
     #[ORM\Column(name: 'deadline', type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $deadline = null;

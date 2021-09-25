@@ -12,14 +12,13 @@
 
 namespace App\Tests\Form\Constraint;
 
+use App\Service\TranslatorService;
 use DateTime;
 use App\Form\Constraint\{
     FirstWeekDay,
     FirstWeekDayValidator
 };
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
@@ -31,9 +30,9 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         return new FirstWeekDayValidator($this->getTransMock());
     }
 
-    private function getTransMock(): MockObject
+    private function getTransMock(): TranslatorService
     {
-        $mockObject = $this->createMock(TranslatorInterface::class);
+        $mockObject = $this->createMock(TranslatorService::class);
         $mockObject->expects($this->any())
             ->method('trans')
             ->willReturn(self::MESSAGE);

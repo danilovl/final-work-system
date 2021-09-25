@@ -60,10 +60,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     private ?string $plainPassword = null;
 
-    #[ORM\Column(name: 'last_login', type: Types::DATE_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'last_login', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $lastLogin = null;
 
-    #[ORM\Column(name: 'last_requested_at', type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(name: 'last_requested_at', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $lastRequestedAt = null;
 
     #[ORM\Column(name: 'confirmation_token', type: Types::STRING, nullable: true)]
@@ -125,7 +125,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'group_id', referencedColumnName: 'id')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $groups;
+    private Collection $groups;
 
     #[ORM\OneToOne(targetEntity: Media::class, cascade: ['persist', 'remove'], fetch: "EAGER")]
     #[ORM\JoinColumn(name: 'profile_image_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
@@ -149,133 +149,133 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Media::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $mediaOwner;
+    private Collection $mediaOwner;
 
     /**
      * @var Collection|MediaCategory[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: MediaCategory::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $mediaCategoriesOwner;
+    private Collection $mediaCategoriesOwner;
 
     /**
      * @var Collection|Work[]
      */
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Work::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $authorWorks;
+    private Collection $authorWorks;
 
     /**
      * @var Collection|Work[]
      */
     #[ORM\OneToMany(mappedBy: 'supervisor', targetEntity: Work::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $supervisorWorks;
+    private Collection $supervisorWorks;
 
     /**
      * @var Collection|Work[]
      */
     #[ORM\OneToMany(mappedBy: 'opponent', targetEntity: Work::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $opponentWorks;
+    private Collection $opponentWorks;
 
     /**
      * @var Collection|Work[]
      */
     #[ORM\OneToMany(mappedBy: 'consultant', targetEntity: Work::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $consultantWorks;
+    private Collection $consultantWorks;
 
     /**
      * @var Collection|Task[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Task::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $tasksOwner;
+    private Collection $tasksOwner;
 
     /**
      * @var Collection|WorkCategory[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: WorkCategory::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $workCategoriesOwner;
+    private Collection $workCategoriesOwner;
 
     /**
      * @var Collection|EventAddress[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: EventAddress::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $eventAddressOwner;
+    private Collection $eventAddressOwner;
 
     /**
      * @var Collection|Event[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Event::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $eventsOwner;
+    private Collection $eventsOwner;
 
     /**
      * @var Collection|EventParticipant[]
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: EventParticipant::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $eventsParticipant;
+    private Collection $eventsParticipant;
 
     /**
      * @var Collection|Conversation[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Conversation::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $conversationsOwner;
+    private Collection $conversationsOwner;
 
     /**
      * @var Collection|ConversationParticipant[]
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConversationParticipant::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $conversationsParticipant;
+    private Collection $conversationsParticipant;
 
     /**
      * @var Collection|ConversationMessage[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: ConversationMessage::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $conversationMessages;
+    private Collection $conversationMessages;
 
     /**
      * @var Collection|ConversationMessageStatus[]
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConversationMessageStatus::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $conversationMessageStatus;
+    private Collection $conversationMessageStatus;
 
     /**
      * @var Collection|Comment[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $comments;
+    private Collection $comments;
 
     /**
      * @var Collection|EventSchedule[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: EventSchedule::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $eventsSchedule;
+    private Collection $eventsSchedule;
 
     /**
      * @var Collection|SystemEvent[]
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: SystemEvent::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $systemEventsOwner;
+    private Collection $systemEventsOwner;
 
     /**
      * @var Collection|SystemEventRecipient[]
      */
     #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: SystemEventRecipient::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Collection $systemEventsRecipient;
+    private Collection $systemEventsRecipient;
 
     public function __construct()
     {
@@ -366,7 +366,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->salt = $salt;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -692,7 +692,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->groups = $groups;
     }
 
-    public function addGroups(Group $group)
+    public function addGroups(Group $group): void
     {
         $this->groups->add($group);
     }

@@ -65,9 +65,12 @@ class MediaUploadListener
         $mimeType = $uploadMedia->getMimeType();
         $mediaSize = $uploadMedia->getSize();
 
-        $em = $eventArgs->getEntityManager();
-        $mediaMimeType = $em->getRepository(MediaMimeType::class)->findOneBy(['name' => $mimeType]);
-        if ($mediaMimeType === null || empty($mediaMimeType)) {
+        /** @var MediaMimeType|null $mediaMimeType */
+        $mediaMimeType = $eventArgs->getEntityManager()
+            ->getRepository(MediaMimeType::class)
+            ->findOneBy(['name' => $mimeType]);
+
+        if ($mediaMimeType === null) {
             throw new RuntimeException("MediaMimeType doesn't exist");
         }
 

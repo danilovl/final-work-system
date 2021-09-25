@@ -27,7 +27,7 @@ use App\Service\{
 };
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    JsonResponse
 };
 
 class VersionEditHandle
@@ -42,7 +42,7 @@ class VersionEditHandle
     ) {
     }
 
-    public function handle(Request $request, Media $media): Response
+    public function handle(Request $request, Media $media): JsonResponse
     {
         $mediaModel = MediaModel::fromMedia($media);
         $form = $this->formFactory

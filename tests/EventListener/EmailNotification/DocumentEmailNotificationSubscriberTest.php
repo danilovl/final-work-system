@@ -26,7 +26,7 @@ class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubsc
         $this->eventSubscriber = new $this->classSubscriber(
             $kernel->getContainer()->get('app.facade.user'),
             $kernel->getContainer()->get('twig'),
-            $kernel->getContainer()->get('translator'),
+            $kernel->getContainer()->get('app.translator'),
             $kernel->getContainer()->get('app.factory.email_notification_queue'),
             $kernel->getContainer()->get('danilovl.parameter'),
             $kernel->getContainer()->get('app.user_work'),

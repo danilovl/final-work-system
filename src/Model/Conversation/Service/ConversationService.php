@@ -34,17 +34,14 @@ class ConversationService
         $workConversations = $work->getConversations();
 
         $conversationUserArray = [$userOne->getId(), $userTwo->getId()];
-        if ($workConversations) {
-            /** @var Conversation $workConversation */
-            foreach ($workConversations as $workConversation) {
-                $isCompare = FunctionHelper::compareSimpleTwoArray(
-                    ConversationHelper::getParticipantIds($workConversation),
-                    $conversationUserArray
-                );
+        foreach ($workConversations as $workConversation) {
+            $isCompare = FunctionHelper::compareSimpleTwoArray(
+                ConversationHelper::getParticipantIds($workConversation),
+                $conversationUserArray
+            );
 
-                if ($isCompare) {
-                    return $workConversation;
-                }
+            if ($isCompare) {
+                return $workConversation;
             }
         }
 
