@@ -60,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     private ?string $plainPassword = null;
 
-    #[ORM\Column(name: 'last_login', type: Types::DATETIME_MUTABLE, nullable: false)]
+    #[ORM\Column(name: 'last_login', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $lastLogin = null;
 
     #[ORM\Column(name: 'last_requested_at', type: Types::DATETIME_MUTABLE, nullable: true)]

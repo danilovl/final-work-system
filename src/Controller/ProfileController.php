@@ -42,6 +42,6 @@ class ProfileController extends BaseController
 
     public function changePassword(Request $request): Response
     {
-        return $this->get('app.http_handle.profile.change_image')->handle($request);
+        return $this->get('app.http_handle.profile.change_password')->handle($request);
     }
 }

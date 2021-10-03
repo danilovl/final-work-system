@@ -65,11 +65,12 @@ final class Version20200627193807 extends AbstractMigration
             (16, 'event', 'EVENT_COMMENT_CREATE', NULL, 'EVENT_COMMENT_CREATE', NOW(), NULL),
             (17, 'event', 'EVENT_COMMENT_EDIT', NULL, 'EVENT_COMMENT_EDIT', NOW(), NULL),
             (18, 'message', 'MESSAGE_CREATE', NULL, 'MESSAGE_CREATE', NOW(), NULL);
+            (19, 'tasks', 'TASK_REMIND_DEADLINE', NULL, 'TASK_REMIND_DEADLINE', NOW(), NULL);
         ");
 
         $this->addSql("INSERT INTO `work_status` (`id`, `color`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
             (1, '#42f442', 'Active', NULL, 'ACTIVE', NOW(), NULL),
-            (2, '#ef0202', 'Archiv', NULL, 'ARCHIVE', NOW(), NULL),
+            (2, '#ef0202', 'Archive', NULL, 'ARCHIVE', NOW(), NULL),
             (3, '#4f5dff', 'Helpers', NULL, 'AUXILIARY', '2017-09-16 22:16:34', NULL),
             (4, '#fbff49', 'Preliminary', NULL, 'PRELIMINARY', '2017-09-16 22:16:35', NULL),
             (5, '#c4c5d1', 'Uncategorized', NULL, 'UNCLASSIFIED', '2017-09-16 22:16:35', NULL);
