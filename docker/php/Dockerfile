@@ -66,4 +66,4 @@ COPY ./ /var/www/html/app
 WORKDIR /var/www/html/app
 
 RUN mkdir -m 777 /var/www/html/app/var
-RUN chmod 777 /var/www/html/app/docker/docker-install-composer.sh
+RUN chmod 777 /var/www/html/app/bin/composer-first-install.sh
