@@ -20,7 +20,7 @@ jobs:
         run: |
           docker-compose exec -T php sh bin/composer-first-install.sh
           docker-compose exec -T php php bin/console doctrine:database:import docker/mysql/data/dump.sql
-          docker-compose exec -T php sh bin/npm-first-install.sh
+          docker-compose exec -T node sh bin/npm-first-install.sh
 
       - name: Run tests
         run: docker-compose exec -T node npm run cypress:run
