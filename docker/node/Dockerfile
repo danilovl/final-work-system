@@ -1,15 +1,22 @@
-FROM node:12
+FROM node:14.17.0
 
-# Update NPM
-RUN npm install -g npm
+RUN apt-get update \
+  && apt-get install -y \
+    libgtk2.0-0 \
+    libgtk-3-0 \
+    libgbm-dev \
+    libnotify-dev \
+    libgconf-2-4 \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libxtst6 \
+    xauth \
+    xvfb
 
-# Set USER
-RUN groupmod -g 999 node && usermod -u 999 -g 999 node
-RUN useradd -ms /bin/bash project
-USER project
-
+COPY ./ /var/www/html/app
 WORKDIR /var/www/html/app
 
+RUN chmod 777 /var/www/html/app/docker/docker-install-npm.sh
+
 CMD tail -f /dev/null
-#CMD [ "npm", "install" ]
-#CMD [ "npm", "run dev" ]

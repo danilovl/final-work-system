@@ -6,7 +6,20 @@ describe('Edit task test', () => {
     })
 
     it('Edit task success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/detail/${Cypress.env('workData').hashId}`)
+        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+
+        cy
+            .get('.work-group-list')
+            .first()
+            .click()
+
+        cy
+            .get('.btn.btn-primary.btn-xs')
+            .first()
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
 
         cy
             .get('.btn.btn-warning.btn-xs')
@@ -41,7 +54,20 @@ describe('Edit task test', () => {
     })
 
     it('Edit success task', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/detail/${Cypress.env('workData').hashId}`)
+        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+
+        cy
+            .get('.work-group-list')
+            .first()
+            .click()
+
+        cy
+            .get('.btn.btn-primary.btn-xs')
+            .first()
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
 
         cy
             .get('.btn.btn-warning.btn-xs')

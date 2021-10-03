@@ -13,13 +13,7 @@
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="7.5" />
-        <env name="DATABASE_URL" value="mysql://root:@127.0.0.1:3306/final_work_system_test?serverVersion=mariadb-10.4.11" />
-        <env name="MAILER_DSN" value="smtp://user:pass@localhost:25" />
-        <env name="REDIS_URL" value="redis://localhost:6379" />
-        <env name="REDIS_HOST" value="127.0.0.1" />
-        <env name="REDIS_PORT" value="6379" />
-        <env name="GOOGLE_ANALYTICS_CODE" value="UA" />
-        <env name="GOOGLE_MAPS_KEY" value="UA" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
     </php>
 
     <testsuites>

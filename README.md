@@ -3,7 +3,7 @@ FinalWork Web Application
 
 Thesis management system based on Symfony Framework 5.3 
 
-![Alt text](/gif/demo.gif?raw=true "Project example")
+![Alt text](/git/readme/demo.gif?raw=true "Project example")
 
 Requirements
 ------------
@@ -15,6 +15,7 @@ Requirements
   * Elasticsearch server
   * Composer
   * NPM
+  * or you can use docker
 
 Features
 ------------
@@ -57,129 +58,88 @@ Project uses extra bundles
 * [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides simple mechanism control permission for class or his method.
 * [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project.
 
-Installation
+Configuration environment
 ------------
 
-Configure the database connection and SMTP in the file:
+You can change configuration in the file:
 
 ```text
-file: .env 
+file: .env or .env.local
 ```
+Configure the database connection, SMTP and other connection:
+
 ``` env
-DATABASE_URL=mysql://username:password@host:port/final_work_system?serverVersion=5.7
+DATABASE_URL=mysql://root:@mysql:3306/final_work_system
+RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+ELASTICSEARCH_URL=http://elasticsearch:9200/
 MAILER_DSN=smtp://user:pass@localhost:25
-REDIS_HOST='127.0.0.1'
+REDIS_HOST=redis
 REDIS_PORT=6379
 ``````
 
-Configure the google api keys:
+Google api keys:
 
-``` text
-file: .env 
-```
 ``` env
-GOOGLE_ANALYTICS_CODE='GOOGLE_ANALYTICS_CODE'
-GOOGLE_MAPS_KEY='GOOGLE_MAPS_KEY'
+GOOGLE_ANALYTICS_CODE=GOOGLE_ANALYTICS_CODE
+GOOGLE_MAPS_KEY=GOOGLE_MAPS_KEY
 ```
 
-Enable\Disable email notifications:
+Email notifications:
 
-```text
-file: .env 
-```
 ``` env
-EMAIL_NOTIFICATION_SENDER='test@test.com'
+EMAIL_NOTIFICATION_SENDER=test@test.com
 EMAIL_NOTIFICATION_ENABLE_SEND=true
+EMAIL_NOTIFICATION_ENABLE_RABBIT_MQ=true
 EMAIL_NOTIFICATION_ENABLE_ADD_TO_QUEUE=true
 ```
 
-Install all the necessary dependencies by Composer:
+Installation dependencies
+------------
+
+Install all the necessary npm dependencies:
 
 ```bash
-$ composer install
+$ bin/npm-first-install.sh
 ```
-
-Install all the necessary css and js dependencies by NPM:
+Install all the necessary php dependencies:
 
 ```bash
-$ npm install
-```
- 
-Creating the database:
-
-```bash
-$ bin/console doctrine:database:create --if-not-exists
+$ bin/composer-first-install.sh
 ```
 
-Creating the database tables/schema:
+Other available commands
+------------
 
-```bash
-$ bin/console doctrine:schema:update --force
-```
-
-Import default data to database:
-
-```bash
-$ bin/console doctrine:migrations:sync-metadata-storage
-$ bin/console doctrine:migrations:migrate
-```
-
-Generating assets:
-
-```bash
-$ npm run build
-$ bin/console assets:install public
-```
-
-Create user:
+Create user
 
 ```bash
 $ bin/console app:user-add
 ```
-
-Clear cache:
+or you can import test data dump.sql
 
 ```bash
-$ bin/console cache:clear
+$ bin/console doctrine:database:import docker/mysql/data/dump.sql
 ```
 
 Docker
 ------------
 
-Change Redis server to `redis` in `config\project\services\redis.yaml`:
-
-``` yaml
-   ....
-   arguments:
-    - 'redis'
-```
-
-Change DATABASE_URL in `.envl` for docker:
-
-``` env
-DATABASE_URL=mysql://final_work_system:password@mariadb:3306/final_work_system
-```
-
 Run docker:
 
 ```bash
-$ docker-compose up -d
+docker-compose -f docker-compose.yml up -d
 ```
 
-Run commands under docker CLI:
+Run command under node image CLI or you can docker-compose:
 
-``` bash
-$ composer install
-$ npm install
-$ bin/console doctrine:database:create --if-not-exists
-$ bin/console doctrine:schema:update --force
-$ bin/console doctrine:migrations:sync-metadata-storage
-$ bin/console doctrine:migrations:migrate
-$ npm run build
-$ bin/console assets:install public
-$ bin/console app:user-add
-$ bin/console cache:clear
+```bash
+docker-compose exec -T node sh bin/npm-first-install.sh
+```
 
+Run command under php image CLI or you can docker-compose:
+
+```bash
+docker-compose exec -T php sh bin/composer-first-install.sh
 ```
 
 Now you can access the application via [localhost:9090](localhost:9090).

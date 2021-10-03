@@ -29,3 +29,5 @@ yarn-error.log
 /public/build/
 /public/bundles/
 /public/upload/
+/cypress/videos/
+/cypress/screenshots/

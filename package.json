@@ -2,9 +2,9 @@
   "devDependencies": {
     "@symfony/webpack-encore": "^0.30.2",
     "bower": "^1.8.8",
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.27.5",
     "core-js": "^3.0.0",
-    "cypress": "^5.1.0",
+    "cypress": "^5.6.0",
     "regenerator-runtime": "^0.13.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
@@ -17,7 +17,8 @@
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production --progress",
-    "cypress:open": "cypress open"
+    "cypress:run": "cypress run --config video=false",
+    "cypress:open": "cypress open --config video=false"
   },
   "dependencies": {
     "animate.css": "^3.5.1",
@@ -47,8 +48,8 @@
     "switchery-latest": "^0.8.2",
     "symfony-collection": "ninsuo/symfony-collection",
     "tinymce": "^4.7.4",
+    "uglify-js": ">=2.6.0",
     "webpack-concat-plugin": "^3.0.0",
-    "webpack-merge-and-include-globally": "^2.1.24",
-    "uglify-js": ">=2.6.0"
+    "webpack-merge-and-include-globally": "^2.1.24"
   }
 }

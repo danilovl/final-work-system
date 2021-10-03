@@ -5,7 +5,7 @@ const conversationData = {
     },
     'composeMessage': {
         'id': '#conversation_compose_message_conversation',
-        'text': 'java'
+        'text': 'work'
     },
     'bodyMessage': {
         'id': '#conversation_compose_message_content_ifr',

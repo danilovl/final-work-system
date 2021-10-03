@@ -1,0 +1,19 @@
+pipelines:
+  default:
+    - step:
+        name: phpunit
+        image: docker/compose
+        services:
+          - docker
+        caches:
+          - docker
+        script:
+          - docker network create dockernet
+          - docker-compose -f docker-compose-bitbucket-cache.yml up -d
+          - docker-compose exec -T php sh bin/composer-first-install.sh
+          - docker-compose exec -T php composer phpunit
+
+definitions:
+  services:
+    docker:
+      memory: 1800

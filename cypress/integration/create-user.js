@@ -5,12 +5,12 @@ describe('Create user test', () => {
 
     failedUserData.email = {
         'id': '#user_email',
-        'text': 'dsr3z@gmail.com'
+        'text': Math.random().toString(36).substr(2, 10) + '@gmail.com'
     }
 
     failedUserData.username = {
         'id': '#user_username',
-        'text': 'lie8ulw9'
+        'text': Math.random().toString(36).substr(2, 10)
     }
 
     beforeEach(() => {

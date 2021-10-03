@@ -1,4 +1,5 @@
-import { successUserData } from '../fixtures/user';
+import {successUserData} from '../fixtures/user';
+
 delete successUserData.email;
 delete successUserData.username;
 
@@ -8,7 +9,20 @@ describe('Edit work user test', () => {
     })
 
     it('Edit work user success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/detail/${Cypress.env('workData').hashId}`)
+        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+
+        cy
+            .get('.work-group-list')
+            .first()
+            .click()
+
+        cy
+            .get('.btn.btn-primary.btn-xs')
+            .first()
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
 
         cy
             .get('#toggle-admin-panel')
@@ -35,7 +49,31 @@ describe('Edit work user test', () => {
     })
 
     it('Edit work user success', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/${Cypress.env('workData').hashId}/edit/author`)
+        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+
+        cy
+            .get('.work-group-list')
+            .first()
+            .click()
+
+        cy
+            .get('.btn.btn-primary.btn-xs')
+            .first()
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
+
+        cy
+            .get('#work-open-admin-panel')
+            .click()
+
+        cy
+            .get('#work-author-edit')
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
 
         for (let prop in successUserData) {
             cy

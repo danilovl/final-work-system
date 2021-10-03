@@ -1,21 +1,31 @@
 {
+  "testFiles": [
+    "create-user.js",
+    "create-user-group.js",
+    "create-work.js",
+    "create-task.js",
+    "fa-down.js",
+    "create-conversation.js",
+    "edit-task.js",
+    "edit-work.js",
+    "edit-work-author.js",
+    "delete-task.js",
+    "delete-work.js"
+  ],
   "env": {
-    "domain": "http://work-system.local",
-    "workData": {
-      "hashId": "Ynvr2lgdAJ"
-    },
+    "domain": "http://nginx:80",
     "loginData": {
       "failed": {
         "username": "admin",
-        "password": "admin"
+        "password": "adminadmin"
       },
       "student": {
         "username": "student",
-        "password": "student"
+        "password": "studentstudent"
       },
       "supervisor": {
         "username": "supervisor",
-        "password": "supervisor"
+        "password": "supervisorsupervisor"
       }
     }
   }

@@ -21,7 +21,11 @@ describe('Create conversation test', () => {
             .type(conversationData.composeMessage.text + '{enter}')
 
         cy
-            .get('.select2-search__field')
+            .get('input[class="select2-search__field"]')
+            .type('{enter}')
+
+        cy
+            .get(conversationData.bodyMessage.id)
             .click()
 
         cy.window().then((win) => {
@@ -32,13 +36,9 @@ describe('Create conversation test', () => {
         })
 
         cy
-            .get(conversationData.bodyMessage.id)
-            .click()
-
-        cy
             .get('#btn-conversation-create')
             .click()
 
-        cy.url().should('include', 'conversation/list')
+        cy.url().should('include', '/conversation/list')
     })
 })

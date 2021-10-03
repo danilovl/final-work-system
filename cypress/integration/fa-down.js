@@ -8,7 +8,7 @@ describe('Fa down test', () => {
 
         cy
             .get('.fa-chevron-down')
-            .each(($el, index, list) => {
+            .each(($el) => {
                 cy
                     .wrap($el)
                     .click()

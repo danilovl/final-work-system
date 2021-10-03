@@ -16,7 +16,8 @@ services:
     calls:
       - method: connect
         arguments:
-          - '127.0.0.1'
+          - '%env(REDIS_HOSTNAME)%'
+          - '%env(REDIS_PORT)%'
       - method: select
         arguments:
           - 13 # change database by index

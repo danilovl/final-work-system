@@ -6,7 +6,20 @@ describe('Create task test', () => {
     })
 
     it('Create task success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/detail/${Cypress.env('workData').hashId}`)
+        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+
+        cy
+            .get('.work-group-list')
+            .first()
+            .click()
+
+        cy
+            .get('.btn.btn-primary.btn-xs')
+            .first()
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
 
         cy
             .get('#task-create')
@@ -38,7 +51,27 @@ describe('Create task test', () => {
     })
 
     it('Create success task', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/${Cypress.env('workData').hashId}/task/create`)
+        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+
+        cy
+            .get('.work-group-list')
+            .first()
+            .click()
+
+        cy
+            .get('.btn.btn-primary.btn-xs')
+            .first()
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
+
+        cy
+            .get('#task-create')
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(Cypress.env('domain') + href)
+            })
 
         cy
             .get(taskData.name.id)

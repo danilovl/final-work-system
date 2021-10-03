@@ -25,7 +25,8 @@ RUN apt-get update \
      libxslt1-dev \
      libzip-dev \
      libonig-dev \
-  &&  ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h
+  &&  ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+  &&  pecl install redis
 
 RUN docker-php-ext-install mysqli \
     && docker-php-ext-install pdo_mysql \
@@ -47,7 +48,9 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install tidy \
     && docker-php-ext-install xsl \
     && docker-php-ext-install opcache \
-    && docker-php-source delete
+    && docker-php-ext-install gd \
+    && docker-php-source delete \
+    && docker-php-ext-enable redis
 
 RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
@@ -55,7 +58,12 @@ RUN rm /etc/localtime \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN useradd -ms /bin/bash project
-USER project
+COPY ./docker/php/conf/php.ini /etc/php/conf.d/
+COPY ./docker/php/conf/php.ini /etc/php/cli/conf.d/
+COPY ./docker/php/conf/php.ini /usr/local/etc/php
+COPY ./ /var/www/html/app
 
 WORKDIR /var/www/html/app
+
+RUN mkdir -m 777 /var/www/html/app/var
+RUN chmod 777 /var/www/html/app/docker/docker-install-composer.sh
