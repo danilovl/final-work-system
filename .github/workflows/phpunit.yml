@@ -1,6 +1,8 @@
 name: Phpunit
 
-on: push
+on:
+  - push
+  - workflow_dispatch
 
 jobs:
   docker:
