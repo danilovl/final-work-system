@@ -1,0 +1,27 @@
+name: Phpunit
+
+on: push
+
+jobs:
+  docker:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Start containers
+        run: |
+          docker network create dockernet
+          docker-compose -f docker-compose.yml up -d
+
+      - name: Install dependencies
+        run: docker-compose exec -T php sh bin/composer-first-install.sh
+
+      - name: Run tests
+        run: docker-compose exec -T php composer phpunit
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f docker-compose.yml down
