@@ -4,7 +4,6 @@
     "create-user-group.js",
     "create-work.js",
     "create-task.js",
-    "fa-down.js",
     "create-conversation.js",
     "edit-task.js",
     "edit-work.js",
