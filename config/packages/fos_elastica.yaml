@@ -6,7 +6,7 @@ fos_elastica:
   indexes:
     work:
       client: default
-      index_name: post_%kernel.environment%
+      index_name: post_default
       properties:
         id:
           type: 'integer'

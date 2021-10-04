@@ -1,8 +1,8 @@
 name: Cypress
 
 on:
- - push
- - workflow_dispatch
+  - push
+  - workflow_dispatch
 
 jobs:
   docker:
@@ -23,6 +23,9 @@ jobs:
           docker-compose exec -T php sh bin/composer-first-install.sh
           docker-compose exec -T php php bin/console doctrine:database:import docker/mysql/data/dump.sql
           docker-compose exec -T node sh bin/npm-first-install.sh
+
+      - name: Elastica populate(elastica network bug)
+        run: docker-compose exec -T php php bin/console fos:elastica:populate
 
       - name: Run tests
         run: docker-compose exec -T node npm run cypress:run
