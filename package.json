@@ -17,7 +17,7 @@
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production --progress",
-    "cypress:run": "cypress run --config video=false",
+    "cypress:run": "cypress run --browser chromium --config video=false",
     "cypress:open": "cypress open --config video=false"
   },
   "dependencies": {

@@ -7,6 +7,7 @@ describe('Create conversation test', () => {
 
     it('Create conversation success', () => {
         cy.visit(Cypress.env('domain') + '/en/conversation/create')
+        cy.wait(2000)
 
         cy
             .get(conversationData.messageName.id)
@@ -28,9 +29,12 @@ describe('Create conversation test', () => {
             .get(conversationData.bodyMessage.id)
             .click()
 
-        cy
-            .get('#conversation_compose_message_content')
-            .type(`<strong>${conversationData.bodyMessage.text}</strong>`, { force: true })
+        cy.window().then((win) => {
+            win
+                .tinymce
+                .activeEditor
+                .setContent(`<strong>${conversationData.bodyMessage.text}</strong>`)
+        })
 
         cy
             .get('#btn-conversation-create')
