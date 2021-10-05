@@ -12,7 +12,8 @@ RUN apt-get update \
     libasound2 \
     libxtst6 \
     xauth \
-    xvfb
+    xvfb \
+    chromium
 
 COPY ./ /var/www/html/app
 WORKDIR /var/www/html/app
