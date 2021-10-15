@@ -34,7 +34,7 @@ services:
       - "MYSQL_PASSWORD="
   php:
     build:
-      context: git/bitbucket
+      context: ./
       dockerfile: ./docker/php/Dockerfile
     expose:
       - '9000'
