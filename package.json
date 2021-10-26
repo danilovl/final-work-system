@@ -32,7 +32,7 @@
     "icheck": "^1.0.2",
     "inputmask": "^5.0.3",
     "jquery": "^3.5.1",
-    "jquery-ui": "^1.12.1",
+    "jquery-ui": "^1.13.0",
     "jquery-ui-dist": "^1.12.1",
     "jszip": "Stuk/jszip",
     "malihu-custom-scrollbar-plugin": "^3.1.3",
