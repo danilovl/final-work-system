@@ -22,7 +22,7 @@ trait CreateUpdateAbleTrait
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?DateTime $createdAt = null;
 
-    #[ORM\Column(name: 'update_at', type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(name: 'updated_at', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $updatedAt = null;
 
     #[ORM\PrePersist]

@@ -9,17 +9,17 @@ final class Version20200627193807 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->addSql("INSERT INTO `conversation_type` (`id`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `conversation_type` (`id`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
             (1, 'WORK', NULL, 'WORK', NOW(), NULL),
             (2, 'GROUP', NULL, 'GROUP', NOW(), NULL);
         ");
 
-        $this->addSql("INSERT INTO `event_type` (`id`, `color`, `registrable`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `event_type` (`id`, `color`, `registrable`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
             (1, '#3b91ad', 1, 'Consultation', NULL, 'CONSULTATION', NOW(), NULL),
             (2, '#cab31c', 0, 'Personal calendar', NULL, 'PERSONAL', NOW(), NULL);
        ");
 
-        $this->addSql("INSERT INTO `media_mime_type` (`id`, `name`, `extension`, `active`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `media_mime_type` (`id`, `name`, `extension`, `active`, `created_at`, `updated_at`) VALUES 
             (1, 'image/jpeg', 'jpg', 1, NOW(), NULL),
             (2, 'image/png', 'png', 1, NOW(), NULL),
             (3, 'application/msword', 'doc', 1, NOW(), NULL),
@@ -39,14 +39,14 @@ final class Version20200627193807 extends AbstractMigration
             (17, 'text/x-java-properties', 'properties', 1, NOW(), NULL);
         ");
 
-        $this->addSql("INSERT INTO `media_type` (`id`, `folder`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `media_type` (`id`, `folder`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
             (1, 'version', 'WORK_VERSION', NULL, 'WORK_VERSION', NOW(), NULL),
             (2, 'document', 'INFORMATION_MATERIAL', NULL, 'INFORMATION_MATERIAL', NOW(), NULL),
             (3, 'profile_image', 'USER_PROFILE_IMAGE', NULL, 'USER_PROFILE_IMAGE', NOW(), NULL),
             (4, 'article', 'ARTICLE', NULL, 'ARTICLE', NOW(), NULL);
         ");
 
-        $this->addSql("INSERT INTO `system_event_type` (`id`, `group`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `system_event_type` (`id`, `group`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
             (1, 'work', 'WORK_CREATE', NULL, 'WORK_CREATE', NOW(), NULL),
             (2, 'work', 'WORK_EDIT', NULL, 'WORK_EDIT', NOW(), NULL),
             (3, 'user', 'USER_EDIT', NULL, 'USER_EDIT', NOW(), NULL),
@@ -68,7 +68,7 @@ final class Version20200627193807 extends AbstractMigration
             (19, 'tasks', 'TASK_REMIND_DEADLINE', NULL, 'TASK_REMIND_DEADLINE', NOW(), NULL);
         ");
 
-        $this->addSql("INSERT INTO `work_status` (`id`, `color`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `work_status` (`id`, `color`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
             (1, '#42f442', 'Active', NULL, 'ACTIVE', NOW(), NULL),
             (2, '#ef0202', 'Archive', NULL, 'ARCHIVE', NOW(), NULL),
             (3, '#4f5dff', 'Helpers', NULL, 'AUXILIARY', '2017-09-16 22:16:34', NULL),
@@ -76,13 +76,13 @@ final class Version20200627193807 extends AbstractMigration
             (5, '#c4c5d1', 'Uncategorized', NULL, 'UNCLASSIFIED', '2017-09-16 22:16:35', NULL);
         ");
 
-        $this->addSql("INSERT INTO `work_type` (`id`, `shortcut`, `name`, `description`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `work_type` (`id`, `shortcut`, `name`, `description`, `created_at`, `updated_at`) VALUES 
                 (1, 'DT', 'Diploma thesis', NULL, NOW(), NULL),
                 (2, 'BT', 'Bachelor thesis', NULL, NOW(), NULL),
                 (3, 'Other', 'Other', NULL, NOW(), NULL);
         ");
 
-        $this->addSql("INSERT INTO `conversation_message_status_type` (`id`, `name`, `description`, `constant`, `created_at`, `update_at`) VALUES 
+        $this->addSql("INSERT INTO `conversation_message_status_type` (`id`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
                 (1, 'read', NULL, 'READ', NOW(), NULL),
                 (2, 'unread', NULL, 'UNREAD', NOW(), NULL);
         ");
