@@ -1,7 +1,7 @@
 document_category_create:
   path: /create
   defaults:
-    _controller: App\Controller\DocumentCategoryController:create
+    _controller: App\Controller\DocumentCategoryController::create
     _seo:
       title: 'app.page.information_materials_category_create'
   methods: [GET, POST]
@@ -9,7 +9,7 @@ document_category_create:
 document_category_create_ajax:
   path: /create/ajax
   defaults:
-    _controller: App\Controller\Ajax\DocumentCategoryController:create
+    _controller: App\Controller\Ajax\DocumentCategoryController::create
   methods: [POST]
 
 document_category_edit:
@@ -17,7 +17,7 @@ document_category_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\DocumentCategoryController:edit
+    _controller: App\Controller\DocumentCategoryController::edit
     _seo:
       title: 'app.page.information_materials_category_edit'
   methods: [GET, POST]
@@ -27,13 +27,13 @@ document_category_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\DocumentCategoryController:edit
+    _controller: App\Controller\Ajax\DocumentCategoryController::edit
   methods: [POST]
 
 document_category_list:
   path: /list
   defaults:
-    _controller: App\Controller\DocumentCategoryController:list
+    _controller: App\Controller\DocumentCategoryController::list
     _seo:
       title: 'app.page.information_materials_category_list'
   methods: [GET, POST]
@@ -43,7 +43,7 @@ document_category_delete:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\DocumentCategoryController:delete
+    _controller: App\Controller\DocumentCategoryController::delete
   methods: [POST, DELETE]
 
 document_category_delete_ajax:
@@ -51,5 +51,5 @@ document_category_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\DocumentCategoryController:delete
+    _controller: App\Controller\Ajax\DocumentCategoryController::delete
   methods: [POST, DELETE]

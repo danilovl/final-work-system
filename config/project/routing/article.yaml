@@ -1,7 +1,7 @@
 article_category_list:
   path: /category/list
   defaults:
-    _controller: App\Controller\ArticleCategoryController:list
+    _controller: App\Controller\ArticleCategoryController::list
     _seo:
       title: 'app.page.article_category_list'
   methods: [GET, POST]
@@ -11,7 +11,7 @@ article_list:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\ArticleCategoryController:articleList
+    _controller: App\Controller\ArticleCategoryController::articleList
   methods: [GET, POST]
 
 article_detail:
@@ -20,5 +20,5 @@ article_detail:
     id_article: '%hashid%'
     id_category: '%hashid%'
   defaults:
-    _controller: App\Controller\ArticleController:detail
+    _controller: App\Controller\ArticleController::detail
   methods: [GET, POST]

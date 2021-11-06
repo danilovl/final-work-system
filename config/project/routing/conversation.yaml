@@ -1,7 +1,7 @@
 conversation_list:
   path: /list
   defaults:
-    _controller: App\Controller\ConversationController:list
+    _controller: App\Controller\ConversationController::list
     _seo:
       title: 'app.page.conversation_list'
   methods: [GET, POST]
@@ -11,13 +11,13 @@ conversation_detail:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\ConversationController:detail
+    _controller: App\Controller\ConversationController::detail
   methods: [GET, POST]
 
 conversation_create:
   path: /create
   defaults:
-    _controller: App\Controller\ConversationController:create
+    _controller: App\Controller\ConversationController::create
     _seo:
       title: 'app.page.message_create'
   methods: [GET, POST]
@@ -29,7 +29,7 @@ conversation_work_create:
     id_user_one: '%hashid%'
     id_user_two: '%hashid%'
   defaults:
-    _controller: App\Controller\ConversationController:createWorkConversation
+    _controller: App\Controller\ConversationController::createWorkConversation
   methods: [GET, POST]
 
 conversation_message_change_read_status_ajax:
@@ -37,13 +37,13 @@ conversation_message_change_read_status_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\ConversationController:changeReadMessageStatus
+    _controller: App\Controller\Ajax\ConversationController::changeReadMessageStatus
   methods: [POST]
 
 conversation_message_all_change_to_read_ajax:
   path: /messages/change-all-to-read/ajax
   defaults:
-    _controller: App\Controller\Ajax\ConversationController:readAll
+    _controller: App\Controller\Ajax\ConversationController::readAll
   methods: [POST]
 
 conversation_message_last:
@@ -51,7 +51,7 @@ conversation_message_last:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\ConversationController:lastMessage
+    _controller: App\Controller\ConversationController::lastMessage
   methods: [GET, POST]
 
 conversation_delete_ajax:
@@ -59,7 +59,7 @@ conversation_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\ConversationController:delete
+    _controller: App\Controller\Ajax\ConversationController::delete
   methods: [POST, DELETE]
 
 conversation_live_ajax:
@@ -67,5 +67,5 @@ conversation_live_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\ConversationController:liveConversation
+    _controller: App\Controller\Ajax\ConversationController::liveConversation
   methods: [GET, POST]

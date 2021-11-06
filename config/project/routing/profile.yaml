@@ -1,7 +1,7 @@
 profile_show:
   path: /profile
   defaults:
-    _controller: App\Controller\ProfileController:show
+    _controller: App\Controller\ProfileController::show
     _seo:
       title: 'app.page.profile'
   methods: [GET, POST]
@@ -9,7 +9,7 @@ profile_show:
 profile_edit:
   path: /profile/edit
   defaults:
-    _controller: App\Controller\ProfileController:edit
+    _controller: App\Controller\ProfileController::edit
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]
@@ -31,7 +31,7 @@ profile_delete_image:
 profile_change_password:
   path: /profile/change-password
   defaults:
-    _controller: App\Controller\ProfileController:changePassword
+    _controller: App\Controller\ProfileController::changePassword
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]

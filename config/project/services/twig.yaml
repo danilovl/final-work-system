@@ -46,6 +46,8 @@ services:
 
   app.twig.runtime.homepage_notify_widget:
     class: App\Twig\Runtime\HomepageNotifyWidgetRuntime
+    arguments:
+      $container: '@service_container'
     tags:
       - { name: twig.runtime }
 

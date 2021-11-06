@@ -1,7 +1,7 @@
 event_address_list:
   path: /list
   defaults:
-    _controller: App\Controller\EventAddressController:list
+    _controller: App\Controller\EventAddressController::list
     _seo:
       title: 'app.page.appointment_address_list'
   methods: GET
@@ -11,13 +11,13 @@ event_address_detail:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\EventAddressController:detail
+    _controller: App\Controller\EventAddressController::detail
   methods: GET
 
 event_address_create:
   path: /create
   defaults:
-    _controller: App\Controller\EventAddressController:create
+    _controller: App\Controller\EventAddressController::create
     _seo:
       title: 'app.page.appointment_address_create'
   methods: [GET, POST]
@@ -25,7 +25,7 @@ event_address_create:
 event_address_create_ajax:
   path: /create/ajax
   defaults:
-    _controller: App\Controller\Ajax\EventAddressController:create
+    _controller: App\Controller\Ajax\EventAddressController::create
   methods: [POST]
 
 event_address_edit:
@@ -33,7 +33,7 @@ event_address_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\EventAddressController:edit
+    _controller: App\Controller\EventAddressController::edit
     _seo:
       title: 'app.page.appointment_address_edit'
   methods: [GET, POST]
@@ -43,7 +43,7 @@ event_address_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\EventAddressController:edit
+    _controller: App\Controller\Ajax\EventAddressController::edit
   methods: [POST]
 
 event_address_delete:
@@ -51,7 +51,7 @@ event_address_delete:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\EventAddressController:delete
+    _controller: App\Controller\EventAddressController::delete
   methods: [DELETE]
 
 event_address_delete_ajax:
@@ -59,5 +59,5 @@ event_address_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\EventAddressController:delete
+    _controller: App\Controller\Ajax\EventAddressController::delete
   methods: [POST]

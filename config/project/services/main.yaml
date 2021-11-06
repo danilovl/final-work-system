@@ -73,6 +73,8 @@ services:
 
   app.widget:
     class: App\Service\Widget\WidgetManagerService
+    arguments:
+      $container: '@service_container'
 
   App\Service\Widget\WidgetManagerService: '@app.widget'
 
