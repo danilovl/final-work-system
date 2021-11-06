@@ -225,16 +225,16 @@
         },
         {
             "name": "danilovl/permission-middleware-bundle",
-            "version": "v2.1.4",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/permission-middleware-bundle.git",
-                "reference": "5088a5c7b9cd5d80419a3a3cfd2fdcf926012a4d"
+                "reference": "4494aeb0ef7d1c3c2acf487d33aa330db94e4a73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/5088a5c7b9cd5d80419a3a3cfd2fdcf926012a4d",
-                "reference": "5088a5c7b9cd5d80419a3a3cfd2fdcf926012a4d",
+                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/4494aeb0ef7d1c3c2acf487d33aa330db94e4a73",
+                "reference": "4494aeb0ef7d1c3c2acf487d33aa330db94e4a73",
                 "shasum": ""
             },
             "require": {
@@ -269,22 +269,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/permission-middleware-bundle/issues",
-                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.1.4"
+                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.1.6"
             },
-            "time": "2021-10-15T11:28:54+00:00"
+            "time": "2021-11-06T09:41:10+00:00"
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/render-service-twig-extension-bundle.git",
-                "reference": "bd6f247f9ddf2472ae17b9558e7868bdfef48383"
+                "reference": "aad0e008612a5251e6229536181e4b2a7de6cebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/bd6f247f9ddf2472ae17b9558e7868bdfef48383",
-                "reference": "bd6f247f9ddf2472ae17b9558e7868bdfef48383",
+                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/aad0e008612a5251e6229536181e4b2a7de6cebb",
+                "reference": "aad0e008612a5251e6229536181e4b2a7de6cebb",
                 "shasum": ""
             },
             "require": {
@@ -319,9 +319,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/render-service-twig-extension-bundle/issues",
-                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v3.0.5"
+                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v3.0.6"
             },
-            "time": "2021-10-09T15:34:45+00:00"
+            "time": "2021-11-06T09:25:20+00:00"
         },
         {
             "name": "doctrine/annotations",
