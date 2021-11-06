@@ -24,7 +24,7 @@ pipelines:
           - docker network create dockernet
           - docker-compose -f docker-compose.yml up -d
           - docker-compose exec -T php sh bin/composer-first-install.sh
-          - docker-compose exec -T php php bin/console doctrine:database:import docker/mysql/data/dump.sql
+          - docker-compose exec -T php php bin/console app:import-sql docker/mysql/data/dump.sql
           - docker-compose exec -T node sh bin/npm-first-install.sh
           - docker-compose exec -T node npm run cypress:run
 

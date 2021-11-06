@@ -12,6 +12,7 @@
 
 namespace App\Service;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class EntityManagerService
@@ -61,5 +62,10 @@ class EntityManagerService
     public function refresh(object $object)
     {
         $this->entityManager->refresh($object);
+    }
+
+    public function getConnection(): Connection
+    {
+        return $this->entityManager->getConnection();
     }
 }

@@ -121,7 +121,7 @@ $ bin/console app:user-add
 or you can import test data dump.sql
 
 ```bash
-$ bin/console doctrine:database:import docker/mysql/data/dump.sql
+$ bin/console app:import-sql docker/mysql/data/dump.sql
 ```
 
 Docker

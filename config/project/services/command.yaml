@@ -32,3 +32,8 @@ services:
     class: App\Command\SyncDatabaseMediaWithRealFileCommand
     tags:
       - { name: console.command }
+
+  app.command.import-sql:
+    class: App\Command\ImportSqlCommand
+    tags:
+      - { name: console.command }
