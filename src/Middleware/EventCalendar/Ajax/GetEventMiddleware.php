@@ -22,7 +22,7 @@ class GetEventMiddleware implements RequestMiddlewareInterface
 {
     public static function handle(Request $request): bool
     {
-        $type = $request->request->get('type');
+        $type = $request->attributes->get('type');
         $startDate = $request->request->get('start');
         $endDate = $request->request->get('end');
 

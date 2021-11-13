@@ -2,66 +2,46 @@ services:
   _defaults:
     public: false
     autowire: true
+    autoconfigure: true
 
-  app.twig.language_extension:
-    class: App\Twig\ChangeLanguageExtension
-    autowire: false
+  App\Twig\:
+    resource: '../../../src/Twig'
+
+  App\Twig\ChangeLanguageExtension:
     arguments:
       - '%locales%'
     tags:
       - { name: twig.extension }
 
-  app.twig.app_extension:
-    class: App\Twig\TwigExtension
-    tags:
-      - { name: twig.extension }
-
-  app.twig.widget_extension:
-    class: App\Twig\WidgetExtension
-    tags:
-      - { name: twig.extension }
-
-  app.twig.seo_extension:
-    class: App\Twig\SeoExtension
-    tags:
-      - { name: twig.extension }
-
-  app.twig.runtime.seo:
-    class: App\Twig\Runtime\SeoRuntime
-    tags:
-      - { name: twig.runtime }
-
-  app.twig.runtime.away:
-    class: App\Twig\Runtime\AwayRuntime
+  App\Twig\Runtime\AwayRuntime:
     arguments:
       - '@router'
       - '%domain%'
     tags:
       - { name: twig.runtime }
 
-  app.twig.runtime.user:
-    class: App\Twig\Runtime\UserRuntime
-    tags:
-      - { name: twig.runtime }
-
-  app.twig.runtime.homepage_notify_widget:
-    class: App\Twig\Runtime\HomepageNotifyWidgetRuntime
+  App\Twig\Runtime\HomepageNotifyWidgetRuntime:
     arguments:
       $container: '@service_container'
     tags:
       - { name: twig.runtime }
 
-  app.twig.runtime.work:
-    class: App\Twig\Runtime\WorkRuntime
+  App\Twig\Runtime\SeoRuntime:
     tags:
       - { name: twig.runtime }
 
-  app.twig.runtime.conversation:
-    class: App\Twig\Runtime\ConversationRuntime
+  App\Twig\Runtime\WorkRuntime:
     tags:
       - { name: twig.runtime }
 
-  app.twig.runtime.task:
-    class: App\Twig\Runtime\TaskRuntime
+  App\Twig\Runtime\UserRuntime:
+    tags:
+      - { name: twig.runtime }
+
+  App\Twig\Runtime\ConversationRuntime:
+    tags:
+      - { name: twig.runtime }
+
+  App\Twig\Runtime\TaskRuntime:
     tags:
       - { name: twig.runtime }

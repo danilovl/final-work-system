@@ -46,7 +46,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $attribute = $this->getAttribute($object, $method);
 
         $request = new Request;
-        $request->request->set('type', 'type');
+        $request->attributes->set('type', 'type');
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME));
 
@@ -67,7 +67,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $attribute = $this->getAttribute($object, $method);
 
         $request = new Request;
-        $request->request->set('type', 'type');
+        $request->attributes->set('type', 'type');
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
 
@@ -85,7 +85,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $attribute = $this->getAttribute($object, $method);
 
         $request = new Request;
-        $request->request->set('type', null);
+        $request->attributes->set('type', null);
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME));
 
@@ -103,7 +103,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $attribute = $this->getAttribute($object, $method);
 
         $request = new Request;
-        $request->request->set('type', 'type');
+        $request->attributes->set('type', 'type');
         $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME));
         $request->request->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
 

@@ -38,7 +38,7 @@ class EventCalendarGetEventHandle
 
         $events = $this->eventCalendarFacade->getEventsByOwner(
             $this->userService->getUser(),
-            $request->request->get('type'),
+            $request->attributes->get('type'),
             $startDate,
             $endDate
         );

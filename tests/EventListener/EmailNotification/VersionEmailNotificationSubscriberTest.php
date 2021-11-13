@@ -13,6 +13,8 @@
 namespace App\Tests\EventListener\EmailNotification;
 
 use App\EventSubscriber\EmailNotification\VersionEmailNotificationSubscriber;
+use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Model\User\Facade\UserFacade;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class VersionEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
@@ -24,10 +26,10 @@ class VersionEmailNotificationSubscriberTest extends BaseEmailNotificationSubscr
         $kernel = self::bootKernel();
         $this->dispatcher = new EventDispatcher;
         $this->eventSubscriber = new $this->classSubscriber(
-            $kernel->getContainer()->get('app.facade.user'),
+            $kernel->getContainer()->get(UserFacade::class),
             $kernel->getContainer()->get('twig'),
             $kernel->getContainer()->get('app.translator'),
-            $kernel->getContainer()->get('app.factory.email_notification_queue'),
+            $kernel->getContainer()->get(EmailNotificationQueueFactory::class),
             $kernel->getContainer()->get('danilovl.parameter'),
             $kernel->getContainer()->get('app.work'),
             $kernel->getContainer()->get('old_sound_rabbit_mq.email_notification_producer')

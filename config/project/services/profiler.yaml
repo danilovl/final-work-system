@@ -1,6 +1,6 @@
 services:
   _defaults:
-    public: true
+    public: false
 
   app.profiler:
     class: App\Collector\SystemInfoCollector
@@ -8,4 +8,3 @@ services:
       - '%system_info%'
     tags:
       - { name: data_collector, id: final_work_info, template: 'profiler/template.html.twig' }
-    public: false
