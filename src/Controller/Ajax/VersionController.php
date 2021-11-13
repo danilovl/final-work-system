@@ -14,6 +14,11 @@ namespace App\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Version\Http\Ajax\{
+    VersionEditHandle,
+    VersionCreateHandle,
+    VersionDeleteHandle
+};
 use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\{
     Work,
@@ -28,6 +33,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class VersionController extends BaseController
 {
+    public function __construct(
+        private VersionCreateHandle $versionCreateHandle,
+        private VersionEditHandle $versionEditHandle,
+        private VersionDeleteHandle $versionDeleteHandle
+    ) {
+    }
+
     public function create(Request $request, Work $work): JsonResponse
     {
         $versionVoterSubject = new VersionVoterSubject;
@@ -35,7 +47,7 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE, $versionVoterSubject);
 
-        return $this->get('app.http_handle_ajax.version.create')->handle($request, $work);
+        return $this->versionCreateHandle->handle($request, $work);
     }
 
     /**
@@ -53,7 +65,7 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
 
-        return $this->get('app.http_handle_ajax.version.edit')->handle($request, $media);
+        return $this->versionEditHandle->handle($request, $media);
     }
 
     /**
@@ -68,6 +80,6 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $versionVoterSubject);
 
-        return $this->get('app.http_handle_ajax.version.delete')->handle($media);
+        return $this->versionDeleteHandle->handle($media);
     }
 }

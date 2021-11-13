@@ -13,6 +13,13 @@
 namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
+use App\Model\Conversation\Http\{
+    ConversationListHandle,
+    ConversationCreateHandle,
+    ConversationDetailHandle,
+    ConversationCreateWorkHandle,
+    ConversationLastMessageHandle
+};
 use App\Entity\{
     Work,
     Conversation
@@ -27,21 +34,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ConversationController extends BaseController
 {
+    public function __construct(
+        private ConversationCreateHandle $conversationCreateHandle,
+        private ConversationListHandle $conversationListHandle,
+        private ConversationDetailHandle $conversationDetailHandle,
+        private ConversationCreateWorkHandle $conversationCreateWorkHandle,
+        private ConversationLastMessageHandle $conversationLastMessageHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.conversation.create')->handle($request);
+        return $this->conversationCreateHandle->handle($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.conversation.list')->handle($request);
+        return $this->conversationListHandle->handle($request);
     }
 
     public function detail(Request $request, Conversation $conversation): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
 
-        return $this->get('app.http_handle.conversation.detail')->handle($request, $conversation);
+        return $this->conversationDetailHandle->handle($request, $conversation);
     }
 
     /**
@@ -54,13 +70,13 @@ class ConversationController extends BaseController
         User $userOne,
         User $userTwo
     ): RedirectResponse {
-        return $this->get('app.http_handle.conversation.create_work')->handle($work, $userOne, $userTwo);
+        return $this->conversationCreateWorkHandle->handle($work, $userOne, $userTwo);
     }
 
     public function lastMessage(Request $request, Conversation $conversation): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
 
-        return $this->get('app.http_handle.conversation.last_message')->handle($request, $conversation);
+        return $this->conversationLastMessageHandle->handle($request, $conversation);
     }
 }

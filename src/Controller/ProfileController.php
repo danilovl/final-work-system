@@ -12,6 +12,13 @@
 
 namespace App\Controller;
 
+use App\Model\Profile\Http\{
+    ProfileEditHandle,
+    ProfileShowHandle,
+    ProfileChangeImageHandle,
+    ProfileDeleteImageHandle,
+    ProfileChangePasswordHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -20,28 +27,37 @@ use Symfony\Component\HttpFoundation\{
 
 class ProfileController extends BaseController
 {
+    public function __construct(
+        private ProfileShowHandle $profileShowHandle,
+        private ProfileEditHandle $profileEditHandle,
+        private ProfileChangeImageHandle $profileChangeImageHandle,
+        private ProfileDeleteImageHandle $profileDeleteImageHandle,
+        private ProfileChangePasswordHandle $profileChangePasswordHandle,
+    ) {
+    }
+
     public function show(): Response
     {
-        return $this->get('app.http_handle.profile.show')->handle();
+        return $this->profileShowHandle->handle();
     }
 
     public function edit(Request $request): Response
     {
-        return $this->get('app.http_handle.profile.edit')->handle($request);
+        return $this->profileEditHandle->handle($request);
     }
 
     public function changeImage(Request $request): Response
     {
-        return $this->get('app.http_handle.profile.change_image')->handle($request);
+        return $this->profileChangeImageHandle->handle($request);
     }
 
     public function deleteImage(): RedirectResponse
     {
-        return $this->get('app.http_handle.profile.delete_image')->handle();
+        return $this->profileDeleteImageHandle->handle();
     }
 
     public function changePassword(Request $request): Response
     {
-        return $this->get('app.http_handle.profile.change_password')->handle($request);
+        return $this->profileChangePasswordHandle->handle($request);
     }
 }

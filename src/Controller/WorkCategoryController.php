@@ -14,6 +14,12 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Http\{
+    WorkCategoryListHandle,
+    WorkCategoryEditHandle,
+    WorkCategoryCreateHandle,
+    WorkCategoryDeleteHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -22,27 +28,35 @@ use Symfony\Component\HttpFoundation\{
 
 class WorkCategoryController extends BaseController
 {
+    public function __construct(
+        private WorkCategoryCreateHandle $workCategoryCreateHandle,
+        private WorkCategoryListHandle $workCategoryListHandle,
+        private WorkCategoryEditHandle $workCategoryEditHandle,
+        private WorkCategoryDeleteHandle $workCategoryDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.work_category.create')->handle($request);
+        return $this->workCategoryCreateHandle->handle($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.work_category.list')->handle($request);
+        return $this->workCategoryListHandle->handle($request);
     }
 
     public function edit(Request $request, WorkCategory $workCategory): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $workCategory);
 
-        return $this->get('app.http_handle.work_category.edit')->handle($request, $workCategory);
+        return $this->workCategoryEditHandle->handle($request, $workCategory);
     }
 
     public function delete(WorkCategory $workCategory): RedirectResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $workCategory);
 
-        return $this->get('app.http_handle.work_category.delete')->handle($workCategory);
+        return $this->workCategoryDeleteHandle->handle($workCategory);
     }
 }

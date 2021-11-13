@@ -13,6 +13,7 @@
 namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
+use App\Model\Article\Http\ArticleDetailHandle;
 use App\Entity\{
     Article,
     ArticleCategory
@@ -23,6 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends BaseController
 {
+    public function __construct(private ArticleDetailHandle $articleDetailHandle)
+    {
+    }
+
     /**
      * @ParamConverter("article", class="App\Entity\Article", options={"id" = "id_article"})
      * @ParamConverter("articleCategory", class="App\Entity\ArticleCategory", options={"id" = "id_category"})
@@ -35,6 +40,6 @@ class ArticleController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $articleVoterSubject);
 
-        return $this->get('app.http_handle.article.detail')->handle($article, $articleCategory);
+        return $this->articleDetailHandle->handle($article, $articleCategory);
     }
 }

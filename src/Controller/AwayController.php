@@ -22,7 +22,7 @@ class AwayController extends BaseController
     public function to(Request $request): Response
     {
         return $this->render('away/to.html.twig', [
-            'url' => $request->get('url')
+            'url' => $request->query->get('url')
         ]);
     }
 }

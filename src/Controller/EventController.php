@@ -14,6 +14,12 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\Event;
+use App\Model\Event\Http\{
+    EventEditHandle,
+    EventDeleteHandle,
+    EventDetailHandle,
+    EventSwitchToSkypeHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -22,31 +28,39 @@ use Symfony\Component\HttpFoundation\{
 
 class EventController extends BaseController
 {
+    public function __construct(
+        private EventDetailHandle $eventDetailHandle,
+        private EventEditHandle $eventEditHandle,
+        private EventSwitchToSkypeHandle $eventSwitchToSkypeHandle,
+        private EventDeleteHandle $eventDeleteHandle,
+    ) {
+    }
+
     public function detail(Request $request, Event $event): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $event);
 
-        return $this->get('app.http_handle.event.detail')->handle($request, $event);
+        return $this->eventDetailHandle->handle($request, $event);
     }
 
     public function edit(Request $request, Event $event): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);
 
-        return $this->get('app.http_handle.event.edit')->handle($request, $event);
+        return $this->eventEditHandle->handle($request, $event);
     }
 
     public function switchToSkype(Event $event): RedirectResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::SWITCH_TO_SKYPE, $event);
 
-        return $this->get('app.http_handle.event.switch_to_skype')->handle($event);
+        return $this->eventSwitchToSkypeHandle->handle($event);
     }
 
     public function delete(Request $request, Event $event): RedirectResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $event);
 
-        return $this->get('app.http_handle.event.delete')->handle($request, $event);
+        return $this->eventDeleteHandle->handle($request, $event);
     }
 }

@@ -45,7 +45,7 @@ class ResetPasswordResetHandle
 
     public function handle(Request $request): Response
     {
-        $token = $request->get('token');
+        $token = $request->query->get('token');
         if ($token === null) {
             throw new NotFoundHttpException('No reset password token found in the URL or in the session.');
         }

@@ -15,6 +15,11 @@ namespace App\Controller\Ajax;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Http\Ajax\{
+    WorkCategoryEditHandle,
+    WorkCategoryCreateHandle,
+    WorkCategoryDeleteHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -22,22 +27,29 @@ use Symfony\Component\HttpFoundation\{
 
 class WorkCategoryController extends BaseController
 {
+    public function __construct(
+        private WorkCategoryCreateHandle $workCategoryCreateHandle,
+        private WorkCategoryEditHandle $workCategoryEditHandle,
+        private WorkCategoryDeleteHandle $workCategoryDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.work_category.create')->handle($request);
+        return $this->workCategoryCreateHandle->handle($request);
     }
 
     public function edit(Request $request, WorkCategory $workCategory): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $workCategory);
 
-        return $this->get('app.http_handle_ajax.work_category.edit')->handle($request, $workCategory);
+        return $this->workCategoryEditHandle->handle($request, $workCategory);
     }
 
     public function delete(WorkCategory $workCategory): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $workCategory);
 
-        return $this->get('app.http_handle_ajax.work_category.delete')->handle($workCategory);
+        return $this->workCategoryDeleteHandle->handle($workCategory);
     }
 }

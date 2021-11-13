@@ -13,6 +13,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Model\User\Http\{
+    UserListHandle,
+    UserEditHandle,
+    UserCreateHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -20,18 +25,25 @@ use Symfony\Component\HttpFoundation\{
 
 class UserController extends BaseController
 {
+    public function __construct(
+        private UserCreateHandle $userCreateHandle,
+        private UserEditHandle $userEditHandle,
+        private UserListHandle $userListHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.user.create')->handle($request);
+        return $this->userCreateHandle->handle($request);
     }
 
     public function edit(Request $request, User $user): Response
     {
-        return $this->get('app.http_handle.user.edit')->handle($request, $user);
+        return $this->userEditHandle->handle($request, $user);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.user.list')->handle($request);
+        return $this->userListHandle->handle($request);
     }
 }

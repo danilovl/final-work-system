@@ -16,6 +16,12 @@ use App\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\Event;
+use App\Model\EventCalendar\Http\Ajax\{
+    EventCalendarEditHandle,
+    EventCalendarCreateHandle,
+    EventCalendarGetEventHandle,
+    EventCalendarEventReservationHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -23,24 +29,32 @@ use Symfony\Component\HttpFoundation\{
 
 class EventCalendarController extends BaseController
 {
+    public function __construct(
+        private EventCalendarGetEventHandle $eventCalendarGetEventHandle,
+        private EventCalendarCreateHandle $eventCalendarCreateHandle,
+        private EventCalendarEventReservationHandle $eventCalendarEventReservationHandle,
+        private EventCalendarEditHandle $eventCalendarEditHandle
+    ) {
+    }
+
     #[AjaxRequestMiddlewareAttribute([
         'class' => 'App\Middleware\EventCalendar\Ajax\GetEventMiddleware'
     ])]
     public function getEvent(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.event_calendar.get_event')->handle($request);
+        return $this->eventCalendarGetEventHandle->handle($request);
     }
 
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.event_calendar.create')->handle($request);
+        return $this->eventCalendarCreateHandle->handle($request);
     }
 
     public function eventReservation(Request $request, Event $event): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION, $event);
 
-        return $this->get('app.http_handle_ajax.event_calendar.event_reservation')->handle($request, $event);
+        return $this->eventCalendarEventReservationHandle->handle($request, $event);
     }
 
     #[AjaxRequestMiddlewareAttribute([
@@ -50,6 +64,6 @@ class EventCalendarController extends BaseController
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);
 
-        return $this->get('app.http_handle_ajax.event_calendar.edit')->handle($request, $event);
+        return $this->eventCalendarEditHandle->handle($request, $event);
     }
 }

@@ -12,6 +12,11 @@
 
 namespace App\Controller;
 
+use App\Model\ResetPassword\Http\{
+    ResetPasswordResetHandle,
+    ResetPasswordRequestHandle,
+    ResetPasswordCheckEmailHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -19,18 +24,25 @@ use Symfony\Component\HttpFoundation\{
 
 class ResetPasswordController extends BaseController
 {
+    public function __construct(
+        private ResetPasswordRequestHandle $passwordRequestHandle,
+        private ResetPasswordCheckEmailHandle $resetPasswordCheckEmailHandle,
+        private ResetPasswordResetHandle $resetPasswordResetHandle,
+    ) {
+    }
+
     public function request(Request $request): Response
     {
-        return $this->get('app.http_handle.reset_password.request')->handle($request);
+        return $this->passwordRequestHandle->handle($request);
     }
 
     public function checkEmail(): Response
     {
-        return $this->get('app.http_handle.reset_password.check_email')->handle();
+        return $this->resetPasswordCheckEmailHandle->handle();
     }
 
     public function reset(Request $request): Response
     {
-        return $this->get('app.http_handle.reset_password.reset')->handle($request);
+        return $this->resetPasswordResetHandle->handle($request);
     }
 }

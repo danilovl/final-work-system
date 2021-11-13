@@ -14,6 +14,12 @@ namespace App\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Conversation\Http\Ajax\{
+    ConversationLiveHandle,
+    ConversationDeleteHandle,
+    ConversationReadAllHandle,
+    ConversationChangeReadMessageStatusHandle
+};
 use App\Entity\{
     Conversation,
     ConversationMessage
@@ -25,6 +31,14 @@ use Symfony\Component\HttpFoundation\{
 
 class ConversationController extends BaseController
 {
+    public function __construct(
+        private ConversationChangeReadMessageStatusHandle $conversationChangeReadMessageStatusHandle,
+        private ConversationReadAllHandle $conversationReadAllHandle,
+        private ConversationDeleteHandle $conversationDeleteHandle,
+        private ConversationLiveHandle $conversationLiveHandle
+    ) {
+    }
+
     public function changeReadMessageStatus(ConversationMessage $conversationMessage): JsonResponse
     {
         $this->denyAccessUnlessGranted(
@@ -32,25 +46,25 @@ class ConversationController extends BaseController
             $conversationMessage
         );
 
-        return $this->get('app.http_handle_ajax.conversation.change_read_message_status')->handle($conversationMessage);
+        return $this->conversationChangeReadMessageStatusHandle->handle($conversationMessage);
     }
 
     public function readAll(): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.conversation.read_all')->handle();
+        return $this->conversationReadAllHandle->handle();
     }
 
     public function delete(Conversation $conversation): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $conversation);
 
-        return $this->get('app.http_handle_ajax.conversation.delete')->handle($conversation);
+        return $this->conversationDeleteHandle->handle($conversation);
     }
 
     public function liveConversation(Conversation $conversation): StreamedResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
 
-        return $this->get('app.http_handle_ajax.conversation.live')->handle($conversation);
+        return $this->conversationLiveHandle->handle($conversation);
     }
 }

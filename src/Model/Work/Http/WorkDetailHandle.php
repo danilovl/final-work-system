@@ -43,7 +43,7 @@ class WorkDetailHandle
     {
         $user = $this->userService->getUser();
         $tabService = $this->workDetailTabService
-            ->setActiveTab($request->get('tab'));
+            ->setActiveTab($request->query->get('tab'));
 
         $paginationTask = $tabService->getTabPagination($request, TabTypeConstant::TAB_TASK, $work, $user);
         $paginationVersion = $tabService->getTabPagination($request, TabTypeConstant::TAB_VERSION, $work);

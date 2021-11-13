@@ -15,6 +15,12 @@ namespace App\Controller\Ajax;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\Work;
+use App\Model\Work\Http\Ajax\{
+    WorkEditHandle,
+    WorkCreateHandle,
+    WorkDeleteHandle,
+    WorkEditAuthorHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -22,29 +28,37 @@ use Symfony\Component\HttpFoundation\{
 
 class WorkController extends BaseController
 {
+    public function __construct(
+        private WorkCreateHandle $workCreateHandle,
+        private WorkEditHandle $workEditHandle,
+        private WorkEditAuthorHandle $workEditAuthorHandle,
+        private WorkDeleteHandle $workDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.work.create')->handle($request);
+        return $this->workCreateHandle->handle($request);
     }
 
     public function edit(Request $request, Work $work): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
-        return $this->get('app.http_handle_ajax.work.edit')->handle($request, $work);
+        return $this->workEditHandle->handle($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
-        return $this->get('app.http_handle_ajax.work.edit_author')->handle($request, $work);
+        return $this->workEditAuthorHandle->handle($request, $work);
     }
 
     public function delete(Work $work): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $work);
 
-        return $this->get('app.http_handle_ajax.work.delete')->handle($work);
+        return $this->workDeleteHandle->handle($work);
     }
 }

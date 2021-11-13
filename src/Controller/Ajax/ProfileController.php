@@ -13,6 +13,7 @@
 namespace App\Controller\Ajax;
 
 use App\Controller\BaseController;
+use App\Model\Profile\Http\Ajax\ProfileCreateImageWebCameraHandle;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -20,8 +21,12 @@ use Symfony\Component\HttpFoundation\{
 
 class ProfileController extends BaseController
 {
+    public function __construct(private ProfileCreateImageWebCameraHandle $profileCreateImageWebCameraHandle)
+    {
+    }
+
     public function createImageWebCamera(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.profile.create_image_web_camera')->handle($request);
+        return $this->profileCreateImageWebCameraHandle->handle($request);
     }
 }

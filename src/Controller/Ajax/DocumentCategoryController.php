@@ -15,6 +15,11 @@ namespace App\Controller\Ajax;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\MediaCategory;
+use App\Model\DocumentCategory\Http\Ajax\{
+    DocumentCategoryEditHandle,
+    DocumentCategoryCreateHandle,
+    DocumentCategoryDeleteHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -22,22 +27,29 @@ use Symfony\Component\HttpFoundation\{
 
 class DocumentCategoryController extends BaseController
 {
+    public function __construct(
+        private DocumentCategoryCreateHandle $documentCategoryCreateHandle,
+        private DocumentCategoryEditHandle $documentCategoryEditHandle,
+        private DocumentCategoryDeleteHandle $documentCategoryDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.document_category.create')->handle($request);
+        return $this->documentCategoryCreateHandle->handle($request);
     }
 
     public function edit(Request $request, MediaCategory $mediaCategory): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $mediaCategory);
 
-        return $this->get('app.http_handle_ajax.document_category.edit')->handle($request, $mediaCategory);
+        return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $mediaCategory);
 
-        return $this->get('app.http_handle_ajax.document_category.delete')->handle($mediaCategory);
+        return $this->documentCategoryDeleteHandle->handle($mediaCategory);
     }
 }

@@ -14,6 +14,14 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\Media;
+use App\Model\Document\Http\{
+    DocumentEditHandle,
+    DocumentListHandle,
+    DocumentCreateHandle,
+    DocumentDownloadHandle,
+    DocumentListOwnerHandle,
+    DocumentDetailContentHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -21,38 +29,48 @@ use Symfony\Component\HttpFoundation\{
 
 class DocumentController extends BaseController
 {
+    public function __construct(
+        private DocumentCreateHandle $documentCreateHandle,
+        private DocumentDetailContentHandle $documentDetailContentHandle,
+        private DocumentEditHandle $documentEditHandle,
+        private DocumentListHandle $documentListHandle,
+        private DocumentListOwnerHandle $documentListOwnerHandle,
+        private DocumentDownloadHandle $documentDownloadHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.document.create')->handle($request);
+        return $this->documentCreateHandle->handle($request);
     }
 
     public function detailContent(Media $media): Response
     {
-        return $this->get('app.http_handle.document.detail_content')->handle($media);
+        return $this->documentDetailContentHandle->handle($media);
     }
 
     public function edit(Request $request, Media $media): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
-        return $this->get('app.http_handle.document.edit')->handle($request, $media);
+        return $this->documentEditHandle->handle($request, $media);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.document.list')->handle($request);
+        return $this->documentListHandle->handle($request);
     }
 
     public function listOwner(Request $request): Response
     {
-        return $this->get('app.http_handle.document.list_owner')->handle($request);
+        return $this->documentListOwnerHandle->handle($request);
     }
 
     public function download(Media $media): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $media);
 
-        $this->get('app.http_handle.document.download')->handle($media);
+        $this->documentDownloadHandle->handle($media);
 
         return new Response;
     }
@@ -61,7 +79,7 @@ class DocumentController extends BaseController
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $media);
 
-        $this->get('app.http_handle.document.download')->handle($media);
+        $this->documentDownloadHandle->handle($media);
 
         return new Response;
     }

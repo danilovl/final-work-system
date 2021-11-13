@@ -55,7 +55,7 @@ class UserListHandle
     {
         $user = $this->userService->getUser();
 
-        $type = $request->get('type');
+        $type = $request->attributes->get('type');
         $openSearchTab = false;
         $showSearchTab = true;
         $workStatus = null;

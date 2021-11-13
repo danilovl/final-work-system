@@ -14,6 +14,10 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\ArticleCategory;
+use App\Model\ArticleCategory\Http\{
+    ArticleCategoryListHandle,
+    ArticleCategoryArticleListHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -21,15 +25,21 @@ use Symfony\Component\HttpFoundation\{
 
 class ArticleCategoryController extends BaseController
 {
+    public function __construct(
+        private ArticleCategoryListHandle $articleCategoryListHandle,
+        private ArticleCategoryArticleListHandle $articleCategoryArticleListHandle
+    ) {
+    }
+
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.article_category.list')->handle($request);
+        return $this->articleCategoryListHandle->handle($request);
     }
 
     public function articleList(Request $request, ArticleCategory $articleCategory): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $articleCategory);
 
-        return $this->get('app.http_handle.article_category.article_list')->handle($request, $articleCategory);
+        return $this->articleCategoryArticleListHandle->handle($request, $articleCategory);
     }
 }

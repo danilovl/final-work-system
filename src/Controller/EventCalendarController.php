@@ -12,17 +12,27 @@
 
 namespace App\Controller;
 
+use App\Model\EventCalendar\Http\{
+    EventCalendarManageHandle,
+    EventCalendarReservationHandle
+};
 use Symfony\Component\HttpFoundation\Response;
 
 class EventCalendarController extends BaseController
 {
+    public function __construct(
+        private EventCalendarReservationHandle $eventCalendarReservationHandle,
+        private EventCalendarManageHandle $eventCalendarManageHandle
+    ) {
+    }
+
     public function reservation(): Response
     {
-        return $this->get('app.http_handle.event_calendar.reservation')->handle();
+        return $this->eventCalendarReservationHandle->handle();
     }
 
     public function manage(): Response
     {
-        return $this->get('app.http_handle.event_calendar.manage')->handle();
+        return $this->eventCalendarManageHandle->handle();
     }
 }

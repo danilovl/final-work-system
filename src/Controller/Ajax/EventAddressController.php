@@ -15,6 +15,11 @@ namespace App\Controller\Ajax;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\EventAddress;
+use App\Model\EventAddress\Http\Ajax\{
+    EventAddressEditHandle,
+    EventAddressCreateHandle,
+    EventAddressDeleteHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -22,9 +27,16 @@ use Symfony\Component\HttpFoundation\{
 
 class EventAddressController extends BaseController
 {
+    public function __construct(
+        private EventAddressCreateHandle $eventAddressCreateHandle,
+        private EventAddressEditHandle $eventAddressEditHandle,
+        private EventAddressDeleteHandle $eventAddressDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.event_address.create')->handle($request);
+        return $this->eventAddressCreateHandle->handle($request);
     }
 
     public function edit(
@@ -33,13 +45,13 @@ class EventAddressController extends BaseController
     ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $eventAddress);
 
-        return $this->get('app.http_handle_ajax.event_address.edit')->handle($request, $eventAddress);
+        return $this->eventAddressEditHandle->handle($request, $eventAddress);
     }
 
     public function delete(EventAddress $eventAddress): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $eventAddress);
 
-        return $this->get('app.http_handle_ajax.event_address.delete')->handle($eventAddress);
+        return $this->eventAddressDeleteHandle->handle($eventAddress);
     }
 }

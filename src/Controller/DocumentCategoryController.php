@@ -14,6 +14,12 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\MediaCategory;
+use App\Model\DocumentCategory\Http\{
+    DocumentCategoryListHandle,
+    DocumentCategoryEditHandle,
+    DocumentCategoryCreateHandle,
+    DocumentCategoryDeleteHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -22,27 +28,35 @@ use Symfony\Component\HttpFoundation\{
 
 class DocumentCategoryController extends BaseController
 {
+    public function __construct(
+        private DocumentCategoryCreateHandle $documentCategoryCreateHandle,
+        private DocumentCategoryListHandle $documentCategoryListHandle,
+        private DocumentCategoryEditHandle $documentCategoryEditHandle,
+        private DocumentCategoryDeleteHandle $documentCategoryDeleteHandle,
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.document_category.create')->handle($request);
+        return $this->documentCategoryCreateHandle->handle($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.document_category.list')->handle($request);
+        return $this->documentCategoryListHandle->handle($request);
     }
 
     public function edit(Request $request, MediaCategory $mediaCategory): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $mediaCategory);
 
-        return $this->get('app.http_handle.document_category.edit')->handle($request, $mediaCategory);
+        return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): RedirectResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $mediaCategory);
 
-        return $this->get('app.http_handle.document_category.delete')->handle($mediaCategory);
+        return $this->documentCategoryDeleteHandle->handle($mediaCategory);
     }
 }

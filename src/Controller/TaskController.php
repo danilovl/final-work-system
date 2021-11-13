@@ -13,6 +13,12 @@
 namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
+use App\Model\Task\Http\{
+    TaskEditHandle,
+    TaskListHandle,
+    TaskCreateHandle,
+    TaskCreateSeveralHandle
+};
 use App\Entity\{
     Task,
     Work
@@ -25,21 +31,29 @@ use Symfony\Component\HttpFoundation\{
 
 class TaskController extends BaseController
 {
+    public function __construct(
+        private TaskListHandle $taskListHandle,
+        private TaskCreateHandle $taskCreateHandle,
+        private TaskCreateSeveralHandle $taskCreateSeveralHandle,
+        private TaskEditHandle $taskEditHandle
+    ) {
+    }
+
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.task.list')->handle($request);
+        return $this->taskListHandle->handle($request);
     }
 
     public function create(Request $request, Work $work): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
-        return $this->get('app.http_handle.task.create')->handle($request, $work);
+        return $this->taskCreateHandle->handle($request, $work);
     }
 
     public function createSeveral(Request $request): Response
     {
-        return $this->get('app.http_handle.task.create_several')->handle($request);
+        return $this->taskCreateSeveralHandle->handle($request);
     }
 
     /**
@@ -53,6 +67,6 @@ class TaskController extends BaseController
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
-        return $this->get('app.http_handle.task.edit')->handle($request, $work, $task);
+        return $this->taskEditHandle->handle($request, $work, $task);
     }
 }

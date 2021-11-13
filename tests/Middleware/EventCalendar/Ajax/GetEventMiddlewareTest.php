@@ -14,9 +14,9 @@ class GetEventMiddlewareTest extends TestCase
     public function testAttributeHandleSuccess(): void
     {
         $request = new Request;
-        $request->attributes->set('type', 'type');
-        $request->attributes->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
-        $request->attributes->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME));
+        $request->request->set('type', 'type');
+        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
+        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME));
 
         $this->assertEquals(
             true,
@@ -30,9 +30,9 @@ class GetEventMiddlewareTest extends TestCase
         $this->expectErrorMessage('Bad format date');
 
         $request = new Request;
-        $request->attributes->set('type', 'type');
-        $request->attributes->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
-        $request->attributes->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
+        $request->request->set('type', 'type');
+        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
+        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
 
         GetEventMiddleware::handle($request);
     }
@@ -43,9 +43,9 @@ class GetEventMiddlewareTest extends TestCase
         $this->expectErrorMessage('Empty type');
 
         $request = new Request;
-        $request->attributes->set('type', null);
-        $request->attributes->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
-        $request->attributes->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
+        $request->request->set('type', null);
+        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
+        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
 
         $this->assertEquals(
             true,
@@ -59,9 +59,9 @@ class GetEventMiddlewareTest extends TestCase
         $this->expectErrorMessage('StartDate must be less then endDate');
 
         $request = new Request;
-        $request->attributes->set('type', 'type');
-        $request->attributes->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME));
-        $request->attributes->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
+        $request->request->set('type', 'type');
+        $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME));
+        $request->request->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
 
         $this->assertEquals(
             true,

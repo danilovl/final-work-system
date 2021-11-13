@@ -95,4 +95,14 @@ class BaseController extends AbstractController
     {
         $this->addFlash($type, $this->trans($trans));
     }
+
+    protected function get(string $id): object
+    {
+        return $this->container->get($id);
+    }
+
+    protected function has(string $id): bool
+    {
+        return $this->container->has($id);
+    }
 }

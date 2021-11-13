@@ -13,12 +13,17 @@
 namespace App\Controller\Ajax;
 
 use App\Controller\BaseController;
+use App\Model\Widget\Http\Ajax\WidgetLiveHandle;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class WidgetController extends BaseController
 {
+    public function __construct(private WidgetLiveHandle $widgetLiveHandle)
+    {
+    }
+
     public function live(): StreamedResponse
     {
-        return $this->get('app.http_handle_ajax.widget.live')->handle();
+        return $this->widgetLiveHandle->handle();
     }
 }

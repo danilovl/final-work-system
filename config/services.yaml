@@ -22,3 +22,7 @@ services:
   App\Repository\:
     resource: '../src/Repository'
     public: true
+
+  App\Model\:
+    resource: '../src/Model/*/Http'
+    public: true

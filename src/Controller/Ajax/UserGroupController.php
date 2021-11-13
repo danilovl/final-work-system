@@ -14,6 +14,11 @@ namespace App\Controller\Ajax;
 
 use App\Controller\BaseController;
 use App\Entity\Group;
+use App\Model\UserGroup\Http\Ajax\{
+    UserGroupEditHandle,
+    UserGroupCreateHandle,
+    UserGroupDeleteHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -21,18 +26,25 @@ use Symfony\Component\HttpFoundation\{
 
 class UserGroupController extends BaseController
 {
+    public function __construct(
+        private UserGroupCreateHandle $userGroupCreateHandle,
+        private UserGroupEditHandle $userGroupEditHandle,
+        private UserGroupDeleteHandle $userGroupDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.user_group.create')->handle($request);
+        return $this->userGroupCreateHandle->handle($request);
     }
 
     public function edit(Request $request, Group $group): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.user_group.edit')->handle($request, $group);
+        return $this->userGroupEditHandle->handle($request, $group);
     }
 
     public function delete(Group $group): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.user_group.delete')->handle($group);
+        return $this->userGroupDeleteHandle->handle($group);
     }
 }

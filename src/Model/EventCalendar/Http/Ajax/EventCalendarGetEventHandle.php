@@ -33,12 +33,12 @@ class EventCalendarGetEventHandle
 
     public function handle(Request $request): JsonResponse
     {
-        $startDate = new DateTime($request->get('start'));
-        $endDate = new DateTime($request->get('end'));
+        $startDate = new DateTime($request->request->get('start'));
+        $endDate = new DateTime($request->request->get('end'));
 
         $events = $this->eventCalendarFacade->getEventsByOwner(
             $this->userService->getUser(),
-            $request->get('type'),
+            $request->request->get('type'),
             $startDate,
             $endDate
         );

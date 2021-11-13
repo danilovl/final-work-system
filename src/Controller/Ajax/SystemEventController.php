@@ -15,19 +15,29 @@ namespace App\Controller\Ajax;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\SystemEventRecipient;
+use App\Model\SystemEvent\Http\Ajax\{
+    SystemEventViewedHandle,
+    SystemEventViewedAllHandle
+};
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SystemEventController extends BaseController
 {
+    public function __construct(
+        private SystemEventViewedHandle $systemEventViewedHandle,
+        private SystemEventViewedAllHandle $systemEventViewedAllHandle
+    ) {
+    }
+
     public function viewed(SystemEventRecipient $systemEventRecipient): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED, $systemEventRecipient);
 
-        return $this->get('app.http_handle_ajax.system_event.viewed')->handle($systemEventRecipient);
+        return $this->systemEventViewedHandle->handle($systemEventRecipient);
     }
 
     public function viewedAll(): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.system_event.viewed_all')->handle();
+        return $this->systemEventViewedAllHandle->handle();
     }
 }

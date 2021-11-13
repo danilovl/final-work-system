@@ -14,6 +14,10 @@ namespace App\Controller\Ajax;
 
 use App\Controller\BaseController;
 use App\Entity\User;
+use App\Model\User\Http\Ajax\{
+    UserEditHandle,
+    UserCreateHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -21,13 +25,19 @@ use Symfony\Component\HttpFoundation\{
 
 class UserController extends BaseController
 {
+    public function __construct(
+        private UserCreateHandle $userCreateHandle,
+        private UserEditHandle $userEditHandle
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.user.create')->handle($request);
+        return $this->userCreateHandle->handle($request);
     }
 
     public function edit(Request $request, User $user): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.user.edit')->handle($request, $user);
+        return $this->userEditHandle->handle($request, $user);
     }
 }

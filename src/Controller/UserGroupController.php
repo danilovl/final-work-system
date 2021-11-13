@@ -13,6 +13,11 @@
 namespace App\Controller;
 
 use App\Entity\Group;
+use App\Model\UserGroup\Http\{
+    UserGroupListHandle,
+    UserGroupEditHandle,
+    UserGroupCreateHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -20,18 +25,25 @@ use Symfony\Component\HttpFoundation\{
 
 class UserGroupController extends BaseController
 {
+    public function __construct(
+        private UserGroupCreateHandle $userGroupCreateHandle,
+        private UserGroupEditHandle $userGroupEditHandle,
+        private UserGroupListHandle $userGroupListHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.user_group.create')->handle($request);
+        return $this->userGroupCreateHandle->handle($request);
     }
 
     public function edit(Request $request, Group $group): Response
     {
-        return $this->get('app.http_handle.user_group.edit')->handle($request, $group);
+        return $this->userGroupEditHandle->handle($request, $group);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.user_group.list')->handle($request);
+        return $this->userGroupListHandle->handle($request);
     }
 }

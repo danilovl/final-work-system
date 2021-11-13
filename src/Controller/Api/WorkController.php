@@ -13,6 +13,7 @@
 namespace App\Controller\Api;
 
 use App\Controller\BaseController;
+use App\Model\Work\Http\Api\WorkListHandle;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -20,8 +21,12 @@ use Symfony\Component\HttpFoundation\{
 
 class WorkController extends BaseController
 {
+    public function __construct(private WorkListHandle $workListHandle)
+    {
+    }
+
     public function list(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_api.work.list')->handle($request);
+        return $this->workListHandle->handle($request);
     }
 }

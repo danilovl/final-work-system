@@ -15,6 +15,12 @@ namespace App\Controller\Ajax;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
 use App\Entity\Media;
+use App\Model\Document\Http\Ajax\{
+    DocumentEditHandle,
+    DocumentCreateHandle,
+    DocumentDeleteHandle,
+    DocumentChangeActiveHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -23,29 +29,37 @@ use Symfony\Component\HttpFoundation\{
 
 class DocumentController extends BaseController
 {
+    public function __construct(
+        private DocumentCreateHandle $documentCreateHandle,
+        private DocumentEditHandle $documentEditHandle,
+        private DocumentChangeActiveHandle $documentChangeActiveHandle,
+        private DocumentDeleteHandle $documentDeleteHandle,
+    ) {
+    }
+
     public function create(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.document.create')->handle($request);
+        return $this->documentCreateHandle->handle($request);
     }
 
     public function edit(Request $request, Media $media): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
-        return $this->get('app.http_handle_ajax.document.edit')->handle($request, $media);
+        return $this->documentEditHandle->handle($request, $media);
     }
 
     public function changeActive(Media $media): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
 
-        return $this->get('app.http_handle_ajax.document.change_active')->handle($media);
+        return $this->documentChangeActiveHandle->handle($media);
     }
 
     public function delete(Media $media): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $media);
 
-        return $this->get('app.http_handle_ajax.document.delete')->handle($media);
+        return $this->documentDeleteHandle->handle($media);
     }
 }

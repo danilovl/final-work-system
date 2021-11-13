@@ -53,7 +53,7 @@ class TaskCreateHandle
     public function handle(Request $request, Work $work): Response
     {
         $user = $this->userService->getUser();
-        $taskName = $request->get('taskName');
+        $taskName = $request->query->get('taskName');
 
         $taskModel = new TaskModel;
         $taskModel->active = true;

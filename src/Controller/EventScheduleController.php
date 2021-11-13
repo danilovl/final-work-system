@@ -14,6 +14,14 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Http\{
+    EventScheduleListHandle,
+    EventScheduleEditHandle,
+    EventScheduleCloneHandle,
+    EventScheduleCreateHandle,
+    EventScheduleDeleteHandle,
+    EventScheduleDetailHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -22,41 +30,51 @@ use Symfony\Component\HttpFoundation\{
 
 class EventScheduleController extends BaseController
 {
+    public function __construct(
+        private EventScheduleCreateHandle $eventScheduleCreateHandle,
+        private EventScheduleListHandle $eventScheduleListHandle,
+        private EventScheduleDetailHandle $eventScheduleDetailHandle,
+        private EventScheduleEditHandle $eventScheduleEditHandle,
+        private EventScheduleCloneHandle $eventScheduleCloneHandle,
+        private EventScheduleDeleteHandle $eventScheduleDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.event_schedule.create')->handle($request);
+        return $this->eventScheduleCreateHandle->handle($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->get('app.http_handle.event_schedule.list')->handle($request);
+        return $this->eventScheduleListHandle->handle($request);
     }
 
     public function detail(EventSchedule $eventSchedule): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $eventSchedule);
 
-        return $this->get('app.http_handle.event_schedule.detail')->handle($eventSchedule);
+        return $this->eventScheduleDetailHandle->handle($eventSchedule);
     }
 
     public function edit(Request $request, EventSchedule $eventSchedule): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $eventSchedule);
 
-        return $this->get('app.http_handle.event_schedule.edit')->handle($request, $eventSchedule);
+        return $this->eventScheduleEditHandle->handle($request, $eventSchedule);
     }
 
     public function clone(Request $request, EventSchedule $eventSchedule): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE, $eventSchedule);
 
-        return $this->get('app.http_handle.event_schedule.clone')->handle($request, $eventSchedule);
+        return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
     }
 
     public function delete(Request $request, EventSchedule $eventSchedule): RedirectResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $eventSchedule);
 
-        return $this->get('app.http_handle.event_schedule.delete')->handle($request, $eventSchedule);
+        return $this->eventScheduleDeleteHandle->handle($request, $eventSchedule);
     }
 }

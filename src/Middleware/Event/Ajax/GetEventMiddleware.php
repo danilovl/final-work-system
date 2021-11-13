@@ -22,8 +22,8 @@ class GetEventMiddleware implements RequestMiddlewareInterface
 {
     public static function handle(Request $request): bool
     {
-        $startDate = $request->get('start');
-        $endDate = $request->get('end');
+        $startDate = $request->request->get('start');
+        $endDate = $request->request->get('end');
 
         if (DateHelper::validateDate(DateFormatConstant::DATE_TIME, $startDate) === false ||
             DateHelper::validateDate(DateFormatConstant::DATE_TIME, $endDate) === false

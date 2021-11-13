@@ -14,6 +14,14 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Entity\Work;
+use App\Model\Work\Http\{
+    WorkEditHandle,
+    WorkListHandle,
+    WorkCreateHandle,
+    WorkDeleteHandle,
+    WorkDetailHandle,
+    WorkEditAuthorHandle
+};
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -22,41 +30,51 @@ use Symfony\Component\HttpFoundation\{
 
 class WorkController extends BaseController
 {
+    public function __construct(
+        private WorkCreateHandle $workCreateHandle,
+        private WorkDetailHandle $workDetailHandle,
+        private WorkListHandle $workListHandle,
+        private WorkEditHandle $workEditHandle,
+        private WorkEditAuthorHandle $workEditAuthorHandle,
+        private WorkDeleteHandle $workDeleteHandle
+    ) {
+    }
+
     public function create(Request $request): Response
     {
-        return $this->get('app.http_handle.work.create')->handle($request);
+        return $this->workCreateHandle->handle($request);
     }
 
     public function detail(Request $request, Work $work): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $work);
 
-        return $this->get('app.http_handle.work.detail')->handle($request, $work);
+        return $this->workDetailHandle->handle($request, $work);
     }
 
     public function list(Request $request, string $type): Response
     {
-        return $this->get('app.http_handle.work.list')->handle($request, $type);
+        return $this->workListHandle->handle($request, $type);
     }
 
     public function edit(Request $request, Work $work): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
-        return $this->get('app.http_handle.work.edit')->handle($request, $work);
+        return $this->workEditHandle->handle($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): Response
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
-        return $this->get('app.http_handle.work.edit_author')->handle($request, $work);
+        return $this->workEditAuthorHandle->handle($request, $work);
     }
 
     public function delete(Request $request, Work $work): RedirectResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $work);
 
-        return $this->get('app.http_handle.work.delete')->handle($request, $work);
+        return $this->workDeleteHandle->handle($request, $work);
     }
 }

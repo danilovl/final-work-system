@@ -14,6 +14,15 @@ namespace App\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Task\Http\Ajax\{
+    TaskEditHandle,
+    TaskCreateHandle,
+    TaskDeleteHandle,
+    TaskCompleteAllHandle,
+    TaskChangeStatusHandle,
+    TaskCreateSeveralHandle,
+    TaskNotifyCompleteHandle
+};
 use App\Entity\{
     Task,
     Work
@@ -26,16 +35,27 @@ use Symfony\Component\HttpFoundation\{
 
 class TaskController extends BaseController
 {
+    public function __construct(
+        private TaskCreateHandle $taskCreateHandle,
+        private TaskCreateSeveralHandle $taskCreateSeveralHandle,
+        private TaskEditHandle $taskEditHandle,
+        private TaskChangeStatusHandle $taskChangeStatusHandle,
+        private TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
+        private TaskDeleteHandle $taskDeleteHandle,
+        private TaskCompleteAllHandle $taskCompleteAllHandle
+    ) {
+    }
+
     public function create(Request $request, Work $work): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
 
-        return $this->get('app.http_handle_ajax.task.create')->handle($request, $work);
+        return $this->taskCreateHandle->handle($request, $work);
     }
 
     public function createSeveral(Request $request): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.task.create_several')->handle($request);
+        return $this->taskCreateSeveralHandle->handle($request);
     }
 
     /**
@@ -49,7 +69,7 @@ class TaskController extends BaseController
     ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
-        return $this->get('app.http_handle_ajax.task.edit')->handle($request, $task);
+        return $this->taskEditHandle->handle($request, $task);
     }
 
     /**
@@ -63,7 +83,7 @@ class TaskController extends BaseController
     ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
-        return $this->get('app.http_handle_ajax.task.change_status')->handle($request, $task);
+        return $this->taskChangeStatusHandle->handle($request, $task);
     }
 
     /**
@@ -74,7 +94,7 @@ class TaskController extends BaseController
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE, $task);
 
-        return $this->get('app.http_handle_ajax.task.notify_complete')->handle($task);
+        return $this->taskNotifyCompleteHandle->handle($task);
     }
 
     /**
@@ -85,11 +105,11 @@ class TaskController extends BaseController
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $task);
 
-        return $this->get('app.http_handle_ajax.task.delete')->handle($task);
+        return $this->taskDeleteHandle->handle($task);
     }
 
     public function completeAll(): JsonResponse
     {
-        return $this->get('app.http_handle_ajax.task.complete_all')->handle();
+        return $this->taskCompleteAllHandle->handle();
     }
 }

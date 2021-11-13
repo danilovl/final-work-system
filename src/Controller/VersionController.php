@@ -13,6 +13,12 @@
 namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
+use App\Model\Version\Http\{
+    VersionEditHandle,
+    VersionCreateHandle,
+    VersionDownloadHandle,
+    VersionDetailContentHandle
+};
 use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\{
     Work,
@@ -27,6 +33,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class VersionController extends BaseController
 {
+    public function __construct(
+        private VersionCreateHandle $versionCreateHandle,
+        private VersionEditHandle $versionEditHandle,
+        private VersionDetailContentHandle $versionDetailContentHandle,
+        private VersionDownloadHandle $versionDownloadHandle
+    ) {
+    }
+
     public function create(
         Request $request,
         Work $work
@@ -36,7 +50,7 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE, $versionVoterSubject);
 
-        return $this->get('app.http_handle.version.create')->handle($request, $work);
+        return $this->versionCreateHandle->handle($request, $work);
     }
 
     /**
@@ -54,7 +68,7 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
 
-        return $this->get('app.http_handle.version.edit')->handle($request, $work, $media);
+        return $this->versionEditHandle->handle($request, $work, $media);
     }
 
     public function detailContent(Media $version): Response
@@ -63,7 +77,7 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $versionVoterSubject, 'The work media does not exist');
 
-        return $this->get('app.http_handle.version.detail_content')->handle($version);
+        return $this->versionDetailContentHandle->handle($version);
     }
 
     /**
@@ -80,7 +94,7 @@ class VersionController extends BaseController
 
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $versionVoterSubject);
 
-        return $this->get('app.http_handle.version.download')->handle($media);
+        return $this->versionDownloadHandle->handle($media);
     }
 
     /**
@@ -91,6 +105,6 @@ class VersionController extends BaseController
         Work $work,
         Media $media
     ): BinaryFileResponse {
-        return $this->get('app.http_handle.version.download')->handle($media);
+        return $this->versionDownloadHandle->handle($media);
     }
 }
