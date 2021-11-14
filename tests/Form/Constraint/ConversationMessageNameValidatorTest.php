@@ -12,7 +12,7 @@
 
 namespace App\Tests\Form\Constraint;
 
-use App\Form\Constraint\{
+use App\Model\ConversationMessage\Form\Constraint\{
     ConversationMessageName,
     ConversationMessageNameValidator
 };

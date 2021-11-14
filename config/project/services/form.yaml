@@ -11,6 +11,11 @@ services:
       - '../../../src/Form/Transformer'
       - '../../../src/Form/EventSubscriber'
 
+  App\Model\:
+    resource: '../../../src/Model/*/Form'
+    exclude:
+      - '../../../src/Model/*/Form/EventSubscriber'
+
   app.form.locales:
     class: App\Form\Type\LocaleType
     autowire: false

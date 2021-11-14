@@ -13,7 +13,7 @@
 namespace App\Model\Profile\Http;
 
 use App\Constant\FlashTypeConstant;
-use App\Form\ProfileFormType;
+use App\Model\Profile\Form\ProfileFormType;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;

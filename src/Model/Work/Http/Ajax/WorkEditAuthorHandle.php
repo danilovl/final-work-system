@@ -13,12 +13,12 @@
 namespace App\Model\Work\Http\Ajax;
 
 use App\Entity\Work;
-use App\Form\UserEditForm;
+use App\Model\User\Form\UserEditForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\UserModel;
 use App\Constant\AjaxJsonTypeConstant;
-use App\EventDispatcher\WorkEventDispatcherService;
+use App\Model\Work\EventDispatcher\WorkEventDispatcherService;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Service\RequestService;
 use Symfony\Component\HttpFoundation\{

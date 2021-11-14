@@ -13,7 +13,7 @@
 namespace App\Tests\Form;
 
 use App\Constant\UserRoleConstant;
-use App\Form\UserForm;
+use App\Model\User\Form\UserForm;
 use App\Model\User\UserModel;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

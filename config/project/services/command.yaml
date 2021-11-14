@@ -6,3 +6,7 @@ services:
 
   App\Command\:
     resource: '../../../src/Command'
+
+  App\Model\:
+    resource: '../../../src/Model/*/Command'
+    public: true

@@ -12,8 +12,8 @@
 
 namespace App\Tests\Form;
 
-use App\Form\WorkUserForm;
 use App\Entity\User;
+use App\Model\Work\Form\WorkUserForm;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;

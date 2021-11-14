@@ -14,12 +14,12 @@ namespace App\Model\Event\Http;
 
 use App\Constant\FlashTypeConstant;
 use App\Entity\Event;
-use App\EventDispatcher\EventEventDispatcherService;
-use App\Form\CommentForm;
+use App\Model\Comment\Form\CommentForm;
 use App\Form\Factory\FormDeleteFactory;
 use App\Model\Comment\CommentModel;
 use App\Model\Comment\Facade\CommentFacade;
 use App\Model\Comment\Factory\CommentFactory;
+use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use App\Model\EventAddress\Facade\EventAddressFacade;
 use App\Service\{
     UserService,

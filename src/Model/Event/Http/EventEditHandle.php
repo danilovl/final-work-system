@@ -12,12 +12,12 @@
 
 namespace App\Model\Event\Http;
 
+use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use App\Entity\{
     Event,
     EventParticipant
 };
-use App\EventDispatcher\EventEventDispatcherService;
-use App\Form\EventForm;
+use App\Model\Event\Form\EventForm;
 use App\Model\Event\EventModel;
 use App\Model\Event\Facade\EventParticipantFacade;
 use App\Model\Event\Factory\EventFactory;

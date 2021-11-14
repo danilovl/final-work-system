@@ -13,8 +13,8 @@
 namespace App\Model\User\Http\Ajax;
 
 use App\Entity\User;
-use App\EventDispatcher\UserEventDispatcherService;
-use App\Form\UserEditForm;
+use App\Model\User\EventDispatcher\UserEventDispatcherService;
+use App\Model\User\Form\UserEditForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\UserModel;

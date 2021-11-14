@@ -15,11 +15,9 @@ namespace App\Model\Work\Http;
 use App\Constant\WorkUserTypeConstant;
 use App\ElasticSearch\WorkSearch;
 use App\Entity\Work;
-use App\Form\Factory\{
-    WorkFormFactory,
-    FormDeleteFactory
-};
+use App\Form\Factory\FormDeleteFactory;
 use App\Helper\WorkFunctionHelper;
+use App\Model\Work\Form\Factory\WorkFormFactory;
 use App\Model\WorkSearch\WorkSearchModel;
 use App\Service\{
     UserService,

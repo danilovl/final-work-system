@@ -27,9 +27,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
+    {
+    }
+
     public function index(): Response
     {
-        $url = $this->get(AdminUrlGenerator::class)
+        $url = $this->adminUrlGenerator
             ->setController(UserCrudController::class)
             ->generateUrl();
 

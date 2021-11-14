@@ -12,8 +12,8 @@
 
 namespace App\Model\User\Http\Ajax;
 
-use App\EventDispatcher\UserEventDispatcherService;
-use App\Form\UserForm;
+use App\Model\User\EventDispatcher\UserEventDispatcherService;
+use App\Model\User\Form\UserForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\User\Facade\UserFacade;
 use App\Model\User\Factory\UserFactory;

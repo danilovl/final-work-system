@@ -12,10 +12,10 @@
 
 namespace App\Model\User\Http;
 
-use App\EventDispatcher\UserEventDispatcherService;
-use App\Form\Factory\UserFormFactory;
+use App\Model\User\EventDispatcher\UserEventDispatcherService;
 use App\Model\User\Facade\UserFacade;
 use App\Model\User\Factory\UserFactory;
+use App\Model\User\Form\Factory\UserFormFactory;
 use App\Model\User\UserModel;
 use App\Constant\{
     FlashTypeConstant,

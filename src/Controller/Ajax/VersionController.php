@@ -14,12 +14,12 @@ namespace App\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Model\Version\Http\Ajax\{
     VersionEditHandle,
     VersionCreateHandle,
     VersionDeleteHandle
 };
-use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\{
     Work,
     Media

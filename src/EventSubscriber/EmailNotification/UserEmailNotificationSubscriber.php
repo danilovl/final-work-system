@@ -13,8 +13,8 @@
 namespace App\EventSubscriber\EmailNotification;
 
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
-use App\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\EventSubscriber\Events;
+use App\Model\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface

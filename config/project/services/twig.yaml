@@ -7,12 +7,6 @@ services:
   App\Twig\:
     resource: '../../../src/Twig'
 
-  App\Twig\ChangeLanguageExtension:
-    arguments:
-      - '%locales%'
-    tags:
-      - { name: twig.extension }
-
   App\Twig\Runtime\AwayRuntime:
     arguments:
       - '@router'
@@ -30,18 +24,24 @@ services:
     tags:
       - { name: twig.runtime }
 
-  App\Twig\Runtime\WorkRuntime:
+  App\Model\Work\Twig\Runtime\WorkRuntime:
     tags:
       - { name: twig.runtime }
 
-  App\Twig\Runtime\UserRuntime:
+  App\Model\User\Twig\Runtime\UserRuntime:
     tags:
       - { name: twig.runtime }
 
-  App\Twig\Runtime\ConversationRuntime:
+  App\Model\Conversation\Twig\Runtime\ConversationRuntime:
     tags:
       - { name: twig.runtime }
 
-  App\Twig\Runtime\TaskRuntime:
+  App\Model\Task\Twig\Runtime\TaskRuntime:
+    tags:
+      - { name: twig.runtime }
+
+  App\Twig\Runtime\LocaleRuntime:
+    arguments:
+      - '%locales%'
     tags:
       - { name: twig.runtime }

@@ -13,7 +13,7 @@
 namespace App\Model\Document\Http\Ajax;
 
 use App\Entity\Media;
-use App\Form\Factory\DocumentFormFactory;
+use App\Model\Document\Form\Factory\DocumentFormFactory;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;

@@ -13,9 +13,9 @@
 namespace App\EventSubscriber\EmailNotification;
 
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
-use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Entity\ConversationParticipant;
 use App\EventSubscriber\Events;
+use App\Model\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface

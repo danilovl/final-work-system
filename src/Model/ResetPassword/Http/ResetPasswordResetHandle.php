@@ -14,7 +14,7 @@ namespace App\Model\ResetPassword\Http;
 
 use App\Constant\FlashTypeConstant;
 use App\Exception\ResetPasswordExceptionInterface;
-use App\Form\ResetChangePasswordForm;
+use App\Model\ResetPassword\Form\ResetChangePasswordForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

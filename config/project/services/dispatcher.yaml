@@ -6,3 +6,8 @@ services:
   App\EventDispatcher\:
     resource: '../../../src/EventDispatcher/'
     exclude: '../../../src/EventDispatcher/GenericEvent'
+
+  App\Model\:
+    resource: '../../../src/Model/*/EventDispatcher'
+    exclude:
+      - '../../../src/Model/*/EventDispatcher/GenericEvent'

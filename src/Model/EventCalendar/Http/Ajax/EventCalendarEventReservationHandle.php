@@ -12,10 +12,10 @@
 
 namespace App\Model\EventCalendar\Http\Ajax;
 
-use App\EventDispatcher\EventEventDispatcherService;
 use App\Exception\AjaxRuntimeException;
-use App\Form\EventWorkReservationForm;
+use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use App\Model\Event\Facade\EventCalendarFacade;
+use App\Model\EventCalendar\Form\EventWorkReservationForm;
 use App\Model\EventWorkReservation\EventWorkReservationModel;
 use App\Constant\{
     WorkStatusConstant,

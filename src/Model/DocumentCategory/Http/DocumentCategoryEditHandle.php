@@ -13,7 +13,7 @@
 namespace App\Model\DocumentCategory\Http;
 
 use App\Entity\MediaCategory;
-use App\Form\Factory\DocumentCategoryFormFactory;
+use App\Model\DocumentCategory\Form\Factory\DocumentCategoryFormFactory;
 use App\Model\MediaCategory\Factory\MediaCategoryFactory;
 use App\Model\MediaCategory\MediaCategoryModel;
 use App\Constant\{

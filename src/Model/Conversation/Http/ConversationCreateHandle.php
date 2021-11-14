@@ -12,7 +12,7 @@
 
 namespace App\Model\Conversation\Http;
 
-use App\Form\ConversationComposeMessageForm;
+use App\Model\ConversationMessage\Form\ConversationComposeMessageForm;
 use App\Helper\{
     UserRoleHelper,
     ConversationHelper

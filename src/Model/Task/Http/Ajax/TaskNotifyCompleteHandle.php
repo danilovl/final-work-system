@@ -13,8 +13,8 @@
 namespace App\Model\Task\Http\Ajax;
 
 use App\Entity\Task;
-use App\EventDispatcher\TaskEventDispatcherService;
 use App\Constant\AjaxJsonTypeConstant;
+use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Service\{
     RequestService,
     EntityManagerService

@@ -13,8 +13,8 @@
 namespace App\Model\Document\Http\Ajax;
 
 use App\Entity\MediaType;
-use App\EventDispatcher\DocumentEventDispatcherService;
-use App\Form\Factory\DocumentFormFactory;
+use App\Model\Document\EventDispatcher\DocumentEventDispatcherService;
+use App\Model\Document\Form\Factory\DocumentFormFactory;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;

@@ -13,11 +13,11 @@
 namespace App\Model\User\Http;
 
 use App\Constant\WorkUserTypeConstant;
+use App\Model\Work\Form\WorkSearchStatusForm;
 use App\DataTransferObject\Repository\{
     WorkData,
     WorkStatusData
 };
-use App\Form\WorkSearchStatusForm;
 use App\Helper\UserHelper;
 use App\Model\User\Facade\UserFacade;
 use App\Model\Work\Facade\WorkFacade;

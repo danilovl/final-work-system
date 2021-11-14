@@ -12,9 +12,9 @@
 
 namespace App\EventSubscriber\SystemEvent;
 
-use App\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
+use App\Model\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\Service\EntityManagerService;
 use App\Model\Work\Service\WorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

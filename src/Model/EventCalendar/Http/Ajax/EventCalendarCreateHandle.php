@@ -12,8 +12,8 @@
 
 namespace App\Model\EventCalendar\Http\Ajax;
 
-use App\EventDispatcher\EventEventDispatcherService;
 use App\Exception\AjaxRuntimeException;
+use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant,
@@ -28,7 +28,7 @@ use App\Entity\{
     WorkStatus,
     EventParticipant
 };
-use App\Form\EventForm;
+use App\Model\Event\Form\EventForm;
 use App\Helper\SortFunctionHelper;
 use App\Model\Event\EventModel;
 use App\Model\User\Service\UserWorkService;

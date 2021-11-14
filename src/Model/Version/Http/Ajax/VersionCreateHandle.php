@@ -14,12 +14,12 @@ namespace App\Model\Version\Http\Ajax;
 
 use App\Entity\MediaType;
 use App\Entity\Work;
-use App\EventDispatcher\VersionEventDispatcherService;
-use App\Form\VersionForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\Media\Facade\MediaMimeTypeFacade;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;
+use App\Model\Version\EventDispatcher\VersionEventDispatcherService;
+use App\Model\Version\Form\VersionForm;
 use App\Constant\{
     MediaTypeConstant,
     AjaxJsonTypeConstant

@@ -12,8 +12,8 @@
 
 namespace App\Model\UserGroup\Http;
 
-use App\Form\Factory\UserGroupFormFactory;
 use App\Model\UserGroup\Factory\UserGroupFactory;
+use App\Model\UserGroup\Form\Factory\UserGroupFormFactory;
 use App\Model\UserGroup\UserGroupModel;
 use App\Constant\{
     FlashTypeConstant,

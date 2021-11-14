@@ -12,7 +12,7 @@
 
 namespace App\Model\Task\Http\Ajax;
 
-use App\EventDispatcher\TaskEventDispatcherService;
+use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Model\Task\Facade\TaskFacade;
 use App\Constant\{
     TaskStatusConstant,

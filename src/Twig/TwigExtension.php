@@ -12,12 +12,13 @@
 
 namespace App\Twig;
 
+use App\Model\Conversation\Twig\Runtime\ConversationRuntime;
+use App\Model\Task\Twig\Runtime\TaskRuntime;
+use App\Model\User\Twig\Runtime\UserRuntime;
+use App\Model\Work\Twig\Runtime\WorkRuntime;
 use App\Twig\Runtime\{
-    UserRuntime,
-    TaskRuntime,
-    WorkRuntime,
     AwayRuntime,
-    ConversationRuntime
+    LocaleRuntime
 };
 use Twig\{
     TwigFilter,
@@ -28,10 +29,6 @@ use Twig\Extension\AbstractExtension;
 
 class TwigExtension extends AbstractExtension
 {
-    public function __construct()
-    {
-    }
-
     public function getFunctions(): array
     {
         $userFunctions = [
@@ -59,12 +56,17 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink'])
         ];
 
+        $otherFunctions = [
+            new TwigFunction('locales', [LocaleRuntime::class, 'getLocales'])
+        ];
+
         return [
             ...$userFunctions,
             ...$workFunctions,
             ...$taskFunctions,
             ...$conversationFunctions,
-            ...$systemEventFunctions
+            ...$systemEventFunctions,
+            ...$otherFunctions
         ];
     }
 

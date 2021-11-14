@@ -14,10 +14,9 @@ namespace App\Service;
 
 use App\Constant\TranslationConstant;
 use App\Exception\RuntimeException;
-use App\Service\Interfaces\SeoPageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class SeoPageService implements SeoPageInterface
+class SeoPageService
 {
     public const DEFAULT_SEPARATOR = '';
 
@@ -37,14 +36,14 @@ class SeoPageService implements SeoPageInterface
         ];
     }
 
-    public function setTitle(?string $title): SeoPageInterface
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function addTitle(string $title, string $separator = null): SeoPageInterface
+    public function addTitle(string $title, string $separator = null): self
     {
         $separator = $separator ?? $this->separator;
         $this->title = $this->getTransTitle() . $separator . $this->getTransTitle($title);
@@ -78,7 +77,7 @@ class SeoPageService implements SeoPageInterface
         string $name,
         string $content,
         array $extras = []
-    ): SeoPageInterface {
+    ): self {
         if (!isset($this->metas[$type])) {
             $this->metas[$type] = [];
         }
@@ -93,7 +92,7 @@ class SeoPageService implements SeoPageInterface
         return isset($this->metas[$type][$name]);
     }
 
-    public function setMetas(array $metaData): SeoPageInterface
+    public function setMetas(array $metaData): self
     {
         $this->metas = [];
 

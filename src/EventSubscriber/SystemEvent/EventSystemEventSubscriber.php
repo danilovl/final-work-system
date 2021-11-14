@@ -12,9 +12,9 @@
 
 namespace App\EventSubscriber\SystemEvent;
 
-use App\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
+use App\Model\Event\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\Entity\{
     SystemEvent,
     SystemEventRecipient,

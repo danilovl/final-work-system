@@ -13,14 +13,14 @@
 namespace App\Model\Work\Http;
 
 use App\Entity\Work;
-use App\Form\UserEditForm;
+use App\Model\User\Form\UserEditForm;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\UserModel;
+use App\Model\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Constant\{
     SeoPageConstant,
     FlashTypeConstant
 };
-use App\EventDispatcher\WorkEventDispatcherService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Service\{

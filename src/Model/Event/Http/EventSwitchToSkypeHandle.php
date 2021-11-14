@@ -13,7 +13,7 @@
 namespace App\Model\Event\Http;
 
 use App\Entity\Event;
-use App\EventDispatcher\EventEventDispatcherService;
+use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use App\Model\EventAddress\Facade\EventAddressFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Constant\FlashTypeConstant;

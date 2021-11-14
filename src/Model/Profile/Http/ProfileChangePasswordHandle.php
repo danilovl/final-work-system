@@ -13,7 +13,7 @@
 namespace App\Model\Profile\Http;
 
 use App\Constant\FlashTypeConstant;
-use App\Form\ProfileChangePasswordFormType;
+use App\Model\ResetPassword\Form\ProfileChangePasswordFormType;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;

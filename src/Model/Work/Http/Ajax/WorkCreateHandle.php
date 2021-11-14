@@ -12,9 +12,9 @@
 
 namespace App\Model\Work\Http\Ajax;
 
-use App\Form\WorkForm;
+use App\Model\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Model\Work\Form\WorkForm;
 use App\Constant\AjaxJsonTypeConstant;
-use App\EventDispatcher\WorkEventDispatcherService;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\Work\Factory\WorkFactory;
 use App\Model\Work\WorkModel;

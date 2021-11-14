@@ -12,8 +12,8 @@
 
 namespace App\Tests\Form;
 
-use App\Form\EventAddressForm;
 use App\Model\EventAddress\EventAddressModel;
+use App\Model\EventAddress\Form\EventAddressForm;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;

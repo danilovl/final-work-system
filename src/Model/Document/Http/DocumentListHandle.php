@@ -18,7 +18,7 @@ use App\Constant\{
 };
 use App\DataTransferObject\Repository\MediaData;
 use App\Entity\MediaType;
-use App\Form\Factory\DocumentFormFactory;
+use App\Model\Document\Form\Factory\DocumentFormFactory;
 use App\Model\Media\Facade\MediaFacade;
 use App\Model\User\Facade\UserFacade;
 use App\Service\{EntityManagerService,

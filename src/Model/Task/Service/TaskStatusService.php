@@ -14,7 +14,7 @@ namespace App\Model\Task\Service;
 
 use App\Constant\TaskStatusConstant;
 use App\Entity\Task;
-use App\EventDispatcher\TaskEventDispatcherService;
+use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
 
 class TaskStatusService
 {
@@ -22,10 +22,8 @@ class TaskStatusService
     {
     }
 
-    public function changeStatus(
-        string $type,
-        Task $task
-    ): void {
+    public function changeStatus(string $type, Task $task): void
+    {
         switch ($type) {
             case TaskStatusConstant::ACTIVE:
                 $task->changeActive();

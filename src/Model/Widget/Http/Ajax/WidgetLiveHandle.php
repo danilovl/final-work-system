@@ -12,7 +12,7 @@
 
 namespace App\Model\Widget\Http\Ajax;
 
-use App\Service\Widget\WidgetStreamService;
+use App\Model\Widget\Service\WidgetStreamService;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class WidgetLiveHandle

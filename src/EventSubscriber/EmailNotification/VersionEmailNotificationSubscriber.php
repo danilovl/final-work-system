@@ -13,11 +13,11 @@
 namespace App\EventSubscriber\EmailNotification;
 
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
-use App\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Entity\User;
 use App\EventSubscriber\Events;
 use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Model\User\Facade\UserFacade;
+use App\Model\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Model\Work\Service\WorkService;
 use App\Service\TranslatorService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;

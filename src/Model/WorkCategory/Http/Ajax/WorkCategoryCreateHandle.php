@@ -12,9 +12,9 @@
 
 namespace App\Model\WorkCategory\Http\Ajax;
 
-use App\Form\WorkCategoryForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\WorkCategory\Factory\WorkCategoryFactory;
+use App\Model\WorkCategory\Form\WorkCategoryForm;
 use App\Model\WorkCategory\WorkCategoryModel;
 use App\Constant\AjaxJsonTypeConstant;
 use Symfony\Component\Form\FormFactoryInterface;

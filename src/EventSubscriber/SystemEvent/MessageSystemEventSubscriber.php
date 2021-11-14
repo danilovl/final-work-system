@@ -12,9 +12,9 @@
 
 namespace App\EventSubscriber\SystemEvent;
 
-use App\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
+use App\Model\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     SystemEvent,

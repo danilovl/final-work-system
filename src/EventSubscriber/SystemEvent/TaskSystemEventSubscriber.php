@@ -12,9 +12,9 @@
 
 namespace App\EventSubscriber\SystemEvent;
 
-use App\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
+use App\Model\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Entity\{
     SystemEvent,

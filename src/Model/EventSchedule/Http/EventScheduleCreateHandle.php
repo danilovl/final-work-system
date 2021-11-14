@@ -12,10 +12,10 @@
 
 namespace App\Model\EventSchedule\Http;
 
-use App\Form\EventScheduleForm;
 use App\Model\EventSchedule\EventScheduleModel;
 use App\Model\EventSchedule\Factory\EventScheduleFactory;
 use App\Constant\FlashTypeConstant;
+use App\Model\EventSchedule\Form\EventScheduleForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Service\{
     UserService,

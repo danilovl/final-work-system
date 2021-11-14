@@ -14,7 +14,7 @@ namespace App\Model\ResetPassword\Http;
 
 use App\EventDispatcher\SecurityDispatcherService;
 use App\Exception\ResetPasswordExceptionInterface;
-use App\Form\ResetPasswordRequestForm;
+use App\Model\ResetPassword\Form\ResetPasswordRequestForm;
 use App\Model\User\Facade\UserFacade;
 use App\Constant\FlashTypeConstant;
 use Symfony\Component\Form\FormFactoryInterface;

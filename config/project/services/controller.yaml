@@ -3,6 +3,13 @@ services:
     autowire: true
     public: true
 
+  App\Controller\:
+    resource: '../../../src/Controller'
+    public: true
+    tags: ['controller.service_arguments']
+    calls:
+      - [setContainer, ["@service_container"]]
+
   #  Controller
   app.controller.version:
     class: App\Controller\VersionController

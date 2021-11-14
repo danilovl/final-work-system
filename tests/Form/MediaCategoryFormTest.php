@@ -12,7 +12,7 @@
 
 namespace App\Tests\Form;
 
-use App\Form\MediaCategoryForm;
+use App\Model\MediaCategory\Form\MediaCategoryForm;
 use App\Model\MediaCategory\MediaCategoryModel;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

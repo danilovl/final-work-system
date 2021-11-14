@@ -14,12 +14,12 @@ namespace App\Model\Profile\Http;
 
 use App\Constant\FlashTypeConstant;
 use App\Constant\MediaTypeConstant;
+use App\Model\Profile\Form\ProfileMediaForm;
 use App\Entity\{
     Media,
     MediaMimeType
 };
 use App\Exception\RuntimeException;
-use App\Form\ProfileMediaForm;
 use App\Model\Media\Facade\MediaTypeFacade;
 use App\Model\Media\MediaModel;
 use Symfony\Component\Form\FormFactoryInterface;

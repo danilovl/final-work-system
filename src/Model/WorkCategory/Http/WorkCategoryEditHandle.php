@@ -13,8 +13,8 @@
 namespace App\Model\WorkCategory\Http;
 
 use App\Entity\WorkCategory;
-use App\Form\Factory\WorkCategoryFormFactory;
 use App\Model\WorkCategory\Factory\WorkCategoryFactory;
+use App\Model\WorkCategory\Form\Factory\WorkCategoryFormFactory;
 use App\Model\WorkCategory\WorkCategoryModel;
 use App\Constant\{
     FlashTypeConstant,

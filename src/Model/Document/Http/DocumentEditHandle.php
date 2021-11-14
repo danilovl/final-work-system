@@ -12,7 +12,7 @@
 
 namespace App\Model\Document\Http;
 
-use App\Form\Factory\DocumentFormFactory;
+use App\Model\Document\Form\Factory\DocumentFormFactory;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;
 use App\Entity\Media;

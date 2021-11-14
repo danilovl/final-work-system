@@ -13,9 +13,9 @@
 namespace App\EventSubscriber\SystemEvent;
 
 use App\Constant\WorkUserTypeConstant;
-use App\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
+use App\Model\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Service\EntityManagerService;
 use App\Model\User\Service\UserWorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

@@ -14,7 +14,7 @@ namespace App\Model\DocumentCategory\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
 use App\Entity\MediaCategory;
-use App\Form\MediaCategoryForm;
+use App\Model\MediaCategory\Form\MediaCategoryForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\MediaCategory\Factory\MediaCategoryFactory;
 use App\Model\MediaCategory\MediaCategoryModel;

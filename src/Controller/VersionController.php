@@ -13,13 +13,13 @@
 namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
+use App\Model\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Model\Version\Http\{
     VersionEditHandle,
     VersionCreateHandle,
     VersionDownloadHandle,
     VersionDetailContentHandle
 };
-use App\Security\Voter\Subject\VersionVoterSubject;
 use App\Entity\{
     Work,
     Media

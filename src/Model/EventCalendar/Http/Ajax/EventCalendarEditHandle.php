@@ -13,7 +13,7 @@
 namespace App\Model\EventCalendar\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
-use App\EventDispatcher\EventEventDispatcherService;
+use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;

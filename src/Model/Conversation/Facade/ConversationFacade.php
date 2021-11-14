@@ -13,6 +13,7 @@
 namespace App\Model\Conversation\Facade;
 
 use App\Helper\ConversationHelper;
+use App\Model\Conversation\EventDispatcher\ConversationEventDispatcherService;
 use App\Model\Conversation\Factory\ConversationFactory;
 use App\Model\Conversation\Service\{
     ConversationStatusService,
@@ -20,7 +21,6 @@ use App\Model\Conversation\Service\{
 };
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\ConversationMessage\ConversationComposeMessageModel;
-use App\EventDispatcher\ConversationEventDispatcherService;
 use App\Service\EntityManagerService;
 use Doctrine\ORM\Query;
 use App\Constant\{

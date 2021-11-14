@@ -14,11 +14,11 @@ namespace App\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Model\Article\Http\ArticleDetailHandle;
+use App\Model\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Entity\{
     Article,
     ArticleCategory
 };
-use App\Security\Voter\Subject\ArticleVoterSubject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +34,7 @@ class ArticleController extends BaseController
      */
     public function detail(Article $article, ArticleCategory $articleCategory): Response
     {
-        $articleVoterSubject = (new ArticleVoterSubject)
+        $articleVoterSubject = (new ArticleVoterSubject())
             ->setArticle($article)
             ->setArticleCategory($articleCategory);
 

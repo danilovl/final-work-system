@@ -12,9 +12,9 @@
 
 namespace App\Model\EventSchedule\Http;
 
-use App\Form\EventScheduleForm;
 use App\Model\EventSchedule\EventScheduleModel;
 use App\Model\EventSchedule\Factory\EventScheduleFactory;
+use App\Model\EventSchedule\Form\EventScheduleForm;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Entity\EventSchedule;

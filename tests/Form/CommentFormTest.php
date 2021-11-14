@@ -18,7 +18,7 @@ use App\Entity\{
     Event
 };
 use DateTime;
-use App\Form\CommentForm;
+use App\Model\Comment\Form\CommentForm;
 use App\Model\Comment\CommentModel;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;

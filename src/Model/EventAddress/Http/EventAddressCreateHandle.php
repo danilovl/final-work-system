@@ -13,9 +13,9 @@
 namespace App\Model\EventAddress\Http;
 
 use App\Constant\ControllerMethodConstant;
-use App\Form\Factory\EventAddressFormFactory;
 use App\Model\EventAddress\EventAddressModel;
 use App\Model\EventAddress\Factory\EventAddressFactory;
+use App\Model\EventAddress\Form\Factory\EventAddressFormFactory;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Service\{
     UserService,

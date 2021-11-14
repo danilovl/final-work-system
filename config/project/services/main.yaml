@@ -72,16 +72,16 @@ services:
   App\Model\Conversation\Service\ConversationStreamService: '@app.stream.conversation'
 
   app.widget:
-    class: App\Service\Widget\WidgetManagerService
+    class: App\Model\Widget\Service\WidgetManagerService
     arguments:
       $container: '@service_container'
 
-  App\Service\Widget\WidgetManagerService: '@app.widget'
+  App\Model\Widget\Service\WidgetManagerService: '@app.widget'
 
   app.stream.widget:
-    class: App\Service\Widget\WidgetStreamService
+    class: App\Model\Widget\Service\WidgetStreamService
 
-  App\Service\Widget\WidgetStreamService: '@app.stream.widget'
+  App\Model\Widget\Service\WidgetStreamService: '@app.stream.widget'
 
   app.system_event_link_generator:
     class: App\Service\SystemEventLinkGeneratorService
