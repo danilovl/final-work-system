@@ -1,7 +1,7 @@
 task_list:
   path: /task/list
   defaults:
-    _controller: App\Controller\TaskController::list
+    _controller: App\Model\Task\Controller\TaskController::list
     _seo:
       title: 'app.page.task_list'
   methods: [GET]
@@ -11,7 +11,7 @@ task_create:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\TaskController::create
+    _controller: App\Model\Task\Controller\TaskController::create
     _seo:
       title: 'app.page.task_create'
   methods:  [GET,POST]
@@ -21,13 +21,13 @@ task_create_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\TaskController::create
+    _controller: App\Model\Task\Controller\Ajax\TaskController::create
   methods: [POST]
 
 task_create_several:
   path: /task/create-several
   defaults:
-    _controller: App\Controller\TaskController::createSeveral
+    _controller: App\Model\Task\Controller\TaskController::createSeveral
     _seo:
       title: 'app.page.task_create'
   methods:  [GET,POST]
@@ -35,7 +35,7 @@ task_create_several:
 task_create_several_ajax:
   path: /task/create-several/ajax
   defaults:
-    _controller: App\Controller\Ajax\TaskController::createSeveral
+    _controller: App\Model\Task\Controller\Ajax\TaskController::createSeveral
   methods: [POST]
 
 task_edit:
@@ -44,7 +44,7 @@ task_edit:
     id_work: '%hashid%'
     id_TaskController:: '%hashid%'
   defaults:
-    _controller: App\Controller\TaskController::edit
+    _controller: App\Model\Task\Controller\TaskController::edit
     _seo:
       title: 'app.page.task_edit'
   methods: [GET, POST]
@@ -55,7 +55,7 @@ task_edit_ajax:
     id_work: '%hashid%'
     id_TaskController:: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\TaskController::edit
+    _controller: App\Model\Task\Controller\Ajax\TaskController::edit
   methods: [POST]
 
 task_change_status_ajax:
@@ -65,13 +65,13 @@ task_change_status_ajax:
     id_TaskController:: '%hashid%'
     type: "complete|active|notify"
   defaults:
-    _controller: App\Controller\Ajax\TaskController::changeStatus
+    _controller: App\Model\Task\Controller\Ajax\TaskController::changeStatus
   methods: [POST]
 
 task_change_all_to_complete_ajax:
   path: /tasks/change-all-to-complete/ajax
   defaults:
-    _controller: App\Controller\Ajax\TaskController::completeAll
+    _controller: App\Model\Task\Controller\Ajax\TaskController::completeAll
   methods: [POST]
 
 task_notify_complete_ajax:
@@ -80,7 +80,7 @@ task_notify_complete_ajax:
     id_work: '%hashid%'
     id_TaskController:: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\TaskController::notifyComplete
+    _controller: App\Model\Task\Controller\Ajax\TaskController::notifyComplete
   methods: [POST]
 
 task_delete:
@@ -89,5 +89,5 @@ task_delete:
     id_work: '%hashid%'
     id_TaskController:: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\TaskController::delete
+    _controller: App\Model\Task\Controller\Ajax\TaskController::delete
   methods: [POST, DELETE]

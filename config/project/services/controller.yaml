@@ -10,13 +10,16 @@ services:
     calls:
       - [setContainer, ["@service_container"]]
 
-  #  Controller
+  App\Model\:
+    resource: '../../../src/Model/*/Controller'
+    public: true
+
   app.controller.version:
-    class: App\Controller\VersionController
+    class: App\Model\Version\Controller\VersionController
     calls:
       - [setContainer, ["@service_container"]]
 
   app.controller.document:
-    class: App\Controller\DocumentController
+    class: App\Model\Document\Controller\DocumentController
     calls:
       - [setContainer, ["@service_container"]]

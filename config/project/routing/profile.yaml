@@ -1,7 +1,7 @@
 profile_show:
   path: /profile
   defaults:
-    _controller: App\Controller\ProfileController::show
+    _controller: App\Model\Profile\Controller\ProfileController::show
     _seo:
       title: 'app.page.profile'
   methods: [GET, POST]
@@ -9,7 +9,7 @@ profile_show:
 profile_edit:
   path: /profile/edit
   defaults:
-    _controller: App\Controller\ProfileController::edit
+    _controller: App\Model\Profile\Controller\ProfileController::edit
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]
@@ -17,7 +17,7 @@ profile_edit:
 profile_change_image:
   path: /profile/image
   defaults:
-    _controller: App\Controller\ProfileController::changeImage
+    _controller: App\Model\Profile\Controller\ProfileController::changeImage
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]
@@ -25,13 +25,13 @@ profile_change_image:
 profile_delete_image:
   path: /profile/image/delete
   defaults:
-    _controller: App\Controller\ProfileController::deleteImage
+    _controller: App\Model\Profile\Controller\ProfileController::deleteImage
   methods: [GET, POST]
 
 profile_change_password:
   path: /profile/change-password
   defaults:
-    _controller: App\Controller\ProfileController::changePassword
+    _controller: App\Model\Profile\Controller\ProfileController::changePassword
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]
@@ -39,5 +39,5 @@ profile_change_password:
 profile_create_image_web_camera_ajax:
   path: /profile/image/create-web-camera/ajax
   defaults:
-    _controller: App\Controller\Ajax\ProfileController::createImageWebCamera
+    _controller: App\Model\Profile\Controller\Ajax\ProfileController::createImageWebCamera
   methods: [POST]

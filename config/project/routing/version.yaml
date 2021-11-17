@@ -3,7 +3,7 @@ version_create:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\VersionController::create
+    _controller: App\Model\Version\Controller\VersionController::create
     _seo:
       title: 'app.page.version_add'
   methods: [GET,POST]
@@ -13,7 +13,7 @@ version_create_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\VersionController::create
+    _controller: App\Model\Version\Controller\Ajax\VersionController::create
   methods: [POST]
 
 version_edit:
@@ -22,7 +22,7 @@ version_edit:
     id_work: '%hashid%'
     id_media: '%hashid%'
   defaults:
-    _controller: App\Controller\VersionController::edit
+    _controller: App\Model\Version\Controller\VersionController::edit
     _seo:
       title: 'app.page.version_edit'
   methods: [GET,POST]
@@ -33,7 +33,7 @@ version_edit_ajax:
     id_work: '%hashid%'
     id_media: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\VersionController::edit
+    _controller: App\Model\Version\Controller\Ajax\VersionController::edit
   methods: [POST]
 
 version_download:
@@ -42,7 +42,7 @@ version_download:
     id_work: '%hashid%'
     id_media: '%hashid%'
   defaults:
-    _controller: App\Controller\VersionController::download
+    _controller: App\Model\Version\Controller\VersionController::download
   methods:  [GET,POST]
 
 version_google_download:
@@ -51,7 +51,7 @@ version_google_download:
     id_work: '%hashid%'
     id_media: '%hashid%'
   defaults:
-    _controller: App\Controller\VersionController::downloadGoogle
+    _controller: App\Model\Version\Controller\VersionController::downloadGoogle
   methods:  [GET,POST]
 
 version_delete_ajax:
@@ -60,5 +60,5 @@ version_delete_ajax:
     id_work: '%hashid%'
     id_media: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\VersionController::delete
+    _controller: App\Model\Version\Controller\Ajax\VersionController::delete
   methods:  [POST, DELETE]

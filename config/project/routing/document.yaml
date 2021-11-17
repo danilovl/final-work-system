@@ -1,7 +1,7 @@
 document_create:
   path: /create
   defaults:
-    _controller: App\Controller\DocumentController::create
+    _controller: App\Model\Document\Controller\DocumentController::create
     _seo:
       title: 'app.page.information_material_create'
   methods: [GET, POST]
@@ -9,7 +9,7 @@ document_create:
 document_create_ajax:
   path: /create/ajax
   defaults:
-    _controller: App\Controller\Ajax\DocumentController::create
+    _controller: App\Model\Document\Controller\Ajax\DocumentController::create
   methods:  [POST]
 
 document_edit:
@@ -17,7 +17,7 @@ document_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\DocumentController::edit
+    _controller: App\Model\Document\Controller\DocumentController::edit
     _seo:
       title: 'app.page.information_material_edit'
   methods: [GET, POST]
@@ -27,13 +27,13 @@ document_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\DocumentController::edit
+    _controller: App\Model\Document\Controller\Ajax\DocumentController::edit
   methods: [GET, POST]
 
 document_list:
   path: /list
   defaults:
-    _controller: App\Controller\DocumentController::list
+    _controller: App\Model\Document\Controller\DocumentController::list
     _seo:
       title: 'app.page.information_materials'
   methods: [GET, POST]
@@ -41,7 +41,7 @@ document_list:
 document_list_owner:
   path: /list/owner
   defaults:
-    _controller: App\Controller\DocumentController::listOwner
+    _controller: App\Model\Document\Controller\DocumentController::listOwner
     _seo:
       title: 'app.page.information_materials'
   methods:  [GET, POST]
@@ -51,7 +51,7 @@ document_change_active_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\DocumentController::changeActive
+    _controller: App\Model\Document\Controller\Ajax\DocumentController::changeActive
   methods:  [POST]
 
 document_download:
@@ -59,7 +59,7 @@ document_download:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\DocumentController::download
+    _controller: App\Model\Document\Controller\DocumentController::download
   methods:  [GET,POST]
 
 document_google_download:
@@ -67,7 +67,7 @@ document_google_download:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\DocumentController::download
+    _controller: App\Model\Document\Controller\DocumentController::download
   methods:  [GET,POST]
 
 document_delete_ajax:
@@ -75,6 +75,6 @@ document_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\DocumentController::delete
+    _controller: App\Model\Document\Controller\Ajax\DocumentController::delete
   methods:  [POST, DELETE]
 

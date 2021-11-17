@@ -3,11 +3,11 @@ system_event_change_viewed_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Controller\Ajax\SystemEventController::viewed
+    _controller: App\Model\SystemEvent\Controller\Ajax\SystemEventController::viewed
   methods: [POST]
 
 system_event_all_change_to_viewed_ajax:
   path: /viewed-all/ajax
   defaults:
-    _controller: App\Controller\Ajax\SystemEventController::viewedAll
+    _controller: App\Model\SystemEvent\Controller\Ajax\SystemEventController::viewedAll
   methods: [POST]
