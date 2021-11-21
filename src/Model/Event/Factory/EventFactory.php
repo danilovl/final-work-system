@@ -13,7 +13,7 @@
 namespace App\Model\Event\Factory;
 
 use App\Model\BaseModelFactory;
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Model\Event\EventModel;
 
 class EventFactory extends BaseModelFactory

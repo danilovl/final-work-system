@@ -12,9 +12,9 @@
 
 namespace App\Model\Article\Facade;
 
+use App\Model\Article\Repository\ArticleRepository;
+use App\Model\ArticleCategory\Entity\ArticleCategory;
 use Doctrine\ORM\Query;
-use App\Entity\ArticleCategory;
-use App\Repository\ArticleRepository;
 
 class ArticleFacade
 {

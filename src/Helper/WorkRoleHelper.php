@@ -12,10 +12,8 @@
 
 namespace App\Helper;
 
-use App\Entity\{
-    User,
-    Work
-};
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 
 class WorkRoleHelper
 {

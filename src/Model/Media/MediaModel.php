@@ -12,16 +12,14 @@
 
 namespace App\Model\Media;
 
+use App\Model\Media\Entity\Media;
+use App\Model\MediaMimeType\Entity\MediaMimeType;
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
-};
-use App\Entity\{
-    User,
-    Work,
-    Media,
-    MediaType,
-    MediaMimeType
 };
 use App\Model\Traits\SimpleInformationTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

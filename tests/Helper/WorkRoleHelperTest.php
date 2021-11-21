@@ -12,11 +12,9 @@
 
 namespace App\Tests\Helper;
 
-use App\Entity\{
-    User,
-    Work
-};
 use App\Helper\WorkRoleHelper;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use PHPUnit\Framework\TestCase;
 
 class WorkRoleHelperTest extends TestCase

@@ -14,7 +14,7 @@ namespace App\Service;
 
 use App\Constant\DateFormatConstant;
 use App\Constant\MediaTypeConstant;
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Helper\FunctionHelper;
 use Symfony\Component\HttpFoundation\{
     ResponseHeaderBag,

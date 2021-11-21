@@ -14,7 +14,7 @@ namespace App\Model\ArticleCategory\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\ArticleCategory;
+use App\Model\ArticleCategory\Entity\ArticleCategory;
 use App\Model\ArticleCategory\Http\{
     ArticleCategoryListHandle,
     ArticleCategoryArticleListHandle

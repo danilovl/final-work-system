@@ -12,16 +12,14 @@
 
 namespace App\Model\Conversation\Service;
 
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use Doctrine\Common\Collections\Criteria;
 use App\Helper\{
     FunctionHelper,
     ConversationHelper
-};
-use App\Entity\{
-    User,
-    Work,
-    Conversation,
-    ConversationMessage
 };
 
 class ConversationService

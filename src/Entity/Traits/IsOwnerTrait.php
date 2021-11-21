@@ -12,7 +12,7 @@
 
 namespace App\Entity\Traits;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 trait IsOwnerTrait
 {

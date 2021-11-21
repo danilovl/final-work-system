@@ -3,11 +3,9 @@
 namespace App\Tests\DataTransferObject\Repository;
 
 use App\DataTransferObject\Repository\EventData;
+use App\Model\EventType\Entity\EventType;
+use App\Model\User\Entity\User;
 use DateTime;
-use App\Entity\{
-    User,
-    EventType
-};
 use Generator;
 use PHPUnit\Framework\TestCase;
 

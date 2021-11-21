@@ -12,12 +12,10 @@
 
 namespace App\Model\Comment\Facade;
 
-use App\Entity\{
-    Event,
-    Comment
-};
-use App\Repository\CommentRepository;
-use App\Entity\User;
+use App\Model\Comment\Entity\Comment;
+use App\Model\Comment\Repository\CommentRepository;
+use App\Model\Event\Entity\Event;
+use App\Model\User\Entity\User;
 
 class CommentFacade
 {

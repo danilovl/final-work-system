@@ -12,7 +12,7 @@
 
 namespace App\Model\Document\Http;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Service\TwigRenderService;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -13,7 +13,7 @@
 namespace App\Model\UserGroup\Controller;
 
 use App\Controller\BaseController;
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use App\Model\UserGroup\Http\{
     UserGroupListHandle,
     UserGroupEditHandle,

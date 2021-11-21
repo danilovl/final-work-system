@@ -13,11 +13,11 @@
 namespace App\Model\Document\Form;
 
 use App\Model\Media\MediaModel;
+use App\Model\MediaCategory\Entity\MediaCategory;
 use App\Model\MediaCategory\Form\DataGrid\MediaCategoryDataGrid;
 use Doctrine\ORM\QueryBuilder;
 use App\Form\Type\MediaFileType;
-use App\Entity\MediaCategory;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{

@@ -12,8 +12,8 @@
 
 namespace App\Model\Version\Http;
 
-use App\Entity\MediaType;
-use App\Entity\Work;
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\Work\Entity\Work;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;
 use App\Model\Version\EventDispatcher\VersionEventDispatcherService;

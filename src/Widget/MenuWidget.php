@@ -12,7 +12,7 @@
 
 namespace App\Widget;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Menu\MenuItem;
 use App\Service\UserService;
 use Symfony\Component\Routing\RouterInterface;

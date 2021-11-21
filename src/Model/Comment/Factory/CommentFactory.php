@@ -13,8 +13,8 @@
 namespace App\Model\Comment\Factory;
 
 use App\Model\BaseModelFactory;
-use App\Entity\Comment;
 use App\Model\Comment\CommentModel;
+use App\Model\Comment\Entity\Comment;
 
 class CommentFactory extends BaseModelFactory
 {

@@ -12,11 +12,9 @@
 
 namespace App\Model\Comment\Form\EventSubscriber;
 
+use App\Model\Event\Entity\Event;
+use App\Model\User\Entity\User;
 use DateTime;
-use App\Entity\{
-    User,
-    Event
-};
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\{
     FormEvent,

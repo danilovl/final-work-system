@@ -12,7 +12,7 @@
 
 namespace App\EventDispatcher;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\EventDispatcher\GenericEvent\CacheGenericEvent;
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

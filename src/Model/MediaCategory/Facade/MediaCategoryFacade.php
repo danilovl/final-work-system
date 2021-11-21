@@ -12,9 +12,9 @@
 
 namespace App\Model\MediaCategory\Facade;
 
+use App\Model\MediaCategory\Repository\MediaCategoryRepository;
 use Doctrine\ORM\Query;
-use App\Repository\MediaCategoryRepository;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class MediaCategoryFacade
 {

@@ -12,11 +12,9 @@
 
 namespace App\Model\EventAddress\Facade;
 
-use App\Entity\{
-    User,
-    EventAddress
-};
-use App\Repository\EventAddressRepository;
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\EventAddress\Repository\EventAddressRepository;
+use App\Model\User\Entity\User;
 
 class EventAddressFacade
 {

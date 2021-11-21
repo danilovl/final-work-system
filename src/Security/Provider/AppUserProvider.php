@@ -12,7 +12,7 @@
 
 namespace App\Security\Provider;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\User\Facade\UserFacade;
 use App\Service\EntityManagerService;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;

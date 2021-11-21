@@ -13,7 +13,7 @@
 namespace App\Model\Task\EventDispatcher;
 
 use App\Constant\TaskStatusConstant;
-use App\Entity\Task;
+use App\Model\Task\Entity\Task;
 use App\EventSubscriber\Events;
 use App\Exception\RuntimeException;
 use App\Model\Task\EventDispatcher\GenericEvent\TaskGenericEvent;

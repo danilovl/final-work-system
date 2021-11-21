@@ -12,14 +12,12 @@
 
 namespace App\Model\Conversation\Service;
 
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\Facade\ConversationMessageFacade;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use Twig\Environment;
-use App\Entity\{
-    Conversation,
-    ConversationMessage
-};
 
 class ConversationStreamService
 {

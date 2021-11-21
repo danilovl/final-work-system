@@ -14,7 +14,7 @@ namespace App\Model\WorkCategory\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use App\Model\WorkCategory\Http\{
     WorkCategoryListHandle,
     WorkCategoryEditHandle,

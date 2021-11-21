@@ -12,7 +12,7 @@
 
 namespace App\Model\Document\Http;
 
-use App\Entity\MediaType;
+use App\Model\MediaType\Entity\MediaType;
 use App\Model\Document\EventDispatcher\DocumentEventDispatcherService;
 use App\Model\Document\Form\Factory\DocumentFormFactory;
 use App\Model\Media\Factory\MediaFactory;

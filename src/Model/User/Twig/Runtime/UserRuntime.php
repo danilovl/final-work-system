@@ -12,7 +12,7 @@
 
 namespace App\Model\User\Twig\Runtime;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Helper\UserRoleHelper;
 use App\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;

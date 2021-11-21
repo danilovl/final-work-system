@@ -12,7 +12,7 @@
 
 namespace App\Model\Task\Http\Ajax;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Model\Task\Factory\TaskFactory;

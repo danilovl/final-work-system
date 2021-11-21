@@ -13,11 +13,11 @@
 namespace App\Model\EventCalendar\Http;
 
 use App\Model\EventCalendar\Form\EventWorkReservationForm;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant
 };
-use App\Entity\WorkStatus;
 use App\Model\EventWorkReservation\EventWorkReservationModel;
 use App\Model\User\Service\UserWorkService;
 use App\Service\{

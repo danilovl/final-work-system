@@ -13,9 +13,9 @@
 namespace App\Model\ArticleCategory\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
-use App\Entity\ArticleCategory;
 use App\Helper\FunctionHelper;
-use App\Entity\User;
+use App\Model\ArticleCategory\Entity\ArticleCategory;
+use App\Model\User\Entity\User;
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

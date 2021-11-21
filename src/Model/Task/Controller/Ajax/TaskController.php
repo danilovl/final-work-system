@@ -14,6 +14,8 @@ namespace App\Model\Task\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Task\Entity\Task;
+use App\Model\Work\Entity\Work;
 use App\Model\Task\Http\Ajax\{
     TaskEditHandle,
     TaskCreateHandle,
@@ -22,10 +24,6 @@ use App\Model\Task\Http\Ajax\{
     TaskChangeStatusHandle,
     TaskCreateSeveralHandle,
     TaskNotifyCompleteHandle
-};
-use App\Entity\{
-    Task,
-    Work
 };
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
@@ -59,8 +57,8 @@ class TaskController extends BaseController
     }
 
     /**
-     * @ParamConverter("work", class="App\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Entity\Task", options={"id" = "id_task"})
+     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
+     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
      */
     public function edit(
         Request $request,
@@ -73,8 +71,8 @@ class TaskController extends BaseController
     }
 
     /**
-     * @ParamConverter("work", class="App\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Entity\Task", options={"id" = "id_task"})
+     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
+     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
      */
     public function changeStatus(
         Request $request,
@@ -87,8 +85,8 @@ class TaskController extends BaseController
     }
 
     /**
-     * @ParamConverter("work", class="App\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Entity\Task", options={"id" = "id_task"})
+     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
+     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
      */
     public function notifyComplete(Work $work, Task $task): JsonResponse
     {
@@ -98,8 +96,8 @@ class TaskController extends BaseController
     }
 
     /**
-     * @ParamConverter("work", class="App\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Entity\Task", options={"id" = "id_task"})
+     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
+     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
      */
     public function delete(Work $work, Task $task): JsonResponse
     {

@@ -12,11 +12,9 @@
 
 namespace App\Model\MediaCategory;
 
+use App\Model\MediaCategory\Entity\MediaCategory;
 use App\Model\Traits\SimpleInformationTrait;
-use App\Entity\{
-    User,
-    MediaCategory
-};
+use App\Model\User\Entity\User;
 
 class MediaCategoryModel
 {

@@ -12,14 +12,12 @@
 
 namespace App\Model\Conversation\Twig\Runtime;
 
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\Service\ConversationService;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use DateTime;
-use App\Entity\{
-    User,
-    Work,
-    Conversation,
-    ConversationMessage
-};
 use Twig\Extension\AbstractExtension;
 
 class ConversationRuntime extends AbstractExtension

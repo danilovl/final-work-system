@@ -12,8 +12,8 @@
 
 namespace App\Model\EmailNotificationQueue\Facade;
 
-use App\Entity\EmailNotificationQueue;
-use App\Repository\EmailNotificationQueueRepository;
+use App\Model\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Model\EmailNotificationQueue\Repository\EmailNotificationQueueRepository;
 
 class EmailNotificationQueueFacade
 {

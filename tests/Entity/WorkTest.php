@@ -12,12 +12,10 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\{
-    User,
-    Work,
-    WorkType,
-    WorkStatus
-};
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
+use App\Model\WorkType\Entity\WorkType;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;

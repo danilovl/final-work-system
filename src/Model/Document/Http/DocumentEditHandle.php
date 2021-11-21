@@ -15,7 +15,7 @@ namespace App\Model\Document\Http;
 use App\Model\Document\Form\Factory\DocumentFormFactory;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Constant\{
     FlashTypeConstant,
     ControllerMethodConstant

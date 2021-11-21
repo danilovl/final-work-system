@@ -13,7 +13,7 @@
 namespace App\Model\EventSchedule\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
-use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\EventSchedule\EventScheduleCloneModel;
 use App\Model\EventSchedule\Factory\EventScheduleFactory;

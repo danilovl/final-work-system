@@ -12,8 +12,8 @@
 
 namespace App\Model\Version\Http\Ajax;
 
-use App\Entity\MediaType;
-use App\Entity\Work;
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\Work\Entity\Work;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\Media\Facade\MediaMimeTypeFacade;
 use App\Model\Media\Factory\MediaFactory;

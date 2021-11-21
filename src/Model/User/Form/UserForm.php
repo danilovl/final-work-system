@@ -14,7 +14,7 @@ namespace App\Model\User\Form;
 
 use App\Form\Type\UserRoleType;
 use App\Model\User\UserModel;
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

@@ -17,7 +17,7 @@ use App\Model\EventSchedule\Factory\EventScheduleFactory;
 use App\Model\EventSchedule\Form\EventScheduleForm;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Constant\FlashTypeConstant;
 use App\Service\{
     UserService,

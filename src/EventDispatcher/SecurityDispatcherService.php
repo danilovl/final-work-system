@@ -12,7 +12,7 @@
 
 namespace App\EventDispatcher;
 
-use App\Entity\ResetPassword;
+use App\Model\ResetPassword\Entity\ResetPassword;
 use App\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

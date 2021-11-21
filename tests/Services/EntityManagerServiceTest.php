@@ -12,18 +12,14 @@
 
 namespace App\Tests\Services;
 
-use App\Entity\{
-    Task,
-    User,
-    Work,
-    Conversation
-};
-use App\Repository\{
-    TaskRepository,
-    UserRepository,
-    WorkRepository,
-    ConversationRepository
-};
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\Conversation\Repository\ConversationRepository;
+use App\Model\Task\Entity\Task;
+use App\Model\Task\Repository\TaskRepository;
+use App\Model\User\Entity\User;
+use App\Model\User\Repository\UserRepository;
+use App\Model\Work\Entity\Work;
+use App\Model\Work\Repository\WorkRepository;
 use App\Service\EntityManagerService;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

@@ -13,10 +13,8 @@
 namespace App\DataTransferObject\Repository;
 
 use App\DataTransferObject\BaseDataTransferObject;
-use App\Entity\{
-    User,
-    EventType
-};
+use App\Model\EventType\Entity\EventType;
+use App\Model\User\Entity\User;
 use DateTime;
 
 class EventData extends BaseDataTransferObject

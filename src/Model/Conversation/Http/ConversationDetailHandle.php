@@ -12,6 +12,7 @@
 
 namespace App\Model\Conversation\Http;
 
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\EventDispatcher\ConversationEventDispatcherService;
 use App\Model\ConversationMessage\Form\ConversationMessageForm;
 use App\Constant\{
@@ -19,7 +20,6 @@ use App\Constant\{
     ConversationTypeConstant,
     ConversationMessageStatusTypeConstant
 };
-use App\Entity\Conversation;
 use App\Exception\ConstantNotFoundException;
 use App\Helper\ConversationHelper;
 use App\Model\Conversation\Facade\ConversationMessageFacade;

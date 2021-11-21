@@ -13,7 +13,7 @@
 namespace App\Model\DocumentCategory\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
-use App\Entity\MediaCategory;
+use App\Model\MediaCategory\Entity\MediaCategory;
 use App\Service\{
     RequestService,
     EntityManagerService

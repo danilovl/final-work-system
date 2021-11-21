@@ -17,7 +17,7 @@ use App\Helper\FormValidationMessageHelper;
 use App\Model\EventAddress\EventAddressModel;
 use App\Model\EventAddress\Facade\EventAddressFacade;
 use App\Model\EventAddress\Factory\EventAddressFactory;
-use App\Entity\EventAddress;
+use App\Model\EventAddress\Entity\EventAddress;
 use App\Model\EventAddress\Form\EventAddressForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Service\{

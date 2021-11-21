@@ -12,9 +12,9 @@
 
 namespace App\Model\EventSchedule\Facade;
 
+use App\Model\EventSchedule\Repository\EventScheduleRepository;
 use Doctrine\ORM\Query;
-use App\Repository\EventScheduleRepository;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class EventScheduleFacade
 {

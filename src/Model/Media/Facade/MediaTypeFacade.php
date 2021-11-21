@@ -12,8 +12,8 @@
 
 namespace App\Model\Media\Facade;
 
-use App\Entity\MediaType;
-use App\Repository\MediaTypeRepository;
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\MediaType\Repository\MediaTypeRepository;
 
 class MediaTypeFacade
 {

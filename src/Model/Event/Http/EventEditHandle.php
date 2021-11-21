@@ -12,15 +12,13 @@
 
 namespace App\Model\Event\Http;
 
+use App\Model\Event\Entity\Event;
 use App\Model\Event\EventDispatcher\EventEventDispatcherService;
-use App\Entity\{
-    Event,
-    EventParticipant
-};
 use App\Model\Event\Form\EventForm;
 use App\Model\Event\EventModel;
 use App\Model\Event\Facade\EventParticipantFacade;
 use App\Model\Event\Factory\EventFactory;
+use App\Model\EventParticipant\Entity\EventParticipant;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Constant\FlashTypeConstant;

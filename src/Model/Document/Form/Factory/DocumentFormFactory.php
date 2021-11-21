@@ -14,6 +14,7 @@ namespace App\Model\Document\Form\Factory;
 
 use App\Model\Media\Facade\MediaMimeTypeFacade;
 use App\Model\MediaCategory\Facade\MediaCategoryFacade;
+use App\Model\User\Entity\User;
 use App\Model\User\Facade\UserFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Exception\{
@@ -25,12 +26,11 @@ use App\Constant\{
     MediaTypeConstant,
     ControllerMethodConstant
 };
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\Document\Form\{
     DocumentForm,
     DocumentSearchForm
 };
-use App\Entity\User;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface

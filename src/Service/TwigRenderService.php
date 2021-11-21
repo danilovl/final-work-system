@@ -34,7 +34,7 @@ class TwigRenderService
     ): Response {
         $content = $this->environment->render($view, $parameters);
         if ($response === null) {
-            $response = new Response();
+            $response = new Response;
         }
 
         $response->setContent($content);

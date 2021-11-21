@@ -12,8 +12,8 @@
 
 namespace App\Model\Event\EventDispatcher\GenericEvent;
 
-use App\Entity\Comment;
-use App\Entity\Event;
+use App\Model\Comment\Entity\Comment;
+use App\Model\Event\Entity\Event;
 
 class EventGenericEvent
 {

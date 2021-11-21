@@ -12,7 +12,7 @@
 
 namespace App\Model\User\Http;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\User\EventDispatcher\UserEventDispatcherService;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\Form\Factory\UserFormFactory;

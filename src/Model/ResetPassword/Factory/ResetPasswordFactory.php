@@ -12,8 +12,8 @@
 
 namespace App\Model\ResetPassword\Factory;
 
-use App\Entity\ResetPassword;
 use App\Model\BaseModelFactory;
+use App\Model\ResetPassword\Entity\ResetPassword;
 use App\Model\ResetPassword\ResetPasswordModel;
 
 class ResetPasswordFactory extends BaseModelFactory

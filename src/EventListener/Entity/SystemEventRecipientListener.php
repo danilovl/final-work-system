@@ -13,7 +13,7 @@
 namespace App\EventListener\Entity;
 
 use App\Constant\CacheKeyConstant;
-use App\Entity\SystemEventRecipient;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\EventDispatcher\CacheEventDispatcherService;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 

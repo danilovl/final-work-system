@@ -12,10 +12,8 @@
 
 namespace App\Model\Version\Security\Voter\Subject;
 
-use App\Entity\{
-    Work,
-    Media
-};
+use App\Model\Media\Entity\Media;
+use App\Model\Work\Entity\Work;
 
 class VersionVoterSubject
 {

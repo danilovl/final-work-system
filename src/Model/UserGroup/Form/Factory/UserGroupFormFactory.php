@@ -13,7 +13,7 @@
 namespace App\Model\UserGroup\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use App\Exception\RuntimeException;
 use App\Model\UserGroup\Form\UserGroupForm;
 use App\Model\UserGroup\UserGroupModel;

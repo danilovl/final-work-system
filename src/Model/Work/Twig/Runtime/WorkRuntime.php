@@ -12,11 +12,9 @@
 
 namespace App\Model\Work\Twig\Runtime;
 
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use App\Model\Work\Service\WorkService;
-use App\Entity\{
-    User,
-    Work
-};
 use App\Helper\WorkRoleHelper;
 use Twig\Extension\AbstractExtension;
 

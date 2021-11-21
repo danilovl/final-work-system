@@ -12,9 +12,9 @@
 
 namespace App\Model\Conversation\EventDispatcher;
 
-use App\Entity\ConversationMessage;
 use App\EventSubscriber\Events;
 use App\Model\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConversationEventDispatcherService

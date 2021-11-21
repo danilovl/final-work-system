@@ -12,12 +12,10 @@
 
 namespace App\Model\Task;
 
+use App\Model\Task\Entity\Task;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use DateTime;
-use App\Entity\{
-    User,
-    Task,
-    Work
-};
 use App\Model\Traits\{
     ActiveTrait,
     SimpleInformationTrait

@@ -12,13 +12,11 @@
 
 namespace App\Model\ConversationMessage;
 
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
-};
-use App\Entity\{
-    Conversation,
-    ConversationMessage
 };
 use App\Model\Traits\{
     OwnerAwareTrait,

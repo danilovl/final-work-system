@@ -14,11 +14,9 @@ namespace App\Model\Work\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
 use App\Helper\WorkRoleHelper;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use App\Model\Work\Service\WorkService;
-use App\Entity\{
-    User,
-    Work
-};
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

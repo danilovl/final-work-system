@@ -12,7 +12,7 @@
 
 namespace App\Tests\Form;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\Work\Form\WorkUserForm;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

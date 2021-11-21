@@ -12,7 +12,7 @@
 
 namespace App\Service;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\User\UserModel;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 

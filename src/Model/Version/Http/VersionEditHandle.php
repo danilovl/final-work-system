@@ -12,10 +12,10 @@
 
 namespace App\Model\Version\Http;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Model\Version\Form\Factory\VersionFormFactory;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;

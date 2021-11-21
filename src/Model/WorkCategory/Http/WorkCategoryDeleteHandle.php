@@ -12,7 +12,7 @@
 
 namespace App\Model\WorkCategory\Http;
 
-use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use App\Constant\FlashTypeConstant;
 use App\Service\{
     RequestService,

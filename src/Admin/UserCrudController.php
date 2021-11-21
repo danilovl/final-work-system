@@ -12,7 +12,7 @@
 
 namespace App\Admin;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{
     Crud,

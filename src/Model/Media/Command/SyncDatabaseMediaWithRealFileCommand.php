@@ -12,7 +12,7 @@
 
 namespace App\Model\Media\Command;
 
-use App\Entity\MediaType;
+use App\Model\MediaType\Entity\MediaType;
 use App\Model\Media\Facade\{
     MediaFacade,
     MediaTypeFacade

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Model\Widget\EventDispatcher\EventDispatcher;
+namespace App\Model\Widget\EventDispatcher\EventDispatcher\GenericEvent;
 
 class WidgetGenericGenericEvent
 {

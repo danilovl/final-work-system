@@ -12,16 +12,13 @@
 
 namespace App\Model\User\Facade;
 
-use App\Entity\{
-    User,
-    WorkStatus
-};
 use App\Helper\UserRoleHelper;
+use App\Model\User\Entity\User;
+use App\Model\User\Repository\UserRepository;
 use App\Model\User\Service\UserWorkService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use App\Constant\WorkUserTypeConstant;
-use App\Repository\UserRepository;
 
 class UserFacade
 {

@@ -12,13 +12,11 @@
 
 namespace App\Model\Event\Security\Voter;
 
+use App\Model\Event\Entity\Event;
+use App\Model\User\Entity\User;
 use App\Constant\{
     DateFormatConstant,
     VoterSupportConstant
-};
-use App\Entity\{
-    User,
-    Event
 };
 use App\Helper\DateHelper;
 use LogicException;

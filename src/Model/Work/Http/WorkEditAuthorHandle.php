@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\Http;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Model\User\Form\UserEditForm;
 use App\Model\User\Factory\UserFactory;
 use App\Model\User\UserModel;

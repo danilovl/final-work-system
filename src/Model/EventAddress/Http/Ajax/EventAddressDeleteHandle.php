@@ -13,7 +13,7 @@
 namespace App\Model\EventAddress\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
-use App\Entity\EventAddress;
+use App\Model\EventAddress\Entity\EventAddress;
 use App\Service\{
     RequestService,
     EntityManagerService

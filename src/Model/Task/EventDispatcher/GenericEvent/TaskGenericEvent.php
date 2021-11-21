@@ -12,7 +12,7 @@
 
 namespace App\Model\Task\EventDispatcher\GenericEvent;
 
-use App\Entity\Task;
+use App\Model\Task\Entity\Task;
 
 class TaskGenericEvent
 {

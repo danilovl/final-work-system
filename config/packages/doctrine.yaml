@@ -11,12 +11,172 @@ doctrine:
     entity_managers:
       default:
         mappings:
-          App:
+          App\Model\ApiUser:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Entity'
-            prefix: 'App\Entity'
-            alias: App
+            dir: '%kernel.project_dir%/src/Model/ApiUser/Entity'
+            prefix: App\Model\ApiUser\Entity
+          App\Model\ApiUserRule:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ApiUserRule/Entity'
+            prefix: App\Model\ApiUserRule\Entity
+          App\Model\Article:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Article/Entity'
+            prefix: App\Model\Article\Entity
+          App\Model\ArticleCategory:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ArticleCategory/Entity'
+            prefix: App\Model\ArticleCategory\Entity
+          App\Model\Comment:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Comment/Entity'
+            prefix: App\Model\Comment\Entity
+          App\Model\Conversation:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Conversation/Entity'
+            prefix: App\Model\Conversation\Entity
+          App\Model\ConversationMessage:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ConversationMessage/Entity'
+            prefix: App\Model\ConversationMessage\Entity
+          App\Model\ConversationMessageStatus:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ConversationMessageStatus/Entity'
+            prefix: App\Model\ConversationMessageStatus\Entity
+          App\Model\ConversationMessageStatusType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ConversationMessageStatusType/Entity'
+            prefix: App\Model\ConversationMessageStatusType\Entity
+          App\Model\ConversationParticipant:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ConversationParticipant/Entity'
+            prefix: App\Model\ConversationParticipant\Entity
+          App\Model\ConversationType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ConversationType/Entity'
+            prefix: App\Model\ConversationType\Entity
+          App\Model\EmailNotificationQueue:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/EmailNotificationQueue/Entity'
+            prefix: App\Model\EmailNotificationQueue\Entity
+          App\Model\Event:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Event/Entity'
+            prefix: App\Model\Event\Entity
+          App\Model\EventAddress:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/EventAddress/Entity'
+            prefix: App\Model\EventAddress\Entity
+          App\Model\EventParticipant:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/EventParticipant/Entity'
+            prefix: App\Model\EventParticipant\Entity
+          App\Model\EventSchedule:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/EventSchedule/Entity'
+            prefix: App\Model\EventSchedule\Entity
+          App\Model\EventScheduleTemplate:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/EventScheduleTemplate/Entity'
+            prefix: App\Model\EventScheduleTemplate\Entity
+          App\Model\EventType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/EventType/Entity'
+            prefix: App\Model\EventType\Entity
+          App\Model\Media:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Media/Entity'
+            prefix: App\Model\Media\Entity
+          App\Model\MediaCategory:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/MediaCategory/Entity'
+            prefix: App\Model\MediaCategory\Entity
+          App\Model\MediaMimeType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/MediaMimeType/Entity'
+            prefix: App\Model\MediaMimeType\Entity
+          App\Model\MediaType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/MediaType/Entity'
+            prefix: App\Model\MediaType\Entity
+          App\Model\ResetPassword:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/ResetPassword/Entity'
+            prefix: App\Model\ResetPassword\Entity
+          App\Model\SystemEvent:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/SystemEvent/Entity'
+            prefix: App\Model\SystemEvent\Entity
+          App\Model\SystemEventRecipient:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/SystemEventRecipient/Entity'
+            prefix: App\Model\SystemEventRecipient\Entity
+          App\Model\SystemEventType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/SystemEventType/Entity'
+            prefix: App\Model\SystemEventType\Entity
+          App\Model\Task:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Task/Entity'
+            prefix: App\Model\Task\Entity
+          App\Model\User:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/User/Entity'
+            prefix: App\Model\User\Entity
+          App\Model\UserGroup:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/UserGroup/Entity'
+            prefix: App\Model\UserGroup\Entity
+          App\Model\Work:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/Work/Entity'
+            prefix: App\Model\Work\Entity
+          App\Model\WorkCategory:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/WorkCategory/Entity'
+            prefix: App\Model\WorkCategory\Entity
+          App\Model\WorkStatus:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/WorkStatus/Entity'
+            prefix: App\Model\WorkStatus\Entity
+          App\Model\WorkType:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Model/WorkType/Entity'
+            prefix: App\Model\WorkType\Entity
+
           loggable:
             type: annotation
             alias: Gedmo

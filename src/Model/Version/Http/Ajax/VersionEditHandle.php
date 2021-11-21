@@ -16,7 +16,7 @@ use App\Helper\FormValidationMessageHelper;
 use App\Model\Media\Facade\MediaMimeTypeFacade;
 use App\Model\Media\Factory\MediaFactory;
 use App\Model\Media\MediaModel;
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Constant\AjaxJsonTypeConstant;
 use App\Model\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Model\Version\Form\VersionForm;

@@ -17,7 +17,7 @@ use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Service\{
     RequestService,
     EntityManagerService

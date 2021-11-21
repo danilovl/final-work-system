@@ -13,7 +13,7 @@
 namespace App\Model\EventSchedule\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
-use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Model\EventSchedule\Http\Ajax\{
     EventScheduleCloneHandle,
     EventScheduleDeleteHandle

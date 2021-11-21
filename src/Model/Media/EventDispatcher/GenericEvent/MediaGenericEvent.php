@@ -12,7 +12,7 @@
 
 namespace App\Model\Media\EventDispatcher\GenericEvent;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 
 class MediaGenericEvent
 {

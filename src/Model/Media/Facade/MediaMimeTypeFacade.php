@@ -12,12 +12,10 @@
 
 namespace App\Model\Media\Facade;
 
-use App\Entity\{
-    User,
-    MediaType,
-    MediaMimeType
-};
-use App\Repository\MediaMimeTypeRepository;
+use App\Model\MediaMimeType\Entity\MediaMimeType;
+use App\Model\MediaMimeType\Repository\MediaMimeTypeRepository;
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\User\Entity\User;
 
 class MediaMimeTypeFacade
 {

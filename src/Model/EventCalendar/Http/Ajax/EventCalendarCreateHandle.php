@@ -14,6 +14,9 @@ namespace App\Model\EventCalendar\Http\Ajax;
 
 use App\Exception\AjaxRuntimeException;
 use App\Model\Event\EventDispatcher\EventEventDispatcherService;
+use App\Model\EventParticipant\Entity\EventParticipant;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant,
@@ -23,11 +26,6 @@ use App\Helper\FormValidationMessageHelper;
 use App\Model\Event\Facade\EventCalendarFacade;
 use App\Model\Event\Factory\EventFactory;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\{
-    Work,
-    WorkStatus,
-    EventParticipant
-};
 use App\Model\Event\Form\EventForm;
 use App\Helper\SortFunctionHelper;
 use App\Model\Event\EventModel;

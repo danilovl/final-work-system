@@ -12,7 +12,7 @@
 
 namespace App\Model\UserGroup;
 
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 
 class UserGroupModel
 {

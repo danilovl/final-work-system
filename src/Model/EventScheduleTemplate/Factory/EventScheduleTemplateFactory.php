@@ -12,8 +12,8 @@
 
 namespace App\Model\EventScheduleTemplate\Factory;
 
-use App\Entity\EventScheduleTemplate;
 use App\Model\BaseModelFactory;
+use App\Model\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Model\EventScheduleTemplate\EventScheduleTemplateModel;
 
 class EventScheduleTemplateFactory extends BaseModelFactory

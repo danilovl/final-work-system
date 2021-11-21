@@ -13,7 +13,7 @@
 namespace App\Model\User\Controller;
 
 use App\Controller\BaseController;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\User\Http\{
     UserListHandle,
     UserEditHandle,

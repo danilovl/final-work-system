@@ -16,9 +16,9 @@ use App\Constant\{
     AjaxJsonTypeConstant,
     ConversationMessageStatusTypeConstant
 };
-use App\Entity\ConversationMessageStatusType;
 use App\Model\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 use App\Model\Conversation\Facade\ConversationMessageFacade;
+use App\Model\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Service\{
     UserService,
     RequestService,

@@ -14,15 +14,13 @@ namespace App\Model\Event\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
 use App\Helper\FormValidationMessageHelper;
+use App\Model\Event\Entity\Event;
 use App\Model\Event\EventDispatcher\EventEventDispatcherService;
-use App\Entity\{
-    Event,
-    EventParticipant
-};
 use App\Model\Event\Form\EventForm;
 use App\Model\Event\EventModel;
 use App\Model\Event\Facade\EventParticipantFacade;
 use App\Model\Event\Factory\EventFactory;
+use App\Model\EventParticipant\Entity\EventParticipant;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Service\{
     UserService,

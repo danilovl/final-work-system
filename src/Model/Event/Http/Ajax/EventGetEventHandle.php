@@ -14,7 +14,7 @@ namespace App\Model\Event\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
 use App\DataTransferObject\Repository\EventData;
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Model\Event\Facade\EventCalendarFacade;
 use App\Model\Event\Facade\EventFacade;
 use DateTime;

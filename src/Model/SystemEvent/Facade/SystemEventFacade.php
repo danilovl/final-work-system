@@ -12,8 +12,8 @@
 
 namespace App\Model\SystemEvent\Facade;
 
-use App\Repository\SystemEventRepository;
-use App\Entity\User;
+use App\Model\SystemEvent\Repository\SystemEventRepository;
+use App\Model\User\Entity\User;
 use DateTime;
 
 class SystemEventFacade

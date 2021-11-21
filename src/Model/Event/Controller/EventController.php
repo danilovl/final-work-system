@@ -14,7 +14,7 @@ namespace App\Model\Event\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Model\Event\Http\{
     EventEditHandle,
     EventDeleteHandle,

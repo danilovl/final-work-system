@@ -12,6 +12,8 @@
 
 namespace App\ElasticSearch;
 
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use ArrayIterator;
 use Collator;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,10 +22,6 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 use App\Constant\{
     DateFormatConstant,
     WorkStatusConstant
-};
-use App\Entity\{
-    User,
-    Work
 };
 use Symfony\Component\Form\FormInterface;
 

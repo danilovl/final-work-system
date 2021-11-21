@@ -13,7 +13,7 @@
 namespace App\Model\Work\Http;
 
 use App\Constant\TabTypeConstant;
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Model\Conversation\Facade\ConversationMessageFacade;
 use App\Model\Work\Service\WorkDetailTabService;
 use App\Form\Factory\FormDeleteFactory;

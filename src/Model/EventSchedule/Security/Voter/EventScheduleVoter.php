@@ -13,10 +13,8 @@
 namespace App\Model\EventSchedule\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
-use App\Entity\{
-    User,
-    EventSchedule
-};
+use App\Model\EventSchedule\Entity\EventSchedule;
+use App\Model\User\Entity\User;
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

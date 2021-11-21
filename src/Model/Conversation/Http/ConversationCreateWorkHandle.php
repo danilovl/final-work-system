@@ -14,13 +14,11 @@ namespace App\Model\Conversation\Http;
 
 use App\Constant\ConversationTypeConstant;
 use App\Model\Conversation\Factory\ConversationFactory;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use App\Model\Conversation\Service\{
     ConversationService,
     ConversationVariationService
-};
-use App\Entity\{
-    User,
-    Work
 };
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use App\Constant\FlashTypeConstant;

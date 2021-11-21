@@ -12,7 +12,7 @@
 
 namespace App\Model\Document\Factory;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\BaseModelFactory;
 use App\Model\Document\DocumentModel;
 

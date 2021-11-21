@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\EventDispatcher;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\EventSubscriber\Events;
 use App\Model\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\Model\Work\EventDispatcher\GenericEvent\WorkGenericEvent;

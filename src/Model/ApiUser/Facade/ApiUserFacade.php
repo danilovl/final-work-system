@@ -12,8 +12,8 @@
 
 namespace App\Model\ApiUser\Facade;
 
-use App\Entity\ApiUser;
-use App\Repository\ApiUserRepository;
+use App\Model\ApiUser\Entity\ApiUser;
+use App\Model\ApiUser\Repository\ApiUserRepository;
 
 class ApiUserFacade
 {

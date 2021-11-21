@@ -12,7 +12,7 @@
 
 namespace App\Model\Version\Factory;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\BaseModelFactory;
 use App\Model\Version\VersionModel;
 

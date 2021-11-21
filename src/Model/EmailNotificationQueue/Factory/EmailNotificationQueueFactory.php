@@ -12,7 +12,7 @@
 
 namespace App\Model\EmailNotificationQueue\Factory;
 
-use App\Entity\EmailNotificationQueue;
+use App\Model\EmailNotificationQueue\Entity\EmailNotificationQueue;
 use App\Model\BaseModelFactory;
 use App\Model\EmailNotificationQueue\EmailNotificationQueueModel;
 

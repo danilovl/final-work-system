@@ -12,11 +12,10 @@
 
 namespace App\Tests\Form;
 
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\ConversationMessage\Form\ConversationMessageForm;
+use App\Model\User\Entity\User;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
-use App\Entity\{User,
-    Conversation
-};
 use App\Model\ConversationMessage\ConversationMessageModel;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;

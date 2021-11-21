@@ -12,7 +12,7 @@
 
 namespace App\Model\UserGroup\Http;
 
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use App\Model\UserGroup\Factory\UserGroupFactory;
 use App\Model\UserGroup\Form\Factory\UserGroupFormFactory;
 use App\Model\UserGroup\UserGroupModel;

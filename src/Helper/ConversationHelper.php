@@ -12,13 +12,11 @@
 
 namespace App\Helper;
 
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\User\Entity\User;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use Collator;
 use App\Constant\ConversationTypeConstant;
-use App\Entity\{
-    User,
-    Conversation,
-    WorkCategory
-};
 use LogicException;
 
 class ConversationHelper

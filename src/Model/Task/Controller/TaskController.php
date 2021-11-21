@@ -14,15 +14,13 @@ namespace App\Model\Task\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Task\Entity\Task;
+use App\Model\Work\Entity\Work;
 use App\Model\Task\Http\{
     TaskEditHandle,
     TaskListHandle,
     TaskCreateHandle,
     TaskCreateSeveralHandle
-};
-use App\Entity\{
-    Task,
-    Work
 };
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
@@ -58,8 +56,8 @@ class TaskController extends BaseController
     }
 
     /**
-     * @ParamConverter("work", class="App\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Entity\Task", options={"id" = "id_task"})
+     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
+     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
      */
     public function edit(
         Request $request,

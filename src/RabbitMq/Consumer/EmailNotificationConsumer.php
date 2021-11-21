@@ -13,7 +13,7 @@
 namespace App\RabbitMq\Consumer;
 
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
-use App\Entity\EmailNotificationQueue;
+use App\Model\EmailNotificationQueue\Entity\EmailNotificationQueue;
 use App\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
 use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;

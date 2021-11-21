@@ -12,12 +12,10 @@
 
 namespace App\Model\Comment;
 
-use App\Entity\{
-    Event,
-    Comment
-};
+use App\Model\Comment\Entity\Comment;
+use App\Model\Event\Entity\Event;
 use App\Model\Traits\ContentAwareTrait;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class CommentModel
 {

@@ -13,10 +13,8 @@
 namespace App\Helper;
 
 use App\Constant\DateFormatConstant;
-use App\Entity\{
-    Work,
-    WorkCategory
-};
+use App\Model\Work\Entity\Work;
+use App\Model\WorkCategory\Entity\WorkCategory;
 
 class WorkFunctionHelper
 {

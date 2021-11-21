@@ -13,7 +13,7 @@
 namespace App\Model\DocumentCategory\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
-use App\Entity\MediaCategory;
+use App\Model\MediaCategory\Entity\MediaCategory;
 use App\Exception\RuntimeException;
 use App\Model\MediaCategory\MediaCategoryModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;

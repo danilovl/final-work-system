@@ -12,11 +12,9 @@
 
 namespace App\Model\ResetPassword\Facade;
 
-use App\Entity\{
-    User,
-    ResetPassword
-};
-use App\Repository\ResetPasswordRepository;
+use App\Model\ResetPassword\Entity\ResetPassword;
+use App\Model\ResetPassword\Repository\ResetPasswordRepository;
+use App\Model\User\Entity\User;
 use DateTime;
 
 class ResetPasswordFacade

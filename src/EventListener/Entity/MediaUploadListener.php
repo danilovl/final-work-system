@@ -13,13 +13,11 @@
 namespace App\EventListener\Entity;
 
 use App\Exception\RuntimeException;
+use App\Model\Media\Entity\Media;
+use App\Model\MediaMimeType\Entity\MediaMimeType;
 use Doctrine\ORM\Event\{
     LifecycleEventArgs,
     PreUpdateEventArgs
-};
-use App\Entity\{
-    Media,
-    MediaMimeType
 };
 
 class MediaUploadListener

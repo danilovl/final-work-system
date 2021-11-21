@@ -14,11 +14,9 @@ namespace App\Model\Task\Form;
 
 use App\Constant\WorkStatusConstant;
 use App\Model\Task\Form\DataGrid\TaskDataGrid;
-use App\Entity\{
-    User,
-    Work
-};
 use App\Model\Task\TaskModel;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -12,7 +12,7 @@
 
 namespace App\Model\User\EventDispatcher\GenericEvent;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class UserGenericEvent
 {

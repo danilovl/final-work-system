@@ -12,10 +12,8 @@
 
 namespace App\Model\Article\Http;
 
-use App\Entity\{
-    Article,
-    ArticleCategory
-};
+use App\Model\Article\Entity\Article;
+use App\Model\ArticleCategory\Entity\ArticleCategory;
 use App\Service\{
     SeoPageService,
     TwigRenderService

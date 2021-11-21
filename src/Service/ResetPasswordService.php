@@ -14,21 +14,15 @@ namespace App\Service;
 
 use App\Model\ResetPassword\Facade\ResetPasswordFacade;
 use App\Model\ResetPassword\Factory\ResetPasswordFactory;
+use App\Model\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Entity\{
-    User,
-    ResetPassword
-};
 use App\Exception\{
     TooManyPasswordRequestsException,
     ExpiredResetPasswordTokenException,
     InvalidResetPasswordTokenException
 };
 use App\Helper\HashHelper;
-use App\Model\ResetPassword\{
-    ResetPasswordModel,
-    ResetPasswordTokenModel
-};
+use App\Model\ResetPassword\{Entity\ResetPassword, ResetPasswordModel, ResetPasswordTokenModel};
 use DateTime;
 use DateInterval;
 

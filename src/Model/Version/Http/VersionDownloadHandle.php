@@ -12,7 +12,7 @@
 
 namespace App\Model\Version\Http;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Service\MediaService;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 

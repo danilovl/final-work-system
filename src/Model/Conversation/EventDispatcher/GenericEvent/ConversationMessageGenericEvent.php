@@ -12,7 +12,7 @@
 
 namespace App\Model\Conversation\EventDispatcher\GenericEvent;
 
-use App\Entity\ConversationMessage;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
 
 class ConversationMessageGenericEvent
 {

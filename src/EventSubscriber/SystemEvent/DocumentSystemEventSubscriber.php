@@ -16,15 +16,13 @@ use App\Constant\WorkUserTypeConstant;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
 use App\Model\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
+use App\Model\SystemEvent\Entity\SystemEvent;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Model\SystemEventType\Entity\SystemEventType;
+use App\Model\User\Entity\User;
 use App\Service\EntityManagerService;
 use App\Model\User\Service\UserWorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use App\Entity\{
-    User,
-    SystemEvent,
-    SystemEventRecipient,
-    SystemEventType
-};
 
 class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {

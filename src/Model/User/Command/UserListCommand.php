@@ -12,7 +12,7 @@
 
 namespace App\Model\User\Command;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Service\EntityManagerService;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Console\Command\Command;

@@ -13,7 +13,7 @@
 namespace App\Cache;
 
 use App\Constant\CacheKeyConstant;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Helper\SystemEventHelper;
 use App\Model\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Service\PaginatorService;

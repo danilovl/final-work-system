@@ -12,7 +12,7 @@
 
 namespace App\Model\Task\Factory;
 
-use App\Entity\Task;
+use App\Model\Task\Entity\Task;
 use App\Model\BaseModelFactory;
 use App\Model\Task\TaskModel;
 

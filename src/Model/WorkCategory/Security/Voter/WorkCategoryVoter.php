@@ -13,10 +13,8 @@
 namespace App\Model\WorkCategory\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
-use App\Entity\{
-    User,
-    WorkCategory
-};
+use App\Model\User\Entity\User;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

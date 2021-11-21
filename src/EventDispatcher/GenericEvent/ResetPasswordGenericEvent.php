@@ -12,7 +12,7 @@
 
 namespace App\EventDispatcher\GenericEvent;
 
-use App\Entity\ResetPassword;
+use App\Model\ResetPassword\Entity\ResetPassword;
 
 class ResetPasswordGenericEvent
 {

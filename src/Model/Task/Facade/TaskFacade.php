@@ -12,12 +12,10 @@
 
 namespace App\Model\Task\Facade;
 
+use App\Model\Task\Entity\Task;
+use App\Model\Task\Repository\TaskRepository;
+use App\Model\User\Entity\User;
 use Doctrine\ORM\Query;
-use App\Repository\TaskRepository;
-use App\Entity\{
-    User,
-    Task
-};
 
 class TaskFacade
 {

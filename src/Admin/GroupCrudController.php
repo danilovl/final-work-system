@@ -12,7 +12,7 @@
 
 namespace App\Admin;
 
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;

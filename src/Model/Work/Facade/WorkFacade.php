@@ -13,8 +13,8 @@
 namespace App\Model\Work\Facade;
 
 use App\DataTransferObject\Repository\WorkData;
-use App\Entity\Work;
-use App\Repository\WorkRepository;
+use App\Model\Work\Entity\Work;
+use App\Model\Work\Repository\WorkRepository;
 use Doctrine\ORM\QueryBuilder;
 
 class WorkFacade

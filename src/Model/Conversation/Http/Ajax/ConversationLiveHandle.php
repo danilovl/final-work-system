@@ -12,7 +12,7 @@
 
 namespace App\Model\Conversation\Http\Ajax;
 
-use App\Entity\Conversation;
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\Service\ConversationStreamService;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

@@ -13,15 +13,13 @@
 namespace App\Model\Task\Http;
 
 use App\DataTransferObject\Form\Factory\TaskFormFactoryData;
+use App\Model\Task\Entity\Task;
 use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
-use App\Entity\{
-    Task,
-    Work
-};
 use App\Model\Task\Form\Factory\TaskFormFactory;
 use App\Model\Task\Facade\TaskDeadlineFacade;
 use App\Model\Task\Factory\TaskFactory;
 use App\Model\Task\TaskModel;
+use App\Model\Work\Entity\Work;
 use App\Constant\{
     FlashTypeConstant,
     ControllerMethodConstant

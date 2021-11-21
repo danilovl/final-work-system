@@ -13,16 +13,14 @@
 namespace App\Model\Conversation\Factory;
 
 use App\Model\BaseModelFactory;
-use App\Entity\{
-    User,
-    Work,
-    Conversation,
-    ConversationType,
-    ConversationMessage,
-    ConversationParticipant,
-    ConversationMessageStatus,
-    ConversationMessageStatusType
-};
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\ConversationMessageStatus\Entity\ConversationMessageStatus;
+use App\Model\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
+use App\Model\ConversationParticipant\Entity\ConversationParticipant;
+use App\Model\ConversationType\Entity\ConversationType;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 
 class ConversationFactory extends BaseModelFactory
 {
@@ -87,7 +85,7 @@ class ConversationFactory extends BaseModelFactory
             $participant = $this->getUser($participant);
 
             if ($participant->getId() !== $user->getId()) {
-                $messageStatus = new ConversationMessageStatus;
+                $messageStatus = new ConversationMessageStatus();
                 $messageStatus->setConversation($conversation);
                 $messageStatus->setMessage($message);
                 $messageStatus->setType($this->entityManagerService->getReference(ConversationMessageStatusType::class, $type));

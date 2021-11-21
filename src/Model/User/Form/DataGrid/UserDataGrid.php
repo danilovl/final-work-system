@@ -12,8 +12,8 @@
 
 namespace App\Model\User\Form\DataGrid;
 
+use App\Model\User\Repository\UserRepository;
 use Doctrine\ORM\QueryBuilder;
-use App\Repository\UserRepository;
 
 class UserDataGrid
 {

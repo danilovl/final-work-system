@@ -13,8 +13,15 @@
 namespace App\Model\Conversation\Facade;
 
 use App\Helper\ConversationHelper;
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\EventDispatcher\ConversationEventDispatcherService;
 use App\Model\Conversation\Factory\ConversationFactory;
+use App\Model\Conversation\Repository\ConversationRepository;
+use App\Model\ConversationParticipant\Entity\ConversationParticipant;
+use App\Model\ConversationType\Entity\ConversationType;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Model\Conversation\Service\{
     ConversationStatusService,
     ConversationVariationService
@@ -28,15 +35,6 @@ use App\Constant\{
     ConversationTypeConstant,
     ConversationMessageStatusTypeConstant
 };
-use App\Repository\ConversationRepository;
-use App\Entity\{
-    Work,
-    Conversation,
-    ConversationType,
-    ConversationParticipant,
-    WorkStatus
-};
-use App\Entity\User;
 
 class ConversationFacade
 {

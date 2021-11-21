@@ -4,6 +4,6 @@ services:
     autowire: true
     autoconfigure: true
 
-  App\Repository\:
-    resource: '../../../src/Repository'
+  App\Model\:
+    resource: '../../../src/Model/*/Repository'
     public: true

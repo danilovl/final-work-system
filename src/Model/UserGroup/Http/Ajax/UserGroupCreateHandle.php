@@ -12,9 +12,9 @@
 
 namespace App\Model\UserGroup\Http\Ajax;
 
-use App\Form\UserGroupForm;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\UserGroup\Factory\UserGroupFactory;
+use App\Model\UserGroup\Form\UserGroupForm;
 use App\Model\UserGroup\UserGroupModel;
 use App\Constant\AjaxJsonTypeConstant;
 use App\Service\{

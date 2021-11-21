@@ -12,9 +12,9 @@
 
 namespace App\Model\WorkCategory\Form\DataGrid;
 
+use App\Model\WorkCategory\Repository\WorkCategoryRepository;
 use Doctrine\ORM\QueryBuilder;
-use App\Repository\WorkCategoryRepository;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class WorkCategoryDataGrid
 {

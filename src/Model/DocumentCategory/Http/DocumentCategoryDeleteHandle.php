@@ -12,7 +12,7 @@
 
 namespace App\Model\DocumentCategory\Http;
 
-use App\Entity\MediaCategory;
+use App\Model\MediaCategory\Entity\MediaCategory;
 use App\Constant\FlashTypeConstant;
 use App\Service\{
     RequestService,

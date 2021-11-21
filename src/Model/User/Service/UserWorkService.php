@@ -12,12 +12,10 @@
 
 namespace App\Model\User\Service;
 
-use App\Entity\{
-    User,
-    Work,
-    WorkStatus,
-    WorkType
-};
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
+use App\Model\WorkType\Entity\WorkType;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant

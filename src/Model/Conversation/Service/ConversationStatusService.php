@@ -13,16 +13,14 @@
 namespace App\Model\Conversation\Service;
 
 use App\DataTransferObject\Repository\ConversationMessageStatusData;
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\ConversationMessageStatus\Entity\ConversationMessageStatus;
+use App\Model\ConversationMessageStatus\Repository\ConversationMessageStatusRepository;
+use App\Model\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
+use App\Model\User\Entity\User;
 use App\Service\EntityManagerService;
-use App\Entity\{
-    User,
-    Conversation,
-    ConversationMessage,
-    ConversationMessageStatus,
-    ConversationMessageStatusType
-};
 use App\Constant\ConversationMessageStatusTypeConstant;
-use App\Repository\ConversationMessageStatusRepository;
 
 class ConversationStatusService
 {

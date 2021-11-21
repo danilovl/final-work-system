@@ -14,11 +14,9 @@ namespace App\Model\Profile\Http;
 
 use App\Constant\FlashTypeConstant;
 use App\Constant\MediaTypeConstant;
+use App\Model\Media\Entity\Media;
+use App\Model\MediaMimeType\Entity\MediaMimeType;
 use App\Model\Profile\Form\ProfileMediaForm;
-use App\Entity\{
-    Media,
-    MediaMimeType
-};
 use App\Exception\RuntimeException;
 use App\Model\Media\Facade\MediaTypeFacade;
 use App\Model\Media\MediaModel;

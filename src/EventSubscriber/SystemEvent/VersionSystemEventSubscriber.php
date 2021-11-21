@@ -14,16 +14,14 @@ namespace App\EventSubscriber\SystemEvent;
 
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
+use App\Model\SystemEvent\Entity\SystemEvent;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Model\SystemEventType\Entity\SystemEventType;
+use App\Model\User\Entity\User;
 use App\Model\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Service\EntityManagerService;
 use App\Model\Work\Service\WorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use App\Entity\{
-    User,
-    SystemEvent,
-    SystemEventType,
-    SystemEventRecipient
-};
 
 class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {

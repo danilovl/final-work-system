@@ -12,9 +12,9 @@
 
 namespace App\Model\Task\Facade;
 
+use App\Model\Task\Repository\TaskRepository;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Entity\User;
-use App\Repository\TaskRepository;
+use App\Model\User\Entity\User;
 
 class TaskDeadlineFacade
 {

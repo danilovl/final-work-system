@@ -13,6 +13,11 @@
 namespace App\Model\Work\Service;
 
 use App\Exception\RuntimeException;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\Event\Entity\Event;
+use App\Model\Media\Entity\Media;
+use App\Model\Task\Entity\Task;
+use App\Model\Work\Entity\Work;
 use App\Helper\{
     WorkRoleHelper,
     ConversationHelper
@@ -24,14 +29,7 @@ use App\Service\{
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\ORM\Query;
 use App\Constant\TabTypeConstant;
-use App\Entity\{
-    Work,
-    Task,
-    Event,
-    Media,
-    ConversationMessage
-};
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Knp\Component\Pager\PaginatorInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\HttpFoundation\Request;

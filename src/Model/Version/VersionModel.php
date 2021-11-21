@@ -12,7 +12,7 @@
 
 namespace App\Model\Version;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\Traits\SimpleInformationTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

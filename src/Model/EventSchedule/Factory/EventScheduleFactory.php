@@ -13,16 +13,14 @@
 namespace App\Model\EventSchedule\Factory;
 
 use App\Constant\DateFormatConstant;
+use App\Model\Event\Entity\Event;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Model\EventSchedule\EventScheduleModel;
+use App\Model\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use DateTime;
 use App\Model\BaseModelFactory;
-use App\Entity\{
-    Event,
-    EventSchedule,
-    EventScheduleTemplate
-};
 use App\Helper\DateHelper;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class EventScheduleFactory extends BaseModelFactory
 {

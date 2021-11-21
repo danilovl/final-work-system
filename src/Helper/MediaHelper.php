@@ -12,7 +12,7 @@
 
 namespace App\Helper;
 
-use App\Entity\MediaMimeType;
+use App\Model\MediaMimeType\Entity\MediaMimeType;
 
 class MediaHelper
 {

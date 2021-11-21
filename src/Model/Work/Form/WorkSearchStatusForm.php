@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\Form;
 
-use App\Entity\WorkStatus;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\{
     AbstractType,

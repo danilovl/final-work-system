@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\Factory;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Model\BaseModelFactory;
 use App\Model\Work\WorkModel;
 

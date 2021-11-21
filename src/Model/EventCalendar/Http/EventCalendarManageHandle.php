@@ -12,14 +12,12 @@
 
 namespace App\Model\EventCalendar\Http;
 
+use App\Model\EventParticipant\Entity\EventParticipant;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant
-};
-use App\Entity\{
-    Work,
-    WorkStatus,
-    EventParticipant
 };
 use App\Model\Event\Form\EventForm;
 use App\Helper\SortFunctionHelper;

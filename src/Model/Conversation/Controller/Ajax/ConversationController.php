@@ -14,15 +14,13 @@ namespace App\Model\Conversation\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
 use App\Model\Conversation\Http\Ajax\{
     ConversationLiveHandle,
     ConversationDeleteHandle,
     ConversationReadAllHandle,
     ConversationChangeReadMessageStatusHandle
-};
-use App\Entity\{
-    Conversation,
-    ConversationMessage
 };
 use Symfony\Component\HttpFoundation\{
     JsonResponse,

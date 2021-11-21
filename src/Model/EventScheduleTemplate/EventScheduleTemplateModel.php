@@ -12,12 +12,10 @@
 
 namespace App\Model\EventScheduleTemplate;
 
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\EventScheduleTemplate\Entity\EventScheduleTemplate;
+use App\Model\EventType\Entity\EventType;
 use DateTime;
-use App\Entity\{
-    EventType,
-    EventAddress,
-    EventScheduleTemplate
-};
 
 class EventScheduleTemplateModel
 {

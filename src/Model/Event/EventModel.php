@@ -12,14 +12,12 @@
 
 namespace App\Model\Event;
 
+use App\Model\Event\Entity\Event;
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\EventParticipant\Entity\EventParticipant;
+use App\Model\EventType\Entity\EventType;
 use DateTime;
-use App\Entity\{
-    Event,
-    EventType,
-    EventAddress,
-    EventParticipant
-};
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class EventModel
 {

@@ -12,19 +12,17 @@
 
 namespace App\Model\Conversation\Facade;
 
-use App\Repository\ConversationMessageRepository;
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\Service\ConversationStatusService;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\ConversationMessage\Repository\ConversationMessageRepository;
+use App\Model\ConversationMessageStatus\Entity\ConversationMessageStatus;
+use App\Model\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
+use App\Model\User\Entity\User;
 use DateTime;
 use App\Service\EntityManagerService;
 use Doctrine\ORM\Query;
 use App\Constant\ConversationMessageStatusTypeConstant;
-use App\Entity\{
-    Conversation,
-    ConversationMessage,
-    ConversationMessageStatus,
-    ConversationMessageStatusType
-};
-use App\Entity\User;
 
 class ConversationMessageFacade
 {
@@ -74,7 +72,7 @@ class ConversationMessageFacade
 
             $this->entityManagerService->flush($conversationMessageStatus);
         } else {
-            $newConversationMessageStatus = new ConversationMessageStatus();
+            $newConversationMessageStatus = new ConversationMessageStatus;
             $newConversationMessageStatus->setConversation($conversation);
             $newConversationMessageStatus->setMessage($conversationMessage);
             $newConversationMessageStatus->setUser($user);

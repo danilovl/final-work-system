@@ -12,7 +12,7 @@
 
 namespace App\Model\WorkCategory\Factory;
 
-use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use App\Model\BaseModelFactory;
 use App\Model\WorkCategory\WorkCategoryModel;
 

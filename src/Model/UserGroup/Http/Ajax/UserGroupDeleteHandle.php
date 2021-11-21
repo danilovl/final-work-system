@@ -12,7 +12,7 @@
 
 namespace App\Model\UserGroup\Http\Ajax;
 
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use App\Constant\AjaxJsonTypeConstant;
 use App\Service\{
     RequestService,

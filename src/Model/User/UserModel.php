@@ -13,7 +13,7 @@
 namespace App\Model\User;
 
 use Doctrine\Common\Collections\Collection;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class UserModel
 {

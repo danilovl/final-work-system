@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\{
     Criteria,
     Collection
 };
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 
 class TaskService
 {

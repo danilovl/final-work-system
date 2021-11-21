@@ -14,7 +14,7 @@ namespace App\Model\EventSchedule\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Model\EventSchedule\Http\{
     EventScheduleListHandle,
     EventScheduleEditHandle,

@@ -3,10 +3,8 @@
 namespace App\Tests\DataTransferObject\Repository;
 
 use App\DataTransferObject\Repository\MediaData;
-use App\Entity\{
-    User,
-    MediaType
-};
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\User\Entity\User;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

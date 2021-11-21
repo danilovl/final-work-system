@@ -13,7 +13,7 @@
 namespace App\Model\Work\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Exception\ConstantNotFoundException;
 use App\Model\WorkDeadline\Facade\WorkDeadlineFacade;
 use App\Model\Work\Service\WorkListService;
@@ -24,7 +24,7 @@ use App\Model\Work\Form\{
     WorkSearchForm
 };
 use App\Helper\SortFunctionHelper;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface

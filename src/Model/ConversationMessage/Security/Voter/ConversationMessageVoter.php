@@ -14,10 +14,8 @@ namespace App\Model\ConversationMessage\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
 use App\Model\Conversation\Service\ConversationService;
-use App\Entity\{
-    User,
-    ConversationMessage
-};
+use App\Model\ConversationMessage\Entity\ConversationMessage;
+use App\Model\User\Entity\User;
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

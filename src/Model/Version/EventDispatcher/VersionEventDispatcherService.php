@@ -12,7 +12,7 @@
 
 namespace App\Model\Version\EventDispatcher;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\EventSubscriber\Events;
 use App\Model\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

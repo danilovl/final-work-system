@@ -12,7 +12,7 @@
 
 namespace App\Service;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserService

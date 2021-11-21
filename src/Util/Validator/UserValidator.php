@@ -3,7 +3,7 @@
 namespace App\Util\Validator;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 class UserValidator

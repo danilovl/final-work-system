@@ -14,7 +14,7 @@ namespace App\Model\ArticleCategory\Http;
 
 use App\Constant\SeoPageConstant;
 use App\Model\Article\Facade\ArticleFacade;
-use App\Entity\ArticleCategory;
+use App\Model\ArticleCategory\Entity\ArticleCategory;
 use App\Service\{
     SeoPageService,
     PaginatorService,

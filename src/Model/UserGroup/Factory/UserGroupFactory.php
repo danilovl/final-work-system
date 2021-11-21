@@ -13,7 +13,7 @@
 namespace App\Model\UserGroup\Factory;
 
 use App\Model\BaseModelFactory;
-use App\Entity\Group;
+use App\Model\UserGroup\Entity\Group;
 use App\Model\UserGroup\UserGroupModel;
 
 class UserGroupFactory extends BaseModelFactory

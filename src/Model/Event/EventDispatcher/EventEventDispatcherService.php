@@ -12,11 +12,9 @@
 
 namespace App\Model\Event\EventDispatcher;
 
+use App\Model\Comment\Entity\Comment;
+use App\Model\Event\Entity\Event;
 use App\Model\Event\EventDispatcher\GenericEvent\EventGenericEvent;
-use App\Entity\{
-    Event,
-    Comment
-};
 use App\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

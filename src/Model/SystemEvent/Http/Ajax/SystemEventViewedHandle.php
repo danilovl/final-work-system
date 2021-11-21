@@ -17,7 +17,7 @@ use App\Constant\{
     CacheKeyConstant,
     AjaxJsonTypeConstant
 };
-use App\Entity\SystemEventRecipient;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Service\{
     UserService,
     RequestService,

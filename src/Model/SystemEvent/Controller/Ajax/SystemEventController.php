@@ -14,7 +14,7 @@ namespace App\Model\SystemEvent\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\SystemEventRecipient;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Model\SystemEvent\Http\Ajax\{
     SystemEventViewedHandle,
     SystemEventViewedAllHandle

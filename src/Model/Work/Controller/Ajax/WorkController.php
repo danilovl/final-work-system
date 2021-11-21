@@ -14,7 +14,7 @@ namespace App\Model\Work\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Model\Work\Http\Ajax\{
     WorkEditHandle,
     WorkCreateHandle,

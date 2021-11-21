@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\Http;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Form\Factory\FormDeleteFactory;
 use App\Constant\{
     FlashTypeConstant,

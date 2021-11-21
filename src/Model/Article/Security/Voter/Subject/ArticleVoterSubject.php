@@ -12,10 +12,8 @@
 
 namespace App\Model\Article\Security\Voter\Subject;
 
-use App\Entity\{
-    Article,
-    ArticleCategory
-};
+use App\Model\Article\Entity\Article;
+use App\Model\ArticleCategory\Entity\ArticleCategory;
 
 class ArticleVoterSubject
 {

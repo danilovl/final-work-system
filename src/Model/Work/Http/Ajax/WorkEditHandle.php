@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\Http\Ajax;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Model\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Model\Work\Form\WorkForm;
 use App\Constant\AjaxJsonTypeConstant;

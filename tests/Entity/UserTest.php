@@ -12,10 +12,8 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\{
-    User,
-    Media
-};
+use App\Model\Media\Entity\Media;
+use App\Model\User\Entity\User;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;

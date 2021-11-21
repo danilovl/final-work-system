@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\{
     ArrayCollection
 };
 use App\Constant\WorkUserTypeConstant;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class WorkListService
 {

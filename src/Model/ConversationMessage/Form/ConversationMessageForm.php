@@ -13,7 +13,7 @@
 namespace App\Model\ConversationMessage\Form;
 
 use App\Model\ConversationMessage\ConversationMessageModel;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\{
     AbstractType,

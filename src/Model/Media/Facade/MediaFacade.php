@@ -13,13 +13,11 @@
 namespace App\Model\Media\Facade;
 
 use App\DataTransferObject\Repository\MediaData;
+use App\Model\Media\Entity\Media;
+use App\Model\Media\Repository\MediaRepository;
+use App\Model\MediaType\Entity\MediaType;
+use App\Model\User\Entity\User;
 use Doctrine\ORM\Query;
-use App\Entity\{
-    User,
-    Media,
-    MediaType
-};
-use App\Repository\MediaRepository;
 
 class MediaFacade
 {

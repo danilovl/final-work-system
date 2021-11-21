@@ -12,13 +12,11 @@
 
 namespace App\Model\Document\Security\Voter;
 
+use App\Model\Media\Entity\Media;
+use App\Model\User\Entity\User;
 use App\Constant\{
     MediaTypeConstant,
     VoterSupportConstant
-};
-use App\Entity\{
-    User,
-    Media
 };
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;

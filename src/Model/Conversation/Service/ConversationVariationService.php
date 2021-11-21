@@ -13,19 +13,17 @@
 namespace App\Model\Conversation\Service;
 
 use App\Constant\WorkUserTypeConstant;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use App\Model\Work\Service\WorkService;
 use App\Model\User\Service\UserWorkService;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Helper\{
     UserRoleHelper,
     WorkRoleHelper
 };
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
-use App\Entity\{
-    Work,
-    WorkStatus
-};
-use App\Entity\User;
 
 class ConversationVariationService
 {

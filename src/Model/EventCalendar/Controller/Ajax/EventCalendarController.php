@@ -15,7 +15,7 @@ namespace App\Model\EventCalendar\Controller\Ajax;
 use App\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Model\EventCalendar\Http\Ajax\{
     EventCalendarEditHandle,
     EventCalendarCreateHandle,

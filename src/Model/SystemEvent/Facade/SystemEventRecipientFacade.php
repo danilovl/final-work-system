@@ -12,9 +12,9 @@
 
 namespace App\Model\SystemEvent\Facade;
 
+use App\Model\SystemEventRecipient\Repository\SystemEventRecipientRepository;
 use Doctrine\ORM\Query;
-use App\Repository\SystemEventRecipientRepository;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class SystemEventRecipientFacade
 {

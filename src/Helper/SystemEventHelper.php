@@ -12,7 +12,7 @@
 
 namespace App\Helper;
 
-use App\Entity\SystemEventRecipient;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
 
 class SystemEventHelper
 {

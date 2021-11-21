@@ -12,11 +12,9 @@
 
 namespace App\Interfaces;
 
+use App\Model\Media\Entity\Media;
+use App\Model\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use App\Entity\{
-    Work,
-    Media
-};
 
 interface MediaInterface
 {

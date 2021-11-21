@@ -12,7 +12,7 @@
 
 namespace App\EventDispatcher\GenericEvent;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class CacheGenericEvent
 {

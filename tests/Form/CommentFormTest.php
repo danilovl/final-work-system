@@ -12,11 +12,9 @@
 
 namespace App\Tests\Form;
 
+use App\Model\Event\Entity\Event;
+use App\Model\User\Entity\User;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
-use App\Entity\{
-    User,
-    Event
-};
 use DateTime;
 use App\Model\Comment\Form\CommentForm;
 use App\Model\Comment\CommentModel;

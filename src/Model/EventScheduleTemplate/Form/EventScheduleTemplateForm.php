@@ -12,13 +12,11 @@
 
 namespace App\Model\EventScheduleTemplate\Form;
 
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Model\EventScheduleTemplate\Form\Constraint\EventScheduleTemplateTime;
-use App\Entity\{
-    EventType,
-    EventAddress,
-    EventScheduleTemplate
-};
 use App\Form\Type\WeekDaysType;
+use App\Model\EventType\Entity\EventType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{

@@ -12,7 +12,7 @@
 
 namespace App\Admin;
 
-use App\Entity\EmailNotificationQueue;
+use App\Model\EmailNotificationQueue\Entity\EmailNotificationQueue;
 use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;

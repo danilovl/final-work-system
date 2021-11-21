@@ -3,10 +3,8 @@
 namespace App\Tests\DataTransferObject\Repository;
 
 use App\DataTransferObject\Repository\WorkStatusData;
-use App\Entity\{
-    User,
-    WorkStatus
-};
+use App\Model\User\Entity\User;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

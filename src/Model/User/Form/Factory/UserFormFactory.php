@@ -21,7 +21,7 @@ use App\Model\User\Form\{
     UserForm,
     UserEditForm
 };
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Form\{
     FormInterface,
     FormFactoryInterface

@@ -16,7 +16,7 @@ use App\Helper\FormValidationMessageHelper;
 use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Model\Task\Form\TaskForm;
 use Symfony\Component\Form\FormFactoryInterface;
-use App\Entity\Task;
+use App\Model\Task\Entity\Task;
 use App\Model\Task\Factory\TaskFactory;
 use App\Model\Task\TaskModel;
 use App\Constant\AjaxJsonTypeConstant;

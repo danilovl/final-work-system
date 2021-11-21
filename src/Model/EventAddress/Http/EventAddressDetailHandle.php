@@ -12,7 +12,7 @@
 
 namespace App\Model\EventAddress\Http;
 
-use App\Entity\EventAddress;
+use App\Model\EventAddress\Entity\EventAddress;
 use App\Form\Factory\FormDeleteFactory;
 use App\Service\{
     SeoPageService,

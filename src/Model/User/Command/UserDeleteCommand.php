@@ -14,7 +14,7 @@ namespace App\Model\User\Command;
 
 use App\Service\EntityManagerService;
 use App\Util\Validator\UserValidator;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputArgument,

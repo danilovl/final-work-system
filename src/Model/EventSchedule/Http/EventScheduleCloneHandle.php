@@ -12,7 +12,7 @@
 
 namespace App\Model\EventSchedule\Http;
 
-use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Model\EventSchedule\EventScheduleCloneModel;
 use App\Model\EventSchedule\Factory\EventScheduleFactory;
 use App\Model\EventSchedule\Form\EventScheduleCloneForm;

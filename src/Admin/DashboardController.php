@@ -12,11 +12,9 @@
 
 namespace App\Admin;
 
-use App\Entity\{
-    User,
-    Group,
-    EmailNotificationQueue
-};
+use App\Model\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Model\User\Entity\User;
+use App\Model\UserGroup\Entity\Group;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{
     MenuItem,
     Dashboard

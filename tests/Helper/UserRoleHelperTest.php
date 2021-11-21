@@ -13,7 +13,7 @@
 namespace App\Tests\Helper;
 
 use App\Constant\UserRoleConstant;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Helper\UserRoleHelper;
 use PHPUnit\Framework\TestCase;
 

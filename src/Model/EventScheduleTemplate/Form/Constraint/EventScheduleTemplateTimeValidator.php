@@ -12,11 +12,11 @@
 
 namespace App\Model\EventScheduleTemplate\Form\Constraint;
 
+use App\Model\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Constant\{
     CompareConstant,
     EventTypeConstant
 };
-use App\Entity\EventScheduleTemplate as EventScheduleTemplateEntity;
 use App\Helper\CompareHelper;
 use Symfony\Component\Validator\{
     Constraint,
@@ -36,8 +36,8 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, EventScheduleTemplateTime::class);
         }
 
-        if (!$value instanceof EventScheduleTemplateEntity) {
-            throw new UnexpectedTypeException($value, EventScheduleTemplateEntity::class);
+        if (!$value instanceof EventScheduleTemplate) {
+            throw new UnexpectedTypeException($value, EventScheduleTemplate::class);
         }
 
         if (CompareHelper::compareDateTime($value->getStart(), $value->getEnd(), CompareConstant::MORE)) {

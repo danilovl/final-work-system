@@ -14,7 +14,7 @@ namespace App\Model\DocumentCategory\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\MediaCategory;
+use App\Model\MediaCategory\Entity\MediaCategory;
 use App\Model\DocumentCategory\Http\Ajax\{
     DocumentCategoryEditHandle,
     DocumentCategoryCreateHandle,

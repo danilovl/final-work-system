@@ -12,7 +12,7 @@
 
 namespace App\Helper;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Constant\UserRoleConstant;
 
 class UserRoleHelper

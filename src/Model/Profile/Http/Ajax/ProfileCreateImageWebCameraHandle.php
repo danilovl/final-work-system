@@ -19,7 +19,7 @@ use App\Constant\{
 };
 use App\Helper\FileHelper;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\Media\Facade\MediaTypeFacade;
 use App\Service\{
     UserService,

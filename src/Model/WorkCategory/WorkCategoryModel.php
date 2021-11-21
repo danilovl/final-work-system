@@ -12,13 +12,11 @@
 
 namespace App\Model\WorkCategory;
 
+use App\Model\User\Entity\User;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
-};
-use App\Entity\{
-    User,
-    WorkCategory
 };
 use App\Model\Traits\SimpleInformationTrait;
 

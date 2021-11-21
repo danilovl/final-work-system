@@ -12,7 +12,7 @@
 
 namespace App\Entity\Interfaces;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 interface OwnerInterface
 {

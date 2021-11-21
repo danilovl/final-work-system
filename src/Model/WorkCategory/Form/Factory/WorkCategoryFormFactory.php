@@ -13,7 +13,7 @@
 namespace App\Model\WorkCategory\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
-use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use App\Exception\ConstantNotFoundException;
 use App\Model\WorkCategory\Form\WorkCategoryForm;
 use App\Model\WorkCategory\WorkCategoryModel;

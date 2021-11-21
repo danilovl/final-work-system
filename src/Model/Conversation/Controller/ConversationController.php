@@ -14,6 +14,9 @@ namespace App\Model\Conversation\Controller;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
+use App\Model\Conversation\Entity\Conversation;
+use App\Model\User\Entity\User;
+use App\Model\Work\Entity\Work;
 use App\Model\Conversation\Http\{
     ConversationListHandle,
     ConversationCreateHandle,
@@ -21,11 +24,6 @@ use App\Model\Conversation\Http\{
     ConversationCreateWorkHandle,
     ConversationLastMessageHandle
 };
-use App\Entity\{
-    Work,
-    Conversation
-};
-use App\Entity\User;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -62,9 +60,9 @@ class ConversationController extends BaseController
     }
 
     /**
-     * @ParamConverter("work", class="App\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("userOne", class="App\Entity\User", options={"id" = "id_user_one"})
-     * @ParamConverter("userTwo", class="App\Entity\User", options={"id" = "id_user_two"})
+     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
+     * @ParamConverter("userOne", class="App\Model\User\Entity\User", options={"id" = "id_user_one"})
+     * @ParamConverter("userTwo", class="App\Model\User\Entity\User", options={"id" = "id_user_two"})
      */
     public function createWorkConversation(
         Work $work,

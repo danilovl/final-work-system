@@ -13,8 +13,11 @@
 namespace App\Model\Work\Form;
 
 use App\Model\User\Form\DataGrid\UserDataGrid;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use App\Model\WorkCategory\Form\DataGrid\WorkCategoryDataGrid;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Model\WorkStatus\Form\DataGrid\WorkStatusDataGrid;
+use App\Model\WorkType\Entity\WorkType;
 use App\Constant\{
     FormConstant,
     DateFormatConstant,
@@ -22,12 +25,7 @@ use App\Constant\{
 };
 use Doctrine\ORM\QueryBuilder;
 use App\Model\Work\WorkModel;
-use App\Entity\User;
-use App\Entity\{
-    WorkType,
-    WorkStatus,
-    WorkCategory
-};
+use App\Model\User\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{

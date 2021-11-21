@@ -13,7 +13,7 @@
 namespace App\Model\User\EventDispatcher;
 
 use App\EventSubscriber\Events;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

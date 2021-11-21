@@ -14,7 +14,7 @@ namespace App\Model\EventAddress\Controller\Ajax;
 
 use App\Constant\VoterSupportConstant;
 use App\Controller\BaseController;
-use App\Entity\EventAddress;
+use App\Model\EventAddress\Entity\EventAddress;
 use App\Model\EventAddress\Http\Ajax\{
     EventAddressEditHandle,
     EventAddressCreateHandle,

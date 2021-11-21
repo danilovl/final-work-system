@@ -13,8 +13,8 @@
 namespace App\Model\WorkStatus\Facade;
 
 use App\DataTransferObject\Repository\WorkStatusData;
-use App\Entity\WorkStatus;
-use App\Repository\WorkStatusRepository;
+use App\Model\WorkStatus\Entity\WorkStatus;
+use App\Model\WorkStatus\Repository\WorkStatusRepository;
 
 class WorkStatusFacade
 {

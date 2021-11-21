@@ -12,7 +12,7 @@
 
 namespace App\Model\Event\Http;
 
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Model\Event\EventDispatcher\EventEventDispatcherService;
 use App\Model\EventAddress\Facade\EventAddressFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;

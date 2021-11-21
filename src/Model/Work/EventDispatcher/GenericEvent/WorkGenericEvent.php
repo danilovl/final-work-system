@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\EventDispatcher\GenericEvent;
 
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 
 class WorkGenericEvent
 {

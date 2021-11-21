@@ -12,9 +12,9 @@
 
 namespace App\Model\MediaCategory\Form\DataGrid;
 
+use App\Model\MediaCategory\Repository\MediaCategoryRepository;
 use Doctrine\ORM\QueryBuilder;
-use App\Entity\User;
-use App\Repository\MediaCategoryRepository;
+use App\Model\User\Entity\User;
 
 class MediaCategoryDataGrid
 {

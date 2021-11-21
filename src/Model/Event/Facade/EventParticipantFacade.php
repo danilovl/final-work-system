@@ -12,19 +12,17 @@
 
 namespace App\Model\Event\Facade;
 
+use App\Model\Event\Entity\Event;
+use App\Model\EventParticipant\Entity\EventParticipant;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Service\EntityManagerService;
 use App\Model\User\Service\UserWorkService;
 use App\Constant\{
     WorkStatusConstant,
     WorkUserTypeConstant
 };
-use App\Entity\{
-    Event,
-    Work,
-    WorkStatus,
-    EventParticipant
-};
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class EventParticipantFacade
 {

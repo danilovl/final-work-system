@@ -13,13 +13,11 @@
 namespace App\Model\Work\Form;
 
 use App\Constant\DateFormatConstant;
+use App\Model\WorkStatus\Entity\WorkStatus;
+use App\Model\WorkType\Entity\WorkType;
 use DateTime;
 use App\Model\WorkSearch\WorkSearchModel;
-use App\Entity\User;
-use App\Entity\{
-    WorkType,
-    WorkStatus
-};
+use App\Model\User\Entity\User;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -80,8 +78,8 @@ class WorkSearchForm extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'choices' => $options['deadlines'],
-                'choice_label' => static fn(DateTime $deadline): string => (string) $deadline->format(DateFormatConstant::DATE),
-                'choice_value' => static fn(DateTime $deadline): string => (string) $deadline->format(DateFormatConstant::DATE)
+                'choice_label' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE),
+                'choice_value' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE)
             ]);
     }
 

@@ -13,8 +13,8 @@
 namespace App\Model\Event\Facade;
 
 use App\DataTransferObject\Repository\EventData;
-use App\Entity\Event;
-use App\Repository\EventRepository;
+use App\Model\Event\Entity\Event;
+use App\Model\Event\Repository\EventRepository;
 
 class EventFacade
 {

@@ -13,7 +13,7 @@
 namespace App\Model\Task\Form\DataGrid;
 
 use App\DataTransferObject\Repository\WorkData;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\Work\Facade\WorkFacade;
 use Doctrine\ORM\QueryBuilder;
 

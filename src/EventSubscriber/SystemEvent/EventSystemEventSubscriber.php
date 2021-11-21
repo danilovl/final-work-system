@@ -15,11 +15,9 @@ namespace App\EventSubscriber\SystemEvent;
 use App\EventSubscriber\Events;
 use App\Constant\SystemEventTypeConstant;
 use App\Model\Event\EventDispatcher\GenericEvent\EventGenericEvent;
-use App\Entity\{
-    SystemEvent,
-    SystemEventRecipient,
-    SystemEventType
-};
+use App\Model\SystemEvent\Entity\SystemEvent;
+use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Model\SystemEventType\Entity\SystemEventType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface

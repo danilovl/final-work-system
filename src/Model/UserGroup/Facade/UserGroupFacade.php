@@ -12,8 +12,8 @@
 
 namespace App\Model\UserGroup\Facade;
 
+use App\Model\UserGroup\Repository\UserGroupRepository;
 use Doctrine\ORM\Query;
-use App\Repository\UserGroupRepository;
 
 class UserGroupFacade
 {

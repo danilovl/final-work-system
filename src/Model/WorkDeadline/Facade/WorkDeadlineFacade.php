@@ -12,9 +12,9 @@
 
 namespace App\Model\WorkDeadline\Facade;
 
-use App\Repository\WorkRepository;
+use App\Model\Work\Repository\WorkRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class WorkDeadlineFacade
 {

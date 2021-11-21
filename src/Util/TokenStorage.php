@@ -12,7 +12,7 @@
 
 namespace App\Util;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 

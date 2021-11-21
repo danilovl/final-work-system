@@ -12,8 +12,8 @@
 
 namespace App\Model\Conversation\Http;
 
+use App\Model\Conversation\Entity\Conversation;
 use App\Model\Conversation\Facade\ConversationMessageFacade;
-use App\Entity\Conversation;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Service\{
     SeoPageService,

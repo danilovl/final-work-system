@@ -13,7 +13,7 @@
 namespace App\Model\Document;
 
 use Doctrine\Common\Collections\Collection;
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 use App\Model\Traits\{
     ActiveTrait,
     SimpleInformationTrait

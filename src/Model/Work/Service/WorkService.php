@@ -12,11 +12,9 @@
 
 namespace App\Model\Work\Service;
 
+use App\Model\Work\Entity\Work;
 use DateTime;
-use App\Entity\{
-    Work
-};
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class WorkService
 {

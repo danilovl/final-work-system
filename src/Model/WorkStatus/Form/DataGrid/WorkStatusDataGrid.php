@@ -12,9 +12,9 @@
 
 namespace App\Model\WorkStatus\Form\DataGrid;
 
+use App\Model\WorkStatus\Repository\WorkStatusRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
-use App\Repository\WorkStatusRepository;
 
 class WorkStatusDataGrid
 {

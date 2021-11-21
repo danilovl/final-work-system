@@ -12,7 +12,7 @@
 
 namespace App\Model\ResetPassword;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use DateTime;
 
 class ResetPasswordModel

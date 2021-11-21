@@ -14,7 +14,7 @@ namespace App\Model\Task\Twig\Runtime;
 
 use App\Model\Task\Service\TaskService;
 use Doctrine\Common\Collections\Collection;
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use Twig\Extension\AbstractExtension;
 
 class TaskRuntime extends AbstractExtension

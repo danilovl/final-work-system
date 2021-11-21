@@ -12,7 +12,7 @@
 
 namespace App\Model\EventSchedule\Http;
 
-use App\Entity\EventSchedule;
+use App\Model\EventSchedule\Entity\EventSchedule;
 use App\Form\Factory\FormDeleteFactory;
 use App\Service\{
     DateService,

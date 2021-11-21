@@ -12,10 +12,8 @@
 
 namespace App\Model\EventAddress;
 
-use App\Entity\{
-    User,
-    EventAddress
-};
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\User\Entity\User;
 use App\Model\Traits\{
     LocationTrait,
     SimpleInformationTrait

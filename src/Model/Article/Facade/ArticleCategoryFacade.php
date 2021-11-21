@@ -12,8 +12,8 @@
 
 namespace App\Model\Article\Facade;
 
+use App\Model\ArticleCategory\Repository\ArticleCategoryRepository;
 use Doctrine\ORM\Query;
-use App\Repository\ArticleCategoryRepository;
 
 class ArticleCategoryFacade
 {

@@ -14,13 +14,11 @@ namespace App\Model\Event\Form;
 
 use App\Constant\DateFormatConstant;
 use App\Model\Event\Form\Constraint\EventTime;
-use App\Entity\{
-    EventType,
-    EventAddress,
-    EventParticipant
-};
 use App\Constant\FormConstant;
 use App\Model\Event\EventModel;
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\EventParticipant\Entity\EventParticipant;
+use App\Model\EventType\Entity\EventType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{

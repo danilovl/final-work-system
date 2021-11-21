@@ -13,6 +13,11 @@
 namespace App\Model\Event\Facade;
 
 use App\DataTransferObject\Repository\EventData;
+use App\Model\Event\Entity\Event;
+use App\Model\Event\Repository\EventRepository;
+use App\Model\EventType\Entity\EventType;
+use App\Model\Work\Entity\Work;
+use App\Model\WorkStatus\Entity\WorkStatus;
 use App\Service\EntityManagerService;
 use App\Model\User\Service\UserWorkService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
@@ -27,15 +32,8 @@ use App\Constant\{
 };
 use App\Exception\ConstantNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
-use App\Entity\{
-    Work,
-    Event,
-    EventType,
-    WorkStatus
-};
-use App\Repository\EventRepository;
 use App\Helper\DateHelper;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class EventCalendarFacade
 {

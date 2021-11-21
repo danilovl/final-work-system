@@ -13,13 +13,11 @@
 namespace App\Model\Version\Form\Factory;
 
 use App\Constant\ControllerMethodConstant;
+use App\Model\Media\Entity\Media;
 use App\Model\Media\Facade\MediaMimeTypeFacade;
 use App\Model\Version\Form\VersionForm;
+use App\Model\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
-use App\Entity\{
-    Work,
-    Media
-};
 use App\Exception\{
     RuntimeException,
     ConstantNotFoundException

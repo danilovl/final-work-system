@@ -13,10 +13,8 @@
 namespace App\Model\EventAddress\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
-use App\Entity\{
-    User,
-    EventAddress
-};
+use App\Model\EventAddress\Entity\EventAddress;
+use App\Model\User\Entity\User;
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

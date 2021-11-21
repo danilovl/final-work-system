@@ -12,7 +12,7 @@
 
 namespace App\Model\WorkCategory\Http\Ajax;
 
-use App\Entity\WorkCategory;
+use App\Model\WorkCategory\Entity\WorkCategory;
 use App\Helper\FormValidationMessageHelper;
 use App\Model\WorkCategory\Factory\WorkCategoryFactory;
 use App\Model\WorkCategory\Form\WorkCategoryForm;

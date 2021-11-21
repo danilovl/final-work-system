@@ -13,11 +13,9 @@
 namespace App\DataTransferObject\Form\Factory;
 
 use App\DataTransferObject\BaseDataTransferObject;
-use App\Entity\{
-    Work,
-    Task
-};
+use App\Model\Task\Entity\Task;
 use App\Model\Task\TaskModel;
+use App\Model\Work\Entity\Work;
 
 class TaskFormFactoryData extends BaseDataTransferObject
 {

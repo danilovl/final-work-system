@@ -13,7 +13,7 @@
 namespace App\Model\Task\Service;
 
 use App\Constant\TaskStatusConstant;
-use App\Entity\Task;
+use App\Model\Task\Entity\Task;
 use App\Model\Task\EventDispatcher\TaskEventDispatcherService;
 
 class TaskStatusService

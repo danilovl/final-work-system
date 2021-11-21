@@ -12,7 +12,7 @@
 
 namespace App\Model\Work\Form;
 
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface

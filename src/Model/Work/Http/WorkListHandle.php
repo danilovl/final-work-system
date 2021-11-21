@@ -14,7 +14,7 @@ namespace App\Model\Work\Http;
 
 use App\Constant\WorkUserTypeConstant;
 use App\ElasticSearch\WorkSearch;
-use App\Entity\Work;
+use App\Model\Work\Entity\Work;
 use App\Form\Factory\FormDeleteFactory;
 use App\Helper\WorkFunctionHelper;
 use App\Model\Work\Form\Factory\WorkFormFactory;

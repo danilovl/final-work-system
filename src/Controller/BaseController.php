@@ -13,7 +13,7 @@
 namespace App\Controller;
 
 use Doctrine\Persistence\ObjectRepository;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\HttpFoundation\Request;

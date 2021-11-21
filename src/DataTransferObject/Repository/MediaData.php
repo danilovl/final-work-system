@@ -13,7 +13,7 @@
 namespace App\DataTransferObject\Repository;
 
 use App\DataTransferObject\BaseDataTransferObject;
-use App\Entity\MediaType;
+use App\Model\MediaType\Entity\MediaType;
 
 class MediaData extends BaseDataTransferObject
 {

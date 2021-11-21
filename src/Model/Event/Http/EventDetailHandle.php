@@ -13,7 +13,7 @@
 namespace App\Model\Event\Http;
 
 use App\Constant\FlashTypeConstant;
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Model\Comment\Form\CommentForm;
 use App\Form\Factory\FormDeleteFactory;
 use App\Model\Comment\CommentModel;

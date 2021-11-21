@@ -13,8 +13,8 @@
 namespace App\Model\Conversation\Http\Ajax;
 
 use App\Constant\AjaxJsonTypeConstant;
-use App\Entity\ConversationMessage;
 use App\Model\Conversation\Facade\ConversationMessageFacade;
+use App\Model\ConversationMessage\Entity\ConversationMessage;
 use App\Service\{
     UserService,
     RequestService

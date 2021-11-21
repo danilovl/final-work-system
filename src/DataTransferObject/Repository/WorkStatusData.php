@@ -13,10 +13,8 @@
 namespace App\DataTransferObject\Repository;
 
 use App\DataTransferObject\BaseDataTransferObject;
-use App\Entity\{
-    User,
-    WorkStatus
-};
+use App\Model\User\Entity\User;
+use App\Model\WorkStatus\Entity\WorkStatus;
 
 class WorkStatusData extends BaseDataTransferObject
 {

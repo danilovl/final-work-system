@@ -12,9 +12,9 @@
 
 namespace App\Model\WorkCategory\Facade;
 
+use App\Model\WorkCategory\Repository\WorkCategoryRepository;
 use Doctrine\ORM\Query;
-use App\Repository\WorkCategoryRepository;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 
 class WorkCategoryFacade
 {

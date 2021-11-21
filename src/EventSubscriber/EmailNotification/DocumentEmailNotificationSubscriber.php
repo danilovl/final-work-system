@@ -15,7 +15,7 @@ namespace App\EventSubscriber\EmailNotification;
 use App\Constant\WorkUserTypeConstant;
 use App\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\EventDispatcher\GenericEvent\MediaGenericEvent;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\EventSubscriber\Events;
 use App\Model\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Model\User\Facade\UserFacade;

@@ -14,7 +14,7 @@ namespace App\Model\Version\Security\Voter;
 
 use App\Constant\VoterSupportConstant;
 use App\Helper\WorkRoleHelper;
-use App\Entity\User;
+use App\Model\User\Entity\User;
 use App\Model\Version\Security\Voter\Subject\VersionVoterSubject;
 use LogicException;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;

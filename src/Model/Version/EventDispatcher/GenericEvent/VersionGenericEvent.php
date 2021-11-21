@@ -12,7 +12,7 @@
 
 namespace App\Model\Version\EventDispatcher\GenericEvent;
 
-use App\Entity\Media;
+use App\Model\Media\Entity\Media;
 
 class VersionGenericEvent
 {

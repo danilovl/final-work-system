@@ -5,7 +5,7 @@ security:
     legacy:
       algorithm: sha512
 
-    App\Entity\User:
+    App\Model\User\Entity\User:
       algorithm: sodium
       migrate_from:
         - legacy

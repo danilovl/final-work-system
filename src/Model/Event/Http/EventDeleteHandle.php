@@ -12,7 +12,7 @@
 
 namespace App\Model\Event\Http;
 
-use App\Entity\Event;
+use App\Model\Event\Entity\Event;
 use App\Form\Factory\FormDeleteFactory;
 use App\Constant\FlashTypeConstant;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;

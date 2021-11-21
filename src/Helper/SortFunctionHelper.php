@@ -12,8 +12,8 @@
 
 namespace App\Helper;
 
+use App\Model\EventParticipant\Entity\EventParticipant;
 use Collator;
-use App\Entity\EventParticipant;
 use Symfony\Component\Yaml\Yaml;
 
 class SortFunctionHelper
