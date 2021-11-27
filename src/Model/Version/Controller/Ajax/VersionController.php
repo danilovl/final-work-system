@@ -48,10 +48,8 @@ class VersionController extends BaseController
         return $this->versionCreateHandle->handle($request, $work);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("media", class="App\Model\Media\Entity\Media", options={"id" = "id_media"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function edit(
         Request $request,
         Work $work,
@@ -66,10 +64,8 @@ class VersionController extends BaseController
         return $this->versionEditHandle->handle($request, $media);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("media", class="App\Model\Media\Entity\Media", options={"id" = "id_media"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function delete(Work $work, Media $media): JsonResponse
     {
         $versionVoterSubject = new VersionVoterSubject;

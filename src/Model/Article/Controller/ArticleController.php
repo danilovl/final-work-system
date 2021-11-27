@@ -27,10 +27,8 @@ class ArticleController extends BaseController
     {
     }
 
-    /**
-     * @ParamConverter("article", class="App\Model\Article\Entity\Article", options={"id" = "id_article"})
-     * @ParamConverter("articleCategory", class="App\Model\ArticleCategory\Entity\ArticleCategory", options={"id" = "id_category"})
-     */
+    #[ParamConverter('article', class: Article::class, options: ['id' => 'id_article'])]
+    #[ParamConverter('articleCategory', class: ArticleCategory::class, options: ['id' => 'id_category'])]
     public function detail(Article $article, ArticleCategory $articleCategory): Response
     {
         $articleVoterSubject = (new ArticleVoterSubject())

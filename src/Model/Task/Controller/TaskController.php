@@ -55,10 +55,8 @@ class TaskController extends BaseController
         return $this->taskCreateSeveralHandle->handle($request);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function edit(
         Request $request,
         Work $work,

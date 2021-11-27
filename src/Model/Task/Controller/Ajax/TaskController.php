@@ -56,10 +56,8 @@ class TaskController extends BaseController
         return $this->taskCreateSeveralHandle->handle($request);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function edit(
         Request $request,
         Work $work,
@@ -70,10 +68,8 @@ class TaskController extends BaseController
         return $this->taskEditHandle->handle($request, $task);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function changeStatus(
         Request $request,
         Work $work,
@@ -84,10 +80,8 @@ class TaskController extends BaseController
         return $this->taskChangeStatusHandle->handle($request, $task);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function notifyComplete(Work $work, Task $task): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE, $task);
@@ -95,10 +89,8 @@ class TaskController extends BaseController
         return $this->taskNotifyCompleteHandle->handle($task);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("task", class="App\Model\Task\Entity\Task", options={"id" = "id_task"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function delete(Work $work, Task $task): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $task);

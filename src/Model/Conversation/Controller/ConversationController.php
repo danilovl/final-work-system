@@ -59,11 +59,9 @@ class ConversationController extends BaseController
         return $this->conversationDetailHandle->handle($request, $conversation);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("userOne", class="App\Model\User\Entity\User", options={"id" = "id_user_one"})
-     * @ParamConverter("userTwo", class="App\Model\User\Entity\User", options={"id" = "id_user_two"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('userOne', class: User::class, options: ['id' => 'id_user_one'])]
+    #[ParamConverter('userTwo', class: User::class, options: ['id' => 'id_user_two'])]
     public function createWorkConversation(
         Work $work,
         User $userOne,

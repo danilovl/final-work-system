@@ -52,10 +52,8 @@ class VersionController extends BaseController
         return $this->versionCreateHandle->handle($request, $work);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("media", class="App\Model\Media\Entity\Media", options={"id" = "id_media"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function edit(
         Request $request,
         Work $work,
@@ -79,10 +77,8 @@ class VersionController extends BaseController
         return $this->versionDetailContentHandle->handle($version);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("media", class="App\Model\Media\Entity\Media", options={"id" = "id_media"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function download(
         Work $work,
         Media $media
@@ -96,10 +92,8 @@ class VersionController extends BaseController
         return $this->versionDownloadHandle->handle($media);
     }
 
-    /**
-     * @ParamConverter("work", class="App\Model\Work\Entity\Work", options={"id" = "id_work"})
-     * @ParamConverter("media", class="App\Model\Media\Entity\Media", options={"id" = "id_media"})
-     */
+    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
+    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function downloadGoogle(
         Work $work,
         Media $media
