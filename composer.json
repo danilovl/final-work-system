@@ -30,7 +30,7 @@
         "overblog/graphql-bundle": "^0.13.2",
         "php-amqplib/rabbitmq-bundle": "^2.7",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "sensio/framework-extra-bundle": "^5.2",
+        "sensio/framework-extra-bundle": "^6.2",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",
         "symfony/dotenv": "5.3.*",
