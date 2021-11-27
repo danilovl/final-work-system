@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\EventListener\Entity;
+namespace App\Model\SystemEventRecipient\EventListener\Entity;
 
 use App\Constant\CacheKeyConstant;
 use App\Model\SystemEventRecipient\Entity\SystemEventRecipient;

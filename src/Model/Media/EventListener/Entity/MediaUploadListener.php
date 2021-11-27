@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\EventListener\Entity;
+namespace App\Model\Media\EventListener\Entity;
 
 use App\Exception\RuntimeException;
 use App\Model\Media\Entity\Media;
