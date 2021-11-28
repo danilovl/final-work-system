@@ -30,11 +30,11 @@ security:
       security: false
 
     api_key:
-      pattern: ^/api/key
+      pattern: ^/api-key/
       stateless: false
       provider: api_key_user_provider
       custom_authenticators:
-          - app.authenticator.api_token
+          - app.authenticator.api_key
 
     main:
       pattern: ^/(.*)
@@ -62,8 +62,7 @@ security:
     - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
 
     # API
-    - { path: ^/api/key, roles: ROLE_API }
-    - { path: ^/api/token, roles: ROLE_API }
+    - { path: ^/api-key/, roles: ROLE_API }
 
     # Google docs
     - { path: ^/(%locales%)/document/google/download/,            roles: PUBLIC_ACCESS }

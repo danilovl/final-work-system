@@ -7,7 +7,7 @@ services:
   app.authenticator:
     class: App\Security\Authenticator\AppAuthenticator
 
-  app.authenticator.api_token:
+  app.authenticator.api_key:
     class: App\Security\Authenticator\ApiKeyAuthenticator
 
   #   Provider

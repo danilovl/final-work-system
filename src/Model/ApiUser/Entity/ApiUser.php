@@ -47,7 +47,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'api_key', type: Types::STRING, length: 32, nullable: false)]
     protected ?string $apiKey = null;
 
-    #[ORM\OneToMany(mappedBy: 'apiUser', targetEntity: ApiUserRule::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: ApiUserRule::class, cascade: ['persist', 'remove'], inversedBy: 'apiUser')]
     protected Collection $rules;
 
     public function __construct()
