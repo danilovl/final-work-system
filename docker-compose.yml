@@ -31,7 +31,7 @@ services:
       - "MYSQL_ROOT_PASSWORD="
       - "MYSQL_DATABASE=final_work_system"
       - "MYSQL_USER=root"
-      - "MYSQL_PASSWORD=root"
+      - "MYSQL_PASSWORD="
   node:
     build:
       context: ./
