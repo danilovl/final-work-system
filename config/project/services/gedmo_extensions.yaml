@@ -1,18 +1,14 @@
 services:
   _defaults:
     public: true
+    autowire: true
 
-  extension.listener:
-    class: App\EventListener\DoctrineExtensionListener
-    arguments:
-      - '@app.user'
-      - '@gedmo.listener.loggable'
+  App\Application\EventListener\DoctrineExtensionListener:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-  gedmo.listener.loggable:
-    class: Gedmo\Loggable\LoggableListener
+  Gedmo\Loggable\LoggableListener:
     calls:
-      - [ setAnnotationReader, [ "@annotation_reader" ] ]
+      - [ setAnnotationReader, [ '@annotation_reader' ] ]
     tags:
       - { name: doctrine.event_subscriber, connection: default }

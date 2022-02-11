@@ -1,3 +1,46 @@
 imports:
   - { resource: project/parameters.yaml }
   - { resource: project/services.yaml }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+    bind:
+      $locale: '%locale%'
+      $locales: '%locales%'
+      $domain: '%domain%'
+      $container: '@service_container'
+      $systemInfo: '%system_info%'
+
+  App\Application\:
+    resource: '../src/Application'
+    exclude:
+      - '../src/Application/Attribute'
+      - '../src/Application/Cache'
+      - '../src/Application/Constant'
+      - '../src/Application/DataTransferObject'
+      - '../src/Application/DependencyInjection'
+      - '../src/Application/EventDispatcher/GenericEvent'
+      - '../src/Application/Exception'
+      - '../src/Application/GraphQL'
+      - '../src/Application/Helper'
+      - '../src/Application/Interfaces'
+      - '../src/Application/Menu'
+      - '../src/Application/Migrations'
+      - '../src/Application/Helper'
+      - '../src/Application/Traits'
+      - '../src/Application/Widget'
+      - '../src/Application/Model'
+
+  App\Domain\:
+    resource: '../src/Domain'
+    exclude:
+      - '../src/Domain/*/Entity'
+      - '../src/Domain/*/Constant'
+      - '../src/Domain/Comment/Form/EventSubscriber'
+
+  App\Application\ElasticSearch\WorkSearch:
+    arguments:
+      $transformedFinderWork: '@fos_elastica.finder.work'

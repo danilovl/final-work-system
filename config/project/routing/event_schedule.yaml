@@ -1,7 +1,7 @@
 event_schedule_create:
   path: /create
   defaults:
-    _controller: App\Model\EventSchedule\Controller\EventScheduleController::create
+    _controller: App\Domain\EventSchedule\Controller\EventScheduleController::create
     _seo:
       title: 'app.page.event_schedule_create'
   methods: [GET,POST]
@@ -11,7 +11,7 @@ event_schedule_detail:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventSchedule\Controller\EventScheduleController::detail
+    _controller: App\Domain\EventSchedule\Controller\EventScheduleController::detail
   methods: [GET]
 
 event_schedule_edit:
@@ -19,13 +19,13 @@ event_schedule_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventSchedule\Controller\EventScheduleController::edit
+    _controller: App\Domain\EventSchedule\Controller\EventScheduleController::edit
   methods: [GET,POST]
 
 event_schedule_list:
   path: /list
   defaults:
-    _controller: App\Model\EventSchedule\Controller\EventScheduleController::list
+    _controller: App\Domain\EventSchedule\Controller\EventScheduleController::list
     _seo:
       title: 'app.page.event_schedule_list'
   methods: [GET]
@@ -35,7 +35,7 @@ event_schedule_clone:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventSchedule\Controller\EventScheduleController::clone
+    _controller: App\Domain\EventSchedule\Controller\EventScheduleController::clone
   methods: [GET,POST]
 
 event_schedule_clone_ajax:
@@ -43,7 +43,7 @@ event_schedule_clone_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventSchedule\Controller\Ajax\EventScheduleController::clone
+    _controller: App\Domain\EventSchedule\Controller\Ajax\EventScheduleController::clone
   methods: [GET,POST]
 
 event_schedule_delete:
@@ -51,7 +51,7 @@ event_schedule_delete:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventSchedule\Controller\EventScheduleController::delete
+    _controller: App\Domain\EventSchedule\Controller\EventScheduleController::delete
   methods: [POST, DELETE]
 
 event_schedule_delete_ajax:
@@ -59,7 +59,7 @@ event_schedule_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventSchedule\Controller\Ajax\EventScheduleController::delete
+    _controller: App\Domain\EventSchedule\Controller\Ajax\EventScheduleController::delete
   methods: [POST, DELETE]
     
  

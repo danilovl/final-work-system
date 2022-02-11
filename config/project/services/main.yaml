@@ -4,159 +4,36 @@ services:
     autowire: true
 
   app.redirect_to_preferred_locale_listener:
-    class: App\EventListener\RedirectToPreferredLocaleListener
+    class: App\Application\EventListener\RedirectToPreferredLocaleListener
     arguments:
       $locales: '%locales%'
       $defaultLocale: '%locale%'
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-  app.mailer:
-    class: App\Service\MailerService
-
-  App\Service\MailerService: '@app.mailer'
-
-  app.translator:
-    class: App\Service\TranslatorService
-    arguments:
-      $defaultLocale: '%locale%'
-
-  App\Service\TranslatorService: '@app.translator'
-
-  app.user_password_encoder:
-    class: Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher
-
-  app.reset_password:
-    class: App\Service\ResetPasswordService
-
-  App\Service\ResetPasswordService: '@app.reset_password'
-
-  app.user:
-    class: App\Service\UserService
-
-  App\Service\UserService: '@app.user'
-
-  app.user_work:
-    class: App\Model\User\Service\UserWorkService
-
-  App\Model\User\Service\UserWorkService: '@app.user_work'
-
-  app.work:
-    class: App\Model\Work\Service\WorkService
-
-  App\Model\Work\Service\WorkService: '@app.work'
-
-  app.task:
-    class: App\Model\Task\Service\TaskService
-
-  App\Model\Task\Service\TaskService: '@app.task'
-
   app.conversation:
-    class: App\Model\Conversation\Service\ConversationService
+    class: App\Domain\Conversation\Service\ConversationService
 
-  App\Model\Conversation\Service\ConversationService: '@app.conversation'
+  App\Domain\Conversation\Service\ConversationService: '@app.conversation'
 
   app.conversation_variation:
-    class: App\Model\Conversation\Service\ConversationVariationService
+    class: App\Domain\Conversation\Service\ConversationVariationService
 
-  App\Model\Conversation\Service\ConversationVariationService: '@app.conversation_variation'
+  App\Domain\Conversation\Service\ConversationVariationService: '@app.conversation_variation'
 
   app.conversation_status:
-    class: App\Model\Conversation\Service\ConversationStatusService
+    class: App\Domain\Conversation\Service\ConversationStatusService
 
-  App\Model\Conversation\Service\ConversationStatusService: '@app.conversation_status'
-
-  app.stream.conversation:
-    class: App\Model\Conversation\Service\ConversationStreamService
-
-  App\Model\Conversation\Service\ConversationStreamService: '@app.stream.conversation'
-
-  app.widget:
-    class: App\Model\Widget\Service\WidgetManagerService
-    arguments:
-      $container: '@service_container'
-
-  App\Model\Widget\Service\WidgetManagerService: '@app.widget'
-
-  app.stream.widget:
-    class: App\Model\Widget\Service\WidgetStreamService
-
-  App\Model\Widget\Service\WidgetStreamService: '@app.stream.widget'
-
-  app.system_event_link_generator:
-    class: App\Service\SystemEventLinkGeneratorService
-    tags:
-      - { name: twig.runtime }
-
-  app.paginator:
-    class: App\Service\PaginatorService
-    shared: false
-
-  App\Service\PaginatorService: '@app.paginator'
-
-  app.work.detail_tab:
-    class: App\Model\Work\Service\WorkDetailTabService
-
-  App\Model\Work\Service\WorkDetailTabService: '@app.work.detail_tab'
-
-  app.work.list:
-    class: App\Model\Work\Service\WorkListService
-
-  App\Model\Work\Service\WorkListService: '@app.work.list'
-
-  app.seo_page:
-    class: App\Service\SeoPageService
-
-  App\Service\SeoPageService: '@app.seo_page'
-
-  app.date:
-    class: App\Service\DateService
-
-  App\Service\DateService: '@app.date'
+  App\Domain\Conversation\Service\ConversationStatusService: '@app.conversation_status'
 
   app.entity_manager:
-    class: App\Service\EntityManagerService
+    class: App\Application\Service\EntityManagerService
 
-  App\Service\EntityManagerService: '@app.entity_manager'
-
-  app.resize_image:
-    class: App\Service\ResizeImageService
-
-  App\Service\ResizeImageService: '@app.resize_image'
-
-  app.task_status:
-    class: App\Model\Task\Service\TaskStatusService
-
-  App\Model\Task\Service\TaskStatusService: '@app.task_status'
-
-  app.request:
-    class: App\Service\RequestService
-
-  App\Service\RequestService: '@app.request'
-
-  app.twig_render:
-    class: App\Service\TwigRenderService
-
-  App\Service\TwigRenderService: '@app.twig_render'
-
-  app.media:
-    class: App\Service\MediaService
-
-  App\Service\MediaService: '@app.media'
-
-  app.password_updater:
-    class: App\Service\PasswordUpdater
-
-  App\Service\PasswordUpdater: '@app.password_updater'
+  App\Application\Service\EntityManagerService: '@app.entity_manager'
 
   #   ParamConverter
   hashids.converter:
-    class: App\EventListener\HashidsParamConverterListener
+    class: App\Application\EventListener\HashidsParamConverterListener
     tags:
       - { name: request.param_converter, priority: 1, converter: hashids.converter }
 
-  #  Transformer
-  app.transformer.api:
-    class: App\Transformer\Api\Transformer
-
-  App\Transformer\Api\Transformer: '@app.transformer.api'

@@ -1,7 +1,0 @@
-services:
-  _defaults:
-    public: true
-    autowire: true
-
-  app.util.token_storage:
-    class: App\Util\TokenStorage

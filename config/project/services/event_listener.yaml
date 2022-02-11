@@ -1,6 +1,6 @@
 services:
   app.event_listener.request:
-    class: App\EventListener\RequestListener
+    class: App\Application\EventListener\RequestListener
     autowire: true
     public: false
     tags:

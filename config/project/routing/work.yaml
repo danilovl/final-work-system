@@ -1,7 +1,7 @@
 work_create:
   path: /create
   defaults:
-    _controller: App\Model\Work\Controller\WorkController::create
+    _controller: App\Domain\Work\Controller\WorkController::create
     _seo:
       title: 'app.page.work_create'
   methods: [GET, POST]
@@ -9,7 +9,7 @@ work_create:
 work_create_ajax:
   path: /create/ajax
   defaults:
-    _controller: App\Model\Work\Controller\Ajax\WorkController::create
+    _controller: App\Domain\Work\Controller\Ajax\WorkController::create
   methods: [POST]
 
 work_edit:
@@ -17,7 +17,7 @@ work_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\WorkController::edit
+    _controller: App\Domain\Work\Controller\WorkController::edit
     _seo:
       title: 'app.page.work_edit'
   methods: [GET, POST]
@@ -27,7 +27,7 @@ work_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\Ajax\WorkController::edit
+    _controller: App\Domain\Work\Controller\Ajax\WorkController::edit
   methods: [POST]
 
 work_edit_author:
@@ -35,7 +35,7 @@ work_edit_author:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\WorkController::editAuthor
+    _controller: App\Domain\Work\Controller\WorkController::editAuthor
     _seo:
       title: 'app.page.profile_edit'
   methods: [GET, POST]
@@ -45,7 +45,7 @@ work_edit_author_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\Ajax\WorkController::editAuthor
+    _controller: App\Domain\Work\Controller\Ajax\WorkController::editAuthor
   methods: [POST]
 
 work_detail:
@@ -53,7 +53,7 @@ work_detail:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\WorkController::detail
+    _controller: App\Domain\Work\Controller\WorkController::detail
   methods: [GET]
 
 work_list:
@@ -61,7 +61,7 @@ work_list:
   requirements:
     type: "supervisor|author|opponent|consultant"
   defaults:
-    _controller: App\Model\Work\Controller\WorkController::list
+    _controller: App\Domain\Work\Controller\WorkController::list
     _seo:
       title: 'app.text.work_list'
   methods: [GET, POST]
@@ -71,7 +71,7 @@ work_delete:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\WorkController::delete
+    _controller: App\Domain\Work\Controller\WorkController::delete
   methods: [POST, DELETE]
 
 work_delete_ajax:
@@ -79,5 +79,5 @@ work_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Work\Controller\Ajax\WorkController::delete
+    _controller: App\Domain\Work\Controller\Ajax\WorkController::delete
   methods: [POST, DELETE]

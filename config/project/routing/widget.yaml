@@ -1,5 +1,5 @@
 widget_data_live_ajax:
   path: /data/live
   defaults:
-    _controller: App\Model\Widget\Controller\Ajax\WidgetController::live
+    _controller: App\Domain\Widget\Controller\Ajax\WidgetController::live
   methods: [GET, POST]

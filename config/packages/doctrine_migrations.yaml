@@ -1,6 +1,6 @@
 doctrine_migrations:
   migrations_paths:
-    'App\Migrations': 'src/Migrations'
+    'App\Application\Migrations': 'src/Application/Migrations'
 
   em: default
   storage:

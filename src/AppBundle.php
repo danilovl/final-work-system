@@ -12,7 +12,7 @@
 
 namespace App;
 
-use App\DependencyInjection\Compiler\{
+use App\Application\DependencyInjection\Compiler\{
     WidgetCompilerPass,
     ServicePublicCompilerPass
 };

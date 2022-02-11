@@ -1,7 +1,7 @@
 event_calendar_reservation:
   path: /reservation
   defaults:
-    _controller: App\Model\EventCalendar\Controller\EventCalendarController::reservation
+    _controller: App\Domain\EventCalendar\Controller\EventCalendarController::reservation
     _seo:
       title: 'app.page.appointment_calendar'
   methods: [GET]
@@ -9,7 +9,7 @@ event_calendar_reservation:
 event_calendar_manage:
   path: /manage
   defaults:
-    _controller: App\Model\EventCalendar\Controller\EventCalendarController::manage
+    _controller: App\Domain\EventCalendar\Controller\EventCalendarController::manage
     _seo:
       title: 'app.page.appointment_calendar'
   methods: [GET]
@@ -17,7 +17,7 @@ event_calendar_manage:
 event_calendar_create_ajax:
   path: /create/ajax
   defaults:
-    _controller: App\Model\EventCalendar\Controller\Ajax\EventCalendarController::create
+    _controller: App\Domain\EventCalendar\Controller\Ajax\EventCalendarController::create
   methods: [POST]
 
 event_calendar_edit_ajax:
@@ -25,7 +25,7 @@ event_calendar_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventCalendar\Controller\Ajax\EventCalendarController::edit
+    _controller: App\Domain\EventCalendar\Controller\Ajax\EventCalendarController::edit
   methods: [POST]
 
 event_calendar_reservation_ajax:
@@ -33,7 +33,7 @@ event_calendar_reservation_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\EventCalendar\Controller\Ajax\EventCalendarController::eventReservation
+    _controller: App\Domain\EventCalendar\Controller\Ajax\EventCalendarController::eventReservation
   methods: [POST]
 
 event_calendar_events_ajax:
@@ -41,5 +41,5 @@ event_calendar_events_ajax:
   requirements:
     type: "manage|reservation|detail"
   defaults:
-    _controller: App\Model\EventCalendar\Controller\Ajax\EventCalendarController::getEvent
+    _controller: App\Domain\EventCalendar\Controller\Ajax\EventCalendarController::getEvent
   methods: [POST]

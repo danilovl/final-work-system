@@ -1,0 +1,115 @@
+<?php declare(strict_types=1);
+
+/**
+ *
+ * This file is part of the FinalWorkSystem project.
+ * (c) Vladimir Danilov
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
+namespace App\Domain\EventCalendar\Http\Ajax;
+
+use App\Application\Constant\{
+    AjaxJsonTypeConstant,
+    WorkStatusConstant,
+    WorkUserTypeConstant
+};
+use App\Application\Exception\AjaxRuntimeException;
+use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Helper\SortFunctionHelper;
+use App\Application\Service\{
+    UserService,
+    RequestService,
+    EntityManagerService
+};
+use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventModel;
+use App\Domain\Event\Facade\EventCalendarFacade;
+use App\Domain\Event\Factory\EventFactory;
+use App\Domain\Event\Form\EventForm;
+use App\Domain\EventParticipant\Entity\EventParticipant;
+use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Entity\WorkStatus;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
+
+class EventCalendarCreateHandle
+{
+    public function __construct(
+        private EntityManagerService $entityManagerService,
+        private RequestService $requestService,
+        private EventCalendarFacade $eventCalendarFacade,
+        private UserService $userService,
+        private UserWorkService $userWorkService,
+        private EventFactory $eventFactory,
+        private FormFactoryInterface $formFactory,
+        private EventEventDispatcherService $eventEventDispatcherService
+    ) {
+    }
+
+    public function handle(Request $request): JsonResponse
+    {
+        $user = $this->userService->getUser();
+        $userWorks = $this->userWorkService->getWorkBy(
+            $user,
+            WorkUserTypeConstant::SUPERVISOR,
+            null,
+            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+        );
+        $eventParticipantArray = [];
+
+        /** @var Work $work */
+        foreach ($userWorks as $work) {
+            $eventParticipant = new EventParticipant;
+            $eventParticipant->setUser($work->getAuthor());
+            $eventParticipant->setWork($work);
+            $eventParticipantArray[] = $eventParticipant;
+        }
+
+        SortFunctionHelper::eventParticipantSort($eventParticipantArray);
+
+        $eventModel = new EventModel;
+        $eventModel->owner = $user;
+
+        $form = $this->formFactory
+            ->create(EventForm::class, $eventModel, [
+                'addresses' => $user->getEventAddressOwner(),
+                'participants' => $eventParticipantArray
+            ])
+            ->handleRequest($request);
+
+        try {
+            if ($form->isSubmitted() && !$form->isValid()) {
+                throw new AjaxRuntimeException('Form not valid');
+            }
+
+            $event = $this->eventFactory->flushFromModel($eventModel);
+
+            $eventParticipant = $eventModel->participant;
+            if ($eventParticipant !== null) {
+                $eventParticipant->setEvent($event);
+
+                $this->entityManagerService->flush();
+                $event->setParticipant($eventParticipant);
+            }
+
+            $this->eventEventDispatcherService
+                ->onEventCalendarCreate($event, $eventParticipant !== null);
+        } catch (AjaxRuntimeException) {
+            return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
+                'data' => FormValidationMessageHelper::getErrorMessages($form)
+            ]);
+        }
+
+        return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS, [
+            'event' => $this->eventCalendarFacade->convertEventCreateToArray($event),
+        ]);
+    }
+}

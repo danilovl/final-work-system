@@ -3,9 +3,7 @@ services:
     public: true
     autowire: true
 
-  app.cache.homepage:
-    class: App\Cache\HomepageCache
+  App\Application\Cache\HomepageCache:
     arguments:
       $cache: '@cache.app'
 
-  App\Cache\HomepageCache: '@app.cache.homepage'

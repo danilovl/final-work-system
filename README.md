@@ -4,14 +4,14 @@
 FinalWork Web Application
 ========================
 
-Thesis management system based on Symfony Framework 5.3 
+Thesis management system based on Symfony 6.0
 
 ![Alt text](/git/readme/demo.gif?raw=true "Project example")
 
 Requirements
 ------------
 
-  * PHP 8.0.0 or higher
+  * PHP 8.1 or higher
   * MySQL
   * Redis server
   * RabbitMq server

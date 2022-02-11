@@ -1,9 +1,0 @@
-services:
-  _defaults:
-    public: true
-    autowire: true
-
-  app.validator.user:
-    class: App\Util\Validator\UserValidator
-
-  App\Util\Validator\UserValidator: '@app.validator.user'

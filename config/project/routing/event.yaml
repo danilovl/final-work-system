@@ -3,7 +3,7 @@ event_detail:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Event\Controller\EventController::detail
+    _controller: App\Domain\Event\Controller\EventController::detail
   methods: [GET,POST]
 
 event_edit:
@@ -11,7 +11,7 @@ event_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Event\Controller\EventController::edit
+    _controller: App\Domain\Event\Controller\EventController::edit
   methods: [GET,POST]
 
 event_edit_ajax:
@@ -19,13 +19,13 @@ event_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Event\Controller\Ajax\EventController::edit
+    _controller: App\Domain\Event\Controller\Ajax\EventController::edit
   methods: [POST]
 
 event_switch_to_skype:
   path: /switch-skype/{id}
   defaults:
-    _controller: App\Model\Event\Controller\EventController::switchToSkype
+    _controller: App\Domain\Event\Controller\EventController::switchToSkype
   methods: [GET,POST]
 
 event_delete:
@@ -33,7 +33,7 @@ event_delete:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Event\Controller\EventController::delete
+    _controller: App\Domain\Event\Controller\EventController::delete
   methods: [DELETE]
 
 event_delete_ajax:
@@ -41,7 +41,7 @@ event_delete_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Event\Controller\Ajax\EventController::delete
+    _controller: App\Domain\Event\Controller\Ajax\EventController::delete
   methods: [GET, POST]
 
 event_detail_events_ajax:
@@ -49,5 +49,5 @@ event_detail_events_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\Event\Controller\Ajax\EventController::getEvent
+    _controller: App\Domain\Event\Controller\Ajax\EventController::getEvent
   methods: [POST]

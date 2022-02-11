@@ -3,7 +3,7 @@ services:
     public: true
 
   doctrine_cache.providers.redis_provider:
-    class: App\Redis\Provider\RedisCache
+    class: App\Application\Redis\Provider\RedisCache
     calls:
       - ['setRedis', ['@redis']]
       - ['setNamespace', ['DoctrineSecondLevelCache']]
@@ -20,4 +20,4 @@ services:
           - '%env(REDIS_PORT)%'
       - method: select
         arguments:
-          - 13 # change database by index
+          - 13

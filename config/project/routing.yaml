@@ -11,7 +11,7 @@ app_security:
 
 security_login:
   path: /{_locale}/login
-  controller: App\Controller\SecurityController::login
+  controller: App\Application\Controller\SecurityController::login
   defaults:
     _locale: '%locale%'
     _seo:
@@ -22,7 +22,7 @@ security_login:
 
 security_logout:
   path: /logout
-  controller: App\Controller\SecurityController::logout
+  controller: App\Application\Controller\SecurityController::logout
   methods: GET
 
 app_admin:
@@ -186,5 +186,5 @@ widget:
     _locale: '%locale%'
 
 api_key:
-  resource: routing/api/key_work.yaml
-  prefix: /api-key/work
+  resource: routing/api_key.yaml
+

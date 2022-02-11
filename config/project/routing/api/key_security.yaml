@@ -1,0 +1,5 @@
+api_key_security_generate_token:
+  path: /generate-token
+  defaults:
+    _controller: App\Application\Controller\Api\SecurityController::generateToken
+  methods: [GET, POST]

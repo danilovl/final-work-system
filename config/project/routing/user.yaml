@@ -1,7 +1,7 @@
 user_create:
   path: /create
   defaults:
-    _controller: App\Model\User\Controller\UserController::create
+    _controller: App\Domain\User\Controller\UserController::create
     _seo:
       title: 'app.page.user_create'
   methods: [GET, POST]
@@ -11,7 +11,7 @@ user_edit:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\User\Controller\UserController::edit
+    _controller: App\Domain\User\Controller\UserController::edit
     _seo:
       title: 'app.page.user_edit'
   methods: [GET, POST]
@@ -21,19 +21,19 @@ user_edit_ajax:
   requirements:
     id: '%hashid%'
   defaults:
-    _controller: App\Model\User\Controller\Ajax\UserController::edit
+    _controller: App\Domain\User\Controller\Ajax\UserController::edit
   methods: [GET, POST]
 
 user_list:
   path: /{type}/list
   requirements:
-    type: "author|opponent|consultant|unused"
+    type: 'author|opponent|consultant|unused'
   defaults:
-    _controller: App\Model\User\Controller\UserController::list
+    _controller: App\Domain\User\Controller\UserController::list
   methods: [GET, POST]
 
 user_create_ajax:
   path: /create/ajax
   defaults:
-    _controller: App\Model\User\Controller\Ajax\UserController::create
+    _controller: App\Domain\User\Controller\Ajax\UserController::create
   methods: [POST]

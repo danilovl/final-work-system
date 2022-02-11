@@ -1,0 +1,5 @@
+api_key_user_info:
+  path: /detail
+  defaults:
+    _controller: App\Domain\User\Controller\Api\UserController::detail
+  methods: [GET, POST]

@@ -11,174 +11,174 @@ doctrine:
     entity_managers:
       default:
         mappings:
-          App\Model\ApiUser:
+          App\Domain\ApiUser:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ApiUser/Entity'
-            prefix: App\Model\ApiUser\Entity
-          App\Model\ApiUserRule:
+            dir: '%kernel.project_dir%/src/Domain/ApiUser/Entity'
+            prefix: App\Domain\ApiUser\Entity
+          App\Domain\ApiUserRule:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ApiUserRule/Entity'
-            prefix: App\Model\ApiUserRule\Entity
-          App\Model\Article:
+            dir: '%kernel.project_dir%/src/Domain/ApiUserRule/Entity'
+            prefix: App\Domain\ApiUserRule\Entity
+          App\Domain\Article:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Article/Entity'
-            prefix: App\Model\Article\Entity
-          App\Model\ArticleCategory:
+            dir: '%kernel.project_dir%/src/Domain/Article/Entity'
+            prefix: App\Domain\Article\Entity
+          App\Domain\ArticleCategory:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ArticleCategory/Entity'
-            prefix: App\Model\ArticleCategory\Entity
-          App\Model\Comment:
+            dir: '%kernel.project_dir%/src/Domain/ArticleCategory/Entity'
+            prefix: App\Domain\ArticleCategory\Entity
+          App\Domain\Comment:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Comment/Entity'
-            prefix: App\Model\Comment\Entity
-          App\Model\Conversation:
+            dir: '%kernel.project_dir%/src/Domain/Comment/Entity'
+            prefix: App\Domain\Comment\Entity
+          App\Domain\Conversation:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Conversation/Entity'
-            prefix: App\Model\Conversation\Entity
-          App\Model\ConversationMessage:
+            dir: '%kernel.project_dir%/src/Domain/Conversation/Entity'
+            prefix: App\Domain\Conversation\Entity
+          App\Domain\ConversationMessage:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ConversationMessage/Entity'
-            prefix: App\Model\ConversationMessage\Entity
-          App\Model\ConversationMessageStatus:
+            dir: '%kernel.project_dir%/src/Domain/ConversationMessage/Entity'
+            prefix: App\Domain\ConversationMessage\Entity
+          App\Domain\ConversationMessageStatus:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ConversationMessageStatus/Entity'
-            prefix: App\Model\ConversationMessageStatus\Entity
-          App\Model\ConversationMessageStatusType:
+            dir: '%kernel.project_dir%/src/Domain/ConversationMessageStatus/Entity'
+            prefix: App\Domain\ConversationMessageStatus\Entity
+          App\Domain\ConversationMessageStatusType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ConversationMessageStatusType/Entity'
-            prefix: App\Model\ConversationMessageStatusType\Entity
-          App\Model\ConversationParticipant:
+            dir: '%kernel.project_dir%/src/Domain/ConversationMessageStatusType/Entity'
+            prefix: App\Domain\ConversationMessageStatusType\Entity
+          App\Domain\ConversationParticipant:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ConversationParticipant/Entity'
-            prefix: App\Model\ConversationParticipant\Entity
-          App\Model\ConversationType:
+            dir: '%kernel.project_dir%/src/Domain/ConversationParticipant/Entity'
+            prefix: App\Domain\ConversationParticipant\Entity
+          App\Domain\ConversationType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ConversationType/Entity'
-            prefix: App\Model\ConversationType\Entity
-          App\Model\EmailNotificationQueue:
+            dir: '%kernel.project_dir%/src/Domain/ConversationType/Entity'
+            prefix: App\Domain\ConversationType\Entity
+          App\Domain\EmailNotificationQueue:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/EmailNotificationQueue/Entity'
-            prefix: App\Model\EmailNotificationQueue\Entity
-          App\Model\Event:
+            dir: '%kernel.project_dir%/src/Domain/EmailNotificationQueue/Entity'
+            prefix: App\Domain\EmailNotificationQueue\Entity
+          App\Domain\Event:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Event/Entity'
-            prefix: App\Model\Event\Entity
-          App\Model\EventAddress:
+            dir: '%kernel.project_dir%/src/Domain/Event/Entity'
+            prefix: App\Domain\Event\Entity
+          App\Domain\EventAddress:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/EventAddress/Entity'
-            prefix: App\Model\EventAddress\Entity
-          App\Model\EventParticipant:
+            dir: '%kernel.project_dir%/src/Domain/EventAddress/Entity'
+            prefix: App\Domain\EventAddress\Entity
+          App\Domain\EventParticipant:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/EventParticipant/Entity'
-            prefix: App\Model\EventParticipant\Entity
-          App\Model\EventSchedule:
+            dir: '%kernel.project_dir%/src/Domain/EventParticipant/Entity'
+            prefix: App\Domain\EventParticipant\Entity
+          App\Domain\EventSchedule:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/EventSchedule/Entity'
-            prefix: App\Model\EventSchedule\Entity
-          App\Model\EventScheduleTemplate:
+            dir: '%kernel.project_dir%/src/Domain/EventSchedule/Entity'
+            prefix: App\Domain\EventSchedule\Entity
+          App\Domain\EventScheduleTemplate:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/EventScheduleTemplate/Entity'
-            prefix: App\Model\EventScheduleTemplate\Entity
-          App\Model\EventType:
+            dir: '%kernel.project_dir%/src/Domain/EventScheduleTemplate/Entity'
+            prefix: App\Domain\EventScheduleTemplate\Entity
+          App\Domain\EventType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/EventType/Entity'
-            prefix: App\Model\EventType\Entity
-          App\Model\Media:
+            dir: '%kernel.project_dir%/src/Domain/EventType/Entity'
+            prefix: App\Domain\EventType\Entity
+          App\Domain\Media:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Media/Entity'
-            prefix: App\Model\Media\Entity
-          App\Model\MediaCategory:
+            dir: '%kernel.project_dir%/src/Domain/Media/Entity'
+            prefix: App\Domain\Media\Entity
+          App\Domain\MediaCategory:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/MediaCategory/Entity'
-            prefix: App\Model\MediaCategory\Entity
-          App\Model\MediaMimeType:
+            dir: '%kernel.project_dir%/src/Domain/MediaCategory/Entity'
+            prefix: App\Domain\MediaCategory\Entity
+          App\Domain\MediaMimeType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/MediaMimeType/Entity'
-            prefix: App\Model\MediaMimeType\Entity
-          App\Model\MediaType:
+            dir: '%kernel.project_dir%/src/Domain/MediaMimeType/Entity'
+            prefix: App\Domain\MediaMimeType\Entity
+          App\Domain\MediaType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/MediaType/Entity'
-            prefix: App\Model\MediaType\Entity
-          App\Model\ResetPassword:
+            dir: '%kernel.project_dir%/src/Domain/MediaType/Entity'
+            prefix: App\Domain\MediaType\Entity
+          App\Domain\ResetPassword:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/ResetPassword/Entity'
-            prefix: App\Model\ResetPassword\Entity
-          App\Model\SystemEvent:
+            dir: '%kernel.project_dir%/src/Domain/ResetPassword/Entity'
+            prefix: App\Domain\ResetPassword\Entity
+          App\Domain\SystemEvent:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/SystemEvent/Entity'
-            prefix: App\Model\SystemEvent\Entity
-          App\Model\SystemEventRecipient:
+            dir: '%kernel.project_dir%/src/Domain/SystemEvent/Entity'
+            prefix: App\Domain\SystemEvent\Entity
+          App\Domain\SystemEventRecipient:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/SystemEventRecipient/Entity'
-            prefix: App\Model\SystemEventRecipient\Entity
-          App\Model\SystemEventType:
+            dir: '%kernel.project_dir%/src/Domain/SystemEventRecipient/Entity'
+            prefix: App\Domain\SystemEventRecipient\Entity
+          App\Domain\SystemEventType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/SystemEventType/Entity'
-            prefix: App\Model\SystemEventType\Entity
-          App\Model\Task:
+            dir: '%kernel.project_dir%/src/Domain/SystemEventType/Entity'
+            prefix: App\Domain\SystemEventType\Entity
+          App\Domain\Task:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Task/Entity'
-            prefix: App\Model\Task\Entity
-          App\Model\User:
+            dir: '%kernel.project_dir%/src/Domain/Task/Entity'
+            prefix: App\Domain\Task\Entity
+          App\Domain\User:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/User/Entity'
-            prefix: App\Model\User\Entity
-          App\Model\UserGroup:
+            dir: '%kernel.project_dir%/src/Domain/User/Entity'
+            prefix: App\Domain\User\Entity
+          App\Domain\UserGroup:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/UserGroup/Entity'
-            prefix: App\Model\UserGroup\Entity
-          App\Model\Work:
+            dir: '%kernel.project_dir%/src/Domain/UserGroup/Entity'
+            prefix: App\Domain\UserGroup\Entity
+          App\Domain\Work:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/Work/Entity'
-            prefix: App\Model\Work\Entity
-          App\Model\WorkCategory:
+            dir: '%kernel.project_dir%/src/Domain/Work/Entity'
+            prefix: App\Domain\Work\Entity
+          App\Domain\WorkCategory:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/WorkCategory/Entity'
-            prefix: App\Model\WorkCategory\Entity
-          App\Model\WorkStatus:
+            dir: '%kernel.project_dir%/src/Domain/WorkCategory/Entity'
+            prefix: App\Domain\WorkCategory\Entity
+          App\Domain\WorkStatus:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/WorkStatus/Entity'
-            prefix: App\Model\WorkStatus\Entity
-          App\Model\WorkType:
+            dir: '%kernel.project_dir%/src/Domain/WorkStatus/Entity'
+            prefix: App\Domain\WorkStatus\Entity
+          App\Domain\WorkType:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Model/WorkType/Entity'
-            prefix: App\Model\WorkType\Entity
+            dir: '%kernel.project_dir%/src/Domain/WorkType/Entity'
+            prefix: App\Domain\WorkType\Entity
 
           loggable:
-            type: annotation
+            type: attribute
             alias: Gedmo
             prefix: Gedmo\Loggable\Entity
             dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Loggable/Entity/"

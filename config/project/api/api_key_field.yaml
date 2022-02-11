@@ -1,0 +1,52 @@
+parameters:
+  api_key_field:
+    parameters:
+      date_format: 'Y-m-d H:i:s'
+
+    Work:
+      fields:
+        - id
+        - title
+        - type
+        - status
+        - deadline
+        - deadlineProgram
+        - author
+        - supervisor
+        - opponent
+        - consultant
+    User:
+      fields:
+        - id
+        - username
+        - firstname
+        - lastname
+        - fullName
+        - degreeBefore
+        - degreeAfter
+        - email
+        - roles
+    WorkType:
+      fields:
+        - id
+        - name
+        - description
+    WorkStatus:
+      fields:
+        - id
+        - name
+        - description
+    Task:
+      fields:
+        - id
+        - name
+        - description
+        - complete:
+            parameters:
+              method: 'isComplete'
+        - notifyComplete:
+            parameters:
+              method: 'isNotifyComplete'
+        - owner
+        - work
+        - deadline

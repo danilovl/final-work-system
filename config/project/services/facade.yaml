@@ -3,28 +3,17 @@ services:
     public: true
     autowire: true
 
-  App\Model\:
-    resource: '../../../src/Model/*/Facade'
-
-  app.facade.conversation:
-    class: App\Model\Conversation\Facade\ConversationFacade
-    autowire: true
-    arguments:
-      $entityManagerService: '@app.entity_manager'
-
-  App\Model\Conversation\Facade\ConversationFacade: '@app.facade.conversation'
-
   app.facade.conversation_message:
-    class: App\Model\Conversation\Facade\ConversationMessageFacade
+    class: App\Domain\Conversation\Facade\ConversationMessageFacade
 
-  App\Model\Conversation\Facade\ConversationMessageFacade: '@app.facade.conversation_message'
+  App\Domain\Conversation\Facade\ConversationMessageFacade: '@app.facade.conversation_message'
 
   app.facade.system_event:
-    class: App\Model\SystemEvent\Facade\SystemEventFacade
+    class: App\Domain\SystemEvent\Facade\SystemEventFacade
 
-  App\Model\SystemEvent\Facade\SystemEventFacade: '@app.facade.system_event'
+  App\Domain\SystemEvent\Facade\SystemEventFacade: '@app.facade.system_event'
 
   app.facade.system_event_recipient:
-    class: App\Model\SystemEvent\Facade\SystemEventRecipientFacade
+    class: App\Domain\SystemEvent\Facade\SystemEventRecipientFacade
 
-  App\Model\SystemEvent\Facade\SystemEventRecipientFacade: '@app.facade.system_event_recipient'
+  App\Domain\SystemEvent\Facade\SystemEventRecipientFacade: '@app.facade.system_event_recipient'

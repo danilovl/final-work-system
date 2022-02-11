@@ -4,7 +4,7 @@ services:
     autowire: true
 
   app.entity_listener.media:
-    class: App\Model\Media\EventListener\Entity\MediaUploadListener
+    class: App\Domain\Media\EventListener\Entity\MediaUploadListener
     tags:
       - name: doctrine.event_listener
         event: prePersist
@@ -22,7 +22,7 @@ services:
         method: preRemove
 
   app.entity_listener.system_event_recipient:
-    class: App\Model\SystemEventRecipient\EventListener\Entity\SystemEventRecipientListener
+    class: App\Domain\SystemEventRecipient\EventListener\Entity\SystemEventRecipientListener
     tags:
       - name: doctrine.event_listener
         event: postPersist

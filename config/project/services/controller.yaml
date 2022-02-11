@@ -1,25 +1,13 @@
 services:
   _defaults:
     autowire: true
-    public: true
-
-  App\Controller\:
-    resource: '../../../src/Controller'
-    public: true
-    tags: ['controller.service_arguments']
-    calls:
-      - [setContainer, ["@service_container"]]
-
-  App\Model\:
-    resource: '../../../src/Model/*/Controller'
-    public: true
 
   app.controller.version:
-    class: App\Model\Version\Controller\VersionController
+    class: App\Domain\Version\Controller\VersionController
     calls:
-      - [setContainer, ["@service_container"]]
+      - [ setContainer, [ '@service_container' ] ]
 
   app.controller.document:
-    class: App\Model\Document\Controller\DocumentController
+    class: App\Domain\Document\Controller\DocumentController
     calls:
-      - [setContainer, ["@service_container"]]
+      - [ setContainer, [ '@service_container' ] ]

@@ -1,0 +1,19 @@
+api_key_security:
+  resource: api/key_security.yaml
+  prefix: /api/key/security
+
+api_key_user:
+  resource: api/key_user.yaml
+  prefix: /api/key/user
+
+api_key_work:
+  resource: api/key_work.yaml
+  prefix: /api/key/work
+
+api_key_endpoint:
+  resource: api/key_endpoint.yaml
+  prefix: /api/key/endpoint
+
+api_key_task:
+  resource: api/key_task.yaml
+  prefix: /api/key/task

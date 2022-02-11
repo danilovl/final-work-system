@@ -4,6 +4,6 @@ services:
     autowire: true
 
   app.rabbit_mq.consumer.email_notification:
-    class: App\RabbitMq\Consumer\EmailNotificationConsumer
+    class: App\Application\RabbitMq\Consumer\EmailNotificationConsumer
 
-  App\RabbitMq\Consumer\EmailNotificationConsumer: '@app.rabbit_mq.consumer.email_notification'
+  App\Application\RabbitMq\Consumer\EmailNotificationConsumer: '@app.rabbit_mq.consumer.email_notification'

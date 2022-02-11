@@ -1,3 +1,3 @@
 resources:
-  App\Model\Work\Entity\Work:
-  App\Model\ApiUser\Entity\ApiUser:
+  App\Domain\Work\Entity\Work:
+  App\Domain\ApiUser\Entity\ApiUser:

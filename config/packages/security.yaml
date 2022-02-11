@@ -5,7 +5,7 @@ security:
     legacy:
       algorithm: sha512
 
-    App\Model\User\Entity\User:
+    App\Domain\User\Entity\User:
       algorithm: sodium
       migrate_from:
         - legacy
@@ -30,26 +30,22 @@ security:
       security: false
 
     api_key:
-      pattern: ^/api-key/
-      stateless: false
+      pattern: ^/api/key/
+      stateless: true
       provider: api_key_user_provider
       custom_authenticators:
-          - app.authenticator.api_key
+        - app.authenticator.api_key
 
     main:
       pattern: ^/(.*)
       lazy: true
-      context:  user
+      context: user
       switch_user: { role: ROLE_ADMIN }
       provider: user_provider
       custom_authenticators:
-          - app.authenticator
-      form_login:
-        check_path: security_login
-        login_path: security_login
-        default_target_path: homepage
+        - app.authenticator
       logout:
-        path:  security_logout
+        path: security_logout
         target: security_login
 
   access_control:
@@ -62,7 +58,7 @@ security:
     - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
 
     # API
-    - { path: ^/api-key/, roles: ROLE_API }
+    - { path: ^/api/key/, roles: ROLE_API }
 
     # Google docs
     - { path: ^/(%locales%)/document/google/download/,            roles: PUBLIC_ACCESS }

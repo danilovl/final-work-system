@@ -51,7 +51,7 @@ fos_elastica:
               type: 'integer'
       persistence:
         driver: orm
-        model: App\Model\Work\Entity\Work
+        model: App\Domain\Work\Entity\Work
         finder: ~
         provider: ~
         listener: ~
