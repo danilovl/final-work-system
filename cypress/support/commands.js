@@ -1,6 +1,6 @@
 Cypress.Commands.add(`login`, (username, password) => {
     cy.clearCookies()
-    cy.visit(Cypress.env('domain'))
+    cy.visit(Cypress.env('domain') + '/en/login')
 
     cy
         .get('#username')
