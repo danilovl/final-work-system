@@ -49,13 +49,13 @@ class ImportSqlCommand extends Command
 
             $this->validationFilePath($filePath);
 
-            $output->write(sprintf("Processing file '<info>%s</info>' ", $filePath));
+            $output->writeln(sprintf("Processing file '<info>%s</info>' ", $filePath));
             $sql = file_get_contents($filePath);
 
             $stmt = $connection->prepare($sql);
             $stmt->executeStatement();
 
-            $output->write(sprintf('%d file was executed!', $filePath) . PHP_EOL);
+            $output->writeln(sprintf('%s file was executed!', $filePath) . PHP_EOL);
         }
 
         return Command::SUCCESS;

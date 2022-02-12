@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Domain\Wotk\Form;
+namespace App\Tests\Domain\Work\Form;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Form\WorkUserForm;

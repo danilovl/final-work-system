@@ -38,9 +38,6 @@ services:
       dockerfile: ./docker/node/Dockerfile
     volumes:
       - "./:/var/www/html/app"
-      - "/var/www/html/app/var"
-      - "/var/www/html/app/vendor"
-      - "/var/www/html/app/node_modules"
     working_dir: /var/www/html/app
   php:
     build:
@@ -50,9 +47,6 @@ services:
       - '9000'
     volumes:
       - "./:/var/www/html/app"
-      - "/var/www/html/app/var"
-      - "/var/www/html/app/vendor"
-      - "/var/www/html/app/node_modules"
       - "./docker/php/conf/php-fpm.conf:/etc/php-fpm.conf"
       - "./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/100-php.ini"
     working_dir: /var/www/html/app
@@ -68,9 +62,6 @@ services:
       - "9090:80"
     volumes:
       - "./:/var/www/html/app"
-      - "/var/www/html/app/var"
-      - "/var/www/html/app/vendor"
-      - "/var/www/html/app/node_modules"
       - './docker/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf'
     depends_on:
       - php
