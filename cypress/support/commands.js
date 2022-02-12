@@ -28,4 +28,3 @@ Cypress.Commands.add(`loginStudent`, () => {
         Cypress.env('loginData').student.password,
     )
 })
-
