@@ -17,7 +17,7 @@ use App\Application\Service\TranslatorService;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserWorkService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Danilovl\ParameterBundle\Service\ParameterService;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
@@ -33,7 +33,7 @@ class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubsc
             $kernel->getContainer()->get('twig'),
             $kernel->getContainer()->get(TranslatorService::class),
             $kernel->getContainer()->get(EmailNotificationQueueFactory::class),
-            $kernel->getContainer()->get(ParameterServiceInterface::class),
+            $kernel->getContainer()->get(ParameterService::class),
             $kernel->getContainer()->get(UserWorkService::class),
             $kernel->getContainer()->get('old_sound_rabbit_mq.email_notification_producer')
         );

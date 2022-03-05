@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8da46b46a561b8565b6e572f2a5ab2da",
+    "content-hash": "5f562ed9b2c01d609688e92202c08ec3",
     "packages": [
         {
             "name": "api-platform/core",
@@ -291,26 +291,26 @@
         },
         {
             "name": "danilovl/hashids-bundle",
-            "version": "v1.1.6",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/hashids-bundle.git",
-                "reference": "dc98312739c6a1242d22f91e84a402fc882ce03b"
+                "reference": "95887486d6dcc9b6a8438ec486248fa03d9d022b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/hashids-bundle/zipball/dc98312739c6a1242d22f91e84a402fc882ce03b",
-                "reference": "dc98312739c6a1242d22f91e84a402fc882ce03b",
+                "url": "https://api.github.com/repos/danilovl/hashids-bundle/zipball/95887486d6dcc9b6a8438ec486248fa03d9d022b",
+                "reference": "95887486d6dcc9b6a8438ec486248fa03d9d022b",
                 "shasum": ""
             },
             "require": {
                 "ext-gmp": "*",
                 "hashids/hashids": "^4.1.0",
-                "php": "^8.0.0",
-                "sensio/framework-extra-bundle": "^5.0 || ^6.0",
-                "symfony/framework-bundle": "^5.0 || ^6.0",
-                "symfony/twig-bundle": "^5.0 || ^6.0",
-                "symfony/yaml": "^5.0 || ^6.0"
+                "php": "^8.1.0",
+                "sensio/framework-extra-bundle": "^6.0",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/twig-bundle": "^6.0",
+                "symfony/yaml": "^6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.2"
@@ -339,28 +339,28 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/hashids-bundle/issues",
-                "source": "https://github.com/danilovl/hashids-bundle/tree/v1.1.6"
+                "source": "https://github.com/danilovl/hashids-bundle/tree/v1.2.0"
             },
-            "time": "2022-02-20T08:57:52+00:00"
+            "time": "2022-03-05T09:15:06+00:00"
         },
         {
             "name": "danilovl/object-to-array-transform-bundle",
-            "version": "v3.0.8",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/object-to-array-transform-bundle.git",
-                "reference": "e2ea12642a3fc07298edaaaf9a46aa722312981f"
+                "reference": "04b336253de9c02e4324d0715ed0dad4a21f88d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/object-to-array-transform-bundle/zipball/e2ea12642a3fc07298edaaaf9a46aa722312981f",
-                "reference": "e2ea12642a3fc07298edaaaf9a46aa722312981f",
+                "url": "https://api.github.com/repos/danilovl/object-to-array-transform-bundle/zipball/04b336253de9c02e4324d0715ed0dad4a21f88d8",
+                "reference": "04b336253de9c02e4324d0715ed0dad4a21f88d8",
                 "shasum": ""
             },
             "require": {
-                "danilovl/parameter-bundle": "^3.0.0",
-                "php": "^8.0.0",
-                "symfony/framework-bundle": "^5.0 || ^6.0"
+                "danilovl/parameter-bundle": "^3.3.0",
+                "php": "^8.1.0",
+                "symfony/framework-bundle": "^6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.2"
@@ -388,28 +388,28 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/object-to-array-transform-bundle/issues",
-                "source": "https://github.com/danilovl/object-to-array-transform-bundle/tree/v3.0.8"
+                "source": "https://github.com/danilovl/object-to-array-transform-bundle/tree/v3.1.0"
             },
-            "time": "2022-02-06T20:26:06+00:00"
+            "time": "2022-03-05T09:17:04+00:00"
         },
         {
             "name": "danilovl/parameter-bundle",
-            "version": "v3.1.2",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/parameter-bundle.git",
-                "reference": "0c701d288ad46a03c06ebad5bc1b274ce9ea2f00"
+                "reference": "e8958dcd286edb40cfb7a852b1777393c4d9c487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/parameter-bundle/zipball/0c701d288ad46a03c06ebad5bc1b274ce9ea2f00",
-                "reference": "0c701d288ad46a03c06ebad5bc1b274ce9ea2f00",
+                "url": "https://api.github.com/repos/danilovl/parameter-bundle/zipball/e8958dcd286edb40cfb7a852b1777393c4d9c487",
+                "reference": "e8958dcd286edb40cfb7a852b1777393c4d9c487",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0.0",
-                "symfony/framework-bundle": "^5.0 || ^6.0",
-                "symfony/twig-bundle": "^5.0  || ^6.0"
+                "php": "^8.1.0",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/twig-bundle": "^6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.2"
@@ -438,28 +438,28 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/parameter-bundle/issues",
-                "source": "https://github.com/danilovl/parameter-bundle/tree/v3.1.2"
+                "source": "https://github.com/danilovl/parameter-bundle/tree/v3.3.0"
             },
-            "time": "2022-01-30T15:19:26+00:00"
+            "time": "2022-03-05T09:12:32+00:00"
         },
         {
             "name": "danilovl/permission-middleware-bundle",
-            "version": "v2.1.7",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/permission-middleware-bundle.git",
-                "reference": "80adc02b08ce89642d48355a1e55e5cdd2fe3587"
+                "reference": "14171a292e1929ca3d70f59c0656c557257694e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/80adc02b08ce89642d48355a1e55e5cdd2fe3587",
-                "reference": "80adc02b08ce89642d48355a1e55e5cdd2fe3587",
+                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/14171a292e1929ca3d70f59c0656c557257694e2",
+                "reference": "14171a292e1929ca3d70f59c0656c557257694e2",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0.0",
-                "symfony/framework-bundle": "^5.0 || ^6.0",
-                "symfony/security-core": "^5.0 || ^6.0",
+                "php": "^8.1.0",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/security-core": "^6.0",
                 "symfony/translation-contracts": "^3.0"
             },
             "require-dev": {
@@ -488,28 +488,28 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/permission-middleware-bundle/issues",
-                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.1.7"
+                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.2.0"
             },
-            "time": "2021-12-18T13:09:26+00:00"
+            "time": "2022-03-05T09:19:51+00:00"
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
-            "version": "v3.0.7",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/render-service-twig-extension-bundle.git",
-                "reference": "d262680092d5aeb61900db2588ff2b8889dabccf"
+                "reference": "fb372ea0c8a7f9cb38fc2a82302ca2be5eba06b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/d262680092d5aeb61900db2588ff2b8889dabccf",
-                "reference": "d262680092d5aeb61900db2588ff2b8889dabccf",
+                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/fb372ea0c8a7f9cb38fc2a82302ca2be5eba06b5",
+                "reference": "fb372ea0c8a7f9cb38fc2a82302ca2be5eba06b5",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0.0",
-                "symfony/framework-bundle": "^5.0 || ^6.0",
-                "symfony/twig-bundle": "^5.0 || ^6.0"
+                "php": "^8.1.0",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/twig-bundle": "^6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.2"
@@ -538,9 +538,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/render-service-twig-extension-bundle/issues",
-                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v3.0.7"
+                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v3.1.0"
             },
-            "time": "2021-12-18T13:11:14+00:00"
+            "time": "2022-03-05T09:24:03+00:00"
         },
         {
             "name": "doctrine/annotations",

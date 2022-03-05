@@ -12,18 +12,18 @@
 
 namespace App\Tests\Application\Service;
 
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Danilovl\ParameterBundle\Service\ParameterService;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ParametersServiceTest extends KernelTestCase
 {
-    private ParameterServiceInterface $parametersService;
+    private ParameterService $parametersService;
 
     public function setUp(): void
     {
         $kernel = self::bootKernel();
-        $this->parametersService = $kernel->getContainer()->get('danilovl.parameter');
+        $this->parametersService = $kernel->getContainer()->get(ParameterService::class);
     }
 
     /**
