@@ -1,0 +1,7 @@
+api_key_event_system_list:
+  path: /{type}/list
+  requirements:
+    type: 'read|unread|all'
+  defaults:
+    _controller: App\Domain\SystemEvent\Controller\Api\SystemEventController::list
+  methods: [GET, POST]

@@ -13,8 +13,8 @@
 namespace App\Domain\Work\Repository;
 
 use App\Application\Constant\WorkUserTypeConstant;
-use App\Application\DataTransferObject\Repository\WorkData;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -54,7 +54,7 @@ class WorkRepository extends ServiceEntityRepository
             ->setParameter('user', $user);
     }
 
-    public function allByUserStatus(WorkData $workData): QueryBuilder
+    public function allByUserStatus(WorkRepositoryData $workData): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('work')
             ->addSelect('status')

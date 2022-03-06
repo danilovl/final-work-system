@@ -7,7 +7,7 @@
 {% endmacro %}
 
 {% macro recursiveMenu(menuItem, dropDownClass) %}
-    {#  @let menuItem App\Menu\MenuItem#}
+    {#  @let menuItem App\Application\Menu\MenuItem#}
     <li>
         <a {% if menuItem.uri %}href="{{ menuItem.uri }}" {% endif %}>
 

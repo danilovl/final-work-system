@@ -13,23 +13,23 @@
 namespace App\Domain\User\Http;
 
 use App\Application\Constant\WorkUserTypeConstant;
-use App\Application\DataTransferObject\Repository\{
-    WorkData,
-    WorkStatusData
-};
 use App\Application\Helper\UserHelper;
 use App\Application\Service\{
-    UserService,
-    SeoPageService,
     PaginatorService,
+    SeoPageService,
     TranslatorService,
-    TwigRenderService
+    TwigRenderService,
+    UserService
 };
 use App\Domain\User\Facade\{
     UserFacade
 };
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Form\WorkSearchStatusForm;
+use App\Domain\WorkStatus\DataTransferObject\{
+    WorkStatusRepositoryData
+};
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -107,7 +107,7 @@ class UserListHandle
         if ($getUserWorkAndStatus === true) {
             foreach ($pagination as $paginationUser) {
 
-                $workData = WorkData::createFromArray([
+                $workData = WorkRepositoryData::createFromArray([
                     'user' => $paginationUser,
                     'supervisor' => $user,
                     'type' => $type,
@@ -120,7 +120,7 @@ class UserListHandle
                     $works->set($paginationUser->getId(), $paginationUserWorks);
                 }
 
-                $workStatusData = WorkStatusData::createFromArray([
+                $workStatusData = WorkStatusRepositoryData::createFromArray([
                     'user' => $paginationUser,
                     'supervisor' => $user,
                     'type' => $type,

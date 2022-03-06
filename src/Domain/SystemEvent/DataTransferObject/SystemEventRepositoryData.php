@@ -10,16 +10,15 @@
  *
  */
 
-namespace App\Application\DataTransferObject\Repository;
+namespace App\Domain\SystemEvent\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\User\Entity\User;
-use App\Domain\WorkStatus\Entity\WorkStatus;
 
-class WorkStatusData extends BaseDataTransferObject
+class SystemEventRepositoryData extends BaseDataTransferObject
 {
-    public ?User $user = null;
-    public ?User $supervisor = null;
-    public ?string $type = null;
-    public WorkStatus|iterable|null $workStatus = null;
+    public ?User $recipient = null;
+    public ?bool $viewed = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
 }

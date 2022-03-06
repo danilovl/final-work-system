@@ -12,9 +12,10 @@
 
 namespace App\Domain\SystemEvent\Facade;
 
+use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
 use App\Domain\SystemEventRecipient\Repository\SystemEventRecipientRepository;
-use Doctrine\ORM\Query;
 use App\Domain\User\Entity\User;
+use Doctrine\ORM\Query;
 
 class SystemEventRecipientFacade
 {
@@ -51,5 +52,12 @@ class SystemEventRecipientFacade
     public function updateViewedAll(User $recipient): void
     {
         $this->systemEventRecipientRepository->updateViewedAll($recipient);
+    }
+
+    public function querySystemEventsByStatus(SystemEventRepositoryData $systemEventRepositoryData): Query
+    {
+        return $this->systemEventRecipientRepository
+            ->systemEventsByStatus($systemEventRepositoryData)
+            ->getQuery();
     }
 }

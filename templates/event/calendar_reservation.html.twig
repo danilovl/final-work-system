@@ -84,10 +84,7 @@
                 return;
             }
 
-            let start,
-                end;
-
-            var calendar = $('#event-calendar').fullCalendar({
+            let calendar = $('#event-calendar').fullCalendar({
                     header: {
                         left: 'prev,next today',
                         center: 'title',
@@ -105,11 +102,11 @@
                     selectHelper: true,
                     editable: false,
                     droppable: false,
-                    eventClick: function (event, jsEvent, view) {
+                    eventClick: function (event) {
                         $('#modal-title').html(event.title.replace(/\n/g, "<br>"));
-                        var eventDetail = $('#event-detail');
-                        var eventReservation = $('#event-reservation');
-                        var modalWorkForm = $('#modal-work-form');
+                        let eventDetail = $('#event-detail');
+                        let eventReservation = $('#event-reservation');
+                        let modalWorkForm = $('#modal-work-form');
 
                         if (event.detail_url) {
                             eventDetail.show();
@@ -125,7 +122,7 @@
                             eventReservation.attr('href', '');
                             eventReservation.attr('href', event.reservation_url);
                             eventReservation.attr('data-event-id', '');
-                            eventReservation.attr("data-event-id", event.id);
+                            eventReservation.attr('data-event-id', event.id);
                         } else {
                             eventReservation.hide();
                             modalWorkForm.hide();
@@ -134,18 +131,20 @@
                         $('#reservation-event-modal').modal();
                     },
                     events: function (start, end, timezone, callback) {
-                        var startDate = start.format("YYYY-MM-DD HH:mm");
-                        var endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
+                        let startDate = start.format('YYYY-MM-DD HH:mm');
+                        let endDate = (end === null) ? start : end.format('YYYY-MM-DD HH:mm');
 
                         $.ajax({
-                            url: "{{ path('event_calendar_events_ajax', {'type' : 'reservation'}) }}",
+                            url: '{{ path('event_calendar_events_ajax', {'type' : 'reservation'}) }}',
                             data: 'start=' + startDate + '&end=' + endDate,
                             type: 'POST',
                             dataType: 'json',
                             success: function (response) {
                                 if (response.valid === true) {
-                                    var events = [];
-                                    var respEvents = response.events;
+                                    clearAllEvents();
+                                    
+                                    let events = [];
+                                    let respEvents = response.events;
 
                                     $.each($.parseJSON(respEvents), function () {
                                         events.push({
@@ -163,7 +162,7 @@
                                     callback(events);
                                 }
 
-                                for (var type in response.notifyMessage) {
+                                for (let type in response.notifyMessage) {
                                     notifyMessage(type, response.notifyMessage[type]);
                                 }
                             }
@@ -172,10 +171,14 @@
                 }
             );
 
-            $('#event-reservation').on("click", function () {
-                var href = $(this).attr('href');
-                var form = $('form');
-                var eventId = $(this).attr('data-event-id');
+            function clearAllEvents() {
+                calendar.fullCalendar('removeEvents');
+            }
+            
+            $('#event-reservation').on('click', function () {
+                let href = $(this).attr('href');
+                let form = $('form');
+                let eventId = $(this).attr('data-event-id');
 
                 $.ajax({
                     url: href,
@@ -183,7 +186,7 @@
                     type: 'POST',
                     dataType: 'json',
                     success: function (response) {
-                        for (var type in response.notifyMessage) {
+                        for (let type in response.notifyMessage) {
                             notifyMessage(type, response.notifyMessage[type]);
                         }
 
@@ -209,7 +212,7 @@
 
         $(document).ready(function () {
             initEventCalendar();
-            $("#event_participant_work").select2({width: '100%'});
+            $('#event_participant_work').select2({width: '100%'});
         });
     </script>
 {% endblock %}

@@ -176,7 +176,7 @@
                         var form = $('form');
 
                         $.ajax({
-                            url: "{{ path('appointment_calendar_create_ajax') }}",
+                            url: "{{ path('event_calendar_create_ajax') }}",
                             data: form.serialize() + '&start=' + start + '&end=' + end,
                             type: 'POST',
                             dataType: 'json',
@@ -214,7 +214,7 @@
 
                     $('#eventDelete').click(function () {
                         $.ajax({
-                            url: "{{ path('appointment_calendar_delete_ajax') }}",
+                            url: "{{ path('event_calendar_delete_ajax') }}",
                             data: 'id=' + event.id,
                             type: 'POST',
                             dataType: 'json',
@@ -242,7 +242,7 @@
                     end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm:ss");
 
                     $.ajax({
-                        url: "{{ path('appointment_calendar_edit_ajax') }}",
+                        url: "{{ path('event_calendar_edit_ajax') }}",
                         data: 'start=' + start + '&end=' + end + '&id=' + event.id,
                         type: 'POST',
                         dataType: 'json',
@@ -265,7 +265,7 @@
                     end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm:ss");
 
                     $.ajax({
-                        url: "{{ path('appointment_calendar_edit_ajax') }}",
+                        url: "{{ path('event_calendar_edit_ajax') }}",
                         data: 'start=' + start + '&end=' + end + '&id=' + event.id,
                         type: 'POST',
                         dataType: 'json',

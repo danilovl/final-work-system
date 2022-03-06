@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Application\DataTransferObject\Repository;
+namespace App\Domain\Media\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\MediaType\Entity\MediaType;
 
-class MediaData extends BaseDataTransferObject
+class MediaRepositoryData extends BaseDataTransferObject
 {
     public mixed $users = null;
     public ?bool $active = null;

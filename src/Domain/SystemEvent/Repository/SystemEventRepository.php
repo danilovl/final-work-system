@@ -44,8 +44,7 @@ class SystemEventRepository extends ServiceEntityRepository
             ->distinct()
             ->where('recipient.recipient = :recipient')
             ->orderBy('system_event.createdAt', Criteria::DESC)
-            ->setParameter('recipient', $recipient)
-            ->setCacheable(true);
+            ->setParameter('recipient', $recipient);
     }
 
     public function countUnreadByRecipient(User $recipient): QueryBuilder

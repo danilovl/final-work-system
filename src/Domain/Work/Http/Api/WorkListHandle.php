@@ -13,16 +13,16 @@
 namespace App\Domain\Work\Http\Api;
 
 use App\Application\Constant\WorkStatusConstant;
-use App\Application\DataTransferObject\Repository\WorkData;
 use App\Application\Service\{
-    UserService,
-    PaginatorService
+    PaginatorService,
+    UserService
 };
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
+    JsonResponse,
+    Request
 };
 
 class WorkListHandle
@@ -39,7 +39,7 @@ class WorkListHandle
     {
         $user = $this->userService->getUser();
 
-        $workData = WorkData::createFromArray([
+        $workData = WorkRepositoryData::createFromArray([
             'user' => $user,
             'type' => $type,
             'workStatus' => [WorkStatusConstant::ACTIVE]

@@ -10,22 +10,22 @@
  *
  */
 
-namespace App\Tests\Application\DataTransferObject\Repository;
+namespace App\Tests\Domain\Media\DataTransferObject;
 
-use App\Application\DataTransferObject\Repository\WorkData;
+use App\Domain\Media\DataTransferObject\MediaRepositoryData;
+use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
-use App\Domain\WorkStatus\Entity\WorkStatus;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class WorkDataTest extends TestCase
+class MediaRepositoryDataTest extends TestCase
 {
     /**
      * @dataProvider dataProvider
      */
     public function testToArray(array $data): void
     {
-        $conversationMessageStatus = WorkData::createFromArray($data);
+        $conversationMessageStatus = MediaRepositoryData::createFromArray($data);
 
         $this->assertEquals(
             $data,
@@ -37,28 +37,28 @@ class WorkDataTest extends TestCase
     {
         yield [
             [
-                'user' => null,
-                'supervisor' => null,
+                'users' => null,
+                'active' => null,
                 'type' => null,
-                'workStatus' => null
+                'criteria' => null
             ]
         ];
 
         yield [
             [
-                'user' => new User,
-                'supervisor' => new User,
-                'type' => null,
-                'workStatus' => new WorkStatus
+                'users' => null,
+                'active' => true,
+                'type' => new MediaType,
+                'criteria' => []
             ]
         ];
 
         yield [
             [
-                'user' => new User,
-                'supervisor' => null,
-                'type' => null,
-                'workStatus' => []
+                'users' => new User,
+                'active' => false,
+                'type' => [],
+                'criteria' => []
             ]
         ];
     }

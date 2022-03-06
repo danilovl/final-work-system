@@ -13,7 +13,6 @@
 namespace App\Domain\WorkStatus\Repository;
 
 use App\Application\Constant\WorkUserTypeConstant;
-use App\Application\DataTransferObject\Repository\WorkStatusData;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -31,7 +30,7 @@ class WorkStatusRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work_status');
     }
 
-    public function countByUser(WorkStatusData $workStatusData): QueryBuilder
+    public function countByUser(\App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData $workStatusData): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('work_status')
             ->select('work_status.name, COUNT(work.id) as count')

@@ -13,16 +13,16 @@
 namespace App\Domain\Task\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
+    ControllerMethodConstant,
+    FlashTypeConstant
 };
-use App\Application\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Application\Service\{
     UserService,
     RequestService,
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Factory\TaskFactory;

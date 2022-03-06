@@ -10,17 +10,16 @@
  *
  */
 
-namespace App\Application\DataTransferObject\Repository;
+namespace App\Domain\Work\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
-use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
-use DateTime;
+use App\Domain\WorkStatus\Entity\WorkStatus;
 
-class EventData extends BaseDataTransferObject
+class WorkRepositoryData extends BaseDataTransferObject
 {
     public ?User $user = null;
-    public ?DateTime $startDate = null;
-    public ?DateTime $endDate = null;
-    public ?EventType $eventType = null;
+    public ?User $supervisor = null;
+    public ?string $type = null;
+    public WorkStatus|iterable|null $workStatus = null;
 }

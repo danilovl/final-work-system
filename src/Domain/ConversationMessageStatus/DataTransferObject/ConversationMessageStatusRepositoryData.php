@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Application\DataTransferObject\Repository;
+namespace App\Domain\ConversationMessageStatus\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 
-class ConversationMessageStatusData extends BaseDataTransferObject
+class ConversationMessageStatusRepositoryData extends BaseDataTransferObject
 {
     public ?User $user = null;
     public ?Conversation $conversation = null;

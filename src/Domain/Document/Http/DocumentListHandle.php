@@ -16,7 +16,6 @@ use App\Application\Constant\{
     MediaTypeConstant,
     ControllerMethodConstant
 };
-use App\Application\DataTransferObject\Repository\MediaData;
 use App\Application\Service\{
     UserService,
     PaginatorService,
@@ -24,6 +23,7 @@ use App\Application\Service\{
     EntityManagerService
 };
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
+use App\Domain\Media\DataTransferObject\MediaRepositoryData;
 use App\Domain\Media\Facade\MediaFacade;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Facade\UserFacade;
@@ -61,7 +61,7 @@ class DocumentListHandle
             $criteria = $form->getData();
         }
 
-        $mediaData = MediaData::createFromArray([
+        $mediaData = MediaRepositoryData::createFromArray([
             'users' => $this->userFacade->getAllUserActiveSupervisors($user),
             'type' => $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
             'active' => true,

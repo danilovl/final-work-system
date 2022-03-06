@@ -13,10 +13,9 @@
 namespace App\Domain\Document\Http;
 
 use App\Application\Constant\{
-    MediaTypeConstant,
-    ControllerMethodConstant
+    ControllerMethodConstant,
+    MediaTypeConstant
 };
-use App\Application\DataTransferObject\Repository\MediaData;
 use App\Application\Service\{
     UserService,
     PaginatorService,
@@ -24,6 +23,7 @@ use App\Application\Service\{
     EntityManagerService
 };
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
+use App\Domain\Media\DataTransferObject\MediaRepositoryData;
 use App\Domain\Media\Facade\MediaFacade;
 use App\Domain\MediaType\Entity\MediaType;
 use Symfony\Component\HttpFoundation\{
@@ -59,7 +59,7 @@ class DocumentListOwnerHandle
             $criteria = $form->getData();
         }
 
-        $mediaData = MediaData::createFromArray([
+        $mediaData = MediaRepositoryData::createFromArray([
             'users' => $user,
             'type' => $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
             'criteria' => $criteria

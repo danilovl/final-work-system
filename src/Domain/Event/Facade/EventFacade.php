@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Facade;
 
-use App\Application\DataTransferObject\Repository\EventData;
+use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
 
@@ -27,7 +27,7 @@ class EventFacade
         return $this->eventRepository->find($id);
     }
 
-    public function getEventsByOwner(EventData $eventData): array
+    public function getEventsByOwner(EventRepositoryData $eventData): array
     {
         return $this->eventRepository
             ->allByOwner($eventData)
@@ -35,7 +35,7 @@ class EventFacade
             ->getResult();
     }
 
-    public function getEventsByParticipant(EventData $eventData): array
+    public function getEventsByParticipant(EventRepositoryData $eventData): array
     {
         return $this->eventRepository
             ->allByParticipant($eventData)

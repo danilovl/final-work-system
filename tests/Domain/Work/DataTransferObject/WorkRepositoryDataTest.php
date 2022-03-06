@@ -10,23 +10,22 @@
  *
  */
 
-namespace App\Tests\Application\DataTransferObject\Repository;
+namespace App\Tests\Domain\Work\DataTransferObject;
 
-use App\Application\DataTransferObject\Repository\EventData;
-use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
-use DateTime;
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
+use App\Domain\WorkStatus\Entity\WorkStatus;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class EventDataTest extends TestCase
+class WorkRepositoryDataTest extends TestCase
 {
     /**
      * @dataProvider dataProvider
      */
     public function testToArray(array $data): void
     {
-        $conversationMessageStatus = EventData::createFromArray($data);
+        $conversationMessageStatus = WorkRepositoryData::createFromArray($data);
 
         $this->assertEquals(
             $data,
@@ -39,27 +38,27 @@ class EventDataTest extends TestCase
         yield [
             [
                 'user' => null,
-                'startDate' => null,
-                'endDate' => null,
-                'eventType' => null
+                'supervisor' => null,
+                'type' => null,
+                'workStatus' => null
             ]
         ];
 
         yield [
             [
                 'user' => new User,
-                'startDate' => new DateTime,
-                'endDate' => new DateTime,
-                'eventType' => new EventType
+                'supervisor' => new User,
+                'type' => null,
+                'workStatus' => new WorkStatus
             ]
         ];
 
         yield [
             [
-                'user' => new class extends User { },
-                'startDate' => new DateTime,
-                'endDate' => new DateTime,
-                'eventType' => new class extends EventType { }
+                'user' => new User,
+                'supervisor' => null,
+                'type' => null,
+                'workStatus' => []
             ]
         ];
     }

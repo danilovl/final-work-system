@@ -39,7 +39,8 @@ class ServicePublicCompilerPass implements CompilerPassInterface
         $this->easyAdminFix($container);
     }
 
-    public function easyAdminFix(ContainerBuilder $container): void{
+    public function easyAdminFix(ContainerBuilder $container): void
+    {
         foreach ($container->getDefinitions() as $definition) {
             if ($definition->getClass() === null) {
                 continue;

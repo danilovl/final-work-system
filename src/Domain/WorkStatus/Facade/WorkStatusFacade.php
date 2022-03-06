@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkStatus\Facade;
 
-use App\Application\DataTransferObject\Repository\WorkStatusData;
+use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
 
@@ -37,7 +37,7 @@ class WorkStatusFacade
             ->getResult();
     }
 
-    public function getCountByUser(WorkStatusData $workStatusData): array
+    public function getCountByUser(WorkStatusRepositoryData $workStatusData): array
     {
         return $this->workStatusRepository
             ->countByUser($workStatusData)

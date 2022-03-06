@@ -10,22 +10,23 @@
  *
  */
 
-namespace App\Tests\Application\DataTransferObject\Repository;
+namespace App\Tests\Domain\ConversationMessage\DataTransferObject;
 
-use App\Application\DataTransferObject\Repository\WorkStatusData;
+use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationMessageStatus\DataTransferObject\ConversationMessageStatusRepositoryData;
+use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
-use App\Domain\WorkStatus\Entity\WorkStatus;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class WorkStatusDataTest extends TestCase
+class ConversationMessageStatusRepositoryDataTest extends TestCase
 {
     /**
      * @dataProvider dataProvider
      */
     public function testToArray(array $data): void
     {
-        $conversationMessageStatus = WorkStatusData::createFromArray($data);
+        $conversationMessageStatus = ConversationMessageStatusRepositoryData::createFromArray($data);
 
         $this->assertEquals(
             $data,
@@ -38,27 +39,24 @@ class WorkStatusDataTest extends TestCase
         yield [
             [
                 'user' => null,
-                'supervisor' => null,
-                'type' => null,
-                'workStatus' => null
+                'conversation' => null,
+                'type' => null
             ]
         ];
 
         yield [
             [
                 'user' => new User,
-                'supervisor' => new User,
-                'type' => null,
-                'workStatus' => new WorkStatus
+                'conversation' => new Conversation,
+                'type' => new ConversationMessageStatusType
             ]
         ];
 
         yield [
             [
-                'user' => new User,
-                'supervisor' => null,
-                'type' => null,
-                'workStatus' => []
+                'user' => new class extends User { },
+                'conversation' => new class extends Conversation { },
+                'type' => new class extends ConversationMessageStatusType { }
             ]
         ];
     }

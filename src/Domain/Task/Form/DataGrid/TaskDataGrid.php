@@ -12,8 +12,8 @@
 
 namespace App\Domain\Task\Form\DataGrid;
 
-use App\Application\DataTransferObject\Repository\WorkData;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;
 use Doctrine\ORM\QueryBuilder;
 
@@ -27,7 +27,7 @@ class TaskDataGrid
         User $user,
         array $workStatus = null
     ): QueryBuilder {
-        $workData = WorkData::createFromArray([
+        $workData = WorkRepositoryData::createFromArray([
             'supervisor' => $user,
             'workStatus' => $workStatus
         ]);

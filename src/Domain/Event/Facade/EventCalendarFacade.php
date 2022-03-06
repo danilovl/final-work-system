@@ -12,23 +12,23 @@
 
 namespace App\Domain\Event\Facade;
 
-use App\Domain\Work\Entity\Work;
 use App\Application\Constant\{
     EventTypeConstant,
-    DateFormatConstant,
     WorkStatusConstant,
+    DateFormatConstant,
     WorkUserTypeConstant,
     EventCalendarActionTypeConstant
 };
-use App\Application\DataTransferObject\Repository\EventData;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\DateHelper;
 use App\Application\Service\EntityManagerService;
+use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
@@ -62,7 +62,7 @@ class EventCalendarFacade
 
         switch ($type) {
             case EventCalendarActionTypeConstant::MANAGE:
-                $mediaData = EventData::createFromArray([
+                $mediaData = EventRepositoryData::createFromArray([
                     'user' => $user,
                     'startDate' => $startDate,
                     'endDate' => $endDate
@@ -118,7 +118,7 @@ class EventCalendarFacade
 
                 /** @var User $supervisor */
                 foreach ($supervisors as $supervisor) {
-                    $mediaData = EventData::createFromArray([
+                    $mediaData = EventRepositoryData::createFromArray([
                         'user' => $supervisor,
                         'startDate' => $startDate,
                         'endDate' => $endDate,

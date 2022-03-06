@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Facade;
 
-use App\Application\DataTransferObject\Repository\WorkData;
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
 use Doctrine\ORM\{
@@ -43,7 +43,7 @@ class WorkFacade
             ->getResult();
     }
 
-    public function getQueryBuilderWorksBySupervisor(WorkData $workData): QueryBuilder
+    public function getQueryBuilderWorksBySupervisor(WorkRepositoryData $workData): QueryBuilder
     {
         return $this->workRepository->allByUserStatus($workData);
     }
@@ -51,7 +51,7 @@ class WorkFacade
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorSupervisorStatus(WorkData $workData): array
+    public function getWorksByAuthorSupervisorStatus(WorkRepositoryData $workData): array
     {
         return $this->workRepository
             ->allByUserStatus($workData)
@@ -62,7 +62,7 @@ class WorkFacade
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorStatus(WorkData $workData): array
+    public function getWorksByAuthorStatus(WorkRepositoryData $workData): array
     {
         return $this->workRepository
             ->allByUserStatus($workData)
@@ -70,7 +70,7 @@ class WorkFacade
             ->getResult();
     }
 
-    public function queryAllByUserStatus(WorkData $workData): Query
+    public function queryAllByUserStatus(WorkRepositoryData $workData): Query
     {
         return $this->workRepository
             ->allByUserStatus($workData)

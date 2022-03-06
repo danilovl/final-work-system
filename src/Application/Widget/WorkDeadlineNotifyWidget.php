@@ -13,15 +13,15 @@
 namespace App\Application\Widget;
 
 use App\Application\Constant\{
-    WorkStatusConstant
+    WorkStatusConstant,
+    WorkUserTypeConstant
 };
-use App\Application\Constant\WorkUserTypeConstant;
-use App\Application\DataTransferObject\Repository\WorkData;
 use App\Application\Helper\UserRoleHelper;
 use App\Application\Service\{
-    UserService,
-    TranslatorService
+    TranslatorService,
+    UserService
 };
+use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Service\WorkService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
@@ -46,7 +46,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
             return null;
         }
 
-        $workData = WorkData::createFromArray([
+        $workData = WorkRepositoryData::createFromArray([
             'user' => $user,
             'supervisor' => null,
             'type' => WorkUserTypeConstant::AUTHOR,

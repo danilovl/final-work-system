@@ -10,23 +10,22 @@
  *
  */
 
-namespace App\Tests\Application\DataTransferObject\Repository;
+namespace App\Tests\Domain\WorkStatus\DataTransferObject;
 
-use App\Application\DataTransferObject\Repository\ConversationMessageStatusData;
-use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
+use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
+use App\Domain\WorkStatus\Entity\WorkStatus;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class ConversationMessageStatusDataTest extends TestCase
+class WorkStatusRepositoryDataTest extends TestCase
 {
     /**
      * @dataProvider dataProvider
      */
     public function testToArray(array $data): void
     {
-        $conversationMessageStatus = ConversationMessageStatusData::createFromArray($data);
+        $conversationMessageStatus = WorkStatusRepositoryData::createFromArray($data);
 
         $this->assertEquals(
             $data,
@@ -39,24 +38,27 @@ class ConversationMessageStatusDataTest extends TestCase
         yield [
             [
                 'user' => null,
-                'conversation' => null,
-                'type' => null
+                'supervisor' => null,
+                'type' => null,
+                'workStatus' => null
             ]
         ];
 
         yield [
             [
                 'user' => new User,
-                'conversation' => new Conversation,
-                'type' => new ConversationMessageStatusType
+                'supervisor' => new User,
+                'type' => null,
+                'workStatus' => new WorkStatus
             ]
         ];
 
         yield [
             [
-                'user' => new class extends User { },
-                'conversation' => new class extends Conversation { },
-                'type' => new class extends ConversationMessageStatusType { }
+                'user' => new User,
+                'supervisor' => null,
+                'type' => null,
+                'workStatus' => []
             ]
         ];
     }

@@ -17,3 +17,7 @@ api_key_endpoint:
 api_key_task:
   resource: api/key_task.yaml
   prefix: /api/key/task
+
+api_key_system_event:
+  resource: api/key_system_event.yaml
+  prefix: /api/key/system-event

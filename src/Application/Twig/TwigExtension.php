@@ -12,7 +12,7 @@
 
 namespace App\Application\Twig;
 
-use App\Application\Service\SystemEventLinkGeneratorService;
+use App\Domain\SystemEvent\Service\SystemEventLinkGeneratorService;
 use App\Application\Twig\Runtime\{
     AwayRuntime
 };

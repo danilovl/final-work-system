@@ -13,11 +13,11 @@
 namespace App\Domain\Task\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Application\Exception\{
-    RuntimeException,
-    ConstantNotFoundException
+    ConstantNotFoundException,
+    RuntimeException
 };
+use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Domain\Task\Form\{
     TaskForm,
     TaskSeveralForm

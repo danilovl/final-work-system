@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\DataTransferObject\Form\Factory;
+namespace App\Domain\Task\DataTransferObject\Form\Factory;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\Task\Entity\Task;

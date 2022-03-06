@@ -12,7 +12,7 @@
 
 namespace App\Application\Exception;
 
-class InvalidArgumentException extends \RuntimeException
+class InvalidArgumentException extends \InvalidArgumentException
 {
 }
 

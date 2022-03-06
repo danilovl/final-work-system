@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Application\DataTransferObject\Repository;
+namespace App\Domain\WorkStatus\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 
-class WorkData extends BaseDataTransferObject
+class WorkStatusRepositoryData extends BaseDataTransferObject
 {
     public ?User $user = null;
     public ?User $supervisor = null;

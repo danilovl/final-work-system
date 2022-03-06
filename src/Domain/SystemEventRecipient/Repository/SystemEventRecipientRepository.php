@@ -12,6 +12,7 @@
 
 namespace App\Domain\SystemEventRecipient\Repository;
 
+use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -26,9 +27,9 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
         parent::__construct($registry, SystemEventRecipient::class);
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    private function baseQueryBuilder(?SystemEventRepositoryData $systemEventsByTypeRecipient = null): QueryBuilder
     {
-        return $this->createQueryBuilder('system_event_recipient')
+        $builder = $this->createQueryBuilder('system_event_recipient')
             ->leftJoin('system_event_recipient.systemEvent', 'systemEvent')
             ->leftJoin('systemEvent.type', 'type')
             ->leftJoin('systemEvent.conversation', 'conversation')
@@ -36,6 +37,18 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
             ->leftJoin('systemEvent.owner', 'owner')
             ->leftJoin('systemEvent.task', 'task')
             ->leftJoin('systemEvent.work', 'work');
+
+        if ($systemEventsByTypeRecipient !== null) {
+            if ($systemEventsByTypeRecipient->limit !== null) {
+                $builder->setMaxResults($systemEventsByTypeRecipient->limit);
+            }
+
+            if ($systemEventsByTypeRecipient->offset !== null) {
+                $builder->setFirstResult($systemEventsByTypeRecipient->offset);
+            }
+        }
+
+        return $builder;
     }
 
     public function allByRecipient(User $recipient): QueryBuilder
@@ -67,5 +80,19 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
             ->setParameter('recipient', $recipient)
             ->getQuery()
             ->execute();
+    }
+
+    public function systemEventsByStatus(SystemEventRepositoryData $systemEventsByTypeRecipient): QueryBuilder
+    {
+        $builder = $this->baseQueryBuilder()
+            ->andWhere('system_event_recipient.recipient = :recipient')
+            ->setParameter('recipient', $systemEventsByTypeRecipient->recipient);
+
+        if ($systemEventsByTypeRecipient->viewed !== null) {
+            $builder->andWhere('system_event_recipient.viewed = :viewed')
+                ->setParameter('viewed', $systemEventsByTypeRecipient->viewed);
+        }
+
+        return $builder;
     }
 }

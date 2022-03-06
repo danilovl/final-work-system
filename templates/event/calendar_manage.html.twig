@@ -170,12 +170,12 @@
                     selectHelper: true,
                     editable: true,
                     droppable: true,
-                    select: function (start, end, allDay) {
+                    select: function (start, end) {
                         $('#create-new-event-modal').modal();
-                        startForm.val(start.format("YYYY-MM-DD HH:mm"));
-                        endForm.val(end.format("YYYY-MM-DD HH:mm"));
+                        startForm.val(start.format('YYYY-MM-DD HH:mm'));
+                        endForm.val(end.format('YYYY-MM-DD HH:mm'));
                     },
-                    eventClick: function (event, jsEvent, view) {
+                    eventClick: function (event) {
                         let eventDetailButton = $('#event-detail');
                         let eventDeleteButton = $('#event-delete');
 
@@ -191,8 +191,8 @@
                         $('#event-detail-modal').modal();
                     },
                     eventDrop: function (event, delta, revertFunc) {
-                        let start = event.start.format("YYYY-MM-DD HH:mm");
-                        let end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
+                        let start = event.start.format('YYYY-MM-DD HH:mm');
+                        let end = (event.end === null) ? start : event.end.format('YYYY-MM-DD HH:mm');
                         let url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
                         url = url.replace('Ynvr2lgdAJ', event.id);
 
@@ -216,9 +216,9 @@
                         });
                     },
                     eventResize: function (event, delta, revertFunc) {
-                        let start = event.start.format("YYYY-MM-DD HH:mm");
-                        var end = (event.end === null) ? start : event.end.format("YYYY-MM-DD HH:mm");
-                        var url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
+                        let start = event.start.format('YYYY-MM-DD HH:mm');
+                        let end = (event.end === null) ? start : event.end.format('YYYY-MM-DD HH:mm');
+                        let url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
                         url = url.replace('Ynvr2lgdAJ', event.id);
 
                         $.ajax({
@@ -231,7 +231,7 @@
                                     revertFunc();
                                 }
 
-                                for (var type in response.notifyMessage) {
+                                for (let type in response.notifyMessage) {
                                     notifyMessage(type, response.notifyMessage[type]);
                                 }
                             },
@@ -241,8 +241,8 @@
                         });
                     },
                     events: function (start, end, timezone, callback) {
-                        var startDate = start.format("YYYY-MM-DD HH:mm");
-                        var endDate = (end === null) ? start : end.format("YYYY-MM-DD HH:mm");
+                        let startDate = start.format('YYYY-MM-DD HH:mm');
+                        let endDate = (end === null) ? start : end.format('YYYY-MM-DD HH:mm');
 
                         $.ajax({
                             url: "{{ path('event_calendar_events_ajax', {'type' : 'manage'}) }}",
@@ -251,8 +251,10 @@
                             dataType: 'json',
                             success: function (response) {
                                 if (response.valid === true) {
-                                    var events = [];
-                                    var respEvents = response.events;
+                                    clearAllEvents();
+
+                                    let events = [];
+                                    let respEvents = response.events;
 
                                     $.each($.parseJSON(respEvents), function () {
                                         events.push({
@@ -270,7 +272,7 @@
                                     callback(events);
                                 }
 
-                                for (var type in response.notifyMessage) {
+                                for (let type in response.notifyMessage) {
                                     notifyMessage(type, response.notifyMessage[type]);
                                 }
                             }
@@ -279,11 +281,15 @@
                 }
             );
 
-            var loading = $('#event_create_load');
-            var button_event_create = $('#event_create');
+            function clearAllEvents() {
+                calendar.fullCalendar('removeEvents');
+            }
 
-            button_event_create.on("click", function () {
-                var form = $('form');
+            let loading = $('#event_create_load');
+            let button_event_create = $('#event_create');
+
+            button_event_create.on('click', function () {
+                let form = $('form');
 
                 button_event_create.prop('disabled', true);
                 loading.removeClass('hide');
@@ -311,12 +317,12 @@
                         }
 
                         if (response.valid === false) {
-                            for (var key in response.data) {
+                            for (let key in response.data) {
                                 $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
                             }
                         }
 
-                        for (var type in response.notifyMessage) {
+                        for (let type in response.notifyMessage) {
                             notifyMessage(type, response.notifyMessage[type]);
                         }
                     }
@@ -334,8 +340,8 @@
             });
 
             $('#event-delete').on("click", function () {
-                var href = $(this).attr('href');
-                var eventId = $(this).attr('data-event-id');
+                let href = $(this).attr('href');
+                let eventId = $(this).attr('data-event-id');
 
                 $.ajax({
                     url: href,
@@ -350,7 +356,7 @@
                             $('#event-calendar').fullCalendar('removeEvents', eventId);
                         }
 
-                        for (var type in response.notifyMessage) {
+                        for (let type in response.notifyMessage) {
                             notifyMessage(type, response.notifyMessage[type]);
                         }
                     },
@@ -364,7 +370,7 @@
         $(document).ready(function () {
             initEventCalendar(locale);
 
-            var modalWindow = $('#create-new-event-modal');
+            let modalWindow = $('#create-new-event-modal');
 
             $("#event_type").select2({width: '100%', dropdownParent: modalWindow});
             $("#event_address").select2({width: '100%', dropdownParent: modalWindow});
