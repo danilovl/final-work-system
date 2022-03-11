@@ -45,6 +45,7 @@ class ConversationReadAllHandle
             ->isUnreadMessagesByRecipient($user);
 
         if ($isUnreadExist) {
+            /** @var ConversationMessageStatusType $conversationMessageStatusType */
             $conversationMessageStatusType = $this->entityManagerService->getReference(
                 ConversationMessageStatusType::class,
                 ConversationMessageStatusTypeConstant::READ

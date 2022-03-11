@@ -61,9 +61,12 @@ class DocumentListHandle
             $criteria = $form->getData();
         }
 
+        /** @var MediaType $type */
+        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL);
+
         $mediaData = MediaRepositoryData::createFromArray([
             'users' => $this->userFacade->getAllUserActiveSupervisors($user),
-            'type' => $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL),
+            'type' => $type,
             'active' => true,
             'criteria' => $criteria
         ]);

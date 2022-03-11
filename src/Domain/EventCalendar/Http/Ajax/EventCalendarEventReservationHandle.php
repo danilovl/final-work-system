@@ -53,11 +53,15 @@ class EventCalendarEventReservationHandle
     public function handle(Request $request, Event $event): JsonResponse
     {
         $user = $this->userService->getUser();
+
+        /** @var WorkStatus $workStatus */
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+
         $userWorks = $this->userWorkService->getWorkBy(
             $user,
             WorkUserTypeConstant::AUTHOR,
             null,
-            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $workStatus
         );
 
         $eventWorkReservationModel = new EventWorkReservationModel;

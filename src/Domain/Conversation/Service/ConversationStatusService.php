@@ -34,13 +34,16 @@ class ConversationStatusService
         Conversation $conversation,
         User $user
     ): bool {
+        /** @var ConversationMessageStatusType $type */
+        $type = $this->entityManagerService->getReference(
+            ConversationMessageStatusType::class,
+            ConversationMessageStatusTypeConstant::UNREAD
+        );
+
         $conversationMessageStatusData = ConversationMessageStatusRepositoryData::createFromArray([
             'user' => $user,
             'conversation' => $conversation,
-            'type' => $this->entityManagerService->getReference(
-                ConversationMessageStatusType::class,
-                ConversationMessageStatusTypeConstant::UNREAD
-            )
+            'type' => $type
         ]);
 
         $conversationStatus = $this->conversationMessageStatusRepository
@@ -66,10 +69,13 @@ class ConversationStatusService
             return;
         }
 
-        $conversationStatus->setType($this->entityManagerService->getReference(
+        /** @var ConversationMessageStatusType $conversationMessageStatusType */
+        $conversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
             $status
-        ));
+        );
+
+        $conversationStatus->setType($conversationMessageStatusType);
 
         $this->entityManagerService->persistAndFlush($conversationStatus);
     }
@@ -91,10 +97,13 @@ class ConversationStatusService
             }
 
             if ($switchToRead === true) {
-                $conversationMessageStatus->setType($this->entityManagerService->getReference(
+                /** @var ConversationMessageStatusType $conversationMessageStatusType */
+                $conversationMessageStatusType = $this->entityManagerService->getReference(
                     ConversationMessageStatusType::class,
                     ConversationMessageStatusTypeConstant::READ
-                ));
+                );
+
+                $conversationMessageStatus->setType($conversationMessageStatusType);
 
                 $this->entityManagerService->persistAndFlush($conversationMessageStatus);
             }
@@ -120,7 +129,13 @@ class ConversationStatusService
             return;
         }
 
-        $conversationMessageStatus->setType($this->entityManagerService->getReference(ConversationMessageStatusType::class, $status));
+        /** @var ConversationMessageStatusType $conversationMessageStatusType */
+        $conversationMessageStatusType = $this->entityManagerService->getReference(
+            ConversationMessageStatusType::class,
+            $status
+        );
+
+        $conversationMessageStatus->setType($conversationMessageStatusType);
         $this->entityManagerService->persistAndFlush($conversationMessageStatus);
     }
 

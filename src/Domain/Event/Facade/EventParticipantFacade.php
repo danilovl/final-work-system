@@ -36,11 +36,14 @@ class EventParticipantFacade
         User $user,
         Event $event
     ): array {
+        /** @var WorkStatus $workStatus */
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+
         $userWorks = $this->userWorkService->getWorkBy(
             $user,
             WorkUserTypeConstant::SUPERVISOR,
             null,
-            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $workStatus
         );
         $eventParticipantArray = [];
 

@@ -56,10 +56,13 @@ class VersionCreateHandle
 
     public function handle(Request $request, Work $work): Response
     {
+        /** @var MediaType $type */
+        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION);
+
         $mediaModel = new MediaModel;
         $mediaModel->owner = $this->userService->getUser();
         $mediaModel->work = $work;
-        $mediaModel->type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION);
+        $mediaModel->type = $type;
 
         $form = $this->versionFormFactory
             ->getVersionForm(

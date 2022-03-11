@@ -52,8 +52,11 @@ class AjaxRequestListener
         Request $request
     ): void {
         $attributes = (new ReflectionClass($controller))->getAttributes(AjaxRequestMiddlewareAttribute::class);
+
         foreach ($attributes as $attribute) {
-            $this->handleRequest($event, $attribute->newInstance(), $request);
+            /** @var AjaxRequestMiddlewareAttribute $ajaxRequestMiddlewareAttribute */
+            $ajaxRequestMiddlewareAttribute = $attribute->newInstance();
+            $this->handleRequest($event, $ajaxRequestMiddlewareAttribute, $request);
         }
     }
 
@@ -68,7 +71,9 @@ class AjaxRequestListener
             ->getAttributes(AjaxRequestMiddlewareAttribute::class);
 
         foreach ($attributes as $attribute) {
-            $this->handleRequest($event, $attribute->newInstance(), $request);
+            /** @var AjaxRequestMiddlewareAttribute $ajaxRequestMiddlewareAttribute */
+            $ajaxRequestMiddlewareAttribute = $attribute->newInstance();
+            $this->handleRequest($event, $ajaxRequestMiddlewareAttribute, $request);
         }
     }
 

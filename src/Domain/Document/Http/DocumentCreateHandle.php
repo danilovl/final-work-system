@@ -52,12 +52,15 @@ class DocumentCreateHandle
     {
         $user = $this->userService->getUser();
 
-        $mediaModel = new MediaModel;
-        $mediaModel->owner = $this->userService->getUser();
-        $mediaModel->type = $this->entityManagerService->getReference(
+        /** @var MediaType $type */
+        $type = $this->entityManagerService->getReference(
             MediaType::class,
             MediaTypeConstant::INFORMATION_MATERIAL
         );
+
+        $mediaModel = new MediaModel;
+        $mediaModel->owner = $this->userService->getUser();
+        $mediaModel->type = $type;
 
         $form = $this->documentFormFactory
             ->setUser($user)

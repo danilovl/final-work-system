@@ -41,11 +41,14 @@ class EventCalendarReservationHandle
 
     public function handle(): Response
     {
+        /** @var WorkStatus $workStatus */
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+
         $userWorks = $this->userWorkService->getWorkBy(
             $this->userService->getUser(),
             WorkUserTypeConstant::AUTHOR,
             null,
-            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $workStatus
         );
 
         $form = $this->formFactory->create(EventWorkReservationForm::class, new EventWorkReservationModel, [

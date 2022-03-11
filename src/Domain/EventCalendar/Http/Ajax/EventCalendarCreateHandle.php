@@ -57,11 +57,14 @@ class EventCalendarCreateHandle
     public function handle(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
+        /** @var WorkStatus $workStatus */
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+
         $userWorks = $this->userWorkService->getWorkBy(
             $user,
             WorkUserTypeConstant::SUPERVISOR,
             null,
-            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $workStatus
         );
         $eventParticipantArray = [];
 

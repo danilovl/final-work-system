@@ -30,9 +30,12 @@ class ConversationFactory extends BaseModelFactory
         Work $work = null,
         string $name = null
     ): Conversation {
+        /** @var ConversationType $conversationType */
+        $conversationType = $this->entityManagerService->getReference(ConversationType::class, $type);
+
         $conversation = new Conversation;
         $conversation->setOwner($owner);
-        $conversation->setType($this->entityManagerService->getReference(ConversationType::class, $type));
+        $conversation->setType($conversationType);
 
         if ($work !== null) {
             $conversation->setWork($work);
@@ -85,10 +88,13 @@ class ConversationFactory extends BaseModelFactory
             $participant = $this->getUser($participant);
 
             if ($participant->getId() !== $user->getId()) {
+                /** @var ConversationMessageStatusType $conversationMessageStatusType */
+                $conversationMessageStatusType = $this->entityManagerService->getReference(ConversationMessageStatusType::class, $type);
+
                 $messageStatus = new ConversationMessageStatus();
                 $messageStatus->setConversation($conversation);
                 $messageStatus->setMessage($message);
-                $messageStatus->setType($this->entityManagerService->getReference(ConversationMessageStatusType::class, $type));
+                $messageStatus->setType($conversationMessageStatusType);
                 $messageStatus->setUser($participant);
                 $this->entityManagerService->persistAndFlush($messageStatus);
             }

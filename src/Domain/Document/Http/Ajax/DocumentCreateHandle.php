@@ -48,13 +48,15 @@ class DocumentCreateHandle
     public function handle(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
-
-        $mediaModel = new MediaModel;
-        $mediaModel->owner = $user;
-        $mediaModel->type = $this->entityManagerService->getReference(
+        /** @var MediaType $type */
+        $type = $this->entityManagerService->getReference(
             MediaType::class,
             MediaTypeConstant::INFORMATION_MATERIAL
         );
+
+        $mediaModel = new MediaModel;
+        $mediaModel->owner = $user;
+        $mediaModel->type = $type;
 
         $form = $this->documentFormFactory
             ->setUser($user)

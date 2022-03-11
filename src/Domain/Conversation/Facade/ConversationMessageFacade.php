@@ -51,35 +51,39 @@ class ConversationMessageFacade
         if ($conversationMessageStatus !== null) {
             switch ($conversationMessageStatus->getType()->getId()) {
                 case ConversationMessageStatusTypeConstant::READ:
-                    $conversationMessageStatus->setType(
-                        $this->entityManagerService->getReference(
-                            ConversationMessageStatusType::class,
-                            ConversationMessageStatusTypeConstant::UNREAD
-                        )
+                    /** @var ConversationMessageStatusType $conversationMessageStatusType */
+                    $conversationMessageStatusType = $this->entityManagerService->getReference(
+                        ConversationMessageStatusType::class,
+                        ConversationMessageStatusTypeConstant::UNREAD
                     );
+
+                    $conversationMessageStatus->setType($conversationMessageStatusType);
                     break;
                 case  ConversationMessageStatusTypeConstant::UNREAD:
-                    $conversationMessageStatus->setType(
-                        $this->entityManagerService->getReference(
-                            ConversationMessageStatusType::class,
-                            ConversationMessageStatusTypeConstant::READ
-                        )
+                    /** @var ConversationMessageStatusType $conversationMessageStatusType */
+                    $conversationMessageStatusType = $this->entityManagerService->getReference(
+                        ConversationMessageStatusType::class,
+                        ConversationMessageStatusTypeConstant::READ
                     );
+
+                    $conversationMessageStatus->setType($conversationMessageStatusType);
                     break;
             }
 
             $this->entityManagerService->flush($conversationMessageStatus);
         } else {
+
+            /** @var ConversationMessageStatusType $conversationMessageStatusType */
+            $conversationMessageStatusType = $this->entityManagerService->getReference(
+                ConversationMessageStatusType::class,
+                ConversationMessageStatusTypeConstant::UNREAD
+            );
+
             $newConversationMessageStatus = new ConversationMessageStatus;
             $newConversationMessageStatus->setConversation($conversation);
             $newConversationMessageStatus->setMessage($conversationMessage);
             $newConversationMessageStatus->setUser($user);
-            $newConversationMessageStatus->setType(
-                $this->entityManagerService->getReference(
-                    ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::UNREAD
-                )
-            );
+            $newConversationMessageStatus->setType($conversationMessageStatusType);
 
             $this->entityManagerService->persistAndFlush($newConversationMessageStatus);
         }
@@ -102,14 +106,16 @@ class ConversationMessageFacade
 
     public function getUnreadMessagesByUser(User $user, ?int $limit = null): array
     {
-        $conversationMessage = $this->conversationMessageRepository
-            ->allByUserStatus(
-                $user,
-                $this->entityManagerService->getReference(
-                    ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::UNREAD
-                )
-            );
+        /** @var ConversationMessageStatusType $ConversationMessageStatusType */
+        $ConversationMessageStatusType = $this->entityManagerService->getReference(
+            ConversationMessageStatusType::class,
+            ConversationMessageStatusTypeConstant::UNREAD
+        );
+
+        $conversationMessage = $this->conversationMessageRepository->allByUserStatus(
+            $user,
+            $ConversationMessageStatusType
+        );
 
         if ($limit !== null) {
             $conversationMessage->setMaxResults($limit);
@@ -120,13 +126,16 @@ class ConversationMessageFacade
 
     public function getTotalUnreadMessagesByUser(User $user): int
     {
+        /** @var ConversationMessageStatusType $ConversationMessageStatusType */
+        $ConversationMessageStatusType = $this->entityManagerService->getReference(
+            ConversationMessageStatusType::class,
+            ConversationMessageStatusTypeConstant::UNREAD
+        );
+
         return (int) $this->conversationMessageRepository
             ->countMessagesByUserStatus(
                 $user,
-                $this->entityManagerService->getReference(
-                    ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::UNREAD
-                )
+                $ConversationMessageStatusType
             )
             ->getQuery()
             ->getSingleScalarResult();
@@ -160,13 +169,16 @@ class ConversationMessageFacade
 
     public function getTotalUnreadMessagesAfterDateByUser(User $user, DateTime $date): int
     {
+        /** @var ConversationMessageStatusType $ConversationMessageStatusType */
+        $ConversationMessageStatusType = $this->entityManagerService->getReference(
+            ConversationMessageStatusType::class,
+            ConversationMessageStatusTypeConstant::UNREAD
+        );
+
         return (int) $this->conversationMessageRepository
             ->countMessagesByUserStatus(
                 $user,
-                $this->entityManagerService->getReference(
-                    ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::UNREAD
-                )
+                $ConversationMessageStatusType
             )
             ->andWhere('conversation_message.createdAt >= :afterDate')
             ->setParameter('afterDate', $date)

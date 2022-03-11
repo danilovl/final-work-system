@@ -72,10 +72,12 @@ class ConversationFacade
     public function getConversationParticipants(User $user): array
     {
         $conversationArray = [];
+        /** @var WorkStatus $workStatus */
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
 
         $workArray = $this->conversationVariationService->getWorkConversationsByUser(
             $user,
-            $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+            $workStatus
         );
 
         /** @var Work $work */
@@ -88,6 +90,9 @@ class ConversationFacade
                 if ($workUser->getId() === $user->getId()) {
                     continue;
                 }
+
+                /** @var ConversationType $conversationType */
+                $conversationType = $this->entityManagerService->getReference(ConversationType::class, ConversationTypeConstant::WORK);
 
                 $newConversation = new Conversation;
                 $participants = new ArrayCollection;
@@ -102,7 +107,7 @@ class ConversationFacade
 
                 $newConversation->setName($work->getTitle());
                 $newConversation->setWork($work);
-                $newConversation->setType($this->entityManagerService->getReference(ConversationType::class, ConversationTypeConstant::WORK));
+                $newConversation->setType($conversationType);
                 $newConversation->setParticipants($participants);
 
                 if (!in_array($newConversation, $conversationArray, true)) {

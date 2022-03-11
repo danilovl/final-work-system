@@ -13,11 +13,12 @@
 namespace App\Domain\ConversationMessage;
 
 use App\Domain\Traits\ContentAwareTrait;
+use Traversable;
 
 class ConversationComposeMessageModel
 {
     use ContentAwareTrait;
 
     public ?string $name = null;
-    public ?iterable $conversation = null;
+    public ?Traversable $conversation = null;
 }

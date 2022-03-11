@@ -98,11 +98,14 @@ class EventCalendarFacade
                 }
                 break;
             case EventCalendarActionTypeConstant::RESERVATION:
+                /** @var WorkStatus $workStatus */
+                $workStatus = $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+
                 $userWorks = $this->userWorkService->getWorkBy(
                     $user,
                     WorkUserTypeConstant::AUTHOR,
                     null,
-                    $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE)
+                    $workStatus
                 );
 
                 $supervisors = [];
