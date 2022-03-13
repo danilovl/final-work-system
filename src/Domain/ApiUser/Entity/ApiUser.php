@@ -64,7 +64,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|ApiUserRule[]
+     * @return Collection<ApiUserRule>
      */
     public function getRules(): Collection
     {

@@ -65,7 +65,7 @@ class ProfileChangeImageHandle
                     ->getRepository(MediaMimeType::class)
                     ->findOneBy(['name' => $mimeType]);
 
-                if ($mediaMimeType === null || empty($mediaMimeType)) {
+                if ($mediaMimeType === null) {
                     throw new RuntimeException("FileMimeType don't exist");
                 }
 

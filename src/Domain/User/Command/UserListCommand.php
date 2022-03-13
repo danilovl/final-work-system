@@ -85,7 +85,7 @@ HELP
         return [
             $user->getId(),
             $user->isEnabled(),
-            $user->getFirstName(),
+            $user->getFirstname(),
             $user->getLastName(),
             $user->getUsername(),
             $user->getEmail(),

@@ -65,7 +65,7 @@ class MediaType
     }
 
     /**
-     * @return Collection|Media[]
+     * @return Collection<Media>
      */
     public function getMedias(): Collection
     {

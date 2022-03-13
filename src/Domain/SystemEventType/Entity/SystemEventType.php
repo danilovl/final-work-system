@@ -64,7 +64,7 @@ class SystemEventType
     }
 
     /**
-     * @return Collection|SystemEvent[]
+     * @return Collection<SystemEvent>
      */
     public function getSystemEvents(): Collection
     {

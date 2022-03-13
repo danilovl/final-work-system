@@ -95,7 +95,7 @@ class EventAddress
     }
 
     /**
-     * @return Collection|Event[]
+     * @return Collection<Event>
      */
     public function getEvents(): Collection
     {

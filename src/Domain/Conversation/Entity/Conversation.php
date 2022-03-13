@@ -107,7 +107,7 @@ class Conversation
     }
 
     /**
-     * @return Collection|ConversationMessage[]
+     * @return Collection<ConversationMessage>
      */
     public function getMessages(): Collection
     {
@@ -126,7 +126,7 @@ class Conversation
     }
 
     /**
-     * @return Collection|ConversationParticipant[]
+     * @return Collection<ConversationParticipant>
      */
     public function getParticipants(): Collection
     {
@@ -179,7 +179,7 @@ class Conversation
     }
 
     /**
-     * @return Collection|ConversationMessageStatus[]
+     * @return Collection<ConversationMessageStatus>
      */
     public function getStatuses(): Collection
     {
@@ -192,7 +192,7 @@ class Conversation
     }
 
     /**
-     * @return Collection|SystemEvent[]
+     * @return Collection<SystemEvent>
      */
     public function getSystemEvents(): Collection
     {

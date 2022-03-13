@@ -37,12 +37,12 @@ class Comment
     #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'comment')]
     #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?\App\Domain\Event\Entity\Event $event = null;
+    private ?Event $event = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?\App\Domain\User\Entity\User $owner = null;
+    private ?User $owner = null;
 
     #[ORM\Column(name: 'content', type: Types::TEXT, nullable: false)]
     #[Gedmo\Versioned]
@@ -63,12 +63,12 @@ class Comment
         return $this->owner;
     }
 
-    public function setOwner(\App\Domain\User\Entity\User $owner): void
+    public function setOwner(User $owner): void
     {
         $this->owner = $owner;
     }
 
-    public function getEvent(): ?\App\Domain\Event\Entity\Event
+    public function getEvent(): ?Event
     {
         return $this->event;
     }

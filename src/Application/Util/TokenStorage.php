@@ -12,6 +12,7 @@
 
 namespace App\Application\Util;
 
+use App\Application\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -25,6 +26,10 @@ class TokenStorage
     public function refreshToken(User $user): void
     {
         $oldToken = $this->tokenStorage->getToken();
+
+        if (!method_exists($oldToken, 'getFirewallName')) {
+            throw new RuntimeException('Method not exist');
+        }
 
         $token = new UsernamePasswordToken(
             $user,

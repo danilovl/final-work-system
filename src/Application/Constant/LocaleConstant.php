@@ -14,7 +14,7 @@ namespace App\Application\Constant;
 
 enum LocaleConstant
 {
-    const ISO_CS = 'cs';
-    const ISO_EN = 'en';
-    const ISO_RU = 'ru';
+    public const ISO_CS = 'cs';
+    public const ISO_EN = 'en';
+    public const ISO_RU = 'ru';
 }

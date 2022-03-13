@@ -88,7 +88,7 @@ class Article
     }
 
     /**
-     * @return Collection|ArticleCategory[]
+     * @return Collection<ArticleCategory>
      */
     public function getCategories(): Collection
     {

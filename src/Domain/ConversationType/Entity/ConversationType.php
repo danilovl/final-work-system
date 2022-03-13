@@ -49,7 +49,7 @@ class ConversationType
     }
 
     /**
-     * @return Collection|Conversation[]
+     * @return Collection<Conversation>
      */
     public function getConversations(): Collection
     {

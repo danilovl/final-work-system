@@ -173,10 +173,8 @@ class ConversationFacade
             $this->conversationEventDispatcherService
                 ->onConversationMessageCreate($message);
         } else {
-            if (is_array($modelConversation)) {
-                /** @var Conversation $modelConversation */
-                $modelConversation = $modelConversation[0];
-            }
+            /** @var Conversation $modelConversation */
+            $modelConversation = $modelConversation[0];
 
             /** @var Conversation $conversation */
             foreach ($conversations as $conversation) {

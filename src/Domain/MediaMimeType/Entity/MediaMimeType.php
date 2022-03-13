@@ -77,7 +77,7 @@ class MediaMimeType
     }
 
     /**
-     * @return Collection|\App\Domain\Media\Entity\Media[]
+     * @return Collection<Media>
      */
     public function getMedias(): Collection
     {

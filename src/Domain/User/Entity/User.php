@@ -595,7 +595,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Media[]
+     * @return Collection<Media>
      */
     public function getMediaOwner(): Collection
     {
@@ -603,7 +603,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Work[]
+     * @return Collection<Work>
      */
     public function getAuthorWorks(): Collection
     {
@@ -616,7 +616,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|EventAddress[]
+     * @return Collection<EventAddress>
      */
     public function getEventAddressOwner(): Collection
     {
@@ -629,7 +629,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Event[]
+     * @return Collection<Event>
      */
     public function getEventsOwner(): Collection
     {
@@ -642,7 +642,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|EventParticipant[]
+     * @return Collection<EventParticipant>
      */
     public function getEventsParticipant(): Collection
     {
@@ -650,7 +650,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|EventParticipant[]
+     * @return Collection<EventParticipant>
      */
     public function getEventByParticipant(): Collection
     {
@@ -665,7 +665,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Work[]
+     * @return Collection<Work>
      */
     public function getOpponentWorks(): Collection
     {
@@ -673,7 +673,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Work[]
+     * @return Collection<Work>
      */
     public function getSupervisorWorks(): Collection
     {
@@ -681,7 +681,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Work[]
+     * @return Collection<Work>
      */
     public function getConsultantWorks(): Collection
     {
@@ -689,7 +689,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection<Comment>
      */
     public function getComments(): Collection
     {
@@ -712,7 +712,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
-     * @return Collection|Group[]
+     * @return Collection<Group>
      */
     public function getGroups(): Collection
     {

@@ -100,7 +100,7 @@ class Event
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection<Comment>
      */
     public function getComment(): Collection
     {

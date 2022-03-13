@@ -114,7 +114,7 @@ class UserWorkService
     }
 
     /**
-     * @return Collection|Work[]
+     * @return Collection<Work>
      */
     private function getUserWorks(User $user, string $userType): Collection
     {

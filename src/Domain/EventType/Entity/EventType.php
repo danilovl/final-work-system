@@ -78,7 +78,7 @@ class EventType
     }
 
     /**
-     * @return Collection|Event[]
+     * @return Collection<Event>
      */
     public function getEvents(): Collection
     {

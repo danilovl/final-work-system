@@ -74,12 +74,12 @@ class Task
         $this->systemEvents = new ArrayCollection;
     }
 
-    public function getOwner(): ?\App\Domain\User\Entity\User
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(\App\Domain\User\Entity\User $owner): void
+    public function setOwner(User $owner): void
     {
         $this->owner = $owner;
     }
@@ -125,7 +125,7 @@ class Task
     }
 
     /**
-     * @return Collection|SystemEvent[]
+     * @return Collection<SystemEvent>
      */
     public function getSystemEvents(): Collection
     {

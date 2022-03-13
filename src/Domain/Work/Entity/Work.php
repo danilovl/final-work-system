@@ -186,7 +186,7 @@ class Work
     }
 
     /**
-     * @return Collection|WorkCategory[]
+     * @return Collection<WorkCategory>
      */
     public function getCategories(): Collection
     {
@@ -219,7 +219,7 @@ class Work
     }
 
     /**
-     * @return Collection|Task[]
+     * @return Collection<Task>
      */
     public function getTasks(): Collection
     {
@@ -232,7 +232,7 @@ class Work
     }
 
     /**
-     * @return Collection|Media[]
+     * @return Collection<Media>
      */
     public function getMedias(): Collection
     {
@@ -265,7 +265,7 @@ class Work
     }
 
     /**
-     * @return Collection|Conversation[]
+     * @return Collection<Conversation>
      */
     public function getConversations(): Collection
     {

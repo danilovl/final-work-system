@@ -131,7 +131,7 @@ class UserAddCommand extends Command
 
         $user = new User;
         $user->setEnabled(true);
-        $user->setFirstName($firstName);
+        $user->setFirstname($firstName);
         $user->setLastName($lastName);
         $user->setUsername($username);
         $user->setEmail($email);

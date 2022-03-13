@@ -12,6 +12,7 @@
 
 namespace App\Domain\Event\Repository;
 
+use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -42,7 +43,7 @@ class EventRepository extends ServiceEntityRepository
             ->setParameter('work', $work);
     }
 
-    public function allByOwner(\App\Domain\Event\DataTransferObject\EventRepositoryData $eventData): QueryBuilder
+    public function allByOwner(EventRepositoryData $eventData): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->where('event.owner = :owner')
@@ -66,7 +67,7 @@ class EventRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-    public function allByParticipant(\App\Domain\Event\DataTransferObject\EventRepositoryData $eventData): QueryBuilder
+    public function allByParticipant(EventRepositoryData $eventData): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->where('participant.user = :participant')

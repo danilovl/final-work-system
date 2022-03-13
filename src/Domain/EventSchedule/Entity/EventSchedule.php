@@ -66,7 +66,7 @@ class EventSchedule
     }
 
     /**
-     * @return Collection|EventScheduleTemplate[]
+     * @return Collection<EventScheduleTemplate>
      */
     public function getTemplates(): Collection
     {

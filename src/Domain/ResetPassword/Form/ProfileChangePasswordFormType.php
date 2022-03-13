@@ -47,10 +47,10 @@ class ProfileChangePasswordFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => UserModel::class,
             'csrf_token_id' => 'change_password',
-        ));
+        ]);
     }
 
     public function getName(): string

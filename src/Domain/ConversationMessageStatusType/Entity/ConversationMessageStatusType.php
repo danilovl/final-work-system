@@ -49,7 +49,7 @@ class ConversationMessageStatusType
     }
 
     /**
-     * @return Collection|ConversationMessageStatus[]
+     * @return Collection<ConversationMessageStatus>
      */
     public function getConversationMessageStatus(): Collection
     {

@@ -97,7 +97,7 @@ class ConversationMessage
     }
 
     /**
-     * @return Collection|ConversationMessageStatus[]
+     * @return Collection<ConversationMessageStatus>
      */
     public function getStatuses(): Collection
     {

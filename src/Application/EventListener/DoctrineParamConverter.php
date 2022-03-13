@@ -58,7 +58,7 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
 
         $id = $this->getIdentifierReplace($request, $options, $name);
 
-        if (false === $id || null === $id) {
+        if ($id === false || $id === null) {
             return false;
         }
 
@@ -97,10 +97,8 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
 
     protected function getIdentifierReplace(Request $request, array $options, string $name): mixed
     {
-        if (null !== $options['id']) {
-            if (!is_array($options['id'])) {
-                $name = $options['id'];
-            } elseif (is_array($options['id'])) {
+        if ($options['id'] !== null) {
+            if (is_array($options['id'])) {
                 $id = [];
                 foreach ($options['id'] as $field) {
                     if (str_contains($field, '%s')) {
@@ -110,6 +108,8 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
                 }
 
                 return $id;
+            } else {
+                $name = $options['id'];
             }
         }
 
@@ -124,7 +124,7 @@ class DoctrineParamConverter extends BaseDoctrineParamConverter
         return false;
     }
 
-    private function getManager(string $name, string $class): ObjectManager
+    private function getManager(?string $name, string $class): ObjectManager
     {
         if ($name === null) {
             return $this->registry->getManagerForClass($class);

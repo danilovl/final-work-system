@@ -81,9 +81,7 @@ class EmailNotificationQueueCommand extends Command
             $this->mailer->send($email);
             $status = true;
 
-            $message = sprintf("Email notification with ID: %d was send",
-                $emailNotificationQueue->getId()
-            );
+            $message = sprintf('Email notification with ID: %d was send', $emailNotificationQueue->getId());
         } catch (TransportExceptionInterface $transportException) {
             $status = false;
             $message = $transportException->getMessage();

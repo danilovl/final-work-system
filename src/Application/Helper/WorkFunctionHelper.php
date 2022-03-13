@@ -26,13 +26,12 @@ class WorkFunctionHelper
         foreach ($works as $work) {
             $deadline = $work->getDeadline()->format(DateFormatConstant::DATE);
 
-            if (isset($deadlineGroup[$deadline])) {
-                $deadlineGroup[$deadline]['works'][] = $work;
-            } else {
+            if (!isset($deadlineGroup[$deadline])) {
                 $deadlineGroup[$deadline] = [];
                 $deadlineGroup[$deadline]['works'] = [];
-                $deadlineGroup[$deadline]['works'][] = $work;
             }
+
+            $deadlineGroup[$deadline]['works'][] = $work;
         }
 
         return $deadlineGroup;

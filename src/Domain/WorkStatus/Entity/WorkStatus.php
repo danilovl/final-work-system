@@ -65,7 +65,7 @@ class WorkStatus
     }
 
     /**
-     * @return Collection|Work[]
+     * @return Collection<Work>
      */
     public function getWorks(): Collection
     {

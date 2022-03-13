@@ -12,6 +12,7 @@
 
 namespace App\Domain\Media\Repository;
 
+use App\Domain\Media\DataTransferObject\MediaRepositoryData;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
@@ -36,7 +37,7 @@ class MediaRepository extends ServiceEntityRepository
             ->setCacheable(true);
     }
 
-    public function mediaListByUserFilter(\App\Domain\Media\DataTransferObject\MediaRepositoryData $mediaData): QueryBuilder
+    public function mediaListByUserFilter(MediaRepositoryData $mediaData): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('media')
             ->leftJoin('media.mimeType', 'mime_type')->addSelect('mime_type')

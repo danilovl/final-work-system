@@ -31,7 +31,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
     ) {
     }
 
-    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
+    public function upgradePassword(PasswordAuthenticatedUserInterface|User $user, string $newHashedPassword): void
     {
         $user->setPassword($newHashedPassword);
         $user->setSalt(null);

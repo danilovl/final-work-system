@@ -159,7 +159,7 @@ class SystemEvent
     }
 
     /**
-     * @return Collection|SystemEventRecipient[]
+     * @return Collection<SystemEventRecipient>
      */
     public function getRecipient(): Collection
     {
