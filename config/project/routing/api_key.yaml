@@ -21,3 +21,7 @@ api_key_task:
 api_key_system_event:
   resource: api/key_system_event.yaml
   prefix: /api/key/system-event
+
+api_key_event:
+  resource: api/key_event.yaml
+  prefix: /api/key/event

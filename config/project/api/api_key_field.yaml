@@ -50,3 +50,40 @@ parameters:
         - owner
         - work
         - deadline
+    Event:
+      fields:
+        - id
+        - type
+        - name
+        - start
+        - end
+        - comment
+        - participant
+    Comment:
+      fields:
+        - id
+        - content
+        - owner
+    EventType:
+      fields:
+        - id
+        - name
+        - description
+    EventAddress:
+      fields:
+        - id
+        - name
+        - description
+        - street
+        - skype
+        - latitude
+        - longitude
+        - owner
+    EventParticipant:
+      fields:
+        - id
+        - firstName
+        - secondName
+        - email
+        - user
+        - work
