@@ -17,9 +17,9 @@ use App\Domain\Work\Entity\Work;
 
 class WorkRoleHelper
 {
-    public static function isAuthorSupervisorOpponent(Work $work, User $user): bool
+    public static function hasAccessToWork(Work $work, User $user): bool
     {
-        return self::isAuthor($work, $user) || self::isSupervisor($work, $user) || self::isOpponent($work, $user);
+        return self::isAuthor($work, $user) || self::isSupervisor($work, $user) || self::isOpponent($work, $user) || self::isConsultant($work, $user);
     }
 
     public static function isAuthorSupervisor(Work $work, User $user): bool

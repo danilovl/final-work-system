@@ -1,0 +1,7 @@
+api_key_version_work_list:
+  path: /work/{id}/list
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Version\Controller\Api\VersionController::list
+  methods: [GET, POST]

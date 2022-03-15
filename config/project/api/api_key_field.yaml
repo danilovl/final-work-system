@@ -87,3 +87,24 @@ parameters:
         - email
         - user
         - work
+    Media:
+      fields:
+        - id
+        - type
+        - name
+        - description
+        - mediaName
+        - mediaSize
+        - originalExtension
+        - owner
+        - work
+    MediaType:
+      fields:
+        - id
+        - name
+        - description
+    MediaMimeType:
+      fields:
+        - id
+        - name
+        - description

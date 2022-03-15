@@ -93,7 +93,7 @@ class VersionVoter extends Voter
         $work = $versionVoterSubject->getWork();
         $media = $versionVoterSubject->getMedia();
 
-        return WorkRoleHelper::isAuthorSupervisorOpponent($work, $user) && $work->getMedias()->contains($media);
+        return WorkRoleHelper::hasAccessToWork($work, $user) && $work->getMedias()->contains($media);
     }
 
     private function canDelete(VersionVoterSubject $versionVoterSubject, User $user): bool

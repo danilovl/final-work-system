@@ -25,3 +25,7 @@ api_key_system_event:
 api_key_event:
   resource: api/key_event.yaml
   prefix: /api/key/event
+
+api_key_version:
+  resource: api/key_version.yaml
+  prefix: /api/key/version
