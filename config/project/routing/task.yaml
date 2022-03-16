@@ -42,7 +42,7 @@ task_edit:
   path: /{id_work}/task/edit/{id_task}
   requirements:
     id_work: '%hashid%'
-    id_TaskController:: '%hashid%'
+    id_task: '%hashid%'
   defaults:
     _controller: App\Domain\Task\Controller\TaskController::edit
     _seo:
@@ -53,7 +53,7 @@ task_edit_ajax:
   path: /{id_work}/task/edit/{id_task}/ajax
   requirements:
     id_work: '%hashid%'
-    id_TaskController:: '%hashid%'
+    id_task: '%hashid%'
   defaults:
     _controller: App\Domain\Task\Controller\Ajax\TaskController::edit
   methods: [POST]
@@ -62,7 +62,7 @@ task_change_status_ajax:
   path: /{id_work}/task/change/{type}/{id_task}/ajax
   requirements:
     id_work: '%hashid%'
-    id_TaskController:: '%hashid%'
+    id_task: '%hashid%'
     type: "complete|active|notify"
   defaults:
     _controller: App\Domain\Task\Controller\Ajax\TaskController::changeStatus
@@ -78,7 +78,7 @@ task_notify_complete_ajax:
   path: /{id_work}/task/notify/complete/{id_task}/ajax
   requirements:
     id_work: '%hashid%'
-    id_TaskController:: '%hashid%'
+    id_task: '%hashid%'
   defaults:
     _controller: App\Domain\Task\Controller\Ajax\TaskController::notifyComplete
   methods: [POST]
@@ -87,7 +87,7 @@ task_delete:
   path: /{id_work}/task/delete/{id_task}
   requirements:
     id_work: '%hashid%'
-    id_TaskController:: '%hashid%'
+    id_task: '%hashid%'
   defaults:
     _controller: App\Domain\Task\Controller\Ajax\TaskController::delete
   methods: [POST, DELETE]

@@ -108,3 +108,20 @@ parameters:
         - id
         - name
         - description
+    ConversationMessage:
+      fields:
+        - id
+        - read
+        - content
+        - owner
+        - statuses
+    ConversationMessageStatus:
+      fields:
+        - id
+        - type
+        - user
+    ConversationMessageStatusType:
+      fields:
+        - id
+        - name
+        - description
