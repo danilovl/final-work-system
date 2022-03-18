@@ -34,7 +34,7 @@ class GetEventMiddlewareTest extends TestCase
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
 
-        \App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware::handle($request);
+        GetEventMiddleware::handle($request);
     }
 
     public function testAttributeHandleFailsType(): void

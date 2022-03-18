@@ -61,7 +61,7 @@ class UserRoleHelperTest extends TestCase
 
     public function testIsAuthorSupervisor(): void
     {
-        $this->assertTrue(\App\Application\Helper\UserRoleHelper::isAuthorSupervisor($this->user));
+        $this->assertTrue(UserRoleHelper::isAuthorSupervisor($this->user));
     }
 
     public function testIsAdmin(): void

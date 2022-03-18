@@ -12,14 +12,13 @@
 
 namespace App\Tests\Application\DataTransferObject;
 
-use App\Application\DataTransferObject\{
-    App\Application\Interfaces\DataTransferObject\DataTransferObjectInterface,
-    BaseDataTransferObject};
+use App\Application\Interfaces\DataTransferObject\DataTransferObjectInterface;
+use App\Application\DataTransferObject\BaseDataTransferObject;
 use PHPUnit\Framework\TestCase;
 
 class BaseDataTransferObjectTest extends TestCase
 {
-    private \App\Application\Interfaces\DataTransferObject\DataTransferObjectInterface $dataTransferObject;
+    private DataTransferObjectInterface $dataTransferObject;
 
     protected function setUp(): void
     {

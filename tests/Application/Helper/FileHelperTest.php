@@ -12,6 +12,7 @@
 
 namespace App\Tests\Application\Helper;
 
+use App\Application\Helper\FileHelper;
 use PHPUnit\Framework\TestCase;
 
 class FileHelperTest extends TestCase
@@ -19,7 +20,7 @@ class FileHelperTest extends TestCase
     public function testCreateTmpFile(): void
     {
         $fileContent = '<?php echo "test" ?>';
-        $filePath = \App\Application\Helper\FileHelper::createTmpFile('php', $fileContent);
+        $filePath = FileHelper::createTmpFile('php', $fileContent);
 
         $this->assertEquals($fileContent, file_get_contents($filePath));
     }

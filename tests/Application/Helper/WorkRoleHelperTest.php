@@ -36,12 +36,12 @@ class WorkRoleHelperTest extends TestCase
 
     public function testIsAuthorSupervisorOpponent(): void
     {
-        $this->assertTrue(\App\Application\Helper\WorkRoleHelper::isAuthorSupervisorOpponent($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::hasAccessToWork($this->work, $this->user));
     }
 
     public function testIsAuthorSupervisor(): void
     {
-        $this->assertTrue(\App\Application\Helper\WorkRoleHelper::isAuthorSupervisor($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isAuthorSupervisor($this->work, $this->user));
     }
 
     public function testIsSupervisor(): void
@@ -51,16 +51,16 @@ class WorkRoleHelperTest extends TestCase
 
     public function testIsConsultant(): void
     {
-        $this->assertTrue(\App\Application\Helper\WorkRoleHelper::isConsultant($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isConsultant($this->work, $this->user));
     }
 
     public function testIsAuthor(): void
     {
-        $this->assertTrue(\App\Application\Helper\WorkRoleHelper::isAuthor($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isAuthor($this->work, $this->user));
     }
 
     public function testIsOpponent(): void
     {
-        $this->assertTrue(\App\Application\Helper\WorkRoleHelper::isOpponent($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isOpponent($this->work, $this->user));
     }
 }
