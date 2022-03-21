@@ -149,13 +149,14 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_flat-green',
                 radioClass: 'iradio_flat-green'
             });
+
             new Sticky('#sticky');
-            $("table").tableFix();
+            $('table').tableFix();
         });
     </script>
 {% endblock %}

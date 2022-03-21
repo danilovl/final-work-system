@@ -64,13 +64,13 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(() => {
         let locale = '{{ app.request.locale }}';
 
         initTinymce(locale);
 
-        $("#media_type").select2({width: '100%'});
-        $("#media_categories").select2({width: '100%'});
+        $('#media_type').select2({width: '100%'});
+        $('#media_categories').select2({width: '100%'});
 
         initJsSwitch('.ajax .js-switch');
         createEditContentFileAjax('#document_create');

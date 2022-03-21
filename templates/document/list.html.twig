@@ -246,10 +246,10 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
-            $("#document_search_categories").select2({width: '100%'});
-            $("#document_search_mimeType").select2({width: '100%'});
-            $("table").tableFix()
+        $(document).ready(() => {
+            $('#document_search_categories').select2({width: '100%'});
+            $('#document_search_mimeType').select2({width: '100%'});
+            $('table').tableFix()
         });
     </script>
 {% endblock %}

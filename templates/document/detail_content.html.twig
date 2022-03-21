@@ -4,8 +4,8 @@
     <script>
         {
             let archiveUrl = '{{ path('document_download', { 'id': document.id | hashids_encode }) }}';
-            let idContent = "#document-content-{{ document.id | hashids_encode }}";
-            let idContentInfo = "document-content-info-{{ document.id | hashids_encode }}";
+            let idContent = '#document-content-{{ document.id | hashids_encode }}';
+            let idContentInfo = 'document-content-info-{{ document.id | hashids_encode }}';
 
             showArchiveContent(archiveUrl, idContent, idContentInfo);
         }

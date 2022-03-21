@@ -110,11 +110,11 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             let locale = '{{ app.request.locale }}';
 
-            $("#media_type").select2();
-            $("#media_categories").select2();
+            $('#media_type').select2();
+            $('#media_categories').select2();
 
             initTinymce(locale);
         });
