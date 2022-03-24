@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -124,7 +124,7 @@
             src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&language={{ app.request.locale }}&region=CS">
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             let locale = '{{ app.request.locale }}';
 
             initTinymce(locale);
@@ -162,23 +162,18 @@
                 title: 'Hello World!'
             });
 
-            google.maps.event.addListener(map, "click", function (event) {
+            google.maps.event.addListener(map, 'click', event => {
                 marker.setPosition(event.latLng);
                 let latitude = event.latLng.lat();
                 let longitude = event.latLng.lng();
                 inputLatitude.value = latitude;
                 inputLongitude.value = longitude;
 
-                geocoder.geocode({
-                    'latLng': event.latLng
-                }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            street.value = results[0].formatted_address;
-                        }
+                geocoder.geocode({'latLng': event.latLng}, (results, status) => {
+                    if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                        street.value = results[0].formatted_address;
                     }
                 });
-
             });
         }
 

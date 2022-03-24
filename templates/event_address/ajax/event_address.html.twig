@@ -118,20 +118,16 @@
                 title: 'Hello World!'
             });
 
-            google.maps.event.addListener(map, "click", function (event) {
+            google.maps.event.addListener(map, 'click', event => {
                 marker.setPosition(event.latLng);
                 let latitude = event.latLng.lat();
                 let longitude = event.latLng.lng();
                 inputLatitude.value = latitude;
                 inputLongitude.value = longitude;
 
-                geocoder.geocode({
-                    'latLng': event.latLng
-                }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            street.value = results[0].formatted_address;
-                        }
+                geocoder.geocode({'latLng': event.latLng}, (results, status) => {
+                    if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                        street.value = results[0].formatted_address;
                     }
                 });
             });
