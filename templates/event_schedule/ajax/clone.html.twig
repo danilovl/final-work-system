@@ -33,9 +33,9 @@
     </div>
 </div>
 <script>
-    var locale = '{{ app.request.locale }}';
+    $(document).ready(() => {
+        let locale = '{{ app.request.locale }}';
 
-    $(document).ready(function () {
         $('#event_schedule_clone_start').datetimepicker({
             format: 'YYYY-MM-DD',
             locale: locale
@@ -44,4 +44,3 @@
         createEditContentAjax('#event_schedule_clone');
     });
 </script>
-

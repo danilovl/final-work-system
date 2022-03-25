@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-lg-12">
@@ -85,14 +85,14 @@
 
 {% block javascript %}
     <script>
-        var locale = '{{ app.request.locale }}';
+        $(document).ready(() => {
+            let locale = '{{ app.request.locale }}';
 
-        $(document).ready(function () {
             initTinymce(locale);
 
-            $("#event_type").select2({width: '100%'});
-            $("#event_address").select2({width: '100%'});
-            $("#event_participant").select2({width: '100%'});
+            $('#event_type').select2({width: '100%'});
+            $('#event_address').select2({width: '100%'});
+            $('#event_participant').select2({width: '100%'});
             $('.collection').collection({
                 drag_drop: true,
                 allow_duplicate: true
