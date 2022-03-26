@@ -69,14 +69,15 @@
         </div>
     </div>
 </div>
+
 <script>
-    $(document).ready(function () {
+    $(document).ready(() => {
         let locale = '{{ app.request.locale }}';
 
         initTinymce(locale);
 
-        $("#media_type").select2({width: '100%'});
-        $("#media_category").select2({width: '100%'});
+        $('#media_type').select2({width: '100%'});
+        $('#media_category').select2({width: '100%'});
 
         initJsSwitch('.ajax .js-switch');
         createEditContentAjax('#media_edit');
