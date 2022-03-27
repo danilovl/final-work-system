@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
 
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -287,14 +287,15 @@
         </div>
     </div>
 {% endblock content %}
+
 {% block javascript %}
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             let locale = '{{ app.request.locale }}';
 
             initTinymce(locale);
             initInputMask();
-            $("#app_user_profile_locale").select2({width: '100%'});
+            $('#app_user_profile_locale').select2({width: '100%'});
         });
     </script>
 {% endblock %}
