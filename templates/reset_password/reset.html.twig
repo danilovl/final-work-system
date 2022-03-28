@@ -1,58 +1,56 @@
 {% extends 'security/layout.html.twig' %}
 
 {% block content %}
-    <div>
-        <div class="login_wrapper">
-            <div id="register" class="form">
-                <section class="login_content">
+    <div class="login_wrapper">
+        <div id="register" class="form">
+            <section class="login_content">
 
-                    {% for flashError in app.flashes('error') %}
-                        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-                    {% endfor %}
+                {% for flashError in app.flashes('error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
 
-                    {% if not form.plainPassword.first.vars.valid %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ 'app.form.validation.password_mismatch' | trans }}
-                        </div>
-                    {% endif %}
-
-                    {{ form_start(form) }}
-                    <h1>{{ 'app.form.label.new_password' | trans }}</h1>
-                    <div class="item form-group">
-                        {{ form_label(form.plainPassword.first,  'app.form.label.new_password' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}} ) }}
-                        </div>
+                {% if not form.plainPassword.first.vars.valid %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ 'app.form.validation.password_mismatch' | trans }}
                     </div>
+                {% endif %}
 
-                    <div class="item form-group">
-                        {{ form_label(form.plainPassword.second,  'app.form.label.new_password_confirmation' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}} ) }}
-                        </div>
+                {{ form_start(form) }}
+                <h1>{{ 'app.form.label.new_password' | trans }}</h1>
+                <div class="item form-group">
+                    {{ form_label(form.plainPassword.first,  'app.form.label.new_password' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}} ) }}
                     </div>
+                </div>
+
+                <div class="item form-group">
+                    {{ form_label(form.plainPassword.second,  'app.form.label.new_password_confirmation' , {'label_attr': {'class': 'col-md-12 col-sm-12 col-xs-12'}}) }}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}} ) }}
+                    </div>
+                </div>
+                <div>
+                    <input class="btn btn-default submit"
+                           id="submit"
+                           type="submit"
+                           value="{{ 'app.form.action.send' | trans }}"
+                    />
+                    <a class="btn btn-default submit"
+                       href="{{ path('security_login') }}">
+                        {{ 'app.form.action.login' | trans }}
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+                <div class="separator">
                     <div>
-                        <input class="btn btn-default submit"
-                               id="submit"
-                               type="submit"
-                               value="{{ 'app.form.action.send' | trans }}"
-                        />
-                        <a class="btn btn-default submit"
-                           href="{{ path('security_login') }}">
-                            {{ 'app.form.action.login' | trans }}
-                        </a>
+                        <h1><i class="fa fa-book"></i>{{ 'app.system_name' | trans({}, 'messages') }}
+                        </h1>
+                        <p>©{{ "now"|date("Y") }}</p>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="separator">
-                        <div>
-                            <h1><i class="fa fa-book"></i>{{ 'app.system_name' | trans({}, 'messages') }}
-                            </h1>
-                            <p>©{{ "now"|date("Y") }}</p>
-                        </div>
-                    </div>
-                    {{ form_end(form) }}
-                </section>
-            </div>
+                </div>
+                {{ form_end(form) }}
+            </section>
         </div>
     </div>
 {% endblock %}

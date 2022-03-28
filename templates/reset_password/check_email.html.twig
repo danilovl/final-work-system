@@ -1,20 +1,18 @@
 {% extends 'security/layout.html.twig' %}
 
 {% block content %}
-	<div>
-		<div class="login_wrapper">
-			<div id="register" class="form">
-				<section class="login_content">
-					<p>
-						An email has been sent that contains a link that you can click to reset your password. This link
-						will expire in {{ tokenLifetime | date('g') }} hour(s).
-					</p>
-					<p>
-						If you don't receive an email please check your spam folder or
-						<a href="{{ path('reset_password_forgot_request') }}">try again</a>.
-					</p>
-				</section>
-			</div>
-		</div>
-	</div>
+    <div class="login_wrapper">
+        <div id="register" class="form">
+            <section class="login_content">
+                <p>
+                    An email has been sent that contains a link that you can click to reset your password. This link
+                    will expire in {{ tokenLifetime | date('g') }} hour(s).
+                </p>
+                <p>
+                    If you don't receive an email please check your spam folder or
+                    <a href="{{ path('reset_password_forgot_request') }}">try again</a>.
+                </p>
+            </section>
+        </div>
+    </div>
 {% endblock %}
