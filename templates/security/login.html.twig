@@ -1,70 +1,69 @@
 {% extends 'security/layout.html.twig' %}
 
 {% block content %}
-	<div>
-		<div class="login_wrapper">
-			<div class="animate form login_form">
-				<section class="login_content">
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
 
-					{% if error %}
-						<div id="error-login-message">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
-						<br/>
-					{% endif %}
+                {% if error %}
+                    <div id="error-login-message">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
+                    <br/>
+                {% endif %}
 
-					{% for flashError in app.flashes('error') %}
-						<div class="alert alert-danger" role="alert">{{ flashError }}</div>
-					{% endfor %}
+                {% for flashError in app.flashes('error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
 
-					{% if app_user() %}
-						<div class="mb-3">
-							You are logged in as {{ app_user().username }}, <a href="{{ path('security_logout') }}">Logout</a>
-						</div>
-					{% endif %}
+                {% if app_user() %}
+                    <div class="mb-3">
+                        You are logged in as {{ app_user().username }}, <a
+                                href="{{ path('security_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
 
-					<form action="{{ path("security_login") }}" method="POST">
-						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-						<h1>{{ 'app.form.label.login_form' | trans({}, 'messages') }}</h1>
-						<div>
-							<input type="text"
-								   class="form-control"
-								   placeholder="{{ 'app.form.label.username' | trans }}"
-								   id="username"
-								   name="_username"
-								   value="{{ last_username }}"
-								   required="required"/>
-						</div>
-						<div>
-							<input type="password"
-								   class="form-control"
-								   placeholder="{{ 'app.form.label.password' | trans }}"
-								   id="password"
-								   name="_password"
-								   required="required"/>
-						</div>
-						<div>
-							<input class="btn btn-default submit"
-								   type="submit"
-								   id="_submit"
-								   name="_submit"
-								   value="{{ 'app.form.action.login' | trans }}"/>
+                <form action="{{ path("security_login") }}" method="POST">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <h1>{{ 'app.form.label.login_form' | trans({}, 'messages') }}</h1>
+                    <div>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="{{ 'app.form.label.username' | trans }}"
+                               id="username"
+                               name="_username"
+                               value="{{ last_username }}"
+                               required="required"/>
+                    </div>
+                    <div>
+                        <input type="password"
+                               class="form-control"
+                               placeholder="{{ 'app.form.label.password' | trans }}"
+                               id="password"
+                               name="_password"
+                               required="required"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-default submit"
+                               type="submit"
+                               id="_submit"
+                               name="_submit"
+                               value="{{ 'app.form.action.login' | trans }}"/>
 
-							<a class="btn btn-default submit"
-							   href="{{ path('reset_password_forgot_request') }}">
-								{{ 'app.form.action.reset_password' | trans }}
-							</a>
-						</div>
-						<div class="clearfix"></div>
-						<div class="separator">
-							<div>
-								<h1>
-									<i class="fa fa-book"></i>{{ 'app.system_name' | trans({}, 'messages') }}
-								</h1>
-								<p>©{{ "now"|date("Y") }}</p>
-							</div>
-						</div>
-					</form>
-				</section>
-			</div>
-		</div>
-	</div>
+                        <a class="btn btn-default submit"
+                           href="{{ path('reset_password_forgot_request') }}">
+                            {{ 'app.form.action.reset_password' | trans }}
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="separator">
+                        <div>
+                            <h1>
+                                <i class="fa fa-book"></i>{{ 'app.system_name' | trans({}, 'messages') }}
+                            </h1>
+                            <p>©{{ "now"|date("Y") }}</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
 {% endblock %}
