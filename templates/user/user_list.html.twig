@@ -42,7 +42,7 @@
             </div>
         {% endif %}
 
-        <div class="">
+        <div>
             <div class="clearfix"></div>
 
             {% if users is defined %}
@@ -329,10 +329,8 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
-            $("#work_search_status").select2({
-                width: '100%'
-            });
+        $(document).ready(() => {
+            $('#work_search_status').select2({width: '100%'});
         });
     </script>
 {% endblock %}

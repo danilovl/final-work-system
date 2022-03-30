@@ -99,11 +99,11 @@
     </div>
 </div>
 <script>
-    $(document).ready(function ($) {
-        $("#user_phone").inputmask();
-        $("#user_email").inputmask();
-        $("#user_role").select2();
-        $("#user_groups").select2();
+    $(document).ready(() => {
+        $('#user_phone').inputmask();
+        $('#user_email').inputmask();
+        $('#user_role').select2();
+        $('#user_groups').select2({width: '100%'});
         createEditContentAjax('#user_action');
         createEditContentAjax('#user_action_close', true);
     });
