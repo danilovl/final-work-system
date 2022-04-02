@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="page-title">
                 <div class="title_left">
                     <h3>
@@ -214,32 +214,20 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
-            $("#work_search_status").select2({
-                width: '100%'
-            });
-            $("#work_search_type").select2({
-                width: '100%'
-            });
-            $("#work_search_author").select2({
-                width: '100%'
-            });
-            $("#work_search_supervisor").select2({
-                width: '100%'
-            });
-            $("#work_search_opponent").select2({
-                width: '100%'
-            });
-            $("#work_search_consultant").select2({
-                width: '100%'
-            });
-            $("#work_search_deadline").select2({
-                width: '100%'
-            });
-            if ($(".progress .progress-bar")[0]) {
+        $(document).ready(() => {
+            $('#work_search_status').select2({width: '100%'});
+            $('#work_search_type').select2({width: '100%'});
+            $('#work_search_author').select2({width: '100%'});
+            $('#work_search_supervisor').select2({width: '100%'});
+            $('#work_search_opponent').select2({width: '100%'});
+            $('#work_search_consultant').select2({width: '100%'});
+            $('#work_search_deadline').select2({width: '100%'});
+
+            if ($('.progress .progress-bar')[0]) {
                 $('.progress .progress-bar').progressbar();
                 NProgress.start();
             }
+
             NProgress.done();
         });
     </script>

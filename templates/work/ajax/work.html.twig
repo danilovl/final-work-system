@@ -191,16 +191,16 @@
 </div>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(() => {
         let modalWindow = $('#modalWindow');
 
-        $("#work_status").select2({width: '100%', dropdownParent: modalWindow});
-        $("#work_type").select2({width: '100%', dropdownParent: modalWindow});
-        $("#work_categories").select2({width: '100%', dropdownParent: modalWindow});
-        $("#work_author").select2({width: '100%', dropdownParent: modalWindow});
-        $("#work_supervisor").select2({width: '100%', dropdownParent: modalWindow});
-        $("#work_opponent").select2({width: '100%', dropdownParent: modalWindow});
-        $("#work_consultant").select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_status').select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_type').select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_categories').select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_author').select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_supervisor').select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_opponent').select2({width: '100%', dropdownParent: modalWindow});
+        $('#work_consultant').select2({width: '100%', dropdownParent: modalWindow});
         $('#work_deadline').datetimepicker({
             format: 'YYYY-MM-DD',
             locale: '{{ app.request.locale }}'
@@ -213,24 +213,24 @@
         createEditContentAjax('#work-button-action');
         createEditContentAjax('#work-button-action-close', true);
 
-        $("#show-deadline-calendar-helper-date").click(function () {
-            $("#deadline-calendar-helper-date").show();
-            $("#deadline-calendar-helper-date").addClass('in');
+        $('#show-deadline-calendar-helper-date').click(() => {
+            $('#deadline-calendar-helper-date').show();
+            $('#deadline-calendar-helper-date').addClass('in');
         });
 
-        $("#show-program-deadline-calendar-helper-date").click(function () {
-            $("#program-deadline-calendar-helper-date").show();
-            $("#program-deadline-calendar-helper-date").addClass('in');
+        $('#show-program-deadline-calendar-helper-date').click(() => {
+            $('#program-deadline-calendar-helper-date').show();
+            $('#program-deadline-calendar-helper-date').addClass('in');
         });
     });
 
     function changeCalendarDate(selector, date) {
-        $(selector).data("DateTimePicker").date(date);
+        $(selector).data('DateTimePicker').date(date);
 
-        $("#deadline-calendar-helper-date").hide();
-        $("#deadline-calendar-helper-date").removeClass('in');
+        $('#deadline-calendar-helper-date').hide();
+        $('#deadline-calendar-helper-date').removeClass('in');
 
-        $("#program-deadline-calendar-helper-date").hide();
-        $("#program-deadline-calendar-helper-date").removeClass('in');
+        $('#program-deadline-calendar-helper-date').hide();
+        $('#program-deadline-calendar-helper-date').removeClass('in');
     }
 </script>

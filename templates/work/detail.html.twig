@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-9 col-sm-9 col-xs-12" id="work-main-info">
@@ -57,9 +57,10 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             let fixedTopInfo = $('#work-info-fixed');
             let mainWorkInfo = $('#work-main-info').offset().top;
+
             $(window).scroll(function () {
                 if ($(window).scrollTop() > mainWorkInfo) {
                     fixedTopInfo.removeClass('hide');
@@ -68,7 +69,7 @@
                 }
             });
 
-            if ($(".progress .progress-bar")[0]) {
+            if ($('.progress .progress-bar')[0]) {
                 $('.progress .progress-bar').progressbar();
                 NProgress.start();
             }
@@ -85,13 +86,14 @@
                 if (distance < 0) {
                     clearInterval(id);
                     element.innerHTML = 'EXPIRED!';
+
                     return;
                 }
 
                 let days = Math.floor(distance / day);
                 let hours = Math.floor((distance % day) / hour);
-                var minutes = Math.floor((distance % hour) / minute);
-                var seconds = Math.floor((distance % minute) / second);
+                let minutes = Math.floor((distance % hour) / minute);
+                let seconds = Math.floor((distance % minute) / second);
 
                 element.innerHTML = days + ' {{ 'app.calendar.day.day' | trans({'%count%': 2}) }} ';
                 element.innerHTML += hours + ' {{ 'app.calendar.hour' | trans({'%count%': 2}) }} ';
@@ -99,61 +101,61 @@
                 element.innerHTML += seconds + ' {{ 'app.calendar.second' | trans({'%count%': 2}) }} ';
             }
 
-            var countdownDeadline;
-            var deadline = '{{ work.deadline | date('Y-m-d') }}';
-            var end = new Date(deadline);
 
-            countdownDeadline = setInterval(function (deadline) {
+            let deadline = '{{ work.deadline | date('Y-m-d') }}';
+            let end = new Date(deadline);
+
+            setInterval(deadline => {
                 showRemaining(deadline, 'countdownDeadline');
             }, 1000, end);
 
             {% if work.deadlineProgram %}
 
-            var countdownDeadlineProgram;
-            var deadlineProgram = '{{ work.deadlineProgram | date('Y-m-d') }}';
-            var endProgram = new Date(deadlineProgram);
 
-            countdownDeadlineProgram = setInterval(function (deadline) {
+            let deadlineProgram = '{{ work.deadlineProgram | date('Y-m-d') }}';
+            let endProgram = new Date(deadlineProgram);
+
+            setInterval(deadline => {
                 showRemaining(deadline, 'countdownDeadlineProgram');
             }, 1000, endProgram);
 
             {% endif %}
         });
 
-        $(window).ready(function () {
+        $(window).ready(() => {
             NProgress.done();
         });
 
         (function ($) {
             $.fn.workTableFix = function (tabId) {
-                var tab = $('#' + tabId);
+                let tab = $('#' + tabId);
 
                 return this.each(function () {
-                    var $this = $(this),
+                    let $this = $(this),
                         $t_fixed;
 
                     function init() {
                         $this.wrap('<div class="work-container-table-fixed"/>');
                         $t_fixed = $this.clone();
-                        $t_fixed.find("tbody").remove().end().addClass("work-table-header-fixed").insertBefore($this);
+                        $t_fixed.find('tbody').remove().end().addClass('work-table-header-fixed').insertBefore($this);
                         resizeFixed();
                     }
 
                     function resizeFixed() {
-                        $t_fixed.find("th").each(function (index) {
-                            $(this).css("width", $this.find("th").eq(index).outerWidth() + "px");
+                        $t_fixed.find('th').each(function (index) {
+                            $(this).css('width', $this.find('th').eq(index).outerWidth() + 'px');
                         });
                     }
 
                     function scrollFixed() {
-                        if (tab.is(":visible")) {
+                        if (tab.is(':visible')) {
                             resizeFixed();
-                            var offset = $(this).scrollTop(),
+                            let offset = $(this).scrollTop(),
                                 tableOffsetTop = $this.offset().top,
-                                tableOffsetBottom = tableOffsetTop + $this.height() - $this.find("thead").height();
+                                tableOffsetBottom = tableOffsetTop + $this.height() - $this.find('thead').height();
                             if (offset < tableOffsetTop || offset > tableOffsetBottom) {
                                 $t_fixed.hide();
-                            } else if (offset >= tableOffsetTop && offset <= tableOffsetBottom && $t_fixed.is(":hidden")) {
+                            } else if (offset >= tableOffsetTop && offset <= tableOffsetBottom && $t_fixed.is(':hidden')) {
                                 $t_fixed.show();
                             }
                         }
@@ -166,8 +168,8 @@
             };
         })(jQuery);
 
-        $("#table-task").workTableFix('tab-task');
-        $("#table-version").workTableFix('tab-version');
-        $("#table-event").workTableFix('tab-event');
+        $('#table-task').workTableFix('tab-task');
+        $('#table-version').workTableFix('tab-version');
+        $('#table-event').workTableFix('tab-event');
     </script>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -128,9 +128,9 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             initInputMask();
-            $("#user_groups").select2();
+            $('#user_groups').select2();
         });
     </script>
 {% endblock %}

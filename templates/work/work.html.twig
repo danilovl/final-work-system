@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -303,14 +303,14 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
-            $("#work_status").select2();
-            $("#work_type").select2();
-            $("#work_categories").select2();
-            $("#work_author").select2();
-            $("#work_supervisor").select2();
-            $("#work_opponent").select2();
-            $("#work_consultant").select2();
+        $(document).ready(() => {
+            $('#work_status').select2();
+            $('#work_type').select2();
+            $('#work_categories').select2();
+            $('#work_author').select2();
+            $('#work_supervisor').select2();
+            $('#work_opponent').select2();
+            $('#work_consultant').select2();
             $('#work_deadline').datetimepicker({
                 format: 'YYYY-MM-DD',
                 locale: '{{ app.request.locale }}'
