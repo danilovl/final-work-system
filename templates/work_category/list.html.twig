@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
+        <div>
             <div class="clearfix"></div>
 
             {% if workCategories is defined %}
@@ -122,8 +122,8 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(function () {
-            $("table").tableFix();
+        $(document).ready(() => {
+            $('table').tableFix();
         });
     </script>
 {% endblock %}
