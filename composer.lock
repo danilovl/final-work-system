@@ -1762,16 +1762,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "2.4.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "092a52b71410ac1795287bb5135704ef07d18dd0"
+                "reference": "f8776dd9a0bdcd838812951a75f4ada72065a82a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/092a52b71410ac1795287bb5135704ef07d18dd0",
-                "reference": "092a52b71410ac1795287bb5135704ef07d18dd0",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/f8776dd9a0bdcd838812951a75f4ada72065a82a",
+                "reference": "f8776dd9a0bdcd838812951a75f4ada72065a82a",
                 "shasum": ""
             },
             "require": {
@@ -1791,10 +1791,10 @@
                 "doctrine/annotations": "^1.0",
                 "doctrine/coding-standard": "^9.0",
                 "doctrine/common": "^3.0",
-                "phpstan/phpstan": "1.4.6",
+                "phpstan/phpstan": "~1.4.10 || 1.5.0",
                 "phpunit/phpunit": "^7.5.20 || ^8.5 || ^9.5",
                 "symfony/cache": "^4.4 || ^5.4 || ^6.0",
-                "vimeo/psalm": "4.21.0"
+                "vimeo/psalm": "4.22.0"
             },
             "type": "library",
             "autoload": {
@@ -1844,9 +1844,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/2.4.1"
+                "source": "https://github.com/doctrine/persistence/tree/2.5.0"
             },
-            "time": "2022-03-22T06:44:40+00:00"
+            "time": "2022-04-06T14:59:40+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -1902,16 +1902,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "ed019f266b78bd639329dab5ad26c41fa38a1209"
+                "reference": "b0aa38f7813c7e5e6ba4bd93bc0eac6adeec56fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/ed019f266b78bd639329dab5ad26c41fa38a1209",
-                "reference": "ed019f266b78bd639329dab5ad26c41fa38a1209",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/b0aa38f7813c7e5e6ba4bd93bc0eac6adeec56fb",
+                "reference": "b0aa38f7813c7e5e6ba4bd93bc0eac6adeec56fb",
                 "shasum": ""
             },
             "require": {
@@ -1978,7 +1978,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.1.0"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.1.1"
             },
             "funding": [
                 {
@@ -1986,7 +1986,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-09T17:43:41+00:00"
+            "time": "2022-04-10T10:33:21+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -9821,12 +9821,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "39998ae9670b9cff48cd226deb974c041bb230bc"
+                "reference": "7cc26a5323a2ecf2bf75bf750d165777b47d1d0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/39998ae9670b9cff48cd226deb974c041bb230bc",
-                "reference": "39998ae9670b9cff48cd226deb974c041bb230bc",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/7cc26a5323a2ecf2bf75bf750d165777b47d1d0b",
+                "reference": "7cc26a5323a2ecf2bf75bf750d165777b47d1d0b",
                 "shasum": ""
             },
             "require": {
@@ -9885,7 +9885,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-04-08T10:15:30+00:00"
+            "time": "2022-04-14T14:40:48+00:00"
         },
         {
             "name": "willdurand/negotiation",
