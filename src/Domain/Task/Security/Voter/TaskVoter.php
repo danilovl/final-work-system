@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class TaskVoter extends Voter
 {
     private const SUPPORTS = [
+        VoterSupportConstant::VIEW,
         VoterSupportConstant::EDIT,
         VoterSupportConstant::DELETE,
         VoterSupportConstant::TASK_NOTIFY_COMPLETE
@@ -49,6 +50,8 @@ class TaskVoter extends Voter
         }
 
         switch ($attribute) {
+            case VoterSupportConstant::VIEW:
+                return $this->canView($subject, $user);
             case VoterSupportConstant::EDIT:
                 return $this->canEdit($subject, $user);
             case VoterSupportConstant::DELETE:
@@ -58,6 +61,13 @@ class TaskVoter extends Voter
         }
 
         throw new LogicException('This code should not be reached!');
+    }
+
+    private function canView(Task $task, User $user): bool
+    {
+        $work = $task->getWork();
+
+        return WorkRoleHelper::hasAccessToWork($work, $user);
     }
 
     private function canEdit(Task $task, User $user): bool

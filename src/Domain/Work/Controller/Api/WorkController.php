@@ -12,20 +12,29 @@
 
 namespace App\Domain\Work\Controller\Api;
 
+use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Http\Api\WorkDetailHandle;
 use App\Domain\Work\Http\Api\WorkListHandle;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 class WorkController
 {
-    public function __construct(private WorkListHandle $workListHandle)
-    {
+    public function __construct(
+        private WorkListHandle $workListHandle,
+        private WorkDetailHandle $workDetailHandle
+    ) {
     }
 
     public function list(Request $request, string $type): JsonResponse
     {
         return $this->workListHandle->handle($request, $type);
+    }
+
+    public function detail(Work $work): JsonResponse
+    {
+        return $this->workDetailHandle->handle($work);
     }
 }

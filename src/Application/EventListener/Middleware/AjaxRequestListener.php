@@ -18,12 +18,14 @@ use App\Application\Exception\AjaxRuntimeException;
 use App\Application\Service\TranslatorService;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
-class AjaxRequestListener
+class AjaxRequestListener implements EventSubscriberInterface
 {
     public function __construct(private TranslatorService $translator)
     {
@@ -100,5 +102,12 @@ class AjaxRequestListener
                 ]
             ]);
         };
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::CONTROLLER => 'onKernelController'
+        ];
     }
 }

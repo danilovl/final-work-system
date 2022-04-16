@@ -1,9 +1,0 @@
-services:
-  _defaults:
-    public: true
-    autowire: true
-
-  app.middleware.ajax.request:
-    class: App\Application\EventListener\Middleware\AjaxRequestListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}

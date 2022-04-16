@@ -12,34 +12,34 @@
 
 namespace App\Domain\Task\Http\Api;
 
+use App\Application\Constant\TabTypeConstant;
+use App\Application\Service\UserService;
+use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Service\WorkDetailTabService;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
-use App\Application\Service\{
-    UserService,
-    PaginatorService
-};
-use App\Domain\Task\Facade\TaskFacade;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
 
-class TaskListOwnerHandle
+class TaskListWorkHandle
 {
     public function __construct(
         private UserService $userService,
-        private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService,
+        private WorkDetailTabService $workDetailTabService,
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {
     }
 
-    public function handle(Request $request): JsonResponse
+    public function handle(Request $request, Work $work): JsonResponse
     {
         $user = $this->userService->getUser();
-        $tasksQuery = $this->taskFacade
-            ->queryTasksByOwner($user);
-
-        $pagination = $this->paginatorService->createPaginationRequest($request, $tasksQuery);
+        $pagination = $this->workDetailTabService->getTabPagination(
+            $request,
+            TabTypeConstant::TAB_TASK,
+            $work,
+            $user
+        );
 
         $tasks = [];
         foreach ($pagination as $task) {

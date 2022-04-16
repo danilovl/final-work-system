@@ -3,10 +3,6 @@ services:
     public: true
     autowire: true
 
-  App\Application\EventListener\DoctrineExtensionListener:
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
   Gedmo\Loggable\LoggableListener:
     calls:
       - [ setAnnotationReader, [ '@annotation_reader' ] ]

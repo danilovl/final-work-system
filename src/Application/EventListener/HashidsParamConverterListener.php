@@ -22,15 +22,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HashidsParamConverterListener extends DoctrineParamConverter
 {
-    private bool $autowire;
+    private bool $autowire = true;
 
     public function __construct(
         private HashidsServiceInterface $hashids,
         ManagerRegistry $registry
     ) {
         parent::__construct($registry);
-
-        $this->autowire = true;
     }
 
     public function apply(Request $request, ParamConverter $configuration): bool
@@ -58,23 +56,23 @@ class HashidsParamConverterListener extends DoctrineParamConverter
     private function decodeHashid(
         Request $request,
         ParamConverter $configuration,
-        string $hashid,
+        string|int $hashid,
         Exception $exception = null
     ): bool {
         $options = $configuration->getOptions();
-
         $id = $hashid;
 
+        if (!is_numeric($id)) {
+            $decodeHashids = $this->hashids->decode($hashid);
+            $id = $decodeHashids[0] ?? null;
 
-        $decodeHashids = $this->hashids->decode($hashid);
-        $id = $decodeHashids[0] ?? null;
+            if ($id === false || !is_int($id)) {
+                if ($exception) {
+                    throw new $exception;
+                }
 
-        if ($id === false || !is_int($id)) {
-            if ($exception) {
-                throw new $exception;
+                throw new LogicException('Unable to guess hashid from the request information.');
             }
-
-            throw new LogicException('Unable to guess hashid from the request information.');
         }
 
         $request->attributes->set('id', $id);

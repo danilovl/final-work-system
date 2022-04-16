@@ -12,6 +12,8 @@
 
 namespace App\Application\EventListener;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 use App\Application\Service\{
     UserService,
     SeoPageService,
@@ -20,7 +22,7 @@ use App\Application\Service\{
 use DateTime;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
-class RequestListener
+class RequestListener implements EventSubscriberInterface
 {
     public function __construct(
         private UserService $userService,
@@ -54,5 +56,12 @@ class RequestListener
     {
         $seo = $requestEvent->getRequest()->attributes->get('_seo');
         $this->seoPageService->setTitle($seo['title'] ?? null);
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest'
+        ];
     }
 }

@@ -56,7 +56,8 @@ class WorkListHandle
         return new JsonResponse([
             'count' => $pagination->count(),
             'totalCount' => $pagination->getTotalItemCount(),
-            'works' => $works
+            'success' => true,
+            'result' => $works
         ]);
     }
 }

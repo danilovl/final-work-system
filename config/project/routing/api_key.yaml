@@ -29,3 +29,7 @@ api_key_event:
 api_key_version:
   resource: api/key_version.yaml
   prefix: /api/key/version
+
+api_key_conversation:
+  resource: api/key_conversation.yaml
+  prefix: /api/key/conversation

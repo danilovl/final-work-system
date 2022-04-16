@@ -28,6 +28,9 @@ class TaskFacade
         return $this->taskRepository->find($id);
     }
 
+    /**
+     * @return Task[]
+     */
     public function findAll(int $limit = null): array
     {
         return $this->taskRepository
@@ -61,6 +64,9 @@ class TaskFacade
         return $this->getTotalCompleteByOwner($user, $isComplete) > 0;
     }
 
+    /**
+     * @return Task[]
+     */
     public function findAllByOwnerComplete(
         User $user,
         bool $isComplete

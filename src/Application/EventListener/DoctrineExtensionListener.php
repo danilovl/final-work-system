@@ -14,8 +14,10 @@ namespace App\Application\EventListener;
 
 use App\Application\Service\UserService;
 use Gedmo\Loggable\LoggableListener;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 
-class DoctrineExtensionListener
+class DoctrineExtensionListener implements EventSubscriberInterface
 {
     public function __construct(
         private UserService $userService,
@@ -31,5 +33,12 @@ class DoctrineExtensionListener
         }
 
         $this->loggableListener->setUsername($user->getUsername());
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest'
+        ];
     }
 }

@@ -9,3 +9,20 @@ api_key_task_list_solver:
   defaults:
     _controller: App\Domain\Task\Controller\Api\TaskController::listSolver
   methods: [GET, POST]
+
+api_key_task_list_detail:
+  path: /work/{id_work}/task/{id_task}/detail
+  requirements:
+    id_work: '\d+'
+    id_task: '\d+'
+  defaults:
+    _controller: App\Domain\Task\Controller\Api\TaskController::detail
+  methods: [GET, POST]
+
+api_key_task_work_list:
+  path: /work/{id}/list
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Task\Controller\Api\TaskController::listWork
+  methods: [GET, POST]

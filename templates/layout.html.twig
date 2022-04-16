@@ -131,9 +131,9 @@
             let modalWindow = $('#modalWindow');
             let modalWindowContent = $('#modalWindow .modal-content');
 
-            errors[403] = '{{ 'app.flash.error.403' | trans([], "flashes") }}';
-            errors[404] = '{{ 'app.flash.error.404' | trans([], "flashes") }}';
-            errors[500] = '{{ 'app.flash.error.500' | trans([], "flashes") }}';
+            errors[403] = '{{ 'app.flash.error.403' | trans([], 'flashes') }}';
+            errors[404] = '{{ 'app.flash.error.404' | trans([], 'flashes') }}';
+            errors[500] = '{{ 'app.flash.error.500' | trans([], 'flashes') }}';
 
             if (modalBackdrop.hasClass('in')) {
                 modalBackdrop.removeClass('in');

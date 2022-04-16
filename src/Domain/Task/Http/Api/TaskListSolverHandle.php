@@ -51,7 +51,8 @@ class TaskListSolverHandle
         return new JsonResponse([
             'count' => $pagination->count(),
             'totalCount' => $pagination->getTotalItemCount(),
-            'tasks' => $tasks
+            'success' => true,
+            'result' => $tasks
         ]);
     }
 }

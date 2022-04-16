@@ -5,3 +5,11 @@ api_key_work_list:
   defaults:
     _controller: App\Domain\Work\Controller\Api\WorkController::list
   methods: [GET, POST]
+
+api_key_work_detail:
+  path: /detail/{id}
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Work\Controller\Api\WorkController::detail
+  methods: [GET, POST]

@@ -68,7 +68,8 @@ class SystemEventTypeEventsHandle
         return new JsonResponse([
             'count' => $pagination->count(),
             'totalCount' => $pagination->getTotalItemCount(),
-            'systemEvents' => $systemEvents
+            'success' => true,
+            'result' => $systemEvents
         ]);
     }
 }
