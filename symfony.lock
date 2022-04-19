@@ -19,6 +19,9 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.3"
     },
+    "danilovl/async-bundle": {
+        "version": "v0.1.0"
+    },
     "danilovl/hashids-bundle": {
         "version": "v1.0.0"
     },

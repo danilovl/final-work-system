@@ -12,6 +12,7 @@
 
 namespace App\Application\EventListener;
 
+use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use App\Application\Service\{
@@ -27,7 +28,8 @@ class RequestListener implements EventSubscriberInterface
     public function __construct(
         private UserService $userService,
         private EntityManagerService $entityManagerService,
-        private SeoPageService $seoPageService
+        private SeoPageService $seoPageService,
+        private AsyncService $asyncService
     ) {
     }
 
@@ -37,8 +39,11 @@ class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $this->userLastRequestedAt();
         $this->defaultRouteSeoPage($requestEvent);
+
+        $this->asyncService->add(function (): void {
+            $this->userLastRequestedAt();
+        });
     }
 
     private function userLastRequestedAt(): void
