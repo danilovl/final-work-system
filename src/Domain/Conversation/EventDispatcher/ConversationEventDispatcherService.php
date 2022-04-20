@@ -15,12 +15,15 @@ namespace App\Domain\Conversation\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConversationEventDispatcherService
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
+    ) {
     }
 
     public function onConversationMessageCreate(ConversationMessage $conversationMessage): void
@@ -28,7 +31,9 @@ class ConversationEventDispatcherService
         $genericEvent = new ConversationMessageGenericEvent;
         $genericEvent->conversationMessage = $conversationMessage;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_MESSAGE_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_MESSAGE_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_MESSAGE_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_MESSAGE_CREATE);
+        });
     }
 }
