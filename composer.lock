@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23e5028e090ca8d8b4d6ade939c110eb",
+    "content-hash": "21d4a5f9bfc2599e26f25f6f85a4db45",
     "packages": [
         {
             "name": "api-platform/core",
@@ -291,16 +291,16 @@
         },
         {
             "name": "danilovl/async-bundle",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/async-bundle.git",
-                "reference": "554b97a17b25189d220420b47f60f948cf00551b"
+                "reference": "65de3b9569bb927afef6dc2d0d06b615140bc660"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/async-bundle/zipball/554b97a17b25189d220420b47f60f948cf00551b",
-                "reference": "554b97a17b25189d220420b47f60f948cf00551b",
+                "url": "https://api.github.com/repos/danilovl/async-bundle/zipball/65de3b9569bb927afef6dc2d0d06b615140bc660",
+                "reference": "65de3b9569bb927afef6dc2d0d06b615140bc660",
                 "shasum": ""
             },
             "require": {
@@ -334,9 +334,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/async-bundle/issues",
-                "source": "https://github.com/danilovl/async-bundle/tree/v0.1.0"
+                "source": "https://github.com/danilovl/async-bundle/tree/v0.1.1"
             },
-            "time": "2022-04-18T15:50:19+00:00"
+            "time": "2022-04-21T15:18:28+00:00"
         },
         {
             "name": "danilovl/hashids-bundle",
