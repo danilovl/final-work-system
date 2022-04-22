@@ -73,7 +73,7 @@ class TaskEditHandle
                     ->flushFromModel($taskModel, $task);
 
                 $this->taskEventDispatcherService
-                    ->onTaskCreate($task);
+                    ->onTaskEdit($task);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
 

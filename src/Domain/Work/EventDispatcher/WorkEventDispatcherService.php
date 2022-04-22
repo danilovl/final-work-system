@@ -16,12 +16,15 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class WorkEventDispatcherService
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
+    ) {
     }
 
     public function onWorkCreate(Work $work): void
@@ -29,8 +32,10 @@ class WorkEventDispatcherService
         $genericEvent = new WorkGenericEvent;
         $genericEvent->work = $work;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_CREATE);
+        });
     }
 
     public function onWorkEdit(Work $work): void
@@ -38,19 +43,23 @@ class WorkEventDispatcherService
         $genericEvent = new WorkGenericEvent;
         $genericEvent->work = $work;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_EDIT);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_EDIT);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_EDIT);
+        });
     }
 
     public function onWorkEditAuthor(Work $work): void
     {
-        $genericEvent = new UserGenericEvent;
-        $genericEvent->user = $work->getAuthor();
+        $genericEventUser = new UserGenericEvent;
+        $genericEventUser->user = $work->getAuthor();
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
+        $genericEventWork = new WorkGenericEvent;
+        $genericEventWork->work = $work;
 
-        $genericEvent = new WorkGenericEvent;
-        $genericEvent->work = $work;
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_AUTHOR_EDIT);
+        $this->asyncService->add(function () use ($genericEventUser, $genericEventWork): void {
+            $this->eventDispatcher->dispatch($genericEventUser, Events::NOTIFICATION_USER_EDIT);
+            $this->eventDispatcher->dispatch($genericEventWork, Events::SYSTEM_WORK_AUTHOR_EDIT);
+        });
     }
 }

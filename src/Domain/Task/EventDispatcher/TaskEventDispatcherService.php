@@ -17,12 +17,15 @@ use App\Application\EventSubscriber\Events;
 use App\Application\Exception\RuntimeException;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TaskEventDispatcherService
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
+    ) {
     }
 
     public function onTaskCreate(Task $task): void
@@ -34,8 +37,10 @@ class TaskEventDispatcherService
             return;
         }
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
+        });
     }
 
     public function onTaskEdit(Task $task): void
@@ -47,15 +52,17 @@ class TaskEventDispatcherService
             return;
         }
 
-        $this->eventDispatcher->dispatch(
-            $genericEvent,
-            !$task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_EDIT : Events::NOTIFICATION_TASK_CREATE
-        );
+        $this->asyncService->add(function () use ($genericEvent, $task): void {
+            $this->eventDispatcher->dispatch(
+                $genericEvent,
+                !$task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_EDIT : Events::NOTIFICATION_TASK_CREATE
+            );
 
-        $this->eventDispatcher->dispatch(
-            $genericEvent,
-            !$task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_EDIT : Events::SYSTEM_TASK_CREATE
-        );
+            $this->eventDispatcher->dispatch(
+                $genericEvent,
+                !$task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_EDIT : Events::SYSTEM_TASK_CREATE
+            );
+        });
     }
 
     public function onTaskNotifyComplete(Task $task): void
@@ -63,8 +70,10 @@ class TaskEventDispatcherService
         $genericEvent = new TaskGenericEvent;
         $genericEvent->task = $task;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_NOTIFY_COMPLETE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_NOTIFY_COMPLETE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_NOTIFY_COMPLETE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_NOTIFY_COMPLETE);
+        });
     }
 
     public function onTaskChangeStatus(Task $task, string $type): void
@@ -95,8 +104,11 @@ class TaskEventDispatcherService
                 throw new RuntimeException(sprintf('Type event "%s" for onTaskChangeStatus not exist', $type));
         }
 
-        $this->eventDispatcher->dispatch($genericEvent, $notificationEvent);
-        $this->eventDispatcher->dispatch($genericEvent, $systemEvent);
+
+        $this->asyncService->add(function () use ($genericEvent, $notificationEvent, $systemEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, $notificationEvent);
+            $this->eventDispatcher->dispatch($genericEvent, $systemEvent);
+        });
     }
 
     public function onTaskReminderCreate(Task $task): void
@@ -104,7 +116,9 @@ class TaskEventDispatcherService
         $genericEvent = new TaskGenericEvent;
         $genericEvent->task = $task;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);
+        });
     }
 }

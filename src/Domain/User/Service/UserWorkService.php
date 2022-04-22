@@ -41,6 +41,9 @@ class UserWorkService
         return $supervisors;
     }
 
+    /**
+     * @return ArrayCollection<User>
+     */
     public function getActiveAuthor(
         User $user,
         string $userType
@@ -53,6 +56,9 @@ class UserWorkService
         return $authors;
     }
 
+    /**
+     * @return ArrayCollection<User>
+     */
     public function getActiveOpponent(
         User $user,
         string $userType
@@ -65,6 +71,9 @@ class UserWorkService
         return $opponents;
     }
 
+    /**
+     * @return ArrayCollection<User>
+     */
     public function getActiveConsultant(
         User $user,
         string $userType
@@ -77,6 +86,9 @@ class UserWorkService
         return $consultants;
     }
 
+    /**
+     * @return ArrayCollection<User>
+     */
     public function getWorkBy(
         User $user,
         string $userType,
@@ -128,7 +140,7 @@ class UserWorkService
     }
 
     /**
-     * @param Collection|Work[] $userWorks
+     * @param Collection<Work> $userWorks
      */
     private function addUserToCollection(
         Collection $users,

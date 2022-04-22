@@ -15,12 +15,15 @@ namespace App\Domain\User\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UserEventDispatcherService
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
+    ) {
     }
 
     public function onUserCreate(User $user): void
@@ -28,7 +31,9 @@ class UserEventDispatcherService
         $genericEvent = new UserGenericEvent;
         $genericEvent->user = $user;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_CREATE);
+        });
     }
 
     public function onUserEdit(User $user, User $owner): void
@@ -37,7 +42,9 @@ class UserEventDispatcherService
         $genericEvent->user = $user;
         $genericEvent->owner = $owner;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_USER_EDIT);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_USER_EDIT);
+        });
     }
 }

@@ -15,12 +15,15 @@ namespace App\Domain\Version\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class VersionEventDispatcherService
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
+    ) {
     }
 
     public function onVersionCreate(Media $media): void
@@ -28,8 +31,10 @@ class VersionEventDispatcherService
         $genericEvent = new VersionGenericEvent;
         $genericEvent->media = $media;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_CREATE);
+        });
     }
 
     public function onVersionEdit(Media $media): void
@@ -37,7 +42,9 @@ class VersionEventDispatcherService
         $genericEvent = new VersionGenericEvent;
         $genericEvent->media = $media;
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_EDIT);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_EDIT);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_EDIT);
+        });
     }
 }
