@@ -7,3 +7,8 @@ services:
     class: App\Application\RabbitMq\Consumer\EmailNotificationConsumer
 
   App\Application\RabbitMq\Consumer\EmailNotificationConsumer: '@app.rabbit_mq.consumer.email_notification'
+
+  app.rabbit_mq.consumer.loggable:
+    class: App\Application\RabbitMq\Consumer\LoggableConsumer
+
+  App\Application\RabbitMq\Consumer\LoggableConsumer: '@app.rabbit_mq.consumer.loggable'

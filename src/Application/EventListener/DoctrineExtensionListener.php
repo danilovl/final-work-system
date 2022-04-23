@@ -13,7 +13,6 @@
 namespace App\Application\EventListener;
 
 use App\Application\Service\UserService;
-use Gedmo\Loggable\LoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 

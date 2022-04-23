@@ -44,3 +44,11 @@ services:
   App\Application\ElasticSearch\WorkSearch:
     arguments:
       $transformedFinderWork: '@fos_elastica.finder.work'
+
+  App\Application\EventListener\LoggableListener:
+    arguments:
+      $loggableProducer: '@old_sound_rabbit_mq.loggable_producer'
+    calls:
+      - [ setAnnotationReader, [ '@annotation_reader' ] ]
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }

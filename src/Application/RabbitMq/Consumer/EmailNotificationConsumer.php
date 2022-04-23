@@ -48,6 +48,7 @@ class EmailNotificationConsumer implements ConsumerInterface
 
         $queueData = EmailNotificationToQueueData::createFromJson($msg->body);
 
+        $subject = $this->baseEmailNotificationSubscriber->trans($queueData->subject, $queueData->locale);
         $body = $this->baseEmailNotificationSubscriber->renderBody(
             $queueData->locale,
             $queueData->template,
@@ -60,7 +61,7 @@ class EmailNotificationConsumer implements ConsumerInterface
             $email = (new Email)
                 ->from(new Address($queueData->from))
                 ->to($queueData->to)
-                ->subject($queueData->subject)
+                ->subject($subject)
                 ->html($body);
 
             $this->mailer->send($email);
@@ -72,7 +73,7 @@ class EmailNotificationConsumer implements ConsumerInterface
             echo sprintf('Failed send email to %s. %s', $queueData->to, PHP_EOL);
         }
 
-        $emailNotificationQueue = $this->createSuccessEmailNotificationQueue($queueData, $body, $success);
+        $emailNotificationQueue = $this->createSuccessEmailNotificationQueue($queueData, $subject, $body, $success);
 
         echo sprintf('Success create email notification queue. ID: %d. %s', $emailNotificationQueue->getId(), PHP_EOL);
 
@@ -81,11 +82,12 @@ class EmailNotificationConsumer implements ConsumerInterface
 
     private function createSuccessEmailNotificationQueue(
         EmailNotificationToQueueData $queueData,
+        string $subject,
         string $body,
         bool $success
     ): EmailNotificationQueue {
         $emailNotificationQueueModel = new EmailNotificationQueueModel;
-        $emailNotificationQueueModel->subject = $queueData->subject;
+        $emailNotificationQueueModel->subject = $subject;
         $emailNotificationQueueModel->to = $queueData->to;
         $emailNotificationQueueModel->from = $queueData->from;
         $emailNotificationQueueModel->body = $body;
