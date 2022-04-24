@@ -40,9 +40,8 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     ): void {
         $task = $event->task;
         $work = $task->getWork();
+        $toUser = $isAuthorEmail ? $work->getAuthor() : $work->getSupervisor();
 
-        $subject = $this->trans($subject);
-        $to = $isAuthorEmail ? $work->getAuthor()->getEmail() : $work->getSupervisor()->getEmail();
         $templateParameters = [
             'taskOwner' => $task->getOwner()->getFullNameDegree(),
             'taskName' => $task->getName(),
@@ -52,9 +51,9 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         ];
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
+            'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => $subject,
-            'to' => $to,
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => $template,
             'templateParameters' => $templateParameters

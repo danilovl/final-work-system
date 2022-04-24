@@ -29,11 +29,12 @@ class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
     public function onResetPasswordToken(ResetPasswordGenericEvent $genericEvent): void
     {
         $resetPassword = $genericEvent->resetPassword;
+        $toUser = $resetPassword->getUser();
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_reservation'),
-            'to' => $resetPassword->getUser()->getEmail(),
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.event_reservation',
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => 'reset_password_token_create',
             'templateParameters' => [

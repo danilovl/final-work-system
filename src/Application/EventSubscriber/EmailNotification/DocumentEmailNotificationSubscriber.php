@@ -18,7 +18,6 @@ use App\Application\EventSubscriber\Events;
 use App\Application\Service\TranslatorService;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
-use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserWorkService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
@@ -66,11 +65,10 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
             'mediaName' => $media->getName()
         ];
 
-        /** @var User $user */
         foreach ($recipientArray as $user) {
             $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-                'locale' => $this->locale,
-                'subject' => $this->trans('subject.document_create'),
+                'locale' => $user->getLocale() ?? $this->locale,
+                'subject' => 'subject.document_create',
                 'to' => $user->getEmail(),
                 'from' => $this->sender,
                 'template' => 'document_create',

@@ -70,8 +70,8 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
             }
 
             $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-                'locale' => $this->locale,
-                'subject' => $this->trans($subject),
+                'locale' => $user->getLocale() ?? $this->locale,
+                'subject' => $subject,
                 'to' => $user->getEmail(),
                 'from' => $this->sender,
                 'template' => $template,

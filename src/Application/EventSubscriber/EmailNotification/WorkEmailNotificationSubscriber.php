@@ -36,6 +36,8 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $consultant = $work->getConsultant();
 
         $to = null;
+        $locale = $this->locale;
+
         $templateParameters = [
             'workId' => $work->getId(),
             'workSupervisor' => $work->getSupervisor()->getFullNameDegree(),
@@ -43,17 +45,23 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
 
         if ($author !== null) {
             $to = $author->getEmail();
-            $templateParameters['role'] = $this->translator->trans('app.text.author_like');
+            $locale = $author->getLocale() ?? $locale;
+
+            $templateParameters['role'] = $this->translator->trans('app.text.author_like', locale: $locale);
         }
 
         if ($opponent !== null) {
             $to = $opponent->getEmail();
-            $templateParameters['role'] = $this->translator->trans('app.text.opponent_like');
+            $locale = $opponent->getLocale() ?? $locale;
+
+            $templateParameters['role'] = $this->translator->trans('app.text.opponent_like', locale: $locale);
         }
 
         if ($consultant !== null) {
             $to = $consultant->getEmail();
-            $templateParameters['role'] = $this->translator->trans('app.text.consultant_like');
+            $locale = $consultant->getLocale() ?? $locale;
+
+            $templateParameters['role'] = $this->translator->trans('app.text.consultant_like', locale: $locale);
         }
 
         if ($to === null) {
@@ -61,8 +69,8 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         }
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.work_create'),
+            'locale' => $locale,
+            'subject' => 'subject.work_create',
             'to' => $to,
             'from' => $this->sender,
             'template' => 'work_create',
@@ -75,11 +83,12 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     public function onWorkEdit(WorkGenericEvent $event): void
     {
         $work = $event->work;
+        $toUser = $work->getAuthor();
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.work_edit'),
-            'to' => $work->getAuthor()->getEmail(),
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.work_edit',
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => 'work_edit',
             'templateParameters' => [

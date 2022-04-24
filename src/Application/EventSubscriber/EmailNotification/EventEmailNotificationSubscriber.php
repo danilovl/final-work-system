@@ -34,11 +34,12 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventCreate(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        $toUser = $event->getParticipant()->getUser();
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_create'),
-            'to' => $event->getParticipant()->getUser()->getEmail(),
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.event_create',
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => 'event_create',
             'templateParameters' => [
@@ -53,11 +54,12 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventEdit(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        $toUser = $event->getParticipant()->getUser();
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_edit'),
-            'to' => $event->getParticipant()->getUser()->getEmail(),
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.event_edit',
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => 'event_edit',
             'templateParameters' => [
@@ -72,11 +74,12 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventSwitchSkype(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        $toUser = $event->getOwner();
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_switch_skype'),
-            'to' => $event->getOwner()->getEmail(),
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.event_switch_skype',
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => 'event_switch_skype',
             'templateParameters' => [
@@ -93,17 +96,22 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
-        $to = $event->getParticipant()->getUser()->getEmail();
+        $toUser = $event->getParticipant()->getUser();
+        $locale = $toUser->getLocale();
+
+        $to = $toUser->getEmail();
         $user = $event->getParticipant()->getUser();
 
         if ($eventComment->getOwner()->getId() !== $event->getOwner()->getId()) {
             $to = $eventComment->getOwner()->getEmail();
             $user = $eventComment->getOwner();
+
+            $locale = $eventComment->getOwner()->getLocale();
         }
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_comment_create'),
+            'locale' => $locale ?? $this->locale,
+            'subject' => 'subject.event_comment_create',
             'to' => $to,
             'from' => $this->sender,
             'template' => 'event_comment_create',
@@ -121,17 +129,22 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
-        $to = $event->getParticipant()->getUser()->getEmail();
+        $toUser = $event->getParticipant()->getUser();
+        $locale = $toUser->getLocale();
+
+        $to = $toUser->getEmail();
         $user = $event->getParticipant()->getUser();
 
         if ($eventComment->getOwner()->getId() !== $event->getOwner()->getId()) {
             $to = $eventComment->getOwner()->getEmail();
             $user = $eventComment->getOwner();
+
+            $locale = $eventComment->getOwner()->getLocale();
         }
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_comment_edit'),
+            'locale' => $locale ?? $this->locale,
+            'subject' => 'subject.event_comment_edit',
             'to' => $to,
             'from' => $this->sender,
             'template' => 'event_comment_edit',
@@ -147,11 +160,12 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventReservation(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        $toUser = $event->getOwner();
 
         $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
-            'locale' => $this->locale,
-            'subject' => $this->trans('subject.event_reservation'),
-            'to' => $event->getOwner()->getEmail(),
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.event_reservation',
+            'to' => $toUser->getEmail(),
             'from' => $this->sender,
             'template' => 'event_create',
             'templateParameters' => [

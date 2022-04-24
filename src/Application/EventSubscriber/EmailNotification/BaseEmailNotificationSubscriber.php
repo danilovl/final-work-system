@@ -38,10 +38,7 @@ class BaseEmailNotificationSubscriber
         protected ParameterServiceInterface $parameterService,
         protected ProducerInterface $emailNotificationProducer
     ) {
-        $this->translator = clone $translator;
-
         $this->initParameters();
-        $this->initTranslatorLocale($this->locale);
     }
 
     private function initParameters(): void
@@ -54,19 +51,14 @@ class BaseEmailNotificationSubscriber
         $this->enableRabbitMq = $this->parameterService->getBoolean('email_notification.enable_rabbit_mq');
     }
 
-    protected function initTranslatorLocale(string $locale): void
-    {
-        $this->translator->setLocale($locale);
-    }
-
     protected function getTemplate(string $locale, string $name): string
     {
         return "email_notification/{$locale}/{$name}.html.twig";
     }
 
-    protected function trans(string $trans): string
+    public function trans(string $trans, string $locale): string
     {
-        return $this->translator->trans("app.email_notification.{$trans}", [], $this->translatorDomain);
+        return $this->translator->trans("app.email_notification.{$trans}", [], $this->translatorDomain, $locale);
     }
 
     protected function addEmailNotificationToQueue(EmailNotificationToQueueData $queueData): void
@@ -99,7 +91,6 @@ class BaseEmailNotificationSubscriber
         $templatePath = $this->getTemplate($locale, $template);
         if (!$this->twig->getLoader()->exists($templatePath)) {
             $locale = $this->sureExistTemplateLocale;
-            $this->initTranslatorLocale($locale);
         }
 
         return $this->twig->render(
@@ -110,6 +101,8 @@ class BaseEmailNotificationSubscriber
 
     protected function saveLocal(EmailNotificationToQueueData $queueData): void
     {
+        $subject = $this->trans($queueData->subject, $queueData->locale);
+
         $body = $this->renderBody(
             $queueData->locale,
             $queueData->template,
@@ -117,7 +110,7 @@ class BaseEmailNotificationSubscriber
         );
 
         $emailNotificationQueueModel = new EmailNotificationQueueModel;
-        $emailNotificationQueueModel->subject = $queueData->subject;
+        $emailNotificationQueueModel->subject = $subject;
         $emailNotificationQueueModel->to = $queueData->to;
         $emailNotificationQueueModel->from = $queueData->from;
         $emailNotificationQueueModel->body = $body;
