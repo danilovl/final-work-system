@@ -23,10 +23,10 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 class HomepageCache
 {
     public function __construct(
-        private AdapterInterface $cache,
-        private ParameterServiceInterface $parameterService,
-        private PaginatorService $paginatorService,
-        private SystemEventRecipientFacade $systemEventRecipientFacade
+        private readonly AdapterInterface $cache,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly PaginatorService $paginatorService,
+        private readonly SystemEventRecipientFacade $systemEventRecipientFacade
     ) {
     }
 
