@@ -26,10 +26,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     public function __construct(
-        private UserService $userService,
-        private HomepageCache $homepageCache,
-        private ParameterServiceInterface $parameterService,
-        private SystemEventFacade $systemEventFacade
+        private readonly UserService $userService,
+        private readonly HomepageCache $homepageCache,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly SystemEventFacade $systemEventFacade
     ) {
     }
 

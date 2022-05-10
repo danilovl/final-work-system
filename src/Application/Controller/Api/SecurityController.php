@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SecurityController extends AbstractController
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private UserService $userService
+        private readonly EntityManagerService $entityManagerService,
+        private readonly UserService $userService
     ) {
     }
 

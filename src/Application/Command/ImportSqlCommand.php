@@ -25,7 +25,7 @@ class ImportSqlCommand extends Command
 {
     protected static $defaultName = 'app:import-sql';
 
-    public function __construct(private EntityManagerService $entityManagerService)
+    public function __construct(private readonly EntityManagerService $entityManagerService)
     {
         parent::__construct();
     }
