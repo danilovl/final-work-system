@@ -19,8 +19,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class DoctrineExtensionListener implements EventSubscriberInterface
 {
     public function __construct(
-        private UserService $userService,
-        private LoggableListener $loggableListener
+        private readonly UserService $userService,
+        private readonly LoggableListener $loggableListener
     ) {
     }
 

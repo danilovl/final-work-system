@@ -26,10 +26,10 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 class RequestListener implements EventSubscriberInterface
 {
     public function __construct(
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private SeoPageService $seoPageService,
-        private AsyncService $asyncService
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly SeoPageService $seoPageService,
+        private readonly AsyncService $asyncService
     ) {
     }
 

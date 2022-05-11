@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
 
 class WorkSearch
 {
-    public function __construct(private TransformedFinder $transformedFinderWork)
+    public function __construct(private readonly TransformedFinder $transformedFinderWork)
     {
     }
 

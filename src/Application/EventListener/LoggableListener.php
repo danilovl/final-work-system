@@ -29,8 +29,8 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
 
     public function __construct(
         protected ProducerInterface $loggableProducer,
-        private ParameterService $parameterService,
-        private AsyncService $asyncService
+        private readonly ParameterService $parameterService,
+        private readonly AsyncService $asyncService
     ) {
         parent::__construct();
 

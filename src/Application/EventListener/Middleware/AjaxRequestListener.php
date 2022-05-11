@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class AjaxRequestListener implements EventSubscriberInterface
 {
-    public function __construct(private TranslatorService $translator)
+    public function __construct(private readonly TranslatorService $translator)
     {
     }
 

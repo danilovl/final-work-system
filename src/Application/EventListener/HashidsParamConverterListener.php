@@ -25,7 +25,7 @@ class HashidsParamConverterListener extends DoctrineParamConverter
     private bool $autowire = true;
 
     public function __construct(
-        private HashidsServiceInterface $hashids,
+        private readonly HashidsServiceInterface $hashids,
         ManagerRegistry $registry
     ) {
         parent::__construct($registry);

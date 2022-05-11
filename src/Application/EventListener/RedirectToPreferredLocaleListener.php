@@ -26,8 +26,8 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
     private array $locales;
 
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator,
-        private UserService $userService,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly UserService $userService,
         string $locales,
         private ?string $defaultLocale = null
     ) {
