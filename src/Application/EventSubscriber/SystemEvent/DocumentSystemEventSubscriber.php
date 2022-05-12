@@ -28,7 +28,7 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
 {
     public function __construct(
         EntityManagerService $entityManagerService,
-        private UserWorkService $userWorkService
+        private readonly UserWorkService $userWorkService
     ) {
         parent::__construct($entityManagerService);
     }

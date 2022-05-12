@@ -33,7 +33,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         protected TranslatorService $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterServiceInterface $parameterService,
-        private WorkService $workService,
+        private readonly WorkService $workService,
         protected ProducerInterface $emailNotificationProducer
     ) {
         parent::__construct(

@@ -27,7 +27,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
 {
     public function __construct(
         EntityManagerService $entityManagerService,
-        private WorkService $workService
+        private readonly WorkService $workService
     ) {
         parent::__construct($entityManagerService);
     }

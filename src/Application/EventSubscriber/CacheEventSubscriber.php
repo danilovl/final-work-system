@@ -20,8 +20,8 @@ use Symfony\Contracts\Cache\CacheInterface;
 class CacheEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private CacheInterface $cache,
-        private HomepageCache $homepageCache
+        private readonly CacheInterface $cache,
+        private readonly HomepageCache $homepageCache
     ) {
     }
 

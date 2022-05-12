@@ -33,7 +33,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         protected TranslatorService $translator,
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterServiceInterface $parameterService,
-        private UserWorkService $userWorkService,
+        private readonly UserWorkService $userWorkService,
         protected ProducerInterface $emailNotificationProducer
     ) {
         parent::__construct(
