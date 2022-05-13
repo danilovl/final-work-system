@@ -18,11 +18,8 @@ use Overblog\GraphQLBundle\Resolver\ResolverMap;
 
 class TaskResolverMap extends ResolverMap
 {
-    private TaskFacade $taskService;
-
-    public function __construct(TaskFacade $taskService)
+    public function __construct(private readonly TaskFacade $taskService)
     {
-        $this->taskService = $taskService;
     }
 
     protected function map(): array

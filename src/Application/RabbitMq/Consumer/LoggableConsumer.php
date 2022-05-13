@@ -23,7 +23,7 @@ class LoggableConsumer implements ConsumerInterface
 {
     private Serializer $serializer;
 
-    public function __construct(private EntityManagerService $entityManagerService)
+    public function __construct(private readonly EntityManagerService $entityManagerService)
     {
         $this->serializer = SerializerHelper::getBaseSerializer();
     }

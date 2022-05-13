@@ -22,8 +22,8 @@ use Overblog\GraphQLBundle\Resolver\ResolverMap;
 class WorkResolverMap extends ResolverMap
 {
     public function __construct(
-        private WorkFacade $workFacade,
-        private WorkStatusFacade $workStatusFacade
+        private readonly WorkFacade $workFacade,
+        private readonly WorkStatusFacade $workStatusFacade
     ) {
     }
 

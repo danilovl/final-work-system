@@ -31,10 +31,10 @@ use Symfony\Component\Mime\{
 class EmailNotificationConsumer implements ConsumerInterface
 {
     public function __construct(
-        private ParameterServiceInterface $parameterService,
-        private MailerService $mailer,
-        private EmailNotificationQueueFactory $emailNotificationQueueFactory,
-        private BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly MailerService $mailer,
+        private readonly EmailNotificationQueueFactory $emailNotificationQueueFactory,
+        private readonly BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
     ) {
     }
 

@@ -18,7 +18,7 @@ use Overblog\GraphQLBundle\Resolver\ResolverMap;
 
 class UserResolverMap extends ResolverMap
 {
-    public function __construct(private UserFacade $userService)
+    public function __construct(private readonly UserFacade $userService)
     {
     }
 

@@ -24,9 +24,9 @@ use Symfony\Component\Routing\RouterInterface;
 class FormDeleteFactory
 {
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private RouterInterface $router,
-        private HashidsServiceInterface $hashidsService
+        private readonly FormFactoryInterface $formFactory,
+        private readonly RouterInterface $router,
+        private readonly HashidsServiceInterface $hashidsService
     ) {
     }
 
