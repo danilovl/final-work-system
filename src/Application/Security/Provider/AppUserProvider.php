@@ -26,8 +26,8 @@ use Symfony\Component\Security\Core\User\{
 class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
     public function __construct(
-        private UserFacade $userFacade,
-        private EntityManagerService $entityManagerService
+        private readonly UserFacade $userFacade,
+        private readonly EntityManagerService $entityManagerService
     ) {
     }
 

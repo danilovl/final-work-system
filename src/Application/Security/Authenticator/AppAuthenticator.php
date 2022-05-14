@@ -47,12 +47,12 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     use TargetPathTrait;
 
     public function __construct(
-        private UserService $userService,
-        private UserFacade $userFacade,
-        private UrlGeneratorInterface $urlGenerator,
-        private HttpUtils $httpUtils,
-        private HttpKernelInterface $httpKernel,
-        private EntityManagerService $entityManagerService
+        private readonly UserService $userService,
+        private readonly UserFacade $userFacade,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly HttpUtils $httpUtils,
+        private readonly HttpKernelInterface $httpKernel,
+        private readonly EntityManagerService $entityManagerService
     ) {
     }
 

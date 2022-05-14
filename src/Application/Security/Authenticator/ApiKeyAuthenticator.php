@@ -48,10 +48,10 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     private const AUTH_USER_USERNAME = 'X-AUTH-USER-USERNAME';
 
     public function __construct(
-        private UserService $userService,
-        private ApiUserFacade $apiUserFacade,
-        private UserFacade $userFacade,
-        private EntityManagerService $entityManagerService
+        private readonly UserService $userService,
+        private readonly ApiUserFacade $apiUserFacade,
+        private readonly UserFacade $userFacade,
+        private readonly EntityManagerService $entityManagerService
     ) {
     }
 
