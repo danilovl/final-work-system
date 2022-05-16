@@ -29,9 +29,9 @@ use Symfony\Component\Routing\RouterInterface;
 class RequestService
 {
     public function __construct(
-        private RequestStack $requestStack,
-        private RouterInterface $router,
-        private TranslatorService $translatorService
+        private readonly RequestStack $requestStack,
+        private readonly RouterInterface $router,
+        private readonly TranslatorService $translatorService
     ) {
     }
 

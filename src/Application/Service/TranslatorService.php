@@ -26,8 +26,8 @@ class TranslatorService implements TranslatorInterface
 
     public function __construct(
         TranslatorInterface $translator,
-        private RequestStack $requestStack,
-        private string $locale,
+        private readonly RequestStack $requestStack,
+        private readonly string $locale,
     ) {
         $this->translator = $translator;
     }

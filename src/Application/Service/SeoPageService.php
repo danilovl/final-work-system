@@ -24,7 +24,7 @@ class SeoPageService
     private array $metas;
     private string $separator;
 
-    public function __construct(private TranslatorInterface $translator)
+    public function __construct(private readonly TranslatorInterface $translator)
     {
         $this->separator = self::DEFAULT_SEPARATOR;
         $this->metas = [

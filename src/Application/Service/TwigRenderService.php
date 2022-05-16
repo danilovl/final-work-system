@@ -22,8 +22,8 @@ use Twig\Environment;
 class TwigRenderService
 {
     public function __construct(
-        private Environment $environment,
-        private ParameterServiceInterface $parameterService
+        private readonly Environment $environment,
+        private readonly ParameterServiceInterface $parameterService
     ) {
     }
 

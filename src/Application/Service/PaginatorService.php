@@ -20,8 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 class PaginatorService
 {
     public function __construct(
-        private PaginatorInterface $paginator,
-        private ParameterServiceInterface $parameterService
+        private readonly PaginatorInterface $paginator,
+        private readonly ParameterServiceInterface $parameterService
     ) {
     }
 

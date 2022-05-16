@@ -37,8 +37,8 @@ class ResetPasswordService
     private int $requestThrottleTime;
 
     public function __construct(
-        private ResetPasswordFactory $resetPasswordFactory,
-        private ResetPasswordFacade $resetPasswordFacade,
+        private readonly ResetPasswordFactory $resetPasswordFactory,
+        private readonly ResetPasswordFacade $resetPasswordFacade,
         ParameterServiceInterface $parameterService
     ) {
         $this->cryptographicallySecureKey = $parameterService->getString('reset_password.cryptographically_secure_key');
