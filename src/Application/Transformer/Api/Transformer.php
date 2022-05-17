@@ -20,7 +20,7 @@ use ReflectionClass;
 
 class Transformer implements TransformerInterface
 {
-    public function __construct(private ParameterServiceInterface $parameterService)
+    public function __construct(private readonly ParameterServiceInterface $parameterService)
     {
     }
 

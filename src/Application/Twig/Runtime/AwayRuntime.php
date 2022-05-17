@@ -20,8 +20,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 class AwayRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
     public function __construct(
-        private RouterInterface $router,
-        private string $domain
+        private readonly RouterInterface $router,
+        private readonly string $domain
     ) {
     }
 

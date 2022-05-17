@@ -21,8 +21,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 class HomepageNotifyWidgetRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
     public function __construct(
-        private ContainerInterface $container,
-        private ParameterServiceInterface $parameterService
+        private readonly ContainerInterface $container,
+        private readonly ParameterServiceInterface $parameterService
     ) {
     }
 

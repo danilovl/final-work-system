@@ -22,7 +22,7 @@ class SeoRuntime extends AbstractExtension implements RuntimeExtensionInterface
     private const META = '<meta %s="%s" />';
     private const META_CONTENT = '<meta %s="%s" content="%s" />';
 
-    public function __construct(protected SeoPageService $seoPageService)
+    public function __construct(private readonly SeoPageService $seoPageService)
     {
     }
 
