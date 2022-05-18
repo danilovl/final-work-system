@@ -27,12 +27,12 @@ class MenuWidget extends BaseWidget
     private ?string $menu;
 
     public function __construct(
-        private array $menuConfig,
-        private TranslatorInterface $translator,
-        private RouterInterface $router,
-        private UserService $userService,
-        private Security $security,
-        private Environment $environment
+        private readonly array $menuConfig,
+        private readonly TranslatorInterface $translator,
+        private readonly RouterInterface $router,
+        private readonly UserService $userService,
+        private readonly Security $security,
+        private readonly Environment $environment
     ) {
         $this->user = $this->userService->getUser();
     }

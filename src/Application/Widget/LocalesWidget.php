@@ -20,7 +20,7 @@ class LocalesWidget extends BaseWidget
     private array $locales;
 
     public function __construct(
-        private Environment $environment,
+        private readonly Environment $environment,
         string $locales
     ) {
         $this->locales = explode('|', $locales);

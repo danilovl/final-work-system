@@ -30,12 +30,12 @@ use Twig\Environment;
 class WorkDeadlineNotifyWidget extends BaseWidget
 {
     public function __construct(
-        private UserService $userService,
-        private WorkService $workService,
-        private ParameterServiceInterface $parameterService,
-        private TranslatorService $translatorService,
-        private Environment $twig,
-        private WorkFacade $workFacade
+        private readonly UserService $userService,
+        private readonly WorkService $workService,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly TranslatorService $translatorService,
+        private readonly Environment $twig,
+        private readonly WorkFacade $workFacade
     ) {
     }
 

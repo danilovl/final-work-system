@@ -22,10 +22,10 @@ use Twig\Environment;
 class UserProfileInformationNotifyWidget extends BaseWidget
 {
     public function __construct(
-        protected UserService $userService,
-        protected ParameterServiceInterface $parameterService,
-        protected TranslatorService $translatorService,
-        protected Environment $twig
+        private readonly UserService $userService,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly TranslatorService $translatorService,
+        private readonly Environment $twig
     ) {
     }
 
