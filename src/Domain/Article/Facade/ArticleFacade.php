@@ -18,7 +18,7 @@ use Doctrine\ORM\Query;
 
 class ArticleFacade
 {
-    public function __construct(private ArticleRepository $articleRepository)
+    public function __construct(private readonly ArticleRepository $articleRepository)
     {
     }
 

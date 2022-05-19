@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ArticleDetailHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private SeoPageService $seoPageService
+        private readonly TwigRenderService $twigRenderService,
+        private readonly SeoPageService $seoPageService
     ) {
     }
 
