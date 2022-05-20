@@ -30,10 +30,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventController extends AbstractController
 {
     public function __construct(
-        private EventDetailHandle $eventDetailHandle,
-        private EventEditHandle $eventEditHandle,
-        private EventSwitchToSkypeHandle $eventSwitchToSkypeHandle,
-        private EventDeleteHandle $eventDeleteHandle,
+        private readonly EventDetailHandle $eventDetailHandle,
+        private readonly EventEditHandle $eventEditHandle,
+        private readonly EventSwitchToSkypeHandle $eventSwitchToSkypeHandle,
+        private readonly EventDeleteHandle $eventDeleteHandle
     ) {
     }
 

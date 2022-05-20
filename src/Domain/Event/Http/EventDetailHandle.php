@@ -36,16 +36,16 @@ use Symfony\Component\HttpFoundation\{
 class EventDetailHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private CommentFacade $commentFacade,
-        private SeoPageService $seoPageService,
-        private FormFactoryInterface $formFactory,
-        private CommentFactory $commentFactory,
-        private EventAddressFacade $eventAddressFacade,
-        private FormDeleteFactory $formDeleteFactory,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly CommentFacade $commentFacade,
+        private readonly SeoPageService $seoPageService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly CommentFactory $commentFactory,
+        private readonly EventAddressFacade $eventAddressFacade,
+        private readonly FormDeleteFactory $formDeleteFactory,
+        private readonly EventEventDispatcherService $eventEventDispatcherService
     ) {
     }
 

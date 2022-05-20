@@ -35,13 +35,13 @@ use Symfony\Component\HttpFoundation\{
 class EventEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private EventFactory $eventFactory,
-        private FormFactoryInterface $formFactory,
-        private EventParticipantFacade $eventParticipantFacade,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly EventFactory $eventFactory,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EventParticipantFacade $eventParticipantFacade,
+        private readonly EventEventDispatcherService $eventEventDispatcherService
     ) {
     }
 

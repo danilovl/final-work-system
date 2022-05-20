@@ -22,7 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
 {
-    public function __construct(private EventListHandle $eventListHandle)
+    public function __construct(private readonly EventListHandle $eventListHandle)
     {
     }
 

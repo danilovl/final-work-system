@@ -32,10 +32,10 @@ use Symfony\Component\HttpFoundation\{
 class EventGetEventHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EventFacade $eventFacade,
-        private EventCalendarFacade $eventCalendarFacade
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EventFacade $eventFacade,
+        private readonly EventCalendarFacade $eventCalendarFacade
     ) {
     }
 

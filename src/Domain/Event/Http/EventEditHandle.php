@@ -38,17 +38,17 @@ use Symfony\Component\Routing\RouterInterface;
 class EventEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private TwigRenderService $twigRenderService,
-        private EventFactory $eventFactory,
-        private SeoPageService $seoPageService,
-        private FormFactoryInterface $formFactory,
-        private HashidsServiceInterface $hashidsService,
-        private EventParticipantFacade $eventParticipantFacade,
-        private EventEventDispatcherService $eventEventDispatcherService,
-        private RouterInterface $router
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly EventFactory $eventFactory,
+        private readonly SeoPageService $seoPageService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly EventParticipantFacade $eventParticipantFacade,
+        private readonly EventEventDispatcherService $eventEventDispatcherService,
+        private readonly RouterInterface $router
     ) {
     }
 

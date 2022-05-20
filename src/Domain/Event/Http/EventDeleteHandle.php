@@ -28,10 +28,10 @@ use Symfony\Component\HttpFoundation\{
 class EventDeleteHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private FormDeleteFactory $formDeleteFactory,
-        private HashidsServiceInterface $hashidsService,
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly FormDeleteFactory $formDeleteFactory,
+        private readonly HashidsServiceInterface $hashidsService,
     ) {
     }
 

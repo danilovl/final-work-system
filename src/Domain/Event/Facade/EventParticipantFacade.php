@@ -27,8 +27,8 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 class EventParticipantFacade
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private UserWorkService $userWorkService
+        private readonly EntityManagerService $entityManagerService,
+        private readonly UserWorkService $userWorkService
     ) {
     }
 

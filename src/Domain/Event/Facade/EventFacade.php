@@ -18,7 +18,7 @@ use App\Domain\Event\Repository\EventRepository;
 
 class EventFacade
 {
-    public function __construct(private EventRepository $eventRepository)
+    public function __construct(private readonly EventRepository $eventRepository)
     {
     }
 

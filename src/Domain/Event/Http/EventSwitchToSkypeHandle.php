@@ -26,11 +26,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class EventSwitchToSkypeHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private EventAddressFacade $eventAddressFacade,
-        private HashidsServiceInterface $hashidsService,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly EventAddressFacade $eventAddressFacade,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly EventEventDispatcherService $eventEventDispatcherService
     ) {
     }
 

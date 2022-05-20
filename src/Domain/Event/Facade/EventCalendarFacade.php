@@ -41,11 +41,11 @@ class EventCalendarFacade
     private string $calendarEventDetailReservedColor;
 
     public function __construct(
-        private UserWorkService $userWorkService,
-        private EntityManagerService $entityManager,
-        private RouterInterface $router,
-        private HashidsServiceInterface $hashIds,
-        private EventRepository $eventRepository,
+        private readonly UserWorkService $userWorkService,
+        private readonly EntityManagerService $entityManager,
+        private readonly RouterInterface $router,
+        private readonly HashidsServiceInterface $hashIds,
+        private readonly EventRepository $eventRepository,
         ParameterServiceInterface $parameterService
     ) {
         $this->calendarEventReservedColor = $parameterService->getString('event_calendar.reserved_color');

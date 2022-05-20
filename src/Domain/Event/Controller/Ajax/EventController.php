@@ -29,9 +29,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventController extends AbstractController
 {
     public function __construct(
-        private EventGetEventHandle $eventGetEventHandle,
-        private EventEditHandle $eventEditHandle,
-        private EventDeleteHandle $eventDeleteHandle
+        private readonly EventGetEventHandle $eventGetEventHandle,
+        private readonly EventEditHandle $eventEditHandle,
+        private readonly EventDeleteHandle $eventDeleteHandle
     ) {
     }
 
