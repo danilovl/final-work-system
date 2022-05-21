@@ -31,10 +31,10 @@ use Symfony\Component\HttpFoundation\{
 class TaskController extends AbstractController
 {
     public function __construct(
-        private TaskListHandle $taskListHandle,
-        private TaskCreateHandle $taskCreateHandle,
-        private TaskCreateSeveralHandle $taskCreateSeveralHandle,
-        private TaskEditHandle $taskEditHandle
+        private readonly TaskListHandle $taskListHandle,
+        private readonly TaskCreateHandle $taskCreateHandle,
+        private readonly TaskCreateSeveralHandle $taskCreateSeveralHandle,
+        private readonly TaskEditHandle $taskEditHandle
     ) {
     }
 

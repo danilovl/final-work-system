@@ -27,9 +27,9 @@ use Symfony\Component\HttpFoundation\{
 class TaskChangeStatusHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TaskStatusService $taskStatusService,
-        private EntityManagerService $entityManagerService
+        private readonly RequestService $requestService,
+        private readonly TaskStatusService $taskStatusService,
+        private readonly EntityManagerService $entityManagerService
     ) {
     }
 

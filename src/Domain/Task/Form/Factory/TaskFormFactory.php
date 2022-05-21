@@ -33,9 +33,9 @@ use Symfony\Component\Routing\RouterInterface;
 class TaskFormFactory
 {
     public function __construct(
-        private RouterInterface $router,
-        private HashidsServiceInterface $hashidsService,
-        private FormFactoryInterface $formFactory
+        private readonly RouterInterface $router,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly FormFactoryInterface $formFactory
     ) {
     }
 

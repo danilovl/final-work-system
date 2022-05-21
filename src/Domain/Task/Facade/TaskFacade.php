@@ -19,7 +19,7 @@ use Doctrine\ORM\Query;
 
 class TaskFacade
 {
-    public function __construct(private TaskRepository $taskRepository)
+    public function __construct(private readonly TaskRepository $taskRepository)
     {
     }
 

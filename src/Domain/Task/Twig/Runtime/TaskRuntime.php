@@ -22,7 +22,7 @@ use Twig\Extension\{
 
 class TaskRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
-    public function __construct(private TaskService $taskService)
+    public function __construct(private readonly TaskService $taskService)
     {
     }
 

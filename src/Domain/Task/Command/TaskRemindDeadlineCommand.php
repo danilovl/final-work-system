@@ -28,9 +28,9 @@ class TaskRemindDeadlineCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private TaskEventDispatcherService $taskEventDispatcherService,
-        private TaskDeadlineFacade $taskDeadlineFacade,
-        private ParameterServiceInterface $parameterService
+        private readonly TaskEventDispatcherService $taskEventDispatcherService,
+        private readonly TaskDeadlineFacade $taskDeadlineFacade,
+        private readonly ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
     }

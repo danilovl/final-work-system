@@ -34,11 +34,11 @@ use Symfony\Component\HttpFoundation\{
 class TaskCreateSeveralHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private TaskFormFactory $taskFormFactory,
-        private TaskFactory $taskFactory,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly TaskFormFactory $taskFormFactory,
+        private readonly TaskFactory $taskFactory,
+        private readonly TaskEventDispatcherService $taskEventDispatcherService
     ) {
     }
 

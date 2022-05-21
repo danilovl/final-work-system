@@ -26,10 +26,10 @@ use Symfony\Component\HttpFoundation\{
 class TaskListOwnerHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private readonly UserService $userService,
+        private readonly TaskFacade $taskFacade,
+        private readonly PaginatorService $paginatorService,
+        private readonly ObjectToArrayTransformService $objectToArrayTransformService
     ) {
     }
 

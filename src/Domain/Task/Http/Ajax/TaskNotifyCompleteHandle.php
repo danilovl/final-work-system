@@ -24,9 +24,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class TaskNotifyCompleteHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly TaskEventDispatcherService $taskEventDispatcherService
     ) {
     }
 

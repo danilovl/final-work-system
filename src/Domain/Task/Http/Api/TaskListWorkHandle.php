@@ -25,9 +25,9 @@ use Symfony\Component\HttpFoundation\{
 class TaskListWorkHandle
 {
     public function __construct(
-        private UserService $userService,
-        private WorkDetailTabService $workDetailTabService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private readonly UserService $userService,
+        private readonly WorkDetailTabService $workDetailTabService,
+        private readonly ObjectToArrayTransformService $objectToArrayTransformService
     ) {
     }
 

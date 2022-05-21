@@ -19,7 +19,7 @@ use App\Domain\User\Entity\User;
 
 class MediaMimeTypeFacade
 {
-    public function __construct(private MediaMimeTypeRepository $mediaMimeTypeRepository)
+    public function __construct(private readonly MediaMimeTypeRepository $mediaMimeTypeRepository)
     {
     }
 

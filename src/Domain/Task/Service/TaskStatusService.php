@@ -18,7 +18,7 @@ use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 
 class TaskStatusService
 {
-    public function __construct(private TaskEventDispatcherService $taskEventDispatcherService)
+    public function __construct(private readonly TaskEventDispatcherService $taskEventDispatcherService)
     {
     }
 

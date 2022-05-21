@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class TaskSeveralForm extends TaskForm
 {
-    public function __construct(private TaskDataGrid $taskDataGrid)
+    public function __construct(private readonly TaskDataGrid $taskDataGrid)
     {
     }
 

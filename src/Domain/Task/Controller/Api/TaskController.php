@@ -31,10 +31,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class TaskController extends AbstractController
 {
     public function __construct(
-        private TaskListOwnerHandle $taskListHandle,
-        private TaskListSolverHandle $taskListSolverHandle,
-        private TaskDetailHandle $taskDetailHandle,
-        private TaskListWorkHandle $taskListWorkHandle
+        private readonly TaskListOwnerHandle $taskListHandle,
+        private readonly TaskListSolverHandle $taskListSolverHandle,
+        private readonly TaskDetailHandle $taskDetailHandle,
+        private readonly TaskListWorkHandle $taskListWorkHandle
     ) {
     }
 

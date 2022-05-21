@@ -19,8 +19,8 @@ use App\Domain\User\Entity\User;
 class TaskDeadlineFacade
 {
     public function __construct(
-        private TaskRepository $taskRepository,
-        private ParameterServiceInterface $parameterService
+        private readonly TaskRepository $taskRepository,
+        private readonly ParameterServiceInterface $parameterService
     ) {
     }
 

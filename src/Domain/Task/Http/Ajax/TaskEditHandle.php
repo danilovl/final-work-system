@@ -29,10 +29,10 @@ use Symfony\Component\HttpFoundation\{
 class TaskEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TaskFactory $taskFactory,
-        private FormFactoryInterface $formFactory,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly TaskFactory $taskFactory,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly TaskEventDispatcherService $taskEventDispatcherService
     ) {
     }
 

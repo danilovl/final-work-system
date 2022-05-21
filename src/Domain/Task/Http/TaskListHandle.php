@@ -26,10 +26,10 @@ use Symfony\Component\HttpFoundation\{
 class TaskListHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private UserService $userService,
-        private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService
+        private readonly TwigRenderService $twigRenderService,
+        private readonly UserService $userService,
+        private readonly TaskFacade $taskFacade,
+        private readonly PaginatorService $paginatorService
     ) {
     }
 

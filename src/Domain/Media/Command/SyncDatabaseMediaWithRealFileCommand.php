@@ -35,10 +35,10 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private MediaFacade $mediaFacade,
-        private MediaTypeFacade $mediaTypeFacade,
-        private ParameterServiceInterface $parameterService
+        private readonly EntityManagerService $entityManagerService,
+        private readonly MediaFacade $mediaFacade,
+        private readonly MediaTypeFacade $mediaTypeFacade,
+        private readonly ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
     }

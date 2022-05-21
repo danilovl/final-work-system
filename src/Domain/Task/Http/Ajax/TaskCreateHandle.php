@@ -32,11 +32,11 @@ use Symfony\Component\HttpFoundation\{
 class TaskCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private TaskFactory $taskFactory,
-        private FormFactoryInterface $formFactory,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly TaskFactory $taskFactory,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly TaskEventDispatcherService $taskEventDispatcherService
     ) {
     }
 

@@ -17,7 +17,7 @@ use App\Domain\MediaType\Repository\MediaTypeRepository;
 
 class MediaTypeFacade
 {
-    public function __construct(private MediaTypeRepository $mediaTypeRepository)
+    public function __construct(private readonly MediaTypeRepository $mediaTypeRepository)
     {
     }
 

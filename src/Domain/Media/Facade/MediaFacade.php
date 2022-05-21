@@ -21,7 +21,7 @@ use Doctrine\ORM\Query;
 
 class MediaFacade
 {
-    public function __construct(private MediaRepository $mediaRepository)
+    public function __construct(private readonly MediaRepository $mediaRepository)
     {
     }
 

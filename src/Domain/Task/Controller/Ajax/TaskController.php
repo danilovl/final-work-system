@@ -34,13 +34,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TaskController extends AbstractController
 {
     public function __construct(
-        private TaskCreateHandle $taskCreateHandle,
-        private TaskCreateSeveralHandle $taskCreateSeveralHandle,
-        private TaskEditHandle $taskEditHandle,
-        private TaskChangeStatusHandle $taskChangeStatusHandle,
-        private TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
-        private TaskDeleteHandle $taskDeleteHandle,
-        private TaskCompleteAllHandle $taskCompleteAllHandle
+        private readonly TaskCreateHandle $taskCreateHandle,
+        private readonly TaskCreateSeveralHandle $taskCreateSeveralHandle,
+        private readonly TaskEditHandle $taskEditHandle,
+        private readonly TaskChangeStatusHandle $taskChangeStatusHandle,
+        private readonly TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
+        private readonly TaskDeleteHandle $taskDeleteHandle,
+        private readonly TaskCompleteAllHandle $taskCompleteAllHandle
     ) {
     }
 
