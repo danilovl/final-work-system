@@ -21,8 +21,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class UserEventDispatcherService
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
-        private AsyncService $asyncService
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly AsyncService $asyncService
     ) {
     }
 

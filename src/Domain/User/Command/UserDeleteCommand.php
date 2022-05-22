@@ -30,8 +30,8 @@ class UserDeleteCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private EntityManagerService $entityManager,
-        private UserValidator $validator
+        private readonly EntityManagerService $entityManager,
+        private readonly UserValidator $validator
     ) {
         parent::__construct();
     }

@@ -32,11 +32,11 @@ use Symfony\Component\HttpFoundation\{
 class UserCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserFacade $userFacade,
-        private FormFactoryInterface $formFactory,
-        private UserFactory $userFactory,
-        private UserEventDispatcherService $userEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserFacade $userFacade,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly UserFactory $userFactory,
+        private readonly UserEventDispatcherService $userEventDispatcherService
     ) {
     }
 

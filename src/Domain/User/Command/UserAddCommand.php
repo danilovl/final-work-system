@@ -34,9 +34,9 @@ class UserAddCommand extends Command
     private ?SymfonyStyle $io = null;
 
     public function __construct(
-        private EntityManagerService $entityManager,
-        private UserPasswordHasherInterface $userPasswordHasher,
-        private UserValidator $validator
+        private readonly EntityManagerService $entityManager,
+        private readonly UserPasswordHasherInterface $userPasswordHasher,
+        private readonly UserValidator $validator
     ) {
         parent::__construct();
     }

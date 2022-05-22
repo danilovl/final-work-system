@@ -24,8 +24,8 @@ use Doctrine\ORM\Query;
 class UserFacade
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserWorkService $userWorkService
+        private readonly UserRepository $userRepository,
+        private readonly UserWorkService $userWorkService
     ) {
     }
 

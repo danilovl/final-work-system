@@ -30,7 +30,7 @@ class UserListCommand extends Command
 {
     protected static $defaultName = 'app:user-list';
 
-    public function __construct(private EntityManagerService $entityManager)
+    public function __construct(private readonly EntityManagerService $entityManager)
     {
         parent::__construct();
     }

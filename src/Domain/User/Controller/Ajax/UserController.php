@@ -26,8 +26,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     public function __construct(
-        private UserCreateHandle $userCreateHandle,
-        private UserEditHandle $userEditHandle
+        private readonly UserCreateHandle $userCreateHandle,
+        private readonly UserEditHandle $userEditHandle
     ) {
     }
 

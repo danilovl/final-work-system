@@ -27,9 +27,9 @@ use Symfony\Component\HttpFoundation\{
 class UserController extends AbstractController
 {
     public function __construct(
-        private UserCreateHandle $userCreateHandle,
-        private UserEditHandle $userEditHandle,
-        private UserListHandle $userListHandle
+        private readonly UserCreateHandle $userCreateHandle,
+        private readonly UserEditHandle $userEditHandle,
+        private readonly UserListHandle $userListHandle
     ) {
     }
 

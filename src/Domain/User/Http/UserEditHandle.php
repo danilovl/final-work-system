@@ -38,15 +38,15 @@ use Symfony\Component\HttpFoundation\{
 class UserEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private UserService $userService,
-        private HashidsServiceInterface $hashidsService,
-        private UserFormFactory $userFormFactory,
-        private UserFactory $userFactory,
-        private UserEventDispatcherService $userEventDispatcherService,
-        private SeoPageService $seoPageService
+        private readonly RequestService $requestService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly UserService $userService,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly UserFormFactory $userFormFactory,
+        private readonly UserFactory $userFactory,
+        private readonly UserEventDispatcherService $userEventDispatcherService,
+        private readonly SeoPageService $seoPageService
     ) {
     }
 

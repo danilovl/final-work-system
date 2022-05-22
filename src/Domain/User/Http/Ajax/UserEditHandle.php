@@ -32,11 +32,11 @@ use Symfony\Component\HttpFoundation\{
 class UserEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private FormFactoryInterface $formFactory,
-        private UserFactory $userFactory,
-        private UserEventDispatcherService $userEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly UserFactory $userFactory,
+        private readonly UserEventDispatcherService $userEventDispatcherService
     ) {
     }
 

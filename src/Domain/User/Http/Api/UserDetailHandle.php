@@ -19,8 +19,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class UserDetailHandle
 {
     public function __construct(
-        private UserService $userService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private readonly UserService $userService,
+        private readonly ObjectToArrayTransformService $objectToArrayTransformService
     ) {
     }
 

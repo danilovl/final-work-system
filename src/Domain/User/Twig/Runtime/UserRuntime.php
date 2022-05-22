@@ -24,8 +24,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
     public function __construct(
-        private UserService $userService,
-        private ParameterServiceInterface $parameterService
+        private readonly UserService $userService,
+        private readonly ParameterServiceInterface $parameterService
     ) {
     }
 

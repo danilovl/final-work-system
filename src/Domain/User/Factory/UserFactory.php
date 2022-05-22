@@ -26,7 +26,7 @@ class UserFactory extends BaseModelFactory
 {
     public function __construct(
         EntityManagerService $entityManager,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private readonly UserPasswordHasherInterface $userPasswordHasher
     ) {
         parent::__construct($entityManager);
     }
