@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class WidgetLiveHandle
 {
-    public function __construct(private WidgetStreamService $widgetStreamService)
+    public function __construct(private readonly WidgetStreamService $widgetStreamService)
     {
     }
 
