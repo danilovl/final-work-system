@@ -32,10 +32,10 @@ use Symfony\Component\HttpFoundation\{
 class WorkDeleteHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private HashidsServiceInterface $hashidsService,
-        private FormDeleteFactory $formDeleteFactory,
-        private EntityManagerService $entityManagerService
+        private readonly RequestService $requestService,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly FormDeleteFactory $formDeleteFactory,
+        private readonly EntityManagerService $entityManagerService
     ) {
     }
 

@@ -28,10 +28,10 @@ use Symfony\Component\HttpFoundation\{
 class WorkListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private WorkFacade $workFacade,
-        private PaginatorService $paginatorService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private readonly UserService $userService,
+        private readonly WorkFacade $workFacade,
+        private readonly PaginatorService $paginatorService,
+        private readonly ObjectToArrayTransformService $objectToArrayTransformService
     ) {
     }
 

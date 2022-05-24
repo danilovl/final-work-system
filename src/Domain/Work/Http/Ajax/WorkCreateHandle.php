@@ -31,11 +31,11 @@ use Symfony\Component\HttpFoundation\{
 class WorkCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private FormFactoryInterface $formFactory,
-        private WorkFactory $workFactory,
-        private WorkEventDispatcherService $workEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly WorkFactory $workFactory,
+        private readonly WorkEventDispatcherService $workEventDispatcherService
     ) {
     }
 

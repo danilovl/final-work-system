@@ -30,12 +30,12 @@ use Symfony\Component\HttpFoundation\{
 class WorkDetailHandle
 {
     public function __construct(
-        private UserService $userService,
-        private WorkDetailTabService $workDetailTabService,
-        private ConversationMessageFacade $conversationMessageFacade,
-        private SeoPageService $seoPageService,
-        private TwigRenderService $twigRenderService,
-        private FormDeleteFactory $deleteFactory
+        private readonly UserService $userService,
+        private readonly WorkDetailTabService $workDetailTabService,
+        private readonly ConversationMessageFacade $conversationMessageFacade,
+        private readonly SeoPageService $seoPageService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly FormDeleteFactory $deleteFactory
     ) {
     }
 

@@ -36,11 +36,11 @@ use Symfony\Component\Routing\RouterInterface;
 class WorkFormFactory
 {
     public function __construct(
-        private RouterInterface $router,
-        private WorkListService $workListService,
-        private WorkDeadlineFacade $deadlineFacade,
-        private HashidsServiceInterface $hashidsService,
-        private FormFactoryInterface $formFactory
+        private readonly RouterInterface $router,
+        private readonly WorkListService $workListService,
+        private readonly WorkDeadlineFacade $deadlineFacade,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly FormFactoryInterface $formFactory
     ) {
     }
 

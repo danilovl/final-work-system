@@ -37,14 +37,14 @@ use Symfony\Component\HttpFoundation\{
 class WorkEditAuthorHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private HashidsServiceInterface $hashidsService,
-        private FormFactoryInterface $formFactory,
-        private WorkEventDispatcherService $workEventDispatcherService,
-        private UserFactory $userFactory,
-        private SeoPageService $seoPageService
+        private readonly RequestService $requestService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly WorkEventDispatcherService $workEventDispatcherService,
+        private readonly UserFactory $userFactory,
+        private readonly SeoPageService $seoPageService
     ) {
     }
 

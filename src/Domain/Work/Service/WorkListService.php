@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\{
 
 class WorkListService
 {
-    public function __construct(private UserWorkService $userWorkService)
+    public function __construct(private readonly UserWorkService $userWorkService)
     {
     }
 

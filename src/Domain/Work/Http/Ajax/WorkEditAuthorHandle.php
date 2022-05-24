@@ -29,10 +29,10 @@ use Symfony\Component\HttpFoundation\{
 class WorkEditAuthorHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private FormFactoryInterface $formFactory,
-        private WorkEventDispatcherService $workEventDispatcherService,
-        private UserFactory $userFactory
+        private readonly RequestService $requestService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly WorkEventDispatcherService $workEventDispatcherService,
+        private readonly UserFactory $userFactory
     ) {
     }
 

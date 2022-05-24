@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\{
 class WorkController
 {
     public function __construct(
-        private WorkListHandle $workListHandle,
-        private WorkDetailHandle $workDetailHandle
+        private readonly WorkListHandle $workListHandle,
+        private readonly WorkDetailHandle $workDetailHandle
     ) {
     }
 

@@ -32,12 +32,12 @@ use Symfony\Component\HttpFoundation\{
 class WorkController extends AbstractController
 {
     public function __construct(
-        private WorkCreateHandle $workCreateHandle,
-        private WorkDetailHandle $workDetailHandle,
-        private WorkListHandle $workListHandle,
-        private WorkEditHandle $workEditHandle,
-        private WorkEditAuthorHandle $workEditAuthorHandle,
-        private WorkDeleteHandle $workDeleteHandle
+        private readonly WorkCreateHandle $workCreateHandle,
+        private readonly WorkDetailHandle $workDetailHandle,
+        private readonly WorkListHandle $workListHandle,
+        private readonly WorkEditHandle $workEditHandle,
+        private readonly WorkEditAuthorHandle $workEditAuthorHandle,
+        private readonly WorkDeleteHandle $workDeleteHandle
     ) {
     }
 

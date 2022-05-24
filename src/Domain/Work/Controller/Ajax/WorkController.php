@@ -29,10 +29,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class WorkController extends AbstractController
 {
     public function __construct(
-        private WorkCreateHandle $workCreateHandle,
-        private WorkEditHandle $workEditHandle,
-        private WorkEditAuthorHandle $workEditAuthorHandle,
-        private WorkDeleteHandle $workDeleteHandle
+        private readonly WorkCreateHandle $workCreateHandle,
+        private readonly WorkEditHandle $workEditHandle,
+        private readonly WorkEditAuthorHandle $workEditAuthorHandle,
+        private readonly WorkDeleteHandle $workDeleteHandle
     ) {
     }
 

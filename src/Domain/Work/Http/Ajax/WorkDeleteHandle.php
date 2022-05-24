@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class WorkDeleteHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService
     ) {
     }
 

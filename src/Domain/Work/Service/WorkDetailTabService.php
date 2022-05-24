@@ -39,9 +39,9 @@ class WorkDetailTabService
     private ?string $activeTab = null;
 
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private PaginatorService $paginator,
-        private ParameterServiceInterface $parameterService
+        private readonly EntityManagerService $entityManagerService,
+        private readonly PaginatorService $paginator,
+        private readonly ParameterServiceInterface $parameterService
     ) {
     }
 

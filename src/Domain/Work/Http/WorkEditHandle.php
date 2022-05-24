@@ -38,16 +38,16 @@ use Symfony\Component\HttpFoundation\{
 class WorkEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private ParameterServiceInterface $parameterService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private HashidsServiceInterface $hashidsService,
-        private WorkFormFactory $workFormFactory,
-        private WorkDeadlineFacade $workDeadlineFacade,
-        private WorkFactory $workFactory,
-        private WorkEventDispatcherService $workEventDispatcherService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly WorkFormFactory $workFormFactory,
+        private readonly WorkDeadlineFacade $workDeadlineFacade,
+        private readonly WorkFactory $workFactory,
+        private readonly WorkEventDispatcherService $workEventDispatcherService
     ) {
     }
 

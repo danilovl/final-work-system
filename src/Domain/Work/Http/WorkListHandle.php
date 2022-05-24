@@ -32,12 +32,12 @@ use Symfony\Component\HttpFoundation\{
 class WorkListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private PaginatorService $paginatorService,
-        private WorkFormFactory $workFormFactory,
-        private WorkSearch $workSearch,
-        private FormDeleteFactory $deleteFactory
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly PaginatorService $paginatorService,
+        private readonly WorkFormFactory $workFormFactory,
+        private readonly WorkSearch $workSearch,
+        private readonly FormDeleteFactory $deleteFactory
     ) {
     }
 
