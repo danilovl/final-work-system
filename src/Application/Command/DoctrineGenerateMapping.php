@@ -21,7 +21,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class DoctrineGenerateMapping extends Command
 {
-    protected static $defaultName = 'app:doctrine-generate-mapping';
+    public const COMMAND_NAME = 'app:doctrine-generate-mapping';
 
     private string $pathToModel;
     private string $mappingFile;
@@ -36,7 +36,8 @@ class DoctrineGenerateMapping extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Generate doctrine entity mapping for doctrine config.');
+        $this->setName(self::COMMAND_NAME)
+            ->setDescription('Generate doctrine entity mapping for doctrine config.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -31,7 +31,7 @@ use Symfony\Component\Mime\{
 
 class EmailNotificationQueueCommand extends Command
 {
-    protected static $defaultName = 'app:email-notification-queue-send';
+    public const COMMAND_NAME = 'app:email-notification-queue-send';
 
     private SymfonyStyle $io;
 
@@ -46,7 +46,8 @@ class EmailNotificationQueueCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Send notification emails');
+        $this->setName(self::COMMAND_NAME)
+            ->setDescription('Send notification emails');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void

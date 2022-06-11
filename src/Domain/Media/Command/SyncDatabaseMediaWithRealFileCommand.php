@@ -29,7 +29,7 @@ use Symfony\Component\Finder\Finder;
 
 class SyncDatabaseMediaWithRealFileCommand extends Command
 {
-    protected static $defaultName = 'app:sync-database-media-with-real-file';
+    public const COMMAND_NAME = 'app:sync-database-media-with-real-file';
     private const LIMIT = 500;
 
     private SymfonyStyle $io;
@@ -45,7 +45,8 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Sync database media with real file');
+        $this->setName(self::COMMAND_NAME)
+            ->setDescription('Sync database media with real file');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void

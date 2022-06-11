@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportSqlCommand extends Command
 {
-    protected static $defaultName = 'app:import-sql';
+    public const COMMAND_NAME = 'app:import-sql';
 
     public function __construct(private readonly EntityManagerService $entityManagerService)
     {
@@ -32,7 +32,8 @@ class ImportSqlCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Import SQL file(s) directly to Database.')
+        $this->setName(self::COMMAND_NAME)
+            ->setDescription('Import SQL file(s) directly to Database.')
             ->addArgument('file', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'File path(s) of SQL to be executed.');
     }
 

@@ -28,7 +28,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class UserListCommand extends Command
 {
-    protected static $defaultName = 'app:user-list';
+    public const COMMAND_NAME = 'app:user-list';
 
     public function __construct(private readonly EntityManagerService $entityManager)
     {
@@ -37,7 +37,7 @@ class UserListCommand extends Command
 
     protected function configure(): void
     {
-        $this
+        $this->setName(self::COMMAND_NAME)
             ->setDescription('Lists all the existing users')
             ->setHelp(<<<'HELP'
 The <info>%command.name%</info> command lists all the users registered in the application:

@@ -22,7 +22,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class TaskRemindDeadlineCommand extends Command
 {
-    protected static $defaultName = 'app:task-remind-deadline';
+    public const COMMAND_NAME = 'app:task-remind-deadline';
     private const LIMIT = 500;
 
     private SymfonyStyle $io;
@@ -37,7 +37,8 @@ class TaskRemindDeadlineCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Create reminder notification emails for tasks');
+        $this->setName(self::COMMAND_NAME)
+            ->setDescription('Create reminder notification emails for tasks');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void

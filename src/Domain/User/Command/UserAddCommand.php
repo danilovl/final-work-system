@@ -29,7 +29,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class UserAddCommand extends Command
 {
-    protected static $defaultName = 'app:user-add';
+    public const COMMAND_NAME = 'app:user-add';
 
     private ?SymfonyStyle $io = null;
 
@@ -43,7 +43,7 @@ class UserAddCommand extends Command
 
     protected function configure(): void
     {
-        $this
+        $this->setName(self::COMMAND_NAME)
             ->setDescription('Creates users and stores them in the database')
             ->addArgument('username', InputArgument::OPTIONAL, 'The username of the new user')
             ->addArgument('password', InputArgument::OPTIONAL, 'The plain password of the new user')

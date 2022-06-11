@@ -4,7 +4,7 @@
 FinalWork Web Application
 ========================
 
-Thesis management system based on Symfony 6.0
+Thesis management system based on Symfony 6.1
 
 ![Alt text](/git/readme/demo.gif?raw=true "Project example")
 
