@@ -14,7 +14,7 @@ namespace App\Application\Constant;
 
 enum TabTypeConstant
 {
-    public const TAB_TASK = 'task';
+    final public const TAB_TASK = 'task';
     public const TAB_VERSION = 'version';
     public const TAB_EVENT = 'event';
     public const TAB_MESSAGE = 'message';

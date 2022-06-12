@@ -14,9 +14,9 @@ namespace App\Application\Constant;
 
 enum WorkStatusConstant
 {
-    public const ACTIVE = 1;
-    public const ARCHIVE = 2;
-    public const AUXILIARY = 3;
-    public const PRELIMINARY = 4;
-    public const UNCLASSIFIED = 5;
+    final public const ACTIVE = 1;
+    final public const ARCHIVE = 2;
+    final public const AUXILIARY = 3;
+    final public const PRELIMINARY = 4;
+    final public const UNCLASSIFIED = 5;
 }

@@ -14,8 +14,8 @@ namespace App\Application\Constant;
 
 enum MediaTypeConstant
 {
-    public const WORK_VERSION = 1;
-    public const INFORMATION_MATERIAL = 2;
-    public const USER_PROFILE_IMAGE = 3;
-    public const ARTICLE = 4;
+    final public const WORK_VERSION = 1;
+    final public const INFORMATION_MATERIAL = 2;
+    final public const USER_PROFILE_IMAGE = 3;
+    final public const ARTICLE = 4;
 }

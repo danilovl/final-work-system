@@ -14,6 +14,6 @@ namespace App\Application\Constant;
 
 enum EventCalendarActionTypeConstant
 {
-    public const MANAGE = 'manage';
-    public const RESERVATION = 'reservation';
+    final public const MANAGE = 'manage';
+    final public const RESERVATION = 'reservation';
 }

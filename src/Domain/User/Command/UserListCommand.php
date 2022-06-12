@@ -28,7 +28,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class UserListCommand extends Command
 {
-    public const COMMAND_NAME = 'app:user-list';
+    final public const COMMAND_NAME = 'app:user-list';
 
     public function __construct(private readonly EntityManagerService $entityManager)
     {

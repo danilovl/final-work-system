@@ -14,5 +14,5 @@ namespace App\Application\Constant;
 
 enum FormConstant
 {
-    public const PLACEHOLDER = '------------------------';
+    final public const PLACEHOLDER = '------------------------';
 }

@@ -14,7 +14,7 @@ namespace App\Application\Constant;
 
 enum VoterSupportConstant
 {
-    public const CREATE = 'create';
+    final public const CREATE = 'create';
     public const VIEW = 'view';
     public const EDIT = 'edit';
     public const CLONE = 'clone';

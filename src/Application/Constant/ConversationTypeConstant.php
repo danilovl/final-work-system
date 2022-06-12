@@ -14,6 +14,6 @@ namespace App\Application\Constant;
 
 enum ConversationTypeConstant
 {
-    public const WORK = 1;
-    public const GROUP = 2;
+    final public const WORK = 1;
+    final public const GROUP = 2;
 }

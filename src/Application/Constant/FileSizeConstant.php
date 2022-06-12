@@ -14,9 +14,9 @@ namespace App\Application\Constant;
 
 enum FileSizeConstant
 {
-    public const B = 'B';
-    public const KB = 'KB';
-    public const MB = 'MB';
+    final public const B = 'B';
+    final public const KB = 'KB';
+    final public const MB = 'MB';
     public const GB = 'GB';
     public const TB = 'TB';
     public const PB = 'PB';

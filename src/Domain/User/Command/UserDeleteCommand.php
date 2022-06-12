@@ -25,7 +25,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class UserDeleteCommand extends Command
 {
-    public const COMMAND_NAME = 'app:user-delete';
+    final public const COMMAND_NAME = 'app:user-delete';
 
     private SymfonyStyle $io;
 

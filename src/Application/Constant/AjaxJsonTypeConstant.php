@@ -14,10 +14,10 @@ namespace App\Application\Constant;
 
 enum AjaxJsonTypeConstant
 {
-    public const CREATE_SUCCESS = 'create.success';
-    public const CREATE_FAILURE = 'create.failure';
-    public const SAVE_SUCCESS = 'save.success';
-    public const SAVE_FAILURE = 'save.failure';
-    public const DELETE_SUCCESS = 'delete.success';
-    public const DELETE_FAILURE = 'delete.failure';
+    final public const CREATE_SUCCESS = 'create.success';
+    final public const CREATE_FAILURE = 'create.failure';
+    final public const SAVE_SUCCESS = 'save.success';
+    final public const SAVE_FAILURE = 'save.failure';
+    final public const DELETE_SUCCESS = 'delete.success';
+    final public const DELETE_FAILURE = 'delete.failure';
 }

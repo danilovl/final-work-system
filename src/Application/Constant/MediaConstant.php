@@ -14,6 +14,6 @@ namespace App\Application\Constant;
 
 enum MediaConstant
 {
-    public const WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
-    public const SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../public';
+    final public const WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
+    final public const SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../public';
 }

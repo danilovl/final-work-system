@@ -14,6 +14,6 @@ namespace App\Application\Constant;
 
 enum SeoPageConstant
 {
-    public const VERTICAL_SEPARATOR = ' | ';
+    final public const VERTICAL_SEPARATOR = ' | ';
     public const DASH_SEPARATOR = ' - ';
 }

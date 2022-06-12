@@ -14,10 +14,10 @@ namespace App\Application\Constant;
 
 enum CompareConstant
 {
-    public const MORE = '>';
-    public const LESS = '<';
-    public const EQUAL = '===';
-    public const NOT_EQUAL = '!==';
+    final public const MORE = '>';
+    final public const LESS = '<';
+    final public const EQUAL = '===';
+    final public const NOT_EQUAL = '!==';
     public const MORE_EQUAL = '>=';
     public const LESS_EQUAL = '<=';
 }

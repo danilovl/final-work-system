@@ -14,7 +14,7 @@ namespace App\Domain\SystemEvent\Constant;
 
 enum SystemEventStatusConstant
 {
-    public const ALL = 'all';
-    public const READ = 'read';
-    public const UNREAD = 'unread';
+    final public const ALL = 'all';
+    final public const READ = 'read';
+    final public const UNREAD = 'unread';
 }

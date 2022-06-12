@@ -14,8 +14,8 @@ namespace App\Application\Constant;
 
 enum TranslationConstant
 {
-    public const EMPTY = 'empty';
-    public const DEFAULT_START_KEY = 'app';
-    public const FLASH_START_KEY = 'flash';
-    public const FLASH_DOMAIN = 'flashes';
+    final public const EMPTY = 'empty';
+    final public const DEFAULT_START_KEY = 'app';
+    final public const FLASH_START_KEY = 'flash';
+    final public const FLASH_DOMAIN = 'flashes';
 }

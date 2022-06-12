@@ -31,7 +31,7 @@ use Symfony\Component\Mime\{
 
 class EmailNotificationQueueCommand extends Command
 {
-    public const COMMAND_NAME = 'app:email-notification-queue-send';
+    final public const COMMAND_NAME = 'app:email-notification-queue-send';
 
     private SymfonyStyle $io;
 

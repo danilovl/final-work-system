@@ -14,7 +14,7 @@ namespace App\Application\Constant;
 
 enum GenderConstant
 {
-    public const GENDER_FEMALE = 'f';
-    public const GENDER_MALE = 'm';
-    public const GENDER_UNKNOWN = 'u';
+    final public const GENDER_FEMALE = 'f';
+    final public const GENDER_MALE = 'm';
+    final public const GENDER_UNKNOWN = 'u';
 }

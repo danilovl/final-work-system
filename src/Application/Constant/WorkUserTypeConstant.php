@@ -14,8 +14,8 @@ namespace App\Application\Constant;
 
 enum WorkUserTypeConstant
 {
-    public const SUPERVISOR = 'supervisor';
-    public const AUTHOR = 'author';
-    public const OPPONENT = 'opponent';
-    public const CONSULTANT = 'consultant';
+    final public const SUPERVISOR = 'supervisor';
+    final public const AUTHOR = 'author';
+    final public const OPPONENT = 'opponent';
+    final public const CONSULTANT = 'consultant';
 }

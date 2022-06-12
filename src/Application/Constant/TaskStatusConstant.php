@@ -14,7 +14,7 @@ namespace App\Application\Constant;
 
 enum TaskStatusConstant
 {
-    public const ACTIVE = 'active';
-    public const COMPLETE = 'complete';
-    public const NOTIFY = 'notify';
+    final public const ACTIVE = 'active';
+    final public const COMPLETE = 'complete';
+    final public const NOTIFY = 'notify';
 }

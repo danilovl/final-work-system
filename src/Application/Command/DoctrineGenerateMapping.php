@@ -21,7 +21,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class DoctrineGenerateMapping extends Command
 {
-    public const COMMAND_NAME = 'app:doctrine-generate-mapping';
+    final public const COMMAND_NAME = 'app:doctrine-generate-mapping';
 
     private string $pathToModel;
     private string $mappingFile;

@@ -14,5 +14,5 @@ namespace App\Application\Constant;
 
 enum ApiDomainConstant
 {
-    public const DEFAULT = 'default';
+    final public const DEFAULT = 'default';
 }

@@ -14,6 +14,6 @@ namespace App\Application\Constant;
 
 enum EventTypeConstant
 {
-    public const CONSULTATION = 1;
-    public const PERSONAL = 2;
+    final public const CONSULTATION = 1;
+    final public const PERSONAL = 2;
 }

@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportSqlCommand extends Command
 {
-    public const COMMAND_NAME = 'app:import-sql';
+    final public const COMMAND_NAME = 'app:import-sql';
 
     public function __construct(private readonly EntityManagerService $entityManagerService)
     {
