@@ -12,8 +12,8 @@
 
 namespace App\Domain\MediaCategory;
 
+use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\MediaCategory\Entity\MediaCategory;
-use App\Domain\Traits\SimpleInformationTrait;
 use App\Domain\User\Entity\User;
 
 class MediaCategoryModel

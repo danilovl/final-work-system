@@ -12,11 +12,10 @@
 
 namespace App\Domain\Document;
 
+use App\Application\Traits\Model\{
+    SimpleInformationTrait};
+use App\Application\Traits\Model\ActiveTrait;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Traits\{
-    ActiveTrait,
-    SimpleInformationTrait
-};
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

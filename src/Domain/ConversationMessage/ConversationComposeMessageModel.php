@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage;
 
-use App\Domain\Traits\ContentAwareTrait;
+use App\Application\Traits\Model\ContentAwareTrait;
 use Traversable;
 
 class ConversationComposeMessageModel

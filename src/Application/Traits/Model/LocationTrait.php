@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Traits;
+namespace App\Application\Traits\Model;
 
 trait LocationTrait
 {

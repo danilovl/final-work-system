@@ -12,16 +12,14 @@
 
 namespace App\Domain\ConversationMessage;
 
+use App\Application\Traits\Model\{
+    OwnerAwareTrait};
+use App\Application\Traits\Model\ContentAwareTrait;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\Traits\ContentAwareTrait;
-use App\Domain\Traits\{
-    OwnerAwareTrait
-};
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection
-};
+    Collection};
 
 class ConversationMessageModel
 {

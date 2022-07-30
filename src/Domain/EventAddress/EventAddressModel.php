@@ -12,10 +12,9 @@
 
 namespace App\Domain\EventAddress;
 
-use App\Domain\Traits\{
-    LocationTrait,
-    SimpleInformationTrait
-};
+use App\Application\Traits\Model\{
+    SimpleInformationTrait};
+use App\Application\Traits\Model\LocationTrait;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\User\Entity\User;
 

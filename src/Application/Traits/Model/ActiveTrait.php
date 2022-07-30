@@ -10,10 +10,9 @@
  *
  */
 
-namespace App\Domain\Traits;
+namespace App\Application\Traits\Model;
 
-trait SimpleInformationTrait
+trait ActiveTrait
 {
-    public ?string $name = null;
-    public ?string $description = null;
+    public bool $active = false;
 }

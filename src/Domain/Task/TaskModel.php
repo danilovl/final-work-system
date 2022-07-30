@@ -12,14 +12,13 @@
 
 namespace App\Domain\Task;
 
+use App\Application\Traits\Model\{
+    SimpleInformationTrait};
+use App\Application\Traits\Model\ActiveTrait;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Traits\ActiveTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use DateTime;
-use App\Domain\Traits\{
-    SimpleInformationTrait
-};
 use Doctrine\Common\Collections\ArrayCollection;
 
 class TaskModel

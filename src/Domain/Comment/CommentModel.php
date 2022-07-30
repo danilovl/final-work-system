@@ -12,9 +12,9 @@
 
 namespace App\Domain\Comment;
 
+use App\Application\Traits\Model\ContentAwareTrait;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Traits\ContentAwareTrait;
 use App\Domain\User\Entity\User;
 
 class CommentModel

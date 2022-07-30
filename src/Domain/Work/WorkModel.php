@@ -12,16 +12,15 @@
 
 namespace App\Domain\Work;
 
+use App\Application\Traits\Model\TitleAwareTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
-use Doctrine\Common\Collections\{
-    Collection,
-    ArrayCollection
-};
 use DateTime;
-use App\Domain\Traits\TitleAwareTrait;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection};
 
 class WorkModel
 {

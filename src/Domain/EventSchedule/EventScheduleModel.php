@@ -12,13 +12,12 @@
 
 namespace App\Domain\EventSchedule;
 
+use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\{
-    Collection,
-    ArrayCollection
-};
-use App\Domain\Traits\SimpleInformationTrait;
+    ArrayCollection,
+    Collection};
 
 class EventScheduleModel
 {

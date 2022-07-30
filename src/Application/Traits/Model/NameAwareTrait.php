@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Domain\Traits;
+namespace App\Application\Traits\Model;
 
-trait ContentAwareTrait
+trait NameAwareTrait
 {
-    public ?string $content = null;
+    public ?string $name = null;
 }

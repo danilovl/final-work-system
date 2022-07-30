@@ -12,8 +12,8 @@
 
 namespace App\Domain\Version;
 
+use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Traits\SimpleInformationTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class VersionModel

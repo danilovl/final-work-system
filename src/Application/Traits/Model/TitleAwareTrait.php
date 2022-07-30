@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Domain\Traits;
+namespace App\Application\Traits\Model;
 
-trait ActiveTrait
+trait TitleAwareTrait
 {
-    public bool $active = false;
+    public ?string $title = null;
 }

@@ -12,16 +12,15 @@
 
 namespace App\Domain\Media;
 
+use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\{
-    Collection,
-    ArrayCollection
-};
-use App\Domain\Traits\SimpleInformationTrait;
+    ArrayCollection,
+    Collection};
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel
