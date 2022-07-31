@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventScheduleTemplate\Factory;
 
-use App\Domain\BaseModelFactory;
+use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\EventScheduleTemplate\EventScheduleTemplateModel;
 

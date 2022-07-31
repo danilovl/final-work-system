@@ -12,7 +12,7 @@
 
 namespace App\Domain\ConversationMessage\Factory;
 
-use App\Domain\BaseModelFactory;
+use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\ConversationMessage\ConversationMessageModel;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 

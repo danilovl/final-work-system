@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventAddress\Factory;
 
-use App\Domain\BaseModelFactory;
+use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\EventAddressModel;
 

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain;
+namespace App\Application\Factory\Model;
 
 use App\Application\Service\EntityManagerService;
 

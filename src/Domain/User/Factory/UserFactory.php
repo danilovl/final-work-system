@@ -12,12 +12,11 @@
 
 namespace App\Domain\User\Factory;
 
+use App\Application\Factory\Model\BaseModelFactory;
 use App\Application\Helper\{
-    FunctionHelper
-};
+    FunctionHelper};
 use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
-use App\Domain\BaseModelFactory;
 use App\Domain\User\Entity\User;
 use App\Domain\User\UserModel;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

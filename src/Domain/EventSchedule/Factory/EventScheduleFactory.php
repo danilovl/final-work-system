@@ -13,8 +13,8 @@
 namespace App\Domain\EventSchedule\Factory;
 
 use App\Application\Constant\DateFormatConstant;
+use App\Application\Factory\Model\BaseModelFactory;
 use App\Application\Helper\DateHelper;
-use App\Domain\BaseModelFactory;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\EventScheduleModel;

@@ -12,7 +12,7 @@
 
 namespace App\Domain\MediaCategory\Factory;
 
-use App\Domain\BaseModelFactory;
+use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\MediaCategoryModel;
 
