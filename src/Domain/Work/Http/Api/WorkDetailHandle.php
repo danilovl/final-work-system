@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class WorkDetailHandle
 {
-    public function __construct(private readonly ObjectToArrayTransformService $objectToArrayTransformService)
-    {
-    }
+    public function __construct(private readonly ObjectToArrayTransformService $objectToArrayTransformService) {}
 
     public function handle(Work $work): JsonResponse
     {

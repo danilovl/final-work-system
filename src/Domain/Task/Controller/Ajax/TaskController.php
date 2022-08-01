@@ -41,8 +41,7 @@ class TaskController extends AbstractController
         private readonly TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
         private readonly TaskDeleteHandle $taskDeleteHandle,
         private readonly TaskCompleteAllHandle $taskCompleteAllHandle
-    ) {
-    }
+    ) {}
 
     public function create(Request $request, Work $work): JsonResponse
     {

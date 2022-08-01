@@ -28,8 +28,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
     public function __construct(
         private readonly UserFacade $userFacade,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function upgradePassword(PasswordAuthenticatedUserInterface|User $user, string $newHashedPassword): void
     {

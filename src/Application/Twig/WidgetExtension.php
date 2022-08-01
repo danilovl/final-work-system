@@ -19,9 +19,7 @@ use Twig\TwigFunction;
 
 class WidgetExtension extends AbstractExtension
 {
-    public function __construct(private readonly WidgetManagerService $widgetManager)
-    {
-    }
+    public function __construct(private readonly WidgetManagerService $widgetManager) {}
 
     public function getFunctions(): array
     {

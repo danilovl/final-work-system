@@ -31,15 +31,14 @@ use Symfony\Component\HttpFoundation\{
 class EventAddressCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private TranslatorService $translatorService,
-        private TwigRenderService $twigRenderService,
-        private EventAddressFactory $eventAddressFactory,
-        private EventAddressFormFactory $eventAddressFormFactory,
-        private HashidsServiceInterface $hashidsService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly TranslatorService $translatorService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly EventAddressFactory $eventAddressFactory,
+        private readonly EventAddressFormFactory $eventAddressFormFactory,
+        private readonly HashidsServiceInterface $hashidsService
+    ) {}
 
     public function handle(Request $request): Response
     {

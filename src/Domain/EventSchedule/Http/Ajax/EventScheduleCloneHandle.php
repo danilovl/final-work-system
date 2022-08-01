@@ -31,12 +31,11 @@ use Symfony\Component\HttpFoundation\{
 class EventScheduleCloneHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EventScheduleFactory $eventScheduleFactory,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EventScheduleFactory $eventScheduleFactory,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(Request $request, EventSchedule $eventSchedule): JsonResponse
     {

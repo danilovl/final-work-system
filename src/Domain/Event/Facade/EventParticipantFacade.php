@@ -29,8 +29,7 @@ class EventParticipantFacade
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
         private readonly UserWorkService $userWorkService
-    ) {
-    }
+    ) {}
 
     public function getEventParticipantsByUserEvent(
         User $user,

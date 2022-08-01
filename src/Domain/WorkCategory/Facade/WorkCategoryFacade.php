@@ -18,9 +18,7 @@ use App\Domain\User\Entity\User;
 
 class WorkCategoryFacade
 {
-    public function __construct(private WorkCategoryRepository $workCategoryRepository)
-    {
-    }
+    public function __construct(private readonly WorkCategoryRepository $workCategoryRepository) {}
 
     public function queryWorkCategoriesByOwner(User $user): Query
     {

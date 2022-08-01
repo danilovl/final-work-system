@@ -31,14 +31,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DocumentController extends AbstractController
 {
     public function __construct(
-        private DocumentCreateHandle $documentCreateHandle,
-        private DocumentDetailContentHandle $documentDetailContentHandle,
-        private DocumentEditHandle $documentEditHandle,
-        private DocumentListHandle $documentListHandle,
-        private DocumentListOwnerHandle $documentListOwnerHandle,
-        private DocumentDownloadHandle $documentDownloadHandle
-    ) {
-    }
+        private readonly DocumentCreateHandle $documentCreateHandle,
+        private readonly DocumentDetailContentHandle $documentDetailContentHandle,
+        private readonly DocumentEditHandle $documentEditHandle,
+        private readonly DocumentListHandle $documentListHandle,
+        private readonly DocumentListOwnerHandle $documentListOwnerHandle,
+        private readonly DocumentDownloadHandle $documentDownloadHandle
+    ) {}
 
     public function create(Request $request): Response
     {

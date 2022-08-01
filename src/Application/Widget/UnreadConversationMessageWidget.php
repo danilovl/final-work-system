@@ -24,8 +24,7 @@ class UnreadConversationMessageWidget extends BaseWidget
         private readonly Environment $environment,
         private readonly UserService $userService,
         private readonly ConversationMessageFacade $conversationMessageFacade
-    ) {
-    }
+    ) {}
 
     public function getRenderParameters(): array
     {

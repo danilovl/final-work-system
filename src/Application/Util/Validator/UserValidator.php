@@ -8,9 +8,7 @@ use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 class UserValidator
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
-    }
+    public function __construct(private readonly EntityManagerInterface $entityManager) {}
 
     public function validateUsername(?string $username): string
     {

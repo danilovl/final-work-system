@@ -37,8 +37,7 @@ class TaskCreateHandle
         private readonly TaskFactory $taskFactory,
         private readonly FormFactoryInterface $formFactory,
         private readonly TaskEventDispatcherService $taskEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): JsonResponse
     {

@@ -111,9 +111,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
         return 'api_user';
     }
 
-    public function eraseCredentials(): void
-    {
-    }
+    public function eraseCredentials(): void {}
 
     public function __toString(): string
     {

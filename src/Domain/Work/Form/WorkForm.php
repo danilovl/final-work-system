@@ -44,8 +44,7 @@ class WorkForm extends AbstractType
         private readonly WorkStatusDataGrid $workStatusDataGridHelper,
         private readonly WorkCategoryDataGrid $workCategoryDataGridHelper,
         private readonly UserDataGrid $userDataGridHelper
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

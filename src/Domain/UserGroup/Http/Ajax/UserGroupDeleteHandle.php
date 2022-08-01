@@ -23,10 +23,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class UserGroupDeleteHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService
+    ) {}
 
     public function handle(Group $group): JsonResponse
     {

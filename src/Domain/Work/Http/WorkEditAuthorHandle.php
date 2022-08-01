@@ -45,8 +45,7 @@ class WorkEditAuthorHandle
         private readonly WorkEventDispatcherService $workEventDispatcherService,
         private readonly UserFactory $userFactory,
         private readonly SeoPageService $seoPageService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): Response
     {

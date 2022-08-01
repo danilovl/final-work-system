@@ -27,8 +27,7 @@ class HomepageCache
         private readonly ParameterServiceInterface $parameterService,
         private readonly PaginatorService $paginatorService,
         private readonly SystemEventRecipientFacade $systemEventRecipientFacade
-    ) {
-    }
+    ) {}
 
     public function createHomepagePaginator(User $user, int $page = 1): array
     {

@@ -47,8 +47,7 @@ class TaskCreateHandle
         private readonly TaskDeadlineFacade $taskDeadlineFacade,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly TaskEventDispatcherService $taskEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): Response
     {

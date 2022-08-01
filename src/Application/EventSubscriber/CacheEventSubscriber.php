@@ -22,8 +22,7 @@ class CacheEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly CacheInterface $cache,
         private readonly HomepageCache $homepageCache
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

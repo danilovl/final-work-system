@@ -17,9 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController
 {
-    public function __construct(private readonly UserDetailHandle $userDetailHandle)
-    {
-    }
+    public function __construct(private readonly UserDetailHandle $userDetailHandle) {}
 
     public function detail(): JsonResponse
     {

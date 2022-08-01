@@ -29,13 +29,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfileController extends AbstractController
 {
     public function __construct(
-        private ProfileShowHandle $profileShowHandle,
-        private ProfileEditHandle $profileEditHandle,
-        private ProfileChangeImageHandle $profileChangeImageHandle,
-        private ProfileDeleteImageHandle $profileDeleteImageHandle,
-        private ProfileChangePasswordHandle $profileChangePasswordHandle
-    ) {
-    }
+        private readonly ProfileShowHandle $profileShowHandle,
+        private readonly ProfileEditHandle $profileEditHandle,
+        private readonly ProfileChangeImageHandle $profileChangeImageHandle,
+        private readonly ProfileDeleteImageHandle $profileDeleteImageHandle,
+        private readonly ProfileChangePasswordHandle $profileChangePasswordHandle
+    ) {}
 
     public function show(): Response
     {

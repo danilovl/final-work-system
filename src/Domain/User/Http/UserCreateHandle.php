@@ -41,8 +41,7 @@ class UserCreateHandle
         private readonly UserFormFactory $userFormFactory,
         private readonly UserFactory $userFactory,
         private readonly UserEventDispatcherService $userEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): Response
     {

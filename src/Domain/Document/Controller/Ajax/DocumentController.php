@@ -30,12 +30,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DocumentController extends AbstractController
 {
     public function __construct(
-        private DocumentCreateHandle $documentCreateHandle,
-        private DocumentEditHandle $documentEditHandle,
-        private DocumentChangeActiveHandle $documentChangeActiveHandle,
-        private DocumentDeleteHandle $documentDeleteHandle,
-    ) {
-    }
+        private readonly DocumentCreateHandle $documentCreateHandle,
+        private readonly DocumentEditHandle $documentEditHandle,
+        private readonly DocumentChangeActiveHandle $documentChangeActiveHandle,
+        private readonly DocumentDeleteHandle $documentDeleteHandle,
+    ) {}
 
     public function create(Request $request): JsonResponse
     {

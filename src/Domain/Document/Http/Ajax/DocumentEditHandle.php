@@ -33,12 +33,11 @@ use Symfony\Component\HttpFoundation\{
 class DocumentEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private DocumentFormFactory $documentFormFactory,
-        private MediaFactory $mediaFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly DocumentFormFactory $documentFormFactory,
+        private readonly MediaFactory $mediaFactory
+    ) {}
 
     public function handle(Request $request, Media $media): JsonResponse
     {

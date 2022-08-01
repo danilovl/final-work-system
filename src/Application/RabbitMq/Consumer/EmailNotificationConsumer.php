@@ -35,8 +35,7 @@ class EmailNotificationConsumer implements ConsumerInterface
         private readonly MailerService $mailer,
         private readonly EmailNotificationQueueFactory $emailNotificationQueueFactory,
         private readonly BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
-    ) {
-    }
+    ) {}
 
     public function execute(AMQPMessage $msg): int
     {

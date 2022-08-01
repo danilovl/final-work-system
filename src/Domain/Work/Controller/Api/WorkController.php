@@ -25,8 +25,7 @@ class WorkController
     public function __construct(
         private readonly WorkListHandle $workListHandle,
         private readonly WorkDetailHandle $workDetailHandle
-    ) {
-    }
+    ) {}
 
     public function list(Request $request, string $type): JsonResponse
     {

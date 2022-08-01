@@ -36,8 +36,7 @@ class EventGetEventHandle
         private readonly UserService $userService,
         private readonly EventFacade $eventFacade,
         private readonly EventCalendarFacade $eventCalendarFacade
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Event $event): JsonResponse
     {

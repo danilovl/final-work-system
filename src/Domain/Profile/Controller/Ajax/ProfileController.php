@@ -21,9 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {
-    public function __construct(private ProfileCreateImageWebCameraHandle $profileCreateImageWebCameraHandle)
-    {
-    }
+    public function __construct(private readonly ProfileCreateImageWebCameraHandle $profileCreateImageWebCameraHandle) {}
 
     public function createImageWebCamera(Request $request): JsonResponse
     {

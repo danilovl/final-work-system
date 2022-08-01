@@ -40,15 +40,14 @@ use Symfony\Component\HttpFoundation\{
 class EventCalendarEventReservationHandle
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private RequestService $requestService,
-        private EventCalendarFacade $eventCalendarFacade,
-        private UserService $userService,
-        private UserWorkService $userWorkService,
-        private FormFactoryInterface $formFactory,
-        private EventEventDispatcherService $eventEventDispatcherService
-    ) {
-    }
+        private readonly EntityManagerService $entityManagerService,
+        private readonly RequestService $requestService,
+        private readonly EventCalendarFacade $eventCalendarFacade,
+        private readonly UserService $userService,
+        private readonly UserWorkService $userWorkService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EventEventDispatcherService $eventEventDispatcherService
+    ) {}
 
     public function handle(Request $request, Event $event): JsonResponse
     {

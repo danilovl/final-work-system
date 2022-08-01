@@ -18,9 +18,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class LocaleRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly string $locales)
-    {
-    }
+    public function __construct(private readonly string $locales) {}
 
     public function getLocales(): array
     {

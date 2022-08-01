@@ -25,8 +25,7 @@ class WorkDeleteHandle
     public function __construct(
         private readonly RequestService $requestService,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function handle(Work $work): JsonResponse
     {

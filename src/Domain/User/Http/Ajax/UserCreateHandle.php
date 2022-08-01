@@ -37,8 +37,7 @@ class UserCreateHandle
         private readonly FormFactoryInterface $formFactory,
         private readonly UserFactory $userFactory,
         private readonly UserEventDispatcherService $userEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

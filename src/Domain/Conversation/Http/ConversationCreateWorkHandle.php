@@ -30,13 +30,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ConversationCreateWorkHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private HashidsServiceInterface $hashidsService,
-        private ConversationService $conversationService,
-        private ConversationVariationService $conversationVariationService,
-        private ConversationFactory $conversationFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly ConversationService $conversationService,
+        private readonly ConversationVariationService $conversationVariationService,
+        private readonly ConversationFactory $conversationFactory
+    ) {}
 
     public function handle(
         Work $work,

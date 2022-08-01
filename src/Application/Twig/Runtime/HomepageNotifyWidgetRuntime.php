@@ -23,8 +23,7 @@ class HomepageNotifyWidgetRuntime extends AbstractExtension implements RuntimeEx
     public function __construct(
         private readonly ContainerInterface $container,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-    }
+    ) {}
 
     public function renderNotify(): ?string
     {

@@ -36,8 +36,7 @@ class WorkDetailHandle
         private readonly SeoPageService $seoPageService,
         private readonly TwigRenderService $twigRenderService,
         private readonly FormDeleteFactory $deleteFactory
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): Response
     {

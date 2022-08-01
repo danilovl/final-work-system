@@ -35,8 +35,7 @@ class TaskController extends AbstractController
         private readonly TaskCreateHandle $taskCreateHandle,
         private readonly TaskCreateSeveralHandle $taskCreateSeveralHandle,
         private readonly TaskEditHandle $taskEditHandle
-    ) {
-    }
+    ) {}
 
     public function list(Request $request): Response
     {

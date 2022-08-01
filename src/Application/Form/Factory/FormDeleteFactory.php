@@ -27,8 +27,7 @@ class FormDeleteFactory
         private readonly FormFactoryInterface $formFactory,
         private readonly RouterInterface $router,
         private readonly HashidsServiceInterface $hashidsService
-    ) {
-    }
+    ) {}
 
     public function createDeleteForm(object $entity, string $route): FormInterface
     {

@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VersionDetailContentHandle
 {
-    public function __construct(private TwigRenderService $twigRenderService)
-    {
-    }
+    public function __construct(private readonly TwigRenderService $twigRenderService) {}
 
     public function handle(Media $media): Response
     {

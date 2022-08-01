@@ -34,8 +34,7 @@ class EventController extends AbstractController
         private readonly EventEditHandle $eventEditHandle,
         private readonly EventSwitchToSkypeHandle $eventSwitchToSkypeHandle,
         private readonly EventDeleteHandle $eventDeleteHandle
-    ) {
-    }
+    ) {}
 
     public function detail(Request $request, Event $event): Response
     {

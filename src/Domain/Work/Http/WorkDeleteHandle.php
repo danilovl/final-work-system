@@ -36,8 +36,7 @@ class WorkDeleteHandle
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormDeleteFactory $formDeleteFactory,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): RedirectResponse
     {

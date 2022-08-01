@@ -18,9 +18,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class WorkStatusDataGrid
 {
-    public function __construct(private WorkStatusRepository $workStatusRepository)
-    {
-    }
+    public function __construct(private readonly WorkStatusRepository $workStatusRepository) {}
 
     public function queryBuilder(): QueryBuilder
     {

@@ -18,9 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class WidgetEventDispatcherService
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
-    {
-    }
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher) {}
 
     public function onGroupReplace(WidgetGenericGenericEvent $widgetGenericGenericEvent): void
     {

@@ -30,11 +30,10 @@ class ConversationVariationService
     private ?array $newPermission = null;
 
     public function __construct(
-        private UserWorkService $userWorkService,
-        private WorkService $workService,
-        private ParameterServiceInterface $parameterService
-    ) {
-    }
+        private readonly UserWorkService $userWorkService,
+        private readonly WorkService $workService,
+        private readonly ParameterServiceInterface $parameterService
+    ) {}
 
     public function setNewPermission(?array $newPermission): void
     {

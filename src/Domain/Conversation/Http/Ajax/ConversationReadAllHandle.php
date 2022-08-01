@@ -29,13 +29,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ConversationReadAllHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private ConversationMessageFacade $conversationMessageFacade,
-        private ConversationMessageStatusFacade $conversationMessageStatusFacade
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly ConversationMessageFacade $conversationMessageFacade,
+        private readonly ConversationMessageStatusFacade $conversationMessageStatusFacade
+    ) {}
 
     public function handle(): JsonResponse
     {

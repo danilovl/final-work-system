@@ -47,8 +47,7 @@ class UserEditHandle
         private readonly UserFactory $userFactory,
         private readonly UserEventDispatcherService $userEventDispatcherService,
         private readonly SeoPageService $seoPageService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, User $user): Response
     {

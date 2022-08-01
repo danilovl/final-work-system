@@ -36,8 +36,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
         private readonly TranslatorService $translatorService,
         private readonly Environment $twig,
         private readonly WorkFacade $workFacade
-    ) {
-    }
+    ) {}
 
     public function render(): ?string
     {

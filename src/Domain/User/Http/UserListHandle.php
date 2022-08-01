@@ -50,8 +50,7 @@ class UserListHandle
         private readonly WorkFacade $workFacade,
         private readonly WorkStatusFacade $workStatusFacade,
         private readonly SeoPageService $seoPageService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): Response
     {

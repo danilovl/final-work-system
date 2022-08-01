@@ -30,12 +30,11 @@ use Symfony\Component\HttpFoundation\{
 class ConversationController extends AbstractController
 {
     public function __construct(
-        private ConversationChangeReadMessageStatusHandle $conversationChangeReadMessageStatusHandle,
-        private ConversationReadAllHandle $conversationReadAllHandle,
-        private ConversationDeleteHandle $conversationDeleteHandle,
-        private ConversationLiveHandle $conversationLiveHandle
-    ) {
-    }
+        private readonly ConversationChangeReadMessageStatusHandle $conversationChangeReadMessageStatusHandle,
+        private readonly ConversationReadAllHandle $conversationReadAllHandle,
+        private readonly ConversationDeleteHandle $conversationDeleteHandle,
+        private readonly ConversationLiveHandle $conversationLiveHandle
+    ) {}
 
     public function changeReadMessageStatus(ConversationMessage $conversationMessage): JsonResponse
     {

@@ -37,9 +37,7 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
         $this->serializer = SerializerHelper::getBaseSerializer();
     }
 
-    public function postPersist(EventArgs $args): void
-    {
-    }
+    public function postPersist(EventArgs $args): void {}
 
     protected function createLogEntry($action, $object, LoggableAdapter $ea): ?AbstractLogEntry
     {

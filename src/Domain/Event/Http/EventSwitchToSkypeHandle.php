@@ -31,8 +31,7 @@ class EventSwitchToSkypeHandle
         private readonly EventAddressFacade $eventAddressFacade,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly EventEventDispatcherService $eventEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Event $event): RedirectResponse
     {

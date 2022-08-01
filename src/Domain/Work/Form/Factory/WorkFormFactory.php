@@ -41,8 +41,7 @@ class WorkFormFactory
         private readonly WorkDeadlineFacade $deadlineFacade,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     public function getWorkForm(
         User $user,

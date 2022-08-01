@@ -24,11 +24,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ProfileDeleteImageHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService
+    ) {}
 
     public function handle(): RedirectResponse
     {

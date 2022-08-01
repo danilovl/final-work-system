@@ -18,9 +18,7 @@ use App\Domain\WorkStatus\Repository\WorkStatusRepository;
 
 class WorkStatusFacade
 {
-    public function __construct(private WorkStatusRepository $workStatusRepository)
-    {
-    }
+    public function __construct(private readonly WorkStatusRepository $workStatusRepository) {}
 
     public function find(int $id): ?WorkStatus
     {

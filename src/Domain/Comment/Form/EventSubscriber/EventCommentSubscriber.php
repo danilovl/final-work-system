@@ -23,9 +23,10 @@ use Symfony\Component\Form\{
 
 class EventCommentSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private User $user, private Event $event)
-    {
-    }
+    public function __construct(
+        private readonly User $user,
+        private readonly Event $event
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

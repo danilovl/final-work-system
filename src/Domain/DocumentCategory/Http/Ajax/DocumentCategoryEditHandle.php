@@ -28,11 +28,10 @@ use Symfony\Component\HttpFoundation\{
 class DocumentCategoryEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private FormFactoryInterface $formFactory,
-        private MediaCategoryFactory $mediaCategoryFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly MediaCategoryFactory $mediaCategoryFactory
+    ) {}
 
     public function handle(Request $request, MediaCategory $mediaCategory): JsonResponse
     {

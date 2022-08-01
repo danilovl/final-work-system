@@ -46,8 +46,7 @@ class TaskEditHandle
         private readonly TaskFactory $taskFactory,
         private readonly TaskDeadlineFacade $taskDeadlineFacade,
         private readonly TaskEventDispatcherService $taskEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(
         Request $request,

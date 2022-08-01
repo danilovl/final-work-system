@@ -27,13 +27,12 @@ use Symfony\Component\HttpFoundation\{
 class DocumentCategoryListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private PaginatorService $paginatorService,
-        private MediaCategoryFacade $mediaCategoryFacade,
-        private ParameterServiceInterface $parameterService
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly PaginatorService $paginatorService,
+        private readonly MediaCategoryFacade $mediaCategoryFacade,
+        private readonly ParameterServiceInterface $parameterService
+    ) {}
 
     public function handle(Request $request): Response
     {

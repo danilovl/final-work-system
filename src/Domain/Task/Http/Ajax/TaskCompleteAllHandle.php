@@ -33,8 +33,7 @@ class TaskCompleteAllHandle
         private readonly EntityManagerService $entityManagerService,
         private readonly TaskFacade $taskFacade,
         private readonly TaskEventDispatcherService $taskEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(): JsonResponse
     {

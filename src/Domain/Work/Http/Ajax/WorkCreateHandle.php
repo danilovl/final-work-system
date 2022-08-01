@@ -36,8 +36,7 @@ class WorkCreateHandle
         private readonly FormFactoryInterface $formFactory,
         private readonly WorkFactory $workFactory,
         private readonly WorkEventDispatcherService $workEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

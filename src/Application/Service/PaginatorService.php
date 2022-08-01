@@ -22,8 +22,7 @@ class PaginatorService
     public function __construct(
         private readonly PaginatorInterface $paginator,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-    }
+    ) {}
 
     public function createPagination(
         mixed $target,

@@ -23,9 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends AbstractController
 {
-    public function __construct(private readonly ArticleDetailHandle $articleDetailHandle)
-    {
-    }
+    public function __construct(private readonly ArticleDetailHandle $articleDetailHandle) {}
 
     #[ParamConverter('article', class: Article::class, options: ['id' => 'id_article'])]
     #[ParamConverter('articleCategory', class: ArticleCategory::class, options: ['id' => 'id_category'])]

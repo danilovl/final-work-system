@@ -24,8 +24,7 @@ class WorkResolverMap extends ResolverMap
     public function __construct(
         private readonly WorkFacade $workFacade,
         private readonly WorkStatusFacade $workStatusFacade
-    ) {
-    }
+    ) {}
 
     protected function map(): array
     {

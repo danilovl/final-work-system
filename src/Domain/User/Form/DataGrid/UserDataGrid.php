@@ -17,9 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class UserDataGrid
 {
-    public function __construct(private readonly UserRepository $userRepository)
-    {
-    }
+    public function __construct(private readonly UserRepository $userRepository) {}
 
     public function queryBuilderAllByRole(string $userRole): QueryBuilder
     {

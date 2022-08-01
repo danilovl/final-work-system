@@ -34,13 +34,12 @@ use Symfony\Component\HttpFoundation\Response;
 class EventCalendarManageHandle
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private UserService $userService,
-        private UserWorkService $userWorkService,
-        private TwigRenderService $twigRenderService,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly EntityManagerService $entityManagerService,
+        private readonly UserService $userService,
+        private readonly UserWorkService $userWorkService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(): Response
     {

@@ -28,9 +28,7 @@ class ProfileMediaForm extends AbstractType
 {
     final public const NAME = 'user_profile_image';
 
-    public function __construct(private ParameterServiceInterface $parameterService)
-    {
-    }
+    public function __construct(private readonly ParameterServiceInterface $parameterService) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

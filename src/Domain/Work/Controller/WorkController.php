@@ -38,8 +38,7 @@ class WorkController extends AbstractController
         private readonly WorkEditHandle $workEditHandle,
         private readonly WorkEditAuthorHandle $workEditAuthorHandle,
         private readonly WorkDeleteHandle $workDeleteHandle
-    ) {
-    }
+    ) {}
 
     public function create(Request $request): Response
     {

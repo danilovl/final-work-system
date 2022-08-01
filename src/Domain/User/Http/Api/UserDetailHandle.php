@@ -21,8 +21,7 @@ class UserDetailHandle
     public function __construct(
         private readonly UserService $userService,
         private readonly ObjectToArrayTransformService $objectToArrayTransformService
-    ) {
-    }
+    ) {}
 
     public function handle(): JsonResponse
     {

@@ -23,8 +23,7 @@ class UserEventDispatcherService
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly AsyncService $asyncService
-    ) {
-    }
+    ) {}
 
     public function onUserCreate(User $user): void
     {

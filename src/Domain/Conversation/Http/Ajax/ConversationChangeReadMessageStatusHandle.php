@@ -24,11 +24,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ConversationChangeReadMessageStatusHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private ConversationMessageFacade $conversationMessageFacade
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly ConversationMessageFacade $conversationMessageFacade
+    ) {}
 
     public function handle(ConversationMessage $conversationMessage): JsonResponse
     {

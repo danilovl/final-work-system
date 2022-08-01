@@ -32,8 +32,7 @@ class RequestService
         private readonly RequestStack $requestStack,
         private readonly RouterInterface $router,
         private readonly TranslatorService $translatorService
-    ) {
-    }
+    ) {}
 
     public function addFlash(string $type, mixed $message): void
     {

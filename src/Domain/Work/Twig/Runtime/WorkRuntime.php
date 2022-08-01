@@ -21,9 +21,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class WorkRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly WorkService $workService)
-    {
-    }
+    public function __construct(private readonly WorkService $workService) {}
 
     public function isWorkRole(
         Work $work,

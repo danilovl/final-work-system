@@ -30,12 +30,11 @@ use Symfony\Component\HttpFoundation\{
 class WorkCategoryCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private FormFactoryInterface $formFactory,
-        private WorkCategoryFactory $workCategoryFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly WorkCategoryFactory $workCategoryFactory
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

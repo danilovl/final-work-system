@@ -29,9 +29,7 @@ class WorkVoter extends Voter
         VoterSupportConstant::DELETE
     ];
 
-    public function __construct(private readonly WorkService $workService)
-    {
-    }
+    public function __construct(private readonly WorkService $workService) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {

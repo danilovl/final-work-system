@@ -26,12 +26,11 @@ use Symfony\Component\HttpFoundation\{
 class UserGroupListHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private SeoPageService $seoPageService,
-        private PaginatorService $paginatorService,
-        private UserGroupFacade $userGroupFacade
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly SeoPageService $seoPageService,
+        private readonly PaginatorService $paginatorService,
+        private readonly UserGroupFacade $userGroupFacade
+    ) {}
 
     public function handle(Request $request): Response
     {

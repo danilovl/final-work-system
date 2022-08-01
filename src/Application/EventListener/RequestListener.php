@@ -30,8 +30,7 @@ class RequestListener implements EventSubscriberInterface
         private readonly EntityManagerService $entityManagerService,
         private readonly SeoPageService $seoPageService,
         private readonly AsyncService $asyncService
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $requestEvent): void
     {

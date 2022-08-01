@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TaskDetailHandle
 {
-    public function __construct(private readonly ObjectToArrayTransformService $objectToArrayTransformService)
-    {
-    }
+    public function __construct(private readonly ObjectToArrayTransformService $objectToArrayTransformService) {}
 
     public function handle(Task $task): JsonResponse
     {

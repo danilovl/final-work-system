@@ -21,8 +21,7 @@ class DoctrineExtensionListener implements EventSubscriberInterface
     public function __construct(
         private readonly UserService $userService,
         private readonly LoggableListener $loggableListener
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(): void
     {

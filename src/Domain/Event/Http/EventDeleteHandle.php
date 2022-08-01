@@ -32,8 +32,7 @@ class EventDeleteHandle
         private readonly EntityManagerService $entityManagerService,
         private readonly FormDeleteFactory $formDeleteFactory,
         private readonly HashidsServiceInterface $hashidsService,
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Event $event): RedirectResponse
     {

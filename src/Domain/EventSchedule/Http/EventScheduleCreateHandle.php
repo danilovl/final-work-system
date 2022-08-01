@@ -30,13 +30,12 @@ use Symfony\Component\HttpFoundation\{
 class EventScheduleCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private EventScheduleFactory $eventScheduleFactory,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly EventScheduleFactory $eventScheduleFactory,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(Request $request): Response
     {

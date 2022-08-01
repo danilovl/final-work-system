@@ -27,11 +27,10 @@ use Symfony\Component\HttpFoundation\{
 class EventCalendarGetEventHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EventCalendarFacade $eventCalendarFacade,
-        private UserService $userService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly EventCalendarFacade $eventCalendarFacade,
+        private readonly UserService $userService
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

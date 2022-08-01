@@ -26,12 +26,11 @@ use Symfony\Component\HttpFoundation\{
 class ResetPasswordSendPasswordHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private UserService $userService,
-        private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly UserService $userService,
+        private readonly TaskFacade $taskFacade,
+        private readonly PaginatorService $paginatorService
+    ) {}
 
     public function handle(Request $request): Response
     {

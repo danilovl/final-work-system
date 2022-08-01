@@ -22,9 +22,8 @@ use Symfony\Component\HttpFoundation\{
 class SystemEventController extends AbstractController
 {
     public function __construct(
-        private SystemEventTypeEventsHandle $systemEventTypeEventsHandle
-    ) {
-    }
+        private readonly SystemEventTypeEventsHandle $systemEventTypeEventsHandle
+    ) {}
 
     public function list(Request $request, string $type): JsonResponse
     {

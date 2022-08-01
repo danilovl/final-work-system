@@ -24,8 +24,7 @@ class EventEventDispatcherService
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly AsyncService $asyncService
-    ) {
-    }
+    ) {}
 
     public function onEventComment(Comment $comment, bool $isEventCommentExist): void
     {

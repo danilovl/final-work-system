@@ -33,15 +33,14 @@ use Symfony\Component\HttpFoundation\{
 class ResetPasswordRequestHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private FormFactoryInterface $formFactory,
-        private UserFacade $userFacade,
-        private SecurityDispatcherService $securityDispatcherService,
-        private ResetPasswordService $resetPasswordService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly UserFacade $userFacade,
+        private readonly SecurityDispatcherService $securityDispatcherService,
+        private readonly ResetPasswordService $resetPasswordService
+    ) {}
 
     public function handle(Request $request): Response
     {

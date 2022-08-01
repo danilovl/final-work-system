@@ -38,15 +38,14 @@ use Symfony\Component\HttpFoundation\{
 class VersionCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private MediaMimeTypeFacade $mediaMimeTypeFacade,
-        private EntityManagerService $entityManagerService,
-        private FormFactoryInterface $formFactory,
-        private MediaFactory $mediaFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly MediaFactory $mediaFactory,
+        private readonly VersionEventDispatcherService $versionEventDispatcherService
+    ) {}
 
     public function handle(Request $request, Work $work): JsonResponse
     {

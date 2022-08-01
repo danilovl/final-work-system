@@ -18,9 +18,7 @@ use App\Domain\User\Entity\User;
 
 class WorkCategoryDataGrid
 {
-    public function __construct(private WorkCategoryRepository $workCategoryRepository)
-    {
-    }
+    public function __construct(private readonly WorkCategoryRepository $workCategoryRepository) {}
 
     public function queryBuilderWorkCategoriesByOwner(User $user): QueryBuilder
     {

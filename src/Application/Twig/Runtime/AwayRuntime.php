@@ -22,8 +22,7 @@ class AwayRuntime extends AbstractExtension implements RuntimeExtensionInterface
     public function __construct(
         private readonly RouterInterface $router,
         private readonly string $domain
-    ) {
-    }
+    ) {}
 
     public function to(?string $text): ?string
     {

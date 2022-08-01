@@ -16,9 +16,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DateService
 {
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
-    }
+    public function __construct(private readonly TranslatorInterface $translator) {}
 
     public function getWeekDaysArray(): array
     {

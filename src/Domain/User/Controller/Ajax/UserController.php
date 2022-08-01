@@ -28,8 +28,7 @@ class UserController extends AbstractController
     public function __construct(
         private readonly UserCreateHandle $userCreateHandle,
         private readonly UserEditHandle $userEditHandle
-    ) {
-    }
+    ) {}
 
     public function create(Request $request): JsonResponse
     {

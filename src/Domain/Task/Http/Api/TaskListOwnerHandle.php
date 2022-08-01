@@ -30,8 +30,7 @@ class TaskListOwnerHandle
         private readonly TaskFacade $taskFacade,
         private readonly PaginatorService $paginatorService,
         private readonly ObjectToArrayTransformService $objectToArrayTransformService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

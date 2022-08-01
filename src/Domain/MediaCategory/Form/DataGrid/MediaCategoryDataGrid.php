@@ -18,9 +18,7 @@ use App\Domain\User\Entity\User;
 
 class MediaCategoryDataGrid
 {
-    public function __construct(private MediaCategoryRepository $mediaCategoryRepository)
-    {
-    }
+    public function __construct(private readonly MediaCategoryRepository $mediaCategoryRepository) {}
 
     public function queryBuilderFindAllByOwner(User $user): QueryBuilder
     {

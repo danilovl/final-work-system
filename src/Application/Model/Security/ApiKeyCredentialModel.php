@@ -20,6 +20,5 @@ class ApiKeyCredentialModel
         public ?string $authUserUsername,
         public ?string $username,
         public ?string $password
-    ) {
-    }
+    ) {}
 }

@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class VersionDownloadHandle
 {
-    public function __construct(private MediaService $mediaService)
-    {
-    }
+    public function __construct(private readonly MediaService $mediaService) {}
 
     public function handle(Media $media): BinaryFileResponse
     {

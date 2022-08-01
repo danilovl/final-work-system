@@ -17,7 +17,8 @@ use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection};
+    Collection
+};
 
 class EventScheduleModel
 {

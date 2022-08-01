@@ -27,10 +27,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleCategoryController extends AbstractController
 {
     public function __construct(
-        private ArticleCategoryListHandle $articleCategoryListHandle,
-        private ArticleCategoryArticleListHandle $articleCategoryArticleListHandle
-    ) {
-    }
+        private readonly ArticleCategoryListHandle $articleCategoryListHandle,
+        private readonly ArticleCategoryArticleListHandle $articleCategoryArticleListHandle
+    ) {}
 
     public function list(Request $request): Response
     {

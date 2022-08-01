@@ -21,10 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
 class ProfileShowHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TwigRenderService $twigRenderService
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService
+    ) {}
 
     public function handle(): Response
     {

@@ -29,12 +29,11 @@ use Symfony\Component\HttpFoundation\{
 class EventCalendarEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private HashidsServiceInterface $hashidsService,
-        private EventEventDispatcherService $eventEventDispatcherService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly EventEventDispatcherService $eventEventDispatcherService
+    ) {}
 
     public function handle(Request $request, Event $event): JsonResponse
     {

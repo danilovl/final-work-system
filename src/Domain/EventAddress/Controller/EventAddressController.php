@@ -31,13 +31,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventAddressController extends AbstractController
 {
     public function __construct(
-        private EventAddressListHandle $eventAddressListHandle,
-        private EventAddressCreateHandle $eventAddressCreateHandle,
-        private EventAddressDetailHandle $eventAddressDetailHandle,
-        private EventAddressEditHandle $eventAddressEditHandle,
-        private EventAddressDeleteHandle $eventAddressDeleteHandle
-    ) {
-    }
+        private readonly EventAddressListHandle $eventAddressListHandle,
+        private readonly EventAddressCreateHandle $eventAddressCreateHandle,
+        private readonly EventAddressDetailHandle $eventAddressDetailHandle,
+        private readonly EventAddressEditHandle $eventAddressEditHandle,
+        private readonly EventAddressDeleteHandle $eventAddressDeleteHandle
+    ) {}
 
     public function list(Request $request): Response
     {

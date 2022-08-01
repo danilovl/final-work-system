@@ -27,11 +27,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserGroupController extends AbstractController
 {
     public function __construct(
-        private UserGroupCreateHandle $userGroupCreateHandle,
-        private UserGroupEditHandle $userGroupEditHandle,
-        private UserGroupDeleteHandle $userGroupDeleteHandle
-    ) {
-    }
+        private readonly UserGroupCreateHandle $userGroupCreateHandle,
+        private readonly UserGroupEditHandle $userGroupEditHandle,
+        private readonly UserGroupDeleteHandle $userGroupDeleteHandle
+    ) {}
 
     public function create(Request $request): JsonResponse
     {

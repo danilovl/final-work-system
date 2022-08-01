@@ -37,14 +37,13 @@ use Symfony\Component\HttpFoundation\{
 class ProfileChangeImageHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private TwigRenderService $twigRenderService,
-        private MediaTypeFacade $mediaTypeFacade,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly MediaTypeFacade $mediaTypeFacade,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(Request $request): Response
     {

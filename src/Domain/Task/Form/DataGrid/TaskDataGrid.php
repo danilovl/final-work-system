@@ -19,9 +19,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class TaskDataGrid
 {
-    public function __construct(private readonly WorkFacade $workFacade)
-    {
-    }
+    public function __construct(private readonly WorkFacade $workFacade) {}
 
     public function queryBuilderWorksBySupervisor(
         User $user,

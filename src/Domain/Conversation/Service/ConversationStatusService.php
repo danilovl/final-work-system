@@ -25,10 +25,9 @@ use App\Domain\User\Entity\User;
 class ConversationStatusService
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private ConversationMessageStatusRepository $conversationMessageStatusRepository
-    ) {
-    }
+        private readonly EntityManagerService $entityManagerService,
+        private readonly ConversationMessageStatusRepository $conversationMessageStatusRepository
+    ) {}
 
     public function isConversationRead(
         Conversation $conversation,

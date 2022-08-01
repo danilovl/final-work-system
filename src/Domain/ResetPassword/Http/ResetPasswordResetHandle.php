@@ -33,15 +33,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ResetPasswordResetHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private FormFactoryInterface $formFactory,
-        private ResetPasswordService $resetPasswordService,
-        private UserPasswordHasherInterface $userPasswordHasher
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ResetPasswordService $resetPasswordService,
+        private readonly UserPasswordHasherInterface $userPasswordHasher
+    ) {}
 
     public function handle(Request $request): Response
     {

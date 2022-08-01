@@ -30,12 +30,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DocumentCategoryController extends AbstractController
 {
     public function __construct(
-        private DocumentCategoryCreateHandle $documentCategoryCreateHandle,
-        private DocumentCategoryListHandle $documentCategoryListHandle,
-        private DocumentCategoryEditHandle $documentCategoryEditHandle,
-        private DocumentCategoryDeleteHandle $documentCategoryDeleteHandle,
-    ) {
-    }
+        private readonly DocumentCategoryCreateHandle $documentCategoryCreateHandle,
+        private readonly DocumentCategoryListHandle $documentCategoryListHandle,
+        private readonly DocumentCategoryEditHandle $documentCategoryEditHandle,
+        private readonly DocumentCategoryDeleteHandle $documentCategoryDeleteHandle,
+    ) {}
 
     public function create(Request $request): Response
     {

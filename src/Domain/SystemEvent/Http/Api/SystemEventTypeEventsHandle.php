@@ -31,12 +31,11 @@ use Symfony\Component\HttpFoundation\{
 class SystemEventTypeEventsHandle
 {
     public function __construct(
-        private UserService $userService,
-        private PaginatorService $paginatorService,
-        private SystemEventRecipientFacade $systemEventRecipientFacade,
-        private SystemEventLinkGeneratorService $systemEventLinkGeneratorService
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly PaginatorService $paginatorService,
+        private readonly SystemEventRecipientFacade $systemEventRecipientFacade,
+        private readonly SystemEventLinkGeneratorService $systemEventLinkGeneratorService
+    ) {}
 
     public function handle(Request $request, string $type): JsonResponse
     {

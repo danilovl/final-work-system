@@ -19,9 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CacheEventDispatcherService
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
-    {
-    }
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher) {}
 
     public function onClearCacheKey(string $key): void
     {

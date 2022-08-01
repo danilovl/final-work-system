@@ -19,9 +19,7 @@ use DateTime;
 
 class ResetPasswordFacade
 {
-    public function __construct(private ResetPasswordRepository $resetPasswordRepository)
-    {
-    }
+    public function __construct(private readonly ResetPasswordRepository $resetPasswordRepository) {}
 
     public function find(int $id): ?ResetPassword
     {

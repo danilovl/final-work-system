@@ -30,12 +30,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventCalendarController extends AbstractController
 {
     public function __construct(
-        private EventCalendarGetEventHandle $eventCalendarGetEventHandle,
-        private EventCalendarCreateHandle $eventCalendarCreateHandle,
-        private EventCalendarEventReservationHandle $eventCalendarEventReservationHandle,
-        private EventCalendarEditHandle $eventCalendarEditHandle
-    ) {
-    }
+        private readonly EventCalendarGetEventHandle $eventCalendarGetEventHandle,
+        private readonly EventCalendarCreateHandle $eventCalendarCreateHandle,
+        private readonly EventCalendarEventReservationHandle $eventCalendarEventReservationHandle,
+        private readonly EventCalendarEditHandle $eventCalendarEditHandle
+    ) {}
 
     #[AjaxRequestMiddlewareAttribute([
         'class' => 'App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware'

@@ -23,9 +23,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ConversationRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
-    public function __construct(private ConversationService $conversationService)
-    {
-    }
+    public function __construct(private readonly ConversationService $conversationService) {}
 
     public function checkWorkUsersConversation(
         Work $work,

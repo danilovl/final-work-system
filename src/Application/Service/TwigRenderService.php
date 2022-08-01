@@ -24,8 +24,7 @@ class TwigRenderService
     public function __construct(
         private readonly Environment $environment,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-    }
+    ) {}
 
     public function render(
         string $view,

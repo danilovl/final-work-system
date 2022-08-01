@@ -30,12 +30,11 @@ use Symfony\Component\HttpFoundation\{
 class WorkCategoryController extends AbstractController
 {
     public function __construct(
-        private WorkCategoryCreateHandle $workCategoryCreateHandle,
-        private WorkCategoryListHandle $workCategoryListHandle,
-        private WorkCategoryEditHandle $workCategoryEditHandle,
-        private WorkCategoryDeleteHandle $workCategoryDeleteHandle
-    ) {
-    }
+        private readonly WorkCategoryCreateHandle $workCategoryCreateHandle,
+        private readonly WorkCategoryListHandle $workCategoryListHandle,
+        private readonly WorkCategoryEditHandle $workCategoryEditHandle,
+        private readonly WorkCategoryDeleteHandle $workCategoryDeleteHandle
+    ) {}
 
     public function create(Request $request): Response
     {

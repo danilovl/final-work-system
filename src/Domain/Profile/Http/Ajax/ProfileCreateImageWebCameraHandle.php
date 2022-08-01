@@ -36,14 +36,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ProfileCreateImageWebCameraHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private ResizeImageService $resizeImageService,
-        private MediaTypeFacade $mediaTypeFacade,
-        private ParameterServiceInterface $parameterService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly ResizeImageService $resizeImageService,
+        private readonly MediaTypeFacade $mediaTypeFacade,
+        private readonly ParameterServiceInterface $parameterService
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

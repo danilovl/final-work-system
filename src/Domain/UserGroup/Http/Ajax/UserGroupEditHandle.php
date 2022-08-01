@@ -28,11 +28,10 @@ use Symfony\Component\HttpFoundation\{
 class UserGroupEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserGroupFactory $userGroupFactory,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserGroupFactory $userGroupFactory,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(Request $request, Group $group): JsonResponse
     {

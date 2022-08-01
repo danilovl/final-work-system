@@ -52,8 +52,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
         private readonly ApiUserFacade $apiUserFacade,
         private readonly UserFacade $userFacade,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function supports(Request $request): bool
     {

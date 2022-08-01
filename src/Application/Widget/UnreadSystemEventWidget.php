@@ -28,8 +28,7 @@ class UnreadSystemEventWidget extends BaseWidget
         private readonly UserService $userService,
         private readonly SystemEventFacade $systemEventFacade,
         private readonly SystemEventRecipientFacade $systemEventRecipientFacade
-    ) {
-    }
+    ) {}
 
     public function getRenderParameters(): array
     {

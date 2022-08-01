@@ -19,9 +19,7 @@ use App\Domain\User\Entity\User;
 
 class CommentFacade
 {
-    public function __construct(private CommentRepository $commentRepository)
-    {
-    }
+    public function __construct(private readonly CommentRepository $commentRepository) {}
 
     public function getCommentByOwnerEvent(
         User $user,

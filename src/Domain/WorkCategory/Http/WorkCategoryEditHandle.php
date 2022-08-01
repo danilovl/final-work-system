@@ -33,13 +33,12 @@ use Symfony\Component\HttpFoundation\{
 class WorkCategoryEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private WorkCategoryFormFactory $workCategoryFormFactory,
-        private WorkCategoryFactory $workCategoryFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly WorkCategoryFormFactory $workCategoryFormFactory,
+        private readonly WorkCategoryFactory $workCategoryFactory
+    ) {}
 
     public function handle(Request $request, WorkCategory $workCategory): Response
     {

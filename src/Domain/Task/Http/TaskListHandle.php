@@ -30,8 +30,7 @@ class TaskListHandle
         private readonly UserService $userService,
         private readonly TaskFacade $taskFacade,
         private readonly PaginatorService $paginatorService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): Response
     {

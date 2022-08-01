@@ -20,7 +20,8 @@ use App\Domain\WorkType\Entity\WorkType;
 use DateTime;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection};
+    Collection
+};
 
 class WorkModel
 {

@@ -19,9 +19,7 @@ use Doctrine\ORM\Query;
 
 class SystemEventRecipientFacade
 {
-    public function __construct(private SystemEventRecipientRepository $systemEventRecipientRepository)
-    {
-    }
+    public function __construct(private readonly SystemEventRecipientRepository $systemEventRecipientRepository) {}
 
     public function queryRecipientsByUser(User $user): Query
     {

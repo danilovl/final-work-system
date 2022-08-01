@@ -30,8 +30,7 @@ class TaskChangeStatusHandle
         private readonly RequestService $requestService,
         private readonly TaskStatusService $taskStatusService,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Task $task): JsonResponse
     {

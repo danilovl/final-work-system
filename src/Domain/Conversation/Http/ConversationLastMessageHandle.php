@@ -27,12 +27,11 @@ use Symfony\Component\HttpFoundation\{
 class ConversationLastMessageHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private ConversationMessageFacade $conversationMessageFacade,
-        private SeoPageService $seoPageService,
-        private ParameterServiceInterface $parameterService
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly ConversationMessageFacade $conversationMessageFacade,
+        private readonly SeoPageService $seoPageService,
+        private readonly ParameterServiceInterface $parameterService
+    ) {}
 
     public function handle(Request $request, Conversation $conversation): Response
     {

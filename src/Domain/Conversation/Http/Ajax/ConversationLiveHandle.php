@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ConversationLiveHandle
 {
-    public function __construct(private ConversationStreamService $conversationStreamService)
-    {
-    }
+    public function __construct(private readonly ConversationStreamService $conversationStreamService) {}
 
     public function handle(Conversation $conversation): StreamedResponse
     {

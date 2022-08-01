@@ -18,9 +18,7 @@ use Doctrine\Persistence\ObjectRepository;
 
 class EntityManagerService
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
-    }
+    public function __construct(private readonly EntityManagerInterface $entityManager) {}
 
     public function getReference(string $entityName, int $id): ?object
     {

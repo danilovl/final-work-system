@@ -26,12 +26,11 @@ use Symfony\Component\HttpFoundation\{
 class WorkCategoryListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private PaginatorService $paginatorService,
-        private WorkCategoryFacade $workCategoryFacade
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly PaginatorService $paginatorService,
+        private readonly WorkCategoryFacade $workCategoryFacade
+    ) {}
 
     public function handle(Request $request): Response
     {

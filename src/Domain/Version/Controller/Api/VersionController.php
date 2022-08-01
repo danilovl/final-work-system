@@ -22,9 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class VersionController extends AbstractController
 {
-    public function __construct(private VersionListHandle $versionListHandle)
-    {
-    }
+    public function __construct(private readonly VersionListHandle $versionListHandle) {}
 
     public function list(Request $request, Work $work): JsonResponse
     {

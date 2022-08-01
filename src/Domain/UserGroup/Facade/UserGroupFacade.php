@@ -17,9 +17,7 @@ use Doctrine\ORM\Query;
 
 class UserGroupFacade
 {
-    public function __construct(private UserGroupRepository $userGroupRepository)
-    {
-    }
+    public function __construct(private readonly UserGroupRepository $userGroupRepository) {}
 
     public function queryAll(): Query
     {

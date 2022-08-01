@@ -35,8 +35,7 @@ class TaskController extends AbstractController
         private readonly TaskListSolverHandle $taskListSolverHandle,
         private readonly TaskDetailHandle $taskDetailHandle,
         private readonly TaskListWorkHandle $taskListWorkHandle
-    ) {
-    }
+    ) {}
 
     public function listOwner(Request $request): JsonResponse
     {

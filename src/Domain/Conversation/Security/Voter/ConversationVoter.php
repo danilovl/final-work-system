@@ -27,9 +27,7 @@ class ConversationVoter extends Voter
         VoterSupportConstant::DELETE
     ];
 
-    public function __construct(private ConversationService $conversationService)
-    {
-    }
+    public function __construct(private readonly ConversationService $conversationService) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {

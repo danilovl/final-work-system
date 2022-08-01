@@ -33,13 +33,12 @@ use Symfony\Component\HttpFoundation\{
 class DocumentCategoryEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private MediaCategoryFactory $mediaCategoryFactory,
-        private DocumentCategoryFormFactory $documentCategoryFormFactory,
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly MediaCategoryFactory $mediaCategoryFactory,
+        private readonly DocumentCategoryFormFactory $documentCategoryFormFactory,
+    ) {}
 
     public function handle(Request $request, MediaCategory $mediaCategory): Response
     {

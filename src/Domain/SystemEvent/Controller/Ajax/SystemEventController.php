@@ -24,10 +24,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SystemEventController extends AbstractController
 {
     public function __construct(
-        private SystemEventViewedHandle $systemEventViewedHandle,
-        private SystemEventViewedAllHandle $systemEventViewedAllHandle
-    ) {
-    }
+        private readonly SystemEventViewedHandle $systemEventViewedHandle,
+        private readonly SystemEventViewedAllHandle $systemEventViewedAllHandle
+    ) {}
 
     public function viewed(SystemEventRecipient $systemEventRecipient): JsonResponse
     {

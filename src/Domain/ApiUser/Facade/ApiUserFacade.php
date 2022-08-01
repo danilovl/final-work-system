@@ -17,9 +17,7 @@ use App\Domain\ApiUser\Repository\ApiUserRepository;
 
 class ApiUserFacade
 {
-    public function __construct(private readonly ApiUserRepository $apiUserRepository)
-    {
-    }
+    public function __construct(private readonly ApiUserRepository $apiUserRepository) {}
 
     public function findByApiKey(string $apiKey): ?ApiUser
     {

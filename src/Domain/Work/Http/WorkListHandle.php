@@ -38,8 +38,7 @@ class WorkListHandle
         private readonly WorkFormFactory $workFormFactory,
         private readonly WorkSearch $workSearch,
         private readonly FormDeleteFactory $deleteFactory
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, string $type): Response
     {

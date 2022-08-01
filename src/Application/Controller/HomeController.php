@@ -30,8 +30,7 @@ class HomeController extends AbstractController
         private readonly HomepageCache $homepageCache,
         private readonly ParameterServiceInterface $parameterService,
         private readonly SystemEventFacade $systemEventFacade
-    ) {
-    }
+    ) {}
 
     #[PermissionMiddleware(['date' => ['from' => '31-01-2020']])]
     public function index(Request $request): Response

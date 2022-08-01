@@ -28,11 +28,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventAddressController extends AbstractController
 {
     public function __construct(
-        private EventAddressCreateHandle $eventAddressCreateHandle,
-        private EventAddressEditHandle $eventAddressEditHandle,
-        private EventAddressDeleteHandle $eventAddressDeleteHandle
-    ) {
-    }
+        private readonly EventAddressCreateHandle $eventAddressCreateHandle,
+        private readonly EventAddressEditHandle $eventAddressEditHandle,
+        private readonly EventAddressDeleteHandle $eventAddressDeleteHandle
+    ) {}
 
     public function create(Request $request): JsonResponse
     {

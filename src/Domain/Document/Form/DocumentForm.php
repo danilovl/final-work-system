@@ -33,9 +33,7 @@ class DocumentForm extends AbstractType
 {
     final public const NAME = 'media';
 
-    public function __construct(private MediaCategoryDataGrid $categoryDataGridHelper)
-    {
-    }
+    public function __construct(private readonly MediaCategoryDataGrid $categoryDataGridHelper) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

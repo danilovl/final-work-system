@@ -20,7 +20,8 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection};
+    Collection
+};
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel

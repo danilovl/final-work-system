@@ -34,13 +34,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ConversationController extends AbstractController
 {
     public function __construct(
-        private ConversationCreateHandle $conversationCreateHandle,
-        private ConversationListHandle $conversationListHandle,
-        private ConversationDetailHandle $conversationDetailHandle,
-        private ConversationCreateWorkHandle $conversationCreateWorkHandle,
-        private ConversationLastMessageHandle $conversationLastMessageHandle
-    ) {
-    }
+        private readonly ConversationCreateHandle $conversationCreateHandle,
+        private readonly ConversationListHandle $conversationListHandle,
+        private readonly ConversationDetailHandle $conversationDetailHandle,
+        private readonly ConversationCreateWorkHandle $conversationCreateWorkHandle,
+        private readonly ConversationLastMessageHandle $conversationLastMessageHandle
+    ) {}
 
     public function create(Request $request): Response
     {

@@ -26,8 +26,7 @@ class UserFacade
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly UserWorkService $userWorkService
-    ) {
-    }
+    ) {}
 
     public function find(int $id): ?User
     {

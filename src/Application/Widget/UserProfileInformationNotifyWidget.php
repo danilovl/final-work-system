@@ -26,8 +26,7 @@ class UserProfileInformationNotifyWidget extends BaseWidget
         private readonly ParameterServiceInterface $parameterService,
         private readonly TranslatorService $translatorService,
         private readonly Environment $twig
-    ) {
-    }
+    ) {}
 
     public function render(): ?string
     {

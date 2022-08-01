@@ -27,11 +27,10 @@ use Symfony\Component\HttpFoundation\{
 class UserGroupController extends AbstractController
 {
     public function __construct(
-        private UserGroupCreateHandle $userGroupCreateHandle,
-        private UserGroupEditHandle $userGroupEditHandle,
-        private UserGroupListHandle $userGroupListHandle
-    ) {
-    }
+        private readonly UserGroupCreateHandle $userGroupCreateHandle,
+        private readonly UserGroupEditHandle $userGroupEditHandle,
+        private readonly UserGroupListHandle $userGroupListHandle
+    ) {}
 
     public function create(Request $request): Response
     {

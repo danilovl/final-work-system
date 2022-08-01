@@ -33,12 +33,11 @@ use Symfony\Component\Routing\RouterInterface;
 class VersionFormFactory
 {
     public function __construct(
-        private RouterInterface $router,
-        private MediaMimeTypeFacade $mediaMimeTypeFacade,
-        private HashidsServiceInterface $hashidsService,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RouterInterface $router,
+        private readonly MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function getVersionForm(
         string $type,

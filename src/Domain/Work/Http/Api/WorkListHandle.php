@@ -32,8 +32,7 @@ class WorkListHandle
         private readonly WorkFacade $workFacade,
         private readonly PaginatorService $paginatorService,
         private readonly ObjectToArrayTransformService $objectToArrayTransformService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, string $type): JsonResponse
     {

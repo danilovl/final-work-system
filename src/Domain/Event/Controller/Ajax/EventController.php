@@ -32,8 +32,7 @@ class EventController extends AbstractController
         private readonly EventGetEventHandle $eventGetEventHandle,
         private readonly EventEditHandle $eventEditHandle,
         private readonly EventDeleteHandle $eventDeleteHandle
-    ) {
-    }
+    ) {}
 
     #[AjaxRequestMiddlewareAttribute([
         'class' => 'App\Application\Middleware\Event\Ajax\GetEventMiddleware'

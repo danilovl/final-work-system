@@ -46,8 +46,7 @@ class EventDetailHandle
         private readonly EventAddressFacade $eventAddressFacade,
         private readonly FormDeleteFactory $formDeleteFactory,
         private readonly EventEventDispatcherService $eventEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Event $event): Response
     {

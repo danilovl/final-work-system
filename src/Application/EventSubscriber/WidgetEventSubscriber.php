@@ -18,9 +18,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WidgetEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly WidgetManagerService $widgetManagerService)
-    {
-    }
+    public function __construct(private readonly WidgetManagerService $widgetManagerService) {}
 
     public static function getSubscribedEvents(): array
     {

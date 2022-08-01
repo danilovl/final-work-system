@@ -13,7 +13,8 @@
 namespace App\Domain\EventAddress;
 
 use App\Application\Traits\Model\{
-    SimpleInformationTrait};
+    SimpleInformationTrait
+};
 use App\Application\Traits\Model\LocationTrait;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\User\Entity\User;

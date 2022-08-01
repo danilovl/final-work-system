@@ -28,12 +28,11 @@ use Symfony\Component\HttpFoundation\Request;
 class DocumentCategoryCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private FormFactoryInterface $formFactory,
-        private MediaCategoryFactory $mediaCategoryFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly MediaCategoryFactory $mediaCategoryFactory
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

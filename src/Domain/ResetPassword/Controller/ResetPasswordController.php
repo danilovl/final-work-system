@@ -26,11 +26,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ResetPasswordController extends AbstractController
 {
     public function __construct(
-        private ResetPasswordRequestHandle $passwordRequestHandle,
-        private ResetPasswordCheckEmailHandle $resetPasswordCheckEmailHandle,
-        private ResetPasswordResetHandle $resetPasswordResetHandle
-    ) {
-    }
+        private readonly ResetPasswordRequestHandle $passwordRequestHandle,
+        private readonly ResetPasswordCheckEmailHandle $resetPasswordCheckEmailHandle,
+        private readonly ResetPasswordResetHandle $resetPasswordResetHandle
+    ) {}
 
     public function request(Request $request): Response
     {

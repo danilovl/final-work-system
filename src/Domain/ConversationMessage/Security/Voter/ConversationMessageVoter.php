@@ -26,9 +26,7 @@ class ConversationMessageVoter extends Voter
         VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS
     ];
 
-    public function __construct(private ConversationService $conversationService)
-    {
-    }
+    public function __construct(private ConversationService $conversationService) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {

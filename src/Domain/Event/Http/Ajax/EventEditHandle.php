@@ -42,8 +42,7 @@ class EventEditHandle
         private readonly FormFactoryInterface $formFactory,
         private readonly EventParticipantFacade $eventParticipantFacade,
         private readonly EventEventDispatcherService $eventEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Event $event): JsonResponse
     {

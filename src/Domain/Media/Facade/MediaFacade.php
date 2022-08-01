@@ -21,9 +21,7 @@ use Doctrine\ORM\Query;
 
 class MediaFacade
 {
-    public function __construct(private readonly MediaRepository $mediaRepository)
-    {
-    }
+    public function __construct(private readonly MediaRepository $mediaRepository) {}
 
     public function find(int $id): ?Media
     {

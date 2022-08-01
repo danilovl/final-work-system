@@ -39,17 +39,16 @@ use Symfony\Component\HttpFoundation\{
 class VersionEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private VersionFormFactory $versionFormFactory,
-        private HashidsServiceInterface $hashidsService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private SeoPageService $seoPageService,
-        private MediaFactory $mediaFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly VersionFormFactory $versionFormFactory,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly SeoPageService $seoPageService,
+        private readonly MediaFactory $mediaFactory,
+        private readonly VersionEventDispatcherService $versionEventDispatcherService
+    ) {}
 
     public function handle(
         Request $request,

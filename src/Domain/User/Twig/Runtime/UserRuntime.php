@@ -26,8 +26,7 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
     public function __construct(
         private readonly UserService $userService,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-    }
+    ) {}
 
     public function appUser(): ?User
     {

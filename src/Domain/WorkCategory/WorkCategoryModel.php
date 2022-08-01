@@ -17,7 +17,8 @@ use App\Domain\User\Entity\User;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection};
+    Collection
+};
 
 class WorkCategoryModel
 {

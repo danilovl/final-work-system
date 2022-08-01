@@ -33,8 +33,7 @@ class WorkEditAuthorHandle
         private readonly FormFactoryInterface $formFactory,
         private readonly WorkEventDispatcherService $workEventDispatcherService,
         private readonly UserFactory $userFactory
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): JsonResponse
     {

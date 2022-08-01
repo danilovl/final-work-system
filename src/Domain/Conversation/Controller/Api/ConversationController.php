@@ -22,9 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ConversationController extends AbstractController
 {
-    public function __construct(private ConversationWorkMessageListHandle $conversionWorkHandle)
-    {
-    }
+    public function __construct(private readonly ConversationWorkMessageListHandle $conversionWorkHandle) {}
 
     public function listWorkMessage(Request $request, Work $work): Response
     {

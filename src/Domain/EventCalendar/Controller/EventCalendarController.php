@@ -22,10 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 class EventCalendarController extends AbstractController
 {
     public function __construct(
-        private EventCalendarReservationHandle $eventCalendarReservationHandle,
-        private EventCalendarManageHandle $eventCalendarManageHandle
-    ) {
-    }
+        private readonly EventCalendarReservationHandle $eventCalendarReservationHandle,
+        private readonly EventCalendarManageHandle $eventCalendarManageHandle
+    ) {}
 
     public function reservation(): Response
     {

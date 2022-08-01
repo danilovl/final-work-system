@@ -24,8 +24,7 @@ class WorkEventDispatcherService
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly AsyncService $asyncService
-    ) {
-    }
+    ) {}
 
     public function onWorkCreate(Work $work): void
     {

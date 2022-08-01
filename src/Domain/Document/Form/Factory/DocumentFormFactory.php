@@ -43,14 +43,13 @@ class DocumentFormFactory
     private ?User $user = null;
 
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private RouterInterface $router,
-        private HashidsServiceInterface $hashIds,
-        private UserFacade $userService,
-        private MediaMimeTypeFacade $mediaMimeTypeFacade,
-        private MediaCategoryFacade $mediaCategoryFacade
-    ) {
-    }
+        private readonly FormFactoryInterface $formFactory,
+        private readonly RouterInterface $router,
+        private readonly HashidsServiceInterface $hashIds,
+        private readonly UserFacade $userService,
+        private readonly MediaMimeTypeFacade $mediaMimeTypeFacade,
+        private readonly MediaCategoryFacade $mediaCategoryFacade
+    ) {}
 
     public function getUser(): ?User
     {

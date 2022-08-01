@@ -24,12 +24,11 @@ use Symfony\Component\HttpFoundation\Response;
 class EventScheduleDetailHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private DateService $dateService,
-        private SeoPageService $seoPageService,
-        private FormDeleteFactory $formDeleteFactory
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly DateService $dateService,
+        private readonly SeoPageService $seoPageService,
+        private readonly FormDeleteFactory $formDeleteFactory
+    ) {}
 
     public function handle(EventSchedule $eventSchedule): Response
     {

@@ -42,8 +42,7 @@ class WorkDetailTabService
         private readonly EntityManagerService $entityManagerService,
         private readonly PaginatorService $paginator,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-    }
+    ) {}
 
     public function getActiveTab(): string
     {

@@ -26,8 +26,7 @@ class EventListHandle
     public function __construct(
         private readonly WorkDetailTabService $workDetailTabService,
         private readonly ObjectToArrayTransformService $objectToArrayTransformService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Work $work): JsonResponse
     {

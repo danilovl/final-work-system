@@ -23,11 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 class EventAddressDetailHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private SeoPageService $seoPageService,
-        private FormDeleteFactory $formDeleteFactory
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly SeoPageService $seoPageService,
+        private readonly FormDeleteFactory $formDeleteFactory
+    ) {}
 
     public function handle(EventAddress $eventAddress): Response
     {

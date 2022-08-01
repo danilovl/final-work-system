@@ -36,10 +36,10 @@ class EmailNotificationQueueCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private EmailNotificationQueueFacade $emailNotificationQueueFacade,
-        private MailerService $mailer,
-        private ParameterServiceInterface $parameterService
+        private readonly EntityManagerService $entityManagerService,
+        private readonly EmailNotificationQueueFacade $emailNotificationQueueFacade,
+        private readonly MailerService $mailer,
+        private readonly ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
     }

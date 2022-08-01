@@ -19,9 +19,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class SystemEventRecipientListener
 {
-    public function __construct(private CacheEventDispatcherService $cacheEventDispatcherService)
-    {
-    }
+    public function __construct(private readonly CacheEventDispatcherService $cacheEventDispatcherService) {}
 
     public function postPersist(LifecycleEventArgs $eventArgs): void
     {

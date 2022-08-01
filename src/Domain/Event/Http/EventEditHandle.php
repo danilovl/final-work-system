@@ -49,8 +49,7 @@ class EventEditHandle
         private readonly EventParticipantFacade $eventParticipantFacade,
         private readonly EventEventDispatcherService $eventEventDispatcherService,
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Event $event): Response
     {

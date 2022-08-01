@@ -27,10 +27,9 @@ use Symfony\Component\HttpFoundation\{
 class EventScheduleController extends AbstractController
 {
     public function __construct(
-        private EventScheduleCloneHandle $eventScheduleCloneHandle,
-        private EventScheduleDeleteHandle $eventScheduleDeleteHandle
-    ) {
-    }
+        private readonly EventScheduleCloneHandle $eventScheduleCloneHandle,
+        private readonly EventScheduleDeleteHandle $eventScheduleDeleteHandle
+    ) {}
 
     public function clone(Request $request, EventSchedule $eventSchedule): JsonResponse
     {

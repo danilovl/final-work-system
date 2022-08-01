@@ -21,8 +21,7 @@ class TaskDeadlineFacade
     public function __construct(
         private readonly TaskRepository $taskRepository,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-    }
+    ) {}
 
     public function getDeadlinesByOwner(
         User $user,

@@ -25,9 +25,7 @@ use Symfony\Component\Security\Core\User\{
 
 class ApiKeyUserProvider implements UserProviderInterface
 {
-    public function __construct(private readonly ApiUserFacade $apiUserFacade)
-    {
-    }
+    public function __construct(private readonly ApiUserFacade $apiUserFacade) {}
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {

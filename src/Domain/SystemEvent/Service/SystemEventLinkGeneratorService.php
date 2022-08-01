@@ -30,10 +30,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
 {
     public function __construct(
-        private RequestStack $requestStack,
-        private Environment $twig
-    ) {
-    }
+        private readonly RequestStack $requestStack,
+        private readonly Environment $twig
+    ) {}
 
     public function generateLink(SystemEventRecipient $systemEventRecipient): string
     {

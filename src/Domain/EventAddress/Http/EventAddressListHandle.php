@@ -25,11 +25,10 @@ use Symfony\Component\HttpFoundation\{
 class EventAddressListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private PaginatorService $paginatorService
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly PaginatorService $paginatorService
+    ) {}
 
     public function handle(Request $request): Response
     {

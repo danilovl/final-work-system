@@ -19,9 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SecurityDispatcherService
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
-    {
-    }
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher) {}
 
     public function onResetPasswordTokenCreate(ResetPassword $resetPassword, int $tokenLifetime): void
     {

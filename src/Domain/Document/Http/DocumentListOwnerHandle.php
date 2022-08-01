@@ -34,14 +34,13 @@ use Symfony\Component\HttpFoundation\{
 class DocumentListOwnerHandle
 {
     public function __construct(
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private EntityManagerService $entityManagerService,
-        private DocumentFormFactory $documentFormFactory,
-        private PaginatorService $paginatorService,
-        private MediaFacade $mediaFacade
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly DocumentFormFactory $documentFormFactory,
+        private readonly PaginatorService $paginatorService,
+        private readonly MediaFacade $mediaFacade
+    ) {}
 
     public function handle(Request $request): Response
     {

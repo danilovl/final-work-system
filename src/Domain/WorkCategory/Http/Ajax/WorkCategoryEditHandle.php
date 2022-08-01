@@ -28,11 +28,10 @@ use Symfony\Component\HttpFoundation\{
 class WorkCategoryEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private WorkCategoryFactory $workCategoryFactory,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly WorkCategoryFactory $workCategoryFactory,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(Request $request, WorkCategory $workCategory): JsonResponse
     {

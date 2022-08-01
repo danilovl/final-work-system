@@ -36,14 +36,13 @@ use Symfony\Component\HttpFoundation\{
 class DocumentCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EntityManagerService $entityManagerService,
-        private DocumentFormFactory $documentFormFactory,
-        private MediaFactory $mediaFactory,
-        private DocumentEventDispatcherService $documentEventDispatcherService
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly DocumentFormFactory $documentFormFactory,
+        private readonly MediaFactory $mediaFactory,
+        private readonly DocumentEventDispatcherService $documentEventDispatcherService
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

@@ -27,11 +27,10 @@ use Symfony\Component\HttpFoundation\{
 class EventAddressDeleteHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private FormDeleteFactory $formDeleteFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly EntityManagerService $entityManagerService,
+        private readonly FormDeleteFactory $formDeleteFactory
+    ) {}
 
     public function handle(Request $request, EventAddress $eventAddress): RedirectResponse
     {

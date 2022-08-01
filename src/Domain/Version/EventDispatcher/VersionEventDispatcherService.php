@@ -21,10 +21,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class VersionEventDispatcherService
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
-        private AsyncService $asyncService
-    ) {
-    }
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly AsyncService $asyncService
+    ) {}
 
     public function onVersionCreate(Media $media): void
     {

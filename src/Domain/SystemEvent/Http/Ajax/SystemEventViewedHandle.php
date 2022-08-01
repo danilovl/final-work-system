@@ -28,12 +28,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SystemEventViewedHandle
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private RequestService $requestService,
-        private UserService $userService,
-        private CacheEventDispatcherService $cacheEventDispatcherService
-    ) {
-    }
+        private readonly EntityManagerService $entityManagerService,
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly CacheEventDispatcherService $cacheEventDispatcherService
+    ) {}
 
     public function handle(SystemEventRecipient $systemEventRecipient): JsonResponse
     {

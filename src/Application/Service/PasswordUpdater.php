@@ -18,9 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 class PasswordUpdater
 {
-    public function __construct(private readonly PasswordHasherFactoryInterface $passwordHasherFactory)
-    {
-    }
+    public function __construct(private readonly PasswordHasherFactoryInterface $passwordHasherFactory) {}
 
     public function hashPassword(
         string $plainPassword,

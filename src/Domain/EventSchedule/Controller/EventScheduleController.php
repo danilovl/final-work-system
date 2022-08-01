@@ -32,14 +32,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventScheduleController extends AbstractController
 {
     public function __construct(
-        private EventScheduleCreateHandle $eventScheduleCreateHandle,
-        private EventScheduleListHandle $eventScheduleListHandle,
-        private EventScheduleDetailHandle $eventScheduleDetailHandle,
-        private EventScheduleEditHandle $eventScheduleEditHandle,
-        private EventScheduleCloneHandle $eventScheduleCloneHandle,
-        private EventScheduleDeleteHandle $eventScheduleDeleteHandle
-    ) {
-    }
+        private readonly EventScheduleCreateHandle $eventScheduleCreateHandle,
+        private readonly EventScheduleListHandle $eventScheduleListHandle,
+        private readonly EventScheduleDetailHandle $eventScheduleDetailHandle,
+        private readonly EventScheduleEditHandle $eventScheduleEditHandle,
+        private readonly EventScheduleCloneHandle $eventScheduleCloneHandle,
+        private readonly EventScheduleDeleteHandle $eventScheduleDeleteHandle
+    ) {}
 
     public function create(Request $request): Response
     {

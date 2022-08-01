@@ -27,9 +27,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class FirstWeekDayValidator extends ConstraintValidator
 {
-    public function __construct(private readonly TranslatorService $translator)
-    {
-    }
+    public function __construct(private readonly TranslatorService $translator) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {

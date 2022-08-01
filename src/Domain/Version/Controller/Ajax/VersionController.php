@@ -32,11 +32,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class VersionController extends AbstractController
 {
     public function __construct(
-        private VersionCreateHandle $versionCreateHandle,
-        private VersionEditHandle $versionEditHandle,
-        private VersionDeleteHandle $versionDeleteHandle
-    ) {
-    }
+        private readonly VersionCreateHandle $versionCreateHandle,
+        private readonly VersionEditHandle $versionEditHandle,
+        private readonly VersionDeleteHandle $versionDeleteHandle
+    ) {}
 
     public function create(Request $request, Work $work): JsonResponse
     {

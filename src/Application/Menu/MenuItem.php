@@ -24,9 +24,7 @@ class MenuItem implements MenuItemInterface
     private ?array $attributes = [];
     private ?MenuItemInterface $parent = null;
 
-    public function __construct(private string $name)
-    {
-    }
+    public function __construct(private string $name) {}
 
     public function getName(): ?string
     {

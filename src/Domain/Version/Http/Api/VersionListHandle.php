@@ -24,10 +24,9 @@ use Symfony\Component\HttpFoundation\{
 class VersionListHandle
 {
     public function __construct(
-        private WorkDetailTabService $workDetailTabService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
-    ) {
-    }
+        private readonly WorkDetailTabService $workDetailTabService,
+        private readonly ObjectToArrayTransformService $objectToArrayTransformService
+    ) {}
 
     public function handle(Request $request, Work $work): JsonResponse
     {

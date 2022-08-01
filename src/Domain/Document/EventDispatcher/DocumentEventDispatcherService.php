@@ -21,10 +21,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class DocumentEventDispatcherService
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
-        private AsyncService $asyncService
-    ) {
-    }
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly AsyncService $asyncService
+    ) {}
 
     public function onDocumentCreate(Media $media): void
     {

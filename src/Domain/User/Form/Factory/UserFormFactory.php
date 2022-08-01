@@ -34,8 +34,7 @@ class UserFormFactory
         private readonly RouterInterface $router,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     public function getUserForm(
         string $type,

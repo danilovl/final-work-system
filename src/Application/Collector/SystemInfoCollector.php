@@ -23,9 +23,7 @@ class SystemInfoCollector extends DataCollector
 {
     private const NAME_COLLECTOR = 'final_work_info';
 
-    public function __construct(private readonly array $systemInfo)
-    {
-    }
+    public function __construct(private readonly array $systemInfo) {}
 
     public function collect(
         Request $request,

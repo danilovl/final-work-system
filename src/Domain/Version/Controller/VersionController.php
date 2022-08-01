@@ -33,12 +33,11 @@ use Symfony\Component\HttpFoundation\{
 class VersionController extends AbstractController
 {
     public function __construct(
-        private VersionCreateHandle $versionCreateHandle,
-        private VersionEditHandle $versionEditHandle,
-        private VersionDetailContentHandle $versionDetailContentHandle,
-        private VersionDownloadHandle $versionDownloadHandle
-    ) {
-    }
+        private readonly VersionCreateHandle $versionCreateHandle,
+        private readonly VersionEditHandle $versionEditHandle,
+        private readonly VersionDetailContentHandle $versionDetailContentHandle,
+        private readonly VersionDownloadHandle $versionDownloadHandle
+    ) {}
 
     public function create(
         Request $request,

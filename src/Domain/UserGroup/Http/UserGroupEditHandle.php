@@ -33,13 +33,12 @@ use Symfony\Component\HttpFoundation\{
 class UserGroupEditHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private UserGroupFactory $userGroupFactory,
-        private UserGroupFormFactory $userGroupFormFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly UserGroupFactory $userGroupFactory,
+        private readonly UserGroupFormFactory $userGroupFormFactory
+    ) {}
 
     public function handle(Request $request, Group $group): Response
     {

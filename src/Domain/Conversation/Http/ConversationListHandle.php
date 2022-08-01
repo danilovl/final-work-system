@@ -31,14 +31,13 @@ use Symfony\Component\HttpFoundation\{
 class ConversationListHandle
 {
     public function __construct(
-        private UserService $userService,
-        private ParameterServiceInterface $parameterService,
-        private TwigRenderService $twigRenderService,
-        private ConversationFacade $conversationFacade,
-        private ConversationMessageFacade $conversationMessageFacade,
-        private PaginatorService $paginatorService
-    ) {
-    }
+        private readonly UserService $userService,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly ConversationFacade $conversationFacade,
+        private readonly ConversationMessageFacade $conversationMessageFacade,
+        private readonly PaginatorService $paginatorService
+    ) {}
 
     public function handle(Request $request): Response
     {

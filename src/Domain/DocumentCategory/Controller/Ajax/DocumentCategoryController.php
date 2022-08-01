@@ -28,11 +28,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DocumentCategoryController extends AbstractController
 {
     public function __construct(
-        private DocumentCategoryCreateHandle $documentCategoryCreateHandle,
-        private DocumentCategoryEditHandle $documentCategoryEditHandle,
-        private DocumentCategoryDeleteHandle $documentCategoryDeleteHandle
-    ) {
-    }
+        private readonly DocumentCategoryCreateHandle $documentCategoryCreateHandle,
+        private readonly DocumentCategoryEditHandle $documentCategoryEditHandle,
+        private readonly DocumentCategoryDeleteHandle $documentCategoryDeleteHandle
+    ) {}
 
     public function create(Request $request): JsonResponse
     {

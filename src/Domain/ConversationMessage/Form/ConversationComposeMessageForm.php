@@ -33,9 +33,7 @@ class ConversationComposeMessageForm extends AbstractType
 {
     final public const NAME = 'conversation_compose_message';
 
-    public function __construct(private TranslatorInterface $translator)
-    {
-    }
+    public function __construct(private TranslatorInterface $translator) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

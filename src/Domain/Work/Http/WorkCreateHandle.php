@@ -47,8 +47,7 @@ class WorkCreateHandle
         private readonly WorkDeadlineFacade $workDeadlineFacade,
         private readonly WorkFactory $workFactory,
         private readonly WorkEventDispatcherService $workEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request): Response
     {

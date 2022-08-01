@@ -31,14 +31,13 @@ class WidgetStreamService
     ];
 
     public function __construct(
-        private ParameterServiceInterface $parameterService,
-        private UserService $userService,
-        private ConversationMessageFacade $conversationMessageFacade,
-        private SystemEventFacade $systemEventFacade,
-        private UnreadConversationMessageWidget $conversationMessageWidget,
-        private UnreadSystemEventWidget $unreadSystemEventWidget,
-    ) {
-    }
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly UserService $userService,
+        private readonly ConversationMessageFacade $conversationMessageFacade,
+        private readonly SystemEventFacade $systemEventFacade,
+        private readonly UnreadConversationMessageWidget $conversationMessageWidget,
+        private readonly UnreadSystemEventWidget $unreadSystemEventWidget,
+    ) {}
 
     private function getData(): ?array
     {

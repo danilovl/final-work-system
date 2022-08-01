@@ -27,8 +27,7 @@ class TaskNotifyCompleteHandle
         private readonly RequestService $requestService,
         private readonly EntityManagerService $entityManagerService,
         private readonly TaskEventDispatcherService $taskEventDispatcherService
-    ) {
-    }
+    ) {}
 
     public function handle(Task $task): JsonResponse
     {

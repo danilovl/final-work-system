@@ -53,8 +53,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         private readonly HttpUtils $httpUtils,
         private readonly HttpKernelInterface $httpKernel,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function supports(Request $request): bool
     {

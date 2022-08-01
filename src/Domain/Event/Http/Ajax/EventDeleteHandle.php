@@ -25,8 +25,7 @@ class EventDeleteHandle
     public function __construct(
         private readonly RequestService $requestService,
         private readonly EntityManagerService $entityManagerService
-    ) {
-    }
+    ) {}
 
     public function handle(Event $event): JsonResponse
     {

@@ -36,8 +36,7 @@ class TaskFormFactory
         private readonly RouterInterface $router,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     public function getTaskForm(TaskFormFactoryData $taskFormFactoryData): FormInterface
     {

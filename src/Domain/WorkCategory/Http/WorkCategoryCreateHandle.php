@@ -33,14 +33,13 @@ use Symfony\Component\HttpFoundation\{
 class WorkCategoryCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private TwigRenderService $twigRenderService,
-        private TranslatorService $translatorService,
-        private WorkCategoryFormFactory $categoryFormFactory,
-        private WorkCategoryFactory $workCategoryFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly TwigRenderService $twigRenderService,
+        private readonly TranslatorService $translatorService,
+        private readonly WorkCategoryFormFactory $categoryFormFactory,
+        private readonly WorkCategoryFactory $workCategoryFactory
+    ) {}
 
     public function handle(Request $request): Response
     {

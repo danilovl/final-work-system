@@ -27,11 +27,10 @@ use Doctrine\ORM\Query;
 class ConversationMessageFacade
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private ConversationStatusService $conversationStatusService,
-        private ConversationMessageRepository $conversationMessageRepository
-    ) {
-    }
+        private readonly EntityManagerService $entityManagerService,
+        private readonly ConversationStatusService $conversationStatusService,
+        private readonly ConversationMessageRepository $conversationMessageRepository
+    ) {}
 
     public function find(int $id): ?ConversationMessage
     {

@@ -26,12 +26,11 @@ use Symfony\Component\HttpFoundation\{
 class EventScheduleListHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private UserService $userService,
-        private EventScheduleFacade $eventScheduleFacade,
-        private PaginatorService $paginatorService
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly UserService $userService,
+        private readonly EventScheduleFacade $eventScheduleFacade,
+        private readonly PaginatorService $paginatorService
+    ) {}
 
     public function handle(Request $request): Response
     {

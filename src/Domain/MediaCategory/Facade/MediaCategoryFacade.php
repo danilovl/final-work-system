@@ -18,9 +18,7 @@ use App\Domain\User\Entity\User;
 
 class MediaCategoryFacade
 {
-    public function __construct(private MediaCategoryRepository $mediaCategoryRepository)
-    {
-    }
+    public function __construct(private readonly MediaCategoryRepository $mediaCategoryRepository) {}
 
     public function queryMediaCategoriesByOwner(User $user): Query
     {

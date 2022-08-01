@@ -25,8 +25,7 @@ class SecurityController extends AbstractController
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
         private readonly UserService $userService
-    ) {
-    }
+    ) {}
 
     public function generateToken(): JsonResponse
     {

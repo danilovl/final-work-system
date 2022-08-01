@@ -30,12 +30,11 @@ use Symfony\Component\HttpFoundation\{
 class EventAddressCreateHandle
 {
     public function __construct(
-        private RequestService $requestService,
-        private UserService $userService,
-        private EventAddressFactory $eventAddressFactory,
-        private FormFactoryInterface $formFactory
-    ) {
-    }
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
+        private readonly EventAddressFactory $eventAddressFactory,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     public function handle(Request $request): JsonResponse
     {

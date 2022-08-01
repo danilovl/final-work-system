@@ -28,12 +28,11 @@ use Symfony\Component\HttpFoundation\{
 class ArticleCategoryArticleListHandle
 {
     public function __construct(
-        private TwigRenderService $twigRenderService,
-        private ArticleFacade $articleFacade,
-        private PaginatorService $paginatorService,
-        private SeoPageService $seoPageService
-    ) {
-    }
+        private readonly TwigRenderService $twigRenderService,
+        private readonly ArticleFacade $articleFacade,
+        private readonly PaginatorService $paginatorService,
+        private readonly SeoPageService $seoPageService
+    ) {}
 
     public function handle(Request $request, ArticleCategory $articleCategory): Response
     {
