@@ -14,9 +14,9 @@ namespace App\Application\Twig;
 
 use App\Domain\SystemEvent\Service\SystemEventLinkGeneratorService;
 use App\Application\Twig\Runtime\{
-    AwayRuntime
+    AwayRuntime,
+    LocaleRuntime
 };
-use App\Application\Twig\Runtime\LocaleRuntime;
 use App\Domain\Conversation\Twig\Runtime\ConversationRuntime;
 use App\Domain\Task\Twig\Runtime\TaskRuntime;
 use App\Domain\User\Twig\Runtime\UserRuntime;
