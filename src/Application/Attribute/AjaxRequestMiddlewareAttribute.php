@@ -17,10 +17,5 @@ use Attribute;
 #[Attribute]
 class AjaxRequestMiddlewareAttribute
 {
-    public string $class;
-
-    public function __construct(array $options)
-    {
-        $this->class = $options['class'];
-    }
+    public function __construct(public string $class) {}
 }

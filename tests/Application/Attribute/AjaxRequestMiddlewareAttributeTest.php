@@ -124,10 +124,10 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         yield
         [
             new class {
-                #[AjaxRequestMiddlewareAttribute([
-                    'class' => GetEventMiddleware::class
-                ])]
-                public function getEvent()
+                #[AjaxRequestMiddlewareAttribute(
+                    class: GetEventMiddleware::class
+                )]
+                public function getEvent(): void
                 {
                 }
             },

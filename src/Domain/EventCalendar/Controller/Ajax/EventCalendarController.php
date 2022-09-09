@@ -36,9 +36,9 @@ class EventCalendarController extends AbstractController
         private readonly EventCalendarEditHandle $eventCalendarEditHandle
     ) {}
 
-    #[AjaxRequestMiddlewareAttribute([
-        'class' => 'App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware'
-    ])]
+    #[AjaxRequestMiddlewareAttribute(
+        class: 'App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware'
+    )]
     public function getEvent(Request $request): JsonResponse
     {
         return $this->eventCalendarGetEventHandle->handle($request);
@@ -56,9 +56,9 @@ class EventCalendarController extends AbstractController
         return $this->eventCalendarEventReservationHandle->handle($request, $event);
     }
 
-    #[AjaxRequestMiddlewareAttribute([
-        'class' => 'App\Application\Middleware\EventCalendar\Ajax\EditMiddleware'
-    ])]
+    #[AjaxRequestMiddlewareAttribute(
+        class: 'App\Application\Middleware\EventCalendar\Ajax\EditMiddleware'
+    )]
     public function edit(Request $request, Event $event): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);

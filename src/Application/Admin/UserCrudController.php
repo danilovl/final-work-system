@@ -22,13 +22,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\{
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
+    FormField,
+    TextField,
     ArrayField,
-    AssociationField,
+    IntegerField,
     BooleanField,
     DateTimeField,
-    FormField,
-    IntegerField,
-    TextField
+    AssociationField
 };
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

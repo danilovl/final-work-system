@@ -34,9 +34,9 @@ class EventController extends AbstractController
         private readonly EventDeleteHandle $eventDeleteHandle
     ) {}
 
-    #[AjaxRequestMiddlewareAttribute([
-        'class' => 'App\Application\Middleware\Event\Ajax\GetEventMiddleware'
-    ])]
+    #[AjaxRequestMiddlewareAttribute(
+        class: 'App\Application\Middleware\Event\Ajax\GetEventMiddleware'
+    )]
     public function getEvent(Request $request, Event $event): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $event);
