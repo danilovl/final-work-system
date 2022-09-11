@@ -1,7 +1,6 @@
 name: Cypress
 
 on:
-  - push
   - workflow_dispatch
 
 jobs:
