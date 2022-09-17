@@ -49,20 +49,8 @@ class EventRepository extends ServiceEntityRepository
             ->where('event.owner = :owner')
             ->setParameter('owner', $eventData->user);
 
-        if ($eventData->startDate !== null && $eventData->endDate !== null) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->gte('event.start', ':start'),
-                    $queryBuilder->expr()->lte('event.end', ':end')
-                ))
-                ->setParameter('start', $eventData->startDate)
-                ->setParameter('end', $eventData->endDate);
-        }
-
-        if ($eventData->eventType !== null) {
-            $queryBuilder->andWhere('event.type = :eventType')
-                ->setParameter('eventType', $eventData->eventType);
-        }
+        $this->filterByBetweenDate($queryBuilder, $eventData);
+        $this->filterByEventType($queryBuilder, $eventData);
 
         return $queryBuilder;
     }
@@ -74,21 +62,34 @@ class EventRepository extends ServiceEntityRepository
             ->groupBy('event.id')
             ->setParameter('participant', $eventData->user);
 
-        if ($eventData->startDate !== null && $eventData->endDate !== null) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->gte('event.start', ':start'),
-                    $queryBuilder->expr()->lte('event.end', ':end')
-                ))
-                ->setParameter('start', $eventData->startDate)
-                ->setParameter('end', $eventData->endDate);
-        }
-
-        if ($eventData->eventType !== null) {
-            $queryBuilder->andWhere('event.type = :eventType')
-                ->setParameter('eventType', $eventData->eventType);
-        }
+        $this->filterByBetweenDate($queryBuilder, $eventData);
+        $this->filterByEventType($queryBuilder, $eventData);
 
         return $queryBuilder;
+    }
+
+    private function filterByBetweenDate(QueryBuilder $queryBuilder, EventRepositoryData $eventData): void
+    {
+        if ($eventData->startDate === null || $eventData->endDate === null) {
+            return;
+        }
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->andX(
+                $queryBuilder->expr()->gte('event.start', ':start'),
+                $queryBuilder->expr()->lte('event.end', ':end')
+            ))
+            ->setParameter('start', $eventData->startDate)
+            ->setParameter('end', $eventData->endDate);
+    }
+
+    private function filterByEventType(QueryBuilder $queryBuilder, EventRepositoryData $eventData): void
+    {
+        if ($eventData->eventType === null) {
+            return;
+        }
+
+        $queryBuilder->andWhere('event.type = :eventType')
+            ->setParameter('eventType', $eventData->eventType);
     }
 }
