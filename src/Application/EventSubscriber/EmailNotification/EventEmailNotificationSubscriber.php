@@ -12,8 +12,8 @@
 
 namespace App\Application\EventSubscriber\EmailNotification;
 
-use App\Application\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Application\EventSubscriber\Events;
+use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -36,7 +36,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getParticipant()->getUser();
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_create',
             'to' => $toUser->getEmail(),
@@ -56,7 +56,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getParticipant()->getUser();
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_edit',
             'to' => $toUser->getEmail(),
@@ -76,7 +76,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getOwner();
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_switch_skype',
             'to' => $toUser->getEmail(),
@@ -109,7 +109,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $locale ?? $this->locale,
             'subject' => 'subject.event_comment_create',
             'to' => $to,
@@ -142,7 +142,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $locale ?? $this->locale,
             'subject' => 'subject.event_comment_edit',
             'to' => $to,
@@ -162,7 +162,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getOwner();
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_reservation',
             'to' => $toUser->getEmail(),

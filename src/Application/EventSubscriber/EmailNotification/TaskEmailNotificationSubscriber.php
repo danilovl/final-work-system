@@ -12,8 +12,8 @@
 
 namespace App\Application\EventSubscriber\EmailNotification;
 
-use App\Application\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Application\EventSubscriber\Events;
+use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -50,7 +50,7 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
             'workAuthor' => $work->getAuthor()->getFullNameDegree()
         ];
 
-        $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => $subject,
             'to' => $toUser->getEmail(),

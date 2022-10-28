@@ -12,8 +12,6 @@
 
 namespace App\Domain\EmailNotificationQueue;
 
-use DateTime;
-
 class EmailNotificationQueueModel
 {
     public string $subject;
@@ -21,6 +19,5 @@ class EmailNotificationQueueModel
     public string $from;
     public string $body;
     public bool $success = false;
-    public ?DateTime $sendedAt = null;
+    public string $uuid;
 }
-

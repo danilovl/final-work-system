@@ -36,4 +36,11 @@ class EmailNotificationQueueRepository extends ServiceEntityRepository
             ->andWhere('email_notification.sendedAt IS NULL')
             ->orderBy('email_notification.createdAt', Criteria::ASC);
     }
+
+    public function byUuid(string $uuid): QueryBuilder
+    {
+        return $this->baseQueryBuilder()
+            ->andWhere('email_notification.uuid = :uuid')
+            ->setParameter('uuid', $uuid);
+    }
 }

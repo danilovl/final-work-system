@@ -12,8 +12,8 @@
 
 namespace App\Application\EventSubscriber\EmailNotification;
 
-use App\Application\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Application\EventSubscriber\Events;
+use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Domain\User\Entity\User;
@@ -21,8 +21,8 @@ use App\Domain\User\Facade\UserFacade;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Service\WorkService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
 class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
@@ -34,7 +34,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterServiceInterface $parameterService,
         private readonly WorkService $workService,
-        protected ProducerInterface $emailNotificationProducer
+        protected MessageBusInterface $bus
     ) {
         parent::__construct(
             $userFacade,
@@ -42,7 +42,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
             $translator,
             $emailNotificationQueueFactory,
             $parameterService,
-            $emailNotificationProducer
+            $bus
         );
     }
 
@@ -69,7 +69,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
                 continue;
             }
 
-            $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
                 'locale' => $user->getLocale() ?? $this->locale,
                 'subject' => $subject,
                 'to' => $user->getEmail(),

@@ -19,6 +19,7 @@ use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserWorkService;
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
 {
@@ -35,7 +36,7 @@ class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubsc
             $kernel->getContainer()->get(EmailNotificationQueueFactory::class),
             $kernel->getContainer()->get(ParameterService::class),
             $kernel->getContainer()->get(UserWorkService::class),
-            $kernel->getContainer()->get('old_sound_rabbit_mq.email_notification_producer')
+            $kernel->getContainer()->get(MessageBusInterface::class)
         );
     }
 }

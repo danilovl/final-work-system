@@ -27,4 +27,12 @@ class EmailNotificationQueueFacade
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function getOneByUuid(string $uuid): ?EmailNotificationQueue
+    {
+        return $this->emailNotificationQueueRepository
+            ->byUuid($uuid)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

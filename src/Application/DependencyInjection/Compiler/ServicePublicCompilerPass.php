@@ -14,6 +14,7 @@ namespace App\Application\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class ServicePublicCompilerPass implements CompilerPassInterface
 {
@@ -21,7 +22,8 @@ class ServicePublicCompilerPass implements CompilerPassInterface
         'twig',
         'form.factory',
         'security.authorization_checker',
-        'fos_elastica.finder.work'
+        'fos_elastica.finder.work',
+        MessageBusInterface::class
     ];
 
     public function process(ContainerBuilder $container): void

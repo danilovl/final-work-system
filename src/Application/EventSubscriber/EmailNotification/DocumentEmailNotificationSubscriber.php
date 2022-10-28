@@ -13,16 +13,16 @@
 namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\Constant\WorkUserTypeConstant;
-use App\Application\DataTransferObject\EventSubscriber\EmailNotificationToQueueData;
 use App\Application\EventSubscriber\Events;
+use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserWorkService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
 class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
@@ -34,7 +34,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
         protected ParameterServiceInterface $parameterService,
         private readonly UserWorkService $userWorkService,
-        protected ProducerInterface $emailNotificationProducer
+        protected MessageBusInterface $bus
     ) {
         parent::__construct(
             $userFacade,
@@ -42,7 +42,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
             $translator,
             $emailNotificationQueueFactory,
             $parameterService,
-            $emailNotificationProducer
+            $bus
         );
     }
 
@@ -66,7 +66,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         ];
 
         foreach ($recipientArray as $user) {
-            $emailNotificationToQueueData = EmailNotificationToQueueData::createFromArray([
+            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
                 'locale' => $user->getLocale() ?? $this->locale,
                 'subject' => 'subject.document_create',
                 'to' => $user->getEmail(),

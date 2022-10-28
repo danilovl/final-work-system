@@ -1,6 +1,3 @@
-[![phpunit](https://github.com/danilovl/final-work-system/actions/workflows/phpunit.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/phpunit.yml)
-[![cypress](https://github.com/danilovl/final-work-system/actions/workflows/cypress.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/cypress.yml)
-
 FinalWork Web Application
 ========================
 
@@ -93,7 +90,7 @@ Email notifications:
 ``` env
 EMAIL_NOTIFICATION_SENDER=test@test.com
 EMAIL_NOTIFICATION_ENABLE_SEND=true
-EMAIL_NOTIFICATION_ENABLE_RABBIT_MQ=true
+EMAIL_NOTIFICATION_MESSENGER=true
 EMAIL_NOTIFICATION_ENABLE_ADD_TO_QUEUE=true
 ```
 

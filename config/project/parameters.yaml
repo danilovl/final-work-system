@@ -17,7 +17,7 @@ parameters:
   email_notification:
     sender: '%env(EMAIL_NOTIFICATION_SENDER)%'
     enable_send: '%env(bool:EMAIL_NOTIFICATION_ENABLE_SEND)%'
-    enable_rabbit_mq: '%env(bool:EMAIL_NOTIFICATION_ENABLE_RABBIT_MQ)%'
+    enable_messenger: '%env(bool:EMAIL_NOTIFICATION_ENABLE_MESSENGER)%'
     enable_add_to_queue: '%env(bool:EMAIL_NOTIFICATION_ENABLE_ADD_TO_QUEUE)%'
     translator_domain: 'email_notification'
     default_locale: '%locale%'
