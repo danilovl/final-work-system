@@ -5,6 +5,7 @@
     "license": "proprietary",
     "require": {
         "php": "^8.1.0",
+        "ext-amqp": "*",
         "ext-ctype": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
@@ -35,8 +36,10 @@
         "phpdocumentor/reflection-docblock": "^5.2",
         "phpdocumentor/type-resolver": "1.5.1",
         "sensio/framework-extra-bundle": "^6.2.3",
+        "symfony/amqp-messenger": "6.1.*",
         "symfony/asset": "6.1.*",
         "symfony/console": "6.1.*",
+        "symfony/doctrine-messenger": "6.1.*",
         "symfony/dotenv": "6.1.*",
         "symfony/expression-language": "6.1.*",
         "symfony/flex": "^1.14.1",
@@ -46,6 +49,7 @@
         "symfony/http-kernel": "6.1.*",
         "symfony/intl": "6.1.*",
         "symfony/mailer": "6.1.*",
+        "symfony/messenger": "6.1.*",
         "symfony/mime": "6.1.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "6.1.*",
@@ -143,5 +147,8 @@
             "allow-contrib": false,
             "require": "6.1.*"
         }
+    },
+    "platform": {
+        "php": "^8.1.0"
     }
 }
