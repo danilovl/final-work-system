@@ -32,7 +32,6 @@
         "knplabs/knp-paginator-bundle": "^5.4.2",
         "nelmio/cors-bundle": "^2.1",
         "overblog/graphql-bundle": "dev-master",
-        "php-amqplib/rabbitmq-bundle": "^2.11",
         "phpdocumentor/reflection-docblock": "^5.2",
         "phpdocumentor/type-resolver": "1.5.1",
         "sensio/framework-extra-bundle": "^6.2.3",
