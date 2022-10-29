@@ -12,7 +12,7 @@
 
 namespace App\Application\EventListener;
 
-use App\Application\Helper\SerializerHelper;
+use App\Application\Messenger\Loggable\LoggableMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Doctrine\Common\EventArgs;
@@ -20,21 +20,16 @@ use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
-use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class LoggableListener extends \Gedmo\Loggable\LoggableListener
 {
-    private Serializer $serializer;
-
     public function __construct(
-        protected ProducerInterface $loggableProducer,
+        private readonly MessageBusInterface $bus,
         private readonly ParameterService $parameterService,
         private readonly AsyncService $asyncService
     ) {
         parent::__construct();
-
-        $this->serializer = SerializerHelper::getBaseSerializer();
     }
 
     public function postPersist(EventArgs $args): void {}
@@ -92,8 +87,8 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
             $this->prePersistLogEntry($logEntry, $object);
 
             $this->asyncService->add(function () use ($logEntry): void {
-                $msgBody = $this->serializer->serialize($logEntry, 'json');
-                $this->loggableProducer->publish($msgBody);
+                $loggableMessage = new LoggableMessage($logEntry);
+                $this->bus->dispatch($loggableMessage);
             });
 
             return null;

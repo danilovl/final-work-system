@@ -28,6 +28,7 @@ services:
       - '../src/Application/Helper'
       - '../src/Application/Interfaces'
       - '../src/Application/Menu'
+      - '../src/Application/Messenger/*/*Message.php'
       - '../src/Application/Migrations'
       - '../src/Application/Helper'
       - '../src/Application/Traits'
@@ -46,8 +47,6 @@ services:
       $transformedFinderWork: '@fos_elastica.finder.work'
 
   App\Application\EventListener\LoggableListener:
-    arguments:
-      $loggableProducer: '@old_sound_rabbit_mq.loggable_producer'
     calls:
       - [ setAnnotationReader, [ '@annotation_reader' ] ]
     tags:

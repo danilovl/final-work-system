@@ -3,8 +3,28 @@ framework:
     failure_transport: failed
 
     transports:
-      email_notification: "%env(MESSENGER_TRANSPORT_DSN)%"
+      email_notification:
+        dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+        options:
+          exchange:
+            name: 'exchange.email_notification'
+            type: direct
+          queues:
+            email_notification: ~
+
+      loggable:
+        dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+        options:
+          exchange:
+            name: 'exchange.loggable'
+            type: direct
+          queues:
+            loggable: ~
+        retry_strategy:
+          max_retries: 0
+
       failed: 'doctrine://default?queue_name=failed'
 
     routing:
       'App\Application\Messenger\EmailNotification\EmailNotificationMessage': email_notification
+      'App\Application\Messenger\Loggable\LoggableMessage': loggable

@@ -20,7 +20,6 @@ return [
     Danilovl\HashidsBundle\HashidsBundle::class => ['all' => true],
     Danilovl\ObjectToArrayTransformBundle\ObjectToArrayTransformBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
-    OldSound\RabbitMqBundle\OldSoundRabbitMqBundle::class => ['all' => true],
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
     FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
