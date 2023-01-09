@@ -4,7 +4,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^8.1.0",
+        "php": "8.2.*",
         "ext-amqp": "*",
         "ext-ctype": "*",
         "ext-gd": "*",
@@ -33,7 +33,7 @@
         "nelmio/cors-bundle": "^2.1",
         "overblog/graphql-bundle": "dev-master",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "phpdocumentor/type-resolver": "1.5.1",
+        "phpdocumentor/type-resolver": "1.6.*",
         "sensio/framework-extra-bundle": "^6.2.3",
         "symfony/amqp-messenger": "6.1.*",
         "symfony/asset": "6.1.*",
@@ -148,6 +148,6 @@
         }
     },
     "platform": {
-        "php": "^8.1.0"
+        "php": "8.2.*"
     }
 }

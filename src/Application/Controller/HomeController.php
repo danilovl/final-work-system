@@ -32,7 +32,7 @@ class HomeController extends AbstractController
         private readonly SystemEventFacade $systemEventFacade
     ) {}
 
-    #[PermissionMiddleware(['date' => ['from' => '31-01-2020']])]
+    #[PermissionMiddleware(date: ['from' => '01-01-2023'])]
     public function index(Request $request): Response
     {
         $user = $this->userService->getUser();

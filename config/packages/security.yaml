@@ -66,14 +66,14 @@ security:
 
     # Work pages
     - { path: ^/(%locales%)/work/author/list,                                      roles: [ROLE_STUDENT] }
-    - { path: ^/(%locales%)/work/(\w+)/task/notify/(complete|active)/(\w+)/ajax ,  roles: [ROLE_STUDENT] }
+    - { path: ^/(%locales%)/work/(\w+)/task/notify/(complete|active)/(\w+)/ajax,   roles: [ROLE_STUDENT] }
     - { path: ^/(%locales%)/work/(\w+)/version/create,                             roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/(\w+)/version/detail/,                            roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/(\w+)/version/edit/(\w+),                         roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/(\w+)/version/download/,                          roles: [ROLE_STUDENT, ROLE_SUPERVISOR, ROLE_OPPONENT] }
     - { path: ^/(%locales%)/work/(\w+)/version/delete/(\w+),                       roles: [ROLE_STUDENT, ROLE_SUPERVISOR] }
-    - { path: ^/(%locales%)/work/(\w+)/task/change/(complete|active)/(\w+)/ajax ,  roles: [ROLE_SUPERVISOR] }
-    - { path: ^/(%locales%)/work/(\w+)/tasks/change-all-to-complete/ajax ,         roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/task/change/(complete|active)/(\w+)/ajax,   roles: [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/work/(\w+)/tasks/change-all-to-complete/ajax,          roles: [ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/detail/(\w+),                                     roles: [ROLE_STUDENT, ROLE_OPPONENT, ROLE_SUPERVISOR ] }
     - { path: ^/(%locales%)/work/task/create,           roles: [ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/work/task/create-several,   roles: [ROLE_SUPERVISOR] }
