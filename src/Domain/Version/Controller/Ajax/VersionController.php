@@ -14,6 +14,7 @@ namespace App\Domain\Version\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Media\Entity\Media;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Version\Http\Ajax\{
     VersionEditHandle,
     VersionCreateHandle,
@@ -21,7 +22,6 @@ use App\Domain\Version\Http\Ajax\{
 };
 use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Work\Entity\Work;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request,
@@ -47,12 +47,10 @@ class VersionController extends AbstractController
         return $this->versionCreateHandle->handle($request, $work);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function edit(
         Request $request,
-        Work $work,
-        Media $media
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
     ): Response {
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
@@ -63,10 +61,10 @@ class VersionController extends AbstractController
         return $this->versionEditHandle->handle($request, $media);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
-    public function delete(Work $work, Media $media): JsonResponse
-    {
+    public function delete(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
+    ): JsonResponse {
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);

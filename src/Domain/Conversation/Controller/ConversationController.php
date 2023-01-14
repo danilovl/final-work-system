@@ -23,12 +23,12 @@ use App\Domain\Conversation\Http\{
 };
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request,
     Response
 };
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ConversationController extends AbstractController
@@ -58,13 +58,10 @@ class ConversationController extends AbstractController
         return $this->conversationDetailHandle->handle($request, $conversation);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('userOne', class: User::class, options: ['id' => 'id_user_one'])]
-    #[ParamConverter('userTwo', class: User::class, options: ['id' => 'id_user_two'])]
     public function createWorkConversation(
-        Work $work,
-        User $userOne,
-        User $userTwo
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_user_one' => 'id'])] User $userOne,
+        #[MapEntity(mapping: ['id_user_two' => 'id'])] User $userTwo
     ): RedirectResponse {
         return $this->conversationCreateWorkHandle->handle($work, $userOne, $userTwo);
     }

@@ -16,7 +16,7 @@ use App\Application\Menu\MenuItem;
 use App\Application\Service\UserService;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 

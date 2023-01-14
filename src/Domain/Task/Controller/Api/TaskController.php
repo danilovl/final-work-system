@@ -14,6 +14,7 @@ namespace App\Domain\Task\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Task\Entity\Task;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Domain\Task\Http\Api\{
     TaskDetailHandle,
@@ -26,7 +27,6 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class TaskController extends AbstractController
 {
@@ -47,10 +47,10 @@ class TaskController extends AbstractController
         return $this->taskListSolverHandle->handle($request);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
-    public function detail(Work $work, Task $task): JsonResponse
-    {
+    public function detail(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $task);
 
         return $this->taskDetailHandle->handle($task);

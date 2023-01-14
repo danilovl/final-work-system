@@ -13,6 +13,7 @@
 namespace App\Domain\Task\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\{
     TaskListHandle,
     TaskEditHandle,
@@ -22,7 +23,6 @@ use App\Domain\Task\Http\{
 use App\Domain\Task\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Domain\Work\Entity\Work;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -54,12 +54,10 @@ class TaskController extends AbstractController
         return $this->taskCreateSeveralHandle->handle($request);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function edit(
         Request $request,
-        Work $work,
-        Task $task
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): Response {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 

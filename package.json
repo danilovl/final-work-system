@@ -51,5 +51,9 @@
     "uglify-js": ">=2.6.0",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-merge-and-include-globally": "^2.1.24"
+  },
+  "engines" : {
+    "npm" : "^6.14.13",
+    "node" : "^14.17.0"
   }
 }

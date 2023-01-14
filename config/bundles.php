@@ -23,7 +23,7 @@ return [
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
     FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
-    ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
+    ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Danilovl\AsyncBundle\AsyncBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true],
 ];

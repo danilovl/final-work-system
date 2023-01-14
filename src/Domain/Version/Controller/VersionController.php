@@ -13,6 +13,7 @@
 namespace App\Domain\Version\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Version\Http\{
     VersionEditHandle,
     VersionCreateHandle,
@@ -51,12 +52,10 @@ class VersionController extends AbstractController
         return $this->versionCreateHandle->handle($request, $work);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function edit(
         Request $request,
-        Work $work,
-        Media $media
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
     ): Response {
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
@@ -76,11 +75,9 @@ class VersionController extends AbstractController
         return $this->versionDetailContentHandle->handle($version);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function download(
-        Work $work,
-        Media $media
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
     ): BinaryFileResponse {
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
@@ -91,11 +88,9 @@ class VersionController extends AbstractController
         return $this->versionDownloadHandle->handle($media);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('media', class: Media::class, options: ['id' => 'id_media'])]
     public function downloadGoogle(
-        Work $work,
-        Media $media
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
     ): BinaryFileResponse {
         return $this->versionDownloadHandle->handle($media);
     }

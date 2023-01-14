@@ -14,6 +14,7 @@ namespace App\Domain\Task\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Task\Entity\Task;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\Ajax\{
     TaskEditHandle,
     TaskCreateHandle,
@@ -55,43 +56,39 @@ class TaskController extends AbstractController
         return $this->taskCreateSeveralHandle->handle($request);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function edit(
         Request $request,
-        Work $work,
-        Task $task
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
         return $this->taskEditHandle->handle($request, $task);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
     public function changeStatus(
         Request $request,
-        Work $work,
-        Task $task
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
 
         return $this->taskChangeStatusHandle->handle($request, $task);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
-    public function notifyComplete(Work $work, Task $task): JsonResponse
-    {
+    public function notifyComplete(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE, $task);
 
         return $this->taskNotifyCompleteHandle->handle($task);
     }
 
-    #[ParamConverter('work', class: Work::class, options: ['id' => 'id_work'])]
-    #[ParamConverter('task', class: Task::class, options: ['id' => 'id_task'])]
-    public function delete(Work $work, Task $task): JsonResponse
-    {
+    public function delete(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $task);
 
         return $this->taskDeleteHandle->handle($task);
