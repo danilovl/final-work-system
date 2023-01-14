@@ -1,4 +1,4 @@
-FROM php:8.1.1-fpm
+FROM php:8.2-fpm
 
 RUN apt-get update \
   && apt-get install -y \
@@ -25,8 +25,8 @@ RUN apt-get update \
      libxslt1-dev \
      libzip-dev \
      libonig-dev \
-  &&  ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
-  &&  pecl install redis
+  && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+  && pecl install redis
 
 RUN docker-php-ext-install mysqli \
     && docker-php-ext-install pdo_mysql \
@@ -51,6 +51,11 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install gd \
     && docker-php-source delete \
     && docker-php-ext-enable redis
+
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions amqp
 
 RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
