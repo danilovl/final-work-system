@@ -52,6 +52,7 @@ class DocumentListHandle
         $criteria = null;
 
         $form = $this->documentFormFactory
+            ->setUser($user)
             ->getDocumentForm(ControllerMethodConstant::LIST)
             ->handleRequest($request);
 

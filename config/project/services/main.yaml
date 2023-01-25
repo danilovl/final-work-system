@@ -29,9 +29,3 @@ services:
 
   App\Application\Service\EntityManagerService: '@app.entity_manager'
 
-  #   ParamConverter
-  hashids.converter:
-    class: App\Application\EventListener\HashidsParamConverterListener
-    tags:
-      - { name: request.param_converter, priority: 1, converter: hashids.converter }
-

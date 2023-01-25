@@ -16,12 +16,12 @@
         "ext-sodium": "*",
         "api-platform/core": "^3.0.8",
         "composer/package-versions-deprecated": "1.11.99.3",
-        "danilovl/async-bundle": "^0.1.1",
-        "danilovl/hashids-bundle": "^1.2.0",
+        "danilovl/async-bundle": "^0.2.0",
+        "danilovl/hashids-bundle": "^1.3.0",
         "danilovl/object-to-array-transform-bundle": "^3.1.0",
-        "danilovl/parameter-bundle": "^3.3.0",
-        "danilovl/permission-middleware-bundle": "^2.2.0",
-        "danilovl/render-service-twig-extension-bundle": "^3.1.0",
+        "danilovl/parameter-bundle": "^4.1.0",
+        "danilovl/permission-middleware-bundle": "^2.4.0",
+        "danilovl/render-service-twig-extension-bundle": "^3.2.0",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
@@ -68,7 +68,7 @@
         "symfony/yaml": "6.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "webonyx/graphql-php": "dev-master"
+        "webonyx/graphql-php": "^15.0.1"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.1",

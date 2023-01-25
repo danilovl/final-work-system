@@ -54,12 +54,12 @@ class TaskEventDispatcherService
         $this->asyncService->add(function () use ($genericEvent, $task): void {
             $this->eventDispatcher->dispatch(
                 $genericEvent,
-                !$task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_EDIT : Events::NOTIFICATION_TASK_CREATE
+                $task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_CREATE : Events::NOTIFICATION_TASK_EDIT
             );
 
             $this->eventDispatcher->dispatch(
                 $genericEvent,
-                !$task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_EDIT : Events::SYSTEM_TASK_CREATE
+                $task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_CREATE : Events::SYSTEM_TASK_EDIT
             );
         });
     }
@@ -102,7 +102,6 @@ class TaskEventDispatcherService
             default:
                 throw new RuntimeException(sprintf('Type event "%s" for onTaskChangeStatus not exist', $type));
         }
-
 
         $this->asyncService->add(function () use ($genericEvent, $notificationEvent, $systemEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, $notificationEvent);
