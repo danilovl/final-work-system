@@ -16,9 +16,9 @@ use App\Domain\Task\Entity\Task;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class TaskDetailHandle
+readonly class TaskDetailHandle
 {
-    public function __construct(private readonly ObjectToArrayTransformService $objectToArrayTransformService) {}
+    public function __construct(private ObjectToArrayTransformService $objectToArrayTransformService) {}
 
     public function handle(Task $task): JsonResponse
     {

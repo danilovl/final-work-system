@@ -29,14 +29,14 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class EventAddressEditHandle
+readonly class EventAddressEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly EventAddressFacade $eventAddressFacade,
-        private readonly EventAddressFactory $eventAddressFactory,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private EventAddressFacade $eventAddressFacade,
+        private EventAddressFactory $eventAddressFactory,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request, EventAddress $eventAddress): JsonResponse

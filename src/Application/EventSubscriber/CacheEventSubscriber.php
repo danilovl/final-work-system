@@ -17,11 +17,11 @@ use App\Application\EventDispatcher\GenericEvent\CacheGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-class CacheEventSubscriber implements EventSubscriberInterface
+readonly class CacheEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly CacheInterface $cache,
-        private readonly HomepageCache $homepageCache
+        private CacheInterface $cache,
+        private HomepageCache $homepageCache
     ) {}
 
     public static function getSubscribedEvents(): array

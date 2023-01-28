@@ -21,12 +21,12 @@ use App\Application\Service\{
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ProfileDeleteImageHandle
+readonly class ProfileDeleteImageHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private UserService $userService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(): RedirectResponse

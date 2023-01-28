@@ -16,9 +16,9 @@ use App\Application\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 
-class TaskStatusService
+readonly class TaskStatusService
 {
-    public function __construct(private readonly TaskEventDispatcherService $taskEventDispatcherService) {}
+    public function __construct(private TaskEventDispatcherService $taskEventDispatcherService) {}
 
     public function changeStatus(string $type, Task $task): void
     {

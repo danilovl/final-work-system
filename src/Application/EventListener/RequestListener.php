@@ -23,13 +23,13 @@ use App\Application\Service\{
 use DateTime;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
-class RequestListener implements EventSubscriberInterface
+readonly class RequestListener implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly SeoPageService $seoPageService,
-        private readonly AsyncService $asyncService
+        private UserService $userService,
+        private EntityManagerService $entityManagerService,
+        private SeoPageService $seoPageService,
+        private AsyncService $asyncService
     ) {}
 
     public function onKernelRequest(RequestEvent $requestEvent): void

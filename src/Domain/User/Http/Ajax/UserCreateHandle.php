@@ -29,14 +29,14 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class UserCreateHandle
+readonly class UserCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserFacade $userFacade,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly UserFactory $userFactory,
-        private readonly UserEventDispatcherService $userEventDispatcherService
+        private RequestService $requestService,
+        private UserFacade $userFacade,
+        private FormFactoryInterface $formFactory,
+        private UserFactory $userFactory,
+        private UserEventDispatcherService $userEventDispatcherService
     ) {}
 
     public function handle(Request $request): JsonResponse

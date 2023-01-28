@@ -20,11 +20,11 @@ use App\Application\Service\{
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class DocumentDeleteHandle
+readonly class DocumentDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Media $media): JsonResponse

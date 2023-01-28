@@ -28,14 +28,14 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class WorkCreateHandle
+readonly class WorkCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly WorkFactory $workFactory,
-        private readonly WorkEventDispatcherService $workEventDispatcherService
+        private RequestService $requestService,
+        private UserService $userService,
+        private FormFactoryInterface $formFactory,
+        private WorkFactory $workFactory,
+        private WorkEventDispatcherService $workEventDispatcherService
     ) {}
 
     public function handle(Request $request): JsonResponse

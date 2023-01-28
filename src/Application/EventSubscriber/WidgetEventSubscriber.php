@@ -16,9 +16,9 @@ use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use App\Domain\Widget\Service\WidgetManagerService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class WidgetEventSubscriber implements EventSubscriberInterface
+readonly class WidgetEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly WidgetManagerService $widgetManagerService) {}
+    public function __construct(private WidgetManagerService $widgetManagerService) {}
 
     public static function getSubscribedEvents(): array
     {

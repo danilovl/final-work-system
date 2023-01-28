@@ -31,14 +31,14 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class TaskCreateSeveralHandle
+readonly class TaskCreateSeveralHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TaskFormFactory $taskFormFactory,
-        private readonly TaskFactory $taskFactory,
-        private readonly TaskEventDispatcherService $taskEventDispatcherService
+        private RequestService $requestService,
+        private UserService $userService,
+        private TaskFormFactory $taskFormFactory,
+        private TaskFactory $taskFactory,
+        private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
     public function handle(Request $request): JsonResponse

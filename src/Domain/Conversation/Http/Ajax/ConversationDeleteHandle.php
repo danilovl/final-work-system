@@ -20,11 +20,11 @@ use App\Application\Service\RequestService;
 use App\Domain\Conversation\Entity\Conversation;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ConversationDeleteHandle
+readonly class ConversationDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Conversation $conversation): JsonResponse

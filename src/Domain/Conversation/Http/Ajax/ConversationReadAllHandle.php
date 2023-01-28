@@ -26,14 +26,14 @@ use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ConversationReadAllHandle
+readonly class ConversationReadAllHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
-        private readonly ConversationMessageStatusFacade $conversationMessageStatusFacade
+        private RequestService $requestService,
+        private UserService $userService,
+        private EntityManagerService $entityManagerService,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private ConversationMessageStatusFacade $conversationMessageStatusFacade
     ) {}
 
     public function handle(): JsonResponse

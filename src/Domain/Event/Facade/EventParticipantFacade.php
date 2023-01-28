@@ -24,11 +24,11 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 
-class EventParticipantFacade
+readonly class EventParticipantFacade
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly UserWorkService $userWorkService
+        private EntityManagerService $entityManagerService,
+        private UserWorkService $userWorkService
     ) {}
 
     public function getEventParticipantsByUserEvent(

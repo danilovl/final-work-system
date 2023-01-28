@@ -21,11 +21,11 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class VersionListHandle
+readonly class VersionListHandle
 {
     public function __construct(
-        private readonly WorkDetailTabService $workDetailTabService,
-        private readonly ObjectToArrayTransformService $objectToArrayTransformService
+        private WorkDetailTabService $workDetailTabService,
+        private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
     public function handle(Request $request, Work $work): JsonResponse

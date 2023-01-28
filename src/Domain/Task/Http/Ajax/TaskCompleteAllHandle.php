@@ -25,14 +25,14 @@ use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Facade\TaskFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class TaskCompleteAllHandle
+readonly class TaskCompleteAllHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly TaskFacade $taskFacade,
-        private readonly TaskEventDispatcherService $taskEventDispatcherService
+        private RequestService $requestService,
+        private UserService $userService,
+        private EntityManagerService $entityManagerService,
+        private TaskFacade $taskFacade,
+        private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
     public function handle(): JsonResponse

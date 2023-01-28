@@ -23,14 +23,14 @@ use App\Domain\EventAddress\Facade\EventAddressFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class EventSwitchToSkypeHandle
+readonly class EventSwitchToSkypeHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly EventAddressFacade $eventAddressFacade,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly EventEventDispatcherService $eventEventDispatcherService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService,
+        private EventAddressFacade $eventAddressFacade,
+        private HashidsServiceInterface $hashidsService,
+        private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
     public function handle(Event $event): RedirectResponse

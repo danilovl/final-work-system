@@ -30,14 +30,14 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class UserGroupEditHandle
+readonly class UserGroupEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly UserGroupFactory $userGroupFactory,
-        private readonly UserGroupFormFactory $userGroupFormFactory
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private UserGroupFactory $userGroupFactory,
+        private UserGroupFormFactory $userGroupFormFactory
     ) {}
 
     public function handle(Request $request, Group $group): Response

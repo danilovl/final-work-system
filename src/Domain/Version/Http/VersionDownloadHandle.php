@@ -16,9 +16,9 @@ use App\Application\Service\MediaService;
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class VersionDownloadHandle
+readonly class VersionDownloadHandle
 {
-    public function __construct(private readonly MediaService $mediaService) {}
+    public function __construct(private MediaService $mediaService) {}
 
     public function handle(Media $media): BinaryFileResponse
     {

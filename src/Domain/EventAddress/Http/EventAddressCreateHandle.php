@@ -28,16 +28,16 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class EventAddressCreateHandle
+readonly class EventAddressCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TranslatorService $translatorService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly EventAddressFactory $eventAddressFactory,
-        private readonly EventAddressFormFactory $eventAddressFormFactory,
-        private readonly HashidsServiceInterface $hashidsService
+        private RequestService $requestService,
+        private UserService $userService,
+        private TranslatorService $translatorService,
+        private TwigRenderService $twigRenderService,
+        private EventAddressFactory $eventAddressFactory,
+        private EventAddressFormFactory $eventAddressFormFactory,
+        private HashidsServiceInterface $hashidsService
     ) {}
 
     public function handle(Request $request): Response

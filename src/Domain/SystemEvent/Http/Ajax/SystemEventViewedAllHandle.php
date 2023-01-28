@@ -27,14 +27,14 @@ use App\Domain\SystemEvent\Facade\{
 };
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class SystemEventViewedAllHandle
+readonly class SystemEventViewedAllHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly SystemEventFacade $systemEventFacade,
-        private readonly SystemEventRecipientFacade $systemEventRecipientFacade,
-        private readonly CacheEventDispatcherService $cacheEventDispatcherService
+        private RequestService $requestService,
+        private UserService $userService,
+        private SystemEventFacade $systemEventFacade,
+        private SystemEventRecipientFacade $systemEventRecipientFacade,
+        private CacheEventDispatcherService $cacheEventDispatcherService
     ) {}
 
     public function handle(): JsonResponse

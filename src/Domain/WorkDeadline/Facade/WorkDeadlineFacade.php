@@ -16,9 +16,9 @@ use App\Domain\Work\Repository\WorkRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Domain\User\Entity\User;
 
-class WorkDeadlineFacade
+readonly class WorkDeadlineFacade
 {
-    public function __construct(private readonly WorkRepository $workRepository) {}
+    public function __construct(private WorkRepository $workRepository) {}
 
     public function getWorkDeadlinesBySupervisor(User $user, int $limit = null): ArrayCollection
     {

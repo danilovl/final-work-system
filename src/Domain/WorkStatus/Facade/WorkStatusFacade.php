@@ -16,9 +16,9 @@ use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
 
-class WorkStatusFacade
+readonly class WorkStatusFacade
 {
-    public function __construct(private readonly WorkStatusRepository $workStatusRepository) {}
+    public function __construct(private WorkStatusRepository $workStatusRepository) {}
 
     public function find(int $id): ?WorkStatus
     {

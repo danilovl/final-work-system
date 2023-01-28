@@ -16,9 +16,9 @@ use App\Domain\MediaCategory\Repository\MediaCategoryRepository;
 use Doctrine\ORM\Query;
 use App\Domain\User\Entity\User;
 
-class MediaCategoryFacade
+readonly class MediaCategoryFacade
 {
-    public function __construct(private readonly MediaCategoryRepository $mediaCategoryRepository) {}
+    public function __construct(private MediaCategoryRepository $mediaCategoryRepository) {}
 
     public function queryMediaCategoriesByOwner(User $user): Query
     {

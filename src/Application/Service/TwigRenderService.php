@@ -19,11 +19,11 @@ use Symfony\Component\HttpFoundation\{
 };
 use Twig\Environment;
 
-class TwigRenderService
+readonly class TwigRenderService
 {
     public function __construct(
-        private readonly Environment $environment,
-        private readonly ParameterServiceInterface $parameterService
+        private Environment $environment,
+        private ParameterServiceInterface $parameterService
     ) {}
 
     public function render(

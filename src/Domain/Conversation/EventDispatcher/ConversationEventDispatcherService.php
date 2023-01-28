@@ -18,11 +18,11 @@ use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ConversationEventDispatcherService
+readonly class ConversationEventDispatcherService
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly AsyncService $asyncService
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
     ) {}
 
     public function onConversationMessageCreate(ConversationMessage $conversationMessage): void

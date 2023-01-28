@@ -23,13 +23,13 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class EventScheduleListHandle
+readonly class EventScheduleListHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly UserService $userService,
-        private readonly EventScheduleFacade $eventScheduleFacade,
-        private readonly PaginatorService $paginatorService
+        private TwigRenderService $twigRenderService,
+        private UserService $userService,
+        private EventScheduleFacade $eventScheduleFacade,
+        private PaginatorService $paginatorService
     ) {}
 
     public function handle(Request $request): Response

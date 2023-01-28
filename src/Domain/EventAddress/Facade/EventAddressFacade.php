@@ -16,9 +16,9 @@ use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Repository\EventAddressRepository;
 use App\Domain\User\Entity\User;
 
-class EventAddressFacade
+readonly class EventAddressFacade
 {
-    public function __construct(private readonly EventAddressRepository $eventAddressRepository) {}
+    public function __construct(private EventAddressRepository $eventAddressRepository) {}
 
     public function getSkypeByOwner(User $user): ?EventAddress
     {

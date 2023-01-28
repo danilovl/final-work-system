@@ -15,9 +15,9 @@ namespace App\Domain\ApiUser\Facade;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Repository\ApiUserRepository;
 
-class ApiUserFacade
+readonly class ApiUserFacade
 {
-    public function __construct(private readonly ApiUserRepository $apiUserRepository) {}
+    public function __construct(private ApiUserRepository $apiUserRepository) {}
 
     public function findByApiKey(string $apiKey): ?ApiUser
     {

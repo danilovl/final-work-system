@@ -21,11 +21,11 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 
-class UserFacade
+readonly class UserFacade
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly UserWorkService $userWorkService
+        private UserRepository $userRepository,
+        private UserWorkService $userWorkService
     ) {}
 
     public function find(int $id): ?User

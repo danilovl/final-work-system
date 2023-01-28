@@ -22,12 +22,12 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class TaskListWorkHandle
+readonly class TaskListWorkHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly WorkDetailTabService $workDetailTabService,
-        private readonly ObjectToArrayTransformService $objectToArrayTransformService
+        private UserService $userService,
+        private WorkDetailTabService $workDetailTabService,
+        private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
     public function handle(Request $request, Work $work): JsonResponse

@@ -20,11 +20,11 @@ use App\Application\Service\{
 use App\Domain\Event\Entity\Event;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class EventDeleteHandle
+readonly class EventDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Event $event): JsonResponse

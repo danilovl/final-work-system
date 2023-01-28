@@ -31,15 +31,15 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class DocumentListOwnerHandle
+readonly class DocumentListOwnerHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly DocumentFormFactory $documentFormFactory,
-        private readonly PaginatorService $paginatorService,
-        private readonly MediaFacade $mediaFacade
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private EntityManagerService $entityManagerService,
+        private DocumentFormFactory $documentFormFactory,
+        private PaginatorService $paginatorService,
+        private MediaFacade $mediaFacade
     ) {}
 
     public function handle(Request $request): Response

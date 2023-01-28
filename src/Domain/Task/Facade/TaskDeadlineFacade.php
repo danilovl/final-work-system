@@ -16,11 +16,11 @@ use App\Domain\Task\Repository\TaskRepository;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Domain\User\Entity\User;
 
-class TaskDeadlineFacade
+readonly class TaskDeadlineFacade
 {
     public function __construct(
-        private readonly TaskRepository $taskRepository,
-        private readonly ParameterServiceInterface $parameterService
+        private TaskRepository $taskRepository,
+        private ParameterServiceInterface $parameterService
     ) {}
 
     public function getDeadlinesByOwner(

@@ -22,11 +22,11 @@ use App\Domain\ConversationMessageStatus\Repository\ConversationMessageStatusRep
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 
-class ConversationStatusService
+readonly class ConversationStatusService
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly ConversationMessageStatusRepository $conversationMessageStatusRepository
+        private EntityManagerService $entityManagerService,
+        private ConversationMessageStatusRepository $conversationMessageStatusRepository
     ) {}
 
     public function isConversationRead(

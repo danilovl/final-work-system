@@ -17,9 +17,9 @@ use App\Domain\SystemEventRecipient\Repository\SystemEventRecipientRepository;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\Query;
 
-class SystemEventRecipientFacade
+readonly class SystemEventRecipientFacade
 {
-    public function __construct(private readonly SystemEventRecipientRepository $systemEventRecipientRepository) {}
+    public function __construct(private SystemEventRecipientRepository $systemEventRecipientRepository) {}
 
     public function queryRecipientsByUser(User $user): Query
     {

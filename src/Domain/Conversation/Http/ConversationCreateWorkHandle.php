@@ -27,14 +27,14 @@ use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ConversationCreateWorkHandle
+readonly class ConversationCreateWorkHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly ConversationService $conversationService,
-        private readonly ConversationVariationService $conversationVariationService,
-        private readonly ConversationFactory $conversationFactory
+        private RequestService $requestService,
+        private HashidsServiceInterface $hashidsService,
+        private ConversationService $conversationService,
+        private ConversationVariationService $conversationVariationService,
+        private ConversationFactory $conversationFactory
     ) {}
 
     public function handle(

@@ -25,12 +25,12 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class DocumentCategoryEditHandle
+readonly class DocumentCategoryEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly MediaCategoryFactory $mediaCategoryFactory
+        private RequestService $requestService,
+        private FormFactoryInterface $formFactory,
+        private MediaCategoryFactory $mediaCategoryFactory
     ) {}
 
     public function handle(Request $request, MediaCategory $mediaCategory): JsonResponse

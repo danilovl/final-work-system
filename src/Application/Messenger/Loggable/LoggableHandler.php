@@ -16,9 +16,9 @@ use App\Application\Service\EntityManagerService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class LoggableHandler
+readonly class LoggableHandler
 {
-    public function __construct(private readonly EntityManagerService $entityManagerService) {}
+    public function __construct(private EntityManagerService $entityManagerService) {}
 
     public function __invoke(LoggableMessage $loggableMessage): void
     {

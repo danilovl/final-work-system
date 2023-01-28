@@ -17,9 +17,9 @@ use App\Domain\MediaMimeType\Repository\MediaMimeTypeRepository;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 
-class MediaMimeTypeFacade
+readonly class MediaMimeTypeFacade
 {
-    public function __construct(private readonly MediaMimeTypeRepository $mediaMimeTypeRepository) {}
+    public function __construct(private MediaMimeTypeRepository $mediaMimeTypeRepository) {}
 
     public function getFormValidationMimeTypes(bool $onlyKey = false): array
     {

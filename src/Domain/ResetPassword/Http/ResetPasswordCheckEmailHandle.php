@@ -19,12 +19,12 @@ use App\Application\Service\{
 };
 use Symfony\Component\HttpFoundation\Response;
 
-class ResetPasswordCheckEmailHandle
+readonly class ResetPasswordCheckEmailHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly ResetPasswordService $resetPasswordService
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private ResetPasswordService $resetPasswordService
     ) {}
 
     public function handle(): Response

@@ -15,9 +15,9 @@ namespace App\Domain\Document\Http;
 use App\Application\Service\MediaService;
 use App\Domain\Media\Entity\Media;
 
-class DocumentDownloadHandle
+readonly class DocumentDownloadHandle
 {
-    public function __construct(private readonly MediaService $mediaService) {}
+    public function __construct(private MediaService $mediaService) {}
 
     public function handle(Media $media): void
     {

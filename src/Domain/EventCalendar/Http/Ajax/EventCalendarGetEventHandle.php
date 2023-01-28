@@ -24,12 +24,12 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class EventCalendarGetEventHandle
+readonly class EventCalendarGetEventHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EventCalendarFacade $eventCalendarFacade,
-        private readonly UserService $userService
+        private RequestService $requestService,
+        private EventCalendarFacade $eventCalendarFacade,
+        private UserService $userService
     ) {}
 
     public function handle(Request $request): JsonResponse

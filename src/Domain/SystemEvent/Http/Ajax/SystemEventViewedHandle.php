@@ -25,13 +25,13 @@ use App\Application\Service\{
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class SystemEventViewedHandle
+readonly class SystemEventViewedHandle
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly CacheEventDispatcherService $cacheEventDispatcherService
+        private EntityManagerService $entityManagerService,
+        private RequestService $requestService,
+        private UserService $userService,
+        private CacheEventDispatcherService $cacheEventDispatcherService
     ) {}
 
     public function handle(SystemEventRecipient $systemEventRecipient): JsonResponse

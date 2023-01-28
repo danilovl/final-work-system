@@ -29,16 +29,16 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class EventAddressEditHandle
+readonly class EventAddressEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly EventAddressFormFactory $eventAddressFormFactory,
-        private readonly EventAddressFacade $eventAddressFacade,
-        private readonly EventAddressFactory $eventAddressFactory,
-        private readonly TranslatorService $translatorService
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private EventAddressFormFactory $eventAddressFormFactory,
+        private EventAddressFacade $eventAddressFacade,
+        private EventAddressFactory $eventAddressFactory,
+        private TranslatorService $translatorService
     ) {}
 
     public function handle(Request $request, EventAddress $eventAddress): Response

@@ -15,9 +15,9 @@ namespace App\Domain\SystemEvent\Facade;
 use App\Domain\SystemEvent\Repository\SystemEventRepository;
 use App\Domain\User\Entity\User;
 
-class SystemEventFacade
+readonly class SystemEventFacade
 {
-    public function __construct(private readonly SystemEventRepository $systemEventRepository) {}
+    public function __construct(private SystemEventRepository $systemEventRepository) {}
 
     public function getTotalUnreadSystemEventsByRecipient(User $user): ?int
     {

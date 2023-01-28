@@ -19,9 +19,9 @@ use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\Query;
 
-class MediaFacade
+readonly class MediaFacade
 {
-    public function __construct(private readonly MediaRepository $mediaRepository) {}
+    public function __construct(private MediaRepository $mediaRepository) {}
 
     public function find(int $id): ?Media
     {

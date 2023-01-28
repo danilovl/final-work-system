@@ -24,12 +24,12 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class EventScheduleDeleteHandle
+readonly class EventScheduleDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly FormDeleteFactory $formDeleteFactory
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService,
+        private FormDeleteFactory $formDeleteFactory
     ) {}
 
     public function handle(Request $request, EventSchedule $eventSchedule): RedirectResponse

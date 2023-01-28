@@ -18,11 +18,11 @@ use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class VersionEventDispatcherService
+readonly class VersionEventDispatcherService
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly AsyncService $asyncService
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
     ) {}
 
     public function onVersionCreate(Media $media): void

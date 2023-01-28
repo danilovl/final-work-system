@@ -25,13 +25,13 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class ArticleCategoryArticleListHandle
+readonly class ArticleCategoryArticleListHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly ArticleFacade $articleFacade,
-        private readonly PaginatorService $paginatorService,
-        private readonly SeoPageService $seoPageService
+        private TwigRenderService $twigRenderService,
+        private ArticleFacade $articleFacade,
+        private PaginatorService $paginatorService,
+        private SeoPageService $seoPageService
     ) {}
 
     public function handle(Request $request, ArticleCategory $articleCategory): Response

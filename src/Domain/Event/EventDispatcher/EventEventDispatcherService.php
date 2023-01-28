@@ -19,11 +19,11 @@ use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class EventEventDispatcherService
+readonly class EventEventDispatcherService
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly AsyncService $asyncService
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
     ) {}
 
     public function onEventComment(Comment $comment, bool $isEventCommentExist): void

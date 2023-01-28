@@ -26,13 +26,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class TaskEditHandle
+readonly class TaskEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TaskFactory $taskFactory,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly TaskEventDispatcherService $taskEventDispatcherService
+        private RequestService $requestService,
+        private TaskFactory $taskFactory,
+        private FormFactoryInterface $formFactory,
+        private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
     public function handle(Request $request, Task $task): JsonResponse

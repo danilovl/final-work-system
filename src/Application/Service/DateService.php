@@ -14,9 +14,9 @@ namespace App\Application\Service;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class DateService
+readonly class DateService
 {
-    public function __construct(private readonly TranslatorInterface $translator) {}
+    public function __construct(private TranslatorInterface $translator) {}
 
     public function getWeekDaysArray(): array
     {

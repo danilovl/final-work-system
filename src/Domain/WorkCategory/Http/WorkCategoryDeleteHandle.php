@@ -20,11 +20,11 @@ use App\Application\Service\{
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class WorkCategoryDeleteHandle
+readonly class WorkCategoryDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(WorkCategory $workCategory): RedirectResponse

@@ -16,9 +16,9 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 
-class EntityManagerService
+readonly class EntityManagerService
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager) {}
+    public function __construct(private EntityManagerInterface $entityManager) {}
 
     public function getReference(string $entityName, int $id): ?object
     {

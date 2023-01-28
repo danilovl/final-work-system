@@ -18,11 +18,11 @@ use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class DocumentEventDispatcherService
+readonly class DocumentEventDispatcherService
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly AsyncService $asyncService
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
     ) {}
 
     public function onDocumentCreate(Media $media): void

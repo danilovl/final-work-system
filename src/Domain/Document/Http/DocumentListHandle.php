@@ -32,16 +32,16 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class DocumentListHandle
+readonly class DocumentListHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly UserFacade $userFacade,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly MediaFacade $mediaFacade,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly DocumentFormFactory $documentFormFactory,
-        private readonly PaginatorService $paginatorService
+        private UserService $userService,
+        private UserFacade $userFacade,
+        private TwigRenderService $twigRenderService,
+        private MediaFacade $mediaFacade,
+        private EntityManagerService $entityManagerService,
+        private DocumentFormFactory $documentFormFactory,
+        private PaginatorService $paginatorService
     ) {}
 
     public function handle(Request $request): Response

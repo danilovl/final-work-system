@@ -23,13 +23,13 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class ResetPasswordSendPasswordHandle
+readonly class ResetPasswordSendPasswordHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly UserService $userService,
-        private readonly TaskFacade $taskFacade,
-        private readonly PaginatorService $paginatorService
+        private TwigRenderService $twigRenderService,
+        private UserService $userService,
+        private TaskFacade $taskFacade,
+        private PaginatorService $paginatorService
     ) {}
 
     public function handle(Request $request): Response

@@ -17,11 +17,11 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PaginatorService
+readonly class PaginatorService
 {
     public function __construct(
-        private readonly PaginatorInterface $paginator,
-        private readonly ParameterServiceInterface $parameterService
+        private PaginatorInterface $paginator,
+        private ParameterServiceInterface $parameterService
     ) {}
 
     public function createPagination(

@@ -22,12 +22,12 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class EventAddressListHandle
+readonly class EventAddressListHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly PaginatorService $paginatorService
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private PaginatorService $paginatorService
     ) {}
 
     public function handle(Request $request): Response

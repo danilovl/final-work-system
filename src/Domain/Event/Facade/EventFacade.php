@@ -16,9 +16,9 @@ use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
 
-class EventFacade
+readonly class EventFacade
 {
-    public function __construct(private readonly EventRepository $eventRepository) {}
+    public function __construct(private EventRepository $eventRepository) {}
 
     public function find(int $id): ?Event
     {

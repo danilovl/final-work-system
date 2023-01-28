@@ -16,9 +16,9 @@ use App\Domain\Work\Entity\Work;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class WorkDetailHandle
+readonly class WorkDetailHandle
 {
-    public function __construct(private readonly ObjectToArrayTransformService $objectToArrayTransformService) {}
+    public function __construct(private ObjectToArrayTransformService $objectToArrayTransformService) {}
 
     public function handle(Work $work): JsonResponse
     {

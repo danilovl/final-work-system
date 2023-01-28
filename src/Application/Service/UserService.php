@@ -15,9 +15,9 @@ namespace App\Application\Service;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class UserService
+readonly class UserService
 {
-    public function __construct(private readonly TokenStorageInterface $tokenStorage) {}
+    public function __construct(private TokenStorageInterface $tokenStorage) {}
 
     public function getUser(): ?User
     {

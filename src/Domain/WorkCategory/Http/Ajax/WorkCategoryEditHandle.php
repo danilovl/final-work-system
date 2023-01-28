@@ -25,12 +25,12 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class WorkCategoryEditHandle
+readonly class WorkCategoryEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly WorkCategoryFactory $workCategoryFactory,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private WorkCategoryFactory $workCategoryFactory,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request, WorkCategory $workCategory): JsonResponse

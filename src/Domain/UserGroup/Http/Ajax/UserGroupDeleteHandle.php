@@ -20,11 +20,11 @@ use App\Application\Service\{
 use App\Domain\UserGroup\Entity\Group;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class UserGroupDeleteHandle
+readonly class UserGroupDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Group $group): JsonResponse

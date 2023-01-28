@@ -20,11 +20,11 @@ use App\Domain\Article\Entity\Article;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleDetailHandle
+readonly class ArticleDetailHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly SeoPageService $seoPageService
+        private TwigRenderService $twigRenderService,
+        private SeoPageService $seoPageService
     ) {}
 
     public function handle(Article $article, ArticleCategory $articleCategory): Response

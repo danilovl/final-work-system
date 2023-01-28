@@ -20,12 +20,12 @@ use App\Application\Service\{
 use App\Domain\EventAddress\Entity\EventAddress;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventAddressDetailHandle
+readonly class EventAddressDetailHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly SeoPageService $seoPageService,
-        private readonly FormDeleteFactory $formDeleteFactory
+        private TwigRenderService $twigRenderService,
+        private SeoPageService $seoPageService,
+        private FormDeleteFactory $formDeleteFactory
     ) {}
 
     public function handle(EventAddress $eventAddress): Response

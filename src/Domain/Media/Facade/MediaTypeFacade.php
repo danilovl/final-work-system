@@ -15,9 +15,9 @@ namespace App\Domain\Media\Facade;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\MediaType\Repository\MediaTypeRepository;
 
-class MediaTypeFacade
+readonly class MediaTypeFacade
 {
-    public function __construct(private readonly MediaTypeRepository $mediaTypeRepository) {}
+    public function __construct(private MediaTypeRepository $mediaTypeRepository) {}
 
     public function find(int $id): ?MediaType
     {

@@ -31,17 +31,17 @@ use Symfony\Component\HttpFoundation\{
 };
 use Symfony\Component\Routing\RouterInterface;
 
-class EventScheduleCloneHandle
+readonly class EventScheduleCloneHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly EventScheduleFactory $eventScheduleFactory,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly SeoPageService $seoPageService,
-        private readonly RouterInterface $router
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private HashidsServiceInterface $hashidsService,
+        private EventScheduleFactory $eventScheduleFactory,
+        private FormFactoryInterface $formFactory,
+        private SeoPageService $seoPageService,
+        private RouterInterface $router
     ) {}
 
     public function handle(Request $request, EventSchedule $eventSchedule): Response

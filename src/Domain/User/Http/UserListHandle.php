@@ -38,18 +38,18 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class UserListHandle
+readonly class UserListHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly UserService $userService,
-        private readonly UserFacade $userFacade,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly PaginatorService $paginatorService,
-        private readonly WorkFacade $workFacade,
-        private readonly WorkStatusFacade $workStatusFacade,
-        private readonly SeoPageService $seoPageService
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private UserService $userService,
+        private UserFacade $userFacade,
+        private FormFactoryInterface $formFactory,
+        private PaginatorService $paginatorService,
+        private WorkFacade $workFacade,
+        private WorkStatusFacade $workStatusFacade,
+        private SeoPageService $seoPageService
     ) {}
 
     public function handle(Request $request): Response

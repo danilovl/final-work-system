@@ -26,12 +26,12 @@ use Symfony\Component\HttpFoundation\{
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class RequestService
+readonly class RequestService
 {
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly RouterInterface $router,
-        private readonly TranslatorService $translatorService
+        private RequestStack $requestStack,
+        private RouterInterface $router,
+        private TranslatorService $translatorService
     ) {}
 
     public function addFlash(string $type, mixed $message): void

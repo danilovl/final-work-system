@@ -30,15 +30,15 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class DocumentCategoryCreateHandle
+readonly class DocumentCategoryCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TranslatorService $translatorService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly DocumentCategoryFormFactory $documentCategoryFormFactory,
-        private readonly MediaCategoryFactory $mediaCategoryFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private TranslatorService $translatorService,
+        private TwigRenderService $twigRenderService,
+        private DocumentCategoryFormFactory $documentCategoryFormFactory,
+        private MediaCategoryFactory $mediaCategoryFactory
     ) {}
 
     public function handle(Request $request): Response

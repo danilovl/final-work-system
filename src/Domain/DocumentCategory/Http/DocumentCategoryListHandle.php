@@ -24,14 +24,14 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class DocumentCategoryListHandle
+readonly class DocumentCategoryListHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly PaginatorService $paginatorService,
-        private readonly MediaCategoryFacade $mediaCategoryFacade,
-        private readonly ParameterServiceInterface $parameterService
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private PaginatorService $paginatorService,
+        private MediaCategoryFacade $mediaCategoryFacade,
+        private ParameterServiceInterface $parameterService
     ) {}
 
     public function handle(Request $request): Response

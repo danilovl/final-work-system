@@ -24,12 +24,12 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class TaskChangeStatusHandle
+readonly class TaskChangeStatusHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TaskStatusService $taskStatusService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private TaskStatusService $taskStatusService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Request $request, Task $task): JsonResponse

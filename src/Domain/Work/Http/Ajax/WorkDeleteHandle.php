@@ -20,11 +20,11 @@ use App\Application\Service\{
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class WorkDeleteHandle
+readonly class WorkDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Work $work): JsonResponse

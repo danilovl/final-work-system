@@ -16,9 +16,9 @@ use App\Domain\WorkCategory\Repository\WorkCategoryRepository;
 use Doctrine\ORM\Query;
 use App\Domain\User\Entity\User;
 
-class WorkCategoryFacade
+readonly class WorkCategoryFacade
 {
-    public function __construct(private readonly WorkCategoryRepository $workCategoryRepository) {}
+    public function __construct(private WorkCategoryRepository $workCategoryRepository) {}
 
     public function queryWorkCategoriesByOwner(User $user): Query
     {

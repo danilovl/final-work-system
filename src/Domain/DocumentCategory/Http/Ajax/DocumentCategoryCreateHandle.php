@@ -25,13 +25,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class DocumentCategoryCreateHandle
+readonly class DocumentCategoryCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly MediaCategoryFactory $mediaCategoryFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private FormFactoryInterface $formFactory,
+        private MediaCategoryFactory $mediaCategoryFactory
     ) {}
 
     public function handle(Request $request): JsonResponse

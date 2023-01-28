@@ -28,13 +28,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class SystemEventTypeEventsHandle
+readonly class SystemEventTypeEventsHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly PaginatorService $paginatorService,
-        private readonly SystemEventRecipientFacade $systemEventRecipientFacade,
-        private readonly SystemEventLinkGeneratorService $systemEventLinkGeneratorService
+        private UserService $userService,
+        private PaginatorService $paginatorService,
+        private SystemEventRecipientFacade $systemEventRecipientFacade,
+        private SystemEventLinkGeneratorService $systemEventLinkGeneratorService
     ) {}
 
     public function handle(Request $request, string $type): JsonResponse

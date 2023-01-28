@@ -15,9 +15,9 @@ namespace App\Domain\Article\Facade;
 use App\Domain\ArticleCategory\Repository\ArticleCategoryRepository;
 use Doctrine\ORM\Query;
 
-class ArticleCategoryFacade
+readonly class ArticleCategoryFacade
 {
-    public function __construct(private readonly ArticleCategoryRepository $articleCategoryRepository) {}
+    public function __construct(private ArticleCategoryRepository $articleCategoryRepository) {}
 
     public function queryCategoriesByRoles(iterable $roles): Query
     {

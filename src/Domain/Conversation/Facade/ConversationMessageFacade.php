@@ -24,12 +24,12 @@ use App\Domain\User\Entity\User;
 use DateTime;
 use Doctrine\ORM\Query;
 
-class ConversationMessageFacade
+readonly class ConversationMessageFacade
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly ConversationStatusService $conversationStatusService,
-        private readonly ConversationMessageRepository $conversationMessageRepository
+        private EntityManagerService $entityManagerService,
+        private ConversationStatusService $conversationStatusService,
+        private ConversationMessageRepository $conversationMessageRepository
     ) {}
 
     public function find(int $id): ?ConversationMessage

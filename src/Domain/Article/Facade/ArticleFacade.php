@@ -16,9 +16,9 @@ use App\Domain\Article\Repository\ArticleRepository;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use Doctrine\ORM\Query;
 
-class ArticleFacade
+readonly class ArticleFacade
 {
-    public function __construct(private readonly ArticleRepository $articleRepository) {}
+    public function __construct(private ArticleRepository $articleRepository) {}
 
     public function queryArticlesByCategory(ArticleCategory $articleCategory): Query
     {

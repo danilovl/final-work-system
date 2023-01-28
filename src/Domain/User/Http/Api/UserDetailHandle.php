@@ -16,11 +16,11 @@ use App\Application\Service\UserService;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class UserDetailHandle
+readonly class UserDetailHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly ObjectToArrayTransformService $objectToArrayTransformService
+        private UserService $userService,
+        private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
     public function handle(): JsonResponse

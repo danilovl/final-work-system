@@ -15,9 +15,9 @@ namespace App\Domain\UserGroup\Facade;
 use App\Domain\UserGroup\Repository\UserGroupRepository;
 use Doctrine\ORM\Query;
 
-class UserGroupFacade
+readonly class UserGroupFacade
 {
-    public function __construct(private readonly UserGroupRepository $userGroupRepository) {}
+    public function __construct(private UserGroupRepository $userGroupRepository) {}
 
     public function queryAll(): Query
     {

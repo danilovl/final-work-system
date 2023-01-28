@@ -28,13 +28,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class EventScheduleCloneHandle
+readonly class EventScheduleCloneHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly EventScheduleFactory $eventScheduleFactory,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private EventScheduleFactory $eventScheduleFactory,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request, EventSchedule $eventSchedule): JsonResponse

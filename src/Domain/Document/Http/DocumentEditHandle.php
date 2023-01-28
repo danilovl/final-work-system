@@ -31,15 +31,15 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class DocumentEditHandle
+readonly class DocumentEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly DocumentFormFactory $documentFormFactory,
-        private readonly MediaFactory $mediaFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private DocumentFormFactory $documentFormFactory,
+        private MediaFactory $mediaFactory
     ) {}
 
     public function handle(Request $request, Media $media): Response

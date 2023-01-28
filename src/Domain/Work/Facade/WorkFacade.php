@@ -20,9 +20,9 @@ use Doctrine\ORM\{
     QueryBuilder
 };
 
-class WorkFacade
+readonly class WorkFacade
 {
-    public function __construct(private readonly WorkRepository $workRepository) {}
+    public function __construct(private WorkRepository $workRepository) {}
 
     public function find(int $id): ?Work
     {

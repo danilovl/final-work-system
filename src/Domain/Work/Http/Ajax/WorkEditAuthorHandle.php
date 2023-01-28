@@ -26,13 +26,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class WorkEditAuthorHandle
+readonly class WorkEditAuthorHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly WorkEventDispatcherService $workEventDispatcherService,
-        private readonly UserFactory $userFactory
+        private RequestService $requestService,
+        private FormFactoryInterface $formFactory,
+        private WorkEventDispatcherService $workEventDispatcherService,
+        private UserFactory $userFactory
     ) {}
 
     public function handle(Request $request, Work $work): JsonResponse

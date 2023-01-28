@@ -18,9 +18,9 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTimeImmutable;
 use ReflectionClass;
 
-class Transformer implements TransformerInterface
+readonly class Transformer implements TransformerInterface
 {
-    public function __construct(private readonly ParameterServiceInterface $parameterService) {}
+    public function __construct(private ParameterServiceInterface $parameterService) {}
 
     public function transform(string $domain, array $fields, object $object): array
     {

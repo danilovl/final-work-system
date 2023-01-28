@@ -26,13 +26,13 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class EventCalendarEditHandle
+readonly class EventCalendarEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly EventEventDispatcherService $eventEventDispatcherService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService,
+        private HashidsServiceInterface $hashidsService,
+        private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
     public function handle(Request $request, Event $event): JsonResponse

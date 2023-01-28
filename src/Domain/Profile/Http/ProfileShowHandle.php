@@ -18,11 +18,11 @@ use App\Application\Service\{
 };
 use Symfony\Component\HttpFoundation\Response;
 
-class ProfileShowHandle
+readonly class ProfileShowHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService
+        private UserService $userService,
+        private TwigRenderService $twigRenderService
     ) {}
 
     public function handle(): Response

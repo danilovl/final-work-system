@@ -27,13 +27,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class UserGroupCreateHandle
+readonly class UserGroupCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TranslatorService $translatorService,
-        private readonly UserGroupFactory $userGroupFactory,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private TranslatorService $translatorService,
+        private UserGroupFactory $userGroupFactory,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request): JsonResponse

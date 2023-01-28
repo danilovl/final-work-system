@@ -27,14 +27,14 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class EventScheduleCreateHandle
+readonly class EventScheduleCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly EventScheduleFactory $eventScheduleFactory,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private EventScheduleFactory $eventScheduleFactory,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request): Response

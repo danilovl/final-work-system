@@ -25,13 +25,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class WorkListHandle
+readonly class WorkListHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly WorkFacade $workFacade,
-        private readonly PaginatorService $paginatorService,
-        private readonly ObjectToArrayTransformService $objectToArrayTransformService
+        private UserService $userService,
+        private WorkFacade $workFacade,
+        private PaginatorService $paginatorService,
+        private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
     public function handle(Request $request, string $type): JsonResponse

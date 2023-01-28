@@ -29,13 +29,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class WorkDeleteHandle
+readonly class WorkDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly FormDeleteFactory $formDeleteFactory,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private HashidsServiceInterface $hashidsService,
+        private FormDeleteFactory $formDeleteFactory,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Request $request, Work $work): RedirectResponse

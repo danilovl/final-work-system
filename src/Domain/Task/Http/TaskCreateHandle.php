@@ -35,18 +35,18 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class TaskCreateHandle
+readonly class TaskCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly TaskFormFactory $taskFormFactory,
-        private readonly TaskFactory $taskFactory,
-        private readonly TaskDeadlineFacade $taskDeadlineFacade,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly TaskEventDispatcherService $taskEventDispatcherService
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private TaskFormFactory $taskFormFactory,
+        private TaskFactory $taskFactory,
+        private TaskDeadlineFacade $taskDeadlineFacade,
+        private HashidsServiceInterface $hashidsService,
+        private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
     public function handle(Request $request, Work $work): Response

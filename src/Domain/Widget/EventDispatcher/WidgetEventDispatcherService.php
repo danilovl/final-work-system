@@ -16,9 +16,9 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class WidgetEventDispatcherService
+readonly class WidgetEventDispatcherService
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher) {}
+    public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 
     public function onGroupReplace(WidgetGenericGenericEvent $widgetGenericGenericEvent): void
     {

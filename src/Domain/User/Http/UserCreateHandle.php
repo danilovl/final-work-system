@@ -31,16 +31,16 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class UserCreateHandle
+readonly class UserCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly UserFacade $userFacade,
-        private readonly UserFormFactory $userFormFactory,
-        private readonly UserFactory $userFactory,
-        private readonly UserEventDispatcherService $userEventDispatcherService
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private UserFacade $userFacade,
+        private UserFormFactory $userFormFactory,
+        private UserFactory $userFactory,
+        private UserEventDispatcherService $userEventDispatcherService
     ) {}
 
     public function handle(Request $request): Response

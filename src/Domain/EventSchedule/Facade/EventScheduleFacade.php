@@ -16,9 +16,9 @@ use App\Domain\EventSchedule\Repository\EventScheduleRepository;
 use Doctrine\ORM\Query;
 use App\Domain\User\Entity\User;
 
-class EventScheduleFacade
+readonly class EventScheduleFacade
 {
-    public function __construct(private readonly EventScheduleRepository $eventScheduleRepository) {}
+    public function __construct(private EventScheduleRepository $eventScheduleRepository) {}
 
     public function queryEventSchedulesByOwner(User $user): Query
     {

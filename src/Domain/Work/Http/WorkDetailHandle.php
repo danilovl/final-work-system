@@ -27,15 +27,15 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class WorkDetailHandle
+readonly class WorkDetailHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly WorkDetailTabService $workDetailTabService,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
-        private readonly SeoPageService $seoPageService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly FormDeleteFactory $deleteFactory
+        private UserService $userService,
+        private WorkDetailTabService $workDetailTabService,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private SeoPageService $seoPageService,
+        private TwigRenderService $twigRenderService,
+        private FormDeleteFactory $deleteFactory
     ) {}
 
     public function handle(Request $request, Work $work): Response

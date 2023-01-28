@@ -16,9 +16,9 @@ use App\Domain\ConversationMessageStatus\Repository\ConversationMessageStatusRep
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 
-class ConversationMessageStatusFacade
+readonly class ConversationMessageStatusFacade
 {
-    public function __construct(private readonly ConversationMessageStatusRepository $conversationMessageStatusRepository) {}
+    public function __construct(private ConversationMessageStatusRepository $conversationMessageStatusRepository) {}
 
     public function updateAllToStatus(
         User $user,

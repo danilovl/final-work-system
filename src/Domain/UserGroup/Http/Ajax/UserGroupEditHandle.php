@@ -25,12 +25,12 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class UserGroupEditHandle
+readonly class UserGroupEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserGroupFactory $userGroupFactory,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private UserGroupFactory $userGroupFactory,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request, Group $group): JsonResponse

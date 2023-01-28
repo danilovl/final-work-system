@@ -30,15 +30,15 @@ use Symfony\Component\HttpFoundation\{
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ProfileChangePasswordHandle
+readonly class ProfileChangePasswordHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly UserService $userService,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly PasswordUpdater $passwordUpdater,
-        private readonly UserFactory $userFactory
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private UserService $userService,
+        private FormFactoryInterface $formFactory,
+        private PasswordUpdater $passwordUpdater,
+        private UserFactory $userFactory
     ) {}
 
     public function handle(Request $request): Response

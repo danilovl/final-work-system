@@ -27,11 +27,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
 
-class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
+readonly class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
 {
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly Environment $twig
+        private RequestStack $requestStack,
+        private Environment $twig
     ) {}
 
     public function generateLink(SystemEventRecipient $systemEventRecipient): string

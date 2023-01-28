@@ -23,13 +23,13 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class UserGroupListHandle
+readonly class UserGroupListHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly SeoPageService $seoPageService,
-        private readonly PaginatorService $paginatorService,
-        private readonly UserGroupFacade $userGroupFacade
+        private TwigRenderService $twigRenderService,
+        private SeoPageService $seoPageService,
+        private PaginatorService $paginatorService,
+        private UserGroupFacade $userGroupFacade
     ) {}
 
     public function handle(Request $request): Response

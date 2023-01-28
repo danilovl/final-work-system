@@ -33,15 +33,15 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class ConversationCreateHandle
+readonly class ConversationCreateHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly ConversationFacade $conversationFacade,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
-        private readonly FormFactoryInterface $formFactory
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private ConversationFacade $conversationFacade,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request): Response

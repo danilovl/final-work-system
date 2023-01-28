@@ -21,13 +21,13 @@ use App\Application\Service\{
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventScheduleDetailHandle
+readonly class EventScheduleDetailHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly DateService $dateService,
-        private readonly SeoPageService $seoPageService,
-        private readonly FormDeleteFactory $formDeleteFactory
+        private TwigRenderService $twigRenderService,
+        private DateService $dateService,
+        private SeoPageService $seoPageService,
+        private FormDeleteFactory $formDeleteFactory
     ) {}
 
     public function handle(EventSchedule $eventSchedule): Response

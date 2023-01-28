@@ -24,13 +24,13 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class ConversationLastMessageHandle
+readonly class ConversationLastMessageHandle
 {
     public function __construct(
-        private readonly TwigRenderService $twigRenderService,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
-        private readonly SeoPageService $seoPageService,
-        private readonly ParameterServiceInterface $parameterService
+        private TwigRenderService $twigRenderService,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private SeoPageService $seoPageService,
+        private ParameterServiceInterface $parameterService
     ) {}
 
     public function handle(Request $request, Conversation $conversation): Response

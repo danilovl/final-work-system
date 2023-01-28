@@ -23,13 +23,13 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class TaskListOwnerHandle
+readonly class TaskListOwnerHandle
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly TaskFacade $taskFacade,
-        private readonly PaginatorService $paginatorService,
-        private readonly ObjectToArrayTransformService $objectToArrayTransformService
+        private UserService $userService,
+        private TaskFacade $taskFacade,
+        private PaginatorService $paginatorService,
+        private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
     public function handle(Request $request): JsonResponse

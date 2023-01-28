@@ -28,15 +28,15 @@ use Symfony\Component\Mime\{
 };
 
 #[AsMessageHandler]
-class EmailNotificationHandler
+readonly class EmailNotificationHandler
 {
     public function __construct(
-        private readonly ParameterServiceInterface $parameterService,
-        private readonly MailerService $mailer,
-        private readonly EmailNotificationQueueFactory $emailNotificationQueueFactory,
-        private readonly BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
-        private readonly EmailNotificationQueueFacade $emailNotificationQueueFacade,
-        private readonly EntityManagerService $entityManagerService
+        private ParameterServiceInterface $parameterService,
+        private MailerService $mailer,
+        private EmailNotificationQueueFactory $emailNotificationQueueFactory,
+        private BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
+        private EmailNotificationQueueFacade $emailNotificationQueueFacade,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function __invoke(EmailNotificationMessage $message): void

@@ -18,11 +18,11 @@ use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class UserEventDispatcherService
+readonly class UserEventDispatcherService
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly AsyncService $asyncService
+        private EventDispatcherInterface $eventDispatcher,
+        private AsyncService $asyncService
     ) {}
 
     public function onUserCreate(User $user): void

@@ -28,14 +28,14 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventCalendarReservationHandle
+readonly class EventCalendarReservationHandle
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly UserService $userService,
-        private readonly UserWorkService $userWorkService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly FormFactoryInterface $formFactory
+        private EntityManagerService $entityManagerService,
+        private UserService $userService,
+        private UserWorkService $userWorkService,
+        private TwigRenderService $twigRenderService,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(): Response

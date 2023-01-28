@@ -36,16 +36,16 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 
-class ConversationFacade
+readonly class ConversationFacade
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
-        private readonly ConversationStatusService $conversationStatusService,
-        private readonly ConversationVariationService $conversationVariationService,
-        private readonly ConversationEventDispatcherService $conversationEventDispatcherService,
-        private readonly ConversationFactory $conversationFactory,
-        private readonly ConversationRepository $conversationRepository
+        private EntityManagerService $entityManagerService,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private ConversationStatusService $conversationStatusService,
+        private ConversationVariationService $conversationVariationService,
+        private ConversationEventDispatcherService $conversationEventDispatcherService,
+        private ConversationFactory $conversationFactory,
+        private ConversationRepository $conversationRepository
     ) {}
 
     public function queryConversationsByUser(User $user): Query

@@ -34,17 +34,17 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class WorkEditAuthorHandle
+readonly class WorkEditAuthorHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly HashidsServiceInterface $hashidsService,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly WorkEventDispatcherService $workEventDispatcherService,
-        private readonly UserFactory $userFactory,
-        private readonly SeoPageService $seoPageService
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private HashidsServiceInterface $hashidsService,
+        private FormFactoryInterface $formFactory,
+        private WorkEventDispatcherService $workEventDispatcherService,
+        private UserFactory $userFactory,
+        private SeoPageService $seoPageService
     ) {}
 
     public function handle(Request $request, Work $work): Response

@@ -21,9 +21,9 @@ use Doctrine\Common\Collections\{
     Collection
 };
 
-class WorkListService
+readonly class WorkListService
 {
-    public function __construct(private readonly UserWorkService $userWorkService) {}
+    public function __construct(private UserWorkService $userWorkService) {}
 
     public function getWorkList(User $user, string $type): Collection
     {

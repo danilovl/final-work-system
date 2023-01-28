@@ -39,19 +39,19 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class ConversationDetailHandle
+readonly class ConversationDetailHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly UserService $userService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly ConversationMessageFacade $conversationMessageFacade,
-        private readonly ConversationFactory $conversationFactory,
-        private readonly ConversationMessageFactory $conversationMessageFactory,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly PaginatorService $paginatorService,
-        private readonly SeoPageService $seoPageService,
-        private readonly ConversationEventDispatcherService $conversationEventDispatcherService
+        private RequestService $requestService,
+        private UserService $userService,
+        private TwigRenderService $twigRenderService,
+        private ConversationMessageFacade $conversationMessageFacade,
+        private ConversationFactory $conversationFactory,
+        private ConversationMessageFactory $conversationMessageFactory,
+        private FormFactoryInterface $formFactory,
+        private PaginatorService $paginatorService,
+        private SeoPageService $seoPageService,
+        private ConversationEventDispatcherService $conversationEventDispatcherService
     ) {}
 
     public function handle(Request $request, Conversation $conversation): Response

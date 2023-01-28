@@ -25,13 +25,13 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 
-class EventDeleteHandle
+readonly class EventDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService,
-        private readonly FormDeleteFactory $formDeleteFactory,
-        private readonly HashidsServiceInterface $hashidsService,
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService,
+        private FormDeleteFactory $formDeleteFactory,
+        private HashidsServiceInterface $hashidsService,
     ) {}
 
     public function handle(Request $request, Event $event): RedirectResponse

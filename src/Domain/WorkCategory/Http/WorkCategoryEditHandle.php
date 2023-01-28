@@ -30,14 +30,14 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 
-class WorkCategoryEditHandle
+readonly class WorkCategoryEditHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly TwigRenderService $twigRenderService,
-        private readonly TranslatorService $translatorService,
-        private readonly WorkCategoryFormFactory $workCategoryFormFactory,
-        private readonly WorkCategoryFactory $workCategoryFactory
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private TranslatorService $translatorService,
+        private WorkCategoryFormFactory $workCategoryFormFactory,
+        private WorkCategoryFactory $workCategoryFactory
     ) {}
 
     public function handle(Request $request, WorkCategory $workCategory): Response

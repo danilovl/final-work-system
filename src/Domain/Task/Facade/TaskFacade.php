@@ -17,9 +17,9 @@ use App\Domain\Task\Repository\TaskRepository;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\Query;
 
-class TaskFacade
+readonly class TaskFacade
 {
-    public function __construct(private readonly TaskRepository $taskRepository) {}
+    public function __construct(private TaskRepository $taskRepository) {}
 
     public function find(int $id): ?Task
     {

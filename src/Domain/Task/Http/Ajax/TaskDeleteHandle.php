@@ -20,11 +20,11 @@ use App\Application\Service\EntityManagerService;
 use App\Domain\Task\Entity\Task;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class TaskDeleteHandle
+readonly class TaskDeleteHandle
 {
     public function __construct(
-        private readonly RequestService $requestService,
-        private readonly EntityManagerService $entityManagerService
+        private RequestService $requestService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Task $task): JsonResponse
