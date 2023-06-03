@@ -23,6 +23,7 @@ use App\Domain\Conversation\Http\{
 };
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request,
@@ -58,6 +59,7 @@ class ConversationController extends AbstractController
         return $this->conversationDetailHandle->handle($request, $conversation);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_user_one', 'id_user_two'])]
     public function createWorkConversation(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_user_one' => 'id'])] User $userOne,

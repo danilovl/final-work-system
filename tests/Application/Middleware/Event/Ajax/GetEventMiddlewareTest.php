@@ -26,7 +26,7 @@ class GetEventMiddlewareTest extends TestCase
     public function testHandleFailsDateForm(): void
     {
         $this->expectException(AjaxRuntimeException::class);
-        $this->expectErrorMessage('Bad format date');
+        $this->expectExceptionMessage('Bad format date');
 
         $request = new Request;
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
@@ -38,7 +38,7 @@ class GetEventMiddlewareTest extends TestCase
     public function testAttributeHandleFailsDateStart(): void
     {
         $this->expectException(AjaxRuntimeException::class);
-        $this->expectErrorMessage('StartDate must be less then endDate');
+        $this->expectExceptionMessage('StartDate must be less then endDate');
 
         $request = new Request;
         $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME));

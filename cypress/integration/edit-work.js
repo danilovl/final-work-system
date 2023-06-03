@@ -40,6 +40,8 @@ describe('Edit work test', () => {
             .get('#work-button-action')
             .click()
 
+        cy.wait(1000)
+
         cy
             .get('.alert-success')
             .should('be.visible')
@@ -82,6 +84,8 @@ describe('Edit work test', () => {
         cy
             .get('#work-button-action')
             .click()
+
+        cy.wait(1000)
 
         cy
             .get('.alert-success')

@@ -14,6 +14,7 @@ namespace App\Domain\Task\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Task\Entity\Task;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Domain\Task\Http\Api\{
@@ -47,6 +48,7 @@ class TaskController extends AbstractController
         return $this->taskListSolverHandle->handle($request);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function detail(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task

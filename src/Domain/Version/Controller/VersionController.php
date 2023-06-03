@@ -13,6 +13,7 @@
 namespace App\Domain\Version\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Version\Http\{
     VersionEditHandle,
@@ -52,6 +53,7 @@ class VersionController extends AbstractController
         return $this->versionCreateHandle->handle($request, $work);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -75,6 +77,7 @@ class VersionController extends AbstractController
         return $this->versionDetailContentHandle->handle($version);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
     public function download(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
@@ -88,6 +91,7 @@ class VersionController extends AbstractController
         return $this->versionDownloadHandle->handle($media);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
     public function downloadGoogle(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_media' => 'id'])] Media $media

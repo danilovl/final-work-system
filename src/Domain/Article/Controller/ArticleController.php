@@ -17,6 +17,7 @@ use App\Domain\Article\Entity\Article;
 use App\Domain\Article\Http\ArticleDetailHandle;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,7 @@ class ArticleController extends AbstractController
 {
     public function __construct(private readonly ArticleDetailHandle $articleDetailHandle) {}
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_article', 'id_category'])]
     public function detail(
         #[MapEntity(mapping: ['id_article' => 'id'])] Article $article,
         #[MapEntity(mapping: ['id_category' => 'id'])] ArticleCategory $articleCategory

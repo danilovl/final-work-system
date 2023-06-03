@@ -30,6 +30,8 @@ describe('Create user test', () => {
             .get('#user-button-action')
             .click()
 
+        cy.wait(1000)
+
         cy
             .get('.alert-success')
             .should('be.visible')

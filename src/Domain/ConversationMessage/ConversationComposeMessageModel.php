@@ -20,5 +20,5 @@ class ConversationComposeMessageModel
     use ContentAwareTrait;
 
     public ?string $name = null;
-    public ?Traversable $conversation = null;
+    public ?iterable $conversation = null;
 }

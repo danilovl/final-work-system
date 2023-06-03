@@ -13,6 +13,7 @@
 namespace App\Domain\Task\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\{
     TaskListHandle,
@@ -54,6 +55,7 @@ class TaskController extends AbstractController
         return $this->taskCreateSeveralHandle->handle($request);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,

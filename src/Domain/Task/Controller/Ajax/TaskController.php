@@ -14,6 +14,7 @@ namespace App\Domain\Task\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Task\Entity\Task;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\Ajax\{
     TaskEditHandle,
@@ -56,6 +57,7 @@ class TaskController extends AbstractController
         return $this->taskCreateSeveralHandle->handle($request);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -66,6 +68,7 @@ class TaskController extends AbstractController
         return $this->taskEditHandle->handle($request, $task);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function changeStatus(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -85,6 +88,7 @@ class TaskController extends AbstractController
         return $this->taskNotifyCompleteHandle->handle($task);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function delete(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task

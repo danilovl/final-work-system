@@ -14,6 +14,7 @@ namespace App\Domain\Version\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Media\Entity\Media;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Version\Http\Ajax\{
     VersionEditHandle,
@@ -47,6 +48,7 @@ class VersionController extends AbstractController
         return $this->versionCreateHandle->handle($request, $work);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -61,6 +63,7 @@ class VersionController extends AbstractController
         return $this->versionEditHandle->handle($request, $media);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
     public function delete(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_media' => 'id'])] Media $media

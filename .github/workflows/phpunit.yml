@@ -20,7 +20,6 @@ jobs:
       - name: Install dependencies
         run: |
           docker-compose exec -T php sh bin/composer-first-install.sh
-          docker-compose exec -T node sh bin/npm-first-install.sh
 
       - name: Elastica populate(elastica network bug)
         run: docker-compose exec -T php php bin/console fos:elastica:populate

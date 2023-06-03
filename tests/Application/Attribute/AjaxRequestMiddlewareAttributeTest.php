@@ -71,7 +71,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
     public function testAttributeHandleFailsDateForm(object $object, string $method): void
     {
         $this->expectException(AjaxRuntimeException::class);
-        $this->expectErrorMessage('Bad format date');
+        $this->expectExceptionMessage('Bad format date');
 
         $attribute = $this->getAttribute($object, $method);
 
@@ -89,7 +89,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
     public function testAttributeHandleFailsType(object $object, string $method): void
     {
         $this->expectException(AjaxRuntimeException::class);
-        $this->expectErrorMessage('Empty type');
+        $this->expectExceptionMessage('Empty type');
 
         $attribute = $this->getAttribute($object, $method);
 
@@ -107,7 +107,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
     public function testAttributeHandleFailsDateStart(object $object, string $method): void
     {
         $this->expectException(AjaxRuntimeException::class);
-        $this->expectErrorMessage('StartDate must be less then endDate');
+        $this->expectExceptionMessage('StartDate must be less then endDate');
 
         $attribute = $this->getAttribute($object, $method);
 
