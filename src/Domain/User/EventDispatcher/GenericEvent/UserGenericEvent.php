@@ -14,8 +14,7 @@ namespace App\Domain\User\EventDispatcher\GenericEvent;
 
 use App\Domain\User\Entity\User;
 
-class UserGenericEvent
+readonly class UserGenericEvent
 {
-    public User $user;
-    public User $owner;
+    public function __construct(public User $user, public ?User $owner = null) {}
 }

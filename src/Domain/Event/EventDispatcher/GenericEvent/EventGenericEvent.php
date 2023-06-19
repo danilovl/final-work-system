@@ -15,8 +15,7 @@ namespace App\Domain\Event\EventDispatcher\GenericEvent;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Event\Entity\Event;
 
-class EventGenericEvent
+readonly class EventGenericEvent
 {
-    public Comment $comment;
-    public Event $event;
+    public function __construct(public Event $event) {}
 }

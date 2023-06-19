@@ -14,7 +14,7 @@ namespace App\Domain\Work\EventDispatcher\GenericEvent;
 
 use App\Domain\Work\Entity\Work;
 
-class WorkGenericEvent
+readonly class WorkGenericEvent
 {
-    public Work $work;
+    public function __construct(public Work $work) {}
 }

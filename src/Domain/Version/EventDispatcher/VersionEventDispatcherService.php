@@ -27,8 +27,7 @@ readonly class VersionEventDispatcherService
 
     public function onVersionCreate(Media $media): void
     {
-        $genericEvent = new VersionGenericEvent;
-        $genericEvent->media = $media;
+        $genericEvent = new VersionGenericEvent($media);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_CREATE);
@@ -38,8 +37,7 @@ readonly class VersionEventDispatcherService
 
     public function onVersionEdit(Media $media): void
     {
-        $genericEvent = new VersionGenericEvent;
-        $genericEvent->media = $media;
+        $genericEvent = new VersionGenericEvent($media);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_EDIT);

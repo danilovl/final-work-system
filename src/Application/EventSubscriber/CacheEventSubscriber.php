@@ -13,7 +13,10 @@
 namespace App\Application\EventSubscriber;
 
 use App\Application\Cache\HomepageCache;
-use App\Application\EventDispatcher\GenericEvent\CacheGenericEvent;
+use App\Application\EventDispatcher\GenericEvent\{
+    CacheUserGenericEvent,
+    CacheClearGenericEvent
+};
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
@@ -32,12 +35,12 @@ readonly class CacheEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onClearCacheKey(CacheGenericEvent $event): void
+    public function onClearCacheKey(CacheClearGenericEvent $event): void
     {
         $this->cache->delete($event->key);
     }
 
-    public function onCreateHomepageCache(CacheGenericEvent $event): void
+    public function onCreateHomepageCache(CacheUserGenericEvent $event): void
     {
         $this->homepageCache->createHomepagePaginator($event->user);
     }

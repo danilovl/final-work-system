@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Application\EventDispatcher\GenericEvent;
+namespace App\Domain\Event\EventDispatcher\GenericEvent;
 
-use App\Domain\User\Entity\User;
+use App\Domain\Comment\Entity\Comment;
+use App\Domain\Event\Entity\Event;
 
-class CacheGenericEvent
+readonly class EventCommentGenericEvent
 {
-    public string $key;
-    public ?User $user = null;
+    public function __construct(public Comment $comment) {}
 }

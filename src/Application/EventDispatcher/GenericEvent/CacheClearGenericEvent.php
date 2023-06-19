@@ -10,11 +10,9 @@
  *
  */
 
-namespace App\Domain\Version\EventDispatcher\GenericEvent;
+namespace App\Application\EventDispatcher\GenericEvent;
 
-use App\Domain\Media\Entity\Media;
-
-readonly class VersionGenericEvent
+readonly class CacheClearGenericEvent
 {
-    public function __construct(public Media $media) {}
+    public function __construct(public string $key) {}
 }

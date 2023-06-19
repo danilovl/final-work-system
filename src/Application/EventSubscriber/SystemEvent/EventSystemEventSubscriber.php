@@ -14,7 +14,10 @@ namespace App\Application\EventSubscriber\SystemEvent;
 
 use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\EventSubscriber\Events;
-use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
+use App\Domain\Event\EventDispatcher\GenericEvent\{
+    EventGenericEvent,
+    EventCommentGenericEvent
+};
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Entity\SystemEventType;
@@ -99,7 +102,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
-    public function onEventCommentCreate(EventGenericEvent $genericEvent): void
+    public function onEventCommentCreate(EventCommentGenericEvent $genericEvent): void
     {
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
@@ -131,7 +134,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $this->entityManagerService->persistAndFlush($systemEvent);
     }
 
-    public function onEventCommentEdit(EventGenericEvent $genericEvent): void
+    public function onEventCommentEdit(EventCommentGenericEvent $genericEvent): void
     {
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();

@@ -28,8 +28,7 @@ readonly class WorkEventDispatcherService
 
     public function onWorkCreate(Work $work): void
     {
-        $genericEvent = new WorkGenericEvent;
-        $genericEvent->work = $work;
+        $genericEvent = new WorkGenericEvent($work);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_CREATE);
@@ -39,8 +38,8 @@ readonly class WorkEventDispatcherService
 
     public function onWorkEdit(Work $work): void
     {
-        $genericEvent = new WorkGenericEvent;
-        $genericEvent->work = $work;
+        $genericEvent = new WorkGenericEvent($work);
+
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_EDIT);
@@ -50,11 +49,8 @@ readonly class WorkEventDispatcherService
 
     public function onWorkEditAuthor(Work $work): void
     {
-        $genericEventUser = new UserGenericEvent;
-        $genericEventUser->user = $work->getAuthor();
-
-        $genericEventWork = new WorkGenericEvent;
-        $genericEventWork->work = $work;
+        $genericEventUser = new UserGenericEvent($work->getAuthor());
+        $genericEventWork = new WorkGenericEvent($work);
 
         $this->asyncService->add(function () use ($genericEventUser, $genericEventWork): void {
             $this->eventDispatcher->dispatch($genericEventUser, Events::NOTIFICATION_USER_EDIT);

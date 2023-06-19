@@ -27,8 +27,7 @@ readonly class DocumentEventDispatcherService
 
     public function onDocumentCreate(Media $media): void
     {
-        $genericEvent = new MediaGenericEvent;
-        $genericEvent->media = $media;
+        $genericEvent = new MediaGenericEvent($media);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_DOCUMENT_CREATE);

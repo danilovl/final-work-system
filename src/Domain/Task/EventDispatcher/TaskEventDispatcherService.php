@@ -29,8 +29,7 @@ readonly class TaskEventDispatcherService
 
     public function onTaskCreate(Task $task): void
     {
-        $genericEvent = new TaskGenericEvent;
-        $genericEvent->task = $task;
+        $genericEvent = new TaskGenericEvent($task);
 
         if (!$task->isActive()) {
             return;
@@ -44,8 +43,7 @@ readonly class TaskEventDispatcherService
 
     public function onTaskEdit(Task $task): void
     {
-        $genericEvent = new TaskGenericEvent;
-        $genericEvent->task = $task;
+        $genericEvent = new TaskGenericEvent($task);
 
         if (!$task->isActive()) {
             return;
@@ -66,8 +64,7 @@ readonly class TaskEventDispatcherService
 
     public function onTaskNotifyComplete(Task $task): void
     {
-        $genericEvent = new TaskGenericEvent;
-        $genericEvent->task = $task;
+        $genericEvent = new TaskGenericEvent($task);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_NOTIFY_COMPLETE);
@@ -77,9 +74,7 @@ readonly class TaskEventDispatcherService
 
     public function onTaskChangeStatus(Task $task, string $type): void
     {
-        $genericEvent = new TaskGenericEvent;
-        $genericEvent->task = $task;
-        $genericEvent->type = $type;
+        $genericEvent = new TaskGenericEvent($task, $type);
 
         switch ($type) {
             case TaskStatusConstant::ACTIVE:
@@ -111,8 +106,7 @@ readonly class TaskEventDispatcherService
 
     public function onTaskReminderCreate(Task $task): void
     {
-        $genericEvent = new TaskGenericEvent;
-        $genericEvent->task = $task;
+        $genericEvent = new TaskGenericEvent($task);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);

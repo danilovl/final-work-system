@@ -23,9 +23,7 @@ readonly class SecurityDispatcherService
 
     public function onResetPasswordTokenCreate(ResetPassword $resetPassword, int $tokenLifetime): void
     {
-        $resetPasswordGenericEvent = new ResetPasswordGenericEvent;
-        $resetPasswordGenericEvent->resetPassword = $resetPassword;
-        $resetPasswordGenericEvent->tokenLifetime = $tokenLifetime;
+        $resetPasswordGenericEvent = new ResetPasswordGenericEvent($resetPassword, $tokenLifetime);
 
         $this->eventDispatcher->dispatch($resetPasswordGenericEvent, Events::NOTIFICATION_RESET_PASSWORD_TOKEN);
     }

@@ -14,6 +14,7 @@ namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\Events;
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
+use App\Domain\Event\EventDispatcher\GenericEvent\EventCommentGenericEvent;
 use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -91,7 +92,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
-    public function onEventCommentCreate(EventGenericEvent $genericEvent): void
+    public function onEventCommentCreate(EventCommentGenericEvent $genericEvent): void
     {
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
@@ -124,7 +125,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
 
-    public function onEventCommentEdit(EventGenericEvent $genericEvent): void
+    public function onEventCommentEdit(EventCommentGenericEvent $genericEvent): void
     {
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();

@@ -27,8 +27,7 @@ readonly class UserEventDispatcherService
 
     public function onUserCreate(User $user): void
     {
-        $genericEvent = new UserGenericEvent;
-        $genericEvent->user = $user;
+        $genericEvent = new UserGenericEvent($user);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_CREATE);
@@ -37,9 +36,7 @@ readonly class UserEventDispatcherService
 
     public function onUserEdit(User $user, User $owner): void
     {
-        $genericEvent = new UserGenericEvent;
-        $genericEvent->user = $user;
-        $genericEvent->owner = $owner;
+        $genericEvent = new UserGenericEvent($user, $owner);
 
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
