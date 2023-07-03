@@ -1,0 +1,34 @@
+name: Webtest
+
+on:
+  - workflow_dispatch
+
+jobs:
+  docker:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Start containers
+        run: |
+          docker network create dockernet
+          docker-compose -f docker-compose.yml up -d
+
+      - name: Install dependencies
+        run: |
+          docker-compose exec -T php sh bin/composer-first-install.sh
+          docker-compose exec -T php php bin/console app:import-sql docker/mysql/data/dump.sql
+          docker-compose exec -T node sh bin/npm-first-install.sh
+
+      - name: Elastica populate(elastica network bug)
+        run: docker-compose exec -T php php bin/console fos:elastica:populate
+
+      - name: Run web test tests
+        run: docker-compose exec -T php composer webtest
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f docker-compose.yml down

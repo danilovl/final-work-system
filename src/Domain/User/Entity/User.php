@@ -147,7 +147,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     #[ORM\OneToOne(targetEntity: Media::class, cascade: ['persist', 'remove'], fetch: "EAGER")]
     #[ORM\JoinColumn(name: 'profile_image_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
-    #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Media $profileImage = null;
 
     #[ORM\Column(name: 'skype', type: Types::STRING, nullable: true)]

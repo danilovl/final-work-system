@@ -57,17 +57,17 @@ class Media
     #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'mediaOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\ManyToOne(targetEntity: MediaType::class, fetch: 'EAGER', inversedBy: 'medias')]
     #[ORM\JoinColumn(name: 'media_type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?MediaType $type = null;
+    private MediaType $type;
 
     #[ORM\ManyToOne(targetEntity: MediaMimeType::class, fetch: 'EAGER', inversedBy: 'medias')]
     #[ORM\JoinColumn(name: 'media_mime_type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?MediaMimeType $mimeType = null;
+    private MediaMimeType $mimeType;
 
     #[ORM\ManyToMany(targetEntity: MediaCategory::class, inversedBy: 'medias')]
     #[ORM\JoinTable(name: 'media_to_media_category')]
@@ -83,7 +83,7 @@ class Media
 
     #[ORM\Column(name: 'media_name', type: Types::STRING, unique: true, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $mediaName = null;
+    private string $mediaName;
 
     #[ORM\Column(name: 'original_name', type: Types::STRING, nullable: true)]
     #[Gedmo\Versioned]

@@ -265,8 +265,8 @@
                                                      role="tabpanel">
                                                     <div class="panel-body text-muted well well-sm no-shadow">
 
-                                                        {% if  document.existMediaFile %}
-                                                            {{ render_service('app.controller.document', 'detailContent', {'media': document}) }}
+                                                        {% if document.existMediaFile %}
+                                                            {{ render_service('App\\Domain\\Document\\Controller\\DocumentController', 'detailContent', {'media': document}) }}
                                                         {% else %}
                                                             {{ 'app.text.file_not_found' | trans }}
                                                         {% endif %}
