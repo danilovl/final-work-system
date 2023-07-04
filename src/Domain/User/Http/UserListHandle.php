@@ -78,15 +78,15 @@ readonly class UserListHandle
 
         $getUserWorkAndStatus = true;
         switch ($type) {
-            case WorkUserTypeConstant::AUTHOR:
+            case WorkUserTypeConstant::AUTHOR->value:
                 $title = $this->translatorService->trans('app.text.author_list');
 
                 break;
-            case WorkUserTypeConstant::OPPONENT:
+            case WorkUserTypeConstant::OPPONENT->value:
                 $title = $this->translatorService->trans('app.text.opponent_list');
 
                 break;
-            case WorkUserTypeConstant::CONSULTANT:
+            case WorkUserTypeConstant::CONSULTANT->value:
                 $title = $this->translatorService->trans('app.text.consultant_list');
 
                 break;

@@ -36,7 +36,7 @@ readonly class ConversationStatusService
         /** @var ConversationMessageStatusType $type */
         $type = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
-            ConversationMessageStatusTypeConstant::UNREAD
+            ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         $conversationMessageStatusData = ConversationMessageStatusRepositoryData::createFromArray([
@@ -91,7 +91,7 @@ readonly class ConversationStatusService
             ->getOneOrNullResult();
 
         if ($conversationMessageStatus !== null) {
-            if ($conversationMessageStatus->getType()->getId() === ConversationMessageStatusTypeConstant::READ) {
+            if ($conversationMessageStatus->getType()->getId() === ConversationMessageStatusTypeConstant::READ->value) {
                 return true;
             }
 
@@ -99,7 +99,7 @@ readonly class ConversationStatusService
                 /** @var ConversationMessageStatusType $conversationMessageStatusType */
                 $conversationMessageStatusType = $this->entityManagerService->getReference(
                     ConversationMessageStatusType::class,
-                    ConversationMessageStatusTypeConstant::READ
+                    ConversationMessageStatusTypeConstant::READ->value
                 );
 
                 $conversationMessageStatus->setType($conversationMessageStatusType);
@@ -142,7 +142,7 @@ readonly class ConversationStatusService
         ConversationMessage $conversationMessage,
         User $user
     ): void {
-        $this->changeConversationMessageStatus($conversationMessage, $user, ConversationMessageStatusTypeConstant::READ);
+        $this->changeConversationMessageStatus($conversationMessage, $user, ConversationMessageStatusTypeConstant::READ->value);
     }
 
     public function getConversationMessageStatus(

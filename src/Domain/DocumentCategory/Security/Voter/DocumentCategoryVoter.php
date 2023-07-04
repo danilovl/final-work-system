@@ -22,8 +22,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class DocumentCategoryVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::DELETE
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::DELETE->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -47,9 +47,9 @@ class DocumentCategoryVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 

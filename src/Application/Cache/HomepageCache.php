@@ -32,7 +32,7 @@ class HomepageCache
     public function createHomepagePaginator(User $user, int $page = 1): array
     {
         $cacheItem = $this->cache->getItem(
-            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $user->getId())
+            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
         $pagePaginators = $cacheItem->get();
 

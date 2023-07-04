@@ -210,7 +210,7 @@ class Conversation
             return (string) $this->getWork();
         }
 
-        return $this->getName() ?: TranslationConstant::EMPTY;
+        return $this->getName() ?: TranslationConstant::EMPTY->value;
     }
 
     public function __toString(): string

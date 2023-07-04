@@ -58,7 +58,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         $media = $event->media;
         $owner = $media->getOwner();
 
-        $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR);
+        $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR->value);
 
         $templateParameters = [
             'mediaOwner' => $media->getOwner()->getFullNameDegree(),

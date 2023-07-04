@@ -35,7 +35,7 @@ class ArticleController extends AbstractController
             ->setArticle($article)
             ->setArticleCategory($articleCategory);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $articleVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleVoterSubject);
 
         return $this->articleDetailHandle->handle($article, $articleCategory);
     }

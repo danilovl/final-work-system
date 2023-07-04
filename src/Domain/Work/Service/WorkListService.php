@@ -28,10 +28,10 @@ readonly class WorkListService
     public function getWorkList(User $user, string $type): Collection
     {
         return match ($type) {
-            WorkUserTypeConstant::SUPERVISOR => $user->getSupervisorWorks(),
-            WorkUserTypeConstant::AUTHOR => $user->getAuthorWorks(),
-            WorkUserTypeConstant::OPPONENT => $user->getOpponentWorks(),
-            WorkUserTypeConstant::CONSULTANT => $user->getConsultantWorks(),
+            WorkUserTypeConstant::SUPERVISOR->value => $user->getSupervisorWorks(),
+            WorkUserTypeConstant::AUTHOR->value => $user->getAuthorWorks(),
+            WorkUserTypeConstant::OPPONENT->value => $user->getOpponentWorks(),
+            WorkUserTypeConstant::CONSULTANT->value => $user->getConsultantWorks(),
             default => throw new RuntimeException("Type '{$type}' not found")
         };
     }
@@ -39,9 +39,9 @@ readonly class WorkListService
     public function getUserAuthors(User $user, string $type): Collection
     {
         $userTypes = [
-            WorkUserTypeConstant::SUPERVISOR,
-            WorkUserTypeConstant::OPPONENT,
-            WorkUserTypeConstant::CONSULTANT
+            WorkUserTypeConstant::SUPERVISOR->value,
+            WorkUserTypeConstant::OPPONENT->value,
+            WorkUserTypeConstant::CONSULTANT->value
         ];
 
         if (!in_array($type, $userTypes, true)) {
@@ -54,8 +54,8 @@ readonly class WorkListService
     public function getUserOpponents(User $user, string $type): Collection
     {
         $userTypes = [
-            WorkUserTypeConstant::SUPERVISOR,
-            WorkUserTypeConstant::AUTHOR
+            WorkUserTypeConstant::SUPERVISOR->value,
+            WorkUserTypeConstant::AUTHOR->value
         ];
 
         if (!in_array($type, $userTypes, true)) {
@@ -68,10 +68,10 @@ readonly class WorkListService
     public function getUserConsultants(User $user, string $type): Collection
     {
         $userTypes = [
-            WorkUserTypeConstant::SUPERVISOR,
-            WorkUserTypeConstant::AUTHOR,
-            WorkUserTypeConstant::OPPONENT,
-            WorkUserTypeConstant::CONSULTANT
+            WorkUserTypeConstant::SUPERVISOR->value,
+            WorkUserTypeConstant::AUTHOR->value,
+            WorkUserTypeConstant::OPPONENT->value,
+            WorkUserTypeConstant::CONSULTANT->value
         ];
 
         if (!in_array($type, $userTypes, true)) {
@@ -84,9 +84,9 @@ readonly class WorkListService
     public function getUserSupervisors(User $user, string $type): Collection
     {
         $userTypes = [
-            WorkUserTypeConstant::AUTHOR,
-            WorkUserTypeConstant::OPPONENT,
-            WorkUserTypeConstant::CONSULTANT
+            WorkUserTypeConstant::AUTHOR->value,
+            WorkUserTypeConstant::OPPONENT->value,
+            WorkUserTypeConstant::CONSULTANT->value
         ];
 
         if (!in_array($type, $userTypes, true)) {

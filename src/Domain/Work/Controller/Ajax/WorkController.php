@@ -42,21 +42,21 @@ class WorkController extends AbstractController
 
     public function edit(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->workEditHandle->handle($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->workEditAuthorHandle->handle($request, $work);
     }
 
     public function delete(Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $work);
 
         return $this->workDeleteHandle->handle($work);
     }

@@ -42,7 +42,7 @@ readonly class SystemEventViewedHandle
         $user = $this->userService->getUser();
 
         $this->cacheEventDispatcherService->onClearCacheKey(
-            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $user->getId())
+            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

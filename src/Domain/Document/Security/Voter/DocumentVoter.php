@@ -25,9 +25,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class DocumentVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::DOWNLOAD,
-        VoterSupportConstant::DELETE
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::DOWNLOAD->value,
+        VoterSupportConstant::DELETE->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -51,11 +51,11 @@ class DocumentVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::DOWNLOAD:
+            case VoterSupportConstant::DOWNLOAD->value:
                 return $this->canDownload($subject);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 
@@ -69,7 +69,7 @@ class DocumentVoter extends Voter
 
     private function canDownload(Media $media): bool
     {
-        return $media->getType()->getId() === MediaTypeConstant::INFORMATION_MATERIAL;
+        return $media->getType()->getId() === MediaTypeConstant::INFORMATION_MATERIAL->value;
     }
 
     private function canDelete(Media $media, User $user): bool

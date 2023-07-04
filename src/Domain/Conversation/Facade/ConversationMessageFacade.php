@@ -49,20 +49,20 @@ readonly class ConversationMessageFacade
 
         if ($conversationMessageStatus !== null) {
             switch ($conversationMessageStatus->getType()->getId()) {
-                case ConversationMessageStatusTypeConstant::READ:
+                case ConversationMessageStatusTypeConstant::READ->value:
                     /** @var ConversationMessageStatusType $conversationMessageStatusType */
                     $conversationMessageStatusType = $this->entityManagerService->getReference(
                         ConversationMessageStatusType::class,
-                        ConversationMessageStatusTypeConstant::UNREAD
+                        ConversationMessageStatusTypeConstant::UNREAD->value
                     );
 
                     $conversationMessageStatus->setType($conversationMessageStatusType);
                     break;
-                case  ConversationMessageStatusTypeConstant::UNREAD:
+                case  ConversationMessageStatusTypeConstant::UNREAD->value:
                     /** @var ConversationMessageStatusType $conversationMessageStatusType */
                     $conversationMessageStatusType = $this->entityManagerService->getReference(
                         ConversationMessageStatusType::class,
-                        ConversationMessageStatusTypeConstant::READ
+                        ConversationMessageStatusTypeConstant::READ->value
                     );
 
                     $conversationMessageStatus->setType($conversationMessageStatusType);
@@ -75,7 +75,7 @@ readonly class ConversationMessageFacade
             /** @var ConversationMessageStatusType $conversationMessageStatusType */
             $conversationMessageStatusType = $this->entityManagerService->getReference(
                 ConversationMessageStatusType::class,
-                ConversationMessageStatusTypeConstant::UNREAD
+                ConversationMessageStatusTypeConstant::UNREAD->value
             );
 
             $newConversationMessageStatus = new ConversationMessageStatus;
@@ -108,7 +108,7 @@ readonly class ConversationMessageFacade
         /** @var ConversationMessageStatusType $ConversationMessageStatusType */
         $ConversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
-            ConversationMessageStatusTypeConstant::UNREAD
+            ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         $conversationMessage = $this->conversationMessageRepository->allByUserStatus(
@@ -128,7 +128,7 @@ readonly class ConversationMessageFacade
         /** @var ConversationMessageStatusType $ConversationMessageStatusType */
         $ConversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
-            ConversationMessageStatusTypeConstant::UNREAD
+            ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         return (int) $this->conversationMessageRepository
@@ -171,7 +171,7 @@ readonly class ConversationMessageFacade
         /** @var ConversationMessageStatusType $ConversationMessageStatusType */
         $ConversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
-            ConversationMessageStatusTypeConstant::UNREAD
+            ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         return (int) $this->conversationMessageRepository

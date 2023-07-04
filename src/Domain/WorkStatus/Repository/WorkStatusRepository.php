@@ -43,15 +43,15 @@ class WorkStatusRepository extends ServiceEntityRepository
             ->groupBy('work_status.name');
 
         switch ($workStatusData->type) {
-            case WorkUserTypeConstant::AUTHOR:
+            case WorkUserTypeConstant::AUTHOR->value:
                 $queryBuilder->leftJoin('work.author', 'author')
                     ->andWhere('author = :user');
                 break;
-            case WorkUserTypeConstant::OPPONENT:
+            case WorkUserTypeConstant::OPPONENT->value:
                 $queryBuilder->leftJoin('work.opponent', 'opponent')
                     ->andWhere('opponent = :user');
                 break;
-            case WorkUserTypeConstant::CONSULTANT:
+            case WorkUserTypeConstant::CONSULTANT->value:
                 $queryBuilder->leftJoin('work.consultant', 'consultant')
                     ->andWhere('consultant = :user');
                 break;

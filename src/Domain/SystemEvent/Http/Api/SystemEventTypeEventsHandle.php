@@ -60,7 +60,7 @@ readonly class SystemEventTypeEventsHandle
                 'id' => $systemEEventRecipient->getSystemEvent()->getId(),
                 'title' => $this->systemEventLinkGeneratorService->generateText($systemEEventRecipient),
                 'owner' => $systemEEventRecipient->getSystemEvent()->getOwner()->getFullNameDegree(),
-                'createdAt' => $systemEEventRecipient->getSystemEvent()->getCreatedAt()->format(DateFormatConstant::DATABASE),
+                'createdAt' => $systemEEventRecipient->getSystemEvent()->getCreatedAt()->format(DateFormatConstant::DATABASE->value),
             ];
         }
 

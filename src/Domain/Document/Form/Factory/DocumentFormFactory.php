@@ -64,7 +64,7 @@ class DocumentFormFactory
     }
 
     public function getDocumentForm(
-        string $type,
+        ControllerMethodConstant $type,
         MediaModel $mediaModel = null,
         Media $media = null
     ): FormInterface {
@@ -128,7 +128,7 @@ class DocumentFormFactory
                     ->getMediaCategoriesByOwners($userActiveSupervisors);
 
                 $mimeType = $this->mediaMimeTypeFacade
-                    ->getMimeTypesByOwner($userActiveSupervisors, MediaTypeConstant::INFORMATION_MATERIAL);
+                    ->getMimeTypesByOwner($userActiveSupervisors, MediaTypeConstant::INFORMATION_MATERIAL->value);
 
                 $formClass = DocumentSearchForm::class;
                 $parameters = [
@@ -141,7 +141,7 @@ class DocumentFormFactory
                     ->getMediaCategoriesByOwner($user);
 
                 $mimeType = $this->mediaMimeTypeFacade
-                    ->getMimeTypesByOwner($user, MediaTypeConstant::INFORMATION_MATERIAL);
+                    ->getMimeTypesByOwner($user, MediaTypeConstant::INFORMATION_MATERIAL->value);
 
                 $formClass = DocumentSearchForm::class;
                 $parameters = [

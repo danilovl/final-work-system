@@ -42,7 +42,7 @@ class EventTimeValidator extends ConstraintValidator
         }
 
         switch ($value->type->getId()) {
-            case EventTypeConstant::CONSULTATION:
+            case EventTypeConstant::CONSULTATION->value:
                 if ($value->address === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
@@ -50,7 +50,7 @@ class EventTimeValidator extends ConstraintValidator
                         ->addViolation();
                 }
                 break;
-            case EventTypeConstant::PERSONAL:
+            case EventTypeConstant::PERSONAL->value:
                 if ($value->name === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
@@ -62,7 +62,7 @@ class EventTimeValidator extends ConstraintValidator
         if (CompareHelper::compareDateTime($value->start, $value->end, CompareConstant::EQUAL)) {
             $this->context
                 ->buildViolation('This value should not be equal to {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $value->start->format(DateFormatConstant::DATE_TIME))
+                ->setParameter('{{ compared_value }}', $value->start->format(DateFormatConstant::DATE_TIME->value))
                 ->atPath('end')
                 ->addViolation();
         }
@@ -70,7 +70,7 @@ class EventTimeValidator extends ConstraintValidator
         if (CompareHelper::compareDateTime($value->start, $value->end, CompareConstant::MORE)) {
             $this->context
                 ->buildViolation('This value should be greater than {{ compared_value }}.')
-                ->setParameter('{{ compared_value }}', $value->start->format(DateFormatConstant::DATE_TIME))
+                ->setParameter('{{ compared_value }}', $value->start->format(DateFormatConstant::DATE_TIME->value))
                 ->atPath('start')
                 ->addViolation();
         }

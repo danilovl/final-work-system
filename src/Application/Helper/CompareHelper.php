@@ -23,7 +23,7 @@ class CompareHelper
     public static function compare(
         mixed $value1,
         mixed $value2,
-        string $operator
+        CompareConstant $operator
     ): bool {
         return match ($operator) {
             CompareConstant::LESS => $value1 < $value2,
@@ -31,19 +31,18 @@ class CompareHelper
             CompareConstant::MORE => $value1 > $value2,
             CompareConstant::MORE_EQUAL => $value1 >= $value2,
             CompareConstant::EQUAL => $value1 === $value2,
-            CompareConstant::NOT_EQUAL => $value1 != $value2,
-            default => false,
+            CompareConstant::NOT_EQUAL => $value1 != $value2
         };
     }
 
     public static function compareDateTime(
         DateTime $first,
         DateTime $second,
-        string $condition
+        CompareConstant $condition
     ): bool {
         return self::compare(
-            strtotime($first->format(DateFormatConstant::DATABASE)),
-            strtotime($second->format(DateFormatConstant::DATABASE)),
+            strtotime($first->format(DateFormatConstant::DATABASE->value)),
+            strtotime($second->format(DateFormatConstant::DATABASE->value)),
             $condition
         );
     }

@@ -12,6 +12,7 @@
 
 namespace App\Tests\Application\Helper;
 
+use App\Application\Constant\PlatformConstant;
 use App\Application\Helper\FunctionHelper;
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -76,7 +77,7 @@ class FunctionHelperTest extends TestCase
      */
     public function testSanitizeFileName(
         string $dangerousFilename,
-        string $platform,
+        PlatformConstant $platform,
         string $result
     ): void {
         $sanitizeFileName = FunctionHelper::sanitizeFileName($dangerousFilename, $platform);
@@ -86,8 +87,8 @@ class FunctionHelperTest extends TestCase
 
     public function sanitizeFileNameProvider(): Generator
     {
-        yield ['test?test?file.pdf', 'unix', 'test_test_file.pdf'];
-        yield ['test#test?test/file.pdf', 'linux', 'test_test_test_file.pdf'];
-        yield ['#test?test/test.pdf', 'windows', '#test?test/test.pdf'];
+        yield ['test?test?file.pdf', PlatformConstant::UNIX, 'test_test_file.pdf'];
+        yield ['test#test?test/file.pdf', PlatformConstant::LINUX, 'test_test_test_file.pdf'];
+        yield ['#test?test/test.pdf', PlatformConstant::WINDOWS, '#test?test/test.pdf'];
     }
 }

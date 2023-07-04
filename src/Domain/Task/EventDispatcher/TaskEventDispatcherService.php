@@ -77,11 +77,11 @@ readonly class TaskEventDispatcherService
         $genericEvent = new TaskGenericEvent($task, $type);
 
         switch ($type) {
-            case TaskStatusConstant::ACTIVE:
+            case TaskStatusConstant::ACTIVE->value:
                 $notificationEvent = Events::NOTIFICATION_TASK_CREATE;
                 $systemEvent = Events::SYSTEM_TASK_CREATE;
                 break;
-            case TaskStatusConstant::COMPLETE:
+            case TaskStatusConstant::COMPLETE->value:
                 $notificationEvent = Events::NOTIFICATION_TASK_INCOMPLETE;
                 $systemEvent = Events::SYSTEM_TASK_INCOMPLETE;
 
@@ -90,7 +90,7 @@ readonly class TaskEventDispatcherService
                     $systemEvent = Events::SYSTEM_TASK_COMPLETE;
                 }
                 break;
-            case TaskStatusConstant::NOTIFY:
+            case TaskStatusConstant::NOTIFY->value:
                 $notificationEvent = Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE;
                 $systemEvent = Events::SYSTEM_TASK_NOTIFY_INCOMPLETE;
                 break;

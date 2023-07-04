@@ -49,7 +49,7 @@ readonly class TaskCompleteAllHandle
             $this->entityManagerService->flush($task);
 
             $this->taskEventDispatcherService
-                ->onTaskChangeStatus($task, TaskStatusConstant::COMPLETE);
+                ->onTaskChangeStatus($task, TaskStatusConstant::COMPLETE->value);
         }
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

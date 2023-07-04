@@ -51,7 +51,7 @@ readonly class WorkListHandle
         $works = $this->workSearch->filterWorkList($user, $type, $form);
 
         $workGroups = match ($type) {
-            WorkUserTypeConstant::SUPERVISOR => WorkFunctionHelper::groupWorksByCategoryAndSorting($works),
+            WorkUserTypeConstant::SUPERVISOR->value => WorkFunctionHelper::groupWorksByCategoryAndSorting($works),
             default => WorkFunctionHelper::groupWorksByDeadline($works),
         };
 

@@ -38,7 +38,7 @@ class ArticleCategoryController extends AbstractController
 
     public function articleList(Request $request, ArticleCategory $articleCategory): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $articleCategory);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleCategory);
 
         return $this->articleCategoryArticleListHandle->handle($request, $articleCategory);
     }

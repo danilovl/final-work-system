@@ -61,7 +61,7 @@ class EventCalendarFacade
         $events = [];
 
         switch ($type) {
-            case EventCalendarActionTypeConstant::MANAGE:
+            case EventCalendarActionTypeConstant::MANAGE->value:
                 $mediaData = EventRepositoryData::createFromArray([
                     'user' => $user,
                     'startDate' => $startDate,
@@ -79,8 +79,8 @@ class EventCalendarFacade
                     $event['id'] = $this->hashIds->encode($appointment->getId());
                     $event['title'] = (string) $appointment;
                     $event['color'] = $appointment->getType()->getColor();
-                    $event['start'] = $appointment->getStart()->format(DateFormatConstant::DATABASE);
-                    $event['end'] = $appointment->getEnd()->format(DateFormatConstant::DATABASE);
+                    $event['start'] = $appointment->getStart()->format(DateFormatConstant::DATABASE->value);
+                    $event['end'] = $appointment->getEnd()->format(DateFormatConstant::DATABASE->value);
                     $event['detail_url'] = $this->router->generate('event_detail', [
                         'id' => $this->hashIds->encode($appointment->getId())
                     ]);
@@ -97,13 +97,13 @@ class EventCalendarFacade
                     $events[] = $event;
                 }
                 break;
-            case EventCalendarActionTypeConstant::RESERVATION:
+            case EventCalendarActionTypeConstant::RESERVATION->value:
                 /** @var WorkStatus $workStatus */
-                $workStatus = $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+                $workStatus = $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
                 $userWorks = $this->userWorkService->getWorkBy(
                     $user,
-                    WorkUserTypeConstant::AUTHOR,
+                    WorkUserTypeConstant::AUTHOR->value,
                     null,
                     $workStatus
                 );
@@ -125,7 +125,7 @@ class EventCalendarFacade
                         'user' => $supervisor,
                         'startDate' => $startDate,
                         'endDate' => $endDate,
-                        'eventType' => $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION)
+                        'eventType' => $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION->value)
                     ]);
 
                     $supervisorAppointments = $this->eventRepository
@@ -137,8 +137,8 @@ class EventCalendarFacade
                     foreach ($supervisorAppointments as $supervisorAppointment) {
                         $event = [];
                         $event['id'] = $this->hashIds->encode($supervisorAppointment->getId());
-                        $event['start'] = $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE);
-                        $event['end'] = $supervisorAppointment->getEnd()->format(DateFormatConstant::DATABASE);
+                        $event['start'] = $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE->value);
+                        $event['end'] = $supervisorAppointment->getEnd()->format(DateFormatConstant::DATABASE->value);
 
                         if ($supervisorAppointment->getAddress()) {
                             $event['title'] = $supervisorAppointment->getAddress()->getName() . "\n" . $supervisorAppointment->getOwner();
@@ -158,7 +158,7 @@ class EventCalendarFacade
                                 continue;
                             }
                         } else {
-                            if (DateHelper::actualDay() > $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE)) {
+                            if (DateHelper::actualDay() > $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE->value)) {
                                 continue;
                             }
                             $event['reservation_url'] = $this->router->generate('event_calendar_reservation_ajax', [
@@ -247,8 +247,8 @@ class EventCalendarFacade
             'id' => $this->hashIds->encode($event->getId()),
             'title' => $event->toString(),
             'color' => $event->getType()->getColor(),
-            'start' => $event->getStart()->format(DateFormatConstant::DATABASE),
-            'end' => $event->getEnd()->format(DateFormatConstant::DATABASE)
+            'start' => $event->getStart()->format(DateFormatConstant::DATABASE->value),
+            'end' => $event->getEnd()->format(DateFormatConstant::DATABASE->value)
         ];
     }
 }

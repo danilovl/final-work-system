@@ -38,8 +38,8 @@ class TranslatorService implements TranslatorInterface
         string $domain = null,
         string $locale = null
     ): string {
-        if (str_contains($id, TranslationConstant::FLASH_START_KEY)) {
-            $domain = TranslationConstant::FLASH_DOMAIN;
+        if (str_contains($id, TranslationConstant::FLASH_START_KEY->value)) {
+            $domain = TranslationConstant::FLASH_DOMAIN->value;
             $locale = $locale ?? $this->requestStack->getCurrentRequest()->getLocale();
         }
 

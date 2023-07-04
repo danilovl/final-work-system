@@ -25,9 +25,9 @@ final class UserRoleType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => [
-                'app.roles.student' => UserRoleConstant::STUDENT,
-                'app.roles.opponent' => UserRoleConstant::OPPONENT,
-                'app.roles.consultant' => UserRoleConstant::CONSULTANT
+                'app.roles.student' => UserRoleConstant::STUDENT->value,
+                'app.roles.opponent' => UserRoleConstant::OPPONENT->value,
+                'app.roles.consultant' => UserRoleConstant::CONSULTANT->value
             ]
         ]);
     }

@@ -62,36 +62,36 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
 
     public function onTaskCreate(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_CREATE);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_CREATE->value);
     }
 
     public function onTaskEdit(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_EDIT);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_EDIT->value);
     }
 
     public function onTaskComplete(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_COMPLETE);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_COMPLETE->value);
     }
 
     public function onTaskInComplete(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_INCOMPLETE);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_INCOMPLETE->value);
     }
 
     public function onTaskNotifyComplete(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_COMPLETE, false);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_COMPLETE->value, false);
     }
 
     public function onTaskNotifyInComplete(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE->value);
     }
 
     public function onTaskReminderDeadlineCreate(TaskGenericEvent $event): void
     {
-        $this->baseEvent($event, SystemEventTypeConstant::TASK_REMIND_DEADLINE);
+        $this->baseEvent($event, SystemEventTypeConstant::TASK_REMIND_DEADLINE->value);
     }
 }

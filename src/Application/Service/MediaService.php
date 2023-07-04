@@ -37,11 +37,11 @@ class MediaService
         }
 
         $name = FunctionHelper::sanitizeFileName($media->getName());
-        $date = $media->getCreatedAt()->format(DateFormatConstant::DATE);
+        $date = $media->getCreatedAt()->format(DateFormatConstant::DATE->value);
         $extension = $media->getMimeType()->getExtension();
 
         $fileName = sprintf('%s.%s', $name, $extension);
-        if ($media->getType()->getId() === MediaTypeConstant::WORK_VERSION) {
+        if ($media->getType()->getId() === MediaTypeConstant::WORK_VERSION->value) {
             $type = $media->getWork() ? $media->getWork()->getType()->getShortcut() : '';
             $fileName = sprintf('%s_%s_%s.%s', $date, $type, $name, $extension);
         }

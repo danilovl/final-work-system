@@ -121,6 +121,6 @@ class EmailNotificationQueue
 
     public function __toString(): string
     {
-        return $this->subject ?: TranslationConstant::EMPTY;
+        return $this->subject ?: TranslationConstant::EMPTY->value;
     }
 }

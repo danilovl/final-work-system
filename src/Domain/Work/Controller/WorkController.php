@@ -47,7 +47,7 @@ class WorkController extends AbstractController
 
     public function detail(Request $request, Work $work): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 
         return $this->workDetailHandle->handle($request, $work);
     }
@@ -59,21 +59,21 @@ class WorkController extends AbstractController
 
     public function edit(Request $request, Work $work): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->workEditHandle->handle($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->workEditAuthorHandle->handle($request, $work);
     }
 
     public function delete(Request $request, Work $work): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $work);
 
         return $this->workDeleteHandle->handle($request, $work);
     }

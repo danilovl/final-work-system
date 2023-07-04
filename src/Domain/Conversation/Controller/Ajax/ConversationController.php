@@ -39,7 +39,7 @@ class ConversationController extends AbstractController
     public function changeReadMessageStatus(ConversationMessage $conversationMessage): JsonResponse
     {
         $this->denyAccessUnlessGranted(
-            VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS,
+            VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value,
             $conversationMessage
         );
 
@@ -53,14 +53,14 @@ class ConversationController extends AbstractController
 
     public function delete(Conversation $conversation): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $conversation);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $conversation);
 
         return $this->conversationDeleteHandle->handle($conversation);
     }
 
     public function liveConversation(Conversation $conversation): StreamedResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationLiveHandle->handle($conversation);
     }

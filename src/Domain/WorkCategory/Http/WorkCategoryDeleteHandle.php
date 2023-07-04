@@ -32,9 +32,9 @@ readonly class WorkCategoryDeleteHandle
         if (count($workCategory->getWorks()) === 0) {
             $this->entityManagerService->remove($workCategory);
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.delete.success');
+            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
         } else {
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.delete.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
         }
 
         return $this->requestService->redirectToRoute('work_category_list');

@@ -73,29 +73,30 @@ readonly class SystemEventLinkGeneratorService implements RuntimeExtensionInterf
             throw new InvalidArgumentException(sprintf('Folder "%s" for generator not exist', $type));
         }
 
-        $locale = LocaleConstant::ISO_CS ?? $this->requestStack->getCurrentRequest()->getLocale();
+        /** TODO: Now available templates only for cs $locale */
+        $locale = LocaleConstant::ISO_CS->value ?? $this->requestStack->getCurrentRequest()->getLocale();
         $folder = sprintf('system_event/%s/%s', $type, $locale);
 
         return match ($systemEventTypeId) {
-            SystemEventTypeConstant::WORK_CREATE => $folder . '/work_create.twig',
-            SystemEventTypeConstant::WORK_EDIT => $folder . '/work_edit.html.twig',
-            SystemEventTypeConstant::USER_EDIT => $folder . '/user_edit.html.twig',
-            SystemEventTypeConstant::TASK_CREATE => $folder . '/task_create.html.twig',
-            SystemEventTypeConstant::TASK_EDIT => $folder . '/task_edit.html.twig',
-            SystemEventTypeConstant::TASK_COMPLETE => $folder . '/task_complete.html.twig',
-            SystemEventTypeConstant::TASK_INCOMPLETE => $folder . '/task_incomplete.html.twig',
-            SystemEventTypeConstant::TASK_NOTIFY_COMPLETE => $folder . '/task_notify_complete.html.twig',
-            SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE => $folder . '/task_notify_incomplete.html.twig',
-            SystemEventTypeConstant::TASK_REMIND_DEADLINE => $folder . '/task_remind_deadline.html.twig',
-            SystemEventTypeConstant::VERSION_CREATE => $folder . '/version_create.twig',
-            SystemEventTypeConstant::VERSION_EDIT => $folder . '/version_edit.twig',
-            SystemEventTypeConstant::DOCUMENT_CREATE => $folder . '/document_create.html.twig',
-            SystemEventTypeConstant::MESSAGE_CREATE => $folder . '/message_create.html.twig',
-            SystemEventTypeConstant::EVENT_CREATE => $folder . '/event_create.html.twig',
-            SystemEventTypeConstant::EVENT_EDIT => $folder . '/event_edit.html.twig',
-            SystemEventTypeConstant::EVENT_SWITCH_SKYPE => $folder . '/event_switch_skype.html.twig',
-            SystemEventTypeConstant::EVENT_COMMENT_CREATE => $folder . '/event_comment_create.html.twig',
-            SystemEventTypeConstant::EVENT_COMMENT_EDIT => $folder . '/event_comment_edit.html.twig',
+            SystemEventTypeConstant::WORK_CREATE->value => $folder . '/work_create.twig',
+            SystemEventTypeConstant::WORK_EDIT->value => $folder . '/work_edit.html.twig',
+            SystemEventTypeConstant::USER_EDIT->value => $folder . '/user_edit.html.twig',
+            SystemEventTypeConstant::TASK_CREATE->value => $folder . '/task_create.html.twig',
+            SystemEventTypeConstant::TASK_EDIT->value => $folder . '/task_edit.html.twig',
+            SystemEventTypeConstant::TASK_COMPLETE->value => $folder . '/task_complete.html.twig',
+            SystemEventTypeConstant::TASK_INCOMPLETE->value => $folder . '/task_incomplete.html.twig',
+            SystemEventTypeConstant::TASK_NOTIFY_COMPLETE->value => $folder . '/task_notify_complete.html.twig',
+            SystemEventTypeConstant::TASK_NOTIFY_INCOMPLETE->value => $folder . '/task_notify_incomplete.html.twig',
+            SystemEventTypeConstant::TASK_REMIND_DEADLINE->value => $folder . '/task_remind_deadline.html.twig',
+            SystemEventTypeConstant::VERSION_CREATE->value => $folder . '/version_create.twig',
+            SystemEventTypeConstant::VERSION_EDIT->value => $folder . '/version_edit.twig',
+            SystemEventTypeConstant::DOCUMENT_CREATE->value => $folder . '/document_create.html.twig',
+            SystemEventTypeConstant::MESSAGE_CREATE->value => $folder . '/message_create.html.twig',
+            SystemEventTypeConstant::EVENT_CREATE->value => $folder . '/event_create.html.twig',
+            SystemEventTypeConstant::EVENT_EDIT->value => $folder . '/event_edit.html.twig',
+            SystemEventTypeConstant::EVENT_SWITCH_SKYPE->value => $folder . '/event_switch_skype.html.twig',
+            SystemEventTypeConstant::EVENT_COMMENT_CREATE->value => $folder . '/event_comment_create.html.twig',
+            SystemEventTypeConstant::EVENT_COMMENT_EDIT->value => $folder . '/event_comment_edit.html.twig',
             default => throw new ConstantNotFoundException('Event type constant not found'),
         };
     }

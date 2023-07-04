@@ -35,7 +35,7 @@ readonly class TaskListWorkHandle
         $user = $this->userService->getUser();
         $pagination = $this->workDetailTabService->getTabPagination(
             $request,
-            TabTypeConstant::TAB_TASK,
+            TabTypeConstant::TAB_TASK->value,
             $work,
             $user
         );

@@ -18,10 +18,10 @@ use App\Application\Constant\{
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use Symfony\Component\HttpFoundation\{
+    Response,
     JsonResponse,
-    RedirectResponse,
     RequestStack,
-    Response
+    RedirectResponse
 };
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -64,7 +64,7 @@ readonly class RequestService
     }
 
     public function createAjaxJson(
-        string $type,
+        AjaxJsonTypeConstant $type,
         ?array $extraData = null,
         int $statusCode = Response::HTTP_OK
     ): JsonResponse {
@@ -72,40 +72,40 @@ readonly class RequestService
             AjaxJsonTypeConstant::CREATE_SUCCESS => [
                 'valid' => true,
                 'notifyMessage' => [
-                    FlashTypeConstant::SUCCESS => $this->translatorService->trans('app.flash.form.create.success')
+                    FlashTypeConstant::SUCCESS->value => $this->translatorService->trans('app.flash.form.create.success')
                 ]
             ],
             AjaxJsonTypeConstant::CREATE_FAILURE => [
                 'valid' => false,
                 'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->translatorService->trans('app.flash.form.create.error'),
-                    FlashTypeConstant::WARNING => $this->translatorService->trans('app.flash.form.create.warning')
+                    FlashTypeConstant::ERROR->value => $this->translatorService->trans('app.flash.form.create.error'),
+                    FlashTypeConstant::WARNING->value => $this->translatorService->trans('app.flash.form.create.warning')
                 ],
             ],
             AjaxJsonTypeConstant::SAVE_SUCCESS => [
                 'valid' => true,
                 'notifyMessage' => [
-                    FlashTypeConstant::SUCCESS => $this->translatorService->trans('app.flash.form.save.success'),
+                    FlashTypeConstant::SUCCESS->value => $this->translatorService->trans('app.flash.form.save.success'),
                 ]
             ],
             AjaxJsonTypeConstant::SAVE_FAILURE => [
                 'valid' => false,
                 'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->translatorService->trans('app.flash.form.save.error'),
-                    FlashTypeConstant::WARNING => $this->translatorService->trans('app.flash.form.save.warning')
+                    FlashTypeConstant::ERROR->value => $this->translatorService->trans('app.flash.form.save.error'),
+                    FlashTypeConstant::WARNING->value => $this->translatorService->trans('app.flash.form.save.warning')
                 ]
             ],
             AjaxJsonTypeConstant::DELETE_SUCCESS => [
                 'delete' => true,
                 'notifyMessage' => [
-                    FlashTypeConstant::SUCCESS => $this->translatorService->trans('app.flash.form.delete.success')
+                    FlashTypeConstant::SUCCESS->value => $this->translatorService->trans('app.flash.form.delete.success')
                 ]
             ],
             AjaxJsonTypeConstant::DELETE_FAILURE => [
                 'delete' => false,
                 'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->translatorService->trans('app.flash.form.delete.error'),
-                    FlashTypeConstant::WARNING => $this->translatorService->trans('app.flash.form.delete.warning')
+                    FlashTypeConstant::ERROR->value => $this->translatorService->trans('app.flash.form.delete.error'),
+                    FlashTypeConstant::WARNING->value => $this->translatorService->trans('app.flash.form.delete.warning')
                 ]
             ],
             default => throw new ConstantNotFoundException('AjaxJson constant type not found'),

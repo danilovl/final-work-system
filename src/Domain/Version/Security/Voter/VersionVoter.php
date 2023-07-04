@@ -23,11 +23,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class VersionVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::CREATE,
-        VoterSupportConstant::VIEW,
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::DELETE,
-        VoterSupportConstant::DOWNLOAD
+        VoterSupportConstant::CREATE->value,
+        VoterSupportConstant::VIEW->value,
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::DELETE->value,
+        VoterSupportConstant::DOWNLOAD->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -51,15 +51,15 @@ class VersionVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::CREATE:
+            case VoterSupportConstant::CREATE->value:
                 return $this->canCreate($subject, $user);
-            case VoterSupportConstant::VIEW:
+            case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject);
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::DOWNLOAD:
+            case VoterSupportConstant::DOWNLOAD->value:
                 return $this->canDownload($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 

@@ -58,17 +58,17 @@ readonly class UserCreateHandle
                 $username = $userModel->username;
 
                 if ($userFacade->findOneByUsername($username) || $userFacade->findOneByEmail($email)) {
-                    $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.user.create.error');
-                    $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.user.create.warning');
+                    $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.user.create.error');
+                    $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.user.create.warning');
                 } else {
                     $newUser = $this->userFactory->createNewUser($userModel);
                     $this->userEventDispatcherService->onUserCreate($newUser);
 
-                    $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.user.create.success');
+                    $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.user.create.success');
                 }
             } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
+                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
+                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
             }
         }
 

@@ -72,7 +72,7 @@ readonly class ConversationFacade
     {
         $conversationArray = [];
         /** @var WorkStatus $workStatus */
-        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
         $workArray = $this->conversationVariationService->getWorkConversationsByUser(
             $user,
@@ -91,7 +91,7 @@ readonly class ConversationFacade
                 }
 
                 /** @var ConversationType $conversationType */
-                $conversationType = $this->entityManagerService->getReference(ConversationType::class, ConversationTypeConstant::WORK);
+                $conversationType = $this->entityManagerService->getReference(ConversationType::class, ConversationTypeConstant::WORK->value);
 
                 $newConversation = new Conversation;
                 $participants = new ArrayCollection;
@@ -145,7 +145,7 @@ readonly class ConversationFacade
 
             $newConversation = $this->conversationFactory->createConversation(
                 $user,
-                ConversationTypeConstant::GROUP,
+                ConversationTypeConstant::GROUP->value,
                 null,
                 $name
             );
@@ -161,7 +161,7 @@ readonly class ConversationFacade
                 $conversationMessage,
                 $user,
                 $conversationParticipantArray,
-                ConversationMessageStatusTypeConstant::UNREAD
+                ConversationMessageStatusTypeConstant::UNREAD->value
             );
 
             $this->entityManagerService->clear();
@@ -190,7 +190,7 @@ readonly class ConversationFacade
                             $conversationMessage,
                             $user,
                             $participants,
-                            ConversationMessageStatusTypeConstant::UNREAD
+                            ConversationMessageStatusTypeConstant::UNREAD->value
                         );
                     $createNewConversation = true;
 
@@ -209,7 +209,7 @@ readonly class ConversationFacade
 
                 $newConversation = $this->conversationFactory->createConversation(
                     $user,
-                    ConversationTypeConstant::WORK,
+                    ConversationTypeConstant::WORK->value,
                     $work,
                     $name
                 );
@@ -224,7 +224,7 @@ readonly class ConversationFacade
                     $conversationMessage,
                     $user,
                     $participants,
-                    ConversationMessageStatusTypeConstant::UNREAD
+                    ConversationMessageStatusTypeConstant::UNREAD->value
                 );
 
                 $this->entityManagerService->clear();

@@ -12,12 +12,12 @@
 
 namespace App\Application\Constant;
 
-enum CompareConstant
+enum CompareConstant: string
 {
-    final public const MORE = '>';
-    final public const LESS = '<';
-    final public const EQUAL = '===';
-    final public const NOT_EQUAL = '!==';
-    public const MORE_EQUAL = '>=';
-    public const LESS_EQUAL = '<=';
+    case MORE = '>';
+    case LESS = '<';
+    case EQUAL = '===';
+    case NOT_EQUAL = '!==';
+    case MORE_EQUAL = '>=';
+    case LESS_EQUAL = '<=';
 }

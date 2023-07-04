@@ -138,6 +138,6 @@ class EventScheduleTemplate
 
     public function __toString(): string
     {
-        return TranslationConstant::EMPTY;
+        return TranslationConstant::EMPTY->value;
     }
 }

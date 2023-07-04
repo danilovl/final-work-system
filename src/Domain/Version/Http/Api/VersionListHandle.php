@@ -30,7 +30,7 @@ readonly class VersionListHandle
 
     public function handle(Request $request, Work $work): JsonResponse
     {
-        $paginationVersion = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_VERSION, $work);
+        $paginationVersion = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_VERSION->value, $work);
 
         $versions = [];
         foreach ($paginationVersion as $version) {

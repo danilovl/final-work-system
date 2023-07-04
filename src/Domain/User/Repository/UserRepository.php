@@ -53,15 +53,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->addSelect('work');
 
         switch ($type) {
-            case WorkUserTypeConstant::AUTHOR:
+            case WorkUserTypeConstant::AUTHOR->value:
                 $queryBuilder->join('user.authorWorks', 'work')
                     ->where('work.supervisor = :supervisor');
                 break;
-            case WorkUserTypeConstant::OPPONENT:
+            case WorkUserTypeConstant::OPPONENT->value:
                 $queryBuilder->join('user.opponentWorks', 'work')
                     ->where('work.supervisor = :supervisor');
                 break;
-            case WorkUserTypeConstant::CONSULTANT:
+            case WorkUserTypeConstant::CONSULTANT->value:
                 $queryBuilder->join('user.consultantWorks', 'work')
                     ->where('work.supervisor = :supervisor');
                 break;
@@ -97,9 +97,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('consultant_work is NULL')
             ->orderBy('user.lastname', Criteria::ASC)
             ->setParameter('user', $user)
-            ->setParameter('roleStudent', '%' . UserRoleConstant::STUDENT . '%')
-            ->setParameter('roleOpponent', '%' . UserRoleConstant::OPPONENT . '%')
-            ->setParameter('roleConsultant', '%' . UserRoleConstant::CONSULTANT . '%');
+            ->setParameter('roleStudent', '%' . UserRoleConstant::STUDENT->value . '%')
+            ->setParameter('roleOpponent', '%' . UserRoleConstant::OPPONENT->value . '%')
+            ->setParameter('roleConsultant', '%' . UserRoleConstant::CONSULTANT->value . '%');
     }
 
     public function allByUserRole(string $role, bool $enable = true): QueryBuilder

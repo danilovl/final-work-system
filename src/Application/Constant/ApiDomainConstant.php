@@ -12,7 +12,7 @@
 
 namespace App\Application\Constant;
 
-enum ApiDomainConstant
+enum ApiDomainConstant: string
 {
-    final public const DEFAULT = 'default';
+    case DEFAULT = 'default';
 }

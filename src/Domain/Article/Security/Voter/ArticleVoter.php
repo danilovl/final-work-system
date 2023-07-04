@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class ArticleVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW
+        VoterSupportConstant::VIEW->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -46,7 +46,7 @@ class ArticleVoter extends Voter
             return false;
         }
 
-        if ($attribute === VoterSupportConstant::VIEW) {
+        if ($attribute === VoterSupportConstant::VIEW->value) {
             return $this->canView($subject, $user);
         }
 

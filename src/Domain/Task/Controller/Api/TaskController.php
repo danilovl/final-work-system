@@ -53,14 +53,14 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $task);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
 
         return $this->taskDetailHandle->handle($task);
     }
 
     public function listWork(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 
         return $this->taskListWorkHandle->handle($request, $work);
     }

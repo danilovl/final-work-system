@@ -47,9 +47,9 @@ class FunctionHelper
 
     public static function sanitizeFileName(
         string $dangerousFilename,
-        string $platform = PlatformConstant::UNIX
+        PlatformConstant $platform = PlatformConstant::UNIX
     ): string {
-        if (in_array(strtolower($platform), [PlatformConstant::UNIX, PlatformConstant::LINUX])) {
+        if (in_array($platform, [PlatformConstant::UNIX, PlatformConstant::LINUX])) {
             $dangerousCharacters = [' ', '"', "'", '&', '/', "\\", '?', '#'];
         } else {
             return $dangerousFilename;

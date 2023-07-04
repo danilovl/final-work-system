@@ -111,6 +111,6 @@ class ConversationMessage
 
     public function __toString(): string
     {
-        return $this->getContent() ?: TranslationConstant::EMPTY;
+        return $this->getContent() ?: TranslationConstant::EMPTY->value;
     }
 }

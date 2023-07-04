@@ -47,7 +47,7 @@ class TaskController extends AbstractController
 
     public function create(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $work);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->taskCreateHandle->handle($request, $work);
     }
@@ -63,7 +63,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
         return $this->taskEditHandle->handle($request, $task);
     }
@@ -74,7 +74,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $task);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
         return $this->taskChangeStatusHandle->handle($request, $task);
     }
@@ -83,7 +83,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE, $task);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE->value, $task);
 
         return $this->taskNotifyCompleteHandle->handle($task);
     }
@@ -93,7 +93,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $task);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $task);
 
         return $this->taskDeleteHandle->handle($task);
     }

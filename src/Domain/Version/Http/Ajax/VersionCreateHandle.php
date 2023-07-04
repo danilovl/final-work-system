@@ -50,7 +50,7 @@ readonly class VersionCreateHandle
     public function handle(Request $request, Work $work): JsonResponse
     {
         /** @var MediaType $type */
-        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION);
+        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION->value);
 
         $mediaModel = new MediaModel;
         $mediaModel->owner = $this->userService->getUser();

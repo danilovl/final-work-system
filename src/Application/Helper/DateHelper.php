@@ -21,7 +21,7 @@ class DateHelper
 {
     public static function actualDay(): string|bool
     {
-        return date(DateFormatConstant::DATABASE);
+        return date(DateFormatConstant::DATABASE->value);
     }
 
     public static function actualWeekStartByDate(DateTime $date): DateTime
@@ -43,7 +43,7 @@ class DateHelper
             strtotime('0 hours 0 seconds') :
             strtotime('last Monday', mktime(0, 0, 0, $dateN, $dateJ, $dateY));
 
-        return date(DateFormatConstant::DATABASE, $weekStart);
+        return date(DateFormatConstant::DATABASE->value, $weekStart);
     }
 
     public static function actualWeekEnd(): string|bool
@@ -51,7 +51,7 @@ class DateHelper
         $weekStart = self::actualWeekStart();
         $weekEnd = $weekStart + 6 * 24 * 60 * 60;
 
-        return date(DateFormatConstant::DATABASE, $weekEnd);
+        return date(DateFormatConstant::DATABASE->value, $weekEnd);
     }
 
     public static function datePeriod(string $from, string $to, bool $mode = false): array
@@ -62,7 +62,7 @@ class DateHelper
 
         $period = new DatePeriod($from, new DateInterval('P1D'), $to);
 
-        $arrayOfDates = array_map(static fn($item): string => $item->format(DateFormatConstant::DATE), iterator_to_array($period));
+        $arrayOfDates = array_map(static fn($item): string => $item->format(DateFormatConstant::DATE->value), iterator_to_array($period));
 
         if ($mode === true) {
             $arrayNameDay = [];
@@ -81,7 +81,7 @@ class DateHelper
         $nextWeek = strtotime($week);
         $nextWeek += 7 * 24 * 60 * 60;
 
-        return date(DateFormatConstant::DATABASE, $nextWeek);
+        return date(DateFormatConstant::DATABASE->value, $nextWeek);
     }
 
     public static function previousWeek(string $week): string|bool
@@ -89,7 +89,7 @@ class DateHelper
         $previousWeek = strtotime($week);
         $previousWeek -= 7 * 24 * 60 * 60;
 
-        return date(DateFormatConstant::DATABASE, $previousWeek);
+        return date(DateFormatConstant::DATABASE->value, $previousWeek);
     }
 
     public static function endWeek(string $week): string|bool
@@ -97,7 +97,7 @@ class DateHelper
         $endWeek = strtotime($week);
         $endWeek += 6 * 24 * 60 * 60;
 
-        return date(DateFormatConstant::DATABASE, $endWeek);
+        return date(DateFormatConstant::DATABASE->value, $endWeek);
     }
 
     public static function changeFormatWeek(string $format, string $date): string|bool
@@ -125,21 +125,21 @@ class DateHelper
 
     public static function firstDayMonth(): string|bool
     {
-        return date(DateFormatConstant::DATABASE, strtotime('first day of this month'));
+        return date(DateFormatConstant::DATABASE->value, strtotime('first day of this month'));
     }
 
     public static function lastDayMonth(): string|bool
     {
-        return date(DateFormatConstant::DATABASE, strtotime('last day of this month'));
+        return date(DateFormatConstant::DATABASE->value, strtotime('last day of this month'));
     }
 
     public static function plusDayDate(string $date, int $quantity): string|bool
     {
-        return date(DateFormatConstant::DATABASE, strtotime($date . ' + ' . $quantity . ' days'));
+        return date(DateFormatConstant::DATABASE->value, strtotime($date . ' + ' . $quantity . ' days'));
     }
 
     public static function minusDayDate(string $date, int $quantity): string|bool
     {
-        return date(DateFormatConstant::DATABASE, strtotime($date . ' - ' . $quantity . ' days'));
+        return date(DateFormatConstant::DATABASE->value, strtotime($date . ' - ' . $quantity . ' days'));
     }
 }

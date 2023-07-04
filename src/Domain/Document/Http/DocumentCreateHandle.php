@@ -54,7 +54,7 @@ readonly class DocumentCreateHandle
         /** @var MediaType $type */
         $type = $this->entityManagerService->getReference(
             MediaType::class,
-            MediaTypeConstant::INFORMATION_MATERIAL
+            MediaTypeConstant::INFORMATION_MATERIAL->value
         );
 
         $mediaModel = new MediaModel;
@@ -71,13 +71,13 @@ readonly class DocumentCreateHandle
                 $media = $this->mediaFactory->flushFromModel($mediaModel);
                 $this->documentEventDispatcherService->onDocumentCreate($media);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
                 return $this->requestService->redirectToRoute('document_list_owner');
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
         }
 
         if ($request->isXmlHttpRequest()) {

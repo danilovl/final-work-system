@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class ConversationMessageVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS
+        VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value
     ];
 
     public function __construct(private ConversationService $conversationService) {}
@@ -48,7 +48,7 @@ class ConversationMessageVoter extends Voter
             return false;
         }
 
-        if ($attribute === VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS) {
+        if ($attribute === VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value) {
             return $this->changeReadMessageStatus($subject, $user);
         }
 

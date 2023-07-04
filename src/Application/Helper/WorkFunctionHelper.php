@@ -24,7 +24,7 @@ class WorkFunctionHelper
 
         /** @var Work $work */
         foreach ($works as $work) {
-            $deadline = $work->getDeadline()->format(DateFormatConstant::DATE);
+            $deadline = $work->getDeadline()->format(DateFormatConstant::DATE->value);
 
             if (!isset($deadlineGroup[$deadline])) {
                 $deadlineGroup[$deadline] = [];

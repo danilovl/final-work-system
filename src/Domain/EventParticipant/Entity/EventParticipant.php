@@ -146,7 +146,7 @@ class EventParticipant
             );
         }
 
-        return $participant ?: TranslationConstant::EMPTY;
+        return $participant ?: TranslationConstant::EMPTY->value;
     }
 
     public function __toString(): string

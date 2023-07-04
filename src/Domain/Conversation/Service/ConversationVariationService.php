@@ -54,22 +54,22 @@ class ConversationVariationService
         };
 
         if (UserRoleHelper::isAuthor($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::AUTHOR, null, $workStatus);
+            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::AUTHOR->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
         if (UserRoleHelper::isOpponent($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::OPPONENT, null, $workStatus);
+            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::OPPONENT->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
         if (UserRoleHelper::isConsultant($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::CONSULTANT, null, $workStatus);
+            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::CONSULTANT->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
         if (UserRoleHelper::isSupervisor($user)) {
-            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::SUPERVISOR, null, $workStatus);
+            $userWorks = $this->userWorkService->getWorkBy($user, WorkUserTypeConstant::SUPERVISOR->value, null, $workStatus);
             $addWorks($userWorks);
         }
 
@@ -90,28 +90,28 @@ class ConversationVariationService
         };
 
         if (WorkRoleHelper::isAuthor($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::AUTHOR, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::AUTHOR->value, true);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isOpponent($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT->value, true);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isSupervisor($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::SUPERVISOR, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::SUPERVISOR->value, true);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isConsultant($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::CONSULTANT, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::CONSULTANT->value, true);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);

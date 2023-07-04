@@ -38,28 +38,28 @@ class EventController extends AbstractController
 
     public function detail(Request $request, Event $event): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
 
         return $this->eventDetailHandle->handle($request, $event);
     }
 
     public function edit(Request $request, Event $event): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
         return $this->eventEditHandle->handle($request, $event);
     }
 
     public function switchToSkype(Event $event): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::SWITCH_TO_SKYPE, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::SWITCH_TO_SKYPE->value, $event);
 
         return $this->eventSwitchToSkypeHandle->handle($event);
     }
 
     public function delete(Request $request, Event $event): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
 
         return $this->eventDeleteHandle->handle($request, $event);
     }

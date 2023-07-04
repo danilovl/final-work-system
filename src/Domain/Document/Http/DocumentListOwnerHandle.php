@@ -59,7 +59,7 @@ readonly class DocumentListOwnerHandle
         }
 
         /** @var MediaType $type */
-        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL);
+        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL->value);
 
         $mediaData = MediaRepositoryData::createFromArray([
             'users' => $user,

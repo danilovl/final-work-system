@@ -55,13 +55,13 @@ readonly class WorkCategoryEditHandle
                 $this->workCategoryFactory
                     ->flushFromModel($workCategoryModel, $workCategory);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
                 return $this->requestService->redirectToRoute('work_category_list');
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
         }
 
         if ($request->isXmlHttpRequest()) {

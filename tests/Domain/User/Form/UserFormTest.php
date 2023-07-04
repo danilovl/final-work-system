@@ -56,7 +56,7 @@ class UserFormTest extends KernelTestCase
                 'phone' => null,
                 'email' => 'email@test.com',
                 'username' => 'test_username',
-                'role' => UserRoleConstant::STUDENT,
+                'role' => UserRoleConstant::STUDENT->value,
                 'groups' => null
             ],
             true
@@ -71,7 +71,7 @@ class UserFormTest extends KernelTestCase
                 'phone' => null,
                 'email' => null,
                 'username' => 'test_username',
-                'role' => UserRoleConstant::STUDENT,
+                'role' => UserRoleConstant::STUDENT->value,
                 'groups' => null
             ],
             false
@@ -86,7 +86,7 @@ class UserFormTest extends KernelTestCase
                 'phone' => null,
                 'email' => 'email@test.com',
                 'username' => null,
-                'role' => UserRoleConstant::STUDENT,
+                'role' => UserRoleConstant::STUDENT->value,
                 'groups' => null
             ],
             false

@@ -95,7 +95,7 @@ class ConversationHelper
     public static function getConversationOpposite(iterable $conversations, User $user): void
     {
         foreach ($conversations as $conversation) {
-            if ($conversation->getType()->getId() !== ConversationTypeConstant::WORK) {
+            if ($conversation->getType()->getId() !== ConversationTypeConstant::WORK->value) {
                 continue;
             }
 

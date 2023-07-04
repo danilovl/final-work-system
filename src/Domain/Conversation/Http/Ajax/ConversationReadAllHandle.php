@@ -47,7 +47,7 @@ readonly class ConversationReadAllHandle
             /** @var ConversationMessageStatusType $conversationMessageStatusType */
             $conversationMessageStatusType = $this->entityManagerService->getReference(
                 ConversationMessageStatusType::class,
-                ConversationMessageStatusTypeConstant::READ
+                ConversationMessageStatusTypeConstant::READ->value
             );
 
             $this->conversationMessageStatusFacade->updateAllToStatus(

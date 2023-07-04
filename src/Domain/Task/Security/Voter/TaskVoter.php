@@ -23,10 +23,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class TaskVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW,
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::DELETE,
-        VoterSupportConstant::TASK_NOTIFY_COMPLETE
+        VoterSupportConstant::VIEW->value,
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::DELETE->value,
+        VoterSupportConstant::TASK_NOTIFY_COMPLETE->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -50,13 +50,13 @@ class TaskVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::VIEW:
+            case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
-            case VoterSupportConstant::TASK_NOTIFY_COMPLETE:
+            case VoterSupportConstant::TASK_NOTIFY_COMPLETE->value:
                 return $this->canNotifyComplete($subject, $user);
         }
 

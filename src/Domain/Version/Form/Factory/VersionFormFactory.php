@@ -40,7 +40,7 @@ class VersionFormFactory
     ) {}
 
     public function getVersionForm(
-        string $type,
+        ControllerMethodConstant $type,
         MediaModel $mediaModel,
         ?Media $media = null,
         Work $work = null

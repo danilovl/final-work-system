@@ -30,7 +30,7 @@ readonly class EventListHandle
 
     public function handle(Request $request, Work $work): JsonResponse
     {
-        $pagination = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_EVENT, $work);
+        $pagination = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_EVENT->value, $work);
 
         $events = [];
         foreach ($pagination as $event) {

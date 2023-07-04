@@ -51,7 +51,7 @@ class TaskForm extends AbstractType
                 'required' => true,
                 'html5' => false,
                 'widget' => 'single_text',
-                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
                 'constraints' => [
                     new NotBlank
                 ]

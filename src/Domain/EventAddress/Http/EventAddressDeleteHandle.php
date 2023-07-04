@@ -42,13 +42,13 @@ readonly class EventAddressDeleteHandle
             if ($form->isValid()) {
                 $this->entityManagerService->remove($eventAddress);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.delete.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.success');
 
                 return $this->requestService->redirectToRoute('event_address_list');
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.delete.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.delete.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
         }
 
         return $this->requestService->redirectToRoute('event_address_list');

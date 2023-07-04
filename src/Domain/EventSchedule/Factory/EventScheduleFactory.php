@@ -48,8 +48,8 @@ class EventScheduleFactory extends BaseModelFactory
             }
 
             $dateFormat = sprintf('%s %s',
-                $startDate->format(DateFormatConstant::DATE),
-                $template->getStart()->format(DateFormatConstant::TIME)
+                $startDate->format(DateFormatConstant::DATE->value),
+                $template->getStart()->format(DateFormatConstant::TIME->value)
             );
 
             $startDate = DateHelper::plusDayDate($dateFormat, $template->getDay());

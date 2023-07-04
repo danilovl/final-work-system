@@ -48,14 +48,14 @@ class DocumentCategoryController extends AbstractController
 
     public function edit(Request $request, MediaCategory $mediaCategory): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $mediaCategory);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
 
         return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $mediaCategory);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
 
         return $this->documentCategoryDeleteHandle->handle($mediaCategory);
     }

@@ -12,8 +12,8 @@
 
 namespace App\Application\Constant;
 
-enum MediaConstant
+enum MediaConstant: string
 {
-    final public const WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
-    final public const SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../../public';
+    case WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
+    case SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../../public';
 }

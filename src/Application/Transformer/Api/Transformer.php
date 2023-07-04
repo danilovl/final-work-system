@@ -53,7 +53,7 @@ readonly class Transformer implements TransformerInterface
                     $result[$field] = $this->transform($domain, $subFields, $fieldValue);
                 } else {
                     if ($fieldValue instanceof DateTimeImmutable) {
-                        $fieldValue = DateTimeImmutable::createFromInterface($fieldValue)->format(DateFormatConstant::DATE);
+                        $fieldValue = DateTimeImmutable::createFromInterface($fieldValue)->format(DateFormatConstant::DATE->value);
                     }
 
                     $result[$field] = $fieldValue;

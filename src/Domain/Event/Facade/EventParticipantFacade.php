@@ -36,11 +36,11 @@ readonly class EventParticipantFacade
         Event $event
     ): array {
         /** @var WorkStatus $workStatus */
-        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
         $userWorks = $this->userWorkService->getWorkBy(
             $user,
-            WorkUserTypeConstant::SUPERVISOR,
+            WorkUserTypeConstant::SUPERVISOR->value,
             null,
             $workStatus
         );

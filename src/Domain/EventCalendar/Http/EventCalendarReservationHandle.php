@@ -41,11 +41,11 @@ readonly class EventCalendarReservationHandle
     public function handle(): Response
     {
         /** @var WorkStatus $workStatus */
-        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE);
+        $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
         $userWorks = $this->userWorkService->getWorkBy(
             $this->userService->getUser(),
-            WorkUserTypeConstant::AUTHOR,
+            WorkUserTypeConstant::AUTHOR->value,
             null,
             $workStatus
         );

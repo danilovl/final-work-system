@@ -42,14 +42,14 @@ class EventAddressController extends AbstractController
         Request $request,
         EventAddress $eventAddress
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $eventAddress);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
 
         return $this->eventAddressEditHandle->handle($request, $eventAddress);
     }
 
     public function delete(EventAddress $eventAddress): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $eventAddress);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
         return $this->eventAddressDeleteHandle->handle($eventAddress);
     }

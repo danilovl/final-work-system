@@ -12,8 +12,9 @@
 
 namespace App\Application\Constant;
 
-enum PlatformConstant
+enum PlatformConstant: string
 {
-    public const UNIX = 'unix';
-    public const LINUX = 'linux';
+    case UNIX = 'unix';
+    case LINUX = 'linux';
+    case WINDOWS = 'windows';
 }

@@ -12,12 +12,12 @@
 
 namespace App\Application\Constant;
 
-enum AjaxJsonTypeConstant
+enum AjaxJsonTypeConstant: string
 {
-    final public const CREATE_SUCCESS = 'create.success';
-    final public const CREATE_FAILURE = 'create.failure';
-    final public const SAVE_SUCCESS = 'save.success';
-    final public const SAVE_FAILURE = 'save.failure';
-    final public const DELETE_SUCCESS = 'delete.success';
-    final public const DELETE_FAILURE = 'delete.failure';
+    case CREATE_SUCCESS = 'create.success';
+    case CREATE_FAILURE = 'create.failure';
+    case SAVE_SUCCESS = 'save.success';
+    case SAVE_FAILURE = 'save.failure';
+    case DELETE_SUCCESS = 'delete.success';
+    case DELETE_FAILURE = 'delete.failure';
 }

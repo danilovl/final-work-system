@@ -30,8 +30,8 @@ class GetEventMiddleware implements RequestMiddlewareInterface
             throw new AjaxRuntimeException('Empty type');
         }
 
-        if (DateHelper::validateDate(DateFormatConstant::DATE_TIME, $startDate) === false ||
-            DateHelper::validateDate(DateFormatConstant::DATE_TIME, $endDate) === false
+        if (DateHelper::validateDate(DateFormatConstant::DATE_TIME->value, $startDate) === false ||
+            DateHelper::validateDate(DateFormatConstant::DATE_TIME->value, $endDate) === false
         ) {
             throw new AjaxRuntimeException('Bad format date');
         }

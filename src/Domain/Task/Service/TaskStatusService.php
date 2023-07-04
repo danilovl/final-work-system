@@ -23,7 +23,7 @@ readonly class TaskStatusService
     public function changeStatus(string $type, Task $task): void
     {
         switch ($type) {
-            case TaskStatusConstant::ACTIVE:
+            case TaskStatusConstant::ACTIVE->value:
                 $task->changeActive();
 
                 if ($task->isActive()) {
@@ -31,13 +31,13 @@ readonly class TaskStatusService
                 }
 
                 break;
-            case TaskStatusConstant::COMPLETE:
+            case TaskStatusConstant::COMPLETE->value:
                 $task->changeComplete();
 
                 $this->taskEventDispatcherService->onTaskChangeStatus($task, $type);
 
                 break;
-            case TaskStatusConstant::NOTIFY:
+            case TaskStatusConstant::NOTIFY->value:
                 if ($task->isNotifyComplete()) {
                     $task->changeNotifyComplete();
 

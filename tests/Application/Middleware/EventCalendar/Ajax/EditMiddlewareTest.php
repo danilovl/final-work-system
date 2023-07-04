@@ -14,8 +14,8 @@ class EditMiddlewareTest extends TestCase
     public function testAttributeHandleSuccess(): void
     {
         $request = new Request;
-        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
-        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME));
+        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
+        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
 
         $this->assertEquals(
             true,
@@ -29,8 +29,8 @@ class EditMiddlewareTest extends TestCase
         $this->expectExceptionMessage('Bad format date');
 
         $request = new Request;
-        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE));
-        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE));
+        $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE->value));
+        $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE->value));
 
         EditMiddleware::handle($request);
     }
@@ -41,8 +41,8 @@ class EditMiddlewareTest extends TestCase
         $this->expectExceptionMessage('StartDate must be less then endDate');
 
         $request = new Request;
-        $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME));
-        $request->request->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME));
+        $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
+        $request->request->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
 
         $this->assertEquals(
             true,

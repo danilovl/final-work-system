@@ -54,20 +54,20 @@ class EventForm extends AbstractType
             ->add('address', ChoiceType::class, [
                 'required' => false,
                 'choices' => $options['addresses'],
-                'placeholder' => FormConstant::PLACEHOLDER,
+                'placeholder' => FormConstant::PLACEHOLDER->value,
                 'choice_label' => static fn(EventAddress $address): string => (string) $address
             ])
             ->add('participant', ChoiceType::class, [
                 'required' => false,
                 'choices' => $participants,
-                'placeholder' => FormConstant::PLACEHOLDER,
+                'placeholder' => FormConstant::PLACEHOLDER->value,
                 'choice_label' => static fn(EventParticipant $participant): string => (string) $participant,
                 'preferred_choices' => $participants
             ])
             ->add('start', DateType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME->value,
                 'html5' => false,
                 'constraints' => [
                     new NotBlank
@@ -75,7 +75,7 @@ class EventForm extends AbstractType
             ])
             ->add('end', DateType::class, [
                 'widget' => 'single_text',
-                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE_TIME->value,
                 'required' => true,
                 'html5' => false,
                 'constraints' => [

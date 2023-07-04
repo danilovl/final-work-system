@@ -50,7 +50,7 @@ readonly class DocumentCreateHandle
         /** @var MediaType $type */
         $type = $this->entityManagerService->getReference(
             MediaType::class,
-            MediaTypeConstant::INFORMATION_MATERIAL
+            MediaTypeConstant::INFORMATION_MATERIAL->value
         );
 
         $mediaModel = new MediaModel;

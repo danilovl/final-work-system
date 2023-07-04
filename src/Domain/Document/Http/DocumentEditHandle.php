@@ -55,13 +55,13 @@ readonly class DocumentEditHandle
             if ($form->isValid()) {
                 $this->mediaFactory->flushFromModel($mediaModel, $media);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
                 return $this->requestService->redirectToRoute('document_edit', ['id' => $media->getId()]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
         }
 
         if ($request->isXmlHttpRequest()) {

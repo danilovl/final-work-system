@@ -52,7 +52,7 @@ readonly class ProfileEditHandle
 
                 $this->userFactory->flushFromModel($userModel, $user);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
                 if ($refreshPage) {
                     return $this->requestService->redirectToRoute('profile_edit', [
@@ -60,8 +60,8 @@ readonly class ProfileEditHandle
                     ]);
                 }
             } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.save.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
+                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
+                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
             }
         }
 

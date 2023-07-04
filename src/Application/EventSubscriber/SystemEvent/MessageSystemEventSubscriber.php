@@ -38,7 +38,7 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
 
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::MESSAGE_CREATE);
+            ->find(SystemEventTypeConstant::MESSAGE_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($massageOwner);

@@ -39,21 +39,21 @@ class EventController extends AbstractController
     )]
     public function getEvent(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
 
         return $this->eventGetEventHandle->handle($request, $event);
     }
 
     public function edit(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
         return $this->eventEditHandle->handle($request, $event);
     }
 
     public function delete(Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
 
         return $this->eventDeleteHandle->handle($event);
     }

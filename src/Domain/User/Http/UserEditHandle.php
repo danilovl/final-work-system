@@ -67,15 +67,15 @@ readonly class UserEditHandle
                     $this->userService->getUser()
                 );
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
                 return $this->requestService->redirectToRoute('user_edit', [
                     'id' => $this->hashidsService->encode($user->getId())
                 ]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -86,7 +86,7 @@ readonly class UserEditHandle
             );
         }
 
-        $this->seoPageService->addTitle($user->getUsername(), SeoPageConstant::VERTICAL_SEPARATOR);
+        $this->seoPageService->addTitle($user->getUsername(), SeoPageConstant::VERTICAL_SEPARATOR->value);
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'user/user.html.twig');
 

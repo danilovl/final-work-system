@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class SystemEventRecipientVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::CHANGE_VIEWED
+        VoterSupportConstant::CHANGE_VIEWED->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -45,7 +45,7 @@ class SystemEventRecipientVoter extends Voter
             return false;
         }
 
-        if ($attribute == VoterSupportConstant::CHANGE_VIEWED) {
+        if ($attribute == VoterSupportConstant::CHANGE_VIEWED->value) {
             return $this->canChangeViewed($subject, $user);
         }
 

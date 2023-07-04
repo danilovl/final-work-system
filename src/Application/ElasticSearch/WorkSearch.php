@@ -57,7 +57,7 @@ class WorkSearch
                 'nested' => [
                     'path' => 'status',
                     'query' => [
-                        'term' => ['status.id' => WorkStatusConstant::ACTIVE]
+                        'term' => ['status.id' => WorkStatusConstant::ACTIVE->value]
                     ]
                 ]
             ];
@@ -75,7 +75,7 @@ class WorkSearch
 
                 foreach ($value as $item) {
                     if ($field === 'deadline' and $item instanceof DateTimeInterface) {
-                        $filedValues[] = $item->format(DateFormatConstant::DATE);
+                        $filedValues[] = $item->format(DateFormatConstant::DATE->value);
                     } elseif (is_object($item)) {
                         $filedValues[] = $item->getId();
                     }
@@ -88,7 +88,7 @@ class WorkSearch
                                 $field => [
                                     'gte' => $filedValue . '||-1d',
                                     'lte' => $filedValue . '||+1d',
-                                    'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE
+                                    'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value
                                 ]
                             ],
                         ];

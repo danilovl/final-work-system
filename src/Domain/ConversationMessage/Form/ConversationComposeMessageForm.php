@@ -121,7 +121,7 @@ class ConversationComposeMessageForm extends AbstractType
                     $recipient->getFullNameDegree(),
                     mb_strtolower($type),
                     $work->getTitle(),
-                    $work->getDeadline()->format(DateFormatConstant::DATE)
+                    $work->getDeadline()->format(DateFormatConstant::DATE->value)
                 );
             }
         }

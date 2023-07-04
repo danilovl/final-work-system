@@ -12,9 +12,9 @@
 
 namespace App\Application\Constant;
 
-enum GenderConstant
+enum GenderConstant: string
 {
-    final public const GENDER_FEMALE = 'f';
-    final public const GENDER_MALE = 'm';
-    final public const GENDER_UNKNOWN = 'u';
+    case FEMALE = 'f';
+    case MALE = 'm';
+    case UNKNOWN = 'u';
 }

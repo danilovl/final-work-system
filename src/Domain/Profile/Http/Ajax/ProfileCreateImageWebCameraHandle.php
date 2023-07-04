@@ -53,7 +53,7 @@ readonly class ProfileCreateImageWebCameraHandle
 
         $media = $profileImage ?? new Media;
         if ($profileImage === null) {
-            $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE);
+            $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
 
             $media = new Media;
             $media->setType($mediaType);

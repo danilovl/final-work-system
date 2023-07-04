@@ -46,12 +46,12 @@ class WorkDetailTabService
 
     public function getActiveTab(): string
     {
-        return $this->activeTab ?? TabTypeConstant::TAB_TASK;
+        return $this->activeTab ?? TabTypeConstant::TAB_TASK->value;
     }
 
     public function setActiveTab(?string $activeTab): self
     {
-        if (in_array($activeTab, TabTypeConstant::TABS, true)) {
+        if (in_array($activeTab, TabTypeConstant::TABS->value, true)) {
             $this->activeTab = $activeTab;
         }
 
@@ -74,7 +74,7 @@ class WorkDetailTabService
 
         $this->setActiveTabByPagination($tab, $paginator);
 
-        if ($tab === TabTypeConstant::TAB_MESSAGE) {
+        if ($tab === TabTypeConstant::TAB_MESSAGE->value) {
             if ($paginator->count() > 0) {
                 ConversationHelper::getConversationOpposite(
                     [$paginator[0]->getConversation()],
@@ -113,19 +113,19 @@ class WorkDetailTabService
         $isSupervisor = $user !== null && WorkRoleHelper::isSupervisor($work, $user);
 
         $queryPagination = match ($tab) {
-            TabTypeConstant::TAB_TASK => $this->entityManagerService
+            TabTypeConstant::TAB_TASK->value => $this->entityManagerService
                 ->getRepository(Task::class)
                 ->allByWork($work, !$isSupervisor)
                 ->getQuery(),
-            TabTypeConstant::TAB_VERSION => $this->entityManagerService
+            TabTypeConstant::TAB_VERSION->value => $this->entityManagerService
                 ->getRepository(Media::class)
                 ->allByWork($work)
                 ->getQuery(),
-            TabTypeConstant::TAB_EVENT => $this->entityManagerService
+            TabTypeConstant::TAB_EVENT->value => $this->entityManagerService
                 ->getRepository(Event::class)
                 ->allByWork($work)
                 ->getQuery(),
-            TabTypeConstant::TAB_MESSAGE => $this->entityManagerService
+            TabTypeConstant::TAB_MESSAGE->value => $this->entityManagerService
                 ->getRepository(ConversationMessage::class)
                 ->allByWorkUser($work, $user)
                 ->getQuery(),

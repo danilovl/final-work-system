@@ -12,7 +12,7 @@
 
 namespace App\Application\Constant;
 
-enum FormConstant
+enum FormConstant: string
 {
-    final public const PLACEHOLDER = '------------------------';
+    case PLACEHOLDER = '------------------------';
 }

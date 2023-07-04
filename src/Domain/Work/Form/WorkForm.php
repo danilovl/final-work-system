@@ -87,26 +87,26 @@ class WorkForm extends AbstractType
                 'constraints' => [
                     new NotBlank
                 ],
-                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::STUDENT),
+                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::STUDENT->value),
                 'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('opponent', EntityType::class, [
                 'class' => User::class,
                 'required' => false,
-                'placeholder' => FormConstant::PLACEHOLDER,
-                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::OPPONENT),
+                'placeholder' => FormConstant::PLACEHOLDER->value,
+                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::OPPONENT->value),
                 'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('consultant', EntityType::class, [
                 'class' => User::class,
                 'required' => false,
-                'placeholder' => FormConstant::PLACEHOLDER,
-                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::CONSULTANT),
+                'placeholder' => FormConstant::PLACEHOLDER->value,
+                'query_builder' => $this->callbackQueryBuilder(UserRoleConstant::CONSULTANT->value),
                 'choice_label' => $this->callbackChoiceLabel()
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
-                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
                 'html5' => false,
                 'required' => true,
                 'constraints' => [
@@ -115,7 +115,7 @@ class WorkForm extends AbstractType
             ])
             ->add('deadlineProgram', DateType::class, [
                 'widget' => 'single_text',
-                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
+                'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
                 'required' => false,
                 'html5' => false
             ]);

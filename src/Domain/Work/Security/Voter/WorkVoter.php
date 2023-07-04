@@ -24,9 +24,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class WorkVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW,
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::DELETE
+        VoterSupportConstant::VIEW->value,
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::DELETE->value
     ];
 
     public function __construct(private readonly WorkService $workService) {}
@@ -52,11 +52,11 @@ class WorkVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::VIEW:
+            case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 

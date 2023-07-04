@@ -75,11 +75,11 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
 
     public function onVersionCreate(VersionGenericEvent $event): void
     {
-        $this->onBaseEvent($event, SystemEventTypeConstant::VERSION_CREATE);
+        $this->onBaseEvent($event, SystemEventTypeConstant::VERSION_CREATE->value);
     }
 
     public function onVersionEdit(VersionGenericEvent $event): void
     {
-        $this->onBaseEvent($event, SystemEventTypeConstant::VERSION_EDIT);
+        $this->onBaseEvent($event, SystemEventTypeConstant::VERSION_EDIT->value);
     }
 }

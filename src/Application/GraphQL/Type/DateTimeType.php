@@ -35,12 +35,12 @@ class DateTimeType extends ScalarType
             throw new InvariantViolation('DateTime is not an instance of DateTimeInterface: ' . Utils::printSafe($value));
         }
 
-        return $value->format(DateFormatConstant::DATABASE);
+        return $value->format(DateFormatConstant::DATABASE->value);
     }
 
     public function parseValue($value): ?DateTimeInterface
     {
-        return DateTimeImmutable::createFromFormat(DateFormatConstant::DATABASE, $value) ?: null;
+        return DateTimeImmutable::createFromFormat(DateFormatConstant::DATABASE->value, $value) ?: null;
     }
 
     public function parseLiteral($valueNode, ?array $variables = null): ?string

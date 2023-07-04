@@ -47,7 +47,7 @@ readonly class SystemEventViewedAllHandle
             $this->systemEventRecipientFacade->updateViewedAll($user);
 
             $this->cacheEventDispatcherService->onClearCacheKey(
-                sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $user->getId())
+                sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
             );
         }
 

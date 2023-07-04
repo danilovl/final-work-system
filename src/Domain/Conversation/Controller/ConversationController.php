@@ -54,7 +54,7 @@ class ConversationController extends AbstractController
 
     public function detail(Request $request, Conversation $conversation): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationDetailHandle->handle($request, $conversation);
     }
@@ -70,7 +70,7 @@ class ConversationController extends AbstractController
 
     public function lastMessage(Request $request, Conversation $conversation): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $conversation);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationLastMessageHandle->handle($request, $conversation);
     }

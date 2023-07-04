@@ -50,21 +50,21 @@ class EventAddressController extends AbstractController
 
     public function detail(EventAddress $eventAddress): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $eventAddress);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventAddress);
 
         return $this->eventAddressDetailHandle->handle($eventAddress);
     }
 
     public function edit(Request $request, EventAddress $eventAddress): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $eventAddress);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
 
         return $this->eventAddressEditHandle->handle($request, $eventAddress);
     }
 
     public function delete(Request $request, EventAddress $eventAddress): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $eventAddress);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
         return $this->eventAddressDeleteHandle->handle($request, $eventAddress);
     }

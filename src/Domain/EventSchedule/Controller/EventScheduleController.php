@@ -52,28 +52,28 @@ class EventScheduleController extends AbstractController
 
     public function detail(EventSchedule $eventSchedule): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $eventSchedule);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventSchedule);
 
         return $this->eventScheduleDetailHandle->handle($eventSchedule);
     }
 
     public function edit(Request $request, EventSchedule $eventSchedule): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $eventSchedule);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventSchedule);
 
         return $this->eventScheduleEditHandle->handle($request, $eventSchedule);
     }
 
     public function clone(Request $request, EventSchedule $eventSchedule): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE, $eventSchedule);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
 
         return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
     }
 
     public function delete(Request $request, EventSchedule $eventSchedule): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $eventSchedule);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
 
         return $this->eventScheduleDeleteHandle->handle($request, $eventSchedule);
     }

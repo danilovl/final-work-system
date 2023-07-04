@@ -51,7 +51,7 @@ class EventCalendarController extends AbstractController
 
     public function eventReservation(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION->value, $event);
 
         return $this->eventCalendarEventReservationHandle->handle($request, $event);
     }
@@ -61,7 +61,7 @@ class EventCalendarController extends AbstractController
     )]
     public function edit(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $event);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
         return $this->eventCalendarEditHandle->handle($request, $event);
     }

@@ -22,10 +22,10 @@ class UserHelper
     public static function getRealRoleName(string $role): ?string
     {
         $rolesName = [
-            UserRoleConstant::STUDENT => 'student',
-            UserRoleConstant::SUPERVISOR => WorkUserTypeConstant::SUPERVISOR,
-            UserRoleConstant::OPPONENT => WorkUserTypeConstant::OPPONENT,
-            UserRoleConstant::CONSULTANT => WorkUserTypeConstant::CONSULTANT
+            UserRoleConstant::STUDENT->value => 'student',
+            UserRoleConstant::SUPERVISOR->value => WorkUserTypeConstant::SUPERVISOR->value,
+            UserRoleConstant::OPPONENT->value => WorkUserTypeConstant::OPPONENT->value,
+            UserRoleConstant::CONSULTANT->value => WorkUserTypeConstant::CONSULTANT->value
         ];
 
         return $rolesName[$role] ?? null;

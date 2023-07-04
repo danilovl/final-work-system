@@ -44,10 +44,10 @@ readonly class WorkDetailHandle
         $tabService = $this->workDetailTabService
             ->setActiveTab($request->query->get('tab'));
 
-        $paginationTask = $tabService->getTabPagination($request, TabTypeConstant::TAB_TASK, $work, $user);
-        $paginationVersion = $tabService->getTabPagination($request, TabTypeConstant::TAB_VERSION, $work);
-        $paginationEvent = $tabService->getTabPagination($request, TabTypeConstant::TAB_EVENT, $work);
-        $paginationMessage = $tabService->getTabPagination($request, TabTypeConstant::TAB_MESSAGE, $work, $user);
+        $paginationTask = $tabService->getTabPagination($request, TabTypeConstant::TAB_TASK->value, $work, $user);
+        $paginationVersion = $tabService->getTabPagination($request, TabTypeConstant::TAB_VERSION->value, $work);
+        $paginationEvent = $tabService->getTabPagination($request, TabTypeConstant::TAB_EVENT->value, $work);
+        $paginationMessage = $tabService->getTabPagination($request, TabTypeConstant::TAB_MESSAGE->value, $work, $user);
 
         $this->conversationMessageFacade->setIsReadToConversationMessages($paginationMessage, $user);
 

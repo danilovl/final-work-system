@@ -48,7 +48,7 @@ class VersionController extends AbstractController
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE, $versionVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
 
         return $this->versionCreateHandle->handle($request, $work);
     }
@@ -63,7 +63,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
 
         return $this->versionEditHandle->handle($request, $work, $media);
     }
@@ -72,7 +72,7 @@ class VersionController extends AbstractController
     {
         $versionVoterSubject = (new VersionVoterSubject)->setMedia($version);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW, $versionVoterSubject, 'The work media does not exist');
+        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $versionVoterSubject, 'The work media does not exist');
 
         return $this->versionDetailContentHandle->handle($version);
     }
@@ -86,7 +86,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $versionVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $versionVoterSubject);
 
         return $this->versionDownloadHandle->handle($media);
     }

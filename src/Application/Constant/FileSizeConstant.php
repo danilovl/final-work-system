@@ -12,30 +12,30 @@
 
 namespace App\Application\Constant;
 
-enum FileSizeConstant
+enum FileSizeConstant: string
 {
-    final public const B = 'B';
-    final public const KB = 'KB';
-    final public const MB = 'MB';
-    public const GB = 'GB';
-    public const TB = 'TB';
-    public const PB = 'PB';
-    public const EB = 'EB';
-    public const ZB = 'ZB';
-    public const YB = 'YB';
+    case B = 'B';
+    case KB = 'KB';
+    case MB = 'MB';
+    case GB = 'GB';
+    case TB = 'TB';
+    case PB = 'PB';
+    case EB = 'EB';
+    case ZB = 'ZB';
+    case YB = 'YB';
 
     /**
      * @var string[]
      */
     public const FILE_SIZES = [
-        self::B,
-        self::KB,
-        self::MB,
-        self::GB,
-        self::TB,
-        self::PB,
-        self::EB,
-        self::ZB,
-        self::YB
+        self::B->value,
+        self::KB->value,
+        self::MB->value,
+        self::GB->value,
+        self::TB->value,
+        self::PB->value,
+        self::EB->value,
+        self::ZB->value,
+        self::YB->value
     ];
 }

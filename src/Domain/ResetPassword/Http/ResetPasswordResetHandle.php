@@ -53,7 +53,7 @@ readonly class ResetPasswordResetHandle
             $user = $this->resetPasswordService->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->requestService->addFlash(
-                FlashTypeConstant::ERROR,
+                FlashTypeConstant::ERROR->value,
                 $this->translatorService->trans($e->getReason())
             );
 

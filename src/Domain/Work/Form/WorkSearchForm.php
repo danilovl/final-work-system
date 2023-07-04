@@ -78,8 +78,8 @@ class WorkSearchForm extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'choices' => $options['deadlines'],
-                'choice_label' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE),
-                'choice_value' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE)
+                'choice_label' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value),
+                'choice_value' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value)
             ]);
     }
 

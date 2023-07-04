@@ -51,7 +51,7 @@ class DocumentController extends AbstractController
 
     public function edit(Request $request, Media $media): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $media);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
         return $this->documentEditHandle->handle($request, $media);
     }
@@ -68,7 +68,7 @@ class DocumentController extends AbstractController
 
     public function download(Media $media): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $media);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
         $this->documentDownloadHandle->handle($media);
 
@@ -77,7 +77,7 @@ class DocumentController extends AbstractController
 
     public function downloadGoogle(Media $media): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD, $media);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
         $this->documentDownloadHandle->handle($media);
 

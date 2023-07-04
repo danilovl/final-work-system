@@ -12,8 +12,8 @@
 
 namespace App\Application\Constant;
 
-enum EventCalendarActionTypeConstant
+enum EventCalendarActionTypeConstant: string
 {
-    final public const MANAGE = 'manage';
-    final public const RESERVATION = 'reservation';
+    case MANAGE = 'manage';
+    case RESERVATION = 'reservation';
 }

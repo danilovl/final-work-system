@@ -33,14 +33,14 @@ class EventScheduleController extends AbstractController
 
     public function clone(Request $request, EventSchedule $eventSchedule): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE, $eventSchedule);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
 
         return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
     }
 
     public function delete(EventSchedule $eventSchedule): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $eventSchedule);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
 
         return $this->eventScheduleDeleteHandle->handle($eventSchedule);
     }

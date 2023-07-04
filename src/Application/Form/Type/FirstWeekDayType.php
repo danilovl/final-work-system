@@ -29,7 +29,7 @@ final class FirstWeekDayType extends AbstractType
     {
         $resolver->setDefaults([
             'widget' => 'single_text',
-            'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE,
+            'format' => DateFormatConstant::WIDGET_SINGLE_TEXT_DATE->value,
             'html5' => false
         ]);
 

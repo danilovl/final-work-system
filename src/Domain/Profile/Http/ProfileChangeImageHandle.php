@@ -70,7 +70,7 @@ readonly class ProfileChangeImageHandle
 
                 $media = $profileImage ?? new Media;
                 if ($profileImage === null) {
-                    $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE);
+                    $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
 
                     $media = new Media;
                     $media->setType($mediaType);
@@ -85,10 +85,10 @@ readonly class ProfileChangeImageHandle
                     $this->entityManagerService->flush($user);
                 }
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
             } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
+                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
             }
         }
 

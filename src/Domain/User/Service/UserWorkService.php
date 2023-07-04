@@ -36,7 +36,7 @@ class UserWorkService
         $supervisors = new ArrayCollection;
         $userWorks = $this->getUserWorks($user, $userType);
 
-        $this->addUserToCollection($supervisors, $userWorks, WorkUserTypeConstant::SUPERVISOR);
+        $this->addUserToCollection($supervisors, $userWorks, WorkUserTypeConstant::SUPERVISOR->value);
 
         return $supervisors;
     }
@@ -51,7 +51,7 @@ class UserWorkService
         $authors = new ArrayCollection;
         $userWorks = $this->getUserWorks($user, $userType);
 
-        $this->addUserToCollection($authors, $userWorks, WorkUserTypeConstant::AUTHOR);
+        $this->addUserToCollection($authors, $userWorks, WorkUserTypeConstant::AUTHOR->value);
 
         return $authors;
     }
@@ -66,7 +66,7 @@ class UserWorkService
         $opponents = new ArrayCollection;
         $userWorks = $this->getUserWorks($user, $userType);
 
-        $this->addUserToCollection($opponents, $userWorks, WorkUserTypeConstant::OPPONENT);
+        $this->addUserToCollection($opponents, $userWorks, WorkUserTypeConstant::OPPONENT->value);
 
         return $opponents;
     }
@@ -81,7 +81,7 @@ class UserWorkService
         $consultants = new ArrayCollection;
         $userWorks = $this->getUserWorks($user, $userType);
 
-        $this->addUserToCollection($consultants, $userWorks, WorkUserTypeConstant::CONSULTANT);
+        $this->addUserToCollection($consultants, $userWorks, WorkUserTypeConstant::CONSULTANT->value);
 
         return $consultants;
     }
@@ -99,10 +99,10 @@ class UserWorkService
         $criteria = Criteria::create();
 
         $userWorks = match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $user->getAuthorWorks(),
-            WorkUserTypeConstant::SUPERVISOR => $user->getSupervisorWorks(),
-            WorkUserTypeConstant::OPPONENT => $user->getOpponentWorks(),
-            WorkUserTypeConstant::CONSULTANT => $user->getConsultantWorks(),
+            WorkUserTypeConstant::AUTHOR->value => $user->getAuthorWorks(),
+            WorkUserTypeConstant::SUPERVISOR->value => $user->getSupervisorWorks(),
+            WorkUserTypeConstant::OPPONENT->value => $user->getOpponentWorks(),
+            WorkUserTypeConstant::CONSULTANT->value => $user->getConsultantWorks(),
             default => throw new RuntimeException("UserType '{$userType}' not found")
         };
 
@@ -131,10 +131,10 @@ class UserWorkService
     private function getUserWorks(User $user, string $userType): Collection
     {
         return match ($userType) {
-            WorkUserTypeConstant::AUTHOR => $user->getAuthorWorks(),
-            WorkUserTypeConstant::OPPONENT => $user->getOpponentWorks(),
-            WorkUserTypeConstant::CONSULTANT => $user->getConsultantWorks(),
-            WorkUserTypeConstant::SUPERVISOR => $user->getSupervisorWorks(),
+            WorkUserTypeConstant::AUTHOR->value => $user->getAuthorWorks(),
+            WorkUserTypeConstant::OPPONENT->value => $user->getOpponentWorks(),
+            WorkUserTypeConstant::CONSULTANT->value => $user->getConsultantWorks(),
+            WorkUserTypeConstant::SUPERVISOR->value => $user->getSupervisorWorks(),
             default => new ArrayCollection,
         };
     }
@@ -148,15 +148,15 @@ class UserWorkService
         string $userType
     ): void {
         foreach ($userWorks as $work) {
-            if ($work->getStatus()->getId() !== WorkStatusConstant::ACTIVE) {
+            if ($work->getStatus()->getId() !== WorkStatusConstant::ACTIVE->value) {
                 continue;
             }
 
             $user = match ($userType) {
-                WorkUserTypeConstant::AUTHOR => $work->getAuthor(),
-                WorkUserTypeConstant::OPPONENT => $work->getOpponent(),
-                WorkUserTypeConstant::CONSULTANT => $work->getConsultant(),
-                WorkUserTypeConstant::SUPERVISOR => $work->getSupervisor(),
+                WorkUserTypeConstant::AUTHOR->value => $work->getAuthor(),
+                WorkUserTypeConstant::OPPONENT->value => $work->getOpponent(),
+                WorkUserTypeConstant::CONSULTANT->value => $work->getConsultant(),
+                WorkUserTypeConstant::SUPERVISOR->value => $work->getSupervisor(),
                 default => throw new RuntimeException("UserType '{$userType}' not found")
             };
 

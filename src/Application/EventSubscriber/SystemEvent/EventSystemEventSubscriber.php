@@ -42,7 +42,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $event = $genericEvent->event;
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_CREATE);
+            ->find(SystemEventTypeConstant::EVENT_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
@@ -69,7 +69,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $event = $genericEvent->event;
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_EDIT);
+            ->find(SystemEventTypeConstant::EVENT_EDIT->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getOwner());
@@ -88,7 +88,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $event = $genericEvent->event;
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_SWITCH_SKYPE);
+            ->find(SystemEventTypeConstant::EVENT_SWITCH_SKYPE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipant()->getUser());
@@ -117,7 +117,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
 
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_COMMENT_CREATE);
+            ->find(SystemEventTypeConstant::EVENT_COMMENT_CREATE->value);
 
         $systemEvent->setType($type);
 
@@ -149,7 +149,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
 
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_COMMENT_EDIT);
+            ->find(SystemEventTypeConstant::EVENT_COMMENT_EDIT->value);
 
         $systemEvent->setType($type);
 
@@ -171,7 +171,7 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
         $event = $genericEvent->event;
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::EVENT_CREATE);
+            ->find(SystemEventTypeConstant::EVENT_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($event->getParticipant()->getUser());

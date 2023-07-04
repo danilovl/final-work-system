@@ -25,7 +25,7 @@ class CompareHelperTest extends TestCase
     public function testCompare(
         mixed $value1,
         mixed $value2,
-        string $operator,
+        CompareConstant $operator,
         bool $expectedValue
     ): void {
         $result = CompareHelper::compare($value1, $value2, $operator);

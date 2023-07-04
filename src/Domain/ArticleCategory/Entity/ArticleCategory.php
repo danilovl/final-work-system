@@ -122,6 +122,6 @@ class ArticleCategory
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY;
+        return $this->getName() ?: TranslationConstant::EMPTY->value;
     }
 }

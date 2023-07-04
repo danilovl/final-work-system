@@ -51,13 +51,13 @@ readonly class ConversationCreateWorkHandle
             if ($workConversation === null) {
                 $conversation = $this->conversationFactory->createConversation(
                     $userOne,
-                    ConversationTypeConstant::WORK,
+                    ConversationTypeConstant::WORK->value,
                     $work
                 );
 
                 $this->conversationFactory->createConversationParticipant($conversation, [$userOne, $userTwo]);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
                 return $this->requestService->redirectToRoute('conversation_detail', [
                     'id' => $this->hashidsService->encode($conversation->getId())
@@ -69,8 +69,8 @@ readonly class ConversationCreateWorkHandle
             ]);
         }
 
-        $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-        $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
+        $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
+        $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
 
         return $this->requestService->redirectToRoute('work_detail', [
             'id' => $this->hashidsService->encode($work->getId())

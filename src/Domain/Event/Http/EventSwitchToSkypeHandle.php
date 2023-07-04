@@ -44,10 +44,10 @@ readonly class EventSwitchToSkypeHandle
             $this->entityManagerService->flush($event);
             $this->eventEventDispatcherService->onEventSwitchToSkype($event);
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
         } else {
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
         }
 
         return $this->requestService->redirectToRoute('event_detail', [

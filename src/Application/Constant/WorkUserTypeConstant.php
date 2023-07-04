@@ -12,10 +12,10 @@
 
 namespace App\Application\Constant;
 
-enum WorkUserTypeConstant
+enum WorkUserTypeConstant: string
 {
-    final public const SUPERVISOR = 'supervisor';
-    final public const AUTHOR = 'author';
-    final public const OPPONENT = 'opponent';
-    final public const CONSULTANT = 'consultant';
+    case SUPERVISOR = 'supervisor';
+    case AUTHOR = 'author';
+    case OPPONENT = 'opponent';
+    case CONSULTANT = 'consultant';
 }

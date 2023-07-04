@@ -61,18 +61,18 @@ readonly class WorkEditAuthorHandle
                 $this->userFactory->flushFromModel($userModel, $author);
                 $this->workEventDispatcherService->onWorkEditAuthor($work);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
                 return $this->requestService->redirectToRoute('work_edit_author', [
                     'id' => $this->hashidsService->encode($work->getId())
                 ]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
         }
 
-        $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
+        $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR->value);
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work/edit_author.html.twig');
 

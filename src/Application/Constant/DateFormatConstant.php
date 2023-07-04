@@ -12,12 +12,12 @@
 
 namespace App\Application\Constant;
 
-enum DateFormatConstant
+enum DateFormatConstant: string
 {
-    public const DATABASE = 'Y-m-d H:i:s';
-    public const WIDGET_SINGLE_TEXT_DATE = 'yyyy-MM-dd';
-    public const WIDGET_SINGLE_TEXT_DATE_TIME = 'yyyy-MM-dd HH:mm';
-    public const DATE = 'Y-m-d';
-    public const TIME = 'H:i:s';
-    public const DATE_TIME = 'Y-m-d H:i';
+    case DATABASE = 'Y-m-d H:i:s';
+    case WIDGET_SINGLE_TEXT_DATE = 'yyyy-MM-dd';
+    case WIDGET_SINGLE_TEXT_DATE_TIME = 'yyyy-MM-dd HH:mm';
+    case DATE = 'Y-m-d';
+    case TIME = 'H:i:s';
+    case DATE_TIME = 'Y-m-d H:i';
 }

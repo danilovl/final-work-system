@@ -44,7 +44,7 @@ readonly class ArticleCategoryArticleListHandle
 
         $this->seoPageService
             ->setTitle('app.page.article_list')
-            ->addTitle($articleCategory->getName(), SeoPageConstant::VERTICAL_SEPARATOR);
+            ->addTitle($articleCategory->getName(), SeoPageConstant::VERTICAL_SEPARATOR->value);
 
         return $this->twigRenderService->render('article_category/article_list.html.twig', [
             'articles' => $articles,

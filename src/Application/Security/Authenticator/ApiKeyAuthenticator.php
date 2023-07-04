@@ -128,7 +128,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
                 throw new CustomUserMessageAuthenticationException('User could not be found.');
             }
 
-            $user->addAdditionRole(UserRoleConstant::API);
+            $user->addAdditionRole(UserRoleConstant::API->value);
 
             return $user;
         };
@@ -161,7 +161,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
                 throw new CustomUserMessageAuthenticationException('Username by token could not be found.');
             }
 
-            $user->addAdditionRole(UserRoleConstant::API);
+            $user->addAdditionRole(UserRoleConstant::API->value);
 
             return $user;
         };

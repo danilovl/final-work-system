@@ -12,15 +12,15 @@
 
 namespace App\Application\Constant;
 
-enum UserRoleConstant
+enum UserRoleConstant: string
 {
-    public const SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-    public const ADMIN = 'ROLE_ADMIN';
-    public const STUDENT = 'ROLE_STUDENT';
-    public const SUPERVISOR = 'ROLE_SUPERVISOR';
-    public const OPPONENT = 'ROLE_OPPONENT';
-    public const CONSULTANT = 'ROLE_CONSULTANT';
-    public const GUEST = 'ROLE_GUEST';
-    public const USER = 'ROLE_USER';
-    public const API = 'ROLE_API';
+    case SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    case ADMIN = 'ROLE_ADMIN';
+    case STUDENT = 'ROLE_STUDENT';
+    case SUPERVISOR = 'ROLE_SUPERVISOR';
+    case OPPONENT = 'ROLE_OPPONENT';
+    case CONSULTANT = 'ROLE_CONSULTANT';
+    case GUEST = 'ROLE_GUEST';
+    case USER = 'ROLE_USER';
+    case API = 'ROLE_API';
 }

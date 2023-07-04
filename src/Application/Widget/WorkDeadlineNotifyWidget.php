@@ -48,8 +48,8 @@ class WorkDeadlineNotifyWidget extends BaseWidget
         $workData = WorkRepositoryData::createFromArray([
             'user' => $user,
             'supervisor' => null,
-            'type' => WorkUserTypeConstant::AUTHOR,
-            'workStatus' => [WorkStatusConstant::ACTIVE]
+            'type' => WorkUserTypeConstant::AUTHOR->value,
+            'workStatus' => [WorkStatusConstant::ACTIVE->value]
         ]);
 
         $works = $this->workFacade->getWorksByAuthorStatus($workData);

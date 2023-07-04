@@ -95,8 +95,8 @@ readonly class AjaxRequestListener implements EventSubscriberInterface
             return new JsonResponse([
                 'valid' => false,
                 'notifyMessage' => [
-                    FlashTypeConstant::ERROR => $this->translator->trans('app.flash.form.create.error'),
-                    FlashTypeConstant::WARNING => $this->translator->trans('app.flash.form.create.warning')
+                    FlashTypeConstant::ERROR->value => $this->translator->trans('app.flash.form.create.error'),
+                    FlashTypeConstant::WARNING->value => $this->translator->trans('app.flash.form.create.warning')
                 ]
             ]);
         };

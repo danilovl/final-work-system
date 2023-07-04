@@ -98,6 +98,6 @@ class ConversationMessageStatus
 
     public function __toString(): string
     {
-        return $this->getType()->getName() ?: TranslationConstant::EMPTY;
+        return $this->getType()->getName() ?: TranslationConstant::EMPTY->value;
     }
 }

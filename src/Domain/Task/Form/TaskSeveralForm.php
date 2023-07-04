@@ -60,7 +60,7 @@ class TaskSeveralForm extends TaskForm
 
     private function queryBuilder(User $supervisor): callable
     {
-        return fn(): QueryBuilder => $this->taskDataGrid->queryBuilderWorksBySupervisor($supervisor, [WorkStatusConstant::ACTIVE]);
+        return fn(): QueryBuilder => $this->taskDataGrid->queryBuilderWorksBySupervisor($supervisor, [WorkStatusConstant::ACTIVE->value]);
     }
 
     private function choiceLabel(): callable

@@ -60,7 +60,7 @@ readonly class UserCreateHandle
             $newUser = $this->userFactory->createNewUser($userModel);
             $this->userEventDispatcherService->onUserCreate($newUser);
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.user.create.success');
+            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.user.create.success');
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

@@ -12,11 +12,11 @@
 
 namespace App\Application\Constant;
 
-enum WorkStatusConstant
+enum WorkStatusConstant: int
 {
-    final public const ACTIVE = 1;
-    final public const ARCHIVE = 2;
-    final public const AUXILIARY = 3;
-    final public const PRELIMINARY = 4;
-    final public const UNCLASSIFIED = 5;
+    case ACTIVE = 1;
+    case ARCHIVE = 2;
+    case AUXILIARY = 3;
+    case PRELIMINARY = 4;
+    case UNCLASSIFIED = 5;
 }

@@ -12,17 +12,17 @@
 
 namespace App\Application\Constant;
 
-enum VoterSupportConstant
+enum VoterSupportConstant: string
 {
-    final public const CREATE = 'create';
-    public const VIEW = 'view';
-    public const EDIT = 'edit';
-    public const CLONE = 'clone';
-    public const DELETE = 'delete';
-    public const CHANGE_VIEWED = 'change.viewed';
-    public const SWITCH_TO_SKYPE = 'switch.to.skype';
-    public const RESERVATION = 'reservation';
-    public const DOWNLOAD = 'download';
-    public const CHANGE_READ_MESSAGE_STATUS = 'change.read.message.status';
-    public const TASK_NOTIFY_COMPLETE = 'task.notify_complete';
+   case CREATE = 'create';
+   case VIEW = 'view';
+   case EDIT = 'edit';
+   case CLONE = 'clone';
+   case DELETE = 'delete';
+   case CHANGE_VIEWED = 'change.viewed';
+   case SWITCH_TO_SKYPE = 'switch.to.skype';
+   case RESERVATION = 'reservation';
+   case DOWNLOAD = 'download';
+   case CHANGE_READ_MESSAGE_STATUS = 'change.read.message.status';
+   case TASK_NOTIFY_COMPLETE = 'task.notify_complete';
 }

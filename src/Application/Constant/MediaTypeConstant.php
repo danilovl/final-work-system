@@ -12,10 +12,10 @@
 
 namespace App\Application\Constant;
 
-enum MediaTypeConstant
+enum MediaTypeConstant: int
 {
-    final public const WORK_VERSION = 1;
-    final public const INFORMATION_MATERIAL = 2;
-    final public const USER_PROFILE_IMAGE = 3;
-    final public const ARTICLE = 4;
+    case WORK_VERSION = 1;
+    case INFORMATION_MATERIAL = 2;
+    case USER_PROFILE_IMAGE = 3;
+    case ARTICLE = 4;
 }

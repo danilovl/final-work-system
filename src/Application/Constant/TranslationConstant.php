@@ -12,10 +12,10 @@
 
 namespace App\Application\Constant;
 
-enum TranslationConstant
+enum TranslationConstant: string
 {
-    final public const EMPTY = 'empty';
-    final public const DEFAULT_START_KEY = 'app';
-    final public const FLASH_START_KEY = 'flash';
-    final public const FLASH_DOMAIN = 'flashes';
+    case EMPTY = 'empty';
+    case DEFAULT_START_KEY = 'app';
+    case FLASH_START_KEY = 'flash';
+    case FLASH_DOMAIN = 'flashes';
 }

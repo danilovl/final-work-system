@@ -12,14 +12,14 @@
 
 namespace App\Application\Constant;
 
-enum ControllerMethodConstant
+enum ControllerMethodConstant: string
 {
-    public const CREATE = 'create';
-    public const CREATE_AJAX = 'create.ajax';
-    public const CREATE_SEVERAL = 'create_several';
-    public const CREATE_SEVERAL_AJAX = 'create_several.ajax';
-    public const EDIT = 'edit';
-    public const EDIT_AJAX = 'edit.ajax';
-    public const LIST = 'list';
-    public const LIST_OWNER = 'list.owner';
+    case CREATE = 'create';
+    case CREATE_AJAX = 'create.ajax';
+    case CREATE_SEVERAL = 'create_several';
+    case CREATE_SEVERAL_AJAX = 'create_several.ajax';
+    case EDIT = 'edit';
+    case EDIT_AJAX = 'edit.ajax';
+    case LIST = 'list';
+    case LIST_OWNER = 'list.owner';
 }

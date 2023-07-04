@@ -12,9 +12,9 @@
 
 namespace App\Application\Constant;
 
-enum TaskStatusConstant
+enum TaskStatusConstant: string
 {
-    final public const ACTIVE = 'active';
-    final public const COMPLETE = 'complete';
-    final public const NOTIFY = 'notify';
+    case ACTIVE = 'active';
+    case COMPLETE = 'complete';
+    case NOTIFY = 'notify';
 }

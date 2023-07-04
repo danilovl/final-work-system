@@ -190,7 +190,7 @@ class Event
             $event .= $participant;
         }
 
-        return $event ?: TranslationConstant::EMPTY;
+        return $event ?: TranslationConstant::EMPTY->value;
     }
 
     public function __toString(): string

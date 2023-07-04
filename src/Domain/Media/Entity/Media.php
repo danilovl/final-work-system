@@ -225,7 +225,7 @@ class Media
 
     public function getUploadDir(): string
     {
-        return MediaConstant::WEB_PATH_TO_UPLOAD_FOLDER . $this->getType()->getFolder();
+        return MediaConstant::WEB_PATH_TO_UPLOAD_FOLDER->value . $this->getType()->getFolder();
     }
 
     public function getAbsolutePath(): string
@@ -257,7 +257,7 @@ class Media
 
     private function getUploadRootDir(): string
     {
-        return MediaConstant::SERVER_PATH_TO_PUBLIC_FOLDER . DIRECTORY_SEPARATOR . $this->getUploadDir();
+        return MediaConstant::SERVER_PATH_TO_PUBLIC_FOLDER->value . DIRECTORY_SEPARATOR . $this->getUploadDir();
     }
 
     public function getMediaSizeFormatted(): string
@@ -297,6 +297,6 @@ class Media
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY;
+        return $this->getName() ?: TranslationConstant::EMPTY->value;
     }
 }

@@ -47,14 +47,14 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
 
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
-            ->find(SystemEventTypeConstant::DOCUMENT_CREATE);
+            ->find(SystemEventTypeConstant::DOCUMENT_CREATE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($owner);
         $systemEvent->setMedia($media);
         $systemEvent->setType($systemEventType);
 
-        $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR);
+        $recipientArray = $this->userWorkService->getActiveAuthor($owner, WorkUserTypeConstant::SUPERVISOR->value);
 
         /** @var User $user */
         foreach ($recipientArray as $user) {

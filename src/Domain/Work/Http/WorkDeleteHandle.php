@@ -57,14 +57,14 @@ readonly class WorkDeleteHandle
 
                 $this->entityManagerService->remove($work);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.delete.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
 
                 return $this->requestService->redirectToRoute('work_list', [
-                    'type' => WorkUserTypeConstant::SUPERVISOR
+                    'type' => WorkUserTypeConstant::SUPERVISOR->value
                 ]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.delete.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
 
             return $this->requestService->redirectToRoute('work_detail', [
                 'id' => $this->hashidsService->encode($work->getId())
@@ -72,7 +72,7 @@ readonly class WorkDeleteHandle
         }
 
         return $this->requestService->redirectToRoute('work_list', [
-            'type' => WorkUserTypeConstant::SUPERVISOR
+            'type' => WorkUserTypeConstant::SUPERVISOR->value
         ]);
     }
 }

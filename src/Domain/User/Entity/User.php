@@ -121,7 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     private ?string $biography = null;
 
     #[ORM\Column(name: 'gender', type: Types::STRING, nullable: false)]
-    private ?string $gender = GenderConstant::GENDER_UNKNOWN;
+    private ?string $gender = GenderConstant::UNKNOWN->value;
 
     #[ORM\Column(name: 'locale', type: Types::STRING, nullable: true)]
     private ?string $locale = null;
@@ -795,7 +795,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     public function addRole(string $role): self
     {
         $role = strtoupper($role);
-        if ($role === UserRoleConstant::USER) {
+        if ($role === UserRoleConstant::USER->value) {
             return $this;
         }
 
@@ -831,6 +831,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     public function __toString(): string
     {
-        return $this->getFullNameDegree() ?: TranslationConstant::EMPTY;
+        return $this->getFullNameDegree() ?: TranslationConstant::EMPTY->value;
     }
 }

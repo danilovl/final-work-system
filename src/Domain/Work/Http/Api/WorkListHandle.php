@@ -41,7 +41,7 @@ readonly class WorkListHandle
         $workData = WorkRepositoryData::createFromArray([
             'user' => $user,
             'type' => $type,
-            'workStatus' => [WorkStatusConstant::ACTIVE]
+            'workStatus' => [WorkStatusConstant::ACTIVE->value]
         ]);
 
         $worksQuery = $this->workFacade->queryAllByUserStatus($workData);

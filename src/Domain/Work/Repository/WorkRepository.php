@@ -71,22 +71,22 @@ class WorkRepository extends ServiceEntityRepository
         }
 
         switch ($workData->type) {
-            case WorkUserTypeConstant::AUTHOR:
+            case WorkUserTypeConstant::AUTHOR->value:
                 $queryBuilder->leftJoin('work.author', 'author')
                     ->andWhere('author = :user');
 
                 break;
-            case WorkUserTypeConstant::OPPONENT:
+            case WorkUserTypeConstant::OPPONENT->value:
                 $queryBuilder->leftJoin('work.opponent', 'opponent')
                     ->andWhere('opponent = :user');
 
                 break;
-            case WorkUserTypeConstant::CONSULTANT:
+            case WorkUserTypeConstant::CONSULTANT->value:
                 $queryBuilder->leftJoin('work.consultant', 'consultant')
                     ->andWhere('consultant = :user');
 
                 break;
-            case WorkUserTypeConstant::SUPERVISOR:
+            case WorkUserTypeConstant::SUPERVISOR->value:
                 $queryBuilder->leftJoin('work.supervisor', 'supervisor')
                     ->andWhere('supervisor = :user');
 

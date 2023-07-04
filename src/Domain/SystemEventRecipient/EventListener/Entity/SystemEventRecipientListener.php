@@ -34,7 +34,7 @@ readonly class SystemEventRecipientListener
     public function clearCache(SystemEventRecipient $recipient): void
     {
         $this->cacheEventDispatcherService->onClearCacheKey(
-            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR, $recipient->getRecipient()->getId())
+            sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $recipient->getRecipient()->getId())
         );
 
         $this->cacheEventDispatcherService->onCreateHomepageCache($recipient->getRecipient());

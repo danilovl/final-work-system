@@ -30,7 +30,7 @@ class SystemEventController extends AbstractController
 
     public function viewed(SystemEventRecipient $systemEventRecipient): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED, $systemEventRecipient);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED->value, $systemEventRecipient);
 
         return $this->systemEventViewedHandle->handle($systemEventRecipient);
     }

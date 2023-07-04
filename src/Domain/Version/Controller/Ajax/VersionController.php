@@ -43,7 +43,7 @@ class VersionController extends AbstractController
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE, $versionVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
 
         return $this->versionCreateHandle->handle($request, $work);
     }
@@ -58,7 +58,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $versionVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
 
         return $this->versionEditHandle->handle($request, $media);
     }
@@ -72,7 +72,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $versionVoterSubject);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $versionVoterSubject);
 
         return $this->versionDeleteHandle->handle($media);
     }

@@ -12,9 +12,9 @@
 
 namespace App\Application\Constant;
 
-enum FlashTypeConstant
+enum FlashTypeConstant: string
 {
-    public const SUCCESS = 'success';
-    public const WARNING = 'warning';
-    public const ERROR = 'error';
+    case SUCCESS = 'success';
+    case WARNING = 'warning';
+    case ERROR = 'error';
 }

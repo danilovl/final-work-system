@@ -112,6 +112,6 @@ class Article
 
     public function __toString(): string
     {
-        return $this->getTitle() ?: TranslationConstant::EMPTY;
+        return $this->getTitle() ?: TranslationConstant::EMPTY->value;
     }
 }

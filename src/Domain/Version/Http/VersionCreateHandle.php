@@ -56,7 +56,7 @@ readonly class VersionCreateHandle
     public function handle(Request $request, Work $work): Response
     {
         /** @var MediaType $type */
-        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION);
+        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION->value);
 
         $mediaModel = new MediaModel;
         $mediaModel->owner = $this->userService->getUser();
@@ -75,15 +75,15 @@ readonly class VersionCreateHandle
                 $media = $this->mediaFactory->flushFromModel($mediaModel);
                 $this->versionEventDispatcherService->onVersionCreate($media);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
                 return $this->requestService->redirectToRoute('work_detail', [
                     'id' => $this->hashidsService->encode($work->getId())
                 ]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -95,7 +95,7 @@ readonly class VersionCreateHandle
             );
         }
 
-        $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR);
+        $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR->value);
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'version/version.html.twig');
 

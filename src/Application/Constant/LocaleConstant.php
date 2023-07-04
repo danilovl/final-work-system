@@ -12,9 +12,9 @@
 
 namespace App\Application\Constant;
 
-enum LocaleConstant
+enum LocaleConstant: string
 {
-    public const ISO_CS = 'cs';
-    public const ISO_EN = 'en';
-    public const ISO_RU = 'ru';
+    case ISO_CS = 'cs';
+    case ISO_EN = 'en';
+    case ISO_RU = 'ru';
 }

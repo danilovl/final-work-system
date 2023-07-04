@@ -68,7 +68,7 @@ readonly class ResetPasswordRequestHandle
             ->set('reset_password_check_email', true);
 
         if (!$user) {
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'Bad email');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'Bad email');
 
             return $this->requestService->redirectToRoute('reset_password_forgot_request');
         }
@@ -77,7 +77,7 @@ readonly class ResetPasswordRequestHandle
             $resetToken = $this->resetPasswordService->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->requestService->addFlash(
-                FlashTypeConstant::ERROR,
+                FlashTypeConstant::ERROR->value,
                 $this->translatorService->trans($e->getReason())
             );
 

@@ -23,8 +23,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class ConversationVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW,
-        VoterSupportConstant::DELETE
+        VoterSupportConstant::VIEW->value,
+        VoterSupportConstant::DELETE->value
     ];
 
     public function __construct(private readonly ConversationService $conversationService) {}
@@ -50,9 +50,9 @@ class ConversationVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::VIEW:
+            case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 

@@ -60,6 +60,6 @@ class ConversationParticipant
 
     public function __toString(): string
     {
-        return (string) $this->getUser() ?: TranslationConstant::EMPTY;
+        return (string) $this->getUser() ?: TranslationConstant::EMPTY->value;
     }
 }

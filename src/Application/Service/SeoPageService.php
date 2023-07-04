@@ -60,7 +60,7 @@ class SeoPageService
     {
         $title = $title ?? $this->title;
 
-        if ($title !== null && str_contains($title, TranslationConstant::DEFAULT_START_KEY)) {
+        if ($title !== null && str_contains($title, TranslationConstant::DEFAULT_START_KEY->value)) {
             return $this->translator->trans($title);
         }
 

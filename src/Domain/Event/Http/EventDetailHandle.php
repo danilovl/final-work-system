@@ -76,7 +76,7 @@ readonly class EventDetailHandle
             $this->eventEventDispatcherService
                 ->onEventComment($eventComment, $eventCommentExist !== null);
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
         }
 
         $eventAddressSkype = $this->eventAddressFacade

@@ -12,7 +12,7 @@
 
 namespace App\Application\Constant;
 
-enum CacheKeyConstant
+enum CacheKeyConstant: string
 {
-    final public const HOME_PAGE_USER_PAGINATOR = 'home_page_paginator_user_%d';
+    case HOME_PAGE_USER_PAGINATOR = 'home_page_paginator_user_%d';
 }

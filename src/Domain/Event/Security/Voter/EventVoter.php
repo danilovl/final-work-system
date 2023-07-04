@@ -26,11 +26,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class EventVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW,
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::DELETE,
-        VoterSupportConstant::RESERVATION,
-        VoterSupportConstant::SWITCH_TO_SKYPE
+        VoterSupportConstant::VIEW->value,
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::DELETE->value,
+        VoterSupportConstant::RESERVATION->value,
+        VoterSupportConstant::SWITCH_TO_SKYPE->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -54,15 +54,15 @@ class EventVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::VIEW:
+            case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
-            case VoterSupportConstant::SWITCH_TO_SKYPE:
+            case VoterSupportConstant::SWITCH_TO_SKYPE->value:
                 return $this->switchToSkype($subject, $user);
-            case VoterSupportConstant::RESERVATION:
+            case VoterSupportConstant::RESERVATION->value:
                 return $this->canReservation($subject);
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 
@@ -92,7 +92,7 @@ class EventVoter extends Voter
     {
         return $event->getParticipant() === null &&
             $event->getType()->isRegistrable() &&
-            DateHelper::actualDay() < $event->getStart()->format(DateFormatConstant::DATABASE);
+            DateHelper::actualDay() < $event->getStart()->format(DateFormatConstant::DATABASE->value);
     }
 
     private function switchToSkype(Event $event, User $user): bool

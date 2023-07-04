@@ -22,10 +22,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class EventScheduleVoter extends Voter
 {
     private const SUPPORTS = [
-        VoterSupportConstant::VIEW,
-        VoterSupportConstant::EDIT,
-        VoterSupportConstant::CLONE,
-        VoterSupportConstant::DELETE
+        VoterSupportConstant::VIEW->value,
+        VoterSupportConstant::EDIT->value,
+        VoterSupportConstant::CLONE->value,
+        VoterSupportConstant::DELETE->value
     ];
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -49,13 +49,13 @@ class EventScheduleVoter extends Voter
         }
 
         switch ($attribute) {
-            case VoterSupportConstant::VIEW:
+            case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
-            case VoterSupportConstant::EDIT:
+            case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
-            case VoterSupportConstant::CLONE:
+            case VoterSupportConstant::CLONE->value:
                 return $this->canClone($subject, $user);
-            case VoterSupportConstant::DELETE:
+            case VoterSupportConstant::DELETE->value:
                 return $this->canDelete($subject, $user);
         }
 

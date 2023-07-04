@@ -12,20 +12,20 @@
 
 namespace App\Application\Constant;
 
-enum TabTypeConstant
+enum TabTypeConstant: string
 {
-    final public const TAB_TASK = 'task';
-    public const TAB_VERSION = 'version';
-    public const TAB_EVENT = 'event';
-    public const TAB_MESSAGE = 'message';
+    case TAB_TASK = 'task';
+    case TAB_VERSION = 'version';
+    case TAB_EVENT = 'event';
+    case TAB_MESSAGE = 'message';
 
     /**
      * @var string[]
      */
     public const TABS = [
-        self::TAB_TASK,
-        self::TAB_VERSION,
-        self::TAB_EVENT,
-        self::TAB_MESSAGE,
+        self::TAB_TASK->value,
+        self::TAB_VERSION->value,
+        self::TAB_EVENT->value,
+        self::TAB_MESSAGE->value
     ];
 }

@@ -12,6 +12,7 @@
 
 namespace App\Domain\Conversation\Http;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Application\Constant\{
     FlashTypeConstant
 };
@@ -65,15 +66,15 @@ readonly class ConversationDetailHandle
         $conversationMessageModel->owner = $user;
 
         switch ($conversation->getType()->getId()) {
-            case ConversationTypeConstant::WORK:
+            case ConversationTypeConstant::WORK->value:
                 $createForm = true;
 
                 break;
-            case ConversationTypeConstant::GROUP:
+            case ConversationTypeConstant::GROUP->value:
                 if ($conversation->isOwner($user)) {
                     $createForm = true;
                 } else {
-                    $conversation->setParticipants(null);
+                    $conversation->setParticipants(new ArrayCollection);
                 }
 
                 break;
@@ -99,16 +100,16 @@ readonly class ConversationDetailHandle
                     $conversationMessage,
                     $user,
                     $conversation->getParticipants(),
-                    ConversationMessageStatusTypeConstant::UNREAD
+                    ConversationMessageStatusTypeConstant::UNREAD->value
                 );
 
                 $this->conversationEventDispatcherService
                     ->onConversationMessageCreate($conversationMessage);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.create.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
             } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.create.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.create.error');
+                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
+                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
             }
         }
 

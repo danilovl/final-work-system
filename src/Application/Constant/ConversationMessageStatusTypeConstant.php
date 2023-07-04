@@ -12,8 +12,8 @@
 
 namespace App\Application\Constant;
 
-enum ConversationMessageStatusTypeConstant
+enum ConversationMessageStatusTypeConstant: int
 {
-    public const READ = 1;
-    public const UNREAD = 2;
+    case READ = 1;
+    case UNREAD = 2;
 }

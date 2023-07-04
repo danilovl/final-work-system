@@ -25,8 +25,8 @@ class UserRoleHelperTest extends TestCase
     {
         $this->user = new User;
         $this->user->setRoles([
-            UserRoleConstant::ADMIN,
-            UserRoleConstant::SUPERVISOR,
+            UserRoleConstant::ADMIN->value,
+            UserRoleConstant::SUPERVISOR->value,
         ]);
     }
 
@@ -42,11 +42,11 @@ class UserRoleHelperTest extends TestCase
 
     public function testHasRole(): void
     {
-        $this->assertTrue(UserRoleHelper::hasRole($this->user, UserRoleConstant::ADMIN));
-        $this->assertTrue(UserRoleHelper::hasRole($this->user, UserRoleConstant::SUPERVISOR));
-        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::STUDENT));
-        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::CONSULTANT));
-        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::OPPONENT));
+        $this->assertTrue(UserRoleHelper::hasRole($this->user, UserRoleConstant::ADMIN->value));
+        $this->assertTrue(UserRoleHelper::hasRole($this->user, UserRoleConstant::SUPERVISOR->value));
+        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::STUDENT->value));
+        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::CONSULTANT->value));
+        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::OPPONENT->value));
     }
 
     public function testIsAuthor(): void

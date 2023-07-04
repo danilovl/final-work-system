@@ -19,7 +19,7 @@ class UserRoleHelper
 {
     public static function isAdmin(User $user): bool
     {
-        return self::hasRole($user, UserRoleConstant::ADMIN);
+        return self::hasRole($user, UserRoleConstant::ADMIN->value);
     }
 
     public static function isAuthorSupervisorOpponent(User $user): bool
@@ -39,22 +39,22 @@ class UserRoleHelper
 
     public static function isAuthor(User $user): bool
     {
-        return self::hasRole($user, UserRoleConstant::STUDENT);
+        return self::hasRole($user, UserRoleConstant::STUDENT->value);
     }
 
     public static function isSupervisor(User $user): bool
     {
-        return self::hasRole($user, UserRoleConstant::SUPERVISOR);
+        return self::hasRole($user, UserRoleConstant::SUPERVISOR->value);
     }
 
     public static function isOpponent(User $user): bool
     {
-        return self::hasRole($user, UserRoleConstant::OPPONENT);
+        return self::hasRole($user, UserRoleConstant::OPPONENT->value);
     }
 
     public static function isConsultant(User $user): bool
     {
-        return self::hasRole($user, UserRoleConstant::CONSULTANT);
+        return self::hasRole($user, UserRoleConstant::CONSULTANT->value);
     }
 
     public static function hasRole(User $user, string $role): bool

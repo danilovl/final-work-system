@@ -38,7 +38,7 @@ readonly class UserFacade
         $userActiveSupervisors = new ArrayCollection;
 
         if (UserRoleHelper::isAuthor($user)) {
-            $authorSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::AUTHOR);
+            $authorSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::AUTHOR->value);
 
             foreach ($authorSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {
@@ -48,7 +48,7 @@ readonly class UserFacade
         }
 
         if (UserRoleHelper::isOpponent($user)) {
-            $opponentSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::OPPONENT);
+            $opponentSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::OPPONENT->value);
 
             foreach ($opponentSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {
@@ -58,7 +58,7 @@ readonly class UserFacade
         }
 
         if (UserRoleHelper::isConsultant($user)) {
-            $consultantSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::CONSULTANT);
+            $consultantSupervisors = $this->userWorkService->getActiveSupervisor($user, WorkUserTypeConstant::CONSULTANT->value);
 
             foreach ($consultantSupervisors as $supervisor) {
                 if (!$userActiveSupervisors->contains($supervisor)) {

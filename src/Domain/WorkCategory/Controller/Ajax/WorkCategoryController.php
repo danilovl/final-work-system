@@ -40,14 +40,14 @@ class WorkCategoryController extends AbstractController
 
     public function edit(Request $request, WorkCategory $workCategory): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT, $workCategory);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $workCategory);
 
         return $this->workCategoryEditHandle->handle($request, $workCategory);
     }
 
     public function delete(WorkCategory $workCategory): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE, $workCategory);
+        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $workCategory);
 
         return $this->workCategoryDeleteHandle->handle($workCategory);
     }

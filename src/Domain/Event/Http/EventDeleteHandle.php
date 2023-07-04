@@ -44,13 +44,13 @@ readonly class EventDeleteHandle
             if ($form->isValid()) {
                 $this->entityManagerService->remove($event);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.delete.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
 
                 return $this->requestService->redirectToRoute('event_calendar_manage');
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.delete.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.delete.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
 
             return $this->requestService->redirectToRoute('event_detail', [
                 'id' => $this->hashidsService->encode($event->getId())

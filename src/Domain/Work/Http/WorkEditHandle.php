@@ -64,15 +64,15 @@ readonly class WorkEditHandle
                 $this->workFactory->flushFromModel($workModel, $work);
                 $this->workEventDispatcherService->onWorkEdit($work);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS, 'app.flash.form.save.success');
+                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
                 return $this->requestService->redirectToRoute('work_edit', [
                     'id' => $this->hashidsService->encode($work->getId())
                 ]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR, 'app.flash.form.save.error');
+            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
+            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
         }
 
         $workDeadLineService = $this->workDeadlineFacade;
