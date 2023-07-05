@@ -34,7 +34,7 @@ class WorkCategoryFormFactory
     ) {}
 
     public function getWorkCategoryForm(
-        string $type,
+        ControllerMethodConstant $type,
         WorkCategoryModel $workCategoryModel,
         WorkCategory $workCategory = null
     ): FormInterface {

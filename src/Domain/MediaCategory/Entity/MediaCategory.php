@@ -12,7 +12,6 @@
 
 namespace App\Domain\MediaCategory\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsOwnerTrait,
@@ -80,6 +79,6 @@ class MediaCategory
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

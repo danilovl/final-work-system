@@ -12,7 +12,6 @@
 
 namespace App\Domain\ConversationMessageStatus\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateUpdateAbleTrait
@@ -49,12 +48,12 @@ class ConversationMessageStatus
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationMessageStatus')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $user = null;
+    private User $user;
 
     #[ORM\ManyToOne(targetEntity: ConversationMessageStatusType::class, fetch: 'EAGER', inversedBy: 'conversationMessageStatus')]
     #[ORM\JoinColumn(name: 'conversation_message_status_type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?ConversationMessageStatusType $type = null;
+    private ConversationMessageStatusType $type;
 
     public function getConversation(): ?Conversation
     {
@@ -66,7 +65,7 @@ class ConversationMessageStatus
         $this->conversation = $conversation;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -86,7 +85,7 @@ class ConversationMessageStatus
         $this->message = $message;
     }
 
-    public function getType(): ?ConversationMessageStatusType
+    public function getType(): ConversationMessageStatusType
     {
         return $this->type;
     }
@@ -98,6 +97,6 @@ class ConversationMessageStatus
 
     public function __toString(): string
     {
-        return $this->getType()->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getType()->getName();
     }
 }

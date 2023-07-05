@@ -37,7 +37,7 @@ class UserFormFactory
     ) {}
 
     public function getUserForm(
-        string $type,
+        ControllerMethodConstant $type,
         UserModel $userModel,
         User $user = null
     ): FormInterface {

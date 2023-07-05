@@ -51,7 +51,7 @@ class WorkDetailTabService
 
     public function setActiveTab(?string $activeTab): self
     {
-        if (in_array($activeTab, TabTypeConstant::TABS->value, true)) {
+        if (in_array($activeTab, TabTypeConstant::TABS, true)) {
             $this->activeTab = $activeTab;
         }
 

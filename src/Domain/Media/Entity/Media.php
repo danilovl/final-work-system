@@ -17,8 +17,7 @@ use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\Work\Entity\Work;
 use App\Application\Constant\{
     MediaConstant,
-    FileSizeConstant,
-    TranslationConstant
+    FileSizeConstant
 };
 use App\Application\Traits\Entity\{
     IdTrait,
@@ -297,6 +296,6 @@ class Media
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

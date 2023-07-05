@@ -32,11 +32,11 @@ class ApiUserRule
     use CreateUpdateAbleTrait;
 
     #[ORM\Column(name: 'range_ip', type: Types::STRING, nullable: false)]
-    protected ?string $rangeIp = null;
+    protected string $rangeIp;
 
     #[ORM\ManyToOne(targetEntity: ApiUser::class, cascade: ['persist'], inversedBy: 'rules')]
     #[ORM\JoinColumn(name: 'api_user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    protected ?ApiUser $apiUser = null;
+    protected ApiUser $apiUser;
 
     public function getRangeIp(): string
     {

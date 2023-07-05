@@ -12,7 +12,6 @@
 
 namespace App\Domain\SystemEventType\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     ConstantAwareTrait,
@@ -42,7 +41,7 @@ class SystemEventType
 
     #[ORM\Column(name: 'group', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $group = null;
+    private string $group;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -53,7 +52,7 @@ class SystemEventType
         $this->systemEvents = new ArrayCollection;
     }
 
-    public function getGroup(): ?string
+    public function getGroup(): string
     {
         return $this->group;
     }
@@ -78,6 +77,6 @@ class SystemEventType
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

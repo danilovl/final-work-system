@@ -12,7 +12,6 @@
 
 namespace App\Domain\UserGroup\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     TimestampAbleTrait
@@ -40,7 +39,7 @@ class Group
     private ?int $id = null;
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
-    protected ?string $name = null;
+    protected string $name;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'groups')]
     protected Collection $users;
@@ -50,7 +49,7 @@ class Group
         $this->users = new ArrayCollection;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -64,6 +63,6 @@ class Group
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->name;
     }
 }

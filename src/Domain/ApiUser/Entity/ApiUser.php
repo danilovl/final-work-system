@@ -12,10 +12,7 @@
 
 namespace App\Domain\ApiUser\Entity;
 
-use App\Application\Constant\TranslationConstant;
-use App\Application\Traits\{
-    Entity\IdTrait
-};
+use App\Application\Traits\Entity\IdTrait;
 use App\Application\Traits\Entity\CreateUpdateAbleTrait;
 use App\Domain\ApiUser\Repository\ApiUserRepository;
 use App\Domain\ApiUserRule\Entity\ApiUserRule;
@@ -26,8 +23,10 @@ use Doctrine\Common\Collections\{
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\{
+    UserInterface,
+    PasswordAuthenticatedUserInterface
+};
 
 #[ORM\Table(name: 'api_user')]
 #[ORM\UniqueConstraint(name: 'api_key_unique', columns: ['api_key'])]
@@ -40,10 +39,10 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
     use CreateUpdateAbleTrait;
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
-    protected ?string $name = null;
+    protected string $name;
 
     #[ORM\Column(name: 'api_key', type: Types::STRING, length: 32, nullable: false)]
-    protected ?string $apiKey = null;
+    protected string $apiKey;
 
     #[ORM\OneToMany(mappedBy: 'apiUser', targetEntity: ApiUserRule::class, cascade: ['persist', 'remove'])]
     protected Collection $rules;
@@ -115,6 +114,6 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        return $this->getName() ?? TranslationConstant::EMPTY->value;
+        return $this->name;
     }
 }

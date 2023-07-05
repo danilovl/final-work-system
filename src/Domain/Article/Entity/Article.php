@@ -12,7 +12,6 @@
 
 namespace App\Domain\Article\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsOwnerTrait,
@@ -44,16 +43,16 @@ class Article
 
     #[ORM\Column(name: 'title', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $title = null;
+    private string $title;
 
     #[ORM\Column(name: 'content', type: Types::TEXT, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $content = null;
+    private string $content;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'comments')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\ManyToMany(targetEntity: ArticleCategory::class, inversedBy: 'articles', fetch: 'EAGER')]
     #[ORM\JoinTable(name: 'article_to_article_category')]
@@ -67,7 +66,7 @@ class Article
         $this->categories = new ArrayCollection;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -77,7 +76,7 @@ class Article
         $this->title = $title;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -112,6 +111,6 @@ class Article
 
     public function __toString(): string
     {
-        return $this->getTitle() ?: TranslationConstant::EMPTY->value;
+        return $this->title;
     }
 }

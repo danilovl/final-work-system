@@ -32,18 +32,15 @@ class ResetPassword
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    private ?User $user = null;
+    private User $user;
 
     #[ORM\Column(name: 'hashed_token', type: Types::STRING, length: 100, unique: true, nullable: false)]
     private ?string $hashedToken = null;
 
     #[ORM\Column(name: 'expires_at', type: Types::DATETIME_MUTABLE, nullable: false)]
-    private ?DateTime $expiresAt = null;
+    private DateTime $expiresAt;
 
-    /**
-     * @return User|null
-     */
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -53,9 +50,6 @@ class ResetPassword
         $this->user = $user;
     }
 
-    /**
-     * @return string|null
-     */
     public function getHashedToken(): ?string
     {
         return $this->hashedToken;
@@ -66,10 +60,7 @@ class ResetPassword
         $this->hashedToken = $hashedToken;
     }
 
-    /**
-     * @return DateTime|null
-     */
-    public function getExpiresAt(): ?DateTime
+    public function getExpiresAt(): DateTime
     {
         return $this->expiresAt;
     }

@@ -54,7 +54,7 @@ class Conversation
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationsOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessage::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -68,7 +68,7 @@ class Conversation
     #[ORM\ManyToOne(targetEntity: ConversationType::class, fetch: 'EAGER', inversedBy: 'conversations')]
     #[ORM\JoinColumn(name: 'conversation_type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?ConversationType $type = null;
+    private ConversationType $type;
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessageStatus::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -96,12 +96,12 @@ class Conversation
         return $this->id;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): void
+    public function setOwner(User $owner): void
     {
         $this->owner = $owner;
     }
@@ -138,7 +138,7 @@ class Conversation
         $this->participants = $participants;
     }
 
-    public function getType(): ?ConversationType
+    public function getType(): ConversationType
     {
         return $this->type;
     }

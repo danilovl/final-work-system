@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventType\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     ConstantAwareTrait,
@@ -42,7 +41,7 @@ class EventType
 
     #[ORM\Column(name: 'color', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $color = null;
+    private string $color;
 
     #[ORM\Column(name: 'registrable', type: Types::BOOLEAN, options: ['default' => '0'])]
     #[Gedmo\Versioned]
@@ -57,7 +56,7 @@ class EventType
         $this->events = new ArrayCollection;
     }
 
-    public function getColor(): ?string
+    public function getColor(): string
     {
         return $this->color;
     }
@@ -92,6 +91,6 @@ class EventType
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

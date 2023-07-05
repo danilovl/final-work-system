@@ -12,7 +12,6 @@
 
 namespace App\Domain\WorkCategory\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsOwnerTrait,
@@ -45,7 +44,7 @@ class WorkCategory
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'workCategoriesOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\ManyToMany(targetEntity: Work::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -60,7 +59,7 @@ class WorkCategory
         $this->works = new ArrayCollection;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
@@ -95,6 +94,6 @@ class WorkCategory
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

@@ -34,7 +34,7 @@ class EventAddressFormFactory
     ) {}
 
     public function getEventAddressForm(
-        string $type,
+        ControllerMethodConstant $type,
         EventAddressModel $eventAddressModel,
         EventAddress $eventAddress = null
     ): FormInterface {

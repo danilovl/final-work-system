@@ -44,12 +44,12 @@ class ArticleCategory
 
     #[ORM\Column(name: 'access', type: Types::ARRAY, nullable: false)]
     #[Gedmo\Versioned]
-    private ?array $access = null;
+    private array $access;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'workCategoriesOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]

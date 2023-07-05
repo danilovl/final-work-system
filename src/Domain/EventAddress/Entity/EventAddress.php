@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventAddress\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsOwnerTrait,
@@ -45,7 +44,7 @@ class EventAddress
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventAddressOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\Column(name: 'street', type: Types::STRING, nullable: true)]
     #[Gedmo\Versioned]
@@ -74,7 +73,7 @@ class EventAddress
         $this->street = $street;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
@@ -114,6 +113,6 @@ class EventAddress
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

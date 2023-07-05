@@ -41,7 +41,7 @@ class MediaMimeType
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(name: 'extension', type: Types::STRING, nullable: true)]
     #[Gedmo\Versioned]
@@ -56,7 +56,7 @@ class MediaMimeType
         $this->medias = new ArrayCollection;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -91,6 +91,6 @@ class MediaMimeType
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->name;
     }
 }

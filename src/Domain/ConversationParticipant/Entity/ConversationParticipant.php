@@ -12,7 +12,6 @@
 
 namespace App\Domain\ConversationParticipant\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\IdTrait;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
@@ -31,14 +30,14 @@ class ConversationParticipant
     #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'participants')]
     #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Conversation $conversation = null;
+    private Conversation $conversation;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationsParticipant')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $user = null;
+    private User $user;
 
-    public function getConversation(): ?Conversation
+    public function getConversation(): Conversation
     {
         return $this->conversation;
     }
@@ -48,7 +47,7 @@ class ConversationParticipant
         $this->conversation = $conversation;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -60,6 +59,6 @@ class ConversationParticipant
 
     public function __toString(): string
     {
-        return (string) $this->getUser() ?: TranslationConstant::EMPTY->value;
+        return $this->getUser()->getFullNameDegree();
     }
 }

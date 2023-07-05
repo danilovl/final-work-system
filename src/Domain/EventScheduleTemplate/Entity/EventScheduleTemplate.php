@@ -38,12 +38,12 @@ class EventScheduleTemplate
     #[ORM\ManyToOne(targetEntity: EventSchedule::class, inversedBy: 'templates')]
     #[ORM\JoinColumn(name: 'event_schedule_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?EventSchedule $schedule = null;
+    private EventSchedule $schedule;
 
     #[ORM\ManyToOne(targetEntity: EventType::class)]
     #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?EventType $type = null;
+    private EventType $type;
 
     #[ORM\ManyToOne(targetEntity: EventAddress::class)]
     #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true)]
@@ -52,7 +52,7 @@ class EventScheduleTemplate
 
     #[ORM\Column(name: 'day', type: Types::INTEGER, nullable: false)]
     #[Gedmo\Versioned]
-    private ?int $day = null;
+    private int $day;
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: true)]
     #[Gedmo\Versioned]
@@ -60,13 +60,13 @@ class EventScheduleTemplate
 
     #[ORM\Column(name: 'start', type: Types::TIME_MUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private ?DateTime $start = null;
+    private DateTime $start;
 
     #[ORM\Column(name: 'end', type: Types::TIME_MUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private ?DateTime $end = null;
+    private DateTime $end;
 
-    public function getSchedule(): ?EventSchedule
+    public function getSchedule(): EventSchedule
     {
         return $this->schedule;
     }
@@ -76,7 +76,7 @@ class EventScheduleTemplate
         $this->schedule = $schedule;
     }
 
-    public function getType(): ?EventType
+    public function getType(): EventType
     {
         return $this->type;
     }
@@ -96,7 +96,7 @@ class EventScheduleTemplate
         $this->address = $address;
     }
 
-    public function getDay(): ?int
+    public function getDay(): int
     {
         return $this->day;
     }
@@ -116,7 +116,7 @@ class EventScheduleTemplate
         $this->name = $name;
     }
 
-    public function getStart(): ?DateTime
+    public function getStart(): DateTime
     {
         return $this->start;
     }
@@ -126,7 +126,7 @@ class EventScheduleTemplate
         $this->start = $start;
     }
 
-    public function getEnd(): ?DateTime
+    public function getEnd(): DateTime
     {
         return $this->end;
     }

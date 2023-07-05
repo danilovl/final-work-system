@@ -12,7 +12,6 @@
 
 namespace App\Domain\WorkStatus\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
     IdTrait,
@@ -43,7 +42,7 @@ class WorkStatus
 
     #[ORM\Column(name: 'color', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $color = null;
+    private string $color;
 
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Work::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -54,7 +53,7 @@ class WorkStatus
         $this->works = new ArrayCollection;
     }
 
-    public function getColor(): ?string
+    public function getColor(): string
     {
         return $this->color;
     }
@@ -79,6 +78,6 @@ class WorkStatus
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

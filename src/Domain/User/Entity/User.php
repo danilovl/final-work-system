@@ -94,10 +94,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     private ?string $usernameCanonical = null;
 
     #[ORM\Column(name: 'email', type: Types::STRING, unique: true, nullable: false)]
-    private ?string $email = null;
+    private string $email;
 
     #[ORM\Column(name: 'email_canonical', type: Types::STRING, nullable: false)]
-    private ?string $emailCanonical = null;
+    private string $emailCanonical;
 
     #[ORM\Column(name: 'enabled', type: Types::BOOLEAN, options: ['default' => '0'])]
     private bool $enabled = false;
@@ -109,10 +109,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     private ?DateTime $dateOfBirth = null;
 
     #[ORM\Column(name: 'firstname', type: Types::STRING, nullable: false)]
-    private ?string $firstname = null;
+    private string $firstname;
 
     #[ORM\Column(name: 'lastname', type: Types::STRING, nullable: false)]
-    private ?string $lastname = null;
+    private string $lastname;
 
     #[ORM\Column(name: 'website', type: Types::STRING, nullable: true)]
     private ?string $website = null;
@@ -121,7 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     private ?string $biography = null;
 
     #[ORM\Column(name: 'gender', type: Types::STRING, nullable: false)]
-    private ?string $gender = GenderConstant::UNKNOWN->value;
+    private string $gender = GenderConstant::UNKNOWN->value;
 
     #[ORM\Column(name: 'locale', type: Types::STRING, nullable: true)]
     private ?string $locale = null;
@@ -831,6 +831,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     public function __toString(): string
     {
-        return $this->getFullNameDegree() ?: TranslationConstant::EMPTY->value;
+        return $this->getFullNameDegree();
     }
 }

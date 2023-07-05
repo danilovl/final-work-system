@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventSchedule\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Application\Traits\Entity\{
     IdTrait,
@@ -44,7 +43,7 @@ class EventSchedule
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsSchedule')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\OneToMany(mappedBy: 'schedule', targetEntity: EventScheduleTemplate::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -55,7 +54,7 @@ class EventSchedule
         $this->templates = new ArrayCollection;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
@@ -91,6 +90,6 @@ class EventSchedule
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

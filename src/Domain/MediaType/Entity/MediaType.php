@@ -12,7 +12,6 @@
 
 namespace App\Domain\MediaType\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     ConstantAwareTrait,
@@ -43,7 +42,7 @@ class MediaType
 
     #[ORM\Column(name: 'folder', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $folder = null;
+    private string $folder;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Media::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -54,7 +53,7 @@ class MediaType
         $this->medias = new ArrayCollection;
     }
 
-    public function getFolder(): ?string
+    public function getFolder(): string
     {
         return $this->folder;
     }
@@ -79,7 +78,7 @@ class MediaType
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }
 

@@ -12,7 +12,6 @@
 
 namespace App\Domain\ConversationMessage\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
 use App\Application\Traits\Entity\{
@@ -46,12 +45,12 @@ class ConversationMessage
     #[ORM\ManyToOne(targetEntity: Conversation::class, inversedBy: 'messages')]
     #[ORM\JoinColumn(name: 'conversation_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Conversation $conversation = null;
+    private Conversation $conversation;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationMessages')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\OneToMany(mappedBy: 'message', targetEntity: ConversationMessageStatus::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -59,14 +58,14 @@ class ConversationMessage
 
     #[ORM\Column(name: 'content', type: Types::TEXT, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $content = null;
+    private string $content;
 
     public function __construct()
     {
         $this->statuses = new ArrayCollection;
     }
 
-    public function getConversation(): ?Conversation
+    public function getConversation(): Conversation
     {
         return $this->conversation;
     }
@@ -76,7 +75,7 @@ class ConversationMessage
         $this->conversation = $conversation;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
@@ -111,6 +110,6 @@ class ConversationMessage
 
     public function __toString(): string
     {
-        return $this->getContent() ?: TranslationConstant::EMPTY->value;
+        return $this->content;
     }
 }

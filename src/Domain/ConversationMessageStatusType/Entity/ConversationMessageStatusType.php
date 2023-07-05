@@ -12,7 +12,6 @@
 
 namespace App\Domain\ConversationMessageStatusType\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     ConstantAwareTrait,
@@ -63,6 +62,6 @@ class ConversationMessageStatusType
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

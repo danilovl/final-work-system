@@ -12,7 +12,6 @@
 
 namespace App\Domain\EmailNotificationQueue\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateAbleTrait
@@ -121,6 +120,6 @@ class EmailNotificationQueue
 
     public function __toString(): string
     {
-        return $this->subject ?: TranslationConstant::EMPTY->value;
+        return $this->subject;
     }
 }

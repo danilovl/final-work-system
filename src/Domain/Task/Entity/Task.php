@@ -12,7 +12,6 @@
 
 namespace App\Domain\Task\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     ActiveAbleTrait,
@@ -55,12 +54,12 @@ class Task
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'tasksOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'tasks')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?Work $work = null;
+    private Work $work;
 
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -74,7 +73,7 @@ class Task
         $this->systemEvents = new ArrayCollection;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
@@ -84,7 +83,7 @@ class Task
         $this->owner = $owner;
     }
 
-    public function getWork(): ?Work
+    public function getWork(): Work
     {
         return $this->work;
     }
@@ -157,6 +156,6 @@ class Task
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

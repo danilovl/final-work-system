@@ -36,18 +36,18 @@ class SystemEventRecipient
     #[ORM\ManyToOne(targetEntity: SystemEvent::class, fetch: 'EAGER', inversedBy: 'recipient')]
     #[ORM\JoinColumn(name: 'system_event_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?SystemEvent $systemEvent = null;
+    private SystemEvent $systemEvent;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'systemEventsRecipient')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $recipient = null;
+    private User $recipient;
 
     #[ORM\Column(name: 'viewed', type: Types::BOOLEAN, options: ['default' => '0'])]
     #[Gedmo\Versioned]
     private bool $viewed = false;
 
-    public function getSystemEvent(): ?SystemEvent
+    public function getSystemEvent(): SystemEvent
     {
         return $this->systemEvent;
     }
@@ -57,7 +57,7 @@ class SystemEventRecipient
         $this->systemEvent = $systemEvent;
     }
 
-    public function getRecipient(): ?User
+    public function getRecipient(): User
     {
         return $this->recipient;
     }
@@ -84,10 +84,6 @@ class SystemEventRecipient
 
     public function changeViewed(): void
     {
-        if ($this->isViewed()) {
-            $this->setViewed(false);
-        } else {
-            $this->setViewed(true);
-        }
+        $this->setViewed(!$this->isViewed());
     }
 }

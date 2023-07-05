@@ -47,12 +47,12 @@ class SystemEvent
     #[ORM\ManyToOne(targetEntity: SystemEventType::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?SystemEventType $type = null;
+    private SystemEventType $type;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'systemEventsOwner')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\ManyToOne(targetEntity: Work::class, fetch: 'EAGER', inversedBy: 'systemEvents')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
@@ -88,7 +88,7 @@ class SystemEvent
         $this->recipient = new ArrayCollection;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }

@@ -50,22 +50,22 @@ class Work
     #[ORM\ManyToOne(targetEntity: WorkType::class, fetch: 'EAGER', inversedBy: 'works')]
     #[ORM\JoinColumn(name: 'work_type_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?WorkType $type = null;
+    private WorkType $type;
 
     #[ORM\ManyToOne(targetEntity: WorkStatus::class, fetch: 'EAGER', inversedBy: 'works')]
     #[ORM\JoinColumn(name: 'work_status_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?WorkStatus $status = null;
+    private WorkStatus $status;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'authorWorks')]
     #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $author = null;
+    private User $author;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'supervisorWorks')]
     #[ORM\JoinColumn(name: 'supervisor_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
-    private ?User $supervisor = null;
+    private User $supervisor;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'opponentWorks')]
     #[ORM\JoinColumn(name: 'opponent_id', referencedColumnName: 'id', nullable: true)]
@@ -85,7 +85,7 @@ class Work
 
     #[ORM\Column(name: 'title', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $title = null;
+    private string $title;
 
     #[ORM\Column(name: 'shortcut', type: Types::STRING, nullable: true)]
     #[Gedmo\Versioned]
@@ -102,7 +102,7 @@ class Work
 
     #[ORM\Column(name: 'deadline', type: Types::DATE_MUTABLE, nullable: false)]
     #[Gedmo\Versioned]
-    private ?DateTime $deadline = null;
+    private DateTime $deadline;
 
     #[ORM\Column(name: 'deadline_program', type: Types::DATE_MUTABLE, nullable: true)]
     #[Gedmo\Versioned]
@@ -125,7 +125,7 @@ class Work
         $this->eventParticipants = new ArrayCollection;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): User
     {
         return $this->author;
     }
@@ -135,7 +135,7 @@ class Work
         $this->author = $author;
     }
 
-    public function getSupervisor(): ?User
+    public function getSupervisor(): User
     {
         return $this->supervisor;
     }
@@ -165,7 +165,7 @@ class Work
         $this->consultant = $consultant;
     }
 
-    public function getType(): ?WorkType
+    public function getType(): WorkType
     {
         return $this->type;
     }
@@ -175,7 +175,7 @@ class Work
         $this->type = $type;
     }
 
-    public function getStatus(): ?WorkStatus
+    public function getStatus(): WorkStatus
     {
         return $this->status;
     }
@@ -198,7 +198,7 @@ class Work
         $this->categories = $categories;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -292,6 +292,6 @@ class Work
 
     public function __toString(): string
     {
-        return $this->getTitle() ?: TranslationConstant::EMPTY->value;
+        return $this->title;
     }
 }

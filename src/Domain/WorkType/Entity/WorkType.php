@@ -12,7 +12,6 @@
 
 namespace App\Domain\WorkType\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateUpdateAbleTrait,
@@ -40,7 +39,7 @@ class WorkType
 
     #[ORM\Column(name: 'shortcut', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $shortcut = null;
+    private string $shortcut;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Work::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
@@ -51,7 +50,7 @@ class WorkType
         $this->works = new ArrayCollection;
     }
 
-    public function getShortcut(): ?string
+    public function getShortcut(): string
     {
         return $this->shortcut;
     }
@@ -76,6 +75,6 @@ class WorkType
 
     public function __toString(): string
     {
-        return $this->getName() ?: TranslationConstant::EMPTY->value;
+        return $this->getName();
     }
 }

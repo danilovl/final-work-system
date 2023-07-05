@@ -15,12 +15,12 @@ namespace App\Domain\Work\Form\Factory;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\SortFunctionHelper;
-use App\Domain\Work\Form\WorkSearchForm;
+use App\Domain\Work\Form\{
+    WorkForm,
+    WorkSearchForm
+};
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\Form\{
-    WorkForm
-};
 use App\Domain\Work\Service\WorkListService;
 use App\Domain\Work\WorkModel;
 use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
@@ -45,7 +45,7 @@ class WorkFormFactory
 
     public function getWorkForm(
         User $user,
-        string $type,
+        ControllerMethodConstant $type,
         WorkModel $workModel,
         Work $work = null
     ): FormInterface {
