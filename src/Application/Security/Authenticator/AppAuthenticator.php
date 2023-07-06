@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
     CustomUserMessageAuthenticationException
 };
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\{
     CsrfTokenBadge,
@@ -112,7 +112,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         $user = $this->userService->getUser();
         $user->updateLastLogin();
 
-        $this->entityManagerService->flush($user);
+        $this->entityManagerService->flush();
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);

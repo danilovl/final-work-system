@@ -28,24 +28,18 @@ readonly class EntityManagerService
     public function persistAndFlush(object $entity): void
     {
         $this->entityManager->persist($entity);
-        $this->entityManager->flush($entity);
+        $this->entityManager->flush();
     }
 
     public function remove(object $entity): void
     {
         $this->entityManager->remove($entity);
-        $this->entityManager->flush($entity);
+        $this->entityManager->flush();
     }
 
-    public function create(object $entity): void
+    public function flush(): void
     {
-        $this->entityManager->persist($entity);
-        $this->entityManager->flush($entity);
-    }
-
-    public function flush(object $entity = null): void
-    {
-        $this->entityManager->flush($entity);
+        $this->entityManager->flush();
     }
 
     public function getRepository(string $entityName): ObjectRepository
@@ -53,14 +47,9 @@ readonly class EntityManagerService
         return $this->entityManager->getRepository($entityName);
     }
 
-    public function clear(string $entityName = null): void
+    public function clear(): void
     {
-        $this->entityManager->clear($entityName);
-    }
-
-    public function refresh(object $object): void
-    {
-        $this->entityManager->refresh($object);
+        $this->entityManager->clear();
     }
 
     public function getConnection(): Connection

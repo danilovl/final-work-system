@@ -40,7 +40,7 @@ readonly class EventCalendarEditHandle
         $event->setStart(new DateTime($request->request->get('start')));
         $event->setEnd(new DateTime($request->request->get('end')));
 
-        $this->entityManagerService->flush($event);
+        $this->entityManagerService->flush();
         $this->eventEventDispatcherService->onEventCalendarEdit($event);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS, [

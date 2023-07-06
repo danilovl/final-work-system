@@ -36,7 +36,7 @@ readonly class TaskNotifyCompleteHandle
         }
 
         $task->changeNotifyComplete();
-        $this->entityManagerService->flush($task);
+        $this->entityManagerService->flush();
 
         $this->taskEventDispatcherService->onTaskNotifyComplete($task);
 

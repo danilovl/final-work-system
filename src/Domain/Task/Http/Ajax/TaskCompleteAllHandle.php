@@ -46,10 +46,12 @@ readonly class TaskCompleteAllHandle
         $tasks = $this->taskFacade->findAllByOwnerComplete($user, false);
         foreach ($tasks as $task) {
             $task->changeComplete();
-            $this->entityManagerService->flush($task);
+            $this->entityManagerService->flush();
 
-            $this->taskEventDispatcherService
-                ->onTaskChangeStatus($task, TaskStatusConstant::COMPLETE->value);
+            $this->taskEventDispatcherService->onTaskChangeStatus(
+                $task,
+                TaskStatusConstant::COMPLETE->value
+            );
         }
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

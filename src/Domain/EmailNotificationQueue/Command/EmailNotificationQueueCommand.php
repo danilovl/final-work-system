@@ -88,7 +88,7 @@ class EmailNotificationQueueCommand extends Command
         }
 
         $emailNotification->setSuccess($status);
-        $this->entityManagerService->flush($emailNotification);
+        $this->entityManagerService->flush();
 
         $this->io->{$status ? 'success' : 'error'}($message);
 

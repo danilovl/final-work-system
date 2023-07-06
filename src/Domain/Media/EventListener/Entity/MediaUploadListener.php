@@ -13,40 +13,43 @@
 namespace App\Domain\Media\EventListener\Entity;
 
 use App\Application\Exception\RuntimeException;
+use App\Application\Service\EntityManagerService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Doctrine\ORM\Event\{
-    LifecycleEventArgs,
+    PrePersistEventArgs,
     PreUpdateEventArgs
 };
 
-class MediaUploadListener
+readonly class MediaUploadListener
 {
     private const DEFAULT_NAME = 'default media name';
 
-    public function prePersist(LifecycleEventArgs $eventArgs): void
+    public function __construct(private EntityManagerService $entityManagerService) {}
+
+    public function prePersist(PrePersistEventArgs $eventArgs): void
     {
-        $entity = $eventArgs->getEntity();
+        $entity = $eventArgs->getObject();
         if (!$entity instanceof Media) {
             return;
         }
 
-        $this->create($entity, $eventArgs);
+        $this->create($entity);
     }
 
     public function preUpdate(PreUpdateEventArgs $eventArgs): void
     {
-        $entity = $eventArgs->getEntity();
+        $entity = $eventArgs->getObject();
         if (!$entity instanceof Media) {
             return;
         }
 
-        $this->update($entity, $eventArgs);
+        $this->update($entity);
     }
 
-    public function preRemove(LifecycleEventArgs $eventArgs): void
+    public function preRemove(PrePersistEventArgs $eventArgs): void
     {
-        $entity = $eventArgs->getEntity();
+        $entity = $eventArgs->getObject();
         if (!$entity instanceof Media) {
             return;
         }
@@ -54,7 +57,7 @@ class MediaUploadListener
         $this->remove($entity);
     }
 
-    private function create(Media $media, LifecycleEventArgs $eventArgs): void
+    private function create(Media $media): void
     {
         $uploadMedia = $media->getUploadMedia();
         $media->setUploadMedia(null);
@@ -64,7 +67,7 @@ class MediaUploadListener
         $mediaSize = $uploadMedia->getSize();
 
         /** @var MediaMimeType|null $mediaMimeType */
-        $mediaMimeType = $eventArgs->getEntityManager()
+        $mediaMimeType = $this->entityManagerService
             ->getRepository(MediaMimeType::class)
             ->findOneBy(['name' => $mimeType]);
 
@@ -87,19 +90,21 @@ class MediaUploadListener
         );
     }
 
-    private function update(Media $media, PreUpdateEventArgs $eventArgs): void
+    private function update(Media $media): void
     {
         $uploadMedia = $media->getUploadMedia();
         if ($uploadMedia) {
             $media->setUploadMedia(null);
-            $em = $eventArgs->getEntityManager();
 
             $originalMediaName = $uploadMedia->getClientOriginalName();
             $originalMediaExtension = $uploadMedia->getClientOriginalExtension();
             $mimeType = $uploadMedia->getMimeType();
             $mediaSize = $uploadMedia->getSize();
 
-            $mediaMimeType = $em->getRepository(MediaMimeType::class)->findOneBy(['name' => $mimeType]);
+            $mediaMimeType = $this->entityManagerService
+                ->getRepository(MediaMimeType::class)
+                ->findOneBy(['name' => $mimeType]);
+
             if ($mediaMimeType === null) {
                 throw new RuntimeException("MediaMimeType doesn't exist");
             }

@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
         $user = $this->userService->getUser();
         $user->setToken($token);
 
-        $this->entityManagerService->flush($user);
+        $this->entityManagerService->flush();
 
         return new JsonResponse(['token' => $token]);
     }

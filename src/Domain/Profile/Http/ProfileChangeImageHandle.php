@@ -82,7 +82,7 @@ readonly class ProfileChangeImageHandle
 
                 if ($profileImage === null) {
                     $user->setProfileImage($media);
-                    $this->entityManagerService->flush($user);
+                    $this->entityManagerService->flush();
                 }
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');

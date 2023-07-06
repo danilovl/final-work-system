@@ -69,7 +69,7 @@ readonly class ConversationMessageFacade
                     break;
             }
 
-            $this->entityManagerService->flush($conversationMessageStatus);
+            $this->entityManagerService->flush();
         } else {
 
             /** @var ConversationMessageStatusType $conversationMessageStatusType */

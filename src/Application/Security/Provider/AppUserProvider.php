@@ -35,7 +35,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         $user->setPassword($newHashedPassword);
         $user->setSalt(null);
 
-        $this->entityManagerService->flush($user);
+        $this->entityManagerService->flush();
     }
 
     public function loadUserByIdentifier(string $identifier): UserInterface

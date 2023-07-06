@@ -53,7 +53,7 @@ readonly class RequestListener implements EventSubscriberInterface
         }
 
         $user->setLastRequestedAt(new DateTime);
-        $this->entityManagerService->flush($user);
+        $this->entityManagerService->flush();
     }
 
     private function defaultRouteSeoPage(RequestEvent $requestEvent): void

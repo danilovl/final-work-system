@@ -84,7 +84,7 @@ readonly class ProfileCreateImageWebCameraHandle
 
         if ($profileImage === null) {
             $user->setProfileImage($media);
-            $this->entityManagerService->flush($user);
+            $this->entityManagerService->flush();
         }
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);

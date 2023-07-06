@@ -39,7 +39,7 @@ readonly class TaskChangeStatusHandle
             $this->taskStatusService
                 ->changeStatus($type, $task);
 
-            $this->entityManagerService->flush($task);
+            $this->entityManagerService->flush();
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

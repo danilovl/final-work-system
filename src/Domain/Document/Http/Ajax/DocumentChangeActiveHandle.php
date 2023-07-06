@@ -30,7 +30,7 @@ readonly class DocumentChangeActiveHandle
     public function handle(Media $media): JsonResponse
     {
         $media->changeActive();
-        $this->entityManagerService->flush($media);
+        $this->entityManagerService->flush();
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }

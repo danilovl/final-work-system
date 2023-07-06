@@ -178,7 +178,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
         }
 
         $user->updateLastLogin();
-        $this->entityManagerService->flush($user);
+        $this->entityManagerService->flush();
 
         return null;
     }

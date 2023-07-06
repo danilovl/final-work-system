@@ -37,7 +37,7 @@ readonly class SystemEventViewedHandle
     public function handle(SystemEventRecipient $systemEventRecipient): JsonResponse
     {
         $systemEventRecipient->changeViewed();
-        $this->entityManagerService->flush($systemEventRecipient);
+        $this->entityManagerService->flush();
 
         $user = $this->userService->getUser();
 

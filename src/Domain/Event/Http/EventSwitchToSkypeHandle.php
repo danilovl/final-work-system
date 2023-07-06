@@ -41,7 +41,7 @@ readonly class EventSwitchToSkypeHandle
         if ($eventAddressSkype !== null) {
             $event->setAddress($eventAddressSkype);
 
-            $this->entityManagerService->flush($event);
+            $this->entityManagerService->flush();
             $this->eventEventDispatcherService->onEventSwitchToSkype($event);
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');

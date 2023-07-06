@@ -73,7 +73,7 @@ readonly class ResetPasswordResetHandle
             );
 
             $user->setPassword($encodedPassword);
-            $this->entityManagerService->flush($user);
+            $this->entityManagerService->flush();
 
             $this->cleanSessionAfterReset();
 
