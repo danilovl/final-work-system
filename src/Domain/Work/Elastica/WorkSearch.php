@@ -10,19 +10,18 @@
  *
  */
 
-namespace App\Application\ElasticSearch;
+namespace App\Domain\Work\Elastica;
 
 use App\Application\Constant\{
     DateFormatConstant,
-    WorkStatusConstant
-};
-use FOS\ElasticaBundle\Finder\TransformedFinder;
+    WorkStatusConstant};
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use ArrayIterator;
 use Collator;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\Form\FormInterface;
 
 class WorkSearch
