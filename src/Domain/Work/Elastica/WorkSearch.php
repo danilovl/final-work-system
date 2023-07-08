@@ -14,7 +14,8 @@ namespace App\Domain\Work\Elastica;
 
 use App\Application\Constant\{
     DateFormatConstant,
-    WorkStatusConstant};
+    WorkStatusConstant
+};
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use ArrayIterator;
@@ -127,7 +128,7 @@ class WorkSearch
         $collator = new Collator('cs_CZ.UTF-8');
         $iterator = $works->getIterator();
 
-        $iterator->uasort(static function (Work $first, Work $second) use ($collator): bool|int {
+        $iterator->uasort(static function (Work $first, Work $second) use ($collator): int|false {
             return $collator->compare(
                 $first->getAuthor()->getLastname(),
                 $second->getAuthor()->getLastname()

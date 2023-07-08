@@ -40,12 +40,17 @@ services:
     exclude:
       - '../src/Domain/*/Entity'
       - '../src/Domain/*/Constant'
+      - '../src/Domain/*/Model'
       - '../src/Domain/*/EventDispatcher/GenericEvent'
       - '../src/Domain/Comment/Form/EventSubscriber'
 
-  App\Application\ElasticSearch\WorkSearch:
+  App\Domain\Work\Elastica\WorkSearch:
     arguments:
       $transformedFinderWork: '@fos_elastica.finder.work'
+
+  App\Domain\Conversation\Elastica\ConversationSearch:
+    arguments:
+      $transformedFinderConversation: '@fos_elastica.finder.conversation'
 
   App\Application\EventListener\LoggableListener:
     calls:

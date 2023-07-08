@@ -12,12 +12,15 @@
 
 namespace App\Domain\Conversation\Http;
 
+use App\Domain\Conversation\Elastica\ConversationSearch;
+use App\Domain\Conversation\Form\ConversationSearchForm;
+use App\Domain\Conversation\Model\SearchModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Application\Constant\{
-    FlashTypeConstant
+    FlashTypeConstant,
+    ConversationMessageStatusTypeConstant,
+    ConversationTypeConstant
 };
-use App\Application\Constant\ConversationMessageStatusTypeConstant;
-use App\Application\Constant\ConversationTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\ConversationHelper;
 use App\Application\Service\{
@@ -52,7 +55,8 @@ readonly class ConversationDetailHandle
         private FormFactoryInterface $formFactory,
         private PaginatorService $paginatorService,
         private SeoPageService $seoPageService,
-        private ConversationEventDispatcherService $conversationEventDispatcherService
+        private ConversationEventDispatcherService $conversationEventDispatcherService,
+        private ConversationSearch $conversationSearch
     ) {}
 
     public function handle(Request $request, Conversation $conversation): Response
@@ -92,6 +96,8 @@ readonly class ConversationDetailHandle
 
         if ($form !== null && $form->isSubmitted()) {
             if ($form->isValid()) {
+                $conversation->createUpdateAblePreUpdate();
+
                 $conversationMessage = $this->conversationMessageFactory
                     ->flushFromModel($conversationMessageModel);
 
@@ -118,6 +124,16 @@ readonly class ConversationDetailHandle
         $conversationMessagesQuery = $this->conversationMessageFacade
             ->queryMessagesByConversation($conversation);
 
+        $searchModel = new SearchModel;
+        $searchForm = $this->formFactory
+            ->create(ConversationSearchForm::class, $searchModel)
+            ->handleRequest($request);
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $conversationMessageIds = $this->conversationSearch->getMessageIdsByConversationAndSearch($conversation, $searchModel->search);
+            $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
+        }
+
         $pagination = $this->paginatorService
             ->createPaginationRequest($request, $conversationMessagesQuery);
 
@@ -127,7 +143,9 @@ readonly class ConversationDetailHandle
         return $this->twigRenderService->render('conversation/detail.html.twig', [
             'conversation' => $conversation,
             'conversationMessages' => $pagination,
-            'form' => $form?->createView()
+            'form' => $form?->createView(),
+            'searchForm' => $searchForm?->createView(),
+            'searchModel' => $searchModel
         ]);
     }
 }

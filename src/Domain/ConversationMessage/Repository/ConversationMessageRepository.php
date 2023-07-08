@@ -95,6 +95,15 @@ class ConversationMessageRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    public function byIds(array $ids): QueryBuilder
+    {
+        return $this->createQueryBuilder('conversation_message')
+            ->select('conversation_message')
+            ->where('conversation_message.id IN (:ids)')
+            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->setParameter('ids', $ids);
+    }
+
     public function countMessagesByUserStatus(
         User $user,
         ConversationMessageStatusType $statusType

@@ -53,8 +53,8 @@ class EventAddressForm extends AbstractType
                 'required' => false
             ]);
 
-        $builder->get('latitude')->addViewTransformer(new CommaDotTransformer());
-        $builder->get('longitude')->addViewTransformer(new CommaDotTransformer());
+        $builder->get('latitude')->addViewTransformer(new CommaDotTransformer);
+        $builder->get('longitude')->addViewTransformer(new CommaDotTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

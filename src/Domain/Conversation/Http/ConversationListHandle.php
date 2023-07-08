@@ -13,15 +13,19 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Helper\ConversationHelper;
+use App\Domain\Conversation\Elastica\ConversationSearch;
+use App\Domain\Conversation\Form\ConversationSearchForm;
+use App\Domain\Conversation\Model\SearchModel;
+use Symfony\Component\Form\FormFactoryInterface;
 use App\Application\Service\{
-    TwigRenderService
+    PaginatorService,
+    TwigRenderService,
+    UserService
 };
-use App\Application\Service\PaginatorService;
-use App\Application\Service\UserService;
 use App\Domain\Conversation\Facade\{
+    ConversationFacade,
     ConversationMessageFacade
 };
-use App\Domain\Conversation\Facade\ConversationFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -36,14 +40,25 @@ readonly class ConversationListHandle
         private TwigRenderService $twigRenderService,
         private ConversationFacade $conversationFacade,
         private ConversationMessageFacade $conversationMessageFacade,
-        private PaginatorService $paginatorService
+        private PaginatorService $paginatorService,
+        private ConversationSearch $conversationSearch,
+        private FormFactoryInterface $formFactory
     ) {}
 
     public function handle(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $conversationsQuery = $this->conversationFacade
-            ->queryConversationsByUser($user);
+        $conversationsQuery = $this->conversationFacade->queryConversationsByParticipantUser($user);
+
+        $searchModel = new SearchModel;
+        $searchForm = $this->formFactory
+            ->create(ConversationSearchForm::class, $searchModel)
+            ->handleRequest($request);
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $conversationIds = $this->conversationSearch->getIdsByParticipantAndSearch($user, $searchModel->search);
+            $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
+        }
 
         $pagination = $this->paginatorService->createPaginationRequest(
             $request,
@@ -53,8 +68,7 @@ readonly class ConversationListHandle
             ['wrap-queries' => true]
         );
 
-        $this->conversationFacade
-            ->setIsReadToConversations($pagination, $user);
+        $this->conversationFacade->setIsReadToConversations($pagination, $user);
 
         ConversationHelper::getConversationOpposite($pagination, $user);
 
@@ -63,7 +77,9 @@ readonly class ConversationListHandle
 
         return $this->twigRenderService->render('conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
-            'conversations' => $pagination
+            'conversations' => $pagination,
+            'searchForm' => $searchForm->createView(),
+            'searchModel' => $searchModel
         ]);
     }
 }

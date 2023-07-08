@@ -48,10 +48,17 @@ readonly class ConversationFacade
         private ConversationRepository $conversationRepository
     ) {}
 
-    public function queryConversationsByUser(User $user): Query
+    public function queryConversationsByParticipantUser(User $user): Query
     {
         return $this->conversationRepository
-            ->allByUser($user)
+            ->allByParticipantUser($user)
+            ->getQuery();
+    }
+
+    public function queryConversationsByIds(array $ids): Query
+    {
+        return $this->conversationRepository
+            ->allByIds($ids)
             ->getQuery();
     }
 
@@ -123,7 +130,7 @@ readonly class ConversationFacade
         ConversationComposeMessageModel $conversationComposeMessageModel
     ): void {
         /** @var array $conversations */
-        $conversations = $this->queryConversationsByUser($user)
+        $conversations = $this->queryConversationsByParticipantUser($user)
             ->getResult();
 
         /** @var array $modelConversation */

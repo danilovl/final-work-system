@@ -22,22 +22,28 @@
                                     title="{{ 'app.text.open_conversation_in_new_window' | trans }}">
                                 <i class="fa fa-comments-o"></i>
                             </button>
-                            <form method="get" action=""
-                                  class="pull-right mail-search">
-                                <div class="input-group">
-                                    <input type="text"
-                                           class="form-control input-sm"
-                                           name="search"
-                                           placeholder="{{ 'app.text.search_form' | trans }}">
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-sm btn-primary">
-                                            {{ 'app.text.search' | trans }}
-                                        </button>
-                                    </div>
+
+                            {{ form_start(searchForm, {'attr': {'class': 'pull-right mail-search'}}) }}
+
+                            <div class="input-group">
+                                {{ form_widget(searchForm.search, {'attr': {'class': 'form-control input-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        {{ 'app.text.search' | trans }}
+                                    </button>
                                 </div>
-                            </form>
+                            </div>
+
+                            {{ form_end(searchForm) }}
+
+                            {% if searchModel.search is not empty %}
+                                <a href="{{ path('conversation_list') }}" class="btn btn-danger btn-xs pull-right">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
+
                     <div class="mail-box">
                         {% if conversations is defined and conversations is not empty %}
                             <table class="table table-hover table-mail">

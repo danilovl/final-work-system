@@ -103,6 +103,13 @@ readonly class ConversationMessageFacade
             ->getQuery();
     }
 
+    public function queryByIds(array $ids): Query
+    {
+        return $this->conversationMessageRepository
+            ->byIds($ids)
+            ->getQuery();
+    }
+
     public function getUnreadMessagesByUser(User $user, ?int $limit = null): array
     {
         /** @var ConversationMessageStatusType $ConversationMessageStatusType */

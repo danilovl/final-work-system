@@ -24,6 +24,24 @@
                                 {{ conversation }}
                             {% endif %}
 
+                            {{ form_start(searchForm, {'attr': {'class': 'pull-right mail-search'}}) }}
+
+                            <div class="input-group">
+                                {{ form_widget(searchForm.search, {'attr': {'class': 'form-control input-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        {{ 'app.text.search' | trans }}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{ form_end(searchForm) }}
+
+                            {% if searchModel.search is not empty %}
+                                <a href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}" class="btn btn-danger btn-xs pull-right">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            {% endif %}
                         </div>
                         <div class="ibox-content">
                             <div class="row">
