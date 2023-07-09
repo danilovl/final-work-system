@@ -42,6 +42,15 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter('user', $user);
     }
 
+    public function getByIds(array $ids): QueryBuilder
+    {
+        return $this->createQueryBuilder('task')
+            ->join('task.work', 'work')
+            ->where('task.id IN (:ids)')
+            ->orderBy('task.createdAt', Criteria::DESC)
+            ->setParameter('ids', $ids);
+    }
+
     public function allByWork(Work $work, bool $active = false): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('task')

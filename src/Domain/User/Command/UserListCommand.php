@@ -68,7 +68,7 @@ HELP
 
         $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $users);
 
-        $bufferedOutput = new BufferedOutput();
+        $bufferedOutput = new BufferedOutput;
         $io = new SymfonyStyle($input, $bufferedOutput);
         $io->table(
             ['ID', 'Enabled', 'FirstName', 'LastName', 'Username', 'Email', 'Roles'],

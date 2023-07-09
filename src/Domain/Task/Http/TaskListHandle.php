@@ -12,6 +12,10 @@
 
 namespace App\Domain\Task\Http;
 
+use App\Application\Form\SimpleSearchForm;
+use App\Application\Model\SearchModel;
+use App\Domain\Task\Elastica\TaskSearch;
+use Symfony\Component\Form\FormFactoryInterface;
 use App\Application\Service\{
     UserService,
     PaginatorService,
@@ -29,7 +33,9 @@ readonly class TaskListHandle
         private TwigRenderService $twigRenderService,
         private UserService $userService,
         private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService
+        private PaginatorService $paginatorService,
+        private FormFactoryInterface $formFactory,
+        private TaskSearch $taskSearch
     ) {}
 
     public function handle(Request $request): Response
@@ -41,9 +47,21 @@ readonly class TaskListHandle
         $isTasksInComplete = $this->taskFacade
             ->isTasksCompleteByOwner($user, false);
 
+        $searchModel = new SearchModel;
+        $searchForm = $this->formFactory
+            ->create(SimpleSearchForm::class, $searchModel)
+            ->handleRequest($request);
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $taskIds = $this->taskSearch->getIdsByOwnerAndSearch($user, $searchModel->search);
+            $tasksQuery = $this->taskFacade->queryByIds($taskIds);
+        }
+
         return $this->twigRenderService->render('task/list.html.twig', [
             'isTasksInComplete' => $isTasksInComplete,
-            'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery)
+            'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery),
+            'searchForm' => $searchForm->createView(),
+            'enableClearSearch' => !empty($searchModel->search)
         ]);
     }
 }

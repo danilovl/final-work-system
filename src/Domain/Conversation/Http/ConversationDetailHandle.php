@@ -12,24 +12,21 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Domain\Conversation\Elastica\ConversationSearch;
-use App\Domain\Conversation\Form\ConversationSearchForm;
-use App\Domain\Conversation\Model\SearchModel;
-use Doctrine\Common\Collections\ArrayCollection;
 use App\Application\Constant\{
-    FlashTypeConstant,
     ConversationMessageStatusTypeConstant,
-    ConversationTypeConstant
-};
+    ConversationTypeConstant,
+    FlashTypeConstant};
 use App\Application\Exception\ConstantNotFoundException;
+use App\Application\Form\SimpleSearchForm;
 use App\Application\Helper\ConversationHelper;
+use App\Application\Model\SearchModel;
 use App\Application\Service\{
-    RequestService,
-    UserService,
-    SeoPageService,
     PaginatorService,
-    TwigRenderService
-};
+    RequestService,
+    SeoPageService,
+    TwigRenderService,
+    UserService};
+use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcherService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
@@ -37,11 +34,11 @@ use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\ConversationMessage\ConversationMessageModel;
 use App\Domain\ConversationMessage\Factory\ConversationMessageFactory;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class ConversationDetailHandle
 {
@@ -126,7 +123,7 @@ readonly class ConversationDetailHandle
 
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
-            ->create(ConversationSearchForm::class, $searchModel)
+            ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
@@ -144,8 +141,8 @@ readonly class ConversationDetailHandle
             'conversation' => $conversation,
             'conversationMessages' => $pagination,
             'form' => $form?->createView(),
-            'searchForm' => $searchForm?->createView(),
-            'searchModel' => $searchModel
+            'searchForm' => $searchForm->createView(),
+            'enableClearSearch' => !empty($searchModel->search)
         ]);
     }
 }

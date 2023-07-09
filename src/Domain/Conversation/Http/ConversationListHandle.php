@@ -12,25 +12,22 @@
 
 namespace App\Domain\Conversation\Http;
 
+use App\Application\Form\SimpleSearchForm;
 use App\Application\Helper\ConversationHelper;
-use App\Domain\Conversation\Elastica\ConversationSearch;
-use App\Domain\Conversation\Form\ConversationSearchForm;
-use App\Domain\Conversation\Model\SearchModel;
-use Symfony\Component\Form\FormFactoryInterface;
+use App\Application\Model\SearchModel;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService,
-    UserService
-};
+    UserService};
+use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Facade\{
     ConversationFacade,
-    ConversationMessageFacade
-};
+    ConversationMessageFacade};
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class ConversationListHandle
 {
@@ -52,7 +49,7 @@ readonly class ConversationListHandle
 
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
-            ->create(ConversationSearchForm::class, $searchModel)
+            ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
@@ -79,7 +76,7 @@ readonly class ConversationListHandle
             'isUnreadMessages' => $isUnreadMessages,
             'conversations' => $pagination,
             'searchForm' => $searchForm->createView(),
-            'searchModel' => $searchModel
+            'enableClearSearch' => !empty($searchModel->search)
         ]);
     }
 }

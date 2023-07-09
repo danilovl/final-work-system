@@ -52,6 +52,10 @@ services:
     arguments:
       $transformedFinderConversation: '@fos_elastica.finder.conversation'
 
+  App\Domain\Task\Elastica\TaskSearch:
+    arguments:
+      $transformedFinderTask: '@fos_elastica.finder.task'
+
   App\Application\EventListener\LoggableListener:
     calls:
       - [ setAnnotationReader, [ '@annotation_reader' ] ]

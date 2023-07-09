@@ -101,7 +101,7 @@ class ResetPasswordService
     {
         $request = $this->findResetPasswordRequest($fullToken);
         if ($request === null) {
-            throw new InvalidResetPasswordTokenException();
+            throw new InvalidResetPasswordTokenException;
         }
 
         $this->resetPasswordFacade->removeResetPassword($request);

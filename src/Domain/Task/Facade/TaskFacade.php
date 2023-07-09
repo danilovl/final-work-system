@@ -45,6 +45,13 @@ readonly class TaskFacade
             ->getQuery();
     }
 
+    public function queryByIds(array $ids): Query
+    {
+        return $this->taskRepository
+            ->getByIds($ids)
+            ->getQuery();
+    }
+
     public function getTotalCompleteByOwner(
         User $user,
         bool $isComplete

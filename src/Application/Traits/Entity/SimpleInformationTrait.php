@@ -20,18 +20,18 @@ trait SimpleInformationTrait
 {
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     #[Gedmo\Versioned]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
     #[Gedmo\Versioned]
     private ?string $description = null;
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

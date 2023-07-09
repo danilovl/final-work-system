@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Conversation\Model;
+namespace App\Application\Model;
 
 class SearchModel
 {

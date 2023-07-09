@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Domain\Conversation\Form;
+namespace App\Application\Form;
 
 use App\Application\Form\Transformer\TrimTransformer;
-use App\Domain\Conversation\Model\SearchModel;
+use App\Application\Model\SearchModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ConversationSearchForm extends AbstractType
+class SimpleSearchForm extends AbstractType
 {
-    final public const NAME = 'conversation_search';
+    final public const NAME = 'simple_search_search';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,7 +35,6 @@ class ConversationSearchForm extends AbstractType
         ]);
 
         $builder->get('search')->addViewTransformer(new TrimTransformer);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

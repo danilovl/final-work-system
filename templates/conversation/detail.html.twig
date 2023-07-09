@@ -37,7 +37,7 @@
 
                             {{ form_end(searchForm) }}
 
-                            {% if searchModel.search is not empty %}
+                            {% if enableClearSearch %}
                                 <a href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}" class="btn btn-danger btn-xs pull-right">
                                     <i class="fa fa-remove"></i>
                                 </a>

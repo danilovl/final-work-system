@@ -91,7 +91,7 @@ class ConversationFactory extends BaseModelFactory
                 /** @var ConversationMessageStatusType $conversationMessageStatusType */
                 $conversationMessageStatusType = $this->entityManagerService->getReference(ConversationMessageStatusType::class, $type);
 
-                $messageStatus = new ConversationMessageStatus();
+                $messageStatus = new ConversationMessageStatus;
                 $messageStatus->setConversation($conversation);
                 $messageStatus->setMessage($message);
                 $messageStatus->setType($conversationMessageStatusType);

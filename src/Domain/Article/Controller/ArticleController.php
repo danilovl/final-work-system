@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
         #[MapEntity(mapping: ['id_article' => 'id'])] Article $article,
         #[MapEntity(mapping: ['id_category' => 'id'])] ArticleCategory $articleCategory
     ): Response {
-        $articleVoterSubject = (new ArticleVoterSubject())
+        $articleVoterSubject = (new ArticleVoterSubject)
             ->setArticle($article)
             ->setArticleCategory($articleCategory);
 

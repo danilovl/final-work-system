@@ -25,7 +25,7 @@
 
                             {{ form_start(searchForm, {'attr': {'class': 'pull-right mail-search'}}) }}
 
-                            <div class="input-group">
+                            <div class="input-group mt-small">
                                 {{ form_widget(searchForm.search, {'attr': {'class': 'form-control input-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
                                 <div class="input-group-btn">
                                     <button type="submit" class="btn btn-sm btn-primary">
@@ -36,8 +36,8 @@
 
                             {{ form_end(searchForm) }}
 
-                            {% if searchModel.search is not empty %}
-                                <a href="{{ path('conversation_list') }}" class="btn btn-danger btn-xs pull-right">
+                            {% if enableClearSearch %}
+                                <a href="{{ path('conversation_list') }}" class="btn btn-danger btn-xs pull-right mt-small">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             {% endif %}
