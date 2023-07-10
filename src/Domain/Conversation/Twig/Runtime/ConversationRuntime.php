@@ -25,11 +25,8 @@ class ConversationRuntime extends AbstractExtension implements RuntimeExtensionI
 {
     public function __construct(private readonly ConversationService $conversationService) {}
 
-    public function checkWorkUsersConversation(
-        Work $work,
-        User $userOne,
-        User $userTwo
-    ): ?Conversation {
+    public function checkWorkUsersConversation(Work $work, User $userOne, User $userTwo): ?Conversation
+    {
         return $this->conversationService->checkWorkUsersConversation($work, $userOne, $userTwo);
     }
 

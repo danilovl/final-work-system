@@ -37,6 +37,12 @@ readonly class EntityManagerService
         $this->entityManager->flush();
     }
 
+    public function detach(object $entity): void
+    {
+        $this->entityManager->detach($entity);
+        $this->entityManager->flush();
+    }
+
     public function flush(): void
     {
         $this->entityManager->flush();
