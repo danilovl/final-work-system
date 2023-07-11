@@ -49,7 +49,6 @@
                                                                     {% include 'common_part/button/js-switch.html.twig' with {
                                                                         'checked': conversationMessageUnreadClass is empty,
                                                                         'class': 'small',
-                                                                        'checked': eventAddress.skype is not null,
                                                                         'dataTargetType': 'complete',
                                                                         'dataTargetUrl': path('conversation_message_change_read_status_ajax', { 'id': message.id | hashids_encode })
                                                                     } %}

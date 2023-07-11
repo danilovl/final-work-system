@@ -56,13 +56,14 @@
                                     <th>
                                         {{ 'app.text.name_conversation' | trans }}
                                     </th>
-                                    <th width="120px"></th>
+                                    <th width="200px"></th>
                                     <th>
                                         {{ 'app.text.last_message_from' | trans }}
                                     </th>
                                     <th>
                                         {{ 'app.text.date_last_message' | trans }}
                                     </th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +80,9 @@
                                             <input type="checkbox" class="i-checks" title="">
                                         </td>
                                         <td class="mail-ontact">
-                                            <a href="{{ path('conversation_detail', { 'id': conversation.id  | hashids_encode }) }}">{{ conversation.recipient }}</a>
+                                            <a href="{{ path('conversation_detail', { 'id': conversation.id  | hashids_encode }) }}">
+                                                {{ conversation.recipient }}
+                                            </a>
                                         </td>
                                         <td class="mail-subject">
                                             <i class="fa fa-circle message-type-{{ conversation.type.constant | lower }}"></i>
@@ -88,31 +91,36 @@
                                             </a>
                                         </td>
                                         <td>
+                                            {% set simpleSearch = '' %}
+                                            {% if enableClearSearch %}
+                                                {% set simpleSearch = '?simple_search[search]=' ~ app.request.get('simple_search')['search'] %}
+                                            {% endif %}
+
                                             <a data-toggle="modal"
                                                data-target="#modalWindow"
                                                class="btn btn-primary btn-xs"
-                                               href="{{ path('conversation_message_last', { 'id': conversation.id | hashids_encode }) }}"
+                                               href="{{ path('conversation_message_last', { 'id': conversation.id | hashids_encode }) }}{{ simpleSearch }}"
                                                target="_blank">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+
+                                            {% if enableClearSearch %}
+                                                <a class="btn btn-primary btn-xs"
+                                                   href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}{{ simpleSearch }}"
+                                                   target="_blank">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            {% endif %}
+
                                             <a class="btn btn-primary btn-xs"
                                                href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}"
                                                target="_blank">
                                                 <i class="fa fa-comments-o"></i>
+                                                [{{ conversation.messages | length }}]
                                             </a>
-
-                                            {% if is_user_role(app_user(), 'isSupervisor') %}
-                                                {% include 'common_part/ajax_delete.html.twig' with {
-                                                    'modalDataTargetDeleteIcon': 'fa-remove',
-                                                    'modalDataTarget': 'conversation',
-                                                    'modalDataTargetId': conversation.id,
-                                                    'modalDataTargetName': conversation.title,
-                                                    'modalDataTargetDeleteUrl': path('conversation_delete_ajax', { 'id': conversation.id | hashids_encode })
-                                                } %}
-                                            {% endif %}
                                         </td>
                                         {% set lastMessage = conversation_last_message(conversation) %}
-                                        <td class="">
+                                        <td>
                                             {% if lastMessage is not empty %}
                                                 {% include 'common_part/user_online_status.html.twig' with {
                                                     'user': lastMessage.owner
@@ -120,9 +128,20 @@
                                                 {{ lastMessage.owner }}
                                             {% endif %}
                                         </td>
-                                        <td class="text-right mail-date">
+                                        <td>
                                             {% if lastMessage is not empty %}
                                                 {{ lastMessage.createdAt | date }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if is_user_role(app_user(), 'isSupervisor') %}
+                                                {% include 'common_part/ajax_delete.html.twig' with {
+                                                    'modalDataTargetDeleteIcon': 'fa-remove ml-2',
+                                                    'modalDataTarget': 'conversation',
+                                                    'modalDataTargetId': conversation.id,
+                                                    'modalDataTargetName': conversation.title,
+                                                    'modalDataTargetDeleteUrl': path('conversation_delete_ajax', { 'id': conversation.id | hashids_encode })
+                                                } %}
                                             {% endif %}
                                         </td>
                                     </tr>

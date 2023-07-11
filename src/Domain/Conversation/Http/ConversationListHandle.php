@@ -18,16 +18,19 @@ use App\Application\Model\SearchModel;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService,
-    UserService};
+    UserService
+};
 use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Facade\{
     ConversationFacade,
-    ConversationMessageFacade};
+    ConversationMessageFacade
+};
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class ConversationListHandle
 {

@@ -19,14 +19,14 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use Twig\Environment;
 
-readonly class ConversationStreamService
+class ConversationStreamService
 {
     private ?DateTime $date;
 
     public function __construct(
-        private ParameterServiceInterface $parameterService,
-        private Environment $twig,
-        private ConversationMessageFacade $conversationMessageFacade
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly Environment $twig,
+        private readonly ConversationMessageFacade $conversationMessageFacade
     ) {}
 
     private function getLastMessage(Conversation $conversation): ?string

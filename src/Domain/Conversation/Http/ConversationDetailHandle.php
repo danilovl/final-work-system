@@ -12,8 +12,7 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Util\TextHighlightWord;
-use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use App\Domain\Conversation\Service\MessageHighlightService;
 use App\Application\Constant\{
     FlashTypeConstant,
     ConversationTypeConstant,
@@ -23,15 +22,12 @@ use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Helper\ConversationHelper;
 use App\Application\Model\SearchModel;
-use Danilovl\AsyncBundle\Service\AsyncService;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use App\Application\Service\{
     UserService,
     RequestService,
     SeoPageService,
     PaginatorService,
-    TwigRenderService,
-    EntityManagerService
+    TwigRenderService
 };
 use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Entity\Conversation;
@@ -62,8 +58,7 @@ readonly class ConversationDetailHandle
         private SeoPageService $seoPageService,
         private ConversationEventDispatcherService $conversationEventDispatcherService,
         private ConversationSearch $conversationSearch,
-        private EntityManagerService $entityManagerService,
-        private AsyncService $asyncService
+        private MessageHighlightService $messageHighlightService
     ) {}
 
     public function handle(Request $request, Conversation $conversation): Response
@@ -147,7 +142,7 @@ readonly class ConversationDetailHandle
         $this->conversationMessageFacade->setIsReadToConversationMessages($pagination, $user);
         $this->seoPageService->setTitle($conversation->getTitle());
 
-        $this->addHighlight($pagination, $searchModel);
+        $this->messageHighlightService->addHighlight($pagination, $searchModel);
 
         return $this->twigRenderService->render('conversation/detail.html.twig', [
             'conversation' => $conversation,
@@ -156,23 +151,5 @@ readonly class ConversationDetailHandle
             'searchForm' => $searchForm->createView(),
             'enableClearSearch' => !empty($searchModel->search)
         ]);
-    }
-
-    private function addHighlight(PaginationInterface $pagination, SearchModel $searchModel): void
-    {
-        if (empty($searchModel->search)) {
-            return;
-        }
-
-        $words = preg_split('~\s+~', $searchModel->search);
-        /** @var ConversationMessage $c */
-        foreach ($pagination as $conversationMessage) {
-            $message = TextHighlightWord::highlightPartWords($conversationMessage->getContent(), $words);
-            $conversationMessage->setContent($message);
-
-            $this->asyncService->add(callable: function () use ($conversationMessage): void {
-                $this->entityManagerService->detach($conversationMessage);
-            }, priority: 999);
-        }
     }
 }

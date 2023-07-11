@@ -35,13 +35,12 @@ class ConversationRepository extends ServiceEntityRepository
     public function allByParticipantUser(User $user): QueryBuilder
     {
         return $this->baseQueryBuilder()
-            ->addSelect('participants')
             ->addSelect('messages')
             ->leftJoin('conversation.participants', 'participants')
             ->leftJoin('conversation.messages', 'messages')
             ->where('participants.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('messages.createdAt', Criteria::DESC);
+            ->orderBy('messages.createdAt', Criteria::DESC)
+            ->setParameter('user', $user);
     }
 
     public function allByIds(array $ids): QueryBuilder
@@ -51,8 +50,8 @@ class ConversationRepository extends ServiceEntityRepository
             ->addSelect('messages')
             ->leftJoin('conversation.participants', 'participants')
             ->leftJoin('conversation.messages', 'messages')
-            ->setParameter('ids', $ids)
             ->where('conversation.id IN (:ids)')
-            ->orderBy('messages.createdAt', Criteria::DESC);
+            ->orderBy('messages.createdAt', Criteria::DESC)
+            ->setParameter('ids', $ids);
     }
 }

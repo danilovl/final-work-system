@@ -12,17 +12,21 @@
 
 namespace App\Domain\Conversation\Http;
 
+use App\Application\Form\SimpleSearchForm;
+use App\Application\Model\SearchModel;
 use App\Application\Service\{
+    SeoPageService,
     TwigRenderService
 };
-use App\Application\Service\SeoPageService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\Conversation\Service\MessageHighlightService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use Symfony\Component\Form\FormFactoryInterface;
 
 readonly class ConversationLastMessageHandle
 {
@@ -30,7 +34,9 @@ readonly class ConversationLastMessageHandle
         private TwigRenderService $twigRenderService,
         private ConversationMessageFacade $conversationMessageFacade,
         private SeoPageService $seoPageService,
-        private ParameterServiceInterface $parameterService
+        private ParameterServiceInterface $parameterService,
+        private FormFactoryInterface $formFactory,
+        private MessageHighlightService $messageHighlightService
     ) {}
 
     public function handle(Request $request, Conversation $conversation): Response
@@ -40,8 +46,16 @@ readonly class ConversationLastMessageHandle
             $this->parameterService->getInt('pagination.conversation.message_list')
         );
 
-        $this->seoPageService->setTitle($conversation->getTitle());
+        $searchModel = new SearchModel;
+        $searchForm = $this->formFactory
+            ->create(SimpleSearchForm::class, $searchModel)
+            ->handleRequest($request);
 
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $this->messageHighlightService->addHighlight($conversationMessages, $searchModel);
+        }
+
+        $this->seoPageService->setTitle($conversation->getTitle());
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'conversation/last_message.html.twig');
 
         return $this->twigRenderService->render($template, [
