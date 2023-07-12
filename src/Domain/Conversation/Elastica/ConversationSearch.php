@@ -24,7 +24,7 @@ class ConversationSearch
 
     public function getIdsByParticipantAndSearch(User $user, string $search): array
     {
-        $search = mb_strtolower($search);
+        $search = $this->transformSearch($search);
 
         $query = [
             'size' => 1000,
@@ -106,10 +106,10 @@ class ConversationSearch
                             'path' => 'messages',
                             'query' => [
                                 'wildcard' => [
-                                    'messages.content' => '*' . mb_strtolower($search) . '*'
+                                    'messages.content' => '*' . $this->transformSearch($search) . '*'
                                 ]
                             ],
-                            'inner_hits' => new stdClass()
+                            'inner_hits' => new stdClass
                         ]
                     ]
                 ]
@@ -130,5 +130,10 @@ class ConversationSearch
         }
 
         return $messageIds;
+    }
+
+    private function transformSearch(string $search): string
+    {
+        return mb_strtolower($search);
     }
 }

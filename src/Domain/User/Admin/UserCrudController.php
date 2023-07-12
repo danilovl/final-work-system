@@ -10,25 +10,26 @@
  *
  */
 
-namespace App\Application\Admin;
+namespace App\Domain\User\Admin;
 
 use App\Domain\User\Entity\User;
+use App\Domain\UserGroup\Admin\GroupCrudController;
 use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{
-    Crud,
     Action,
-    Actions
+    Actions,
+    Crud
 };
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
-    FormField,
-    TextField,
     ArrayField,
-    IntegerField,
+    AssociationField,
     BooleanField,
     DateTimeField,
-    AssociationField
+    FormField,
+    IntegerField,
+    TextField
 };
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

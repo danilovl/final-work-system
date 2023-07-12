@@ -10,20 +10,19 @@
  *
  */
 
-namespace App\Application\Admin;
+namespace App\Domain\EmailNotificationQueue\Admin;
 
 use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
 use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
-    FormField,
-    TextField,
     BooleanField,
-    IntegerField,
     DateTimeField,
-    TextEditorField
-};
+    FormField,
+    IntegerField,
+    TextEditorField,
+    TextField};
 
 class EmailNotificationQueueCrudController extends AbstractCrudController
 {

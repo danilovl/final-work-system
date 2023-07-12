@@ -10,16 +10,16 @@
  *
  */
 
-namespace App\Application\Admin;
+namespace App\Domain\UserGroup\Admin;
 
 use App\Domain\UserGroup\Entity\Group;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
+    DateTimeField,
     FormField,
-    TextField,
     IntegerField,
-    DateTimeField
+    TextField
 };
 
 class GroupCrudController extends AbstractCrudController

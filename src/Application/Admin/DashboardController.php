@@ -13,6 +13,7 @@
 namespace App\Application\Admin;
 
 use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Domain\User\Admin\UserCrudController;
 use App\Domain\User\Entity\User;
 use App\Domain\UserGroup\Entity\Group;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{
