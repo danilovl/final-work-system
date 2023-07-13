@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Application\EventListener;
+namespace App\Tests\Application\EventSubscriber;
 
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Application\EventListener\SystemEvent;
+namespace App\Tests\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\EventSubscriber\SystemEvent\UserSystemEventSubscriber;
+use App\Domain\SystemEvent\EventSubscriber\UserSystemEventSubscriber;
 
 class UserSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {

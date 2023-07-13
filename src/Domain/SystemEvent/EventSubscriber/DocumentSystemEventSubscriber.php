@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventSubscriber\SystemEvent;
+namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\Constant\WorkUserTypeConstant;

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Application\EventListener\EmailNotification;
+namespace App\Tests\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\EmailNotification\TaskEmailNotificationSubscriber;
 

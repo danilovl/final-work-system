@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Application\EventListener\SystemEvent;
+namespace App\Tests\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\EventSubscriber\SystemEvent\VersionSystemEventSubscriber;
 use App\Application\Service\EntityManagerService;
+use App\Domain\SystemEvent\EventSubscriber\VersionSystemEventSubscriber;
 use App\Domain\Work\Service\WorkService;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

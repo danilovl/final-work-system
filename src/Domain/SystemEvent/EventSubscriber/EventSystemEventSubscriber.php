@@ -10,14 +10,13 @@
  *
  */
 
-namespace App\Application\EventSubscriber\SystemEvent;
+namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Domain\Event\EventDispatcher\GenericEvent\{
-    EventGenericEvent,
-    EventCommentGenericEvent
-};
+    EventCommentGenericEvent,
+    EventGenericEvent};
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Entity\SystemEventType;

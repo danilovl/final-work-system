@@ -10,18 +10,21 @@
  *
  */
 
-namespace App\Tests\Application\EventListener\EmailNotification;
+namespace App\Tests\Application\EventSubscriber\EmailNotification;
 
+use App\Application\EventSubscriber\EmailNotification\VersionEmailNotificationSubscriber;
 use App\Application\Service\TranslatorService;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Domain\User\Facade\UserFacade;
-use App\Tests\Application\EventListener\BaseEventSubscriber;
+use App\Domain\Work\Service\WorkService;
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class BaseEmailNotificationSubscriber extends BaseEventSubscriber
+class VersionEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
 {
+    protected string $classSubscriber = VersionEmailNotificationSubscriber::class;
+
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -32,6 +35,7 @@ class BaseEmailNotificationSubscriber extends BaseEventSubscriber
             $kernel->getContainer()->get(TranslatorService::class),
             $kernel->getContainer()->get(EmailNotificationQueueFactory::class),
             $kernel->getContainer()->get(ParameterService::class),
+            $kernel->getContainer()->get(WorkService::class),
             $kernel->getContainer()->get(MessageBusInterface::class)
         );
     }
