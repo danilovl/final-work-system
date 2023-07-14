@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\SystemEventType\Constant;
 
 enum SystemEventTypeConstant: int
 {

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Service;
 
-use App\Application\Constant\TaskStatusConstant;
+use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 

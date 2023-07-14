@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\ConversationType\Constant;
 
-enum MediaConstant: string
+enum ConversationTypeConstant: int
 {
-    case WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
-    case SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../../public';
+    case WORK = 1;
+    case GROUP = 2;
 }

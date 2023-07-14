@@ -12,12 +12,12 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

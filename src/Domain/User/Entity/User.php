@@ -12,45 +12,41 @@
 
 namespace App\Domain\User\Entity;
 
+use App\Application\Constant\{
+    GenderConstant};
+use App\Application\Traits\Entity\TimestampAbleTrait;
+use App\Domain\Comment\Entity\Comment;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
-use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\WorkCategory\Entity\WorkCategory;
-use App\Application\Constant\{
-    GenderConstant,
-    UserRoleConstant,
-    TranslationConstant
-};
-use App\Application\Traits\Entity\TimestampAbleTrait;
-use App\Domain\Comment\Entity\Comment;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventParticipant\Entity\EventParticipant;
+use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\Task\Entity\Task;
+use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Repository\UserRepository;
 use App\Domain\UserGroup\Entity\Group;
 use App\Domain\Work\Entity\Work;
+use App\Domain\WorkCategory\Entity\WorkCategory;
 use DateTime;
 use Doctrine\Common\Collections\{
     ArrayCollection,
     Collection,
-    Criteria
-};
+    Criteria};
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\{
     LegacyPasswordAuthenticatedUserInterface,
     PasswordAuthenticatedUserInterface,
-    UserInterface
-};
+    UserInterface};
 
 #[ORM\Table(name: 'user')]
 #[UniqueEntity(fields: ['email'])]

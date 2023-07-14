@@ -12,16 +12,16 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Constant\SystemEventTypeConstant;
-use App\Application\Constant\WorkUserTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Application\Service\EntityManagerService;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface

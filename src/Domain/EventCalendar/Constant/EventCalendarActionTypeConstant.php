@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\EventCalendar\Constant;
 
-enum EventTypeConstant: int
+enum EventCalendarActionTypeConstant: string
 {
-    case CONSULTATION = 1;
-    case PERSONAL = 2;
+    case MANAGE = 'manage';
+    case RESERVATION = 'reservation';
 }

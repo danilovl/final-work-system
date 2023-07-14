@@ -10,10 +10,13 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\WorkStatus\Constant;
 
-enum ConversationMessageStatusTypeConstant: int
+enum WorkStatusConstant: int
 {
-    case READ = 1;
-    case UNREAD = 2;
+    case ACTIVE = 1;
+    case ARCHIVE = 2;
+    case AUXILIARY = 3;
+    case PRELIMINARY = 4;
+    case UNCLASSIFIED = 5;
 }

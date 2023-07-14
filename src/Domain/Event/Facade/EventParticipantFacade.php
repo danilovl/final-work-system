@@ -12,16 +12,15 @@
 
 namespace App\Domain\Event\Facade;
 
-use App\Domain\Work\Entity\Work;
-use App\Application\Constant\{
-    WorkStatusConstant,
-    WorkUserTypeConstant
-};
 use App\Application\Service\EntityManagerService;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Constant\{
+    WorkUserTypeConstant};
+use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 
 readonly class EventParticipantFacade

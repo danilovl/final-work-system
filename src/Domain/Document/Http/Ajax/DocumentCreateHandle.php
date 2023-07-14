@@ -13,25 +13,22 @@
 namespace App\Domain\Document\Http\Ajax;
 
 use App\Application\Constant\{
-    MediaTypeConstant,
     AjaxJsonTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant};
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\{
-    UserService
-};
+    UserService};
 use App\Application\Service\EntityManagerService;
 use App\Application\Service\RequestService;
 use App\Domain\Document\EventDispatcher\DocumentEventDispatcherService;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\MediaModel;
+use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request
-};
+    Request};
 
 readonly class DocumentCreateHandle
 {

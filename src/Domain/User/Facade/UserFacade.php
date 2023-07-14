@@ -12,11 +12,11 @@
 
 namespace App\Domain\User\Facade;
 
-use App\Application\Constant\WorkUserTypeConstant;
 use App\Application\Helper\UserRoleHelper;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepository;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;

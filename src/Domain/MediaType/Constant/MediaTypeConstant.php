@@ -10,10 +10,12 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\MediaType\Constant;
 
-enum ConversationTypeConstant: int
+enum MediaTypeConstant: int
 {
-    case WORK = 1;
-    case GROUP = 2;
+    case WORK_VERSION = 1;
+    case INFORMATION_MATERIAL = 2;
+    case USER_PROFILE_IMAGE = 3;
+    case ARTICLE = 4;
 }

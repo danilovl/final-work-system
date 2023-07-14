@@ -12,8 +12,8 @@
 
 namespace App\Domain\Work\Repository;
 
-use App\Application\Constant\WorkUserTypeConstant;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Entity\WorkStatus;

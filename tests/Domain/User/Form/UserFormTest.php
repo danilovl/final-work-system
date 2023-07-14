@@ -12,7 +12,7 @@
 
 namespace App\Tests\Domain\User\Form;
 
-use App\Application\Constant\UserRoleConstant;
+use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Form\UserForm;
 use App\Domain\User\UserModel;
 use Generator;

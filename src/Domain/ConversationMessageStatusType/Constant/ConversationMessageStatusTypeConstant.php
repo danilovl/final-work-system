@@ -10,12 +10,10 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\ConversationMessageStatusType\Constant;
 
-enum WorkUserTypeConstant: string
+enum ConversationMessageStatusTypeConstant: int
 {
-    case SUPERVISOR = 'supervisor';
-    case AUTHOR = 'author';
-    case OPPONENT = 'opponent';
-    case CONSULTANT = 'consultant';
+    case READ = 1;
+    case UNREAD = 2;
 }

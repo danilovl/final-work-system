@@ -10,13 +10,10 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\EventType\Constant;
 
-enum WorkStatusConstant: int
+enum EventTypeConstant: int
 {
-    case ACTIVE = 1;
-    case ARCHIVE = 2;
-    case AUXILIARY = 3;
-    case PRELIMINARY = 4;
-    case UNCLASSIFIED = 5;
+    case CONSULTATION = 1;
+    case PERSONAL = 2;
 }

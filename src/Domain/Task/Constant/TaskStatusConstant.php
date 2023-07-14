@@ -10,12 +10,11 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\Task\Constant;
 
-enum MediaTypeConstant: int
+enum TaskStatusConstant: string
 {
-    case WORK_VERSION = 1;
-    case INFORMATION_MATERIAL = 2;
-    case USER_PROFILE_IMAGE = 3;
-    case ARTICLE = 4;
+    case ACTIVE = 'active';
+    case COMPLETE = 'complete';
+    case NOTIFY = 'notify';
 }

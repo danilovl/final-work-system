@@ -12,10 +12,10 @@
 
 namespace App\Application\Service;
 
-use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
 

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\Widget\Constant;
 
 enum WidgetConstant: string
 {

@@ -12,13 +12,13 @@
 
 namespace App\Domain\Conversation\Facade;
 
-use App\Application\Constant\ConversationMessageStatusTypeConstant;
 use App\Application\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Repository\ConversationMessageRepository;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
+use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use DateTime;

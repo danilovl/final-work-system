@@ -13,24 +13,21 @@
 namespace App\Domain\Document\Http;
 
 use App\Application\Constant\{
-    MediaTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant};
 use App\Application\Service\{
-    UserService,
+    EntityManagerService,
     PaginatorService,
     TwigRenderService,
-    EntityManagerService
-};
+    UserService};
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\DataTransferObject\MediaRepositoryData;
 use App\Domain\Media\Facade\MediaFacade;
+use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class DocumentListHandle
 {

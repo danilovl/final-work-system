@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkStatus\Repository;
 
-use App\Application\Constant\WorkUserTypeConstant;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

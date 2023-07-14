@@ -12,21 +12,19 @@
 
 namespace App\Domain\EventCalendar\Http;
 
-use App\Domain\Work\Entity\Work;
-use App\Application\Constant\{
-    WorkStatusConstant,
-    WorkUserTypeConstant
-};
 use App\Application\Helper\SortFunctionHelper;
 use App\Application\Service\{
-    UserService,
+    EntityManagerService,
     TwigRenderService,
-    EntityManagerService
-};
+    UserService};
 use App\Domain\Event\EventModel;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Constant\{
+    WorkUserTypeConstant};
+use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;

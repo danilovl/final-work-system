@@ -12,13 +12,12 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Application\Constant\WorkUserTypeConstant;
 use App\Application\Helper\{
-    WorkRoleHelper,
-    UserRoleHelper
-};
+    UserRoleHelper,
+    WorkRoleHelper};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkService;
 use App\Domain\WorkStatus\Entity\WorkStatus;

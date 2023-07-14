@@ -12,20 +12,18 @@
 
 namespace App\Domain\User\Service;
 
-use App\Application\Constant\{
-    WorkStatusConstant,
-    WorkUserTypeConstant
-};
 use App\Application\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Constant\{
+    WorkUserTypeConstant};
 use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
 use Doctrine\Common\Collections\{
     ArrayCollection,
     Collection,
-    Criteria
-};
+    Criteria};
 
 class UserWorkService
 {

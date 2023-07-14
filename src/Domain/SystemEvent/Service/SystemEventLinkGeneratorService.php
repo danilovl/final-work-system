@@ -13,16 +13,14 @@
 namespace App\Domain\SystemEvent\Service;
 
 use App\Application\Constant\{
-    LocaleConstant,
-    SystemEventTypeConstant
-};
+    LocaleConstant};
 use App\Application\Exception\{
-    InvalidArgumentException,
-    ConstantNotFoundException
-};
+    ConstantNotFoundException,
+    InvalidArgumentException};
 use App\Domain\SystemEvent\Constant\SystemEventGeneratorFolderConstant;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;

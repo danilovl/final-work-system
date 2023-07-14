@@ -12,16 +12,14 @@
 
 namespace App\Domain\EventScheduleTemplate\Form\Constraint;
 
-use App\Application\Constant\{
-    EventTypeConstant
-};
 use App\Application\Constant\CompareConstant;
 use App\Application\Helper\CompareHelper;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
+use App\Domain\EventType\Constant\{
+    EventTypeConstant};
 use Symfony\Component\Validator\{
     Constraint,
-    ConstraintValidator
-};
+    ConstraintValidator};
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EventScheduleTemplateTimeValidator extends ConstraintValidator

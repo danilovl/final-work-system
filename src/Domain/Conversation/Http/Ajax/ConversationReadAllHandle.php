@@ -12,17 +12,15 @@
 
 namespace App\Domain\Conversation\Http\Ajax;
 
-use App\Application\Constant\{
-    ConversationMessageStatusTypeConstant
-};
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Service\{
-    RequestService
-};
+    RequestService};
 use App\Application\Service\EntityManagerService;
 use App\Application\Service\UserService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
+use App\Domain\ConversationMessageStatusType\Constant\{
+    ConversationMessageStatusTypeConstant};
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

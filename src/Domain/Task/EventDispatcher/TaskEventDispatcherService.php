@@ -12,9 +12,9 @@
 
 namespace App\Domain\Task\EventDispatcher;
 
-use App\Application\Constant\TaskStatusConstant;
 use App\Application\EventSubscriber\Events;
 use App\Application\Exception\RuntimeException;
+use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\MediaMimeType\Constant;
 
 enum MediaMimeTypeTypeConstant
 {

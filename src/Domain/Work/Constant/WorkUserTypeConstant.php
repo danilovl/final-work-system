@@ -10,11 +10,12 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\Work\Constant;
 
-enum TaskStatusConstant: string
+enum WorkUserTypeConstant: string
 {
-    case ACTIVE = 'active';
-    case COMPLETE = 'complete';
-    case NOTIFY = 'notify';
+    case SUPERVISOR = 'supervisor';
+    case AUTHOR = 'author';
+    case OPPONENT = 'opponent';
+    case CONSULTANT = 'consultant';
 }

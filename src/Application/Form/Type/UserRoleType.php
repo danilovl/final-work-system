@@ -12,7 +12,7 @@
 
 namespace App\Application\Form\Type;
 
-use App\Application\Constant\UserRoleConstant;
+use App\Domain\User\Constant\UserRoleConstant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

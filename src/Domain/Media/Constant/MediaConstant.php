@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Domain\Media\Constant;
 
-enum EventCalendarActionTypeConstant: string
+enum MediaConstant: string
 {
-    case MANAGE = 'manage';
-    case RESERVATION = 'reservation';
+    case WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
+    case SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../../public';
 }

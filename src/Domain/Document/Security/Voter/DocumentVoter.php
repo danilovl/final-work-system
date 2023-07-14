@@ -13,10 +13,9 @@
 namespace App\Domain\Document\Security\Voter;
 
 use App\Application\Constant\{
-    MediaTypeConstant,
-    VoterSupportConstant
-};
+    VoterSupportConstant};
 use App\Domain\Media\Entity\Media;
+use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\User\Entity\User;
 use LogicException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

@@ -2,11 +2,10 @@
 
 namespace App\Domain\User\Repository;
 
-use App\Application\Constant\{
-    UserRoleConstant
-};
-use App\Application\Constant\WorkUserTypeConstant;
+use App\Domain\User\Constant\{
+    UserRoleConstant};
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -15,8 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\{
     PasswordAuthenticatedUserInterface,
-    PasswordUpgraderInterface
-};
+    PasswordUpgraderInterface};
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)

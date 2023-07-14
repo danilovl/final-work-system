@@ -13,21 +13,18 @@
 namespace App\Domain\Work\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    WorkUserTypeConstant
-};
+    FlashTypeConstant};
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+    EntityManagerService,
+    RequestService};
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
-    Request
-};
+    Request};
 
 readonly class WorkDeleteHandle
 {

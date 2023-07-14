@@ -12,11 +12,11 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Application\Service\EntityManagerService;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;

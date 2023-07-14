@@ -13,26 +13,23 @@
 namespace App\Domain\Document\Http;
 
 use App\Application\Constant\{
-    MediaTypeConstant,
-    FlashTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant,
+    FlashTypeConstant};
 use App\Application\Service\{
-    UserService,
+    EntityManagerService,
     RequestService,
     TranslatorService,
-    EntityManagerService,
-    TwigRenderService
-};
+    TwigRenderService,
+    UserService};
 use App\Domain\Document\EventDispatcher\DocumentEventDispatcherService;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\MediaModel;
+use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class DocumentCreateHandle
 {

@@ -12,29 +12,26 @@
 
 namespace App\Domain\Media\Entity;
 
-use App\Domain\MediaCategory\Entity\MediaCategory;
-use App\Domain\SystemEvent\Entity\SystemEvent;
-use App\Domain\Work\Entity\Work;
 use App\Application\Constant\{
-    MediaConstant,
-    FileSizeConstant
-};
+    FileSizeConstant};
 use App\Application\Traits\Entity\{
-    IdTrait,
-    IsOwnerTrait,
     ActiveAbleTrait,
     CreateUpdateAbleTrait,
-    SimpleInformationTrait
-};
+    IdTrait,
+    IsOwnerTrait,
+    SimpleInformationTrait};
+use App\Domain\Media\Constant\MediaConstant;
 use App\Domain\Media\Repository\MediaRepository;
+use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\MediaType\Entity\MediaType;
+use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Entity\Work;
 use DateTime;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection
-};
+    Collection};
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;

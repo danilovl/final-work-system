@@ -12,15 +12,13 @@
 
 namespace App\Domain\Task\Http\Ajax;
 
-use App\Application\Constant\{
-    TaskStatusConstant
-};
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Service\{
-    RequestService
-};
+    RequestService};
 use App\Application\Service\EntityManagerService;
 use App\Application\Service\UserService;
+use App\Domain\Task\Constant\{
+    TaskStatusConstant};
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Facade\TaskFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;

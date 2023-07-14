@@ -12,8 +12,8 @@
 
 namespace App\Application\Helper;
 
-use App\Application\Constant\ConversationTypeConstant;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Collator;

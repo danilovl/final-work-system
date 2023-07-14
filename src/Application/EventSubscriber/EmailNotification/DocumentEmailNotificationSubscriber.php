@@ -12,7 +12,6 @@
 
 namespace App\Application\EventSubscriber\EmailNotification;
 
-use App\Application\Constant\WorkUserTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
@@ -20,6 +19,7 @@ use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserWorkService;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

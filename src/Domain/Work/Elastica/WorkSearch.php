@@ -13,11 +13,10 @@
 namespace App\Domain\Work\Elastica;
 
 use App\Application\Constant\{
-    DateFormatConstant,
-    WorkStatusConstant
-};
+    DateFormatConstant};
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use ArrayIterator;
 use Collator;
 use DateTimeInterface;

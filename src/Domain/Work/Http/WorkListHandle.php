@@ -12,13 +12,13 @@
 
 namespace App\Domain\Work\Http;
 
-use App\Application\Constant\WorkUserTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Helper\WorkFunctionHelper;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService,
     UserService};
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Elastica\WorkSearch;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;

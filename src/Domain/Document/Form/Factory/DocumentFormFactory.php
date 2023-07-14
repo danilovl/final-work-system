@@ -12,29 +12,25 @@
 
 namespace App\Domain\Document\Form\Factory;
 
-use App\Application\Constant\{
-    MediaTypeConstant
-};
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\{
-    RuntimeException
-};
+    RuntimeException};
 use App\Application\Exception\ConstantNotFoundException;
 use App\Domain\Document\Form\{
-    DocumentForm
-};
+    DocumentForm};
 use App\Domain\Document\Form\DocumentSearchForm;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\MediaModel;
 use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
+use App\Domain\MediaType\Constant\{
+    MediaTypeConstant};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

@@ -12,10 +12,10 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Constant\SystemEventTypeConstant;
 use App\Application\EventSubscriber\Events;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
+use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
