@@ -10,11 +10,10 @@
  *
  */
 
-namespace App\Application\Helper;
+namespace App\Domain\User\Helper;
 
 use App\Domain\User\Constant\UserRoleConstant;
-use App\Domain\Work\Constant\{
-    WorkUserTypeConstant};
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 
 class UserHelper
 {

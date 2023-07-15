@@ -13,9 +13,9 @@
 namespace App\Application\Cache;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\Helper\SystemEventHelper;
 use App\Application\Service\PaginatorService;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
+use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;

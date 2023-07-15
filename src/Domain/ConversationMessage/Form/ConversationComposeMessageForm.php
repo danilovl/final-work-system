@@ -13,11 +13,11 @@
 namespace App\Domain\ConversationMessage\Form;
 
 use App\Application\Constant\DateFormatConstant;
-use App\Application\Helper\UserRoleHelper;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\ConversationComposeMessageModel;
 use App\Domain\ConversationMessage\Form\Constraint\ConversationMessageName;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Helper\UserRoleHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,

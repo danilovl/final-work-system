@@ -12,27 +12,27 @@
 
 namespace App\Domain\User\Http;
 
-use App\Application\Helper\UserHelper;
 use App\Application\Service\{
-    PaginatorService,
+    UserService,
     SeoPageService,
+    PaginatorService,
     TranslatorService,
-    TwigRenderService,
-    UserService};
-use App\Domain\User\Facade\{
-    UserFacade};
+    TwigRenderService
+};
+use App\Domain\User\Facade\UserFacade;
+use App\Domain\User\Helper\UserHelper;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Form\WorkSearchStatusForm;
-use App\Domain\WorkStatus\DataTransferObject\{
-    WorkStatusRepositoryData};
+use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class UserListHandle
 {

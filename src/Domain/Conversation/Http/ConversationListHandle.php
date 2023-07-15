@@ -13,7 +13,6 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Form\SimpleSearchForm;
-use App\Application\Helper\ConversationHelper;
 use App\Application\Model\SearchModel;
 use App\Application\Service\{
     PaginatorService,
@@ -25,6 +24,7 @@ use App\Domain\Conversation\Facade\{
     ConversationFacade,
     ConversationMessageFacade
 };
+use App\Domain\Conversation\Helper\ConversationHelper;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

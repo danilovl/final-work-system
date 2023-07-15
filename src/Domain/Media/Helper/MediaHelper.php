@@ -10,8 +10,9 @@
  *
  */
 
-namespace App\Application\Helper;
+namespace App\Domain\Media\Helper;
 
+use App\Application\Helper\HashHelper;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 
 class MediaHelper

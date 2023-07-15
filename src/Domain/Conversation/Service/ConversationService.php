@@ -12,11 +12,9 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Application\Helper\{
-    FunctionHelper,
-    ConversationHelper
-};
+use App\Application\Helper\FunctionHelper;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Helper;
+namespace App\Domain\Work\Helper;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;

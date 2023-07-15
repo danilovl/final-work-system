@@ -12,7 +12,7 @@
 
 namespace App\Tests\Application\Helper;
 
-use App\Application\Helper\MediaHelper;
+use App\Domain\Media\Helper\MediaHelper;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use PHPUnit\Framework\TestCase;
 

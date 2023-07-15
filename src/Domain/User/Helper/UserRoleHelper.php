@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Helper;
+namespace App\Domain\User\Helper;
 
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;

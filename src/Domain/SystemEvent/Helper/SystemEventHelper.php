@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Helper;
+namespace App\Domain\SystemEvent\Helper;
 
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 

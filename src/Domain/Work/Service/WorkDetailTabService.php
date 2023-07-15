@@ -18,16 +18,14 @@ use App\Application\Service\{
     PaginatorService,
     EntityManagerService
 };
-use App\Application\Helper\{
-    WorkRoleHelper,
-    ConversationHelper
-};
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Helper\WorkRoleHelper;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\ORM\Query;
 use Knp\Component\Pager\Pagination\PaginationInterface;

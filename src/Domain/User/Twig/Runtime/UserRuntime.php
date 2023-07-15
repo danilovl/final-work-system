@@ -12,9 +12,9 @@
 
 namespace App\Domain\User\Twig\Runtime;
 
-use App\Application\Helper\UserRoleHelper;
 use App\Application\Service\UserService;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Helper\UserRoleHelper;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Twig\Environment;

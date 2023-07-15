@@ -12,21 +12,19 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Helper\{
-    UserRoleHelper
-};
-use App\Application\Helper\ConversationHelper;
 use App\Application\Service\{
+    UserService,
+    RequestService,
     TwigRenderService
 };
-use App\Application\Service\RequestService;
-use App\Application\Service\UserService;
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Facade\{
+    ConversationFacade,
     ConversationMessageFacade
 };
-use App\Domain\Conversation\Facade\ConversationFacade;
 use App\Domain\ConversationMessage\ConversationComposeMessageModel;
 use App\Domain\ConversationMessage\Form\ConversationComposeMessageForm;
+use App\Domain\User\Helper\UserRoleHelper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,

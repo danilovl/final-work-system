@@ -12,15 +12,16 @@
 
 namespace App\Domain\Conversation\Facade;
 
-use App\Application\Helper\ConversationHelper;
 use App\Application\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcherService;
 use App\Domain\Conversation\Factory\ConversationFactory;
+use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Repository\ConversationRepository;
 use App\Domain\Conversation\Service\{
-    ConversationVariationService};
-use App\Domain\Conversation\Service\ConversationStatusService;
+    ConversationStatusService,
+    ConversationVariationService
+};
 use App\Domain\ConversationMessage\ConversationComposeMessageModel;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
@@ -28,8 +29,7 @@ use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use App\Domain\WorkStatus\Constant\{
-    WorkStatusConstant};
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;

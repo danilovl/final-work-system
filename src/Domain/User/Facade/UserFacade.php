@@ -12,8 +12,8 @@
 
 namespace App\Domain\User\Facade;
 
-use App\Application\Helper\UserRoleHelper;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Repository\UserRepository;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;

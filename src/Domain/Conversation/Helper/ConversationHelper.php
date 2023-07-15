@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Helper;
+namespace App\Domain\Conversation\Helper;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
