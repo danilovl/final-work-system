@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Http\Api;
 
 use App\Application\Constant\TabTypeConstant;
-use App\Application\Service\UserService;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkDetailTabService;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;

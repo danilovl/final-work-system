@@ -14,15 +14,15 @@ namespace App\Domain\EventSchedule\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
-    UserService,
-    SeoPageService,
     RequestService,
+    SeoPageService,
     TwigRenderService
 };
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\EventScheduleModel;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleForm;
+use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

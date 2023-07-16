@@ -16,8 +16,7 @@ use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
 use App\Application\Service\{
     PaginatorService,
-    TwigRenderService,
-    UserService
+    TwigRenderService
 };
 use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Facade\{
@@ -25,6 +24,7 @@ use App\Domain\Conversation\Facade\{
     ConversationMessageFacade
 };
 use App\Domain\Conversation\Helper\ConversationHelper;
+use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

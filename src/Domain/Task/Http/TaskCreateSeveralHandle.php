@@ -13,11 +13,10 @@
 namespace App\Domain\Task\Http;
 
 use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
+    FlashTypeConstant,
+    ControllerMethodConstant
 };
 use App\Application\Service\{
-    UserService,
     RequestService,
     TranslatorService,
     TwigRenderService
@@ -28,6 +27,7 @@ use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
 use App\Domain\Task\TaskModel;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

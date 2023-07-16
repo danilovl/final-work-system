@@ -13,10 +13,8 @@
 namespace App\Application\Controller\Api;
 
 use App\Application\Helper\HashHelper;
-use App\Application\Service\{
-    UserService,
-    EntityManagerService
-};
+use App\Application\Service\EntityManagerService;
+use App\Domain\User\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

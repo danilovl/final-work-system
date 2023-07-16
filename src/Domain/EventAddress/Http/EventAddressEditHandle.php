@@ -14,7 +14,6 @@ namespace App\Domain\EventAddress\Http;
 
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Service\{
-    UserService,
     RequestService,
     TranslatorService,
     TwigRenderService
@@ -24,6 +23,7 @@ use App\Domain\EventAddress\EventAddressModel;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Domain\EventAddress\Factory\EventAddressFactory;
 use App\Domain\EventAddress\Form\Factory\EventAddressFormFactory;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

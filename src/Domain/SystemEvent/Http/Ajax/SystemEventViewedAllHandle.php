@@ -17,14 +17,12 @@ use App\Application\Constant\{
     AjaxJsonTypeConstant
 };
 use App\Application\EventDispatcher\CacheEventDispatcherService;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
     SystemEventRecipientFacade
 };
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class SystemEventViewedAllHandle

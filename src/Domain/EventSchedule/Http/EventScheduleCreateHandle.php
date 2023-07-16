@@ -14,13 +14,13 @@ namespace App\Domain\EventSchedule\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
-    UserService,
     RequestService,
     TwigRenderService
 };
 use App\Domain\EventSchedule\EventScheduleModel;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleForm;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,

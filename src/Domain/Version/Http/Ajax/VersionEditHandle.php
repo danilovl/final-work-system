@@ -14,20 +14,18 @@ namespace App\Domain\Version\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
+use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\MediaModel;
+use App\Domain\User\Service\UserService;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\VersionForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class VersionEditHandle

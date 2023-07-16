@@ -14,26 +14,28 @@ namespace App\Application\Security\Authenticator;
 
 use App\Application\Model\Security\ApiKeyCredentialModel;
 use App\Application\Security\Authenticator\Credential\CustomApiKeyCredentials;
-use App\Application\Service\{
-    EntityManagerService,
-    UserService};
+use App\Application\Service\EntityManagerService;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request,
-    Response};
+    Response
+};
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
-    CustomUserMessageAuthenticationException};
+    CustomUserMessageAuthenticationException
+};
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\{
     Passport,
-    SelfValidatingPassport};
+    SelfValidatingPassport
+};
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 

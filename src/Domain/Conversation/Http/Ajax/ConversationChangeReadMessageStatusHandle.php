@@ -13,12 +13,10 @@
 namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class ConversationChangeReadMessageStatusHandle

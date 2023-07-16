@@ -12,16 +12,16 @@
 
 namespace App\Application\EventListener;
 
-use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
 use App\Application\Service\{
-    UserService,
     SeoPageService,
     EntityManagerService
 };
+use App\Domain\User\Service\UserService;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use DateTime;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class RequestListener implements EventSubscriberInterface
 {

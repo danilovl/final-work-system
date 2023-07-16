@@ -13,10 +13,10 @@
 namespace App\Domain\EventAddress\Http;
 
 use App\Application\Service\{
-    UserService,
-    TwigRenderService,
-    PaginatorService
+    PaginatorService,
+    TwigRenderService
 };
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

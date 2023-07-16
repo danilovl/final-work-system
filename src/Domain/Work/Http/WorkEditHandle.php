@@ -17,11 +17,11 @@ use App\Application\Constant\{
     ControllerMethodConstant
 };
 use App\Application\Service\{
-    UserService,
     RequestService,
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Domain\Work\Factory\WorkFactory;

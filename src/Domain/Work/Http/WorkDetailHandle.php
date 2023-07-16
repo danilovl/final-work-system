@@ -15,11 +15,11 @@ namespace App\Domain\Work\Http;
 use App\Application\Constant\TabTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
-    UserService,
     SeoPageService,
     TwigRenderService
 };
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkDetailTabService;
 use Symfony\Component\HttpFoundation\{

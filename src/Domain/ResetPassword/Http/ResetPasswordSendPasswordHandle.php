@@ -13,11 +13,11 @@
 namespace App\Domain\ResetPassword\Http;
 
 use App\Application\Service\{
-    UserService,
     PaginatorService,
     TwigRenderService
 };
 use App\Domain\Task\Facade\TaskFacade;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

@@ -14,18 +14,16 @@ namespace App\Domain\SystemEvent\Http\Api;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\InvalidArgumentException;
+use App\Application\Service\PaginatorService;
 use App\Domain\SystemEvent\Constant\SystemEventStatusConstant;
 use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Service\SystemEventLinkGeneratorService;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
-use App\Application\Service\{
-    PaginatorService,
-    UserService
-};
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class SystemEventTypeEventsHandle

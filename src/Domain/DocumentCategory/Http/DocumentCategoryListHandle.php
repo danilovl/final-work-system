@@ -13,11 +13,11 @@
 namespace App\Domain\DocumentCategory\Http;
 
 use App\Application\Service\{
-    UserService,
     PaginatorService,
     TwigRenderService
 };
 use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
+use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,

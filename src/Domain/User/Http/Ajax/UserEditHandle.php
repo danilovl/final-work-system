@@ -14,19 +14,17 @@ namespace App\Domain\User\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\UserEventDispatcherService;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\UserEditForm;
+use App\Domain\User\Service\UserService;
 use App\Domain\User\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class UserEditHandle

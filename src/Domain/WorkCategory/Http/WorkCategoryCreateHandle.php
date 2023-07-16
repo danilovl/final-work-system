@@ -13,15 +13,15 @@
 namespace App\Domain\WorkCategory\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
+    ControllerMethodConstant,
+    FlashTypeConstant
 };
 use App\Application\Service\{
-    UserService,
     RequestService,
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\User\Service\UserService;
 use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
 use App\Domain\WorkCategory\Form\Factory\WorkCategoryFormFactory;
 use App\Domain\WorkCategory\WorkCategoryModel;

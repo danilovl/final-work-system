@@ -13,10 +13,10 @@
 namespace App\Application\Widget;
 
 use App\Application\Menu\MenuItem;
-use App\Application\Service\UserService;
 use App\Domain\User\Entity\User;
-use Symfony\Component\Routing\RouterInterface;
+use App\Domain\User\Service\UserService;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 

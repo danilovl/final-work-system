@@ -12,16 +12,15 @@
 
 namespace App\Application\Security\Authenticator;
 
-use App\Application\Service\{
-    UserService,
-    EntityManagerService
-};
+use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
+use App\Domain\User\Service\UserService;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\{
-    RedirectResponse,
     Request,
-    Response
+    Response,
+    RedirectResponse
 };
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,11 +29,10 @@ use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
     CustomUserMessageAuthenticationException
 };
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\{
-    CsrfTokenBadge,
-    UserBadge
+    UserBadge,
+    CsrfTokenBadge
 };
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;

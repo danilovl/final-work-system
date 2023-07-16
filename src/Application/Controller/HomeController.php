@@ -13,15 +13,15 @@
 namespace App\Application\Controller;
 
 use App\Application\Cache\HomepageCache;
-use App\Application\Service\UserService;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
+use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {

@@ -17,9 +17,8 @@ use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
 use App\Application\Service\{
-    UserService,
-    SeoPageService,
     RequestService,
+    SeoPageService,
     PaginatorService,
     TwigRenderService,
 };
@@ -35,6 +34,7 @@ use App\Domain\ConversationMessage\Factory\ConversationMessageFactory;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
+use App\Domain\User\Service\UserService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

@@ -13,12 +13,11 @@
 namespace App\Domain\User\Http;
 
 use App\Application\Constant\{
+    SeoPageConstant,
     FlashTypeConstant,
-    ControllerMethodConstant,
-    SeoPageConstant
+    ControllerMethodConstant
 };
 use App\Application\Service\{
-    UserService,
     RequestService,
     SeoPageService,
     TranslatorService,
@@ -28,6 +27,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\UserEventDispatcherService;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\Factory\UserFormFactory;
+use App\Domain\User\Service\UserService;
 use App\Domain\User\UserModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{

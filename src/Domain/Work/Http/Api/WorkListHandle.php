@@ -12,16 +12,16 @@
 
 namespace App\Domain\Work\Http\Api;
 
-use App\Application\Service\{
-    PaginatorService,
-    UserService};
+use App\Application\Service\PaginatorService;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request};
+    Request,
+    JsonResponse
+};
 
 readonly class WorkListHandle
 {

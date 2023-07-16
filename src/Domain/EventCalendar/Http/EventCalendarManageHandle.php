@@ -14,15 +14,15 @@ namespace App\Domain\EventCalendar\Http;
 
 use App\Application\Helper\SortFunctionHelper;
 use App\Application\Service\{
-    EntityManagerService,
     TwigRenderService,
-    UserService};
+    EntityManagerService
+};
 use App\Domain\Event\EventModel;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
+use App\Domain\User\Service\UserService;
 use App\Domain\User\Service\UserWorkService;
-use App\Domain\Work\Constant\{
-    WorkUserTypeConstant};
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;

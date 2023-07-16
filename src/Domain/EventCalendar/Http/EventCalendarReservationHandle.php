@@ -13,14 +13,16 @@
 namespace App\Domain\EventCalendar\Http;
 
 use App\Application\Service\{
-    EntityManagerService,
     TwigRenderService,
-    UserService};
+    EntityManagerService
+};
 use App\Domain\EventCalendar\Form\EventWorkReservationForm;
 use App\Domain\EventWorkReservation\EventWorkReservationModel;
-use App\Domain\User\Service\UserWorkService;
-use App\Domain\Work\Constant\{
-    WorkUserTypeConstant};
+use App\Domain\User\Service\{
+    UserService,
+    UserWorkService
+};
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\Form\FormFactoryInterface;

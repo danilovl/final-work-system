@@ -12,12 +12,10 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
-use App\Application\Service\{
-    UserService,
-    PaginatorService
-};
+use App\Application\Service\PaginatorService;
 use App\Domain\Task\Facade\TaskFacade;
+use App\Domain\User\Service\UserService;
+use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse

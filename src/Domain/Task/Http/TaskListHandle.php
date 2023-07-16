@@ -14,14 +14,14 @@ namespace App\Domain\Task\Http;
 
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
-use App\Domain\Task\Elastica\TaskSearch;
-use Symfony\Component\Form\FormFactoryInterface;
 use App\Application\Service\{
-    UserService,
     PaginatorService,
     TwigRenderService
 };
+use App\Domain\Task\Elastica\TaskSearch;
 use App\Domain\Task\Facade\TaskFacade;
+use App\Domain\User\Service\UserService;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

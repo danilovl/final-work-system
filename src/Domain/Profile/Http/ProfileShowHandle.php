@@ -12,10 +12,8 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Service\{
-    UserService,
-    TwigRenderService
-};
+use App\Application\Service\TwigRenderService;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\Response;
 
 readonly class ProfileShowHandle

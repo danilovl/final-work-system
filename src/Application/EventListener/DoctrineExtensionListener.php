@@ -12,7 +12,7 @@
 
 namespace App\Application\EventListener;
 
-use App\Application\Service\UserService;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 

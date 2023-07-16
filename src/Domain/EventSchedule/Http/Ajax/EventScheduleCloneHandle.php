@@ -14,18 +14,16 @@ namespace App\Domain\EventSchedule\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\EventScheduleCloneModel;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleCloneForm;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class EventScheduleCloneHandle

@@ -13,11 +13,10 @@
 namespace App\Domain\DocumentCategory\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
+    ControllerMethodConstant,
+    FlashTypeConstant
 };
 use App\Application\Service\{
-    UserService,
     RequestService,
     TranslatorService,
     TwigRenderService
@@ -25,6 +24,7 @@ use App\Application\Service\{
 use App\Domain\DocumentCategory\Form\Factory\DocumentCategoryFormFactory;
 use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
 use App\Domain\MediaCategory\MediaCategoryModel;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

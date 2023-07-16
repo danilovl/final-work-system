@@ -14,10 +14,10 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
-    UserService,
     PaginatorService,
     TwigRenderService
 };
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Elastica\WorkSearch;
 use App\Domain\Work\Entity\Work;

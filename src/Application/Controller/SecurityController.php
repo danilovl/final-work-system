@@ -12,7 +12,7 @@
 
 namespace App\Application\Controller;
 
-use App\Application\Service\UserService;
+use App\Domain\User\Service\UserService;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

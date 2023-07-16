@@ -12,11 +12,11 @@
 
 namespace App\Application\Widget;
 
-use App\Application\Service\UserService;
-use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Facade\{
-    SystemEventFacade
+    SystemEventFacade,
+    SystemEventRecipientFacade
 };
+use App\Domain\User\Service\UserService;
 use Twig\Environment;
 
 class UnreadSystemEventWidget extends BaseWidget

@@ -14,10 +14,8 @@ namespace App\Domain\Work\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Domain\Work\Factory\WorkFactory;
@@ -25,8 +23,8 @@ use App\Domain\Work\Form\WorkForm;
 use App\Domain\Work\WorkModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class WorkEditHandle

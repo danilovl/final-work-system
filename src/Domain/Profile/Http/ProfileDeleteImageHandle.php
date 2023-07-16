@@ -14,10 +14,10 @@ namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
-    UserService,
     RequestService,
     EntityManagerService
 };
+use App\Domain\User\Service\UserService;
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

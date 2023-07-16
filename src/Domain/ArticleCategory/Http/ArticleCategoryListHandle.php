@@ -13,11 +13,11 @@
 namespace App\Domain\ArticleCategory\Http;
 
 use App\Application\Service\{
-    TwigRenderService,
-    UserService,
-    PaginatorService
+    PaginatorService,
+    TwigRenderService
 };
 use App\Domain\Article\Facade\ArticleCategoryFacade;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

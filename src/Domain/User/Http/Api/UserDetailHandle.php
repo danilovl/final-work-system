@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Http\Api;
 
-use App\Application\Service\UserService;
+use App\Domain\User\Service\UserService;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

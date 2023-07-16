@@ -14,7 +14,6 @@ namespace App\Domain\Event\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
-    UserService,
     RequestService,
     SeoPageService,
     TwigRenderService,
@@ -27,6 +26,7 @@ use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
+use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

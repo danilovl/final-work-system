@@ -14,14 +14,14 @@ namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Service\{
-    RequestService};
-use App\Application\Service\EntityManagerService;
-use App\Application\Service\UserService;
+    RequestService,
+    EntityManagerService
+};
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
-use App\Domain\ConversationMessageStatusType\Constant\{
-    ConversationMessageStatusTypeConstant};
+use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class ConversationReadAllHandle

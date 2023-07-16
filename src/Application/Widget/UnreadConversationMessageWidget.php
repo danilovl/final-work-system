@@ -12,8 +12,8 @@
 
 namespace App\Application\Widget;
 
-use App\Application\Service\UserService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\User\Service\UserService;
 use Twig\Environment;
 
 class UnreadConversationMessageWidget extends BaseWidget

@@ -13,20 +13,18 @@
 namespace App\Domain\Event\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    UserService
-};
+use App\Application\Service\RequestService;
 use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\{
-    EventCalendarFacade,
-    EventFacade
+    EventFacade,
+    EventCalendarFacade
 };
+use App\Domain\User\Service\UserService;
 use DateTime;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class EventGetEventHandle

@@ -15,25 +15,28 @@ namespace App\Domain\Version\Http;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant,
-    SeoPageConstant};
+    SeoPageConstant
+};
 use App\Application\Service\{
     EntityManagerService,
     RequestService,
     SeoPageService,
     TranslatorService,
-    TwigRenderService,
-    UserService};
+    TwigRenderService
+};
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
+use App\Domain\User\Service\UserService;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\Factory\VersionFormFactory;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class VersionCreateHandle
 {

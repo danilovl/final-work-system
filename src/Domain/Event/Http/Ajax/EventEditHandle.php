@@ -15,7 +15,6 @@ namespace App\Domain\Event\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\{
-    UserService,
     RequestService,
     EntityManagerService
 };
@@ -26,10 +25,11 @@ use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
 readonly class EventEditHandle

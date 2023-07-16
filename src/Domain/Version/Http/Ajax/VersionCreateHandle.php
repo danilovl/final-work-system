@@ -12,25 +12,26 @@
 
 namespace App\Domain\Version\Http\Ajax;
 
-use App\Application\Constant\{
-    AjaxJsonTypeConstant};
+use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\{
-    EntityManagerService,
     RequestService,
-    UserService};
+    EntityManagerService
+};
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
+use App\Domain\User\Service\UserService;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\VersionForm;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request};
+    Request,
+    JsonResponse
+};
 
 readonly class VersionCreateHandle
 {

@@ -13,11 +13,9 @@
 namespace App\Domain\EventCalendar\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    UserService,
-    RequestService
-};
+use App\Application\Service\RequestService;
 use App\Domain\Event\Facade\EventCalendarFacade;
+use App\Domain\User\Service\UserService;
 use DateTime;
 use Symfony\Component\HttpFoundation\{
     Request,

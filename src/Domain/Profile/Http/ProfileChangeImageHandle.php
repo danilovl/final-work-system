@@ -12,24 +12,25 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Constant\{
-    FlashTypeConstant};
+use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\RuntimeException;
 use App\Application\Service\{
-    EntityManagerService,
     RequestService,
     TwigRenderService,
-    UserService};
+    EntityManagerService
+};
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\Media\MediaModel;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\Profile\Form\ProfileMediaForm;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class ProfileChangeImageHandle
 {

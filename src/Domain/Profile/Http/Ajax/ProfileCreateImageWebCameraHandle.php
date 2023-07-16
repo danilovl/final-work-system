@@ -12,22 +12,23 @@
 
 namespace App\Domain\Profile\Http\Ajax;
 
-use App\Application\Constant\{
-    AjaxJsonTypeConstant};
+use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FileHelper;
 use App\Application\Service\{
-    EntityManagerService,
     RequestService,
     ResizeImageService,
-    UserService};
+    EntityManagerService
+};
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\MediaMimeType\Constant\MediaMimeTypeTypeConstant;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
+use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request};
+    Request,
+    JsonResponse
+};
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 readonly class ProfileCreateImageWebCameraHandle

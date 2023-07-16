@@ -12,11 +12,9 @@
 
 namespace App\Application\Widget;
 
-use App\Application\Service\{
-    UserService,
-    TranslatorService
-};
+use App\Application\Service\TranslatorService;
 use App\Domain\User\Helper\UserRoleHelper;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;

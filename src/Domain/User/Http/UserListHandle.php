@@ -13,14 +13,13 @@
 namespace App\Domain\User\Http;
 
 use App\Application\Service\{
-    UserService,
     SeoPageService,
-    PaginatorService,
     TranslatorService,
     TwigRenderService
 };
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Helper\UserHelper;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Facade\WorkFacade;

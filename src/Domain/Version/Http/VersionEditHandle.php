@@ -13,12 +13,11 @@
 namespace App\Domain\Version\Http;
 
 use App\Application\Constant\{
-    SeoPageConstant,
     ControllerMethodConstant,
-    FlashTypeConstant
+    FlashTypeConstant,
+    SeoPageConstant
 };
 use App\Application\Service\{
-    UserService,
     RequestService,
     SeoPageService,
     TranslatorService,
@@ -27,6 +26,7 @@ use App\Application\Service\{
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\MediaModel;
+use App\Domain\User\Service\UserService;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\Factory\VersionFormFactory;
 use App\Domain\Work\Entity\Work;

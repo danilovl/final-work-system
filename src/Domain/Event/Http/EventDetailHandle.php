@@ -15,7 +15,6 @@ namespace App\Domain\Event\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
-    UserService,
     RequestService,
     SeoPageService,
     TwigRenderService
@@ -27,6 +26,7 @@ use App\Domain\Comment\Form\CommentForm;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
+use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,

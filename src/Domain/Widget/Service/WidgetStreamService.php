@@ -12,7 +12,7 @@
 
 namespace App\Domain\Widget\Service;
 
-use App\Application\Service\UserService;
+use App\Domain\User\Service\UserService;
 use App\Application\Widget\{
     UnreadSystemEventWidget,
     UnreadConversationMessageWidget
