@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\UserGroup;
+namespace App\Domain\UserGroup\Model;
 
 use App\Domain\UserGroup\Entity\Group;
 
