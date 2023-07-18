@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Work;
+namespace App\Domain\Work\Model;
 
 use App\Application\Traits\Model\TitleAwareTrait;
 use App\Domain\User\Entity\User;
@@ -20,8 +20,7 @@ use App\Domain\WorkType\Entity\WorkType;
 use DateTime;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection
-};
+    Collection};
 
 class WorkModel
 {

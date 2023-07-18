@@ -13,23 +13,20 @@
 namespace App\Domain\User\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant,
+    FlashTypeConstant};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\User\EventDispatcher\UserEventDispatcherService;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\Factory\UserFormFactory;
-use App\Domain\User\UserModel;
+use App\Domain\User\Model\UserModel;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class UserCreateHandle
 {

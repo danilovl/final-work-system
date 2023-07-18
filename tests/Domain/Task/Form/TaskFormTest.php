@@ -13,7 +13,7 @@
 namespace App\Tests\Domain\Task\Form;
 
 use App\Domain\Task\Form\TaskForm;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;

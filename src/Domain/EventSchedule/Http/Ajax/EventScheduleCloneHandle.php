@@ -16,15 +16,14 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\EventSchedule\EventScheduleCloneModel;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleCloneForm;
+use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class EventScheduleCloneHandle
 {

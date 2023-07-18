@@ -14,17 +14,15 @@ namespace App\Domain\User\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\RuntimeException;
-use App\Domain\User\Form\{
-    UserForm,
-    UserEditForm
-};
 use App\Domain\User\Entity\User;
-use App\Domain\User\UserModel;
+use App\Domain\User\Form\{
+    UserEditForm,
+    UserForm};
+use App\Domain\User\Model\UserModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

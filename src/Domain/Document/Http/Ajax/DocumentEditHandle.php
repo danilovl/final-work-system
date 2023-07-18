@@ -14,19 +14,17 @@ namespace App\Domain\Document\Http\Ajax;
 
 use App\Application\Constant\{
     AjaxJsonTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant};
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Factory\MediaFactory;
-use App\Domain\Media\MediaModel;
+use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class DocumentEditHandle
 {

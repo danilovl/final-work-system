@@ -14,7 +14,7 @@ namespace App\Domain\ResetPassword\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\ResetPassword\Entity\ResetPassword;
-use App\Domain\ResetPassword\ResetPasswordModel;
+use App\Domain\ResetPassword\Model\ResetPasswordModel;
 
 class ResetPasswordFactory extends BaseModelFactory
 {

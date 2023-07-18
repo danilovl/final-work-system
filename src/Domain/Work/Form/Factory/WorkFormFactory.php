@@ -15,21 +15,19 @@ namespace App\Domain\Work\Form\Factory;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\SortFunctionHelper;
-use App\Domain\Work\Form\{
-    WorkForm,
-    WorkSearchForm
-};
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Form\{
+    WorkForm,
+    WorkSearchForm};
+use App\Domain\Work\Model\WorkModel;
 use App\Domain\Work\Service\WorkListService;
-use App\Domain\Work\WorkModel;
 use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
-use App\Domain\WorkSearch\WorkSearchModel;
+use App\Domain\WorkSearch\Model\WorkSearchModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

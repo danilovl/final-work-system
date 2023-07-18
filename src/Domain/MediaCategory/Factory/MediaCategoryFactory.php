@@ -14,7 +14,7 @@ namespace App\Domain\MediaCategory\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\MediaCategory\Entity\MediaCategory;
-use App\Domain\MediaCategory\MediaCategoryModel;
+use App\Domain\MediaCategory\Model\MediaCategoryModel;
 
 class MediaCategoryFactory extends BaseModelFactory
 {

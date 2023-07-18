@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Media;
+namespace App\Domain\Media\Model;
 
 use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;
@@ -20,8 +20,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection
-};
+    Collection};
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel

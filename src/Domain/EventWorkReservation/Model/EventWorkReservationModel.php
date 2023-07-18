@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\EventWorkReservation;
+namespace App\Domain\EventWorkReservation\Model;
 
 use App\Domain\Work\Entity\Work;
 

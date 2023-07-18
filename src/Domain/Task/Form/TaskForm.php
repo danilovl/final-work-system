@@ -13,14 +13,13 @@
 namespace App\Domain\Task\Form;
 
 use App\Application\Constant\DateFormatConstant;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
+    CheckboxType,
     DateType,
-    TextType,
     TextareaType,
-    CheckboxType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

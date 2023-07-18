@@ -16,12 +16,11 @@ use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\RuntimeException;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Form\MediaCategoryForm;
-use App\Domain\MediaCategory\MediaCategoryModel;
+use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

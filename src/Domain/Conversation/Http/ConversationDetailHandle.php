@@ -17,11 +17,10 @@ use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
 use App\Application\Service\{
+    PaginatorService,
     RequestService,
     SeoPageService,
-    PaginatorService,
-    TwigRenderService,
-};
+    TwigRenderService,};
 use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcherService;
@@ -29,9 +28,9 @@ use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Service\MessageHighlightService;
-use App\Domain\ConversationMessage\ConversationMessageModel;
 use App\Domain\ConversationMessage\Factory\ConversationMessageFactory;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
+use App\Domain\ConversationMessage\Model\ConversationMessageModel;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Service\UserService;
@@ -39,8 +38,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class ConversationDetailHandle
 {

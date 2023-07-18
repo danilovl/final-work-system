@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Version;
+namespace App\Domain\Version\Model;
 
 use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;

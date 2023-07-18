@@ -14,7 +14,7 @@ namespace App\Tests\Domain\User\Form;
 
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Form\UserForm;
-use App\Domain\User\UserModel;
+use App\Domain\User\Model\UserModel;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;

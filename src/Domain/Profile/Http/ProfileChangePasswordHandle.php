@@ -14,19 +14,17 @@ namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
-    RequestService,
     PasswordUpdater,
-    TwigRenderService
-};
+    RequestService,
+    TwigRenderService};
 use App\Domain\ResetPassword\Form\ProfileChangePasswordFormType;
 use App\Domain\User\Factory\UserFactory;
+use App\Domain\User\Model\UserModel;
 use App\Domain\User\Service\UserService;
-use App\Domain\User\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 

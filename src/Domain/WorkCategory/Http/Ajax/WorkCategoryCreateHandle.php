@@ -19,7 +19,7 @@ use App\Application\Service\{
 use App\Domain\User\Service\UserService;
 use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;
-use App\Domain\WorkCategory\WorkCategoryModel;
+use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,

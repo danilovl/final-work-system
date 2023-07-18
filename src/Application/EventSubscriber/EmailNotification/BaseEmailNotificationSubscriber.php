@@ -14,8 +14,8 @@ namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
-use App\Domain\EmailNotificationQueue\EmailNotificationQueueModel;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Domain\EmailNotificationQueue\Model\EmailNotificationQueueModel;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

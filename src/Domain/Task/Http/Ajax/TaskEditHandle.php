@@ -19,12 +19,11 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\TaskForm;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request
-};
+    Request};
 
 readonly class TaskEditHandle
 {

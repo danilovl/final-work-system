@@ -10,10 +10,9 @@
  *
  */
 
-namespace App\Domain\ConversationMessage;
+namespace App\Domain\ConversationMessage\Model;
 
 use App\Application\Traits\Model\ContentAwareTrait;
-use Traversable;
 
 class ConversationComposeMessageModel
 {

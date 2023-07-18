@@ -14,7 +14,7 @@ namespace App\Domain\UserGroup\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\UserGroup\Entity\Group;
-use App\Domain\UserGroup\UserGroupModel;
+use App\Domain\UserGroup\Model\UserGroupModel;
 
 class UserGroupFactory extends BaseModelFactory
 {

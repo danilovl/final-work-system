@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\EmailNotificationQueue;
+namespace App\Domain\EmailNotificationQueue\Model;
 
 class EmailNotificationQueueModel
 {

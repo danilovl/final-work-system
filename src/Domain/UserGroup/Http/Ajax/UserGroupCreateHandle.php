@@ -16,16 +16,14 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\{
     RequestService,
-    TranslatorService
-};
+    TranslatorService};
 use App\Domain\UserGroup\Factory\UserGroupFactory;
 use App\Domain\UserGroup\Form\UserGroupForm;
-use App\Domain\UserGroup\UserGroupModel;
+use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request
-};
+    Request};
 
 readonly class UserGroupCreateHandle
 {

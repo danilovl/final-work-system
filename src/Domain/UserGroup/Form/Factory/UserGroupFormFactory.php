@@ -16,12 +16,11 @@ use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\RuntimeException;
 use App\Domain\UserGroup\Entity\Group;
 use App\Domain\UserGroup\Form\UserGroupForm;
-use App\Domain\UserGroup\UserGroupModel;
+use App\Domain\UserGroup\Model\UserGroupModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

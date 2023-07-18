@@ -13,7 +13,7 @@
 namespace App\Domain\EventSchedule\Form;
 
 use App\Application\Form\Type\FirstWeekDayType;
-use App\Domain\EventSchedule\EventScheduleCloneModel;
+use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

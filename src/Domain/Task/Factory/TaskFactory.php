@@ -14,7 +14,7 @@ namespace App\Domain\Task\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 
 class TaskFactory extends BaseModelFactory
 {

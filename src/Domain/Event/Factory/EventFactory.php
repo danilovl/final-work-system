@@ -14,7 +14,7 @@ namespace App\Domain\Event\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventModel;
+use App\Domain\Event\Model\EventModel;
 
 class EventFactory extends BaseModelFactory
 {

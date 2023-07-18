@@ -14,7 +14,7 @@ namespace App\Domain\Work\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\WorkModel;
+use App\Domain\Work\Model\WorkModel;
 
 class WorkFactory extends BaseModelFactory
 {

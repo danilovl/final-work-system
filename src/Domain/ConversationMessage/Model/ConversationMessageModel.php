@@ -10,18 +10,16 @@
  *
  */
 
-namespace App\Domain\ConversationMessage;
+namespace App\Domain\ConversationMessage\Model;
 
 use App\Application\Traits\Model\{
-    OwnerAwareTrait
-};
+    OwnerAwareTrait};
 use App\Application\Traits\Model\ContentAwareTrait;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection
-};
+    Collection};
 
 class ConversationMessageModel
 {

@@ -14,7 +14,7 @@ namespace App\Domain\EventScheduleTemplate\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
-use App\Domain\EventScheduleTemplate\EventScheduleTemplateModel;
+use App\Domain\EventScheduleTemplate\Model\EventScheduleTemplateModel;
 
 class EventScheduleTemplateFactory extends BaseModelFactory
 {

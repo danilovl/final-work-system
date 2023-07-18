@@ -15,15 +15,14 @@ namespace App\Domain\EventAddress\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
-use App\Domain\EventAddress\EventAddressModel;
 use App\Domain\EventAddress\Factory\EventAddressFactory;
 use App\Domain\EventAddress\Form\EventAddressForm;
+use App\Domain\EventAddress\Model\EventAddressModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request
-};
+    Request};
 
 readonly class EventAddressCreateHandle
 {

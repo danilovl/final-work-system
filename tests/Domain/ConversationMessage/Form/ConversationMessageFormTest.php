@@ -13,8 +13,8 @@
 namespace App\Tests\Domain\ConversationMessage\Form;
 
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\ConversationMessage\ConversationMessageModel;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
+use App\Domain\ConversationMessage\Model\ConversationMessageModel;
 use App\Domain\User\Entity\User;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;

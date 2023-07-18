@@ -14,26 +14,23 @@ namespace App\Domain\Task\Http;
 
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant
-};
+    FlashTypeConstant};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class TaskEditHandle
 {

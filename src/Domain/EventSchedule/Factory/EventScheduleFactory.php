@@ -17,7 +17,7 @@ use App\Application\Factory\Model\BaseModelFactory;
 use App\Application\Helper\DateHelper;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\EventSchedule\EventScheduleModel;
+use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\User\Entity\User;
 use DateTime;

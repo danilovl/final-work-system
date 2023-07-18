@@ -14,12 +14,11 @@ namespace App\Domain\User\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Application\Helper\{
-    FunctionHelper
-};
+    FunctionHelper};
 use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
-use App\Domain\User\UserModel;
+use App\Domain\User\Model\UserModel;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFactory extends BaseModelFactory

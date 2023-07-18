@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Form;
 
 use App\Domain\Task\Form\DataGrid\TaskDataGrid;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;

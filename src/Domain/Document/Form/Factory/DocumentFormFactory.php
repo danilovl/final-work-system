@@ -21,7 +21,7 @@ use App\Domain\Document\Form\{
 use App\Domain\Document\Form\DocumentSearchForm;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
-use App\Domain\Media\MediaModel;
+use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
 use App\Domain\MediaType\Constant\{
     MediaTypeConstant};

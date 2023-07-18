@@ -12,11 +12,10 @@
 
 namespace App\Tests\Domain\ConversationMessage\Form;
 
-use App\Domain\ConversationMessage\ConversationComposeMessageModel;
 use App\Domain\ConversationMessage\Form\Constraint\{
     ConversationMessageName,
-    ConversationMessageNameValidator
-};
+    ConversationMessageNameValidator};
+use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;

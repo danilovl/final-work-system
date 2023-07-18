@@ -13,13 +13,12 @@
 namespace App\Domain\Profile\Form;
 
 use App\Application\Form\Type\LocaleType;
-use App\Domain\User\UserModel;
+use App\Domain\User\Model\UserModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     CheckboxType,
     TextareaType,
-    TextType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;

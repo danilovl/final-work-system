@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\MediaCategory;
+namespace App\Domain\MediaCategory\Model;
 
 use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\MediaCategory\Entity\MediaCategory;

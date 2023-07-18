@@ -14,21 +14,18 @@ namespace App\Domain\DocumentCategory\Http;
 
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant
-};
+    FlashTypeConstant};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\DocumentCategory\Form\Factory\DocumentCategoryFormFactory;
 use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
-use App\Domain\MediaCategory\MediaCategoryModel;
+use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class DocumentCategoryCreateHandle
 {

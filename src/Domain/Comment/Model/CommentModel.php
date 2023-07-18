@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Comment;
+namespace App\Domain\Comment\Model;
 
 use App\Application\Traits\Model\ContentAwareTrait;
 use App\Domain\Comment\Entity\Comment;

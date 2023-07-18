@@ -12,12 +12,11 @@
 
 namespace App\Domain\EventCalendar\Form;
 
-use App\Domain\EventWorkReservation\EventWorkReservationModel;
+use App\Domain\EventWorkReservation\Model\EventWorkReservationModel;
+use App\Domain\Work\Entity\Work;
 use Symfony\Component\Form\{
     AbstractType,
-    FormBuilderInterface
-};
-use App\Domain\Work\Entity\Work;
+    FormBuilderInterface};
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

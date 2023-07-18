@@ -14,7 +14,7 @@ namespace App\Domain\Version\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Version\VersionModel;
+use App\Domain\Version\Model\VersionModel;
 
 class VersionFactory extends BaseModelFactory
 {

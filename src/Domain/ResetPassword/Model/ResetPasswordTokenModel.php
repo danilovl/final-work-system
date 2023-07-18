@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\ResetPassword;
+namespace App\Domain\ResetPassword\Model;
 
 class ResetPasswordTokenModel
 {

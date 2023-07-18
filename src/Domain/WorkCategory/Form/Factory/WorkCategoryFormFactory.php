@@ -16,12 +16,11 @@ use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;
-use App\Domain\WorkCategory\WorkCategoryModel;
+use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

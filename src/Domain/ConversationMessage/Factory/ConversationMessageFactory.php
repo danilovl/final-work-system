@@ -13,8 +13,8 @@
 namespace App\Domain\ConversationMessage\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
-use App\Domain\ConversationMessage\ConversationMessageModel;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use App\Domain\ConversationMessage\Model\ConversationMessageModel;
 
 class ConversationMessageFactory extends BaseModelFactory
 {

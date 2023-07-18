@@ -16,19 +16,17 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
     RequestService,
     SeoPageService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\EventSchedule\EventScheduleModel;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleForm;
+use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class EventScheduleEditHandle
 {

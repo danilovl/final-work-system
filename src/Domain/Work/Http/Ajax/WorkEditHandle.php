@@ -20,12 +20,11 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Domain\Work\Factory\WorkFactory;
 use App\Domain\Work\Form\WorkForm;
-use App\Domain\Work\WorkModel;
+use App\Domain\Work\Model\WorkModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class WorkEditHandle
 {

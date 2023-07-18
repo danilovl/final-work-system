@@ -15,19 +15,17 @@ namespace App\Domain\Work\Http;
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
     PaginatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Elastica\WorkSearch;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\Work\Helper\WorkFunctionHelper;
-use App\Domain\WorkSearch\WorkSearchModel;
+use App\Domain\WorkSearch\Model\WorkSearchModel;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class WorkListHandle
 {

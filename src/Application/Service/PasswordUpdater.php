@@ -13,7 +13,7 @@
 namespace App\Application\Service;
 
 use App\Domain\User\Entity\User;
-use App\Domain\User\UserModel;
+use App\Domain\User\Model\UserModel;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 readonly class PasswordUpdater

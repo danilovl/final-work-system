@@ -13,21 +13,18 @@
 namespace App\Domain\UserGroup\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant,
+    FlashTypeConstant};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\UserGroup\Factory\UserGroupFactory;
 use App\Domain\UserGroup\Form\Factory\UserGroupFormFactory;
-use App\Domain\UserGroup\UserGroupModel;
+use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class UserGroupCreateHandle
 {

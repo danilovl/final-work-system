@@ -18,15 +18,14 @@ use App\Application\Service\RequestService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Factory\MediaFactory;
-use App\Domain\Media\MediaModel;
+use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\VersionForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class VersionEditHandle
 {

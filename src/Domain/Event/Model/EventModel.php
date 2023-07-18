@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Domain\Event;
+namespace App\Domain\Event\Model;
 
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;
-use DateTime;
 use App\Domain\User\Entity\User;
+use DateTime;
 
 class EventModel
 {

@@ -14,25 +14,23 @@ namespace App\Domain\Event\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
+    EntityManagerService,
     RequestService,
     SeoPageService,
-    TwigRenderService,
-    EntityManagerService
-};
+    TwigRenderService};
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
-use App\Domain\Event\EventModel;
 use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
+use App\Domain\Event\Model\EventModel;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 use Symfony\Component\Routing\RouterInterface;
 
 readonly class EventEditHandle

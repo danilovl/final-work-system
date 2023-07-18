@@ -12,7 +12,7 @@
 
 namespace App\Domain\Profile\Form;
 
-use App\Domain\Media\MediaModel;
+use App\Domain\Media\Model\MediaModel;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -21,8 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\{
     File,
     Image,
-    NotBlank
-};
+    NotBlank};
 
 class ProfileMediaForm extends AbstractType
 {

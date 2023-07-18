@@ -14,11 +14,10 @@ namespace App\Domain\EventCalendar\Http;
 
 use App\Application\Helper\SortFunctionHelper;
 use App\Application\Service\{
-    TwigRenderService,
-    EntityManagerService
-};
-use App\Domain\Event\EventModel;
+    EntityManagerService,
+    TwigRenderService};
 use App\Domain\Event\Form\EventForm;
+use App\Domain\Event\Model\EventModel;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Service\UserService;
 use App\Domain\User\Service\UserWorkService;

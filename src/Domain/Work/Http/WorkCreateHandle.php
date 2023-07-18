@@ -13,26 +13,23 @@
 namespace App\Domain\Work\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant,
+    FlashTypeConstant};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Domain\Work\Factory\WorkFactory;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
-use App\Domain\Work\WorkModel;
+use App\Domain\Work\Model\WorkModel;
 use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class WorkCreateHandle
 {

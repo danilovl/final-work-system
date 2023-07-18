@@ -16,19 +16,17 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
     RequestService,
     SeoPageService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\EventSchedule\EventScheduleCloneModel;
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleCloneForm;
+use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
 use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 use Symfony\Component\Routing\RouterInterface;
 
 readonly class EventScheduleCloneHandle

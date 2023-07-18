@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\EventSchedule;
+namespace App\Domain\EventSchedule\Model;
 
 use DateTime;
 

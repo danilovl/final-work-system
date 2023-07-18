@@ -16,7 +16,7 @@ use App\Application\Constant\{
     CompareConstant,
     DateFormatConstant};
 use App\Application\Helper\CompareHelper;
-use App\Domain\Event\EventModel;
+use App\Domain\Event\Model\EventModel;
 use App\Domain\EventType\Constant\EventTypeConstant;
 use Symfony\Component\Validator\{
     Constraint,

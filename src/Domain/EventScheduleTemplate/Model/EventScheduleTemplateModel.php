@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\EventScheduleTemplate;
+namespace App\Domain\EventScheduleTemplate\Model;
 
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;

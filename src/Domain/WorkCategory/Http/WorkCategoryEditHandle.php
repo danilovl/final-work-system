@@ -13,22 +13,19 @@
 namespace App\Domain\WorkCategory\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
-};
+    ControllerMethodConstant,
+    FlashTypeConstant};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
 use App\Domain\WorkCategory\Form\Factory\WorkCategoryFormFactory;
-use App\Domain\WorkCategory\WorkCategoryModel;
+use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class WorkCategoryEditHandle
 {

@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Domain\User;
+namespace App\Domain\User\Model;
 
-use Doctrine\Common\Collections\Collection;
 use App\Domain\User\Entity\User;
+use Doctrine\Common\Collections\Collection;
 
 class UserModel
 {

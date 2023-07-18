@@ -12,11 +12,10 @@
 
 namespace App\Domain\ConversationMessage\Form\Constraint;
 
-use App\Domain\ConversationMessage\ConversationComposeMessageModel;
+use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use Symfony\Component\Validator\{
     Constraint,
-    ConstraintValidator
-};
+    ConstraintValidator};
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class ConversationMessageNameValidator extends ConstraintValidator

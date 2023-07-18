@@ -14,16 +14,15 @@ namespace App\Domain\ConversationMessage\Form;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\ConversationMessage\ConversationComposeMessageModel;
 use App\Domain\ConversationMessage\Form\Constraint\ConversationMessageName;
+use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
     TextareaType,
-    TextType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

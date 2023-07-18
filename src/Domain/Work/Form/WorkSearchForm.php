@@ -14,7 +14,7 @@ namespace App\Domain\Work\Form;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Domain\User\Entity\User;
-use App\Domain\WorkSearch\WorkSearchModel;
+use App\Domain\WorkSearch\Model\WorkSearchModel;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
 use DateTime;
@@ -22,8 +22,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
-    TextType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

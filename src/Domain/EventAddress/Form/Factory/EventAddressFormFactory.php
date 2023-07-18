@@ -15,13 +15,12 @@ namespace App\Domain\EventAddress\Form\Factory;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Domain\EventAddress\Entity\EventAddress;
-use App\Domain\EventAddress\EventAddressModel;
 use App\Domain\EventAddress\Form\EventAddressForm;
+use App\Domain\EventAddress\Model\EventAddressModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface
-};
+    FormInterface};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

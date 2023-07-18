@@ -10,11 +10,10 @@
  *
  */
 
-namespace App\Domain\Document;
+namespace App\Domain\Document\Model;
 
 use App\Application\Traits\Model\{
-    SimpleInformationTrait
-};
+    SimpleInformationTrait};
 use App\Application\Traits\Model\ActiveTrait;
 use App\Domain\Media\Entity\Media;
 use Doctrine\Common\Collections\Collection;

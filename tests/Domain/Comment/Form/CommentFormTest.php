@@ -12,8 +12,8 @@
 
 namespace App\Tests\Domain\Comment\Form;
 
-use App\Domain\Comment\CommentModel;
 use App\Domain\Comment\Form\CommentForm;
+use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 use DateTime;

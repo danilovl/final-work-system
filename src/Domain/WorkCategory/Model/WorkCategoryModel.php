@@ -10,15 +10,14 @@
  *
  */
 
-namespace App\Domain\WorkCategory;
+namespace App\Domain\WorkCategory\Model;
 
 use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection
-};
+    Collection};
 
 class WorkCategoryModel
 {

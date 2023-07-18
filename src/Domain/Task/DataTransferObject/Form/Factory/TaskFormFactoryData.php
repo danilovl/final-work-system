@@ -15,7 +15,7 @@ namespace App\Domain\Task\DataTransferObject\Form\Factory;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use App\Domain\Work\Entity\Work;
 
 class TaskFormFactoryData extends BaseDataTransferObject

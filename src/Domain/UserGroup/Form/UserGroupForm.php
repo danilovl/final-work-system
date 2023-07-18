@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Form;
 
-use App\Domain\UserGroup\UserGroupModel;
+use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

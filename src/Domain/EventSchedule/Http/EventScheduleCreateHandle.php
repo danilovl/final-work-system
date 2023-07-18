@@ -15,17 +15,15 @@ namespace App\Domain\EventSchedule\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
     RequestService,
-    TwigRenderService
-};
-use App\Domain\EventSchedule\EventScheduleModel;
+    TwigRenderService};
 use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleForm;
+use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 readonly class EventScheduleCreateHandle
 {

@@ -13,11 +13,10 @@
 namespace App\Domain\Event\Form;
 
 use App\Application\Constant\{
-    FormConstant,
-    DateFormatConstant
-};
-use App\Domain\Event\EventModel;
+    DateFormatConstant,
+    FormConstant};
 use App\Domain\Event\Form\Constraint\EventTime;
+use App\Domain\Event\Model\EventModel;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;
@@ -26,8 +25,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
     DateType,
-    TextType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

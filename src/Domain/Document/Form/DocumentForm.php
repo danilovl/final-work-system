@@ -13,7 +13,7 @@
 namespace App\Domain\Document\Form;
 
 use App\Application\Form\Type\MediaFileType;
-use App\Domain\Media\MediaModel;
+use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Form\DataGrid\MediaCategoryDataGrid;
 use App\Domain\User\Entity\User;
@@ -23,8 +23,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     CheckboxType,
     TextareaType,
-    TextType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

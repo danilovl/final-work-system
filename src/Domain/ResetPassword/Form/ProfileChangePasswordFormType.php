@@ -11,12 +11,11 @@
 
 namespace App\Domain\ResetPassword\Form;
 
-use App\Domain\User\UserModel;
+use App\Domain\User\Model\UserModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     PasswordType,
-    RepeatedType
-};
+    RepeatedType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;

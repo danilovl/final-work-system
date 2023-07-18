@@ -12,14 +12,13 @@
 
 namespace App\Domain\Comment\Form;
 
-use App\Domain\Comment\CommentModel;
 use App\Domain\Comment\Form\EventSubscriber\EventCommentSubscriber;
+use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Form\{
     AbstractType,
-    FormBuilderInterface
-};
+    FormBuilderInterface};
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

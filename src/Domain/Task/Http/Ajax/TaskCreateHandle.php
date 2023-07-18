@@ -18,14 +18,13 @@ use App\Application\Service\RequestService;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\TaskForm;
-use App\Domain\Task\TaskModel;
+use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class TaskCreateHandle
 {

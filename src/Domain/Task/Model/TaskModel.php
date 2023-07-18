@@ -10,11 +10,10 @@
  *
  */
 
-namespace App\Domain\Task;
+namespace App\Domain\Task\Model;
 
 use App\Application\Traits\Model\{
-    SimpleInformationTrait
-};
+    SimpleInformationTrait};
 use App\Application\Traits\Model\ActiveTrait;
 use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;

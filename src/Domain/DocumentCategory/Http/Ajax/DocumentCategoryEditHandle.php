@@ -18,12 +18,11 @@ use App\Application\Service\RequestService;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
 use App\Domain\MediaCategory\Form\MediaCategoryForm;
-use App\Domain\MediaCategory\MediaCategoryModel;
+use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class DocumentCategoryEditHandle
 {

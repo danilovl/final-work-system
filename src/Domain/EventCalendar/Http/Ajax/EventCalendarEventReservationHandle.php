@@ -15,15 +15,14 @@ namespace App\Domain\EventCalendar\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\AjaxRuntimeException;
 use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+    EntityManagerService,
+    RequestService};
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
 use App\Domain\Event\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\Form\EventWorkReservationForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
-use App\Domain\EventWorkReservation\EventWorkReservationModel;
+use App\Domain\EventWorkReservation\Model\EventWorkReservationModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
@@ -31,9 +30,8 @@ use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class EventCalendarEventReservationHandle
 {

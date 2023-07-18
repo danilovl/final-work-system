@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\WorkSearch;
+namespace App\Domain\WorkSearch\Model;
 
 class WorkSearchModel
 {

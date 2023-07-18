@@ -13,7 +13,7 @@
 namespace App\Domain\Document\Factory;
 
 use App\Application\Factory\Model\BaseModelFactory;
-use App\Domain\Document\DocumentModel;
+use App\Domain\Document\Model\DocumentModel;
 use App\Domain\Media\Entity\Media;
 
 class DocumentFactory extends BaseModelFactory

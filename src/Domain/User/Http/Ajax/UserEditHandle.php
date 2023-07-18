@@ -19,13 +19,12 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\UserEventDispatcherService;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\UserEditForm;
+use App\Domain\User\Model\UserModel;
 use App\Domain\User\Service\UserService;
-use App\Domain\User\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class UserEditHandle
 {

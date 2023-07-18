@@ -18,7 +18,7 @@ use App\Application\Constant\DateFormatConstant;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Form\DataGrid\UserDataGrid;
-use App\Domain\Work\WorkModel;
+use App\Domain\Work\Model\WorkModel;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Form\DataGrid\WorkCategoryDataGrid;
 use App\Domain\WorkStatus\Entity\WorkStatus;

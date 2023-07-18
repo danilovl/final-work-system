@@ -13,13 +13,12 @@
 namespace App\Domain\EventAddress\Form;
 
 use App\Application\Form\Transformer\CommaDotTransformer;
-use App\Domain\EventAddress\EventAddressModel;
+use App\Domain\EventAddress\Model\EventAddressModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     CheckboxType,
     TextareaType,
-    TextType
-};
+    TextType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

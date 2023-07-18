@@ -16,16 +16,15 @@ use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubsc
 use App\Application\Exception\RuntimeException;
 use App\Application\Service\EntityManagerService;
 use App\Application\Service\MailerService;
-use App\Domain\EmailNotificationQueue\EmailNotificationQueueModel;
 use App\Domain\EmailNotificationQueue\Facade\EmailNotificationQueueFacade;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Domain\EmailNotificationQueue\Model\EmailNotificationQueueModel;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\{
     Address,
-    Email
-};
+    Email};
 
 #[AsMessageHandler]
 readonly class EmailNotificationHandler
