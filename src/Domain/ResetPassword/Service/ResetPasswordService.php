@@ -13,9 +13,9 @@
 namespace App\Domain\ResetPassword\Service;
 
 use App\Application\Exception\{
-    ExpiredResetPasswordTokenException,
+    TooManyPasswordRequestsException,
     InvalidResetPasswordTokenException,
-    TooManyPasswordRequestsException
+    ExpiredResetPasswordTokenException
 };
 use App\Application\Helper\HashHelper;
 use App\Domain\ResetPassword\Model\ResetPasswordTokenModel;
@@ -28,15 +28,15 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateInterval;
 use DateTime;
 
-class ResetPasswordService
+readonly class ResetPasswordService
 {
     private string $cryptographicallySecureKey;
     private int $resetRequestLifetime;
     private int $requestThrottleTime;
 
     public function __construct(
-        private readonly ResetPasswordFactory $resetPasswordFactory,
-        private readonly ResetPasswordFacade $resetPasswordFacade,
+        private ResetPasswordFactory $resetPasswordFactory,
+        private ResetPasswordFacade $resetPasswordFacade,
         ParameterServiceInterface $parameterService
     ) {
         $this->cryptographicallySecureKey = $parameterService->getString('reset_password.cryptographically_secure_key');
