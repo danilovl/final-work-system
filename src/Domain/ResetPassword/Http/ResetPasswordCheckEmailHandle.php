@@ -14,9 +14,8 @@ namespace App\Domain\ResetPassword\Http;
 
 use App\Application\Service\{
     RequestService,
-    ResetPasswordService,
-    TwigRenderService
-};
+    TwigRenderService};
+use App\Domain\ResetPassword\Service\ResetPasswordService;
 use Symfony\Component\HttpFoundation\Response;
 
 readonly class ResetPasswordCheckEmailHandle

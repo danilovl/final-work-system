@@ -10,15 +10,15 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Domain\ResetPassword\Service;
 
 use App\Application\Exception\{
-    ExpiredResetPasswordTokenException};
-use App\Application\Exception\InvalidResetPasswordTokenException;
-use App\Application\Exception\TooManyPasswordRequestsException;
+    ExpiredResetPasswordTokenException,
+    InvalidResetPasswordTokenException,
+    TooManyPasswordRequestsException
+};
 use App\Application\Helper\HashHelper;
-use App\Domain\ResetPassword\{
-    Model\ResetPasswordTokenModel};
+use App\Domain\ResetPassword\Model\ResetPasswordTokenModel;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\Facade\ResetPasswordFacade;
 use App\Domain\ResetPassword\Factory\ResetPasswordFactory;

@@ -15,18 +15,16 @@ namespace App\Domain\ResetPassword\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ResetPasswordExceptionInterface;
 use App\Application\Service\{
-    RequestService,
-    TwigRenderService,
-    TranslatorService,
     EntityManagerService,
-    ResetPasswordService
-};
+    RequestService,
+    TranslatorService,
+    TwigRenderService};
 use App\Domain\ResetPassword\Form\ResetChangePasswordForm;
+use App\Domain\ResetPassword\Service\ResetPasswordService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
