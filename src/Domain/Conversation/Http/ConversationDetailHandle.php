@@ -20,7 +20,8 @@ use App\Application\Service\{
     PaginatorService,
     RequestService,
     SeoPageService,
-    TwigRenderService,};
+    TwigRenderService,
+};
 use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcherService;
@@ -38,7 +39,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class ConversationDetailHandle
 {

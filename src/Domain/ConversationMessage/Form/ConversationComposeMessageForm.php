@@ -20,9 +20,10 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
+    TextType,
     ChoiceType,
-    TextareaType,
-    TextType};
+    TextareaType
+};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

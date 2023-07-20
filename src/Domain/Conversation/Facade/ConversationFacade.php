@@ -20,7 +20,8 @@ use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Repository\ConversationRepository;
 use App\Domain\Conversation\Service\{
     ConversationStatusService,
-    ConversationVariationService};
+    ConversationVariationService
+};
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;

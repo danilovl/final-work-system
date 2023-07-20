@@ -10,22 +10,16 @@
  *
  */
 
-namespace App\Domain\Document\Model;
+namespace App\Domain\Version;
 
-use App\Application\Traits\Model\{
-    ActiveTrait,
-    SimpleInformationTrait
-};
+use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class DocumentModel
+class VersionModel
 {
     use SimpleInformationTrait;
-    use ActiveTrait;
 
-    public ?Collection $categories = null;
     public ?UploadedFile $uploadMedia = null;
 
     public static function fromMedia(Media $media): self
@@ -33,7 +27,6 @@ class DocumentModel
         $model = new self;
         $model->name = $media->getName();
         $model->description = $media->getDescription();
-        $model->categories = $media->getCategories();
         $model->uploadMedia = $media->getUploadMedia();
 
         return $model;

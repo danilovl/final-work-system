@@ -14,12 +14,12 @@ namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
-    PasswordUpdater,
     RequestService,
     TwigRenderService};
 use App\Domain\ResetPassword\Form\ProfileChangePasswordFormType;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
+use App\Domain\User\Service\PasswordUpdater;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

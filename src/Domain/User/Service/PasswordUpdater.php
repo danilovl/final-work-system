@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Domain\User\Service;
 
 use App\Domain\User\Entity\User;
 use App\Domain\User\Model\UserModel;

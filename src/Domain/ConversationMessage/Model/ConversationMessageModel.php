@@ -13,13 +13,15 @@
 namespace App\Domain\ConversationMessage\Model;
 
 use App\Application\Traits\Model\{
-    OwnerAwareTrait};
-use App\Application\Traits\Model\ContentAwareTrait;
+    OwnerAwareTrait,
+    ContentAwareTrait
+};
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection};
+    Collection,
+    ArrayCollection
+};
 
 class ConversationMessageModel
 {

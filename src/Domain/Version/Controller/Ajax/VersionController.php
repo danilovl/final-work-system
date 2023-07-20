@@ -14,21 +14,19 @@ namespace App\Domain\Version\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Media\Entity\Media;
+use App\Domain\Version\Http\Ajax\{
+    VersionCreateHandle,
+    VersionDeleteHandle,
+    VersionEditHandle};
+use App\Domain\Version\Model\Security\Voter\Subject\VersionVoterSubject;
+use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use App\Domain\Version\Http\Ajax\{
-    VersionEditHandle,
-    VersionCreateHandle,
-    VersionDeleteHandle
-};
-use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
-use App\Domain\Work\Entity\Work;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request,
-    Response
-};
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    Response};
 
 class VersionController extends AbstractController
 {

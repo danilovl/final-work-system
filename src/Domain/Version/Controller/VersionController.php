@@ -13,24 +13,22 @@
 namespace App\Domain\Version\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
-use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use App\Domain\Version\Http\{
-    VersionEditHandle,
-    VersionCreateHandle,
-    VersionDownloadHandle,
-    VersionDetailContentHandle
-};
 use App\Domain\Media\Entity\Media;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
+use App\Domain\Version\Http\{
+    VersionCreateHandle,
+    VersionDetailContentHandle,
+    VersionDownloadHandle,
+    VersionEditHandle};
+use App\Domain\Version\Model\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Work\Entity\Work;
+use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     BinaryFileResponse,
     Request,
-    Response
-};
+    Response};
 
 class VersionController extends AbstractController
 {

@@ -17,7 +17,8 @@ use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
     RequestService,
     SeoPageService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\Comment\Facade\CommentFacade;
 use App\Domain\Comment\Factory\CommentFactory;
 use App\Domain\Comment\Form\CommentForm;
@@ -29,7 +30,8 @@ use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class EventDetailHandle
 {

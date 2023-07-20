@@ -16,7 +16,8 @@ use App\Domain\ConversationMessage\Model\ConversationMessageModel;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Form\{
     AbstractType,
-    FormBuilderInterface};
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
