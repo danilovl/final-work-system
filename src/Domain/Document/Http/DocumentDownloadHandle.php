@@ -12,8 +12,8 @@
 
 namespace App\Domain\Document\Http;
 
-use App\Application\Service\MediaService;
 use App\Domain\Media\Entity\Media;
+use App\Domain\Media\Service\MediaService;
 
 readonly class DocumentDownloadHandle
 {

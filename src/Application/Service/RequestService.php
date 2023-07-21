@@ -13,9 +13,9 @@
 namespace App\Application\Service;
 
 use App\Application\Constant\{
-    FlashTypeConstant
+    FlashTypeConstant,
+    AjaxJsonTypeConstant
 };
-use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use Symfony\Component\HttpFoundation\{
     Response,

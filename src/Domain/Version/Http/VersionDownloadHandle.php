@@ -12,8 +12,8 @@
 
 namespace App\Domain\Version\Http;
 
-use App\Application\Service\MediaService;
 use App\Domain\Media\Entity\Media;
+use App\Domain\Media\Service\MediaService;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 readonly class VersionDownloadHandle

@@ -10,17 +10,17 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Domain\Media\Service;
 
-use App\Application\Constant\{
-    DateFormatConstant};
+use App\Application\Constant\DateFormatConstant;
 use App\Application\Helper\FunctionHelper;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{
     BinaryFileResponse,
-    ResponseHeaderBag};
+    ResponseHeaderBag
+};
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaService
