@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Application\Exception;
+namespace App\Domain\ResetPassword\Exception;
 
 use Exception;
 
-final class ExpiredResetPasswordTokenException extends Exception implements ResetPasswordExceptionInterface
+final class InvalidResetPasswordTokenException extends Exception implements ResetPasswordExceptionInterface
 {
     public function getReason(): string
     {
-        return 'app.exception.reset_password_expired_token';
+        return 'app.exception.reset_password_invalid_reset';
     }
 }

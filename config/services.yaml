@@ -39,6 +39,7 @@ services:
     resource: '../src/Domain'
     exclude:
       - '../src/Domain/*/Entity'
+      - '../src/Domain/*/Exception'
       - '../src/Domain/*/Constant'
       - '../src/Domain/*/Model'
       - '../src/Domain/*/EventDispatcher/GenericEvent'

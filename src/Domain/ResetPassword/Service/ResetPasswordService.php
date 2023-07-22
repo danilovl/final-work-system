@@ -12,17 +12,17 @@
 
 namespace App\Domain\ResetPassword\Service;
 
-use App\Application\Exception\{
-    TooManyPasswordRequestsException,
-    InvalidResetPasswordTokenException,
-    ExpiredResetPasswordTokenException
-};
 use App\Application\Helper\HashHelper;
-use App\Domain\ResetPassword\Model\ResetPasswordTokenModel;
 use App\Domain\ResetPassword\Entity\ResetPassword;
+use App\Domain\ResetPassword\Exception\{
+    TooManyPasswordRequestsException,
+    ExpiredResetPasswordTokenException,
+    InvalidResetPasswordTokenException
+};
 use App\Domain\ResetPassword\Facade\ResetPasswordFacade;
 use App\Domain\ResetPassword\Factory\ResetPasswordFactory;
 use App\Domain\ResetPassword\Model\ResetPasswordModel;
+use App\Domain\ResetPassword\Model\ResetPasswordTokenModel;
 use App\Domain\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateInterval;

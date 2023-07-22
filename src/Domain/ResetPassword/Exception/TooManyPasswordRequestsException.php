@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Exception;
+namespace App\Domain\ResetPassword\Exception;
 
 use DateTime;
 use DateTimeInterface;

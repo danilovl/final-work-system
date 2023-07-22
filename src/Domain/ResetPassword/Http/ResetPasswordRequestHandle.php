@@ -14,11 +14,12 @@ namespace App\Domain\ResetPassword\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\EventDispatcher\SecurityDispatcherService;
-use App\Application\Exception\ResetPasswordExceptionInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
+use App\Domain\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use App\Domain\ResetPassword\Form\ResetPasswordRequestForm;
 use App\Domain\ResetPassword\Service\ResetPasswordService;
 use App\Domain\User\Facade\UserFacade;
@@ -26,7 +27,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request,
-    Response};
+    Response
+};
 
 readonly class ResetPasswordRequestHandle
 {
