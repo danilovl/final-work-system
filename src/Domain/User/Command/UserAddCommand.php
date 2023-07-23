@@ -14,7 +14,7 @@ namespace App\Domain\User\Command;
 
 use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
-use App\Application\Util\Validator\UserValidator;
+use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
