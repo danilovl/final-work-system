@@ -18,9 +18,9 @@ use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use stdClass;
 
-class ConversationSearch
+readonly class ConversationSearch
 {
-    public function __construct(private readonly TransformedFinder $transformedFinderConversation) {}
+    public function __construct(private TransformedFinder $transformedFinderConversation) {}
 
     public function getIdsByParticipantAndSearch(User $user, string $search): array
     {

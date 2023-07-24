@@ -12,8 +12,7 @@
 
 namespace App\Domain\Work\Elastica;
 
-use App\Application\Constant\{
-    DateFormatConstant};
+use App\Application\Constant\DateFormatConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
@@ -24,9 +23,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\Form\FormInterface;
 
-class WorkSearch
+readonly class WorkSearch
 {
-    public function __construct(private readonly TransformedFinder $transformedFinderWork) {}
+    public function __construct(private TransformedFinder $transformedFinderWork) {}
 
     public function filterWorkList(
         User $user,

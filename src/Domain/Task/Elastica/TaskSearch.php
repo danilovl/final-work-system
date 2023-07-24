@@ -16,9 +16,9 @@ use App\Domain\User\Entity\User;
 use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 
-class TaskSearch
+readonly class TaskSearch
 {
-    public function __construct(private readonly TransformedFinder $transformedFinderTask) {}
+    public function __construct(private TransformedFinder $transformedFinderTask) {}
 
     public function getIdsByOwnerAndSearch(User $user, string $search): array
     {
