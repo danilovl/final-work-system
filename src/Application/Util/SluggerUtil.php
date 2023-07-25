@@ -12,7 +12,7 @@
 
 namespace App\Application\Util;
 
-class Slugger
+class SluggerUtil
 {
     public function slugify(string $string): string
     {

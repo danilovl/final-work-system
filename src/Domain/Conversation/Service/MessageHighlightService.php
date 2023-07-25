@@ -14,7 +14,7 @@ namespace App\Domain\Conversation\Service;
 
 use App\Application\Model\SearchModel;
 use App\Application\Service\EntityManagerService;
-use App\Application\Util\TextHighlightWord;
+use App\Application\Util\TextHighlightWordUtil;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 
@@ -34,7 +34,7 @@ readonly class MessageHighlightService
         $words = preg_split('~\s+~', $searchModel->search);
         /** @var ConversationMessage $conversationMessage */
         foreach ($conversationMessages as $conversationMessage) {
-            $message = TextHighlightWord::highlightPartWords($conversationMessage->getContent(), $words);
+            $message = TextHighlightWordUtil::highlightPartWords($conversationMessage->getContent(), $words);
             $conversationMessage->setContent($message);
 
             $this->asyncService->add(callable: function () use ($conversationMessage): void {

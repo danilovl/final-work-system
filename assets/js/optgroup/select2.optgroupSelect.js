@@ -1,5 +1,4 @@
 (function ($) {
-
     $.fn.select2.amd.define('optgroup-data', ['select2/data/select', 'select2/utils'], function (SelectAdapter, Utils) {
         function OptgroupData($element, options) {
             OptgroupData.__super__.constructor.apply(this, arguments);
@@ -162,6 +161,7 @@
                     'role': 'treeitem',
                     'aria-selected': 'false'
                 });
+
                 $label.data('data', data);
             }
 
@@ -220,7 +220,7 @@
             });
         };
 
-        OptgroupResults.prototype.setClasses = function (container, $container) {
+        OptgroupResults.prototype.setClasses = function () {
             var self = this;
 
             this.data.current(function (selected) {
@@ -231,10 +231,10 @@
                     if (obj.children) {
                         optgroupLabels.push(obj.text);
                         $.each(obj.children, function (j, child) {
-                            selectedIds.push(child.id.toString());
+                            selectedIds.push(child._resultId);
                         });
                     } else {
-                        selectedIds.push(obj.id.toString());
+                        selectedIds.push(obj._resultId);
                     }
                 });
 
@@ -243,13 +243,9 @@
                 $options.each(function () {
                     var $option = $(this);
 
-                    var item = $.data(this, 'data');
+                    var id = $option.attr('id');
 
-                    // id needs to be converted to a string when comparing
-                    var id = '' + item.id;
-
-                    if ((item.element != null && item.element.selected) ||
-                        (item.element == null && $.inArray(id, selectedIds) > -1)) {
+                    if ($.inArray(id, selectedIds) > -1) {
                         $option.attr('aria-selected', 'true');
                     } else {
                         $option.attr('aria-selected', 'false');

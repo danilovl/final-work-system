@@ -12,7 +12,7 @@
 
 namespace App\Application\Util;
 
-class TextHighlightWord
+class TextHighlightWordUtil
 {
     public static function highlightEntireWords(string $text, array $words): string
     {

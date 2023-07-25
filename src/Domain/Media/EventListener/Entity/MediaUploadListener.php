@@ -18,6 +18,7 @@ use App\Domain\Media\Entity\Media;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Doctrine\ORM\Event\{
     PrePersistEventArgs,
+    PreRemoveEventArgs,
     PreUpdateEventArgs
 };
 
@@ -47,7 +48,7 @@ readonly class MediaUploadListener
         $this->update($entity);
     }
 
-    public function preRemove(PrePersistEventArgs $eventArgs): void
+    public function preRemove(PreRemoveEventArgs $eventArgs): void
     {
         $entity = $eventArgs->getObject();
         if (!$entity instanceof Media) {

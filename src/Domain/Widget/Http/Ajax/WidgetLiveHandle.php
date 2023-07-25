@@ -12,6 +12,7 @@
 
 namespace App\Domain\Widget\Http\Ajax;
 
+use App\Application\Util\StreamedResponseUtil;
 use App\Domain\Widget\Service\WidgetStreamService;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -21,13 +22,8 @@ readonly class WidgetLiveHandle
 
     public function handle(): StreamedResponse
     {
-        $response = new StreamedResponse(
-            $this->widgetStreamService->handle()
-        );
-        $response->headers->set('Content-Type', 'text/event-stream');
-        $response->headers->set('X-Accel-Buffering', 'no');
-        $response->headers->set('Cach-Control', 'no-cache');
+        $callback = $this->widgetStreamService->handle();
 
-        return $response;
+        return StreamedResponseUtil::create($callback);
     }
 }

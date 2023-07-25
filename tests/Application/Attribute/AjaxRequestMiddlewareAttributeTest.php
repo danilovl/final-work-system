@@ -59,8 +59,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             call_user_func([$attribute->class, 'handle'], $request)
         );
     }

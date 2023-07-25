@@ -86,6 +86,7 @@ class Conversation
 
     public function __construct()
     {
+        $this->messages = new ArrayCollection;
         $this->statuses = new ArrayCollection;
         $this->systemEvents = new ArrayCollection;
         $this->participants = new ArrayCollection;

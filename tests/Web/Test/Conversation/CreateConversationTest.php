@@ -37,7 +37,7 @@ class CreateConversationTest extends WebTestCase
         $values = $form['conversation_compose_message[conversation]']->availableOptionValues();
 
         $form['conversation_compose_message[name]'] = 'New conversation title';
-        $form['conversation_compose_message[conversation]']->select($values[1]);
+        $form['conversation_compose_message[conversation]']->select($values[0]);
         $form['conversation_compose_message[content]'] = 'Message';
 
         $client->submit($form);

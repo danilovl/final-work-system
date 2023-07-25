@@ -29,6 +29,12 @@ jobs:
       - name: Run tests
         run: docker-compose exec -T node npm run cypress:run
 
+      - name: View log files
+        if: always()
+        run: |
+          docker-compose exec -T php cat var/log/prod.log || true
+          docker-compose exec -T php cat var/log/dev.log || true
+
       - name: Stop containers
         if: always()
         run: docker-compose -f docker-compose.yml down

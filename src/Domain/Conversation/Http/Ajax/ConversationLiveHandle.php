@@ -12,6 +12,7 @@
 
 namespace App\Domain\Conversation\Http\Ajax;
 
+use App\Application\Util\StreamedResponseUtil;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationStreamService;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -22,13 +23,8 @@ readonly class ConversationLiveHandle
 
     public function handle(Conversation $conversation): StreamedResponse
     {
-        $response = new StreamedResponse(
-            $this->conversationStreamService->handle($conversation)
-        );
-        $response->headers->set('Content-Type', 'text/event-stream');
-        $response->headers->set('X-Accel-Buffering', 'no');
-        $response->headers->set('Cache-Control', 'no-cache');
+        $callback = $this->conversationStreamService->handle($conversation);
 
-        return $response;
+        return StreamedResponseUtil::create($callback);
     }
 }

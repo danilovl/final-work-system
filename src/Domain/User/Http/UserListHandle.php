@@ -13,6 +13,7 @@
 namespace App\Domain\User\Http;
 
 use App\Application\Service\{
+    PaginatorService,
     SeoPageService,
     TranslatorService,
     TwigRenderService

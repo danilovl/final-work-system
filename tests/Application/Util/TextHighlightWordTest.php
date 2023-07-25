@@ -12,7 +12,7 @@
 
 namespace App\Tests\Application\Util;
 
-use App\Application\Util\TextHighlightWord;
+use App\Application\Util\TextHighlightWordUtil;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -23,7 +23,7 @@ class TextHighlightWordTest extends TestCase
      */
     public function testHighlightEntireWords(string $text, array $words, string $expectedResult): void
     {
-        $highlightedText = TextHighlightWord::highlightEntireWords($text, $words);
+        $highlightedText = TextHighlightWordUtil::highlightEntireWords($text, $words);
 
         $this->assertEquals($expectedResult, $highlightedText);
     }
@@ -33,7 +33,7 @@ class TextHighlightWordTest extends TestCase
      */
     public function testHighlightPartWords(string $text, array $words, string $expectedResult): void
     {
-        $highlightedText = TextHighlightWord::highlightPartWords($text, $words);
+        $highlightedText = TextHighlightWordUtil::highlightPartWords($text, $words);
 
         $this->assertEquals($expectedResult, $highlightedText);
     }
