@@ -123,10 +123,7 @@
         ],
         "webtest": [
             "@php bin/console cache:warmup --env=dev",
-            "vendor/bin/phpunit tests/Web/Test/Security",
-            "vendor/bin/phpunit tests/Web/Test/Work",
-            "vendor/bin/phpunit tests/Web/Test/Conversation",
-            "vendor/bin/phpunit tests/Web/Test/Task"
+            "bash bin/web-test.sh"
         ],
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
