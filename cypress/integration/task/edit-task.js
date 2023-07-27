@@ -1,4 +1,4 @@
-import {taskData} from '../fixtures/task';
+import {taskData} from '../../fixtures/task/task';
 
 describe('Edit task test', () => {
     beforeEach(() => {
@@ -6,7 +6,7 @@ describe('Edit task test', () => {
     })
 
     it('Edit task success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('.work-group-list')
@@ -56,7 +56,7 @@ describe('Edit task test', () => {
     })
 
     it('Edit success task', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('.work-group-list')

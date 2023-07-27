@@ -1,4 +1,4 @@
-import {workData} from '../fixtures/work';
+import {workData} from '../../fixtures/work/work';
 
 describe('Edit work test', () => {
     beforeEach(() => {
@@ -6,7 +6,7 @@ describe('Edit work test', () => {
     })
 
     it('Edit work success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('.work-group-list')
@@ -48,7 +48,7 @@ describe('Edit work test', () => {
     })
 
     it('Edit work success', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('.work-group-list')

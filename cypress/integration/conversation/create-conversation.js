@@ -1,4 +1,4 @@
-import {conversationData} from '../fixtures/conversation';
+import {conversationData} from '../../fixtures/conversation/conversation';
 
 describe('Create conversation test', () => {
     beforeEach(() => {

@@ -1,15 +1,12 @@
-import {successUserData} from '../fixtures/user';
+import {taskData} from '../../fixtures/task/task';
 
-delete successUserData.email;
-delete successUserData.username;
-
-describe('Edit work user test', () => {
+describe('Create task test', () => {
     beforeEach(() => {
         cy.loginSupervisor()
     })
 
-    it('Edit work user success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+    it('Create task success ajax', () => {
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('.work-group-list')
@@ -25,22 +22,27 @@ describe('Edit work user test', () => {
             })
 
         cy
-            .get('#toggle-admin-panel')
+            .get('#task-create')
             .click()
 
         cy
-            .get('#work-author-edit')
-            .click()
-
-        for (let prop in successUserData) {
-            cy
-                .get(successUserData[prop].id)
-                .clear()
-                .type(successUserData[prop].text)
-        }
+            .get(taskData.name.id)
+            .type(taskData.name.text)
 
         cy
-            .get('#user-button-action')
+            .get(taskData.deadline.id)
+            .type(taskData.deadline.text)
+            .click()
+
+        cy.window().then((win) => {
+            win
+                .tinymce
+                .activeEditor
+                .setContent(`<strong>${taskData.description.text}</strong>`)
+        })
+
+        cy
+            .get('#task-button-action')
             .click()
 
         cy.wait(1000)
@@ -50,8 +52,8 @@ describe('Edit work user test', () => {
             .should('be.visible')
     })
 
-    it('Edit work user success', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+    it('Create success task', () => {
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('.work-group-list')
@@ -67,25 +69,29 @@ describe('Edit work user test', () => {
             })
 
         cy
-            .get('#work-open-admin-panel')
-            .click()
-
-        cy
-            .get('#work-author-edit')
+            .get('#task-create')
             .should('have.attr', 'href')
             .then((href) => {
                 cy.visit(Cypress.env('domain') + href)
             })
 
-        for (let prop in successUserData) {
-            cy
-                .get(successUserData[prop].id)
-                .clear()
-                .type(successUserData[prop].text)
-        }
+        cy
+            .get(taskData.name.id)
+            .type(taskData.name.text)
 
         cy
-            .get('#user-button-action')
+            .get(taskData.deadline.id)
+            .type(taskData.deadline.text)
+
+        cy.window().then((win) => {
+            win
+                .tinymce
+                .activeEditor
+                .setContent(`<strong>${taskData.description.text}</strong>`)
+        })
+
+        cy
+            .get('#task-button-action')
             .click()
 
         cy.wait(1000)

@@ -1,0 +1,26 @@
+{% set inputGroupClass = inputGroupClass is defined ? inputGroupClass : '' %}
+
+{{ form_start(searchForm, {'attr': {'class': 'pull-right mail-search'}}) }}
+
+<div class="input-group {{ inputGroupClass }}">
+    {{ form_widget(searchForm.search, {'attr': {'class': 'form-control input-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
+    <div class="input-group-btn">
+        <button type="submit"
+                id="simple-search-button-action"
+                class="btn btn-sm btn-primary"
+        >
+            {{ 'app.text.search' | trans }}
+        </button>
+    </div>
+</div>
+
+{{ form_end(searchForm) }}
+
+{% if enableClearSearch %}
+    <a href="{{ clearSearchUrl }}"
+       id="clear-simple-search-button-action"
+       class="btn btn-danger btn-xs pull-right"
+    >
+        <i class="fa fa-remove"></i>
+    </a>
+{% endif %}

@@ -23,24 +23,10 @@
                                 <i class="fa fa-comments-o"></i>
                             </button>
 
-                            {{ form_start(searchForm, {'attr': {'class': 'pull-right mail-search'}}) }}
-
-                            <div class="input-group mt-small">
-                                {{ form_widget(searchForm.search, {'attr': {'class': 'form-control input-sm', 'placeholder': 'app.text.search_form' | trans}} ) }}
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-sm btn-primary">
-                                        {{ 'app.text.search' | trans }}
-                                    </button>
-                                </div>
-                            </div>
-
-                            {{ form_end(searchForm) }}
-
-                            {% if enableClearSearch %}
-                                <a href="{{ path('conversation_list') }}" class="btn btn-danger btn-xs pull-right mt-small">
-                                    <i class="fa fa-remove"></i>
-                                </a>
-                            {% endif %}
+                            {% include 'common_part/simple_search.html.twig' with {
+                                'imputGroupClass': 'mt-lsmal',
+                                'clearSearchUrl':  path('conversation_list')
+                            } %}
                         </div>
                     </div>
 

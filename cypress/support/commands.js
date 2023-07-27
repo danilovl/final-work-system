@@ -1,4 +1,4 @@
-Cypress.Commands.add(`login`, (username, password) => {
+Cypress.Commands.add('login', (username, password) => {
     cy.clearCookies()
     cy.visit(Cypress.env('domain') + '/en/login')
 
@@ -15,16 +15,16 @@ Cypress.Commands.add(`login`, (username, password) => {
         .click()
 })
 
-Cypress.Commands.add(`loginSupervisor`, () => {
+Cypress.Commands.add('loginSupervisor', () => {
     cy.login(
         Cypress.env('loginData').supervisor.username,
-        Cypress.env('loginData').supervisor.password,
+        Cypress.env('loginData').supervisor.password
     )
 })
 
-Cypress.Commands.add(`loginStudent`, () => {
+Cypress.Commands.add('loginStudent', () => {
     cy.login(
         Cypress.env('loginData').student.username,
-        Cypress.env('loginData').student.password,
+        Cypress.env('loginData').student.password
     )
 })

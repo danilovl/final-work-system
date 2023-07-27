@@ -1,7 +1,7 @@
 describe('Login test', () => {
     beforeEach(() => {
         cy.clearCookies()
-        cy.visit(Cypress.env('domain'))
+        cy.visit(Cypress.env('domain') + '/en/login')
     })
 
     it('Login failed', () => {

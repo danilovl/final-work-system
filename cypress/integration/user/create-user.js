@@ -1,16 +1,16 @@
-import {successUserData} from '../fixtures/user';
+import {successUserData} from '../../fixtures/user/user';
 
 describe('Create user test', () => {
     const failedUserData = successUserData;
 
     failedUserData.email = {
         'id': '#user_email',
-        'text': Math.random().toString(36).substr(2, 10) + '@gmail.com'
+        'text': Math.random().toString(36).substring(2, 10) + '@gmail.com'
     }
 
     failedUserData.username = {
         'id': '#user_username',
-        'text': Math.random().toString(36).substr(2, 10)
+        'text': Math.random().toString(36).substring(2, 10)
     }
 
     beforeEach(() => {

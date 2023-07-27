@@ -16,9 +16,10 @@ use App\Application\Form\Type\LocaleType;
 use App\Domain\User\Model\UserModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
+    TextType,
     CheckboxType,
-    TextareaType,
-    TextType};
+    TextareaType
+};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;

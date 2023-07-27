@@ -1,4 +1,4 @@
-import {workData} from '../fixtures/work';
+import {workData} from '../../fixtures/work/work';
 
 describe('Delete work test', () => {
     beforeEach(() => {
@@ -6,7 +6,7 @@ describe('Delete work test', () => {
     })
 
     it('Delete work success ajax', () => {
-        cy.visit(Cypress.env('domain') + `/en/work/supervisor/list`)
+        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
             .get('#toggle-search-work-form')

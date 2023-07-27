@@ -1,4 +1,4 @@
-import {userGroupData} from '../fixtures/user-group';
+import {userGroupData} from '../../fixtures/user/user-group';
 
 describe('Create user group test', () => {
     beforeEach(() => {

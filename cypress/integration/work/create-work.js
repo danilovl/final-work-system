@@ -1,4 +1,4 @@
-import {workData} from '../fixtures/work';
+import {workData} from '../../fixtures/work/work';
 
 describe('Create work test', () => {
     beforeEach(() => {
