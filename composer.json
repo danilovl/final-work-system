@@ -118,8 +118,7 @@
     "scripts": {
         "phpunit": [
             "@php bin/console cache:warmup --env=dev",
-            "vendor/bin/phpunit tests/Application",
-            "vendor/bin/phpunit tests/Domain"
+            "vendor/bin/phpunit tests/Unit"
         ],
         "webtest": [
             "@php bin/console cache:warmup --env=dev",
