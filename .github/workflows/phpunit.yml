@@ -24,8 +24,11 @@ jobs:
       - name: Elastica populate(elastica network bug)
         run: docker-compose exec -T php php bin/console fos:elastica:populate
 
-      - name: Run tests
-        run: docker-compose exec -T php composer phpunit
+      - name: Run unit tests
+        run: docker-compose exec -T php composer test-unit
+
+      - name: Run kernel tests
+        run: docker-compose exec -T php composer test-kernel
 
       - name: View log files
         if: always()

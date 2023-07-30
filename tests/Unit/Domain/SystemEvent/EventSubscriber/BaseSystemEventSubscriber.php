@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 use App\Application\Service\EntityManagerService;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class BaseSystemEventSubscriber extends \App\Tests\Unit\Application\EventSubscriber\BaseEventSubscriber
+class BaseSystemEventSubscriber extends \App\Tests\Kernel\Application\EventSubscriber\BaseEventSubscriber
 {
     protected function setUp(): void
     {

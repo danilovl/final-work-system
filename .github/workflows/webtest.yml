@@ -27,7 +27,7 @@ jobs:
         run: docker-compose exec -T php php bin/console fos:elastica:populate
 
       - name: Run tests
-        run: docker-compose exec -T php composer webtest
+        run: docker-compose exec -T php composer test-web
 
       - name: View log files
         if: always()

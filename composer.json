@@ -116,11 +116,15 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
-        "phpunit": [
+        "test-unit": [
             "@php bin/console cache:warmup --env=dev",
             "vendor/bin/phpunit tests/Unit"
         ],
-        "webtest": [
+        "test-kernel": [
+            "@php bin/console cache:warmup --env=dev",
+            "vendor/bin/phpunit tests/Kernel"
+        ],
+        "test-web": [
             "@php bin/console cache:warmup --env=dev",
             "bash bin/web-test.sh"
         ],
