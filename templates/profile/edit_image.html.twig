@@ -42,7 +42,7 @@
                             <ul class="list-unstyled user_data">
                                 {% if app_user().profileImage is not null %}
                                     <li>
-                                        <a class="btn btn-danger" href="{{ path('profile_delete_image') }}">
+                                        <a class="btn btn-danger" id="delete-profile-image" href="{{ path('profile_delete_image') }}">
                                             <i class="fa fa-picture-o"></i>
                                             {{ 'app.text.delete' | trans }}
                                         </a>
@@ -83,6 +83,7 @@
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                         <input type="submit"
+                                               id="upload-profile-image-button-action"
                                                class="btn btn-success"
                                                value="{{ 'app.form.action.create' | trans }}"/>
                                     </div>

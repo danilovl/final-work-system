@@ -13,6 +13,7 @@
 namespace App\Domain\EventAddress\Http;
 
 use App\Application\Constant\ControllerMethodConstant;
+use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
@@ -53,6 +54,8 @@ readonly class EventAddressCreateHandle
         if ($form->isSubmitted() && $form->isValid()) {
             $eventAddress = $this->eventAddressFactory
                 ->flushFromModel($eventAddressModel);
+
+            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
             return $this->requestService->redirectToRoute('event_address_detail', [
                 'id' => $this->hashidsService->encode($eventAddress->getId())

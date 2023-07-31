@@ -103,7 +103,6 @@ readonly class UserFacade
             ->getOneOrNullResult();
     }
 
-
     public function findOneByToken(string $username, string $token, bool $enable = null): ?User
     {
         return $this->userRepository

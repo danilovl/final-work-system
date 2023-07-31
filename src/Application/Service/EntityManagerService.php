@@ -43,6 +43,11 @@ readonly class EntityManagerService
         $this->entityManager->flush();
     }
 
+    public function refresh(object $entity): void
+    {
+        $this->entityManager->refresh($entity);
+    }
+
     public function flush(): void
     {
         $this->entityManager->flush();

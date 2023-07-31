@@ -69,6 +69,7 @@ readonly class ProfileChangeImageHandle
                     $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
 
                     $media = new Media;
+                    $media->setName($uploadMedia->getFilename());
                     $media->setType($mediaType);
                     $media->setOwner($user);
                 }

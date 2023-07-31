@@ -24,8 +24,6 @@ use Doctrine\ORM\Event\{
 
 readonly class MediaUploadListener
 {
-    private const DEFAULT_NAME = 'default media name';
-
     public function __construct(private EntityManagerService $entityManagerService) {}
 
     public function prePersist(PrePersistEventArgs $eventArgs): void
@@ -78,7 +76,7 @@ readonly class MediaUploadListener
 
         $mediaName = sha1(uniqid((string) mt_rand(), true)) . '.' . $mediaMimeType->getExtension();
 
-        $media->setName($media->getName() ?? self::DEFAULT_NAME);
+        $media->setName($media->getName());
         $media->setMediaName($mediaName);
         $media->setMimeType($mediaMimeType);
         $media->setOriginalMediaName($originalMediaName);

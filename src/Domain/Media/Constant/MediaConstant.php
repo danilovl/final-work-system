@@ -15,5 +15,5 @@ namespace App\Domain\Media\Constant;
 enum MediaConstant: string
 {
     case WEB_PATH_TO_UPLOAD_FOLDER = 'upload/';
-    case SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../../public';
+    case SERVER_PATH_TO_PUBLIC_FOLDER = __DIR__ . '/../../../../public';
 }
