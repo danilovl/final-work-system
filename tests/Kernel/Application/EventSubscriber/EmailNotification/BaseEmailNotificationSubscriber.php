@@ -26,7 +26,7 @@ class BaseEmailNotificationSubscriber extends BaseEventSubscriber
     {
         $kernel = self::bootKernel();
         $this->dispatcher = new EventDispatcher;
-        $this->eventSubscriber = new $this->classSubscriber(
+        $this->eventSubscriber = new static::$classSubscriber(
             $kernel->getContainer()->get(UserFacade::class),
             $kernel->getContainer()->get('twig'),
             $kernel->getContainer()->get(TranslatorService::class),

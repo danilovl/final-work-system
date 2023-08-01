@@ -16,7 +16,7 @@ class RegexHelperTest extends TestCase
         $this->assertEquals(RegexHelper::allLinks($text), $result);
     }
 
-    public function textProvider(): Generator
+    public static function textProvider(): Generator
     {
         yield [
             'Now the widgets are ready to go. The engine combines the entire tree into a <a href="www.w3.com">Visit W3</a>  render-able view and tells the operating system to display it. 

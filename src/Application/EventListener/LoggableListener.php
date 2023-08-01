@@ -18,6 +18,7 @@ use Danilovl\ParameterBundle\Service\ParameterService;
 use Doctrine\Common\EventArgs;
 use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
+use Gedmo\Loggable\LogEntryInterface;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -60,23 +61,23 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
             $logEntry->setObjectClass($meta->getName());
             $logEntry->setLoggedAt();
 
-            if (self::ACTION_CREATE === $action && $ea->isPostInsertGenerator($meta)) {
+            if (LogEntryInterface::ACTION_CREATE === $action && $ea->isPostInsertGenerator($meta)) {
                 $this->pendingLogEntryInserts[spl_object_id($object)] = $logEntry;
             } else {
                 $logEntry->setObjectId($wrapped->getIdentifier());
             }
             $newValues = [];
-            if (self::ACTION_REMOVE !== $action && isset($config['versioned'])) {
+            if (LogEntryInterface::ACTION_REMOVE !== $action && isset($config['versioned'])) {
                 $newValues = $this->getObjectChangeSetData($ea, $object, $logEntry);
                 $logEntry->setData($newValues);
             }
 
-            if (self::ACTION_UPDATE === $action && 0 === count($newValues)) {
+            if (LogEntryInterface::ACTION_UPDATE === $action && 0 === count($newValues)) {
                 return null;
             }
 
             $version = 1;
-            if (self::ACTION_CREATE !== $action) {
+            if (LogEntryInterface::ACTION_CREATE !== $action) {
                 $version = $ea->getNewVersion($logEntryMeta, $object);
                 if (empty($version)) {
                     $version = 1;

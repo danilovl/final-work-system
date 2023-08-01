@@ -53,21 +53,21 @@ class ParametersServiceTest extends KernelTestCase
         $this->assertEquals($param, $result);
     }
 
-    public function keyIntegerProvider(): Generator
+    public static function keyIntegerProvider(): Generator
     {
         yield ['pagination.default.page', 1];
         yield ['pagination.default.limit', 25];
         yield ['pagination.home.limit', 100];
     }
 
-    public function keyStringProvider(): Generator
+    public static function keyStringProvider(): Generator
     {
         yield ['template.ajax', 'ajax/'];
         yield ['locale', 'en'];
         yield ['locales', 'en|cs|ru'];
     }
 
-    public function keyArrayProvider(): Generator
+    public static function keyArrayProvider(): Generator
     {
         yield ['pagination.default', ['page' => 1, 'limit' => 25]];
     }

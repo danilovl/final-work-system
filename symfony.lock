@@ -337,9 +337,6 @@
     "sebastian/recursion-context": {
         "version": "4.0.1"
     },
-    "sebastian/resource-operations": {
-        "version": "3.0.1"
-    },
     "sebastian/type": {
         "version": "2.1.0"
     },

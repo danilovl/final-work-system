@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Domain\Media\Helper;
 
 use App\Domain\Media\Helper\MediaHelper;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;

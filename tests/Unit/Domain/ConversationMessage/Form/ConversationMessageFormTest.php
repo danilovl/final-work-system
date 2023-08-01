@@ -56,7 +56,7 @@ class ConversationMessageFormTest extends TypeTestCase
         $this->assertEquals($isValid, $form->isValid());
     }
 
-    public function messageProvider(): Generator
+    public static function messageProvider(): Generator
     {
         yield [['content' => 'text'], true];
         yield [['content' => null], true];

@@ -69,13 +69,13 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
         $this->buildViolation('This value should not be blank.')->assertRaised();
     }
 
-    public function validProvider(): Generator
+    public static function validProvider(): Generator
     {
         yield ['name', ['conversation' => [1]]];
         yield ['name', ['conversation' => [1, 2]]];
     }
 
-    public function notValidProvider(): Generator
+    public static function notValidProvider(): Generator
     {
         yield ['', ['conversation' => [1, 2]]];
         yield [null, ['conversation' => [1, 2, 3]]];

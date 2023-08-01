@@ -41,9 +41,9 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
     }
 
     /**
-     * @dataProvider firstProvider
+     * @dataProvider validateSuccessProvider
      */
-    public function testIsValid(string $startDate): void
+    public function testValidateSuccess(string $startDate): void
     {
         $date = new DateTime($startDate);
         $this->validator->initialize($this->context);
@@ -52,11 +52,31 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    public function firstProvider(): Generator
+    /**
+     * @dataProvider validateFailedProvider
+     */
+    public function testValidateFailed(string $startDate): void
+    {
+        $date = new DateTime($startDate);
+        $this->validator->initialize($this->context);
+        $this->validator->validate($date, new FirstWeekDay);
+
+        $this->assertEquals(1, $this->context->getViolations()->count());
+    }
+
+    public static function validateSuccessProvider(): Generator
     {
         yield ['2019-01-07'];
         yield ['2019-01-14'];
         yield ['2019-01-21'];
         yield ['2019-01-28'];
+    }
+
+    public static function validateFailedProvider(): Generator
+    {
+        yield ['2019-01-05'];
+        yield ['2019-02-14'];
+        yield ['2019-03-21'];
+        yield ['2019-04-11'];
     }
 }

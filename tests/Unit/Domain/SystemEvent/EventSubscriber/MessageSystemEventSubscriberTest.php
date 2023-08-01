@@ -16,6 +16,6 @@ use App\Domain\SystemEvent\EventSubscriber\MessageSystemEventSubscriber;
 
 class MessageSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
-    protected string $classSubscriber = MessageSystemEventSubscriber::class;
+    protected static string $classSubscriber = MessageSystemEventSubscriber::class;
 }
 

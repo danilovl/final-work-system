@@ -19,13 +19,13 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class VersionSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
-    protected string $classSubscriber = VersionSystemEventSubscriber::class;
+    protected static string $classSubscriber = VersionSystemEventSubscriber::class;
 
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->dispatcher = new EventDispatcher;
-        $this->eventSubscriber = new $this->classSubscriber(
+        $this->eventSubscriber = new static::$classSubscriber(
             $kernel->getContainer()->get(EntityManagerService::class),
             $kernel->getContainer()->get(WorkService::class)
         );

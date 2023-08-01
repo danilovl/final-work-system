@@ -19,16 +19,15 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
-    protected string $classSubscriber = DocumentSystemEventSubscriber::class;
+    protected static string $classSubscriber = DocumentSystemEventSubscriber::class;
 
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->dispatcher = new EventDispatcher;
-        $this->eventSubscriber = new $this->classSubscriber(
+        $this->eventSubscriber = new static::$classSubscriber(
             $kernel->getContainer()->get(EntityManagerService::class),
             $kernel->getContainer()->get(UserWorkService::class)
         );
     }
 }
-

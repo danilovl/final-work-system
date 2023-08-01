@@ -29,7 +29,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($length, $passwordLength);
     }
 
-    public function randomPasswordProvider(): Generator
+    public static function randomPasswordProvider(): Generator
     {
         yield [1];
         yield [2];
@@ -47,7 +47,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($compare, $isValid);
     }
 
-    public function compareSimpleTwoArrayProvider(): Generator
+    public static function compareSimpleTwoArrayProvider(): Generator
     {
         yield [[1, 2, 3], [2, 1, 3], true];
         yield [['a', 'b', 'c'], ['b', 'a', 'c'], true];
@@ -65,7 +65,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($check, $isValid);
     }
 
-    public function checkIntersectTwoArrayProvider(): Generator
+    public static function checkIntersectTwoArrayProvider(): Generator
     {
         yield [[2, 2, 2], [2, 2, 3], true];
         yield [[2, 2, 2], [2, 2, 2], true];
@@ -85,7 +85,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($sanitizeFileName, $result);
     }
 
-    public function sanitizeFileNameProvider(): Generator
+    public static function sanitizeFileNameProvider(): Generator
     {
         yield ['test?test?file.pdf', PlatformConstant::UNIX, 'test_test_file.pdf'];
         yield ['test#test?test/file.pdf', PlatformConstant::LINUX, 'test_test_test_file.pdf'];

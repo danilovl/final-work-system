@@ -34,7 +34,7 @@ class EventRepositoryDataTest extends TestCase
         );
     }
 
-    public function dataProvider(): Generator
+    public static function dataProvider(): Generator
     {
         yield [
             [

@@ -16,5 +16,5 @@ use App\Application\EventSubscriber\EmailNotification\UserEmailNotificationSubsc
 
 class UserEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
 {
-    protected string $classSubscriber = UserEmailNotificationSubscriber::class;
+    protected static string $classSubscriber = UserEmailNotificationSubscriber::class;
 }

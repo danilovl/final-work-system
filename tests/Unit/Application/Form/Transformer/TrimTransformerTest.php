@@ -41,7 +41,7 @@ class TrimTransformerTest extends TestCase
         $this->assertEquals($expected, $this->commaDotTransformer->reverseTransform($replace));
     }
 
-    public function transformProvider(): Generator
+    public static function transformProvider(): Generator
     {
         yield [' text', 'text'];
         yield ['text ', 'text'];
@@ -49,7 +49,7 @@ class TrimTransformerTest extends TestCase
         yield [' ', ''];
     }
 
-    public function reverseTransformProvider(): Generator
+    public static function reverseTransformProvider(): Generator
     {
         yield ['text ', 'text '];
     }

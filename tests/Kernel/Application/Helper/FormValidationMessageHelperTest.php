@@ -65,7 +65,7 @@ class FormValidationMessageHelperTest extends KernelTestCase
         $this->assertEquals($expectedErrors, $result);
     }
 
-    public function dataProvider(): Generator
+    public static function dataProvider(): Generator
     {
         yield [
             ['text' => null, 'date' => null],

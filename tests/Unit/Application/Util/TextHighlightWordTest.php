@@ -38,7 +38,7 @@ class TextHighlightWordTest extends TestCase
         $this->assertEquals($expectedResult, $highlightedText);
     }
 
-    public function highlightEntireWordsDataProvider(): Generator
+    public static function highlightEntireWordsDataProvider(): Generator
     {
         yield ['Lorem ipsum dolor sit amet', ['ipsum'], 'Lorem <span style="background-color: yellow;">ipsum</span> dolor sit amet'];
         yield ['Lorem ipsum dolor sit amet', ['Lorem', 'sit'], '<span style="background-color: yellow;">Lorem</span> ipsum dolor <span style="background-color: yellow;">sit</span> amet'];
@@ -48,7 +48,7 @@ class TextHighlightWordTest extends TestCase
         yield ['která bude souviset s náplní mé prace v ŠA', ['ša', 'amet'], 'která bude souviset s náplní mé prace v <span style="background-color: yellow;">ŠA</span>'];
     }
 
-    public function highlightPartWordsDataProvider(): Generator
+    public static function highlightPartWordsDataProvider(): Generator
     {
         yield ['Lorem ipsumdolor sit amet', ['ipsum'], 'Lorem <span style="background-color: yellow;">ipsum</span>dolor sit amet'];
         yield ['Lorem ipsum dolor sitamet', ['Lorem', 'sit'], '<span style="background-color: yellow;">Lorem</span> ipsum dolor <span style="background-color: yellow;">sit</span>amet'];

@@ -52,7 +52,7 @@ class EntityManagerServiceTest extends KernelTestCase
         $this->assertEquals(get_parent_class($reference), $entityClass);
     }
 
-    public function repositoryProvider(): Generator
+    public static function repositoryProvider(): Generator
     {
         yield [User::class, UserRepository::class];
         yield [Work::class, WorkRepository::class];
@@ -60,7 +60,7 @@ class EntityManagerServiceTest extends KernelTestCase
         yield [Conversation::class, ConversationRepository::class];
     }
 
-    public function referenceProvider(): Generator
+    public static function referenceProvider(): Generator
     {
         yield [User::class];
         yield [Work::class];

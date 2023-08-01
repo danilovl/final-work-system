@@ -16,6 +16,5 @@ use App\Domain\SystemEvent\EventSubscriber\EventSystemEventSubscriber;
 
 class EventSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
-    protected string $classSubscriber = EventSystemEventSubscriber::class;
+    protected static string $classSubscriber = EventSystemEventSubscriber::class;
 }
-

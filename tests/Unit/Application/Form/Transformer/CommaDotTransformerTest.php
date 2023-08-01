@@ -41,14 +41,14 @@ class CommaDotTransformerTest extends TestCase
         $this->assertEquals($expected, $this->commaDotTransformer->reverseTransform($replace));
     }
 
-    public function transformProvider(): Generator
+    public static function transformProvider(): Generator
     {
         yield ['11111,11111', '11111.11111'];
         yield ['50,0527973', '50.0527973'];
         yield ['50,05,27,97,3', '50.05.27.97.3'];
     }
 
-    public function reverseTransformProvider(): Generator
+    public static function reverseTransformProvider(): Generator
     {
         yield ['50.0527973', '50.0527973'];
         yield ['1', '1'];

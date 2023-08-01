@@ -30,7 +30,7 @@ class StreamedResponseUtilTest extends TestCase
         $this->assertEquals($expectedResponse, $response);
     }
 
-    public function responseProvider(): Generator
+    public static function responseProvider(): Generator
     {
         $streamedResponse = new StreamedResponse;
 

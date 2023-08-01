@@ -37,7 +37,7 @@ class ObjectHelperTest extends TestCase
         $this->assertEquals($expectedTraits, $result);
     }
 
-    public function classProvider(): Generator
+    public static function classProvider(): Generator
     {
         yield [
             new class { }, []

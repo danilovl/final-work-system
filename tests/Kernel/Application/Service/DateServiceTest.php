@@ -38,7 +38,7 @@ class DateServiceTest extends KernelTestCase
         $this->assertEquals($dateService->getWeekDaysArray(), $arrayWeek);
     }
 
-    public function weekDaysProvider(): Generator
+    public static function weekDaysProvider(): Generator
     {
         yield ['cs', [
             0 => 'Po',

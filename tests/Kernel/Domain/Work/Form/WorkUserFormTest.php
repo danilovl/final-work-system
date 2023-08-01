@@ -44,7 +44,7 @@ class WorkUserFormTest extends KernelTestCase
         $this->assertEquals($isValid, $form->isValid());
     }
 
-    public function dataProvider(): Generator
+    public static function dataProvider(): Generator
     {
         yield [
             [

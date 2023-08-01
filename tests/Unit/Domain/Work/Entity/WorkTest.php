@@ -37,7 +37,7 @@ class WorkTest extends TestCase
         $this->assertEquals($value, $entity->$get());
     }
 
-    public function gettersAndSettersProvider(): Generator
+    public static function gettersAndSettersProvider(): Generator
     {
         yield [1, 'setId', 'getId'];
         yield ['Work title', 'setTitle', 'getTitle'];

@@ -36,13 +36,13 @@ class IpHelperTest extends TestCase
         $this->assertEquals($isIpAllowed, $result);
     }
 
-    public function ipInRangeProvider(): Generator
+    public static function ipInRangeProvider(): Generator
     {
         yield ['127.0.0.1', '127.0.0.1/24', true];
         yield ['192.0.0.60', '192.0.0.60/24', true];
     }
 
-    public function ipAllowedProvider(): Generator
+    public static function ipAllowedProvider(): Generator
     {
         yield ['127.0.0.1', ['127.0.0.1/24'], true];
         yield ['192.0.0.60', ['127.0.0.1/24'], false];

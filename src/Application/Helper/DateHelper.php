@@ -49,7 +49,7 @@ class DateHelper
     public static function actualWeekEnd(): string|bool
     {
         $weekStart = self::actualWeekStart();
-        $weekEnd = $weekStart + 6 * 24 * 60 * 60;
+        $weekEnd = strtotime($weekStart . ' + 1 week');
 
         return date(DateFormatConstant::DATABASE->value, $weekEnd);
     }
@@ -110,7 +110,7 @@ class DateHelper
     public static function checkWeek(string $date): string|bool
     {
         $current_time = strtotime($date);
-        $actualWeek = date('d.m.Y', $current_time - (date('N', $current_time) - 1) * 86400);
+        $actualWeek = date(DateFormatConstant::DATE->value, $current_time - (date('N', $current_time) - 1) * 86400);
         if ($actualWeek === $date) {
             return $date;
         }

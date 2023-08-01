@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\{
 
 class BaseEventSubscriber extends KernelTestCase
 {
-    protected string $classSubscriber;
+    protected static string $classSubscriber;
     protected ?EventDispatcher $dispatcher;
     protected ?EventSubscriberInterface $eventSubscriber;
 
@@ -68,9 +68,9 @@ class BaseEventSubscriber extends KernelTestCase
         );
     }
 
-    public function subscribedEvents(): Generator
+    public static function subscribedEvents(): Generator
     {
-        foreach ($this->classSubscriber::getSubscribedEvents() as $eventKey => $event) {
+        foreach ((static::$classSubscriber)::getSubscribedEvents() as $eventKey => $event) {
             yield [$eventKey, $event];
         }
     }

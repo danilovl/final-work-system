@@ -33,7 +33,7 @@ class CompareHelperTest extends TestCase
         $this->assertEquals($expectedValue, $result);
     }
 
-    public function compareProvider(): Generator
+    public static function compareProvider(): Generator
     {
         yield [1, 0, CompareConstant::MORE, true];
         yield [0, 1, CompareConstant::MORE, false];

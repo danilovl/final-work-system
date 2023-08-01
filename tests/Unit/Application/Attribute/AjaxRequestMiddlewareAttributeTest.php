@@ -118,7 +118,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         call_user_func([$attribute->class, 'handle'], $request);
     }
 
-    public function classMethodProvider(): Generator
+    public static function classMethodProvider(): Generator
     {
         yield
         [

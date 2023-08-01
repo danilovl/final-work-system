@@ -23,13 +23,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class DocumentEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
 {
-    protected string $classSubscriber = DocumentEmailNotificationSubscriber::class;
+    protected static string $classSubscriber = DocumentEmailNotificationSubscriber::class;
 
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->dispatcher = new EventDispatcher;
-        $this->eventSubscriber = new $this->classSubscriber(
+        $this->eventSubscriber = new static::$classSubscriber(
             $kernel->getContainer()->get(UserFacade::class),
             $kernel->getContainer()->get('twig'),
             $kernel->getContainer()->get(TranslatorService::class),

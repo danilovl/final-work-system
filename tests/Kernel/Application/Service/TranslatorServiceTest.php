@@ -44,14 +44,14 @@ class TranslatorServiceTest extends KernelTestCase
         $this->assertEquals($trans, $result);
     }
 
-    public function idProvider(): Generator
+    public static function idProvider(): Generator
     {
         yield ['app.system_name', 'System for conducting bachelor and diploma theses'];
         yield ['app.text.author', 'Author'];
         yield ['app.error.500', 'Internal Server Error'];
     }
 
-    public function transProvider(): Generator
+    public static function transProvider(): Generator
     {
         yield ['app.email_notification.subject.user_create', 'email_notification', 'en', 'Create a new account'];
         yield ['app.email_notification.subject.user_create', 'email_notification', 'ru', 'Создание новой учетной записи'];

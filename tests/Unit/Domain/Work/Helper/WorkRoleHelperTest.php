@@ -10,10 +10,11 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Domain\Work\Helper;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Domain\Work\Helper\WorkRoleHelper;
 use PHPUnit\Framework\TestCase;
 
 class WorkRoleHelperTest extends TestCase
@@ -35,31 +36,31 @@ class WorkRoleHelperTest extends TestCase
 
     public function testIsAuthorSupervisorOpponent(): void
     {
-        $this->assertTrue(\App\Domain\Work\Helper\WorkRoleHelper::hasAccessToWork($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::hasAccessToWork($this->work, $this->user));
     }
 
     public function testIsAuthorSupervisor(): void
     {
-        $this->assertTrue(\App\Domain\Work\Helper\WorkRoleHelper::isAuthorSupervisor($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isAuthorSupervisor($this->work, $this->user));
     }
 
     public function testIsSupervisor(): void
     {
-        $this->assertTrue(\App\Domain\Work\Helper\WorkRoleHelper::isSupervisor($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isSupervisor($this->work, $this->user));
     }
 
     public function testIsConsultant(): void
     {
-        $this->assertTrue(\App\Domain\Work\Helper\WorkRoleHelper::isConsultant($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isConsultant($this->work, $this->user));
     }
 
     public function testIsAuthor(): void
     {
-        $this->assertTrue(\App\Domain\Work\Helper\WorkRoleHelper::isAuthor($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isAuthor($this->work, $this->user));
     }
 
     public function testIsOpponent(): void
     {
-        $this->assertTrue(\App\Domain\Work\Helper\WorkRoleHelper::isOpponent($this->work, $this->user));
+        $this->assertTrue(WorkRoleHelper::isOpponent($this->work, $this->user));
     }
 }

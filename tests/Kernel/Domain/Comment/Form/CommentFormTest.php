@@ -82,7 +82,7 @@ class CommentFormTest extends KernelTestCase
         $this->assertEquals($isContentShow, $isContentFieldExist);
     }
 
-    public function commentProvider(): Generator
+    public static function commentProvider(): Generator
     {
         yield [true, 1, '2016-04-06 10:00:00', ['content' => 'text'], true];
         yield [false, 2, '2016-04-06 10:00:00', [], false];

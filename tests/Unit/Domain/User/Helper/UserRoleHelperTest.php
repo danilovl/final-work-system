@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Helper;
+namespace App\Tests\Unit\Domain\User\Helper;
 
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
@@ -32,50 +32,50 @@ class UserRoleHelperTest extends TestCase
 
     public function testIsAuthorSupervisorOpponentConsultant(): void
     {
-        $this->assertTrue(\App\Domain\User\Helper\UserRoleHelper::isAuthorSupervisorOpponent($this->user));
+        $this->assertTrue(UserRoleHelper::isAuthorSupervisorOpponent($this->user));
     }
 
     public function testIsAuthorSupervisorOpponent(): void
     {
-        $this->assertTrue(\App\Domain\User\Helper\UserRoleHelper::isAuthorSupervisorOpponent($this->user));
+        $this->assertTrue(UserRoleHelper::isAuthorSupervisorOpponent($this->user));
     }
 
     public function testHasRole(): void
     {
         $this->assertTrue(UserRoleHelper::hasRole($this->user, UserRoleConstant::ADMIN->value));
-        $this->assertTrue(\App\Domain\User\Helper\UserRoleHelper::hasRole($this->user, UserRoleConstant::SUPERVISOR->value));
+        $this->assertTrue(UserRoleHelper::hasRole($this->user, UserRoleConstant::SUPERVISOR->value));
         $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::STUDENT->value));
-        $this->assertFalse(\App\Domain\User\Helper\UserRoleHelper::hasRole($this->user, UserRoleConstant::CONSULTANT->value));
+        $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::CONSULTANT->value));
         $this->assertFalse(UserRoleHelper::hasRole($this->user, UserRoleConstant::OPPONENT->value));
     }
 
     public function testIsAuthor(): void
     {
-        $this->assertFalse(\App\Domain\User\Helper\UserRoleHelper::isAuthor($this->user));
+        $this->assertFalse(UserRoleHelper::isAuthor($this->user));
     }
 
     public function testIsOpponent(): void
     {
-        $this->assertFalse(\App\Domain\User\Helper\UserRoleHelper::isOpponent($this->user));
+        $this->assertFalse(UserRoleHelper::isOpponent($this->user));
     }
 
     public function testIsAuthorSupervisor(): void
     {
-        $this->assertTrue(\App\Domain\User\Helper\UserRoleHelper::isAuthorSupervisor($this->user));
+        $this->assertTrue(UserRoleHelper::isAuthorSupervisor($this->user));
     }
 
     public function testIsAdmin(): void
     {
-        $this->assertTrue(\App\Domain\User\Helper\UserRoleHelper::isAdmin($this->user));
+        $this->assertTrue(UserRoleHelper::isAdmin($this->user));
     }
 
     public function testIsSupervisor(): void
     {
-        $this->assertTrue(\App\Domain\User\Helper\UserRoleHelper::isSupervisor($this->user));
+        $this->assertTrue(UserRoleHelper::isSupervisor($this->user));
     }
 
     public function testIsConsultant(): void
     {
-        $this->assertFalse(\App\Domain\User\Helper\UserRoleHelper::isConsultant($this->user));
+        $this->assertFalse(UserRoleHelper::isConsultant($this->user));
     }
 }

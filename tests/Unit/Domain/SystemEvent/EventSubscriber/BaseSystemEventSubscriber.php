@@ -13,15 +13,16 @@
 namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\Service\EntityManagerService;
+use App\Tests\Kernel\Application\EventSubscriber\BaseEventSubscriber;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class BaseSystemEventSubscriber extends \App\Tests\Kernel\Application\EventSubscriber\BaseEventSubscriber
+class BaseSystemEventSubscriber extends BaseEventSubscriber
 {
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->dispatcher = new EventDispatcher;
-        $this->eventSubscriber = new $this->classSubscriber(
+        $this->eventSubscriber = new static::$classSubscriber(
             $kernel->getContainer()->get(EntityManagerService::class)
         );
     }

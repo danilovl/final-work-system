@@ -16,5 +16,5 @@ use App\Application\EventSubscriber\EmailNotification\TaskEmailNotificationSubsc
 
 class TaskEmailNotificationSubscriberTest extends BaseEmailNotificationSubscriber
 {
-    protected string $classSubscriber = TaskEmailNotificationSubscriber::class;
+    protected static string $classSubscriber = TaskEmailNotificationSubscriber::class;
 }
