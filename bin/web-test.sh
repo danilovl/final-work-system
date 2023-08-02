@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-output=$(php tests/Web/Test/WebTest.php showEcho )
+output=$(php tests/Web/Test/Web.php showEcho )
 IFS=$'\n' read -r -d '' -a classNames <<< "$output"
 
 for className in "${classNames[@]}"

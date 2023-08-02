@@ -28,7 +28,11 @@ RUN apt-get update \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && pecl install redis
 
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
 RUN docker-php-ext-install mysqli \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install gd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install intl \
     && docker-php-ext-install zip \
@@ -48,7 +52,6 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install tidy \
     && docker-php-ext-install xsl \
     && docker-php-ext-install opcache \
-    && docker-php-ext-install gd \
     && docker-php-source delete \
     && docker-php-ext-enable redis
 
