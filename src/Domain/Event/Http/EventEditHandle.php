@@ -110,7 +110,7 @@ readonly class EventEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'event/edit.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'event' => $event,
             'form' => $form->createView()
         ]);

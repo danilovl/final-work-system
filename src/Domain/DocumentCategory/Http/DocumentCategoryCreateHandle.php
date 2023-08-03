@@ -72,7 +72,7 @@ readonly class DocumentCategoryCreateHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'document_category/document_category.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.information_materials_category_create'),
             'buttonActionTitle' => $this->translatorService->trans('app.form.action.create'),

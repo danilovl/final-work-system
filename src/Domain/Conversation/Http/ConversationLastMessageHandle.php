@@ -58,7 +58,7 @@ readonly class ConversationLastMessageHandle
         $this->seoPageService->setTitle($conversation->getTitle());
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'conversation/last_message.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'conversation' => $conversation,
             'conversationMessages' => $conversationMessages
         ]);

@@ -70,7 +70,7 @@ readonly class DocumentEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'document/document.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'media' => $media,
             'title' => $this->translatorService->trans('app.page.information_material_edit'),
             'form' => $form->createView(),

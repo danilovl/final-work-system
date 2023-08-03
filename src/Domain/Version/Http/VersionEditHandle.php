@@ -93,7 +93,7 @@ readonly class VersionEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'version/version.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,
             'media' => $media,
             'form' => $form->createView(),

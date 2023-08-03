@@ -71,7 +71,7 @@ readonly class UserGroupEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'user_group/user_group.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'group' => $group,
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.user_group_edit'),

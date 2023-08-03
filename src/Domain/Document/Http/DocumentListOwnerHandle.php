@@ -67,7 +67,7 @@ readonly class DocumentListOwnerHandle
 
         $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
 
-        return $this->twigRenderService->render('document/list_owner.html.twig', [
+        return $this->twigRenderService->renderToResponse('document/list_owner.html.twig', [
             'openSearchTab' => $openSearchTab,
             'documents' => $this->paginatorService->createPaginationRequest($request, $documents),
             'form' => $form->createView()

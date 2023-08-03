@@ -54,7 +54,7 @@ readonly class ResetPasswordRequestHandle
             );
         }
 
-        return $this->twigRenderService->render('reset_password/request.html.twig', [
+        return $this->twigRenderService->renderToResponse('reset_password/request.html.twig', [
             'form' => $form->createView(),
         ]);
     }

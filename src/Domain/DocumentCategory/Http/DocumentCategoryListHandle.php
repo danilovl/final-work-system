@@ -38,7 +38,7 @@ readonly class DocumentCategoryListHandle
     {
         $user = $this->userService->getUser();
 
-        return $this->twigRenderService->render('document_category/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('document_category/list.html.twig', [
             'mediaCategories' => $this->paginatorService->createPaginationRequest(
                 $request,
                 $this->mediaCategoryFacade->queryMediaCategoriesByOwner($user),

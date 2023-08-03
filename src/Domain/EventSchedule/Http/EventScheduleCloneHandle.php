@@ -81,7 +81,7 @@ readonly class EventScheduleCloneHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'event_schedule/clone.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'eventSchedule' => $eventSchedule,
             'form' => $form->createView()
         ]);

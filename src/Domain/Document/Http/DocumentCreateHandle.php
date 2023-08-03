@@ -86,7 +86,7 @@ readonly class DocumentCreateHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'document/document.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.information_material_create'),
             'buttonActionTitle' => $this->translatorService->trans('app.form.action.create'),

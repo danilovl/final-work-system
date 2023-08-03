@@ -61,7 +61,7 @@ readonly class EventScheduleCreateHandle
             $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
         }
 
-        return $this->twigRenderService->render('event_schedule/create.html.twig', [
+        return $this->twigRenderService->renderToResponse('event_schedule/create.html.twig', [
             'form' => $form->createView()
         ]);
     }

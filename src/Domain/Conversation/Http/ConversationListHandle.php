@@ -75,7 +75,7 @@ readonly class ConversationListHandle
         $isUnreadMessages = $this->conversationMessageFacade
             ->isUnreadMessagesByRecipient($user);
 
-        return $this->twigRenderService->render('conversation/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
             'conversations' => $pagination,
             'searchForm' => $searchForm->createView(),

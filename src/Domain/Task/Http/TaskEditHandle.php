@@ -88,7 +88,7 @@ readonly class TaskEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'task/task.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,
             'task' => $task,
             'form' => $form->createView(),

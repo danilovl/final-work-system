@@ -36,7 +36,7 @@ readonly class EventAddressDetailHandle
             ->createDeleteForm($eventAddress, 'event_address_delete')
             ->createView();
 
-        return $this->twigRenderService->render('event_address/detail.html.twig', [
+        return $this->twigRenderService->renderToResponse('event_address/detail.html.twig', [
             'eventAddress' => $eventAddress,
             'deleteForm' => $deleteForm
         ]);

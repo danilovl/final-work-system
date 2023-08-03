@@ -12,16 +12,16 @@
 
 namespace App\Application\Widget;
 
+use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\User\Service\UserService;
-use Twig\Environment;
 
 class UnreadConversationMessageWidget extends BaseWidget
 {
     private const COUNT_VIEW = 6;
 
     public function __construct(
-        private readonly Environment $environment,
+        private readonly TwigRenderService $twigRenderService,
         private readonly UserService $userService,
         private readonly ConversationMessageFacade $conversationMessageFacade
     ) {}
@@ -43,6 +43,6 @@ class UnreadConversationMessageWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment->render('widget/conversation_message.html.twig', $this->getRenderParameters());
+        return $this->twigRenderService->render('widget/conversation_message.html.twig', $this->getRenderParameters());
     }
 }

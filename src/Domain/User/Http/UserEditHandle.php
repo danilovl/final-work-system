@@ -87,7 +87,7 @@ readonly class UserEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'user/user.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'reload' => true,
             'user' => $user,
             'form' => $form->createView(),

@@ -96,7 +96,7 @@ readonly class WorkEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work/work.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.work_edit'),

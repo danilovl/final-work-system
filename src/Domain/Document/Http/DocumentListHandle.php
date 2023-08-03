@@ -71,7 +71,7 @@ readonly class DocumentListHandle
 
         $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
 
-        return $this->twigRenderService->render('document/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('document/list.html.twig', [
             'openSearchTab' => $openSearchTab,
             'documents' => $this->paginatorService->createPaginationRequest($request, $documents),
             'form' => $form->createView()

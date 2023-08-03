@@ -36,7 +36,7 @@ readonly class WorkCategoryListHandle
     {
         $user = $this->userService->getUser();
 
-        return $this->twigRenderService->render('work_category/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('work_category/list.html.twig', [
             'workCategories' => $this->paginatorService->createPaginationRequest(
                 $request,
                 $this->workCategoryFacade->queryWorkCategoriesByOwner($user)

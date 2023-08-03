@@ -71,7 +71,7 @@ readonly class WorkCategoryEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
             'workCategory' => $workCategory,
             'title' => $this->translatorService->trans('app.page.work_category_edit'),

@@ -142,7 +142,7 @@ readonly class ConversationDetailHandle
 
         $this->messageHighlightService->addHighlight($pagination, $searchModel);
 
-        return $this->twigRenderService->render('conversation/detail.html.twig', [
+        return $this->twigRenderService->renderToResponse('conversation/detail.html.twig', [
             'conversation' => $conversation,
             'conversationMessages' => $pagination,
             'form' => $form?->createView(),

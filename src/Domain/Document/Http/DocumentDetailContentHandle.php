@@ -22,7 +22,7 @@ readonly class DocumentDetailContentHandle
 
     public function handle(Media $media): Response
     {
-        return $this->twigRenderService->render('document/detail_content.html.twig', [
+        return $this->twigRenderService->renderToResponse('document/detail_content.html.twig', [
             'document' => $media
         ]);
     }

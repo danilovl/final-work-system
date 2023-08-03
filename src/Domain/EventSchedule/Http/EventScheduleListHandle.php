@@ -39,7 +39,7 @@ readonly class EventScheduleListHandle
         $eventSchedulesQuery = $this->eventScheduleFacade
             ->queryEventSchedulesByOwner($user);
 
-        return $this->twigRenderService->render('event_schedule/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('event_schedule/list.html.twig', [
             'eventSchedules' => $this->paginatorService->createPaginationRequest($request, $eventSchedulesQuery)
         ]);
     }

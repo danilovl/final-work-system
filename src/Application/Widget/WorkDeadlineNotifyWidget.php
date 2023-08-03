@@ -12,7 +12,10 @@
 
 namespace App\Application\Widget;
 
-use App\Application\Service\TranslatorService;
+use App\Application\Service\{
+    TranslatorService,
+    TwigRenderService
+};
 use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
@@ -21,7 +24,6 @@ use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Service\WorkService;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use Twig\Environment;
 
 class WorkDeadlineNotifyWidget extends BaseWidget
 {
@@ -30,7 +32,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
         private readonly WorkService $workService,
         private readonly ParameterServiceInterface $parameterService,
         private readonly TranslatorService $translatorService,
-        private readonly Environment $twig,
+        private readonly TwigRenderService $twigRenderService,
         private readonly WorkFacade $workFacade
     ) {}
 
@@ -67,7 +69,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
             return null;
         }
 
-        return $this->twig->render('widget/notify.html.twig', [
+        return $this->twigRenderService->render('widget/notify.html.twig', [
             'class' => $this->parameterService->getString($type),
             'message' => $this->translatorService->trans('app.text.reminding_work_deadline_submission')
         ]);

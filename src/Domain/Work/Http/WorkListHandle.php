@@ -65,7 +65,7 @@ readonly class WorkListHandle
             }
         }
 
-        return $this->twigRenderService->render('work/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('work/list.html.twig', [
             'form' => $form->createView(),
             'openSearchTab' => $form->isSubmitted(),
             'workGroups' => $pagination,

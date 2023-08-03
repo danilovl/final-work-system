@@ -13,12 +13,12 @@
 namespace App\Application\Widget;
 
 use App\Application\Menu\MenuItem;
+use App\Application\Service\TwigRenderService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
 
 class MenuWidget extends BaseWidget
 {
@@ -32,7 +32,7 @@ class MenuWidget extends BaseWidget
         private readonly RouterInterface $router,
         private readonly UserService $userService,
         private readonly Security $security,
-        private readonly Environment $environment
+        private readonly TwigRenderService $twigRenderService
     ) {
         $this->user = $this->userService->getUser();
     }
@@ -123,6 +123,6 @@ class MenuWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment->render("widget/menu/{$this->menu}.html.twig", $this->getRenderParameters());
+        return $this->twigRenderService->render("widget/menu/{$this->menu}.html.twig", $this->getRenderParameters());
     }
 }

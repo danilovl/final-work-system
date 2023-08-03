@@ -89,7 +89,7 @@ readonly class ProfileChangeImageHandle
             }
         }
 
-        return $this->twigRenderService->render('profile/edit_image.html.twig', [
+        return $this->twigRenderService->renderToResponse('profile/edit_image.html.twig', [
             'form' => $form->createView()
         ]);
     }

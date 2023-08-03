@@ -80,7 +80,7 @@ readonly class ResetPasswordResetHandle
             return $this->requestService->redirectToRoute('homepage');
         }
 
-        return $this->twigRenderService->render('reset_password/reset.html.twig', [
+        return $this->twigRenderService->renderToResponse('reset_password/reset.html.twig', [
             'form' => $form->createView(),
         ]);
     }

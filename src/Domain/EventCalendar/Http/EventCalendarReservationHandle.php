@@ -52,7 +52,7 @@ readonly class EventCalendarReservationHandle
             'works' => $userWorks
         ]);
 
-        return $this->twigRenderService->render('event/calendar_reservation.html.twig', [
+        return $this->twigRenderService->renderToResponse('event/calendar_reservation.html.twig', [
             'form' => $form->createView()
         ]);
     }

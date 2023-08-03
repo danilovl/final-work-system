@@ -38,7 +38,7 @@ readonly class ArticleCategoryListHandle
             $this->userService->getUser()->getRoles()
         );
 
-        return $this->twigRenderService->render('article_category/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('article_category/list.html.twig', [
             'articleCategories' => $this->paginatorService->createPaginationRequest($request, $articleCategoriesQuery)
         ]);
     }

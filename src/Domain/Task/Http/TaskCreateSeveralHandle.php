@@ -85,7 +85,7 @@ readonly class TaskCreateSeveralHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'task/task.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.task_create'),
             'taskDeadlines' => $this->taskDeadlineFacade->getDeadlinesByOwner($user),

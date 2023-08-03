@@ -26,7 +26,12 @@ readonly class TwigRenderService
         private ParameterServiceInterface $parameterService
     ) {}
 
-    public function render(
+    public function render(string $view, array $parameters = []): string
+    {
+        return $this->environment->render($view, $parameters);
+    }
+
+    public function renderToResponse(
         string $view,
         array $parameters = [],
         Response $response = null

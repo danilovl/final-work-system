@@ -12,15 +12,15 @@
 
 namespace App\Application\Widget;
 
+use App\Application\Service\TwigRenderService;
 use Symfony\Component\Intl\Locales;
-use Twig\Environment;
 
 class LocalesWidget extends BaseWidget
 {
     private array $locales;
 
     public function __construct(
-        private readonly Environment $environment,
+        private readonly TwigRenderService $twigRenderService,
         string $locales
     ) {
         $this->locales = explode('|', $locales);
@@ -41,6 +41,6 @@ class LocalesWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment->render('widget/locales.html.twig', $this->getRenderParameters());
+        return $this->twigRenderService->render('widget/locales.html.twig', $this->getRenderParameters());
     }
 }

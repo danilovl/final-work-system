@@ -57,7 +57,7 @@ readonly class TaskListHandle
             $tasksQuery = $this->taskFacade->queryByIds($taskIds);
         }
 
-        return $this->twigRenderService->render('task/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('task/list.html.twig', [
             'isTasksInComplete' => $isTasksInComplete,
             'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery),
             'searchForm' => $searchForm->createView(),

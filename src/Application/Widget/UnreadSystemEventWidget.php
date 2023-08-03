@@ -12,19 +12,19 @@
 
 namespace App\Application\Widget;
 
+use App\Application\Service\TwigRenderService;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
     SystemEventRecipientFacade
 };
 use App\Domain\User\Service\UserService;
-use Twig\Environment;
 
 class UnreadSystemEventWidget extends BaseWidget
 {
     private const COUNT_VIEW = 6;
 
     public function __construct(
-        private readonly Environment $environment,
+        private readonly TwigRenderService $twigRenderService,
         private readonly UserService $userService,
         private readonly SystemEventFacade $systemEventFacade,
         private readonly SystemEventRecipientFacade $systemEventRecipientFacade
@@ -47,6 +47,6 @@ class UnreadSystemEventWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->environment->render('widget/system_event.html.twig', $this->getRenderParameters());
+        return $this->twigRenderService->render('widget/system_event.html.twig', $this->getRenderParameters());
     }
 }

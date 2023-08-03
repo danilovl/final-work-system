@@ -70,7 +70,7 @@ readonly class EventCalendarManageHandle
             'participants' => $eventParticipantArray
         ]);
 
-        return $this->twigRenderService->render('event/calendar_manage.html.twig', [
+        return $this->twigRenderService->renderToResponse('event/calendar_manage.html.twig', [
             'form' => $form->createView()
         ]);
     }

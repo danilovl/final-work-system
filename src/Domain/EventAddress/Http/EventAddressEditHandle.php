@@ -74,7 +74,7 @@ readonly class EventAddressEditHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'event_address/event_address.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
             'eventAddress' => $eventAddress,
             'title' => $this->translatorService->trans('app.page.appointment_address_edit'),

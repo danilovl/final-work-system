@@ -73,7 +73,7 @@ readonly class WorkEditAuthorHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work/edit_author.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,
             'user' => $author,
             'form' => $form->createView(),

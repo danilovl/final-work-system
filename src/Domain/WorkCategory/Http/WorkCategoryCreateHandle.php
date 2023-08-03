@@ -71,7 +71,7 @@ readonly class WorkCategoryCreateHandle
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig');
 
-        return $this->twigRenderService->render($template, [
+        return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.work_category_create'),
             'buttonActionTitle' => $this->translatorService->trans('app.form.action.create'),

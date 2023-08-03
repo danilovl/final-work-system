@@ -25,7 +25,7 @@ readonly class ProfileShowHandle
 
     public function handle(): Response
     {
-        return $this->twigRenderService->render('profile/show.html.twig', [
+        return $this->twigRenderService->renderToResponse('profile/show.html.twig', [
             'user' => $this->userService->getUser()
         ]);
     }
