@@ -12,15 +12,14 @@
 
 namespace App\Application\Form\Transformer;
 
-use App\Application\Exception\InvalidArgumentException;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class TrimTransformer implements DataTransformerInterface
 {
-    public function transform(mixed $value): string
+    public function transform(mixed $value): mixed
     {
         if (!is_string($value)) {
-            throw new InvalidArgumentException('The value must be a string.');
+            return $value;
         }
 
         return trim($value);
