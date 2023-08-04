@@ -14,13 +14,12 @@ namespace App\Tests\Unit\Application\Util;
 
 use App\Application\Util\TextHighlightWordUtil;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class TextHighlightWordTest extends TestCase
 {
-    /**
-     * @dataProvider highlightEntireWordsDataProvider
-     */
+    #[DataProvider('highlightEntireWordsDataProvider')]
     public function testHighlightEntireWords(string $text, array $words, string $expectedResult): void
     {
         $highlightedText = TextHighlightWordUtil::highlightEntireWords($text, $words);
@@ -28,9 +27,7 @@ class TextHighlightWordTest extends TestCase
         $this->assertEquals($expectedResult, $highlightedText);
     }
 
-    /**
-     * @dataProvider highlightPartWordsDataProvider
-     */
+    #[DataProvider('highlightPartWordsDataProvider')]
     public function testHighlightPartWords(string $text, array $words, string $expectedResult): void
     {
         $highlightedText = TextHighlightWordUtil::highlightPartWords($text, $words);

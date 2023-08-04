@@ -19,6 +19,7 @@ use App\Domain\User\Entity\User;
 use DateTime;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;
 
@@ -55,9 +56,7 @@ class CommentFormTest extends KernelTestCase
         return $event;
     }
 
-    /**
-     * @dataProvider commentProvider
-     */
+    #[DataProvider('commentProvider')]
     public function testSubmitValidData(
         bool $isOwner,
         int $userId,

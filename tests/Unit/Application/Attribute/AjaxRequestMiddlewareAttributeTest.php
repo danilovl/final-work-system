@@ -18,15 +18,14 @@ use App\Application\Exception\AjaxRuntimeException;
 use App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware;
 use DateTime;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 
 class AjaxRequestMiddlewareAttributeTest extends TestCase
 {
-    /**
-     * @dataProvider classMethodProvider
-     */
+    #[DataProvider('classMethodProvider')]
     public function testAttributeInstance(object $object, string $method): void
     {
         $attribute = $this->getAttribute($object, $method);
@@ -34,9 +33,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $this->assertEquals(AjaxRequestMiddlewareAttribute::class, get_class($attribute));
     }
 
-    /**
-     * @dataProvider classMethodProvider
-     */
+    #[DataProvider('classMethodProvider')]
     public function testClassInstance(
         object $object,
         string $method,
@@ -47,9 +44,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         $this->assertEquals($class, $attribute->class);
     }
 
-    /**
-     * @dataProvider classMethodProvider
-     */
+    #[DataProvider('classMethodProvider')]
     public function testAttributeHandleSuccess(object $object, string $method): void
     {
         $attribute = $this->getAttribute($object, $method);
@@ -64,9 +59,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider classMethodProvider
-     */
+    #[DataProvider('classMethodProvider')]
     public function testAttributeHandleFailsDateForm(object $object, string $method): void
     {
         $this->expectException(AjaxRuntimeException::class);
@@ -82,9 +75,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         call_user_func([$attribute->class, 'handle'], $request);
     }
 
-    /**
-     * @dataProvider classMethodProvider
-     */
+    #[DataProvider('classMethodProvider')]
     public function testAttributeHandleFailsType(object $object, string $method): void
     {
         $this->expectException(AjaxRuntimeException::class);
@@ -100,9 +91,7 @@ class AjaxRequestMiddlewareAttributeTest extends TestCase
         call_user_func([$attribute->class, 'handle'], $request);
     }
 
-    /**
-     * @dataProvider classMethodProvider
-     */
+    #[DataProvider('classMethodProvider')]
     public function testAttributeHandleFailsDateStart(object $object, string $method): void
     {
         $this->expectException(AjaxRuntimeException::class);

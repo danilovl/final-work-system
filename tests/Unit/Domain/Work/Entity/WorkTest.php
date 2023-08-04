@@ -19,13 +19,12 @@ use App\Domain\WorkType\Entity\WorkType;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class WorkTest extends TestCase
 {
-    /**
-     * @dataProvider gettersAndSettersProvider
-     */
+    #[DataProvider('gettersAndSettersProvider')]
     public function testGettersAndSetters(
         mixed $value,
         string $set,

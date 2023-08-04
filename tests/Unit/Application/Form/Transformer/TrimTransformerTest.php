@@ -14,6 +14,7 @@ namespace App\Tests\Unit\Application\Form\Transformer;
 
 use App\Application\Form\Transformer\TrimTransformer;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class TrimTransformerTest extends TestCase
@@ -25,17 +26,13 @@ class TrimTransformerTest extends TestCase
         $this->commaDotTransformer = new TrimTransformer;
     }
 
-    /**
-     * @dataProvider transformProvider
-     */
+    #[DataProvider('transformProvider')]
     public function testTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->transform($replace));
     }
 
-    /**
-     * @dataProvider reverseTransformProvider
-     */
+    #[DataProvider('reverseTransformProvider')]
     public function testReverseTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->reverseTransform($replace));

@@ -14,22 +14,19 @@ namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Helper\IpHelper;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class IpHelperTest extends TestCase
 {
-    /**
-     * @dataProvider ipInRangeProvider
-     */
+    #[DataProvider('ipInRangeProvider')]
     public function testIsIpInRange(string $ip, string $range, bool $result): void
     {
         $isIpInRange = IpHelper::isIpInRange($ip, $range);
         $this->assertEquals($isIpInRange, $result);
     }
 
-    /**
-     * @dataProvider ipAllowedProvider
-     */
+    #[DataProvider('ipAllowedProvider')]
     public function testisIpAllowed(string $ip, array $whiteList, bool $result): void
     {
         $isIpAllowed = IpHelper::isIpAllowed($ip, $whiteList);

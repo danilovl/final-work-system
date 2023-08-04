@@ -14,13 +14,12 @@ namespace App\Tests\Unit\Application\Util;
 
 use App\Application\Util\SluggerUtil;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SluggerUtilTest extends TestCase
 {
-    /**
-     * @dataProvider slugifyDataProvider
-     */
+    #[DataProvider('slugifyDataProvider')]
     public function testSlugify(string $input, string $expectedOutput)
     {
         $slugger = new SluggerUtil();

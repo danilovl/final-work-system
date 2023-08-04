@@ -23,13 +23,12 @@ use App\Application\Traits\Entity\{
 use App\Domain\Event\Entity\Event;
 use App\Domain\Media\Entity\Media;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ObjectHelperTest extends TestCase
 {
-    /**
-     * @dataProvider classProvider
-     */
+    #[DataProvider('classProvider')]
     public function testClassUsesDeep(string|object $class, array $expectedTraits): void
     {
         $result = ObjectHelper::classUsesDeep($class);

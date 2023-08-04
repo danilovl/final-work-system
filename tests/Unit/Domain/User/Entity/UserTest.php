@@ -17,13 +17,12 @@ use App\Domain\User\Entity\User;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    /**
-     * @dataProvider gettersAndSettersProvider
-     */
+    #[DataProvider('gettersAndSettersProvider')]
     public function testGettersAndSetters(
         mixed $value,
         string $set,

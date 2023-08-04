@@ -13,6 +13,7 @@
 namespace App\Tests\Kernel\Application\EventSubscriber;
 
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\{
     EventDispatcher,
@@ -31,27 +32,21 @@ class BaseEventSubscriber extends KernelTestCase
         $this->eventSubscriber = null;
     }
 
-    /**
-     * @dataProvider subscribedEvents
-     */
+    #[DataProvider('subscribedEvents')]
     public function testInitialState(string $eventKey): void
     {
         $this->assertEquals([], $this->dispatcher->getListeners());
         $this->assertFalse($this->dispatcher->hasListeners($eventKey));
     }
 
-    /**
-     * @dataProvider subscribedEvents
-     */
+    #[DataProvider('subscribedEvents')]
     public function testAddSubscriber(string $eventKey): void
     {
         $this->dispatcher->addSubscriber($this->eventSubscriber);
         $this->assertTrue($this->dispatcher->hasListeners($eventKey));
     }
 
-    /**
-     * @dataProvider subscribedEvents
-     */
+    #[DataProvider('subscribedEvents')]
     public function testRemoveSubscriber(string $eventKey): void
     {
         $this->dispatcher->addSubscriber($this->eventSubscriber);

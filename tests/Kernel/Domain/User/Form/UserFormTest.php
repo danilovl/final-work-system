@@ -16,6 +16,7 @@ use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Form\UserForm;
 use App\Domain\User\Model\UserModel;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;
 
@@ -29,9 +30,7 @@ class UserFormTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testSubmitValidData(
         array $data,
         bool $isValid

@@ -15,6 +15,7 @@ namespace App\Tests\Kernel\Domain\MediaCategory\Form;
 use App\Domain\MediaCategory\Form\MediaCategoryForm;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;
 
@@ -28,9 +29,7 @@ class MediaCategoryFormTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testSubmitValidData(
         array $data,
         bool $isValid

@@ -17,13 +17,12 @@ use App\Domain\ConversationMessageStatus\DataTransferObject\ConversationMessageS
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ConversationMessageStatusRepositoryDataTest extends TestCase
 {
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testToArray(array $data): void
     {
         $conversationMessageStatus = ConversationMessageStatusRepositoryData::createFromArray($data);

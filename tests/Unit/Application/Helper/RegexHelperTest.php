@@ -4,13 +4,12 @@ namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Helper\RegexHelper;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RegexHelperTest extends TestCase
 {
-    /**
-     * @dataProvider textProvider
-     */
+    #[DataProvider('textProvider')]
     public function testAllLinks(string $text, mixed $result): void
     {
         $this->assertEquals(RegexHelper::allLinks($text), $result);

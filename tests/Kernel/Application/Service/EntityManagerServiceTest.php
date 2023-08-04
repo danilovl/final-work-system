@@ -22,6 +22,7 @@ use App\Domain\User\Repository\UserRepository;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class EntityManagerServiceTest extends KernelTestCase
@@ -34,18 +35,14 @@ class EntityManagerServiceTest extends KernelTestCase
         $this->entityManagerService = $kernel->getContainer()->get('app.entity_manager');
     }
 
-    /**
-     * @dataProvider repositoryProvider
-     */
+    #[DataProvider('repositoryProvider')]
     public function testRepository(string $entityClass, string $repositoryClass): void
     {
         $repository = $this->entityManagerService->getRepository($entityClass);
         $this->assertEquals(get_class($repository), $repositoryClass);
     }
 
-    /**
-     * @dataProvider referenceProvider
-     */
+    #[DataProvider('referenceProvider')]
     public function testReference(string $entityClass): void
     {
         $reference = $this->entityManagerService->getReference($entityClass, 1);

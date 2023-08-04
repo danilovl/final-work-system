@@ -14,14 +14,13 @@ namespace App\Tests\Unit\Application\Util;
 
 use App\Application\Util\StreamedResponseUtil;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class StreamedResponseUtilTest extends TestCase
 {
-    /**
-     * @dataProvider responseProvider
-     */
+    #[DataProvider('responseProvider')]
     public function testCreateStreamedResponse(callable $callback, StreamedResponse $expectedResponse): void
     {
         $response = StreamedResponseUtil::create($callback);

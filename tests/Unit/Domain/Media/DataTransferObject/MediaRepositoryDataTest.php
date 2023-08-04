@@ -16,13 +16,12 @@ use App\Domain\Media\DataTransferObject\MediaRepositoryData;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class MediaRepositoryDataTest extends TestCase
 {
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testToArray(array $data): void
     {
         $conversationMessageStatus = MediaRepositoryData::createFromArray($data);

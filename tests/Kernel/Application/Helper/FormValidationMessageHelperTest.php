@@ -14,6 +14,7 @@ namespace App\Tests\Kernel\Application\Helper;
 
 use App\Application\Helper\FormValidationMessageHelper;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\Extension\Core\Type\{
     DateType,
@@ -36,9 +37,7 @@ class FormValidationMessageHelperTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testGetErrorMessages(array $submitData, array $expectedErrors): void
     {
         $form = $this->formFactory

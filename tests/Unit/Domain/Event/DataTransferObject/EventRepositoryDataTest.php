@@ -17,13 +17,12 @@ use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
 use DateTime;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class EventRepositoryDataTest extends TestCase
 {
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testToArray(array $data): void
     {
         $conversationMessageStatus = EventRepositoryData::createFromArray($data);

@@ -15,13 +15,12 @@ namespace App\Tests\Unit\Application\Helper;
 use App\Application\Constant\PlatformConstant;
 use App\Application\Helper\FunctionHelper;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FunctionHelperTest extends TestCase
 {
-    /**
-     * @dataProvider randomPasswordProvider
-     */
+    #[DataProvider('randomPasswordProvider')]
     public function testRandomPassword(int $length): void
     {
         $passwordLength = strlen(FunctionHelper::randomPassword($length));
@@ -37,9 +36,7 @@ class FunctionHelperTest extends TestCase
         yield [100];
     }
 
-    /**
-     * @dataProvider compareSimpleTwoArrayProvider
-     */
+    #[DataProvider('compareSimpleTwoArrayProvider')]
     public function testCompareSimpleTwoArray(array $one, array $two, bool $isValid): void
     {
         $compare = FunctionHelper::compareSimpleTwoArray($one, $two);
@@ -55,9 +52,7 @@ class FunctionHelperTest extends TestCase
         yield [[1, 2, 3], ['a', 'b', 'c'], false];
     }
 
-    /**
-     * @dataProvider checkIntersectTwoArrayProvider
-     */
+    #[DataProvider('checkIntersectTwoArrayProvider')]
     public function testCheckIntersectTwoArray(array $one, array $two, bool $isValid): void
     {
         $check = FunctionHelper::checkIntersectTwoArray($one, $two);
@@ -72,9 +67,7 @@ class FunctionHelperTest extends TestCase
         yield [[2, 2, 2], [3, 3, 3], false];
     }
 
-    /**
-     * @dataProvider sanitizeFileNameProvider
-     */
+    #[DataProvider('sanitizeFileNameProvider')]
     public function testSanitizeFileName(
         string $dangerousFilename,
         PlatformConstant $platform,

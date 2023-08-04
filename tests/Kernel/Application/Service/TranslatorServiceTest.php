@@ -14,6 +14,7 @@ namespace App\Tests\Kernel\Application\Service;
 
 use App\Application\Service\TranslatorService;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class TranslatorServiceTest extends KernelTestCase
@@ -26,18 +27,14 @@ class TranslatorServiceTest extends KernelTestCase
         $this->translatorService = $kernel->getContainer()->get(TranslatorService::class);
     }
 
-    /**
-     * @dataProvider idProvider
-     */
+    #[DataProvider('idProvider')]
     public function testId(string $key, string $result): void
     {
         $trans = $this->translatorService->trans($key);
         $this->assertEquals($trans, $result);
     }
 
-    /**
-     * @dataProvider transProvider
-     */
+    #[DataProvider('transProvider')]
     public function testTrans(string $key, string $domain, string $locale, string $result): void
     {
         $trans = $this->translatorService->trans($key, [], $domain, $locale);

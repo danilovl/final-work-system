@@ -16,13 +16,12 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class WorkRepositoryDataTest extends TestCase
 {
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testToArray(array $data): void
     {
         $conversationMessageStatus = WorkRepositoryData::createFromArray($data);

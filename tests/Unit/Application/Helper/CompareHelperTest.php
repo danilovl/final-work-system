@@ -15,13 +15,12 @@ namespace App\Tests\Unit\Application\Helper;
 use App\Application\Constant\CompareConstant;
 use App\Application\Helper\CompareHelper;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CompareHelperTest extends TestCase
 {
-    /**
-     * @dataProvider compareProvider
-     */
+    #[DataProvider('compareProvider')]
     public function testCompare(
         mixed $value1,
         mixed $value2,

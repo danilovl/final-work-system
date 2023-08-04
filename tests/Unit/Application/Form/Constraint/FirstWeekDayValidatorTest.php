@@ -19,6 +19,7 @@ use App\Application\Form\Constraint\{
 use App\Application\Service\TranslatorService;
 use DateTime;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
@@ -40,9 +41,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         return $mockObject;
     }
 
-    /**
-     * @dataProvider validateSuccessProvider
-     */
+    #[DataProvider('validateSuccessProvider')]
     public function testValidateSuccess(string $startDate): void
     {
         $date = new DateTime($startDate);
@@ -52,9 +51,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    /**
-     * @dataProvider validateFailedProvider
-     */
+    #[DataProvider('validateFailedProvider')]
     public function testValidateFailed(string $startDate): void
     {
         $date = new DateTime($startDate);

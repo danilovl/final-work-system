@@ -14,6 +14,7 @@ namespace App\Tests\Kernel\Application\Service;
 
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ParametersServiceTest extends KernelTestCase
@@ -26,27 +27,21 @@ class ParametersServiceTest extends KernelTestCase
         $this->parametersService = $kernel->getContainer()->get(ParameterService::class);
     }
 
-    /**
-     * @dataProvider keyIntegerProvider
-     */
+    #[DataProvider('keyIntegerProvider')]
     public function testKeyInteger(string $key, int $result): void
     {
         $param = $this->parametersService->get($key);
         $this->assertEquals($param, $result);
     }
 
-    /**
-     * @dataProvider keyStringProvider
-     */
+    #[DataProvider('keyStringProvider')]
     public function testKeyString(string $key, string $result): void
     {
         $param = $this->parametersService->get($key);
         $this->assertEquals($param, $result);
     }
 
-    /**
-     * @dataProvider keyArrayProvider
-     */
+    #[DataProvider('keyArrayProvider')]
     public function testKeyArray(string $key, array $result): void
     {
         $param = $this->parametersService->get($key);

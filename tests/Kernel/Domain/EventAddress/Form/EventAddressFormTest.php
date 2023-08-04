@@ -15,6 +15,7 @@ namespace App\Tests\Kernel\Domain\EventAddress\Form;
 use App\Domain\EventAddress\Form\EventAddressForm;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;
 
@@ -28,9 +29,7 @@ class EventAddressFormTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testSubmitValidData(
         array $data,
         bool $isValid

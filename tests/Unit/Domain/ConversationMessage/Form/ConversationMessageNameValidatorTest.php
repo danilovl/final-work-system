@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\FormInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
@@ -43,9 +44,7 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
         return $mockObject;
     }
 
-    /**
-     * @dataProvider validProvider
-     */
+    #[DataProvider('validProvider')]
     public function testIsValid(?string $value, array $data): void
     {
         $this->setRoot($this->getFormMock($data));
@@ -56,9 +55,7 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    /**
-     * @dataProvider notValidProvider
-     */
+    #[DataProvider('notValidProvider')]
     public function testIsNotValid(?string $value, array $data): void
     {
         $this->setRoot($this->getFormMock($data));

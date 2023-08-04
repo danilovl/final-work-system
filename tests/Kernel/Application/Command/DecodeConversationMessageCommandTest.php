@@ -20,6 +20,7 @@ use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\Criteria;
+use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -51,9 +52,7 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
         return $conversationMessageId;
     }
 
-    /**
-     * @depends testExecute
-     */
+    #[Depends('testExecute')]
     public function testContent(int $conversationMessageId): void
     {
         /** @var ConversationMessage $message */

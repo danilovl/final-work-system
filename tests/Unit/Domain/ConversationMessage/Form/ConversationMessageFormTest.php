@@ -17,6 +17,7 @@ use App\Domain\ConversationMessage\Form\ConversationMessageForm;
 use App\Domain\ConversationMessage\Model\ConversationMessageModel;
 use App\Domain\User\Entity\User;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -35,9 +36,7 @@ class ConversationMessageFormTest extends TypeTestCase
         return $user;
     }
 
-    /**
-     * @dataProvider messageProvider
-     */
+    #[DataProvider('messageProvider')]
     public function testSubmitValidData(
         array $data,
         bool $isValid

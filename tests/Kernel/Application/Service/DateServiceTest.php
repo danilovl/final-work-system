@@ -15,6 +15,7 @@ namespace App\Tests\Kernel\Application\Service;
 use App\Application\Service\DateService;
 use App\Application\Service\TranslatorService;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class DateServiceTest extends KernelTestCase
@@ -27,9 +28,7 @@ class DateServiceTest extends KernelTestCase
         $this->translator = $kernel->getContainer()->get(TranslatorService::class);
     }
 
-    /**
-     * @dataProvider weekDaysProvider
-     */
+    #[DataProvider('weekDaysProvider')]
     public function testGetWeekDaysArray(string $locale, array $arrayWeek): void
     {
         $this->translator->setLocale($locale);

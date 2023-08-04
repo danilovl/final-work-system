@@ -13,6 +13,7 @@
 namespace App\Tests\Kernel\Application\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
