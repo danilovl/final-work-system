@@ -118,11 +118,11 @@
     "scripts": {
         "test-unit": [
             "@php bin/console cache:warmup --env=dev",
-            "vendor/bin/phpunit tests/Unit"
+            "bash bin/phpunit.sh Unit"
         ],
         "test-kernel": [
             "@php bin/console cache:warmup --env=dev",
-            "vendor/bin/phpunit tests/Kernel"
+            "bash bin/phpunit.sh Kernel"
         ],
         "test-web": [
             "@php bin/console cache:warmup --env=dev",
