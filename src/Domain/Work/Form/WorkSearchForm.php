@@ -22,7 +22,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
-    TextType};
+    TextType
+};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,38 +49,25 @@ class WorkSearchForm extends AbstractType
                 'class' => WorkType::class,
                 'required' => false,
                 'multiple' => true
-            ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'required' => false,
-                'multiple' => true,
-                'choices' => $options['authors']
-            ])
-            ->add('supervisor', EntityType::class, [
-                'class' => User::class,
-                'required' => false,
-                'multiple' => true,
-                'choices' => $options['supervisors']
-            ])
-            ->add('opponent', EntityType::class, [
-                'class' => User::class,
-                'required' => false,
-                'multiple' => true,
-                'choices' => $options['opponents']
-            ])
-            ->add('consultant', EntityType::class, [
-                'class' => User::class,
-                'required' => false,
-                'multiple' => true,
-                'choices' => $options['consultants']
-            ])
-            ->add('deadline', ChoiceType::class, [
-                'required' => false,
-                'multiple' => true,
-                'choices' => $options['deadlines'],
-                'choice_label' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value),
-                'choice_value' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value)
             ]);
+
+        $types = ['author', 'supervisor', 'opponent', 'consultant'];
+        foreach ($types as $type) {
+            $builder->add($type, ChoiceType::class, [
+                'required' => false,
+                'multiple' => true,
+                'choices' => $options[$type . 's'],
+                'choice_label' => static fn(User $user): string => $user->getFullNameDegree()
+            ]);
+        }
+
+        $builder->add('deadline', ChoiceType::class, [
+            'required' => false,
+            'multiple' => true,
+            'choices' => $options['deadlines'],
+            'choice_label' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value),
+            'choice_value' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value)
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

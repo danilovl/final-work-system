@@ -17,8 +17,9 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection};
+    Collection,
+    ArrayCollection
+};
 
 readonly class WorkListService
 {

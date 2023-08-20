@@ -32,6 +32,29 @@ readonly class WorkSearch
         string $type,
         FormInterface $form
     ): ArrayIterator {
+        $query = $this->createQuery($user, $type, $form);
+
+        $works = $this->transformedFinderWork->find($query);
+        $works = new ArrayCollection($works);
+
+        $collator = new Collator('cs_CZ.UTF-8');
+        $iterator = $works->getIterator();
+
+        $iterator->uasort(static function (Work $first, Work $second) use ($collator): int|false {
+            return $collator->compare(
+                $first->getAuthor()->getLastname(),
+                $second->getAuthor()->getLastname()
+            );
+        });
+
+        return $iterator;
+    }
+
+    public function createQuery(
+        User $user,
+        string $type,
+        FormInterface $form
+    ): array {
         $query = [
             'size' => 1000,
             'query' => [
@@ -63,6 +86,7 @@ readonly class WorkSearch
 
         $filter = [];
         $filterDates = [];
+
         foreach ($form->getData() as $field => $value) {
             if (empty($value) || (is_iterable($value) && count($value) === 0)) {
                 continue;
@@ -120,19 +144,6 @@ readonly class WorkSearch
             $query['query']['bool']['filter'] = $filterDates;
         }
 
-        $works = $this->transformedFinderWork->find($query);
-        $works = new ArrayCollection($works);
-
-        $collator = new Collator('cs_CZ.UTF-8');
-        $iterator = $works->getIterator();
-
-        $iterator->uasort(static function (Work $first, Work $second) use ($collator): int|false {
-            return $collator->compare(
-                $first->getAuthor()->getLastname(),
-                $second->getAuthor()->getLastname()
-            );
-        });
-
-        return $iterator;
+        return $query;
     }
 }

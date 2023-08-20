@@ -675,6 +675,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         return $this->supervisorWorks;
     }
 
+    public function setSupervisorWorks(Collection $supervisorWorks): void
+    {
+        $this->supervisorWorks = $supervisorWorks;
+    }
+
     /**
      * @return Collection<Work>
      */

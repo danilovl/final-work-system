@@ -18,10 +18,8 @@ use App\Domain\User\Entity\User;
 
 class WorkService
 {
-    public function isParticipant(
-        Work $work,
-        User $user
-    ): bool {
+    public function isParticipant(Work $work, User $user): bool
+    {
         foreach ($this->getAllUsers($work) as $participant) {
             if ($participant->getId() === $user->getId()) {
                 return true;
@@ -38,10 +36,10 @@ class WorkService
 
     public function getUsers(
         Work $work,
-        bool $author = null,
-        bool $supervisor = null,
-        bool $consultant = null,
-        bool $opponent = null
+        bool $author = false,
+        bool $supervisor = false,
+        bool $consultant = false,
+        bool $opponent = false
     ): array {
         $users = [];
 
