@@ -32,8 +32,6 @@ class WorkSearchTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         $kernel = self::bootKernel();
         $formFactory = $kernel->getContainer()->get('form.factory');
 

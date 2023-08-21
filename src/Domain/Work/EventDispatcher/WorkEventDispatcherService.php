@@ -40,7 +40,6 @@ readonly class WorkEventDispatcherService
     {
         $genericEvent = new WorkGenericEvent($work);
 
-
         $this->asyncService->add(function () use ($genericEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_EDIT);
             $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_EDIT);

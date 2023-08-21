@@ -30,7 +30,7 @@ class WorkTest extends TestCase
         string $set,
         string $get
     ): void {
-        $entity = new class extends Work { };
+        $entity = new class extends Work {};
         $entity->$set($value);
 
         $this->assertEquals($value, $entity->$get());

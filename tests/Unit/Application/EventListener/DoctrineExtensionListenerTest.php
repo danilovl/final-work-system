@@ -29,8 +29,6 @@ class DoctrineExtensionListenerTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         $user = $this->createMock(User::class);
         $user->expects($this->any())
             ->method('getUsername')

@@ -25,8 +25,6 @@ class WorkServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->workService = new WorkService;
         $this->work = new Work;
 

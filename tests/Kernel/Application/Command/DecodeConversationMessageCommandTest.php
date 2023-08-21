@@ -33,8 +33,6 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         $kernel = self::bootKernel();
         $this->command = $kernel->getContainer()->get(DecodeConversationMessageCommand::class);
         $this->entityManagerService = $kernel->getContainer()->get(EntityManagerService::class);
