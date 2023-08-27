@@ -10,13 +10,12 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\Work\EventDispatcher;
+namespace App\Tests\Unit\Domain\Version\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
-use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
-use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Media\Entity\Media;
+use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
+use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -24,36 +23,36 @@ use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 
-class WorkEventDispatcherServiceTest extends TestCase
+class VersionEventDispatcherServiceTest extends TestCase
 {
     private readonly EventDispatcherInterface $eventDispatcher;
     private readonly AsyncService $asyncService;
-    private readonly WorkEventDispatcherService $workEventDispatcherService;
+    private readonly VersionEventDispatcherService $versionEventDispatcherService;
 
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->asyncService = new AsyncService;
-        $this->workEventDispatcherService = new WorkEventDispatcherService($this->eventDispatcher, $this->asyncService);
+        $this->versionEventDispatcherService = new VersionEventDispatcherService($this->eventDispatcher, $this->asyncService);
     }
 
     #[DataProvider('dispatchProvider')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
-        $work = $this->createMock(Work::class);
+        $media = $this->createMock(Media::class);
 
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
             ->method('dispatch')
             ->will($this->createReturnCallback($expectEvents, $expectNames));
 
-        $this->workEventDispatcherService->{$method}($work);
+        $this->versionEventDispatcherService->{$method}($media);
         $this->asyncService->call();
     }
 
     private function createReturnCallback(array $expectEvents, array $expectNames): ReturnCallback
     {
-        return $this->returnCallback(function (WorkGenericEvent|UserGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): WorkGenericEvent|UserGenericEvent {
+        return $this->returnCallback(function (VersionGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): VersionGenericEvent {
             $this->assertTrue(in_array(get_class($event), $expectEvents, true));
             $this->assertTrue(in_array($eventName, $expectNames, true));
 
@@ -63,36 +62,23 @@ class WorkEventDispatcherServiceTest extends TestCase
 
     public static function dispatchProvider(): Generator
     {
-        yield ['onWorkCreate', 2,
+        yield ['onVersionCreate', 2,
             [
-                WorkGenericEvent::class,
-                UserGenericEvent::class
+                VersionGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_WORK_CREATE,
-                Events::SYSTEM_WORK_CREATE
+                Events::NOTIFICATION_VERSION_CREATE,
+                Events::SYSTEM_VERSION_CREATE
             ]
         ];
 
-        yield ['onWorkEdit', 2,
+        yield ['onVersionEdit', 2,
             [
-                WorkGenericEvent::class,
-                UserGenericEvent::class
+                VersionGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_WORK_EDIT,
-                Events::SYSTEM_WORK_EDIT
-            ]
-        ];
-
-        yield ['onWorkEditAuthor', 2,
-            [
-                UserGenericEvent::class,
-                WorkGenericEvent::class
-            ],
-            [
-                Events::NOTIFICATION_USER_EDIT,
-                Events::SYSTEM_WORK_AUTHOR_EDIT
+                Events::NOTIFICATION_VERSION_EDIT,
+                Events::SYSTEM_VERSION_EDIT
             ]
         ];
     }
