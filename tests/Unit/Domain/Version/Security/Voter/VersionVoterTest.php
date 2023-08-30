@@ -15,20 +15,18 @@ namespace App\Tests\Unit\Domain\Version\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Version\Security\Voter\VersionVoter;
+use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
 class VersionVoterTest extends TestCase
 {
+    use VoterPublicTrait;
+
     private readonly VersionVoter $versionVoter;
 
     protected function setUp(): void
     {
-        $this->versionVoter = new class extends VersionVoter {
-            public function supportsPublic(string $attribute, mixed $subject): bool
-            {
-                return $this->supports($attribute, $subject);
-            }
-        };
+        $this->versionVoter = $this->createVoterPublic(VersionVoter::class);
     }
 
     public function testSupports(): void

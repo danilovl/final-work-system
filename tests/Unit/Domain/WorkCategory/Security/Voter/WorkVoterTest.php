@@ -15,20 +15,18 @@ namespace App\Tests\Unit\Domain\WorkCategory\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Security\Voter\WorkCategoryVoter;
+use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
 class WorkVoterTest extends TestCase
 {
+    use VoterPublicTrait;
+
     private readonly WorkCategoryVoter $workCategoryVoter;
 
     protected function setUp(): void
     {
-        $this->workCategoryVoter = new class extends WorkCategoryVoter {
-            public function supportsPublic(string $attribute, mixed $subject): bool
-            {
-                return $this->supports($attribute, $subject);
-            }
-        };
+        $this->workCategoryVoter = $this->createVoterPublic(WorkCategoryVoter::class);
     }
 
     public function testSupports(): void
