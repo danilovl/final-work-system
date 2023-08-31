@@ -22,9 +22,17 @@ readonly class TaskSearch
 
     public function getIdsByOwnerAndSearch(User $user, string $search): array
     {
+        $query = $this->createQuery($user, $search);
+        $results = $this->transformedFinderTask->findRaw($query);
+
+        return array_map(static fn(Result $document): int => (int) $document->getId(), $results);
+    }
+
+    public function createQuery(User $user, string $search): array
+    {
         $search = mb_strtolower($search);
 
-        $query = [
+        return [
             'size' => 1000,
             '_source' => ['id'],
             'query' => [
@@ -60,9 +68,5 @@ readonly class TaskSearch
                 ]
             ]
         ];
-
-        $results = $this->transformedFinderTask->findRaw($query);
-
-        return array_map(static fn(Result $document): int => (int) $document->getId(), $results);
     }
 }
