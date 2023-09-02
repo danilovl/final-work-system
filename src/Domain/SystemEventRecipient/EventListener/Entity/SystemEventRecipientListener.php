@@ -15,15 +15,15 @@ namespace App\Domain\SystemEventRecipient\EventListener\Entity;
 use App\Application\Constant\CacheKeyConstant;
 use App\Application\EventDispatcher\CacheEventDispatcherService;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PostPersistEventArgs;
 
 readonly class SystemEventRecipientListener
 {
     public function __construct(private CacheEventDispatcherService $cacheEventDispatcherService) {}
 
-    public function postPersist(LifecycleEventArgs $eventArgs): void
+    public function postPersist(PostPersistEventArgs $eventArgs): void
     {
-        $entity = $eventArgs->getEntity();
+        $entity = $eventArgs->getObject();
         if (!$entity instanceof SystemEventRecipient) {
             return;
         }

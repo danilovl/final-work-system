@@ -17,6 +17,7 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkService;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Validator\Constraints\Date;
 
 class WorkServiceTest extends TestCase
 {
@@ -114,17 +115,28 @@ class WorkServiceTest extends TestCase
 
     public function testGetDeadlineDays(): void
     {
-        $this->work->setDeadline(new DateTime('2023-07-20'));
+        $deadline = new DateTime;
+        $diff = (int) ($deadline)->diff(new DateTime)->format('%a');
+        $dayCount = $deadline->diff(new DateTime)->invert ? $diff : -$diff;
+
+        $this->work->setDeadline($deadline);
         $deadlineDays = $this->workService->getDeadlineDays($this->work);
 
-        $this->assertEquals(4, $deadlineDays);
+        $this->assertEquals($dayCount, $deadlineDays);
     }
 
     public function testGetDeadlineProgramDays(): void
     {
-        $this->work->setDeadlineProgram(new DateTime('2023-07-10'));
+        $deadlineProgram = new DateTime;
+        $now = new DateTime;
+        $d = $now->diff($deadlineProgram)->d;
+
+        $dayCount = $now->diff($deadlineProgram)->invert ? -$d : $d;
+
+        $this->work->setDeadline($deadlineProgram);
+        $this->work->setDeadlineProgram($deadlineProgram);
         $deadlineProgramDays = $this->workService->getDeadlineProgramDays($this->work);
 
-        $this->assertEquals(-5, $deadlineProgramDays);
+        $this->assertEquals($dayCount, $deadlineProgramDays);
     }
 }
