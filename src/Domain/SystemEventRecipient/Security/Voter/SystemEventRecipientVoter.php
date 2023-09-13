@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class SystemEventRecipientVoter extends Voter
 {
-    private const SUPPORTS = [
+    public const SUPPORTS = [
         VoterSupportConstant::CHANGE_VIEWED->value
     ];
 

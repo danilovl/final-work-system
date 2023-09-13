@@ -33,14 +33,7 @@ class TaskVoterTest extends TestCase
     {
         $task = $this->createMock(Task::class);
 
-        $supports = [
-            VoterSupportConstant::VIEW->value,
-            VoterSupportConstant::EDIT->value,
-            VoterSupportConstant::DELETE->value,
-            VoterSupportConstant::TASK_NOTIFY_COMPLETE->value,
-        ];
-
-        foreach ($supports as $support) {
+        foreach (TaskVoter::SUPPORTS as $support) {
             $this->assertTrue($this->taskVoter->supportsPublic($support, $task));
         }
 

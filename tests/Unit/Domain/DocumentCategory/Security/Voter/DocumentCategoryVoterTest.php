@@ -33,12 +33,7 @@ class DocumentCategoryVoterTest extends TestCase
     {
         $mediaCategory = $this->createMock(MediaCategory::class);
 
-        $supports = [
-            VoterSupportConstant::EDIT->value,
-            VoterSupportConstant::DELETE->value
-        ];
-
-        foreach ($supports as $support) {
+        foreach (DocumentCategoryVoter::SUPPORTS as $support) {
             $this->assertTrue($this->documentCategoryVoter->supportsPublic($support, $mediaCategory));
         }
 

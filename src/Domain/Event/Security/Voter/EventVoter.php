@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class EventVoter extends Voter
 {
-    private const SUPPORTS = [
+    public const SUPPORTS = [
         VoterSupportConstant::VIEW->value,
         VoterSupportConstant::EDIT->value,
         VoterSupportConstant::DELETE->value,

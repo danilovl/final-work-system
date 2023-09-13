@@ -33,15 +33,7 @@ class VersionVoterTest extends TestCase
     {
         $versionVoterSubject = $this->createMock(VersionVoterSubject::class);
 
-        $supports = [
-            VoterSupportConstant::CREATE->value,
-            VoterSupportConstant::VIEW->value,
-            VoterSupportConstant::EDIT->value,
-            VoterSupportConstant::DOWNLOAD->value,
-            VoterSupportConstant::DELETE->value,
-        ];
-
-        foreach ($supports as $support) {
+        foreach (VersionVoter::SUPPORTS as $support) {
             $this->assertTrue($this->versionVoter->supportsPublic($support, $versionVoterSubject));
         }
 

@@ -33,10 +33,9 @@ class SystemEventRecipientVoterTest extends TestCase
     {
         $systemEventRecipient = $this->createMock(SystemEventRecipient::class);
 
-        $this->assertTrue($this->systemEventRecipientVoter->supportsPublic(
-            VoterSupportConstant::CHANGE_VIEWED->value,
-            $systemEventRecipient
-        ));
+        foreach (SystemEventRecipientVoter::SUPPORTS as $support) {
+            $this->assertTrue($this->systemEventRecipientVoter->supportsPublic($support, $systemEventRecipient));
+        }
 
         $this->assertFalse($this->systemEventRecipientVoter->supportsPublic('invalid_attribute', $systemEventRecipient));
         $this->assertFalse($this->systemEventRecipientVoter->supportsPublic(VoterSupportConstant::CHANGE_VIEWED->value, 'invalid_subject'));

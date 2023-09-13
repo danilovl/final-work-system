@@ -33,8 +33,9 @@ class WorkVoterTest extends TestCase
     {
         $workCategory = $this->createMock(WorkCategory::class);
 
-        $this->assertTrue($this->workCategoryVoter->supportsPublic(VoterSupportConstant::EDIT->value, $workCategory));
-        $this->assertTrue($this->workCategoryVoter->supportsPublic(VoterSupportConstant::DELETE->value, $workCategory));
+        foreach (WorkCategoryVoter::SUPPORTS as $support) {
+            $this->assertTrue($this->workCategoryVoter->supportsPublic($support, $workCategory));
+        }
 
         $this->assertFalse($this->workCategoryVoter->supportsPublic('invalid_attribute', $workCategory));
         $this->assertFalse($this->workCategoryVoter->supportsPublic(VoterSupportConstant::VIEW->value, 'invalid_subject'));

@@ -33,15 +33,7 @@ class EventAddressVoterTest extends TestCase
     {
         $event = $this->createMock(Event::class);
 
-        $supports = [
-            VoterSupportConstant::VIEW->value,
-            VoterSupportConstant::SWITCH_TO_SKYPE->value,
-            VoterSupportConstant::RESERVATION->value,
-            VoterSupportConstant::EDIT->value,
-            VoterSupportConstant::DELETE->value
-        ];
-
-        foreach ($supports as $support) {
+        foreach (EventVoter::SUPPORTS as $support) {
             $this->assertTrue($this->eventVoter->supportsPublic($support, $event));
         }
 

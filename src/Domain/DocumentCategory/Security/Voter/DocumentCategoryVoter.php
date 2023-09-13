@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class DocumentCategoryVoter extends Voter
 {
-    private const SUPPORTS = [
+    public const SUPPORTS = [
         VoterSupportConstant::EDIT->value,
         VoterSupportConstant::DELETE->value
     ];

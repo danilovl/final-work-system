@@ -36,10 +36,9 @@ class ConversationMessageVoterTest extends TestCase
     {
         $conversationMessage = $this->createMock(ConversationMessage::class);
 
-        $this->assertTrue($this->conversationMessageVoter->supportsPublic(
-            VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value,
-            $conversationMessage
-        ));
+        foreach (ConversationMessageVoter::SUPPORTS as $support) {
+            $this->assertTrue($this->conversationMessageVoter->supportsPublic($support, $conversationMessage));
+        }
 
         $this->assertFalse($this->conversationMessageVoter->supportsPublic('invalid_attribute', $conversationMessage));
         $this->assertFalse($this->conversationMessageVoter->supportsPublic(VoterSupportConstant::VIEW->value, 'invalid_subject'));

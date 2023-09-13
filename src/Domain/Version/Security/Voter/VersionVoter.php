@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class VersionVoter extends Voter
 {
-    private const SUPPORTS = [
+    public const SUPPORTS = [
         VoterSupportConstant::CREATE->value,
         VoterSupportConstant::VIEW->value,
         VoterSupportConstant::EDIT->value,

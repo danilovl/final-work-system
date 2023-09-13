@@ -33,14 +33,7 @@ class EventScheduleVoterTest extends TestCase
     {
         $eventSchedule = $this->createMock(EventSchedule::class);
 
-        $supports = [
-            VoterSupportConstant::VIEW->value,
-            VoterSupportConstant::EDIT->value,
-            VoterSupportConstant::CLONE->value,
-            VoterSupportConstant::DELETE->value
-        ];
-
-        foreach ($supports as $support) {
+        foreach (EventScheduleVoter::SUPPORTS as $support) {
             $this->assertTrue($this->eventScheduleVoter->supportsPublic($support, $eventSchedule));
         }
 
