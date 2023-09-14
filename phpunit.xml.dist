@@ -19,8 +19,14 @@
         <server name="PANTHER_ERROR_SCREENSHOT_DIR" value="var/panther"/>
     </php>
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="tests">
             <directory>tests</directory>
+        </testsuite>
+        <testsuite name="tests-kernel">
+            <directory>tests/Kernel</directory>
+        </testsuite>
+        <testsuite name="tests-unit">
+            <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
     <source>
