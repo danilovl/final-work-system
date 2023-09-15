@@ -24,9 +24,17 @@ readonly class ConversationSearch
 
     public function getIdsByParticipantAndSearch(User $user, string $search): array
     {
+        $query = $this->createQueryGetIdsByParticipantAndSearch($user, $search);
+        $results = $this->transformedFinderConversation->findRaw($query);
+
+        return array_map(static fn(Result $document): int => (int) $document->getId(), $results);
+    }
+
+    public function createQueryGetIdsByParticipantAndSearch(User $user, string $search): array
+    {
         $search = $this->transformSearch($search);
 
-        $query = [
+        return [
             'size' => 1000,
             '_source' => ['id'],
             'query' => [
@@ -82,15 +90,30 @@ readonly class ConversationSearch
                 ]
             ]
         ];
-
-        $results = $this->transformedFinderConversation->findRaw($query);
-
-        return array_map(static fn(Result $document): int => (int) $document->getId(), $results);
     }
 
     public function getMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
     {
-        $query = [
+        $query = $this->createQueryGetMessageIdsByConversationAndSearch($conversation, $search);
+        $results = $this->transformedFinderConversation->findRaw($query);
+
+        $messageIds = [];
+        foreach ($results as $result) {
+            $innerHits = $result->getInnerHits();
+            foreach ($innerHits['messages'] as $innerHit) {
+                foreach ($innerHit['hits'] as $hit) {
+                    $messageIds[] = $hit['_source']['id'];
+                }
+
+            }
+        }
+
+        return $messageIds;
+    }
+
+    public function createQueryGetMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
+    {
+        return [
             'size' => 1000,
             'query' => [
                 'bool' => [
@@ -115,21 +138,6 @@ readonly class ConversationSearch
                 ]
             ]
         ];
-
-        $results = $this->transformedFinderConversation->findRaw($query);
-
-        $messageIds = [];
-        foreach ($results as $result) {
-            $innerHits = $result->getInnerHits();
-            foreach ($innerHits['messages'] as $innerHit) {
-                foreach ($innerHit['hits'] as $hit) {
-                    $messageIds[] = $hit['_source']['id'];
-                }
-
-            }
-        }
-
-        return $messageIds;
     }
 
     private function transformSearch(string $search): string

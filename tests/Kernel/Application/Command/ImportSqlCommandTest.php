@@ -12,8 +12,8 @@
 
 namespace App\Tests\Kernel\Application\Command;
 
+use App\Application\Command\ImportSqlCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -26,7 +26,7 @@ class ImportSqlCommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $command = $application->find('app:import-sql');
+        $command = $application->find(ImportSqlCommand::COMMAND_NAME);
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'file' => self::SQL_FILE_PATH
