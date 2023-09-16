@@ -18,7 +18,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class ServicePublicCompilerPass implements CompilerPassInterface
 {
-    private const SERVICES = [
+    public const SERVICES = [
         'twig',
         'form.factory',
         'security.authorization_checker',

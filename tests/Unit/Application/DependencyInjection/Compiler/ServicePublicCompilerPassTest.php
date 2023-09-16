@@ -13,25 +13,50 @@
 namespace App\Tests\Unit\Application\DependencyInjection\Compiler;
 
 use App\Application\DependencyInjection\Compiler\ServicePublicCompilerPass;
+use EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ServicePublicCompilerPassTest extends TestCase
 {
-    public function testProcess()
+    public function testProcess(): void
     {
         $container = new ContainerBuilder;
-        $container
-            ->register('twig')
-            ->setPublic(false);
 
-        $twigDefinition = $container->getDefinition('twig');
+        foreach (ServicePublicCompilerPass::SERVICES as $service) {
+            $container
+                ->register($service)
+                ->setPublic(false);
+        }
 
-        $this->assertFalse($twigDefinition->isPublic());
+        foreach (ServicePublicCompilerPass::SERVICES as $service) {
+            $definition = $container->getDefinition($service);
+
+            $this->assertFalse($definition->isPublic());
+        }
 
         $resolvePass = new ServicePublicCompilerPass;
         $resolvePass->process($container);
 
-        $this->assertTrue($twigDefinition->isPublic());
+        foreach (ServicePublicCompilerPass::SERVICES as $service) {
+            $definition = $container->getDefinition($service);
+
+            $this->assertTrue($definition->isPublic());
+        }
+    }
+
+    public function testEasyAdminFix(): void
+    {
+        $container = new ContainerBuilder;
+        $container
+            ->register('EasyAdmin', EasyAdminBundle::class)
+            ->setPublic(false);
+
+        $compilerPass = new ServicePublicCompilerPass;
+        $compilerPass->easyAdminFix($container);
+
+        $definition = $container->getDefinition('EasyAdmin');
+
+        $this->assertTrue($definition->isPublic());
     }
 }
