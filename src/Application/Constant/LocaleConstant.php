@@ -17,4 +17,12 @@ enum LocaleConstant: string
     case ISO_CS = 'cs';
     case ISO_EN = 'en';
     case ISO_RU = 'ru';
+
+    /**
+     * @return string[]
+     */
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }
