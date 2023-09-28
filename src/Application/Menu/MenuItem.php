@@ -12,8 +12,8 @@
 
 namespace App\Application\Menu;
 
+use App\Application\Exception\InvalidArgumentException;
 use App\Application\Interfaces\Menu\MenuItemInterface;
-use InvalidArgumentException;
 
 class MenuItem implements MenuItemInterface
 {
@@ -34,12 +34,12 @@ class MenuItem implements MenuItemInterface
     public function setName(string $name): MenuItemInterface
     {
         $oldName = $this->name;
-        if ($oldName == $name) {
+        if ($oldName === $name) {
             return $this;
         }
 
         $parent = $this->getParent();
-        if ($parent !== null && isset($parent[$name])) {
+        if ($parent !== null && $parent->getName() === $name) {
             throw new InvalidArgumentException('Cannot rename item, name is already used by sibling.');
         }
 
@@ -156,7 +156,7 @@ class MenuItem implements MenuItemInterface
         return $this->attributes;
     }
 
-    public function setAttributes(?array $attributes): MenuItemInterface
+    public function setAttributes(array $attributes): MenuItemInterface
     {
         $this->attributes = $attributes;
 
