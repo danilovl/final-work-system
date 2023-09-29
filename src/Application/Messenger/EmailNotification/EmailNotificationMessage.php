@@ -24,7 +24,8 @@ class EmailNotificationMessage extends BaseDataTransferObject
     public array $templateParameters = [];
     public string $uuid;
 
-    public function generateUuid(): void {
+    public function generateUuid(): void
+    {
         $this->uuid = md5(serialize([
             'subject' => $this->subject,
             'to' => $this->to,
