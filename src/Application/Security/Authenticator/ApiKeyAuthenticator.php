@@ -41,9 +41,9 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 
 class ApiKeyAuthenticator extends AbstractAuthenticator
 {
-    private const AUTH_KEY = 'X-AUTH-API-KEY';
-    private const AUTH_USER_TOKEN_KEY = 'X-AUTH-USER-TOKEN';
-    private const AUTH_USER_USERNAME = 'X-AUTH-USER-USERNAME';
+    public const AUTH_KEY = 'X-AUTH-API-KEY';
+    public const AUTH_USER_TOKEN_KEY = 'X-AUTH-USER-TOKEN';
+    public const AUTH_USER_USERNAME = 'X-AUTH-USER-USERNAME';
 
     public function __construct(
         private readonly UserService $userService,
