@@ -26,7 +26,16 @@ class DateHelper
 
     public static function actualWeekStartByDate(DateTime $date): DateTime
     {
-        return $date->sub(new DateInterval('P' . ($date->format('w') - 1) . 'D'));
+        $number = $date->format('w');
+        if ($number == 0) {
+            $number = 7;
+        }
+
+        if ($number != 0) {
+            $number = $number - 1;
+        }
+
+        return $date->sub(new DateInterval('P' . $number . 'D'));
     }
 
     /**

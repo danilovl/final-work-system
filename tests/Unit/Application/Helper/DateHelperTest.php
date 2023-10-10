@@ -30,7 +30,7 @@ class DateHelperTest extends TestCase
 
     public function testActualWeekStartByDate(): void
     {
-        $date = new DateTime('2023-07-10');
+        $date = new DateTime('2023-07-15');
         $expectedWeekStart = new DateTime('2023-07-10');
 
         $actualWeekStart = DateHelper::actualWeekStartByDate($date);
