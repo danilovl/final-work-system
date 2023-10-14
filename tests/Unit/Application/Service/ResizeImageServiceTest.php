@@ -19,7 +19,7 @@ class ResizeImageServiceTest extends TestCase
 {
     public function testResizeBase64Image(): void
     {
-        $originImage = base64_encode(file_get_contents(__DIR__ . '/image/test.jpg'));
+        $originImage = base64_encode(file_get_contents(__DIR__ . '/../../../Helper/image/test_jpg.jpg'));
         $newWidth = 500;
         $resizedImage = (new ResizeImageService)->resizeBase64Image($originImage, $newWidth);
 
