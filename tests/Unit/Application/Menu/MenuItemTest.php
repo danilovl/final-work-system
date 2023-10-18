@@ -18,75 +18,128 @@ use PHPUnit\Framework\TestCase;
 
 class MenuItemTest extends TestCase
 {
+    public function testSetName(): void
+    {
+        $menuItem = new MenuItem('home');
+        $this->assertSame('home', $menuItem->getName());
+
+        $menuItem->setName('new');
+        $this->assertSame('new', $menuItem->getName());
+
+        $menuItemParent = new MenuItem('parent');
+        $menuItem->setParent($menuItemParent);
+        $this->expectException(InvalidArgumentException::class);
+
+        $menuItem->setName('parent');
+    }
+
+    public function testGetUri(): void
+    {
+        $menuItem = new MenuItem('home');
+        $this->assertNull($menuItem->getUri());
+
+        $menuItem->setUri('new');
+        $this->assertSame('new', $menuItem->getUri());
+    }
+
     public function testBasicMenuItemBehavior(): void
     {
-        $item = new MenuItem('home');
+        $menuItem = new MenuItem('home');
 
-        $this->assertEquals('home', $item->getName());
-        $this->assertEquals('home', $item->getLabel());
-        $this->assertTrue($item->isDisplayed());
+        $this->assertEquals('home', $menuItem->getName());
+        $this->assertEquals('home', $menuItem->getLabel());
+        $this->assertTrue($menuItem->isDisplayed());
 
-        $item->setLabel('Home Page');
-        $this->assertEquals('Home Page', $item->getLabel());
+        $menuItem->setLabel('Home Page');
+        $this->assertEquals('Home Page', $menuItem->getLabel());
 
-        $item->setIsDisplayed(false);
-        $this->assertFalse($item->isDisplayed());
+        $menuItem->setIsDisplayed(false);
+        $this->assertFalse($menuItem->isDisplayed());
     }
 
     public function testMenuItemWithChildren(): void
     {
-        $item = new MenuItem('home');
+        $menuItem = new MenuItem('home');
 
-        $child1 = new MenuItem('about');
-        $child1->setLabel('About Us');
-        $child1->setUri('/about');
+        $childMenuItemOne = new MenuItem('about');
+        $childMenuItemOne->setLabel('About Us');
+        $childMenuItemOne->setUri('/about');
 
-        $child2 = new MenuItem('contact');
-        $child2->setLabel('Contact Us');
-        $child2->setUri('/contact');
+        $childMenuItemTwo = new MenuItem('contact');
+        $childMenuItemTwo->setLabel('Contact Us');
+        $childMenuItemTwo->setUri('/contact');
 
-        $item->addChild($child1);
-        $item->addChild($child2);
+        $menuItem->addChild($childMenuItemOne);
+        $menuItem->addChild($childMenuItemTwo);
 
-        $this->assertCount(2, $item->getChildren());
+        $this->assertCount(2, $menuItem->getChildren());
 
-        $this->assertSame($child1, $item->getChild('about'));
-        $this->assertSame($child2, $item->getChild('contact'));
+        $this->assertSame($childMenuItemOne, $menuItem->getChild('about'));
+        $this->assertSame($childMenuItemTwo, $menuItem->getChild('contact'));
 
-        $this->assertSame($item, $child1->getParent());
-        $this->assertSame($item, $child2->getParent());
+        $this->assertSame($menuItem, $childMenuItemOne->getParent());
+        $this->assertSame($menuItem, $childMenuItemTwo->getParent());
     }
 
     public function testRenameMenuItem(): void
     {
-        $item1 = new MenuItem('home');
-        $item2 = new MenuItem('about');
-        $item2->setParent($item1);
+        $menuItemOne = new MenuItem('home');
+        $menuItemTwo = new MenuItem('about');
+        $menuItemTwo->setParent($menuItemOne);
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Cannot rename item, name is already used by sibling.');
 
-        $item2->setName('home');
+        $menuItemTwo->setName('home');
     }
 
     public function testMenuItemAttributes(): void
     {
-        $item = new MenuItem('home');
-        $item->setAttributes([
+        $menuItem = new MenuItem('home');
+        $menuItem->setAttributes([
             'class' => 'menu-item',
             'data-id' => 123
         ]);
 
-        $this->assertEquals(['class' => 'menu-item', 'data-id' => 123], $item->getAttributes());
+        $this->assertEquals(['class' => 'menu-item', 'data-id' => 123], $menuItem->getAttributes());
 
-        $item->addAttribute('data-type', 'page');
-        $this->assertEquals(['class' => 'menu-item', 'data-id' => 123, 'data-type' => 'page'], $item->getAttributes());
+        $menuItem->addAttribute('data-type', 'page');
+        $this->assertEquals(['class' => 'menu-item', 'data-id' => 123, 'data-type' => 'page'], $menuItem->getAttributes());
 
-        $this->assertSame('menu-item', $item->getAttribute('class'));
-        $this->assertSame(123, $item->getAttribute('data-id'));
-        $this->assertSame('page', $item->getAttribute('data-type'));
+        $this->assertSame('menu-item', $menuItem->getAttribute('class'));
+        $this->assertSame(123, $menuItem->getAttribute('data-id'));
+        $this->assertSame('page', $menuItem->getAttribute('data-type'));
 
-        $item->setAttributes([]);
-        $this->assertEquals([], $item->getAttributes());
+        $menuItem->setAttributes([]);
+        $this->assertEquals([], $menuItem->getAttributes());
+    }
+
+    public function testSetChildren(): void
+    {
+        $menuItem = new MenuItem('home');
+        $menuItem->setChildren([]);
+
+        $this->assertSame([], $menuItem->getChildren());
+    }
+
+    public function testAddChildren(): void
+    {
+        $menuItem = new MenuItem('home');
+        $menuItemChildren = new MenuItem('children');
+        $menuItem->addChildren($menuItemChildren);
+
+        $this->assertSame([$menuItemChildren], $menuItem->getChildren());
+    }
+
+    public function testRemoveChild(): void
+    {
+        $menuItem = new MenuItem('home');
+        $menuItemChild = new MenuItem('child');
+
+        $menuItem->addChild($menuItemChild);
+        $this->assertSame($menuItemChild, $menuItem->getChild('child'));
+
+        $menuItem->removeChild('child');
+        $this->assertNull($menuItem->getChild('child'));
     }
 }
