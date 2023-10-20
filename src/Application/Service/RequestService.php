@@ -107,8 +107,7 @@ readonly class RequestService
                     FlashTypeConstant::ERROR->value => $this->translatorService->trans('app.flash.form.delete.error'),
                     FlashTypeConstant::WARNING->value => $this->translatorService->trans('app.flash.form.delete.warning')
                 ]
-            ],
-            default => throw new ConstantNotFoundException('AjaxJson constant type not found'),
+            ]
         };
 
         if (!empty($extraData)) {
