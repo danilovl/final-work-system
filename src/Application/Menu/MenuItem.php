@@ -48,10 +48,11 @@ class MenuItem implements MenuItemInterface
             $names = array_keys($parent->getChildren());
             $items = array_values($parent->getChildren());
 
-            $offset = array_search($oldName, $names, true);
-            $names[$offset] = $name;
-
-            $parent->setChildren(array_combine($names, $items));
+            if (count($names) > 0) {
+                $offset = array_search($oldName, $names, true);
+                $names[$offset] = $name;
+                $parent->setChildren(array_combine($names, $items));
+            }
         }
 
         return $this;

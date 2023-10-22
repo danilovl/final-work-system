@@ -23,13 +23,23 @@ class MenuItemTest extends TestCase
         $menuItem = new MenuItem('home');
         $this->assertSame('home', $menuItem->getName());
 
-        $menuItem->setName('new');
+        $menuItem->setName('new')->setName('new');
         $this->assertSame('new', $menuItem->getName());
 
-        $menuItemParent = new MenuItem('parent');
+        $menuItemParent = new MenuItem('static');
         $menuItem->setParent($menuItemParent);
-        $this->expectException(InvalidArgumentException::class);
+        $menuItem->setName('parent');
 
+        $menuItemParent = new MenuItem('parent');
+        $menuItemParent->setChildren([
+            'home' => new MenuItem('home'),
+            'child' => new MenuItem('child'),
+        ]);
+
+        $menuItem->setParent($menuItemParent);
+        $menuItem->setName('home');
+
+        $this->expectException(InvalidArgumentException::class);
         $menuItem->setName('parent');
     }
 
@@ -141,5 +151,18 @@ class MenuItemTest extends TestCase
 
         $menuItem->removeChild('child');
         $this->assertNull($menuItem->getChild('child'));
+    }
+
+    public function testSetParent(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $menuItem = new MenuItem('home');
+        $menuItem->setParent($menuItem);
+
+        $menuItem = new MenuItem('home');
+        $menuItem->setParent(new MenuItem('parent'));
+
+        $this->assertTrue(true);
     }
 }
