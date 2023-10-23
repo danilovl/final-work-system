@@ -26,7 +26,11 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\{
+    AuthenticationException,
+    CustomUserMessageAuthenticationException
+};
+use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 class ApiKeyAuthenticatorTest extends TestCase
 {
@@ -85,7 +89,7 @@ class ApiKeyAuthenticatorTest extends TestCase
         $this->assertSame('password', $credentials->password);
     }
 
-    public function testAuthenticateByAuthUserToken(): void
+    public function testAuthenticateByAuthUserTokenSuccess(): void
     {
         $user = new User;
 
@@ -99,7 +103,19 @@ class ApiKeyAuthenticatorTest extends TestCase
         $this->assertSame($user, $result->getUser());
     }
 
-    public function testAuthenticateByUsername(): void
+    public function testAuthenticateByAuthUserTokenFailed(): void
+    {
+        $this->userFacade
+            ->expects($this->once())
+            ->method('findOneByToken')
+            ->willReturn(null);
+
+        $this->expectException(CustomUserMessageAuthenticationException::class);
+        $result = $this->authenticator->authenticate($this->request);
+        $result->getUser();
+    }
+
+    public function testAuthenticateByUsernameSuccess(): void
     {
         $user = new User;
         $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY);
@@ -114,6 +130,31 @@ class ApiKeyAuthenticatorTest extends TestCase
         $this->assertSame($user, $result->getUser());
     }
 
+    public function testAuthenticateByUsernameFailed(): void
+    {
+        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY);
+
+        $this->userFacade
+            ->expects($this->once())
+            ->method('findOneByUsername')
+            ->willReturn(null);
+
+        $this->expectException(CustomUserMessageAuthenticationException::class);
+        $result = $this->authenticator->authenticate($this->request);
+        $result->getUser();
+    }
+
+    public function testAuthenticateByAuthToken(): void
+    {
+        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY);
+        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_USERNAME);
+        $this->request->request->remove('username');
+
+        $result = $this->authenticator->authenticate($this->request);
+
+        $this->assertInstanceOf(SelfValidatingPassport::class, $result);
+    }
+
     public function testOnAuthenticationSuccess(): void
     {
         $token = $this->createMock(TokenInterface::class);
@@ -122,6 +163,24 @@ class ApiKeyAuthenticatorTest extends TestCase
             ->expects($this->once())
             ->method('getUser')
             ->willReturn(new User);
+
+        $result = $this->authenticator->onAuthenticationSuccess(
+            $this->request,
+            $token,
+            'main'
+        );
+
+        $this->assertNull($result);
+    }
+
+    public function testOnAuthenticationSuccessNotUser(): void
+    {
+        $token = $this->createMock(TokenInterface::class);
+
+        $this->userService
+            ->expects($this->once())
+            ->method('getUser')
+            ->willReturn(null);
 
         $result = $this->authenticator->onAuthenticationSuccess(
             $this->request,

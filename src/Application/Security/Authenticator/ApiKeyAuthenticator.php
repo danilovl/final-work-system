@@ -132,22 +132,6 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
         };
     }
 
-    public function getApiUser(string $authToken): callable
-    {
-        return function () use ($authToken): ?ApiUser {
-            if ($authToken === null) {
-                throw new CustomUserMessageAuthenticationException('ApiKey could not be found.');
-            }
-
-            $user = $this->apiUserFacade->findByApiKey($authToken);
-            if ($user === null) {
-                throw new CustomUserMessageAuthenticationException('ApiUser could not be found.');
-            }
-
-            return $user;
-        };
-    }
-
     public function getUserByToken(ApiKeyCredentialModel $apiKeyCredentialModel): callable
     {
         return function () use ($apiKeyCredentialModel): User {
