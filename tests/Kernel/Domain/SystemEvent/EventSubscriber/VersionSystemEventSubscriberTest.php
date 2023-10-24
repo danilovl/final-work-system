@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
+namespace App\Tests\Kernel\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\Service\EntityManagerService;
 use App\Domain\SystemEvent\EventSubscriber\VersionSystemEventSubscriber;
