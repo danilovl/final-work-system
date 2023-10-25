@@ -117,7 +117,10 @@ class AppAuthenticatorTest extends TestCase
         $this->expectException(CustomUserMessageAuthenticationException::class);
         $callback = $this->authenticator->getUser([]);
         $callback();
+    }
 
+    public function testGetUserFacadeFailed(): void
+    {
         $this->userFacade
             ->expects($this->once())
             ->method('findOneByUsername')
@@ -163,6 +166,26 @@ class AppAuthenticatorTest extends TestCase
         );
 
         $this->assertSame('url', $result->getTargetUrl());
+    }
+
+    public function testOnAuthenticationRedirectSuccess(): void
+    {
+        $token = $this->createMock(TokenInterface::class);
+
+        $this->userService
+            ->expects($this->once())
+            ->method('getUser')
+            ->willReturn(new User);
+
+        $this->request->getSession()->set('_security.main.target_path', 'target_path');
+
+        $result = $this->authenticator->onAuthenticationSuccess(
+            $this->request,
+            $token,
+            'main'
+        );
+
+        $this->assertSame('target_path', $result->getTargetUrl());
     }
 
     public function testOnAuthenticationFailure(): void
