@@ -117,7 +117,6 @@
     },
     "scripts": {
         "test-unit": [
-            "@php bin/console cache:warmup --env=dev",
             "bash bin/phpunit.sh tests/Unit"
         ],
         "test-kernel": [
