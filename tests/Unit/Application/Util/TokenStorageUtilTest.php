@@ -12,13 +12,17 @@
 
 namespace App\Tests\Unit\Application\Util;
 
+use App\Application\Exception\RuntimeException;
 use App\Application\Util\TokenStorageUtil;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\{
+    TokenInterface,
+    UsernamePasswordToken
+};
 
 class TokenStorageUtilTest extends TestCase
 {
@@ -43,9 +47,7 @@ class TokenStorageUtilTest extends TestCase
             ->method('setToken')
             ->with($this->isInstanceOf(UsernamePasswordToken::class));
 
-        $tokenStorageUtil = new TokenStorageUtil($tokenStorage);
-
-        $tokenStorageUtil->refreshToken(new User);
+        (new TokenStorageUtil($tokenStorage))->refreshToken(new User);
     }
 
     public function testRefreshTokenThrowsException(): void
@@ -61,9 +63,20 @@ class TokenStorageUtilTest extends TestCase
             ->method('getFirewallName')
             ->willReturn('');
 
-        $tokenStorageUtil = new TokenStorageUtil($tokenStorage);
-
         $this->expectException(InvalidArgumentException::class);
-        $tokenStorageUtil->refreshToken(new User);
+        (new TokenStorageUtil($tokenStorage))->refreshToken(new User);
+    }
+
+    public function testRefreshTokenThrowsMethodException(): void
+    {
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $token = $this->createMock(TokenInterface::class);
+
+        $tokenStorage->expects($this->once())
+            ->method('getToken')
+            ->willReturn($token);
+
+        $this->expectException(RuntimeException::class);
+        (new TokenStorageUtil($tokenStorage))->refreshToken(new User);
     }
 }
