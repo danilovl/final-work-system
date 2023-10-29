@@ -22,7 +22,7 @@ class SluggerUtilTest extends TestCase
     #[DataProvider('slugifyDataProvider')]
     public function testSlugify(string $input, string $expectedOutput)
     {
-        $slugger = new SluggerUtil();
+        $slugger = new SluggerUtil;
         $this->assertEquals($expectedOutput, $slugger->slugify($input));
     }
 
