@@ -27,7 +27,15 @@ class AwayRuntimeTest extends TestCase
             ->method('generate')
             ->willReturn('https://final-work.com?to=https://another-web.com');
 
-        $this->awayRuntime = new AwayRuntime($router, 'https://final-work.com');
+        $this->awayRuntime = new AwayRuntime($router, 'final-work.com');
+    }
+
+    public function testNull(): void
+    {
+        $text = null;
+        $result = $this->awayRuntime->to($text);
+
+        $this->assertNull($result);
     }
 
     public function testEmptyTest(): void
@@ -40,8 +48,8 @@ class AwayRuntimeTest extends TestCase
 
     public function testReplaceTest(): void
     {
-        $text = 'Some text <a href="https://another-web.com">link</a> with <a href="https://another-web.com">link</a>';
-        $exceptResult = 'Some text <a href="https://final-work.com?to=https://another-web.com">link</a> with <a href="https://final-work.com?to=https://another-web.com">link</a>';;
+        $text = 'Some text <a href="https://another-web.com">link</a> with <a href="https://another-web.com">link</a><a href="https://final-work.com">link</a>';
+        $exceptResult = 'Some text <a href="https://final-work.com?to=https://another-web.com">link</a> with <a href="https://final-work.com?to=https://another-web.com">link</a><a href="https://final-work.com">link</a>';
 
         $result = $this->awayRuntime->to($text);
 
