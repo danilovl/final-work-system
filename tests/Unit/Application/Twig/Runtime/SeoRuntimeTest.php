@@ -19,6 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoRuntimeTest extends TestCase
 {
+    private readonly SeoPageService $seoPageService;
     private readonly SeoRuntime $seoRuntime;
 
     protected function setUp(): void
@@ -28,11 +29,12 @@ class SeoRuntimeTest extends TestCase
             ->method('trans')
             ->willReturn('trans');
 
-        $seoPageService = new SeoPageService($translator);
-        $seoPageService->addMeta('charset', 'utf-8', 'content');
-        $seoPageService->addMeta('name', 'viewport', 'content');
+        $this->seoPageService = new SeoPageService($translator);
+        $this->seoPageService->addMeta('charset', 'utf-8', 'content');
+        $this->seoPageService->addMeta('name', 'viewport', 'content');
+        $this->seoPageService->addMeta('meta', 'viewport', '');
 
-        $this->seoRuntime = new SeoRuntime($seoPageService);
+        $this->seoRuntime = new SeoRuntime($this->seoPageService);
     }
 
     public function testSetTitle(): void
@@ -42,10 +44,18 @@ class SeoRuntimeTest extends TestCase
         $this->assertEquals('<title>test title</title>', $this->seoRuntime->getTitle());
     }
 
+    public function testGetDataNull(): void
+    {
+        $this->seoPageService->setTitle(null);
+
+        $this->assertNull($this->seoRuntime->getTitle());
+    }
+
     public function testGetMetaData(): void
     {
         $result = '<meta name="viewport" content="content" />' . "\n";
         $result .= '<meta charset="utf-8" content="content" />' . "\n";
+        $result .= '<meta meta="viewport" />' . "\n";
 
         $this->assertEquals($result, $this->seoRuntime->getMetaData());
     }
