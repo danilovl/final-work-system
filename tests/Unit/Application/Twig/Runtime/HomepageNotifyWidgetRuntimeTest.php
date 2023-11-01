@@ -47,13 +47,14 @@ class HomepageNotifyWidgetRuntimeTest extends TestCase
     public function testRenderNotifyNothing(): void
     {
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->exactly(0))
-            ->method('get');
+        $container->expects($this->once())
+            ->method('get')
+            ->willReturn(null);
 
         $parameterServiceInterface = $this->createMock(ParameterServiceInterface::class);
-        $parameterServiceInterface->expects($this->exactly(1))
+        $parameterServiceInterface->expects($this->once())
             ->method('getArray')
-            ->willReturn([]);
+            ->willReturn(['homepage_notify']);
 
         $homepageNotifyWidgetRuntime = new HomepageNotifyWidgetRuntime($container, $parameterServiceInterface);
 
