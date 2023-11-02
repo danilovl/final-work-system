@@ -50,6 +50,13 @@ class FirstWeekDayTypeTest extends KernelTestCase
         $this->assertFalse($this->form->isValid());
     }
 
+    public function testGetBlockPrefix(): void
+    {
+        $userRoleType = new FirstWeekDayType;
+
+        $this->assertSame(FirstWeekDayType::NAME, $userRoleType->getBlockPrefix());
+    }
+
     public static function successDateProvider(): Generator
     {
         yield ['2023-07-03'];
