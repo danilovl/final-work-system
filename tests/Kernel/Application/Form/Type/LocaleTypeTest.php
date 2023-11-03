@@ -51,6 +51,13 @@ class LocaleTypeTest extends KernelTestCase
         $this->assertFalse($this->form->isValid());
     }
 
+    public function testGetBlockPrefix(): void
+    {
+        $userRoleType = new LocaleType('');
+
+        $this->assertSame(LocaleType::NAME, $userRoleType->getBlockPrefix());
+    }
+
     public static function localeDateProvider(): Generator
     {
         foreach (LocaleConstant::values() as $locale) {
