@@ -51,6 +51,13 @@ class UserRoleTypeTest extends KernelTestCase
         $this->assertFalse($this->form->isValid());
     }
 
+    public function testGetBlockPrefix(): void
+    {
+        $userRoleType = new UserRoleType;
+
+        $this->assertSame(UserRoleType::NAME, $userRoleType->getBlockPrefix());
+    }
+
     public static function roleDateProvider(): Generator
     {
         yield [UserRoleConstant::STUDENT->value];
