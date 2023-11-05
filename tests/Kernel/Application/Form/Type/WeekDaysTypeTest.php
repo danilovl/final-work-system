@@ -50,6 +50,13 @@ class WeekDaysTypeTest extends KernelTestCase
         $this->assertFalse($this->form->isValid());
     }
 
+    public function testGetBlockPrefix(): void
+    {
+        $userRoleType = new WeekDaysType;
+
+        $this->assertSame(WeekDaysType::NAME, $userRoleType->getBlockPrefix());
+    }
+
     public static function dayDateProvider(): Generator
     {
         foreach (range(0, 6) as $number) {
