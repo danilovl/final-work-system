@@ -36,7 +36,9 @@ class IpHelperTest extends TestCase
     public static function ipInRangeProvider(): Generator
     {
         yield ['127.0.0.1', '127.0.0.1/24', true];
+        yield ['127.0.0.1', '127.0.0.1', true];
         yield ['192.0.0.60', '192.0.0.60/24', true];
+        yield ['192.0.0.60', '192.0.0.60', true];
     }
 
     public static function ipAllowedProvider(): Generator
