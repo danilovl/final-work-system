@@ -20,6 +20,8 @@ use App\Application\Service\TranslatorService;
 use DateTime;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
@@ -59,6 +61,30 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($date, new FirstWeekDay);
 
         $this->assertEquals(1, $this->context->getViolations()->count());
+    }
+
+    public function testValueNull(): void
+    {
+        $this->validator->initialize($this->context);
+        $this->validator->validate(null, new FirstWeekDay);
+
+        $this->assertNoViolation();
+    }
+
+    public function testFirstWeekDay(): void
+    {
+        $this->expectException(UnexpectedTypeException::class);
+
+        $this->validator->initialize($this->context);
+        $this->validator->validate(new DateTime, new class extends Constraint {});
+    }
+
+    public function testDateTimeType(): void
+    {
+        $this->expectException(UnexpectedTypeException::class);
+
+        $this->validator->initialize($this->context);
+        $this->validator->validate(1234, new FirstWeekDay);
     }
 
     public static function validateSuccessProvider(): Generator
