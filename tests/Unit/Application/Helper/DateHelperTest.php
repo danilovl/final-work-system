@@ -16,6 +16,7 @@ use App\Application\Constant\DateFormatConstant;
 use App\Application\Helper\DateHelper;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use function Symfony\Component\Clock\now;
 
 class DateHelperTest extends TestCase
 {
@@ -31,6 +32,13 @@ class DateHelperTest extends TestCase
     public function testActualWeekStartByDate(): void
     {
         $date = new DateTime('2023-07-15');
+        $expectedWeekStart = new DateTime('2023-07-10');
+
+        $actualWeekStart = DateHelper::actualWeekStartByDate($date);
+
+        $this->assertEquals($expectedWeekStart, $actualWeekStart);
+
+        $date = new DateTime('2023-07-16');
         $expectedWeekStart = new DateTime('2023-07-10');
 
         $actualWeekStart = DateHelper::actualWeekStartByDate($date);
@@ -63,6 +71,14 @@ class DateHelperTest extends TestCase
         $expectedDates = ['2023-07-01', '2023-07-02', '2023-07-03', '2023-07-04', '2023-07-05', '2023-07-06', '2023-07-07'];
 
         $actualDates = DateHelper::datePeriod($from, $to);
+
+        $this->assertEquals($expectedDates, $actualDates);
+
+        $from = '2023-07-01';
+        $to = '2023-07-07';
+        $expectedDates = ['Sat, 01.07', 'Sun, 02.07', 'Mon, 03.07', 'Tue, 04.07', 'Wed, 05.07', 'Thu, 06.07', 'Fri, 07.07'];
+
+        $actualDates = DateHelper::datePeriod($from, $to, true);
 
         $this->assertEquals($expectedDates, $actualDates);
     }
@@ -112,6 +128,13 @@ class DateHelperTest extends TestCase
     {
         $date = '2023-07-07';
         $expectedResult = '2023-07-03';
+
+        $actualWeek = DateHelper::checkWeek($date);
+
+        $this->assertEquals($expectedResult, $actualWeek);
+
+        $date = '2023-07-24';
+        $expectedResult = $date;
 
         $actualWeek = DateHelper::checkWeek($date);
 
