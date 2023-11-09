@@ -20,7 +20,7 @@ class FileHelperTest extends TestCase
     public function testCreateTmpFile(): void
     {
         $fileContent = '<?php echo "test" ?>';
-        $filePath = FileHelper::createTmpFile('php', $fileContent);
+        $filePath = FileHelper::createTmpFile('php', $fileContent, 'prefix');
 
         $this->assertEquals($fileContent, file_get_contents($filePath));
     }
