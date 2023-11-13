@@ -81,6 +81,55 @@ class RequestListenerTest extends TestCase
         $this->asyncService->call();
     }
 
+    public function testOnKernelRequestNotUser(): void
+    {
+        $request = new Request(attributes: [
+            'seo' => ['title' => 'test'],
+        ]);
+
+        $event = new RequestEvent(
+            $this->createMock(KernelInterface::class),
+            $request,
+            HttpKernelInterface::MAIN_REQUEST
+        );
+
+        $this->seoPageService
+            ->expects($this->once())
+            ->method('setTitle');
+
+        $this->userService
+            ->expects($this->once())
+            ->method('getUser')
+            ->willReturn(null);
+
+        $this->entityManagerService
+            ->expects($this->never())
+            ->method('flush');
+
+        $this->listener->onKernelRequest($event);
+        $this->asyncService->call();
+    }
+
+    public function testOnKernelRequestNotMain(): void
+    {
+        $request = new Request(attributes: [
+            'seo' => ['title' => 'test'],
+        ]);
+
+        $event = new RequestEvent(
+            $this->createMock(KernelInterface::class),
+            $request,
+            HttpKernelInterface::SUB_REQUEST
+        );
+
+        $this->seoPageService
+            ->expects($this->never())
+            ->method('setTitle');;
+
+        $this->listener->onKernelRequest($event);
+        $this->asyncService->call();
+    }
+
     public function testGetSubscribedEvents(): void
     {
         $subscribedEvents = $this->listener::getSubscribedEvents();
