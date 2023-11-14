@@ -33,7 +33,7 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
     ) {
         $this->locales = explode('|', trim($locales));
 
-        if (empty($this->locales)) {
+        if (empty($this->locales[0])) {
             throw new UnexpectedValueException('The list of supported locales must not be empty.');
         }
 
