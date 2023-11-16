@@ -13,6 +13,7 @@
 namespace App\Tests\Kernel\Application\Command;
 
 use App\Application\Command\ImportSqlCommand;
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -33,5 +34,36 @@ class ImportSqlCommandTest extends KernelTestCase
         ]);
 
         $commandTester->assertCommandIsSuccessful();
+    }
+
+    public function testExecuteNotExistFile(): void
+    {
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $command = $application->find(ImportSqlCommand::COMMAND_NAME);
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'file' => 'not-exist-file'
+        ]);
+    }
+
+    public function testExecuteNotReadable(): void
+    {
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $temporaryFilePath = tempnam(sys_get_temp_dir(), 'import-sql-command');
+        chmod($temporaryFilePath, 0000);
+
+        $command = $application->find(ImportSqlCommand::COMMAND_NAME);
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'file' => $temporaryFilePath
+        ]);
     }
 }
