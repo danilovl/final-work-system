@@ -1,0 +1,53 @@
+<?php declare(strict_types=1);
+
+/**
+ *
+ * This file is part of the FinalWorkSystem project.
+ * (c) Vladimir Danilov
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
+namespace App\Tests\Unit\Application\Collector;
+
+use App\Application\Collector\SystemInfoCollector;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    Response
+};
+
+class SystemInfoCollectorTest extends TestCase
+{
+    private readonly SystemInfoCollector $collector;
+
+    protected function setUp(): void
+    {
+        $systemInfo = [
+            'name' => 'Test System',
+            'version' => '1.0.0'
+        ];
+
+        $request = $this->createMock(Request::class);
+        $response = $this->createMock(Response::class);
+
+        $this->collector = new SystemInfoCollector($systemInfo);
+        $this->collector->collect($request, $response);
+    }
+
+    public function testCollect(): void
+    {
+        $this->assertEquals(SystemInfoCollector::NAME_COLLECTOR, $this->collector->getName());
+        $this->assertEquals('Test System', $this->collector->getSystemName());
+        $this->assertEquals('1.0.0', $this->collector->getVersion());
+    }
+
+    public function testReset(): void
+    {
+        $this->collector->reset();
+
+        $this->assertTrue(true);
+    }
+}

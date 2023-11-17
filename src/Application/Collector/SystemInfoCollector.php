@@ -21,7 +21,7 @@ use Throwable;
 
 class SystemInfoCollector extends DataCollector
 {
-    private const NAME_COLLECTOR = 'final_work_info';
+    public const NAME_COLLECTOR = 'final_work_info';
 
     public function __construct(private readonly array $systemInfo) {}
 
