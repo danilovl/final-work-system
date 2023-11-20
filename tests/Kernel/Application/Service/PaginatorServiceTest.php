@@ -41,7 +41,10 @@ class PaginatorServiceTest extends KernelTestCase
             'limit' => 20
         ]);
 
-        $pagination = $this->paginatorService->createPaginationRequest($request, range(0, 100));
+        $pagination = $this->paginatorService->createPaginationRequest(
+            request: $request,
+            target: range(0, 100),
+            options: ['pageParameterName' => 'page']);
 
         $this->assertSame(2, $pagination->getCurrentPageNumber());
         $this->assertSame(20, $pagination->count());
