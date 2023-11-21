@@ -81,7 +81,7 @@ class RequestServiceTest extends TestCase
         $this->assertEquals('trans', $message[0]);
     }
 
-    public function redirectToRoute(): void
+    public function testRedirectToRoute(): void
     {
         $redirect = $this->requestService->redirectToRoute('url');
 
@@ -99,7 +99,8 @@ class RequestServiceTest extends TestCase
     #[DataProvider('createAjaxJsonProvider')]
     public function testCreateAjaxJson(AjaxJsonTypeConstant $type, array $expectedResult): void
     {
-        $result = $this->requestService->createAjaxJson($type);
+        $expectedResult = array_merge($expectedResult, ['test' => 'test']);
+        $result = $this->requestService->createAjaxJson($type, ['test' => 'test']);
 
         $this->assertSame($expectedResult, json_decode($result->getContent(), true));
     }
