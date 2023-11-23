@@ -41,7 +41,7 @@ class AjaxRequestListenerTest extends TestCase
 
         $event = new ControllerEvent(
             $this->createMock(KernelInterface::class),
-            [new TestController(), 'index'],
+            [new TestController, 'index'],
             $request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -49,6 +49,48 @@ class AjaxRequestListenerTest extends TestCase
         $listener->onKernelController($event);
 
         $this->assertTrue(true);
+    }
+
+    public function testOnKernelControllerFailedCallback(): void
+    {
+        $translatorService = $this->createMock(TranslatorService::class);
+        $translatorService->expects($this->never())
+            ->method('trans')
+            ->willReturn('content');
+
+        $listener = new AjaxRequestListener($translatorService);
+        $request = new Request;
+        $request->setMethod(Request::METHOD_POST);
+
+        $event = new ControllerEvent(
+            $this->createMock(KernelInterface::class),
+            static function (): void {},
+            $request,
+            HttpKernelInterface::MAIN_REQUEST
+        );
+
+        $listener->onKernelController($event);
+    }
+
+    public function testOnKernelControllerFailedGet(): void
+    {
+        $translatorService = $this->createMock(TranslatorService::class);
+        $translatorService->expects($this->never())
+            ->method('trans')
+            ->willReturn('content');
+
+        $listener = new AjaxRequestListener($translatorService);
+        $request = new Request;
+        $request->setMethod(Request::METHOD_GET);
+
+        $event = new ControllerEvent(
+            $this->createMock(KernelInterface::class),
+            [new TestController, 'error'],
+            $request,
+            HttpKernelInterface::MAIN_REQUEST
+        );
+
+        $listener->onKernelController($event);
     }
 
     public function testOnKernelControllerFailed(): void
@@ -64,7 +106,7 @@ class AjaxRequestListenerTest extends TestCase
 
         $event = new ControllerEvent(
             $this->createMock(KernelInterface::class),
-            [new TestController(), 'error'],
+            [new TestController, 'error'],
             $request,
             HttpKernelInterface::MAIN_REQUEST
         );
