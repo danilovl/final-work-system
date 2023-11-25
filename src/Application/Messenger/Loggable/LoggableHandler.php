@@ -18,7 +18,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 readonly class LoggableHandler
 {
-    public function __construct(private EntityManagerService $entityManagerService) {}
+    public function __construct(
+        private EntityManagerService $entityManagerService,
+        private bool $printMessage = true
+    ) {}
 
     public function __invoke(LoggableMessage $loggableMessage): void
     {
@@ -27,6 +30,8 @@ readonly class LoggableHandler
 
         $this->entityManagerService->persistAndFlush($logEntry);
 
-        echo sprintf('Success create log for class "%s" and username "%s". %s', $logEntry->getObjectClass(), $logEntry->getUsername(), PHP_EOL);
+        if ($this->printMessage) {
+            echo sprintf('Success create log for class "%s" and username "%s". %s', $logEntry->getObjectClass(), $logEntry->getUsername(), PHP_EOL);
+        }
     }
 }

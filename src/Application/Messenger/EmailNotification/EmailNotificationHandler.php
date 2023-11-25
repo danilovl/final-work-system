@@ -24,7 +24,8 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\{
     Address,
-    Email};
+    Email
+};
 
 #[AsMessageHandler]
 readonly class EmailNotificationHandler
@@ -35,13 +36,16 @@ readonly class EmailNotificationHandler
         private EmailNotificationQueueFactory $emailNotificationQueueFactory,
         private BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
         private EmailNotificationQueueFacade $emailNotificationQueueFacade,
-        private EntityManagerService $entityManagerService
+        private EntityManagerService $entityManagerService,
+        private bool $printMessage = true
     ) {}
 
     public function __invoke(EmailNotificationMessage $message): void
     {
         if (!$this->parameterService->getBoolean('email_notification.enable_send')) {
-            echo 'Email notification sending is not enable';
+            if ($this->printMessage) {
+                echo 'Email notification sending is not enable';
+            }
 
             throw new RuntimeException('Email notification sending is not enable');
         }
@@ -64,11 +68,15 @@ readonly class EmailNotificationHandler
 
             $this->mailer->send($email);
 
-            echo sprintf('Success send email to %s. %s', $message->to, PHP_EOL);
+            if ($this->printMessage) {
+                echo sprintf('Success send email to %s. %s', $message->to, PHP_EOL);
+            }
         } catch (TransportExceptionInterface) {
             $success = false;
 
-            echo sprintf('Failed send email to %s. %s', $message->to, PHP_EOL);
+            if ($this->printMessage) {
+                echo sprintf('Failed send email to %s. %s', $message->to, PHP_EOL);
+            }
         }
 
         $this->createSuccessEmailNotificationQueue($message, $subject, $body, $success);
@@ -93,7 +101,9 @@ readonly class EmailNotificationHandler
             $emailNotification->setSuccess($success);
             $this->entityManagerService->flush();
 
-            echo sprintf('Success update email notification queue. ID: %d. %s', $emailNotification->getId(), PHP_EOL);
+            if ($this->printMessage) {
+                echo sprintf('Success update email notification queue. ID: %d. %s', $emailNotification->getId(), PHP_EOL);
+            }
 
             return;
         }
@@ -108,6 +118,8 @@ readonly class EmailNotificationHandler
 
         $emailNotification = $this->emailNotificationQueueFactory->createFromModel($emailNotificationQueueModel);
 
-        echo sprintf('Success create email notification queue. ID: %d. %s', $emailNotification->getId(), PHP_EOL);
+        if ($this->printMessage) {
+            echo sprintf('Create email notification queue. ID: %d. %s', $emailNotification->getId(), PHP_EOL);
+        }
     }
 }

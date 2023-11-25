@@ -29,7 +29,7 @@ class LoggableHandlerTest extends TestCase
     {
         $this->entityManagerService = $this->createMock(EntityManagerService::class);
 
-        $this->loggableHandler = new LoggableHandler($this->entityManagerService);
+        $this->loggableHandler = new LoggableHandler($this->entityManagerService, false);
     }
 
     public function testInvoke(): void
