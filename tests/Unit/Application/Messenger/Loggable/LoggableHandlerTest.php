@@ -29,7 +29,7 @@ class LoggableHandlerTest extends TestCase
     {
         $this->entityManagerService = $this->createMock(EntityManagerService::class);
 
-        $this->loggableHandler = new LoggableHandler($this->entityManagerService, false);
+        $this->loggableHandler = new LoggableHandler($this->entityManagerService);
     }
 
     public function testInvoke(): void
@@ -40,6 +40,7 @@ class LoggableHandlerTest extends TestCase
             ->expects($this->once())
             ->method('persistAndFlush');
 
+        $this->expectOutputString('Success create log for class "" and username "". '. PHP_EOL);
         $this->loggableHandler->__invoke($loggableMessage);
     }
 }

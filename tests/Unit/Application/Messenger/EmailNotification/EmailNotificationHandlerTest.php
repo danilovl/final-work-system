@@ -73,8 +73,7 @@ class EmailNotificationHandlerTest extends TestCase
             $this->emailNotificationQueueFactory,
             $baseEmailNotificationSubscriber,
             $this->emailNotificationQueueFacade,
-            $this->entityManagerService,
-            false
+            $this->entityManagerService
         );
 
         $this->emailNotificationMessage = EmailNotificationMessage::createFromArray([
@@ -99,6 +98,7 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getBoolean')
             ->willReturn(false);
 
+        $this->expectOutputString('Email notification sending is not enable');
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
     }
 
@@ -124,6 +124,7 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getOneByUuid')
             ->willReturn($emailNotificationQueue);
 
+        $this->expectOutputString('Failed send email to test@example.com. ' . PHP_EOL);
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
     }
 
@@ -150,6 +151,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getOneByUuid')
             ->willReturn($emailNotificationQueue);
 
+        $result = 'Success send email to test@example.com. ' . PHP_EOL;
+        $result .= 'Success update email notification queue. ID: 1. ' . PHP_EOL;
+
+        $this->expectOutputString($result);
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
     }
 
@@ -176,6 +181,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getOneByUuid')
             ->willReturn(null);
 
+        $result = 'Success send email to test@example.com. ' . PHP_EOL;
+        $result .= 'Create email notification queue. ID: 1. ' . PHP_EOL;
+
+        $this->expectOutputString($result);
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
     }
 }
