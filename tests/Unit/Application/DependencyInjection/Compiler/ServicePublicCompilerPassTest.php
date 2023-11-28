@@ -21,16 +21,32 @@ class ServicePublicCompilerPassTest extends TestCase
 {
     public function testProcess(): void
     {
+        $services = ServicePublicCompilerPass::SERVICES;
+        $servicesDefinitions = array_slice($services, 1);
+        $servicesAliases = array_slice($services, 0, 1);
+
         $container = new ContainerBuilder;
 
-        foreach (ServicePublicCompilerPass::SERVICES as $service) {
+        foreach ($servicesAliases as $service) {
+            $container
+                ->setAlias($service, 'service')
+                ->setPublic(false);
+        }
+
+        foreach ($servicesDefinitions as $service) {
             $container
                 ->register($service)
                 ->setPublic(false);
         }
 
-        foreach (ServicePublicCompilerPass::SERVICES as $service) {
+        foreach ($servicesDefinitions as $service) {
             $definition = $container->getDefinition($service);
+
+            $this->assertFalse($definition->isPublic());
+        }
+
+        foreach ($servicesAliases as $service) {
+            $definition = $container->getAlias($service);
 
             $this->assertFalse($definition->isPublic());
         }
@@ -38,8 +54,14 @@ class ServicePublicCompilerPassTest extends TestCase
         $resolvePass = new ServicePublicCompilerPass;
         $resolvePass->process($container);
 
-        foreach (ServicePublicCompilerPass::SERVICES as $service) {
+        foreach ($servicesDefinitions as $service) {
             $definition = $container->getDefinition($service);
+
+            $this->assertTrue($definition->isPublic());
+        }
+
+        foreach ($servicesAliases as $service) {
+            $definition = $container->getAlias($service);
 
             $this->assertTrue($definition->isPublic());
         }
