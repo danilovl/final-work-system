@@ -42,7 +42,11 @@ class WidgetCompilerPassTest extends TestCase
         $taggedService2->addTag('app.widgets', ['alias' => 'widget2']);
         $containerBuilder->setDefinition('your_widget2_service', $taggedService2);
 
-        $containerBuilder->setParameter('widget_group', []);
+        $taggedService3 = new Definition(BaseWidget::class);
+        $taggedService3->addTag('app.widgets');
+        $containerBuilder->setDefinition('your_widget3_service', $taggedService3);
+
+        $containerBuilder->setParameter('widget_group', ['name' => ['widget1', 'widget2']]);
 
         $compilerPass = new WidgetCompilerPass;
         $compilerPass->process($containerBuilder);
