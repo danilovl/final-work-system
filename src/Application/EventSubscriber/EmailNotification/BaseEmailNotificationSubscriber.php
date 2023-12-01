@@ -27,8 +27,8 @@ class BaseEmailNotificationSubscriber
     protected string $locale;
     private string $sureExistTemplateLocale;
     protected string $translatorDomain;
-    protected bool $enableAddToQueue;
-    protected bool $enableMessenger;
+    public bool $enableAddToQueue;
+    public bool $enableMessenger;
 
     public function __construct(
         protected UserFacade $userFacade,
