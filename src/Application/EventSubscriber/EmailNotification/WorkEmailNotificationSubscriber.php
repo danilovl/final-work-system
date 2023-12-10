@@ -64,10 +64,6 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
             $templateParameters['role'] = $this->translator->trans('app.text.consultant_like', locale: $locale);
         }
 
-        if ($to === null) {
-            return;
-        }
-
         $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $locale,
             'subject' => 'subject.work_create',
