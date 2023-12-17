@@ -13,6 +13,7 @@
 namespace App\Tests\Unit\Application\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
+use App\Application\Exception\PropertyNotExistException;
 use App\Application\Interfaces\DataTransferObject\DataTransferObjectInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -31,6 +32,25 @@ class BaseDataTransferObjectTest extends TestCase
         $this->dataTransferObject = $dataTransferObject::createFromArray($this->getData());
     }
 
+    public function testCreateFromArray(): void
+    {
+        $dataTransferObject = $this->dataTransferObject::createFromArray($this->getData());
+
+        $this->assertEquals(
+            $this->getData(),
+            $dataTransferObject->toArray()
+        );
+    }
+
+    public function testCreateFromArrayPropertyNotExist(): void
+    {
+        $this->expectException(PropertyNotExistException::class);
+
+        $this->dataTransferObject::createFromArray([
+            'data' => null
+        ]);
+    }
+
     public function testToJson(): void
     {
         $this->assertEquals(
@@ -44,6 +64,27 @@ class BaseDataTransferObjectTest extends TestCase
         $this->assertEquals(
             $this->getData(),
             $this->dataTransferObject->toArray()
+        );
+    }
+
+    public function testCreateFromJson(): void
+    {
+        $json = json_encode($this->getData());
+        $dataTransferObject = $this->dataTransferObject::createFromJson($json);
+
+        $this->assertEquals(
+            $this->getData(),
+            $dataTransferObject->toArray()
+        );
+    }
+
+    public function testCreateFromArrayRequired(): void
+    {
+        $dataTransferObject = $this->dataTransferObject::createFromArray($this->getData(), false);
+
+        $this->assertEquals(
+            $this->getData(),
+            $dataTransferObject->toArray()
         );
     }
 
