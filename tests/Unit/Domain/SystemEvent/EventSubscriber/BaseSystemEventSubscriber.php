@@ -10,26 +10,23 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\EventSubscriber;
+namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
+use App\Application\Service\EntityManagerService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\EventDispatcher\{
-    EventDispatcher,
-    EventSubscriberInterface
-};
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class BaseEventSubscriber extends KernelTestCase
+class BaseSystemEventSubscriber extends TestCase
 {
-    protected static string $classSubscriber;
-    protected ?EventDispatcher $dispatcher;
-    protected ?EventSubscriberInterface $eventSubscriber;
+    protected readonly EventDispatcher $dispatcher;
+    protected readonly EntityManagerService $entityManagerService;
 
-    protected function tearDown(): void
+    protected function setUp(): void
     {
-        $this->dispatcher = null;
-        $this->eventSubscriber = null;
+        $this->dispatcher = new EventDispatcher;
+        $this->entityManagerService = $this->createMock(EntityManagerService::class);
     }
 
     #[DataProvider('subscribedEvents')]
@@ -42,24 +39,24 @@ class BaseEventSubscriber extends KernelTestCase
     #[DataProvider('subscribedEvents')]
     public function testAddSubscriber(string $eventKey): void
     {
-        $this->dispatcher->addSubscriber($this->eventSubscriber);
+        $this->dispatcher->addSubscriber($this->subscriber);
         $this->assertTrue($this->dispatcher->hasListeners($eventKey));
     }
 
     #[DataProvider('subscribedEvents')]
     public function testRemoveSubscriber(string $eventKey): void
     {
-        $this->dispatcher->addSubscriber($this->eventSubscriber);
+        $this->dispatcher->addSubscriber($this->subscriber);
         $this->assertTrue($this->dispatcher->hasListeners($eventKey));
-        $this->dispatcher->removeSubscriber($this->eventSubscriber);
+        $this->dispatcher->removeSubscriber($this->subscriber);
         $this->assertFalse($this->dispatcher->hasListeners($eventKey));
     }
 
     public function testCountEvent(): void
     {
         $this->assertCount(
-            count($this->eventSubscriber::getSubscribedEvents()),
-            $this->eventSubscriber::getSubscribedEvents()
+            count($this->subscriber::getSubscribedEvents()),
+            $this->subscriber::getSubscribedEvents()
         );
     }
 

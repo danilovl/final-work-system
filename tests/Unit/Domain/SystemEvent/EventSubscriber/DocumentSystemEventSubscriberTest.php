@@ -10,24 +10,25 @@
  *
  */
 
-namespace App\Tests\Kernel\Domain\SystemEvent\EventSubscriber;
+namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\SystemEvent\EventSubscriber\DocumentSystemEventSubscriber;
 use App\Domain\User\Service\UserWorkService;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = DocumentSystemEventSubscriber::class;
+    protected readonly DocumentSystemEventSubscriber $subscriber;
 
     protected function setUp(): void
     {
-        $kernel = self::bootKernel();
-        $this->dispatcher = new EventDispatcher;
-        $this->eventSubscriber = new static::$classSubscriber(
-            $kernel->getContainer()->get(EntityManagerService::class),
-            $kernel->getContainer()->get(UserWorkService::class)
+        parent::setUp();
+
+        $userWorkService = $this->createMock(UserWorkService::class);
+
+        $this->subscriber = new DocumentSystemEventSubscriber(
+            $this->entityManagerService,
+            $userWorkService,
         );
     }
 }

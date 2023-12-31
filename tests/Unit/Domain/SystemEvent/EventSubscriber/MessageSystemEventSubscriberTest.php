@@ -10,12 +10,20 @@
  *
  */
 
-namespace App\Tests\Kernel\Domain\SystemEvent\EventSubscriber;
+namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
 use App\Domain\SystemEvent\EventSubscriber\MessageSystemEventSubscriber;
 
 class MessageSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = MessageSystemEventSubscriber::class;
+    protected readonly MessageSystemEventSubscriber $subscriber;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->subscriber = new MessageSystemEventSubscriber($this->entityManagerService);
+    }
 }
 

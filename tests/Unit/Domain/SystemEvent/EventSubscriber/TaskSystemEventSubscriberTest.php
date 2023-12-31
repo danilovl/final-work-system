@@ -10,12 +10,19 @@
  *
  */
 
-namespace App\Tests\Kernel\Domain\SystemEvent\EventSubscriber;
+namespace App\Tests\Unit\Domain\SystemEvent\EventSubscriber;
 
 use App\Domain\SystemEvent\EventSubscriber\TaskSystemEventSubscriber;
 
 class TaskSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = TaskSystemEventSubscriber::class;
-}
+    protected readonly TaskSystemEventSubscriber $subscriber;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->subscriber = new TaskSystemEventSubscriber($this->entityManagerService);
+    }
+}
