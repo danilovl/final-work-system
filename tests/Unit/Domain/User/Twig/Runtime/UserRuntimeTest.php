@@ -28,7 +28,7 @@ class UserRuntimeTest extends TestCase
 
         $userService = $this->createMock(UserService::class);
         $userService->expects($this->exactly(1))
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn($user);
 
         $parameterService = $this->createMock(ParameterServiceInterface::class);

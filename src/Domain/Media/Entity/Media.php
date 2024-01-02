@@ -105,7 +105,7 @@ class Media
         $this->systemEvents = new ArrayCollection;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }

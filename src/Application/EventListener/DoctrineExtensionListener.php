@@ -25,7 +25,7 @@ readonly class DoctrineExtensionListener implements EventSubscriberInterface
 
     public function onKernelRequest(): void
     {
-        $user = $this->userService->getUser();
+        $user = $this->userService->getUserOrNull();
         if ($user === null) {
             return;
         }

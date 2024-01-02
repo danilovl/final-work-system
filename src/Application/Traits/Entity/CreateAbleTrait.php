@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait CreateAbleTrait
 {
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
-    private ?DateTime $createdAt = null;
+    private DateTime $createdAt;
 
     #[ORM\PrePersist]
     public function createAblePrePersist(): void

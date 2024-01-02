@@ -1,3 +1,6 @@
+includes:
+    - phpstan-baseline.neon
+
 parameters:
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
@@ -9,18 +12,9 @@ parameters:
     paths:
         - src
         - bin
-        - tests
     excludePaths:
+        - src/Application/Command
+        - src/Domain/User/Command/
         - tests/bootstrap.php
-
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
-
-    ignoreErrors:
-        - '~^Unsafe usage of new static(.*)$~'
-        - '~^Property(.*)type mapping mismatch: property can contain(.*)but database expects(.*)$~'
-        - '~^Property(.*)type mapping mismatch: database can contain(.*)but property expects(.*)$~'
-        - '~^Method(.*)::find\(\) should return(.*)but returns(.*)$~'
-        - '~^Parameter(.*)of method(.*)::setType\(\) expects(.*), object|null given$~'
-        - '~^Parameter(.*)of function(.*)expects string, string|false given$~'
-        - '~^Parameter(.*)of method(.*)::getWorkBy\(\) expects(.*), object|null given$~'

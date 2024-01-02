@@ -91,7 +91,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
         $userService = $this->createMock(UserService::class);
         $userService->expects($this->exactly(1))
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn($user);
 
         $listener = new RedirectToPreferredLocaleListener(
@@ -119,7 +119,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
         $userService = $this->createMock(UserService::class);
         $userService->expects($this->exactly(1))
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn($user);
 
         $listener = new RedirectToPreferredLocaleListener(
@@ -146,7 +146,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
         $userService = $this->createMock(UserService::class);
         $userService->expects($this->never())
-            ->method('getUser');
+            ->method('getUserOrNull');
 
         $listener = new RedirectToPreferredLocaleListener(
             $urlGenerator,
@@ -175,7 +175,7 @@ class RedirectToPreferredLocaleListenerTest extends TestCase
 
         $userService = $this->createMock(UserService::class);
         $userService->expects($this->never())
-            ->method('getUser');
+            ->method('getUserOrNull');
 
         $listener = new RedirectToPreferredLocaleListener(
             $urlGenerator,

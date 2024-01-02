@@ -15,7 +15,8 @@ namespace App\Domain\Profile\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
     RequestService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\ResetPassword\Form\ProfileChangePasswordFormType;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
@@ -24,9 +25,8 @@ use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
+    Response
+};
 
 readonly class ProfileChangePasswordHandle
 {
@@ -42,9 +42,6 @@ readonly class ProfileChangePasswordHandle
     public function handle(Request $request): Response
     {
         $user = $this->userService->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
 
         $userModel = UserModel::fromUser($user);
         $form = $this->formFactory

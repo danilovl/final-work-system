@@ -66,7 +66,7 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
         }
 
         $preferredLanguage = $request->getPreferredLanguage($this->locales);
-        $user = $this->userService->getUser();
+        $user = $this->userService->getUserOrNull();
 
         if ($user !== null && $user->getLocale()) {
             $preferredLanguage = $user->getLocale();

@@ -32,7 +32,7 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
 
     public function appUser(): ?User
     {
-        return $this->userService->getUser();
+        return $this->userService->getUserOrNull();
     }
 
     public function isUserRole(User $user, string $method): bool

@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Application\EventListener;
 
 use App\Application\EventListener\LoggableListener;
-use Danilovl\ParameterBundle\Service\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Danilovl\AsyncBundle\Service\AsyncService;
@@ -23,7 +23,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class LoggableListenerTest extends TestCase
 {
     private readonly MessageBusInterface $messageBus;
-    private readonly ParameterService $parameterService;
+    private readonly ParameterServiceInterface $parameterService;
     private readonly AsyncService $asyncService;
     private readonly LoggableListener $listener;
 
@@ -34,7 +34,7 @@ class LoggableListenerTest extends TestCase
             ->expects($this->any())
             ->method('dispatch');
 
-        $this->parameterService = $this->createMock(ParameterService::class);
+        $this->parameterService = $this->createMock(ParameterServiceInterface::class);
         $this->asyncService = new AsyncService;
 
         $this->listener = new class ($this->messageBus, $this->parameterService, $this->asyncService) extends LoggableListener {

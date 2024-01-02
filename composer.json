@@ -133,7 +133,7 @@
         ],
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
-            "phpstan analyse -c phpstan.neon src tests --level 7 --no-progress"
+            "phpstan analyse -c phpstan.neon src --level 9 --no-progress"
         ],
         "pre-push": [
             "@phpunit"

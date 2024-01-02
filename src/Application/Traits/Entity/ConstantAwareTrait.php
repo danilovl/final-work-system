@@ -18,9 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait ConstantAwareTrait
 {
     #[ORM\Column(name: 'constant', type: Types::STRING, nullable: false)]
-    private ?string $constant = null;
+    private string $constant;
 
-    public function getConstant(): ?string
+    public function getConstant(): string
     {
         return $this->constant;
     }

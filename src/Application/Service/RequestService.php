@@ -16,7 +16,6 @@ use App\Application\Constant\{
     FlashTypeConstant,
     AjaxJsonTypeConstant
 };
-use App\Application\Exception\ConstantNotFoundException;
 use Symfony\Component\HttpFoundation\{
     Response,
     JsonResponse,
@@ -39,7 +38,7 @@ readonly class RequestService
         $this->requestStack->getSession()->getFlashBag()->add($type, $message);
     }
 
-    public function addFlashTrans(string $type, mixed $message): void
+    public function addFlashTrans(string $type, string $message): void
     {
         $this->addFlash(
             $type,

@@ -23,8 +23,6 @@ class ConstantAwareTraitTest extends TestCase
             use ConstantAwareTrait;
         };
 
-        $this->assertNull($class->getConstant());
-
         $class->setConstant('test');
         $this->assertSame('test', $class->getConstant());
     }

@@ -161,7 +161,7 @@ class ApiKeyAuthenticatorTest extends TestCase
 
         $this->userService
             ->expects($this->once())
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn(new User);
 
         $result = $this->authenticator->onAuthenticationSuccess(
@@ -179,7 +179,7 @@ class ApiKeyAuthenticatorTest extends TestCase
 
         $this->userService
             ->expects($this->once())
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn(null);
 
         $result = $this->authenticator->onAuthenticationSuccess(

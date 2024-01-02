@@ -47,7 +47,7 @@ readonly class RequestListener implements EventSubscriberInterface
 
     private function userLastRequestedAt(): void
     {
-        $user = $this->userService->getUser();
+        $user = $this->userService->getUserOrNull();
         if ($user === null) {
             return;
         }

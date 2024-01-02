@@ -14,7 +14,7 @@ namespace App\Application\EventListener;
 
 use App\Application\Messenger\Loggable\LoggableMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Danilovl\ParameterBundle\Service\ParameterService;
+use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\EventArgs;
 use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
@@ -27,7 +27,7 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
 {
     public function __construct(
         private readonly MessageBusInterface $bus,
-        private readonly ParameterService $parameterService,
+        private readonly ParameterServiceInterface $parameterService,
         private readonly AsyncService $asyncService
     ) {
         parent::__construct();

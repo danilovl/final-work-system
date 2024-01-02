@@ -111,7 +111,7 @@ class SeoPageService
         return $this;
     }
 
-    private function normalize(mixed $meta): array
+    private function normalize(string|array $meta): array
     {
         return is_string($meta) ? [$meta, []] : $meta;
     }

@@ -15,7 +15,6 @@ namespace App\Application\Security\Authenticator;
 use App\Application\Model\Security\ApiKeyCredentialModel;
 use App\Application\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use App\Application\Service\EntityManagerService;
-use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
@@ -154,7 +153,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
         TokenInterface $token,
         string $firewallName
     ): ?Response {
-        $user = $this->userService->getUser();
+        $user = $this->userService->getUserOrNull();
         if ($user === null) {
             return null;
         }

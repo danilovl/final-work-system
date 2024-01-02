@@ -70,7 +70,7 @@ class RequestListenerTest extends TestCase
 
         $this->userService
             ->expects($this->once())
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn(new User);
 
         $this->entityManagerService
@@ -99,7 +99,7 @@ class RequestListenerTest extends TestCase
 
         $this->userService
             ->expects($this->once())
-            ->method('getUser')
+            ->method('getUserOrNull')
             ->willReturn(null);
 
         $this->entityManagerService

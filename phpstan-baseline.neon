@@ -1,0 +1,2331 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset int on mixed\\.$#"
+			count: 2
+			path: src/Application/Cache/HomepageCache.php
+
+		-
+			message: "#^Method App\\\\Application\\\\Cache\\\\HomepageCache\\:\\:createHomepagePaginator\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Application/Cache/HomepageCache.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function html_entity_decode expects string, mixed given\\.$#"
+			count: 1
+			path: src/Application/Command/DecodeConversationMessageCommand.php
+
+		-
+			message: "#^Method App\\\\Application\\\\Command\\\\ImportSqlCommand\\:\\:validationFilePath\\(\\) is unused\\.$#"
+			count: 1
+			path: src/Application/Command/ImportSqlCommand.php
+
+		-
+			message: "#^Property App\\\\Application\\\\Command\\\\ImportSqlCommand\\:\\:\\$entityManagerService is never read, only written\\.$#"
+			count: 1
+			path: src/Application/Command/ImportSqlCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of static method App\\\\Application\\\\DataTransferObject\\\\BaseDataTransferObject\\:\\:createFromArray\\(\\) expects array, mixed given\\.$#"
+			count: 1
+			path: src/Application/DataTransferObject/BaseDataTransferObject.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: src/Application/DataTransferObject/BaseDataTransferObject.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\Mapping\\\\ClassMetadata\\<Gedmo\\\\Loggable\\\\LogEntryInterface\\<object\\>\\>\\:\\:newInstance\\(\\)\\.$#"
+			count: 1
+			path: src/Application/EventListener/LoggableListener.php
+
+		-
+			message: "#^Parameter \\#1 \\$objectId of method Gedmo\\\\Loggable\\\\Entity\\\\MappedSuperclass\\\\AbstractLogEntry\\<object\\>\\:\\:setObjectId\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Application/EventListener/LoggableListener.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, array\\{string, 'handle'\\} given\\.$#"
+			count: 1
+			path: src/Application/EventListener/Middleware/AjaxRequestListener.php
+
+		-
+			message: "#^Cannot access offset 'title' on mixed\\.$#"
+			count: 1
+			path: src/Application/EventListener/RequestListener.php
+
+		-
+			message: "#^Parameter \\#1 \\$title of method App\\\\Application\\\\Service\\\\SeoPageService\\:\\:setTitle\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Application/EventListener/RequestListener.php
+
+		-
+			message: "#^Cannot call method getEmail\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 6
+			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot call method getFullNameDegree\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 6
+			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 2
+			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot call method getLocale\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 6
+			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot call method getUser\\(\\) on App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\|null\\.$#"
+			count: 7
+			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 1
+			path: src/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot call method getTitle\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 1
+			path: src/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Service\\\\WorkService\\:\\:getAllUsers\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
+			count: 1
+			path: src/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriber.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 2
+			path: src/Application/Form/Transformer/CommaDotTransformer.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Application/Form/Transformer/TrimTransformer.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Application/GraphQL/Resolver/TaskResolverMap.php
+
+		-
+			message: "#^Parameter \\#1 \\$limit of method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAll\\(\\) expects int\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Application/GraphQL/Resolver/TaskResolverMap.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Application/GraphQL/Resolver/UserResolverMap.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: src/Application/GraphQL/Resolver/WorkResolverMap.php
+
+		-
+			message: "#^Parameter \\#1 \\$limit of method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:findAll\\(\\) expects int\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Application/GraphQL/Resolver/WorkResolverMap.php
+
+		-
+			message: "#^Parameter \\#2 \\$datetime of static method DateTimeImmutable\\:\\:createFromFormat\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Application/GraphQL/Type/DateTimeType.php
+
+		-
+			message: "#^Parameter \\#2 \\$baseTimestamp of function strtotime expects int\\|null, int\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/DateHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, int\\|false given\\.$#"
+			count: 6
+			path: src/Application/Helper/DateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$from of function rename expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/FileHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$path of function pathinfo expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/FileHelper.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/FileHelper.php
+
+		-
+			message: "#^Binary operation \"\\-\" between 32 and string results in an error\\.$#"
+			count: 1
+			path: src/Application/Helper/IpHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, array\\<string, class\\-string\\>\\|false given\\.$#"
+			count: 2
+			path: src/Application/Helper/ObjectHelper.php
+
+		-
+			message: "#^Anonymous function should return int\\|false but returns bool\\|int\\.$#"
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Cannot access offset 'czech' on mixed\\.$#"
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Cannot call method getFullNameDegree\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 2
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$a of static method App\\\\Application\\\\Helper\\\\SortFunctionHelper\\:\\:sortCzechChars\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$input of static method Symfony\\\\Component\\\\Yaml\\\\Yaml\\:\\:parse\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$b of static method App\\\\Application\\\\Helper\\\\SortFunctionHelper\\:\\:sortCzechChars\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(mixed, mixed\\)\\: int, Closure\\(mixed, mixed\\)\\: \\(int\\|false\\) given\\.$#"
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$replace_pairs of function strtr expects array, mixed given\\.$#"
+			count: 2
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: "#^Method App\\\\Application\\\\Menu\\\\MenuItem\\:\\:getAttributes\\(\\) should return array but returns array\\|null\\.$#"
+			count: 1
+			path: src/Application/Menu/MenuItem.php
+
+		-
+			message: "#^Parameter \\#2 \\$date of static method App\\\\Application\\\\Helper\\\\DateHelper\\:\\:validateDate\\(\\) expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Application/Middleware/Event/Ajax/GetEventMiddleware.php
+
+		-
+			message: "#^Parameter \\#2 \\$date of static method App\\\\Application\\\\Helper\\\\DateHelper\\:\\:validateDate\\(\\) expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Application/Middleware/EventCalendar/Ajax/EditMiddleware.php
+
+		-
+			message: "#^Parameter \\#2 \\$date of static method App\\\\Application\\\\Helper\\\\DateHelper\\:\\:validateDate\\(\\) expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Application/Middleware/EventCalendar/Ajax/GetEventMiddleware.php
+
+		-
+			message: "#^Call to function is_bool\\(\\) with int will always evaluate to false\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method del\\(\\) on Redis\\|null\\.$#"
+			count: 2
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method exists\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method flushDB\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method get\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method info\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method mget\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method mset\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method multi\\(\\) on Redis\\|null\\.$#"
+			count: 2
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method set\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Cannot call method setex\\(\\) on Redis\\|null\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Parameter \\#3 \\$value of method Redis\\:\\:setex\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: "#^Parameter \\#1 \\$password of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Credentials\\\\PasswordCredentials constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\#1 \\$userIdentifier of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Badge\\\\UserBadge constructor expects string, string\\|null given\\.$#"
+			count: 2
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\#1 \\$username of method App\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticator\\:\\:getUser\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\#1 \\$username of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByToken\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\#2 \\$token of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByToken\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\$authToken of class App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\$password of class App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Parameter \\$username of class App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface\\:\\:setPassword\\(\\)\\.$#"
+			count: 1
+			path: src/Application/Security/Provider/AppUserProvider.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface\\:\\:setSalt\\(\\)\\.$#"
+			count: 1
+			path: src/Application/Security/Provider/AppUserProvider.php
+
+		-
+			message: "#^Method App\\\\Application\\\\Security\\\\Provider\\\\AppUserProvider\\:\\:refreshUser\\(\\) should return Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface but returns App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Application/Security/Provider/AppUserProvider.php
+
+		-
+			message: "#^Parameter \\#1 \\$className of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
+			count: 1
+			path: src/Application/Service/EntityManagerService.php
+
+		-
+			message: "#^Parameter \\#1 \\$entityName of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getReference\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
+			count: 1
+			path: src/Application/Service/EntityManagerService.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getReference\\(\\)$#"
+			count: 1
+			path: src/Application/Service/EntityManagerService.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\)$#"
+			count: 1
+			path: src/Application/Service/EntityManagerService.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
+			count: 1
+			path: src/Application/Service/RequestService.php
+
+		-
+			message: "#^Call to function is_resource\\(\\) with false will always evaluate to false\\.$#"
+			count: 1
+			path: src/Application/Service/ResizeImageService.php
+
+		-
+			message: "#^Instanceof between \\*NEVER\\* and GdImage will always evaluate to false\\.$#"
+			count: 1
+			path: src/Application/Service/ResizeImageService.php
+
+		-
+			message: "#^Parameter \\#1 \\$dst_image of function imagecopyresized expects GdImage, GdImage\\|false given\\.$#"
+			count: 1
+			path: src/Application/Service/ResizeImageService.php
+
+		-
+			message: "#^Parameter \\#1 \\$image of function imagejpeg expects GdImage, GdImage\\|false given\\.$#"
+			count: 1
+			path: src/Application/Service/ResizeImageService.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function base64_encode expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Application/Service/ResizeImageService.php
+
+		-
+			message: "#^Result of \\|\\| is always true\\.$#"
+			count: 1
+			path: src/Application/Service/ResizeImageService.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Translation\\\\TranslatorBagInterface\\|Symfony\\\\Contracts\\\\Translation\\\\LocaleAwareInterface\\|Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\:\\:setLocale\\(\\)\\.$#"
+			count: 1
+			path: src/Application/Service/TranslatorService.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Translation\\\\TranslatorBagInterface\\|Symfony\\\\Contracts\\\\Translation\\\\LocaleAwareInterface\\|Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\:\\:trans\\(\\)\\.$#"
+			count: 1
+			path: src/Application/Service/TranslatorService.php
+
+		-
+			message: "#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#"
+			count: 1
+			path: src/Application/Service/TranslatorService.php
+
+		-
+			message: "#^Cannot access offset string on mixed\\.$#"
+			count: 1
+			path: src/Application/Transformer/Api/Transformer.php
+
+		-
+			message: "#^Method App\\\\Application\\\\Util\\\\SluggerUtil\\:\\:slugify\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Application/Util/SluggerUtil.php
+
+		-
+			message: "#^Method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:replaceWord\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Application/Util/TextHighlightWordUtil.php
+
+		-
+			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null given\\.$#"
+			count: 1
+			path: src/Application/Util/TokenStorageUtil.php
+
+		-
+			message: "#^Parameter \\#1 \\$menu of method App\\\\Application\\\\Widget\\\\MenuWidget\\:\\:getMenuConfig\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Application/Widget/MenuWidget.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ApiUser/Entity/ApiUser.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\:\\:\\$rules type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ApiUserRule\\\\Entity\\\\ApiUserRule\\>\\.$#"
+			count: 1
+			path: src/Domain/ApiUser/Entity/ApiUser.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:findByApiKey\\(\\) should return App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/ApiUser/Facade/ApiUserFacade.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ApiUserRule\\\\Entity\\\\ApiUserRule\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ApiUserRule/Entity/ApiUserRule.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Article\\\\Entity\\\\Article\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\>\\.$#"
+			count: 1
+			path: src/Domain/Article/Entity/Article.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Article\\\\Entity\\\\Article\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Article/Entity/Article.php
+
+		-
+			message: "#^Cannot call method getAccess\\(\\) on App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\|null\\.$#"
+			count: 1
+			path: src/Domain/Article/Security/Voter/ArticleVoter.php
+
+		-
+			message: "#^Cannot call method getCategories\\(\\) on App\\\\Domain\\\\Article\\\\Entity\\\\Article\\|null\\.$#"
+			count: 1
+			path: src/Domain/Article/Security/Voter/ArticleVoter.php
+
+		-
+			message: "#^Cannot call method isActive\\(\\) on App\\\\Domain\\\\Article\\\\Entity\\\\Article\\|null\\.$#"
+			count: 1
+			path: src/Domain/Article/Security/Voter/ArticleVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$articleVoterSubject of method App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\Subject\\\\ArticleVoterSubject, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Article/Security/Voter/ArticleVoter.php
+
+		-
+			message: "#^Parameter \\#2 \\$two of static method App\\\\Application\\\\Helper\\\\FunctionHelper\\:\\:checkIntersectTwoArray\\(\\) expects array, array\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Article/Security/Voter/ArticleVoter.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\:\\:\\$articles type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Article\\\\Entity\\\\Article\\>\\.$#"
+			count: 1
+			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
+
+		-
+			message: "#^Parameter \\#1 \\$articleCategory of method App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory, mixed given\\.$#"
+			count: 1
+			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
+
+		-
+			message: "#^Parameter \\#2 \\$two of static method App\\\\Application\\\\Helper\\\\FunctionHelper\\:\\:checkIntersectTwoArray\\(\\) expects array, array\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Comment/Entity/Comment.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Comment\\\\Facade\\\\CommentFacade\\:\\:getCommentByOwnerEvent\\(\\) should return App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Comment/Facade/CommentFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$content of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setContent\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Comment/Factory/CommentFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setEvent\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Comment/Factory/CommentFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Comment/Factory/CommentFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of class App\\\\Domain\\\\Comment\\\\Form\\\\EventSubscriber\\\\EventCommentSubscriber constructor expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Comment/Form/CommentForm.php
+
+		-
+			message: "#^Parameter \\#2 \\$event of class App\\\\Domain\\\\Comment\\\\Form\\\\EventSubscriber\\\\EventCommentSubscriber constructor expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Comment/Form/CommentForm.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$messages type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\>\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$participants type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationParticipant\\\\Entity\\\\ConversationParticipant\\>\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$statuses type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
+			message: "#^Parameter \\#1 \\$conversationMessage of method App\\\\Domain\\\\Conversation\\\\EventDispatcher\\\\ConversationEventDispatcherService\\:\\:onConversationMessageCreate\\(\\) expects App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage, App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Conversation/Facade/ConversationFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:find\\(\\) expects int, int\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Conversation/Facade/ConversationFacade.php
+
+		-
+			message: "#^Parameter \\#3 \\$content of method App\\\\Domain\\\\Conversation\\\\Factory\\\\ConversationFactory\\:\\:createConversationMessage\\(\\) expects string, string\\|null given\\.$#"
+			count: 3
+			path: src/Domain/Conversation/Facade/ConversationFacade.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getMessagesByConversation\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getMessagesByConversationAfterDate\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getUnreadMessagesByUser\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
+
+		-
+			message: "#^Cannot call method getCategories\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 2
+			path: src/Domain/Conversation/Helper/ConversationHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(mixed, mixed\\)\\: int, Closure\\(App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\)\\: \\(bool\\|int\\) given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Helper/ConversationHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$search of method App\\\\Domain\\\\Conversation\\\\Elastica\\\\ConversationSearch\\:\\:getMessageIdsByConversationAndSearch\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Http/ConversationDetailHandle.php
+
+		-
+			message: "#^Parameter \\#2 \\$search of method App\\\\Domain\\\\Conversation\\\\Elastica\\\\ConversationSearch\\:\\:getIdsByParticipantAndSearch\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Http/ConversationListHandle.php
+
+		-
+			message: "#^Cannot call method getSupervisor\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Conversation\\\\Service\\\\ConversationService\\:\\:getLastMessage\\(\\) should return App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Service/ConversationService.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Conversation\\\\Service\\\\ConversationStatusService\\:\\:getConversationMessageStatus\\(\\) should return App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Service/ConversationStatusService.php
+
+		-
+			message: "#^While loop condition is always true\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Service/ConversationStreamService.php
+
+		-
+			message: "#^Parameter \\#1 \\$text of static method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:highlightPartWords\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Service/MessageHighlightService.php
+
+		-
+			message: "#^Parameter \\#2 \\$words of static method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:highlightPartWords\\(\\) expects array, array\\<int, string\\>\\|false given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Service/MessageHighlightService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Entity/ConversationMessage.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:\\$statuses type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Entity/ConversationMessage.php
+
+		-
+			message: "#^Parameter \\#1 \\$content of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setContent\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setConversation\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$statuses of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setStatuses\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
+
+		-
+			message: "#^Cannot call method getData\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
+
+		-
+			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
+
+		-
+			message: "#^Cannot call method getFullNameDegree\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 4
+			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
+
+		-
+			message: "#^Cannot call method getMessageHeaderFooter\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of static method App\\\\Domain\\\\User\\\\Helper\\\\UserRoleHelper\\:\\:isSupervisor\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
+			count: 2
+			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
+
+		-
+			message: "#^Cannot call method getMessageHeaderFooter\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Form/ConversationMessageForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$conversationMessage of method App\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoter\\:\\:changeReadMessageStatus\\(\\) expects App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage, mixed given\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessageStatus/Entity/ConversationMessageStatus.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationMessageStatusType\\\\Entity\\\\ConversationMessageStatusType\\:\\:\\$conversationMessageStatus type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationMessageStatusType\\\\Entity\\\\ConversationMessageStatusType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\:\\:\\$conversations type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\>\\.$#"
+			count: 1
+			path: src/Domain/ConversationType/Entity/ConversationType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ConversationType/Entity/ConversationType.php
+
+		-
+			message: "#^Parameter \\#1 \\$categories of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setCategories\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Document/Factory/DocumentFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Document/Factory/DocumentFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\MediaCategory\\\\Form\\\\DataGrid\\\\MediaCategoryDataGrid\\:\\:queryBuilderFindAllByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Document/Form/DocumentForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Document/Form/Factory/DocumentFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getMimeTypesByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User\\|iterable, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Document/Form/Factory/DocumentFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:getAllUserActiveSupervisors\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Document/Form/Factory/DocumentFormFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null\\.$#"
+			count: 1
+			path: src/Domain/Document/Security/Voter/DocumentVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$media of method App\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Media\\\\Entity\\\\Media, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Document/Security/Voter/DocumentVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$media of method App\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoter\\:\\:canDownload\\(\\) expects App\\\\Domain\\\\Media\\\\Entity\\\\Media, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Document/Security/Voter/DocumentVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$media of method App\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Media\\\\Entity\\\\Media, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Document/Security/Voter/DocumentVoter.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\|null\\.$#"
+			count: 1
+			path: src/Domain/DocumentCategory/Form/Factory/DocumentCategoryFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$mediaCategory of method App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory, mixed given\\.$#"
+			count: 1
+			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$mediaCategory of method App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory, mixed given\\.$#"
+			count: 1
+			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$address of class Symfony\\\\Component\\\\Mime\\\\Address constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EmailNotificationQueue/Command/EmailNotificationQueueCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$subject of method Symfony\\\\Component\\\\Mime\\\\Email\\:\\:subject\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EmailNotificationQueue/Command/EmailNotificationQueueCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$addresses of method Symfony\\\\Component\\\\Mime\\\\Email\\:\\:to\\(\\) expects string\\|Symfony\\\\Component\\\\Mime\\\\Address, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EmailNotificationQueue/Command/EmailNotificationQueueCommand.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\EmailNotificationQueue\\\\Facade\\\\EmailNotificationQueueFacade\\:\\:getOneByUuid\\(\\) should return App\\\\Domain\\\\EmailNotificationQueue\\\\Entity\\\\EmailNotificationQueue\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/EmailNotificationQueue/Facade/EmailNotificationQueueFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\EmailNotificationQueue\\\\Facade\\\\EmailNotificationQueueFacade\\:\\:getOneReadyForSender\\(\\) should return App\\\\Domain\\\\EmailNotificationQueue\\\\Entity\\\\EmailNotificationQueue\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/EmailNotificationQueue/Facade/EmailNotificationQueueFacade.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Domain/Event/Entity/Event.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$comment type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\>\\.$#"
+			count: 1
+			path: src/Domain/Event/Entity/Event.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Event/Entity/Event.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
+			count: 1
+			path: src/Domain/Event/Entity/Event.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 2
+			path: src/Domain/Event/Facade/EventCalendarFacade.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Domain/Event/Facade/EventCalendarFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Event/Facade/EventFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:getEventsByOwner\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Event/Facade/EventFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:getEventsByParticipant\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Event/Facade/EventFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Factory/EventFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$end of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setEnd\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Factory/EventFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Factory/EventFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$start of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setStart\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Factory/EventFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setType\\(\\) expects App\\\\Domain\\\\EventType\\\\Entity\\\\EventType, App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Factory/EventFactory.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
+			count: 2
+			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\|null\\.$#"
+			count: 1
+			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
+
+		-
+			message: "#^Parameter \\#1 \\$first of static method App\\\\Application\\\\Helper\\\\CompareHelper\\:\\:compareDateTime\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
+
+		-
+			message: "#^Parameter \\#2 \\$second of static method App\\\\Application\\\\Helper\\\\CompareHelper\\:\\:compareDateTime\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
+
+		-
+			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Event/Http/Ajax/EventGetEventHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Http/EventDetailHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Event/Http/EventSwitchToSkypeHandle.php
+
+		-
+			message: "#^Cannot call method isSkype\\(\\) on App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null\\.$#"
+			count: 1
+			path: src/Domain/Event/Security/Voter/EventVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Event/Security/Voter/EventVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Event/Security/Voter/EventVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\:\\:canReservation\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Event/Security/Voter/EventVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Event/Security/Voter/EventVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\:\\:switchToSkype\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Event/Security/Voter/EventVoter.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Entity/EventAddress.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Entity/EventAddress.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$latitude type mapping mismatch\\: database can contain string\\|null but property expects float\\|null\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Entity/EventAddress.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$longitude type mapping mismatch\\: database can contain string\\|null but property expects float\\|null\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Entity/EventAddress.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) should return App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Factory/EventAddressFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Factory/EventAddressFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$street of method App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:setStreet\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Factory/EventAddressFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Form/Factory/EventAddressFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventAddress of method App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Security/Voter/EventAddressVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventAddress of method App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Security/Voter/EventAddressVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventAddress of method App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventAddress/Security/Voter/EventAddressVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarEditHandle.php
+
+		-
+			message: "#^Cannot call method getSupervisorWorks\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarEventReservationHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarGetEventHandle.php
+
+		-
+			message: "#^Parameter \\#2 \\$type of method App\\\\Domain\\\\Event\\\\Facade\\\\EventCalendarFacade\\:\\:getEventsByOwner\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarGetEventHandle.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/EventParticipant/Entity/EventParticipant.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Entity/EventSchedule.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:\\$templates type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\>\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Entity/EventSchedule.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on bool\\|DateTime\\|string\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|string given\\.$#"
+			count: 2
+			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$templates of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setTemplates\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
+
+		-
+			message: "#^Parameter \\#3 \\$startDate of method App\\\\Domain\\\\EventSchedule\\\\Factory\\\\EventScheduleFactory\\:\\:cloneEventSchedule\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Http/Ajax/EventScheduleCloneHandle.php
+
+		-
+			message: "#^Parameter \\#3 \\$startDate of method App\\\\Domain\\\\EventSchedule\\\\Factory\\\\EventScheduleFactory\\:\\:cloneEventSchedule\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Http/EventScheduleCloneHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canClone\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
+			count: 1
+			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Entity/EventScheduleTemplate.php
+
+		-
+			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$day of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setDay\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$end of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setEnd\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$start of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setStart\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setType\\(\\) expects App\\\\Domain\\\\EventType\\\\Entity\\\\EventType, App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/EventType/Entity/EventType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
+			count: 1
+			path: src/Domain/EventType/Entity/EventType.php
+
+		-
+			message: "#^Parameter \\#2 \\$array of function array_map expects array, array\\<int, string\\>\\|false given\\.$#"
+			count: 1
+			path: src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php
+
+		-
+			message: "#^Unsafe access to private constant App\\\\Domain\\\\Media\\\\Command\\\\SyncDatabaseMediaWithRealFileCommand\\:\\:LIMIT through static\\:\\:\\.$#"
+			count: 2
+			path: src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php
+
+		-
+			message: "#^Cannot call method getExtension\\(\\) on App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null\\.$#"
+			count: 3
+			path: src/Domain/Media/Entity/Media.php
+
+		-
+			message: "#^Cannot call method getFolder\\(\\) on App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null\\.$#"
+			count: 2
+			path: src/Domain/Media/Entity/Media.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\>\\.$#"
+			count: 1
+			path: src/Domain/Media/Entity/Media.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Media/Entity/Media.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
+			count: 1
+			path: src/Domain/Media/Entity/Media.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getExtension\\(\\)\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Cannot call method getClientOriginalExtension\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Cannot call method getClientOriginalName\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Cannot call method getMimeType\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Cannot call method getSize\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Cannot call method move\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Parameter \\#1 \\$mimeType of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setMimeType\\(\\) expects App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType, object given\\.$#"
+			count: 1
+			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:findByMediaName\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getFormValidationMimeTypes\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getMimeTypeByName\\(\\) should return App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getMimeTypesByOwner\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_keys expects array, mixed given\\.$#"
+			count: 2
+			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaTypeFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaTypeFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaTypeFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\> but returns array\\<int, object\\>\\.$#"
+			count: 1
+			path: src/Domain/Media/Facade/MediaTypeFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$categories of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setCategories\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Media/Factory/MediaFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$mediaName of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setMediaName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Media/Factory/MediaFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Media/Factory/MediaFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Media/Factory/MediaFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setType\\(\\) expects App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType, App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Media/Factory/MediaFactory.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/Service/MediaService.php
+
+		-
+			message: "#^Cannot call method getExtension\\(\\) on App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/Service/MediaService.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null\\.$#"
+			count: 1
+			path: src/Domain/Media/Service/MediaService.php
+
+		-
+			message: "#^Parameter \\#1 \\$file of class Symfony\\\\Component\\\\HttpFoundation\\\\BinaryFileResponse constructor expects SplFileInfo\\|string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Media/Service/MediaService.php
+
+		-
+			message: "#^Parameter \\#2 \\$values of method Symfony\\\\Component\\\\HttpFoundation\\\\ResponseHeaderBag\\:\\:set\\(\\) expects array\\<string\\>\\|string\\|null, App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Media/Service/MediaService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/MediaCategory/Entity/MediaCategory.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
+			count: 1
+			path: src/Domain/MediaCategory/Entity/MediaCategory.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwner\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwners\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/MediaCategory/Factory/MediaCategoryFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/MediaCategory/Factory/MediaCategoryFactory.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/MediaMimeType/Entity/MediaMimeType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
+			count: 1
+			path: src/Domain/MediaMimeType/Entity/MediaMimeType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/MediaType/Entity/MediaType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
+			count: 1
+			path: src/Domain/MediaType/Entity/MediaType.php
+
+		-
+			message: "#^Cannot access offset 'imageData' on mixed\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$originImage of method App\\\\Application\\\\Service\\\\ResizeImageService\\:\\:resizeBase64Image\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function base64_decode expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setType\\(\\) expects App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType, App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
+
+		-
+			message: "#^Parameter \\#2 \\$newWidth of method App\\\\Application\\\\Service\\\\ResizeImageService\\:\\:resizeBase64Image\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
+
+		-
+			message: "#^Cannot call method getFilename\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
+
+		-
+			message: "#^Cannot call method getMimeType\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setType\\(\\) expects App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType, App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$plainPassword of method App\\\\Domain\\\\User\\\\Service\\\\PasswordUpdater\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/ProfileChangePasswordHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$entity of method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:remove\\(\\) expects object, App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Profile/Http/ProfileDeleteImageHandle.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Entity/ResetPassword.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$hashedToken type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Entity/ResetPassword.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Entity/ResetPassword.php
+
+		-
+			message: "#^Cannot call method getCreatedAt\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
+
+		-
+			message: "#^Cannot call method isExpired\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\ResetPassword\\\\Facade\\\\ResetPasswordFacade\\:\\:findResetPasswordByToken\\(\\) should return App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$expiresAt of method App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:setExpiresAt\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$hashedToken of method App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:setHashedToken\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:setUser\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$email of method App\\\\Domain\\\\ResetPassword\\\\Http\\\\ResetPasswordRequestHandle\\:\\:processSendingPasswordResetEmail\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Http/ResetPasswordRequestHandle.php
+
+		-
+			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of static method App\\\\Application\\\\Helper\\\\HashHelper\\:\\:generateResetPasswordHashedToken\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Domain/ResetPassword/Service/ResetPasswordService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Entity/SystemEvent.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:\\$recipient type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\>\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Entity/SystemEvent.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/DocumentSystemEventSubscriber.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 2
+			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
+
+		-
+			message: "#^Cannot call method getUser\\(\\) on App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\|null\\.$#"
+			count: 5
+			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
+
+		-
+			message: "#^Cannot call method getWork\\(\\) on App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\|null\\.$#"
+			count: 4
+			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 4
+			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$recipient of method App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\:\\:setRecipient\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 5
+			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 6
+			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/MessageSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/TaskSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/UserSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/UserSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/VersionSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Service\\\\WorkService\\:\\:getUsers\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/EventSubscriber/VersionSystemEventSubscriber.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
+			count: 3
+			path: src/Domain/SystemEvent/EventSubscriber/WorkSystemEventSubscriber.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Facade/SystemEventFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\SystemEvent\\\\Facade\\\\SystemEventRecipientFacade\\:\\:getUnreadSystemEventsByRecipient\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Http/Api/SystemEventTypeEventsHandle.php
+
+		-
+			message: "#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
+
+		-
+			message: "#^Parameter \\#2 \\$systemEventTypeId of method App\\\\Domain\\\\SystemEvent\\\\Service\\\\SystemEventLinkGeneratorService\\:\\:getTemplate\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/SystemEventRecipient/Entity/SystemEventRecipient.php
+
+		-
+			message: "#^Parameter \\#1 \\$systemEventRecipient of method App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\:\\:canChangeViewed\\(\\) expects App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient, mixed given\\.$#"
+			count: 1
+			path: src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/SystemEventType/Entity/SystemEventType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
+			count: 1
+			path: src/Domain/SystemEventType/Entity/SystemEventType.php
+
+		-
+			message: "#^Unsafe access to private constant App\\\\Domain\\\\Task\\\\Command\\\\TaskRemindDeadlineCommand\\:\\:LIMIT through static\\:\\:\\.$#"
+			count: 2
+			path: src/Domain/Task/Command/TaskRemindDeadlineCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Task/Entity/Task.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
+			count: 1
+			path: src/Domain/Task/Entity/Task.php
+
+		-
+			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
+			count: 1
+			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskDeadlineFacade\\:\\:getTasksAfterDeadline\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Task\\\\Entity\\\\Task\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAllByOwnerComplete\\(\\) should return array\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Task/Factory/TaskFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Task/Factory/TaskFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:setWork\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Task/Factory/TaskFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Task\\\\Entity\\\\Task\\|null\\.$#"
+			count: 1
+			path: src/Domain/Task/Form/Factory/TaskFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$supervisor of method App\\\\Domain\\\\Task\\\\Form\\\\TaskSeveralForm\\:\\:queryBuilder\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Task/Form/TaskSeveralForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Task\\\\Service\\\\TaskStatusService\\:\\:changeStatus\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Task/Http/Ajax/TaskChangeStatusHandle.php
+
+		-
+			message: "#^Argument of an invalid type iterable\\|null supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php
+
+		-
+			message: "#^Parameter \\#2 \\$search of method App\\\\Domain\\\\Task\\\\Elastica\\\\TaskSearch\\:\\:getIdsByOwnerAndSearch\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Task/Http/TaskListHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Task/Security/Voter/TaskVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Task/Security/Voter/TaskVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canNotifyComplete\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Task/Security/Voter/TaskVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Task/Security/Voter/TaskVoter.php
+
+		-
+			message: "#^Cannot call method isComplete\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/Task/Service/TaskService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$entityManager is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$io is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$userPasswordHasher is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$validator is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserDeleteCommand\\:\\:\\$entityManager is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserDeleteCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserDeleteCommand\\:\\:\\$io is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserDeleteCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserDeleteCommand\\:\\:\\$validator is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserDeleteCommand.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\User\\\\Command\\\\UserListCommand\\:\\:userToArray\\(\\) is unused\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserListCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserListCommand\\:\\:\\$entityManager is never read, only written\\.$#"
+			count: 1
+			path: src/Domain/User/Command/UserListCommand.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$email \\(string\\) does not accept string\\|null\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$emailCanonical \\(string\\) does not accept string\\|null\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$gender \\(string\\) does not accept string\\|null\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$groups type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\>\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$mediaOwner type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$password type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/User/Entity/User.php
+
+		-
+			message: "#^Cannot call method getQuery\\(\\) on Doctrine\\\\ORM\\\\QueryBuilder\\|null\\.$#"
+			count: 3
+			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByEmail\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByToken\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByUsername\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 3
+			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$firstname of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setFirstname\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$groups of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setGroups\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$lastname of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setLastname\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$password of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setPassword\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$roles of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setRoles\\(\\) expects array, array\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$username of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setUsername\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
+			count: 1
+			path: src/Domain/User/Form/Factory/UserFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$email of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByEmail\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Http/Ajax/UserCreateHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$username of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByUsername\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Http/Ajax/UserCreateHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$email of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByEmail\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Http/UserCreateHandle.php
+
+		-
+			message: "#^Parameter \\#1 \\$username of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByUsername\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Http/UserCreateHandle.php
+
+		-
+			message: "#^Parameter \\#2 \\$type of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:getUsersQueryBySupervisor\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: src/Domain/User/Http/UserListHandle.php
+
+		-
+			message: "#^Parameter \\#3 \\$workStatus of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:getUsersQueryBySupervisor\\(\\) expects App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|iterable\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Domain/User/Http/UserListHandle.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\User\\\\Service\\\\UserWorkService\\:\\:getWorkBy\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
+			count: 1
+			path: src/Domain/User/Service/UserWorkService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/UserGroup/Entity/Group.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/UserGroup/Entity/Group.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$users type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\>\\.$#"
+			count: 1
+			path: src/Domain/UserGroup/Entity/Group.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/UserGroup/Factory/UserGroupFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\|null\\.$#"
+			count: 1
+			path: src/Domain/UserGroup/Form/Factory/UserGroupFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Version/Factory/VersionFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null\\.$#"
+			count: 1
+			path: src/Domain/Version/Form/Factory/VersionFormFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 2
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Cannot call method getMedias\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Cannot call method getWork\\(\\) on App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null\\.$#"
+			count: 2
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$versionVoterSubject of method App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\:\\:canCreate\\(\\) expects App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\Subject\\\\VersionVoterSubject, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$versionVoterSubject of method App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\Subject\\\\VersionVoterSubject, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$versionVoterSubject of method App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\:\\:canDownload\\(\\) expects App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\Subject\\\\VersionVoterSubject, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$versionVoterSubject of method App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\Subject\\\\VersionVoterSubject, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$versionVoterSubject of method App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\Subject\\\\VersionVoterSubject, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of static method App\\\\Domain\\\\Work\\\\Helper\\\\WorkRoleHelper\\:\\:hasAccessToWork\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of static method App\\\\Domain\\\\Work\\\\Helper\\\\WorkRoleHelper\\:\\:isAuthorSupervisor\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Version/Security/Voter/VersionVoter.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:getWidget\\(\\) should return App\\\\Application\\\\Interfaces\\\\Widget\\\\WidgetInterface but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Widget/Service/WidgetManagerService.php
+
+		-
+			message: "#^While loop condition is always true\\.$#"
+			count: 1
+			path: src/Domain/Widget/Service/WidgetStreamService.php
+
+		-
+			message: "#^Anonymous function should return int\\|false but returns bool\\|int\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Call to an undefined method Traversable\\<\\(int\\|string\\), object\\>\\:\\:uasort\\(\\)\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Work\\\\Elastica\\\\WorkSearch\\:\\:filterWorkList\\(\\) should return ArrayIterator but returns Traversable\\<\\(int\\|string\\), object\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Parameter \\#1 \\$string1 of method Symfony\\\\Polyfill\\\\Intl\\\\Icu\\\\Collator\\:\\:compare\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Parameter \\#2 \\$string2 of method Symfony\\\\Polyfill\\\\Intl\\\\Icu\\\\Collator\\:\\:compare\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Part \\$field \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$conversations type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$eventParticipants type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$tasks type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\>\\.$#"
+			count: 1
+			path: src/Domain/Work/Entity/Work.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/Work/Facade/WorkFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Work/Facade/WorkFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:getWorksByAuthorStatus\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Work/Facade/WorkFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:getWorksByAuthorSupervisorStatus\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Work/Facade/WorkFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$author of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setAuthor\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$categories of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setCategories\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$deadline of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setDeadline\\(\\) expects DateTime, DateTime\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$status of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setStatus\\(\\) expects App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus, App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$supervisor of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setSupervisor\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$title of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setTitle\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setType\\(\\) expects App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType, App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Factory/WorkFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
+			count: 2
+			path: src/Domain/Work/Form/Factory/WorkFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\WorkCategory\\\\Form\\\\DataGrid\\\\WorkCategoryDataGrid\\:\\:queryBuilderWorkCategoriesByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Work/Form/WorkForm.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
+			count: 1
+			path: src/Domain/Work/Helper/WorkFunctionHelper.php
+
+		-
+			message: "#^Using nullsafe method call on non\\-nullable type App\\\\Domain\\\\User\\\\Entity\\\\User\\. Use \\-\\> instead\\.$#"
+			count: 2
+			path: src/Domain/Work/Helper/WorkRoleHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Work/Security/Voter/WorkVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Work/Security/Voter/WorkVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
+			count: 1
+			path: src/Domain/Work/Security/Voter/WorkVoter.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWork\\(\\)\\.$#"
+			count: 3
+			path: src/Domain/Work/Service/WorkDetailTabService.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWorkUser\\(\\)\\.$#"
+			count: 1
+			path: src/Domain/Work/Service/WorkDetailTabService.php
+
+		-
+			message: "#^Cannot call method getConversation\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Domain/Work/Service/WorkDetailTabService.php
+
+		-
+			message: "#^Parameter \\#2 \\$user of static method App\\\\Domain\\\\Conversation\\\\Helper\\\\ConversationHelper\\:\\:getConversationOpposite\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/Work/Service/WorkDetailTabService.php
+
+		-
+			message: "#^Cannot call method diff\\(\\) on DateTime\\|null\\.$#"
+			count: 2
+			path: src/Domain/Work/Service/WorkService.php
+
+		-
+			message: "#^Parameter \\#1 \\$targetObject of method DateTime\\:\\:diff\\(\\) expects DateTimeInterface, DateTime\\|null given\\.$#"
+			count: 2
+			path: src/Domain/Work/Service/WorkService.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Entity/WorkCategory.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Entity/WorkCategory.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$works of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setWorks\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\|null\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Form/Factory/WorkCategoryFormFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$workCategory of method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory, mixed given\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php
+
+		-
+			message: "#^Parameter \\#1 \\$workCategory of method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory, mixed given\\.$#"
+			count: 1
+			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php
+
+		-
+			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
+			count: 1
+			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
+
+		-
+			message: "#^Cannot access offset 'deadlineProgram' on mixed\\.$#"
+			count: 1
+			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/WorkStatus/Entity/WorkStatus.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
+			count: 1
+			path: src/Domain/WorkStatus/Entity/WorkStatus.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:findAll\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:getCountByUser\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
+			count: 1
+			path: src/Domain/WorkType/Entity/WorkType.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
+			count: 1
+			path: src/Domain/WorkType/Entity/WorkType.php

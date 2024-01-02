@@ -99,7 +99,7 @@ class Article
         $this->categories = $categories;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }

@@ -26,7 +26,7 @@ readonly class PaginatorService
 
     public function createPagination(
         mixed $target,
-        int $page = null,
+        int $page,
         int $limit = null,
         array $options = []
     ): PaginationInterface {

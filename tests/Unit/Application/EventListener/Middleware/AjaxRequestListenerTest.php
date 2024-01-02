@@ -70,7 +70,7 @@ class AjaxRequestListenerTest extends TestCase
         );
 
         $listener->onKernelController($event);
-    }
+     }
 
     public function testOnKernelControllerFailedGet(): void
     {
