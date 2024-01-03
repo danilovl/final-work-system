@@ -18,6 +18,7 @@ use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class HomepageCache
@@ -34,6 +35,7 @@ class HomepageCache
         $cacheItem = $this->cache->getItem(
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
+        /** @var array<int, PaginationInterface>|null $pagePaginators */
         $pagePaginators = $cacheItem->get();
 
         if (!$cacheItem->isHit() || empty($pagePaginators[$page])) {
