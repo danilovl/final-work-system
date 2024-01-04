@@ -16,6 +16,7 @@ use App\Application\Messenger\Loggable\LoggableMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\EventArgs;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Loggable\LogEntryInterface;
@@ -52,6 +53,7 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
 
         if ($config = $this->getConfiguration($om, $meta->getName())) {
             $logEntryClass = $this->getLogEntryClass($ea, $meta->getName());
+            /** @var ClassMetadataInfo $logEntryMeta */
             $logEntryMeta = $om->getClassMetadata($logEntryClass);
             /** @var LogEntry $logEntry */
             $logEntry = $logEntryMeta->newInstance();
@@ -64,7 +66,9 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
             if (LogEntryInterface::ACTION_CREATE === $action && $ea->isPostInsertGenerator($meta)) {
                 $this->pendingLogEntryInserts[spl_object_id($object)] = $logEntry;
             } else {
-                $logEntry->setObjectId($wrapped->getIdentifier());
+                /** @var string $identifier */
+                $identifier = $wrapped->getIdentifier();
+                $logEntry->setObjectId($identifier);
             }
             $newValues = [];
             if (LogEntryInterface::ACTION_REMOVE !== $action && isset($config['versioned'])) {

@@ -6,16 +6,6 @@ parameters:
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\Mapping\\\\ClassMetadata\\<Gedmo\\\\Loggable\\\\LogEntryInterface\\<object\\>\\>\\:\\:newInstance\\(\\)\\.$#"
-			count: 1
-			path: src/Application/EventListener/LoggableListener.php
-
-		-
-			message: "#^Parameter \\#1 \\$objectId of method Gedmo\\\\Loggable\\\\Entity\\\\MappedSuperclass\\\\AbstractLogEntry\\<object\\>\\:\\:setObjectId\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Application/EventListener/LoggableListener.php
-
-		-
 			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, array\\{string, 'handle'\\} given\\.$#"
 			count: 1
 			path: src/Application/EventListener/Middleware/AjaxRequestListener.php
