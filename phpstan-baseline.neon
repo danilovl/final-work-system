@@ -11,16 +11,6 @@ parameters:
 			path: src/Application/EventListener/Middleware/AjaxRequestListener.php
 
 		-
-			message: "#^Cannot access offset 'title' on mixed\\.$#"
-			count: 1
-			path: src/Application/EventListener/RequestListener.php
-
-		-
-			message: "#^Parameter \\#1 \\$title of method App\\\\Application\\\\Service\\\\SeoPageService\\:\\:setTitle\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 1
-			path: src/Application/EventListener/RequestListener.php
-
-		-
 			message: "#^Cannot call method getEmail\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
 			count: 6
 			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php

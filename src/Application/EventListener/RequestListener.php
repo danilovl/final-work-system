@@ -58,6 +58,7 @@ readonly class RequestListener implements EventSubscriberInterface
 
     private function defaultRouteSeoPage(RequestEvent $requestEvent): void
     {
+        /** @var array{title: string}|null $seo */
         $seo = $requestEvent->getRequest()->attributes->get('_seo');
         $this->seoPageService->setTitle($seo['title'] ?? null);
     }
