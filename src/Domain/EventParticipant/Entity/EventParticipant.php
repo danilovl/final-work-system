@@ -13,6 +13,7 @@
 namespace App\Domain\EventParticipant\Entity;
 
 use App\Application\Constant\TranslationConstant;
+use App\Application\Exception\PropertyValueIsNullException;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
     IdTrait,
@@ -93,6 +94,15 @@ class EventParticipant
 
     public function getUser(): ?User
     {
+        return $this->user;
+    }
+
+    public function getUserMust(): User
+    {
+        if ($this->user === null) {
+            throw new PropertyValueIsNullException('User is null.');
+        }
+
         return $this->user;
     }
 

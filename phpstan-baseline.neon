@@ -11,31 +11,6 @@ parameters:
 			path: src/Application/EventListener/Middleware/AjaxRequestListener.php
 
 		-
-			message: "#^Cannot call method getEmail\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 6
-			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
-
-		-
-			message: "#^Cannot call method getFullNameDegree\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 6
-			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 2
-			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
-
-		-
-			message: "#^Cannot call method getLocale\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 6
-			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
-
-		-
-			message: "#^Cannot call method getUser\\(\\) on App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\|null\\.$#"
-			count: 7
-			path: src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php
-
-		-
 			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
 			count: 1
 			path: src/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriber.php
@@ -831,11 +806,6 @@ parameters:
 			path: src/Domain/EmailNotificationQueue/Facade/EmailNotificationQueueFacade.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 1
-			path: src/Domain/Event/Entity/Event.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$comment type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\>\\.$#"
 			count: 1
 			path: src/Domain/Event/Entity/Event.php
@@ -924,16 +894,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 2
 			path: src/Domain/Event/Http/Ajax/EventGetEventHandle.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Http/EventDetailHandle.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Http/EventSwitchToSkypeHandle.php
 
 		-
 			message: "#^Cannot call method isSkype\\(\\) on App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null\\.$#"
@@ -1029,11 +989,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 2
 			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarEditHandle.php
-
-		-
-			message: "#^Cannot call method getSupervisorWorks\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 1
-			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarEventReservationHandle.php
 
 		-
 			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
@@ -1499,36 +1454,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/EventSubscriber/DocumentSystemEventSubscriber.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 2
-			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
-
-		-
-			message: "#^Cannot call method getUser\\(\\) on App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\|null\\.$#"
-			count: 5
-			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
-
-		-
-			message: "#^Cannot call method getWork\\(\\) on App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\|null\\.$#"
-			count: 4
-			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 4
-			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$recipient of method App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\:\\:setRecipient\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 5
-			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
-			count: 6
-			path: src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php
 
 		-
 			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"

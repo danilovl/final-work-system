@@ -13,6 +13,7 @@
 namespace App\Domain\Event\Entity;
 
 use App\Application\Constant\TranslationConstant;
+use App\Application\Exception\PropertyValueIsNullException;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsOwnerTrait,
@@ -132,7 +133,7 @@ class Event
         $this->end = $end;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
@@ -164,6 +165,15 @@ class Event
 
     public function getParticipant(): ?EventParticipant
     {
+        return $this->participant;
+    }
+
+    public function getParticipantMust(): EventParticipant
+    {
+        if ($this->participant === null) {
+            throw new PropertyValueIsNullException('Participant is null.');
+        }
+
         return $this->participant;
     }
 

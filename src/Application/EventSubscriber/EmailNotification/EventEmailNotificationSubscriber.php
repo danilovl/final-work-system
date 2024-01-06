@@ -35,7 +35,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventCreate(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
-        $toUser = $event->getParticipant()->getUser();
+        $toUser = $event->getParticipantMust()->getUserMust();
 
         $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
@@ -55,7 +55,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventEdit(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
-        $toUser = $event->getParticipant()->getUser();
+        $toUser = $event->getParticipantMust()->getUserMust();
 
         $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
@@ -84,7 +84,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             'from' => $this->sender,
             'template' => 'event_switch_skype',
             'templateParameters' => [
-                'eventParticipant' => $event->getParticipant()->getUser()->getFullNameDegree(),
+                'eventParticipant' => $event->getParticipantMust()->getUserMust()->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
         ]);
@@ -97,11 +97,11 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
-        $toUser = $event->getParticipant()->getUser();
+        $toUser = $event->getParticipantMust()->getUserMust();
         $locale = $toUser->getLocale();
 
         $to = $toUser->getEmail();
-        $user = $event->getParticipant()->getUser();
+        $user = $event->getParticipantMust()->getUserMust();
 
         if ($eventComment->getOwner()->getId() !== $event->getOwner()->getId()) {
             $to = $eventComment->getOwner()->getEmail();
@@ -130,11 +130,11 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $eventComment = $genericEvent->comment;
         $event = $eventComment->getEvent();
 
-        $toUser = $event->getParticipant()->getUser();
+        $toUser = $event->getParticipantMust()->getUserMust();
         $locale = $toUser->getLocale();
 
         $to = $toUser->getEmail();
-        $user = $event->getParticipant()->getUser();
+        $user = $toUser;
 
         if ($eventComment->getOwner()->getId() !== $event->getOwner()->getId()) {
             $to = $eventComment->getOwner()->getEmail();
