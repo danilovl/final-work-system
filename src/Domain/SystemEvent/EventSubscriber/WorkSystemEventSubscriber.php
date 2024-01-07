@@ -18,7 +18,6 @@ use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
-use App\Domain\User\Entity\User;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\Domain\Work\Service\WorkService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -56,7 +55,6 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
 
         $workUsers = $this->workService->getAllUsers($work);
 
-        /** @var User $user */
         foreach ($workUsers as $user) {
             if ($user->getId() === $work->getSupervisor()->getId()) {
                 continue;

@@ -99,7 +99,7 @@ class EventParticipant
 
     public function getUserMust(): User
     {
-        if ($this->user === null) {
+        if (!$this->user) {
             throw new PropertyValueIsNullException('User is null.');
         }
 

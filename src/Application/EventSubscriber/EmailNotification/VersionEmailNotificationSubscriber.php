@@ -16,7 +16,6 @@ use App\Application\EventSubscriber\Events;
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
 use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
-use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Service\WorkService;
@@ -60,10 +59,9 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         string $template
     ): void {
         $media = $event->media;
-        $work = $media->getWork();
+        $work = $media->getWorkMust();
         $workUsers = $this->workService->getAllUsers($work);
 
-        /** @var User $user */
         foreach ($workUsers as $user) {
             if ($user->getId() === $media->getOwner()->getId()) {
                 continue;

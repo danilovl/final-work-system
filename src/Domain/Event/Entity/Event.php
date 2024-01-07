@@ -170,7 +170,7 @@ class Event
 
     public function getParticipantMust(): EventParticipant
     {
-        if ($this->participant === null) {
+        if (!$this->participant) {
             throw new PropertyValueIsNullException('Participant is null.');
         }
 

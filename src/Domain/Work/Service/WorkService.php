@@ -29,11 +29,17 @@ class WorkService
         return false;
     }
 
+    /**
+     * @return User[]
+     */
     public function getAllUsers(Work $work): array
     {
         return $this->getUsers($work, true, true, true, true);
     }
 
+    /**
+     * @return User[]
+     */
     public function getUsers(
         Work $work,
         bool $author = false,

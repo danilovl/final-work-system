@@ -12,14 +12,17 @@
 
 namespace App\Domain\Media\Entity;
 
+use App\Application\Exception\PropertyValueIsNullException;
 use App\Application\Constant\{
-    FileSizeConstant};
+    FileSizeConstant
+};
 use App\Application\Traits\Entity\{
     ActiveAbleTrait,
     CreateUpdateAbleTrait,
     IdTrait,
     IsOwnerTrait,
-    SimpleInformationTrait};
+    SimpleInformationTrait
+};
 use App\Domain\Media\Constant\MediaConstant;
 use App\Domain\Media\Repository\MediaRepository;
 use App\Domain\MediaCategory\Entity\MediaCategory;
@@ -31,7 +34,8 @@ use App\Domain\Work\Entity\Work;
 use DateTime;
 use Doctrine\Common\Collections\{
     ArrayCollection,
-    Collection};
+    Collection
+};
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -165,6 +169,15 @@ class Media
 
     public function getWork(): ?Work
     {
+        return $this->work;
+    }
+
+    public function getWorkMust(): Work
+    {
+        if (!$this->work) {
+            throw new PropertyValueIsNullException('Work is null.');
+        }
+
         return $this->work;
     }
 
