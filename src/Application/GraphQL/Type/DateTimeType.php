@@ -38,6 +38,9 @@ class DateTimeType extends ScalarType
         return $value->format(DateFormatConstant::DATABASE->value);
     }
 
+    /**
+     * @param string $value
+     */
     public function parseValue($value): ?DateTimeInterface
     {
         return DateTimeImmutable::createFromFormat(DateFormatConstant::DATABASE->value, $value) ?: null;

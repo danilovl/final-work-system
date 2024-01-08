@@ -46,11 +46,6 @@ parameters:
 			path: src/Application/GraphQL/Resolver/WorkResolverMap.php
 
 		-
-			message: "#^Parameter \\#2 \\$datetime of static method DateTimeImmutable\\:\\:createFromFormat\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Application/GraphQL/Type/DateTimeType.php
-
-		-
 			message: "#^Parameter \\#2 \\$baseTimestamp of function strtotime expects int\\|null, int\\|false given\\.$#"
 			count: 1
 			path: src/Application/Helper/DateHelper.php
