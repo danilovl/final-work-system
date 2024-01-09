@@ -56,21 +56,6 @@ parameters:
 			path: src/Application/Helper/DateHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$from of function rename expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Application/Helper/FileHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$path of function pathinfo expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Application/Helper/FileHelper.php
-
-		-
-			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|false given\\.$#"
-			count: 1
-			path: src/Application/Helper/FileHelper.php
-
-		-
 			message: "#^Binary operation \"\\-\" between 32 and string results in an error\\.$#"
 			count: 1
 			path: src/Application/Helper/IpHelper.php

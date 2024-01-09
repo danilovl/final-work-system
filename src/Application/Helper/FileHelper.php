@@ -19,6 +19,7 @@ class FileHelper
         string $data,
         string $prefix = 'temp-file'
     ): string {
+        /** @var string $file */
         $file = tempnam(sys_get_temp_dir(), $prefix);
         $newName = str_replace(pathinfo($file, PATHINFO_EXTENSION), $extension, $file);
         rename($file, $newName);
