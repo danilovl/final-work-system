@@ -56,11 +56,6 @@ parameters:
 			path: src/Application/Helper/DateHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, array\\<string, class\\-string\\>\\|false given\\.$#"
-			count: 2
-			path: src/Application/Helper/ObjectHelper.php
-
-		-
 			message: "#^Anonymous function should return int\\|false but returns bool\\|int\\.$#"
 			count: 1
 			path: src/Application/Helper/SortFunctionHelper.php

@@ -19,11 +19,15 @@ class ObjectHelper
         $traits = [];
 
         do {
-            $traits = array_merge(class_uses($class, $autoload), $traits);
+            /** @var string[] $classUses */
+            $classUses = class_uses($class, $autoload);
+            $traits = array_merge($classUses, $traits);
         } while ($class = get_parent_class($class));
 
         foreach ($traits as $trait => $same) {
-            $traits = array_merge(class_uses($trait, $autoload), $traits);
+            /** @var string[] $classUses */
+            $classUses = class_uses($trait, $autoload);
+            $traits = array_merge($classUses, $traits);
         }
 
         return array_values(array_unique($traits));
