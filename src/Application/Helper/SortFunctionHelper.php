@@ -24,18 +24,21 @@ class SortFunctionHelper
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
-        usort($array, static function (mixed $first, mixed $second) use ($collator): int|false {
+        usort($array, static function (mixed $first, mixed $second) use ($collator): int {
             $f = (string) $first;
             $s = (string) $second;
 
-            return $collator->compare($f, $s);
+            return (int) $collator->compare($f, $s);
         });
     }
 
     public static function sortCzechChars(string $a, string $b): int
     {
+        /** @var string $a */
         $a = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $a);
+        /** @var string $b */
         $b = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $b);
+        /** @var array $czechChars */
         $czechChars = Yaml::parse(file_get_contents(self::PATH_CZECH_CHARS))['czech'] ?? [];
 
         $a = strtr($a, $czechChars);
@@ -47,8 +50,10 @@ class SortFunctionHelper
     public static function eventParticipantSort(array &$eventParticipantArray): void
     {
         usort($eventParticipantArray, static function (EventParticipant $first, EventParticipant $second): int {
-            $f = iconv('UTF-8', 'ASCII//TRANSLIT', $first->getUser()->getFullNameDegree());
-            $s = iconv('UTF-8', 'ASCII//TRANSLIT', $second->getUser()->getFullNameDegree());
+            /** @var string $f */
+            $f = iconv('UTF-8', 'ASCII//TRANSLIT', $first->getUserMust()->getFullNameDegree());
+            /** @var string $s */
+            $s = iconv('UTF-8', 'ASCII//TRANSLIT', $second->getUserMust()->getFullNameDegree());
 
             return self::sortCzechChars($f, $s);
         });

@@ -56,43 +56,13 @@ parameters:
 			path: src/Application/Helper/DateHelper.php
 
 		-
-			message: "#^Anonymous function should return int\\|false but returns bool\\|int\\.$#"
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
 			message: "#^Cannot access offset 'czech' on mixed\\.$#"
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
-			message: "#^Cannot call method getFullNameDegree\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 2
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$a of static method App\\\\Application\\\\Helper\\\\SortFunctionHelper\\:\\:sortCzechChars\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Application/Helper/SortFunctionHelper.php
 
 		-
 			message: "#^Parameter \\#1 \\$input of static method Symfony\\\\Component\\\\Yaml\\\\Yaml\\:\\:parse\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
-			message: "#^Parameter \\#2 \\$b of static method App\\\\Application\\\\Helper\\\\SortFunctionHelper\\:\\:sortCzechChars\\(\\) expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
-			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(mixed, mixed\\)\\: int, Closure\\(mixed, mixed\\)\\: \\(int\\|false\\) given\\.$#"
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
-			message: "#^Parameter \\#2 \\$replace_pairs of function strtr expects array, mixed given\\.$#"
-			count: 2
 			path: src/Application/Helper/SortFunctionHelper.php
 
 		-
