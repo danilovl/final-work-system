@@ -66,11 +66,6 @@ parameters:
 			path: src/Application/Helper/SortFunctionHelper.php
 
 		-
-			message: "#^Method App\\\\Application\\\\Menu\\\\MenuItem\\:\\:getAttributes\\(\\) should return array but returns array\\|null\\.$#"
-			count: 1
-			path: src/Application/Menu/MenuItem.php
-
-		-
 			message: "#^Parameter \\#2 \\$date of static method App\\\\Application\\\\Helper\\\\DateHelper\\:\\:validateDate\\(\\) expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 2
 			path: src/Application/Middleware/Event/Ajax/GetEventMiddleware.php
