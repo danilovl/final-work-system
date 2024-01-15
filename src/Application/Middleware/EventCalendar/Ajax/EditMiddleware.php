@@ -22,8 +22,8 @@ class EditMiddleware implements RequestMiddlewareInterface
 {
     public static function handle(Request $request): bool
     {
-        $startDate = $request->request->get('start');
-        $endDate = $request->request->get('end');
+        $startDate = $request->request->getString('start');
+        $endDate = $request->request->getString('end');
 
         if (DateHelper::validateDate(DateFormatConstant::DATE_TIME->value, $startDate) === false ||
             DateHelper::validateDate(DateFormatConstant::DATE_TIME->value, $endDate) === false
