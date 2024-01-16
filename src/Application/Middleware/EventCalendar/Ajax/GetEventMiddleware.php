@@ -22,9 +22,10 @@ class GetEventMiddleware implements RequestMiddlewareInterface
 {
     public static function handle(Request $request): bool
     {
+        /** @var string|null $type */
         $type = $request->attributes->get('type');
-        $startDate = $request->request->get('start');
-        $endDate = $request->request->get('end');
+        $startDate = $request->request->getString('start');
+        $endDate = $request->request->getString('end');
 
         if (empty($type)) {
             throw new AjaxRuntimeException('Empty type');
