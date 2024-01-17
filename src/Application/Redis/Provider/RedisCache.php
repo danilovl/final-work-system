@@ -20,7 +20,7 @@ use Redis;
 
 class RedisCache extends CacheProvider
 {
-    private ?Redis $redis = null;
+    private Redis $redis;
 
     public function setRedis(Redis $redis): void
     {
@@ -28,7 +28,7 @@ class RedisCache extends CacheProvider
         $this->redis = $redis;
     }
 
-    public function getRedis(): ?Redis
+    public function getRedis(): Redis
     {
         return $this->redis;
     }
@@ -58,6 +58,9 @@ class RedisCache extends CacheProvider
         return $fetchedItems;
     }
 
+    /**
+     * @param array<string, string> $keysAndValues
+     */
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0): bool
     {
         if ($lifetime) {
@@ -76,13 +79,14 @@ class RedisCache extends CacheProvider
 
     protected function doContains($id): bool
     {
+        /** @var int|bool $exists */
         $exists = $this->redis->exists($id);
 
-        if (is_bool($exists)) {
-            return $exists;
+        if (is_int($exists)) {
+            return $exists > 0;
         }
 
-        return $exists > 0;
+        return $exists;
     }
 
     protected function doSave($id, $data, $lifeTime = 0): bool
