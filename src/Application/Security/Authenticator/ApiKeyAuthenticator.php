@@ -65,12 +65,19 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
 
     public function getCredentials(Request $request): ApiKeyCredentialModel
     {
+        /** @var string $authToken */
+        $authToken = $request->headers->get(self::AUTH_KEY);
+        /** @var string|null $authUserToken */
+        $authUserToken = $request->headers->get(self::AUTH_USER_TOKEN_KEY);
+        /** @var string|null $authUserUsername */
+        $authUserUsername = $request->headers->get(self::AUTH_USER_USERNAME);
+
         return new ApiKeyCredentialModel(
-            authToken: $request->headers->get(self::AUTH_KEY),
-            authUserToken: $request->headers->get(self::AUTH_USER_TOKEN_KEY),
-            authUserUsername: $request->headers->get(self::AUTH_USER_USERNAME),
-            username: $request->request->get('username'),
-            password: $request->request->get('password')
+            authToken: $authToken,
+            authUserToken: $authUserToken,
+            authUserUsername: $authUserUsername,
+            username: $request->request->getString('username'),
+            password: $request->request->getString('password')
         );
     }
 
@@ -91,6 +98,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
 
     private function authenticateUserToken(ApiKeyCredentialModel $apiKeyCredentialModel): Passport
     {
+        /** @var string $username */
         $username = $apiKeyCredentialModel->authUserUsername;
 
         $userBadge = new UserBadge($username, $this->getUserByToken($apiKeyCredentialModel));
@@ -101,7 +109,9 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
 
     private function authenticateUsername(ApiKeyCredentialModel $apiKeyCredentialModel): Passport
     {
+        /** @var string $username */
         $username = $apiKeyCredentialModel->username;
+        /** @var string $password */
         $password = $apiKeyCredentialModel->password;
 
         $userBadge = new UserBadge($username, $this->getUser($username));
@@ -134,7 +144,9 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     public function getUserByToken(ApiKeyCredentialModel $apiKeyCredentialModel): callable
     {
         return function () use ($apiKeyCredentialModel): User {
+            /** @var string $username */
             $username = $apiKeyCredentialModel->authUserUsername;
+            /** @var string $userToken */
             $userToken = $apiKeyCredentialModel->authUserToken;
 
             $user = $this->userFacade->findOneByToken($username, $userToken);

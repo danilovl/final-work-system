@@ -66,46 +66,6 @@ parameters:
 			path: src/Application/Helper/SortFunctionHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$password of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Credentials\\\\PasswordCredentials constructor expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\#1 \\$userIdentifier of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Badge\\\\UserBadge constructor expects string, string\\|null given\\.$#"
-			count: 2
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\#1 \\$username of method App\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticator\\:\\:getUser\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\#1 \\$username of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByToken\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\#2 \\$token of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByToken\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\$authToken of class App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel constructor expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\$password of class App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
-			message: "#^Parameter \\$username of class App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
-			path: src/Application/Security/Authenticator/ApiKeyAuthenticator.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface\\:\\:setPassword\\(\\)\\.$#"
 			count: 1
 			path: src/Application/Security/Provider/AppUserProvider.php
