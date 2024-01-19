@@ -66,21 +66,6 @@ parameters:
 			path: src/Application/Helper/SortFunctionHelper.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface\\:\\:setPassword\\(\\)\\.$#"
-			count: 1
-			path: src/Application/Security/Provider/AppUserProvider.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface\\:\\:setSalt\\(\\)\\.$#"
-			count: 1
-			path: src/Application/Security/Provider/AppUserProvider.php
-
-		-
-			message: "#^Method App\\\\Application\\\\Security\\\\Provider\\\\AppUserProvider\\:\\:refreshUser\\(\\) should return Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface but returns App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 1
-			path: src/Application/Security/Provider/AppUserProvider.php
-
-		-
 			message: "#^Parameter \\#1 \\$className of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
 			count: 1
 			path: src/Application/Service/EntityManagerService.php

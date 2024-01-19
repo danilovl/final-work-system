@@ -17,10 +17,10 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\{
-    PasswordAuthenticatedUserInterface,
-    PasswordUpgraderInterface,
     UserInterface,
-    UserProviderInterface
+    UserProviderInterface,
+    PasswordUpgraderInterface,
+    PasswordAuthenticatedUserInterface
 };
 
 class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterface
@@ -30,7 +30,10 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         private readonly EntityManagerService $entityManagerService
     ) {}
 
-    public function upgradePassword(PasswordAuthenticatedUserInterface|User $user, string $newHashedPassword): void
+    /**
+     * @param User $user
+     */
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         $user->setPassword($newHashedPassword);
         $user->setSalt(null);
@@ -52,7 +55,9 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        return $this->userFacade->findOneByUsername($user->getUserIdentifier());
+        $user = $this->userFacade->findOneByUsername($user->getUserIdentifier());
+
+        return $user ?? throw new UserNotFoundException;
     }
 
     public function supportsClass(string $class): bool

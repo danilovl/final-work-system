@@ -12,8 +12,7 @@
 
 namespace App\Domain\User\Entity;
 
-use App\Application\Constant\{
-    GenderConstant};
+use App\Application\Constant\GenderConstant;
 use App\Application\Traits\Entity\TimestampAbleTrait;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Conversation\Entity\Conversation;
@@ -37,16 +36,18 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use DateTime;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
+    Criteria,
     Collection,
-    Criteria};
+    ArrayCollection
+};
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\{
+    UserInterface,
     LegacyPasswordAuthenticatedUserInterface,
-    PasswordAuthenticatedUserInterface,
-    UserInterface};
+    PasswordAuthenticatedUserInterface
+};
 
 #[ORM\Table(name: 'user')]
 #[UniqueEntity(fields: ['email'])]
