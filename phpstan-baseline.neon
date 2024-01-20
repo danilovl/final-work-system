@@ -86,11 +86,6 @@ parameters:
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
-			count: 1
-			path: src/Application/Service/RequestService.php
-
-		-
 			message: "#^Call to function is_resource\\(\\) with false will always evaluate to false\\.$#"
 			count: 1
 			path: src/Application/Service/ResizeImageService.php

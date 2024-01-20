@@ -18,11 +18,15 @@ use App\Application\Constant\{
 };
 use Symfony\Component\HttpFoundation\{
     Response,
-    JsonResponse,
     RequestStack,
+    JsonResponse,
     RedirectResponse
 };
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+use Symfony\Component\HttpFoundation\Session\{
+    Session,
+    SessionInterface
+};
 use Symfony\Component\Routing\RouterInterface;
 
 readonly class RequestService
@@ -35,7 +39,9 @@ readonly class RequestService
 
     public function addFlash(string $type, mixed $message): void
     {
-        $this->requestStack->getSession()->getFlashBag()->add($type, $message);
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $session->getFlashBag()->add($type, $message);
     }
 
     public function addFlashTrans(string $type, string $message): void
