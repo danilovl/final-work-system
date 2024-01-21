@@ -86,36 +86,6 @@ parameters:
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Call to function is_resource\\(\\) with false will always evaluate to false\\.$#"
-			count: 1
-			path: src/Application/Service/ResizeImageService.php
-
-		-
-			message: "#^Instanceof between \\*NEVER\\* and GdImage will always evaluate to false\\.$#"
-			count: 1
-			path: src/Application/Service/ResizeImageService.php
-
-		-
-			message: "#^Parameter \\#1 \\$dst_image of function imagecopyresized expects GdImage, GdImage\\|false given\\.$#"
-			count: 1
-			path: src/Application/Service/ResizeImageService.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagejpeg expects GdImage, GdImage\\|false given\\.$#"
-			count: 1
-			path: src/Application/Service/ResizeImageService.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function base64_encode expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Application/Service/ResizeImageService.php
-
-		-
-			message: "#^Result of \\|\\| is always true\\.$#"
-			count: 1
-			path: src/Application/Service/ResizeImageService.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Translation\\\\TranslatorBagInterface\\|Symfony\\\\Contracts\\\\Translation\\\\LocaleAwareInterface\\|Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\:\\:setLocale\\(\\)\\.$#"
 			count: 1
 			path: src/Application/Service/TranslatorService.php

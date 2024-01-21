@@ -25,7 +25,7 @@ class ResizeImageService
         $data = base64_decode($image);
         $image = imagecreatefromstring($data);
 
-        if (!is_object($image) && (!is_resource($image) || !$image instanceof GdImage)) {
+        if (!$image instanceof GdImage) {
             return null;
         }
 
@@ -41,12 +41,20 @@ class ResizeImageService
         $newHeight = (int) ($height * $percent);
 
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        if ($thumb === false) {
+            return null;
+        }
+
         imagecopyresized($thumb, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
         ob_start();
         imagejpeg($thumb);
         $contents = ob_get_contents();
         ob_end_clean();
+
+        if ($contents === false) {
+            return null;
+        }
 
         return base64_encode($contents);
     }
