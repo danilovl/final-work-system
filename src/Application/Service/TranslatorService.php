@@ -14,15 +14,12 @@ namespace App\Application\Service;
 
 use App\Application\Constant\TranslationConstant;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Translation\TranslatorBagInterface;
-use Symfony\Contracts\Translation\{
-    TranslatorInterface,
-    LocaleAwareInterface
-};
+use Symfony\Component\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TranslatorService implements TranslatorInterface
 {
-    private TranslatorInterface|LocaleAwareInterface|TranslatorBagInterface $translator;
+    private TranslatorInterface|Translator $translator;
 
     public function __construct(
         TranslatorInterface $translator,
@@ -40,7 +37,7 @@ class TranslatorService implements TranslatorInterface
     ): string {
         if (str_contains($id, TranslationConstant::FLASH_START_KEY->value)) {
             $domain = TranslationConstant::FLASH_DOMAIN->value;
-            $locale = $locale ?? $this->requestStack->getCurrentRequest()->getLocale();
+            $locale = $locale ?? $this->requestStack->getCurrentRequest()?->getLocale();
         }
 
         return $this->translator->trans($id, $parameters, $domain, $locale);
