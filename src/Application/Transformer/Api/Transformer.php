@@ -18,7 +18,7 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTimeImmutable;
 use ReflectionClass;
 
-readonly class Transformer implements TransformerInterface
+class Transformer implements TransformerInterface
 {
     public function __construct(private ParameterServiceInterface $parameterService) {}
 
@@ -26,8 +26,7 @@ readonly class Transformer implements TransformerInterface
     {
         $result = [];
 
-        $apiFields = $this->parameterService
-            ->get("api_field.{$domain}");
+        $apiFields = $this->parameterService->getArray("api_field.{$domain}");
 
         foreach ($fields as $item) {
             $field = $item;

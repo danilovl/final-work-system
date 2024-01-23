@@ -91,11 +91,6 @@ parameters:
 			path: src/Application/Service/TranslatorService.php
 
 		-
-			message: "#^Cannot access offset string on mixed\\.$#"
-			count: 1
-			path: src/Application/Transformer/Api/Transformer.php
-
-		-
 			message: "#^Method App\\\\Application\\\\Util\\\\SluggerUtil\\:\\:slugify\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: src/Application/Util/SluggerUtil.php

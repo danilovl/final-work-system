@@ -25,7 +25,7 @@ class TransformerTest extends TestCase
     {
         $parameterService = $this->createMock(ParameterServiceInterface::class);
         $parameterService->expects($this->once())
-            ->method('get')
+            ->method('getArray')
             ->willReturn([]);
 
         $this->transformer = new Transformer($parameterService);
