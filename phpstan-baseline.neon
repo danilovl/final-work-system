@@ -91,11 +91,6 @@ parameters:
 			path: src/Application/Service/TranslatorService.php
 
 		-
-			message: "#^Method App\\\\Application\\\\Util\\\\SluggerUtil\\:\\:slugify\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: src/Application/Util/SluggerUtil.php
-
-		-
 			message: "#^Method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:replaceWord\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: src/Application/Util/TextHighlightWordUtil.php
