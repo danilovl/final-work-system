@@ -35,8 +35,10 @@ class TextHighlightWordUtil
     private static function replaceWord(string $text, string $word, bool $entireWord = true): string
     {
         $highlightedWord = '<span style="background-color: yellow;">$0</span>';
-        $pattern = sprintf('/%2$s(%1$s)%2$s/iu', preg_quote($word), $entireWord === true ? '\b' : '');
+        $pattern = sprintf('~%2$s(%1$s)%2$s~iu', preg_quote($word), $entireWord === true ? '\b' : '');
+        /** @var string $text */
+        $text = preg_replace($pattern, $highlightedWord, $text);
 
-        return preg_replace($pattern, $highlightedWord, $text);
+        return $text;
     }
 }

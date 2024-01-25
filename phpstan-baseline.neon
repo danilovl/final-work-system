@@ -91,11 +91,6 @@ parameters:
 			path: src/Application/Service/TranslatorService.php
 
 		-
-			message: "#^Method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:replaceWord\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: src/Application/Util/TextHighlightWordUtil.php
-
-		-
 			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null given\\.$#"
 			count: 1
 			path: src/Application/Util/TokenStorageUtil.php
