@@ -25,7 +25,7 @@ readonly class TokenStorageUtil
     {
         $oldToken = $this->tokenStorage->getToken();
 
-        if (!method_exists($oldToken, 'getFirewallName')) {
+        if ($oldToken === null || !method_exists($oldToken, 'getFirewallName')) {
             throw new RuntimeException('Method not exist');
         }
 

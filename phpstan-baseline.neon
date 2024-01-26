@@ -91,11 +91,6 @@ parameters:
 			path: src/Application/Service/TranslatorService.php
 
 		-
-			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null given\\.$#"
-			count: 1
-			path: src/Application/Util/TokenStorageUtil.php
-
-		-
 			message: "#^Parameter \\#1 \\$menu of method App\\\\Application\\\\Widget\\\\MenuWidget\\:\\:getMenuConfig\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Application/Widget/MenuWidget.php
