@@ -24,7 +24,7 @@ class MenuWidget extends BaseWidget
 {
     private ?array $factory = null;
     private ?User $user;
-    private ?string $menu;
+    private string $menu;
 
     public function __construct(
         private readonly array $menuConfig,
@@ -100,9 +100,12 @@ class MenuWidget extends BaseWidget
         return $subMenu;
     }
 
+    /**
+     * @param array{menu: string} $parameters
+     */
     public function setParameters(array $parameters): void
     {
-        $this->menu = $parameters['menu'] ?? null;
+        $this->menu = $parameters['menu'];
     }
 
     public function getRenderParameters(): array
