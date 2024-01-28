@@ -20,10 +20,10 @@ use Doctrine\ORM\Mapping as ORM;
 trait TimestampAbleTrait
 {
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
-    private ?DateTime $createdAt = null;
+    private DateTime $createdAt;
 
     #[ORM\Column(name: 'updated_at', type: Types::DATETIME_MUTABLE, nullable: false)]
-    private ?DateTime $updatedAt = null;
+    private DateTime $updatedAt;
 
     #[ORM\PrePersist]
     public function timestampAblePrePersist(): void
@@ -38,7 +38,7 @@ trait TimestampAbleTrait
         $this->updatedAt = new DateTime;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -48,7 +48,7 @@ trait TimestampAbleTrait
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt(): ?DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }

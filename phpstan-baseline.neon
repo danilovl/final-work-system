@@ -91,11 +91,6 @@ parameters:
 			path: src/Application/Service/TranslatorService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ApiUser/Entity/ApiUser.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\:\\:\\$rules type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ApiUserRule\\\\Entity\\\\ApiUserRule\\>\\.$#"
 			count: 1
 			path: src/Domain/ApiUser/Entity/ApiUser.php
@@ -106,17 +101,7 @@ parameters:
 			path: src/Domain/ApiUser/Facade/ApiUserFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ApiUserRule\\\\Entity\\\\ApiUserRule\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ApiUserRule/Entity/ApiUserRule.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\Article\\\\Entity\\\\Article\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\>\\.$#"
-			count: 1
-			path: src/Domain/Article/Entity/Article.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Article\\\\Entity\\\\Article\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/Article/Entity/Article.php
 
@@ -161,11 +146,6 @@ parameters:
 			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
-
-		-
 			message: "#^Parameter \\#1 \\$articleCategory of method App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory, mixed given\\.$#"
 			count: 1
 			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
@@ -174,11 +154,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$two of static method App\\\\Application\\\\Helper\\\\FunctionHelper\\:\\:checkIntersectTwoArray\\(\\) expects array, array\\|null given\\.$#"
 			count: 1
 			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/Comment/Entity/Comment.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Comment\\\\Facade\\\\CommentFacade\\:\\:getCommentByOwnerEvent\\(\\) should return App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\|null but returns mixed\\.$#"
@@ -209,11 +184,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$event of class App\\\\Domain\\\\Comment\\\\Form\\\\EventSubscriber\\\\EventCommentSubscriber constructor expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Comment/Form/CommentForm.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Entity/Conversation.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$messages type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\>\\.$#"
@@ -336,11 +306,6 @@ parameters:
 			path: src/Domain/Conversation/Service/MessageHighlightService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Entity/ConversationMessage.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:\\$statuses type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessage/Entity/ConversationMessage.php
@@ -411,27 +376,12 @@ parameters:
 			path: src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessageStatus/Entity/ConversationMessageStatus.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ConversationMessageStatusType\\\\Entity\\\\ConversationMessageStatusType\\:\\:\\$conversationMessageStatus type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ConversationMessageStatusType\\\\Entity\\\\ConversationMessageStatusType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\:\\:\\$conversations type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\>\\.$#"
-			count: 1
-			path: src/Domain/ConversationType/Entity/ConversationType.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/ConversationType/Entity/ConversationType.php
 
@@ -527,11 +477,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$comment type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\>\\.$#"
-			count: 1
-			path: src/Domain/Event/Entity/Event.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/Event/Entity/Event.php
 
@@ -646,11 +591,6 @@ parameters:
 			path: src/Domain/Event/Security/Voter/EventVoter.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/EventAddress/Entity/EventAddress.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
 			count: 1
 			path: src/Domain/EventAddress/Entity/EventAddress.php
@@ -721,16 +661,6 @@ parameters:
 			path: src/Domain/EventCalendar/Http/Ajax/EventCalendarGetEventHandle.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/EventParticipant/Entity/EventParticipant.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Entity/EventSchedule.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:\\$templates type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\>\\.$#"
 			count: 1
 			path: src/Domain/EventSchedule/Entity/EventSchedule.php
@@ -791,11 +721,6 @@ parameters:
 			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Entity/EventScheduleTemplate.php
-
-		-
 			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
@@ -826,11 +751,6 @@ parameters:
 			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/EventType/Entity/EventType.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
 			count: 1
 			path: src/Domain/EventType/Entity/EventType.php
@@ -857,11 +777,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\>\\.$#"
-			count: 1
-			path: src/Domain/Media/Entity/Media.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/Media/Entity/Media.php
 
@@ -976,11 +891,6 @@ parameters:
 			path: src/Domain/Media/Factory/MediaFactory.php
 
 		-
-			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/Service/MediaService.php
-
-		-
 			message: "#^Cannot call method getExtension\\(\\) on App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null\\.$#"
 			count: 1
 			path: src/Domain/Media/Service/MediaService.php
@@ -999,11 +909,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$values of method Symfony\\\\Component\\\\HttpFoundation\\\\ResponseHeaderBag\\:\\:set\\(\\) expects array\\<string\\>\\|string\\|null, App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Media/Service/MediaService.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/MediaCategory/Entity/MediaCategory.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
@@ -1031,19 +936,9 @@ parameters:
 			path: src/Domain/MediaCategory/Factory/MediaCategoryFactory.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/MediaMimeType/Entity/MediaMimeType.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
 			count: 1
 			path: src/Domain/MediaMimeType/Entity/MediaMimeType.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/MediaType/Entity/MediaType.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
@@ -1101,17 +996,7 @@ parameters:
 			path: src/Domain/Profile/Http/ProfileDeleteImageHandle.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Entity/ResetPassword.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$hashedToken type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Entity/ResetPassword.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/ResetPassword/Entity/ResetPassword.php
 
@@ -1159,11 +1044,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$data of static method App\\\\Application\\\\Helper\\\\HashHelper\\:\\:generateResetPasswordHashedToken\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Domain/ResetPassword/Service/ResetPasswordService.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Entity/SystemEvent.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:\\$recipient type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\>\\.$#"
@@ -1221,11 +1101,6 @@ parameters:
 			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
 
 		-
-			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Http/Api/SystemEventTypeEventsHandle.php
-
-		-
 			message: "#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
@@ -1236,19 +1111,9 @@ parameters:
 			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/SystemEventRecipient/Entity/SystemEventRecipient.php
-
-		-
 			message: "#^Parameter \\#1 \\$systemEventRecipient of method App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\:\\:canChangeViewed\\(\\) expects App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient, mixed given\\.$#"
 			count: 1
 			path: src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/SystemEventType/Entity/SystemEventType.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
@@ -1259,11 +1124,6 @@ parameters:
 			message: "#^Unsafe access to private constant App\\\\Domain\\\\Task\\\\Command\\\\TaskRemindDeadlineCommand\\:\\:LIMIT through static\\:\\:\\.$#"
 			count: 2
 			path: src/Domain/Task/Command/TaskRemindDeadlineCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/Task/Entity/Task.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
@@ -1411,11 +1271,6 @@ parameters:
 			path: src/Domain/User/Command/UserListCommand.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$email \\(string\\) does not accept string\\|null\\.$#"
 			count: 1
 			path: src/Domain/User/Entity/User.php
@@ -1442,11 +1297,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$password type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/User/Entity/User.php
 
@@ -1544,16 +1394,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\User\\\\Service\\\\UserWorkService\\:\\:getWorkBy\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
 			count: 1
 			path: src/Domain/User/Service/UserWorkService.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/UserGroup/Entity/Group.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/UserGroup/Entity/Group.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$users type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\>\\.$#"
@@ -1692,11 +1532,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$conversations type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
 			count: 1
 			path: src/Domain/Work/Entity/Work.php
 
@@ -1841,11 +1676,6 @@ parameters:
 			path: src/Domain/Work/Service/WorkService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Entity/WorkCategory.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
 			count: 1
 			path: src/Domain/WorkCategory/Entity/WorkCategory.php
@@ -1891,11 +1721,6 @@ parameters:
 			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/WorkStatus/Entity/WorkStatus.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
 			count: 1
 			path: src/Domain/WorkStatus/Entity/WorkStatus.php
@@ -1914,11 +1739,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:getCountByUser\\(\\) should return array but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTime\\|null but database expects DateTimeInterface\\.$#"
-			count: 1
-			path: src/Domain/WorkType/Entity/WorkType.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"

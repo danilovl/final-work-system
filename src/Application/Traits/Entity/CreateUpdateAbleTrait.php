@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait CreateUpdateAbleTrait
 {
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, nullable: false)]
-    private ?DateTime $createdAt = null;
+    private DateTime $createdAt;
 
     #[ORM\Column(name: 'updated_at', type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $updatedAt = null;
@@ -37,12 +37,12 @@ trait CreateUpdateAbleTrait
         $this->updatedAt = new DateTime;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
