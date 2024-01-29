@@ -42,6 +42,7 @@ services:
       - '../src/Domain/*/Exception'
       - '../src/Domain/*/Constant'
       - '../src/Domain/*/Model'
+      - '../src/Domain/*/Security/Voter/Subject'
       - '../src/Domain/*/EventDispatcher/GenericEvent'
       - '../src/Domain/Comment/Form/EventSubscriber'
 

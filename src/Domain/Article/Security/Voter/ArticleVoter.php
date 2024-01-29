@@ -46,6 +46,10 @@ class ArticleVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof ArticleVoterSubject) {
+            return false;
+        }
+
         if ($attribute === VoterSupportConstant::VIEW->value) {
             return $this->canView($subject, $user);
         }
@@ -55,8 +59,8 @@ class ArticleVoter extends Voter
 
     private function canView(ArticleVoterSubject $articleVoterSubject, User $user): bool
     {
-        $article = $articleVoterSubject->getArticle();
-        $articleCategory = $articleVoterSubject->getArticleCategory();
+        $article = $articleVoterSubject->article;
+        $articleCategory = $articleVoterSubject->articleCategory;
 
         return $article->isActive() &&
             FunctionHelper::checkIntersectTwoArray($user->getRoles(), $articleCategory->getAccess()) &&

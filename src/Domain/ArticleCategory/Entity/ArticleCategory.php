@@ -60,7 +60,7 @@ class ArticleCategory
         $this->articles = new ArrayCollection;
     }
 
-    public function getAccess(): ?array
+    public function getAccess(): array
     {
         return $this->access;
     }

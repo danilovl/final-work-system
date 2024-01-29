@@ -106,37 +106,7 @@ parameters:
 			path: src/Domain/Article/Entity/Article.php
 
 		-
-			message: "#^Cannot call method getAccess\\(\\) on App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\|null\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
-			message: "#^Cannot call method getCategories\\(\\) on App\\\\Domain\\\\Article\\\\Entity\\\\Article\\|null\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
-			message: "#^Cannot call method isActive\\(\\) on App\\\\Domain\\\\Article\\\\Entity\\\\Article\\|null\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$articleVoterSubject of method App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\Subject\\\\ArticleVoterSubject, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
-			message: "#^Parameter \\#2 \\$two of static method App\\\\Application\\\\Helper\\\\FunctionHelper\\:\\:checkIntersectTwoArray\\(\\) expects array, array\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
 			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 1
-			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|null given\\.$#"
 			count: 1
 			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
 
@@ -147,11 +117,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$articleCategory of method App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory, mixed given\\.$#"
-			count: 1
-			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
-
-		-
-			message: "#^Parameter \\#2 \\$two of static method App\\\\Application\\\\Helper\\\\FunctionHelper\\:\\:checkIntersectTwoArray\\(\\) expects array, array\\|null given\\.$#"
 			count: 1
 			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
 

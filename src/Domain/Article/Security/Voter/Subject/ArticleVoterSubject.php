@@ -15,32 +15,9 @@ namespace App\Domain\Article\Security\Voter\Subject;
 use App\Domain\Article\Entity\Article;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 
-class ArticleVoterSubject
+readonly class ArticleVoterSubject
 {
-    private ?Article $article = null;
-    private ?ArticleCategory $articleCategory = null;
-
-    public function getArticle(): ?Article
+    public function __construct(public Article $article, public ArticleCategory $articleCategory)
     {
-        return $this->article;
-    }
-
-    public function setArticle(?Article $article): self
-    {
-        $this->article = $article;
-
-        return $this;
-    }
-
-    public function getArticleCategory(): ?ArticleCategory
-    {
-        return $this->articleCategory;
-    }
-
-    public function setArticleCategory(?ArticleCategory $articleCategory): self
-    {
-        $this->articleCategory = $articleCategory;
-
-        return $this;
     }
 }
