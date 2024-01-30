@@ -116,11 +116,6 @@ parameters:
 			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
 
 		-
-			message: "#^Parameter \\#1 \\$articleCategory of method App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory, mixed given\\.$#"
-			count: 1
-			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Comment\\\\Facade\\\\CommentFacade\\:\\:getCommentByOwnerEvent\\(\\) should return App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Comment/Facade/CommentFacade.php

@@ -13,6 +13,7 @@
 namespace App\Domain\Article\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Exception\InvalidArgumentException;
 use App\Application\Helper\FunctionHelper;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Domain\User\Entity\User;
@@ -47,7 +48,7 @@ class ArticleVoter extends Voter
         }
 
         if (!$subject instanceof ArticleVoterSubject) {
-            return false;
+            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', ArticleVoterSubject::class));
         }
 
         if ($attribute === VoterSupportConstant::VIEW->value) {

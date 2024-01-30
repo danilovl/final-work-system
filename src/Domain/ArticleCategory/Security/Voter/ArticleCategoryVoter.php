@@ -13,6 +13,7 @@
 namespace App\Domain\ArticleCategory\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Exception\InvalidArgumentException;
 use App\Application\Helper\FunctionHelper;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use App\Domain\User\Entity\User;
@@ -46,6 +47,10 @@ class ArticleCategoryVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof ArticleCategory) {
+            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', ArticleCategory::class));
+        }
+
         if ($attribute === VoterSupportConstant::VIEW->value) {
             return $this->canView($subject, $user);
         }
@@ -55,7 +60,6 @@ class ArticleCategoryVoter extends Voter
 
     private function canView(ArticleCategory $articleCategory, User $user): bool
     {
-        return $articleCategory->isActive() &&
-            FunctionHelper::checkIntersectTwoArray($user->getRoles(), $articleCategory->getAccess());
+        return $articleCategory->isActive() && FunctionHelper::checkIntersectTwoArray($user->getRoles(), $articleCategory->getAccess());
     }
 }
