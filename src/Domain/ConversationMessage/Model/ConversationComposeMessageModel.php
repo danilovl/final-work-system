@@ -19,5 +19,19 @@ class ConversationComposeMessageModel
     use ContentAwareTrait;
 
     public ?string $name = null;
-    public ?iterable $conversation = null;
+    private iterable $conversation = [];
+
+    public function getConversation(): iterable
+    {
+        return $this->conversation;
+    }
+
+    public function setConversation(mixed $conversation): void
+    {
+        if (!is_iterable($conversation)) {
+            $conversation = [$conversation];
+        }
+
+        $this->conversation = $conversation;
+    }
 }

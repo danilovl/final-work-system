@@ -33,7 +33,7 @@ class ConversationComposeMessageForm extends AbstractType
 {
     final public const NAME = 'conversation_compose_message';
 
-    public function __construct(private TranslatorInterface $translator) {}
+    public function __construct(private readonly TranslatorInterface $translator) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -97,7 +97,7 @@ class ConversationComposeMessageForm extends AbstractType
             $recipient = $conversation->getRecipient();
 
             $author = $work->getAuthor();
-            if ($author !== null && $author->getId() === $recipient->getId()) {
+            if ($author->getId() === $recipient->getId()) {
                 $type = $this->translator->trans('app.form.label.author');
             }
 
@@ -112,7 +112,7 @@ class ConversationComposeMessageForm extends AbstractType
             }
 
             $supervisor = $work->getSupervisor();
-            if ($supervisor !== null && $supervisor->getId() === $recipient->getId()) {
+            if ($supervisor->getId() === $recipient->getId()) {
                 $type = $this->translator->trans('app.form.label.supervisor');
             }
 

@@ -14,5 +14,5 @@ namespace App\Application\Traits\Model;
 
 trait ContentAwareTrait
 {
-    public ?string $content = null;
+    public string $content;
 }

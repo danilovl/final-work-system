@@ -87,7 +87,7 @@ class RedisCache extends CacheProvider
         }
 
         return $exists;
-    }
+     }
 
     protected function doSave($id, $data, $lifeTime = 0): bool
     {

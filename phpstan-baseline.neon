@@ -121,11 +121,6 @@ parameters:
 			path: src/Domain/Comment/Facade/CommentFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$content of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setContent\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Comment/Factory/CommentFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setEvent\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Comment/Factory/CommentFactory.php
@@ -173,11 +168,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$id of method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:find\\(\\) expects int, int\\|null given\\.$#"
 			count: 2
-			path: src/Domain/Conversation/Facade/ConversationFacade.php
-
-		-
-			message: "#^Parameter \\#3 \\$content of method App\\\\Domain\\\\Conversation\\\\Factory\\\\ConversationFactory\\:\\:createConversationMessage\\(\\) expects string, string\\|null given\\.$#"
-			count: 3
 			path: src/Domain/Conversation/Facade/ConversationFacade.php
 
 		-
@@ -256,11 +246,6 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: "#^Parameter \\#1 \\$text of static method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:highlightPartWords\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Service/MessageHighlightService.php
-
-		-
 			message: "#^Parameter \\#2 \\$words of static method App\\\\Application\\\\Util\\\\TextHighlightWordUtil\\:\\:highlightPartWords\\(\\) expects array, array\\<int, string\\>\\|false given\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Service/MessageHighlightService.php
@@ -269,11 +254,6 @@ parameters:
 			message: "#^Property App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:\\$statuses type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessage/Entity/ConversationMessage.php
-
-		-
-			message: "#^Parameter \\#1 \\$content of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setContent\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
 
 		-
 			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setConversation\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\|null given\\.$#"

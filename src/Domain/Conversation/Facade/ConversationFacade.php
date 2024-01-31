@@ -132,7 +132,7 @@ readonly class ConversationFacade
             ->getResult();
 
         /** @var array $modelConversation */
-        $modelConversation = $conversationComposeMessageModel->conversation;
+        $modelConversation = $conversationComposeMessageModel->getConversation();
         $content = $conversationComposeMessageModel->content;
         $createNewConversation = false;
 

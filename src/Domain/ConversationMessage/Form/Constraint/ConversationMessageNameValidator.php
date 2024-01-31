@@ -15,7 +15,8 @@ namespace App\Domain\ConversationMessage\Form\Constraint;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use Symfony\Component\Validator\{
     Constraint,
-    ConstraintValidator};
+    ConstraintValidator
+};
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class ConversationMessageNameValidator extends ConstraintValidator
@@ -27,9 +28,9 @@ class ConversationMessageNameValidator extends ConstraintValidator
         }
 
         $form = $this->context->getRoot();
-        /** @var \App\Domain\ConversationMessage\Model\ConversationComposeMessageModel $data */
+        /** @var ConversationComposeMessageModel $data */
         $data = $form->getData();
-        $conversations = $data->conversation !== null ? iterator_to_array($data->conversation) : [];
+        $conversations = iterator_to_array($data->getConversation());
 
         if (empty($value) && count($conversations) > 1) {
             $this->context
