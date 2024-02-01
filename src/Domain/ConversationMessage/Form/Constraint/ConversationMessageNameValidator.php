@@ -17,6 +17,7 @@ use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
 };
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class ConversationMessageNameValidator extends ConstraintValidator
@@ -27,6 +28,7 @@ class ConversationMessageNameValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, ConversationMessageName::class);
         }
 
+        /** @var FormInterface $form */
         $form = $this->context->getRoot();
         /** @var ConversationComposeMessageModel $data */
         $data = $form->getData();

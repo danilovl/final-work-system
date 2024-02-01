@@ -271,11 +271,6 @@ parameters:
 			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
 
 		-
-			message: "#^Cannot call method getData\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
-
-		-
 			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
