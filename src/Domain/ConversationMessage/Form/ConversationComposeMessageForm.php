@@ -41,6 +41,12 @@ class ConversationComposeMessageForm extends AbstractType
         $user = $options['user'];
 
         $builder
+            ->add('name', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new  ConversationMessageName
+                ],
+            ])
             ->add('conversation', ChoiceType::class, [
                 'required' => true,
                 'multiple' => UserRoleHelper::isSupervisor($user),
@@ -49,12 +55,6 @@ class ConversationComposeMessageForm extends AbstractType
                 'constraints' => [
                     new NotBlank
                 ]
-            ])
-            ->add('name', TextType::class, [
-                'required' => false,
-                'constraints' => [
-                    new  ConversationMessageName
-                ],
             ])
             ->add('content', TextareaType::class, [
                 'required' => true,
@@ -92,38 +92,40 @@ class ConversationComposeMessageForm extends AbstractType
     {
         $title = '';
         $work = $conversation->getWork();
-        if ($work !== null) {
-            $type = null;
-            $recipient = $conversation->getRecipient();
+        if ($work === null) {
+            return $title;
+        }
 
-            $author = $work->getAuthor();
-            if ($author->getId() === $recipient->getId()) {
-                $type = $this->translator->trans('app.form.label.author');
-            }
+        $type = null;
+        $recipient = $conversation->getRecipient();
 
-            $opponent = $work->getOpponent();
-            if ($opponent !== null && $opponent->getId() === $recipient->getId()) {
-                $type = $this->translator->trans('app.form.label.opponent');
-            }
+        $author = $work->getAuthor();
+        if ($author->getId() === $recipient->getId()) {
+            $type = $this->translator->trans('app.form.label.author');
+        }
 
-            $consultant = $work->getConsultant();
-            if ($consultant !== null && $consultant->getId() === $recipient->getId()) {
-                $type = $this->translator->trans('app.form.label.consultant');
-            }
+        $opponent = $work->getOpponent();
+        if ($opponent !== null && $opponent->getId() === $recipient->getId()) {
+            $type = $this->translator->trans('app.form.label.opponent');
+        }
 
-            $supervisor = $work->getSupervisor();
-            if ($supervisor->getId() === $recipient->getId()) {
-                $type = $this->translator->trans('app.form.label.supervisor');
-            }
+        $consultant = $work->getConsultant();
+        if ($consultant !== null && $consultant->getId() === $recipient->getId()) {
+            $type = $this->translator->trans('app.form.label.consultant');
+        }
 
-            if ($type !== null) {
-                $title = sprintf('%s(%s) | %s | %s',
-                    $recipient->getFullNameDegree(),
-                    mb_strtolower($type),
-                    $work->getTitle(),
-                    $work->getDeadline()->format(DateFormatConstant::DATE->value)
-                );
-            }
+        $supervisor = $work->getSupervisor();
+        if ($supervisor->getId() === $recipient->getId()) {
+            $type = $this->translator->trans('app.form.label.supervisor');
+        }
+
+        if ($type !== null) {
+            $title = sprintf('%s(%s) | %s | %s',
+                $recipient->getFullNameDegree(),
+                mb_strtolower($type),
+                $work->getTitle(),
+                $work->getDeadline()->format(DateFormatConstant::DATE->value)
+            );
         }
 
         return $title;

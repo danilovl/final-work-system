@@ -82,7 +82,7 @@ class Conversation
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
-    private ?User $recipient = null;
+    private User $recipient;
 
     public function __construct()
     {
@@ -169,12 +169,12 @@ class Conversation
         $this->work = $work;
     }
 
-    public function getRecipient(): ?User
+    public function getRecipient(): User
     {
         return $this->recipient;
     }
 
-    public function setRecipient(?User $recipient): void
+    public function setRecipient(User $recipient): void
     {
         $this->recipient = $recipient;
     }

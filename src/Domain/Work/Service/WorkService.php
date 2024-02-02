@@ -78,6 +78,10 @@ class WorkService
 
     public function getDeadlineProgramDays(Work $work): int
     {
+        if ($work->getDeadlineProgram() === null) {
+            return 0;
+        }
+
         $now = new DateTime;
         $d = $now->diff($work->getDeadlineProgram())->d;
 

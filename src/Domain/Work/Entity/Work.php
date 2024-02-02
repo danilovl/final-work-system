@@ -244,7 +244,7 @@ class Work
         $this->medias = $media;
     }
 
-    public function getDeadline(): ?DateTime
+    public function getDeadline(): DateTime
     {
         return $this->deadline;
     }
