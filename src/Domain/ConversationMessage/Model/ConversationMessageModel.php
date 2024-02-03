@@ -28,8 +28,8 @@ class ConversationMessageModel
     use ContentAwareTrait;
     use OwnerAwareTrait;
 
-    public ?Conversation $conversation = null;
-    public ?Collection $statuses = null;
+    public Conversation $conversation;
+    public Collection $statuses;
 
     public function __construct()
     {

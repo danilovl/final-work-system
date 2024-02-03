@@ -16,5 +16,5 @@ use App\Domain\User\Entity\User;
 
 trait OwnerAwareTrait
 {
-    public ?User $owner = null;
+    public User $owner;
 }

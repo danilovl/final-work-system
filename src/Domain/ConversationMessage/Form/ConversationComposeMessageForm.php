@@ -97,7 +97,7 @@ class ConversationComposeMessageForm extends AbstractType
         }
 
         $type = null;
-        $recipient = $conversation->getRecipient();
+        $recipient = $conversation->getRecipientMust();
 
         $author = $work->getAuthor();
         if ($author->getId() === $recipient->getId()) {

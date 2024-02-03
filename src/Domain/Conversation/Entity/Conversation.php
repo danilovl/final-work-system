@@ -13,6 +13,7 @@
 namespace App\Domain\Conversation\Entity;
 
 use App\Application\Constant\TranslationConstant;
+use App\Application\Exception\PropertyValueIsNullException;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
     IdTrait,
@@ -82,7 +83,7 @@ class Conversation
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
-    private User $recipient;
+    private ?User $recipient = null;
 
     public function __construct()
     {
@@ -169,8 +170,17 @@ class Conversation
         $this->work = $work;
     }
 
-    public function getRecipient(): User
+    public function getRecipient(): ?User
     {
+        return $this->recipient;
+    }
+
+    public function getRecipientMust(): User
+    {
+        if (!$this->recipient) {
+            throw new PropertyValueIsNullException('Recipient is null.');
+        }
+
         return $this->recipient;
     }
 

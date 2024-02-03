@@ -256,21 +256,6 @@ parameters:
 			path: src/Domain/ConversationMessage/Entity/ConversationMessage.php
 
 		-
-			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setConversation\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$statuses of method App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\:\\:setStatuses\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Factory/ConversationMessageFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
