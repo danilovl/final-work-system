@@ -37,7 +37,10 @@ class ConversationRuntime extends AbstractExtension implements RuntimeExtensionI
 
     public function getMessageReadDateByRecipient(ConversationMessage $conversationMessage): ?DateTime
     {
-        $recipient = $conversationMessage->getConversation()->getRecipientMust();
+        $recipient = $conversationMessage->getConversation()->getRecipient();
+        if ($recipient === null) {
+            return null;
+        }
 
         $recipientStatus = null;
         foreach ($conversationMessage->getStatuses() as $status) {

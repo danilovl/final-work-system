@@ -263,16 +263,6 @@ parameters:
 		-
 			message: "#^Cannot call method getMessageHeaderFooter\\(\\) on mixed\\.$#"
 			count: 1
-			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of static method App\\\\Domain\\\\User\\\\Helper\\\\UserRoleHelper\\:\\:isSupervisor\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
-			count: 2
-			path: src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php
-
-		-
-			message: "#^Cannot call method getMessageHeaderFooter\\(\\) on mixed\\.$#"
-			count: 1
 			path: src/Domain/ConversationMessage/Form/ConversationMessageForm.php
 
 		-

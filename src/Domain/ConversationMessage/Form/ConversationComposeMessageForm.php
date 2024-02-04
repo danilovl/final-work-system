@@ -37,7 +37,7 @@ class ConversationComposeMessageForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /*** @var User $user */
+        /** @var User $user */
         $user = $options['user'];
 
         $builder
