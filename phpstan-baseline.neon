@@ -261,11 +261,6 @@ parameters:
 			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
 
 		-
-			message: "#^Cannot call method getMessageHeaderFooter\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Form/ConversationMessageForm.php
-
-		-
 			message: "#^Parameter \\#1 \\$conversationMessage of method App\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoter\\:\\:changeReadMessageStatus\\(\\) expects App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage, mixed given\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php
