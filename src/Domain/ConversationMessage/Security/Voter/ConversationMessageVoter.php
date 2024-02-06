@@ -13,6 +13,7 @@
 namespace App\Domain\ConversationMessage\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Exception\InvalidArgumentException;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
@@ -26,7 +27,7 @@ class ConversationMessageVoter extends Voter
         VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value
     ];
 
-    public function __construct(private ConversationService $conversationService) {}
+    public function __construct(private readonly ConversationService $conversationService) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -46,6 +47,10 @@ class ConversationMessageVoter extends Voter
         $user = $token->getUser();
         if (!$user instanceof User) {
             return false;
+        }
+
+        if (!$subject instanceof ConversationMessage) {
+            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', ConversationMessage::class));
         }
 
         if ($attribute === VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value) {

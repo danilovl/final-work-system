@@ -261,11 +261,6 @@ parameters:
 			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
 
 		-
-			message: "#^Parameter \\#1 \\$conversationMessage of method App\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoter\\:\\:changeReadMessageStatus\\(\\) expects App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage, mixed given\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ConversationMessageStatusType\\\\Entity\\\\ConversationMessageStatusType\\:\\:\\$conversationMessageStatus type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
 			count: 1
 			path: src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php
