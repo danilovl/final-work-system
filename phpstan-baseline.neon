@@ -271,16 +271,6 @@ parameters:
 			path: src/Domain/ConversationType/Entity/ConversationType.php
 
 		-
-			message: "#^Parameter \\#1 \\$categories of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setCategories\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Document/Factory/DocumentFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Document/Factory/DocumentFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\MediaCategory\\\\Form\\\\DataGrid\\\\MediaCategoryDataGrid\\:\\:queryBuilderFindAllByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Document/Form/DocumentForm.php
