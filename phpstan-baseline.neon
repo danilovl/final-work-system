@@ -271,21 +271,6 @@ parameters:
 			path: src/Domain/ConversationType/Entity/ConversationType.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Document/Form/Factory/DocumentFormFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getMimeTypesByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User\\|iterable, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Document/Form/Factory/DocumentFormFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:getAllUserActiveSupervisors\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Document/Form/Factory/DocumentFormFactory.php
-
-		-
 			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null\\.$#"
 			count: 1
 			path: src/Domain/Document/Security/Voter/DocumentVoter.php
@@ -747,11 +732,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Media/Factory/MediaFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Media/Factory/MediaFactory.php
 

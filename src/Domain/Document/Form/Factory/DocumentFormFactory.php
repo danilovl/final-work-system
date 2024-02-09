@@ -14,29 +14,31 @@ namespace App\Domain\Document\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\{
-    RuntimeException};
-use App\Application\Exception\ConstantNotFoundException;
+    RuntimeException,
+    ConstantNotFoundException
+};
 use App\Domain\Document\Form\{
-    DocumentForm};
-use App\Domain\Document\Form\DocumentSearchForm;
+    DocumentForm,
+    DocumentSearchForm
+};
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
-use App\Domain\MediaType\Constant\{
-    MediaTypeConstant};
+use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
-    FormFactoryInterface,
-    FormInterface};
+    FormInterface,
+    FormFactoryInterface
+};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
 class DocumentFormFactory
 {
-    private ?User $user = null;
+    private User $user;
 
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
@@ -47,12 +49,7 @@ class DocumentFormFactory
         private readonly MediaCategoryFacade $mediaCategoryFacade
     ) {}
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
@@ -64,7 +61,7 @@ class DocumentFormFactory
         MediaModel $mediaModel = null,
         Media $media = null
     ): FormInterface {
-        $user = $this->getUser();
+        $user = $this->user;
         $formClass = DocumentForm::class;
         $mimeTypes = $this->mediaMimeTypeFacade->getFormValidationMimeTypes(true);
 

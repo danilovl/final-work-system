@@ -19,15 +19,16 @@ use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection};
+    Collection,
+    ArrayCollection
+};
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel
 {
     use SimpleInformationTrait;
 
-    public ?User $owner = null;
+    public User $owner;
     public ?MediaType $type = null;
     public ?MediaMimeType $mimeType = null;
     public ?Collection $categories = null;
