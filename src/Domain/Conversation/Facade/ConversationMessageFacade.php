@@ -32,9 +32,12 @@ readonly class ConversationMessageFacade
         private ConversationMessageRepository $conversationMessageRepository
     ) {}
 
-    public function find(int $id): ?ConversationMessage
+    public function getConversationMessage(int $id): ConversationMessage
     {
-        return $this->conversationMessageRepository->find($id);
+        /** @var ConversationMessage $conversationMessage */
+        $conversationMessage = $this->conversationMessageRepository->find(ConversationMessage::class, $id);
+
+        return $conversationMessage;
     }
 
     public function changeReadMessageStatus(

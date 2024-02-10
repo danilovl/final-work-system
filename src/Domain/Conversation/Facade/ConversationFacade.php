@@ -172,7 +172,7 @@ readonly class ConversationFacade
             $this->entityManagerService->clear();
 
             $message = $this->conversationMessageFacade
-                ->find($conversationMessage->getId());
+                ->getConversationMessage($conversationMessage->getId());
 
             $this->conversationEventDispatcherService
                 ->onConversationMessageCreate($message);
@@ -200,7 +200,7 @@ readonly class ConversationFacade
                     $createNewConversation = true;
 
                     $message = $this->conversationMessageFacade
-                        ->find($conversationMessage->getId());
+                        ->getConversationMessage($conversationMessage->getId());
 
                     $this->conversationEventDispatcherService
                         ->onConversationMessageCreate($message);

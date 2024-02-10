@@ -161,23 +161,8 @@ parameters:
 			path: src/Domain/Conversation/Entity/Conversation.php
 
 		-
-			message: "#^Parameter \\#1 \\$conversationMessage of method App\\\\Domain\\\\Conversation\\\\EventDispatcher\\\\ConversationEventDispatcherService\\:\\:onConversationMessageCreate\\(\\) expects App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage, App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\|null given\\.$#"
-			count: 2
-			path: src/Domain/Conversation/Facade/ConversationFacade.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:find\\(\\) expects int, int\\|null given\\.$#"
-			count: 2
-			path: src/Domain/Conversation/Facade/ConversationFacade.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
-			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\|null but returns object\\|null\\.$#"
-			count: 1
 			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
 
 		-
@@ -952,11 +937,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
-
-		-
-			message: "#^Parameter \\#2 \\$systemEventTypeId of method App\\\\Domain\\\\SystemEvent\\\\Service\\\\SystemEventLinkGeneratorService\\:\\:getTemplate\\(\\) expects int, int\\|null given\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
 

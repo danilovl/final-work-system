@@ -19,10 +19,10 @@ trait IdTrait
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(name: 'id', type: Types::INTEGER)]
-    private ?int $id = null;
+    #[ORM\Column(name: 'id', type: Types::INTEGER, nullable: false)]
+    private int $id;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -34,6 +34,6 @@ trait IdTrait
 
     public function __clone()
     {
-        $this->id = null;
+        $this->id = 0;
     }
 }

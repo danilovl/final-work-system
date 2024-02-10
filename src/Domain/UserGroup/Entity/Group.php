@@ -33,11 +33,6 @@ class Group
     use IdTrait;
     use TimestampAbleTrait;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(name: 'id', type: Types::INTEGER)]
-    private ?int $id = null;
-
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     protected string $name;
 
