@@ -51,6 +51,7 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
         $userTwo->setId(2);
 
         $work = new Work;
+        $work->setId(1);
         $work->setTitle('test');
         $work->setAuthor($user);
         $work->setSupervisor($userTwo);

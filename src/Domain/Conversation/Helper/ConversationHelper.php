@@ -21,13 +21,19 @@ use LogicException;
 
 class ConversationHelper
 {
+    /**
+     * @param Conversation[] $conversations
+     */
     public static function groupConversationsByCategory(iterable $conversations): array
     {
         $categoryGroup = [];
 
-        /** @var Conversation $conversation */
         foreach ($conversations as $conversation) {
             $work = $conversation->getWork();
+            if ($work === null) {
+                continue;
+            }
+
             $categories = $work->getCategories();
 
             if ($categories->count() > 0) {
@@ -59,6 +65,9 @@ class ConversationHelper
         /** @var Conversation $conversation */
         foreach ($conversations as $conversation) {
             $work = $conversation->getWork();
+            if ($work === null) {
+                continue;
+            }
 
             $categories = $work->getCategories();
             if ($categories->count() > 0) {
@@ -113,15 +122,21 @@ class ConversationHelper
         }
     }
 
+    /**
+     * @param Conversation[] $array
+     */
     public static function usortCzechArray(array &$array): void
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
-        usort($array, static function (Conversation $first, Conversation $second) use ($collator): int|bool {
+        usort($array, static function (Conversation $first, Conversation $second) use ($collator): int {
             $f = (string) $first->getRecipient();
             $s = (string) $second->getRecipient();
 
-            return $collator->compare($f, $s);
+            /** @var int $compare */
+            $compare = $collator->compare($f, $s);
+
+            return $compare;
         });
     }
 

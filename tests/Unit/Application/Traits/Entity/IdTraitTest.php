@@ -28,6 +28,6 @@ class IdTraitTest extends TestCase
 
         $class = clone $class;
 
-        $this->assertNull($class->getId());
+        $this->assertSame(0, $class->getId());
     }
 }
