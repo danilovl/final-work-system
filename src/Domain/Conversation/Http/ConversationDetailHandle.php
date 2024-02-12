@@ -129,7 +129,7 @@ readonly class ConversationDetailHandle
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+        if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
             $conversationMessageIds = $this->conversationSearch->getMessageIdsByConversationAndSearch($conversation, $searchModel->search);
             $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
         }
