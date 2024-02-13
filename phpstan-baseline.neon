@@ -181,11 +181,6 @@ parameters:
 			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
 
 		-
-			message: "#^Parameter \\#2 \\$search of method App\\\\Domain\\\\Conversation\\\\Elastica\\\\ConversationSearch\\:\\:getIdsByParticipantAndSearch\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Http/ConversationListHandle.php
-
-		-
 			message: "#^Cannot call method getSupervisor\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php

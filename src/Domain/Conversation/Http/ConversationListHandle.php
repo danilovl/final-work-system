@@ -55,7 +55,7 @@ readonly class ConversationListHandle
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+        if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
             $conversationIds = $this->conversationSearch->getIdsByParticipantAndSearch($user, $searchModel->search);
             $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
         }
