@@ -13,6 +13,7 @@
 namespace App\Domain\Conversation\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Exception\InvalidArgumentException;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\User\Entity\User;
@@ -49,6 +50,10 @@ class ConversationVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof Conversation) {
+            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', Conversation::class));
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
@@ -66,6 +71,6 @@ class ConversationVoter extends Voter
 
     private function canDelete(Conversation $conversation, User $user): bool
     {
-        return $conversation->isOwner($user) || $conversation->getWork()->getSupervisor()->getId() === $user->getId();
+        return $conversation->isOwner($user) || $conversation->getWork()?->getSupervisor()->getId() === $user->getId();
     }
 }

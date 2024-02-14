@@ -181,21 +181,6 @@ parameters:
 			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
 
 		-
-			message: "#^Cannot call method getSupervisor\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$conversation of method App\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Conversation\\\\Service\\\\ConversationService\\:\\:getLastMessage\\(\\) should return App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Service/ConversationService.php
