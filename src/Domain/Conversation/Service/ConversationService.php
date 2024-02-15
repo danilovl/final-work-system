@@ -63,16 +63,19 @@ class ConversationService
     {
         $messages = $conversation->getMessages();
 
-        if ($messages->count() > 0) {
-            $criteria = Criteria::create()
-                ->orderBy([
-                    'createdAt' => Criteria::DESC
-                ])
-                ->setMaxResults(1);
-
-            return $messages->matching($criteria)[0];
+        if ($messages->count() === 0) {
+            return null;
         }
 
-        return null;
+        $criteria = Criteria::create()
+            ->orderBy([
+                'createdAt' => Criteria::DESC
+            ])
+            ->setMaxResults(1);
+
+        /** @var ConversationMessage|null $message */
+        $message = $messages->matching($criteria)[0] ?? null;
+
+        return $message;
     }
 }
