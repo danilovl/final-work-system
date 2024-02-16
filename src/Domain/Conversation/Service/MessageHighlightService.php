@@ -31,6 +31,7 @@ readonly class MessageHighlightService
             return;
         }
 
+        /** @var string[] $words */
         $words = preg_split('~\s+~', $searchModel->search);
         /** @var ConversationMessage $conversationMessage */
         foreach ($conversationMessages as $conversationMessage) {
