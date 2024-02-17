@@ -12,8 +12,7 @@
 
 namespace App\Domain\Document\Security\Voter;
 
-use App\Application\Constant\{
-    VoterSupportConstant};
+use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\User\Entity\User;
@@ -46,6 +45,10 @@ class DocumentVoter extends Voter
     {
         $user = $token->getUser();
         if (!$user instanceof User) {
+            return false;
+        }
+
+        if (!$subject instanceof Media) {
             return false;
         }
 

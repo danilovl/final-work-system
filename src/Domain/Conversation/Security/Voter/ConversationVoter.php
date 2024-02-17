@@ -13,7 +13,6 @@
 namespace App\Domain\Conversation\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Exception\InvalidArgumentException;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\User\Entity\User;
@@ -51,7 +50,7 @@ class ConversationVoter extends Voter
         }
 
         if (!$subject instanceof Conversation) {
-            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', Conversation::class));
+            return false;
         }
 
         switch ($attribute) {

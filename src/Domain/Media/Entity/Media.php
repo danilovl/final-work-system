@@ -134,7 +134,7 @@ class Media
         $this->mediaName = $mediaName;
     }
 
-    public function getType(): ?MediaType
+    public function getType(): MediaType
     {
         return $this->type;
     }
@@ -292,11 +292,6 @@ class Media
     public function existMediaFile(): bool
     {
         return file_exists($this->getAbsolutePath());
-    }
-
-    public function getFolder(): ?string
-    {
-        return $this->getType()?->getFolder();
     }
 
     public function changeActive(): void

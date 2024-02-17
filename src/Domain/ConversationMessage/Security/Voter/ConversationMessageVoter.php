@@ -50,7 +50,7 @@ class ConversationMessageVoter extends Voter
         }
 
         if (!$subject instanceof ConversationMessage) {
-            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', ConversationMessage::class));
+            return false;
         }
 
         if ($attribute === VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value) {

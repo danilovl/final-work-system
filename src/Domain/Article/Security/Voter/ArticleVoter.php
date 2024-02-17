@@ -48,7 +48,7 @@ class ArticleVoter extends Voter
         }
 
         if (!$subject instanceof ArticleVoterSubject) {
-            throw new InvalidArgumentException(sprintf('Invalid subject type. Expected "%s".', ArticleVoterSubject::class));
+            return false;
         }
 
         if ($attribute === VoterSupportConstant::VIEW->value) {
