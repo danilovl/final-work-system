@@ -211,16 +211,6 @@ parameters:
 			path: src/Domain/ConversationType/Entity/ConversationType.php
 
 		-
-			message: "#^Parameter \\#1 \\$mediaCategory of method App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory, mixed given\\.$#"
-			count: 1
-			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$mediaCategory of method App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory, mixed given\\.$#"
-			count: 1
-			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
-
-		-
 			message: "#^Parameter \\#1 \\$address of class Symfony\\\\Component\\\\Mime\\\\Address constructor expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EmailNotificationQueue/Command/EmailNotificationQueueCommand.php

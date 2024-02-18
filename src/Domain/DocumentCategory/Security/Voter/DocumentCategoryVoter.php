@@ -46,6 +46,10 @@ class DocumentCategoryVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof MediaCategory) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);
