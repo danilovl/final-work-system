@@ -19,8 +19,9 @@ use App\Domain\MediaCategory\Form\MediaCategoryForm;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
-    FormFactoryInterface,
-    FormInterface};
+    FormInterface,
+    FormFactoryInterface
+};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -50,6 +51,10 @@ class DocumentCategoryFormFactory
                 ];
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
+                if ($mediaCategory === null) {
+                    throw new RuntimeException('Media category is null.');
+                }
+
                 $parameters = [
                     'action' => $this->router->generate('document_category_edit_ajax', [
                         'id' => $this->hashidsService->encode($mediaCategory->getId())

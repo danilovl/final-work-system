@@ -211,11 +211,6 @@ parameters:
 			path: src/Domain/ConversationType/Entity/ConversationType.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\|null\\.$#"
-			count: 1
-			path: src/Domain/DocumentCategory/Form/Factory/DocumentCategoryFormFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$mediaCategory of method App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory, mixed given\\.$#"
 			count: 1
 			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
