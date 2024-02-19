@@ -50,7 +50,7 @@ class EmailNotificationQueue
     #[ORM\Column(name: 'sended_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $sendedAt = null;
 
-    public function getSubject(): ?string
+    public function getSubject(): string
     {
         return $this->subject;
     }
@@ -60,7 +60,7 @@ class EmailNotificationQueue
         $this->subject = $subject;
     }
 
-    public function getTo(): ?string
+    public function getTo(): string
     {
         return $this->to;
     }
@@ -70,7 +70,7 @@ class EmailNotificationQueue
         $this->to = $to;
     }
 
-    public function getFrom(): ?string
+    public function getFrom(): string
     {
         return $this->from;
     }
@@ -80,7 +80,7 @@ class EmailNotificationQueue
         $this->from = $from;
     }
 
-    public function getBody(): ?string
+    public function getBody(): string
     {
         return $this->body;
     }
