@@ -12,8 +12,7 @@
 
 namespace App\Domain\Event\Facade;
 
-use App\Application\Constant\{
-    DateFormatConstant};
+use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\DateHelper;
 use App\Application\Service\EntityManagerService;
@@ -67,12 +66,12 @@ class EventCalendarFacade
                     'endDate' => $endDate
                 ]);
 
+                /** @var Event[] $userEvents */
                 $userEvents = $this->eventRepository
                     ->allByOwner($mediaData)
                     ->getQuery()
                     ->getResult();
 
-                /** @var Event $appointment */
                 foreach ($userEvents as $appointment) {
                     $event = [];
                     $event['id'] = $this->hashIds->encode($appointment->getId());
@@ -100,6 +99,7 @@ class EventCalendarFacade
                 /** @var WorkStatus $workStatus */
                 $workStatus = $this->entityManager->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 
+                /** @var Work[] $userWorks */
                 $userWorks = $this->userWorkService->getWorkBy(
                     $user,
                     WorkUserTypeConstant::AUTHOR->value,
@@ -108,7 +108,6 @@ class EventCalendarFacade
                 );
 
                 $supervisors = [];
-                /** @var Work $userWork */
                 foreach ($userWorks as $userWork) {
                     $supervisor = $userWork->getSupervisor();
                     if ($user->getId() !== $supervisor->getId() &&
@@ -127,12 +126,12 @@ class EventCalendarFacade
                         'eventType' => $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION->value)
                     ]);
 
+                    /** @var Event[] $supervisorAppointments */
                     $supervisorAppointments = $this->eventRepository
                         ->allByOwner($mediaData)
                         ->getQuery()
                         ->getResult();
 
-                    /** @var Event $supervisorAppointment */
                     foreach ($supervisorAppointments as $supervisorAppointment) {
                         $event = [];
                         $event['id'] = $this->hashIds->encode($supervisorAppointment->getId());
@@ -147,7 +146,7 @@ class EventCalendarFacade
 
                         $participant = $supervisorAppointment->getParticipant();
                         if ($participant) {
-                            if ($participant->getUser()->getId() === $user->getId()) {
+                            if ($participant->getUserMust()->getId() === $user->getId()) {
                                 $event['color'] = $this->calendarEventReservedColor;
                                 $event['title'] = $event['title'] . "\n" . $participant->toString();
                                 $event['detail_url'] = $this->router->generate('event_detail', [
