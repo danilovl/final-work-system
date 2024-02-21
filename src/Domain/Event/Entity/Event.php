@@ -158,7 +158,7 @@ class Event
         return $this->address;
     }
 
-    public function setAddress(EventAddress $address): void
+    public function setAddress(?EventAddress $address): void
     {
         $this->address = $address;
     }

@@ -21,13 +21,13 @@ use DateTime;
 
 class EventModel
 {
-    public ?EventType $type = null;
+    public EventType $type;
     public ?string $name = null;
     public ?EventAddress $address = null;
     public ?EventParticipant $participant = null;
-    public ?DateTime $start = null;
-    public ?DateTime $end = null;
-    public ?User $owner = null;
+    public DateTime $start;
+    public DateTime $end;
+    public User $owner;
 
     public static function fromEvent(Event $event): self
     {

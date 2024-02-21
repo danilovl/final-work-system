@@ -246,51 +246,6 @@ parameters:
 			path: src/Domain/Event/Facade/EventFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Factory/EventFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$end of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setEnd\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Factory/EventFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Factory/EventFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$start of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setStart\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Factory/EventFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:setType\\(\\) expects App\\\\Domain\\\\EventType\\\\Entity\\\\EventType, App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Event/Factory/EventFactory.php
-
-		-
-			message: "#^Cannot call method format\\(\\) on DateTime\\|null\\.$#"
-			count: 2
-			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\|null\\.$#"
-			count: 1
-			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
-
-		-
-			message: "#^Parameter \\#1 \\$first of static method App\\\\Application\\\\Helper\\\\CompareHelper\\:\\:compareDateTime\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 2
-			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
-
-		-
-			message: "#^Parameter \\#2 \\$second of static method App\\\\Application\\\\Helper\\\\CompareHelper\\:\\:compareDateTime\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 2
-			path: src/Domain/Event/Form/Constraint/EventTimeValidator.php
-
-		-
 			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 2
 			path: src/Domain/Event/Http/Ajax/EventGetEventHandle.php
