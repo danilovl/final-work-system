@@ -53,6 +53,10 @@ class EventVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof Event) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
@@ -78,10 +82,7 @@ class EventVoter extends Voter
             $owner = true;
         }
 
-        if ($event->getParticipant() &&
-            $event->getParticipant()->getUser() &&
-            $event->getParticipant()->getUser()->getId() === $user->getId()
-        ) {
+        if ($event->getParticipant()?->getUser()?->getId() === $user->getId()) {
             $participant = true;
         }
 
@@ -97,7 +98,7 @@ class EventVoter extends Voter
 
     private function switchToSkype(Event $event, User $user): bool
     {
-        return $this->canView($event, $user) && $event->getAddress()->isSkype();
+        return $this->canView($event, $user) && $event->getAddress()?->isSkype();
     }
 
     private function canEdit(Event $event, User $user): bool
