@@ -13,14 +13,18 @@
 namespace App\Domain\EventAddress\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\ConstantNotFoundException;
+use App\Application\Exception\{
+    RuntimeException,
+    ConstantNotFoundException
+};
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Form\EventAddressForm;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
-    FormFactoryInterface,
-    FormInterface};
+    FormInterface,
+    FormFactoryInterface
+};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -50,6 +54,10 @@ class EventAddressFormFactory
                 ];
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
+                if ($eventAddress === null) {
+                    throw new RuntimeException('Event address is null.');
+                }
+
                 $parameters = [
                     'action' => $this->router->generate('event_address_edit_ajax', [
                         'id' => $this->hashidsService->encode($eventAddress->getId())
@@ -64,5 +72,3 @@ class EventAddressFormFactory
         return $this->formFactory->create(EventAddressForm::class, $eventAddressModel, $parameters);
     }
 }
-
-

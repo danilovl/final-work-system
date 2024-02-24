@@ -281,11 +281,6 @@ parameters:
 			path: src/Domain/EventAddress/Factory/EventAddressFactory.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null\\.$#"
-			count: 1
-			path: src/Domain/EventAddress/Form/Factory/EventAddressFormFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$eventAddress of method App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, mixed given\\.$#"
 			count: 1
 			path: src/Domain/EventAddress/Security/Voter/EventAddressVoter.php
