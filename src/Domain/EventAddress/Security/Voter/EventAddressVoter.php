@@ -47,6 +47,10 @@ class EventAddressVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof EventAddress) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);

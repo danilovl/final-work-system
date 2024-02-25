@@ -108,7 +108,7 @@ class EventAddress
 
     public function existLocation(): bool
     {
-        return $this->getLatitude() && $this->getLatitude();
+        return $this->getLatitude() && $this->getLongitude();
     }
 
     public function __toString(): string
