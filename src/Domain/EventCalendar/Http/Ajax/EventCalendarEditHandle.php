@@ -37,8 +37,8 @@ readonly class EventCalendarEditHandle
 
     public function handle(Request $request, Event $event): JsonResponse
     {
-        $event->setStart(new DateTime($request->request->get('start')));
-        $event->setEnd(new DateTime($request->request->get('end')));
+        $event->setStart(new DateTime($request->request->getString('start')));
+        $event->setEnd(new DateTime($request->request->getString('end')));
 
         $this->entityManagerService->flush();
         $this->eventEventDispatcherService->onEventCalendarEdit($event);
