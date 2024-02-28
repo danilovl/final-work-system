@@ -24,7 +24,7 @@ class EventScheduleModel
     use SimpleInformationTrait;
 
     public ?User $owner = null;
-    public ?Collection $templates = null;
+    public Collection $templates;
 
     public function __construct()
     {

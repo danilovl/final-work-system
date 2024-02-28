@@ -286,27 +286,12 @@ parameters:
 			path: src/Domain/EventSchedule/Entity/EventSchedule.php
 
 		-
-			message: "#^Cannot call method format\\(\\) on bool\\|DateTime\\|string\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$datetime of class DateTime constructor expects string, bool\\|string given\\.$#"
-			count: 2
-			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
 
 		-
 			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$templates of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setTemplates\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
 

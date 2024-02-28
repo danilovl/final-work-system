@@ -52,11 +52,13 @@ class EventScheduleFactory extends BaseModelFactory
                 $template->getStart()->format(DateFormatConstant::TIME->value)
             );
 
-            $startDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
-            $event->setStart(new DateTime($startDate));
+            /** @var string $eventStartDate */
+            $eventStartDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
+            $event->setStart(new DateTime($eventStartDate));
 
-            $endDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
-            $event->setEnd(new DateTime($endDate));
+            /** @var string $eventEndDate */
+            $eventEndDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
+            $event->setEnd(new DateTime($eventEndDate));
 
             $this->entityManagerService->persistAndFlush($event);
         }
