@@ -306,26 +306,6 @@ parameters:
 			path: src/Domain/EventSchedule/Http/EventScheduleCloneHandle.php
 
 		-
-			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canClone\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventSchedule of method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule, mixed given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
-
-		-
 			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php

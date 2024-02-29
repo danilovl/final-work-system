@@ -48,6 +48,10 @@ class EventScheduleVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof EventSchedule) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);
