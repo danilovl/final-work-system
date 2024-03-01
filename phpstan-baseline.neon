@@ -346,11 +346,6 @@ parameters:
 			path: src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php
 
 		-
-			message: "#^Unsafe access to private constant App\\\\Domain\\\\Media\\\\Command\\\\SyncDatabaseMediaWithRealFileCommand\\:\\:LIMIT through static\\:\\:\\.$#"
-			count: 2
-			path: src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php
-
-		-
 			message: "#^Cannot call method getExtension\\(\\) on App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null\\.$#"
 			count: 3
 			path: src/Domain/Media/Entity/Media.php

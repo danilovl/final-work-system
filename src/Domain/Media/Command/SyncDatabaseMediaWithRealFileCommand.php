@@ -68,7 +68,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         $offset = 0;
         $count = 0;
         while (true) {
-            $medias = $this->mediaFacade->findAll($offset, static::LIMIT);
+            $medias = $this->mediaFacade->findAll($offset, self::LIMIT);
             if (count($medias) === 0) {
                 break;
             }
@@ -82,7 +82,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
                 $count++;
             }
 
-            $offset += static::LIMIT;
+            $offset += self::LIMIT;
         }
 
         $this->io->success(sprintf('%d media were deleted', $count));
