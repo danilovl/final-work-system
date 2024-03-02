@@ -144,7 +144,7 @@ class Media
         $this->type = $type;
     }
 
-    public function getMimeType(): ?MediaMimeType
+    public function getMimeType(): MediaMimeType
     {
         return $this->mimeType;
     }

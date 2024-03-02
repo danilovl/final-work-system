@@ -45,7 +45,7 @@ class MediaService
         }
 
         $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', $media->getMimeType());
+        $response->headers->set('Content-Type', $media->getMimeType()->getName());
 
         return $response->send();
     }
