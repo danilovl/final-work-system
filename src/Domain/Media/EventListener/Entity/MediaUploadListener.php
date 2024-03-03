@@ -58,7 +58,7 @@ readonly class MediaUploadListener
 
     private function create(Media $media): void
     {
-        $uploadMedia = $media->getUploadMedia();
+        $uploadMedia = $media->getUploadMediaMust();
         $media->setUploadMedia(null);
         $originalMediaName = $uploadMedia->getClientOriginalName();
         $originalMediaExtension = $uploadMedia->getClientOriginalExtension();
@@ -100,6 +100,7 @@ readonly class MediaUploadListener
             $mimeType = $uploadMedia->getMimeType();
             $mediaSize = $uploadMedia->getSize();
 
+            /** @var MediaMimeType|null $mediaMimeType */
             $mediaMimeType = $this->entityManagerService
                 ->getRepository(MediaMimeType::class)
                 ->findOneBy(['name' => $mimeType]);

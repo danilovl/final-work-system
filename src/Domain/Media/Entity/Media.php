@@ -227,6 +227,15 @@ class Media
         return $this->uploadMedia;
     }
 
+    public function getUploadMediaMust(): UploadedFile
+    {
+        if (!$this->uploadMedia) {
+            throw new PropertyValueIsNullException('UploadMedia is null.');
+        }
+
+        return $this->uploadMedia;
+    }
+
     public function getNameWithExtension(): string
     {
         return $this->getMediaName() . '.' . $this->getMimeType()->getExtension();

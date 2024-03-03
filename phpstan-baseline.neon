@@ -356,41 +356,6 @@ parameters:
 			path: src/Domain/Media/Entity/Media.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:getExtension\\(\\)\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
-			message: "#^Cannot call method getClientOriginalExtension\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
-			message: "#^Cannot call method getClientOriginalName\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
-			message: "#^Cannot call method getMimeType\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
-			message: "#^Cannot call method getSize\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
-			message: "#^Cannot call method move\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
-			message: "#^Parameter \\#1 \\$mimeType of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setMimeType\\(\\) expects App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType, object given\\.$#"
-			count: 1
-			path: src/Domain/Media/EventListener/Entity/MediaUploadListener.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Domain/Media/Facade/MediaFacade.php
