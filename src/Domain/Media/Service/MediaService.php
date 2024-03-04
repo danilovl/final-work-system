@@ -51,7 +51,7 @@ class MediaService
     }
 
     public function file(
-        mixed $file,
+        string $file,
         string $fileName = null,
         string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT
     ): BinaryFileResponse {
