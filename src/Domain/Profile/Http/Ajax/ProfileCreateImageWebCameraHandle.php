@@ -13,7 +13,9 @@
 namespace App\Domain\Profile\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Application\Exception\RuntimeException;
 use App\Application\Helper\FileHelper;
+use App\Domain\MediaType\Entity\MediaType;
 use App\Application\Service\{
     RequestService,
     ResizeImageService,
@@ -44,13 +46,16 @@ readonly class ProfileCreateImageWebCameraHandle
 
     public function handle(Request $request): JsonResponse
     {
-        $imageData = json_decode($request->getContent(), true)['imageData'];
+        /** @var array $imageData */
+        $imageData = json_decode($request->getContent(), true);
+        $imageData = $imageData['imageData'] ?? null;
 
         $user = $this->userService->getUser();
         $profileImage = $user->getProfileImage();
 
         $media = $profileImage ?? new Media;
         if ($profileImage === null) {
+            /** @var MediaType $mediaType */
             $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
 
             $media = new Media;
@@ -59,9 +64,13 @@ readonly class ProfileCreateImageWebCameraHandle
         }
 
         $maxImageWidth = $this->parameterService
-            ->get('constraints.profile.image.maxWidth');
+            ->getInt('constraints.profile.image.maxWidth');
 
         $imageData = $this->resizeImageService->resizeBase64Image($imageData, $maxImageWidth, true);
+        if ($imageData === null) {
+            throw new RuntimeException('Cannot resize image.');
+        }
+
         $pngExtension = MediaMimeTypeTypeConstant::PNG['extension'];
 
         $tmpFilePath = FileHelper::createTmpFile(

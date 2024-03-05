@@ -456,31 +456,6 @@ parameters:
 			path: src/Domain/MediaType/Entity/MediaType.php
 
 		-
-			message: "#^Cannot access offset 'imageData' on mixed\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
-
-		-
-			message: "#^Parameter \\#1 \\$originImage of method App\\\\Application\\\\Service\\\\ResizeImageService\\:\\:resizeBase64Image\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
-
-		-
-			message: "#^Parameter \\#1 \\$str of function base64_decode expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setType\\(\\) expects App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType, App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
-
-		-
-			message: "#^Parameter \\#2 \\$newWidth of method App\\\\Application\\\\Service\\\\ResizeImageService\\:\\:resizeBase64Image\\(\\) expects int, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php
-
-		-
 			message: "#^Cannot call method getFilename\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
 			count: 1
 			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
