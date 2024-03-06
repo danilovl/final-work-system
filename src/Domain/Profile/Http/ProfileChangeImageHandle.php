@@ -27,6 +27,7 @@ use App\Domain\Profile\Form\ProfileMediaForm;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
+    File\UploadedFile,
     Request,
     Response};
 
@@ -53,6 +54,7 @@ readonly class ProfileChangeImageHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                /** @var UploadedFile $uploadMedia */
                 $uploadMedia = $mediaModel->uploadMedia;
                 $mimeType = $uploadMedia->getMimeType();
 

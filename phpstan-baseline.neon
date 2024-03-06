@@ -456,16 +456,6 @@ parameters:
 			path: src/Domain/MediaType/Entity/MediaType.php
 
 		-
-			message: "#^Cannot call method getFilename\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
-
-		-
-			message: "#^Cannot call method getMimeType\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\File\\\\UploadedFile\\|null\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
-
-		-
 			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setType\\(\\) expects App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType, App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
