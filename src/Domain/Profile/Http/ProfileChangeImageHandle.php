@@ -14,10 +14,12 @@ namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\RuntimeException;
+use App\Domain\MediaType\Entity\MediaType;
 use App\Application\Service\{
     EntityManagerService,
     RequestService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\Media\Model\MediaModel;
@@ -29,7 +31,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     File\UploadedFile,
     Request,
-    Response};
+    Response
+};
 
 readonly class ProfileChangeImageHandle
 {
@@ -68,6 +71,7 @@ readonly class ProfileChangeImageHandle
 
                 $media = $profileImage ?? new Media;
                 if ($profileImage === null) {
+                    /** @var MediaType $mediaType */
                     $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
 
                     $media = new Media;

@@ -456,11 +456,6 @@ parameters:
 			path: src/Domain/MediaType/Entity/MediaType.php
 
 		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setType\\(\\) expects App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType, App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/ProfileChangeImageHandle.php
-
-		-
 			message: "#^Parameter \\#1 \\$plainPassword of method App\\\\Domain\\\\User\\\\Service\\\\PasswordUpdater\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Profile/Http/ProfileChangePasswordHandle.php
