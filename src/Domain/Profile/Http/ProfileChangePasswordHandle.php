@@ -50,8 +50,11 @@ readonly class ProfileChangePasswordHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                /** @var string $plainPassword */
+                $plainPassword = $form->get('plainPassword')->getData();
+
                 $this->passwordUpdater->hashPassword(
-                    $form->get('plainPassword')->getData(),
+                    $plainPassword,
                     $user,
                     $userModel
                 );
