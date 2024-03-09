@@ -456,11 +456,6 @@ parameters:
 			path: src/Domain/MediaType/Entity/MediaType.php
 
 		-
-			message: "#^Parameter \\#1 \\$entity of method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:remove\\(\\) expects object, App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Profile/Http/ProfileDeleteImageHandle.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$hashedToken type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: src/Domain/ResetPassword/Entity/ResetPassword.php

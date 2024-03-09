@@ -34,7 +34,11 @@ readonly class ProfileDeleteImageHandle
         $user = $this->userService->getUser();
 
         try {
-            $this->entityManagerService->remove($user->getProfileImage());
+            $profileImage = $user->getProfileImage();
+            if ($profileImage) {
+                $this->entityManagerService->remove($profileImage);
+            }
+
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
         } catch (Exception) {
             $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
