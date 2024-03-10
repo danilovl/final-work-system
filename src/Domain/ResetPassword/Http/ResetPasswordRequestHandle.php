@@ -49,9 +49,10 @@ readonly class ResetPasswordRequestHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->processSendingPasswordResetEmail(
-                $form->get('email')->getData()
-            );
+            /** @var string $email */
+            $email =  $form->get('email')->getData();
+
+            return $this->processSendingPasswordResetEmail($email);
         }
 
         return $this->twigRenderService->renderToResponse('reset_password/request.html.twig', [

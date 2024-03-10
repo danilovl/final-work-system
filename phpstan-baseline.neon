@@ -491,11 +491,6 @@ parameters:
 			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$email of method App\\\\Domain\\\\ResetPassword\\\\Http\\\\ResetPasswordRequestHandle\\:\\:processSendingPasswordResetEmail\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Http/ResetPasswordRequestHandle.php
-
-		-
 			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php
