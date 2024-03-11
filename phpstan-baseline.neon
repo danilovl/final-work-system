@@ -508,16 +508,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
 			count: 1
-			path: src/Domain/SystemEvent/EventSubscriber/DocumentSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/EventSubscriber/MessageSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
-			count: 1
 			path: src/Domain/SystemEvent/EventSubscriber/TaskSystemEventSubscriber.php
 
 		-

@@ -45,6 +45,7 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
         $media = $event->media;
         $owner = $media->getOwner();
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::DOCUMENT_CREATE->value);
