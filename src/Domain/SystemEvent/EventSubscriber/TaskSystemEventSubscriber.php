@@ -43,6 +43,7 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $task = $event->task;
         $work = $task->getWork();
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find($systemEventId);

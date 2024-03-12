@@ -506,11 +506,6 @@ parameters:
 			path: src/Domain/SystemEvent/Entity/SystemEvent.php
 
 		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/EventSubscriber/TaskSystemEventSubscriber.php
-
-		-
 			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/EventSubscriber/UserSystemEventSubscriber.php
