@@ -32,8 +32,9 @@ class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     public function onUserEdit(UserGenericEvent $event): void
     {
         $user = $event->user;
-        $owner = $event->owner;
+        $owner = $event->getOwnerMust();
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::USER_EDIT->value);
