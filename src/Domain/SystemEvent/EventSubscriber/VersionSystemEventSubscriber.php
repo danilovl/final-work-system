@@ -46,8 +46,9 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         array $users = [true, true, true, true]
     ): void {
         $media = $event->media;
-        $work = $media->getWork();
+        $work = $media->getWorkMust();
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find($systemEventTypeId);

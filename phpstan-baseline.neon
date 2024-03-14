@@ -507,16 +507,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/EventSubscriber/VersionSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Service\\\\WorkService\\:\\:getUsers\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/EventSubscriber/VersionSystemEventSubscriber.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
 			count: 3
 			path: src/Domain/SystemEvent/EventSubscriber/WorkSystemEventSubscriber.php
 
