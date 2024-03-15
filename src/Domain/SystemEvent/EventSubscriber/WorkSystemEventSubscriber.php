@@ -44,6 +44,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::WORK_CREATE->value);
@@ -72,6 +73,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::WORK_EDIT->value);
@@ -104,6 +106,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     {
         $work = $event->work;
 
+        /** @var SystemEventType $systemEventType */
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::USER_EDIT->value);

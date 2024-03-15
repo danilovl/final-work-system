@@ -506,11 +506,6 @@ parameters:
 			path: src/Domain/SystemEvent/Entity/SystemEvent.php
 
 		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:setType\\(\\) expects App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType, object\\|null given\\.$#"
-			count: 3
-			path: src/Domain/SystemEvent/EventSubscriber/WorkSystemEventSubscriber.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/Facade/SystemEventFacade.php
