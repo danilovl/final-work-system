@@ -72,7 +72,7 @@ readonly class SystemEventLinkGeneratorService implements RuntimeExtensionInterf
         }
 
         /** TODO: Now available templates only for cs $locale */
-        $locale = LocaleConstant::ISO_CS->value ?? $this->requestStack->getCurrentRequest()->getLocale();
+        $locale = LocaleConstant::ISO_CS->value ?? $this->requestStack->getCurrentRequest()?->getLocale();
         $folder = sprintf('system_event/%s/%s', $type, $locale);
 
         return match ($systemEventTypeId) {

@@ -516,11 +516,6 @@ parameters:
 			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
 
 		-
-			message: "#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php
-
-		-
 			message: "#^Parameter \\#1 \\$systemEventRecipient of method App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\:\\:canChangeViewed\\(\\) expects App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient, mixed given\\.$#"
 			count: 1
 			path: src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php
