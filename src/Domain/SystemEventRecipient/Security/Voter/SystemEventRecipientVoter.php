@@ -45,6 +45,10 @@ class SystemEventRecipientVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof SystemEventRecipient) {
+            return false;
+        }
+
         if ($attribute == VoterSupportConstant::CHANGE_VIEWED->value) {
             return $this->canChangeViewed($subject, $user);
         }

@@ -516,11 +516,6 @@ parameters:
 			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$systemEventRecipient of method App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\:\\:canChangeViewed\\(\\) expects App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient, mixed given\\.$#"
-			count: 1
-			path: src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\SystemEventType\\\\Entity\\\\SystemEventType\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
 			count: 1
 			path: src/Domain/SystemEventType/Entity/SystemEventType.php
