@@ -57,7 +57,7 @@ class TaskRemindDeadlineCommand extends Command
         $offset = 0;
         $count = 0;
         while (true) {
-            $tasks = $this->taskDeadlineFacade->getTasksAfterDeadline($offset, static::LIMIT);
+            $tasks = $this->taskDeadlineFacade->getTasksAfterDeadline($offset, self::LIMIT);
             if (count($tasks) === 0) {
                 break;
             }
@@ -67,7 +67,7 @@ class TaskRemindDeadlineCommand extends Command
             }
 
             $count += count($tasks);
-            $offset += static::LIMIT;
+            $offset += self::LIMIT;
         }
 
         $this->io->success(sprintf('Task deadline reminds create for %d tasks', $count));
