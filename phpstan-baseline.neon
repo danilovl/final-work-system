@@ -576,11 +576,6 @@ parameters:
 			path: src/Domain/Task/Form/Factory/TaskFormFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$supervisor of method App\\\\Domain\\\\Task\\\\Form\\\\TaskSeveralForm\\:\\:queryBuilder\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Task/Form/TaskSeveralForm.php
-
-		-
 			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Task\\\\Service\\\\TaskStatusService\\:\\:changeStatus\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Task/Http/Ajax/TaskChangeStatusHandle.php

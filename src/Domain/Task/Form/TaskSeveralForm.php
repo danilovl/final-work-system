@@ -31,6 +31,7 @@ class TaskSeveralForm extends TaskForm
     {
         parent::buildForm($builder, $options);
 
+        /** @var User $supervisor */
         $supervisor = $options['supervisor'];
 
         $builder
