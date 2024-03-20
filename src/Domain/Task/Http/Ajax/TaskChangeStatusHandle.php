@@ -34,7 +34,7 @@ readonly class TaskChangeStatusHandle
 
     public function handle(Request $request, Task $task): JsonResponse
     {
-        $type = $request->attributes->get('type');
+        $type = $request->attributes->getString('type');
         if (!empty($type)) {
             $this->taskStatusService
                 ->changeStatus($type, $task);
