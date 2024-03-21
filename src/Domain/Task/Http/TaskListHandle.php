@@ -52,7 +52,7 @@ readonly class TaskListHandle
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+        if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
             $taskIds = $this->taskSearch->getIdsByOwnerAndSearch($user, $searchModel->search);
             $tasksQuery = $this->taskFacade->queryByIds($taskIds);
         }

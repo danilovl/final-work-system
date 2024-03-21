@@ -581,11 +581,6 @@ parameters:
 			path: src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php
 
 		-
-			message: "#^Parameter \\#2 \\$search of method App\\\\Domain\\\\Task\\\\Elastica\\\\TaskSearch\\:\\:getIdsByOwnerAndSearch\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Task/Http/TaskListHandle.php
-
-		-
 			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Task/Security/Voter/TaskVoter.php
