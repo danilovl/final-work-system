@@ -49,6 +49,10 @@ class TaskVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof Task) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::VIEW->value:
                 return $this->canView($subject, $user);

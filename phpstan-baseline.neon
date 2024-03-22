@@ -581,26 +581,6 @@ parameters:
 			path: src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php
 
 		-
-			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Task/Security/Voter/TaskVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Task/Security/Voter/TaskVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canNotifyComplete\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Task/Security/Voter/TaskVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$task of method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Task\\\\Entity\\\\Task, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Task/Security/Voter/TaskVoter.php
-
-		-
 			message: "#^Cannot call method isComplete\\(\\) on mixed\\.$#"
 			count: 1
 			path: src/Domain/Task/Service/TaskService.php
