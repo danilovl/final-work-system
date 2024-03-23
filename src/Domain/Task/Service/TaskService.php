@@ -12,6 +12,7 @@
 
 namespace App\Domain\Task\Service;
 
+use App\Domain\Task\Entity\Task;
 use Doctrine\Common\Collections\{
     Criteria,
     Collection
@@ -20,6 +21,9 @@ use App\Domain\Work\Entity\Work;
 
 class TaskService
 {
+    /**
+     * @return Collection<Task>
+     */
     public function getActiveWorkTask(Work $work): Collection
     {
         $allTask = $work->getTasks();
@@ -28,6 +32,9 @@ class TaskService
         return $allTask->matching($criteriaActive);
     }
 
+    /**
+     * @param Collection<Task>|null $tasks
+     */
     public function getCompleteTaskPercentage(
         Work $work,
         Collection $tasks = null

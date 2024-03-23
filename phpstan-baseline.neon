@@ -581,11 +581,6 @@ parameters:
 			path: src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php
 
 		-
-			message: "#^Cannot call method isComplete\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Domain/Task/Service/TaskService.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$entityManager is never read, only written\\.$#"
 			count: 1
 			path: src/Domain/User/Command/UserAddCommand.php
