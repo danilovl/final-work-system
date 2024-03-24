@@ -70,8 +70,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'roles', type: Types::ARRAY)]
     private array $roles;
 
-    #[ORM\Column(name: 'password', type: Types::STRING)]
-    private ?string $password = null;
+    #[ORM\Column(name: 'password', type: Types::STRING, nullable: false)]
+    private string $password;
 
     private ?string $plainPassword = null;
 
@@ -420,7 +420,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         return $this->gender;
     }
 
-    public function setGender(?string $gender): void
+    public function setGender(string $gender): void
     {
         $this->gender = $gender;
     }
@@ -515,7 +515,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         return $this->email;
     }
 
-    public function setEmail(?string $email): void
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -525,7 +525,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         return $this->emailCanonical;
     }
 
-    public function setEmailCanonical(?string $emailCanonical): void
+    public function setEmailCanonical(string $emailCanonical): void
     {
         $this->emailCanonical = $emailCanonical;
     }

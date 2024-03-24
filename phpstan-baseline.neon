@@ -581,77 +581,12 @@ parameters:
 			path: src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$entityManager is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserAddCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$io is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserAddCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$userPasswordHasher is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserAddCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserAddCommand\\:\\:\\$validator is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserAddCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserDeleteCommand\\:\\:\\$entityManager is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserDeleteCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserDeleteCommand\\:\\:\\$io is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserDeleteCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserDeleteCommand\\:\\:\\$validator is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserDeleteCommand.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\User\\\\Command\\\\UserListCommand\\:\\:userToArray\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserListCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Command\\\\UserListCommand\\:\\:\\$entityManager is never read, only written\\.$#"
-			count: 1
-			path: src/Domain/User/Command/UserListCommand.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$email \\(string\\) does not accept string\\|null\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$emailCanonical \\(string\\) does not accept string\\|null\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$gender \\(string\\) does not accept string\\|null\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$groups type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\>\\.$#"
 			count: 1
 			path: src/Domain/User/Entity/User.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$mediaOwner type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$password type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: src/Domain/User/Entity/User.php
 
@@ -679,6 +614,16 @@ parameters:
 			message: "#^Negated boolean expression is always true\\.$#"
 			count: 3
 			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$email of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setEmail\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$emailCanonical of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setEmailCanonical\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Domain/User/Factory/UserFactory.php
 
 		-
 			message: "#^Parameter \\#1 \\$firstname of method App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:setFirstname\\(\\) expects string, string\\|null given\\.$#"
