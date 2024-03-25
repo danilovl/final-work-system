@@ -17,12 +17,14 @@ use App\Application\Exception\RuntimeException;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Form\{
     UserEditForm,
-    UserForm};
+    UserForm
+};
 use App\Domain\User\Model\UserModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface};
+    FormInterface
+};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -55,6 +57,10 @@ class UserFormFactory
                 ];
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
+                if ($user === null) {
+                    throw new RuntimeException('User is null.');
+                }
+
                 $formClass = UserEditForm::class;
                 $parameters = [
                     'action' => $this->router->generate('user_edit_ajax', [

@@ -656,11 +656,6 @@ parameters:
 			path: src/Domain/User/Factory/UserFactory.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
-			count: 1
-			path: src/Domain/User/Form/Factory/UserFormFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$email of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByEmail\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/User/Http/Ajax/UserCreateHandle.php
