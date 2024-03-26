@@ -51,6 +51,10 @@ class UserGroupFormFactory
 
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
+                if ($group === null) {
+                    throw new RuntimeException('Group is null.');
+                }
+
                 $parameters = [
                     'action' => $this->router->generate('user_group_edit_ajax', [
                         'id' => $this->hashidsService->encode($group->getId())

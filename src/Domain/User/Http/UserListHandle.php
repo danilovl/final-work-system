@@ -12,6 +12,7 @@
 
 namespace App\Domain\User\Http;
 
+use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Application\Service\{
     PaginatorService,
     SeoPageService,
@@ -52,7 +53,7 @@ readonly class UserListHandle
     {
         $user = $this->userService->getUser();
 
-        $type = $request->attributes->get('type');
+        $type = $request->attributes->getString('type');
         $openSearchTab = false;
         $showSearchTab = true;
         $workStatus = null;
@@ -67,6 +68,7 @@ readonly class UserListHandle
             $openSearchTab = true;
 
             if ($form->isValid()) {
+                /** @var WorkStatus[] $workStatus */
                 $workStatus = $form->get('status')->getData();
                 $usersQuery = $this->userFacade->getUsersQueryBySupervisor($user, $type, $workStatus);
             }

@@ -676,16 +676,6 @@ parameters:
 			path: src/Domain/User/Http/UserCreateHandle.php
 
 		-
-			message: "#^Parameter \\#2 \\$type of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:getUsersQueryBySupervisor\\(\\) expects string, mixed given\\.$#"
-			count: 2
-			path: src/Domain/User/Http/UserListHandle.php
-
-		-
-			message: "#^Parameter \\#3 \\$workStatus of method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:getUsersQueryBySupervisor\\(\\) expects App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|iterable\\|null, mixed given\\.$#"
-			count: 1
-			path: src/Domain/User/Http/UserListHandle.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\User\\\\Service\\\\UserWorkService\\:\\:getWorkBy\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
 			count: 1
 			path: src/Domain/User/Service/UserWorkService.php
@@ -699,11 +689,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/UserGroup/Factory/UserGroupFactory.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\|null\\.$#"
-			count: 1
-			path: src/Domain/UserGroup/Form/Factory/UserGroupFormFactory.php
 
 		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
