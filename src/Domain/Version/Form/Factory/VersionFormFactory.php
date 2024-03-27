@@ -72,8 +72,8 @@ class VersionFormFactory
 
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
-                if ($work === null) {
-                    throw new RuntimeException('Work must not be null for edit ajax');
+                if ($work === null || $media === null) {
+                    throw new RuntimeException('Work and media must not be null for edit ajax');
                 }
 
                 $parameters = array_merge($parameters, [

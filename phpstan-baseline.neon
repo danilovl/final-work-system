@@ -696,11 +696,6 @@ parameters:
 			path: src/Domain/Version/Factory/VersionFactory.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null\\.$#"
-			count: 1
-			path: src/Domain/Version/Form/Factory/VersionFormFactory.php
-
-		-
 			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null\\.$#"
 			count: 2
 			path: src/Domain/Version/Security/Voter/VersionVoter.php
