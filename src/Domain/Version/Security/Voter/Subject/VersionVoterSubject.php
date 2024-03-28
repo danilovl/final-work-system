@@ -17,27 +17,27 @@ use App\Domain\Work\Entity\Work;
 
 class VersionVoterSubject
 {
-    protected ?Work $work = null;
-    protected ?Media $media = null;
+    protected Work $work;
+    protected Media $media;
 
     public function getWork(): ?Work
     {
         return $this->work;
     }
 
-    public function setWork(?Work $work): self
+    public function setWork(Work $work): self
     {
         $this->work = $work;
 
         return $this;
     }
 
-    public function getMedia(): ?Media
+    public function getMedia(): Media
     {
         return $this->media;
     }
 
-    public function setMedia(?Media $media): self
+    public function setMedia(Media $media): self
     {
         $this->media = $media;
 

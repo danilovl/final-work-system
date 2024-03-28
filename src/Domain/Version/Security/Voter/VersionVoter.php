@@ -50,6 +50,10 @@ class VersionVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof VersionVoterSubject) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::CREATE->value:
                 return $this->canCreate($subject, $user);
@@ -78,7 +82,7 @@ class VersionVoter extends Voter
         $work = $versionVoterSubject->getWork();
         $media = $versionVoterSubject->getMedia();
 
-        return WorkRoleHelper::isAuthorSupervisor($work, $user) && $media->getWork()->getId() === $work->getId();
+        return WorkRoleHelper::isAuthorSupervisor($work, $user) && $media->getWorkMust()->getId() === $work->getId();
     }
 
     private function canView(VersionVoterSubject $versionVoterSubject): bool
