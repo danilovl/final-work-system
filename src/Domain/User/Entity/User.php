@@ -405,7 +405,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->firstname = $firstname;
     }
 
-    public function getLastname(): ?string
+    public function getLastname(): string
     {
         return $this->lastname;
     }

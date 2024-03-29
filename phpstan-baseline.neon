@@ -731,17 +731,7 @@ parameters:
 			path: src/Domain/Work/Elastica/WorkSearch.php
 
 		-
-			message: "#^Parameter \\#1 \\$string1 of method Symfony\\\\Polyfill\\\\Intl\\\\Icu\\\\Collator\\:\\:compare\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Elastica/WorkSearch.php
-
-		-
 			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/Work/Elastica/WorkSearch.php
-
-		-
-			message: "#^Parameter \\#2 \\$string2 of method Symfony\\\\Polyfill\\\\Intl\\\\Icu\\\\Collator\\:\\:compare\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Work/Elastica/WorkSearch.php
 
