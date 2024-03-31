@@ -826,11 +826,6 @@ parameters:
 			path: src/Domain/Work/Factory/WorkFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\WorkCategory\\\\Form\\\\DataGrid\\\\WorkCategoryDataGrid\\:\\:queryBuilderWorkCategoriesByOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Work/Form/WorkForm.php
-
-		-
 			message: "#^Using nullsafe method call on non\\-nullable type App\\\\Domain\\\\User\\\\Entity\\\\User\\. Use \\-\\> instead\\.$#"
 			count: 2
 			path: src/Domain/Work/Helper/WorkRoleHelper.php

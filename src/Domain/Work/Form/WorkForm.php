@@ -46,6 +46,7 @@ class WorkForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var User $user */
         $user = $options['user'];
 
         $builder
