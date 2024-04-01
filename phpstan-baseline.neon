@@ -826,11 +826,6 @@ parameters:
 			path: src/Domain/Work/Factory/WorkFactory.php
 
 		-
-			message: "#^Using nullsafe method call on non\\-nullable type App\\\\Domain\\\\User\\\\Entity\\\\User\\. Use \\-\\> instead\\.$#"
-			count: 2
-			path: src/Domain/Work/Helper/WorkRoleHelper.php
-
-		-
 			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Work/Security/Voter/WorkVoter.php
