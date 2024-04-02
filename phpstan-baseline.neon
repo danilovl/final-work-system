@@ -826,21 +826,6 @@ parameters:
 			path: src/Domain/Work/Factory/WorkFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Work/Security/Voter/WorkVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Work/Security/Voter/WorkVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Work/Security/Voter/WorkVoter.php
-
-		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWork\\(\\)\\.$#"
 			count: 3
 			path: src/Domain/Work/Service/WorkDetailTabService.php
