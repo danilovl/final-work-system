@@ -866,11 +866,6 @@ parameters:
 			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\|null\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Form/Factory/WorkCategoryFormFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$workCategory of method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory, mixed given\\.$#"
 			count: 1
 			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php

@@ -13,14 +13,18 @@
 namespace App\Domain\WorkCategory\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Exception\ConstantNotFoundException;
+use App\Application\Exception\{
+    RuntimeException,
+    ConstantNotFoundException
+};
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;
 use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface};
+    FormInterface
+};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -51,6 +55,10 @@ class WorkCategoryFormFactory
 
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
+                if ($workCategory === null) {
+                    throw new RuntimeException('Work category is null.');
+                }
+
                 $parameters = [
                     'action' => $this->router->generate('work_category_edit_ajax', [
                         'id' => $this->hashidsService->encode($workCategory->getId())
