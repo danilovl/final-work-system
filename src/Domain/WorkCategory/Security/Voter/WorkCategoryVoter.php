@@ -46,6 +46,10 @@ class WorkCategoryVoter extends Voter
             return false;
         }
 
+        if (!$subject instanceof WorkCategory) {
+            return false;
+        }
+
         switch ($attribute) {
             case VoterSupportConstant::EDIT->value:
                 return $this->canEdit($subject, $user);

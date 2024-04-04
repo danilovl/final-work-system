@@ -866,16 +866,6 @@ parameters:
 			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$workCategory of method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:canDelete\\(\\) expects App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory, mixed given\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$workCategory of method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory, mixed given\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php
-
-		-
 			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
 			count: 1
 			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
