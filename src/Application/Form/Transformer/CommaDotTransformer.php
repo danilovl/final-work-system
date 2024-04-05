@@ -12,22 +12,31 @@
 
 namespace App\Application\Form\Transformer;
 
+use App\Application\Exception\RuntimeException;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class CommaDotTransformer implements DataTransformerInterface
 {
     public function transform(mixed $value): string
     {
-        return $this->replace((string) $value);
+        return $this->replace($value);
     }
 
-    public function reverseTransform(mixed $value): mixed
+    public function reverseTransform(mixed $value): string
     {
-        return $this->replace((string) $value);
+        return $this->replace($value);
     }
 
-    private function replace(string $value): string
+    private function replace(mixed $value): string
     {
-        return str_replace(',', '.', $value);
+        if ($value === null) {
+            return '';
+        }
+
+        if (!is_string($value) && !is_numeric($value)) {
+            throw new RuntimeException(sprintf('"%s" is not a valid type.', gettype($value)));
+        }
+
+        return str_replace(',', '.', (string) $value);
     }
 }

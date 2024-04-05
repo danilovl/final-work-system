@@ -12,11 +12,6 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
-			count: 2
-			path: src/Application/Form/Transformer/CommaDotTransformer.php
-
-		-
-			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: src/Application/Form/Transformer/TrimTransformer.php
 
