@@ -83,7 +83,7 @@ readonly class AjaxRequestListener implements EventSubscriberInterface
         Request $request
     ): void {
         try {
-            call_user_func([$ajaxRequestMiddlewareAttribute->class, 'handle'], $request);
+            $ajaxRequestMiddlewareAttribute->class::{'handle'}($request);
         } catch (AjaxRuntimeException) {
             $event->setController($this->getControllerJsonErrorCallable());
         }

@@ -6,11 +6,6 @@ parameters:
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, array\\{string, 'handle'\\} given\\.$#"
-			count: 1
-			path: src/Application/EventListener/Middleware/AjaxRequestListener.php
-
-		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: src/Application/Form/Transformer/TrimTransformer.php
