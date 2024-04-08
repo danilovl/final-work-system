@@ -12,6 +12,7 @@
 
 namespace App\Application\GraphQL\Resolver;
 
+use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Facade\TaskFacade;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
@@ -24,8 +25,18 @@ class TaskResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'task' => fn($value, ArgumentInterface $args) => $this->taskService->find((int) $args['id']),
-                'taskList' => fn($value, ArgumentInterface $args) => $this->taskService->findAll($args['limit'] ?? null),
+                'task' => function ($value, ArgumentInterface $args): ?Task {
+                    /** @var int $id */
+                    $id = $args['id'];
+
+                    return $this->taskService->find($id);
+                },
+                'taskList' => function ($value, ArgumentInterface $args): array {
+                    /** @var int|null $limit */
+                    $limit = $args['limit'] ?? null;
+
+                    return $this->taskService->findAll($limit);
+                },
             ]
         ];
     }

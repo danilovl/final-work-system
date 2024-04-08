@@ -8,16 +8,6 @@ parameters:
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
-			path: src/Application/GraphQL/Resolver/TaskResolverMap.php
-
-		-
-			message: "#^Parameter \\#1 \\$limit of method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAll\\(\\) expects int\\|null, mixed given\\.$#"
-			count: 1
-			path: src/Application/GraphQL/Resolver/TaskResolverMap.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
 			path: src/Application/GraphQL/Resolver/UserResolverMap.php
 
 		-
