@@ -7,11 +7,6 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: src/Application/GraphQL/Resolver/UserResolverMap.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
 			path: src/Application/GraphQL/Resolver/WorkResolverMap.php
 

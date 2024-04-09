@@ -12,6 +12,7 @@
 
 namespace App\Application\GraphQL\Resolver;
 
+use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
@@ -24,7 +25,12 @@ class UserResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'user' => fn($value, ArgumentInterface $args) => $this->userService->find((int) $args['id'])
+                'user' => function ($value, ArgumentInterface $args):  ?User {
+                    /** @var int $id */
+                    $id = $args['id'];
+
+                    return $this->userService->find($id);
+                }
             ]
         ];
     }
