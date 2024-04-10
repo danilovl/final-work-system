@@ -12,10 +12,10 @@
 
 namespace App\Application\GraphQL\Resolver;
 
+use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Facade\WorkFacade;
+use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
-use ArrayObject;
-use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 
@@ -30,9 +30,24 @@ class WorkResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'work' => fn($value, ArgumentInterface $args) => $this->workFacade->find((int) $args['id']),
-                'workStatus' => fn($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) => $this->workStatusFacade->find((int) $args['id']),
-                'workStatusList' => fn($value, ArgumentInterface $args) => $this->workStatusFacade->findAll($args['limit'] ?? null)
+                'work' => function ($value, ArgumentInterface $args): ?Work {
+                    /** @var int $id */
+                    $id = $args['id'];
+
+                    return $this->workFacade->find($id);
+                },
+                'workStatus' => function ($value, ArgumentInterface $args): ?WorkStatus {
+                    /** @var int $id */
+                    $id = $args['id'];
+
+                    return $this->workStatusFacade->find($id);
+                },
+                'workStatusList' => function ($value, ArgumentInterface $args): array {
+                    /** @var int|null $limit */
+                    $limit = $args['limit'] ?? null;
+
+                    return $this->workStatusFacade->findAll($limit);
+                }
             ]
         ];
     }
