@@ -6,16 +6,6 @@ parameters:
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
-			message: "#^Parameter \\#2 \\$baseTimestamp of function strtotime expects int\\|null, int\\|false given\\.$#"
-			count: 1
-			path: src/Application/Helper/DateHelper.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, int\\|false given\\.$#"
-			count: 6
-			path: src/Application/Helper/DateHelper.php
-
-		-
 			message: "#^Cannot access offset 'czech' on mixed\\.$#"
 			count: 1
 			path: src/Application/Helper/SortFunctionHelper.php
