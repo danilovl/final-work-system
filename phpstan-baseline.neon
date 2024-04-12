@@ -6,16 +6,6 @@ parameters:
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
-			message: "#^Cannot access offset 'czech' on mixed\\.$#"
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$input of static method Symfony\\\\Component\\\\Yaml\\\\Yaml\\:\\:parse\\(\\) expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
 			message: "#^Parameter \\#1 \\$className of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
 			count: 1
 			path: src/Application/Service/EntityManagerService.php

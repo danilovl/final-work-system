@@ -14,6 +14,7 @@ namespace App\Application\Helper;
 
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use Collator;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Yaml\Yaml;
 
 class SortFunctionHelper
@@ -38,8 +39,12 @@ class SortFunctionHelper
         $a = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $a);
         /** @var string $b */
         $b = str_replace(['Ch', 'ch'], ['HZZ', 'hzz'], $b);
-        /** @var array $czechChars */
-        $czechChars = Yaml::parse(file_get_contents(self::PATH_CZECH_CHARS))['czech'] ?? [];
+
+        $file = new File(self::PATH_CZECH_CHARS);
+
+        /** @var array<string, array> $sorterChars */
+        $sorterChars = Yaml::parse($file->getContent());
+        $czechChars = $sorterChars['czech'] ?? [];
 
         $a = strtr($a, $czechChars);
         $b = strtr($b, $czechChars);
