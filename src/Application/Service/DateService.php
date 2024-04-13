@@ -18,16 +18,16 @@ readonly class DateService
 {
     public function __construct(private TranslatorInterface $translator) {}
 
-    public function getWeekDaysArray(): array
+    public function getWeekDaysArray(string $locale = null): array
     {
         return [
-            0 => $this->translator->trans('app.calendar.day.mo'),
-            1 => $this->translator->trans('app.calendar.day.tu'),
-            2 => $this->translator->trans('app.calendar.day.we'),
-            3 => $this->translator->trans('app.calendar.day.th'),
-            4 => $this->translator->trans('app.calendar.day.fr'),
-            5 => $this->translator->trans('app.calendar.day.sa'),
-            6 => $this->translator->trans('app.calendar.day.su')
+            0 => $this->translator->trans('app.calendar.day.mo', locale: $locale),
+            1 => $this->translator->trans('app.calendar.day.tu', locale: $locale),
+            2 => $this->translator->trans('app.calendar.day.we', locale: $locale),
+            3 => $this->translator->trans('app.calendar.day.th', locale: $locale),
+            4 => $this->translator->trans('app.calendar.day.fr', locale: $locale),
+            5 => $this->translator->trans('app.calendar.day.sa', locale: $locale),
+            6 => $this->translator->trans('app.calendar.day.su', locale: $locale)
         ];
     }
 }

@@ -31,10 +31,9 @@ class DateServiceTest extends KernelTestCase
     #[DataProvider('weekDaysProvider')]
     public function testGetWeekDaysArray(string $locale, array $arrayWeek): void
     {
-        $this->translator->setLocale($locale);
         $dateService = new DateService($this->translator);
 
-        $this->assertEquals($dateService->getWeekDaysArray(), $arrayWeek);
+        $this->assertEquals($dateService->getWeekDaysArray($locale), $arrayWeek);
     }
 
     public static function weekDaysProvider(): Generator

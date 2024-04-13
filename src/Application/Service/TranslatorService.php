@@ -14,20 +14,15 @@ namespace App\Application\Service;
 
 use App\Application\Constant\TranslationConstant;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TranslatorService implements TranslatorInterface
 {
-    private TranslatorInterface|Translator $translator;
-
     public function __construct(
-        TranslatorInterface $translator,
+        private readonly TranslatorInterface $translator,
         private readonly RequestStack $requestStack,
-        private readonly string $locale,
-    ) {
-        $this->translator = $translator;
-    }
+        private readonly string $locale
+    ) {}
 
     public function trans(
         string $id,
@@ -41,11 +36,6 @@ class TranslatorService implements TranslatorInterface
         }
 
         return $this->translator->trans($id, $parameters, $domain, $locale);
-    }
-
-    public function setLocale(string $locale): void
-    {
-        $this->translator->setLocale($locale);
     }
 
     public function getLocale(): string
