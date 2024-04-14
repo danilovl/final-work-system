@@ -26,11 +26,6 @@ parameters:
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\:\\:\\$rules type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ApiUserRule\\\\Entity\\\\ApiUserRule\\>\\.$#"
-			count: 1
-			path: src/Domain/ApiUser/Entity/ApiUser.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:findByApiKey\\(\\) should return App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/ApiUser/Facade/ApiUserFacade.php

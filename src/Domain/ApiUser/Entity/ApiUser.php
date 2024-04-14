@@ -12,8 +12,10 @@
 
 namespace App\Domain\ApiUser\Entity;
 
-use App\Application\Traits\Entity\IdTrait;
-use App\Application\Traits\Entity\CreateUpdateAbleTrait;
+use App\Application\Traits\Entity\{
+    IdTrait,
+    CreateUpdateAbleTrait
+};
 use App\Domain\ApiUser\Repository\ApiUserRepository;
 use App\Domain\ApiUserRule\Entity\ApiUserRule;
 use Doctrine\Common\Collections\{
@@ -44,6 +46,9 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'api_key', type: Types::STRING, length: 32, nullable: false)]
     protected string $apiKey;
 
+    /**
+     * @var Collection<ApiUserRule>>
+     */
     #[ORM\OneToMany(mappedBy: 'apiUser', targetEntity: ApiUserRule::class, cascade: ['persist', 'remove'])]
     protected Collection $rules;
 
