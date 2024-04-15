@@ -54,6 +54,7 @@ class Article
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
+    /** @var Collection<ArticleCategory> */
     #[ORM\ManyToMany(targetEntity: ArticleCategory::class, inversedBy: 'articles', fetch: 'EAGER')]
     #[ORM\JoinTable(name: 'article_to_article_category')]
     #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]

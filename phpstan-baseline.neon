@@ -31,11 +31,6 @@ parameters:
 			path: src/Domain/ApiUser/Facade/ApiUserFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\Article\\\\Entity\\\\Article\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ArticleCategory\\\\Entity\\\\ArticleCategory\\>\\.$#"
-			count: 1
-			path: src/Domain/Article/Entity/Article.php
-
-		-
 			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\User\\\\Entity\\\\User\\|null\\.$#"
 			count: 1
 			path: src/Domain/ArticleCategory/Entity/ArticleCategory.php
