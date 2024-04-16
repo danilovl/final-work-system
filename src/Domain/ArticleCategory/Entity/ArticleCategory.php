@@ -51,6 +51,7 @@ class ArticleCategory
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
+    /** @var Collection<Article> */
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $articles;
@@ -87,7 +88,7 @@ class ArticleCategory
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
