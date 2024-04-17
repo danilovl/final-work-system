@@ -12,25 +12,24 @@
 
 namespace App\Domain\Comment\Model;
 
-use App\Application\Traits\Model\ContentAwareTrait;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 
 class CommentModel
 {
-    use ContentAwareTrait;
-
-    public ?User $owner = null;
-    public ?Event $event = null;
+    public function __construct(
+        public User $owner,
+        public Event $event,
+        public string $content = ''
+    ) {}
 
     public static function fromComment(Comment $comment): self
     {
-        $model = new self;
-        $model->content = $comment->getContent();
-        $model->owner = $comment->getOwner();
-        $model->event = $comment->getEvent();
-
-        return $model;
+        return new self(
+            $comment->getOwner(),
+            $comment->getEvent(),
+            $comment->getContent()
+        );
     }
 }

@@ -54,9 +54,7 @@ readonly class EventDetailHandle
         $eventCommentExist = $this->commentFacade
             ->getCommentByOwnerEvent($user, $event);
 
-        $eventCommentModel = new CommentModel;
-        $eventCommentModel->owner = $user;
-        $eventCommentModel->event = $event;
+        $eventCommentModel = new CommentModel($user, $event);
 
         if ($eventCommentExist !== null) {
             $eventCommentModel = CommentModel::fromComment($eventCommentExist);

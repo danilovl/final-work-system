@@ -18,7 +18,6 @@ use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 use DateTime;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactory;
@@ -33,7 +32,7 @@ class CommentFormTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    private function getUserMock(int $id): MockObject
+    private function getUserMock(int $id): User
     {
         $user = $this->createMock(User::class);
         $user->method('getId')
@@ -42,7 +41,7 @@ class CommentFormTest extends KernelTestCase
         return $user;
     }
 
-    private function getEventMock(bool $isOwner, string $dateTime): MockObject
+    private function getEventMock(bool $isOwner, string $dateTime): Event
     {
         $event = $this->createMock(Event::class);
         $event->expects($this->any())
@@ -64,7 +63,10 @@ class CommentFormTest extends KernelTestCase
         array $submitData,
         bool $isContentShow
     ): void {
-        $commentModel = new CommentModel;
+        $commentModel = new CommentModel(
+            $this->getUserMock($userId),
+            $this->getEventMock($isOwner, $dateTime)
+        );
 
         $form = $this->formFactory->create(CommentForm::class, $commentModel, [
             'user' => $this->getUserMock($userId),

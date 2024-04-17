@@ -36,16 +36,6 @@ parameters:
 			path: src/Domain/Comment/Facade/CommentFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$event of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setEvent\\(\\) expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Comment/Factory/CommentFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Comment/Factory/CommentFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$user of class App\\\\Domain\\\\Comment\\\\Form\\\\EventSubscriber\\\\EventCommentSubscriber constructor expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
 			count: 1
 			path: src/Domain/Comment/Form/CommentForm.php
