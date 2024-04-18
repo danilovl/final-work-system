@@ -37,7 +37,12 @@ class CommentForm extends AbstractType
             ]
         ]);
 
-        $builder->addEventSubscriber(new EventCommentSubscriber($options['user'], $options['event']));
+        /** @var User $user */
+        $user = $options['user'];
+        /** @var Event $event */
+        $event = $options['event'];
+
+        $builder->addEventSubscriber(new EventCommentSubscriber($user, $event));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

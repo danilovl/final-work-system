@@ -36,16 +36,6 @@ parameters:
 			path: src/Domain/Comment/Facade/CommentFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of class App\\\\Domain\\\\Comment\\\\Form\\\\EventSubscriber\\\\EventCommentSubscriber constructor expects App\\\\Domain\\\\User\\\\Entity\\\\User, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Comment/Form/CommentForm.php
-
-		-
-			message: "#^Parameter \\#2 \\$event of class App\\\\Domain\\\\Comment\\\\Form\\\\EventSubscriber\\\\EventCommentSubscriber constructor expects App\\\\Domain\\\\Event\\\\Entity\\\\Event, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Comment/Form/CommentForm.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\:\\:\\$messages type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\>\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Entity/Conversation.php
