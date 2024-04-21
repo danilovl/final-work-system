@@ -12,26 +12,9 @@
 
 namespace App\Domain\ConversationMessage\Model;
 
-use App\Application\Traits\Model\ContentAwareTrait;
-
 class ConversationComposeMessageModel
 {
-    use ContentAwareTrait;
-
     public ?string $name = null;
-    private iterable $conversation = [];
-
-    public function getConversation(): iterable
-    {
-        return $this->conversation;
-    }
-
-    public function setConversation(mixed $conversation): void
-    {
-        if (!is_iterable($conversation)) {
-            $conversation = [$conversation];
-        }
-
-        $this->conversation = $conversation;
-    }
+    public array $conversation = [];
+    public string $content;
 }

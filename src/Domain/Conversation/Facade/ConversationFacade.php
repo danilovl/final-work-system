@@ -131,8 +131,7 @@ readonly class ConversationFacade
         $conversations = $this->queryConversationsByParticipantUser($user)
             ->getResult();
 
-        /** @var array $modelConversation */
-        $modelConversation = $conversationComposeMessageModel->getConversation();
+        $modelConversation = $conversationComposeMessageModel->conversation;
         $content = $conversationComposeMessageModel->content;
         $createNewConversation = false;
 

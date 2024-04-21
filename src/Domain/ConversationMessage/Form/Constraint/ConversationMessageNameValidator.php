@@ -32,7 +32,7 @@ class ConversationMessageNameValidator extends ConstraintValidator
         $form = $this->context->getRoot();
         /** @var ConversationComposeMessageModel $data */
         $data = $form->getData();
-        $conversations = iterator_to_array($data->getConversation());
+        $conversations = $data->conversation;
 
         if (empty($value) && count($conversations) > 1) {
             $this->context

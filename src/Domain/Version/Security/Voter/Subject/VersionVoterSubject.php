@@ -20,7 +20,7 @@ class VersionVoterSubject
     protected Work $work;
     protected Media $media;
 
-    public function getWork(): ?Work
+    public function getWork(): Work
     {
         return $this->work;
     }

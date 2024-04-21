@@ -17,7 +17,6 @@ use App\Domain\ConversationMessage\Form\Constraint\{
     ConversationMessageNameValidator
 };
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
-use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\FormInterface;
@@ -34,7 +33,7 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
     private function getFormMock(array $data): MockObject
     {
         $conversationComposeMessageModel = new ConversationComposeMessageModel;
-        $conversationComposeMessageModel->conversation = new ArrayCollection($data['conversation']);
+        $conversationComposeMessageModel->conversation = $data['conversation'];
 
         $mockObject = $this->createMock(FormInterface::class);
         $mockObject->expects($this->any())

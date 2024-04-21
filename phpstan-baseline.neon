@@ -66,16 +66,6 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\ConversationMessageStatusType\\\\Entity\\\\ConversationMessageStatusType\\:\\:\\$conversationMessageStatus type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\>\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\:\\:\\$conversations type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\>\\.$#"
 			count: 1
 			path: src/Domain/ConversationType/Entity/ConversationType.php
