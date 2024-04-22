@@ -38,6 +38,7 @@ class ConversationType
     use ConstantAwareTrait;
     use CreateUpdateAbleTrait;
 
+    /** @var Collection<Conversation> */
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Conversation::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $conversations;
