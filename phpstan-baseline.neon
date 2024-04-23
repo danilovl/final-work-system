@@ -76,16 +76,6 @@ parameters:
 			path: src/Domain/EmailNotificationQueue/Facade/EmailNotificationQueueFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$comment type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\>\\.$#"
-			count: 1
-			path: src/Domain/Event/Entity/Event.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Event\\\\Entity\\\\Event\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
-			count: 1
-			path: src/Domain/Event/Entity/Event.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Domain/Event/Facade/EventFacade.php
