@@ -54,6 +54,7 @@ class EventAddress
     #[Gedmo\Versioned]
     private bool $skype = false;
 
+    /** @var Collection<Event> */
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Event::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $events;

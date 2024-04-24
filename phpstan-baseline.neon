@@ -91,11 +91,6 @@ parameters:
 			path: src/Domain/Event/Facade/EventFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
-			count: 1
-			path: src/Domain/EventAddress/Entity/EventAddress.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$latitude type mapping mismatch\\: database can contain string\\|null but property expects float\\|null\\.$#"
 			count: 1
 			path: src/Domain/EventAddress/Entity/EventAddress.php
