@@ -23,7 +23,7 @@ trait LocationTrait
     #[ORM\Column(name: 'longitude', type: Types::DECIMAL, precision: 10, scale: 7, nullable: true)]
     private ?float $longitude = null;
 
-    public function getLatitude(): ?float
+    public function getLatitude(): float
     {
         return (float) $this->latitude;
     }
@@ -33,7 +33,7 @@ trait LocationTrait
         $this->latitude = (float) $latitude;
     }
 
-    public function getLongitude(): ?float
+    public function getLongitude(): float
     {
         return (float) $this->longitude;
     }

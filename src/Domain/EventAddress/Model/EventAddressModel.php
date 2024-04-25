@@ -12,20 +12,18 @@
 
 namespace App\Domain\EventAddress\Model;
 
-use App\Application\Traits\Model\{
-    SimpleInformationTrait};
-use App\Application\Traits\Model\LocationTrait;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\User\Entity\User;
 
 class EventAddressModel
 {
-    use SimpleInformationTrait;
-    use LocationTrait;
-
+    public string $name;
+    public ?string $description = null;
     public bool $skype = false;
     public ?string $street = null;
-    public ?User $owner = null;
+    public User $owner;
+    public float $latitude;
+    public float $longitude;
 
     public static function fromEventAddress(EventAddress $eventAddress): self
     {
