@@ -45,6 +45,7 @@ class EventSchedule
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
+    /** @var Collection<EventScheduleTemplate> */
     #[ORM\OneToMany(mappedBy: 'schedule', targetEntity: EventScheduleTemplate::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $templates;

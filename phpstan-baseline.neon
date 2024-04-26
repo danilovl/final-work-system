@@ -106,11 +106,6 @@ parameters:
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:\\$templates type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\>\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Entity/EventSchedule.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
