@@ -106,16 +106,6 @@ parameters:
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\EventSchedule\\\\Entity\\\\EventSchedule\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Factory/EventScheduleFactory.php
-
-		-
 			message: "#^Parameter \\#3 \\$startDate of method App\\\\Domain\\\\EventSchedule\\\\Factory\\\\EventScheduleFactory\\:\\:cloneEventSchedule\\(\\) expects DateTime, DateTime\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventSchedule/Http/Ajax/EventScheduleCloneHandle.php

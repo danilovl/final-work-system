@@ -12,18 +12,18 @@
 
 namespace App\Domain\EventSchedule\Model;
 
-use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection};
+    Collection,
+    ArrayCollection
+};
 
 class EventScheduleModel
 {
-    use SimpleInformationTrait;
-
-    public ?User $owner = null;
+    public string $name;
+    public ?string $description = null;
+    public User $owner;
     public Collection $templates;
 
     public function __construct()
