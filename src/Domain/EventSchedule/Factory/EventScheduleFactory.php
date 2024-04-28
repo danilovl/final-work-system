@@ -18,7 +18,6 @@ use App\Application\Helper\DateHelper;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
-use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\User\Entity\User;
 use DateTime;
 
@@ -31,7 +30,6 @@ class EventScheduleFactory extends BaseModelFactory
     ): void {
         $templates = $eventSchedule->getTemplates();
 
-        /** @var EventScheduleTemplate $template */
         foreach ($templates as $template) {
             $event = new Event;
             $event->setType($template->getType());
@@ -52,11 +50,9 @@ class EventScheduleFactory extends BaseModelFactory
                 $template->getStart()->format(DateFormatConstant::TIME->value)
             );
 
-            /** @var string $eventStartDate */
             $eventStartDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
             $event->setStart(new DateTime($eventStartDate));
 
-            /** @var string $eventEndDate */
             $eventEndDate = DateHelper::plusDayDate($dateFormat, $template->getDay());
             $event->setEnd(new DateTime($eventEndDate));
 

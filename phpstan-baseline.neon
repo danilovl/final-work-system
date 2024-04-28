@@ -106,16 +106,6 @@ parameters:
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
 
 		-
-			message: "#^Parameter \\#3 \\$startDate of method App\\\\Domain\\\\EventSchedule\\\\Factory\\\\EventScheduleFactory\\:\\:cloneEventSchedule\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Http/Ajax/EventScheduleCloneHandle.php
-
-		-
-			message: "#^Parameter \\#3 \\$startDate of method App\\\\Domain\\\\EventSchedule\\\\Factory\\\\EventScheduleFactory\\:\\:cloneEventSchedule\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Http/EventScheduleCloneHandle.php
-
-		-
 			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
 			count: 1
 			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php

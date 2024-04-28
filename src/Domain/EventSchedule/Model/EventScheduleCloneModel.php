@@ -16,5 +16,5 @@ use DateTime;
 
 class EventScheduleCloneModel
 {
-    public ?DateTime $start = null;
+    public DateTime $start;
 }
