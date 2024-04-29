@@ -106,36 +106,6 @@ parameters:
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$address of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setAddress\\(\\) expects App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress, App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$day of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setDay\\(\\) expects int, int\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$end of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setEnd\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$start of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setStart\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\EventScheduleTemplate\\\\Entity\\\\EventScheduleTemplate\\:\\:setType\\(\\) expects App\\\\Domain\\\\EventType\\\\Entity\\\\EventType, App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\|null given\\.$#"
-			count: 1
-			path: src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
 			count: 1
 			path: src/Domain/EventType/Entity/EventType.php

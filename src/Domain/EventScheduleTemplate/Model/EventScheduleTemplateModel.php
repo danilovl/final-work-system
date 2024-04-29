@@ -13,29 +13,15 @@
 namespace App\Domain\EventScheduleTemplate\Model;
 
 use App\Domain\EventAddress\Entity\EventAddress;
-use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\EventType\Entity\EventType;
 use DateTime;
 
 class EventScheduleTemplateModel
 {
-    public ?EventType $type = null;
-    public ?int $day = null;
-    public ?string $name = null;
-    public ?EventAddress $address = null;
-    public ?DateTime $start = null;
-    public ?DateTime $end = null;
-
-    public static function fromEventScheduleTemplate(EventScheduleTemplate $eventScheduleTemplate): self
-    {
-        $model = new self;
-        $model->type = $eventScheduleTemplate->getType();
-        $model->day = $eventScheduleTemplate->getDay();
-        $model->name = $eventScheduleTemplate->getName();
-        $model->address = $eventScheduleTemplate->getAddress();
-        $model->start = $eventScheduleTemplate->getStart();
-        $model->end = $eventScheduleTemplate->getEnd();
-
-        return $model;
-    }
+    public EventType $type;
+    public int $day;
+    public string $name;
+    public EventAddress $address;
+    public DateTime $start;
+    public DateTime $end;
 }
