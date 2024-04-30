@@ -47,6 +47,7 @@ class EventType
     #[Gedmo\Versioned]
     private bool $registrable = false;
 
+    /** @var Collection<Event> */
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Event::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $events;

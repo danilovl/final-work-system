@@ -106,11 +106,6 @@ parameters:
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\EventType\\\\Entity\\\\EventType\\:\\:\\$events type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\.$#"
-			count: 1
-			path: src/Domain/EventType/Entity/EventType.php
-
-		-
 			message: "#^Parameter \\#2 \\$array of function array_map expects array, array\\<int, string\\>\\|false given\\.$#"
 			count: 1
 			path: src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php
