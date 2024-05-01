@@ -129,7 +129,10 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         foreach ($finder as $folder) {
             if (!in_array($folder->getBasename(), $mediaTypeFolders, true)) {
                 $realPath = $folder->getRealPath();
-                array_map('unlink', glob("$realPath/*.*"));
+                /** @var array $files */
+                $files = glob("$realPath/*.*");
+
+                array_map('unlink', $files);
                 $removeFolders[] = $realPath;
             }
 
