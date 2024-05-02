@@ -106,16 +106,6 @@ parameters:
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\>\\.$#"
-			count: 1
-			path: src/Domain/Media/Entity/Media.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
-			count: 1
-			path: src/Domain/Media/Entity/Media.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Domain/Media/Facade/MediaFacade.php

@@ -69,6 +69,7 @@ class Media
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private MediaMimeType $mimeType;
 
+    /** @var Collection<MediaCategory> */
     #[ORM\ManyToMany(targetEntity: MediaCategory::class, inversedBy: 'medias')]
     #[ORM\JoinTable(name: 'media_to_media_category')]
     #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
@@ -99,6 +100,7 @@ class Media
 
     private ?UploadedFile $uploadMedia = null;
 
+    /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(mappedBy: 'media', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
