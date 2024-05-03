@@ -40,6 +40,7 @@ class MediaCategory
     use CreateUpdateAbleTrait;
     use IsOwnerTrait;
 
+    /** @var Collection<Media> */
     #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;

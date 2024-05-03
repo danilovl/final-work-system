@@ -171,11 +171,6 @@ parameters:
 			path: src/Domain/Media/Factory/MediaFactory.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
-			count: 1
-			path: src/Domain/MediaCategory/Entity/MediaCategory.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwner\\(\\) should return array but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
