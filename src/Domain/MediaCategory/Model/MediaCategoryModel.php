@@ -12,15 +12,14 @@
 
 namespace App\Domain\MediaCategory\Model;
 
-use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\User\Entity\User;
 
 class MediaCategoryModel
 {
-    use SimpleInformationTrait;
-
-    public ?User $owner = null;
+    public string $name;
+    public ?string $description = null;
+    public User $owner;
 
     public static function fromMediaCategory(MediaCategory $mediaCategory): self
     {

@@ -181,16 +181,6 @@ parameters:
 			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/MediaCategory/Factory/MediaCategoryFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\MediaCategory\\\\Entity\\\\MediaCategory\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/MediaCategory/Factory/MediaCategoryFactory.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
 			count: 1
 			path: src/Domain/MediaMimeType/Entity/MediaMimeType.php
