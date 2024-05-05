@@ -47,6 +47,7 @@ class MediaMimeType
     #[Gedmo\Versioned]
     private ?string $extension = null;
 
+    /** @var Collection<Media> */
     #[ORM\OneToMany(mappedBy: 'mimeType', targetEntity: Media::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;

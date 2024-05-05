@@ -181,11 +181,6 @@ parameters:
 			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
-			count: 1
-			path: src/Domain/MediaMimeType/Entity/MediaMimeType.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
 			count: 1
 			path: src/Domain/MediaType/Entity/MediaType.php
