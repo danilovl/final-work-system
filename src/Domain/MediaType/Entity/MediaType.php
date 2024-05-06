@@ -44,6 +44,7 @@ class MediaType
     #[Gedmo\Versioned]
     private string $folder;
 
+    /** @var Collection<Media> */
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Media::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;
