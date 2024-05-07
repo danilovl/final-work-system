@@ -181,11 +181,6 @@ parameters:
 			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:\\$hashedToken type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Entity/ResetPassword.php
-
-		-
 			message: "#^Cannot call method getCreatedAt\\(\\) on mixed\\.$#"
 			count: 1
 			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php

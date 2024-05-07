@@ -35,7 +35,7 @@ class ResetPassword
     private User $user;
 
     #[ORM\Column(name: 'hashed_token', type: Types::STRING, length: 100, unique: true, nullable: false)]
-    private ?string $hashedToken = null;
+    private string $hashedToken;
 
     #[ORM\Column(name: 'expires_at', type: Types::DATETIME_MUTABLE, nullable: false)]
     private DateTime $expiresAt;
@@ -50,7 +50,7 @@ class ResetPassword
         $this->user = $user;
     }
 
-    public function getHashedToken(): ?string
+    public function getHashedToken(): string
     {
         return $this->hashedToken;
     }
