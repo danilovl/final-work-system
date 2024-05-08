@@ -196,21 +196,6 @@ parameters:
 			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$expiresAt of method App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:setExpiresAt\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$hashedToken of method App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:setHashedToken\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\:\\:setUser\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Factory/ResetPasswordFactory.php
-
-		-
 			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php

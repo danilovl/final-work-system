@@ -57,10 +57,10 @@ readonly class ResetPasswordService
         $verifier = $verifier ?? HashHelper::generateDefaultHash();
         $encodedData = json_encode([$verifier, $user->getId(), $expiresAt->getTimestamp()]);
 
-        $resetPasswordModel = new ResetPasswordTokenModel;
-        $resetPasswordModel->hashedToken = HashHelper::generateResetPasswordHashedToken($encodedData, $this->cryptographicallySecureKey);
+        $resetPasswordTokenModel = new ResetPasswordTokenModel;
+        $resetPasswordTokenModel->hashedToken = HashHelper::generateResetPasswordHashedToken($encodedData, $this->cryptographicallySecureKey);
 
-        return $resetPasswordModel;
+        return $resetPasswordTokenModel;
     }
 
     public function generateResetToken(User $user): ResetPassword

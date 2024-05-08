@@ -17,7 +17,7 @@ use DateTime;
 
 class ResetPasswordModel
 {
-    public ?User $user;
-    public ?string $hashedToken;
-    public ?DateTime $expiresAt;
+    public User $user;
+    public string $hashedToken;
+    public DateTime $expiresAt;
 }

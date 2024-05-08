@@ -14,6 +14,5 @@ namespace App\Domain\ResetPassword\Model;
 
 class ResetPasswordTokenModel
 {
-    public ?string $selector;
-    public ?string $hashedToken;
+    public string $hashedToken;
 }
