@@ -55,6 +55,7 @@ readonly class ResetPasswordService
         string $verifier = null
     ): ResetPasswordTokenModel {
         $verifier = $verifier ?? HashHelper::generateDefaultHash();
+        /** @var string $encodedData */
         $encodedData = json_encode([$verifier, $user->getId(), $expiresAt->getTimestamp()]);
 
         $resetPasswordTokenModel = new ResetPasswordTokenModel;
