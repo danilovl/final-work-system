@@ -201,11 +201,6 @@ parameters:
 			path: src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\:\\:\\$recipient type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEventRecipient\\\\Entity\\\\SystemEventRecipient\\>\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Entity/SystemEvent.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/Facade/SystemEventFacade.php
