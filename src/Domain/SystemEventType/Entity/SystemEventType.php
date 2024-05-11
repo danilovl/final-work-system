@@ -43,6 +43,7 @@ class SystemEventType
     #[Gedmo\Versioned]
     private string $group;
 
+    /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: SystemEvent::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
