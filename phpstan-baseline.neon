@@ -211,11 +211,6 @@ parameters:
 			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
-			count: 1
-			path: src/Domain/Task/Entity/Task.php
-
-		-
 			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
 			count: 1
 			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
@@ -244,21 +239,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAllByOwnerComplete\\(\\) should return array\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\> but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Task/Facade/TaskFacade.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Task/Factory/TaskFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Task/Factory/TaskFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$work of method App\\\\Domain\\\\Task\\\\Entity\\\\Task\\:\\:setWork\\(\\) expects App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Task/Factory/TaskFactory.php
 
 		-
 			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Task\\\\Entity\\\\Task\\|null\\.$#"

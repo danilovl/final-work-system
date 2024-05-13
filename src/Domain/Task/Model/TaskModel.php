@@ -12,8 +12,6 @@
 
 namespace App\Domain\Task\Model;
 
-use App\Application\Traits\Model\{
-    SimpleInformationTrait};
 use App\Application\Traits\Model\ActiveTrait;
 use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
@@ -23,13 +21,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class TaskModel
 {
-    use SimpleInformationTrait;
     use ActiveTrait;
 
+    public string $name;
+    public ?string $description = null;
     public bool $complete = false;
     public ?DateTime $deadline = null;
-    public ?User $owner = null;
-    public ?Work $work = null;
+    public User $owner;
+    public Work $work;
     public iterable|ArrayCollection|null $works = null;
 
     public static function fromTask(Task $task): self
