@@ -135,6 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'salt', type: Types::STRING, nullable: true)]
     private ?string $salt = null;
 
+    /** @var Collection<Group>*/
     #[ORM\ManyToMany(targetEntity: Group::class, inversedBy: 'users')]
     #[ORM\JoinTable(name: 'user_to_user_group')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
@@ -161,6 +162,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'message_signature', type: Types::STRING, nullable: true)]
     private ?string $messageSignature = null;
 
+    /** @var Collection<Media> */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Media::class, cascade: ['persist', 'remove'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $mediaOwner;

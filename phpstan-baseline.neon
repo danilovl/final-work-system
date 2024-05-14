@@ -251,16 +251,6 @@ parameters:
 			path: src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$groups type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\>\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\User\\\\Entity\\\\User\\:\\:\\$mediaOwner type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
-			count: 1
-			path: src/Domain/User/Entity/User.php
-
-		-
 			message: "#^Cannot call method getQuery\\(\\) on Doctrine\\\\ORM\\\\QueryBuilder\\|null\\.$#"
 			count: 3
 			path: src/Domain/User/Facade/UserFacade.php

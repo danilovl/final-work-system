@@ -46,6 +46,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
         $resetPassword = new ResetPassword;
         $resetPassword->setUser($user);
+        $resetPassword->setHashedToken('hashed');
 
         $event = new ResetPasswordGenericEvent($resetPassword, 1000);
 
