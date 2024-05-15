@@ -16,5 +16,6 @@ parameters:
         - src/Application/Command
         - src/Domain/User/Command/
         - tests/bootstrap.php
+    treatPhpDocTypesAsCertain: false
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false

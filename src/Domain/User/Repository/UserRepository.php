@@ -111,7 +111,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('enable', $enable);
     }
 
-    public function oneByUsername(string $username, ?bool $enable = null): ?QueryBuilder
+    public function oneByUsername(string $username, ?bool $enable = null): QueryBuilder
     {
         $builder = $this->createQueryBuilder('user')
             ->andWhere('user.username = :username')
@@ -125,7 +125,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $builder;
     }
 
-    public function oneByEmail(string $email, ?bool $enable = null): ?QueryBuilder
+    public function oneByEmail(string $email, ?bool $enable = null): QueryBuilder
     {
         $builder = $this->createQueryBuilder('user')
             ->andWhere('user.email = :email')
@@ -138,7 +138,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $builder;
     }
 
-    public function oneByToken(string $username, string $token, ?bool $enable = null): ?QueryBuilder
+    public function oneByToken(string $username, string $token, ?bool $enable = null): QueryBuilder
     {
         $builder = $this->createQueryBuilder('user')
             ->andWhere('user.token = :token')
