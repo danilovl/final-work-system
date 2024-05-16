@@ -18,26 +18,26 @@ use Doctrine\Common\Collections\Collection;
 class UserModel
 {
     public ?string $degreeBefore = null;
-    public ?string $firstName = null;
-    public ?string $lastName = null;
+    public string $firstName;
+    public string $lastName;
     public ?string $degreeAfter = null;
     public ?string $phone = null;
     public ?string $skype = null;
-    public ?string $email = null;
-    public ?string $emailCanonical = null;
-    public ?string $username = null;
+    public string $email;
+    public string $emailCanonical;
+    public string $username;
     public ?string $usernameCanonical = null;
     public ?string $salt = null;
-    public ?string $password = null;
+    public string $password;
     public ?string $plainPassword = null;
     public ?string $messageGreeting = null;
     public ?string $messageSignature = null;
     public ?string $locale = null;
     public ?string $role = null;
-    public ?array $roles = null;
+    public array $roles = [];
     public bool $enable = false;
     public bool $enabledEmailNotification = true;
-    public ?Collection $groups = null;
+    public Collection $groups;
 
     public static function fromUser(User $user): self
     {

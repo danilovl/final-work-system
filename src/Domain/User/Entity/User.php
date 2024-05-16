@@ -397,7 +397,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         // $this->plainPassword = null;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
@@ -512,7 +512,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->usernameCanonical = $usernameCanonical;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -522,7 +522,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->email = $email;
     }
 
-    public function getEmailCanonical(): ?string
+    public function getEmailCanonical(): string
     {
         return $this->emailCanonical;
     }
