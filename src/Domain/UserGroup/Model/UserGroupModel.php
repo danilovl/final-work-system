@@ -16,7 +16,7 @@ use App\Domain\UserGroup\Entity\Group;
 
 class UserGroupModel
 {
-    public ?string $name = null;
+    public string $name;
 
     public static function fromGroup(Group $group): self
     {

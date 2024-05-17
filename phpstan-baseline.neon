@@ -276,11 +276,6 @@ parameters:
 			path: src/Domain/UserGroup/Entity/Group.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/UserGroup/Factory/UserGroupFactory.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Version/Factory/VersionFactory.php
