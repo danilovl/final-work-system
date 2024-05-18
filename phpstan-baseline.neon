@@ -271,11 +271,6 @@ parameters:
 			path: src/Domain/User/Service/UserWorkService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\UserGroup\\\\Entity\\\\Group\\:\\:\\$users type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\>\\.$#"
-			count: 1
-			path: src/Domain/UserGroup/Entity/Group.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\Media\\\\Entity\\\\Media\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Version/Factory/VersionFactory.php

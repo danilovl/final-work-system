@@ -36,6 +36,7 @@ class Group
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     protected string $name;
 
+    /** @var Collection<User> */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'groups')]
     protected Collection $users;
 
