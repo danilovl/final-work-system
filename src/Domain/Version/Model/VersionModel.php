@@ -12,14 +12,13 @@
 
 namespace App\Domain\Version\Model;
 
-use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class VersionModel
 {
-    use SimpleInformationTrait;
-
+    public string $name;
+    public ?string $description = null;
     public ?UploadedFile $uploadMedia = null;
 
     public static function fromMedia(Media $media): self
