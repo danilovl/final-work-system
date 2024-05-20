@@ -64,7 +64,10 @@ class WidgetManagerService implements WidgetManagerInterface
     {
         $widget = $this->widgets[$name] ?? null;
         if ($widget !== null) {
-            return $this->container->get($widget);
+            /** @var WidgetInterface $widgetService */
+            $widgetService = $this->container->get($widget);
+
+            return $widgetService;
         }
 
         throw new InvalidArgumentException(sprintf('Widget "%s" not registered', $name));

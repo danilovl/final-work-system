@@ -271,11 +271,6 @@ parameters:
 			path: src/Domain/User/Service/UserWorkService.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:getWidget\\(\\) should return App\\\\Application\\\\Interfaces\\\\Widget\\\\WidgetInterface but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Widget/Service/WidgetManagerService.php
-
-		-
 			message: "#^While loop condition is always true\\.$#"
 			count: 1
 			path: src/Domain/Widget/Service/WidgetStreamService.php
