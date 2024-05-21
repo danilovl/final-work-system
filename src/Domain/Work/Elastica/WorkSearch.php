@@ -38,9 +38,10 @@ readonly class WorkSearch
         $works = new ArrayCollection($works);
 
         $collator = new Collator('cs_CZ.UTF-8');
+        /** @var ArrayIterator $iterator */
         $iterator = $works->getIterator();
 
-        $iterator->uasort(static function (Work $first, Work $second) use ($collator): int|false {
+        $iterator->uasort(static function (Work $first, Work $second) use ($collator): int {
             return $collator->compare(
                 $first->getAuthor()->getLastname(),
                 $second->getAuthor()->getLastname()
@@ -87,7 +88,10 @@ readonly class WorkSearch
         $filter = [];
         $filterDates = [];
 
-        foreach ($form->getData() as $field => $value) {
+        /** @var array $formData */
+        $formData = $form->getData();
+
+        foreach ($formData as $field => $value) {
             if (empty($value) || (is_iterable($value) && count($value) === 0)) {
                 continue;
             }
@@ -98,7 +102,7 @@ readonly class WorkSearch
                 foreach ($value as $item) {
                     if ($field === 'deadline' and $item instanceof DateTimeInterface) {
                         $filedValues[] = $item->format(DateFormatConstant::DATE->value);
-                    } elseif (is_object($item)) {
+                    } elseif (is_object($item) && method_exists($item, 'getId')) {
                         $filedValues[] = $item->getId();
                     }
                 }
