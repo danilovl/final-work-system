@@ -291,36 +291,6 @@ parameters:
 			path: src/Domain/Work/Elastica/WorkSearch.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$categories type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$conversations type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$eventParticipants type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\EventParticipant\\\\Entity\\\\EventParticipant\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$medias type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$systemEvents type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\SystemEvent\\\\Entity\\\\SystemEvent\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:\\$tasks type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\>\\.$#"
-			count: 1
-			path: src/Domain/Work/Entity/Work.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Domain/Work/Facade/WorkFacade.php

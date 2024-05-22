@@ -76,6 +76,7 @@ class Work
     #[ORM\JoinColumn(name: 'consultant_id', referencedColumnName: 'id', nullable: true)]
     private ?User $consultant = null;
 
+    /** @var Collection<WorkCategory> */
     #[ORM\ManyToMany(targetEntity: WorkCategory::class, inversedBy: 'works')]
     #[ORM\JoinTable(name: 'work_to_work_category')]
     #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
@@ -91,12 +92,15 @@ class Work
     #[Gedmo\Versioned]
     private ?string $shortcut = null;
 
+    /** @var Collection<Task> */
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Task::class)]
     private Collection $tasks;
 
+    /** @var Collection<Media> */
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Media::class)]
     private Collection $medias;
 
+    /** @var Collection<SystemEvent> */
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: SystemEvent::class)]
     private Collection $systemEvents;
 
@@ -108,9 +112,11 @@ class Work
     #[Gedmo\Versioned]
     private ?DateTime $deadlineProgram = null;
 
+    /** @var Collection<Conversation> */
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: Conversation::class)]
     private Collection $conversations;
 
+    /** @var Collection<EventParticipant> */
     #[ORM\OneToMany(mappedBy: 'work', targetEntity: EventParticipant::class)]
     private Collection $eventParticipants;
 
