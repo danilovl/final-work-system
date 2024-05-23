@@ -12,30 +12,29 @@
 
 namespace App\Domain\Work\Model;
 
-use App\Application\Traits\Model\TitleAwareTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
 use DateTime;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection};
+    Collection,
+    ArrayCollection
+};
 
 class WorkModel
 {
-    use TitleAwareTrait;
-
+    public string $title;
     public ?string $shortcut = null;
-    public ?WorkStatus $status = null;
-    public ?WorkType $type = null;
-    public ?User $author = null;
-    public ?User $supervisor = null;
+    public WorkStatus $status;
+    public WorkType $type;
+    public User $author;
+    public User $supervisor;
     public ?User $opponent = null;
     public ?User $consultant = null;
-    public ?DateTime $deadline = null;
+    public DateTime $deadline;
     public ?DateTime $deadlineProgram = null;
-    public ?Collection $categories = null;
+    public Collection $categories;
 
     public function __construct()
     {

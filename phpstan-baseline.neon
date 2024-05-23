@@ -311,41 +311,6 @@ parameters:
 			path: src/Domain/Work/Facade/WorkFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$author of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setAuthor\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$categories of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setCategories\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$deadline of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setDeadline\\(\\) expects DateTime, DateTime\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$status of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setStatus\\(\\) expects App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus, App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$supervisor of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setSupervisor\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$title of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setTitle\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method App\\\\Domain\\\\Work\\\\Entity\\\\Work\\:\\:setType\\(\\) expects App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType, App\\\\Domain\\\\WorkType\\\\Entity\\\\WorkType\\|null given\\.$#"
-			count: 1
-			path: src/Domain/Work/Factory/WorkFactory.php
-
-		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWork\\(\\)\\.$#"
 			count: 3
 			path: src/Domain/Work/Service/WorkDetailTabService.php
