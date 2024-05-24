@@ -331,11 +331,6 @@ parameters:
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Entity/WorkCategory.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
