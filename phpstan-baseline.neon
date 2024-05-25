@@ -331,21 +331,6 @@ parameters:
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setName\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$owner of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setOwner\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
-
-		-
-			message: "#^Parameter \\#1 \\$works of method App\\\\Domain\\\\WorkCategory\\\\Entity\\\\WorkCategory\\:\\:setWorks\\(\\) expects Doctrine\\\\Common\\\\Collections\\\\Collection, Doctrine\\\\Common\\\\Collections\\\\Collection\\|null given\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Factory/WorkCategoryFactory.php
-
-		-
 			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
 			count: 1
 			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php

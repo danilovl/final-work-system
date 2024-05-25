@@ -12,20 +12,20 @@
 
 namespace App\Domain\WorkCategory\Model;
 
-use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection};
+    Collection,
+    ArrayCollection
+};
 
 class WorkCategoryModel
 {
-    use SimpleInformationTrait;
-
+    public string $name;
+    public ?string $description = null;
     public ?string $sorting = null;
-    public ?User $owner = null;
-    public ?Collection $works = null;
+    public User $owner;
+    public Collection $works;
 
     public function __construct()
     {
