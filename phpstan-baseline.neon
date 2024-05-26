@@ -341,11 +341,6 @@ parameters:
 			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
 
 		-
-			message: "#^Property App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\:\\:\\$works type mapping mismatch\\: property can contain Doctrine\\\\Common\\\\Collections\\\\Collection but database expects Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
-			count: 1
-			path: src/Domain/WorkStatus/Entity/WorkStatus.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
