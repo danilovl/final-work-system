@@ -41,6 +41,7 @@ class WorkType
     #[Gedmo\Versioned]
     private string $shortcut;
 
+    /** @var Collection<Work> */
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Work::class)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $works;
