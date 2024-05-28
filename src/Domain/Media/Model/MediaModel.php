@@ -12,7 +12,6 @@
 
 namespace App\Domain\Media\Model;
 
-use App\Application\Traits\Model\SimpleInformationTrait;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\MediaType\Entity\MediaType;
@@ -26,14 +25,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel
 {
-    use SimpleInformationTrait;
-
+    public string $name;
+    public ?string $description = null;
     public User $owner;
-    public ?MediaType $type = null;
-    public ?MediaMimeType $mimeType = null;
-    public ?Collection $categories = null;
+    public MediaType $type;
+    public MediaMimeType $mimeType;
+    public Collection $categories;
     public ?Work $work = null;
-    public ?string $mediaName = null;
+    public string $mediaName = '';
     public ?string $originalMediaName = null;
     public ?string $originalExtension = null;
     public ?int $mediaSize = null;
@@ -43,6 +42,7 @@ class MediaModel
     public function __construct()
     {
         $this->categories = new ArrayCollection;
+        $this->mimeType = new MediaMimeType;
     }
 
     public static function fromMedia(Media $media): self

@@ -42,13 +42,10 @@ class MediaFactory extends BaseModelFactory
         $media->setWork($mediaModel->work);
         $media->setActive($mediaModel->active);
         $media->setUploadMedia($mediaModel->uploadMedia);
-
-        if ($mediaModel->mimeType) {
-            $media->setMediaName($mediaModel->mediaName);
-            $media->setMimeType($mediaModel->mimeType);
-            $media->setOriginalExtension($mediaModel->originalExtension);
-            $media->setOriginalMediaName($mediaModel->originalMediaName);
-        }
+        $media->setMediaName($mediaModel->mediaName);
+        $media->setMimeType($mediaModel->mimeType);
+        $media->setOriginalExtension($mediaModel->originalExtension);
+        $media->setOriginalMediaName($mediaModel->originalMediaName);
 
         return $media;
     }

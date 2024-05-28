@@ -121,7 +121,7 @@ class Media
         $this->owner = $owner;
     }
 
-    public function getMediaName(): ?string
+    public function getMediaName(): string
     {
         return $this->mediaName;
     }
