@@ -24,6 +24,9 @@ jobs:
       - name: Elastica populate(elastica network bug)
         run: docker-compose exec -T php php bin/console fos:elastica:populate
 
+      - name: Run phpstan
+        run: docker-compose exec -T php composer phpstan
+
       - name: Run unit tests
         run: docker-compose exec -T php composer test-unit
 
