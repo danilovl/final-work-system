@@ -12,11 +12,11 @@
 
 namespace App\Domain\SystemEvent\Service;
 
-use App\Application\Constant\{
-    LocaleConstant};
+use App\Application\Constant\LocaleConstant;
 use App\Application\Exception\{
     ConstantNotFoundException,
-    InvalidArgumentException};
+    InvalidArgumentException
+};
 use App\Domain\SystemEvent\Constant\SystemEventGeneratorFolderConstant;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;

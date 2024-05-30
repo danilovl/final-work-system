@@ -16,7 +16,6 @@ use App\Application\Constant\DateFormatConstant;
 use App\Application\Helper\DateHelper;
 use DateTime;
 use PHPUnit\Framework\TestCase;
-use function Symfony\Component\Clock\now;
 
 class DateHelperTest extends TestCase
 {

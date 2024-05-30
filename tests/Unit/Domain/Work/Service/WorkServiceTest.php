@@ -17,7 +17,6 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkService;
 use DateTime;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Validator\Constraints\Date;
 
 class WorkServiceTest extends TestCase
 {

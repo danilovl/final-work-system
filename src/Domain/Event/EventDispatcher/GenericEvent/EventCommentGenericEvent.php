@@ -13,7 +13,6 @@
 namespace App\Domain\Event\EventDispatcher\GenericEvent;
 
 use App\Domain\Comment\Entity\Comment;
-use App\Domain\Event\Entity\Event;
 
 readonly class EventCommentGenericEvent
 {

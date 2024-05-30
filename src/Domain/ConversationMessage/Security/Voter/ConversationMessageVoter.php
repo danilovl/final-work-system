@@ -13,7 +13,6 @@
 namespace App\Domain\ConversationMessage\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Exception\InvalidArgumentException;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;

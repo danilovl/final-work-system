@@ -12,7 +12,6 @@
 
 namespace App\Domain\Work\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Application\Traits\Entity\{
     IdTrait,

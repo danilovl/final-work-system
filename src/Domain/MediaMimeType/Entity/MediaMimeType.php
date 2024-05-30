@@ -12,7 +12,6 @@
 
 namespace App\Domain\MediaMimeType\Entity;
 
-use App\Application\Constant\TranslationConstant;
 use App\Application\Traits\Entity\{
     IdTrait,
     ActiveAbleTrait,
