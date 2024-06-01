@@ -19,6 +19,7 @@ app:
         warning: Verify that the data entered is correct
         error: Username or email already exists
     error:
+      400: Bad request
       403: Access denied
       404: Sorry but we couldnt find this page
       500: Internal Server Error

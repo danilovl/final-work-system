@@ -19,6 +19,7 @@ app:
         warning: Ověřte správnost vložených dat
         error: Uživatelské jméno nebo e-mail již existuje
     error:
+      400: Špatný požadavek
       403: Přístup zamítnut
       404: Je nám líto, ale nemůžeme najít tuto stránku
       500: Interní chyba serveru

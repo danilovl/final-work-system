@@ -14,7 +14,9 @@ namespace App\Domain\EventCalendar\Controller\Ajax;
 
 use App\Application\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Middleware\EventCalendar\Ajax\EditMiddleware;
 use App\Domain\Event\Entity\Event;
+use App\Domain\EventCalendar\Request\GetEventRequest;
 use App\Domain\EventCalendar\Http\Ajax\{
     EventCalendarEditHandle,
     EventCalendarCreateHandle,
@@ -22,8 +24,8 @@ use App\Domain\EventCalendar\Http\Ajax\{
     EventCalendarEventReservationHandle
 };
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -36,10 +38,7 @@ class EventCalendarController extends AbstractController
         private readonly EventCalendarEditHandle $eventCalendarEditHandle
     ) {}
 
-    #[AjaxRequestMiddlewareAttribute(
-        class: 'App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware'
-    )]
-    public function getEvent(Request $request): JsonResponse
+    public function getEvent(GetEventRequest $request): JsonResponse
     {
         return $this->eventCalendarGetEventHandle->handle($request);
     }
@@ -57,7 +56,7 @@ class EventCalendarController extends AbstractController
     }
 
     #[AjaxRequestMiddlewareAttribute(
-        class: 'App\Application\Middleware\EventCalendar\Ajax\EditMiddleware'
+        class: EditMiddleware::class
     )]
     public function edit(Request $request, Event $event): JsonResponse
     {

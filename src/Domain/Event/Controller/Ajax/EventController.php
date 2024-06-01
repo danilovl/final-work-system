@@ -14,6 +14,7 @@ namespace App\Domain\Event\Controller\Ajax;
 
 use App\Application\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Middleware\Event\Ajax\GetEventMiddleware;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Http\Ajax\{
     EventDeleteHandle,
@@ -35,7 +36,7 @@ class EventController extends AbstractController
     ) {}
 
     #[AjaxRequestMiddlewareAttribute(
-        class: 'App\Application\Middleware\Event\Ajax\GetEventMiddleware'
+        class: GetEventMiddleware::class
     )]
     public function getEvent(Request $request, Event $event): JsonResponse
     {

@@ -15,12 +15,10 @@ namespace App\Domain\EventCalendar\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Service\RequestService;
 use App\Domain\Event\Facade\EventCalendarFacade;
+use App\Domain\EventCalendar\Request\GetEventRequest;
 use App\Domain\User\Service\UserService;
 use DateTime;
-use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class EventCalendarGetEventHandle
 {
@@ -30,10 +28,12 @@ readonly class EventCalendarGetEventHandle
         private UserService $userService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function handle(GetEventRequest $getEventRequest): JsonResponse
     {
-        $startDate = new DateTime($request->request->getString('start'));
-        $endDate = new DateTime($request->request->getString('end'));
+        $request = $getEventRequest->getRequest();
+
+        $startDate = new DateTime($getEventRequest->start);
+        $endDate = new DateTime($getEventRequest->end);
 
         $events = $this->eventCalendarFacade->getEventsByOwner(
             $this->userService->getUser(),
@@ -43,7 +43,7 @@ readonly class EventCalendarGetEventHandle
         );
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS, [
-            'events' => json_encode($events, JSON_PRETTY_PRINT),
+            'events' => json_encode($events, JSON_PRETTY_PRINT)
         ]);
     }
 }
