@@ -78,7 +78,7 @@ class TaskVoter extends Voter
     {
         $work = $task->getWork();
 
-        return WorkRoleHelper::isSupervisor($work, $user) && $task->getOwner() === $user;
+        return WorkRoleHelper::isSupervisor($work, $user) && $task->getOwner()->getId() === $user->getId();
     }
 
     private function canDelete(Task $task, User $user): bool

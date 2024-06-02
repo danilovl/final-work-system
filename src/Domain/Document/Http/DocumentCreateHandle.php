@@ -84,7 +84,7 @@ readonly class DocumentCreateHandle
                 ->handleRequest($request);
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'document/document.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/document/document.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),

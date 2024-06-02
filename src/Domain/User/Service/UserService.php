@@ -16,7 +16,7 @@ use App\Application\Exception\UserNotExistException;
 use App\Domain\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-readonly class UserService
+class UserService
 {
     public function __construct(private TokenStorageInterface $tokenStorage) {}
 

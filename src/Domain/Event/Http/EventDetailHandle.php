@@ -86,7 +86,7 @@ readonly class EventDetailHandle
             ->createDeleteForm($event, 'event_delete')
             ->createView();
 
-        return $this->twigRenderService->renderToResponse('event/detail.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/event/detail.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
             'deleteForm' => $deleteForm,

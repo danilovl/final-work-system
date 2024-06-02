@@ -94,7 +94,7 @@ readonly class VersionCreateHandle
 
         $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR->value);
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'version/version.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/version/version.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,

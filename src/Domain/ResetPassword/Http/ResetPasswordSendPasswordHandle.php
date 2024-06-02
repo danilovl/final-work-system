@@ -41,7 +41,7 @@ readonly class ResetPasswordSendPasswordHandle
         $isTasksInComplete = $this->taskFacade
             ->isTasksCompleteByOwner($user, false);
 
-        return $this->twigRenderService->renderToResponse('task/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/task/list.html.twig', [
             'isTasksInComplete' => $isTasksInComplete,
             'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery)
         ]);

@@ -14,7 +14,7 @@ namespace App\Application\Util;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-readonly class StreamedResponseUtil
+class StreamedResponseUtil
 {
     public static function create(callable $callback): StreamedResponse
     {

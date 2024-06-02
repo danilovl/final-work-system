@@ -79,7 +79,7 @@ readonly class EventScheduleCloneHandle
 
         $this->seoPageService->setTitle($eventSchedule->getName());
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'event_schedule/clone.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/event_schedule/clone.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'eventSchedule' => $eventSchedule,

@@ -2,7 +2,7 @@
 
 {% block head %}
     <head>
-        {% include 'analytics/analitics.html.twig' %}
+        {% include 'other/analytics/analitics.html.twig' %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,17 +24,17 @@
         <div class="main_container">
 
             {% block sidebar %}
-                {% include 'page_section/sidebar.html.twig' %}
+                {% include 'other/page_section/sidebar.html.twig' %}
             {% endblock %}
 
             {% block topnav %}
-                {% include 'page_section/topnav.html.twig' %}
+                {% include 'other/page_section/topnav.html.twig' %}
             {% endblock %}
 
             {% block content %}{% endblock %}
 
             {% block footer %}
-                {% include 'page_section/footer.html.twig' %}
+                {% include 'other/page_section/footer.html.twig' %}
             {% endblock %}
 
         </div>

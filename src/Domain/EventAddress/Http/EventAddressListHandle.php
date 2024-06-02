@@ -38,7 +38,7 @@ readonly class EventAddressListHandle
             $user->getEventAddressOwner()
         );
 
-        return $this->twigRenderService->renderToResponse('event_address/list.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/event_address/list.html.twig', [
             'eventAddresses' => $eventAddresses
         ]);
     }

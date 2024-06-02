@@ -15,7 +15,7 @@ namespace App\Domain\User\EventDispatcher\GenericEvent;
 use App\Application\Exception\PropertyValueIsNullException;
 use App\Domain\User\Entity\User;
 
-readonly class UserGenericEvent
+class UserGenericEvent
 {
     public function __construct(public User $user, public ?User $owner = null) {}
 

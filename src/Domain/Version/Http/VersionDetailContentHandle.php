@@ -22,7 +22,7 @@ readonly class VersionDetailContentHandle
 
     public function handle(Media $media): Response
     {
-        return $this->twigRenderService->renderToResponse('version/detail_content.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/version/detail_content.html.twig', [
             'version' => $media,
             'work' => $media->getWork()
         ]);

@@ -1,0 +1,98 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+	<div class="right_col" role="main">
+		<div class="x_content bs-example-popovers">
+			 {{ widget_homepage_notify() }}
+		</div>
+		<div>
+			<div class="clearfix"></div>
+			{% if  isSystemEventUnreadExist %}
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 mb-small">
+						{{ 'app.text.set_alerts_all_viewed' | trans }}
+
+						{% include 'other/common_part/button/js-switch.html.twig' with {
+							'dataTargetUrl': path('system_event_all_change_to_viewed_ajax')
+						} %}
+					</div>
+				</div>
+			{% endif %}
+
+			<div class="row">
+				{% for key,group in paginator %}
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="x_panel tile fixed_height_320">
+							<div class="x_title">
+								<h2>
+									{{ key }}
+								</h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li>
+										<a class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</a>
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<div class="system-event-table">
+
+									<table class="table">
+										<thead>
+										<tr>
+											<th style="width: 22%">
+												{{ 'app.text.date_added' | trans }}
+											</th>
+											<th style="width: 10%"></th>
+											<th>
+												{{ 'app.text.event' | trans }}
+											</th>
+											<th>
+												{{ 'app.text.state' | trans }}
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+
+										{% for systemEventRecipient in group %}
+											<tr class="active">
+												<td>
+													{{ systemEventRecipient.createdAt | date("d.m.Y H:i") }}
+												</td>
+												<td>
+													<ul class="list-inline">
+														<li>
+															<img src="{{ systemEventRecipient.systemEvent.owner | profile_image }}"
+																 class="avatar" alt="Avatar">
+														</li>
+													</ul>
+												</td>
+												<td>
+													{{ system_event_generate_link(systemEventRecipient) | raw }}
+												</td>
+												<td>
+													{% include 'other/common_part/button/js-switch.html.twig' with {
+														'checked': systemEventRecipient.viewed,
+														'dataTargetUrl': path('system_event_change_viewed_ajax',{'id': systemEventRecipient.id | hashids_encode })
+													} %}
+												</td>
+											</tr>
+										{% endfor %}
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+			<div class="navigation">
+				{{ knp_pagination_render(paginator) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

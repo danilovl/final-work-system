@@ -18,7 +18,7 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTimeImmutable;
 use ReflectionClass;
 
-readonly class Transformer implements TransformerInterface
+class Transformer implements TransformerInterface
 {
     public function __construct(private ParameterServiceInterface $parameterService) {}
 

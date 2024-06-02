@@ -18,7 +18,7 @@ use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class VersionEventDispatcherService
+class VersionEventDispatcherService
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,

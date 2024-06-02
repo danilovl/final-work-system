@@ -53,7 +53,7 @@ readonly class WorkDetailHandle
 
         $this->seoPageService->setTitle($work->getTitle());
 
-        return $this->twigRenderService->renderToResponse('work/detail.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/work/detail.html.twig', [
             'work' => $work,
             'tasks' => $paginationTask,
             'versions' => $paginationVersion,

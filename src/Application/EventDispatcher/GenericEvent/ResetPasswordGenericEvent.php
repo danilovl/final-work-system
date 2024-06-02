@@ -14,7 +14,7 @@ namespace App\Application\EventDispatcher\GenericEvent;
 
 use App\Domain\ResetPassword\Entity\ResetPassword;
 
-readonly class ResetPasswordGenericEvent
+class ResetPasswordGenericEvent
 {
     public function __construct(public ResetPassword $resetPassword, public int $tokenLifetime) {}
 }

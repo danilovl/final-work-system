@@ -45,7 +45,7 @@ class UserProfileInformationNotifyWidget extends BaseWidget
             return null;
         }
 
-        return $this->twigRenderService->render('widget/notify.html.twig', [
+        return $this->twigRenderService->render('application/widget/notify.html.twig', [
             'class' => $this->parameterService->getString('homepage_notify.type_class.info'),
             'message' => $this->translatorService->trans('app.text.please_fill_phone_number_before_use_app')
         ]);
@@ -58,7 +58,7 @@ class UserProfileInformationNotifyWidget extends BaseWidget
             return null;
         }
 
-        return $this->twigRenderService->render('widget/notify.html.twig', [
+        return $this->twigRenderService->render('application/widget/notify.html.twig', [
             'class' => $this->parameterService->getString('homepage_notify.type_class.info'),
             'message' => $this->translatorService->trans('app.text.please_fill_skype_before_use_app')
         ]);

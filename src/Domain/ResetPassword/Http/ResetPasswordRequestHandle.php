@@ -55,7 +55,7 @@ readonly class ResetPasswordRequestHandle
             return $this->processSendingPasswordResetEmail($email);
         }
 
-        return $this->twigRenderService->renderToResponse('reset_password/request.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/reset_password/request.html.twig', [
             'form' => $form->createView(),
         ]);
     }

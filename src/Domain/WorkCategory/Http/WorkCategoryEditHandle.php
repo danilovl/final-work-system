@@ -69,7 +69,7 @@ readonly class WorkCategoryEditHandle
             );
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work_category/work_category.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/work_category/work_category.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),

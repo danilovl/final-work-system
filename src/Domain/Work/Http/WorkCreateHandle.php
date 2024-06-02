@@ -83,7 +83,7 @@ readonly class WorkCreateHandle
             $this->parameterService->getInt('pagination.work.program_deadline_limit')
         );
 
-        return $this->twigRenderService->renderToResponse('work/work.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/work/work.html.twig', [
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.work_create'),
             'workDeadlines' => $workDeadLines->toArray(),

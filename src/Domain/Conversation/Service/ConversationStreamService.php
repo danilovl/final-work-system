@@ -38,7 +38,7 @@ class ConversationStreamService
 
         $chatMessageHtml = null;
         foreach ($messages as $message) {
-            $chatMessageHtml .= $this->twig->render('conversation/include/chat_message.html.twig', [
+            $chatMessageHtml .= $this->twig->render('domain/conversation/include/chat_message.html.twig', [
                 'message' => $message
             ]);
 

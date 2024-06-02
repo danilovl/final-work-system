@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\{
     ArrayCollection
 };
 
-readonly class WorkListService
+class WorkListService
 {
     public function __construct(private UserWorkService $userWorkService) {}
 

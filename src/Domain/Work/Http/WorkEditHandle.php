@@ -94,7 +94,7 @@ readonly class WorkEditHandle
             );
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work/work.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/work/work.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,

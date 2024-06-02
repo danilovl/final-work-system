@@ -7,4 +7,4 @@ services:
     arguments:
       - '%system_info%'
     tags:
-      - { name: data_collector, id: final_work_info, template: 'profiler/template.html.twig' }
+      - { name: data_collector, id: final_work_info, template: 'other/profiler/template.html.twig' }

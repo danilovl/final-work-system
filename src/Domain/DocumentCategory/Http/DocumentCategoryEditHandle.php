@@ -69,7 +69,7 @@ readonly class DocumentCategoryEditHandle
             );
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'document_category/document_category.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/document_category/document_category.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),

@@ -31,7 +31,7 @@ readonly class ArticleDetailHandle
     {
         $this->seoPageService->setTitle($article->getTitle());
 
-        return $this->twigRenderService->renderToResponse('article/detail.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/article/detail.html.twig', [
             'article' => $article,
             'articleCategory' => $articleCategory
         ]);

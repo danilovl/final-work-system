@@ -38,7 +38,7 @@ readonly class EventScheduleDetailHandle
             ->createDeleteForm($eventSchedule, 'event_schedule_delete')
             ->createView();
 
-        return $this->twigRenderService->renderToResponse('event_schedule/detail.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/event_schedule/detail.html.twig', [
             'eventSchedule' => $eventSchedule,
             'weekDay' => $this->dateService->getWeekDaysArray(),
             'deleteForm' => $deleteForm

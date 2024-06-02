@@ -14,7 +14,7 @@ namespace App\Domain\Media\EventDispatcher\GenericEvent;
 
 use App\Domain\Media\Entity\Media;
 
-readonly class MediaGenericEvent
+class MediaGenericEvent
 {
     public function __construct(public Media $media) {}
 }

@@ -1,0 +1,48 @@
+{% if is_work_role(work, app_user(), 'isSupervisor') %}
+    <div class="row">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    {{ 'app.text.admin_panel' | trans }}
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li id="toggle-admin-panel">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down" id="work-open-admin-panel"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content" style="display: none;">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <a class="btn btn-app"
+                       id="work-edit"
+                       href="{{ path('work_edit', { 'id': work.id | hashids_encode }) }}"
+                       data-toggle="modal"
+                       data-target="#modalWindow">
+                        <i class="fa fa-edit"></i>
+                        {{ 'app.form.action.edit' | trans }}
+                    </a>
+                    <a class="btn btn-app"
+                       id="work-author-edit"
+                       href="{{ path('work_edit_author', { 'id': work.id | hashids_encode }) }}"
+                       data-toggle="modal"
+                       data-target="#modalWindow">
+                        <i class="fa fa-edit"></i>
+                        {{ 'app.form.action.edit_author' | trans }}
+                    </a>
+
+                    {% include 'other/common_part/ajax_delete.html.twig' with {
+                        'modalDataTargetDeleteClass': 'btn btn-app',
+                        'modalDataTarget': 'work',
+                        'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                        'modalDataTargetId': work.id,
+                        'modalDataTargetName': work.title,
+                    } %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

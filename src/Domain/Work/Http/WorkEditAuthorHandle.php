@@ -71,7 +71,7 @@ readonly class WorkEditAuthorHandle
 
         $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR->value);
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'work/edit_author.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/work/edit_author.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'work' => $work,

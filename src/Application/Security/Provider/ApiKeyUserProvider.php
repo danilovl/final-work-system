@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\User\{
     UserProviderInterface
 };
 
-readonly class ApiKeyUserProvider implements UserProviderInterface
+class ApiKeyUserProvider implements UserProviderInterface
 {
     public function __construct(private ApiUserFacade $apiUserFacade) {}
 

@@ -126,6 +126,6 @@ class MenuWidget extends BaseWidget
 
     public function render(): string
     {
-        return $this->twigRenderService->render("widget/menu/{$this->menu}.html.twig", $this->getRenderParameters());
+        return $this->twigRenderService->render("application/widget/menu/{$this->menu}.html.twig", $this->getRenderParameters());
     }
 }

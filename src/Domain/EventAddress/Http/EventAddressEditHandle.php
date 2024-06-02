@@ -72,7 +72,7 @@ readonly class EventAddressEditHandle
             );
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'event_address/event_address.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/event_address/event_address.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),

@@ -65,7 +65,7 @@ readonly class ProfileEditHandle
             }
         }
 
-        return $this->twigRenderService->renderToResponse('profile/edit.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/profile/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }

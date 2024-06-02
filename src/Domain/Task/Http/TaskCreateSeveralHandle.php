@@ -83,7 +83,7 @@ readonly class TaskCreateSeveralHandle
             $form = $this->taskFormFactory->getTaskForm($taskFormFactoryData);
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'task/task.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/task/task.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),

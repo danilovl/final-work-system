@@ -134,7 +134,7 @@ readonly class UserListHandle
 
         $this->seoPageService->addTitle($title);
 
-        return $this->twigRenderService->renderToResponse('user/user_list.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/user/user_list.html.twig', [
             'type' => $type,
             'title' => $title,
             'users' => $pagination,

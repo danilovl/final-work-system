@@ -1,0 +1,13 @@
+{% if participant.user.id != app_user().id %}
+    <div class="chat-user">
+        <img class="chat-avatar"
+             src="{{ participant.user | profile_image }}"
+             alt="">
+        <div class="chat-user-name">
+            {% include 'other/common_part/user_online_status.html.twig' with {
+                'user': participant.user
+            } %}
+            {{ participant.user }}
+        </div>
+    </div>
+{% endif %}

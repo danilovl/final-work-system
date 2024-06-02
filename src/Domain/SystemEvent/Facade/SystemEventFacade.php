@@ -15,7 +15,7 @@ namespace App\Domain\SystemEvent\Facade;
 use App\Domain\SystemEvent\Repository\SystemEventRepository;
 use App\Domain\User\Entity\User;
 
-readonly class SystemEventFacade
+class SystemEventFacade
 {
     public function __construct(private SystemEventRepository $systemEventRepository) {}
 

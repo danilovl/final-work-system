@@ -16,7 +16,7 @@ use App\Domain\User\Entity\User;
 use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 
-readonly class TaskSearch
+class TaskSearch
 {
     public function __construct(private TransformedFinder $transformedFinderTask) {}
 

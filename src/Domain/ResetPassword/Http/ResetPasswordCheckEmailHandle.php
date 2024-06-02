@@ -32,7 +32,7 @@ readonly class ResetPasswordCheckEmailHandle
             return $this->requestService->redirectToRoute('reset_password_forgot_request');
         }
 
-        return $this->twigRenderService->renderToResponse('reset_password/check_email.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/reset_password/check_email.html.twig', [
             'tokenLifetime' => $this->resetPasswordService->getTokenLifetime(),
         ]);
     }

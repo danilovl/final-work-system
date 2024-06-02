@@ -76,7 +76,7 @@ readonly class UserCreateHandle
             );
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'user/user.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/user/user.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'reload' => true,

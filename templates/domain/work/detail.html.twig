@@ -1,0 +1,175 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="top_nav hide" id="work-info-fixed">
+        <div class="top-info-fixed">
+            <h6>
+                {{ work.title }}, {{ work.deadline | date('Y-m-d') }} | {{ work.author }}
+            </h6>
+        </div>
+    </div>
+    <div class="right_col" role="main">
+        <div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-9 col-sm-9 col-xs-12" id="work-main-info">
+                    {% include 'domain/work/include/work_info.html.twig' %}
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    {% include 'domain/work/include/admin.html.twig' %}
+                    {% include 'domain/work/include/profile.html.twig' %}
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="tabs-area">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+                                {% include 'domain/work/include/btn_tab_panel.html.twig' %}
+
+                                <div role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'domain/work/include/tabs.html.twig' %}
+                                    <div id="tab-content" class="tab-content">
+                                        {% include 'domain/work/include/tab_task.html.twig' %}
+                                        {% include 'domain/work/include/tab_version.html.twig' %}
+                                        {% include 'domain/work/include/tab_event.html.twig' %}
+                                        {% include 'domain/work/include/tab_conversation.html.twig' %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(() => {
+            let fixedTopInfo = $('#work-info-fixed');
+            let mainWorkInfo = $('#work-main-info').offset().top;
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > mainWorkInfo) {
+                    fixedTopInfo.removeClass('hide');
+                } else {
+                    fixedTopInfo.addClass('hide')
+                }
+            });
+
+            if ($('.progress .progress-bar')[0]) {
+                $('.progress .progress-bar').progressbar();
+                NProgress.start();
+            }
+
+            function showRemaining(deadline, id) {
+                let now = new Date();
+                let distance = deadline - now;
+                let second = 1000;
+                let minute = second * 60;
+                let hour = minute * 60;
+                let day = hour * 24;
+
+                let element = document.getElementById(id);
+                if (distance < 0) {
+                    clearInterval(id);
+                    element.innerHTML = 'EXPIRED!';
+
+                    return;
+                }
+
+                let days = Math.floor(distance / day);
+                let hours = Math.floor((distance % day) / hour);
+                let minutes = Math.floor((distance % hour) / minute);
+                let seconds = Math.floor((distance % minute) / second);
+
+                element.innerHTML = days + ' {{ 'app.calendar.day.day' | trans({'%count%': 2}) }} ';
+                element.innerHTML += hours + ' {{ 'app.calendar.hour' | trans({'%count%': 2}) }} ';
+                element.innerHTML += minutes + ' {{ 'app.calendar.minute' | trans({'%count%': 2}) }} ';
+                element.innerHTML += seconds + ' {{ 'app.calendar.second' | trans({'%count%': 2}) }} ';
+            }
+
+
+            let deadline = '{{ work.deadline | date('Y-m-d') }}';
+            let end = new Date(deadline);
+
+            setInterval(deadline => {
+                showRemaining(deadline, 'countdownDeadline');
+            }, 1000, end);
+
+            {% if work.deadlineProgram %}
+
+
+            let deadlineProgram = '{{ work.deadlineProgram | date('Y-m-d') }}';
+            let endProgram = new Date(deadlineProgram);
+
+            setInterval(deadline => {
+                showRemaining(deadline, 'countdownDeadlineProgram');
+            }, 1000, endProgram);
+
+            {% endif %}
+        });
+
+        $(window).ready(() => {
+            NProgress.done();
+        });
+
+        (function ($) {
+            $.fn.workTableFix = function (tabId) {
+                let tab = $('#' + tabId);
+
+                return this.each(function () {
+                    let $this = $(this),
+                        $t_fixed;
+
+                    function init() {
+                        $this.wrap('<div class="work-container-table-fixed"/>');
+                        $t_fixed = $this.clone();
+                        $t_fixed.find('tbody').remove().end().addClass('work-table-header-fixed').insertBefore($this);
+                        resizeFixed();
+                    }
+
+                    function resizeFixed() {
+                        $t_fixed.find('th').each(function (index) {
+                            $(this).css('width', $this.find('th').eq(index).outerWidth() + 'px');
+                        });
+                    }
+
+                    function scrollFixed() {
+                        if (tab.is(':visible')) {
+                            resizeFixed();
+                            let offset = $(this).scrollTop(),
+                                tableOffsetTop = $this.offset().top,
+                                tableOffsetBottom = tableOffsetTop + $this.height() - $this.find('thead').height();
+                            if (offset < tableOffsetTop || offset > tableOffsetBottom) {
+                                $t_fixed.hide();
+                            } else if (offset >= tableOffsetTop && offset <= tableOffsetBottom && $t_fixed.is(':hidden')) {
+                                $t_fixed.show();
+                            }
+                        }
+                    }
+
+                    $(window).resize(resizeFixed);
+                    $(window).scroll(scrollFixed);
+                    init();
+                });
+            };
+        })(jQuery);
+
+        $('#table-task').workTableFix('tab-task');
+        $('#table-version').workTableFix('tab-version');
+        $('#table-event').workTableFix('tab-event');
+    </script>
+{% endblock %}

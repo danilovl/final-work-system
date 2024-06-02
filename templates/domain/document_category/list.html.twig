@@ -1,0 +1,129 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div>
+            <div class="clearfix"></div>
+
+            {% if mediaCategories is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <h2>
+                                {{ 'app.page.information_materials_category_list' | trans }}
+                            </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li class="dropdown">
+                                    <a href="#"
+                                       class="dropdown-toggle"
+                                       data-toggle="dropdown"
+                                       role="button"
+                                       aria-expanded="false">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ path('document_category_create') }}"
+                                               data-toggle="modal"
+                                               data-target="#modalWindow">
+                                                <i class="fa fa-edit"></i>
+                                                {{ 'app.form.action.create' | trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if mediaCategories is not empty %}
+
+                                {% set directionParam = mediaCategories.getPaginatorOption('sortDirectionParameterName') %}
+                                {% set params = mediaCategories.getParams() %}
+                                {% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th{% if mediaCategories.isSorted('media_category.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.name' | trans, 'work_category.name') }}
+                                        </th>
+                                        <th{% if mediaCategories.isSorted('media_category.description') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.description' | trans, 'media_category.description') }}
+                                        </th>
+                                        <th>
+                                            {{ 'app.text.information_materials' | trans }}
+                                        </th>
+                                        <th{% if mediaCategories.isSorted('media_category.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+                                            {{ knp_pagination_sortable(mediaCategories, 'app.text.date_added' | trans, 'media_category.createdAt') }}
+                                        </th>
+                                        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for mediaCategory in mediaCategories %}
+                                        <tr data-delete-row="document-category-{{ mediaCategory.id | hashids_encode }}">
+                                            <td>
+                                                {{ mediaCategory.name }}
+                                            </td>
+                                            <td>
+                                                {{ mediaCategory.description | away_to | raw }}
+                                            </td>
+                                            <td>
+                                                {{ mediaCategory.medias | length }}
+                                            </td>
+                                            <td>
+                                                {{ mediaCategory.createdAt | date("d.m.Y H:i") }}
+                                            </td>
+                                            <td>
+                                                <a data-toggle="modal"
+                                                   data-target="#modalWindow"
+                                                   class="btn btn-warning btn-xs"
+                                                   href="{{ path('document_category_edit', { 'id': mediaCategory.id | hashids_encode }) }}">
+                                                    <i class="fa fa-pencil"></i>
+                                                    {{ 'app.form.action.edit' | trans }}
+                                                </a>
+
+                                                {% include 'other/common_part/ajax_delete.html.twig' with {
+                                                    'modalDataTarget': 'document',
+                                                    'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                                                    'modalDataTargetId': mediaCategory.id,
+                                                    'modalDataTargetName': mediaCategory.name,
+                                                    'modalDataTargetDeleteUrl': path('document_category_delete_ajax', { 'id': mediaCategory.id | hashids_encode })
+                                                } %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'app.text.no_result' | trans }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(mediaCategories) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(() => {
+            $("table").tableFix()
+        });
+    </script>
+{% endblock %}

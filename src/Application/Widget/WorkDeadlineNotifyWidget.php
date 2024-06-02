@@ -69,7 +69,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
             return null;
         }
 
-        return $this->twigRenderService->render('widget/notify.html.twig', [
+        return $this->twigRenderService->render('application/widget/notify.html.twig', [
             'class' => $this->parameterService->getString($type),
             'message' => $this->translatorService->trans('app.text.reminding_work_deadline_submission')
         ]);

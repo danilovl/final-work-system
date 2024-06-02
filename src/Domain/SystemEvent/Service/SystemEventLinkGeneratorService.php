@@ -73,7 +73,7 @@ readonly class SystemEventLinkGeneratorService implements RuntimeExtensionInterf
 
         /** TODO: Now available templates only for cs $locale */
         $locale = LocaleConstant::ISO_CS->value ?? $this->requestStack->getCurrentRequest()?->getLocale();
-        $folder = sprintf('system_event/%s/%s', $type, $locale);
+        $folder = sprintf('domain/system_event/%s/%s', $type, $locale);
 
         return match ($systemEventTypeId) {
             SystemEventTypeConstant::WORK_CREATE->value => $folder . '/work_create.twig',

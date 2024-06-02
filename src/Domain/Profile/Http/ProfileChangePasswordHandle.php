@@ -68,7 +68,7 @@ readonly class ProfileChangePasswordHandle
             }
         }
 
-        return $this->twigRenderService->renderToResponse('profile/change_password.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/profile/change_password.html.twig', [
             'form' => $form->createView()
         ]);
     }

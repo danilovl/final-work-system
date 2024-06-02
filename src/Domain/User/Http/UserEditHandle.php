@@ -85,7 +85,7 @@ readonly class UserEditHandle
 
         $this->seoPageService->addTitle($user->getUsername(), SeoPageConstant::VERTICAL_SEPARATOR->value);
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'user/user.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/user/user.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'reload' => true,

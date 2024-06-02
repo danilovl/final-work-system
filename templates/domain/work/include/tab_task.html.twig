@@ -1,0 +1,17 @@
+<div role="tabpanel"
+        {% if activeTab == 'task' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+     id="tab-task"
+     aria-labelledby="home-tab">
+
+    {% if tasks is defined and tasks is not empty %}
+        {% include 'domain/task/include/tasks.html.twig' with {
+            'tableTaskId': 'table-task',
+            'isSupervisor': is_work_role(work, app_user(), 'isSupervisor'),
+            'isAuthor': is_work_role(work, app_user(), 'isAuthor'),
+            'isWorkTab': true,
+        } %}
+        <div class="navigation">
+            {{ knp_pagination_render(tasks, null ,{'tab':'task', '_fragment':'tabs-area'}) }}
+        </div>
+    {% endif %}
+</div>

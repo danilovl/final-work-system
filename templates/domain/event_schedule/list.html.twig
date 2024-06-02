@@ -1,0 +1,118 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div>
+            <div class="clearfix"></div>
+
+            {% if eventSchedules is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <h2>
+                                {{ 'app.page.event_schedule_list' | trans }}
+                            </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li class="dropdown">
+                                    <a href="#"
+                                       class="dropdown-toggle"
+                                       data-toggle="dropdown"
+                                       role="button"
+                                       aria-expanded="false">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a target="_blank"
+                                               href="{{ path('event_schedule_create') }}">
+                                                <i class="fa fa-edit"></i>
+                                                {{ 'app.form.action.create' | trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if eventSchedules is not empty %}
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            {{ 'app.text.name' | trans }}
+                                        </th>
+                                        <th>
+                                            {{ 'app.text.created' | trans }}
+                                        </th>
+                                        <th style="width: 20%">
+                                            {{ 'app.text.options' | trans }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for  eventSchedule in eventSchedules %}
+                                        <tr id="event-schedule-{{ eventSchedule.id | hashids_encode }}"
+                                            data-delete-row="event-schedule-{{ eventSchedule.id | hashids_encode }}">
+                                            <td>
+                                                <a target="_blank"
+                                                   href="{{ path('event_schedule_detail', { 'id': eventSchedule.id | hashids_encode}) }}">
+                                                    {{ eventSchedule.name }}
+                                                </a>
+                                            </td>
+                                            <td>{{ eventSchedule.createdAt | date("d.m.Y") }}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-xs"
+                                                   href="{{ path('event_schedule_detail', { 'id': eventSchedule.id | hashids_encode }) }}"
+                                                   target="_blank">
+                                                    <i class="fa fa-folder"></i>
+                                                    {{ 'app.form.action.show_detail' | trans }}
+                                                </a>
+                                                <a class="btn btn-warning btn-xs"
+                                                   target="_blank"
+                                                   href="{{ path('event_schedule_edit', { 'id': eventSchedule.id | hashids_encode }) }}">
+                                                    <i class="fa fa-pencil"></i>
+                                                    {{ 'app.form.action.edit' | trans }}
+                                                </a>
+                                                <a data-toggle="modal"
+                                                   data-target="#modalWindow"
+                                                   class="btn btn-success btn-xs"
+                                                   href="{{ path('event_schedule_clone', { 'id': eventSchedule.id | hashids_encode }) }}">
+                                                    <i class="fa fa-retweet"></i>
+                                                    {{ 'app.form.action.clonning' | trans }}
+                                                </a>
+
+                                                {% include 'other/common_part/ajax_delete.html.twig' with {
+                                                    'modalDataTarget': 'event-schedule',
+                                                    'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                                                    'modalDataTargetId': eventSchedule.id,
+                                                    'modalDataTargetName': eventSchedule.name,
+                                                    'modalDataTargetDeleteUrl': path('event_schedule_delete_ajax', { 'id': eventSchedule.id | hashids_encode })
+                                                } %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                {{ 'app.text.no_result' | trans }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(eventSchedules) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

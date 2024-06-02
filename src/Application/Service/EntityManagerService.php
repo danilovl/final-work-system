@@ -16,7 +16,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 
-readonly class EntityManagerService
+class EntityManagerService
 {
     public function __construct(private EntityManagerInterface $entityManager) {}
 

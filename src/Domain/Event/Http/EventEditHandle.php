@@ -108,7 +108,7 @@ readonly class EventEditHandle
 
         $this->seoPageService->setTitle($event->toString());
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'event/edit.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/event/edit.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'event' => $event,

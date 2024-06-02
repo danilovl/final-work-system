@@ -1,0 +1,27 @@
+<div {% if activeTab == 'message' %}  class="tab-pane fade active in" {% else %} class="tab-pane fade" {% endif %}
+        id="tab-message"
+        aria-labelledby="profile-tab">
+
+    {% if messages is defined and messages is not empty %}
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="chat-discussion">
+
+                        {% for message in messages %}
+                            {% include 'domain/conversation/include/chat_message.html.twig' with {
+                                'message': message
+                            } %}
+                        {% else %}
+                            {{ 'app.text.no_result' | trans }}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(messages, null ,{'tab':'message', '_fragment':'tabs-area'}) }}
+        </div>
+    {% endif %}
+</div>

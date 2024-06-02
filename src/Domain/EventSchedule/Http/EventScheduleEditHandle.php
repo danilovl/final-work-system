@@ -69,7 +69,7 @@ readonly class EventScheduleEditHandle
 
         $this->seoPageService->setTitle($eventSchedule->getName());
 
-        return $this->twigRenderService->renderToResponse('event_schedule/edit.html.twig', [
+        return $this->twigRenderService->renderToResponse('domain/event_schedule/edit.html.twig', [
             'eventSchedule' => $eventSchedule,
             'form' => $form->createView()
         ]);

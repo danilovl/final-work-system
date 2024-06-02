@@ -22,7 +22,7 @@ class AwayController extends AbstractController
 {
     public function to(Request $request): Response
     {
-        return $this->render('away/to.html.twig', [
+        return $this->render('application/away/to.html.twig', [
             'url' => $request->query->get('url')
         ]);
     }

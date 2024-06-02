@@ -14,7 +14,7 @@ namespace App\Application\Service;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-readonly class DateService
+class DateService
 {
     public function __construct(private TranslatorInterface $translator) {}
 

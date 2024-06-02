@@ -1,0 +1,87 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div>
+            <div class="clearfix"></div>
+
+            {% if tasks is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <div class="row">
+                                <h2>{{ 'app.text.task_list' | trans }}</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li class="dropdown">
+                                        <a href="#"
+                                           class="dropdown-toggle"
+                                           data-toggle="dropdown"
+                                           role="button"
+                                           aria-expanded="false">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="{{ path('task_create_several') }}"
+                                                   data-toggle="modal"
+                                                   data-target="#modalWindow">
+                                                    <i class="fa fa-edit"></i>
+                                                    {{ 'app.text.task_create' | trans }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+
+                                {% include 'other/common_part/simple_search.html.twig' with {
+                                    'clearSearchUrl': path('task_list')
+                                } %}
+                            </div>
+                            {% if isTasksInComplete %}
+                                <div class="row">
+                                <span>
+                    			    {{ 'app.text.change_all_tasks_to_complete' | trans }}
+                    		    </span>
+                                    <span>
+                                        {% include 'other/common_part/button/js-switch.html.twig' with {
+                                            'dataTargetUrl': path('task_change_all_to_complete_ajax')
+                                        } %}
+                                    </span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="x_content">
+
+                            {% if tasks is not empty %}
+                                {% include 'domain/task/include/tasks.html.twig' with {
+                                    'isSupervisor': true
+                                } %}
+                            {% else %}
+                                {{ 'app.text.no_result' | trans }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(tasks) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $("table").tableFix();
+        });
+    </script>
+{% endblock %}

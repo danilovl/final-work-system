@@ -14,7 +14,7 @@ namespace App\Domain\Event\EventDispatcher\GenericEvent;
 
 use App\Domain\Event\Entity\Event;
 
-readonly class EventGenericEvent
+class EventGenericEvent
 {
     public function __construct(public Event $event) {}
 }

@@ -68,7 +68,7 @@ readonly class UserGroupCreateHandle
             );
         }
 
-        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'user_group/user_group.html.twig');
+        $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/user_group/user_group.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),

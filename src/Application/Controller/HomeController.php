@@ -44,7 +44,7 @@ class HomeController extends AbstractController
         $isUnreadExist = $this->systemEventFacade
             ->isUnreadSystemEventsByRecipient($user);
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('application/home/index.html.twig', [
             'isSystemEventUnreadExist' => $isUnreadExist,
             'paginator' => $pagePaginators[$page]
         ]);
