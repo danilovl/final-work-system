@@ -108,6 +108,10 @@
                                         {% set lastMessage = conversation_last_message(conversation) %}
                                         <td>
                                             {% if lastMessage is not empty %}
+                                                <img src="{{ lastMessage.owner | profile_image }}"
+                                                     class="avatar"
+                                                     alt="Avatar">
+
                                                 {% include 'other/common_part/user_online_status.html.twig' with {
                                                     'user': lastMessage.owner
                                                 } %}

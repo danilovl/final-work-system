@@ -3360,7 +3360,8 @@ ul.project_files li a i {
 
 .avatar img {
     border-radius: 50%;
-    max-width: 45px
+    max-width: 45px;
+    max-height: 45px;
 }
 
 .pricing {
