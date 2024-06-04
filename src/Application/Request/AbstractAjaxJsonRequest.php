@@ -69,6 +69,7 @@ abstract class AbstractAjaxJsonRequest
     protected function validate(): void
     {
         $errors = [];
+
         $violations = $this->validator->validate(
             $this->data,
             $this->getConstraints()
@@ -107,15 +108,19 @@ abstract class AbstractAjaxJsonRequest
 
     protected function sendJsonResponse(
         array $errors = [],
-        array $notifyMessage = []
+        array $notifyMessage = [],
+        bool $send = true
     ): void {
         $response = new JsonResponse([
             'valid' => false,
             'errors' => $errors,
             'notifyMessage' => $notifyMessage
         ]);
-        $response->send();
-        exit;
+
+        if ($send) {
+            $response->send();
+            exit;
+        }
     }
 
     private static function camelCase(string $attribute): string
