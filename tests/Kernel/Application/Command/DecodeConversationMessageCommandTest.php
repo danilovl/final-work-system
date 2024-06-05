@@ -38,21 +38,24 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
         $this->entityManagerService = $kernel->getContainer()->get(EntityManagerService::class);
     }
 
-    public function testExecute(): int
+
+    public function testExecute(): array
     {
-        $conversationMessageId = $this->prepareData();
+        $data = $this->prepareData();
 
         $commandTester = new CommandTester($this->command);
         $commandTester->execute([]);
 
         $commandTester->assertCommandIsSuccessful();
 
-        return $conversationMessageId;
+        return $data;
     }
 
     #[Depends('testExecute')]
-    public function testContent(int $conversationMessageId): void
+    public function testContent(array $data): void
     {
+        [$conversationId, $conversationMessageId] = $data;
+
         /** @var ConversationMessage $message */
         $message = $this->entityManagerService
             ->getRepository(ConversationMessage::class)
@@ -64,9 +67,11 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
             html_entity_decode($this->messageEncode),
             $message->getContent()
         );
+
+        $this->removeTestConversation($conversationId);
     }
 
-    private function prepareData(): int
+    private function prepareData(): array
     {
         /** @var ConversationType $conversationType */
         $conversationType = $this->entityManagerService->getReference(
@@ -80,7 +85,7 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
             ->findOneBy([], ['id' => Criteria::ASC]);
 
         $conversation = new Conversation;
-        $conversation->setName('test');
+        $conversation->setName('kernel test');
         $conversation->setOwner($user);
         $conversation->setType($conversationType);
 
@@ -93,6 +98,16 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
 
         $this->entityManagerService->persistAndFlush($message);
 
-        return $message->getId();
+        return [$conversation->getId(), $message->getId()];
+    }
+
+    private function removeTestConversation(int $conversationId): void
+    {
+        /** @var Conversation $conversation */
+        $conversation = $this->entityManagerService
+            ->getRepository(Conversation::class)
+            ->find($conversationId);
+
+        $this->entityManagerService->remove($conversation);
     }
 }
