@@ -15,6 +15,7 @@ namespace App\Domain\Task\Repository;
 use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -103,13 +104,17 @@ class TaskRepository extends ServiceEntityRepository
     public function getTasksAfterDeadline(): QueryBuilder
     {
         return $this->baseQueryBuilder()
+            ->join('task.work', 'work')
+            ->join('work.status', 'status')
             ->andWhere('task.complete = :complete')
             ->andWhere('task.notifyComplete = :notifyComplete')
             ->andWhere('task.active = :active')
             ->andWhere('task.deadline < CURRENT_DATE()')
+            ->andWhere('status.id = :workStatusId')
             ->setParameter('active', true)
             ->setParameter('complete', false)
-            ->setParameter('notifyComplete', false);
+            ->setParameter('notifyComplete', false)
+            ->setParameter('workStatusId', WorkStatusConstant::ACTIVE);
     }
 
     public function allByWorks(array $works, bool $active = false): QueryBuilder
