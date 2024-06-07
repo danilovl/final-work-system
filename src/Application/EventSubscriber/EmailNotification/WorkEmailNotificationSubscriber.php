@@ -23,7 +23,8 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     {
         return [
             Events::NOTIFICATION_WORK_CREATE => 'onWorkCreate',
-            Events::NOTIFICATION_WORK_EDIT => 'onWorkEdit'
+            Events::NOTIFICATION_WORK_EDIT => 'onWorkEdit',
+            Events::NOTIFICATION_WORK_REMIND_DEADLINE_CREATE => 'onWorkReminderDeadlineCreate'
         ];
     }
 
@@ -90,6 +91,25 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
             'templateParameters' => [
                 'workId' => $work->getId(),
                 'workSupervisor' => $work->getSupervisor()->getFullNameDegree()
+            ]
+        ]);
+
+        $this->addEmailNotificationToQueue($emailNotificationToQueueData);
+    }
+
+    public function onWorkReminderDeadlineCreate(WorkGenericEvent $event): void
+    {
+        $work = $event->work;
+        $toUser = $work->getAuthor();
+
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+            'locale' => $toUser->getLocale() ?? $this->locale,
+            'subject' => 'subject.work_reminder_deadline',
+            'to' => $toUser->getEmail(),
+            'from' => $this->sender,
+            'template' => 'work_reminder_deadline',
+            'templateParameters' => [
+                'workId' => $work->getId(),
             ]
         ]);
 

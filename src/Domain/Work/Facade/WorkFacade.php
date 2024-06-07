@@ -20,7 +20,7 @@ use Doctrine\ORM\{
     QueryBuilder
 };
 
-class WorkFacade
+readonly class WorkFacade
 {
     public function __construct(private WorkRepository $workRepository) {}
 

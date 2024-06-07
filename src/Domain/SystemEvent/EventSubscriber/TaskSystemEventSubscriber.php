@@ -31,7 +31,7 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
             Events::SYSTEM_TASK_INCOMPLETE => 'onTaskInComplete',
             Events::SYSTEM_TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
             Events::SYSTEM_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
-            Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE => 'onTaskReminderDeadlineCreate'
+            Events::SYSTEM_TASK_REMIND_CREATE => 'onTaskReminderDeadlineCreate'
         ];
     }
 

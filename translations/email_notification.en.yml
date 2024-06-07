@@ -4,6 +4,7 @@ app:
       user_create: 'Create a new account'
       work_create: 'Creating work'
       work_edit: 'Editing work'
+      work_reminder_deadline: 'A reminder about the expiration of the deadline for the work'
       user_edit: 'Editing personal information'
       task_create: 'Create a new task'
       task_edit: 'Editing a task'

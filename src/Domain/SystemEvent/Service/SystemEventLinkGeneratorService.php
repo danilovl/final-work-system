@@ -78,6 +78,7 @@ readonly class SystemEventLinkGeneratorService implements RuntimeExtensionInterf
         return match ($systemEventTypeId) {
             SystemEventTypeConstant::WORK_CREATE->value => $folder . '/work_create.twig',
             SystemEventTypeConstant::WORK_EDIT->value => $folder . '/work_edit.html.twig',
+            SystemEventTypeConstant::WORK_REMIND_DEADLINE->value => $folder . '/work_remind_deadline.html.twig',
             SystemEventTypeConstant::USER_EDIT->value => $folder . '/user_edit.html.twig',
             SystemEventTypeConstant::TASK_CREATE->value => $folder . '/task_create.html.twig',
             SystemEventTypeConstant::TASK_EDIT->value => $folder . '/task_edit.html.twig',

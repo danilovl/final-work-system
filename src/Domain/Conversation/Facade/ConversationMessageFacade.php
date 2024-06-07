@@ -24,7 +24,7 @@ use App\Domain\User\Entity\User;
 use DateTime;
 use Doctrine\ORM\Query;
 
-class ConversationMessageFacade
+readonly class ConversationMessageFacade
 {
     public function __construct(
         private EntityManagerService $entityManagerService,

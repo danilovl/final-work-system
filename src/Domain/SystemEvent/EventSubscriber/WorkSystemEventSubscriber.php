@@ -36,7 +36,8 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         return [
             Events::SYSTEM_WORK_CREATE => 'onWorkCreate',
             Events::SYSTEM_WORK_EDIT => 'onWorkEdit',
-            Events::SYSTEM_WORK_AUTHOR_EDIT => 'onWorkAuthorEdit'
+            Events::SYSTEM_WORK_AUTHOR_EDIT => 'onWorkAuthorEdit',
+            Events::SYSTEM_WORK_REMIND_CREATE => 'onWorkReminderDeadlineCreate'
         ];
     }
 
@@ -110,6 +111,27 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         $systemEventType = $this->entityManagerService
             ->getRepository(SystemEventType::class)
             ->find(SystemEventTypeConstant::USER_EDIT->value);
+
+        $systemEvent = new SystemEvent;
+        $systemEvent->setOwner($work->getSupervisor());
+        $systemEvent->setType($systemEventType);
+        $systemEvent->setWork($work);
+
+        $recipientAuthor = new SystemEventRecipient;
+        $recipientAuthor->setRecipient($work->getAuthor());
+        $systemEvent->addRecipient($recipientAuthor);
+
+        $this->entityManagerService->persistAndFlush($systemEvent);
+    }
+
+    public function onWorkReminderDeadlineCreate(WorkGenericEvent $event): void
+    {
+        $work = $event->work;
+
+        /** @var SystemEventType $systemEventType */
+        $systemEventType = $this->entityManagerService
+            ->getRepository(SystemEventType::class)
+            ->find(SystemEventTypeConstant::WORK_REMIND_DEADLINE->value);
 
         $systemEvent = new SystemEvent;
         $systemEvent->setOwner($work->getSupervisor());

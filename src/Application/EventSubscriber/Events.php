@@ -16,6 +16,7 @@ enum Events
 {
     public const NOTIFICATION_WORK_CREATE = 'notification.work.create';
     public const NOTIFICATION_WORK_EDIT = 'notification.work.edit';
+    public const NOTIFICATION_WORK_REMIND_DEADLINE_CREATE = 'notification.work.remind_deadline.create';
     public const NOTIFICATION_TASK_CREATE = 'notification.task.create';
     public const NOTIFICATION_TASK_EDIT = 'notification.task.edit';
     public const NOTIFICATION_TASK_COMPLETE = 'notification.task.complete';
@@ -40,6 +41,7 @@ enum Events
     public const SYSTEM_WORK_CREATE = 'system.work.create';
     public const SYSTEM_WORK_EDIT = 'system.work.edit';
     public const SYSTEM_WORK_AUTHOR_EDIT = 'system.work.author_edit';
+    public const SYSTEM_WORK_REMIND_CREATE = 'system.work.remind.create';
     public const SYSTEM_USER_EDIT = 'system.user.edit';
     public const SYSTEM_TASK_CREATE = 'system.task.create';
     public const SYSTEM_TASK_EDIT = 'system.task.edit';

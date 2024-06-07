@@ -53,7 +53,7 @@ class BaseEmailNotificationSubscriber
 
     protected function getTemplate(string $locale, string $name): string
     {
-        return "email_notification/{$locale}/{$name}.html.twig";
+        return "application/email_notification/{$locale}/{$name}.html.twig";
     }
 
     public function trans(string $trans, string $locale): string

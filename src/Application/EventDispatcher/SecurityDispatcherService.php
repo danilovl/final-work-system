@@ -17,7 +17,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class SecurityDispatcherService
+readonly class SecurityDispatcherService
 {
     public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 

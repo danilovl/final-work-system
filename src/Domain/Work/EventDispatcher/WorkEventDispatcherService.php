@@ -19,7 +19,7 @@ use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class WorkEventDispatcherService
+readonly class WorkEventDispatcherService
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,
@@ -55,5 +55,13 @@ class WorkEventDispatcherService
             $this->eventDispatcher->dispatch($genericEventUser, Events::NOTIFICATION_USER_EDIT);
             $this->eventDispatcher->dispatch($genericEventWork, Events::SYSTEM_WORK_AUTHOR_EDIT);
         });
+    }
+
+    public function onWorkReminderDeadlineCreate(Work $work): void
+    {
+        $genericEvent = new WorkGenericEvent($work);
+
+        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_REMIND_DEADLINE_CREATE);
+        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_REMIND_CREATE);
     }
 }

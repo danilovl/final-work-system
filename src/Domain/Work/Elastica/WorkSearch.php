@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\Form\FormInterface;
 
-class WorkSearch
+readonly class WorkSearch
 {
     public function __construct(private TransformedFinder $transformedFinderWork) {}
 

@@ -28,6 +28,10 @@ parameters:
     enable: '%env(bool:TASK_REMIND_ENABLE)%'
     translator_domain: 'email_notification'
     default_locale: '%locale%'
+  work_remind:
+    enable: '%env(bool:WORK_REMIND_ENABLE)%'
+    translator_domain: 'email_notification'
+    default_locale: '%locale%'
   google_maps_key: '%env(GOOGLE_MAPS_KEY)%'
   google_analytics_code: '%env(GOOGLE_ANALYTICS_CODE)%'
   template:

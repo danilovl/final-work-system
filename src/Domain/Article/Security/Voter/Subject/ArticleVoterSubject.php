@@ -15,7 +15,7 @@ namespace App\Domain\Article\Security\Voter\Subject;
 use App\Domain\Article\Entity\Article;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 
-class ArticleVoterSubject
+readonly class ArticleVoterSubject
 {
     public function __construct(public Article $article, public ArticleCategory $articleCategory)
     {

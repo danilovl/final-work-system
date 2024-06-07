@@ -64,8 +64,9 @@ final class Version20200627193807 extends AbstractMigration
             (15, 'event', 'EVENT_SWITCH_SKYPE', NULL, 'EVENT_SWITCH_SKYPE', NOW(), NULL),
             (16, 'event', 'EVENT_COMMENT_CREATE', NULL, 'EVENT_COMMENT_CREATE', NOW(), NULL),
             (17, 'event', 'EVENT_COMMENT_EDIT', NULL, 'EVENT_COMMENT_EDIT', NOW(), NULL),
-            (18, 'message', 'MESSAGE_CREATE', NULL, 'MESSAGE_CREATE', NOW(), NULL);
-            (19, 'tasks', 'TASK_REMIND_DEADLINE', NULL, 'TASK_REMIND_DEADLINE', NOW(), NULL);
+            (18, 'message', 'MESSAGE_CREATE', NULL, 'MESSAGE_CREATE', NOW(), NULL),
+            (19, 'task', 'TASK_REMIND_DEADLINE', NULL, 'TASK_REMIND_DEADLINE', NOW(), NULL),
+            (20, 'work', 'WORK_REMIND_DEADLINE', NULL, 'WORK_REMIND_DEADLINE', NOW(), NULL);
         ");
 
         $this->addSql("INSERT INTO `work_status` (`id`, `color`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 

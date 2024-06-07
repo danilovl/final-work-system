@@ -14,7 +14,7 @@ namespace App\Domain\Conversation\EventDispatcher\GenericEvent;
 
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 
-class ConversationMessageGenericEvent
+readonly class ConversationMessageGenericEvent
 {
     public function __construct(public ConversationMessage $conversationMessage) {}
 }

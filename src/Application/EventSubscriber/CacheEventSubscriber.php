@@ -20,7 +20,7 @@ use App\Application\EventDispatcher\GenericEvent\{
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-class CacheEventSubscriber implements EventSubscriberInterface
+readonly class CacheEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private CacheInterface $cache,

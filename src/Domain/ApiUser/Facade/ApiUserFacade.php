@@ -15,7 +15,7 @@ namespace App\Domain\ApiUser\Facade;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Repository\ApiUserRepository;
 
-class ApiUserFacade
+readonly class ApiUserFacade
 {
     public function __construct(private ApiUserRepository $apiUserRepository) {}
 

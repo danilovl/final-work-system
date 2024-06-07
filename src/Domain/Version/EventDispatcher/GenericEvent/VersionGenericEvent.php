@@ -14,7 +14,7 @@ namespace App\Domain\Version\EventDispatcher\GenericEvent;
 
 use App\Domain\Media\Entity\Media;
 
-class VersionGenericEvent
+readonly class VersionGenericEvent
 {
     public function __construct(public Media $media) {}
 }

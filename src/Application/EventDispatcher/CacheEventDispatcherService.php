@@ -20,7 +20,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CacheEventDispatcherService
+readonly class CacheEventDispatcherService
 {
     public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 

@@ -4,6 +4,7 @@ app:
       user_create: 'Vytvoření nového účtu'
       work_create: 'Vytvoření prace'
       work_edit: 'Editace práce'
+      work_reminder_deadline: 'Připomenutí o uplynutí lhůty práce'
       user_edit: 'Editace osobních údajů'
       task_create: 'Vytvoření nového úkolu'
       task_edit: 'Editace úkolu'

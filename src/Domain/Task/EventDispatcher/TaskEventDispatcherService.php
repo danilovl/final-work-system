@@ -20,7 +20,7 @@ use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class TaskEventDispatcherService
+readonly class TaskEventDispatcherService
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,
@@ -108,9 +108,7 @@ class TaskEventDispatcherService
     {
         $genericEvent = new TaskGenericEvent($task);
 
-        $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);
-        });
+        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
+        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);
     }
 }

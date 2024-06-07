@@ -16,6 +16,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DataTransferObject\WorkRepositoryData;
 use App\Domain\Work\Entity\Work;
+use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -103,5 +104,14 @@ class WorkRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder;
+    }
+
+    public function getWorksAfterDeadline(): QueryBuilder
+    {
+        return $this->baseQueryBuilder()
+            ->join('work.status', 'status')
+            ->andWhere('work.deadline < CURRENT_DATE()')
+            ->andWhere('status.id = :workStatusId')
+            ->setParameter('workStatusId', WorkStatusConstant::ACTIVE);
     }
 }

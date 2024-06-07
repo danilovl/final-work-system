@@ -16,6 +16,7 @@ enum SystemEventTypeConstant: int
 {
     case WORK_CREATE = 1;
     case WORK_EDIT = 2;
+    case WORK_REMIND_DEADLINE = 20;
     case USER_EDIT = 3;
     case TASK_CREATE = 4;
     case TASK_EDIT = 5;
