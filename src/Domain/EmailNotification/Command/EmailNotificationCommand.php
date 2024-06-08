@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Domain\EmailNotificationQueue\Command;
+namespace App\Domain\EmailNotification\Command;
 
 use App\Application\Service\{
     MailerService,
     EntityManagerService
 };
-use App\Domain\EmailNotificationQueue\Facade\EmailNotificationQueueFacade;
+use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,15 +28,15 @@ use Symfony\Component\Mime\{
     Email
 };
 
-class EmailNotificationQueueCommand extends Command
+class EmailNotificationCommand extends Command
 {
-    final public const COMMAND_NAME = 'app:email-notification-queue-send';
+    final public const COMMAND_NAME = 'app:email-notification-send';
 
     private SymfonyStyle $io;
 
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
-        private readonly EmailNotificationQueueFacade $emailNotificationQueueFacade,
+        private readonly EmailNotificationFacade $emailNotificationFacade,
         private readonly MailerService $mailer,
         private readonly ParameterServiceInterface $parameterService
     ) {
@@ -62,7 +62,7 @@ class EmailNotificationQueueCommand extends Command
             return Command::FAILURE;
         }
 
-        $emailNotification = $this->emailNotificationQueueFacade
+        $emailNotification = $this->emailNotificationFacade
             ->getOneReadyForSender();
 
         if ($emailNotification === null) {

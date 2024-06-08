@@ -12,7 +12,7 @@
 
 namespace App\Application\Admin;
 
-use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\User\Admin\UserCrudController;
 use App\Domain\User\Entity\User;
 use App\Domain\UserGroup\Entity\Group;
@@ -47,6 +47,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('app.admin.menu.item.user', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('app.admin.menu.item.group', 'fas fa-users', Group::class);
-        yield MenuItem::linkToCrud('app.admin.menu.item.email_notification_queue', 'fas fa-envelope-open', EmailNotificationQueue::class);
+        yield MenuItem::linkToCrud('app.admin.menu.item.email_notification_queue', 'fas fa-envelope-open', EmailNotification::class);
     }
 }

@@ -30,7 +30,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             $this->userFacade,
             $this->twig,
             $this->translator,
-            $this->emailNotificationQueueFactory,
+            $this->emailNotificationFactory,
             $this->parameterService,
             $this->bus
         );

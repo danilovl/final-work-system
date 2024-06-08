@@ -34,7 +34,7 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
             $this->userFacade,
             $this->twig,
             $this->translator,
-            $this->emailNotificationQueueFactory,
+            $this->emailNotificationFactory,
             $this->parameterService,
             $this->bus
         );

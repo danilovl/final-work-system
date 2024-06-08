@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Domain\EmailNotificationQueue\Model;
+namespace App\Domain\EmailNotification\Model;
 
-class EmailNotificationQueueModel
+class EmailNotificationModel
 {
     public string $subject;
     public string $to;

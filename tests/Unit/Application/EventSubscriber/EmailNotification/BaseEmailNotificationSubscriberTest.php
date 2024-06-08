@@ -14,7 +14,7 @@ namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
-use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\User\Entity\User;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -42,7 +42,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->userFacade,
             $this->twig,
             $this->translator,
-            $this->emailNotificationQueueFactory,
+            $this->emailNotificationFactory,
             $this->parameterService,
             $this->bus
         ) extends BaseEmailNotificationSubscriber {
@@ -109,10 +109,10 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             ->method('findOneByEmail')
             ->willReturn($user);
 
-        $this->emailNotificationQueueFactory
+        $this->emailNotificationFactory
             ->expects($this->once())
             ->method('createFromModel')
-            ->willReturn(new EmailNotificationQueue);
+            ->willReturn(new EmailNotification);
 
         $this->subscriber->addEmailNotificationToQueuePublic($this->emailNotificationMessage);
     }

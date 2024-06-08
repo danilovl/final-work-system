@@ -10,19 +10,19 @@
  *
  */
 
-namespace App\Domain\EmailNotificationQueue\Repository;
+namespace App\Domain\EmailNotification\Repository;
 
-use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Domain\EmailNotification\Entity\EmailNotification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
-class EmailNotificationQueueRepository extends ServiceEntityRepository
+class EmailNotificationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EmailNotificationQueue::class);
+        parent::__construct($registry, EmailNotification::class);
     }
 
     public function baseQueryBuilder(): QueryBuilder

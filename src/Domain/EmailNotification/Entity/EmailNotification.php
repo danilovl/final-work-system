@@ -10,21 +10,21 @@
  *
  */
 
-namespace App\Domain\EmailNotificationQueue\Entity;
+namespace App\Domain\EmailNotification\Entity;
 
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateAbleTrait
 };
-use App\Domain\EmailNotificationQueue\Repository\EmailNotificationQueueRepository;
+use App\Domain\EmailNotification\Repository\EmailNotificationRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'email_notification')]
-#[ORM\Entity(repositoryClass: EmailNotificationQueueRepository::class)]
+#[ORM\Entity(repositoryClass: EmailNotificationRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class EmailNotificationQueue
+class EmailNotification
 {
     use IdTrait;
     use CreateAbleTrait;

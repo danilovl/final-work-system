@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Domain\EmailNotificationQueue\Admin;
+namespace App\Domain\EmailNotification\Admin;
 
-use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
+use App\Domain\EmailNotification\Entity\EmailNotification;
 use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -24,11 +24,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{
     TextEditorField,
     TextField};
 
-class EmailNotificationQueueCrudController extends AbstractCrudController
+class EmailNotificationCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return EmailNotificationQueue::class;
+        return EmailNotification::class;
     }
 
     public function configureCrud(Crud $crud): Crud

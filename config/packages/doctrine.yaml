@@ -66,11 +66,11 @@ doctrine:
             type: attribute
             dir: '%kernel.project_dir%/src/Domain/ConversationType/Entity'
             prefix: App\Domain\ConversationType\Entity
-          App\Domain\EmailNotificationQueue:
+          App\Domain\EmailNotification:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Domain/EmailNotificationQueue/Entity'
-            prefix: App\Domain\EmailNotificationQueue\Entity
+            dir: '%kernel.project_dir%/src/Domain/EmailNotification/Entity'
+            prefix: App\Domain\EmailNotification\Entity
           App\Domain\Event:
             is_bundle: false
             type: attribute

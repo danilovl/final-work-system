@@ -66,14 +66,14 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\EmailNotificationQueue\\\\Facade\\\\EmailNotificationQueueFacade\\:\\:getOneByUuid\\(\\) should return App\\\\Domain\\\\EmailNotificationQueue\\\\Entity\\\\EmailNotificationQueue\\|null but returns mixed\\.$#"
+			message: "#^Method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:getOneByUuid\\(\\) should return App\\\\Domain\\\\EmailNotification\\\\Entity\\\\EmailNotification\\|null but returns mixed\\.$#"
 			count: 1
-			path: src/Domain/EmailNotificationQueue/Facade/EmailNotificationQueueFacade.php
+			path: src/Domain/EmailNotification/Facade/EmailNotificationFacade.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\EmailNotificationQueue\\\\Facade\\\\EmailNotificationQueueFacade\\:\\:getOneReadyForSender\\(\\) should return App\\\\Domain\\\\EmailNotificationQueue\\\\Entity\\\\EmailNotificationQueue\\|null but returns mixed\\.$#"
+			message: "#^Method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:getOneReadyForSender\\(\\) should return App\\\\Domain\\\\EmailNotification\\\\Entity\\\\EmailNotification\\|null but returns mixed\\.$#"
 			count: 1
-			path: src/Domain/EmailNotificationQueue/Facade/EmailNotificationQueueFacade.php
+			path: src/Domain/EmailNotification/Facade/EmailNotificationFacade.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null but returns object\\|null\\.$#"
@@ -269,6 +269,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
 			count: 1
 			path: src/Domain/Work/Elastica/WorkSearch.php
+
+		-
+			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkDeadlineFacade\\:\\:getWorksAfterDeadline\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Domain/Work/Facade/WorkDeadlineFacade.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null but returns object\\|null\\.$#"

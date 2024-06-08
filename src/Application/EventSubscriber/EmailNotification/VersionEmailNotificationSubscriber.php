@@ -15,7 +15,7 @@ namespace App\Application\EventSubscriber\EmailNotification;
 use App\Application\EventSubscriber\Events;
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
-use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Service\WorkService;
@@ -30,7 +30,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         protected UserFacade $userFacade,
         protected Environment $twig,
         protected TranslatorService $translator,
-        protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
+        protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
         private readonly WorkService $workService,
         protected MessageBusInterface $bus
@@ -39,7 +39,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
             $userFacade,
             $twig,
             $translator,
-            $emailNotificationQueueFactory,
+            $emailNotificationFactory,
             $parameterService,
             $bus
         );

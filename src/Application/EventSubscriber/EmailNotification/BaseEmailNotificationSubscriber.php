@@ -14,8 +14,8 @@ namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
-use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
-use App\Domain\EmailNotificationQueue\Model\EmailNotificationQueueModel;
+use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
+use App\Domain\EmailNotification\Model\EmailNotificationModel;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -34,7 +34,7 @@ class BaseEmailNotificationSubscriber
         protected UserFacade $userFacade,
         protected Environment $twig,
         protected TranslatorService $translator,
-        protected EmailNotificationQueueFactory $emailNotificationQueueFactory,
+        protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
         protected MessageBusInterface $bus
     ) {
@@ -110,14 +110,14 @@ class BaseEmailNotificationSubscriber
             $message->templateParameters
         );
 
-        $emailNotificationQueueModel = new EmailNotificationQueueModel;
-        $emailNotificationQueueModel->subject = $subject;
-        $emailNotificationQueueModel->to = $message->to;
-        $emailNotificationQueueModel->from = $message->from;
-        $emailNotificationQueueModel->body = $body;
-        $emailNotificationQueueModel->uuid = $message->uuid;
+        $emailNotificationModel = new EmailNotificationModel;
+        $emailNotificationModel->subject = $subject;
+        $emailNotificationModel->to = $message->to;
+        $emailNotificationModel->from = $message->from;
+        $emailNotificationModel->body = $body;
+        $emailNotificationModel->uuid = $message->uuid;
 
-        $this->emailNotificationQueueFactory->createFromModel($emailNotificationQueueModel);
+        $this->emailNotificationFactory->createFromModel($emailNotificationModel);
     }
 
     protected function sendToMessenger(EmailNotificationMessage $queueData): void

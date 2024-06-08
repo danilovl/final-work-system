@@ -13,8 +13,8 @@
 namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
 
 use App\Application\Service\TranslatorService;
-use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
-use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Domain\EmailNotification\Entity\EmailNotification;
+use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\ParameterBundle\Service\ParameterService;
@@ -38,7 +38,7 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
     protected readonly UserFacade $userFacade;
     protected readonly Environment $twig;
     protected readonly TranslatorService $translator;
-    protected readonly EmailNotificationQueueFactory $emailNotificationQueueFactory;
+    protected readonly EmailNotificationFactory $emailNotificationFactory;
     protected readonly ParameterServiceInterface $parameterService;
     protected readonly MessageBusInterface $bus;
 
@@ -54,12 +54,12 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
             ->method('trans')
             ->willReturn('trans');
 
-        $this->emailNotificationQueueFactory = $this->createMock(EmailNotificationQueueFactory::class);
+        $this->emailNotificationFactory = $this->createMock(EmailNotificationFactory::class);
 
-        $this->emailNotificationQueueFactory
+        $this->emailNotificationFactory
             ->expects($this->any())
             ->method('createFromModel')
-            ->willReturn(new EmailNotificationQueue);
+            ->willReturn(new EmailNotification);
 
         $this->bus = $this->createMock(MessageBusInterface::class);
         $envelope = new Envelope(new stdClass);

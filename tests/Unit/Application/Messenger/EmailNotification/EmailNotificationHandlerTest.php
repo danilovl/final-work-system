@@ -19,9 +19,9 @@ use App\Application\Messenger\EmailNotification\{
     EmailNotificationMessage
 };
 use App\Application\Service\MailerService;
-use App\Domain\EmailNotificationQueue\Entity\EmailNotificationQueue;
-use App\Domain\EmailNotificationQueue\Facade\EmailNotificationQueueFacade;
-use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
+use App\Domain\EmailNotification\Entity\EmailNotification;
+use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
+use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Application\Service\EntityManagerService;
 use PHPUnit\Framework\TestCase;
@@ -31,8 +31,8 @@ class EmailNotificationHandlerTest extends TestCase
 {
     private readonly ParameterServiceInterface $parameterService;
     private readonly MailerService $mailerService;
-    private readonly EmailNotificationQueueFactory $emailNotificationQueueFactory;
-    private readonly EmailNotificationQueueFacade $emailNotificationQueueFacade;
+    private readonly EmailNotificationFactory $emailNotificationFactory;
+    private readonly EmailNotificationFacade $emailNotificationFacade;
     private readonly EntityManagerService $entityManagerService;
     private readonly EmailNotificationHandler $emailNotificationHandler;
     private readonly EmailNotificationMessage $emailNotificationMessage;
@@ -55,24 +55,24 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('renderBody')
             ->willReturn('body');
 
-        $emailNotificationQueueModel = new EmailNotificationQueue;
-        $emailNotificationQueueModel->setId(1);
+        $emailNotification = new EmailNotification;
+        $emailNotification->setId(1);
 
-        $this->emailNotificationQueueFactory = $this->createMock(EmailNotificationQueueFactory::class);
-        $this->emailNotificationQueueFactory
+        $this->emailNotificationFactory = $this->createMock(EmailNotificationFactory::class);
+        $this->emailNotificationFactory
             ->expects($this->any())
             ->method('createFromModel')
-            ->willReturn($emailNotificationQueueModel);
+            ->willReturn($emailNotification);
 
-        $this->emailNotificationQueueFacade = $this->createMock(EmailNotificationQueueFacade::class);
+        $this->emailNotificationFacade = $this->createMock(EmailNotificationFacade::class);
         $this->entityManagerService = $this->createMock(EntityManagerService::class);
 
         $this->emailNotificationHandler = new EmailNotificationHandler(
             $this->parameterService,
             $this->mailerService,
-            $this->emailNotificationQueueFactory,
+            $this->emailNotificationFactory,
             $baseEmailNotificationSubscriber,
-            $this->emailNotificationQueueFacade,
+            $this->emailNotificationFacade,
             $this->entityManagerService
         );
 
@@ -116,13 +116,13 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('send')
             ->willThrowException(new TransportException);
 
-        $emailNotificationQueue = new EmailNotificationQueue;
-        $emailNotificationQueue->setId(1);
+        $emailNotification = new EmailNotification;
+        $emailNotification->setId(1);
 
-        $this->emailNotificationQueueFacade
+        $this->emailNotificationFacade
             ->expects($this->once())
             ->method('getOneByUuid')
-            ->willReturn($emailNotificationQueue);
+            ->willReturn($emailNotification);
 
         $this->expectOutputString('Failed send email to test@example.com. ' . PHP_EOL);
         $this->emailNotificationHandler->__invoke($this->emailNotificationMessage);
@@ -143,13 +143,13 @@ class EmailNotificationHandlerTest extends TestCase
             ->expects($this->once())
             ->method('flush');
 
-        $emailNotificationQueue = new EmailNotificationQueue;
-        $emailNotificationQueue->setId(1);
+        $emailNotification = new EmailNotification;
+        $emailNotification->setId(1);
 
-        $this->emailNotificationQueueFacade
+        $this->emailNotificationFacade
             ->expects($this->once())
             ->method('getOneByUuid')
-            ->willReturn($emailNotificationQueue);
+            ->willReturn($emailNotification);
 
         $result = 'Success send email to test@example.com. ' . PHP_EOL;
         $result .= 'Success update email notification queue. ID: 1. ' . PHP_EOL;
@@ -173,10 +173,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->expects($this->never())
             ->method('flush');
 
-        $emailNotificationQueue = new EmailNotificationQueue;
-        $emailNotificationQueue->setId(1);
+        $emailNotification = new EmailNotification;
+        $emailNotification->setId(1);
 
-        $this->emailNotificationQueueFacade
+        $this->emailNotificationFacade
             ->expects($this->once())
             ->method('getOneByUuid')
             ->willReturn(null);

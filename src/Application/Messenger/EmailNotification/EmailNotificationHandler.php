@@ -16,9 +16,9 @@ use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubsc
 use App\Application\Exception\RuntimeException;
 use App\Application\Service\EntityManagerService;
 use App\Application\Service\MailerService;
-use App\Domain\EmailNotificationQueue\Facade\EmailNotificationQueueFacade;
-use App\Domain\EmailNotificationQueue\Factory\EmailNotificationQueueFactory;
-use App\Domain\EmailNotificationQueue\Model\EmailNotificationQueueModel;
+use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
+use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
+use App\Domain\EmailNotification\Model\EmailNotificationModel;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -33,9 +33,9 @@ readonly class EmailNotificationHandler
     public function __construct(
         private ParameterServiceInterface $parameterService,
         private MailerService $mailer,
-        private EmailNotificationQueueFactory $emailNotificationQueueFactory,
+        private EmailNotificationFactory $emailNotificationFactory,
         private BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
-        private EmailNotificationQueueFacade $emailNotificationQueueFacade,
+        private EmailNotificationFacade $emailNotificationFacade,
         private EntityManagerService $entityManagerService,
         private bool $printMessage = true
     ) {}
@@ -92,7 +92,7 @@ readonly class EmailNotificationHandler
         string $body,
         bool $success
     ): void {
-        $emailNotification = $this->emailNotificationQueueFacade->getOneByUuid($message->uuid);
+        $emailNotification = $this->emailNotificationFacade->getOneByUuid($message->uuid);
         if ($emailNotification !== null) {
             if (!$success) {
                 return;
@@ -108,15 +108,15 @@ readonly class EmailNotificationHandler
             return;
         }
 
-        $emailNotificationQueueModel = new EmailNotificationQueueModel;
-        $emailNotificationQueueModel->subject = $subject;
-        $emailNotificationQueueModel->to = $message->to;
-        $emailNotificationQueueModel->from = $message->from;
-        $emailNotificationQueueModel->body = $body;
-        $emailNotificationQueueModel->uuid = $message->uuid;
-        $emailNotificationQueueModel->success = $success;
+        $emailNotificationModel = new EmailNotificationModel;
+        $emailNotificationModel->subject = $subject;
+        $emailNotificationModel->to = $message->to;
+        $emailNotificationModel->from = $message->from;
+        $emailNotificationModel->body = $body;
+        $emailNotificationModel->uuid = $message->uuid;
+        $emailNotificationModel->success = $success;
 
-        $emailNotification = $this->emailNotificationQueueFactory->createFromModel($emailNotificationQueueModel);
+        $emailNotification = $this->emailNotificationFactory->createFromModel($emailNotificationModel);
 
         if ($this->printMessage) {
             echo sprintf('Create email notification queue. ID: %d. %s', $emailNotification->getId(), PHP_EOL);
