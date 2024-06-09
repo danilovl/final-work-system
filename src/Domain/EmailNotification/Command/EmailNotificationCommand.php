@@ -12,21 +12,15 @@
 
 namespace App\Domain\EmailNotification\Command;
 
-use App\Application\Service\{
-    MailerService,
-    EntityManagerService
-};
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
+use App\Domain\EmailNotification\Service\SendEmailNotificationService;
+use App\Application\Service\EntityManagerService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mime\{
-    Address,
-    Email
-};
 
 class EmailNotificationCommand extends Command
 {
@@ -37,7 +31,7 @@ class EmailNotificationCommand extends Command
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
         private readonly EmailNotificationFacade $emailNotificationFacade,
-        private readonly MailerService $mailer,
+        private readonly SendEmailNotificationService $sendEmailNotificationService,
         private readonly ParameterServiceInterface $parameterService
     ) {
         parent::__construct();
@@ -72,13 +66,7 @@ class EmailNotificationCommand extends Command
         }
 
         try {
-            $email = (new Email)
-                ->from(new Address($emailNotification->getFrom()))
-                ->to($emailNotification->getTo())
-                ->subject($emailNotification->getSubject())
-                ->html($emailNotification->getBody());
-
-            $this->mailer->send($email);
+            $this->sendEmailNotificationService->sendEmailNotification($emailNotification);
             $status = true;
 
             $message = sprintf('Email notification with ID: %d was send.', $emailNotification->getId());
