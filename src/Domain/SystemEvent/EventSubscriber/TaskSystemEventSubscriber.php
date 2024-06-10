@@ -25,13 +25,13 @@ class TaskSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_TASK_CREATE => 'onTaskCreate',
-            Events::SYSTEM_TASK_EDIT => 'onTaskEdit',
-            Events::SYSTEM_TASK_COMPLETE => 'onTaskComplete',
-            Events::SYSTEM_TASK_INCOMPLETE => 'onTaskInComplete',
-            Events::SYSTEM_TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
-            Events::SYSTEM_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
-            Events::SYSTEM_TASK_REMIND_CREATE => 'onTaskReminderDeadlineCreate'
+            Events::TASK_CREATE => 'onTaskCreate',
+            Events::TASK_EDIT => 'onTaskEdit',
+            Events::TASK_COMPLETE => 'onTaskComplete',
+            Events::TASK_INCOMPLETE => 'onTaskInComplete',
+            Events::TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
+            Events::TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
+            Events::TASK_REMIND_DEADLINE_CREATE => 'onTaskReminderDeadlineCreate'
         ];
     }
 

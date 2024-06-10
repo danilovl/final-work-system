@@ -36,8 +36,7 @@ readonly class TaskEventDispatcherService
         }
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::TASK_CREATE);
         });
     }
 
@@ -52,12 +51,7 @@ readonly class TaskEventDispatcherService
         $this->asyncService->add(function () use ($genericEvent, $task): void {
             $this->eventDispatcher->dispatch(
                 $genericEvent,
-                $task->getSystemEvents()->isEmpty() ? Events::NOTIFICATION_TASK_CREATE : Events::NOTIFICATION_TASK_EDIT
-            );
-
-            $this->eventDispatcher->dispatch(
-                $genericEvent,
-                $task->getSystemEvents()->isEmpty() ? Events::SYSTEM_TASK_CREATE : Events::SYSTEM_TASK_EDIT
+                $task->getSystemEvents()->isEmpty() ? Events::TASK_CREATE : Events::TASK_EDIT
             );
         });
     }
@@ -67,8 +61,7 @@ readonly class TaskEventDispatcherService
         $genericEvent = new TaskGenericEvent($task);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_NOTIFY_COMPLETE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_NOTIFY_COMPLETE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::TASK_NOTIFY_COMPLETE);
         });
     }
 
@@ -78,29 +71,27 @@ readonly class TaskEventDispatcherService
 
         switch ($type) {
             case TaskStatusConstant::ACTIVE->value:
-                $notificationEvent = Events::NOTIFICATION_TASK_CREATE;
-                $systemEvent = Events::SYSTEM_TASK_CREATE;
+                $notificationEvent = Events::TASK_CREATE;
+
                 break;
             case TaskStatusConstant::COMPLETE->value:
-                $notificationEvent = Events::NOTIFICATION_TASK_INCOMPLETE;
-                $systemEvent = Events::SYSTEM_TASK_INCOMPLETE;
+                $notificationEvent = Events::TASK_INCOMPLETE;
 
                 if ($task->isComplete()) {
-                    $notificationEvent = Events::NOTIFICATION_TASK_COMPLETE;
-                    $systemEvent = Events::SYSTEM_TASK_COMPLETE;
+                    $notificationEvent = Events::TASK_COMPLETE;
                 }
+
                 break;
             case TaskStatusConstant::NOTIFY->value:
-                $notificationEvent = Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE;
-                $systemEvent = Events::SYSTEM_TASK_NOTIFY_INCOMPLETE;
+                $notificationEvent = Events::TASK_NOTIFY_INCOMPLETE;
+
                 break;
             default:
                 throw new RuntimeException(sprintf('Type event "%s" for onTaskChangeStatus not exist', $type));
         }
 
-        $this->asyncService->add(function () use ($genericEvent, $notificationEvent, $systemEvent): void {
+        $this->asyncService->add(function () use ($genericEvent, $notificationEvent): void {
             $this->eventDispatcher->dispatch($genericEvent, $notificationEvent);
-            $this->eventDispatcher->dispatch($genericEvent, $systemEvent);
         });
     }
 
@@ -108,7 +99,6 @@ readonly class TaskEventDispatcherService
     {
         $genericEvent = new TaskGenericEvent($task);
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_TASK_REMIND_CREATE);
+        $this->eventDispatcher->dispatch($genericEvent, Events::TASK_REMIND_DEADLINE_CREATE);
     }
 }

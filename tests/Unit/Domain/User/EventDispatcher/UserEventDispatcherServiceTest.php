@@ -67,17 +67,16 @@ class UserEventDispatcherServiceTest extends TestCase
                 UserGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_USER_CREATE
+                Events::USER_CREATE
             ]
         ];
 
-        yield ['onUserEdit', 2,
+        yield ['onUserEdit', 1,
             [
                 UserGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_USER_EDIT,
-                Events::SYSTEM_USER_EDIT
+                Events::USER_EDIT
             ]
         ];
     }

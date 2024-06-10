@@ -34,10 +34,10 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_WORK_CREATE => 'onWorkCreate',
-            Events::SYSTEM_WORK_EDIT => 'onWorkEdit',
-            Events::SYSTEM_WORK_AUTHOR_EDIT => 'onWorkAuthorEdit',
-            Events::SYSTEM_WORK_REMIND_CREATE => 'onWorkReminderDeadlineCreate'
+            Events::WORK_CREATE => 'onWorkCreate',
+            Events::WORK_EDIT => 'onWorkEdit',
+            Events::WORK_AUTHOR_EDIT => 'onWorkAuthorEdit',
+            Events::WORK_REMIND_DEADLINE_CREATE => 'onWorkReminderDeadlineCreate'
         ];
     }
 

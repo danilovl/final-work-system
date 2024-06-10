@@ -14,12 +14,14 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Constant\{
     FlashTypeConstant,
-    SeoPageConstant};
+    SeoPageConstant
+};
 use App\Application\Service\{
     RequestService,
     SeoPageService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\UserEditForm;
 use App\Domain\User\Model\UserModel;
@@ -29,7 +31,8 @@ use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class WorkEditAuthorHandle
 {

@@ -48,8 +48,8 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_VERSION_CREATE => 'onVersionCreate',
-            Events::NOTIFICATION_VERSION_EDIT => 'onVersionEdit'
+            Events::WORK_VERSION_CREATE => 'onVersionCreate',
+            Events::WORK_VERSION_EDIT => 'onVersionEdit'
         ];
     }
 

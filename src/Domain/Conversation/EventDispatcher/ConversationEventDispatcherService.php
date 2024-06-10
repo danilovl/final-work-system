@@ -30,8 +30,7 @@ readonly class ConversationEventDispatcherService
         $genericEvent = new ConversationMessageGenericEvent($conversationMessage);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_MESSAGE_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_MESSAGE_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::MESSAGE_CREATE);
         });
     }
 }

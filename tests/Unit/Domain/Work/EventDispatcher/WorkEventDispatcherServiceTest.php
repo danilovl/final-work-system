@@ -63,25 +63,23 @@ class WorkEventDispatcherServiceTest extends TestCase
 
     public static function dispatchProvider(): Generator
     {
-        yield ['onWorkCreate', 2,
+        yield ['onWorkCreate', 1,
             [
                 WorkGenericEvent::class,
                 UserGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_WORK_CREATE,
-                Events::SYSTEM_WORK_CREATE
+                Events::WORK_CREATE
             ]
         ];
 
-        yield ['onWorkEdit', 2,
+        yield ['onWorkEdit', 1,
             [
                 WorkGenericEvent::class,
                 UserGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_WORK_EDIT,
-                Events::SYSTEM_WORK_EDIT
+                Events::WORK_EDIT
             ]
         ];
 
@@ -91,8 +89,8 @@ class WorkEventDispatcherServiceTest extends TestCase
                 WorkGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_USER_EDIT,
-                Events::SYSTEM_WORK_AUTHOR_EDIT
+                Events::USER_EDIT,
+                Events::WORK_AUTHOR_EDIT
             ]
         ];
     }

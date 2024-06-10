@@ -36,7 +36,7 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_DOCUMENT_CREATE => 'onDocumentCreate'
+            Events::DOCUMENT_CREATE => 'onDocumentCreate'
         ];
     }
 

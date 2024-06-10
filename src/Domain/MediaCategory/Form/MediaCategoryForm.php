@@ -16,7 +16,8 @@ use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextareaType,
-    TextType};
+    TextType
+};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

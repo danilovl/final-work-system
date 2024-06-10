@@ -14,7 +14,8 @@ namespace App\Domain\Version\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Exception\{
-    ConstantNotFoundException};
+    ConstantNotFoundException
+};
 use App\Application\Exception\RuntimeException;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
@@ -24,7 +25,8 @@ use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
     FormFactoryInterface,
-    FormInterface};
+    FormInterface
+};
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

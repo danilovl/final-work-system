@@ -22,7 +22,8 @@ use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class WorkCategoryEditHandle
 {

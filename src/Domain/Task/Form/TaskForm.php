@@ -19,7 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\{
     CheckboxType,
     DateType,
     TextareaType,
-    TextType};
+    TextType
+};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

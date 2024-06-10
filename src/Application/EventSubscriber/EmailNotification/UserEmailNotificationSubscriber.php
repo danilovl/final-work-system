@@ -22,8 +22,8 @@ class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_USER_CREATE => 'onUserCreate',
-            Events::NOTIFICATION_USER_EDIT => 'onUserEdit'
+            Events::USER_CREATE => 'onUserCreate',
+            Events::USER_EDIT => 'onUserEdit'
         ];
     }
 

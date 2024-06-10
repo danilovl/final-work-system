@@ -30,8 +30,7 @@ readonly class VersionEventDispatcherService
         $genericEvent = new VersionGenericEvent($media);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::WORK_VERSION_CREATE);
         });
     }
 
@@ -40,8 +39,7 @@ readonly class VersionEventDispatcherService
         $genericEvent = new VersionGenericEvent($media);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_VERSION_EDIT);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_VERSION_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::WORK_VERSION_EDIT);
         });
     }
 }

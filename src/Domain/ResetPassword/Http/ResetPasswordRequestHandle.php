@@ -50,7 +50,7 @@ readonly class ResetPasswordRequestHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $email */
-            $email =  $form->get('email')->getData();
+            $email = $form->get('email')->getData();
 
             return $this->processSendingPasswordResetEmail($email);
         }

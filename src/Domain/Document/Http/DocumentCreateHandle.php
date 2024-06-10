@@ -14,12 +14,14 @@ namespace App\Domain\Document\Http;
 
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant};
+    FlashTypeConstant
+};
 use App\Application\Service\{
     EntityManagerService,
     RequestService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\Document\EventDispatcher\DocumentEventDispatcherService;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Factory\MediaFactory;
@@ -29,7 +31,8 @@ use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class DocumentCreateHandle
 {

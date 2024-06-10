@@ -22,9 +22,9 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_WORK_CREATE => 'onWorkCreate',
-            Events::NOTIFICATION_WORK_EDIT => 'onWorkEdit',
-            Events::NOTIFICATION_WORK_REMIND_DEADLINE_CREATE => 'onWorkReminderDeadlineCreate'
+            Events::WORK_CREATE => 'onWorkCreate',
+            Events::WORK_EDIT => 'onWorkEdit',
+            Events::WORK_REMIND_DEADLINE_CREATE => 'onWorkReminderDeadlineCreate'
         ];
     }
 

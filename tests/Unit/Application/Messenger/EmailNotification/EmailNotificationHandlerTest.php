@@ -14,6 +14,7 @@ namespace App\Tests\Unit\Application\Messenger\EmailNotification;
 
 use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
 use App\Application\Exception\RuntimeException;
+use App\Domain\EmailNotification\Service\SendEmailNotificationService;
 use App\Application\Messenger\EmailNotification\{
     EmailNotificationHandler,
     EmailNotificationMessage
@@ -30,7 +31,7 @@ use Symfony\Component\Mailer\Exception\TransportException;
 class EmailNotificationHandlerTest extends TestCase
 {
     private readonly ParameterServiceInterface $parameterService;
-    private readonly MailerService $mailerService;
+    private readonly SendEmailNotificationService $sendEmailNotificationService;
     private readonly EmailNotificationFactory $emailNotificationFactory;
     private readonly EmailNotificationFacade $emailNotificationFacade;
     private readonly EntityManagerService $entityManagerService;
@@ -40,11 +41,7 @@ class EmailNotificationHandlerTest extends TestCase
     protected function setUp(): void
     {
         $this->parameterService = $this->createMock(ParameterServiceInterface::class);
-
-        $this->mailerService = $this->createMock(MailerService::class);
-        $this->mailerService->expects($this->any())
-            ->method('send');
-
+        $this->sendEmailNotificationService = $this->createMock(SendEmailNotificationService::class);
         $baseEmailNotificationSubscriber = $this->createMock(BaseEmailNotificationSubscriber::class);
 
         $baseEmailNotificationSubscriber->expects($this->any())
@@ -69,7 +66,7 @@ class EmailNotificationHandlerTest extends TestCase
 
         $this->emailNotificationHandler = new EmailNotificationHandler(
             $this->parameterService,
-            $this->mailerService,
+            $this->sendEmailNotificationService,
             $this->emailNotificationFactory,
             $baseEmailNotificationSubscriber,
             $this->emailNotificationFacade,
@@ -111,10 +108,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getBoolean')
             ->willReturn(true);
 
-        $this->mailerService
+        $this->sendEmailNotificationService
             ->expects($this->once())
-            ->method('send')
-            ->willThrowException(new TransportException);
+            ->method('sendEmailNotificationBool')
+            ->willReturn(false);;
 
         $emailNotification = new EmailNotification;
         $emailNotification->setId(1);
@@ -135,9 +132,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getBoolean')
             ->willReturn(true);
 
-        $this->mailerService
+        $this->sendEmailNotificationService
             ->expects($this->once())
-            ->method('send');
+            ->method('sendEmailNotificationBool')
+            ->willReturn(true);
 
         $this->entityManagerService
             ->expects($this->once())
@@ -165,9 +163,10 @@ class EmailNotificationHandlerTest extends TestCase
             ->method('getBoolean')
             ->willReturn(true);
 
-        $this->mailerService
+        $this->sendEmailNotificationService
             ->expects($this->once())
-            ->method('send');
+            ->method('sendEmailNotificationBool')
+            ->willReturn(true);
 
         $this->entityManagerService
             ->expects($this->never())

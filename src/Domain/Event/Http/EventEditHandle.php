@@ -17,7 +17,8 @@ use App\Application\Service\{
     EntityManagerService,
     RequestService,
     SeoPageService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
 use App\Domain\Event\Facade\EventParticipantFacade;
@@ -30,7 +31,8 @@ use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 use Symfony\Component\Routing\RouterInterface;
 
 readonly class EventEditHandle

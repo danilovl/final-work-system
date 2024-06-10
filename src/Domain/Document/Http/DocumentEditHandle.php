@@ -14,11 +14,13 @@ namespace App\Domain\Document\Http;
 
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant};
+    FlashTypeConstant
+};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Factory\MediaFactory;
@@ -26,7 +28,8 @@ use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class DocumentEditHandle
 {

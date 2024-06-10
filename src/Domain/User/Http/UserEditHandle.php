@@ -15,12 +15,14 @@ namespace App\Domain\User\Http;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant,
-    SeoPageConstant};
+    SeoPageConstant
+};
 use App\Application\Service\{
     RequestService,
     SeoPageService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\UserEventDispatcherService;
 use App\Domain\User\Factory\UserFactory;
@@ -30,7 +32,8 @@ use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class UserEditHandle
 {

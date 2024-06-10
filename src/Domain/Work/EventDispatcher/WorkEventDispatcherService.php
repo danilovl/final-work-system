@@ -31,8 +31,7 @@ readonly class WorkEventDispatcherService
         $genericEvent = new WorkGenericEvent($work);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_CREATE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::WORK_CREATE);
         });
     }
 
@@ -41,8 +40,7 @@ readonly class WorkEventDispatcherService
         $genericEvent = new WorkGenericEvent($work);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_EDIT);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::WORK_EDIT);
         });
     }
 
@@ -52,8 +50,8 @@ readonly class WorkEventDispatcherService
         $genericEventWork = new WorkGenericEvent($work);
 
         $this->asyncService->add(function () use ($genericEventUser, $genericEventWork): void {
-            $this->eventDispatcher->dispatch($genericEventUser, Events::NOTIFICATION_USER_EDIT);
-            $this->eventDispatcher->dispatch($genericEventWork, Events::SYSTEM_WORK_AUTHOR_EDIT);
+            $this->eventDispatcher->dispatch($genericEventUser, Events::USER_EDIT);
+            $this->eventDispatcher->dispatch($genericEventWork, Events::WORK_AUTHOR_EDIT);
         });
     }
 
@@ -61,7 +59,6 @@ readonly class WorkEventDispatcherService
     {
         $genericEvent = new WorkGenericEvent($work);
 
-        $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_WORK_REMIND_DEADLINE_CREATE);
-        $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_WORK_REMIND_CREATE);
+        $this->eventDispatcher->dispatch($genericEvent, Events::WORK_REMIND_DEADLINE_CREATE);
     }
 }

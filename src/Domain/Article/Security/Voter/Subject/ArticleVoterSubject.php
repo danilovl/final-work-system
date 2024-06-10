@@ -17,7 +17,5 @@ use App\Domain\ArticleCategory\Entity\ArticleCategory;
 
 readonly class ArticleVoterSubject
 {
-    public function __construct(public Article $article, public ArticleCategory $articleCategory)
-    {
-    }
+    public function __construct(public Article $article, public ArticleCategory $articleCategory) {}
 }

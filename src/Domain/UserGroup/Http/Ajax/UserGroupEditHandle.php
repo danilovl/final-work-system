@@ -22,7 +22,8 @@ use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class UserGroupEditHandle
 {

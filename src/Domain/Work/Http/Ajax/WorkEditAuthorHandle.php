@@ -23,7 +23,8 @@ use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class WorkEditAuthorHandle
 {

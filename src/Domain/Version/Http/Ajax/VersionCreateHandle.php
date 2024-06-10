@@ -16,7 +16,8 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\{
     EntityManagerService,
-    RequestService};
+    RequestService
+};
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
@@ -29,7 +30,8 @@ use App\Domain\Work\Entity\Work;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class VersionCreateHandle
 {

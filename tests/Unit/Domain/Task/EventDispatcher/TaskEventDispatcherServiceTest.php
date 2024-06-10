@@ -78,37 +78,34 @@ class TaskEventDispatcherServiceTest extends TestCase
 
     public static function dispatchProvider(): Generator
     {
-        yield ['onTaskCreate', 2, [],
+        yield ['onTaskCreate', 1, [],
             [
                 TaskGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_TASK_CREATE,
-                Events::SYSTEM_TASK_CREATE
+                Events::TASK_CREATE
             ]
         ];
 
-        yield ['onTaskEdit', 2, [],
+        yield ['onTaskEdit', 1, [],
             [
                 TaskGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_TASK_CREATE,
-                Events::SYSTEM_TASK_CREATE
+                Events::TASK_CREATE
             ]
         ];
 
-        yield ['onTaskNotifyComplete', 2, [],
+        yield ['onTaskNotifyComplete', 1, [],
             [
                 TaskGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_TASK_NOTIFY_COMPLETE,
-                Events::SYSTEM_TASK_NOTIFY_COMPLETE
+                Events::TASK_NOTIFY_COMPLETE
             ]
         ];
 
-        yield ['onTaskChangeStatus', 2,
+        yield ['onTaskChangeStatus', 1,
             [
                 TaskStatusConstant::COMPLETE->value
             ],
@@ -116,18 +113,16 @@ class TaskEventDispatcherServiceTest extends TestCase
                 TaskGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_TASK_INCOMPLETE,
-                Events::SYSTEM_TASK_INCOMPLETE
+                Events::TASK_INCOMPLETE
             ]
         ];
 
-        yield ['onTaskReminderCreate', 2, [],
+        yield ['onTaskReminderCreate', 1, [],
             [
                 TaskGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE,
-                Events::SYSTEM_TASK_REMIND_CREATE
+                Events::TASK_REMIND_DEADLINE_CREATE
             ]
         ];
     }

@@ -14,27 +14,33 @@ namespace App\Domain\EventCalendar\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\AjaxRuntimeException;
-use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Helper\SortFunctionHelper;
+use App\Application\Helper\{
+    SortFunctionHelper,
+    FormValidationMessageHelper
+};
 use App\Application\Service\{
-    EntityManagerService,
-    RequestService};
+    RequestService,
+    EntityManagerService
+};
 use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
 use App\Domain\Event\Facade\EventCalendarFacade;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\EventParticipant\Entity\EventParticipant;
-use App\Domain\User\Service\UserService;
-use App\Domain\User\Service\UserWorkService;
+use App\Domain\User\Service\{
+    UserService,
+    UserWorkService
+};
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request};
+    Request,
+    JsonResponse
+};
 
 readonly class EventCalendarCreateHandle
 {
@@ -98,8 +104,7 @@ readonly class EventCalendarCreateHandle
                 $event->setParticipant($eventParticipant);
             }
 
-            $this->eventEventDispatcherService
-                ->onEventCalendarCreate($event, $eventParticipant !== null);
+            $this->eventEventDispatcherService->onEventCalendarCreate($event);
         } catch (AjaxRuntimeException) {
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
                 'data' => FormValidationMessageHelper::getErrorMessages($form)

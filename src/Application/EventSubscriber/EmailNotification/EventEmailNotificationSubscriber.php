@@ -23,18 +23,22 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_EVENT_CREATE => 'onEventCreate',
-            Events::NOTIFICATION_EVENT_EDIT => 'onEventEdit',
-            Events::NOTIFICATION_EVENT_SWITCH_SKYPE => 'onEventSwitchSkype',
-            Events::NOTIFICATION_EVENT_COMMENT_CREATE => 'onEventCommentCreate',
-            Events::NOTIFICATION_EVENT_COMMENT_EDIT => 'onEventCommentEdit',
-            Events::NOTIFICATION_EVENT_RESERVATION => 'onEventReservation'
+            Events::EVENT_CREATE => 'onEventCreate',
+            Events::EVENT_EDIT => 'onEventEdit',
+            Events::EVENT_SWITCH_SKYPE => 'onEventSwitchSkype',
+            Events::EVENT_COMMENT_CREATE => 'onEventCommentCreate',
+            Events::EVENT_COMMENT_EDIT => 'onEventCommentEdit',
+            Events::EVENT_RESERVATION => 'onEventReservation'
         ];
     }
 
     public function onEventCreate(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        if ($event->getParticipant() === null) {
+            return;
+        }
+
         $toUser = $event->getParticipantMust()->getUserMust();
 
         $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
@@ -55,6 +59,10 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
     public function onEventEdit(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        if ($event->getParticipant() === null) {
+            return;
+        }
+
         $toUser = $event->getParticipantMust()->getUserMust();
 
         $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([

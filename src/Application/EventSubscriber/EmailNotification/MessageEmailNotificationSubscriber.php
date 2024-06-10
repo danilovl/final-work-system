@@ -22,7 +22,7 @@ class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_MESSAGE_CREATE => 'onMessageCreate'
+            Events::MESSAGE_CREATE => 'onMessageCreate'
         ];
     }
 

@@ -75,6 +75,6 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
     {
         $subscribedEvents = $this->subscriber::getSubscribedEvents();
 
-        $this->assertEquals('onDocumentCreate', $subscribedEvents[Events::NOTIFICATION_DOCUMENT_CREATE]);
+        $this->assertEquals('onDocumentCreate', $subscribedEvents[Events::DOCUMENT_CREATE]);
     }
 }

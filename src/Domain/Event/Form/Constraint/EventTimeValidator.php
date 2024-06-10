@@ -14,13 +14,15 @@ namespace App\Domain\Event\Form\Constraint;
 
 use App\Application\Constant\{
     CompareConstant,
-    DateFormatConstant};
+    DateFormatConstant
+};
 use App\Application\Helper\CompareHelper;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\EventType\Constant\EventTypeConstant;
 use Symfony\Component\Validator\{
     Constraint,
-    ConstraintValidator};
+    ConstraintValidator
+};
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EventTimeValidator extends ConstraintValidator

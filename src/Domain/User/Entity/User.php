@@ -135,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'salt', type: Types::STRING, nullable: true)]
     private ?string $salt = null;
 
-    /** @var Collection<Group>*/
+    /** @var Collection<Group> */
     #[ORM\ManyToMany(targetEntity: Group::class, inversedBy: 'users')]
     #[ORM\JoinTable(name: 'user_to_user_group')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]

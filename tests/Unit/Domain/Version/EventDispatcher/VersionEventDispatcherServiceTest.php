@@ -62,23 +62,21 @@ class VersionEventDispatcherServiceTest extends TestCase
 
     public static function dispatchProvider(): Generator
     {
-        yield ['onVersionCreate', 2,
+        yield ['onVersionCreate', 1,
             [
                 VersionGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_VERSION_CREATE,
-                Events::SYSTEM_VERSION_CREATE
+                Events::WORK_VERSION_CREATE
             ]
         ];
 
-        yield ['onVersionEdit', 2,
+        yield ['onVersionEdit', 1,
             [
                 VersionGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_VERSION_EDIT,
-                Events::SYSTEM_VERSION_EDIT
+                Events::WORK_VERSION_EDIT
             ]
         ];
     }

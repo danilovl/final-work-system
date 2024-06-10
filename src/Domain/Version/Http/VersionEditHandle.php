@@ -15,12 +15,14 @@ namespace App\Domain\Version\Http;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant,
-    SeoPageConstant};
+    SeoPageConstant
+};
 use App\Application\Service\{
     RequestService,
     SeoPageService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
@@ -31,7 +33,8 @@ use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class VersionEditHandle
 {

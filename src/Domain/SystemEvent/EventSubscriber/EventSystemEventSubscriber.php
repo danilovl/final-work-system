@@ -28,12 +28,12 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_EVENT_CREATE => 'onEventCreate',
-            Events::SYSTEM_EVENT_EDIT => 'onEventEdit',
-            Events::SYSTEM_EVENT_SWITCH_SKYPE => 'onEventSwitchSkype',
-            Events::SYSTEM_EVENT_COMMENT_CREATE => 'onEventCommentCreate',
-            Events::SYSTEM_EVENT_COMMENT_EDIT => 'onEventCommentEdit',
-            Events::SYSTEM_EVENT_RESERVATION => 'onEventReservation'
+            Events::EVENT_CREATE => 'onEventCreate',
+            Events::EVENT_EDIT => 'onEventEdit',
+            Events::EVENT_SWITCH_SKYPE => 'onEventSwitchSkype',
+            Events::EVENT_COMMENT_CREATE => 'onEventCommentCreate',
+            Events::EVENT_COMMENT_EDIT => 'onEventCommentEdit',
+            Events::EVENT_RESERVATION => 'onEventReservation'
         ];
     }
 
@@ -68,6 +68,10 @@ class EventSystemEventSubscriber extends BaseSystemEventSubscriber implements Ev
     public function onEventEdit(EventGenericEvent $genericEvent): void
     {
         $event = $genericEvent->event;
+        if ($event->getParticipant()?->getUser() === null) {
+            return;
+        }
+
         /** @var SystemEventType $type */
         $type = $this->entityManagerService
             ->getRepository(SystemEventType::class)

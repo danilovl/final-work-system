@@ -72,39 +72,35 @@ class EventEventDispatcherServiceTest extends TestCase
                 EventGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_EVENT_EDIT,
-                Events::SYSTEM_EVENT_EDIT
+                Events::EVENT_EDIT
             ]
         ];
 
-        yield ['onEventSwitchToSkype', 2,
+        yield ['onEventSwitchToSkype', 1,
             [
                 EventGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_EVENT_SWITCH_SKYPE,
-                Events::SYSTEM_EVENT_SWITCH_SKYPE
+                Events::EVENT_SWITCH_SKYPE
             ]
         ];
 
-        yield ['onEventCalendarReservation', 2,
+        yield ['onEventCalendarReservation', 1,
             [
                 EventGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_EVENT_RESERVATION,
-                Events::SYSTEM_EVENT_RESERVATION
+                Events::EVENT_RESERVATION
             ]
         ];
 
-        yield ['onEventCalendarEdit', 2,
+        yield ['onEventCalendarEdit', 1,
 
             [
                 EventGenericEvent::class
             ],
             [
-                Events::NOTIFICATION_EVENT_EDIT,
-                Events::SYSTEM_EVENT_EDIT
+                Events::EVENT_EDIT
             ]
         ];
     }

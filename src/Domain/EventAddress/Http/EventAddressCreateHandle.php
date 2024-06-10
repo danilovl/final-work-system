@@ -17,7 +17,8 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\EventAddress\Factory\EventAddressFactory;
 use App\Domain\EventAddress\Form\Factory\EventAddressFormFactory;
 use App\Domain\EventAddress\Model\EventAddressModel;
@@ -25,7 +26,8 @@ use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class EventAddressCreateHandle
 {

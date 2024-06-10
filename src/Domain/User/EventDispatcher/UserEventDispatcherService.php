@@ -30,7 +30,7 @@ readonly class UserEventDispatcherService
         $genericEvent = new UserGenericEvent($user);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_CREATE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::USER_CREATE);
         });
     }
 
@@ -39,8 +39,7 @@ readonly class UserEventDispatcherService
         $genericEvent = new UserGenericEvent($user, $owner);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_USER_EDIT);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_USER_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::USER_EDIT);
         });
     }
 }

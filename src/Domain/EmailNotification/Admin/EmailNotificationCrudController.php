@@ -22,7 +22,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{
     FormField,
     IntegerField,
     TextEditorField,
-    TextField};
+    TextField
+};
 
 class EmailNotificationCrudController extends AbstractCrudController
 {

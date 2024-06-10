@@ -13,11 +13,13 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Constant\{
-    FlashTypeConstant};
+    FlashTypeConstant
+};
 use App\Application\Service\RequestService;
 use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Service\{
-    ConversationService};
+    ConversationService
+};
 use App\Domain\Conversation\Service\ConversationVariationService;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Entity\User;

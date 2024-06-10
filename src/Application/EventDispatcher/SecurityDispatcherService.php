@@ -25,6 +25,6 @@ readonly class SecurityDispatcherService
     {
         $resetPasswordGenericEvent = new ResetPasswordGenericEvent($resetPassword, $tokenLifetime);
 
-        $this->eventDispatcher->dispatch($resetPasswordGenericEvent, Events::NOTIFICATION_RESET_PASSWORD_TOKEN);
+        $this->eventDispatcher->dispatch($resetPasswordGenericEvent, Events::SECURITY_RESET_PASSWORD_TOKEN);
     }
 }

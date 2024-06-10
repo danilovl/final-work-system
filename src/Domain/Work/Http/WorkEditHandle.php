@@ -14,11 +14,13 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant};
+    FlashTypeConstant
+};
 use App\Application\Service\{
     RequestService,
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
@@ -30,7 +32,8 @@ use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class WorkEditHandle
 {

@@ -49,7 +49,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_DOCUMENT_CREATE => 'onDocumentCreate'
+            Events::DOCUMENT_CREATE => 'onDocumentCreate'
         ];
     }
 

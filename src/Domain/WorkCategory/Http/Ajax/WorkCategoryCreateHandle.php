@@ -15,7 +15,8 @@ namespace App\Domain\WorkCategory\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\{
-    RequestService};
+    RequestService
+};
 use App\Domain\User\Service\UserService;
 use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;
@@ -23,7 +24,8 @@ use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class WorkCategoryCreateHandle
 {

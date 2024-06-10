@@ -18,7 +18,8 @@ use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\{
-    WorkUserTypeConstant};
+    WorkUserTypeConstant
+};
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;

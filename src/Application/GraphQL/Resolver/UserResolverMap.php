@@ -25,7 +25,7 @@ class UserResolverMap extends ResolverMap
     {
         return [
             'doctrine' => [
-                'user' => function ($value, ArgumentInterface $args):  ?User {
+                'user' => function ($value, ArgumentInterface $args): ?User {
                     /** @var int $id */
                     $id = $args['id'];
 

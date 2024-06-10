@@ -25,7 +25,7 @@ class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_USER_EDIT => 'onUserEdit'
+            Events::USER_EDIT => 'onUserEdit'
         ];
     }
 

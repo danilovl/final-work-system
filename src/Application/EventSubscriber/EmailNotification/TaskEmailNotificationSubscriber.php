@@ -22,13 +22,13 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_TASK_CREATE => 'onTaskCreate',
-            Events::NOTIFICATION_TASK_EDIT => 'onTaskEdit',
-            Events::NOTIFICATION_TASK_COMPLETE => 'onTaskComplete',
-            Events::NOTIFICATION_TASK_INCOMPLETE => 'onTaskInComplete',
-            Events::NOTIFICATION_TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
-            Events::NOTIFICATION_TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
-            Events::NOTIFICATION_TASK_REMIND_DEADLINE_CREATE => 'onTaskReminderDeadlineCreate'
+            Events::TASK_CREATE => 'onTaskCreate',
+            Events::TASK_EDIT => 'onTaskEdit',
+            Events::TASK_COMPLETE => 'onTaskComplete',
+            Events::TASK_INCOMPLETE => 'onTaskInComplete',
+            Events::TASK_NOTIFY_COMPLETE => 'onTaskNotifyComplete',
+            Events::TASK_NOTIFY_INCOMPLETE => 'onTaskNotifyInComplete',
+            Events::TASK_REMIND_DEADLINE_CREATE => 'onTaskReminderDeadlineCreate'
         ];
     }
 

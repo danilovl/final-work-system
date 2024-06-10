@@ -22,7 +22,7 @@ class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::NOTIFICATION_RESET_PASSWORD_TOKEN => 'onResetPasswordToken'
+            Events::SECURITY_RESET_PASSWORD_TOKEN => 'onResetPasswordToken'
         ];
     }
 

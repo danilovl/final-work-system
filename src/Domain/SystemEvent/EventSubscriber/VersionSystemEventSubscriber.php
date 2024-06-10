@@ -35,8 +35,8 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_VERSION_CREATE => 'onVersionCreate',
-            Events::SYSTEM_VERSION_EDIT => 'onVersionEdit'
+            Events::WORK_VERSION_CREATE => 'onVersionCreate',
+            Events::WORK_VERSION_EDIT => 'onVersionEdit'
         ];
     }
 

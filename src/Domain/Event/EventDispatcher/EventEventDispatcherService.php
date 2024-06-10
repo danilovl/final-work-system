@@ -36,31 +36,17 @@ readonly class EventEventDispatcherService
         $this->asyncService->add(function () use ($genericEvent, $isEventCommentExist): void {
             $this->eventDispatcher->dispatch(
                 $genericEvent,
-                $isEventCommentExist ? Events::NOTIFICATION_EVENT_COMMENT_EDIT : Events::NOTIFICATION_EVENT_COMMENT_CREATE
-            );
-
-            $this->eventDispatcher->dispatch(
-                $genericEvent,
-                $isEventCommentExist ? Events::SYSTEM_EVENT_COMMENT_EDIT : Events::SYSTEM_EVENT_COMMENT_CREATE
+                $isEventCommentExist ? Events::EVENT_COMMENT_EDIT : Events::EVENT_COMMENT_CREATE
             );
         });
-
     }
 
     public function onEventEdit(Event $event): void
     {
-        if ($event->getParticipant() === null) {
-            return;
-        }
-
         $genericEvent = new EventGenericEvent($event);
 
-        $this->asyncService->add(function () use ($genericEvent, $event): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
-
-            if ($event->getParticipant()->getUser()) {
-                $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);
-            }
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::EVENT_EDIT);
         });
     }
 
@@ -69,21 +55,16 @@ readonly class EventEventDispatcherService
         $genericEvent = new EventGenericEvent($event);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_SWITCH_SKYPE);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_SWITCH_SKYPE);
+            $this->eventDispatcher->dispatch($genericEvent, Events::EVENT_SWITCH_SKYPE);
         });
     }
 
-    public function onEventCalendarCreate(Event $event, bool $eventParticipant): void
+    public function onEventCalendarCreate(Event $event): void
     {
         $genericEvent = new EventGenericEvent($event);
 
-        $this->asyncService->add(function () use ($genericEvent, $eventParticipant): void {
-            if ($eventParticipant) {
-                $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_CREATE);
-            }
-
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_CREATE);
+        $this->asyncService->add(function () use ($genericEvent): void {
+            $this->eventDispatcher->dispatch($genericEvent, Events::EVENT_CREATE);
         });
     }
 
@@ -92,22 +73,16 @@ readonly class EventEventDispatcherService
         $genericEvent = new EventGenericEvent($event);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_RESERVATION);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_RESERVATION);
+            $this->eventDispatcher->dispatch($genericEvent, Events::EVENT_RESERVATION);
         });
     }
 
     public function onEventCalendarEdit(Event $event): void
     {
-        if ($event->getParticipant() === null) {
-            return;
-        }
-
         $genericEvent = new EventGenericEvent($event);
 
         $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::NOTIFICATION_EVENT_EDIT);
-            $this->eventDispatcher->dispatch($genericEvent, Events::SYSTEM_EVENT_EDIT);
+            $this->eventDispatcher->dispatch($genericEvent, Events::EVENT_EDIT);
         });
     }
 }

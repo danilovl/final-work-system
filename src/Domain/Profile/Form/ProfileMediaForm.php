@@ -21,7 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\{
     File,
     Image,
-    NotBlank};
+    NotBlank
+};
 
 class ProfileMediaForm extends AbstractType
 {

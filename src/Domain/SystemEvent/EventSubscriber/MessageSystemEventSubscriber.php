@@ -26,7 +26,7 @@ class MessageSystemEventSubscriber extends BaseSystemEventSubscriber implements 
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::SYSTEM_MESSAGE_CREATE => 'onMessageCreate'
+            Events::MESSAGE_CREATE => 'onMessageCreate'
         ];
     }
 

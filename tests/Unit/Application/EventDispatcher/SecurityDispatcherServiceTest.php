@@ -32,7 +32,7 @@ class SecurityDispatcherServiceTest extends TestCase
             ->method('dispatch')
             ->with(
                 $this->isInstanceOf(ResetPasswordGenericEvent::class),
-                Events::NOTIFICATION_RESET_PASSWORD_TOKEN
+                Events::SECURITY_RESET_PASSWORD_TOKEN
             );
 
         $securityDispatcherService->onResetPasswordTokenCreate($resetPassword, 3600);

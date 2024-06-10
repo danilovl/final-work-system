@@ -46,7 +46,7 @@ class WorkCategory
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
-    /** @var Collection<Work>*/
+    /** @var Collection<Work> */
     #[ORM\ManyToMany(targetEntity: Work::class, mappedBy: 'categories')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $works;
