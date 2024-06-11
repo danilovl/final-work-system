@@ -14,9 +14,12 @@ namespace App\Domain\Conversation\Http;
 
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
+use App\Domain\ConversationType\Constant\ConversationTypeConstant;
+use App\Domain\ConversationType\Entity\ConversationType;
 use App\Application\Service\{
     PaginatorService,
-    TwigRenderService
+    TwigRenderService,
+    EntityManagerService
 };
 use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Facade\{
@@ -42,13 +45,22 @@ readonly class ConversationListHandle
         private ConversationMessageFacade $conversationMessageFacade,
         private PaginatorService $paginatorService,
         private ConversationSearch $conversationSearch,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function handle(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $conversationsQuery = $this->conversationFacade->queryConversationsByParticipantUser($user);
+        $types = [];
+
+        $type = $request->query->get('type');
+        if (!empty($type)) {
+            $typeId = ConversationTypeConstant::getIdByType($type);
+            $types[] = $this->entityManagerService->getReference(ConversationType::class, $typeId);
+        }
+
+        $conversationsQuery = $this->conversationFacade->queryConversationsByParticipantUserTypes($user, $types);
 
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory

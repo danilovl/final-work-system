@@ -13,6 +13,7 @@
 namespace App\Domain\Conversation\Repository;
 
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -53,5 +54,21 @@ class ConversationRepository extends ServiceEntityRepository
             ->where('conversation.id IN (:ids)')
             ->orderBy('messages.createdAt', Criteria::DESC)
             ->setParameter('ids', $ids);
+    }
+
+    /**
+     * @param ConversationType[] $types
+     */
+    public function addFilterByTypes(QueryBuilder $queryBuilder, array $types): QueryBuilder
+    {
+        $ids = array_map(static fn(ConversationType $type): int => $type->getId(), $types);
+        if (count($ids) === 0) {
+            return $queryBuilder;
+        }
+
+        return $queryBuilder
+            ->join('conversation.type', 'type')
+            ->andWhere('type.id IN (:typeIds)')
+            ->setParameter('typeIds', $ids);
     }
 }

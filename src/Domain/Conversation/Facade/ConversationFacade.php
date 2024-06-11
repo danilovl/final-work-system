@@ -53,6 +53,16 @@ readonly class ConversationFacade
             ->getQuery();
     }
 
+    public function queryConversationsByParticipantUserTypes(User $user, array $types = []): Query
+    {
+        $queryBuilder = $this->conversationRepository
+            ->allByParticipantUser($user);
+
+       return $this->conversationRepository
+            ->addFilterByTypes($queryBuilder, $types)
+            ->getQuery();
+    }
+
     public function queryConversationsByIds(array $ids): Query
     {
         return $this->conversationRepository
