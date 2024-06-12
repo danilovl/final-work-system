@@ -5416,11 +5416,11 @@ img.avatar {
 }
 
 .message-type-work {
-    color: #F8AC59;
+    color: #F8AC59 !important;
 }
 
 .message-type-group {
-    color: #1c84c6;
+    color: #1c84c6 !important;
 }
 
 .work-table-header-fixed {

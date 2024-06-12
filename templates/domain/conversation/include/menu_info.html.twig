@@ -36,18 +36,17 @@
                             ***
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ path('conversation_list', {type: 'work'}) }}">
-                            <i class="fa fa-circle text-warning"></i>
-                            {{ 'app.text.work' | trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('conversation_list', {type: 'group'}) }}">
-                            <i class="fa fa-circle text-primary"></i>
-                            {{ 'app.text.group_mail' | trans }}
-                        </a>
-                    </li>
+
+                    {% for conversationType in conversationTypes %}
+                        {% set type = conversationType.constant | lower %}
+
+                        <li>
+                            <a href="{{ path('conversation_list', {type: type}) }}">
+                                <i class="fa fa-circle message-type-{{ type }}"></i>
+                                {{ ('app.text.' ~ type) | trans }}
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
 
                 {% if isUnreadMessages %}

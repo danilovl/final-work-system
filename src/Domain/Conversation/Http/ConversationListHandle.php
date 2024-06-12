@@ -16,6 +16,7 @@ use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
+use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService,
@@ -42,6 +43,7 @@ readonly class ConversationListHandle
         private ParameterServiceInterface $parameterService,
         private TwigRenderService $twigRenderService,
         private ConversationFacade $conversationFacade,
+        private ConversationTypeFacade $conversationTypeFacade,
         private ConversationMessageFacade $conversationMessageFacade,
         private PaginatorService $paginatorService,
         private ConversationSearch $conversationSearch,
@@ -87,9 +89,12 @@ readonly class ConversationListHandle
         $isUnreadMessages = $this->conversationMessageFacade
             ->isUnreadMessagesByRecipient($user);
 
+        $conversationTypes = $this->conversationTypeFacade->getAll();
+
         return $this->twigRenderService->renderToResponse('domain/conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
             'conversations' => $pagination,
+            'conversationTypes' => $conversationTypes,
             'searchForm' => $searchForm->createView(),
             'enableClearSearch' => !empty($searchModel->search)
         ]);

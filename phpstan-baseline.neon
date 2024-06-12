@@ -66,6 +66,11 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
+			message: "#^Method App\\\\Domain\\\\ConversationType\\\\Facade\\\\ConversationTypeFacade\\:\\:getAll\\(\\) should return array\\<App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\> but returns array\\<int, object\\>\\.$#"
+			count: 1
+			path: src/Domain/ConversationType/Facade/ConversationTypeFacade.php
+
+		-
 			message: "#^Method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:getOneByUuid\\(\\) should return App\\\\Domain\\\\EmailNotification\\\\Entity\\\\EmailNotification\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/EmailNotification/Facade/EmailNotificationFacade.php
