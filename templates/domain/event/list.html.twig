@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div>
+            <div class="clearfix"></div>
+
+            {% if events is defined %}
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title" style="height: auto;">
+                            <div class="row">
+                                <h2>{{ 'app.text.event_list' | trans }}</h2>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="x_content">
+
+                            {% if events is not empty %}
+                                {% include 'domain/event/include/events.html.twig' %}
+                            {% else %}
+                                {{ 'app.text.no_result' | trans }}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(events) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $("table").tableFix();
+        });
+    </script>
+{% endblock %}

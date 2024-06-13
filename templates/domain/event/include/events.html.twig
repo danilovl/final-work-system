@@ -1,0 +1,74 @@
+{% set directionParam = events.getPaginatorOption('sortDirectionParameterName') %}
+{% set params = events.getParams() %}
+{% set direction = params[directionParam] is defined ? params[directionParam] : null %}
+
+<table class="table table-striped projects">
+    <thead>
+    <tr>
+        <th>
+            {{ 'app.text.appointment_address' | trans }}
+        </th>
+        <th>
+            {{ 'app.text.name' | trans }}
+        </th>
+        <th{% if events.isSorted('event.start') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+            {{ knp_pagination_sortable(events, 'app.text.start' | trans, 'event.start') }}
+        </th>
+        <th{% if events.isSorted('event.end') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+            {{ knp_pagination_sortable(events, 'app.text.end' | trans, 'event.end') }}
+        </th>
+        <th{% if events.isSorted('event.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
+            {{ knp_pagination_sortable(events, 'app.text.date_added' | trans, 'event.createdAt') }}
+        </th>
+        <th style="width: 20%">{{ 'app.text.options' | trans }}</th>
+    </tr>
+    </thead>
+
+    {% for event in events %}
+        <tr data-delete-row="event-{{ event.id | hashids_encode }}">
+            <td>
+                {% if event.address is not empty %}
+                    {{ event.address.name }}
+                {% endif %}
+            </td>
+            <td>
+                {{ event.toString() }}
+            </td>
+            <td>
+                {{ event.start | date('d.m.Y H:i') }}
+            </td>
+            <td>
+                {{ event.end | date('d.m.Y H:i') }}
+            </td>
+            <td>
+                {{ event.createdAt | date('d.m.Y H:i') }}
+            </td>
+            <td>
+                {% if event.participant is not empty %}
+                    <a class="btn btn-primary btn-xs"
+                       href="{{ path('work_detail', { 'id': event.participant.work.id | hashids_encode }) }}"
+                       target="_blank">
+                        <i class="fa fa-folder"></i>
+                        {{ 'app.text.work' | trans }}
+                    </a>
+                {% endif %}
+
+                <a data-toggle="modal"
+                   data-target="#modalWindow"
+                   class="btn btn-warning btn-xs"
+                   href="{{ path('event_edit', { 'id': event.id | hashids_encode }) }}">
+                    <i class="fa fa-pencil"></i>
+                    {{ 'app.form.action.edit' | trans }}
+                </a>
+
+                {% include 'other/common_part/ajax_delete.html.twig' with {
+                    'modalDataTarget': 'event',
+                    'modalDataTargetDeleteText': 'app.form.action.delete' | trans,
+                    'modalDataTargetId': event.id,
+                    'modalDataTargetName': event.toString(),
+                    'modalDataTargetDeleteUrl': path('event_delete_ajax', { 'id': event.id | hashids_encode })
+                } %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

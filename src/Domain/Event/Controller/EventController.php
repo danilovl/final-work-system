@@ -14,6 +14,7 @@ namespace App\Domain\Event\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Event\Http\{
+    EventListHandle,
     EventEditHandle,
     EventDeleteHandle,
     EventDetailHandle,
@@ -30,11 +31,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventController extends AbstractController
 {
     public function __construct(
+        private readonly EventListHandle $eventListHandle,
         private readonly EventDetailHandle $eventDetailHandle,
         private readonly EventEditHandle $eventEditHandle,
         private readonly EventSwitchToSkypeHandle $eventSwitchToSkypeHandle,
         private readonly EventDeleteHandle $eventDeleteHandle
     ) {}
+
+    public function list(Request $request): Response
+    {
+        return $this->eventListHandle->handle($request);
+    }
 
     public function detail(Request $request, Event $event): Response
     {

@@ -120,13 +120,20 @@ parameters:
           - 'ROLE_STUDENT'
 
         children:
+          - path: 'event_list'
+            label: 'app.menu.event_list'
+            attributes:
+              icon: 'fa fa-ellipsis-v'
+            roles:
+              - 'ROLE_SUPERVISOR'
+
           - path: 'event_calendar_reservation'
             label: 'app.menu.appointment_calendar'
             attributes:
               icon: 'fa-calendar'
             roles:
               - 'ROLE_STUDENT'
-              -
+
           - path: 'event_calendar_manage'
             label: 'app.menu.appointment_calendar_manage'
             attributes:

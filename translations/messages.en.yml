@@ -9,6 +9,7 @@ app:
     article_category_list: List of article categories
     article_list: Article list
     conversation_list: Conversation list
+    event_list: Appointments
     event_schedule_create: Creating event schedule
     event_schedule_list: List of events
     home: Home page
@@ -55,6 +56,7 @@ app:
     consultant_list: List of consultants
     contact_information: Contact information
     conversation: Conversation
+    event_list: Events
     event_schedule_create: Create event schedule
     event_schedule_list: List of event schedules
     filter: Filter

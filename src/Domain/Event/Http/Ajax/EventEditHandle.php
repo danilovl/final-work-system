@@ -53,23 +53,24 @@ readonly class EventEditHandle
         $form = $this->formFactory
             ->create(EventForm::class, $eventModel, [
                 'addresses' => $user->getEventAddressOwner(),
-                'participants' => $this->eventParticipantFacade
-                    ->getEventParticipantsByUserEvent($user, $event)
+                'participants' => $this->eventParticipantFacade->getEventParticipantsByUserEvent($user, $event)
             ]);
+
         $form->get('participant')->isRequired();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventParticipantForm = $eventModel->participant;
+            $originParticipant = $origin->getParticipant();
 
-            $eventParticipant = $origin->getParticipant() ?? new EventParticipant;
+            $eventParticipant = $originParticipant ?? new EventParticipant;
             if ($eventParticipantForm !== null) {
                 $eventParticipant->setWork($eventParticipantForm->getWork());
                 $eventParticipant->setUser($eventParticipantForm->getUser());
                 $eventParticipant->setEvent($event);
                 $eventModel->participant = $eventParticipant;
-            } elseif ($eventParticipant->getId() !== null) {
-                $this->entityManagerService->remove($eventParticipant);
+            } elseif ($originParticipant !== null) {
+                $this->entityManagerService->remove($originParticipant);
                 $eventModel->participant = null;
             }
 

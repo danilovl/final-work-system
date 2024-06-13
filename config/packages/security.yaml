@@ -100,6 +100,7 @@ security:
     - { path: ^/(%locales%)/event/edit/,          roles:  [ROLE_SUPERVISOR] }
     - { path: ^/(%locales%)/event/switch-skype/,  roles:  [ROLE_STUDENT] }
     - { path: ^/(%locales%)/event/delete,         roles:  [ROLE_SUPERVISOR] }
+    - { path: ^/(%locales%)/event/list,           roles:  [ROLE_SUPERVISOR] }
 
     # Event address
     - { path: ^/(%locales%)/event/address/,       roles:  [ROLE_SUPERVISOR] }

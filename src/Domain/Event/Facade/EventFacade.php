@@ -15,6 +15,7 @@ namespace App\Domain\Event\Facade;
 use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
+use Doctrine\ORM\Query;
 
 readonly class EventFacade
 {
@@ -31,6 +32,13 @@ readonly class EventFacade
             ->allByOwner($eventData)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getEventsByOwnerQuery(EventRepositoryData $eventData): Query
+    {
+        return $this->eventRepository
+            ->allByOwner($eventData)
+            ->getQuery();
     }
 
     public function getEventsByParticipant(EventRepositoryData $eventData): array

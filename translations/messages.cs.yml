@@ -10,6 +10,7 @@ app:
     article_category_list: Seznam kategorií článků
     article_list: Seznam článků
     conversation_list: Seznam konverzací
+    event_list: Schůzky
     event_schedule_create: Vytvoření plánu událostí
     event_schedule_list: Seznam plánu událostí
     home: Hlavní stránka
@@ -56,6 +57,7 @@ app:
     consultant_list: Seznam konzultantů
     contact_information: Kontaktní informace
     conversation: Konverzace
+    event_list: Schůzky
     event_schedule_create: Vytvoření plánu událostí
     event_schedule_list: Seznam plánu událostí
     filter: Filtr

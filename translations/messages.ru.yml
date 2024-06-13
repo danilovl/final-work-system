@@ -9,6 +9,7 @@ app:
     article_category_list: Cписок категорий статей
     article_list: Список статей
     conversation_list: Список бесед
+    event_list: Встречи
     event_schedule_create: Создание расписания событий
     event_schedule_list: Список расписаний событий
     home: Главная страница
@@ -55,6 +56,7 @@ app:
     consultant_list: Список консультантов
     contact_information: Контактная информация
     conversation: Переписка
+    event_list: Встречи
     event_schedule_create: Cоздать расписание событий
     event_schedule_list: Список расписаний событий
     filter: Фильтр

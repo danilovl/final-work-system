@@ -1,3 +1,9 @@
+event_list:
+  path: /list
+  defaults:
+    _controller: App\Domain\Event\Controller\EventController::list
+  methods: [GET,POST]
+
 event_detail:
   path: /detail/{id}
   requirements:
@@ -34,7 +40,7 @@ event_delete:
     id: '%hashid%'
   defaults:
     _controller: App\Domain\Event\Controller\EventController::delete
-  methods: [DELETE]
+  methods: [POST, DELETE]
 
 event_delete_ajax:
   path: /delete/{id}/ajax

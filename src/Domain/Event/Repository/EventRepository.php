@@ -47,6 +47,7 @@ class EventRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->where('event.owner = :owner')
+            ->orderBy('event.createdAt', Criteria::DESC)
             ->setParameter('owner', $eventData->user);
 
         $this->filterByBetweenDate($queryBuilder, $eventData);
