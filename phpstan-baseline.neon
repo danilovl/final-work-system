@@ -36,6 +36,11 @@ parameters:
 			path: src/Domain/Comment/Facade/CommentFacade.php
 
 		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\ReadableCollection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects Closure\\(mixed, int\\|string\\)\\: bool, Closure\\(App\\\\Domain\\\\ConversationParticipant\\\\Entity\\\\ConversationParticipant\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
 			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php

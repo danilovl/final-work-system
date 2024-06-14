@@ -10,11 +10,9 @@
  *
  */
 
-namespace App\Domain\SystemEvent\EventSubscriber;
+namespace App\Application\EventDispatcher\GenericEvent;
 
-use App\Application\Service\EntityManagerService;
-
-class BaseSystemEventSubscriber
+readonly class EntityPostFlushGenericEvent
 {
-    public function __construct(protected EntityManagerService $entityManagerService) {}
+    public function __construct(public object $object) {}
 }

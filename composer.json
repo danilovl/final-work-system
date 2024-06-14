@@ -48,6 +48,7 @@
         "symfony/http-kernel": "6.3.*",
         "symfony/intl": "6.3.*",
         "symfony/mailer": "6.3.*",
+        "symfony/mercure-bundle": "^0.3.7",
         "symfony/messenger": "6.3.*",
         "symfony/mime": "6.3.*",
         "symfony/monolog-bundle": "^3.8",

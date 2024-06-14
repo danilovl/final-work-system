@@ -42,6 +42,7 @@ enum Events
     public const CACHE_CLEAR_KEY = 'cache.clear.key';
     public const CACHE_CREATE_HOMEPAGE = 'cache.create.homepage';
 
+    public const ENTITY_POST_PERSIST_FLUSH = 'entity.post_persist_flush';
     public const MESSAGE_CREATE = 'message.create';
     public const DOCUMENT_CREATE = 'document.create';
     public const SECURITY_RESET_PASSWORD_TOKEN = 'security.reset_password.token';

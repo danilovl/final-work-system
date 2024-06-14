@@ -14,6 +14,7 @@ namespace App\Domain\Conversation\Entity;
 
 use App\Application\Constant\TranslationConstant;
 use App\Application\Exception\PropertyValueIsNullException;
+use App\Application\Helper\ArrayMapHelper;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
     IdTrait,
@@ -97,11 +98,6 @@ class Conversation
         $this->participants = new ArrayCollection;
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getOwner(): User
     {
         return $this->owner;
@@ -137,6 +133,22 @@ class Conversation
     public function getParticipants(): Collection
     {
         return $this->participants;
+    }
+
+    /**
+     * @param User[] $users
+     * @return Collection<ConversationParticipant>
+     */
+    public function getParticipantsExceptUsers(array $users): Collection
+    {
+        $ids = ArrayMapHelper::getObjectsIds($users);
+
+        /** @var Collection<ConversationParticipant> $participants */
+        $participants = $this->participants->filter(static function (ConversationParticipant $participant) use ($ids): bool {
+            return !in_array($participant->getUser()->getId(), $ids, true);
+        });
+
+        return $participants;
     }
 
     public function setParticipants(Collection $participants): void

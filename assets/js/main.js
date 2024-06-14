@@ -656,10 +656,10 @@ function atob64DecodeUnicode(str) {
 
 function conversationEventSource(url, $chat) {
     let eventSource = new EventSource(url);
-    eventSource.onmessage = function (event) {
-        let data = event.data;
-        if (data !== null && data !== undefined && data.length > 0) {
-            $chat.prepend(atob64DecodeUnicode(data));
+    eventSource.onmessage = event => {
+        let data = JSON.parse(event.data);
+        if (data.message !== undefined) {
+            $chat.prepend((data.message));
             initAjaxChangeStatus();
         }
     };
@@ -702,29 +702,15 @@ function conversationEventSource(url, $chat) {
     };
 })(jQuery);
 
-function widgetEventSource(url, widgetsParam) {
+function widgetEventSource(url, id) {
     let eventSource = new EventSource(url);
-    eventSource.onmessage = function (event) {
-        let eventData = event.data;
-        if (eventData.length === 0) {
+    eventSource.onmessage = event => {
+        let data = JSON.parse(event.data);
+        if (data.content === undefined) {
             return;
         }
 
-        let data = $.parseJSON(event.data);
-        if (data === null || data.length === 0) {
-            return;
-        }
-
-        let widgets = Object.entries(widgetsParam);
-        for (let widget of widgets) {
-            let message = data[widget[0]];
-            if (message === null || message === undefined || message.length === 0) {
-                continue;
-            }
-
-            let id = widget[1];
-            $(`#${id}`).replaceWith(message);
-        }
+        $(`#${id}`).replaceWith(data.content);
     }
 }
 

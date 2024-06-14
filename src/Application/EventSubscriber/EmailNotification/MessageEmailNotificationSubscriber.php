@@ -30,12 +30,11 @@ class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
     {
         $conversationMessage = $event->conversationMessage;
         $conversation = $conversationMessage->getConversation();
+        $owner = $conversation->getOwner();
 
-        foreach ($conversation->getParticipants() as $participant) {
-            if ($conversationMessage->getOwner()->getId() === $participant->getUser()->getId()) {
-                continue;
-            }
+        $participants = $conversation->getParticipantsExceptUsers([$owner]);
 
+        foreach ($participants as $participant) {
             $toUser = $participant->getUser();
 
             $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([

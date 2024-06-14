@@ -12,13 +12,17 @@
 
 namespace App\Application\Service;
 
+use App\Application\EventDispatcher\EntityEventDispatcherService;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 readonly class EntityManagerService
 {
-    public function __construct(private EntityManagerInterface $entityManager) {}
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private EntityEventDispatcherService $entityEventDispatcherService
+    ) {}
 
     public function getReference(string $entityName, int $id): ?object
     {
@@ -29,6 +33,8 @@ readonly class EntityManagerService
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
+
+        $this->entityEventDispatcherService->onPostPersistFlush($entity);
     }
 
     public function remove(object $entity): void

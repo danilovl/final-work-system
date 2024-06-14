@@ -12,6 +12,7 @@
 
 namespace App\Tests\Unit\Application\Service;
 
+use App\Application\EventDispatcher\EntityEventDispatcherService;
 use App\Application\Service\EntityManagerService;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,8 +28,12 @@ class EntityManagerServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityEventDispatcherService = $this->createMock(EntityEventDispatcherService::class);
 
-        $this->entityManagerService = new EntityManagerService($this->entityManager);
+        $this->entityManagerService = new EntityManagerService(
+            $this->entityManager,
+            $entityEventDispatcherService
+        );
     }
 
     public function testGetReference(): void

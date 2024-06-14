@@ -13,6 +13,7 @@
 namespace App\Application\Widget;
 
 use App\Application\Service\TwigRenderService;
+use App\Domain\User\Entity\User;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
     SystemEventRecipientFacade
@@ -22,6 +23,7 @@ use App\Domain\User\Service\UserService;
 class UnreadSystemEventWidget extends BaseWidget
 {
     private const COUNT_VIEW = 6;
+    private ?User $user = null;
 
     public function __construct(
         private readonly TwigRenderService $twigRenderService,
@@ -32,7 +34,8 @@ class UnreadSystemEventWidget extends BaseWidget
 
     public function getRenderParameters(): array
     {
-        $user = $this->userService->getUser();
+        $user = $this->user ?? $this->userService->getUser();
+
         $countUnreadSystemEventMessage = $this->systemEventFacade
             ->getTotalUnreadSystemEventsByRecipient($user);
 
@@ -48,5 +51,14 @@ class UnreadSystemEventWidget extends BaseWidget
     public function render(): string
     {
         return $this->twigRenderService->render('application/widget/system_event.html.twig', $this->getRenderParameters());
+    }
+
+    public function renderForUser(User $user): string
+    {
+        $this->user = $user;
+        $parameters = $this->getRenderParameters();
+        $this->user = null;
+
+        return $this->twigRenderService->render('application/widget/system_event.html.twig', $parameters);
     }
 }

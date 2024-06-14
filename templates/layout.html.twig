@@ -104,10 +104,8 @@
             });
 
             {% if parameter_get('event_source.widget.top_nav.active') == true %}
-            widgetEventSource("{{ path('widget_data_live_ajax') }}", {
-                'conversation': 'top-nav-unread-conversation-messages',
-                'systemEvent': 'top-nav-unread-system-events'
-            });
+                widgetEventSource("{{ mercure('unread-conversation-message-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-conversation-messages');
+                widgetEventSource("{{ mercure('unread-system-event-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-system-events');
             {% endif %}
         });
 

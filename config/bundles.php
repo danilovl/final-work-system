@@ -24,5 +24,6 @@ return [
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Danilovl\AsyncBundle\AsyncBundle::class => ['all' => true],
-    App\AppBundle::class => ['all' => true],
+    Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
+    App\AppBundle::class => ['all' => true]
 ];

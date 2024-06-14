@@ -14,11 +14,13 @@ namespace App\Application\Widget;
 
 use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 
 class UnreadConversationMessageWidget extends BaseWidget
 {
     private const COUNT_VIEW = 6;
+    private ?User $user = null;
 
     public function __construct(
         private readonly TwigRenderService $twigRenderService,
@@ -28,8 +30,9 @@ class UnreadConversationMessageWidget extends BaseWidget
 
     public function getRenderParameters(): array
     {
-        $user = $this->userService->getUser();
-        $countUnreadConversationMessage = $this->conversationMessageFacade
+        $user = $this->user ?? $this->userService->getUser();
+
+       $countUnreadConversationMessage = $this->conversationMessageFacade
             ->getTotalUnreadMessagesByUser($user);
 
         $unreadConversationMessages = $this->conversationMessageFacade
@@ -44,5 +47,14 @@ class UnreadConversationMessageWidget extends BaseWidget
     public function render(): string
     {
         return $this->twigRenderService->render('application/widget/conversation_message.html.twig', $this->getRenderParameters());
+    }
+
+    public function renderForUser(User $user): string
+    {
+        $this->user = $user;
+        $parameters = $this->getRenderParameters();
+        $this->user = null;
+
+        return $this->twigRenderService->render('application/widget/conversation_message.html.twig', $parameters);
     }
 }

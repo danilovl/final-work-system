@@ -38,7 +38,7 @@ services:
   App\Domain\:
     resource: '../src/Domain'
     exclude:
-      - '../src/Domain/*/Entity'
+      - '../src/Domain/*/Entity/'
       - '../src/Domain/*/Exception'
       - '../src/Domain/*/Constant'
       - '../src/Domain/*/Model'

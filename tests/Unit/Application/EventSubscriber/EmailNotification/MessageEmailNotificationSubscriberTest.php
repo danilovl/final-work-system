@@ -65,6 +65,7 @@ class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
         $conversation = new Conversation;
         $conversation->setId(1);
+        $conversation->setOwner($user);
         $conversation->setParticipants($participants);
 
         $conversationMessage = new ConversationMessage;
