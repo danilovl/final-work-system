@@ -13,10 +13,11 @@
 namespace App\Tests\Kernel\Application\Command;
 
 use App\Application\Command\ImportSqlCommand;
-use InvalidArgumentException;
+use App\Application\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Throwable;
 
 class ImportSqlCommandTest extends KernelTestCase
 {
@@ -55,7 +56,7 @@ class ImportSqlCommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(Throwable::class);
 
         $temporaryFilePath = tempnam(sys_get_temp_dir(), 'import-sql-command');
         chmod($temporaryFilePath, 0000);

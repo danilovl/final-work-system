@@ -12,6 +12,7 @@
 
 namespace App\Application\DependencyInjection\Compiler;
 
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -23,7 +24,8 @@ class ServicePublicCompilerPass implements CompilerPassInterface
         'form.factory',
         'security.authorization_checker',
         'fos_elastica.finder.work',
-        MessageBusInterface::class
+        MessageBusInterface::class,
+        Security::class
     ];
 
     public function process(ContainerBuilder $container): void

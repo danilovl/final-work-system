@@ -4,25 +4,25 @@ services:
   redis:
     build: docker/redis
     ports:
-      - "6380:6379"
+      - "7102:6379"
   elasticsearch:
     build: docker/elasticsearch
     restart: always
     ports:
-      - "9201:9200"
-      - "9301:9300"
+      - "7103:9200"
+      - "7104:9300"
     environment:
       - discovery.type=single-node
     mem_limit: 1g
   rabbitmq:
     build: docker/rabbitmq
     ports:
-      - "5673:5672"
+      - "7105:5672"
   mysql:
     build: docker/mysql
     restart: always
     ports:
-      - "3307:3306"
+      - "7101:3306"
     volumes:
       - "./docker/mysql/conf/custom.cnf:/etc/mysql/conf.d/custom.cnf"
       #      - "./docker/mysql/data:/var/lib/mysql/"
@@ -62,4 +62,4 @@ services:
       MERCURE_EXTRA_DIRECTIVES: |
         anonymous
     ports:
-      - '8656:80'
+      - '7106:80'

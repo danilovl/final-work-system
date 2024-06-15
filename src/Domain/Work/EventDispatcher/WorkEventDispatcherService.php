@@ -46,7 +46,7 @@ readonly class WorkEventDispatcherService
 
     public function onWorkEditAuthor(Work $work): void
     {
-        $genericEventUser = new UserGenericEvent($work->getAuthor());
+        $genericEventUser = new UserGenericEvent($work->getAuthor(), $work->getSupervisor());
         $genericEventWork = new WorkGenericEvent($work);
 
         $this->asyncService->add(function () use ($genericEventUser, $genericEventWork): void {

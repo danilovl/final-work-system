@@ -12,6 +12,7 @@
 
 namespace App\Domain\Conversation\Http;
 
+use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Application\Service\{
     RequestService,
     TwigRenderService
@@ -39,7 +40,8 @@ readonly class ConversationCreateHandle
         private TwigRenderService $twigRenderService,
         private ConversationFacade $conversationFacade,
         private ConversationMessageFacade $conversationMessageFacade,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private ConversationTypeFacade $conversationTypeFacade
     ) {}
 
     public function handle(Request $request): Response
@@ -74,9 +76,12 @@ readonly class ConversationCreateHandle
         $isUnreadMessages = $this->conversationMessageFacade
             ->isUnreadMessagesByRecipient($user);
 
+        $conversationTypes = $this->conversationTypeFacade->getAll();
+
         return $this->twigRenderService->renderToResponse('domain/conversation/create.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'conversationTypes' => $conversationTypes
         ]);
     }
 }

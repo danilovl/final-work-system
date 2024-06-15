@@ -12,8 +12,8 @@
 
 namespace App\Application\Command;
 
+use App\Application\Exception\InvalidArgumentException;
 use App\Application\Service\EntityManagerService;
-use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputArgument,
