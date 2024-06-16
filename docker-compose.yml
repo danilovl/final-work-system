@@ -18,6 +18,7 @@ services:
     build: docker/rabbitmq
     ports:
       - "7105:5672"
+      - "7106:15672"
   mysql:
     build: docker/mysql
     restart: always
@@ -55,6 +56,7 @@ services:
       - mysql
       - rabbitmq
       - elasticsearch
+      - mercure
     mem_limit: 2g
   nginx:
     build: docker/nginx
@@ -76,4 +78,4 @@ services:
         cors_origins "http://work-system.local:8100"
         anonymous
     ports:
-      - '7106:80'
+      - '7107:80'

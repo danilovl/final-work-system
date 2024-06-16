@@ -11,7 +11,6 @@ php bin/console doctrine:migrations:migrate --no-interaction
 php bin/console assets:install public
 php bin/console cache:clear
 php bin/console cache:warmup
-php bin/console rabbitmq:setup-fabric
 php bin/console app:import-sql docker/mysql/data/dump.sql
 php bin/console fos:elastica:populate
 

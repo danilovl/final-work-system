@@ -75,7 +75,7 @@ Configure the database connection, SMTP and other connection:
 
 ``` env
 DATABASE_URL=mysql://root:@mysql:3306/final_work_system
-RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+MESSENGER_TRANSPORT_DSN=amqp://guest:guest@rabbitmq:5672
 ELASTICSEARCH_URL=http://elasticsearch:9200/
 MAILER_DSN=smtp://user:pass@localhost:25
 REDIS_HOST=redis

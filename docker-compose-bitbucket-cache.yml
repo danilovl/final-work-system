@@ -18,6 +18,7 @@ services:
     build: docker/rabbitmq
     ports:
       - "7105:5672"
+      - "7106:15672"
   mysql:
     build: docker/mysql
     restart: always
@@ -51,6 +52,7 @@ services:
       - mysql
       - rabbitmq
       - elasticsearch
+      - mercure
     mem_limit: 1g
   mercure:
     build: docker/mercure
@@ -62,4 +64,4 @@ services:
       MERCURE_EXTRA_DIRECTIVES: |
         anonymous
     ports:
-      - '7106:80'
+      - '7107:80'
