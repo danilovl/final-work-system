@@ -12,11 +12,14 @@
 
 namespace App\Tests\Unit\Domain\User\Twig\Runtime;
 
+use App\Application\Service\S3ClientService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\User\Twig\Runtime\UserRuntime;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Routing\RouterInterface;
 
 class UserRuntimeTest extends TestCase
 {
@@ -31,9 +34,18 @@ class UserRuntimeTest extends TestCase
             ->method('getUserOrNull')
             ->willReturn($user);
 
+        $router = $this->createMock(RouterInterface::class);
+        $hashidsService = $this->createMock(HashidsServiceInterface::class);
         $parameterService = $this->createMock(ParameterServiceInterface::class);
+        $s3ClientService = $this->createMock(S3ClientService::class);
 
-        $this->userRuntime = new UserRuntime($userService, $parameterService);
+        $this->userRuntime = new UserRuntime(
+            $userService,
+            $router,
+            $hashidsService,
+            $parameterService,
+            $s3ClientService
+        );
     }
 
     public function testAppUser(): void

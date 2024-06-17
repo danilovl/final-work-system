@@ -24,7 +24,8 @@ yarn-error.log
 .idea/
 /public/build/
 /public/bundles/
-/public/upload/
+/public/upload*
+/public/minio/
 /cypress/videos/
 /cypress/screenshots/
 !/.env.local

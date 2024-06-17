@@ -12,21 +12,19 @@
 
 namespace App\Domain\Work\Http;
 
-use App\Application\Constant\{
-    FlashTypeConstant
-};
+use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
-    EntityManagerService,
-    RequestService
+    RequestService,
+    S3ClientService,
+    EntityManagerService
 };
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{
-    RedirectResponse,
-    Request
+    Request,
+    RedirectResponse
 };
 
 readonly class WorkDeleteHandle
@@ -35,7 +33,8 @@ readonly class WorkDeleteHandle
         private RequestService $requestService,
         private HashidsServiceInterface $hashidsService,
         private FormDeleteFactory $formDeleteFactory,
-        private EntityManagerService $entityManagerService
+        private EntityManagerService $entityManagerService,
+        private S3ClientService $s3ClientService
     ) {}
 
     public function handle(Request $request, Work $work): RedirectResponse
@@ -48,11 +47,11 @@ readonly class WorkDeleteHandle
             if ($form->isValid()) {
 
                 $workMedia = $work->getMedias();
-                if ($workMedia !== null) {
-                    foreach ($workMedia as $media) {
-                        $deleteFile = $media->getWebPath();
-                        (new Filesystem)->remove($deleteFile);
-                    }
+                foreach ($workMedia as $media) {
+                    $this->s3ClientService->deleteObject(
+                        $media->getType()->getFolder(),
+                        $media->getMediaName()
+                    );
                 }
 
                 $this->entityManagerService->remove($work);

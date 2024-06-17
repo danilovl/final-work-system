@@ -15,6 +15,8 @@
         "ext-sockets": "*",
         "ext-sodium": "*",
         "api-platform/core": "^3.0.8",
+        "aws/aws-sdk-php": "^3.279",
+        "aws/aws-sdk-php-symfony": "^2.6",
         "composer/package-versions-deprecated": "1.11.99.3",
         "danilovl/async-bundle": "^0.2.0",
         "danilovl/hashids-bundle": "^1.4.0",

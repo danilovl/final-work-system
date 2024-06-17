@@ -12,6 +12,7 @@
 
 namespace App\Application\Twig;
 
+use App\Domain\Media\Twig\Runtime\MediaRuntime;
 use App\Domain\SystemEvent\Service\SystemEventLinkGeneratorService;
 use App\Application\Twig\Runtime\{
     AwayRuntime,
@@ -56,6 +57,10 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('system_event_generate_link', [SystemEventLinkGeneratorService::class, 'generateLink'])
         ];
 
+        $mediaFunctions = [
+            new TwigFunction('media_is_file_exist', [MediaRuntime::class, 'isMediaFileExist'])
+        ];
+
         $otherFunctions = [
             new TwigFunction('locales', [LocaleRuntime::class, 'getLocales'])
         ];
@@ -66,6 +71,7 @@ class TwigExtension extends AbstractExtension
             ...$taskFunctions,
             ...$conversationFunctions,
             ...$systemEventFunctions,
+            ...$mediaFunctions,
             ...$otherFunctions
         ];
     }

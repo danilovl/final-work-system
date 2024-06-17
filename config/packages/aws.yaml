@@ -1,0 +1,8 @@
+aws:
+    version: latest
+    region: us-east-1
+    use_path_style_endpoint: true
+    credentials:
+        key: '%env(AWS_KEY)%'
+        secret: '%env(AWS_SECRET)%'
+    endpoint: '%env(AWS_ENDPOINT)%'

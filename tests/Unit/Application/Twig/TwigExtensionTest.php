@@ -35,6 +35,7 @@ class TwigExtensionTest extends TestCase
                 'task_work_complete_percentage',
                 'check_work_users_conversation', 'conversation_last_message', 'conversation_message_read_date_recipient',
                 'system_event_generate_link',
+                'media_is_file_exist',
                 'locales'
             ],
             $twigFunction

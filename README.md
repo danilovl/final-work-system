@@ -19,6 +19,7 @@ Requirements
   * Composer
   * NPM
   * Mercure
+  * Minio
   * or you can use docker
 
 Features

@@ -12,17 +12,20 @@
 
 namespace App\Domain\Profile\Controller;
 
+use App\Domain\User\Entity\User;
 use App\Domain\Profile\Http\{
     ProfileEditHandle,
     ProfileShowHandle,
+    ProfileImageHandle,
     ProfileChangeImageHandle,
     ProfileDeleteImageHandle,
     ProfileChangePasswordHandle
 };
 use Symfony\Component\HttpFoundation\{
-    RedirectResponse,
     Request,
-    Response
+    Response,
+    RedirectResponse,
+    BinaryFileResponse
 };
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,7 +36,8 @@ class ProfileController extends AbstractController
         private readonly ProfileEditHandle $profileEditHandle,
         private readonly ProfileChangeImageHandle $profileChangeImageHandle,
         private readonly ProfileDeleteImageHandle $profileDeleteImageHandle,
-        private readonly ProfileChangePasswordHandle $profileChangePasswordHandle
+        private readonly ProfileChangePasswordHandle $profileChangePasswordHandle,
+        private readonly ProfileImageHandle $profileImageHandle
     ) {}
 
     public function show(): Response
@@ -59,5 +63,10 @@ class ProfileController extends AbstractController
     public function changePassword(Request $request): Response
     {
         return $this->profileChangePasswordHandle->handle($request);
+    }
+
+    public function image(User $user): BinaryFileResponse|Response
+    {
+        return $this->profileImageHandle->handle($user);
     }
 }

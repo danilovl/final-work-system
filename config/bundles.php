@@ -25,5 +25,6 @@ return [
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Danilovl\AsyncBundle\AsyncBundle::class => ['all' => true],
     Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
+    Aws\Symfony\AwsBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true]
 ];

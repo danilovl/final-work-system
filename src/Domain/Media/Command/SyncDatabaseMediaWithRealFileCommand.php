@@ -13,6 +13,7 @@
 namespace App\Domain\Media\Command;
 
 use App\Application\Service\EntityManagerService;
+use App\Application\Service\S3ClientService;
 use App\Domain\Media\Facade\{
     MediaFacade,
     MediaTypeFacade
@@ -38,7 +39,8 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         private readonly EntityManagerService $entityManagerService,
         private readonly MediaFacade $mediaFacade,
         private readonly MediaTypeFacade $mediaTypeFacade,
-        private readonly ParameterServiceInterface $parameterService
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly S3ClientService $s3ClientService
     ) {
         parent::__construct();
     }
@@ -74,7 +76,12 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
             }
 
             foreach ($medias as $media) {
-                if (file_exists($media->getAbsolutePath())) {
+                $isExist = $this->s3ClientService->isExist(
+                    $media->getType()->getFolder(),
+                    $media->getMediaName()
+                );
+
+                if ($isExist) {
                     continue;
                 }
 

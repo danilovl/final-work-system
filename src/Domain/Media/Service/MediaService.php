@@ -14,23 +14,28 @@ namespace App\Domain\Media\Service;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Helper\FunctionHelper;
+use App\Application\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{
     BinaryFileResponse,
     ResponseHeaderBag
 };
+use GuzzleHttp\Psr7\Stream;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaService
 {
+    public function __construct(private readonly S3ClientService $s3ClientService) {}
+
     public function download(Media $media): BinaryFileResponse
     {
-        $filePath = $media->getWebPath();
-        $isExistFile = (new Filesystem)->exists($filePath);
+        $object = $this->s3ClientService->getObject(
+            $media->getType()->getFolder(),
+            $media->getMediaName()
+        );
 
-        if (!$isExistFile) {
+        if (!$object) {
             throw new NotFoundHttpException("File doesn't exist");
         }
 
@@ -44,13 +49,20 @@ class MediaService
             $fileName = sprintf('%s_%s_%s.%s', $date, $type, $name, $extension);
         }
 
-        $response = $this->file($filePath, $fileName);
+        /** @var Stream $body */
+        $body = $object->get('Body');
+
+        /** @var string $temporaryFilePath */
+        $temporaryFilePath = tempnam(sys_get_temp_dir(), 'media-download');
+        file_put_contents($temporaryFilePath, $body->getContents());
+
+        $response = $this->createBinaryFileResponse($temporaryFilePath, $fileName);
         $response->headers->set('Content-Type', $media->getMimeType()->getName());
 
-        return $response->send();
+        return $response;
     }
 
-    public function file(
+    public function createBinaryFileResponse(
         string $file,
         string $fileName = null,
         string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT

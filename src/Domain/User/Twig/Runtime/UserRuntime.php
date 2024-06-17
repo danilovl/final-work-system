@@ -12,11 +12,14 @@
 
 namespace App\Domain\User\Twig\Runtime;
 
+use App\Application\Service\S3ClientService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Service\UserService;
+use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 use Twig\Extension\{
     AbstractExtension,
@@ -27,7 +30,10 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
     public function __construct(
         private readonly UserService $userService,
-        private readonly ParameterServiceInterface $parameterService
+        private readonly RouterInterface $router,
+        private readonly HashidsServiceInterface $hashidsService,
+        private readonly ParameterServiceInterface $parameterService,
+        private readonly S3ClientService $s3ClientService
     ) {}
 
     public function appUser(): ?User
@@ -43,11 +49,18 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
     public function profileImage(Environment $env, ?User $user): string
     {
         $defaultImagePath = $this->parameterService->getString('default_user_image');
+        $imageProfile = $user?->getProfileImage();
 
-        if ($user !== null) {
-            $imageProfile = $user->getProfileImage();
-            if ($imageProfile !== null && $imageProfile->existMediaFile()) {
-                $defaultImagePath = $imageProfile->getWebPath();
+        if ($imageProfile !== null) {
+            $isFileExist = $this->s3ClientService->isExist(
+                $imageProfile->getType()->getFolder(),
+                $imageProfile->getMediaName()
+            );
+
+            if ($isFileExist) {
+                return $this->router->generate('profile_image', [
+                    'id' => $this->hashidsService->encode($user->getId())
+                ]);
             }
         }
 

@@ -41,3 +41,11 @@ profile_create_image_web_camera_ajax:
   defaults:
     _controller: App\Domain\Profile\Controller\Ajax\ProfileController::createImageWebCamera
   methods: [POST]
+
+profile_image:
+  path: /profile/image/{id}
+  requirements:
+    id: '%hashid%'
+  defaults:
+    _controller: App\Domain\Profile\Controller\ProfileController::image
+  methods: [GET]

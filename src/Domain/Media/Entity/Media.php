@@ -13,17 +13,14 @@
 namespace App\Domain\Media\Entity;
 
 use App\Application\Exception\PropertyValueIsNullException;
-use App\Application\Constant\{
-    FileSizeConstant
-};
+use App\Application\Constant\FileSizeConstant;
 use App\Application\Traits\Entity\{
-    ActiveAbleTrait,
-    CreateUpdateAbleTrait,
     IdTrait,
     IsOwnerTrait,
+    ActiveAbleTrait,
+    CreateUpdateAbleTrait,
     SimpleInformationTrait
 };
-use App\Domain\Media\Constant\MediaConstant;
 use App\Domain\Media\Repository\MediaRepository;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
@@ -33,8 +30,8 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use DateTime;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection
+    Collection,
+    ArrayCollection
 };
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -124,11 +121,6 @@ class Media
     public function getMediaName(): string
     {
         return $this->mediaName;
-    }
-
-    public function getMediaNameFolderType(): string
-    {
-        return $this->getType()->getFolder() . DIRECTORY_SEPARATOR . $this->getMediaName();
     }
 
     public function setMediaName(string $mediaName): void
@@ -238,48 +230,9 @@ class Media
         return $this->uploadMedia;
     }
 
-    public function getNameWithExtension(): string
-    {
-        return $this->getMediaName() . '.' . $this->getMimeType()->getExtension();
-    }
-
-    public function getUploadDir(): string
-    {
-        return MediaConstant::WEB_PATH_TO_UPLOAD_FOLDER->value . $this->getType()->getFolder();
-    }
-
-    public function getAbsolutePath(): string
-    {
-        return $this->getUploadRootDir() . DIRECTORY_SEPARATOR . $this->getMediaName();
-    }
-
-    public function getAbsolutePathWithExtension(): string
-    {
-        return $this->getUploadRootDir() .
-            DIRECTORY_SEPARATOR .
-            $this->getMediaName() .
-            $this->getMimeType()->getExtension();
-    }
-
-    public function getWebPath(): string
-    {
-        return $this->getUploadDir() . DIRECTORY_SEPARATOR . $this->getMediaName();
-    }
-
-    public function getWebPathWithExtension(): string
-    {
-        return $this->getUploadDir() .
-            DIRECTORY_SEPARATOR .
-            $this->getMediaName() .
-            '.' .
-            $this->getMimeType()->getExtension();
-    }
-
-    private function getUploadRootDir(): string
-    {
-        return MediaConstant::SERVER_PATH_TO_PUBLIC_FOLDER->value . DIRECTORY_SEPARATOR . $this->getUploadDir();
-    }
-
+    /**
+     * @note use in template
+     */
     public function getMediaSizeFormatted(): string
     {
         $size = $this->getMediaSize();
@@ -288,21 +241,6 @@ class Media
         $number = number_format($size / (1024 ** $power), 2);
 
         return sprintf('%s %s', $number, FileSizeConstant::FILE_SIZES[$power]);
-    }
-
-    public function removeMediaFile(): bool
-    {
-        $pathToFile = $this->getAbsolutePath();
-        if (file_exists($pathToFile)) {
-            return unlink($pathToFile);
-        }
-
-        return false;
-    }
-
-    public function existMediaFile(): bool
-    {
-        return file_exists($this->getAbsolutePath());
     }
 
     public function changeActive(): void

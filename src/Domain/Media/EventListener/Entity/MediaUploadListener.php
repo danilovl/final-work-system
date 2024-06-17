@@ -13,7 +13,10 @@
 namespace App\Domain\Media\EventListener\Entity;
 
 use App\Application\Exception\RuntimeException;
-use App\Application\Service\EntityManagerService;
+use App\Application\Service\{
+    S3ClientService,
+    EntityManagerService
+};
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Doctrine\ORM\Event\{
@@ -24,7 +27,10 @@ use Doctrine\ORM\Event\{
 
 readonly class MediaUploadListener
 {
-    public function __construct(private EntityManagerService $entityManagerService) {}
+    public function __construct(
+        private EntityManagerService $entityManagerService,
+        private S3ClientService $s3ClientService
+    ) {}
 
     public function prePersist(PrePersistEventArgs $eventArgs): void
     {
@@ -83,51 +89,58 @@ readonly class MediaUploadListener
         $media->setOriginalExtension($originalMediaExtension);
         $media->setMediaSize($mediaSize);
 
-        $uploadMedia->move(
-            $media->getUploadDir(),
-            $mediaName
+        $this->s3ClientService->putObject(
+            $media->getType()->getFolder(),
+            $media->getMediaName(),
+            $uploadMedia->getRealPath()
         );
     }
 
     private function update(Media $media): void
     {
         $uploadMedia = $media->getUploadMedia();
-        if ($uploadMedia) {
-            $media->setUploadMedia(null);
-
-            $originalMediaName = $uploadMedia->getClientOriginalName();
-            $originalMediaExtension = $uploadMedia->getClientOriginalExtension();
-            $mimeType = $uploadMedia->getMimeType();
-            $mediaSize = $uploadMedia->getSize();
-
-            /** @var MediaMimeType|null $mediaMimeType */
-            $mediaMimeType = $this->entityManagerService
-                ->getRepository(MediaMimeType::class)
-                ->findOneBy(['name' => $mimeType]);
-
-            if ($mediaMimeType === null) {
-                throw new RuntimeException("MediaMimeType doesn't exist");
-            }
-
-            $media->removeMediaFile();
-
-            $mediaName = sha1(uniqid((string) mt_rand(), true)) . '.' . $mediaMimeType->getExtension();
-            $media->setMediaName($mediaName);
-            $media->setMimeType($mediaMimeType);
-
-            $media->setOriginalMediaName($originalMediaName);
-            $media->setOriginalExtension($originalMediaExtension);
-            $media->setMediaSize($mediaSize);
-
-            $uploadMedia->move(
-                $media->getUploadDir(),
-                $mediaName
-            );
+        if (!$uploadMedia) {
+            return;
         }
+
+        $media->setUploadMedia(null);
+
+        $originalMediaName = $uploadMedia->getClientOriginalName();
+        $originalMediaExtension = $uploadMedia->getClientOriginalExtension();
+        $mimeType = $uploadMedia->getMimeType();
+        $mediaSize = $uploadMedia->getSize();
+
+        /** @var MediaMimeType|null $mediaMimeType */
+        $mediaMimeType = $this->entityManagerService
+            ->getRepository(MediaMimeType::class)
+            ->findOneBy(['name' => $mimeType]);
+
+        if ($mediaMimeType === null) {
+            throw new RuntimeException("MediaMimeType doesn't exist");
+        }
+
+        $this->remove($media);
+
+        $mediaName = sha1(uniqid((string) mt_rand(), true)) . '.' . $mediaMimeType->getExtension();
+        $media->setMediaName($mediaName);
+        $media->setMimeType($mediaMimeType);
+
+        $media->setOriginalMediaName($originalMediaName);
+        $media->setOriginalExtension($originalMediaExtension);
+        $media->setMediaSize($mediaSize);
+
+        $this->s3ClientService->putObject(
+            $media->getType()->getFolder(),
+            $media->getMediaName(),
+            $uploadMedia->getRealPath()
+        );
     }
 
     private function remove(Media $media): void
     {
-        $media->removeMediaFile();
+        $this->s3ClientService->deleteObject(
+            $media->getType()->getFolder(),
+            $media->getMediaName()
+        );
     }
 }

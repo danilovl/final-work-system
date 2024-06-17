@@ -42,7 +42,7 @@ final class Version20200627193807 extends AbstractMigration
         $this->addSql("INSERT INTO `media_type` (`id`, `folder`, `name`, `description`, `constant`, `created_at`, `updated_at`) VALUES 
             (1, 'version', 'WORK_VERSION', NULL, 'WORK_VERSION', NOW(), NULL),
             (2, 'document', 'INFORMATION_MATERIAL', NULL, 'INFORMATION_MATERIAL', NOW(), NULL),
-            (3, 'profile_image', 'USER_PROFILE_IMAGE', NULL, 'USER_PROFILE_IMAGE', NOW(), NULL),
+            (3, 'profile-image', 'USER_PROFILE_IMAGE', NULL, 'USER_PROFILE_IMAGE', NOW(), NULL),
             (4, 'article', 'ARTICLE', NULL, 'ARTICLE', NOW(), NULL);
         ");
 

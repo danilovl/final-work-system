@@ -10,18 +10,23 @@
  *
  */
 
-namespace App\Domain\Document\Http;
+namespace App\Domain\Profile\Http;
 
-use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Service\MediaService;
+use App\Domain\User\Entity\User;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-readonly class DocumentDownloadHandle
+readonly class ProfileImageHandle
 {
     public function __construct(private MediaService $mediaService) {}
 
-    public function handle(Media $media): BinaryFileResponse
+    public function handle(User $user): BinaryFileResponse|Response
     {
-        return $this->mediaService->download($media);
+        if (!$user->getProfileImage()) {
+            return new Response;
+        }
+
+        return $this->mediaService->download($user->getProfileImage());
     }
 }

@@ -24,7 +24,8 @@ use App\Domain\Document\Http\{
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    Response,
+    BinaryFileResponse
 };
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -66,21 +67,17 @@ class DocumentController extends AbstractController
         return $this->documentListOwnerHandle->handle($request);
     }
 
-    public function download(Media $media): Response
+    public function download(Media $media): BinaryFileResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
-        $this->documentDownloadHandle->handle($media);
-
-        return new Response;
+        return $this->documentDownloadHandle->handle($media);
     }
 
-    public function downloadGoogle(Media $media): Response
+    public function downloadGoogle(Media $media): BinaryFileResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
-        $this->documentDownloadHandle->handle($media);
-
-        return new Response;
+        return $this->documentDownloadHandle->handle($media);
     }
 }
