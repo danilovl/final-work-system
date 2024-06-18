@@ -1,7 +1,7 @@
 framework:
     secret: '%env(APP_SECRET)%'
     session:
-        handler_id: null
+        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
         cookie_secure: false
         cookie_samesite: lax
     php_errors:

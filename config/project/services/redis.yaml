@@ -2,14 +2,6 @@ services:
   _defaults:
     public: true
 
-  doctrine_cache.providers.redis_provider:
-    class: App\Application\Redis\Provider\RedisCache
-    calls:
-      - ['setRedis', ['@redis']]
-      - ['setNamespace', ['DoctrineSecondLevelCache']]
-    tags:
-      - { name: snc_redis.client }
-
   redis:
     class: Redis
     public: false
@@ -21,3 +13,15 @@ services:
       - method: select
         arguments:
           - 13
+
+  doctrine_cache.providers.redis_provider:
+    class: App\Application\Redis\Provider\RedisCache
+    calls:
+      - ['setRedis', ['@redis']]
+      - ['setNamespace', ['DoctrineSecondLevelCache']]
+    tags:
+      - { name: snc_redis.client }
+
+  Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+    arguments:
+      - '@redis'
