@@ -2,6 +2,18 @@ services:
   _defaults:
     public: true
 
+  redis_session:
+    class: Redis
+    public: false
+    calls:
+      - method: connect
+        arguments:
+          - '%env(REDIS_HOSTNAME)%'
+          - '%env(REDIS_PORT)%'
+      - method: select
+        arguments:
+          - 12
+
   redis:
     class: Redis
     public: false
@@ -24,4 +36,4 @@ services:
 
   Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
     arguments:
-      - '@redis'
+      - '@redis_session'
