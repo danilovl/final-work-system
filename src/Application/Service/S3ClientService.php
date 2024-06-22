@@ -25,6 +25,13 @@ class S3ClientService
 
     public function __construct(private readonly S3Client $s3Client) {}
 
+    public function createBucket(string $bucket): void
+    {
+        $this->s3Client->createBucket([
+            'Bucket' => $bucket
+        ]);
+    }
+
     public function getObject(string $bucket, string $key): ?Result
     {
         $result = $this->getFromCache($bucket, $key);
@@ -46,9 +53,14 @@ class S3ClientService
         }
     }
 
-    public function isExist(string $bucket, string $key): bool
+    public function doesBucketExist(string $bucket): bool
     {
-        return $this->getObject($bucket, $key) !== null;
+        return $this->s3Client->doesBucketExist($bucket);
+    }
+
+    public function doesObjectExist(string $bucket, string $key): bool
+    {
+        return $this->s3Client->doesObjectExist($bucket, $key);
     }
 
     public function putObject(string $bucket, string $key, string $filePath): void

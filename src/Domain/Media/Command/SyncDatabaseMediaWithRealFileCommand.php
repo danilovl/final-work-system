@@ -76,7 +76,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
             }
 
             foreach ($medias as $media) {
-                $isExist = $this->s3ClientService->isExist(
+                $isExist = $this->s3ClientService->doesObjectExist(
                     $media->getType()->getFolder(),
                     $media->getMediaName()
                 );

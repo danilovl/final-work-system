@@ -25,7 +25,7 @@ class MediaRuntime extends AbstractExtension implements RuntimeExtensionInterfac
 
     public function isMediaFileExist(Media $media): bool
     {
-        return $this->s3ClientService->isExist(
+        return $this->s3ClientService->doesObjectExist(
             $media->getType()->getFolder(),
             $media->getMediaName()
         );

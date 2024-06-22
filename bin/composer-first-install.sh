@@ -13,5 +13,6 @@ php bin/console cache:clear
 php bin/console cache:warmup
 php bin/console app:import-sql docker/mysql/data/dump.sql
 php bin/console fos:elastica:populate
+php bin/console app:s3-create-buckets
 
 exec "$@"

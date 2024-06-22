@@ -52,7 +52,7 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
         $imageProfile = $user?->getProfileImage();
 
         if ($imageProfile !== null) {
-            $isFileExist = $this->s3ClientService->isExist(
+            $isFileExist = $this->s3ClientService->doesObjectExist(
                 $imageProfile->getType()->getFolder(),
                 $imageProfile->getMediaName()
             );
