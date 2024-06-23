@@ -81,3 +81,14 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+  kibana:
+    build: docker/kibana
+    restart: always
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      ELASTICSEARCH_USERNAME: ELASTICSEARCH_USERNAME
+      ELASTICSEARCH_PASSWORD: ELASTICSEARCH_PASSWORD
+    ports:
+      - '7110:5601'
+    depends_on:
+      - elasticsearch

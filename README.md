@@ -20,6 +20,7 @@ Requirements
   * NPM
   * Mercure
   * Minio
+  * Kibana
   * or you can use docker
 
 Features

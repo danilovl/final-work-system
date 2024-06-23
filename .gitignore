@@ -31,3 +31,5 @@ yarn-error.log
 !/.env.local
 
 /coverage-report
+
+docker/elasticsearch/data
