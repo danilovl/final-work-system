@@ -125,6 +125,39 @@ fos_elastica:
         provider: ~
         listener: true
 
+    conversation_message:
+      client: default
+      index_name: conversation_message_index
+      settings:
+        index:
+          analysis:
+            analyzer:
+              lowercase_shingle_analyzer:
+                type: custom
+                tokenizer: standard
+                filter:
+                  - lowercase
+                  - shingle_filter
+            filter:
+              shingle_filter:
+                type: shingle
+                min_shingle_size: 2
+                max_shingle_size: 4
+                output_unigrams: true
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: date
+        updated_at:
+          type: date
+      persistence:
+        driver: orm
+        model: App\Domain\ConversationMessage\Entity\ConversationMessage
+        finder: ~
+        provider: ~
+        listener: true
+
     task:
       client: default
       index_name: task_index
