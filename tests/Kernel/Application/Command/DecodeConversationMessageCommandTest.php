@@ -38,7 +38,6 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
         $this->entityManagerService = $kernel->getContainer()->get(EntityManagerService::class);
     }
 
-
     public function testExecute(): array
     {
         $data = $this->prepareData();

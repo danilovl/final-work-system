@@ -60,6 +60,7 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $this->subscriber->onWorkCreate($event);
         $this->subscriber->onWorkCreate($event);
         $this->subscriber->onWorkEdit($event);
+        $this->subscriber->onWorkReminderDeadlineCreate($event);
 
         $this->assertTrue(true);
     }

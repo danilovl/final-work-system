@@ -58,4 +58,9 @@ class UnreadSystemEventWidgetTest extends TestCase
     {
         $this->assertEquals('content', $this->widget->render());
     }
+
+    public function testRenderForUser(): void
+    {
+        $this->assertEquals('content', $this->widget->renderForUser(new User));
+    }
 }
