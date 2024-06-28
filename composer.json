@@ -78,13 +78,16 @@
         "phpstan/phpstan-doctrine": "^1.3.40",
         "phpstan/phpstan-symfony": "^1.3.2",
         "phpunit/phpunit": "^10.0",
+        "psalm/plugin-symfony": "^5.0",
         "symfony/browser-kit": "^6.2",
         "symfony/css-selector": "^6.2",
         "symfony/debug-bundle": "^6.2",
         "symfony/maker-bundle": "^1.48",
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "^6.2",
-        "symfony/web-profiler-bundle": "^6.2"
+        "symfony/web-profiler-bundle": "^6.2",
+        "vimeo/psalm": "^5.15",
+        "weirdan/doctrine-psalm-plugin": "^2.9"
     },
     "config": {
         "optimize-autoloader": true,
@@ -135,8 +138,10 @@
             "bash bin/web-test.sh"
         ],
         "phpstan": [
-            "@php bin/console cache:warmup --env=dev",
             "phpstan analyse -c phpstan.neon src --level 9 --no-progress"
+        ],
+        "psalm": [
+            "./vendor/bin/psalm"
         ],
         "pre-push": [
             "@phpunit"

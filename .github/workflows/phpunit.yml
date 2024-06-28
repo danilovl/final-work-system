@@ -27,6 +27,9 @@ jobs:
       - name: Run phpstan
         run: docker-compose exec -T php composer phpstan
 
+      - name: Run psalm
+        run: docker-compose exec -T php composer psalm
+
       - name: Run unit tests
         run: docker-compose exec -T php composer test-unit
 

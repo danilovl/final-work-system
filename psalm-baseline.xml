@@ -1,0 +1,3282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+  <file src="src/AppBundle.php">
+    <UnusedClass>
+      <code>AppBundle</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Admin/DashboardController.php">
+    <UnusedClass>
+      <code>DashboardController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Cache/HomepageCache.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Collector/SystemInfoCollector.php">
+    <UnusedClass>
+      <code>SystemInfoCollector</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Command/DecodeConversationMessageCommand.php">
+    <UnusedClass>
+      <code>DecodeConversationMessageCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Command/DoctrineGenerateMapping.php">
+    <UnusedClass>
+      <code>DoctrineGenerateMapping</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Command/ImportSqlCommand.php">
+    <UnusedClass>
+      <code>ImportSqlCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Command/S3CreateBucketCommand.php">
+    <UnusedClass>
+      <code>S3CreateBucketCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Constant/ApiDomainConstant.php">
+    <UnusedClass>
+      <code>ApiDomainConstant</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Constant/LocaleConstant.php">
+    <PossiblyUnusedMethod>
+      <code>values</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Controller/Api/EndpointController.php">
+    <UnusedClass>
+      <code>EndpointController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Controller/Api/SecurityController.php">
+    <UnusedClass>
+      <code>SecurityController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Controller/AwayController.php">
+    <UnusedClass>
+      <code>AwayController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Controller/DefaultController.php">
+    <UnusedClass>
+      <code>DefaultController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Controller/HomeController.php">
+    <UnusedClass>
+      <code>HomeController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Controller/SecurityController.php">
+    <UnusedClass>
+      <code>SecurityController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/DataTransferObject/BaseDataTransferObject.php">
+    <PossiblyUnusedMethod>
+      <code>createFromJson</code>
+      <code>toJson</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/EventDispatcher/CacheEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/EventDispatcher/EntityEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/EventDispatcher/SecurityDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/EventListener/DoctrineExtensionListener.php">
+    <UnusedClass>
+      <code>DoctrineExtensionListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventListener/LoggableListener.php">
+    <MissingTemplateParam>
+      <code>LoggableListener</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/EventListener/Middleware/AjaxRequestListener.php">
+    <UnnecessaryVarAnnotation>
+      <code>AjaxRequestMiddlewareAttribute</code>
+      <code>AjaxRequestMiddlewareAttribute</code>
+    </UnnecessaryVarAnnotation>
+    <UnusedClass>
+      <code>AjaxRequestListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventListener/RedirectToPreferredLocaleListener.php">
+    <UnusedClass>
+      <code>RedirectToPreferredLocaleListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventListener/RequestListener.php">
+    <UnusedClass>
+      <code>RequestListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/CacheEventSubscriber.php">
+    <UnusedClass>
+      <code>CacheEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/DocumentEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>DocumentEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>EventEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/MessageEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>MessageEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/SecurityEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>SecurityEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/TaskEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>TaskEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/UserEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>UserEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>VersionEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/EmailNotification/WorkEmailNotificationSubscriber.php">
+    <UnusedClass>
+      <code>WorkEmailNotificationSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/EventSubscriber/WidgetEventSubscriber.php">
+    <UnusedClass>
+      <code>WidgetEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Exception/LogicException.php">
+    <UnusedClass>
+      <code>LogicException</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Form/Constraint/FirstWeekDayValidator.php">
+    <UnusedClass>
+      <code>FirstWeekDayValidator</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Form/Factory/FormDeleteFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Form/SimpleSearchForm.php">
+    <MissingTemplateParam>
+      <code>SimpleSearchForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/Form/Transformer/CommaDotTransformer.php">
+    <MissingTemplateParam>
+      <code>DataTransformerInterface</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/Form/Transformer/TrimTransformer.php">
+    <MissingTemplateParam>
+      <code>DataTransformerInterface</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/Form/Type/FirstWeekDayType.php">
+    <MissingTemplateParam>
+      <code>FirstWeekDayType</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/Form/Type/LocaleType.php">
+    <MissingTemplateParam>
+      <code>LocaleType</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Form/Type/MediaFileType.php">
+    <MissingTemplateParam>
+      <code>MediaFileType</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/Form/Type/UserRoleType.php">
+    <MissingTemplateParam>
+      <code>UserRoleType</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/Form/Type/WeekDaysType.php">
+    <MissingTemplateParam>
+      <code>WeekDaysType</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Application/GraphQL/Resolver/NotDoctrineResolverMap.php">
+    <UnusedClass>
+      <code>NotDoctrineResolverMap</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/GraphQL/Resolver/TaskResolverMap.php">
+    <UnusedClass>
+      <code>TaskResolverMap</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/GraphQL/Resolver/UserResolverMap.php">
+    <UnusedClass>
+      <code>UserResolverMap</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/GraphQL/Resolver/WorkResolverMap.php">
+    <UnusedClass>
+      <code>WorkResolverMap</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/GraphQL/Type/DateTimeType.php">
+    <UnusedClass>
+      <code>DateTimeType</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Helper/DateHelper.php">
+    <PossiblyUnusedMethod>
+      <code>actualWeekEnd</code>
+      <code>changeFormatWeek</code>
+      <code>checkWeek</code>
+      <code>datePeriod</code>
+      <code>endWeek</code>
+      <code>firstDayMonth</code>
+      <code>lastDayMonth</code>
+      <code>minusDayDate</code>
+      <code>nextWeek</code>
+      <code>previousWeek</code>
+    </PossiblyUnusedMethod>
+    <UnnecessaryVarAnnotation>
+      <code>int</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Application/Helper/IpHelper.php">
+    <UnusedClass>
+      <code>IpHelper</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Helper/ObjectHelper.php">
+    <UnusedClass>
+      <code>ObjectHelper</code>
+    </UnusedClass>
+    <UnusedForeachValue>
+      <code>$same</code>
+    </UnusedForeachValue>
+  </file>
+  <file src="src/Application/Helper/SerializerHelper.php">
+    <UnusedClass>
+      <code>SerializerHelper</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Helper/SortFunctionHelper.php">
+    <UnnecessaryVarAnnotation>
+      <code>string</code>
+      <code>string</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Application/Interfaces/Entity/OwnerInterface.php">
+    <UnusedClass>
+      <code>OwnerInterface</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Interfaces/Menu/MenuItemInterface.php">
+    <PossiblyUnusedMethod>
+      <code>addAttribute</code>
+      <code>addChild</code>
+      <code>getAttribute</code>
+      <code>getAttributes</code>
+      <code>getChild</code>
+      <code>getLabel</code>
+      <code>getUri</code>
+      <code>isDisplayed</code>
+      <code>removeChild</code>
+      <code>setIsDisplayed</code>
+      <code>setName</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedReturnValue>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Application/Interfaces/Middleware/RequestMiddlewareInterface.php">
+    <PossiblyUnusedMethod>
+      <code>handle</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Interfaces/Transformer/TransformerInterface.php">
+    <PossiblyUnusedMethod>
+      <code>transform</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Interfaces/Widget/WidgetInterface.php">
+    <PossiblyUnusedMethod>
+      <code>setName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Interfaces/Widget/WidgetManagerInterface.php">
+    <PossiblyUnusedMethod>
+      <code>addWidget</code>
+      <code>addWidgetGroup</code>
+      <code>hasWidget</code>
+      <code>hasWidgetGroup</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Menu/MenuItem.php">
+    <PossiblyUnusedMethod>
+      <code>addChildren</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Messenger/EmailNotification/EmailNotificationHandler.php">
+    <UnusedClass>
+      <code>EmailNotificationHandler</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Messenger/Loggable/LoggableHandler.php">
+    <UnusedClass>
+      <code>LoggableHandler</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Middleware/EventCalendar/Ajax/GetEventMiddleware.php">
+    <UnusedClass>
+      <code>GetEventMiddleware</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Migrations/2020/06/Version20200627193807.php">
+    <UnusedClass>
+      <code>Version20200627193807</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Redis/Provider/RedisCache.php">
+    <UnusedClass>
+      <code>RedisCache</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Security/Authenticator/ApiKeyAuthenticator.php">
+    <UnnecessaryVarAnnotation>
+      <code>string|null</code>
+      <code>string|null</code>
+    </UnnecessaryVarAnnotation>
+    <UnusedClass>
+      <code>ApiKeyAuthenticator</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Security/Authenticator/AppAuthenticator.php">
+    <UnusedClass>
+      <code>AppAuthenticator</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Security/Provider/ApiKeyUserProvider.php">
+    <UnusedClass>
+      <code>ApiKeyUserProvider</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Security/Provider/AppUserProvider.php">
+    <MissingTemplateParam>
+      <code>PasswordUpgraderInterface</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>AppUserProvider</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Service/DateService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/EntityManagerService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>refresh</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/MailerService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/PaginatorService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/RequestService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/S3ClientService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/SeoPageService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>hasMeta</code>
+      <code>setMetas</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/TranslatorService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Service/TwigRenderService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Traits/Entity/ConstantAwareTrait.php">
+    <PossiblyUnusedMethod>
+      <code>getConstant</code>
+      <code>getConstant</code>
+      <code>getConstant</code>
+      <code>getConstant</code>
+      <code>getConstant</code>
+      <code>getConstant</code>
+      <code>setConstant</code>
+      <code>setConstant</code>
+      <code>setConstant</code>
+      <code>setConstant</code>
+      <code>setConstant</code>
+      <code>setConstant</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Traits/Entity/CreateAbleTrait.php">
+    <PossiblyUnusedMethod>
+      <code>createAblePrePersist</code>
+      <code>getCreatedAt</code>
+      <code>setCreatedAt</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Traits/Entity/CreateUpdateAbleTrait.php">
+    <PossiblyUnusedMethod>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>createUpdateAblePrePersist</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Traits/Entity/IdTrait.php">
+    <PossiblyUnusedMethod>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+      <code>setId</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Traits/Entity/IsReadTrait.php">
+    <PossiblyUnusedMethod>
+      <code>isRead</code>
+      <code>isRead</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Traits/Entity/TimestampAbleTrait.php">
+    <PossiblyUnusedMethod>
+      <code>getCreatedAt</code>
+      <code>getCreatedAt</code>
+      <code>getCreatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>getUpdatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setCreatedAt</code>
+      <code>setUpdatedAt</code>
+      <code>setUpdatedAt</code>
+      <code>setUpdatedAt</code>
+      <code>timestampAblePrePersist</code>
+      <code>timestampAblePrePersist</code>
+      <code>timestampAblePrePersist</code>
+      <code>timestampAblePreUpdate</code>
+      <code>timestampAblePreUpdate</code>
+      <code>timestampAblePreUpdate</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Transformer/Api/Transformer.php">
+    <UnusedClass>
+      <code>Transformer</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Twig/Runtime/AwayRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Twig/Runtime/HomepageNotifyWidgetRuntime.php">
+    <ContainerDependency>
+      <code>private readonly ContainerInterface $container</code>
+    </ContainerDependency>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Twig/Runtime/LocaleRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Twig/Runtime/SeoRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Twig/SeoExtension.php">
+    <UnusedClass>
+      <code>SeoExtension</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Twig/TwigExtension.php">
+    <UnusedClass>
+      <code>TwigExtension</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Twig/WidgetExtension.php">
+    <UnusedClass>
+      <code>WidgetExtension</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Util/MomentFormatConverterUtil.php">
+    <UnusedClass>
+      <code>MomentFormatConverterUtil</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Util/SluggerUtil.php">
+    <UnusedClass>
+      <code>SluggerUtil</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Util/TextHighlightWordUtil.php">
+    <PossiblyUnusedMethod>
+      <code>highlightEntireWords</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Util/TokenStorageUtil.php">
+    <UnusedClass>
+      <code>TokenStorageUtil</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Widget/BaseWidget.php">
+    <PossiblyUnusedProperty>
+      <code>$parameters</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Application/Widget/LocalesWidget.php">
+    <UnusedClass>
+      <code>LocalesWidget</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Widget/MenuWidget.php">
+    <UnusedClass>
+      <code>MenuWidget</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Widget/UnreadConversationMessageWidget.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Widget/UnreadSystemEventWidget.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Widget/UserProfileInformationNotifyWidget.php">
+    <UnusedClass>
+      <code>UserProfileInformationNotifyWidget</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/Widget/WorkDeadlineNotifyWidget.php">
+    <UnusedClass>
+      <code>WorkDeadlineNotifyWidget</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ApiUser/Entity/ApiUser.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ApiUserRule>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getApiKey</code>
+      <code>getName</code>
+      <code>getRules</code>
+      <code>getSalt</code>
+      <code>setApiKey</code>
+      <code>setName</code>
+      <code>setRules</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ApiUser/Facade/ApiUserFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ApiUser/Repository/ApiUserRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>baseQueryBuilder</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$apiKey</code>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/ApiUserRule/Entity/ApiUserRule.php">
+    <PossiblyUnusedMethod>
+      <code>getApiUser</code>
+      <code>getRangeIp</code>
+      <code>setApiUser</code>
+      <code>setRangeIp</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ApiUserRule/Repository/ApiUserRuleRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>baseQueryBuilder</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Article/Controller/ArticleController.php">
+    <UnusedClass>
+      <code>ArticleController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Article/Entity/Article.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ArticleCategory>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getContent</code>
+      <code>setCategories</code>
+      <code>setContent</code>
+      <code>setOwner</code>
+      <code>setTitle</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Article/Facade/ArticleCategoryFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Article/Facade/ArticleFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Article/Http/ArticleDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Article/Repository/ArticleRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$articleCategory</code>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Article/Security/Voter/ArticleVoter.php">
+    <MissingTemplateParam>
+      <code>ArticleVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>ArticleVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ArticleCategory/Controller/ArticleCategoryController.php">
+    <UnusedClass>
+      <code>ArticleCategoryController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ArticleCategory/Entity/ArticleCategory.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Article>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getArticles</code>
+      <code>hasAccess</code>
+      <code>isOwner</code>
+      <code>setAccess</code>
+      <code>setArticles</code>
+      <code>setOwner</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ArticleCategory/Http/ArticleCategoryArticleListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ArticleCategory/Http/ArticleCategoryListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ArticleCategory/Repository/ArticleCategoryRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$roles</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php">
+    <MissingTemplateParam>
+      <code>ArticleCategoryVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>ArticleCategoryVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Comment/Facade/CommentFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Comment/Form/CommentForm.php">
+    <MissingTemplateParam>
+      <code>CommentForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Comment/Form/EventSubscriber/EventCommentSubscriber.php">
+    <PossiblyUnusedMethod>
+      <code>preSetData</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Comment/Repository/CommentRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$event</code>
+      <code>$registry</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Conversation/Controller/Ajax/ConversationController.php">
+    <UnusedClass>
+      <code>ConversationController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Conversation/Controller/Api/ConversationController.php">
+    <UnusedClass>
+      <code>ConversationController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Conversation/Controller/ConversationController.php">
+    <UnusedClass>
+      <code>ConversationController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Conversation/Elastica/ConversationSearch.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Entity/Conversation.php">
+    <MissingTemplateParam>
+      <code>$participants</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ConversationMessage>]]></code>
+      <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
+      <code><![CDATA[Collection<ConversationParticipant>]]></code>
+      <code><![CDATA[Collection<ConversationParticipant>]]></code>
+      <code><![CDATA[Collection<SystemEvent>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>addMessage</code>
+      <code>getStatuses</code>
+      <code>getSystemEvents</code>
+      <code>setMessages</code>
+      <code>setStatuses</code>
+      <code>setSystemEvents</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/EventDispatcher/ConversationEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/EventSubscriber/MercureSubscriber.php">
+    <UnusedClass>
+      <code>MercureSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Conversation/Facade/ConversationFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <UnnecessaryVarAnnotation>
+      <code>array</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Domain/Conversation/Facade/ConversationMessageFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getTotalUnreadMessagesAfterDateByUser</code>
+    </PossiblyUnusedMethod>
+    <QueryBuilderSetParameter>
+      <code>$date</code>
+    </QueryBuilderSetParameter>
+    <UnnecessaryVarAnnotation>
+      <code>ConversationMessageStatus|null</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Domain/Conversation/Helper/ConversationHelper.php">
+    <PossiblyUnusedMethod>
+      <code>groupConversationsByCategory</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/Ajax/ConversationChangeReadMessageStatusHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/Ajax/ConversationDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/Ajax/ConversationLiveHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/Ajax/ConversationReadAllHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/Api/ConversationWorkMessageListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/ConversationCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/ConversationCreateWorkHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/ConversationDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/ConversationLastMessageHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Http/ConversationListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Repository/ConversationRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$ids</code>
+      <code>$queryBuilder</code>
+      <code>$registry</code>
+      <code>$types</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Conversation/Security/Voter/ConversationVoter.php">
+    <MissingTemplateParam>
+      <code>ConversationVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>ConversationVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Conversation/Service/ConversationStatusService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>changeConversationStatus</code>
+      <code>setReadConversationMessage</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Service/ConversationStreamService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Service/ConversationVariationService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>setNewPermission</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Service/MessageHighlightService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Twig/Runtime/ConversationRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationMessage/Entity/ConversationMessage.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php">
+    <UnusedClass>
+      <code>ConversationMessageNameValidator</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ConversationMessage/Form/ConversationComposeMessageForm.php">
+    <MissingTemplateParam>
+      <code>ConversationComposeMessageForm</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationMessage/Form/ConversationMessageForm.php">
+    <MissingTemplateParam>
+      <code>ConversationMessageForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/ConversationMessage/Model/ConversationMessageModel.php">
+    <PossiblyUnusedMethod>
+      <code>fromConversationMessage</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationMessage/Repository/ConversationMessageRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByWorkUser</code>
+      <code>countMessageByUserStatus</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$conversation</code>
+      <code>$conversation</code>
+      <code>$date</code>
+      <code>$ids</code>
+      <code>$limit</code>
+      <code>$registry</code>
+      <code>$statusType</code>
+      <code>$statusType</code>
+      <code>$statusType</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$work</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php">
+    <MissingTemplateParam>
+      <code>ConversationMessageVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>ConversationMessageVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ConversationMessageStatus/DataTransferObject/ConversationMessageStatusRepositoryData.php">
+    <PossiblyUnusedProperty>
+      <code>$conversation</code>
+      <code>$type</code>
+      <code>$user</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/ConversationMessageStatus/Entity/ConversationMessageStatus.php">
+    <PossiblyUnusedMethod>
+      <code>getConversation</code>
+      <code>getMessage</code>
+      <code>getUser</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationMessageStatus/Facade/ConversationMessageStatusFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationMessageStatus/Repository/ConversationMessageStatusRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByConversation</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$conversation</code>
+      <code>$conversation</code>
+      <code>$conversationMessage</code>
+      <code>$data</code>
+      <code>$registry</code>
+      <code>$type</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getConversationMessageStatus</code>
+      <code>setConversationMessageStatus</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationParticipant/Entity/ConversationParticipant.php">
+    <PossiblyUnusedMethod>
+      <code>getConversation</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationType/Entity/ConversationType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Conversation>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getConversations</code>
+      <code>setConversations</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationType/Facade/ConversationTypeFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ConversationType/Repository/ConversationTypeRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Document/Controller/Ajax/DocumentController.php">
+    <UnusedClass>
+      <code>DocumentController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Document/Controller/DocumentController.php">
+    <UnusedClass>
+      <code>DocumentController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Document/EventDispatcher/DocumentEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Form/DocumentForm.php">
+    <MissingTemplateParam>
+      <code>DocumentForm</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Form/DocumentSearchForm.php">
+    <MissingTemplateParam>
+      <code>DocumentSearchForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Document/Form/Factory/DocumentFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/Ajax/DocumentChangeActiveHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/Ajax/DocumentCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/Ajax/DocumentDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/Ajax/DocumentEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/DocumentCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/DocumentDetailContentHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/DocumentDownloadHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/DocumentEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/DocumentListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Http/DocumentListOwnerHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Document/Security/Voter/DocumentVoter.php">
+    <MissingTemplateParam>
+      <code>DocumentVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>DocumentVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/DocumentCategory/Controller/Ajax/DocumentCategoryController.php">
+    <UnusedClass>
+      <code>DocumentCategoryController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/DocumentCategory/Controller/DocumentCategoryController.php">
+    <UnusedClass>
+      <code>DocumentCategoryController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/DocumentCategory/Form/Factory/DocumentCategoryFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/Ajax/DocumentCategoryCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/Ajax/DocumentCategoryDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/Ajax/DocumentCategoryEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/DocumentCategoryCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/DocumentCategoryDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/DocumentCategoryEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Http/DocumentCategoryListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php">
+    <MissingTemplateParam>
+      <code>DocumentCategoryVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>DocumentCategoryVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EmailNotification/Admin/EmailNotificationCrudController.php">
+    <UnusedClass>
+      <code>EmailNotificationCrudController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EmailNotification/Command/EmailNotificationCommand.php">
+    <UnusedClass>
+      <code>EmailNotificationCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EmailNotification/Entity/EmailNotification.php">
+    <PossiblyUnusedMethod>
+      <code>getSendedAt</code>
+      <code>getUuid</code>
+      <code>isSuccess</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EmailNotification/Facade/EmailNotificationFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EmailNotification/Repository/EmailNotificationRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>baseQueryBuilder</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$uuid</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/EmailNotification/Service/SendEmailNotificationService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Controller/Ajax/EventController.php">
+    <UnusedClass>
+      <code>EventController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Event/Controller/Api/EventController.php">
+    <UnusedClass>
+      <code>EventController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Event/Controller/EventController.php">
+    <UnusedClass>
+      <code>EventController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Event/DataTransferObject/EventRepositoryData.php">
+    <PossiblyUnusedProperty>
+      <code>$endDate</code>
+      <code>$eventType</code>
+      <code>$startDate</code>
+      <code>$user</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Event/Entity/Event.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Comment>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>getComment</code>
+      <code>setComment</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$systemEvents</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Domain/Event/EventDispatcher/EventEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Facade/EventCalendarFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <UnnecessaryVarAnnotation>
+      <code>User</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Domain/Event/Facade/EventFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>find</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Facade/EventParticipantFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Form/Constraint/EventTimeValidator.php">
+    <UnusedClass>
+      <code>EventTimeValidator</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Event/Form/EventForm.php">
+    <MissingTemplateParam>
+      <code>EventForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Event/Http/Ajax/EventDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/Ajax/EventEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/Ajax/EventGetEventHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/Api/EventListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/EventDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/EventDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/EventEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/EventListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Http/EventSwitchToSkypeHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Repository/EventRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByWork</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$eventData</code>
+      <code>$eventData</code>
+      <code>$registry</code>
+      <code>$work</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Event/Security/Voter/EventVoter.php">
+    <MissingTemplateParam>
+      <code>EventVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>EventVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventAddress/Controller/Ajax/EventAddressController.php">
+    <UnusedClass>
+      <code>EventAddressController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventAddress/Controller/EventAddressController.php">
+    <UnusedClass>
+      <code>EventAddressController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventAddress/Entity/EventAddress.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Event>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>existLocation</code>
+      <code>getEvents</code>
+      <code>setEvents</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Facade/EventAddressFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Form/EventAddressForm.php">
+    <MissingTemplateParam>
+      <code>EventAddressForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/EventAddress/Form/Factory/EventAddressFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/Ajax/EventAddressCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/Ajax/EventAddressDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/Ajax/EventAddressEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/EventAddressCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/EventAddressDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/EventAddressDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/EventAddressEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Http/EventAddressListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventAddress/Model/EventAddressModel.php">
+    <PossiblyUnusedProperty>
+      <code>$skype</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/EventAddress/Repository/EventAddressRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/EventAddress/Security/Voter/EventAddressVoter.php">
+    <MissingTemplateParam>
+      <code>EventAddressVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>EventAddressVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventCalendar/Controller/Ajax/EventCalendarController.php">
+    <UnusedClass>
+      <code>EventCalendarController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventCalendar/Controller/EventCalendarController.php">
+    <UnusedClass>
+      <code>EventCalendarController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventCalendar/Form/EventWorkReservationForm.php">
+    <MissingTemplateParam>
+      <code>EventWorkReservationForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/EventCalendar/Http/Ajax/EventCalendarCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventCalendar/Http/Ajax/EventCalendarEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventCalendar/Http/Ajax/EventCalendarEventReservationHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventCalendar/Http/Ajax/EventCalendarGetEventHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventCalendar/Http/EventCalendarManageHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventCalendar/Http/EventCalendarReservationHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventCalendar/Request/GetEventRequest.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventParticipant/Entity/EventParticipant.php">
+    <PossiblyUnusedMethod>
+      <code>setEmail</code>
+      <code>setFirstName</code>
+      <code>setSecondName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Controller/Ajax/EventScheduleController.php">
+    <UnusedClass>
+      <code>EventScheduleController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventSchedule/Controller/EventScheduleController.php">
+    <UnusedClass>
+      <code>EventScheduleController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventSchedule/Entity/EventSchedule.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<EventScheduleTemplate>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>addTemplate</code>
+      <code>removeTemplate</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Facade/EventScheduleFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Factory/EventScheduleFactory.php">
+    <PossiblyUnusedReturnValue>
+      <code>EventSchedule</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Domain/EventSchedule/Form/EventScheduleCloneForm.php">
+    <MissingTemplateParam>
+      <code>EventScheduleCloneForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/EventSchedule/Form/EventScheduleForm.php">
+    <MissingTemplateParam>
+      <code>EventScheduleForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/Ajax/EventScheduleCloneHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/Ajax/EventScheduleDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/EventScheduleCloneHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/EventScheduleCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/EventScheduleDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/EventScheduleDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/EventScheduleEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Http/EventScheduleListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventSchedule/Repository/EventScheduleRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php">
+    <MissingTemplateParam>
+      <code>EventScheduleVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>EventScheduleVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventScheduleTemplate/Entity/EventScheduleTemplate.php">
+    <PossiblyUnusedMethod>
+      <code>getDay</code>
+      <code>getSchedule</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php">
+    <UnusedClass>
+      <code>EventScheduleTemplateFactory</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventScheduleTemplate/Form/Constraint/EventScheduleTemplateTimeValidator.php">
+    <UnusedClass>
+      <code>EventScheduleTemplateTimeValidator</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EventScheduleTemplate/Form/EventScheduleTemplateForm.php">
+    <MissingTemplateParam>
+      <code>EventScheduleTemplateForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/EventType/Entity/EventType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Event>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getEvents</code>
+      <code>setColor</code>
+      <code>setEvents</code>
+      <code>setRegistrable</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php">
+    <UnusedClass>
+      <code>SyncDatabaseMediaWithRealFileCommand</code>
+    </UnusedClass>
+    <UnusedFunctionCall>
+      <code>array_map</code>
+      <code>array_map</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="src/Domain/Media/DataTransferObject/MediaRepositoryData.php">
+    <PossiblyUnusedProperty>
+      <code>$active</code>
+      <code>$criteria</code>
+      <code>$type</code>
+      <code>$users</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Media/Entity/Media.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<MediaCategory>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>getMediaSizeFormatted</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$systemEvents</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Domain/Media/EventListener/Entity/MediaUploadListener.php">
+    <UnusedClass>
+      <code>MediaUploadListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Media/Facade/MediaFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>find</code>
+      <code>queryMediasByType</code>
+      <code>queryMediasQueryByUser</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Media/Facade/MediaMimeTypeFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getMimeTypeByName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Media/Facade/MediaTypeFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Media/Helper/MediaHelper.php">
+    <UnusedClass>
+      <code>MediaHelper</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Media/Model/MediaModel.php">
+    <PossiblyUnusedProperty>
+      <code>$mediaSize</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Media/Repository/MediaRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByWork</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$mediaData</code>
+      <code>$mediaType</code>
+      <code>$registry</code>
+      <code>$type</code>
+      <code>$user</code>
+      <code>$work</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Media/Service/MediaService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Media/Twig/Runtime/MediaRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/MediaCategory/Entity/MediaCategory.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Media>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>setMedias</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/MediaCategory/Facade/MediaCategoryFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/MediaCategory/Factory/MediaCategoryFactory.php">
+    <PossiblyUnusedReturnValue>
+      <code>MediaCategory</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Domain/MediaCategory/Form/DataGrid/MediaCategoryDataGrid.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/MediaCategory/Form/MediaCategoryForm.php">
+    <MissingTemplateParam>
+      <code>MediaCategoryForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/MediaCategory/Repository/MediaCategoryRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByMediaOwner</code>
+      <code>allByMediaOwners</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$users</code>
+      <code>$users</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/MediaMimeType/Entity/MediaMimeType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Media>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>getMedias</code>
+      <code>setExtension</code>
+      <code>setMedias</code>
+      <code>setName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/MediaMimeType/Repository/MediaMimeTypeRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$mediaType</code>
+      <code>$name</code>
+      <code>$registry</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/MediaType/Entity/MediaType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Media>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getMedias</code>
+      <code>setFolder</code>
+      <code>setMedias</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/MediaType/Repository/MediaTypeRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Profile/Controller/Ajax/ProfileController.php">
+    <UnusedClass>
+      <code>ProfileController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Profile/Controller/ProfileController.php">
+    <UnusedClass>
+      <code>ProfileController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Profile/Form/ProfileFormType.php">
+    <MissingTemplateParam>
+      <code>ProfileFormType</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Profile/Form/ProfileMediaForm.php">
+    <MissingTemplateParam>
+      <code>ProfileMediaForm</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/ProfileChangeImageHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/ProfileChangePasswordHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/ProfileDeleteImageHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/ProfileEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/ProfileImageHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Profile/Http/ProfileShowHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Controller/ResetPasswordController.php">
+    <UnusedClass>
+      <code>ResetPasswordController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ResetPassword/Entity/ResetPassword.php">
+    <PossiblyUnusedMethod>
+      <code>getExpiresAt</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Exception/FakeRepositoryException.php">
+    <UnusedClass>
+      <code>FakeRepositoryException</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ResetPassword/Exception/TooManyPasswordRequestsException.php">
+    <PossiblyUnusedMethod>
+      <code>getRetryAfter</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Facade/ResetPasswordFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>find</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Form/ProfileChangePasswordFormType.php">
+    <MissingTemplateParam>
+      <code>ProfileChangePasswordFormType</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>getName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Form/ResetChangePasswordForm.php">
+    <MissingTemplateParam>
+      <code>ResetChangePasswordForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/ResetPassword/Form/ResetPasswordRequestForm.php">
+    <MissingTemplateParam>
+      <code>ResetPasswordRequestForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/ResetPassword/Http/ResetPasswordCheckEmailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Http/ResetPasswordRequestHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/ResetPassword/Http/ResetPasswordSendPasswordHandle.php">
+    <UnusedClass>
+      <code>ResetPasswordSendPasswordHandle</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/ResetPassword/Repository/ResetPasswordRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$token</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/ResetPassword/Service/ResetPasswordService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Controller/Ajax/SystemEventController.php">
+    <UnusedClass>
+      <code>SystemEventController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/Controller/Api/SystemEventController.php">
+    <UnusedClass>
+      <code>SystemEventController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/DataTransferObject/SystemEventRepositoryData.php">
+    <PossiblyUnusedProperty>
+      <code>$limit</code>
+      <code>$offset</code>
+      <code>$recipient</code>
+      <code>$viewed</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/SystemEvent/Entity/SystemEvent.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<SystemEventRecipient>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>setRecipient</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/DocumentSystemEventSubscriber.php">
+    <UnusedClass>
+      <code>DocumentSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php">
+    <UnusedClass>
+      <code>EventSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/MercureSubscriber.php">
+    <UnusedClass>
+      <code>MercureSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/MessageSystemEventSubscriber.php">
+    <UnusedClass>
+      <code>MessageSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/TaskSystemEventSubscriber.php">
+    <UnusedClass>
+      <code>TaskSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/UserSystemEventSubscriber.php">
+    <UnusedClass>
+      <code>UserSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/VersionSystemEventSubscriber.php">
+    <UnnecessaryVarAnnotation>
+      <code>User</code>
+    </UnnecessaryVarAnnotation>
+    <UnusedClass>
+      <code>VersionSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/EventSubscriber/WorkSystemEventSubscriber.php">
+    <UnusedClass>
+      <code>WorkSystemEventSubscriber</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEvent/Facade/SystemEventFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>queryRecipientsByUser</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Http/Ajax/SystemEventViewedAllHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Http/Ajax/SystemEventViewedHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Http/Api/SystemEventTypeEventsHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Repository/SystemEventRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByRecipient</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$recipient</code>
+      <code>$recipient</code>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEventRecipient/EventListener/Entity/SystemEventRecipientListener.php">
+    <UnusedClass>
+      <code>SystemEventRecipientListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEventRecipient/Repository/SystemEventRecipientRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$recipient</code>
+      <code>$recipient</code>
+      <code>$recipient</code>
+      <code>$registry</code>
+      <code>$systemEventsByTypeRecipient</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php">
+    <MissingTemplateParam>
+      <code>SystemEventRecipientVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>SystemEventRecipientVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/SystemEventType/Entity/SystemEventType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<SystemEvent>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getSystemEvents</code>
+      <code>setGroup</code>
+      <code>setSystemEvents</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Command/TaskRemindDeadlineCommand.php">
+    <UnusedClass>
+      <code>TaskRemindDeadlineCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Task/Controller/Ajax/TaskController.php">
+    <PossiblyUnusedParam>
+      <code>$work</code>
+      <code>$work</code>
+      <code>$work</code>
+      <code>$work</code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code>TaskController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Task/Controller/Api/TaskController.php">
+    <PossiblyUnusedParam>
+      <code>$work</code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code>TaskController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Task/Controller/TaskController.php">
+    <UnusedClass>
+      <code>TaskController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Task/Elastica/TaskSearch.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Entity/Task.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<SystemEvent>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>setSystemEvents</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/EventDispatcher/GenericEvent/TaskGenericEvent.php">
+    <PossiblyUnusedProperty>
+      <code>$type</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Task/EventDispatcher/TaskEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Facade/TaskDeadlineFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Facade/TaskFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Form/DataGrid/TaskDataGrid.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Form/Factory/TaskFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Form/TaskForm.php">
+    <MissingTemplateParam>
+      <code>TaskForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Task/Form/TaskSeveralForm.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskChangeStatusHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskCompleteAllHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Ajax/TaskNotifyCompleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Api/TaskDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Api/TaskListOwnerHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Api/TaskListSolverHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/Api/TaskListWorkHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/TaskCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/TaskCreateSeveralHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/TaskEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Http/TaskListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Repository/TaskRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>allByWork</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$active</code>
+      <code>$active</code>
+      <code>$ids</code>
+      <code>$isComplete</code>
+      <code>$isComplete</code>
+      <code>$registry</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$work</code>
+      <code>$works</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Task/Security/Voter/TaskVoter.php">
+    <MissingTemplateParam>
+      <code>TaskVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>TaskVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Task/Service/TaskService.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Task>]]></code>
+      <code><![CDATA[Collection<Task>|null]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Task/Service/TaskStatusService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Twig/Runtime/TaskRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Admin/UserCrudController.php">
+    <PossiblyUnusedMethod>
+      <code>switchUserAction</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Command/UserAddCommand.php">
+    <UnusedClass>
+      <code>UserAddCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/User/Command/UserDeleteCommand.php">
+    <UnusedClass>
+      <code>UserDeleteCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/User/Command/UserListCommand.php">
+    <UnusedClass>
+      <code>UserListCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/User/Command/Validator/UserValidator.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Controller/Ajax/UserController.php">
+    <UnusedClass>
+      <code>UserController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/User/Controller/Api/UserController.php">
+    <UnusedClass>
+      <code>UserController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/User/Controller/UserController.php">
+    <UnusedClass>
+      <code>UserController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/User/Entity/User.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Comment>]]></code>
+      <code><![CDATA[Collection<Event>]]></code>
+      <code><![CDATA[Collection<EventAddress>]]></code>
+      <code><![CDATA[Collection<EventParticipant>]]></code>
+      <code><![CDATA[Collection<EventParticipant>]]></code>
+      <code><![CDATA[Collection<Group>]]></code>
+      <code><![CDATA[Collection<Media>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>addGroups</code>
+      <code>addRole</code>
+      <code>getComments</code>
+      <code>getEventByParticipant</code>
+      <code>getEventsOwner</code>
+      <code>getGender</code>
+      <code>getLastLogin</code>
+      <code>getLastRequestedAt</code>
+      <code>getMediaBy</code>
+      <code>getTimezone</code>
+      <code>getToken</code>
+      <code>isOnline</code>
+      <code>serialize</code>
+      <code>setAuthorWorks</code>
+      <code>setComments</code>
+      <code>setEventAddressOwner</code>
+      <code>setEventsOwner</code>
+      <code>setGender</code>
+      <code>setId</code>
+      <code>setLastLogin</code>
+      <code>setSupervisorWorks</code>
+      <code>setTimezone</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$biography</code>
+      <code>$confirmationToken</code>
+      <code>$conversationMessageStatus</code>
+      <code>$conversationMessages</code>
+      <code>$conversationsOwner</code>
+      <code>$conversationsParticipant</code>
+      <code>$dateOfBirth</code>
+      <code>$eventsSchedule</code>
+      <code>$mediaCategoriesOwner</code>
+      <code>$passwordRequestedAt</code>
+      <code>$systemEventsOwner</code>
+      <code>$systemEventsRecipient</code>
+      <code>$tasksOwner</code>
+      <code>$website</code>
+      <code>$workCategoriesOwner</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Domain/User/EventDispatcher/UserEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Facade/UserFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Factory/UserFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Form/DataGrid/UserDataGrid.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Form/Factory/UserFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Form/UserForm.php">
+    <MissingTemplateParam>
+      <code>UserForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/User/Helper/UserHelper.php">
+    <PossiblyUnusedMethod>
+      <code>getRealRoleName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Helper/UserRoleHelper.php">
+    <PossiblyUnusedMethod>
+      <code>isAdmin</code>
+      <code>isAuthorSupervisor</code>
+      <code>isAuthorSupervisorOpponent</code>
+      <code>isAuthorSupervisorOpponentConsultant</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Http/Ajax/UserCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Http/Ajax/UserEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Http/Api/UserDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Http/UserCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Http/UserEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Http/UserListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Repository/UserRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$email</code>
+      <code>$enable</code>
+      <code>$enable</code>
+      <code>$enable</code>
+      <code>$enable</code>
+      <code>$registry</code>
+      <code>$role</code>
+      <code>$token</code>
+      <code>$type</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$username</code>
+      <code>$username</code>
+      <code>$workStatus</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/User/Service/PasswordUpdater.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Service/UserService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Service/UserWorkService.php">
+    <MissingTemplateParam>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/User/Twig/Runtime/UserRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Controller/Ajax/UserGroupController.php">
+    <UnusedClass>
+      <code>UserGroupController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/UserGroup/Controller/UserGroupController.php">
+    <UnusedClass>
+      <code>UserGroupController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/UserGroup/Entity/Group.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedProperty>
+      <code>$users</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/UserGroup/Facade/UserGroupFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Factory/UserGroupFactory.php">
+    <PossiblyUnusedReturnValue>
+      <code>Group</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Domain/UserGroup/Form/Factory/UserGroupFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Form/UserGroupForm.php">
+    <MissingTemplateParam>
+      <code>UserGroupForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/UserGroup/Http/Ajax/UserGroupCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Http/Ajax/UserGroupDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Http/Ajax/UserGroupEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Http/UserGroupCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Http/UserGroupEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Http/UserGroupListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Repository/UserGroupRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Version/Controller/Ajax/VersionController.php">
+    <UnusedClass>
+      <code>VersionController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Version/Controller/Api/VersionController.php">
+    <UnusedClass>
+      <code>VersionController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Version/Controller/VersionController.php">
+    <PossiblyUnusedParam>
+      <code>$work</code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code>VersionController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Version/EventDispatcher/VersionEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Factory/VersionFactory.php">
+    <UnusedClass>
+      <code>VersionFactory</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Version/Form/Factory/VersionFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Form/VersionForm.php">
+    <MissingTemplateParam>
+      <code>VersionForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Version/Http/Ajax/VersionCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/Ajax/VersionDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/Ajax/VersionEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/Api/VersionListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/VersionCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/VersionDetailContentHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/VersionDownloadHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Http/VersionEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Model/VersionModel.php">
+    <PossiblyUnusedMethod>
+      <code>fromMedia</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Security/Voter/VersionVoter.php">
+    <MissingTemplateParam>
+      <code>VersionVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>VersionVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Widget/Constant/WidgetConstant.php">
+    <UnusedClass>
+      <code>WidgetConstant</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Widget/Controller/Ajax/WidgetController.php">
+    <UnusedClass>
+      <code>WidgetController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Widget/EventDispatcher/WidgetEventDispatcherService.php">
+    <UnusedClass>
+      <code>WidgetEventDispatcherService</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Widget/Http/Ajax/WidgetLiveHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Widget/Service/WidgetManagerService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Widget/Service/WidgetStreamService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Command/WorkRemindDeadlineCommand.php">
+    <UnusedClass>
+      <code>WorkRemindDeadlineCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Work/Controller/Ajax/WorkController.php">
+    <UnusedClass>
+      <code>WorkController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Work/Controller/Api/WorkController.php">
+    <UnusedClass>
+      <code>WorkController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Work/Controller/WorkController.php">
+    <UnusedClass>
+      <code>WorkController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Work/DataTransferObject/WorkRepositoryData.php">
+    <PossiblyUnusedProperty>
+      <code>$supervisor</code>
+      <code>$type</code>
+      <code>$user</code>
+      <code>$workStatus</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Work/Elastica/WorkSearch.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Entity/Work.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Conversation>]]></code>
+      <code><![CDATA[Collection<Media>]]></code>
+      <code><![CDATA[Collection<Task>]]></code>
+      <code><![CDATA[Collection<WorkCategory>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>getActiveTask</code>
+      <code>setConversations</code>
+      <code>setEventParticipants</code>
+      <code>setFile</code>
+      <code>setTasks</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$eventParticipants</code>
+      <code>$systemEvents</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Domain/Work/EventDispatcher/WorkEventDispatcherService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Facade/WorkDeadlineFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Facade/WorkFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>findAll</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Form/Factory/WorkFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Form/WorkForm.php">
+    <MissingTemplateParam>
+      <code>WorkForm</code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Form/WorkSearchForm.php">
+    <MissingTemplateParam>
+      <code>WorkSearchForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Work/Form/WorkSearchStatusForm.php">
+    <MissingTemplateParam>
+      <code>WorkSearchStatusForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Work/Form/WorkUserForm.php">
+    <MissingTemplateParam>
+      <code>WorkUserForm</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>WorkUserForm</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Work/Helper/WorkFunctionHelper.php">
+    <PossiblyUnusedMethod>
+      <code>groupWorksByCategory</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/Ajax/WorkCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/Ajax/WorkDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/Ajax/WorkEditAuthorHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/Ajax/WorkEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/Api/WorkDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/Api/WorkListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/WorkCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/WorkDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/WorkDetailHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/WorkEditAuthorHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/WorkEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Http/WorkListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Repository/WorkRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$user</code>
+      <code>$user</code>
+      <code>$workData</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Work/Security/Voter/WorkVoter.php">
+    <MissingTemplateParam>
+      <code>WorkVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>WorkVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Work/Service/WorkDetailTabService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <UnusedVariable>
+      <code>$isSupervisor</code>
+    </UnusedVariable>
+  </file>
+  <file src="src/Domain/Work/Service/WorkListService.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getWorkList</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Twig/Runtime/WorkRuntime.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Controller/Ajax/WorkCategoryController.php">
+    <UnusedClass>
+      <code>WorkCategoryController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/WorkCategory/Controller/WorkCategoryController.php">
+    <UnusedClass>
+      <code>WorkCategoryController</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/WorkCategory/Entity/WorkCategory.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/WorkCategory/Facade/WorkCategoryFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Factory/WorkCategoryFactory.php">
+    <PossiblyUnusedReturnValue>
+      <code>WorkCategory</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Domain/WorkCategory/Form/DataGrid/WorkCategoryDataGrid.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Form/Factory/WorkCategoryFormFactory.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Form/WorkCategoryForm.php">
+    <MissingTemplateParam>
+      <code>WorkCategoryForm</code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/Ajax/WorkCategoryCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/Ajax/WorkCategoryDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/Ajax/WorkCategoryEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/WorkCategoryCreateHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/WorkCategoryDeleteHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/WorkCategoryEditHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Http/WorkCategoryListHandle.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkCategory/Repository/WorkCategoryRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$user</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php">
+    <MissingTemplateParam>
+      <code>WorkCategoryVoter</code>
+    </MissingTemplateParam>
+    <UnusedClass>
+      <code>WorkCategoryVoter</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkSearch/Model/WorkSearchModel.php">
+    <PossiblyUnusedProperty>
+      <code>$author</code>
+      <code>$consultant</code>
+      <code>$deadline</code>
+      <code>$opponent</code>
+      <code>$shortcut</code>
+      <code>$status</code>
+      <code>$supervisor</code>
+      <code>$title</code>
+      <code>$type</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/WorkStatus/DataTransferObject/WorkStatusRepositoryData.php">
+    <PossiblyUnusedProperty>
+      <code>$supervisor</code>
+      <code>$type</code>
+      <code>$user</code>
+      <code>$workStatus</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/WorkStatus/Entity/WorkStatus.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getColor</code>
+      <code>getWorks</code>
+      <code>setColor</code>
+      <code>setWorks</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkStatus/Facade/WorkStatusFacade.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkStatus/Form/DataGrid/WorkStatusDataGrid.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/WorkStatus/Repository/WorkStatusRepository.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$registry</code>
+      <code>$workStatusData</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/WorkType/Entity/WorkType.php">
+    <MissingTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getWorks</code>
+      <code>setShortcut</code>
+      <code>setWorks</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Kernel.php">
+    <PossiblyUnusedMethod>
+      <code>configureContainer</code>
+      <code>configureRoutes</code>
+    </PossiblyUnusedMethod>
+  </file>
+</files>
