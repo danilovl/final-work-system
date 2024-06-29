@@ -13,12 +13,12 @@ services:
       - '7104:9300'
     environment:
       - discovery.type=single-node
-#      - xpack.security.enabled=false
-#      - ELASTIC_USERNAME=ELASTIC_USERNAME
-#      - ELASTIC_PASSWORD=ELASTIC_PASSWORD
+      - xpack.security.enabled=true
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=password
     mem_limit: 2g
 #    volumes:
-#      - ./docker/elasticsearch/data:/usr/share/elasticsearch/data
+#      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
   rabbitmq:
     build: docker/rabbitmq
     ports:
@@ -56,6 +56,11 @@ services:
       - './docker/php/conf/php-fpm.conf:/etc/php-fpm.conf'
       - './docker/php/conf/php.ini:/usr/local/etc/php/conf.d/100-php.ini'
     working_dir: /var/www/html/app
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://elasticsearch:9200', '-u', 'elastic:password' ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
     depends_on:
       - redis
       - mysql
@@ -105,8 +110,8 @@ services:
     restart: always
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-      ELASTICSEARCH_USERNAME: ELASTICSEARCH_USERNAME
-      ELASTICSEARCH_PASSWORD: ELASTICSEARCH_PASSWORD
+      ELASTICSEARCH_USERNAME: superuser
+      ELASTICSEARCH_PASSWORD: superuser
     ports:
       - '7110:5601'
     depends_on:

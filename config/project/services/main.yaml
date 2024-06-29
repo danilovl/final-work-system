@@ -30,10 +30,11 @@ services:
   App\Application\Service\EntityManagerService: '@app.entity_manager'
 
   Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler:
+    factory:   ['@App\Application\Log\ElasticsearchLogstashHandlerFactory', create]
     arguments:
       $endpoint: '%env(ELASTICSEARCH_URL)%'
       $index: 'monolog'
-      $client: null
-      $level: !php/const Monolog\Logger::DEBUG
       $bubble: true
       $elasticsearchVersion: '8.9.0'
+      $elasticUsername: '%env(ELASTICSEARCH_USERNAME)%'
+      $elasticPassword: '%env(ELASTICSEARCH_PASSWORD)%'

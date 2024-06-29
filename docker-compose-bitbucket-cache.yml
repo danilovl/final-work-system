@@ -13,6 +13,7 @@ services:
       - "7104:9300"
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=true
     mem_limit: 1g
   rabbitmq:
     build: docker/rabbitmq
@@ -86,8 +87,8 @@ services:
     restart: always
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-      ELASTICSEARCH_USERNAME: ELASTICSEARCH_USERNAME
-      ELASTICSEARCH_PASSWORD: ELASTICSEARCH_PASSWORD
+      ELASTICSEARCH_USERNAME: superuser
+      ELASTICSEARCH_PASSWORD: superuser
     ports:
       - '7110:5601'
     depends_on:

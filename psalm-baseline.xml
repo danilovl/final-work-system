@@ -11,16 +11,45 @@
     </UnusedClass>
   </file>
   <file src="src/Application/Cache/HomepageCache.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$user->getId()]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Collector/SystemInfoCollector.php">
+    <MixedArrayAccess>
+      <code><![CDATA[$this->data['system_info']['name']]]></code>
+      <code><![CDATA[$this->data['system_info']['version']]]></code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType>
+      <code>string</code>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->data['system_info']['name']]]></code>
+      <code><![CDATA[$this->data['system_info']['version']]]></code>
+    </MixedReturnStatement>
     <UnusedClass>
       <code>SystemInfoCollector</code>
     </UnusedClass>
   </file>
   <file src="src/Application/Command/DecodeConversationMessageCommand.php">
+    <InvalidArrayAccess>
+      <code><![CDATA[$message['content']]]></code>
+      <code><![CDATA[$message['id']]]></code>
+    </InvalidArrayAccess>
+    <InvalidArrayOffset>
+      <code><![CDATA[$message['content']]]></code>
+      <code><![CDATA[$message['id']]]></code>
+    </InvalidArrayOffset>
+    <MixedArgument>
+      <code><![CDATA[$message['content']]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$id</code>
+    </MixedAssignment>
     <UnusedClass>
       <code>DecodeConversationMessageCommand</code>
     </UnusedClass>
@@ -31,6 +60,9 @@
     </UnusedClass>
   </file>
   <file src="src/Application/Command/ImportSqlCommand.php">
+    <RedundantCast>
+      <code><![CDATA[(array) $input->getArgument('file')]]></code>
+    </RedundantCast>
     <UnusedClass>
       <code>ImportSqlCommand</code>
     </UnusedClass>
@@ -51,6 +83,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Controller/Api/EndpointController.php">
+    <MixedArgumentTypeCoercion>
+      <code>$routeKey</code>
+    </MixedArgumentTypeCoercion>
     <UnusedClass>
       <code>EndpointController</code>
     </UnusedClass>
@@ -81,10 +116,39 @@
     </UnusedClass>
   </file>
   <file src="src/Application/DataTransferObject/BaseDataTransferObject.php">
+    <MixedArgumentTypeCoercion>
+      <code>$key</code>
+      <code>$requiredOptionNames</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code>$value</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>createFromJson</code>
       <code>toJson</code>
     </PossiblyUnusedMethod>
+    <UnsafeInstantiation>
+      <code>new static</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Application/DependencyInjection/Compiler/ServicePublicCompilerPass.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$definition->getClass()]]></code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Application/DependencyInjection/Compiler/WidgetCompilerPass.php">
+    <MixedArrayAccess>
+      <code><![CDATA[$attributes['alias']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$alias</code>
+      <code>$attributes</code>
+      <code>$name</code>
+      <code>$widgets</code>
+    </MixedAssignment>
+    <PossiblyNullIterator>
+      <code>$widgetGroups</code>
+    </PossiblyNullIterator>
   </file>
   <file src="src/Application/EventDispatcher/CacheEventDispatcherService.php">
     <PossiblyUnusedMethod>
@@ -107,14 +171,30 @@
     </UnusedClass>
   </file>
   <file src="src/Application/EventListener/LoggableListener.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$config['versioned']]]></code>
+    </InvalidArrayOffset>
     <MissingTemplateParam>
       <code>LoggableListener</code>
     </MissingTemplateParam>
+    <NoInterfaceProperties>
+      <code><![CDATA[$meta->isEmbeddedDocument]]></code>
+    </NoInterfaceProperties>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>LoggableListener</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Application/EventListener/Middleware/AjaxRequestListener.php">
+    <InvalidStringClass>
+      <code><![CDATA[$ajaxRequestMiddlewareAttribute->class::{'handle'}($request)]]></code>
+    </InvalidStringClass>
+    <PossiblyInvalidArgument>
+      <code>$controller</code>
+      <code>$controller</code>
+    </PossiblyInvalidArgument>
     <UnnecessaryVarAnnotation>
       <code>AjaxRequestMiddlewareAttribute</code>
       <code>AjaxRequestMiddlewareAttribute</code>
@@ -124,6 +204,9 @@
     </UnusedClass>
   </file>
   <file src="src/Application/EventListener/RedirectToPreferredLocaleListener.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$this->locales]]></code>
+    </MixedArgumentTypeCoercion>
     <UnusedClass>
       <code>RedirectToPreferredLocaleListener</code>
     </UnusedClass>
@@ -139,6 +222,13 @@
     </UnusedClass>
   </file>
   <file src="src/Application/EventSubscriber/EmailNotification/DocumentEmailNotificationSubscriber.php">
+    <MixedAssignment>
+      <code>$user</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getEmail</code>
+      <code>getLocale</code>
+    </MixedMethodCall>
     <UnusedClass>
       <code>DocumentEmailNotificationSubscriber</code>
     </UnusedClass>
@@ -149,6 +239,15 @@
     </UnusedClass>
   </file>
   <file src="src/Application/EventSubscriber/EmailNotification/MessageEmailNotificationSubscriber.php">
+    <MixedAssignment>
+      <code>$participant</code>
+      <code>$toUser</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getEmail</code>
+      <code>getLocale</code>
+      <code>getUser</code>
+    </MixedMethodCall>
     <UnusedClass>
       <code>MessageEmailNotificationSubscriber</code>
     </UnusedClass>
@@ -174,6 +273,9 @@
     </UnusedClass>
   </file>
   <file src="src/Application/EventSubscriber/EmailNotification/WorkEmailNotificationSubscriber.php">
+    <RedundantCondition>
+      <code>$author !== null</code>
+    </RedundantCondition>
     <UnusedClass>
       <code>WorkEmailNotificationSubscriber</code>
     </UnusedClass>
@@ -214,22 +316,44 @@
     </MissingTemplateParam>
   </file>
   <file src="src/Application/Form/Type/FirstWeekDayType.php">
+    <MissingClosureParamType>
+      <code>$value</code>
+    </MissingClosureParamType>
     <MissingTemplateParam>
       <code>FirstWeekDayType</code>
     </MissingTemplateParam>
+    <MixedArgument>
+      <code>$value</code>
+    </MixedArgument>
   </file>
   <file src="src/Application/Form/Type/LocaleType.php">
     <MissingTemplateParam>
       <code>LocaleType</code>
     </MissingTemplateParam>
+    <MixedAssignment>
+      <code><![CDATA[$choices["app.locales.{$locale}"]]]></code>
+      <code>$locale</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Form/Type/MediaFileType.php">
+    <MissingClosureParamType>
+      <code>$value</code>
+    </MissingClosureParamType>
     <MissingTemplateParam>
       <code>MediaFileType</code>
     </MissingTemplateParam>
+    <MixedArgument>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedInferredReturnType>
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$options['uploadMedia']]]></code>
+    </MixedReturnStatement>
   </file>
   <file src="src/Application/Form/Type/UserRoleType.php">
     <MissingTemplateParam>
@@ -247,26 +371,58 @@
     </UnusedClass>
   </file>
   <file src="src/Application/GraphQL/Resolver/TaskResolverMap.php">
+    <MissingClosureParamType>
+      <code>$value</code>
+      <code>$value</code>
+    </MissingClosureParamType>
     <UnusedClass>
       <code>TaskResolverMap</code>
     </UnusedClass>
   </file>
   <file src="src/Application/GraphQL/Resolver/UserResolverMap.php">
+    <MissingClosureParamType>
+      <code>$value</code>
+    </MissingClosureParamType>
     <UnusedClass>
       <code>UserResolverMap</code>
     </UnusedClass>
   </file>
   <file src="src/Application/GraphQL/Resolver/WorkResolverMap.php">
+    <MissingClosureParamType>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MissingClosureParamType>
     <UnusedClass>
       <code>WorkResolverMap</code>
     </UnusedClass>
   </file>
   <file src="src/Application/GraphQL/Type/DateTimeType.php">
+    <MixedArgumentTypeCoercion>
+      <code>$config</code>
+    </MixedArgumentTypeCoercion>
+    <MoreSpecificImplementedParamType>
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
     <UnusedClass>
       <code>DateTimeType</code>
     </UnusedClass>
   </file>
+  <file src="src/Application/Helper/ArrayMapHelper.php">
+    <MixedInferredReturnType>
+      <code>int</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$object->getId()]]></code>
+    </MixedReturnStatement>
+  </file>
   <file src="src/Application/Helper/DateHelper.php">
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$currentTime - (date('N', $currentTime) - 1) * 86400]]></code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidOperand>
+      <code>$number</code>
+    </PossiblyInvalidOperand>
     <PossiblyUnusedMethod>
       <code>actualWeekEnd</code>
       <code>changeFormatWeek</code>
@@ -279,16 +435,34 @@
       <code>nextWeek</code>
       <code>previousWeek</code>
     </PossiblyUnusedMethod>
+    <RedundantCondition>
+      <code>$number != 0</code>
+    </RedundantCondition>
     <UnnecessaryVarAnnotation>
       <code>int</code>
     </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Application/Helper/IpHelper.php">
+    <MixedArgument>
+      <code>$ipRange</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$ipRange</code>
+    </MixedAssignment>
+    <PossiblyUndefinedArrayOffset>
+      <code>$netmask</code>
+    </PossiblyUndefinedArrayOffset>
     <UnusedClass>
       <code>IpHelper</code>
     </UnusedClass>
   </file>
   <file src="src/Application/Helper/ObjectHelper.php">
+    <ArgumentTypeCoercion>
+      <code>$class</code>
+    </ArgumentTypeCoercion>
+    <MixedArgumentTypeCoercion>
+      <code>$trait</code>
+    </MixedArgumentTypeCoercion>
     <UnusedClass>
       <code>ObjectHelper</code>
     </UnusedClass>
@@ -302,6 +476,16 @@
     </UnusedClass>
   </file>
   <file src="src/Application/Helper/SortFunctionHelper.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[usort($eventParticipantArray, static function (EventParticipant $first, EventParticipant $second): int {
+            /** @var string $f */
+            $f = iconv('UTF-8', 'ASCII//TRANSLIT', $first->getUserMust()->getFullNameDegree());
+            /** @var string $s */
+            $s = iconv('UTF-8', 'ASCII//TRANSLIT', $second->getUserMust()->getFullNameDegree());
+
+            return self::sortCzechChars($f, $s);
+        })]]></code>
+    </MixedArgumentTypeCoercion>
     <UnnecessaryVarAnnotation>
       <code>string</code>
       <code>string</code>
@@ -357,7 +541,25 @@
       <code>hasWidgetGroup</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Application/Log/ElasticsearchLogstashHandlerFactory.php">
+    <UnusedClass>
+      <code>ElasticsearchLogstashHandlerFactory</code>
+    </UnusedClass>
+  </file>
   <file src="src/Application/Menu/MenuItem.php">
+    <MixedInferredReturnType>
+      <code>?MenuItemInterface</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code>setParent</code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->children[$name] ?? null]]></code>
+      <code><![CDATA[$this->children[$name] ?? null]]></code>
+    </MixedReturnStatement>
+    <PossiblyNullArrayOffset>
+      <code><![CDATA[$this->children]]></code>
+    </PossiblyNullArrayOffset>
     <PossiblyUnusedMethod>
       <code>addChildren</code>
     </PossiblyUnusedMethod>
@@ -367,7 +569,21 @@
       <code>EmailNotificationHandler</code>
     </UnusedClass>
   </file>
+  <file src="src/Application/Messenger/EmailNotification/EmailNotificationMessage.php">
+    <MissingConstructor>
+      <code>$from</code>
+      <code>$locale</code>
+      <code>$subject</code>
+      <code>$template</code>
+      <code>$to</code>
+      <code>$uuid</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Application/Messenger/Loggable/LoggableHandler.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$logEntry->getObjectClass()]]></code>
+      <code><![CDATA[$logEntry->getUsername()]]></code>
+    </PossiblyNullArgument>
     <UnusedClass>
       <code>LoggableHandler</code>
     </UnusedClass>
@@ -382,10 +598,13 @@
       <code>Version20200627193807</code>
     </UnusedClass>
   </file>
-  <file src="src/Application/Redis/Provider/RedisCache.php">
-    <UnusedClass>
-      <code>RedisCache</code>
-    </UnusedClass>
+  <file src="src/Application/Request/AbstractAjaxJsonRequest.php">
+    <MixedArgumentTypeCoercion>
+      <code>$property</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code>$value</code>
+    </MixedAssignment>
   </file>
   <file src="src/Application/Security/Authenticator/ApiKeyAuthenticator.php">
     <UnnecessaryVarAnnotation>
@@ -397,6 +616,12 @@
     </UnusedClass>
   </file>
   <file src="src/Application/Security/Authenticator/AppAuthenticator.php">
+    <MixedArgument>
+      <code><![CDATA[$credentials['csrf_token']]]></code>
+      <code><![CDATA[$credentials['password']]]></code>
+      <code><![CDATA[$credentials['username']]]></code>
+      <code><![CDATA[$credentials['username']]]></code>
+    </MixedArgument>
     <UnusedClass>
       <code>AppAuthenticator</code>
     </UnusedClass>
@@ -410,6 +635,9 @@
     <MissingTemplateParam>
       <code>PasswordUpgraderInterface</code>
     </MissingTemplateParam>
+    <MoreSpecificImplementedParamType>
+      <code>$user</code>
+    </MoreSpecificImplementedParamType>
     <UnusedClass>
       <code>AppUserProvider</code>
     </UnusedClass>
@@ -420,6 +648,10 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Service/EntityManagerService.php">
+    <ArgumentTypeCoercion>
+      <code>$entityName</code>
+      <code>$entityName</code>
+    </ArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>refresh</code>
@@ -431,6 +663,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Service/PaginatorService.php">
+    <MixedArgument>
+      <code>$defaultPageName</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$defaultPageName</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -446,6 +684,25 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Service/SeoPageService.php">
+    <MixedArgument>
+      <code>$content</code>
+      <code>$extras</code>
+      <code>$meta</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$name</code>
+      <code>$type</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAssignment>
+      <code><![CDATA[$this->metas[$type][$name]]]></code>
+    </MixedArrayAssignment>
+    <MixedAssignment>
+      <code>$meta</code>
+    </MixedAssignment>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getTransTitle($title)]]></code>
+      <code><![CDATA[$this->getTransTitle()]]></code>
+    </PossiblyNullOperand>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>hasMeta</code>
@@ -479,6 +736,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Traits/Entity/CreateAbleTrait.php">
+    <MissingConstructor>
+      <code>$createdAt</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>createAblePrePersist</code>
       <code>getCreatedAt</code>
@@ -486,6 +746,14 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Traits/Entity/CreateUpdateAbleTrait.php">
+    <MissingConstructor>
+      <code>$createdAt</code>
+      <code>$createdAt</code>
+      <code>$createdAt</code>
+      <code>$createdAt</code>
+      <code>$createdAt</code>
+      <code>$createdAt</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>createUpdateAblePrePersist</code>
       <code>createUpdateAblePrePersist</code>
@@ -574,6 +842,17 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Traits/Entity/IdTrait.php">
+    <MissingConstructor>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+      <code>$id</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>setId</code>
       <code>setId</code>
@@ -616,6 +895,10 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Traits/Entity/TimestampAbleTrait.php">
+    <MissingConstructor>
+      <code>$createdAt</code>
+      <code>$updatedAt</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getCreatedAt</code>
       <code>getCreatedAt</code>
@@ -638,11 +921,45 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Transformer/Api/Transformer.php">
+    <MixedArgument>
+      <code>$field</code>
+      <code>$fieldValue</code>
+      <code>$subFields</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$field</code>
+      <code>$fieldValue</code>
+      <code>$item</code>
+      <code>$result[$field]</code>
+      <code>$subFields</code>
+      <code>$subFields</code>
+    </MixedAssignment>
+    <PossiblyNullArgument>
+      <code>$field</code>
+    </PossiblyNullArgument>
+    <PossiblyNullArrayOffset>
+      <code>$item</code>
+    </PossiblyNullArrayOffset>
     <UnusedClass>
       <code>Transformer</code>
     </UnusedClass>
   </file>
   <file src="src/Application/Twig/Runtime/AwayRuntime.php">
+    <MixedArgument>
+      <code>$href</code>
+      <code>$href</code>
+      <code>$link</code>
+      <code>$link</code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code>$match[0]</code>
+      <code>$match[1]</code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$href</code>
+      <code>$link</code>
+      <code>$match</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -651,6 +968,16 @@
     <ContainerDependency>
       <code>private readonly ContainerInterface $container</code>
     </ContainerDependency>
+    <MixedArgument>
+      <code>$notifyService</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$notifyService</code>
+    </MixedAssignment>
+    <PossiblyNullOperand>
+      <code><![CDATA[$notify->render()]]></code>
+      <code>$result</code>
+    </PossiblyNullOperand>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -661,6 +988,23 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Twig/Runtime/SeoRuntime.php">
+    <MixedArgument>
+      <code>$content</code>
+      <code>$name</code>
+      <code>$name</code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code>$content</code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$meta</code>
+      <code>$metas</code>
+      <code>$name</code>
+      <code>[$content,]</code>
+    </MixedAssignment>
+    <PossiblyNullArgument>
+      <code><![CDATA[$this->stripTags($this->seoPageService->getTransTitle())]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -676,6 +1020,16 @@
     </UnusedClass>
   </file>
   <file src="src/Application/Twig/WidgetExtension.php">
+    <MixedArgument>
+      <code><![CDATA[$parameters[$widget->getName()] ?? []]]></code>
+    </MixedArgument>
+    <PossiblyNullArrayOffset>
+      <code>$parameters</code>
+    </PossiblyNullArrayOffset>
+    <PossiblyNullOperand>
+      <code>$content</code>
+      <code><![CDATA[$widget->render()]]></code>
+    </PossiblyNullOperand>
     <UnusedClass>
       <code>WidgetExtension</code>
     </UnusedClass>
@@ -691,11 +1045,22 @@
     </UnusedClass>
   </file>
   <file src="src/Application/Util/TextHighlightWordUtil.php">
+    <MixedArgument>
+      <code>$word</code>
+      <code>$word</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$word</code>
+      <code>$word</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>highlightEntireWords</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Util/TokenStorageUtil.php">
+    <MixedArgument>
+      <code><![CDATA[$oldToken->getFirewallName()]]></code>
+    </MixedArgument>
     <UnusedClass>
       <code>TokenStorageUtil</code>
     </UnusedClass>
@@ -706,11 +1071,64 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Application/Widget/LocalesWidget.php">
+    <MixedArgument>
+      <code>$localeCode</code>
+      <code>$localeCode</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$localeCode</code>
+    </MixedAssignment>
     <UnusedClass>
       <code>LocalesWidget</code>
     </UnusedClass>
   </file>
   <file src="src/Application/Widget/MenuWidget.php">
+    <MixedArgument>
+      <code>$attributes</code>
+      <code>$children</code>
+      <code>$item</code>
+      <code><![CDATA[$item['label']]]></code>
+      <code>$name</code>
+      <code>$path</code>
+      <code>$pathOption</code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code><![CDATA[$item['attributes']]]></code>
+      <code><![CDATA[$item['children']]]></code>
+      <code><![CDATA[$item['label']]]></code>
+      <code><![CDATA[$item['label']]]></code>
+      <code><![CDATA[$item['label']]]></code>
+      <code><![CDATA[$item['path']]]></code>
+      <code><![CDATA[$item['path_option']]]></code>
+      <code><![CDATA[$item['roles']]]></code>
+      <code><![CDATA[$item['transchoice']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$attributes</code>
+      <code>$children</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$label</code>
+      <code>$name</code>
+      <code>$path</code>
+      <code>$pathOption</code>
+      <code>$role</code>
+      <code>$roles</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>?array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->factory[$menu] ?? null]]></code>
+      <code><![CDATA[$this->factory[$menu] ?? null]]></code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType>
+      <code>$parameters</code>
+      <code>$parameters</code>
+    </MoreSpecificImplementedParamType>
+    <PropertyNotSetInConstructor>
+      <code>$menu</code>
+    </PropertyNotSetInConstructor>
     <UnusedClass>
       <code>MenuWidget</code>
     </UnusedClass>
@@ -726,6 +1144,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Widget/UserProfileInformationNotifyWidget.php">
+    <MixedOperand>
+      <code><![CDATA[$this->{$method}()]]></code>
+    </MixedOperand>
     <UnusedClass>
       <code>UserProfileInformationNotifyWidget</code>
     </UnusedClass>
@@ -736,6 +1157,13 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/ApiUser/Entity/ApiUser.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$rules</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ApiUserRule>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<ApiUserRule>]]></code>
@@ -750,8 +1178,23 @@
       <code>setName</code>
       <code>setRules</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$apiKey</code>
+      <code>$name</code>
+      <code>ApiUser</code>
+      <code>ApiUser</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/ApiUser/Facade/ApiUserFacade.php">
+    <MixedInferredReturnType>
+      <code>?ApiUser</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->apiUserRepository
+            ->byApiKey($apiKey)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -767,6 +1210,10 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/ApiUserRule/Entity/ApiUserRule.php">
+    <MissingConstructor>
+      <code>$apiUser</code>
+      <code>$rangeIp</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getApiUser</code>
       <code>getRangeIp</code>
@@ -789,6 +1236,13 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Article/Entity/Article.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$categories</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ArticleCategory>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<ArticleCategory>]]></code>
@@ -801,6 +1255,13 @@
       <code>setOwner</code>
       <code>setTitle</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$content</code>
+      <code>$owner</code>
+      <code>$title</code>
+      <code>Article</code>
+      <code>Article</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Article/Facade/ArticleCategoryFacade.php">
     <PossiblyUnusedMethod>
@@ -840,10 +1301,26 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/ArticleCategory/Entity/ArticleCategory.php">
+    <DeprecatedConstant>
+      <code>Types::ARRAY</code>
+    </DeprecatedConstant>
+    <InvalidPropertyAssignmentValue>
+      <code>$articles</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Article>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Article>]]></code>
     </MissingTemplateParam>
+    <MixedArgument>
+      <code>$role</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$role</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>getArticles</code>
@@ -853,6 +1330,13 @@
       <code>setArticles</code>
       <code>setOwner</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$access</code>
+      <code>$owner</code>
+      <code>ArticleCategory</code>
+      <code>ArticleCategory</code>
+      <code>ArticleCategory</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/ArticleCategory/Http/ArticleCategoryArticleListHandle.php">
     <PossiblyUnusedMethod>
@@ -881,7 +1365,23 @@
       <code>ArticleCategoryVoter</code>
     </UnusedClass>
   </file>
+  <file src="src/Domain/Comment/Entity/Comment.php">
+    <MissingConstructor>
+      <code>$content</code>
+      <code>$event</code>
+      <code>$owner</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/Comment/Facade/CommentFacade.php">
+    <MixedInferredReturnType>
+      <code>?Comment</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->commentRepository
+            ->allByOwnerEvent($user, $event)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -922,11 +1422,43 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Conversation/Elastica/ConversationSearch.php">
+    <MixedArgumentTypeCoercion>
+      <code>$query</code>
+      <code>$query</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess>
+      <code><![CDATA[$hit['_source']]]></code>
+      <code><![CDATA[$hit['_source']['id']]]></code>
+      <code><![CDATA[$innerHit['hits']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$hit</code>
+      <code>$innerHit</code>
+      <code>$messageIds[]</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Entity/Conversation.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$messages</code>
+      <code>$participants</code>
+      <code>$statuses</code>
+      <code>$systemEvents</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>$participants</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ConversationMessage>]]></code>
+      <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
+      <code><![CDATA[Collection<ConversationParticipant>]]></code>
+      <code><![CDATA[Collection<ConversationParticipant>]]></code>
+      <code><![CDATA[Collection<SystemEvent>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>$participants</code>
       <code>Collection</code>
@@ -939,6 +1471,9 @@
       <code><![CDATA[Collection<ConversationParticipant>]]></code>
       <code><![CDATA[Collection<SystemEvent>]]></code>
     </MissingTemplateParam>
+    <MixedArgumentTypeCoercion>
+      <code>filter</code>
+    </MixedArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>addMessage</code>
       <code>getStatuses</code>
@@ -947,6 +1482,12 @@
       <code>setStatuses</code>
       <code>setSystemEvents</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>$type</code>
+      <code>Conversation</code>
+      <code>Conversation</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Conversation/EventDispatcher/ConversationEventDispatcherService.php">
     <PossiblyUnusedMethod>
@@ -954,11 +1495,29 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/EventSubscriber/MercureSubscriber.php">
+    <MixedArgument>
+      <code>$participantUser</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$participant</code>
+      <code>$participantUser</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getId</code>
+      <code>getUser</code>
+    </MixedMethodCall>
     <UnusedClass>
       <code>MercureSubscriber</code>
     </UnusedClass>
   </file>
   <file src="src/Domain/Conversation/Facade/ConversationFacade.php">
+    <InvalidArgument>
+      <code>$conversationParticipant</code>
+      <code>$conversationParticipant</code>
+    </InvalidArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$types</code>
+    </MixedArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -978,7 +1537,38 @@
       <code>ConversationMessageStatus|null</code>
     </UnnecessaryVarAnnotation>
   </file>
+  <file src="src/Domain/Conversation/Factory/ConversationFactory.php">
+    <MixedArgument>
+      <code>$participant</code>
+      <code>$participant</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$participant</code>
+      <code>$participant</code>
+    </MixedAssignment>
+  </file>
   <file src="src/Domain/Conversation/Helper/ConversationHelper.php">
+    <MixedArgument>
+      <code><![CDATA[$participant->getUser()]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$conversation</code>
+      <code>$participant</code>
+      <code>$participant</code>
+      <code>$participantIds[]</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getId</code>
+      <code>getId</code>
+      <code>getId</code>
+      <code>getType</code>
+      <code>getUser</code>
+      <code>getUser</code>
+      <code>getUser</code>
+    </MixedMethodCall>
+    <PossiblyNullArgument>
+      <code><![CDATA[$category->getSorting()]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>groupConversationsByCategory</code>
     </PossiblyUnusedMethod>
@@ -1004,14 +1594,26 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Http/Api/ConversationWorkMessageListHandle.php">
+    <MixedArgument>
+      <code>$message</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$message</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Http/ConversationCreateHandle.php">
+    <MixedArgumentTypeCoercion>
+      <code>$conversationParticipants</code>
+    </MixedArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <ReferenceConstraintViolation>
+      <code>$conversationParticipants</code>
+    </ReferenceConstraintViolation>
   </file>
   <file src="src/Domain/Conversation/Http/ConversationCreateWorkHandle.php">
     <PossiblyUnusedMethod>
@@ -1053,7 +1655,32 @@
       <code>ConversationVoter</code>
     </UnusedClass>
   </file>
+  <file src="src/Domain/Conversation/Service/ConversationService.php">
+    <MixedArgument>
+      <code>$workConversation</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$participant</code>
+      <code>$workConversation</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getId</code>
+      <code>getUser</code>
+    </MixedMethodCall>
+    <UndefinedInterfaceMethod>
+      <code>matching</code>
+    </UndefinedInterfaceMethod>
+  </file>
   <file src="src/Domain/Conversation/Service/ConversationStatusService.php">
+    <MixedInferredReturnType>
+      <code>?ConversationMessageStatus</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->conversationMessageStatusRepository
+            ->oneByMessageUser($conversationMessage, $user)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>changeConversationStatus</code>
@@ -1061,11 +1688,70 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Service/ConversationStreamService.php">
+    <ArgumentTypeCoercion>
+      <code>$sleepSecond</code>
+    </ArgumentTypeCoercion>
+    <PossiblyNullOperand>
+      <code>$chatMessageHtml</code>
+      <code><![CDATA[$this->getLastMessage($conversation)]]></code>
+    </PossiblyNullOperand>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$date</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Conversation/Service/ConversationVariationService.php">
+    <InvalidArgument>
+      <code>$userWorks</code>
+      <code>$userWorks</code>
+      <code>$userWorks</code>
+      <code>$userWorks</code>
+    </InvalidArgument>
+    <MixedArgument>
+      <code>$a</code>
+      <code>$a</code>
+      <code>$a</code>
+      <code>$a</code>
+      <code>$c</code>
+      <code>$c</code>
+      <code>$c</code>
+      <code>$c</code>
+      <code>$conversationUsers</code>
+      <code>$o</code>
+      <code>$o</code>
+      <code>$o</code>
+      <code>$o</code>
+      <code>$s</code>
+      <code>$s</code>
+      <code>$s</code>
+      <code>$s</code>
+      <code>$variations</code>
+      <code>$works</code>
+    </MixedArgument>
+    <MixedArrayAssignment>
+      <code>$conversationUsers[]</code>
+      <code>$works[]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment>
+      <code>$conversationUsers[]</code>
+      <code>$variations</code>
+      <code>$work</code>
+      <code>$workUser</code>
+      <code>$works[]</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>array</code>
+      <code>array</code>
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code>$conversationUsers</code>
+      <code>$onlyValue === true ? array_values($variations) : $variations</code>
+      <code>$onlyValue === true ? array_values($variations) : $variations</code>
+      <code>$works</code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>setNewPermission</code>
@@ -1077,15 +1763,45 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Twig/Runtime/ConversationRuntime.php">
+    <MixedAssignment>
+      <code>$recipientStatus</code>
+      <code>$status</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>?DateTime</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code>getId</code>
+      <code>getUpdatedAt</code>
+      <code>getUser</code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$recipientStatus?->getUpdatedAt()]]></code>
+      <code><![CDATA[$recipientStatus?->getUpdatedAt()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/ConversationMessage/Entity/ConversationMessage.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$statuses</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
     </MissingTemplateParam>
+    <PropertyNotSetInConstructor>
+      <code>$content</code>
+      <code>$conversation</code>
+      <code>$owner</code>
+      <code>ConversationMessage</code>
+      <code>ConversationMessage</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php">
     <UnusedClass>
@@ -1105,10 +1821,20 @@
       <code>ConversationMessageForm</code>
     </MissingTemplateParam>
   </file>
+  <file src="src/Domain/ConversationMessage/Model/ConversationComposeMessageModel.php">
+    <MissingConstructor>
+      <code>$content</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/ConversationMessage/Model/ConversationMessageModel.php">
     <PossiblyUnusedMethod>
       <code>fromConversationMessage</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$conversation</code>
+      <code>ConversationMessageModel</code>
+      <code>ConversationMessageModel</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/ConversationMessage/Repository/ConversationMessageRepository.php">
     <PossiblyUnusedMethod>
@@ -1149,6 +1875,10 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/ConversationMessageStatus/Entity/ConversationMessageStatus.php">
+    <MissingConstructor>
+      <code>$type</code>
+      <code>$user</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getConversation</code>
       <code>getMessage</code>
@@ -1179,6 +1909,13 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/ConversationMessageStatusType/Entity/ConversationMessageStatusType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$conversation</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<ConversationMessageStatus>]]></code>
@@ -1188,13 +1925,30 @@
       <code>getConversationMessageStatus</code>
       <code>setConversationMessageStatus</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>ConversationMessageStatusType</code>
+      <code>ConversationMessageStatusType</code>
+      <code>ConversationMessageStatusType</code>
+      <code>ConversationMessageStatusType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/ConversationParticipant/Entity/ConversationParticipant.php">
+    <MissingConstructor>
+      <code>$conversation</code>
+      <code>$user</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getConversation</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/ConversationType/Entity/ConversationType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$conversations</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Conversation>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Conversation>]]></code>
@@ -1204,8 +1958,20 @@
       <code>getConversations</code>
       <code>setConversations</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>ConversationType</code>
+      <code>ConversationType</code>
+      <code>ConversationType</code>
+      <code>ConversationType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/ConversationType/Facade/ConversationTypeFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->conversationTypeRepository->findAll()]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code>ConversationType[]</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1250,6 +2016,9 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$user</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Document/Http/Ajax/DocumentChangeActiveHandle.php">
     <PossiblyUnusedMethod>
@@ -1292,11 +2061,17 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Document/Http/DocumentListHandle.php">
+    <MixedAssignment>
+      <code>$criteria</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Document/Http/DocumentListOwnerHandle.php">
+    <MixedAssignment>
+      <code>$criteria</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1373,11 +2148,21 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EmailNotification/Command/EmailNotificationCommand.php">
+    <PropertyNotSetInConstructor>
+      <code>$io</code>
+    </PropertyNotSetInConstructor>
     <UnusedClass>
       <code>EmailNotificationCommand</code>
     </UnusedClass>
   </file>
   <file src="src/Domain/EmailNotification/Entity/EmailNotification.php">
+    <MissingConstructor>
+      <code>$body</code>
+      <code>$from</code>
+      <code>$subject</code>
+      <code>$to</code>
+      <code>$uuid</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getSendedAt</code>
       <code>getUuid</code>
@@ -1385,9 +2170,33 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/EmailNotification/Facade/EmailNotificationFacade.php">
+    <MixedInferredReturnType>
+      <code>?EmailNotification</code>
+      <code>?EmailNotification</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->emailNotificationRepository
+            ->byUuid($uuid)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+      <code><![CDATA[$this->emailNotificationRepository
+            ->oneReadyForSender()
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EmailNotification/Model/EmailNotificationModel.php">
+    <MissingConstructor>
+      <code>$body</code>
+      <code>$from</code>
+      <code>$subject</code>
+      <code>$to</code>
+      <code>$uuid</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/EmailNotification/Repository/EmailNotificationRepository.php">
     <PossiblyUnusedMethod>
@@ -1428,15 +2237,41 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/Event/Entity/Event.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$comment</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Comment>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code>Collection</code>
       <code><![CDATA[Collection<Comment>]]></code>
     </MissingTemplateParam>
+    <PossiblyNullOperand>
+      <code>$event</code>
+      <code>$event</code>
+    </PossiblyNullOperand>
+    <PossiblyNullReference>
+      <code>getName</code>
+      <code>getName</code>
+      <code>toString</code>
+      <code>toString</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>getComment</code>
       <code>setComment</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$end</code>
+      <code>$owner</code>
+      <code>$start</code>
+      <code>$type</code>
+      <code>Event</code>
+      <code>Event</code>
+    </PropertyNotSetInConstructor>
     <UnusedProperty>
       <code>$systemEvents</code>
     </UnusedProperty>
@@ -1447,6 +2282,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Event/Facade/EventCalendarFacade.php">
+    <PossiblyNullReference>
+      <code>getName</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1455,12 +2293,23 @@
     </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Domain/Event/Facade/EventFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->eventRepository->find($id)]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code>?Event</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>find</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Event/Facade/EventParticipantFacade.php">
+    <PossiblyNullReference>
+      <code>getId</code>
+      <code>getWork</code>
+      <code>getWork</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1474,6 +2323,9 @@
     <MissingTemplateParam>
       <code>EventForm</code>
     </MissingTemplateParam>
+    <MixedAssignment>
+      <code>$participants</code>
+    </MixedAssignment>
   </file>
   <file src="src/Domain/Event/Http/Ajax/EventDeleteHandle.php">
     <PossiblyUnusedMethod>
@@ -1491,6 +2343,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Event/Http/Api/EventListHandle.php">
+    <MixedArgument>
+      <code>$event</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$event</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1519,6 +2377,14 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Event/Model/EventModel.php">
+    <MissingConstructor>
+      <code>$end</code>
+      <code>$owner</code>
+      <code>$start</code>
+      <code>$type</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/Event/Repository/EventRepository.php">
     <PossiblyUnusedMethod>
@@ -1551,6 +2417,13 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EventAddress/Entity/EventAddress.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$events</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Event>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Event>]]></code>
@@ -1560,8 +2433,23 @@
       <code>getEvents</code>
       <code>setEvents</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>EventAddress</code>
+      <code>EventAddress</code>
+      <code>EventAddress</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/EventAddress/Facade/EventAddressFacade.php">
+    <MixedInferredReturnType>
+      <code>?EventAddress</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->eventAddressRepository
+            ->skypeByOwner($user)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1617,6 +2505,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/EventAddress/Model/EventAddressModel.php">
+    <MissingConstructor>
+      <code>$latitude</code>
+      <code>$longitude</code>
+      <code>$name</code>
+      <code>$owner</code>
+    </MissingConstructor>
     <PossiblyUnusedProperty>
       <code>$skype</code>
     </PossiblyUnusedProperty>
@@ -1687,8 +2581,24 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$end</code>
+      <code>$start</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/EventParticipant/Entity/EventParticipant.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$this->getEmail()]]></code>
+      <code><![CDATA[$this->getFirstName()]]></code>
+      <code><![CDATA[$this->getSecondName()]]></code>
+    </PossiblyNullArgument>
+    <PossiblyNullOperand>
+      <code>$participant</code>
+    </PossiblyNullOperand>
+    <PossiblyNullReference>
+      <code>getTitle</code>
+      <code>getTitle</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>setEmail</code>
       <code>setFirstName</code>
@@ -1706,6 +2616,13 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EventSchedule/Entity/EventSchedule.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$templates</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<EventScheduleTemplate>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<EventScheduleTemplate>]]></code>
@@ -1714,6 +2631,12 @@
       <code>addTemplate</code>
       <code>removeTemplate</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>EventSchedule</code>
+      <code>EventSchedule</code>
+      <code>EventSchedule</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/EventSchedule/Facade/EventScheduleFacade.php">
     <PossiblyUnusedMethod>
@@ -1721,6 +2644,28 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/EventSchedule/Factory/EventScheduleFactory.php">
+    <MixedArgument>
+      <code>$address</code>
+      <code>$name</code>
+      <code><![CDATA[$template->getDay()]]></code>
+      <code><![CDATA[$template->getDay()]]></code>
+      <code><![CDATA[$template->getStart()->format(DateFormatConstant::TIME->value)]]></code>
+      <code><![CDATA[$template->getType()]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$address</code>
+      <code>$name</code>
+      <code>$template</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>format</code>
+      <code>getAddress</code>
+      <code>getDay</code>
+      <code>getDay</code>
+      <code>getName</code>
+      <code>getStart</code>
+      <code>getType</code>
+    </MixedMethodCall>
     <PossiblyUnusedReturnValue>
       <code>EventSchedule</code>
     </PossiblyUnusedReturnValue>
@@ -1775,6 +2720,17 @@
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Domain/EventSchedule/Model/EventScheduleCloneModel.php">
+    <MissingConstructor>
+      <code>$start</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Domain/EventSchedule/Model/EventScheduleModel.php">
+    <PropertyNotSetInConstructor>
+      <code>$name</code>
+      <code>$owner</code>
+    </PropertyNotSetInConstructor>
+  </file>
   <file src="src/Domain/EventSchedule/Repository/EventScheduleRepository.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
@@ -1793,6 +2749,13 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EventScheduleTemplate/Entity/EventScheduleTemplate.php">
+    <MissingConstructor>
+      <code>$day</code>
+      <code>$end</code>
+      <code>$schedule</code>
+      <code>$start</code>
+      <code>$type</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getDay</code>
       <code>getSchedule</code>
@@ -1813,7 +2776,24 @@
       <code>EventScheduleTemplateForm</code>
     </MissingTemplateParam>
   </file>
+  <file src="src/Domain/EventScheduleTemplate/Model/EventScheduleTemplateModel.php">
+    <MissingConstructor>
+      <code>$address</code>
+      <code>$day</code>
+      <code>$end</code>
+      <code>$name</code>
+      <code>$start</code>
+      <code>$type</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/EventType/Entity/EventType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$events</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Event>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Event>]]></code>
@@ -1825,8 +2805,21 @@
       <code>setEvents</code>
       <code>setRegistrable</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$color</code>
+      <code>EventType</code>
+      <code>EventType</code>
+      <code>EventType</code>
+      <code>EventType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php">
+    <MixedArgument>
+      <code>$files</code>
+    </MixedArgument>
+    <PropertyNotSetInConstructor>
+      <code>$io</code>
+    </PropertyNotSetInConstructor>
     <UnusedClass>
       <code>SyncDatabaseMediaWithRealFileCommand</code>
     </UnusedClass>
@@ -1844,24 +2837,70 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/Media/Entity/Media.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$categories</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<MediaCategory>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code>Collection</code>
       <code><![CDATA[Collection<MediaCategory>]]></code>
     </MissingTemplateParam>
+    <PossiblyInvalidArrayOffset>
+      <code>FileSizeConstant::FILE_SIZES[$power]</code>
+    </PossiblyInvalidArrayOffset>
+    <PossiblyNullOperand>
+      <code>$size</code>
+    </PossiblyNullOperand>
     <PossiblyUnusedMethod>
       <code>getMediaSizeFormatted</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$mediaName</code>
+      <code>$mimeType</code>
+      <code>$owner</code>
+      <code>$type</code>
+      <code>Media</code>
+      <code>Media</code>
+      <code>Media</code>
+    </PropertyNotSetInConstructor>
     <UnusedProperty>
       <code>$systemEvents</code>
     </UnusedProperty>
   </file>
   <file src="src/Domain/Media/EventListener/Entity/MediaUploadListener.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$mediaMimeType->getExtension()]]></code>
+      <code><![CDATA[$mediaMimeType->getExtension()]]></code>
+    </PossiblyNullOperand>
     <UnusedClass>
       <code>MediaUploadListener</code>
     </UnusedClass>
   </file>
   <file src="src/Domain/Media/Facade/MediaFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->mediaRepository->find($id)]]></code>
+      <code><![CDATA[$this->mediaRepository->findOneBy([
+            'mediaName' => $mediaName
+        ])]]></code>
+    </LessSpecificReturnStatement>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->mediaRepository
+            ->baseQueryBuilder()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code>Media[]</code>
+    </MixedReturnTypeCoercion>
+    <MoreSpecificReturnType>
+      <code>?Media</code>
+      <code>?Media</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>find</code>
@@ -1870,17 +2909,37 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Media/Facade/MediaMimeTypeFacade.php">
+    <MixedInferredReturnType>
+      <code>?MediaMimeType</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->mediaMimeTypeRepository
+            ->byName($name)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>getMimeTypeByName</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Media/Facade/MediaTypeFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->mediaTypeRepository->find($id)]]></code>
+      <code><![CDATA[$this->mediaTypeRepository->findAll()]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code>?MediaType</code>
+      <code>MediaType[]</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Media/Helper/MediaHelper.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$mediaMimeType->getExtension()]]></code>
+    </PossiblyNullOperand>
     <UnusedClass>
       <code>MediaHelper</code>
     </UnusedClass>
@@ -1889,6 +2948,11 @@
     <PossiblyUnusedProperty>
       <code>$mediaSize</code>
     </PossiblyUnusedProperty>
+    <PropertyNotSetInConstructor>
+      <code>$name</code>
+      <code>$owner</code>
+      <code>$type</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Media/Repository/MediaRepository.php">
     <PossiblyUnusedMethod>
@@ -1905,6 +2969,13 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/Media/Service/MediaService.php">
+    <PossiblyNullArgument>
+      <code>$extension</code>
+      <code>$extension</code>
+    </PossiblyNullArgument>
+    <PossiblyNullReference>
+      <code>getType</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1915,6 +2986,13 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/MediaCategory/Entity/MediaCategory.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$medias</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Media>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Media>]]></code>
@@ -1922,6 +3000,12 @@
     <PossiblyUnusedMethod>
       <code>setMedias</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>MediaCategory</code>
+      <code>MediaCategory</code>
+      <code>MediaCategory</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/MediaCategory/Facade/MediaCategoryFacade.php">
     <PossiblyUnusedMethod>
@@ -1943,6 +3027,12 @@
       <code>MediaCategoryForm</code>
     </MissingTemplateParam>
   </file>
+  <file src="src/Domain/MediaCategory/Model/MediaCategoryModel.php">
+    <MissingConstructor>
+      <code>$name</code>
+      <code>$owner</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/MediaCategory/Repository/MediaCategoryRepository.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
@@ -1958,6 +3048,13 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/MediaMimeType/Entity/MediaMimeType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$medias</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Media>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Media>]]></code>
@@ -1968,6 +3065,11 @@
       <code>setMedias</code>
       <code>setName</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$name</code>
+      <code>MediaMimeType</code>
+      <code>MediaMimeType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/MediaMimeType/Repository/MediaMimeTypeRepository.php">
     <PossiblyUnusedMethod>
@@ -1981,6 +3083,13 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/MediaType/Entity/MediaType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$medias</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Media>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Media>]]></code>
@@ -1991,6 +3100,13 @@
       <code>setFolder</code>
       <code>setMedias</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$folder</code>
+      <code>MediaType</code>
+      <code>MediaType</code>
+      <code>MediaType</code>
+      <code>MediaType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/MediaType/Repository/MediaTypeRepository.php">
     <PossiblyUnusedMethod>
@@ -2024,6 +3140,15 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Profile/Http/Ajax/ProfileCreateImageWebCameraHandle.php">
+    <MixedArgument>
+      <code>$imageData</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$imageData</code>
+    </MixedAssignment>
+    <PossiblyNullArgument>
+      <code>$imageData</code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2049,6 +3174,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Profile/Http/ProfileImageHandle.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$user->getProfileImage()]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2064,6 +3192,11 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/ResetPassword/Entity/ResetPassword.php">
+    <MissingConstructor>
+      <code>$expiresAt</code>
+      <code>$hashedToken</code>
+      <code>$user</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>getExpiresAt</code>
     </PossiblyUnusedMethod>
@@ -2079,6 +3212,24 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/ResetPassword/Facade/ResetPasswordFacade.php">
+    <MixedAssignment>
+      <code>$resetPassword</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>?DateTime</code>
+      <code>?ResetPassword</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code>getCreatedAt</code>
+      <code>isExpired</code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$resetPassword->getCreatedAt()]]></code>
+      <code><![CDATA[$this->resetPasswordRepository
+            ->byToken($token)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>find</code>
@@ -2113,6 +3264,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php">
+    <MixedArgument>
+      <code><![CDATA[$form->get('plainPassword')->getData()]]></code>
+    </MixedArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2121,6 +3275,18 @@
     <UnusedClass>
       <code>ResetPasswordSendPasswordHandle</code>
     </UnusedClass>
+  </file>
+  <file src="src/Domain/ResetPassword/Model/ResetPasswordModel.php">
+    <MissingConstructor>
+      <code>$expiresAt</code>
+      <code>$hashedToken</code>
+      <code>$user</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Domain/ResetPassword/Model/ResetPasswordTokenModel.php">
+    <MissingConstructor>
+      <code>$hashedToken</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/ResetPassword/Repository/ResetPasswordRepository.php">
     <PossiblyUnusedMethod>
@@ -2156,6 +3322,13 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/SystemEvent/Entity/SystemEvent.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$recipient</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<SystemEventRecipient>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<SystemEventRecipient>]]></code>
@@ -2163,6 +3336,12 @@
     <PossiblyUnusedMethod>
       <code>setRecipient</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>$type</code>
+      <code>SystemEvent</code>
+      <code>SystemEvent</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/SystemEvent/EventSubscriber/DocumentSystemEventSubscriber.php">
     <UnusedClass>
@@ -2170,11 +3349,31 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/SystemEvent/EventSubscriber/EventSystemEventSubscriber.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$event->getParticipant()->getUser()]]></code>
+    </PossiblyNullArgument>
+    <PossiblyNullReference>
+      <code>getUser</code>
+      <code>getUser</code>
+      <code>getWork</code>
+      <code>getWork</code>
+    </PossiblyNullReference>
     <UnusedClass>
       <code>EventSystemEventSubscriber</code>
     </UnusedClass>
   </file>
   <file src="src/Domain/SystemEvent/EventSubscriber/MercureSubscriber.php">
+    <MixedArgument>
+      <code>$user</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$systemEventRecipient</code>
+      <code>$user</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getId</code>
+      <code>getRecipient</code>
+    </MixedMethodCall>
     <UnusedClass>
       <code>MercureSubscriber</code>
     </UnusedClass>
@@ -2195,6 +3394,12 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/SystemEvent/EventSubscriber/VersionSystemEventSubscriber.php">
+    <MixedArgument>
+      <code>$users</code>
+      <code>$users</code>
+      <code>$users</code>
+      <code>$users</code>
+    </MixedArgument>
     <UnnecessaryVarAnnotation>
       <code>User</code>
     </UnnecessaryVarAnnotation>
@@ -2203,6 +3408,10 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/SystemEvent/EventSubscriber/WorkSystemEventSubscriber.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$work->getConsultant()]]></code>
+      <code><![CDATA[$work->getOpponent()]]></code>
+    </PossiblyNullArgument>
     <UnusedClass>
       <code>WorkSystemEventSubscriber</code>
     </UnusedClass>
@@ -2219,11 +3428,17 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/SystemEvent/Http/Ajax/SystemEventViewedAllHandle.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$user->getId()]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/SystemEvent/Http/Ajax/SystemEventViewedHandle.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$user->getId()]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2245,11 +3460,23 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/SystemEvent/Service/SystemEventLinkGeneratorService.php">
+    <PossiblyNullArgument>
+      <code>$locale</code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Domain/SystemEventRecipient/Entity/SystemEventRecipient.php">
+    <MissingConstructor>
+      <code>$recipient</code>
+      <code>$systemEvent</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/SystemEventRecipient/EventListener/Entity/SystemEventRecipientListener.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$recipient->getRecipient()->getId()]]></code>
+    </PossiblyNullArgument>
     <UnusedClass>
       <code>SystemEventRecipientListener</code>
     </UnusedClass>
@@ -2275,6 +3502,13 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/SystemEventType/Entity/SystemEventType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$systemEvents</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<SystemEvent>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<SystemEvent>]]></code>
@@ -2285,8 +3519,24 @@
       <code>setGroup</code>
       <code>setSystemEvents</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$group</code>
+      <code>SystemEventType</code>
+      <code>SystemEventType</code>
+      <code>SystemEventType</code>
+      <code>SystemEventType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Task/Command/TaskRemindDeadlineCommand.php">
+    <MixedArgument>
+      <code>$task</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$task</code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor>
+      <code>$io</code>
+    </PropertyNotSetInConstructor>
     <UnusedClass>
       <code>TaskRemindDeadlineCommand</code>
     </UnusedClass>
@@ -2315,12 +3565,28 @@
       <code>TaskController</code>
     </UnusedClass>
   </file>
+  <file src="src/Domain/Task/DataTransferObject/Form/Factory/TaskFormFactoryData.php">
+    <MissingConstructor>
+      <code>$taskModel</code>
+      <code>$type</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/Task/Elastica/TaskSearch.php">
+    <MixedArgumentTypeCoercion>
+      <code>$query</code>
+    </MixedArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Entity/Task.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$systemEvents</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<SystemEvent>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<SystemEvent>]]></code>
@@ -2328,6 +3594,13 @@
     <PossiblyUnusedMethod>
       <code>setSystemEvents</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>$work</code>
+      <code>Task</code>
+      <code>Task</code>
+      <code>Task</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Task/EventDispatcher/GenericEvent/TaskGenericEvent.php">
     <PossiblyUnusedProperty>
@@ -2340,11 +3613,37 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Facade/TaskDeadlineFacade.php">
+    <MixedArrayAccess>
+      <code><![CDATA[$taskDeadLine['deadline']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$taskDeadLine</code>
+      <code>$taskDeadLines[]</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Facade/TaskFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->taskRepository->find($id)]]></code>
+    </LessSpecificReturnStatement>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->taskRepository
+            ->allByOwnerComplete($user, $isComplete)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code><![CDATA[$this->taskRepository
+            ->baseQueryBuilder()
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code>Task[]</code>
+      <code>Task[]</code>
+    </MixedReturnTypeCoercion>
+    <MoreSpecificReturnType>
+      <code>?Task</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2355,6 +3654,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Form/Factory/TaskFormFactory.php">
+    <PossiblyNullReference>
+      <code>getId</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2385,6 +3687,13 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/Ajax/TaskCreateSeveralHandle.php">
+    <MixedAssignment>
+      <code><![CDATA[$taskModel->work]]></code>
+      <code>$work</code>
+    </MixedAssignment>
+    <PossiblyNullIterator>
+      <code><![CDATA[$taskModel->works]]></code>
+    </PossiblyNullIterator>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2410,16 +3719,37 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/Api/TaskListOwnerHandle.php">
+    <MixedArgument>
+      <code>$task</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$task</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/Api/TaskListSolverHandle.php">
+    <InvalidArgument>
+      <code><![CDATA[$authorWorks->toArray()]]></code>
+    </InvalidArgument>
+    <MixedArgument>
+      <code>$task</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$task</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/Api/TaskListWorkHandle.php">
+    <MixedArgument>
+      <code>$task</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$task</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2443,6 +3773,13 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Model/TaskModel.php">
+    <MissingConstructor>
+      <code>$name</code>
+      <code>$owner</code>
+      <code>$work</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/Task/Repository/TaskRepository.php">
     <PossiblyUnusedMethod>
@@ -2473,10 +3810,29 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Task/Service/TaskService.php">
+    <InvalidTemplateParam>
+      <code><![CDATA[Collection<Task>]]></code>
+      <code><![CDATA[Collection<Task>|null]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code><![CDATA[Collection<Task>]]></code>
       <code><![CDATA[Collection<Task>|null]]></code>
     </MissingTemplateParam>
+    <MixedAssignment>
+      <code>$task</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[Collection<Task>]]></code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code>isComplete</code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$allTask->matching($criteriaActive)]]></code>
+    </MixedReturnStatement>
+    <UndefinedInterfaceMethod>
+      <code>matching</code>
+    </UndefinedInterfaceMethod>
   </file>
   <file src="src/Domain/Task/Service/TaskStatusService.php">
     <PossiblyUnusedMethod>
@@ -2484,6 +3840,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Twig/Runtime/TaskRuntime.php">
+    <InvalidArgument>
+      <code>$tasks</code>
+    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2494,16 +3853,55 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/User/Command/UserAddCommand.php">
+    <MixedAssignment>
+      <code>$email</code>
+      <code>$firstName</code>
+      <code>$lastName</code>
+      <code>$password</code>
+      <code>$roles</code>
+      <code>$username</code>
+    </MixedAssignment>
+    <PossiblyNullArgument>
+      <code>$email</code>
+      <code>$firstName</code>
+      <code>$lastName</code>
+      <code>$plainPassword</code>
+      <code>$roles</code>
+      <code><![CDATA[$user->getId()]]></code>
+      <code>$username</code>
+    </PossiblyNullArgument>
+    <PossiblyNullReference>
+      <code>success</code>
+      <code>title</code>
+    </PossiblyNullReference>
     <UnusedClass>
       <code>UserAddCommand</code>
     </UnusedClass>
   </file>
   <file src="src/Domain/User/Command/UserDeleteCommand.php">
+    <MixedAssignment>
+      <code>$username</code>
+    </MixedAssignment>
+    <PossiblyNullArgument>
+      <code><![CDATA[$user->getId()]]></code>
+    </PossiblyNullArgument>
+    <PropertyNotSetInConstructor>
+      <code>$io</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCondition>
+      <code><![CDATA[$input->getArgument('username') !== null]]></code>
+    </RedundantCondition>
     <UnusedClass>
       <code>UserDeleteCommand</code>
     </UnusedClass>
   </file>
   <file src="src/Domain/User/Command/UserListCommand.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[fn(User $user): array => $this->userToArray($user)]]></code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument>
+      <code>$maxResult</code>
+    </InvalidArgument>
     <UnusedClass>
       <code>UserListCommand</code>
     </UnusedClass>
@@ -2529,6 +3927,70 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/User/Entity/User.php">
+    <DeprecatedConstant>
+      <code>Types::ARRAY</code>
+    </DeprecatedConstant>
+    <InvalidArgument>
+      <code><![CDATA[$eventParticipant->getEvent()]]></code>
+    </InvalidArgument>
+    <InvalidPropertyAssignmentValue>
+      <code>$groups</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidReturnStatement>
+      <code><![CDATA[$this->authorWorks]]></code>
+      <code><![CDATA[$this->comments]]></code>
+      <code><![CDATA[$this->consultantWorks]]></code>
+      <code><![CDATA[$this->eventAddressOwner]]></code>
+      <code><![CDATA[$this->eventsOwner]]></code>
+      <code><![CDATA[$this->eventsParticipant]]></code>
+      <code><![CDATA[$this->opponentWorks]]></code>
+      <code><![CDATA[$this->supervisorWorks]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[Collection<Comment>]]></code>
+      <code><![CDATA[Collection<Event>]]></code>
+      <code><![CDATA[Collection<EventAddress>]]></code>
+      <code><![CDATA[Collection<EventParticipant>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </InvalidReturnType>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Comment>]]></code>
+      <code><![CDATA[Collection<Event>]]></code>
+      <code><![CDATA[Collection<EventAddress>]]></code>
+      <code><![CDATA[Collection<EventParticipant>]]></code>
+      <code><![CDATA[Collection<EventParticipant>]]></code>
+      <code><![CDATA[Collection<Group>]]></code>
+      <code><![CDATA[Collection<Media>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </InvalidTemplateParam>
+    <MismatchingDocblockPropertyType>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+    </MismatchingDocblockPropertyType>
     <MissingTemplateParam>
       <code>Collection</code>
       <code>Collection</code>
@@ -2544,6 +4006,30 @@
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
     </MissingTemplateParam>
+    <MixedArgument>
+      <code>$media</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$media</code>
+      <code>$userMedia</code>
+      <code>$userMedia</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>$userMedia</code>
+      <code>isEmpty</code>
+      <code>matching</code>
+    </MixedMethodCall>
+    <MixedReturnTypeCoercion>
+      <code>array</code>
+      <code>array_unique($roles)</code>
+    </MixedReturnTypeCoercion>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getDegreeAfter()]]></code>
+      <code><![CDATA[$this->getDegreeBefore()]]></code>
+    </PossiblyNullOperand>
+    <PossiblyUndefinedMethod>
+      <code>matching</code>
+    </PossiblyUndefinedMethod>
     <PossiblyUnusedMethod>
       <code>addGroups</code>
       <code>addRole</code>
@@ -2568,6 +4054,21 @@
       <code>setSupervisorWorks</code>
       <code>setTimezone</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$email</code>
+      <code>$emailCanonical</code>
+      <code>$firstname</code>
+      <code>$lastname</code>
+      <code>$password</code>
+      <code>User</code>
+      <code>User</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCast>
+      <code><![CDATA[(string) $this->password]]></code>
+    </RedundantCast>
+    <UndefinedInterfaceMethod>
+      <code>matching</code>
+    </UndefinedInterfaceMethod>
     <UnusedProperty>
       <code>$biography</code>
       <code>$confirmationToken</code>
@@ -2592,6 +4093,38 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/User/Facade/UserFacade.php">
+    <MixedArgument>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+      <code>$supervisor</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>?User</code>
+      <code>?User</code>
+      <code>?User</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->userRepository
+            ->oneByEmail($email, $enable)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+      <code><![CDATA[$this->userRepository
+            ->oneByToken($username, $token, $enable)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+      <code><![CDATA[$this->userRepository
+            ->oneByUsername($username, $enable)
+            ->getQuery()
+            ->getOneOrNullResult()]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2655,9 +4188,39 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/User/Http/UserListHandle.php">
+    <InvalidArgument>
+      <code>$paginationUserWorks</code>
+      <code>$workStatusCount</code>
+    </InvalidArgument>
+    <MixedArgument>
+      <code><![CDATA[$paginationUser->getId()]]></code>
+      <code><![CDATA[$paginationUser->getId()]]></code>
+      <code><![CDATA[$paginationUser->getId()]]></code>
+      <code><![CDATA[$paginationUser->getId()]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$paginationUser</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getId</code>
+      <code>getId</code>
+      <code>getId</code>
+      <code>getId</code>
+    </MixedMethodCall>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/User/Model/UserModel.php">
+    <MissingConstructor>
+      <code>$email</code>
+      <code>$emailCanonical</code>
+      <code>$firstName</code>
+      <code>$groups</code>
+      <code>$lastName</code>
+      <code>$password</code>
+      <code>$username</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/User/Repository/UserRepository.php">
     <PossiblyUnusedMethod>
@@ -2691,6 +4254,27 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/User/Service/UserWorkService.php">
+    <InvalidReturnStatement>
+      <code>$authors</code>
+      <code>$consultants</code>
+      <code>$opponents</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+    </InvalidReturnType>
+    <InvalidTemplateParam>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </InvalidTemplateParam>
+    <LessSpecificReturnStatement>
+      <code>$userWorks</code>
+    </LessSpecificReturnStatement>
     <MissingTemplateParam>
       <code><![CDATA[ArrayCollection<User>]]></code>
       <code><![CDATA[ArrayCollection<User>]]></code>
@@ -2699,8 +4283,51 @@
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
     </MissingTemplateParam>
+    <MixedArgument>
+      <code>$work</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$user</code>
+      <code>$userWorks</code>
+      <code>$userWorks</code>
+      <code>$work</code>
+      <code>$work</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[ArrayCollection<User>]]></code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code>$userWorks</code>
+      <code>getAuthor</code>
+      <code>getConsultant</code>
+      <code>getId</code>
+      <code>getOpponent</code>
+      <code>getStatus</code>
+      <code>getSupervisor</code>
+      <code>isEmpty</code>
+      <code>isEnabled</code>
+      <code>matching</code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code>$userWorks</code>
+    </MixedReturnStatement>
+    <PossiblyUndefinedMethod>
+      <code>matching</code>
+    </PossiblyUndefinedMethod>
+    <UndefinedInterfaceMethod>
+      <code>matching</code>
+    </UndefinedInterfaceMethod>
   </file>
   <file src="src/Domain/User/Twig/Runtime/UserRuntime.php">
+    <MixedInferredReturnType>
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code>UserRoleHelper::$method($user)</code>
+    </MixedReturnStatement>
+    <PossiblyNullReference>
+      <code>getId</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2716,12 +4343,21 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/UserGroup/Entity/Group.php">
+    <InvalidTemplateParam>
+      <code>Collection</code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
     </MissingTemplateParam>
     <PossiblyUnusedProperty>
       <code>$users</code>
     </PossiblyUnusedProperty>
+    <PropertyNotSetInConstructor>
+      <code>$name</code>
+      <code>Group</code>
+      <code>Group</code>
+      <code>Group</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/UserGroup/Facade/UserGroupFacade.php">
     <PossiblyUnusedMethod>
@@ -2772,6 +4408,11 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/UserGroup/Model/UserGroupModel.php">
+    <MissingConstructor>
+      <code>$name</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/UserGroup/Repository/UserGroupRepository.php">
     <PossiblyUnusedMethod>
@@ -2835,6 +4476,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Version/Http/Api/VersionListHandle.php">
+    <MixedArgument>
+      <code>$version</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$version</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2860,9 +4507,18 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Version/Model/VersionModel.php">
+    <MissingConstructor>
+      <code>$name</code>
+    </MissingConstructor>
     <PossiblyUnusedMethod>
       <code>fromMedia</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Version/Security/Voter/Subject/VersionVoterSubject.php">
+    <MissingConstructor>
+      <code>$media</code>
+      <code>$work</code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/Version/Security/Voter/VersionVoter.php">
     <MissingTemplateParam>
@@ -2882,6 +4538,12 @@
       <code>WidgetController</code>
     </UnusedClass>
   </file>
+  <file src="src/Domain/Widget/EventDispatcher/GenericEvent/WidgetGenericGenericEvent.php">
+    <MissingConstructor>
+      <code>$groupName</code>
+      <code>$groupWidgets</code>
+    </MissingConstructor>
+  </file>
   <file src="src/Domain/Widget/EventDispatcher/WidgetEventDispatcherService.php">
     <UnusedClass>
       <code>WidgetEventDispatcherService</code>
@@ -2893,14 +4555,33 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Widget/Service/WidgetManagerService.php">
+    <MixedArgument>
+      <code>$widget</code>
+      <code>$widgetName</code>
+    </MixedArgument>
+    <MixedArrayOffset>
+      <code><![CDATA[$this->widgets[$widget]]]></code>
+      <code><![CDATA[$this->widgets[$widget]]]></code>
+    </MixedArrayOffset>
+    <MixedAssignment>
+      <code>$widget</code>
+      <code>$widget</code>
+      <code>$widgetName</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Widget/Service/WidgetStreamService.php">
+    <ArgumentTypeCoercion>
+      <code>$sleepSecond</code>
+    </ArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$date</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Work/Command/WorkRemindDeadlineCommand.php">
     <UnusedClass>
@@ -2931,11 +4612,47 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/Work/Elastica/WorkSearch.php">
+    <InvalidArgument>
+      <code>$value</code>
+    </InvalidArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$query</code>
+      <code>uasort</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code>$filedValue</code>
+      <code>$filedValues[]</code>
+      <code>$item</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$filedValue</code>
+      <code>$filedValue</code>
+    </MixedOperand>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Entity/Work.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$categories</code>
+      <code>$conversations</code>
+      <code>$eventParticipants</code>
+      <code>$media</code>
+      <code>$tasks</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Conversation>]]></code>
+      <code><![CDATA[Collection<Media>]]></code>
+      <code><![CDATA[Collection<Task>]]></code>
+      <code><![CDATA[Collection<WorkCategory>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code>Collection</code>
@@ -2948,6 +4665,12 @@
       <code><![CDATA[Collection<Task>]]></code>
       <code><![CDATA[Collection<WorkCategory>]]></code>
     </MissingTemplateParam>
+    <MixedInferredReturnType>
+      <code>Collection</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$allTask->matching($criteriaActive)]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>getActiveTask</code>
       <code>setConversations</code>
@@ -2955,6 +4678,18 @@
       <code>setFile</code>
       <code>setTasks</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$author</code>
+      <code>$status</code>
+      <code>$supervisor</code>
+      <code>$title</code>
+      <code>$type</code>
+      <code>Work</code>
+      <code>Work</code>
+    </PropertyNotSetInConstructor>
+    <UndefinedInterfaceMethod>
+      <code>matching</code>
+    </UndefinedInterfaceMethod>
     <UnusedProperty>
       <code>$eventParticipants</code>
       <code>$systemEvents</code>
@@ -2966,11 +4701,44 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Facade/WorkDeadlineFacade.php">
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->workRepository
+            ->getWorksAfterDeadline()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code>Work[]</code>
+    </MixedReturnTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Facade/WorkFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->workRepository->find($id)]]></code>
+    </LessSpecificReturnStatement>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->workRepository
+            ->allByUserStatus($workData)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code><![CDATA[$this->workRepository
+            ->allByUserStatus($workData)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code><![CDATA[$this->workRepository
+            ->baseQueryBuilder()
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()]]></code>
+      <code>Work[]</code>
+      <code>Work[]</code>
+      <code>Work[]</code>
+    </MixedReturnTypeCoercion>
+    <MoreSpecificReturnType>
+      <code>?Work</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>findAll</code>
@@ -3008,6 +4776,9 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Work/Helper/WorkFunctionHelper.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$category->getSorting()]]></code>
+    </PossiblyNullOperand>
     <PossiblyUnusedMethod>
       <code>groupWorksByCategory</code>
     </PossiblyUnusedMethod>
@@ -3038,6 +4809,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Http/Api/WorkListHandle.php">
+    <MixedArgument>
+      <code>$work</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$work</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3048,6 +4825,18 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Http/WorkDeleteHandle.php">
+    <MixedArgument>
+      <code><![CDATA[$media->getMediaName()]]></code>
+      <code><![CDATA[$media->getType()->getFolder()]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$media</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getFolder</code>
+      <code>getMediaName</code>
+      <code>getType</code>
+    </MixedMethodCall>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3068,9 +4857,25 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Http/WorkListHandle.php">
+    <MixedArrayAccess>
+      <code><![CDATA[$entities['works']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$entities</code>
+      <code>$entities</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Model/WorkModel.php">
+    <PropertyNotSetInConstructor>
+      <code>$author</code>
+      <code>$status</code>
+      <code>$supervisor</code>
+      <code>$title</code>
+      <code>$type</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Work/Repository/WorkRepository.php">
     <PossiblyUnusedMethod>
@@ -3092,9 +4897,34 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Work/Service/WorkDetailTabService.php">
+    <MixedAssignment>
+      <code>$queryPagination</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>Query</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code>getConversation</code>
+      <code>getQuery</code>
+      <code>getQuery</code>
+      <code>getQuery</code>
+      <code>getQuery</code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code>$queryPagination</code>
+    </MixedReturnStatement>
+    <PossiblyNullArgument>
+      <code>$user</code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <UndefinedInterfaceMethod>
+      <code>allByWork</code>
+      <code>allByWork</code>
+      <code>allByWork</code>
+      <code>allByWorkUser</code>
+    </UndefinedInterfaceMethod>
     <UnusedVariable>
       <code>$isSupervisor</code>
     </UnusedVariable>
@@ -3105,7 +4935,28 @@
       <code>getWorkList</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Domain/Work/Service/WorkService.php">
+    <InvalidReturnStatement>
+      <code>$users</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code>User[]</code>
+    </InvalidReturnType>
+    <PossiblyNullArgument>
+      <code><![CDATA[$work->getDeadlineProgram()]]></code>
+    </PossiblyNullArgument>
+    <RedundantCondition>
+      <code><![CDATA[$work->getAuthor() !== null]]></code>
+      <code><![CDATA[$work->getSupervisor() !== null]]></code>
+    </RedundantCondition>
+  </file>
   <file src="src/Domain/Work/Twig/Runtime/WorkRuntime.php">
+    <MixedInferredReturnType>
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code>WorkRoleHelper::$method($work, $user)</code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3121,10 +4972,23 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/WorkCategory/Entity/WorkCategory.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$works</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Work>]]></code>
     </MissingTemplateParam>
+    <PropertyNotSetInConstructor>
+      <code>$owner</code>
+      <code>WorkCategory</code>
+      <code>WorkCategory</code>
+      <code>WorkCategory</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/WorkCategory/Facade/WorkCategoryFacade.php">
     <PossiblyUnusedMethod>
@@ -3186,6 +5050,12 @@
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Domain/WorkCategory/Model/WorkCategoryModel.php">
+    <PropertyNotSetInConstructor>
+      <code>$name</code>
+      <code>$owner</code>
+    </PropertyNotSetInConstructor>
+  </file>
   <file src="src/Domain/WorkCategory/Repository/WorkCategoryRepository.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
@@ -3204,6 +5074,18 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php">
+    <MixedArgument>
+      <code><![CDATA[$workDeadLine['deadline']]]></code>
+      <code><![CDATA[$workProgramDeadLine['deadlineProgram']]]></code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code><![CDATA[$workDeadLine['deadline']]]></code>
+      <code><![CDATA[$workProgramDeadLine['deadlineProgram']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$workDeadLine</code>
+      <code>$workProgramDeadLine</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3230,6 +5112,13 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/WorkStatus/Entity/WorkStatus.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$works</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Work>]]></code>
@@ -3241,8 +5130,22 @@
       <code>setColor</code>
       <code>setWorks</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$color</code>
+      <code>WorkStatus</code>
+      <code>WorkStatus</code>
+      <code>WorkStatus</code>
+      <code>WorkStatus</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/WorkStatus/Facade/WorkStatusFacade.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->workStatusRepository
+            ->find($id)]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code>?WorkStatus</code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3262,6 +5165,13 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Domain/WorkType/Entity/WorkType.php">
+    <InvalidPropertyAssignmentValue>
+      <code>$works</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+      <code><![CDATA[Collection<Work>]]></code>
+    </InvalidTemplateParam>
     <MissingTemplateParam>
       <code>Collection</code>
       <code><![CDATA[Collection<Work>]]></code>
@@ -3272,11 +5182,70 @@
       <code>setShortcut</code>
       <code>setWorks</code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code>$shortcut</code>
+      <code>WorkType</code>
+      <code>WorkType</code>
+      <code>WorkType</code>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Kernel.php">
-    <PossiblyUnusedMethod>
-      <code>configureContainer</code>
-      <code>configureRoutes</code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code>Kernel</code>
+    </UnusedClass>
+  </file>
+  <file src="vendor/symfony/console/Command/Command.php">
+    <PossiblyNullArgument>
+      <code>$name</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php">
+    <ArgumentTypeCoercion>
+      <code>$kernelLoader</code>
+    </ArgumentTypeCoercion>
+    <LessSpecificImplementedReturnType>
+      <code>iterable</code>
+    </LessSpecificImplementedReturnType>
+    <MixedArrayAccess>
+      <code><![CDATA[$envs[$this->environment]]]></code>
+      <code><![CDATA[$envs['all']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$class</code>
+      <code>$contents</code>
+      <code>$controller</code>
+      <code>$envs</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>new $class()</code>
+    </MixedMethodCall>
+    <ParentNotFound>
+      <code>parent::class</code>
+    </ParentNotFound>
+    <PossiblyFalseArgument>
+      <code>$kernelLoader</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseReference>
+      <code>setCurrentDir</code>
+    </PossiblyFalseReference>
+    <UndefinedInterfaceMethod>
+      <code>setCurrentDir</code>
+    </UndefinedInterfaceMethod>
+    <UnresolvableInclude>
+      <code><![CDATA[require $this->getBundlesPath()]]></code>
+    </UnresolvableInclude>
+  </file>
+  <file src="vendor/symfony/security-http/Util/TargetPathTrait.php">
+    <MixedInferredReturnType>
+      <code>?string</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="vendor/symfony/validator/Constraint.php">
+    <MissingConstructor>
+      <code>$groups</code>
+      <code>$groups</code>
+      <code>$groups</code>
+      <code>$groups</code>
+    </MissingConstructor>
   </file>
 </files>

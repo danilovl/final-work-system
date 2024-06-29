@@ -32,4 +32,4 @@ yarn-error.log
 
 /coverage-report
 
-docker/elasticsearch/data
+docker-data/

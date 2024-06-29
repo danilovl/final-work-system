@@ -7,10 +7,13 @@
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
         findUnusedBaselineEntry="true"
         findUnusedCode="true"
-        errorBaseline="your-baseline.xml"
+        errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="src"/>
+        <ignoreFiles>
+            <directory name="src/Application/Redis"/>
+        </ignoreFiles>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
