@@ -17,6 +17,10 @@ jobs:
           docker network create dockernet
           docker-compose -f docker-compose.yml up -d
 
+      - name: Add kibana user
+        run: |
+          docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+
       - name: Install dependencies
         run: |
           docker-compose exec -T php sh bin/composer-first-install.sh

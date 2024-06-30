@@ -68,8 +68,12 @@ readonly class TaskCreateSeveralHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $task = $this->taskFactory->flushFromModel($taskModel);
-                $this->taskEventDispatcherService->onTaskCreate($task);
+                foreach ($taskModel->works as $work) {
+                    $taskModel->work = $work;
+
+                    $task = $this->taskFactory->flushFromModel($taskModel);
+                    $this->taskEventDispatcherService->onTaskCreate($task);
+                }
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
