@@ -17,13 +17,21 @@ jobs:
           docker network create dockernet
           docker-compose -f docker-compose.yml up -d
 
+      - name: Check docker api
+        run: docker-compose exec -T php sh bin/check-docker.sh
+
       - name: Add kibana user
-        run: |
-          docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+        run: docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+
+      - name: Cache vendor
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: vendor-${{hashFiles('composer.lock')}}
+          restore-keys: vendor-${{hashFiles('composer.lock')}}
 
       - name: Install dependencies
-        run: |
-          docker-compose exec -T php sh bin/composer-first-install.sh
+        run: docker-compose exec -T php sh bin/composer-first-install.sh
 
       - name: Elastica populate(elastica network bug)
         run: docker-compose exec -T php php bin/console fos:elastica:populate

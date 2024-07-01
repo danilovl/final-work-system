@@ -17,9 +17,25 @@ jobs:
           docker network create dockernet
           docker-compose -f docker-compose.yml up -d
 
+      - name: Check docker api
+        run: docker-compose exec -T php sh bin/check-docker.sh
+
       - name: Add kibana user
-        run: |
-          docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+        run: docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+
+      - name: Cache vendor
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: vendor-${{hashFiles('composer.lock')}}
+          restore-keys: vendor-${{hashFiles('composer.lock')}}
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{hashFiles('package-lock.json')}}
+          restore-keys: node_modules-${{hashFiles('package-lock.json')}}
 
       - name: Install dependencies
         run: |

@@ -1,4 +1,4 @@
-version: '2.4'
+version: '3.8'
 
 services:
   redis:
@@ -16,7 +16,6 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
-    mem_limit: 2g
 #    volumes:
 #      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
   rabbitmq:
@@ -67,7 +66,6 @@ services:
       - rabbitmq
       - elasticsearch
       - mercure
-    mem_limit: 2g
   nginx:
     build: docker/nginx
     ports:

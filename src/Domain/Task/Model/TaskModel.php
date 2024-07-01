@@ -17,7 +17,10 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\{
+    Collection,
+    ArrayCollection
+};
 
 class TaskModel
 {
@@ -29,7 +32,16 @@ class TaskModel
     public ?DateTime $deadline = null;
     public User $owner;
     public Work $work;
-    public iterable|ArrayCollection|null $works = null;
+
+    /**
+     * @var Collection<Work>
+     */
+    public Collection $works;
+
+    public function __construct()
+    {
+        $this->works = new ArrayCollection;
+    }
 
     public static function fromTask(Task $task): self
     {

@@ -3691,9 +3691,6 @@
       <code><![CDATA[$taskModel->work]]></code>
       <code>$work</code>
     </MixedAssignment>
-    <PossiblyNullIterator>
-      <code><![CDATA[$taskModel->works]]></code>
-    </PossiblyNullIterator>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3760,6 +3757,10 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/TaskCreateSeveralHandle.php">
+    <MixedAssignment>
+      <code><![CDATA[$taskModel->work]]></code>
+      <code>$work</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -3775,11 +3776,17 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Model/TaskModel.php">
-    <MissingConstructor>
+    <InvalidTemplateParam>
+      <code>Collection</code>
+    </InvalidTemplateParam>
+    <MissingTemplateParam>
+      <code>Collection</code>
+    </MissingTemplateParam>
+    <PropertyNotSetInConstructor>
       <code>$name</code>
       <code>$owner</code>
       <code>$work</code>
-    </MissingConstructor>
+    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Task/Repository/TaskRepository.php">
     <PossiblyUnusedMethod>
