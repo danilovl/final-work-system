@@ -1,0 +1,9 @@
+name: Stop containers
+description: Stop containers
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Stop containers
+      shell: bash
+      run: docker-compose -f docker-compose.yml down

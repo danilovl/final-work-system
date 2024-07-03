@@ -1,0 +1,9 @@
+name: Run unit
+description: Run unit
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run unit
+      shell: bash
+      run: docker-compose exec -T php composer test-unit

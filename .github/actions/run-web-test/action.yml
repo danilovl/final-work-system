@@ -1,0 +1,9 @@
+name: Run web tests
+description: Run web tests
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run web tests
+      shell: bash
+      run: docker-compose exec -T php composer test-web

@@ -1,0 +1,9 @@
+name: Run phpstan
+description: Run phpstan
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run phpstan
+      shell: bash
+      run: docker-compose exec -T php composer phpstan

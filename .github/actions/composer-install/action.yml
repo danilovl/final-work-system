@@ -1,0 +1,9 @@
+name: Composer install
+description: Composer install
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Composer install
+      shell: bash
+      run: docker-compose exec -T php sh bin/composer-first-install.sh

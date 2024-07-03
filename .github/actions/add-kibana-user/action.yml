@@ -1,0 +1,9 @@
+name: Add kibana user
+description: Add kibana user
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Add kibana user
+      shell: bash
+      run: docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system

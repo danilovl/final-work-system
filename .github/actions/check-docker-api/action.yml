@@ -1,0 +1,9 @@
+name: Check docker api
+description: Check docker api
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Check docker api
+      shell: bash
+      run: docker-compose exec -T php sh bin/check-docker.sh

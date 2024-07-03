@@ -1,0 +1,9 @@
+name: Run cypress test
+description: Run cypress test
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run psalm
+      shell: bash
+      run: docker-compose exec -T node npm run cypress:run

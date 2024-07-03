@@ -1,0 +1,9 @@
+name: Run psalm
+description: Run psalm
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run psalm
+      shell: bash
+      run: docker-compose exec -T php composer psalm

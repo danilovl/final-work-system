@@ -1,0 +1,11 @@
+name: Start containers
+description: Start containers
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Start containers
+      shell: bash
+      run: |
+        docker network create dockernet
+        docker-compose -f docker-compose.yml up -d

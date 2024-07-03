@@ -13,15 +13,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Start containers
-        run: |
-          docker network create dockernet
-          docker-compose -f docker-compose.yml up -d
+        uses: ./.github/actions/start-containers
 
       - name: Check docker api
-        run: docker-compose exec -T php sh bin/check-docker.sh
+        uses: ./.github/actions/check-docker-api
 
       - name: Add kibana user
-        run: docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+        uses: ./.github/actions/add-kibana-user
 
       - name: Cache vendor
         uses: actions/cache@v3
@@ -30,30 +28,25 @@ jobs:
           key: vendor-${{hashFiles('composer.lock')}}
           restore-keys: vendor-${{hashFiles('composer.lock')}}
 
-      - name: Install dependencies
-        run: docker-compose exec -T php sh bin/composer-first-install.sh
-
-      - name: Elastica populate(elastica network bug)
-        run: docker-compose exec -T php php bin/console fos:elastica:populate
-
       - name: Run phpstan
-        run: docker-compose exec -T php composer phpstan
+        uses: ./.github/actions/run-phpstan
+
+      - name: Composer install
+        uses: ./.github/actions/composer-install
 
       - name: Run psalm
-        run: docker-compose exec -T php composer psalm
+        uses: ./.github/actions/run-psalm
 
       - name: Run unit tests
-        run: docker-compose exec -T php composer test-unit
+        uses: ./.github/actions/run-unit-test
 
       - name: Run kernel tests
-        run: docker-compose exec -T php composer test-kernel
+        uses: ./.github/actions/run-kernel-test
 
       - name: View log files
         if: always()
-        run: |
-          docker-compose exec -T php cat var/log/prod.log || true
-          docker-compose exec -T php cat var/log/dev.log || true
+        uses: ./.github/actions/view-log-files
 
       - name: Stop containers
         if: always()
-        run: docker-compose -f docker-compose.yml down
+        uses: ./.github/actions/stop-containers
