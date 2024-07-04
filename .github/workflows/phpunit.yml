@@ -28,11 +28,11 @@ jobs:
           key: vendor-${{hashFiles('composer.lock')}}
           restore-keys: vendor-${{hashFiles('composer.lock')}}
 
-      - name: Run phpstan
-        uses: ./.github/actions/run-phpstan
-
       - name: Composer install
         uses: ./.github/actions/composer-install
+
+      - name: Run phpstan
+        uses: ./.github/actions/run-phpstan
 
       - name: Run psalm
         uses: ./.github/actions/run-psalm

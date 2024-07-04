@@ -18,6 +18,8 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class S3CreateBucketCommandTest extends KernelTestCase
 {
+    private readonly S3CreateBucketCommand $command;
+
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
