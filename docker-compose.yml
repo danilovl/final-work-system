@@ -7,6 +7,7 @@ services:
       - '7102:6379'
   elasticsearch:
     build: docker/elasticsearch
+    restart: always
     ports:
       - '7103:9200'
       - '7104:9300'
@@ -15,8 +16,8 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
-#    volumes:
-#      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
+  #    volumes:
+  #      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
   rabbitmq:
     build: docker/rabbitmq
     ports:
@@ -24,6 +25,7 @@ services:
       - '7106:15672'
   mysql:
     build: docker/mysql
+    restart: always
     ports:
       - '7101:3306'
     volumes:
@@ -103,6 +105,7 @@ services:
       retries: 3
   kibana:
     build: docker/kibana
+    restart: always
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       ELASTICSEARCH_USERNAME: superuser

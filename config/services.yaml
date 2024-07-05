@@ -34,6 +34,7 @@ services:
       - '../src/Application/Traits'
       - '../src/Application/Widget'
       - '../src/Application/Model'
+      - '../src/Application/Repository/*QueryBuilder.php'
 
   App\Domain\:
     resource: '../src/Domain'
@@ -42,6 +43,7 @@ services:
       - '../src/Domain/*/Exception'
       - '../src/Domain/*/Constant'
       - '../src/Domain/*/Model'
+      - '../src/Domain/*/Repository/*QueryBuilder.php'
       - '../src/Domain/*/Security/Voter/Subject'
       - '../src/Domain/*/EventDispatcher/GenericEvent'
       - '../src/Domain/Comment/Form/EventSubscriber'

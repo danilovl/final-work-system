@@ -17,7 +17,6 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -28,6 +27,11 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    private function createTaskQueryBuilder(): TaskQueryBuilder
+    {
+        return new TaskQueryBuilder($this->createQueryBuilder('task'));
+    }
+
     public function baseQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('task')
@@ -36,101 +40,102 @@ class TaskRepository extends ServiceEntityRepository
 
     public function allByOwner(User $user): QueryBuilder
     {
-        return $this->createQueryBuilder('task')
-            ->join('task.work', 'work')
-            ->where('task.owner = :user')
-            ->orderBy('task.createdAt', Criteria::DESC)
-            ->setParameter('user', $user);
+        return $this->createTaskQueryBuilder()
+            ->joinWork()
+            ->byOwner($user)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function getByIds(array $ids): QueryBuilder
     {
-        return $this->createQueryBuilder('task')
-            ->join('task.work', 'work')
-            ->where('task.id IN (:ids)')
-            ->orderBy('task.createdAt', Criteria::DESC)
-            ->setParameter('ids', $ids);
+        return $this->createTaskQueryBuilder()
+            ->joinWork()
+            ->byIds($ids)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function allByWork(Work $work, bool $active = false): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('task')
-            ->where('task.work = :work')
-            ->orderBy('task.deadline', Criteria::DESC)
-            ->orderBy('task.createdAt', Criteria::DESC)
-            ->setParameter('work', $work);
+        $queryBuilder = $this->createTaskQueryBuilder()
+            ->joinWork()
+            ->byWork($work);
 
         if ($active === true) {
-            $queryBuilder->andWhere('task.active = :active')
-                ->setParameter('active', $active);
+            $queryBuilder = $queryBuilder->byActive($active);
         }
 
-        return $queryBuilder;
+        return $queryBuilder->getQueryBuilder();
     }
 
     public function byDeadlineOwner(User $user): QueryBuilder
     {
-        return $this->createQueryBuilder('task')
-            ->select('DISTINCT task.deadline')
-            ->where('task.owner = :user')
-            ->orderBy('task.deadline', Criteria::DESC)
-            ->setParameter('user', $user);
+        $callback = static function (QueryBuilder $queryBuilder): void {
+            $queryBuilder->select('DISTINCT task.deadline');
+        };
+
+        return $this->createTaskQueryBuilder()
+            ->byOwner($user)
+            ->orderByDeadline()
+            ->byCallback($callback)
+            ->getQueryBuilder();
     }
 
-    public function allByOwnerComplete(
-        User $user,
-        bool $isComplete
-    ): QueryBuilder {
-        return $this->createQueryBuilder('task')
-            ->andWhere('task.owner = :user')
-            ->andWhere('task.complete = :isComplete')
-            ->setParameter('user', $user)
-            ->setParameter('isComplete', $isComplete);
+    public function allByOwnerComplete(User $user, bool $isComplete): QueryBuilder
+    {
+        return $this->createTaskQueryBuilder()
+            ->byOwner($user)
+            ->byComplete($isComplete)
+            ->getQueryBuilder();
     }
 
-    public function countByOwnerComplete(
-        User $user,
-        bool $isComplete
-    ): QueryBuilder {
-        return $this->createQueryBuilder('task')
-            ->distinct()
-            ->select('count(task.id)')
-            ->andWhere('task.owner = :user')
-            ->andWhere('task.complete = :isComplete')
-            ->setParameter('user', $user)
-            ->setParameter('isComplete', $isComplete);
+    public function countByOwnerComplete(User $user, bool $isComplete): QueryBuilder
+    {
+        $callback = static function (QueryBuilder $queryBuilder): void {
+            $queryBuilder
+                ->select('count(task.id)')
+                ->andWhere('task.owner = :user');
+        };
+
+        return $this->createTaskQueryBuilder()
+            ->byOwner($user)
+            ->byComplete($isComplete)
+            ->byCallback($callback)
+            ->getQueryBuilder();
     }
 
     public function getTasksAfterDeadline(): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->join('task.work', 'work')
-            ->join('work.status', 'status')
-            ->andWhere('task.complete = :complete')
-            ->andWhere('task.notifyComplete = :notifyComplete')
-            ->andWhere('task.active = :active')
-            ->andWhere('task.deadline < CURRENT_DATE()')
-            ->andWhere('status.id = :workStatusId')
-            ->setParameter('active', true)
-            ->setParameter('complete', false)
-            ->setParameter('notifyComplete', false)
-            ->setParameter('workStatusId', WorkStatusConstant::ACTIVE);
+        $callback = static function (QueryBuilder $queryBuilder): void {
+            $queryBuilder
+                ->andWhere('task.deadline < CURRENT_DATE()')
+                ->andWhere('status.id = :workStatusId')
+                ->setParameter('workStatusId', WorkStatusConstant::ACTIVE);
+        };
+
+        return $this->createTaskQueryBuilder()
+            ->joinWork()
+            ->joinStatus()
+            ->byActive(true)
+            ->byComplete(false)
+            ->byNotifyComplete(false)
+            ->byCallback($callback)
+            ->getQueryBuilder();
     }
 
     public function allByWorks(array $works, bool $active = false): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('task')
-            ->join('task.work', 'work')
-            ->where('work IN (:works)')
-            ->orderBy('task.deadline', Criteria::DESC)
-            ->orderBy('task.createdAt', Criteria::DESC)
-            ->setParameter('works', $works);
+        $queryBuilder = $this->createTaskQueryBuilder()
+            ->joinWork()
+            ->byWorks($works)
+            ->orderByCreatedAt()
+            ->orderByDeadline();
 
         if ($active === true) {
-            $queryBuilder->andWhere('task.active = :active')
-                ->setParameter('active', $active);
+            $queryBuilder = $queryBuilder->byActive($active);
         }
 
-        return $queryBuilder;
+        return $queryBuilder->getQueryBuilder();
     }
 }

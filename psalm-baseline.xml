@@ -598,6 +598,13 @@
       <code>Version20200627193807</code>
     </UnusedClass>
   </file>
+  <file src="src/Application/Repository/BaseQueryBuilder.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>byCallback</code>
+      <code>getQueryBuilder</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Application/Request/AbstractAjaxJsonRequest.php">
     <MixedArgumentTypeCoercion>
       <code>$property</code>
@@ -3787,6 +3794,25 @@
       <code>$owner</code>
       <code>$work</code>
     </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Domain/Task/Repository/TaskQueryBuilder.php">
+    <PossiblyUnusedMethod>
+      <code>byActive</code>
+      <code>byComplete</code>
+      <code>byIds</code>
+      <code>byNotifyComplete</code>
+      <code>byOwner</code>
+      <code>byWork</code>
+      <code>byWorks</code>
+      <code>joinStatus</code>
+      <code>joinWork</code>
+      <code>orderByCreatedAt</code>
+      <code>orderByDeadline</code>
+    </PossiblyUnusedMethod>
+    <QueryBuilderSetParameter>
+      <code>$user</code>
+      <code>$work</code>
+    </QueryBuilderSetParameter>
   </file>
   <file src="src/Domain/Task/Repository/TaskRepository.php">
     <PossiblyUnusedMethod>
