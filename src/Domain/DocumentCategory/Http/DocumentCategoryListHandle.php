@@ -37,14 +37,16 @@ readonly class DocumentCategoryListHandle
     public function handle(Request $request): Response
     {
         $user = $this->userService->getUser();
+        $pagination = $this->paginatorService->createPaginationRequest(
+            $request,
+            $this->mediaCategoryFacade->queryMediaCategoriesByOwner($user),
+            $this->parameterService->getInt('pagination.default.page'),
+            $this->parameterService->getInt('pagination.document_category.limit'),
+            detachEntity: true
+        );
 
         return $this->twigRenderService->renderToResponse('domain/document_category/list.html.twig', [
-            'mediaCategories' => $this->paginatorService->createPaginationRequest(
-                $request,
-                $this->mediaCategoryFacade->queryMediaCategoriesByOwner($user),
-                $this->parameterService->getInt('pagination.default.page'),
-                $this->parameterService->getInt('pagination.document_category.limit')
-            )
+            'mediaCategories' => $pagination
         ]);
     }
 }

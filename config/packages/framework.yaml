@@ -4,5 +4,6 @@ framework:
         handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
         cookie_secure: false
         cookie_samesite: lax
+        cookie_lifetime: 43200
     php_errors:
         log: true

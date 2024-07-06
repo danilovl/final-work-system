@@ -12,10 +12,11 @@
 
 namespace App\Domain\User\Http;
 
+use App\Application\Helper\CloneHelper;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Application\Service\{
-    PaginatorService,
     SeoPageService,
+    PaginatorService,
     TranslatorService,
     TwigRenderService
 };
@@ -103,7 +104,6 @@ readonly class UserListHandle
 
         if ($getUserWorkAndStatus === true) {
             foreach ($pagination as $paginationUser) {
-
                 $workData = WorkRepositoryData::createFromArray([
                     'user' => $paginationUser,
                     'supervisor' => $user,
@@ -131,6 +131,10 @@ readonly class UserListHandle
                 }
             }
         }
+
+        /** @var object[] $items */
+        $items = iterator_to_array($pagination->getItems());
+        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         $this->seoPageService->addTitle($title);
 

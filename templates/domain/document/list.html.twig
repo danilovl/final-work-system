@@ -164,7 +164,7 @@
                                                    aria-expanded="true"
                                                    aria-controls="tab-document-content-{{ document.id | hashids_encode }}"
 
-                                                        {% if document.existMediaFile and document.mimeType.extension != 'zip' and document.mimeType.extension != 'rar' %}
+                                                        {% if media_is_file_exist(document) and document.mimeType.extension != 'zip' and document.mimeType.extension != 'rar' %}
                                                             {% set frameLink = absolute_url(path('document_google_download', { 'id': document.id | hashids_encode })) %}
                                                             onclick="showGoogleDocs( '#iframe-document-content-{{ document.id | hashids_encode }}', '{{ frameLink }}')"
                                                         {% endif %}
@@ -173,7 +173,7 @@
                                                     {{ 'app.form.action.show_content' | trans }}
                                                 </a>
 
-                                                {% if document.existMediaFile %}
+                                                {% if media_is_file_exist(document) %}
                                                     <a class="btn btn-success btn-xs"
                                                        href="{{ path('document_download', { 'id': document.id | hashids_encode }) }}">
                                                         <i class="fa fa-download"></i>
@@ -216,7 +216,7 @@
                                                      role="tabpanel">
                                                     <div class="panel-body text-muted well well-sm no-shadow">
 
-                                                        {% if document.existMediaFile %}
+                                                        {% if media_is_file_exist(document) %}
                                                             {{ render_service('App\\Domain\\Document\\Controller\\DocumentController', 'detailContent', {'media': document}) }}
                                                         {% else %}
                                                             {{ 'app.text.file_not_found' | trans }}

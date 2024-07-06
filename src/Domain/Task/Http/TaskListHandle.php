@@ -59,7 +59,7 @@ readonly class TaskListHandle
 
         return $this->twigRenderService->renderToResponse('domain/task/list.html.twig', [
             'isTasksInComplete' => $isTasksInComplete,
-            'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery),
+            'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery, detachEntity: true),
             'searchForm' => $searchForm->createView(),
             'enableClearSearch' => !empty($searchModel->search)
         ]);

@@ -670,6 +670,10 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Application/Service/PaginatorService.php">
+    <InvalidArgument>
+      <code><![CDATA[$pagination->getItems()]]></code>
+      <code><![CDATA[$pagination->getItems()]]></code>
+    </InvalidArgument>
     <MixedArgument>
       <code>$defaultPageName</code>
     </MixedArgument>
@@ -1628,6 +1632,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Http/ConversationDetailHandle.php">
+    <InvalidArgument>
+      <code><![CDATA[$pagination->getItems()]]></code>
+    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -1638,6 +1645,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Http/ConversationListHandle.php">
+    <InvalidArgument>
+      <code><![CDATA[$pagination->getItems()]]></code>
+    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -2376,6 +2386,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Event/Http/EventListHandle.php">
+    <InvalidArgument>
+      <code><![CDATA[$pagination->getItems()]]></code>
+    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -4222,6 +4235,7 @@
   </file>
   <file src="src/Domain/User/Http/UserListHandle.php">
     <InvalidArgument>
+      <code><![CDATA[$pagination->getItems()]]></code>
       <code>$paginationUserWorks</code>
       <code>$workStatusCount</code>
     </InvalidArgument>

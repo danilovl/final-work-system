@@ -73,7 +73,7 @@
                                         <td class="mail-subject">
                                             <i class="fa fa-circle message-type-{{ conversation.type.constant | lower }}"></i>
                                             <a href="{{ path('conversation_detail', { 'id': conversation.id | hashids_encode }) }}">
-                                                {{ conversation }}
+                                                {{ conversation.title }}
                                             </a>
                                         </td>
                                         <td>

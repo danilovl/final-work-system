@@ -31,8 +31,7 @@ class EventRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('event')
             ->leftJoin('event.participant', 'participant')
-            ->leftJoin('event.address', 'address')
-            ->setCacheable(true);
+            ->leftJoin('event.address', 'address');
     }
 
     public function allByWork(Work $work): QueryBuilder
@@ -46,6 +45,9 @@ class EventRepository extends ServiceEntityRepository
     public function allByOwner(EventRepositoryData $eventData): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
+            ->addSelect('participant')
+            ->addSelect('work')
+            ->leftJoin('participant.work', 'work')
             ->where('event.owner = :owner')
             ->orderBy('event.createdAt', Criteria::DESC)
             ->setParameter('owner', $eventData->user);

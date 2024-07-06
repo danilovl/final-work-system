@@ -36,11 +36,14 @@ readonly class WorkCategoryListHandle
     {
         $user = $this->userService->getUser();
 
+        $pagination = $this->paginatorService->createPaginationRequest(
+            $request,
+            $this->workCategoryFacade->queryWorkCategoriesByOwner($user),
+            detachEntity: true
+        );
+
         return $this->twigRenderService->renderToResponse('domain/work_category/list.html.twig', [
-            'workCategories' => $this->paginatorService->createPaginationRequest(
-                $request,
-                $this->workCategoryFacade->queryWorkCategoriesByOwner($user)
-            )
+            'workCategories' => $pagination
         ]);
     }
 }

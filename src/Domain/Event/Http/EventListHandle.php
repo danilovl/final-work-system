@@ -12,6 +12,7 @@
 
 namespace App\Domain\Event\Http;
 
+use App\Application\Helper\CloneHelper;
 use App\Application\Service\{
     SeoPageService,
     PaginatorService,
@@ -43,12 +44,15 @@ readonly class EventListHandle
 
         $eventsQuery = $this->eventFacade->getEventsByOwnerQuery($eventRepositoryData);
 
-        $events = $this->paginatorService->createPaginationRequest($request, $eventsQuery);
+        $pagination = $this->paginatorService->createPaginationRequest($request, $eventsQuery);
+        /** @var object[] $items */
+        $items = iterator_to_array($pagination->getItems());
+        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         $this->seoPageService->setTitle('app.page.event_list');
 
         return $this->twigRenderService->renderToResponse('domain/event/list.html.twig', [
-            'events' => $events
+            'events' => $pagination
         ]);
     }
 }

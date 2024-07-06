@@ -46,7 +46,16 @@ readonly class EntityManagerService
     public function detach(object $entity): void
     {
         $this->entityManager->detach($entity);
-        $this->entityManager->flush();
+    }
+
+    /**
+     * @param object[] $entities
+     */
+    public function detachArray(array $entities): void
+    {
+        foreach ($entities as $entity) {
+            $this->detach($entity);
+        }
     }
 
     public function refresh(object $entity): void

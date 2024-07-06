@@ -76,7 +76,6 @@ readonly class WorkCategoryEditHandle
 
         return $this->twigRenderService->renderToResponse($template, [
             'form' => $form->createView(),
-            'workCategory' => $workCategory,
             'title' => $this->translatorService->trans('app.page.work_category_edit'),
             'buttonActionTitle' => $this->translatorService->trans('app.form.action.update'),
             'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.update_and_close')

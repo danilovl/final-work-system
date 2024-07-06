@@ -15,6 +15,7 @@ namespace App\Domain\Conversation\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
+use App\Application\Helper\CloneHelper;
 use App\Application\Model\SearchModel;
 use App\Application\Service\{
     PaginatorService,
@@ -141,6 +142,10 @@ readonly class ConversationDetailHandle
         $this->seoPageService->setTitle($conversation->getTitle());
 
         $this->messageHighlightService->addHighlight($pagination, $searchModel);
+
+        /** @var object[] $items */
+        $items = iterator_to_array($pagination->getItems());
+        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         return $this->twigRenderService->renderToResponse('domain/conversation/detail.html.twig', [
             'conversation' => $conversation,

@@ -17,11 +17,11 @@
                             {% if conversation.work %}
                                 <a href="{{ path('work_detail', { 'id': conversation.work.id | hashids_encode }) }}"
                                    target="_blank">
-                                    {{ conversation }}
+                                    {{ conversation.title }}
                                     <i class="fa fa-book"></i>
                                 </a>
                             {% else %}
-                                {{ conversation }}
+                                {{ conversation.title }}
                             {% endif %}
 
                             {% include 'other/common_part/simple_search.html.twig' with {

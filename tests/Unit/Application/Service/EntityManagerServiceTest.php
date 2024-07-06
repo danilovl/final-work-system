@@ -83,10 +83,6 @@ class EntityManagerServiceTest extends TestCase
             ->expects($this->once())
             ->method('detach');
 
-        $this->entityManager
-            ->expects($this->once())
-            ->method('flush');
-
         $this->entityManagerService->detach(new stdClass);
 
         $this->assertTrue(true);

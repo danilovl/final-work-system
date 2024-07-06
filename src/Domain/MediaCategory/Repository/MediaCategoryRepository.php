@@ -28,13 +28,14 @@ class MediaCategoryRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('media_category')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('media_category');
     }
 
     public function allByOwner(User $user): QueryBuilder
     {
         return $this->baseQueryBuilder()
+            ->addSelect('medias')
+            ->leftJoin('media_category.medias', 'medias')
             ->where('media_category.owner = :user')
             ->orderBy('media_category.name', Criteria::ASC)
             ->setParameter('user', $user);

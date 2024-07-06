@@ -36,11 +36,14 @@ readonly class UserGroupListHandle
     {
         $this->seoPageService->setTitle('app.page.user_group_list');
 
+        $pagination = $this->paginatorService->createPaginationRequest(
+            $request,
+            $this->userGroupFacade->queryAll(),
+            detachEntity: true
+        );
+
         return $this->twigRenderService->renderToResponse('domain/user_group/list.html.twig', [
-            'groups' => $this->paginatorService->createPaginationRequest(
-                $request,
-                $this->userGroupFacade->queryAll()
-            ),
+            'groups' => $pagination
         ]);
     }
 }

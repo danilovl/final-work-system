@@ -70,10 +70,11 @@ readonly class DocumentListHandle
         ]);
 
         $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
+        $pagination = $this->paginatorService->createPaginationRequest($request, $documents, detachEntity: true);
 
         return $this->twigRenderService->renderToResponse('domain/document/list.html.twig', [
             'openSearchTab' => $openSearchTab,
-            'documents' => $this->paginatorService->createPaginationRequest($request, $documents),
+            'documents' => $pagination,
             'form' => $form->createView()
         ]);
     }

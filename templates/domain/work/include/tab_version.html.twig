@@ -74,7 +74,7 @@
                            aria-expanded="true"
                            aria-controls="tab-version-content-{{ version.id | hashids_encode }}"
 
-                                {% if version.existMediaFile and version.mimeType.extension != 'zip' and version.mimeType.extension != 'rar' %}
+                                {% if media_is_file_exist(version) and version.mimeType.extension != 'zip' and version.mimeType.extension != 'rar' %}
                                     {% set frameLink =  absolute_url(path('version_google_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode })) %}
                                     onclick="showGoogleDocs( '#iframe-version-content-{{ version.id | hashids_encode }}', '{{ frameLink }}')"
                                 {% endif %}
@@ -83,7 +83,7 @@
                             {{ 'app.form.action.show_content' | trans }}
                         </a>
 
-                        {% if version.existMediaFile %}
+                        {% if media_is_file_exist(version) %}
                             <a class="btn btn-success btn-xs"
                                href="{{ path('version_download', { 'id_work': work.id | hashids_encode, 'id_media': version.id | hashids_encode }) }}">
                                 <i class="fa fa-download"></i>
@@ -143,7 +143,7 @@
                              role="tabpanel">
                             <div class="panel-body text-muted well well-sm no-shadow">
 
-                                {% if version.existMediaFile %}
+                                {% if media_is_file_exist(version) %}
                                     {{ render_service('App\\Domain\\Document\\Controller\\DocumentController', 'detailContent', {'media': version}) }}
                                 {% else %}
                                     {{ 'app.text.file_not_found' | trans }}

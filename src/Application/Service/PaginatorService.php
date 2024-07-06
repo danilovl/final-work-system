@@ -21,21 +21,31 @@ readonly class PaginatorService
 {
     public function __construct(
         private PaginatorInterface $paginator,
-        private ParameterServiceInterface $parameterService
+        private ParameterServiceInterface $parameterService,
+        private EntityManagerService $entityManagerService
     ) {}
 
     public function createPagination(
         mixed $target,
         int $page,
         int $limit = null,
-        array $options = []
+        array $options = [],
+        bool $detachEntity = false
     ): PaginationInterface {
-        return $this->paginator->paginate(
+        $pagination = $this->paginator->paginate(
             $target,
             $page,
             $limit,
             $options
         );
+
+        if ($detachEntity) {
+            /** @var object[] $items */
+            $items = iterator_to_array($pagination->getItems());
+            $this->entityManagerService->detachArray($items);
+        }
+
+        return $pagination;
     }
 
     public function createPaginationRequest(
@@ -43,7 +53,8 @@ readonly class PaginatorService
         mixed $target,
         int $page = null,
         int $limit = null,
-        array $options = null
+        array $options = null,
+        bool $detachEntity = false
     ): PaginationInterface {
         $page = $page ?? $this->parameterService->getInt('pagination.default.page');
         $limit = $limit ?? $this->parameterService->getInt('pagination.default.limit');
@@ -55,11 +66,19 @@ readonly class PaginatorService
             $defaultPageName = $options['pageParameterName'];
         }
 
-        return $this->createPagination(
+        $pagination = $this->createPagination(
             $target,
             $request->query->getInt($defaultPageName, $page),
             $request->query->getInt($defaultLimitName, $limit),
             $options !== null ? $options : []
         );
+
+        if ($detachEntity) {
+            /** @var object[] $items */
+            $items = iterator_to_array($pagination->getItems());
+            $this->entityManagerService->detachArray($items);
+        }
+
+        return $pagination;
     }
 }

@@ -29,8 +29,7 @@ class ConversationRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('conversation')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('conversation');
     }
 
     public function allByParticipantUser(User $user): QueryBuilder
