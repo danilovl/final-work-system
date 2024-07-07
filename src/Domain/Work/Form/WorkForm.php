@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class WorkForm extends AbstractType
 {
-    final public const NAME = 'work';
+    final public const string NAME = 'work';
 
     public function __construct(
         private readonly WorkStatusDataGrid $workStatusDataGridHelper,

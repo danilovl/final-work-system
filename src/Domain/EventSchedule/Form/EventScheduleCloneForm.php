@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventScheduleCloneForm extends AbstractType
 {
-    final public const NAME = 'event_schedule_clone';
+    final public const string NAME = 'event_schedule_clone';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

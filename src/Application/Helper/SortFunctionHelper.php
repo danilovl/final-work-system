@@ -19,7 +19,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class SortFunctionHelper
 {
-    private const PATH_CZECH_CHARS = __DIR__ . '/../../../config/project/sorter_chars.yaml';
+    private const string PATH_CZECH_CHARS = __DIR__ . '/../../../config/project/sorter_chars.yaml';
 
     public static function usortCzechArray(array &$array): void
     {

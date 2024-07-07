@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class DocumentVoter extends Voter
 {
-    public const SUPPORTS = [
+    public const array SUPPORTS = [
         VoterSupportConstant::EDIT->value,
         VoterSupportConstant::DOWNLOAD->value,
         VoterSupportConstant::DELETE->value

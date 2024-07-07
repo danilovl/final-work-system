@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UserRoleType extends AbstractType
 {
-    final public const NAME = 'user_role_type';
+    final public const string NAME = 'user_role_type';
 
     public function configureOptions(OptionsResolver $resolver): void
     {

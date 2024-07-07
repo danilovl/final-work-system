@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventAddressForm extends AbstractType
 {
-    final public const NAME = 'event_address';
+    final public const string NAME = 'event_address';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

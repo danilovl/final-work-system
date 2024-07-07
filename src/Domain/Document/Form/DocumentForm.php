@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class DocumentForm extends AbstractType
 {
-    final public const NAME = 'media';
+    final public const string NAME = 'media';
 
     public function __construct(private readonly MediaCategoryDataGrid $categoryDataGridHelper) {}
 

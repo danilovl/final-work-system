@@ -31,7 +31,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConversationComposeMessageForm extends AbstractType
 {
-    final public const NAME = 'conversation_compose_message';
+    final public const string NAME = 'conversation_compose_message';
 
     public function __construct(private readonly TranslatorInterface $translator) {}
 

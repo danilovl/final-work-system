@@ -6,6 +6,11 @@ parameters:
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
+			message: "#^Comparison operation \"\\>\\=\" between \\(int\\|Redis\\|false\\) and 0 results in an error\\.$#"
+			count: 2
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
 			message: "#^Parameter \\#1 \\$className of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
 			count: 1
 			path: src/Application/Service/EntityManagerService.php
@@ -26,11 +31,6 @@ parameters:
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
-			count: 2
-			path: src/Application/Service/PaginatorService.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:findByApiKey\\(\\) should return App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/ApiUser/Facade/ApiUserFacade.php
@@ -41,14 +41,9 @@ parameters:
 			path: src/Domain/Comment/Facade/CommentFacade.php
 
 		-
-			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\ReadableCollection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects Closure\\(mixed, int\\|string\\)\\: bool, Closure\\(App\\\\Domain\\\\ConversationParticipant\\\\Entity\\\\ConversationParticipant\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects Closure\\(mixed, int\\|string\\)\\: bool, Closure\\(App\\\\Domain\\\\ConversationParticipant\\\\Entity\\\\ConversationParticipant\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Entity/Conversation.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
-			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getMessagesByConversation\\(\\) should return array but returns mixed\\.$#"
@@ -64,16 +59,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getUnreadMessagesByUser\\(\\) should return array but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
-
-		-
-			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Http/ConversationDetailHandle.php
-
-		-
-			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Http/ConversationListHandle.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Conversation\\\\Service\\\\ConversationStatusService\\:\\:getConversationMessageStatus\\(\\) should return App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\|null but returns mixed\\.$#"
@@ -114,11 +99,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:getEventsByParticipant\\(\\) should return array but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Event/Facade/EventFacade.php
-
-		-
-			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/Event/Http/EventListHandle.php
 
 		-
 			message: "#^Property App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\:\\:\\$latitude type mapping mismatch\\: database can contain string\\|null but property expects float\\|null\\.$#"
@@ -211,11 +191,6 @@ parameters:
 			path: src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Facade/SystemEventFacade.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\SystemEvent\\\\Facade\\\\SystemEventRecipientFacade\\:\\:getUnreadSystemEventsByRecipient\\(\\) should return array but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
@@ -229,11 +204,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskDeadlineFacade\\:\\:getTasksAfterDeadline\\(\\) should return array but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: src/Domain/Task/Facade/TaskFacade.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Task\\\\Entity\\\\Task\\|null but returns object\\|null\\.$#"
@@ -269,11 +239,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByUsername\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/User/Facade/UserFacade.php
-
-		-
-			message: "#^Parameter \\#1 \\$iterator of function iterator_to_array expects Traversable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/User/Http/UserListHandle.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\User\\\\Service\\\\UserWorkService\\:\\:getWorkBy\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"

@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class EventScheduleVoter extends Voter
 {
-    public const SUPPORTS = [
+    public const array SUPPORTS = [
         VoterSupportConstant::VIEW->value,
         VoterSupportConstant::EDIT->value,
         VoterSupportConstant::CLONE->value,

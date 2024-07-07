@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LocaleType extends AbstractType
 {
-    final public const NAME = 'locale_type';
+    final public const string NAME = 'locale_type';
     private array $locales;
 
     public function __construct(string $locales)

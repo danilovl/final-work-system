@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints\{
 
 class UserForm extends AbstractType
 {
-    final public const NAME = 'user';
+    final public const string NAME = 'user';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserGroupForm extends AbstractType
 {
-    final public const NAME = 'user_group';
+    final public const string NAME = 'user_group';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

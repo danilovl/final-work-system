@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ConversationMessageForm extends AbstractType
 {
-    final public const NAME = 'conversation_message';
+    final public const string NAME = 'conversation_message';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventWorkReservationForm extends AbstractType
 {
-    final public const NAME = 'event_participant';
+    final public const string NAME = 'event_participant';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorkSearchForm extends AbstractType
 {
-    final public const NAME = 'work_search';
+    final public const string NAME = 'work_search';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MediaCategoryForm extends AbstractType
 {
-    final public const NAME = 'media_category';
+    final public const string NAME = 'media_category';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

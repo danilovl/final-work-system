@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DocumentSearchForm extends AbstractType
 {
-    final public const NAME = 'document_search';
+    final public const string NAME = 'document_search';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -19,7 +19,7 @@ use App\Domain\User\Service\UserService;
 
 class UnreadConversationMessageWidget extends BaseWidget
 {
-    private const COUNT_VIEW = 6;
+    private const int COUNT_VIEW = 6;
     private ?User $user = null;
 
     public function __construct(

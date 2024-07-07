@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\{
 
 final class MediaFileType extends AbstractType
 {
-    final public const NAME = 'media_file_type';
+    final public const string NAME = 'media_file_type';
 
     public function configureOptions(OptionsResolver $resolver): void
     {

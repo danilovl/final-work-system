@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class WeekDaysType extends AbstractType
 {
-    final public const NAME = 'week_days_type';
+    final public const string NAME = 'week_days_type';
 
     public function configureOptions(OptionsResolver $resolver): void
     {

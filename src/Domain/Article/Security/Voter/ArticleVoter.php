@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class ArticleVoter extends Voter
 {
-    public const SUPPORTS = [
+    public const array SUPPORTS = [
         VoterSupportConstant::VIEW->value
     ];
 

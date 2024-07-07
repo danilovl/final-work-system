@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileChangePasswordFormType extends AbstractType
 {
-    final public const NAME = 'profile_change_password';
+    final public const string NAME = 'profile_change_password';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

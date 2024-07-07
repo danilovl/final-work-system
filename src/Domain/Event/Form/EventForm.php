@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventForm extends AbstractType
 {
-    final public const NAME = 'event';
+    final public const string NAME = 'event';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

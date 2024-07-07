@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints\{
 
 class ProfileMediaForm extends AbstractType
 {
-    final public const NAME = 'user_profile_image';
+    final public const string NAME = 'user_profile_image';
 
     public function __construct(private readonly ParameterServiceInterface $parameterService) {}
 

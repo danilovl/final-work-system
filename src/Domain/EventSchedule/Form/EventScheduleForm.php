@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventScheduleForm extends AbstractType
 {
-    final public const NAME = 'event_schedule';
+    final public const string NAME = 'event_schedule';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

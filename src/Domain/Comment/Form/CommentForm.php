@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CommentForm extends AbstractType
 {
-    final public const NAME = 'comment';
+    final public const string NAME = 'comment';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

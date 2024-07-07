@@ -11,7 +11,7 @@ Thesis management system based on Symfony 6.3
 Requirements
 ------------
 
-* PHP 8.2 or higher
+  * PHP 8.3 or higher
   * MySQL
   * Redis
   * RabbitMq

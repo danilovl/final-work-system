@@ -27,7 +27,7 @@ enum FileSizeConstant: string
     /**
      * @var string[]
      */
-    public const FILE_SIZES = [
+    public const array FILE_SIZES = [
         self::B->value,
         self::KB->value,
         self::MB->value,

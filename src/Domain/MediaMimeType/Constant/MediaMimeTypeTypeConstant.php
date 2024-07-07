@@ -14,12 +14,12 @@ namespace App\Domain\MediaMimeType\Constant;
 
 enum MediaMimeTypeTypeConstant
 {
-    final public const JPG = [
+    final public const array JPG = [
         'extension' => 'jpg',
         'mimeType' => 'image/jpeg',
     ];
 
-    final public const PNG = [
+    final public const array PNG = [
         'extension' => 'png',
         'mimeType' => 'image/png',
     ];

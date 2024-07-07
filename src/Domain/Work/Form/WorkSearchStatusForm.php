@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class WorkSearchStatusForm extends AbstractType
 {
-    final public const NAME = 'work_search';
+    final public const string NAME = 'work_search';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

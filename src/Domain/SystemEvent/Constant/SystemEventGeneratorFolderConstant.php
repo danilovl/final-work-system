@@ -14,8 +14,8 @@ namespace App\Domain\SystemEvent\Constant;
 
 enum SystemEventGeneratorFolderConstant
 {
-    final public const LINK = 'link';
-    final public const TEXT = 'text';
+    final public const string LINK = 'link';
+    final public const string TEXT = 'text';
 
     final public const FOLDERS = [
         self::LINK,

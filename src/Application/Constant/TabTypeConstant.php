@@ -22,7 +22,7 @@ enum TabTypeConstant: string
     /**
      * @var string[]
      */
-    public const TABS = [
+    public const array TABS = [
         self::TAB_TASK->value,
         self::TAB_VERSION->value,
         self::TAB_EVENT->value,

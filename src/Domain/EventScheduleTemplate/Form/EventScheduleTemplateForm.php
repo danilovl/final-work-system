@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventScheduleTemplateForm extends AbstractType
 {
-    final public const NAME = 'event_schedule_template';
+    final public const string NAME = 'event_schedule_template';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

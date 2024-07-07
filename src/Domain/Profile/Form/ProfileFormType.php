@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileFormType extends AbstractType
 {
-    final public const NAME = 'app_user_profile';
+    final public const string NAME = 'app_user_profile';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

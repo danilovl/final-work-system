@@ -4,7 +4,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-amqp": "*",
         "ext-ctype": "*",
         "ext-gd": "*",
@@ -167,6 +167,6 @@
         }
     },
     "platform": {
-        "php": "^8.2"
+        "php": "^8.3"
     }
 }

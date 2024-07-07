@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\{
 
 final class FirstWeekDayType extends AbstractType
 {
-    final public const NAME = 'first_week_day_type';
+    final public const string NAME = 'first_week_day_type';
 
     public function configureOptions(OptionsResolver $resolver): void
     {

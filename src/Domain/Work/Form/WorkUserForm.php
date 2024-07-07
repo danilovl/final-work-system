@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorkUserForm extends AbstractType
 {
-    final public const NAME = 'work_user';
+    final public const string NAME = 'work_user';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

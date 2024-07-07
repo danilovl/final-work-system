@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoPageService
 {
-    final public const DEFAULT_SEPARATOR = '';
+    final public const string DEFAULT_SEPARATOR = '';
 
     private ?string $title = null;
     private array $metas;

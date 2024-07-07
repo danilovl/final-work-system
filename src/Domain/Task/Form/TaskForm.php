@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class TaskForm extends AbstractType
 {
-    final public const NAME = 'task';
+    final public const string NAME = 'task';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

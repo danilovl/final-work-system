@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class VersionForm extends AbstractType
 {
-    final public const NAME = 'version';
+    final public const string NAME = 'version';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

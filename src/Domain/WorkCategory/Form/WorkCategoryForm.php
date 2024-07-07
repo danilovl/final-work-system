@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class WorkCategoryForm extends AbstractType
 {
-    final public const NAME = 'work_category';
+    final public const string NAME = 'work_category';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
