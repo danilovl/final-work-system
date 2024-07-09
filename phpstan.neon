@@ -8,7 +8,7 @@ parameters:
     doctrine:
         objectManagerLoader: bin/phpstan/doctrine-orm-bootstrap.php
 
-    level: max
+    level: 9
     paths:
         - src
         - bin

@@ -18,28 +18,28 @@ use Doctrine\ORM\Mapping as ORM;
 trait LocationTrait
 {
     #[ORM\Column(name: 'latitude', type: Types::DECIMAL, precision: 9, scale: 7, nullable: true)]
-    private ?float $latitude = null;
+    private ?string $latitude = null;
 
     #[ORM\Column(name: 'longitude', type: Types::DECIMAL, precision: 10, scale: 7, nullable: true)]
-    private ?float $longitude = null;
+    private ?string $longitude = null;
 
-    public function getLatitude(): float
+    public function getLatitude(): ?float
     {
-        return (float) $this->latitude;
+        return !empty($this->latitude) ? (float) $this->latitude : null;
     }
 
     public function setLatitude(?float $latitude): void
     {
-        $this->latitude = (float) $latitude;
+        $this->latitude = (string) $latitude;
     }
 
-    public function getLongitude(): float
+    public function getLongitude(): ?float
     {
-        return (float) $this->longitude;
+        return !empty($this->longitude) ? (float) $this->longitude : null;
     }
 
     public function setLongitude(?float $longitude): void
     {
-        $this->longitude = (float) $longitude;
+        $this->longitude = (string) $longitude;
     }
 }

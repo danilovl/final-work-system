@@ -18,7 +18,6 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -33,6 +32,7 @@ use Symfony\Component\Security\Core\Exception\{
     CustomUserMessageAuthenticationException
 };
 use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 
 class AppAuthenticatorTest extends TestCase
 {
@@ -95,7 +95,7 @@ class AppAuthenticatorTest extends TestCase
         ];
         $this->assertEquals($expectedCredentials, $credentials);
 
-        $expectedSession = $this->request->getSession()->get(Security::LAST_USERNAME);
+        $expectedSession = $this->request->getSession()->get(SecurityRequestAttributes::LAST_USERNAME);
         $this->assertEquals($expectedSession, 'username');
     }
 

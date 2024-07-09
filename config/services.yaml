@@ -61,7 +61,5 @@ services:
       $transformedFinderTask: '@fos_elastica.finder.task'
 
   App\Application\EventListener\LoggableListener:
-    calls:
-      - [ setAnnotationReader, [ '@annotation_reader' ] ]
     tags:
       - { name: doctrine.event_subscriber, connection: default }

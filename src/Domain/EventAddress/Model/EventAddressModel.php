@@ -22,8 +22,8 @@ class EventAddressModel
     public bool $skype = false;
     public ?string $street = null;
     public User $owner;
-    public float $latitude;
-    public float $longitude;
+    public ?float $latitude;
+    public ?float $longitude;
 
     public static function fromEventAddress(EventAddress $eventAddress): self
     {

@@ -62,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(name: 'id', type: Types::INTEGER)]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(name: 'username', type: Types::STRING, length: 180, nullable: true)]
     private ?string $username = null;
@@ -325,7 +325,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->id = $id;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

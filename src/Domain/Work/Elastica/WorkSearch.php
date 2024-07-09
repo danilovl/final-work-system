@@ -42,10 +42,13 @@ readonly class WorkSearch
         $iterator = $works->getIterator();
 
         $iterator->uasort(static function (Work $first, Work $second) use ($collator): int {
-            return $collator->compare(
+            /** @var int $result */
+            $result = $collator->compare(
                 $first->getAuthor()->getLastname(),
                 $second->getAuthor()->getLastname()
             );
+
+            return $result;
         });
 
         return $iterator;

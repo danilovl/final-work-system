@@ -141,11 +141,11 @@ readonly class ConversationDetailHandle
         $this->conversationMessageFacade->setIsReadToConversationMessages($pagination, $user);
         $this->seoPageService->setTitle($conversation->getTitle());
 
-        $this->messageHighlightService->addHighlight($pagination, $searchModel);
-
         /** @var object[] $items */
         $items = iterator_to_array($pagination->getItems());
         $pagination->setItems(CloneHelper::simpleCloneObjects($items));
+
+        $this->messageHighlightService->addHighlight($pagination, $searchModel);
 
         return $this->twigRenderService->renderToResponse('domain/conversation/detail.html.twig', [
             'conversation' => $conversation,

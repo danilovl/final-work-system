@@ -30,6 +30,7 @@ use Symfony\Component\Security\Core\Exception\{
     CustomUserMessageAuthenticationException
 };
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\{
     UserBadge,
     CsrfTokenBadge
@@ -68,7 +69,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         ];
 
         $request->getSession()->set(
-            Security::LAST_USERNAME,
+            SecurityRequestAttributes::LAST_USERNAME,
             $credentials['username']
         );
 
@@ -121,7 +122,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        $request->getSession()->set(SecurityRequestAttributes::AUTHENTICATION_ERROR, $exception);
         $loginUrl = $this->urlGenerator->generate('security_login');
 
         return $this->httpUtils->createRedirectResponse($request, $loginUrl);
