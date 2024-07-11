@@ -49,6 +49,9 @@
     "danilovl/render-service-twig-extension-bundle": {
         "version": "v2.0.1"
     },
+    "danilovl/translator-bundle": {
+        "version": "v0.1.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

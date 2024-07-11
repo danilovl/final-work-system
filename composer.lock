@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9854f0e4f62ee517d99bcdaf1d5ccb5",
+    "content-hash": "3dda295c90591384354266838be2d86d",
     "packages": [
         {
             "name": "api-platform/core",
@@ -802,6 +802,63 @@
                 "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v3.4.2"
             },
             "time": "2024-02-17T09:52:06+00:00"
+        },
+        {
+            "name": "danilovl/translator-bundle",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danilovl/translator-bundle.git",
+                "reference": "95fbae70e1af2e0595b78510012677d3a8cb64e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danilovl/translator-bundle/zipball/95fbae70e1af2e0595b78510012677d3a8cb64e3",
+                "reference": "95fbae70e1af2e0595b78510012677d3a8cb64e3",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^2.11",
+                "doctrine/orm": "^2.18",
+                "easycorp/easyadmin-bundle": "^4.9",
+                "php": "^8.3",
+                "symfony/console": "^7.0",
+                "symfony/event-dispatcher": "^7.0",
+                "symfony/framework-bundle": "^7.0",
+                "symfony/http-kernel": "^7.0",
+                "symfony/translation": "^7.0",
+                "symfony/yaml": "^7.0",
+                "twig/twig": "^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Danilovl\\TranslatorBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Danilov"
+                }
+            ],
+            "description": "Symfony bundle provides simple management of system translations.",
+            "keywords": [
+                "bundle",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/danilovl/translator-bundle/issues",
+                "source": "https://github.com/danilovl/translator-bundle/tree/v0.1.0"
+            },
+            "time": "2024-02-26T20:41:16+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -4246,6 +4303,53 @@
                 "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.2"
             },
             "time": "2022-10-14T12:47:21+00:00"
+        },
+        {
+            "name": "phpstan/phpdoc-parser",
+            "version": "1.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "bd84b629c8de41aa2ae82c067c955e06f1b00240"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/bd84b629c8de41aa2ae82c067c955e06f1b00240",
+                "reference": "bd84b629c8de41aa2ae82c067c955e06f1b00240",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^2.0",
+                "nikic/php-parser": "^4.15",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.5",
+                "phpstan/phpstan-phpunit": "^1.1",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "symfony/process": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.25.0"
+            },
+            "time": "2024-01-04T17:06:16+00:00"
         },
         {
             "name": "psr/cache",

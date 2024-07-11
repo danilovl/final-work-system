@@ -16,6 +16,7 @@ use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\User\Admin\UserCrudController;
 use App\Domain\User\Entity\User;
 use App\Domain\UserGroup\Entity\Group;
+use Danilovl\TranslatorBundle\Entity\Translator;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{
     Dashboard,
     MenuItem
@@ -48,5 +49,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('app.admin.menu.item.user', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('app.admin.menu.item.group', 'fas fa-users', Group::class);
         yield MenuItem::linkToCrud('app.admin.menu.item.email_notification_queue', 'fas fa-envelope-open', EmailNotification::class);
+        yield MenuItem::linkToCrud('Translator', 'fas fa-book', Translator::class);
     }
 }

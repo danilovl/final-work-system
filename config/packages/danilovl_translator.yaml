@@ -1,0 +1,5 @@
+danilovl_translator:
+  enabled: true
+  enabledAutoAdminRefreshCache: true
+  locale: [cs, en, ru]
+  domain: [messages, email_notification, flashes]

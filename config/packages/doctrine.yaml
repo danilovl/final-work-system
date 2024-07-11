@@ -5,7 +5,9 @@ doctrine:
     default_table_options:
       charset: utf8mb4
       collate:  utf8mb4_unicode_ci
-    server_version: mariadb-10.4.11
+    server_version: '8.0.34'
+    schema_filter: "~^(?!doctrine_migration$)~"
+
   orm:
     auto_generate_proxy_classes: true
     entity_managers:
@@ -176,6 +178,12 @@ doctrine:
             type: attribute
             dir: '%kernel.project_dir%/src/Domain/WorkType/Entity'
             prefix: App\Domain\WorkType\Entity
+
+          Danilovl\TranslatorBundle:
+            is_bundle: false
+            type: attribute
+            dir: "%kernel.project_dir%/vendor/danilovl/translator-bundle/src/Entity/"
+            prefix: 'Danilovl\TranslatorBundle\Entity'
 
           loggable:
             type: attribute

@@ -18,6 +18,7 @@ return [
     Danilovl\PermissionMiddlewareBundle\PermissionMiddlewareBundle::class => ['all' => true],
     Danilovl\HashidsBundle\HashidsBundle::class => ['all' => true],
     Danilovl\ObjectToArrayTransformBundle\ObjectToArrayTransformBundle::class => ['all' => true],
+    Danilovl\TranslatorBundle\TranslatorBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
     FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
@@ -26,5 +27,5 @@ return [
     Danilovl\AsyncBundle\AsyncBundle::class => ['all' => true],
     Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
     Aws\Symfony\AwsBundle::class => ['all' => true],
-    App\AppBundle::class => ['all' => true]
+    App\AppBundle::class => ['all' => true],
 ];
