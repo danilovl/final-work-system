@@ -28,6 +28,8 @@ use Twig\Extension\{
 
 class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
 {
+    private array $cache = [];
+
     public function __construct(
         private readonly UserService $userService,
         private readonly RouterInterface $router,
@@ -48,6 +50,13 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
 
     public function profileImage(Environment $env, ?User $user): string
     {
+        $cacheKey = $user?->getId() ?? 'null';
+
+        $cacheItem = $this->cache[$cacheKey] ?? null;
+        if ($cacheItem !== null) {
+            return $cacheItem;
+        }
+
         $defaultImagePath = $this->parameterService->getString('default_user_image');
         $imageProfile = $user?->getProfileImage();
 
@@ -58,12 +67,19 @@ class UserRuntime extends AbstractExtension implements RuntimeExtensionInterface
             );
 
             if ($isFileExist) {
-                return $this->router->generate('profile_image', [
+                $url = $this->router->generate('profile_image', [
                     'id' => $this->hashidsService->encode($user->getId())
                 ]);
+
+                $this->cache[$user->getId()] = $url;
+
+                return $url;
             }
         }
 
-        return $env->getExtension(AssetExtension::class)->getAssetUrl($defaultImagePath);
+        $url = $env->getExtension(AssetExtension::class)->getAssetUrl($defaultImagePath);
+        $this->cache[$cacheKey] = $url;
+
+        return $url;
     }
 }
