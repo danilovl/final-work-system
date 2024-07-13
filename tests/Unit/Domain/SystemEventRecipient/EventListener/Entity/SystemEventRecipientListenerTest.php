@@ -23,8 +23,11 @@ class SystemEventRecipientListenerTest extends TestCase
 {
     public function testClearCache(): void
     {
+        $user = new User;
+        $user->setId(1);
+
         $recipient = new SystemEventRecipient;
-        $recipient->setRecipient(new User);
+        $recipient->setRecipient($user);
 
         $cacheEventDispatcherService = $this->createMock(CacheEventDispatcherService::class);
         $cacheEventDispatcherService

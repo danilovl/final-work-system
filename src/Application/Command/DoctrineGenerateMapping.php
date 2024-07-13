@@ -13,16 +13,16 @@
 namespace App\Application\Command;
 
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
+#[AsCommand(name: 'app:doctrine-generate-mapping', description: 'Generate doctrine entity mapping for doctrine config.')]
 class DoctrineGenerateMapping extends Command
 {
-    final public const string COMMAND_NAME = 'app:doctrine-generate-mapping';
-
     private string $pathToModel;
     private string $mappingFile;
 
@@ -32,12 +32,6 @@ class DoctrineGenerateMapping extends Command
 
         $this->pathToModel = $parameterService->getString('model.path');
         $this->mappingFile = __DIR__ . '/mapping.yaml';
-    }
-
-    protected function configure(): void
-    {
-        $this->setName(self::COMMAND_NAME)
-            ->setDescription('Generate doctrine entity mapping for doctrine config.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

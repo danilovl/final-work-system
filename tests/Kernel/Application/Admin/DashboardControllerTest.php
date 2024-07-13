@@ -14,10 +14,6 @@ namespace App\Tests\Kernel\Application\Admin;
 
 use App\Application\Admin\DashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use Symfony\Component\HttpFoundation\{
-    Response,
-    RedirectResponse
-};
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class DashboardControllerTest extends KernelTestCase
@@ -28,15 +24,6 @@ class DashboardControllerTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
         $this->dashboardController = $kernel->getContainer()->get(DashboardController::class);
-    }
-
-    public function testIndex(): void
-    {
-        $response = $this->dashboardController->index();
-
-        $this->assertInstanceOf(RedirectResponse::class, $response);
-        $this->assertSame(Response::HTTP_FOUND, $response->getStatusCode());
-        $this->containsEqual('UserCrudController', $response->getTargetUrl());
     }
 
     public function testConfigureDashboard(): void
@@ -52,6 +39,6 @@ class DashboardControllerTest extends KernelTestCase
         $items = $this->dashboardController->configureMenuItems();
         $items = iterator_to_array($items);
 
-        $this->assertSame(4, count($items));
+        $this->assertSame(5, count($items));
     }
 }

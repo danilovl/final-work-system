@@ -14,6 +14,7 @@ namespace App\Application\Command;
 
 use App\Application\Exception\InvalidArgumentException;
 use App\Application\Service\EntityManagerService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputArgument,
@@ -21,6 +22,7 @@ use Symfony\Component\Console\Input\{
 };
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'app:import-sql', description: 'Import SQL file(s) directly to Database.')]
 class ImportSqlCommand extends Command
 {
     final public const string COMMAND_NAME = 'app:import-sql';
@@ -32,9 +34,7 @@ class ImportSqlCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(self::COMMAND_NAME)
-            ->setDescription('Import SQL file(s) directly to Database.')
-            ->addArgument('file', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'File path(s) of SQL to be executed.');
+        $this->addArgument('file', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'File path(s) of SQL to be executed.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

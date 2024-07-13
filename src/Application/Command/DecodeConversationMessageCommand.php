@@ -44,7 +44,7 @@ class DecodeConversationMessageCommand extends Command
                 $id = $message['id'];
                 $content = html_entity_decode($message['content']);
 
-                $updateQuery = "UPDATE conversation_message SET content = ? WHERE id = ?";
+                $updateQuery = 'UPDATE conversation_message SET content = ? WHERE id = ?';
                 $this->entityManagerService
                     ->getConnection()
                     ->executeQuery($updateQuery, [$content, $id]);

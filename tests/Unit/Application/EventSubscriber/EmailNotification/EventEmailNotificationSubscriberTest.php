@@ -40,6 +40,7 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
         );
 
         $user = new User;
+        $user->setId(1);
         $user->setFirstname('first');
         $user->setLastname('last');
         $user->setEmail('test@example.com');
