@@ -130,9 +130,7 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
-        "test-unit": [
-            "bash bin/phpunit.sh tests/Unit"
-        ],
+        "test-unit": "bash bin/phpunit.sh tests/Unit",
         "test-kernel": [
             "@php bin/console cache:warmup --env=dev",
             "bash bin/phpunit.sh tests/Kernel"
@@ -145,34 +143,18 @@
             "@php bin/console cache:warmup --env=dev",
             "bash bin/web-test.sh"
         ],
-        "phpstan": [
-            "phpstan analyse -c phpstan.neon src --no-progress"
-        ],
-        "phpstan-generate-baseline": [
-            "vendor/bin/phpstan analyse --configuration phpstan.neon src/ tests/ --generate-baseline"
-        ],
-        "phpstan-clear-result-cache": [
-            "phpstan clear-result-cache"
-        ],
-        "psalm": [
-            "./vendor/bin/psalm"
-        ],
-        "psalm-update-baseline": [
-            "./vendor/bin/psalm --set-baseline=psalm-baseline.xml"
-        ],
-        "pre-push": [
-            "@phpunit"
-        ],
+        "phpstan": "phpstan analyse -c phpstan.neon src --no-progress",
+        "phpstan-generate-baseline": "vendor/bin/phpstan analyse --configuration phpstan.neon src/ tests/ --generate-baseline",
+        "phpstan-clear-result-cache": "phpstan clear-result-cache",
+        "psalm": "./vendor/bin/psalm",
+        "psalm-update-baseline": "./vendor/bin/psalm --set-baseline=psalm-baseline.xml",
+        "pre-push": "@phpunit",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
+        "post-install-cmd": "@auto-scripts",
+        "post-update-cmd": "@auto-scripts"
     },
     "conflict": {
         "symfony/symfony": "*"

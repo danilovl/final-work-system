@@ -12,35 +12,22 @@
 
 namespace App\Application\Middleware\EventCalendar\Ajax;
 
-use App\Application\Constant\DateFormatConstant;
-use App\Application\Exception\AjaxRuntimeException;
-use App\Application\Helper\DateHelper;
-use App\Application\Interfaces\Middleware\RequestMiddlewareInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
-class GetEventMiddleware implements RequestMiddlewareInterface
+class GetEventMiddleware extends EditMiddleware
 {
-    public static function handle(Request $request): bool
+    public function __invoke(ControllerEvent $event): bool
     {
+        $request = $event->getRequest();
         /** @var string|null $type */
         $type = $request->attributes->get('type');
-        $startDate = $request->request->getString('start');
-        $endDate = $request->request->getString('end');
 
         if (empty($type)) {
-            throw new AjaxRuntimeException('Empty type');
+            $this->setResponse($event);
+
+            return true;
         }
 
-        if (DateHelper::validateDate(DateFormatConstant::DATE_TIME->value, $startDate) === false ||
-            DateHelper::validateDate(DateFormatConstant::DATE_TIME->value, $endDate) === false
-        ) {
-            throw new AjaxRuntimeException('Bad format date');
-        }
-
-        if ($startDate > $endDate) {
-            throw new AjaxRuntimeException('StartDate must be less then endDate');
-        }
-
-        return true;
+        return parent::__invoke($event);
     }
 }

@@ -3,50 +3,74 @@
 namespace App\Tests\Unit\Application\Middleware\Event\Ajax;
 
 use App\Application\Constant\DateFormatConstant;
-use App\Application\Exception\AjaxRuntimeException;
 use App\Application\Middleware\Event\Ajax\GetEventMiddleware;
+use App\Application\Service\TranslatorService;
 use DateTime;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class GetEventMiddlewareTest extends TestCase
 {
+    private readonly GetEventMiddleware $getEventMiddleware;
+
+    protected function setUp(): void
+    {
+        $translatorService = $this->createMock(TranslatorService::class);
+        $translatorService->expects($this->any())
+            ->method('trans')
+            ->willReturn('content');
+
+        $this->getEventMiddleware = new GetEventMiddleware($translatorService);
+    }
+
     public function testAttributeHandleSuccess(): void
     {
         $request = new Request;
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
 
-        $this->assertEquals(
-            true,
-            GetEventMiddleware::handle($request)
-        );
+        $controllerEvent = $this->getMockControllerEvent($request);
+        $result = $this->getEventMiddleware->__invoke($controllerEvent);
+
+        $this->assertTrue($result);
     }
 
     public function testHandleFailsDateForm(): void
     {
-        $this->expectException(AjaxRuntimeException::class);
-        $this->expectExceptionMessage('Bad format date');
-
         $request = new Request;
         $request->request->set('start', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATABASE->value));
         $request->request->set('end', (new DateTime)->format(DateFormatConstant::DATABASE->value));
 
-        GetEventMiddleware::handle($request);
+        $controllerEvent = $this->getMockControllerEvent($request);
+        $this->getEventMiddleware->__invoke($controllerEvent);
+
+        $this->assertInstanceOf(JsonResponse::class, $controllerEvent->getController()());
     }
 
     public function testAttributeHandleFailsDateStart(): void
     {
-        $this->expectException(AjaxRuntimeException::class);
-        $this->expectExceptionMessage('StartDate must be less then endDate');
-
         $request = new Request;
         $request->request->set('start', (new DateTime)->format(DateFormatConstant::DATE_TIME->value));
         $request->request->set('end', (new DateTime('now -1 minute'))->format(DateFormatConstant::DATE_TIME->value));
 
-        $this->assertEquals(
-            true,
-            GetEventMiddleware::handle($request)
+        $controllerEvent = $this->getMockControllerEvent($request);
+        $this->getEventMiddleware->__invoke($controllerEvent);
+
+        $this->assertInstanceOf(JsonResponse::class, $controllerEvent->getController()());
+    }
+
+    private function getMockControllerEvent(Request $request): ControllerEvent
+    {
+        return new ControllerEvent(
+            $this->createMock(HttpKernelInterface::class),
+            static fn(): bool => true,
+            $request,
+            HttpKernelInterface::MAIN_REQUEST
         );
     }
 }

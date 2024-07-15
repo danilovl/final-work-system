@@ -56,7 +56,7 @@ readonly class EventEditHandle
         $origin = clone $event;
         $user = $this->userService->getUser();
         $eventParticipantArray = $this->eventParticipantFacade
-            ->getEventParticipantsByUserEvent($user, $event);
+            ->getEventParticipantsByUserEvent($user, $origin);
 
         $eventModel = EventModel::fromEvent($event);
         $form = $this->formFactory

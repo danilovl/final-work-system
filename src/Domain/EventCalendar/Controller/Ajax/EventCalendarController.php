@@ -12,11 +12,12 @@
 
 namespace App\Domain\EventCalendar\Controller\Ajax;
 
-use App\Application\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Application\Middleware\EventCalendar\Ajax\EditMiddleware;
+use App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventCalendar\Request\GetEventRequest;
+use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
 use App\Domain\EventCalendar\Http\Ajax\{
     EventCalendarEditHandle,
     EventCalendarCreateHandle,
@@ -38,6 +39,9 @@ class EventCalendarController extends AbstractController
         private readonly EventCalendarEditHandle $eventCalendarEditHandle
     ) {}
 
+    #[PermissionMiddleware(service: [
+        'name' => GetEventMiddleware::class
+    ])]
     public function getEvent(GetEventRequest $request): JsonResponse
     {
         return $this->eventCalendarGetEventHandle->handle($request);
@@ -55,9 +59,9 @@ class EventCalendarController extends AbstractController
         return $this->eventCalendarEventReservationHandle->handle($request, $event);
     }
 
-    #[AjaxRequestMiddlewareAttribute(
-        class: EditMiddleware::class
-    )]
+    #[PermissionMiddleware(service: [
+        'name' => EditMiddleware::class
+    ])]
     public function edit(Request $request, Event $event): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);

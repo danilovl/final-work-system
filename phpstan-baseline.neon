@@ -36,26 +36,6 @@ parameters:
 			path: src/Domain/ApiUser/Facade/ApiUserFacade.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Article/Security/Voter/ArticleVoter.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Comment\\\\Facade\\\\CommentFacade\\:\\:getCommentByOwnerEvent\\(\\) should return App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Comment/Facade/CommentFacade.php
@@ -81,16 +61,6 @@ parameters:
 			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Security/Voter/ConversationVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Conversation\\\\Service\\\\ConversationStatusService\\:\\:getConversationMessageStatus\\(\\) should return App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Service/ConversationStatusService.php
@@ -101,39 +71,9 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/ConversationMessage/Security/Voter/ConversationMessageVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\ConversationType\\\\Facade\\\\ConversationTypeFacade\\:\\:getAll\\(\\) should return array\\<App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\> but returns array\\<int, object\\>\\.$#"
 			count: 1
 			path: src/Domain/ConversationType/Facade/ConversationTypeFacade.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Document/Security/Voter/DocumentVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Document/Security/Voter/DocumentVoter.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoter.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:getOneByUuid\\(\\) should return App\\\\Domain\\\\EmailNotification\\\\Entity\\\\EmailNotification\\|null but returns mixed\\.$#"
@@ -161,39 +101,9 @@ parameters:
 			path: src/Domain/Event/Facade/EventFacade.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Event/Security/Voter/EventVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Event/Security/Voter/EventVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) should return App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/EventAddress/Security/Voter/EventAddressVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/EventAddress/Security/Voter/EventAddressVoter.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/EventSchedule/Security/Voter/EventScheduleVoter.php
 
 		-
 			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
@@ -276,16 +186,6 @@ parameters:
 			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoter.php
-
-		-
 			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
 			count: 1
 			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
@@ -316,16 +216,6 @@ parameters:
 			path: src/Domain/Task/Form/Factory/TaskFormFactory.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Task/Security/Voter/TaskVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Task/Security/Voter/TaskVoter.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByEmail\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/User/Facade/UserFacade.php
@@ -344,16 +234,6 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\User\\\\Service\\\\UserWorkService\\:\\:getWorkBy\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
 			count: 1
 			path: src/Domain/User/Service/UserWorkService.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Version/Security/Voter/VersionVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Version/Security/Voter/VersionVoter.php
 
 		-
 			message: "#^While loop condition is always true\\.$#"
@@ -396,16 +276,6 @@ parameters:
 			path: src/Domain/Work/Facade/WorkFacade.php
 
 		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Work/Security/Voter/WorkVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/Work/Security/Voter/WorkVoter.php
-
-		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWork\\(\\)\\.$#"
 			count: 3
 			path: src/Domain/Work/Service/WorkDetailTabService.php
@@ -424,16 +294,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$user of static method App\\\\Domain\\\\Conversation\\\\Helper\\\\ConversationHelper\\:\\:getConversationOpposite\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
-
-		-
-			message: "#^Asserted type mixed for \\$subject with type mixed does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php
-
-		-
-			message: "#^Asserted type string for \\$attribute with type string does not narrow down the type\\.$#"
-			count: 1
-			path: src/Domain/WorkCategory/Security/Voter/WorkCategoryVoter.php
 
 		-
 			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
@@ -462,11 +322,6 @@ parameters:
 
 		-
 			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Admin\\\\DashboardControllerTest has an uninitialized readonly property \\$dashboardController\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Admin/DashboardControllerTest.php
-
-		-
-			message: "#^Method PHPUnit\\\\Framework\\\\Assert\\:\\:containsEqual\\(\\) invoked with 2 parameters, 1 required\\.$#"
 			count: 1
 			path: tests/Kernel/Application/Admin/DashboardControllerTest.php
 
@@ -649,31 +504,6 @@ parameters:
 			message: "#^Property App\\\\Tests\\\\ReplacerFinal\\:\\:\\$classes \\(array\\) does not accept mixed\\.$#"
 			count: 1
 			path: tests/ReplacerFinal.php
-
-		-
-			message: "#^Cannot access property \\$class on App\\\\Application\\\\Attribute\\\\AjaxRequestMiddlewareAttribute\\|null\\.$#"
-			count: 5
-			path: tests/Unit/Application/Attribute/AjaxRequestMiddlewareAttributeTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Unit\\\\Application\\\\Attribute\\\\AjaxRequestMiddlewareAttributeTest\\:\\:getAttribute\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: tests/Unit/Application/Attribute/AjaxRequestMiddlewareAttributeTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, array\\{string, 'handle'\\} given\\.$#"
-			count: 4
-			path: tests/Unit/Application/Attribute/AjaxRequestMiddlewareAttributeTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$object of function get_class expects object, App\\\\Application\\\\Attribute\\\\AjaxRequestMiddlewareAttribute\\|null given\\.$#"
-			count: 1
-			path: tests/Unit/Application/Attribute/AjaxRequestMiddlewareAttributeTest.php
-
-		-
-			message: "#^Using nullsafe method call on non\\-nullable type ReflectionAttribute\\<App\\\\Application\\\\Attribute\\\\AjaxRequestMiddlewareAttribute\\>\\. Use \\-\\> instead\\.$#"
-			count: 1
-			path: tests/Unit/Application/Attribute/AjaxRequestMiddlewareAttributeTest.php
 
 		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Cache\\\\HomepageCacheTest has an uninitialized readonly property \\$homepageCache\\. Assign it in the constructor\\.$#"
@@ -1284,6 +1114,36 @@ parameters:
 			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\Loggable\\\\LoggableHandlerTest\\:\\:\\$loggableHandler is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\Event\\\\Ajax\\\\GetEventMiddlewareTest has an uninitialized readonly property \\$getEventMiddleware\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Middleware/Event/Ajax/GetEventMiddlewareTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\Event\\\\Ajax\\\\GetEventMiddlewareTest\\:\\:\\$getEventMiddleware is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Middleware/Event/Ajax/GetEventMiddlewareTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\EditMiddlewareTest has an uninitialized readonly property \\$editMiddleware\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/EditMiddlewareTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\EditMiddlewareTest\\:\\:\\$editMiddleware is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/EditMiddlewareTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\GetEventMiddlewareTest has an uninitialized readonly property \\$getEventMiddleware\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/GetEventMiddlewareTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\GetEventMiddlewareTest\\:\\:\\$getEventMiddleware is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/GetEventMiddlewareTest.php
 
 		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Request\\\\AbstractAjaxJsonRequestTest has an uninitialized readonly property \\$requestStackFilled\\. Assign it in the constructor\\.$#"

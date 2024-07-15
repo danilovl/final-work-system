@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.22.1@e9dad66e11274315dac27e08349c628c7d6a1a43">
+<files psalm-version="5.22.2@d768d914152dbbf3486c36398802f74e80cfde48">
   <file src="src/AppBundle.php">
     <UnusedClass>
       <code><![CDATA[AppBundle]]></code>
@@ -183,22 +183,6 @@
     <PropertyNotSetInConstructor>
       <code><![CDATA[LoggableListener]]></code>
     </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Application/EventListener/Middleware/AjaxRequestListener.php">
-    <InvalidStringClass>
-      <code><![CDATA[$ajaxRequestMiddlewareAttribute->class::{'handle'}($request)]]></code>
-    </InvalidStringClass>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$controller]]></code>
-      <code><![CDATA[$controller]]></code>
-    </PossiblyInvalidArgument>
-    <UnnecessaryVarAnnotation>
-      <code><![CDATA[AjaxRequestMiddlewareAttribute]]></code>
-      <code><![CDATA[AjaxRequestMiddlewareAttribute]]></code>
-    </UnnecessaryVarAnnotation>
-    <UnusedClass>
-      <code><![CDATA[AjaxRequestListener]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Application/EventListener/RedirectToPreferredLocaleListener.php">
     <MixedArgumentTypeCoercion>
@@ -520,9 +504,9 @@
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Application/Interfaces/Middleware/RequestMiddlewareInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[handle]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[RequestMiddlewareInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/Interfaces/Transformer/TransformerInterface.php">
     <PossiblyUnusedMethod>
@@ -588,13 +572,15 @@
       <code><![CDATA[LoggableHandler]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Application/Middleware/Event/Ajax/GetEventMiddleware.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Application/Middleware/EventCalendar/Ajax/GetEventMiddleware.php">
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($type)]]></code>
     </RiskyTruthyFalsyComparison>
-    <UnusedClass>
-      <code><![CDATA[GetEventMiddleware]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Application/Migrations/2020/06/Version20200627193807.php">
     <UnusedClass>
@@ -1715,6 +1701,9 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Conversation/Service/ConversationService.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Criteria::DESC]]></code>
+    </DeprecatedConstant>
     <MixedArgument>
       <code><![CDATA[$workConversation]]></code>
     </MixedArgument>
@@ -2195,6 +2184,9 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EmailNotification/Admin/EmailNotificationCrudController.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Criteria::DESC]]></code>
+    </DeprecatedConstant>
     <UnusedClass>
       <code><![CDATA[EmailNotificationCrudController]]></code>
     </UnusedClass>
@@ -3866,6 +3858,10 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Task/Repository/TaskQueryBuilder.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Criteria::DESC]]></code>
+      <code><![CDATA[Criteria::DESC]]></code>
+    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[byActive]]></code>
       <code><![CDATA[byComplete]]></code>
@@ -3951,6 +3947,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/User/Admin/UserCrudController.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Criteria::DESC]]></code>
+    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[switchUserAction]]></code>
     </PossiblyUnusedMethod>
@@ -3998,6 +3997,9 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[fn(User $user): array => $this->userToArray($user)]]></code>
     </ArgumentTypeCoercion>
+    <DeprecatedConstant>
+      <code><![CDATA[Criteria::DESC]]></code>
+    </DeprecatedConstant>
     <InvalidArgument>
       <code><![CDATA[$maxResult]]></code>
     </InvalidArgument>
@@ -4041,29 +4043,32 @@
       <code><![CDATA[$eventParticipant->getEvent()]]></code>
     </InvalidArgument>
     <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$authorWorks]]></code>
+      <code><![CDATA[$comments]]></code>
+      <code><![CDATA[$eventAddressOwner]]></code>
+      <code><![CDATA[$eventsOwner]]></code>
       <code><![CDATA[$groups]]></code>
+      <code><![CDATA[$supervisorWorks]]></code>
     </InvalidPropertyAssignmentValue>
-    <InvalidReturnStatement>
-      <code><![CDATA[$this->authorWorks]]></code>
-      <code><![CDATA[$this->comments]]></code>
-      <code><![CDATA[$this->consultantWorks]]></code>
-      <code><![CDATA[$this->eventAddressOwner]]></code>
-      <code><![CDATA[$this->eventsOwner]]></code>
-      <code><![CDATA[$this->eventsParticipant]]></code>
-      <code><![CDATA[$this->opponentWorks]]></code>
-      <code><![CDATA[$this->supervisorWorks]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code><![CDATA[Collection<Comment>]]></code>
-      <code><![CDATA[Collection<Event>]]></code>
-      <code><![CDATA[Collection<EventAddress>]]></code>
-      <code><![CDATA[Collection<EventParticipant>]]></code>
-      <code><![CDATA[Collection<Work>]]></code>
-      <code><![CDATA[Collection<Work>]]></code>
-      <code><![CDATA[Collection<Work>]]></code>
-      <code><![CDATA[Collection<Work>]]></code>
-    </InvalidReturnType>
     <InvalidTemplateParam>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection<Comment>]]></code>
@@ -4078,27 +4083,25 @@
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
     </InvalidTemplateParam>
-    <MismatchingDocblockPropertyType>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection]]></code>
-    </MismatchingDocblockPropertyType>
     <MissingTemplateParam>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection<Comment>]]></code>
@@ -4434,8 +4437,10 @@
   <file src="src/Domain/User/Twig/Runtime/UserRuntime.php">
     <MixedInferredReturnType>
       <code><![CDATA[bool]]></code>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
+      <code><![CDATA[$cacheItem]]></code>
       <code><![CDATA[UserRoleHelper::$method($user)]]></code>
     </MixedReturnStatement>
     <PossiblyNullReference>
@@ -5270,6 +5275,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/WorkStatus/Form/DataGrid/WorkStatusDataGrid.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Criteria::ASC]]></code>
+    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>

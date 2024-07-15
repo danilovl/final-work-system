@@ -12,10 +12,10 @@
 
 namespace App\Domain\Event\Controller\Ajax;
 
-use App\Application\Attribute\AjaxRequestMiddlewareAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Application\Middleware\Event\Ajax\GetEventMiddleware;
 use App\Domain\Event\Entity\Event;
+use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
 use App\Domain\Event\Http\Ajax\{
     EventDeleteHandle,
     EventEditHandle,
@@ -35,9 +35,9 @@ class EventController extends AbstractController
         private readonly EventDeleteHandle $eventDeleteHandle
     ) {}
 
-    #[AjaxRequestMiddlewareAttribute(
-        class: GetEventMiddleware::class
-    )]
+    #[PermissionMiddleware(service: [
+        'name' => GetEventMiddleware::class
+    ])]
     public function getEvent(Request $request, Event $event): JsonResponse
     {
         $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);

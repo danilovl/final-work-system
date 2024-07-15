@@ -19,14 +19,12 @@ use App\Application\Messenger\EmailNotification\{
     EmailNotificationHandler,
     EmailNotificationMessage
 };
-use App\Application\Service\MailerService;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Application\Service\EntityManagerService;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Mailer\Exception\TransportException;
 
 class EmailNotificationHandlerTest extends TestCase
 {

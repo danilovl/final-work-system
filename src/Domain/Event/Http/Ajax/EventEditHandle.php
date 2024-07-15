@@ -53,7 +53,7 @@ readonly class EventEditHandle
         $form = $this->formFactory
             ->create(EventForm::class, $eventModel, [
                 'addresses' => $user->getEventAddressOwner(),
-                'participants' => $this->eventParticipantFacade->getEventParticipantsByUserEvent($user, $event)
+                'participants' => $this->eventParticipantFacade->getEventParticipantsByUserEvent($user, $origin)
             ]);
 
         $form->get('participant')->isRequired();
