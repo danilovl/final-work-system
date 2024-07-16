@@ -1,0 +1,6 @@
+danilovl_doctrine_entity_dto:
+  isEnableEntityDTO: true
+  isEnableEntityRuntimeNameDTO: true
+
+  isEnableScalarDTO: true
+  isAsScalarDTO: true

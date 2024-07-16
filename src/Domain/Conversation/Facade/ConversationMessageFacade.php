@@ -135,17 +135,14 @@ readonly class ConversationMessageFacade
 
     public function getTotalUnreadMessagesByUser(User $user): int
     {
-        /** @var ConversationMessageStatusType $ConversationMessageStatusType */
-        $ConversationMessageStatusType = $this->entityManagerService->getReference(
+        /** @var ConversationMessageStatusType $conversationMessageStatusType */
+        $conversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
             ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         return (int) $this->conversationMessageRepository
-            ->countMessagesByUserStatus(
-                $user,
-                $ConversationMessageStatusType
-            )
+            ->countMessagesByUserStatus($user, $conversationMessageStatusType)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -159,10 +156,16 @@ readonly class ConversationMessageFacade
     {
         /** @var ConversationMessage $conversationMessage */
         foreach ($conversations as $conversationMessage) {
-            $conversationMessage->setRead(
-                $this->conversationStatusService
-                    ->isConversationMessageRead($conversationMessage, $user)
+            /** @var ConversationMessage $conversationMessage */
+            $conversationMessage = $this->entityManagerService->getReference(
+                ConversationMessage::class,
+                $conversationMessage->getId()
             );
+
+            $isConversationMessageRead = $this->conversationStatusService
+                ->isConversationMessageRead($conversationMessage, $user);
+
+            $conversationMessage->setRead($isConversationMessageRead);
         }
     }
 
@@ -178,17 +181,14 @@ readonly class ConversationMessageFacade
 
     public function getTotalUnreadMessagesAfterDateByUser(User $user, DateTime $date): int
     {
-        /** @var ConversationMessageStatusType $ConversationMessageStatusType */
-        $ConversationMessageStatusType = $this->entityManagerService->getReference(
+        /** @var ConversationMessageStatusType $conversationMessageStatusType */
+        $conversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
             ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         return (int) $this->conversationMessageRepository
-            ->countMessagesByUserStatus(
-                $user,
-                $ConversationMessageStatusType
-            )
+            ->countMessagesByUserStatus($user, $conversationMessageStatusType)
             ->andWhere('conversation_message.createdAt >= :afterDate')
             ->setParameter('afterDate', $date)
             ->getQuery()

@@ -502,6 +502,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->lastRequestedAt = $lastRequestedAt;
     }
 
+    public function getPasswordRequestedAt(): ?DateTime
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    public function setPasswordRequestedAt(?DateTime $passwordRequestedAt): void
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+    }
+
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): void
+    {
+        $this->confirmationToken = $confirmationToken;
+    }
+
     public function getUsernameCanonical(): ?string
     {
         return $this->usernameCanonical;

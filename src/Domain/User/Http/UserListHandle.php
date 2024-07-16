@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Http;
 
-use App\Application\Helper\CloneHelper;
+use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Application\Service\{
     SeoPageService,
@@ -98,6 +98,8 @@ readonly class UserListHandle
                 break;
         }
 
+
+        $usersQuery->setHydrationMode(User::class);
         $pagination = $this->paginatorService->createPaginationRequest($request, $usersQuery);
         $works = new ArrayCollection;
         $userStatusWorkCounts = new ArrayCollection;
@@ -131,10 +133,6 @@ readonly class UserListHandle
                 }
             }
         }
-
-        /** @var object[] $items */
-        $items = iterator_to_array($pagination->getItems());
-        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         $this->seoPageService->addTitle($title);
 

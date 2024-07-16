@@ -15,8 +15,8 @@ namespace App\Domain\Conversation\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
-use App\Application\Helper\CloneHelper;
 use App\Application\Model\SearchModel;
+use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Application\Service\{
     PaginatorService,
     RequestService,
@@ -135,15 +135,13 @@ readonly class ConversationDetailHandle
             $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
         }
 
+        $conversationMessagesQuery->setHydrationMode(ConversationMessage::class);
+
         $pagination = $this->paginatorService
             ->createPaginationRequest($request, $conversationMessagesQuery);
 
         $this->conversationMessageFacade->setIsReadToConversationMessages($pagination, $user);
         $this->seoPageService->setTitle($conversation->getTitle());
-
-        /** @var object[] $items */
-        $items = iterator_to_array($pagination->getItems());
-        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         $this->messageHighlightService->addHighlight($pagination, $searchModel);
 

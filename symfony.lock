@@ -34,6 +34,9 @@
     "danilovl/async-bundle": {
         "version": "v0.1.0"
     },
+    "danilovl/doctrine-entity-dto-bundle": {
+        "version": "v0.1.5"
+    },
     "danilovl/hashids-bundle": {
         "version": "v1.0.0"
     },

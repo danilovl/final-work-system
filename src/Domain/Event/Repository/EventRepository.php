@@ -45,9 +45,9 @@ class EventRepository extends ServiceEntityRepository
     public function allByOwner(EventRepositoryData $eventData): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
-            ->addSelect('participant')
-            ->addSelect('work')
+            ->addSelect('participant, work, address, user')
             ->leftJoin('participant.work', 'work')
+            ->leftJoin('participant.user', 'user')
             ->where('event.owner = :owner')
             ->orderBy('event.createdAt', Criteria::DESC)
             ->setParameter('owner', $eventData->user);

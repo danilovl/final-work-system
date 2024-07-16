@@ -76,10 +76,10 @@ readonly class ConversationFacade
     ): void {
         /** @var Conversation $conversation */
         foreach ($conversations as $conversation) {
-            $conversation->setRead(
-                $this->conversationStatusService
-                    ->isConversationRead($conversation, $user)
-            );
+            $isConversationRead = $this->conversationStatusService
+                ->isConversationRead($conversation, $user);
+
+            $conversation->setRead($isConversationRead);
         }
     }
 

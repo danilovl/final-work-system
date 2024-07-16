@@ -13,8 +13,8 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Form\SimpleSearchForm;
-use App\Application\Helper\CloneHelper;
 use App\Application\Model\SearchModel;
+use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\ConversationType\Facade\ConversationTypeFacade;
@@ -75,6 +75,8 @@ readonly class ConversationListHandle
             $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
         }
 
+        $conversationsQuery->setHydrationMode(Conversation::class);
+
         $pagination = $this->paginatorService->createPaginationRequest(
             $request,
             $conversationsQuery,
@@ -91,10 +93,6 @@ readonly class ConversationListHandle
             ->isUnreadMessagesByRecipient($user);
 
         $conversationTypes = $this->conversationTypeFacade->getAll();
-
-        /** @var object[] $items */
-        $items = iterator_to_array($pagination->getItems());
-        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         return $this->twigRenderService->renderToResponse('domain/conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,

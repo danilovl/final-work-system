@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6728adebfb53d765962275c13e8e8522",
+    "content-hash": "84762cc9def46bbb764f8661729e42c4",
     "packages": [
         {
             "name": "api-platform/core",
@@ -548,6 +548,58 @@
                 "source": "https://github.com/danilovl/async-bundle/tree/v0.4.1"
             },
             "time": "2024-01-21T09:38:45+00:00"
+        },
+        {
+            "name": "danilovl/doctrine-entity-dto-bundle",
+            "version": "v0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danilovl/doctrine-entity-dto-bundle.git",
+                "reference": "8bc9e742c5300c95664f2af1e6b7807d988a68fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danilovl/doctrine-entity-dto-bundle/zipball/8bc9e742c5300c95664f2af1e6b7807d988a68fc",
+                "reference": "8bc9e742c5300c95664f2af1e6b7807d988a68fc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^2",
+                "doctrine/orm": "^2.17",
+                "php": "^8.3",
+                "symfony/finder": "^7.0",
+                "symfony/framework-bundle": "^7.0",
+                "symfony/property-access": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Danilovl\\DoctrineEntityDtoBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Danilov"
+                }
+            ],
+            "description": "The Symfony bundle provides a simple mechanism to convert Doctrine entities to DTO objects.",
+            "keywords": [
+                "bundle",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/danilovl/doctrine-entity-dto-bundle/issues",
+                "source": "https://github.com/danilovl/doctrine-entity-dto-bundle/tree/v0.1.6"
+            },
+            "time": "2024-03-11T21:18:34+00:00"
         },
         {
             "name": "danilovl/hashids-bundle",

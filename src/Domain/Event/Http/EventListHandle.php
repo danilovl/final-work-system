@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Helper\CloneHelper;
+use App\Domain\Event\Entity\Event;
 use App\Application\Service\{
     SeoPageService,
     PaginatorService,
@@ -43,11 +43,9 @@ readonly class EventListHandle
         $eventRepositoryData->user = $user;
 
         $eventsQuery = $this->eventFacade->getEventsByOwnerQuery($eventRepositoryData);
+        $eventsQuery->setHydrationMode(Event::class);
 
         $pagination = $this->paginatorService->createPaginationRequest($request, $eventsQuery);
-        /** @var object[] $items */
-        $items = iterator_to_array($pagination->getItems());
-        $pagination->setItems(CloneHelper::simpleCloneObjects($items));
 
         $this->seoPageService->setTitle('app.page.event_list');
 

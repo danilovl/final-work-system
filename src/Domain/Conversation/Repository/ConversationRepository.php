@@ -35,9 +35,13 @@ class ConversationRepository extends ServiceEntityRepository
     public function allByParticipantUser(User $user): QueryBuilder
     {
         return $this->baseQueryBuilder()
-            ->addSelect('messages')
+            ->addSelect('messages, type, work, participants, participantsUser, messagesOwner')
+            ->leftJoin('conversation.type', 'type')
+            ->leftJoin('conversation.work', 'work')
             ->leftJoin('conversation.participants', 'participants')
+            ->leftJoin('participants.user', 'participantsUser')
             ->leftJoin('conversation.messages', 'messages')
+            ->leftJoin('messages.owner', 'messagesOwner')
             ->where('participants.user = :user')
             ->orderBy('messages.createdAt', Criteria::DESC)
             ->setParameter('user', $user);

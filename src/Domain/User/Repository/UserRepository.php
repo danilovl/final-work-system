@@ -30,7 +30,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
-
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -50,7 +49,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         iterable|WorkStatus $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
-            ->addSelect('work');
+            ->addSelect('work, groups')
+            ->leftJoin('user.groups', 'groups');
 
         switch ($type) {
             case WorkUserTypeConstant::AUTHOR->value:
