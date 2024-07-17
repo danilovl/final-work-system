@@ -41,14 +41,14 @@ class SeoRuntimeTest extends TestCase
     {
         $this->seoRuntime->setTitle('test title');
 
-        $this->assertEquals('<title>test title</title>', $this->seoRuntime->getTitle());
+        $this->assertEquals('<title>test title</title>', $this->seoRuntime->title());
     }
 
     public function testGetDataNull(): void
     {
         $this->seoPageService->setTitle(null);
 
-        $this->assertNull($this->seoRuntime->getTitle());
+        $this->assertNull($this->seoRuntime->title());
     }
 
     public function testGetMetaData(): void

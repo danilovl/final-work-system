@@ -156,14 +156,14 @@ readonly class ConversationMessageFacade
     {
         /** @var ConversationMessage $conversationMessage */
         foreach ($conversations as $conversationMessage) {
-            /** @var ConversationMessage $conversationMessage */
-            $conversationMessage = $this->entityManagerService->getReference(
+            /** @var ConversationMessage $conversationMessageOrigin */
+            $conversationMessageOrigin = $this->entityManagerService->getReference(
                 ConversationMessage::class,
                 $conversationMessage->getId()
             );
 
             $isConversationMessageRead = $this->conversationStatusService
-                ->isConversationMessageRead($conversationMessage, $user);
+                ->isConversationMessageRead($conversationMessageOrigin, $user);
 
             $conversationMessage->setRead($isConversationMessageRead);
         }

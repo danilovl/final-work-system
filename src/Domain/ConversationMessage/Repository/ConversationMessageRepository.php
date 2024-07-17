@@ -100,6 +100,9 @@ class ConversationMessageRepository extends ServiceEntityRepository
     public function byIds(array $ids): QueryBuilder
     {
         return $this->createQueryBuilder('conversation_message')
+            ->addSelect('owner, conversation')
+            ->join('conversation_message.owner', 'owner')
+            ->join('conversation_message.conversation', 'conversation')
             ->where('conversation_message.id IN (:ids)')
             ->orderBy('conversation_message.createdAt', Criteria::DESC)
             ->setParameter('ids', $ids);

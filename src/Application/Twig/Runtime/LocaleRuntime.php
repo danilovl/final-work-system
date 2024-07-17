@@ -12,14 +12,14 @@
 
 namespace App\Application\Twig\Runtime;
 
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use Symfony\Component\Intl\Locales;
-use Twig\Extension\AbstractExtension;
-use Twig\Extension\RuntimeExtensionInterface;
 
-class LocaleRuntime extends AbstractExtension implements RuntimeExtensionInterface
+class LocaleRuntime
 {
     public function __construct(private readonly string $locales) {}
 
+    #[AsTwigFunction('locales')]
     public function getLocales(): array
     {
         $localeCodes = explode('|', $this->locales);

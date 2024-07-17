@@ -21,17 +21,18 @@ use App\Domain\SystemEvent\Constant\SystemEventGeneratorFolderConstant;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
-use Twig\Extension\RuntimeExtensionInterface;
 
-readonly class SystemEventLinkGeneratorService implements RuntimeExtensionInterface
+readonly class SystemEventLinkGeneratorService
 {
     public function __construct(
         private RequestStack $requestStack,
         private Environment $twig
     ) {}
 
+    #[AsTwigFunction('system_event_generate_link')]
     public function generateLink(SystemEventRecipient $systemEventRecipient): string
     {
         return $this->generateString(SystemEventGeneratorFolderConstant::LINK, $systemEventRecipient);

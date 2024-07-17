@@ -14,15 +14,13 @@ namespace App\Domain\Media\Twig\Runtime;
 
 use App\Application\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
-use Twig\Extension\{
-    AbstractExtension,
-    RuntimeExtensionInterface
-};
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 
-class MediaRuntime extends AbstractExtension implements RuntimeExtensionInterface
+class MediaRuntime
 {
     public function __construct(private readonly S3ClientService $s3ClientService,) {}
 
+    #[AsTwigFunction('media_is_file_exist')]
     public function isMediaFileExist(Media $media): bool
     {
         return $this->s3ClientService->doesObjectExist(

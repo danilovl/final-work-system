@@ -10,36 +10,23 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Twig;
+namespace Application\Twig\Runtime;
 
-use App\Application\Twig\WidgetExtension;
+use App\Application\Twig\Runtime\WidgetRuntime;
 use App\Application\Widget\BaseWidget;
 use App\Domain\Widget\Service\WidgetManagerService;
 use PHPUnit\Framework\TestCase;
-use Twig\TwigFunction;
 
-class WidgetExtensionTest extends TestCase
+class WidgetRuntimeTest extends TestCase
 {
     private readonly WidgetManagerService $widgetManagerService;
-    private readonly WidgetExtension $widgetExtension;
+    private readonly WidgetRuntime $widgetRuntime;
 
     protected function setUp(): void
     {
         $this->widgetManagerService = $this->createMock(WidgetManagerService::class);
 
-        $this->widgetExtension = new WidgetExtension($this->widgetManagerService);
-    }
-
-    public function testGetFunctions(): void
-    {
-        $twigFunction = array_map(static function (TwigFunction $twigFunction): string {
-            return $twigFunction->getName();
-        }, $this->widgetExtension->getFunctions());
-
-        $this->assertEquals(
-            ['widget', 'widget_group', 'widget_homepage_notify'],
-            $twigFunction
-        );
+        $this->widgetRuntime = new WidgetRuntime($this->widgetManagerService);
     }
 
     public function testWidget(): void
@@ -56,7 +43,7 @@ class WidgetExtensionTest extends TestCase
             ->method('getWidget')
             ->willReturn($widget);
 
-        $result = $this->widgetExtension->widget('widget');
+        $result = $this->widgetRuntime->widget('widget');
 
         $this->assertSame('text widget text', $result);
     }
@@ -83,7 +70,7 @@ class WidgetExtensionTest extends TestCase
             ->method('getWidgetGroup')
             ->willReturn($widgetGroup);
 
-        $result = $this->widgetExtension->widgetGroup('widget');
+        $result = $this->widgetRuntime->widgetGroup('widget');
 
         $this->assertSame('text widget onetext widget two', $result);
     }

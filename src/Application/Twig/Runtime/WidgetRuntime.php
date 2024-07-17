@@ -10,26 +10,16 @@
  *
  */
 
-namespace App\Application\Twig;
+namespace App\Application\Twig\Runtime;
 
-use App\Application\Twig\Runtime\HomepageNotifyWidgetRuntime;
 use App\Domain\Widget\Service\WidgetManagerService;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 
-class WidgetExtension extends AbstractExtension
+class WidgetRuntime
 {
     public function __construct(private readonly WidgetManagerService $widgetManager) {}
 
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('widget', [$this, 'widget'], ['is_safe' => ['html']]),
-            new TwigFunction('widget_group', [$this, 'widgetGroup'], ['is_safe' => ['html']]),
-            new TwigFunction('widget_homepage_notify', [HomepageNotifyWidgetRuntime::class, 'renderNotify'], ['is_safe' => ['html']])
-        ];
-    }
-
+    #[AsTwigFunction('widget')]
     public function widget(
         string $name,
         array $parameters = []
@@ -40,6 +30,7 @@ class WidgetExtension extends AbstractExtension
         return $widget->render();
     }
 
+    #[AsTwigFunction('widget_group')]
     public function widgetGroup(
         string $name,
         array $parameters = []

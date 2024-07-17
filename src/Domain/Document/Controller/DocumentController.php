@@ -13,6 +13,7 @@
 namespace App\Domain\Document\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use App\Domain\Document\Http\{
     DocumentEditHandle,
     DocumentListHandle,
@@ -45,6 +46,7 @@ class DocumentController extends AbstractController
         return $this->documentCreateHandle->handle($request);
     }
 
+    #[AsTwigFunction('document_detail_content')]
     public function detailContent(Media $media): Response
     {
         return $this->documentDetailContentHandle->handle($media);

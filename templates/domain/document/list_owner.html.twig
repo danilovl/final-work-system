@@ -266,7 +266,7 @@
                                                     <div class="panel-body text-muted well well-sm no-shadow">
 
                                                         {% if media_is_file_exist(document) %}
-                                                            {{ render_service('App\\Domain\\Document\\Controller\\DocumentController', 'detailContent', {'media': document}) }}
+                                                            {{ document_detail_content(document) }}
                                                         {% else %}
                                                             {{ 'app.text.file_not_found' | trans }}
                                                         {% endif %}

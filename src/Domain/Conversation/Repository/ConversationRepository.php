@@ -36,7 +36,7 @@ class ConversationRepository extends ServiceEntityRepository
     {
         return $this->baseQueryBuilder()
             ->addSelect('messages, type, work, participants, participantsUser, messagesOwner')
-            ->leftJoin('conversation.type', 'type')
+            ->join('conversation.type', 'type')
             ->leftJoin('conversation.work', 'work')
             ->leftJoin('conversation.participants', 'participants')
             ->leftJoin('participants.user', 'participantsUser')
@@ -50,10 +50,13 @@ class ConversationRepository extends ServiceEntityRepository
     public function allByIds(array $ids): QueryBuilder
     {
         return $this->baseQueryBuilder()
-            ->addSelect('participants')
-            ->addSelect('messages')
+            ->addSelect('messages, type, work, participants, participantsUser, messagesOwner')
+            ->join('conversation.type', 'type')
+            ->leftJoin('conversation.work', 'work')
             ->leftJoin('conversation.participants', 'participants')
+            ->leftJoin('participants.user', 'participantsUser')
             ->leftJoin('conversation.messages', 'messages')
+            ->leftJoin('messages.owner', 'messagesOwner')
             ->where('conversation.id IN (:ids)')
             ->orderBy('messages.createdAt', Criteria::DESC)
             ->setParameter('ids', $ids);
@@ -70,7 +73,6 @@ class ConversationRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder
-            ->join('conversation.type', 'type')
             ->andWhere('type.id IN (:typeIds)')
             ->setParameter('typeIds', $ids);
     }

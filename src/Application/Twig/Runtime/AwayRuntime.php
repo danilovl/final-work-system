@@ -13,17 +13,17 @@
 namespace App\Application\Twig\Runtime;
 
 use App\Application\Helper\RegexHelper;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFilter;
 use Symfony\Component\Routing\RouterInterface;
-use Twig\Extension\AbstractExtension;
-use Twig\Extension\RuntimeExtensionInterface;
 
-class AwayRuntime extends AbstractExtension implements RuntimeExtensionInterface
+class AwayRuntime
 {
     public function __construct(
         private readonly RouterInterface $router,
         private readonly string $domain
     ) {}
 
+    #[AsTwigFilter('away_to')]
     public function to(?string $text): ?string
     {
         if ($text === null) {

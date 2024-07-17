@@ -16,13 +16,13 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Helper\WorkRoleHelper;
 use App\Domain\Work\Service\WorkService;
-use Twig\Extension\AbstractExtension;
-use Twig\Extension\RuntimeExtensionInterface;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 
-class WorkRuntime extends AbstractExtension implements RuntimeExtensionInterface
+class WorkRuntime
 {
     public function __construct(private readonly WorkService $workService) {}
 
+    #[AsTwigFunction('is_work_role')]
     public function isWorkRole(
         Work $work,
         User $user,
@@ -31,14 +31,15 @@ class WorkRuntime extends AbstractExtension implements RuntimeExtensionInterface
         return WorkRoleHelper::$method($work, $user);
     }
 
+    #[AsTwigFunction('work_deadline_days')]
     public function getDeadlineDays(Work $work): int
     {
         return $this->workService->getDeadlineDays($work);
     }
 
+    #[AsTwigFunction('work_deadline_program_days')]
     public function getDeadlineProgramDays(Work $work): int
     {
         return $this->workService->getDeadlineProgramDays($work);
     }
 }
-

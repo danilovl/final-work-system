@@ -13,17 +13,15 @@
 namespace App\Domain\Task\Twig\Runtime;
 
 use App\Domain\Task\Service\TaskService;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use Doctrine\Common\Collections\Collection;
 use App\Domain\Work\Entity\Work;
-use Twig\Extension\{
-    AbstractExtension,
-    RuntimeExtensionInterface
-};
 
-class TaskRuntime extends AbstractExtension implements RuntimeExtensionInterface
+class TaskRuntime
 {
     public function __construct(private readonly TaskService $taskService) {}
 
+    #[AsTwigFunction('task_work_complete_percentage')]
     public function getCompleteTaskPercentage(
         Work $work,
         Collection $tasks = null

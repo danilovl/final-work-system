@@ -13,10 +13,10 @@
 namespace App\Application\Twig\Runtime;
 
 use App\Application\Service\SeoPageService;
-use Twig\Extension\AbstractExtension;
-use Twig\Extension\RuntimeExtensionInterface;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 
-class SeoRuntime extends AbstractExtension implements RuntimeExtensionInterface
+#[AsTwigFunction('seo_')]
+class SeoRuntime
 {
     private const string TITLE = '<title>%s</title>';
     private const string META = '<meta %s="%s" />';
@@ -29,7 +29,7 @@ class SeoRuntime extends AbstractExtension implements RuntimeExtensionInterface
         $this->seoPageService->setTitle($title);
     }
 
-    public function getTitle(): ?string
+    public function title(): ?string
     {
         if ($this->seoPageService->getTitle() === null) {
             return null;

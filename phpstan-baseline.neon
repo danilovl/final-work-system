@@ -1538,27 +1538,27 @@ parameters:
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:expects\\(\\)\\.$#"
 			count: 2
-			path: tests/Unit/Application/Twig/WidgetExtensionTest.php
+			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\WidgetExtensionTest has an uninitialized readonly property \\$widgetExtension\\. Assign it in the constructor\\.$#"
+			message: "#^Class Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest has an uninitialized readonly property \\$widgetManagerService\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Twig/WidgetExtensionTest.php
+			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\WidgetExtensionTest has an uninitialized readonly property \\$widgetManagerService\\. Assign it in the constructor\\.$#"
+			message: "#^Class Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest has an uninitialized readonly property \\$widgetRuntime\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Twig/WidgetExtensionTest.php
+			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\WidgetExtensionTest\\:\\:\\$widgetExtension is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest\\:\\:\\$widgetManagerService is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Twig/WidgetExtensionTest.php
+			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\WidgetExtensionTest\\:\\:\\$widgetManagerService is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest\\:\\:\\$widgetRuntime is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Twig/WidgetExtensionTest.php
+			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
 
 		-
 			message: "#^Method App\\\\Tests\\\\Unit\\\\Application\\\\Util\\\\MomentFormatConverterUtilTest\\:\\:testConvert\\(\\) has no return type specified\\.$#"

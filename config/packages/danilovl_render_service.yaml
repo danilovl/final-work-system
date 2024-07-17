@@ -1,0 +1,6 @@
+danilovl_render_service:
+  filter_options:
+    is_safe: ['html']
+
+  function_options:
+    is_safe: ['html']

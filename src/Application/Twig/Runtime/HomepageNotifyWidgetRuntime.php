@@ -14,17 +14,17 @@ namespace App\Application\Twig\Runtime;
 
 use App\Application\Interfaces\Widget\WidgetInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFilter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Twig\Extension\AbstractExtension;
-use Twig\Extension\RuntimeExtensionInterface;
 
-class HomepageNotifyWidgetRuntime extends AbstractExtension implements RuntimeExtensionInterface
+class HomepageNotifyWidgetRuntime
 {
     public function __construct(
         private readonly ContainerInterface $container,
         private readonly ParameterServiceInterface $parameterService
     ) {}
 
+    #[AsTwigFilter('widget_homepage_notify')]
     public function renderNotify(): ?string
     {
         $notifyServices = $this->parameterService->getArray('homepage_notify.notifies');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84762cc9def46bbb764f8661729e42c4",
+    "content-hash": "5c515d45abd81b03e8e446e63e8b5d69",
     "packages": [
         {
             "name": "api-platform/core",
@@ -807,22 +807,23 @@
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
-            "version": "v3.4.2",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/render-service-twig-extension-bundle.git",
-                "reference": "0b12baa1641645f8ad599fe591d79e311ff2ed9c"
+                "reference": "4e5be339f0125c0cbc4214da3a99609217a19ea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/0b12baa1641645f8ad599fe591d79e311ff2ed9c",
-                "reference": "0b12baa1641645f8ad599fe591d79e311ff2ed9c",
+                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/4e5be339f0125c0cbc4214da3a99609217a19ea0",
+                "reference": "4e5be339f0125c0cbc4214da3a99609217a19ea0",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.3",
                 "symfony/framework-bundle": "^7.0",
-                "symfony/twig-bundle": "^7.0"
+                "symfony/twig-bundle": "^7.0",
+                "symfony/yaml": "^7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.2"
@@ -851,9 +852,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/render-service-twig-extension-bundle/issues",
-                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v3.4.2"
+                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v4.0.0"
             },
-            "time": "2024-02-17T09:52:06+00:00"
+            "time": "2024-04-06T06:22:40+00:00"
         },
         {
             "name": "danilovl/translator-bundle",

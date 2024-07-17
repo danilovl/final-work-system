@@ -401,6 +401,11 @@
       <code><![CDATA[$object->getId()]]></code>
     </MixedReturnStatement>
   </file>
+  <file src="src/Application/Helper/CloneHelper.php">
+    <UnusedClass>
+      <code><![CDATA[CloneHelper]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Application/Helper/DateHelper.php">
     <PossiblyInvalidArgument>
       <code><![CDATA[$currentTime - (date('N', $currentTime) - 1) * 86400]]></code>
@@ -980,9 +985,9 @@
       <code><![CDATA[$link]]></code>
       <code><![CDATA[$match]]></code>
     </MixedAssignment>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[AwayRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/Twig/Runtime/HomepageNotifyWidgetRuntime.php">
     <ContainerDependency>
@@ -998,14 +1003,14 @@
       <code><![CDATA[$notify->render()]]></code>
       <code><![CDATA[$result]]></code>
     </PossiblyNullOperand>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[HomepageNotifyWidgetRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/Twig/Runtime/LocaleRuntime.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[LocaleRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/Twig/Runtime/SeoRuntime.php">
     <MixedArgument>
@@ -1025,21 +1030,11 @@
     <PossiblyNullArgument>
       <code><![CDATA[$this->stripTags($this->seoPageService->getTransTitle())]]></code>
     </PossiblyNullArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Application/Twig/SeoExtension.php">
     <UnusedClass>
-      <code><![CDATA[SeoExtension]]></code>
+      <code><![CDATA[SeoRuntime]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Application/Twig/TwigExtension.php">
-    <UnusedClass>
-      <code><![CDATA[TwigExtension]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Application/Twig/WidgetExtension.php">
+  <file src="src/Application/Twig/Runtime/WidgetRuntime.php">
     <MixedArgument>
       <code><![CDATA[$parameters[$widget->getName()] ?? []]]></code>
     </MixedArgument>
@@ -1051,7 +1046,7 @@
       <code><![CDATA[$widget->render()]]></code>
     </PossiblyNullOperand>
     <UnusedClass>
-      <code><![CDATA[WidgetExtension]]></code>
+      <code><![CDATA[WidgetRuntime]]></code>
     </UnusedClass>
   </file>
   <file src="src/Application/Util/MomentFormatConverterUtil.php">
@@ -1648,9 +1643,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Http/ConversationDetailHandle.php">
-    <InvalidArgument>
-      <code><![CDATA[$pagination->getItems()]]></code>
-    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -1668,9 +1660,6 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$type]]></code>
     </ArgumentTypeCoercion>
-    <InvalidArgument>
-      <code><![CDATA[$pagination->getItems()]]></code>
-    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -1820,9 +1809,9 @@
       <code><![CDATA[$recipientStatus?->getUpdatedAt()]]></code>
       <code><![CDATA[$recipientStatus?->getUpdatedAt()]]></code>
     </MixedReturnStatement>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[ConversationRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Domain/ConversationMessage/Entity/ConversationMessage.php">
     <InvalidPropertyAssignmentValue>
@@ -2419,9 +2408,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Event/Http/EventListHandle.php">
-    <InvalidArgument>
-      <code><![CDATA[$pagination->getItems()]]></code>
-    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -3044,9 +3030,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Media/Twig/Runtime/MediaRuntime.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[MediaRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Domain/MediaCategory/Entity/MediaCategory.php">
     <InvalidPropertyAssignmentValue>
@@ -3527,6 +3513,7 @@
     </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
+      <code><![CDATA[generateLink]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/SystemEventRecipient/Entity/SystemEventRecipient.php">
@@ -3942,9 +3929,9 @@
     <InvalidArgument>
       <code><![CDATA[$tasks]]></code>
     </InvalidArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[TaskRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Domain/User/Admin/UserCrudController.php">
     <DeprecatedConstant>
@@ -4144,23 +4131,27 @@
       <code><![CDATA[addGroups]]></code>
       <code><![CDATA[addRole]]></code>
       <code><![CDATA[getComments]]></code>
+      <code><![CDATA[getConfirmationToken]]></code>
       <code><![CDATA[getEventByParticipant]]></code>
       <code><![CDATA[getEventsOwner]]></code>
       <code><![CDATA[getGender]]></code>
       <code><![CDATA[getLastLogin]]></code>
       <code><![CDATA[getLastRequestedAt]]></code>
       <code><![CDATA[getMediaBy]]></code>
+      <code><![CDATA[getPasswordRequestedAt]]></code>
       <code><![CDATA[getTimezone]]></code>
       <code><![CDATA[getToken]]></code>
       <code><![CDATA[isOnline]]></code>
       <code><![CDATA[serialize]]></code>
       <code><![CDATA[setAuthorWorks]]></code>
       <code><![CDATA[setComments]]></code>
+      <code><![CDATA[setConfirmationToken]]></code>
       <code><![CDATA[setEventAddressOwner]]></code>
       <code><![CDATA[setEventsOwner]]></code>
       <code><![CDATA[setGender]]></code>
       <code><![CDATA[setId]]></code>
       <code><![CDATA[setLastLogin]]></code>
+      <code><![CDATA[setPasswordRequestedAt]]></code>
       <code><![CDATA[setSupervisorWorks]]></code>
       <code><![CDATA[setTimezone]]></code>
     </PossiblyUnusedMethod>
@@ -4186,7 +4177,6 @@
     </UndefinedInterfaceMethod>
     <UnusedProperty>
       <code><![CDATA[$biography]]></code>
-      <code><![CDATA[$confirmationToken]]></code>
       <code><![CDATA[$conversationMessageStatus]]></code>
       <code><![CDATA[$conversationMessages]]></code>
       <code><![CDATA[$conversationsOwner]]></code>
@@ -4194,7 +4184,6 @@
       <code><![CDATA[$dateOfBirth]]></code>
       <code><![CDATA[$eventsSchedule]]></code>
       <code><![CDATA[$mediaCategoriesOwner]]></code>
-      <code><![CDATA[$passwordRequestedAt]]></code>
       <code><![CDATA[$systemEventsOwner]]></code>
       <code><![CDATA[$systemEventsRecipient]]></code>
       <code><![CDATA[$tasksOwner]]></code>
@@ -4304,7 +4293,6 @@
   </file>
   <file src="src/Domain/User/Http/UserListHandle.php">
     <InvalidArgument>
-      <code><![CDATA[$pagination->getItems()]]></code>
       <code><![CDATA[$paginationUserWorks]]></code>
       <code><![CDATA[$workStatusCount]]></code>
     </InvalidArgument>
@@ -4446,9 +4434,9 @@
     <PossiblyNullReference>
       <code><![CDATA[getId]]></code>
     </PossiblyNullReference>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[UserRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Domain/UserGroup/Controller/Ajax/UserGroupController.php">
     <UnusedClass>
@@ -5081,9 +5069,9 @@
     <MixedReturnStatement>
       <code><![CDATA[WorkRoleHelper::$method($work, $user)]]></code>
     </MixedReturnStatement>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[WorkRuntime]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Domain/WorkCategory/Controller/Ajax/WorkCategoryController.php">
     <UnusedClass>
