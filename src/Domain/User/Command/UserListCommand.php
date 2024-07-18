@@ -14,7 +14,7 @@ namespace App\Domain\User\Command;
 
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputInterface,
@@ -64,7 +64,7 @@ HELP
         $maxResult = $input->getOption('max-result');
         $users = $this->entityManager
             ->getRepository(User::class)
-            ->findBy([], ['id' => Criteria::DESC], $maxResult);
+            ->findBy([], ['id' => Order::Descending->value], $maxResult);
 
         $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $users);
 

@@ -19,7 +19,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,7 +47,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->andWhere('participants.user = :user')
             ->setParameter('work', $work)
             ->setParameter('user', $user)
-            ->orderBy('conversation_message.createdAt', Criteria::DESC);
+            ->orderBy('conversation_message.createdAt', Order::Descending->value);
     }
 
     public function countMessageByUserStatus(
@@ -75,7 +75,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->andWhere('status.user = :user')
             ->andWhere('status.message IS NOT NULL')
             ->andWhere('status.conversation IS NOT NULL')
-            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->orderBy('conversation_message.createdAt', Order::Descending->value)
             ->setParameter('user', $user)
             ->setParameter('type', $statusType);
     }
@@ -87,7 +87,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->join('conversation_message.owner', 'owner')
             ->join('conversation_message.conversation', 'conversation')
             ->where('conversation_message.conversation = :conversation')
-            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->orderBy('conversation_message.createdAt', Order::Descending->value)
             ->setParameter('conversation', $conversation);
 
         if ($limit !== null) {
@@ -104,7 +104,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->join('conversation_message.owner', 'owner')
             ->join('conversation_message.conversation', 'conversation')
             ->where('conversation_message.id IN (:ids)')
-            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->orderBy('conversation_message.createdAt', Order::Descending->value)
             ->setParameter('ids', $ids);
     }
 
@@ -120,7 +120,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->andWhere('status.user = :user')
             ->andWhere('status.message IS NOT NULL')
             ->andWhere('status.conversation IS NOT NULL')
-            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->orderBy('conversation_message.createdAt', Order::Descending->value)
             ->setParameter('user', $user)
             ->setParameter('type', $statusType);
     }
@@ -133,7 +133,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->select('conversation_message')
             ->where('conversation_message.conversation = :conversation')
             ->andWhere('conversation_message.createdAt > :date')
-            ->orderBy('conversation_message.createdAt', Criteria::DESC)
+            ->orderBy('conversation_message.createdAt', Order::Descending->value)
             ->setParameter('conversation', $conversation)
             ->setParameter('date', $date);
     }

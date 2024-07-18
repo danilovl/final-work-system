@@ -15,7 +15,7 @@ namespace App\Domain\Task\Repository;
 use App\Application\Repository\BaseQueryBuilder;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 
 class TaskQueryBuilder extends BaseQueryBuilder
 {
@@ -33,14 +33,14 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function orderByCreatedAt(string $order = Criteria::DESC): self
+    public function orderByCreatedAt(string $order = Order::Descending->value): self
     {
         $this->queryBuilder->orderBy('task.createdAt', $order);
 
         return $this;
     }
 
-    public function orderByDeadline(string $order = Criteria::DESC): self
+    public function orderByDeadline(string $order = Order::Descending->value): self
     {
         $this->queryBuilder->orderBy('task.deadline', $order);
 

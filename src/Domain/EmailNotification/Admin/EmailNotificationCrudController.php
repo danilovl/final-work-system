@@ -13,7 +13,7 @@
 namespace App\Domain\EmailNotification\Admin;
 
 use App\Domain\EmailNotification\Entity\EmailNotification;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
@@ -37,7 +37,7 @@ class EmailNotificationCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Email Notification Queue')
             ->setEntityLabelInPlural('Email Notification Queue')
-            ->setDefaultSort(['sendedAt' => Criteria::DESC]);
+            ->setDefaultSort(['sendedAt' => Order::Descending->value]);
     }
 
     public function configureFields(string $pageName): iterable

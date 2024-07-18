@@ -16,7 +16,7 @@ namespace App\Domain\ResetPassword\Repository;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -50,7 +50,7 @@ class ResetPasswordRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->where('reset_password.user = :user')
             ->setParameter('user', $user)
-            ->orderBy('reset_password.createdAt', Criteria::DESC)
+            ->orderBy('reset_password.createdAt', Order::Descending->value)
             ->setMaxResults(1);
     }
 }

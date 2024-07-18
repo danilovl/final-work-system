@@ -18,7 +18,7 @@ use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -42,7 +42,7 @@ class MediaRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('media')
             ->leftJoin('media.mimeType', 'mime_type')->addSelect('mime_type')
             ->leftJoin('media.categories', 'categories')->addSelect('categories')
-            ->orderBy('media.createdAt', Criteria::DESC);
+            ->orderBy('media.createdAt', Order::Descending->value);
 
         if ($mediaData->users !== null) {
             $queryBuilder
@@ -94,7 +94,7 @@ class MediaRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('media')
             ->where('media.work = :work')
-            ->orderBy('media.createdAt', Criteria::DESC)
+            ->orderBy('media.createdAt', Order::Descending->value)
             ->setParameter('work', $work);
     }
 
@@ -102,7 +102,7 @@ class MediaRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('media')
             ->where('media.owner = :user')
-            ->orderBy('media.createdAt', Criteria::DESC)
+            ->orderBy('media.createdAt', Order::Descending->value)
             ->setParameter('user', $user);
 
         if ($type !== null) {

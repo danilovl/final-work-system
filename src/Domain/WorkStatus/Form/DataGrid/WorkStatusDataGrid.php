@@ -13,7 +13,7 @@
 namespace App\Domain\WorkStatus\Form\DataGrid;
 
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 
 class WorkStatusDataGrid
@@ -24,6 +24,6 @@ class WorkStatusDataGrid
     {
         return $this->workStatusRepository
             ->createQueryBuilder('status')
-            ->orderBy('status.name', Criteria::ASC);
+            ->orderBy('status.name', Order::Ascending->value);
     }
 }

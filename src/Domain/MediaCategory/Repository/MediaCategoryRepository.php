@@ -15,7 +15,7 @@ namespace App\Domain\MediaCategory\Repository;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,7 +37,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
             ->addSelect('medias')
             ->leftJoin('media_category.medias', 'medias')
             ->where('media_category.owner = :user')
-            ->orderBy('media_category.name', Criteria::ASC)
+            ->orderBy('media_category.name', Order::Ascending->value)
             ->setParameter('user', $user);
     }
 
@@ -45,7 +45,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
     {
         return $this->baseQueryBuilder()
             ->where('media_category.owner IN(:users)')
-            ->orderBy('media_category.createdAt', Criteria::DESC)
+            ->orderBy('media_category.createdAt', Order::Descending->value)
             ->setParameter('users', $users);
     }
 
@@ -54,7 +54,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->leftJoin('media_category.medias', 'medias')
             ->where('medias.owner = :user')
-            ->orderBy('media_category.createdAt', Criteria::DESC)
+            ->orderBy('media_category.createdAt', Order::Descending->value)
             ->setParameter('user', $user);
     }
 
@@ -63,7 +63,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->leftJoin('media_category.medias', 'medias')
             ->where('medias.owner IN(:users)')
-            ->orderBy('media_category.createdAt', Criteria::DESC)
+            ->orderBy('media_category.createdAt', Order::Descending->value)
             ->setParameter('users', $users);
     }
 }

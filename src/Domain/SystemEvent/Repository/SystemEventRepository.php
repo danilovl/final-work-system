@@ -15,7 +15,7 @@ namespace App\Domain\SystemEvent\Repository;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -43,7 +43,7 @@ class SystemEventRepository extends ServiceEntityRepository
         return $this->createBaseQueryBuilder()
             ->distinct()
             ->where('recipient.recipient = :recipient')
-            ->orderBy('system_event.createdAt', Criteria::DESC)
+            ->orderBy('system_event.createdAt', Order::Descending->value)
             ->setParameter('recipient', $recipient);
     }
 
@@ -54,7 +54,7 @@ class SystemEventRepository extends ServiceEntityRepository
             ->select('count(system_event.id)')
             ->where('recipient.recipient = :recipient')
             ->andWhere('recipient.viewed = :viewed')
-            ->orderBy('system_event.createdAt', Criteria::DESC)
+            ->orderBy('system_event.createdAt', Order::Descending->value)
             ->setParameter('recipient', $recipient)
             ->setParameter('viewed', false);
     }

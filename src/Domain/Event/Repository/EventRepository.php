@@ -16,7 +16,7 @@ use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,7 +38,7 @@ class EventRepository extends ServiceEntityRepository
     {
         return $this->baseQueryBuilder()
             ->where('participant.work = :work')
-            ->orderBy('event.start', Criteria::DESC)
+            ->orderBy('event.start', Order::Descending->value)
             ->setParameter('work', $work);
     }
 
@@ -49,7 +49,7 @@ class EventRepository extends ServiceEntityRepository
             ->leftJoin('participant.work', 'work')
             ->leftJoin('participant.user', 'user')
             ->where('event.owner = :owner')
-            ->orderBy('event.createdAt', Criteria::DESC)
+            ->orderBy('event.createdAt', Order::Descending->value)
             ->setParameter('owner', $eventData->user);
 
         $this->filterByBetweenDate($queryBuilder, $eventData);

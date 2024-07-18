@@ -19,6 +19,7 @@ use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 
 class ConversationService
 {
@@ -69,7 +70,7 @@ class ConversationService
 
         $criteria = Criteria::create()
             ->orderBy([
-                'createdAt' => Criteria::DESC
+                'createdAt' => Order::Descending->value
             ])
             ->setMaxResults(1);
 

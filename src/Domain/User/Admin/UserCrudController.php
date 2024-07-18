@@ -14,7 +14,7 @@ namespace App\Domain\User\Admin;
 
 use App\Domain\User\Entity\User;
 use App\Domain\UserGroup\Admin\GroupCrudController;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{
     Action,
     Actions,
@@ -46,7 +46,7 @@ class UserCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('User')
             ->setEntityLabelInPlural('Users')
             ->setSearchFields(['id', 'username', 'email'])
-            ->setDefaultSort(['lastLogin' => Criteria::DESC]);
+            ->setDefaultSort(['lastLogin' => Order::Descending->value]);
     }
 
     public function configureFields(string $pageName): iterable

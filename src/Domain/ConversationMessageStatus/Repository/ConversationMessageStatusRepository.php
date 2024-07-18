@@ -19,7 +19,7 @@ use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -44,7 +44,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->where('conversation_message_status.user = :user')
             ->andWhere('conversation_message_status.conversation = :conversation')
-            ->orderBy('message.createdAt', Criteria::DESC)
+            ->orderBy('message.createdAt', Order::Descending->value)
             ->setParameter('user', $user)
             ->setParameter('conversation', $conversation);
     }
@@ -55,7 +55,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->where('conversation_message_status.user = :user')
             ->andWhere('conversation_message_status.conversation = :conversation')
             ->andWhere('conversation_message_status.type = :type')
-            ->orderBy('message.createdAt', Criteria::DESC)
+            ->orderBy('message.createdAt', Order::Descending->value)
             ->setParameter('user', $data->user)
             ->setParameter('conversation', $data->conversation)
             ->setParameter('type', $data->type);
@@ -68,7 +68,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->where('conversation_message_status.user = :user')
             ->andWhere('conversation_message_status.conversation = :conversation')
-            ->orderBy('message.createdAt', Criteria::DESC)
+            ->orderBy('message.createdAt', Order::Descending->value)
             ->setParameter('user', $user)
             ->setParameter('conversation', $conversation);
     }
@@ -80,7 +80,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->where('conversation_message_status.user = :user')
             ->andWhere('message = :conversationMessage')
-            ->orderBy('message.createdAt', Criteria::DESC)
+            ->orderBy('message.createdAt', Order::Descending->value)
             ->setParameter('user', $user)
             ->setParameter('conversationMessage', $conversationMessage);
     }

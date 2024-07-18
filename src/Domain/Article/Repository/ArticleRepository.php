@@ -15,7 +15,7 @@ namespace App\Domain\Article\Repository;
 use App\Domain\Article\Entity\Article;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -33,7 +33,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->innerJoin('article.categories', 'categories')
             ->where('article.active = :active')
             ->andWhere('categories = :articleCategory')
-            ->orderBy('article.createdAt', Criteria::DESC)
+            ->orderBy('article.createdAt', Order::Descending->value)
             ->setParameter('active', true)
             ->setParameter('articleCategory', $articleCategory)
             ->setCacheable(true);

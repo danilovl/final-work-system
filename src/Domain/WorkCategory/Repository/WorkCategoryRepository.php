@@ -15,7 +15,7 @@ namespace App\Domain\WorkCategory\Repository;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -32,7 +32,7 @@ class WorkCategoryRepository extends ServiceEntityRepository
             ->addSelect('works')
             ->leftJoin('work_category.works', 'works')
             ->where('work_category.owner = :user')
-            ->orderBy('work_category.name', Criteria::ASC)
+            ->orderBy('work_category.name', Order::Ascending->value)
             ->setParameter('user', $user);
     }
 }

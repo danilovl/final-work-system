@@ -16,7 +16,7 @@ use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
@@ -55,7 +55,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
     {
         return $this->baseQueryBuilder()
             ->where('system_event_recipient.recipient = :recipient')
-            ->orderBy('systemEvent.createdAt', Criteria::DESC)
+            ->orderBy('systemEvent.createdAt', Order::Descending->value)
             ->setParameter('recipient', $recipient);
     }
 
@@ -64,7 +64,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
         return $this->baseQueryBuilder()
             ->where('system_event_recipient.recipient = :recipient')
             ->andWhere('system_event_recipient.viewed = :viewed')
-            ->orderBy('systemEvent.createdAt', Criteria::DESC)
+            ->orderBy('systemEvent.createdAt', Order::Descending->value)
             ->setParameter('viewed', false)
             ->setParameter('recipient', $recipient);
     }

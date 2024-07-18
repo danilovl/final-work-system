@@ -16,7 +16,7 @@ use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,7 +43,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoin('conversation.messages', 'messages')
             ->leftJoin('messages.owner', 'messagesOwner')
             ->where('participants.user = :user')
-            ->orderBy('messages.createdAt', Criteria::DESC)
+            ->orderBy('messages.createdAt', Order::Descending->value)
             ->setParameter('user', $user);
     }
 
@@ -58,7 +58,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoin('conversation.messages', 'messages')
             ->leftJoin('messages.owner', 'messagesOwner')
             ->where('conversation.id IN (:ids)')
-            ->orderBy('messages.createdAt', Criteria::DESC)
+            ->orderBy('messages.createdAt', Order::Descending->value)
             ->setParameter('ids', $ids);
     }
 

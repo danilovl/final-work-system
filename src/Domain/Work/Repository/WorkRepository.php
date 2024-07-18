@@ -19,7 +19,7 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,7 +40,7 @@ class WorkRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work')
             ->select('DISTINCT work.deadline')
             ->where('work.supervisor = :user')
-            ->orderBy('work.deadline', Criteria::DESC)
+            ->orderBy('work.deadline', Order::Descending->value)
             ->setParameter('user', $user);
     }
 
@@ -51,7 +51,7 @@ class WorkRepository extends ServiceEntityRepository
             ->select('DISTINCT work.deadlineProgram')
             ->where('work.supervisor = :user')
             ->andWhere('work.deadlineProgram is NOT NULL')
-            ->orderBy('work.deadlineProgram', Criteria::DESC)
+            ->orderBy('work.deadlineProgram', Order::Descending->value)
             ->setParameter('user', $user);
     }
 

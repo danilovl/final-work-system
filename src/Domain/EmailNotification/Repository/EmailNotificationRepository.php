@@ -14,7 +14,7 @@ namespace App\Domain\EmailNotification\Repository;
 
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,7 +34,7 @@ class EmailNotificationRepository extends ServiceEntityRepository
     {
         return $this->baseQueryBuilder()
             ->andWhere('email_notification.sendedAt IS NULL')
-            ->orderBy('email_notification.createdAt', Criteria::ASC);
+            ->orderBy('email_notification.createdAt', Order::Ascending->value);
     }
 
     public function byUuid(string $uuid): QueryBuilder

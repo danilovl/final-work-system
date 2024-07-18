@@ -9,7 +9,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -68,7 +68,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $queryBuilder
-            ->orderBy('user.lastname', Criteria::ASC)
+            ->orderBy('user.lastname', Order::Ascending->value)
             ->setParameter('supervisor', $user);
 
         if ($workStatus instanceof WorkStatus) {
@@ -95,7 +95,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('author_work is NULL')
             ->andWhere('opponent_work is NULL')
             ->andWhere('consultant_work is NULL')
-            ->orderBy('user.lastname', Criteria::ASC)
+            ->orderBy('user.lastname', Order::Ascending->value)
             ->setParameter('user', $user)
             ->setParameter('roleStudent', '%' . UserRoleConstant::STUDENT->value . '%')
             ->setParameter('roleOpponent', '%' . UserRoleConstant::OPPONENT->value . '%')
@@ -107,8 +107,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('user')
             ->where('user.roles LIKE :roles')
             ->andWhere('user.enabled = :enable')
-            ->addOrderBy('user.lastname', Criteria::ASC)
-            ->addOrderBy('user.firstname', Criteria::ASC)
+            ->addOrderBy('user.lastname', Order::Ascending->value)
+            ->addOrderBy('user.firstname', Order::Ascending->value)
             ->setParameter('roles', "%{$role}%")
             ->setParameter('enable', $enable);
     }
