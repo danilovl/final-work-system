@@ -684,6 +684,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     }
 
     /**
+     * @param Collection<Work> $opponentWorks
+     */
+    public function setOpponentWorks(Collection $opponentWorks): void
+    {
+        $this->opponentWorks = $opponentWorks;
+    }
+
+    /**
      * @return Collection<Work>
      */
     public function getOpponentWorks(): Collection
@@ -702,6 +710,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     public function setSupervisorWorks(Collection $supervisorWorks): void
     {
         $this->supervisorWorks = $supervisorWorks;
+    }
+
+    /**
+     * @param Collection<Work> $consultantWorks
+     */
+    public function setConsultantWorks(Collection $consultantWorks): void
+    {
+        $this->consultantWorks = $consultantWorks;
     }
 
     /**

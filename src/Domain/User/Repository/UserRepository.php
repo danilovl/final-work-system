@@ -85,6 +85,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function unusedUser(User $user): QueryBuilder
     {
         return $this->createQueryBuilder('user')
+            ->addSelect('groups')
+            ->leftJoin('user.groups', 'groups')
             ->leftJoin('user.authorWorks', 'author_work')
             ->leftJoin('user.opponentWorks', 'opponent_work')
             ->leftJoin('user.consultantWorks', 'consultant_work')
