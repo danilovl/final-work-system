@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c515d45abd81b03e8e446e63e8b5d69",
+    "content-hash": "bdf0a2db3483963ed3da2026c569665f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -807,20 +807,21 @@
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
-            "version": "v4.0.0",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/render-service-twig-extension-bundle.git",
-                "reference": "4e5be339f0125c0cbc4214da3a99609217a19ea0"
+                "reference": "bb357bffaed1a8b02ea9b2e18f5992e1982caa7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/4e5be339f0125c0cbc4214da3a99609217a19ea0",
-                "reference": "4e5be339f0125c0cbc4214da3a99609217a19ea0",
+                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/bb357bffaed1a8b02ea9b2e18f5992e1982caa7c",
+                "reference": "bb357bffaed1a8b02ea9b2e18f5992e1982caa7c",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.3",
+                "symfony/console": "^7.0",
                 "symfony/framework-bundle": "^7.0",
                 "symfony/twig-bundle": "^7.0",
                 "symfony/yaml": "^7.0"
@@ -852,9 +853,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/render-service-twig-extension-bundle/issues",
-                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v4.0.0"
+                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v4.0.2"
             },
-            "time": "2024-04-06T06:22:40+00:00"
+            "time": "2024-04-06T12:30:29+00:00"
         },
         {
             "name": "danilovl/translator-bundle",
