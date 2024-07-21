@@ -103,5 +103,3 @@ parameters:
         sleep: 60
   cache:
     homepage_time: 86400
-  model:
-    path: '%kernel.project_dir%/src/Domain/'
