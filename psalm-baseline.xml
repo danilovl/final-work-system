@@ -51,11 +51,6 @@
       <code><![CDATA[DecodeConversationMessageCommand]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Application/Command/DoctrineGenerateMapping.php">
-    <UnusedClass>
-      <code><![CDATA[DoctrineGenerateMapping]]></code>
-    </UnusedClass>
-  </file>
   <file src="src/Application/Command/ImportSqlCommand.php">
     <RedundantCast>
       <code><![CDATA[(array) $input->getArgument('file')]]></code>
@@ -1690,9 +1685,6 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/Conversation/Service/ConversationService.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Criteria::DESC]]></code>
-    </DeprecatedConstant>
     <MixedArgument>
       <code><![CDATA[$workConversation]]></code>
     </MixedArgument>
@@ -2173,9 +2165,6 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EmailNotification/Admin/EmailNotificationCrudController.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Criteria::DESC]]></code>
-    </DeprecatedConstant>
     <UnusedClass>
       <code><![CDATA[EmailNotificationCrudController]]></code>
     </UnusedClass>
@@ -3845,10 +3834,6 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Task/Repository/TaskQueryBuilder.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Criteria::DESC]]></code>
-      <code><![CDATA[Criteria::DESC]]></code>
-    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[byActive]]></code>
       <code><![CDATA[byComplete]]></code>
@@ -3934,9 +3919,6 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/User/Admin/UserCrudController.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Criteria::DESC]]></code>
-    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[switchUserAction]]></code>
     </PossiblyUnusedMethod>
@@ -3984,9 +3966,6 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[fn(User $user): array => $this->userToArray($user)]]></code>
     </ArgumentTypeCoercion>
-    <DeprecatedConstant>
-      <code><![CDATA[Criteria::DESC]]></code>
-    </DeprecatedConstant>
     <InvalidArgument>
       <code><![CDATA[$maxResult]]></code>
     </InvalidArgument>
@@ -4069,6 +4048,8 @@
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
     </InvalidTemplateParam>
     <MissingTemplateParam>
       <code><![CDATA[Collection]]></code>
@@ -4098,6 +4079,8 @@
       <code><![CDATA[Collection<EventParticipant>]]></code>
       <code><![CDATA[Collection<Group>]]></code>
       <code><![CDATA[Collection<Media>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
+      <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
       <code><![CDATA[Collection<Work>]]></code>
@@ -4146,11 +4129,13 @@
       <code><![CDATA[setAuthorWorks]]></code>
       <code><![CDATA[setComments]]></code>
       <code><![CDATA[setConfirmationToken]]></code>
+      <code><![CDATA[setConsultantWorks]]></code>
       <code><![CDATA[setEventAddressOwner]]></code>
       <code><![CDATA[setEventsOwner]]></code>
       <code><![CDATA[setGender]]></code>
       <code><![CDATA[setId]]></code>
       <code><![CDATA[setLastLogin]]></code>
+      <code><![CDATA[setOpponentWorks]]></code>
       <code><![CDATA[setPasswordRequestedAt]]></code>
       <code><![CDATA[setSupervisorWorks]]></code>
       <code><![CDATA[setTimezone]]></code>
@@ -5263,9 +5248,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/WorkStatus/Form/DataGrid/WorkStatusDataGrid.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Criteria::ASC]]></code>
-    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
