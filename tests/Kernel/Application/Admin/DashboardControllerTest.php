@@ -15,6 +15,7 @@ namespace App\Tests\Kernel\Application\Admin;
 use App\Application\Admin\DashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DashboardControllerTest extends KernelTestCase
 {
@@ -23,7 +24,23 @@ class DashboardControllerTest extends KernelTestCase
     public function setUp(): void
     {
         $kernel = self::bootKernel();
+
         $this->dashboardController = $kernel->getContainer()->get(DashboardController::class);
+    }
+
+    public function testIndex(): void
+    {
+        $this->dashboardController->adminUrlGenerator->setDashboard(DashboardController::class);
+
+        $response = $this->dashboardController->index();
+
+        $this->assertInstanceOf(RedirectResponse::class, $response);
+
+        $isContains = str_contains(
+            $response->getTargetUrl(),
+            'admin/dashboard?crudAction=index&crudControllerFqcn=App%5CDomain%5CUser%5CAdmin%5CUserCrudController'
+        );
+        $this->assertTrue($isContains);
     }
 
     public function testConfigureDashboard(): void
