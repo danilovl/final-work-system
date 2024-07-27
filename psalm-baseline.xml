@@ -508,11 +508,6 @@
       <code><![CDATA[RequestMiddlewareInterface]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Application/Interfaces/Transformer/TransformerInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[transform]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Application/Interfaces/Widget/WidgetInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[setName]]></code>
@@ -939,30 +934,6 @@
       <code><![CDATA[timestampAblePreUpdate]]></code>
       <code><![CDATA[timestampAblePreUpdate]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Application/Transformer/Api/Transformer.php">
-    <MixedArgument>
-      <code><![CDATA[$field]]></code>
-      <code><![CDATA[$fieldValue]]></code>
-      <code><![CDATA[$subFields]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$field]]></code>
-      <code><![CDATA[$fieldValue]]></code>
-      <code><![CDATA[$item]]></code>
-      <code><![CDATA[$result[$field]]]></code>
-      <code><![CDATA[$subFields]]></code>
-      <code><![CDATA[$subFields]]></code>
-    </MixedAssignment>
-    <PossiblyNullArgument>
-      <code><![CDATA[$field]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$item]]></code>
-    </PossiblyNullArrayOffset>
-    <UnusedClass>
-      <code><![CDATA[Transformer]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Application/Twig/Runtime/AwayRuntime.php">
     <MixedArgument>
