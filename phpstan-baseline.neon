@@ -1486,26 +1486,6 @@ parameters:
 			path: tests/Unit/Application/Traits/Entity/PublicAbleTraitTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Transformer\\\\Api\\\\TransformerTest has an uninitialized readonly property \\$object\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Transformer/Api/TransformerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Transformer\\\\Api\\\\TransformerTest has an uninitialized readonly property \\$transformer\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Transformer/Api/TransformerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Transformer\\\\Api\\\\TransformerTest\\:\\:\\$object is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Transformer/Api/TransformerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Transformer\\\\Api\\\\TransformerTest\\:\\:\\$transformer is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Transformer/Api/TransformerTest.php
-
-		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\AwayRuntimeTest has an uninitialized readonly property \\$awayRuntime\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/Twig/Runtime/AwayRuntimeTest.php
