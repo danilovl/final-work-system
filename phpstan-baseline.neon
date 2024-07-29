@@ -356,16 +356,6 @@ parameters:
 			path: tests/Kernel/Application/Command/ImportSqlCommandTest.php
 
 		-
-			message: "#^Class Application\\\\Command\\\\S3CreateBucketCommandTest has an uninitialized readonly property \\$command\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Command/S3CreateBucketCommandTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Command\\\\S3CreateBucketCommandTest\\:\\:\\$command is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Command/S3CreateBucketCommandTest.php
-
-		-
 			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\SimpleSearchFormTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Kernel/Application/Form/SimpleSearchFormTest.php
@@ -524,6 +514,21 @@ parameters:
 			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Collector\\\\SystemInfoCollectorTest\\:\\:\\$collector is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/Collector/SystemInfoCollectorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\S3ClientService\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Application/Command/S3CreateBucketCommandTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\Media\\\\Facade\\\\MediaTypeFacade\\:\\:method\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Application/Command/S3CreateBucketCommandTest.php
+
+		-
+			message: "#^Match expression does not handle remaining value\\: string$#"
+			count: 1
+			path: tests/Unit/Application/Command/S3CreateBucketCommandTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Interfaces\\\\DataTransferObject\\\\DataTransferObjectInterface\\:\\:toJson\\(\\)\\.$#"
