@@ -24,7 +24,9 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
 {
     protected static string $classSubscriber = EventEmailNotificationSubscriber::class;
     protected readonly EventEmailNotificationSubscriber $subscriber;
-    private readonly Event $event;
+
+    private readonly Event $eventWithParticipant;
+    private readonly Event $eventWithoutParticipant;
 
     protected function setUp(): void
     {
@@ -45,18 +47,24 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
         $user->setLastname('last');
         $user->setEmail('test@example.com');
 
-        $this->event = new Event;
-        $this->event->setId(1);
-        $this->event->setOwner($user);
+        $this->eventWithParticipant = new Event;
+        $this->eventWithParticipant->setId(1);
+        $this->eventWithParticipant->setOwner($user);
         $eventParticipant = new EventParticipant;
         $eventParticipant->setUser($user);
 
-        $this->event->setParticipant($eventParticipant);
+        $this->eventWithParticipant->setParticipant($eventParticipant);
+
+        $this->eventWithoutParticipant = new Event;
+        $this->eventWithoutParticipant->setId(1);
+        $this->eventWithoutParticipant->setOwner($user);
+
+        $this->eventWithoutParticipant->setParticipant(null);
     }
 
     public function testEventGenericEvent(): void
     {
-        $event = new EventGenericEvent($this->event);
+        $event = new EventGenericEvent($this->eventWithParticipant);
 
         $this->subscriber->onEventCreate($event);
         $this->subscriber->onEventEdit($event);
@@ -66,13 +74,23 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
         $this->assertTrue(true);
     }
 
+    public function testEventGenericEventNoParticipant(): void
+    {
+        $event = new EventGenericEvent($this->eventWithoutParticipant);
+
+        $this->subscriber->onEventCreate($event);
+        $this->subscriber->onEventEdit($event);
+
+        $this->assertTrue(true);
+    }
+
     public function testEventCommentGenericEvent(): void
     {
-        $user = clone $this->event->getOwner();
+        $user = clone $this->eventWithParticipant->getOwner();
         $user->setId(2);
 
         $comment = new Comment;
-        $comment->setEvent($this->event);
+        $comment->setEvent($this->eventWithParticipant);
         $comment->setOwner($user);
 
         $event = new EventCommentGenericEvent($comment);
