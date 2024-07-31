@@ -12,10 +12,12 @@
 
 namespace App\Tests\Unit\Application\Form\Transformer;
 
+use App\Application\Exception\RuntimeException;
 use App\Application\Form\Transformer\CommaDotTransformer;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class CommaDotTransformerTest extends TestCase
 {
@@ -36,6 +38,15 @@ class CommaDotTransformerTest extends TestCase
     public function testReverseTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->reverseTransform($replace));
+    }
+
+    public function testRuntimeException(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->commaDotTransformer->reverseTransform(new stdClass);
+
+        $this->expectException(RuntimeException::class);
+        $this->commaDotTransformer->reverseTransform('not numeric');
     }
 
     public static function transformProvider(): Generator
