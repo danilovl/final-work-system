@@ -111,15 +111,10 @@ abstract class AbstractAjaxJsonRequest
         array $notifyMessage = [],
         bool $send = true
     ): void {
-        $response = new JsonResponse([
-            'valid' => false,
-            'errors' => $errors,
-            'notifyMessage' => $notifyMessage
-        ]);
+        $response = $this->createJsonResponse(false, $errors, $notifyMessage);
 
         if ($send) {
             $response->send();
-            exit;
         }
     }
 
@@ -143,5 +138,17 @@ abstract class AbstractAjaxJsonRequest
     protected function getNotifyMessage(): array
     {
         return [];
+    }
+
+    protected function createJsonResponse(
+        bool $valid,
+        array $errors = [],
+        array $notifyMessage = [],
+    ): JsonResponse {
+        return new JsonResponse([
+            'valid' => $valid,
+            'errors' => $errors,
+            'notifyMessage' => $notifyMessage
+        ]);
     }
 }

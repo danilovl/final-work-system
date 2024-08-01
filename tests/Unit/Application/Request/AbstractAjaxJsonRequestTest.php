@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Application\Request;
 use App\Application\Request\AbstractAjaxJsonRequest;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
+    JsonResponse,
     Request,
     RequestStack
 };
@@ -23,6 +24,7 @@ use Symfony\Component\Validator\Constraints\{
     Collection
 };
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AbstractAjaxJsonRequestTest extends TestCase
 {
@@ -52,9 +54,21 @@ class AbstractAjaxJsonRequestTest extends TestCase
 
     public function testHandleMissing(): void
     {
-        new class (Validation::createValidator(), $this->requestStackMissing) extends AbstractAjaxJsonRequest {
+        $jsonResponse = $this->createMock(JsonResponse::class);
+        $jsonResponse->expects($this->once())
+            ->method('send');
+
+        new class ($jsonResponse, Validation::createValidator(), $this->requestStackMissing) extends AbstractAjaxJsonRequest {
             public string $start;
             public string $end;
+
+            public function __construct(
+                private readonly JsonResponse $jsonResponse,
+                ValidatorInterface $validator,
+                RequestStack $requestStack
+            ) {
+                parent::__construct($validator, $requestStack);
+            }
 
             protected function getConstraints(): Collection
             {
@@ -69,7 +83,15 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 array $notifyMessage = [],
                 bool $send = true
             ): void {
-                parent::sendJsonResponse($errors, $notifyMessage, false);
+                parent::sendJsonResponse($errors, $notifyMessage);
+            }
+
+            protected function createJsonResponse(
+                bool $valid,
+                array $errors = [],
+                array $notifyMessage = [],
+            ): JsonResponse {
+                return $this->jsonResponse;
             }
         };
 
