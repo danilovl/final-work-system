@@ -14,6 +14,7 @@ namespace App\Tests\Unit\Application\Service;
 
 use App\Application\EventDispatcher\EntityEventDispatcherService;
 use App\Application\Service\EntityManagerService;
+use App\Domain\User\Entity\User;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
@@ -84,6 +85,17 @@ class EntityManagerServiceTest extends TestCase
             ->method('detach');
 
         $this->entityManagerService->detach(new stdClass);
+
+        $this->assertTrue(true);
+    }
+
+    public function testDetachArray(): void
+    {
+        $this->entityManager
+            ->expects($this->once())
+            ->method('detach');
+
+        $this->entityManagerService->detachArray([new User]);
 
         $this->assertTrue(true);
     }
