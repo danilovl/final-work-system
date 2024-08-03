@@ -13,6 +13,7 @@
 namespace App\Tests\Kernel\Application\Service;
 
 use App\Application\Service\PaginatorService;
+use App\Domain\User\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -32,6 +33,10 @@ class PaginatorServiceTest extends KernelTestCase
 
         $this->assertSame(1, $pagination->getCurrentPageNumber());
         $this->assertSame(10, $pagination->count());
+
+        $this->paginatorService->createPagination([new User], 1, 10, detachEntity: true);
+
+        $this->assertTrue(true);
     }
 
     public function testCreatePaginationRequest(): void
@@ -44,9 +49,19 @@ class PaginatorServiceTest extends KernelTestCase
         $pagination = $this->paginatorService->createPaginationRequest(
             request: $request,
             target: range(0, 100),
-            options: ['pageParameterName' => 'page']);
+            options: ['pageParameterName' => 'page']
+        );
 
         $this->assertSame(2, $pagination->getCurrentPageNumber());
         $this->assertSame(20, $pagination->count());
+
+        $this->paginatorService->createPaginationRequest(
+            request: $request,
+            target: [new User],
+            options: ['pageParameterName' => 'page'],
+            detachEntity: true
+        );
+
+        $this->assertTrue(true);
     }
 }
