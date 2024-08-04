@@ -14,6 +14,8 @@ namespace Application\Service;
 
 use App\Application\Service\S3ClientService;
 use App\Tests\Helper\Application\Service\S3Client;
+use Aws\Command;
+use Aws\S3\Exception\S3Exception;
 use PHPUnit\Framework\TestCase;
 
 class S3ClientServiceTest extends TestCase
@@ -50,6 +52,18 @@ class S3ClientServiceTest extends TestCase
             ->method('getObject');
 
         $this->s3ClientService->getObject('test', 'test');
+    }
+
+    public function testGetObjectS3Exception(): void
+    {
+        $this->s3Client
+            ->expects($this->once())
+            ->method('getObject')
+            ->willThrowException(new S3Exception('message', new Command('name')));
+
+        $result = $this->s3ClientService->getObject('test', 'test');
+
+        $this->assertNull($result);
     }
 
     public function testDoesBucketExist(): void
