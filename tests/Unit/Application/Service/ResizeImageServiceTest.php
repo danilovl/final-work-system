@@ -17,16 +17,85 @@ use PHPUnit\Framework\TestCase;
 
 class ResizeImageServiceTest extends TestCase
 {
+    private string $originImage;
+
+    protected function setUp(): void
+    {
+        $this->originImage = base64_encode(file_get_contents(__DIR__ . '/../../../Helper/image/test_jpg.jpg'));
+    }
+
     public function testResizeBase64Image(): void
     {
-        $originImage = base64_encode(file_get_contents(__DIR__ . '/../../../Helper/image/test_jpg.jpg'));
-        $newWidth = 500;
-        $resizedImage = (new ResizeImageService)->resizeBase64Image($originImage, $newWidth);
+        $resizedImage = (new ResizeImageService)->resizeBase64Image($this->originImage, 500);
 
         $this->assertNotNull($resizedImage);
         $this->assertTrue((bool) preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $resizedImage));
 
         $this->assertTrue(in_array($resizedImage, $this->getBase64Image(), true));
+    }
+
+    public function testGdImageFalse(): void
+    {
+        $resizeImageService = $this->getMockBuilder(ResizeImageService::class)
+            ->onlyMethods(['getGdImage'])
+            ->getMock();
+
+        $resizedImage = $resizeImageService->resizeBase64Image($this->originImage, 500);
+
+        $this->assertNull($resizedImage);
+    }
+
+    public function testGdImageWidthFalse(): void
+    {
+        $resizeImageService = $this->getMockBuilder(ResizeImageService::class)
+            ->onlyMethods(['getImagesx', 'getImagesy'])
+            ->getMock();
+
+        $resizeImageService
+            ->expects($this->once())
+            ->method('getImagesx')
+            ->willReturn(10);
+
+        $resizeImageService
+            ->expects($this->once())
+            ->method('getImagesy')
+            ->willReturn(20);
+
+        $resizedImage = $resizeImageService->resizeBase64Image($this->originImage, 500);
+
+        $this->assertNull($resizedImage);
+    }
+
+    public function testGdImageTruColoryFalse(): void
+    {
+        $resizeImageService = $this->getMockBuilder(ResizeImageService::class)
+            ->onlyMethods(['getImageCreateTrueColory'])
+            ->getMock();
+
+        $resizeImageService
+            ->expects($this->once())
+            ->method('getImageCreateTrueColory')
+            ->willReturn(false);
+
+        $resizedImage = $resizeImageService->resizeBase64Image($this->originImage, 500);
+
+        $this->assertNull($resizedImage);
+    }
+
+    public function testGdImageGetContentFalse(): void
+    {
+        $resizeImageService = $this->getMockBuilder(ResizeImageService::class)
+            ->onlyMethods(['getContent'])
+            ->getMock();
+
+        $resizeImageService
+            ->expects($this->once())
+            ->method('getContent')
+            ->willReturn(false);
+
+        $resizedImage = $resizeImageService->resizeBase64Image($this->originImage, 500);
+
+        $this->assertNull($resizedImage);
     }
 
     private function getBase64Image(): array

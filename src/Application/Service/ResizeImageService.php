@@ -23,14 +23,14 @@ class ResizeImageService
     ): ?string {
         $image = $originImage;
         $data = base64_decode($image);
-        $image = imagecreatefromstring($data);
+        $image = $this->getGdImage($data);
 
         if (!$image instanceof GdImage) {
             return null;
         }
 
-        $width = imagesx($image);
-        $height = imagesy($image);
+        $width = $this->getImagesx($image);
+        $height = $this->getImagesy($image);
 
         if ($width <= $newWidth) {
             return $returnOrigin ? $originImage : null;
@@ -40,22 +40,48 @@ class ResizeImageService
         $newWidth = (int) ($width * $percent);
         $newHeight = (int) ($height * $percent);
 
-        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $thumb = $this->getImageCreateTrueColory($newWidth, $newHeight);
         if ($thumb === false) {
             return null;
         }
 
         imagecopyresized($thumb, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        ob_start();
-        imagejpeg($thumb);
-        $contents = ob_get_contents();
-        ob_end_clean();
-
+        $contents = $this->getContent($thumb);
         if ($contents === false) {
             return null;
         }
 
         return base64_encode($contents);
+    }
+
+    public function getGdImage(string $data): GdImage|false
+    {
+        return imagecreatefromstring($data);
+    }
+
+    protected function getImagesx(GdImage $image): int
+    {
+        return imagesx($image);
+    }
+
+    protected function getImagesy(GdImage $image): int
+    {
+        return imagesy($image);
+    }
+
+    protected function getImageCreateTrueColory(int $width, int $height): GdImage|false
+    {
+        return imagecreatetruecolor($width, $height);
+    }
+
+    protected function getContent(GdImage $image): string|false
+    {
+        ob_start();
+        imagejpeg($image);
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        return $contents;
     }
 }
