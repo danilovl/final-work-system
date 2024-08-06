@@ -631,66 +631,6 @@ parameters:
 			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Application\\\\EventListener\\\\LoggableListener\\:\\:createLogEntryPublic\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Call to an undefined method Danilovl\\\\ParameterBundle\\\\Interfaces\\\\ParameterServiceInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest has an uninitialized readonly property \\$listener\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest has an uninitialized readonly property \\$messageBus\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Method class@anonymous/tests/Unit/Application/EventListener/LoggableListenerTest\\.php\\:40\\:\\:createLogEntryPublic\\(\\) has parameter \\$action with no type specified\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Method class@anonymous/tests/Unit/Application/EventListener/LoggableListenerTest\\.php\\:40\\:\\:createLogEntryPublic\\(\\) has parameter \\$object with no type specified\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest\\:\\:\\$listener is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest\\:\\:\\$messageBus is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\LoggableListenerTest\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/LoggableListenerTest.php
-
-		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RedirectToPreferredLocaleListenerTest has an uninitialized readonly property \\$event\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventListener/RedirectToPreferredLocaleListenerTest.php
@@ -896,7 +836,12 @@ parameters:
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/DocumentEmailNotificationSubscriberTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$event\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithParticipant\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithoutParticipant\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
 
@@ -906,7 +851,12 @@ parameters:
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest\\:\\:\\$event is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithParticipant is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithoutParticipant is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
 
@@ -1397,7 +1347,7 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:expects\\(\\)\\.$#"
-			count: 11
+			count: 12
 			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
 
 		-
@@ -1442,7 +1392,7 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method App\\\\Tests\\\\Helper\\\\Application\\\\Service\\\\S3Client\\:\\:expects\\(\\)\\.$#"
-			count: 7
+			count: 8
 			path: tests/Unit/Application/Service/S3ClientServiceTest.php
 
 		-

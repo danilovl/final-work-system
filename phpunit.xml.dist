@@ -39,7 +39,8 @@
             <directory suffix=".php">src/Application/GraphQL</directory>
             <directory suffix=".php">src/Application/Interfaces</directory>
             <directory suffix=".php">src/Application/Migrations</directory>
-            <directory suffix=".php">src/Application/Rediss</directory>
+            <directory suffix=".php">src/Application/Redis</directory>
+            <file>src/Application/EventListener/LoggableListener.php</file>
         </exclude>
     </source>
 </phpunit>
