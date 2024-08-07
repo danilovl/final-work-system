@@ -8,45 +8,45 @@ Thesis management system based on Symfony 7.0
 
 ![Alt text](/git/readme/demo.gif?raw=true "Project example")
 
+Who is it for?
+------------
+
+This project is for teachers and students whose interest is to streamline the process of leading the final work.
+This is especially true for those teachers who carry out the final theses of several dozen students a year.
+
 Requirements
 ------------
 
-  * PHP 8.3 or higher
-  * MySQL
-  * Redis
-  * RabbitMq
-  * Elasticsearch
-  * Composer
-  * NPM
-  * Mercure
-  * Minio
-  * Kibana
-  * or you can use docker
+* PHP 8.3 or higher
+* MySQL
+* Redis
+* RabbitMq
+* Elasticsearch
+* Composer
+* NPM
+* Mercure
+* Minio
+* Kibana
+* or you can use docker
 
 Features
 ------------
 
-  * Administration panel
-  * Management of users(student, opponent, consultant)
-  * Management of thesis
-  * Assigning tasks to students
-  * Scheduling of meetings by the supervisor
-  * Uploading unfinished/finished versions of final thesis and downloading them
-  * Chat communication between the supervisor and others
-  * Sending a bulk message to users
-  * Email notification of new events in the system
-  * Multi languages
-  * An API that covers most of the data
-  * Unit test
-  * Cypress test
-  * and more other features
-   
-Who is it for?
-------------
+* Administration panel
+* Management of users(student, opponent, consultant)
+* Management of thesis
+* Assigning tasks to students
+* Scheduling of meetings by the supervisor
+* Uploading unfinished/finished versions of final thesis and downloading them
+* Chat communication between the supervisor and others
+* Sending a bulk message to users
+* Email notification of new events in the system
+* Multi languages
+* An API that covers most of the data
+* Unit test
+* Cypress test
+* and more other features
 
-This project is for teachers and students whose interest is to streamline the process of leading the final work. 
-This is especially true for those teachers who carry out the final theses of several dozen students a year.
-   
 Project uses extra bundles
 ------------
 
@@ -64,6 +64,12 @@ Project uses extra bundles
 * [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides simple mechanism control permission for class or his method.
 * [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project.
 * [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle provides simple delayed function call.
+
+
+Test coverage
+------------
+
+![Alt text](/git/readme/test_coverage_application.png?raw=true "Test coverage application")
 
 Configuration environment
 ------------
