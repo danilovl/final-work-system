@@ -12,26 +12,33 @@
 
 namespace App\Application\Controller;
 
+use App\Application\Service\{
+    RequestService,
+    TwigRenderService
+};
 use App\Domain\User\Service\UserService;
 use LogicException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractController
+readonly class SecurityController
 {
-    public function __construct(private readonly UserService $userService) {}
+    public function __construct(
+        private RequestService $requestService,
+        private TwigRenderService $twigRenderService,
+        private UserService $userService
+    ) {}
 
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->userService->getUserOrNull()) {
-            return $this->redirectToRoute('homepage');
+            return $this->requestService->redirectToRoute('homepage');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('application/security/login.html.twig', [
+        return $this->twigRenderService->renderToResponse('application/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
         ]);

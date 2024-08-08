@@ -15,14 +15,13 @@ namespace App\Application\Controller\Api;
 use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Service\UserService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class SecurityController extends AbstractController
+readonly class SecurityController
 {
     public function __construct(
-        private readonly EntityManagerService $entityManagerService,
-        private readonly UserService $userService
+        private EntityManagerService $entityManagerService,
+        private UserService $userService
     ) {}
 
     public function generateToken(): JsonResponse

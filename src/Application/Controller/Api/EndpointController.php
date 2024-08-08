@@ -16,11 +16,10 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
-class EndpointController extends AbstractController
+class EndpointController
 {
     private const string ROUTE_PREFIX_KEY = 'api_key';
 

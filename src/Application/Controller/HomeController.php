@@ -13,23 +13,24 @@
 namespace App\Application\Controller;
 
 use App\Application\Cache\HomepageCache;
+use App\Application\Service\TwigRenderService;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
 use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
 
-class HomeController extends AbstractController
+readonly class HomeController
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly HomepageCache $homepageCache,
-        private readonly ParameterServiceInterface $parameterService,
-        private readonly SystemEventFacade $systemEventFacade
+        private TwigRenderService $twigRenderService,
+        private UserService $userService,
+        private HomepageCache $homepageCache,
+        private ParameterServiceInterface $parameterService,
+        private SystemEventFacade $systemEventFacade
     ) {}
 
     #[PermissionMiddleware(date: ['from' => '01-01-2023'])]
@@ -44,7 +45,7 @@ class HomeController extends AbstractController
         $isUnreadExist = $this->systemEventFacade
             ->isUnreadSystemEventsByRecipient($user);
 
-        return $this->render('application/home/index.html.twig', [
+        return $this->twigRenderService->renderToResponse('application/home/index.html.twig', [
             'isSystemEventUnreadExist' => $isUnreadExist,
             'paginator' => $pagePaginators[$page]
         ]);

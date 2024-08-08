@@ -12,13 +12,15 @@
 
 namespace App\Application\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Application\Service\TwigRenderService;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends AbstractController
+readonly class DefaultController
 {
+    public function __construct(private TwigRenderService $twigRenderService) {}
+
     public function index(): Response
     {
-        return $this->render('base.html.twig');
+        return $this->twigRenderService->renderToResponse('base.html.twig');
     }
 }

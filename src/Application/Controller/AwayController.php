@@ -12,17 +12,19 @@
 
 namespace App\Application\Controller;
 
+use App\Application\Service\TwigRenderService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AwayController extends AbstractController
+readonly class AwayController
 {
+    public function __construct(private TwigRenderService $twigRenderService) {}
+
     public function to(Request $request): Response
     {
-        return $this->render('application/away/to.html.twig', [
+        return $this->twigRenderService->renderToResponse('application/away/to.html.twig', [
             'url' => $request->query->get('url')
         ]);
     }
