@@ -26,17 +26,18 @@ readonly class SecurityController
     public function __construct(
         private RequestService $requestService,
         private TwigRenderService $twigRenderService,
-        private UserService $userService
+        private UserService $userService,
+        private AuthenticationUtils $authenticationUtils
     ) {}
 
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(): Response
     {
         if ($this->userService->getUserOrNull()) {
             return $this->requestService->redirectToRoute('homepage');
         }
 
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $error = $this->authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $this->authenticationUtils->getLastUsername();
 
         return $this->twigRenderService->renderToResponse('application/security/login.html.twig', [
             'last_username' => $lastUsername,
