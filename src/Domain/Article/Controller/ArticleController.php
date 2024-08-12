@@ -13,18 +13,21 @@
 namespace App\Domain\Article\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Article\Entity\Article;
 use App\Domain\Article\Http\ArticleDetailHandle;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController extends AbstractController
+readonly class ArticleController
 {
-    public function __construct(private readonly ArticleDetailHandle $articleDetailHandle) {}
+    public function __construct(
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private ArticleDetailHandle $articleDetailHandle
+    ) {}
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_article', 'id_category'])]
     public function detail(
@@ -33,7 +36,7 @@ class ArticleController extends AbstractController
     ): Response {
         $articleVoterSubject = new ArticleVoterSubject($article, $articleCategory);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleVoterSubject);
 
         return $this->articleDetailHandle->handle($article, $articleCategory);
     }
