@@ -13,6 +13,7 @@
 namespace App\Domain\ArticleCategory\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use App\Domain\ArticleCategory\Http\{
     ArticleCategoryArticleListHandle
@@ -22,13 +23,13 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ArticleCategoryController extends AbstractController
+readonly class ArticleCategoryController
 {
     public function __construct(
-        private readonly ArticleCategoryListHandle $articleCategoryListHandle,
-        private readonly ArticleCategoryArticleListHandle $articleCategoryArticleListHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private ArticleCategoryListHandle $articleCategoryListHandle,
+        private ArticleCategoryArticleListHandle $articleCategoryArticleListHandle
     ) {}
 
     public function list(Request $request): Response
@@ -38,7 +39,7 @@ class ArticleCategoryController extends AbstractController
 
     public function articleList(Request $request, ArticleCategory $articleCategory): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleCategory);
 
         return $this->articleCategoryArticleListHandle->handle($request, $articleCategory);
     }
