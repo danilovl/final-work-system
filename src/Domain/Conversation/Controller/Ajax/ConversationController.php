@@ -13,6 +13,7 @@
 namespace App\Domain\Conversation\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Http\Ajax\{
     ConversationLiveHandle,
@@ -21,24 +22,24 @@ use App\Domain\Conversation\Http\Ajax\{
     ConversationChangeReadMessageStatusHandle
 };
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     StreamedResponse
 };
 
-class ConversationController extends AbstractController
+readonly class ConversationController
 {
     public function __construct(
-        private readonly ConversationChangeReadMessageStatusHandle $conversationChangeReadMessageStatusHandle,
-        private readonly ConversationReadAllHandle $conversationReadAllHandle,
-        private readonly ConversationDeleteHandle $conversationDeleteHandle,
-        private readonly ConversationLiveHandle $conversationLiveHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private ConversationChangeReadMessageStatusHandle $conversationChangeReadMessageStatusHandle,
+        private ConversationReadAllHandle $conversationReadAllHandle,
+        private ConversationDeleteHandle $conversationDeleteHandle,
+        private ConversationLiveHandle $conversationLiveHandle
     ) {}
 
     public function changeReadMessageStatus(ConversationMessage $conversationMessage): JsonResponse
     {
-        $this->denyAccessUnlessGranted(
+        $this->authorizationCheckerService->denyAccessUnlessGranted(
             VoterSupportConstant::CHANGE_READ_MESSAGE_STATUS->value,
             $conversationMessage
         );
@@ -53,14 +54,14 @@ class ConversationController extends AbstractController
 
     public function delete(Conversation $conversation): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $conversation);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $conversation);
 
         return $this->conversationDeleteHandle->handle($conversation);
     }
 
     public function liveConversation(Conversation $conversation): StreamedResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationLiveHandle->handle($conversation);
     }

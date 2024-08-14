@@ -13,6 +13,7 @@
 namespace App\Domain\Conversation\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Http\{
     ConversationLastMessageHandle,
@@ -25,21 +26,21 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Component\HttpFoundation\{
-    RedirectResponse,
     Request,
-    Response
+    Response,
+    RedirectResponse
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ConversationController extends AbstractController
+readonly class ConversationController
 {
     public function __construct(
-        private readonly ConversationCreateHandle $conversationCreateHandle,
-        private readonly ConversationListHandle $conversationListHandle,
-        private readonly ConversationDetailHandle $conversationDetailHandle,
-        private readonly ConversationCreateWorkHandle $conversationCreateWorkHandle,
-        private readonly ConversationLastMessageHandle $conversationLastMessageHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private ConversationCreateHandle $conversationCreateHandle,
+        private ConversationListHandle $conversationListHandle,
+        private ConversationDetailHandle $conversationDetailHandle,
+        private ConversationCreateWorkHandle $conversationCreateWorkHandle,
+        private ConversationLastMessageHandle $conversationLastMessageHandle
     ) {}
 
     public function create(Request $request): Response
@@ -54,7 +55,7 @@ class ConversationController extends AbstractController
 
     public function detail(Request $request, Conversation $conversation): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationDetailHandle->handle($request, $conversation);
     }
@@ -70,7 +71,7 @@ class ConversationController extends AbstractController
 
     public function lastMessage(Request $request, Conversation $conversation): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationLastMessageHandle->handle($request, $conversation);
     }
