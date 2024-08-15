@@ -13,6 +13,7 @@
 namespace App\Domain\Document\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Document\Http\Ajax\{
     DocumentEditHandle,
     DocumentCreateHandle,
@@ -25,15 +26,15 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DocumentController extends AbstractController
+readonly class DocumentController
 {
     public function __construct(
-        private readonly DocumentCreateHandle $documentCreateHandle,
-        private readonly DocumentEditHandle $documentEditHandle,
-        private readonly DocumentChangeActiveHandle $documentChangeActiveHandle,
-        private readonly DocumentDeleteHandle $documentDeleteHandle,
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private DocumentCreateHandle $documentCreateHandle,
+        private DocumentEditHandle $documentEditHandle,
+        private DocumentChangeActiveHandle $documentChangeActiveHandle,
+        private DocumentDeleteHandle $documentDeleteHandle,
     ) {}
 
     public function create(Request $request): JsonResponse
@@ -43,21 +44,21 @@ class DocumentController extends AbstractController
 
     public function edit(Request $request, Media $media): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
         return $this->documentEditHandle->handle($request, $media);
     }
 
     public function changeActive(Media $media): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
         return $this->documentChangeActiveHandle->handle($media);
     }
 
     public function delete(Media $media): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $media);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $media);
 
         return $this->documentDeleteHandle->handle($media);
     }

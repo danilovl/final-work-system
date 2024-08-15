@@ -13,6 +13,7 @@
 namespace App\Domain\Document\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use App\Domain\Document\Http\{
     DocumentEditHandle,
@@ -28,17 +29,17 @@ use Symfony\Component\HttpFoundation\{
     Response,
     BinaryFileResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DocumentController extends AbstractController
+readonly class DocumentController
 {
     public function __construct(
-        private readonly DocumentCreateHandle $documentCreateHandle,
-        private readonly DocumentDetailContentHandle $documentDetailContentHandle,
-        private readonly DocumentEditHandle $documentEditHandle,
-        private readonly DocumentListHandle $documentListHandle,
-        private readonly DocumentListOwnerHandle $documentListOwnerHandle,
-        private readonly DocumentDownloadHandle $documentDownloadHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private DocumentCreateHandle $documentCreateHandle,
+        private DocumentDetailContentHandle $documentDetailContentHandle,
+        private DocumentEditHandle $documentEditHandle,
+        private DocumentListHandle $documentListHandle,
+        private DocumentListOwnerHandle $documentListOwnerHandle,
+        private DocumentDownloadHandle $documentDownloadHandle
     ) {}
 
     public function create(Request $request): Response
@@ -54,7 +55,7 @@ class DocumentController extends AbstractController
 
     public function edit(Request $request, Media $media): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
         return $this->documentEditHandle->handle($request, $media);
     }
@@ -71,14 +72,14 @@ class DocumentController extends AbstractController
 
     public function download(Media $media): BinaryFileResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
         return $this->documentDownloadHandle->handle($media);
     }
 
     public function downloadGoogle(Media $media): BinaryFileResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
         return $this->documentDownloadHandle->handle($media);
     }
