@@ -13,6 +13,7 @@
 namespace App\Domain\DocumentCategory\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\DocumentCategory\Http\Ajax\{
     DocumentCategoryEditHandle,
     DocumentCategoryCreateHandle,
@@ -23,14 +24,14 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DocumentCategoryController extends AbstractController
+readonly class DocumentCategoryController
 {
     public function __construct(
-        private readonly DocumentCategoryCreateHandle $documentCategoryCreateHandle,
-        private readonly DocumentCategoryEditHandle $documentCategoryEditHandle,
-        private readonly DocumentCategoryDeleteHandle $documentCategoryDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private DocumentCategoryCreateHandle $documentCategoryCreateHandle,
+        private DocumentCategoryEditHandle $documentCategoryEditHandle,
+        private DocumentCategoryDeleteHandle $documentCategoryDeleteHandle
     ) {}
 
     public function create(Request $request): JsonResponse
@@ -40,14 +41,14 @@ class DocumentCategoryController extends AbstractController
 
     public function edit(Request $request, MediaCategory $mediaCategory): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
 
         return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
 
         return $this->documentCategoryDeleteHandle->handle($mediaCategory);
     }

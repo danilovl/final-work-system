@@ -13,6 +13,7 @@
 namespace App\Domain\DocumentCategory\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\DocumentCategory\Http\{
     DocumentCategoryEditHandle,
     DocumentCategoryListHandle,
@@ -25,15 +26,15 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DocumentCategoryController extends AbstractController
+readonly class DocumentCategoryController
 {
     public function __construct(
-        private readonly DocumentCategoryCreateHandle $documentCategoryCreateHandle,
-        private readonly DocumentCategoryListHandle $documentCategoryListHandle,
-        private readonly DocumentCategoryEditHandle $documentCategoryEditHandle,
-        private readonly DocumentCategoryDeleteHandle $documentCategoryDeleteHandle,
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private DocumentCategoryCreateHandle $documentCategoryCreateHandle,
+        private DocumentCategoryListHandle $documentCategoryListHandle,
+        private DocumentCategoryEditHandle $documentCategoryEditHandle,
+        private DocumentCategoryDeleteHandle $documentCategoryDeleteHandle,
     ) {}
 
     public function create(Request $request): Response
@@ -48,14 +49,14 @@ class DocumentCategoryController extends AbstractController
 
     public function edit(Request $request, MediaCategory $mediaCategory): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
 
         return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
 
         return $this->documentCategoryDeleteHandle->handle($mediaCategory);
     }
