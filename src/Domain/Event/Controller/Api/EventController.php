@@ -18,11 +18,10 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventController extends AbstractController
+readonly class EventController
 {
-    public function __construct(private readonly EventListHandle $eventListHandle) {}
+    public function __construct(private EventListHandle $eventListHandle) {}
 
     public function list(Request $request, Work $work): JsonResponse
     {

@@ -14,6 +14,7 @@ namespace App\Domain\Event\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Application\Middleware\Event\Ajax\GetEventMiddleware;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Event\Entity\Event;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
 use App\Domain\Event\Http\Ajax\{
@@ -25,14 +26,14 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventController extends AbstractController
+readonly class EventController
 {
     public function __construct(
-        private readonly EventGetEventHandle $eventGetEventHandle,
-        private readonly EventEditHandle $eventEditHandle,
-        private readonly EventDeleteHandle $eventDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private EventGetEventHandle $eventGetEventHandle,
+        private EventEditHandle $eventEditHandle,
+        private EventDeleteHandle $eventDeleteHandle
     ) {}
 
     #[PermissionMiddleware(service: [
@@ -40,21 +41,21 @@ class EventController extends AbstractController
     ])]
     public function getEvent(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
 
         return $this->eventGetEventHandle->handle($request, $event);
     }
 
     public function edit(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
         return $this->eventEditHandle->handle($request, $event);
     }
 
     public function delete(Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
 
         return $this->eventDeleteHandle->handle($event);
     }
