@@ -13,6 +13,7 @@
 namespace App\Domain\EventAddress\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Http\Ajax\{
     EventAddressEditHandle,
@@ -23,14 +24,14 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventAddressController extends AbstractController
+readonly class EventAddressController
 {
     public function __construct(
-        private readonly EventAddressCreateHandle $eventAddressCreateHandle,
-        private readonly EventAddressEditHandle $eventAddressEditHandle,
-        private readonly EventAddressDeleteHandle $eventAddressDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private EventAddressCreateHandle $eventAddressCreateHandle,
+        private EventAddressEditHandle $eventAddressEditHandle,
+        private EventAddressDeleteHandle $eventAddressDeleteHandle
     ) {}
 
     public function create(Request $request): JsonResponse
@@ -42,14 +43,14 @@ class EventAddressController extends AbstractController
         Request $request,
         EventAddress $eventAddress
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
 
         return $this->eventAddressEditHandle->handle($request, $eventAddress);
     }
 
     public function delete(EventAddress $eventAddress): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
         return $this->eventAddressDeleteHandle->handle($eventAddress);
     }

@@ -13,6 +13,7 @@
 namespace App\Domain\EventAddress\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\EventAddress\Http\{
     EventAddressEditHandle,
     EventAddressDeleteHandle,
@@ -26,16 +27,16 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventAddressController extends AbstractController
+readonly class EventAddressController
 {
     public function __construct(
-        private readonly EventAddressListHandle $eventAddressListHandle,
-        private readonly EventAddressCreateHandle $eventAddressCreateHandle,
-        private readonly EventAddressDetailHandle $eventAddressDetailHandle,
-        private readonly EventAddressEditHandle $eventAddressEditHandle,
-        private readonly EventAddressDeleteHandle $eventAddressDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private EventAddressListHandle $eventAddressListHandle,
+        private EventAddressCreateHandle $eventAddressCreateHandle,
+        private EventAddressDetailHandle $eventAddressDetailHandle,
+        private EventAddressEditHandle $eventAddressEditHandle,
+        private EventAddressDeleteHandle $eventAddressDeleteHandle
     ) {}
 
     public function list(Request $request): Response
@@ -50,21 +51,21 @@ class EventAddressController extends AbstractController
 
     public function detail(EventAddress $eventAddress): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventAddress);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventAddress);
 
         return $this->eventAddressDetailHandle->handle($eventAddress);
     }
 
     public function edit(Request $request, EventAddress $eventAddress): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
 
         return $this->eventAddressEditHandle->handle($request, $eventAddress);
     }
 
     public function delete(Request $request, EventAddress $eventAddress): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
         return $this->eventAddressDeleteHandle->handle($request, $eventAddress);
     }
