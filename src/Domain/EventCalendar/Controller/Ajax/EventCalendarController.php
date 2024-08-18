@@ -13,8 +13,11 @@
 namespace App\Domain\EventCalendar\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Middleware\EventCalendar\Ajax\EditMiddleware;
-use App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware;
+use App\Application\Middleware\EventCalendar\Ajax\{
+    EditMiddleware,
+    GetEventMiddleware
+};
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventCalendar\Request\GetEventRequest;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
@@ -28,15 +31,15 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventCalendarController extends AbstractController
+readonly class EventCalendarController
 {
     public function __construct(
-        private readonly EventCalendarGetEventHandle $eventCalendarGetEventHandle,
-        private readonly EventCalendarCreateHandle $eventCalendarCreateHandle,
-        private readonly EventCalendarEventReservationHandle $eventCalendarEventReservationHandle,
-        private readonly EventCalendarEditHandle $eventCalendarEditHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private EventCalendarGetEventHandle $eventCalendarGetEventHandle,
+        private EventCalendarCreateHandle $eventCalendarCreateHandle,
+        private EventCalendarEventReservationHandle $eventCalendarEventReservationHandle,
+        private EventCalendarEditHandle $eventCalendarEditHandle
     ) {}
 
     #[PermissionMiddleware(service: [
@@ -54,7 +57,7 @@ class EventCalendarController extends AbstractController
 
     public function eventReservation(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION->value, $event);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION->value, $event);
 
         return $this->eventCalendarEventReservationHandle->handle($request, $event);
     }
@@ -64,7 +67,7 @@ class EventCalendarController extends AbstractController
     ])]
     public function edit(Request $request, Event $event): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
         return $this->eventCalendarEditHandle->handle($request, $event);
     }

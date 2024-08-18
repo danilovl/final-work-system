@@ -16,14 +16,13 @@ use App\Domain\EventCalendar\Http\{
     EventCalendarManageHandle,
     EventCalendarReservationHandle
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventCalendarController extends AbstractController
+readonly class EventCalendarController
 {
     public function __construct(
-        private readonly EventCalendarReservationHandle $eventCalendarReservationHandle,
-        private readonly EventCalendarManageHandle $eventCalendarManageHandle
+        private EventCalendarReservationHandle $eventCalendarReservationHandle,
+        private EventCalendarManageHandle $eventCalendarManageHandle
     ) {}
 
     public function reservation(): Response
