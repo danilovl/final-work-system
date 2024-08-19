@@ -13,6 +13,7 @@
 namespace App\Domain\EventSchedule\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\EventSchedule\Http\{
     EventScheduleEditHandle,
     EventScheduleListHandle,
@@ -27,17 +28,17 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EventScheduleController extends AbstractController
+readonly class EventScheduleController
 {
     public function __construct(
-        private readonly EventScheduleCreateHandle $eventScheduleCreateHandle,
-        private readonly EventScheduleListHandle $eventScheduleListHandle,
-        private readonly EventScheduleDetailHandle $eventScheduleDetailHandle,
-        private readonly EventScheduleEditHandle $eventScheduleEditHandle,
-        private readonly EventScheduleCloneHandle $eventScheduleCloneHandle,
-        private readonly EventScheduleDeleteHandle $eventScheduleDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private EventScheduleCreateHandle $eventScheduleCreateHandle,
+        private EventScheduleListHandle $eventScheduleListHandle,
+        private EventScheduleDetailHandle $eventScheduleDetailHandle,
+        private EventScheduleEditHandle $eventScheduleEditHandle,
+        private EventScheduleCloneHandle $eventScheduleCloneHandle,
+        private EventScheduleDeleteHandle $eventScheduleDeleteHandle
     ) {}
 
     public function create(Request $request): Response
@@ -52,28 +53,28 @@ class EventScheduleController extends AbstractController
 
     public function detail(EventSchedule $eventSchedule): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventSchedule);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventSchedule);
 
         return $this->eventScheduleDetailHandle->handle($eventSchedule);
     }
 
     public function edit(Request $request, EventSchedule $eventSchedule): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventSchedule);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventSchedule);
 
         return $this->eventScheduleEditHandle->handle($request, $eventSchedule);
     }
 
     public function clone(Request $request, EventSchedule $eventSchedule): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
 
         return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
     }
 
     public function delete(Request $request, EventSchedule $eventSchedule): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
 
         return $this->eventScheduleDeleteHandle->handle($request, $eventSchedule);
     }

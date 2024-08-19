@@ -13,34 +13,35 @@
 namespace App\Domain\EventSchedule\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Http\Ajax\{
     EventScheduleCloneHandle,
     EventScheduleDeleteHandle
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
 
-class EventScheduleController extends AbstractController
+readonly class EventScheduleController
 {
     public function __construct(
-        private readonly EventScheduleCloneHandle $eventScheduleCloneHandle,
-        private readonly EventScheduleDeleteHandle $eventScheduleDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private EventScheduleCloneHandle $eventScheduleCloneHandle,
+        private EventScheduleDeleteHandle $eventScheduleDeleteHandle
     ) {}
 
     public function clone(Request $request, EventSchedule $eventSchedule): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
 
         return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
     }
 
     public function delete(EventSchedule $eventSchedule): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
 
         return $this->eventScheduleDeleteHandle->handle($eventSchedule);
     }
