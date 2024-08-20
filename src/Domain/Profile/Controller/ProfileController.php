@@ -27,17 +27,16 @@ use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     BinaryFileResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ProfileController extends AbstractController
+readonly class ProfileController
 {
     public function __construct(
-        private readonly ProfileShowHandle $profileShowHandle,
-        private readonly ProfileEditHandle $profileEditHandle,
-        private readonly ProfileChangeImageHandle $profileChangeImageHandle,
-        private readonly ProfileDeleteImageHandle $profileDeleteImageHandle,
-        private readonly ProfileChangePasswordHandle $profileChangePasswordHandle,
-        private readonly ProfileImageHandle $profileImageHandle
+        private ProfileShowHandle $profileShowHandle,
+        private ProfileEditHandle $profileEditHandle,
+        private ProfileChangeImageHandle $profileChangeImageHandle,
+        private ProfileDeleteImageHandle $profileDeleteImageHandle,
+        private ProfileChangePasswordHandle $profileChangePasswordHandle,
+        private ProfileImageHandle $profileImageHandle
     ) {}
 
     public function show(): Response

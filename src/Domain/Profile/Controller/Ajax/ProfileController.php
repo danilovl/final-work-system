@@ -14,12 +14,11 @@ namespace App\Domain\Profile\Controller\Ajax;
 
 use App\Domain\Profile\Http\Ajax\ProfileCreateImageWebCameraHandle;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ProfileController extends AbstractController
+class ProfileController
 {
     public function __construct(private readonly ProfileCreateImageWebCameraHandle $profileCreateImageWebCameraHandle) {}
 
