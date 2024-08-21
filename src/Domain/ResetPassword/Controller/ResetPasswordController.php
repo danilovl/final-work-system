@@ -21,14 +21,13 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ResetPasswordController extends AbstractController
+readonly class ResetPasswordController
 {
     public function __construct(
-        private readonly ResetPasswordRequestHandle $passwordRequestHandle,
-        private readonly ResetPasswordCheckEmailHandle $resetPasswordCheckEmailHandle,
-        private readonly ResetPasswordResetHandle $resetPasswordResetHandle
+        private ResetPasswordRequestHandle $passwordRequestHandle,
+        private ResetPasswordCheckEmailHandle $resetPasswordCheckEmailHandle,
+        private ResetPasswordResetHandle $resetPasswordResetHandle
     ) {}
 
     public function request(Request $request): Response
