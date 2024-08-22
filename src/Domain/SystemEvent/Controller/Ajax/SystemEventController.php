@@ -13,24 +13,25 @@
 namespace App\Domain\SystemEvent\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\SystemEvent\Http\Ajax\{
     SystemEventViewedHandle,
     SystemEventViewedAllHandle
 };
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class SystemEventController extends AbstractController
+readonly class SystemEventController
 {
     public function __construct(
-        private readonly SystemEventViewedHandle $systemEventViewedHandle,
-        private readonly SystemEventViewedAllHandle $systemEventViewedAllHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private SystemEventViewedHandle $systemEventViewedHandle,
+        private SystemEventViewedAllHandle $systemEventViewedAllHandle
     ) {}
 
     public function viewed(SystemEventRecipient $systemEventRecipient): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED->value, $systemEventRecipient);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED->value, $systemEventRecipient);
 
         return $this->systemEventViewedHandle->handle($systemEventRecipient);
     }

@@ -13,16 +13,15 @@
 namespace App\Domain\SystemEvent\Controller\Api;
 
 use App\Domain\SystemEvent\Http\Api\SystemEventTypeEventsHandle;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
 
-class SystemEventController extends AbstractController
+readonly class SystemEventController
 {
     public function __construct(
-        private readonly SystemEventTypeEventsHandle $systemEventTypeEventsHandle
+        private SystemEventTypeEventsHandle $systemEventTypeEventsHandle
     ) {}
 
     public function list(Request $request, string $type): JsonResponse
