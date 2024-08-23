@@ -13,6 +13,7 @@
 namespace App\Domain\Task\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\{
@@ -22,20 +23,20 @@ use App\Domain\Task\Http\{
     TaskCreateSeveralHandle
 };
 use App\Domain\Task\Entity\Task;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
 
-class TaskController extends AbstractController
+readonly class TaskController
 {
     public function __construct(
-        private readonly TaskListHandle $taskListHandle,
-        private readonly TaskCreateHandle $taskCreateHandle,
-        private readonly TaskCreateSeveralHandle $taskCreateSeveralHandle,
-        private readonly TaskEditHandle $taskEditHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private TaskListHandle $taskListHandle,
+        private TaskCreateHandle $taskCreateHandle,
+        private TaskCreateSeveralHandle $taskCreateSeveralHandle,
+        private TaskEditHandle $taskEditHandle
     ) {}
 
     public function list(Request $request): Response
@@ -45,7 +46,7 @@ class TaskController extends AbstractController
 
     public function create(Request $request, Work $work): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->taskCreateHandle->handle($request, $work);
     }
@@ -61,7 +62,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): Response {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
         return $this->taskEditHandle->handle($request, $work, $task);
     }

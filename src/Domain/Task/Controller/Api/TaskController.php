@@ -13,10 +13,10 @@
 namespace App\Domain\Task\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Task\Entity\Task;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Domain\Task\Http\Api\{
     TaskDetailHandle,
     TaskListWorkHandle,
@@ -29,13 +29,14 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 
-class TaskController extends AbstractController
+readonly class TaskController
 {
     public function __construct(
-        private readonly TaskListOwnerHandle $taskListHandle,
-        private readonly TaskListSolverHandle $taskListSolverHandle,
-        private readonly TaskDetailHandle $taskDetailHandle,
-        private readonly TaskListWorkHandle $taskListWorkHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private TaskListOwnerHandle $taskListHandle,
+        private TaskListSolverHandle $taskListSolverHandle,
+        private TaskDetailHandle $taskDetailHandle,
+        private TaskListWorkHandle $taskListWorkHandle
     ) {}
 
     public function listOwner(Request $request): JsonResponse
@@ -53,14 +54,14 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
 
         return $this->taskDetailHandle->handle($task);
     }
 
     public function listWork(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 
         return $this->taskListWorkHandle->handle($request, $work);
     }

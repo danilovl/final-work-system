@@ -13,6 +13,7 @@
 namespace App\Domain\Task\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Task\Entity\Task;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -26,28 +27,27 @@ use App\Domain\Task\Http\Ajax\{
     TaskNotifyCompleteHandle
 };
 use App\Domain\Work\Entity\Work;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class TaskController extends AbstractController
+readonly class TaskController
 {
     public function __construct(
-        private readonly TaskCreateHandle $taskCreateHandle,
-        private readonly TaskCreateSeveralHandle $taskCreateSeveralHandle,
-        private readonly TaskEditHandle $taskEditHandle,
-        private readonly TaskChangeStatusHandle $taskChangeStatusHandle,
-        private readonly TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
-        private readonly TaskDeleteHandle $taskDeleteHandle,
-        private readonly TaskCompleteAllHandle $taskCompleteAllHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private TaskCreateHandle $taskCreateHandle,
+        private TaskCreateSeveralHandle $taskCreateSeveralHandle,
+        private TaskEditHandle $taskEditHandle,
+        private TaskChangeStatusHandle $taskChangeStatusHandle,
+        private TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
+        private TaskDeleteHandle $taskDeleteHandle,
+        private TaskCompleteAllHandle $taskCompleteAllHandle
     ) {}
 
     public function create(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->taskCreateHandle->handle($request, $work);
     }
@@ -63,7 +63,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
         return $this->taskEditHandle->handle($request, $task);
     }
@@ -74,7 +74,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
         return $this->taskChangeStatusHandle->handle($request, $task);
     }
@@ -83,7 +83,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE->value, $task);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE->value, $task);
 
         return $this->taskNotifyCompleteHandle->handle($task);
     }
@@ -93,7 +93,7 @@ class TaskController extends AbstractController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $task);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $task);
 
         return $this->taskDeleteHandle->handle($task);
     }
