@@ -18,18 +18,17 @@ use App\Domain\User\Http\{
     UserListHandle,
     UserCreateHandle
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
 
-class UserController extends AbstractController
+readonly class UserController
 {
     public function __construct(
-        private readonly UserCreateHandle $userCreateHandle,
-        private readonly UserEditHandle $userEditHandle,
-        private readonly UserListHandle $userListHandle
+        private UserCreateHandle $userCreateHandle,
+        private UserEditHandle $userEditHandle,
+        private UserListHandle $userListHandle
     ) {}
 
     public function create(Request $request): Response

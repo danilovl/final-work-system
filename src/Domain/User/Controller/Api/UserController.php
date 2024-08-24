@@ -15,9 +15,9 @@ namespace App\Domain\User\Controller\Api;
 use App\Domain\User\Http\Api\UserDetailHandle;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class UserController
+readonly class UserController
 {
-    public function __construct(private readonly UserDetailHandle $userDetailHandle) {}
+    public function __construct(private UserDetailHandle $userDetailHandle) {}
 
     public function detail(): JsonResponse
     {

@@ -21,13 +21,12 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UserController extends AbstractController
+readonly class UserController
 {
     public function __construct(
-        private readonly UserCreateHandle $userCreateHandle,
-        private readonly UserEditHandle $userEditHandle
+        private UserCreateHandle $userCreateHandle,
+        private UserEditHandle $userEditHandle
     ) {}
 
     public function create(Request $request): JsonResponse
