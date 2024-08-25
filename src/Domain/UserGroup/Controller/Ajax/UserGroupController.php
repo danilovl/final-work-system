@@ -19,17 +19,16 @@ use App\Domain\UserGroup\Http\Ajax\{
     UserGroupDeleteHandle
 };
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UserGroupController extends AbstractController
+readonly class UserGroupController
 {
     public function __construct(
-        private readonly UserGroupCreateHandle $userGroupCreateHandle,
-        private readonly UserGroupEditHandle $userGroupEditHandle,
-        private readonly UserGroupDeleteHandle $userGroupDeleteHandle
+        private UserGroupCreateHandle $userGroupCreateHandle,
+        private UserGroupEditHandle $userGroupEditHandle,
+        private UserGroupDeleteHandle $userGroupDeleteHandle
     ) {}
 
     public function create(Request $request): JsonResponse

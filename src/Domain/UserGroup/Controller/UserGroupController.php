@@ -18,18 +18,17 @@ use App\Domain\UserGroup\Http\{
     UserGroupCreateHandle
 };
 use App\Domain\UserGroup\Entity\Group;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
 
-class UserGroupController extends AbstractController
+readonly class UserGroupController
 {
     public function __construct(
-        private readonly UserGroupCreateHandle $userGroupCreateHandle,
-        private readonly UserGroupEditHandle $userGroupEditHandle,
-        private readonly UserGroupListHandle $userGroupListHandle
+        private UserGroupCreateHandle $userGroupCreateHandle,
+        private UserGroupEditHandle $userGroupEditHandle,
+        private UserGroupListHandle $userGroupListHandle
     ) {}
 
     public function create(Request $request): Response
