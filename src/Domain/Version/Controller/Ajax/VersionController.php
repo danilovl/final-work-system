@@ -13,6 +13,7 @@
 namespace App\Domain\Version\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Version\Http\Ajax\{
     VersionCreateHandle,
@@ -23,19 +24,19 @@ use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
     Request,
-    Response
+    Response,
+    JsonResponse
 };
 
-class VersionController extends AbstractController
+readonly class VersionController
 {
     public function __construct(
-        private readonly VersionCreateHandle $versionCreateHandle,
-        private readonly VersionEditHandle $versionEditHandle,
-        private readonly VersionDeleteHandle $versionDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private VersionCreateHandle $versionCreateHandle,
+        private VersionEditHandle $versionEditHandle,
+        private VersionDeleteHandle $versionDeleteHandle
     ) {}
 
     public function create(Request $request, Work $work): JsonResponse
@@ -43,7 +44,7 @@ class VersionController extends AbstractController
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
 
         return $this->versionCreateHandle->handle($request, $work);
     }
@@ -58,7 +59,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
 
         return $this->versionEditHandle->handle($request, $media);
     }
@@ -72,7 +73,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $versionVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $versionVoterSubject);
 
         return $this->versionDeleteHandle->handle($media);
     }

@@ -13,32 +13,32 @@
 namespace App\Domain\Version\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Version\Http\{
+    VersionEditHandle,
     VersionCreateHandle,
-    VersionDetailContentHandle,
     VersionDownloadHandle,
-    VersionEditHandle
+    VersionDetailContentHandle
 };
 use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
-    BinaryFileResponse,
     Request,
-    Response
+    Response,
+    BinaryFileResponse
 };
 
-class VersionController extends AbstractController
+readonly class VersionController
 {
     public function __construct(
-        private readonly VersionCreateHandle $versionCreateHandle,
-        private readonly VersionEditHandle $versionEditHandle,
-        private readonly VersionDetailContentHandle $versionDetailContentHandle,
-        private readonly VersionDownloadHandle $versionDownloadHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private VersionCreateHandle $versionCreateHandle,
+        private VersionEditHandle $versionEditHandle,
+        private VersionDetailContentHandle $versionDetailContentHandle,
+        private VersionDownloadHandle $versionDownloadHandle
     ) {}
 
     public function create(
@@ -48,7 +48,7 @@ class VersionController extends AbstractController
         $versionVoterSubject = new VersionVoterSubject;
         $versionVoterSubject->setWork($work);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
 
         return $this->versionCreateHandle->handle($request, $work);
     }
@@ -63,7 +63,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
 
         return $this->versionEditHandle->handle($request, $work, $media);
     }
@@ -72,7 +72,7 @@ class VersionController extends AbstractController
     {
         $versionVoterSubject = (new VersionVoterSubject)->setMedia($version);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $versionVoterSubject, 'The work media does not exist');
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $versionVoterSubject, 'The work media does not exist');
 
         return $this->versionDetailContentHandle->handle($version);
     }
@@ -86,7 +86,7 @@ class VersionController extends AbstractController
         $versionVoterSubject->setWork($work);
         $versionVoterSubject->setMedia($media);
 
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $versionVoterSubject);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $versionVoterSubject);
 
         return $this->versionDownloadHandle->handle($media);
     }
