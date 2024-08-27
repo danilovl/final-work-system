@@ -15,9 +15,9 @@ namespace App\Domain\Widget\Controller\Ajax;
 use App\Domain\Widget\Http\Ajax\WidgetLiveHandle;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class WidgetController
+readonly class WidgetController
 {
-    public function __construct(private readonly WidgetLiveHandle $widgetLiveHandle) {}
+    public function __construct(private WidgetLiveHandle $widgetLiveHandle) {}
 
     public function live(): StreamedResponse
     {
