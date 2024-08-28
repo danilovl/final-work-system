@@ -13,6 +13,7 @@
 namespace App\Domain\Work\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Http\Ajax\{
     WorkEditHandle,
@@ -21,18 +22,18 @@ use App\Domain\Work\Http\Ajax\{
     WorkEditAuthorHandle
 };
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class WorkController extends AbstractController
+readonly class WorkController
 {
     public function __construct(
-        private readonly WorkCreateHandle $workCreateHandle,
-        private readonly WorkEditHandle $workEditHandle,
-        private readonly WorkEditAuthorHandle $workEditAuthorHandle,
-        private readonly WorkDeleteHandle $workDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private WorkCreateHandle $workCreateHandle,
+        private WorkEditHandle $workEditHandle,
+        private WorkEditAuthorHandle $workEditAuthorHandle,
+        private WorkDeleteHandle $workDeleteHandle
     ) {}
 
     public function create(Request $request): JsonResponse
@@ -42,21 +43,21 @@ class WorkController extends AbstractController
 
     public function edit(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->workEditHandle->handle($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
         return $this->workEditAuthorHandle->handle($request, $work);
     }
 
     public function delete(Work $work): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $work);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $work);
 
         return $this->workDeleteHandle->handle($work);
     }
