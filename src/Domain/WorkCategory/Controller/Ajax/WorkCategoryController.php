@@ -13,6 +13,7 @@
 namespace App\Domain\WorkCategory\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Http\Ajax\{
     WorkCategoryEditHandle,
@@ -20,17 +21,17 @@ use App\Domain\WorkCategory\Http\Ajax\{
     WorkCategoryDeleteHandle
 };
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
+    Request,
+    JsonResponse
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class WorkCategoryController extends AbstractController
+readonly class WorkCategoryController
 {
     public function __construct(
-        private readonly WorkCategoryCreateHandle $workCategoryCreateHandle,
-        private readonly WorkCategoryEditHandle $workCategoryEditHandle,
-        private readonly WorkCategoryDeleteHandle $workCategoryDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private WorkCategoryCreateHandle $workCategoryCreateHandle,
+        private WorkCategoryEditHandle $workCategoryEditHandle,
+        private WorkCategoryDeleteHandle $workCategoryDeleteHandle
     ) {}
 
     public function create(Request $request): JsonResponse
@@ -40,14 +41,14 @@ class WorkCategoryController extends AbstractController
 
     public function edit(Request $request, WorkCategory $workCategory): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $workCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $workCategory);
 
         return $this->workCategoryEditHandle->handle($request, $workCategory);
     }
 
     public function delete(WorkCategory $workCategory): JsonResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $workCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $workCategory);
 
         return $this->workCategoryDeleteHandle->handle($workCategory);
     }

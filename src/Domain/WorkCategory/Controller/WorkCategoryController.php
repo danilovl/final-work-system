@@ -13,6 +13,7 @@
 namespace App\Domain\WorkCategory\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Application\Service\AuthorizationCheckerService;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Http\{
     WorkCategoryEditHandle,
@@ -20,20 +21,20 @@ use App\Domain\WorkCategory\Http\{
     WorkCategoryDeleteHandle,
     WorkCategoryCreateHandle
 };
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{
-    RedirectResponse,
     Request,
-    Response
+    Response,
+    RedirectResponse
 };
 
-class WorkCategoryController extends AbstractController
+readonly class WorkCategoryController
 {
     public function __construct(
-        private readonly WorkCategoryCreateHandle $workCategoryCreateHandle,
-        private readonly WorkCategoryListHandle $workCategoryListHandle,
-        private readonly WorkCategoryEditHandle $workCategoryEditHandle,
-        private readonly WorkCategoryDeleteHandle $workCategoryDeleteHandle
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private WorkCategoryCreateHandle $workCategoryCreateHandle,
+        private WorkCategoryListHandle $workCategoryListHandle,
+        private WorkCategoryEditHandle $workCategoryEditHandle,
+        private WorkCategoryDeleteHandle $workCategoryDeleteHandle
     ) {}
 
     public function create(Request $request): Response
@@ -48,14 +49,14 @@ class WorkCategoryController extends AbstractController
 
     public function edit(Request $request, WorkCategory $workCategory): Response
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $workCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $workCategory);
 
         return $this->workCategoryEditHandle->handle($request, $workCategory);
     }
 
     public function delete(WorkCategory $workCategory): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $workCategory);
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $workCategory);
 
         return $this->workCategoryDeleteHandle->handle($workCategory);
     }
