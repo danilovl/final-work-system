@@ -644,6 +644,11 @@
       <code><![CDATA[AppUserProvider]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Application/Service/AuthorizationCheckerService.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Application/Service/DateService.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
