@@ -44,6 +44,13 @@
                 {{ event.createdAt | date('d.m.Y H:i') }}
             </td>
             <td>
+                <a target="_blank"
+                   href="{{ path('event_detail', { 'id': event.id | hashids_encode  }) }}"
+                   class="btn btn-primary btn-xs">
+                    <i class="fa fa-desktop"></i>
+                    {{ 'app.form.action.show_detail' | trans }}
+                </a>
+
                 {% if event.participant is not empty %}
                     <a class="btn btn-primary btn-xs"
                        href="{{ path('work_detail', { 'id': event.participant.work.id | hashids_encode }) }}"
