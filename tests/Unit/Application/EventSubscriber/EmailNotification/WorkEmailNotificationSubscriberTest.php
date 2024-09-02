@@ -28,7 +28,7 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $this->subscriber = new WorkEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,

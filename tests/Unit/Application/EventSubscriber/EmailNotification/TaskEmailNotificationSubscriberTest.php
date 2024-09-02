@@ -29,7 +29,7 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $this->subscriber = new TaskEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,

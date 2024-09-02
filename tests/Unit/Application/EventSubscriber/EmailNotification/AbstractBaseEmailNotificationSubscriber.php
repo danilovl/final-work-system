@@ -12,7 +12,10 @@
 
 namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
 
-use App\Application\Service\TranslatorService;
+use App\Application\Service\{
+    TranslatorService,
+    TwigRenderService
+};
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\User\Facade\UserFacade;
@@ -28,7 +31,6 @@ use Symfony\Component\Messenger\{
     Envelope,
     MessageBusInterface
 };
-use Twig\Environment;
 
 abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 {
@@ -36,7 +38,7 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
     protected EventDispatcher $dispatcher;
 
     protected readonly UserFacade $userFacade;
-    protected readonly Environment $twig;
+    protected readonly TwigRenderService $twigRenderService;
     protected readonly TranslatorService $translator;
     protected readonly EmailNotificationFactory $emailNotificationFactory;
     protected readonly ParameterServiceInterface $parameterService;
@@ -47,7 +49,7 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
         $this->dispatcher = new EventDispatcher;
 
         $this->userFacade = $this->createMock(UserFacade::class);
-        $this->twig = $this->createMock(Environment::class);
+        $this->twigRenderService = $this->createMock(TwigRenderService::class);
         $this->translator = $this->createMock(TranslatorService::class);
         $this->translator
             ->expects($this->any())

@@ -27,7 +27,7 @@ class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $this->subscriber = new UserEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,

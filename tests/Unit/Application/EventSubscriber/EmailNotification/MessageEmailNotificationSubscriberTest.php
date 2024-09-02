@@ -31,7 +31,7 @@ class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
         $this->subscriber = new MessageEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,

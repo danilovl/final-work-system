@@ -18,17 +18,18 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 use Twig\Environment;
+use Twig\Loader\LoaderInterface;
 
 readonly class TwigRenderService
 {
     public function __construct(
-        private Environment $environment,
+        private Environment $twig,
         private ParameterServiceInterface $parameterService
     ) {}
 
     public function render(string $view, array $parameters = []): string
     {
-        return $this->environment->render($view, $parameters);
+        return $this->twig->render($view, $parameters);
     }
 
     public function renderToResponse(
@@ -36,7 +37,7 @@ readonly class TwigRenderService
         array $parameters = [],
         Response $response = null
     ): Response {
-        $content = $this->environment->render($view, $parameters);
+        $content = $this->twig->render($view, $parameters);
         if ($response === null) {
             $response = new Response;
         }
@@ -57,5 +58,10 @@ readonly class TwigRenderService
         }
 
         return $templateName;
+    }
+
+    public function getLoader(): LoaderInterface
+    {
+        return $this->twig->getLoader();
     }
 }

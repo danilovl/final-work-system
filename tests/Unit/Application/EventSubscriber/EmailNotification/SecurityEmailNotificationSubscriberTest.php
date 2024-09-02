@@ -28,7 +28,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
         $this->subscriber = new SecurityEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,

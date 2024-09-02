@@ -13,6 +13,7 @@
 namespace App\Domain\SystemEvent\Service;
 
 use App\Application\Constant\LocaleConstant;
+use App\Application\Service\TwigRenderService;
 use App\Application\Exception\{
     ConstantNotFoundException,
     InvalidArgumentException
@@ -23,13 +24,12 @@ use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Twig\Environment;
 
 readonly class SystemEventLinkGeneratorService
 {
     public function __construct(
         private RequestStack $requestStack,
-        private Environment $twig
+        private TwigRenderService $twigRenderService
     ) {}
 
     #[AsTwigFunction('system_event_generate_link')]
@@ -47,7 +47,7 @@ readonly class SystemEventLinkGeneratorService
     {
         $systemEvent = $systemEventRecipient->getSystemEvent();
 
-        return $this->twig->render(
+        return $this->twigRenderService->render(
             $this->getTemplate($type, $systemEvent->getType()->getId()),
             $this->getTemplateParameters($systemEvent)
         );

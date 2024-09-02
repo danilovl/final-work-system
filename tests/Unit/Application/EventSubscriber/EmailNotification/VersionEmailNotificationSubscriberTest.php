@@ -30,7 +30,7 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
         $this->subscriber = new VersionEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,

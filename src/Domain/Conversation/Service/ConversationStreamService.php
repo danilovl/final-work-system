@@ -12,12 +12,12 @@
 
 namespace App\Domain\Conversation\Service;
 
+use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
-use Twig\Environment;
 
 class ConversationStreamService
 {
@@ -25,7 +25,7 @@ class ConversationStreamService
 
     public function __construct(
         private readonly ParameterServiceInterface $parameterService,
-        private readonly Environment $twig,
+        private readonly TwigRenderService $twigRenderService,
         private readonly ConversationMessageFacade $conversationMessageFacade
     ) {}
 
@@ -38,7 +38,7 @@ class ConversationStreamService
 
         $chatMessageHtml = null;
         foreach ($messages as $message) {
-            $chatMessageHtml .= $this->twig->render('domain/conversation/include/chat_message.html.twig', [
+            $chatMessageHtml .= $this->twigRenderService->render('domain/conversation/include/chat_message.html.twig', [
                 'message' => $message
             ]);
 

@@ -14,7 +14,10 @@ namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\Events;
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
-use App\Application\Service\TranslatorService;
+use App\Application\Service\{
+    TranslatorService,
+    TwigRenderService
+};
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use App\Domain\User\Facade\UserFacade;
@@ -23,13 +26,12 @@ use App\Domain\Work\Constant\WorkUserTypeConstant;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Twig\Environment;
 
 class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         protected UserFacade $userFacade,
-        protected Environment $twig,
+        protected TwigRenderService $twigRenderService,
         protected TranslatorService $translator,
         protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
@@ -38,7 +40,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
     ) {
         parent::__construct(
             $userFacade,
-            $twig,
+            $twigRenderService,
             $translator,
             $emailNotificationFactory,
             $parameterService,

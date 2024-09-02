@@ -14,12 +14,12 @@ namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
+use App\Application\Service\TwigRenderService;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\EmailNotification\Model\EmailNotificationModel;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Twig\Environment;
 
 class BaseEmailNotificationSubscriber
 {
@@ -32,7 +32,7 @@ class BaseEmailNotificationSubscriber
 
     public function __construct(
         protected UserFacade $userFacade,
-        protected Environment $twig,
+        protected TwigRenderService $twigRenderService,
         protected TranslatorService $translator,
         protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
@@ -90,11 +90,11 @@ class BaseEmailNotificationSubscriber
         array $templateParameters = []
     ): string {
         $templatePath = $this->getTemplate($locale, $template);
-        if (!$this->twig->getLoader()->exists($templatePath)) {
+        if (!$this->twigRenderService->getLoader()->exists($templatePath)) {
             $locale = $this->sureExistTemplateLocale;
         }
 
-        return $this->twig->render(
+        return $this->twigRenderService->render(
             $this->getTemplate($locale, $template),
             $templateParameters
         );

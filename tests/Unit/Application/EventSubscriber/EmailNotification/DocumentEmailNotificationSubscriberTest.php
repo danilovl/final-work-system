@@ -39,7 +39,7 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
         $this->subscriber = new DocumentEmailNotificationSubscriber(
             $this->userFacade,
-            $this->twig,
+            $this->twigRenderService,
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
