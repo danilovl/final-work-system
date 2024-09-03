@@ -1,7 +1,7 @@
 [![phpunit](https://github.com/danilovl/final-work-system/actions/workflows/phpunit.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/phpunit.yml)
 [![cypress](https://github.com/danilovl/final-work-system/actions/workflows/cypress.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/cypress.yml)
 
-FinalWork Web Application
+FinalWork web application
 ========================
 
 Thesis management system based on Symfony 7.0
@@ -65,6 +65,10 @@ Project uses extra bundles
 * [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project.
 * [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle provides simple delayed function call.
 
+ERD diagram
+------------
+
+![Alt text](/git/readme/erd_diagram_small.png?raw=true "ERD diagram")
 
 Test coverage
 ------------
