@@ -19,11 +19,11 @@ use Symfony\Component\HttpFoundation\{
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
-class EndpointController
+readonly class EndpointController
 {
     private const string ROUTE_PREFIX_KEY = 'api_key';
 
-    public function __construct(private readonly RouterInterface $router) {}
+    public function __construct(private RouterInterface $router) {}
 
     public function list(Request $request): JsonResponse
     {
