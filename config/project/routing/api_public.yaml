@@ -1,0 +1,3 @@
+api_key_security:
+  resource: api_public/public_security.yaml
+  prefix: /api/public/security

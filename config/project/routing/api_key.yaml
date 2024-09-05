@@ -1,7 +1,3 @@
-api_key_security:
-  resource: api/key_security.yaml
-  prefix: /api/key/security
-
 api_key_user:
   resource: api/key_user.yaml
   prefix: /api/key/user

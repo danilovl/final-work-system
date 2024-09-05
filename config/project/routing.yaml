@@ -188,3 +188,6 @@ widget:
 api_key:
   resource: routing/api_key.yaml
 
+api_public:
+  resource: routing/api_public.yaml
+

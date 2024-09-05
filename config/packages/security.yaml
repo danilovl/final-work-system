@@ -15,6 +15,8 @@ security:
     api_key_user_provider:
       id: app.provider.api_key
 
+    in_memory: { memory: null }
+
   role_hierarchy:
     ROLE_STUDENT:     [ROLE_USER]
     ROLE_OPPONENT:    [ROLE_USER]
@@ -34,6 +36,12 @@ security:
       custom_authenticators:
         - app.authenticator.api_key
 
+    api_public:
+      pattern: ^/api/public/
+      stateless: true
+      lazy: true
+      provider: in_memory
+
     main:
       pattern: ^/(.*)
       lazy: true
@@ -52,11 +60,14 @@ security:
     - { path: ^/(%locales%)/reset-password/check-email$,  roles: PUBLIC_ACCESS }
     - { path: ^/(%locales%)/reset-password/reset$,        roles: PUBLIC_ACCESS }
 
+    # API public
+    - { path: ^/api/public/, roles: PUBLIC_ACCESS }
+
+    # API only by token key
+    - { path: ^/api/key/,  roles: ROLE_API }
+
     # Admin login page needs to be access without credential
     - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
-
-    # API
-    - { path: ^/api/key/, roles: ROLE_API }
 
     # Google docs
     - { path: ^/(%locales%)/document/google/download/,            roles: PUBLIC_ACCESS }
