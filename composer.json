@@ -20,7 +20,7 @@
         "ext-redis": "*",
         "ext-sockets": "*",
         "ext-sodium": "*",
-        "api-platform/core": "^3.0.8",
+        "api-platform/core": "^3.3.3",
         "aws/aws-sdk-php": "^3.279",
         "aws/aws-sdk-php-symfony": "^2.7",
         "composer/package-versions-deprecated": "1.11.99.3",
