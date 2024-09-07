@@ -16,9 +16,7 @@ class ApiKeyCredentialModel
 {
     public function __construct(
         public string $authToken,
-        public ?string $authUserToken,
-        public ?string $authUserUsername,
-        public ?string $username,
-        public ?string $password
+        public string $authUserToken,
+        public string $authUserUsername
     ) {}
 }

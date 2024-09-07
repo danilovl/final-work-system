@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Application\Security\Authenticator;
 
 use App\Application\Model\Security\ApiKeyCredentialModel;
-use App\Application\Security\Authenticator\ApiKeyAuthenticator;
+use App\Application\Security\Authenticator\ApiAuthenticator;
 use App\Application\Service\EntityManagerService;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
@@ -30,32 +30,29 @@ use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
     CustomUserMessageAuthenticationException
 };
-use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
-class ApiKeyAuthenticatorTest extends TestCase
+class ApiAuthenticatorTest extends TestCase
 {
     private readonly Request $request;
-    private readonly ApiKeyAuthenticator $authenticator;
+    private readonly ApiAuthenticator $authenticator;
     private readonly UserService $userService;
     private readonly UserFacade $userFacade;
     private readonly ApiUserFacade $apiUserFacade;
 
     protected function setUp(): void
     {
-        $this->request = new Request(request: [
-            'username' => 'username',
-            'password' => 'password',
-        ]);
-        $this->request->headers->set(ApiKeyAuthenticator::AUTH_KEY, 'AUTH_KEY');
-        $this->request->headers->set(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY, 'AUTH_USER_TOKEN_KEY');
-        $this->request->headers->set(ApiKeyAuthenticator::AUTH_USER_USERNAME, 'AUTH_USER_USERNAME');
+        $this->request = new Request;
+        $this->request->headers->set(ApiAuthenticator::AUTH_KEY, 'AUTH_KEY');
+        $this->request->headers->set(ApiAuthenticator::AUTH_USER_TOKEN_KEY, 'AUTH_USER_TOKEN_KEY');
+        $this->request->headers->set(ApiAuthenticator::AUTH_USER_USERNAME, 'AUTH_USER_USERNAME');
 
         $this->userService = $this->createMock(UserService::class);
         $this->apiUserFacade = $this->createMock(ApiUserFacade::class);
         $this->userFacade = $this->createMock(UserFacade::class);
         $entityManagerService = $this->createMock(EntityManagerService::class);
 
-        $this->authenticator = new ApiKeyAuthenticator(
+        $this->authenticator = new ApiAuthenticator(
             $this->userService,
             $this->apiUserFacade,
             $this->userFacade,
@@ -72,7 +69,7 @@ class ApiKeyAuthenticatorTest extends TestCase
 
         $this->assertTrue($this->authenticator->supports($this->request));
 
-        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_KEY);
+        $this->request->headers->remove(ApiAuthenticator::AUTH_KEY);
         $this->assertFalse($this->authenticator->supports($this->request));
     }
 
@@ -85,8 +82,6 @@ class ApiKeyAuthenticatorTest extends TestCase
         $this->assertSame('AUTH_KEY', $credentials->authToken);
         $this->assertSame('AUTH_USER_TOKEN_KEY', $credentials->authUserToken);
         $this->assertSame('AUTH_USER_USERNAME', $credentials->authUserUsername);
-        $this->assertSame('username', $credentials->username);
-        $this->assertSame('password', $credentials->password);
     }
 
     public function testAuthenticateByAuthUserTokenSuccess(): void
@@ -111,48 +106,16 @@ class ApiKeyAuthenticatorTest extends TestCase
             ->willReturn(null);
 
         $this->expectException(CustomUserMessageAuthenticationException::class);
-        $result = $this->authenticator->authenticate($this->request);
-        $result->getUser();
-    }
 
-    public function testAuthenticateByUsernameSuccess(): void
-    {
-        $user = new User;
-        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY);
-
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findOneByUsername')
-            ->willReturn($user);
-
-        $result = $this->authenticator->authenticate($this->request);
-
-        $this->assertSame($user, $result->getUser());
-    }
-
-    public function testAuthenticateByUsernameFailed(): void
-    {
-        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY);
-
-        $this->userFacade
-            ->expects($this->once())
-            ->method('findOneByUsername')
-            ->willReturn(null);
-
-        $this->expectException(CustomUserMessageAuthenticationException::class);
         $result = $this->authenticator->authenticate($this->request);
         $result->getUser();
     }
 
     public function testAuthenticateByAuthToken(): void
     {
-        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_TOKEN_KEY);
-        $this->request->headers->remove(ApiKeyAuthenticator::AUTH_USER_USERNAME);
-        $this->request->request->remove('username');
-
         $result = $this->authenticator->authenticate($this->request);
 
-        $this->assertInstanceOf(SelfValidatingPassport::class, $result);
+        $this->assertInstanceOf(Passport::class, $result);
     }
 
     public function testOnAuthenticationSuccess(): void

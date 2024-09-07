@@ -21,9 +21,9 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
     Request,
-    Response
+    Response,
+    JsonResponse
 };
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\{
@@ -31,14 +31,10 @@ use Symfony\Component\Security\Core\Exception\{
     CustomUserMessageAuthenticationException
 };
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
-use Symfony\Component\Security\Http\Authenticator\Passport\{
-    Passport,
-    SelfValidatingPassport
-};
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 
-class ApiKeyAuthenticator extends AbstractAuthenticator
+class ApiAuthenticator extends AbstractAuthenticator
 {
     public const string AUTH_KEY = 'X-AUTH-API-KEY';
     public const string AUTH_USER_TOKEN_KEY = 'X-AUTH-USER-TOKEN';
@@ -54,7 +50,10 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     public function supports(Request $request): bool
     {
         $authKey = $request->headers->get(self::AUTH_KEY);
-        if ($authKey === null) {
+        $authUserToken = $request->headers->get(self::AUTH_USER_TOKEN_KEY);
+        $authUserUsername = $request->headers->get(self::AUTH_USER_USERNAME);
+
+        if ($authKey === null || $authUserToken === null || $authUserUsername === null) {
             return false;
         }
 
@@ -67,17 +66,15 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     {
         /** @var string $authToken */
         $authToken = $request->headers->get(self::AUTH_KEY);
-        /** @var string|null $authUserToken */
+        /** @var string $authUserToken */
         $authUserToken = $request->headers->get(self::AUTH_USER_TOKEN_KEY);
-        /** @var string|null $authUserUsername */
+        /** @var string $authUserUsername */
         $authUserUsername = $request->headers->get(self::AUTH_USER_USERNAME);
 
         return new ApiKeyCredentialModel(
             authToken: $authToken,
             authUserToken: $authUserToken,
-            authUserUsername: $authUserUsername,
-            username: $request->request->getString('username'),
-            password: $request->request->getString('password')
+            authUserUsername: $authUserUsername
         );
     }
 
@@ -85,20 +82,11 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     {
         $apiKeyCredential = $this->getCredentials($request);
 
-        if (!empty($apiKeyCredential->authUserToken)) {
-            return $this->authenticateUserToken($apiKeyCredential);
-        }
-
-        if (!empty($apiKeyCredential->username) && !empty($apiKeyCredential->password)) {
-            return $this->authenticateUsername($apiKeyCredential);
-        }
-
-        return $this->authenticateAuthToken($apiKeyCredential);
+        return $this->authenticateUserToken($apiKeyCredential);
     }
 
     private function authenticateUserToken(ApiKeyCredentialModel $apiKeyCredentialModel): Passport
     {
-        /** @var string $username */
         $username = $apiKeyCredentialModel->authUserUsername;
 
         $userBadge = new UserBadge($username, $this->getUserByToken($apiKeyCredentialModel));
@@ -107,46 +95,10 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
         return new Passport($userBadge, $passwordCredentials);
     }
 
-    private function authenticateUsername(ApiKeyCredentialModel $apiKeyCredentialModel): Passport
-    {
-        /** @var string $username */
-        $username = $apiKeyCredentialModel->username;
-        /** @var string $password */
-        $password = $apiKeyCredentialModel->password;
-
-        $userBadge = new UserBadge($username, $this->getUser($username));
-        $passwordCredentials = new PasswordCredentials($password);
-
-        return new Passport($userBadge, $passwordCredentials);
-    }
-
-    private function authenticateAuthToken(ApiKeyCredentialModel $apiKeyCredentialModel): Passport
-    {
-        $authToken = $apiKeyCredentialModel->authToken;
-
-        return new SelfValidatingPassport(new UserBadge($authToken));
-    }
-
-    public function getUser(string $username): callable
-    {
-        return function () use ($username): User {
-            $user = $this->userFacade->findOneByUsername($username);
-            if ($user === null) {
-                throw new CustomUserMessageAuthenticationException('User could not be found.');
-            }
-
-            $user->addAdditionRole(UserRoleConstant::API->value);
-
-            return $user;
-        };
-    }
-
     public function getUserByToken(ApiKeyCredentialModel $apiKeyCredentialModel): callable
     {
         return function () use ($apiKeyCredentialModel): User {
-            /** @var string $username */
             $username = $apiKeyCredentialModel->authUserUsername;
-            /** @var string $userToken */
             $userToken = $apiKeyCredentialModel->authUserToken;
 
             $user = $this->userFacade->findOneByToken($username, $userToken);

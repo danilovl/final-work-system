@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.22.2@d768d914152dbbf3486c36398802f74e80cfde48">
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
   <file src="src/AppBundle.php">
     <UnusedClass>
       <code><![CDATA[AppBundle]]></code>
@@ -186,6 +186,7 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$defaultLocale]]></code>
       <code><![CDATA[$user->getLocale()]]></code>
+      <code><![CDATA[empty($this->locales[0])]]></code>
     </RiskyTruthyFalsyComparison>
     <UnusedClass>
       <code><![CDATA[RedirectToPreferredLocaleListener]]></code>
@@ -582,6 +583,11 @@
       <code><![CDATA[Version20200627193807]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Application/Model/Security/ApiKeyCredentialModel.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$authToken]]></code>
+    </PossiblyUnusedProperty>
+  </file>
   <file src="src/Application/Repository/BaseQueryBuilder.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
@@ -597,18 +603,9 @@
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
   </file>
-  <file src="src/Application/Security/Authenticator/ApiKeyAuthenticator.php">
-    <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($apiKeyCredential->authUserToken)]]></code>
-      <code><![CDATA[empty($apiKeyCredential->password)]]></code>
-      <code><![CDATA[empty($apiKeyCredential->username)]]></code>
-    </RiskyTruthyFalsyComparison>
-    <UnnecessaryVarAnnotation>
-      <code><![CDATA[string|null]]></code>
-      <code><![CDATA[string|null]]></code>
-    </UnnecessaryVarAnnotation>
+  <file src="src/Application/Security/Authenticator/ApiAuthenticator.php">
     <UnusedClass>
-      <code><![CDATA[ApiKeyAuthenticator]]></code>
+      <code><![CDATA[ApiAuthenticator]]></code>
     </UnusedClass>
   </file>
   <file src="src/Application/Security/Authenticator/AppAuthenticator.php">
@@ -677,6 +674,9 @@
     <MixedArgument>
       <code><![CDATA[$defaultPageName]]></code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$options]]></code>
+    </MixedArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$defaultPageName]]></code>
     </MixedAssignment>

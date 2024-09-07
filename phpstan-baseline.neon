@@ -741,7 +741,7 @@ parameters:
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$twig\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$twigRenderService\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
 
@@ -771,7 +771,7 @@ parameters:
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$twig is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$twigRenderService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
 
@@ -1186,6 +1186,16 @@ parameters:
 			path: tests/Unit/Application/Security/AppUserProviderTest.php
 
 		-
+			message: "#^Access to an undefined property App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel\\:\\:\\$password\\.$#"
+			count: 1
+			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel\\:\\:\\$username\\.$#"
+			count: 1
+			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+
+		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
@@ -1344,6 +1354,31 @@ parameters:
 			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\AuthorizationCheckerInterface\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
+
+		-
+			message: "#^Class Application\\\\Service\\\\AuthorizationCheckerServiceTest has an uninitialized readonly property \\$authorizationChecker\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
+
+		-
+			message: "#^Class Application\\\\Service\\\\AuthorizationCheckerServiceTest has an uninitialized readonly property \\$authorizationCheckerService\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
+
+		-
+			message: "#^Readonly property Application\\\\Service\\\\AuthorizationCheckerServiceTest\\:\\:\\$authorizationChecker is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
+
+		-
+			message: "#^Readonly property Application\\\\Service\\\\AuthorizationCheckerServiceTest\\:\\:\\$authorizationCheckerService is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:expects\\(\\)\\.$#"

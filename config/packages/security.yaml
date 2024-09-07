@@ -12,9 +12,6 @@ security:
     user_provider:
       id: app.provider.user
 
-    api_key_user_provider:
-      id: app.provider.api_key
-
     in_memory: { memory: null }
 
   role_hierarchy:
@@ -29,18 +26,18 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
-    api_key:
-      pattern: ^/api/key/
-      stateless: true
-      provider: api_key_user_provider
-      custom_authenticators:
-        - app.authenticator.api_key
-
     api_public:
       pattern: ^/api/public/
       stateless: true
       lazy: true
       provider: in_memory
+
+    api_key:
+      pattern: ^/api/
+      context: user
+      provider: user_provider
+      custom_authenticators:
+        - app.authenticator.api_key
 
     main:
       pattern: ^/(.*)
@@ -64,7 +61,7 @@ security:
     - { path: ^/api/public/, roles: PUBLIC_ACCESS }
 
     # API only by token key
-    - { path: ^/api/key/,  roles: ROLE_API }
+    - { path: ^/api/,  roles: IS_AUTHENTICATED_FULLY }
 
     # Admin login page needs to be access without credential
     - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
