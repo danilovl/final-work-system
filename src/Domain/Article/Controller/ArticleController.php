@@ -38,6 +38,6 @@ readonly class ArticleController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleVoterSubject);
 
-        return $this->articleDetailHandle->handle($article, $articleCategory);
+        return $this->articleDetailHandle->__invoke($article, $articleCategory);
     }
 }

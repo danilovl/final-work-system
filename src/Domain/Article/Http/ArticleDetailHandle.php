@@ -27,7 +27,7 @@ readonly class ArticleDetailHandle
         private SeoPageService $seoPageService
     ) {}
 
-    public function handle(Article $article, ArticleCategory $articleCategory): Response
+    public function __invoke(Article $article, ArticleCategory $articleCategory): Response
     {
         $this->seoPageService->setTitle($article->getTitle());
 
