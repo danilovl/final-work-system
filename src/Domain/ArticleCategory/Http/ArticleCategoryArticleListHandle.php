@@ -34,7 +34,7 @@ readonly class ArticleCategoryArticleListHandle
         private SeoPageService $seoPageService
     ) {}
 
-    public function handle(Request $request, ArticleCategory $articleCategory): Response
+    public function __invoke(Request $request, ArticleCategory $articleCategory): Response
     {
         $articlesQuery = $this->articleFacade
             ->queryArticlesByCategory($articleCategory);

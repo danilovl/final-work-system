@@ -34,13 +34,13 @@ readonly class ArticleCategoryController
 
     public function list(Request $request): Response
     {
-        return $this->articleCategoryListHandle->handle($request);
+        return $this->articleCategoryListHandle->__invoke($request);
     }
 
     public function articleList(Request $request, ArticleCategory $articleCategory): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $articleCategory);
 
-        return $this->articleCategoryArticleListHandle->handle($request, $articleCategory);
+        return $this->articleCategoryArticleListHandle->__invoke($request, $articleCategory);
     }
 }

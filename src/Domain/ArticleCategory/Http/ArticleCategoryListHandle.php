@@ -32,7 +32,7 @@ readonly class ArticleCategoryListHandle
         private PaginatorService $paginatorService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $articleCategoriesQuery = $this->articleCategoryFacade->queryCategoriesByRoles(
             $this->userService->getUser()->getRoles()
