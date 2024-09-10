@@ -60,7 +60,7 @@ readonly class ConversationDetailHandle
         private MessageHighlightService $messageHighlightService
     ) {}
 
-    public function handle(Request $request, Conversation $conversation): Response
+    public function __invoke(Request $request, Conversation $conversation): Response
     {
         $user = $this->userService->getUser();
         $form = null;

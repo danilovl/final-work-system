@@ -27,7 +27,7 @@ readonly class ConversationDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Conversation $conversation): JsonResponse
+    public function __invoke(Conversation $conversation): JsonResponse
     {
         $this->entityManagerService->remove($conversation);
 

@@ -52,7 +52,7 @@ readonly class ConversationListHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
         $types = [];

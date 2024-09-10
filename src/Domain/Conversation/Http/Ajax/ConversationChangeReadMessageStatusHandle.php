@@ -27,7 +27,7 @@ readonly class ConversationChangeReadMessageStatusHandle
         private ConversationMessageFacade $conversationMessageFacade
     ) {}
 
-    public function handle(ConversationMessage $conversationMessage): JsonResponse
+    public function __invoke(ConversationMessage $conversationMessage): JsonResponse
     {
         $this->conversationMessageFacade->changeReadMessageStatus(
             $this->userService->getUser(),

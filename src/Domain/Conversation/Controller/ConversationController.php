@@ -45,19 +45,19 @@ readonly class ConversationController
 
     public function create(Request $request): Response
     {
-        return $this->conversationCreateHandle->handle($request);
+        return $this->conversationCreateHandle->__invoke($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->conversationListHandle->handle($request);
+        return $this->conversationListHandle->__invoke($request);
     }
 
     public function detail(Request $request, Conversation $conversation): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
-        return $this->conversationDetailHandle->handle($request, $conversation);
+        return $this->conversationDetailHandle->__invoke($request, $conversation);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_user_one', 'id_user_two'])]
@@ -66,13 +66,13 @@ readonly class ConversationController
         #[MapEntity(mapping: ['id_user_one' => 'id'])] User $userOne,
         #[MapEntity(mapping: ['id_user_two' => 'id'])] User $userTwo
     ): RedirectResponse {
-        return $this->conversationCreateWorkHandle->handle($work, $userOne, $userTwo);
+        return $this->conversationCreateWorkHandle->__invoke($work, $userOne, $userTwo);
     }
 
     public function lastMessage(Request $request, Conversation $conversation): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
-        return $this->conversationLastMessageHandle->handle($request, $conversation);
+        return $this->conversationLastMessageHandle->__invoke($request, $conversation);
     }
 }

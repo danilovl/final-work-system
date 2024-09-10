@@ -44,25 +44,25 @@ readonly class ConversationController
             $conversationMessage
         );
 
-        return $this->conversationChangeReadMessageStatusHandle->handle($conversationMessage);
+        return $this->conversationChangeReadMessageStatusHandle->__invoke($conversationMessage);
     }
 
     public function readAll(): JsonResponse
     {
-        return $this->conversationReadAllHandle->handle();
+        return $this->conversationReadAllHandle->__invoke();
     }
 
     public function delete(Conversation $conversation): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $conversation);
 
-        return $this->conversationDeleteHandle->handle($conversation);
+        return $this->conversationDeleteHandle->__invoke($conversation);
     }
 
     public function liveConversation(Conversation $conversation): StreamedResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
-        return $this->conversationLiveHandle->handle($conversation);
+        return $this->conversationLiveHandle->__invoke($conversation);
     }
 }

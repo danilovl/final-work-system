@@ -44,7 +44,7 @@ readonly class ConversationCreateHandle
         private ConversationTypeFacade $conversationTypeFacade
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
 

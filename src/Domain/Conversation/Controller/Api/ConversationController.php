@@ -25,6 +25,6 @@ readonly class ConversationController
 
     public function listWorkMessage(Request $request, Work $work): Response
     {
-        return $this->conversionWorkHandle->handle($request, $work);
+        return $this->conversionWorkHandle->__invoke($request, $work);
     }
 }

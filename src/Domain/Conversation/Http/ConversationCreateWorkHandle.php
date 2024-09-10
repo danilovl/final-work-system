@@ -37,7 +37,7 @@ readonly class ConversationCreateWorkHandle
         private ConversationFactory $conversationFactory
     ) {}
 
-    public function handle(
+    public function __invoke(
         Work $work,
         User $userOne,
         User $userTwo

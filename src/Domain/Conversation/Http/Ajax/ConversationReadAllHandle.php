@@ -34,7 +34,7 @@ readonly class ConversationReadAllHandle
         private ConversationMessageStatusFacade $conversationMessageStatusFacade
     ) {}
 
-    public function handle(): JsonResponse
+    public function __invoke(): JsonResponse
     {
         $user = $this->userService->getUser();
 

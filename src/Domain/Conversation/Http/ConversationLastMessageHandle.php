@@ -39,7 +39,7 @@ readonly class ConversationLastMessageHandle
         private MessageHighlightService $messageHighlightService
     ) {}
 
-    public function handle(Request $request, Conversation $conversation): Response
+    public function __invoke(Request $request, Conversation $conversation): Response
     {
         $conversationMessages = $this->conversationMessageFacade->getMessagesByConversation(
             $conversation,

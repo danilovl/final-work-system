@@ -21,7 +21,7 @@ readonly class ConversationLiveHandle
 {
     public function __construct(private ConversationStreamService $conversationStreamService) {}
 
-    public function handle(Conversation $conversation): StreamedResponse
+    public function __invoke(Conversation $conversation): StreamedResponse
     {
         $callback = $this->conversationStreamService->handle($conversation);
 
