@@ -37,7 +37,7 @@ readonly class DocumentEditHandle
         private MediaFactory $mediaFactory
     ) {}
 
-    public function handle(Request $request, Media $media): JsonResponse
+    public function __invoke(Request $request, Media $media): JsonResponse
     {
         $mediaModel = MediaModel::fromMedia($media);
         $form = $this->documentFormFactory

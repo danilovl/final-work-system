@@ -42,7 +42,7 @@ readonly class DocumentListHandle
         private PaginatorService $paginatorService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
 

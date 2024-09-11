@@ -42,7 +42,7 @@ readonly class DocumentEditHandle
         private MediaFactory $mediaFactory
     ) {}
 
-    public function handle(Request $request, Media $media): Response
+    public function __invoke(Request $request, Media $media): Response
     {
         $user = $this->userService->getUser();
         $mediaModel = MediaModel::fromMedia($media);

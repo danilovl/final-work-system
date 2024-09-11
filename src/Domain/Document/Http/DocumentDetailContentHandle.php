@@ -20,7 +20,7 @@ readonly class DocumentDetailContentHandle
 {
     public function __construct(private TwigRenderService $twigRenderService) {}
 
-    public function handle(Media $media): Response
+    public function __invoke(Media $media): Response
     {
         return $this->twigRenderService->renderToResponse('domain/document/detail_content.html.twig', [
             'document' => $media

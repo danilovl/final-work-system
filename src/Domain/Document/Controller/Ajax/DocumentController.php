@@ -39,27 +39,27 @@ readonly class DocumentController
 
     public function create(Request $request): JsonResponse
     {
-        return $this->documentCreateHandle->handle($request);
+        return $this->documentCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, Media $media): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
-        return $this->documentEditHandle->handle($request, $media);
+        return $this->documentEditHandle->__invoke($request, $media);
     }
 
     public function changeActive(Media $media): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
-        return $this->documentChangeActiveHandle->handle($media);
+        return $this->documentChangeActiveHandle->__invoke($media);
     }
 
     public function delete(Media $media): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $media);
 
-        return $this->documentDeleteHandle->handle($media);
+        return $this->documentDeleteHandle->__invoke($media);
     }
 }

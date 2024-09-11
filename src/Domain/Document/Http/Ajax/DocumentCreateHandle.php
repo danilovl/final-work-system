@@ -44,7 +44,7 @@ readonly class DocumentCreateHandle
         private DocumentEventDispatcherService $documentEventDispatcherService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
         /** @var MediaType $type */

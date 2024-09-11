@@ -27,7 +27,7 @@ readonly class DocumentChangeActiveHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Media $media): JsonResponse
+    public function __invoke(Media $media): JsonResponse
     {
         $media->changeActive();
         $this->entityManagerService->flush();

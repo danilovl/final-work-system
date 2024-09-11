@@ -44,43 +44,43 @@ readonly class DocumentController
 
     public function create(Request $request): Response
     {
-        return $this->documentCreateHandle->handle($request);
+        return $this->documentCreateHandle->__invoke($request);
     }
 
     #[AsTwigFunction('document_detail_content')]
     public function detailContent(Media $media): Response
     {
-        return $this->documentDetailContentHandle->handle($media);
+        return $this->documentDetailContentHandle->__invoke($media);
     }
 
     public function edit(Request $request, Media $media): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $media);
 
-        return $this->documentEditHandle->handle($request, $media);
+        return $this->documentEditHandle->__invoke($request, $media);
     }
 
     public function list(Request $request): Response
     {
-        return $this->documentListHandle->handle($request);
+        return $this->documentListHandle->__invoke($request);
     }
 
     public function listOwner(Request $request): Response
     {
-        return $this->documentListOwnerHandle->handle($request);
+        return $this->documentListOwnerHandle->__invoke($request);
     }
 
     public function download(Media $media): BinaryFileResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
-        return $this->documentDownloadHandle->handle($media);
+        return $this->documentDownloadHandle->__invoke($media);
     }
 
     public function downloadGoogle(Media $media): BinaryFileResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $media);
 
-        return $this->documentDownloadHandle->handle($media);
+        return $this->documentDownloadHandle->__invoke($media);
     }
 }
