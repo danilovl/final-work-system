@@ -39,25 +39,25 @@ readonly class DocumentCategoryController
 
     public function create(Request $request): Response
     {
-        return $this->documentCategoryCreateHandle->handle($request);
+        return $this->documentCategoryCreateHandle->__invoke($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->documentCategoryListHandle->handle($request);
+        return $this->documentCategoryListHandle->__invoke($request);
     }
 
     public function edit(Request $request, MediaCategory $mediaCategory): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
 
-        return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
+        return $this->documentCategoryEditHandle->__invoke($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
 
-        return $this->documentCategoryDeleteHandle->handle($mediaCategory);
+        return $this->documentCategoryDeleteHandle->__invoke($mediaCategory);
     }
 }

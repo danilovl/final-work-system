@@ -34,7 +34,7 @@ readonly class DocumentCategoryListHandle
         private ParameterServiceInterface $parameterService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
         $pagination = $this->paginatorService->createPaginationRequest(

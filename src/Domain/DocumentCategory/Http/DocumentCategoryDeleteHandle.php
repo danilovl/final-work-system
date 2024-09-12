@@ -27,7 +27,7 @@ readonly class DocumentCategoryDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(MediaCategory $mediaCategory): RedirectResponse
+    public function __invoke(MediaCategory $mediaCategory): RedirectResponse
     {
         if (count($mediaCategory->getMedias()) === 0) {
             $this->entityManagerService->remove($mediaCategory);

@@ -40,7 +40,7 @@ readonly class DocumentCategoryEditHandle
         private DocumentCategoryFormFactory $documentCategoryFormFactory,
     ) {}
 
-    public function handle(Request $request, MediaCategory $mediaCategory): Response
+    public function __invoke(Request $request, MediaCategory $mediaCategory): Response
     {
         $mediaCategoryModel = MediaCategoryModel::fromMediaCategory($mediaCategory);
 

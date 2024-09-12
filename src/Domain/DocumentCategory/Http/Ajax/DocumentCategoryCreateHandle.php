@@ -32,7 +32,7 @@ readonly class DocumentCategoryCreateHandle
         private MediaCategoryFactory $mediaCategoryFactory
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $mediaCategoryModel = new MediaCategoryModel;
         $mediaCategoryModel->owner = $this->userService->getUser();

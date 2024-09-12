@@ -33,7 +33,7 @@ readonly class DocumentCategoryEditHandle
         private MediaCategoryFactory $mediaCategoryFactory
     ) {}
 
-    public function handle(Request $request, MediaCategory $mediaCategory): JsonResponse
+    public function __invoke(Request $request, MediaCategory $mediaCategory): JsonResponse
     {
         $mediaCategoryModel = MediaCategoryModel::fromMediaCategory($mediaCategory);
         $form = $this->formFactory

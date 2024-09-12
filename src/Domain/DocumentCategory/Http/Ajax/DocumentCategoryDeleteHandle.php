@@ -27,7 +27,7 @@ readonly class DocumentCategoryDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(MediaCategory $mediaCategory): JsonResponse
+    public function __invoke(MediaCategory $mediaCategory): JsonResponse
     {
         if (count($mediaCategory->getMedias()) === 0) {
             $this->entityManagerService->remove($mediaCategory);

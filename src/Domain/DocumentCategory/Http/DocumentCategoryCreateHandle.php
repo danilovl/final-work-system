@@ -41,7 +41,7 @@ readonly class DocumentCategoryCreateHandle
         private MediaCategoryFactory $mediaCategoryFactory
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $mediaCategoryModel = new MediaCategoryModel;
         $mediaCategoryModel->owner = $this->userService->getUser();

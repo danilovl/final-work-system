@@ -36,20 +36,20 @@ readonly class DocumentCategoryController
 
     public function create(Request $request): JsonResponse
     {
-        return $this->documentCategoryCreateHandle->handle($request);
+        return $this->documentCategoryCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, MediaCategory $mediaCategory): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $mediaCategory);
 
-        return $this->documentCategoryEditHandle->handle($request, $mediaCategory);
+        return $this->documentCategoryEditHandle->__invoke($request, $mediaCategory);
     }
 
     public function delete(MediaCategory $mediaCategory): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $mediaCategory);
 
-        return $this->documentCategoryDeleteHandle->handle($mediaCategory);
+        return $this->documentCategoryDeleteHandle->__invoke($mediaCategory);
     }
 }
