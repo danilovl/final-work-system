@@ -51,7 +51,7 @@ readonly class EventEditHandle
         private RouterInterface $router
     ) {}
 
-    public function handle(Request $request, Event $event): Response
+    public function __invoke(Request $request, Event $event): Response
     {
         $origin = clone $event;
         $user = $this->userService->getUser();

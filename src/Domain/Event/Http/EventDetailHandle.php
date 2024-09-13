@@ -48,7 +48,7 @@ readonly class EventDetailHandle
         private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Event $event): Response
+    public function __invoke(Request $request, Event $event): Response
     {
         $user = $this->userService->getUser();
         $eventCommentExist = $this->commentFacade

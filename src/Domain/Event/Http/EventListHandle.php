@@ -36,7 +36,7 @@ readonly class EventListHandle
         private SeoPageService $seoPageService,
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
         $eventRepositoryData = new EventRepositoryData;

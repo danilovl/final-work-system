@@ -43,20 +43,20 @@ readonly class EventController
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
 
-        return $this->eventGetEventHandle->handle($request, $event);
+        return $this->eventGetEventHandle->__invoke($request, $event);
     }
 
     public function edit(Request $request, Event $event): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
-        return $this->eventEditHandle->handle($request, $event);
+        return $this->eventEditHandle->__invoke($request, $event);
     }
 
     public function delete(Event $event): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
 
-        return $this->eventDeleteHandle->handle($event);
+        return $this->eventDeleteHandle->__invoke($event);
     }
 }

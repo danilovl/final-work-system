@@ -41,34 +41,34 @@ readonly class EventController
 
     public function list(Request $request): Response
     {
-        return $this->eventListHandle->handle($request);
+        return $this->eventListHandle->__invoke($request);
     }
 
     public function detail(Request $request, Event $event): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
 
-        return $this->eventDetailHandle->handle($request, $event);
+        return $this->eventDetailHandle->__invoke($request, $event);
     }
 
     public function edit(Request $request, Event $event): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
-        return $this->eventEditHandle->handle($request, $event);
+        return $this->eventEditHandle->__invoke($request, $event);
     }
 
     public function switchToSkype(Event $event): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::SWITCH_TO_SKYPE->value, $event);
 
-        return $this->eventSwitchToSkypeHandle->handle($event);
+        return $this->eventSwitchToSkypeHandle->__invoke($event);
     }
 
     public function delete(Request $request, Event $event): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
 
-        return $this->eventDeleteHandle->handle($request, $event);
+        return $this->eventDeleteHandle->__invoke($request, $event);
     }
 }

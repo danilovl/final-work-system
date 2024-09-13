@@ -36,7 +36,7 @@ readonly class EventGetEventHandle
         private EventCalendarFacade $eventCalendarFacade
     ) {}
 
-    public function handle(Request $request, Event $event): JsonResponse
+    public function __invoke(Request $request, Event $event): JsonResponse
     {
         $user = $this->userService->getUser();
 

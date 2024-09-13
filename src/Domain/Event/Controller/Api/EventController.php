@@ -25,6 +25,6 @@ readonly class EventController
 
     public function list(Request $request, Work $work): JsonResponse
     {
-        return $this->eventListHandle->handle($request, $work);
+        return $this->eventListHandle->__invoke($request, $work);
     }
 }

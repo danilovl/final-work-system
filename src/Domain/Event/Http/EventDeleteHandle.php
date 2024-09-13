@@ -34,7 +34,7 @@ readonly class EventDeleteHandle
         private HashidsServiceInterface $hashidsService,
     ) {}
 
-    public function handle(Request $request, Event $event): RedirectResponse
+    public function __invoke(Request $request, Event $event): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($event, 'event_schedule_delete')

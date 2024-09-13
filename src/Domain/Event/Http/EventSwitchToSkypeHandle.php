@@ -33,7 +33,7 @@ readonly class EventSwitchToSkypeHandle
         private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
-    public function handle(Event $event): RedirectResponse
+    public function __invoke(Event $event): RedirectResponse
     {
         $eventAddressSkype = $this->eventAddressFacade
             ->getSkypeByOwner($event->getOwner());

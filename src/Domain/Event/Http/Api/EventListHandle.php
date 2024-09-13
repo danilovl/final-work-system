@@ -28,7 +28,7 @@ readonly class EventListHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function handle(Request $request, Work $work): JsonResponse
+    public function __invoke(Request $request, Work $work): JsonResponse
     {
         $pagination = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_EVENT->value, $work);
 
