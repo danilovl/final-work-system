@@ -34,7 +34,7 @@ readonly class EventAddressCreateHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $eventAddressModel = new EventAddressModel;
         $eventAddressModel->owner = $this->userService->getUser();

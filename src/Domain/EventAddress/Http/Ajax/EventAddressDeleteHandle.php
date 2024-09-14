@@ -27,7 +27,7 @@ readonly class EventAddressDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(EventAddress $eventAddress): JsonResponse
+    public function __invoke(EventAddress $eventAddress): JsonResponse
     {
         $this->entityManagerService->remove($eventAddress);
 

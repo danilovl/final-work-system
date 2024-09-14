@@ -41,7 +41,7 @@ readonly class EventAddressEditHandle
         private TranslatorService $translatorService
     ) {}
 
-    public function handle(Request $request, EventAddress $eventAddress): Response
+    public function __invoke(Request $request, EventAddress $eventAddress): Response
     {
         $user = $this->userService->getUser();
         $eventAddressModel = EventAddressModel::fromEventAddress($eventAddress);

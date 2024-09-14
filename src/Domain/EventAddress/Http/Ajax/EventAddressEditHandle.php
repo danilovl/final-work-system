@@ -37,7 +37,7 @@ readonly class EventAddressEditHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request, EventAddress $eventAddress): JsonResponse
+    public function __invoke(Request $request, EventAddress $eventAddress): JsonResponse
     {
         $eventAddressModel = EventAddressModel::fromEventAddress($eventAddress);
         $form = $this->formFactory

@@ -28,7 +28,7 @@ readonly class EventAddressDetailHandle
         private FormDeleteFactory $formDeleteFactory
     ) {}
 
-    public function handle(EventAddress $eventAddress): Response
+    public function __invoke(EventAddress $eventAddress): Response
     {
         $this->seoPageService->setTitle($eventAddress->getName());
 

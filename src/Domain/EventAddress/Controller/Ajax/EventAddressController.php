@@ -36,7 +36,7 @@ readonly class EventAddressController
 
     public function create(Request $request): JsonResponse
     {
-        return $this->eventAddressCreateHandle->handle($request);
+        return $this->eventAddressCreateHandle->__invoke($request);
     }
 
     public function edit(
@@ -45,13 +45,13 @@ readonly class EventAddressController
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
 
-        return $this->eventAddressEditHandle->handle($request, $eventAddress);
+        return $this->eventAddressEditHandle->__invoke($request, $eventAddress);
     }
 
     public function delete(EventAddress $eventAddress): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
-        return $this->eventAddressDeleteHandle->handle($eventAddress);
+        return $this->eventAddressDeleteHandle->__invoke($eventAddress);
     }
 }

@@ -32,7 +32,7 @@ readonly class EventAddressDeleteHandle
         private FormDeleteFactory $formDeleteFactory
     ) {}
 
-    public function handle(Request $request, EventAddress $eventAddress): RedirectResponse
+    public function __invoke(Request $request, EventAddress $eventAddress): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($eventAddress, 'event_address_delete')

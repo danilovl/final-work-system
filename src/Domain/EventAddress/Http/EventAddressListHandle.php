@@ -30,7 +30,7 @@ readonly class EventAddressListHandle
         private PaginatorService $paginatorService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
         $eventAddresses = $this->paginatorService->createPaginationRequest(

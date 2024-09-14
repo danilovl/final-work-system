@@ -41,7 +41,7 @@ readonly class EventAddressCreateHandle
         private HashidsServiceInterface $hashidsService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $eventAddressModel = new EventAddressModel;
         $eventAddressModel->owner = $this->userService->getUser();

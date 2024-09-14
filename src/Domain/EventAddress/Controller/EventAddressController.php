@@ -41,32 +41,32 @@ readonly class EventAddressController
 
     public function list(Request $request): Response
     {
-        return $this->eventAddressListHandle->handle($request);
+        return $this->eventAddressListHandle->__invoke($request);
     }
 
     public function create(Request $request): Response
     {
-        return $this->eventAddressCreateHandle->handle($request);
+        return $this->eventAddressCreateHandle->__invoke($request);
     }
 
     public function detail(EventAddress $eventAddress): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventAddress);
 
-        return $this->eventAddressDetailHandle->handle($eventAddress);
+        return $this->eventAddressDetailHandle->__invoke($eventAddress);
     }
 
     public function edit(Request $request, EventAddress $eventAddress): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventAddress);
 
-        return $this->eventAddressEditHandle->handle($request, $eventAddress);
+        return $this->eventAddressEditHandle->__invoke($request, $eventAddress);
     }
 
     public function delete(Request $request, EventAddress $eventAddress): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventAddress);
 
-        return $this->eventAddressDeleteHandle->handle($request, $eventAddress);
+        return $this->eventAddressDeleteHandle->__invoke($request, $eventAddress);
     }
 }
