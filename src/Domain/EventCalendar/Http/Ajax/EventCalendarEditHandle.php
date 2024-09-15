@@ -35,7 +35,7 @@ readonly class EventCalendarEditHandle
         private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Event $event): JsonResponse
+    public function __invoke(Request $request, Event $event): JsonResponse
     {
         $event->setStart(new DateTime($request->request->getString('start')));
         $event->setEnd(new DateTime($request->request->getString('end')));

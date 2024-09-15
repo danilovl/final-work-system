@@ -28,7 +28,7 @@ readonly class EventCalendarGetEventHandle
         private UserService $userService
     ) {}
 
-    public function handle(GetEventRequest $getEventRequest): JsonResponse
+    public function __invoke(GetEventRequest $getEventRequest): JsonResponse
     {
         $request = $getEventRequest->getRequest();
 

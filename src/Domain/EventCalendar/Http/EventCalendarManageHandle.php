@@ -39,7 +39,7 @@ readonly class EventCalendarManageHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(): Response
+    public function __invoke(): Response
     {
         $user = $this->userService->getUser();
         /** @var WorkStatus $workStatus */

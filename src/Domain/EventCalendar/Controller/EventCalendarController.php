@@ -27,11 +27,11 @@ readonly class EventCalendarController
 
     public function reservation(): Response
     {
-        return $this->eventCalendarReservationHandle->handle();
+        return $this->eventCalendarReservationHandle->__invoke();
     }
 
     public function manage(): Response
     {
-        return $this->eventCalendarManageHandle->handle();
+        return $this->eventCalendarManageHandle->__invoke();
     }
 }

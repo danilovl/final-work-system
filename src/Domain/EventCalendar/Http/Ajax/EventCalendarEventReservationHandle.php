@@ -47,7 +47,7 @@ readonly class EventCalendarEventReservationHandle
         private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Event $event): JsonResponse
+    public function __invoke(Request $request, Event $event): JsonResponse
     {
         $user = $this->userService->getUser();
 

@@ -55,7 +55,7 @@ readonly class EventCalendarCreateHandle
         private EventEventDispatcherService $eventEventDispatcherService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
         /** @var WorkStatus $workStatus */

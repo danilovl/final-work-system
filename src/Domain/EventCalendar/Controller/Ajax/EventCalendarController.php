@@ -47,19 +47,19 @@ readonly class EventCalendarController
     ])]
     public function getEvent(GetEventRequest $request): JsonResponse
     {
-        return $this->eventCalendarGetEventHandle->handle($request);
+        return $this->eventCalendarGetEventHandle->__invoke($request);
     }
 
     public function create(Request $request): JsonResponse
     {
-        return $this->eventCalendarCreateHandle->handle($request);
+        return $this->eventCalendarCreateHandle->__invoke($request);
     }
 
     public function eventReservation(Request $request, Event $event): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION->value, $event);
 
-        return $this->eventCalendarEventReservationHandle->handle($request, $event);
+        return $this->eventCalendarEventReservationHandle->__invoke($request, $event);
     }
 
     #[PermissionMiddleware(service: [
@@ -69,6 +69,6 @@ readonly class EventCalendarController
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
 
-        return $this->eventCalendarEditHandle->handle($request, $event);
+        return $this->eventCalendarEditHandle->__invoke($request, $event);
     }
 }

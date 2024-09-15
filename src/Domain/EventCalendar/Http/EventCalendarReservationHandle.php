@@ -38,7 +38,7 @@ readonly class EventCalendarReservationHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(): Response
+    public function __invoke(): Response
     {
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
