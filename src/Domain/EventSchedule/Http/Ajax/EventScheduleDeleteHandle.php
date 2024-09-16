@@ -27,7 +27,7 @@ readonly class EventScheduleDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(EventSchedule $eventSchedule): JsonResponse
+    public function __invoke(EventSchedule $eventSchedule): JsonResponse
     {
         $this->entityManagerService->remove($eventSchedule);
 

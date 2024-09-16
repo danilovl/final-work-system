@@ -43,39 +43,39 @@ readonly class EventScheduleController
 
     public function create(Request $request): Response
     {
-        return $this->eventScheduleCreateHandle->handle($request);
+        return $this->eventScheduleCreateHandle->__invoke($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->eventScheduleListHandle->handle($request);
+        return $this->eventScheduleListHandle->__invoke($request);
     }
 
     public function detail(EventSchedule $eventSchedule): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $eventSchedule);
 
-        return $this->eventScheduleDetailHandle->handle($eventSchedule);
+        return $this->eventScheduleDetailHandle->__invoke($eventSchedule);
     }
 
     public function edit(Request $request, EventSchedule $eventSchedule): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $eventSchedule);
 
-        return $this->eventScheduleEditHandle->handle($request, $eventSchedule);
+        return $this->eventScheduleEditHandle->__invoke($request, $eventSchedule);
     }
 
     public function clone(Request $request, EventSchedule $eventSchedule): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
 
-        return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
+        return $this->eventScheduleCloneHandle->__invoke($request, $eventSchedule);
     }
 
     public function delete(Request $request, EventSchedule $eventSchedule): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
 
-        return $this->eventScheduleDeleteHandle->handle($request, $eventSchedule);
+        return $this->eventScheduleDeleteHandle->__invoke($request, $eventSchedule);
     }
 }

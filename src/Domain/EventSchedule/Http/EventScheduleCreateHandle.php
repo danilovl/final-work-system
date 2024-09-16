@@ -37,7 +37,7 @@ readonly class EventScheduleCreateHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
 

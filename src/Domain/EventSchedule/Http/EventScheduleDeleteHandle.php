@@ -32,7 +32,7 @@ readonly class EventScheduleDeleteHandle
         private FormDeleteFactory $formDeleteFactory
     ) {}
 
-    public function handle(Request $request, EventSchedule $eventSchedule): RedirectResponse
+    public function __invoke(Request $request, EventSchedule $eventSchedule): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($eventSchedule, 'event_schedule_delete')

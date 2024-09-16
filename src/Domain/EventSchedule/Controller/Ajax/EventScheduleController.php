@@ -36,13 +36,13 @@ readonly class EventScheduleController
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CLONE->value, $eventSchedule);
 
-        return $this->eventScheduleCloneHandle->handle($request, $eventSchedule);
+        return $this->eventScheduleCloneHandle->__invoke($request, $eventSchedule);
     }
 
     public function delete(EventSchedule $eventSchedule): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $eventSchedule);
 
-        return $this->eventScheduleDeleteHandle->handle($eventSchedule);
+        return $this->eventScheduleDeleteHandle->__invoke($eventSchedule);
     }
 }

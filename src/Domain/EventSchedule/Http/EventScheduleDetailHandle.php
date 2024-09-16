@@ -30,7 +30,7 @@ readonly class EventScheduleDetailHandle
         private FormDeleteFactory $formDeleteFactory
     ) {}
 
-    public function handle(EventSchedule $eventSchedule): Response
+    public function __invoke(EventSchedule $eventSchedule): Response
     {
         $this->seoPageService->setTitle($eventSchedule->getName());
 

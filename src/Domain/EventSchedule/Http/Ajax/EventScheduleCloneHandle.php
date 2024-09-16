@@ -35,7 +35,7 @@ readonly class EventScheduleCloneHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request, EventSchedule $eventSchedule): JsonResponse
+    public function __invoke(Request $request, EventSchedule $eventSchedule): JsonResponse
     {
         $eventScheduleCloneModel = new EventScheduleCloneModel;
         $form = $this->formFactory

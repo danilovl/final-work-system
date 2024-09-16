@@ -44,7 +44,7 @@ readonly class EventScheduleCloneHandle
         private RouterInterface $router
     ) {}
 
-    public function handle(Request $request, EventSchedule $eventSchedule): Response
+    public function __invoke(Request $request, EventSchedule $eventSchedule): Response
     {
         $user = $this->userService->getUser();
 
