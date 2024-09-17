@@ -21,7 +21,7 @@ readonly class ProfileImageHandle
 {
     public function __construct(private MediaService $mediaService) {}
 
-    public function handle(User $user): BinaryFileResponse|Response
+    public function __invoke(User $user): BinaryFileResponse|Response
     {
         if (!$user->getProfileImage()) {
             return new Response;

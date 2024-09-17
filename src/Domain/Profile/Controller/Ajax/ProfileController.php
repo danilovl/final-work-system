@@ -24,6 +24,6 @@ readonly class ProfileController
 
     public function createImageWebCamera(Request $request): JsonResponse
     {
-        return $this->profileCreateImageWebCameraHandle->handle($request);
+        return $this->profileCreateImageWebCameraHandle->__invoke($request);
     }
 }

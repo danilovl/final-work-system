@@ -41,31 +41,31 @@ readonly class ProfileController
 
     public function show(): Response
     {
-        return $this->profileShowHandle->handle();
+        return $this->profileShowHandle->__invoke();
     }
 
     public function edit(Request $request): Response
     {
-        return $this->profileEditHandle->handle($request);
+        return $this->profileEditHandle->__invoke($request);
     }
 
     public function changeImage(Request $request): Response
     {
-        return $this->profileChangeImageHandle->handle($request);
+        return $this->profileChangeImageHandle->__invoke($request);
     }
 
     public function deleteImage(): RedirectResponse
     {
-        return $this->profileDeleteImageHandle->handle();
+        return $this->profileDeleteImageHandle->__invoke();
     }
 
     public function changePassword(Request $request): Response
     {
-        return $this->profileChangePasswordHandle->handle($request);
+        return $this->profileChangePasswordHandle->__invoke($request);
     }
 
     public function image(User $user): BinaryFileResponse|Response
     {
-        return $this->profileImageHandle->handle($user);
+        return $this->profileImageHandle->__invoke($user);
     }
 }

@@ -29,7 +29,7 @@ readonly class ProfileDeleteImageHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(): RedirectResponse
+    public function __invoke(): RedirectResponse
     {
         $user = $this->userService->getUser();
 

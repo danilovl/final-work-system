@@ -39,7 +39,7 @@ readonly class ProfileChangePasswordHandle
         private UserFactory $userFactory
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
 

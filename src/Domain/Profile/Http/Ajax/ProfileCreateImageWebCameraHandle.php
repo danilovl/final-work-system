@@ -44,7 +44,7 @@ readonly class ProfileCreateImageWebCameraHandle
         private ParameterServiceInterface $parameterService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         /** @var array $imageData */
         $imageData = json_decode($request->getContent(), true);

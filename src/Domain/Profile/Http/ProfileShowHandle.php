@@ -23,7 +23,7 @@ readonly class ProfileShowHandle
         private TwigRenderService $twigRenderService
     ) {}
 
-    public function handle(): Response
+    public function __invoke(): Response
     {
         return $this->twigRenderService->renderToResponse('domain/profile/show.html.twig', [
             'user' => $this->userService->getUser()
