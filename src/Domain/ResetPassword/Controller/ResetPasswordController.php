@@ -32,16 +32,16 @@ readonly class ResetPasswordController
 
     public function request(Request $request): Response
     {
-        return $this->passwordRequestHandle->handle($request);
+        return $this->passwordRequestHandle->__invoke($request);
     }
 
     public function checkEmail(): Response
     {
-        return $this->resetPasswordCheckEmailHandle->handle();
+        return $this->resetPasswordCheckEmailHandle->__invoke();
     }
 
     public function reset(Request $request): Response
     {
-        return $this->resetPasswordResetHandle->handle($request);
+        return $this->resetPasswordResetHandle->__invoke($request);
     }
 }

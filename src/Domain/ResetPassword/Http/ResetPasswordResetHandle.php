@@ -42,7 +42,7 @@ readonly class ResetPasswordResetHandle
         private UserPasswordHasherInterface $userPasswordHasher
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $token = $request->query->get('token');
         if ($token === null) {

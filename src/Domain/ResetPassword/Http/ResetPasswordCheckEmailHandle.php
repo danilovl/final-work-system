@@ -27,7 +27,7 @@ readonly class ResetPasswordCheckEmailHandle
         private ResetPasswordService $resetPasswordService
     ) {}
 
-    public function handle(): Response
+    public function __invoke(): Response
     {
         if (!$this->requestService->getSession()->get('reset_password_check_email')) {
             return $this->requestService->redirectToRoute('reset_password_forgot_request');

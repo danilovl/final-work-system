@@ -42,7 +42,7 @@ readonly class ResetPasswordRequestHandle
         private ResetPasswordService $resetPasswordService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $form = $this->formFactory
             ->create(ResetPasswordRequestForm::class)
