@@ -33,11 +33,11 @@ readonly class SystemEventController
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED->value, $systemEventRecipient);
 
-        return $this->systemEventViewedHandle->handle($systemEventRecipient);
+        return $this->systemEventViewedHandle->__invoke($systemEventRecipient);
     }
 
     public function viewedAll(): JsonResponse
     {
-        return $this->systemEventViewedAllHandle->handle();
+        return $this->systemEventViewedAllHandle->__invoke();
     }
 }

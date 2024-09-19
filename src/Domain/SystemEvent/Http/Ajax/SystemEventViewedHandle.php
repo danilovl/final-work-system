@@ -34,7 +34,7 @@ readonly class SystemEventViewedHandle
         private CacheEventDispatcherService $cacheEventDispatcherService
     ) {}
 
-    public function handle(SystemEventRecipient $systemEventRecipient): JsonResponse
+    public function __invoke(SystemEventRecipient $systemEventRecipient): JsonResponse
     {
         $systemEventRecipient->changeViewed();
         $this->entityManagerService->flush();

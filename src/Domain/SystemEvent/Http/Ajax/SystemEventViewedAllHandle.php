@@ -35,7 +35,7 @@ readonly class SystemEventViewedAllHandle
         private CacheEventDispatcherService $cacheEventDispatcherService
     ) {}
 
-    public function handle(): JsonResponse
+    public function __invoke(): JsonResponse
     {
         $user = $this->userService->getUser();
         $isUnreadExist = $this->systemEventFacade

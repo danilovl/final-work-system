@@ -26,6 +26,6 @@ readonly class SystemEventController
 
     public function list(Request $request, string $type): JsonResponse
     {
-        return $this->systemEventTypeEventsHandle->handle($request, $type);
+        return $this->systemEventTypeEventsHandle->__invoke($request, $type);
     }
 }

@@ -35,7 +35,7 @@ readonly class SystemEventTypeEventsHandle
         private SystemEventLinkGeneratorService $systemEventLinkGeneratorService
     ) {}
 
-    public function handle(Request $request, string $type): JsonResponse
+    public function __invoke(Request $request, string $type): JsonResponse
     {
         $viewed = match ($type) {
             SystemEventStatusConstant::READ => true,
