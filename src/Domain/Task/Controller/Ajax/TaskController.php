@@ -49,12 +49,12 @@ readonly class TaskController
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
-        return $this->taskCreateHandle->handle($request, $work);
+        return $this->taskCreateHandle->__invoke($request, $work);
     }
 
     public function createSeveral(Request $request): JsonResponse
     {
-        return $this->taskCreateSeveralHandle->handle($request);
+        return $this->taskCreateSeveralHandle->__invoke($request);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
@@ -65,7 +65,7 @@ readonly class TaskController
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
-        return $this->taskEditHandle->handle($request, $task);
+        return $this->taskEditHandle->__invoke($request, $task);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
@@ -76,7 +76,7 @@ readonly class TaskController
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
-        return $this->taskChangeStatusHandle->handle($request, $task);
+        return $this->taskChangeStatusHandle->__invoke($request, $task);
     }
 
     public function notifyComplete(
@@ -85,7 +85,7 @@ readonly class TaskController
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE->value, $task);
 
-        return $this->taskNotifyCompleteHandle->handle($task);
+        return $this->taskNotifyCompleteHandle->__invoke($task);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
@@ -95,11 +95,11 @@ readonly class TaskController
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $task);
 
-        return $this->taskDeleteHandle->handle($task);
+        return $this->taskDeleteHandle->__invoke($task);
     }
 
     public function completeAll(): JsonResponse
     {
-        return $this->taskCompleteAllHandle->handle();
+        return $this->taskCompleteAllHandle->__invoke();
     }
 }

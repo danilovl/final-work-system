@@ -32,7 +32,7 @@ readonly class TaskChangeStatusHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Request $request, Task $task): JsonResponse
+    public function __invoke(Request $request, Task $task): JsonResponse
     {
         $type = $request->attributes->getString('type');
         if (!empty($type)) {

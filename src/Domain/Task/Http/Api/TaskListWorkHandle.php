@@ -30,7 +30,7 @@ readonly class TaskListWorkHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function handle(Request $request, Work $work): JsonResponse
+    public function __invoke(Request $request, Work $work): JsonResponse
     {
         $user = $this->userService->getUser();
         $pagination = $this->workDetailTabService->getTabPagination(

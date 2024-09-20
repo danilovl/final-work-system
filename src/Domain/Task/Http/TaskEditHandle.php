@@ -48,7 +48,7 @@ readonly class TaskEditHandle
         private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
-    public function handle(
+    public function __invoke(
         Request $request,
         Work $work,
         Task $task

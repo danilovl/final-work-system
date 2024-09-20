@@ -30,7 +30,7 @@ readonly class TaskListOwnerHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
         $tasksQuery = $this->taskFacade

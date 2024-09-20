@@ -27,7 +27,7 @@ readonly class TaskDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Task $task): JsonResponse
+    public function __invoke(Task $task): JsonResponse
     {
         $this->entityManagerService->remove($task);
 

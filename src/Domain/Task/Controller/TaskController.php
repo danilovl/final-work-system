@@ -41,19 +41,19 @@ readonly class TaskController
 
     public function list(Request $request): Response
     {
-        return $this->taskListHandle->handle($request);
+        return $this->taskListHandle->__invoke($request);
     }
 
     public function create(Request $request, Work $work): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
-        return $this->taskCreateHandle->handle($request, $work);
+        return $this->taskCreateHandle->__invoke($request, $work);
     }
 
     public function createSeveral(Request $request): Response
     {
-        return $this->taskCreateSeveralHandle->handle($request);
+        return $this->taskCreateSeveralHandle->__invoke($request);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
@@ -64,6 +64,6 @@ readonly class TaskController
     ): Response {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
-        return $this->taskEditHandle->handle($request, $work, $task);
+        return $this->taskEditHandle->__invoke($request, $work, $task);
     }
 }

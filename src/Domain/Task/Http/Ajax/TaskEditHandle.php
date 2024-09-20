@@ -35,7 +35,7 @@ readonly class TaskEditHandle
         private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Task $task): JsonResponse
+    public function __invoke(Request $request, Task $task): JsonResponse
     {
         $taskModel = TaskModel::fromTask($task);
         $form = $this->formFactory

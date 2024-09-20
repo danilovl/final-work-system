@@ -49,7 +49,7 @@ readonly class TaskCreateHandle
         private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Work $work): Response
+    public function __invoke(Request $request, Work $work): Response
     {
         $user = $this->userService->getUser();
         $taskName = $request->query->get('taskName');

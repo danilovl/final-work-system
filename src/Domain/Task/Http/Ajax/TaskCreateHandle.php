@@ -37,7 +37,7 @@ readonly class TaskCreateHandle
         private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Work $work): JsonResponse
+    public function __invoke(Request $request, Work $work): JsonResponse
     {
         $taskModel = new TaskModel;
         $taskModel->active = true;

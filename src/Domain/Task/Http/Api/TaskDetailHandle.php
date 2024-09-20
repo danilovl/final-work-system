@@ -20,7 +20,7 @@ readonly class TaskDetailHandle
 {
     public function __construct(private ObjectToArrayTransformService $objectToArrayTransformService) {}
 
-    public function handle(Task $task): JsonResponse
+    public function __invoke(Task $task): JsonResponse
     {
         return new JsonResponse([
             'task' => $this->objectToArrayTransformService->transform('api_key_field', $task)

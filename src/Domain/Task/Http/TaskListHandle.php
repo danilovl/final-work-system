@@ -38,7 +38,7 @@ readonly class TaskListHandle
         private TaskSearch $taskSearch
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
         $tasksQuery = $this->taskFacade

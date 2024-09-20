@@ -39,7 +39,7 @@ readonly class TaskCreateSeveralHandle
         private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
 

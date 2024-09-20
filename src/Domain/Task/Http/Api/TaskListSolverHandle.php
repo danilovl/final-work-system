@@ -30,7 +30,7 @@ readonly class TaskListSolverHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
         $authorWorks = $user->getAuthorWorks();

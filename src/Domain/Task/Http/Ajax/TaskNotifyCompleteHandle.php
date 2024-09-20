@@ -29,7 +29,7 @@ readonly class TaskNotifyCompleteHandle
         private TaskEventDispatcherService $taskEventDispatcherService
     ) {}
 
-    public function handle(Task $task): JsonResponse
+    public function __invoke(Task $task): JsonResponse
     {
         if ($task->isNotifyComplete()) {
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE);

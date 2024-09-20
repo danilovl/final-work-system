@@ -41,12 +41,12 @@ readonly class TaskController
 
     public function listOwner(Request $request): JsonResponse
     {
-        return $this->taskListHandle->handle($request);
+        return $this->taskListHandle->__invoke($request);
     }
 
     public function listSolver(Request $request): JsonResponse
     {
-        return $this->taskListSolverHandle->handle($request);
+        return $this->taskListSolverHandle->__invoke($request);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
@@ -56,13 +56,13 @@ readonly class TaskController
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
 
-        return $this->taskDetailHandle->handle($task);
+        return $this->taskDetailHandle->__invoke($task);
     }
 
     public function listWork(Request $request, Work $work): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 
-        return $this->taskListWorkHandle->handle($request, $work);
+        return $this->taskListWorkHandle->__invoke($request, $work);
     }
 }
