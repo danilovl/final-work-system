@@ -33,16 +33,16 @@ readonly class UserController
 
     public function create(Request $request): Response
     {
-        return $this->userCreateHandle->handle($request);
+        return $this->userCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, User $user): Response
     {
-        return $this->userEditHandle->handle($request, $user);
+        return $this->userEditHandle->__invoke($request, $user);
     }
 
     public function list(Request $request): Response
     {
-        return $this->userListHandle->handle($request);
+        return $this->userListHandle->__invoke($request);
     }
 }

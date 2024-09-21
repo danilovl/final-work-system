@@ -21,6 +21,6 @@ readonly class UserController
 
     public function detail(): JsonResponse
     {
-        return $this->userDetailHandle->handle();
+        return $this->userDetailHandle->__invoke();
     }
 }

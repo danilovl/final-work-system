@@ -37,7 +37,7 @@ readonly class UserEditHandle
         private UserEventDispatcherService $userEventDispatcherService
     ) {}
 
-    public function handle(Request $request, User $user): JsonResponse
+    public function __invoke(Request $request, User $user): JsonResponse
     {
         $userModel = UserModel::fromUser($user);
         $form = $this->formFactory

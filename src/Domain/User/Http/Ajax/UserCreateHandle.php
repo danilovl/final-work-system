@@ -39,7 +39,7 @@ readonly class UserCreateHandle
         private UserEventDispatcherService $userEventDispatcherService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $userModel = new UserModel;
 

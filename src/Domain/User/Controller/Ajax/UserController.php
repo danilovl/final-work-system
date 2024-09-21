@@ -31,11 +31,11 @@ readonly class UserController
 
     public function create(Request $request): JsonResponse
     {
-        return $this->userCreateHandle->handle($request);
+        return $this->userCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, User $user): JsonResponse
     {
-        return $this->userEditHandle->handle($request, $user);
+        return $this->userEditHandle->__invoke($request, $user);
     }
 }

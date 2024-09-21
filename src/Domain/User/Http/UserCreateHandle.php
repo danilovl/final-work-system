@@ -43,7 +43,7 @@ readonly class UserCreateHandle
         private UserEventDispatcherService $userEventDispatcherService
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $userFacade = $this->userFacade;
         $userModel = new UserModel;

@@ -23,7 +23,7 @@ readonly class UserDetailHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function handle(): JsonResponse
+    public function __invoke(): JsonResponse
     {
         $user = $this->userService->getUser();
         $data = $this->objectToArrayTransformService->transform('api_key_field', $user);
