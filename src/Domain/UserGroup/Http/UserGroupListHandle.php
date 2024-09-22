@@ -32,7 +32,7 @@ readonly class UserGroupListHandle
         private UserGroupFacade $userGroupFacade
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $this->seoPageService->setTitle('app.page.user_group_list');
 

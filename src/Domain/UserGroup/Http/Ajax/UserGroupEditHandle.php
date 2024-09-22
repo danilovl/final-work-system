@@ -33,7 +33,7 @@ readonly class UserGroupEditHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request, Group $group): JsonResponse
+    public function __invoke(Request $request, Group $group): JsonResponse
     {
         $userGroupModel = UserGroupModel::fromGroup($group);
         $form = $this->formFactory

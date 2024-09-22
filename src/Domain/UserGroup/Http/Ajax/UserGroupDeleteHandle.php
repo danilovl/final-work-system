@@ -27,7 +27,7 @@ readonly class UserGroupDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Group $group): JsonResponse
+    public function __invoke(Group $group): JsonResponse
     {
         $this->entityManagerService->remove($group);
 

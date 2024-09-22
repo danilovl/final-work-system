@@ -40,7 +40,7 @@ readonly class UserGroupEditHandle
         private UserGroupFormFactory $userGroupFormFactory
     ) {}
 
-    public function handle(Request $request, Group $group): Response
+    public function __invoke(Request $request, Group $group): Response
     {
         $userGroupModel = UserGroupModel::fromGroup($group);
 

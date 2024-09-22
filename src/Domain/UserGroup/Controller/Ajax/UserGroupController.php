@@ -33,16 +33,16 @@ readonly class UserGroupController
 
     public function create(Request $request): JsonResponse
     {
-        return $this->userGroupCreateHandle->handle($request);
+        return $this->userGroupCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, Group $group): JsonResponse
     {
-        return $this->userGroupEditHandle->handle($request, $group);
+        return $this->userGroupEditHandle->__invoke($request, $group);
     }
 
     public function delete(Group $group): JsonResponse
     {
-        return $this->userGroupDeleteHandle->handle($group);
+        return $this->userGroupDeleteHandle->__invoke($group);
     }
 }

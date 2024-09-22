@@ -39,7 +39,7 @@ readonly class UserGroupCreateHandle
         private UserGroupFormFactory $userGroupFormFactory
     ) {}
 
-    public function handle(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $userGroupModel = new UserGroupModel;
         $userGroupModel->name = 'Name';

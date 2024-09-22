@@ -33,16 +33,16 @@ readonly class UserGroupController
 
     public function create(Request $request): Response
     {
-        return $this->userGroupCreateHandle->handle($request);
+        return $this->userGroupCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, Group $group): Response
     {
-        return $this->userGroupEditHandle->handle($request, $group);
+        return $this->userGroupEditHandle->__invoke($request, $group);
     }
 
     public function list(Request $request): Response
     {
-        return $this->userGroupListHandle->handle($request);
+        return $this->userGroupListHandle->__invoke($request);
     }
 }

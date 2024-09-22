@@ -36,7 +36,7 @@ readonly class UserGroupCreateHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $userGroupModel = new UserGroupModel;
         $userGroupModel->name = $this->translatorService->trans('app.text.name');
