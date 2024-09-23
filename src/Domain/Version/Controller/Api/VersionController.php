@@ -25,6 +25,6 @@ readonly class VersionController
 
     public function list(Request $request, Work $work): JsonResponse
     {
-        return $this->versionListHandle->handle($request, $work);
+        return $this->versionListHandle->__invoke($request, $work);
     }
 }

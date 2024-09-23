@@ -27,7 +27,7 @@ readonly class VersionDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Media $media): JsonResponse
+    public function __invoke(Media $media): JsonResponse
     {
         $this->entityManagerService->remove($media);
 

@@ -20,7 +20,7 @@ readonly class VersionDetailContentHandle
 {
     public function __construct(private TwigRenderService $twigRenderService) {}
 
-    public function handle(Media $media): Response
+    public function __invoke(Media $media): Response
     {
         return $this->twigRenderService->renderToResponse('domain/version/detail_content.html.twig', [
             'version' => $media,

@@ -50,7 +50,7 @@ readonly class VersionEditHandle
         private VersionEventDispatcherService $versionEventDispatcherService
     ) {}
 
-    public function handle(
+    public function __invoke(
         Request $request,
         Work $work,
         Media $media

@@ -45,7 +45,7 @@ readonly class VersionCreateHandle
         private VersionEventDispatcherService $versionEventDispatcherService
     ) {}
 
-    public function handle(Request $request, Work $work): JsonResponse
+    public function __invoke(Request $request, Work $work): JsonResponse
     {
         /** @var MediaType $type */
         $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::WORK_VERSION->value);

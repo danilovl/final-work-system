@@ -46,7 +46,7 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
 
-        return $this->versionCreateHandle->handle($request, $work);
+        return $this->versionCreateHandle->__invoke($request, $work);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
@@ -61,7 +61,7 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
 
-        return $this->versionEditHandle->handle($request, $media);
+        return $this->versionEditHandle->__invoke($request, $media);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
@@ -75,6 +75,6 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $versionVoterSubject);
 
-        return $this->versionDeleteHandle->handle($media);
+        return $this->versionDeleteHandle->__invoke($media);
     }
 }

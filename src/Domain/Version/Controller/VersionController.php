@@ -50,7 +50,7 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CREATE->value, $versionVoterSubject);
 
-        return $this->versionCreateHandle->handle($request, $work);
+        return $this->versionCreateHandle->__invoke($request, $work);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
@@ -65,7 +65,7 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $versionVoterSubject);
 
-        return $this->versionEditHandle->handle($request, $work, $media);
+        return $this->versionEditHandle->__invoke($request, $work, $media);
     }
 
     public function detailContent(Media $version): Response
@@ -74,7 +74,7 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $versionVoterSubject, 'The work media does not exist');
 
-        return $this->versionDetailContentHandle->handle($version);
+        return $this->versionDetailContentHandle->__invoke($version);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
@@ -88,7 +88,7 @@ readonly class VersionController
 
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DOWNLOAD->value, $versionVoterSubject);
 
-        return $this->versionDownloadHandle->handle($media);
+        return $this->versionDownloadHandle->__invoke($media);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
@@ -96,6 +96,6 @@ readonly class VersionController
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
     ): BinaryFileResponse {
-        return $this->versionDownloadHandle->handle($media);
+        return $this->versionDownloadHandle->__invoke($media);
     }
 }

@@ -20,7 +20,7 @@ readonly class VersionDownloadHandle
 {
     public function __construct(private MediaService $mediaService) {}
 
-    public function handle(Media $media): BinaryFileResponse
+    public function __invoke(Media $media): BinaryFileResponse
     {
         return $this->mediaService->download($media);
     }
