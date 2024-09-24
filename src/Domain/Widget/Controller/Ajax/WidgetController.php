@@ -21,6 +21,6 @@ readonly class WidgetController
 
     public function live(): StreamedResponse
     {
-        return $this->widgetLiveHandle->handle();
+        return $this->widgetLiveHandle->__invoke();
     }
 }

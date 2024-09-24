@@ -20,7 +20,7 @@ readonly class WidgetLiveHandle
 {
     public function __construct(private WidgetStreamService $widgetStreamService) {}
 
-    public function handle(): StreamedResponse
+    public function __invoke(): StreamedResponse
     {
         $callback = $this->widgetStreamService->handle();
 
