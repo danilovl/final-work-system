@@ -43,39 +43,39 @@ readonly class WorkController
 
     public function create(Request $request): Response
     {
-        return $this->workCreateHandle->handle($request);
+        return $this->workCreateHandle->__invoke($request);
     }
 
     public function detail(Request $request, Work $work): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 
-        return $this->workDetailHandle->handle($request, $work);
+        return $this->workDetailHandle->__invoke($request, $work);
     }
 
     public function list(Request $request, string $type): Response
     {
-        return $this->workListHandle->handle($request, $type);
+        return $this->workListHandle->__invoke($request, $type);
     }
 
     public function edit(Request $request, Work $work): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
-        return $this->workEditHandle->handle($request, $work);
+        return $this->workEditHandle->__invoke($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
-        return $this->workEditAuthorHandle->handle($request, $work);
+        return $this->workEditAuthorHandle->__invoke($request, $work);
     }
 
     public function delete(Request $request, Work $work): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $work);
 
-        return $this->workDeleteHandle->handle($request, $work);
+        return $this->workDeleteHandle->__invoke($request, $work);
     }
 }

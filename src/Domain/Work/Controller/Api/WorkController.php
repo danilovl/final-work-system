@@ -31,11 +31,11 @@ readonly class WorkController
 
     public function list(Request $request, string $type): JsonResponse
     {
-        return $this->workListHandle->handle($request, $type);
+        return $this->workListHandle->__invoke($request, $type);
     }
 
     public function detail(Work $work): JsonResponse
     {
-        return $this->workDetailHandle->handle($work);
+        return $this->workDetailHandle->__invoke($work);
     }
 }

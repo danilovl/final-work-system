@@ -40,7 +40,7 @@ readonly class WorkListHandle
         private FormDeleteFactory $deleteFactory
     ) {}
 
-    public function handle(Request $request, string $type): Response
+    public function __invoke(Request $request, string $type): Response
     {
         $user = $this->userService->getUser();
 

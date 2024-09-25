@@ -37,7 +37,7 @@ readonly class WorkDeleteHandle
         private S3ClientService $s3ClientService
     ) {}
 
-    public function handle(Request $request, Work $work): RedirectResponse
+    public function __invoke(Request $request, Work $work): RedirectResponse
     {
         $form = $this->formDeleteFactory
             ->createDeleteForm($work, 'work_delete')

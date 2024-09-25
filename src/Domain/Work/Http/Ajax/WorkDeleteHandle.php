@@ -27,7 +27,7 @@ readonly class WorkDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(Work $work): JsonResponse
+    public function __invoke(Work $work): JsonResponse
     {
         $this->entityManagerService->remove($work);
 

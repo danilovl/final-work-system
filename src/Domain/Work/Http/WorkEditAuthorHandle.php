@@ -47,7 +47,7 @@ readonly class WorkEditAuthorHandle
         private SeoPageService $seoPageService
     ) {}
 
-    public function handle(Request $request, Work $work): Response
+    public function __invoke(Request $request, Work $work): Response
     {
         $author = $work->getAuthor();
         $userModel = UserModel::fromUser($author);

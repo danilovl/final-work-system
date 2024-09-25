@@ -36,7 +36,7 @@ readonly class WorkCreateHandle
         private WorkEventDispatcherService $workEventDispatcherService
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $user = $this->userService->getUser();
 

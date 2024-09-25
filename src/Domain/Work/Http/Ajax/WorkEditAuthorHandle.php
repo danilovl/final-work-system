@@ -35,7 +35,7 @@ readonly class WorkEditAuthorHandle
         private UserFactory $userFactory
     ) {}
 
-    public function handle(Request $request, Work $work): JsonResponse
+    public function __invoke(Request $request, Work $work): JsonResponse
     {
         $author = $work->getAuthor();
         $userModel = UserModel::fromUser($author);

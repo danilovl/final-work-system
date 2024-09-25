@@ -38,7 +38,7 @@ readonly class WorkDetailHandle
         private FormDeleteFactory $deleteFactory
     ) {}
 
-    public function handle(Request $request, Work $work): Response
+    public function __invoke(Request $request, Work $work): Response
     {
         $user = $this->userService->getUser();
         $tabService = $this->workDetailTabService

@@ -38,27 +38,27 @@ readonly class WorkController
 
     public function create(Request $request): JsonResponse
     {
-        return $this->workCreateHandle->handle($request);
+        return $this->workCreateHandle->__invoke($request);
     }
 
     public function edit(Request $request, Work $work): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
-        return $this->workEditHandle->handle($request, $work);
+        return $this->workEditHandle->__invoke($request, $work);
     }
 
     public function editAuthor(Request $request, Work $work): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $work);
 
-        return $this->workEditAuthorHandle->handle($request, $work);
+        return $this->workEditAuthorHandle->__invoke($request, $work);
     }
 
     public function delete(Work $work): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $work);
 
-        return $this->workDeleteHandle->handle($work);
+        return $this->workDeleteHandle->__invoke($work);
     }
 }
