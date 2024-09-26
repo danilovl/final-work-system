@@ -39,25 +39,25 @@ readonly class WorkCategoryController
 
     public function create(Request $request): Response
     {
-        return $this->workCategoryCreateHandle->handle($request);
+        return $this->workCategoryCreateHandle->__invoke($request);
     }
 
     public function list(Request $request): Response
     {
-        return $this->workCategoryListHandle->handle($request);
+        return $this->workCategoryListHandle->__invoke($request);
     }
 
     public function edit(Request $request, WorkCategory $workCategory): Response
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $workCategory);
 
-        return $this->workCategoryEditHandle->handle($request, $workCategory);
+        return $this->workCategoryEditHandle->__invoke($request, $workCategory);
     }
 
     public function delete(WorkCategory $workCategory): RedirectResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $workCategory);
 
-        return $this->workCategoryDeleteHandle->handle($workCategory);
+        return $this->workCategoryDeleteHandle->__invoke($workCategory);
     }
 }

@@ -27,7 +27,7 @@ readonly class WorkCategoryDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(WorkCategory $workCategory): JsonResponse
+    public function __invoke(WorkCategory $workCategory): JsonResponse
     {
         if (count($workCategory->getWorks()) > 0) {
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_FAILURE);

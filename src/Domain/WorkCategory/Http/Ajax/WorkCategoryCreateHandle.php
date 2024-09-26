@@ -36,7 +36,7 @@ readonly class WorkCategoryCreateHandle
         private WorkCategoryFactory $workCategoryFactory
     ) {}
 
-    public function handle(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $workCategoryModel = new WorkCategoryModel;
         $workCategoryModel->owner = $this->userService->getUser();

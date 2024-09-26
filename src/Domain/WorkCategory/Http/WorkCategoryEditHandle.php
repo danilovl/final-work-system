@@ -40,7 +40,7 @@ readonly class WorkCategoryEditHandle
         private WorkCategoryFactory $workCategoryFactory
     ) {}
 
-    public function handle(Request $request, WorkCategory $workCategory): Response
+    public function __invoke(Request $request, WorkCategory $workCategory): Response
     {
         $workCategoryModel = WorkCategoryModel::fromMedia($workCategory);
 

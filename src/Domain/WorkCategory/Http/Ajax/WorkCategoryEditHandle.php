@@ -33,7 +33,7 @@ readonly class WorkCategoryEditHandle
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(Request $request, WorkCategory $workCategory): JsonResponse
+    public function __invoke(Request $request, WorkCategory $workCategory): JsonResponse
     {
         $workCategoryModel = WorkCategoryModel::fromMedia($workCategory);
         $form = $this->formFactory

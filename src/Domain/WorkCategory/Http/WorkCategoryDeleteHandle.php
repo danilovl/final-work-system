@@ -27,7 +27,7 @@ readonly class WorkCategoryDeleteHandle
         private EntityManagerService $entityManagerService
     ) {}
 
-    public function handle(WorkCategory $workCategory): RedirectResponse
+    public function __invoke(WorkCategory $workCategory): RedirectResponse
     {
         if (count($workCategory->getWorks()) === 0) {
             $this->entityManagerService->remove($workCategory);
