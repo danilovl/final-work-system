@@ -1186,79 +1186,69 @@ parameters:
 			path: tests/Unit/Application/Security/AppUserProviderTest.php
 
 		-
-			message: "#^Access to an undefined property App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel\\:\\:\\$password\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
-
-		-
-			message: "#^Access to an undefined property App\\\\Application\\\\Model\\\\Security\\\\ApiKeyCredentialModel\\:\\:\\$username\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:expects\\(\\)\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			count: 2
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
 			count: 2
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest has an uninitialized readonly property \\$apiUserFacade\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$apiUserFacade\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest has an uninitialized readonly property \\$authenticator\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$authenticator\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest has an uninitialized readonly property \\$request\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$request\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest\\:\\:\\$apiUserFacade is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$apiUserFacade is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest\\:\\:\\$authenticator is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$authenticator is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest\\:\\:\\$request is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$request is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiKeyAuthenticatorTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiKeyAuthenticatorTest.php
+			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
