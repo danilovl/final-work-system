@@ -25,4 +25,12 @@ class SerializerHelper
     {
         return new Serializer([new DateTimeNormalizer, new ObjectNormalizer], [new JsonEncoder]);
     }
+
+    public static function convertToObject(object $object, string $toClass): object
+    {
+        $serializer = self::getBaseSerializer();
+        $jsonContent = $serializer->serialize($object, 'json');
+
+        return $serializer->deserialize($jsonContent, $toClass, 'json');
+    }
 }
