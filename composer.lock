@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa786830965f630095673ebb06bb5b1b",
+    "content-hash": "01369b78474e871d2d92f18e57c0f0b0",
     "packages": [
         {
             "name": "api-platform/core",
@@ -573,16 +573,16 @@
         },
         {
             "name": "danilovl/doctrine-entity-dto-bundle",
-            "version": "v0.1.7",
+            "version": "v0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/doctrine-entity-dto-bundle.git",
-                "reference": "b5b883126a560c7ccb79853151698a1f9611b46f"
+                "reference": "cfbacae00336bed125e01fbba4a6efe3f02b4367"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/doctrine-entity-dto-bundle/zipball/b5b883126a560c7ccb79853151698a1f9611b46f",
-                "reference": "b5b883126a560c7ccb79853151698a1f9611b46f",
+                "url": "https://api.github.com/repos/danilovl/doctrine-entity-dto-bundle/zipball/cfbacae00336bed125e01fbba4a6efe3f02b4367",
+                "reference": "cfbacae00336bed125e01fbba4a6efe3f02b4367",
                 "shasum": ""
             },
             "require": {
@@ -619,9 +619,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/doctrine-entity-dto-bundle/issues",
-                "source": "https://github.com/danilovl/doctrine-entity-dto-bundle/tree/v0.1.7"
+                "source": "https://github.com/danilovl/doctrine-entity-dto-bundle/tree/v0.1.8"
             },
-            "time": "2024-03-30T07:49:57+00:00"
+            "time": "2024-05-18T09:14:10+00:00"
         },
         {
             "name": "danilovl/hashids-bundle",

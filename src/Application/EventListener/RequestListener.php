@@ -38,8 +38,6 @@ readonly class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $requestEvent->getRequest()->getSession()->migrate();
-
         $this->defaultRouteSeoPage($requestEvent);
 
         $this->asyncService->add(function (): void {
