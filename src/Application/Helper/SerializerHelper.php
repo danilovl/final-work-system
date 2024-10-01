@@ -26,11 +26,20 @@ class SerializerHelper
         return new Serializer([new DateTimeNormalizer, new ObjectNormalizer], [new JsonEncoder]);
     }
 
-    public static function convertToObject(object $object, string $toClass): object
-    {
+    /**
+     * @template T of object
+     * @param class-string<T> $toClass
+     * @return T
+     */
+    public static function convertToObject(
+        object $object,
+        string $toClass,
+        array $serializeContext = [],
+        array $deserializeContext = [],
+    ): object {
         $serializer = self::getBaseSerializer();
-        $jsonContent = $serializer->serialize($object, 'json');
+        $jsonContent = $serializer->serialize($object, 'json', $serializeContext);
 
-        return $serializer->deserialize($jsonContent, $toClass, 'json');
+        return $serializer->deserialize($jsonContent, $toClass, 'json', $deserializeContext);
     }
 }
