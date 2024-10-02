@@ -60,11 +60,12 @@ class WorkDetailTabService
         Request $request,
         string $tab,
         Work $work,
-        ?User $user = null
+        ?User $user = null,
+        bool $setHydrationMode = false
     ): PaginationInterface {
         $paginator = $this->paginator->createPaginationRequest(
             $request,
-            $this->getQueryPagination($tab, $work, $user),
+            $this->getQueryPagination($tab, $work, $user, $setHydrationMode),
             $this->getPaginationPage($tab),
             $this->getPaginationLimit($tab),
             $this->getOptions($tab)
@@ -106,7 +107,8 @@ class WorkDetailTabService
     private function getQueryPagination(
         string $tab,
         Work $work,
-        ?User $user = null
+        ?User $user = null,
+        bool $setHydrationMode = false
     ): Query {
         $isSupervisor = $user !== null && WorkRoleHelper::isSupervisor($work, $user);
 
@@ -129,6 +131,27 @@ class WorkDetailTabService
                 ->getQuery(),
             default => null
         };
+
+        if ($setHydrationMode) {
+            switch ($tab) {
+                case TabTypeConstant::TAB_TASK->value:
+                    $queryPagination->setHydrationMode(Task::class);
+
+                    break;
+                case TabTypeConstant::TAB_VERSION->value:
+                    $queryPagination->setHydrationMode(Media::class);
+
+                    break;
+                case TabTypeConstant::TAB_EVENT->value:
+                    $queryPagination->setHydrationMode(Event::class);
+
+                    break;
+                case TabTypeConstant::TAB_MESSAGE->value:
+                    $queryPagination->setHydrationMode(ConversationMessage::class);
+
+                    break;
+            }
+        }
 
         if ($queryPagination === null) {
             throw new RuntimeException('Query for tab pagination was not created');

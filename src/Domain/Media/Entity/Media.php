@@ -37,6 +37,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Serializer\Attribute\Ignore;
 
 #[ORM\Table(name: 'media')]
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
@@ -166,6 +167,7 @@ class Media
         return $this->work;
     }
 
+    #[Ignore]
     public function getWorkMust(): Work
     {
         if (!$this->work) {
@@ -221,6 +223,7 @@ class Media
         return $this->uploadMedia;
     }
 
+    #[Ignore]
     public function getUploadMediaMust(): UploadedFile
     {
         if (!$this->uploadMedia) {
@@ -233,6 +236,7 @@ class Media
     /**
      * @note use in template
      */
+    #[Ignore]
     public function getMediaSizeFormatted(): string
     {
         $size = $this->getMediaSize();

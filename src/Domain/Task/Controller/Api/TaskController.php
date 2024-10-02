@@ -14,6 +14,12 @@ namespace App\Domain\Task\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Application\Service\AuthorizationCheckerService;
+use App\Domain\Task\DTO\Api\Output\{
+    TaskDetailOutput,
+    TaskListWorkOutput,
+    TaskListOwnerOutput,
+    TaskListSolverOutput
+};
 use App\Domain\Task\Entity\Task;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -24,10 +30,7 @@ use App\Domain\Task\Http\Api\{
     TaskListSolverHandle
 };
 use App\Domain\Work\Entity\Work;
-use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+use Symfony\Component\HttpFoundation\Request;
 
 readonly class TaskController
 {
@@ -39,12 +42,12 @@ readonly class TaskController
         private TaskListWorkHandle $taskListWorkHandle
     ) {}
 
-    public function listOwner(Request $request): JsonResponse
+    public function listOwner(Request $request): TaskListOwnerOutput
     {
         return $this->taskListHandle->__invoke($request);
     }
 
-    public function listSolver(Request $request): JsonResponse
+    public function listSolver(Request $request): TaskListSolverOutput
     {
         return $this->taskListSolverHandle->__invoke($request);
     }
@@ -53,13 +56,13 @@ readonly class TaskController
     public function detail(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
-    ): JsonResponse {
+    ): TaskDetailOutput {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
 
         return $this->taskDetailHandle->__invoke($task);
     }
 
-    public function listWork(Request $request, Work $work): JsonResponse
+    public function listWork(Request $request, Work $work): TaskListWorkOutput
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 

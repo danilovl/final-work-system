@@ -1,0 +1,108 @@
+resources:
+  App\Domain\Task\Entity\Task:
+    operations:
+      api_get_task_list_owner:
+        description: 'Get tasks owner.'
+        class: ApiPlatform\Metadata\Get
+        routeName: api_get_task_list_owner
+        uriTemplate: '/task/list-owner'
+        controller: App\Domain\Task\Controller\Api\TaskController::listOwner
+        output: App\Domain\Task\DTO\Api\Output\TaskListOwnerOutput
+        read: false
+        openapi:
+          summary: 'Get owner tasks.'
+          description: 'Get owner tasks.'
+        openapiContext:
+          parameters:
+            - name: page
+              in: query
+              description: Page
+              required: false
+              schema:
+                type: integer
+        normalizationContext:
+          groups: ['output', 'task:read', 'work:read', 'user:read:author', 'user:read']
+
+      api_get_task_list_solver:
+        description: 'Get tasks solver.'
+        class: ApiPlatform\Metadata\Get
+        routeName: api_get_task_list_solver
+        uriTemplate: '/task/list-solver'
+        controller: App\Domain\Task\Controller\Api\TaskController::listSolver
+        output: App\Domain\Task\DTO\Api\Output\TaskListSolverOutput
+        read: false
+        openapi:
+          summary: 'Get solver tasks.'
+          description: 'Get solver tasks.'
+        openapiContext:
+          parameters:
+            - name: page
+              in: query
+              description: Page
+              required: false
+              schema:
+                type: integer
+        normalizationContext:
+          groups: ['output', 'task:read', 'work:read']
+
+      api_get_task_detail:
+        description: 'Get task detail.'
+        class: ApiPlatform\Metadata\Get
+        routeName: api_get_task_detail
+        uriTemplate: '/task/work/{id_work}/task/{id_task}/detail'
+        requirements:
+          id_work: '\d+'
+          id_task: '\d+'
+        controller: App\Domain\Task\Controller\Api\TaskController::detail
+        output: App\Domain\Task\DTO\Api\Output\TaskDetailOutput
+        read: false
+        openapi:
+          summary: 'Get task detail.'
+          description: 'Get task detail.'
+        normalizationContext:
+          groups: ['output', 'task:read', 'work:read']
+        openapiContext:
+          parameters:
+            - name: id_work
+              in: path
+              description: Work id
+              required: true
+              schema:
+                type: integer
+            - name: id_task
+              in: path
+              description: Task id
+              required: true
+              schema:
+                type: integer
+
+      api_get_task_work_list:
+        description: 'Get tasks by work.'
+        class: ApiPlatform\Metadata\Get
+        routeName: api_get_task_work_list
+        uriTemplate: '/task/work/{id}/list'
+        requirements:
+          id: '\d+'
+        controller: App\Domain\Task\Controller\Api\TaskController::listWork
+        output: App\Domain\Task\DTO\Api\Output\TaskListWorkOutput
+        read: false
+        openapi:
+          summary: 'Get work tasks.'
+          description: 'Get work tasks.'
+        openapiContext:
+          parameters:
+            - name: id
+              in: path
+              description: Work id
+              required: true
+              schema:
+                type: integer
+            - name: page
+              in: query
+              description: Page
+              required: false
+              schema:
+                type: integer
+
+        normalizationContext:
+          groups: ['output', 'task:read']

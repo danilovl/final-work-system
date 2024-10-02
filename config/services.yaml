@@ -22,6 +22,7 @@ services:
       - '../src/Application/Constant'
       - '../src/Application/DataTransferObject'
       - '../src/Application/DependencyInjection'
+      - '../src/Application/DTO'
       - '../src/Application/EventDispatcher/GenericEvent'
       - '../src/Application/Exception'
       - '../src/Application/GraphQL'
@@ -39,6 +40,7 @@ services:
   App\Domain\:
     resource: '../src/Domain'
     exclude:
+      - '../src/Domain/*/DTO/'
       - '../src/Domain/*/Entity/'
       - '../src/Domain/*/Exception'
       - '../src/Domain/*/Constant'

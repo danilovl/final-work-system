@@ -13,43 +13,46 @@
 namespace App\Domain\Task\Http\Api;
 
 use App\Application\Constant\TabTypeConstant;
+use App\Application\Helper\SerializerHelper;
+use App\Domain\Task\DTO\Api\Output\TaskListWorkOutput;
+use App\Domain\Task\DTO\Api\TaskDTO;
+use App\Domain\Task\Entity\Task;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Service\WorkDetailTabService;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
-use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+use Symfony\Component\HttpFoundation\Request;
 
 readonly class TaskListWorkHandle
 {
     public function __construct(
         private UserService $userService,
-        private WorkDetailTabService $workDetailTabService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private WorkDetailTabService $workDetailTabService
     ) {}
 
-    public function __invoke(Request $request, Work $work): JsonResponse
+    public function __invoke(Request $request, Work $task): TaskListWorkOutput
     {
         $user = $this->userService->getUser();
         $pagination = $this->workDetailTabService->getTabPagination(
             $request,
             TabTypeConstant::TAB_TASK->value,
-            $work,
-            $user
+            $task,
+            $user,
+            true
         );
 
-        $tasks = [];
-        foreach ($pagination as $task) {
-            $tasks[] = $this->objectToArrayTransformService->transform('api_key_field', $task);
+        $result = [];
+
+        /** @var Task $task */
+        foreach ($pagination->getItems() as $task) {
+            $taskDTO = SerializerHelper::convertToObject($task, TaskDTO::class);
+            $result[] = $taskDTO;
         }
 
-        return new JsonResponse([
-            'count' => $pagination->count(),
-            'totalCount' => $pagination->getTotalItemCount(),
-            'success' => true,
-            'result' => $tasks
-        ]);
+        return new TaskListWorkOutput(
+            $pagination->getItemNumberPerPage(),
+            $pagination->getTotalItemCount(),
+            $pagination->count(),
+            $result
+        );
     }
 }

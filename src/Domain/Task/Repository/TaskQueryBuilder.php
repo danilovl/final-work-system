@@ -19,9 +19,30 @@ use Doctrine\Common\Collections\Order;
 
 class TaskQueryBuilder extends BaseQueryBuilder
 {
+    public function selectWork(): self
+    {
+        $this->queryBuilder->addSelect('work');
+
+        return $this;
+    }
+
+    public function selectWorkAuthor(): self
+    {
+        $this->queryBuilder->addSelect('author');
+
+        return $this;
+    }
+
     public function joinWork(): self
     {
         $this->queryBuilder->join('task.work', 'work');
+
+        return $this;
+    }
+
+    public function joinWorkAuthor(): self
+    {
+        $this->queryBuilder->join('work.author', 'author');
 
         return $this;
     }

@@ -12,18 +12,21 @@
 
 namespace App\Domain\Task\Http\Api;
 
+use App\Application\Helper\SerializerHelper;
+use App\Domain\Task\DTO\Api\Output\TaskDetailOutput;
+use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Domain\Task\Entity\Task;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 readonly class TaskDetailHandle
 {
-    public function __construct(private ObjectToArrayTransformService $objectToArrayTransformService) {}
-
-    public function __invoke(Task $task): JsonResponse
+    public function __invoke(Task $task): TaskDetailOutput
     {
-        return new JsonResponse([
-            'task' => $this->objectToArrayTransformService->transform('api_key_field', $task)
-        ]);
+        $serializeContext [AbstractNormalizer::IGNORED_ATTRIBUTES] = ['owner', 'work', 'systemEvents'];
+
+        /** @var TaskDTO $result */
+        $result = SerializerHelper::convertToObject($task, TaskDTO::class, $serializeContext);
+
+        return new TaskDetailOutput($result);
     }
 }

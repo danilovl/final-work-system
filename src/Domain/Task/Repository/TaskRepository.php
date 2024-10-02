@@ -41,7 +41,10 @@ class TaskRepository extends ServiceEntityRepository
     public function allByOwner(User $user): QueryBuilder
     {
         return $this->createTaskQueryBuilder()
+            ->selectWork()
+            ->selectWorkAuthor()
             ->joinWork()
+            ->joinWorkAuthor()
             ->byOwner($user)
             ->orderByCreatedAt()
             ->getQueryBuilder();
@@ -127,6 +130,7 @@ class TaskRepository extends ServiceEntityRepository
     public function allByWorks(array $works, bool $active = false): QueryBuilder
     {
         $queryBuilder = $this->createTaskQueryBuilder()
+            ->selectWork()
             ->joinWork()
             ->byWorks($works)
             ->orderByCreatedAt()
