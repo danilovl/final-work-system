@@ -457,9 +457,10 @@
     </UnusedForeachValue>
   </file>
   <file src="src/Application/Helper/SerializerHelper.php">
-    <UnusedClass>
-      <code><![CDATA[SerializerHelper]]></code>
-    </UnusedClass>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$deserializeContext]]></code>
+      <code><![CDATA[$serializeContext]]></code>
+    </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Application/Helper/SortFunctionHelper.php">
     <MixedArgumentTypeCoercion>
@@ -3576,6 +3577,60 @@
       <code><![CDATA[TaskController]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Domain/Task/DTO/Api/Output/BaseListOutput.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$currentItemCount]]></code>
+      <code><![CDATA[$numItemsPerPage]]></code>
+      <code><![CDATA[$totalCount]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Task/DTO/Api/Output/TaskDetailOutput.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$result]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Task/DTO/Api/Output/TaskListOwnerOutput.php">
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->result]]></code>
+      <code><![CDATA[TaskDTO[]]]></code>
+    </MixedReturnTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getResult]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/DTO/Api/Output/TaskListSolverOutput.php">
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->result]]></code>
+      <code><![CDATA[TaskDTO[]]]></code>
+    </MixedReturnTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getResult]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/DTO/Api/Output/TaskListWorkOutput.php">
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->result]]></code>
+      <code><![CDATA[TaskDTO[]]]></code>
+    </MixedReturnTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getResult]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/DTO/Api/TaskDTO.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$active]]></code>
+      <code><![CDATA[$complete]]></code>
+      <code><![CDATA[$deadline]]></code>
+      <code><![CDATA[$description]]></code>
+      <code><![CDATA[$id]]></code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$notifyComplete]]></code>
+      <code><![CDATA[$work]]></code>
+    </PossiblyUnusedProperty>
+  </file>
   <file src="src/Domain/Task/DataTransferObject/Form/Factory/TaskFormFactoryData.php">
     <MissingConstructor>
       <code><![CDATA[$taskModel]]></code>
@@ -3722,17 +3777,14 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/Api/TaskDetailHandle.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
+    <PossiblyUndefinedVariable>
+      <code><![CDATA[$serializeContext]]></code>
+    </PossiblyUndefinedVariable>
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[TaskDTO]]></code>
+    </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Domain/Task/Http/Api/TaskListOwnerHandle.php">
-    <MixedArgument>
-      <code><![CDATA[$task]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$task]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -3741,23 +3793,11 @@
     <InvalidArgument>
       <code><![CDATA[$authorWorks->toArray()]]></code>
     </InvalidArgument>
-    <MixedArgument>
-      <code><![CDATA[$task]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$task]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Http/Api/TaskListWorkHandle.php">
-    <MixedArgument>
-      <code><![CDATA[$task]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$task]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -3820,8 +3860,11 @@
       <code><![CDATA[byWorks]]></code>
       <code><![CDATA[joinStatus]]></code>
       <code><![CDATA[joinWork]]></code>
+      <code><![CDATA[joinWorkAuthor]]></code>
       <code><![CDATA[orderByCreatedAt]]></code>
       <code><![CDATA[orderByDeadline]]></code>
+      <code><![CDATA[selectWork]]></code>
+      <code><![CDATA[selectWorkAuthor]]></code>
     </PossiblyUnusedMethod>
     <QueryBuilderSetParameter>
       <code><![CDATA[$user]]></code>
@@ -3976,6 +4019,20 @@
     <UnusedClass>
       <code><![CDATA[UserController]]></code>
     </UnusedClass>
+  </file>
+  <file src="src/Domain/User/DTO/Api/UserDTO.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$degreeAfter]]></code>
+      <code><![CDATA[$degreeBefore]]></code>
+      <code><![CDATA[$email]]></code>
+      <code><![CDATA[$firstname]]></code>
+      <code><![CDATA[$id]]></code>
+      <code><![CDATA[$lastname]]></code>
+      <code><![CDATA[$username]]></code>
+    </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/User/Entity/User.php">
     <DeprecatedConstant>
@@ -4670,6 +4727,22 @@
       <code><![CDATA[WorkController]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Domain/Work/DTO/Api/WorkDTO.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$author]]></code>
+      <code><![CDATA[$consultant]]></code>
+      <code><![CDATA[$deadline]]></code>
+      <code><![CDATA[$deadlineProgram]]></code>
+      <code><![CDATA[$id]]></code>
+      <code><![CDATA[$opponent]]></code>
+      <code><![CDATA[$shortcut]]></code>
+      <code><![CDATA[$supervisor]]></code>
+      <code><![CDATA[$title]]></code>
+    </PossiblyUnusedProperty>
+  </file>
   <file src="src/Domain/Work/DataTransferObject/WorkRepositoryData.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$supervisor]]></code>
@@ -4982,6 +5055,10 @@
       <code><![CDATA[getQuery]]></code>
       <code><![CDATA[getQuery]]></code>
       <code><![CDATA[getQuery]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
     </MixedMethodCall>
     <MixedReturnStatement>
       <code><![CDATA[$queryPagination]]></code>
@@ -4989,6 +5066,12 @@
     <PossiblyNullArgument>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
+    <PossiblyNullReference>
+      <code><![CDATA[setHydrationMode]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
+      <code><![CDATA[setHydrationMode]]></code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
