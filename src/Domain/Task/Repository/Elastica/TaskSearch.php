@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Task\Elastica;
+namespace App\Domain\Task\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
 use Elastica\Result;

@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\Task\Elastica;
+namespace Domain\Task\Repository\Elastica;
 
-use App\Domain\Task\Elastica\TaskSearch;
+use App\Domain\Task\Repository\Elastica\TaskSearch;
 use App\Domain\User\Entity\User;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Generator;

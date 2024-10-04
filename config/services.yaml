@@ -58,7 +58,7 @@ services:
     arguments:
       $transformedFinderConversation: '@fos_elastica.finder.conversation'
 
-  App\Domain\Task\Elastica\TaskSearch:
+  App\Domain\Task\Repository\Elastica\TaskSearch:
     arguments:
       $transformedFinderTask: '@fos_elastica.finder.task'
 
