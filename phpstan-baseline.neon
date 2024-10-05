@@ -241,16 +241,6 @@ parameters:
 			path: src/Domain/Widget/Service/WidgetStreamService.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of method ArrayIterator\\<\\(int\\|string\\),mixed\\>\\:\\:uasort\\(\\) expects callable\\(mixed, mixed\\)\\: int, Closure\\(App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\)\\: int given\\.$#"
-			count: 1
-			path: src/Domain/Work/Elastica/WorkSearch.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
-			count: 1
-			path: src/Domain/Work/Elastica/WorkSearch.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkDeadlineFacade\\:\\:getWorksAfterDeadline\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Work/Facade/WorkDeadlineFacade.php
@@ -274,6 +264,16 @@ parameters:
 			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:getWorksByAuthorSupervisorStatus\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
 			count: 1
 			path: src/Domain/Work/Facade/WorkFacade.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of method ArrayIterator\\<\\(int\\|string\\),mixed\\>\\:\\:uasort\\(\\) expects callable\\(mixed, mixed\\)\\: int, Closure\\(App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\)\\: int given\\.$#"
+			count: 1
+			path: src/Domain/Work/Repository/Elastica/WorkSearch.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
+			count: 1
+			path: src/Domain/Work/Repository/Elastica/WorkSearch.php
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWork\\(\\)\\.$#"
@@ -451,7 +451,7 @@ parameters:
 			path: tests/Kernel/Domain/Work/Elastica/WorkSearchTest.php
 
 		-
-			message: "#^Parameter \\#3 \\$form of method App\\\\Domain\\\\Work\\\\Elastica\\\\WorkSearch\\:\\:createQuery\\(\\) expects Symfony\\\\Component\\\\Form\\\\FormInterface, App\\\\Domain\\\\Work\\\\Form\\\\WorkSearchForm\\|Symfony\\\\Component\\\\Form\\\\FormInterface given\\.$#"
+			message: "#^Parameter \\#3 \\$form of method App\\\\Domain\\\\Work\\\\Repository\\\\Elastica\\\\WorkSearch\\:\\:createQuery\\(\\) expects Symfony\\\\Component\\\\Form\\\\FormInterface, App\\\\Domain\\\\Work\\\\Form\\\\WorkSearchForm\\|Symfony\\\\Component\\\\Form\\\\FormInterface given\\.$#"
 			count: 1
 			path: tests/Kernel/Domain/Work/Elastica/WorkSearchTest.php
 

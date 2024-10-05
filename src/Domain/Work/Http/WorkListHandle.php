@@ -13,13 +13,13 @@
 namespace App\Domain\Work\Http;
 
 use App\Application\Form\Factory\FormDeleteFactory;
+use App\Domain\Work\Repository\Elastica\ElasticaWorkRepository;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService
 };
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\Elastica\WorkSearch;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\Work\Helper\WorkFunctionHelper;
@@ -36,7 +36,7 @@ readonly class WorkListHandle
         private TwigRenderService $twigRenderService,
         private PaginatorService $paginatorService,
         private WorkFormFactory $workFormFactory,
-        private WorkSearch $workSearch,
+        private ElasticaWorkRepository $elasticaWorkRepository,
         private FormDeleteFactory $deleteFactory
     ) {}
 
@@ -48,7 +48,7 @@ readonly class WorkListHandle
             ->getSearchForm($user, $type, new WorkSearchModel)
             ->handleRequest($request);
 
-        $works = $this->workSearch->filterWorkList($user, $type, $form);
+        $works = $this->elasticaWorkRepository->filterWorkList($user, $type, $form);
 
         $workGroups = match ($type) {
             WorkUserTypeConstant::SUPERVISOR->value => WorkFunctionHelper::groupWorksByCategoryAndSorting($works),

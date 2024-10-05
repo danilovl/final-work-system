@@ -50,7 +50,7 @@ services:
       - '../src/Domain/*/EventDispatcher/GenericEvent'
       - '../src/Domain/Comment/Form/EventSubscriber'
 
-  App\Domain\Work\Elastica\WorkSearch:
+  App\Domain\Work\Repository\Elastica\WorkSearch:
     arguments:
       $transformedFinderWork: '@fos_elastica.finder.work'
 

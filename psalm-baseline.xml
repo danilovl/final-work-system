@@ -3637,14 +3637,6 @@
       <code><![CDATA[$type]]></code>
     </MissingConstructor>
   </file>
-  <file src="src/Domain/Task/Elastica/TaskSearch.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$query]]></code>
-    </MixedArgumentTypeCoercion>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Domain/Task/Entity/Task.php">
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$systemEvents]]></code>
@@ -3848,6 +3840,19 @@
       <code><![CDATA[$owner]]></code>
       <code><![CDATA[$work]]></code>
     </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Domain/Task/Repository/Elastica/ElasticaTaskRepository.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Task/Repository/Elastica/TaskSearch.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$query]]></code>
+    </MixedArgumentTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Task/Repository/TaskQueryBuilder.php">
     <PossiblyUnusedMethod>
@@ -4751,28 +4756,6 @@
       <code><![CDATA[$workStatus]]></code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="src/Domain/Work/Elastica/WorkSearch.php">
-    <InvalidArgument>
-      <code><![CDATA[$value]]></code>
-    </InvalidArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$query]]></code>
-      <code><![CDATA[uasort]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment>
-      <code><![CDATA[$filedValue]]></code>
-      <code><![CDATA[$filedValues[]]]></code>
-      <code><![CDATA[$item]]></code>
-      <code><![CDATA[$value]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$filedValue]]></code>
-      <code><![CDATA[$filedValue]]></code>
-    </MixedOperand>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Domain/Work/Entity/Work.php">
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$categories]]></code>
@@ -5022,6 +5005,33 @@
       <code><![CDATA[$title]]></code>
       <code><![CDATA[$type]]></code>
     </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Domain/Work/Repository/Elastica/ElasticaWorkRepository.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Work/Repository/Elastica/WorkSearch.php">
+    <InvalidArgument>
+      <code><![CDATA[$value]]></code>
+    </InvalidArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$query]]></code>
+      <code><![CDATA[uasort]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code><![CDATA[$filedValue]]></code>
+      <code><![CDATA[$filedValues[]]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$value]]></code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code><![CDATA[$filedValue]]></code>
+      <code><![CDATA[$filedValue]]></code>
+    </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Work/Repository/WorkRepository.php">
     <PossiblyUnusedMethod>

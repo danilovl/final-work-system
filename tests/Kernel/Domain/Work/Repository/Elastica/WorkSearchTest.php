@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Tests\Kernel\Domain\Work\Elastica;
+namespace Domain\Work\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\Elastica\WorkSearch;
 use App\Domain\Work\Form\WorkSearchForm;
+use App\Domain\Work\Repository\Elastica\WorkSearch;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use DateTime;

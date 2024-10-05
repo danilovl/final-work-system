@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Work\Elastica;
+namespace App\Domain\Work\Repository\Elastica;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Domain\User\Entity\User;
