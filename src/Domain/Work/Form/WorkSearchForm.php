@@ -33,6 +33,8 @@ class WorkSearchForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $type = $options['type'];
+
         $builder
             ->add('title', TextType::class, [
                 'required' => false
@@ -51,12 +53,16 @@ class WorkSearchForm extends AbstractType
                 'multiple' => true
             ]);
 
-        $types = ['author', 'supervisor', 'opponent', 'consultant'];
-        foreach ($types as $type) {
-            $builder->add($type, ChoiceType::class, [
+        $formTypes = ['author', 'supervisor', 'opponent', 'consultant'];
+        foreach ($formTypes as $formType) {
+            if ($formType === $type) {
+                continue;
+            }
+
+            $builder->add($formType, ChoiceType::class, [
                 'required' => false,
                 'multiple' => true,
-                'choices' => $options[$type . 's'],
+                'choices' => $options[$formType . 's'],
                 'choice_label' => static fn(User $user): string => $user->getFullNameDegree()
             ]);
         }
@@ -81,11 +87,13 @@ class WorkSearchForm extends AbstractType
                 'supervisors' => [],
                 'deadlines' => []
             ])
+            ->setRequired('type')
             ->setAllowedTypes('authors', 'iterable')
             ->setAllowedTypes('opponents', 'iterable')
             ->setAllowedTypes('consultants', 'iterable')
             ->setAllowedTypes('supervisors', 'iterable')
-            ->setAllowedTypes('deadlines', 'iterable');
+            ->setAllowedTypes('deadlines', 'iterable')
+            ->setAllowedTypes('type', 'string');
     }
 
     public function getBlockPrefix(): string

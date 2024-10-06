@@ -43,35 +43,43 @@
                 {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
-        <div class="item form-group">
-            {{ form_label(form.supervisor, 'app.form.label.supervisor', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.supervisor, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="item form-group">
-            {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="item form-group">
-            {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.opponent, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="item form-group">
-            {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.consultant, {'attr': {'class': 'form-control'}}) }}
-            </div>
-            {% if not form.consultant.vars.valid %}
-                <div class="col-md-3 col-sm-3 col-xs-12 red">
-                    {{ form_errors(form.consultant) }}
+
+        {% if form.supervisor is defined %}
+            <div class="item form-group">
+                {{ form_label(form.supervisor, 'app.form.label.supervisor', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(form.supervisor, {'attr': {'class': 'form-control'}}) }}
                 </div>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
+
+        {% if form.author is defined %}
+            <div class="item form-group">
+                {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if form.opponent is defined %}
+            <div class="item form-group">
+                {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(form.opponent, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if form.consultant is defined %}
+            <div class="item form-group">
+                {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(form.consultant, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        {% endif %}
+
         <div class="item form-group">
             {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
             <div class="col-md-6 col-sm-6 col-xs-12">

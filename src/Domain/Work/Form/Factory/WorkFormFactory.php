@@ -115,7 +115,8 @@ class WorkFormFactory
             'opponents' => $userOpponentArray,
             'consultants' => $userConsultantArray,
             'supervisors' => $userSupervisorArray,
-            'deadlines' => $workDeadLines
+            'deadlines' => $workDeadLines,
+            'type' => $type
         ]);
     }
 }

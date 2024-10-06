@@ -4884,6 +4884,9 @@
     <MissingTemplateParam>
       <code><![CDATA[WorkSearchForm]]></code>
     </MissingTemplateParam>
+    <MixedAssignment>
+      <code><![CDATA[$type]]></code>
+    </MixedAssignment>
   </file>
   <file src="src/Domain/Work/Form/WorkSearchStatusForm.php">
     <MissingTemplateParam>

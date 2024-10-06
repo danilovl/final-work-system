@@ -448,12 +448,12 @@ parameters:
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\Work\\\\Form\\\\WorkSearchForm\\|Symfony\\\\Component\\\\Form\\\\FormInterface\\:\\:submit\\(\\)\\.$#"
 			count: 1
-			path: tests/Kernel/Domain/Work/Elastica/WorkSearchTest.php
+			path: tests/Kernel/Domain/Work/Repository/Elastica/WorkSearchTest.php
 
 		-
 			message: "#^Parameter \\#3 \\$form of method App\\\\Domain\\\\Work\\\\Repository\\\\Elastica\\\\WorkSearch\\:\\:createQuery\\(\\) expects Symfony\\\\Component\\\\Form\\\\FormInterface, App\\\\Domain\\\\Work\\\\Form\\\\WorkSearchForm\\|Symfony\\\\Component\\\\Form\\\\FormInterface given\\.$#"
 			count: 1
-			path: tests/Kernel/Domain/Work/Elastica/WorkSearchTest.php
+			path: tests/Kernel/Domain/Work/Repository/Elastica/WorkSearchTest.php
 
 		-
 			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
