@@ -14,21 +14,21 @@ namespace App\Domain\Conversation\Http;
 
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
-use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\ConversationType\Constant\ConversationTypeConstant;
-use App\Domain\ConversationType\Entity\ConversationType;
-use App\Domain\ConversationType\Facade\ConversationTypeFacade;
+use App\Domain\Conversation\Repository\Elastica\ElasticaConversationRepository;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService,
     EntityManagerService
 };
-use App\Domain\Conversation\Elastica\ConversationSearch;
+use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\{
     ConversationFacade,
     ConversationMessageFacade
 };
 use App\Domain\Conversation\Helper\ConversationHelper;
+use App\Domain\ConversationType\Constant\ConversationTypeConstant;
+use App\Domain\ConversationType\Entity\ConversationType;
+use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -47,7 +47,7 @@ readonly class ConversationListHandle
         private ConversationTypeFacade $conversationTypeFacade,
         private ConversationMessageFacade $conversationMessageFacade,
         private PaginatorService $paginatorService,
-        private ConversationSearch $conversationSearch,
+        private ElasticaConversationRepository $elasticaConversationRepository,
         private FormFactoryInterface $formFactory,
         private EntityManagerService $entityManagerService
     ) {}
@@ -71,7 +71,7 @@ readonly class ConversationListHandle
             ->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
-            $conversationIds = $this->conversationSearch->getIdsByParticipantAndSearch($user, $searchModel->search);
+            $conversationIds = $this->elasticaConversationRepository->getIdsByParticipantAndSearch($user, $searchModel->search);
             $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
         }
 

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Conversation\Elastica;
+namespace App\Domain\Conversation\Repository\Elastica;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;

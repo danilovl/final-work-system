@@ -1408,25 +1408,6 @@
       <code><![CDATA[ConversationController]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Domain/Conversation/Elastica/ConversationSearch.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$query]]></code>
-      <code><![CDATA[$query]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedArrayAccess>
-      <code><![CDATA[$hit['_source']]]></code>
-      <code><![CDATA[$hit['_source']['id']]]></code>
-      <code><![CDATA[$innerHit['hits']]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code><![CDATA[$hit]]></code>
-      <code><![CDATA[$innerHit]]></code>
-      <code><![CDATA[$messageIds[]]]></code>
-    </MixedAssignment>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Domain/Conversation/Entity/Conversation.php">
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$messages]]></code>
@@ -1652,6 +1633,30 @@
       <code><![CDATA[$types]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyUnusedParam>
+  </file>
+  <file src="src/Domain/Conversation/Repository/Elastica/ConversationSearch.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$query]]></code>
+      <code><![CDATA[$query]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess>
+      <code><![CDATA[$hit['_source']]]></code>
+      <code><![CDATA[$hit['_source']['id']]]></code>
+      <code><![CDATA[$innerHit['hits']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code><![CDATA[$hit]]></code>
+      <code><![CDATA[$innerHit]]></code>
+      <code><![CDATA[$messageIds[]]]></code>
+    </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Conversation/Repository/Elastica/ElasticaConversationRepository.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/Conversation/Security/Voter/ConversationVoter.php">
     <MissingTemplateParam>

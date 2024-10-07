@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\Conversation\Elastica;
+namespace Domain\Conversation\Repository\Elastica;
 
-use App\Domain\Conversation\Elastica\ConversationSearch;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\Conversation\Repository\Elastica\ConversationSearch;
 use App\Domain\User\Entity\User;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Generator;
@@ -44,7 +44,7 @@ class ConversationSearchTest extends TestCase
 
     public static function createQueryGetIdsByParticipantAndSearchProvider(): Generator
     {
-        foreach (['test', 'apple'] as $search){
+        foreach (['test', 'apple'] as $search) {
             $user = new User;
             $user->setId(random_int(1, 100));
 
@@ -124,7 +124,7 @@ class ConversationSearchTest extends TestCase
 
     public static function createQueryGetMessageIdsByConversationAndSearchProvider(): Generator
     {
-        foreach (['test', 'apple'] as $search){
+        foreach (['test', 'apple'] as $search) {
             $conversation = new Conversation;
             $conversation->setId(random_int(1, 100));
 
