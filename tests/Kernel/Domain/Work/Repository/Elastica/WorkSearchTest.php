@@ -48,7 +48,7 @@ class WorkSearchTest extends KernelTestCase
             'consultants' => $users,
             'supervisors' => $users,
             'deadlines' => [new DateTime('2023-01-01')],
-            'type' => 'author'
+            'type' => WorkUserTypeConstant::AUTHOR->value
         ]);
 
         $transformedFinder = $this->createMock(TransformedFinder::class);
