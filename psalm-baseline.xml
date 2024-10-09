@@ -734,6 +734,11 @@
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Application/Traits/Entity/ActiveAbleTrait.php">
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
+  </file>
   <file src="src/Application/Traits/Entity/ConstantAwareTrait.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[getConstant]]></code>
@@ -749,6 +754,9 @@
       <code><![CDATA[setConstant]]></code>
       <code><![CDATA[setConstant]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Application/Traits/Entity/CreateAbleTrait.php">
     <MissingConstructor>
@@ -759,6 +767,9 @@
       <code><![CDATA[getCreatedAt]]></code>
       <code><![CDATA[setCreatedAt]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Application/Traits/Entity/CreateUpdateAbleTrait.php">
     <MissingConstructor>
@@ -855,6 +866,10 @@
       <code><![CDATA[setCreatedAt]]></code>
       <code><![CDATA[setCreatedAt]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Application/Traits/Entity/IdTrait.php">
     <MissingConstructor>
@@ -902,6 +917,9 @@
       <code><![CDATA[setId]]></code>
       <code><![CDATA[setId]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Application/Traits/Entity/IsReadTrait.php">
     <PossiblyUnusedMethod>
@@ -914,6 +932,16 @@
       <code><![CDATA[empty($this->latitude)]]></code>
       <code><![CDATA[empty($this->longitude)]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
+  </file>
+  <file src="src/Application/Traits/Entity/SimpleInformationTrait.php">
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Application/Traits/Entity/TimestampAbleTrait.php">
     <MissingConstructor>
@@ -940,6 +968,10 @@
       <code><![CDATA[timestampAblePreUpdate]]></code>
       <code><![CDATA[timestampAblePreUpdate]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Application/Twig/Runtime/AwayRuntime.php">
     <MixedArgument>
@@ -1171,6 +1203,10 @@
       <code><![CDATA[ApiUser]]></code>
       <code><![CDATA[ApiUser]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/ApiUser/Facade/ApiUserFacade.php">
     <MixedInferredReturnType>
@@ -1207,6 +1243,9 @@
       <code><![CDATA[setApiUser]]></code>
       <code><![CDATA[setRangeIp]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/ApiUserRule/Repository/ApiUserRuleRepository.php">
     <PossiblyUnusedMethod>
@@ -1249,6 +1288,10 @@
       <code><![CDATA[Article]]></code>
       <code><![CDATA[Article]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/Article/Facade/ArticleCategoryFacade.php">
     <PossiblyUnusedMethod>
@@ -1288,9 +1331,6 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/ArticleCategory/Entity/ArticleCategory.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Types::ARRAY]]></code>
-    </DeprecatedConstant>
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$articles]]></code>
     </InvalidPropertyAssignmentValue>
@@ -1324,6 +1364,9 @@
       <code><![CDATA[ArticleCategory]]></code>
       <code><![CDATA[ArticleCategory]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/ArticleCategory/Http/ArticleCategoryArticleListHandle.php">
     <PossiblyUnusedMethod>
@@ -1358,6 +1401,9 @@
       <code><![CDATA[$event]]></code>
       <code><![CDATA[$owner]]></code>
     </MissingConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/Comment/Facade/CommentFacade.php">
     <MixedInferredReturnType>
@@ -1459,6 +1505,9 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$this->getName()]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/Conversation/EventDispatcher/ConversationEventDispatcherService.php">
     <PossiblyUnusedMethod>
@@ -1806,6 +1855,9 @@
       <code><![CDATA[ConversationMessage]]></code>
       <code><![CDATA[ConversationMessage]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/ConversationMessage/Form/Constraint/ConversationMessageNameValidator.php">
     <UnusedClass>
@@ -2152,6 +2204,9 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/EmailNotification/Command/EmailNotificationCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[COMMAND_NAME = 'app:email-notification-send']]></code>
+    </MissingClassConstType>
     <PropertyNotSetInConstructor>
       <code><![CDATA[$io]]></code>
     </PropertyNotSetInConstructor>
@@ -2172,6 +2227,15 @@
       <code><![CDATA[getUuid]]></code>
       <code><![CDATA[isSuccess]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/EmailNotification/Facade/EmailNotificationFacade.php">
     <MixedInferredReturnType>
@@ -2282,6 +2346,11 @@
       <code><![CDATA[$event]]></code>
       <code><![CDATA[$this->getName()]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
     <UnusedProperty>
       <code><![CDATA[$systemEvents]]></code>
     </UnusedProperty>
@@ -2453,6 +2522,10 @@
       <code><![CDATA[$this->getLatitude()]]></code>
       <code><![CDATA[$this->getLongitude()]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/EventAddress/Facade/EventAddressFacade.php">
     <MixedInferredReturnType>
@@ -2624,6 +2697,11 @@
       <code><![CDATA[$this->getFirstName()]]></code>
       <code><![CDATA[$this->getSecondName()]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/EventSchedule/Controller/Ajax/EventScheduleController.php">
     <UnusedClass>
@@ -2780,6 +2858,12 @@
       <code><![CDATA[getDay]]></code>
       <code><![CDATA[getSchedule]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/EventScheduleTemplate/Factory/EventScheduleTemplateFactory.php">
     <UnusedClass>
@@ -2832,8 +2916,16 @@
       <code><![CDATA[EventType]]></code>
       <code><![CDATA[EventType]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/Media/Command/SyncDatabaseMediaWithRealFileCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[COMMAND_NAME = 'app:sync-database-media-with-real-file']]></code>
+      <code><![CDATA[LIMIT = 500]]></code>
+    </MissingClassConstType>
     <MixedArgument>
       <code><![CDATA[$files]]></code>
     </MixedArgument>
@@ -2888,6 +2980,12 @@
       <code><![CDATA[Media]]></code>
       <code><![CDATA[Media]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
     <UnusedProperty>
       <code><![CDATA[$systemEvents]]></code>
     </UnusedProperty>
@@ -3090,6 +3188,10 @@
       <code><![CDATA[MediaMimeType]]></code>
       <code><![CDATA[MediaMimeType]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/MediaMimeType/Repository/MediaMimeTypeRepository.php">
     <PossiblyUnusedMethod>
@@ -3127,6 +3229,9 @@
       <code><![CDATA[MediaType]]></code>
       <code><![CDATA[MediaType]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/MediaType/Repository/MediaTypeRepository.php">
     <PossiblyUnusedMethod>
@@ -3220,6 +3325,10 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[getExpiresAt]]></code>
     </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/ResetPassword/Exception/FakeRepositoryException.php">
     <UnusedClass>
@@ -3326,6 +3435,21 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/SystemEvent/Constant/SystemEventGeneratorFolderConstant.php">
+    <MissingClassConstType>
+      <code><![CDATA[FOLDERS = [
+        self::LINK,
+        self::TEXT
+    ]]]></code>
+    </MissingClassConstType>
+  </file>
+  <file src="src/Domain/SystemEvent/Constant/SystemEventStatusConstant.php">
+    <MissingClassConstType>
+      <code><![CDATA[ALL = 'all']]></code>
+      <code><![CDATA[READ = 'read']]></code>
+      <code><![CDATA[UNREAD = 'unread']]></code>
+    </MissingClassConstType>
   </file>
   <file src="src/Domain/SystemEvent/Controller/Ajax/SystemEventController.php">
     <UnusedClass>
@@ -3492,6 +3616,9 @@
       <code><![CDATA[$recipient]]></code>
       <code><![CDATA[$systemEvent]]></code>
     </MissingConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/SystemEventRecipient/EventListener/Entity/SystemEventRecipientListener.php">
     <UnusedClass>
@@ -3543,8 +3670,15 @@
       <code><![CDATA[SystemEventType]]></code>
       <code><![CDATA[SystemEventType]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/Task/Command/TaskRemindDeadlineCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[COMMAND_NAME = 'app:task-remind-deadline']]></code>
+      <code><![CDATA[LIMIT = 500]]></code>
+    </MissingClassConstType>
     <MixedArgument>
       <code><![CDATA[$task]]></code>
     </MixedArgument>
@@ -3664,6 +3798,11 @@
       <code><![CDATA[Task]]></code>
       <code><![CDATA[Task]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/Task/EventDispatcher/GenericEvent/TaskGenericEvent.php">
     <PossiblyUnusedProperty>
@@ -3953,6 +4092,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/User/Command/UserAddCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[COMMAND_NAME = 'app:user-add']]></code>
+    </MissingClassConstType>
     <MixedAssignment>
       <code><![CDATA[$email]]></code>
       <code><![CDATA[$firstName]]></code>
@@ -3978,6 +4120,9 @@
     </UnusedClass>
   </file>
   <file src="src/Domain/User/Command/UserDeleteCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[COMMAND_NAME = 'app:user-delete']]></code>
+    </MissingClassConstType>
     <MixedAssignment>
       <code><![CDATA[$username]]></code>
     </MixedAssignment>
@@ -4045,9 +4190,6 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Domain/User/Entity/User.php">
-    <DeprecatedConstant>
-      <code><![CDATA[Types::ARRAY]]></code>
-    </DeprecatedConstant>
     <InvalidArgument>
       <code><![CDATA[$eventParticipant->getEvent()]]></code>
     </InvalidArgument>
@@ -4200,6 +4342,37 @@
       <code><![CDATA[empty($this->getDegreeAfter())]]></code>
       <code><![CDATA[empty($this->getDegreeBefore())]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
     <UndefinedInterfaceMethod>
       <code><![CDATA[matching]]></code>
     </UndefinedInterfaceMethod>
@@ -4492,6 +4665,9 @@
       <code><![CDATA[Group]]></code>
       <code><![CDATA[Group]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/UserGroup/Facade/UserGroupFacade.php">
     <PossiblyUnusedMethod>
@@ -4718,6 +4894,9 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Domain/Work/Command/WorkRemindDeadlineCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[LIMIT = 500]]></code>
+    </MissingClassConstType>
     <UnusedClass>
       <code><![CDATA[WorkRemindDeadlineCommand]]></code>
     </UnusedClass>
@@ -4815,6 +4994,12 @@
       <code><![CDATA[Work]]></code>
       <code><![CDATA[Work]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
     <UndefinedInterfaceMethod>
       <code><![CDATA[matching]]></code>
     </UndefinedInterfaceMethod>
@@ -5163,6 +5348,9 @@
       <code><![CDATA[WorkCategory]]></code>
       <code><![CDATA[WorkCategory]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/WorkCategory/Facade/WorkCategoryFacade.php">
     <PossiblyUnusedMethod>
@@ -5311,6 +5499,9 @@
       <code><![CDATA[WorkStatus]]></code>
       <code><![CDATA[WorkStatus]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Domain/WorkStatus/Facade/WorkStatusFacade.php">
     <LessSpecificReturnStatement>
@@ -5362,6 +5553,9 @@
       <code><![CDATA[WorkType]]></code>
       <code><![CDATA[WorkType]]></code>
     </PropertyNotSetInConstructor>
+    <UndefinedAttributeClass>
+      <code><![CDATA[ORM\Column]]></code>
+    </UndefinedAttributeClass>
   </file>
   <file src="src/Kernel.php">
     <UnusedClass>

@@ -147,8 +147,8 @@
         "phpstan": "phpstan analyse -c phpstan.neon src --no-progress",
         "phpstan-generate-baseline": "vendor/bin/phpstan analyse --configuration phpstan.neon src/ tests/ --generate-baseline",
         "phpstan-clear-result-cache": "phpstan clear-result-cache",
-        "psalm": "./vendor/bin/psalm",
-        "psalm-update-baseline": "./vendor/bin/psalm --set-baseline=psalm-baseline.xml",
+        "psalm": "./vendor/bin/psalm --no-cache",
+        "psalm-update-baseline": "./vendor/bin/psalm --no-cache --set-baseline=psalm-baseline.xml",
         "pre-push": "@phpunit",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
