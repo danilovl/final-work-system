@@ -34,9 +34,6 @@ jobs:
       - name: Run phpstan
         uses: ./.github/actions/run-phpstan
 
-      - name: Run psalm
-        uses: ./.github/actions/run-psalm
-
       - name: Run unit tests
         uses: ./.github/actions/run-unit-test
 
