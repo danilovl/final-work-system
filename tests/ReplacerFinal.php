@@ -19,8 +19,8 @@ use RegexIterator;
 
 class ReplacerFinal
 {
-    private const ALLOW_METHODS = ['replace', 'replaceBack'];
-    private const FILE_NAME = 'replaceClasses.txt';
+    private const array ALLOW_METHODS = ['replace', 'replaceBack'];
+    private const string FILE_NAME = 'replaceClasses.txt';
 
     private array $classes = [];
 

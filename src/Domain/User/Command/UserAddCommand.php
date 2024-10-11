@@ -29,7 +29,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class UserAddCommand extends Command
 {
-    final public const COMMAND_NAME = 'app:user-add';
+    final public const string COMMAND_NAME = 'app:user-add';
 
     private ?SymfonyStyle $io = null;
 

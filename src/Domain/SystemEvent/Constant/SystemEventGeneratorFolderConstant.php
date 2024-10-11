@@ -17,7 +17,7 @@ enum SystemEventGeneratorFolderConstant
     final public const string LINK = 'link';
     final public const string TEXT = 'text';
 
-    final public const FOLDERS = [
+    final public const array FOLDERS = [
         self::LINK,
         self::TEXT
     ];

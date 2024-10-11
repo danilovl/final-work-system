@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
 {
-    private const MESSAGE = 'It is not first day of the week';
+    private const string MESSAGE = 'It is not first day of the week';
 
     protected function createValidator(): FirstWeekDayValidator
     {

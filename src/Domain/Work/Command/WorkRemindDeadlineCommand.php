@@ -24,7 +24,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'app:work-remind-deadline', description: 'Create reminder notification emails for works')]
 class WorkRemindDeadlineCommand extends Command
 {
-    private const LIMIT = 500;
+    private const int LIMIT = 500;
 
     public function __construct(
         private readonly WorkEventDispatcherService $workEventDispatcherService,

@@ -21,7 +21,7 @@ use Throwable;
 
 class ImportSqlCommandTest extends KernelTestCase
 {
-    private const SQL_FILE_PATH = __DIR__ . '/data/import-sql-command-data.sql';
+    private const string SQL_FILE_PATH = __DIR__ . '/data/import-sql-command-data.sql';
 
     public function testExecute(): void
     {

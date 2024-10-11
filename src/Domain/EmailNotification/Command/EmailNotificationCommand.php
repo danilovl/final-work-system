@@ -24,7 +24,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class EmailNotificationCommand extends Command
 {
-    final public const COMMAND_NAME = 'app:email-notification-send';
+    final public const string COMMAND_NAME = 'app:email-notification-send';
 
     private SymfonyStyle $io;
 

@@ -30,8 +30,8 @@ use Symfony\Component\Finder\Finder;
 
 class SyncDatabaseMediaWithRealFileCommand extends Command
 {
-    final public const COMMAND_NAME = 'app:sync-database-media-with-real-file';
-    private const LIMIT = 500;
+    final public const string COMMAND_NAME = 'app:sync-database-media-with-real-file';
+    private const int LIMIT = 500;
 
     private SymfonyStyle $io;
 
