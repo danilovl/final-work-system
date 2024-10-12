@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01369b78474e871d2d92f18e57c0f0b0",
+    "content-hash": "bb1c8478f0dbd2a3b72ea8d825d8ec03",
     "packages": [
         {
             "name": "api-platform/core",
@@ -250,16 +250,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.306.7",
+            "version": "3.307.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "bc30df54badd9d2af8d291cd0665ade6eb509598"
+                "reference": "cc79f16e1a1bd3feee421401ba2f21915abfdf91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bc30df54badd9d2af8d291cd0665ade6eb509598",
-                "reference": "bc30df54badd9d2af8d291cd0665ade6eb509598",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cc79f16e1a1bd3feee421401ba2f21915abfdf91",
+                "reference": "cc79f16e1a1bd3feee421401ba2f21915abfdf91",
                 "shasum": ""
             },
             "require": {
@@ -339,9 +339,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.306.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.307.1"
             },
-            "time": "2024-05-15T18:04:12+00:00"
+            "time": "2024-05-17T18:07:44+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -2766,13 +2766,13 @@
             "version": "v6.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danilovl/FOSElasticaBundle.git",
-                "reference": "0c3868b7378a6d7f8e528c9833cdd7d9a92edef4"
+                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
+                "reference": "b4f7147832a1a536ef9feafdeddabd8dd95b4437"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/FOSElasticaBundle/zipball/0c3868b7378a6d7f8e528c9833cdd7d9a92edef4",
-                "reference": "0c3868b7378a6d7f8e528c9833cdd7d9a92edef4",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/b4f7147832a1a536ef9feafdeddabd8dd95b4437",
+                "reference": "b4f7147832a1a536ef9feafdeddabd8dd95b4437",
                 "shasum": ""
             },
             "require": {
@@ -2780,33 +2780,34 @@
                 "php": "^7.4 || ^8.0",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
                 "ruflin/elastica": "^7.1",
-                "symfony/console": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/property-access": "^4.4 || ^5.4 || ^6.3 || ^7.0"
+                "symfony/console": "^5.4 || ^6.4 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0",
+                "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.0",
+                "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
+                "symfony/stopwatch": "^5.4 || ^6.4 || ^7.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "^2.1.1",
                 "doctrine/mongodb-odm": "^2.2",
                 "doctrine/orm": "^2.8",
-                "doctrine/phpcr-odm": "^1.5.3",
+                "doctrine/phpcr-odm": "^1.5.3 || ^2.0",
                 "ergebnis/composer-normalize": "^2.28",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "jackalope/jackalope-doctrine-dbal": "^1.2",
+                "jackalope/jackalope-doctrine-dbal": "^1.2 || ^2.0",
                 "jms/serializer": "^3.8",
                 "jms/serializer-bundle": "^4.0 || ^5.0",
-                "knplabs/knp-components": "^2.4 || ^3.0",
+                "knplabs/knp-components": "^2.4 || ^3.0 || ^4.0",
+                "php-cs-fixer/shim": "3.8.0",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan": "^1.4",
                 "phpstan/phpstan-phpunit": "^1.1",
                 "phpstan/phpstan-symfony": "^1.2",
                 "phpunit/phpunit": "^9.5",
-                "symfony/expression-language": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/messenger": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/serializer": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/web-profiler-bundle": "^4.4 || ^5.4 || ^6.3 || ^7.0",
-                "symfony/yaml": "^4.4 || ^5.4 || ^6.3 || ^7.0"
+                "symfony/expression-language": "^5.4 || ^6.4 || ^7.0",
+                "symfony/messenger": "^5.4 || ^6.4 || ^7.0",
+                "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
+                "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0",
+                "symfony/web-profiler-bundle": "^5.4 || ^6.4 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.4 || ^7.0"
             },
             "suggest": {
                 "enqueue/elastica-bundle": "For populating Elasticsearch indexes asynchronously and using significanly less resources. Uses Enqueue.",
@@ -2823,19 +2824,7 @@
                     "FOS\\ElasticaBundle\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "FOS\\ElasticaBundle\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "cs": [
-                    "@php vendor/bin/php-cs-fixer fix --allow-risky=yes"
-                ],
-                "sca": [
-                    "@php vendor/bin/phpstan --memory-limit=256M"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2867,9 +2856,10 @@
                 "search"
             ],
             "support": {
-                "source": "https://github.com/danilovl/FOSElasticaBundle/tree/v6.4.0"
+                "issues": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/issues",
+                "source": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/tree/v6.4.0"
             },
-            "time": "2024-02-17T09:27:02+00:00"
+            "time": "2024-05-13T08:01:05+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -10838,16 +10828,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.10.2",
+            "version": "v3.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "7aaed0b8311a557cc8c4047a71fd03153a00e755"
+                "reference": "67f29781ffafa520b0bbfbd8384674b42db04572"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7aaed0b8311a557cc8c4047a71fd03153a00e755",
-                "reference": "7aaed0b8311a557cc8c4047a71fd03153a00e755",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/67f29781ffafa520b0bbfbd8384674b42db04572",
+                "reference": "67f29781ffafa520b0bbfbd8384674b42db04572",
                 "shasum": ""
             },
             "require": {
@@ -10901,7 +10891,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.10.2"
+                "source": "https://github.com/twigphp/Twig/tree/v3.10.3"
             },
             "funding": [
                 {
@@ -10913,7 +10903,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-14T06:04:16+00:00"
+            "time": "2024-05-16T10:04:27+00:00"
         },
         {
             "name": "webmozart/assert",

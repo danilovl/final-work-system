@@ -3,12 +3,6 @@
     "description": "Thesis management system based on Symfony",
     "type": "project",
     "license": "proprietary",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/danilovl/FOSElasticaBundle"
-        }
-    ],
     "require": {
         "php": "^8.3",
         "ext-amqp": "*",
