@@ -31,7 +31,9 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use Symfony\Component\HttpKernel\Attribute\AsController;
 
+#[AsController]
 readonly class EventCalendarController
 {
     public function __construct(
