@@ -30,9 +30,9 @@ class ElasticsearchLogstashHandlerFactory
             endpoint: $endpoint,
             index: $index,
             client: HttpClient::create(['timeout' => 1, 'auth_basic' => [$elasticUsername, $elasticPassword]]),
-            level: Level::Debug,
+            level: Level::Error,
             bubble: $bubble,
-            elasticsearchVersion: $elasticsearchVersion
+            elasticsearchVersion: $elasticsearchVersion,
         );
     }
 }
