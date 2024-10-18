@@ -9,8 +9,11 @@ monolog:
     nested:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
-      level: debug
+      level: error
     console:
       type: console
       process_psr_3_messages: false
       channels: [ "!event", "!doctrine" ]
+    es:
+      type: service
+      id: Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler
