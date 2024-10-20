@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb1c8478f0dbd2a3b72ea8d825d8ec03",
+    "content-hash": "1b0187815bea541c853568c52db46e0a",
     "packages": [
         {
             "name": "api-platform/core",
@@ -881,16 +881,16 @@
         },
         {
             "name": "danilovl/translator-bundle",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/translator-bundle.git",
-                "reference": "0f8e5cfec790cb0eca24275e0bde5fcb669e9928"
+                "reference": "803b0c50670f79d5a409b06d890177acc3cfbf31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/translator-bundle/zipball/0f8e5cfec790cb0eca24275e0bde5fcb669e9928",
-                "reference": "0f8e5cfec790cb0eca24275e0bde5fcb669e9928",
+                "url": "https://api.github.com/repos/danilovl/translator-bundle/zipball/803b0c50670f79d5a409b06d890177acc3cfbf31",
+                "reference": "803b0c50670f79d5a409b06d890177acc3cfbf31",
                 "shasum": ""
             },
             "require": {
@@ -932,9 +932,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/translator-bundle/issues",
-                "source": "https://github.com/danilovl/translator-bundle/tree/v0.1.2"
+                "source": "https://github.com/danilovl/translator-bundle/tree/v0.1.3"
             },
-            "time": "2024-04-09T21:16:45+00:00"
+            "time": "2024-05-22T21:36:41+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -14518,6 +14518,7 @@
         "php": "^8.3",
         "ext-amqp": "*",
         "ext-ctype": "*",
+        "ext-elastic_apm": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",

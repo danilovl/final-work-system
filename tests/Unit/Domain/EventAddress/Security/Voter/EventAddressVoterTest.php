@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\EventAddressVoter\Security\Voter;
+namespace App\Tests\Unit\Domain\EventAddress\Security\Voter;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\EventAddress\Entity\EventAddress;
