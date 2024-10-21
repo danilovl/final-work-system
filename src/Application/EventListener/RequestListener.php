@@ -12,6 +12,7 @@
 
 namespace App\Application\EventListener;
 
+use Elastic\Apm\ElasticApm;
 use App\Application\Service\{
     SeoPageService,
     EntityManagerService
@@ -34,6 +35,8 @@ readonly class RequestListener implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $requestEvent): void
     {
+        $this->elasticApmDiscard($requestEvent);
+
         if (!$requestEvent->isMainRequest()) {
             return;
         }
@@ -61,6 +64,15 @@ readonly class RequestListener implements EventSubscriberInterface
         /** @var array{title: string}|null $seo */
         $seo = $requestEvent->getRequest()->attributes->get('_seo');
         $this->seoPageService->setTitle($seo['title'] ?? null);
+    }
+
+    private function elasticApmDiscard(RequestEvent $requestEvent): void
+    {
+        $isProfiler = $requestEvent->getRequest()->attributes->get('_route') == '_wdt';
+
+        if (!$requestEvent->isMainRequest() || $isProfiler) {
+            ElasticApm::getCurrentTransaction()->discard();
+        }
     }
 
     public static function getSubscribedEvents(): array
