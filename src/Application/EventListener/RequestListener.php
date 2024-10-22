@@ -12,6 +12,7 @@
 
 namespace App\Application\EventListener;
 
+use App\Application\ElasticApm\ElasticApmHelper;
 use Elastic\Apm\ElasticApm;
 use App\Application\Service\{
     SeoPageService,
@@ -40,6 +41,10 @@ readonly class RequestListener implements EventSubscriberInterface
         if (!$requestEvent->isMainRequest()) {
             return;
         }
+
+        $context = $requestEvent->getRequest()->attributes;
+        $context = iterator_to_array($context->getIterator());
+        ElasticApmHelper::addContextToCurrentTransaction($context, 'request');
 
         $this->defaultRouteSeoPage($requestEvent);
 

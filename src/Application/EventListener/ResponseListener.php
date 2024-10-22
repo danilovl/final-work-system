@@ -14,20 +14,19 @@ namespace App\Application\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-readonly class ExceptionListener implements EventSubscriberInterface
+readonly class ResponseListener implements EventSubscriberInterface
 {
-    public function onKernelException(ExceptionEvent $exceptionEvent): void
+    public function onKernelResponse(): void
     {
-        ElasticApmHelper::createErrorFromThrowable($exceptionEvent->getThrowable());
+        ElasticApmHelper::endCurrentSpan();
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::EXCEPTION => 'onKernelException'
+            KernelEvents::RESPONSE => 'onKernelResponse'
         ];
     }
 }
