@@ -64,4 +64,6 @@ services:
 
   App\Application\EventListener\LoggableListener:
     tags:
-      - { name: doctrine.event_subscriber, connection: default }
+      - { name: doctrine.event_listener, event: 'onFlush' }
+      - { name: doctrine.event_listener, event: 'loadClassMetadata' }
+      - { name: doctrine.event_listener, event: 'postPersist' }
