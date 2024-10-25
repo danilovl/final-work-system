@@ -4,8 +4,6 @@ services:
     autowire: true
 
   App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber:
-    arguments:
-      $emailNotificationProducer: '@old_sound_rabbit_mq.email_notification_producer'
 
   App\Application\EventSubscriber\EmailNotification\DocumentEmailNotificationSubscriber:
     parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
