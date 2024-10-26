@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Application\EventListener;
+namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\{
-    SpanTypeEnum,
+    ElasticApmHelper,
     SpanNameEnum,
-    ElasticApmHelper
+    SpanTypeEnum
 };
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;

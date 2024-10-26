@@ -5,5 +5,5 @@ namespace App\Application\ElasticApm;
 
 enum SpanNameEnum: string
 {
-	case HANDLE = 'handle';
+    case HANDLE = 'handle';
 }

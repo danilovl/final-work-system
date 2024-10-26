@@ -6,12 +6,23 @@ namespace App\Application\ElasticApm;
 use Elastic\Apm\{
     ElasticApm,
     SpanInterface,
-    TransactionInterface
+    TransactionInterface,
+    TransactionBuilderInterface
 };
 use Throwable;
 
 class ElasticApmHelper
 {
+    public static function beginCurrentTransaction(string $name, string $type): TransactionInterface
+    {
+        return ElasticApm::beginCurrentTransaction($name, $type);
+    }
+
+    public static function newTransaction(string $name, string $type): TransactionBuilderInterface
+    {
+        return ElasticApm::newTransaction($name, $type);
+    }
+
     public static function getCurrentTransaction(): TransactionInterface
     {
         return ElasticApm::getCurrentTransaction();
@@ -115,7 +126,8 @@ class ElasticApmHelper
                 }
             }
 
-            $span->context()->setLabel($prefix. $key, $value);
+            /** @var string|bool|int|float|null $value */
+            $span->context()->setLabel($prefix . $key, $value);
         }
     }
 }
