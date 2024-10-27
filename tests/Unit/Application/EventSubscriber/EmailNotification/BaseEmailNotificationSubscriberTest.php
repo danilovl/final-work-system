@@ -13,8 +13,8 @@
 namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Domain\EmailNotification\Entity\EmailNotification;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\User\Entity\User;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;

@@ -12,15 +12,7 @@
 
 namespace App\Domain\Conversation\Repository\Elastica;
 
-use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
-use ArrayIterator;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Form\FormInterface;
 
 class ElasticaConversationRepository
 {

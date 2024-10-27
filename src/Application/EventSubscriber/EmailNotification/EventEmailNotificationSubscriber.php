@@ -13,9 +13,11 @@
 namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
-use App\Domain\Event\EventDispatcher\GenericEvent\EventCommentGenericEvent;
-use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
+use App\Domain\Event\EventDispatcher\GenericEvent\{
+    EventGenericEvent,
+    EventCommentGenericEvent
+};
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
@@ -65,7 +67,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
 
         $toUser = $event->getParticipantMust()->getUserMust();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_edit',
             'to' => $toUser->getEmail(),
@@ -118,7 +120,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
             'locale' => $locale ?? $this->locale,
             'subject' => 'subject.event_comment_create',
             'to' => $to,
@@ -151,7 +153,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
             'locale' => $locale ?? $this->locale,
             'subject' => 'subject.event_comment_edit',
             'to' => $to,
@@ -171,7 +173,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getOwner();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_reservation',
             'to' => $toUser->getEmail(),

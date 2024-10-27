@@ -13,7 +13,6 @@
 namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -68,7 +67,7 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         ];
 
         foreach ($recipientArray as $user) {
-            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+            $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
                 'locale' => $user->getLocale() ?? $this->locale,
                 'subject' => 'subject.document_create',
                 'to' => $user->getEmail(),

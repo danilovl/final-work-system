@@ -13,7 +13,6 @@
 namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -69,7 +68,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
                 continue;
             }
 
-            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
+            $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
                 'locale' => $user->getLocale() ?? $this->locale,
                 'subject' => $subject,
                 'to' => $user->getEmail(),

@@ -13,7 +13,7 @@
 namespace App\Application\EventSubscriber\EmailNotification;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

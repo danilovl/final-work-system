@@ -957,96 +957,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\Service\\\\SendEmailNotificationService\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Call to an undefined method Danilovl\\\\ParameterBundle\\\\Interfaces\\\\ParameterServiceInterface\\:\\:expects\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationHandler\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$sendEmailNotificationService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationHandler is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\EmailNotification\\\\EmailNotificationHandlerTest\\:\\:\\$sendEmailNotificationService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/EmailNotification/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
 
@@ -1791,6 +1701,96 @@ parameters:
 			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
 
 		-
+			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:expects\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\Service\\\\SendEmailNotificationService\\:\\:expects\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Call to an undefined method Danilovl\\\\ParameterBundle\\\\Interfaces\\\\ParameterServiceInterface\\:\\:expects\\(\\)\\.$#"
+			count: 4
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFacade\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationHandler\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$sendEmailNotificationService\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFacade is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationHandler is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
+			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$sendEmailNotificationService is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
+
+		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
@@ -1851,17 +1851,17 @@ parameters:
 			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddressVoter\\\\Security\\\\Voter\\\\EventAddressVoterTest has an uninitialized readonly property \\$eventAddressVoter\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest has an uninitialized readonly property \\$eventAddressVoter\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
 
 		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddressVoter\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter \\(App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
+			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter \\(App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddressVoter\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
 

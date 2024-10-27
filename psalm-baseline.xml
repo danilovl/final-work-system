@@ -151,17 +151,43 @@
     </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[addContextToCurrentSpan]]></code>
-      <code><![CDATA[endCurrentTransaction]]></code>
       <code><![CDATA[getApmContext]]></code>
       <code><![CDATA[getCurrentSpan]]></code>
       <code><![CDATA[getCurrentTransaction]]></code>
+      <code><![CDATA[newTransaction]]></code>
     </PossiblyUnusedMethod>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[SpanInterface]]></code>
+      <code><![CDATA[TransactionInterface]]></code>
     </PossiblyUnusedReturnValue>
     <UndefinedPropertyFetch>
       <code><![CDATA[$subtype?->value]]></code>
     </UndefinedPropertyFetch>
+  </file>
+  <file src="src/Application/ElasticApm/EventListener/ConsoleListener.php">
+    <UnusedClass>
+      <code><![CDATA[ConsoleListener]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/ElasticApm/EventListener/ControllerListener.php">
+    <UnusedClass>
+      <code><![CDATA[ControllerListener]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/ElasticApm/EventListener/RequestListener.php">
+    <UnusedClass>
+      <code><![CDATA[RequestListener]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/ElasticApm/EventListener/ResponseListener.php">
+    <UnusedClass>
+      <code><![CDATA[ResponseListener]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Application/ElasticApm/Messenger/ApmMessengerMiddleware.php">
+    <UnusedClass>
+      <code><![CDATA[ApmMessengerMiddleware]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/EventDispatcher/CacheEventDispatcherService.php">
     <PossiblyUnusedMethod>
@@ -177,11 +203,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Application/EventListener/ControllerListener.php">
-    <UnusedClass>
-      <code><![CDATA[ControllerListener]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Application/EventListener/DoctrineExtensionListener.php">
     <UnusedClass>
@@ -226,11 +247,6 @@
   <file src="src/Application/EventListener/RequestListener.php">
     <UnusedClass>
       <code><![CDATA[RequestListener]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Application/EventListener/ResponseListener.php">
-    <UnusedClass>
-      <code><![CDATA[ResponseListener]]></code>
     </UnusedClass>
   </file>
   <file src="src/Application/EventSubscriber/CacheEventSubscriber.php">
@@ -581,21 +597,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[addChildren]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Application/Messenger/EmailNotification/EmailNotificationHandler.php">
-    <UnusedClass>
-      <code><![CDATA[EmailNotificationHandler]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Application/Messenger/EmailNotification/EmailNotificationMessage.php">
-    <MissingConstructor>
-      <code><![CDATA[$from]]></code>
-      <code><![CDATA[$locale]]></code>
-      <code><![CDATA[$subject]]></code>
-      <code><![CDATA[$template]]></code>
-      <code><![CDATA[$to]]></code>
-      <code><![CDATA[$uuid]]></code>
-    </MissingConstructor>
   </file>
   <file src="src/Application/Messenger/Loggable/LoggableHandler.php">
     <PossiblyNullArgument>
@@ -2289,6 +2290,21 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/EmailNotification/Messenger/EmailNotificationHandler.php">
+    <UnusedClass>
+      <code><![CDATA[EmailNotificationHandler]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/EmailNotification/Messenger/EmailNotificationMessage.php">
+    <MissingConstructor>
+      <code><![CDATA[$from]]></code>
+      <code><![CDATA[$locale]]></code>
+      <code><![CDATA[$subject]]></code>
+      <code><![CDATA[$template]]></code>
+      <code><![CDATA[$to]]></code>
+      <code><![CDATA[$uuid]]></code>
+    </MissingConstructor>
   </file>
   <file src="src/Domain/EmailNotification/Model/EmailNotificationModel.php">
     <MissingConstructor>

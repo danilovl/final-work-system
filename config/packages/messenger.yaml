@@ -31,5 +31,5 @@ framework:
       failed: 'doctrine://default?queue_name=failed'
 
     routing:
-      'App\Application\Messenger\EmailNotification\EmailNotificationMessage': email_notification
+      'App\Domain\EmailNotification\Messenger\EmailNotificationMessage': email_notification
       'App\Application\Messenger\Loggable\LoggableMessage': loggable

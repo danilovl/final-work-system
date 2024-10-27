@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Application\ElasticApm\Messenger;
 
 use App\Application\ElasticApm\ElasticApmHelper;
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Messenger\Loggable\LoggableMessage;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\{
     StackInterface,

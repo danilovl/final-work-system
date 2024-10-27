@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Messenger\EmailNotification;
+namespace App\Domain\EmailNotification\Messenger;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 

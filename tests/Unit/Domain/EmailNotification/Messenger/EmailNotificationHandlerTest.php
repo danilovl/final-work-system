@@ -10,20 +10,20 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Messenger\EmailNotification;
+namespace Domain\EmailNotification\Messenger;
 
 use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
 use App\Application\Exception\RuntimeException;
-use App\Domain\EmailNotification\Service\SendEmailNotificationService;
-use App\Application\Messenger\EmailNotification\{
-    EmailNotificationHandler,
-    EmailNotificationMessage
-};
+use App\Application\Service\EntityManagerService;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
+use App\Domain\EmailNotification\Messenger\{
+    EmailNotificationHandler,
+    EmailNotificationMessage
+};
+use App\Domain\EmailNotification\Service\SendEmailNotificationService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Application\Service\EntityManagerService;
 use PHPUnit\Framework\TestCase;
 
 class EmailNotificationHandlerTest extends TestCase
@@ -109,7 +109,7 @@ class EmailNotificationHandlerTest extends TestCase
         $this->sendEmailNotificationService
             ->expects($this->once())
             ->method('sendEmailNotificationBool')
-            ->willReturn(false);;
+            ->willReturn(false);
 
         $emailNotification = new EmailNotification;
         $emailNotification->setId(1);

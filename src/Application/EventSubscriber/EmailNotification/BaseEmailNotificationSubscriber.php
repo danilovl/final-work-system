@@ -12,10 +12,10 @@
 
 namespace App\Application\EventSubscriber\EmailNotification;
 
-use App\Application\Messenger\EmailNotification\EmailNotificationMessage;
 use App\Application\Service\TranslatorService;
 use App\Application\Service\TwigRenderService;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\EmailNotification\Model\EmailNotificationModel;
 use App\Domain\User\Facade\UserFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
