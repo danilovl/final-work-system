@@ -39,9 +39,10 @@ class WorkRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('work')
             ->select('DISTINCT work.deadline')
-            ->where('work.supervisor = :user')
+            ->leftJoin('work.supervisor', 'supervisor')
+            ->where('supervisor.id = :userId')
             ->orderBy('work.deadline', Order::Descending->value)
-            ->setParameter('user', $user);
+            ->setParameter('userId', $user->getId());
     }
 
     public function workProgramDeadlineBySupervisor(User $user): QueryBuilder
@@ -49,10 +50,11 @@ class WorkRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('work')
             ->select('work.deadlineProgram')
             ->select('DISTINCT work.deadlineProgram')
-            ->where('work.supervisor = :user')
+            ->leftJoin('work.supervisor', 'supervisor')
+            ->where('supervisor.id = :userId')
             ->andWhere('work.deadlineProgram is NOT NULL')
             ->orderBy('work.deadlineProgram', Order::Descending->value)
-            ->setParameter('user', $user);
+            ->setParameter('userId', $user->getId());
     }
 
     public function allByUserStatus(WorkRepositoryData $workData): QueryBuilder
@@ -63,33 +65,34 @@ class WorkRepository extends ServiceEntityRepository
             ->setCacheable(true);
 
         if ($workData->user !== null) {
-            $queryBuilder->setParameter('user', $workData->user);
+            $queryBuilder->setParameter('userId', $workData->user->getId());
         }
 
         if ($workData->supervisor !== null) {
-            $queryBuilder->where('work.supervisor = :supervisor')
-                ->setParameter('supervisor', $workData->supervisor);
+            $queryBuilder->leftJoin('work.supervisor', 'supervisor')
+                ->where('supervisor.id = :supervisorId')
+                ->setParameter('supervisorId', $workData->supervisor->getId());
         }
 
         switch ($workData->type) {
             case WorkUserTypeConstant::AUTHOR->value:
                 $queryBuilder->leftJoin('work.author', 'author')
-                    ->andWhere('author = :user');
+                    ->andWhere('author.id = :userId');
 
                 break;
             case WorkUserTypeConstant::OPPONENT->value:
                 $queryBuilder->leftJoin('work.opponent', 'opponent')
-                    ->andWhere('opponent = :user');
+                    ->andWhere('opponent.id = :userId');
 
                 break;
             case WorkUserTypeConstant::CONSULTANT->value:
                 $queryBuilder->leftJoin('work.consultant', 'consultant')
-                    ->andWhere('consultant = :user');
+                    ->andWhere('consultant.id = :userId');
 
                 break;
             case WorkUserTypeConstant::SUPERVISOR->value:
                 $queryBuilder->leftJoin('work.supervisor', 'supervisor')
-                    ->andWhere('supervisor = :user');
+                    ->andWhere('supervisor.id = :userId');
 
                 break;
         }
