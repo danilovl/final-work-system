@@ -1,9 +1,11 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ goole_analitics_code }}"></script>
+{% if parameter_get_string('google_analytics_code') is not empty  %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ parameter_get_string('google_analytics_code') }}"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', '{{ goole_analitics_code }}');
+    gtag('config', '{{ parameter_get_string('google_analytics_code') }}');
 </script>
+{% endif %}

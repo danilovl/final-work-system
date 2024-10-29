@@ -18,8 +18,7 @@
 {% endblock %}
 
 {% block javascript %}
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&language={{ app.request.locale }}&region=CS"></script>
+    {% include 'other/script/google_map.twig' %}
 
     <script type="text/javascript">
         let locale = '{{ app.request.locale }}';
