@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-URL="http://elasticsearch:9200/"
+URL=$1
 RETRIES=20
 INTERVAL=10
 
