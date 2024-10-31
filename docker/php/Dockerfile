@@ -14,8 +14,8 @@ COPY ./ /var/www/html/app
 
 WORKDIR /var/www/html/app
 
-RUN mkdir -m 777 /var/www/html/app/var
-RUN chmod 777 /var/www/html/app/bin/composer-first-install.sh
+RUN mkdir -p 777 var
+RUN chmod 777 bin/composer-first-install.sh
 
 FROM final-work-system-php AS final-work-system-php-supervisor
 
