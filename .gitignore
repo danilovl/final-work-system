@@ -1,35 +1,26 @@
-###> symfony/framework-bundle ###
-/tests/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+.idea
+docker-data/
 
-###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
 .phpunit.cache/
 /phpunit.xml
-###< symfony/phpunit-bridge ###
+/coverage-report
 
-###> symfony/webpack-encore-bundle ###
 /node_modules/
 npm-debug.log
 yarn-error.log
-###< symfony/webpack-encore-bundle ###
 
-.idea
-.idea/
 /public/build/
 /public/bundles/
 /public/upload*
 /public/minio/
+
 /cypress/videos/
 /cypress/screenshots/
+
 !/.env.local
+/.env.*.local
 
-/coverage-report
-
-docker-data/
+/var/
+/vendor/
