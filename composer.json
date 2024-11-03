@@ -20,7 +20,7 @@
         "aws/aws-sdk-php-symfony": "^2.7",
         "composer/package-versions-deprecated": "1.11.99.3",
         "danilovl/async-bundle": "^0.4.1",
-        "danilovl/doctrine-entity-dto-bundle": "^0.1.7",
+        "danilovl/doctrine-entity-dto-bundle": "^v0.1.9",
         "danilovl/hashids-bundle": "^1.6.1",
         "danilovl/object-to-array-transform-bundle": "^3.5.1",
         "danilovl/parameter-bundle": "^4.3.1",
