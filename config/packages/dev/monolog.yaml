@@ -5,6 +5,11 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: debug
       channels: [ "!event" ]
+    error:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.error.log"
+      level: error
+      channels: ["!event"]
     console:
       type: console
       process_psr_3_messages: false
