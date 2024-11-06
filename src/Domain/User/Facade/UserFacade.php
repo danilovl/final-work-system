@@ -33,6 +33,14 @@ readonly class UserFacade
         return $this->userRepository->find($id);
     }
 
+    public function findNotNull(int $id): User
+    {
+        /** @var User $user */
+        $user = $this->userRepository->find($id);
+
+        return $user;
+    }
+
     public function getAllUserActiveSupervisors(User $user): ArrayCollection
     {
         $userActiveSupervisors = new ArrayCollection;
