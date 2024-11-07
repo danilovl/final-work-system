@@ -15,6 +15,7 @@ namespace App\Application\Service;
 use App\Application\EventDispatcher\EntityEventDispatcherService;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\ObjectRepository;
 
 readonly class EntityManagerService
@@ -81,5 +82,10 @@ readonly class EntityManagerService
     public function getConnection(): Connection
     {
         return $this->entityManager->getConnection();
+    }
+
+    public function getUnitOfWork(): UnitOfWork
+    {
+        return $this->entityManager->getUnitOfWork();
     }
 }
