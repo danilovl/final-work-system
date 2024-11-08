@@ -13,12 +13,18 @@
 namespace App\Domain\User\Service;
 
 use App\Application\Exception\UserNotExistException;
+use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 readonly class UserService
 {
-    public function __construct(private TokenStorageInterface $tokenStorage) {}
+    public function __construct(
+        private TokenStorageInterface $tokenStorage,
+        private EntityManagerService $entityManagerService,
+        private UserFacade $userFacade
+    ) {}
 
     public function getUserOrNull(): ?User
     {
@@ -32,7 +38,7 @@ readonly class UserService
             return null;
         }
 
-        return $user;
+        return $this->refreshUser($user);
     }
 
     public function getUser(): User
@@ -42,6 +48,19 @@ readonly class UserService
             throw new UserNotExistException('User must exist.');
         }
 
-        return $user;
+        return $this->refreshUser($user);
+    }
+
+    private function refreshUser(User $user): User
+    {
+        $isInIdentityMap = $this->entityManagerService
+            ->getUnitOfWork()
+            ->isInIdentityMap($user);
+
+        if ($isInIdentityMap) {
+            return $user;
+        }
+
+        return $this->userFacade->findNotNull($user->getId());
     }
 }
