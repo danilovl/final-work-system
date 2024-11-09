@@ -52,8 +52,6 @@ readonly class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $this->entityManagerService->refresh($user);
-
         $user->setLastRequestedAt(new DateTime);
         $this->entityManagerService->flush();
     }
