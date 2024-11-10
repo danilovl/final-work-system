@@ -44,9 +44,13 @@ jobs:
       - name: Run cypress tests
         uses: ./.github/actions/run-cypress-test
 
-      - name: View log files
+      - name: View dev log file
         if: always()
-        uses: ./.github/actions/view-log-files
+        uses: ./.github/actions/view-dev-log-file
+
+      - name: View dev error log file
+        if: always()
+        uses: ./.github/actions/view-dev-error-log-file
 
       - name: Stop containers
         if: always()

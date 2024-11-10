@@ -1,0 +1,10 @@
+name: View dev.log file
+description: View dev.log file
+
+runs:
+  using: 'composite'
+  steps:
+    - name:  View dev.log file
+      shell: bash
+      run: |
+        docker-compose exec -T php cat var/log/dev.log || true
