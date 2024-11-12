@@ -12,6 +12,9 @@
 
 namespace App\Tests\Unit\Application\EventListener;
 
+use App\Application\Service\EntityManagerService;
+use App\Domain\User\Facade\UserFacade;
+use Doctrine\ORM\UnitOfWork;
 use App\Application\EventListener\{
     LoggableListener,
     DoctrineExtensionListener
@@ -48,7 +51,19 @@ class DoctrineExtensionListenerTest extends TestCase
             ->method('getToken')
             ->willReturn($this->token);
 
-        $this->userService = new UserService($this->tokenStorage);
+        $unitOfWork = $this->createMock(UnitOfWork::class);
+        $unitOfWork->expects($this->any())
+            ->method('isInIdentityMap')
+            ->willReturn(true);
+
+        $entityManagerService = $this->createMock(EntityManagerService::class);
+        $entityManagerService->expects($this->any())
+            ->method('getUnitOfWork')
+            ->willReturn($unitOfWork);
+
+        $userFacade = $this->createMock(UserFacade::class);
+
+        $this->userService = new UserService($this->tokenStorage, $entityManagerService, $userFacade);
         $this->loggableListener = $this->createMock(LoggableListener::class);
         $this->loggableListener->expects($this->any())
             ->method('setUsername')
@@ -71,7 +86,10 @@ class DoctrineExtensionListenerTest extends TestCase
             ->method('getToken')
             ->willReturn(null);
 
-        $userService = new UserService($tokenStorage);
+        $entityManagerService = $this->createMock(EntityManagerService::class);
+        $userFacade = $this->createMock(UserFacade::class);
+
+        $userService = new UserService($tokenStorage, $entityManagerService, $userFacade);
 
         $this->loggableListener
             ->expects($this->never())
