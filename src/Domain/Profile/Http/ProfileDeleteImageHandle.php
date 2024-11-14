@@ -36,7 +36,8 @@ readonly class ProfileDeleteImageHandle
         try {
             $profileImage = $user->getProfileImage();
             if ($profileImage) {
-                $this->entityManagerService->remove($profileImage);
+                $user->setProfileImage(null);
+                $this->entityManagerService->flush();
             }
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');

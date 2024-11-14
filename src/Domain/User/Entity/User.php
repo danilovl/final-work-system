@@ -143,7 +143,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $groups;
 
-    #[ORM\OneToOne(targetEntity: Media::class, cascade: ['persist', 'remove'], fetch: "EAGER")]
+    #[ORM\OneToOne(targetEntity: Media::class, cascade: ['persist', 'remove'], fetch: "EAGER", orphanRemoval: true)]
     #[ORM\JoinColumn(name: 'profile_image_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
     private ?Media $profileImage = null;
 
@@ -800,7 +800,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         return $this->profileImage;
     }
 
-    public function setProfileImage(Media $profileImage): void
+    public function setProfileImage(?Media $profileImage): void
     {
         $this->profileImage = $profileImage;
     }
