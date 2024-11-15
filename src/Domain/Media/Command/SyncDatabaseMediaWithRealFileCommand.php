@@ -12,6 +12,7 @@
 
 namespace App\Domain\Media\Command;
 
+use App\Application\Helper\FileHelper;
 use App\Application\Service\EntityManagerService;
 use App\Application\Service\S3ClientService;
 use App\Domain\Media\Facade\{
@@ -20,7 +21,6 @@ use App\Domain\Media\Facade\{
 };
 use App\Domain\MediaType\Entity\MediaType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use DirectoryIterator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -103,17 +103,18 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         $count = 0;
         foreach ($mediaTypes as $mediaType) {
             $folder = $uploadFolder . $mediaType->getFolder();
-            foreach (new DirectoryIterator($folder) as $fileInfo) {
-                if ($fileInfo->isDot()) {
-                    continue;
-                }
 
-                $media = $this->mediaFacade->findByMediaName($fileInfo->getFilename());
+            $finder = new Finder;
+            $finder->directories()->in($folder)->depth(0);
+
+            foreach ($finder as $folder) {
+                $media = $this->mediaFacade->findByMediaName($folder->getBasename());
                 if ($media !== null) {
                     continue;
                 }
 
-                unlink($fileInfo->getRealPath());
+                FileHelper::deleteDirectory($folder->getRealPath());
+
                 $count++;
             }
         }
@@ -125,10 +126,10 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
     {
         $uploadFolder = $this->parameterService->getString('upload_directory');
         $finder = new Finder;
-        $finder->directories()->in($uploadFolder);
+        $finder->directories()->in($uploadFolder)->depth(0);
 
         $mediaTypes = $this->mediaTypeFacade->findAll();
-        $mediaTypeFolders = array_map(fn(MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
+        $mediaTypeFolders = array_map(static fn(MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
 
         $progressBar = new ProgressBar($output, $finder->count());
 
@@ -136,17 +137,15 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         foreach ($finder as $folder) {
             if (!in_array($folder->getBasename(), $mediaTypeFolders, true)) {
                 $realPath = $folder->getRealPath();
-                /** @var array $files */
-                $files = glob("$realPath/*.*");
-
-                array_map('unlink', $files);
                 $removeFolders[] = $realPath;
             }
 
             $progressBar->advance();
         }
 
-        array_map('rmdir', $removeFolders);
+        foreach ($removeFolders as $removeFolder) {
+            FileHelper::deleteDirectory($removeFolder);
+        }
 
         $this->io->success('Sync upload folder with media type folder is done');
     }
