@@ -33,8 +33,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
     private function baseQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('conversation_message_status')
-            ->leftJoin('conversation_message_status.message', 'message')
-            ->setCacheable(true);
+            ->leftJoin('conversation_message_status.message', 'message');
     }
 
     public function allByConversation(

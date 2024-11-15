@@ -28,8 +28,7 @@ class CommentRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('comment')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('comment');
     }
 
     public function allByOwnerEvent(

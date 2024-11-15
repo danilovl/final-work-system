@@ -34,8 +34,7 @@ class TaskRepository extends ServiceEntityRepository
 
     public function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('task')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('task');
     }
 
     public function allByOwner(User $user): QueryBuilder

@@ -35,7 +35,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->andWhere('categories = :articleCategory')
             ->orderBy('article.createdAt', Order::Descending->value)
             ->setParameter('active', true)
-            ->setParameter('articleCategory', $articleCategory)
-            ->setCacheable(true);
+            ->setParameter('articleCategory', $articleCategory);
     }
 }

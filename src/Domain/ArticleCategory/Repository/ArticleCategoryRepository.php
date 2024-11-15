@@ -39,8 +39,7 @@ class ArticleCategoryRepository extends ServiceEntityRepository
         }
 
         $queryBuilder->andWhere('article_category.active = :active')
-            ->setParameter('active', true)
-            ->setCacheable(true);
+            ->setParameter('active', true);
 
         return $queryBuilder;
     }

@@ -27,8 +27,7 @@ class EventScheduleRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('event_schedule')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('event_schedule');
     }
 
     public function allByOwner(User $user): QueryBuilder

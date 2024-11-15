@@ -27,8 +27,7 @@ class EventAddressRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('event_address')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('event_address');
     }
 
     public function skypeByOwner(User $user): QueryBuilder

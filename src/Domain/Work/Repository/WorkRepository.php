@@ -61,8 +61,7 @@ class WorkRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('work')
             ->addSelect('status')
-            ->innerJoin('work.status', 'status')
-            ->setCacheable(true);
+            ->innerJoin('work.status', 'status');
 
         if ($workData->user !== null) {
             $queryBuilder->setParameter('userId', $workData->user->getId());

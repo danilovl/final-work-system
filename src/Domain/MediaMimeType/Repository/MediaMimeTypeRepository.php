@@ -28,8 +28,7 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('media_mime_type')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('media_mime_type');
     }
 
     public function allBy(

@@ -33,8 +33,7 @@ class MediaRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('media')
             ->leftJoin('media.mimeType', 'mime_type')
-            ->leftJoin('media.categories', 'categories')
-            ->setCacheable(true);
+            ->leftJoin('media.categories', 'categories');
     }
 
     public function mediaListByUserFilter(MediaRepositoryData $mediaData): QueryBuilder

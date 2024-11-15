@@ -32,8 +32,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
 
     private function baseQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('conversation_message')
-            ->setCacheable(true);
+        return $this->createQueryBuilder('conversation_message');
     }
 
     public function allByWorkUser(
