@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventListener;
+namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
