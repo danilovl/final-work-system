@@ -1,4 +1,4 @@
-FROM node:14.20.0
+FROM node:18.20.0
 
 RUN apt-get update \
   && apt-get install -y \
@@ -14,7 +14,3 @@ RUN apt-get update \
     xauth \
     xvfb \
     chromium
-
-# install chrome
-#RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-#    && apt install ./google-chrome-stable_current_amd64.deb
