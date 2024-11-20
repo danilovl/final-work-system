@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
+namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
 use App\Application\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
-use App\Application\EventSubscriber\EmailNotification\SecurityEmailNotificationSubscriber;
+use App\Domain\EmailNotification\EventSubscriber\SecurityEmailNotificationSubscriber;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\User\Entity\User;
 

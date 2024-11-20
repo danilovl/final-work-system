@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
+namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\EventSubscriber\EmailNotification\MessageEmailNotificationSubscriber;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
+use App\Domain\EmailNotification\EventSubscriber\MessageEmailNotificationSubscriber;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 

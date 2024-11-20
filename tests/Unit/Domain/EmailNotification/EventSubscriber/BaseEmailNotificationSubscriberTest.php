@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
+namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
 use App\Domain\EmailNotification\Entity\EmailNotification;
+use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\User\Entity\User;
 use Generator;

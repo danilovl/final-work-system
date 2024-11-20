@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
+namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\EventSubscriber\EmailNotification\EventEmailNotificationSubscriber;
 use App\Domain\Comment\Entity\Comment;
+use App\Domain\EmailNotification\EventSubscriber\EventEmailNotificationSubscriber;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\GenericEvent\EventCommentGenericEvent;
 use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;

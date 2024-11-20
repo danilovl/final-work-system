@@ -716,216 +716,6 @@ parameters:
 			path: tests/Unit/Application/EventSubscriber/CacheEventSubscriberTest.php
 
 		-
-			message: "#^Access to an undefined property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$subscriber\\.$#"
-			count: 5
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$bus\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$translator\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$twigRenderService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$bus is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$translator is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$twigRenderService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/AbstractBaseEmailNotificationSubscriber.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\BaseEmailNotificationSubscriber\\:\\:addEmailNotificationToQueuePublic\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\Factory\\\\EmailNotificationFactory\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Messenger\\\\MessageBusInterface\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\BaseEmailNotificationSubscriberTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\BaseEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\BaseEmailNotificationSubscriberTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\BaseEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/BaseEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/DocumentEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\DocumentEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/DocumentEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\DocumentEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/DocumentEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithParticipant\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithoutParticipant\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithParticipant is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithoutParticipant is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\EventEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\MessageEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/MessageEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\MessageEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/MessageEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\SecurityEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/SecurityEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\SecurityEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/SecurityEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\TaskEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/TaskEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\TaskEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/TaskEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\UserEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/UserEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\UserEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/UserEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\VersionEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\VersionEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/VersionEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\WorkEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/WorkEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventSubscriber\\\\EmailNotification\\\\WorkEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/EmailNotification/WorkEmailNotificationSubscriberTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventSubscriber/WidgetEventSubscriberTest.php
@@ -1701,6 +1491,216 @@ parameters:
 			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
 
 		-
+			message: "#^Access to an undefined property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$subscriber\\.$#"
+			count: 5
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$bus\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$translator\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$twigRenderService\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$bus is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$translator is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$twigRenderService is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\BaseEmailNotificationSubscriber\\:\\:addEmailNotificationToQueuePublic\\(\\)\\.$#"
+			count: 4
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\EmailNotification\\\\Factory\\\\EmailNotificationFactory\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Messenger\\\\MessageBusInterface\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\BaseEmailNotificationSubscriberTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\BaseEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\BaseEmailNotificationSubscriberTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\BaseEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/BaseEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/DocumentEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\DocumentEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/DocumentEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\DocumentEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/DocumentEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithParticipant\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithoutParticipant\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithParticipant is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithoutParticipant is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\MessageEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/MessageEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\MessageEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/MessageEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\SecurityEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/SecurityEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\SecurityEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/SecurityEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\TaskEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/TaskEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\TaskEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/TaskEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\UserEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/UserEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\UserEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/UserEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\VersionEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/VersionEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\VersionEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/VersionEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\WorkEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/WorkEmailNotificationSubscriberTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\WorkEmailNotificationSubscriberTest\\:\\:\\$subscriber is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/EmailNotification/EventSubscriber/WorkEmailNotificationSubscriberTest.php
+
+		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
 			count: 2
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
@@ -1721,72 +1721,72 @@ parameters:
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFacade\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFacade\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationHandler\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationHandler\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$sendEmailNotificationService\\. Assign it in the constructor\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$sendEmailNotificationService\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFacade is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFacade is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationHandler is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationHandler is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Readonly property Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$sendEmailNotificationService is assigned outside of the constructor\\.$#"
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$sendEmailNotificationService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventSubscriber\EmailNotification;
+namespace App\Domain\EmailNotification\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;

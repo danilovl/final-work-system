@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventSubscriber\EmailNotification;
+namespace App\Domain\EmailNotification\EventSubscriber;
 
 use App\Application\Service\TranslatorService;
 use App\Application\Service\TwigRenderService;

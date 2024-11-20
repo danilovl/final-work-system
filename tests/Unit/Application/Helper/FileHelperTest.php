@@ -56,6 +56,5 @@ class FileHelperTest extends TestCase
 
         $result = FileHelper::deleteDirectory($this->testDir);
         $this->assertFalse($result);
-
     }
 }

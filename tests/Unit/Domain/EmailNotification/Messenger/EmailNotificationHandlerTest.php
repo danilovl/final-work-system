@@ -10,12 +10,12 @@
  *
  */
 
-namespace Domain\EmailNotification\Messenger;
+namespace App\Tests\Unit\Domain\EmailNotification\Messenger;
 
-use App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber;
 use App\Application\Exception\RuntimeException;
 use App\Application\Service\EntityManagerService;
 use App\Domain\EmailNotification\Entity\EmailNotification;
+use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\EmailNotification\Messenger\{

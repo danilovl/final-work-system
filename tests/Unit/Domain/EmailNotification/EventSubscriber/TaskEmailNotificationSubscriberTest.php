@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber\EmailNotification;
+namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\EventSubscriber\EmailNotification\TaskEmailNotificationSubscriber;
+use App\Domain\EmailNotification\EventSubscriber\TaskEmailNotificationSubscriber;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\Domain\User\Entity\User;

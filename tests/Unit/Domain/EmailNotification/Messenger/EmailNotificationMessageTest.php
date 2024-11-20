@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\EmailNotification\Messenger;
+namespace App\Tests\Unit\Domain\EmailNotification\Messenger;
 
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use PHPUnit\Framework\TestCase;
