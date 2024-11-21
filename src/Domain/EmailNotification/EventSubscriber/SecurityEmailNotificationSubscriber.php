@@ -12,8 +12,9 @@
 
 namespace App\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Application\EventSubscriber\Events;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
+use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
@@ -30,7 +31,7 @@ class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         $resetPassword = $genericEvent->resetPassword;
         $toUser = $resetPassword->getUser();
 
-        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_reservation',
             'to' => $toUser->getEmail(),

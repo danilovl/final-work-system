@@ -12,9 +12,9 @@
 
 namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Domain\EmailNotification\EventSubscriber\SecurityEmailNotificationSubscriber;
 use App\Domain\ResetPassword\Entity\ResetPassword;
+use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Domain\User\Entity\User;
 
 class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber

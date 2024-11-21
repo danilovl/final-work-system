@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventDispatcher\GenericEvent;
+namespace App\Domain\ResetPassword\EventDispatcher\GenericEvent;
 
 use App\Domain\ResetPassword\Entity\ResetPassword;
 

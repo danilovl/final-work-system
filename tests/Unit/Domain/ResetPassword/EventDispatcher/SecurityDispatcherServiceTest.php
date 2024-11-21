@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventDispatcher;
+namespace App\Tests\Unit\Domain\ResetPassword\EventDispatcher;
 
-use App\Application\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
-use App\Application\EventDispatcher\SecurityDispatcherService;
 use App\Application\EventSubscriber\Events;
 use App\Domain\ResetPassword\Entity\ResetPassword;
+use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
+use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcherService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
