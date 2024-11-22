@@ -10,8 +10,9 @@
  *
  */
 
-namespace App\Application\EventSubscriber;
+namespace App\Domain\Widget\EventSubscriber;
 
+use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use App\Domain\Widget\Service\WidgetManagerService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

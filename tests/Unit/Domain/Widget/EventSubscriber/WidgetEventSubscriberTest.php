@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber;
+namespace App\Tests\Unit\Domain\Widget\EventSubscriber;
 
-use App\Application\EventSubscriber\WidgetEventSubscriber;
-use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
-use App\Domain\Widget\Service\WidgetManagerService;
 use App\Application\EventSubscriber\Events;
+use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
+use App\Domain\Widget\EventSubscriber\WidgetEventSubscriber;
+use App\Domain\Widget\Service\WidgetManagerService;
 use PHPUnit\Framework\TestCase;
 
 class WidgetEventSubscriberTest extends TestCase
