@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventDispatcher\GenericEvent;
+namespace App\Domain\User\EventDispatcher\GenericEvent;
 
 use App\Domain\User\Entity\User;
 

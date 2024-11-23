@@ -12,29 +12,24 @@
 
 namespace App\Tests\Unit\Application\EventSubscriber;
 
-use App\Application\Cache\HomepageCache;
-use App\Application\EventDispatcher\GenericEvent\{
-    CacheUserGenericEvent,
-    CacheClearGenericEvent
+use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
+use App\Application\EventSubscriber\{
+    Events,
+    CacheEventSubscriber
 };
-use App\Application\EventSubscriber\CacheEventSubscriber;
-use App\Application\EventSubscriber\Events;
-use App\Domain\User\Entity\User;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class CacheEventSubscriberTest extends TestCase
 {
     private CacheInterface $cache;
-    private HomepageCache $homepageCache;
     private CacheEventSubscriber $subscriber;
 
     protected function setUp(): void
     {
         $this->cache = $this->createMock(CacheInterface::class);
-        $this->homepageCache = $this->createMock(HomepageCache::class);
 
-        $this->subscriber = new CacheEventSubscriber($this->cache, $this->homepageCache);
+        $this->subscriber = new CacheEventSubscriber($this->cache);
     }
 
     public function testOnClearCacheKey(): void
@@ -50,24 +45,10 @@ class CacheEventSubscriberTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testOnCreateHomepageCache(): void
-    {
-        $event = new CacheUserGenericEvent(new User);
-
-        $this->homepageCache
-            ->expects($this->once())
-            ->method('createHomepagePaginator');
-
-        $this->subscriber->onCreateHomepageCache($event);
-
-        $this->assertTrue(true);
-    }
-
     public function testGetSubscribedEvents(): void
     {
         $subscribedEvents = $this->subscriber::getSubscribedEvents();
 
         $this->assertEquals('onClearCacheKey', $subscribedEvents[Events::CACHE_CLEAR_KEY]);
-        $this->assertEquals('onCreateHomepageCache', $subscribedEvents[Events::CACHE_CREATE_HOMEPAGE]);
     }
 }

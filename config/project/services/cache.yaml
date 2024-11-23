@@ -1,9 +1,0 @@
-services:
-  _defaults:
-    public: true
-    autowire: true
-
-  App\Application\Cache\HomepageCache:
-    arguments:
-      $cache: '@cache.app'
-

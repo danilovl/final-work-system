@@ -10,19 +10,19 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Cache;
+namespace App\Tests\Unit\Domain\SystemEvent\Cache;
 
-use App\Application\Cache\HomepageCache;
 use App\Application\Service\PaginatorService;
+use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Doctrine\ORM\{
     Query,
     Configuration,
     EntityManagerInterface
 };
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 

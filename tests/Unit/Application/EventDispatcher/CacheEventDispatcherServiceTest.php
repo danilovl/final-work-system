@@ -13,12 +13,8 @@
 namespace App\Tests\Unit\Application\EventDispatcher;
 
 use App\Application\EventDispatcher\CacheEventDispatcherService;
-use App\Application\EventDispatcher\GenericEvent\{
-    CacheUserGenericEvent,
-    CacheClearGenericEvent
-};
+use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Application\EventSubscriber\Events;
-use App\Domain\User\Entity\User;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -37,20 +33,5 @@ class CacheEventDispatcherServiceTest extends TestCase
             );
 
         $cacheEventDispatcherService->onClearCacheKey('test_key');
-    }
-
-    public function testOnCreateHomepageCache(): void
-    {
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $cacheEventDispatcherService = new CacheEventDispatcherService($eventDispatcher);
-
-        $eventDispatcher->expects($this->once())
-            ->method('dispatch')
-            ->with(
-                $this->isInstanceOf(CacheUserGenericEvent::class),
-                Events::CACHE_CREATE_HOMEPAGE
-            );
-
-        $cacheEventDispatcherService->onCreateHomepageCache(new User);
     }
 }

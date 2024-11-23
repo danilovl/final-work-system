@@ -1,6 +1,6 @@
 homepage:
   path: /{_locale}
-  controller: App\Application\Controller\HomeController::index
+  controller: App\Domain\SystemEvent\Controller\HomeController::index
   defaults:
     _locale: '%locale%'
     _seo:

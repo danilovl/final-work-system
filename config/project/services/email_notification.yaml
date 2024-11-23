@@ -3,36 +3,36 @@ services:
     public: true
     autowire: true
 
-  App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber:
+  App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber:
 
-  App\Application\EventSubscriber\EmailNotification\DocumentEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\DocumentEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\EventEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\EventEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\MessageEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\MessageEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\SecurityEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\SecurityEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\TaskEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\TaskEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\UserEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\UserEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\VersionEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\VersionEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true
 
-  App\Application\EventSubscriber\EmailNotification\WorkEmailNotificationSubscriber:
-    parent: 'App\Application\EventSubscriber\EmailNotification\BaseEmailNotificationSubscriber'
+  App\Domain\EmailNotification\EventSubscriber\WorkEmailNotificationSubscriber:
+    parent: 'App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber'
     autoconfigure: true

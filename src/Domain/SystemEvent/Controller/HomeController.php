@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Controller;
+namespace App\Domain\SystemEvent\Controller;
 
 use App\Application\Service\TwigRenderService;
 use App\Domain\SystemEvent\Cache\HomepageCache;
@@ -20,7 +20,8 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 
 readonly class HomeController
 {

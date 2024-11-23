@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Cache;
+namespace App\Domain\SystemEvent\Cache;
 
 use App\Application\Constant\CacheKeyConstant;
 use App\Application\Service\PaginatorService;

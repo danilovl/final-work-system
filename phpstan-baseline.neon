@@ -496,16 +496,6 @@ parameters:
 			path: tests/ReplacerFinal.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Cache\\\\HomepageCacheTest has an uninitialized readonly property \\$homepageCache\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Cache/HomepageCacheTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Cache\\\\HomepageCacheTest\\:\\:\\$homepageCache is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Cache/HomepageCacheTest.php
-
-		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Collector\\\\SystemInfoCollectorTest has an uninitialized readonly property \\$collector\\. Assign it in the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/Collector/SystemInfoCollectorTest.php
@@ -704,11 +694,6 @@ parameters:
 			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Cache\\\\HomepageCache\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/CacheEventSubscriberTest.php
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Contracts\\\\Cache\\\\CacheInterface\\:\\:expects\\(\\)\\.$#"
@@ -1881,6 +1866,16 @@ parameters:
 			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
 
 		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\Cache\\\\HomepageCacheTest has an uninitialized readonly property \\$homepageCache\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/SystemEvent/Cache/HomepageCacheTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\Cache\\\\HomepageCacheTest\\:\\:\\$homepageCache is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Domain/SystemEvent/Cache/HomepageCacheTest.php
+
+		-
 			message: "#^Access to an undefined property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\EventSubscriber\\\\BaseSystemEventSubscriber\\:\\:\\$subscriber\\.$#"
 			count: 5
 			path: tests/Unit/Domain/SystemEvent/EventSubscriber/BaseSystemEventSubscriber.php
@@ -1909,6 +1904,11 @@ parameters:
 			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\EventSubscriber\\\\BaseSystemEventSubscriber\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/SystemEvent/EventSubscriber/BaseSystemEventSubscriber.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\SystemEvent\\\\Cache\\\\HomepageCache\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Domain/SystemEvent/EventSubscriber/CacheEventSubscriberTest.php
 
 		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\EventSubscriber\\\\DocumentSystemEventSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
@@ -2154,6 +2154,11 @@ parameters:
 			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoterTest\\:\\:\\$versionVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Domain/Widget/EventSubscriber/WidgetEventSubscriberTest.php
 
 		-
 			message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:expects\\(\\)\\.$#"
