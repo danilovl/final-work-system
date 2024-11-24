@@ -10,17 +10,17 @@
  *
  */
 
-namespace Application\Twig\Runtime;
+namespace Domain\Widget\Twig\Runtime\Widget;
 
-use App\Application\Twig\Runtime\WidgetRuntime;
-use App\Application\Widget\BaseWidget;
 use App\Domain\Widget\Service\WidgetManagerService;
+use App\Domain\Widget\Twig\Runtime\WidgetRuntime;
+use App\Domain\Widget\WidgetItem\BaseWidget;
 use PHPUnit\Framework\TestCase;
 
 class WidgetRuntimeTest extends TestCase
 {
-    private readonly WidgetManagerService $widgetManagerService;
-    private readonly WidgetRuntime $widgetRuntime;
+    private WidgetManagerService $widgetManagerService;
+    private WidgetRuntime $widgetRuntime;
 
     protected function setUp(): void
     {

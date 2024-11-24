@@ -28,8 +28,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AbstractAjaxJsonRequestTest extends TestCase
 {
-    private readonly RequestStack $requestStackMissing;
-    private readonly RequestStack $requestStackFilled;
+    private RequestStack $requestStackMissing;
+    private RequestStack $requestStackFilled;
 
     protected function setUp(): void
     {
@@ -63,7 +63,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
             public string $end;
 
             public function __construct(
-                private readonly JsonResponse $jsonResponse,
+                private JsonResponse $jsonResponse,
                 ValidatorInterface $validator,
                 RequestStack $requestStack
             ) {

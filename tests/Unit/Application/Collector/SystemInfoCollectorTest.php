@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\{
 
 class SystemInfoCollectorTest extends TestCase
 {
-    private readonly SystemInfoCollector $collector;
+    private SystemInfoCollector $collector;
 
     protected function setUp(): void
     {

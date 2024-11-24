@@ -22,7 +22,7 @@ class ArticleCategoryVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly ArticleCategoryVoter $articleCategoryVoter;
+    private ArticleCategoryVoter $articleCategoryVoter;
 
     protected function setUp(): void
     {

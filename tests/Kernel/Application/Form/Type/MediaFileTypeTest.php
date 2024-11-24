@@ -21,7 +21,7 @@ class MediaFileTypeTest extends KernelTestCase
 {
     private const string FILE_PATH_JPG = __DIR__ . '/../../../../Helper/image/test_jpg.jpg';
     private const string FILE_PATH_PNG = __DIR__ . '/../../../../Helper/image/test_png.png';
-    private readonly FormInterface $form;
+    private FormInterface $form;
 
     public function setUp(): void
     {

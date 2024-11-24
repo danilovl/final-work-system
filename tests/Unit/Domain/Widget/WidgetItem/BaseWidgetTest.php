@@ -10,15 +10,15 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Widget;
+namespace Domain\Widget\WidgetItem;
 
 use App\Application\Service\TwigRenderService;
-use App\Application\Widget\BaseWidget;
+use App\Domain\Widget\WidgetItem\BaseWidget;
 use PHPUnit\Framework\TestCase;
 
 class BaseWidgetTest extends TestCase
 {
-    private readonly BaseWidget $widget;
+    private BaseWidget $widget;
 
     protected function setUp(): void
     {

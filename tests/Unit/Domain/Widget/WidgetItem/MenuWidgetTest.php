@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Widget;
+namespace Domain\Widget\WidgetItem;
 
 use App\Application\Service\TwigRenderService;
-use App\Application\Widget\MenuWidget;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
+use App\Domain\Widget\WidgetItem\MenuWidget;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\RouterInterface;
@@ -23,8 +23,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MenuWidgetTest extends TestCase
 {
-    private readonly Security $security;
-    private readonly MenuWidget $menuWidget;
+    private Security $security;
+    private MenuWidget $menuWidget;
 
     protected function setUp(): void
     {

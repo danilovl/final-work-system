@@ -10,13 +10,12 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Widget;
+namespace Domain\Widget\WidgetItem;
 
+use App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget;
 use App\Application\Service\{
     TranslatorService,
-    TwigRenderService
-};
-use App\Application\Widget\UserProfileInformationNotifyWidget;
+    TwigRenderService};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
@@ -24,8 +23,8 @@ use PHPUnit\Framework\TestCase;
 
 class UserProfileInformationNotifyWidgetTest extends TestCase
 {
-    private readonly UserService $userService;
-    private readonly UserProfileInformationNotifyWidget $widget;
+    private UserService $userService;
+    private UserProfileInformationNotifyWidget $widget;
 
     protected function setUp(): void
     {

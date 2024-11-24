@@ -22,8 +22,8 @@ use PHPUnit\Framework\TestCase;
 
 class LoggableHandlerTest extends TestCase
 {
-    private readonly LoggableHandler $loggableHandler;
-    private readonly EntityManagerService $entityManagerService;
+    private LoggableHandler $loggableHandler;
+    private EntityManagerService $entityManagerService;
 
     protected function setUp(): void
     {

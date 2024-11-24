@@ -21,9 +21,9 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class AppUserProviderTest extends TestCase
 {
-    private readonly UserFacade $userFacade;
-    private readonly EntityManagerService $entityManagerService;
-    private readonly AppUserProvider $appUserProvider;
+    private UserFacade $userFacade;
+    private EntityManagerService $entityManagerService;
+    private AppUserProvider $appUserProvider;
 
     protected function setUp(): void
     {

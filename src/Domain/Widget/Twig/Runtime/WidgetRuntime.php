@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Twig\Runtime;
+namespace App\Domain\Widget\Twig\Runtime;
 
 use App\Domain\Widget\Service\WidgetManagerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;

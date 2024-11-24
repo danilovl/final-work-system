@@ -13,15 +13,15 @@
 namespace App\Tests\Unit\Domain\Widget\Service;
 
 use App\Application\Exception\InvalidArgumentException;
-use App\Application\Interfaces\Widget\WidgetInterface;
+use App\Domain\Widget\Interfaces\WidgetInterface;
 use App\Domain\Widget\Service\WidgetManagerService;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 class WidgetManagerServiceTest extends TestCase
 {
-    private readonly ContainerInterface $container;
-    private readonly WidgetManagerService $widgetManagerService;
+    private ContainerInterface $container;
+    private WidgetManagerService $widgetManagerService;
 
     protected function setUp(): void
     {

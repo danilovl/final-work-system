@@ -22,7 +22,7 @@ class EventAddressVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly EventAddressVoter $eventAddressVoter;
+    private EventAddressVoter $eventAddressVoter;
 
     protected function setUp(): void
     {

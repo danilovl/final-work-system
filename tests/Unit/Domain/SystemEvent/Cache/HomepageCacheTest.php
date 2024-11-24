@@ -28,7 +28,7 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class HomepageCacheTest extends TestCase
 {
-    private readonly HomepageCache $homepageCache;
+    private HomepageCache $homepageCache;
 
     public function setUp(): void
     {

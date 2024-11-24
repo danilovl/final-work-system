@@ -31,11 +31,11 @@ use Symfony\Component\HttpKernel\{
 
 class RequestListenerTest extends TestCase
 {
-    private readonly UserService $userService;
-    private readonly EntityManagerService $entityManagerService;
-    private readonly SeoPageService $seoPageService;
-    private readonly AsyncService $asyncService;
-    private readonly RequestListener $listener;
+    private UserService $userService;
+    private EntityManagerService $entityManagerService;
+    private SeoPageService $seoPageService;
+    private AsyncService $asyncService;
+    private RequestListener $listener;
 
     protected function setUp(): void
     {

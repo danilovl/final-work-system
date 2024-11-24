@@ -28,13 +28,13 @@ use PHPUnit\Framework\TestCase;
 
 class EmailNotificationHandlerTest extends TestCase
 {
-    private readonly ParameterServiceInterface $parameterService;
-    private readonly SendEmailNotificationService $sendEmailNotificationService;
-    private readonly EmailNotificationFactory $emailNotificationFactory;
-    private readonly EmailNotificationFacade $emailNotificationFacade;
-    private readonly EntityManagerService $entityManagerService;
-    private readonly EmailNotificationHandler $emailNotificationHandler;
-    private readonly EmailNotificationMessage $emailNotificationMessage;
+    private ParameterServiceInterface $parameterService;
+    private SendEmailNotificationService $sendEmailNotificationService;
+    private EmailNotificationFactory $emailNotificationFactory;
+    private EmailNotificationFacade $emailNotificationFacade;
+    private EntityManagerService $entityManagerService;
+    private EmailNotificationHandler $emailNotificationHandler;
+    private EmailNotificationMessage $emailNotificationMessage;
 
     protected function setUp(): void
     {

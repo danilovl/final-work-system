@@ -13,14 +13,13 @@
 namespace App\Tests\Unit\Application\DependencyInjection\Compiler;
 
 use App\Application\DependencyInjection\Compiler\WidgetCompilerPass;
-use App\Application\Widget\BaseWidget;
 use App\Domain\Widget\Service\WidgetManagerService;
+use App\Domain\Widget\WidgetItem\BaseWidget;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\{
-    Definition,
-    ContainerBuilder
-};
+    ContainerBuilder,
+    Definition};
 
 class WidgetCompilerPassTest extends TestCase
 {

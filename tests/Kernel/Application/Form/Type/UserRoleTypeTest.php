@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormInterface;
 
 class UserRoleTypeTest extends KernelTestCase
 {
-    private readonly FormInterface $form;
+    private FormInterface $form;
 
     public function setUp(): void
     {

@@ -86,8 +86,8 @@ parameters:
       success: 'alert-success'
       warning: 'alert-warning'
     notifies:
-      - 'app.widget.user_profile_information'
-      - 'app.widget.work_deadline_information'
+      - App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget
+      - App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget
   reset_password:
     cryptographically_secure_key: '45679'
     reset_request_lifetime: 3600

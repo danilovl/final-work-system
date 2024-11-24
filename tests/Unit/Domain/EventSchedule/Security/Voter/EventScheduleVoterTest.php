@@ -22,7 +22,7 @@ class EventScheduleVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly EventScheduleVoter $eventScheduleVoter;
+    private EventScheduleVoter $eventScheduleVoter;
 
     protected function setUp(): void
     {

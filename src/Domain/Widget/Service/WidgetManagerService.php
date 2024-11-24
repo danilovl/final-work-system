@@ -13,10 +13,9 @@
 namespace App\Domain\Widget\Service;
 
 use App\Application\Exception\InvalidArgumentException;
-use App\Application\Interfaces\Widget\{
-    WidgetInterface,
-    WidgetManagerInterface
-};
+use App\Domain\Widget\Interfaces\{
+    WidgetManagerInterface};
+use App\Domain\Widget\Interfaces\WidgetInterface;
 use Psr\Container\ContainerInterface;
 
 class WidgetManagerService implements WidgetManagerInterface

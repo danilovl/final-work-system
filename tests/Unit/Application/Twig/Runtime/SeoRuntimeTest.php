@@ -19,8 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoRuntimeTest extends TestCase
 {
-    private readonly SeoPageService $seoPageService;
-    private readonly SeoRuntime $seoRuntime;
+    private SeoPageService $seoPageService;
+    private SeoRuntime $seoRuntime;
 
     protected function setUp(): void
     {

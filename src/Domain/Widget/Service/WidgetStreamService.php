@@ -12,13 +12,12 @@
 
 namespace App\Domain\Widget\Service;
 
-use App\Domain\User\Service\UserService;
-use App\Application\Widget\{
-    UnreadSystemEventWidget,
-    UnreadConversationMessageWidget
-};
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
+use App\Domain\User\Service\UserService;
+use App\Domain\Widget\WidgetItem\{
+    UnreadSystemEventWidget};
+use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 

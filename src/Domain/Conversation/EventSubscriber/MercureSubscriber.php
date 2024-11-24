@@ -14,15 +14,14 @@ namespace App\Domain\Conversation\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
 use App\Application\Service\TwigRenderService;
-use App\Application\Widget\UnreadConversationMessageWidget;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\User\Service\UserService;
+use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
 use Danilovl\HashidsBundle\Service\HashidsService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\{
-    Update,
-    HubInterface
-};
+    HubInterface,
+    Update};
 
 readonly class MercureSubscriber implements EventSubscriberInterface
 {

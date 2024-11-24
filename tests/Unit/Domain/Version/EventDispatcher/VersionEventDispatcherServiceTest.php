@@ -25,9 +25,9 @@ use PHPUnit\Framework\TestCase;
 
 class VersionEventDispatcherServiceTest extends TestCase
 {
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly AsyncService $asyncService;
-    private readonly VersionEventDispatcherService $versionEventDispatcherService;
+    private EventDispatcherInterface $eventDispatcher;
+    private AsyncService $asyncService;
+    private VersionEventDispatcherService $versionEventDispatcherService;
 
     protected function setUp(): void
     {

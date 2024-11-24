@@ -19,7 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SeoPageServiceTest extends TestCase
 {
-    private readonly SeoPageService $seoPageService;
+    private SeoPageService $seoPageService;
 
     public function setUp(): void
     {

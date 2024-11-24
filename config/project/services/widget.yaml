@@ -3,36 +3,25 @@ services:
     public: true
     autowire: true
 
-  app.widget.unread_conversation_message:
-    class: App\Application\Widget\UnreadConversationMessageWidget
+  App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget:
     tags:
       - { name: app.widgets, alias: unread_conversation_message }
 
-  App\Application\Widget\UnreadConversationMessageWidget: '@app.widget.unread_conversation_message'
-
-  app.widget.unread_system_event:
-    class: App\Application\Widget\UnreadSystemEventWidget
+  App\Domain\Widget\WidgetItem\UnreadSystemEventWidget:
     tags:
       - { name: app.widgets, alias: unread_system_event }
 
-  App\Application\Widget\UnreadSystemEventWidget: '@app.widget.unread_system_event'
-
-  app.widget.locales:
-    class: App\Application\Widget\LocalesWidget
+  App\Domain\Widget\WidgetItem\LocalesWidget:
     arguments:
       $locales: '%locales%'
     tags:
       - { name: app.widgets, alias: locales }
 
-  app.widget.menu:
-    class: App\Application\Widget\MenuWidget
+  App\Domain\Widget\WidgetItem\MenuWidget:
     arguments:
       $menuConfig: '%menu%'
     tags:
       - { name: app.widgets, alias: menu }
 
-  app.widget.user_profile_information:
-    class: App\Application\Widget\UserProfileInformationNotifyWidget
-
-  app.widget.work_deadline_information:
-    class: App\Application\Widget\WorkDeadlineNotifyWidget
+  App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget:
+  App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget:

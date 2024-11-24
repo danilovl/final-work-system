@@ -10,29 +10,28 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Widget;
+namespace Domain\Widget\WidgetItem;
 
-use App\Application\Widget\WorkDeadlineNotifyWidget;
+use App\Application\Service\{
+    TranslatorService,
+    TwigRenderService};
 use App\Domain\User\Constant\UserRoleConstant;
+use App\Domain\User\Entity\User;
+use App\Domain\User\Service\UserService;
+use App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Service\WorkService;
-use DateTime;
-use App\Application\Service\{
-    TranslatorService,
-    TwigRenderService
-};
-use App\Domain\User\Entity\User;
-use App\Domain\User\Service\UserService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use DateTime;
 use PHPUnit\Framework\TestCase;
 
 class WorkDeadlineNotifyWidgetTest extends TestCase
 {
-    private readonly UserService $userService;
-    private readonly WorkService $workService;
-    private readonly WorkFacade $workFacade;
-    private readonly WorkDeadlineNotifyWidget $widget;
+    private UserService $userService;
+    private WorkService $workService;
+    private WorkFacade $workFacade;
+    private WorkDeadlineNotifyWidget $widget;
 
     protected function setUp(): void
     {
@@ -55,7 +54,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->method('trans')
             ->willReturn('trans');
 
-        $this->widget = new WorkDeadlineNotifyWidget(
+        $this->widget = new \App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget(
             $this->userService,
             $this->workService,
             $parameterService,

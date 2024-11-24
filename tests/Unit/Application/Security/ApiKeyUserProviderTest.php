@@ -24,8 +24,8 @@ use Symfony\Component\Security\Core\Exception\{
 
 class ApiKeyUserProviderTest extends TestCase
 {
-    private readonly ApiUserFacade $apiUserFacade;
-    private readonly ApiKeyUserProvider $apiKeyUserProvider;
+    private ApiUserFacade $apiUserFacade;
+    private ApiKeyUserProvider $apiKeyUserProvider;
 
     protected function setUp(): void
     {

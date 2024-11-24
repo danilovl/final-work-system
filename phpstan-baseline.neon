@@ -321,16 +321,6 @@ parameters:
 			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Admin\\\\DashboardControllerTest has an uninitialized readonly property \\$dashboardController\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Admin/DashboardControllerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Admin\\\\DashboardControllerTest\\:\\:\\$dashboardController is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Admin/DashboardControllerTest.php
-
-		-
 			message: "#^Method Doctrine\\\\Persistence\\\\ObjectRepository\\<object\\>\\:\\:findOneBy\\(\\) invoked with 2 parameters, 1 required\\.$#"
 			count: 1
 			path: tests/Kernel/Application/Command/DecodeConversationMessageCommandTest.php
@@ -354,86 +344,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$filename of function chmod expects string, string\\|false given\\.$#"
 			count: 1
 			path: tests/Kernel/Application/Command/ImportSqlCommandTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\SimpleSearchFormTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/SimpleSearchFormTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\SimpleSearchFormTest has an uninitialized readonly property \\$searchModel\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/SimpleSearchFormTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\SimpleSearchFormTest\\:\\:\\$form is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/SimpleSearchFormTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\SimpleSearchFormTest\\:\\:\\$searchModel is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/SimpleSearchFormTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\FirstWeekDayTypeTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/FirstWeekDayTypeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\FirstWeekDayTypeTest\\:\\:\\$form is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/FirstWeekDayTypeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\LocaleTypeTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/LocaleTypeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\LocaleTypeTest\\:\\:\\$form is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/LocaleTypeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\MediaFileTypeTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/MediaFileTypeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\MediaFileTypeTest\\:\\:\\$form is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/MediaFileTypeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\UserRoleTypeTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/UserRoleTypeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\UserRoleTypeTest\\:\\:\\$form is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/UserRoleTypeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\WeekDaysTypeTest has an uninitialized readonly property \\$form\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/WeekDaysTypeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Form\\\\Type\\\\WeekDaysTypeTest\\:\\:\\$form is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Form/Type/WeekDaysTypeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Kernel\\\\Application\\\\Helper\\\\FormValidationMessageHelperTest has an uninitialized readonly property \\$formFactory\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Helper/FormValidationMessageHelperTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Kernel\\\\Application\\\\Helper\\\\FormValidationMessageHelperTest\\:\\:\\$formFactory is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Kernel/Application/Helper/FormValidationMessageHelperTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$object_or_class of function get_parent_class expects object\\|string, object\\|null given\\.$#"
@@ -496,16 +406,6 @@ parameters:
 			path: tests/ReplacerFinal.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Collector\\\\SystemInfoCollectorTest has an uninitialized readonly property \\$collector\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Collector/SystemInfoCollectorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Collector\\\\SystemInfoCollectorTest\\:\\:\\$collector is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Collector/SystemInfoCollectorTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\S3ClientService\\:\\:expects\\(\\)\\.$#"
 			count: 2
 			path: tests/Unit/Application/Command/S3CreateBucketCommandTest.php
@@ -536,99 +436,9 @@ parameters:
 			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
 
 		-
-			message: "#^Class Application\\\\EventDispatcher\\\\EntityEventDispatcherServiceTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class Application\\\\EventDispatcher\\\\EntityEventDispatcherServiceTest has an uninitialized readonly property \\$entityEventDispatcherService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class Application\\\\EventDispatcher\\\\EntityEventDispatcherServiceTest has an uninitialized readonly property \\$eventDispatcher\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\EventDispatcher\\\\EntityEventDispatcherServiceTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\EventDispatcher\\\\EntityEventDispatcherServiceTest\\:\\:\\$entityEventDispatcherService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\EventDispatcher\\\\EntityEventDispatcherServiceTest\\:\\:\\$eventDispatcher is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Application\\\\EventListener\\\\LoggableListener\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest has an uninitialized readonly property \\$listener\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest has an uninitialized readonly property \\$loggableListener\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest has an uninitialized readonly property \\$token\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest has an uninitialized readonly property \\$tokenStorage\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest\\:\\:\\$listener is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest\\:\\:\\$loggableListener is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest\\:\\:\\$token is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest\\:\\:\\$tokenStorage is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\DoctrineExtensionListenerTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RedirectToPreferredLocaleListenerTest has an uninitialized readonly property \\$event\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RedirectToPreferredLocaleListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RedirectToPreferredLocaleListenerTest\\:\\:\\$event is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RedirectToPreferredLocaleListenerTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
@@ -643,56 +453,6 @@ parameters:
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
 			count: 2
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest has an uninitialized readonly property \\$listener\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest has an uninitialized readonly property \\$seoPageService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest\\:\\:\\$listener is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest\\:\\:\\$seoPageService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\EventListener\\\\RequestListenerTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
-			count: 1
 			path: tests/Unit/Application/EventListener/RequestListenerTest.php
 
 		-
@@ -731,98 +491,8 @@ parameters:
 			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\Loggable\\\\LoggableHandlerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\Loggable\\\\LoggableHandlerTest has an uninitialized readonly property \\$loggableHandler\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\Loggable\\\\LoggableHandlerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Messenger\\\\Loggable\\\\LoggableHandlerTest\\:\\:\\$loggableHandler is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\Event\\\\Ajax\\\\GetEventMiddlewareTest has an uninitialized readonly property \\$getEventMiddleware\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Middleware/Event/Ajax/GetEventMiddlewareTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\Event\\\\Ajax\\\\GetEventMiddlewareTest\\:\\:\\$getEventMiddleware is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Middleware/Event/Ajax/GetEventMiddlewareTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\EditMiddlewareTest has an uninitialized readonly property \\$editMiddleware\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/EditMiddlewareTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\EditMiddlewareTest\\:\\:\\$editMiddleware is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/EditMiddlewareTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\GetEventMiddlewareTest has an uninitialized readonly property \\$getEventMiddleware\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/GetEventMiddlewareTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Middleware\\\\EventCalendar\\\\Ajax\\\\GetEventMiddlewareTest\\:\\:\\$getEventMiddleware is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Middleware/EventCalendar/Ajax/GetEventMiddlewareTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Request\\\\AbstractAjaxJsonRequestTest has an uninitialized readonly property \\$requestStackFilled\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Request/AbstractAjaxJsonRequestTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Request\\\\AbstractAjaxJsonRequestTest has an uninitialized readonly property \\$requestStackMissing\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Request/AbstractAjaxJsonRequestTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Request\\\\AbstractAjaxJsonRequestTest\\:\\:\\$requestStackFilled is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Request/AbstractAjaxJsonRequestTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Request\\\\AbstractAjaxJsonRequestTest\\:\\:\\$requestStackMissing is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Request/AbstractAjaxJsonRequestTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:expects\\(\\)\\.$#"
 			count: 2
-			path: tests/Unit/Application/Security/ApiKeyUserProviderTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\ApiKeyUserProviderTest has an uninitialized readonly property \\$apiKeyUserProvider\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/ApiKeyUserProviderTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\ApiKeyUserProviderTest has an uninitialized readonly property \\$apiUserFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/ApiKeyUserProviderTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\ApiKeyUserProviderTest\\:\\:\\$apiKeyUserProvider is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/ApiKeyUserProviderTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\ApiKeyUserProviderTest\\:\\:\\$apiUserFacade is assigned outside of the constructor\\.$#"
-			count: 1
 			path: tests/Unit/Application/Security/ApiKeyUserProviderTest.php
 
 		-
@@ -833,36 +503,6 @@ parameters:
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
 			count: 3
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\AppUserProviderTest has an uninitialized readonly property \\$appUserProvider\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\AppUserProviderTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\AppUserProviderTest has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\AppUserProviderTest\\:\\:\\$appUserProvider is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\AppUserProviderTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\AppUserProviderTest\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
-			count: 1
 			path: tests/Unit/Application/Security/AppUserProviderTest.php
 
 		-
@@ -878,56 +518,6 @@ parameters:
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
 			count: 2
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$apiUserFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$authenticator\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$request\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$apiUserFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$authenticator is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$request is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\ApiAuthenticatorTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
-			count: 1
 			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
 
 		-
@@ -956,123 +546,13 @@ parameters:
 			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$authenticator\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$httpKernel\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$httpUtils\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$request\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$urlGenerator\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$userFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$authenticator is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$httpKernel is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$httpUtils is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$request is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$urlGenerator is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$userFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Security\\\\Authenticator\\\\AppAuthenticatorTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\AuthorizationCheckerInterface\\:\\:expects\\(\\)\\.$#"
 			count: 2
 			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
 
 		-
-			message: "#^Class Application\\\\Service\\\\AuthorizationCheckerServiceTest has an uninitialized readonly property \\$authorizationChecker\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
-
-		-
-			message: "#^Class Application\\\\Service\\\\AuthorizationCheckerServiceTest has an uninitialized readonly property \\$authorizationCheckerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Service\\\\AuthorizationCheckerServiceTest\\:\\:\\$authorizationChecker is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Service\\\\AuthorizationCheckerServiceTest\\:\\:\\$authorizationCheckerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
-
-		-
 			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:expects\\(\\)\\.$#"
 			count: 12
-			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Service\\\\EntityManagerServiceTest has an uninitialized readonly property \\$entityManager\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Service\\\\EntityManagerServiceTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Service\\\\EntityManagerServiceTest\\:\\:\\$entityManager is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Service\\\\EntityManagerServiceTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
-			count: 1
 			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
 
 		-
@@ -1101,36 +581,6 @@ parameters:
 			path: tests/Unit/Application/Service/S3ClientServiceTest.php
 
 		-
-			message: "#^Class Application\\\\Service\\\\S3ClientServiceTest has an uninitialized readonly property \\$s3Client\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/S3ClientServiceTest.php
-
-		-
-			message: "#^Class Application\\\\Service\\\\S3ClientServiceTest has an uninitialized readonly property \\$s3ClientService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/S3ClientServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Service\\\\S3ClientServiceTest\\:\\:\\$s3Client is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/S3ClientServiceTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Service\\\\S3ClientServiceTest\\:\\:\\$s3ClientService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/S3ClientServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Service\\\\SeoPageServiceTest has an uninitialized readonly property \\$seoPageService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/SeoPageServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Service\\\\SeoPageServiceTest\\:\\:\\$seoPageService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/SeoPageServiceTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\RequestStack\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Application/Service/TranslatorServiceTest.php
@@ -1144,61 +594,6 @@ parameters:
 			message: "#^Class Doctrine\\\\ORM\\\\Mapping\\\\Column referenced with incorrect case\\: Doctrine\\\\Orm\\\\Mapping\\\\Column\\.$#"
 			count: 2
 			path: tests/Unit/Application/Traits/Entity/PublicAbleTraitTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\AwayRuntimeTest has an uninitialized readonly property \\$awayRuntime\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/AwayRuntimeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\AwayRuntimeTest\\:\\:\\$awayRuntime is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/AwayRuntimeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\SeoRuntimeTest has an uninitialized readonly property \\$seoPageService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/SeoRuntimeTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\SeoRuntimeTest has an uninitialized readonly property \\$seoRuntime\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/SeoRuntimeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\SeoRuntimeTest\\:\\:\\$seoPageService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/SeoRuntimeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Twig\\\\Runtime\\\\SeoRuntimeTest\\:\\:\\$seoRuntime is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/SeoRuntimeTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
-
-		-
-			message: "#^Class Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest has an uninitialized readonly property \\$widgetManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
-
-		-
-			message: "#^Class Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest has an uninitialized readonly property \\$widgetRuntime\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest\\:\\:\\$widgetManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
-
-		-
-			message: "#^Readonly property Application\\\\Twig\\\\Runtime\\\\WidgetRuntimeTest\\:\\:\\$widgetRuntime is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Twig/Runtime/WidgetRuntimeTest.php
 
 		-
 			message: "#^Method App\\\\Tests\\\\Unit\\\\Application\\\\Util\\\\MomentFormatConverterUtilTest\\:\\:testConvert\\(\\) has no return type specified\\.$#"
@@ -1216,167 +611,12 @@ parameters:
 			path: tests/Unit/Application/Util/StreamedResponseUtilTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\BaseWidgetTest has an uninitialized readonly property \\$widget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/BaseWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\BaseWidgetTest\\:\\:\\$widget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/BaseWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\LocaleWidgetTest has an uninitialized readonly property \\$localesWidget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/LocaleWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\LocaleWidgetTest\\:\\:\\$localesWidget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/LocaleWidgetTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Bundle\\\\SecurityBundle\\\\Security\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Widget/MenuWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\MenuWidgetTest has an uninitialized readonly property \\$menuWidget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/MenuWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\MenuWidgetTest has an uninitialized readonly property \\$security\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/MenuWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\MenuWidgetTest\\:\\:\\$menuWidget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/MenuWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\MenuWidgetTest\\:\\:\\$security is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/MenuWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UnreadConversationMessageWidgetTest has an uninitialized readonly property \\$widget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UnreadConversationMessageWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UnreadConversationMessageWidgetTest\\:\\:\\$widget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UnreadConversationMessageWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UnreadSystemEventWidgetTest has an uninitialized readonly property \\$widget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UnreadSystemEventWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UnreadSystemEventWidgetTest\\:\\:\\$widget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UnreadSystemEventWidgetTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Widget/UserProfileInformationNotifyWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UserProfileInformationNotifyWidgetTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UserProfileInformationNotifyWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UserProfileInformationNotifyWidgetTest has an uninitialized readonly property \\$widget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UserProfileInformationNotifyWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UserProfileInformationNotifyWidgetTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UserProfileInformationNotifyWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\UserProfileInformationNotifyWidgetTest\\:\\:\\$widget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/UserProfileInformationNotifyWidgetTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Work\\\\Service\\\\WorkService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest has an uninitialized readonly property \\$userService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest has an uninitialized readonly property \\$widget\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest has an uninitialized readonly property \\$workFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest has an uninitialized readonly property \\$workService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest\\:\\:\\$userService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest\\:\\:\\$widget is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest\\:\\:\\$workFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Application\\\\Widget\\\\WorkDeadlineNotifyWidgetTest\\:\\:\\$workService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Application/Widget/WorkDeadlineNotifyWidgetTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoter\\:\\:supportsPublic\\(\\)\\.$#"
 			count: 3
 			path: tests/Unit/Domain/Article/Security/Voter/ArticleVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoterTest has an uninitialized readonly property \\$articleVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Article/Security/Voter/ArticleVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoterTest\\:\\:\\$articleVoter \\(App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Article/Security/Voter/ArticleVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoterTest\\:\\:\\$articleVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Article/Security/Voter/ArticleVoterTest.php
 
@@ -1386,17 +626,7 @@ parameters:
 			path: tests/Unit/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoterTest has an uninitialized readonly property \\$articleCategoryVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoterTest\\:\\:\\$articleCategoryVoter \\(App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoterTest\\:\\:\\$articleCategoryVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoterTest.php
 
@@ -1406,28 +636,8 @@ parameters:
 			path: tests/Unit/Domain/Conversation/Security/Voter/ConversationVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoterTest has an uninitialized readonly property \\$conversationVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Conversation/Security/Voter/ConversationVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoterTest\\:\\:\\$conversationVoter is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Conversation/Security/Voter/ConversationVoterTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoter\\:\\:supportsPublic\\(\\)\\.$#"
 			count: 3
-			path: tests/Unit/Domain/ConversationMessage/Security/Voter/ConversationMessageVoterTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoterTest has an uninitialized readonly property \\$conversationMessageVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/ConversationMessage/Security/Voter/ConversationMessageVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoterTest\\:\\:\\$conversationMessageVoter is assigned outside of the constructor\\.$#"
-			count: 1
 			path: tests/Unit/Domain/ConversationMessage/Security/Voter/ConversationMessageVoterTest.php
 
 		-
@@ -1436,17 +646,7 @@ parameters:
 			path: tests/Unit/Domain/Document/Security/Voter/DocumentVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoterTest has an uninitialized readonly property \\$documentVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Document/Security/Voter/DocumentVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoterTest\\:\\:\\$documentVoter \\(App\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Document/Security/Voter/DocumentVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoterTest\\:\\:\\$documentVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Document/Security/Voter/DocumentVoterTest.php
 
@@ -1456,17 +656,7 @@ parameters:
 			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoterTest has an uninitialized readonly property \\$documentCategoryVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoterTest\\:\\:\\$documentCategoryVoter \\(App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoterTest\\:\\:\\$documentCategoryVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
 
@@ -1591,27 +781,7 @@ parameters:
 			path: tests/Unit/Domain/EmailNotification/EventSubscriber/DocumentEmailNotificationSubscriberTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithParticipant\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$eventWithoutParticipant\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
-
-		-
 			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest has an uninitialized readonly property \\$subscriber\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithParticipant is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\EventEmailNotificationSubscriberTest\\:\\:\\$eventWithoutParticipant is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EmailNotification/EventSubscriber/EventEmailNotificationSubscriberTest.php
 
@@ -1701,107 +871,7 @@ parameters:
 			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFacade\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationFactory\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationHandler\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$emailNotificationMessage\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$entityManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$parameterService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest has an uninitialized readonly property \\$sendEmailNotificationService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFacade is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationFactory is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationHandler is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$emailNotificationMessage is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$entityManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$parameterService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\Messenger\\\\EmailNotificationHandlerTest\\:\\:\\$sendEmailNotificationService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EmailNotification/Messenger/EmailNotificationHandlerTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\EventDispatcher\\\\EventEventDispatcherServiceTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\EventDispatcher\\\\EventEventDispatcherServiceTest has an uninitialized readonly property \\$eventDispatcher\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\EventDispatcher\\\\EventEventDispatcherServiceTest has an uninitialized readonly property \\$eventEventDispatcherService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\EventDispatcher\\\\EventEventDispatcherServiceTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\EventDispatcher\\\\EventEventDispatcherServiceTest\\:\\:\\$eventDispatcher is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\EventDispatcher\\\\EventEventDispatcherServiceTest\\:\\:\\$eventEventDispatcherService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
 
@@ -1811,17 +881,7 @@ parameters:
 			path: tests/Unit/Domain/Event/Security/Voter/EventAddressVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventAddressVoterTest has an uninitialized readonly property \\$eventVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/Security/Voter/EventAddressVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventVoter \\(App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/Security/Voter/EventAddressVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Event/Security/Voter/EventAddressVoterTest.php
 
@@ -1831,17 +891,7 @@ parameters:
 			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest has an uninitialized readonly property \\$eventAddressVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter \\(App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
 
@@ -1851,29 +901,9 @@ parameters:
 			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoterTest has an uninitialized readonly property \\$eventScheduleVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoterTest\\:\\:\\$eventScheduleVoter \\(App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
 			count: 1
 			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoterTest\\:\\:\\$eventScheduleVoter is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\Cache\\\\HomepageCacheTest has an uninitialized readonly property \\$homepageCache\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/SystemEvent/Cache/HomepageCacheTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\Cache\\\\HomepageCacheTest\\:\\:\\$homepageCache is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/SystemEvent/Cache/HomepageCacheTest.php
 
 		-
 			message: "#^Access to an undefined property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEvent\\\\EventSubscriber\\\\BaseSystemEventSubscriber\\:\\:\\$subscriber\\.$#"
@@ -1986,52 +1016,12 @@ parameters:
 			path: tests/Unit/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoterTest has an uninitialized readonly property \\$systemEventRecipientVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoterTest\\:\\:\\$systemEventRecipientVoter \\(App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
 			count: 1
 			path: tests/Unit/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoterTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoterTest\\:\\:\\$systemEventRecipientVoter is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoterTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\EventDispatcher\\\\TaskEventDispatcherServiceTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\EventDispatcher\\\\TaskEventDispatcherServiceTest has an uninitialized readonly property \\$eventDispatcher\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\EventDispatcher\\\\TaskEventDispatcherServiceTest has an uninitialized readonly property \\$taskEventDispatcherService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\EventDispatcher\\\\TaskEventDispatcherServiceTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\EventDispatcher\\\\TaskEventDispatcherServiceTest\\:\\:\\$eventDispatcher is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\EventDispatcher\\\\TaskEventDispatcherServiceTest\\:\\:\\$taskEventDispatcherService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
 
@@ -2041,97 +1031,17 @@ parameters:
 			path: tests/Unit/Domain/Task/Security/Voter/TaskVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoterTest has an uninitialized readonly property \\$taskVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/Security/Voter/TaskVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoterTest\\:\\:\\$taskVoter \\(App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Task/Security/Voter/TaskVoterTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoterTest\\:\\:\\$taskVoter is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/Security/Voter/TaskVoterTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\EventDispatcher\\\\UserEventDispatcherServiceTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\EventDispatcher\\\\UserEventDispatcherServiceTest has an uninitialized readonly property \\$eventDispatcher\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\EventDispatcher\\\\UserEventDispatcherServiceTest has an uninitialized readonly property \\$userEventDispatcherService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\EventDispatcher\\\\UserEventDispatcherServiceTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\EventDispatcher\\\\UserEventDispatcherServiceTest\\:\\:\\$eventDispatcher is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\EventDispatcher\\\\UserEventDispatcherServiceTest\\:\\:\\$userEventDispatcherService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/EventDispatcher/UserEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\Twig\\\\Runtime\\\\UserRuntimeTest has an uninitialized readonly property \\$userRuntime\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/Twig/Runtime/UserRuntimeTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\User\\\\Twig\\\\Runtime\\\\UserRuntimeTest\\:\\:\\$userRuntime is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/User/Twig/Runtime/UserRuntimeTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\EventDispatcher\\\\VersionEventDispatcherServiceTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\EventDispatcher\\\\VersionEventDispatcherServiceTest has an uninitialized readonly property \\$eventDispatcher\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\EventDispatcher\\\\VersionEventDispatcherServiceTest has an uninitialized readonly property \\$versionEventDispatcherService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\EventDispatcher\\\\VersionEventDispatcherServiceTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\EventDispatcher\\\\VersionEventDispatcherServiceTest\\:\\:\\$eventDispatcher is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\EventDispatcher\\\\VersionEventDispatcherServiceTest\\:\\:\\$versionEventDispatcherService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
 
@@ -2141,17 +1051,7 @@ parameters:
 			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoterTest has an uninitialized readonly property \\$versionVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoterTest\\:\\:\\$versionVoter \\(App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoterTest\\:\\:\\$versionVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
 
@@ -2166,57 +1066,37 @@ parameters:
 			path: tests/Unit/Domain/Widget/Service/WidgetManagerServiceTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerServiceTest has an uninitialized readonly property \\$container\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Widget/Service/WidgetManagerServiceTest.php
+			message: "#^Call to an undefined method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Domain/Widget/Twig/Runtime/Widget/WidgetRuntimeTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerServiceTest has an uninitialized readonly property \\$widgetManagerService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Widget/Service/WidgetManagerServiceTest.php
+			message: "#^Call to an undefined method Symfony\\\\Bundle\\\\SecurityBundle\\\\Security\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Domain/Widget/WidgetItem/MenuWidgetTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerServiceTest\\:\\:\\$container is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Widget/Service/WidgetManagerServiceTest.php
+			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Domain/Widget/WidgetItem/UserProfileInformationNotifyWidgetTest.php
 
 		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerServiceTest\\:\\:\\$widgetManagerService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Widget/Service/WidgetManagerServiceTest.php
+			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
+			count: 4
+			path: tests/Unit/Domain/Widget/WidgetItem/WorkDeadlineNotifyWidgetTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:expects\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/Domain/Widget/WidgetItem/WorkDeadlineNotifyWidgetTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Domain\\\\Work\\\\Service\\\\WorkService\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Domain/Widget/WidgetItem/WorkDeadlineNotifyWidgetTest.php
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\EventDispatcher\\\\WorkEventDispatcherServiceTest has an uninitialized readonly property \\$asyncService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\EventDispatcher\\\\WorkEventDispatcherServiceTest has an uninitialized readonly property \\$eventDispatcher\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\EventDispatcher\\\\WorkEventDispatcherServiceTest has an uninitialized readonly property \\$workEventDispatcherService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\EventDispatcher\\\\WorkEventDispatcherServiceTest\\:\\:\\$asyncService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\EventDispatcher\\\\WorkEventDispatcherServiceTest\\:\\:\\$eventDispatcher is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\EventDispatcher\\\\WorkEventDispatcherServiceTest\\:\\:\\$workEventDispatcherService is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
 
@@ -2226,52 +1106,12 @@ parameters:
 			path: tests/Unit/Domain/Work/Security/Voter/WorkVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoterTest has an uninitialized readonly property \\$workVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/Security/Voter/WorkVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoterTest\\:\\:\\$workVoter is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/Security/Voter/WorkVoterTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\Service\\\\WorkServiceTest has an uninitialized readonly property \\$work\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/Service/WorkServiceTest.php
-
-		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\Service\\\\WorkServiceTest has an uninitialized readonly property \\$workService\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/Service/WorkServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\Service\\\\WorkServiceTest\\:\\:\\$work is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/Service/WorkServiceTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\Work\\\\Service\\\\WorkServiceTest\\:\\:\\$workService is assigned outside of the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Work/Service/WorkServiceTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:supportsPublic\\(\\)\\.$#"
 			count: 3
 			path: tests/Unit/Domain/WorkCategory/Security/Voter/WorkVoterTest.php
 
 		-
-			message: "#^Class App\\\\Tests\\\\Unit\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkVoterTest has an uninitialized readonly property \\$workCategoryVoter\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: tests/Unit/Domain/WorkCategory/Security/Voter/WorkVoterTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkVoterTest\\:\\:\\$workCategoryVoter \\(App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/WorkCategory/Security/Voter/WorkVoterTest.php
-
-		-
-			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkVoterTest\\:\\:\\$workCategoryVoter is assigned outside of the constructor\\.$#"
 			count: 1
 			path: tests/Unit/Domain/WorkCategory/Security/Voter/WorkVoterTest.php
 

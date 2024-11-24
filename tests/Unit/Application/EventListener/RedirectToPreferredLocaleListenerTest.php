@@ -32,7 +32,7 @@ use UnexpectedValueException;
 
 class RedirectToPreferredLocaleListenerTest extends TestCase
 {
-    private readonly RequestEvent $event;
+    private RequestEvent $event;
 
     protected function setUp(): void
     {

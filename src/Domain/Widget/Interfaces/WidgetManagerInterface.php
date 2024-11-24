@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Interfaces\Widget;
+namespace App\Domain\Widget\Interfaces;
 
 interface WidgetManagerInterface
 {

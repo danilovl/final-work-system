@@ -36,13 +36,13 @@ use Symfony\Component\Security\Http\SecurityRequestAttributes;
 
 class AppAuthenticatorTest extends TestCase
 {
-    private readonly Request $request;
-    private readonly UserService $userService;
-    private readonly AppAuthenticator $authenticator;
-    private readonly UrlGeneratorInterface $urlGenerator;
-    private readonly HttpUtils $httpUtils;
-    private readonly HttpKernelInterface $httpKernel;
-    private readonly UserFacade $userFacade;
+    private Request $request;
+    private UserService $userService;
+    private AppAuthenticator $authenticator;
+    private UrlGeneratorInterface $urlGenerator;
+    private HttpUtils $httpUtils;
+    private HttpKernelInterface $httpKernel;
+    private UserFacade $userFacade;
 
     protected function setUp(): void
     {

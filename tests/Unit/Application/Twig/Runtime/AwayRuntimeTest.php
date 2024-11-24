@@ -18,7 +18,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class AwayRuntimeTest extends TestCase
 {
-    private readonly AwayRuntime $awayRuntime;
+    private AwayRuntime $awayRuntime;
 
     protected function setUp(): void
     {

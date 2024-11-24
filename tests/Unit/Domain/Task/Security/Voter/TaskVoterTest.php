@@ -22,7 +22,7 @@ class TaskVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly TaskVoter $taskVoter;
+    private TaskVoter $taskVoter;
 
     protected function setUp(): void
     {

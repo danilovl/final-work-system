@@ -10,18 +10,19 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Widget;
+namespace Domain\Widget\WidgetItem;
 
 use App\Application\Service\TwigRenderService;
-use App\Application\Widget\UnreadConversationMessageWidget;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\SystemEvent\Facade\SystemEventFacade;
+use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
+use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;
 use PHPUnit\Framework\TestCase;
 
-class UnreadConversationMessageWidgetTest extends TestCase
+class UnreadSystemEventWidgetTest extends TestCase
 {
-    private readonly UnreadConversationMessageWidget $widget;
+    private UnreadSystemEventWidget $widget;
 
     protected function setUp(): void
     {
@@ -35,24 +36,31 @@ class UnreadConversationMessageWidgetTest extends TestCase
             ->method('render')
             ->willReturn('content');
 
-        $conversationMessageFacade = $this->createMock(ConversationMessageFacade::class);
-        $conversationMessageFacade->expects($this->any())
-            ->method('getTotalUnreadMessagesByUser')
-            ->willReturn(1);
+        $systemEventFacade = $this->createMock(SystemEventFacade::class);
+        $systemEventFacade->expects($this->any())
+            ->method('getTotalUnreadSystemEventsByRecipient')
+            ->willReturn(null);
 
-        $conversationMessageFacade->expects($this->any())
-            ->method('getUnreadMessagesByUser')
+        $systemEventRecipientFacade = $this->createMock(SystemEventRecipientFacade::class);
+        $systemEventRecipientFacade->expects($this->any())
+            ->method('getUnreadSystemEventsByRecipient')
             ->willReturn([]);
 
-        $this->widget = new UnreadConversationMessageWidget(
+        $this->widget = new UnreadSystemEventWidget(
             $twigRenderService,
             $userService,
-            $conversationMessageFacade
+            $systemEventFacade,
+            $systemEventRecipientFacade
         );
     }
 
     public function testRender(): void
     {
         $this->assertEquals('content', $this->widget->render());
+    }
+
+    public function testRenderForUser(): void
+    {
+        $this->assertEquals('content', $this->widget->renderForUser(new User));
     }
 }

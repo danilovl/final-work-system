@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints\{
 
 class FormValidationMessageHelperTest extends KernelTestCase
 {
-    private readonly FormFactory $formFactory;
+    private FormFactory $formFactory;
 
     public function setUp(): void
     {

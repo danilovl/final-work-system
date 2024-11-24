@@ -25,8 +25,8 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
     protected static string $classSubscriber = EventEmailNotificationSubscriber::class;
     protected readonly EventEmailNotificationSubscriber $subscriber;
 
-    private readonly Event $eventWithParticipant;
-    private readonly Event $eventWithoutParticipant;
+    private Event $eventWithParticipant;
+    private Event $eventWithoutParticipant;
 
     protected function setUp(): void
     {

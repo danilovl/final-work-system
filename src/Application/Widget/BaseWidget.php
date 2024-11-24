@@ -12,7 +12,7 @@
 
 namespace App\Application\Widget;
 
-use App\Application\Interfaces\Widget\WidgetInterface;
+use App\Domain\Widget\Interfaces\WidgetInterface;
 
 abstract class BaseWidget implements WidgetInterface
 {

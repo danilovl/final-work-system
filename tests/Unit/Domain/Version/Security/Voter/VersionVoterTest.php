@@ -22,7 +22,7 @@ class VersionVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly VersionVoter $versionVoter;
+    private VersionVoter $versionVoter;
 
     protected function setUp(): void
     {

@@ -22,7 +22,7 @@ class DocumentCategoryVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly DocumentCategoryVoter $documentCategoryVoter;
+    private DocumentCategoryVoter $documentCategoryVoter;
 
     protected function setUp(): void
     {

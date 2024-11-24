@@ -49,6 +49,7 @@ services:
       - '../src/Domain/*/Security/Voter/Subject'
       - '../src/Domain/*/EventDispatcher/GenericEvent'
       - '../src/Domain/Comment/Form/EventSubscriber'
+      - '../src/Domain/Widget/WidgetItem'
 
   App\Domain\Work\Repository\Elastica\WorkSearch:
     arguments:

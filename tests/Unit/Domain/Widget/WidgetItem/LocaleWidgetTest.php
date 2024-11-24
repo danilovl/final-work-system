@@ -10,16 +10,16 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Widget;
+namespace Domain\Widget\WidgetItem;
 
 use App\Application\Constant\LocaleConstant;
 use App\Application\Service\TwigRenderService;
-use App\Application\Widget\LocalesWidget;
+use App\Domain\Widget\WidgetItem\LocalesWidget;
 use PHPUnit\Framework\TestCase;
 
 class LocaleWidgetTest extends TestCase
 {
-    private readonly LocalesWidget $localesWidget;
+    private LocalesWidget $localesWidget;
 
     protected function setUp(): void
     {

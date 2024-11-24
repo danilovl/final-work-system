@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class EditMiddlewareTest extends TestCase
 {
-    private readonly EditMiddleware $editMiddleware;
+    private EditMiddleware $editMiddleware;
 
     protected function setUp(): void
     {

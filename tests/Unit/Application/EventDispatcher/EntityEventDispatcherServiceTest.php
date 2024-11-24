@@ -21,9 +21,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EntityEventDispatcherServiceTest extends TestCase
 {
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly AsyncService $asyncService;
-    private readonly EntityEventDispatcherService $entityEventDispatcherService;
+    private EventDispatcherInterface $eventDispatcher;
+    private AsyncService $asyncService;
+    private EntityEventDispatcherService $entityEventDispatcherService;
 
     protected function setUp(): void
     {

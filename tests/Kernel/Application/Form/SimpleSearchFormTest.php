@@ -19,8 +19,8 @@ use Symfony\Component\Form\FormInterface;
 
 class SimpleSearchFormTest extends KernelTestCase
 {
-    private readonly FormInterface $form;
-    private readonly SearchModel $searchModel;
+    private FormInterface $form;
+    private SearchModel $searchModel;
 
     public function setUp(): void
     {

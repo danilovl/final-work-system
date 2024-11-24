@@ -14,14 +14,13 @@ namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
 use App\Application\EventSubscriber\Events;
-use App\Application\Widget\UnreadSystemEventWidget;
 use App\Domain\SystemEvent\Entity\SystemEvent;
+use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;
 use Danilovl\HashidsBundle\Service\HashidsService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\{
-    Update,
-    HubInterface
-};
+    HubInterface,
+    Update};
 
 readonly class MercureSubscriber implements EventSubscriberInterface
 {

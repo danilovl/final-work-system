@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConversationMessageVoterTest extends TestCase
 {
-    private readonly ConversationMessageVoter $conversationMessageVoter;
+    private ConversationMessageVoter $conversationMessageVoter;
 
     protected function setUp(): void
     {

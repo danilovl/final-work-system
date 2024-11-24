@@ -25,9 +25,9 @@ use PHPUnit\Framework\TestCase;
 
 class UserEventDispatcherServiceTest extends TestCase
 {
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly AsyncService $asyncService;
-    private readonly UserEventDispatcherService $userEventDispatcherService;
+    private EventDispatcherInterface $eventDispatcher;
+    private AsyncService $asyncService;
+    private UserEventDispatcherService $userEventDispatcherService;
 
     protected function setUp(): void
     {

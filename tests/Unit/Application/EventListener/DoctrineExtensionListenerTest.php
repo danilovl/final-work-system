@@ -28,11 +28,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class DoctrineExtensionListenerTest extends TestCase
 {
-    private readonly TokenInterface $token;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly LoggableListener $loggableListener;
-    private readonly UserService $userService;
-    private readonly DoctrineExtensionListener $listener;
+    private TokenInterface $token;
+    private TokenStorageInterface $tokenStorage;
+    private LoggableListener $loggableListener;
+    private UserService $userService;
+    private DoctrineExtensionListener $listener;
 
     protected function setUp(): void
     {

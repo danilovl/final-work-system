@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DashboardControllerTest extends KernelTestCase
 {
-    private readonly DashboardController $dashboardController;
+    private DashboardController $dashboardController;
 
     public function setUp(): void
     {

@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Twig\Runtime;
+namespace Domain\Widget\Twig\Runtime\Widget;
 
-use App\Application\Twig\Runtime\HomepageNotifyWidgetRuntime;
-use App\Application\Widget\BaseWidget;
+use App\Domain\Widget\Twig\Runtime\HomepageNotifyWidgetRuntime;
+use App\Domain\Widget\WidgetItem\BaseWidget;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;

@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Application\Twig\Runtime;
+namespace App\Domain\Widget\Twig\Runtime;
 
-use App\Application\Interfaces\Widget\WidgetInterface;
+use App\Domain\Widget\Interfaces\WidgetInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use Symfony\Component\DependencyInjection\ContainerInterface;

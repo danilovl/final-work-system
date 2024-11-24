@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
 
 class FirstWeekDayTypeTest extends KernelTestCase
 {
-    private readonly FormInterface $form;
+    private FormInterface $form;
 
     public function setUp(): void
     {

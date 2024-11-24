@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class WorkVoterTest extends TestCase
 {
-    private readonly WorkVoter $workVoter;
+    private WorkVoter $workVoter;
 
     protected function setUp(): void
     {

@@ -22,7 +22,7 @@ class SystemEventRecipientVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly SystemEventRecipientVoter $systemEventRecipientVoter;
+    private SystemEventRecipientVoter $systemEventRecipientVoter;
 
     protected function setUp(): void
     {

@@ -34,11 +34,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 class ApiAuthenticatorTest extends TestCase
 {
-    private readonly Request $request;
-    private readonly ApiAuthenticator $authenticator;
-    private readonly UserService $userService;
-    private readonly UserFacade $userFacade;
-    private readonly ApiUserFacade $apiUserFacade;
+    private Request $request;
+    private ApiAuthenticator $authenticator;
+    private UserService $userService;
+    private UserFacade $userFacade;
+    private ApiUserFacade $apiUserFacade;
 
     protected function setUp(): void
     {

@@ -22,7 +22,7 @@ class WorkVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private readonly WorkCategoryVoter $workCategoryVoter;
+    private WorkCategoryVoter $workCategoryVoter;
 
     protected function setUp(): void
     {

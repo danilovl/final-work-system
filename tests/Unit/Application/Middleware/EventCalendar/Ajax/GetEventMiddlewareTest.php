@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class GetEventMiddlewareTest extends TestCase
 {
-    private readonly GetEventMiddleware $getEventMiddleware;
+    private GetEventMiddleware $getEventMiddleware;
 
     protected function setUp(): void
     {

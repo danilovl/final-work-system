@@ -23,7 +23,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UserRuntimeTest extends TestCase
 {
-    private readonly UserRuntime $userRuntime;
+    private UserRuntime $userRuntime;
 
     protected function setUp(): void
     {
