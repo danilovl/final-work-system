@@ -10,9 +10,8 @@
  *
  */
 
-namespace Application\Command;
+namespace App\Tests\Unit\Domain\Media\Command;
 
-use App\Application\Command\S3CreateBucketCommand;
 use App\Application\Service\S3ClientService;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\MediaType\Entity\MediaType;
@@ -26,7 +25,7 @@ class S3CreateBucketCommandTest extends TestCase
 
     private S3ClientService $s3ClientService;
 
-    private S3CreateBucketCommand $s3CreateBucketCommand;
+    private \App\Domain\Media\Command\S3CreateBucketCommand $s3CreateBucketCommand;
 
     private CommandTester $commandTester;
 
@@ -34,7 +33,7 @@ class S3CreateBucketCommandTest extends TestCase
     {
         $this->mediaTypeFacade = $this->createMock(MediaTypeFacade::class);
         $this->s3ClientService = $this->createMock(S3ClientService::class);
-        $this->s3CreateBucketCommand = new S3CreateBucketCommand($this->mediaTypeFacade, $this->s3ClientService);
+        $this->s3CreateBucketCommand = new \App\Domain\Media\Command\S3CreateBucketCommand($this->mediaTypeFacade, $this->s3ClientService);
 
         $this->commandTester = new CommandTester($this->s3CreateBucketCommand);
     }

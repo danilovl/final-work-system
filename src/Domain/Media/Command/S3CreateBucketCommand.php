@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Command;
+namespace App\Domain\Media\Command;
 
 use App\Application\Service\S3ClientService;
 use App\Domain\Media\Facade\MediaTypeFacade;
