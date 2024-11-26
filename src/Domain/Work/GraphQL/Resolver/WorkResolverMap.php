@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\GraphQL\Resolver;
+namespace App\Domain\Work\GraphQL\Resolver;
 
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Facade\WorkFacade;

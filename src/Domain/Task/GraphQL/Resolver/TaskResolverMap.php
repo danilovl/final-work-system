@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\GraphQL\Resolver;
+namespace App\Domain\Task\GraphQL\Resolver;
 
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Facade\TaskFacade;

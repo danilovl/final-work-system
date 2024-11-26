@@ -4,17 +4,17 @@ services:
     autowire: true
 
   app.graph_ql.resolver.user:
-    class: App\Application\GraphQL\Resolver\UserResolverMap
+    class: App\Domain\User\GraphQL\Resolver\UserResolverMap
     tags:
       - { name: overblog_graphql.resolver_map, schema: doctrine }
 
   app.graph_ql.resolver.work:
-    class: App\Application\GraphQL\Resolver\WorkResolverMap
+    class: App\Domain\Work\GraphQL\Resolver\WorkResolverMap
     tags:
       - { name: overblog_graphql.resolver_map, schema: doctrine }
 
   app.graph_ql.resolver.task:
-    class: App\Application\GraphQL\Resolver\TaskResolverMap
+    class: App\Domain\Task\GraphQL\Resolver\TaskResolverMap
     tags:
       - { name: overblog_graphql.resolver_map, schema: doctrine }
 
