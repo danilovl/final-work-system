@@ -52,7 +52,7 @@ services:
     build:
       context: ./
       dockerfile: ./docker/php/Dockerfile
-      target: final-work-system-php
+      target: final-work-system-php-www-data
     expose:
       - '9000'
     volumes:

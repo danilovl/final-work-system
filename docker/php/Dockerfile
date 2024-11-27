@@ -17,6 +17,16 @@ WORKDIR /var/www/html/app
 RUN mkdir -p 777 var
 RUN chmod 777 bin/composer-first-install.sh
 
+FROM final-work-system-php AS final-work-system-php-www-data
+
+RUN \
+ usermod -u 1000 www-data && \
+ groupmod -g 1000 www-data && \
+ usermod -d /home/www-data -s /bin/bash www-data
+
+RUN chown www-data:www-data /var/www/html/app
+USER www-data
+
 FROM final-work-system-php AS final-work-system-php-supervisor
 
 RUN apt-get update && \
