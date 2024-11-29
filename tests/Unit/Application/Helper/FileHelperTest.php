@@ -24,7 +24,6 @@ class FileHelperTest extends TestCase
         $this->testDir = __DIR__ . '/testDir';
         mkdir($this->testDir);
 
-        file_put_contents($this->testDir . '/file1.txt', 'File 1');
         file_put_contents($this->testDir . '/file2.txt', 'File 2');
         mkdir($this->testDir . '/subDir');
         file_put_contents($this->testDir . '/subDir/file3.txt', 'File 3');
@@ -48,6 +47,11 @@ class FileHelperTest extends TestCase
     public function testDeleteDirectory(): void
     {
         $this->assertDirectoryExists($this->testDir);
+
+        $file = $this->testDir . '/file1.txt';
+        file_put_contents($file, 'File 1');
+        $result = FileHelper::deleteDirectory($file);
+        $this->assertTrue($result);
 
         $result = FileHelper::deleteDirectory($this->testDir);
 
