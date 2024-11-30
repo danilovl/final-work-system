@@ -72,6 +72,10 @@ class ReplacerFinal
 
     private function replaceBack(): void
     {
+        if (!file_exists(self::FILE_NAME)) {
+            return;
+        }
+
         $serialized = file_get_contents(self::FILE_NAME);
         $this->classes = unserialize($serialized);
 
