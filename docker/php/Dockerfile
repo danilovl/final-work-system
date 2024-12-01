@@ -12,19 +12,25 @@ COPY ./docker/php/conf/php.ini /etc/php/cli/conf.d/
 COPY ./docker/php/conf/php.ini /usr/local/etc/php
 COPY ./ /var/www/html/app
 
-WORKDIR /var/www/html/app
-
-RUN mkdir -p 777 var
-RUN chmod 777 bin/composer-first-install.sh
-
 FROM final-work-system-php AS final-work-system-php-www-data
 
+ARG GITHUB_ACTION_UUID
+ARG UUID
+ENV UUID=${GITHUB_ACTION_UUID:-${UUID}}
+
+WORKDIR /var/www/html/app
+
 RUN \
- usermod -u 1000 www-data && \
- groupmod -g 1000 www-data && \
+ usermod -u ${UUID} www-data && \
+ groupmod -g ${UUID} www-data && \
  usermod -d /home/www-data -s /bin/bash www-data
 
-RUN chown www-data:www-data /var/www/html/app
+RUN chown -R ${UUID}:${UUID} ./
+RUN chmod -R 774 ./
+
+RUN mkdir var && chmod 777 var
+RUN mkdir -p public/upload && chmod 777 public/upload
+
 USER www-data
 
 FROM final-work-system-php AS final-work-system-php-supervisor

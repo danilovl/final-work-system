@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-chmod 777 -R public
-chmod 777 -R var
-
 composer install --no-interaction
 php bin/console doctrine:database:create --if-not-exists
 php bin/console doctrine:schema:update --force
