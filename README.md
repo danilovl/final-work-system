@@ -68,6 +68,8 @@ Project uses extra bundles
 ERD diagram
 ------------
 
+Higher resolution: [git/readme/erd_diagram.png](/git/readme/erd_diagram.png)
+
 ![Alt text](/git/readme/erd_diagram_small.png?raw=true "ERD diagram")
 
 Test coverage
