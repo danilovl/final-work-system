@@ -20,7 +20,7 @@ class ArrayMapHelper
      */
     public static function getObjectsIds(array $objects): array
     {
-        $objects = array_filter($objects, function (object $object): bool {
+        $objects = array_filter($objects, static function (object $object): bool {
             return method_exists($object, 'getId');
         });
 
