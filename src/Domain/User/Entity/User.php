@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'username', type: Types::STRING, length: 180, nullable: true)]
     private ?string $username = null;
 
-    #[ORM\Column(name: 'roles', type: Types::ARRAY)]
+    #[ORM\Column(name: 'roles', type: Types::JSON)]
     private array $roles;
 
     #[ORM\Column(name: 'password', type: Types::STRING, nullable: false)]

@@ -42,7 +42,7 @@ class ArticleCategory
     use ActiveAbleTrait;
     use CreateUpdateAbleTrait;
 
-    #[ORM\Column(name: 'access', type: Types::ARRAY, nullable: false)]
+    #[ORM\Column(name: 'access', type: Types::JSON, nullable: false)]
     #[Gedmo\Versioned]
     private array $access;
 
