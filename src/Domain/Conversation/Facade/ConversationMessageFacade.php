@@ -23,6 +23,7 @@ use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusTyp
 use App\Domain\User\Entity\User;
 use DateTime;
 use Doctrine\ORM\Query;
+use Webmozart\Assert\Assert;
 
 readonly class ConversationMessageFacade
 {
@@ -106,8 +107,13 @@ readonly class ConversationMessageFacade
             ->getQuery();
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function queryByIds(array $ids): Query
     {
+        Assert::allInteger($ids);
+
         return $this->conversationMessageRepository
             ->byIds($ids)
             ->getQuery();

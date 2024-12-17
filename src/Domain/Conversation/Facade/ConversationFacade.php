@@ -33,6 +33,7 @@ use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
+use Webmozart\Assert\Assert;
 
 readonly class ConversationFacade
 {
@@ -55,6 +56,8 @@ readonly class ConversationFacade
 
     public function queryConversationsByParticipantUserTypes(User $user, array $types = []): Query
     {
+        Assert::allIsInstanceOf($types, ConversationType::class);
+
         $queryBuilder = $this->conversationRepository
             ->allByParticipantUser($user);
 
@@ -63,17 +66,27 @@ readonly class ConversationFacade
             ->getQuery();
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function queryConversationsByIds(array $ids): Query
     {
+        Assert::allInteger($ids);
+
         return $this->conversationRepository
             ->allByIds($ids)
             ->getQuery();
     }
 
+    /**
+     * @param Conversation[] $conversations
+     */
     public function setIsReadToConversations(
         iterable $conversations,
         User $user
     ): void {
+        Assert::allIsInstanceOf($conversations, Conversation::class);
+
         /** @var Conversation $conversation */
         foreach ($conversations as $conversation) {
             $isConversationRead = $this->conversationStatusService
@@ -137,7 +150,7 @@ readonly class ConversationFacade
         User $user,
         ConversationComposeMessageModel $conversationComposeMessageModel
     ): void {
-        /** @var array $conversations */
+        /** @var Conversation[] $conversations */
         $conversations = $this->queryConversationsByParticipantUser($user)
             ->getResult();
 
@@ -189,9 +202,8 @@ readonly class ConversationFacade
             /** @var Conversation $modelConversation */
             $modelConversation = $modelConversation[0];
 
-            /** @var Conversation $conversation */
             foreach ($conversations as $conversation) {
-                if ($modelConversation->getWork() === $conversation->getWork() &&
+                if ($modelConversation->getWork()?->getId() === $conversation->getWork()?->getId() &&
                     ConversationHelper::getParticipantIds($modelConversation) === ConversationHelper::getParticipantIds($conversation)
                 ) {
                     $conversationMessage = $this->conversationFactory

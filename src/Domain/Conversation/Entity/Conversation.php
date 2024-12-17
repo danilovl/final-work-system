@@ -36,6 +36,7 @@ use Doctrine\Common\Collections\{
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Webmozart\Assert\Assert;
 
 #[ORM\Table(name: 'conversation')]
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
@@ -141,6 +142,8 @@ class Conversation
      */
     public function getParticipantsExceptUsers(array $users): Collection
     {
+        Assert::allIsInstanceOf($users, User::class);
+
         $ids = ArrayMapHelper::getObjectsIds($users);
 
         /** @var Collection<ConversationParticipant> $participants */

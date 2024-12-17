@@ -22,6 +22,7 @@ use App\Domain\Work\Service\WorkService;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 
 class ConversationVariationService
 {
@@ -80,6 +81,8 @@ class ConversationVariationService
     ): array {
         $conversationUsers = [];
         $addConversationUser = function (array $workUsers) use (&$conversationUsers): void {
+            Assert::allIsInstanceOf($workUsers, User::class);
+
             foreach ($workUsers as $workUser) {
                 if (!in_array($workUser, $conversationUsers, true)) {
                     $conversationUsers[] = $workUser;

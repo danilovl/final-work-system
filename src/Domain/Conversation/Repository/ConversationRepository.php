@@ -19,6 +19,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Webmozart\Assert\Assert;
 
 class ConversationRepository extends ServiceEntityRepository
 {
@@ -47,8 +48,13 @@ class ConversationRepository extends ServiceEntityRepository
             ->setParameter('user', $user);
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function allByIds(array $ids): QueryBuilder
     {
+        Assert::allInteger($ids);
+
         return $this->baseQueryBuilder()
             ->addSelect('messages, type, work, participants, participantsUser, messagesOwner')
             ->join('conversation.type', 'type')
@@ -67,6 +73,8 @@ class ConversationRepository extends ServiceEntityRepository
      */
     public function addFilterByTypes(QueryBuilder $queryBuilder, array $types): QueryBuilder
     {
+        Assert::allIsInstanceOf($types, ConversationType::class);
+
         $ids = array_map(static fn(ConversationType $type): int => $type->getId(), $types);
         if (count($ids) === 0) {
             return $queryBuilder;
