@@ -22,6 +22,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Webmozart\Assert\Assert;
 
 class ConversationMessageRepository extends ServiceEntityRepository
 {
@@ -96,8 +97,13 @@ class ConversationMessageRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function byIds(array $ids): QueryBuilder
     {
+        Assert::allInteger($ids);
+
         return $this->createQueryBuilder('conversation_message')
             ->addSelect('owner, conversation')
             ->join('conversation_message.owner', 'owner')
