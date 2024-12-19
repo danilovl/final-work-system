@@ -32,6 +32,7 @@ use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 class EventCalendarFacade
 {
@@ -214,11 +215,16 @@ class EventCalendarFacade
         return $eventCalendar;
     }
 
+    /**
+     * @param Event[] $userEvents
+     * @return array<string, mixed>
+     */
     public function convertUserEventsToArray(Event $event, array $userEvents): array
     {
+        Assert::allIsInstanceOf($userEvents, Event::class);
+
         $events = [];
 
-        /** @var Event $userEvent */
         foreach ($userEvents as $userEvent) {
             $eventCalendar = $this->baseEventArray($userEvent);
 
