@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Add kibana user
       shell: bash
-      run: docker-compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system
+      run: docker compose exec -T elasticsearch bin/elasticsearch-users useradd superuser -p superuser -r superuser,kibana_admin,kibana_system

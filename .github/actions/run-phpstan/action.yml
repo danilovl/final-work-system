@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run phpstan
       shell: bash
-      run: docker-compose exec -T php composer phpstan
+      run: docker compose exec -T php composer phpstan

@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run web tests
       shell: bash
-      run: docker-compose exec -T php composer test-web
+      run: docker compose exec -T php composer test-web

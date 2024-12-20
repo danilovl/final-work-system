@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Stop containers
       shell: bash
-      run: docker-compose -f docker-compose.yml down
+      run: docker compose -f docker-compose.yml down

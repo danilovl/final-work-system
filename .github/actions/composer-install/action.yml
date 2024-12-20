@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Composer install
       shell: bash
-      run: docker-compose exec -T php sh bin/composer-first-install.sh
+      run: docker compose exec -T php sh bin/composer-first-install.sh

@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run kernel
       shell: bash
-      run: docker-compose exec -T php composer test-kernel
+      run: docker compose exec -T php composer test-kernel

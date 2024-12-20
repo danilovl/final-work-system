@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run psalm
       shell: bash
-      run: docker-compose exec -T node npm run cypress:run
+      run: docker compose exec -T node npm run cypress:run

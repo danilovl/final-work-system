@@ -8,4 +8,4 @@ runs:
       shell: bash
       run: |
         docker network create dockernet
-        GITHUB_ACTION_UUID=1001 docker-compose -f docker-compose.yml up -d
+        GITHUB_ACTION_UUID=1001 docker compose -f docker-compose.yml up -d

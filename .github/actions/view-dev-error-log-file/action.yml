@@ -7,4 +7,4 @@ runs:
     - name:  View dev.error.log file
       shell: bash
       run: |
-        docker-compose exec -T php cat var/log/dev.error.log || true
+        docker compose exec -T php cat var/log/dev.error.log || true

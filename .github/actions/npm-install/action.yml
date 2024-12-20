@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Npm install
       shell: bash
-      run: docker-compose exec -T node sh bin/npm-first-install.sh
+      run: docker compose exec -T node sh bin/npm-first-install.sh

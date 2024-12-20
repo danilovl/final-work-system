@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run unit
       shell: bash
-      run: docker-compose exec -T php composer test-unit
+      run: docker compose exec -T php composer test-unit

@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run psalm
       shell: bash
-      run: docker-compose exec -T php composer psalm
+      run: docker compose exec -T php composer psalm

@@ -6,8 +6,8 @@ runs:
   steps:
     - name: Check elastica api
       shell: bash
-      run: docker-compose exec -T php sh bin/check-docker.sh http://elasticsearch:9200
+      run: docker compose exec -T php sh bin/check-docker.sh http://elasticsearch:9200
 
     - name: Check apm-server api
       shell: bash
-      run: docker-compose exec -T php sh bin/check-docker.sh http://apm-server:8200
+      run: docker compose exec -T php sh bin/check-docker.sh http://apm-server:8200
