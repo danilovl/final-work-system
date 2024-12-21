@@ -67,7 +67,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
 
         $toUser = $event->getParticipantMust()->getUserMust();
 
-        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_edit',
             'to' => $toUser->getEmail(),
@@ -120,7 +120,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $locale ?? $this->locale,
             'subject' => 'subject.event_comment_create',
             'to' => $to,
@@ -153,7 +153,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $locale ?? $this->locale,
             'subject' => 'subject.event_comment_edit',
             'to' => $to,
@@ -173,7 +173,7 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getOwner();
 
-        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.event_reservation',
             'to' => $toUser->getEmail(),

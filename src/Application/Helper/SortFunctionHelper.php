@@ -13,9 +13,11 @@
 namespace App\Application\Helper;
 
 use App\Domain\EventParticipant\Entity\EventParticipant;
+use App\Domain\User\Entity\User;
 use Collator;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Yaml\Yaml;
+use Webmozart\Assert\Assert;
 
 class SortFunctionHelper
 {
@@ -25,9 +27,23 @@ class SortFunctionHelper
     {
         $collator = new Collator('cs_CZ.UTF-8');
 
-        usort($array, static function (mixed $first, mixed $second) use ($collator): int {
-            $f = (string) $first;
-            $s = (string) $second;
+        usort($array, static function (string $first, string $second) use ($collator): int {
+            return (int) $collator->compare($first, $second);
+        });
+    }
+
+    /**
+     * @param User[] $array
+     */
+    public static function usortCzechUserArray(array &$array): void
+    {
+        Assert::allIsInstanceOf($array, User::class);
+
+        $collator = new Collator('cs_CZ.UTF-8');
+
+        usort($array, static function (User $first, User $second) use ($collator): int {
+            $f = $first->getFullNameDegree();
+            $s = $second->getFullNameDegree();
 
             return (int) $collator->compare($f, $s);
         });

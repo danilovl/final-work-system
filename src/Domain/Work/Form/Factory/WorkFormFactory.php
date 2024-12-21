@@ -101,10 +101,10 @@ class WorkFormFactory
         $userConsultantArray = $this->workListService->getUserConsultants($user, $type)->toArray();
         $userSupervisorArray = $this->workListService->getUserSupervisors($user, $type)->toArray();
 
-        SortFunctionHelper::usortCzechArray($userAuthorArray);
-        SortFunctionHelper::usortCzechArray($userOpponentArray);
-        SortFunctionHelper::usortCzechArray($userConsultantArray);
-        SortFunctionHelper::usortCzechArray($userSupervisorArray);
+        SortFunctionHelper::usortCzechUserArray($userAuthorArray);
+        SortFunctionHelper::usortCzechUserArray($userOpponentArray);
+        SortFunctionHelper::usortCzechUserArray($userConsultantArray);
+        SortFunctionHelper::usortCzechUserArray($userSupervisorArray);
 
         $workDeadLines = $this->deadlineFacade
             ->getWorkDeadlinesBySupervisor($user)

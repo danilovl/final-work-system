@@ -217,7 +217,7 @@ class EventCalendarFacade
 
     /**
      * @param Event[] $userEvents
-     * @return array<string, mixed>
+     * @return array<int, array<string, mixed>>
      */
     public function convertUserEventsToArray(Event $event, array $userEvents): array
     {

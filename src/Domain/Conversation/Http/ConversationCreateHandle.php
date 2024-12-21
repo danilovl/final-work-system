@@ -67,8 +67,7 @@ readonly class ConversationCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->conversationFacade
-                ->processCreateConversation($user, $conversationModel);
+            $this->conversationFacade->processCreateConversation($user, $conversationModel);
 
             return $this->requestService->redirectToRoute('conversation_list');
         }
