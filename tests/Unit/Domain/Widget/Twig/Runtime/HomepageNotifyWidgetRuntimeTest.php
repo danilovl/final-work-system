@@ -10,9 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\Widget\Twig\Runtime;
+namespace Domain\Widget\Twig\Runtime;
 
-use App\Application\Widget\BaseWidget;
+use App\Domain\Widget\Twig\Runtime\HomepageNotifyWidgetRuntime;
+use App\Domain\Widget\WidgetItem\BaseWidget;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,7 +39,7 @@ class HomepageNotifyWidgetRuntimeTest extends TestCase
             ->method('getArray')
             ->willReturn(['homepage_notify']);
 
-        $homepageNotifyWidgetRuntime = new \App\Domain\Widget\Twig\Runtime\HomepageNotifyWidgetRuntime($container, $parameterServiceInterface);
+        $homepageNotifyWidgetRuntime = new HomepageNotifyWidgetRuntime($container, $parameterServiceInterface);
 
         $this->assertEquals('text widget text', $homepageNotifyWidgetRuntime->renderNotify());
     }
@@ -55,7 +56,7 @@ class HomepageNotifyWidgetRuntimeTest extends TestCase
             ->method('getArray')
             ->willReturn(['homepage_notify']);
 
-        $homepageNotifyWidgetRuntime = new \App\Domain\Widget\Twig\Runtime\HomepageNotifyWidgetRuntime($container, $parameterServiceInterface);
+        $homepageNotifyWidgetRuntime = new HomepageNotifyWidgetRuntime($container, $parameterServiceInterface);
 
 
         $this->assertNull($homepageNotifyWidgetRuntime->renderNotify());
