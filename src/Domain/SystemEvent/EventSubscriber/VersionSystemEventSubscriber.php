@@ -60,7 +60,6 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         $systemEvent->setType($systemEventType);
 
         $workUsers = $this->workService->getUsers($work, ...$users);
-        /** @var User $user */
         foreach ($workUsers as $user) {
             if ($user->getId() === $media->getOwner()->getId()) {
                 continue;

@@ -16,6 +16,7 @@ use App\Application\Repository\BaseQueryBuilder;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\Order;
+use Webmozart\Assert\Assert;
 
 class TaskQueryBuilder extends BaseQueryBuilder
 {
@@ -82,6 +83,8 @@ class TaskQueryBuilder extends BaseQueryBuilder
      */
     public function byWorks(array $works): self
     {
+        Assert::allIsInstanceOf($works, Work::class);
+
         $this->queryBuilder
             ->andWhere('work IN (:works)')
             ->setParameter('works', $works);
@@ -125,8 +128,13 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function byIds(array $ids): self
     {
+        Assert::allInteger($ids);
+
         $this->queryBuilder
             ->andWhere('task.id IN (:ids)')
             ->setParameter('ids', $ids);

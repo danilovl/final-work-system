@@ -19,6 +19,7 @@ use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Webmozart\Assert\Assert;
 
 class TaskRepository extends ServiceEntityRepository
 {
@@ -49,8 +50,13 @@ class TaskRepository extends ServiceEntityRepository
             ->getQueryBuilder();
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function getByIds(array $ids): QueryBuilder
     {
+        Assert::allInteger($ids);
+
         return $this->createTaskQueryBuilder()
             ->joinWork()
             ->byIds($ids)
@@ -126,8 +132,13 @@ class TaskRepository extends ServiceEntityRepository
             ->getQueryBuilder();
     }
 
+    /**
+     * @param Work[] $works
+     */
     public function allByWorks(array $works, bool $active = false): QueryBuilder
     {
+        Assert::allIsInstanceOf($works, Work::class);
+
         $queryBuilder = $this->createTaskQueryBuilder()
             ->selectWork()
             ->joinWork()

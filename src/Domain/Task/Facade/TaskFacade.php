@@ -15,7 +15,9 @@ namespace App\Domain\Task\Facade;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Repository\TaskRepository;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Entity\Work;
 use Doctrine\ORM\Query;
+use Webmozart\Assert\Assert;
 
 readonly class TaskFacade
 {
@@ -45,8 +47,13 @@ readonly class TaskFacade
             ->getQuery();
     }
 
+    /**
+     * @param int[] $ids
+     */
     public function queryByIds(array $ids): Query
     {
+        Assert::allInteger($ids);
+
         return $this->taskRepository
             ->getByIds($ids)
             ->getQuery();
@@ -82,8 +89,13 @@ readonly class TaskFacade
             ->getResult();
     }
 
+    /**
+     * @param Work[] $works
+     */
     public function queryTasksByWorks(array $works): Query
     {
+        Assert::allIsInstanceOf($works, Work::class);
+
         return $this->taskRepository
             ->allByWorks($works)
             ->getQuery();
