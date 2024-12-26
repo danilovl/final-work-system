@@ -48,6 +48,7 @@ use Symfony\Component\Security\Core\User\{
     LegacyPasswordAuthenticatedUserInterface,
     PasswordAuthenticatedUserInterface
 };
+use Webmozart\Assert\Assert;
 
 #[ORM\Table(name: 'user')]
 #[UniqueEntity(fields: ['email'])]
@@ -359,6 +360,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     public function setRoles(array $roles): self
     {
+        Assert::allString($roles);
+
         $this->roles = $roles;
 
         return $this;
