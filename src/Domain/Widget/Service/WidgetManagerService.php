@@ -13,6 +13,7 @@
 namespace App\Domain\Widget\Service;
 
 use App\Application\Exception\InvalidArgumentException;
+use Webmozart\Assert\Assert;
 use App\Domain\Widget\Interfaces\{
     WidgetManagerInterface};
 use App\Domain\Widget\Interfaces\WidgetInterface;
@@ -36,6 +37,8 @@ class WidgetManagerService implements WidgetManagerInterface
 
     public function addWidgetGroup(string $name, array $widgets): void
     {
+        Assert::allString($widgets);
+
         if (isset($this->widgetsGroup[$name])) {
             throw new InvalidArgumentException(sprintf('Widget group "%s" is already registered', $name));
         }
@@ -92,6 +95,8 @@ class WidgetManagerService implements WidgetManagerInterface
 
     public function replaceWidgetGroup(string $name, array $widgets): void
     {
+        Assert::allString($widgets);
+
         if (!isset($this->widgetsGroup[$name])) {
             throw new InvalidArgumentException(sprintf('Widget group "%s" is not exist', $name));
         }

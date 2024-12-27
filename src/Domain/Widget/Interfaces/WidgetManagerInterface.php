@@ -20,8 +20,14 @@ interface WidgetManagerInterface
 
     public function getWidget(string $name): WidgetInterface;
 
+    /**
+     * @param string[] $widgets
+     */
     public function addWidgetGroup(string $name, array $widgets): void;
 
+    /**
+     * @param string[] $widgets
+     */
     public function replaceWidgetGroup(string $name, array $widgets): void;
 
     public function hasWidgetGroup(string $name): bool;
