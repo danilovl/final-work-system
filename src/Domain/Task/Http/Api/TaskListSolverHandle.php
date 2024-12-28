@@ -19,6 +19,7 @@ use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Facade\TaskFacade;
 use App\Domain\User\Service\UserService;
+use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\Request;
 
 readonly class TaskListSolverHandle
@@ -32,10 +33,11 @@ readonly class TaskListSolverHandle
     public function __invoke(Request $request): TaskListSolverOutput
     {
         $user = $this->userService->getUser();
-        $authorWorks = $user->getAuthorWorks();
+        $authorWorksCollection = $user->getAuthorWorks();
+        /** @var Work[] $authorWorks */
+        $authorWorks = $authorWorksCollection->toArray();
 
-        $tasksQuery = $this->taskFacade
-            ->queryTasksByWorks($authorWorks->toArray());
+        $tasksQuery = $this->taskFacade->queryTasksByWorks($authorWorks);
 
         $tasksQuery->setHydrationMode(Task::class);
 
