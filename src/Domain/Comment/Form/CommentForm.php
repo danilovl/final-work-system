@@ -28,6 +28,9 @@ class CommentForm extends AbstractType
 {
     final public const string NAME = 'comment';
 
+    /**
+     * @param array{user: User, event: Event} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('content', TextareaType::class, [
@@ -37,9 +40,7 @@ class CommentForm extends AbstractType
             ]
         ]);
 
-        /** @var User $user */
         $user = $options['user'];
-        /** @var Event $event */
         $event = $options['event'];
 
         $builder->addEventSubscriber(new EventCommentSubscriber($user, $event));
