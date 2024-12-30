@@ -35,9 +35,11 @@ class ConversationComposeMessageForm extends AbstractType
 
     public function __construct(private readonly TranslatorInterface $translator) {}
 
+    /**
+     * @param array{user: User, conversations: Conversation[]} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var User $user */
         $user = $options['user'];
 
         $builder

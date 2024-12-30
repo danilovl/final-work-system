@@ -26,6 +26,9 @@ class ConversationMessageForm extends AbstractType
 {
     final public const string NAME = 'conversation_message';
 
+    /**
+     * @param array{user: User} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var User $user */
