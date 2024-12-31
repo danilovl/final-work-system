@@ -12,6 +12,8 @@
 
 namespace App\Domain\Document\Form;
 
+use App\Domain\MediaCategory\Entity\MediaCategory;
+use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
@@ -24,6 +26,9 @@ class DocumentSearchForm extends AbstractType
 {
     final public const string NAME = 'document_search';
 
+    /**
+     * @param array{categories: MediaCategory[], mimeType: MediaMimeType[]} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

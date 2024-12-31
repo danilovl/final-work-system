@@ -16,6 +16,7 @@ use App\Application\Form\Type\MediaFileType;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Form\DataGrid\MediaCategoryDataGrid;
+use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,9 +36,11 @@ class DocumentForm extends AbstractType
 
     public function __construct(private readonly MediaCategoryDataGrid $categoryDataGridHelper) {}
 
+    /**
+     * @param array{user: User, mimeTypes: MediaMimeType[], uploadMedia: bool} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var User $user */
         $user = $options['user'];
 
         $builder
