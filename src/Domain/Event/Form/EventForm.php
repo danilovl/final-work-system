@@ -36,6 +36,9 @@ class EventForm extends AbstractType
 {
     final public const string NAME = 'event';
 
+    /**
+     * @param array{addresses: EventAddress[], participants: EventParticipant[]} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $participants = $options['participants'];
