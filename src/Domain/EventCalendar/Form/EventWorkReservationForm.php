@@ -26,6 +26,9 @@ class EventWorkReservationForm extends AbstractType
 {
     final public const string NAME = 'event_participant';
 
+    /**
+     * @param array{works: Work[]} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('work', ChoiceType::class, [
