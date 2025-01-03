@@ -12,6 +12,7 @@
 
 namespace App\Domain\EventSchedule\Form;
 
+use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\EventScheduleTemplate\Form\EventScheduleTemplateForm;
 use Symfony\Component\Form\AbstractType;
@@ -28,6 +29,9 @@ class EventScheduleForm extends AbstractType
 {
     final public const string NAME = 'event_schedule';
 
+    /**
+     * @param array{addresses: EventAddress[]} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
