@@ -14,6 +14,7 @@ namespace App\Domain\Version\Form;
 
 use App\Application\Form\Type\MediaFileType;
 use App\Domain\Media\Model\MediaModel;
+use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextareaType,
@@ -27,6 +28,9 @@ class VersionForm extends AbstractType
 {
     final public const string NAME = 'version';
 
+    /**
+     * @param array{mimeTypes: MediaMimeType[], uploadMedia: bool} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
