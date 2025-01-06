@@ -31,6 +31,16 @@ class WorkSearchForm extends AbstractType
 {
     final public const string NAME = 'work_search';
 
+    /**
+     * @param array{
+     *      type: string,
+     *      authors: User[],
+     *      supervisors: User[],
+     *      opponents: User[],
+     *      consultants: User[],
+     *      deadlines: DateTime[]
+     * } $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $type = $options['type'];

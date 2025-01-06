@@ -46,9 +46,11 @@ class WorkForm extends AbstractType
         private readonly UserDataGrid $userDataGridHelper
     ) {}
 
+    /**
+     * @param array{user: User} $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var User $user */
         $user = $options['user'];
 
         $builder
