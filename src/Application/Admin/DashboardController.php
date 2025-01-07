@@ -23,12 +23,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\{
 };
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Override;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(public readonly AdminUrlGenerator $adminUrlGenerator) {}
 
+    #[Override]
     public function index(): Response
     {
         $url = $this->adminUrlGenerator
@@ -38,11 +40,13 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($url);
     }
 
+    #[Override]
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()->setTitle('Final Work System');
     }
 
+    #[Override]
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
