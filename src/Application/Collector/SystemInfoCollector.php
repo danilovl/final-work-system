@@ -12,6 +12,7 @@
 
 namespace App\Application\Collector;
 
+use Override;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -25,6 +26,7 @@ class SystemInfoCollector extends DataCollector
 
     public function __construct(private readonly array $systemInfo) {}
 
+    #[Override]
     public function collect(
         Request $request,
         Response $response,
@@ -35,11 +37,13 @@ class SystemInfoCollector extends DataCollector
         ];
     }
 
+    #[Override]
     public function reset(): void
     {
         $this->data = [];
     }
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME_COLLECTOR;
