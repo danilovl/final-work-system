@@ -14,6 +14,7 @@ namespace App\Application\Command;
 
 use App\Application\Exception\InvalidArgumentException;
 use App\Application\Service\EntityManagerService;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
@@ -32,11 +33,13 @@ class ImportSqlCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->addArgument('file', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'File path(s) of SQL to be executed.');
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $connection = $this->entityManagerService->getConnection();
