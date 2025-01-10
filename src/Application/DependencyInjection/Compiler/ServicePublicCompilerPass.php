@@ -12,6 +12,7 @@
 
 namespace App\Application\DependencyInjection\Compiler;
 
+use Override;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,6 +29,7 @@ class ServicePublicCompilerPass implements CompilerPassInterface
         Security::class
     ];
 
+    #[Override]
     public function process(ContainerBuilder $container): void
     {
         foreach (self::SERVICES as $service) {

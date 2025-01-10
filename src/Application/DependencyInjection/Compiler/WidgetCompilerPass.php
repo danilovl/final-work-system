@@ -13,11 +13,13 @@
 namespace App\Application\DependencyInjection\Compiler;
 
 use App\Domain\Widget\Service\WidgetManagerService;
+use Override;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class WidgetCompilerPass implements CompilerPassInterface
 {
+    #[Override]
     public function process(ContainerBuilder $container): void
     {
         $widgetManager = $container->getDefinition(WidgetManagerService::class);
