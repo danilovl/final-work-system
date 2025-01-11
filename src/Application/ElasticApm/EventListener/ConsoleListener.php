@@ -13,6 +13,7 @@
 namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
+use Override;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\{
     ConsoleErrorEvent,
@@ -23,6 +24,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 readonly class ConsoleListener implements EventSubscriberInterface
 {
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

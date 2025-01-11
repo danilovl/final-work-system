@@ -13,6 +13,7 @@
 namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -24,6 +25,7 @@ readonly class ExceptionListener implements EventSubscriberInterface
         ElasticApmHelper::createErrorFromThrowable($exceptionEvent->getThrowable());
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

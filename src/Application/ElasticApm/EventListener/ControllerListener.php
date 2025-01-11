@@ -17,6 +17,7 @@ use App\Application\ElasticApm\{
     SpanNameEnum,
     SpanTypeEnum
 };
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -36,6 +37,7 @@ readonly class ControllerListener implements EventSubscriberInterface
         );
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

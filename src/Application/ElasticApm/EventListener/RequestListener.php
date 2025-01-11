@@ -14,6 +14,7 @@ namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
 use Elastic\Apm\ElasticApm;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -42,6 +43,7 @@ readonly class RequestListener implements EventSubscriberInterface
         }
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
