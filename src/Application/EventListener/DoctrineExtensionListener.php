@@ -13,6 +13,7 @@
 namespace App\Application\EventListener;
 
 use App\Domain\User\Service\UserService;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -33,6 +34,7 @@ readonly class DoctrineExtensionListener implements EventSubscriberInterface
         $this->loggableListener->setUsername($user->getUsername());
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

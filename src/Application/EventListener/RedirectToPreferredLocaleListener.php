@@ -13,6 +13,7 @@
 namespace App\Application\EventListener;
 
 use App\Domain\User\Service\UserService;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -46,6 +47,7 @@ class RedirectToPreferredLocaleListener implements EventSubscriberInterface
         $this->locales = array_unique($this->locales);
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

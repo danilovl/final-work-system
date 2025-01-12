@@ -12,6 +12,7 @@
 
 namespace App\Application\EventListener;
 
+use Override;
 use App\Application\Service\{
     SeoPageService,
     EntityManagerService
@@ -63,6 +64,7 @@ readonly class RequestListener implements EventSubscriberInterface
         $this->seoPageService->setTitle($seo['title'] ?? null);
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

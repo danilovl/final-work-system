@@ -22,6 +22,7 @@ use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Loggable\LogEntryInterface;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
+use Override;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class LoggableListener extends \Gedmo\Loggable\LoggableListener
@@ -34,8 +35,10 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
         parent::__construct();
     }
 
+    #[Override]
     public function postPersist(EventArgs $args): void {}
 
+    #[Override]
     protected function createLogEntry($action, $object, LoggableAdapter $ea): ?AbstractLogEntry
     {
         $isEnable = $this->parameterService->getBoolean('loggable.enable');
