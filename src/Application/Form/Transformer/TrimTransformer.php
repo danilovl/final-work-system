@@ -12,10 +12,12 @@
 
 namespace App\Application\Form\Transformer;
 
+use Override;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class TrimTransformer implements DataTransformerInterface
 {
+    #[Override]
     public function transform(mixed $value): mixed
     {
         if (!is_string($value)) {
@@ -25,6 +27,7 @@ class TrimTransformer implements DataTransformerInterface
         return trim($value);
     }
 
+    #[Override]
     public function reverseTransform(mixed $value): mixed
     {
         return $value;

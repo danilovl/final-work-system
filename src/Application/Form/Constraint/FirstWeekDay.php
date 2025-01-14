@@ -12,12 +12,14 @@
 
 namespace App\Application\Form\Constraint;
 
+use Override;
 use Symfony\Component\Validator\Constraint;
 
 class FirstWeekDay extends Constraint
 {
     public string $message = 'It is not first day of the week';
 
+    #[Override]
     public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;

@@ -14,6 +14,7 @@ namespace App\Application\Form;
 
 use App\Application\Form\Transformer\TrimTransformer;
 use App\Application\Model\SearchModel;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,6 +26,7 @@ class SimpleSearchForm extends AbstractType
 {
     final public const string NAME = 'simple_search';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('search', TextType::class, [
@@ -37,6 +39,7 @@ class SimpleSearchForm extends AbstractType
         $builder->get('search')->addViewTransformer(new TrimTransformer);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -46,6 +49,7 @@ class SimpleSearchForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

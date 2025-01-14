@@ -13,15 +13,18 @@
 namespace App\Application\Form\Transformer;
 
 use App\Application\Exception\RuntimeException;
+use Override;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class CommaDotTransformer implements DataTransformerInterface
 {
+    #[Override]
     public function transform(mixed $value): string
     {
         return $this->replace($value);
     }
 
+    #[Override]
     public function reverseTransform(mixed $value): string
     {
         return $this->replace($value);

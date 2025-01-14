@@ -12,6 +12,7 @@
 
 namespace App\Application\Form\Type;
 
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +27,7 @@ final class LocaleType extends AbstractType
         $this->locales = explode('|', $locales);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -43,11 +45,13 @@ final class LocaleType extends AbstractType
         return $choices;
     }
 
+    #[Override]
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

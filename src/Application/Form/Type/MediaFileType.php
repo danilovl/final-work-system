@@ -12,6 +12,7 @@
 
 namespace App\Application\Form\Type;
 
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\{
@@ -27,6 +28,7 @@ final class MediaFileType extends AbstractType
 {
     final public const string NAME = 'media_file_type';
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -69,11 +71,13 @@ final class MediaFileType extends AbstractType
         return $options['uploadMedia'];
     }
 
+    #[Override]
     public function getParent(): string
     {
         return FileType::class;
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

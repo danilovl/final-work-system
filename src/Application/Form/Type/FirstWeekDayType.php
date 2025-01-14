@@ -14,6 +14,7 @@ namespace App\Application\Form\Type;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Form\Constraint\FirstWeekDay;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\{
@@ -25,6 +26,7 @@ final class FirstWeekDayType extends AbstractType
 {
     final public const string NAME = 'first_week_day_type';
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -41,11 +43,13 @@ final class FirstWeekDayType extends AbstractType
         $resolver->setNormalizer('constraints', static fn(Options $options, $value): array => array_merge($value, [new FirstWeekDay]));
     }
 
+    #[Override]
     public function getParent(): string
     {
         return DateType::class;
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

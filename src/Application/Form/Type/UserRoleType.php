@@ -13,6 +13,7 @@
 namespace App\Application\Form\Type;
 
 use App\Domain\User\Constant\UserRoleConstant;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +22,7 @@ final class UserRoleType extends AbstractType
 {
     final public const string NAME = 'user_role_type';
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -32,11 +34,13 @@ final class UserRoleType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
