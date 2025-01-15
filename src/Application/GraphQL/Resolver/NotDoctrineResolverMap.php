@@ -13,9 +13,11 @@
 namespace App\Application\GraphQL\Resolver;
 
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
+use Override;
 
 class NotDoctrineResolverMap extends ResolverMap
 {
+    #[Override]
     protected function map(): array
     {
         return [

@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 /**
  *
  * This file is part of the FinalWorkSystem project.
@@ -18,6 +19,7 @@ use GraphQL\Error\InvariantViolation;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
+use Override;
 
 class DateTimeType extends ScalarType
 {
@@ -29,6 +31,7 @@ class DateTimeType extends ScalarType
         $this->description = 'The `DateTime` scalar type represents time data';
     }
 
+    #[Override]
     public function serialize($value): string
     {
         if (!$value instanceof DateTimeInterface) {
@@ -41,11 +44,13 @@ class DateTimeType extends ScalarType
     /**
      * @param string $value
      */
+    #[Override]
     public function parseValue($value): ?DateTimeInterface
     {
         return DateTimeImmutable::createFromFormat(DateFormatConstant::DATABASE->value, $value) ?: null;
     }
 
+    #[Override]
     public function parseLiteral($valueNode, ?array $variables = null): ?string
     {
         if ($valueNode instanceof StringValueNode) {
