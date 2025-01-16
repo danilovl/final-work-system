@@ -16,6 +16,7 @@ use Doctrine\Common\Cache\{
     Cache,
     CacheProvider
 };
+use Override;
 use Redis;
 
 class RedisCache extends CacheProvider
@@ -33,11 +34,13 @@ class RedisCache extends CacheProvider
         return $this->redis;
     }
 
+    #[Override]
     protected function doFetch($id): mixed
     {
         return $this->redis->get($id);
     }
 
+    #[Override]
     protected function doFetchMultiple(array $keys): array
     {
         $fetchedItems = array_combine($keys, $this->redis->mget($keys));
@@ -61,6 +64,7 @@ class RedisCache extends CacheProvider
     /**
      * @param array<string, string> $keysAndValues
      */
+    #[Override]
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0): bool
     {
         if ($lifetime) {
@@ -77,6 +81,7 @@ class RedisCache extends CacheProvider
         return $this->redis->mset($keysAndValues);
     }
 
+    #[Override]
     protected function doContains($id): bool
     {
         /** @var int|bool $exists */
@@ -89,6 +94,7 @@ class RedisCache extends CacheProvider
         return $exists;
     }
 
+    #[Override]
     protected function doSave($id, $data, $lifeTime = 0): bool
     {
         if ($lifeTime > 0) {
@@ -98,21 +104,25 @@ class RedisCache extends CacheProvider
         return $this->redis->set($id, $data);
     }
 
+    #[Override]
     protected function doDelete($id): bool
     {
         return $this->redis->del($id) >= 0;
     }
 
+    #[Override]
     protected function doDeleteMultiple(array $keys): bool
     {
         return $this->redis->del($keys) >= 0;
     }
 
+    #[Override]
     protected function doFlush(): bool
     {
         return $this->redis->flushDB();
     }
 
+    #[Override]
     protected function doGetStats(): array
     {
         $info = $this->redis->info();
