@@ -16,6 +16,7 @@ use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
+use Override;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -53,6 +54,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         private readonly EntityManagerService $entityManagerService
     ) {}
 
+    #[Override]
     public function supports(Request $request): bool
     {
         return $request->attributes->get('_route') === 'security_login' &&
@@ -91,6 +93,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         };
     }
 
+    #[Override]
     public function authenticate(Request $request): Passport
     {
         $credentials = $this->getCredentials($request);
@@ -102,6 +105,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         return new Passport($userBadge, $passwordCredentials, $badges);
     }
 
+    #[Override]
     public function onAuthenticationSuccess(
         Request $request,
         TokenInterface $token,
@@ -119,6 +123,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         return new RedirectResponse($this->urlGenerator->generate('homepage'));
     }
 
+    #[Override]
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         $request->getSession()->set(SecurityRequestAttributes::AUTHENTICATION_ERROR, $exception);
@@ -127,6 +132,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         return $this->httpUtils->createRedirectResponse($request, $loginUrl);
     }
 
+    #[Override]
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         $loginUrl = $this->urlGenerator->generate('security_login');

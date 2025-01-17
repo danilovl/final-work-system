@@ -14,6 +14,7 @@ namespace App\Application\Security\Provider;
 
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
+use Override;
 use Symfony\Component\Security\Core\Exception\{
     UnsupportedUserException,
     UserNotFoundException
@@ -27,6 +28,7 @@ readonly class ApiKeyUserProvider implements UserProviderInterface
 {
     public function __construct(private ApiUserFacade $apiUserFacade) {}
 
+    #[Override]
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
         return $this->loadUserByUsername($identifier);
@@ -39,11 +41,13 @@ readonly class ApiKeyUserProvider implements UserProviderInterface
         return $user ?? throw new UserNotFoundException;
     }
 
+    #[Override]
     public function refreshUser(UserInterface $user): UserInterface
     {
         throw new UnsupportedUserException;
     }
 
+    #[Override]
     public function supportsClass(string $class): bool
     {
         return ApiUser::class === $class;

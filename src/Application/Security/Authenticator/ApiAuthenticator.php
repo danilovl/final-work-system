@@ -20,6 +20,7 @@ use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
+use Override;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response,
@@ -47,6 +48,7 @@ class ApiAuthenticator extends AbstractAuthenticator
         private readonly EntityManagerService $entityManagerService
     ) {}
 
+    #[Override]
     public function supports(Request $request): bool
     {
         $authKey = $request->headers->get(self::AUTH_KEY);
@@ -78,6 +80,7 @@ class ApiAuthenticator extends AbstractAuthenticator
         );
     }
 
+    #[Override]
     public function authenticate(Request $request): Passport
     {
         $apiKeyCredential = $this->getCredentials($request);
@@ -112,6 +115,7 @@ class ApiAuthenticator extends AbstractAuthenticator
         };
     }
 
+    #[Override]
     public function onAuthenticationSuccess(
         Request $request,
         TokenInterface $token,
@@ -128,6 +132,7 @@ class ApiAuthenticator extends AbstractAuthenticator
         return null;
     }
 
+    #[Override]
     public function onAuthenticationFailure(
         Request $request,
         AuthenticationException $exception

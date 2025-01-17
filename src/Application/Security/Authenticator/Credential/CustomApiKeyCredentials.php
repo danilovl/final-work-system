@@ -12,10 +12,12 @@
 
 namespace App\Application\Security\Authenticator\Credential;
 
+use Override;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CredentialsInterface;
 
 class CustomApiKeyCredentials implements CredentialsInterface
 {
+    #[Override]
     public function isResolved(): bool
     {
         return true;

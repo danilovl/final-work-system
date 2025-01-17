@@ -15,6 +15,7 @@ namespace App\Application\Security\Provider;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
+use Override;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\{
     UserInterface,
@@ -33,6 +34,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
     /**
      * @param User $user
      */
+    #[Override]
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         $user->setPassword($newHashedPassword);
@@ -41,6 +43,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         $this->entityManagerService->flush();
     }
 
+    #[Override]
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
         return $this->loadUserByUsername($identifier);
@@ -53,6 +56,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         return $user ?? throw new UserNotFoundException;
     }
 
+    #[Override]
     public function refreshUser(UserInterface $user): UserInterface
     {
         $user = $this->userFacade->findOneByUsername($user->getUserIdentifier());
@@ -60,6 +64,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
         return $user ?? throw new UserNotFoundException;
     }
 
+    #[Override]
     public function supportsClass(string $class): bool
     {
         return User::class === $class;
