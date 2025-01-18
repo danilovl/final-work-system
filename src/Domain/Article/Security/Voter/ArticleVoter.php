@@ -17,6 +17,7 @@ use App\Application\Helper\FunctionHelper;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Domain\User\Entity\User;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -26,6 +27,7 @@ class ArticleVoter extends Voter
         VoterSupportConstant::VIEW->value
     ];
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -39,6 +41,7 @@ class ArticleVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
