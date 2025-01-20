@@ -20,6 +20,7 @@ use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
 };
+use Override;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -31,6 +32,7 @@ class CommentForm extends AbstractType
     /**
      * @param array{user: User, event: Event} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('content', TextareaType::class, [
@@ -46,6 +48,7 @@ class CommentForm extends AbstractType
         $builder->addEventSubscriber(new EventCommentSubscriber($user, $event));
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -60,6 +63,7 @@ class CommentForm extends AbstractType
             ->setAllowedTypes('event', Event::class);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

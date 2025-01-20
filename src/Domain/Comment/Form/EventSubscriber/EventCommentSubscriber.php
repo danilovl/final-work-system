@@ -15,6 +15,7 @@ namespace App\Domain\Comment\Form\EventSubscriber;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 use DateTime;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\{
     FormEvent,
@@ -28,6 +29,7 @@ readonly class EventCommentSubscriber implements EventSubscriberInterface
         private Event $event
     ) {}
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
