@@ -18,6 +18,7 @@ use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGene
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
 use Danilovl\HashidsBundle\Service\HashidsService;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\{
     HubInterface,
@@ -33,6 +34,7 @@ readonly class MercureSubscriber implements EventSubscriberInterface
         private HubInterface $hub
     ) {}
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

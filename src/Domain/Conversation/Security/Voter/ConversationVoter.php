@@ -17,6 +17,7 @@ use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\User\Entity\User;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -29,6 +30,7 @@ class ConversationVoter extends Voter
 
     public function __construct(private readonly ConversationService $conversationService) {}
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -42,6 +44,7 @@ class ConversationVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
