@@ -18,6 +18,7 @@ use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
 };
+use Override;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -29,6 +30,7 @@ class ConversationMessageForm extends AbstractType
     /**
      * @param array{user: User} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var User $user */
@@ -43,6 +45,7 @@ class ConversationMessageForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -55,6 +58,7 @@ class ConversationMessageForm extends AbstractType
             ->setAllowedTypes('user', User::class);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

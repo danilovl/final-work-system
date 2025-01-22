@@ -17,11 +17,13 @@ use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
 };
+use Override;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class ConversationMessageNameValidator extends ConstraintValidator
 {
+    #[Override]
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof ConversationMessageName) {

@@ -18,6 +18,7 @@ use App\Domain\ConversationMessage\Form\Constraint\ConversationMessageName;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
@@ -38,6 +39,7 @@ class ConversationComposeMessageForm extends AbstractType
     /**
      * @param array{user: User, conversations: Conversation[]} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $options['user'];
@@ -71,6 +73,7 @@ class ConversationComposeMessageForm extends AbstractType
         }
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -85,6 +88,7 @@ class ConversationComposeMessageForm extends AbstractType
             ->setAllowedTypes('conversations', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

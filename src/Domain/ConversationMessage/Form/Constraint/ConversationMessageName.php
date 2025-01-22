@@ -12,10 +12,12 @@
 
 namespace App\Domain\ConversationMessage\Form\Constraint;
 
+use Override;
 use Symfony\Component\Validator\Constraint;
 
 class ConversationMessageName extends Constraint
 {
+    #[Override]
     public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;
