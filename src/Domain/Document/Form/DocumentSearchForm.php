@@ -14,6 +14,7 @@ namespace App\Domain\Document\Form;
 
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
@@ -29,6 +30,7 @@ class DocumentSearchForm extends AbstractType
     /**
      * @param array{categories: MediaCategory[], mimeType: MediaMimeType[]} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -49,6 +51,7 @@ class DocumentSearchForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -60,6 +63,7 @@ class DocumentSearchForm extends AbstractType
             ->setAllowedTypes('mimeType', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

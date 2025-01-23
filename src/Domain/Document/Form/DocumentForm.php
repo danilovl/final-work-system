@@ -19,6 +19,7 @@ use App\Domain\MediaCategory\Form\DataGrid\MediaCategoryDataGrid;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\QueryBuilder;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
@@ -39,6 +40,7 @@ class DocumentForm extends AbstractType
     /**
      * @param array{user: User, mimeTypes: MediaMimeType[], uploadMedia: bool} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $options['user'];
@@ -71,6 +73,7 @@ class DocumentForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -87,6 +90,7 @@ class DocumentForm extends AbstractType
             ->setAllowedTypes('mimeTypes', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
