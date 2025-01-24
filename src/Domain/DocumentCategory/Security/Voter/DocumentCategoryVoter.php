@@ -16,6 +16,7 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\User\Entity\User;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -26,6 +27,7 @@ class DocumentCategoryVoter extends Voter
         VoterSupportConstant::DELETE->value
     ];
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -39,6 +41,7 @@ class DocumentCategoryVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
