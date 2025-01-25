@@ -15,10 +15,12 @@ namespace App\Domain\EmailNotification\EventSubscriber;
 use App\Application\EventSubscriber\Events;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

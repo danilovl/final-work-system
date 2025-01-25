@@ -18,10 +18,12 @@ use App\Domain\Event\EventDispatcher\GenericEvent\{
     EventGenericEvent,
     EventCommentGenericEvent
 };
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

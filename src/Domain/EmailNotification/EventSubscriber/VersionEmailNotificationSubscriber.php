@@ -13,6 +13,8 @@
 namespace App\Domain\EmailNotification\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
+use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
+use Override;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -46,6 +48,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         );
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
@@ -68,7 +71,7 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
                 continue;
             }
 
-            $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
                 'locale' => $user->getLocale() ?? $this->locale,
                 'subject' => $subject,
                 'to' => $user->getEmail(),

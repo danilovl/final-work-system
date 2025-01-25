@@ -15,10 +15,12 @@ namespace App\Domain\EmailNotification\EventSubscriber;
 use App\Application\EventSubscriber\Events;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber implements EventSubscriberInterface
 {
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
@@ -102,7 +104,7 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $work = $event->work;
         $toUser = $work->getAuthor();
 
-        $emailNotificationToQueueData = \App\Domain\EmailNotification\Messenger\EmailNotificationMessage::createFromArray([
+        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
             'locale' => $toUser->getLocale() ?? $this->locale,
             'subject' => 'subject.work_reminder_deadline',
             'to' => $toUser->getEmail(),

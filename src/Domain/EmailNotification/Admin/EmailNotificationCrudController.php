@@ -24,14 +24,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{
     TextEditorField,
     TextField
 };
+use Override;
 
 class EmailNotificationCrudController extends AbstractCrudController
 {
+    #[Override]
     public static function getEntityFqcn(): string
     {
         return EmailNotification::class;
     }
 
+    #[Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -40,6 +43,7 @@ class EmailNotificationCrudController extends AbstractCrudController
             ->setDefaultSort(['sendedAt' => Order::Descending->value]);
     }
 
+    #[Override]
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addPanel('Information');
