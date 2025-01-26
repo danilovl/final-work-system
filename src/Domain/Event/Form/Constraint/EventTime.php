@@ -12,10 +12,12 @@
 
 namespace App\Domain\Event\Form\Constraint;
 
+use Override;
 use Symfony\Component\Validator\Constraint;
 
 class EventTime extends Constraint
 {
+    #[Override]
     public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;

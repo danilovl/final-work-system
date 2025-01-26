@@ -21,6 +21,7 @@ use App\Domain\Event\Model\EventModel;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
@@ -39,6 +40,7 @@ class EventForm extends AbstractType
     /**
      * @param array{addresses: EventAddress[], participants: EventParticipant[]} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $participants = $options['participants'];
@@ -87,6 +89,7 @@ class EventForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -105,6 +108,7 @@ class EventForm extends AbstractType
             ->setAllowedTypes('participants', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

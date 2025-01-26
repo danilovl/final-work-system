@@ -23,10 +23,12 @@ use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
 };
+use Override;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EventTimeValidator extends ConstraintValidator
 {
+    #[Override]
     public function validate(mixed $value, Constraint $constraint): void
     {
         if ($value === null) {

@@ -20,6 +20,7 @@ use App\Application\Helper\DateHelper;
 use App\Domain\Event\Entity\Event;
 use App\Domain\User\Entity\User;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -33,6 +34,7 @@ class EventVoter extends Voter
         VoterSupportConstant::SWITCH_TO_SKYPE->value
     ];
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -46,6 +48,7 @@ class EventVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
