@@ -14,6 +14,7 @@ namespace App\Domain\EventAddress\Form;
 
 use App\Application\Form\Transformer\CommaDotTransformer;
 use App\Domain\EventAddress\Model\EventAddressModel;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     CheckboxType,
@@ -28,6 +29,7 @@ class EventAddressForm extends AbstractType
 {
     final public const string NAME = 'event_address';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -57,6 +59,7 @@ class EventAddressForm extends AbstractType
         $builder->get('longitude')->addViewTransformer(new CommaDotTransformer);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -64,6 +67,7 @@ class EventAddressForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
