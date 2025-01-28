@@ -18,6 +18,7 @@ use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
 };
+use Override;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -29,6 +30,7 @@ class EventWorkReservationForm extends AbstractType
     /**
      * @param array{works: Work[]} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('work', ChoiceType::class, [
@@ -41,6 +43,7 @@ class EventWorkReservationForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -54,6 +57,7 @@ class EventWorkReservationForm extends AbstractType
             ->setAllowedTypes('works', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
