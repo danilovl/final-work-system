@@ -16,6 +16,7 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\User\Entity\User;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -28,6 +29,7 @@ class EventScheduleVoter extends Voter
         VoterSupportConstant::DELETE->value
     ];
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -41,6 +43,7 @@ class EventScheduleVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();

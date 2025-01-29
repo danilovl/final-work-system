@@ -15,6 +15,7 @@ namespace App\Domain\EventSchedule\Form;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\EventScheduleTemplate\Form\EventScheduleTemplateForm;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
@@ -32,6 +33,7 @@ class EventScheduleForm extends AbstractType
     /**
      * @param array{addresses: EventAddress[]} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -62,6 +64,7 @@ class EventScheduleForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -74,6 +77,7 @@ class EventScheduleForm extends AbstractType
             ->setAllowedTypes('addresses', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
