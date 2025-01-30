@@ -12,10 +12,12 @@
 
 namespace App\Domain\EventScheduleTemplate\Form\Constraint;
 
+use Override;
 use Symfony\Component\Validator\Constraint;
 
 class EventScheduleTemplateTime extends Constraint
 {
+    #[Override]
     public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;
