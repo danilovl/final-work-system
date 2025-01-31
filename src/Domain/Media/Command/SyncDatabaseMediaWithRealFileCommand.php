@@ -21,6 +21,7 @@ use App\Domain\Media\Facade\{
 };
 use App\Domain\MediaType\Entity\MediaType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -45,17 +46,20 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->setName(self::COMMAND_NAME)
             ->setDescription('Sync database media with real file');
     }
 
+    #[Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->syncMediaTypeFolder($output);

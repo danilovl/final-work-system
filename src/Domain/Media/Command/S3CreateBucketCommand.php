@@ -14,6 +14,7 @@ namespace App\Domain\Media\Command;
 
 use App\Application\Service\S3ClientService;
 use App\Domain\Media\Facade\MediaTypeFacade;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,6 +30,7 @@ class S3CreateBucketCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $mediaTypes = $this->mediaTypeFacade->findAll();
