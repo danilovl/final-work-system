@@ -13,6 +13,7 @@
 namespace App\Domain\MediaCategory\Form;
 
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextareaType,
@@ -26,6 +27,7 @@ class MediaCategoryForm extends AbstractType
 {
     final public const string NAME = 'media_category';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -40,6 +42,7 @@ class MediaCategoryForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -47,6 +50,7 @@ class MediaCategoryForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
