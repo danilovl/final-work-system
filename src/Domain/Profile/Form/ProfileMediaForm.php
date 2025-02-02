@@ -14,6 +14,7 @@ namespace App\Domain\Profile\Form;
 
 use App\Domain\Media\Model\MediaModel;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,6 +31,7 @@ class ProfileMediaForm extends AbstractType
 
     public function __construct(private readonly ParameterServiceInterface $parameterService) {}
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('uploadMedia', FileType::class, [
@@ -42,6 +44,7 @@ class ProfileMediaForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -49,6 +52,7 @@ class ProfileMediaForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

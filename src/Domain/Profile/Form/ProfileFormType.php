@@ -14,6 +14,7 @@ namespace App\Domain\Profile\Form;
 
 use App\Application\Form\Type\LocaleType;
 use App\Domain\User\Model\UserModel;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
@@ -29,6 +30,7 @@ class ProfileFormType extends AbstractType
 {
     final public const string NAME = 'app_user_profile';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -84,6 +86,7 @@ class ProfileFormType extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -91,6 +94,7 @@ class ProfileFormType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
