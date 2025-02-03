@@ -12,6 +12,7 @@
 namespace App\Domain\ResetPassword\Form;
 
 use App\Domain\User\Model\UserModel;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     PasswordType,
@@ -26,6 +27,7 @@ class ProfileChangePasswordFormType extends AbstractType
 {
     final public const string NAME = 'profile_change_password';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -45,6 +47,7 @@ class ProfileChangePasswordFormType extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -58,6 +61,7 @@ class ProfileChangePasswordFormType extends AbstractType
         return $this->getBlockPrefix();
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

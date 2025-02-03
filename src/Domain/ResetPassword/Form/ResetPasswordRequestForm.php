@@ -12,6 +12,7 @@
 
 namespace App\Domain\ResetPassword\Form;
 
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ResetPasswordRequestForm extends AbstractType
 {
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('email', EmailType::class, [
@@ -31,6 +33,7 @@ class ResetPasswordRequestForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([]);
