@@ -18,10 +18,12 @@ use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
 {
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

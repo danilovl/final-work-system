@@ -22,6 +22,7 @@ use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
@@ -33,6 +34,7 @@ class DocumentSystemEventSubscriber extends BaseSystemEventSubscriber implements
         parent::__construct($entityManagerService);
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

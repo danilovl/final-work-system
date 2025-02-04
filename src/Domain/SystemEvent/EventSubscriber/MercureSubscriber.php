@@ -17,6 +17,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;
 use Danilovl\HashidsBundle\Service\HashidsService;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\{
     HubInterface,
@@ -30,6 +31,7 @@ readonly class MercureSubscriber implements EventSubscriberInterface
         private HubInterface $hub
     ) {}
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

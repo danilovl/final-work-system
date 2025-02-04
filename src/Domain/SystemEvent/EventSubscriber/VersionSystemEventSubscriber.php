@@ -21,6 +21,7 @@ use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\User\Entity\User;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Work\Service\WorkService;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
@@ -32,6 +33,7 @@ class VersionSystemEventSubscriber extends BaseSystemEventSubscriber implements 
         parent::__construct($entityManagerService);
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [

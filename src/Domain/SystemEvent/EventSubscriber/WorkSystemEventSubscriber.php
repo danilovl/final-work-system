@@ -20,6 +20,7 @@ use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;
 use App\Domain\SystemEventType\Entity\SystemEventType;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\Domain\Work\Service\WorkService;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements EventSubscriberInterface
@@ -31,6 +32,7 @@ class WorkSystemEventSubscriber extends BaseSystemEventSubscriber implements Eve
         parent::__construct($entityManagerService);
     }
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
