@@ -17,6 +17,7 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Helper\WorkRoleHelper;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -29,6 +30,7 @@ class TaskVoter extends Voter
         VoterSupportConstant::TASK_NOTIFY_COMPLETE->value
     ];
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -42,6 +44,7 @@ class TaskVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();

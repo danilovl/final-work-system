@@ -18,6 +18,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use Doctrine\ORM\QueryBuilder;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +28,7 @@ class TaskSeveralForm extends TaskForm
 {
     public function __construct(private readonly TaskDataGrid $taskDataGrid) {}
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -47,6 +49,7 @@ class TaskSeveralForm extends TaskForm
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

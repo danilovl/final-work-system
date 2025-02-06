@@ -15,6 +15,7 @@ namespace App\Domain\Task\Command;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,17 +36,20 @@ class TaskRemindDeadlineCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->setName(self::COMMAND_NAME)
             ->setDescription('Create reminder notification emails for tasks');
     }
 
+    #[Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->parameterService->getBoolean('task_remind.enable')) {
