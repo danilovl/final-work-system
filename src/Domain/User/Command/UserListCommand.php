@@ -15,6 +15,7 @@ namespace App\Domain\User\Command;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\Order;
+use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputInterface,
@@ -35,6 +36,7 @@ class UserListCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->setName(self::COMMAND_NAME)
@@ -59,6 +61,7 @@ HELP
             ->addOption('max-result', 'mr', InputOption::VALUE_OPTIONAL, 'Limits the number of users listed', 50);
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $maxResult = $input->getOption('max-result');

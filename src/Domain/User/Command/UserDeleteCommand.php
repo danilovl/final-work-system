@@ -15,6 +15,7 @@ namespace App\Domain\User\Command;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
+use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{
     InputArgument,
@@ -36,6 +37,7 @@ class UserDeleteCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->setName(self::COMMAND_NAME)
@@ -43,11 +45,13 @@ class UserDeleteCommand extends Command
             ->addArgument('username', InputArgument::REQUIRED, 'The username of an existing user');
     }
 
+    #[Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
+    #[Override]
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
         if ($input->getArgument('username') !== null) {
@@ -60,6 +64,7 @@ class UserDeleteCommand extends Command
         $input->setArgument('username', $username);
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');

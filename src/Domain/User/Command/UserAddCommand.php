@@ -16,6 +16,7 @@ use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
+use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\{
@@ -41,6 +42,7 @@ class UserAddCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->setName(self::COMMAND_NAME)
@@ -53,11 +55,13 @@ class UserAddCommand extends Command
             ->addArgument('roles', InputArgument::OPTIONAL, 'Roles');
     }
 
+    #[Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
     }
 
+    #[Override]
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
         if ($this->validInteractInputArguments($input)) {
@@ -115,6 +119,7 @@ class UserAddCommand extends Command
         }
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $stopwatch = new Stopwatch;

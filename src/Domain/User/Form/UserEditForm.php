@@ -12,10 +12,12 @@
 
 namespace App\Domain\User\Form;
 
+use Override;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class UserEditForm extends UserForm
 {
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);

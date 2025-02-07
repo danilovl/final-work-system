@@ -15,6 +15,7 @@ namespace App\Domain\User\Form;
 use App\Application\Form\Type\UserRoleType;
 use App\Domain\User\Model\UserModel;
 use App\Domain\UserGroup\Entity\Group;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,6 +30,7 @@ class UserForm extends AbstractType
 {
     final public const string NAME = 'user';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -79,6 +81,7 @@ class UserForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -86,6 +89,7 @@ class UserForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

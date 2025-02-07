@@ -31,15 +31,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{
     IntegerField,
     TextField
 };
+use Override;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserCrudController extends AbstractCrudController
 {
+    #[Override]
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
+    #[Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -49,6 +52,7 @@ class UserCrudController extends AbstractCrudController
             ->setDefaultSort(['lastLogin' => Order::Descending->value]);
     }
 
+    #[Override]
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addPanel('Account Information');
@@ -73,6 +77,7 @@ class UserCrudController extends AbstractCrudController
             ->autocomplete();
     }
 
+    #[Override]
     public function configureActions(Actions $actions): Actions
     {
         $impersonate = Action::new('impersonate', 'app.admin.label.impersonate')

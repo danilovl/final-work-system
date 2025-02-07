@@ -15,12 +15,14 @@ namespace App\Domain\User\EventSubscriber;
 use App\Application\EventSubscriber\Events;
 use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
+use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 readonly class CacheEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(private HomepageCache $homepageCache) {}
 
+    #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
