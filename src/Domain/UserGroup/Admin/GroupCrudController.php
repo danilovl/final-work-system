@@ -21,14 +21,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{
     IntegerField,
     TextField
 };
+use Override;
 
 class GroupCrudController extends AbstractCrudController
 {
+    #[Override]
     public static function getEntityFqcn(): string
     {
         return Group::class;
     }
 
+    #[Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -36,6 +39,7 @@ class GroupCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Groups');
     }
 
+    #[Override]
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addPanel('Information');

@@ -13,6 +13,7 @@
 namespace App\Domain\UserGroup\Form;
 
 use App\Domain\UserGroup\Model\UserGroupModel;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,7 @@ class UserGroupForm extends AbstractType
 {
     final public const string NAME = 'user_group';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('name', TextType::class, [
@@ -29,6 +31,7 @@ class UserGroupForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -36,6 +39,7 @@ class UserGroupForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;
