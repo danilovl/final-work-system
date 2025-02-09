@@ -15,6 +15,7 @@ namespace App\Domain\Version\Form;
 use App\Application\Form\Type\MediaFileType;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     TextareaType,
@@ -31,6 +32,7 @@ class VersionForm extends AbstractType
     /**
      * @param array{mimeTypes: MediaMimeType[], uploadMedia: bool} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -49,6 +51,7 @@ class VersionForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -63,6 +66,7 @@ class VersionForm extends AbstractType
             ->setAllowedTypes('mimeTypes', 'iterable');
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

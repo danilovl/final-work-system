@@ -17,6 +17,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Work\Helper\WorkRoleHelper;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -30,6 +31,7 @@ class VersionVoter extends Voter
         VoterSupportConstant::DOWNLOAD->value
     ];
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -43,6 +45,7 @@ class VersionVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
