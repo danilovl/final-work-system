@@ -17,6 +17,7 @@ use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
 };
+use Override;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\{
     Email,
@@ -28,6 +29,7 @@ class WorkUserForm extends AbstractType
 {
     final public const string NAME = 'work_user';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -61,6 +63,7 @@ class WorkUserForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -68,6 +71,7 @@ class WorkUserForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

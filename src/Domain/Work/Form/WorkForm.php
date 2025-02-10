@@ -26,6 +26,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Form\DataGrid\WorkStatusDataGrid;
 use App\Domain\WorkType\Entity\WorkType;
 use Doctrine\ORM\QueryBuilder;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
@@ -49,6 +50,7 @@ class WorkForm extends AbstractType
     /**
      * @param array{user: User} $options
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $options['user'];
@@ -124,6 +126,7 @@ class WorkForm extends AbstractType
             ]);
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -136,6 +139,7 @@ class WorkForm extends AbstractType
             ->setAllowedTypes('user', User::class);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

@@ -15,6 +15,7 @@ namespace App\Domain\Work\Command;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
 use App\Domain\Work\Facade\WorkDeadlineFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,6 +35,7 @@ class WorkRemindDeadlineCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

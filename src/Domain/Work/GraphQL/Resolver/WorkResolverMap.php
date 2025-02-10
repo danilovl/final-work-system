@@ -18,6 +18,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Overblog\GraphQLBundle\Definition\ArgumentInterface;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
+use Override;
 
 class WorkResolverMap extends ResolverMap
 {
@@ -26,6 +27,7 @@ class WorkResolverMap extends ResolverMap
         private readonly WorkStatusFacade $workStatusFacade
     ) {}
 
+    #[Override]
     protected function map(): array
     {
         return [

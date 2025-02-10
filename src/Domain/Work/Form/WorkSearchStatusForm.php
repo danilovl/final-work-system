@@ -13,6 +13,7 @@
 namespace App\Domain\Work\Form;
 
 use App\Domain\WorkStatus\Entity\WorkStatus;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\{
     AbstractType,
@@ -24,6 +25,7 @@ class WorkSearchStatusForm extends AbstractType
 {
     final public const string NAME = 'work_search';
 
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('status', EntityType::class, [
@@ -36,6 +38,7 @@ class WorkSearchStatusForm extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getBlockPrefix(): string
     {
         return self::NAME;

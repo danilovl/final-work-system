@@ -18,6 +18,7 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Helper\WorkRoleHelper;
 use App\Domain\Work\Service\WorkService;
 use LogicException;
+use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -31,6 +32,7 @@ class WorkVoter extends Voter
 
     public function __construct(private readonly WorkService $workService) {}
 
+    #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, self::SUPPORTS, true)) {
@@ -44,6 +46,7 @@ class WorkVoter extends Voter
         return true;
     }
 
+    #[Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
