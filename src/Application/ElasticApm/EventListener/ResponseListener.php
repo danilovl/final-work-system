@@ -19,16 +19,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class ResponseListener implements EventSubscriberInterface
 {
-    public function onKernelResponse(): void
-    {
-        ElasticApmHelper::endCurrentSpan();
-    }
-
     #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::RESPONSE => 'onKernelResponse'
         ];
+    }
+
+    public function onKernelResponse(): void
+    {
+        ElasticApmHelper::endCurrentSpan();
     }
 }

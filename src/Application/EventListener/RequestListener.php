@@ -33,6 +33,14 @@ readonly class RequestListener implements EventSubscriberInterface
         private AsyncService $asyncService
     ) {}
 
+    #[Override]
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest'
+        ];
+    }
+
     public function onKernelRequest(RequestEvent $requestEvent): void
     {
         if (!$requestEvent->isMainRequest()) {
@@ -62,13 +70,5 @@ readonly class RequestListener implements EventSubscriberInterface
         /** @var array{title: string}|null $seo */
         $seo = $requestEvent->getRequest()->attributes->get('_seo');
         $this->seoPageService->setTitle($seo['title'] ?? null);
-    }
-
-    #[Override]
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::REQUEST => 'onKernelRequest'
-        ];
     }
 }

@@ -20,16 +20,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class ExceptionListener implements EventSubscriberInterface
 {
-    public function onKernelException(ExceptionEvent $exceptionEvent): void
-    {
-        ElasticApmHelper::createErrorFromThrowable($exceptionEvent->getThrowable());
-    }
-
     #[Override]
     public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::EXCEPTION => 'onKernelException'
         ];
+    }
+
+    public function onKernelException(ExceptionEvent $exceptionEvent): void
+    {
+        ElasticApmHelper::createErrorFromThrowable($exceptionEvent->getThrowable());
     }
 }

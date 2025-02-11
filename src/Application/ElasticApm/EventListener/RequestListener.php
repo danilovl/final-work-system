@@ -21,6 +21,14 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class RequestListener implements EventSubscriberInterface
 {
+    #[Override]
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest'
+        ];
+    }
+
     public function onKernelRequest(RequestEvent $requestEvent): void
     {
         $this->elasticApmDiscard($requestEvent);
@@ -41,13 +49,5 @@ readonly class RequestListener implements EventSubscriberInterface
         if (!$requestEvent->isMainRequest() || $isProfiler) {
             ElasticApm::getCurrentTransaction()->discard();
         }
-    }
-
-    #[Override]
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::REQUEST => 'onKernelRequest'
-        ];
     }
 }

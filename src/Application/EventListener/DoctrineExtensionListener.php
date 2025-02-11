@@ -24,6 +24,14 @@ readonly class DoctrineExtensionListener implements EventSubscriberInterface
         private LoggableListener $loggableListener
     ) {}
 
+    #[Override]
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest'
+        ];
+    }
+
     public function onKernelRequest(): void
     {
         $user = $this->userService->getUserOrNull();
@@ -32,13 +40,5 @@ readonly class DoctrineExtensionListener implements EventSubscriberInterface
         }
 
         $this->loggableListener->setUsername($user->getUsername());
-    }
-
-    #[Override]
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::REQUEST => 'onKernelRequest'
-        ];
     }
 }

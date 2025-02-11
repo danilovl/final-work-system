@@ -24,6 +24,14 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class ControllerListener implements EventSubscriberInterface
 {
+    #[Override]
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::CONTROLLER => 'onKernelController'
+        ];
+    }
+
     public function onKernelController(ControllerEvent $event): void
     {
         $controller = $event->getController();
@@ -35,13 +43,5 @@ readonly class ControllerListener implements EventSubscriberInterface
             SpanNameEnum::HANDLE,
             SpanTypeEnum::CONTROLLER
         );
-    }
-
-    #[Override]
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::CONTROLLER => 'onKernelController'
-        ];
     }
 }
