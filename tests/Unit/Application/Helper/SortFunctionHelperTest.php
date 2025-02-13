@@ -37,6 +37,28 @@ class SortFunctionHelperTest extends TestCase
         $this->assertSame(1, SortFunctionHelper::sortCzechChars('žzz', 'zzz'));
     }
 
+    public function testUsortCzechUserArray(): void
+    {
+        $user1 = new User;
+        $user1->setFirstname('žbaňka');
+        $user1->setLastname('');
+
+        $user2 = new User;
+        $user2->setFirstname('ářam');
+        $user2->setLastname('');
+
+        $user3 = new User;
+        $user3->setFirstname('čary');
+        $user3->setLastname('');
+
+        $users = [$user1, $user2, $user3];
+        SortFunctionHelper::usortCzechUserArray($users);
+
+        $this->assertEquals($user2, $users[0]);
+        $this->assertEquals($user3, $users[1]);
+        $this->assertEquals($user1, $users[2]);
+    }
+
     public function testEventParticipantSort(): void
     {
         $user1 = new User;
