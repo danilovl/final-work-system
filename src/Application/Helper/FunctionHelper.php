@@ -35,14 +35,14 @@ class FunctionHelper
     {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = [];
-        $alphaLength = strlen($alphabet) - 1;
+        $alphaLength = mb_strlen($alphabet) - 1;
 
         for ($i = 0; $i < $length; $i++) {
             $n = random_int(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }
 
-        return implode($pass);
+        return implode('', $pass);
     }
 
     public static function sanitizeFileName(

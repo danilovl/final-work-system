@@ -28,6 +28,6 @@ class CloneHelper
      */
     public static function simpleCloneObjects(array $objects): array
     {
-        return array_map(static fn(object $object): object => self::simpleCloneObject($object), $objects);
+        return array_map(static fn (object $object): object => self::simpleCloneObject($object), $objects);
     }
 }

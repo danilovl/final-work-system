@@ -14,6 +14,4 @@ namespace App\Application\Middleware\EventCalendar\Ajax;
 
 use App\Application\Middleware\Event\Ajax\GetEventMiddleware;
 
-class EditMiddleware extends GetEventMiddleware
-{
-}
+class EditMiddleware extends GetEventMiddleware {}

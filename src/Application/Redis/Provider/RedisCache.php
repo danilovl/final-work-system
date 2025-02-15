@@ -45,7 +45,7 @@ class RedisCache extends CacheProvider
     {
         $fetchedItems = array_combine($keys, $this->redis->mget($keys));
 
-        $keysToFilter = array_keys(array_filter($fetchedItems, static fn($item): bool => $item === false));
+        $keysToFilter = array_keys(array_filter($fetchedItems, static fn ($item): bool => $item === false));
 
         if ($keysToFilter) {
             $multi = $this->redis->multi(Redis::PIPELINE);

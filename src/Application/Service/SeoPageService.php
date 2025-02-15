@@ -21,7 +21,9 @@ class SeoPageService
     final public const string DEFAULT_SEPARATOR = '';
 
     private ?string $title = null;
+
     private array $metas;
+
     private string $separator;
 
     public function __construct(private readonly TranslatorInterface $translator)
@@ -45,7 +47,7 @@ class SeoPageService
 
     public function addTitle(string $title, string $separator = null): self
     {
-        $separator = $separator ?? $this->separator;
+        $separator ??= $this->separator;
         $this->title = $this->getTransTitle() . $separator . $this->getTransTitle($title);
 
         return $this;
@@ -58,7 +60,7 @@ class SeoPageService
 
     public function getTransTitle(string $title = null): ?string
     {
-        $title = $title ?? $this->title;
+        $title ??= $this->title;
 
         if ($title !== null && str_contains($title, TranslationConstant::DEFAULT_START_KEY->value)) {
             return $this->translator->trans($title);

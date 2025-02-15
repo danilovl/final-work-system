@@ -14,6 +14,4 @@ namespace App\Application\Exception;
 
 use Exception;
 
-final class PropertyNotExistException extends Exception
-{
-}
+final class PropertyNotExistException extends Exception {}

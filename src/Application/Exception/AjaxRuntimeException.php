@@ -12,7 +12,6 @@
 
 namespace App\Application\Exception;
 
-class AjaxRuntimeException extends \RuntimeException
-{
-}
+use RuntimeException;
 
+class AjaxRuntimeException extends RuntimeException {}

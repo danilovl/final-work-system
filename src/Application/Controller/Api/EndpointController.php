@@ -16,8 +16,10 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\{
+    Route,
+    RouterInterface
+};
 
 readonly class EndpointController
 {

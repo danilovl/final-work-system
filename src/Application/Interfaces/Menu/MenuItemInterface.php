@@ -30,13 +30,13 @@ interface MenuItemInterface
 
     public function setIsDisplayed(bool $bool): self;
 
-    public function addChild(MenuItemInterface $child, array $options = []): self;
+    public function addChild(self $child, array $options = []): self;
 
     public function getChild(string $name): ?self;
 
     public function getParent(): ?self;
 
-    public function setParent(?MenuItemInterface $parent): self;
+    public function setParent(?self $parent): self;
 
     public function getChildren(): array;
 

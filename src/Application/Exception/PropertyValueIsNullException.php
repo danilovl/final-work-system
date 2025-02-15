@@ -12,6 +12,6 @@
 
 namespace App\Application\Exception;
 
-class PropertyValueIsNullException extends \RuntimeException
-{
-}
+use RuntimeException;
+
+class PropertyValueIsNullException extends RuntimeException {}

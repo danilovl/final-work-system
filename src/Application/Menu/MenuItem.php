@@ -18,10 +18,15 @@ use App\Application\Interfaces\Menu\MenuItemInterface;
 class MenuItem implements MenuItemInterface
 {
     private ?string $label = null;
+
     private ?string $uri = null;
+
     private bool $isDisplayed = true;
+
     private array $children = [];
+
     private array $attributes = [];
+
     private ?MenuItemInterface $parent = null;
 
     public function __construct(private string $name) {}

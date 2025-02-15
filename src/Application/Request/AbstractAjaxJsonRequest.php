@@ -26,6 +26,7 @@ use function Symfony\Component\String\s;
 abstract class AbstractAjaxJsonRequest
 {
     protected array $data = [];
+
     protected ReflectionClass $reflection;
 
     public function __construct(

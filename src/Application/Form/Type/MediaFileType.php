@@ -49,8 +49,8 @@ final class MediaFileType extends AbstractType
 
     private function fixingOptions(OptionsResolver $resolver): void
     {
-        $resolver->setNormalizer('constraints', fn(Options $options, $value): array => array_merge($value, $this->uploadMediaConstraints($options)));
-        $resolver->setNormalizer('required', fn(Options $options): bool => $this->uploadMediaRequired($options));
+        $resolver->setNormalizer('constraints', fn (Options $options, $value): array => array_merge($value, $this->uploadMediaConstraints($options)));
+        $resolver->setNormalizer('required', fn (Options $options): bool => $this->uploadMediaRequired($options));
     }
 
     private function uploadMediaConstraints(Options $options): array

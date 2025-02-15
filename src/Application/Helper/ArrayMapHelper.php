@@ -24,6 +24,6 @@ class ArrayMapHelper
             return method_exists($object, 'getId');
         });
 
-        return array_map(static fn(object $object): int => $object->getId(), $objects);
+        return array_map(static fn (object $object): int => $object->getId(), $objects);
     }
 }

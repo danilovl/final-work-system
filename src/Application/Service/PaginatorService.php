@@ -56,8 +56,8 @@ readonly class PaginatorService
         array $options = null,
         bool $detachEntity = false
     ): PaginationInterface {
-        $page = $page ?? $this->parameterService->getInt('pagination.default.page');
-        $limit = $limit ?? $this->parameterService->getInt('pagination.default.limit');
+        $page ??= $this->parameterService->getInt('pagination.default.page');
+        $limit ??= $this->parameterService->getInt('pagination.default.limit');
 
         $defaultPageName = 'page';
         $defaultLimitName = 'limit';

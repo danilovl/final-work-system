@@ -14,6 +14,4 @@ namespace App\Application\Exception;
 
 use OutOfBoundsException;
 
-class ConstantNotFoundException extends OutOfBoundsException
-{
-}
+class ConstantNotFoundException extends OutOfBoundsException {}

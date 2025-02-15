@@ -12,7 +12,4 @@
 
 namespace App\Application\Exception;
 
-class RuntimeException extends \RuntimeException
-{
-}
-
+class RuntimeException extends \RuntimeException {}

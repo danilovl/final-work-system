@@ -30,7 +30,6 @@ use Symfony\Component\Security\Core\Exception\{
     CustomUserMessageAuthenticationException
 };
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
-use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\{
     UserBadge,
     CsrfTokenBadge
@@ -38,7 +37,10 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\{
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
-use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Security\Http\{
+    HttpUtils,
+    SecurityRequestAttributes
+};
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface

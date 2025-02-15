@@ -43,7 +43,7 @@ class SeoRuntime
         $html = '';
         foreach ($this->seoPageService->getMetas() as $type => $metas) {
             foreach ($metas as $name => $meta) {
-                [$content,] = $meta;
+                [$content] = $meta;
 
                 if (!empty($content)) {
                     $html .= sprintf(self::META_CONTENT . "\n",

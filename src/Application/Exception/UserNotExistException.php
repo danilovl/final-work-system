@@ -12,7 +12,6 @@
 
 namespace App\Application\Exception;
 
-class UserNotExistException extends \RuntimeException
-{
-}
+use RuntimeException;
 
+class UserNotExistException extends RuntimeException {}
