@@ -34,11 +34,7 @@ class ArticleVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof ArticleVoterSubject) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof ArticleVoterSubject;
     }
 
     #[Override]
