@@ -79,7 +79,7 @@ class ArticleCategory
 
     public function addRole(string $role): self
     {
-        $role = strtoupper($role);
+        $role = mb_strtoupper($role);
 
         if (!in_array($role, $this->getAccess(), true)) {
             $this->access[] = $role;
@@ -118,7 +118,7 @@ class ArticleCategory
 
     public function hasAccess(string $role): bool
     {
-        return in_array(strtoupper($role), $this->access, true);
+        return in_array(mb_strtoupper($role), $this->access, true);
     }
 
     public function __toString(): string
