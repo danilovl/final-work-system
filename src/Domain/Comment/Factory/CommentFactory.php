@@ -22,7 +22,7 @@ class CommentFactory extends BaseModelFactory
         CommentModel $commentModel,
         Comment $comment = null
     ): Comment {
-        $comment = $comment ?? new Comment;
+        $comment ??= new Comment;
         $comment = $this->fromModel($comment, $commentModel);
 
         $this->entityManagerService->persistAndFlush($comment);
