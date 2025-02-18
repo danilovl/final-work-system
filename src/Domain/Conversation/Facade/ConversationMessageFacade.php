@@ -61,8 +61,9 @@ readonly class ConversationMessageFacade
                     );
 
                     $conversationMessageStatus->setType($conversationMessageStatusType);
+
                     break;
-                case  ConversationMessageStatusTypeConstant::UNREAD->value:
+                case ConversationMessageStatusTypeConstant::UNREAD->value:
                     /** @var ConversationMessageStatusType $conversationMessageStatusType */
                     $conversationMessageStatusType = $this->entityManagerService->getReference(
                         ConversationMessageStatusType::class,
@@ -70,6 +71,7 @@ readonly class ConversationMessageFacade
                     );
 
                     $conversationMessageStatus->setType($conversationMessageStatusType);
+
                     break;
             }
 

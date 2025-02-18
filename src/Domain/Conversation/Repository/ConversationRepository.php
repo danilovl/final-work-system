@@ -75,7 +75,7 @@ class ConversationRepository extends ServiceEntityRepository
     {
         Assert::allIsInstanceOf($types, ConversationType::class);
 
-        $ids = array_map(static fn(ConversationType $type): int => $type->getId(), $types);
+        $ids = array_map(static fn (ConversationType $type): int => $type->getId(), $types);
         if (count($ids) === 0) {
             return $queryBuilder;
         }

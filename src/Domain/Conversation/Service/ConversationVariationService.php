@@ -44,7 +44,7 @@ class ConversationVariationService
         WorkStatus $workStatus
     ): array {
         $works = [];
-        $addWorks = function (Collection $userWorks) use (&$works): void {
+        $addWorks = static function (Collection $userWorks) use (&$works): void {
             foreach ($userWorks as $work) {
                 if (!in_array($work, $works, true)) {
                     $works[] = $work;
@@ -80,7 +80,7 @@ class ConversationVariationService
         User $user
     ): array {
         $conversationUsers = [];
-        $addConversationUser = function (array $workUsers) use (&$conversationUsers): void {
+        $addConversationUser = static function (array $workUsers) use (&$conversationUsers): void {
             Assert::allIsInstanceOf($workUsers, User::class);
 
             foreach ($workUsers as $workUser) {

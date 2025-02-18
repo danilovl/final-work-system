@@ -18,8 +18,10 @@ use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\Order;
+use Doctrine\Common\Collections\{
+    Order,
+    Criteria
+};
 
 class ConversationService
 {

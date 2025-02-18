@@ -31,7 +31,7 @@ class ConversationStreamService
 
     private function getLastMessage(Conversation $conversation): ?string
     {
-        $this->date = $this->date ?? new DateTime;
+        $this->date ??= new DateTime;
 
         /** @var ConversationMessage[] $messages */
         $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate($conversation, $this->date);

@@ -27,7 +27,7 @@ readonly class ConversationSearch
         $query = $this->createQueryGetIdsByParticipantAndSearch($user, $search);
         $results = $this->transformedFinderConversation->findRaw($query);
 
-        return array_map(static fn(Result $document): int => (int) $document->getId(), $results);
+        return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
     }
 
     public function createQueryGetIdsByParticipantAndSearch(User $user, string $search): array
@@ -35,7 +35,7 @@ readonly class ConversationSearch
         $search = $this->transformSearch($search);
 
         return [
-            'size' => 1000,
+            'size' => 1_000,
             '_source' => ['id'],
             'query' => [
                 'bool' => [
@@ -114,7 +114,7 @@ readonly class ConversationSearch
     public function createQueryGetMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
     {
         return [
-            'size' => 1000,
+            'size' => 1_000,
             'query' => [
                 'bool' => [
                     'must' => [
