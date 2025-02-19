@@ -22,7 +22,7 @@ class ConversationMessageFactory extends BaseModelFactory
         ConversationMessageModel $conversationMessageModel,
         ?ConversationMessage $conversationMessage = null
     ): ConversationMessage {
-        $conversationMessage = $conversationMessage ?? new ConversationMessage;
+        $conversationMessage ??= new ConversationMessage;
         $conversationMessage = $this->fromModel($conversationMessage, $conversationMessageModel);
 
         $this->entityManagerService->persistAndFlush($conversationMessage);

@@ -19,13 +19,15 @@ use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use Override;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
     ChoiceType,
     TextareaType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -48,14 +50,14 @@ class ConversationComposeMessageForm extends AbstractType
             ->add('name', TextType::class, [
                 'required' => false,
                 'constraints' => [
-                    new  ConversationMessageName
+                    new ConversationMessageName
                 ],
             ])
             ->add('conversation', ChoiceType::class, [
                 'required' => true,
                 'multiple' => UserRoleHelper::isSupervisor($user),
                 'choices' => $options['conversations'],
-                'choice_label' => fn(Conversation $conversation): string => $this->choiceLabelConversation($conversation),
+                'choice_label' => fn (Conversation $conversation): string => $this->choiceLabelConversation($conversation),
                 'constraints' => [
                     new NotBlank
                 ]

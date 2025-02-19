@@ -29,6 +29,7 @@ class ConversationMessageModel
     use OwnerAwareTrait;
 
     public Conversation $conversation;
+
     public Collection $statuses;
 
     public function __construct()

@@ -36,11 +36,7 @@ class ConversationMessageVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof ConversationMessage) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof ConversationMessage;
     }
 
     #[Override]
