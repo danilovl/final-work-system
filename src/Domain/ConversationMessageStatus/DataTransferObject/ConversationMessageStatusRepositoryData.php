@@ -20,6 +20,8 @@ use App\Domain\User\Entity\User;
 class ConversationMessageStatusRepositoryData extends BaseDataTransferObject
 {
     public ?User $user = null;
+
     public ?Conversation $conversation = null;
+
     public ?ConversationMessageStatusType $type = null;
 }
