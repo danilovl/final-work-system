@@ -21,13 +21,15 @@ use App\Domain\User\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
     CheckboxType,
     TextareaType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -59,7 +61,7 @@ class DocumentForm extends AbstractType
                 'class' => MediaCategory::class,
                 'multiple' => true,
                 'required' => false,
-                'query_builder' => fn(): QueryBuilder => $this->categoryDataGridHelper->queryBuilderFindAllByOwner($user),
+                'query_builder' => fn (): QueryBuilder => $this->categoryDataGridHelper->queryBuilderFindAllByOwner($user),
                 'constraints' => [
                     new NotBlank
                 ]

@@ -36,11 +36,7 @@ class DocumentVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof Media) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof Media;
     }
 
     #[Override]

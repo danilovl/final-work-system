@@ -88,6 +88,7 @@ class DocumentFormFactory
                     'uploadMedia' => false,
                     'mimeTypes' => $mimeTypes
                 ];
+
                 break;
             case ControllerMethodConstant::CREATE_AJAX:
                 $parameters = [
@@ -97,6 +98,7 @@ class DocumentFormFactory
                     'user' => $user,
                     'mimeTypes' => $mimeTypes
                 ];
+
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
                 if ($media === null) {
@@ -112,6 +114,7 @@ class DocumentFormFactory
                     'uploadMedia' => false,
                     'mimeTypes' => $mimeTypes
                 ];
+
                 break;
             case ControllerMethodConstant::LIST:
                 $userActiveSupervisors = $this->userService
@@ -128,6 +131,7 @@ class DocumentFormFactory
                     'categories' => $categories,
                     'mimeType' => $mimeType
                 ];
+
                 break;
             case ControllerMethodConstant::LIST_OWNER:
                 $categories = $this->mediaCategoryFacade
@@ -141,6 +145,7 @@ class DocumentFormFactory
                     'categories' => $categories,
                     'mimeType' => $mimeType
                 ];
+
                 break;
             default:
                 throw new ConstantNotFoundException('Controller method type constant not found');

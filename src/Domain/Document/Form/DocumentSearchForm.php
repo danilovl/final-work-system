@@ -15,12 +15,14 @@ namespace App\Domain\Document\Form;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use Override;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
     TextType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DocumentSearchForm extends AbstractType
