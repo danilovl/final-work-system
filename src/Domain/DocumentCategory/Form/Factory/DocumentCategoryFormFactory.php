@@ -49,6 +49,7 @@ class DocumentCategoryFormFactory
                     'action' => $this->router->generate('document_category_create_ajax'),
                     'method' => Request::METHOD_POST
                 ];
+
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
                 if ($mediaCategory === null) {
@@ -61,6 +62,7 @@ class DocumentCategoryFormFactory
                     ]),
                     'method' => Request::METHOD_POST
                 ];
+
                 break;
             default:
                 throw new RuntimeException('Controller method type not found');

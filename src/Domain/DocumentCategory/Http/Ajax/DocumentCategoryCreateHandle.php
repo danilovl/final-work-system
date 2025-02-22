@@ -20,8 +20,10 @@ use App\Domain\MediaCategory\Form\MediaCategoryForm;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
 
 readonly class DocumentCategoryCreateHandle
 {

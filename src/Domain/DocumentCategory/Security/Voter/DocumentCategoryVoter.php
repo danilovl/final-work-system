@@ -34,11 +34,7 @@ class DocumentCategoryVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof MediaCategory) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof MediaCategory;
     }
 
     #[Override]
