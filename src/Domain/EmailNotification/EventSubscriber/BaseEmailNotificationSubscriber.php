@@ -12,8 +12,7 @@
 
 namespace App\Domain\EmailNotification\EventSubscriber;
 
-use App\Application\Service\TranslatorService;
-use App\Application\Service\TwigRenderService;
+use App\Application\Service\{TranslatorService, TwigRenderService};
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\EmailNotification\Model\EmailNotificationModel;
@@ -24,10 +23,15 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class BaseEmailNotificationSubscriber
 {
     protected string $sender;
+
     protected string $locale;
+
     private string $sureExistTemplateLocale;
+
     protected string $translatorDomain;
+
     public bool $enableAddToQueue;
+
     public bool $enableMessenger;
 
     public function __construct(

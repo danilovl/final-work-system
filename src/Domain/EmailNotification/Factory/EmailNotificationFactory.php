@@ -22,7 +22,7 @@ class EmailNotificationFactory extends BaseModelFactory
         EmailNotificationModel $emailNotificationModel,
         EmailNotification $emailNotification = null
     ): EmailNotification {
-        $emailNotification = $emailNotification ?? new EmailNotification;
+        $emailNotification ??= new EmailNotification;
         $emailNotification = $this->fromModel($emailNotification, $emailNotificationModel);
 
         $this->entityManagerService->persistAndFlush($emailNotification);

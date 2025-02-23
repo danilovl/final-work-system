@@ -15,9 +15,14 @@ namespace App\Domain\EmailNotification\Model;
 class EmailNotificationModel
 {
     public string $subject;
+
     public string $to;
+
     public string $from;
+
     public string $body;
+
     public bool $success = false;
+
     public string $uuid;
 }

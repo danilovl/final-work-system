@@ -17,11 +17,17 @@ use App\Application\DataTransferObject\BaseDataTransferObject;
 class EmailNotificationMessage extends BaseDataTransferObject
 {
     public string $locale;
+
     public string $subject;
+
     public string $to;
+
     public string $from;
+
     public string $template;
+
     public array $templateParameters = [];
+
     public string $uuid;
 
     public function generateUuid(): void
