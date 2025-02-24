@@ -41,11 +41,7 @@ class EventVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof Event) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof Event;
     }
 
     #[Override]

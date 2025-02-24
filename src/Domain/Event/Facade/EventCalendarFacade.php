@@ -37,6 +37,7 @@ use Webmozart\Assert\Assert;
 class EventCalendarFacade
 {
     private string $calendarEventReservedColor;
+
     private string $calendarEventDetailReservedColor;
 
     public function __construct(
@@ -54,8 +55,8 @@ class EventCalendarFacade
     public function getEventsByOwner(
         User $user,
         string $type,
-        Datetime $startDate,
-        Datetime $endDate
+        DateTime $startDate,
+        DateTime $endDate
     ): array {
         $events = [];
 
@@ -95,6 +96,7 @@ class EventCalendarFacade
 
                     $events[] = $event;
                 }
+
                 break;
             case EventCalendarActionTypeConstant::RESERVATION->value:
                 /** @var WorkStatus $workStatus */
@@ -168,6 +170,7 @@ class EventCalendarFacade
                         $events[] = $event;
                     }
                 }
+
                 break;
             default:
                 throw new ConstantNotFoundException('Event calendar type constant not found');

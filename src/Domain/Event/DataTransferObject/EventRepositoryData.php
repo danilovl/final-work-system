@@ -20,7 +20,10 @@ use DateTime;
 class EventRepositoryData extends BaseDataTransferObject
 {
     public ?User $user = null;
+
     public ?DateTime $startDate = null;
+
     public ?DateTime $endDate = null;
+
     public ?EventType $eventType = null;
 }

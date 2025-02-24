@@ -51,6 +51,7 @@ class EventTimeValidator extends ConstraintValidator
                         ->atPath('address')
                         ->addViolation();
                 }
+
                 break;
             case EventTypeConstant::PERSONAL->value:
                 if ($value->name === null) {

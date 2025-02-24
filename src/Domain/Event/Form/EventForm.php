@@ -23,13 +23,15 @@ use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
     DateType,
     TextType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -60,13 +62,13 @@ class EventForm extends AbstractType
                 'required' => false,
                 'choices' => $options['addresses'],
                 'placeholder' => FormConstant::PLACEHOLDER->value,
-                'choice_label' => static fn(EventAddress $address): string => (string) $address
+                'choice_label' => static fn (EventAddress $address): string => (string) $address
             ])
             ->add('participant', ChoiceType::class, [
                 'required' => false,
                 'choices' => $participants,
                 'placeholder' => FormConstant::PLACEHOLDER->value,
-                'choice_label' => static fn(EventParticipant $participant): string => (string) $participant,
+                'choice_label' => static fn (EventParticipant $participant): string => (string) $participant,
                 'preferred_choices' => $participants
             ])
             ->add('start', DateType::class, [
@@ -94,11 +96,11 @@ class EventForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                    'data_class' => EventModel::class,
-                    'constraints' => [
-                        new EventTime
-                    ],
-                ]
+                'data_class' => EventModel::class,
+                'constraints' => [
+                    new EventTime
+                ],
+            ]
             )
             ->setRequired([
                 'addresses',
