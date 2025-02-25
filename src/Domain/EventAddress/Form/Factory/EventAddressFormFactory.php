@@ -52,6 +52,7 @@ class EventAddressFormFactory
                     'action' => $this->router->generate('event_address_create_ajax'),
                     'method' => Request::METHOD_POST
                 ];
+
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
                 if ($eventAddress === null) {
@@ -64,6 +65,7 @@ class EventAddressFormFactory
                     ]),
                     'method' => Request::METHOD_POST
                 ];
+
                 break;
             default:
                 throw new ConstantNotFoundException('Controller method type constant not found');

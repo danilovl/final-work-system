@@ -12,8 +12,10 @@
 
 namespace App\Domain\EventAddress\Http;
 
-use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Constant\FlashTypeConstant;
+use App\Application\Constant\{
+    FlashTypeConstant,
+    ControllerMethodConstant
+};
 use App\Application\Service\{
     RequestService,
     TranslatorService,

@@ -18,11 +18,17 @@ use App\Domain\User\Entity\User;
 class EventAddressModel
 {
     public string $name;
+
     public ?string $description = null;
+
     public bool $skype = false;
+
     public ?string $street = null;
+
     public User $owner;
+
     public ?float $latitude;
+
     public ?float $longitude;
 
     public static function fromEventAddress(EventAddress $eventAddress): self

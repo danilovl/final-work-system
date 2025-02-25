@@ -22,8 +22,10 @@ use App\Application\Traits\Entity\{
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventAddress\Repository\EventAddressRepository;
 use App\Domain\User\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\{
+    Collection,
+    ArrayCollection
+};
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;

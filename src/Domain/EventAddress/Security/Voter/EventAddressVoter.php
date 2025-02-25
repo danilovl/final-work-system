@@ -35,11 +35,7 @@ class EventAddressVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof EventAddress) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof EventAddress;
     }
 
     #[Override]

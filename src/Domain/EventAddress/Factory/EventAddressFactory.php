@@ -22,7 +22,7 @@ class EventAddressFactory extends BaseModelFactory
         EventAddressModel $addressModel,
         EventAddress $eventAddress = null
     ): EventAddress {
-        $eventAddress = $eventAddress ?? new EventAddress;
+        $eventAddress ??= new EventAddress;
         $eventAddress = $this->fromModel($eventAddress, $addressModel);
 
         $this->entityManagerService->persistAndFlush($eventAddress);
