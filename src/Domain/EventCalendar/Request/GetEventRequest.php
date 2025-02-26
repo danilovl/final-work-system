@@ -32,6 +32,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class GetEventRequest extends AbstractAjaxJsonRequest
 {
     public string $start;
+
     public string $end;
 
     public function __construct(

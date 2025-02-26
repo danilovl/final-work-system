@@ -24,8 +24,10 @@ use App\Domain\Event\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\Form\EventWorkReservationForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventWorkReservation\Model\EventWorkReservationModel;
-use App\Domain\User\Service\UserService;
-use App\Domain\User\Service\UserWorkService;
+use App\Domain\User\Service\{
+    UserService,
+    UserWorkService
+};
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;

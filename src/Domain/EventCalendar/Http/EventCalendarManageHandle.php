@@ -20,8 +20,10 @@ use App\Application\Service\{
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\EventParticipant\Entity\EventParticipant;
-use App\Domain\User\Service\UserService;
-use App\Domain\User\Service\UserWorkService;
+use App\Domain\User\Service\{
+    UserService,
+    UserWorkService
+};
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
