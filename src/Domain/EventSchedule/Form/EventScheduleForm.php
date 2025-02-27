@@ -16,13 +16,15 @@ use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\EventScheduleTemplate\Form\EventScheduleTemplateForm;
 use Override;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
     TextareaType,
     CollectionType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 

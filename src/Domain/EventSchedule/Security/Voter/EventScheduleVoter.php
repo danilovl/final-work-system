@@ -36,11 +36,7 @@ class EventScheduleVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof EventSchedule) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof EventSchedule;
     }
 
     #[Override]

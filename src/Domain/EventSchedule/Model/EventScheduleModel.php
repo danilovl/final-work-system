@@ -22,8 +22,11 @@ use Doctrine\Common\Collections\{
 class EventScheduleModel
 {
     public string $name;
+
     public ?string $description = null;
+
     public User $owner;
+
     public Collection $templates;
 
     public function __construct()

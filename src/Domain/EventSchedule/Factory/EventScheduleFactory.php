@@ -64,7 +64,7 @@ class EventScheduleFactory extends BaseModelFactory
         EventScheduleModel $eventAddressModel,
         EventSchedule $eventSchedule = null
     ): EventSchedule {
-        $eventSchedule = $eventSchedule ?? new EventSchedule;
+        $eventSchedule ??= new EventSchedule;
         $eventSchedule = $this->fromModel($eventSchedule, $eventAddressModel);
 
         $this->entityManagerService->persistAndFlush($eventSchedule);
