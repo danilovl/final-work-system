@@ -22,7 +22,7 @@ class EventScheduleTemplateFactory extends BaseModelFactory
         EventScheduleTemplateModel $eventScheduleTemplateModel,
         EventScheduleTemplate $eventScheduleTemplate = null
     ): EventScheduleTemplate {
-        $eventScheduleTemplate = $eventScheduleTemplate ?? new EventScheduleTemplate;
+        $eventScheduleTemplate ??= new EventScheduleTemplate;
         $eventScheduleTemplate = $this->fromModel($eventScheduleTemplate, $eventScheduleTemplateModel);
 
         $this->entityManagerService->persistAndFlush($eventScheduleTemplate);

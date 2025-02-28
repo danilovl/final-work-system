@@ -19,9 +19,14 @@ use DateTime;
 class EventScheduleTemplateModel
 {
     public EventType $type;
+
     public int $day;
+
     public string $name;
+
     public EventAddress $address;
+
     public DateTime $start;
+
     public DateTime $end;
 }

@@ -51,13 +51,14 @@ class EventScheduleTemplateTimeValidator extends ConstraintValidator
         }
 
         switch ($value->getType()->getId()) {
-            case  EventTypeConstant::CONSULTATION->value:
+            case EventTypeConstant::CONSULTATION->value:
                 if ($value->getAddress() === null) {
                     $this->context
                         ->buildViolation('This value should not be blank.')
                         ->atPath('address')
                         ->addViolation();
                 }
+
                 break;
             case EventTypeConstant::PERSONAL->value:
                 if ($value->getName() === null) {

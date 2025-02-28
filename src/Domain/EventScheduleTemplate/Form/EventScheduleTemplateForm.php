@@ -19,13 +19,15 @@ use App\Domain\EventScheduleTemplate\Form\Constraint\EventScheduleTemplateTime;
 use App\Domain\EventType\Entity\EventType;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
     TextType,
     TimeType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -59,7 +61,7 @@ class EventScheduleTemplateForm extends AbstractType
             ->add('address', ChoiceType::class, [
                 'required' => false,
                 'choices' => $options['addresses'],
-                'choice_label' => static fn(EventAddress $address): string => $address->getName()
+                'choice_label' => static fn (EventAddress $address): string => $address->getName()
             ])
             ->add('start', TimeType::class, [
                 'required' => true,
@@ -82,11 +84,11 @@ class EventScheduleTemplateForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                    'data_class' => EventScheduleTemplate::class,
-                    'constraints' => [
-                        new EventScheduleTemplateTime
-                    ]
+                'data_class' => EventScheduleTemplate::class,
+                'constraints' => [
+                    new EventScheduleTemplateTime
                 ]
+            ]
             )
             ->setRequired([
                 'addresses'
