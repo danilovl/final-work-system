@@ -18,7 +18,7 @@ use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 
 class MediaRuntime
 {
-    public function __construct(private readonly S3ClientService $s3ClientService,) {}
+    public function __construct(private readonly S3ClientService $s3ClientService) {}
 
     #[AsTwigFunction('media_is_file_exist')]
     public function isMediaFileExist(Media $media): bool

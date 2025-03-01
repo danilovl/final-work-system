@@ -26,17 +26,29 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class MediaModel
 {
     public string $name;
+
     public ?string $description = null;
+
     public User $owner;
+
     public MediaType $type;
+
     public MediaMimeType $mimeType;
+
     public Collection $categories;
+
     public ?Work $work = null;
+
     public string $mediaName = '';
+
     public ?string $originalMediaName = null;
+
     public ?string $originalExtension = null;
+
     public ?int $mediaSize = null;
+
     public bool $active = false;
+
     public ?UploadedFile $uploadMedia = null;
 
     public function __construct()

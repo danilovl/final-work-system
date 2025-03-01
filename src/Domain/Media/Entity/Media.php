@@ -240,9 +240,9 @@ class Media
     public function getMediaSizeFormatted(): string
     {
         $size = $this->getMediaSize();
-        $power = $size > 0 ? floor(log($size, 1024)) : 0;
+        $power = $size > 0 ? floor(log($size, 1_024)) : 0;
 
-        $number = number_format($size / (1024 ** $power), 2);
+        $number = number_format($size / (1_024 ** $power), 2);
 
         return sprintf('%s %s', $number, FileSizeConstant::FILE_SIZES[$power]);
     }

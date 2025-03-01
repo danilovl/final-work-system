@@ -13,8 +13,10 @@
 namespace App\Domain\Media\Command;
 
 use App\Application\Helper\FileHelper;
-use App\Application\Service\EntityManagerService;
-use App\Application\Service\S3ClientService;
+use App\Application\Service\{
+    S3ClientService,
+    EntityManagerService
+};
 use App\Domain\Media\Facade\{
     MediaFacade,
     MediaTypeFacade
@@ -32,6 +34,7 @@ use Symfony\Component\Finder\Finder;
 class SyncDatabaseMediaWithRealFileCommand extends Command
 {
     final public const string COMMAND_NAME = 'app:sync-database-media-with-real-file';
+
     private const int LIMIT = 500;
 
     private SymfonyStyle $io;
@@ -133,7 +136,7 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         $finder->directories()->in($uploadFolder)->depth(0);
 
         $mediaTypes = $this->mediaTypeFacade->findAll();
-        $mediaTypeFolders = array_map(static fn(MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
+        $mediaTypeFolders = array_map(static fn (MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
 
         $progressBar = new ProgressBar($output, $finder->count());
 

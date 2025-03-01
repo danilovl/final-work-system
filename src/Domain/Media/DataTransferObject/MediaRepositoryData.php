@@ -18,7 +18,10 @@ use App\Domain\MediaType\Entity\MediaType;
 class MediaRepositoryData extends BaseDataTransferObject
 {
     public mixed $users = null;
+
     public ?bool $active = null;
+
     public MediaType|iterable|null $type = null;
-    public array|null $criteria = null;
+
+    public ?array $criteria = null;
 }
