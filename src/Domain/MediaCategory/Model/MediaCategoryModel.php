@@ -18,7 +18,9 @@ use App\Domain\User\Entity\User;
 class MediaCategoryModel
 {
     public string $name;
+
     public ?string $description = null;
+
     public User $owner;
 
     public static function fromMediaCategory(MediaCategory $mediaCategory): self
