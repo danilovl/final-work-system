@@ -82,4 +82,3 @@ class MediaType
         return $this->getName();
     }
 }
-
