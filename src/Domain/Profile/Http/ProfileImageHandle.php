@@ -14,8 +14,10 @@ namespace App\Domain\Profile\Http;
 
 use App\Domain\Media\Service\MediaService;
 use App\Domain\User\Entity\User;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\{
+    Response,
+    BinaryFileResponse
+};
 
 readonly class ProfileImageHandle
 {

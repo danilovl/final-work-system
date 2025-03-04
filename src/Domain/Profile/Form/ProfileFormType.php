@@ -15,16 +15,20 @@ namespace App\Domain\Profile\Form;
 use App\Application\Form\Type\LocaleType;
 use App\Domain\User\Model\UserModel;
 use Override;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
+use Symfony\Component\Validator\Constraints\{
+    Email,
+    NotBlank
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     TextType,
     CheckboxType,
     TextareaType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileFormType extends AbstractType
 {

@@ -20,8 +20,10 @@ use App\Application\Service\{
 use App\Domain\ResetPassword\Form\ProfileChangePasswordFormType;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
-use App\Domain\User\Service\PasswordUpdater;
-use App\Domain\User\Service\UserService;
+use App\Domain\User\Service\{
+    UserService,
+    PasswordUpdater
+};
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
