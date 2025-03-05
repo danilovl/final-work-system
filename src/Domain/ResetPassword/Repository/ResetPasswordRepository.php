@@ -10,7 +10,6 @@
  *
  */
 
-
 namespace App\Domain\ResetPassword\Repository;
 
 use App\Domain\ResetPassword\Entity\ResetPassword;

@@ -21,8 +21,10 @@ use App\Domain\ResetPassword\Exception\{
 };
 use App\Domain\ResetPassword\Facade\ResetPasswordFacade;
 use App\Domain\ResetPassword\Factory\ResetPasswordFactory;
-use App\Domain\ResetPassword\Model\ResetPasswordModel;
-use App\Domain\ResetPassword\Model\ResetPasswordTokenModel;
+use App\Domain\ResetPassword\Model\{
+    ResetPasswordModel,
+    ResetPasswordTokenModel
+};
 use App\Domain\User\Entity\User;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateInterval;
@@ -31,7 +33,9 @@ use DateTime;
 readonly class ResetPasswordService
 {
     private string $cryptographicallySecureKey;
+
     private int $resetRequestLifetime;
+
     private int $requestThrottleTime;
 
     public function __construct(
@@ -54,7 +58,7 @@ readonly class ResetPasswordService
         User $user,
         string $verifier = null
     ): ResetPasswordTokenModel {
-        $verifier = $verifier ?? HashHelper::generateDefaultHash();
+        $verifier ??= HashHelper::generateDefaultHash();
         /** @var string $encodedData */
         $encodedData = json_encode([$verifier, $user->getId(), $expiresAt->getTimestamp()]);
 

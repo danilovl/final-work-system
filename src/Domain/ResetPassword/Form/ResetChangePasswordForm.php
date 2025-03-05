@@ -13,12 +13,14 @@
 namespace App\Domain\ResetPassword\Form;
 
 use Override;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     PasswordType,
     RepeatedType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\{
     Length,
@@ -40,7 +42,7 @@ class ResetChangePasswordForm extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'max' => 4096
+                        'max' => 4_096
                     ]),
                 ],
                 'label' => 'New password'

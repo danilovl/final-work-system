@@ -22,7 +22,7 @@ class ResetPasswordFactory extends BaseModelFactory
         ResetPasswordModel $resetPasswordModel,
         ResetPassword $resetPassword = null
     ): ResetPassword {
-        $resetPassword = $resetPassword ?? new ResetPassword;
+        $resetPassword ??= new ResetPassword;
         $resetPassword = $this->fromModel($resetPassword, $resetPasswordModel);
 
         $this->entityManagerService->persistAndFlush($resetPassword);
