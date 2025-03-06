@@ -18,7 +18,10 @@ use App\Domain\User\Entity\User;
 class SystemEventRepositoryData extends BaseDataTransferObject
 {
     public ?User $recipient = null;
+
     public ?bool $viewed = null;
+
     public ?int $limit = null;
+
     public ?int $offset = null;
 }

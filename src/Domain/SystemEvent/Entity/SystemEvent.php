@@ -12,7 +12,6 @@
 
 namespace App\Domain\SystemEvent\Entity;
 
-use App\Domain\SystemEvent\EntityListener\SystemEventListener;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsOwnerTrait,
