@@ -33,11 +33,7 @@ class SystemEventRecipientVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof SystemEventRecipient) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof SystemEventRecipient;
     }
 
     #[Override]
