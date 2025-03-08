@@ -27,7 +27,7 @@ readonly class TaskDeadlineFacade
         User $user,
         int $limit = null
     ): array {
-        $limit = $limit ?? $this->parameterService->getInt('pagination.task.deadline_limit');
+        $limit ??= $this->parameterService->getInt('pagination.task.deadline_limit');
 
         $taskDeadLinesQuery = $this->taskRepository
             ->byDeadlineOwner($user)

@@ -64,11 +64,11 @@ class TaskSeveralForm extends TaskForm
 
     private function queryBuilder(User $supervisor): callable
     {
-        return fn(): QueryBuilder => $this->taskDataGrid->queryBuilderWorksBySupervisor($supervisor, [WorkStatusConstant::ACTIVE->value]);
+        return fn (): QueryBuilder => $this->taskDataGrid->queryBuilderWorksBySupervisor($supervisor, [WorkStatusConstant::ACTIVE->value]);
     }
 
     private function choiceLabel(): callable
     {
-        return static fn(Work $work): string => sprintf('%s (%s)', $work->getTitle(), $work->getAuthor()->getFullNameDegree());
+        return static fn (Work $work): string => sprintf('%s (%s)', $work->getTitle(), $work->getAuthor()->getFullNameDegree());
     }
 }

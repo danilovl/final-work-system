@@ -22,7 +22,7 @@ readonly class TaskDetailHandle
 {
     public function __invoke(Task $task): TaskDetailOutput
     {
-        $serializeContext [AbstractNormalizer::IGNORED_ATTRIBUTES] = ['owner', 'work', 'systemEvents'];
+        $serializeContext[AbstractNormalizer::IGNORED_ATTRIBUTES] = ['owner', 'work', 'systemEvents'];
 
         /** @var TaskDTO $result */
         $result = SerializerHelper::convertToObject($task, TaskDTO::class, $serializeContext);

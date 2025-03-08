@@ -22,7 +22,7 @@ class TaskFactory extends BaseModelFactory
         TaskModel $taskModel,
         Task $task = null
     ): Task {
-        $task = $task ?? new Task;
+        $task ??= new Task;
         $task = $this->fromModel($task, $taskModel);
 
         $this->entityManagerService->persistAndFlush($task);

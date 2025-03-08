@@ -25,7 +25,7 @@ readonly class TaskSearch
         $query = $this->createQuery($user, $search);
         $results = $this->transformedFinderTask->findRaw($query);
 
-        return array_map(static fn(Result $document): int => (int) $document->getId(), $results);
+        return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
     }
 
     public function createQuery(User $user, string $search): array
@@ -33,7 +33,7 @@ readonly class TaskSearch
         $search = mb_strtolower($search);
 
         return [
-            'size' => 1000,
+            'size' => 1_000,
             '_source' => ['id'],
             'query' => [
                 'bool' => [

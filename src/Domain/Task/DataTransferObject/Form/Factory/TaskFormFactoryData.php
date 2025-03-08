@@ -21,8 +21,12 @@ use App\Domain\Work\Entity\Work;
 class TaskFormFactoryData extends BaseDataTransferObject
 {
     public ControllerMethodConstant $type;
+
     public TaskModel $taskModel;
+
     public ?Task $task = null;
+
     public ?Work $work = null;
+
     public array $options = [];
 }

@@ -37,11 +37,7 @@ class TaskVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof Task) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof Task;
     }
 
     #[Override]

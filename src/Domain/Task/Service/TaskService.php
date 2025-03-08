@@ -55,4 +55,3 @@ class TaskService
         return round(($completeTasks / $taskCount) * 100);
     }
 }
-

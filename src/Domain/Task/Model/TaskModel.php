@@ -27,10 +27,15 @@ class TaskModel
     use ActiveTrait;
 
     public string $name;
+
     public ?string $description = null;
+
     public bool $complete = false;
+
     public ?DateTime $deadline = null;
+
     public User $owner;
+
     public Work $work;
 
     /**

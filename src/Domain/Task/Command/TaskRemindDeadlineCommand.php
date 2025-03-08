@@ -24,6 +24,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class TaskRemindDeadlineCommand extends Command
 {
     final public const COMMAND_NAME = 'app:task-remind-deadline';
+
     private const int LIMIT = 500;
 
     private SymfonyStyle $io;
