@@ -515,7 +515,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->passwordRequestedAt = $passwordRequestedAt;
     }
 
-
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
@@ -838,7 +837,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     public function addRole(string $role): self
     {
-        $role = strtoupper($role);
+        $role = mb_strtoupper($role);
         if ($role === UserRoleConstant::USER->value) {
             return $this;
         }

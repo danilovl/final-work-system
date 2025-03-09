@@ -35,7 +35,7 @@ class UserFactory extends BaseModelFactory
         UserModel $userModel,
         User $user = null
     ): User {
-        $user = $user ?? new User;
+        $user ??= new User;
         $user = $this->fromModel($user, $userModel);
 
         $this->entityManagerService->persistAndFlush($user);

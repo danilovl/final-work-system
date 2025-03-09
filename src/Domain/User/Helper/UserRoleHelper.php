@@ -59,6 +59,6 @@ class UserRoleHelper
 
     public static function hasRole(User $user, string $role): bool
     {
-        return in_array(strtoupper($role), $user->getRoles(), true);
+        return in_array(mb_strtoupper($role), $user->getRoles(), true);
     }
 }

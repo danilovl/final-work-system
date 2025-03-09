@@ -47,6 +47,7 @@ class UserFormFactory
         switch ($type) {
             case ControllerMethodConstant::EDIT:
                 $formClass = UserEditForm::class;
+
                 break;
             case ControllerMethodConstant::CREATE:
                 break;
@@ -55,6 +56,7 @@ class UserFormFactory
                     'action' => $this->router->generate('user_create_ajax'),
                     'method' => Request::METHOD_POST
                 ];
+
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
                 if ($user === null) {
@@ -68,6 +70,7 @@ class UserFormFactory
                     ]),
                     'method' => Request::METHOD_POST,
                 ];
+
                 break;
             default:
                 throw new RuntimeException('Controller method type not found');

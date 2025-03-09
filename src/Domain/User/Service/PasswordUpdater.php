@@ -25,7 +25,7 @@ readonly class PasswordUpdater
         User $user,
         UserModel $userModel
     ): void {
-        if (strlen($plainPassword) === 0) {
+        if (mb_strlen($plainPassword) === 0) {
             return;
         }
 

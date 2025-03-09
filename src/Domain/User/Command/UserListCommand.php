@@ -69,7 +69,7 @@ HELP
             ->getRepository(User::class)
             ->findBy([], ['id' => Order::Descending->value], $maxResult);
 
-        $usersAsPlainArrays = array_map(fn(User $user): array => $this->userToArray($user), $users);
+        $usersAsPlainArrays = array_map(fn (User $user): array => $this->userToArray($user), $users);
 
         $bufferedOutput = new BufferedOutput;
         $io = new SymfonyStyle($input, $bufferedOutput);

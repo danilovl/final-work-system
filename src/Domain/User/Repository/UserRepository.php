@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Domain\User\Repository;
 
@@ -30,6 +30,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
+
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -56,14 +57,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             case WorkUserTypeConstant::AUTHOR->value:
                 $queryBuilder->join('user.authorWorks', 'work')
                     ->where('work.supervisor = :supervisor');
+
                 break;
             case WorkUserTypeConstant::OPPONENT->value:
                 $queryBuilder->join('user.opponentWorks', 'work')
                     ->where('work.supervisor = :supervisor');
+
                 break;
             case WorkUserTypeConstant::CONSULTANT->value:
                 $queryBuilder->join('user.consultantWorks', 'work')
                     ->where('work.supervisor = :supervisor');
+
                 break;
         }
 
@@ -139,6 +143,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $builder->andWhere('user.enabled = :enable')
                 ->setParameter('enable', $enable);
         }
+
         return $builder;
     }
 
@@ -154,6 +159,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $builder->andWhere('user.enabled = :enable')
                 ->setParameter('enable', $enable);
         }
+
         return $builder;
     }
 }
