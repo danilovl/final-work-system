@@ -22,7 +22,7 @@ class UserGroupFactory extends BaseModelFactory
         UserGroupModel $userGroupModel,
         Group $group = null
     ): Group {
-        $group = $group ?? new Group;
+        $group ??= new Group;
         $group = $this->fromModel($group, $userGroupModel);
 
         $this->entityManagerService->persistAndFlush($group);
