@@ -22,7 +22,7 @@ class VersionFactory extends BaseModelFactory
         VersionModel $versionModel,
         Media $media = null
     ): Media {
-        $media = $media ?? new Media;
+        $media ??= new Media;
         $media = $this->fromModel($media, $versionModel);
 
         $this->entityManagerService->persistAndFlush($media);

@@ -18,6 +18,7 @@ use App\Domain\Work\Entity\Work;
 class VersionVoterSubject
 {
     protected Work $work;
+
     protected Media $media;
 
     public function getWork(): Work

@@ -38,11 +38,7 @@ class VersionVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof VersionVoterSubject) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof VersionVoterSubject;
     }
 
     #[Override]

@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class VersionModel
 {
     public string $name;
+
     public ?string $description = null;
+
     public ?UploadedFile $uploadMedia = null;
 
     public static function fromMedia(Media $media): self
