@@ -18,6 +18,5 @@ enum WidgetConstant: string
     case UNREAD_SYSTEM_EVENT = 'unread_system_event';
     case LOCALES = 'locales';
     case MENU = 'menu';
-
     case GROUP_TOP_NAV = 'top_nav';
 }

@@ -16,14 +16,16 @@ use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\{
-    UnreadSystemEventWidget};
-use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
+    UnreadSystemEventWidget,
+    UnreadConversationMessageWidget
+};
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 
 class WidgetStreamService
 {
     private ?DateTime $date;
+
     private array $lastCountUnread = [
         'conversation' => 0,
         'systemEvent' => 0
@@ -43,7 +45,7 @@ class WidgetStreamService
         $conversation = null;
         $systemEvent = null;
         $user = $this->userService->getUser();
-        $this->date = $this->date ?? new DateTime;
+        $this->date ??= new DateTime;
 
         $countUnreadConversationMessage = $this->conversationMessageFacade->getTotalUnreadMessagesByUser($user);
         if ($this->lastCountUnread['conversation'] !== $countUnreadConversationMessage) {

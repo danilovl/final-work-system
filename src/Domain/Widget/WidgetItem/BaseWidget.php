@@ -17,6 +17,7 @@ use App\Domain\Widget\Interfaces\WidgetInterface;
 abstract class BaseWidget implements WidgetInterface
 {
     protected string $name = 'base';
+
     protected array $parameters = [];
 
     public function setName(string $name): void

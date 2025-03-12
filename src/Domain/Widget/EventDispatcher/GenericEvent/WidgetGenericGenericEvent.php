@@ -15,5 +15,6 @@ namespace App\Domain\Widget\EventDispatcher\GenericEvent;
 class WidgetGenericGenericEvent
 {
     public string $groupName;
+
     public array $groupWidgets;
 }

@@ -23,7 +23,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class MenuWidget extends BaseWidget
 {
     private ?array $factory = null;
+
     private ?User $user;
+
     private string $menu;
 
     public function __construct(

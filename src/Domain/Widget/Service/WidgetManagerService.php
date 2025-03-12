@@ -22,6 +22,7 @@ use Psr\Container\ContainerInterface;
 class WidgetManagerService implements WidgetManagerInterface
 {
     private array $widgets = [];
+
     private array $widgetsGroup = [];
 
     public function __construct(private readonly ContainerInterface $container) {}
