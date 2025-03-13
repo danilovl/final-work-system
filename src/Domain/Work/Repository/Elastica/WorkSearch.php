@@ -60,7 +60,7 @@ readonly class WorkSearch
         FormInterface $form
     ): array {
         $query = [
-            'size' => 1000,
+            'size' => 1_000,
             'query' => [
                 'bool' => [
                     'must' => [
@@ -103,7 +103,7 @@ readonly class WorkSearch
                 $filedValues = [];
 
                 foreach ($value as $item) {
-                    if ($field === 'deadline' and $item instanceof DateTimeInterface) {
+                    if ($field === 'deadline' && $item instanceof DateTimeInterface) {
                         $filedValues[] = $item->format(DateFormatConstant::DATE->value);
                     } elseif (is_object($item) && method_exists($item, 'getId')) {
                         $filedValues[] = $item->getId();

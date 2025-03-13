@@ -39,11 +39,7 @@ class WorkVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof Work) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof Work;
     }
 
     #[Override]

@@ -71,6 +71,7 @@ class WorkFormFactory
                     ]),
                     'method' => Request::METHOD_POST
                 ];
+
                 break;
             case ControllerMethodConstant::EDIT_AJAX:
                 if ($work === null) {
@@ -83,6 +84,7 @@ class WorkFormFactory
                     ]),
                     'method' => Request::METHOD_POST
                 ]);
+
                 break;
             default:
                 throw new ConstantNotFoundException('Controller method type constant not found');

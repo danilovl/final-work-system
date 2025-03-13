@@ -25,15 +25,25 @@ use Doctrine\Common\Collections\{
 class WorkModel
 {
     public string $title;
+
     public ?string $shortcut = null;
+
     public WorkStatus $status;
+
     public WorkType $type;
+
     public User $author;
+
     public User $supervisor;
+
     public ?User $opponent = null;
+
     public ?User $consultant = null;
+
     public DateTime $deadline;
+
     public ?DateTime $deadlineProgram = null;
+
     public Collection $categories;
 
     public function __construct()

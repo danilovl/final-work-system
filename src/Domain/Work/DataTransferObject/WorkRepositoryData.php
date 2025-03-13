@@ -19,7 +19,10 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 class WorkRepositoryData extends BaseDataTransferObject
 {
     public ?User $user = null;
+
     public ?User $supervisor = null;
+
     public ?string $type = null;
+
     public WorkStatus|iterable|null $workStatus = null;
 }

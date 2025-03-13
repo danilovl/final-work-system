@@ -20,12 +20,14 @@ use App\Domain\WorkType\Entity\WorkType;
 use DateTime;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\{
+    AbstractType,
+    FormBuilderInterface
+};
 use Symfony\Component\Form\Extension\Core\Type\{
     ChoiceType,
     TextType
 };
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorkSearchForm extends AbstractType
@@ -75,7 +77,7 @@ class WorkSearchForm extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'choices' => $options[$formType . 's'],
-                'choice_label' => static fn(User $user): string => $user->getFullNameDegree()
+                'choice_label' => static fn (User $user): string => $user->getFullNameDegree()
             ]);
         }
 
@@ -83,8 +85,8 @@ class WorkSearchForm extends AbstractType
             'required' => false,
             'multiple' => true,
             'choices' => $options['deadlines'],
-            'choice_label' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value),
-            'choice_value' => static fn(DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value)
+            'choice_label' => static fn (DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value),
+            'choice_value' => static fn (DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value)
         ]);
     }
 

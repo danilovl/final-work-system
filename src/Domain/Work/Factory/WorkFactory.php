@@ -22,7 +22,7 @@ class WorkFactory extends BaseModelFactory
         WorkModel $workModel,
         Work $work = null
     ): Work {
-        $work = $work ?? new Work;
+        $work ??= new Work;
         $work = $this->fromModel($work, $workModel);
 
         $this->entityManagerService->persistAndFlush($work);
