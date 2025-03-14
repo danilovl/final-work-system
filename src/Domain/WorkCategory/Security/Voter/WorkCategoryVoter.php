@@ -34,11 +34,7 @@ class WorkCategoryVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof WorkCategory) {
-            return false;
-        }
-
-        return true;
+        return $subject instanceof WorkCategory;
     }
 
     #[Override]

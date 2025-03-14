@@ -22,7 +22,7 @@ class WorkCategoryFactory extends BaseModelFactory
         WorkCategoryModel $workCategoryModel,
         WorkCategory $workCategory = null
     ): WorkCategory {
-        $workCategory = $workCategory ?? new WorkCategory;
+        $workCategory ??= new WorkCategory;
         $workCategory = $this->fromModel($workCategory, $workCategoryModel);
 
         $this->entityManagerService->persistAndFlush($workCategory);

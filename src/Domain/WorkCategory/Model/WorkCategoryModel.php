@@ -22,9 +22,13 @@ use Doctrine\Common\Collections\{
 class WorkCategoryModel
 {
     public string $name;
+
     public ?string $description = null;
+
     public ?string $sorting = null;
+
     public User $owner;
+
     public Collection $works;
 
     public function __construct()
