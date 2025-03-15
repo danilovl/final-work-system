@@ -15,12 +15,20 @@ namespace App\Domain\WorkSearch\Model;
 class WorkSearchModel
 {
     public ?string $title = null;
+
     public ?string $shortcut = null;
+
     public ?iterable $status = null;
+
     public ?iterable $type = null;
+
     public ?iterable $author = null;
+
     public ?iterable $supervisor = null;
+
     public ?iterable $opponent = null;
+
     public ?iterable $consultant = null;
+
     public ?iterable $deadline = null;
 }
