@@ -46,14 +46,17 @@ class WorkStatusRepository extends ServiceEntityRepository
             case WorkUserTypeConstant::AUTHOR->value:
                 $queryBuilder->leftJoin('work.author', 'author')
                     ->andWhere('author = :user');
+
                 break;
             case WorkUserTypeConstant::OPPONENT->value:
                 $queryBuilder->leftJoin('work.opponent', 'opponent')
                     ->andWhere('opponent = :user');
+
                 break;
             case WorkUserTypeConstant::CONSULTANT->value:
                 $queryBuilder->leftJoin('work.consultant', 'consultant')
                     ->andWhere('consultant = :user');
+
                 break;
         }
 
