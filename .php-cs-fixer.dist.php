@@ -38,7 +38,6 @@ return (new PhpCsFixer\Config())
         'short_scalar_cast' => true,
         'class_attributes_separation' => [
             'elements' => [
-                'const' => 'none',
                 'method' => 'one',
                 'property' => 'one',
                 'trait_import' => 'none',
