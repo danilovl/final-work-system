@@ -48,9 +48,23 @@ class ReplacerFinal
             $contents = file_get_contents($filePath);
 
             $matches = [];
-            preg_match_all('~use\s+(\S+);~', $contents, $matches);
+            preg_match_all('/^use\s+([^;{]+)(?:{([^}]+)})?;/m', $contents, $matches, PREG_SET_ORDER);
 
-            foreach ($matches[1] as $class) {
+            $imports = [];
+            foreach ($matches as $match) {
+                $namespace = trim($match[1]);
+
+                if (!empty($match[2])) {
+                    $classes = array_map('trim', explode(',', $match[2]));
+                    foreach ($classes as $class) {
+                        $imports[] = $namespace . $class;
+                    }
+                } else {
+                    $imports[] = $namespace;
+                }
+            }
+
+            foreach ($imports as $class) {
                 if (!class_exists($class)) {
                     continue;
                 }
