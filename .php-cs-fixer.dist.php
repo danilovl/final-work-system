@@ -1,7 +1,7 @@
 <?php
 
 $finder = (new PhpCsFixer\Finder())
-    ->in(__DIR__)
+    ->in([__DIR__. '/src', __DIR__ . '/tests'])
     ->exclude('var');
 
 return (new PhpCsFixer\Config())
@@ -96,6 +96,15 @@ return (new PhpCsFixer\Config())
         'compact_nullable_type_declaration' => true,
         'no_spaces_around_offset' => true,
         'single_blank_line_at_eof' => true,
+        'php_unit_assert_new_names' => true,
+        'php_unit_attributes' => true,
+        'php_unit_construct' => true,
+        'php_unit_data_provider_name' => true,
+        'php_unit_dedicate_assert' => true,
+        'php_unit_dedicate_assert_internal_type' => true,
+        'php_unit_expectation' => true,
+        'php_unit_mock_short_will_return' => true,
+        'php_unit_set_up_tear_down_visibility' => true,
     ])
     ->setFinder($finder)
     ->setUsingCache(false);
