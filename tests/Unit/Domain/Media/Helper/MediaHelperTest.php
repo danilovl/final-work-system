@@ -25,6 +25,6 @@ class MediaHelperTest extends TestCase
 
         $result = MediaHelper::generateMediaNameByType($mediaMimeType);
 
-        $this->assertTrue(str_contains($result, '.png'));
+        $this->assertStringContainsString('.png', $result);
     }
 }

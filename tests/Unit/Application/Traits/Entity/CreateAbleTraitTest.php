@@ -20,7 +20,7 @@ class CreateAbleTraitTest extends TestCase
 {
     public function testActive(): void
     {
-        $class = new class {
+        $class = new class() {
             use CreateAbleTrait;
         };
 

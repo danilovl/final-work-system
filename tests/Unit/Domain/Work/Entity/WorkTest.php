@@ -30,7 +30,7 @@ class WorkTest extends TestCase
         string $set,
         string $get
     ): void {
-        $entity = new class extends Work {};
+        $entity = new class ( ) extends Work {};
         $entity->$set($value);
 
         $this->assertEquals($value, $entity->$get());
@@ -48,13 +48,13 @@ class WorkTest extends TestCase
         yield [null, 'setDeadlineProgram', 'getDeadlineProgram'];
         yield [new ArrayCollection, 'setTasks', 'getActiveTask'];
         yield [new ArrayCollection, 'setCategories', 'getCategories'];
-        yield [new class extends WorkStatus { }, 'setStatus', 'getStatus'];
-        yield [new class extends WorkType { }, 'setType', 'getType'];
-        yield [new class extends User { }, 'setConsultant', 'getConsultant'];
+        yield [new class ( ) extends WorkStatus {}, 'setStatus', 'getStatus'];
+        yield [new class ( ) extends WorkType {}, 'setType', 'getType'];
+        yield [new class ( ) extends User {}, 'setConsultant', 'getConsultant'];
         yield [null, 'setConsultant', 'getConsultant'];
-        yield [new class extends User { }, 'setOpponent', 'getOpponent'];
+        yield [new class ( ) extends User {}, 'setOpponent', 'getOpponent'];
         yield [null, 'setOpponent', 'getOpponent'];
-        yield [new class extends User { }, 'setSupervisor', 'getSupervisor'];
-        yield [new class extends User { }, 'setAuthor', 'getAuthor'];
+        yield [new class ( ) extends User {}, 'setSupervisor', 'getSupervisor'];
+        yield [new class ( ) extends User {}, 'setAuthor', 'getAuthor'];
     }
 }

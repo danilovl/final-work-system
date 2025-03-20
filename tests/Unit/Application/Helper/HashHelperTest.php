@@ -17,24 +17,24 @@ use PHPUnit\Framework\TestCase;
 
 class HashHelperTest extends TestCase
 {
-    public function testGenerateResetPasswordHashedToken()
+    public function testGenerateResetPasswordHashedToken(): void
     {
         $hash = HashHelper::generateResetPasswordHashedToken('data', 'signingKey');
 
         $this->assertEquals('/XmpE5hILa08HC0IEq6VM7wFHBpcIflG3Mheayc0ADU=', $hash);
     }
 
-    public function testGenerateDefaultHash()
+    public function testGenerateDefaultHash(): void
     {
         $hash = HashHelper::generateDefaultHash();
 
-        $this->assertEquals(40, strlen($hash));
+        $this->assertEquals(40, mb_strlen($hash));
     }
 
-    public function testGenerateUserSalt()
+    public function testGenerateUserSalt(): void
     {
         $hash = HashHelper::generateUserSalt();
 
-        $this->assertEquals(43, strlen($hash));
+        $this->assertEquals(43, mb_strlen($hash));
     }
 }

@@ -70,13 +70,13 @@ class SortFunctionHelperTest extends TestCase
         $user2 = new User;
         $user2->setFirstname('ářam');
         $user2->setLastname('');
-        $participant2 = new EventParticipant();
+        $participant2 = new EventParticipant;
         $participant2->setUser($user2);
 
         $user3 = new User;
         $user3->setFirstname('čary');
         $user3->setLastname('');
-        $participant3 = new EventParticipant();
+        $participant3 = new EventParticipant;
         $participant3->setUser($user3);
 
         $participants = [$participant1, $participant2, $participant3];

@@ -34,6 +34,7 @@ use Symfony\Component\Routing\RouterInterface;
 class RequestServiceTest extends TestCase
 {
     private RequestStack $requestStack;
+
     private RequestService $requestService;
 
     protected function setUp(): void

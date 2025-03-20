@@ -22,7 +22,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = BaseEmailNotificationSubscriber::class;
+
     protected readonly EmailNotificationMessage $emailNotificationMessage;
+
     protected readonly BaseEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void

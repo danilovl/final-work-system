@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
 class WidgetEventSubscriberTest extends TestCase
 {
     private WidgetManagerService $widgetManagerService;
+
     private WidgetEventSubscriber $subscriber;
 
     protected function setUp(): void

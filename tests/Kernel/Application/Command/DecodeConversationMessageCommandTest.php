@@ -27,6 +27,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 class DecodeConversationMessageCommandTest extends KernelTestCase
 {
     private DecodeConversationMessageCommand $command;
+
     private EntityManagerService $entityManagerService;
 
     private string $messageEncode = '&lt;a href=&quot;https://www.w3schools.com&quot;&gt;w3schools.com&lt;/a&gt;';

@@ -28,6 +28,7 @@ use Symfony\Component\Form\FormInterface;
 class WorkSearchTest extends KernelTestCase
 {
     private FormInterface|WorkSearchForm $workSearchForm;
+
     private WorkSearch $workSearch;
 
     protected function setUp(): void
@@ -81,7 +82,7 @@ class WorkSearchTest extends KernelTestCase
             WorkUserTypeConstant::SUPERVISOR->value,
             null,
             [
-                'size' => 1000,
+                'size' => 1_000,
                 'query' => [
                     'bool' => [
                         'must' => [
@@ -121,7 +122,7 @@ class WorkSearchTest extends KernelTestCase
                 'opponent' => [5]
             ],
             [
-                'size' => 1000,
+                'size' => 1_000,
                 'query' => [
                     'bool' => [
                         'must' => [

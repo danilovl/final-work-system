@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 class MomentFormatConverterUtilTest extends TestCase
 {
     #[DataProvider('convertDataProvider')]
-    public function testConvert(string $format, string $expectedOutput)
+    public function testConvert(string $format, string $expectedOutput): void
     {
         $slugger = new MomentFormatConverterUtil;
         $this->assertEquals($expectedOutput, $slugger->convert($format));

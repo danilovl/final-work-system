@@ -15,17 +15,21 @@ namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\EmailNotification\EventSubscriber\EventEmailNotificationSubscriber;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\GenericEvent\EventCommentGenericEvent;
-use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
+use App\Domain\Event\EventDispatcher\GenericEvent\{
+    EventCommentGenericEvent,
+    EventGenericEvent
+};
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Entity\User;
 
 class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = EventEmailNotificationSubscriber::class;
+
     protected readonly EventEmailNotificationSubscriber $subscriber;
 
     private Event $eventWithParticipant;
+
     private Event $eventWithoutParticipant;
 
     protected function setUp(): void

@@ -21,7 +21,7 @@ class ParametersServiceTest extends KernelTestCase
 {
     private ParameterService $parametersService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->parametersService = $kernel->getContainer()->get(ParameterService::class);

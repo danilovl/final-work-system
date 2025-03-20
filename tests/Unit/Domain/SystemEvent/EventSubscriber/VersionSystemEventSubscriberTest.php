@@ -18,6 +18,7 @@ use App\Domain\Work\Service\WorkService;
 class VersionSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = VersionSystemEventSubscriber::class;
+
     protected readonly VersionSystemEventSubscriber $subscriber;
 
     protected function setUp(): void

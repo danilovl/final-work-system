@@ -50,7 +50,7 @@ class TaskSearchTest extends TestCase
             $user,
             $search,
             [
-                'size' => 1000,
+                'size' => 1_000,
                 '_source' => ['id'],
                 'query' => [
                     'bool' => [
@@ -88,14 +88,14 @@ class TaskSearchTest extends TestCase
         ];
 
         $user = new User;
-        $user->setId(1000);
+        $user->setId(1_000);
         $search = 'apple';
 
         yield [
             $user,
             $search,
             [
-                'size' => 1000,
+                'size' => 1_000,
                 '_source' => ['id'],
                 'query' => [
                     'bool' => [

@@ -21,6 +21,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class AuthorizationCheckerServiceTest extends TestCase
 {
     private AuthorizationCheckerService $authorizationCheckerService;
+
     private AuthorizationCheckerInterface $authorizationChecker;
 
     protected function setUp(): void

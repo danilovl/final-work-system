@@ -22,7 +22,9 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 class AppUserProviderTest extends TestCase
 {
     private UserFacade $userFacade;
+
     private EntityManagerService $entityManagerService;
+
     private AppUserProvider $appUserProvider;
 
     protected function setUp(): void

@@ -27,7 +27,7 @@ class BaseWidgetTest extends TestCase
             ->method('render')
             ->willReturn('twig');
 
-        $this->widget = new class extends BaseWidget { };
+        $this->widget = new class ( ) extends BaseWidget {};
     }
 
     public function testSetName(): void

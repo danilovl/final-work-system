@@ -20,6 +20,7 @@ use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = WorkEmailNotificationSubscriber::class;
+
     protected readonly WorkEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void

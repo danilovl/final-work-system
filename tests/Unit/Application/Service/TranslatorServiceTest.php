@@ -23,7 +23,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TranslatorServiceTest extends TestCase
 {
     private TranslatorService $translatorService;
+
     private TranslatorInterface $translatorMock;
+
     private RequestStack $requestStackMock;
 
     protected function setUp(): void

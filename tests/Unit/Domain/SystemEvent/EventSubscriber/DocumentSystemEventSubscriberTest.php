@@ -18,6 +18,7 @@ use App\Domain\User\Service\UserWorkService;
 class DocumentSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = DocumentSystemEventSubscriber::class;
+
     protected readonly DocumentSystemEventSubscriber $subscriber;
 
     protected function setUp(): void

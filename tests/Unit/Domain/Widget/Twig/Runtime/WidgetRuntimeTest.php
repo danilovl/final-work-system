@@ -20,6 +20,7 @@ use PHPUnit\Framework\TestCase;
 class WidgetRuntimeTest extends TestCase
 {
     private WidgetManagerService $widgetManagerService;
+
     private WidgetRuntime $widgetRuntime;
 
     protected function setUp(): void
@@ -31,7 +32,7 @@ class WidgetRuntimeTest extends TestCase
 
     public function testWidget(): void
     {
-        $widget = new class extends BaseWidget {
+        $widget = new class() extends BaseWidget {
             public function render(): ?string
             {
                 return 'text widget text';
@@ -51,13 +52,13 @@ class WidgetRuntimeTest extends TestCase
     public function testWidgetGroup(): void
     {
         $widgetGroup = [
-            new class extends BaseWidget {
+            new class() extends BaseWidget {
                 public function render(): ?string
                 {
                     return 'text widget one';
                 }
             },
-            new class extends BaseWidget {
+            new class() extends BaseWidget {
                 public function render(): ?string
                 {
                     return 'text widget two';

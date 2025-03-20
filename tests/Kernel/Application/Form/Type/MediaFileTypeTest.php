@@ -21,9 +21,10 @@ class MediaFileTypeTest extends KernelTestCase
 {
     private const string FILE_PATH_JPG = __DIR__ . '/../../../../Helper/image/test_jpg.jpg';
     private const string FILE_PATH_PNG = __DIR__ . '/../../../../Helper/image/test_png.png';
+
     private FormInterface $form;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $formFactory = $kernel->getContainer()->get('form.factory');

@@ -21,7 +21,7 @@ class PaginatorServiceTest extends KernelTestCase
 {
     private PaginatorService $paginatorService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->paginatorService = $kernel->getContainer()->get(PaginatorService::class);

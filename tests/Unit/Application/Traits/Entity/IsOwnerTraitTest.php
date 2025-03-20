@@ -20,7 +20,7 @@ class IsOwnerTraitTest extends TestCase
 {
     public function testIsOwner(): void
     {
-        $class = new class {
+        $class = new class() {
             use IsOwnerTrait;
 
             public function getOwner(): User

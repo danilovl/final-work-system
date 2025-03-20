@@ -52,7 +52,7 @@ class ConversationSearchTest extends TestCase
                 $user,
                 $search,
                 [
-                    'size' => 1000,
+                    'size' => 1_000,
                     '_source' => ['id'],
                     'query' => [
                         'bool' => [
@@ -132,7 +132,7 @@ class ConversationSearchTest extends TestCase
                 $conversation,
                 $search,
                 [
-                    'size' => 1000,
+                    'size' => 1_000,
                     'query' => [
                         'bool' => [
                             'must' => [

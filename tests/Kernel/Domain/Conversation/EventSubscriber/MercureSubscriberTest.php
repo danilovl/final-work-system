@@ -27,9 +27,10 @@ class MercureSubscriberTest extends KernelTestCase
     use SecurityLoginTrait;
 
     private ConversationMessage $conversationMessage;
+
     private MercureSubscriber $mercureSubscriber;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->mercureSubscriber = $kernel->getContainer()->get(MercureSubscriber::class);

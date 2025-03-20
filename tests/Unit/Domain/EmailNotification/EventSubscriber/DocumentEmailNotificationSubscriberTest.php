@@ -23,6 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = DocumentEmailNotificationSubscriber::class;
+
     protected readonly DocumentEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void

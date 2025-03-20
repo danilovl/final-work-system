@@ -20,6 +20,7 @@ use App\Domain\User\Entity\User;
 class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = SecurityEmailNotificationSubscriber::class;
+
     protected readonly SecurityEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void
@@ -48,7 +49,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
         $resetPassword->setUser($user);
         $resetPassword->setHashedToken('hashed');
 
-        $event = new ResetPasswordGenericEvent($resetPassword, 1000);
+        $event = new ResetPasswordGenericEvent($resetPassword, 1_000);
 
         $this->subscriber->onResetPasswordToken($event);
 

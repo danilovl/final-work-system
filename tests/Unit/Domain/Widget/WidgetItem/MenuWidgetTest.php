@@ -24,6 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class MenuWidgetTest extends TestCase
 {
     private Security $security;
+
     private MenuWidget $menuWidget;
 
     protected function setUp(): void

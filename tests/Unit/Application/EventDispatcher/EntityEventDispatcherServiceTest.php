@@ -22,7 +22,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class EntityEventDispatcherServiceTest extends TestCase
 {
     private EventDispatcherInterface $eventDispatcher;
+
     private AsyncService $asyncService;
+
     private EntityEventDispatcherService $entityEventDispatcherService;
 
     protected function setUp(): void
@@ -41,7 +43,7 @@ class EntityEventDispatcherServiceTest extends TestCase
                 Events::ENTITY_POST_PERSIST_FLUSH
             );
 
-        $this->entityEventDispatcherService->onPostPersistFlush(new class {});
+        $this->entityEventDispatcherService->onPostPersistFlush(new class ( ) {});
         $this->asyncService->call();
     }
 }

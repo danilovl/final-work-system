@@ -19,7 +19,7 @@ class LocationTraitTest extends TestCase
 {
     public function testIsOwner(): void
     {
-        $class = new class {
+        $class = new class() {
             use LocationTrait;
         };
 

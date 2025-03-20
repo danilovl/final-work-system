@@ -55,10 +55,10 @@ class EventRepositoryDataTest extends TestCase
 
         yield [
             [
-                'user' => new class extends User { },
+                'user' => new class ( ) extends User {},
                 'startDate' => new DateTime,
                 'endDate' => new DateTime,
-                'eventType' => new class extends EventType { }
+                'eventType' => new class ( ) extends EventType {}
             ]
         ];
     }

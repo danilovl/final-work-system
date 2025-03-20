@@ -20,6 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class SeoRuntimeTest extends TestCase
 {
     private SeoPageService $seoPageService;
+
     private SeoRuntime $seoRuntime;
 
     protected function setUp(): void

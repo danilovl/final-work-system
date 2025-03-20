@@ -14,7 +14,8 @@ namespace Domain\Widget\WidgetItem;
 
 use App\Application\Service\{
     TranslatorService,
-    TwigRenderService};
+    TwigRenderService
+};
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
@@ -29,8 +30,11 @@ use PHPUnit\Framework\TestCase;
 class WorkDeadlineNotifyWidgetTest extends TestCase
 {
     private UserService $userService;
+
     private WorkService $workService;
+
     private WorkFacade $workFacade;
+
     private WorkDeadlineNotifyWidget $widget;
 
     protected function setUp(): void
@@ -54,7 +58,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
             ->method('trans')
             ->willReturn('trans');
 
-        $this->widget = new \App\Domain\Widget\WidgetItem\WorkDeadlineNotifyWidget(
+        $this->widget = new WorkDeadlineNotifyWidget(
             $this->userService,
             $this->workService,
             $parameterService,

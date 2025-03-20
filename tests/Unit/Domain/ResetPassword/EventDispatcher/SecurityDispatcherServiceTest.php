@@ -35,6 +35,6 @@ class SecurityDispatcherServiceTest extends TestCase
                 Events::SECURITY_RESET_PASSWORD_TOKEN
             );
 
-        $securityDispatcherService->onResetPasswordTokenCreate($resetPassword, 3600);
+        $securityDispatcherService->onResetPasswordTokenCreate($resetPassword, 3_600);
     }
 }

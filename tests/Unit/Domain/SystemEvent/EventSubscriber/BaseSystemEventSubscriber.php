@@ -21,6 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class BaseSystemEventSubscriber extends TestCase
 {
     protected readonly EventDispatcher $dispatcher;
+
     protected readonly EntityManagerService $entityManagerService;
 
     protected function setUp(): void

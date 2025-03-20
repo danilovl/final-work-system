@@ -32,9 +32,13 @@ use Symfony\Component\HttpKernel\{
 class RequestListenerTest extends TestCase
 {
     private UserService $userService;
+
     private EntityManagerService $entityManagerService;
+
     private SeoPageService $seoPageService;
+
     private AsyncService $asyncService;
+
     private RequestListener $listener;
 
     protected function setUp(): void

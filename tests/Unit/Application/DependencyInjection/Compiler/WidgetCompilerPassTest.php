@@ -19,7 +19,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\{
     ContainerBuilder,
-    Definition};
+    Definition
+};
 
 class WidgetCompilerPassTest extends TestCase
 {

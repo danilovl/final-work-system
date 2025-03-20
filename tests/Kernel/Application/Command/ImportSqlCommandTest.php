@@ -69,7 +69,7 @@ class ImportSqlCommandTest extends KernelTestCase
 
         $this->expectException(InvalidArgumentException::class);
 
-        chmod($this->sqlFilePath, 0000);
+        chmod($this->sqlFilePath, 0o000);
 
         $command = $application->find(ImportSqlCommand::COMMAND_NAME);
         $commandTester = new CommandTester($command);

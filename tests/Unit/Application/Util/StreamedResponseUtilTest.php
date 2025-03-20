@@ -40,13 +40,13 @@ class StreamedResponseUtilTest extends TestCase
         ]);
 
         yield [
-            static fn(): string => 'This is a test response.',
-            $streamedResponse->setCallback(static fn(): string => 'This is a test response.'),
+            static fn (): string => 'This is a test response.',
+            $streamedResponse->setCallback(static fn (): string => 'This is a test response.'),
         ];
 
         yield [
-            static fn(): int => 0,
-            $streamedResponse->setCallback(static fn(): int => 0),
+            static fn (): int => 0,
+            $streamedResponse->setCallback(static fn (): int => 0),
         ];
     }
 }

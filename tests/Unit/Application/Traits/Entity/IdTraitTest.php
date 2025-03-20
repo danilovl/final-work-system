@@ -19,7 +19,7 @@ class IdTraitTest extends TestCase
 {
     public function testId(): void
     {
-        $class = new class {
+        $class = new class() {
             use IdTrait;
         };
 

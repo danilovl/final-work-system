@@ -13,8 +13,10 @@
 namespace Domain\Widget\WidgetItem;
 
 use App\Application\Service\TwigRenderService;
-use App\Domain\SystemEvent\Facade\SystemEventFacade;
-use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
+use App\Domain\SystemEvent\Facade\{
+    SystemEventFacade,
+    SystemEventRecipientFacade
+};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;

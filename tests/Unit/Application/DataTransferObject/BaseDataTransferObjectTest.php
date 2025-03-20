@@ -23,9 +23,11 @@ class BaseDataTransferObjectTest extends TestCase
 
     protected function setUp(): void
     {
-        $dataTransferObject = new class extends BaseDataTransferObject {
+        $dataTransferObject = new class() extends BaseDataTransferObject {
             public ?string $user;
+
             public ?string $conversation;
+
             public ?string $type;
         };
 

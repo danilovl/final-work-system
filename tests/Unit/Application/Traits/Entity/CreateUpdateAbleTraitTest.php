@@ -20,7 +20,7 @@ class CreateUpdateAbleTraitTest extends TestCase
 {
     public function testDate(): void
     {
-        $class = new class {
+        $class = new class() {
             use CreateUpdateAbleTrait;
         };
 

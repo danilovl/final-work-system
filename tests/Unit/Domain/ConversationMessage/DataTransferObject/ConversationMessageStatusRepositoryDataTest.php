@@ -53,9 +53,9 @@ class ConversationMessageStatusRepositoryDataTest extends TestCase
 
         yield [
             [
-                'user' => new class extends User { },
-                'conversation' => new class extends Conversation { },
-                'type' => new class extends ConversationMessageStatusType { }
+                'user' => new class ( ) extends User {},
+                'conversation' => new class ( ) extends Conversation {},
+                'type' => new class ( ) extends ConversationMessageStatusType {}
             ]
         ];
     }

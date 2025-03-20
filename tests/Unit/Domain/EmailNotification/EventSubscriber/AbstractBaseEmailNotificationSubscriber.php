@@ -35,13 +35,19 @@ use Symfony\Component\Messenger\{
 abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 {
     protected static string $classSubscriber;
+
     protected EventDispatcher $dispatcher;
 
     protected readonly UserFacade $userFacade;
+
     protected readonly TwigRenderService $twigRenderService;
+
     protected readonly TranslatorService $translator;
+
     protected readonly EmailNotificationFactory $emailNotificationFactory;
+
     protected readonly ParameterServiceInterface $parameterService;
+
     protected readonly MessageBusInterface $bus;
 
     protected function setUp(): void

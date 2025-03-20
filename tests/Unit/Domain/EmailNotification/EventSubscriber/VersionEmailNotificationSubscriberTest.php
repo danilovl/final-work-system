@@ -22,6 +22,7 @@ use App\Domain\Work\Service\WorkService;
 class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = VersionEmailNotificationSubscriber::class;
+
     protected readonly VersionEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void

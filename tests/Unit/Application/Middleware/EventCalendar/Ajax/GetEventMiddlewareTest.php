@@ -84,7 +84,7 @@ class GetEventMiddlewareTest extends TestCase
     {
         return new ControllerEvent(
             $this->createMock(HttpKernelInterface::class),
-            static fn(): bool => true,
+            static fn (): bool => true,
             $request,
             HttpKernelInterface::MAIN_REQUEST
         );

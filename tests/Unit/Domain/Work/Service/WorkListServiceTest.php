@@ -27,6 +27,7 @@ use PHPUnit\Framework\TestCase;
 class WorkListServiceTest extends TestCase
 {
     private WorkListService $workListService;
+
     private User $user;
 
     protected function setUp(): void

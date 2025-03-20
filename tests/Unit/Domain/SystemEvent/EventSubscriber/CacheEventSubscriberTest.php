@@ -22,6 +22,7 @@ use PHPUnit\Framework\TestCase;
 class CacheEventSubscriberTest extends TestCase
 {
     private HomepageCache $homepageCache;
+
     private CacheEventSubscriber $subscriber;
 
     protected function setUp(): void

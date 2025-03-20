@@ -19,6 +19,7 @@ use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = UserEmailNotificationSubscriber::class;
+
     protected readonly UserEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void

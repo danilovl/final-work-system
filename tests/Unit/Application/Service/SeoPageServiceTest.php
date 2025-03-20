@@ -21,7 +21,7 @@ class SeoPageServiceTest extends TestCase
 {
     private SeoPageService $seoPageService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $translator = $this->createMock(TranslatorInterface::class);
         $translator->expects($this->any())

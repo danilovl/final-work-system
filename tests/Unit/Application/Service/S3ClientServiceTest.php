@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
 class S3ClientServiceTest extends TestCase
 {
     private S3Client $s3Client;
+
     private S3ClientService $s3ClientService;
 
     protected function setUp(): void

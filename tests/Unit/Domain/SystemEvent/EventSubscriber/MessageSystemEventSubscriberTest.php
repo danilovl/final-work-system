@@ -17,6 +17,7 @@ use App\Domain\SystemEvent\EventSubscriber\MessageSystemEventSubscriber;
 class MessageSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = MessageSystemEventSubscriber::class;
+
     protected readonly MessageSystemEventSubscriber $subscriber;
 
     protected function setUp(): void
@@ -26,4 +27,3 @@ class MessageSystemEventSubscriberTest extends BaseSystemEventSubscriber
         $this->subscriber = new MessageSystemEventSubscriber($this->entityManagerService);
     }
 }
-

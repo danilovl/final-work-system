@@ -21,7 +21,7 @@ class TrimTransformerTest extends TestCase
 {
     private TrimTransformer $commaDotTransformer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->commaDotTransformer = new TrimTransformer;
     }

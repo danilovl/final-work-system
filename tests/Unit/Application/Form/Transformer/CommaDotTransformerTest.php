@@ -23,7 +23,7 @@ class CommaDotTransformerTest extends TestCase
 {
     private CommaDotTransformer $commaDotTransformer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->commaDotTransformer = new CommaDotTransformer;
     }

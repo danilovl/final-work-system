@@ -21,7 +21,7 @@ class DashboardControllerTest extends KernelTestCase
 {
     private DashboardController $dashboardController;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
 
@@ -56,6 +56,6 @@ class DashboardControllerTest extends KernelTestCase
         $items = $this->dashboardController->configureMenuItems();
         $items = iterator_to_array($items);
 
-        $this->assertSame(5, count($items));
+        $this->assertCount(5, $items);
     }
 }

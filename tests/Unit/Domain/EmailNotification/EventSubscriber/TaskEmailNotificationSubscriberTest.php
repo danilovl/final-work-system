@@ -21,6 +21,7 @@ use App\Domain\Work\Entity\Work;
 class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = TaskEmailNotificationSubscriber::class;
+
     protected readonly TaskEmailNotificationSubscriber $subscriber;
 
     protected function setUp(): void

@@ -23,7 +23,7 @@ class TwigRenderServiceTest extends KernelTestCase
 {
     private TwigRenderService $twigRenderService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->twigRenderService = $kernel->getContainer()->get(TwigRenderService::class);

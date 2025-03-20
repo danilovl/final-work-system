@@ -30,7 +30,7 @@ class HomepageCacheTest extends TestCase
 {
     private HomepageCache $homepageCache;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $cache = new ArrayAdapter;
 
@@ -75,6 +75,6 @@ class HomepageCacheTest extends TestCase
 
         $result = $this->homepageCache->createHomepagePaginator($user);
 
-        $this->assertSame(1, count($result));
+        $this->assertCount(1, $result);
     }
 }

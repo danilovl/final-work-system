@@ -20,6 +20,7 @@ use PHPUnit\Framework\TestCase;
 class WorkRoleHelperTest extends TestCase
 {
     private Work $work;
+
     private User $user;
 
     protected function setUp(): void

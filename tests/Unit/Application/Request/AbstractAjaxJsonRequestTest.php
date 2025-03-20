@@ -29,6 +29,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AbstractAjaxJsonRequestTest extends TestCase
 {
     private RequestStack $requestStackMissing;
+
     private RequestStack $requestStackFilled;
 
     protected function setUp(): void
@@ -60,6 +61,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
 
         new class ($jsonResponse, Validation::createValidator(), $this->requestStackMissing) extends AbstractAjaxJsonRequest {
             public string $start;
+
             public string $end;
 
             public function __construct(
@@ -102,6 +104,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
     {
         new class (Validation::createValidator(), $this->requestStackFilled) extends AbstractAjaxJsonRequest {
             public string $start;
+
             public string $end;
 
             protected function getConstraints(): Collection
@@ -133,6 +136,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
     {
         new class (Validation::createValidator(), $this->requestStackFilled) extends AbstractAjaxJsonRequest {
             public string $start;
+
             public string $end;
 
             protected function getConstraints(): Collection
@@ -159,6 +163,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
     {
         new class (Validation::createValidator(), $this->requestStackFilled) extends AbstractAjaxJsonRequest {
             public string $start;
+
             public string $end;
 
             protected function getConstraints(): Collection

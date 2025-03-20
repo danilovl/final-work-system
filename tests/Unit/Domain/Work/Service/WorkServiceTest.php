@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
 class WorkServiceTest extends TestCase
 {
     private Work $work;
+
     private WorkService $workService;
 
     protected function setUp(): void

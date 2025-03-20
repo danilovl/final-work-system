@@ -24,6 +24,7 @@ use stdClass;
 class EntityManagerServiceTest extends TestCase
 {
     private EntityManagerService $entityManagerService;
+
     private EntityManagerInterface $entityManager;
 
     protected function setUp(): void

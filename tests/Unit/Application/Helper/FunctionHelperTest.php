@@ -23,7 +23,7 @@ class FunctionHelperTest extends TestCase
     #[DataProvider('randomPasswordProvider')]
     public function testRandomPassword(int $length): void
     {
-        $passwordLength = strlen(FunctionHelper::randomPassword($length));
+        $passwordLength = mb_strlen(FunctionHelper::randomPassword($length));
 
         $this->assertEquals($length, $passwordLength);
     }

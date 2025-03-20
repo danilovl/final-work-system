@@ -39,7 +39,7 @@ class ObjectHelperTest extends TestCase
     public static function classProvider(): Generator
     {
         yield [
-            new class { }, []
+            new class ( ) {}, []
         ];
 
         yield [

@@ -26,7 +26,7 @@ class CommentFormTest extends KernelTestCase
 {
     private FormFactory $formFactory;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->formFactory = $kernel->getContainer()->get('form.factory');

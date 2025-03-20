@@ -18,12 +18,15 @@ use Symfony\Component\Mailer\{
     Envelope,
     MailerInterface
 };
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\RawMessage;
+use Symfony\Component\Mime\{
+    Address,
+    RawMessage
+};
 
 class MailerServiceTest extends TestCase
 {
     private MailerInterface $mailerInterface;
+
     private MailerService $mailerService;
 
     protected function setUp(): void

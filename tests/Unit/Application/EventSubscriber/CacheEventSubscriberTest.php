@@ -23,6 +23,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 class CacheEventSubscriberTest extends TestCase
 {
     private CacheInterface $cache;
+
     private CacheEventSubscriber $subscriber;
 
     protected function setUp(): void

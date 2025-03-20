@@ -21,6 +21,7 @@ use Psr\Container\ContainerInterface;
 class WidgetManagerServiceTest extends TestCase
 {
     private ContainerInterface $container;
+
     private WidgetManagerService $widgetManagerService;
 
     protected function setUp(): void

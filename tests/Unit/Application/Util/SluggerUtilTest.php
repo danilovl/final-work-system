@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 class SluggerUtilTest extends TestCase
 {
     #[DataProvider('slugifyDataProvider')]
-    public function testSlugify(string $input, string $expectedOutput)
+    public function testSlugify(string $input, string $expectedOutput): void
     {
         $slugger = new SluggerUtil;
         $this->assertEquals($expectedOutput, $slugger->slugify($input));

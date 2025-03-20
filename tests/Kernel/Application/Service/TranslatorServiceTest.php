@@ -21,7 +21,7 @@ class TranslatorServiceTest extends KernelTestCase
 {
     private TranslatorService $translatorService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->translatorService = $kernel->getContainer()->get(TranslatorService::class);

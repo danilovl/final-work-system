@@ -23,7 +23,7 @@ class LocaleTypeTest extends KernelTestCase
 {
     private FormInterface $form;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $formFactory = $kernel->getContainer()->get('form.factory');

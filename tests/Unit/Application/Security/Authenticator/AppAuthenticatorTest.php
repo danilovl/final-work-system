@@ -31,17 +31,25 @@ use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
     CustomUserMessageAuthenticationException
 };
-use Symfony\Component\Security\Http\HttpUtils;
-use Symfony\Component\Security\Http\SecurityRequestAttributes;
+use Symfony\Component\Security\Http\{
+    HttpUtils,
+    SecurityRequestAttributes
+};
 
 class AppAuthenticatorTest extends TestCase
 {
     private Request $request;
+
     private UserService $userService;
+
     private AppAuthenticator $authenticator;
+
     private UrlGeneratorInterface $urlGenerator;
+
     private HttpUtils $httpUtils;
+
     private HttpKernelInterface $httpKernel;
+
     private UserFacade $userFacade;
 
     protected function setUp(): void

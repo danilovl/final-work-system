@@ -76,7 +76,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->expectException(UnexpectedTypeException::class);
 
         $this->validator->initialize($this->context);
-        $this->validator->validate(new DateTime, new class extends Constraint {});
+        $this->validator->validate(new DateTime, new class ( ) extends Constraint {});
     }
 
     public function testDateTimeType(): void
@@ -84,7 +84,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->expectException(UnexpectedTypeException::class);
 
         $this->validator->initialize($this->context);
-        $this->validator->validate(1234, new FirstWeekDay);
+        $this->validator->validate(1_234, new FirstWeekDay);
     }
 
     public static function validateSuccessProvider(): Generator

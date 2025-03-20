@@ -23,6 +23,7 @@ use PHPUnit\Framework\TestCase;
 class LoggableHandlerTest extends TestCase
 {
     private LoggableHandler $loggableHandler;
+
     private EntityManagerService $entityManagerService;
 
     protected function setUp(): void
@@ -40,7 +41,7 @@ class LoggableHandlerTest extends TestCase
             ->expects($this->once())
             ->method('persistAndFlush');
 
-        $this->expectOutputString('Success create log for class "" and username "". '. PHP_EOL);
+        $this->expectOutputString('Success create log for class "" and username "". ' . PHP_EOL);
         $this->loggableHandler->__invoke($loggableMessage);
     }
 }
