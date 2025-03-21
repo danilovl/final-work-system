@@ -31,6 +31,9 @@ jobs:
       - name: Composer install
         uses: ./.github/actions/composer-install
 
+      - name: Run cs-fixer check
+        uses: ./.github/actions/run-phpstan
+
       - name: Run phpstan
         uses: ./.github/actions/run-phpstan
 

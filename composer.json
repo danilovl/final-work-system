@@ -141,7 +141,8 @@
             "@php bin/console cache:warmup --env=dev",
             "bash bin/web-test.sh"
         ],
-        "cs-fixer": "vendor/bin/php-cs-fixer fix src/ --allow-risky=yes",
+        "cs-fixer": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "cs-fixer-check": "vendor/bin/php-cs-fixer fix --dry-run --allow-risky=yes",
         "phpstan": "phpstan analyse -c phpstan.neon src --no-progress",
         "phpstan-generate-baseline": "vendor/bin/phpstan analyse --configuration phpstan.neon src/ tests/ --generate-baseline",
         "phpstan-clear-result-cache": "phpstan clear-result-cache",

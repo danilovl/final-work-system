@@ -1,0 +1,9 @@
+name: Run cs-fixer check
+description: Run cs-fixer check
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run cs-fixer check
+      shell: bash
+      run: docker compose exec -T php composer cs-fixer-check
