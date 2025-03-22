@@ -1,4 +1,4 @@
-name: Phpunit
+name: phpunit|phpstan|cs-fixer
 
 on:
   - workflow_dispatch
