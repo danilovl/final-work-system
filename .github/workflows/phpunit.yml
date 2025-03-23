@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/actions/composer-install
 
       - name: Run cs-fixer check
-        uses: ./.github/actions/run-phpstan
+        uses: ./.github/actions/run-cs-fixer-check
 
       - name: Run phpstan
         uses: ./.github/actions/run-phpstan
