@@ -19,7 +19,9 @@ use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 class SeoRuntime
 {
     private const string TITLE = '<title>%s</title>';
+
     private const string META = '<meta %s="%s" />';
+
     private const string META_CONTENT = '<meta %s="%s" content="%s" />';
 
     public function __construct(private readonly SeoPageService $seoPageService) {}

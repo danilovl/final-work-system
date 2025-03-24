@@ -73,13 +73,13 @@ class WorkForm extends AbstractType
                 'constraints' => [
                     new NotBlank
                 ],
-                'query_builder' => fn(): QueryBuilder => $this->workStatusDataGridHelper->queryBuilder(),
+                'query_builder' => fn (): QueryBuilder => $this->workStatusDataGridHelper->queryBuilder(),
             ])
             ->add('categories', EntityType::class, [
                 'class' => WorkCategory::class,
                 'multiple' => true,
                 'required' => false,
-                'query_builder' => fn(): QueryBuilder => $this->workCategoryDataGridHelper->queryBuilderWorkCategoriesByOwner($user),
+                'query_builder' => fn (): QueryBuilder => $this->workCategoryDataGridHelper->queryBuilderWorkCategoriesByOwner($user),
             ])
             ->add('type', EntityType::class, [
                 'class' => WorkType::class,
@@ -149,11 +149,11 @@ class WorkForm extends AbstractType
 
     private function callbackQueryBuilder(string $role): callable
     {
-        return fn(): QueryBuilder => $this->userDataGridHelper->queryBuilderAllByRole($role);
+        return fn (): QueryBuilder => $this->userDataGridHelper->queryBuilderAllByRole($role);
     }
 
     private function callbackChoiceLabel(): callable
     {
-        return static fn(User $user): string => sprintf('%s (%s)', $user->getFullNameDegree(), $user->getUsername());
+        return static fn (User $user): string => sprintf('%s (%s)', $user->getFullNameDegree(), $user->getUsername());
     }
 }

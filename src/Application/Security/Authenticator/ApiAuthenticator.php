@@ -38,7 +38,9 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 class ApiAuthenticator extends AbstractAuthenticator
 {
     public const string AUTH_KEY = 'X-AUTH-API-KEY';
+
     public const string AUTH_USER_TOKEN_KEY = 'X-AUTH-USER-TOKEN';
+
     public const string AUTH_USER_USERNAME = 'X-AUTH-USER-USERNAME';
 
     public function __construct(
