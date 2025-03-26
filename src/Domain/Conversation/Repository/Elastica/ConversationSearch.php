@@ -18,7 +18,7 @@ use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use stdClass;
 
-readonly class ConversationSearch
+class ConversationSearch
 {
     public function __construct(private TransformedFinder $transformedFinderConversation) {}
 

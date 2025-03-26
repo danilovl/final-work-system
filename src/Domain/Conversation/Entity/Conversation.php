@@ -55,7 +55,7 @@ class Conversation
     private ?string $name = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'conversationsOwner')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
@@ -70,7 +70,7 @@ class Conversation
     private ?Work $work = null;
 
     #[ORM\ManyToOne(targetEntity: ConversationType::class, fetch: 'EAGER', inversedBy: 'conversations')]
-    #[ORM\JoinColumn(name: 'conversation_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'conversation_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ConversationType $type;
 

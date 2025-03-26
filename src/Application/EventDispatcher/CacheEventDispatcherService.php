@@ -16,7 +16,7 @@ use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Application\EventSubscriber\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class CacheEventDispatcherService
+class CacheEventDispatcherService
 {
     public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 

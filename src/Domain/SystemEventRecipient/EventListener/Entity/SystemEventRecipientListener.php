@@ -18,7 +18,7 @@ use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\EventDispatcher\UserCacheEventDispatcherService;
 use Doctrine\ORM\Event\PostPersistEventArgs;
 
-readonly class SystemEventRecipientListener
+class SystemEventRecipientListener
 {
     public function __construct(
         private CacheEventDispatcherService $cacheEventDispatcherService,

@@ -18,7 +18,7 @@ use Symfony\Component\Mailer\{
 };
 use Symfony\Component\Mime\RawMessage;
 
-readonly class MailerService implements MailerInterface
+class MailerService implements MailerInterface
 {
     public function __construct(private MailerInterface $mailer) {}
 

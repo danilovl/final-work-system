@@ -41,12 +41,12 @@ class EventScheduleTemplate
     private EventSchedule $schedule;
 
     #[ORM\ManyToOne(targetEntity: EventType::class)]
-    #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private EventType $type;
 
     #[ORM\ManyToOne(targetEntity: EventAddress::class)]
-    #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventAddress $address = null;
 

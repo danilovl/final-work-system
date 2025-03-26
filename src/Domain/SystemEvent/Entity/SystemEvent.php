@@ -50,7 +50,7 @@ class SystemEvent
     private SystemEventType $type;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'systemEventsOwner')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
@@ -80,7 +80,7 @@ class SystemEvent
     private ?Conversation $conversation = null;
 
     /** @var Collection<SystemEventRecipient> */
-    #[ORM\OneToMany(mappedBy: 'systemEvent', targetEntity: SystemEventRecipient::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[ORM\OneToMany(mappedBy: 'systemEvent', targetEntity: SystemEventRecipient::class, cascade: ['persist'], fetch: 'EAGER')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $recipient;
 

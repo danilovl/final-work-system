@@ -51,7 +51,7 @@ class ConversationMessageStatus
     private User $user;
 
     #[ORM\ManyToOne(targetEntity: ConversationMessageStatusType::class, fetch: 'EAGER', inversedBy: 'conversationMessageStatus')]
-    #[ORM\JoinColumn(name: 'conversation_message_status_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'conversation_message_status_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ConversationMessageStatusType $type;
 

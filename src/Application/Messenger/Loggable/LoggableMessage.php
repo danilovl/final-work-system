@@ -14,7 +14,7 @@ namespace App\Application\Messenger\Loggable;
 
 use Gedmo\Loggable\Entity\LogEntry;
 
-readonly class LoggableMessage
+class LoggableMessage
 {
     public function __construct(public LogEntry $logEntry) {}
 }

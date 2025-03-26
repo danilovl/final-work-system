@@ -53,24 +53,24 @@ class Media
     use IsOwnerTrait;
 
     #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'mediaOwner')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     #[ORM\ManyToOne(targetEntity: MediaType::class, fetch: 'EAGER', inversedBy: 'medias')]
-    #[ORM\JoinColumn(name: 'media_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'media_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private MediaType $type;
 
     #[ORM\ManyToOne(targetEntity: MediaMimeType::class, fetch: 'EAGER', inversedBy: 'medias')]
-    #[ORM\JoinColumn(name: 'media_mime_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'media_mime_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private MediaMimeType $mimeType;
 
     /** @var Collection<MediaCategory> */
     #[ORM\ManyToMany(targetEntity: MediaCategory::class, inversedBy: 'medias')]
     #[ORM\JoinTable(name: 'media_to_media_category')]
-    #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'media_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
     #[ORM\InverseJoinColumn(name: 'media_category_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $categories;

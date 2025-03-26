@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Session\{
 };
 use Symfony\Component\Routing\RouterInterface;
 
-readonly class RequestService
+class RequestService
 {
     public function __construct(
         private RequestStack $requestStack,

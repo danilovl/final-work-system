@@ -12,7 +12,7 @@
 
 namespace App\Application\EventDispatcher\GenericEvent;
 
-readonly class CacheClearGenericEvent
+class CacheClearGenericEvent
 {
     public function __construct(public string $key) {}
 }

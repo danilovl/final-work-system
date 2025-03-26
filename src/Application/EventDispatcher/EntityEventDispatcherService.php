@@ -17,7 +17,7 @@ use App\Application\EventSubscriber\Events;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class EntityEventDispatcherService
+class EntityEventDispatcherService
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,

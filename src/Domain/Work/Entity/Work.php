@@ -47,38 +47,38 @@ class Work
     use CreateUpdateAbleTrait;
 
     #[ORM\ManyToOne(targetEntity: WorkType::class, fetch: 'EAGER', inversedBy: 'works')]
-    #[ORM\JoinColumn(name: 'work_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'work_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private WorkType $type;
 
     #[ORM\ManyToOne(targetEntity: WorkStatus::class, fetch: 'EAGER', inversedBy: 'works')]
-    #[ORM\JoinColumn(name: 'work_status_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'work_status_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private WorkStatus $status;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'authorWorks')]
-    #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $author;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'supervisorWorks')]
-    #[ORM\JoinColumn(name: 'supervisor_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'supervisor_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $supervisor;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'opponentWorks')]
-    #[ORM\JoinColumn(name: 'opponent_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'opponent_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?User $opponent = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'consultantWorks')]
-    #[ORM\JoinColumn(name: 'consultant_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'consultant_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
     private ?User $consultant = null;
 
     /** @var Collection<WorkCategory> */
     #[ORM\ManyToMany(targetEntity: WorkCategory::class, inversedBy: 'works')]
     #[ORM\JoinTable(name: 'work_to_work_category')]
-    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'work_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\InverseJoinColumn(name: 'work_category_id', referencedColumnName: 'id', nullable: false)]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $categories;

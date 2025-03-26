@@ -47,17 +47,17 @@ class Event
     use IsOwnerTrait;
 
     #[ORM\ManyToOne(targetEntity: EventType::class, fetch: 'EAGER', inversedBy: 'events')]
-    #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'event_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private EventType $type;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'eventsOwner')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private User $owner;
 
     #[ORM\ManyToOne(targetEntity: EventAddress::class, fetch: 'EAGER', inversedBy: 'events')]
-    #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'event_address_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventAddress $address = null;
 
@@ -73,12 +73,12 @@ class Event
     #[Gedmo\Versioned]
     private DateTime $end;
 
-    #[ORM\OneToOne(mappedBy: 'event', targetEntity: EventParticipant::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'event', targetEntity: EventParticipant::class, cascade: ['persist'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventParticipant $participant = null;
 
     /** @var Collection<Comment> */
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Comment::class, cascade: ['persist'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $comment;
 

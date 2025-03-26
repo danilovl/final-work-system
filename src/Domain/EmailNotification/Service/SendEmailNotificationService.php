@@ -20,7 +20,7 @@ use Symfony\Component\Mime\{
     Address
 };
 
-readonly class SendEmailNotificationService
+class SendEmailNotificationService
 {
     public function __construct(private MailerService $mailer) {}
 

@@ -14,7 +14,7 @@ namespace App\Domain\Task\EventDispatcher\GenericEvent;
 
 use App\Domain\Task\Entity\Task;
 
-readonly class TaskGenericEvent
+class TaskGenericEvent
 {
     public function __construct(public Task $task, public ?string $type = null) {}
 }

@@ -35,7 +35,7 @@ class Comment
     use CreateUpdateAbleTrait;
 
     #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'comment')]
-    #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Event $event;
 

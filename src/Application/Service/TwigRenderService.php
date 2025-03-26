@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\{
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 
-readonly class TwigRenderService
+class TwigRenderService
 {
     public function __construct(
         private Environment $twig,

@@ -21,7 +21,7 @@ use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 
-readonly class UserFacade
+class UserFacade
 {
     public function __construct(
         private UserRepository $userRepository,
