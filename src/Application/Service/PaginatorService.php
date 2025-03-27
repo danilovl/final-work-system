@@ -17,7 +17,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PaginatorService
+readonly class PaginatorService
 {
     public function __construct(
         private PaginatorInterface $paginator,

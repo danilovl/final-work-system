@@ -20,7 +20,7 @@ use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class TaskEventDispatcherService
+readonly class TaskEventDispatcherService
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,

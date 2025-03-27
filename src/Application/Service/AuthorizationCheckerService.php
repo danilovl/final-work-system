@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Throwable;
 
-class AuthorizationCheckerService
+readonly class AuthorizationCheckerService
 {
     public function __construct(private AuthorizationCheckerInterface $authorizationChecker) {}
 

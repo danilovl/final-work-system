@@ -20,7 +20,7 @@ use Doctrine\ORM\{
 };
 use Doctrine\Persistence\ObjectRepository;
 
-class EntityManagerService
+readonly class EntityManagerService
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

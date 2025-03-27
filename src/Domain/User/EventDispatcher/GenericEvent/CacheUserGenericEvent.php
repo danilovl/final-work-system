@@ -14,7 +14,7 @@ namespace App\Domain\User\EventDispatcher\GenericEvent;
 
 use App\Domain\User\Entity\User;
 
-class CacheUserGenericEvent
+readonly class CacheUserGenericEvent
 {
     public function __construct(public User $user) {}
 }

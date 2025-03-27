@@ -17,7 +17,7 @@ use App\Domain\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class TokenStorageUtil
+readonly class TokenStorageUtil
 {
     public function __construct(private TokenStorageInterface $tokenStorage) {}
 

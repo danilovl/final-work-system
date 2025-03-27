@@ -21,7 +21,7 @@ use Symfony\Component\Form\{
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class FormDeleteFactory
+readonly class FormDeleteFactory
 {
     public function __construct(
         private FormFactoryInterface $formFactory,

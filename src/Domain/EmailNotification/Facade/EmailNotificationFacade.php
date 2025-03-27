@@ -15,7 +15,7 @@ namespace App\Domain\EmailNotification\Facade;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\Repository\EmailNotificationRepository;
 
-class EmailNotificationFacade
+readonly class EmailNotificationFacade
 {
     public function __construct(private EmailNotificationRepository $emailNotificationRepository) {}
 

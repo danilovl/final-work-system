@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class RequestListener implements EventSubscriberInterface
+readonly class RequestListener implements EventSubscriberInterface
 {
     public function __construct(
         private UserService $userService,

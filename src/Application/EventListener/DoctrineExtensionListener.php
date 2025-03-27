@@ -17,7 +17,7 @@ use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class DoctrineExtensionListener implements EventSubscriberInterface
+readonly class DoctrineExtensionListener implements EventSubscriberInterface
 {
     public function __construct(
         private UserService $userService,
