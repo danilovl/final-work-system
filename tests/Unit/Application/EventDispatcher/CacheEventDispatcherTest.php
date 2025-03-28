@@ -12,18 +12,18 @@
 
 namespace App\Tests\Unit\Application\EventDispatcher;
 
-use App\Application\EventDispatcher\CacheEventDispatcherService;
+use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Application\EventSubscriber\Events;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CacheEventDispatcherServiceTest extends TestCase
+class CacheEventDispatcherTest extends TestCase
 {
     public function testOnClearCacheKey(): void
     {
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $cacheEventDispatcherService = new CacheEventDispatcherService($eventDispatcher);
+        $cacheEventDispatcher = new CacheEventDispatcher($eventDispatcher);
 
         $eventDispatcher->expects($this->once())
             ->method('dispatch')
@@ -32,6 +32,6 @@ class CacheEventDispatcherServiceTest extends TestCase
                 Events::CACHE_CLEAR_KEY
             );
 
-        $cacheEventDispatcherService->onClearCacheKey('test_key');
+        $cacheEventDispatcher->onClearCacheKey('test_key');
     }
 }

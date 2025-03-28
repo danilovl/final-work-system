@@ -16,7 +16,7 @@ use App\Application\Constant\{
     CacheKeyConstant,
     AjaxJsonTypeConstant
 };
-use App\Application\EventDispatcher\CacheEventDispatcherService;
+use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Application\Service\{
     RequestService,
     EntityManagerService
@@ -31,7 +31,7 @@ readonly class SystemEventViewedHandle
         private EntityManagerService $entityManagerService,
         private RequestService $requestService,
         private UserService $userService,
-        private CacheEventDispatcherService $cacheEventDispatcherService
+        private CacheEventDispatcher $cacheEventDispatcher
     ) {}
 
     public function __invoke(SystemEventRecipient $systemEventRecipient): JsonResponse
@@ -41,7 +41,7 @@ readonly class SystemEventViewedHandle
 
         $user = $this->userService->getUser();
 
-        $this->cacheEventDispatcherService->onClearCacheKey(
+        $this->cacheEventDispatcher->onClearCacheKey(
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
 

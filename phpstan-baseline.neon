@@ -411,11 +411,6 @@ parameters:
 			path: tests/Unit/Application/DataTransferObject/BaseDataTransferObjectTest.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventDispatcher/EntityEventDispatcherServiceTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Application\\\\EventListener\\\\LoggableListener\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php

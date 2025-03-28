@@ -13,7 +13,7 @@
 namespace App\Domain\SystemEventRecipient\EventListener\Entity;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\EventDispatcher\CacheEventDispatcherService;
+use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\EventDispatcher\UserCacheEventDispatcherService;
 use Doctrine\ORM\Event\PostPersistEventArgs;
@@ -21,7 +21,7 @@ use Doctrine\ORM\Event\PostPersistEventArgs;
 readonly class SystemEventRecipientListener
 {
     public function __construct(
-        private CacheEventDispatcherService $cacheEventDispatcherService,
+        private CacheEventDispatcher $cacheEventDispatcher,
         private UserCacheEventDispatcherService $userCacheEventDispatcherService,
     ) {}
 
@@ -37,7 +37,7 @@ readonly class SystemEventRecipientListener
 
     public function clearCache(SystemEventRecipient $recipient): void
     {
-        $this->cacheEventDispatcherService->onClearCacheKey(
+        $this->cacheEventDispatcher->onClearCacheKey(
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $recipient->getRecipient()->getId())
         );
 

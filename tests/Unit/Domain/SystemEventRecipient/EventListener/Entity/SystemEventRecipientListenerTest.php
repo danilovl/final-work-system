@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Domain\SystemEventRecipient\EventListener\Entity;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\EventDispatcher\CacheEventDispatcherService;
+use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\EventListener\Entity\SystemEventRecipientListener;
 use App\Domain\User\Entity\User;
@@ -30,7 +30,7 @@ class SystemEventRecipientListenerTest extends TestCase
         $recipient = new SystemEventRecipient;
         $recipient->setRecipient($user);
 
-        $cacheEventDispatcherService = $this->createMock(CacheEventDispatcherService::class);
+        $cacheEventDispatcherService = $this->createMock(CacheEventDispatcher::class);
         $cacheEventDispatcherService
             ->expects($this->once())
             ->method('onClearCacheKey')

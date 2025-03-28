@@ -16,7 +16,7 @@ use App\Application\Constant\{
     CacheKeyConstant,
     AjaxJsonTypeConstant
 };
-use App\Application\EventDispatcher\CacheEventDispatcherService;
+use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Application\Service\RequestService;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
@@ -32,7 +32,7 @@ readonly class SystemEventViewedAllHandle
         private UserService $userService,
         private SystemEventFacade $systemEventFacade,
         private SystemEventRecipientFacade $systemEventRecipientFacade,
-        private CacheEventDispatcherService $cacheEventDispatcherService
+        private CacheEventDispatcher $cacheEventDispatcher
     ) {}
 
     public function __invoke(): JsonResponse
@@ -44,7 +44,7 @@ readonly class SystemEventViewedAllHandle
         if ($isUnreadExist === true) {
             $this->systemEventRecipientFacade->updateViewedAll($user);
 
-            $this->cacheEventDispatcherService->onClearCacheKey(
+            $this->cacheEventDispatcher->onClearCacheKey(
                 sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
             );
         }

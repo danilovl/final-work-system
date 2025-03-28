@@ -12,38 +12,40 @@
 
 namespace Application\EventDispatcher;
 
-use App\Application\EventDispatcher\EntityEventDispatcherService;
+use App\Application\EventDispatcher\EntityEventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
 use App\Application\EventSubscriber\Events;
 use Danilovl\AsyncBundle\Service\AsyncService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class EntityEventDispatcherServiceTest extends TestCase
+class EntityEventDispatcherTest extends TestCase
 {
-    private EventDispatcherInterface $eventDispatcher;
+    private MockObject $eventDispatcher;
 
     private AsyncService $asyncService;
 
-    private EntityEventDispatcherService $entityEventDispatcherService;
+    private EntityEventDispatcher $entityEventDispatcher;
 
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->asyncService = new AsyncService;
-        $this->entityEventDispatcherService = new EntityEventDispatcherService($this->eventDispatcher, $this->asyncService);
+        $this->entityEventDispatcher = new EntityEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
     public function testOnResetPasswordTokenCreate(): void
     {
-        $this->eventDispatcher->expects($this->once())
+        $this->eventDispatcher
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 $this->isInstanceOf(EntityPostFlushGenericEvent::class),
                 Events::ENTITY_POST_PERSIST_FLUSH
             );
 
-        $this->entityEventDispatcherService->onPostPersistFlush(new class ( ) {});
+        $this->entityEventDispatcher->onPostPersistFlush(new class ( ) {});
         $this->asyncService->call();
     }
 }
