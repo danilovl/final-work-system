@@ -12,6 +12,7 @@ parameters:
     paths:
         - src
         - bin
+        - tests
     excludePaths:
         - src/Application/Command
         - src/Domain/User/Command/
