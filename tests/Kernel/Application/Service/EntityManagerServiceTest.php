@@ -45,6 +45,7 @@ class EntityManagerServiceTest extends KernelTestCase
     #[DataProvider('referenceProvider')]
     public function testReference(string $entityClass): void
     {
+        /** @var object $reference */
         $reference = $this->entityManagerService->getReference($entityClass, 1);
         $this->assertEquals(get_parent_class($reference), $entityClass);
     }

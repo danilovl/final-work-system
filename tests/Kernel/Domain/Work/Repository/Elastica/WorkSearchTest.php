@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
 
 class WorkSearchTest extends KernelTestCase
 {
-    private FormInterface|WorkSearchForm $workSearchForm;
+    private FormInterface $workSearchForm;
 
     private WorkSearch $workSearch;
 

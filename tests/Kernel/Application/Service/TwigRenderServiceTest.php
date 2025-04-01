@@ -43,6 +43,7 @@ class TwigRenderServiceTest extends KernelTestCase
 
         $this->assertInstanceOf(Response::class, $response);
 
+        /** @var string $content */
         $content = $response->getContent();
         $this->assertStringContainsString('first', $content);
         $this->assertStringContainsString('second', $content);

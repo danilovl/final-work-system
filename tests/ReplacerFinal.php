@@ -12,10 +12,12 @@
 
 namespace App\Tests;
 
+use Doctrine\Common\Collections\Order;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
 use RegexIterator;
+use SplFileInfo;
 
 class ReplacerFinal
 {
@@ -41,10 +43,12 @@ class ReplacerFinal
         }
 
         $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/../tests'));
+        /** @var SplFileInfo[] $phpFiles */
         $phpFiles = new RegexIterator($files, '~\.php$~');
 
         foreach ($phpFiles as $file) {
             $filePath = $file->getPathname();
+            /** @var string $contents */
             $contents = file_get_contents($filePath);
 
             $matches = [];
@@ -74,7 +78,7 @@ class ReplacerFinal
                 if ($reflectionClass->isFinal() || $reflectionClass->isReadOnly()) {
                     $filename = $reflectionClass->getFileName();
                     if ($filename) {
-                        $this->removeClassAccess($reflectionClass->getFileName());
+                        $this->removeClassAccess($filename);
                     }
                 }
             }
@@ -90,8 +94,11 @@ class ReplacerFinal
             return;
         }
 
+        /** @var string $serialized */
         $serialized = file_get_contents(self::FILE_NAME);
-        $this->classes = unserialize($serialized);
+        /** @var array $classes */
+        $classes = unserialize($serialized);
+        $this->classes = $classes;
 
         foreach ($this->classes as $fileName => $content) {
             file_put_contents($fileName, $content);
@@ -106,6 +113,7 @@ class ReplacerFinal
             return;
         }
 
+        /** @var string $classContent */
         $classContent = file_get_contents($fileName);
         if (!isset($this->classes[$fileName])) {
             $this->classes[$fileName] = $classContent;
