@@ -12,7 +12,6 @@
 
 namespace App\Tests;
 
-use Doctrine\Common\Collections\Order;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;

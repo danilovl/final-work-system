@@ -18,13 +18,14 @@ use App\Application\Messenger\Loggable\{
 };
 use App\Application\Service\EntityManagerService;
 use Gedmo\Loggable\Entity\LogEntry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class LoggableHandlerTest extends TestCase
 {
     private LoggableHandler $loggableHandler;
 
-    private EntityManagerService $entityManagerService;
+    private MockObject $entityManagerService;
 
     protected function setUp(): void
     {

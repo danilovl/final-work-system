@@ -14,6 +14,7 @@ namespace App\Tests\Unit\Application\EventListener;
 
 use App\Application\EventListener\RequestListener;
 use App\Domain\User\Entity\User;
+use PHPUnit\Framework\MockObject\MockObject;
 use App\Application\Service\{
     SeoPageService,
     EntityManagerService
@@ -31,11 +32,11 @@ use Symfony\Component\HttpKernel\{
 
 class RequestListenerTest extends TestCase
 {
-    private UserService $userService;
+    private MockObject $userService;
 
-    private EntityManagerService $entityManagerService;
+    private MockObject $entityManagerService;
 
-    private SeoPageService $seoPageService;
+    private MockObject $seoPageService;
 
     private AsyncService $asyncService;
 

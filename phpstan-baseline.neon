@@ -321,41 +321,6 @@ parameters:
 			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Interfaces\\\\DataTransferObject\\\\DataTransferObjectInterface\\:\\:toJson\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/DataTransferObject/BaseDataTransferObjectTest.php
-
-		-
-			message: "#^Call to an undefined static method App\\\\Application\\\\Interfaces\\\\DataTransferObject\\\\DataTransferObjectInterface\\:\\:createFromJson\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/DataTransferObject/BaseDataTransferObjectTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\EventListener\\\\LoggableListener\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventListener/DoctrineExtensionListenerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\SeoPageService\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/EventListener/RequestListenerTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Contracts\\\\Cache\\\\CacheInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/EventSubscriber/CacheEventSubscriberTest.php
-
-		-
 			message: "#^Access to an undefined property object\\:\\:\\$property1\\.$#"
 			count: 1
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
@@ -364,16 +329,6 @@ parameters:
 			message: "#^Access to an undefined property object\\:\\:\\$property2\\.$#"
 			count: 1
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Messenger/Loggable/LoggableHandlerTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Security/ApiKeyUserProviderTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"

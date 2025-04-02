@@ -14,12 +14,11 @@ namespace App\Tests\Unit\Application\DataTransferObject;
 
 use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Application\Exception\PropertyNotExistException;
-use App\Application\Interfaces\DataTransferObject\DataTransferObjectInterface;
 use PHPUnit\Framework\TestCase;
 
 class BaseDataTransferObjectTest extends TestCase
 {
-    private DataTransferObjectInterface $dataTransferObject;
+    private BaseDataTransferObject $dataTransferObject;
 
     protected function setUp(): void
     {
@@ -71,6 +70,7 @@ class BaseDataTransferObjectTest extends TestCase
 
     public function testCreateFromJson(): void
     {
+        /** @var string $json */
         $json = json_encode($this->getData());
         $dataTransferObject = $this->dataTransferObject::createFromJson($json);
 

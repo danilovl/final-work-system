@@ -16,6 +16,7 @@ use App\Application\Security\Provider\ApiKeyUserProvider;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\User\Entity\User;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\{
     UserNotFoundException,
@@ -24,7 +25,7 @@ use Symfony\Component\Security\Core\Exception\{
 
 class ApiKeyUserProviderTest extends TestCase
 {
-    private ApiUserFacade $apiUserFacade;
+    private MockObject $apiUserFacade;
 
     private ApiKeyUserProvider $apiKeyUserProvider;
 

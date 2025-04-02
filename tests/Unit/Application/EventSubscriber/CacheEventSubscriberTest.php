@@ -17,12 +17,13 @@ use App\Application\EventSubscriber\{
     Events,
     CacheEventSubscriber
 };
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class CacheEventSubscriberTest extends TestCase
 {
-    private CacheInterface $cache;
+    private MockObject $cache;
 
     private CacheEventSubscriber $subscriber;
 

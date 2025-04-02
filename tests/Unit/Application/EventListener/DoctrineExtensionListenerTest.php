@@ -21,6 +21,7 @@ use App\Application\EventListener\{
 };
 use App\Domain\User\Service\UserService;
 use App\Domain\User\Entity\User;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -28,13 +29,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class DoctrineExtensionListenerTest extends TestCase
 {
-    private TokenInterface $token;
-
-    private TokenStorageInterface $tokenStorage;
-
-    private LoggableListener $loggableListener;
-
-    private UserService $userService;
+    private MockObject $loggableListener;
 
     private DoctrineExtensionListener $listener;
 
@@ -45,15 +40,15 @@ class DoctrineExtensionListenerTest extends TestCase
             ->method('getUsername')
             ->willReturn('username');
 
-        $this->token = $this->createMock(TokenInterface::class);
-        $this->token->expects($this->any())
+        $token = $this->createMock(TokenInterface::class);
+        $token->expects($this->any())
             ->method('getUser')
             ->willReturn($user);
 
-        $this->tokenStorage = $this->createMock(TokenStorageInterface::class);
-        $this->tokenStorage->expects($this->any())
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $tokenStorage->expects($this->any())
             ->method('getToken')
-            ->willReturn($this->token);
+            ->willReturn($token);
 
         $unitOfWork = $this->createMock(UnitOfWork::class);
         $unitOfWork->expects($this->any())
@@ -67,13 +62,13 @@ class DoctrineExtensionListenerTest extends TestCase
 
         $userFacade = $this->createMock(UserFacade::class);
 
-        $this->userService = new UserService($this->tokenStorage, $entityManagerService, $userFacade);
+        $userService = new UserService($tokenStorage, $entityManagerService, $userFacade);
         $this->loggableListener = $this->createMock(LoggableListener::class);
         $this->loggableListener->expects($this->any())
             ->method('setUsername')
             ->with($user->getUsername());
 
-        $this->listener = new DoctrineExtensionListener($this->userService, $this->loggableListener);
+        $this->listener = new DoctrineExtensionListener($userService, $this->loggableListener);
     }
 
     public function testOnKernelRequest(): void
@@ -95,6 +90,7 @@ class DoctrineExtensionListenerTest extends TestCase
 
         $userService = new UserService($tokenStorage, $entityManagerService, $userFacade);
 
+        $this->loggableListener = $this->createMock(LoggableListener::class);
         $this->loggableListener
             ->expects($this->never())
             ->method('setUsername');
