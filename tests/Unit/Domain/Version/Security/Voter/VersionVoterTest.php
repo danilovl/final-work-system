@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\Version\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Version\Security\Voter\VersionVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,7 @@ class VersionVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private VersionVoter $versionVoter;
+    private TestVoterInterface $versionVoter;
 
     protected function setUp(): void
     {

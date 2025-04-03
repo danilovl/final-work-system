@@ -17,6 +17,7 @@ use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -40,17 +41,17 @@ class AppAuthenticatorTest extends TestCase
 {
     private Request $request;
 
-    private UserService $userService;
+    private MockObject $userService;
+
+    private MockObject $urlGenerator;
+
+    private MockObject $httpUtils;
+
+    private MockObject $httpKernel;
+
+    private MockObject $userFacade;
 
     private AppAuthenticator $authenticator;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private HttpUtils $httpUtils;
-
-    private HttpKernelInterface $httpKernel;
-
-    private UserFacade $userFacade;
 
     protected function setUp(): void
     {

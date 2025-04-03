@@ -16,15 +16,16 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Security\Voter\WorkVoter;
 use App\Domain\Work\Service\WorkService;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use PHPUnit\Framework\TestCase;
 
 class WorkVoterTest extends TestCase
 {
-    private WorkVoter $workVoter;
+    private TestVoterInterface $workVoter;
 
     protected function setUp(): void
     {
-        $this->workVoter = new class(new WorkService) extends WorkVoter {
+        $this->workVoter = new class(new WorkService) extends WorkVoter implements TestVoterInterface{
             public function supportsPublic(string $attribute, mixed $subject): bool
             {
                 return $this->supports($attribute, $subject);

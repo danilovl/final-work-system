@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\EventAddress\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Security\Voter\EventAddressVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,7 @@ class EventAddressVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private EventAddressVoter $eventAddressVoter;
+    private TestVoterInterface $eventAddressVoter;
 
     protected function setUp(): void
     {

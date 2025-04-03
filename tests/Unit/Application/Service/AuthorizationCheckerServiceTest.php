@@ -13,6 +13,7 @@
 namespace Application\Service;
 
 use App\Application\Service\AuthorizationCheckerService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -22,7 +23,7 @@ class AuthorizationCheckerServiceTest extends TestCase
 {
     private AuthorizationCheckerService $authorizationCheckerService;
 
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private MockObject $authorizationChecker;
 
     protected function setUp(): void
     {

@@ -16,14 +16,15 @@ use App\Application\Security\Provider\AppUserProvider;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class AppUserProviderTest extends TestCase
 {
-    private UserFacade $userFacade;
+    private MockObject $userFacade;
 
-    private EntityManagerService $entityManagerService;
+    private MockObject $entityManagerService;
 
     private AppUserProvider $appUserProvider;
 

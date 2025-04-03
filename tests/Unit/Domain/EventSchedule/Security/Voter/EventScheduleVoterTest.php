@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\EventSchedule\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Security\Voter\EventScheduleVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,7 @@ class EventScheduleVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private EventScheduleVoter $eventScheduleVoter;
+    private TestVoterInterface $eventScheduleVoter;
 
     protected function setUp(): void
     {

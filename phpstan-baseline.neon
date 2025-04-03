@@ -331,156 +331,6 @@ parameters:
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/Security/AppUserProviderTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Security/Authenticator/ApiAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:expects\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\User\\\\Service\\\\UserService\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpKernel\\\\HttpKernelInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Routing\\\\Generator\\\\UrlGeneratorInterface\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Http\\\\HttpUtils\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Security/Authenticator/AppAuthenticatorTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\AuthorizationCheckerInterface\\:\\:expects\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Service/AuthorizationCheckerServiceTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:expects\\(\\)\\.$#"
-			count: 12
-			path: tests/Unit/Application/Service/EntityManagerServiceTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Mailer\\\\MailerInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/MailerServiceTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Application/Service/RequestServiceTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/RequestServiceTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function base64_encode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/ResizeImageServiceTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Tests\\\\Helper\\\\Application\\\\Service\\\\S3Client\\:\\:expects\\(\\)\\.$#"
-			count: 8
-			path: tests/Unit/Application/Service/S3ClientServiceTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\RequestStack\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/TranslatorServiceTest.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\:\\:expects\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Service/TranslatorServiceTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$date of method Symfony\\\\Component\\\\HttpFoundation\\\\Response\\:\\:setDate\\(\\) expects DateTimeInterface, DateTimeImmutable\\|null given\\.$#"
-			count: 1
-			path: tests/Unit/Application/Util/StreamedResponseUtilTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Article/Security/Voter/ArticleVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoterTest\\:\\:\\$articleVoter \\(App\\\\Domain\\\\Article\\\\Security\\\\Voter\\\\ArticleVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Article/Security/Voter/ArticleVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoterTest\\:\\:\\$articleCategoryVoter \\(App\\\\Domain\\\\ArticleCategory\\\\Security\\\\Voter\\\\ArticleCategoryVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/ArticleCategory/Security/Voter/ArticleCategoryVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Conversation\\\\Security\\\\Voter\\\\ConversationVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Conversation/Security/Voter/ConversationVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\ConversationMessage\\\\Security\\\\Voter\\\\ConversationMessageVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/ConversationMessage/Security/Voter/ConversationMessageVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Document/Security/Voter/DocumentVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoterTest\\:\\:\\$documentVoter \\(App\\\\Domain\\\\Document\\\\Security\\\\Voter\\\\DocumentVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Document/Security/Voter/DocumentVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoterTest\\:\\:\\$documentCategoryVoter \\(App\\\\Domain\\\\DocumentCategory\\\\Security\\\\Voter\\\\DocumentCategoryVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/DocumentCategory/Security/Voter/DocumentCategoryVoterTest.php
-
-		-
 			message: "#^Access to an undefined property App\\\\Tests\\\\Unit\\\\Domain\\\\EmailNotification\\\\EventSubscriber\\\\AbstractBaseEmailNotificationSubscriber\\:\\:\\$subscriber\\.$#"
 			count: 5
 			path: tests/Unit/Domain/EmailNotification/EventSubscriber/AbstractBaseEmailNotificationSubscriber.php
@@ -696,36 +546,6 @@ parameters:
 			path: tests/Unit/Domain/Event/EventDispatcher/EventEventDispatcherServiceTest.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Event/Security/Voter/EventAddressVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventVoter \\(App\\\\Domain\\\\Event\\\\Security\\\\Voter\\\\EventVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Event/Security/Voter/EventAddressVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoterTest\\:\\:\\$eventAddressVoter \\(App\\\\Domain\\\\EventAddress\\\\Security\\\\Voter\\\\EventAddressVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EventAddress/Security/Voter/EventAddressVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoterTest\\:\\:\\$eventScheduleVoter \\(App\\\\Domain\\\\EventSchedule\\\\Security\\\\Voter\\\\EventScheduleVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/EventSchedule/Security/Voter/EventScheduleVoterTest.php
-
-		-
 			message: "#^Call to an undefined method App\\\\Application\\\\Service\\\\S3ClientService\\:\\:expects\\(\\)\\.$#"
 			count: 2
 			path: tests/Unit/Domain/Media/Command/S3CreateBucketCommandTest.php
@@ -846,29 +666,9 @@ parameters:
 			path: tests/Unit/Domain/SystemEvent/EventSubscriber/WorkSystemEventSubscriberTest.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoterTest\\:\\:\\$systemEventRecipientVoter \\(App\\\\Domain\\\\SystemEventRecipient\\\\Security\\\\Voter\\\\SystemEventRecipientVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/SystemEventRecipient/Security/Voter/SystemEventRecipientVoterTest.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Task/EventDispatcher/TaskEventDispatcherServiceTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Task/Security/Voter/TaskVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoterTest\\:\\:\\$taskVoter \\(App\\\\Domain\\\\Task\\\\Security\\\\Voter\\\\TaskVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Task/Security/Voter/TaskVoterTest.php
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
@@ -879,16 +679,6 @@ parameters:
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Version/EventDispatcher/VersionEventDispatcherServiceTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoterTest\\:\\:\\$versionVoter \\(App\\\\Domain\\\\Version\\\\Security\\\\Voter\\\\VersionVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/Version/Security/Voter/VersionVoterTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Domain\\\\Widget\\\\Service\\\\WidgetManagerService\\:\\:expects\\(\\)\\.$#"
@@ -934,21 +724,6 @@ parameters:
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/Domain/Work/EventDispatcher/WorkEventDispatcherServiceTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\Work\\\\Security\\\\Voter\\\\WorkVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/Work/Security/Voter/WorkVoterTest.php
-
-		-
-			message: "#^Call to an undefined method App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\:\\:supportsPublic\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Domain/WorkCategory/Security/Voter/WorkVoterTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkVoterTest\\:\\:\\$workCategoryVoter \\(App\\\\Domain\\\\WorkCategory\\\\Security\\\\Voter\\\\WorkCategoryVoter\\) does not accept Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\Voter\\\\VoterInterface\\.$#"
-			count: 1
-			path: tests/Unit/Domain/WorkCategory/Security/Voter/WorkVoterTest.php
 
 		-
 			message: "#^Cannot call method availableOptionValues\\(\\) on array\\<array\\<Symfony\\\\Component\\\\DomCrawler\\\\Field\\\\FormField\\>\\|Symfony\\\\Component\\\\DomCrawler\\\\Field\\\\FormField\\>\\|Symfony\\\\Component\\\\DomCrawler\\\\Field\\\\FormField\\.$#"

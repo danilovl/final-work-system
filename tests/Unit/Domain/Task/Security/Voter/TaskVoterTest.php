@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\Task\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Security\Voter\TaskVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,7 @@ class TaskVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private TaskVoter $taskVoter;
+    private TestVoterInterface $taskVoter;
 
     protected function setUp(): void
     {

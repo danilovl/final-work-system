@@ -13,6 +13,7 @@
 namespace App\Tests\Unit\Application\Service;
 
 use App\Application\Service\MailerService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\{
     Envelope,
@@ -25,7 +26,7 @@ use Symfony\Component\Mime\{
 
 class MailerServiceTest extends TestCase
 {
-    private MailerInterface $mailerInterface;
+    private MockObject $mailerInterface;
 
     private MailerService $mailerService;
 
@@ -40,7 +41,8 @@ class MailerServiceTest extends TestCase
         $message = new RawMessage('Test Message');
         $envelope = new Envelope(new Address('test@localhost'), [new Address('test@localhost')]);
 
-        $this->mailerInterface->expects($this->once())
+        $this->mailerInterface
+            ->expects($this->once())
             ->method('send')
             ->with($message, $envelope);
 

@@ -12,13 +12,13 @@
 
 namespace App\Tests\Helper\Traits;
 
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 
 trait VoterPublicTrait
 {
-    public function createVoterPublic(string $parentClass): VoterInterface
+    public function createVoterPublic(string $parentClass): TestVoterInterface
     {
-        $classCode = 'return new class extends %s {
+        $classCode = 'return new class extends %s implements %s {
                 public function supportsPublic(string $attribute, mixed $subject): bool
                 {
                     return $this->supports($attribute, $subject);
@@ -26,7 +26,7 @@ trait VoterPublicTrait
             };
         ';
 
-        $classCode = sprintf($classCode, $parentClass);
+        $classCode = sprintf($classCode, $parentClass, TestVoterInterface::class);
 
         return eval($classCode);
     }

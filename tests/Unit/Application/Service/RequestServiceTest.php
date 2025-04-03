@@ -62,10 +62,9 @@ class RequestServiceTest extends TestCase
     {
         $this->requestService->addFlash(FlashTypeConstant::ERROR->value, 'error');
 
-        $message = $this->requestStack
-            ->getSession()
-            ->getFlashBag()
-            ->get(FlashTypeConstant::ERROR->value);
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $message = $session->getFlashBag()->get(FlashTypeConstant::ERROR->value);
 
         $this->assertEquals('error', $message[0]);
     }
@@ -74,10 +73,9 @@ class RequestServiceTest extends TestCase
     {
         $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'error');
 
-        $message = $this->requestStack
-            ->getSession()
-            ->getFlashBag()
-            ->get(FlashTypeConstant::ERROR->value);
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $message = $session->getFlashBag()->get(FlashTypeConstant::ERROR->value);
 
         $this->assertEquals('trans', $message[0]);
     }
@@ -102,8 +100,10 @@ class RequestServiceTest extends TestCase
     {
         $expectedResult = array_merge($expectedResult, ['test' => 'test']);
         $result = $this->requestService->createAjaxJson($type, ['test' => 'test']);
+        /** @var string $content */
+        $content = $result->getContent();
 
-        $this->assertSame($expectedResult, json_decode($result->getContent(), true));
+        $this->assertSame($expectedResult, json_decode($content, true));
     }
 
     public static function createAjaxJsonProvider(): Generator

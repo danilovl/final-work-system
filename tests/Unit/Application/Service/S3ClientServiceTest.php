@@ -16,11 +16,12 @@ use App\Application\Service\S3ClientService;
 use App\Tests\Helper\Application\Service\S3Client;
 use Aws\Command;
 use Aws\S3\Exception\S3Exception;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class S3ClientServiceTest extends TestCase
 {
-    private S3Client $s3Client;
+    private MockObject $s3Client;
 
     private S3ClientService $s3ClientService;
 

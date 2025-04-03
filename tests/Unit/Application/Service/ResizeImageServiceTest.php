@@ -21,7 +21,10 @@ class ResizeImageServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->originImage = base64_encode(file_get_contents(__DIR__ . '/../../../Helper/image/test_jpg.jpg'));
+        /** @var string $contents */
+        $contents = file_get_contents(__DIR__ . '/../../../Helper/image/test_jpg.jpg');
+
+        $this->originImage = base64_encode($contents);
     }
 
     public function testResizeBase64Image(): void

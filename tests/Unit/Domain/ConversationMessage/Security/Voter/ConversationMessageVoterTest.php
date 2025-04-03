@@ -16,15 +16,16 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Security\Voter\ConversationMessageVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use PHPUnit\Framework\TestCase;
 
 class ConversationMessageVoterTest extends TestCase
 {
-    private ConversationMessageVoter $conversationMessageVoter;
+    private TestVoterInterface $conversationMessageVoter;
 
     protected function setUp(): void
     {
-        $this->conversationMessageVoter = new class(new ConversationService) extends ConversationMessageVoter {
+        $this->conversationMessageVoter = new class(new ConversationService) extends ConversationMessageVoter implements TestVoterInterface{
             public function supportsPublic(string $attribute, mixed $subject): bool
             {
                 return $this->supports($attribute, $subject);

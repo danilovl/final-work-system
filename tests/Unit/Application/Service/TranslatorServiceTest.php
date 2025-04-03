@@ -13,6 +13,7 @@
 namespace App\Tests\Unit\Application\Service;
 
 use App\Application\Service\TranslatorService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -24,9 +25,9 @@ class TranslatorServiceTest extends TestCase
 {
     private TranslatorService $translatorService;
 
-    private TranslatorInterface $translatorMock;
+    private MockObject $translatorMock;
 
-    private RequestStack $requestStackMock;
+    private MockObject $requestStackMock;
 
     protected function setUp(): void
     {

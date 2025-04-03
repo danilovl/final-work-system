@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\Document\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Document\Security\Voter\DocumentVoter;
 use App\Domain\Media\Entity\Media;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,7 @@ class DocumentVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private DocumentVoter $documentVoter;
+    private TestVoterInterface $documentVoter;
 
     protected function setUp(): void
     {

@@ -13,6 +13,7 @@
 namespace App\Tests\Unit\Application\Util;
 
 use App\Application\Util\StreamedResponseUtil;
+use DateTimeImmutable;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +25,9 @@ class StreamedResponseUtilTest extends TestCase
     public function testCreateStreamedResponse(callable $callback, StreamedResponse $expectedResponse): void
     {
         $response = StreamedResponseUtil::create($callback);
-        $response->setDate($expectedResponse->getDate());
+        /** @var DateTimeImmutable $date */
+        $date = $expectedResponse->getDate();
+        $response->setDate($date);
 
         $this->assertEquals($expectedResponse, $response);
     }

@@ -18,6 +18,7 @@ use App\Domain\User\Entity\User;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -25,7 +26,7 @@ class EntityManagerServiceTest extends TestCase
 {
     private EntityManagerService $entityManagerService;
 
-    private EntityManagerInterface $entityManager;
+    private MockObject $entityManager;
 
     protected function setUp(): void
     {

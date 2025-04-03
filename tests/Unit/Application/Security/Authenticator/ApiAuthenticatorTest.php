@@ -20,6 +20,7 @@ use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -38,11 +39,11 @@ class ApiAuthenticatorTest extends TestCase
 
     private ApiAuthenticator $authenticator;
 
-    private UserService $userService;
+    private MockObject $userService;
 
-    private UserFacade $userFacade;
+    private MockObject $userFacade;
 
-    private ApiUserFacade $apiUserFacade;
+    private MockObject $apiUserFacade;
 
     protected function setUp(): void
     {

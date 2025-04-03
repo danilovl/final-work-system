@@ -16,6 +16,7 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Article\Security\Voter\ArticleVoter;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Domain\ArticleCategory\Security\Voter\ArticleCategoryVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -23,7 +24,7 @@ class ArticleVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private ArticleVoter $articleVoter;
+    private TestVoterInterface $articleVoter;
 
     protected function setUp(): void
     {

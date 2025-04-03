@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Domain\WorkCategory\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Security\Voter\WorkCategoryVoter;
+use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
 use App\Tests\Helper\Traits\VoterPublicTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,7 @@ class WorkVoterTest extends TestCase
 {
     use VoterPublicTrait;
 
-    private WorkCategoryVoter $workCategoryVoter;
+    private TestVoterInterface $workCategoryVoter;
 
     protected function setUp(): void
     {
