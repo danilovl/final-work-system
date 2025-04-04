@@ -17,12 +17,17 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class BaseSystemEventSubscriber extends TestCase
 {
-    protected readonly EventDispatcher $dispatcher;
+    protected static string $classSubscriber;
 
-    protected readonly EntityManagerService $entityManagerService;
+    protected EventDispatcher $dispatcher;
+
+    protected EntityManagerService $entityManagerService;
+
+    protected EventSubscriberInterface $subscriber;
 
     protected function setUp(): void
     {

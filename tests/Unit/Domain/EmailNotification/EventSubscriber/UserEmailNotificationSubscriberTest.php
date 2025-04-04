@@ -20,7 +20,7 @@ class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 {
     protected static string $classSubscriber = UserEmailNotificationSubscriber::class;
 
-    protected readonly UserEmailNotificationSubscriber $subscriber;
+    protected UserEmailNotificationSubscriber $userEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -34,6 +34,8 @@ class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->parameterService,
             $this->bus
         );
+
+        $this->userEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnResetPasswordToken(): void
@@ -46,8 +48,8 @@ class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $event = new UserGenericEvent($user);
 
-        $this->subscriber->onUserCreate($event);
-        $this->subscriber->onUserEdit($event);
+        $this->userEmailNotificationSubscriber->onUserCreate($event);
+        $this->userEmailNotificationSubscriber->onUserEdit($event);
 
         $this->assertTrue(true);
     }

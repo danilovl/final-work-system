@@ -18,8 +18,6 @@ class MessageSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = MessageSystemEventSubscriber::class;
 
-    protected readonly MessageSystemEventSubscriber $subscriber;
-
     protected function setUp(): void
     {
         parent::setUp();

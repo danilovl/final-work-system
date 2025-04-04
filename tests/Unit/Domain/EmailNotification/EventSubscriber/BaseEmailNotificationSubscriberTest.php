@@ -18,14 +18,17 @@ use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\User\Entity\User;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = BaseEmailNotificationSubscriber::class;
 
-    protected readonly EmailNotificationMessage $emailNotificationMessage;
+    protected EmailNotificationMessage $emailNotificationMessage;
 
-    protected readonly BaseEmailNotificationSubscriber $subscriber;
+    protected EventSubscriberInterface $subscriber;
+
+    protected BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -47,25 +50,27 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->emailNotificationFactory,
             $this->parameterService,
             $this->bus
-        ) extends BaseEmailNotificationSubscriber {
-            public function addEmailNotificationToQueuePublic(EmailNotificationMessage $emailNotificationMessage): void
+        ) extends BaseEmailNotificationSubscriber implements EventSubscriberInterface{
+            public static function getSubscribedEvents(): array
             {
-                $this->addEmailNotificationToQueue($emailNotificationMessage);
+                return [];
             }
         };
+
+        $this->baseEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testAddEmailNotificationToQueueNotEnable(): void
     {
         $emailNotificationMessage = $this->createMock(EmailNotificationMessage::class);
 
-        $this->subscriber->enableAddToQueue = false;
+        $this->baseEmailNotificationSubscriber->enableAddToQueue = false;
 
         $this->userFacade
             ->expects($this->never())
             ->method('findOneByEmail');
 
-        $this->subscriber->addEmailNotificationToQueuePublic($emailNotificationMessage);
+        $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($emailNotificationMessage);
     }
 
     public function testAddEmailNotificationToQueueUserNoEnable(): void
@@ -82,7 +87,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             ->method('findOneByEmail')
             ->willReturn($user);
 
-        $this->subscriber->addEmailNotificationToQueuePublic($this->emailNotificationMessage);
+        $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($this->emailNotificationMessage);
     }
 
     public function testAddEmailNotificationToQueueEnableMessenger(): void
@@ -90,14 +95,14 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $user = new User;
         $user->setEnabledEmailNotification(true);
 
-        $this->subscriber->addEmailNotificationToQueuePublic($this->emailNotificationMessage);
+        $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($this->emailNotificationMessage);
 
         $this->assertTrue(true);
     }
 
     public function testAddEmailNotificationToQueueSaveLocal(): void
     {
-        $this->subscriber->enableMessenger = false;
+        $this->baseEmailNotificationSubscriber->enableMessenger = false;
 
         $this->bus
             ->expects($this->never())
@@ -116,7 +121,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             ->method('createFromModel')
             ->willReturn(new EmailNotification);
 
-        $this->subscriber->addEmailNotificationToQueuePublic($this->emailNotificationMessage);
+        $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($this->emailNotificationMessage);
     }
 
     #[DataProvider('subscribedEvents')]

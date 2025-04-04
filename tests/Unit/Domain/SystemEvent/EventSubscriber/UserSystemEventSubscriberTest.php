@@ -18,8 +18,6 @@ class UserSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = UserSystemEventSubscriber::class;
 
-    protected readonly UserSystemEventSubscriber $subscriber;
-
     protected function setUp(): void
     {
         parent::setUp();

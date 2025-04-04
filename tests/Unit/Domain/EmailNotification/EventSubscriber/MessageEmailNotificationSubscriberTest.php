@@ -19,12 +19,13 @@ use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\EmailNotification\EventSubscriber\MessageEmailNotificationSubscriber;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {
     protected static string $classSubscriber = MessageEmailNotificationSubscriber::class;
 
-    protected readonly MessageEmailNotificationSubscriber $subscriber;
+    protected MessageEmailNotificationSubscriber $messageEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -38,6 +39,8 @@ class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
             $this->parameterService,
             $this->bus
         );
+
+        $this->messageEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnMessageCreate(): void
@@ -75,7 +78,7 @@ class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
         $event = new ConversationMessageGenericEvent($conversationMessage);
 
-        $this->subscriber->onMessageCreate($event);
+        $this->messageEmailNotificationSubscriber->onMessageCreate($event);
 
         $this->assertTrue(true);
     }

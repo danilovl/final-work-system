@@ -18,8 +18,6 @@ class EventSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = EventSystemEventSubscriber::class;
 
-    protected readonly EventSystemEventSubscriber $subscriber;
-
     protected function setUp(): void
     {
         parent::setUp();

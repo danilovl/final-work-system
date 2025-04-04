@@ -21,7 +21,7 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 {
     protected static string $classSubscriber = WorkEmailNotificationSubscriber::class;
 
-    protected readonly WorkEmailNotificationSubscriber $subscriber;
+    protected WorkEmailNotificationSubscriber $workEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -35,6 +35,8 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->parameterService,
             $this->bus
         );
+
+        $this->workEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnResetPasswordToken(): void
@@ -58,10 +60,10 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $event = new WorkGenericEvent($work);
 
-        $this->subscriber->onWorkCreate($event);
-        $this->subscriber->onWorkCreate($event);
-        $this->subscriber->onWorkEdit($event);
-        $this->subscriber->onWorkReminderDeadlineCreate($event);
+        $this->workEmailNotificationSubscriber->onWorkCreate($event);
+        $this->workEmailNotificationSubscriber->onWorkCreate($event);
+        $this->workEmailNotificationSubscriber->onWorkEdit($event);
+        $this->workEmailNotificationSubscriber->onWorkReminderDeadlineCreate($event);
 
         $this->assertTrue(true);
     }

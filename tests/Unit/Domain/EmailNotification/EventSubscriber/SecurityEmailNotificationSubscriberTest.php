@@ -21,7 +21,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 {
     protected static string $classSubscriber = SecurityEmailNotificationSubscriber::class;
 
-    protected readonly SecurityEmailNotificationSubscriber $subscriber;
+    protected SecurityEmailNotificationSubscriber $securityEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -35,6 +35,8 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             $this->parameterService,
             $this->bus
         );
+
+        $this->securityEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnResetPasswordToken(): void
@@ -51,7 +53,7 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
         $event = new ResetPasswordGenericEvent($resetPassword, 1_000);
 
-        $this->subscriber->onResetPasswordToken($event);
+        $this->securityEmailNotificationSubscriber->onResetPasswordToken($event);
 
         $this->assertTrue(true);
     }

@@ -23,7 +23,7 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 {
     protected static string $classSubscriber = VersionEmailNotificationSubscriber::class;
 
-    protected readonly VersionEmailNotificationSubscriber $subscriber;
+    protected VersionEmailNotificationSubscriber $versionEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -38,6 +38,8 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
             new WorkService,
             $this->bus
         );
+
+        $this->versionEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnResetPasswordToken(): void
@@ -64,8 +66,8 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
         $event = new VersionGenericEvent($media);
 
-        $this->subscriber->onVersionCreate($event);
-        $this->subscriber->onVersionEdit($event);
+        $this->versionEmailNotificationSubscriber->onVersionCreate($event);
+        $this->versionEmailNotificationSubscriber->onVersionEdit($event);
 
         $this->assertTrue(true);
     }

@@ -19,8 +19,6 @@ class WorkSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = WorkSystemEventSubscriber::class;
 
-    protected readonly WorkSystemEventSubscriber $subscriber;
-
     protected function setUp(): void
     {
         parent::setUp();

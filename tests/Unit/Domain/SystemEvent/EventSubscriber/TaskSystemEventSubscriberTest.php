@@ -18,8 +18,6 @@ class TaskSystemEventSubscriberTest extends BaseSystemEventSubscriber
 {
     protected static string $classSubscriber = TaskSystemEventSubscriber::class;
 
-    protected readonly TaskSystemEventSubscriber $subscriber;
-
     protected function setUp(): void
     {
         parent::setUp();

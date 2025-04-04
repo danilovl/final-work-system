@@ -22,7 +22,7 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 {
     protected static string $classSubscriber = TaskEmailNotificationSubscriber::class;
 
-    protected readonly TaskEmailNotificationSubscriber $subscriber;
+    protected TaskEmailNotificationSubscriber $taskEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -36,6 +36,8 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->parameterService,
             $this->bus
         );
+
+        $this->taskEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnResetPasswordToken(): void
@@ -59,13 +61,13 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $event = new TaskGenericEvent($task);
 
-        $this->subscriber->onTaskCreate($event);
-        $this->subscriber->onTaskEdit($event);
-        $this->subscriber->onTaskComplete($event);
-        $this->subscriber->onTaskInComplete($event);
-        $this->subscriber->onTaskNotifyComplete($event);
-        $this->subscriber->onTaskNotifyInComplete($event);
-        $this->subscriber->onTaskReminderDeadlineCreate($event);
+        $this->taskEmailNotificationSubscriber->onTaskCreate($event);
+        $this->taskEmailNotificationSubscriber->onTaskEdit($event);
+        $this->taskEmailNotificationSubscriber->onTaskComplete($event);
+        $this->taskEmailNotificationSubscriber->onTaskInComplete($event);
+        $this->taskEmailNotificationSubscriber->onTaskNotifyComplete($event);
+        $this->taskEmailNotificationSubscriber->onTaskNotifyInComplete($event);
+        $this->taskEmailNotificationSubscriber->onTaskReminderDeadlineCreate($event);
 
         $this->assertTrue(true);
     }

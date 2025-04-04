@@ -24,7 +24,7 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 {
     protected static string $classSubscriber = DocumentEmailNotificationSubscriber::class;
 
-    protected readonly DocumentEmailNotificationSubscriber $subscriber;
+    protected DocumentEmailNotificationSubscriber $documentEmailNotificationSubscriber;
 
     protected function setUp(): void
     {
@@ -47,6 +47,8 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             $userWorkService,
             $this->bus
         );
+
+        $this->documentEmailNotificationSubscriber = $this->subscriber;
     }
 
     public function testOnDocumentCreate(): void
@@ -67,7 +69,7 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             ->method('findOneByEmail')
             ->willReturn($user);
 
-        $this->subscriber->onDocumentCreate($event);
+        $this->documentEmailNotificationSubscriber->onDocumentCreate($event);
 
         $this->assertTrue(true);
     }

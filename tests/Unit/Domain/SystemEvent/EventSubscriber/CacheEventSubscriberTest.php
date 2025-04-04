@@ -17,11 +17,12 @@ use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
 use App\Domain\User\EventSubscriber\CacheEventSubscriber;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class CacheEventSubscriberTest extends TestCase
 {
-    private HomepageCache $homepageCache;
+    private MockObject&HomepageCache $homepageCache;
 
     private CacheEventSubscriber $subscriber;
 

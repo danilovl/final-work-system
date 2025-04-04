@@ -26,7 +26,7 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
 {
     protected static string $classSubscriber = EventEmailNotificationSubscriber::class;
 
-    protected readonly EventEmailNotificationSubscriber $subscriber;
+    protected EventEmailNotificationSubscriber $eventEmailNotificationSubscriber;
 
     private Event $eventWithParticipant;
 
@@ -44,6 +44,8 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
             $this->parameterService,
             $this->bus
         );
+
+        $this->eventEmailNotificationSubscriber = $this->subscriber;
 
         $user = new User;
         $user->setId(1);
@@ -70,10 +72,10 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
     {
         $event = new EventGenericEvent($this->eventWithParticipant);
 
-        $this->subscriber->onEventCreate($event);
-        $this->subscriber->onEventEdit($event);
-        $this->subscriber->onEventSwitchSkype($event);
-        $this->subscriber->onEventReservation($event);
+        $this->eventEmailNotificationSubscriber->onEventCreate($event);
+        $this->eventEmailNotificationSubscriber->onEventEdit($event);
+        $this->eventEmailNotificationSubscriber->onEventSwitchSkype($event);
+        $this->eventEmailNotificationSubscriber->onEventReservation($event);
 
         $this->assertTrue(true);
     }
@@ -82,8 +84,8 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
     {
         $event = new EventGenericEvent($this->eventWithoutParticipant);
 
-        $this->subscriber->onEventCreate($event);
-        $this->subscriber->onEventEdit($event);
+        $this->eventEmailNotificationSubscriber->onEventCreate($event);
+        $this->eventEmailNotificationSubscriber->onEventEdit($event);
 
         $this->assertTrue(true);
     }
@@ -99,8 +101,8 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
 
         $event = new EventCommentGenericEvent($comment);
 
-        $this->subscriber->onEventCommentCreate($event);
-        $this->subscriber->onEventCommentEdit($event);
+        $this->eventEmailNotificationSubscriber->onEventCommentCreate($event);
+        $this->eventEmailNotificationSubscriber->onEventCommentEdit($event);
 
         $this->assertTrue(true);
     }

@@ -12,6 +12,8 @@
 
 namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -38,17 +40,19 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 
     protected EventDispatcher $dispatcher;
 
-    protected readonly UserFacade $userFacade;
+    protected MockObject&UserFacade $userFacade;
 
-    protected readonly TwigRenderService $twigRenderService;
+    protected MockObject&TwigRenderService $twigRenderService;
 
-    protected readonly TranslatorService $translator;
+    protected MockObject&TranslatorService $translator;
 
-    protected readonly EmailNotificationFactory $emailNotificationFactory;
+    protected MockObject&EmailNotificationFactory $emailNotificationFactory;
 
-    protected readonly ParameterServiceInterface $parameterService;
+    protected ParameterServiceInterface $parameterService;
 
-    protected readonly MessageBusInterface $bus;
+    protected MockObject&MessageBusInterface $bus;
+
+    protected EventSubscriberInterface $subscriber;
 
     protected function setUp(): void
     {
