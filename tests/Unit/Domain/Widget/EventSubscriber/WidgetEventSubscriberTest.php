@@ -16,11 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use App\Domain\Widget\EventSubscriber\WidgetEventSubscriber;
 use App\Domain\Widget\Service\WidgetManagerService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class WidgetEventSubscriberTest extends TestCase
 {
-    private WidgetManagerService $widgetManagerService;
+    private MockObject&WidgetManagerService $widgetManagerService;
 
     private WidgetEventSubscriber $subscriber;
 

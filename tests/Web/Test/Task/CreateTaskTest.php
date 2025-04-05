@@ -38,6 +38,7 @@ class CreateTaskTest extends WebTestCase
 
         $link = $crawler->filter('#task-create')->first()->link();
         preg_match('~/work/([a-zA-Z0-9]+)/task/~', $link->getUri(), $matches);
+        /** @var array{0: string, 1: string} $matches */
         $workId = $matches[1];
 
         $crawler = $client->click($link);

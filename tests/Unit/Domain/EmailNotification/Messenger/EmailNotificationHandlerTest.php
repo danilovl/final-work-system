@@ -24,19 +24,20 @@ use App\Domain\EmailNotification\Messenger\{
 };
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class EmailNotificationHandlerTest extends TestCase
 {
-    private ParameterServiceInterface $parameterService;
+    private MockObject&ParameterServiceInterface $parameterService;
 
-    private SendEmailNotificationService $sendEmailNotificationService;
+    private MockObject&SendEmailNotificationService $sendEmailNotificationService;
 
-    private EmailNotificationFactory $emailNotificationFactory;
+    private MockObject&EmailNotificationFactory $emailNotificationFactory;
 
-    private EmailNotificationFacade $emailNotificationFacade;
+    private MockObject&EmailNotificationFacade $emailNotificationFacade;
 
-    private EntityManagerService $entityManagerService;
+    private MockObject&EntityManagerService $entityManagerService;
 
     private EmailNotificationHandler $emailNotificationHandler;
 

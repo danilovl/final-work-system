@@ -12,6 +12,7 @@
 
 namespace Domain\Widget\WidgetItem;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -29,11 +30,11 @@ use PHPUnit\Framework\TestCase;
 
 class WorkDeadlineNotifyWidgetTest extends TestCase
 {
-    private UserService $userService;
+    private MockObject&UserService $userService;
 
-    private WorkService $workService;
+    private MockObject&WorkService $workService;
 
-    private WorkFacade $workFacade;
+    private MockObject&WorkFacade $workFacade;
 
     private WorkDeadlineNotifyWidget $widget;
 

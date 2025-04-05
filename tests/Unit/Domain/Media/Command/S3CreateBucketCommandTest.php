@@ -16,15 +16,16 @@ use App\Application\Service\S3ClientService;
 use App\Domain\Media\Command\S3CreateBucketCommand;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\MediaType\Entity\MediaType;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class S3CreateBucketCommandTest extends TestCase
 {
-    private MediaTypeFacade $mediaTypeFacade;
+    private MockObject&MediaTypeFacade $mediaTypeFacade;
 
-    private S3ClientService $s3ClientService;
+    private MockObject&S3ClientService $s3ClientService;
 
     private S3CreateBucketCommand $s3CreateBucketCommand;
 

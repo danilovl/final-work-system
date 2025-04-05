@@ -19,13 +19,14 @@ use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 
 class VersionEventDispatcherServiceTest extends TestCase
 {
-    private EventDispatcherInterface $eventDispatcher;
+    private MockObject&EventDispatcherInterface $eventDispatcher;
 
     private AsyncService $asyncService;
 

@@ -13,6 +13,7 @@
 namespace Domain\Widget\WidgetItem;
 
 use App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget;
+use PHPUnit\Framework\MockObject\MockObject;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -24,14 +25,13 @@ use PHPUnit\Framework\TestCase;
 
 class UserProfileInformationNotifyWidgetTest extends TestCase
 {
-    private UserService $userService;
+    private MockObject&UserService $userService;
 
     private UserProfileInformationNotifyWidget $widget;
 
     protected function setUp(): void
     {
         $this->userService = $this->createMock(UserService::class);
-
 
         $twigRenderService = $this->createMock(TwigRenderService::class);
         $twigRenderService->expects($this->any())

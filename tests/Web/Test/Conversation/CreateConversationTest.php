@@ -15,6 +15,7 @@ namespace App\Tests\Web\Test\Conversation;
 use App\Tests\Web\Enum\LoginData;
 use App\Tests\Web\Traits\LoginTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Field\ChoiceFormField;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreateConversationTest extends WebTestCase
@@ -34,10 +35,14 @@ class CreateConversationTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, '/en/conversation/create');
 
         $form = $crawler->filter('#btn-conversation-create')->form();
-        $values = $form['conversation_compose_message[conversation]']->availableOptionValues();
+        /** @var ChoiceFormField $choiceFormField */
+        $choiceFormField = $form['conversation_compose_message[conversation]'];
+        $values = $choiceFormField->availableOptionValues();
 
         $form['conversation_compose_message[name]'] = 'New conversation title';
-        $form['conversation_compose_message[conversation]']->select($values[0]);
+        /** @var ChoiceFormField $conversationField */
+        $conversationField = $form['conversation_compose_message[conversation]'];
+        $conversationField->select($values[0]);
         $form['conversation_compose_message[content]'] = 'Message';
 
         $client->submit($form);

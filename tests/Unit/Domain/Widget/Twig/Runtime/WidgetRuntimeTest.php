@@ -15,11 +15,12 @@ namespace Domain\Widget\Twig\Runtime;
 use App\Domain\Widget\Service\WidgetManagerService;
 use App\Domain\Widget\Twig\Runtime\WidgetRuntime;
 use App\Domain\Widget\WidgetItem\BaseWidget;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class WidgetRuntimeTest extends TestCase
 {
-    private WidgetManagerService $widgetManagerService;
+    private MockObject&WidgetManagerService $widgetManagerService;
 
     private WidgetRuntime $widgetRuntime;
 
