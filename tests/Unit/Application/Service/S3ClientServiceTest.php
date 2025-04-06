@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 
 class S3ClientServiceTest extends TestCase
 {
-    private MockObject $s3Client;
+    private MockObject&S3Client $s3Client;
 
     private S3ClientService $s3ClientService;
 

@@ -23,7 +23,7 @@ class AuthorizationCheckerServiceTest extends TestCase
 {
     private AuthorizationCheckerService $authorizationCheckerService;
 
-    private MockObject $authorizationChecker;
+    private MockObject&AuthorizationCheckerInterface $authorizationChecker;
 
     protected function setUp(): void
     {

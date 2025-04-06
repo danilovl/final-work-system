@@ -26,7 +26,7 @@ use Symfony\Component\Mime\{
 
 class MailerServiceTest extends TestCase
 {
-    private MockObject $mailerInterface;
+    private MockObject&MailerInterface $mailerInterface;
 
     private MailerService $mailerService;
 

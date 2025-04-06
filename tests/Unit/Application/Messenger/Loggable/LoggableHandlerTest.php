@@ -25,7 +25,7 @@ class LoggableHandlerTest extends TestCase
 {
     private LoggableHandler $loggableHandler;
 
-    private MockObject $entityManagerService;
+    private MockObject&EntityManagerService $entityManagerService;
 
     protected function setUp(): void
     {

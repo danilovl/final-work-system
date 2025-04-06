@@ -39,11 +39,11 @@ class ApiAuthenticatorTest extends TestCase
 
     private ApiAuthenticator $authenticator;
 
-    private MockObject $userService;
+    private MockObject&UserService $userService;
 
-    private MockObject $userFacade;
+    private MockObject&UserFacade $userFacade;
 
-    private MockObject $apiUserFacade;
+    private MockObject&ApiUserFacade $apiUserFacade;
 
     protected function setUp(): void
     {

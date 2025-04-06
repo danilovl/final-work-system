@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Exception\{
 
 class ApiKeyUserProviderTest extends TestCase
 {
-    private MockObject $apiUserFacade;
+    private MockObject&ApiUserFacade $apiUserFacade;
 
     private ApiKeyUserProvider $apiKeyUserProvider;
 

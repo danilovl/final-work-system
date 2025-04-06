@@ -41,15 +41,15 @@ class AppAuthenticatorTest extends TestCase
 {
     private Request $request;
 
-    private MockObject $userService;
+    private MockObject&UserService $userService;
 
-    private MockObject $urlGenerator;
+    private MockObject&UrlGeneratorInterface $urlGenerator;
 
-    private MockObject $httpUtils;
+    private MockObject&HttpUtils $httpUtils;
 
-    private MockObject $httpKernel;
+    private MockObject&HttpKernelInterface $httpKernel;
 
-    private MockObject $userFacade;
+    private MockObject&UserFacade $userFacade;
 
     private AppAuthenticator $authenticator;
 

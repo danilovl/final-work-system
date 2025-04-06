@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class DoctrineExtensionListenerTest extends TestCase
 {
-    private MockObject $loggableListener;
+    private MockObject&LoggableListener $loggableListener;
 
     private DoctrineExtensionListener $listener;
 

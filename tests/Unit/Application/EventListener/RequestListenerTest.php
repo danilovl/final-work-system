@@ -32,11 +32,11 @@ use Symfony\Component\HttpKernel\{
 
 class RequestListenerTest extends TestCase
 {
-    private MockObject $userService;
+    private MockObject&UserService $userService;
 
-    private MockObject $entityManagerService;
+    private MockObject&EntityManagerService $entityManagerService;
 
-    private MockObject $seoPageService;
+    private MockObject&SeoPageService $seoPageService;
 
     private AsyncService $asyncService;
 

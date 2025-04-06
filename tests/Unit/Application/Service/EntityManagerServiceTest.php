@@ -26,7 +26,7 @@ class EntityManagerServiceTest extends TestCase
 {
     private EntityManagerService $entityManagerService;
 
-    private MockObject $entityManager;
+    private MockObject&EntityManagerInterface $entityManager;
 
     protected function setUp(): void
     {

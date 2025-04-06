@@ -25,9 +25,9 @@ class TranslatorServiceTest extends TestCase
 {
     private TranslatorService $translatorService;
 
-    private MockObject $translatorMock;
+    private MockObject&TranslatorInterface $translatorMock;
 
-    private MockObject $requestStackMock;
+    private MockObject&RequestStack $requestStackMock;
 
     protected function setUp(): void
     {

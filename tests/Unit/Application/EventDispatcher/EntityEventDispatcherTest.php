@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EntityEventDispatcherTest extends TestCase
 {
-    private MockObject $eventDispatcher;
+    private MockObject&EventDispatcherInterface $eventDispatcher;
 
     private AsyncService $asyncService;
 
