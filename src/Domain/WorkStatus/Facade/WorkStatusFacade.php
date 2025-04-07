@@ -22,24 +22,32 @@ readonly class WorkStatusFacade
 
     public function find(int $id): ?WorkStatus
     {
-        return $this->workStatusRepository
-            ->find($id);
+        /** @var WorkStatus|null $result */
+        $result = $this->workStatusRepository->find($id);
+
+        return $result;
     }
 
     public function findAll(int $limit = null): array
     {
-        return $this->workStatusRepository
+        /** @var array $result */
+        $result = $this->workStatusRepository
             ->baseQueryBuilder()
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function getCountByUser(WorkStatusRepositoryData $workStatusData): array
     {
-        return $this->workStatusRepository
+        /** @var array $result */
+        $result = $this->workStatusRepository
             ->countByUser($workStatusData)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 }

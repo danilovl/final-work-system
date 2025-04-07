@@ -95,7 +95,11 @@ readonly class WorkSearch
         $formData = $form->getData();
 
         foreach ($formData as $field => $value) {
-            if (empty($value) || (is_iterable($value) && count($value) === 0)) {
+            if (empty($value)) {
+                continue;
+            }
+
+            if (is_iterable($value) && is_countable($value) && count($value) === 0) {
                 continue;
             }
 

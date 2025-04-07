@@ -87,7 +87,7 @@ class UserWorkService
     }
 
     /**
-     * @return ArrayCollection<User>
+     * @return ArrayCollection<Work>
      */
     public function getWorkBy(
         User $user,
@@ -95,6 +95,7 @@ class UserWorkService
         WorkType $type = null,
         WorkStatus $status = null
     ): ArrayCollection {
+        /** @var ArrayCollection<Work> $collectionWorks */
         $collectionWorks = new ArrayCollection;
         $criteria = Criteria::create();
 
@@ -122,7 +123,7 @@ class UserWorkService
             }
         }
 
-        return $userWorks;
+        return $collectionWorks;
     }
 
     /**

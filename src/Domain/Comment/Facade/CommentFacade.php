@@ -25,9 +25,12 @@ readonly class CommentFacade
         User $user,
         Event $event
     ): ?Comment {
-        return $this->commentRepository
+        /** @var Comment|null $result */
+        $result = $this->commentRepository
             ->allByOwnerEvent($user, $event)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

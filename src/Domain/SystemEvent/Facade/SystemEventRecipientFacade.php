@@ -13,6 +13,7 @@
 namespace App\Domain\SystemEvent\Facade;
 
 use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
+use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\Repository\SystemEventRecipientRepository;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\Query;
@@ -28,6 +29,9 @@ readonly class SystemEventRecipientFacade
             ->getQuery();
     }
 
+    /**
+     * @return SystemEventRecipient[]
+     */
     public function getUnreadSystemEventsByRecipient(User $user, int $limit = null): array
     {
         $systemEvents = $this->systemEventRecipientRepository
@@ -37,7 +41,10 @@ readonly class SystemEventRecipientFacade
             $systemEvents->setMaxResults($limit);
         }
 
-        return $systemEvents->getQuery()->getResult();
+        /** @var SystemEventRecipient[] $result */
+        $result = $systemEvents->getQuery()->getResult();
+
+        return $result;
     }
 
     public function queryRecipientsQueryByUser(User $recipient): Query

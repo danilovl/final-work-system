@@ -94,12 +94,18 @@ readonly class ConversationMessageFacade
         }
     }
 
+    /**
+     * @return ConversationMessage[]
+     */
     public function getMessagesByConversation(Conversation $conversation, int $limit): array
     {
-        return $this->conversationMessageRepository
+        /** @var ConversationMessage[] $result */
+        $result = $this->conversationMessageRepository
             ->allByConversation($conversation, $limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function queryMessagesByConversation(Conversation $conversation): Query
@@ -121,6 +127,9 @@ readonly class ConversationMessageFacade
             ->getQuery();
     }
 
+    /**
+     * @return ConversationMessageStatusType[]
+     */
     public function getUnreadMessagesByUser(User $user, ?int $limit = null): array
     {
         /** @var ConversationMessageStatusType $ConversationMessageStatusType */
@@ -138,7 +147,10 @@ readonly class ConversationMessageFacade
             $conversationMessage->setMaxResults($limit);
         }
 
-        return $conversationMessage->getQuery()->getResult();
+        /** @var ConversationMessageStatusType[] $result */
+        $result = $conversationMessage->getQuery()->getResult();
+
+        return $result;
     }
 
     public function getTotalUnreadMessagesByUser(User $user): int
@@ -177,14 +189,20 @@ readonly class ConversationMessageFacade
         }
     }
 
+    /**
+     * @return ConversationMessage[]
+     */
     public function getMessagesByConversationAfterDate(
         Conversation $conversation,
         DateTime $date
     ): array {
-        return $this->conversationMessageRepository
+        /** @var ConversationMessage[] $result */
+        $result = $this->conversationMessageRepository
             ->allByConversationAfterDate($conversation, $date)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function getTotalUnreadMessagesAfterDateByUser(User $user, DateTime $date): int

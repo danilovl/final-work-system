@@ -25,7 +25,10 @@ readonly class TaskFacade
 
     public function find(int $id): ?Task
     {
-        return $this->taskRepository->find($id);
+        /** @var Task|null $result */
+        $result = $this->taskRepository->find($id);
+
+        return $result;
     }
 
     /**
@@ -33,11 +36,14 @@ readonly class TaskFacade
      */
     public function findAll(int $limit = null): array
     {
-        return $this->taskRepository
+        /** @var Task[] $result */
+        $result = $this->taskRepository
             ->baseQueryBuilder()
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function queryTasksByOwner(User $user): Query
@@ -83,10 +89,13 @@ readonly class TaskFacade
         User $user,
         bool $isComplete
     ): array {
-        return $this->taskRepository
+        /** @var Task[] $result */
+        $result = $this->taskRepository
             ->allByOwnerComplete($user, $isComplete)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     /**

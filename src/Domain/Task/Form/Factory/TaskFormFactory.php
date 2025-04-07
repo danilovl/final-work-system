@@ -82,6 +82,10 @@ class TaskFormFactory
                     throw new RuntimeException('Work must not be null for edit ajax');
                 }
 
+                if ($task === null) {
+                    throw new RuntimeException('Task must not be null for edit ajax');
+                }
+
                 $typeOptions = [
                     'action' => $this->router->generate('task_edit_ajax', [
                         'id_task' => $this->hashidsService->encode($task->getId()),

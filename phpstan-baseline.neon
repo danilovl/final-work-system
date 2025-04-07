@@ -11,11 +11,6 @@ parameters:
 			path: src/Application/Redis/Provider/RedisCache.php
 
 		-
-			message: "#^Parameter \\#1 \\$className of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
-			count: 1
-			path: src/Application/Service/EntityManagerService.php
-
-		-
 			message: "#^Parameter \\#1 \\$entityName of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getReference\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
 			count: 1
 			path: src/Application/Service/EntityManagerService.php
@@ -26,44 +21,9 @@ parameters:
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getRepository\\(\\)$#"
-			count: 1
-			path: src/Application/Service/EntityManagerService.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\ApiUser\\\\Facade\\\\ApiUserFacade\\:\\:findByApiKey\\(\\) should return App\\\\Domain\\\\ApiUser\\\\Entity\\\\ApiUser\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/ApiUser/Facade/ApiUserFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Comment\\\\Facade\\\\CommentFacade\\:\\:getCommentByOwnerEvent\\(\\) should return App\\\\Domain\\\\Comment\\\\Entity\\\\Comment\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Comment/Facade/CommentFacade.php
-
-		-
 			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects Closure\\(mixed, int\\|string\\)\\: bool, Closure\\(App\\\\Domain\\\\ConversationParticipant\\\\Entity\\\\ConversationParticipant\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Domain/Conversation/Entity/Conversation.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getMessagesByConversation\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getMessagesByConversationAfterDate\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Conversation\\\\Facade\\\\ConversationMessageFacade\\:\\:getUnreadMessagesByUser\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Conversation\\\\Service\\\\ConversationStatusService\\:\\:getConversationMessageStatus\\(\\) should return App\\\\Domain\\\\ConversationMessageStatus\\\\Entity\\\\ConversationMessageStatus\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Conversation/Service/ConversationStatusService.php
 
 		-
 			message: "#^While loop condition is always true\\.$#"
@@ -71,199 +31,9 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\ConversationType\\\\Facade\\\\ConversationTypeFacade\\:\\:getAll\\(\\) should return array\\<App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType\\> but returns array\\<int, object\\>\\.$#"
-			count: 1
-			path: src/Domain/ConversationType/Facade/ConversationTypeFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:getOneByUuid\\(\\) should return App\\\\Domain\\\\EmailNotification\\\\Entity\\\\EmailNotification\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/EmailNotification/Facade/EmailNotificationFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\EmailNotification\\\\Facade\\\\EmailNotificationFacade\\:\\:getOneReadyForSender\\(\\) should return App\\\\Domain\\\\EmailNotification\\\\Entity\\\\EmailNotification\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/EmailNotification/Facade/EmailNotificationFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Event\\\\Entity\\\\Event\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/Event/Facade/EventFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:getEventsByOwner\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Event/Facade/EventFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Event\\\\Facade\\\\EventFacade\\:\\:getEventsByParticipant\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Event/Facade/EventFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\EventAddress\\\\Facade\\\\EventAddressFacade\\:\\:getSkypeByOwner\\(\\) should return App\\\\Domain\\\\EventAddress\\\\Entity\\\\EventAddress\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/EventAddress/Facade/EventAddressFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaFacade\\:\\:findByMediaName\\(\\) should return App\\\\Domain\\\\Media\\\\Entity\\\\Media\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getFormValidationMimeTypes\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getMimeTypeByName\\(\\) should return App\\\\Domain\\\\MediaMimeType\\\\Entity\\\\MediaMimeType\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaMimeTypeFacade\\:\\:getMimeTypesByOwner\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
-
-		-
-			message: "#^Parameter \\#1 \\$array of function array_keys expects array, mixed given\\.$#"
-			count: 2
-			path: src/Domain/Media/Facade/MediaMimeTypeFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaTypeFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaTypeFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Media\\\\Facade\\\\MediaTypeFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\MediaType\\\\Entity\\\\MediaType\\> but returns array\\<int, object\\>\\.$#"
-			count: 1
-			path: src/Domain/Media/Facade/MediaTypeFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwner\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\MediaCategory\\\\Facade\\\\MediaCategoryFacade\\:\\:getMediaCategoriesByOwners\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/MediaCategory/Facade/MediaCategoryFacade.php
-
-		-
-			message: "#^Cannot call method getCreatedAt\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
-
-		-
-			message: "#^Cannot call method isExpired\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\ResetPassword\\\\Facade\\\\ResetPasswordFacade\\:\\:findResetPasswordByToken\\(\\) should return App\\\\Domain\\\\ResetPassword\\\\Entity\\\\ResetPassword\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Facade/ResetPasswordFacade.php
-
-		-
-			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Domain/ResetPassword/Http/ResetPasswordResetHandle.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\SystemEvent\\\\Facade\\\\SystemEventRecipientFacade\\:\\:getUnreadSystemEventsByRecipient\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/SystemEvent/Facade/SystemEventRecipientFacade.php
-
-		-
-			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
-			count: 1
-			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskDeadlineFacade\\:\\:getTasksAfterDeadline\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Task/Facade/TaskDeadlineFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Task\\\\Entity\\\\Task\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/Task/Facade/TaskFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Task/Facade/TaskFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Task\\\\Facade\\\\TaskFacade\\:\\:findAllByOwnerComplete\\(\\) should return array\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Task/Facade/TaskFacade.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on App\\\\Domain\\\\Task\\\\Entity\\\\Task\\|null\\.$#"
-			count: 1
-			path: src/Domain/Task/Form/Factory/TaskFormFactory.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByEmail\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/User/Facade/UserFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByToken\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/User/Facade/UserFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\User\\\\Facade\\\\UserFacade\\:\\:findOneByUsername\\(\\) should return App\\\\Domain\\\\User\\\\Entity\\\\User\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/User/Facade/UserFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\User\\\\Service\\\\UserWorkService\\:\\:getWorkBy\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Domain\\\\User\\\\Entity\\\\User\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection&iterable\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\>\\.$#"
-			count: 1
-			path: src/Domain/User/Service/UserWorkService.php
-
-		-
 			message: "#^While loop condition is always true\\.$#"
 			count: 1
 			path: src/Domain/Widget/Service/WidgetStreamService.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkDeadlineFacade\\:\\:getWorksAfterDeadline\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Work/Facade/WorkDeadlineFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\Work\\\\Entity\\\\Work\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/Work/Facade/WorkFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:findAll\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Work/Facade/WorkFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:getWorksByAuthorStatus\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Work/Facade/WorkFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Work\\\\Facade\\\\WorkFacade\\:\\:getWorksByAuthorSupervisorStatus\\(\\) should return array\\<App\\\\Domain\\\\Work\\\\Entity\\\\Work\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Work/Facade/WorkFacade.php
 
 		-
 			message: "#^Parameter \\#1 \\$callback of method ArrayIterator\\<\\(int\\|string\\),mixed\\>\\:\\:uasort\\(\\) expects callable\\(mixed, mixed\\)\\: int, Closure\\(App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\)\\: int given\\.$#"
@@ -271,17 +41,22 @@ parameters:
 			path: src/Domain/Work/Repository/Elastica/WorkSearch.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\>\\:\\:allByWorkUser\\(\\)\\.$#"
 			count: 1
-			path: src/Domain/Work/Repository/Elastica/WorkSearch.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWork\\(\\)\\.$#"
-			count: 3
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\:\\:allByWorkUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\:\\:allByWork\\(\\)\\.$#"
+			count: 1
+			path: src/Domain/Work/Service/WorkDetailTabService.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\:\\:allByWork\\(\\)\\.$#"
+			count: 1
+			path: src/Domain/Work/Service/WorkDetailTabService.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\>\\:\\:allByWork\\(\\)\\.$#"
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
@@ -296,29 +71,14 @@ parameters:
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Cannot access offset 'deadline' on mixed\\.$#"
+			message: "#^Parameter \\#1 \\$entityName of method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
 			count: 1
-			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
+			path: tests/Kernel/Application/Service/EntityManagerServiceTest.php
 
 		-
-			message: "#^Cannot access offset 'deadlineProgram' on mixed\\.$#"
+			message: "#^Unable to resolve the template type T in call to method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:getRepository\\(\\)$#"
 			count: 1
-			path: src/Domain/WorkDeadline/Facade/WorkDeadlineFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:find\\(\\) should return App\\\\Domain\\\\WorkStatus\\\\Entity\\\\WorkStatus\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:findAll\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WorkStatus\\\\Facade\\\\WorkStatusFacade\\:\\:getCountByUser\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/WorkStatus/Facade/WorkStatusFacade.php
+			path: tests/Kernel/Application/Service/EntityManagerServiceTest.php
 
 		-
 			message: "#^Access to an undefined property object\\:\\:\\$property1\\.$#"

@@ -21,7 +21,10 @@ readonly class MediaTypeFacade
 
     public function find(int $id): ?MediaType
     {
-        return $this->mediaTypeRepository->find($id);
+        /** @var MediaType|null $result */
+        $result = $this->mediaTypeRepository->find($id);
+
+        return $result;
     }
 
     /**
@@ -29,6 +32,9 @@ readonly class MediaTypeFacade
      */
     public function findAll(): array
     {
-        return $this->mediaTypeRepository->findAll();
+        /** @var MediaType[] $result */
+        $result = $this->mediaTypeRepository->findAll();
+
+        return $result;
     }
 }

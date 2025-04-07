@@ -21,8 +21,12 @@ readonly class MediaMimeTypeFacade
 {
     public function __construct(private MediaMimeTypeRepository $mediaMimeTypeRepository) {}
 
+    /**
+     * @return MediaMimeType[]|string[]
+     */
     public function getFormValidationMimeTypes(bool $onlyKey = false): array
     {
+        /** @var MediaMimeType[] $mimeTypes */
         $mimeTypes = $this->mediaMimeTypeRepository
             ->formValidationMimeTypeName()
             ->getQuery()
@@ -35,11 +39,15 @@ readonly class MediaMimeTypeFacade
         return $mimeTypes;
     }
 
+    /**
+     * @return MediaMimeType[]|string[]
+     */
     public function getMimeTypesByOwner(
         iterable|User $user,
         iterable|MediaType|int $mediaType = null,
         bool $onlyKey = false
     ): array {
+        /** @var MediaMimeType[] $mimeTypes */
         $mimeTypes = $this->mediaMimeTypeRepository
             ->allBy($user, $mediaType)
             ->getQuery()
@@ -54,9 +62,12 @@ readonly class MediaMimeTypeFacade
 
     public function getMimeTypeByName(string $name): ?MediaMimeType
     {
-        return $this->mediaMimeTypeRepository
+        /** @var MediaMimeType|null $result */
+        $result = $this->mediaMimeTypeRepository
             ->byName($name)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

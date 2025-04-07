@@ -21,9 +21,12 @@ readonly class ApiUserFacade
 
     public function findByApiKey(string $apiKey): ?ApiUser
     {
-        return $this->apiUserRepository
+        /** @var ApiUser|null $result */
+        $result = $this->apiUserRepository
             ->byApiKey($apiKey)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

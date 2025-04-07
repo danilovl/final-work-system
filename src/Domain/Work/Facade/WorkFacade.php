@@ -26,7 +26,10 @@ readonly class WorkFacade
 
     public function find(int $id): ?Work
     {
-        return $this->workRepository->find($id);
+        /** @var Work|null $result */
+        $result = $this->workRepository->find($id);
+
+        return $result;
     }
 
     /**
@@ -34,11 +37,14 @@ readonly class WorkFacade
      */
     public function findAll(?int $limit = null): array
     {
-        return $this->workRepository
+        /** @var Work[] $result */
+        $result = $this->workRepository
             ->baseQueryBuilder()
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function getQueryBuilderWorksBySupervisor(WorkRepositoryData $workData): QueryBuilder
@@ -51,10 +57,13 @@ readonly class WorkFacade
      */
     public function getWorksByAuthorSupervisorStatus(WorkRepositoryData $workData): array
     {
-        return $this->workRepository
+        /** @var Work[] $result */
+        $result = $this->workRepository
             ->allByUserStatus($workData)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     /**
@@ -62,10 +71,13 @@ readonly class WorkFacade
      */
     public function getWorksByAuthorStatus(WorkRepositoryData $workData): array
     {
-        return $this->workRepository
+        /** @var Work[] $result */
+        $result = $this->workRepository
             ->allByUserStatus($workData)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function queryAllByUserStatus(WorkRepositoryData $workData): Query

@@ -30,7 +30,10 @@ readonly class UserFacade
 
     public function find(int $id): ?User
     {
-        return $this->userRepository->find($id);
+        /** @var User|null $result */
+        $result = $this->userRepository->find($id);
+
+        return $result;
     }
 
     public function findNotNull(int $id): User
@@ -97,25 +100,34 @@ readonly class UserFacade
 
     public function findOneByUsername(string $username, bool $enable = null): ?User
     {
-        return $this->userRepository
+        /** @var User|null $result */
+        $result = $this->userRepository
             ->oneByUsername($username, $enable)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 
     public function findOneByEmail(string $email, bool $enable = null): ?User
     {
-        return $this->userRepository
+        /** @var User|null $result */
+        $result = $this->userRepository
             ->oneByEmail($email, $enable)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 
     public function findOneByToken(string $username, string $token, bool $enable = null): ?User
     {
-        return $this->userRepository
+        /** @var User|null $result */
+        $result = $this->userRepository
             ->oneByToken($username, $token, $enable)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

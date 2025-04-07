@@ -67,10 +67,9 @@ readonly class ResetPasswordResetHandle
         if ($form->isSubmitted() && $form->isValid()) {
             $this->resetPasswordService->removeResetRequest($token);
 
-            $encodedPassword = $this->userPasswordHasher->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            );
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
+            $encodedPassword = $this->userPasswordHasher->hashPassword($user, $plainPassword);
 
             $user->setPassword($encodedPassword);
             $this->entityManagerService->flush();

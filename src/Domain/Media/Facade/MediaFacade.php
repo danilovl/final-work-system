@@ -25,14 +25,20 @@ readonly class MediaFacade
 
     public function find(int $id): ?Media
     {
-        return $this->mediaRepository->find($id);
+        /** @var Media|null $result */
+        $result = $this->mediaRepository->find($id);
+
+        return $result;
     }
 
     public function findByMediaName(string $mediaName): ?Media
     {
-        return $this->mediaRepository->findOneBy([
+        /** @var Media|null $result */
+        $result = $this->mediaRepository->findOneBy([
             'mediaName' => $mediaName
         ]);
+
+        return $result;
     }
 
     /**
@@ -40,12 +46,15 @@ readonly class MediaFacade
      */
     public function findAll(int $offset, int $limit): array
     {
-        return $this->mediaRepository
+        /** @var Media[] $result */
+        $result = $this->mediaRepository
             ->baseQueryBuilder()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function queryMediasByType(MediaType $mediaType): Query

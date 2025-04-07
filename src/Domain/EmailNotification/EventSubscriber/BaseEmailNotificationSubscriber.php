@@ -65,7 +65,7 @@ class BaseEmailNotificationSubscriber
         return $this->translator->trans("app.email_notification.{$trans}", [], $this->translatorDomain, $locale);
     }
 
-    protected function addEmailNotificationToQueue(EmailNotificationMessage $emailNotificationMessage): void
+    public function addEmailNotificationToQueue(EmailNotificationMessage $emailNotificationMessage): void
     {
         if (!$this->enableAddToQueue) {
             return;

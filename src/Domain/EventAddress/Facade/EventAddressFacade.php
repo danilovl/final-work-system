@@ -22,9 +22,12 @@ readonly class EventAddressFacade
 
     public function getSkypeByOwner(User $user): ?EventAddress
     {
-        return $this->eventAddressRepository
+        /** @var EventAddress|null $result */
+        $result = $this->eventAddressRepository
             ->skypeByOwner($user)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

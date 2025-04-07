@@ -21,18 +21,24 @@ readonly class EmailNotificationFacade
 
     public function getOneReadyForSender(): ?EmailNotification
     {
-        return $this->emailNotificationRepository
+        /** @var EmailNotification|null $result */
+        $result = $this->emailNotificationRepository
             ->oneReadyForSender()
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 
     public function getOneByUuid(string $uuid): ?EmailNotification
     {
-        return $this->emailNotificationRepository
+        /** @var EmailNotification|null $result */
+        $result = $this->emailNotificationRepository
             ->byUuid($uuid)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

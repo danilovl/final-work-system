@@ -12,6 +12,7 @@
 
 namespace App\Domain\MediaCategory\Facade;
 
+use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Repository\MediaCategoryRepository;
 use Doctrine\ORM\Query;
 use App\Domain\User\Entity\User;
@@ -27,19 +28,31 @@ readonly class MediaCategoryFacade
             ->getQuery();
     }
 
+    /**
+     * @return MediaCategory[]
+     */
     public function getMediaCategoriesByOwner(User $user): array
     {
-        return $this->mediaCategoryRepository
+        /** @var MediaCategory[] $result */
+        $result = $this->mediaCategoryRepository
             ->allByOwner($user)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
+    /**
+     * @return MediaCategory[]
+     */
     public function getMediaCategoriesByOwners(iterable $users): array
     {
-        return $this->mediaCategoryRepository
+        /** @var MediaCategory[] $result */
+        $result = $this->mediaCategoryRepository
             ->allByOwners($users)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 }

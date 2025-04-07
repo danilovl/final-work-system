@@ -155,9 +155,12 @@ readonly class ConversationStatusService
         ConversationMessage $conversationMessage,
         User $user
     ): ?ConversationMessageStatus {
-        return $this->conversationMessageStatusRepository
+        /** @var ConversationMessageStatus|null $result */
+        $result = $this->conversationMessageStatusRepository
             ->oneByMessageUser($conversationMessage, $user)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $result;
     }
 }

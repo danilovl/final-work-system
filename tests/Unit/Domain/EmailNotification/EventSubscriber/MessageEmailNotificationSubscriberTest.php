@@ -19,7 +19,6 @@ use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\EmailNotification\EventSubscriber\MessageEmailNotificationSubscriber;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationSubscriber
 {

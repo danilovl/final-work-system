@@ -12,6 +12,7 @@
 
 namespace App\Domain\Task\Facade;
 
+use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Repository\TaskRepository;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Domain\User\Entity\User;
@@ -29,6 +30,7 @@ readonly class TaskDeadlineFacade
     ): array {
         $limit ??= $this->parameterService->getInt('pagination.task.deadline_limit');
 
+        /** @var array<array{deadline: string}> $taskDeadLinesQuery */
         $taskDeadLinesQuery = $this->taskRepository
             ->byDeadlineOwner($user)
             ->setMaxResults($limit)
@@ -43,13 +45,19 @@ readonly class TaskDeadlineFacade
         return $taskDeadLines;
     }
 
+    /**
+     * @return Task[]
+     */
     public function getTasksAfterDeadline(int $offset, int $limit): array
     {
-        return $this->taskRepository
+        /** @var Task[] $result */
+        $result = $this->taskRepository
             ->getTasksAfterDeadline()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 }

@@ -30,6 +30,7 @@ readonly class WorkDeadlineFacade
             $workDeadLinesQuery->setMaxResults($limit);
         }
 
+        /** @var array<array{deadline: string}> $workDeadLinesArrayResult */
         $workDeadLinesArrayResult = $workDeadLinesQuery->getArrayResult();
 
         $workDeadLines = new ArrayCollection;
@@ -52,6 +53,7 @@ readonly class WorkDeadlineFacade
 
         $workProgramDeadLines = new ArrayCollection;
 
+        /** @var array<array{deadlineProgram: string}> $workProgramDeadLinesArrayResult */
         $workProgramDeadLinesArrayResult = $workProgramDeadLinesQuery->getArrayResult();
         foreach ($workProgramDeadLinesArrayResult as $workProgramDeadLine) {
             $workProgramDeadLines->add($workProgramDeadLine['deadlineProgram']);

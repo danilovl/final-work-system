@@ -24,11 +24,14 @@ readonly class WorkDeadlineFacade
      */
     public function getWorksAfterDeadline(int $offset, int $limit): array
     {
-        return $this->workRepository
+        /** @var Work[] $result */
+        $result = $this->workRepository
             ->getWorksAfterDeadline()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 }

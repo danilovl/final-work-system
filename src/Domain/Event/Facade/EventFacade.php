@@ -23,15 +23,24 @@ readonly class EventFacade
 
     public function find(int $id): ?Event
     {
-        return $this->eventRepository->find($id);
+        /** @var Event|null $result */
+        $result = $this->eventRepository->find($id);
+
+        return $result;
     }
 
+    /**
+     * @return Event[]
+     */
     public function getEventsByOwner(EventRepositoryData $eventData): array
     {
-        return $this->eventRepository
+        /** @var Event[] $result */
+        $result = $this->eventRepository
             ->allByOwner($eventData)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 
     public function getEventsByOwnerQuery(EventRepositoryData $eventData): Query
@@ -43,9 +52,12 @@ readonly class EventFacade
 
     public function getEventsByParticipant(EventRepositoryData $eventData): array
     {
-        return $this->eventRepository
+        /** @var Event[] $result */
+        $result = $this->eventRepository
             ->allByParticipant($eventData)
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 }

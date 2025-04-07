@@ -71,6 +71,11 @@ readonly class EntityManagerService
         $this->entityManager->flush();
     }
 
+    /**
+     * @template T of object
+     * @param class-string<T> $entityName
+     * @return ObjectRepository<T>
+     */
     public function getRepository(string $entityName): ObjectRepository
     {
         return $this->entityManager->getRepository($entityName);

@@ -13,7 +13,6 @@
 namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -28,7 +27,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\{EventDispatcher, EventSubscriberInterface};
 use Symfony\Component\Messenger\{
     Envelope,
     MessageBusInterface
