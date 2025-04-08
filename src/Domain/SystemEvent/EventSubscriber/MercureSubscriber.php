@@ -20,8 +20,9 @@ use Danilovl\HashidsBundle\Service\HashidsService;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\{
-    HubInterface,
-    Update};
+    Update,
+    HubInterface
+};
 
 readonly class MercureSubscriber implements EventSubscriberInterface
 {

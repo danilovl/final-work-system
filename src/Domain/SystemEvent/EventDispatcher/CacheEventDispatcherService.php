@@ -14,8 +14,7 @@ namespace App\Domain\SystemEvent\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
-use App\Domain\User\EventDispatcher\GenericEvent\{
-    CacheUserGenericEvent,};
+use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 readonly class CacheEventDispatcherService

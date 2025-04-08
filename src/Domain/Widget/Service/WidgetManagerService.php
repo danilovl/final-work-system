@@ -15,7 +15,8 @@ namespace App\Domain\Widget\Service;
 use App\Application\Exception\InvalidArgumentException;
 use Webmozart\Assert\Assert;
 use App\Domain\Widget\Interfaces\{
-    WidgetManagerInterface};
+    WidgetManagerInterface
+};
 use App\Domain\Widget\Interfaces\WidgetInterface;
 use Psr\Container\ContainerInterface;
 

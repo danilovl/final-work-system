@@ -16,7 +16,10 @@ use App\Application\Service\EntityManagerService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\{EventDispatcher, EventSubscriberInterface};
+use Symfony\Component\EventDispatcher\{
+    EventDispatcher,
+    EventSubscriberInterface
+};
 
 class BaseSystemEventSubscriber extends TestCase
 {

@@ -27,7 +27,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\EventDispatcher\{EventDispatcher, EventSubscriberInterface};
+use Symfony\Component\EventDispatcher\{
+    EventDispatcher,
+    EventSubscriberInterface
+};
 use Symfony\Component\Messenger\{
     Envelope,
     MessageBusInterface
