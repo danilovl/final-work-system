@@ -99,11 +99,13 @@ readonly class ConversationMessageFacade
      */
     public function getMessagesByConversation(Conversation $conversation, int $limit): array
     {
-        /** @var ConversationMessage[] $result */
+        /** @var array $result */
         $result = $this->conversationMessageRepository
             ->allByConversation($conversation, $limit)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, ConversationMessage::class);
 
         return $result;
     }
@@ -132,23 +134,25 @@ readonly class ConversationMessageFacade
      */
     public function getUnreadMessagesByUser(User $user, ?int $limit = null): array
     {
-        /** @var ConversationMessageStatusType $ConversationMessageStatusType */
-        $ConversationMessageStatusType = $this->entityManagerService->getReference(
+        /** @var ConversationMessageStatusType $conversationMessageStatusType */
+        $conversationMessageStatusType = $this->entityManagerService->getReference(
             ConversationMessageStatusType::class,
             ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
         $conversationMessage = $this->conversationMessageRepository->allByUserStatus(
             $user,
-            $ConversationMessageStatusType
+            $conversationMessageStatusType
         );
 
         if ($limit !== null) {
             $conversationMessage->setMaxResults($limit);
         }
 
-        /** @var ConversationMessageStatusType[] $result */
+        /** @var array $result */
         $result = $conversationMessage->getQuery()->getResult();
+
+        Assert::allIsInstanceOf($result, ConversationMessageStatusType::class);
 
         return $result;
     }
@@ -196,11 +200,13 @@ readonly class ConversationMessageFacade
         Conversation $conversation,
         DateTime $date
     ): array {
-        /** @var ConversationMessage[] $result */
+        /** @var array $result */
         $result = $this->conversationMessageRepository
             ->allByConversationAfterDate($conversation, $date)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, ConversationMessage::class);
 
         return $result;
     }

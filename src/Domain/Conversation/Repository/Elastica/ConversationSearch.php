@@ -17,11 +17,15 @@ use App\Domain\User\Entity\User;
 use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use stdClass;
+use Webmozart\Assert\Assert;
 
 readonly class ConversationSearch
 {
     public function __construct(private TransformedFinder $transformedFinderConversation) {}
 
+    /**
+     * @return int[]
+     */
     public function getIdsByParticipantAndSearch(User $user, string $search): array
     {
         $query = $this->createQueryGetIdsByParticipantAndSearch($user, $search);
@@ -30,6 +34,13 @@ readonly class ConversationSearch
         return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
     }
 
+    /**
+     * @return array{
+     *     size: int,
+     *     _source: array<string>,
+     *     query: array
+     * }
+     */
     public function createQueryGetIdsByParticipantAndSearch(User $user, string $search): array
     {
         $search = $this->transformSearch($search);
@@ -92,6 +103,9 @@ readonly class ConversationSearch
         ];
     }
 
+    /**
+     * @return int[]
+     */
     public function getMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
     {
         $query = $this->createQueryGetMessageIdsByConversationAndSearch($conversation, $search);
@@ -108,9 +122,17 @@ readonly class ConversationSearch
             }
         }
 
+        Assert::allInteger($messageIds);
+
         return $messageIds;
     }
 
+    /**
+     * @return array{
+     *     size: int,
+     *     query: array
+     * }
+     */
     public function createQueryGetMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
     {
         return [

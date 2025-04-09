@@ -96,6 +96,9 @@ readonly class ConversationFacade
         }
     }
 
+    /**
+     * @return Conversation[]
+     */
     public function getConversationParticipants(User $user): array
     {
         $conversationArray = [];

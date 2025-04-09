@@ -57,6 +57,9 @@ class ConversationHelper
         return $categoryGroup;
     }
 
+    /**
+     * @return array<string, array<Conversation>>
+     */
     public static function groupConversationsByCategorySorting(iterable $conversations): array
     {
         $categoryGroupWithSorting = [];
@@ -98,7 +101,10 @@ class ConversationHelper
         ksort($categoryGroupWithSorting);
         ksort($categoryGroupWithoutSorting);
 
-        return array_merge($categoryGroupWithSorting, $categoryGroupWithoutSorting);
+        /** @var array<string, array<Conversation>> $result */
+        $result = array_merge($categoryGroupWithSorting, $categoryGroupWithoutSorting);
+
+        return $result;
     }
 
     public static function getConversationOpposite(iterable $conversations, User $user): void
@@ -140,6 +146,9 @@ class ConversationHelper
         });
     }
 
+    /**
+     * @return int[]
+     */
     public static function getParticipantIds(Conversation $conversation): array
     {
         $participantIds = [];

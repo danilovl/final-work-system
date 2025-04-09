@@ -24,8 +24,39 @@ use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
 
+/**
+ * @phpstan-type ConversationVariation array{
+ *      author: array{
+ *          author: bool,
+ *          supervisor: bool,
+ *          opponent: bool,
+ *          consultant: bool
+ *      },
+ *      opponent: array{
+ *          author: bool,
+ *          supervisor: bool,
+ *          opponent: bool,
+ *          consultant: bool
+ *      },
+ *      supervisor: array{
+ *          author: bool,
+ *          supervisor: bool,
+ *          opponent: bool,
+ *          consultant: bool
+ *      },
+ *      consultant: array{
+ *          author: bool,
+ *          supervisor: bool,
+ *          opponent: bool,
+ *          consultant: bool
+ *      }
+ *  }
+ */
 class ConversationVariationService
 {
+    /**
+     * @var ConversationVariation|null
+     */
     private ?array $newPermission = null;
 
     public function __construct(
@@ -34,17 +65,26 @@ class ConversationVariationService
         private readonly ParameterServiceInterface $parameterService
     ) {}
 
+    /**
+     * @param ConversationVariation|null $newPermission
+     * @return void
+     */
     public function setNewPermission(?array $newPermission): void
     {
         $this->newPermission = $newPermission;
     }
 
+    /**
+     * @return Work[]
+     */
     public function getWorkConversationsByUser(
         User $user,
         WorkStatus $workStatus
     ): array {
+        /** @var Work[] $works */
         $works = [];
         $addWorks = static function (Collection $userWorks) use (&$works): void {
+            /** @var Collection<Work> $userWorks */
             foreach ($userWorks as $work) {
                 if (!in_array($work, $works, true)) {
                     $works[] = $work;
@@ -75,6 +115,9 @@ class ConversationVariationService
         return $works;
     }
 
+    /**
+     * @return User[]
+     */
     public function getConversationsByWorkUser(
         Work $work,
         User $user
@@ -91,28 +134,28 @@ class ConversationVariationService
         };
 
         if (WorkRoleHelper::isAuthor($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::AUTHOR->value, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::AUTHOR->value);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isOpponent($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT->value, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::OPPONENT->value);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isSupervisor($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::SUPERVISOR->value, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::SUPERVISOR->value);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
         }
 
         if (WorkRoleHelper::isConsultant($work, $user)) {
-            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::CONSULTANT->value, true);
+            [$a, $s, $o, $c] = $this->getVariationType(WorkUserTypeConstant::CONSULTANT->value);
 
             $workUsers = $this->workService->getUsers($work, $a, $s, $o, $c);
             $addConversationUser($workUsers);
@@ -133,17 +176,28 @@ class ConversationVariationService
         );
     }
 
-    private function getVariationType(
-        string $type,
-        bool $onlyValue = false
-    ): array {
-        $variations = $this->getConversationVariationPermissions()[$type] ?? [];
+    /**
+     * @return array{0: bool, 1: bool, 2: bool, 3: bool}
+     */
+    private function getVariationType(string $type): array
+    {
+        $variations = $this->getConversationVariationPermissions()[$type];
 
-        return $onlyValue === true ? array_values($variations) : $variations;
+        return array_values($variations);
     }
 
+    /**
+     * @return ConversationVariation
+     */
     public function getConversationVariationPermissions(): array
     {
-        return $this->newPermission ?? $this->parameterService->getArray('conversation.variation');
+        if (!empty($this->newPermission)) {
+            return $this->newPermission;
+        }
+
+        /** @var ConversationVariation $variations */
+        $variations = $this->parameterService->getArray('conversation.variation');
+
+        return $variations;
     }
 }

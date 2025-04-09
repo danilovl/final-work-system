@@ -13,13 +13,21 @@
 namespace App\Domain\Conversation\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
+use Webmozart\Assert\Assert;
 
 class ElasticaConversationRepository
 {
     public function __construct(private readonly ConversationSearch $conversationSearch) {}
 
+    /**
+     * @return int[]
+     */
     public function getIdsByParticipantAndSearch(User $user, string $search): array
     {
-        return $this->conversationSearch->getIdsByParticipantAndSearch($user, $search);
+        $result = $this->conversationSearch->getIdsByParticipantAndSearch($user, $search);
+
+        Assert::allInteger($result);
+
+        return $result;
     }
 }
