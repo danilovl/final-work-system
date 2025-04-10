@@ -152,7 +152,7 @@ readonly class ConversationMessageFacade
         /** @var array $result */
         $result = $conversationMessage->getQuery()->getResult();
 
-        Assert::allIsInstanceOf($result, ConversationMessageStatusType::class);
+        Assert::allIsInstanceOf($result, ConversationMessage::class);
 
         return $result;
     }
