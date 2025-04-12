@@ -31,6 +31,9 @@ readonly class EventParticipantFacade
         private UserWorkService $userWorkService
     ) {}
 
+    /**
+     * @return EventParticipant[]
+     */
     public function getEventParticipantsByUserEvent(
         User $user,
         Event $event

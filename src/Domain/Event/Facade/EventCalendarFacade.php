@@ -52,6 +52,9 @@ class EventCalendarFacade
         $this->calendarEventDetailReservedColor = $parameterService->getString('event_calendar.detail_reserved_color');
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     public function getEventsByOwner(
         User $user,
         string $type,
@@ -179,6 +182,9 @@ class EventCalendarFacade
         return $events;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function convertEventCreateToArray(Event $event): array
     {
         $eventCalendar = $this->baseEventArray($event);
@@ -200,6 +206,9 @@ class EventCalendarFacade
         return $eventCalendar;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function convertEventReservationToArray(Event $event): array
     {
         $eventCalendar = $this->baseEventArray($event);
@@ -248,6 +257,15 @@ class EventCalendarFacade
         return $events;
     }
 
+    /**
+     * @return array{
+     *     id: string,
+     *     title: string,
+     *     color: string,
+     *     start: string,
+     *     end: string
+     * }
+     */
     private function baseEventArray(Event $event): array
     {
         return [

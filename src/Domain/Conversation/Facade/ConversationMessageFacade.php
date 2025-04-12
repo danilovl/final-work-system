@@ -130,7 +130,7 @@ readonly class ConversationMessageFacade
     }
 
     /**
-     * @return ConversationMessageStatusType[]
+     * @return ConversationMessage[]
      */
     public function getUnreadMessagesByUser(User $user, ?int $limit = null): array
     {
