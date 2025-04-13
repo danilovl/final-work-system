@@ -54,6 +54,9 @@ class GetEventRequest extends AbstractAjaxJsonRequest
         return $this->start < $this->end;
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function getNotifyMessage(): array
     {
         return [
