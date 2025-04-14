@@ -18,6 +18,7 @@ use App\Domain\Media\Repository\MediaRepository;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\Query;
+use Webmozart\Assert\Assert;
 
 readonly class MediaFacade
 {
@@ -46,13 +47,15 @@ readonly class MediaFacade
      */
     public function findAll(int $offset, int $limit): array
     {
-        /** @var Media[] $result */
+        /** @var array $result */
         $result = $this->mediaRepository
             ->baseQueryBuilder()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, Media::class);
 
         return $result;
     }
