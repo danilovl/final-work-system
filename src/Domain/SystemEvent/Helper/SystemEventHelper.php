@@ -16,6 +16,9 @@ use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 
 class SystemEventHelper
 {
+    /**
+     * @return array<string, array<SystemEventRecipient>>
+     */
     public static function groupSystemEventByType(iterable $events): array
     {
         $systemEventGroup = [];

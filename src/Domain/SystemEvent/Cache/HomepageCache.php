@@ -30,6 +30,9 @@ class HomepageCache
         private readonly SystemEventRecipientFacade $systemEventRecipientFacade
     ) {}
 
+    /**
+     * @return array<int, PaginationInterface>
+     */
     public function createHomepagePaginator(User $user, int $page = 1): array
     {
         $cacheItem = $this->cache->getItem(
