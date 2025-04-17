@@ -16,6 +16,7 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Repository\TaskRepository;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use App\Domain\User\Entity\User;
+use Webmozart\Assert\Assert;
 
 readonly class TaskDeadlineFacade
 {
@@ -50,13 +51,15 @@ readonly class TaskDeadlineFacade
      */
     public function getTasksAfterDeadline(int $offset, int $limit): array
     {
-        /** @var Task[] $result */
+        /** @var array $result */
         $result = $this->taskRepository
             ->getTasksAfterDeadline()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, Task::class);
 
         return $result;
     }

@@ -13,13 +13,21 @@
 namespace App\Domain\Task\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
+use Webmozart\Assert\Assert;
 
 class ElasticaTaskRepository
 {
     public function __construct(private readonly TaskSearch $taskSearch) {}
 
+    /**
+     * @return int[]
+     */
     public function getIdsByOwnerAndSearch(User $user, string $search): array
     {
-        return $this->taskSearch->getIdsByOwnerAndSearch($user, $search);
+        $result = $this->taskSearch->getIdsByOwnerAndSearch($user, $search);
+
+        Assert::allInteger($result);
+
+        return $result;
     }
 }

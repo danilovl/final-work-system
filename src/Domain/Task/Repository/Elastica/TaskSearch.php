@@ -20,6 +20,9 @@ readonly class TaskSearch
 {
     public function __construct(private TransformedFinder $transformedFinderTask) {}
 
+    /**
+     * @return int[]
+     */
     public function getIdsByOwnerAndSearch(User $user, string $search): array
     {
         $query = $this->createQuery($user, $search);
@@ -28,6 +31,13 @@ readonly class TaskSearch
         return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
     }
 
+    /**
+     * @return array{
+     *     size: int,
+     *     _source: array<string>,
+     *     query: array
+     * }
+     */
     public function createQuery(User $user, string $search): array
     {
         $search = mb_strtolower($search);
