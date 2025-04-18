@@ -771,6 +771,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
         $this->groups->add($group);
     }
 
+    /**
+     * @return ArrayCollection<Media>
+     */
     public function getMediaBy(?MediaType $type = null, ?bool $active = null): ArrayCollection
     {
         $collectionMedias = new ArrayCollection;

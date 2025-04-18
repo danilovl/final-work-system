@@ -83,6 +83,9 @@ HELP
         return Command::SUCCESS;
     }
 
+    /**
+     * @return array{int, bool, string, string, string, string, string}
+     */
     private function userToArray(User $user): array
     {
         return [

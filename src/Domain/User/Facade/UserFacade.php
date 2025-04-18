@@ -44,6 +44,9 @@ readonly class UserFacade
         return $user;
     }
 
+    /**
+     * @return ArrayCollection<User>
+     */
     public function getAllUserActiveSupervisors(User $user): ArrayCollection
     {
         $userActiveSupervisors = new ArrayCollection;
