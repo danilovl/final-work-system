@@ -19,6 +19,7 @@ use Doctrine\ORM\{
     Query,
     QueryBuilder
 };
+use Webmozart\Assert\Assert;
 
 readonly class WorkFacade
 {
@@ -37,12 +38,14 @@ readonly class WorkFacade
      */
     public function findAll(?int $limit = null): array
     {
-        /** @var Work[] $result */
+        /** @var array $result */
         $result = $this->workRepository
             ->baseQueryBuilder()
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, Work::class);
 
         return $result;
     }
@@ -57,11 +60,13 @@ readonly class WorkFacade
      */
     public function getWorksByAuthorSupervisorStatus(WorkRepositoryData $workData): array
     {
-        /** @var Work[] $result */
+        /** @var array $result */
         $result = $this->workRepository
             ->allByUserStatus($workData)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, Work::class);
 
         return $result;
     }
@@ -71,11 +76,13 @@ readonly class WorkFacade
      */
     public function getWorksByAuthorStatus(WorkRepositoryData $workData): array
     {
-        /** @var Work[] $result */
+        /** @var array $result */
         $result = $this->workRepository
             ->allByUserStatus($workData)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, Work::class);
 
         return $result;
     }

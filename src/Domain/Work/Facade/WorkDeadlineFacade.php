@@ -14,6 +14,7 @@ namespace App\Domain\Work\Facade;
 
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
+use Webmozart\Assert\Assert;
 
 readonly class WorkDeadlineFacade
 {
@@ -24,13 +25,15 @@ readonly class WorkDeadlineFacade
      */
     public function getWorksAfterDeadline(int $offset, int $limit): array
     {
-        /** @var Work[] $result */
+        /** @var array $result */
         $result = $this->workRepository
             ->getWorksAfterDeadline()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        Assert::allIsInstanceOf($result, Work::class);
 
         return $result;
     }

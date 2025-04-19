@@ -18,6 +18,9 @@ use App\Domain\WorkCategory\Entity\WorkCategory;
 
 class WorkFunctionHelper
 {
+    /**
+     * @return array<string, array{works: Work[]}>>
+     */
     public static function groupWorksByDeadline(iterable $works): array
     {
         $deadlineGroup = [];
@@ -37,6 +40,9 @@ class WorkFunctionHelper
         return $deadlineGroup;
     }
 
+    /**
+     * @return array<string, array{works?: Work[]}>
+     */
     public static function groupWorksByCategory(iterable $works): array
     {
         $categoryGroup = [];
@@ -68,6 +74,9 @@ class WorkFunctionHelper
         return $categoryGroup;
     }
 
+    /**
+     * @return array<string, array{works?: Work[]}>
+     */
     public static function groupWorksByCategoryAndSorting(iterable $works): array
     {
         $categoryGroupWithoutSorting = [];

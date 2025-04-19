@@ -160,6 +160,16 @@ class WorkDetailTabService
         return $queryPagination;
     }
 
+    /**
+     * @return array{
+     *      pageParameterName: string,
+     *      sortFieldParameterName: string,
+     *      sortDirectionParameterName: string,
+     *      filterFieldParameterName: string,
+     *      filterValueParameterName: string,
+     *      distinct: bool
+     * }
+     */
     private function getOptions(string $prefix): array
     {
         return [
