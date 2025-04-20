@@ -13,6 +13,7 @@
 namespace App\Domain\WorkDeadline\Facade;
 
 use App\Domain\Work\Repository\WorkRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Domain\User\Entity\User;
 
@@ -20,6 +21,9 @@ readonly class WorkDeadlineFacade
 {
     public function __construct(private WorkRepository $workRepository) {}
 
+    /**
+     * @return ArrayCollection<DateTime>
+     */
     public function getWorkDeadlinesBySupervisor(User $user, int $limit = null): ArrayCollection
     {
         $workDeadLinesQuery = $this->workRepository
@@ -41,6 +45,9 @@ readonly class WorkDeadlineFacade
         return $workDeadLines;
     }
 
+    /**
+     * @return ArrayCollection<DateTime>
+     */
     public function getWorkProgramDeadlinesBySupervisor(User $user, int $limit = null): ArrayCollection
     {
         $workProgramDeadLinesQuery = $this->workRepository
