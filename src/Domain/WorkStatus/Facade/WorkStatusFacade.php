@@ -15,6 +15,7 @@ namespace App\Domain\WorkStatus\Facade;
 use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
+use Webmozart\Assert\Assert;
 
 readonly class WorkStatusFacade
 {
@@ -28,6 +29,9 @@ readonly class WorkStatusFacade
         return $result;
     }
 
+    /**
+     * @return WorkStatus[]
+     */
     public function findAll(int $limit = null): array
     {
         /** @var array $result */
@@ -37,12 +41,17 @@ readonly class WorkStatusFacade
             ->getQuery()
             ->getResult();
 
+        Assert::allIsInstanceOf($result, WorkStatus::class);
+
         return $result;
     }
 
+    /**
+     * @return array<string, int>
+     */
     public function getCountByUser(WorkStatusRepositoryData $workStatusData): array
     {
-        /** @var array $result */
+        /** @var array<string, int> $result */
         $result = $this->workStatusRepository
             ->countByUser($workStatusData)
             ->getQuery()
