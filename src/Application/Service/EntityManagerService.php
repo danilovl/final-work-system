@@ -13,6 +13,7 @@
 namespace App\Application\Service;
 
 use App\Application\EventDispatcher\EntityEventDispatcher;
+use App\Application\Helper\AttributeHelper;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\{
     UnitOfWork,
@@ -44,6 +45,16 @@ readonly class EntityManagerService
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
+    }
+
+    public function removeNativeSql(string $entity, int $id): void
+    {
+        $tableName = AttributeHelper::getEntityTableName($entity);
+        $sql = sprintf('DELETE FROM %s WHERE id = %d', $tableName, $id);
+
+        $this->entityManager
+            ->getConnection()
+            ->executeQuery($sql);
     }
 
     public function detach(object $entity): void

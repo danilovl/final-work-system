@@ -16,7 +16,10 @@ use App\Application\EventDispatcher\EntityEventDispatcher;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\{
+    Mapping as ORM,
+    EntityManagerInterface
+};
 use Doctrine\Persistence\ObjectRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -76,6 +79,26 @@ class EntityManagerServiceTest extends TestCase
             ->method('flush');
 
         $this->entityManagerService->remove(new stdClass);
+
+        $this->assertTrue(true);
+    }
+
+    public function testRemoveNativeSql(): void
+    {
+        $connection = $this->createMock(Connection::class);
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('getConnection')
+            ->willReturn($connection);
+
+        $connection
+            ->expects($this->once())
+            ->method('executeQuery');
+
+        $entity = new #[ORM\Table(name: 'test_table')] #[ORM\Entity] class {};
+
+        $this->entityManagerService->removeNativeSql($entity::class, 1);
 
         $this->assertTrue(true);
     }
