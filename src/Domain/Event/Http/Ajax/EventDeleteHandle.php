@@ -29,7 +29,7 @@ readonly class EventDeleteHandle
 
     public function __invoke(Event $event): JsonResponse
     {
-        $this->entityManagerService->remove($event);
+        $this->entityManagerService->removeNativeSql(Event::class, $event->getId());
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }

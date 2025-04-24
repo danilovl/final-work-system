@@ -21,8 +21,8 @@ use App\Application\Service\{
 use App\Domain\Event\Entity\Event;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
-    RedirectResponse,
-    Request
+    Request,
+    RedirectResponse
 };
 
 readonly class EventDeleteHandle
@@ -42,7 +42,7 @@ readonly class EventDeleteHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->entityManagerService->remove($event);
+                $this->entityManagerService->removeNativeSql(Event::class, $event->getId());
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
 
