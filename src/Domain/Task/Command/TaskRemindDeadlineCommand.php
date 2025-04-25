@@ -14,7 +14,7 @@ namespace App\Domain\Task\Command;
 
 use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use App\Domain\Task\Provider\TaskRemindProvider;
 use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,7 +32,7 @@ class TaskRemindDeadlineCommand extends Command
     public function __construct(
         private readonly TaskEventDispatcherService $taskEventDispatcherService,
         private readonly TaskDeadlineFacade $taskDeadlineFacade,
-        private readonly ParameterServiceInterface $parameterService
+        private readonly TaskRemindProvider $taskRemindProvider
     ) {
         parent::__construct();
     }
@@ -53,7 +53,7 @@ class TaskRemindDeadlineCommand extends Command
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (!$this->parameterService->getBoolean('task_remind.enable')) {
+        if (!$this->taskRemindProvider->isEnable()) {
             $this->io->error('Task reminder is not unable');
 
             return Command::FAILURE;
