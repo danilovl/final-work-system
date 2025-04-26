@@ -19,26 +19,26 @@ use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\EmailNotification\Model\EmailNotificationModel;
+use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 readonly class EmailNotificationHandler
 {
     public function __construct(
-        private ParameterServiceInterface $parameterService,
         private SendEmailNotificationService $sendEmailNotificationService,
         private EmailNotificationFactory $emailNotificationFactory,
         private BaseEmailNotificationSubscriber $baseEmailNotificationSubscriber,
         private EmailNotificationFacade $emailNotificationFacade,
         private EntityManagerService $entityManagerService,
+        private EmailNotificationSendProvider $emailNotificationSendProvider,
         private bool $printMessage = true
     ) {}
 
     public function __invoke(EmailNotificationMessage $message): void
     {
-        if (!$this->parameterService->getBoolean('email_notification.enable_send')) {
+        if (!$this->emailNotificationSendProvider->isEnable()) {
             if ($this->printMessage) {
                 echo 'Email notification sending is not enable';
             }

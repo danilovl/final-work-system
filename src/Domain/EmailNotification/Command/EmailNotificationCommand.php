@@ -13,9 +13,9 @@
 namespace App\Domain\EmailNotification\Command;
 
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
+use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
 use App\Application\Service\EntityManagerService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +33,7 @@ class EmailNotificationCommand extends Command
         private readonly EntityManagerService $entityManagerService,
         private readonly EmailNotificationFacade $emailNotificationFacade,
         private readonly SendEmailNotificationService $sendEmailNotificationService,
-        private readonly ParameterServiceInterface $parameterService
+        private readonly EmailNotificationSendProvider $emailNotificationSendProvider
     ) {
         parent::__construct();
     }
@@ -54,7 +54,7 @@ class EmailNotificationCommand extends Command
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (!$this->parameterService->getBoolean('email_notification.enable_send')) {
+        if (!$this->emailNotificationSendProvider->isEnable()) {
             $this->io->error('Email notification sending is unable.');
 
             return Command::FAILURE;

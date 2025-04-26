@@ -18,18 +18,18 @@ use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
+use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Messenger\{
     EmailNotificationHandler,
     EmailNotificationMessage
 };
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class EmailNotificationHandlerTest extends TestCase
 {
-    private MockObject&ParameterServiceInterface $parameterService;
+    private MockObject&EmailNotificationSendProvider $emailNotificationSendProvider;
 
     private MockObject&SendEmailNotificationService $sendEmailNotificationService;
 
@@ -45,7 +45,7 @@ class EmailNotificationHandlerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->parameterService = $this->createMock(ParameterServiceInterface::class);
+        $this->emailNotificationSendProvider = $this->createMock(EmailNotificationSendProvider::class);
         $this->sendEmailNotificationService = $this->createMock(SendEmailNotificationService::class);
         $baseEmailNotificationSubscriber = $this->createMock(BaseEmailNotificationSubscriber::class);
 
@@ -70,12 +70,12 @@ class EmailNotificationHandlerTest extends TestCase
         $this->entityManagerService = $this->createMock(EntityManagerService::class);
 
         $this->emailNotificationHandler = new EmailNotificationHandler(
-            $this->parameterService,
             $this->sendEmailNotificationService,
             $this->emailNotificationFactory,
             $baseEmailNotificationSubscriber,
             $this->emailNotificationFacade,
-            $this->entityManagerService
+            $this->entityManagerService,
+            $this->emailNotificationSendProvider,
         );
 
         $this->emailNotificationMessage = EmailNotificationMessage::createFromArray([
@@ -95,9 +95,9 @@ class EmailNotificationHandlerTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        $this->parameterService
+        $this->emailNotificationSendProvider
             ->expects($this->once())
-            ->method('getBoolean')
+            ->method('isEnable')
             ->willReturn(false);
 
         $this->expectOutputString('Email notification sending is not enable');
@@ -108,9 +108,9 @@ class EmailNotificationHandlerTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        $this->parameterService
+        $this->emailNotificationSendProvider
             ->expects($this->once())
-            ->method('getBoolean')
+            ->method('isEnable')
             ->willReturn(true);
 
         $this->sendEmailNotificationService
@@ -132,9 +132,9 @@ class EmailNotificationHandlerTest extends TestCase
 
     public function testInvokeSuccessSend(): void
     {
-        $this->parameterService
+        $this->emailNotificationSendProvider
             ->expects($this->once())
-            ->method('getBoolean')
+            ->method('isEnable')
             ->willReturn(true);
 
         $this->sendEmailNotificationService
@@ -163,9 +163,9 @@ class EmailNotificationHandlerTest extends TestCase
 
     public function testInvokeSuccessNotExistNotification(): void
     {
-        $this->parameterService
+        $this->emailNotificationSendProvider
             ->expects($this->once())
-            ->method('getBoolean')
+            ->method('isEnable')
             ->willReturn(true);
 
         $this->sendEmailNotificationService
