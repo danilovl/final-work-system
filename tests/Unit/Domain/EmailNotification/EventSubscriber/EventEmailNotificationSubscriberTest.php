@@ -42,7 +42,9 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->eventEmailNotificationSubscriber = $this->subscriber;

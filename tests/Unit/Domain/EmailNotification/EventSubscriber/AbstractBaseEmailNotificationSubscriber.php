@@ -12,6 +12,10 @@
 
 namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
+use App\Domain\EmailNotification\Provider\{
+    EmailNotificationAddToQueueProvider,
+    EmailNotificationEnableMessengerProvider
+};
 use PHPUnit\Framework\MockObject\MockObject;
 use App\Application\Service\{
     TranslatorService,
@@ -50,11 +54,19 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
 
     protected MockObject&EmailNotificationFactory $emailNotificationFactory;
 
+    protected MockObject&EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider;
+
+    protected MockObject&EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider;
+
     protected ParameterServiceInterface $parameterService;
 
     protected MockObject&MessageBusInterface $bus;
 
     protected EventSubscriberInterface $subscriber;
+
+    protected bool $isEmailNotificationAddToQueueProvider;
+
+    protected bool $isEmailNotificationEnableMessengerProvider;
 
     protected function setUp(): void
     {
@@ -88,12 +100,29 @@ abstract class AbstractBaseEmailNotificationSubscriber extends TestCase
                 'sender' => 'test@example.com',
                 'default_locale' => 'en',
                 'sure_exist_template_locale' => 'en',
-                'translator_domain' => 'email_notification',
-                'enable_add_to_queue' => true,
-                'enable_messenger' => true
+                'translator_domain' => 'email_notification'
             ]
         ]);
         $this->parameterService = new ParameterService($parameterBug);
+
+        $this->isEmailNotificationAddToQueueProvider = true;
+        $this->isEmailNotificationEnableMessengerProvider = true;
+
+        $this->emailNotificationAddToQueueProvider = $this->createMock(EmailNotificationAddToQueueProvider::class);
+        $this->emailNotificationAddToQueueProvider
+            ->expects($this->any())
+            ->method('isEnable')
+            ->willReturnCallback(function (): bool {
+                return $this->isEmailNotificationAddToQueueProvider;
+            });
+
+        $this->emailNotificationEnableMessengerProvider = $this->createMock(EmailNotificationEnableMessengerProvider::class);
+        $this->emailNotificationAddToQueueProvider
+            ->expects($this->any())
+            ->method('isEnable')
+            ->willReturnCallback(function (): bool {
+                return $this->isEmailNotificationEnableMessengerProvider;
+            });
     }
 
     #[DataProvider('subscribedEvents')]

@@ -33,7 +33,9 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->securityEmailNotificationSubscriber = $this->subscriber;

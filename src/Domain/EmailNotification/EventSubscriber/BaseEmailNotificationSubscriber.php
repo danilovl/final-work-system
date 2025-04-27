@@ -12,6 +12,10 @@
 
 namespace App\Domain\EmailNotification\EventSubscriber;
 
+use App\Domain\EmailNotification\Provider\{
+    EmailNotificationAddToQueueProvider,
+    EmailNotificationEnableMessengerProvider
+};
 use App\Application\Service\{
     TranslatorService,
     TwigRenderService
@@ -33,17 +37,15 @@ class BaseEmailNotificationSubscriber
 
     protected string $translatorDomain;
 
-    public bool $enableAddToQueue;
-
-    public bool $enableMessenger;
-
     public function __construct(
         protected UserFacade $userFacade,
         protected TwigRenderService $twigRenderService,
         protected TranslatorService $translator,
         protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
-        protected MessageBusInterface $bus
+        protected MessageBusInterface $bus,
+        protected EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider,
+        protected EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider
     ) {
         $this->initParameters();
     }
@@ -54,8 +56,6 @@ class BaseEmailNotificationSubscriber
         $this->locale = $this->parameterService->getString('email_notification.default_locale');
         $this->sureExistTemplateLocale = $this->parameterService->getString('email_notification.sure_exist_template_locale');
         $this->translatorDomain = $this->parameterService->getString('email_notification.translator_domain');
-        $this->enableAddToQueue = $this->parameterService->getBoolean('email_notification.enable_add_to_queue');
-        $this->enableMessenger = $this->parameterService->getBoolean('email_notification.enable_messenger');
     }
 
     protected function getTemplate(string $locale, string $name): string
@@ -70,7 +70,7 @@ class BaseEmailNotificationSubscriber
 
     public function addEmailNotificationToQueue(EmailNotificationMessage $emailNotificationMessage): void
     {
-        if (!$this->enableAddToQueue) {
+        if (!$this->emailNotificationAddToQueueProvider->isEnable()) {
             return;
         }
 
@@ -82,7 +82,7 @@ class BaseEmailNotificationSubscriber
             return;
         }
 
-        if ($this->enableMessenger) {
+        if ($this->emailNotificationEnableMessengerProvider->isEnable()) {
             $this->sendToMessenger($emailNotificationMessage);
 
             return;

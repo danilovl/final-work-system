@@ -32,7 +32,9 @@ class UserEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->userEmailNotificationSubscriber = $this->subscriber;

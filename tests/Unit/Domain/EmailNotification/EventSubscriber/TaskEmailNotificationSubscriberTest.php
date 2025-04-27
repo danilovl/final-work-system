@@ -34,7 +34,9 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->taskEmailNotificationSubscriber = $this->subscriber;

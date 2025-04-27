@@ -45,7 +45,9 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             $this->emailNotificationFactory,
             $this->parameterService,
             $userWorkService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->documentEmailNotificationSubscriber = $this->subscriber;

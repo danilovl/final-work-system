@@ -14,6 +14,7 @@ namespace App\Domain\EmailNotification\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
+use App\Domain\EmailNotification\Provider\{EmailNotificationAddToQueueProvider, EmailNotificationEnableMessengerProvider};
 use Override;
 use App\Application\Service\{
     TranslatorService,
@@ -36,7 +37,9 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         protected EmailNotificationFactory $emailNotificationFactory,
         protected ParameterServiceInterface $parameterService,
         private readonly WorkService $workService,
-        protected MessageBusInterface $bus
+        protected MessageBusInterface $bus,
+        protected EmailNotificationAddToQueueProvider $emailNotificationAddToQueueProvider,
+        protected EmailNotificationEnableMessengerProvider $emailNotificationEnableMessengerProvider
     ) {
         parent::__construct(
             $userFacade,
@@ -44,7 +47,9 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
             $translator,
             $emailNotificationFactory,
             $parameterService,
-            $bus
+            $bus,
+            $emailNotificationAddToQueueProvider,
+            $emailNotificationEnableMessengerProvider
         );
     }
 

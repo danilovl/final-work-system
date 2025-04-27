@@ -33,7 +33,9 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->workEmailNotificationSubscriber = $this->subscriber;

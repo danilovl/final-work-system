@@ -49,8 +49,10 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
             $this->translator,
             $this->emailNotificationFactory,
             $this->parameterService,
-            $this->bus
-        ) extends BaseEmailNotificationSubscriber implements EventSubscriberInterface{
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
+        ) extends BaseEmailNotificationSubscriber implements EventSubscriberInterface {
             public static function getSubscribedEvents(): array
             {
                 return [];
@@ -62,13 +64,13 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
     public function testAddEmailNotificationToQueueNotEnable(): void
     {
-        $emailNotificationMessage = $this->createMock(EmailNotificationMessage::class);
-
-        $this->baseEmailNotificationSubscriber->enableAddToQueue = false;
+        $this->isEmailNotificationAddToQueueProvider = false;
 
         $this->userFacade
             ->expects($this->never())
             ->method('findOneByEmail');
+
+        $emailNotificationMessage = $this->createMock(EmailNotificationMessage::class);
 
         $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($emailNotificationMessage);
     }
@@ -102,7 +104,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
     public function testAddEmailNotificationToQueueSaveLocal(): void
     {
-        $this->baseEmailNotificationSubscriber->enableMessenger = false;
+        $this->isEmailNotificationEnableMessengerProvider = false;
 
         $this->bus
             ->expects($this->never())

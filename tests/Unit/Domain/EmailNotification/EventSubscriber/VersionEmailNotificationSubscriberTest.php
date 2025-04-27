@@ -36,7 +36,9 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
             $this->emailNotificationFactory,
             $this->parameterService,
             new WorkService,
-            $this->bus
+            $this->bus,
+            $this->emailNotificationAddToQueueProvider,
+            $this->emailNotificationEnableMessengerProvider
         );
 
         $this->versionEmailNotificationSubscriber = $this->subscriber;
