@@ -30,11 +30,7 @@ class ArticleVoter extends Voter
     #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, self::SUPPORTS, true)) {
-            return false;
-        }
-
-        return $subject instanceof ArticleVoterSubject;
+        return $subject instanceof ArticleVoterSubject && in_array($attribute, self::SUPPORTS, true);
     }
 
     #[Override]

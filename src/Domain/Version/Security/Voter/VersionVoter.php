@@ -34,11 +34,7 @@ class VersionVoter extends Voter
     #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, self::SUPPORTS, true)) {
-            return false;
-        }
-
-        return $subject instanceof VersionVoterSubject;
+        return $subject instanceof VersionVoterSubject && in_array($attribute, self::SUPPORTS, true);
     }
 
     #[Override]

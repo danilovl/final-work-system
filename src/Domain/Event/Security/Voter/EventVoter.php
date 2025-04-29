@@ -37,11 +37,7 @@ class EventVoter extends Voter
     #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, self::SUPPORTS, true)) {
-            return false;
-        }
-
-        return $subject instanceof Event;
+        return $subject instanceof Event && in_array($attribute, self::SUPPORTS, true);
     }
 
     #[Override]

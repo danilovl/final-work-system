@@ -32,11 +32,7 @@ class DocumentVoter extends Voter
     #[Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, self::SUPPORTS, true)) {
-            return false;
-        }
-
-        return $subject instanceof Media;
+        return $subject instanceof Media && in_array($attribute, self::SUPPORTS, true);
     }
 
     #[Override]
