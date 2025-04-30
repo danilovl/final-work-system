@@ -13,9 +13,9 @@
 namespace App\Domain\Article\Http;
 
 use App\Application\Service\{
+    SeoPageService,
     TwigRenderService
 };
-use App\Application\Service\SeoPageService;
 use App\Domain\Article\Entity\Article;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use Symfony\Component\HttpFoundation\Response;

@@ -18,7 +18,7 @@ use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class ConversationEventDispatcherService
+readonly class ConversationEventDispatcher
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,

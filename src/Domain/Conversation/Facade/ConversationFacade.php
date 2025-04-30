@@ -14,7 +14,7 @@ namespace App\Domain\Conversation\Facade;
 
 use App\Application\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcherService;
+use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcher;
 use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Repository\ConversationRepository;
@@ -42,7 +42,7 @@ readonly class ConversationFacade
         private ConversationMessageFacade $conversationMessageFacade,
         private ConversationStatusService $conversationStatusService,
         private ConversationVariationService $conversationVariationService,
-        private ConversationEventDispatcherService $conversationEventDispatcherService,
+        private ConversationEventDispatcher $conversationEventDispatcher,
         private ConversationFactory $conversationFactory,
         private ConversationRepository $conversationRepository
     ) {}
@@ -199,8 +199,7 @@ readonly class ConversationFacade
             $message = $this->conversationMessageFacade
                 ->getConversationMessage($conversationMessage->getId());
 
-            $this->conversationEventDispatcherService
-                ->onConversationMessageCreate($message);
+            $this->conversationEventDispatcher->onConversationMessageCreate($message);
         } else {
             /** @var Conversation $modelConversation */
             $modelConversation = $modelConversation[0];
@@ -226,8 +225,7 @@ readonly class ConversationFacade
                     $message = $this->conversationMessageFacade
                         ->getConversationMessage($conversationMessage->getId());
 
-                    $this->conversationEventDispatcherService
-                        ->onConversationMessageCreate($message);
+                    $this->conversationEventDispatcher->onConversationMessageCreate($message);
                 }
             }
 

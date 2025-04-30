@@ -30,7 +30,7 @@ class CommentFactory extends BaseModelFactory
         return $comment;
     }
 
-    public function fromModel(
+    private function fromModel(
         Comment $comment,
         CommentModel $commentModel
     ): Comment {

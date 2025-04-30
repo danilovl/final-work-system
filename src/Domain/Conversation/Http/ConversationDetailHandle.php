@@ -23,7 +23,7 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcherService;
+use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcher;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Helper\ConversationHelper;
@@ -55,7 +55,7 @@ readonly class ConversationDetailHandle
         private FormFactoryInterface $formFactory,
         private PaginatorService $paginatorService,
         private SeoPageService $seoPageService,
-        private ConversationEventDispatcherService $conversationEventDispatcherService,
+        private ConversationEventDispatcher $conversationEventDispatcher,
         private ConversationSearch $conversationSearch,
         private MessageHighlightService $messageHighlightService
     ) {}
@@ -110,8 +110,7 @@ readonly class ConversationDetailHandle
                     ConversationMessageStatusTypeConstant::UNREAD->value
                 );
 
-                $this->conversationEventDispatcherService
-                    ->onConversationMessageCreate($conversationMessage);
+                $this->conversationEventDispatcher->onConversationMessageCreate($conversationMessage);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
             } else {
