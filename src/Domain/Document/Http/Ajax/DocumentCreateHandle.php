@@ -21,7 +21,7 @@ use App\Application\Service\{
     RequestService,
     EntityManagerService
 };
-use App\Domain\Document\EventDispatcher\DocumentEventDispatcherService;
+use App\Domain\Document\EventDispatcher\DocumentEventDispatcher;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
@@ -41,7 +41,7 @@ readonly class DocumentCreateHandle
         private EntityManagerService $entityManagerService,
         private DocumentFormFactory $documentFormFactory,
         private MediaFactory $mediaFactory,
-        private DocumentEventDispatcherService $documentEventDispatcherService
+        private DocumentEventDispatcher $documentEventDispatcher
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -65,7 +65,7 @@ readonly class DocumentCreateHandle
         if ($form->isSubmitted() && $form->isValid()) {
             $media = $this->mediaFactory->flushFromModel($mediaModel);
 
-            $this->documentEventDispatcherService->onDocumentCreate($media);
+            $this->documentEventDispatcher->onDocumentCreate($media);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

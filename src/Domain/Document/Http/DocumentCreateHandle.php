@@ -22,7 +22,7 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\Document\EventDispatcher\DocumentEventDispatcherService;
+use App\Domain\Document\EventDispatcher\DocumentEventDispatcher;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
@@ -44,7 +44,7 @@ readonly class DocumentCreateHandle
         private EntityManagerService $entityManagerService,
         private DocumentFormFactory $documentFormFactory,
         private MediaFactory $mediaFactory,
-        private DocumentEventDispatcherService $documentEventDispatcherService
+        private DocumentEventDispatcher $documentEventDispatcher
     ) {}
 
     public function __invoke(Request $request): Response
@@ -69,7 +69,7 @@ readonly class DocumentCreateHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $media = $this->mediaFactory->flushFromModel($mediaModel);
-                $this->documentEventDispatcherService->onDocumentCreate($media);
+                $this->documentEventDispatcher->onDocumentCreate($media);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
