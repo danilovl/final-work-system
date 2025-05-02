@@ -14,7 +14,7 @@ namespace App\Tests\Unit\Domain\Event\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\EventDispatcher\GenericEvent\EventGenericEvent;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use Danilovl\AsyncBundle\Service\AsyncService;
@@ -25,19 +25,19 @@ use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 
-class EventEventDispatcherServiceTest extends TestCase
+class EventEventDispatcherTest extends TestCase
 {
     private MockObject&EventDispatcherInterface $eventDispatcher;
 
     private AsyncService $asyncService;
 
-    private EventEventDispatcherService $eventEventDispatcherService;
+    private EventEventDispatcher $eventEventDispatcher;
 
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->asyncService = new AsyncService;
-        $this->eventEventDispatcherService = new EventEventDispatcherService($this->eventDispatcher, $this->asyncService);
+        $this->eventEventDispatcher = new EventEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
     #[DataProvider('dispatchProvider')]
@@ -54,7 +54,7 @@ class EventEventDispatcherServiceTest extends TestCase
             ->method('dispatch')
             ->will($this->createReturnCallback($expectEvents, $expectNames));;
 
-        $this->eventEventDispatcherService->{$method}($event);
+        $this->eventEventDispatcher->{$method}($event);
         $this->asyncService->call();
     }
 

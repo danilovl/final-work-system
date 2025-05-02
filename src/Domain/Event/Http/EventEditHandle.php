@@ -20,7 +20,7 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
@@ -47,7 +47,7 @@ readonly class EventEditHandle
         private FormFactoryInterface $formFactory,
         private HashidsServiceInterface $hashidsService,
         private EventParticipantFacade $eventParticipantFacade,
-        private EventEventDispatcherService $eventEventDispatcherService,
+        private EventEventDispatcher $eventEventDispatcherService,
         private RouterInterface $router
     ) {}
 

@@ -18,7 +18,7 @@ use App\Application\Service\{
     EntityManagerService
 };
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use DateTime;
 use Symfony\Component\HttpFoundation\{
@@ -32,7 +32,7 @@ readonly class EventCalendarEditHandle
         private RequestService $requestService,
         private EntityManagerService $entityManagerService,
         private HashidsServiceInterface $hashidsService,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private EventEventDispatcher $eventEventDispatcherService
     ) {}
 
     public function __invoke(Request $request, Event $event): JsonResponse

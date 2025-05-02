@@ -19,7 +19,7 @@ use App\Application\Service\{
     RequestService
 };
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Facade\EventCalendarFacade;
 use App\Domain\EventCalendar\Form\EventWorkReservationForm;
 use App\Domain\EventParticipant\Entity\EventParticipant;
@@ -46,7 +46,7 @@ readonly class EventCalendarEventReservationHandle
         private UserService $userService,
         private UserWorkService $userWorkService,
         private FormFactoryInterface $formFactory,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private EventEventDispatcher $eventEventDispatcherService
     ) {}
 
     public function __invoke(Request $request, Event $event): JsonResponse

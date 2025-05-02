@@ -24,7 +24,7 @@ use App\Domain\Comment\Factory\CommentFactory;
 use App\Domain\Comment\Form\CommentForm;
 use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -45,7 +45,7 @@ readonly class EventDetailHandle
         private CommentFactory $commentFactory,
         private EventAddressFacade $eventAddressFacade,
         private FormDeleteFactory $formDeleteFactory,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private EventEventDispatcher $eventEventDispatcher
     ) {}
 
     public function __invoke(Request $request, Event $event): Response
@@ -71,8 +71,10 @@ readonly class EventDetailHandle
             $eventComment = $this->commentFactory
                 ->createFromModel($eventCommentModel, $eventCommentExist);
 
-            $this->eventEventDispatcherService
-                ->onEventComment($eventComment, $eventCommentExist !== null);
+            $this->eventEventDispatcher->onEventComment(
+                $eventComment,
+                $eventCommentExist !== null
+            );
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
         }

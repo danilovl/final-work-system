@@ -18,7 +18,7 @@ use App\Application\Service\{
     EntityManagerService
 };
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,7 +30,7 @@ readonly class EventSwitchToSkypeHandle
         private EntityManagerService $entityManagerService,
         private EventAddressFacade $eventAddressFacade,
         private HashidsServiceInterface $hashidsService,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private EventEventDispatcher $eventEventDispatcherService
     ) {}
 
     public function __invoke(Event $event): RedirectResponse

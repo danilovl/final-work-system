@@ -19,7 +19,7 @@ use App\Application\Service\{
     RequestService
 };
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcherService;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
@@ -41,7 +41,7 @@ readonly class EventEditHandle
         private EventFactory $eventFactory,
         private FormFactoryInterface $formFactory,
         private EventParticipantFacade $eventParticipantFacade,
-        private EventEventDispatcherService $eventEventDispatcherService
+        private EventEventDispatcher $eventEventDispatcherService
     ) {}
 
     public function __invoke(Request $request, Event $event): JsonResponse
