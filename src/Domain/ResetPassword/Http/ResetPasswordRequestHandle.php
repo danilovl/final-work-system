@@ -18,7 +18,7 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcherService;
+use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcher;
 use App\Domain\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use App\Domain\ResetPassword\Form\ResetPasswordRequestForm;
 use App\Domain\ResetPassword\Service\ResetPasswordService;
@@ -38,7 +38,7 @@ readonly class ResetPasswordRequestHandle
         private TranslatorService $translatorService,
         private FormFactoryInterface $formFactory,
         private UserFacade $userFacade,
-        private SecurityDispatcherService $securityDispatcherService,
+        private SecurityDispatcher $securityDispatcher,
         private ResetPasswordService $resetPasswordService
     ) {}
 
@@ -85,7 +85,7 @@ readonly class ResetPasswordRequestHandle
             return $this->requestService->redirectToRoute('reset_password_forgot_request');
         }
 
-        $this->securityDispatcherService->onResetPasswordTokenCreate(
+        $this->securityDispatcher->onResetPasswordTokenCreate(
             $resetToken,
             $this->resetPasswordService->getTokenLifetime()
         );

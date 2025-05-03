@@ -15,16 +15,16 @@ namespace App\Tests\Unit\Domain\ResetPassword\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
-use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcherService;
+use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class SecurityDispatcherServiceTest extends TestCase
+class SecurityDispatcherTest extends TestCase
 {
     public function testOnResetPasswordTokenCreate(): void
     {
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $securityDispatcherService = new SecurityDispatcherService($eventDispatcher);
+        $securityDispatcher = new SecurityDispatcher($eventDispatcher);
 
         $resetPassword = $this->createMock(ResetPassword::class);
 
@@ -35,6 +35,6 @@ class SecurityDispatcherServiceTest extends TestCase
                 Events::SECURITY_RESET_PASSWORD_TOKEN
             );
 
-        $securityDispatcherService->onResetPasswordTokenCreate($resetPassword, 3_600);
+        $securityDispatcher->onResetPasswordTokenCreate($resetPassword, 3_600);
     }
 }
