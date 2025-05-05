@@ -18,7 +18,7 @@ use App\Application\Service\{
 };
 use App\Application\Service\EntityManagerService;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class TaskNotifyCompleteHandle
@@ -26,7 +26,7 @@ readonly class TaskNotifyCompleteHandle
     public function __construct(
         private RequestService $requestService,
         private EntityManagerService $entityManagerService,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
     public function __invoke(Task $task): JsonResponse
@@ -38,7 +38,7 @@ readonly class TaskNotifyCompleteHandle
         $task->changeNotifyComplete();
         $this->entityManagerService->flush();
 
-        $this->taskEventDispatcherService->onTaskNotifyComplete($task);
+        $this->taskEventDispatcher->onTaskNotifyComplete($task);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }

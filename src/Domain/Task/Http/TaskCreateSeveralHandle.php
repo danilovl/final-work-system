@@ -22,7 +22,7 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
@@ -43,7 +43,7 @@ readonly class TaskCreateSeveralHandle
         private TaskFormFactory $taskFormFactory,
         private TaskFactory $taskFactory,
         private TaskDeadlineFacade $taskDeadlineFacade,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
     public function __invoke(Request $request): Response
@@ -72,7 +72,7 @@ readonly class TaskCreateSeveralHandle
                     $taskModel->work = $work;
 
                     $task = $this->taskFactory->flushFromModel($taskModel);
-                    $this->taskEventDispatcherService->onTaskCreate($task);
+                    $this->taskEventDispatcher->onTaskCreate($task);
                 }
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');

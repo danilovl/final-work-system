@@ -23,7 +23,7 @@ use App\Application\Service\{
 };
 use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
@@ -45,7 +45,7 @@ readonly class TaskEditHandle
         private TaskFormFactory $taskFormFactory,
         private TaskFactory $taskFactory,
         private TaskDeadlineFacade $taskDeadlineFacade,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcherService
     ) {}
 
     public function __invoke(

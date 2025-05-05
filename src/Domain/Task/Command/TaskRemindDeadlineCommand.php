@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Command;
 
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Provider\TaskRemindProvider;
 use Override;
@@ -30,7 +30,7 @@ class TaskRemindDeadlineCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private readonly TaskEventDispatcherService $taskEventDispatcherService,
+        private readonly TaskEventDispatcher $taskEventDispatcher,
         private readonly TaskDeadlineFacade $taskDeadlineFacade,
         private readonly TaskRemindProvider $taskRemindProvider
     ) {
@@ -68,7 +68,7 @@ class TaskRemindDeadlineCommand extends Command
             }
 
             foreach ($tasks as $task) {
-                $this->taskEventDispatcherService->onTaskReminderCreate($task);
+                $this->taskEventDispatcher->onTaskReminderCreate($task);
             }
 
             $count += count($tasks);

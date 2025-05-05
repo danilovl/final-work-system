@@ -14,11 +14,11 @@ namespace App\Domain\Task\Service;
 
 use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 
 readonly class TaskStatusService
 {
-    public function __construct(private TaskEventDispatcherService $taskEventDispatcherService) {}
+    public function __construct(private TaskEventDispatcher $taskEventDispatcher) {}
 
     public function changeStatus(string $type, Task $task): void
     {
@@ -27,21 +27,21 @@ readonly class TaskStatusService
                 $task->changeActive();
 
                 if ($task->isActive()) {
-                    $this->taskEventDispatcherService->onTaskChangeStatus($task, $type);
+                    $this->taskEventDispatcher->onTaskChangeStatus($task, $type);
                 }
 
                 break;
             case TaskStatusConstant::COMPLETE->value:
                 $task->changeComplete();
 
-                $this->taskEventDispatcherService->onTaskChangeStatus($task, $type);
+                $this->taskEventDispatcher->onTaskChangeStatus($task, $type);
 
                 break;
             case TaskStatusConstant::NOTIFY->value:
                 if ($task->isNotifyComplete()) {
                     $task->changeNotifyComplete();
 
-                    $this->taskEventDispatcherService->onTaskChangeStatus($task, $type);
+                    $this->taskEventDispatcher->onTaskChangeStatus($task, $type);
                 }
 
                 break;

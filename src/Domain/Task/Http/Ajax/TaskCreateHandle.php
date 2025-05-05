@@ -15,7 +15,7 @@ namespace App\Domain\Task\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\TaskForm;
 use App\Domain\Task\Model\TaskModel;
@@ -34,7 +34,7 @@ readonly class TaskCreateHandle
         private UserService $userService,
         private TaskFactory $taskFactory,
         private FormFactoryInterface $formFactory,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -50,7 +50,7 @@ readonly class TaskCreateHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $task = $this->taskFactory->flushFromModel($taskModel);
-            $this->taskEventDispatcherService->onTaskCreate($task);
+            $this->taskEventDispatcher->onTaskCreate($task);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

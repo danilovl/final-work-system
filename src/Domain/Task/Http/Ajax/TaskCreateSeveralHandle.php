@@ -19,7 +19,7 @@ use App\Application\Constant\{
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
 use App\Domain\Task\Model\TaskModel;
@@ -36,7 +36,7 @@ readonly class TaskCreateSeveralHandle
         private UserService $userService,
         private TaskFormFactory $taskFormFactory,
         private TaskFactory $taskFactory,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -64,7 +64,7 @@ readonly class TaskCreateSeveralHandle
                 $taskModel->work = $work;
 
                 $task = $this->taskFactory->flushFromModel($taskModel);
-                $this->taskEventDispatcherService->onTaskCreate($task);
+                $this->taskEventDispatcher->onTaskCreate($task);
             }
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);

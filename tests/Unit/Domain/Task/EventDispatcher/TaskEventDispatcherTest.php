@@ -16,7 +16,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
@@ -26,19 +26,19 @@ use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 
-class TaskEventDispatcherServiceTest extends TestCase
+class TaskEventDispatcherTest extends TestCase
 {
     private MockObject&EventDispatcherInterface $eventDispatcher;
 
     private AsyncService $asyncService;
 
-    private TaskEventDispatcherService $taskEventDispatcherService;
+    private TaskEventDispatcher $taskEventDispatcher;
 
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->asyncService = new AsyncService;
-        $this->taskEventDispatcherService = new TaskEventDispatcherService($this->eventDispatcher, $this->asyncService);
+        $this->taskEventDispatcher = new TaskEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
     #[DataProvider('dispatchProvider')]
@@ -65,7 +65,7 @@ class TaskEventDispatcherServiceTest extends TestCase
 
         $arguments = array_merge([$task], $otherArguments);
 
-        $this->taskEventDispatcherService->{$method}(...$arguments);
+        $this->taskEventDispatcher->{$method}(...$arguments);
         $this->asyncService->call();
     }
 

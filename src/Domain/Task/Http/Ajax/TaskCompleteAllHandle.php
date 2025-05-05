@@ -18,7 +18,7 @@ use App\Application\Service\{
     EntityManagerService
 };
 use App\Domain\Task\Constant\TaskStatusConstant;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,7 +30,7 @@ readonly class TaskCompleteAllHandle
         private UserService $userService,
         private EntityManagerService $entityManagerService,
         private TaskFacade $taskFacade,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
     public function __invoke(): JsonResponse
@@ -46,7 +46,7 @@ readonly class TaskCompleteAllHandle
             $task->changeComplete();
             $this->entityManagerService->flush();
 
-            $this->taskEventDispatcherService->onTaskChangeStatus(
+            $this->taskEventDispatcher->onTaskChangeStatus(
                 $task,
                 TaskStatusConstant::COMPLETE->value
             );

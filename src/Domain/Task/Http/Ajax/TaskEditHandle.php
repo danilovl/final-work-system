@@ -16,7 +16,7 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcherService;
+use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\TaskForm;
 use App\Domain\Task\Model\TaskModel;
@@ -32,7 +32,7 @@ readonly class TaskEditHandle
         private RequestService $requestService,
         private TaskFactory $taskFactory,
         private FormFactoryInterface $formFactory,
-        private TaskEventDispatcherService $taskEventDispatcherService
+        private TaskEventDispatcher $taskEventDispatcher
     ) {}
 
     public function __invoke(Request $request, Task $task): JsonResponse
@@ -44,7 +44,7 @@ readonly class TaskEditHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->taskFactory->flushFromModel($taskModel, $task);
-            $this->taskEventDispatcherService->onTaskEdit($task);
+            $this->taskEventDispatcher->onTaskEdit($task);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
