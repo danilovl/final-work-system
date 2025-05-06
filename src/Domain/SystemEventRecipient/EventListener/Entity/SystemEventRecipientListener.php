@@ -15,14 +15,14 @@ namespace App\Domain\SystemEventRecipient\EventListener\Entity;
 use App\Application\Constant\CacheKeyConstant;
 use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
-use App\Domain\User\EventDispatcher\UserCacheEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserCacheEventDispatcher;
 use Doctrine\ORM\Event\PostPersistEventArgs;
 
 readonly class SystemEventRecipientListener
 {
     public function __construct(
         private CacheEventDispatcher $cacheEventDispatcher,
-        private UserCacheEventDispatcherService $userCacheEventDispatcherService,
+        private UserCacheEventDispatcher $userCacheEventDispatcher,
     ) {}
 
     public function postPersist(PostPersistEventArgs $eventArgs): void
@@ -41,6 +41,6 @@ readonly class SystemEventRecipientListener
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $recipient->getRecipient()->getId())
         );
 
-        $this->userCacheEventDispatcherService->onCreateHomepageCache($recipient->getRecipient());
+        $this->userCacheEventDispatcher->onCreateHomepageCache($recipient->getRecipient());
     }
 }

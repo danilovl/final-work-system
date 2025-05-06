@@ -24,7 +24,7 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\User\Entity\User;
-use App\Domain\User\EventDispatcher\UserEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserEventDispatcher;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\Factory\UserFormFactory;
 use App\Domain\User\Model\UserModel;
@@ -45,7 +45,7 @@ readonly class UserEditHandle
         private HashidsServiceInterface $hashidsService,
         private UserFormFactory $userFormFactory,
         private UserFactory $userFactory,
-        private UserEventDispatcherService $userEventDispatcherService,
+        private UserEventDispatcher $userEventDispatcher,
         private SeoPageService $seoPageService
     ) {}
 
@@ -62,7 +62,7 @@ readonly class UserEditHandle
                 $this->userFactory
                     ->flushFromModel($userModel, $user);
 
-                $this->userEventDispatcherService->onUserEdit(
+                $this->userEventDispatcher->onUserEdit(
                     $user,
                     $this->userService->getUser()
                 );

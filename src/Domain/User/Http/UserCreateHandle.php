@@ -21,7 +21,7 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\User\EventDispatcher\UserEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserEventDispatcher;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\Factory\UserFormFactory;
@@ -40,7 +40,7 @@ readonly class UserCreateHandle
         private UserFacade $userFacade,
         private UserFormFactory $userFormFactory,
         private UserFactory $userFactory,
-        private UserEventDispatcherService $userEventDispatcherService
+        private UserEventDispatcher $userEventDispatcher
     ) {}
 
     public function __invoke(Request $request): Response
@@ -62,7 +62,7 @@ readonly class UserCreateHandle
                     $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.user.create.warning');
                 } else {
                     $newUser = $this->userFactory->createNewUser($userModel);
-                    $this->userEventDispatcherService->onUserCreate($newUser);
+                    $this->userEventDispatcher->onUserCreate($newUser);
 
                     $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.user.create.success');
                 }

@@ -16,7 +16,7 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\User\Entity\User;
-use App\Domain\User\EventDispatcher\UserEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserEventDispatcher;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\UserEditForm;
 use App\Domain\User\Model\UserModel;
@@ -34,7 +34,7 @@ readonly class UserEditHandle
         private UserService $userService,
         private FormFactoryInterface $formFactory,
         private UserFactory $userFactory,
-        private UserEventDispatcherService $userEventDispatcherService
+        private UserEventDispatcher $userEventDispatcher
     ) {}
 
     public function __invoke(Request $request, User $user): JsonResponse
@@ -50,7 +50,7 @@ readonly class UserEditHandle
                 $user
             );
 
-            $this->userEventDispatcherService->onUserEdit(
+            $this->userEventDispatcher->onUserEdit(
                 $user,
                 $this->userService->getUser()
             );

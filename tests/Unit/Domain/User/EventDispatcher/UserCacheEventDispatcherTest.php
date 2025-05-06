@@ -15,16 +15,16 @@ namespace Domain\User\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
-use App\Domain\User\EventDispatcher\UserCacheEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserCacheEventDispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class UserCacheEventDispatcherServiceTest extends TestCase
+class UserCacheEventDispatcherTest extends TestCase
 {
     public function testOnCreateHomepageCache(): void
     {
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $userCacheEventDispatcherService = new UserCacheEventDispatcherService($eventDispatcher);
+        $userCacheEventDispatcher = new UserCacheEventDispatcher($eventDispatcher);
 
         $eventDispatcher->expects($this->once())
             ->method('dispatch')
@@ -33,6 +33,6 @@ class UserCacheEventDispatcherServiceTest extends TestCase
                 Events::CACHE_CREATE_HOMEPAGE
             );
 
-        $userCacheEventDispatcherService->onCreateHomepageCache(new User);
+        $userCacheEventDispatcher->onCreateHomepageCache(new User);
     }
 }

@@ -17,7 +17,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class UserCacheEventDispatcherService
+readonly class UserCacheEventDispatcher
 {
     public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 

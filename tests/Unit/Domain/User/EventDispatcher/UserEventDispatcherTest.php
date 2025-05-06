@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Domain\User\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
-use App\Domain\User\EventDispatcher\UserEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserEventDispatcher;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -24,19 +24,19 @@ use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 
-class UserEventDispatcherServiceTest extends TestCase
+class UserEventDispatcherTest extends TestCase
 {
     private MockObject&EventDispatcherInterface $eventDispatcher;
 
     private AsyncService $asyncService;
 
-    private UserEventDispatcherService $userEventDispatcherService;
+    private UserEventDispatcher $userEventDispatcher;
 
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->asyncService = new AsyncService;
-        $this->userEventDispatcherService = new UserEventDispatcherService($this->eventDispatcher, $this->asyncService);
+        $this->userEventDispatcher = new UserEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
     #[DataProvider('dispatchProvider')]
@@ -49,7 +49,7 @@ class UserEventDispatcherServiceTest extends TestCase
             ->method('dispatch')
             ->will($this->createReturnCallback($expectEvents, $expectNames));
 
-        $this->userEventDispatcherService->{$method}($user, $user);
+        $this->userEventDispatcher->{$method}($user, $user);
         $this->asyncService->call();
     }
 

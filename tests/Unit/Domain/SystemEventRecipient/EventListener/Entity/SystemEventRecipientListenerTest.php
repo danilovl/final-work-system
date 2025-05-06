@@ -17,7 +17,7 @@ use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\EventListener\Entity\SystemEventRecipientListener;
 use App\Domain\User\Entity\User;
-use App\Domain\User\EventDispatcher\UserCacheEventDispatcherService;
+use App\Domain\User\EventDispatcher\UserCacheEventDispatcher;
 use PHPUnit\Framework\TestCase;
 
 class SystemEventRecipientListenerTest extends TestCase
@@ -36,13 +36,13 @@ class SystemEventRecipientListenerTest extends TestCase
             ->method('onClearCacheKey')
             ->with(sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $recipient->getRecipient()->getId()));
 
-        $userCacheEventDispatcherService = $this->createMock(UserCacheEventDispatcherService::class);
-        $userCacheEventDispatcherService
+        $userCacheEventDispatcher = $this->createMock(UserCacheEventDispatcher::class);
+        $userCacheEventDispatcher
             ->expects($this->once())
             ->method('onCreateHomepageCache')
             ->with($recipient->getRecipient());
 
-        $listener = new SystemEventRecipientListener($cacheEventDispatcherService, $userCacheEventDispatcherService);
+        $listener = new SystemEventRecipientListener($cacheEventDispatcherService, $userCacheEventDispatcher);
         $listener->clearCache($recipient);
     }
 }
