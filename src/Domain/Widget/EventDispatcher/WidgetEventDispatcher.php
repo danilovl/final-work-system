@@ -16,7 +16,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class WidgetEventDispatcherService
+readonly class WidgetEventDispatcher
 {
     public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 
