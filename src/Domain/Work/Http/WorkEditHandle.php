@@ -23,7 +23,7 @@ use App\Application\Service\{
 };
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Factory\WorkFactory;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\Work\Model\WorkModel;
@@ -47,7 +47,7 @@ readonly class WorkEditHandle
         private WorkFormFactory $workFormFactory,
         private WorkDeadlineFacade $workDeadlineFacade,
         private WorkFactory $workFactory,
-        private WorkEventDispatcherService $workEventDispatcherService
+        private WorkEventDispatcher $workEventDispatcher
     ) {}
 
     public function __invoke(Request $request, Work $work): Response
@@ -62,7 +62,7 @@ readonly class WorkEditHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $this->workFactory->flushFromModel($workModel, $work);
-                $this->workEventDispatcherService->onWorkEdit($work);
+                $this->workEventDispatcher->onWorkEdit($work);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

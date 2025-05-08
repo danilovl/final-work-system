@@ -19,7 +19,7 @@ use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-readonly class WorkEventDispatcherService
+readonly class WorkEventDispatcher
 {
     public function __construct(
         private EventDispatcherInterface $eventDispatcher,

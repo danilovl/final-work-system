@@ -26,7 +26,7 @@ use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\UserEditForm;
 use App\Domain\User\Model\UserModel;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
@@ -42,7 +42,7 @@ readonly class WorkEditAuthorHandle
         private TranslatorService $translatorService,
         private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory,
-        private WorkEventDispatcherService $workEventDispatcherService,
+        private WorkEventDispatcher $workEventDispatcher,
         private UserFactory $userFactory,
         private SeoPageService $seoPageService
     ) {}
@@ -59,7 +59,7 @@ readonly class WorkEditAuthorHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $this->userFactory->flushFromModel($userModel, $author);
-                $this->workEventDispatcherService->onWorkEditAuthor($work);
+                $this->workEventDispatcher->onWorkEditAuthor($work);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

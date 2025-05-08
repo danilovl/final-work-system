@@ -16,7 +16,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -25,19 +25,19 @@ use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPUnit\Framework\TestCase;
 
-class WorkEventDispatcherServiceTest extends TestCase
+class WorkEventDispatcherTest extends TestCase
 {
     private MockObject&EventDispatcherInterface $eventDispatcher;
 
     private AsyncService $asyncService;
 
-    private WorkEventDispatcherService $workEventDispatcherService;
+    private WorkEventDispatcher $workEventDispatcher;
 
     protected function setUp(): void
     {
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->asyncService = new AsyncService;
-        $this->workEventDispatcherService = new WorkEventDispatcherService($this->eventDispatcher, $this->asyncService);
+        $this->workEventDispatcher = new WorkEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
     #[DataProvider('dispatchProvider')]
@@ -50,7 +50,7 @@ class WorkEventDispatcherServiceTest extends TestCase
             ->method('dispatch')
             ->will($this->createReturnCallback($expectEvents, $expectNames));
 
-        $this->workEventDispatcherService->{$method}($work);
+        $this->workEventDispatcher->{$method}($work);
         $this->asyncService->call();
     }
 

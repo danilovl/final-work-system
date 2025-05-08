@@ -17,7 +17,7 @@ use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Factory\WorkFactory;
 use App\Domain\Work\Form\WorkForm;
 use App\Domain\Work\Model\WorkModel;
@@ -34,7 +34,7 @@ readonly class WorkEditHandle
         private UserService $userService,
         private FormFactoryInterface $formFactory,
         private WorkFactory $workFactory,
-        private WorkEventDispatcherService $workEventDispatcherService
+        private WorkEventDispatcher $workEventDispatcher
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -48,7 +48,7 @@ readonly class WorkEditHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->workFactory->flushFromModel($workModel, $work);
-            $this->workEventDispatcherService->onWorkEdit($work);
+            $this->workEventDispatcher->onWorkEdit($work);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

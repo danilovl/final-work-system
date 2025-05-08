@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Command;
 
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Facade\WorkDeadlineFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Override;
@@ -28,7 +28,7 @@ class WorkRemindDeadlineCommand extends Command
     private const int LIMIT = 500;
 
     public function __construct(
-        private readonly WorkEventDispatcherService $workEventDispatcherService,
+        private readonly WorkEventDispatcher $workEventDispatcher,
         private readonly WorkDeadlineFacade $workDeadlineFacade,
         private readonly ParameterServiceInterface $parameterService
     ) {
@@ -56,7 +56,7 @@ class WorkRemindDeadlineCommand extends Command
             }
 
             foreach ($works as $work) {
-                $this->workEventDispatcherService->onWorkReminderDeadlineCreate($work);
+                $this->workEventDispatcher->onWorkReminderDeadlineCreate($work);
             }
 
             $count += count($works);

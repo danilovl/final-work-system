@@ -16,7 +16,7 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcherService;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Factory\WorkFactory;
 use App\Domain\Work\Form\WorkForm;
 use App\Domain\Work\Model\WorkModel;
@@ -33,7 +33,7 @@ readonly class WorkCreateHandle
         private UserService $userService,
         private FormFactoryInterface $formFactory,
         private WorkFactory $workFactory,
-        private WorkEventDispatcherService $workEventDispatcherService
+        private WorkEventDispatcher $workEventDispatcher
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -49,7 +49,7 @@ readonly class WorkCreateHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $work = $this->workFactory->flushFromModel($workModel);
-            $this->workEventDispatcherService->onWorkCreate($work);
+            $this->workEventDispatcher->onWorkCreate($work);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }
