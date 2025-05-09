@@ -79,6 +79,7 @@ readonly class TaskController
         return $this->taskChangeStatusHandle->__invoke($request, $task);
     }
 
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function notifyComplete(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
