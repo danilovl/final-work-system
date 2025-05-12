@@ -15,7 +15,6 @@ namespace App\Domain\Conversation\Service;
 use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
 
@@ -29,25 +28,6 @@ class ConversationStreamService
         private readonly ConversationMessageFacade $conversationMessageFacade
     ) {}
 
-    private function getLastMessage(Conversation $conversation): ?string
-    {
-        $this->date ??= new DateTime;
-
-        /** @var ConversationMessage[] $messages */
-        $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate($conversation, $this->date);
-
-        $chatMessageHtml = null;
-        foreach ($messages as $message) {
-            $chatMessageHtml .= $this->twigRenderService->render('domain/conversation/include/chat_message.html.twig', [
-                'message' => $message
-            ]);
-
-            $this->date = $message->getCreatedAt();
-        }
-
-        return $chatMessageHtml !== null ? base64_encode($chatMessageHtml) : null;
-    }
-
     public function handle(Conversation $conversation): callable
     {
         $sleepSecond = $this->parameterService->getInt('event_source.conversation.detail.sleep');
@@ -60,5 +40,23 @@ class ConversationStreamService
                 sleep($sleepSecond);
             }
         };
+    }
+
+    private function getLastMessage(Conversation $conversation): ?string
+    {
+        $this->date ??= new DateTime;
+
+        $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate($conversation, $this->date);
+
+        $chatMessageHtml = null;
+        foreach ($messages as $message) {
+            $chatMessageHtml .= $this->twigRenderService->render('domain/conversation/include/chat_message.html.twig', [
+                'message' => $message
+            ]);
+
+            $this->date = $message->getCreatedAt();
+        }
+
+        return $chatMessageHtml !== null ? base64_encode($chatMessageHtml) : null;
     }
 }
