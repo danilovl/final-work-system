@@ -14,6 +14,7 @@ namespace App\Tests\Unit\Application\Traits\Entity;
 
 use App\Application\Traits\Entity\CreateUpdateAbleTrait;
 use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class CreateUpdateAbleTraitTest extends TestCase
@@ -24,10 +25,11 @@ class CreateUpdateAbleTraitTest extends TestCase
             use CreateUpdateAbleTrait;
         };
 
+        $dateTimeImmutable = new DateTimeImmutable;
         $date = new DateTime;
 
-        $class->setCreatedAt($date);
-        $this->assertSame($date, $class->getCreatedAt());
+        $class->setCreatedAt($dateTimeImmutable);
+        $this->assertSame($dateTimeImmutable, $class->getCreatedAt());
 
         $class->setUpdatedAt($date);
         $this->assertSame($date, $class->getUpdatedAt());
@@ -35,7 +37,7 @@ class CreateUpdateAbleTraitTest extends TestCase
         $class->createUpdateAblePrePersist();
         $class->createUpdateAblePreUpdate();
 
-        $this->assertNotSame($date, $class->getCreatedAt());
+        $this->assertNotSame($dateTimeImmutable, $class->getCreatedAt());
         $this->assertNotSame($date, $class->getUpdatedAt());
     }
 }

@@ -13,7 +13,7 @@
 namespace App\Domain\User\Entity;
 
 use App\Application\Constant\GenderConstant;
-use App\Application\Traits\Entity\TimestampAbleTrait;
+use App\Application\Traits\Entity\CreateUpdateAbleTrait;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
@@ -58,7 +58,7 @@ use Webmozart\Assert\Assert;
 #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyPasswordAuthenticatedUserInterface
 {
-    use TimestampAbleTrait;
+    use CreateUpdateAbleTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]

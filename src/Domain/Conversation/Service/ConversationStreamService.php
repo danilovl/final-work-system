@@ -17,10 +17,11 @@ use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
+use DateTimeImmutable;
 
 class ConversationStreamService
 {
-    private ?DateTime $date;
+    private ?DateTimeImmutable $date;
 
     public function __construct(
         private readonly ParameterServiceInterface $parameterService,
@@ -44,9 +45,12 @@ class ConversationStreamService
 
     private function getLastMessage(Conversation $conversation): ?string
     {
-        $this->date ??= new DateTime;
+        $this->date ??= new DateTimeImmutable;
 
-        $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate($conversation, $this->date);
+        $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate(
+            $conversation,
+            DateTime::createFromImmutable($this->date)
+        );
 
         $chatMessageHtml = null;
         foreach ($messages as $message) {

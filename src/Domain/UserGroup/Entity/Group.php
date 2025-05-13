@@ -14,7 +14,7 @@ namespace App\Domain\UserGroup\Entity;
 
 use App\Application\Traits\Entity\{
     IdTrait,
-    TimestampAbleTrait
+    CreateUpdateAbleTrait
 };
 use App\Domain\User\Entity\User;
 use App\Domain\UserGroup\Repository\UserGroupRepository;
@@ -31,7 +31,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Group
 {
     use IdTrait;
-    use TimestampAbleTrait;
+    use CreateUpdateAbleTrait;
 
     #[ORM\Column(name: 'name', type: Types::STRING, nullable: false)]
     protected string $name;

@@ -15,7 +15,7 @@ namespace App\Domain\ResetPassword\Entity;
 use App\Domain\User\Entity\User;
 use App\Application\Traits\Entity\{
     IdTrait,
-    TimestampAbleTrait
+    CreateUpdateAbleTrait
 };
 use App\Domain\ResetPassword\Repository\ResetPasswordRepository;
 use DateTime;
@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ResetPassword
 {
     use IdTrait;
-    use TimestampAbleTrait;
+    use CreateUpdateAbleTrait;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
