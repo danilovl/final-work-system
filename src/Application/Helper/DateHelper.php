@@ -16,6 +16,7 @@ use App\Application\Constant\DateFormatConstant;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use DateTimeImmutable;
 
 class DateHelper
 {
@@ -66,8 +67,8 @@ class DateHelper
 
     public static function datePeriod(string $from, string $to, bool $mode = false): array
     {
-        $from = new DateTime($from);
-        $to = new DateTime($to);
+        $from = new DateTimeImmutable($from);
+        $to = new DateTimeImmutable($to);
         $to = $to->modify('+1 day');
 
         $period = new DatePeriod($from, new DateInterval('P1D'), $to);
@@ -77,7 +78,7 @@ class DateHelper
         if ($mode === true) {
             $arrayNameDay = [];
             foreach ($arrayOfDates as $date) {
-                $arrayNameDay[] = (new DateTime($date))->format('D, d.m');
+                $arrayNameDay[] = (new DateTimeImmutable($date))->format('D, d.m');
             }
 
             return $arrayNameDay;
