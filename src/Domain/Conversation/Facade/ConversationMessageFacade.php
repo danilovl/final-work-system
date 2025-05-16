@@ -22,6 +22,7 @@ use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusT
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
 
@@ -198,7 +199,7 @@ readonly class ConversationMessageFacade
      */
     public function getMessagesByConversationAfterDate(
         Conversation $conversation,
-        DateTime $date
+        DateTimeImmutable $date
     ): array {
         /** @var array $result */
         $result = $this->conversationMessageRepository

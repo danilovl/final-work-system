@@ -12,7 +12,7 @@
 
 namespace App\Domain\ResetPassword\Exception;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use Throwable;
@@ -39,7 +39,7 @@ final class TooManyPasswordRequestsException extends Exception implements ResetP
 
     public function getRetryAfter(): int
     {
-        return $this->getAvailableAt()->getTimestamp() - (new DateTime('now'))->getTimestamp();
+        return $this->getAvailableAt()->getTimestamp() - (new DateTimeImmutable('now'))->getTimestamp();
     }
 
     public function getReason(): string

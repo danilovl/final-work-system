@@ -40,6 +40,7 @@ use Doctrine\Common\Collections\{
     Collection,
     ArrayCollection
 };
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -858,7 +859,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
             return false;
         }
 
-        return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTime;
+        return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTimeImmutable();
     }
 
     public function serialize(): string

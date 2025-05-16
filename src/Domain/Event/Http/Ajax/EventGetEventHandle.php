@@ -40,10 +40,13 @@ readonly class EventGetEventHandle
     {
         $user = $this->userService->getUser();
 
+        $startDate = new DateTime($request->request->getString('start'));
+        $endDate = new DateTime($request->request->getString('end'));
+
         $mediaData = EventRepositoryData::createFromArray([
             'user' => $user,
-            'startDate' => new DateTime($request->request->getString('start')),
-            'endDate' => new DateTime($request->request->getString('end'))
+            'startDate' => $startDate,
+            'endDate' => $endDate
         ]);
 
         if ($event->isOwner($user)) {

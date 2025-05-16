@@ -16,7 +16,6 @@ use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use DateTime;
 use DateTimeImmutable;
 
 class ConversationStreamService
@@ -49,7 +48,7 @@ class ConversationStreamService
 
         $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate(
             $conversation,
-            DateTime::createFromImmutable($this->date)
+            $this->date
         );
 
         $chatMessageHtml = null;

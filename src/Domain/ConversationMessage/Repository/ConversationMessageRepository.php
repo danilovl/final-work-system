@@ -17,7 +17,7 @@ use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
@@ -132,7 +132,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
 
     public function allByConversationAfterDate(
         Conversation $conversation,
-        DateTime $date
+        DateTimeImmutable $date
     ): QueryBuilder {
         return $this->createQueryBuilder('conversation_message')
             ->select('conversation_message')

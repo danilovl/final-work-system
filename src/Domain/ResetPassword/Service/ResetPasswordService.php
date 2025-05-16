@@ -14,6 +14,7 @@ namespace App\Domain\ResetPassword\Service;
 
 use App\Application\Helper\HashHelper;
 use App\Domain\ResetPassword\Entity\ResetPassword;
+use DateTimeImmutable;
 use App\Domain\ResetPassword\Exception\{
     TooManyPasswordRequestsException,
     ExpiredResetPasswordTokenException,
@@ -124,6 +125,6 @@ readonly class ResetPasswordService
 
         $availableAt = (clone $lastRequestDate)->add(new DateInterval("PT{$this->requestThrottleTime}S"));
 
-        return $availableAt > new DateTime ? $availableAt : null;
+        return $availableAt > new DateTimeImmutable() ? $availableAt : null;
     }
 }
