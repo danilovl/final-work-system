@@ -46,12 +46,14 @@ class FirstWeekDayValidator extends ConstraintValidator
         }
 
         $startWeekTest = DateHelper::actualWeekStartByDate(clone $value);
-        if (CompareHelper::compareDateTime($value, $startWeekTest, CompareConstant::NOT_EQUAL)) {
-            $this->context
-                ->buildViolation($this->translator->trans($constraint->message))
-                ->setTranslationDomain('messages')
-                ->atPath('start')
-                ->addViolation();
+        if (!CompareHelper::compareDateTime($value, $startWeekTest, CompareConstant::NOT_EQUAL)) {
+            return;
         }
+
+        $this->context
+            ->buildViolation($this->translator->trans($constraint->message))
+            ->setTranslationDomain('messages')
+            ->atPath('start')
+            ->addViolation();
     }
 }

@@ -21,6 +21,9 @@ final class LocaleType extends AbstractType
 {
     final public const string NAME = 'locale_type';
 
+    /**
+     * @var string[]
+     */
     private array $locales;
 
     public function __construct(string $locales)
