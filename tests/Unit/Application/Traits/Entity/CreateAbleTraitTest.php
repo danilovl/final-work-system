@@ -24,7 +24,7 @@ class CreateAbleTraitTest extends TestCase
             use CreateAbleTrait;
         };
 
-        $date = new DateTimeImmutable();
+        $date = new DateTimeImmutable;
 
         $class->setCreatedAt($date);
         $this->assertSame($date, $class->getCreatedAt());

@@ -859,7 +859,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
             return false;
         }
 
-        return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTimeImmutable();
+        return (clone $this->lastRequestedAt)->modify('+5 min') > new DateTimeImmutable;
     }
 
     public function serialize(): string

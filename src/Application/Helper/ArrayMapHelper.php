@@ -12,6 +12,8 @@
 
 namespace App\Application\Helper;
 
+use Webmozart\Assert\Assert;
+
 class ArrayMapHelper
 {
     /**
@@ -20,9 +22,7 @@ class ArrayMapHelper
      */
     public static function getObjectsIds(array $objects): array
     {
-        $objects = array_filter($objects, static function (object $object): bool {
-            return method_exists($object, 'getId');
-        });
+        Assert::allMethodExists($objects, 'getId');
 
         return array_map(static fn (object $object): int => $object->getId(), $objects);
     }

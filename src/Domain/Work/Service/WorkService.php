@@ -13,7 +13,6 @@
 namespace App\Domain\Work\Service;
 
 use App\Domain\Work\Entity\Work;
-use DateTime;
 use App\Domain\User\Entity\User;
 use DateTimeImmutable;
 
@@ -71,7 +70,7 @@ class WorkService
 
     public function getDeadlineDays(Work $work): int
     {
-        $now = new DateTimeImmutable();
+        $now = new DateTimeImmutable;
         $diff = (int) $work->getDeadline()->diff($now)->format('%a');
 
         return $work->getDeadline()->diff($now)->invert ? $diff : -$diff;
@@ -83,7 +82,7 @@ class WorkService
             return 0;
         }
 
-        $now = new DateTimeImmutable();
+        $now = new DateTimeImmutable;
         $d = $now->diff($work->getDeadlineProgram())->d;
 
         return $now->diff($work->getDeadline())->invert ? -$d : $d;

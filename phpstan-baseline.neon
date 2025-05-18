@@ -6,6 +6,11 @@ parameters:
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
+			message: "#^Call to an undefined method object\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Application/Helper/ArrayMapHelper.php
+
+		-
 			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
 			count: 1
 			path: src/Application/Helper/AttributeHelper.php

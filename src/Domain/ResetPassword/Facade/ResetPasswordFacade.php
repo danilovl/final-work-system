@@ -60,7 +60,7 @@ readonly class ResetPasswordFacade
             ->getOneorNullResult();
 
         if ($resetPassword !== null && !$resetPassword->isExpired()) {
-            return  DateTime::createFromImmutable($resetPassword->getCreatedAt());
+            return DateTime::createFromImmutable($resetPassword->getCreatedAt());
         }
 
         return null;

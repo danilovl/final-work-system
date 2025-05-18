@@ -125,6 +125,6 @@ readonly class ResetPasswordService
 
         $availableAt = (clone $lastRequestDate)->add(new DateInterval("PT{$this->requestThrottleTime}S"));
 
-        return $availableAt > new DateTimeImmutable() ? $availableAt : null;
+        return $availableAt > new DateTimeImmutable ? $availableAt : null;
     }
 }
