@@ -12,11 +12,9 @@
 
 namespace App\Domain\Conversation\Repository\Elastica;
 
-use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
 use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use stdClass;
 use Webmozart\Assert\Assert;
 
 readonly class ConversationSearch
@@ -24,24 +22,26 @@ readonly class ConversationSearch
     public function __construct(private TransformedFinder $transformedFinderConversation) {}
 
     /**
+     * @param int[] $messageIds
      * @return int[]
      */
-    public function getIdsByParticipantAndSearch(User $user, string $search): array
+    public function getIdsByParticipantAndSearch(User $user, array $messageIds, string $search): array
     {
-        $query = $this->createQueryGetIdsByParticipantAndSearch($user, $search);
+        $query = $this->createQueryGetIdsByParticipantAndSearch($user, $messageIds, $search);
         $results = $this->transformedFinderConversation->findRaw($query);
 
-        return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
+        return $this->getDocumentIds($results);
     }
 
     /**
+     * @param int[] $messageIds
      * @return array{
-     *     size: int,
-     *     _source: array<string>,
-     *     query: array
-     * }
+     *      size: int,
+     *      _source: array<string>,
+     *      query: array
+     *  }
      */
-    public function createQueryGetIdsByParticipantAndSearch(User $user, string $search): array
+    public function createQueryGetIdsByParticipantAndSearch(User $user, array $messageIds, string $search): array
     {
         $search = $this->transformSearch($search);
 
@@ -78,8 +78,8 @@ readonly class ConversationSearch
                                         'nested' => [
                                             'path' => 'messages',
                                             'query' => [
-                                                'wildcard' => [
-                                                    'messages.content' => '*' . $search . '*'
+                                                'terms' => [
+                                                    'messages.id' => $messageIds
                                                 ]
                                             ]
                                         ]
@@ -103,67 +103,21 @@ readonly class ConversationSearch
         ];
     }
 
+    private function transformSearch(string $search): string
+    {
+        return mb_strtolower($search);
+    }
+
     /**
+     * @param Result[] $results
      * @return int[]
      */
-    public function getMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
+    private function getDocumentIds(array $results): array
     {
-        $query = $this->createQueryGetMessageIdsByConversationAndSearch($conversation, $search);
-        $results = $this->transformedFinderConversation->findRaw($query);
-
-        $messageIds = [];
-        foreach ($results as $result) {
-            $innerHits = $result->getInnerHits();
-            foreach ($innerHits['messages'] as $innerHit) {
-                foreach ($innerHit['hits'] as $hit) {
-                    $messageIds[] = $hit['_source']['id'];
-                }
-
-            }
-        }
+        $messageIds = array_map(static fn (Result $document): int => (int) $document->getId(), $results);
 
         Assert::allInteger($messageIds);
 
         return $messageIds;
-    }
-
-    /**
-     * @return array{
-     *     size: int,
-     *     query: array
-     * }
-     */
-    public function createQueryGetMessageIdsByConversationAndSearch(Conversation $conversation, string $search): array
-    {
-        return [
-            'size' => 1_000,
-            'query' => [
-                'bool' => [
-                    'must' => [
-                        [
-                            'term' => [
-                                'id' => $conversation->getId()
-                            ]
-                        ],
-                    ],
-                    'filter' => [
-                        'nested' => [
-                            'path' => 'messages',
-                            'query' => [
-                                'wildcard' => [
-                                    'messages.content' => '*' . $this->transformSearch($search) . '*'
-                                ]
-                            ],
-                            'inner_hits' => new stdClass
-                        ]
-                    ]
-                ]
-            ]
-        ];
-    }
-
-    private function transformSearch(string $search): string
-    {
-        return mb_strtolower($search);
     }
 }

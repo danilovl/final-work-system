@@ -101,9 +101,6 @@ fos_elastica:
           properties:
             id:
               type: integer
-            content:
-              type: text
-              analyzer: lowercase_shingle_analyzer
         participants:
           type: nested
           properties:
@@ -147,10 +144,28 @@ fos_elastica:
       properties:
         id:
           type: integer
+        content:
+          type: text
+          analyzer: lowercase_shingle_analyzer
         created_at:
           type: date
         updated_at:
           type: date
+        conversation:
+          type: nested
+          properties:
+            id:
+              type: integer
+            participants:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                user:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
       persistence:
         driver: orm
         model: App\Domain\ConversationMessage\Entity\ConversationMessage

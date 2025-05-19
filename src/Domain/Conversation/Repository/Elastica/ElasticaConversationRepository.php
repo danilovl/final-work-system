@@ -20,11 +20,14 @@ class ElasticaConversationRepository
     public function __construct(private readonly ConversationSearch $conversationSearch) {}
 
     /**
+     * @param int[] $messageIds
      * @return int[]
      */
-    public function getIdsByParticipantAndSearch(User $user, string $search): array
+    public function getIdsByParticipantAndSearch(User $user, array $messageIds, string $search): array
     {
-        $result = $this->conversationSearch->getIdsByParticipantAndSearch($user, $search);
+        Assert::allInteger($messageIds);
+
+        $result = $this->conversationSearch->getIdsByParticipantAndSearch($user, $messageIds, $search);
 
         Assert::allInteger($result);
 

@@ -16,6 +16,7 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
+use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Application\Service\{
     PaginatorService,
     RequestService,
@@ -27,7 +28,6 @@ use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcher;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Helper\ConversationHelper;
-use App\Domain\Conversation\Repository\Elastica\ConversationSearch;
 use App\Domain\Conversation\Service\MessageHighlightService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Factory\ConversationMessageFactory;
@@ -56,8 +56,8 @@ readonly class ConversationDetailHandle
         private PaginatorService $paginatorService,
         private SeoPageService $seoPageService,
         private ConversationEventDispatcher $conversationEventDispatcher,
-        private ConversationSearch $conversationSearch,
-        private MessageHighlightService $messageHighlightService
+        private MessageHighlightService $messageHighlightService,
+        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository
     ) {}
 
     public function __invoke(Request $request, Conversation $conversation): Response
@@ -130,7 +130,9 @@ readonly class ConversationDetailHandle
             ->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
-            $conversationMessageIds = $this->conversationSearch->getMessageIdsByConversationAndSearch($conversation, $searchModel->search);
+            $conversationMessageIds = $this->elasticaConversationMessageRepository
+                ->getMessageIdsByConversationAndSearch($conversation, $searchModel->search);
+
             $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
         }
 

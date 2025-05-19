@@ -12,14 +12,12 @@
 
 namespace Domain\Conversation\Repository\Elastica;
 
-use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Repository\Elastica\ConversationSearch;
 use App\Domain\User\Entity\User;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 class ConversationSearchTest extends TestCase
 {
@@ -31,13 +29,17 @@ class ConversationSearchTest extends TestCase
         $this->conversationSearch = new ConversationSearch($transformedFinder);
     }
 
+    /**
+     * @param int[] $messageIds
+     */
     #[DataProvider('createQueryGetIdsByParticipantAndSearchProvider')]
-    public function testCreateQueryGetMessageIdsByConversationAndSearch(
+    public function testCreateQueryGetIdsByParticipantAndSearch(
         User $user,
+        array $messageIds,
         string $search,
         array $expectedQuery
     ): void {
-        $result = $this->conversationSearch->createQueryGetIdsByParticipantAndSearch($user, $search);
+        $result = $this->conversationSearch->createQueryGetIdsByParticipantAndSearch($user, $messageIds, $search);
 
         $this->assertEquals($expectedQuery, $result);
     }
@@ -48,8 +50,11 @@ class ConversationSearchTest extends TestCase
             $user = new User;
             $user->setId(random_int(1, 100));
 
+            $messageIds = [1, 2, 3];
+
             yield [
                 $user,
+                $messageIds,
                 $search,
                 [
                     'size' => 1_000,
@@ -84,8 +89,8 @@ class ConversationSearchTest extends TestCase
                                                 'nested' => [
                                                     'path' => 'messages',
                                                     'query' => [
-                                                        'wildcard' => [
-                                                            'messages.content' => '*' . $search . '*'
+                                                        'terms' => [
+                                                            'messages.id' => $messageIds
                                                         ]
                                                     ]
                                                 ]
@@ -102,55 +107,6 @@ class ConversationSearchTest extends TestCase
                                             ]
                                         ]
                                     ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ];
-        }
-    }
-
-    #[DataProvider('createQueryGetMessageIdsByConversationAndSearchProvider')]
-    public function testCreateQueryGetMessageIdsByConversationAndSearchh(
-        Conversation $conversation,
-        string $search,
-        array $expectedQuery
-    ): void {
-        $result = $this->conversationSearch->createQueryGetMessageIdsByConversationAndSearch($conversation, $search);
-
-        $this->assertEquals($expectedQuery, $result);
-    }
-
-    public static function createQueryGetMessageIdsByConversationAndSearchProvider(): Generator
-    {
-        foreach (['test', 'apple'] as $search) {
-            $conversation = new Conversation;
-            $conversation->setId(random_int(1, 100));
-
-            yield [
-                $conversation,
-                $search,
-                [
-                    'size' => 1_000,
-                    'query' => [
-                        'bool' => [
-                            'must' => [
-                                [
-                                    'term' => [
-                                        'id' => $conversation->getId()
-                                    ]
-                                ],
-                            ],
-                            'filter' => [
-                                'nested' => [
-                                    'path' => 'messages',
-                                    'query' => [
-                                        'wildcard' => [
-                                            'messages.content' => '*' . $search . '*'
-                                        ]
-                                    ],
-                                    'inner_hits' => new stdClass
                                 ]
                             ]
                         ]

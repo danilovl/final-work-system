@@ -15,6 +15,7 @@ namespace App\Domain\Conversation\Http;
 use App\Application\Form\SimpleSearchForm;
 use App\Application\Model\SearchModel;
 use App\Domain\Conversation\Repository\Elastica\ElasticaConversationRepository;
+use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Application\Service\{
     PaginatorService,
     TwigRenderService,
@@ -48,6 +49,7 @@ readonly class ConversationListHandle
         private ConversationMessageFacade $conversationMessageFacade,
         private PaginatorService $paginatorService,
         private ElasticaConversationRepository $elasticaConversationRepository,
+        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
         private FormFactoryInterface $formFactory,
         private EntityManagerService $entityManagerService
     ) {}
@@ -71,7 +73,17 @@ readonly class ConversationListHandle
             ->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
-            $conversationIds = $this->elasticaConversationRepository->getIdsByParticipantAndSearch($user, $searchModel->search);
+            $messageIds = $this->elasticaConversationMessageRepository->getMessageIdsByParticipantAndSearch(
+                $user,
+                $searchModel->search
+            );
+
+            $conversationIds = $this->elasticaConversationRepository->getIdsByParticipantAndSearch(
+                $user,
+                $messageIds,
+                $searchModel->search
+            );
+
             $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
         }
 
