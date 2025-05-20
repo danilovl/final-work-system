@@ -12,14 +12,15 @@
 
 namespace App\Domain\ConversationMessage\Repository\Elastica;
 
+use App\Application\Traits\Repository\Elastica\ElasticaSearchTrait;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
-use Elastica\Result;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use Webmozart\Assert\Assert;
 
 readonly class ConversationMessageSearch
 {
+    use ElasticaSearchTrait;
+
     public function __construct(private TransformedFinder $transformedFinderConversationMessage) {}
 
     /**
@@ -129,23 +130,5 @@ readonly class ConversationMessageSearch
                 ]
             ]
         ];
-    }
-
-    private function transformSearch(string $search): string
-    {
-        return mb_strtolower($search);
-    }
-
-    /**
-     * @param Result[] $results
-     * @return int[]
-     */
-    private function getDocumentIds(array $results): array
-    {
-        $messageIds = array_map(static fn (Result $document): int => (int) $document->getId(), $results);
-
-        Assert::allInteger($messageIds);
-
-        return $messageIds;
     }
 }
