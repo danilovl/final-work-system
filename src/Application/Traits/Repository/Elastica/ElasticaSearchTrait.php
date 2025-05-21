@@ -28,6 +28,8 @@ trait ElasticaSearchTrait
      */
     private function getDocumentIds(array $results): array
     {
+        Assert::allIsInstanceOf($results, Result::class);
+
         $messageIds = array_map(static fn (Result $document): int => (int) $document->getId(), $results);
 
         Assert::allInteger($messageIds);
