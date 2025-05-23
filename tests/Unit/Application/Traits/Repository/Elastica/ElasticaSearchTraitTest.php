@@ -12,7 +12,7 @@
 
 namespace App\Tests\Unit\Application\Traits\Entity;
 
-use App\Tests\Helper\Application\Traits\Repository\Elastica\ElasticaSearchMock;
+use App\Tests\Mock\Application\Traits\Repository\Elastica\ElasticaSearchMock;
 use Elastica\Result;
 use PHPUnit\Framework\TestCase;
 use stdClass;

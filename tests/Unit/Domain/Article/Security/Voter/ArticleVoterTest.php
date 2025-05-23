@@ -16,15 +16,15 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Article\Security\Voter\ArticleVoter;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;
 use App\Domain\ArticleCategory\Security\Voter\ArticleCategoryVoter;
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
-use App\Tests\Helper\Traits\VoterPublicTrait;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Traits\VoterPublicTraitMock;
 use PHPUnit\Framework\TestCase;
 
 class ArticleVoterTest extends TestCase
 {
-    use VoterPublicTrait;
+    use VoterPublicTraitMock;
 
-    private TestVoterInterface $articleVoter;
+    private VoterInterfaceMock $articleVoter;
 
     protected function setUp(): void
     {

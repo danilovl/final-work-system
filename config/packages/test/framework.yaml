@@ -3,4 +3,4 @@ framework:
   session:
     storage_factory_id: session.storage.factory.mock_file
   assets:
-    json_manifest_path: '%kernel.project_dir%/tests/Helper/public/build/manifest.json'
+    json_manifest_path: '%kernel.project_dir%/tests/Mock/public/build/manifest.json'

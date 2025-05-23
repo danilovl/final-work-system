@@ -13,7 +13,7 @@
 namespace Application\Service;
 
 use App\Application\Service\S3ClientService;
-use App\Tests\Helper\Application\Service\S3Client;
+use App\Tests\Mock\Application\Service\S3ClientMock;
 use Aws\Command;
 use Aws\S3\Exception\S3Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,13 +21,13 @@ use PHPUnit\Framework\TestCase;
 
 class S3ClientServiceTest extends TestCase
 {
-    private MockObject&S3Client $s3Client;
+    private MockObject&S3ClientMock $s3Client;
 
     private S3ClientService $s3ClientService;
 
     protected function setUp(): void
     {
-        $this->s3Client = $this->createMock(S3Client::class);
+        $this->s3Client = $this->createMock(S3ClientMock::class);
 
         $this->s3ClientService = new S3ClientService($this->s3Client);
     }

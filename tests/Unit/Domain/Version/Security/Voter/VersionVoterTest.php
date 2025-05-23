@@ -15,15 +15,15 @@ namespace App\Tests\Unit\Domain\Version\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Version\Security\Voter\Subject\VersionVoterSubject;
 use App\Domain\Version\Security\Voter\VersionVoter;
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
-use App\Tests\Helper\Traits\VoterPublicTrait;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Traits\VoterPublicTraitMock;
 use PHPUnit\Framework\TestCase;
 
 class VersionVoterTest extends TestCase
 {
-    use VoterPublicTrait;
+    use VoterPublicTraitMock;
 
-    private TestVoterInterface $versionVoter;
+    private VoterInterfaceMock $versionVoter;
 
     protected function setUp(): void
     {

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Helper\Traits;
+namespace App\Tests\Mock\Application\Traits;
 
 use App\Domain\User\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-trait SecurityLoginTrait
+trait SecurityLoginTraitMock
 {
     public function loginUser(KernelInterface $kernel, User $user): void
     {

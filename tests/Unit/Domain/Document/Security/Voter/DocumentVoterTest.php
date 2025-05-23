@@ -15,15 +15,15 @@ namespace App\Tests\Unit\Domain\Document\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Document\Security\Voter\DocumentVoter;
 use App\Domain\Media\Entity\Media;
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
-use App\Tests\Helper\Traits\VoterPublicTrait;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Traits\VoterPublicTraitMock;
 use PHPUnit\Framework\TestCase;
 
 class DocumentVoterTest extends TestCase
 {
-    use VoterPublicTrait;
+    use VoterPublicTraitMock;
 
-    private TestVoterInterface $documentVoter;
+    private VoterInterfaceMock $documentVoter;
 
     protected function setUp(): void
     {

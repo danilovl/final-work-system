@@ -15,15 +15,15 @@ namespace App\Tests\Unit\Domain\SystemEventRecipient\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\Security\Voter\SystemEventRecipientVoter;
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
-use App\Tests\Helper\Traits\VoterPublicTrait;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Traits\VoterPublicTraitMock;
 use PHPUnit\Framework\TestCase;
 
 class SystemEventRecipientVoterTest extends TestCase
 {
-    use VoterPublicTrait;
+    use VoterPublicTraitMock;
 
-    private TestVoterInterface $systemEventRecipientVoter;
+    private VoterInterfaceMock $systemEventRecipientVoter;
 
     protected function setUp(): void
     {

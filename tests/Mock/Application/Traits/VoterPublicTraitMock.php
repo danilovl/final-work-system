@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Tests\Helper\Traits;
+namespace App\Tests\Mock\Application\Traits;
 
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
 
-trait VoterPublicTrait
+trait VoterPublicTraitMock
 {
-    public function createVoterPublic(string $parentClass): TestVoterInterface
+    public function createVoterPublic(string $parentClass): VoterInterfaceMock
     {
         $classCode = 'return new class extends %s implements %s {
                 public function supportsPublic(string $attribute, mixed $subject): bool
@@ -26,7 +26,7 @@ trait VoterPublicTrait
             };
         ';
 
-        $classCode = sprintf($classCode, $parentClass, TestVoterInterface::class);
+        $classCode = sprintf($classCode, $parentClass, VoterInterfaceMock::class);
 
         return eval($classCode);
     }

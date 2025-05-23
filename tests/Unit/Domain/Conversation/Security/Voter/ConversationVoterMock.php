@@ -16,7 +16,7 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Security\Voter\ConversationVoter;
 use App\Domain\Conversation\Service\ConversationService;
-use App\Tests\Helper\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
 use PHPUnit\Framework\TestCase;
 
 class ConversationVoterTest extends TestCase

@@ -15,15 +15,15 @@ namespace App\Tests\Unit\Domain\EventSchedule\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Security\Voter\EventScheduleVoter;
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
-use App\Tests\Helper\Traits\VoterPublicTrait;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Traits\VoterPublicTraitMock;
 use PHPUnit\Framework\TestCase;
 
 class EventScheduleVoterTest extends TestCase
 {
-    use VoterPublicTrait;
+    use VoterPublicTraitMock;
 
-    private TestVoterInterface $eventScheduleVoter;
+    private VoterInterfaceMock $eventScheduleVoter;
 
     protected function setUp(): void
     {

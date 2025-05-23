@@ -15,15 +15,15 @@ namespace App\Tests\Unit\Domain\EventAddress\Security\Voter;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Security\Voter\EventAddressVoter;
-use App\Tests\Helper\Application\Security\Voter\TestVoterInterface;
-use App\Tests\Helper\Traits\VoterPublicTrait;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Traits\VoterPublicTraitMock;
 use PHPUnit\Framework\TestCase;
 
 class EventAddressVoterTest extends TestCase
 {
-    use VoterPublicTrait;
+    use VoterPublicTraitMock;
 
-    private TestVoterInterface $eventAddressVoter;
+    private VoterInterfaceMock $eventAddressVoter;
 
     protected function setUp(): void
     {

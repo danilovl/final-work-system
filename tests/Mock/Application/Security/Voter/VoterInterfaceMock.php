@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Helper\Application\Security\Voter;
+namespace App\Tests\Mock\Application\Security\Voter;
 
-interface TestVoterInterface
+interface VoterInterfaceMock
 {
     public function supportsPublic(string $attribute, mixed $subject): bool;
 }

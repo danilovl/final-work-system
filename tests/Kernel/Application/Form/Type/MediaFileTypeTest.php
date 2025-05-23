@@ -19,8 +19,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class MediaFileTypeTest extends KernelTestCase
 {
-    private const string FILE_PATH_JPG = __DIR__ . '/../../../../Helper/image/test_jpg.jpg';
-    private const string FILE_PATH_PNG = __DIR__ . '/../../../../Helper/image/test_png.png';
+    private const string FILE_PATH_JPG = __DIR__ . '/../../../../Mock/image/test_jpg.jpg';
+    private const string FILE_PATH_PNG = __DIR__ . '/../../../../Mock/image/test_png.png';
 
     private FormInterface $form;
 

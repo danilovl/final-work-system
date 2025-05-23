@@ -10,11 +10,11 @@
  *
  */
 
-namespace App\Tests\Helper\Application\Service;
+namespace App\Tests\Mock\Application\Service;
 
 use Aws\Result;
 
-class S3Client extends \Aws\S3\S3Client
+class S3ClientMock extends \Aws\S3\S3Client
 {
     public function getObject(array $args = []): Result
     {

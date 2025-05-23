@@ -18,13 +18,13 @@ use App\Domain\Conversation\EventSubscriber\MercureSubscriber;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\User\Entity\User;
-use App\Tests\Helper\Traits\SecurityLoginTrait;
+use App\Tests\Mock\Application\Traits\SecurityLoginTraitMock;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class MercureSubscriberTest extends KernelTestCase
 {
-    use SecurityLoginTrait;
+    use SecurityLoginTraitMock;
 
     private ConversationMessage $conversationMessage;
 
