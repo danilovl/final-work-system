@@ -16,7 +16,7 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Security\Voter\WorkVoter;
 use App\Domain\Work\Service\WorkService;
-use App\Tests\Helper\Application\Security\Voter\VoterInterfaceMock;
+use App\Tests\Mock\Application\Security\Voter\VoterInterfaceMock;
 use PHPUnit\Framework\TestCase;
 
 class WorkVoterTest extends TestCase
