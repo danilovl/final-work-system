@@ -64,6 +64,7 @@ Project uses extra bundles
 * [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides simple mechanism control permission for class or his method.
 * [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project.
 * [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle provides simple delayed function call.
+* [SelectAutocompleterBundle](https://github.com/danilovl/select-autocompleter-bundle) - Symfony bundle provides simple integration with select2.
 
 ERD diagram
 ------------

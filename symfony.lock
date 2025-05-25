@@ -52,6 +52,9 @@
     "danilovl/render-service-twig-extension-bundle": {
         "version": "v2.0.1"
     },
+    "danilovl/select-autocompleter-bundle": {
+        "version": "v3.7.8"
+    },
     "danilovl/translator-bundle": {
         "version": "v0.1.0"
     },

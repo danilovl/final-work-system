@@ -26,6 +26,7 @@
         "danilovl/parameter-bundle": "^4.4.0",
         "danilovl/permission-middleware-bundle": "^2.7.3",
         "danilovl/render-service-twig-extension-bundle": "^4.0.2",
+        "danilovl/select-autocompleter-bundle": "^3.8.0",
         "danilovl/translator-bundle": "^0.1.4",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
