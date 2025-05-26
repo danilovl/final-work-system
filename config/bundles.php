@@ -28,5 +28,6 @@ return [
     Danilovl\ObjectToArrayTransformBundle\ObjectToArrayTransformBundle::class => ['all' => true],
     Danilovl\AsyncBundle\AsyncBundle::class => ['all' => true],
     Danilovl\DoctrineEntityDtoBundle\DoctrineEntityDtoBundle::class => ['all' => true],
+    Danilovl\SelectAutocompleterBundle\SelectAutocompleterBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true],
 ];

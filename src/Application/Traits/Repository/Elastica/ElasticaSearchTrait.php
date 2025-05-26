@@ -30,10 +30,6 @@ trait ElasticaSearchTrait
     {
         Assert::allIsInstanceOf($results, Result::class);
 
-        $messageIds = array_map(static fn (Result $document): int => (int) $document->getId(), $results);
-
-        Assert::allInteger($messageIds);
-
-        return $messageIds;
+        return array_map(static fn (Result $document): int => (int) $document->getId(), $results);
     }
 }

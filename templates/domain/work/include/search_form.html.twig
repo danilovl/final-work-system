@@ -49,6 +49,12 @@
                 {{ form_label(form.supervisor, 'app.form.label.supervisor', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     {{ form_widget(form.supervisor, {'attr': {'class': 'form-control'}}) }}
+
+                    {% if not form.supervisor.vars.valid %}
+                        <div class="red">
+                            {{ form_errors(form.supervisor) }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
@@ -58,6 +64,12 @@
                 {{ form_label(form.author, 'app.form.label.author', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+
+                    {% if not form.author.vars.valid %}
+                        <div class="red">
+                            {{ form_errors(form.author) }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
@@ -67,6 +79,12 @@
                 {{ form_label(form.opponent, 'app.form.label.opponent', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     {{ form_widget(form.opponent, {'attr': {'class': 'form-control'}}) }}
+
+                    {% if not form.opponent.vars.valid %}
+                        <div class="red">
+                            {{ form_errors(form.opponent) }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
@@ -76,6 +94,12 @@
                 {{ form_label(form.consultant, 'app.form.label.consultant', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     {{ form_widget(form.consultant, {'attr': {'class': 'form-control'}}) }}
+
+                    {% if not form.consultant.vars.valid %}
+                        <div class="red">
+                            {{ form_errors(form.consultant) }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}

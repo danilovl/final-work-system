@@ -13,10 +13,10 @@
 namespace App\Domain\Work\Form;
 
 use App\Application\Constant\DateFormatConstant;
-use App\Domain\User\Entity\User;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
+use Danilovl\SelectAutocompleterBundle\Form\Type\MultipleAutocompleterType;
 use DateTime;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -37,10 +37,6 @@ class WorkSearchForm extends AbstractType
     /**
      * @param array{
      *      type: string,
-     *      authors: User[],
-     *      supervisors: User[],
-     *      opponents: User[],
-     *      consultants: User[],
      *      deadlines: DateTime[]
      * } $options
      */
@@ -73,11 +69,19 @@ class WorkSearchForm extends AbstractType
                 continue;
             }
 
-            $builder->add($formType, ChoiceType::class, [
+            $autocompleter = sprintf('own.work-search-%s', $formType);
+
+            $builder->add($formType, MultipleAutocompleterType::class, [
+                'autocompleter' => [
+                    'name' => $autocompleter,
+                    'select_option' => [
+                        'multiple' => true
+                    ],
+                    'route' => [
+                        'extra' => ['type' => $type],
+                    ]
+                ],
                 'required' => false,
-                'multiple' => true,
-                'choices' => $options[$formType . 's'],
-                'choice_label' => static fn (User $user): string => $user->getFullNameDegree()
             ]);
         }
 
@@ -96,17 +100,9 @@ class WorkSearchForm extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => WorkSearchModel::class,
-                'authors' => [],
-                'opponents' => [],
-                'consultants' => [],
-                'supervisors' => [],
                 'deadlines' => []
             ])
             ->setRequired('type')
-            ->setAllowedTypes('authors', 'iterable')
-            ->setAllowedTypes('opponents', 'iterable')
-            ->setAllowedTypes('consultants', 'iterable')
-            ->setAllowedTypes('supervisors', 'iterable')
             ->setAllowedTypes('deadlines', 'iterable')
             ->setAllowedTypes('type', 'string');
     }

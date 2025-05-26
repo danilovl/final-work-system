@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Repository;
 
+use App\Application\Exception\RuntimeException;
 use App\Domain\User\Constant\{
     UserRoleConstant
 };
@@ -73,6 +74,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $queryBuilder
             ->orderBy('user.lastname', Order::Ascending->value)
+            ->groupBy('user.id')
             ->setParameter('supervisor', $user);
 
         if ($workStatus instanceof WorkStatus) {
@@ -82,6 +84,158 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
             $queryBuilder->setParameter('statuses', $workStatus);
         }
+
+        return $queryBuilder;
+    }
+
+    public function bySearchAuthors(
+        User $user,
+        string $type,
+        array $workStatus = null
+    ): QueryBuilder {
+        $queryBuilder = $this->createQueryBuilder('user')
+            ->join('user.authorWorks', 'work');
+
+        switch ($type) {
+            case WorkUserTypeConstant::SUPERVISOR->value:
+                $queryBuilder->where('work.supervisor = :user');
+
+                break;
+            case WorkUserTypeConstant::OPPONENT->value:
+                $queryBuilder->where('work.opponent = :user');
+
+                break;
+            case WorkUserTypeConstant::CONSULTANT->value:
+                $queryBuilder->where('work.consultant = :user');
+
+                break;
+            default:
+                throw new RuntimeException('Type not found');
+        }
+
+        if ($workStatus !== null ) {
+            $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
+            $queryBuilder->setParameter('statuses', $workStatus);
+        }
+
+        $queryBuilder
+            ->orderBy('user.lastname', Order::Ascending->value)
+            ->groupBy('user.id')
+            ->setParameter('user', $user);
+
+        return $queryBuilder;
+    }
+
+    public function bySearchSupervisors(
+        User $user,
+        string $type,
+        array $workStatus = null
+    ): QueryBuilder {
+        $queryBuilder = $this->createQueryBuilder('user')
+            ->join('user.supervisorWorks', 'work');
+
+        switch ($type) {
+            case WorkUserTypeConstant::AUTHOR->value:
+                $queryBuilder->where('work.author = :user');
+
+                break;
+            case WorkUserTypeConstant::OPPONENT->value:
+                $queryBuilder->where('work.opponent = :user');
+
+                break;
+            case WorkUserTypeConstant::CONSULTANT->value:
+                $queryBuilder->where('work.consultant = :user');
+
+                break;
+            default:
+                throw new RuntimeException('Type not found');
+        }
+
+        if ($workStatus !== null ) {
+            $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
+            $queryBuilder->setParameter('statuses', $workStatus);
+        }
+
+        $queryBuilder
+            ->orderBy('user.lastname', Order::Ascending->value)
+            ->groupBy('user.id')
+            ->setParameter('user', $user);
+
+        return $queryBuilder;
+    }
+
+    public function bySearchOpponents(
+        User $user,
+        string $type,
+        array $workStatus = null
+    ): QueryBuilder {
+        $queryBuilder = $this->createQueryBuilder('user')
+            ->join('user.opponentWorks', 'work');
+
+        switch ($type) {
+            case WorkUserTypeConstant::AUTHOR->value:
+                $queryBuilder->where('work.author = :user');
+
+                break;
+            case WorkUserTypeConstant::SUPERVISOR->value:
+                $queryBuilder->where('work.supervisor = :user');
+
+                break;
+            case WorkUserTypeConstant::CONSULTANT->value:
+                $queryBuilder->where('work.consultant = :user');
+
+                break;
+            default:
+                throw new RuntimeException('Type not found');
+        }
+
+        if ($workStatus !== null ) {
+            $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
+            $queryBuilder->setParameter('statuses', $workStatus);
+        }
+
+        $queryBuilder
+            ->orderBy('user.lastname', Order::Ascending->value)
+            ->groupBy('user.id')
+            ->setParameter('user', $user);
+
+        return $queryBuilder;
+    }
+
+    public function bySearchConsultants(
+        User $user,
+        string $type,
+        array $workStatus = null
+    ): QueryBuilder {
+        $queryBuilder = $this->createQueryBuilder('user')
+            ->join('user.consultantWorks', 'work');
+
+        switch ($type) {
+            case WorkUserTypeConstant::AUTHOR->value:
+                $queryBuilder->where('work.author = :user');
+
+                break;
+            case WorkUserTypeConstant::OPPONENT->value:
+                $queryBuilder->where('work.opponent = :user');
+
+                break;
+            case WorkUserTypeConstant::SUPERVISOR->value:
+                $queryBuilder->where('work.supervisor = :user');
+
+                break;
+            default:
+                throw new RuntimeException('Type not found');
+        }
+
+        if ($workStatus !== null ) {
+            $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
+            $queryBuilder->setParameter('statuses', $workStatus);
+        }
+
+        $queryBuilder
+            ->orderBy('user.lastname', Order::Ascending->value)
+            ->groupBy('user.id')
+            ->setParameter('user', $user);
 
         return $queryBuilder;
     }

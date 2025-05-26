@@ -11,3 +11,7 @@ homepage:
 
 app:
   resource: project/routing.yaml
+
+_danilovl_select_autocomopleter:
+  resource: "@SelectAutocompleterBundle/Resources/config/routing.yaml"
+  prefix:   /select-autocomplete

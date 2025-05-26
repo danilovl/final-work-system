@@ -214,13 +214,9 @@
 
 {% block javascript %}
     <script>
-        $(document).ready(() => {
+        jQuery(function ($) {
             $('#work_search_status').select2({width: '100%'});
             $('#work_search_type').select2({width: '100%'});
-            $('#work_search_author').select2({width: '100%'});
-            $('#work_search_supervisor').select2({width: '100%'});
-            $('#work_search_opponent').select2({width: '100%'});
-            $('#work_search_consultant').select2({width: '100%'});
             $('#work_search_deadline').select2({width: '100%'});
 
             if ($('.progress .progress-bar')[0]) {
@@ -229,6 +225,6 @@
             }
 
             NProgress.done();
-        });
+        })
     </script>
 {% endblock %}

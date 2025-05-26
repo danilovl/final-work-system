@@ -17,7 +17,6 @@ use App\Application\Exception\{
     RuntimeException,
     ConstantNotFoundException
 };
-use App\Application\Helper\SortFunctionHelper;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\{
@@ -25,7 +24,6 @@ use App\Domain\Work\Form\{
     WorkSearchForm
 };
 use App\Domain\Work\Model\WorkModel;
-use App\Domain\Work\Service\WorkListService;
 use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
@@ -40,7 +38,6 @@ class WorkFormFactory
 {
     public function __construct(
         private readonly RouterInterface $router,
-        private readonly WorkListService $workListService,
         private readonly WorkDeadlineFacade $deadlineFacade,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormFactoryInterface $formFactory
@@ -98,25 +95,11 @@ class WorkFormFactory
         string $type,
         WorkSearchModel $workSearchModel
     ): FormInterface {
-        $userAuthorArray = $this->workListService->getUserAuthors($user, $type)->toArray();
-        $userOpponentArray = $this->workListService->getUserOpponents($user, $type)->toArray();
-        $userConsultantArray = $this->workListService->getUserConsultants($user, $type)->toArray();
-        $userSupervisorArray = $this->workListService->getUserSupervisors($user, $type)->toArray();
-
-        SortFunctionHelper::usortCzechUserArray($userAuthorArray);
-        SortFunctionHelper::usortCzechUserArray($userOpponentArray);
-        SortFunctionHelper::usortCzechUserArray($userConsultantArray);
-        SortFunctionHelper::usortCzechUserArray($userSupervisorArray);
-
         $workDeadLines = $this->deadlineFacade
             ->getWorkDeadlinesBySupervisor($user)
             ->toArray();
 
         return $this->formFactory->create(WorkSearchForm::class, $workSearchModel, [
-            'authors' => $userAuthorArray,
-            'opponents' => $userOpponentArray,
-            'consultants' => $userConsultantArray,
-            'supervisors' => $userSupervisorArray,
             'deadlines' => $workDeadLines,
             'type' => $type
         ]);

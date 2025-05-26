@@ -14,11 +14,10 @@ namespace Domain\Work\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\Form\WorkSearchForm;
 use App\Domain\Work\Repository\Elastica\WorkSearch;
-use App\Domain\WorkSearch\Model\WorkSearchModel;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
-use DateTime;
+use App\Domain\WorkStatus\Entity\WorkStatus;
+use App\Domain\WorkType\Entity\WorkType;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -27,47 +26,22 @@ use Symfony\Component\Form\FormInterface;
 
 class WorkSearchTest extends KernelTestCase
 {
-    private FormInterface $workSearchForm;
-
-    private WorkSearch $workSearch;
-
-    protected function setUp(): void
-    {
-        $kernel = self::bootKernel();
-        $formFactory = $kernel->getContainer()->get('form.factory');
-
-        $users = array_map(static function (int $id): User {
-            $user = new User;
-            $user->setId($id);
-
-            return $user;
-        }, range(0, 10));
-
-        $this->workSearchForm = $formFactory->create(WorkSearchForm::class, new WorkSearchModel, [
-            'authors' => [],
-            'opponents' => $users,
-            'consultants' => $users,
-            'supervisors' => $users,
-            'deadlines' => [new DateTime('2023-01-01')],
-            'type' => WorkUserTypeConstant::AUTHOR->value
-        ]);
-
-        $transformedFinder = $this->createMock(TransformedFinder::class);
-        $this->workSearch = new WorkSearch($transformedFinder);
-    }
-
     #[DataProvider('createQueryProvider')]
     public function testCreateQuery(
         User $user,
         string $type,
-        ?array $formData,
+        array $formData,
         array $expectedQuery
     ): void {
-        if ($formData !== null) {
-            $this->workSearchForm->submit($formData);
-        }
+        $form = $this->createMock(FormInterface::class);
+        $form->method('getData')->willReturn($formData);
+        $form->method('isSubmitted')->willReturn(!empty($formData));
 
-        $result = $this->workSearch->createQuery($user, $type, $this->workSearchForm);
+        $transformedFinder = $this->createMock(TransformedFinder::class);
+
+        $workSearch = new WorkSearch($transformedFinder);
+
+        $result = $workSearch->createQuery($user, $type, $form);
 
         $this->assertEquals($expectedQuery, $result);
     }
@@ -80,7 +54,7 @@ class WorkSearchTest extends KernelTestCase
         yield [
             $user,
             WorkUserTypeConstant::SUPERVISOR->value,
-            null,
+            [],
             [
                 'size' => 1_000,
                 'query' => [
@@ -110,16 +84,38 @@ class WorkSearchTest extends KernelTestCase
             ],
         ];
 
+        $supervisors = [];
+        foreach ([4, 5] as $id) {
+            $supervisor = new User;
+            $supervisor->setId($id);
+
+            $supervisors[] = $supervisor;
+        }
+
+        $opponents = [];
+        foreach ([11, 12] as $id) {
+            $opponent = new User;
+            $opponent->setId($id);
+
+            $opponents[] = $opponent;
+        }
+
+        $workStatus = new WorkStatus;
+        $workStatus->setId(WorkStatusConstant::ARCHIVE->value);
+
+        $workType = new WorkType;
+        $workType->setId(2);
+
         yield [
             $user,
             WorkUserTypeConstant::SUPERVISOR->value,
             [
                 'title' => 'title text',
                 'shortcut' => 'shortcut text',
-                'status' => [WorkStatusConstant::ARCHIVE->value],
-                'type' => [2],
-                'supervisor' => [4],
-                'opponent' => [5]
+                'status' => [$workStatus],
+                'type' => [$workType],
+                'supervisor' => $supervisors,
+                'opponent' => $opponents
             ],
             [
                 'size' => 1_000,
@@ -174,7 +170,7 @@ class WorkSearchTest extends KernelTestCase
                                                 'path' => WorkUserTypeConstant::SUPERVISOR->value,
                                                 'query' => [
                                                     'terms' => [
-                                                        WorkUserTypeConstant::SUPERVISOR->value . '.id' => [4]
+                                                        WorkUserTypeConstant::SUPERVISOR->value . '.id' => [4, 5]
                                                     ]
                                                 ]
                                             ]
@@ -184,7 +180,7 @@ class WorkSearchTest extends KernelTestCase
                                                 'path' => WorkUserTypeConstant::OPPONENT->value,
                                                 'query' => [
                                                     'terms' => [
-                                                        WorkUserTypeConstant::OPPONENT->value . '.id' => [5]
+                                                        WorkUserTypeConstant::OPPONENT->value . '.id' => [11, 12]
                                                     ]
                                                 ]
                                             ]

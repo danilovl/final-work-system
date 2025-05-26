@@ -124,5 +124,8 @@ security:
     # Event schedule
     - { path: ^/(%locales%)/event/schedule/, roles:  [ROLE_SUPERVISOR] }
 
+    # Autocompleter pages
+    - { path: ^/(%locales%)/select-autocompleter/(\w+)/autocomplete, roles: [IS_AUTHENTICATED_FULLY] }
+
     # All pages
     - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY  }

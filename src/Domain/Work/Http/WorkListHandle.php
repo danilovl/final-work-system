@@ -44,8 +44,10 @@ readonly class WorkListHandle
     {
         $user = $this->userService->getUser();
 
+        $data = new WorkSearchModel;
+
         $form = $this->workFormFactory
-            ->getSearchForm($user, $type, new WorkSearchModel)
+            ->getSearchForm($user, $type, $data)
             ->handleRequest($request);
 
         $works = $this->elasticaWorkRepository->filterWorkList($user, $type, $form);

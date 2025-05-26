@@ -1,0 +1,18 @@
+danilovl_select_autocompleter:
+  default_option:
+    select_option:
+      width: '100%'
+      placeholder: ''
+
+  own:
+    - name: 'work-search-author'
+      class: 'App\Domain\User\Entity\User'
+
+    - name: 'work-search-supervisor'
+      class: 'App\Domain\User\Entity\User'
+
+    - name: 'work-search-opponent'
+      class: 'App\Domain\User\Entity\User'
+
+    - name: 'work-search-consultant'
+      class: 'App\Domain\User\Entity\User'
