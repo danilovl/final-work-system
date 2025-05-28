@@ -152,7 +152,7 @@ readonly class WorkSearch
         }
 
         if (!empty($filterDates)) {
-            $query['query']['bool']['filter'] = $filterDates;
+            $query['query']['bool']['filter']['bool']['should'] = $filterDates;
         }
 
         return $query;
