@@ -24,7 +24,6 @@ use App\Domain\Work\Form\{
     WorkSearchForm
 };
 use App\Domain\Work\Model\WorkModel;
-use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\{
@@ -38,7 +37,6 @@ class WorkFormFactory
 {
     public function __construct(
         private readonly RouterInterface $router,
-        private readonly WorkDeadlineFacade $deadlineFacade,
         private readonly HashidsServiceInterface $hashidsService,
         private readonly FormFactoryInterface $formFactory
     ) {}
@@ -91,16 +89,10 @@ class WorkFormFactory
     }
 
     public function getSearchForm(
-        User $user,
         string $type,
         WorkSearchModel $workSearchModel
     ): FormInterface {
-        $workDeadLines = $this->deadlineFacade
-            ->getWorkDeadlinesBySupervisor($user)
-            ->toArray();
-
         return $this->formFactory->create(WorkSearchForm::class, $workSearchModel, [
-            'deadlines' => $workDeadLines,
             'type' => $type
         ]);
     }

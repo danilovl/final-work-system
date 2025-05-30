@@ -104,17 +104,21 @@
             </div>
         {% endif %}
 
-        <div class="item form-group">
-            {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                {{ form_widget(form.deadline, {'attr': {'class': 'form-control has-feedback-left'}}) }}
-            </div>
-            {% if not form.deadline.vars.valid %}
-                <div class="col-md-3 col-sm-3 col-xs-12 red">
-                    {{ form_errors(form.deadline) }}
+        {% if form.deadline is defined %}
+            <div class="item form-group">
+                {{ form_label(form.deadline, 'app.form.label.deadline', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(form.deadline, {'attr': {'class': 'form-control has-feedback-left'}}) }}
+
+                    {% if not form.deadline.vars.valid %}
+                        <div class="red">
+                            {{ form_errors(form.deadline) }}
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
+
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <input type="submit"

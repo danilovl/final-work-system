@@ -18,7 +18,6 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use ArrayIterator;
 use Collator;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\Form\FormInterface;
@@ -107,8 +106,8 @@ readonly class WorkSearch
                 $filedValues = [];
 
                 foreach ($value as $item) {
-                    if ($field === 'deadline' && $item instanceof DateTimeInterface) {
-                        $filedValues[] = $item->format(DateFormatConstant::DATE->value);
+                    if ($field === 'deadline') {
+                        $filedValues[] = $item;
                     } elseif (is_object($item) && method_exists($item, 'getId')) {
                         $filedValues[] = $item->getId();
                     }

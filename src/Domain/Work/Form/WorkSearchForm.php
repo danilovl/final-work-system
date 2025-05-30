@@ -12,22 +12,18 @@
 
 namespace App\Domain\Work\Form;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkType\Entity\WorkType;
 use Danilovl\SelectAutocompleterBundle\Form\Type\MultipleAutocompleterType;
-use DateTime;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
 };
-use Symfony\Component\Form\Extension\Core\Type\{
-    ChoiceType,
-    TextType
-};
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorkSearchForm extends AbstractType
@@ -35,10 +31,7 @@ class WorkSearchForm extends AbstractType
     final public const string NAME = 'work_search';
 
     /**
-     * @param array{
-     *      type: string,
-     *      deadlines: DateTime[]
-     * } $options
+     * @param array{type: string} $options
      */
     #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -85,13 +78,17 @@ class WorkSearchForm extends AbstractType
             ]);
         }
 
-        $builder->add('deadline', ChoiceType::class, [
-            'required' => false,
-            'multiple' => true,
-            'choice_translation_domain' => false,
-            'choices' => $options['deadlines'],
-            'choice_label' => static fn (DateTime $deadline): string => $deadline->format(DateFormatConstant::DATE->value)
-        ]);
+        if ($type === WorkUserTypeConstant::SUPERVISOR->value) {
+            $builder->add('deadline', MultipleAutocompleterType::class, [
+                'autocompleter' => [
+                    'name' => 'own.work-search-deadline',
+                    'select_option' => [
+                        'multiple' => true
+                    ]
+                ],
+                'required' => false
+            ]);
+        }
     }
 
     #[Override]
@@ -99,11 +96,9 @@ class WorkSearchForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => WorkSearchModel::class,
-                'deadlines' => []
+                'data_class' => WorkSearchModel::class
             ])
             ->setRequired('type')
-            ->setAllowedTypes('deadlines', 'iterable')
             ->setAllowedTypes('type', 'string');
     }
 

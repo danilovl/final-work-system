@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71fa437727526af328ce3e5ce6fabad7",
+    "content-hash": "5007d0ae570e7df9d0fbebde48a4b8a7",
     "packages": [
         {
             "name": "api-platform/core",
@@ -905,16 +905,16 @@
         },
         {
             "name": "danilovl/select-autocompleter-bundle",
-            "version": "v3.9.0",
+            "version": "v3.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/select-autocompleter-bundle.git",
-                "reference": "02a175d6e2e51b5607b8c36ab58e4c50b1295a0e"
+                "reference": "c0db1c769637ac2428ef82211c4dc9797a817046"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/select-autocompleter-bundle/zipball/02a175d6e2e51b5607b8c36ab58e4c50b1295a0e",
-                "reference": "02a175d6e2e51b5607b8c36ab58e4c50b1295a0e",
+                "url": "https://api.github.com/repos/danilovl/select-autocompleter-bundle/zipball/c0db1c769637ac2428ef82211c4dc9797a817046",
+                "reference": "c0db1c769637ac2428ef82211c4dc9797a817046",
                 "shasum": ""
             },
             "require": {
@@ -959,9 +959,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/select-autocompleter-bundle/issues",
-                "source": "https://github.com/danilovl/select-autocompleter-bundle/tree/v3.9.0"
+                "source": "https://github.com/danilovl/select-autocompleter-bundle/tree/v3.9.1"
             },
-            "time": "2024-11-09T20:22:34+00:00"
+            "time": "2024-11-09T21:10:03+00:00"
         },
         {
             "name": "danilovl/translator-bundle",

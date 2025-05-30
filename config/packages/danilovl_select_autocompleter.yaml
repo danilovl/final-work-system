@@ -16,3 +16,6 @@ danilovl_select_autocompleter:
 
     - name: 'work-search-consultant'
       class: 'App\Domain\User\Entity\User'
+
+    - name: 'work-search-deadline'
+      class: 'App\Domain\Work\Entity\Work'
