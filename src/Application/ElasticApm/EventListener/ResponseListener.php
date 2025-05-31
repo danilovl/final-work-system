@@ -13,12 +13,15 @@
 namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
+use App\Application\Provider\ElasticApmProvider;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class ResponseListener implements EventSubscriberInterface
 {
+    public function __construct(private ElasticApmProvider $elasticApmProvider) {}
+
     #[Override]
     public static function getSubscribedEvents(): array
     {
@@ -29,6 +32,10 @@ readonly class ResponseListener implements EventSubscriberInterface
 
     public function onKernelResponse(): void
     {
+        if (!$this->elasticApmProvider->isEnable()) {
+            return;
+        }
+
         ElasticApmHelper::endCurrentSpan();
     }
 }

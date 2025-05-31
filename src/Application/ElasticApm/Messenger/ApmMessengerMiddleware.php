@@ -5,6 +5,7 @@ namespace App\Application\ElasticApm\Messenger;
 
 use App\Application\ElasticApm\ElasticApmHelper;
 use App\Application\Messenger\Loggable\LoggableMessage;
+use App\Application\Provider\ElasticApmProvider;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use Override;
 use Symfony\Component\Messenger\Envelope;
@@ -19,6 +20,10 @@ class ApmMessengerMiddleware implements MiddlewareInterface
     #[Override]
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
+         if (!ElasticApmProvider::$isEnable) {
+            return $stack->next()->handle($envelope, $stack);
+        }
+
         $name = $this->getNameFromMessage($envelope);
         if ($name === null) {
             return $stack->next()->handle($envelope, $stack);

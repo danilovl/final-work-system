@@ -13,6 +13,7 @@
 namespace App\Application\ElasticApm\EventListener;
 
 use App\Application\ElasticApm\ElasticApmHelper;
+use App\Application\Provider\ElasticApmProvider;
 use Override;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\{
@@ -24,6 +25,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 readonly class ConsoleListener implements EventSubscriberInterface
 {
+    public function __construct(private ElasticApmProvider $elasticApmProvider) {}
+
     #[Override]
     public static function getSubscribedEvents(): array
     {
@@ -36,6 +39,10 @@ readonly class ConsoleListener implements EventSubscriberInterface
 
     public function onCommand(ConsoleCommandEvent $event): void
     {
+        if (!$this->elasticApmProvider->isEnable()) {
+            return;
+        }
+
         $command = $event->getCommand();
         if ($command === null) {
             return;
@@ -48,6 +55,10 @@ readonly class ConsoleListener implements EventSubscriberInterface
 
     public function onTerminate(ConsoleTerminateEvent $event): void
     {
+        if (!$this->elasticApmProvider->isEnable()) {
+            return;
+        }
+
         ElasticApmHelper::addContextToCurrentTransaction([
             'exit_code' => $event->getExitCode()
         ], 'console');
@@ -58,6 +69,10 @@ readonly class ConsoleListener implements EventSubscriberInterface
 
     public function onError(ConsoleErrorEvent $event): void
     {
+        if (!$this->elasticApmProvider->isEnable()) {
+            return;
+        }
+
         ElasticApmHelper::createErrorFromThrowable($event->getError());
     }
 }

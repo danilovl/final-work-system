@@ -12,6 +12,7 @@
 
 namespace App\Application\ElasticApm\EventListener;
 
+use App\Application\Provider\ElasticApmProvider;
 use App\Application\ElasticApm\{
     ElasticApmHelper,
     SpanNameEnum,
@@ -24,6 +25,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class ControllerListener implements EventSubscriberInterface
 {
+    public function __construct(private ElasticApmProvider $elasticApmProvider) {}
+
     #[Override]
     public static function getSubscribedEvents(): array
     {
@@ -34,6 +37,10 @@ readonly class ControllerListener implements EventSubscriberInterface
 
     public function onKernelController(ControllerEvent $event): void
     {
+        if (!$this->elasticApmProvider->isEnable()) {
+            return;
+        }
+
         $controller = $event->getController();
         if (!is_array($controller)) {
             return;
