@@ -76,7 +76,7 @@ Encore
                     './node_modules/nprogress/nprogress.js',
                     './node_modules/bootstrap-progressbar/bootstrap-progressbar.min.js',
                     './node_modules/jszip/dist/jszip.js',
-                    './node_modules/symfony-collection/jquery.collection.js',
+                    './assets/js/collection/jquery.collection.js',
                     './assets/js/optgroup/select2.optgroupSelect.js',
                     './assets/js/jszip/jszip-utils.js',
                     './assets/js/main.js'
