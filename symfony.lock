@@ -34,11 +34,14 @@
     "danilovl/async-bundle": {
         "version": "v0.1.0"
     },
+    "danilovl/cache-response-bundle": {
+        "version": "v0.5.8"
+    },
     "danilovl/doctrine-entity-dto-bundle": {
         "version": "v0.1.5"
     },
     "danilovl/hashids-bundle": {
-        "version": "v1.0.0"
+        "version": "v1.7.0"
     },
     "danilovl/object-to-array-transform-bundle": {
         "version": "v3.0.5"
@@ -57,18 +60,6 @@
     },
     "danilovl/translator-bundle": {
         "version": "v0.1.0"
-    },
-    "doctrine/annotations": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
-        },
-        "files": [
-            "./config/routes/annotations.yaml"
-        ]
     },
     "doctrine/cache": {
         "version": "1.10.1"

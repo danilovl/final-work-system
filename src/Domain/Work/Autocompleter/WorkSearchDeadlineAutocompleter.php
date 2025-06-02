@@ -44,7 +44,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
         $queryBuilder->andWhere("work.deadline IN (:deadlines)")
             ->setParameter('deadlines', $identifiers);
 
-        /** @var array{deadline: DateTimeInterface} $result */
+        /** @var array<array{deadline: DateTimeInterface}> $result */
         $result = $queryBuilder->getQuery()->getResult();
 
         return array_map(static function (array $object): string {
@@ -93,6 +93,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
 
             public function getResult(): array
             {
+                /** @var array{deadline: DateTimeInterface} $result */
                 $result = $this->paginator->getQuery()->getResult();
                 /** @var DateTimeInterface[] $result */
                 $result = array_column($result, 'deadline');

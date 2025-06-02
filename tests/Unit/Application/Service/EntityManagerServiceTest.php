@@ -17,9 +17,9 @@ use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\{
+    EntityRepository,
     Mapping as ORM,
-    EntityManagerInterface
-};
+    EntityManagerInterface};
 use Doctrine\Persistence\ObjectRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -149,7 +149,7 @@ class EntityManagerServiceTest extends TestCase
 
     public function testGetRepository(): void
     {
-        $objectRepository = $this->createMock(ObjectRepository::class);
+        $objectRepository = $this->createMock(EntityRepository::class);
 
         $this->entityManager
             ->expects($this->once())

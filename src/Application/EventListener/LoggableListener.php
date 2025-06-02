@@ -16,7 +16,7 @@ use App\Application\Messenger\Loggable\LoggableMessage;
 use App\Application\Provider\LoggableProvider;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Doctrine\Common\EventArgs;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Loggable\LogEntryInterface;
@@ -56,7 +56,7 @@ class LoggableListener extends \Gedmo\Loggable\LoggableListener
 
         if ($config = $this->getConfiguration($om, $meta->getName())) {
             $logEntryClass = $this->getLogEntryClass($ea, $meta->getName());
-            /** @var ClassMetadataInfo $logEntryMeta */
+            /** @var ClassMetadata $logEntryMeta */
             $logEntryMeta = $om->getClassMetadata($logEntryClass);
             /** @var LogEntry $logEntry */
             $logEntry = $logEntryMeta->newInstance();

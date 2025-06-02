@@ -17,10 +17,12 @@ use Throwable;
 
 class ApmMessengerMiddleware implements MiddlewareInterface
 {
+    public function __construct(private ElasticApmProvider $elasticApmProvider) {}
+
     #[Override]
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
-         if (!ElasticApmProvider::$isEnable) {
+        if (!$this->elasticApmProvider->isEnable()) {
             return $stack->next()->handle($envelope, $stack);
         }
 
