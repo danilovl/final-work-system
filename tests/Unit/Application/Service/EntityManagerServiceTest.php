@@ -19,8 +19,8 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\{
     EntityRepository,
     Mapping as ORM,
-    EntityManagerInterface};
-use Doctrine\Persistence\ObjectRepository;
+    EntityManagerInterface
+};
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
