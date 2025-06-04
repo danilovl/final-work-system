@@ -7,7 +7,8 @@ doctrine:
       collate:  utf8mb4_unicode_ci
     server_version: '8.0.34'
     schema_filter: "~^(doctrine_migration)$~"
-
+    types:
+      array: App\Application\DBAL\Types\ArrayType
   orm:
     auto_generate_proxy_classes: true
     entity_managers:

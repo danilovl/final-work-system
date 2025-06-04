@@ -21,6 +21,7 @@ services:
       - '../src/Application/Cache'
       - '../src/Application/Constant'
       - '../src/Application/DataTransferObject'
+      - '../src/Application/DBAL'
       - '../src/Application/DependencyInjection'
       - '../src/Application/DTO'
       - '../src/Application/EventDispatcher/GenericEvent'

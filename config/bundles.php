@@ -24,10 +24,11 @@ return [
     Danilovl\TranslatorBundle\TranslatorBundle::class => ['all' => true],
     Danilovl\RenderServiceTwigExtensionBundle\RenderServiceTwigExtensionBundle::class => ['all' => true],
     Danilovl\PermissionMiddlewareBundle\PermissionMiddlewareBundle::class => ['all' => true],
-    Danilovl\HashidsBundle\HashidsBundle::class => ['all' => true],
     Danilovl\ObjectToArrayTransformBundle\ObjectToArrayTransformBundle::class => ['all' => true],
     Danilovl\AsyncBundle\AsyncBundle::class => ['all' => true],
     Danilovl\DoctrineEntityDtoBundle\DoctrineEntityDtoBundle::class => ['all' => true],
     Danilovl\SelectAutocompleterBundle\SelectAutocompleterBundle::class => ['all' => true],
     App\AppBundle::class => ['all' => true],
+    Danilovl\CacheResponseBundle\CacheResponseBundle::class => ['all' => true],
+    Danilovl\HashidsBundle\HashidsBundle::class => ['all' => true],
 ];
