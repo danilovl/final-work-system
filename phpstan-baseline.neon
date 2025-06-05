@@ -1,106 +1,391 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
 			count: 1
 			path: src/Application/DataTransferObject/BaseDataTransferObject.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:getId\\(\\)\\.$#"
+			message: '#^Call to an undefined method object\:\:getId\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Application/Helper/ArrayMapHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
+			message: '#^Parameter \#1 \$objectOrClass of class ReflectionClass constructor expects class\-string\<T of object\>\|T of object, string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Application/Helper/AttributeHelper.php
 
 		-
-			message: "#^Comparison operation \"\\>\\=\" between \\(int\\|Redis\\|false\\) and 0 results in an error\\.$#"
+			message: '#^PHPDoc tag @var with type array is not subtype of native type list\<string\>\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Application/Helper/FileHelper.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type \(non\-falsy\-string\|false\)\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Application/Helper/FileHelper.php
+
+		-
+			message: '#^PHPDoc tag @var with type array\<string\> is not subtype of native type array\<string, class\-string\>\|false\.$#'
+			identifier: varTag.nativeType
+			count: 2
+			path: src/Application/Helper/ObjectHelper.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\User\\Entity\\User\> and ''App\\\\Domain\\\\User\\\\Entity\\\\User'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Application/Helper/SortFunctionHelper.php
+
+		-
+			message: '#^Comparison operation "\>\=" between \(int\|Redis\|false\) and 0 results in an error\.$#'
+			identifier: greaterOrEqual.invalid
 			count: 2
 			path: src/Application/Redis/Provider/RedisCache.php
 
 		-
-			message: "#^Parameter \\#1 \\$entityName of method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getReference\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
+			message: '#^Parameter \#1 \$entityName of method Doctrine\\ORM\\EntityManagerInterface\:\:getReference\(\) expects class\-string\<object\>, string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getReference\\(\\)$#"
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\ORM\\EntityManagerInterface\:\:getReference\(\)$#'
+			identifier: argument.templateType
 			count: 1
 			path: src/Application/Service/EntityManagerService.php
 
 		-
-			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects Closure\\(mixed, int\\|string\\)\\: bool, Closure\\(App\\\\Domain\\\\ConversationParticipant\\\\Entity\\\\ConversationParticipant\\)\\: bool given\\.$#"
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\User\\Entity\\User\> and ''App\\\\Domain\\\\User\\\\Entity\\\\User'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/Domain/Conversation/Entity/Conversation.php
 
 		-
-			message: "#^While loop condition is always true\\.$#"
+			message: '#^Parameter \#1 \$p of method Doctrine\\Common\\Collections\\Collection\<\(int\|string\),mixed\>\:\:filter\(\) expects Closure\(mixed, int\|string\)\: bool, Closure\(App\\Domain\\ConversationParticipant\\Entity\\ConversationParticipant\)\: bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/Conversation/Entity/Conversation.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with iterable\<App\\Domain\\Conversation\\Entity\\Conversation\> and ''App\\\\Domain\\\\Conversation\\\\Entity\\\\Conversation'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Conversation/Facade/ConversationMessageFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Conversation/Repository/ConversationRepository.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\ConversationType\\Entity\\ConversationType\> and ''App\\\\Domain\\\\ConversationType\\\\Entity\\\\ConversationType'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Conversation/Repository/ConversationRepository.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<Elastica\\Result\> and ''Elastica\\\\Result'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Conversation/Repository/Elastica/ConversationSearch.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: src/Domain/Conversation/Repository/Elastica/ElasticaConversationRepository.php
+
+		-
+			message: '#^Property App\\Domain\\Conversation\\Service\\ConversationStreamService\:\:\$date \(DateTimeImmutable\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
 			count: 1
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: "#^While loop condition is always true\\.$#"
+			message: '#^While loop condition is always true\.$#'
+			identifier: while.alwaysTrue
+			count: 1
+			path: src/Domain/Conversation/Service/ConversationStreamService.php
+
+		-
+			message: '#^PHPDoc tag @var with type array\<string\> is not subtype of native type list\<string\>\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Domain/Conversation/Service/MessageHighlightService.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/ConversationMessage/Repository/ConversationMessageRepository.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<Elastica\\Result\> and ''Elastica\\\\Result'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/ConversationMessage/Repository/Elastica/ConversationMessageSearch.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: src/Domain/ConversationMessage/Repository/Elastica/ElasticaConversationMessageRepository.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between App\\Domain\\User\\Entity\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Domain/EmailNotification/EventSubscriber/WorkEmailNotificationSubscriber.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\Event\\Entity\\Event\> and ''App\\\\Domain\\\\Event\\\\Entity\\\\Event'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Event/Facade/EventCalendarFacade.php
+
+		-
+			message: '#^PHPDoc tag @var with type array\<App\\Domain\\Work\\Entity\\Work\> is not subtype of native type Doctrine\\Common\\Collections\\ArrayCollection\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Domain/Event/Facade/EventCalendarFacade.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type \(non\-falsy\-string\|false\)\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Domain/Media/Service/MediaService.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Domain/ResetPassword/Service/ResetPasswordService.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with Doctrine\\ORM\\Query\<null, mixed\> and ''App\\\\Domain\\\\Work\\\\Entity\\\\Work'' will always evaluate to false\.$#'
+			identifier: staticMethod.impossibleType
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\Work\\Entity\\Work\> and ''App\\\\Domain\\\\Work\\\\Entity\\\\Work'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Facade/TaskFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Repository/Elastica/ElasticaTaskRepository.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Repository/TaskQueryBuilder.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\Work\\Entity\\Work\> and ''App\\\\Domain\\\\Work\\\\Entity\\\\Work'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Repository/TaskQueryBuilder.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Repository/TaskRepository.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\Work\\Entity\\Work\> and ''App\\\\Domain\\\\Work\\\\Entity\\\\Work'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/Task/Repository/TaskRepository.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 3
+			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between null and null will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 2
+			path: src/Domain/User/Http/UserListHandle.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allString\(\) with array\<string\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: src/Domain/Widget/Service/WidgetManagerService.php
+
+		-
+			message: '#^While loop condition is always true\.$#'
+			identifier: while.alwaysTrue
 			count: 1
 			path: src/Domain/Widget/Service/WidgetStreamService.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of method ArrayIterator\\<\\(int\\|string\\),mixed\\>\\:\\:uasort\\(\\) expects callable\\(mixed, mixed\\)\\: int, Closure\\(App\\\\Domain\\\\Work\\\\Entity\\\\Work, App\\\\Domain\\\\Work\\\\Entity\\\\Work\\)\\: int given\\.$#"
+			message: '#^Property App\\Domain\\Widget\\WidgetItem\\MenuWidget\:\:\$user \(App\\Domain\\User\\Entity\\User\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Domain/Widget/WidgetItem/MenuWidget.php
+
+		-
+			message: '#^PHPDoc tag @return has invalid value \(array\<string, array\{works\: Work\[\]\}\>\>\)\: Unexpected token "\>", expected TOKEN_HORIZONTAL_WS at offset 54 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Domain/Work/Helper/WorkFunctionHelper.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method ArrayIterator\<\(int\|string\),mixed\>\:\:uasort\(\) expects callable\(mixed, mixed\)\: int, Closure\(App\\Domain\\Work\\Entity\\Work, App\\Domain\\Work\\Entity\\Work\)\: int given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Domain/Work/Repository/Elastica/WorkSearch.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\ConversationMessage\\\\Entity\\\\ConversationMessage\\>\\:\\:allByWorkUser\\(\\)\\.$#"
+			message: '#^Call to an undefined method Doctrine\\Persistence\\ObjectRepository\<App\\Domain\\ConversationMessage\\Entity\\ConversationMessage\>\:\:allByWorkUser\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\Event\\\\Entity\\\\Event\\>\\:\\:allByWork\\(\\)\\.$#"
+			message: '#^Call to an undefined method Doctrine\\Persistence\\ObjectRepository\<App\\Domain\\Event\\Entity\\Event\>\:\:allByWork\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\Media\\\\Entity\\\\Media\\>\\:\\:allByWork\\(\\)\\.$#"
+			message: '#^Call to an undefined method Doctrine\\Persistence\\ObjectRepository\<App\\Domain\\Media\\Entity\\Media\>\:\:allByWork\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Domain\\\\Task\\\\Entity\\\\Task\\>\\:\\:allByWork\\(\\)\\.$#"
+			message: '#^Call to an undefined method Doctrine\\Persistence\\ObjectRepository\<App\\Domain\\Task\\Entity\\Task\>\:\:allByWork\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Cannot call method getConversation\\(\\) on mixed\\.$#"
+			message: '#^Cannot call method getConversation\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Parameter \\#2 \\$user of static method App\\\\Domain\\\\Conversation\\\\Helper\\\\ConversationHelper\\:\\:getConversationOpposite\\(\\) expects App\\\\Domain\\\\User\\\\Entity\\\\User, App\\\\Domain\\\\User\\\\Entity\\\\User\\|null given\\.$#"
+			message: '#^Parameter \#2 \$user of static method App\\Domain\\Conversation\\Helper\\ConversationHelper\:\:getConversationOpposite\(\) expects App\\Domain\\User\\Entity\\User, App\\Domain\\User\\Entity\\User\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Domain/Work/Service/WorkDetailTabService.php
 
 		-
-			message: "#^Parameter \\#1 \\$entityName of method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:getRepository\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
+			message: '#^Strict comparison using \!\=\= between App\\Domain\\User\\Entity\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: src/Domain/Work/Service/WorkService.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type \(non\-falsy\-string\|false\)\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: tests/Kernel/Application/Command/ImportSqlCommandTest.php
+
+		-
+			message: '#^Parameter \#1 \$entityName of method App\\Application\\Service\\EntityManagerService\:\:getRepository\(\) expects class\-string\<object\>, string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Kernel/Application/Service/EntityManagerServiceTest.php
 
 		-
-			message: "#^Unable to resolve the template type T in call to method App\\\\Application\\\\Service\\\\EntityManagerService\\:\\:getRepository\\(\\)$#"
+			message: '#^Unable to resolve the template type T in call to method App\\Application\\Service\\EntityManagerService\:\:getRepository\(\)$#'
+			identifier: argument.templateType
 			count: 1
 			path: tests/Kernel/Application/Service/EntityManagerServiceTest.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$property1\\.$#"
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<Elastica\\Result\> and ''Elastica\\\\Result'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Mock/Application/Traits/Repository/Elastica/ElasticaSearchMock.php
+
+		-
+			message: '#^PHPDoc tag @var with type array\<SplFileInfo\> is not subtype of native type RegexIterator\<mixed, mixed, Traversable\<TKey, TValue\>\>\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: tests/ReplacerFinal.php
+
+		-
+			message: '#^Parameter \#1 \$argv of class App\\Tests\\ReplacerFinal constructor expects array\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/ReplacerFinal.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: tests/Unit/Application/DataTransferObject/BaseDataTransferObjectTest.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$property1\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$property2\\.$#"
+			message: '#^Access to an undefined property object\:\:\$property2\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
 
 		-
-			message: "#^Match expression does not handle remaining value\\: string$#"
+			message: '#^Method App\\Application\\Request\\AbstractAjaxJsonRequest@anonymous/tests/Unit/Application/Request/AbstractAjaxJsonRequestTest\.php\:166\:\:handle\(\) never returns bool so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/Unit/Application/Request/AbstractAjaxJsonRequestTest.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: string$#'
+			identifier: match.unhandled
 			count: 1
 			path: tests/Unit/Domain/Media/Command/S3CreateBucketCommandTest.php
+
+		-
+			message: '#^Method App\\Domain\\Widget\\WidgetItem\\BaseWidget@anonymous/tests/Unit/Domain/Widget/Twig/Runtime/HomepageNotifyWidgetRuntimeTest\.php\:25\:\:render\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/Unit/Domain/Widget/Twig/Runtime/HomepageNotifyWidgetRuntimeTest.php
+
+		-
+			message: '#^Parameter \#1 \$argv of class App\\Tests\\Web\\Test\\Web constructor expects array\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Web/Test/Web.php

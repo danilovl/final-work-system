@@ -47,12 +47,12 @@ class FormDeleteFactoryTest extends TypeTestCase
 
     public function testCreateDeleteFormSuccess(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setId(1);
 
         $this->formDeleteFactory->createDeleteForm($user, 'route');
-
-        $this->assertTrue(true);
     }
 
     public function testCreateDeleteFormFailed(): void

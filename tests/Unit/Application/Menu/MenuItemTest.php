@@ -162,7 +162,5 @@ class MenuItemTest extends TestCase
 
         $menuItem = new MenuItem('home');
         $menuItem->setParent(new MenuItem('parent'));
-
-        $this->assertTrue(true);
     }
 }

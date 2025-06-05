@@ -17,18 +17,21 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFactoryTest extends TestCase
 {
+    private EntityManagerService&MockObject $entityManager;
+
     private UserFactory $userFactory;
 
     protected function setUp(): void
     {
-        $entityManager = $this->createMock(EntityManagerService::class);
+        $this->entityManager = $this->createMock(EntityManagerService::class);
         $userPasswordHasher = $this->createMock(UserPasswordHasherInterface::class);
-        $this->userFactory = new UserFactory($entityManager, $userPasswordHasher);
+        $this->userFactory = new UserFactory($this->entityManager, $userPasswordHasher);
     }
 
     public function testFlushFromModel(): void
@@ -47,13 +50,10 @@ class UserFactoryTest extends TestCase
 
         $user = new User;
 
-        $entityManager = $this->createMock(EntityManagerService::class);
-        $entityManager->expects($this->any())
-            ->method('persistAndFlush')
-            ->with($this->equalTo($user));
+        $this->entityManager
+            ->expects($this->once())
+            ->method('persistAndFlush');
 
         $this->userFactory->flushFromModel($userModel, $user);
-
-        $this->assertTrue(true);
     }
 }

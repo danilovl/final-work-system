@@ -46,8 +46,6 @@ class AppUserProviderTest extends TestCase
             ->method('flush');
 
         $this->appUserProvider->upgradePassword(new User, 'newHashedPassword');
-
-        $this->assertTrue(true);
     }
 
     public function testLoadUserByIdentifierSuccess(): void

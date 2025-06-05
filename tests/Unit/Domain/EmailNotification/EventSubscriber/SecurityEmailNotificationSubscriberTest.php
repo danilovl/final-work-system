@@ -43,6 +43,8 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
     public function testOnResetPasswordToken(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setId(1);
         $user->setEmail('test@example.com');
@@ -56,7 +58,5 @@ class SecurityEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
         $event = new ResetPasswordGenericEvent($resetPassword, 1_000);
 
         $this->securityEmailNotificationSubscriber->onResetPasswordToken($event);
-
-        $this->assertTrue(true);
     }
 }

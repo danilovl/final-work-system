@@ -94,12 +94,12 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
     public function testAddEmailNotificationToQueueEnableMessenger(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setEnabledEmailNotification(true);
 
         $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($this->emailNotificationMessage);
-
-        $this->assertTrue(true);
     }
 
     public function testAddEmailNotificationToQueueSaveLocal(): void
@@ -129,25 +129,25 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
     #[DataProvider('subscribedEvents')]
     public function testInitialState(string $eventKey): void
     {
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     #[DataProvider('subscribedEvents')]
     public function testAddSubscriber(string $eventKey): void
     {
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     #[DataProvider('subscribedEvents')]
     public function testRemoveSubscriber(string $eventKey): void
     {
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     #[DataProvider('subscribedEvents')]
     public function testCountEvent(): void
     {
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     public static function subscribedEvents(): Generator

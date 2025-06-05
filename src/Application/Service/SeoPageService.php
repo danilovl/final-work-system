@@ -103,6 +103,7 @@ class SeoPageService
                 throw new RuntimeException('$metas must be an array');
             }
 
+            /** @var array|string $meta */
             foreach ($metas as $name => $meta) {
                 [$content, $extras] = $this->normalize($meta);
 

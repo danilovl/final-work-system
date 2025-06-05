@@ -35,8 +35,6 @@ class PaginatorServiceTest extends KernelTestCase
         $this->assertSame(10, $pagination->count());
 
         $this->paginatorService->createPagination([new User], 1, 10, detachEntity: true);
-
-        $this->assertTrue(true);
     }
 
     public function testCreatePaginationRequest(): void
@@ -61,7 +59,5 @@ class PaginatorServiceTest extends KernelTestCase
             options: ['pageParameterName' => 'page'],
             detachEntity: true
         );
-
-        $this->assertTrue(true);
     }
 }

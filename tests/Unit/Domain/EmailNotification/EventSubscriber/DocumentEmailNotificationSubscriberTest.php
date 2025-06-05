@@ -72,8 +72,6 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
             ->willReturn($user);
 
         $this->documentEmailNotificationSubscriber->onDocumentCreate($event);
-
-        $this->assertTrue(true);
     }
 
     public function testGetSubscribedEvents(): void

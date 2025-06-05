@@ -46,8 +46,8 @@ class SystemInfoCollectorTest extends TestCase
 
     public function testReset(): void
     {
-        $this->collector->reset();
+        $this->expectNotToPerformAssertions();
 
-        $this->assertTrue(true);
+        $this->collector->reset();
     }
 }

@@ -3,21 +3,22 @@ includes:
 
 parameters:
     symfony:
-        container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
-        console_application_loader: bin/phpstan/console-loader.php
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+        consoleApplicationLoader: bin/phpstan/console-loader.php
     doctrine:
         objectManagerLoader: bin/phpstan/doctrine-orm-bootstrap.php
 
     level: 9
     paths:
         - src
-        - bin
         - tests
     excludePaths:
         - src/Application/DBAL
         - src/Application/Command
         - src/Domain/User/Command/
         - tests/bootstrap.php
-    treatPhpDocTypesAsCertain: false
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+       -
+           identifier: missingType.iterableValue
+       -
+           identifier: missingType.generics

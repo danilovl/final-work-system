@@ -72,28 +72,30 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
 
     public function testEventGenericEvent(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $event = new EventGenericEvent($this->eventWithParticipant);
 
         $this->eventEmailNotificationSubscriber->onEventCreate($event);
         $this->eventEmailNotificationSubscriber->onEventEdit($event);
         $this->eventEmailNotificationSubscriber->onEventSwitchSkype($event);
         $this->eventEmailNotificationSubscriber->onEventReservation($event);
-
-        $this->assertTrue(true);
     }
 
     public function testEventGenericEventNoParticipant(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $event = new EventGenericEvent($this->eventWithoutParticipant);
 
         $this->eventEmailNotificationSubscriber->onEventCreate($event);
         $this->eventEmailNotificationSubscriber->onEventEdit($event);
-
-        $this->assertTrue(true);
     }
 
     public function testEventCommentGenericEvent(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = clone $this->eventWithParticipant->getOwner();
         $user->setId(2);
 
@@ -105,7 +107,5 @@ class EventEmailNotificationSubscriberTest extends AbstractBaseEmailNotification
 
         $this->eventEmailNotificationSubscriber->onEventCommentCreate($event);
         $this->eventEmailNotificationSubscriber->onEventCommentEdit($event);
-
-        $this->assertTrue(true);
     }
 }

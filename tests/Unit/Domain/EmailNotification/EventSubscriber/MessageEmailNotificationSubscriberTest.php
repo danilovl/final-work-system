@@ -46,6 +46,8 @@ class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
     public function testOnMessageCreate(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setId(1);
         $user->setEmail('test@example.com');
@@ -80,7 +82,5 @@ class MessageEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
         $event = new ConversationMessageGenericEvent($conversationMessage);
 
         $this->messageEmailNotificationSubscriber->onMessageCreate($event);
-
-        $this->assertTrue(true);
     }
 }

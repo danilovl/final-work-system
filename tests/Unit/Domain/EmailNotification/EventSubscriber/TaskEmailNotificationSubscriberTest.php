@@ -44,6 +44,8 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
     public function testOnResetPasswordToken(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setId(1);
         $user->setEmail('test@example.com');
@@ -70,7 +72,5 @@ class TaskEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $this->taskEmailNotificationSubscriber->onTaskNotifyComplete($event);
         $this->taskEmailNotificationSubscriber->onTaskNotifyInComplete($event);
         $this->taskEmailNotificationSubscriber->onTaskReminderDeadlineCreate($event);
-
-        $this->assertTrue(true);
     }
 }

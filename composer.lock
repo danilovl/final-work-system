@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0249acb3f32ddc059d0fee62ad7cc6a5",
+    "content-hash": "f4d99750204537c9e2a609c7fd270af3",
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "8bdf04409a4e873c889d22c4e05a3a81137f2a57"
+                "reference": "f251ed152d8c3709cef177a6ce5e0f34c7abb680"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/8bdf04409a4e873c889d22c4e05a3a81137f2a57",
-                "reference": "8bdf04409a4e873c889d22c4e05a3a81137f2a57",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/f251ed152d8c3709cef177a6ce5e0f34c7abb680",
+                "reference": "f251ed152d8c3709cef177a6ce5e0f34c7abb680",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 "elasticsearch/elasticsearch": ">=8.0,<8.4",
                 "phpspec/prophecy": "<1.15",
                 "phpunit/phpunit": "<9.5",
-                "symfony/framework-bundle": "6.4.6 || 7.1.6",
+                "symfony/framework-bundle": "6.4.6 || 7.0.6",
                 "symfony/var-exporter": "<6.1.1"
             },
             "replace": {
@@ -107,7 +107,7 @@
                 "justinrainbow/json-schema": "^5.2.1",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpdoc-parser": "^1.13",
+                "phpstan/phpdoc-parser": "^1.13|^2.0",
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-doctrine": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
@@ -223,9 +223,9 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v3.4.5"
+                "source": "https://github.com/api-platform/core/tree/v3.4.6"
             },
-            "time": "2024-10-26T07:20:01+00:00"
+            "time": "2024-11-15T09:41:19+00:00"
         },
         {
             "name": "aws/aws-crt-php",
@@ -283,16 +283,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.326.0",
+            "version": "3.328.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5420284de9aad84e375fa8012cefd834bebfd623"
+                "reference": "a99b58e166ae367f2b067937afb04e843e900745"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5420284de9aad84e375fa8012cefd834bebfd623",
-                "reference": "5420284de9aad84e375fa8012cefd834bebfd623",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a99b58e166ae367f2b067937afb04e843e900745",
+                "reference": "a99b58e166ae367f2b067937afb04e843e900745",
                 "shasum": ""
             },
             "require": {
@@ -375,9 +375,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.326.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.328.0"
             },
-            "time": "2024-11-13T19:07:44+00:00"
+            "time": "2024-11-15T19:06:57+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -560,16 +560,16 @@
         },
         {
             "name": "danilovl/async-bundle",
-            "version": "v0.4.4",
+            "version": "v0.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/async-bundle.git",
-                "reference": "ef4304fe891ea6d4fdc04cae1864bd3d901d2aaa"
+                "reference": "ee40278c02dfdbf69f2aedabbbbdbd6c61f962c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/async-bundle/zipball/ef4304fe891ea6d4fdc04cae1864bd3d901d2aaa",
-                "reference": "ef4304fe891ea6d4fdc04cae1864bd3d901d2aaa",
+                "url": "https://api.github.com/repos/danilovl/async-bundle/zipball/ee40278c02dfdbf69f2aedabbbbdbd6c61f962c8",
+                "reference": "ee40278c02dfdbf69f2aedabbbbdbd6c61f962c8",
                 "shasum": ""
             },
             "require": {
@@ -579,8 +579,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -606,22 +607,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/async-bundle/issues",
-                "source": "https://github.com/danilovl/async-bundle/tree/v0.4.4"
+                "source": "https://github.com/danilovl/async-bundle/tree/v0.4.5"
             },
-            "time": "2024-11-13T19:29:44+00:00"
+            "time": "2024-11-15T19:04:41+00:00"
         },
         {
             "name": "danilovl/cache-response-bundle",
-            "version": "v0.5.8",
+            "version": "v0.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/cache-response-bundle.git",
-                "reference": "538c98cb47ce5187e886af505abde6b6e1d84b3b"
+                "reference": "a3abe64a007c34ebd3bc05fdaa012fb453109738"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/cache-response-bundle/zipball/538c98cb47ce5187e886af505abde6b6e1d84b3b",
-                "reference": "538c98cb47ce5187e886af505abde6b6e1d84b3b",
+                "url": "https://api.github.com/repos/danilovl/cache-response-bundle/zipball/a3abe64a007c34ebd3bc05fdaa012fb453109738",
+                "reference": "a3abe64a007c34ebd3bc05fdaa012fb453109738",
                 "shasum": ""
             },
             "require": {
@@ -635,8 +636,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -662,22 +664,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/cache-response-bundle/issues",
-                "source": "https://github.com/danilovl/cache-response-bundle/tree/v0.5.8"
+                "source": "https://github.com/danilovl/cache-response-bundle/tree/v0.5.9"
             },
-            "time": "2024-11-13T20:25:18+00:00"
+            "time": "2024-11-15T20:29:38+00:00"
         },
         {
             "name": "danilovl/doctrine-entity-dto-bundle",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/doctrine-entity-dto-bundle.git",
-                "reference": "2027d371f78df61c867ec1b55427d247652b7ff8"
+                "reference": "31ec2cba9f164da28e9395df6eb287567d95e62b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/doctrine-entity-dto-bundle/zipball/2027d371f78df61c867ec1b55427d247652b7ff8",
-                "reference": "2027d371f78df61c867ec1b55427d247652b7ff8",
+                "url": "https://api.github.com/repos/danilovl/doctrine-entity-dto-bundle/zipball/31ec2cba9f164da28e9395df6eb287567d95e62b",
+                "reference": "31ec2cba9f164da28e9395df6eb287567d95e62b",
                 "shasum": ""
             },
             "require": {
@@ -690,8 +692,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -717,22 +720,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/doctrine-entity-dto-bundle/issues",
-                "source": "https://github.com/danilovl/doctrine-entity-dto-bundle/tree/v0.2.0"
+                "source": "https://github.com/danilovl/doctrine-entity-dto-bundle/tree/v0.2.1"
             },
-            "time": "2024-11-13T20:59:03+00:00"
+            "time": "2024-11-15T20:49:57+00:00"
         },
         {
             "name": "danilovl/hashids-bundle",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/hashids-bundle.git",
-                "reference": "9590da62034cc41d9a6d39bf2ab597dd9cf57e14"
+                "reference": "6e0cef647222bc185745e0da4260aa81257d8817"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/hashids-bundle/zipball/9590da62034cc41d9a6d39bf2ab597dd9cf57e14",
-                "reference": "9590da62034cc41d9a6d39bf2ab597dd9cf57e14",
+                "url": "https://api.github.com/repos/danilovl/hashids-bundle/zipball/6e0cef647222bc185745e0da4260aa81257d8817",
+                "reference": "6e0cef647222bc185745e0da4260aa81257d8817",
                 "shasum": ""
             },
             "require": {
@@ -747,8 +750,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -775,22 +779,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/hashids-bundle/issues",
-                "source": "https://github.com/danilovl/hashids-bundle/tree/v1.7.0"
+                "source": "https://github.com/danilovl/hashids-bundle/tree/v1.7.1"
             },
-            "time": "2024-11-13T19:47:25+00:00"
+            "time": "2024-11-15T19:15:47+00:00"
         },
         {
             "name": "danilovl/object-to-array-transform-bundle",
-            "version": "v3.5.4",
+            "version": "v3.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/object-to-array-transform-bundle.git",
-                "reference": "cc2ed4056989e19323e7964f5e6c4f603ee4cab5"
+                "reference": "3d306e4e92ab857a26c250a5d74eccd56164e530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/object-to-array-transform-bundle/zipball/cc2ed4056989e19323e7964f5e6c4f603ee4cab5",
-                "reference": "cc2ed4056989e19323e7964f5e6c4f603ee4cab5",
+                "url": "https://api.github.com/repos/danilovl/object-to-array-transform-bundle/zipball/3d306e4e92ab857a26c250a5d74eccd56164e530",
+                "reference": "3d306e4e92ab857a26c250a5d74eccd56164e530",
                 "shasum": ""
             },
             "require": {
@@ -800,8 +804,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -827,22 +832,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/object-to-array-transform-bundle/issues",
-                "source": "https://github.com/danilovl/object-to-array-transform-bundle/tree/v3.5.4"
+                "source": "https://github.com/danilovl/object-to-array-transform-bundle/tree/v3.5.5"
             },
-            "time": "2024-11-13T19:51:45+00:00"
+            "time": "2024-11-15T19:28:26+00:00"
         },
         {
             "name": "danilovl/parameter-bundle",
-            "version": "v4.4.2",
+            "version": "v4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/parameter-bundle.git",
-                "reference": "0a7c8f21afe0ddb4cfb3e527a4d5907d6646beca"
+                "reference": "8bf9b820d50c615d6b2657d46023316b5991ee78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/parameter-bundle/zipball/0a7c8f21afe0ddb4cfb3e527a4d5907d6646beca",
-                "reference": "0a7c8f21afe0ddb4cfb3e527a4d5907d6646beca",
+                "url": "https://api.github.com/repos/danilovl/parameter-bundle/zipball/8bf9b820d50c615d6b2657d46023316b5991ee78",
+                "reference": "8bf9b820d50c615d6b2657d46023316b5991ee78",
                 "shasum": ""
             },
             "require": {
@@ -852,8 +857,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -880,22 +886,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/parameter-bundle/issues",
-                "source": "https://github.com/danilovl/parameter-bundle/tree/v4.4.2"
+                "source": "https://github.com/danilovl/parameter-bundle/tree/v4.4.3"
             },
-            "time": "2024-11-13T20:17:04+00:00"
+            "time": "2024-11-15T19:43:23+00:00"
         },
         {
             "name": "danilovl/permission-middleware-bundle",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/permission-middleware-bundle.git",
-                "reference": "9cb1375f40ce48a822d5470da694bfab96a92492"
+                "reference": "2e5645d649b7d018e443b7d93406fce70b7ff7ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/9cb1375f40ce48a822d5470da694bfab96a92492",
-                "reference": "9cb1375f40ce48a822d5470da694bfab96a92492",
+                "url": "https://api.github.com/repos/danilovl/permission-middleware-bundle/zipball/2e5645d649b7d018e443b7d93406fce70b7ff7ee",
+                "reference": "2e5645d649b7d018e443b7d93406fce70b7ff7ee",
                 "shasum": ""
             },
             "require": {
@@ -906,8 +912,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -933,22 +940,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/permission-middleware-bundle/issues",
-                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.7.5"
+                "source": "https://github.com/danilovl/permission-middleware-bundle/tree/v2.7.6"
             },
-            "time": "2024-11-13T20:21:20+00:00"
+            "time": "2024-11-15T20:01:20+00:00"
         },
         {
             "name": "danilovl/render-service-twig-extension-bundle",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/render-service-twig-extension-bundle.git",
-                "reference": "74c207a2d7b937c2fbf2ac579c5f0d4c449b1e83"
+                "reference": "80e75089d8eda1793658773472d58c88ec81e0a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/74c207a2d7b937c2fbf2ac579c5f0d4c449b1e83",
-                "reference": "74c207a2d7b937c2fbf2ac579c5f0d4c449b1e83",
+                "url": "https://api.github.com/repos/danilovl/render-service-twig-extension-bundle/zipball/80e75089d8eda1793658773472d58c88ec81e0a5",
+                "reference": "80e75089d8eda1793658773472d58c88ec81e0a5",
                 "shasum": ""
             },
             "require": {
@@ -960,8 +967,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -988,22 +996,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/render-service-twig-extension-bundle/issues",
-                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v4.0.4"
+                "source": "https://github.com/danilovl/render-service-twig-extension-bundle/tree/v4.0.5"
             },
-            "time": "2024-11-13T20:09:34+00:00"
+            "time": "2024-11-15T19:36:04+00:00"
         },
         {
             "name": "danilovl/select-autocompleter-bundle",
-            "version": "v3.9.3",
+            "version": "v3.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/select-autocompleter-bundle.git",
-                "reference": "770a166be425221a693b6ca5858b9c82c6b27b82"
+                "reference": "fe5b98ccd7a4ebb719123793c80ecbbc8865f726"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/select-autocompleter-bundle/zipball/770a166be425221a693b6ca5858b9c82c6b27b82",
-                "reference": "770a166be425221a693b6ca5858b9c82c6b27b82",
+                "url": "https://api.github.com/repos/danilovl/select-autocompleter-bundle/zipball/fe5b98ccd7a4ebb719123793c80ecbbc8865f726",
+                "reference": "fe5b98ccd7a4ebb719123793c80ecbbc8865f726",
                 "shasum": ""
             },
             "require": {
@@ -1020,9 +1028,9 @@
                 "doctrine/mongodb-odm-bundle": "^5.1",
                 "doctrine/orm": "^2.9 | ^3.0",
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2",
                 "symfony/yaml": "^7.0"
             },
@@ -1049,9 +1057,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/select-autocompleter-bundle/issues",
-                "source": "https://github.com/danilovl/select-autocompleter-bundle/tree/v3.9.3"
+                "source": "https://github.com/danilovl/select-autocompleter-bundle/tree/v3.9.4"
             },
-            "time": "2024-11-13T22:42:07+00:00"
+            "time": "2024-11-15T21:09:24+00:00"
         },
         {
             "name": "danilovl/symfony-console-input-validation",
@@ -1106,16 +1114,16 @@
         },
         {
             "name": "danilovl/translator-bundle",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilovl/translator-bundle.git",
-                "reference": "2da54f28226d4998fe711b54b0c913627b27d286"
+                "reference": "073b85fbf5c579faff2700e533658cef1e4266fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilovl/translator-bundle/zipball/2da54f28226d4998fe711b54b0c913627b27d286",
-                "reference": "2da54f28226d4998fe711b54b0c913627b27d286",
+                "url": "https://api.github.com/repos/danilovl/translator-bundle/zipball/073b85fbf5c579faff2700e533658cef1e4266fb",
+                "reference": "073b85fbf5c579faff2700e533658cef1e4266fb",
                 "shasum": ""
             },
             "require": {
@@ -1133,8 +1141,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
                 "phpunit/phpunit": "^10.2"
             },
             "type": "symfony-bundle",
@@ -1160,9 +1169,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilovl/translator-bundle/issues",
-                "source": "https://github.com/danilovl/translator-bundle/tree/v0.2.0"
+                "source": "https://github.com/danilovl/translator-bundle/tree/v0.2.1"
             },
-            "time": "2024-11-13T19:09:07+00:00"
+            "time": "2024-11-15T18:45:08+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -6765,16 +6774,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v7.1.5",
+            "version": "v7.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "8a792de86230c13a9de7750c0c8b23cc083183d4"
+                "reference": "1d616d762905091e798d64c53ffe3840ccfc3d89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/8a792de86230c13a9de7750c0c8b23cc083183d4",
-                "reference": "8a792de86230c13a9de7750c0c8b23cc083183d4",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/1d616d762905091e798d64c53ffe3840ccfc3d89",
+                "reference": "1d616d762905091e798d64c53ffe3840ccfc3d89",
                 "shasum": ""
             },
             "require": {
@@ -6812,6 +6821,7 @@
                 "symfony/mime": "<6.4",
                 "symfony/property-access": "<6.4",
                 "symfony/property-info": "<6.4",
+                "symfony/runtime": "<6.4.13|>=7.0,<7.1.6",
                 "symfony/scheduler": "<6.4.4|>=7.0.0,<7.0.4",
                 "symfony/security-core": "<6.4",
                 "symfony/security-csrf": "<6.4",
@@ -6892,7 +6902,7 @@
             "description": "Provides a tight integration between Symfony components and the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/framework-bundle/tree/v7.1.5"
+                "source": "https://github.com/symfony/framework-bundle/tree/v7.1.6"
             },
             "funding": [
                 {
@@ -6908,7 +6918,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-20T13:35:23+00:00"
+            "time": "2024-10-25T15:11:02+00:00"
         },
         {
             "name": "symfony/http-client",
@@ -12619,20 +12629,20 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.10",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "fc463b5d0fe906dcf19689be692c65c50406a071"
+                "reference": "ab4e9b4415a5fc9e4d27f7fe16c8bc9d067dcd6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fc463b5d0fe906dcf19689be692c65c50406a071",
-                "reference": "fc463b5d0fe906dcf19689be692c65c50406a071",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ab4e9b4415a5fc9e4d27f7fe16c8bc9d067dcd6d",
+                "reference": "ab4e9b4415a5fc9e4d27f7fe16c8bc9d067dcd6d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0"
+                "php": "^7.4|^8.0"
             },
             "conflict": {
                 "phpstan/phpstan-shim": "*"
@@ -12673,25 +12683,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-11T15:37:09+00:00"
+            "time": "2024-11-11T15:43:04+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.5.6",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "8ba022846e79238872e315fff61e19b42ba2f139"
+                "reference": "90c42756b2d7c3660b423d328622d4dfa2194487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/8ba022846e79238872e315fff61e19b42ba2f139",
-                "reference": "8ba022846e79238872e315fff61e19b42ba2f139",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/90c42756b2d7c3660b423d328622d4dfa2194487",
+                "reference": "90c42756b2d7c3660b423d328622d4dfa2194487",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.12.6"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0"
             },
             "conflict": {
                 "doctrine/collections": "<1.0",
@@ -12704,20 +12714,19 @@
                 "cache/array-adapter": "^1.1",
                 "composer/semver": "^3.3.2",
                 "cweagans/composer-patches": "^1.7.3",
-                "doctrine/annotations": "^1.11 || ^2.0",
+                "doctrine/annotations": "^2.0",
                 "doctrine/collections": "^1.6 || ^2.1",
                 "doctrine/common": "^2.7 || ^3.0",
-                "doctrine/dbal": "^2.13.8 || ^3.3.3",
+                "doctrine/dbal": "^3.3.8",
                 "doctrine/lexer": "^2.0 || ^3.0",
-                "doctrine/mongodb-odm": "^1.3 || ^2.4.3",
+                "doctrine/mongodb-odm": "^2.4.3",
                 "doctrine/orm": "^2.16.0",
                 "doctrine/persistence": "^2.2.1 || ^3.2",
                 "gedmo/doctrine-extensions": "^3.8",
                 "nesbot/carbon": "^2.49",
-                "nikic/php-parser": "^4.13.2",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.3.13",
-                "phpstan/phpstan-strict-rules": "^1.5.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^9.6.20",
                 "ramsey/uuid": "^4.2",
                 "symfony/cache": "^5.4"
@@ -12743,38 +12752,37 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.5.6"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/2.0.0"
             },
-            "time": "2024-11-09T17:34:01+00:00"
+            "time": "2024-11-09T17:34:32+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.4.12",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "c7b7e7f520893621558bfbfdb2694d4364565c1d"
+                "reference": "1ef4dce2baabd464c2dd3109d051bad94efa1e79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c7b7e7f520893621558bfbfdb2694d4364565c1d",
-                "reference": "c7b7e7f520893621558bfbfdb2694d4364565c1d",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/1ef4dce2baabd464c2dd3109d051bad94efa1e79",
+                "reference": "1ef4dce2baabd464c2dd3109d051bad94efa1e79",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.12"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
             },
             "require-dev": {
-                "nikic/php-parser": "^4.13.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.3.11",
-                "phpstan/phpstan-strict-rules": "^1.5.1",
-                "phpunit/phpunit": "^8.5.29 || ^9.5",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
                 "psr/container": "1.0 || 1.1.1",
                 "symfony/config": "^5.4 || ^6.1",
                 "symfony/console": "^5.4 || ^6.1",
@@ -12815,9 +12823,9 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.12"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.0"
             },
-            "time": "2024-11-06T10:13:18+00:00"
+            "time": "2024-11-06T10:13:40+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

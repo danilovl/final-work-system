@@ -16,10 +16,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
-use Symfony\Component\Routing\{
-    Route,
-    RouterInterface
-};
+use Symfony\Component\Routing\RouterInterface;
 
 readonly class EndpointController
 {
@@ -29,7 +26,6 @@ readonly class EndpointController
 
     public function list(Request $request): JsonResponse
     {
-        /** @var Route[] $routes */
         $routes = $this->router->getRouteCollection();
 
         $result = [];

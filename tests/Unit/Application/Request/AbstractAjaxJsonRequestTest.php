@@ -96,12 +96,12 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 return $this->jsonResponse;
             }
         };
-
-        $this->assertTrue(true);
     }
 
     public function testHandleFalse(): void
     {
+        $this->expectNotToPerformAssertions();
+
         new class (Validation::createValidator(), $this->requestStackFilled) extends AbstractAjaxJsonRequest {
             public string $start;
 
@@ -128,12 +128,12 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 parent::sendJsonResponse($errors, $notifyMessage, false);
             }
         };
-
-        $this->assertTrue(true);
     }
 
     public function testHandleTrue(): void
     {
+        $this->expectNotToPerformAssertions();
+
         new class (Validation::createValidator(), $this->requestStackFilled) extends AbstractAjaxJsonRequest {
             public string $start;
 
@@ -155,12 +155,12 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 parent::sendJsonResponse($errors, $notifyMessage, false);
             }
         };
-
-        $this->assertTrue(true);
     }
 
     public function testHandleArray(): void
     {
+        $this->expectNotToPerformAssertions();
+
         new class (Validation::createValidator(), $this->requestStackFilled) extends AbstractAjaxJsonRequest {
             public string $start;
 
@@ -187,7 +187,5 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 parent::sendJsonResponse($errors, $notifyMessage, false);
             }
         };
-
-        $this->assertTrue(true);
     }
 }

@@ -40,8 +40,6 @@ class AuthorizationCheckerServiceTest extends TestCase
             ->willReturn(true);
 
         $this->authorizationCheckerService->denyAccessUnlessGranted('test', new stdClass);
-
-        $this->assertTrue(true);
     }
 
     public function testDenyAccessUnlessGrantedFalse(): void

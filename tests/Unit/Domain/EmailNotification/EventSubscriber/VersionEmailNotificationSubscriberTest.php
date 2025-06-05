@@ -46,6 +46,8 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
     public function testOnResetPasswordToken(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setId(1);
         $user->setEmail('test@example.com');
@@ -70,7 +72,5 @@ class VersionEmailNotificationSubscriberTest extends AbstractBaseEmailNotificati
 
         $this->versionEmailNotificationSubscriber->onVersionCreate($event);
         $this->versionEmailNotificationSubscriber->onVersionEdit($event);
-
-        $this->assertTrue(true);
     }
 }

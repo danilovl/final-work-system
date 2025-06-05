@@ -90,9 +90,9 @@ class RequestServiceTest extends TestCase
 
     public function testGetSession(): void
     {
-        $this->requestService->getSession();
+        $this->expectNotToPerformAssertions();
 
-        $this->assertTrue(true);
+        $this->requestService->getSession();
     }
 
     #[DataProvider('createAjaxJsonProvider')]

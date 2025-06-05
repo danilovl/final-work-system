@@ -72,7 +72,7 @@ class ResizeImageService
 
     protected function getImageCreateTrueColory(int $width, int $height): GdImage|false
     {
-        return imagecreatetruecolor($width, $height);
+        return imagecreatetruecolor(max(1, $width), max(1, $height));
     }
 
     protected function getContent(GdImage $image): string|false

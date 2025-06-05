@@ -73,9 +73,9 @@ class DoctrineExtensionListenerTest extends TestCase
 
     public function testOnKernelRequest(): void
     {
-        $this->listener->onKernelRequest();
+        $this->expectNotToPerformAssertions();
 
-        $this->assertTrue(true);
+        $this->listener->onKernelRequest();
     }
 
     public function testOnKernelRequestNoUser(): void
@@ -98,8 +98,6 @@ class DoctrineExtensionListenerTest extends TestCase
         $listener = new DoctrineExtensionListener($userService, $this->loggableListener);
 
         $listener->onKernelRequest();
-
-        $this->assertTrue(true);
     }
 
     public function testGetSubscribedEvents(): void

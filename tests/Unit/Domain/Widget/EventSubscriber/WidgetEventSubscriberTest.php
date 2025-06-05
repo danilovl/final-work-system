@@ -43,8 +43,6 @@ class WidgetEventSubscriberTest extends TestCase
             ->method('replaceWidgetGroup');
 
         $this->subscriber->onGroupReorder($event);
-
-        $this->assertTrue(true);
     }
 
     public function testGetSubscribedEvents(): void

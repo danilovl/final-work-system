@@ -43,6 +43,8 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
     public function testOnResetPasswordToken(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $user = new User;
         $user->setId(1);
         $user->setEmail('test@example.com');
@@ -66,7 +68,5 @@ class WorkEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
         $this->workEmailNotificationSubscriber->onWorkCreate($event);
         $this->workEmailNotificationSubscriber->onWorkEdit($event);
         $this->workEmailNotificationSubscriber->onWorkReminderDeadlineCreate($event);
-
-        $this->assertTrue(true);
     }
 }

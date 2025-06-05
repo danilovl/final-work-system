@@ -64,9 +64,9 @@ class MenuWidgetTest extends TestCase
 
     public function testSetParameters(): void
     {
-        $this->menuWidget->setParameters(['menu' => 'main']);
+        $this->expectNotToPerformAssertions();
 
-        $this->assertTrue(true);
+        $this->menuWidget->setParameters(['menu' => 'main']);
     }
 
     public function testRenderAccess(): void

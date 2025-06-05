@@ -67,19 +67,19 @@ class MercureSubscriberTest extends KernelTestCase
 
     public function testOnMessageCreateConversation(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $event = new ConversationMessageGenericEvent($this->conversationMessage);
 
         $this->mercureSubscriber->onMessageCreateConversation($event);
-
-        $this->assertTrue(true);
     }
 
     public function testOnMessageCreateUnreadConversationMessageWidget(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $event = new ConversationMessageGenericEvent($this->conversationMessage);
 
         $this->mercureSubscriber->onMessageCreateUnreadConversationMessageWidget($event);
-
-        $this->assertTrue(true);
     }
 }

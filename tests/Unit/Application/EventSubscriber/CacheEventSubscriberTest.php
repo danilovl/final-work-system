@@ -43,8 +43,6 @@ class CacheEventSubscriberTest extends TestCase
             ->method('delete');
 
         $this->subscriber->onClearCacheKey($event);
-
-        $this->assertTrue(true);
     }
 
     public function testGetSubscribedEvents(): void

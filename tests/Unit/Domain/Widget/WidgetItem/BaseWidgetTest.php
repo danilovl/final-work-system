@@ -44,9 +44,9 @@ class BaseWidgetTest extends TestCase
 
     public function testSetParameters(): void
     {
-        $this->widget->setParameters(['key' => 'value']);
+        $this->expectNotToPerformAssertions();
 
-        $this->assertTrue(true);
+        $this->widget->setParameters(['key' => 'value']);
     }
 
     public function testHetRenderParameters(): void

@@ -49,8 +49,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('getReference');
 
         $this->entityManagerService->getReference(stdClass::class, 1);
-
-        $this->assertTrue(true);
     }
 
     public function testPersistAndFlush(): void
@@ -64,8 +62,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('flush');
 
         $this->entityManagerService->persistAndFlush(new stdClass);
-
-        $this->assertTrue(true);
     }
 
     public function testRemove(): void
@@ -79,8 +75,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('flush');
 
         $this->entityManagerService->remove(new stdClass);
-
-        $this->assertTrue(true);
     }
 
     public function testRemoveNativeSql(): void
@@ -99,8 +93,6 @@ class EntityManagerServiceTest extends TestCase
         $entity = new #[ORM\Table(name: 'test_table')] #[ORM\Entity] class {};
 
         $this->entityManagerService->removeNativeSql($entity::class, 1);
-
-        $this->assertTrue(true);
     }
 
     public function testDetach(): void
@@ -110,8 +102,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('detach');
 
         $this->entityManagerService->detach(new stdClass);
-
-        $this->assertTrue(true);
     }
 
     public function testDetachArray(): void
@@ -121,8 +111,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('detach');
 
         $this->entityManagerService->detachArray([new User]);
-
-        $this->assertTrue(true);
     }
 
     public function testRefresh(): void
@@ -132,8 +120,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('refresh');
 
         $this->entityManagerService->refresh(new stdClass);
-
-        $this->assertTrue(true);
     }
 
     public function testFlush(): void
@@ -143,8 +129,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('flush');
 
         $this->entityManagerService->flush();
-
-        $this->assertTrue(true);
     }
 
     public function testGetRepository(): void
@@ -157,8 +141,6 @@ class EntityManagerServiceTest extends TestCase
             ->willReturn($objectRepository);
 
         $this->entityManagerService->getRepository(stdClass::class);
-
-        $this->assertTrue(true);
     }
 
     public function testClear(): void
@@ -168,8 +150,6 @@ class EntityManagerServiceTest extends TestCase
             ->method('clear');
 
         $this->entityManagerService->clear();
-
-        $this->assertTrue(true);
     }
 
     public function testGetConnection(): void
@@ -182,7 +162,5 @@ class EntityManagerServiceTest extends TestCase
             ->willReturn($connection);
 
         $this->entityManagerService->getConnection();
-
-        $this->assertTrue(true);
     }
 }
