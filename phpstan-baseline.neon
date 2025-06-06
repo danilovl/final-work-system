@@ -367,12 +367,6 @@ parameters:
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
 
 		-
-			message: '#^Method App\\Application\\Request\\AbstractAjaxJsonRequest@anonymous/tests/Unit/Application/Request/AbstractAjaxJsonRequestTest\.php\:166\:\:handle\(\) never returns bool so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/Unit/Application/Request/AbstractAjaxJsonRequestTest.php
-
-		-
 			message: '#^Match expression does not handle remaining value\: string$#'
 			identifier: match.unhandled
 			count: 1

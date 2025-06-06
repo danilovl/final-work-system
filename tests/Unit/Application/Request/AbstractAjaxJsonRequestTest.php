@@ -115,7 +115,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 ]);
             }
 
-            protected function handle(Request $request): array|bool
+            protected function handle(Request $request): bool
             {
                 return false;
             }
@@ -174,7 +174,7 @@ class AbstractAjaxJsonRequestTest extends TestCase
                 ]);
             }
 
-            protected function handle(Request $request): array|bool
+            protected function handle(Request $request): array
             {
                 return [];
             }
