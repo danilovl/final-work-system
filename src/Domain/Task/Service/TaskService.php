@@ -37,7 +37,7 @@ class TaskService
      */
     public function getCompleteTaskPercentage(
         Work $work,
-        Collection $tasks = null
+        ?Collection $tasks = null
     ): float {
         if ($tasks === null) {
             $tasks = $this->getActiveWorkTask($work);

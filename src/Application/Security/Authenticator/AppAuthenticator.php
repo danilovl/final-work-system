@@ -135,7 +135,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     }
 
     #[Override]
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         $loginUrl = $this->urlGenerator->generate('security_login');
 

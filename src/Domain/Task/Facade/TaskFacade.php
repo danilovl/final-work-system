@@ -34,7 +34,7 @@ readonly class TaskFacade
     /**
      * @return Task[]
      */
-    public function findAll(int $limit = null): array
+    public function findAll(?int $limit = null): array
     {
         /** @var Task[] $result */
         $result = $this->taskRepository

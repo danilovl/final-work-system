@@ -48,7 +48,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function bySupervisor(
         User $user,
         string $type,
-        iterable|WorkStatus $workStatus = null
+        iterable|WorkStatus|null $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
             ->addSelect('work, groups')
@@ -91,7 +91,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function bySearchAuthors(
         User $user,
         string $type,
-        array $workStatus = null
+        ?array $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
             ->join('user.authorWorks', 'work');
@@ -129,7 +129,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function bySearchSupervisors(
         User $user,
         string $type,
-        array $workStatus = null
+        ?array $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
             ->join('user.supervisorWorks', 'work');
@@ -167,7 +167,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function bySearchOpponents(
         User $user,
         string $type,
-        array $workStatus = null
+        ?array $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
             ->join('user.opponentWorks', 'work');
@@ -205,7 +205,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function bySearchConsultants(
         User $user,
         string $type,
-        array $workStatus = null
+        ?array $workStatus = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('user')
             ->join('user.consultantWorks', 'work');

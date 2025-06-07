@@ -92,8 +92,8 @@ class UserWorkService
     public function getWorkBy(
         User $user,
         string $userType,
-        WorkType $type = null,
-        WorkStatus $status = null
+        ?WorkType $type = null,
+        ?WorkStatus $status = null
     ): ArrayCollection {
         /** @var ArrayCollection<Work> $collectionWorks */
         $collectionWorks = new ArrayCollection;

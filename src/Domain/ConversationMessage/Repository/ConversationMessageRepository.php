@@ -80,7 +80,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->setParameter('type', $statusType);
     }
 
-    public function allByConversation(Conversation $conversation, int $limit = null): QueryBuilder
+    public function allByConversation(Conversation $conversation, ?int $limit = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('conversation_message')
             ->addSelect('owner, conversation')

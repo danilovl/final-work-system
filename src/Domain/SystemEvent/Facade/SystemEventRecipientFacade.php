@@ -33,7 +33,7 @@ readonly class SystemEventRecipientFacade
     /**
      * @return SystemEventRecipient[]
      */
-    public function getUnreadSystemEventsByRecipient(User $user, int $limit = null): array
+    public function getUnreadSystemEventsByRecipient(User $user, ?int $limit = null): array
     {
         $systemEvents = $this->systemEventRecipientRepository
             ->allUnreadByRecipient($user);

@@ -64,7 +64,7 @@ class MediaService
 
     public function createBinaryFileResponse(
         string $file,
-        string $fileName = null,
+        ?string $fileName = null,
         string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT
     ): BinaryFileResponse {
         $response = new BinaryFileResponse($file);

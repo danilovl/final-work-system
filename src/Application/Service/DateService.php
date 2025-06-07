@@ -18,7 +18,7 @@ readonly class DateService
 {
     public function __construct(private TranslatorInterface $translator) {}
 
-    public function getWeekDaysArray(string $locale = null): array
+    public function getWeekDaysArray(?string $locale = null): array
     {
         return [
             0 => $this->translator->trans('app.calendar.day.mo', locale: $locale),

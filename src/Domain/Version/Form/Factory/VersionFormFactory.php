@@ -43,7 +43,7 @@ class VersionFormFactory
         ControllerMethodConstant $type,
         MediaModel $mediaModel,
         ?Media $media = null,
-        Work $work = null
+        ?Work $work = null
     ): FormInterface {
         $mimeTypes = $this->mediaMimeTypeFacade
             ->getFormValidationMimeTypes(true);

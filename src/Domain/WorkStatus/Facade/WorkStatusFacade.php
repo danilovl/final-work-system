@@ -32,7 +32,7 @@ readonly class WorkStatusFacade
     /**
      * @return WorkStatus[]
      */
-    public function findAll(int $limit = null): array
+    public function findAll(?int $limit = null): array
     {
         /** @var array $result */
         $result = $this->workStatusRepository

@@ -20,7 +20,7 @@ class TaskFactory extends BaseModelFactory
 {
     public function flushFromModel(
         TaskModel $taskModel,
-        Task $task = null
+        ?Task $task = null
     ): Task {
         $task ??= new Task;
         $task = $this->fromModel($task, $taskModel);

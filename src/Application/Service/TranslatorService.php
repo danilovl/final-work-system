@@ -27,8 +27,8 @@ class TranslatorService implements TranslatorInterface
     public function trans(
         string $id,
         array $parameters = [],
-        string $domain = null,
-        string $locale = null
+        ?string $domain = null,
+        ?string $locale = null
     ): string {
         if (str_contains($id, TranslationConstant::FLASH_START_KEY->value)) {
             $domain = TranslationConstant::FLASH_DOMAIN->value;

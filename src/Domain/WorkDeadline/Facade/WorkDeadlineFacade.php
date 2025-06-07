@@ -24,7 +24,7 @@ readonly class WorkDeadlineFacade
     /**
      * @return ArrayCollection<DateTime>
      */
-    public function getWorkDeadlinesBySupervisor(User $user, int $limit = null): ArrayCollection
+    public function getWorkDeadlinesBySupervisor(User $user, ?int $limit = null): ArrayCollection
     {
         $workDeadLinesQuery = $this->workRepository
             ->workDeadlineBySupervisor($user)
@@ -48,7 +48,7 @@ readonly class WorkDeadlineFacade
     /**
      * @return ArrayCollection<DateTime>
      */
-    public function getWorkProgramDeadlinesBySupervisor(User $user, int $limit = null): ArrayCollection
+    public function getWorkProgramDeadlinesBySupervisor(User $user, ?int $limit = null): ArrayCollection
     {
         $workProgramDeadLinesQuery = $this->workRepository
             ->workProgramDeadlineBySupervisor($user)

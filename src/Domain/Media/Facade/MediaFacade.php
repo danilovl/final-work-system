@@ -76,7 +76,7 @@ readonly class MediaFacade
 
     public function queryMediasQueryByUser(
         User $user,
-        MediaType $type = null
+        ?MediaType $type = null
     ): Query {
         return $this->mediaRepository
             ->allByUser($user, $type)

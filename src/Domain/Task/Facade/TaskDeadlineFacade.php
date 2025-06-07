@@ -27,7 +27,7 @@ readonly class TaskDeadlineFacade
 
     public function getDeadlinesByOwner(
         User $user,
-        int $limit = null
+        ?int $limit = null
     ): array {
         $limit ??= $this->parameterService->getInt('pagination.task.deadline_limit');
 

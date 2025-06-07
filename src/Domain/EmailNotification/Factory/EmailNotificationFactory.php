@@ -20,7 +20,7 @@ class EmailNotificationFactory extends BaseModelFactory
 {
     public function createFromModel(
         EmailNotificationModel $emailNotificationModel,
-        EmailNotification $emailNotification = null
+        ?EmailNotification $emailNotification = null
     ): EmailNotification {
         $emailNotification ??= new EmailNotification;
         $emailNotification = $this->fromModel($emailNotification, $emailNotificationModel);

@@ -33,7 +33,7 @@ class UserFactory extends BaseModelFactory
 
     public function flushFromModel(
         UserModel $userModel,
-        User $user = null
+        ?User $user = null
     ): User {
         $user ??= new User;
         $user = $this->fromModel($user, $userModel);

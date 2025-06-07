@@ -20,7 +20,7 @@ class WorkFactory extends BaseModelFactory
 {
     public function flushFromModel(
         WorkModel $workModel,
-        Work $work = null
+        ?Work $work = null
     ): Work {
         $work ??= new Work;
         $work = $this->fromModel($work, $workModel);

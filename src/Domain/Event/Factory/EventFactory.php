@@ -20,7 +20,7 @@ class EventFactory extends BaseModelFactory
 {
     public function flushFromModel(
         EventModel $eventModel,
-        Event $event = null
+        ?Event $event = null
     ): Event {
         $event ??= new Event;
         $event = $this->fromModel($event, $eventModel);

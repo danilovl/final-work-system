@@ -33,7 +33,7 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
 
     public function allBy(
         iterable|User $user,
-        iterable|MediaType|int $mediaType = null
+        iterable|MediaType|int|null $mediaType = null
     ): QueryBuilder {
         $queryBuilder = $this->baseQueryBuilder()
             ->leftJoin('media_mime_type.medias', 'medias');

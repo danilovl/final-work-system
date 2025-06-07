@@ -24,7 +24,7 @@ class TaskRuntime
     #[AsTwigFunction('task_work_complete_percentage')]
     public function getCompleteTaskPercentage(
         Work $work,
-        Collection $tasks = null
+        ?Collection $tasks = null
     ): float {
         return $this->taskService->getCompleteTaskPercentage($work, $tasks);
     }

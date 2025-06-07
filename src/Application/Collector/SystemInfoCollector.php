@@ -30,7 +30,7 @@ class SystemInfoCollector extends DataCollector
     public function collect(
         Request $request,
         Response $response,
-        Throwable $exception = null
+        ?Throwable $exception = null
     ): void {
         $this->data = [
             'system_info' => $this->systemInfo

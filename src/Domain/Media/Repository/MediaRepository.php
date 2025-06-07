@@ -97,7 +97,7 @@ class MediaRepository extends ServiceEntityRepository
             ->setParameter('work', $work);
     }
 
-    public function allByUser(User $user, MediaType $type = null): QueryBuilder
+    public function allByUser(User $user, ?MediaType $type = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('media')
             ->where('media.owner = :user')

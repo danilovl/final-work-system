@@ -44,7 +44,7 @@ readonly class MediaMimeTypeFacade
      */
     public function getMimeTypesByOwner(
         iterable|User $user,
-        iterable|MediaType|int $mediaType = null,
+        iterable|MediaType|int|null $mediaType = null,
         bool $onlyKey = false
     ): array {
         /** @var MediaMimeType[] $mimeTypes */

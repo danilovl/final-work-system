@@ -28,7 +28,7 @@ readonly class PaginatorService
     public function createPagination(
         mixed $target,
         int $page,
-        int $limit = null,
+        ?int $limit = null,
         array $options = [],
         bool $detachEntity = false
     ): PaginationInterface {
@@ -51,9 +51,9 @@ readonly class PaginatorService
     public function createPaginationRequest(
         Request $request,
         mixed $target,
-        int $page = null,
-        int $limit = null,
-        array $options = null,
+        ?int $page = null,
+        ?int $limit = null,
+        ?array $options = null,
         bool $detachEntity = false
     ): PaginationInterface {
         $page ??= $this->parameterService->getInt('pagination.default.page');

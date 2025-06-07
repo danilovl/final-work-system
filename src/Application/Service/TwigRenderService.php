@@ -35,7 +35,7 @@ readonly class TwigRenderService
     public function renderToResponse(
         string $view,
         array $parameters = [],
-        Response $response = null
+        ?Response $response = null
     ): Response {
         $content = $this->twig->render($view, $parameters);
         if ($response === null) {

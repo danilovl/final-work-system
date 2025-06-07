@@ -45,7 +45,7 @@ class WorkFormFactory
         User $user,
         ControllerMethodConstant $type,
         WorkModel $workModel,
-        Work $work = null
+        ?Work $work = null
     ): FormInterface {
         $parameters = [
             'user' => $user

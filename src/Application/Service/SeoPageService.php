@@ -45,7 +45,7 @@ class SeoPageService
         return $this;
     }
 
-    public function addTitle(string $title, string $separator = null): self
+    public function addTitle(string $title, ?string $separator = null): self
     {
         $separator ??= $this->separator;
         $this->title = $this->getTransTitle() . $separator . $this->getTransTitle($title);
@@ -58,7 +58,7 @@ class SeoPageService
         return $this->title;
     }
 
-    public function getTransTitle(string $title = null): ?string
+    public function getTransTitle(?string $title = null): ?string
     {
         $title ??= $this->title;
 

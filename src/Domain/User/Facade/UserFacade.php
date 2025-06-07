@@ -87,7 +87,7 @@ readonly class UserFacade
     public function getUsersQueryBySupervisor(
         User $user,
         string $type,
-        iterable|WorkStatus $workStatus = null
+        iterable|WorkStatus|null $workStatus = null
     ): Query {
         return $this->userRepository
             ->bySupervisor($user, $type, $workStatus)
@@ -101,7 +101,7 @@ readonly class UserFacade
             ->getQuery();
     }
 
-    public function findOneByUsername(string $username, bool $enable = null): ?User
+    public function findOneByUsername(string $username, ?bool $enable = null): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository
@@ -112,7 +112,7 @@ readonly class UserFacade
         return $result;
     }
 
-    public function findOneByEmail(string $email, bool $enable = null): ?User
+    public function findOneByEmail(string $email, ?bool $enable = null): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository
@@ -123,7 +123,7 @@ readonly class UserFacade
         return $result;
     }
 
-    public function findOneByToken(string $username, string $token, bool $enable = null): ?User
+    public function findOneByToken(string $username, string $token, ?bool $enable = null): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository

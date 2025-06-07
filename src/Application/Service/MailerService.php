@@ -22,7 +22,7 @@ readonly class MailerService implements MailerInterface
 {
     public function __construct(private MailerInterface $mailer) {}
 
-    public function send(RawMessage $message, Envelope $envelope = null): void
+    public function send(RawMessage $message, ?Envelope $envelope = null): void
     {
         $this->mailer->send($message, $envelope);
     }

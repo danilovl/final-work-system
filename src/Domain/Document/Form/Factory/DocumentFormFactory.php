@@ -58,8 +58,8 @@ class DocumentFormFactory
 
     public function getDocumentForm(
         ControllerMethodConstant $type,
-        MediaModel $mediaModel = null,
-        Media $media = null
+        ?MediaModel $mediaModel = null,
+        ?Media $media = null
     ): FormInterface {
         $user = $this->user;
         $formClass = DocumentForm::class;

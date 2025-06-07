@@ -23,7 +23,7 @@ class TaskDataGrid
 
     public function queryBuilderWorksBySupervisor(
         User $user,
-        array $workStatus = null
+        ?array $workStatus = null
     ): QueryBuilder {
         $workData = WorkRepositoryData::createFromArray([
             'supervisor' => $user,
