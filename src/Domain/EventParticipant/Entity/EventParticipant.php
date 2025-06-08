@@ -47,7 +47,7 @@ class EventParticipant
     #[Gedmo\Versioned]
     private ?string $email = null;
 
-    #[ORM\OneToOne(inversedBy: 'participant', targetEntity: Event::class)]
+    #[ORM\OneToOne(targetEntity: Event::class, inversedBy: 'participant')]
     #[ORM\JoinColumn(name: 'event_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?Event $event = null;

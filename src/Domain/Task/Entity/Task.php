@@ -62,7 +62,7 @@ class Task
     private Work $work;
 
     /** @var Collection<SystemEvent> */
-    #[ORM\OneToMany(mappedBy: 'task', targetEntity: SystemEvent::class)]
+    #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'task')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 

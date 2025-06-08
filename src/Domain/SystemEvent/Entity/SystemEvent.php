@@ -80,7 +80,7 @@ class SystemEvent
     private ?Conversation $conversation = null;
 
     /** @var Collection<SystemEventRecipient> */
-    #[ORM\OneToMany(mappedBy: 'systemEvent', targetEntity: SystemEventRecipient::class, cascade: ['persist'], fetch: 'EAGER')]
+    #[ORM\OneToMany(targetEntity: SystemEventRecipient::class, mappedBy: 'systemEvent', cascade: ['persist'], fetch: 'EAGER')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $recipient;
 

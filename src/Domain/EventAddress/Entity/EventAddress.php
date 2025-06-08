@@ -57,7 +57,7 @@ class EventAddress
     private bool $skype = false;
 
     /** @var Collection<Event> */
-    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Event::class)]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'address')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $events;
 

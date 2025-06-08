@@ -45,7 +45,7 @@ class MediaType
     private string $folder;
 
     /** @var Collection<Media> */
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Media::class)]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'type')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;
 

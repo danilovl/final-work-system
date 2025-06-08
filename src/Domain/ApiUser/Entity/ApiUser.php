@@ -47,7 +47,7 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
     protected string $apiKey;
 
     /** @var Collection<ApiUserRule> */
-    #[ORM\OneToMany(mappedBy: 'apiUser', targetEntity: ApiUserRule::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: ApiUserRule::class, mappedBy: 'apiUser', cascade: ['persist', 'remove'])]
     protected Collection $rules;
 
     public function __construct()

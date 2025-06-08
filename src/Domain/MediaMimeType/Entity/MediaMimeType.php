@@ -47,7 +47,7 @@ class MediaMimeType
     private ?string $extension = null;
 
     /** @var Collection<Media> */
-    #[ORM\OneToMany(mappedBy: 'mimeType', targetEntity: Media::class)]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'mimeType')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $medias;
 

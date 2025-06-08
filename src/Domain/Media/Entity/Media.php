@@ -99,7 +99,7 @@ class Media
     private ?UploadedFile $uploadMedia = null;
 
     /** @var Collection<SystemEvent> */
-    #[ORM\OneToMany(mappedBy: 'media', targetEntity: SystemEvent::class)]
+    #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'media')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 

@@ -39,7 +39,7 @@ class ConversationType
     use CreateUpdateAbleTrait;
 
     /** @var Collection<Conversation> */
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Conversation::class)]
+    #[ORM\OneToMany(targetEntity: Conversation::class, mappedBy: 'type')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $conversations;
 

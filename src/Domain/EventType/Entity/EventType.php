@@ -48,7 +48,7 @@ class EventType
     private bool $registrable = false;
 
     /** @var Collection<Event> */
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Event::class)]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'type')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $events;
 

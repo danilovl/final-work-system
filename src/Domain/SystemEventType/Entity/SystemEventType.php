@@ -44,7 +44,7 @@ class SystemEventType
     private string $group;
 
     /** @var Collection<SystemEvent> */
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: SystemEvent::class)]
+    #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'type')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 

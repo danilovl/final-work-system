@@ -73,17 +73,17 @@ class Event
     #[Gedmo\Versioned]
     private DateTime $end;
 
-    #[ORM\OneToOne(mappedBy: 'event', targetEntity: EventParticipant::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: EventParticipant::class, mappedBy: 'event', cascade: ['persist'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private ?EventParticipant $participant = null;
 
     /** @var Collection<Comment> */
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Comment::class, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'event', cascade: ['persist'])]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $comment;
 
     /** @var Collection<SystemEvent> */
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: SystemEvent::class)]
+    #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'event')]
     private Collection $systemEvents;
 
     public function __construct()

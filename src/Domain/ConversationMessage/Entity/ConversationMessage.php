@@ -53,7 +53,7 @@ class ConversationMessage
     private User $owner;
 
     /** @var Collection<ConversationMessageStatus> */
-    #[ORM\OneToMany(mappedBy: 'message', targetEntity: ConversationMessageStatus::class)]
+    #[ORM\OneToMany(targetEntity: ConversationMessageStatus::class, mappedBy: 'message')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $statuses;
 

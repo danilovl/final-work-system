@@ -60,7 +60,7 @@ class Conversation
     private User $owner;
 
     /** @var Collection<ConversationMessage> */
-    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessage::class)]
+    #[ORM\OneToMany(targetEntity: ConversationMessage::class, mappedBy: 'conversation')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $messages;
 
@@ -75,17 +75,17 @@ class Conversation
     private ConversationType $type;
 
     /** @var Collection<ConversationMessageStatus> */
-    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationMessageStatus::class)]
+    #[ORM\OneToMany(targetEntity: ConversationMessageStatus::class, mappedBy: 'conversation')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $statuses;
 
     /** @var Collection<ConversationParticipant> */
-    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: ConversationParticipant::class)]
+    #[ORM\OneToMany(targetEntity: ConversationParticipant::class, mappedBy: 'conversation')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $participants;
 
     /** @var Collection<SystemEvent> */
-    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: SystemEvent::class)]
+    #[ORM\OneToMany(targetEntity: SystemEvent::class, mappedBy: 'conversation')]
     #[ORM\Cache(usage: 'NONSTRICT_READ_WRITE', region: 'default')]
     private Collection $systemEvents;
 
