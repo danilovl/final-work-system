@@ -39,7 +39,7 @@ class UserFormFactory
     public function getUserForm(
         ControllerMethodConstant $type,
         UserModel $userModel,
-        User $user = null
+        ?User $user = null
     ): FormInterface {
         $parameters = [];
 

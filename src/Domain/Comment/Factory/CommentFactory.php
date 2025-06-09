@@ -20,7 +20,7 @@ class CommentFactory extends BaseModelFactory
 {
     public function createFromModel(
         CommentModel $commentModel,
-        Comment $comment = null
+        ?Comment $comment = null
     ): Comment {
         $comment ??= new Comment;
         $comment = $this->fromModel($comment, $commentModel);

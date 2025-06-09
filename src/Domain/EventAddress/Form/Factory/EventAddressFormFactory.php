@@ -39,7 +39,7 @@ class EventAddressFormFactory
     public function getEventAddressForm(
         ControllerMethodConstant $type,
         EventAddressModel $eventAddressModel,
-        EventAddress $eventAddress = null
+        ?EventAddress $eventAddress = null
     ): FormInterface {
         $parameters = [];
 

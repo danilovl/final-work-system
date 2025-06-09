@@ -20,7 +20,7 @@ class EventAddressFactory extends BaseModelFactory
 {
     public function flushFromModel(
         EventAddressModel $addressModel,
-        EventAddress $eventAddress = null
+        ?EventAddress $eventAddress = null
     ): EventAddress {
         $eventAddress ??= new EventAddress;
         $eventAddress = $this->fromModel($eventAddress, $addressModel);

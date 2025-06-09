@@ -20,7 +20,7 @@ class WorkCategoryFactory extends BaseModelFactory
 {
     public function flushFromModel(
         WorkCategoryModel $workCategoryModel,
-        WorkCategory $workCategory = null
+        ?WorkCategory $workCategory = null
     ): WorkCategory {
         $workCategory ??= new WorkCategory;
         $workCategory = $this->fromModel($workCategory, $workCategoryModel);

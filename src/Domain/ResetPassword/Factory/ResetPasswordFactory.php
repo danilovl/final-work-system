@@ -20,7 +20,7 @@ class ResetPasswordFactory extends BaseModelFactory
 {
     public function flushFromModel(
         ResetPasswordModel $resetPasswordModel,
-        ResetPassword $resetPassword = null
+        ?ResetPassword $resetPassword = null
     ): ResetPassword {
         $resetPassword ??= new ResetPassword;
         $resetPassword = $this->fromModel($resetPassword, $resetPasswordModel);

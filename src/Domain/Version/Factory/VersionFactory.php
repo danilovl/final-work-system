@@ -20,7 +20,7 @@ class VersionFactory extends BaseModelFactory
 {
     public function createFromModel(
         VersionModel $versionModel,
-        Media $media = null
+        ?Media $media = null
     ): Media {
         $media ??= new Media;
         $media = $this->fromModel($media, $versionModel);

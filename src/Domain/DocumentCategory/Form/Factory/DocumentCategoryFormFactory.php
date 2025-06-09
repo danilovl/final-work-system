@@ -36,7 +36,7 @@ class DocumentCategoryFormFactory
     public function getDocumentCategoryForm(
         ControllerMethodConstant $type,
         MediaCategoryModel $mediaCategoryModel,
-        MediaCategory $mediaCategory = null
+        ?MediaCategory $mediaCategory = null
     ): FormInterface {
         $parameters = [];
 

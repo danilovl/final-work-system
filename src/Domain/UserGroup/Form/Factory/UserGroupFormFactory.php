@@ -36,7 +36,7 @@ class UserGroupFormFactory
     public function getUserGroupForm(
         ControllerMethodConstant $type,
         UserGroupModel $userGroupModel,
-        Group $group = null
+        ?Group $group = null
     ): FormInterface {
         $parameters = [];
 

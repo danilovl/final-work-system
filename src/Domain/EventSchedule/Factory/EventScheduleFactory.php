@@ -62,7 +62,7 @@ class EventScheduleFactory extends BaseModelFactory
 
     public function flushFromModel(
         EventScheduleModel $eventAddressModel,
-        EventSchedule $eventSchedule = null
+        ?EventSchedule $eventSchedule = null
     ): EventSchedule {
         $eventSchedule ??= new EventSchedule;
         $eventSchedule = $this->fromModel($eventSchedule, $eventAddressModel);

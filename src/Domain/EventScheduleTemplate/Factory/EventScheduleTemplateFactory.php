@@ -20,7 +20,7 @@ class EventScheduleTemplateFactory extends BaseModelFactory
 {
     public function createFromModel(
         EventScheduleTemplateModel $eventScheduleTemplateModel,
-        EventScheduleTemplate $eventScheduleTemplate = null
+        ?EventScheduleTemplate $eventScheduleTemplate = null
     ): EventScheduleTemplate {
         $eventScheduleTemplate ??= new EventScheduleTemplate;
         $eventScheduleTemplate = $this->fromModel($eventScheduleTemplate, $eventScheduleTemplateModel);

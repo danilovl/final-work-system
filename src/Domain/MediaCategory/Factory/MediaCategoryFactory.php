@@ -20,7 +20,7 @@ class MediaCategoryFactory extends BaseModelFactory
 {
     public function flushFromModel(
         MediaCategoryModel $mediaCategoryModel,
-        MediaCategory $mediaCategory = null
+        ?MediaCategory $mediaCategory = null
     ): MediaCategory {
         $mediaCategory ??= new MediaCategory;
         $mediaCategory = $this->fromModel($mediaCategory, $mediaCategoryModel);

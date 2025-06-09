@@ -39,7 +39,7 @@ class WorkCategoryFormFactory
     public function getWorkCategoryForm(
         ControllerMethodConstant $type,
         WorkCategoryModel $workCategoryModel,
-        WorkCategory $workCategory = null
+        ?WorkCategory $workCategory = null
     ): FormInterface {
         $parameters = [];
 

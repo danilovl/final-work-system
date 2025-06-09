@@ -20,7 +20,7 @@ class UserGroupFactory extends BaseModelFactory
 {
     public function flushFromModel(
         UserGroupModel $userGroupModel,
-        Group $group = null
+        ?Group $group = null
     ): Group {
         $group ??= new Group;
         $group = $this->fromModel($group, $userGroupModel);

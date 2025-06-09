@@ -57,7 +57,7 @@ readonly class ResetPasswordService
     public function createToken(
         DateTime $expiresAt,
         User $user,
-        string $verifier = null
+        ?string $verifier = null
     ): ResetPasswordTokenModel {
         $verifier ??= HashHelper::generateDefaultHash();
         /** @var string $encodedData */

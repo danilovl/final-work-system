@@ -27,8 +27,8 @@ class ConversationFactory extends BaseModelFactory
     public function createConversation(
         User $owner,
         int $type,
-        Work $work = null,
-        string $name = null
+        ?Work $work = null,
+        ?string $name = null
     ): Conversation {
         /** @var ConversationType $conversationType */
         $conversationType = $this->entityManagerService->getReference(ConversationType::class, $type);
