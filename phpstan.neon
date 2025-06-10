@@ -22,3 +22,5 @@ parameters:
            identifier: missingType.iterableValue
        -
            identifier: missingType.generics
+       -
+           identifier: varTag.nativeType

@@ -51,4 +51,6 @@ class Web
     }
 }
 
-new Web($_SERVER['argv']);
+/** @var array|null $arg */
+$arg = $_SERVER['argv'];
+new Web($arg);

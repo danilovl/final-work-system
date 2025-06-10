@@ -19,24 +19,6 @@ parameters:
 			path: src/Application/Helper/AttributeHelper.php
 
 		-
-			message: '#^PHPDoc tag @var with type array is not subtype of native type list\<string\>\|false\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Application/Helper/FileHelper.php
-
-		-
-			message: '#^PHPDoc tag @var with type string is not subtype of native type \(non\-falsy\-string\|false\)\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Application/Helper/FileHelper.php
-
-		-
-			message: '#^PHPDoc tag @var with type array\<string\> is not subtype of native type array\<string, class\-string\>\|false\.$#'
-			identifier: varTag.nativeType
-			count: 2
-			path: src/Application/Helper/ObjectHelper.php
-
-		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\User\\Entity\\User\> and ''App\\\\Domain\\\\User\\\\Entity\\\\User'' will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
@@ -127,12 +109,6 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
-			message: '#^PHPDoc tag @var with type array\<string\> is not subtype of native type list\<string\>\|false\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Domain/Conversation/Service/MessageHighlightService.php
-
-		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
@@ -161,24 +137,6 @@ parameters:
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/Domain/Event/Facade/EventCalendarFacade.php
-
-		-
-			message: '#^PHPDoc tag @var with type array\<App\\Domain\\Work\\Entity\\Work\> is not subtype of native type Doctrine\\Common\\Collections\\ArrayCollection\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Domain/Event/Facade/EventCalendarFacade.php
-
-		-
-			message: '#^PHPDoc tag @var with type string is not subtype of native type \(non\-falsy\-string\|false\)\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Domain/Media/Service/MediaService.php
-
-		-
-			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Domain/ResetPassword/Service/ResetPasswordService.php
 
 		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
@@ -313,12 +271,6 @@ parameters:
 			path: src/Domain/Work/Service/WorkService.php
 
 		-
-			message: '#^PHPDoc tag @var with type string is not subtype of native type \(non\-falsy\-string\|false\)\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: tests/Kernel/Application/Command/ImportSqlCommandTest.php
-
-		-
 			message: '#^Parameter \#1 \$entityName of method App\\Application\\Service\\EntityManagerService\:\:getRepository\(\) expects class\-string\<object\>, string given\.$#'
 			identifier: argument.type
 			count: 1
@@ -337,24 +289,6 @@ parameters:
 			path: tests/Mock/Application/Traits/Repository/Elastica/ElasticaSearchMock.php
 
 		-
-			message: '#^PHPDoc tag @var with type array\<SplFileInfo\> is not subtype of native type RegexIterator\<mixed, mixed, Traversable\<TKey, TValue\>\>\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: tests/ReplacerFinal.php
-
-		-
-			message: '#^Parameter \#1 \$argv of class App\\Tests\\ReplacerFinal constructor expects array\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/ReplacerFinal.php
-
-		-
-			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: tests/Unit/Application/DataTransferObject/BaseDataTransferObjectTest.php
-
-		-
 			message: '#^Access to an undefined property object\:\:\$property1\.$#'
 			identifier: property.notFound
 			count: 1
@@ -366,20 +300,3 @@ parameters:
 			count: 1
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
 
-		-
-			message: '#^Match expression does not handle remaining value\: string$#'
-			identifier: match.unhandled
-			count: 1
-			path: tests/Unit/Domain/Media/Command/S3CreateBucketCommandTest.php
-
-		-
-			message: '#^Method App\\Domain\\Widget\\WidgetItem\\BaseWidget@anonymous/tests/Unit/Domain/Widget/Twig/Runtime/HomepageNotifyWidgetRuntimeTest\.php\:25\:\:render\(\) never returns null so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/Unit/Domain/Widget/Twig/Runtime/HomepageNotifyWidgetRuntimeTest.php
-
-		-
-			message: '#^Parameter \#1 \$argv of class App\\Tests\\Web\\Test\\Web constructor expects array\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/Web/Test/Web.php

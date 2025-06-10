@@ -124,4 +124,6 @@ class ReplacerFinal
     }
 }
 
-(new ReplacerFinal($_SERVER['argv']));
+/** @var array|null $arg */
+$arg = $_SERVER['argv'];
+(new ReplacerFinal($arg));

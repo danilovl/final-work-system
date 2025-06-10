@@ -23,7 +23,7 @@ class HomepageNotifyWidgetRuntimeTest extends TestCase
     public function testRenderNotify(): void
     {
         $widget = new class() extends BaseWidget {
-            public function render(): ?string
+            public function render(): string
             {
                 return 'text widget text';
             }

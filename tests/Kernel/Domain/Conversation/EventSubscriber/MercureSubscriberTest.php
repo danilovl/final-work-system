@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Conversation\EventSubscriber;
+namespace App\Tests\Kernel\Domain\Conversation\EventSubscriber;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;

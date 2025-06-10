@@ -20,6 +20,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\TypeInfo\Exception\LogicException;
 
 class S3CreateBucketCommandTest extends TestCase
 {
@@ -58,7 +59,8 @@ class S3CreateBucketCommandTest extends TestCase
             ->willReturnCallback(static function (string $param): bool {
                 return match ($param) {
                     'testFolder1' => false,
-                    'testFolder2' => true
+                    'testFolder2' => true,
+                    default => throw new LogicException('Can not happen')
                 };
             });
 
