@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Form\Type;
+namespace App\Domain\User\Form\Type;
 
 use App\Domain\User\Constant\UserRoleConstant;
 use Override;

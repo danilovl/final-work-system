@@ -12,21 +12,19 @@
 
 namespace App\Domain\User\Form;
 
-use App\Application\Form\Type\UserRoleType;
+use App\Domain\User\Form\Type\UserRoleType;
 use App\Domain\User\Model\UserModel;
 use App\Domain\UserGroup\Entity\Group;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\{
     AbstractType,
-    FormBuilderInterface
-};
+    FormBuilderInterface};
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\{
     Email,
-    NotBlank
-};
+    NotBlank};
 
 class UserForm extends AbstractType
 {

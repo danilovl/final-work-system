@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Form\Type;
+namespace App\Tests\Kernel\Domain\User\Form\Type;
 
-use App\Application\Form\Type\UserRoleType;
 use App\Domain\User\Constant\UserRoleConstant;
+use App\Domain\User\Form\Type\UserRoleType;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
