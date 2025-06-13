@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Task\Repository\Elastica;
+namespace App\Tests\Unit\Domain\Task\Repository\Elastica;
 
 use App\Domain\Task\Repository\Elastica\TaskSearch;
 use App\Domain\User\Entity\User;

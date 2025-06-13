@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\User\EventDispatcher;
+namespace App\Tests\Unit\Domain\User\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;

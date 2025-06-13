@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Work\Repository\Elastica;
+namespace App\Tests\Unit\Domain\Work\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Constant\WorkUserTypeConstant;

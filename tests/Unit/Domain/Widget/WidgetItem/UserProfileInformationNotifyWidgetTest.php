@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Widget\WidgetItem;
+namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
 use App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget;
 use PHPUnit\Framework\MockObject\MockObject;

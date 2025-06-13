@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Traits\Entity;
+namespace App\Tests\Unit\Application\Traits\Repository\Elastica;
 
 use App\Tests\Mock\Application\Traits\Repository\Elastica\ElasticaSearchMock;
 use Elastica\Result;

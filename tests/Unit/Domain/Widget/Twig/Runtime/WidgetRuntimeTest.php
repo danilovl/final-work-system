@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Widget\Twig\Runtime;
+namespace App\Tests\Unit\Domain\Widget\Twig\Runtime;
 
 use App\Domain\Widget\Service\WidgetManagerService;
 use App\Domain\Widget\Twig\Runtime\WidgetRuntime;

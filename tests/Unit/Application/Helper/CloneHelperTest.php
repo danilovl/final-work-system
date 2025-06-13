@@ -10,7 +10,7 @@
  *
  */
 
-namespace Application\Helper;
+namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Helper\CloneHelper;
 use PHPUnit\Framework\TestCase;

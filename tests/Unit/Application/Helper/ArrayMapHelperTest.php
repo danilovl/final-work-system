@@ -10,7 +10,7 @@
  *
  */
 
-namespace Application\Helper;
+namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Helper\ArrayMapHelper;
 use PHPUnit\Framework\TestCase;

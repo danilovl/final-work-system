@@ -10,7 +10,7 @@
  *
  */
 
-namespace Application\Service;
+namespace App\Tests\Unit\Application\Service;
 
 use App\Application\Service\S3ClientService;
 use App\Tests\Mock\Application\Service\S3ClientMock;

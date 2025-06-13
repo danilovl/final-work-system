@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Widget\WidgetItem;
+namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use App\Application\Service\{

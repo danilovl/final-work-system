@@ -10,7 +10,7 @@
  *
  */
 
-namespace Application\Helper;
+namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Exception\RuntimeException;
 use App\Application\Helper\AttributeHelper;

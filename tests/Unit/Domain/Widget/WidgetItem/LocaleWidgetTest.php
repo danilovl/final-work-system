@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Widget\WidgetItem;
+namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
 use App\Application\Constant\LocaleConstant;
 use App\Application\Service\TwigRenderService;

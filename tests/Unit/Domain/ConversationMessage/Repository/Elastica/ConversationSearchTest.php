@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\ConversationMessage\Repository\Elastica;
+namespace App\Tests\Unit\Domain\ConversationMessage\Repository\Elastica;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Repository\Elastica\ConversationMessageSearch;

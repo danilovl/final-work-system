@@ -10,7 +10,7 @@
  *
  */
 
-namespace Domain\Media\Command;
+namespace App\Tests\Unit\Domain\Media\Command;
 
 use App\Application\Service\S3ClientService;
 use App\Domain\Media\Command\S3CreateBucketCommand;

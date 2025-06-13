@@ -10,7 +10,7 @@
  *
  */
 
-namespace Application\EventDispatcher;
+namespace App\Tests\Unit\Application\EventDispatcher;
 
 use App\Application\EventDispatcher\EntityEventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
