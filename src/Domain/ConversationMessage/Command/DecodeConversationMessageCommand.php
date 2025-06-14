@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Command;
+namespace App\Domain\ConversationMessage\Command;
 
 use App\Application\Service\EntityManagerService;
 use Override;

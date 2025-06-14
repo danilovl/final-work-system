@@ -10,11 +10,11 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Command;
+namespace App\Tests\Kernel\Domain\ConversationMessage\Command;
 
-use App\Application\Command\DecodeConversationMessageCommand;
 use App\Application\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationMessage\Command\DecodeConversationMessageCommand;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
