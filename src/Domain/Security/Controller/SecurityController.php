@@ -10,12 +10,11 @@
  *
  */
 
-namespace App\Application\Controller;
+namespace App\Domain\Security\Controller;
 
 use App\Application\Service\{
     RequestService,
-    TwigRenderService
-};
+    TwigRenderService};
 use App\Domain\User\Service\UserService;
 use LogicException;
 use Symfony\Component\HttpFoundation\Response;

@@ -10,15 +10,14 @@
  *
  */
 
-namespace App\Application\Controller\Api;
+namespace App\Domain\Security\Controller\Api;
 
 use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 

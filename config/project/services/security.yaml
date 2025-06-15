@@ -5,14 +5,14 @@ services:
 
   #   Authenticator
   app.authenticator:
-    class: App\Application\Security\Authenticator\AppAuthenticator
+    class: App\Domain\Security\Authenticator\AppAuthenticator
 
   app.authenticator.api_key:
-    class: App\Application\Security\Authenticator\ApiAuthenticator
+    class: App\Domain\Security\Authenticator\ApiAuthenticator
 
   #   Provider
   app.provider.user:
-    class: App\Application\Security\Provider\AppUserProvider
+    class: App\Domain\Security\Provider\AppUserProvider
 
   app.provider.api_key:
-    class: App\Application\Security\Provider\ApiKeyUserProvider
+    class: App\Domain\Security\Provider\ApiKeyUserProvider

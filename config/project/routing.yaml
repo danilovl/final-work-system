@@ -11,7 +11,7 @@ app_security:
 
 security_login:
   path: /{_locale}/login
-  controller: App\Application\Controller\SecurityController::login
+  controller: App\Domain\Security\Controller\SecurityController::login
   defaults:
     _locale: '%locale%'
     _seo:
@@ -22,7 +22,7 @@ security_login:
 
 security_logout:
   path: /logout
-  controller: App\Application\Controller\SecurityController::logout
+  controller: App\Domain\Security\Controller\SecurityController::logout
   methods: GET
 
 app_admin:

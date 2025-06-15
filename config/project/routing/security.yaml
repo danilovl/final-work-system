@@ -1,4 +1,4 @@
 security_login:
   path: /login
-  controller: App\Application\Controller\SecurityController::login
+  controller: App\Domain\Security\Controller\SecurityController::login
   methods: [GET,POST]
