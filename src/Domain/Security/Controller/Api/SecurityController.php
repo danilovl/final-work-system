@@ -16,8 +16,9 @@ use App\Application\Helper\HashHelper;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request};
+    Request,
+    JsonResponse
+};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 

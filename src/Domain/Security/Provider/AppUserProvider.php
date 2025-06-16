@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Security\Provider;
+namespace App\Domain\Security\Provider;
 
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;

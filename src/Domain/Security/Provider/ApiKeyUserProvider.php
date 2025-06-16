@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Security\Provider;
+namespace App\Domain\Security\Provider;
 
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;

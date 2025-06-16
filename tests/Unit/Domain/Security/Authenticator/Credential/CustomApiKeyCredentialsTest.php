@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Security\Authenticator\Credential;
+namespace App\Tests\Unit\Domain\Security\Authenticator\Credential;
 
-use App\Application\Security\Authenticator\Credential\CustomApiKeyCredentials;
+use App\Domain\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use PHPUnit\Framework\TestCase;
 
 class CustomApiKeyCredentialsTest extends TestCase

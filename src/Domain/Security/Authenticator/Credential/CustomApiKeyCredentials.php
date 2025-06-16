@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Security\Authenticator\Credential;
+namespace App\Domain\Security\Authenticator\Credential;
 
 use Override;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CredentialsInterface;

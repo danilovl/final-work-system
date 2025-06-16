@@ -10,18 +10,17 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Security;
+namespace App\Tests\Unit\Domain\Security\Provider;
 
-use App\Application\Security\Provider\ApiKeyUserProvider;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
+use App\Domain\Security\Provider\ApiKeyUserProvider;
 use App\Domain\User\Entity\User;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\{
-    UserNotFoundException,
-    UnsupportedUserException
-};
+    UnsupportedUserException,
+    UserNotFoundException};
 
 class ApiKeyUserProviderTest extends TestCase
 {

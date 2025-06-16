@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Application\Security\Authenticator;
+namespace App\Domain\Security\Authenticator;
 
 use App\Application\Model\Security\ApiKeyCredentialModel;
-use App\Application\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use App\Application\Service\EntityManagerService;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
+use App\Domain\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;

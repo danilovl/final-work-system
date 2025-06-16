@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Security;
+namespace App\Tests\Unit\Domain\Security\Provider;
 
-use App\Application\Security\Provider\AppUserProvider;
 use App\Application\Service\EntityManagerService;
+use App\Domain\Security\Provider\AppUserProvider;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use PHPUnit\Framework\MockObject\MockObject;
