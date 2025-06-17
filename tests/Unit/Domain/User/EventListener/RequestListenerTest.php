@@ -10,11 +10,14 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventListener;
+namespace App\Tests\Unit\Domain\User\EventListener;
 
-use App\Application\EventListener\RequestListener;
+use App\Domain\User\Entity\User;
+use App\Domain\User\EventListener\RequestListener;
 use PHPUnit\Framework\MockObject\MockObject;
-use App\Application\Service\SeoPageService;
+use App\Application\Service\EntityManagerService;
+use App\Domain\User\Service\UserService;
+use Danilovl\AsyncBundle\Service\AsyncService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -26,72 +29,83 @@ use Symfony\Component\HttpKernel\{
 
 class RequestListenerTest extends TestCase
 {
-    private MockObject&SeoPageService $seoPageService;
+    private MockObject&UserService $userService;
+
+    private MockObject&EntityManagerService $entityManagerService;
+
+    private AsyncService $asyncService;
 
     private RequestListener $listener;
 
     protected function setUp(): void
     {
-        $this->seoPageService = $this->createMock(SeoPageService::class);
+        $this->userService = $this->createMock(UserService::class);
+        $this->entityManagerService = $this->createMock(EntityManagerService::class);
+        $this->asyncService = new AsyncService;
 
-        $this->listener = new RequestListener($this->seoPageService);
+        $this->listener = new RequestListener(
+            $this->userService,
+            $this->entityManagerService,
+            $this->asyncService
+        );
     }
 
     public function testOnKernelRequest(): void
     {
-        $request = new Request(attributes: [
-            'seo' => ['title' => 'test'],
-        ]);
-
         $event = new RequestEvent(
             $this->createMock(KernelInterface::class),
-            $request,
+            new Request,
             HttpKernelInterface::MAIN_REQUEST
         );
 
-        $this->seoPageService
+        $this->userService
             ->expects($this->once())
-            ->method('setTitle');
+            ->method('getUserOrNull')
+            ->willReturn(new User);
+
+        $this->entityManagerService
+            ->expects($this->once())
+            ->method('flush');
 
         $this->listener->onKernelRequest($event);
+        $this->asyncService->call();
     }
 
     public function testOnKernelRequestNotUser(): void
     {
-        $request = new Request(attributes: [
-            'seo' => ['title' => 'test'],
-        ]);
-
         $event = new RequestEvent(
             $this->createMock(KernelInterface::class),
-            $request,
+            new Request,
             HttpKernelInterface::MAIN_REQUEST
         );
 
-        $this->seoPageService
+        $this->userService
             ->expects($this->once())
-            ->method('setTitle');
+            ->method('getUserOrNull')
+            ->willReturn(null);
+
+        $this->entityManagerService
+            ->expects($this->never())
+            ->method('flush');
 
         $this->listener->onKernelRequest($event);
+        $this->asyncService->call();
     }
 
     public function testOnKernelRequestNotMain(): void
     {
-        $request = new Request(attributes: [
-            'seo' => ['title' => 'test'],
-        ]);
-
         $event = new RequestEvent(
             $this->createMock(KernelInterface::class),
-            $request,
+            new Request,
             HttpKernelInterface::SUB_REQUEST
         );
 
-        $this->seoPageService
+        $this->userService
             ->expects($this->never())
-            ->method('setTitle');
+            ->method('getUserOrNull');
 
         $this->listener->onKernelRequest($event);
+        $this->asyncService->call();
     }
 
     public function testGetSubscribedEvents(): void

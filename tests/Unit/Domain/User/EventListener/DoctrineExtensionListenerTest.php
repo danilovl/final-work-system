@@ -10,13 +10,12 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventListener;
+namespace App\Tests\Unit\Domain\User\EventListener;
 
-use App\Application\EventListener\{
-    App\Domain\User\EventListener\DoctrineExtensionListener,
-    LoggableListener};
+use App\Application\EventListener\LoggableListener;
 use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
+use App\Domain\User\EventListener\DoctrineExtensionListener;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use Doctrine\ORM\UnitOfWork;
@@ -30,7 +29,7 @@ class DoctrineExtensionListenerTest extends TestCase
 {
     private MockObject&LoggableListener $loggableListener;
 
-    private \App\Domain\User\EventListener\DoctrineExtensionListener $listener;
+    private DoctrineExtensionListener $listener;
 
     protected function setUp(): void
     {
@@ -67,7 +66,7 @@ class DoctrineExtensionListenerTest extends TestCase
             ->method('setUsername')
             ->with($user->getUsername());
 
-        $this->listener = new \App\Domain\User\EventListener\DoctrineExtensionListener($userService, $this->loggableListener);
+        $this->listener = new DoctrineExtensionListener($userService, $this->loggableListener);
     }
 
     public function testOnKernelRequest(): void
@@ -94,7 +93,7 @@ class DoctrineExtensionListenerTest extends TestCase
             ->expects($this->never())
             ->method('setUsername');
 
-        $listener = new \App\Domain\User\EventListener\DoctrineExtensionListener($userService, $this->loggableListener);
+        $listener = new DoctrineExtensionListener($userService, $this->loggableListener);
 
         $listener->onKernelRequest();
     }

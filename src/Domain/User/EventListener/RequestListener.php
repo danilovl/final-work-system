@@ -10,17 +10,24 @@
  *
  */
 
-namespace App\Application\EventListener;
+namespace App\Domain\User\EventListener;
 
 use Override;
-use App\Application\Service\SeoPageService;
+use App\Application\Service\EntityManagerService;
+use App\Domain\User\Service\UserService;
+use Danilovl\AsyncBundle\Service\AsyncService;
+use DateTime;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class RequestListener implements EventSubscriberInterface
 {
-    public function __construct(private SeoPageService $seoPageService) {}
+    public function __construct(
+        private UserService $userService,
+        private EntityManagerService $entityManagerService,
+        private AsyncService $asyncService
+    ) {}
 
     #[Override]
     public static function getSubscribedEvents(): array
@@ -36,13 +43,19 @@ readonly class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $this->defaultRouteSeoPage($requestEvent);
+        $this->asyncService->add(function (): void {
+            $this->userLastRequestedAt();
+        });
     }
 
-    private function defaultRouteSeoPage(RequestEvent $requestEvent): void
+    private function userLastRequestedAt(): void
     {
-        /** @var array{title: string}|null $seo */
-        $seo = $requestEvent->getRequest()->attributes->get('_seo');
-        $this->seoPageService->setTitle($seo['title'] ?? null);
+        $user = $this->userService->getUserOrNull();
+        if ($user === null) {
+            return;
+        }
+
+        $user->setLastRequestedAt(new DateTime);
+        $this->entityManagerService->flush();
     }
 }
