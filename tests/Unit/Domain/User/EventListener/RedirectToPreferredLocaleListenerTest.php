@@ -10,11 +10,11 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventListener;
+namespace App\Tests\Unit\Domain\User\EventListener;
 
 use App\Application\Constant\LocaleConstant;
-use App\Application\EventListener\RedirectToPreferredLocaleListener;
 use App\Domain\User\Entity\User;
+use App\Domain\User\EventListener\RedirectToPreferredLocaleListener;
 use App\Domain\User\Service\UserService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{

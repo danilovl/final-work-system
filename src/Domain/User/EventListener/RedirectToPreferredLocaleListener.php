@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventListener;
+namespace App\Domain\User\EventListener;
 
 use App\Domain\User\Service\UserService;
 use Override;

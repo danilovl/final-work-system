@@ -4,7 +4,7 @@ services:
     autowire: true
 
   app.redirect_to_preferred_locale_listener:
-    class: App\Application\EventListener\RedirectToPreferredLocaleListener
+    class: App\Domain\User\EventListener\RedirectToPreferredLocaleListener
     arguments:
       $locales: '%locales%'
       $defaultLocale: '%locale%'
