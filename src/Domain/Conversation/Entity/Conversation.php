@@ -15,11 +15,11 @@ namespace App\Domain\Conversation\Entity;
 use App\Application\Constant\TranslationConstant;
 use App\Application\Exception\PropertyValueIsNullException;
 use App\Application\Helper\ArrayMapHelper;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Domain\Work\Entity\Work;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsReadTrait,
-    IsOwnerTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\Conversation\Repository\ConversationRepository;
@@ -30,8 +30,8 @@ use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection
+    Collection,
+    ArrayCollection
 };
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

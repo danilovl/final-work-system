@@ -14,9 +14,9 @@ namespace App\Domain\Media\Entity;
 
 use App\Application\Exception\PropertyValueIsNullException;
 use App\Application\Constant\FileSizeConstant;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     ActiveAbleTrait,
     CreateUpdateAbleTrait,
     SimpleInformationTrait

@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Traits\Entity;
+namespace App\Tests\Unit\Domain\User\Traits\Entity;
 
-use App\Application\Traits\Entity\IsOwnerTrait;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use PHPUnit\Framework\TestCase;
 
 class IsOwnerTraitTest extends TestCase

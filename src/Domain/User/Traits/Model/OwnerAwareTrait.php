@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Traits\Model;
+namespace App\Domain\User\Traits\Model;
 
 use App\Domain\User\Entity\User;
 

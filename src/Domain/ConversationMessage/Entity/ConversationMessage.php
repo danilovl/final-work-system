@@ -14,10 +14,10 @@ namespace App\Domain\ConversationMessage\Entity;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
     IsReadTrait,
-    IsOwnerTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\ConversationMessage\Repository\ConversationMessageRepository;

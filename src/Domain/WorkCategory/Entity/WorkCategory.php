@@ -12,9 +12,9 @@
 
 namespace App\Domain\WorkCategory\Entity;
 
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     CreateUpdateAbleTrait,
     SimpleInformationTrait
 };

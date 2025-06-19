@@ -12,9 +12,9 @@
 
 namespace App\Domain\SystemEvent\Entity;
 
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\Conversation\Entity\Conversation;
@@ -27,8 +27,8 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection
+    Collection,
+    ArrayCollection
 };
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;

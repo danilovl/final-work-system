@@ -12,9 +12,9 @@
 
 namespace App\Domain\EventAddress\Entity;
 
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     LocationTrait,
     CreateUpdateAbleTrait,
     SimpleInformationTrait

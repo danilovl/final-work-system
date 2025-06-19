@@ -13,9 +13,9 @@
 namespace App\Domain\EventSchedule\Entity;
 
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     CreateUpdateAbleTrait,
     SimpleInformationTrait
 };

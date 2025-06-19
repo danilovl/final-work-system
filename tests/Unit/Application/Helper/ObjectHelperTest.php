@@ -17,11 +17,10 @@ use App\Application\Traits\Entity\{
     ActiveAbleTrait,
     CreateUpdateAbleTrait,
     IdTrait,
-    IsOwnerTrait,
-    SimpleInformationTrait
-};
+    SimpleInformationTrait};
 use App\Domain\Event\Entity\Event;
 use App\Domain\Media\Entity\Media;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

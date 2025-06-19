@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-/*
+/**
  *
  * This file is part of the FinalWorkSystem project.
  * (c) Vladimir Danilov
@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Traits\Entity;
+namespace App\Domain\User\Traits\Entity;
 
 use App\Domain\User\Entity\User;
 

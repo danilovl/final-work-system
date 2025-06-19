@@ -14,16 +14,16 @@ namespace App\Domain\Article\Entity;
 
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     ActiveAbleTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\Article\Repository\ArticleRepository;
 use App\Domain\ArticleCategory\Entity\ArticleCategory;
 use App\Domain\User\Entity\User;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection
+    Collection,
+    ArrayCollection
 };
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

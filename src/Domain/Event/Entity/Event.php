@@ -14,9 +14,9 @@ namespace App\Domain\Event\Entity;
 
 use App\Application\Constant\TranslationConstant;
 use App\Application\Exception\PropertyValueIsNullException;
+use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Application\Traits\Entity\{
     IdTrait,
-    IsOwnerTrait,
     CreateUpdateAbleTrait
 };
 use App\Domain\Comment\Entity\Comment;
@@ -28,8 +28,8 @@ use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\User\Entity\User;
 use DateTime;
 use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection
+    Collection,
+    ArrayCollection
 };
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
