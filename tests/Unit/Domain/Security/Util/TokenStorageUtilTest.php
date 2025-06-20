@@ -10,19 +10,19 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Util;
+namespace App\Tests\Unit\Domain\Security\Util;
 
 use App\Application\Exception\RuntimeException;
-use App\Application\Util\TokenStorageUtil;
+use App\Domain\Security\Util\TokenStorageUtil;
 use App\Domain\User\Constant\UserRoleConstant;
 use App\Domain\User\Entity\User;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\{
     TokenInterface,
     UsernamePasswordToken
 };
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class TokenStorageUtilTest extends TestCase
 {
