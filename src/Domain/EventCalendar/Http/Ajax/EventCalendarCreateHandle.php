@@ -14,10 +14,8 @@ namespace App\Domain\EventCalendar\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\AjaxRuntimeException;
-use App\Application\Helper\{
-    SortFunctionHelper,
-    FormValidationMessageHelper
-};
+use App\Application\Helper\FormValidationMessageHelper;
+use App\Domain\EventParticipant\Helper\SortFunctionHelper;
 use App\Application\Service\{
     RequestService,
     EntityManagerService

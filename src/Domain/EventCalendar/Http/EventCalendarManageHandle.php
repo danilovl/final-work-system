@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http;
 
-use App\Application\Helper\SortFunctionHelper;
+use App\Domain\EventParticipant\Helper\SortFunctionHelper;
 use App\Application\Service\{
     EntityManagerService,
     TwigRenderService
