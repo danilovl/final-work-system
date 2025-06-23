@@ -19,12 +19,6 @@ parameters:
 			path: src/Application/Helper/AttributeHelper.php
 
 		-
-			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\User\\Entity\\User\> and ''App\\\\Domain\\\\User\\\\Entity\\\\User'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: src/Application/Helper/SortFunctionHelper.php
-
-		-
 			message: '#^Comparison operation "\>\=" between \(int\|Redis\|false\) and 0 results in an error\.$#'
 			identifier: greaterOrEqual.invalid
 			count: 2
@@ -109,6 +103,30 @@ parameters:
 			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
+			message: '#^Cannot access offset ''content'' on int\|string\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Domain/ConversationMessage/Command/DecodeConversationMessageCommand.php
+
+		-
+			message: '#^Cannot access offset ''id'' on int\|string\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Domain/ConversationMessage/Command/DecodeConversationMessageCommand.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Domain/ConversationMessage/Command/DecodeConversationMessageCommand.php
+
+		-
+			message: '#^Variable \$messages in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: src/Domain/ConversationMessage/Command/DecodeConversationMessageCommand.php
+
+		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
@@ -191,6 +209,12 @@ parameters:
 			identifier: booleanNot.alwaysTrue
 			count: 3
 			path: src/Domain/User/Facade/UserFacade.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\User\\Entity\\User\> and ''App\\\\Domain\\\\User\\\\Entity\\\\User'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Domain/User/Helper/SortFunctionHelper.php
 
 		-
 			message: '#^Strict comparison using \=\=\= between null and null will always evaluate to true\.$#'
