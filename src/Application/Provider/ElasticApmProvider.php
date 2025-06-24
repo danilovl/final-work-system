@@ -12,11 +12,15 @@
 
 namespace App\Application\Provider;
 
+use App\Application\Service\IniService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 
 readonly class ElasticApmProvider
 {
-    public function __construct(private ParameterServiceInterface $parameterService) {}
+    public function __construct(
+        private ParameterServiceInterface $parameterService,
+        private IniService $iniService
+    ) {}
 
     public function isEnable(): bool
     {
@@ -25,7 +29,7 @@ readonly class ElasticApmProvider
             return false;
         }
 
-        $isEnableIni = ini_get('elastic_apm.enabled');
+        $isEnableIni = $this->iniService->get('elastic_apm.enabled');
 
         return !empty($isEnableIni);
     }

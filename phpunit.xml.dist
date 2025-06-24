@@ -35,13 +35,14 @@
         <exclude>
             <directory suffix=".php">src/Application/Controller</directory>
             <directory suffix=".php">src/Application/Constant</directory>
+            <directory suffix=".php">src/Application/DBAL</directory>
             <directory suffix=".php">src/Application/ElasticApm</directory>
             <directory suffix=".php">src/Application/Exception</directory>
             <directory suffix=".php">src/Application/GraphQL</directory>
             <directory suffix=".php">src/Application/Interfaces</directory>
             <directory suffix=".php">src/Application/Migrations</directory>
             <directory suffix=".php">src/Application/Redis</directory>
-            <file>src/Application/EventListener/LoggableListener.php</file>
+            <file>src/Application/Service/IniService.php</file>
         </exclude>
     </source>
 </phpunit>

@@ -61,4 +61,11 @@ class TwigRenderServiceTest extends KernelTestCase
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'simple.html.twig');
         $this->assertSame('ajax/simple.html.twig', $template);
     }
+
+    public function testGetLoader(): void
+    {
+        $this->expectNotToPerformAssertions();
+
+        $this->twigRenderService->getLoader();
+    }
 }
