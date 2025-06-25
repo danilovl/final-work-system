@@ -22,152 +22,114 @@ class DateHelper
 {
     public static function actualDay(): string
     {
-        return date(DateFormatConstant::DATABASE->value);
+        return (new DateTime)->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function actualWeekStartByDate(DateTime $date): DateTime
     {
-        $number = $date->format('w');
-        if ($number == 0) {
-            $number = 7;
-        }
-
-        if ($number != 0) {
-            $number -= 1;
-        }
-
-        return $date->sub(new DateInterval('P' . $number . 'D'));
+        return (clone $date)->modify('this week monday');
     }
 
     public static function actualWeekStart(): string
     {
-        $time = time();
-        $dateN = (int) date('n', $time);
-        $dateJ = (int) date('j', $time);
-        $dateY = (int) date('Y', $time);
-
-        /** @var int $baseTimestamp */
-        $baseTimestamp = mktime(0, 0, 0, $dateN, $dateJ, $dateY);
-
-        $weekStart = date('w') === '1' ?
-            strtotime('0 hours 0 seconds') :
-            strtotime('last Monday', $baseTimestamp);
-
-        return date(DateFormatConstant::DATABASE->value, $weekStart);
+        return (new DateTime)
+            ->modify('this week monday')
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function actualWeekEnd(): string
     {
-        $weekStart = self::actualWeekStart();
-        /** @var int $weekEnd */
-        $weekEnd = strtotime($weekStart . ' + 1 week');
-
-        return date(DateFormatConstant::DATABASE->value, $weekEnd);
+        return (new DateTime)
+            ->modify('this week sunday')
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function datePeriod(string $from, string $to, bool $mode = false): array
     {
         $from = new DateTimeImmutable($from);
-        $to = new DateTimeImmutable($to);
-        $to = $to->modify('+1 day');
-
+        $to = (new DateTimeImmutable($to))->modify('+1 day');
         $period = new DatePeriod($from, new DateInterval('P1D'), $to);
 
-        $arrayOfDates = array_map(static fn ($item): string => $item->format(DateFormatConstant::DATE->value), iterator_to_array($period));
+        $dates = iterator_to_array($period);
+        $formattedDates = array_map(
+            fn (DateTimeImmutable $date) => $date->format(DateFormatConstant::DATE->value),
+            $dates
+        );
 
-        if ($mode === true) {
-            $arrayNameDay = [];
-            foreach ($arrayOfDates as $date) {
-                $arrayNameDay[] = (new DateTimeImmutable($date))->format('D, d.m');
-            }
-
-            return $arrayNameDay;
+        if ($mode) {
+            return array_map(
+                fn (string $date) => (new DateTimeImmutable($date))->format('D, d.m'),
+                $formattedDates
+            );
         }
 
-        return $arrayOfDates;
+        return $formattedDates;
     }
 
     public static function nextWeek(string $week): string
     {
-        $nextWeek = strtotime($week);
-        $nextWeek += 7 * 24 * 60 * 60;
-
-        return date(DateFormatConstant::DATABASE->value, $nextWeek);
+        return (new DateTimeImmutable($week))
+            ->modify('+1 week')
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function previousWeek(string $week): string
     {
-        $previousWeek = strtotime($week);
-        $previousWeek -= 7 * 24 * 60 * 60;
-
-        return date(DateFormatConstant::DATABASE->value, $previousWeek);
+        return (new DateTimeImmutable($week))
+            ->modify('-1 week')
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function endWeek(string $week): string
     {
-        $endWeek = strtotime($week);
-        $endWeek += 6 * 24 * 60 * 60;
-
-        return date(DateFormatConstant::DATABASE->value, $endWeek);
+        return (new DateTimeImmutable($week))
+            ->modify('+6 days')
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function changeFormatWeek(string $format, string $date): string
     {
-        /** @var int $changeDate */
-        $changeDate = strtotime($date);
-
-        return date($format, $changeDate);
+        return (new DateTimeImmutable($date))->format($format);
     }
 
     public static function checkWeek(string $date): string
     {
-        /** @var int $currentTime */
-        $currentTime = strtotime($date);
-        $actualWeek = date(DateFormatConstant::DATE->value, $currentTime - (date('N', $currentTime) - 1) * 86_400);
-        if ($actualWeek === $date) {
-            return $date;
-        }
+        $dateTime = new DateTimeImmutable($date);
+        $startOfWeek = $dateTime->modify('this week monday');
 
-        return $actualWeek;
+        return $startOfWeek->format(DateFormatConstant::DATE->value);
     }
 
     public static function validateDate(string $format, string $date): bool
     {
-        /** @var int $time */
-        $time = strtotime($date);
+        $dateTime = DateTimeImmutable::createFromFormat($format, $date);
 
-        return date($format, $time) === $date;
+        return $dateTime && $dateTime->format($format) === $date;
     }
 
     public static function firstDayMonth(): string
     {
-        /** @var int $time */
-        $time = strtotime('first day of this month');
-
-        return date(DateFormatConstant::DATABASE->value, $time);
+        return (new DateTime('first day of this month'))
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function lastDayMonth(): string
     {
-        /** @var int $time */
-        $time = strtotime('last day of this month');
-
-        return date(DateFormatConstant::DATABASE->value, $time);
+        return (new DateTime('last day of this month'))
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function plusDayDate(string $date, int $quantity): string
     {
-        /** @var int $time */
-        $time = strtotime($date . ' + ' . $quantity . ' days');
-
-        return date(DateFormatConstant::DATABASE->value, $time);
+        return (new DateTimeImmutable($date))
+            ->modify("+{$quantity} days")
+            ->format(DateFormatConstant::DATABASE->value);
     }
 
     public static function minusDayDate(string $date, int $quantity): string
     {
-        /** @var int $time */
-        $time = strtotime($date . ' - ' . $quantity . ' days');
-
-        return date(DateFormatConstant::DATABASE->value, $time);
+        return (new DateTimeImmutable($date))
+            ->modify("-{$quantity} days")
+            ->format(DateFormatConstant::DATABASE->value);
     }
 }
