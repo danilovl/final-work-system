@@ -43,6 +43,7 @@
             <directory suffix=".php">src/Application/Migrations</directory>
             <directory suffix=".php">src/Application/Redis</directory>
             <file>src/Application/Service/IniService.php</file>
+            <file>src/Application/EventListener/LoggableListener.php</file>
         </exclude>
     </source>
 </phpunit>
