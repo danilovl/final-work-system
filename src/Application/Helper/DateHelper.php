@@ -52,13 +52,13 @@ class DateHelper
 
         $dates = iterator_to_array($period);
         $formattedDates = array_map(
-            fn (DateTimeImmutable $date) => $date->format(DateFormatConstant::DATE->value),
+            static fn (DateTimeImmutable $date) => $date->format(DateFormatConstant::DATE->value),
             $dates
         );
 
         if ($mode) {
             return array_map(
-                fn (string $date) => (new DateTimeImmutable($date))->format('D, d.m'),
+                static fn (string $date) => (new DateTimeImmutable($date))->format('D, d.m'),
                 $formattedDates
             );
         }
