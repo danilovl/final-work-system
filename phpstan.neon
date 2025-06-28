@@ -13,7 +13,7 @@ parameters:
         - src
         - tests
     excludePaths:
-        - src/Application/DBAL
+        - src/Application/Doctrine/DBAL
         - src/Application/Command
         - src/Domain/User/Command/
         - tests/bootstrap.php

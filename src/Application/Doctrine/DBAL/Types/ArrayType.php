@@ -1,18 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\DBAL\Types;
+namespace App\Application\Doctrine\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\{ConversionException, Type};
+use Doctrine\DBAL\Types\{
+    Type,
+    ConversionException
+};
 use Doctrine\Deprecations\Deprecation;
-
 use function is_resource;
 use function restore_error_handler;
 use function serialize;
 use function set_error_handler;
 use function stream_get_contents;
 use function unserialize;
-
 use const E_DEPRECATED;
 use const E_USER_DEPRECATED;
 
