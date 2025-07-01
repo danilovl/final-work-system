@@ -96,6 +96,7 @@ return (new PhpCsFixer\Config())
         'compact_nullable_type_declaration' => true,
         'no_spaces_around_offset' => true,
         'single_blank_line_at_eof' => true,
+        'nullable_type_declaration_for_default_null_value' => true,
         'php_unit_assert_new_names' => true,
         'php_unit_attributes' => true,
         'php_unit_construct' => true,
@@ -104,7 +105,7 @@ return (new PhpCsFixer\Config())
         'php_unit_dedicate_assert_internal_type' => true,
         'php_unit_expectation' => true,
         'php_unit_mock_short_will_return' => true,
-        'php_unit_set_up_tear_down_visibility' => true,
+        'php_unit_set_up_tear_down_visibility' => true
     ])
     ->setFinder($finder)
     ->setUsingCache(false);
