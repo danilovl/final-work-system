@@ -100,6 +100,8 @@ Encore
         })
     )
     .splitEntryChunks()
+    .enableStimulusBridge('./assets/controllers.json')
+    .addEntry('app', './assets/app.js')
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())

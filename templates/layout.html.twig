@@ -10,10 +10,12 @@
         {% block title %} {{ seo_title() }} {% endblock %}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app/css') }}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
             <script src="{{ asset('build/js/main.js') }}"></script>
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
 {% endblock %}
