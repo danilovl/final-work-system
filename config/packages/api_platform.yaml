@@ -11,3 +11,4 @@ api_platform:
   defaults:
     normalization_context:
       skip_null_values: false
+  use_symfony_listeners: true
