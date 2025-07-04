@@ -4,7 +4,7 @@
 FinalWork web application
 ========================
 
-Thesis management system based on Symfony 7.0
+Thesis management system based on Symfony 7.2
 
 ![Alt text](/git/readme/demo.gif?raw=true "Project example")
 
@@ -49,29 +49,30 @@ Features
 
 Project uses extra bundles
 ------------
+* [API Platform](https://github.com/api-platform/api-platform) - API Platform is a next-generation web framework designed to easily create API-first projects
 * [EasyAdmin](https://github.com/EasyCorp/EasyAdminBundle) - EasyAdmin creates administration backends. erd diagram
-* [KnpMenuBundle](https://github.com/KnpLabs/KnpMenuBundle) - The KnpMenuBundle integrates the KnpMenu PHP library with Symfony.
-* [KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) - Provide markdown conversion (based on Michel Fortin work) to your Symfony projects.
-* [RedisBundle](https://github.com/snc/SncRedisBundle) - This bundle integrates Predis and phpredis into your Symfony application.
-* [OverblogGraphQLBundle](https://github.com/overblog/GraphQLBundle) - This Symfony bundle provides integration of GraphQL.
-* [OverblogGraphiQLBundle](https://github.com/overblog/GraphiQLBundle) - This Symfony bundle provides integration of GraphiQL interface to your Symfony application.
-* [Doctrine Behavioral Extensions](https://github.com/Atlantic18/DoctrineExtensions) - This package contains extensions tools to use Doctrine more efficiently.
-* [RabbitMqBundle](https://github.com/php-amqplib/RabbitMqBundle) - Incorporates messaging in your application via RabbitMQ using the php-amqplib library.
-* [FOSElasticaBundle](https://github.com/FriendsOfSymfony/FOSElasticaBundle) - his bundle provides integration with Elasticsearch and Elastica.
+* [KnpMenuBundle](https://github.com/KnpLabs/KnpMenuBundle) - The KnpMenuBundle integrates the KnpMenu PHP library with Symfony
+* [KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) - Provide markdown conversion (based on Michel Fortin work) to your Symfony projects
+* [RedisBundle](https://github.com/snc/SncRedisBundle) - This bundle integrates Predis and phpredis into your Symfony application
+* [OverblogGraphQLBundle](https://github.com/overblog/GraphQLBundle) - This Symfony bundle provides integration of GraphQL
+* [OverblogGraphiQLBundle](https://github.com/overblog/GraphiQLBundle) - This Symfony bundle provides integration of GraphiQL interface to your Symfony application
+* [Doctrine Behavioral Extensions](https://github.com/Atlantic18/DoctrineExtensions) - This package contains extensions tools to use Doctrine more efficiently
+* [RabbitMqBundle](https://github.com/php-amqplib/RabbitMqBundle) - Incorporates messaging in your application via RabbitMQ using the php-amqplib library
+* [FOSElasticaBundle](https://github.com/FriendsOfSymfony/FOSElasticaBundle) - his bundle provides integration with Elasticsearch and Elastica
 
 Project uses own bundles
 ------------
-* [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle provides simple delayed function call.
-* [CacheResponseBundle](https://github.com/danilovl/cache-response-bundle) - Symfony bundle provides cache controller response.
-* [DoctrineEntityDtoBundle](https://github.com/danilovl/doctrine-entity-dto-bundle) - The Symfony bundle provides a simple mechanism to convert Doctrine entities to DTO objects.
-* [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project.
-* [ObjectToArrayTransformBundle](https://github.com/danilovl/object-to-array-transform-bundle) - Symfony bundle provides convert object to an array by configuration fields.
-* [ParameterBundle](https://github.com/danilovl/parameter-bundle) - Symfony bundle provides comfortable getting parameters from config.
-* [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides simple mechanism control permission for class or his method.
-* [RenderServiceTwigExtensionBundle](https://github.com/danilovl/render-service-twig-extension-bundle) - Symfony twig extension bundle provides rendering service method.
-* [SelectAutocompleterBundle](https://github.com/danilovl/select-autocompleter-bundle) - Symfony bundle provides simple integration with select2.
-* [Symfony console input validation](https://github.com/danilovl/symfony-console-input-validation) - Provide a simple method for adding input validation to Symfony console commands.
-* [TranslatorBundle](https://github.com/danilovl/translator-bundle) - Symfony bundle provides simple management of system translations.
+* [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle provides simple delayed function call
+* [CacheResponseBundle](https://github.com/danilovl/cache-response-bundle) - Symfony bundle provides cache controller response
+* [DoctrineEntityDtoBundle](https://github.com/danilovl/doctrine-entity-dto-bundle) - The Symfony bundle provides a simple mechanism to convert Doctrine entities to DTO objects
+* [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project
+* [ObjectToArrayTransformBundle](https://github.com/danilovl/object-to-array-transform-bundle) - Symfony bundle provides convert object to an array by configuration fields
+* [ParameterBundle](https://github.com/danilovl/parameter-bundle) - Symfony bundle provides comfortable getting parameters from config
+* [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides simple mechanism control permission for class or his method
+* [RenderServiceTwigExtensionBundle](https://github.com/danilovl/render-service-twig-extension-bundle) - Symfony twig extension bundle provides rendering service method
+* [SelectAutocompleterBundle](https://github.com/danilovl/select-autocompleter-bundle) - Symfony bundle provides simple integration with select2
+* [Symfony console input validation](https://github.com/danilovl/symfony-console-input-validation) - Provide a simple method for adding input validation to Symfony console commands
+* [TranslatorBundle](https://github.com/danilovl/translator-bundle) - Symfony bundle provides simple management of system translations
 
 ERD diagram
 ------------
