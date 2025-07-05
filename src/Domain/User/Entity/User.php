@@ -13,6 +13,7 @@
 namespace App\Domain\User\Entity;
 
 use App\Application\Constant\GenderConstant;
+use App\Application\Exception\RuntimeException;
 use App\Application\Traits\Entity\CreateUpdateAbleTrait;
 use App\Domain\Comment\Entity\Comment;
 use App\Domain\Conversation\Entity\Conversation;
@@ -66,8 +67,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
     #[ORM\Column(name: 'id', type: Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(name: 'username', type: Types::STRING, length: 180, nullable: true)]
-    private ?string $username = null;
+    #[ORM\Column(name: 'username', type: Types::STRING, length: 180, nullable: false)]
+    private string $username;
 
     #[ORM\Column(name: 'roles', type: Types::JSON)]
     private array $roles;
@@ -334,12 +335,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
     public function getUserIdentifier(): string
     {
+        if (empty($this->getUsername())) {
+            throw new RuntimeException('Username is empty.');
+        }
+
         return $this->getUsername();
     }
 
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     public function setUsername(string $username): self

@@ -37,6 +37,7 @@ class MercureSubscriberTest extends KernelTestCase
 
         $user = new User;
         $user->setId(1);
+        $user->setUsername('test');
         $user->setEmail('test@example.com');
         $user->setFirstname('test');
         $user->setLastname('test');

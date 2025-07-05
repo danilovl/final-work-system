@@ -12,6 +12,7 @@
 
 namespace App\Domain\ApiUser\Entity;
 
+use App\Application\Exception\RuntimeException;
 use App\Application\Traits\Entity\{
     IdTrait,
     CreateUpdateAbleTrait
@@ -90,6 +91,10 @@ class ApiUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
+        if (empty($this->getUsername())) {
+            throw new RuntimeException('Username is empty.');
+        }
+
         return $this->getUsername();
     }
 
