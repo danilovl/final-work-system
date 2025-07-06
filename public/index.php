@@ -2,11 +2,13 @@
 
 use App\Kernel;
 
+if (!is_file(dirname(__DIR__) . '/vendor/autoload_runtime.php')) {
+    throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+}
+
 require_once dirname(__DIR__) . '/vendor/autoload_runtime.php';
+require_once dirname(__DIR__) . '/tracing.php';
 
 return function (array $context) {
-    // ElasticApm ignores E_USER_DEPRECATED and E_WARNING
-    error_reporting(E_ALL & ~E_USER_DEPRECATED & ~E_WARNING);
-
     return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
 };

@@ -17,8 +17,8 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
-#    volumes:
-#      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
+    volumes:
+      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
 
   rabbitmq:
     build: docker/rabbitmq
@@ -58,6 +58,8 @@ services:
         - UUID=1000
     expose:
       - '9000'
+    env_file:
+      - ./docker/opentelemetry/opentelemetry.env
     volumes:
       - './:/var/www/html/app'
       - './docker/php/conf/php-fpm.conf:/etc/php-fpm.conf'
@@ -74,7 +76,6 @@ services:
       - rabbitmq
       - elasticsearch
       - mercure
-      - apm-server
 
   nginx:
     build: docker/nginx
@@ -128,7 +129,7 @@ services:
       - elasticsearch
 
   apm-server:
-    image: docker.elastic.co/apm/apm-server:7.17.21
+    image: elastic/apm-server:8.16.2
     depends_on:
       - elasticsearch
       - kibana
@@ -138,11 +139,14 @@ services:
       - '7120:8200'
     command: >
       apm-server -e
-        -E apm-server.rum.enabled=true
         -E setup.kibana.host=kibana:5601
         -E setup.template.settings.index.number_of_replicas=0
+        -E apm-server.rum.enabled=true
         -E apm-server.kibana.enabled=true
         -E apm-server.kibana.host=kibana:5601
+        -E apm-server.apm-server.metrics.enabled=true 
+        -E apm-server.apm-server.metrics.aggregation.enabled=true
+        -E apm-server.apm-server.metrics.protocols.otlp.http.enabled=true
         -E output.elasticsearch.hosts=["elasticsearch:9200"]
         -E output.elasticsearch.username=superuser
         -E output.elasticsearch.password=superuser
@@ -165,3 +169,15 @@ services:
       - elasticsearch
     volumes:
       - './:/var/www/html/app'
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    ports:
+      - "4317:4317" # gRPC
+      - "4318:4318" # HTTP
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./docker/opentelemetry/otel-collector-config.yml:/etc/otel-collector-config.yml
+    depends_on:
+      - elasticsearch
+      - kibana
