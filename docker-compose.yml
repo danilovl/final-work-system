@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   redis:
     build: docker/redis
@@ -17,8 +15,8 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
-    volumes:
-      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
+  #    volumes:
+  #      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
 
   rabbitmq:
     build: docker/rabbitmq

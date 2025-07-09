@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 URL=$1
-RETRIES=100
+RETRIES=30
 INTERVAL=10
 
 for i in $(seq 1 $RETRIES); do
