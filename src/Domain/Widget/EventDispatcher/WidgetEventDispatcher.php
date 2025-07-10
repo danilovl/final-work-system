@@ -14,11 +14,11 @@ namespace App\Domain\Widget\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class WidgetEventDispatcher
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher) {}
+    public function __construct(private EventDispatcherService $eventDispatcher) {}
 
     public function onGroupReplace(WidgetGenericGenericEvent $widgetGenericGenericEvent): void
     {

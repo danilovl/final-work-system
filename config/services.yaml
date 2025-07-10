@@ -32,6 +32,8 @@ services:
       - '../src/Application/Menu'
       - '../src/Application/Messenger/*/*Message.php'
       - '../src/Application/Migrations'
+      - '../src/Application/Model'
+      - '../src/Application/OpenTelemetry/*/Context'
       - '../src/Application/Helper'
       - '../src/Application/Traits'
       - '../src/Application/Widget'

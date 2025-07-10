@@ -17,13 +17,13 @@ use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcher;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 class SecurityDispatcherTest extends TestCase
 {
     public function testOnResetPasswordTokenCreate(): void
     {
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $eventDispatcher = $this->createMock(EventDispatcherService::class);
         $securityDispatcher = new SecurityDispatcher($eventDispatcher);
 
         $resetPassword = $this->createMock(ResetPassword::class);

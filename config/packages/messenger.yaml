@@ -1,5 +1,10 @@
 framework:
   messenger:
+    buses:
+      messenger.bus.default:
+        middleware:
+          - App\Application\OpenTelemetry\Messenger\MessengerMiddleware
+
     failure_transport: failed
 
     transports:

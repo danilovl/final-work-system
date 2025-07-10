@@ -16,12 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class VersionEventDispatcherService
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherService $eventDispatcher,
         private AsyncService $asyncService
     ) {}
 

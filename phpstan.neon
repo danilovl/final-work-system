@@ -15,6 +15,7 @@ parameters:
     excludePaths:
         - src/Application/Doctrine/DBAL
         - src/Application/Command
+        - src/Application/OpenTelemetry
         - src/Domain/User/Command/
         - tests/bootstrap.php
     ignoreErrors:

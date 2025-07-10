@@ -16,12 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class ConversationEventDispatcher
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherService $eventDispatcher,
         private AsyncService $asyncService
     ) {}
 

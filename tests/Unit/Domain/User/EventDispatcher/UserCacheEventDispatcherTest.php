@@ -17,13 +17,13 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
 use App\Domain\User\EventDispatcher\UserCacheEventDispatcher;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 class UserCacheEventDispatcherTest extends TestCase
 {
     public function testOnCreateHomepageCache(): void
     {
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $eventDispatcher = $this->createMock(EventDispatcherService::class);
         $userCacheEventDispatcher = new UserCacheEventDispatcher($eventDispatcher);
 
         $eventDispatcher->expects($this->once())

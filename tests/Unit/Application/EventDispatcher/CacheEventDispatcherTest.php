@@ -16,13 +16,13 @@ use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Application\EventSubscriber\Events;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 class CacheEventDispatcherTest extends TestCase
 {
     public function testOnClearCacheKey(): void
     {
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $eventDispatcher = $this->createMock(EventDispatcherService::class);
         $cacheEventDispatcher = new CacheEventDispatcher($eventDispatcher);
 
         $eventDispatcher->expects($this->once())

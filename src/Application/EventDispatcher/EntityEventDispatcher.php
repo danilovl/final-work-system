@@ -15,12 +15,12 @@ namespace App\Application\EventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
 use App\Application\EventSubscriber\Events;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class EntityEventDispatcher
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherService $eventDispatcher,
         private AsyncService $asyncService
     ) {}
 

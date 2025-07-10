@@ -20,12 +20,12 @@ use App\Domain\Event\EventDispatcher\GenericEvent\{
     EventCommentGenericEvent
 };
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class EventEventDispatcher
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherService $eventDispatcher,
         private AsyncService $asyncService
     ) {}
 

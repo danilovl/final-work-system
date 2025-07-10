@@ -15,11 +15,11 @@ namespace App\Domain\ResetPassword\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class SecurityDispatcher
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher) {}
+    public function __construct(private EventDispatcherService $eventDispatcher) {}
 
     public function onResetPasswordTokenCreate(ResetPassword $resetPassword, int $tokenLifetime): void
     {

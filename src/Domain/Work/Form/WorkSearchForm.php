@@ -12,13 +12,14 @@
 
 namespace App\Domain\Work\Form;
 
+use App\Domain\Work\Autocompleter\{
+    WorkSearchTypeUxAutocompleter,
+    WorkStatusTypeUxAutocompleter
+};
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
-use App\Domain\WorkStatus\Entity\WorkStatus;
-use App\Domain\WorkType\Entity\WorkType;
 use Danilovl\SelectAutocompleterBundle\Form\Type\MultipleAutocompleterType;
 use Override;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
@@ -45,16 +46,8 @@ class WorkSearchForm extends AbstractType
             ->add('shortcut', TextType::class, [
                 'required' => false
             ])
-            ->add('status', EntityType::class, [
-                'class' => WorkStatus::class,
-                'required' => false,
-                'multiple' => true
-            ])
-            ->add('type', EntityType::class, [
-                'class' => WorkType::class,
-                'required' => false,
-                'multiple' => true
-            ]);
+            ->add('status', WorkStatusTypeUxAutocompleter::class)
+            ->add('type', WorkSearchTypeUxAutocompleter::class);
 
         $formTypes = ['author', 'supervisor', 'opponent', 'consultant'];
         foreach ($formTypes as $formType) {

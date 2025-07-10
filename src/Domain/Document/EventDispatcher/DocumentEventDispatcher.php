@@ -16,12 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class DocumentEventDispatcher
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherService $eventDispatcher,
         private AsyncService $asyncService
     ) {}
 

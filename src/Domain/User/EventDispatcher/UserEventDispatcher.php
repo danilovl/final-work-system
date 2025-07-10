@@ -16,12 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 
 readonly class UserEventDispatcher
 {
     public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherService $eventDispatcher,
         private AsyncService $asyncService
     ) {}
 

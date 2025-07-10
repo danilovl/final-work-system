@@ -23,12 +23,12 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Application\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
 
 class TaskEventDispatcherTest extends TestCase
 {
-    private MockObject&EventDispatcherInterface $eventDispatcher;
+    private MockObject&EventDispatcherService $eventDispatcher;
 
     private AsyncService $asyncService;
 
@@ -36,7 +36,7 @@ class TaskEventDispatcherTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $this->eventDispatcher = $this->createMock(EventDispatcherService::class);
         $this->asyncService = new AsyncService;
         $this->taskEventDispatcher = new TaskEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
