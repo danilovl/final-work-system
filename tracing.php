@@ -1,7 +1,18 @@
 <?php declare(strict_types=1);
 
+use App\Application\OpenTelemetry\Messenger\Context\SymfonyMessengerPropagationGetterSetter;
+use App\Application\Service\EventDispatcherService;
+use Danilovl\AsyncBundle\Service\AsyncService;
+use Elastica\Client;
+use Elastica\Exception\ExceptionInterface;
+use Elasticsearch\Common\Exceptions\Missing404Exception;
+use Elasticsearch\Endpoints\AbstractEndpoint;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
+use OpenTelemetry\API\Metrics\{
+    GaugeInterface,
+    CounterInterface
+};
 use OpenTelemetry\SemConv\TraceAttributeValues;
 use OpenTelemetry\API\Trace\{
     Span,
@@ -31,8 +42,8 @@ use Symfony\Contracts\HttpClient\{
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Messenger\{
     Envelope,
-    MessageBusInterface
-};
+    MessageBusInterface,
+    Stamp\TransportMessageIdStamp};
 use Symfony\Component\Messenger\Transport\Sender\SenderInterface;
 use function OpenTelemetry\Instrumentation\hook;
 
@@ -137,9 +148,61 @@ if (extension_loaded('opentelemetry')) {
         {
             return $class !== 'ApiPlatform\Symfony\Bundle\Test\Client';
         }
+
+        public static function counter(string $name, ?string $unit = null): CounterInterface
+        {
+            return Globals::meterProvider()
+                ->getMeter(__CLASS__)
+                ->createCounter($name, $unit);
+        }
+
+        public static function gauge(string $name, ?string $unit = null): GaugeInterface
+        {
+            return Globals::meterProvider()
+                ->getMeter(__CLASS__)
+                ->createGauge($name, $unit);
+        }
     }
 
-////////////////////////////HttpKernel////////////////////////////
+    ////////////////////////////Apcu////////////////////////////
+
+    $apcuOperations = [
+        'apcu_add',
+        'apcu_cache_info',
+        'apcu_cas',
+        'apcu_clear_cache',
+        'apcu_dec',
+        'apcu_delete',
+        'apcu_enabled',
+        'apcu_entry',
+        'apcu_exists',
+        'apcu_fetch',
+        'apcu_inc',
+        'apcu_key_info',
+        'apcu_sma_info',
+        'apcu_store'
+    ];
+
+    foreach ($apcuOperations as $apcuOperation) {
+        $counters = new stdClass;
+
+        hook(
+            null,
+            $apcuOperation,
+            pre: static function () use ($apcuOperation, $counters): void {
+                $counter = $counters->{$apcuOperation} ?? null;
+
+                if ($counter instanceof CounterInterface === false) {
+                    $counter = Helper::counter($apcuOperation, 'calls');
+                    $counters->{$apcuOperation} = $counter;
+                }
+
+                $counter->add(1);
+            }
+        );
+    }
+
+    ////////////////////////////HttpKernel////////////////////////////
 
     hook(
         HttpKernel::class,
@@ -193,7 +256,6 @@ if (extension_loaded('opentelemetry')) {
                 return;
             }
 
-            $scope->detach();
             $span = Span::fromContext($scope->context());
             $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
@@ -242,6 +304,19 @@ if (extension_loaded('opentelemetry')) {
 
     hook(
         HttpKernel::class,
+        'terminate',
+        post: static function (): void {
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
+            }
+
+            $scope->detach();
+        }
+    );
+
+    hook(
+        HttpKernel::class,
         'handleThrowable',
         pre: static function (HttpKernel $kernel, array $params): array {
             /** @var Throwable $throwable */
@@ -256,7 +331,7 @@ if (extension_loaded('opentelemetry')) {
         }
     );
 
-////////////////////////////HttpClientInterface////////////////////////////
+    ////////////////////////////HttpClientInterface////////////////////////////
 
     hook(
         HttpClientInterface::class,
@@ -364,21 +439,35 @@ if (extension_loaded('opentelemetry')) {
         }
     );
 
-////////////////////////////cli console////////////////////////////
+    ////////////////////////////cli console////////////////////////////
 
     hook(
-        null,
-        'cli',
-        pre: static function (): void {
-            $instrumentation = new CachedInstrumentation(__FILE__);
+        Command::class,
+        'run',
+        pre: static function (Command $command, array $params, string $class, string $function): void {
+            $spanName = $command->getName();
+            if ($spanName === 'messenger:consume') {
+                return;
+            }
 
+            $instrumentation = new CachedInstrumentation(__FILE__);
             $parentContext = Globals::propagator()->extract(getenv(), ConsoleEnvPropagationGetterSetter::instance());
 
+            if ($spanName === null || $spanName === '') {
+                $spanName = $class . '::' . $function;
+            }
+            $spanName = sprintf('bin/console %s', $spanName);
+
             $span = $instrumentation->tracer()
-                ->spanBuilder('cli')
+                ->spanBuilder($spanName)
                 ->setSpanKind(SpanKind::KIND_SERVER)
                 ->setParent($parentContext)
-                ->setAttribute('type', 'cli')
+                ->setAttributes([
+                    TraceAttributes::CODE_FUNCTION => $function,
+                    TraceAttributes::CODE_NAMESPACE => $class,
+                    'type' => 'console-command',
+                    'console.command.class' => $command::class
+                ])
                 ->addLink(Span::fromContext($parentContext)->getContext())
                 ->startSpan();
 
@@ -387,9 +476,12 @@ if (extension_loaded('opentelemetry')) {
             Globals::propagator()->inject($ignoredVar, ConsoleEnvPropagationGetterSetter::instance(), $context);
             Context::storage()->attach($context);
         },
-        post: static function (?object $object, array $params, $void, ?Throwable $exception): void {
-            $scope = Context::storage()->scope();
+        post: static function (Command $command, array $params, $exitCode, ?Throwable $exception): void {
+            if ($command->getName() === 'messenger:consume') {
+                return;
+            }
 
+            $scope = Context::storage()->scope();
             if ($scope === null) {
                 return;
             }
@@ -398,7 +490,7 @@ if (extension_loaded('opentelemetry')) {
             $span = Span::fromContext($scope->context());
             $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
-            $status = $exception !== null ? StatusCode::STATUS_ERROR : StatusCode::STATUS_OK;
+            $status = $exitCode !== 0 || $exception !== null ? StatusCode::STATUS_ERROR : StatusCode::STATUS_OK;
 
             if ($exception !== null) {
                 $span->recordException($exception, [
@@ -406,42 +498,14 @@ if (extension_loaded('opentelemetry')) {
                 ]);
             }
 
-            $span->setStatus($status);
-        }
-    );
-
-    hook(
-        Command::class,
-        'run',
-        pre: static function (Command $command, array $params, string $class, string $function): void {
-            $spanName = $command->getName();
-
-            if ($spanName === null || $spanName === '') {
-                $spanName = $class . '::' . $function;
-            }
-
-            Span::getCurrent()
-                ->updateName($spanName)
-                ->setAttributes([
-                    TraceAttributes::CODE_FUNCTION => $function,
-                    TraceAttributes::CODE_NAMESPACE => $class,
-                    'type' => 'console-command',
-                    'console.command.class' => $command::class
-                ]);
-        },
-        post: static function (Command $command, array $params, $exitCode, ?Throwable $exception): void {
-            $span = Span::getCurrent();
-
             $exitCode = (int) $exitCode;
             $span->setAttribute('exit.code', $exitCode);
-
-            $status = $exitCode !== 0 || $exception !== null ? StatusCode::STATUS_ERROR : StatusCode::STATUS_OK;
-
             $span->setStatus($status);
+            $span->end();
         }
     );
 
-////////////////////////////MessageBusInterface////////////////////////////
+    ////////////////////////////MessageBusInterface////////////////////////////
 
     hook(
         MessageBusInterface::class,
@@ -460,16 +524,16 @@ if (extension_loaded('opentelemetry')) {
             $message = $params[0];
             $messageClass = get_class($message);
 
-            $builder = $instrumentation
-                ->tracer()
-                ->spanBuilder(sprintf('DISPATCH %s', $messageClass))
+            $builder = $instrumentation->tracer()
+                ->spanBuilder(sprintf('MESSENGER DISPATCH %s', $messageClass))
                 ->setSpanKind(SpanKind::KIND_PRODUCER)
                 ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
                 ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
                 ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
                 ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
                 ->setAttribute('symfony.messenger.bus', $class)
-                ->setAttribute('symfony.messenger.message', $messageClass);
+                ->setAttribute('symfony.messenger.message', $messageClass)
+                ->setAttribute('type', 'dispatch');
 
             $parent = Context::getCurrent();
             $span = $builder
@@ -520,17 +584,25 @@ if (extension_loaded('opentelemetry')) {
             /** @var Envelope $envelope */
             $envelope = $params[0];
             $messageClass = get_class($envelope->getMessage());
+            $transportMessageIdStamp = $envelope->last(TransportMessageIdStamp::class);
 
             $builder = $instrumentation
                 ->tracer()
-                ->spanBuilder(sprintf('SEND %s', $messageClass))
+                ->spanBuilder(sprintf('MESSENGER SEND %s', $messageClass))
                 ->setSpanKind(SpanKind::KIND_PRODUCER)
                 ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
                 ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
                 ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
                 ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
+                ->setAttribute(TraceAttributes::MESSAGING_SYSTEM, TraceAttributeValues::MESSAGING_SYSTEM_RABBITMQ)
+                ->setAttribute(TraceAttributes::MESSAGING_OPERATION_TYPE, TraceAttributeValues::MESSAGING_OPERATION_TYPE_PUBLISH)
                 ->setAttribute('symfony.messenger.transport', $class)
-                ->setAttribute('symfony.messenger.message', $messageClass);
+                ->setAttribute('symfony.messenger.message', $messageClass)
+                ->setAttribute('type', 'dispatch');
+
+            if ($transportMessageIdStamp instanceof TransportMessageIdStamp) {
+                $builder->setAttribute(TraceAttributes::MESSAGING_MESSAGE_ID, $transportMessageIdStamp->getId());
+            }
 
             $parent = Context::getCurrent();
 
@@ -540,6 +612,7 @@ if (extension_loaded('opentelemetry')) {
 
             $context = $span->storeInContext($parent);
 
+            Globals::propagator()->inject($envelope, SymfonyMessengerPropagationGetterSetter::instance(), $context);
             Context::storage()->attach($context);
 
             return $params;
@@ -567,14 +640,14 @@ if (extension_loaded('opentelemetry')) {
         }
     );
 
-////////////////////////////PDO////////////////////////////
+    ////////////////////////////PDO////////////////////////////
 
     class PDOInstrumentation
     {
         public static function register(): void
         {
             $instrumentation = new CachedInstrumentation(__CLASS__);
-            $databaseParams = new stdClass();
+            $databaseParams = new stdClass;
 
             self::hookPDO($instrumentation, $databaseParams);
             self::hookPDOStatement($instrumentation, $databaseParams);
@@ -675,8 +748,10 @@ if (extension_loaded('opentelemetry')) {
                 $sql = 'Empty sql';
             }
 
+            $spanName = self::simplifySql($sql);
+
             $spanBuilder = $instrumentation->tracer()
-                ->spanBuilder($sql)
+                ->spanBuilder($spanName)
                 ->setSpanKind(SpanKind::KIND_INTERNAL)
                 ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
                 ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
@@ -716,11 +791,26 @@ if (extension_loaded('opentelemetry')) {
                 $span->end();
             };
         }
+
+        private static function simplifySql(string $sql): string
+        {
+            $sql = preg_replace('~\s+~', ' ', trim($sql));
+
+            if (preg_match('~^(SELECT).*?FROM\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
+                return strtolower($matches[1]) . ' FROM ' . $matches[2];
+            } elseif (preg_match('~^(UPDATE)\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
+                return strtolower($matches[1]) . ' ' . $matches[2];
+            } elseif (preg_match('~^(INSERT INTO)\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
+                return 'INSERT ' . strtolower($matches[2]);
+            }
+
+            return $sql;
+        }
     }
 
     PDOInstrumentation::register();
 
-////////////////////////////Elasticsearch////////////////////////////
+    ////////////////////////////Elasticsearch////////////////////////////
 
     class ElasticsearchInstrumentation
     {
@@ -732,15 +822,14 @@ if (extension_loaded('opentelemetry')) {
 
         private static function hookElasticsearchClient(): void
         {
-            $instrumentation = new CachedInstrumentation(__CLASS__);
-
             hook(
                 \Elasticsearch\Client::class,
                 'performRequest',
-                pre: static function (\Elasticsearch\Client $client, array $params, string $class, string $function) use ($instrumentation): void {
+                pre: static function (\Elasticsearch\Client $client, array $params, string $class, string $function): void {
+                    $instrumentation = new CachedInstrumentation(__CLASS__);
                     [$endpoint] = $params;
 
-                    assert($endpoint instanceof \Elasticsearch\Endpoints\AbstractEndpoint);
+                    assert($endpoint instanceof AbstractEndpoint);
 
                     $endpointReflection = new ReflectionClass($endpoint::class);
                     $endpointOperation = strtolower($endpointReflection->getShortName());
@@ -767,7 +856,8 @@ if (extension_loaded('opentelemetry')) {
                                 TraceAttributes::DB_QUERY_TEXT,
                                 json_encode($body, JSON_THROW_ON_ERROR)
                             );
-                        } catch (Throwable) {}
+                        } catch (Throwable) {
+                        }
                     } elseif (is_string($body)) {
                         $spanBuilder->setAttribute(TraceAttributes::DB_QUERY_TEXT, $body);
                     }
@@ -778,7 +868,7 @@ if (extension_loaded('opentelemetry')) {
                     Context::storage()->attach($context);
                 },
                 post: static function (\Elasticsearch\Client $client, array $params, $result, ?Throwable $exception): void {
-                    if ($exception instanceof \Elasticsearch\Common\Exceptions\Missing404Exception) {
+                    if ($exception instanceof Missing404Exception) {
                         $exception = null;
                     }
 
@@ -806,13 +896,12 @@ if (extension_loaded('opentelemetry')) {
 
         private static function hookElasticaClient(): void
         {
-            $instrumentation = new CachedInstrumentation(__CLASS__);
-
             hook(
                 \FOS\ElasticaBundle\Elastica\Client::class,
                 'request',
-                pre: static function (\Elastica\Client $client, array $params, string $class, string $function) use ($instrumentation): void {
+                pre: static function (Client $client, array $params, string $class, string $function): void {
                     [$path, $method, $data] = $params;
+                    $instrumentation = new CachedInstrumentation(__CLASS__);
 
                     $spanBuilder = $instrumentation
                         ->tracer()
@@ -830,7 +919,8 @@ if (extension_loaded('opentelemetry')) {
                                 TraceAttributes::DB_QUERY_TEXT,
                                 json_encode($data, JSON_THROW_ON_ERROR)
                             );
-                        } catch (Throwable) {}
+                        } catch (Throwable) {
+                        }
                     } elseif (is_string($data)) {
                         $spanBuilder->setAttribute(TraceAttributes::DB_QUERY_TEXT, $data);
                     }
@@ -840,8 +930,8 @@ if (extension_loaded('opentelemetry')) {
 
                     Context::storage()->attach($context);
                 },
-                post: static function (\Elastica\Client $client, array $params, $result, ?Throwable $exception): void {
-                    if (!$exception instanceof \Elastica\Exception\ExceptionInterface) {
+                post: static function (Client $client, array $params, $result, ?Throwable $exception): void {
+                    if (!$exception instanceof ExceptionInterface) {
                         $exception = null;
                     }
 
@@ -867,10 +957,7 @@ if (extension_loaded('opentelemetry')) {
             );
         }
 
-        /**
-         * @return non-empty-string
-         */
-        private static function makeSpanName(\Elasticsearch\Endpoints\AbstractEndpoint $endpoint): string
+        private static function makeSpanName(AbstractEndpoint $endpoint): string
         {
             if ($endpoint->getMethod() === '') {
                 return 'Search elasticsearch';
@@ -884,4 +971,85 @@ if (extension_loaded('opentelemetry')) {
     }
 
     ElasticsearchInstrumentation::register();
+
+    ////////////////////////////EventDispatcherInterface////////////////////////////
+
+    hook(
+        EventDispatcherService::class,
+        'dispatch',
+        pre: static function (EventDispatcherService $dispatcher, array $params, string $class, string $function): void {
+            [$event] = $params;
+            if ($event === null) {
+                return;
+            }
+
+            $parent = Context::getCurrent();
+
+            $instrumentation = new CachedInstrumentation(__CLASS__);
+            $builder = $instrumentation->tracer()
+                ->spanBuilder(sprintf('EVENT DISPATCH %s', $event::class))
+                ->setSpanKind(SpanKind::KIND_INTERNAL)
+                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
+                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
+                ->setAttribute('type', 'event');
+
+            $span = $builder->startSpan();
+            $context = $span->storeInContext($parent);
+            Context::storage()->attach($context);
+        },
+        post: static function (EventDispatcherService $dispatcher, array $params, $return, ?Throwable $exception): void {
+            [$event] = $params;
+            if ($event === null) {
+                return;
+            }
+
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
+            }
+
+            $scope->detach();
+            $span = Span::fromContext($scope->context());
+
+            if ($exception !== null) {
+                $span->recordException($exception, [
+                    TraceAttributes::EXCEPTION_ESCAPED => true
+                ]);
+                $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
+            } else {
+                $span->setStatus(StatusCode::STATUS_OK);
+            }
+
+            $span->end();
+        }
+    );
+
+    ////////////////////////////AsyncService////////////////////////////
+
+    hook(
+        AsyncService::class,
+        'call',
+        pre: static function (): void {
+            $parent = Context::getCurrent();
+
+            $instrumentation = new CachedInstrumentation(__CLASS__);
+            $builder = $instrumentation->tracer()
+                ->spanBuilder('AsyncService')
+                ->setSpanKind(SpanKind::KIND_INTERNAL);
+
+            $span = $builder->startSpan();
+            $context = $span->storeInContext($parent);
+            Context::storage()->attach($context);
+        },
+        post: static function (): void {
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
+            }
+
+            $scope->detach();
+            $span = Span::fromContext($scope->context());
+            $span->end();
+        }
+    );
 }
