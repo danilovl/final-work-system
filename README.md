@@ -86,6 +86,13 @@ Test coverage
 
 ![Alt text](/git/readme/test_coverage_application.png?raw=true "Test coverage application")
 
+Kibana
+------------
+
+This project utilizes the `OpenTelemetry API SDK`, manually configured specifically for this project using hooks.
+
+![Alt text](/git/readme/kibana.png?raw=true "Kibana")
+
 Configuration environment
 ------------
 
