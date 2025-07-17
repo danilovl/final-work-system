@@ -17,19 +17,18 @@ use Doctrine\Common\Cache\{
     CacheProvider
 };
 use Override;
-use Redis;
+use Predis\ClientInterface;
 
 class RedisCache extends CacheProvider
 {
-    private Redis $redis;
+    private ClientInterface $redis;
 
-    public function setRedis(Redis $redis): void
+    public function setRedis(ClientInterface $redis): void
     {
-        $redis->setOption(Redis::OPT_SERIALIZER, $this->getSerializerValue());
         $this->redis = $redis;
     }
 
-    public function getRedis(): Redis
+    public function getRedis(): ClientInterface
     {
         return $this->redis;
     }
@@ -37,28 +36,25 @@ class RedisCache extends CacheProvider
     #[Override]
     protected function doFetch($id): mixed
     {
-        return $this->redis->get($id);
+        $value = $this->redis->get($id);
+
+        return $value !== null ? unserialize($value) : false;
     }
 
     #[Override]
     protected function doFetchMultiple(array $keys): array
     {
-        $fetchedItems = array_combine($keys, $this->redis->mget($keys));
+        $values = $this->redis->mget($keys);
+        $result = [];
 
-        $keysToFilter = array_keys(array_filter($fetchedItems, static fn ($item): bool => $item === false));
-
-        if ($keysToFilter) {
-            $multi = $this->redis->multi(Redis::PIPELINE);
-            foreach ($keysToFilter as $key) {
-                $multi->exists($key);
+        foreach ($keys as $index => $key) {
+            $value = $values[$index] ?? null;
+            if ($value !== null) {
+                $result[$key] = unserialize($value);
             }
-
-            $existItems = array_filter($multi->exec());
-            $missedItemKeys = array_diff_key($keysToFilter, $existItems);
-            $fetchedItems = array_diff_key($fetchedItems, array_fill_keys($missedItemKeys, true));
         }
 
-        return $fetchedItems;
+        return $result;
     }
 
     /**
@@ -67,41 +63,39 @@ class RedisCache extends CacheProvider
     #[Override]
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0): bool
     {
-        if ($lifetime) {
-            $multi = $this->redis->multi(Redis::PIPELINE);
-            foreach ($keysAndValues as $key => $value) {
-                $multi->setex($key, $lifetime, $value);
+        $pipeline = $this->redis->pipeline();
+
+        foreach ($keysAndValues as $key => $value) {
+            $serializedValue = serialize($value);
+            if ($lifetime > 0) {
+                $pipeline->setex($key, $lifetime, $serializedValue);
+            } else {
+                $pipeline->set($key, $serializedValue);
             }
-
-            $succeeded = array_filter($multi->exec());
-
-            return count($succeeded) === count($keysAndValues);
         }
 
-        return $this->redis->mset($keysAndValues);
+        $responses = $pipeline->execute();
+
+        return count(array_filter($responses)) === count($keysAndValues);
+
     }
 
     #[Override]
     protected function doContains($id): bool
     {
-        /** @var int|bool $exists */
-        $exists = $this->redis->exists($id);
-
-        if (is_int($exists)) {
-            return $exists > 0;
-        }
-
-        return $exists;
+        return $this->redis->exists($id) > 0;
     }
 
     #[Override]
     protected function doSave($id, $data, $lifeTime = 0): bool
     {
+        $serializedData = serialize($data);
+
         if ($lifeTime > 0) {
-            return $this->redis->setex($id, $lifeTime, $data);
+            return $this->redis->setex($id, $lifeTime, $serializedData) === true;
         }
 
-        return $this->redis->set($id, $data);
+        return $this->redis->set($id, $serializedData) === true;
     }
 
     #[Override]
@@ -134,14 +128,5 @@ class RedisCache extends CacheProvider
             Cache::STATS_MEMORY_USAGE => $info['used_memory'],
             Cache::STATS_MEMORY_AVAILABLE => false
         ];
-    }
-
-    protected function getSerializerValue(): int
-    {
-        if (defined('Redis::SERIALIZER_IGBINARY') && extension_loaded('igbinary')) {
-            return Redis::SERIALIZER_IGBINARY;
-        }
-
-        return Redis::SERIALIZER_PHP;
     }
 }

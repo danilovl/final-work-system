@@ -3,28 +3,24 @@ services:
     public: true
 
   redis_session:
-    class: Redis
+    class: Predis\Client
     public: false
-    calls:
-      - method: connect
-        arguments:
-          - '%env(REDIS_HOSTNAME)%'
-          - '%env(REDIS_PORT)%'
-      - method: select
-        arguments:
-          - 12
+    arguments:
+      $parameters:
+        host: '%env(REDIS_HOSTNAME)%'
+        port: '%env(REDIS_PORT)%'
+        database: 12
+      $options: []
 
   redis:
-    class: Redis
+    class: Predis\Client
     public: false
-    calls:
-      - method: connect
-        arguments:
-          - '%env(REDIS_HOSTNAME)%'
-          - '%env(REDIS_PORT)%'
-      - method: select
-        arguments:
-          - 13
+    arguments:
+      $parameters:
+        host: '%env(REDIS_HOSTNAME)%'
+        port: '%env(REDIS_PORT)%'
+        database: 13
+      $options: []
 
   doctrine_cache.providers.redis_provider:
     class: App\Application\Redis\Provider\RedisCache
