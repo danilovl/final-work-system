@@ -39,9 +39,11 @@ class TraceableTwigExtension extends AbstractExtension
     {
         $scope = Context::storage()->scope();
 
+        $spanName = sprintf('TWIG %s', $this->getSpanName($profile));
+
         $spanBuilder = Globals::tracerProvider()
             ->getTracer(__CLASS__)
-            ->spanBuilder($this->getSpanName($profile))
+            ->spanBuilder($spanName)
             ->setSpanKind(SpanKind::KIND_INTERNAL)
             ->setParent($scope?->context());
 
