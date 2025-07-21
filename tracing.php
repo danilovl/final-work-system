@@ -20,10 +20,7 @@ use GuzzleHttp\{
 };
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
-use OpenTelemetry\API\Metrics\{
-    GaugeInterface,
-    CounterInterface
-};
+use OpenTelemetry\API\Metrics\GaugeInterface;
 use OpenTelemetry\SemConv\TraceAttributeValues;
 use Predis\Command\CommandInterface;
 use Predis\Command\Redis\AUTH;
@@ -169,57 +166,12 @@ if (extension_loaded('opentelemetry')) {
             return $class !== 'ApiPlatform\Symfony\Bundle\Test\Client';
         }
 
-        public static function counter(string $name, ?string $unit = null): CounterInterface
-        {
-            return Globals::meterProvider()
-                ->getMeter(__CLASS__)
-                ->createCounter($name, $unit);
-        }
-
         public static function gauge(string $name, ?string $unit = null): GaugeInterface
         {
             return Globals::meterProvider()
                 ->getMeter(__CLASS__)
                 ->createGauge($name, $unit);
         }
-    }
-
-    ////////////////////////////Apcu////////////////////////////
-
-    $apcuOperations = [
-        'apcu_add',
-        'apcu_cache_info',
-        'apcu_cas',
-        'apcu_clear_cache',
-        'apcu_dec',
-        'apcu_delete',
-        'apcu_enabled',
-        'apcu_entry',
-        'apcu_exists',
-        'apcu_fetch',
-        'apcu_inc',
-        'apcu_key_info',
-        'apcu_sma_info',
-        'apcu_store'
-    ];
-
-    foreach ($apcuOperations as $apcuOperation) {
-        $counters = new stdClass;
-
-        hook(
-            null,
-            $apcuOperation,
-            pre: static function () use ($apcuOperation, $counters): void {
-                $counter = $counters->{$apcuOperation} ?? null;
-
-                if ($counter instanceof CounterInterface === false) {
-                    $counter = Helper::counter($apcuOperation, 'calls');
-                    $counters->{$apcuOperation} = $counter;
-                }
-
-                $counter->add(1);
-            }
-        );
     }
 
     ////////////////////////////HttpKernel////////////////////////////
