@@ -38,16 +38,10 @@ use OpenTelemetry\API\Trace\{
 };
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\Context\Propagation\{
-    ArrayAccessGetterSetter,
     PropagationGetterInterface,
     PropagationSetterInterface
 };
 use OpenTelemetry\SemConv\TraceAttributes;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\{
-    HttpClientInterface,
-    ResponseInterface
-};
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Messenger\{
     Envelope,
@@ -58,30 +52,6 @@ use Symfony\Component\Messenger\Transport\Sender\SenderInterface;
 use function OpenTelemetry\Instrumentation\hook;
 
 if (extension_loaded('opentelemetry')) {
-    final class ResponsePropagationSetter implements PropagationSetterInterface
-    {
-        public static function instance(): self
-        {
-            static $instance;
-
-            return $instance ??= new self();
-        }
-
-        public function keys($carrier): array
-        {
-            assert($carrier instanceof Response);
-
-            return $carrier->headers->keys();
-        }
-
-        public function set(&$carrier, string $key, string $value): void
-        {
-            assert($carrier instanceof Response);
-
-            $carrier->headers->set($key, $value);
-        }
-    }
-
     class ConsoleEnvPropagationGetterSetter implements PropagationGetterInterface, PropagationSetterInterface
     {
         private static ?self $instance = null;
@@ -142,114 +112,6 @@ if (extension_loaded('opentelemetry')) {
                 ->createGauge($name, $unit);
         }
     }
-
-    ////////////////////////////HttpClientInterface////////////////////////////
-
-    hook(
-        HttpClientInterface::class,
-        'request',
-        pre: static function (
-            HttpClientInterface $client,
-            array $params,
-            string $class,
-            string $function,
-            ?string $filename,
-            ?int $lineno,
-        ): array {
-            $instrumentation = new CachedInstrumentation(__FILE__);
-
-            $builder = $instrumentation
-                ->tracer()
-                ->spanBuilder(sprintf('%s', $params[0]))
-                ->setSpanKind(SpanKind::KIND_CLIENT)
-                ->setAttribute(TraceAttributes::PEER_SERVICE, parse_url((string) $params[1])['host'] ?? null)
-                ->setAttribute(TraceAttributes::URL_FULL, (string) $params[1])
-                ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $params[0])
-                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
-                ->setAttribute('type', 'request');
-
-            $propagator = Globals::propagator();
-            $parent = Context::getCurrent();
-
-            $span = $builder
-                ->setParent($parent)
-                ->startSpan();
-
-            $requestOptions = $params[2] ?? [];
-
-            if (!isset($requestOptions['headers'])) {
-                $requestOptions['headers'] = [];
-            }
-
-            if (Helper::supportsProgress($class) === false) {
-                $context = $span->storeInContext($parent);
-                $propagator->inject($requestOptions['headers'], ArrayAccessGetterSetter::getInstance(), $context);
-
-                Context::storage()->attach($context);
-
-                return $params;
-            }
-
-            $previousOnProgress = $requestOptions['on_progress'] ?? null;
-
-            $requestOptions['on_progress'] = static function (int $dlNow, int $dlSize, array $info) use ($previousOnProgress, $span): void {
-                if ($previousOnProgress !== null) {
-                    $previousOnProgress($dlNow, $dlSize, $info);
-                }
-
-                $statusCode = $info['http_code'];
-
-                if ($statusCode !== 0 && $statusCode !== null && $span->isRecording()) {
-                    $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $statusCode);
-
-                    if ($statusCode >= 400 && $statusCode < 600) {
-                        $span->setStatus(StatusCode::STATUS_ERROR);
-                    }
-
-                    $span->end();
-                }
-            };
-
-            $context = $span->storeInContext($parent);
-            $propagator->inject($requestOptions['headers'], ArrayAccessGetterSetter::getInstance(), $context);
-
-            Context::storage()->attach($context);
-            $params[2] = $requestOptions;
-
-            return $params;
-        },
-        post: static function (HttpClientInterface $client, array $params, ?ResponseInterface $response, ?Throwable $exception): void {
-            $scope = Context::storage()->scope();
-            if ($scope === null) {
-                return;
-            }
-
-            $scope->detach();
-            $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
-
-            if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
-                $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
-                $span->end();
-
-                return;
-            }
-
-            if ($response !== null && Helper::supportsProgress(get_class($client)) === false) {
-                $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
-
-                if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 600) {
-                    $span->setStatus(StatusCode::STATUS_ERROR);
-                }
-            }
-        }
-    );
 
     ////////////////////////////cli console////////////////////////////
 
