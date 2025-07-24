@@ -42,7 +42,6 @@ use OpenTelemetry\Context\Propagation\{
     PropagationSetterInterface
 };
 use OpenTelemetry\SemConv\TraceAttributes;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Messenger\{
     Envelope,
     MessageBusInterface
@@ -52,59 +51,8 @@ use Symfony\Component\Messenger\Transport\Sender\SenderInterface;
 use function OpenTelemetry\Instrumentation\hook;
 
 if (extension_loaded('opentelemetry')) {
-    class ConsoleEnvPropagationGetterSetter implements PropagationGetterInterface, PropagationSetterInterface
-    {
-        private static ?self $instance = null;
-
-        public static function instance(): self
-        {
-            if (self::$instance === null) {
-                self::$instance = new self();
-            }
-
-            return self::$instance;
-        }
-
-        /**
-         * @param mixed $carrier
-         */
-        public function keys($carrier): array
-        {
-            if (is_array($carrier) === false) {
-                return [];
-            }
-
-            return $carrier;
-        }
-
-        /**
-         * @param mixed $carrier
-         */
-        public function get($carrier, string $key): ?string
-        {
-            if (is_array($carrier) === false) {
-                return null;
-            }
-
-            return $carrier[$key] ?? null;
-        }
-
-        /**
-         * @param mixed $carrier
-         */
-        public function set(&$carrier, string $key, string $value): void
-        {
-            putenv(sprintf('%s=%s', $key, $value));
-        }
-    }
-
     final class Helper
     {
-        public static function supportsProgress(string $class): bool
-        {
-            return $class !== 'ApiPlatform\Symfony\Bundle\Test\Client';
-        }
-
         public static function gauge(string $name, ?string $unit = null): GaugeInterface
         {
             return Globals::meterProvider()
@@ -112,72 +60,6 @@ if (extension_loaded('opentelemetry')) {
                 ->createGauge($name, $unit);
         }
     }
-
-    ////////////////////////////cli console////////////////////////////
-
-    hook(
-        Command::class,
-        'run',
-        pre: static function (Command $command, array $params, string $class, string $function): void {
-            $spanName = $command->getName();
-            if ($spanName === 'messenger:consume') {
-                return;
-            }
-
-            $instrumentation = new CachedInstrumentation(__FILE__);
-            $parentContext = Globals::propagator()->extract(getenv(), ConsoleEnvPropagationGetterSetter::instance());
-
-            if ($spanName === null || $spanName === '') {
-                $spanName = $class . '::' . $function;
-            }
-            $spanName = sprintf('bin/console %s', $spanName);
-
-            $span = $instrumentation->tracer()
-                ->spanBuilder($spanName)
-                ->setSpanKind(SpanKind::KIND_SERVER)
-                ->setParent($parentContext)
-                ->setAttributes([
-                    TraceAttributes::CODE_FUNCTION => $function,
-                    TraceAttributes::CODE_NAMESPACE => $class,
-                    'type' => 'console-command',
-                    'console.command.class' => $command::class
-                ])
-                ->addLink(Span::fromContext($parentContext)->getContext())
-                ->startSpan();
-
-            $context = $span->storeInContext(Context::getCurrent());
-
-            Globals::propagator()->inject($ignoredVar, ConsoleEnvPropagationGetterSetter::instance(), $context);
-            Context::storage()->attach($context);
-        },
-        post: static function (Command $command, array $params, $exitCode, ?Throwable $exception): void {
-            if ($command->getName() === 'messenger:consume') {
-                return;
-            }
-
-            $scope = Context::storage()->scope();
-            if ($scope === null) {
-                return;
-            }
-
-            $scope->detach();
-            $span = Span::fromContext($scope->context());
-            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
-
-            $status = $exitCode !== 0 || $exception !== null ? StatusCode::STATUS_ERROR : StatusCode::STATUS_OK;
-
-            if ($exception !== null) {
-                $span->recordException($exception, [
-                    TraceAttributes::EXCEPTION_ESCAPED => true
-                ]);
-            }
-
-            $exitCode = (int) $exitCode;
-            $span->setAttribute('exit.code', $exitCode);
-            $span->setStatus($status);
-            $span->end();
-        }
-    );
 
     ////////////////////////////MessageBusInterface////////////////////////////
 
