@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 
-use Danilovl\AsyncBundle\Service\AsyncService;
 use GuzzleHttp\Exception\{
     ClientException,
     BadResponseException
@@ -48,35 +47,6 @@ if (extension_loaded('opentelemetry')) {
                 ->createGauge($name, $unit);
         }
     }
-
-    ////////////////////////////AsyncService////////////////////////////
-
-    hook(
-        AsyncService::class,
-        'call',
-        pre: static function (): void {
-            $parent = Context::getCurrent();
-
-            $instrumentation = new CachedInstrumentation(__CLASS__);
-            $builder = $instrumentation->tracer()
-                ->spanBuilder('AsyncService')
-                ->setSpanKind(SpanKind::KIND_INTERNAL);
-
-            $span = $builder->startSpan();
-            $context = $span->storeInContext($parent);
-            Context::storage()->attach($context);
-        },
-        post: static function (): void {
-            $scope = Context::storage()->scope();
-            if ($scope === null) {
-                return;
-            }
-
-            $scope->detach();
-            $span = Span::fromContext($scope->context());
-            $span->end();
-        }
-    );
 
     ////////////////////////////Redis////////////////////////////
 
