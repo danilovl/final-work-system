@@ -18,7 +18,10 @@ use Elasticsearch\Common\Exceptions\Missing404Exception;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use FOS\ElasticaBundle\Elastica\Client as FOSElastica;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
-use OpenTelemetry\SemConv\TraceAttributeValues;
+use OpenTelemetry\SemConv\{
+    TraceAttributes,
+    TraceAttributeValues
+};
 use ReflectionClass;
 use OpenTelemetry\API\Trace\{
     Span,
@@ -26,7 +29,6 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
@@ -50,7 +52,7 @@ class ElasticaRegistration
                 assert($endpoint instanceof AbstractEndpoint);
 
                 $endpointReflection = new ReflectionClass($endpoint::class);
-                $endpointOperation = strtolower($endpointReflection->getShortName());
+                $endpointOperation = mb_strtolower($endpointReflection->getShortName());
                 $endpointDocId = $endpointReflection->getProperty('id')->getValue($endpoint);
 
                 $spanName = self::makeSpanName($endpoint);

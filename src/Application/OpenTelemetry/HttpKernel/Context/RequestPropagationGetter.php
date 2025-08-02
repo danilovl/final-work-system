@@ -21,7 +21,7 @@ class RequestPropagationGetter implements PropagationGetterInterface
     {
         static $instance;
 
-        return $instance ??= new self();
+        return $instance ??= new self;
     }
 
     public function keys($carrier): array

@@ -24,8 +24,10 @@ use OpenTelemetry\API\Trace\{
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Contracts\HttpClient\{
+    ResponseInterface,
+    HttpClientInterface
+};
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 

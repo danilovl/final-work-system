@@ -12,6 +12,7 @@
 
 namespace App\Application\DependencyInjection\Compiler;
 
+use App\Application\DependencyInjection\Boot\OpenTelemetryBoot;
 use App\Application\OpenTelemetry\OpenTelemetryManager;
 use Override;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -22,12 +23,19 @@ class OpenTelemetryCompilerPass implements CompilerPassInterface
     #[Override]
     public function process(ContainerBuilder $container): void
     {
-        $manager = $container->getDefinition(OpenTelemetryManager::class);
+        if (!extension_loaded('opentelemetry')) {
+            return;
+        }
+
+        /** @var OpenTelemetryManager $manager */
+        $manager = $container->get(OpenTelemetryManager::class);
         $taggedServices = $container->findTaggedServiceIds('app.open_telemetry.registration');
         $taggedServices = array_keys($taggedServices);
 
         foreach ($taggedServices as $serviceId) {
-            $manager->addMethodCall('addRegistration', [$serviceId]);
+            $manager->addRegistration($serviceId);
         }
-    }
+
+        (new OpenTelemetryBoot)->process($container);
+     }
 }

@@ -16,14 +16,13 @@ use App\Application\OpenTelemetry\Messenger\Context\SymfonyMessengerPropagationG
 use App\Application\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
-use OpenTelemetry\SemConv\TraceAttributeValues;
+use OpenTelemetry\SemConv\{TraceAttributeValues, TraceAttributes};
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\Messenger\{
     Envelope,
     MessageBusInterface

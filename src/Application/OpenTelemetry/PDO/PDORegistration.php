@@ -15,7 +15,10 @@ namespace App\Application\OpenTelemetry\PDO;
 use App\Application\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use Closure;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
-use OpenTelemetry\SemConv\TraceAttributeValues;
+use OpenTelemetry\SemConv\{
+    TraceAttributes,
+    TraceAttributeValues
+};
 use PDO;
 use PDOStatement;
 use OpenTelemetry\API\Trace\{
@@ -24,7 +27,6 @@ use OpenTelemetry\API\Trace\{
     StatusCode
 };
 use OpenTelemetry\Context\Context;
-use OpenTelemetry\SemConv\TraceAttributes;
 use stdClass;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
@@ -187,11 +189,11 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         $sql = preg_replace('~\s+~', ' ', trim($sql));
 
         if (preg_match('~^(SELECT).*?FROM\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
-            return strtolower($matches[1]) . ' FROM ' . $matches[2];
+            return mb_strtolower($matches[1]) . ' FROM ' . $matches[2];
         } elseif (preg_match('~^(UPDATE)\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
-            return strtolower($matches[1]) . ' ' . $matches[2];
+            return mb_strtolower($matches[1]) . ' ' . $matches[2];
         } elseif (preg_match('~^(INSERT INTO)\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
-            return 'INSERT ' . strtolower($matches[2]);
+            return 'INSERT ' . mb_strtolower($matches[2]);
         }
 
         return $sql;

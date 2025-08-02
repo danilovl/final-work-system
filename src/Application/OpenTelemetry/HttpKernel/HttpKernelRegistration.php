@@ -130,7 +130,7 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                 $contentLength = $response->headers->get('Content-Length');
 
                 if ($contentLength === null && is_string($response->getContent())) {
-                    $contentLength = strlen($response->getContent());
+                    $contentLength = mb_strlen($response->getContent());
                 }
 
                 $span->setAttribute(TraceAttributes::HTTP_RESPONSE_BODY_SIZE, $contentLength);

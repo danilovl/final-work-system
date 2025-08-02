@@ -32,7 +32,7 @@ class CacheItemPoolRegistration implements OpenTelemetryRegistrationInterface
         hook(
             CacheItemPoolInterface::class,
             'getItem',
-            pre: static function (CacheItemPoolInterface $object, array $params, string $class, string $function, ?string $filename, ?int $lineno) {
+            pre: static function (CacheItemPoolInterface $object, array $params, string $class, string $function, ?string $filename, ?int $lineno): void {
                 $key = $params[0] ?? null;
                 if ($key === null) {
                     return;

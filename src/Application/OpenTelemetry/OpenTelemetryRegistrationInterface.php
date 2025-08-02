@@ -12,8 +12,6 @@
 
 namespace App\Application\OpenTelemetry;
 
-use App\Application\Exception\InvalidArgumentException;
-
 interface OpenTelemetryRegistrationInterface
 {
     public function registration(): void;

@@ -12,8 +12,8 @@
 
 namespace App;
 
-use App\Application\DependencyInjection\Boot\OpenTelemetryBoot;
-use Psr\Container\ContainerInterface;
+use App\Application\OpenTelemetry\Elastica\ElasticaRegistration;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use App\Application\DependencyInjection\Compiler\{
     WidgetCompilerPass,
     OpenTelemetryCompilerPass,
@@ -30,14 +30,18 @@ class AppBundle extends Bundle
 
         $container->addCompilerPass(new ServicePublicCompilerPass);
         $container->addCompilerPass(new WidgetCompilerPass);
-        $container->addCompilerPass(new OpenTelemetryCompilerPass);
+        $container->addCompilerPass(new OpenTelemetryCompilerPass, PassConfig::TYPE_OPTIMIZE);
+
+        $this->openTelemetryRegistration();
     }
 
-    public function boot(): void
+    // Some initialization problem in OpenTelemetryCompilerPass by PassConfig::TYPE_OPTIMIZE
+    private function openTelemetryRegistration(): void
     {
-        /** @var ContainerInterface $container */
-        $container = $this->container;
+        if (!extension_loaded('opentelemetry')) {
+            return;
+        }
 
-        (new OpenTelemetryBoot)->process($container);
+        ElasticaRegistration::registration();
     }
 }
