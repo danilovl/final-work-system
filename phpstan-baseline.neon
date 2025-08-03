@@ -19,9 +19,27 @@ parameters:
 			path: src/Application/Helper/AttributeHelper.php
 
 		-
-			message: '#^Comparison operation "\>\=" between \(int\|Redis\|false\) and 0 results in an error\.$#'
-			identifier: greaterOrEqual.invalid
-			count: 2
+			message: '#^Call to an undefined method Predis\\ClientInterface\:\:flushDB\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: '#^Call to an undefined method Predis\\ClientInterface\:\:pipeline\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Predis\\Response\\Status and true will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Application/Redis/Provider/RedisCache.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Predis\\Response\\Status\|null and true will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
 			path: src/Application/Redis/Provider/RedisCache.php
 
 		-
