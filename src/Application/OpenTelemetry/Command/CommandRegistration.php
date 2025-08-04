@@ -28,10 +28,10 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class CommandRegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         hook(
             Command::class,

@@ -33,10 +33,10 @@ use Symfony\Component\Messenger\Transport\Sender\SenderInterface;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class MessageBusRegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         hook(
             MessageBusInterface::class,

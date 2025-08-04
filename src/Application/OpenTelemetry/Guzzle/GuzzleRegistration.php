@@ -43,18 +43,18 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class GuzzleRegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         $instrumentation = new CachedInstrumentation(__CLASS__);
 
-        $this->hookTransfer($instrumentation);
-        $this->hookRetryMiddleware($instrumentation);
+        self::hookTransfer($instrumentation);
+        self::hookRetryMiddleware($instrumentation);
     }
 
-    private function hookTransfer(CachedInstrumentation $instrumentation): void
+    private static function hookTransfer(CachedInstrumentation $instrumentation): void
     {
         hook(
             ClientInterface::class,
@@ -68,7 +68,7 @@ class GuzzleRegistration implements OpenTelemetryRegistrationInterface
         );
     }
 
-    private function hookRetryMiddleware(CachedInstrumentation $instrumentation): void
+    private static function hookRetryMiddleware(CachedInstrumentation $instrumentation): void
     {
         hook(
             RetryMiddleware::class,

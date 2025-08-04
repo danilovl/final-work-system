@@ -31,10 +31,10 @@ use Symfony\Contracts\HttpClient\{
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 90])]
 class HttpClientRegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         hook(
             HttpClientInterface::class,

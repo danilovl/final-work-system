@@ -32,19 +32,19 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 80])]
 class PDORegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         $instrumentation = new CachedInstrumentation(__CLASS__);
         $databaseParams = new stdClass;
 
-        $this->hookPDO($instrumentation, $databaseParams);
-        $this->hookPDOStatement($instrumentation, $databaseParams);
+        self::hookPDO($instrumentation, $databaseParams);
+        self::hookPDOStatement($instrumentation, $databaseParams);
     }
 
-    private function hookPDO(CachedInstrumentation $instrumentation, stdClass $databaseParams): void
+    private static function hookPDO(CachedInstrumentation $instrumentation, stdClass $databaseParams): void
     {
         hook(
             PDO::class,
@@ -71,9 +71,9 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
                 $sql = $params[0];
                 assert(is_string($sql));
 
-                $this->startSpan($instrumentation, $sql, $class, $function, $databaseParams);
+                self::startSpan($instrumentation, $sql, $class, $function, $databaseParams);
             },
-            post: $this->post()
+            post: self::post()
         );
 
         hook(
@@ -83,52 +83,52 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
                 /* @var string $params */
                 $sql = $params[0];
 
-                $this->startSpan($instrumentation, $sql, $class, $function, $databaseParams);
+                self::startSpan($instrumentation, $sql, $class, $function, $databaseParams);
             },
-            post: $this->post()
+            post: self::post()
         );
 
         hook(
             PDO::class,
             'beginTransaction',
             pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
-                $this->startSpan($instrumentation, 'PDO->beginTransaction', $class, $function, $databaseParams);
+                self::startSpan($instrumentation, 'PDO->beginTransaction', $class, $function, $databaseParams);
             },
-            post: $this->post()
+            post: self::post()
         );
 
         hook(
             PDO::class,
             'commit',
             pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
-                $this->startSpan($instrumentation, 'PDO->commit', $class, $function, $databaseParams);
+                self::startSpan($instrumentation, 'PDO->commit', $class, $function, $databaseParams);
             },
-            post: $this->post()
+            post: self::post()
         );
 
         hook(
             PDO::class,
             'rollBack',
             pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
-                $this->startSpan($instrumentation, 'PDO->rollBack', $class, $function, $databaseParams);
+                self::startSpan($instrumentation, 'PDO->rollBack', $class, $function, $databaseParams);
             },
-            post: $this->post()
+            post: self::post()
         );
     }
 
-    private function hookPDOStatement(CachedInstrumentation $instrumentation, stdClass $databaseParams): void
+    private static function hookPDOStatement(CachedInstrumentation $instrumentation, stdClass $databaseParams): void
     {
         hook(
             PDOStatement::class,
             'execute',
             pre: function (PDOStatement $statement, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
-                $this->startSpan($instrumentation, $statement->queryString, $class, $function, $databaseParams);
+                self::startSpan($instrumentation, $statement->queryString, $class, $function, $databaseParams);
             },
-            post: $this->post()
+            post: self::post()
         );
     }
 
-    private function startSpan(
+    private static function startSpan(
         CachedInstrumentation $instrumentation,
         string $sql,
         string $class,
@@ -160,7 +160,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         Context::storage()->attach($context);
     }
 
-    private function post(): Closure
+    private static function post(): Closure
     {
         return static function ($statement, $params, $result, ?Throwable $exception): void {
             $scope = Context::storage()->scope();

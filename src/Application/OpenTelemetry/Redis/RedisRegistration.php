@@ -35,18 +35,18 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class RedisRegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         $instrumentation = new CachedInstrumentation(__CLASS__);
         $connectionParameters = new stdClass;
 
-        $this->hook($instrumentation, $connectionParameters);
+        self::hook($instrumentation, $connectionParameters);
     }
 
-    private function hook(CachedInstrumentation $instrumentation, stdClass $connectionParameters): void
+    private static function hook(CachedInstrumentation $instrumentation, stdClass $connectionParameters): void
     {
         hook(
             ConnectionInterface::class,

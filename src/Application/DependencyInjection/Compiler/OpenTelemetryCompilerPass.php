@@ -12,8 +12,7 @@
 
 namespace App\Application\DependencyInjection\Compiler;
 
-use App\Application\DependencyInjection\Boot\OpenTelemetryBoot;
-use App\Application\OpenTelemetry\OpenTelemetryManager;
+use App\Application\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use Override;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -27,15 +26,33 @@ class OpenTelemetryCompilerPass implements CompilerPassInterface
             return;
         }
 
-        /** @var OpenTelemetryManager $manager */
-        $manager = $container->get(OpenTelemetryManager::class);
         $taggedServices = $container->findTaggedServiceIds('app.open_telemetry.registration');
-        $taggedServices = array_keys($taggedServices);
+        $servicesWithPriority = [];
 
-        foreach ($taggedServices as $serviceId) {
-            $manager->addRegistration($serviceId);
+        foreach ($taggedServices as $serviceId => $tags) {
+            if (!in_array(OpenTelemetryRegistrationInterface::class, class_implements($serviceId))) {
+                continue;
+            }
+
+            foreach ($tags as $attributes) {
+                if (isset($attributes['priority'])) {
+                    $priority = (int) $attributes['priority'];
+                    $servicesWithPriority[] = [
+                        'serviceId' => $serviceId,
+                        'priority' => $priority,
+                    ];
+                }
+            }
         }
 
-        (new OpenTelemetryBoot)->process($container);
-     }
+        usort($servicesWithPriority, static function (array $a, array $b): int {
+            return $b['priority'] <=> $a['priority'];
+        });
+
+        foreach ($servicesWithPriority as $service) {
+            $serviceId = $service['serviceId'];
+
+            $serviceId::registration();
+        }
+    }
 }

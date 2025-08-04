@@ -24,10 +24,10 @@ use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration')]
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class CacheItemPoolRegistration implements OpenTelemetryRegistrationInterface
 {
-    public function registration(): void
+    public static function registration(): void
     {
         hook(
             CacheItemPoolInterface::class,

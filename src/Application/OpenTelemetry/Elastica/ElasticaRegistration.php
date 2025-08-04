@@ -12,12 +12,14 @@
 
 namespace App\Application\OpenTelemetry\Elastica;
 
+use App\Application\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use Elastica\Exception\ExceptionInterface;
 use Elasticsearch\Client as ElasticsearchClient;
 use Elasticsearch\Common\Exceptions\Missing404Exception;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use FOS\ElasticaBundle\Elastica\Client as FOSElastica;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use OpenTelemetry\SemConv\{
     TraceAttributes,
     TraceAttributeValues
@@ -32,7 +34,8 @@ use OpenTelemetry\Context\Context;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-class ElasticaRegistration
+#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
+class ElasticaRegistration implements OpenTelemetryRegistrationInterface
 {
     public static function registration(): void
     {

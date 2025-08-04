@@ -14,5 +14,5 @@ namespace App\Application\OpenTelemetry;
 
 interface OpenTelemetryRegistrationInterface
 {
-    public function registration(): void;
+    public static function registration(): void;
 }
