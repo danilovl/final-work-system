@@ -10,23 +10,23 @@
     <thead>
     <tr>
         <th{% if tasks.isSorted('task.name') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-            {{ knp_pagination_sortable(tasks, 'app.text.name' | trans, 'task.name') }}
+            {{ knp_pagination_sortable(tasks, 'app.text.name' | trans, 'task.name', {}, {'tab':'task'}) }}
         </th>
 
         {% if isWorkTab == false %}
             <th{% if tasks.isSorted('work.title') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-                {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans, 'work.title') }}
+                {{ knp_pagination_sortable(tasks, 'app.text.work_title' | trans, 'work.title', {}, {'tab':'task'}) }}
             </th>
         {% endif %}
 
         <th{% if tasks.isSorted('task.createdAt') %} class="fa fa-sort-{{ direction }}"{% endif %}>
-            {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans, 'task.createdAt') }}
+            {{ knp_pagination_sortable(tasks, 'app.text.date_added' | trans, 'task.createdAt', {}, {'tab':'task'}) }}
         </th>
         <th{% if tasks.isSorted('task.deadline') %} class="fa fa-sort-{{ direction }}"{% endif %}
                 data-toggle="tooltip"
                 data-placement="top"
                 data-original-title="{{ 'app.tooltip.task_deadline' | trans }}">
-            {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans, 'task.deadline') }}
+            {{ knp_pagination_sortable(tasks, 'app.text.deadline' | trans, 'task.deadline', {}, {'tab':'task'}) }}
         </th>
 
         {% if isSupervisor %}
