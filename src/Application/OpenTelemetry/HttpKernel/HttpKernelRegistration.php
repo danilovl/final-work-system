@@ -39,6 +39,8 @@ use function OpenTelemetry\Instrumentation\hook;
 #[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 100])]
 class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
 {
+    public static bool $isHandleThrowable = false;
+
     public static function registration(): void
     {
         hook(
@@ -93,6 +95,11 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                     return;
                 }
 
+                if (self::$isHandleThrowable) {
+                    $scope->detach();
+                    self::$isHandleThrowable = false;
+                }
+
                 $span = Span::fromContext($scope->context());
                 $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
 
@@ -143,19 +150,22 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
             HttpKernel::class,
             'terminate',
             post: static function (): void {
-                $scope = Context::storage()->scope();
-                if ($scope === null) {
-                    return;
-                }
+                Context::storage()->scope()?->detach();
+            }
+        );
 
-                $scope->detach();
+        hook(
+            HttpKernel::class,
+            'terminateWithException',
+            post: static function (): void {
+                Context::storage()->scope()?->detach();
             }
         );
 
         hook(
             HttpKernel::class,
             'handleThrowable',
-            pre: static function (HttpKernel $kernel, array $params): array {
+            pre: static function (HttpKernel $kernel, array $params): void {
                 /** @var Throwable $throwable */
                 $throwable = $params[0];
 
@@ -164,7 +174,7 @@ class HttpKernelRegistration implements OpenTelemetryRegistrationInterface
                         TraceAttributes::EXCEPTION_ESCAPED => true
                     ]);
 
-                return $params;
+                self::$isHandleThrowable = true;
             }
         );
     }

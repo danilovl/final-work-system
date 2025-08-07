@@ -12,6 +12,8 @@
 
 namespace App;
 
+use App\Application\DependencyInjection\Boot\OpenTelemetryBoot;
+use Psr\Container\ContainerInterface;
 use App\Application\DependencyInjection\Compiler\{
     WidgetCompilerPass,
     OpenTelemetryCompilerPass,
@@ -29,5 +31,13 @@ class AppBundle extends Bundle
         $container->addCompilerPass(new OpenTelemetryCompilerPass);
         $container->addCompilerPass(new ServicePublicCompilerPass);
         $container->addCompilerPass(new WidgetCompilerPass);
+    }
+
+    public function boot(): void
+    {
+        /** @var ContainerInterface $container */
+        $container = $this->container;
+
+        OpenTelemetryBoot::process($container);
     }
 }

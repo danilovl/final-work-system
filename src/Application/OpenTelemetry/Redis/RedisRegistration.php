@@ -31,11 +31,9 @@ use OpenTelemetry\API\Trace\{
 };
 use OpenTelemetry\Context\Context;
 use stdClass;
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 
-#[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class RedisRegistration implements OpenTelemetryRegistrationInterface
 {
     public static function registration(): void

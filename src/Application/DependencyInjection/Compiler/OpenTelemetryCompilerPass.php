@@ -12,7 +12,9 @@
 
 namespace App\Application\DependencyInjection\Compiler;
 
-use App\Application\OpenTelemetry\OpenTelemetryRegistrationInterface;
+use App\Application\OpenTelemetry\{
+    OpenTelemetryManager,
+    OpenTelemetryRegistrationInterface};
 use Override;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,7 +32,9 @@ class OpenTelemetryCompilerPass implements CompilerPassInterface
         $servicesWithPriority = [];
 
         foreach ($taggedServices as $serviceId => $tags) {
-            if (!in_array(OpenTelemetryRegistrationInterface::class, class_implements($serviceId))) {
+            /** @var string[] $classes */
+            $classes = class_implements($serviceId);
+            if (!in_array(OpenTelemetryRegistrationInterface::class, $classes)) {
                 continue;
             }
 
@@ -39,7 +43,7 @@ class OpenTelemetryCompilerPass implements CompilerPassInterface
                     $priority = (int) $attributes['priority'];
                     $servicesWithPriority[] = [
                         'serviceId' => $serviceId,
-                        'priority' => $priority,
+                        'priority' => $priority
                     ];
                 }
             }
@@ -49,10 +53,9 @@ class OpenTelemetryCompilerPass implements CompilerPassInterface
             return $b['priority'] <=> $a['priority'];
         });
 
+        $manager = $container->getDefinition(OpenTelemetryManager::class);
         foreach ($servicesWithPriority as $service) {
-            $serviceId = $service['serviceId'];
-
-            $serviceId::registration();
+            $manager->addMethodCall('addRegistration', [$service['serviceId']]);
         }
     }
 }

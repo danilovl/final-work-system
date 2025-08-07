@@ -67,7 +67,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         hook(
             PDO::class,
             'exec',
-            pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
+            pre: static function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
                 $sql = $params[0];
                 assert(is_string($sql));
 
@@ -79,7 +79,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         hook(
             PDO::class,
             'query',
-            pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
+            pre: static function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
                 /* @var string $params */
                 $sql = $params[0];
 
@@ -91,7 +91,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         hook(
             PDO::class,
             'beginTransaction',
-            pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
+            pre: static function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
                 self::startSpan($instrumentation, 'PDO->beginTransaction', $class, $function, $databaseParams);
             },
             post: self::post()
@@ -100,7 +100,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         hook(
             PDO::class,
             'commit',
-            pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
+            pre: static function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
                 self::startSpan($instrumentation, 'PDO->commit', $class, $function, $databaseParams);
             },
             post: self::post()
@@ -109,7 +109,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         hook(
             PDO::class,
             'rollBack',
-            pre: function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
+            pre: static function (PDO $pdo, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
                 self::startSpan($instrumentation, 'PDO->rollBack', $class, $function, $databaseParams);
             },
             post: self::post()
@@ -121,7 +121,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
         hook(
             PDOStatement::class,
             'execute',
-            pre: function (PDOStatement $statement, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
+            pre: static function (PDOStatement $statement, array $params, string $class, string $function) use ($instrumentation, $databaseParams): void {
                 self::startSpan($instrumentation, $statement->queryString, $class, $function, $databaseParams);
             },
             post: self::post()
