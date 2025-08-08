@@ -44,21 +44,22 @@ class ApcuRegistration implements OpenTelemetryRegistrationInterface
         foreach ($apcuOperations as $apcuOperation) {
             $counters = new stdClass;
 
-            hook(
-                null,
-                $apcuOperation,
-                pre: static function () use ($apcuOperation, $counters): void {
-                    $counter = $counters->{$apcuOperation} ?? null;
-
-                    if ($counter instanceof CounterInterface === false) {
-                        $counter = self::counter($apcuOperation, 'calls');
-                        $counters->{$apcuOperation} = $counter;
-                    }
-
-                    $counter->add(1);
-                }
-            );
+            hook(null, $apcuOperation, pre: self::preHookCallback($apcuOperation, $counters));
         }
+    }
+
+    private static function preHookCallback(string $apcuOperation, stdClass $counters): callable
+    {
+        return static function () use ($apcuOperation, $counters): void {
+            $counter = $counters->{$apcuOperation} ?? null;
+
+            if ($counter instanceof CounterInterface === false) {
+                $counter = self::counter($apcuOperation, 'calls');
+                $counters->{$apcuOperation} = $counter;
+            }
+
+            $counter->add(1);
+        };
     }
 
     private static function counter(string $name, ?string $unit = null): CounterInterface

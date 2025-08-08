@@ -67,90 +67,100 @@ class RedisRegistration implements OpenTelemetryRegistrationInterface
         hook(
             ConnectionInterface::class,
             'executeCommand',
-            pre: static function (ConnectionInterface $client, array $params, string $class, string $function) use ($instrumentation, $connectionParameters): void {
-                [$command] = $params;
+            pre: self::getPreCallback($instrumentation, $connectionParameters),
+            post: self::getPostCallback()
+        );
+    }
 
-                assert($command instanceof CommandInterface);
+    private static function getPreCallback(CachedInstrumentation $instrumentation, stdClass $connectionParameters): callable
+    {
+        return static function (ConnectionInterface $client, array $params, string $class, string $function) use ($instrumentation, $connectionParameters): void {
+            [$command] = $params;
 
-                $spanName = self::makeSpanName($command);
-                $spanName = sprintf('REDIS %s', $spanName);
+            assert($command instanceof CommandInterface);
 
-                $ignore = [
-                    'DoctrineNamespaceCacheKey',
-                    'DoctrineSecondLevelCache'
-                ];
+            $spanName = self::makeSpanName($command);
+            $spanName = sprintf('REDIS %s', $spanName);
 
-                foreach ($ignore as $value) {
-                    if (str_contains($spanName, $value)) {
-                        return;
-                    }
-                }
+            $ignore = [
+                'DoctrineNamespaceCacheKey',
+                'DoctrineSecondLevelCache'
+            ];
 
-                $spanBuilder = $instrumentation
-                    ->tracer()
-                    ->spanBuilder($spanName)
-                    ->setSpanKind(SpanKind::KIND_INTERNAL)
-                    ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                    ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                    ->setAttribute(TraceAttributes::SERVER_ADDRESS, $connectionParameters->host)
-                    ->setAttribute(TraceAttributes::NETWORK_TRANSPORT, $connectionParameters->scheme)
-                    ->setAttribute(TraceAttributes::NETWORK_PEER_ADDRESS, $connectionParameters->host)
-                    ->setAttribute(TraceAttributes::NETWORK_PEER_PORT, $connectionParameters->port)
-                    ->setAttribute(TraceAttributes::DB_SYSTEM, TraceAttributeValues::DB_SYSTEM_REDIS)
-                    ->setAttribute(TraceAttributes::DB_NAMESPACE, $connectionParameters->database)
-                    ->setAttribute(TraceAttributes::DB_NAMESPACE, $connectionParameters->database)
-                    ->setAttribute(TraceAttributes::DB_OPERATION_NAME, $command->getId())
-                    ->setAttribute(TraceAttributes::DB_QUERY_TEXT, self::makeDbStatement($command))
-                    ->setAttribute('command.class', $command::class);
-
-                $parent = Context::getCurrent();
-                $span = $spanBuilder
-                    ->setParent($parent)
-                    ->startSpan();
-
-                $span->setStatus(StatusCode::STATUS_OK);
-
-                $context = $span->storeInContext($parent);
-                Context::storage()->attach($context);
-            },
-            post: static function (ConnectionInterface $client, array $params, $void, ?Throwable $exception): void {
-                [$command] = $params;
-
-                assert($command instanceof CommandInterface);
-
-                $spanName = self::makeSpanName($command);
-                $ignore = [
-                    'DoctrineNamespaceCacheKey',
-                    'DoctrineSecondLevelCache'
-                ];
-
-                foreach ($ignore as $value) {
-                    if (str_contains($spanName, $value)) {
-                        return;
-                    }
-                }
-
-                $scope = Context::storage()->scope();
-                if ($scope === null) {
+            foreach ($ignore as $value) {
+                if (str_contains($spanName, $value)) {
                     return;
                 }
-
-                $scope->detach();
-                $span = Span::fromContext($scope->context());
-                $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
-
-                if ($exception !== null) {
-                    $span->recordException($exception, [
-                        TraceAttributes::EXCEPTION_ESCAPED => true
-                    ]);
-                    $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
-                } else {
-                    $span->setStatus(StatusCode::STATUS_OK);
-                }
-
-                $span->end();
             }
-        );
+
+            $spanBuilder = $instrumentation
+                ->tracer()
+                ->spanBuilder($spanName)
+                ->setSpanKind(SpanKind::KIND_INTERNAL)
+                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
+                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
+                ->setAttribute(TraceAttributes::SERVER_ADDRESS, $connectionParameters->host)
+                ->setAttribute(TraceAttributes::NETWORK_TRANSPORT, $connectionParameters->scheme)
+                ->setAttribute(TraceAttributes::NETWORK_PEER_ADDRESS, $connectionParameters->host)
+                ->setAttribute(TraceAttributes::NETWORK_PEER_PORT, $connectionParameters->port)
+                ->setAttribute(TraceAttributes::DB_SYSTEM, TraceAttributeValues::DB_SYSTEM_REDIS)
+                ->setAttribute(TraceAttributes::DB_NAMESPACE, $connectionParameters->database)
+                ->setAttribute(TraceAttributes::DB_NAMESPACE, $connectionParameters->database)
+                ->setAttribute(TraceAttributes::DB_OPERATION_NAME, $command->getId())
+                ->setAttribute(TraceAttributes::DB_QUERY_TEXT, self::makeDbStatement($command))
+                ->setAttribute('command.class', $command::class);
+
+            $parent = Context::getCurrent();
+            $span = $spanBuilder
+                ->setParent($parent)
+                ->startSpan();
+
+            $span->setStatus(StatusCode::STATUS_OK);
+
+            $context = $span->storeInContext($parent);
+            Context::storage()->attach($context);
+        };
+    }
+
+    private static function getPostCallback(): callable
+    {
+        return static function (ConnectionInterface $client, array $params, $void, ?Throwable $exception): void {
+            [$command] = $params;
+
+            assert($command instanceof CommandInterface);
+
+            $spanName = self::makeSpanName($command);
+            $ignore = [
+                'DoctrineNamespaceCacheKey',
+                'DoctrineSecondLevelCache'
+            ];
+
+            foreach ($ignore as $value) {
+                if (str_contains($spanName, $value)) {
+                    return;
+                }
+            }
+
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
+            }
+
+            $scope->detach();
+            $span = Span::fromContext($scope->context());
+            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+
+            if ($exception !== null) {
+                $span->recordException($exception, [
+                    TraceAttributes::EXCEPTION_ESCAPED => true
+                ]);
+                $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
+            } else {
+                $span->setStatus(StatusCode::STATUS_OK);
+            }
+
+            $span->end();
+        };
     }
 
     private static function makeSpanName(CommandInterface $command): string

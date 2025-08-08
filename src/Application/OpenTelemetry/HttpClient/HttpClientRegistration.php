@@ -36,111 +36,116 @@ class HttpClientRegistration implements OpenTelemetryRegistrationInterface
 {
     public static function registration(): void
     {
-        hook(
-            HttpClientInterface::class,
-            'request',
-            pre: static function (
-                HttpClientInterface $client,
-                array $params,
-                string $class,
-                string $function,
-                ?string $filename,
-                ?int $lineno,
-            ): array {
-                $instrumentation = new CachedInstrumentation(__FILE__);
+        hook(HttpClientInterface::class, 'request', pre: self::getPreCallback(), post: self::getPostCallback());
+    }
 
-                $builder = $instrumentation
-                    ->tracer()
-                    ->spanBuilder(sprintf('%s', $params[0]))
-                    ->setSpanKind(SpanKind::KIND_CLIENT)
-                    ->setAttribute(TraceAttributes::PEER_SERVICE, parse_url((string) $params[1])['host'] ?? null)
-                    ->setAttribute(TraceAttributes::URL_FULL, (string) $params[1])
-                    ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $params[0])
-                    ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
-                    ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
-                    ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
-                    ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
-                    ->setAttribute('type', 'request');
+    private static function getPreCallback(): callable
+    {
+        return static function (
+            HttpClientInterface $client,
+            array $params,
+            string $class,
+            string $function,
+            ?string $filename,
+            ?int $lineno,
+        ): array {
+            $instrumentation = new CachedInstrumentation(__FILE__);
 
-                $propagator = Globals::propagator();
-                $parent = Context::getCurrent();
+            $builder = $instrumentation
+                ->tracer()
+                ->spanBuilder(sprintf('%s', $params[0]))
+                ->setSpanKind(SpanKind::KIND_CLIENT)
+                ->setAttribute(TraceAttributes::PEER_SERVICE, parse_url((string) $params[1])['host'] ?? null)
+                ->setAttribute(TraceAttributes::URL_FULL, (string) $params[1])
+                ->setAttribute(TraceAttributes::HTTP_REQUEST_METHOD, $params[0])
+                ->setAttribute(TraceAttributes::CODE_FUNCTION, $function)
+                ->setAttribute(TraceAttributes::CODE_NAMESPACE, $class)
+                ->setAttribute(TraceAttributes::CODE_FILEPATH, $filename)
+                ->setAttribute(TraceAttributes::CODE_LINENO, $lineno)
+                ->setAttribute('type', 'request');
 
-                $span = $builder
-                    ->setParent($parent)
-                    ->startSpan();
+            $propagator = Globals::propagator();
+            $parent = Context::getCurrent();
 
-                $requestOptions = $params[2] ?? [];
+            $span = $builder
+                ->setParent($parent)
+                ->startSpan();
 
-                if (!isset($requestOptions['headers'])) {
-                    $requestOptions['headers'] = [];
-                }
+            $requestOptions = $params[2] ?? [];
 
-                if (self::supportsProgress($class) === false) {
-                    $context = $span->storeInContext($parent);
-                    $propagator->inject($requestOptions['headers'], ArrayAccessGetterSetter::getInstance(), $context);
+            if (!isset($requestOptions['headers'])) {
+                $requestOptions['headers'] = [];
+            }
 
-                    Context::storage()->attach($context);
-
-                    return $params;
-                }
-
-                $previousOnProgress = $requestOptions['on_progress'] ?? null;
-
-                $requestOptions['on_progress'] = static function (int $dlNow, int $dlSize, array $info) use ($previousOnProgress, $span): void {
-                    if ($previousOnProgress !== null) {
-                        $previousOnProgress($dlNow, $dlSize, $info);
-                    }
-
-                    $statusCode = $info['http_code'];
-
-                    if ($statusCode !== 0 && $statusCode !== null && $span->isRecording()) {
-                        $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $statusCode);
-
-                        if ($statusCode >= 400 && $statusCode < 600) {
-                            $span->setStatus(StatusCode::STATUS_ERROR);
-                        }
-
-                        $span->end();
-                    }
-                };
-
+            if (self::supportsProgress($class) === false) {
                 $context = $span->storeInContext($parent);
                 $propagator->inject($requestOptions['headers'], ArrayAccessGetterSetter::getInstance(), $context);
 
                 Context::storage()->attach($context);
-                $params[2] = $requestOptions;
 
                 return $params;
-            },
-            post: static function (HttpClientInterface $client, array $params, ?ResponseInterface $response, ?Throwable $exception): void {
-                $scope = Context::storage()->scope();
-                if ($scope === null) {
-                    return;
+            }
+
+            $previousOnProgress = $requestOptions['on_progress'] ?? null;
+
+            $requestOptions['on_progress'] = static function (int $dlNow, int $dlSize, array $info) use ($previousOnProgress, $span): void {
+                if ($previousOnProgress !== null) {
+                    $previousOnProgress($dlNow, $dlSize, $info);
                 }
 
-                $scope->detach();
-                $span = Span::fromContext($scope->context());
-                $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+                $statusCode = $info['http_code'];
 
-                if ($exception !== null) {
-                    $span->recordException($exception, [
-                        TraceAttributes::EXCEPTION_ESCAPED => true
-                    ]);
-                    $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
-                    $span->end();
+                if ($statusCode !== 0 && $statusCode !== null && $span->isRecording()) {
+                    $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $statusCode);
 
-                    return;
-                }
-
-                if ($response !== null && self::supportsProgress(get_class($client)) === false) {
-                    $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
-
-                    if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 600) {
+                    if ($statusCode >= 400 && $statusCode < 600) {
                         $span->setStatus(StatusCode::STATUS_ERROR);
                     }
+
+                    $span->end();
+                }
+            };
+
+            $context = $span->storeInContext($parent);
+            $propagator->inject($requestOptions['headers'], ArrayAccessGetterSetter::getInstance(), $context);
+
+            Context::storage()->attach($context);
+            $params[2] = $requestOptions;
+
+            return $params;
+        };
+    }
+
+    private static function getPostCallback(): callable
+    {
+        return static function (HttpClientInterface $client, array $params, ?ResponseInterface $response, ?Throwable $exception): void {
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
+            }
+
+            $scope->detach();
+            $span = Span::fromContext($scope->context());
+            $span->setAttribute(TraceAttributes::DEPLOYMENT_ENVIRONMENT_NAME, $_ENV['APP_ENV'] ?: 'unknown');
+
+            if ($exception !== null) {
+                $span->recordException($exception, [
+                    TraceAttributes::EXCEPTION_ESCAPED => true
+                ]);
+                $span->setStatus(StatusCode::STATUS_ERROR, $exception->getMessage());
+                $span->end();
+
+                return;
+            }
+
+            if ($response !== null && self::supportsProgress(get_class($client)) === false) {
+                $span->setAttribute(TraceAttributes::HTTP_RESPONSE_STATUS_CODE, $response->getStatusCode());
+
+                if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 600) {
+                    $span->setStatus(StatusCode::STATUS_ERROR);
                 }
             }
-        );
+        };
     }
 
     private static function supportsProgress(string $class): bool

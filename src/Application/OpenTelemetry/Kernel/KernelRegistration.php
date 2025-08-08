@@ -32,25 +32,35 @@ class KernelRegistration implements OpenTelemetryRegistrationInterface
         hook(
             Kernel::class,
             'boot',
-            pre: static function (): void {
-                $instrumentation = new CachedInstrumentation(__CLASS__);
-                $builder = $instrumentation->tracer()
-                    ->spanBuilder('boot')
-                    ->setSpanKind(SpanKind::KIND_SERVER)
-                    ->setAttribute('type', 'boot');
-
-                $builder->startSpan();
-            },
-            post: static function (): void {
-                $scope = Context::storage()->scope();
-                if ($scope === null) {
-                    return;
-                }
-
-                $scope->detach();
-                $span = Span::fromContext($scope->context());
-                $span->end();
-            }
+            pre: self::getPreCallback(),
+            post: self::getPostCallback()
         );
+    }
+
+    private static function getPreCallback(): callable
+    {
+        return static function (): void {
+            $instrumentation = new CachedInstrumentation(__CLASS__);
+            $builder = $instrumentation->tracer()
+                ->spanBuilder('boot')
+                ->setSpanKind(SpanKind::KIND_SERVER)
+                ->setAttribute('type', 'boot');
+
+            $builder->startSpan();
+        };
+    }
+
+    private static function getPostCallback(): callable
+    {
+        return static function (): void {
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
+            }
+
+            $scope->detach();
+            $span = Span::fromContext($scope->context());
+            $span->end();
+        };
     }
 }

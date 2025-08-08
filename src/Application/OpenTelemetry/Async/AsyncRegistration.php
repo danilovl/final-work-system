@@ -28,31 +28,36 @@ class AsyncRegistration implements OpenTelemetryRegistrationInterface
 {
     public static function registration(): void
     {
-        hook(
-            AsyncService::class,
-            'call',
-            pre: static function (): void {
-                $parent = Context::getCurrent();
+        hook(AsyncService::class, 'call', pre: self::getPreCallback(), post: self::getPostCallback());
+    }
 
-                $instrumentation = new CachedInstrumentation(__CLASS__);
-                $builder = $instrumentation->tracer()
-                    ->spanBuilder('AsyncService')
-                    ->setSpanKind(SpanKind::KIND_INTERNAL);
+    private static function getPreCallback(): callable
+    {
+        return static function (): void {
+            $parent = Context::getCurrent();
 
-                $span = $builder->startSpan();
-                $context = $span->storeInContext($parent);
-                Context::storage()->attach($context);
-            },
-            post: static function (): void {
-                $scope = Context::storage()->scope();
-                if ($scope === null) {
-                    return;
-                }
+            $instrumentation = new CachedInstrumentation(__CLASS__);
+            $builder = $instrumentation->tracer()
+                ->spanBuilder('AsyncService')
+                ->setSpanKind(SpanKind::KIND_INTERNAL);
 
-                $scope->detach();
-                $span = Span::fromContext($scope->context());
-                $span->end();
+            $span = $builder->startSpan();
+            $context = $span->storeInContext($parent);
+            Context::storage()->attach($context);
+        };
+    }
+
+    private static function getPostCallback(): callable
+    {
+        return static function (): void {
+            $scope = Context::storage()->scope();
+            if ($scope === null) {
+                return;
             }
-        );
+
+            $scope->detach();
+            $span = Span::fromContext($scope->context());
+            $span->end();
+        };
     }
 }
