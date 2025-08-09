@@ -20,10 +20,12 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public function __construct(string $environment, bool $debug)
+    public function __construct(string $environment, bool $debug, bool $isEnableOpenTelemetry = true)
     {
         parent::__construct($environment, $debug);
 
-        KernelRegistration::registration();
+        if ($isEnableOpenTelemetry && extension_loaded('opentelemetry')) {
+            KernelRegistration::registration();
+        }
     }
 }

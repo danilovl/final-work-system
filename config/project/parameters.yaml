@@ -24,6 +24,8 @@ parameters:
     sure_exist_template_locale: 'cs'
   loggable:
     enable: '%env(bool:LOGGABLE_ENABLE)%'
+  open_telemetry:
+    enable: '%env(bool:OPEN_TELEMETRY_ENABLE)%'
   task_remind:
     enable: '%env(bool:TASK_REMIND_ENABLE)%'
     translator_domain: 'email_notification'
