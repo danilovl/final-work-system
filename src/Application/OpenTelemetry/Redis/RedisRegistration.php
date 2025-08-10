@@ -40,6 +40,10 @@ class RedisRegistration implements OpenTelemetryRegistrationInterface
     {
         $instrumentation = new CachedInstrumentation(__CLASS__);
         $connectionParameters = new stdClass;
+        $connectionParameters->scheme = null;
+        $connectionParameters->host = null;
+        $connectionParameters->port = null;
+        $connectionParameters->database = null;
 
         self::hook($instrumentation, $connectionParameters);
     }

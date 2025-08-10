@@ -39,6 +39,9 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
     {
         $instrumentation = new CachedInstrumentation(__CLASS__);
         $databaseParams = new stdClass;
+        $databaseParams->dbname = null;
+        $databaseParams->host = null;
+        $databaseParams->username = null;
 
         self::hookPDO($instrumentation, $databaseParams);
         self::hookPDOStatement($instrumentation, $databaseParams);
