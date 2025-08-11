@@ -12,6 +12,7 @@
 
 namespace App\Application\DependencyInjection\Boot;
 
+use App\Application\Provider\OpenTelemetryProvider;
 use App\Application\OpenTelemetry\{
     OpenTelemetryManager,
     OpenTelemetryRegistrationInterface
@@ -22,6 +23,12 @@ class OpenTelemetryBoot
 {
     public static function process(ContainerInterface $container): void
     {
+        /** @var OpenTelemetryProvider $openTelemetryProvider */
+        $openTelemetryProvider = $container->get(OpenTelemetryProvider::class);
+        if (!$openTelemetryProvider->isEnable()) {
+            return;
+        }
+
         /** @var OpenTelemetryManager $manager */
         $manager = $container->get(OpenTelemetryManager::class);
 
