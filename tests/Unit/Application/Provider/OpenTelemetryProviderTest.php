@@ -14,11 +14,12 @@ namespace App\Tests\Unit\Application\Provider;
 
 use App\Application\Provider\OpenTelemetryProvider;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class OpenTelemetryProviderTest extends TestCase
 {
-    private ParameterServiceInterface $parameterService;
+    private MockObject&ParameterServiceInterface $parameterService;
 
     private OpenTelemetryProvider $openTelemetryProvider;
 
