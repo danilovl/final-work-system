@@ -13,6 +13,7 @@
 namespace App\Domain\SystemEvent\Cache;
 
 use App\Application\Constant\CacheKeyConstant;
+use App\Application\OpenTelemetry\Helper\TracingSpan;
 use App\Application\Service\PaginatorService;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Helper\SystemEventHelper;
@@ -35,6 +36,8 @@ class HomepageCache
      */
     public function createHomepagePaginator(User $user, int $page = 1): array
     {
+        $span = TracingSpan::start('CreateHomepagePaginator');
+
         $cacheItem = $this->cache->getItem(
             sprintf(CacheKeyConstant::HOME_PAGE_USER_PAGINATOR->value, $user->getId())
         );
@@ -60,6 +63,8 @@ class HomepageCache
 
             $this->cache->save($cacheItem);
         }
+
+        $span->end();
 
         return $pagePaginators;
     }
