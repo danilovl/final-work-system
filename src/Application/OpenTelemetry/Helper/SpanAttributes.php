@@ -12,10 +12,10 @@
 
 namespace App\Application\OpenTelemetry\Helper;
 
-interface SpanAttributes
+enum SpanAttributes: string
 {
-	public const string TRACE_ID = 'traceId';
-	public const string SPAN_ID = 'spanId';
-	public const string SPAN_TYPE = 'type';
-	public const string RECORDED_LOCATION = 'recordedLocation';
+    case TRACE_ID = 'traceId';
+    case SPAN_ID = 'spanId';
+    case SPAN_TYPE = 'type';
+    case RECORDED_LOCATION = 'recordedLocation';
 }

@@ -31,8 +31,8 @@ readonly class TracingHelper
         $span = Span::getCurrent();
 
         return [
-            SpanAttributes::TRACE_ID => $span->getContext()->getTraceId(),
-            SpanAttributes::SPAN_ID => $span->getContext()->getSpanId()
+            SpanAttributes::TRACE_ID->value => $span->getContext()->getTraceId(),
+            SpanAttributes::SPAN_ID->value => $span->getContext()->getSpanId()
         ];
     }
 
@@ -60,7 +60,7 @@ readonly class TracingHelper
             TraceAttributes::EXCEPTION_ESCAPED => false,
             ...self::normalizeAttributeValues($attributes),
             ...self::extractTracingAttributesFromObject($exception),
-            SpanAttributes::RECORDED_LOCATION => self::calledFrom()
+            SpanAttributes::RECORDED_LOCATION->value => self::calledFrom()
         ];
 
         if ($span->isRecording()) {
@@ -84,7 +84,7 @@ readonly class TracingHelper
         foreach ($attributes as $key => $value) {
             if (is_int($key)) {
                 $key = 'item-' . $key;
-            } elseif ($key === SpanAttributes::SPAN_TYPE) {
+            } elseif ($key === SpanAttributes::SPAN_TYPE->value) {
                 $key = '_' . $key;
             } elseif ($key === '' || $value === '') {
                 continue;

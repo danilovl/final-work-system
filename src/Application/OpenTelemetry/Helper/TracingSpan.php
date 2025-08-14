@@ -34,7 +34,7 @@ readonly class TracingSpan
             ->getTracer(__CLASS__)
             ->spanBuilder($name)
             ->setSpanKind(SpanKind::KIND_INTERNAL)
-            ->setAttribute(SpanAttributes::RECORDED_LOCATION, self::calledFrom())
+            ->setAttribute(SpanAttributes::RECORDED_LOCATION->value, self::calledFrom())
             ->startSpan();
 
         $scope = $span->activate();
@@ -95,7 +95,7 @@ readonly class TracingSpan
             TraceAttributes::EXCEPTION_ESCAPED => false,
             ...TracingHelper::normalizeAttributeValues($attributes),
             ...TracingHelper::extractTracingAttributesFromObject($exception),
-            SpanAttributes::RECORDED_LOCATION => self::calledFrom()
+            SpanAttributes::RECORDED_LOCATION->value => self::calledFrom()
         ]);
 
         return $this;
