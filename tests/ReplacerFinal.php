@@ -55,7 +55,7 @@ class ReplacerFinal
 
             $imports = [];
             foreach ($matches as $match) {
-                $namespace = trim($match[1]);
+                $namespace = mb_trim($match[1]);
 
                 if (!empty($match[2])) {
                     $classes = array_map('trim', explode(',', $match[2]));

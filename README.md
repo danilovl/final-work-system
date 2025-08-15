@@ -17,7 +17,7 @@ This is especially true for those teachers who carry out the final theses of sev
 Requirements
 ------------
 
-* PHP 8.3 or higher
+* PHP 8.4 or higher
 * MySQL
 * Redis
 * RabbitMq

@@ -1,13 +1,5 @@
 FROM danilovl/final-work-system:php AS final-work-system-php
 
-RUN pecl install -f opentelemetry && docker-php-ext-enable opentelemetry
-RUN pecl install -f protobuf && docker-php-ext-enable protobuf
-
-RUN mkdir -p /usr/src/php/ext/redis \
-    && curl -L https://github.com/phpredis/phpredis/archive/6.1.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
-    && echo 'redis' >> /usr/src/php-available-exts \
-    && docker-php-ext-install redis
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY ./docker/php/conf/php.ini /etc/php/conf.d/

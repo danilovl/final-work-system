@@ -30,7 +30,7 @@ class EmailEmbeddable implements Stringable
 
     private function setEmail(string $email): void
     {
-        $email = trim($email);
+        $email = mb_trim($email);
 
         $validator = new EmailValidator;
 

@@ -17,7 +17,7 @@ class SluggerUtil
     public function slugify(string $string): string
     {
         /** @var string $string */
-        $string = preg_replace('~\s+~', '-', mb_strtolower(trim(strip_tags($string)), 'UTF-8'));
+        $string = preg_replace('~\s+~', '-', mb_strtolower(mb_trim(strip_tags($string)), 'UTF-8'));
 
         return $string;
     }

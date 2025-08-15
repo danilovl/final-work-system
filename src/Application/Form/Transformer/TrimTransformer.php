@@ -24,7 +24,7 @@ class TrimTransformer implements DataTransformerInterface
             return $value;
         }
 
-        return trim($value);
+        return mb_trim($value);
     }
 
     #[Override]

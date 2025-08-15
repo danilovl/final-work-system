@@ -189,7 +189,7 @@ class PDORegistration implements OpenTelemetryRegistrationInterface
 
     private static function simplifySql(string $sql): string
     {
-        $sql = preg_replace('~\s+~', ' ', trim($sql));
+        $sql = preg_replace('~\s+~', ' ', mb_trim($sql));
 
         if (preg_match('~^(SELECT).*?FROM\s+([a-zA-Z0-9_.]+)~i', $sql, $matches)) {
             return mb_strtolower($matches[1]) . ' FROM ' . $matches[2];

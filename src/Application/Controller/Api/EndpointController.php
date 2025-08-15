@@ -35,7 +35,7 @@ readonly class EndpointController
             }
 
             $url = $request->getSchemeAndHttpHost() . $route->getPath();
-            $url = rtrim($url, '/');
+            $url = mb_rtrim($url, '/');
 
             $result[$routeKey] = $url;
         }

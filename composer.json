@@ -4,7 +4,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ext-amqp": "*",
         "ext-ctype": "*",
         "ext-gd": "*",
@@ -41,10 +41,10 @@
         "hashids/hashids": "^5.0.0",
         "knplabs/knp-paginator-bundle": "^6.0.1",
         "nelmio/cors-bundle": "^2.2",
-        "open-telemetry/api": "dev-main#c1e77ef",
+        "open-telemetry/api": "dev-main#04c85a1",
         "open-telemetry/exporter-otlp": "dev-main#9b6de12",
-        "open-telemetry/gen-otlp-protobuf": "dev-main#3aa87bc",
-        "open-telemetry/sdk": "dev-main#0f9a3c8",
+        "open-telemetry/gen-otlp-protobuf": "dev-main#66c3b98",
+        "open-telemetry/sdk": "dev-main#f0457fe",
         "open-telemetry/sem-conv": "^1.25",
         "overblog/graphql-bundle": "dev-master",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -98,16 +98,13 @@
         "phpstan/phpstan-doctrine": "^2.0.0",
         "phpstan/phpstan-symfony": "^2.0.0",
         "phpunit/phpunit": "^10.0",
-        "psalm/plugin-symfony": "^5.1",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
         "symfony/debug-bundle": "7.2.*",
         "symfony/maker-bundle": "^1.54",
         "symfony/phpunit-bridge": "7.2.*",
         "symfony/stopwatch": "7.2.*",
-        "symfony/web-profiler-bundle": "7.2.*",
-        "vimeo/psalm": "^5.15",
-        "weirdan/doctrine-psalm-plugin": "^2.9"
+        "symfony/web-profiler-bundle": "7.2.*"
     },
     "config": {
         "optimize-autoloader": true,
@@ -157,8 +154,8 @@
             "@php bin/console cache:warmup --env=dev",
             "bash bin/web-test.sh"
         ],
-        "cs-fixer": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
-        "cs-fixer-check": "vendor/bin/php-cs-fixer fix --dry-run --allow-risky=yes",
+        "cs-fixer": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "cs-fixer-check": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --allow-risky=yes",
         "phpstan": "phpstan analyse -c phpstan.neon --no-progress",
         "phpstan-generate-baseline": "vendor/bin/phpstan analyse --configuration phpstan.neon --generate-baseline",
         "phpstan-clear-result-cache": "phpstan clear-result-cache",
@@ -183,6 +180,6 @@
         }
     },
     "platform": {
-        "php": "^8.3"
+        "php": "^8.4"
     }
 }

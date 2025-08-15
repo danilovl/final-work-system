@@ -26,6 +26,6 @@ class HashHelper
 
     public static function generateUserSalt(): string
     {
-        return rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '=');
+        return mb_rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '=');
     }
 }

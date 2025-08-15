@@ -35,10 +35,6 @@ class KernelRegistration implements OpenTelemetryRegistrationInterface
             pre: self::getPreCallback(),
             post: self::getPostCallback()
         );
-
-        register_shutdown_function(static function (): void {
-            fastcgi_finish_request();
-        });
     }
 
     private static function getPreCallback(): callable

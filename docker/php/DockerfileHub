@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4-fpm AS final-work-system-php
 
 RUN apt-get update \
   && apt-get install -y \
@@ -27,7 +27,9 @@ RUN apt-get update \
      libonig-dev \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && pecl install redis \
-  && pecl install -f xdebug-3.3.2
+  && pecl install -f xdebug-3.4.0 \
+  && pecl install -f opentelemetry \
+  && pecl install -f protobuf
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
@@ -55,7 +57,14 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install opcache \
     && docker-php-source delete \
     && docker-php-ext-enable redis \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable opentelemetry \
+    && docker-php-ext-enable protobuf
+
+RUN mkdir -p /usr/src/php/ext/redis \
+    && curl -L https://github.com/phpredis/phpredis/archive/6.1.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && echo 'redis' >> /usr/src/php-available-exts \
+    && docker-php-ext-install redis
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
