@@ -12,6 +12,8 @@
 
 namespace App\Domain\Task\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
@@ -22,9 +24,7 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
-use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Service\UserService;
@@ -43,10 +43,9 @@ readonly class TaskCreateHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private TaskFormFactory $taskFormFactory,
-        private TaskFactory $taskFactory,
         private TaskDeadlineFacade $taskDeadlineFacade,
         private HashidsServiceInterface $hashidsService,
-        private TaskEventDispatcher $taskEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): Response
@@ -75,8 +74,8 @@ readonly class TaskCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $task = $this->taskFactory->flushFromModel($taskModel);
-                $this->taskEventDispatcher->onTaskCreate($task);
+                $createTaskCommand = new CreateTaskCommand($taskModel);
+                $this->commandBus->dispatch($createTaskCommand);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

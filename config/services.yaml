@@ -28,7 +28,6 @@ services:
       - '../src/Application/Exception'
       - '../src/Application/GraphQL'
       - '../src/Application/Helper'
-      - '../src/Application/Interfaces'
       - '../src/Application/Menu'
       - '../src/Application/Messenger/*/*Message.php'
       - '../src/Application/Migrations'
@@ -43,6 +42,7 @@ services:
   App\Domain\:
     resource: '../src/Domain'
     exclude:
+      - '../src/Domain/*/Bus/Command/*/*Command.php'
       - '../src/Domain/*/DTO/'
       - '../src/Domain/*/Entity/'
       - '../src/Domain/*/Exception'

@@ -1,6 +1,10 @@
 framework:
   messenger:
+    default_bus: command.bus
+
     buses:
+      command.bus: ~
+
       messenger.bus.default:
         middleware:
           - App\Application\OpenTelemetry\Messenger\MessengerMiddleware
@@ -8,6 +12,8 @@ framework:
     failure_transport: failed
 
     transports:
+      sync: 'sync://'
+
       email_notification:
         dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
         options:
@@ -33,3 +39,5 @@ framework:
     routing:
       'App\Domain\EmailNotification\Messenger\EmailNotificationMessage': email_notification
       'App\Application\Messenger\Loggable\LoggableMessage': loggable
+
+      'App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand': sync

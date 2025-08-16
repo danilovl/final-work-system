@@ -3,6 +3,11 @@ services:
     public: true
     autowire: true
 
+  _instanceof:
+    App\Application\Interfaces\Bus\CommandHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
   app.redirect_to_preferred_locale_listener:
     class: App\Domain\User\EventListener\RedirectToPreferredLocaleListener
     arguments:
