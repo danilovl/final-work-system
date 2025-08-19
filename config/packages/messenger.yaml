@@ -41,3 +41,4 @@ framework:
       'App\Application\Messenger\Loggable\LoggableMessage': loggable
 
       'App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand': sync
+      'App\Domain\Task\Bus\Command\EditTask\EditTaskCommand': sync

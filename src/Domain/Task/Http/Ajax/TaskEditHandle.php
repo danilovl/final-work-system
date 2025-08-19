@@ -14,10 +14,10 @@ namespace App\Domain\Task\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
+use App\Domain\Task\Bus\Command\EditTask\EditTaskCommand;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
-use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\TaskForm;
 use App\Domain\Task\Model\TaskModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,9 +30,8 @@ readonly class TaskEditHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private TaskFactory $taskFactory,
         private FormFactoryInterface $formFactory,
-        private TaskEventDispatcher $taskEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Task $task): JsonResponse
@@ -43,8 +42,8 @@ readonly class TaskEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskFactory->flushFromModel($taskModel, $task);
-            $this->taskEventDispatcher->onTaskEdit($task);
+            $editTaskCommand = new EditTaskCommand($taskModel, $task);
+            $this->commandBus->dispatch($editTaskCommand);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

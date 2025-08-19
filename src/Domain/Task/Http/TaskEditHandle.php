@@ -12,6 +12,8 @@
 
 namespace App\Domain\Task\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Task\Bus\Command\EditTask\EditTaskCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
@@ -23,9 +25,7 @@ use App\Application\Service\{
 };
 use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
-use App\Domain\Task\Factory\TaskFactory;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Service\UserService;
@@ -43,9 +43,8 @@ readonly class TaskEditHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private TaskFormFactory $taskFormFactory,
-        private TaskFactory $taskFactory,
         private TaskDeadlineFacade $taskDeadlineFacade,
-        private TaskEventDispatcher $taskEventDispatcherService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(
@@ -68,11 +67,8 @@ readonly class TaskEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $task = $this->taskFactory
-                    ->flushFromModel($taskModel, $task);
-
-                $this->taskEventDispatcherService
-                    ->onTaskEdit($task);
+                $editTaskCommand = new EditTaskCommand($taskModel, $task);
+                $this->commandBus->dispatch($editTaskCommand);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
