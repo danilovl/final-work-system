@@ -13,12 +13,10 @@
 namespace App\Domain\Task\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Task\Bus\Command\ChangeStatusTask\ChangeStatusTaskCommand;
+use App\Application\Service\RequestService;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\Service\TaskStatusService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
@@ -28,18 +26,15 @@ readonly class TaskChangeStatusHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private TaskStatusService $taskStatusService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Task $task): JsonResponse
     {
         $type = $request->attributes->getString('type');
         if (!empty($type)) {
-            $this->taskStatusService
-                ->changeStatus($type, $task);
-
-            $this->entityManagerService->flush();
+            $createTaskCommand = new ChangeStatusTaskCommand($type, $task);
+            $this->commandBus->dispatch($createTaskCommand);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
