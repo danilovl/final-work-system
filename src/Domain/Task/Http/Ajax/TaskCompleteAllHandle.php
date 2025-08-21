@@ -13,12 +13,9 @@
 namespace App\Domain\Task\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
-use App\Domain\Task\Constant\TaskStatusConstant;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Task\Bus\Command\CompleteTask\CompleteTaskCommand;
+use App\Application\Service\RequestService;
 use App\Domain\Task\Facade\TaskFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,9 +25,8 @@ readonly class TaskCompleteAllHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private EntityManagerService $entityManagerService,
         private TaskFacade $taskFacade,
-        private TaskEventDispatcher $taskEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(): JsonResponse
@@ -43,13 +39,8 @@ readonly class TaskCompleteAllHandle
 
         $tasks = $this->taskFacade->findAllByOwnerComplete($user, false);
         foreach ($tasks as $task) {
-            $task->changeComplete();
-            $this->entityManagerService->flush();
-
-            $this->taskEventDispatcher->onTaskChangeStatus(
-                $task,
-                TaskStatusConstant::COMPLETE->value
-            );
+            $createTaskCommand = new CompleteTaskCommand($task);
+            $this->commandBus->dispatch($createTaskCommand);
         }
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
