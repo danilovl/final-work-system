@@ -13,20 +13,17 @@
 namespace App\Domain\Task\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService
-};
-use App\Application\Service\EntityManagerService;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Task\Bus\Command\NotifyCompleteTask\NotifyCompleteTaskCommand;
+use App\Application\Service\RequestService;
 use App\Domain\Task\Entity\Task;
-use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class TaskNotifyCompleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
-        private TaskEventDispatcher $taskEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Task $task): JsonResponse
@@ -35,10 +32,8 @@ readonly class TaskNotifyCompleteHandle
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE);
         }
 
-        $task->changeNotifyComplete();
-        $this->entityManagerService->flush();
-
-        $this->taskEventDispatcher->onTaskNotifyComplete($task);
+        $notifyCompleteTaskCommand = new NotifyCompleteTaskCommand($task);
+        $this->commandBus->dispatch($notifyCompleteTaskCommand);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }
