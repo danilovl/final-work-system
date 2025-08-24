@@ -42,7 +42,6 @@ services:
   App\Domain\:
     resource: '../src/Domain'
     exclude:
-      - '../src/Domain/*/Bus/Command/*/*Command.php'
       - '../src/Domain/*/DTO/'
       - '../src/Domain/*/Entity/'
       - '../src/Domain/*/Exception'
@@ -81,3 +80,8 @@ services:
   App\Domain\SystemEvent\Cache\HomepageCache:
     arguments:
       $cache: '@cache.app'
+
+  _instanceof:
+    App\Application\Interfaces\Bus\CommandHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }

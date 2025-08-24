@@ -15,11 +15,15 @@ namespace App\Domain\Task\Bus\Command\EditTask;
 use App\Application\Interfaces\Bus\CommandInterface;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Model\TaskModel;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
+#[AsMessage('sync')]
 readonly class EditTaskCommand implements CommandInterface
 {
-    public function __construct(
-        public TaskModel $taskModel,
-        public Task $task
-    ) {}
+    private function __construct(public TaskModel $taskModel, public Task $task) {}
+
+    public static function create(TaskModel $taskModel, Task $task): self
+    {
+        return new self($taskModel, $task);
+    }
 }

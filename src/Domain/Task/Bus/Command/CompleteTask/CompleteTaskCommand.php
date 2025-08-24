@@ -14,8 +14,15 @@ namespace App\Domain\Task\Bus\Command\CompleteTask;
 
 use App\Application\Interfaces\Bus\CommandInterface;
 use App\Domain\Task\Entity\Task;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
+#[AsMessage('sync')]
 readonly class CompleteTaskCommand implements CommandInterface
 {
-    public function __construct(public Task $task) {}
+    private function __construct(public Task $task) {}
+
+    public static function create(Task $task): self
+    {
+        return new self($task);
+    }
 }

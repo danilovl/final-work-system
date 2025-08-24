@@ -39,10 +39,3 @@ framework:
     routing:
       'App\Domain\EmailNotification\Messenger\EmailNotificationMessage': email_notification
       'App\Application\Messenger\Loggable\LoggableMessage': loggable
-
-      'App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand': sync
-      'App\Domain\Task\Bus\Command\EditTask\EditTaskCommand': sync
-      'App\Domain\Task\Bus\Command\ChangeStatusTask\ChangeStatusTaskCommand': sync
-      'App\Domain\Task\Bus\Command\CompleteTask\CompleteTaskCommand': sync
-      'App\Domain\Task\Bus\Command\DeleteTask\DeleteTaskCommand': sync
-      'App\Domain\Task\Bus\Command\NotifyCompleteTask\NotifyCompleteTaskCommand': sync

@@ -25,9 +25,7 @@ readonly class CreateTaskHandler implements CommandHandlerInterface
 
     public function __invoke(CreateTaskCommand $command): void
     {
-        $taskModel = $command->taskModel;
-
-        $task = $this->taskFactory->flushFromModel($taskModel);
+        $task = $this->taskFactory->flushFromModel($command->taskModel);
         $this->taskEventDispatcher->onTaskCreate($task);
     }
 }

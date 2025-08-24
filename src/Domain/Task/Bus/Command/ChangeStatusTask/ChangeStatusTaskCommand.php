@@ -14,8 +14,15 @@ namespace App\Domain\Task\Bus\Command\ChangeStatusTask;
 
 use App\Application\Interfaces\Bus\CommandInterface;
 use App\Domain\Task\Entity\Task;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
+#[AsMessage('sync')]
 readonly class ChangeStatusTaskCommand implements CommandInterface
 {
-    public function __construct(public string $type, public Task $task) {}
+    private function __construct(public string $type, public Task $task) {}
+
+    public static function create(string $type, Task $task): self
+    {
+        return new self($type, $task);
+    }
 }

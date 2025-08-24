@@ -14,8 +14,15 @@ namespace App\Domain\Task\Bus\Command\DeleteTask;
 
 use App\Application\Interfaces\Bus\CommandInterface;
 use App\Domain\Task\Entity\Task;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
+#[AsMessage('sync')]
 readonly class DeleteTaskCommand implements CommandInterface
 {
-    public function __construct(public Task $task) {}
+    private function __construct(public Task $task) {}
+
+    public static function create(Task $task): self
+    {
+        return new self($task);
+    }
 }

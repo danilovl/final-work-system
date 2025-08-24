@@ -14,8 +14,15 @@ namespace App\Domain\Task\Bus\Command\CreateTask;
 
 use App\Application\Interfaces\Bus\CommandInterface;
 use App\Domain\Task\Model\TaskModel;
+use Symfony\Component\Messenger\Attribute\AsMessage;
 
+#[AsMessage('sync')]
 readonly class CreateTaskCommand implements CommandInterface
 {
-    public function __construct(public TaskModel $taskModel) {}
+    private function __construct(public TaskModel $taskModel) {}
+
+    public static function create(TaskModel $taskModel): self
+    {
+        return new self($taskModel);
+    }
 }
