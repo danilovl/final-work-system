@@ -42,7 +42,7 @@ readonly class TaskEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $editTaskCommand = new EditTaskCommand($taskModel, $task);
+            $editTaskCommand = EditTaskCommand::create($taskModel, $task);
             $this->commandBus->dispatch($editTaskCommand);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

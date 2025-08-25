@@ -67,7 +67,7 @@ readonly class TaskEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $editTaskCommand = new EditTaskCommand($taskModel, $task);
+                $editTaskCommand = EditTaskCommand::create($taskModel, $task);
                 $this->commandBus->dispatch($editTaskCommand);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');

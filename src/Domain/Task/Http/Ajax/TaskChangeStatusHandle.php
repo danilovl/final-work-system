@@ -33,7 +33,7 @@ readonly class TaskChangeStatusHandle
     {
         $type = $request->attributes->getString('type');
         if (!empty($type)) {
-            $createTaskCommand = new ChangeStatusTaskCommand($type, $task);
+            $createTaskCommand = ChangeStatusTaskCommand::create($type, $task);
             $this->commandBus->dispatch($createTaskCommand);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

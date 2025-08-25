@@ -48,7 +48,7 @@ readonly class TaskCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $createTaskCommand = new CreateTaskCommand($taskModel);
+            $createTaskCommand = CreateTaskCommand::create($taskModel);
             $this->commandBus->dispatch($createTaskCommand);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);

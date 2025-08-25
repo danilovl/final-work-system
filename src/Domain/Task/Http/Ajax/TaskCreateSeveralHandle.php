@@ -62,7 +62,7 @@ readonly class TaskCreateSeveralHandle
             foreach ($taskModel->works as $work) {
                 $taskModel->work = $work;
 
-                $createTaskCommand = new CreateTaskCommand($taskModel);
+                $createTaskCommand = CreateTaskCommand::create($taskModel);
                 $this->commandBus->dispatch($createTaskCommand);
             }
 

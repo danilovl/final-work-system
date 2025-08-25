@@ -32,7 +32,7 @@ readonly class TaskNotifyCompleteHandle
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE);
         }
 
-        $notifyCompleteTaskCommand = new NotifyCompleteTaskCommand($task);
+        $notifyCompleteTaskCommand = NotifyCompleteTaskCommand::create($task);
         $this->commandBus->dispatch($notifyCompleteTaskCommand);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

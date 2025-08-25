@@ -39,7 +39,7 @@ readonly class TaskCompleteAllHandle
 
         $tasks = $this->taskFacade->findAllByOwnerComplete($user, false);
         foreach ($tasks as $task) {
-            $createTaskCommand = new CompleteTaskCommand($task);
+            $createTaskCommand = CompleteTaskCommand::create($task);
             $this->commandBus->dispatch($createTaskCommand);
         }
 
