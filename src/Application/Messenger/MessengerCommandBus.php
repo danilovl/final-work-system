@@ -16,14 +16,28 @@ use App\Application\Interfaces\Bus\{
     CommandInterface,
     CommandBusInterface
 };
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-readonly class MessengerCommandBus implements CommandBusInterface
+class MessengerCommandBus implements CommandBusInterface
 {
-    public function __construct(private MessageBusInterface $commandBus) {}
+    use HandleTrait;
 
-    public function dispatch(CommandInterface $command): void
+    public function __construct(private MessageBusInterface $messageBus) {}
+
+    public function dispatch(CommandInterface $command): Envelope
     {
-        $this->commandBus->dispatch($command);
+        return $this->messageBus->dispatch($command);
+    }
+
+    /**
+     * @template T of object
+     * @param CommandInterface $command
+     * @return object
+     */
+    public function dispatchResult(CommandInterface $command): object
+    {
+        return $this->handle($command);
     }
 }
