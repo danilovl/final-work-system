@@ -12,6 +12,9 @@
 
 namespace App\Domain\Version\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Media\Entity\Media;
+use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant,
@@ -24,7 +27,6 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
@@ -49,8 +51,8 @@ readonly class VersionCreateHandle
         private TranslatorService $translatorService,
         private SeoPageService $seoPageService,
         private EntityManagerService $entityManagerService,
-        private MediaFactory $mediaFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService
+        private VersionEventDispatcherService $versionEventDispatcherService,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): Response
@@ -72,7 +74,10 @@ readonly class VersionCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $media = $this->mediaFactory->flushFromModel($mediaModel);
+                $createVersionCommand = CreateVersionCommand::create($mediaModel);
+                /** @var Media $media */
+                $media = $this->commandBus->dispatchResult($createVersionCommand);
+
                 $this->versionEventDispatcherService->onVersionCreate($media);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
