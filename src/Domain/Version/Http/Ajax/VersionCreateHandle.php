@@ -14,12 +14,14 @@ namespace App\Domain\Version\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Media\Entity\Media;
+use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
 use App\Application\Service\{
     EntityManagerService,
     RequestService
 };
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
@@ -41,8 +43,8 @@ readonly class VersionCreateHandle
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private EntityManagerService $entityManagerService,
         private FormFactoryInterface $formFactory,
-        private MediaFactory $mediaFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService
+        private VersionEventDispatcherService $versionEventDispatcherService,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -63,7 +65,10 @@ readonly class VersionCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $media = $this->mediaFactory->flushFromModel($mediaModel);
+            $createVersionCommand = CreateVersionCommand::create($mediaModel);
+            /** @var Media $media */
+            $media = $this->commandBus->dispatchResult($createVersionCommand);
+
             $this->versionEventDispatcherService->onVersionCreate($media);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
