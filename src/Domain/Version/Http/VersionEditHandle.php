@@ -12,6 +12,8 @@
 
 namespace App\Domain\Version\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Version\Bus\Command\EditVersion\EditVersionCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant,
@@ -24,7 +26,6 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
@@ -46,8 +47,8 @@ readonly class VersionEditHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private SeoPageService $seoPageService,
-        private MediaFactory $mediaFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService
+        private VersionEventDispatcherService $versionEventDispatcherService,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(
@@ -67,7 +68,9 @@ readonly class VersionEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->mediaFactory->flushFromModel($mediaModel, $media);
+                $editVersionCommand = EditVersionCommand::create($media, $mediaModel);
+                /** @var Media $media */
+                $media = $this->commandBus->dispatchResult($editVersionCommand);
 
                 $media->setOwner($user);
                 $this->versionEventDispatcherService->onVersionEdit($media);
