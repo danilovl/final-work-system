@@ -14,12 +14,13 @@ namespace App\Domain\Version\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
+use App\Domain\Version\Bus\Command\EditVersion\EditVersionCommand;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\VersionForm;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -35,8 +36,8 @@ readonly class VersionEditHandle
         private UserService $userService,
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private FormFactoryInterface $formFactory,
-        private MediaFactory $mediaFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService
+        private VersionEventDispatcherService $versionEventDispatcherService,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Media $media): JsonResponse
@@ -49,7 +50,9 @@ readonly class VersionEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->mediaFactory->flushFromModel($mediaModel, $media);
+            $editVersionCommand = EditVersionCommand::create($media, $mediaModel);
+            /** @var Media $media */
+            $media = $this->commandBus->dispatchResult($editVersionCommand);
 
             $media->setOwner($this->userService->getUser());
             $this->versionEventDispatcherService->onVersionEdit($media);
