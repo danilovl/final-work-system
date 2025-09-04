@@ -14,11 +14,12 @@ namespace App\Domain\Work\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
 use App\Domain\User\Service\UserService;
+use App\Domain\Work\Bus\Command\EditWork\EditWorkCommand;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
-use App\Domain\Work\Factory\WorkFactory;
 use App\Domain\Work\Form\WorkForm;
 use App\Domain\Work\Model\WorkModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,8 +34,8 @@ readonly class WorkEditHandle
         private RequestService $requestService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
-        private WorkFactory $workFactory,
-        private WorkEventDispatcher $workEventDispatcher
+        private WorkEventDispatcher $workEventDispatcher,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -47,7 +48,10 @@ readonly class WorkEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->workFactory->flushFromModel($workModel, $work);
+            $editWorkCommand = EditWorkCommand::create($work, $workModel);
+            /** @var Work $work */
+            $work = $this->commandBus->dispatchResult($editWorkCommand);
+
             $this->workEventDispatcher->onWorkEdit($work);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
