@@ -12,6 +12,8 @@
 
 namespace App\Domain\Work\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Work\Bus\Command\EditAuthor\EditAuthorCommand;
 use App\Application\Constant\{
     FlashTypeConstant,
     SeoPageConstant
@@ -22,7 +24,6 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\UserEditForm;
 use App\Domain\User\Model\UserModel;
 use App\Domain\Work\Entity\Work;
@@ -43,8 +44,8 @@ readonly class WorkEditAuthorHandle
         private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory,
         private WorkEventDispatcher $workEventDispatcher,
-        private UserFactory $userFactory,
-        private SeoPageService $seoPageService
+        private SeoPageService $seoPageService,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): Response
@@ -58,7 +59,9 @@ readonly class WorkEditAuthorHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->userFactory->flushFromModel($userModel, $author);
+                $editAuthorCommand = EditAuthorCommand::create($author, $userModel);
+                $this->commandBus->dispatch($editAuthorCommand);
+
                 $this->workEventDispatcher->onWorkEditAuthor($work);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
