@@ -14,11 +14,9 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
-use App\Application\Service\{
-    RequestService,
-    S3ClientService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
+use App\Application\Service\RequestService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
@@ -33,8 +31,7 @@ readonly class WorkDeleteHandle
         private RequestService $requestService,
         private HashidsServiceInterface $hashidsService,
         private FormDeleteFactory $formDeleteFactory,
-        private EntityManagerService $entityManagerService,
-        private S3ClientService $s3ClientService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): RedirectResponse
@@ -45,16 +42,8 @@ readonly class WorkDeleteHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
-                $workMedia = $work->getMedias();
-                foreach ($workMedia as $media) {
-                    $this->s3ClientService->deleteObject(
-                        $media->getType()->getFolder(),
-                        $media->getMediaName()
-                    );
-                }
-
-                $this->entityManagerService->remove($work);
+                $editAuthorCommand = DeleteWorkCommand::create($work);
+                $this->commandBus->dispatch($editAuthorCommand);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
 
