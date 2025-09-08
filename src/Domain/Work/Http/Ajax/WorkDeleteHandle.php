@@ -13,10 +13,9 @@
 namespace App\Domain\Work\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
+use App\Application\Service\RequestService;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -24,12 +23,13 @@ readonly class WorkDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Work $work): JsonResponse
     {
-        $this->entityManagerService->remove($work);
+        $editAuthorCommand = DeleteWorkCommand::create($work);
+        $this->commandBus->dispatch($editAuthorCommand);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
