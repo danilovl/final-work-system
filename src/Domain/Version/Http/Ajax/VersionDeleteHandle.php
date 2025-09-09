@@ -13,10 +13,9 @@
 namespace App\Domain\Version\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Version\Bus\Command\DeleteVersion\DeleteVersionCommand;
+use App\Application\Service\RequestService;
 use App\Domain\Media\Entity\Media;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -24,12 +23,13 @@ readonly class VersionDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Media $media): JsonResponse
     {
-        $this->entityManagerService->remove($media);
+        $deleteVersionCommand = DeleteVersionCommand::create($media);
+        $this->commandBus->dispatch($deleteVersionCommand);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
