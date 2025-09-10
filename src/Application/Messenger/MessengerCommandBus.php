@@ -16,9 +16,11 @@ use App\Application\Interfaces\Bus\{
     CommandInterface,
     CommandBusInterface
 };
-use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\HandleTrait;
-use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\{
+    Envelope,
+    HandleTrait,
+    MessageBusInterface
+};
 
 class MessengerCommandBus implements CommandBusInterface
 {

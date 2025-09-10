@@ -13,8 +13,10 @@
 namespace App\Domain\Work\Bus\Command\DeleteWork;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
-use App\Application\Service\S3ClientService;
+use App\Application\Service\{
+    S3ClientService,
+    EntityManagerService
+};
 
 readonly class DeleteWorkHandler implements CommandHandlerInterface
 {

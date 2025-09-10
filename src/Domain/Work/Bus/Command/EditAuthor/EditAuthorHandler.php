@@ -18,7 +18,7 @@ use App\Domain\User\Factory\UserFactory;
 
 readonly class EditAuthorHandler implements CommandHandlerInterface
 {
-    public function __construct(private UserFactory $userFactory,) {}
+    public function __construct(private UserFactory $userFactory) {}
 
     public function __invoke(EditAuthorCommand $command): User
     {
