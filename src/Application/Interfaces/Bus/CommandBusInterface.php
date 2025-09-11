@@ -20,7 +20,6 @@ interface CommandBusInterface
     public function dispatch(CommandInterface $command): Envelope;
 
     /**
-     * @template T of object
      * @param CommandInterface $command
      * @return object
      * @throws ExceptionInterface

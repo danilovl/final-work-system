@@ -79,7 +79,14 @@ class WorkFunctionHelper
      */
     public static function groupWorksByCategoryAndSorting(iterable $works): array
     {
+        /**
+         * @var array<string, array{works?: Work[], id?: int}> $categoryGroupWithoutSorting
+         */
         $categoryGroupWithoutSorting = [];
+
+        /**
+         * @var array<string, array{works?: Work[], id?: int}> $categoryGroupWithoutSorting
+         */
         $categoryGroupWithSorting = [];
 
         /** @var Work $work */
