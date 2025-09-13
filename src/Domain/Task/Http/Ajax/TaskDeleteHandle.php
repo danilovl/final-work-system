@@ -28,8 +28,8 @@ readonly class TaskDeleteHandle
 
     public function __invoke(Task $task): JsonResponse
     {
-        $deleteTaskCommand = DeleteTaskCommand::create($task);
-        $this->commandBus->dispatch($deleteTaskCommand);
+        $command = DeleteTaskCommand::create($task);
+        $this->commandBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }

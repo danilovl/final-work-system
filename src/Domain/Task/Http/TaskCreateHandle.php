@@ -74,8 +74,8 @@ readonly class TaskCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $createTaskCommand = CreateTaskCommand::create($taskModel);
-                $this->commandBus->dispatch($createTaskCommand);
+                $command = CreateTaskCommand::create($taskModel);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

@@ -28,8 +28,8 @@ readonly class WorkDeleteHandle
 
     public function __invoke(Work $work): JsonResponse
     {
-        $editAuthorCommand = DeleteWorkCommand::create($work);
-        $this->commandBus->dispatch($editAuthorCommand);
+        $command = DeleteWorkCommand::create($work);
+        $this->commandBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }

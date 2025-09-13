@@ -50,9 +50,9 @@ readonly class WorkCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $createWorkCommand = CreateWorkCommand::create($workModel);
+            $command = CreateWorkCommand::create($workModel);
             /** @var Work $work */
-            $work = $this->commandBus->dispatchResult($createWorkCommand);
+            $work = $this->commandBus->dispatchResult($command);
 
             $this->workEventDispatcher->onWorkCreate($work);
 

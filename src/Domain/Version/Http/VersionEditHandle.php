@@ -68,9 +68,9 @@ readonly class VersionEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $editVersionCommand = EditVersionCommand::create($media, $mediaModel);
+                $command = EditVersionCommand::create($media, $mediaModel);
                 /** @var Media $media */
-                $media = $this->commandBus->dispatchResult($editVersionCommand);
+                $media = $this->commandBus->dispatchResult($command);
 
                 $media->setOwner($user);
                 $this->versionEventDispatcherService->onVersionEdit($media);

@@ -14,13 +14,15 @@ namespace App\Domain\Event\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Comment\Bus\Command\CreateComment\CreateCommentCommand;
+use App\Domain\Comment\Entity\Comment;
 use App\Application\Service\{
     RequestService,
     SeoPageService,
     TwigRenderService
 };
 use App\Domain\Comment\Facade\CommentFacade;
-use App\Domain\Comment\Factory\CommentFactory;
 use App\Domain\Comment\Form\CommentForm;
 use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
@@ -42,10 +44,10 @@ readonly class EventDetailHandle
         private CommentFacade $commentFacade,
         private SeoPageService $seoPageService,
         private FormFactoryInterface $formFactory,
-        private CommentFactory $commentFactory,
         private EventAddressFacade $eventAddressFacade,
         private FormDeleteFactory $formDeleteFactory,
-        private EventEventDispatcher $eventEventDispatcher
+        private EventEventDispatcher $eventEventDispatcher,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Event $event): Response
@@ -68,8 +70,9 @@ readonly class EventDetailHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $eventComment = $this->commentFactory
-                ->createFromModel($eventCommentModel, $eventCommentExist);
+            $command = CreateCommentCommand::create($eventCommentModel, $eventCommentExist);
+            /** @var Comment $eventComment */
+            $eventComment = $this->commandBus->dispatchResult($command);
 
             $this->eventEventDispatcher->onEventComment(
                 $eventComment,

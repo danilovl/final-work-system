@@ -28,8 +28,8 @@ readonly class VersionDeleteHandle
 
     public function __invoke(Media $media): JsonResponse
     {
-        $deleteVersionCommand = DeleteVersionCommand::create($media);
-        $this->commandBus->dispatch($deleteVersionCommand);
+        $command = DeleteVersionCommand::create($media);
+        $this->commandBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }

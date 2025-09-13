@@ -64,9 +64,9 @@ readonly class WorkCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $createWorkCommand = CreateWorkCommand::create($workModel);
+                $command = CreateWorkCommand::create($workModel);
                 /** @var Work $work */
-                $work = $this->commandBus->dispatchResult($createWorkCommand);
+                $work = $this->commandBus->dispatchResult($command);
 
                 $this->workEventDispatcher->onWorkCreate($work);
 

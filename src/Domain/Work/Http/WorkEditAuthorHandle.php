@@ -59,8 +59,8 @@ readonly class WorkEditAuthorHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $editAuthorCommand = EditAuthorCommand::create($author, $userModel);
-                $this->commandBus->dispatch($editAuthorCommand);
+                $command = EditAuthorCommand::create($author, $userModel);
+                $this->commandBus->dispatch($command);
 
                 $this->workEventDispatcher->onWorkEditAuthor($work);
 

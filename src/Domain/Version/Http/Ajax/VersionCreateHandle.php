@@ -65,9 +65,9 @@ readonly class VersionCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $createVersionCommand = CreateVersionCommand::create($mediaModel);
+            $command = CreateVersionCommand::create($mediaModel);
             /** @var Media $media */
-            $media = $this->commandBus->dispatchResult($createVersionCommand);
+            $media = $this->commandBus->dispatchResult($command);
 
             $this->versionEventDispatcherService->onVersionCreate($media);
 

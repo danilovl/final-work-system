@@ -39,8 +39,8 @@ readonly class TaskCompleteAllHandle
 
         $tasks = $this->taskFacade->findAllByOwnerComplete($user, false);
         foreach ($tasks as $task) {
-            $createTaskCommand = CompleteTaskCommand::create($task);
-            $this->commandBus->dispatch($createTaskCommand);
+            $command = CompleteTaskCommand::create($task);
+            $this->commandBus->dispatch($command);
         }
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);

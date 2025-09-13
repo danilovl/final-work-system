@@ -48,9 +48,9 @@ readonly class WorkEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $editWorkCommand = EditWorkCommand::create($work, $workModel);
+            $command = EditWorkCommand::create($work, $workModel);
             /** @var Work $work */
-            $work = $this->commandBus->dispatchResult($editWorkCommand);
+            $work = $this->commandBus->dispatchResult($command);
 
             $this->workEventDispatcher->onWorkEdit($work);
 

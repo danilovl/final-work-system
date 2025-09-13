@@ -42,8 +42,8 @@ readonly class WorkDeleteHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $editAuthorCommand = DeleteWorkCommand::create($work);
-                $this->commandBus->dispatch($editAuthorCommand);
+                $command = DeleteWorkCommand::create($work);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
 
