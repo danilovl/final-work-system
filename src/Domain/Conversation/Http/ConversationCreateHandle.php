@@ -12,6 +12,8 @@
 
 namespace App\Domain\Conversation\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Conversation\Bus\Command\CreateConversation\CreateConversationCommand;
 use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Application\Service\{
     RequestService,
@@ -41,7 +43,8 @@ readonly class ConversationCreateHandle
         private ConversationFacade $conversationFacade,
         private ConversationMessageFacade $conversationMessageFacade,
         private FormFactoryInterface $formFactory,
-        private ConversationTypeFacade $conversationTypeFacade
+        private ConversationTypeFacade $conversationTypeFacade,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -67,7 +70,8 @@ readonly class ConversationCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->conversationFacade->processCreateConversation($user, $conversationModel);
+            $command = CreateConversationCommand::create($user, $conversationModel);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->redirectToRoute('conversation_list');
         }
