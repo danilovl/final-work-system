@@ -12,15 +12,17 @@
 
 namespace App\Domain\Conversation\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Conversation\Bus\Command\CreateWorkConversation\CreateWorkConversationCommand;
+use App\Domain\Conversation\Entity\Conversation;
 use App\Application\Constant\{
     FlashTypeConstant
 };
 use App\Application\Service\RequestService;
-use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Service\{
-    ConversationService
+    ConversationService,
+    ConversationVariationService
 };
-use App\Domain\Conversation\Service\ConversationVariationService;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
@@ -34,7 +36,7 @@ readonly class ConversationCreateWorkHandle
         private HashidsServiceInterface $hashidsService,
         private ConversationService $conversationService,
         private ConversationVariationService $conversationVariationService,
-        private ConversationFactory $conversationFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(
@@ -49,13 +51,9 @@ readonly class ConversationCreateWorkHandle
                 ->checkWorkUsersConversation($work, $userOne, $userTwo);
 
             if ($workConversation === null) {
-                $conversation = $this->conversationFactory->createConversation(
-                    $userOne,
-                    ConversationTypeConstant::WORK->value,
-                    $work
-                );
-
-                $this->conversationFactory->createConversationParticipant($conversation, [$userOne, $userTwo]);
+                $command = CreateWorkConversationCommand::create($userOne, $userTwo, ConversationTypeConstant::WORK->value, $work);
+                /** @var Conversation $eventComment */
+                $conversation = $this->commandBus->dispatchResult($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
