@@ -13,8 +13,9 @@
 namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
+use App\Domain\Conversation\Bus\Command\ChangeReadMessageStatus\ChangeReadMessageStatusCommand;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,15 +25,15 @@ readonly class ConversationChangeReadMessageStatusHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private ConversationMessageFacade $conversationMessageFacade
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(ConversationMessage $conversationMessage): JsonResponse
     {
-        $this->conversationMessageFacade->changeReadMessageStatus(
-            $this->userService->getUser(),
-            $conversationMessage
-        );
+        $user = $this->userService->getUser();
+
+        $command = ChangeReadMessageStatusCommand::create($user, $conversationMessage);
+        $this->commandBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }
