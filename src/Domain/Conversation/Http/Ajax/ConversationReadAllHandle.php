@@ -13,12 +13,13 @@
 namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Conversation\Bus\Command\UpdateAllToStatus\UpdateAllToStatusCommand;
 use App\Application\Service\{
     RequestService,
     EntityManagerService
 };
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\ConversationMessageStatus\Facade\ConversationMessageStatusFacade;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Service\UserService;
@@ -31,7 +32,7 @@ readonly class ConversationReadAllHandle
         private UserService $userService,
         private EntityManagerService $entityManagerService,
         private ConversationMessageFacade $conversationMessageFacade,
-        private ConversationMessageStatusFacade $conversationMessageStatusFacade
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(): JsonResponse
@@ -48,10 +49,8 @@ readonly class ConversationReadAllHandle
                 ConversationMessageStatusTypeConstant::READ->value
             );
 
-            $this->conversationMessageStatusFacade->updateAllToStatus(
-                $user,
-                $conversationMessageStatusType
-            );
+            $command = UpdateAllToStatusCommand::create($user, $conversationMessageStatusType);
+            $this->commandBus->dispatch($command);
         }
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
