@@ -13,9 +13,8 @@
 namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Conversation\Bus\Command\DeleteConversation\DeleteConversationCommand;
 use App\Application\Service\RequestService;
 use App\Domain\Conversation\Entity\Conversation;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,12 +23,13 @@ readonly class ConversationDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Conversation $conversation): JsonResponse
     {
-        $this->entityManagerService->remove($conversation);
+        $command = DeleteConversationCommand::create($conversation);
+        $this->commandBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
