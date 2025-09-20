@@ -13,15 +13,23 @@
 namespace App\Domain\Comment\Bus\Command\CreateComment;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\Comment\Entity\Comment;
 use App\Domain\Comment\Factory\CommentFactory;
+use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 
 readonly class CreateCommentHandler implements CommandHandlerInterface
 {
-    public function __construct(private CommentFactory $commentFactory) {}
+    public function __construct(
+        private CommentFactory $commentFactory,
+        private EventEventDispatcher $eventEventDispatcher
+    ) {}
 
-    public function __invoke(CreateCommentCommand $command): Comment
+    public function __invoke(CreateCommentCommand $command): void
     {
-        return $this->commentFactory->createFromModel($command->commentModel, $command->comment);
+        $this->commentFactory->createFromModel($command->commentModel, $command->comment);
+
+        $this->eventEventDispatcher->onEventComment(
+            $command->comment,
+            $command->commentModel !== null
+        );
     }
 }

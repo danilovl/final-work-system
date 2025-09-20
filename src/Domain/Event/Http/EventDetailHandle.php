@@ -16,7 +16,6 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Comment\Bus\Command\CreateComment\CreateCommentCommand;
-use App\Domain\Comment\Entity\Comment;
 use App\Application\Service\{
     RequestService,
     SeoPageService,
@@ -26,7 +25,6 @@ use App\Domain\Comment\Facade\CommentFacade;
 use App\Domain\Comment\Form\CommentForm;
 use App\Domain\Comment\Model\CommentModel;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -46,7 +44,6 @@ readonly class EventDetailHandle
         private FormFactoryInterface $formFactory,
         private EventAddressFacade $eventAddressFacade,
         private FormDeleteFactory $formDeleteFactory,
-        private EventEventDispatcher $eventEventDispatcher,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -71,13 +68,7 @@ readonly class EventDetailHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = CreateCommentCommand::create($eventCommentModel, $eventCommentExist);
-            /** @var Comment $eventComment */
-            $eventComment = $this->commandBus->dispatchResult($command);
-
-            $this->eventEventDispatcher->onEventComment(
-                $eventComment,
-                $eventCommentExist !== null
-            );
+            $this->commandBus->dispatch($command);
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
         }
