@@ -18,8 +18,6 @@ use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Bus\Command\CreateWork\CreateWorkCommand;
-use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Form\WorkForm;
 use App\Domain\Work\Model\WorkModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -34,7 +32,6 @@ readonly class WorkCreateHandle
         private RequestService $requestService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
-        private WorkEventDispatcher $workEventDispatcher,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -51,10 +48,7 @@ readonly class WorkCreateHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = CreateWorkCommand::create($workModel);
-            /** @var Work $work */
-            $work = $this->commandBus->dispatchResult($command);
-
-            $this->workEventDispatcher->onWorkCreate($work);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

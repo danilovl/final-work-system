@@ -13,15 +13,19 @@
 namespace App\Domain\Work\Bus\Command\EditAuthor;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\User\Entity\User;
 use App\Domain\User\Factory\UserFactory;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 
 readonly class EditAuthorHandler implements CommandHandlerInterface
 {
-    public function __construct(private UserFactory $userFactory) {}
+    public function __construct(
+        private UserFactory $userFactory,
+        private WorkEventDispatcher $workEventDispatcher
+    ) {}
 
-    public function __invoke(EditAuthorCommand $command): User
+    public function __invoke(EditAuthorCommand $command): void
     {
-        return $this->userFactory->flushFromModel($command->userModel, $command->user);
+        $this->userFactory->flushFromModel($command->userModel, $command->user);
+        $this->workEventDispatcher->onWorkEditAuthor($command->work);
     }
 }

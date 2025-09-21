@@ -14,14 +14,21 @@ namespace App\Domain\Work\Bus\Command\CreateWork;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
 use App\Domain\Work\Entity\Work;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Factory\WorkFactory;
 
 readonly class CreateWorkHandler implements CommandHandlerInterface
 {
-    public function __construct(private WorkFactory $workFactory) {}
+    public function __construct(
+        private WorkFactory $workFactory,
+        private WorkEventDispatcher $workEventDispatcher,
+    ) {}
 
     public function __invoke(CreateWorkCommand $command): Work
     {
-        return $this->workFactory->flushFromModel($command->workModel);
+        $work = $this->workFactory->flushFromModel($command->workModel);
+        $this->workEventDispatcher->onWorkCreate($work);
+
+        return $work;
     }
 }

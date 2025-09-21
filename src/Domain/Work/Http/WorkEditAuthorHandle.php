@@ -27,7 +27,6 @@ use App\Application\Service\{
 use App\Domain\User\Form\UserEditForm;
 use App\Domain\User\Model\UserModel;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
@@ -43,7 +42,6 @@ readonly class WorkEditAuthorHandle
         private TranslatorService $translatorService,
         private HashidsServiceInterface $hashidsService,
         private FormFactoryInterface $formFactory,
-        private WorkEventDispatcher $workEventDispatcher,
         private SeoPageService $seoPageService,
         private CommandBusInterface $commandBus
     ) {}
@@ -59,10 +57,8 @@ readonly class WorkEditAuthorHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $command = EditAuthorCommand::create($author, $userModel);
+                $command = EditAuthorCommand::create($author, $userModel, $work);
                 $this->commandBus->dispatch($command);
-
-                $this->workEventDispatcher->onWorkEditAuthor($work);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

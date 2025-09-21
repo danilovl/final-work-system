@@ -20,7 +20,6 @@ use App\Domain\User\Form\UserEditForm;
 use App\Domain\User\Model\UserModel;
 use App\Domain\Work\Bus\Command\EditAuthor\EditAuthorCommand;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -32,7 +31,6 @@ readonly class WorkEditAuthorHandle
     public function __construct(
         private RequestService $requestService,
         private FormFactoryInterface $formFactory,
-        private WorkEventDispatcher $workEventDispatcher,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -46,10 +44,8 @@ readonly class WorkEditAuthorHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = EditAuthorCommand::create($author, $userModel);
+            $command = EditAuthorCommand::create($author, $userModel, $work);
             $this->commandBus->dispatch($command);
-
-            $this->workEventDispatcher->onWorkEditAuthor($work);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

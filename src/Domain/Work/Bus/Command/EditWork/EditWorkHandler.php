@@ -13,15 +13,19 @@
 namespace App\Domain\Work\Bus\Command\EditWork;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\Work\Entity\Work;
+use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Factory\WorkFactory;
 
 readonly class EditWorkHandler implements CommandHandlerInterface
 {
-    public function __construct(private WorkFactory $workFactory) {}
+    public function __construct(
+        private WorkFactory $workFactory,
+        private WorkEventDispatcher $workEventDispatcher
+    ) {}
 
-    public function __invoke(EditWorkCommand $command): Work
+    public function __invoke(EditWorkCommand $command): void
     {
-        return $this->workFactory->flushFromModel($command->workModel, $command->work);
+        $this->workFactory->flushFromModel($command->workModel, $command->work);
+        $this->workEventDispatcher->onWorkEdit($command->work);
     }
 }

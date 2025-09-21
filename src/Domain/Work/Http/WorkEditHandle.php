@@ -25,7 +25,6 @@ use App\Application\Service\{
 };
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\Work\Model\WorkModel;
 use App\Domain\WorkDeadline\Facade\WorkDeadlineFacade;
@@ -47,7 +46,6 @@ readonly class WorkEditHandle
         private HashidsServiceInterface $hashidsService,
         private WorkFormFactory $workFormFactory,
         private WorkDeadlineFacade $workDeadlineFacade,
-        private WorkEventDispatcher $workEventDispatcher,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -63,10 +61,7 @@ readonly class WorkEditHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $command = EditWorkCommand::create($work, $workModel);
-                /** @var Work $work */
-                $work = $this->commandBus->dispatchResult($command);
-
-                $this->workEventDispatcher->onWorkEdit($work);
+                $this->commandBus->dispatchResult($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

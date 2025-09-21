@@ -15,15 +15,20 @@ namespace App\Domain\Work\Bus\Command\EditAuthor;
 use App\Application\Interfaces\Bus\CommandInterface;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Model\UserModel;
+use App\Domain\Work\Entity\Work;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
 #[AsMessage('sync')]
 readonly class EditAuthorCommand implements CommandInterface
 {
-    private function __construct(public User $user, public UserModel $userModel) {}
+    private function __construct(
+        public User $user,
+        public UserModel $userModel,
+        public Work $work
+    ) {}
 
-    public static function create(User $user, UserModel $userModel): self
+    public static function create(User $user, UserModel $userModel, Work $work): self
     {
-        return new self($user, $userModel);
+        return new self($user, $userModel, $work);
     }
 }

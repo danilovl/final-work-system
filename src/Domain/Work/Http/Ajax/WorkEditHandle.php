@@ -19,7 +19,6 @@ use App\Application\Service\RequestService;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Bus\Command\EditWork\EditWorkCommand;
 use App\Domain\Work\Entity\Work;
-use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Form\WorkForm;
 use App\Domain\Work\Model\WorkModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -34,7 +33,6 @@ readonly class WorkEditHandle
         private RequestService $requestService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
-        private WorkEventDispatcher $workEventDispatcher,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -49,10 +47,7 @@ readonly class WorkEditHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = EditWorkCommand::create($work, $workModel);
-            /** @var Work $work */
-            $work = $this->commandBus->dispatchResult($command);
-
-            $this->workEventDispatcher->onWorkEdit($work);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
