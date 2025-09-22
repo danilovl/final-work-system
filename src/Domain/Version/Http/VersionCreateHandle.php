@@ -13,7 +13,6 @@
 namespace App\Domain\Version\Http;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Domain\Media\Entity\Media;
 use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
@@ -31,7 +30,6 @@ use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Service\UserService;
-use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\Factory\VersionFormFactory;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
@@ -51,7 +49,6 @@ readonly class VersionCreateHandle
         private TranslatorService $translatorService,
         private SeoPageService $seoPageService,
         private EntityManagerService $entityManagerService,
-        private VersionEventDispatcherService $versionEventDispatcherService,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -75,10 +72,7 @@ readonly class VersionCreateHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $command = CreateVersionCommand::create($mediaModel);
-                /** @var Media $media */
-                $media = $this->commandBus->dispatchResult($command);
-
-                $this->versionEventDispatcherService->onVersionCreate($media);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

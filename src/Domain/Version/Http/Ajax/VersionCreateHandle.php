@@ -15,7 +15,6 @@ namespace App\Domain\Version\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Domain\Media\Entity\Media;
 use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
 use App\Application\Service\{
     EntityManagerService,
@@ -26,7 +25,6 @@ use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Service\UserService;
-use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\VersionForm;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -43,7 +41,6 @@ readonly class VersionCreateHandle
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private EntityManagerService $entityManagerService,
         private FormFactoryInterface $formFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -66,10 +63,7 @@ readonly class VersionCreateHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = CreateVersionCommand::create($mediaModel);
-            /** @var Media $media */
-            $media = $this->commandBus->dispatchResult($command);
-
-            $this->versionEventDispatcherService->onVersionCreate($media);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

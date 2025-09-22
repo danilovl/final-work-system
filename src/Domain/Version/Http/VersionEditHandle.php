@@ -28,7 +28,6 @@ use App\Application\Service\{
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
-use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\Factory\VersionFormFactory;
 use App\Domain\Work\Entity\Work;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
@@ -47,7 +46,6 @@ readonly class VersionEditHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private SeoPageService $seoPageService,
-        private VersionEventDispatcherService $versionEventDispatcherService,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -68,12 +66,10 @@ readonly class VersionEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $command = EditVersionCommand::create($media, $mediaModel);
-                /** @var Media $media */
-                $media = $this->commandBus->dispatchResult($command);
+                $user = $this->userService->getUser();
 
-                $media->setOwner($user);
-                $this->versionEventDispatcherService->onVersionEdit($media);
+                $command = EditVersionCommand::create($media, $mediaModel, $user);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

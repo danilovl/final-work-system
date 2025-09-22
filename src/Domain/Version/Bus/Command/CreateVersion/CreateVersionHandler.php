@@ -13,15 +13,19 @@
 namespace App\Domain\Version\Bus\Command\CreateVersion;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Factory\MediaFactory;
+use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 
 readonly class CreateVersionHandler implements CommandHandlerInterface
 {
-    public function __construct(private MediaFactory $mediaFactory) {}
+    public function __construct(
+        private MediaFactory $mediaFactory,
+        private VersionEventDispatcherService $versionEventDispatcherService,
+    ) {}
 
-    public function __invoke(CreateVersionCommand $command): Media
+    public function __invoke(CreateVersionCommand $command): void
     {
-        return $this->mediaFactory->flushFromModel($command->mediaModel);
+        $media = $this->mediaFactory->flushFromModel($command->mediaModel);
+        $this->versionEventDispatcherService->onVersionCreate($media);
     }
 }

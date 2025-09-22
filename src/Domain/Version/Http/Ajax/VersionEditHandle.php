@@ -21,7 +21,6 @@ use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\Version\Bus\Command\EditVersion\EditVersionCommand;
-use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Domain\Version\Form\VersionForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
@@ -36,7 +35,6 @@ readonly class VersionEditHandle
         private UserService $userService,
         private MediaMimeTypeFacade $mediaMimeTypeFacade,
         private FormFactoryInterface $formFactory,
-        private VersionEventDispatcherService $versionEventDispatcherService,
         private CommandBusInterface $commandBus
     ) {}
 
@@ -50,12 +48,10 @@ readonly class VersionEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = EditVersionCommand::create($media, $mediaModel);
-            /** @var Media $media */
-            $media = $this->commandBus->dispatchResult($command);
+            $user = $this->userService->getUser();
 
-            $media->setOwner($this->userService->getUser());
-            $this->versionEventDispatcherService->onVersionEdit($media);
+            $command = EditVersionCommand::create($media, $mediaModel, $user);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
