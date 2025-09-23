@@ -15,7 +15,9 @@ namespace App\Domain\Conversation\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Form\SimpleSearchForm;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Model\SearchModel;
+use App\Domain\Conversation\Bus\Command\CreateConversationMessage\CreateConversationMessageCommand;
 use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Application\Service\{
     PaginatorService,
@@ -24,16 +26,12 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\EventDispatcher\ConversationEventDispatcher;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\Conversation\Factory\ConversationFactory;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\Conversation\Service\MessageHighlightService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessage\Factory\ConversationMessageFactory;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
 use App\Domain\ConversationMessage\Model\ConversationMessageModel;
-use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Service\UserService;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -50,14 +48,12 @@ readonly class ConversationDetailHandle
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private ConversationMessageFacade $conversationMessageFacade,
-        private ConversationFactory $conversationFactory,
-        private ConversationMessageFactory $conversationMessageFactory,
         private FormFactoryInterface $formFactory,
         private PaginatorService $paginatorService,
         private SeoPageService $seoPageService,
-        private ConversationEventDispatcher $conversationEventDispatcher,
         private MessageHighlightService $messageHighlightService,
-        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository
+        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Conversation $conversation): Response
@@ -99,18 +95,8 @@ readonly class ConversationDetailHandle
             if ($form->isValid()) {
                 $conversation->createUpdateAblePreUpdate();
 
-                $conversationMessage = $this->conversationMessageFactory
-                    ->flushFromModel($conversationMessageModel);
-
-                $this->conversationFactory->createConversationMessageStatus(
-                    $conversation,
-                    $conversationMessage,
-                    $user,
-                    $conversation->getParticipants(),
-                    ConversationMessageStatusTypeConstant::UNREAD->value
-                );
-
-                $this->conversationEventDispatcher->onConversationMessageCreate($conversationMessage);
+                $command = CreateConversationMessageCommand::create($conversation, $conversationMessageModel, $user);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
             } else {
