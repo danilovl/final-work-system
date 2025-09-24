@@ -17,13 +17,13 @@ use App\Application\Constant\{
     ControllerMethodConstant
 };
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Document\Bus\Command\CreateDocument\CreateDocumentCommand;
 use App\Application\Service\{
     RequestService,
     EntityManagerService
 };
-use App\Domain\Document\EventDispatcher\DocumentEventDispatcher;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
@@ -40,8 +40,7 @@ readonly class DocumentCreateHandle
         private UserService $userService,
         private EntityManagerService $entityManagerService,
         private DocumentFormFactory $documentFormFactory,
-        private MediaFactory $mediaFactory,
-        private DocumentEventDispatcher $documentEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -63,9 +62,8 @@ readonly class DocumentCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $media = $this->mediaFactory->flushFromModel($mediaModel);
-
-            $this->documentEventDispatcher->onDocumentCreate($media);
+            $command = CreateDocumentCommand::create($mediaModel);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

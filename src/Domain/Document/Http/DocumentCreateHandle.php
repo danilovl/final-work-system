@@ -12,6 +12,8 @@
 
 namespace App\Domain\Document\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Document\Bus\Command\CreateDocument\CreateDocumentCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
@@ -22,9 +24,7 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\Document\EventDispatcher\DocumentEventDispatcher;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
@@ -43,8 +43,7 @@ readonly class DocumentCreateHandle
         private TranslatorService $translatorService,
         private EntityManagerService $entityManagerService,
         private DocumentFormFactory $documentFormFactory,
-        private MediaFactory $mediaFactory,
-        private DocumentEventDispatcher $documentEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -68,8 +67,8 @@ readonly class DocumentCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $media = $this->mediaFactory->flushFromModel($mediaModel);
-                $this->documentEventDispatcher->onDocumentCreate($media);
+                $command = CreateDocumentCommand::create($mediaModel);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
