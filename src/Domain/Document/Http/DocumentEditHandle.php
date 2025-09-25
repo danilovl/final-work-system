@@ -12,6 +12,8 @@
 
 namespace App\Domain\Document\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\Document\Bus\Command\EditDocument\EditDocumentCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
@@ -23,7 +25,6 @@ use App\Application\Service\{
 };
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
@@ -39,7 +40,7 @@ readonly class DocumentEditHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private DocumentFormFactory $documentFormFactory,
-        private MediaFactory $mediaFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Media $media): Response
@@ -53,7 +54,8 @@ readonly class DocumentEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->mediaFactory->flushFromModel($mediaModel, $media);
+                $command = EditDocumentCommand::create($mediaModel, $media);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

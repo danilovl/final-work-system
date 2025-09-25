@@ -17,10 +17,11 @@ use App\Application\Constant\{
     ControllerMethodConstant
 };
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
+use App\Domain\Document\Bus\Command\EditDocument\EditDocumentCommand;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Factory\MediaFactory;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
@@ -34,7 +35,7 @@ readonly class DocumentEditHandle
         private RequestService $requestService,
         private UserService $userService,
         private DocumentFormFactory $documentFormFactory,
-        private MediaFactory $mediaFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Media $media): JsonResponse
@@ -46,7 +47,8 @@ readonly class DocumentEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->mediaFactory->flushFromModel($mediaModel, $media);
+            $command = EditDocumentCommand::create($mediaModel, $media);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
