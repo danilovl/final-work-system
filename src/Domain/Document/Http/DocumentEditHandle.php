@@ -69,8 +69,7 @@ readonly class DocumentEditHandle
         if ($request->isXmlHttpRequest()) {
             $form = $this->documentFormFactory
                 ->setUser($user)
-                ->getDocumentForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel, $media)
-                ->handleRequest($request);
+                ->getDocumentForm(ControllerMethodConstant::EDIT_AJAX, $mediaModel, $media);
         }
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/document/document.html.twig');

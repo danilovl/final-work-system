@@ -82,8 +82,7 @@ readonly class DocumentCreateHandle
         if ($request->isXmlHttpRequest()) {
             $form = $this->documentFormFactory
                 ->setUser($user)
-                ->getDocumentForm(ControllerMethodConstant::CREATE_AJAX, $mediaModel)
-                ->handleRequest($request);
+                ->getDocumentForm(ControllerMethodConstant::CREATE_AJAX, $mediaModel);
         }
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/document/document.html.twig');
