@@ -12,6 +12,8 @@
 
 namespace App\Domain\DocumentCategory\Http;
 
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\DocumentCategory\Bus\Command\CreateDocumentCategory\CreateDocumentCategoryCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
@@ -22,7 +24,6 @@ use App\Application\Service\{
     TwigRenderService
 };
 use App\Domain\DocumentCategory\Form\Factory\DocumentCategoryFormFactory;
-use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
@@ -38,7 +39,7 @@ readonly class DocumentCategoryCreateHandle
         private TranslatorService $translatorService,
         private TwigRenderService $twigRenderService,
         private DocumentCategoryFormFactory $documentCategoryFormFactory,
-        private MediaCategoryFactory $mediaCategoryFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -54,8 +55,8 @@ readonly class DocumentCategoryCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->mediaCategoryFactory
-                    ->flushFromModel($mediaCategoryModel);
+                $command = CreateDocumentCategoryCommand::create($mediaCategoryModel);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

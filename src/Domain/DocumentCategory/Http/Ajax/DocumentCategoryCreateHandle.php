@@ -14,8 +14,9 @@ namespace App\Domain\DocumentCategory\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
-use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
+use App\Domain\DocumentCategory\Bus\Command\CreateDocumentCategory\CreateDocumentCategoryCommand;
 use App\Domain\MediaCategory\Form\MediaCategoryForm;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use App\Domain\User\Service\UserService;
@@ -31,7 +32,7 @@ readonly class DocumentCategoryCreateHandle
         private RequestService $requestService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
-        private MediaCategoryFactory $mediaCategoryFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -44,7 +45,8 @@ readonly class DocumentCategoryCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->mediaCategoryFactory->flushFromModel($mediaCategoryModel);
+            $command = CreateDocumentCategoryCommand::create($mediaCategoryModel);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }
