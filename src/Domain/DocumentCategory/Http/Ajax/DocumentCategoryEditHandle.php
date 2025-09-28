@@ -14,9 +14,10 @@ namespace App\Domain\DocumentCategory\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
+use App\Domain\DocumentCategory\Bus\Command\EditDocumentCategory\EditDocumentCategoryCommand;
 use App\Domain\MediaCategory\Entity\MediaCategory;
-use App\Domain\MediaCategory\Factory\MediaCategoryFactory;
 use App\Domain\MediaCategory\Form\MediaCategoryForm;
 use App\Domain\MediaCategory\Model\MediaCategoryModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,7 +31,7 @@ readonly class DocumentCategoryEditHandle
     public function __construct(
         private RequestService $requestService,
         private FormFactoryInterface $formFactory,
-        private MediaCategoryFactory $mediaCategoryFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, MediaCategory $mediaCategory): JsonResponse
@@ -41,8 +42,8 @@ readonly class DocumentCategoryEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->mediaCategoryFactory
-                ->flushFromModel($mediaCategoryModel, $mediaCategory);
+            $command = EditDocumentCategoryCommand::create($mediaCategoryModel, $mediaCategory);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
