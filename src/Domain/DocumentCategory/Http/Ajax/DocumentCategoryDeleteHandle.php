@@ -13,10 +13,9 @@
 namespace App\Domain\DocumentCategory\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\DocumentCategory\Bus\Command\DeleteDocumentCategory\DeleteDocumentCategoryCommand;
+use App\Application\Service\RequestService;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -24,17 +23,18 @@ readonly class DocumentCategoryDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(MediaCategory $mediaCategory): JsonResponse
     {
-        if (count($mediaCategory->getMedias()) === 0) {
-            $this->entityManagerService->remove($mediaCategory);
-
-            return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
+        if (count($mediaCategory->getMedias()) > 0) {
+            return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_FAILURE);
         }
 
-        return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_FAILURE);
+        $command = DeleteDocumentCategoryCommand::create($mediaCategory);
+        $this->commandBus->dispatch($command);
+
+        return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
 }

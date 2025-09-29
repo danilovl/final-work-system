@@ -13,10 +13,9 @@
 namespace App\Domain\DocumentCategory\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Domain\DocumentCategory\Bus\Command\DeleteDocumentCategory\DeleteDocumentCategoryCommand;
+use App\Application\Service\RequestService;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -24,13 +23,14 @@ readonly class DocumentCategoryDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(MediaCategory $mediaCategory): RedirectResponse
     {
         if (count($mediaCategory->getMedias()) === 0) {
-            $this->entityManagerService->remove($mediaCategory);
+            $command = DeleteDocumentCategoryCommand::create($mediaCategory);
+            $this->commandBus->dispatch($command);
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
         } else {
