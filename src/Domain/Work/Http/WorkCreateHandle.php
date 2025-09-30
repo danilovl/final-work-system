@@ -14,6 +14,7 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Work\Bus\Command\CreateWork\CreateWorkCommand;
+use App\Domain\Work\Entity\Work;
 use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
@@ -62,6 +63,7 @@ readonly class WorkCreateHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $command = CreateWorkCommand::create($workModel);
+                /** @var Work $work */
                 $work = $this->commandBus->dispatchResult($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');

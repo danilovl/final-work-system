@@ -25,11 +25,11 @@ readonly class CreateCommentHandler implements CommandHandlerInterface
 
     public function __invoke(CreateCommentCommand $command): void
     {
-        $this->commentFactory->createFromModel($command->commentModel, $command->comment);
+        $comment = $this->commentFactory->createFromModel($command->commentModel, $command->comment);
 
         $this->eventEventDispatcher->onEventComment(
-            $command->comment,
-            $command->commentModel !== null
+            $comment,
+            $command->comment !== null
         );
     }
 }

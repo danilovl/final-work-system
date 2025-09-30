@@ -52,7 +52,7 @@ readonly class ConversationCreateWorkHandle
 
             if ($workConversation === null) {
                 $command = CreateWorkConversationCommand::create($userOne, $userTwo, ConversationTypeConstant::WORK->value, $work);
-                /** @var Conversation $eventComment */
+                /** @var Conversation $conversation */
                 $conversation = $this->commandBus->dispatchResult($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
