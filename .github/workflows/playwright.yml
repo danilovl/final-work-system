@@ -1,0 +1,57 @@
+name: Playwright
+
+on:
+  - workflow_dispatch
+
+jobs:
+  docker:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Start containers
+        uses: ./.github/actions/start-containers
+
+      - name: Check docker api
+        uses: ./.github/actions/check-docker-api
+
+      - name: Add kibana user
+        uses: ./.github/actions/add-kibana-user
+
+      - name: Cache vendor
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: vendor-${{hashFiles('composer.lock')}}
+          restore-keys: vendor-${{hashFiles('composer.lock')}}
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{hashFiles('package-lock.json')}}
+          restore-keys: node_modules-${{hashFiles('package-lock.json')}}
+
+      - name: Composer install
+        uses: ./.github/actions/composer-install
+
+      - name: Npm install
+        uses: ./.github/actions/npm-install
+
+      - name: Run playwright tests
+        uses: ./.github/actions/run-playwright-test
+
+      - name: View dev log file
+        if: always()
+        uses: ./.github/actions/view-dev-log-file
+
+      - name: View dev error log file
+        if: always()
+        uses: ./.github/actions/view-dev-error-log-file
+
+      - name: Stop containers
+        if: always()
+        uses: ./.github/actions/stop-containers

@@ -34,3 +34,10 @@ yarn-error.log
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

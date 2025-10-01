@@ -42,6 +42,8 @@ services:
     build:
       context: ./
       dockerfile: ./docker/node/Dockerfile
+    ports:
+      - '7115:35825'
     volumes:
       - './:/var/www/html/app'
     working_dir: /var/www/html/app
