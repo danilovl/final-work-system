@@ -6,11 +6,9 @@
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "skipLibCheck": true,
+        "baseUrl": ".",
         "paths": {
-            "*": [
-                "*",
-                "tests/Playwright/*"
-            ]
+            "@playwright-test/*": ["tests/Playwright/*"]
         },
         "types": [
             "node",
