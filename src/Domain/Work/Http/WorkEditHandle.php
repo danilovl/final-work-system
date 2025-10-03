@@ -61,7 +61,7 @@ readonly class WorkEditHandle
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $command = EditWorkCommand::create($work, $workModel);
-                $this->commandBus->dispatchResult($command);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
