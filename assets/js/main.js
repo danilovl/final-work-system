@@ -270,7 +270,8 @@ function notifyMessage(notify_type, notify_text) {
         title: notify_text,
         type: notify_type,
         hide: true,
-        styling: 'bootstrap3'
+        styling: 'bootstrap3',
+        delay: 2000
     });
 }
 
