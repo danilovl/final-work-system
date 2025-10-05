@@ -3,7 +3,7 @@ describe('Delete task test', () => {
         cy.loginSupervisor()
     })
 
-    it('Edit task success ajax', () => {
+    it('Delete task success ajax', () => {
         cy.visit(Cypress.env('domain') + '/en/work/task/list')
 
         cy
