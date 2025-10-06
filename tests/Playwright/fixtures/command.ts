@@ -1,6 +1,6 @@
 import {test as base, Page} from '@playwright/test';
-import loginData from 'test-data/login';
-import LoginPage from 'page/login-page';
+import loginData from '@playwright-test/test-data/login';
+import LoginPage from '@playwright-test/page/login-page';
 
 const test = base.extend<{
     loginSupervisor: Page;

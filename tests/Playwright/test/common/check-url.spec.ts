@@ -1,7 +1,7 @@
 import {expect} from '@playwright/test';
-import {test} from 'fixtures/command';
+import {test} from '@playwright-test/fixtures/command';
 
-test.describe('Check static URL test', () => {
+export default function createTests() {
     test.beforeEach(async ({loginSupervisor}) => {});
 
     test('Check static URL success', async ({page}) => {
@@ -38,4 +38,4 @@ test.describe('Check static URL test', () => {
             expect(response!.status()).toBe(200);
         }
     });
-});
+}
