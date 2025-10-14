@@ -25,6 +25,8 @@ describe('Create task test', () => {
             .get('#task-create')
             .click()
 
+        cy.wait(1000)
+
         cy
             .get(taskData.name.id)
             .type(taskData.name.text)
@@ -74,6 +76,8 @@ describe('Create task test', () => {
             .then((href) => {
                 cy.visit(Cypress.env('domain') + href)
             })
+
+        cy.wait(1000)
 
         cy
             .get(taskData.name.id)
