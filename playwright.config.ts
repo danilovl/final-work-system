@@ -11,6 +11,10 @@ export default defineConfig({
     reporter: 'html',
     use: {
         baseURL: 'http://nginx:80',
+        extraHTTPHeaders: {
+            'X-E2E-TEST': '1'
+        },
+        actionTimeout: 10000,
         trace: 'on-first-retry',
         screenshot: 'only-on-failure',
         video: 'on' // retain-on-failure
