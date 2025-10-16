@@ -1,4 +1,4 @@
-import {workData} from '../../fixtures/work/work';
+import { workData } from '@cypress-test/fixtures/work/work'
 
 describe('Create work test', () => {
     beforeEach(() => {
@@ -9,9 +9,11 @@ describe('Create work test', () => {
         cy.visit(Cypress.env('domain') + '/en/work/create')
 
         for (let prop in workData) {
+            const propKey = prop as keyof typeof workData
+
             cy
-                .get(workData[prop].id)
-                .type(workData[prop].text)
+                .get(workData[propKey].id)
+                .type(workData[propKey].text.toString())
         }
 
         cy

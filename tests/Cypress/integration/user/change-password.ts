@@ -1,4 +1,4 @@
-import {passwordData} from '../../fixtures/user/user-change-password';
+import {passwordData} from '@cypress-test/fixtures/user/user-change-password'
 
 describe('Change user password test', () => {
     beforeEach(() => {
@@ -6,12 +6,14 @@ describe('Change user password test', () => {
     })
 
     it('Change user password success', () => {
-        cy.visit(Cypress.env('domain') + '/en/user/profile/change-password')
+        cy.visit(`${Cypress.env('domain')}/en/user/profile/change-password`)
 
-        for (let prop in passwordData) {
+        for (const prop in passwordData) {
+            const propKey = prop as keyof typeof passwordData
+
             cy
-                .get(passwordData[prop].id)
-                .type(passwordData[prop].text)
+                .get(passwordData[propKey].id)
+                .type(passwordData[propKey].text)
         }
 
         cy

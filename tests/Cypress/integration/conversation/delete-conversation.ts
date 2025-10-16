@@ -4,7 +4,7 @@ describe('Delete conversation test', () => {
     })
 
     it('Delete conversation success', () => {
-        cy.visit(Cypress.env('domain') + '/en/conversation/list')
+        cy.visit(`${Cypress.env('domain')}/en/conversation/list`)
         cy.wait(2000)
 
         cy
@@ -13,16 +13,14 @@ describe('Delete conversation test', () => {
             .click()
             .invoke('attr', 'data-target')
             .then((dataTarget) => {
-                cy
-                    .get(dataTarget + ' .delete-element')
+                cy.get(dataTarget + ' .delete-element')
                     .should('be.visible')
                     .click()
-            });
+            })
 
         cy.wait(1000)
 
-        cy
-            .get('.alert-success')
+        cy.get('.alert-success')
             .should('be.visible')
     })
 })

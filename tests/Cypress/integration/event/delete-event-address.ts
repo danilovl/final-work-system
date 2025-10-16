@@ -4,7 +4,7 @@ describe('Delete event address test', () => {
     })
 
     it('Delete event address success ajax', () => {
-        cy.visit(Cypress.env('domain') + '/en/event/address/list')
+        cy.visit(`${Cypress.env('domain')}/en/event/address/list`)
 
         cy
             .get('.btn.btn-danger.btn-xs')

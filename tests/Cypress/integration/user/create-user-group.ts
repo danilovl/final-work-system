@@ -1,4 +1,4 @@
-import {userGroupData} from '../../fixtures/user/user-group';
+import {userGroupData} from '@cypress-test/fixtures/user/user-group'
 
 describe('Create user group test', () => {
     beforeEach(() => {
@@ -6,7 +6,7 @@ describe('Create user group test', () => {
     })
 
     it('Create user group success', () => {
-        cy.visit(Cypress.env('domain') + '/en/user/group/create')
+        cy.visit(`${Cypress.env('domain')}/en/user/group/create`)
 
         cy
             .get(userGroupData.name.id)

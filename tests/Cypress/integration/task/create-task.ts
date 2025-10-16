@@ -1,12 +1,12 @@
-import {taskData} from '../../fixtures/task/task';
+import { taskData } from '@cypress-test/fixtures/task/task'
 
-describe('Edit task test', () => {
+describe('Create task test', () => {
     beforeEach(() => {
         cy.loginSupervisor()
     })
 
-    it('Edit task success ajax', () => {
-        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
+    it('Create task success ajax', () => {
+        cy.visit(`${Cypress.env('domain')}/en/work/supervisor/list`)
 
         cy
             .get('.work-group-list')
@@ -18,27 +18,26 @@ describe('Edit task test', () => {
             .first()
             .should('have.attr', 'href')
             .then((href) => {
-                cy.visit(Cypress.env('domain') + href)
+                cy.visit(`${Cypress.env('domain')}${href}`)
             })
 
         cy
-            .get('.btn.btn-warning.btn-xs')
-            .first()
+            .get('#task-create')
             .click()
+
+        cy.wait(1000)
 
         cy
             .get(taskData.name.id)
-            .clear()
             .type(taskData.name.text)
 
         cy
             .get(taskData.deadline.id)
-            .clear()
             .type(taskData.deadline.text)
             .click()
 
         cy.window().then((win) => {
-            win
+            (win as any)
                 .tinymce
                 .activeEditor
                 .setContent(`<strong>${taskData.description.text}</strong>`)
@@ -55,8 +54,8 @@ describe('Edit task test', () => {
             .should('be.visible')
     })
 
-    it('Edit success task', () => {
-        cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
+    it('Create success task', () => {
+        cy.visit(`${Cypress.env('domain')}/en/work/supervisor/list`)
 
         cy
             .get('.work-group-list')
@@ -68,28 +67,28 @@ describe('Edit task test', () => {
             .first()
             .should('have.attr', 'href')
             .then((href) => {
-                cy.visit(Cypress.env('domain') + href)
+                cy.visit(`${Cypress.env('domain')}${href}`)
             })
 
         cy
-            .get('.btn.btn-warning.btn-xs')
-            .first()
-            .then(function (item) {
-                cy.visit(item.prop('href'))
+            .get('#task-create')
+            .should('have.attr', 'href')
+            .then((href) => {
+                cy.visit(`${Cypress.env('domain')}${href}`)
             })
+
+        cy.wait(1000)
 
         cy
             .get(taskData.name.id)
-            .clear()
             .type(taskData.name.text)
 
         cy
             .get(taskData.deadline.id)
-            .clear()
             .type(taskData.deadline.text)
 
         cy.window().then((win) => {
-            win
+            (win as any)
                 .tinymce
                 .activeEditor
                 .setContent(`<strong>${taskData.description.text}</strong>`)

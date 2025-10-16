@@ -4,7 +4,7 @@ describe('Create event calendar test', () => {
     })
 
     it('Create event calendar success', () => {
-        cy.visit(Cypress.env('domain') + '/en/event/calendar/manage')
+        cy.visit(`${Cypress.env('domain')}/en/event/calendar/manage`)
         cy.wait(2000)
 
         cy

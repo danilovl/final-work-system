@@ -3,8 +3,8 @@ describe('Change user profile image test', () => {
         cy.loginSupervisor()
     })
 
-    it('Change user profile image  success', () => {
-        cy.visit(Cypress.env('domain') + '/en/user/profile/image')
+    it('Change user profile image success', () => {
+        cy.visit(`${Cypress.env('domain')}/en/user/profile/image`)
 
         cy
             .get('#user_profile_image_uploadMedia')

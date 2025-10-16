@@ -1,11 +1,11 @@
-import {successUserData} from '../../fixtures/user/user';
+import { successUserData } from '@cypress-test/fixtures/user/user'
 
 describe('Create user test', () => {
-    const failedUserData = successUserData;
+    let failedUserData = { ...successUserData }
 
     failedUserData.email = {
         'id': '#user_email',
-        'text': Math.random().toString(36).substring(2, 10) + '@gmail.com'
+        'text': Math.random().toString(36).substring(2, 10)
     }
 
     failedUserData.username = {
@@ -18,12 +18,14 @@ describe('Create user test', () => {
     })
 
     it('Create user success', () => {
-        cy.visit(Cypress.env('domain') + '/en/user/create')
+        cy.visit(`${Cypress.env('domain')}/en/user/create`)
 
         for (let prop in successUserData) {
+            const propKey = prop as keyof typeof successUserData
+
             cy
-                .get(successUserData[prop].id)
-                .type(successUserData[prop].text)
+                .get(successUserData[propKey].id)
+                .type(successUserData[propKey].text.toString())
         }
 
         cy
@@ -38,12 +40,14 @@ describe('Create user test', () => {
     })
 
     it('Create user failed', () => {
-        cy.visit(Cypress.env('domain') + '/en/user/create')
+        cy.visit(`${Cypress.env('domain')}/en/user/create`)
 
         for (let prop in failedUserData) {
+            const propKey = prop as keyof typeof failedUserData
+
             cy
-                .get(failedUserData[prop].id)
-                .type(failedUserData[prop].text)
+                .get(failedUserData[propKey].id)
+                .type(failedUserData[propKey].text.toString())
         }
 
         cy

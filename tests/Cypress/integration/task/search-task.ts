@@ -1,10 +1,10 @@
-describe('Search conversation test', () => {
+describe('Search task test', () => {
     beforeEach(() => {
         cy.loginSupervisor()
     })
 
-    it('Search conversation success', () => {
-        cy.visit(Cypress.env('domain') + '/en/conversation/list')
+    it('Search task success', () => {
+        cy.visit(`${Cypress.env('domain')}/en/work/task/list`)
         cy.wait(2000)
 
         cy

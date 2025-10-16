@@ -1,14 +1,11 @@
-import {successUserData} from '../../fixtures/user/user';
+import {workData} from '@cypress-test/fixtures/work/work'
 
-delete successUserData.email;
-delete successUserData.username;
-
-describe('Edit work user test', () => {
+describe('Edit work test', () => {
     beforeEach(() => {
         cy.loginSupervisor()
     })
 
-    it('Edit work user success ajax', () => {
+    it('Edit work success ajax', () => {
         cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
@@ -29,18 +26,20 @@ describe('Edit work user test', () => {
             .click()
 
         cy
-            .get('#work-author-edit')
+            .get('#work-edit')
             .click()
 
-        for (let prop in successUserData) {
+        for (let prop in workData) {
+            const propKey = prop as keyof typeof workData
+
             cy
-                .get(successUserData[prop].id)
+                .get(workData[propKey].id)
                 .clear()
-                .type(successUserData[prop].text)
+                .type(workData[propKey].text.toString())
         }
 
         cy
-            .get('#user-button-action')
+            .get('#work-button-action')
             .click()
 
         cy.wait(1000)
@@ -50,7 +49,7 @@ describe('Edit work user test', () => {
             .should('be.visible')
     })
 
-    it('Edit work user success', () => {
+    it('Edit work success', () => {
         cy.visit(Cypress.env('domain') + '/en/work/supervisor/list')
 
         cy
@@ -71,21 +70,23 @@ describe('Edit work user test', () => {
             .click()
 
         cy
-            .get('#work-author-edit')
+            .get('#work-edit')
             .should('have.attr', 'href')
             .then((href) => {
                 cy.visit(Cypress.env('domain') + href)
             })
 
-        for (let prop in successUserData) {
+        for (let prop in workData) {
+            const propKey = prop as keyof typeof workData
+
             cy
-                .get(successUserData[prop].id)
+                .get(workData[propKey].id)
                 .clear()
-                .type(successUserData[prop].text)
+                .type(workData[propKey].text.toString())
         }
 
         cy
-            .get('#user-button-action')
+            .get('#work-button-action')
             .click()
 
         cy.wait(1000)

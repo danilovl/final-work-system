@@ -1,19 +1,19 @@
-describe('Delete event calendar test', () => {
+describe('Delete task test', () => {
     beforeEach(() => {
         cy.loginSupervisor()
     })
 
-    it('Delete event calendar success', () => {
-        cy.visit(Cypress.env('domain') + '/en/event/calendar/manage')
-        cy.wait(2000)
+    it('Delete task success ajax', () => {
+        cy.visit(`${Cypress.env('domain')}/en/work/task/list`)
 
         cy
-            .get('.fc-draggable')
+            .get('.btn.btn-danger.btn-xs')
             .first()
             .click()
 
         cy
-            .get('#event-delete')
+            .get('.btn.btn-danger.delete-element')
+            .first()
             .click()
 
         cy.wait(1000)

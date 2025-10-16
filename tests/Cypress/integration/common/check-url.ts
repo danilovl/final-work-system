@@ -4,7 +4,7 @@ describe('Check static url test', () => {
     })
 
     it('Check static url success', () => {
-        const urls = [
+        const urls: string[] = [
             '/en/reset-password/request',
             '/en/reset-password/check-email',
             '/en/article/category/list',
@@ -30,8 +30,8 @@ describe('Check static url test', () => {
             '/en/user/create'
         ]
 
-        urls.forEach(url => {
-            cy.visit(Cypress.env('domain') + url)
+        urls.forEach((url: string) => {
+            cy.visit(`${Cypress.env('domain')}${url}`)
             cy.wait(2000)
         })
     })

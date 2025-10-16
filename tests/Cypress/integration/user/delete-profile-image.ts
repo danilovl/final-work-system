@@ -4,7 +4,7 @@ describe('Delete user profile image test', () => {
     })
 
     it('Delete user profile image success', () => {
-        cy.visit(Cypress.env('domain') + '/en/user/profile/image')
+        cy.visit(`${Cypress.env('domain')}/en/user/profile/image`)
 
         cy
             .get('#delete-profile-image')

@@ -1,4 +1,4 @@
-import {conversationData} from '../../fixtures/conversation/conversation';
+import {conversationData} from '@cypress-test/fixtures/conversation/conversation'
 
 describe('Create conversation test', () => {
     beforeEach(() => {
@@ -6,7 +6,7 @@ describe('Create conversation test', () => {
     })
 
     it('Create conversation success', () => {
-        cy.visit(Cypress.env('domain') + '/en/conversation/create')
+        cy.visit(`${Cypress.env('domain')}/en/conversation/create`)
         cy.wait(2000)
 
         cy
@@ -30,10 +30,9 @@ describe('Create conversation test', () => {
             .click()
 
         cy.window().then((win) => {
-            win
-                .tinymce
-                .activeEditor
-                .setContent(`<strong>${conversationData.bodyMessage.text}</strong>`)
+            (win as any).tinymce.activeEditor.setContent(
+                `<strong>${conversationData.bodyMessage.text}</strong>`
+            )
         })
 
         cy
