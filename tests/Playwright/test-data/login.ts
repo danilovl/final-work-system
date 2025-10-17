@@ -11,4 +11,4 @@ export default {
         username: 'supervisor',
         password: 'supervisorsupervisor'
     }
-};
+}

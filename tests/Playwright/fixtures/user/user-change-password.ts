@@ -1,4 +1,4 @@
-import loginData from '../../test-data/login';
+import loginData from '../../test-data/login'
 
 const passwordData = {
     old: {

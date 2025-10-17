@@ -1,19 +1,21 @@
-import {test} from '@playwright-test/fixtures/command';
-import {workData} from '@playwright-test/fixtures/work/work';
+import {test} from '@playwright-test/fixtures/command'
+import {workData} from '@playwright-test/fixtures/work/work'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {});
+    test.beforeEach(async ({loginSupervisor}) => {})
 
     test('Create work success', async ({page}) => {
-        await page.goto('/en/work/create');
+        await page.goto('/en/work/create')
 
         for (const prop in workData) {
+            const propKey = prop as keyof typeof workData
+
             await page.fill(
-                workData[prop as keyof typeof workData].id,
-                workData[prop as keyof typeof workData].text.toString()
-            );
+                workData[propKey].id,
+                workData[propKey].text.toString()
+            )
         }
 
-        await page.click('#work-button-action');
-    });
+        await page.click('#work-button-action')
+    })
 }

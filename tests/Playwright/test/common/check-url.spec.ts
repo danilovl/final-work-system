@@ -1,8 +1,8 @@
-import {expect} from '@playwright/test';
-import {test} from '@playwright-test/fixtures/command';
+import {expect} from '@playwright/test'
+import {test} from '@playwright-test/fixtures/command'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {});
+    test.beforeEach(async ({loginSupervisor}) => {})
 
     test('Check static URL success', async ({page}) => {
         const urls = [
@@ -29,13 +29,13 @@ export default function createTests() {
             '/en/event/schedule/create',
             '/en/event/schedule/list',
             '/en/user/create'
-        ];
+        ]
 
         for (const url of urls) {
-            const response = await page.goto(url);
+            const response = await page.goto(url)
 
-            expect(response).not.toBeNull();
-            expect(response!.status()).toBe(200);
+            expect(response).not.toBeNull()
+            expect(response!.status()).toBe(200)
         }
-    });
+    })
 }
