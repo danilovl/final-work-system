@@ -1,4 +1,6 @@
 (function ($) {
+    "use strict";
+
     $.fn.select2.amd.define('optgroup-data', ['select2/data/select', 'select2/utils'], function (SelectAdapter, Utils) {
         function OptgroupData($element, options) {
             OptgroupData.__super__.constructor.apply(this, arguments);
@@ -8,12 +10,13 @@
         Utils.Extend(OptgroupData, SelectAdapter);
 
         OptgroupData.prototype.current = function (callback) {
-            var data = [];
-            var self = this;
+            let data = [];
+            let self = this;
             this._checkOptgroups();
+
             this.$element.find(':not(.selected-custom) :selected, .selected-custom').each(function () {
-                var $option = $(this);
-                var option = self.item($option);
+                let $option = $(this);
+                let option = self.item($option);
 
                 if (!option.hasOwnProperty('id')) {
                     option.id = 'optgroup';
@@ -27,7 +30,7 @@
 
         OptgroupData.prototype.bind = function (container, $container) {
             OptgroupData.__super__.bind.apply(this, arguments);
-            var self = this;
+            let self = this;
 
             container.on('optgroup:select', function (params) {
                 self.optgroupSelect(params.data);
@@ -73,14 +76,14 @@
 
         OptgroupData.prototype.optgroupSelect = function (data) {
             data.selected = true;
-            var vals = this.$element.val() || [];
+            let vals = this.$element.val() || [];
 
-            var newVals = $.map(data.element.children, function (child) {
+            let newVals = $.map(data.element.children, function (child) {
                 return '' + child.value;
             });
 
             newVals.forEach(function (val) {
-                if ($.inArray(val, vals) == -1) {
+                if ($.inArray(val, vals) === -1) {
                     vals.push(val);
                 }
             });
@@ -95,14 +98,14 @@
 
         OptgroupData.prototype.optgroupUnselect = function (data) {
             data.selected = false;
-            var vals = this.$element.val() || [];
-            var removeVals = $.map(data.element.children, function (child) {
+            let vals = this.$element.val() || [];
+            let removeVals = $.map(data.element.children, function (child) {
                 return '' + child.value;
             });
-            var newVals = [];
+            let newVals = [];
 
             vals.forEach(function (val) {
-                if ($.inArray(val, removeVals) == -1) {
+                if ($.inArray(val, removeVals) === -1) {
                     newVals.push(val);
                 }
             });
@@ -116,11 +119,11 @@
         // Check if all children of optgroup are selected. If so, select optgroup
         OptgroupData.prototype._checkOptgroups = function () {
             this.$element.find('optgroup').each(function () {
-                var children = this.children;
+                let children = this.children;
 
-                var allSelected = !!children.length;
+                let allSelected = !!children.length;
 
-                for (var i = 0; i < children.length; i++) {
+                for (let i = 0; i < children.length; i++) {
                     allSelected = children[i].selected;
                     if (!allSelected) {
                         break;
@@ -145,6 +148,7 @@
 
         return OptgroupData;
     });
+
     $.fn.select2.amd.define('optgroup-results', ['select2/results', 'select2/utils', 'select2/keys'], function OptgroupResults(ResultsAdapter, Utils, KEYS) {
         function OptgroupResults() {
             OptgroupResults.__super__.constructor.apply(this, arguments);
@@ -153,10 +157,10 @@
         Utils.Extend(OptgroupResults, ResultsAdapter);
 
         OptgroupResults.prototype.option = function (data) {
-            var option = OptgroupResults.__super__.option.call(this, data);
+            let option = OptgroupResults.__super__.option.call(this, data);
 
             if (data.children) {
-                var $label = $(option).find('.select2-results__group');
+                let $label = $(option).find('.select2-results__group');
                 $label.attr({
                     'role': 'treeitem',
                     'aria-selected': 'false'
@@ -170,14 +174,12 @@
 
         OptgroupResults.prototype.bind = function (container, $container) {
             OptgroupResults.__super__.bind.call(this, container, $container);
-            var self = this;
+            let self = this;
 
             this.$results.on('mouseup', '.select2-results__group', function (evt) {
-                var $this = $(this);
-
-                var data = $this.data('data');
-
-                var trigger = ($this.attr('aria-selected') === 'true') ? 'optgroup:unselect' : 'optgroup:select';
+                let $this = $(this);
+                let data = $this.data('data');
+                let trigger = ($this.attr('aria-selected') === 'true') ? 'optgroup:unselect' : 'optgroup:select';
 
                 self.trigger(trigger, {
                     originalEvent: evt,
@@ -187,8 +189,8 @@
                 return false;
             });
 
-            this.$results.on('mouseenter', '.select2-results__group[aria-selected]', function (evt) {
-                var data = $(this).data('data');
+            this.$results.on('mouseenter', '.select2-results__group[aria-selected]', function () {
+                let data = $(this).data('data');
 
                 self.getHighlightedResults()
                     .removeClass('select2-results__option--highlighted');
@@ -221,11 +223,11 @@
         };
 
         OptgroupResults.prototype.setClasses = function () {
-            var self = this;
+            let self = this;
 
             this.data.current(function (selected) {
-                var selectedIds = [];
-                var optgroupLabels = [];
+                let selectedIds = [];
+                let optgroupLabels = [];
 
                 $.each(selected, function (i, obj) {
                     if (obj.children) {
@@ -238,12 +240,11 @@
                     }
                 });
 
-                var $options = self.$results.find('.select2-results__option[aria-selected]');
+                let $options = self.$results.find('.select2-results__option[aria-selected]');
 
                 $options.each(function () {
-                    var $option = $(this);
-
-                    var id = $option.attr('id');
+                    let $option = $(this);
+                    let id = $option.attr('id');
 
                     if ($.inArray(id, selectedIds) > -1) {
                         $option.attr('aria-selected', 'true');
@@ -253,13 +254,13 @@
                 });
 
 
-                var $groups = self.$results.find('.select2-results__group[aria-selected]');
+                let $groups = self.$results.find('.select2-results__group[aria-selected]');
 
                 $groups.each(function () {
-                    var $optgroup = $(this);
-                    var item = $.data(this, 'data');
-                    var text = item.text;
-                    var $element = $(item.element);
+                    let $optgroup = $(this);
+                    let item = $.data(this, 'data');
+                    let text = item.text;
+                    let $element = $(item.element);
 
                     if ($element.hasClass('selected-custom') || $.inArray(text, optgroupLabels) > -1) {
                         $optgroup.attr('aria-selected', 'true');

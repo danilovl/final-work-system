@@ -1,4 +1,4 @@
-/*
+/**
  *
  * This file is part of the FinalWorkSystem project.
  * (c) Bc. Vladimir Danilov
@@ -5559,4 +5559,8 @@ ul.msg_list li .time {
     background-color: white;
     width: 400px;
     height: 400px;
+}
+
+.ui-pnotify {
+    width: 320px !important;
 }

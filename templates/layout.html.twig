@@ -60,7 +60,7 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', () => {
             $.ajaxSetup({'global': true});
             initSidebar();
             initValidator();
@@ -147,13 +147,15 @@
             notifyMessage('error', errors[status.status]);
         });
 
-        {% for type, messages in app.flashes %}
-        {% for message in messages %}
-        $(document).ready(() => {
-            notifyMessage('{{ type }}', '{{ message }}');
+        window.addEventListener('load', () => {
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    setTimeout(() => {
+                        notifyMessage('{{ type }}', '{{ message }}');
+                    })
+                {% endfor %}
+            {% endfor %}
         });
-        {% endfor %}
-        {% endfor %}
     </script>
 
     {% block javascript %}{% endblock %}

@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 
-/*
+/**
  * This is an example Stimulus controller!
  *
  * Any element with a data-controller="hello" attribute will cause

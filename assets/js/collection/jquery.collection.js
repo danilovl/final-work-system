@@ -1,4 +1,4 @@
-/*
+/**
  * jquery.collection.js
  *
  * Copyright (c) 2042 alain tiemblo <alain at fuz dot org>
