@@ -50,14 +50,19 @@ class GetEventMiddleware
 
     protected function setResponse(ControllerEvent $event): void
     {
-        $event->setController(function (): JsonResponse {
-            return new JsonResponse([
-                'valid' => false,
-                'notifyMessage' => [
-                    FlashTypeConstant::ERROR->value => $this->translator->trans('app.flash.form.create.error'),
-                    FlashTypeConstant::WARNING->value => $this->translator->trans('app.flash.form.create.warning')
-                ]
-            ]);
-        });
+        $event->setController(fn (): JsonResponse => $this->createErrorResponse());
+    }
+
+    private function createErrorResponse(): JsonResponse
+    {
+        $messages = [
+            FlashTypeConstant::ERROR->value => $this->translator->trans('app.flash.form.create.error'),
+            FlashTypeConstant::WARNING->value => $this->translator->trans('app.flash.form.create.warning')
+        ];
+
+        return new JsonResponse([
+            'valid' => false,
+            'notifyMessage' => $messages,
+        ]);
     }
 }
