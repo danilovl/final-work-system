@@ -210,8 +210,12 @@
                                     notifyMessage(type, response.notifyMessage[type]);
                                 }
                             },
-                            error: function () {
+                            error: function (response) {
                                 revertFunc();
+
+                                for (let type in response.responseJSON.notifyMessage) {
+                                    notifyMessage(type, response.responseJSON.notifyMessage[type]);
+                                }
                             }
                         });
                     },
@@ -235,8 +239,12 @@
                                     notifyMessage(type, response.notifyMessage[type]);
                                 }
                             },
-                            error: function () {
+                            error: function (response) {
                                 revertFunc();
+
+                                for (let type in response.responseJSON.notifyMessage) {
+                                    notifyMessage(type, response.responseJSON.notifyMessage[type]);
+                                }
                             }
                         });
                     },
@@ -274,6 +282,11 @@
 
                                 for (let type in response.notifyMessage) {
                                     notifyMessage(type, response.notifyMessage[type]);
+                                }
+                            },
+                            error: function (response) {
+                                for (let type in response.responseJSON.notifyMessage) {
+                                    notifyMessage(type, response.responseJSON.notifyMessage[type]);
                                 }
                             }
                         });
