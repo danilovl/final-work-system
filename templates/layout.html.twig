@@ -106,8 +106,8 @@
             });
 
             {% if parameter_get('event_source.widget.top_nav.active') == true %}
-                widgetEventSource("{{ mercure('unread-conversation-message-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-conversation-messages');
-                widgetEventSource("{{ mercure('unread-system-event-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-system-events');
+            widgetEventSource("{{ mercure('unread-conversation-message-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-conversation-messages');
+            widgetEventSource("{{ mercure('unread-system-event-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-system-events');
             {% endif %}
         });
 
@@ -125,7 +125,12 @@
             initModalDraggable();
         });
 
-        $(document).ajaxError((obj, status) => {
+        $(document).ajaxError((event, jqXHR) => {
+            const response = jqXHR.responseJSON;
+            if (response.hasOwnProperty('notifyMessage')) {
+                return
+            }
+
             let errors = [];
             let modalBackdrop = $('.modal-backdrop');
             let modalWindow = $('#modalWindow');
@@ -134,6 +139,11 @@
             errors[403] = '{{ 'app.flash.error.403' | trans([], 'flashes') }}';
             errors[404] = '{{ 'app.flash.error.404' | trans([], 'flashes') }}';
             errors[500] = '{{ 'app.flash.error.500' | trans([], 'flashes') }}';
+
+            let message = errors[jqXHR.status] ?? null
+            if (!message) {
+                message = `Status ${jqXHR.status}`
+            }
 
             if (modalBackdrop.hasClass('in')) {
                 modalBackdrop.removeClass('in');
@@ -144,16 +154,16 @@
                 modalWindowContent.empty();
             }
 
-            notifyMessage('error', errors[status.status]);
+            notifyMessage('error', message);
         });
 
         window.addEventListener('load', () => {
             {% for type, messages in app.flashes %}
-                {% for message in messages %}
-                    setTimeout(() => {
-                        notifyMessage('{{ type }}', '{{ message }}');
-                    })
-                {% endfor %}
+            {% for message in messages %}
+            setTimeout(() => {
+                notifyMessage('{{ type }}', '{{ message }}');
+            })
+            {% endfor %}
             {% endfor %}
         });
     </script>
