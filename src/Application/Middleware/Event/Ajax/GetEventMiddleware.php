@@ -18,7 +18,10 @@ use App\Application\Constant\{
 };
 use App\Application\Helper\DateHelper;
 use App\Application\Service\TranslatorService;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\{
+    Response,
+    JsonResponse
+};
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class GetEventMiddleware
@@ -60,9 +63,12 @@ class GetEventMiddleware
             FlashTypeConstant::WARNING->value => $this->translator->trans('app.flash.form.create.warning')
         ];
 
-        return new JsonResponse([
-            'valid' => false,
-            'notifyMessage' => $messages,
-        ]);
+        return new JsonResponse(
+            data: [
+                'valid' => false,
+                'notifyMessage' => $messages
+            ],
+            status: Response::HTTP_BAD_REQUEST
+        );
     }
 }

@@ -71,7 +71,7 @@ readonly class RequestService
     public function createAjaxJson(
         AjaxJsonTypeConstant $type,
         ?array $extraData = null,
-        int $statusCode = Response::HTTP_OK
+        ?int $statusCode = null
     ): JsonResponse {
         $data = match ($type) {
             AjaxJsonTypeConstant::CREATE_SUCCESS => [
@@ -114,6 +114,16 @@ readonly class RequestService
                 ]
             ]
         };
+
+        if ($statusCode === null) {
+            $statusCode = match ($type) {
+                AjaxJsonTypeConstant::CREATE_SUCCESS => Response::HTTP_CREATED,
+                AjaxJsonTypeConstant::SAVE_SUCCESS, AjaxJsonTypeConstant::DELETE_SUCCESS => Response::HTTP_OK,
+                AjaxJsonTypeConstant::CREATE_FAILURE,
+                AjaxJsonTypeConstant::SAVE_FAILURE,
+                AjaxJsonTypeConstant::DELETE_FAILURE => Response::HTTP_BAD_REQUEST
+            };
+        }
 
         if (!empty($extraData)) {
             $data = array_merge($data, $extraData);
