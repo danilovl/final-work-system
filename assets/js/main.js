@@ -313,6 +313,18 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
         loadingIcon = $(buttonCreate.children()[0]),
         form = buttonCreate.parents('form');
 
+    const processResponse = function (response) {
+        if (response.valid === false) {
+            for (const key in response.data) {
+                $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
+            }
+        }
+
+        for (let type in response.notifyMessage) {
+            notifyMessage(type, response.notifyMessage[type]);
+        }
+    }
+
     buttonCreate.on('click', (function (e) {
         e.preventDefault();
 
@@ -331,14 +343,8 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
             cache: false,
             dataType: "json",
             success: function (response) {
-                if (response.valid === false) {
-                    for (let key in response.data) {
-                        $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
-                    }
-                }
-                for (let type in response.notifyMessage) {
-                    notifyMessage(type, response.notifyMessage[type]);
-                }
+                processResponse(response)
+
                 if (response.valid === true) {
                     if (reload) {
                         setTimeout(function () {
@@ -353,6 +359,9 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
                         }, 1000);
                     }
                 }
+            },
+            error: function (response) {
+                processResponse(response.responseJSON)
             }
         }).done(function () {
             loadingIcon.addClass('hide');
@@ -369,9 +378,20 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
 }
 
 function createEditContentFileAjax(buttonId, close = false, reload = false) {
-    let buttonCreate = $(buttonId),
-        loadingIcon = $(buttonCreate.children()[0]),
-        form = buttonCreate.parents('form');
+    let buttonCreate = $(buttonId);
+    let loadingIcon = $(buttonCreate.children()[0]);
+    let form = buttonCreate.parents('form');
+
+    const processResponse = function (response) {
+        if (response.valid === false) {
+            for (const key in response.data) {
+                $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
+            }
+        }
+        for (let type in response.notifyMessage) {
+            notifyMessage(type, response.notifyMessage[type]);
+        }
+    }
 
     buttonCreate.on('click', (function (e) {
         e.preventDefault();
@@ -391,14 +411,8 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
             cache: false,
             dataType: "json",
             success: function (response) {
-                if (response.valid === false) {
-                    for (let key in response.data) {
-                        $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
-                    }
-                }
-                for (let type in response.notifyMessage) {
-                    notifyMessage(type, response.notifyMessage[type]);
-                }
+                processResponse(response)
+
                 if (response.valid === true) {
                     if (reload) {
                         setTimeout(function () {
@@ -413,6 +427,9 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
                         }, 1000);
                     }
                 }
+            },
+            error: function (response) {
+                processResponse(response.responseJSON)
             }
         }).done(function () {
             loadingIcon.addClass('hide');
@@ -431,6 +448,18 @@ function initAjaxChangeStatus() {
                 return item.style.display !== "none"
             });
 
+        const processResponse = function (response) {
+            if (response.valid === false) {
+                for (const key in response.data) {
+                    $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
+                }
+            }
+
+            for (let type in response.notifyMessage) {
+                notifyMessage(type, response.notifyMessage[type]);
+            }
+        }
+
         switch_elements.forEach(function (element) {
             new Switchery(element, {
                 color: '#26B99A',
@@ -439,24 +468,19 @@ function initAjaxChangeStatus() {
 
             if (element.hasAttribute('data-target-url')) {
                 element.onchange = function () {
-                    let method = 'POST';
                     let url = element.getAttribute('data-target-url');
                     let type = {'type': element.getAttribute('data-target-type')};
 
                     $.ajax({
-                        type: method,
+                        type: 'POST',
                         url: url,
                         data: type,
                         timeout: 10000,
-                        success: function (obj) {
-                            if (obj.valid === false) {
-                                for (let key in obj.data) {
-                                    $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + obj.data[key] + '</div>');
-                                }
-                            }
-                            for (let type in obj.notifyMessage) {
-                                notifyMessage(type, obj.notifyMessage[type]);
-                            }
+                        success: function (response) {
+                            processResponse(response)
+                        },
+                        error: function (response) {
+                            processResponse(response.responseJSON)
                         }
                     });
                 };
@@ -468,11 +492,16 @@ function initAjaxChangeStatus() {
 function initAjaxDeleteContent() {
     let delete_elements = Array.prototype.slice.call(document.querySelectorAll('.delete-element'));
     if (delete_elements.length > 0) {
+        const processResponse = function (response) {
+            for (const type in response.notifyMessage) {
+                notifyMessage(type, response.notifyMessage[type]);
+            }
+        }
+
         delete_elements.forEach(function (element) {
             element.onclick = function (e) {
                 e.preventDefault();
 
-                let method = 'POST';
                 let url = element.getAttribute('data-delete-target-url');
                 let row = $('tr').filter('[data-delete-row="' + element.getAttribute('data-delete-target-row') + '"]');
                 let modalWindow = $('.modal');
@@ -485,19 +514,21 @@ function initAjaxDeleteContent() {
                 window.automaticModalWindowClose = true;
 
                 $.ajax({
-                    type: method,
+                    type: 'POST',
                     url: url,
                     timeout: 10000,
-                    success: function (obj) {
-                        if (obj.delete === true) {
+                    success: function (response) {
+                        if (response.delete === true) {
                             $('.modal').modal('hide');
                             setTimeout(function () {
                                 $(row).remove();
                             }, 1000);
                         }
-                        for (let type in obj.notifyMessage) {
-                            notifyMessage(type, obj.notifyMessage[type]);
-                        }
+
+                        processResponse(response)
+                    },
+                    error: function (response) {
+                        processResponse(response.responseJSON)
                     }
                 }).done(function () {
                     loadingIcon.classList.add('hide');
