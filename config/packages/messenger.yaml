@@ -4,6 +4,7 @@ framework:
 
     buses:
       command.bus: ~
+      query.bus: ~
 
       messenger.bus.default:
         middleware:
