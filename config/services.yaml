@@ -42,6 +42,7 @@ services:
   App\Domain\:
     resource: '../src/Domain'
     exclude:
+      - '../src/Domain/*/Bus/Query/*/*QueryResult.php'
       - '../src/Domain/*/DTO/'
       - '../src/Domain/*/Entity/'
       - '../src/Domain/*/Exception'

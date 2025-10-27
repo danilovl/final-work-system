@@ -13,13 +13,13 @@
 namespace App\Domain\Task\Http;
 
 use App\Application\Form\SimpleSearchForm;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
-use App\Domain\Task\Repository\Elastica\ElasticaTaskRepository;
-use App\Application\Service\{
-    PaginatorService,
-    TwigRenderService
+use App\Domain\Task\Bus\Query\TaskList\{
+    GetTaskListQuery,
+    GetTaskListQueryResult
 };
-use App\Domain\Task\Facade\TaskFacade;
+use App\Application\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
@@ -32,34 +32,31 @@ readonly class TaskListHandle
     public function __construct(
         private TwigRenderService $twigRenderService,
         private UserService $userService,
-        private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService,
         private FormFactoryInterface $formFactory,
-        private ElasticaTaskRepository $elasticaTaskRepository
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $tasksQuery = $this->taskFacade
-            ->queryTasksByOwner($user);
-
-        $isTasksInComplete = $this->taskFacade
-            ->isTasksCompleteByOwner($user, false);
 
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
-            $taskIds = $this->elasticaTaskRepository->getIdsByOwnerAndSearch($user, $searchModel->search);
-            $tasksQuery = $this->taskFacade->queryByIds($taskIds);
-        }
+        $query = GetTaskListQuery::create(
+            request: $request,
+            user: $user,
+            search: $searchForm->isSubmitted() && $searchForm->isValid() ? $searchModel->search : null
+        );
+
+        /** @var GetTaskListQueryResult $result */
+        $result = $this->queryBus->handleResult($query);
 
         return $this->twigRenderService->renderToResponse('domain/task/list.html.twig', [
-            'isTasksInComplete' => $isTasksInComplete,
-            'tasks' => $this->paginatorService->createPaginationRequest($request, $tasksQuery, detachEntity: true),
+            'isTasksInComplete' => $result->isTasksInComplete,
+            'tasks' => $result->tasks,
             'searchForm' => $searchForm->createView(),
             'enableClearSearch' => !empty($searchModel->search)
         ]);
