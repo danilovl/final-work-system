@@ -49,7 +49,7 @@ readonly class WorkListHandle
             ->getSearchForm($type, $data)
             ->handleRequest($request);
 
-        $works = $this->elasticaWorkRepository->filterWorkList($user, $type, $form);
+        $works = $this->elasticaWorkRepository->filterWorkList($user, $type, (array) $form->getData());
 
         $workGroups = match ($type) {
             WorkUserTypeConstant::SUPERVISOR->value => WorkFunctionHelper::groupWorksByCategoryAndSorting($works),

@@ -20,11 +20,14 @@ class ElasticaWorkRepository
 {
     public function __construct(private readonly WorkSearch $workSearch) {}
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     public function filterWorkList(
         User $user,
         string $type,
-        FormInterface $form
+        array $filters
     ): ArrayIterator {
-        return $this->workSearch->filterWorkList($user, $type, $form);
+        return $this->workSearch->filterWorkList($user, $type, $filters);
     }
 }

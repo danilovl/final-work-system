@@ -26,12 +26,15 @@ readonly class WorkSearch
 {
     public function __construct(private TransformedFinder $transformedFinderWork) {}
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     public function filterWorkList(
         User $user,
         string $type,
-        FormInterface $form
+        array $filters
     ): ArrayIterator {
-        $query = $this->createQuery($user, $type, $form);
+        $query = $this->createQuery($user, $type, $filters);
 
         $works = $this->transformedFinderWork->find($query);
         $works = new ArrayCollection($works);
@@ -53,10 +56,13 @@ readonly class WorkSearch
         return $iterator;
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     public function createQuery(
         User $user,
         string $type,
-        FormInterface $form
+        array $filters
     ): array {
         $query = [
             'size' => 1_000,
@@ -76,7 +82,7 @@ readonly class WorkSearch
             ]
         ];
 
-        if (!$form->isSubmitted()) {
+        if (empty($filters)) {
             $query['query']['bool']['must'][] = [
                 'nested' => [
                     'path' => 'status',
@@ -90,10 +96,7 @@ readonly class WorkSearch
         $filter = [];
         $filterDates = [];
 
-        /** @var array $formData */
-        $formData = $form->getData();
-
-        foreach ($formData as $field => $value) {
+        foreach ($filters as $field => $value) {
             if (empty($value)) {
                 continue;
             }
