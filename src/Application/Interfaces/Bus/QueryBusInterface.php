@@ -19,5 +19,5 @@ interface QueryBusInterface
     /**
      * @throws ExceptionInterface
      */
-    public function handleResult(QueryInterface $query): object;
+    public function handle(QueryInterface $query): object;
 }

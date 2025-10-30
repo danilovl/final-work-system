@@ -23,7 +23,7 @@ class MessengerQueryBus implements QueryBusInterface
 {
     public function __construct(private MessageBusInterface $queryBus) {}
 
-    public function handleResult(QueryInterface $query): object
+    public function handle(QueryInterface $query): object
     {
         $envelope = $this->queryBus->dispatch($query);
         $handledStamps = $envelope->all(HandledStamp::class);

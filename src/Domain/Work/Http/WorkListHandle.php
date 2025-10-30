@@ -55,7 +55,7 @@ readonly class WorkListHandle
         );
 
         /** @var GetWorkListQueryResult $result */
-        $result = $this->queryBus->handleResult($query);
+        $result = $this->queryBus->handle($query);
 
         $deleteForms = [];
         foreach ($result->workGroups as $entities) {

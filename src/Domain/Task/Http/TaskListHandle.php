@@ -52,7 +52,7 @@ readonly class TaskListHandle
         );
 
         /** @var GetTaskListQueryResult $result */
-        $result = $this->queryBus->handleResult($query);
+        $result = $this->queryBus->handle($query);
 
         return $this->twigRenderService->renderToResponse('domain/task/list.html.twig', [
             'isTasksInComplete' => $result->isTasksInComplete,
