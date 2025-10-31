@@ -12,11 +12,12 @@
 
 namespace App\Domain\ArticleCategory\Http;
 
-use App\Application\Service\{
-    PaginatorService,
-    TwigRenderService
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\ArticleCategory\Bus\Query\ArticleCategoryList\{
+    GetArticleCategoryListQuery,
+    GetArticleCategoryListQueryResult
 };
-use App\Domain\Article\Facade\ArticleCategoryFacade;
+use App\Application\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -28,18 +29,19 @@ readonly class ArticleCategoryListHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private ArticleCategoryFacade $articleCategoryFacade,
-        private PaginatorService $paginatorService
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
-        $articleCategoriesQuery = $this->articleCategoryFacade->queryCategoriesByRoles(
-            $this->userService->getUser()->getRoles()
-        );
+        $roles = $this->userService->getUser()->getRoles();
+        $query = GetArticleCategoryListQuery::create($request, $roles);
+
+        /** @var GetArticleCategoryListQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         return $this->twigRenderService->renderToResponse('domain/article_category/list.html.twig', [
-            'articleCategories' => $this->paginatorService->createPaginationRequest($request, $articleCategoriesQuery)
+            'articleCategories' => $result->articleCategories
         ]);
     }
 }
