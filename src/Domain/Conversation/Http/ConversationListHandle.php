@@ -13,25 +13,16 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Form\SimpleSearchForm;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
-use App\Domain\Conversation\Repository\Elastica\ElasticaConversationRepository;
-use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
-use App\Application\Service\{
-    PaginatorService,
-    TwigRenderService,
-    EntityManagerService
+use App\Domain\Conversation\Bus\Query\ConversationList\{
+    GetConversationListQuery,
+    GetConversationListQueryResult
 };
-use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\Facade\{
-    ConversationFacade,
-    ConversationMessageFacade
-};
-use App\Domain\Conversation\Helper\ConversationHelper;
-use App\Domain\ConversationType\Constant\ConversationTypeConstant;
-use App\Domain\ConversationType\Entity\ConversationType;
+use App\Application\Service\TwigRenderService;
+use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Domain\User\Service\UserService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -42,73 +33,38 @@ readonly class ConversationListHandle
 {
     public function __construct(
         private UserService $userService,
-        private ParameterServiceInterface $parameterService,
         private TwigRenderService $twigRenderService,
-        private ConversationFacade $conversationFacade,
         private ConversationTypeFacade $conversationTypeFacade,
         private ConversationMessageFacade $conversationMessageFacade,
-        private PaginatorService $paginatorService,
-        private ElasticaConversationRepository $elasticaConversationRepository,
-        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository,
         private FormFactoryInterface $formFactory,
-        private EntityManagerService $entityManagerService
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $types = [];
-
-        $type = $request->query->get('type');
-        if (!empty($type)) {
-            $typeId = ConversationTypeConstant::getIdByType($type);
-            $types[] = $this->entityManagerService->getReference(ConversationType::class, $typeId);
-        }
-
-        $conversationsQuery = $this->conversationFacade->queryConversationsByParticipantUserTypes($user, $types);
 
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid() && $searchModel->search) {
-            $messageIds = $this->elasticaConversationMessageRepository->getMessageIdsByParticipantAndSearch(
-                $user,
-                $searchModel->search
-            );
-
-            $conversationIds = $this->elasticaConversationRepository->getIdsByParticipantAndSearch(
-                $user,
-                $messageIds,
-                $searchModel->search
-            );
-
-            $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
-        }
-
-        $conversationsQuery->setHydrationMode(Conversation::class);
-
-        $pagination = $this->paginatorService->createPaginationRequest(
-            $request,
-            $conversationsQuery,
-            $this->parameterService->getInt('pagination.default.page'),
-            $this->parameterService->getInt('pagination.default.limit'),
-            ['wrap-queries' => true]
-        );
-
-        $this->conversationFacade->setIsReadToConversations($pagination, $user);
-
-        ConversationHelper::getConversationOpposite($pagination, $user);
-
-        $isUnreadMessages = $this->conversationMessageFacade
-            ->isUnreadMessagesByRecipient($user);
+        $isUnreadMessages = $this->conversationMessageFacade->isUnreadMessagesByRecipient($user);
 
         $conversationTypes = $this->conversationTypeFacade->getAll();
 
+        $query = GetConversationListQuery::create(
+            request: $request,
+            user: $user,
+            search: $searchForm->isSubmitted() && $searchForm->isValid() ? $searchModel->search : null,
+        );
+
+        /** @var GetConversationListQueryResult $result */
+        $result = $this->queryBus->handle($query);
+
         return $this->twigRenderService->renderToResponse('domain/conversation/list.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,
-            'conversations' => $pagination,
+            'conversations' => $result->conversations,
             'conversationTypes' => $conversationTypes,
             'searchForm' => $searchForm->createView(),
             'enableClearSearch' => !empty($searchModel->search)
