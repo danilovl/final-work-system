@@ -13,15 +13,17 @@
 namespace App\Domain\Conversation\Http;
 
 use App\Application\Form\SimpleSearchForm;
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
+use App\Domain\Conversation\Bus\Query\ConversationLastMessage\{
+    GetConversationLastMessageQuery,
+    GetConversationLastMessageQueryResult
+};
 use App\Application\Service\{
     SeoPageService,
     TwigRenderService
 };
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\Conversation\Facade\ConversationMessageFacade;
-use App\Domain\Conversation\Service\MessageHighlightService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -32,35 +34,32 @@ readonly class ConversationLastMessageHandle
 {
     public function __construct(
         private TwigRenderService $twigRenderService,
-        private ConversationMessageFacade $conversationMessageFacade,
         private SeoPageService $seoPageService,
-        private ParameterServiceInterface $parameterService,
         private FormFactoryInterface $formFactory,
-        private MessageHighlightService $messageHighlightService
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request, Conversation $conversation): Response
     {
-        $conversationMessages = $this->conversationMessageFacade->getMessagesByConversation(
-            $conversation,
-            $this->parameterService->getInt('pagination.conversation.message_list')
-        );
-
         $searchModel = new SearchModel;
         $searchForm = $this->formFactory
             ->create(SimpleSearchForm::class, $searchModel)
             ->handleRequest($request);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $this->messageHighlightService->addHighlight($conversationMessages, $searchModel);
-        }
+        $query = GetConversationLastMessageQuery::create(
+            conversation: $conversation,
+            search: $searchForm->isSubmitted() && $searchForm->isValid() ? $searchModel->search : null
+        );
+
+        /** @var GetConversationLastMessageQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         $this->seoPageService->setTitle($conversation->getTitle());
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/conversation/last_message.html.twig');
 
         return $this->twigRenderService->renderToResponse($template, [
             'conversation' => $conversation,
-            'conversationMessages' => $conversationMessages
+            'conversationMessages' => $result->conversationMessages
         ]);
     }
 }

@@ -12,7 +12,6 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Application\Model\SearchModel;
 use App\Application\Service\EntityManagerService;
 use App\Application\Util\TextHighlightWordUtil;
 use Danilovl\AsyncBundle\Service\AsyncService;
@@ -25,14 +24,14 @@ readonly class MessageHighlightService
         private AsyncService $asyncService
     ) {}
 
-    public function addHighlight(iterable $conversationMessages, SearchModel $searchModel): void
+    public function addHighlight(iterable $conversationMessages, string $search): void
     {
-        if (empty($searchModel->search)) {
+        if (empty($search)) {
             return;
         }
 
         /** @var string[] $words */
-        $words = preg_split('~\s+~', $searchModel->search);
+        $words = preg_split('~\s+~', $search);
         /** @var ConversationMessage $conversationMessage */
         foreach ($conversationMessages as $conversationMessage) {
             $message = TextHighlightWordUtil::highlightPartWords($conversationMessage->getContent(), $words);
