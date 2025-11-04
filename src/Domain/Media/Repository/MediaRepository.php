@@ -83,7 +83,7 @@ class MediaRepository extends ServiceEntityRepository
 
         if ($mediaData->active) {
             $queryBuilder->andWhere('media.active = :active')
-                ->setParameter('active', $mediaData->type);
+                ->setParameter('active', $mediaData->active);
         }
 
         return $queryBuilder;
