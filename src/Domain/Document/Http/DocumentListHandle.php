@@ -13,6 +13,7 @@ namespace App\Domain\Document\Http;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Service\TwigRenderService;
+use App\Domain\User\Facade\UserFacade;
 use App\Domain\Document\Bus\Query\DocumentList\{
     GetDocumentListQuery,
     GetDocumentListQueryResult
@@ -28,6 +29,7 @@ readonly class DocumentListHandle
 {
     public function __construct(
         private UserService $userService,
+        private UserFacade $userFacade,
         private TwigRenderService $twigRenderService,
         private DocumentFormFactory $documentFormFactory,
         private QueryBusInterface $queryBus
@@ -47,10 +49,14 @@ readonly class DocumentListHandle
             $openSearchTab = true;
         }
 
+        $users = $this->userFacade->getAllUserActiveSupervisors($user);
+
         $query = GetDocumentListQuery::create(
             request: $request,
-            user: $user,
+            users: $users->toArray(),
             criteria: $form->isSubmitted() && $form->isValid() ? $form->getData() : null,
+            detachEntity: true,
+            active: true
         );
 
         /** @var GetDocumentListQueryResult $result */

@@ -13,16 +13,13 @@
 namespace App\Domain\Document\Http;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Service\{
-    EntityManagerService,
-    PaginatorService,
-    TwigRenderService
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Document\Bus\Query\DocumentList\{
+    GetDocumentListQuery,
+    GetDocumentListQueryResult
 };
+use App\Application\Service\TwigRenderService;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
-use App\Domain\Media\DataTransferObject\MediaRepositoryData;
-use App\Domain\Media\Facade\MediaFacade;
-use App\Domain\MediaType\Constant\MediaTypeConstant;
-use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -34,17 +31,14 @@ readonly class DocumentListOwnerHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private EntityManagerService $entityManagerService,
         private DocumentFormFactory $documentFormFactory,
-        private PaginatorService $paginatorService,
-        private MediaFacade $mediaFacade
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
         $openSearchTab = false;
-        $criteria = null;
 
         $form = $this->documentFormFactory
             ->setUser($user)
@@ -53,23 +47,20 @@ readonly class DocumentListOwnerHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $openSearchTab = true;
-            $criteria = $form->getData();
         }
 
-        /** @var MediaType $type */
-        $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL->value);
+        $query = GetDocumentListQuery::create(
+            request: $request,
+            users: [$user],
+            criteria: $form->isSubmitted() && $form->isValid() ? $form->getData() : null,
+        );
 
-        $mediaData = MediaRepositoryData::createFromArray([
-            'users' => $user,
-            'type' => $type,
-            'criteria' => $criteria
-        ]);
-
-        $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
+        /** @var GetDocumentListQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         return $this->twigRenderService->renderToResponse('domain/document/list_owner.html.twig', [
             'openSearchTab' => $openSearchTab,
-            'documents' => $this->paginatorService->createPaginationRequest($request, $documents),
+            'documents' => $result->documents,
             'form' => $form->createView()
         ]);
     }

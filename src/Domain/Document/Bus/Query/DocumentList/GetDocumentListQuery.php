@@ -21,22 +21,28 @@ use Symfony\Component\Messenger\Attribute\AsMessage;
 readonly class GetDocumentListQuery implements QueryInterface
 {
     /**
+     * @param User[] $users
      * @param array<string, mixed> $criteria
      */
     private function __construct(
         public Request $request,
-        public User $user,
+        public array $users,
         public ?array $criteria,
+        public bool $detachEntity = false,
+        public ?bool $active = null,
     ) {}
 
     /**
+     * @param User[] $users
      * @param array<string, mixed> $criteria
      */
     public static function create(
-        Request $request,
-        User $user,
-        ?array $criteria,
+         Request $request,
+         array $users,
+         ?array $criteria,
+          bool $detachEntity = false,
+         ?bool $active = null,
     ): self {
-        return new self($request, $user, $criteria);
+        return new self($request, $users, $criteria, $detachEntity, $active);
     }
 }
