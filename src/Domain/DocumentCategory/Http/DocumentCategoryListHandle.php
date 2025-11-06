@@ -12,13 +12,13 @@
 
 namespace App\Domain\DocumentCategory\Http;
 
-use App\Application\Service\{
-    PaginatorService,
-    TwigRenderService
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\DocumentCategory\Bus\Query\DocumentCategoryList\{
+    GetDocumentCategoryListQuery,
+    GetDocumentCategoryListQueryResult
 };
-use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
+use App\Application\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
-use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -29,24 +29,19 @@ readonly class DocumentCategoryListHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private PaginatorService $paginatorService,
-        private MediaCategoryFacade $mediaCategoryFacade,
-        private ParameterServiceInterface $parameterService
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $pagination = $this->paginatorService->createPaginationRequest(
-            $request,
-            $this->mediaCategoryFacade->queryMediaCategoriesByOwner($user),
-            $this->parameterService->getInt('pagination.default.page'),
-            $this->parameterService->getInt('pagination.document_category.limit'),
-            detachEntity: true
-        );
+
+        $query = GetDocumentCategoryListQuery::create($request, $user);
+        /** @var GetDocumentCategoryListQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         return $this->twigRenderService->renderToResponse('domain/document_category/list.html.twig', [
-            'mediaCategories' => $pagination
+            'mediaCategories' => $result->documents
         ]);
     }
 }
