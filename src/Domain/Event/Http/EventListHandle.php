@@ -12,14 +12,15 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Domain\Event\Entity\Event;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\Event\Bus\Query\EventList\{
+    GetEventListQuery,
+    GetEventListQueryResult
+};
 use App\Application\Service\{
     SeoPageService,
-    PaginatorService,
     TwigRenderService
 };
-use App\Domain\Event\DataTransferObject\EventRepositoryData;
-use App\Domain\Event\Facade\EventFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -31,26 +32,22 @@ readonly class EventListHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private EventFacade $eventFacade,
-        private PaginatorService $paginatorService,
         private SeoPageService $seoPageService,
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $eventRepositoryData = new EventRepositoryData;
-        $eventRepositoryData->user = $user;
 
-        $eventsQuery = $this->eventFacade->getEventsByOwnerQuery($eventRepositoryData);
-        $eventsQuery->setHydrationMode(Event::class);
-
-        $pagination = $this->paginatorService->createPaginationRequest($request, $eventsQuery);
+        $query = GetEventListQuery::create($request, $user);
+        /** @var GetEventListQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         $this->seoPageService->setTitle('app.page.event_list');
 
         return $this->twigRenderService->renderToResponse('domain/event/list.html.twig', [
-            'events' => $pagination
+            'events' => $result->events
         ]);
     }
 }
