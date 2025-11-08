@@ -12,10 +12,12 @@
 
 namespace App\Domain\EventAddress\Http;
 
-use App\Application\Service\{
-    PaginatorService,
-    TwigRenderService
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\EventAddress\Bus\Query\EventAddressList\{
+    GetEventAddressListQuery,
+    GetEventAddressListQueryResult
 };
+use App\Application\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -27,19 +29,19 @@ readonly class EventAddressListHandle
     public function __construct(
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private PaginatorService $paginatorService
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $eventAddresses = $this->paginatorService->createPaginationRequest(
-            $request,
-            $user->getEventAddressOwner()
-        );
+
+        $query = GetEventAddressListQuery::create($request, $user);
+        /** @var GetEventAddressListQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         return $this->twigRenderService->renderToResponse('domain/event_address/list.html.twig', [
-            'eventAddresses' => $eventAddresses
+            'eventAddresses' => $result->eventAddresses
         ]);
     }
 }
