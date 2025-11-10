@@ -24,7 +24,7 @@ readonly class MessageHighlightService
         private AsyncService $asyncService
     ) {}
 
-    public function addHighlight(iterable $conversationMessages, string $search): void
+    public function addHighlight(iterable $conversationMessages, ?string $search = null): void
     {
         if (empty($search)) {
             return;

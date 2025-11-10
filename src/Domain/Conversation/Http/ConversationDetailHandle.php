@@ -130,7 +130,7 @@ readonly class ConversationDetailHandle
         $this->conversationMessageFacade->setIsReadToConversationMessages($pagination, $user);
         $this->seoPageService->setTitle($conversation->getTitle());
 
-        $this->messageHighlightService->addHighlight($pagination, $searchModel);
+        $this->messageHighlightService->addHighlight($pagination, $searchModel->search);
 
         return $this->twigRenderService->renderToResponse('domain/conversation/detail.html.twig', [
             'conversation' => $conversation,
