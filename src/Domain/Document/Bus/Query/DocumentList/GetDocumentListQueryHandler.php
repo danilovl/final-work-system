@@ -34,7 +34,11 @@ readonly class GetDocumentListQueryHandler
         ]);
 
         $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
-        $pagination = $this->paginatorService->createPaginationRequest($query->request, $documents, detachEntity: $query->detachEntity);
+        $pagination = $this->paginatorService->createPaginationRequest(
+            $query->request,
+            $documents,
+            detachEntity: $query->detachEntity
+        );
 
         return new GetDocumentListQueryResult($pagination);
     }
