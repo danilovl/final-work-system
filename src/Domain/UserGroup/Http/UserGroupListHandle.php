@@ -12,12 +12,15 @@
 
 namespace App\Domain\UserGroup\Http;
 
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\UserGroup\Bus\Query\UserGroupList\{
+    GetUserGroupListQuery,
+    GetUserGroupListQueryResult
+};
 use App\Application\Service\{
     SeoPageService,
-    PaginatorService,
     TwigRenderService
 };
-use App\Domain\UserGroup\Facade\UserGroupFacade;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -28,22 +31,19 @@ readonly class UserGroupListHandle
     public function __construct(
         private TwigRenderService $twigRenderService,
         private SeoPageService $seoPageService,
-        private PaginatorService $paginatorService,
-        private UserGroupFacade $userGroupFacade
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
+        $query = GetUserGroupListQuery::create($request);
+        /** @var GetUserGroupListQueryResult $result */
+        $result = $this->queryBus->handle($query);
+
         $this->seoPageService->setTitle('app.page.user_group_list');
 
-        $pagination = $this->paginatorService->createPaginationRequest(
-            $request,
-            $this->userGroupFacade->queryAll(),
-            detachEntity: true
-        );
-
         return $this->twigRenderService->renderToResponse('domain/user_group/list.html.twig', [
-            'groups' => $pagination
+            'groups' => $result->groups
         ]);
     }
 }
