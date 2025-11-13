@@ -12,15 +12,17 @@
 
 namespace App\Domain\User\Http;
 
-use App\Domain\User\Entity\User;
+use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Domain\User\Bus\Query\UserList\{
+    GetUserListQuery,
+    GetUserListQueryResult
+};
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Application\Service\{
     SeoPageService,
-    PaginatorService,
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Helper\UserHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
@@ -42,12 +44,11 @@ readonly class UserListHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private UserService $userService,
-        private UserFacade $userFacade,
         private FormFactoryInterface $formFactory,
-        private PaginatorService $paginatorService,
         private WorkFacade $workFacade,
         private WorkStatusFacade $workStatusFacade,
-        private SeoPageService $seoPageService
+        private SeoPageService $seoPageService,
+        private QueryBusInterface $queryBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -59,8 +60,6 @@ readonly class UserListHandle
         $showSearchTab = true;
         $workStatus = null;
 
-        $usersQuery = $this->userFacade->getUsersQueryBySupervisor($user, $type);
-
         $form = $this->formFactory
             ->create(WorkSearchStatusForm::class)
             ->handleRequest($request);
@@ -71,7 +70,6 @@ readonly class UserListHandle
             if ($form->isValid()) {
                 /** @var WorkStatus[] $workStatus */
                 $workStatus = $form->get('status')->getData();
-                $usersQuery = $this->userFacade->getUsersQueryBySupervisor($user, $type, $workStatus);
             }
         }
 
@@ -92,20 +90,26 @@ readonly class UserListHandle
             default:
                 $showSearchTab = false;
                 $getUserWorkAndStatus = false;
-                $usersQuery = $this->userFacade->queryUnusedUsers($user);
                 $title = $this->translatorService->trans('app.text.unused_user_list');
 
                 break;
         }
 
+        $query = GetUserListQuery::create(
+            request: $request,
+            user: $user,
+            type: $type,
+            workStatus: $workStatus
+        );
 
-        $usersQuery->setHydrationMode(User::class);
-        $pagination = $this->paginatorService->createPaginationRequest($request, $usersQuery);
+        /** @var GetUserListQueryResult $result */
+        $result = $this->queryBus->handle($query);
+
         $works = new ArrayCollection;
         $userStatusWorkCounts = new ArrayCollection;
 
         if ($getUserWorkAndStatus === true) {
-            foreach ($pagination as $paginationUser) {
+            foreach ($result->users as $paginationUser) {
                 $workData = WorkRepositoryData::createFromArray([
                     'user' => $paginationUser,
                     'supervisor' => $user,
@@ -139,7 +143,7 @@ readonly class UserListHandle
         return $this->twigRenderService->renderToResponse('domain/user/user_list.html.twig', [
             'type' => $type,
             'title' => $title,
-            'users' => $pagination,
+            'users' => $result->users,
             'userWorks' => $works,
             'userStatusWorkCounts' => $userStatusWorkCounts,
             'form' => $form->createView(),
