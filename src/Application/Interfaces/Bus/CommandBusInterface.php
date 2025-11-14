@@ -21,8 +21,8 @@ interface CommandBusInterface
 
     /**
      * @param CommandInterface $command
-     * @return object
+     * @return object|null
      * @throws ExceptionInterface
      */
-    public function dispatchResult(CommandInterface $command): object;
+    public function dispatchResult(CommandInterface $command): ?object;
 }

@@ -16,14 +16,14 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
 };
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\User\EventDispatcher\UserEventDispatcher;
-use App\Domain\User\Facade\UserFacade;
-use App\Domain\User\Factory\UserFactory;
+use App\Domain\User\Bus\Command\CreateUser\CreateUserCommand;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Form\Factory\UserFormFactory;
 use App\Domain\User\Model\UserModel;
 use Symfony\Component\HttpFoundation\{
@@ -37,15 +37,12 @@ readonly class UserCreateHandle
         private RequestService $requestService,
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
-        private UserFacade $userFacade,
         private UserFormFactory $userFormFactory,
-        private UserFactory $userFactory,
-        private UserEventDispatcher $userEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
-        $userFacade = $this->userFacade;
         $userModel = new UserModel;
 
         $form = $this->userFormFactory
@@ -54,16 +51,14 @@ readonly class UserCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $email = $userModel->email;
-                $username = $userModel->username;
+                $command = CreateUserCommand::create($userModel);
+                /** @var User|null $user */
+                $user = $this->commandBus->dispatchResult($command);
 
-                if ($userFacade->findOneByUsername($username) || $userFacade->findOneByEmail($email)) {
+                if ($user === null) {
                     $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.user.create.error');
                     $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.user.create.warning');
                 } else {
-                    $newUser = $this->userFactory->createNewUser($userModel);
-                    $this->userEventDispatcher->onUserCreate($newUser);
-
                     $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.user.create.success');
                 }
             } else {

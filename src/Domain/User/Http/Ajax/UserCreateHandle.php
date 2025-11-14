@@ -14,29 +14,24 @@ namespace App\Domain\User\Http\Ajax;
 
 use App\Application\Constant\{
     AjaxJsonTypeConstant,
-    FlashTypeConstant
-};
+    FlashTypeConstant};
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
-use App\Domain\User\EventDispatcher\UserEventDispatcher;
-use App\Domain\User\Facade\UserFacade;
-use App\Domain\User\Factory\UserFactory;
+use App\Domain\User\Bus\Command\CreateUser\CreateUserCommand;
 use App\Domain\User\Form\UserForm;
 use App\Domain\User\Model\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request
-};
+    Request};
 
 readonly class UserCreateHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private UserFacade $userFacade,
         private FormFactoryInterface $formFactory,
-        private UserFactory $userFactory,
-        private UserEventDispatcher $userEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -48,17 +43,14 @@ readonly class UserCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $email = $userModel->email;
-            $username = $userModel->username;
+            $command = CreateUserCommand::create($userModel);
+            $user = $this->commandBus->dispatch($command);
 
-            if ($this->userFacade->findOneByUsername($username) || $this->userFacade->findOneByEmail($email)) {
+            if ($user === null) {
                 return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
                     'data' => FormValidationMessageHelper::getErrorMessages($form)
                 ]);
             }
-
-            $newUser = $this->userFactory->createNewUser($userModel);
-            $this->userEventDispatcher->onUserCreate($newUser);
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.user.create.success');
 

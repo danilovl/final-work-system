@@ -35,11 +35,11 @@ class MessengerCommandBus implements CommandBusInterface
 
     /**
      * @param CommandInterface $command
-     * @return object
+     * @return object|null
      */
-    public function dispatchResult(CommandInterface $command): object
+    public function dispatchResult(CommandInterface $command): ?object
     {
-        /** @var object $result */
+        /** @var object|null $result */
         $result = $this->handle($command);
 
         return $result;
