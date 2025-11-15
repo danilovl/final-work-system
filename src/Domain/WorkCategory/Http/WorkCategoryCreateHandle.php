@@ -16,13 +16,14 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
 };
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService
 };
 use App\Domain\User\Service\UserService;
-use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
+use App\Domain\WorkCategory\Bus\Command\CreateWorkCategory\CreateWorkCategoryCommand;
 use App\Domain\WorkCategory\Form\Factory\WorkCategoryFormFactory;
 use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\HttpFoundation\{
@@ -38,7 +39,7 @@ readonly class WorkCategoryCreateHandle
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private WorkCategoryFormFactory $categoryFormFactory,
-        private WorkCategoryFactory $workCategoryFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -54,7 +55,8 @@ readonly class WorkCategoryCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->workCategoryFactory->flushFromModel($workCategoryModel);
+                $command = CreateWorkCategoryCommand::create($workCategoryModel);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

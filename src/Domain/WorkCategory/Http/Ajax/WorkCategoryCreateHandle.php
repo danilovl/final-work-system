@@ -14,11 +14,10 @@ namespace App\Domain\WorkCategory\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\{
-    RequestService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Service\RequestService;
 use App\Domain\User\Service\UserService;
-use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
+use App\Domain\WorkCategory\Bus\Command\CreateWorkCategory\CreateWorkCategoryCommand;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;
 use App\Domain\WorkCategory\Model\WorkCategoryModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,7 +32,7 @@ readonly class WorkCategoryCreateHandle
         private RequestService $requestService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
-        private WorkCategoryFactory $workCategoryFactory
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -46,7 +45,8 @@ readonly class WorkCategoryCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->workCategoryFactory->flushFromModel($workCategoryModel);
+            $command = CreateWorkCategoryCommand::create($workCategoryModel);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }
