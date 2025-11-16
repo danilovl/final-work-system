@@ -12,16 +12,13 @@
 
 namespace App\Application\Interfaces\Bus;
 
-use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 
 interface CommandBusInterface
 {
-    public function dispatch(CommandInterface $command): Envelope;
+    public function dispatch(CommandInterface $command): void;
 
     /**
-     * @param CommandInterface $command
-     * @return object|null
      * @throws ExceptionInterface
      */
     public function dispatchResult(CommandInterface $command): ?object;

@@ -17,7 +17,6 @@ use App\Application\Interfaces\Bus\{
     CommandBusInterface
 };
 use Symfony\Component\Messenger\{
-    Envelope,
     HandleTrait,
     MessageBusInterface
 };
@@ -28,9 +27,9 @@ class MessengerCommandBus implements CommandBusInterface
 
     public function __construct(private MessageBusInterface $messageBus) {}
 
-    public function dispatch(CommandInterface $command): Envelope
+    public function dispatch(CommandInterface $command): void
     {
-        return $this->messageBus->dispatch($command);
+        $this->messageBus->dispatch($command);
     }
 
     /**

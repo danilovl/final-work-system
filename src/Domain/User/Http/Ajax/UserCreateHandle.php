@@ -44,7 +44,7 @@ readonly class UserCreateHandle
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = CreateUserCommand::create($userModel);
-            $user = $this->commandBus->dispatch($command);
+            $user = $this->commandBus->dispatchResult($command);
 
             if ($user === null) {
                 return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_FAILURE, [
