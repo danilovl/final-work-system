@@ -17,18 +17,17 @@ use App\Application\Constant\{
     FlashTypeConstant,
     SeoPageConstant
 };
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     SeoPageService,
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\User\Bus\Command\EditUser\EditUserCommand;
 use App\Domain\User\Entity\User;
-use App\Domain\User\EventDispatcher\UserEventDispatcher;
-use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Form\Factory\UserFormFactory;
 use App\Domain\User\Model\UserModel;
-use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -41,12 +40,10 @@ readonly class UserEditHandle
         private RequestService $requestService,
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
-        private UserService $userService,
         private HashidsServiceInterface $hashidsService,
         private UserFormFactory $userFormFactory,
-        private UserFactory $userFactory,
-        private UserEventDispatcher $userEventDispatcher,
-        private SeoPageService $seoPageService
+        private SeoPageService $seoPageService,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, User $user): Response
@@ -59,13 +56,8 @@ readonly class UserEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->userFactory
-                    ->flushFromModel($userModel, $user);
-
-                $this->userEventDispatcher->onUserEdit(
-                    $user,
-                    $this->userService->getUser()
-                );
+                $command = EditUserCommand::create($userModel, $user);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 

@@ -13,8 +13,9 @@
 namespace App\Domain\User\Http\Ajax;
 
 use App\Application\Constant\{
-    AjaxJsonTypeConstant,
-    FlashTypeConstant};
+    FlashTypeConstant,
+    AjaxJsonTypeConstant
+};
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
@@ -24,7 +25,8 @@ use App\Domain\User\Model\UserModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class UserCreateHandle
 {
