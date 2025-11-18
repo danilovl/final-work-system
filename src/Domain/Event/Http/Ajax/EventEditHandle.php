@@ -14,14 +14,14 @@ namespace App\Domain\Event\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     EntityManagerService,
     RequestService
 };
+use App\Domain\Event\Bus\Command\EditEvent\EditEventCommand;
 use App\Domain\Event\Entity\Event;
-use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\Event\Facade\EventParticipantFacade;
-use App\Domain\Event\Factory\EventFactory;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\EventParticipant\Entity\EventParticipant;
@@ -38,10 +38,9 @@ readonly class EventEditHandle
         private RequestService $requestService,
         private UserService $userService,
         private EntityManagerService $entityManagerService,
-        private EventFactory $eventFactory,
         private FormFactoryInterface $formFactory,
         private EventParticipantFacade $eventParticipantFacade,
-        private EventEventDispatcher $eventEventDispatcherService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Event $event): JsonResponse
@@ -74,8 +73,8 @@ readonly class EventEditHandle
                 $eventModel->participant = null;
             }
 
-            $this->eventFactory->flushFromModel($eventModel, $event);
-            $this->eventEventDispatcherService->onEventEdit($event);
+            $command = EditEventCommand::create($eventModel, $event);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
