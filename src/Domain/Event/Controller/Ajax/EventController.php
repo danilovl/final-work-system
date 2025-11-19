@@ -22,8 +22,10 @@ use App\Domain\Event\Http\Ajax\{
     EventEditHandle,
     EventGetEventHandle
 };
+use App\Domain\Event\Http\EventSwitchToSkypeHandle;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
+    RedirectResponse,
     Request
 };
 
@@ -33,7 +35,8 @@ readonly class EventController
         private AuthorizationCheckerService $authorizationCheckerService,
         private EventGetEventHandle $eventGetEventHandle,
         private EventEditHandle $eventEditHandle,
-        private EventDeleteHandle $eventDeleteHandle
+        private EventDeleteHandle $eventDeleteHandle,
+        private EventSwitchToSkypeHandle $eventSwitchToSkypeHandle
     ) {}
 
     #[PermissionMiddleware(service: [
@@ -58,5 +61,12 @@ readonly class EventController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
 
         return $this->eventDeleteHandle->__invoke($event);
+    }
+
+    public function switchToSkype(Event $event): RedirectResponse
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $event);
+
+        return $this->eventSwitchToSkypeHandle->__invoke($event);
     }
 }
