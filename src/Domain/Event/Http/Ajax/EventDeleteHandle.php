@@ -13,10 +13,9 @@
 namespace App\Domain\Event\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Service\RequestService;
+use App\Domain\Event\Bus\Command\DeleteEvent\DeleteEventCommand;
 use App\Domain\Event\Entity\Event;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -24,12 +23,13 @@ readonly class EventDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Event $event): JsonResponse
     {
-        $this->entityManagerService->removeNativeSql(Event::class, $event->getId());
+        $command = DeleteEventCommand::create($event);
+        $this->commandBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
