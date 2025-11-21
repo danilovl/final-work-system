@@ -12,16 +12,18 @@
 
 namespace App\Domain\EventAddress\Http;
 
+use App\Domain\EventAddress\Entity\EventAddress;
 use App\Application\Constant\{
     FlashTypeConstant,
     ControllerMethodConstant
 };
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\EventAddress\Factory\EventAddressFactory;
+use App\Domain\EventAddress\Bus\Command\CreateEventAddress\CreateEventAddressCommand;
 use App\Domain\EventAddress\Form\Factory\EventAddressFormFactory;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use App\Domain\User\Service\UserService;
@@ -38,7 +40,7 @@ readonly class EventAddressCreateHandle
         private UserService $userService,
         private TranslatorService $translatorService,
         private TwigRenderService $twigRenderService,
-        private EventAddressFactory $eventAddressFactory,
+        private CommandBusInterface $commandBus,
         private EventAddressFormFactory $eventAddressFormFactory,
         private HashidsServiceInterface $hashidsService
     ) {}
@@ -56,8 +58,9 @@ readonly class EventAddressCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $eventAddress = $this->eventAddressFactory
-                ->flushFromModel($eventAddressModel);
+            $command = CreateEventAddressCommand::create($eventAddressModel);
+            /** @var EventAddress $eventAddress */
+            $eventAddress = $this->commandBus->dispatchResult($command);
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

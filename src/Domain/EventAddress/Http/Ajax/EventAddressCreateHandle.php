@@ -14,8 +14,9 @@ namespace App\Domain\EventAddress\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
-use App\Domain\EventAddress\Factory\EventAddressFactory;
+use App\Domain\EventAddress\Bus\Command\CreateEventAddress\CreateEventAddressCommand;
 use App\Domain\EventAddress\Form\EventAddressForm;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use App\Domain\User\Service\UserService;
@@ -30,8 +31,8 @@ readonly class EventAddressCreateHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private EventAddressFactory $eventAddressFactory,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): JsonResponse
@@ -44,7 +45,8 @@ readonly class EventAddressCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->eventAddressFactory->flushFromModel($eventAddressModel);
+            $command = CreateEventAddressCommand::create($eventAddressModel);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }
