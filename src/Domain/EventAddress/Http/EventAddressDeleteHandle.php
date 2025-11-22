@@ -14,21 +14,20 @@ namespace App\Domain\EventAddress\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Service\RequestService;
+use App\Domain\EventAddress\Bus\Command\DeleteEventAddress\DeleteEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request
 };
+use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EventAddressDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
+        private MessageBusInterface $messageBus,
         private FormDeleteFactory $formDeleteFactory
     ) {}
 
@@ -40,7 +39,8 @@ readonly class EventAddressDeleteHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->entityManagerService->remove($eventAddress);
+                $command = DeleteEventAddressCommand::create($eventAddress);
+                $this->messageBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.success');
 

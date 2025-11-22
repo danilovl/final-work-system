@@ -13,23 +13,23 @@
 namespace App\Domain\EventAddress\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Service\RequestService;
+use App\Domain\EventAddress\Bus\Command\DeleteEventAddress\DeleteEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EventAddressDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(EventAddress $eventAddress): JsonResponse
     {
-        $this->entityManagerService->remove($eventAddress);
+        $command = DeleteEventAddressCommand::create($eventAddress);
+        $this->messageBus->dispatch($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
