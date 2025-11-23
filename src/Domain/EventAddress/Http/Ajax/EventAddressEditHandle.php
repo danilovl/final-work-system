@@ -15,9 +15,9 @@ namespace App\Domain\EventAddress\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
+use App\Domain\EventAddress\Bus\Command\EditEventAddress\EditEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
-use App\Domain\EventAddress\Factory\EventAddressFactory;
 use App\Domain\EventAddress\Form\EventAddressForm;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use App\Domain\User\Service\UserService;
@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
 };
+use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EventAddressEditHandle
 {
@@ -33,8 +34,8 @@ readonly class EventAddressEditHandle
         private RequestService $requestService,
         private UserService $userService,
         private EventAddressFacade $eventAddressFacade,
-        private EventAddressFactory $eventAddressFactory,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(Request $request, EventAddress $eventAddress): JsonResponse
@@ -53,8 +54,8 @@ readonly class EventAddressEditHandle
                 $eventAddressSkype?->setSkype(false);
             }
 
-            $this->eventAddressFactory
-                ->flushFromModel($eventAddressModel, $eventAddress);
+            $command = EditEventAddressCommand::create($eventAddressModel, $eventAddress);
+            $this->messageBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }

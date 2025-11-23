@@ -18,9 +18,9 @@ use App\Application\Service\{
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\EventAddress\Bus\Command\EditEventAddress\EditEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Facade\EventAddressFacade;
-use App\Domain\EventAddress\Factory\EventAddressFactory;
 use App\Domain\EventAddress\Form\Factory\EventAddressFormFactory;
 use App\Domain\EventAddress\Model\EventAddressModel;
 use App\Domain\User\Service\UserService;
@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EventAddressEditHandle
 {
@@ -37,8 +38,8 @@ readonly class EventAddressEditHandle
         private TwigRenderService $twigRenderService,
         private EventAddressFormFactory $eventAddressFormFactory,
         private EventAddressFacade $eventAddressFacade,
-        private EventAddressFactory $eventAddressFactory,
-        private TranslatorService $translatorService
+        private TranslatorService $translatorService,
+        private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(Request $request, EventAddress $eventAddress): Response
@@ -61,7 +62,8 @@ readonly class EventAddressEditHandle
                 $eventAddressSkype?->setSkype(false);
             }
 
-            $this->eventAddressFactory->flushFromModel($eventAddressModel, $eventAddress);
+            $command = EditEventAddressCommand::create($eventAddressModel, $eventAddress);
+            $this->messageBus->dispatch($command);
 
             return $this->requestService->redirectToRoute('event_address_list');
         }
