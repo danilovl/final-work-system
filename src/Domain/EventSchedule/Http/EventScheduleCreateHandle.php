@@ -17,7 +17,7 @@ use App\Application\Service\{
     RequestService,
     TwigRenderService
 };
-use App\Domain\EventSchedule\Factory\EventScheduleFactory;
+use App\Domain\EventSchedule\Command\CreateEventSchedule\CreateEventScheduleCommand;
 use App\Domain\EventSchedule\Form\EventScheduleForm;
 use App\Domain\EventSchedule\Model\EventScheduleModel;
 use App\Domain\User\Service\UserService;
@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EventScheduleCreateHandle
 {
@@ -33,8 +34,8 @@ readonly class EventScheduleCreateHandle
         private RequestService $requestService,
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private EventScheduleFactory $eventScheduleFactory,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -52,7 +53,8 @@ readonly class EventScheduleCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->eventScheduleFactory->flushFromModel($eventScheduleModel);
+                $command = CreateEventScheduleCommand::create($eventScheduleModel);
+                $this->messageBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
