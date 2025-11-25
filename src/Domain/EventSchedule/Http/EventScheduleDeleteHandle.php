@@ -14,11 +14,10 @@ namespace App\Domain\EventSchedule\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Form\Factory\FormDeleteFactory;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Service\RequestService;
+use App\Domain\EventSchedule\Command\DeleteEventSchedule\DeleteEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request
@@ -28,7 +27,7 @@ readonly class EventScheduleDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
+        private MessageBusInterface $commandBus,
         private FormDeleteFactory $formDeleteFactory
     ) {}
 
@@ -40,7 +39,8 @@ readonly class EventScheduleDeleteHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->entityManagerService->remove($eventSchedule);
+                $command = DeleteEventScheduleCommand::create($eventSchedule);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
 
