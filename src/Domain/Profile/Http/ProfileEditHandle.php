@@ -13,12 +13,13 @@
 namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TwigRenderService
 };
+use App\Domain\Profile\Bus\Command\EditProfile\EditProfileCommand;
 use App\Domain\Profile\Form\ProfileFormType;
-use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,8 +34,8 @@ readonly class ProfileEditHandle
         private RequestService $requestService,
         private UserService $userService,
         private TwigRenderService $twigRenderService,
-        private UserFactory $userFactory,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -50,7 +51,8 @@ readonly class ProfileEditHandle
             if ($form->isValid()) {
                 $refreshPage = $userModel->locale !== null && $userModel->locale !== $user->getLocale();
 
-                $this->userFactory->flushFromModel($userModel, $user);
+                $command = EditProfileCommand::create($userModel, $user);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
 
