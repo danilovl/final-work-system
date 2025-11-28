@@ -13,23 +13,17 @@
 namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Exception\RuntimeException;
-use App\Domain\MediaType\Entity\MediaType;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
-    EntityManagerService,
     RequestService,
     TwigRenderService
 };
-use App\Domain\Media\Entity\Media;
-use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\Media\Model\MediaModel;
-use App\Domain\MediaMimeType\Entity\MediaMimeType;
-use App\Domain\MediaType\Constant\MediaTypeConstant;
+use App\Domain\Profile\Bus\Command\ProfileChangeImage\ProfileChangeImageCommand;
 use App\Domain\Profile\Form\ProfileMediaForm;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
-    File\UploadedFile,
     Request,
     Response
 };
@@ -39,16 +33,14 @@ readonly class ProfileChangeImageHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private EntityManagerService $entityManagerService,
         private TwigRenderService $twigRenderService,
-        private MediaTypeFacade $mediaTypeFacade,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
     {
         $user = $this->userService->getUser();
-        $profileImage = $user->getProfileImage();
 
         $mediaModel = new MediaModel;
         $form = $this->formFactory
@@ -57,36 +49,8 @@ readonly class ProfileChangeImageHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                /** @var UploadedFile $uploadMedia */
-                $uploadMedia = $mediaModel->uploadMedia;
-                $mimeType = $uploadMedia->getMimeType();
-
-                $mediaMimeType = $this->entityManagerService
-                    ->getRepository(MediaMimeType::class)
-                    ->findOneBy(['name' => $mimeType]);
-
-                if ($mediaMimeType === null) {
-                    throw new RuntimeException("FileMimeType don't exist");
-                }
-
-                $media = $profileImage ?? new Media;
-                if ($profileImage === null) {
-                    /** @var MediaType $mediaType */
-                    $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
-
-                    $media = new Media;
-                    $media->setName($uploadMedia->getFilename());
-                    $media->setType($mediaType);
-                    $media->setOwner($user);
-                }
-
-                $media->setUploadMedia($uploadMedia);
-                $this->entityManagerService->persistAndFlush($media);
-
-                if ($profileImage === null) {
-                    $user->setProfileImage($media);
-                    $this->entityManagerService->flush();
-                }
+                $command = ProfileChangeImageCommand::create($mediaModel, $user);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
             } else {
