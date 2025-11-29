@@ -13,10 +13,9 @@
 namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Service\RequestService;
+use App\Domain\Profile\Bus\Command\ProfileDeleteImage\ProfileDeleteImageCommand;
 use App\Domain\User\Service\UserService;
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,7 +25,7 @@ readonly class ProfileDeleteImageHandle
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(): RedirectResponse
@@ -34,11 +33,8 @@ readonly class ProfileDeleteImageHandle
         $user = $this->userService->getUser();
 
         try {
-            $profileImage = $user->getProfileImage();
-            if ($profileImage) {
-                $user->setProfileImage(null);
-                $this->entityManagerService->flush();
-            }
+            $command = ProfileDeleteImageCommand::create($user);
+            $this->commandBus->dispatch($command);
 
             $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
         } catch (Exception) {
