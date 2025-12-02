@@ -13,12 +13,13 @@
 namespace App\Domain\ResetPassword\Http;
 
 use App\Application\Constant\FlashTypeConstant;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
-    EntityManagerService,
     RequestService,
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\ResetPassword\Bus\Command\ResetPassword\ResetPasswordCommand;
 use App\Domain\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use App\Domain\ResetPassword\Form\ResetChangePasswordForm;
 use App\Domain\ResetPassword\Service\ResetPasswordService;
@@ -28,18 +29,16 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 readonly class ResetPasswordResetHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService,
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
         private FormFactoryInterface $formFactory,
         private ResetPasswordService $resetPasswordService,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request): Response
@@ -65,14 +64,11 @@ readonly class ResetPasswordResetHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->resetPasswordService->removeResetRequest($token);
-
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
-            $encodedPassword = $this->userPasswordHasher->hashPassword($user, $plainPassword);
 
-            $user->setPassword($encodedPassword);
-            $this->entityManagerService->flush();
+            $command = ResetPasswordCommand::create($user, $plainPassword, $token);
+            $this->commandBus->dispatchResult($command);
 
             $this->cleanSessionAfterReset();
 
