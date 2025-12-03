@@ -14,11 +14,12 @@ namespace App\Domain\UserGroup\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService
 };
-use App\Domain\UserGroup\Factory\UserGroupFactory;
+use App\Domain\UserGroup\Bus\Command\CreateUserGroup\CreateUserGroupCommand;
 use App\Domain\UserGroup\Form\UserGroupForm;
 use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -32,7 +33,7 @@ readonly class UserGroupCreateHandle
     public function __construct(
         private RequestService $requestService,
         private TranslatorService $translatorService,
-        private UserGroupFactory $userGroupFactory,
+        private CommandBusInterface $commandBus,
         private FormFactoryInterface $formFactory
     ) {}
 
@@ -46,7 +47,8 @@ readonly class UserGroupCreateHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->userGroupFactory->flushFromModel($userGroupModel);
+            $command = CreateUserGroupCommand::create($userGroupModel);
+            $this->commandBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS);
         }

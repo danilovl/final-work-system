@@ -16,12 +16,13 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
 };
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\UserGroup\Factory\UserGroupFactory;
+use App\Domain\UserGroup\Bus\Command\CreateUserGroup\CreateUserGroupCommand;
 use App\Domain\UserGroup\Form\Factory\UserGroupFormFactory;
 use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\HttpFoundation\{
@@ -35,7 +36,7 @@ readonly class UserGroupCreateHandle
         private RequestService $requestService,
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
-        private UserGroupFactory $userGroupFactory,
+        private CommandBusInterface $commandBus,
         private UserGroupFormFactory $userGroupFormFactory
     ) {}
 
@@ -53,7 +54,8 @@ readonly class UserGroupCreateHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->userGroupFactory->flushFromModel($userGroupModel);
+                $command = CreateUserGroupCommand::create($userGroupModel);
+                $this->commandBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
