@@ -13,10 +13,9 @@
 namespace App\Domain\UserGroup\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\{
-    RequestService,
-    EntityManagerService
-};
+use App\Application\Interfaces\Bus\CommandBusInterface;
+use App\Application\Service\RequestService;
+use App\Domain\UserGroup\Bus\Command\DeleteUserGroup\DeleteUserGroupCommand;
 use App\Domain\UserGroup\Entity\Group;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -24,12 +23,13 @@ readonly class UserGroupDeleteHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private EntityManagerService $entityManagerService
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Group $group): JsonResponse
     {
-        $this->entityManagerService->remove($group);
+        $command = DeleteUserGroupCommand::create($group);
+        $this->commandBus->dispatchResult($command);
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::DELETE_SUCCESS);
     }
