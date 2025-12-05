@@ -16,13 +16,14 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
 };
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService
 };
+use App\Domain\UserGroup\Bus\Command\EditUserGroup\EditUserGroupCommand;
 use App\Domain\UserGroup\Entity\Group;
-use App\Domain\UserGroup\Factory\UserGroupFactory;
 use App\Domain\UserGroup\Form\Factory\UserGroupFormFactory;
 use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\HttpFoundation\{
@@ -36,8 +37,8 @@ readonly class UserGroupEditHandle
         private RequestService $requestService,
         private TwigRenderService $twigRenderService,
         private TranslatorService $translatorService,
-        private UserGroupFactory $userGroupFactory,
-        private UserGroupFormFactory $userGroupFormFactory
+        private UserGroupFormFactory $userGroupFormFactory,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Group $group): Response
@@ -53,7 +54,8 @@ readonly class UserGroupEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->userGroupFactory->flushFromModel($userGroupModel, $group);
+                $command = EditUserGroupCommand::create($userGroupModel, $group);
+                $this->commandBus->dispatchResult($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

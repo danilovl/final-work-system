@@ -14,9 +14,10 @@ namespace App\Domain\UserGroup\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
+use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Service\RequestService;
+use App\Domain\UserGroup\Bus\Command\EditUserGroup\EditUserGroupCommand;
 use App\Domain\UserGroup\Entity\Group;
-use App\Domain\UserGroup\Factory\UserGroupFactory;
 use App\Domain\UserGroup\Form\UserGroupForm;
 use App\Domain\UserGroup\Model\UserGroupModel;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -29,8 +30,8 @@ readonly class UserGroupEditHandle
 {
     public function __construct(
         private RequestService $requestService,
-        private UserGroupFactory $userGroupFactory,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Group $group): JsonResponse
@@ -41,7 +42,8 @@ readonly class UserGroupEditHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->userGroupFactory->flushFromModel($userGroupModel, $group);
+            $command = EditUserGroupCommand::create($userGroupModel, $group);
+            $this->commandBus->dispatchResult($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
