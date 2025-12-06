@@ -13,6 +13,7 @@ namespace App\Domain\Document\Http;
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Service\TwigRenderService;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\Document\Bus\Query\DocumentList\{
     GetDocumentListQuery,
@@ -50,11 +51,15 @@ readonly class DocumentListHandle
         }
 
         $users = $this->userFacade->getAllUserActiveSupervisors($user);
+        /** @var User[] $usersArray */
+        $usersArray = $users->toArray();
+        /** @var array<string, mixed>|null $criteria */
+        $criteria = $form->isSubmitted() && $form->isValid() ? $form->getData() : null;
 
         $query = GetDocumentListQuery::create(
             request: $request,
-            users: $users->toArray(),
-            criteria: $form->isSubmitted() && $form->isValid() ? $form->getData() : null,
+            users: $usersArray,
+            criteria: $criteria,
             detachEntity: true,
             active: true
         );

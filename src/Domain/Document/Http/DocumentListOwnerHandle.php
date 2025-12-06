@@ -49,10 +49,13 @@ readonly class DocumentListOwnerHandle
             $openSearchTab = true;
         }
 
+        /** @var array<string, mixed>|null $criteria */
+        $criteria = $form->isSubmitted() && $form->isValid() ? $form->getData() : null;
+
         $query = GetDocumentListQuery::create(
             request: $request,
             users: [$user],
-            criteria: $form->isSubmitted() && $form->isValid() ? $form->getData() : null,
+            criteria: $criteria
         );
 
         /** @var GetDocumentListQueryResult $result */

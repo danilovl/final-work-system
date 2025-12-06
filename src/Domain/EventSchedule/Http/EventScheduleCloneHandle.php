@@ -18,8 +18,8 @@ use App\Application\Service\{
     SeoPageService,
     TwigRenderService
 };
+use App\Domain\EventSchedule\Command\CloneEventSchedule\CloneEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleCloneForm;
 use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
 use App\Domain\User\Service\UserService;
@@ -29,6 +29,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 readonly class EventScheduleCloneHandle
@@ -38,10 +39,10 @@ readonly class EventScheduleCloneHandle
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private HashidsServiceInterface $hashidsService,
-        private EventScheduleFactory $eventScheduleFactory,
         private FormFactoryInterface $formFactory,
         private SeoPageService $seoPageService,
-        private RouterInterface $router
+        private RouterInterface $router,
+        private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(Request $request, EventSchedule $eventSchedule): Response
@@ -55,11 +56,12 @@ readonly class EventScheduleCloneHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->eventScheduleFactory->cloneEventSchedule(
+                $command = CloneEventScheduleCommand::create(
                     $user,
                     $eventSchedule,
-                    $eventScheduleCloneModel->start
+                    $eventScheduleCloneModel
                 );
+                $this->messageBus->dispatch($command);
 
                 $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 

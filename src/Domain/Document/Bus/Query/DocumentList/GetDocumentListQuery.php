@@ -22,7 +22,7 @@ readonly class GetDocumentListQuery implements QueryInterface
 {
     /**
      * @param User[] $users
-     * @param array<string, mixed> $criteria
+     * @param array<string, mixed>|null $criteria
      */
     private function __construct(
         public Request $request,
@@ -34,7 +34,7 @@ readonly class GetDocumentListQuery implements QueryInterface
 
     /**
      * @param User[] $users
-     * @param array<string, mixed> $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public static function create(
          Request $request,

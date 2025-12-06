@@ -41,7 +41,9 @@ class WorkSearchTest extends KernelTestCase
 
         $workSearch = new WorkSearch($transformedFinder);
 
-        $result = $workSearch->createQuery($user, $type, $form->getData());
+        /** @var array<string, mixed> $data */
+        $data = $form->getData();
+        $result = $workSearch->createQuery($user, $type, $data);
 
         $this->assertEquals($expectedQuery, $result);
     }

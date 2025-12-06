@@ -18,7 +18,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 readonly class GetWorkListQueryResult
 {
     /**
-     * @param PaginationInterface<int, Work> $workGroups
+     * @param PaginationInterface<string, array{works?: Work[]}> $workGroups
      */
     public function __construct(public PaginationInterface $workGroups) {}
 }

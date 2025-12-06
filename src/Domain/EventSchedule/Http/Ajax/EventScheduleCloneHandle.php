@@ -15,8 +15,8 @@ namespace App\Domain\EventSchedule\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Service\RequestService;
+use App\Domain\EventSchedule\Command\CloneEventSchedule\CloneEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
-use App\Domain\EventSchedule\Factory\EventScheduleFactory;
 use App\Domain\EventSchedule\Form\EventScheduleCloneForm;
 use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
 use App\Domain\User\Service\UserService;
@@ -25,14 +25,15 @@ use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
+use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class EventScheduleCloneHandle
 {
     public function __construct(
         private RequestService $requestService,
         private UserService $userService,
-        private EventScheduleFactory $eventScheduleFactory,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
+        private MessageBusInterface $messageBus
     ) {}
 
     public function __invoke(Request $request, EventSchedule $eventSchedule): JsonResponse
@@ -43,11 +44,12 @@ readonly class EventScheduleCloneHandle
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->eventScheduleFactory->cloneEventSchedule(
+            $command = CloneEventScheduleCommand::create(
                 $this->userService->getUser(),
                 $eventSchedule,
-                $eventScheduleCloneModel->start
+                $eventScheduleCloneModel
             );
+            $this->messageBus->dispatch($command);
 
             return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
         }
