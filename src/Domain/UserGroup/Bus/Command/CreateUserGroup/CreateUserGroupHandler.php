@@ -22,8 +22,6 @@ readonly class CreateUserGroupHandler implements CommandHandlerInterface
 
     public function __invoke(CreateUserGroupCommand $command): Group
     {
-        $userGroupModel = $command->userGroupModel;
-
-        return $this->userGroupFactory->flushFromModel($userGroupModel);
+        return $this->userGroupFactory->flushFromModel($command->userGroupModel);
     }
 }

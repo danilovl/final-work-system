@@ -22,8 +22,6 @@ readonly class CreateWorkCategoryHandler implements CommandHandlerInterface
 
     public function __invoke(CreateWorkCategoryCommand $command): WorkCategory
     {
-        $workCategoryModel = $command->workCategoryModel;
-
-        return $this->workCategoryFactory->flushFromModel($workCategoryModel);
+        return $this->workCategoryFactory->flushFromModel($command->workCategoryModel);
     }
 }

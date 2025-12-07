@@ -25,10 +25,7 @@ readonly class EditEventHandler implements CommandHandlerInterface
 
     public function __invoke(EditEventCommand $command): void
     {
-        $eventModel = $command->eventModel;
-        $event = $command->event;
-
-        $this->eventFactory->flushFromModel($eventModel, $event);
-        $this->eventEventDispatcher->onEventEdit($event);
+        $this->eventFactory->flushFromModel($command->eventModel, $command->event);
+        $this->eventEventDispatcher->onEventEdit($command->event);
     }
 }

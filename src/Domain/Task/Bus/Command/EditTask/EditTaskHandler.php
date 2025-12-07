@@ -25,10 +25,7 @@ readonly class EditTaskHandler implements CommandHandlerInterface
 
     public function __invoke(EditTaskCommand $command): void
     {
-        $taskModel = $command->taskModel;
-        $task = $command->task;
-
-        $task = $this->taskFactory->flushFromModel($taskModel, $task);
+        $task = $this->taskFactory->flushFromModel($command->taskModel, $command->task);
         $this->taskEventDispatcher->onTaskEdit($task);
     }
 }

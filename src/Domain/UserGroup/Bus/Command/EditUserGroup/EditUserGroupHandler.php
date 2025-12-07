@@ -21,9 +21,6 @@ readonly class EditUserGroupHandler implements CommandHandlerInterface
 
     public function __invoke(EditUserGroupCommand $command): void
     {
-        $userGroupModel = $command->userGroupModel;
-        $group = $command->group;
-
-        $this->userGroupFactory->flushFromModel($userGroupModel, $group);
+        $this->userGroupFactory->flushFromModel($command->userGroupModel, $command->group);
     }
 }

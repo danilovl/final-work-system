@@ -26,14 +26,11 @@ readonly class ProfileChangePasswordHandler implements CommandHandlerInterface
 
     public function __invoke(ProfileChangePasswordCommand $command): void
     {
-        $user = $command->user;
-        $plainPassword = $command->plainPassword;
-
-        $userModel = UserModel::fromUser($user);
+        $userModel = UserModel::fromUser($command->user);
 
         $this->passwordUpdater->hashPassword(
-            $plainPassword,
-            $user,
+            $command->plainPassword,
+            $command->user,
             $userModel
         );
 

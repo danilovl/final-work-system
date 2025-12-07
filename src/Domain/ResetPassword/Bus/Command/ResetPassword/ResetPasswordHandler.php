@@ -28,12 +28,11 @@ readonly class ResetPasswordHandler implements CommandHandlerInterface
     public function __invoke(ResetPasswordCommand $command): void
     {
         $user = $command->user;
-        $plainPassword = $command->plainPassword;
         $token = $command->token;
 
         $this->resetPasswordService->removeResetRequest($token);
 
-        $encodedPassword = $this->userPasswordHasher->hashPassword($user, $plainPassword);
+        $encodedPassword = $this->userPasswordHasher->hashPassword($user, $command->plainPassword);
         $user->setPassword($encodedPassword);
         
         $this->entityManagerService->flush();

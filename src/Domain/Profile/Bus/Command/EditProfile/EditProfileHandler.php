@@ -21,9 +21,6 @@ readonly class EditProfileHandler implements CommandHandlerInterface
 
     public function __invoke(EditProfileCommand $command): void
     {
-        $userModel = $command->userModel;
-        $user = $command->user;
-
-        $this->userFactory->flushFromModel($userModel, $user);
+        $this->userFactory->flushFromModel($command->userModel, $command->user);
     }
 }

@@ -22,8 +22,6 @@ readonly class CreateEventAddressHandler implements CommandHandlerInterface
 
     public function __invoke(CreateEventAddressCommand $command): EventAddress
     {
-        $eventAddressModel = $command->eventAddressModel;
-
-        return $this->eventAddressFactory->flushFromModel($eventAddressModel);
+        return $this->eventAddressFactory->flushFromModel($command->eventAddressModel);
     }
 }
