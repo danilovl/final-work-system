@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventSchedule\Bus\Query\EventScheduleList;
 
-use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 

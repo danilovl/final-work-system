@@ -20,7 +20,6 @@ use ArrayIterator;
 use Collator;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use Symfony\Component\Form\FormInterface;
 
 readonly class WorkSearch
 {

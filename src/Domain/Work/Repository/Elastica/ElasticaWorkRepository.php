@@ -14,7 +14,6 @@ namespace App\Domain\Work\Repository\Elastica;
 
 use App\Domain\User\Entity\User;
 use ArrayIterator;
-use Symfony\Component\Form\FormInterface;
 
 class ElasticaWorkRepository
 {

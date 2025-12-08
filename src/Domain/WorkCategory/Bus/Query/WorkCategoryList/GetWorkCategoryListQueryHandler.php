@@ -11,7 +11,6 @@
  */
 
 namespace App\Domain\WorkCategory\Bus\Query\WorkCategoryList;
-;
 
 use App\Application\Service\PaginatorService;
 use App\Domain\WorkCategory\Facade\WorkCategoryFacade;
