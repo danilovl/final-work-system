@@ -106,8 +106,8 @@
             });
 
             {% if parameter_get('event_source.widget.top_nav.active') == true %}
-            widgetEventSource("{{ mercure('unread-conversation-message-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-conversation-messages');
-            widgetEventSource("{{ mercure('unread-system-event-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-system-events');
+                widgetEventSource("{{ mercure('unread-conversation-message-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-conversation-messages');
+                widgetEventSource("{{ mercure('unread-system-event-widget/' ~ app_user().id | hashids_encode)|escape('js') }}", 'top-nav-unread-system-events');
             {% endif %}
         });
 
@@ -157,13 +157,95 @@
             notifyMessage('error', message);
         });
 
+        let activeRequests = 0;
+        const originalFetch = window.fetch;
+
+        const translations = {
+            403: '{{ 'app.flash.error.403' | trans([], 'flashes') }}',
+            404: '{{ 'app.flash.error.404' | trans([], 'flashes') }}',
+            500: '{{ 'app.flash.error.500' | trans([], 'flashes') }}'
+        };
+
+        window.fetch = async (...args) => {
+            activeRequests++;
+            document.getElementById('ajax-loader').style.display = 'block';
+
+            try {
+                const response = await originalFetch(...args);
+                activeRequests--;
+
+                if (activeRequests === 0) {
+                    document.getElementById('ajax-loader').style.display = 'none';
+                    initModalResize();
+                    initModalDraggable();
+                }
+
+                if (!response.ok) {
+                    let responseJson;
+                    try {
+                        responseJson = await response.json();
+                        if (responseJson && 'notifyMessage' in responseJson) {
+                            return response;
+                        }
+                    } catch (e) {}
+
+                    const message = translations[response.status] || `Status ${response.status}`;
+
+                    const modalBackdrop = document.querySelector('.modal-backdrop');
+                    const modalWindow = document.getElementById('modalWindow');
+                    const modalWindowContent = document.querySelector('#modalWindow .modal-content');
+
+                    if (modalBackdrop && modalBackdrop.classList.contains('in')) {
+                        modalBackdrop.classList.remove('in');
+                    }
+
+                    if (modalWindow && modalWindow.classList.contains('in')) {
+                        modalWindow.classList.remove('in');
+                        if (modalWindowContent) {
+                            modalWindowContent.innerHTML = '';
+                        }
+                    }
+
+                    notifyMessage('error', message);
+                }
+
+                return response;
+            } catch (error) {
+                activeRequests--;
+                if (activeRequests === 0) {
+                    document.getElementById('ajax-loader').style.display = 'none';
+                    initModalResize();
+                    initModalDraggable();
+                }
+
+                const modalBackdrop = document.querySelector('.modal-backdrop');
+                const modalWindow = document.getElementById('modalWindow');
+                const modalWindowContent = document.querySelector('#modalWindow .modal-content');
+
+                if (modalBackdrop && modalBackdrop.classList.contains('in')) {
+                    modalBackdrop.classList.remove('in');
+                }
+
+                if (modalWindow && modalWindow.classList.contains('in')) {
+                    modalWindow.classList.remove('in');
+                    if (modalWindowContent) {
+                        modalWindowContent.innerHTML = '';
+                    }
+                }
+
+                notifyMessage('error', 'Network error or invalid response');
+
+                throw error;
+            }
+        };
+
         window.addEventListener('load', () => {
             {% for type, messages in app.flashes %}
-            {% for message in messages %}
-            setTimeout(() => {
-                notifyMessage('{{ type }}', '{{ message }}');
-            })
-            {% endfor %}
+                {% for message in messages %}
+                    setTimeout(() => {
+                        notifyMessage('{{ type }}', '{{ message }}');
+                    })
+                {% endfor %}
             {% endfor %}
         });
     </script>
