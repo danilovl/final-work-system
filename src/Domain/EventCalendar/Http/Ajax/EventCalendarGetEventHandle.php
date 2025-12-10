@@ -43,7 +43,7 @@ readonly class EventCalendarGetEventHandle
         );
 
         return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS, [
-            'events' => json_encode($events, JSON_PRETTY_PRINT)
+            'events' => $events
         ]);
     }
 }
