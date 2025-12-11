@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
+ {% block content %}
     <div class="right_col" role="main">
         <div>
             <div class="row">
@@ -9,13 +9,24 @@
                         <div class="x_title">
                             <h2>{{ 'app.page.appointment_calendar' | trans }}</h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                <li>
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div id='event-calendar'></div>
+                            <div id="calendar-app" class="fc">
+                                <calendar
+                                        locale="{{ app.request.locale }}"
+                                        endpoint-event-calendar-edit-ajax="{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}"
+                                        endpoint-event-calendar-events-ajax="{{ path('event_calendar_events_ajax', {'type' : 'manage'}) }}"
+                                        endpoint-event-calendar-create-ajax="{{ path('event_calendar_create_ajax') }}"
+                                >
+                                </calendar>
+                            </div>
                         </div>
                         <div id="create-new-event-modal"
                              class="modal fade"
@@ -138,251 +149,17 @@
             </div>
         </div>
     </div>
-{% endblock %}
+ {% endblock %}
 
 {% block javascript %}
+    {{ encore_entry_script_tags('app_vue_calendar_manage') }}
+
     <script>
         let locale = '{{ app.request.locale }}';
         let startForm = $('#event_start');
         let endForm = $('#event_end');
 
-        function initEventCalendar(locale) {
-
-            if (typeof ($.fn.fullCalendar) === 'undefined') {
-                return;
-            }
-
-            let calendar = $('#event-calendar').fullCalendar({
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaFourteenDay,agendaWeek,agendaDay,listMonth,'
-                    },
-                    views: {
-                        agendaFourteenDay: {
-                            type: 'agenda',
-                            duration: {days: 14},
-                            buttonText: '14 {{ 'app.calendar.day.day' | trans({'%count%': 2}) }}'
-                        }
-                    },
-                    lang: locale,
-                    selectable: true,
-                    selectHelper: true,
-                    editable: true,
-                    droppable: true,
-                    select: function (start, end) {
-                        $('#create-new-event-modal').modal();
-                        startForm.val(start.format('YYYY-MM-DD HH:mm'));
-                        endForm.val(end.format('YYYY-MM-DD HH:mm'));
-                    },
-                    eventClick: function (event) {
-                        let eventDetailButton = $('#event-detail');
-                        let eventDeleteButton = $('#event-delete');
-
-                        $('#modal-title').html(event.title.replace(/\n/g, "<br>"));
-                        eventDetailButton.attr('href', '');
-                        eventDetailButton.attr('href', event.detail_url);
-
-                        eventDeleteButton.attr('href', '');
-                        eventDeleteButton.attr('href', event.delete_url);
-                        eventDeleteButton.attr('data-event-id', '');
-                        eventDeleteButton.attr("data-event-id", event.id);
-
-                        $('#event-detail-modal').modal();
-                    },
-                    eventDrop: function (event, delta, revertFunc) {
-                        let start = event.start.format('YYYY-MM-DD HH:mm');
-                        let end = (event.end === null) ? start : event.end.format('YYYY-MM-DD HH:mm');
-                        let url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
-                        url = url.replace('Ynvr2lgdAJ', event.id);
-
-                        $.ajax({
-                            url: url,
-                            data: 'start=' + start + '&end=' + end,
-                            type: 'POST',
-                            dataType: 'json',
-                            success: function (response) {
-                                if (response.valid === false) {
-                                    revertFunc();
-                                }
-
-                                for (let type in response.notifyMessage) {
-                                    notifyMessage(type, response.notifyMessage[type]);
-                                }
-                            },
-                            error: function (response) {
-                                revertFunc();
-
-                                for (let type in response.responseJSON.notifyMessage) {
-                                    notifyMessage(type, response.responseJSON.notifyMessage[type]);
-                                }
-                            }
-                        });
-                    },
-                    eventResize: function (event, delta, revertFunc) {
-                        let start = event.start.format('YYYY-MM-DD HH:mm');
-                        let end = (event.end === null) ? start : event.end.format('YYYY-MM-DD HH:mm');
-                        let url = "{{ path('event_calendar_edit_ajax', {'id': 'Ynvr2lgdAJ' }) }}";
-                        url = url.replace('Ynvr2lgdAJ', event.id);
-
-                        $.ajax({
-                            url: url,
-                            data: 'start=' + start + '&end=' + end,
-                            type: 'POST',
-                            dataType: 'json',
-                            success: function (response) {
-                                if (response.valid === false) {
-                                    revertFunc();
-                                }
-
-                                for (let type in response.notifyMessage) {
-                                    notifyMessage(type, response.notifyMessage[type]);
-                                }
-                            },
-                            error: function (response) {
-                                revertFunc();
-
-                                for (let type in response.responseJSON.notifyMessage) {
-                                    notifyMessage(type, response.responseJSON.notifyMessage[type]);
-                                }
-                            }
-                        });
-                    },
-                    events: function (start, end, timezone, callback) {
-                        let startDate = start.format('YYYY-MM-DD HH:mm');
-                        let endDate = (end === null) ? start : end.format('YYYY-MM-DD HH:mm');
-
-                        $.ajax({
-                            url: "{{ path('event_calendar_events_ajax', {'type' : 'manage'}) }}",
-                            data: 'start=' + startDate + '&end=' + endDate,
-                            type: 'POST',
-                            dataType: 'json',
-                            success: function (response) {
-                                if (response.valid === true) {
-                                    clearAllEvents();
-
-                                    let events = [];
-                                    let respEvents = response.events;
-
-                                    $.each($.parseJSON(respEvents), function () {
-                                        events.push({
-                                            id: this.id,
-                                            title: this.title,
-                                            start: this.start,
-                                            end: this.end,
-                                            color: this.color,
-                                            detail_url: this.detail_url,
-                                            delete_url: this.delete_url,
-                                            allDay: false
-                                        });
-                                    });
-
-                                    callback(events);
-                                }
-
-                                for (let type in response.notifyMessage) {
-                                    notifyMessage(type, response.notifyMessage[type]);
-                                }
-                            },
-                            error: function (response) {
-                                for (let type in response.responseJSON.notifyMessage) {
-                                    notifyMessage(type, response.responseJSON.notifyMessage[type]);
-                                }
-                            }
-                        });
-                    }
-                }
-            );
-
-            function clearAllEvents() {
-                calendar.fullCalendar('removeEvents');
-            }
-
-            let loading = $('#event_create_load');
-            let button_event_create = $('#event_create');
-
-            button_event_create.on('click', function () {
-                let form = $('form');
-
-                button_event_create.prop('disabled', true);
-                loading.removeClass('hide');
-
-                $.ajax({
-                    url: "{{ path('event_calendar_create_ajax') }}",
-                    data: form.serialize(),
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.valid === true) {
-                            $('.antoclose').click();
-                            calendar.fullCalendar('renderEvent', {
-                                    id: response.event.id,
-                                    title: response.event.title,
-                                    start: response.event.start,
-                                    end: response.event.end,
-                                    color: response.event.color,
-                                    detail_url: response.event.detail_url,
-                                    delete_url: response.event.delete_url,
-                                    allDay: false
-                                },
-                                true // make the event "stick"
-                            );
-                        }
-
-                        if (response.valid === false) {
-                            for (let key in response.data) {
-                                $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
-                            }
-                        }
-
-                        for (let type in response.notifyMessage) {
-                            notifyMessage(type, response.notifyMessage[type]);
-                        }
-                    }
-                }).done(function () {
-                    loading.addClass('hide');
-                    button_event_create.prop('disabled', false);
-                    setTimeout(function () {
-                        $('.validation-error').remove();
-                    }, 3000);
-                });
-
-                calendar.fullCalendar('unselect');
-
-                return false;
-            });
-
-            $('#event-delete').on("click", function () {
-                let href = $(this).attr('href');
-                let eventId = $(this).attr('data-event-id');
-
-                $.ajax({
-                    url: href,
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.delete === false) {
-                            revertFunc();
-                        }
-
-                        if (response.delete === true) {
-                            $('#event-calendar').fullCalendar('removeEvents', eventId);
-                        }
-
-                        for (let type in response.notifyMessage) {
-                            notifyMessage(type, response.notifyMessage[type]);
-                        }
-                    },
-                    error: function () {
-                        revertFunc();
-                    }
-                });
-            });
-        }
-
         $(document).ready(function () {
-            initEventCalendar(locale);
-
             let modalWindow = $('#create-new-event-modal');
 
             $("#event_type").select2({width: '100%', dropdownParent: modalWindow});

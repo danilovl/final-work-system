@@ -16,7 +16,13 @@
             </div>
 
             <div class="x_content">
-                <div id='eventCalendar'></div>
+                <div id="calendar-app" class="fc">
+                    <calendar
+                            locale="{{ app.request.locale }}"
+                            endpoint-event-calendar-events-ajax="{{ path('event_detail_events_ajax',{'id' : event.id | hashids_encode}) }}"
+                    >
+                    </calendar>
+                </div>
             </div>
         </div>
     </div>

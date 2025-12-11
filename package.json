@@ -12,13 +12,18 @@
         "playwright:test-ui": "npx playwright test --ui-host=0.0.0.0 --ui-port=35825"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.17",
+        "@fullcalendar/daygrid": "^6.1.17",
+        "@fullcalendar/interaction": "^6.1.17",
+        "@fullcalendar/list": "^6.1.17",
+        "@fullcalendar/timegrid": "^6.1.17",
+        "@fullcalendar/vue3": "^6.1.17",
         "animate.css": "^3.5.1",
         "bootstrap": "^3.3.7",
         "bootstrap-progressbar": "^0.9.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.47",
         "fastclick": "^1.0.6",
         "font-awesome": "^4.6.1",
-        "fullcalendar": "^3.10.2",
         "icheck": "^1.0.2",
         "inputmask": "^5.0.3",
         "jquery": "^3.5.1",
@@ -35,7 +40,9 @@
         "sticky-js": "^1.3.0",
         "switchery": "^0.0.2",
         "switchery-latest": "^0.8.2",
-        "tinymce": "^6.4.2"
+        "tinymce": "^7.9.0",
+        "vue": "^3.5.14",
+        "vue-loader": "^17.4.2"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.22.7",

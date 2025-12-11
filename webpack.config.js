@@ -40,7 +40,6 @@ Encore
         'switchery/standalone/switchery.css',
         'select2/dist/css/select2.min.css',
         'icheck/skins/flat/green.css',
-        'fullcalendar/dist/fullcalendar.min.css',
         'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
         './assets/css/main.css'
     ])
@@ -67,8 +66,6 @@ Encore
                     './node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
                     './node_modules/select2/dist/js/select2.full.min.js',
                     './node_modules/moment/min/moment-with-locales.js',
-                    './node_modules/fullcalendar/dist/fullcalendar.min.js',
-                    './node_modules/fullcalendar/dist/locale-all.js',
                     './node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                     './node_modules/switchery-latest/dist/switchery.min.js',
                     './node_modules/icheck/icheck.min.js',
@@ -102,6 +99,10 @@ Encore
     .splitEntryChunks()
     .enableStimulusBridge('./assets/controllers.json')
     .addEntry('app', './assets/app.js')
+    .enableVueLoader(() => {}, { version: 3 })
+    .addEntry('app_vue_calendar_manage', './assets/vue/app-calendar-manage.js')
+    .addEntry('app_vue_calendar_reservation', './assets/vue/app-calendar-reservation.js')
+    .addEntry('app_vue_calendar_event_detail', './assets/vue/app-calendar-event-detail.js')
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
