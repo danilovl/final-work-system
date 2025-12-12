@@ -39,7 +39,7 @@ readonly class FormDeleteFactory
             ->setAction($this->router->generate($route, [
                 'id' => $this->hashidsService->encode($entity->getId())
             ]))
-            ->setMethod(Request::METHOD_DELETE)
+            ->setMethod(Request::METHOD_POST)
             ->getForm();
     }
 }
