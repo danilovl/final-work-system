@@ -32,6 +32,11 @@ trait IdTrait
         $this->id = $id;
     }
 
+    public function isNewObject(): bool
+    {
+        return !isset($this->id);
+    }
+
     public function __clone()
     {
         $this->id = 0;
