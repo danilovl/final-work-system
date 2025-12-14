@@ -25,7 +25,6 @@ use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
-use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Service\UserService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -52,12 +51,13 @@ readonly class EventEditHandle
 
     public function __invoke(Request $request, Event $event): Response
     {
-        $origin = clone $event;
         $user = $this->userService->getUser();
         $eventParticipantArray = $this->eventParticipantFacade
-            ->getEventParticipantsByUserEvent($user, $origin);
+            ->getEventParticipantsByUserEvent($user, $event);
 
         $eventModel = EventModel::fromEvent($event);
+        $eventModel->setActualParticipant($eventParticipantArray);
+
         $form = $this->formFactory
             ->create(EventForm::class, $eventModel, [
                 'addresses' => $user->getEventAddressOwner(),
@@ -68,17 +68,8 @@ readonly class EventEditHandle
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $eventParticipantForm = $eventModel->participant;
-
-                $eventParticipant = $origin->getParticipant() ?: new EventParticipant;
-                if ($eventParticipantForm) {
-                    $eventParticipant->setWork($eventParticipantForm->getWork());
-                    $eventParticipant->setUser($eventParticipantForm->getUser());
-                    $eventParticipant->setEvent($event);
-                    $eventModel->participant = $eventParticipant;
-                } elseif ($eventParticipant->getId()) {
-                    $this->entityManagerService->remove($eventParticipant);
-                    $eventModel->participant = null;
+                if ($event->getParticipant() !== null) {
+                    $this->entityManagerService->remove($event->getParticipant());
                 }
 
                 $command = EditEventCommand::create($eventModel, $event);

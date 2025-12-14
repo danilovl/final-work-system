@@ -68,8 +68,7 @@ class EventForm extends AbstractType
                 'required' => false,
                 'choices' => $participants,
                 'placeholder' => FormConstant::PLACEHOLDER->value,
-                'choice_label' => static fn (EventParticipant $participant): string => (string) $participant,
-                'preferred_choices' => $participants
+                'choice_label' => static fn (EventParticipant $participant): string => (string) $participant
             ])
             ->add('start', DateType::class, [
                 'required' => true,

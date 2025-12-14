@@ -24,7 +24,6 @@ use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\EventParticipantFacade;
 use App\Domain\Event\Form\EventForm;
 use App\Domain\Event\Model\EventModel;
-use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
@@ -45,32 +44,25 @@ readonly class EventEditHandle
 
     public function __invoke(Request $request, Event $event): JsonResponse
     {
-        $origin = clone $event;
         $user = $this->userService->getUser();
+        $eventParticipantArray = $this->eventParticipantFacade
+            ->getEventParticipantsByUserEvent($user, $event);
+
         $eventModel = EventModel::fromEvent($event);
+        $eventModel->setActualParticipant($eventParticipantArray);
 
         $form = $this->formFactory
             ->create(EventForm::class, $eventModel, [
                 'addresses' => $user->getEventAddressOwner(),
-                'participants' => $this->eventParticipantFacade->getEventParticipantsByUserEvent($user, $origin)
+                'participants' => $eventParticipantArray
             ]);
 
         $form->get('participant')->isRequired();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $eventParticipantForm = $eventModel->participant;
-            $originParticipant = $origin->getParticipant();
-
-            $eventParticipant = $originParticipant ?? new EventParticipant;
-            if ($eventParticipantForm !== null) {
-                $eventParticipant->setWork($eventParticipantForm->getWork());
-                $eventParticipant->setUser($eventParticipantForm->getUser());
-                $eventParticipant->setEvent($event);
-                $eventModel->participant = $eventParticipant;
-            } elseif ($originParticipant !== null) {
-                $this->entityManagerService->remove($originParticipant);
-                $eventModel->participant = null;
+            if ($event->getParticipant() !== null) {
+                $this->entityManagerService->remove($event->getParticipant());
             }
 
             $command = EditEventCommand::create($eventModel, $event);

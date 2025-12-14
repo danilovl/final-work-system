@@ -48,4 +48,23 @@ class EventModel
 
         return $model;
     }
+
+    /**
+     * @param EventParticipant[] $eventParticipantArray
+     */
+    public function setActualParticipant(array $eventParticipantArray): void
+    {
+        if ($this->participant === null) {
+            return;
+        }
+
+        foreach ($eventParticipantArray as $eventParticipant) {
+            if (
+                $this->participant->getWork()->getId() === $eventParticipant->getWork()->getId() &&
+                $this->participant->getUser()->getId() === $eventParticipant->getUser()->getId()
+            ) {
+                $this->participant = $eventParticipant;
+            }
+        }
+    }
 }

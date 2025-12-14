@@ -17,9 +17,7 @@ use App\Domain\Event\Entity\Event;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserWorkService;
-use App\Domain\Work\Constant\{
-    WorkUserTypeConstant
-};
+use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
@@ -55,13 +53,6 @@ readonly class EventParticipantFacade
             $participant->setUser($work->getAuthor());
             $participant->setWork($work);
             $participant->setEvent($event);
-
-            if ($event->getParticipant() &&
-                $event->getParticipant()->getWork() &&
-                $event->getParticipant()->getWork()->getId() === $work->getId()
-            ) {
-                $event->setParticipant($participant);
-            }
 
             $eventParticipantArray[] = $participant;
         }
