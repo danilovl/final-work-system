@@ -61,10 +61,10 @@ readonly class EventEditHandle
         $form = $this->formFactory
             ->create(EventForm::class, $eventModel, [
                 'addresses' => $user->getEventAddressOwner(),
-                'participants' => $eventParticipantArray
-            ]);
-        $form->get('participant')->isRequired();
-        $form->handleRequest($request);
+                'participants' => $eventParticipantArray,
+                'isParticipantRequired' => true
+            ])
+            ->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {

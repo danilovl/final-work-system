@@ -40,12 +40,17 @@ class EventForm extends AbstractType
     final public const string NAME = 'event';
 
     /**
-     * @param array{addresses: EventAddress[], participants: EventParticipant[]} $options
+     * @param array{
+     *     addresses: EventAddress[],
+     *     participants: EventParticipant[],
+     *     isParticipantRequired: bool
+     * } $options
      */
     #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $participants = $options['participants'];
+        $isParticipantRequired = $options['isParticipantRequired'];
 
         $builder
             ->add('type', EntityType::class, [
@@ -65,7 +70,7 @@ class EventForm extends AbstractType
                 'choice_label' => static fn (EventAddress $address): string => (string) $address
             ])
             ->add('participant', ChoiceType::class, [
-                'required' => false,
+                'required' => $isParticipantRequired,
                 'choices' => $participants,
                 'placeholder' => FormConstant::PLACEHOLDER->value,
                 'choice_label' => static fn (EventParticipant $participant): string => (string) $participant
@@ -95,18 +100,20 @@ class EventForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => EventModel::class,
-                'constraints' => [
-                    new EventTime
-                ],
-            ]
+                    'data_class' => EventModel::class,
+                    'constraints' => [
+                        new EventTime
+                    ],
+                    'isParticipantRequired' => false
+                ]
             )
             ->setRequired([
                 'addresses',
                 'participants'
             ])
             ->setAllowedTypes('addresses', 'iterable')
-            ->setAllowedTypes('participants', 'iterable');
+            ->setAllowedTypes('participants', 'iterable')
+            ->setAllowedTypes('isParticipantRequired', 'bool');
     }
 
     #[Override]
