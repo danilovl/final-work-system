@@ -13,6 +13,7 @@
 namespace App\Domain\Work\Autocompleter;
 
 use App\Domain\WorkType\Entity\WorkType;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\{
@@ -23,6 +24,7 @@ use Symfony\UX\Autocomplete\Form\{
 #[AsEntityAutocompleteField]
 class WorkSearchTypeUxAutocompleter extends AbstractType
 {
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -34,6 +36,7 @@ class WorkSearchTypeUxAutocompleter extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return BaseEntityAutocompleteType::class;

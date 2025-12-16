@@ -23,6 +23,7 @@ use Danilovl\SelectAutocompleterBundle\Resolver\Config\AutocompleterConfigResolv
 use Danilovl\SelectAutocompleterBundle\Service\OrmAutocompleter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Override;
 
 class WorkSearchUsersAutocompleter extends OrmAutocompleter
 {
@@ -35,6 +36,7 @@ class WorkSearchUsersAutocompleter extends OrmAutocompleter
         parent::__construct($registry, $resolver);
     }
 
+    #[Override]
     protected function createAutocompleterQueryBuilder(AutocompleterQuery $query): QueryBuilder
     {
         $user = $this->userService->getUser();
@@ -72,6 +74,7 @@ class WorkSearchUsersAutocompleter extends OrmAutocompleter
      * @param User&object $object
      * @return Item
      */
+    #[Override]
     public function transformObjectToItem(object $object): Item
     {
         return new Item(

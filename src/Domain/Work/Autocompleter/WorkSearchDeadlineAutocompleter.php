@@ -25,6 +25,7 @@ use DateTimeInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Override;
 
 #[AsAutocompleter(alias: 'own.work-search-deadline')]
 class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
@@ -38,6 +39,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
         parent::__construct($registry, $resolver);
     }
 
+    #[Override]
     public function reverseTransform(array $identifiers): array
     {
         $queryBuilder = $this->createAutocompleterQueryBuilder(new AutocompleterQuery);
@@ -56,6 +58,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
      * @param string[] $objects
      * @return string[]
      */
+    #[Override]
     public function reverseTransformResultIds(array $objects): array
     {
         return $objects;
@@ -64,6 +67,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
     /**
      * @param string[] $objects
      */
+    #[Override]
     public function transformObjectsToItem(array $objects): array
     {
         return array_map(static function (string $object): Item {
@@ -71,6 +75,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
         }, $objects);
     }
 
+    #[Override]
     protected function createPaginator(): PaginatorInterface
     {
         $queryBuilder = $this->createAutocompleterQueryBuilder($this->autocompleterQuery);
@@ -105,6 +110,7 @@ class WorkSearchDeadlineAutocompleter extends OrmAutocompleter
         };
     }
 
+    #[Override]
     protected function createAutocompleterQueryBuilder(AutocompleterQuery $query): QueryBuilder
     {
         $user = $this->userService->getUser();
