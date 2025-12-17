@@ -2,7 +2,7 @@
   <FullCalendar ref="fullCalendar" :options="calendarOptions"/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref} from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -10,10 +10,15 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 
+interface CalendarEventDetailProps {
+  locale: string;
+  endpointEventCalendarEventsAjax: string;
+}
+
 const {
   locale,
   endpointEventCalendarEventsAjax,
-} = defineProps(['locale', 'endpointEventCalendarEventsAjax'])
+} = defineProps<CalendarEventDetailProps>();
 
 const fullCalendar = ref(null);
 

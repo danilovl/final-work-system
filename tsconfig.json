@@ -15,10 +15,18 @@
             "node",
             "playwright",
             "cypress",
-        ]
+        ],
+        "sourceMap": true,
+        "allowJs": true,
+        "checkJs": false
     },
     "include": [
+        "assets/vue",
         "tests",
         "playwright.config.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "public/build"
     ]
 }

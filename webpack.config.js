@@ -100,9 +100,9 @@ Encore
     .enableStimulusBridge('./assets/controllers.json')
     .addEntry('app', './assets/app.js')
     .enableVueLoader(() => {}, { version: 3 })
-    .addEntry('app_vue_calendar_manage', './assets/vue/app-calendar-manage.js')
-    .addEntry('app_vue_calendar_reservation', './assets/vue/app-calendar-reservation.js')
-    .addEntry('app_vue_calendar_event_detail', './assets/vue/app-calendar-event-detail.js')
+    .addEntry('app_vue_calendar_manage', './assets/vue/app-calendar-manage.ts')
+    .addEntry('app_vue_calendar_reservation', './assets/vue/app-calendar-reservation.ts')
+    .addEntry('app_vue_calendar_event_detail', './assets/vue/app-calendar-event-detail.ts')
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
@@ -110,5 +110,14 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
+
+Encore.addLoader({
+    test: /\.ts$/,
+    loader: 'ts-loader',
+    options: {
+        appendTsSuffixTo: [/\.vue$/],
+        transpileOnly: true
+    }
+});
 
 module.exports = Encore.getWebpackConfig();
