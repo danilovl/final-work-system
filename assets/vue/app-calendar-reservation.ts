@@ -1,5 +1,5 @@
 import {createApp} from 'vue';
-import Calendar from './components/CalendarReservation.vue';
+import Calendar from './components/Calendar/CalendarReservation.vue';
 
 const app = createApp({
     components: {
