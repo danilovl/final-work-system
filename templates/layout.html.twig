@@ -181,9 +181,9 @@
                 }
 
                 if (!response.ok) {
-                    let responseJson;
                     try {
-                        responseJson = await response.json();
+                        let responseJson = await response.clone();
+                        responseJson = await responseJson.json();
                         if (responseJson && 'notifyMessage' in responseJson) {
                             return response;
                         }
