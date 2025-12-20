@@ -100,13 +100,12 @@ class EventForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                    'data_class' => EventModel::class,
-                    'constraints' => [
-                        new EventTime
-                    ],
-                    'isParticipantRequired' => false
-                ]
-            )
+                'data_class' => EventModel::class,
+                'constraints' => [
+                    new EventTime
+                ],
+                'isParticipantRequired' => false
+            ])
             ->setRequired([
                 'addresses',
                 'participants'
