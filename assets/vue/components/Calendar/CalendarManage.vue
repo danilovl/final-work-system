@@ -180,8 +180,6 @@ function deleteEvent(): void {
         }
       })
       .then((response: ApiResponse) => {
-        const responseData = response.data;
-
         const calendarApi = fullCalendar.value?.getApi();
         if (calendarApi) {
           const event = calendarApi.getEventById(eventId);
@@ -190,8 +188,8 @@ function deleteEvent(): void {
           }
         }
 
-        for (const type in responseData.notifyMessage) {
-          notifyMessage(type, responseData.notifyMessage[type]);
+        for (const type in response.notifyMessage) {
+          notifyMessage(type, response.notifyMessage[type]);
         }
       });
 }
