@@ -8,7 +8,7 @@ describe('Delete event calendar test', () => {
         cy.wait(2000)
 
         cy
-            .get('.fc-draggable')
+            .get('.fc-event-draggable')
             .first()
             .click()
 

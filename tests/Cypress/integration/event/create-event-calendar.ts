@@ -8,7 +8,7 @@ describe('Create event calendar test', () => {
         cy.wait(2000)
 
         cy
-            .get('.fc-future')
+            .get('.fc-day-future')
             .first()
             .click()
 
