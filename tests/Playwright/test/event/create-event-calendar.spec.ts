@@ -8,7 +8,7 @@ export default function createEventCalendarTests() {
         await page.goto('/en/event/calendar/manage')
         await page.waitForTimeout(2000)
 
-        await page.locator('.fc-future').first().click()
+        await page.locator('.fc-day-future').first().click()
 
         await page.locator('#select2-event_address-container').click()
         await page.locator('li[id^="select2-event_address-result"]').first().click()

@@ -8,7 +8,7 @@ export default function createTests() {
         await page.goto('/en/event/calendar/manage')
         await page.waitForTimeout(2000)
 
-        await page.locator('.fc-draggable').first().click()
+        await page.locator('.fc-event-draggable').first().click()
         await page.click('#event-delete')
 
         await page.waitForTimeout(2000)
