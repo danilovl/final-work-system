@@ -59,6 +59,14 @@ class EventModel
         }
 
         foreach ($eventParticipantArray as $eventParticipant) {
+            if ($this->participant->getWork() === null || $this->participant->getUser() === null) {
+                continue;
+            }
+
+            if ($eventParticipant->getWork() === null || $eventParticipant->getUser() === null) {
+                continue;
+            }
+
             if (
                 $this->participant->getWork()->getId() === $eventParticipant->getWork()->getId() &&
                 $this->participant->getUser()->getId() === $eventParticipant->getUser()->getId()
