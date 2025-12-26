@@ -12,7 +12,11 @@
 
 namespace App\Domain\Event\Controller\Api;
 
-use App\Domain\Event\Http\Api\EventListHandle;
+use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
+use App\Domain\Event\Http\Api\{
+    EventListHandle,
+    EventListOwnerHandle
+};
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -21,10 +25,19 @@ use Symfony\Component\HttpFoundation\{
 
 readonly class EventController
 {
-    public function __construct(private EventListHandle $eventListHandle) {}
+    public function __construct(
+        private EventListHandle $eventListHandle,
+        private EventListOwnerHandle $eventListOwnerHandle
+
+    ) {}
 
     public function list(Request $request, Work $work): JsonResponse
     {
         return $this->eventListHandle->__invoke($request, $work);
+    }
+
+    public function listOwner(Request $request): EventListOwnerOutput
+    {
+        return $this->eventListOwnerHandle->__invoke($request);
     }
 }

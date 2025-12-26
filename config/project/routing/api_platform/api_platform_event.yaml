@@ -1,0 +1,31 @@
+resources:
+  App\Domain\Event\Entity\Event:
+    operations:
+      api_get_event_list_owner:
+        description: 'Get events owner.'
+        class: ApiPlatform\Metadata\Get
+        routeName: api_get_event_list_owner
+        uriTemplate: '/event/list-owner'
+        controller: App\Domain\Event\Controller\Api\EventController::listOwner
+        output: App\Domain\Event\DTO\Api\Output\EventListOwnerOutput
+        read: false
+        openapi:
+          summary: 'Get owner events.'
+          description: 'Get owner events.'
+        openapiContext:
+          parameters:
+            - name: page
+              in: query
+              description: Page
+              required: false
+              schema:
+                type: integer
+        normalizationContext:
+          groups:
+            - 'output'
+            - 'event:read'
+            - 'event:owner:read'
+            - 'event:event-address:read'
+            - 'event-address:read'
+            - 'event-address:owner:read'
+            - 'user:read'
