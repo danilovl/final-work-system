@@ -1,9 +1,16 @@
 framework:
-    secret: '%env(APP_SECRET)%'
-    session:
-        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
-        cookie_secure: false
-        cookie_samesite: lax
-        cookie_lifetime: 43200
-    php_errors:
-        log: true
+  secret: '%env(APP_SECRET)%'
+  session:
+    handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+    cookie_secure: false
+    cookie_samesite: lax
+    cookie_lifetime: 43200
+  php_errors:
+    log: true
+  cache:
+    pools:
+      doctrine.redis_adapter:
+        adapter: cache.adapter.redis
+        default_lifetime: 3600
+
+    default_redis_provider: 'redis://%env(REDIS_HOSTNAME)%:%env(REDIS_PORT)%/13'

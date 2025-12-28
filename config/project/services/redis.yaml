@@ -12,24 +12,6 @@ services:
         database: 12
       $options: []
 
-  redis:
-    class: Predis\Client
-    public: false
-    arguments:
-      $parameters:
-        host: '%env(REDIS_HOSTNAME)%'
-        port: '%env(REDIS_PORT)%'
-        database: 13
-      $options: []
-
-  doctrine_cache.providers.redis_provider:
-    class: App\Application\Redis\Provider\RedisCache
-    calls:
-      - ['setRedis', ['@redis']]
-      - ['setNamespace', ['DoctrineSecondLevelCache']]
-    tags:
-      - { name: snc_redis.client }
-
   Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
     arguments:
       - '@redis_session'
