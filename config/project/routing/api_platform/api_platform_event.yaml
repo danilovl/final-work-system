@@ -29,3 +29,26 @@ resources:
             - 'event-address:read'
             - 'event-address:owner:read'
             - 'user:read'
+
+      api_post_event_create:
+        description: 'Create a new event.'
+        class: ApiPlatform\Metadata\Post
+        routeName: api_post_event_create
+        uriTemplate: '/event/create'
+        controller: App\Domain\Event\Controller\Api\EventController::create
+        input: App\Domain\Event\DTO\Api\Input\EventCreateInput
+        output: App\Domain\Event\DTO\Api\EventDTO
+        read: false
+        validate: true
+        openapi:
+          summary: 'Create a new event.'
+          description: 'Create a new event.'
+        normalizationContext:
+          groups:
+            - 'output'
+            - 'event:read'
+            - 'event:owner:read'
+            - 'event:event-address:read'
+            - 'event-address:read'
+            - 'event-address:owner:read'
+            - 'user:read'
