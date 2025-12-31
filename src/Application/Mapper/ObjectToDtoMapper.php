@@ -12,6 +12,7 @@
 
 namespace App\Application\Mapper;
 
+use App\Application\Mapper\Attribute\MapToDto;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
@@ -39,17 +40,20 @@ readonly class ObjectToDtoMapper
         $constructor = $dtoReflection->getConstructor();
 
         if (!$constructor) {
-            throw new RuntimeException("DTO class must have a constructor: $dtoClass");
+            $message = sprintf('DTO class must have a constructor: %s', $dtoClass);
+
+            throw new RuntimeException($message);
         }
 
         $args = [];
 
-        foreach ($constructor->getParameters() as $param) {
-            $name = $param->getName();
-            $type = $param->getType();
+        foreach ($constructor->getParameters() as $parameter) {
+            $name = $parameter->getName();
+            $type = $parameter->getType();
 
             if (!$this->accessor->isReadable($entity, $name)) {
-                $args[] = $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null;
+                $args[] = $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null;
+
                 continue;
             }
 
@@ -57,22 +61,46 @@ readonly class ObjectToDtoMapper
 
             if ($value === null) {
                 $args[] = null;
+
                 continue;
+            }
+
+            if (is_iterable($value)) {
+                $property = $dtoReflection->getProperty($name);
+                $attributes = $property->getAttributes(MapToDto::class);
+
+                if (count($attributes) > 0) {
+                    $attribute = $attributes[0]->newInstance();
+                    $targetDtoClass = $attribute->dtoClass;
+                    $args[] = $this->mapCollection($value, $targetDtoClass);
+
+                    continue;
+                }
             }
 
             if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
                 $typeName = $type->getName();
+                $args[] = $this->map($value, $typeName);
 
-                if (str_ends_with($typeName, 'DTO')) {
-                    $args[] = $this->map($value, $typeName);
-
-                    continue;
-                }
+                continue;
             }
 
             $args[] = $value;
         }
 
         return $dtoReflection->newInstanceArgs($args);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private function mapCollection(iterable $collection, string $dtoClass): array
+    {
+        $result = [];
+        foreach ($collection as $item) {
+            $result[] = $this->map($item, $dtoClass);
+        }
+
+        return $result;
     }
 }

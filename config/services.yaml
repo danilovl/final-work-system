@@ -28,6 +28,7 @@ services:
       - '../src/Application/Exception'
       - '../src/Application/GraphQL'
       - '../src/Application/Helper'
+      - '../src/Application/Mapper/Attribute'
       - '../src/Application/Menu'
       - '../src/Application/Messenger/*/*Message.php'
       - '../src/Application/Migrations'
