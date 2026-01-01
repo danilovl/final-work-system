@@ -14,6 +14,10 @@ services:
       $container: '@service_container'
       $systemInfo: '%system_info%'
 
+  App\Infrastructure\:
+    resource: '../src/Infrastructure'
+    exclude:
+
   App\Application\:
     resource: '../src/Application'
     exclude:

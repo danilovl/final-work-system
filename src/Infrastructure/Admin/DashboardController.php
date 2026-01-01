@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Admin;
+namespace App\Infrastructure\Admin;
 
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\User\Admin\UserCrudController;
