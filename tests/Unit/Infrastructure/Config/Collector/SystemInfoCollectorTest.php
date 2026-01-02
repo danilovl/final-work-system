@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Collector;
+namespace App\Tests\Unit\Infrastructure\Config\Collector;
 
-use App\Application\Collector\SystemInfoCollector;
+use App\Infrastructure\Config\Collector\SystemInfoCollector;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,

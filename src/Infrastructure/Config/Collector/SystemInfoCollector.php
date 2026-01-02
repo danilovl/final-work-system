@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Collector;
+namespace App\Infrastructure\Config\Collector;
 
 use Override;
 use Symfony\Component\HttpFoundation\{
