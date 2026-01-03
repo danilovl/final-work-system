@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Command;
+namespace App\Tests\Kernel\Infrastructure\Console;
 
-use App\Application\Command\ImportSqlCommand;
 use App\Application\Exception\InvalidArgumentException;
+use App\Infrastructure\Console\ImportSqlCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;

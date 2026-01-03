@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Command;
+namespace App\Infrastructure\Console;
 
 use App\Application\Exception\InvalidArgumentException;
 use App\Application\Service\EntityManagerService;
