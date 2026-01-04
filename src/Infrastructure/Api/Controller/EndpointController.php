@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Controller\Api;
+namespace App\Infrastructure\Api\Controller;
 
 use Symfony\Component\HttpFoundation\{
     Request,
