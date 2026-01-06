@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Application\DependencyInjection\Boot;
+namespace App\Infrastructure\Config\DependencyInjection\Boot;
 
-use App\Application\Provider\OpenTelemetryProvider;
 use App\Application\OpenTelemetry\{
     OpenTelemetryManager,
     OpenTelemetryRegistrationInterface
 };
+use App\Application\Provider\OpenTelemetryProvider;
 use Psr\Container\ContainerInterface;
 
 class OpenTelemetryBoot

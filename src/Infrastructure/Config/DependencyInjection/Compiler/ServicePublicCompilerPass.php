@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\DependencyInjection\Compiler;
+namespace App\Infrastructure\Config\DependencyInjection\Compiler;
 
 use Override;
 use Symfony\Bundle\SecurityBundle\Security;

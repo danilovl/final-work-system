@@ -10,11 +10,11 @@
  *
  */
 
-namespace App\Tests\Unit\Application\DependencyInjection\Compiler;
+namespace App\Tests\Unit\Infrastructure\Config\DependencyInjection\Compiler;
 
-use App\Application\DependencyInjection\Compiler\WidgetCompilerPass;
 use App\Domain\Widget\Service\WidgetManagerService;
 use App\Domain\Widget\WidgetItem\BaseWidget;
+use App\Infrastructure\Config\DependencyInjection\Compiler\WidgetCompilerPass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\{

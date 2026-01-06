@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\DependencyInjection\Compiler;
+namespace App\Tests\Unit\Infrastructure\Config\DependencyInjection\Compiler;
 
-use App\Application\DependencyInjection\Compiler\ServicePublicCompilerPass;
+use App\Infrastructure\Config\DependencyInjection\Compiler\ServicePublicCompilerPass;
 use EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

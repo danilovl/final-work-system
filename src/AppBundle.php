@@ -12,13 +12,13 @@
 
 namespace App;
 
-use App\Application\DependencyInjection\Boot\OpenTelemetryBoot;
-use Psr\Container\ContainerInterface;
-use App\Application\DependencyInjection\Compiler\{
+use App\Infrastructure\Config\DependencyInjection\Boot\OpenTelemetryBoot;
+use App\Infrastructure\Config\DependencyInjection\Compiler\{
     WidgetCompilerPass,
     OpenTelemetryCompilerPass,
     ServicePublicCompilerPass
 };
+use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
