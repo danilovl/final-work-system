@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\Doctrine\Embeddable;
+namespace App\Infrastructure\Persistence\Doctrine\Embeddable;
 
 use App\Application\Exception\InvalidArgumentException;
 use Doctrine\DBAL\Types\Types;

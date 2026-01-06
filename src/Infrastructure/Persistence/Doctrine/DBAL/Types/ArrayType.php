@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Application\Doctrine\DBAL\Types;
+namespace App\Infrastructure\Persistence\Doctrine\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\{
-    Type,
-    ConversionException
+    ConversionException,
+    Type
 };
 use Doctrine\Deprecations\Deprecation;
 use function is_resource;
