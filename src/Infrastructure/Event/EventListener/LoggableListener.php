@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\EventListener;
+namespace App\Infrastructure\Event\EventListener;
 
 use App\Application\Messenger\Loggable\LoggableMessage;
 use App\Application\Provider\LoggableProvider;

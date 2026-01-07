@@ -12,8 +12,8 @@
 
 namespace App\Domain\User\EventListener;
 
-use App\Application\EventListener\LoggableListener;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Event\EventListener\LoggableListener;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;

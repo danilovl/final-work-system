@@ -10,19 +10,17 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventListener;
+namespace App\Tests\Unit\Infrastructure\Event\EventListener;
 
-use App\Application\EventListener\RequestListener;
-use PHPUnit\Framework\MockObject\MockObject;
 use App\Application\Service\SeoPageService;
+use App\Infrastructure\Event\EventListener\RequestListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\{
+    HttpKernelInterface,
     KernelEvents,
-    KernelInterface,
-    HttpKernelInterface
-};
+    KernelInterface};
 
 class RequestListenerTest extends TestCase
 {
