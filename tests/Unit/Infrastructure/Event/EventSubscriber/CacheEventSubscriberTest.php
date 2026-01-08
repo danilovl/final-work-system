@@ -10,13 +10,11 @@
  *
  */
 
-namespace App\Tests\Unit\Application\EventSubscriber;
+namespace App\Tests\Unit\Infrastructure\Event\EventSubscriber;
 
 use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
-use App\Application\EventSubscriber\{
-    Events,
-    CacheEventSubscriber
-};
+use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Event\EventSubscriber\CacheEventSubscriber;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;

@@ -10,9 +10,10 @@
  *
  */
 
-namespace App\Application\EventSubscriber;
+namespace App\Infrastructure\Event\EventSubscriber;
 
 use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
+use App\Application\EventSubscriber\Events;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Cache\CacheInterface;
