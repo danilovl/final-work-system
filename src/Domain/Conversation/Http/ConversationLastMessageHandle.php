@@ -12,23 +12,23 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Form\SimpleSearchForm;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
-use App\Domain\Conversation\Bus\Query\ConversationLastMessage\{
-    GetConversationLastMessageQuery,
-    GetConversationLastMessageQueryResult
-};
 use App\Application\Service\{
     SeoPageService,
     TwigRenderService
 };
+use App\Domain\Conversation\Bus\Query\ConversationLastMessage\{
+    GetConversationLastMessageQuery,
+    GetConversationLastMessageQueryResult
+};
 use App\Domain\Conversation\Entity\Conversation;
+use App\Infrastructure\Web\Form\SimpleSearchForm;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use Symfony\Component\Form\FormFactoryInterface;
 
 readonly class ConversationLastMessageHandle
 {

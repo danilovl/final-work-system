@@ -13,10 +13,10 @@
 namespace App\Domain\EventAddress\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\RequestService;
 use App\Domain\EventAddress\Bus\Command\DeleteEventAddress\DeleteEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
+use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request

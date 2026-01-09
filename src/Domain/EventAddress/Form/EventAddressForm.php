@@ -12,8 +12,8 @@
 
 namespace App\Domain\EventAddress\Form;
 
-use App\Application\Form\Transformer\CommaDotTransformer;
 use App\Domain\EventAddress\Model\EventAddressModel;
+use App\Infrastructure\Web\Form\Transformer\CommaDotTransformer;
 use Override;
 use Symfony\Component\Form\{
     AbstractType,

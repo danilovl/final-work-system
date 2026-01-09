@@ -16,7 +16,9 @@ use App\Application\OpenTelemetry\Messenger\Context\SymfonyMessengerPropagationG
 use App\Application\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
-use OpenTelemetry\SemConv\{TraceAttributeValues, TraceAttributes};
+use OpenTelemetry\SemConv\{
+    TraceAttributeValues,
+    TraceAttributes};
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
@@ -35,7 +37,7 @@ use function OpenTelemetry\Instrumentation\hook;
 
 #[AutoconfigureTag('app.open_telemetry.registration', ['priority' => 0])]
 class MessageBusRegistration implements OpenTelemetryRegistrationInterface
-{    
+{
     public static function registration(): void
     {
         hook(

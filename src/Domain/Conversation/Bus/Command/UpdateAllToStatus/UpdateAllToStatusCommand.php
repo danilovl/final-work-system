@@ -22,7 +22,7 @@ readonly class UpdateAllToStatusCommand implements CommandInterface
 {
     private function __construct(public User $user, public ConversationMessageStatusType $type) {}
 
-    public static function create(User $user,  ConversationMessageStatusType $type): self
+    public static function create(User $user, ConversationMessageStatusType $type): self
     {
         return new self($user, $type);
     }

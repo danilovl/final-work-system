@@ -12,12 +12,12 @@
 
 namespace App\Domain\EventAddress\Http;
 
-use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
     SeoPageService,
     TwigRenderService
 };
 use App\Domain\EventAddress\Entity\EventAddress;
+use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Symfony\Component\HttpFoundation\Response;
 
 readonly class EventAddressDetailHandle

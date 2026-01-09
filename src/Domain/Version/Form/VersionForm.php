@@ -12,9 +12,9 @@
 
 namespace App\Domain\Version\Form;
 
-use App\Application\Form\Type\MediaFileType;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
+use App\Infrastructure\Web\Form\Type\MediaFileType;
 use Override;
 use Symfony\Component\Form\{
     AbstractType,

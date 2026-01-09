@@ -12,13 +12,13 @@
 
 namespace App\Domain\EventSchedule\Http;
 
-use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Service\{
     DateService,
     SeoPageService,
     TwigRenderService
 };
 use App\Domain\EventSchedule\Entity\EventSchedule;
+use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Symfony\Component\HttpFoundation\Response;
 
 readonly class EventScheduleDetailHandle

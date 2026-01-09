@@ -123,7 +123,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 throw new RuntimeException('Type not found');
         }
 
-        if ($workStatus !== null ) {
+        if ($workStatus !== null) {
             $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
             $queryBuilder->setParameter('statuses', $workStatus);
         }
@@ -161,7 +161,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 throw new RuntimeException('Type not found');
         }
 
-        if ($workStatus !== null ) {
+        if ($workStatus !== null) {
             $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
             $queryBuilder->setParameter('statuses', $workStatus);
         }
@@ -199,7 +199,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 throw new RuntimeException('Type not found');
         }
 
-        if ($workStatus !== null ) {
+        if ($workStatus !== null) {
             $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
             $queryBuilder->setParameter('statuses', $workStatus);
         }
@@ -237,7 +237,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 throw new RuntimeException('Type not found');
         }
 
-        if ($workStatus !== null ) {
+        if ($workStatus !== null) {
             $queryBuilder->andWhere($queryBuilder->expr()->in('work.status', ':statuses'));
             $queryBuilder->setParameter('statuses', $workStatus);
         }

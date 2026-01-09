@@ -12,12 +12,12 @@
 
 namespace App\Domain\Document\Form;
 
-use App\Application\Form\Type\MediaFileType;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Form\DataGrid\MediaCategoryDataGrid;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\User\Entity\User;
+use App\Infrastructure\Web\Form\Type\MediaFileType;
 use Doctrine\ORM\QueryBuilder;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,9 +26,9 @@ use Symfony\Component\Form\{
     FormBuilderInterface
 };
 use Symfony\Component\Form\Extension\Core\Type\{
-    TextType,
     CheckboxType,
-    TextareaType
+    TextareaType,
+    TextType
 };
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

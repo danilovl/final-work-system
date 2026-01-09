@@ -34,7 +34,7 @@ readonly class ResetPasswordHandler implements CommandHandlerInterface
 
         $encodedPassword = $this->userPasswordHasher->hashPassword($user, $command->plainPassword);
         $user->setPassword($encodedPassword);
-        
+
         $this->entityManagerService->flush();
     }
 }

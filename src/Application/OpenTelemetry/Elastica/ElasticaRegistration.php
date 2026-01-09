@@ -84,7 +84,8 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
                         TraceAttributes::DB_QUERY_TEXT,
                         json_encode($body, JSON_THROW_ON_ERROR)
                     );
-                } catch (Throwable) {}
+                } catch (Throwable) {
+                }
             } elseif (is_string($body)) {
                 $spanBuilder->setAttribute(TraceAttributes::DB_QUERY_TEXT, $body);
             }
@@ -153,7 +154,8 @@ class ElasticaRegistration implements OpenTelemetryRegistrationInterface
                         TraceAttributes::DB_QUERY_TEXT,
                         json_encode($data, JSON_THROW_ON_ERROR)
                     );
-                } catch (Throwable) {}
+                } catch (Throwable) {
+                }
             } elseif (is_string($data)) {
                 $spanBuilder->setAttribute(TraceAttributes::DB_QUERY_TEXT, $data);
             }

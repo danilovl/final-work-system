@@ -12,8 +12,8 @@
 
 namespace App\Domain\EventSchedule\Form;
 
-use App\Application\Form\Type\FirstWeekDayType;
 use App\Domain\EventSchedule\Model\EventScheduleCloneModel;
+use App\Infrastructure\Web\Form\Type\FirstWeekDayType;
 use Override;
 use Symfony\Component\Form\{
     AbstractType,

@@ -12,17 +12,17 @@
 
 namespace App\Domain\Work\Http;
 
-use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Interfaces\Bus\QueryBusInterface;
+use App\Application\Service\TwigRenderService;
+use App\Domain\User\Service\UserService;
 use App\Domain\Work\Bus\Query\WorkList\{
     GetWorkListQuery,
     GetWorkListQueryResult
 };
-use App\Application\Service\TwigRenderService;
-use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
 use App\Domain\WorkSearch\Model\WorkSearchModel;
+use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response

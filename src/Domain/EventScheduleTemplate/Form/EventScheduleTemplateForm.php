@@ -12,11 +12,11 @@
 
 namespace App\Domain\EventScheduleTemplate\Form;
 
-use App\Application\Form\Type\WeekDaysType;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
 use App\Domain\EventScheduleTemplate\Form\Constraint\EventScheduleTemplateTime;
 use App\Domain\EventType\Entity\EventType;
+use App\Infrastructure\Web\Form\Type\WeekDaysType;
 use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\{
@@ -84,11 +84,11 @@ class EventScheduleTemplateForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => EventScheduleTemplate::class,
-                'constraints' => [
-                    new EventScheduleTemplateTime
+                    'data_class' => EventScheduleTemplate::class,
+                    'constraints' => [
+                        new EventScheduleTemplateTime
+                    ]
                 ]
-            ]
             )
             ->setRequired([
                 'addresses'

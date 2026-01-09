@@ -109,7 +109,8 @@ readonly class TracingHelper
         if (is_array($value)) {
             try {
                 $value = json_encode($value, JSON_THROW_ON_ERROR);
-            } catch (Throwable) {}
+            } catch (Throwable) {
+            }
         }
 
         if (is_scalar($value) === false && $value !== null) {

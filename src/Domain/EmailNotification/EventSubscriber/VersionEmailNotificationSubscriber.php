@@ -14,7 +14,9 @@ namespace App\Domain\EmailNotification\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
-use App\Domain\EmailNotification\Provider\{EmailNotificationAddToQueueProvider, EmailNotificationEnableMessengerProvider};
+use App\Domain\EmailNotification\Provider\{
+    EmailNotificationAddToQueueProvider,
+    EmailNotificationEnableMessengerProvider};
 use Override;
 use App\Application\Service\{
     TranslatorService,

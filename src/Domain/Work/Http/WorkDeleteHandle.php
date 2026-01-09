@@ -13,16 +13,16 @@
 namespace App\Domain\Work\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Form\Factory\FormDeleteFactory;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
 use App\Application\Service\RequestService;
+use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    RedirectResponse
+    RedirectResponse,
+    Request
 };
 
 readonly class WorkDeleteHandle

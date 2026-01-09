@@ -37,11 +37,11 @@ readonly class GetDocumentListQuery implements QueryInterface
      * @param array<string, mixed>|null $criteria
      */
     public static function create(
-         Request $request,
-         array $users,
-         ?array $criteria,
-          bool $detachEntity = false,
-         ?bool $active = null,
+        Request $request,
+        array $users,
+        ?array $criteria,
+        bool $detachEntity = false,
+        ?bool $active = null,
     ): self {
         return new self($request, $users, $criteria, $detachEntity, $active);
     }

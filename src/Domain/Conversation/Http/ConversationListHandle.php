@@ -12,17 +12,17 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Form\SimpleSearchForm;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
+use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Bus\Query\ConversationList\{
     GetConversationListQuery,
     GetConversationListQueryResult
 };
-use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationType\Facade\ConversationTypeFacade;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Web\Form\SimpleSearchForm;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{
     Request,

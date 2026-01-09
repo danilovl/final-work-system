@@ -12,23 +12,23 @@
 
 namespace App\Domain\Profile\Form;
 
-use App\Application\Form\Type\LocaleType;
 use App\Domain\User\Model\UserModel;
+use App\Infrastructure\Web\Form\Type\LocaleType;
 use Override;
 use Symfony\Component\Form\{
     AbstractType,
     FormBuilderInterface
 };
+use Symfony\Component\Form\Extension\Core\Type\{
+    CheckboxType,
+    TextareaType,
+    TextType
+};
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\{
     Email,
     NotBlank
 };
-use Symfony\Component\Form\Extension\Core\Type\{
-    TextType,
-    CheckboxType,
-    TextareaType
-};
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProfileFormType extends AbstractType
 {

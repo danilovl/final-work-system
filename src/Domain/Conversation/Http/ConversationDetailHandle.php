@@ -14,17 +14,15 @@ namespace App\Domain\Conversation\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
-use App\Application\Form\SimpleSearchForm;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Model\SearchModel;
-use App\Domain\Conversation\Bus\Command\CreateConversationMessage\CreateConversationMessageCommand;
-use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Application\Service\{
     PaginatorService,
     RequestService,
     SeoPageService,
     TwigRenderService
 };
+use App\Domain\Conversation\Bus\Command\CreateConversationMessage\CreateConversationMessageCommand;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Helper\ConversationHelper;
@@ -32,8 +30,10 @@ use App\Domain\Conversation\Service\MessageHighlightService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\Form\ConversationMessageForm;
 use App\Domain\ConversationMessage\Model\ConversationMessageModel;
+use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Web\Form\SimpleSearchForm;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\{

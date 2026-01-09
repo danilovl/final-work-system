@@ -61,7 +61,7 @@ readonly class ConversationFacade
         $queryBuilder = $this->conversationRepository
             ->allByParticipantUser($user);
 
-       return $this->conversationRepository
+        return $this->conversationRepository
             ->addFilterByTypes($queryBuilder, $types)
             ->getQuery();
     }
