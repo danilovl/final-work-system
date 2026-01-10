@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\GraphQL\Resolver;
+namespace App\Infrastructure\GraphQL\Resolver;
 
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 use Override;

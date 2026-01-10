@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\GraphQL\Type;
+namespace App\Infrastructure\GraphQL\Type;
 
 use App\Application\Constant\DateFormatConstant;
 use DateTimeImmutable;
