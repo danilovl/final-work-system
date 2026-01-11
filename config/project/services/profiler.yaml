@@ -3,7 +3,7 @@ services:
     public: false
 
   app.profiler:
-    class: App\Application\Collector\SystemInfoCollector
+    class: App\Infrastructure\Config\Collector\SystemInfoCollector
     arguments:
       - '%system_info%'
     tags:

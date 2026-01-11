@@ -17,6 +17,9 @@ services:
   App\Infrastructure\:
     resource: '../src/Infrastructure'
     exclude:
+      - '../src/Infrastructure/Config/DependencyInjection'
+      - '../src/Infrastructure/Persistence/Doctrine'
+      - '../src/Infrastructure/GraphQL'
 
   App\Application\:
     resource: '../src/Application'
@@ -25,12 +28,9 @@ services:
       - '../src/Application/Cache'
       - '../src/Application/Constant'
       - '../src/Application/DataTransferObject'
-      - '../src/Application/Doctrine'
-      - '../src/Application/DependencyInjection'
       - '../src/Application/DTO'
       - '../src/Application/EventDispatcher/GenericEvent'
       - '../src/Application/Exception'
-      - '../src/Application/GraphQL'
       - '../src/Application/Helper'
       - '../src/Application/Mapper/Attribute'
       - '../src/Application/Menu'
@@ -77,7 +77,7 @@ services:
     arguments:
       $transformedFinderTask: '@fos_elastica.finder.task'
 
-  App\Application\EventListener\LoggableListener:
+  App\Infrastructure\Event\EventListener\LoggableListener:
     tags:
       - { name: doctrine.event_listener, event: 'onFlush' }
       - { name: doctrine.event_listener, event: 'loadClassMetadata' }
