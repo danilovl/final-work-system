@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Log;
+namespace App\Tests\Unit\Infrastructure\Log;
 
-use App\Application\Log\ElasticsearchLogstashHandlerFactory;
+use App\Infrastructure\Log\ElasticsearchLogstashHandlerFactory;
 use Monolog\Level;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler;

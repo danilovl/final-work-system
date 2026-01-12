@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Log;
+namespace App\Infrastructure\Log;
 
 use Monolog\Level;
 use Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler;

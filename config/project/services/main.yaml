@@ -30,7 +30,7 @@ services:
   App\Application\Service\EntityManagerService: '@app.entity_manager'
 
   Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler:
-    factory:   ['@App\Application\Log\ElasticsearchLogstashHandlerFactory', create]
+    factory:   ['@App\Infrastructure\Log\ElasticsearchLogstashHandlerFactory', create]
     arguments:
       $endpoint: '%env(ELASTICSEARCH_URL)%'
       $index: 'monolog'
