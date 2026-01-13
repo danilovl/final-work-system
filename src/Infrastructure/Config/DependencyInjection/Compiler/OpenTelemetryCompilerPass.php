@@ -12,10 +12,9 @@
 
 namespace App\Infrastructure\Config\DependencyInjection\Compiler;
 
-use App\Application\OpenTelemetry\{
-    OpenTelemetryManager,
-    OpenTelemetryRegistrationInterface
-};
+use App\Infrastructure\OpenTelemetry\{
+    OpenTelemetryManager};
+use App\Infrastructure\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use Override;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

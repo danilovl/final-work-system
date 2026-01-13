@@ -13,11 +13,11 @@
 namespace App\Domain\SystemEvent\Cache;
 
 use App\Application\Constant\CacheKeyConstant;
-use App\Application\OpenTelemetry\Helper\TracingSpan;
 use App\Application\Service\PaginatorService;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Helper\SystemEventHelper;
 use App\Domain\User\Entity\User;
+use App\Infrastructure\OpenTelemetry\Helper\TracingSpan;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;

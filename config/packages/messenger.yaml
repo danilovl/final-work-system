@@ -8,7 +8,7 @@ framework:
 
       messenger.bus.default:
         middleware:
-          - App\Application\OpenTelemetry\Messenger\MessengerMiddleware
+          - App\Infrastructure\OpenTelemetry\Messenger\MessengerMiddleware
 
     failure_transport: failed
 

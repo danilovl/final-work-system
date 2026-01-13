@@ -20,6 +20,7 @@ services:
       - '../src/Infrastructure/Config/DependencyInjection'
       - '../src/Infrastructure/Persistence/Doctrine'
       - '../src/Infrastructure/GraphQL'
+      - '../src/Infrastructure/OpenTelemetry/*/Context'
 
   App\Application\:
     resource: '../src/Application'
@@ -37,7 +38,6 @@ services:
       - '../src/Application/Messenger/*/*Message.php'
       - '../src/Application/Migrations'
       - '../src/Application/Model'
-      - '../src/Application/OpenTelemetry/*/Context'
       - '../src/Application/Helper'
       - '../src/Application/Traits'
       - '../src/Application/Widget'

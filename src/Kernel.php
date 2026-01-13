@@ -12,7 +12,7 @@
 
 namespace App;
 
-use App\Application\OpenTelemetry\Kernel\KernelRegistration;
+use App\Infrastructure\OpenTelemetry\Kernel\KernelRegistration;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
