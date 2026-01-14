@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Twig\Runtime;
+namespace App\Tests\Unit\Infrastructure\Web\Twig\Runtime;
 
 use App\Application\Constant\LocaleConstant;
-use App\Application\Twig\Runtime\LocaleRuntime;
+use App\Infrastructure\Web\Twig\Runtime\LocaleRuntime;
 use PHPUnit\Framework\TestCase;
 
 class LocaleRuntimeTest extends TestCase

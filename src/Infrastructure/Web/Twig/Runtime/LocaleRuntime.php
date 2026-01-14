@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Twig\Runtime;
+namespace App\Infrastructure\Web\Twig\Runtime;
 
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use Symfony\Component\Intl\Locales;

@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Twig\Runtime;
+namespace App\Tests\Unit\Infrastructure\Web\Twig\Runtime;
 
-use App\Application\Twig\Runtime\AwayRuntime;
+use App\Infrastructure\Web\Twig\Runtime\AwayRuntime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 

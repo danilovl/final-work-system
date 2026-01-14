@@ -10,10 +10,10 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Twig\Runtime;
+namespace App\Tests\Unit\Infrastructure\Web\Twig\Runtime;
 
 use App\Application\Service\SeoPageService;
-use App\Application\Twig\Runtime\SeoRuntime;
+use App\Infrastructure\Web\Twig\Runtime\SeoRuntime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Twig\Runtime;
+namespace App\Infrastructure\Web\Twig\Runtime;
 
 use App\Application\Helper\RegexHelper;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFilter;
