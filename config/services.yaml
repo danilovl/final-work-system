@@ -21,6 +21,7 @@ services:
       - '../src/Infrastructure/Persistence/Doctrine'
       - '../src/Infrastructure/GraphQL'
       - '../src/Infrastructure/OpenTelemetry/*/Context'
+      - '../src/Infrastructure/Messaging/*/*Message.php'
 
   App\Application\:
     resource: '../src/Application'
@@ -35,7 +36,6 @@ services:
       - '../src/Application/Helper'
       - '../src/Application/Mapper/Attribute'
       - '../src/Application/Menu'
-      - '../src/Application/Messenger/*/*Message.php'
       - '../src/Application/Migrations'
       - '../src/Application/Model'
       - '../src/Application/Helper'

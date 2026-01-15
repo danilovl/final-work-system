@@ -12,8 +12,8 @@
 
 namespace App\Infrastructure\Event\EventListener;
 
-use App\Application\Messenger\Loggable\LoggableMessage;
 use App\Application\Provider\LoggableProvider;
+use App\Infrastructure\Messaging\Loggable\LoggableMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Doctrine\Common\EventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;

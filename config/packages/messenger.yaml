@@ -39,4 +39,4 @@ framework:
 
     routing:
       'App\Domain\EmailNotification\Messenger\EmailNotificationMessage': email_notification
-      'App\Application\Messenger\Loggable\LoggableMessage': loggable
+      'App\Infrastructure\Messaging\Loggable\LoggableMessage': loggable

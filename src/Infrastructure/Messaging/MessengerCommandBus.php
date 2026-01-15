@@ -10,16 +10,14 @@
  *
  */
 
-namespace App\Application\Messenger;
+namespace App\Infrastructure\Messaging;
 
 use App\Application\Interfaces\Bus\{
-    CommandInterface,
-    CommandBusInterface
-};
+    CommandBusInterface,
+    CommandInterface};
 use Symfony\Component\Messenger\{
     HandleTrait,
-    MessageBusInterface
-};
+    MessageBusInterface};
 
 class MessengerCommandBus implements CommandBusInterface
 {

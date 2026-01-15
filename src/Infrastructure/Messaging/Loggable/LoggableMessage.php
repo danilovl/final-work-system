@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Messenger\Loggable;
+namespace App\Infrastructure\Messaging\Loggable;
 
 use Gedmo\Loggable\Entity\LogEntry;
 

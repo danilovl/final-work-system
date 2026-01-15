@@ -10,13 +10,13 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Messenger\Loggable;
+namespace App\Tests\Unit\Infrastructure\Messaging\Loggable;
 
-use App\Application\Messenger\Loggable\{
-    LoggableMessage,
-    LoggableHandler
-};
 use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Messaging\Loggable\{
+    LoggableHandler,
+    LoggableMessage
+};
 use Gedmo\Loggable\Entity\LogEntry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
