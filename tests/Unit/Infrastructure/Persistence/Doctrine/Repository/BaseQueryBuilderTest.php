@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\Unit\Application\Repository;
+namespace App\Tests\Unit\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Application\Repository\BaseQueryBuilder;
+use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 

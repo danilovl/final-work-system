@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 

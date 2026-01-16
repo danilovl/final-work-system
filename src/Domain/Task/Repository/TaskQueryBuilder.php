@@ -12,9 +12,9 @@
 
 namespace App\Domain\Task\Repository;
 
-use App\Application\Repository\BaseQueryBuilder;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 use Doctrine\Common\Collections\Order;
 use Webmozart\Assert\Assert;
 
