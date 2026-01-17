@@ -20,7 +20,7 @@ use App\Domain\Event\EventDispatcher\GenericEvent\{
     EventCommentGenericEvent
 };
 use Danilovl\AsyncBundle\Service\AsyncService;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class EventEventDispatcher
 {

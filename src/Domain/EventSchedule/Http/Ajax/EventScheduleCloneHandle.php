@@ -14,7 +14,7 @@ namespace App\Domain\EventSchedule\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\EventSchedule\Command\CloneEventSchedule\CloneEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Domain\EventSchedule\Form\EventScheduleCloneForm;

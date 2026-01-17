@@ -17,7 +17,7 @@ use App\Domain\UserGroup\Bus\Query\UserGroupList\{
     GetUserGroupListQuery,
     GetUserGroupListQueryResult
 };
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Facade;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationStatusService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;

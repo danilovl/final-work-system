@@ -14,7 +14,7 @@ namespace App\Domain\Task\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
 use App\Application\Exception\RuntimeException;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;

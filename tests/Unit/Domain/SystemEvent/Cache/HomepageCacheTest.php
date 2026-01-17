@@ -12,15 +12,15 @@
 
 namespace App\Tests\Unit\Domain\SystemEvent\Cache;
 
-use App\Application\Service\PaginatorService;
 use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\User\Entity\User;
+use App\Infrastructure\Service\PaginatorService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Doctrine\ORM\{
-    Query,
     Configuration,
-    EntityManagerInterface
+    EntityManagerInterface,
+    Query
 };
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PHPUnit\Framework\TestCase;

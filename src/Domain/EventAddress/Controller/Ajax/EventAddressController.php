@@ -13,7 +13,7 @@
 namespace App\Domain\EventAddress\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventAddress\Http\Ajax\{
     EventAddressEditHandle,

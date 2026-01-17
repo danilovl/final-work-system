@@ -18,7 +18,8 @@ use OpenTelemetry\API\Trace\{
     Span,
     SpanInterface,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\ScopeInterface;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Throwable;

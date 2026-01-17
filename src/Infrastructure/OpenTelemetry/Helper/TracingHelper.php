@@ -16,7 +16,8 @@ use DateTimeInterface;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Trace\{
     Span,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\SemConv\TraceAttributes;
 use Throwable;
 

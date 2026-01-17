@@ -13,7 +13,7 @@
 namespace App\Domain\EventAddress\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\EventAddress\Bus\Command\DeleteEventAddress\DeleteEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use Symfony\Component\HttpFoundation\JsonResponse;

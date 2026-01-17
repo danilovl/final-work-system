@@ -16,7 +16,7 @@ use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService
 };

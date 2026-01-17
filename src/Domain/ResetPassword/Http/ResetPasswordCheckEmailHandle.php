@@ -12,7 +12,7 @@
 
 namespace App\Domain\ResetPassword\Http;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     TwigRenderService
 };

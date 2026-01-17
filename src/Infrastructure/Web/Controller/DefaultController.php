@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Web\Controller;
 
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use Symfony\Component\HttpFoundation\Response;
 
 readonly class DefaultController

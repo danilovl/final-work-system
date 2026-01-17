@@ -12,7 +12,7 @@
 
 namespace App\Domain\Widget\WidgetItem;
 
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use Symfony\Component\Intl\Locales;
 
 class LocalesWidget extends BaseWidget

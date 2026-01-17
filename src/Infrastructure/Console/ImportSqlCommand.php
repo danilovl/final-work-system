@@ -13,7 +13,7 @@
 namespace App\Infrastructure\Console;
 
 use App\Application\Exception\InvalidArgumentException;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

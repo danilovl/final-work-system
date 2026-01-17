@@ -18,7 +18,7 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
 };
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService,
     TranslatorService,

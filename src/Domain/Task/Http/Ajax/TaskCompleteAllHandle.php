@@ -15,7 +15,7 @@ namespace App\Domain\Task\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CompleteTask\CompleteTaskCommand;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Task\Facade\TaskFacade;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;

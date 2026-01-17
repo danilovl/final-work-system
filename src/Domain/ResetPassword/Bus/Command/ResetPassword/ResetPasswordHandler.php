@@ -13,7 +13,7 @@
 namespace App\Domain\ResetPassword\Bus\Command\ResetPassword;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\ResetPassword\Service\ResetPasswordService;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 

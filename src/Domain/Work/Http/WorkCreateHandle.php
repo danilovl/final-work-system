@@ -19,7 +19,7 @@ use App\Application\Constant\{
     ControllerMethodConstant,
     FlashTypeConstant
 };
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService

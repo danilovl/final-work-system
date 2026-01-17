@@ -19,7 +19,7 @@ use App\Application\Constant\{
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Document\Bus\Command\CreateDocument\CreateDocumentCommand;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     EntityManagerService
 };

@@ -13,7 +13,7 @@
 namespace App\Domain\EventAddress\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\EventAddress\Bus\Command\DeleteEventAddress\DeleteEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;

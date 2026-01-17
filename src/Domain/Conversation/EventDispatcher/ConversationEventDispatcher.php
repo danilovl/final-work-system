@@ -16,7 +16,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class ConversationEventDispatcher
 {

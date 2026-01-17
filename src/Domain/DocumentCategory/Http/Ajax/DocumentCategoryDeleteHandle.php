@@ -15,7 +15,7 @@ namespace App\Domain\DocumentCategory\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\DocumentCategory\Bus\Command\DeleteDocumentCategory\DeleteDocumentCategoryCommand;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

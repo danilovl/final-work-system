@@ -15,7 +15,7 @@ namespace App\Domain\Work\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

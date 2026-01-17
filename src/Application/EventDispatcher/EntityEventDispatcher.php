@@ -15,7 +15,7 @@ namespace App\Application\EventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
 use App\Application\EventSubscriber\Events;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class EntityEventDispatcher
 {

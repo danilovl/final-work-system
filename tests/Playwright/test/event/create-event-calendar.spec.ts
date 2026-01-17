@@ -2,7 +2,8 @@ import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
 
 export default function createEventCalendarTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Create event calendar success', async ({page}) => {
         await page.goto('/en/event/calendar/manage')

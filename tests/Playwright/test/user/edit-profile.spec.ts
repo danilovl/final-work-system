@@ -1,11 +1,17 @@
 import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
-import {contactInformationData, personalInformationData, messageData, tabData} from '@playwright-test/fixtures/user/user-profile'
+import {
+    contactInformationData,
+    personalInformationData,
+    messageData,
+    tabData
+} from '@playwright-test/fixtures/user/user-profile'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
-    test('Edit user profile success', async ({ page }) => {
+    test('Edit user profile success', async ({page}) => {
         await page.goto('/en/user/profile/edit')
 
         for (const prop in contactInformationData) {
@@ -19,7 +25,7 @@ export default function createTests() {
                 contactInformationData[propKey].id,
                 contactInformationData[propKey].text.toString()
             )
-         }
+        }
 
         await page.locator(tabData.tabPersonal.id).click()
 
@@ -42,7 +48,7 @@ export default function createTests() {
             const propKey = prop as keyof typeof messageData
 
             await page.evaluate(
-                ({ id, text }) => {
+                ({id, text}) => {
                     const editor = (window as any).tinymce.get(id)
                     if (editor) {
                         editor.setContent(`<strong>${text}</strong>`)

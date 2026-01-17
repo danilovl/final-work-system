@@ -14,7 +14,7 @@ namespace App\Domain\Event\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Application\Middleware\Event\Ajax\GetEventMiddleware;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Event\Entity\Event;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;
 use App\Domain\Event\Http\Ajax\{

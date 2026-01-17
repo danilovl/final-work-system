@@ -13,7 +13,7 @@
 namespace App\Domain\EventSchedule\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\EventSchedule\Command\DeleteEventSchedule\DeleteEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;

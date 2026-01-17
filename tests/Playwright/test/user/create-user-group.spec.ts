@@ -3,7 +3,8 @@ import {test} from '@playwright-test/fixtures/command'
 import {userGroupData} from '@playwright-test/fixtures/user/user-group'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Create user group success', async ({page}) => {
         await page.goto('/en/user/group/create')

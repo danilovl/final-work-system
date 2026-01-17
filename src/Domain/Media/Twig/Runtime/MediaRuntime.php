@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Twig\Runtime;
 
-use App\Application\Service\S3ClientService;
+use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 

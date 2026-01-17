@@ -14,7 +14,7 @@ namespace App\Domain\Profile\Bus\Command\ProfileChangeImage;
 
 use App\Application\Exception\RuntimeException;
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\MediaMimeType\Entity\MediaMimeType;

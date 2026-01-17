@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Command;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\Order;
 use Override;

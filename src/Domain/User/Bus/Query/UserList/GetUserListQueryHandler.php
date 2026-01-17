@@ -13,7 +13,7 @@
 namespace App\Domain\User\Bus\Query\UserList;
 
 use App\Application\Interfaces\Bus\QueryHandlerInterface;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\Work\Constant\WorkUserTypeConstant;

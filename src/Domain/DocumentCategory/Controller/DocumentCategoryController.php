@@ -13,7 +13,7 @@
 namespace App\Domain\DocumentCategory\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\DocumentCategory\Http\{
     DocumentCategoryEditHandle,
     DocumentCategoryListHandle,

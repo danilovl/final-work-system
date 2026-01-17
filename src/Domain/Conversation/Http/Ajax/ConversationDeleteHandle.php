@@ -15,7 +15,7 @@ namespace App\Domain\Conversation\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Conversation\Bus\Command\DeleteConversation\DeleteConversationCommand;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Conversation\Entity\Conversation;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

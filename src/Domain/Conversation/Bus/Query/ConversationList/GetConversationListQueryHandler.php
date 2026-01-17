@@ -14,7 +14,7 @@ namespace App\Domain\Conversation\Bus\Query\ConversationList;
 
 use App\Domain\Conversation\Repository\Elastica\ElasticaConversationRepository;
 use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };

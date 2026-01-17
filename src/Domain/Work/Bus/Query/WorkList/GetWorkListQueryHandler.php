@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Bus\Query\WorkList;
 
 use App\Application\Interfaces\Bus\QueryHandlerInterface;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Helper\WorkFunctionHelper;
 use App\Domain\Work\Repository\Elastica\ElasticaWorkRepository;

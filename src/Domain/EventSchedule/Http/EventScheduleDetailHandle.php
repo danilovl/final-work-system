@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Http;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     DateService,
     SeoPageService,
     TwigRenderService

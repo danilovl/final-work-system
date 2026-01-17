@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Service;
+namespace App\Tests\Unit\Infrastructure\Service;
 
-use App\Application\Service\TranslatorService;
+use App\Infrastructure\Service\TranslatorService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{

@@ -17,7 +17,8 @@ use App\Infrastructure\OpenTelemetry\Redis\RedisRegistration;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
-    SpanKind};
+    SpanKind
+};
 use OpenTelemetry\Context\Context;
 use Symfony\Component\HttpKernel\Kernel;
 use function OpenTelemetry\Instrumentation\hook;

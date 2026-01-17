@@ -13,7 +13,7 @@
 namespace App\Domain\Media\Command;
 
 use App\Application\Helper\FileHelper;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     S3ClientService,
     EntityManagerService
 };

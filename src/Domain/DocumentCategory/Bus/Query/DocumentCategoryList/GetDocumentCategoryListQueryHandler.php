@@ -4,7 +4,7 @@ namespace App\Domain\DocumentCategory\Bus\Query\DocumentCategoryList;
 
 use App\Domain\MediaCategory\Facade\MediaCategoryFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

@@ -13,7 +13,7 @@
 namespace App\Domain\Conversation\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Conversation\EventDispatcher\GenericEvent\ConversationMessageGenericEvent;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;

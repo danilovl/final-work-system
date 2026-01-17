@@ -12,7 +12,7 @@
 
 namespace App\Domain\Security\Controller;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     TwigRenderService
 };

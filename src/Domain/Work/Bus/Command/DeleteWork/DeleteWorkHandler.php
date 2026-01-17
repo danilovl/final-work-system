@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Bus\Command\DeleteWork;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     S3ClientService,
     EntityManagerService
 };

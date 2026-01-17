@@ -13,7 +13,7 @@
 namespace App\Domain\Security\Controller\Api;
 
 use App\Application\Helper\HashHelper;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Facade\UserFacade;
 use Symfony\Component\HttpFoundation\{
     Request,

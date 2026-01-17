@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http\Api;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;

@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Web\Twig\Runtime;
 
-use App\Application\Service\SeoPageService;
+use App\Infrastructure\Service\SeoPageService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 
 #[AsTwigFunction('seo_')]

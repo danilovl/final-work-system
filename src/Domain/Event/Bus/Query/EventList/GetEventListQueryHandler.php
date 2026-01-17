@@ -5,7 +5,7 @@ namespace App\Domain\Event\Bus\Query\EventList;
 use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\EventFacade;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

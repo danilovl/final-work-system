@@ -15,7 +15,7 @@ namespace App\Domain\Conversation\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Conversation\Bus\Command\UpdateAllToStatus\UpdateAllToStatusCommand;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     EntityManagerService
 };

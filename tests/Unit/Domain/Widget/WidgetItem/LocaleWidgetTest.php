@@ -13,8 +13,8 @@
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
 use App\Application\Constant\LocaleConstant;
-use App\Application\Service\TwigRenderService;
 use App\Domain\Widget\WidgetItem\LocalesWidget;
+use App\Infrastructure\Service\TwigRenderService;
 use PHPUnit\Framework\TestCase;
 
 class LocaleWidgetTest extends TestCase

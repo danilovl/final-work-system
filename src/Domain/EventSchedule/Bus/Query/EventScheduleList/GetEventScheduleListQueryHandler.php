@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventSchedule\Bus\Query\EventScheduleList;
 
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\EventSchedule\Facade\EventScheduleFacade;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

@@ -10,19 +10,18 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    AjaxJsonTypeConstant
+    AjaxJsonTypeConstant,
+    FlashTypeConstant
 };
 use Symfony\Component\HttpFoundation\{
-    Response,
-    RequestStack,
     JsonResponse,
-    RedirectResponse
+    RedirectResponse,
+    RequestStack,
+    Response
 };
-
 use Symfony\Component\HttpFoundation\Session\{
     Session,
     SessionInterface

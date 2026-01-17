@@ -16,7 +16,7 @@ use App\Domain\EmailNotification\Provider\{
     EmailNotificationAddToQueueProvider,
     EmailNotificationEnableMessengerProvider
 };
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     TranslatorService,
     TwigRenderService
 };

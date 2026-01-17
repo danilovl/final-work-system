@@ -12,7 +12,7 @@
 
 namespace App\Application\Factory\Model;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 
 class BaseModelFactory
 {

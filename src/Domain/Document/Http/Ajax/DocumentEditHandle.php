@@ -18,7 +18,7 @@ use App\Application\Constant\{
 };
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Document\Bus\Command\EditDocument\EditDocumentCommand;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\Media\Entity\Media;

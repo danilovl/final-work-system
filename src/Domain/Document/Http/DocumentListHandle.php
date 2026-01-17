@@ -12,7 +12,7 @@ namespace App\Domain\Document\Http;
 
 use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\QueryBusInterface;
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\Document\Bus\Query\DocumentList\{

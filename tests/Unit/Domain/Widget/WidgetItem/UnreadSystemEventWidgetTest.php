@@ -12,7 +12,6 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Application\Service\TwigRenderService;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
     SystemEventRecipientFacade
@@ -20,6 +19,7 @@ use App\Domain\SystemEvent\Facade\{
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;
+use App\Infrastructure\Service\TwigRenderService;
 use PHPUnit\Framework\TestCase;
 
 class UnreadSystemEventWidgetTest extends TestCase

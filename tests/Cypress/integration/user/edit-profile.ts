@@ -1,4 +1,9 @@
-import { contactInformationData, personalInformationData, messageData, tabData } from '@cypress-test/fixtures/user/user-profile'
+import {
+    contactInformationData,
+    personalInformationData,
+    messageData,
+    tabData
+} from '@cypress-test/fixtures/user/user-profile'
 
 describe('Edit user profile test', () => {
     beforeEach(() => {

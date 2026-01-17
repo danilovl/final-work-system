@@ -13,7 +13,7 @@
 namespace App\Domain\EventSchedule\Http;
 
 use App\Application\Constant\FlashTypeConstant;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     SeoPageService,
     TwigRenderService

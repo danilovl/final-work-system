@@ -12,7 +12,7 @@
 
 namespace App\Domain\EmailNotification\Service;
 
-use App\Application\Service\MailerService;
+use App\Infrastructure\Service\MailerService;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\{

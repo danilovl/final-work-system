@@ -1,7 +1,8 @@
 import type {Page} from '@playwright/test'
 
 export default class LoginPage {
-    constructor(public readonly page: Page) {}
+    constructor(public readonly page: Page) {
+    }
 
     async login(username: string, password: string): Promise<void> {
         await this.page.context().clearCookies()

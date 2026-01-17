@@ -16,7 +16,7 @@ use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Model\SearchModel;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     PaginatorService,
     RequestService,
     SeoPageService,

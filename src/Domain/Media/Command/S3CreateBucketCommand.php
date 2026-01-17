@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Command;
 
-use App\Application\Service\S3ClientService;
+use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use Override;
 use Symfony\Component\Console\Attribute\AsCommand;

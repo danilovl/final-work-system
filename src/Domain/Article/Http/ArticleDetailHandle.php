@@ -12,7 +12,7 @@
 
 namespace App\Domain\Article\Http;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };

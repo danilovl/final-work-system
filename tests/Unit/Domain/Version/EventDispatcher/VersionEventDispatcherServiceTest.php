@@ -16,12 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
-use App\Application\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
 
 class VersionEventDispatcherServiceTest extends TestCase

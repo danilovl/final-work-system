@@ -13,7 +13,7 @@
 namespace App\Domain\User\Command;
 
 use App\Application\Helper\HashHelper;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
 use Override;

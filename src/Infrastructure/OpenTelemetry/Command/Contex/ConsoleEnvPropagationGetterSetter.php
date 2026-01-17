@@ -14,7 +14,8 @@ namespace App\Infrastructure\OpenTelemetry\Command\Contex;
 
 use OpenTelemetry\Context\Propagation\{
     PropagationGetterInterface,
-    PropagationSetterInterface};
+    PropagationSetterInterface
+};
 
 class ConsoleEnvPropagationGetterSetter implements PropagationGetterInterface, PropagationSetterInterface
 {

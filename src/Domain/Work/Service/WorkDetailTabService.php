@@ -14,7 +14,7 @@ namespace App\Domain\Work\Service;
 
 use App\Application\Constant\TabTypeConstant;
 use App\Application\Exception\RuntimeException;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };

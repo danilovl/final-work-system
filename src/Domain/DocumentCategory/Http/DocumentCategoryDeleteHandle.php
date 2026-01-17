@@ -15,7 +15,7 @@ namespace App\Domain\DocumentCategory\Http;
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\DocumentCategory\Bus\Command\DeleteDocumentCategory\DeleteDocumentCategoryCommand;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

@@ -16,8 +16,8 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
 use App\Domain\ResetPassword\EventDispatcher\SecurityDispatcher;
+use App\Infrastructure\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
-use App\Application\Service\EventDispatcherService;
 
 class SecurityDispatcherTest extends TestCase
 {

@@ -14,7 +14,7 @@ namespace App\Domain\Conversation\Http;
 
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };

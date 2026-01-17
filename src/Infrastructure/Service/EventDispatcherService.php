@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 

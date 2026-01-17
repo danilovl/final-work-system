@@ -12,10 +12,10 @@
 
 namespace App\Tests\Unit\Domain\User\Factory;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
+use App\Infrastructure\Service\EntityManagerService;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

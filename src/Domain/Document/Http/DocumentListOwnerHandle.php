@@ -18,7 +18,7 @@ use App\Domain\Document\Bus\Query\DocumentList\{
     GetDocumentListQuery,
     GetDocumentListQueryResult
 };
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Document\Form\Factory\DocumentFormFactory;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{

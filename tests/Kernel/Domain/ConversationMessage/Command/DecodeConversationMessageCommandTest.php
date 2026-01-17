@@ -12,7 +12,6 @@
 
 namespace App\Tests\Kernel\Domain\ConversationMessage\Command;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Command\DecodeConversationMessageCommand;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
@@ -20,6 +19,7 @@ use App\Domain\ConversationType\Constant\ConversationTypeConstant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepository;
+use App\Infrastructure\Service\EntityManagerService;
 use Doctrine\Common\Collections\Order;
 use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

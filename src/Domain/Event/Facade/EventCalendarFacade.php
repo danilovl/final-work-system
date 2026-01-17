@@ -15,7 +15,7 @@ namespace App\Domain\Event\Facade;
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\DateHelper;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;

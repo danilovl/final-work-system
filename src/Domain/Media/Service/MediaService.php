@@ -14,7 +14,7 @@ namespace App\Domain\Media\Service;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Helper\FunctionHelper;
-use App\Application\Service\S3ClientService;
+use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use Symfony\Component\HttpFoundation\{

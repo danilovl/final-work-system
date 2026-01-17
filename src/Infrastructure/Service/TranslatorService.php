@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use App\Application\Constant\TranslationConstant;
 use Symfony\Component\HttpFoundation\RequestStack;

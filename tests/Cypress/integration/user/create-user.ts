@@ -1,7 +1,7 @@
-import { successUserData } from '@cypress-test/fixtures/user/user'
+import {successUserData} from '@cypress-test/fixtures/user/user'
 
 describe('Create user test', () => {
-    let failedUserData = { ...successUserData }
+    let failedUserData = {...successUserData}
 
     failedUserData.email = {
         'id': '#user_email',

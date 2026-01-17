@@ -12,11 +12,11 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Application\Service\TwigRenderService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\Widget\WidgetItem\UnreadConversationMessageWidget;
+use App\Infrastructure\Service\TwigRenderService;
 use PHPUnit\Framework\TestCase;
 
 class UnreadConversationMessageWidgetTest extends TestCase

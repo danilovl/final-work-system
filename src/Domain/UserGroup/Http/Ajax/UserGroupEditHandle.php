@@ -15,7 +15,7 @@ namespace App\Domain\UserGroup\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\UserGroup\Bus\Command\EditUserGroup\EditUserGroupCommand;
 use App\Domain\UserGroup\Entity\Group;
 use App\Domain\UserGroup\Form\UserGroupForm;

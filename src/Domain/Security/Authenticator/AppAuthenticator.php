@@ -12,7 +12,7 @@
 
 namespace App\Domain\Security\Authenticator;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;

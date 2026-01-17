@@ -15,7 +15,7 @@ namespace App\Domain\Event\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService
 };

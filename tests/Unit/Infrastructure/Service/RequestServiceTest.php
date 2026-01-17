@@ -10,23 +10,23 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Service;
+namespace App\Tests\Unit\Infrastructure\Service;
 
 use App\Application\Constant\{
-    FlashTypeConstant,
-    AjaxJsonTypeConstant
+    AjaxJsonTypeConstant,
+    FlashTypeConstant
 };
 use App\Application\Service\{
-    RequestService,
-    TranslatorService
+    App\Infrastructure\Service\RequestService,
+    App\Infrastructure\Service\TranslatorService
 };
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response,
-    RequestStack
+    RequestStack,
+    Response
 };
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
@@ -35,7 +35,7 @@ class RequestServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    private RequestService $requestService;
+    private \App\Infrastructure\Service\RequestService $requestService;
 
     protected function setUp(): void
     {
@@ -50,12 +50,12 @@ class RequestServiceTest extends TestCase
             ->method('generate')
             ->willReturn('url');
 
-        $translator = $this->createMock(TranslatorService::class);
+        $translator = $this->createMock(\App\Infrastructure\Service\TranslatorService::class);
         $translator->expects($this->any())
             ->method('trans')
             ->willReturn('trans');
 
-        $this->requestService = new RequestService($this->requestStack, $router, $translator);
+        $this->requestService = new \App\Infrastructure\Service\RequestService($this->requestStack, $router, $translator);
     }
 
     public function testAddFlash(): void

@@ -17,7 +17,7 @@ use App\Application\Middleware\EventCalendar\Ajax\{
     EditMiddleware,
     GetEventMiddleware
 };
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventCalendar\Request\GetEventRequest;
 use Danilovl\PermissionMiddlewareBundle\Attribute\PermissionMiddleware;

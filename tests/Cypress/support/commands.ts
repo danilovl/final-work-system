@@ -19,12 +19,15 @@ declare global {
     namespace Cypress {
         interface Chainable {
             login(username: string, password: string): Chainable<void>
+
             loginSupervisor(): Chainable<void>
+
             loginStudent(): Chainable<void>
         }
 
         interface Cypress {
             env(key: 'loginData'): LoginData
+
             env(key: 'domain'): string
         }
     }

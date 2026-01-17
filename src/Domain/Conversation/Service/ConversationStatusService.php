@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessageStatus\DataTransferObject\ConversationMessageStatusRepositoryData;

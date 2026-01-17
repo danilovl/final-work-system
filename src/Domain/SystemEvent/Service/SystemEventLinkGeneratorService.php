@@ -13,7 +13,7 @@
 namespace App\Domain\SystemEvent\Service;
 
 use App\Application\Constant\LocaleConstant;
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Application\Exception\{
     ConstantNotFoundException,
     InvalidArgumentException

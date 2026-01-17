@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Http\Api;
 
 use App\Application\Helper\SerializerHelper;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Task\DTO\Api\Output\TaskListOwnerOutput;
 use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Domain\Task\Entity\Task;

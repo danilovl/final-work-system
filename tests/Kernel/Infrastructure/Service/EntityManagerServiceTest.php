@@ -10,9 +10,8 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Service;
+namespace App\Tests\Kernel\Infrastructure\Service;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Repository\ConversationRepository;
 use App\Domain\Task\Entity\Task;
@@ -21,6 +20,7 @@ use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepository;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
+use App\Infrastructure\Service\EntityManagerService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -32,7 +32,7 @@ class EntityManagerServiceTest extends KernelTestCase
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
-        $this->entityManagerService = $kernel->getContainer()->get('app.entity_manager');
+        $this->entityManagerService = $kernel->getContainer()->get(EntityManagerService::class);
     }
 
     #[DataProvider('repositoryProvider')]

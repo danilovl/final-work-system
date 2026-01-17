@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Service;
+namespace App\Tests\Kernel\Infrastructure\Service;
 
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Generator;

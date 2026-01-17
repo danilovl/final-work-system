@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 
 class BaseSystemEventSubscriber
 {

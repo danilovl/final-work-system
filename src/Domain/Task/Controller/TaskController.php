@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\{

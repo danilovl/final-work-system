@@ -16,8 +16,8 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
 use App\Domain\User\EventDispatcher\UserCacheEventDispatcher;
+use App\Infrastructure\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
-use App\Application\Service\EventDispatcherService;
 
 class UserCacheEventDispatcherTest extends TestCase
 {

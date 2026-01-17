@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     EntityManagerService,
     TwigRenderService
 };

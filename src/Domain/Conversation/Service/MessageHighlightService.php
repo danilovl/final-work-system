@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Application\Util\TextHighlightWordUtil;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;

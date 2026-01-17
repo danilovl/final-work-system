@@ -10,16 +10,16 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Service;
+namespace App\Tests\Unit\Infrastructure\Service;
 
 use App\Application\EventDispatcher\EntityEventDispatcher;
-use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
+use App\Infrastructure\Service\EntityManagerService;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\{
+    EntityManagerInterface,
     EntityRepository,
-    Mapping as ORM,
-    EntityManagerInterface
+    Mapping as ORM
 };
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

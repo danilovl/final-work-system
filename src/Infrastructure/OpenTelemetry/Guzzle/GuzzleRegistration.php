@@ -16,11 +16,13 @@ use App\Infrastructure\OpenTelemetry\Guzzle\Contex\PsrHeadersPropagationSetter;
 use App\Infrastructure\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use GuzzleHttp\{
     RequestOptions,
-    RetryMiddleware};
+    RetryMiddleware
+};
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\{
     BadResponseException,
-    ClientException};
+    ClientException
+};
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Query;
 use OpenTelemetry\API\Globals;
@@ -29,12 +31,14 @@ use OpenTelemetry\API\Trace\{
     Span,
     SpanInterface,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Psr\Http\Message\{
     RequestInterface,
-    ResponseInterface};
+    ResponseInterface
+};
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;

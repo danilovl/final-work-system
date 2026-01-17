@@ -16,12 +16,12 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\Domain\User\EventDispatcher\UserEventDispatcher;
+use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
-use App\Application\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
 
 class UserEventDispatcherTest extends TestCase

@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;

@@ -16,9 +16,10 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\EmailNotification\Messenger\EmailNotificationMessage;
 use App\Domain\EmailNotification\Provider\{
     EmailNotificationAddToQueueProvider,
-    EmailNotificationEnableMessengerProvider};
+    EmailNotificationEnableMessengerProvider
+};
 use Override;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     TranslatorService,
     TwigRenderService
 };

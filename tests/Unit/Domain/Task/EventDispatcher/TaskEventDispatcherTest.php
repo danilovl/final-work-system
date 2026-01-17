@@ -17,13 +17,13 @@ use App\Domain\Task\Constant\TaskStatusConstant;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
+use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
-use App\Application\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
 
 class TaskEventDispatcherTest extends TestCase

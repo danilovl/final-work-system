@@ -3,7 +3,8 @@ import {test} from '@playwright-test/fixtures/command'
 import {workData} from '@playwright-test/fixtures/work/work'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Edit work success ajax', async ({page}) => {
         await page.goto('/en/work/supervisor/list')

@@ -13,7 +13,7 @@
 namespace App\Domain\Document\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use Danilovl\RenderServiceTwigExtensionBundle\Attribute\AsTwigFunction;
 use App\Domain\Document\Http\{
     DocumentEditHandle,

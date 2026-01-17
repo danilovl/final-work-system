@@ -12,7 +12,7 @@
 
 namespace App\Domain\Widget\WidgetItem;
 
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;

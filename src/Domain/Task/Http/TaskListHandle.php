@@ -14,7 +14,7 @@ namespace App\Domain\Task\Http;
 
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Application\Model\SearchModel;
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Task\Bus\Query\TaskList\{
     GetTaskListQuery,
     GetTaskListQueryResult

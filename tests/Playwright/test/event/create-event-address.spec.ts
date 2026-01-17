@@ -3,7 +3,8 @@ import {test} from '@playwright-test/fixtures/command'
 import {addressData} from '@playwright-test//fixtures/event/address'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Create event address success', async ({page}) => {
         await page.goto('/en/event/address/create')

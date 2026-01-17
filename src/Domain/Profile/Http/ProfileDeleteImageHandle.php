@@ -14,7 +14,7 @@ namespace App\Domain\Profile\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Profile\Bus\Command\ProfileDeleteImage\ProfileDeleteImageCommand;
 use App\Domain\User\Service\UserService;
 use Exception;

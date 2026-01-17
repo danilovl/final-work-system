@@ -18,14 +18,16 @@ use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\Context\Propagation\ArrayAccessGetterSetter;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Contracts\HttpClient\{
     HttpClientInterface,
-    ResponseInterface};
+    ResponseInterface
+};
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 

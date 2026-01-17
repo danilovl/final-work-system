@@ -12,15 +12,15 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget;
-use PHPUnit\Framework\MockObject\MockObject;
-use App\Application\Service\{
-    TranslatorService,
-    TwigRenderService
-};
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
+use App\Domain\Widget\WidgetItem\UserProfileInformationNotifyWidget;
+use App\Infrastructure\Service\{
+    TranslatorService
+};
+use App\Infrastructure\Service\TwigRenderService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class UserProfileInformationNotifyWidgetTest extends TestCase

@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Bus\Command\ChangeStatusTask;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Task\Service\TaskStatusService;
 
 readonly class ChangeStatusTaskHandler implements CommandHandlerInterface

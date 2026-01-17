@@ -15,7 +15,8 @@ namespace App\Infrastructure\OpenTelemetry\Twig;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Trace\{
     SpanInterface,
-    SpanKind};
+    SpanKind
+};
 use OpenTelemetry\Context\Context;
 use SplObjectStorage;
 use Twig\Extension\AbstractExtension;

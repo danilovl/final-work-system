@@ -13,7 +13,7 @@
 namespace App\Domain\DocumentCategory\Bus\Command\DeleteDocumentCategory;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 
 readonly class DeleteDocumentCategoryHandler implements CommandHandlerInterface
 {

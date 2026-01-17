@@ -1,6 +1,6 @@
-import { successUserData } from '@cypress-test/fixtures/user/user'
+import {successUserData} from '@cypress-test/fixtures/user/user'
 
-const { email, username, ...successData } = successUserData
+const {email, username, ...successData} = successUserData
 
 describe('Edit work user test', () => {
     beforeEach(() => {
@@ -33,7 +33,7 @@ describe('Edit work user test', () => {
 
         for (let prop in successData) {
             const propKey = prop as keyof typeof successData
-            
+
             cy
                 .get(successData[propKey].id)
                 .clear()

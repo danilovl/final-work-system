@@ -12,7 +12,7 @@
 
 namespace App\Domain\Widget\WidgetItem;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     TranslatorService,
     TwigRenderService
 };

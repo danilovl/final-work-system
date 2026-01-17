@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Messaging\Loggable;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

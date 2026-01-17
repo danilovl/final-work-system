@@ -15,7 +15,7 @@ namespace App\Domain\EmailNotification\Command;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

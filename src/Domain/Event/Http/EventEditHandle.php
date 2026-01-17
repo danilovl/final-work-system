@@ -14,7 +14,7 @@ namespace App\Domain\Event\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService,
     SeoPageService,

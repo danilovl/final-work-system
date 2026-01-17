@@ -13,7 +13,7 @@
 namespace App\Domain\Event\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\{

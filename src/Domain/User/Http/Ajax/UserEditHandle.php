@@ -15,7 +15,7 @@ namespace App\Domain\User\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\User\Bus\Command\EditUser\EditUserCommand;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Form\UserEditForm;

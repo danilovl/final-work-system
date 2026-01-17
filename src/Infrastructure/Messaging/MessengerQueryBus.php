@@ -14,7 +14,8 @@ namespace App\Infrastructure\Messaging;
 
 use App\Application\Interfaces\Bus\{
     QueryBusInterface,
-    QueryInterface};
+    QueryInterface
+};
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 

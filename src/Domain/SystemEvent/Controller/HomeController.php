@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\Controller;
 
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\SystemEvent\Cache\HomepageCache;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
 use App\Domain\User\Service\UserService;

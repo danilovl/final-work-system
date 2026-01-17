@@ -13,7 +13,7 @@
 namespace App\Domain\Security\Authenticator;
 
 use App\Application\Model\Security\ApiKeyCredentialModel;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\Security\Authenticator\Credential\CustomApiKeyCredentials;
 use App\Domain\User\Constant\UserRoleConstant;

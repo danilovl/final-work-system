@@ -24,11 +24,6 @@ services:
 
   App\Domain\Conversation\Service\ConversationStatusService: '@app.conversation_status'
 
-  app.entity_manager:
-    class: App\Application\Service\EntityManagerService
-
-  App\Application\Service\EntityManagerService: '@app.entity_manager'
-
   Symfony\Bridge\Monolog\Handler\ElasticsearchLogstashHandler:
     factory:   ['@App\Infrastructure\Log\ElasticsearchLogstashHandlerFactory', create]
     arguments:

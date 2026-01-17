@@ -15,10 +15,10 @@ namespace App\Tests\Unit\Application\EventDispatcher;
 use App\Application\EventDispatcher\EntityEventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
 use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use App\Application\Service\EventDispatcherService;
 
 class EntityEventDispatcherTest extends TestCase
 {

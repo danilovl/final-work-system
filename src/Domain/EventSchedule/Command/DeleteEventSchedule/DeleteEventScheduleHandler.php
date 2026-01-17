@@ -13,7 +13,7 @@
 namespace App\Domain\EventSchedule\Command\DeleteEventSchedule;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 
 readonly class DeleteEventScheduleHandler implements CommandHandlerInterface
 {

@@ -17,7 +17,7 @@ use App\Domain\WorkCategory\Bus\Query\WorkCategoryList\{
     GetWorkCategoryListQuery,
     GetWorkCategoryListQueryResult
 };
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,

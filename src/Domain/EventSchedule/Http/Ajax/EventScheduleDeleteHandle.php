@@ -13,7 +13,7 @@
 namespace App\Domain\EventSchedule\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\EventSchedule\Command\DeleteEventSchedule\DeleteEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
 use Symfony\Component\Messenger\MessageBusInterface;

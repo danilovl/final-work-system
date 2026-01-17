@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Http;
 
 use App\Application\Constant\TabTypeConstant;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };

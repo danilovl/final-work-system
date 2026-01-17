@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Controller\Ajax;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Http\Ajax\{
     WorkEditHandle,

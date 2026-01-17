@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Bus\Query\TaskList;
 
 use App\Application\Interfaces\Bus\QueryHandlerInterface;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Task\Facade\TaskFacade;
 use App\Domain\Task\Repository\Elastica\ElasticaTaskRepository;
 

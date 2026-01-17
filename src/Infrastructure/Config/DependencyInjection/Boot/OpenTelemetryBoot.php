@@ -14,8 +14,9 @@ namespace App\Infrastructure\Config\DependencyInjection\Boot;
 
 use App\Application\Provider\OpenTelemetryProvider;
 use App\Infrastructure\OpenTelemetry\{
-    OpenTelemetryManager};
-use App\Infrastructure\OpenTelemetry\OpenTelemetryRegistrationInterface;
+    OpenTelemetryRegistrationInterface
+};
+use App\Infrastructure\OpenTelemetry\OpenTelemetryManager;
 use Psr\Container\ContainerInterface;
 
 class OpenTelemetryBoot

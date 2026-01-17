@@ -13,7 +13,7 @@
 namespace App\Domain\Work\Http;
 
 use App\Application\Interfaces\Bus\QueryBusInterface;
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Bus\Query\WorkList\{
     GetWorkListQuery,

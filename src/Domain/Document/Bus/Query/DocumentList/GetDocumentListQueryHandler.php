@@ -2,7 +2,7 @@
 
 namespace App\Domain\Document\Bus\Query\DocumentList;
 
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };

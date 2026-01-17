@@ -2,7 +2,8 @@ import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Delete event calendar success', async ({page}) => {
         await page.goto('/en/event/calendar/manage')

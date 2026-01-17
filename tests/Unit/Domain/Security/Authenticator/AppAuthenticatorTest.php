@@ -12,27 +12,30 @@
 
 namespace App\Tests\Unit\Domain\Security\Authenticator;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\Security\Authenticator\AppAuthenticator;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     RedirectResponse,
     Request,
-    Response};
+    Response
+};
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
-    CustomUserMessageAuthenticationException};
+    CustomUserMessageAuthenticationException
+};
 use Symfony\Component\Security\Http\{
     HttpUtils,
-    SecurityRequestAttributes};
+    SecurityRequestAttributes
+};
 
 class AppAuthenticatorTest extends TestCase
 {

@@ -18,7 +18,7 @@ use App\Domain\Conversation\Entity\Conversation;
 use App\Application\Constant\{
     FlashTypeConstant
 };
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Conversation\Service\{
     ConversationService,
     ConversationVariationService

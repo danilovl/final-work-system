@@ -12,8 +12,8 @@
 
 namespace App\Tests\Unit\Domain\Widget\WidgetItem;
 
-use App\Application\Service\TwigRenderService;
 use App\Domain\Widget\WidgetItem\BaseWidget;
+use App\Infrastructure\Service\TwigRenderService;
 use PHPUnit\Framework\TestCase;
 
 class BaseWidgetTest extends TestCase

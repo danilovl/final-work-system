@@ -4,12 +4,12 @@ namespace App\Tests\Unit\Application\Middleware\EventCalendar\Ajax;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Middleware\EventCalendar\Ajax\GetEventMiddleware;
-use App\Application\Service\TranslatorService;
+use App\Infrastructure\Service\TranslatorService;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
+    JsonResponse,
+    Request
 };
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;

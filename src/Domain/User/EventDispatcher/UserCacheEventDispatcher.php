@@ -15,7 +15,7 @@ namespace App\Domain\User\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventDispatcher\GenericEvent\CacheUserGenericEvent;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class UserCacheEventDispatcher
 {

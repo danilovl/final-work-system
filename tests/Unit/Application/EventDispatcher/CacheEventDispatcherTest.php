@@ -15,8 +15,8 @@ namespace App\Tests\Unit\Application\EventDispatcher;
 use App\Application\EventDispatcher\CacheEventDispatcher;
 use App\Application\EventDispatcher\GenericEvent\CacheClearGenericEvent;
 use App\Application\EventSubscriber\Events;
+use App\Infrastructure\Service\EventDispatcherService;
 use PHPUnit\Framework\TestCase;
-use App\Application\Service\EventDispatcherService;
 
 class CacheEventDispatcherTest extends TestCase
 {

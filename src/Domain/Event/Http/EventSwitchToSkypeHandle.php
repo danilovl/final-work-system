@@ -14,7 +14,7 @@ namespace App\Domain\Event\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Event\Bus\Command\EventSwitchToSkype\EventSwitchToSkypeCommand;
 use App\Domain\Event\Entity\Event;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;

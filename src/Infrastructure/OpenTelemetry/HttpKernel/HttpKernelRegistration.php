@@ -20,16 +20,19 @@ use OpenTelemetry\API\Trace\{
     Span,
     SpanInterface,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response};
+    Response
+};
 use Symfony\Component\HttpKernel\{
     HttpKernel,
-    HttpKernelInterface};
+    HttpKernelInterface
+};
 use Throwable;
 use function OpenTelemetry\Instrumentation\hook;
 

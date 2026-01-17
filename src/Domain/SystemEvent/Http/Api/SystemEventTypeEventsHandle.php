@@ -14,7 +14,7 @@ namespace App\Domain\SystemEvent\Http\Api;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\InvalidArgumentException;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\SystemEvent\Constant\SystemEventStatusConstant;
 use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;

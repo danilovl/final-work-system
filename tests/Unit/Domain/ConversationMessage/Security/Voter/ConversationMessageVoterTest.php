@@ -25,7 +25,7 @@ class ConversationMessageVoterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->conversationMessageVoter = new class(new ConversationService) extends ConversationMessageVoter implements VoterInterfaceMock{
+        $this->conversationMessageVoter = new class(new ConversationService) extends ConversationMessageVoter implements VoterInterfaceMock {
             public function supportsPublic(string $attribute, mixed $subject): bool
             {
                 return $this->supports($attribute, $subject);

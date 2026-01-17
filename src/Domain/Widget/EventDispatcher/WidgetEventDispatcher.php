@@ -14,7 +14,7 @@ namespace App\Domain\Widget\EventDispatcher;
 
 use App\Application\EventSubscriber\Events;
 use App\Domain\Widget\EventDispatcher\GenericEvent\WidgetGenericGenericEvent;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class WidgetEventDispatcher
 {

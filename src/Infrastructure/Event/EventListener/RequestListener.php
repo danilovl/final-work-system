@@ -12,7 +12,7 @@
 
 namespace App\Infrastructure\Event\EventListener;
 
-use App\Application\Service\SeoPageService;
+use App\Infrastructure\Service\SeoPageService;
 use Override;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;

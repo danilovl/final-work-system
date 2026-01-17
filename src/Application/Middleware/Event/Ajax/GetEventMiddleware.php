@@ -17,7 +17,7 @@ use App\Application\Constant\{
     DateFormatConstant
 };
 use App\Application\Helper\DateHelper;
-use App\Application\Service\TranslatorService;
+use App\Infrastructure\Service\TranslatorService;
 use Symfony\Component\HttpFoundation\{
     Response,
     JsonResponse

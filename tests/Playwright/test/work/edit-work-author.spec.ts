@@ -2,10 +2,11 @@ import {expect} from '@playwright/test'
 import {test} from '@playwright-test/fixtures/command'
 import {successUserData} from '@playwright-test/fixtures/user/user'
 
-const { email, username, ...successData } = successUserData
+const {email, username, ...successData} = successUserData
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Edit work user success ajax', async ({page}) => {
         await page.goto('/en/work/supervisor/list')

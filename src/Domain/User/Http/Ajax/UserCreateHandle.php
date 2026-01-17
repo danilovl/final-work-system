@@ -18,7 +18,7 @@ use App\Application\Constant\{
 };
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\User\Bus\Command\CreateUser\CreateUserCommand;
 use App\Domain\User\Form\UserForm;
 use App\Domain\User\Model\UserModel;

@@ -13,7 +13,7 @@
 namespace App\Domain\Task\Bus\Command\NotifyCompleteTask;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 
 readonly class NotifyCompleteTaskHandler implements CommandHandlerInterface

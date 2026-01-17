@@ -59,7 +59,7 @@ class ArrayMapHelperTest extends TestCase
             }
         };
 
-        $object2 = new class () {};
+        $object2 = new class ( ) {};
 
         $objects = [$object1, $object2];
 

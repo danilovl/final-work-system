@@ -13,7 +13,7 @@
 namespace App\Domain\EventAddress\Http;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService

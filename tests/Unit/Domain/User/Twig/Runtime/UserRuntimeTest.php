@@ -12,10 +12,10 @@
 
 namespace App\Tests\Unit\Domain\User\Twig\Runtime;
 
-use App\Application\Service\S3ClientService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Service\UserService;
 use App\Domain\User\Twig\Runtime\UserRuntime;
+use App\Infrastructure\Service\S3ClientService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use PHPUnit\Framework\TestCase;

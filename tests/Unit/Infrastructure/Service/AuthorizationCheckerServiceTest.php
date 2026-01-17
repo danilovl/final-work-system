@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Service;
+namespace App\Tests\Unit\Infrastructure\Service;
 
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;

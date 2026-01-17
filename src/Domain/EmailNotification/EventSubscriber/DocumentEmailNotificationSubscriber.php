@@ -19,7 +19,7 @@ use App\Domain\EmailNotification\Provider\{
     EmailNotificationEnableMessengerProvider
 };
 use Override;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     TranslatorService,
     TwigRenderService
 };

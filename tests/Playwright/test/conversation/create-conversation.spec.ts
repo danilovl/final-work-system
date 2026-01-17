@@ -3,7 +3,8 @@ import {test} from '@playwright-test/fixtures/command'
 import {conversationData} from '@playwright-test/fixtures/conversation/conversation'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Create conversation success', async ({page}) => {
         await page.goto('/en/conversation/create')

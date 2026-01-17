@@ -15,7 +15,7 @@ namespace App\Domain\Version\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaMimeTypeFacade;
 use App\Domain\Media\Model\MediaModel;

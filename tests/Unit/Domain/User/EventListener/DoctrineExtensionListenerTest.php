@@ -12,12 +12,12 @@
 
 namespace App\Tests\Unit\Domain\User\EventListener;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventListener\DoctrineExtensionListener;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Event\EventListener\LoggableListener;
+use App\Infrastructure\Service\EntityManagerService;
 use Doctrine\ORM\UnitOfWork;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

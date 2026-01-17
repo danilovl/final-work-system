@@ -13,7 +13,7 @@
 namespace App\Domain\Profile\Bus\Command\ProfileChangePassword;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Model\UserModel;
 use App\Domain\User\Service\PasswordUpdater;
 

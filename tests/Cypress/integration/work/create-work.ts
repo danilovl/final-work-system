@@ -1,4 +1,4 @@
-import { workData } from '@cypress-test/fixtures/work/work'
+import {workData} from '@cypress-test/fixtures/work/work'
 
 describe('Create work test', () => {
     beforeEach(() => {

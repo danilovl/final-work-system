@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

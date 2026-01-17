@@ -19,15 +19,18 @@ use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\{
     TraceAttributes,
-    TraceAttributeValues};
+    TraceAttributeValues
+};
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Messenger\{
     Envelope,
-    MessageBusInterface};
+    MessageBusInterface
+};
 use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
 use Symfony\Component\Messenger\Transport\Sender\SenderInterface;
 use Throwable;

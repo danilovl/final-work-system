@@ -13,7 +13,7 @@
 namespace App\Domain\Article\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Article\Entity\Article;
 use App\Domain\Article\Http\ArticleDetailHandle;
 use App\Domain\Article\Security\Voter\Subject\ArticleVoterSubject;

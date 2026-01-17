@@ -15,10 +15,8 @@ namespace App\Domain\Profile\Bus\Command\ProfileCreateImageWebCamera;
 use App\Application\Exception\RuntimeException;
 use App\Application\Helper\FileHelper;
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\{
-    EntityManagerService,
-    ResizeImageService
-};
+use App\Application\Service\ResizeImageService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\MediaMimeType\Constant\MediaMimeTypeTypeConstant;

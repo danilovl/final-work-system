@@ -13,7 +13,7 @@
 namespace App\Domain\Event\Http\Api;
 
 use App\Application\Mapper\ObjectToDtoMapper;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\Entity\Event;

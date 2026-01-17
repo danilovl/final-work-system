@@ -18,7 +18,7 @@ use App\Application\Constant\{
     ControllerMethodConstant
 };
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService

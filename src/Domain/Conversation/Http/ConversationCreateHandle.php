@@ -15,7 +15,7 @@ namespace App\Domain\Conversation\Http;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Conversation\Bus\Command\CreateConversation\CreateConversationCommand;
 use App\Domain\ConversationType\Facade\ConversationTypeFacade;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     TwigRenderService
 };

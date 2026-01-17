@@ -14,7 +14,7 @@ namespace App\Domain\WorkCategory\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\WorkCategory\Entity\WorkCategory;
 use App\Domain\WorkCategory\Factory\WorkCategoryFactory;
 use App\Domain\WorkCategory\Form\WorkCategoryForm;

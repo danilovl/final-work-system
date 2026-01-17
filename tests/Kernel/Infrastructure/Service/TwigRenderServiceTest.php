@@ -10,14 +10,13 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Service;
+namespace App\Tests\Kernel\Infrastructure\Service;
 
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
-};
+    Response};
 
 class TwigRenderServiceTest extends KernelTestCase
 {

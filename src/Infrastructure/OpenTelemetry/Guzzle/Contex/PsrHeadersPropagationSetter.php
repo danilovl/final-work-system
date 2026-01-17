@@ -14,7 +14,8 @@ namespace App\Infrastructure\OpenTelemetry\Guzzle\Contex;
 
 use OpenTelemetry\Context\Propagation\{
     PropagationGetterInterface,
-    PropagationSetterInterface};
+    PropagationSetterInterface
+};
 use Psr\Http\Message\RequestInterface;
 
 class PsrHeadersPropagationSetter implements PropagationGetterInterface, PropagationSetterInterface

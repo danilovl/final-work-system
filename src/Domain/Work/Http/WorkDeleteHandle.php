@@ -14,7 +14,7 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;

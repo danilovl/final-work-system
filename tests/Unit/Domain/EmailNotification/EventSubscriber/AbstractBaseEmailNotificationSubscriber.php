@@ -12,22 +12,22 @@
 
 namespace App\Tests\Unit\Domain\EmailNotification\EventSubscriber;
 
+use App\Domain\EmailNotification\Entity\EmailNotification;
+use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\EmailNotification\Provider\{
     EmailNotificationAddToQueueProvider,
     EmailNotificationEnableMessengerProvider
 };
-use PHPUnit\Framework\MockObject\MockObject;
-use App\Application\Service\{
-    TranslatorService,
-    TwigRenderService
-};
-use App\Domain\EmailNotification\Entity\EmailNotification;
-use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
 use App\Domain\User\Facade\UserFacade;
+use App\Infrastructure\Service\{
+    TranslatorService
+};
+use App\Infrastructure\Service\TwigRenderService;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Danilovl\ParameterBundle\Service\ParameterService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;

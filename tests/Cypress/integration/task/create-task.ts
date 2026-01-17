@@ -1,4 +1,4 @@
-import { taskData } from '@cypress-test/fixtures/task/task'
+import {taskData} from '@cypress-test/fixtures/task/task'
 
 describe('Create task test', () => {
     beforeEach(() => {

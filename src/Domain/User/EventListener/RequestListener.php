@@ -13,7 +13,7 @@
 namespace App\Domain\User\EventListener;
 
 use Override;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Service\UserService;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use DateTime;

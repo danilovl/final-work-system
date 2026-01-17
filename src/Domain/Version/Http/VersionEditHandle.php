@@ -19,7 +19,7 @@ use App\Application\Constant\{
     FlashTypeConstant,
     SeoPageConstant
 };
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     RequestService,
     SeoPageService,
     TranslatorService,

@@ -14,7 +14,8 @@ namespace App\Infrastructure\OpenTelemetry\Messenger\Context;
 
 use OpenTelemetry\Context\Propagation\{
     PropagationGetterInterface,
-    PropagationSetterInterface};
+    PropagationSetterInterface
+};
 use Symfony\Component\Messenger\Envelope;
 
 class SymfonyMessengerPropagationGetterSetter implements PropagationGetterInterface, PropagationSetterInterface

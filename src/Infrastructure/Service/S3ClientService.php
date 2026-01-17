@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use Aws\Result;
 use Aws\S3\Exception\S3Exception;

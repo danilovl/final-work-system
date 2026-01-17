@@ -13,7 +13,7 @@
 namespace App\Domain\SystemEvent\EventSubscriber;
 
 use App\Application\EventSubscriber\Events;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventType\Constant\SystemEventTypeConstant;

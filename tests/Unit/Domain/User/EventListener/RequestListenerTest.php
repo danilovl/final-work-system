@@ -14,18 +14,18 @@ namespace App\Tests\Unit\Domain\User\EventListener;
 
 use App\Domain\User\Entity\User;
 use App\Domain\User\EventListener\RequestListener;
-use PHPUnit\Framework\MockObject\MockObject;
-use App\Application\Service\EntityManagerService;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\AsyncBundle\Service\AsyncService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\{
+    HttpKernelInterface,
     KernelEvents,
-    KernelInterface,
-    HttpKernelInterface
+    KernelInterface
 };
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RequestListenerTest extends TestCase
 {

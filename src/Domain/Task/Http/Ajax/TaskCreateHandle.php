@@ -15,7 +15,7 @@ namespace App\Domain\Task\Http\Ajax;
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
 use App\Domain\Task\Form\TaskForm;
 use App\Domain\Task\Model\TaskModel;

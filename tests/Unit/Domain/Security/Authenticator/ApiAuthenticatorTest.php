@@ -13,22 +13,24 @@
 namespace App\Tests\Unit\Domain\Security\Authenticator;
 
 use App\Application\Model\Security\ApiKeyCredentialModel;
-use App\Application\Service\EntityManagerService;
 use App\Domain\ApiUser\Entity\ApiUser;
 use App\Domain\ApiUser\Facade\ApiUserFacade;
 use App\Domain\Security\Authenticator\ApiAuthenticator;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\{
     AuthenticationException,
-    CustomUserMessageAuthenticationException};
+    CustomUserMessageAuthenticationException
+};
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 class ApiAuthenticatorTest extends TestCase

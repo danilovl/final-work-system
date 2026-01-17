@@ -17,7 +17,8 @@ use App\Application\Traits\Entity\{
     ActiveAbleTrait,
     CreateUpdateAbleTrait,
     IdTrait,
-    SimpleInformationTrait};
+    SimpleInformationTrait
+};
 use App\Domain\Event\Entity\Event;
 use App\Domain\Media\Entity\Media;
 use App\Domain\User\Traits\Entity\IsOwnerTrait;

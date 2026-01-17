@@ -13,26 +13,31 @@
 namespace App\Infrastructure\OpenTelemetry\Messenger;
 
 use App\Infrastructure\OpenTelemetry\Messenger\Context\{
-    SymfonyMessengerPropagationGetterSetter};
-use App\Infrastructure\OpenTelemetry\Messenger\Context\EnvelopeIsTracedStamp;
+    EnvelopeIsTracedStamp
+};
+use App\Infrastructure\OpenTelemetry\Messenger\Context\SymfonyMessengerPropagationGetterSetter;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\SDK\Trace\TracerProvider;
 use OpenTelemetry\SemConv\{
     TraceAttributes,
-    TraceAttributeValues};
+    TraceAttributeValues
+};
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Middleware\{
     MiddlewareInterface,
-    StackInterface};
+    StackInterface
+};
 use Symfony\Component\Messenger\Stamp\{
     ConsumedByWorkerStamp,
     RedeliveryStamp,
-    TransportMessageIdStamp};
+    TransportMessageIdStamp
+};
 use Throwable;
 
 class MessengerMiddleware implements MiddlewareInterface

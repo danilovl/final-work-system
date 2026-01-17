@@ -17,7 +17,7 @@ use App\Domain\Event\Bus\Query\EventList\{
     GetEventListQuery,
     GetEventListQueryResult
 };
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };

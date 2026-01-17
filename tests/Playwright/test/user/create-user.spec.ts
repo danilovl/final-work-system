@@ -15,7 +15,8 @@ export default function createTests() {
         text: Math.random().toString(36).substring(2, 10)
     }
 
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Create user success', async ({page}) => {
         await page.goto('/en/user/create')

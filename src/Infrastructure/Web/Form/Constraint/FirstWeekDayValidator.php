@@ -17,7 +17,7 @@ use App\Application\Helper\{
     CompareHelper,
     DateHelper
 };
-use App\Application\Service\TranslatorService;
+use App\Infrastructure\Service\TranslatorService;
 use DateTime;
 use Override;
 use Symfony\Component\Validator\{

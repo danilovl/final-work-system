@@ -14,7 +14,7 @@ namespace App\Domain\EventCalendar\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
 use App\Application\Exception\AjaxRuntimeException;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     EntityManagerService,
     RequestService
 };

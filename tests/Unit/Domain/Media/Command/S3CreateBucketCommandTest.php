@@ -12,10 +12,10 @@
 
 namespace App\Tests\Unit\Domain\Media\Command;
 
-use App\Application\Service\S3ClientService;
 use App\Domain\Media\Command\S3CreateBucketCommand;
 use App\Domain\Media\Facade\MediaTypeFacade;
 use App\Domain\MediaType\Entity\MediaType;
+use App\Infrastructure\Service\S3ClientService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;

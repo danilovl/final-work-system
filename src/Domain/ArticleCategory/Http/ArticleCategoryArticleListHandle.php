@@ -14,7 +14,7 @@ namespace App\Domain\ArticleCategory\Http;
 
 use App\Application\Constant\SeoPageConstant;
 use App\Application\Interfaces\Bus\QueryBusInterface;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TwigRenderService
 };

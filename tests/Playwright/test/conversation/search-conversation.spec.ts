@@ -1,7 +1,8 @@
 import {test} from '@playwright-test/fixtures/command'
 
 export default function createTests() {
-    test.beforeEach(async ({loginSupervisor}) => {})
+    test.beforeEach(async ({loginSupervisor}) => {
+    })
 
     test('Search conversation success', async ({page}) => {
         await page.goto('/en/conversation/list')

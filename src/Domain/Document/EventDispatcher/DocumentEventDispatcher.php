@@ -16,7 +16,7 @@ use App\Application\EventSubscriber\Events;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\EventDispatcher\GenericEvent\MediaGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class DocumentEventDispatcher
 {

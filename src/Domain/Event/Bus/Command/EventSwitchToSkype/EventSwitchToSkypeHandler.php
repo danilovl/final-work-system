@@ -13,7 +13,7 @@
 namespace App\Domain\Event\Bus\Command\EventSwitchToSkype;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\EventDispatcher\EventEventDispatcher;
 use App\Domain\EventAddress\Facade\EventAddressFacade;

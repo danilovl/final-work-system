@@ -15,7 +15,7 @@ namespace App\Domain\ResetPassword\EventDispatcher;
 use App\Application\EventSubscriber\Events;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\ResetPassword\EventDispatcher\GenericEvent\ResetPasswordGenericEvent;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class SecurityDispatcher
 {

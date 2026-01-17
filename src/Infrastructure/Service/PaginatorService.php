@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;

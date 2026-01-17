@@ -12,10 +12,10 @@
 
 namespace App\Tests\Unit\Domain\Security\Provider;
 
-use App\Application\Service\EntityManagerService;
 use App\Domain\Security\Provider\AppUserProvider;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Facade\UserFacade;
+use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;

@@ -17,7 +17,7 @@ use App\Application\Constant\{
     AjaxJsonTypeConstant
 };
 use App\Application\EventDispatcher\CacheEventDispatcher;
-use App\Application\Service\RequestService;
+use App\Infrastructure\Service\RequestService;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
     SystemEventRecipientFacade

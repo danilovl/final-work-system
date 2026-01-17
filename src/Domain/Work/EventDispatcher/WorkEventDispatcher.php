@@ -17,7 +17,7 @@ use App\Domain\User\EventDispatcher\GenericEvent\UserGenericEvent;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use Danilovl\AsyncBundle\Service\AsyncService;
-use App\Application\Service\EventDispatcherService;
+use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class WorkEventDispatcher
 {

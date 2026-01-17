@@ -16,7 +16,8 @@ use App\Infrastructure\OpenTelemetry\OpenTelemetryRegistrationInterface;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
-    SpanKind};
+    SpanKind
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Psr\Cache\CacheItemPoolInterface;

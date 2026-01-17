@@ -13,7 +13,7 @@
 namespace App\Domain\ArticleCategory\Bus\Query\ArticleCategoryList;
 
 use App\Application\Interfaces\Bus\QueryHandlerInterface;
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Article\Facade\ArticleCategoryFacade;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

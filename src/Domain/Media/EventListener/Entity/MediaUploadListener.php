@@ -13,7 +13,7 @@
 namespace App\Domain\Media\EventListener\Entity;
 
 use App\Application\Exception\RuntimeException;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     S3ClientService,
     EntityManagerService
 };

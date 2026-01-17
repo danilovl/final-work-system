@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Kernel\Application\Service;
+namespace App\Tests\Kernel\Infrastructure\Service;
 
-use App\Application\Service\TranslatorService;
+use App\Infrastructure\Service\TranslatorService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

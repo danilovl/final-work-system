@@ -17,7 +17,7 @@ use App\Domain\DocumentCategory\Bus\Query\DocumentCategoryList\{
     GetDocumentCategoryListQuery,
     GetDocumentCategoryListQueryResult
 };
-use App\Application\Service\TwigRenderService;
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,

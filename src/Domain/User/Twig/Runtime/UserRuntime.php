@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Twig\Runtime;
 
-use App\Application\Service\S3ClientService;
+use App\Infrastructure\Service\S3ClientService;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Service\UserService;

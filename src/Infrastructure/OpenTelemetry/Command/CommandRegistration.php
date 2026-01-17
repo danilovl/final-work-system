@@ -19,7 +19,8 @@ use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Symfony\Component\Console\Command\Command;

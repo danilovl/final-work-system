@@ -13,17 +13,17 @@
 namespace App\Tests\Unit\Domain\EmailNotification\Messenger;
 
 use App\Application\Exception\RuntimeException;
-use App\Application\Service\EntityManagerService;
 use App\Domain\EmailNotification\Entity\EmailNotification;
 use App\Domain\EmailNotification\EventSubscriber\BaseEmailNotificationSubscriber;
 use App\Domain\EmailNotification\Facade\EmailNotificationFacade;
 use App\Domain\EmailNotification\Factory\EmailNotificationFactory;
-use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Messenger\{
     EmailNotificationHandler,
     EmailNotificationMessage
 };
+use App\Domain\EmailNotification\Provider\EmailNotificationSendProvider;
 use App\Domain\EmailNotification\Service\SendEmailNotificationService;
+use App\Infrastructure\Service\EntityManagerService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

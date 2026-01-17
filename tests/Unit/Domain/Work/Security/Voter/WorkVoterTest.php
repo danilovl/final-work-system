@@ -25,7 +25,7 @@ class WorkVoterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->workVoter = new class(new WorkService) extends WorkVoter implements VoterInterfaceMock{
+        $this->workVoter = new class(new WorkService) extends WorkVoter implements VoterInterfaceMock {
             public function supportsPublic(string $attribute, mixed $subject): bool
             {
                 return $this->supports($attribute, $subject);

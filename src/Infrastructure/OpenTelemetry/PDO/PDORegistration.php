@@ -18,11 +18,13 @@ use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
     SpanKind,
-    StatusCode};
+    StatusCode
+};
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\SemConv\{
     TraceAttributes,
-    TraceAttributeValues};
+    TraceAttributeValues
+};
 use PDO;
 use PDOStatement;
 use stdClass;

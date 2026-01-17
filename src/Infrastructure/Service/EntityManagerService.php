@@ -10,14 +10,14 @@
  *
  */
 
-namespace App\Application\Service;
+namespace App\Infrastructure\Service;
 
 use App\Application\EventDispatcher\EntityEventDispatcher;
 use App\Application\Helper\AttributeHelper;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\{
-    UnitOfWork,
-    EntityManagerInterface
+    EntityManagerInterface,
+    UnitOfWork
 };
 use Doctrine\Persistence\ObjectRepository;
 

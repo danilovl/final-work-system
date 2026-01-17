@@ -17,7 +17,8 @@ use Danilovl\AsyncBundle\Service\AsyncService;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Trace\{
     Span,
-    SpanKind};
+    SpanKind
+};
 use OpenTelemetry\Context\Context;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use function OpenTelemetry\Instrumentation\hook;

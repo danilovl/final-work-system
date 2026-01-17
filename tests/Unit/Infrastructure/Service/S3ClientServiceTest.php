@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Service;
+namespace App\Tests\Unit\Infrastructure\Service;
 
-use App\Application\Service\S3ClientService;
+use App\Infrastructure\Service\S3ClientService;
 use App\Tests\Mock\Application\Service\S3ClientMock;
 use Aws\Command;
 use Aws\S3\Exception\S3Exception;

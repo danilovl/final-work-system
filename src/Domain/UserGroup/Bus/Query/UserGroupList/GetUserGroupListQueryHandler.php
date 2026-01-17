@@ -12,7 +12,7 @@
 
 namespace App\Domain\UserGroup\Bus\Query\UserGroupList;
 
-use App\Application\Service\PaginatorService;
+use App\Infrastructure\Service\PaginatorService;
 use App\Domain\UserGroup\Facade\UserGroupFacade;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

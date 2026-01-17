@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Facade;
 
-use App\Application\Service\EntityManagerService;
+use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Event\Entity\Event;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\User\Entity\User;

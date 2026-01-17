@@ -13,7 +13,7 @@
 namespace App\Domain\EventSchedule\Controller;
 
 use App\Application\Constant\VoterSupportConstant;
-use App\Application\Service\AuthorizationCheckerService;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\EventSchedule\Http\{
     EventScheduleEditHandle,
     EventScheduleListHandle,

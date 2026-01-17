@@ -28,7 +28,7 @@ class AttributeHelperTest extends TestCase
 
     public function testGetEntityTableNameException(): void
     {
-        $entity = new #[ORM\Entity] class() {};
+        $entity = new #[ORM\Entity] class ( ) {};
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Attribute Doctrine\ORM\Mapping\Table not found.');

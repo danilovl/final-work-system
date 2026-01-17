@@ -18,7 +18,7 @@ use App\Domain\User\Bus\Query\UserList\{
     GetUserListQueryResult
 };
 use App\Domain\WorkStatus\Entity\WorkStatus;
-use App\Application\Service\{
+use App\Infrastructure\Service\{
     SeoPageService,
     TranslatorService,
     TwigRenderService
