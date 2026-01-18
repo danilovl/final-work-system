@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Application\Util;
+namespace App\Infrastructure\Util;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

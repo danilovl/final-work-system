@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Application\Util;
+namespace App\Tests\Unit\Infrastructure\Util;
 
-use App\Application\Util\StreamedResponseUtil;
+use App\Infrastructure\Util\StreamedResponseUtil;
 use DateTimeImmutable;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;

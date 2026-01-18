@@ -12,9 +12,9 @@
 
 namespace App\Domain\Conversation\Http\Ajax;
 
-use App\Application\Util\StreamedResponseUtil;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationStreamService;
+use App\Infrastructure\Util\StreamedResponseUtil;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 readonly class ConversationLiveHandle

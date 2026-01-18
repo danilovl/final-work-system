@@ -12,8 +12,8 @@
 
 namespace App\Domain\Widget\Http\Ajax;
 
-use App\Application\Util\StreamedResponseUtil;
 use App\Domain\Widget\Service\WidgetStreamService;
+use App\Infrastructure\Util\StreamedResponseUtil;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 readonly class WidgetLiveHandle
