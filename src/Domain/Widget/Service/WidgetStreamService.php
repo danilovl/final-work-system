@@ -15,6 +15,8 @@ namespace App\Domain\Widget\Service;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\SystemEvent\Facade\SystemEventFacade;
 use App\Domain\User\Service\UserService;
+use Generator;
+use Symfony\Component\HttpFoundation\ServerEvent;
 use App\Domain\Widget\WidgetItem\{
     UnreadSystemEventWidget,
     UnreadConversationMessageWidget
@@ -71,11 +73,9 @@ class WidgetStreamService
     {
         $sleepSecond = $this->parameterService->getInt('event_source.widget.top_nav.sleep');
 
-        return function () use ($sleepSecond): void {
+        return function () use ($sleepSecond): Generator {
             while (true) {
-                echo 'data: ' . json_encode($this->getData()) . "\n\n";
-                ob_flush();
-                flush();
+                yield new ServerEvent(json_encode($this->getData()), type: 'jobs');
                 sleep($sleepSecond);
             }
         };

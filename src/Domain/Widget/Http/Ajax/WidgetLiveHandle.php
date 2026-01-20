@@ -13,17 +13,16 @@
 namespace App\Domain\Widget\Http\Ajax;
 
 use App\Domain\Widget\Service\WidgetStreamService;
-use App\Infrastructure\Util\StreamedResponseUtil;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\EventStreamResponse;
 
 readonly class WidgetLiveHandle
 {
     public function __construct(private WidgetStreamService $widgetStreamService) {}
 
-    public function __invoke(): StreamedResponse
+    public function __invoke(): EventStreamResponse
     {
         $callback = $this->widgetStreamService->handle();
 
-        return StreamedResponseUtil::create($callback);
+        return new EventStreamResponse($callback);
     }
 }
