@@ -17,6 +17,8 @@ use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTimeImmutable;
+use Generator;
+use Symfony\Component\HttpFoundation\ServerEvent;
 
 class ConversationStreamService
 {
@@ -32,11 +34,9 @@ class ConversationStreamService
     {
         $sleepSecond = $this->parameterService->getInt('event_source.conversation.detail.sleep');
 
-        return function () use ($conversation, $sleepSecond): void {
+        return function () use ($conversation, $sleepSecond): Generator {
             while (true) {
-                echo 'data: ' . $this->getLastMessage($conversation) . "\n\n";
-                ob_flush();
-                flush();
+                yield new ServerEvent($this->getLastMessage($conversation), type: 'jobs');
                 sleep($sleepSecond);
             }
         };

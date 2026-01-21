@@ -14,17 +14,16 @@ namespace App\Domain\Conversation\Http\Ajax;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Service\ConversationStreamService;
-use App\Infrastructure\Util\StreamedResponseUtil;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\EventStreamResponse;
 
 readonly class ConversationLiveHandle
 {
     public function __construct(private ConversationStreamService $conversationStreamService) {}
 
-    public function __invoke(Conversation $conversation): StreamedResponse
+    public function __invoke(Conversation $conversation): EventStreamResponse
     {
         $callback = $this->conversationStreamService->handle($conversation);
 
-        return StreamedResponseUtil::create($callback);
+        return new EventStreamResponse($callback);
     }
 }
