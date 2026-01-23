@@ -113,7 +113,11 @@
 
             initTinymce(locale);
             {% if parameter_get('event_source.conversation.detail.active') == true %}
-            conversationEventSource("{{ mercure('conversation/' ~ conversation.id | hashids_encode)|escape('js') }}", $('#chat'));
+
+            {% set topics = 'conversation/' ~ conversation.id | hashids_encode %}
+            {% set topics = topics ~ '/user/' ~ app.user().id | hashids_encode %}
+
+            conversationEventSource("{{ mercure(topics)|escape('js') }}", $('#chat'));
             {% endif %}
         });
     </script>

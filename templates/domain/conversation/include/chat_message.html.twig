@@ -1,9 +1,11 @@
+{% set user = user ?? app_user() %}
+
 {% set conversationMessageUnreadClass = null %}
 {% if message.isRead == false %}
     {% set conversationMessageUnreadClass = 'conversation-message-unread' %}
 {% endif %}
 
-<div class="{% if message.isOwner(app_user()) %}chat-message-left{% else %}chat-message-right{% endif %}">
+<div class="{% if message.isOwner(user) %}chat-message-left{% else %}chat-message-right{% endif %}">
     <img class="message-avatar"
          src="{{ message.owner | profile_image }}"
          alt="{{ message.owner }}"
@@ -13,7 +15,7 @@
         <span class="message-date switchery-very-small">
             {{ message.createdAt | date }}
 
-            {% if message.isOwner(app_user()) == false %}
+            {% if message.isOwner(user) == false %}
                 {% include 'other/common_part/button/js-switch.html.twig' with {
                     'checked': conversationMessageUnreadClass is empty,
                     'dataTargetType': 'complete',

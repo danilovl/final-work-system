@@ -51,16 +51,29 @@ readonly class MercureSubscriber implements EventSubscriberInterface
         $conversationMessage = $event->conversationMessage;
         $conversation = $conversationMessage->getConversation();
 
-        $message = $this->twigRenderService->render('domain/conversation/include/chat_message.html.twig', [
-            'message' => $conversationMessage
-        ]);
+        $user = $this->userService->getUser();
+        $participants = $conversationMessage->getConversation()->getParticipantsExceptUsers([$user]);
 
-        $update = new Update(
-            'conversation/' . $this->hashidsService->encode($conversation->getId()),
-            (string) json_encode(['message' => $message]),
-        );
+        foreach ($participants as $participant) {
+            $participantUser = $participant->getUser();
 
-        $this->hub->publish($update);
+            $message = $this->twigRenderService->render('domain/conversation/include/chat_message.html.twig', [
+                'user' => $participantUser,
+                'message' => $conversationMessage
+            ]);
+
+            $topics = sprintf('conversation/%s/user/%s',
+                $this->hashidsService->encode($conversation->getId()),
+                $this->hashidsService->encode($participantUser->getId())
+            );
+
+            $update = new Update(
+                $topics,
+                (string) json_encode(['message' => $message]),
+            );
+
+            $this->hub->publish($update);
+        }
     }
 
     public function onMessageCreateUnreadConversationMessageWidget(ConversationMessageGenericEvent $event): void
