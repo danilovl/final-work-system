@@ -14,38 +14,31 @@ namespace App\Infrastructure\Console;
 
 use App\Application\Exception\InvalidArgumentException;
 use App\Infrastructure\Service\EntityManagerService;
-use Override;
-use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\{
-    InputArgument,
-    InputInterface
+use Symfony\Component\Console\Attribute\{
+    Argument,
+    AsCommand
 };
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(name: 'app:import-sql', description: 'Import SQL file(s) directly to Database.')]
-class ImportSqlCommand extends Command
+class ImportSqlCommand
 {
     final public const string COMMAND_NAME = 'app:import-sql';
 
-    public function __construct(private readonly EntityManagerService $entityManagerService)
-    {
-        parent::__construct();
-    }
+    public function __construct(private readonly EntityManagerService $entityManagerService) {}
 
-    #[Override]
-    protected function configure(): void
-    {
-        $this->addArgument('file', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'File path(s) of SQL to be executed.');
-    }
-
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    public function __invoke(
+        #[Argument(
+            description: 'File path(s) of SQL to be executed.',
+            name: 'file'
+        )]
+        array $file,
+        OutputInterface $output
+    ): int {
         $connection = $this->entityManagerService->getConnection();
-        $fileNames = (array) $input->getArgument('file');
 
-        foreach ($fileNames as $fileName) {
+        foreach ($file as $fileName) {
             $filePath = realpath($fileName);
             if ($filePath === false) {
                 $filePath = $fileName;
