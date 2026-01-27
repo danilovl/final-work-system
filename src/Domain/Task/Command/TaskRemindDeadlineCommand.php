@@ -15,46 +15,30 @@ namespace App\Domain\Task\Command;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Provider\TaskRemindProvider;
-use Override;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class TaskRemindDeadlineCommand extends Command
+#[AsCommand(
+    name: 'app:task-remind-deadline',
+    description: 'Create reminder notification emails for tasks'
+)]
+final class TaskRemindDeadlineCommand
 {
     final public const string COMMAND_NAME = 'app:task-remind-deadline';
 
     private const int LIMIT = 500;
 
-    private SymfonyStyle $io;
-
     public function __construct(
         private readonly TaskEventDispatcher $taskEventDispatcher,
         private readonly TaskDeadlineFacade $taskDeadlineFacade,
         private readonly TaskRemindProvider $taskRemindProvider
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
-    #[Override]
-    protected function configure(): void
-    {
-        $this->setName(self::COMMAND_NAME)
-            ->setDescription('Create reminder notification emails for tasks');
-    }
-
-    #[Override]
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->io = new SymfonyStyle($input, $output);
-    }
-
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
         if (!$this->taskRemindProvider->isEnable()) {
-            $this->io->error('Task reminder is not unable');
+            $io->error('Task reminder is not unable');
 
             return Command::FAILURE;
         }
@@ -75,7 +59,7 @@ class TaskRemindDeadlineCommand extends Command
             $offset += self::LIMIT;
         }
 
-        $this->io->success(sprintf('Task deadline reminds create for %d tasks', $count));
+        $io->success(sprintf('Task deadline reminds create for %d tasks', $count));
 
         return Command::SUCCESS;
     }
