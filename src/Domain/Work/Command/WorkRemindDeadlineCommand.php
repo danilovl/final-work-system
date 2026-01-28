@@ -15,15 +15,12 @@ namespace App\Domain\Work\Command;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Domain\Work\Facade\WorkDeadlineFacade;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(name: 'app:work-remind-deadline', description: 'Create reminder notification emails for works')]
-class WorkRemindDeadlineCommand extends Command
+class WorkRemindDeadlineCommand
 {
     private const int LIMIT = 500;
 
@@ -31,15 +28,10 @@ class WorkRemindDeadlineCommand extends Command
         private readonly WorkEventDispatcher $workEventDispatcher,
         private readonly WorkDeadlineFacade $workDeadlineFacade,
         private readonly ParameterServiceInterface $parameterService
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
-        $io = new SymfonyStyle($input, $output);
-
         if (!$this->parameterService->getBoolean('work_remind.enable')) {
             $io->error('Work reminder is not unable');
 
