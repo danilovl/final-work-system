@@ -13,22 +13,18 @@
 namespace App\Domain\ConversationMessage\Command;
 
 use App\Infrastructure\Service\EntityManagerService;
-use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(name: 'app:html-decode-conversation-message', description: 'HTML decode conversation message.')]
-class DecodeConversationMessageCommand extends Command
+class DecodeConversationMessageCommand
 {
     public function __construct(private readonly EntityManagerService $entityManagerService)
     {
-        parent::__construct();
     }
 
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
         $offset = 0;
         $limit = 500;
@@ -55,7 +51,7 @@ class DecodeConversationMessageCommand extends Command
             $offset += $limit;
         } while (!empty($messages));
 
-        $output->writeln('Content decoding completed successfully.');
+        $io->success('Content decoding completed successfully.');
 
         return Command::SUCCESS;
     }
