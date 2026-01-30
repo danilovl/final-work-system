@@ -42,7 +42,7 @@ class ImportSqlCommandTest extends KernelTestCase
         $command = $application->find(ImportSqlCommand::COMMAND_NAME);
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'file' => $this->sqlFilePath
+            'file' => [$this->sqlFilePath]
         ]);
 
         $commandTester->assertCommandIsSuccessful();
@@ -58,7 +58,7 @@ class ImportSqlCommandTest extends KernelTestCase
         $command = $application->find(ImportSqlCommand::COMMAND_NAME);
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'file' => 'not-exist-file'
+            'file' => ['not-exist-file']
         ]);
     }
 
@@ -74,7 +74,7 @@ class ImportSqlCommandTest extends KernelTestCase
         $command = $application->find(ImportSqlCommand::COMMAND_NAME);
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'file' => $this->sqlFilePath
+            'file' => [$this->sqlFilePath]
         ]);
     }
 

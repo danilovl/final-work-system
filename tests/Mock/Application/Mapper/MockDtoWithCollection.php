@@ -12,10 +12,13 @@
 
 namespace App\Tests\Mock\Application\Mapper;
 
+use App\Application\Mapper\Attribute\MapToDto;
+
 readonly class MockDtoWithCollection
 {
     public function __construct(
         public string $title,
+        #[MapToDto(MockDto::class)]
         public array $items,
         public ?string $description = null
     ) {}

@@ -22,12 +22,14 @@ use App\Domain\User\Repository\UserRepository;
 use App\Infrastructure\Service\EntityManagerService;
 use Doctrine\Common\Collections\Order;
 use PHPUnit\Framework\Attributes\Depends;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class DecodeConversationMessageCommandTest extends KernelTestCase
 {
-    private DecodeConversationMessageCommand $command;
+    private LazyCommand $command;
 
     private EntityManagerService $entityManagerService;
 
@@ -36,7 +38,13 @@ class DecodeConversationMessageCommandTest extends KernelTestCase
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
-        $this->command = $kernel->getContainer()->get(DecodeConversationMessageCommand::class);
+        $application = new Application($kernel);
+        $application->setAutoExit(false);
+
+        /** @var LazyCommand $command */
+        $command = $application->find(DecodeConversationMessageCommand::COMMAND_NAME);
+
+        $this->command = $command;
         $this->entityManagerService = $kernel->getContainer()->get(EntityManagerService::class);
     }
 

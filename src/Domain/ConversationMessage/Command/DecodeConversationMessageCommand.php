@@ -20,6 +20,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'app:html-decode-conversation-message', description: 'HTML decode conversation message.')]
 class DecodeConversationMessageCommand
 {
+    final public const string COMMAND_NAME = 'app:html-decode-conversation-message';
+
     public function __construct(private readonly EntityManagerService $entityManagerService)
     {
     }

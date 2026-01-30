@@ -17,6 +17,7 @@ use App\Infrastructure\Service\SeoPageService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\{
     HttpKernelInterface,
     KernelEvents,
