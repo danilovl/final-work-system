@@ -15,59 +15,33 @@ namespace App\Domain\User\Command;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
-use Override;
+use Symfony\Component\Console\Attribute\Argument;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\{
-    InputArgument,
-    InputInterface
-};
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class UserDeleteCommand extends Command
+#[AsCommand(name: 'app:user-delete', description: 'Deletes users from the database')]
+class UserDeleteCommand
 {
     final public const string COMMAND_NAME = 'app:user-delete';
-
-    private SymfonyStyle $io;
 
     public function __construct(
         private readonly EntityManagerService $entityManager,
         private readonly UserValidator $validator
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
-    #[Override]
-    protected function configure(): void
-    {
-        $this->setName(self::COMMAND_NAME)
-            ->setDescription('Deletes users from the database')
-            ->addArgument('username', InputArgument::REQUIRED, 'The username of an existing user');
-    }
-
-    #[Override]
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->io = new SymfonyStyle($input, $output);
-    }
-
-    #[Override]
-    protected function interact(InputInterface $input, OutputInterface $output): void
-    {
-        if ($input->getArgument('username') !== null) {
-            return;
+    public function __invoke(
+        SymfonyStyle $io,
+        #[Argument(
+            description: 'The username of an existing user',
+            name: 'username'
+        )]
+        ?string $username = null
+    ): int {
+        if ($username === null) {
+            $io->title('Delete user command');
+            $username = $io->ask('Username', null, [$this->validator, 'validateUsernameExist']);
         }
-
-        $this->io->title('Delete user command');
-
-        $username = $this->io->ask('Username', null, [$this->validator, 'validateUsernameExist']);
-        $input->setArgument('username', $username);
-    }
-
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $username = $input->getArgument('username');
 
         /** @var User|null $user */
         $user = $this->entityManager
@@ -75,14 +49,14 @@ class UserDeleteCommand extends Command
             ->findOneBy(['username' => $username]);
 
         if ($user === null) {
-            $this->io->success(sprintf('User with username "%s" not found', $username));
+            $io->success(sprintf('User with username "%s" not found', $username));
 
             return Command::SUCCESS;
         }
 
         $this->entityManager->remove($user);
 
-        $this->io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted', $user->getUsername(), $user->getId(), $user->getEmail()));
+        $io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted', $user->getUsername(), $user->getId(), $user->getEmail()));
 
         return Command::SUCCESS;
     }
