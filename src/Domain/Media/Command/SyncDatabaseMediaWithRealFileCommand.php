@@ -23,21 +23,19 @@ use App\Domain\Media\Facade\{
 };
 use App\Domain\MediaType\Entity\MediaType;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
-use Override;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 
-class SyncDatabaseMediaWithRealFileCommand extends Command
+#[AsCommand(name: 'app:sync-database-media-with-real-file', description: 'Sync database media with real file')]
+class SyncDatabaseMediaWithRealFileCommand
 {
     final public const string COMMAND_NAME = 'app:sync-database-media-with-real-file';
 
     private const int LIMIT = 500;
-
-    private SymfonyStyle $io;
 
     public function __construct(
         private readonly EntityManagerService $entityManagerService,
@@ -45,34 +43,18 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
         private readonly MediaTypeFacade $mediaTypeFacade,
         private readonly ParameterServiceInterface $parameterService,
         private readonly S3ClientService $s3ClientService
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
-    #[Override]
-    protected function configure(): void
+    public function __invoke(SymfonyStyle $io, OutputInterface $output): int
     {
-        $this->setName(self::COMMAND_NAME)
-            ->setDescription('Sync database media with real file');
-    }
-
-    #[Override]
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->io = new SymfonyStyle($input, $output);
-    }
-
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $this->syncMediaTypeFolder($output);
-        $this->syncMediaFile();
-        $this->syncMedia();
+        $this->syncMediaTypeFolder($output, $io);
+        $this->syncMediaFile($io);
+        $this->syncMedia($io);
 
         return Command::SUCCESS;
     }
 
-    private function syncMedia(): void
+    private function syncMedia(SymfonyStyle $io): void
     {
         $offset = 0;
         $count = 0;
@@ -99,10 +81,10 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
             $offset += self::LIMIT;
         }
 
-        $this->io->success(sprintf('%d media were deleted', $count));
+        $io->success(sprintf('%d media were deleted', $count));
     }
 
-    private function syncMediaFile(): void
+    private function syncMediaFile(SymfonyStyle $io): void
     {
         $uploadFolder = $this->parameterService->getString('upload_directory');
         $mediaTypes = $this->mediaTypeFacade->findAll();
@@ -126,10 +108,10 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
             }
         }
 
-        $this->io->success(sprintf('%d files were deleted', $count));
+        $io->success(sprintf('%d files were deleted', $count));
     }
 
-    private function syncMediaTypeFolder(OutputInterface $output): void
+    private function syncMediaTypeFolder(OutputInterface $output, SymfonyStyle $io): void
     {
         $uploadFolder = $this->parameterService->getString('upload_directory');
         $finder = new Finder;
@@ -154,6 +136,6 @@ class SyncDatabaseMediaWithRealFileCommand extends Command
             FileHelper::deleteDirectory($removeFolder);
         }
 
-        $this->io->success('Sync upload folder with media type folder is done');
+        $io->success('Sync upload folder with media type folder is done');
     }
 }
