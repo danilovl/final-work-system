@@ -19,7 +19,9 @@ use App\Infrastructure\Service\S3ClientService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\TypeInfo\Exception\LogicException;
 
 class S3CreateBucketCommandTest extends TestCase
@@ -30,15 +32,14 @@ class S3CreateBucketCommandTest extends TestCase
 
     private S3CreateBucketCommand $s3CreateBucketCommand;
 
-    private CommandTester $commandTester;
-
     protected function setUp(): void
     {
         $this->mediaTypeFacade = $this->createMock(MediaTypeFacade::class);
         $this->s3ClientService = $this->createMock(S3ClientService::class);
-        $this->s3CreateBucketCommand = new S3CreateBucketCommand($this->mediaTypeFacade, $this->s3ClientService);
-
-        $this->commandTester = new CommandTester($this->s3CreateBucketCommand);
+        $this->s3CreateBucketCommand = new S3CreateBucketCommand(
+            $this->mediaTypeFacade,
+            $this->s3ClientService
+        );
     }
 
     public function testExecute(): void
@@ -60,7 +61,7 @@ class S3CreateBucketCommandTest extends TestCase
                 return match ($param) {
                     'testFolder1' => false,
                     'testFolder2' => true,
-                    default => throw new LogicException('Can not happen')
+                    default => throw new LogicException('Unexpected bucket'),
                 };
             });
 
@@ -69,8 +70,12 @@ class S3CreateBucketCommandTest extends TestCase
             ->method('createBucket')
             ->with('testFolder1');
 
-        $this->commandTester->execute([]);
+        $input = new ArrayInput([]);
+        $output = new BufferedOutput();
+        $io = new SymfonyStyle($input, $output);
 
-        $this->assertEquals(Command::SUCCESS, $this->commandTester->getStatusCode());
+        $status = ($this->s3CreateBucketCommand)($io);
+
+        $this->assertSame(Command::SUCCESS, $status);
     }
 }

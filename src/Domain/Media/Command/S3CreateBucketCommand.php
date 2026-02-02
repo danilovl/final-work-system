@@ -14,36 +14,37 @@ namespace App\Domain\Media\Command;
 
 use App\Infrastructure\Service\S3ClientService;
 use App\Domain\Media\Facade\MediaTypeFacade;
-use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(name: 'app:s3-create-buckets', description: 'Create s3 buckets.')]
-class S3CreateBucketCommand extends Command
+class S3CreateBucketCommand
 {
+    final public const string COMMAND_NAME = 'app:s3-create-buckets';
+
     public function __construct(
         private readonly MediaTypeFacade $mediaTypeFacade,
         private readonly S3ClientService $s3ClientService
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
         $mediaTypes = $this->mediaTypeFacade->findAll();
+
+        $io->title('Creating S3 buckets');
 
         foreach ($mediaTypes as $mediaType) {
             $folder = $mediaType->getFolder();
 
             $doesBucketExist = $this->s3ClientService->doesBucketExist($folder);
             if ($doesBucketExist) {
+                $io->info(sprintf('Bucket "%s" already exists, skipping', $folder));
                 continue;
             }
 
             $this->s3ClientService->createBucket($folder);
+            $io->success(sprintf('Created bucket "%s"', $folder));
         }
 
         return Command::SUCCESS;
