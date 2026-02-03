@@ -15,33 +15,17 @@ namespace App\Domain\User\Command;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Entity\User;
 use Doctrine\Common\Collections\Order;
-use Override;
+use Symfony\Component\Console\Attribute\{
+    Option,
+    AsCommand
+};
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\{
-    InputInterface,
-    InputOption
-};
-use Symfony\Component\Console\Output\{
-    BufferedOutput,
-    OutputInterface
-};
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class UserListCommand extends Command
-{
-    final public const string COMMAND_NAME = 'app:user-list';
-
-    public function __construct(private readonly EntityManagerService $entityManager)
-    {
-        parent::__construct();
-    }
-
-    #[Override]
-    protected function configure(): void
-    {
-        $this->setName(self::COMMAND_NAME)
-            ->setDescription('Lists all the existing users')
-            ->setHelp(<<<'HELP'
+#[AsCommand(
+    name: 'app:user-list',
+    description: 'Lists all the existing users',
+    help: <<<TXT
 The <info>%command.name%</info> command lists all the users registered in the application:
 
   <info>php %command.full_name%</info>
@@ -55,30 +39,33 @@ In addition to displaying the user list, you can also send this information to
 the email address specified in the <comment>--send-to</comment> option:
 
   <info>php %command.full_name%</info> <comment>--send-to=fabien@symfony.com</comment>
+TXT
+)]
+class UserListCommand
+{
+    final public const string COMMAND_NAME = 'app:user-list';
 
-HELP
-            )
-            ->addOption('max-result', 'mr', InputOption::VALUE_OPTIONAL, 'Limits the number of users listed', 50);
-    }
+    public function __construct(private readonly EntityManagerService $entityManager) {}
 
-    #[Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $maxResult = $input->getOption('max-result');
+    public function __invoke(
+        SymfonyStyle $io,
+        #[Option(
+            description: 'Limits the number of users listed',
+            name: 'max-result',
+            shortcut: 'mr'
+        )]
+        int $maxResult = 50
+    ): int {
         $users = $this->entityManager
             ->getRepository(User::class)
             ->findBy([], ['id' => Order::Descending->value], $maxResult);
 
         $usersAsPlainArrays = array_map(fn (User $user): array => $this->userToArray($user), $users);
 
-        $bufferedOutput = new BufferedOutput;
-        $io = new SymfonyStyle($input, $bufferedOutput);
         $io->table(
             ['ID', 'Enabled', 'FirstName', 'LastName', 'Username', 'Email', 'Roles'],
             $usersAsPlainArrays
         );
-
-        $output->write($bufferedOutput->fetch());
 
         return Command::SUCCESS;
     }
