@@ -38,13 +38,15 @@ readonly class EntityManagerService
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 
-        $this->entityEventDispatcher->onPostPersistFlush($entity);
+        $this->entityEventDispatcher->onCreate($entity);
     }
 
     public function remove(object $entity): void
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
+
+        $this->entityEventDispatcher->onRemove();
     }
 
     public function removeNativeSql(string $entity, int $id): void
@@ -55,6 +57,8 @@ readonly class EntityManagerService
         $this->entityManager
             ->getConnection()
             ->executeQuery($sql);
+
+        $this->entityEventDispatcher->onRemove();
     }
 
     public function detach(object $entity): void
@@ -80,6 +84,8 @@ readonly class EntityManagerService
     public function flush(): void
     {
         $this->entityManager->flush();
+
+        $this->entityEventDispatcher->onSave();
     }
 
     /**

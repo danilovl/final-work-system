@@ -16,6 +16,7 @@ use App\Application\Constant\{
     AjaxJsonTypeConstant,
     FlashTypeConstant
 };
+use App\Application\Exception\ConstantNotFoundException;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     RedirectResponse,
@@ -28,12 +29,17 @@ use Symfony\Component\HttpFoundation\Session\{
 };
 use Symfony\Component\Routing\RouterInterface;
 
-readonly class RequestService
+class RequestService
 {
+    /**
+     * @var array<string, bool>
+     */
+    private array $addedFlashTypes = [];
+
     public function __construct(
-        private RequestStack $requestStack,
-        private RouterInterface $router,
-        private TranslatorService $translatorService
+        private readonly RequestStack $requestStack,
+        private readonly RouterInterface $router,
+        private readonly TranslatorService $translatorService
     ) {}
 
     public function addFlash(string $type, mixed $message): void
@@ -65,6 +71,36 @@ readonly class RequestService
     public function getSession(): SessionInterface
     {
         return $this->requestStack->getSession();
+    }
+
+    public function addFlashTransAutoType(FlashTypeConstant $type): void
+    {
+        $mainRequest = $this->requestStack->getMainRequest();
+        if ($mainRequest === null || $mainRequest->isXmlHttpRequest()) {
+            return;
+        }
+
+        if (isset($this->addedFlashTypes[$type->value])) {
+            return;
+        }
+
+        $message = match ($type) {
+            FlashTypeConstant::CREATE_SUCCESS => 'app.flash.form.create.success',
+            FlashTypeConstant::CREATE_WARNING => 'app.flash.form.create.warning',
+            FlashTypeConstant::CREATE_ERROR => 'app.flash.form.create.error',
+            FlashTypeConstant::SAVE_SUCCESS => 'app.flash.form.save.success',
+            FlashTypeConstant::SAVE_WARNING => 'app.flash.form.save.warning',
+            FlashTypeConstant::SAVE_ERROR => 'app.flash.form.save.error',
+            FlashTypeConstant::DELETE_SUCCESS => 'app.flash.form.delete.success',
+            FlashTypeConstant::DELETE_WARNING => 'app.flash.form.delete.warning',
+            FlashTypeConstant::DELETE_ERROR => 'app.flash.form.delete.error',
+            default => throw new ConstantNotFoundException('Flash constant type not found'),
+        };
+
+        $message = $this->translatorService->trans($message);
+        $this->addFlash($type->getMainType()->value, $message);
+
+        $this->addedFlashTypes[$type->value] = true;
     }
 
     public function createAjaxJson(

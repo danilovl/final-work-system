@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\EventSubscriber;
 
-use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
+use App\Application\EventDispatcher\GenericEvent\EntityCreateEvent;
 use App\Application\EventSubscriber\Events;
 use App\Domain\SystemEvent\Entity\SystemEvent;
 use App\Domain\Widget\WidgetItem\UnreadSystemEventWidget;
@@ -36,11 +36,11 @@ readonly class MercureSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::ENTITY_POST_PERSIST_FLUSH => ['onSystemEventCreate', -10]
+            Events::ENTITY_CREATE_ASYNC => ['onSystemEventCreate', -10]
         ];
     }
 
-    public function onSystemEventCreate(EntityPostFlushGenericEvent $genericEvent): void
+    public function onSystemEventCreate(EntityCreateEvent $genericEvent): void
     {
         $object = $genericEvent->object;
         if (!$object instanceof SystemEvent) {

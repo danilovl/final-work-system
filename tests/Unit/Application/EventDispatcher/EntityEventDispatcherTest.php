@@ -13,7 +13,7 @@
 namespace App\Tests\Unit\Application\EventDispatcher;
 
 use App\Application\EventDispatcher\EntityEventDispatcher;
-use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
+use App\Application\EventDispatcher\GenericEvent\EntityCreateEvent;
 use App\Application\EventSubscriber\Events;
 use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
@@ -37,15 +37,23 @@ class EntityEventDispatcherTest extends TestCase
 
     public function testOnResetPasswordTokenCreate(): void
     {
-        $this->eventDispatcher
-            ->expects($this->once())
-            ->method('dispatch')
-            ->with(
-                $this->isInstanceOf(EntityPostFlushGenericEvent::class),
-                Events::ENTITY_POST_PERSIST_FLUSH
-            );
+        $dispatchedEvents = [];
 
-        $this->entityEventDispatcher->onPostPersistFlush(new class ( ) {});
+        $this->eventDispatcher
+            ->expects($this->exactly(2))
+            ->method('dispatch')
+            ->willReturnCallback(static function (object $event, string $eventName) use (&$dispatchedEvents): object {
+                $dispatchedEvents[] = [$event, $eventName];
+
+                return $event;
+            });
+
+        $this->entityEventDispatcher->onCreate(new class {});
         $this->asyncService->call();
+
+        $this->assertCount(2, $dispatchedEvents);
+
+        $this->assertSame(Events::ENTITY_CREATE, $dispatchedEvents[0][1]);
+        $this->assertSame(Events::ENTITY_CREATE_ASYNC, $dispatchedEvents[1][1]);
     }
 }

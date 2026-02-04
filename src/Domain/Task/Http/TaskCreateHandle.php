@@ -12,12 +12,10 @@
 
 namespace App\Domain\Task\Http;
 
+use App\Application\EventDispatcher\RequestFlashEventDispatcher;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
@@ -45,7 +43,8 @@ readonly class TaskCreateHandle
         private TaskFormFactory $taskFormFactory,
         private TaskDeadlineFacade $taskDeadlineFacade,
         private HashidsServiceInterface $hashidsService,
-        private CommandBusInterface $commandBus
+        private CommandBusInterface $commandBus,
+        private RequestFlashEventDispatcher $requestFlashEventDispatcher
     ) {}
 
     public function __invoke(Request $request, Work $work): Response
@@ -77,15 +76,12 @@ readonly class TaskCreateHandle
                 $command = CreateTaskCommand::create($taskModel);
                 $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-
                 return $this->requestService->redirectToRoute('work_detail', [
                     'id' => $this->hashidsService->encode($work->getId())
                 ]);
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            $this->requestFlashEventDispatcher->onCreateFailure();
         }
 
         if ($request->isXmlHttpRequest()) {

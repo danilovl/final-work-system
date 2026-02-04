@@ -12,9 +12,13 @@
 
 namespace App\Application\EventDispatcher;
 
-use App\Application\EventDispatcher\GenericEvent\EntityPostFlushGenericEvent;
-use App\Application\EventSubscriber\Events;
 use Danilovl\AsyncBundle\Service\AsyncService;
+use App\Application\EventDispatcher\GenericEvent\{
+    EntityCreateEvent,
+    EntityRemoveEvent,
+    EntitySaveEvent
+};
+use App\Application\EventSubscriber\Events;
 use App\Infrastructure\Service\EventDispatcherService;
 
 readonly class EntityEventDispatcher
@@ -24,12 +28,23 @@ readonly class EntityEventDispatcher
         private AsyncService $asyncService
     ) {}
 
-    public function onPostPersistFlush(object $object): void
+    public function onCreate(object $entity): void
     {
-        $genericEvent = new EntityPostFlushGenericEvent($object);
+        $event = new EntityCreateEvent($entity);
+        $this->eventDispatcher->dispatch($event, Events::ENTITY_CREATE);
 
-        $this->asyncService->add(function () use ($genericEvent): void {
-            $this->eventDispatcher->dispatch($genericEvent, Events::ENTITY_POST_PERSIST_FLUSH);
+        $this->asyncService->add(function () use ($event): void {
+            $this->eventDispatcher->dispatch($event, Events::ENTITY_CREATE_ASYNC);
         });
+    }
+
+    public function onRemove(): void
+    {
+        $this->eventDispatcher->dispatch(new EntityRemoveEvent, Events::ENTITY_REMOVE);
+    }
+
+    public function onSave(): void
+    {
+        $this->eventDispatcher->dispatch(new EntitySaveEvent, Events::ENTITY_SAVE);
     }
 }

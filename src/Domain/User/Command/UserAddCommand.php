@@ -187,12 +187,12 @@ class UserAddCommand
         ?string $lastName,
         ?string $roles
     ): bool {
-        return $username !== null &&
-            $password !== null &&
-            $email !== null &&
-            $firstName !== null &&
-            $lastName !== null &&
-            $roles !== null;
+        return $username !== null && 
+               $password !== null && 
+               $email !== null && 
+               $firstName !== null && 
+               $lastName !== null && 
+               $roles !== null;
     }
 
 }

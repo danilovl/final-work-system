@@ -12,7 +12,7 @@
 
 namespace App\Application\EventDispatcher\GenericEvent;
 
-readonly class EntityPostFlushGenericEvent
+readonly class EntityCreateEvent
 {
     public function __construct(public object $object) {}
 }
