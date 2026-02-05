@@ -19,40 +19,16 @@ parameters:
 			path: src/Application/Helper/AttributeHelper.php
 
 		-
-			message: '#^Call to an undefined method Predis\\ClientInterface\:\:flushDB\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Application/Redis/Provider/RedisCache.php
-
-		-
-			message: '#^Call to an undefined method Predis\\ClientInterface\:\:pipeline\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Application/Redis/Provider/RedisCache.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between Predis\\Response\\Status and true will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Application/Redis/Provider/RedisCache.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between Predis\\Response\\Status\|null and true will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/Application/Redis/Provider/RedisCache.php
-
-		-
-			message: '#^Parameter \#1 \$entityName of method Doctrine\\ORM\\EntityManagerInterface\:\:getReference\(\) expects class\-string\<object\>, string given\.$#'
+			message: '#^Parameter \#1 \$entity of method App\\Application\\Mapper\\ObjectToDtoMapper\:\:map\(\) expects object, mixed given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Application/Service/EntityManagerService.php
+			path: src/Application/Mapper/ObjectToDtoMapper.php
 
 		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\ORM\\EntityManagerInterface\:\:getReference\(\)$#'
-			identifier: argument.templateType
+			message: '#^Parameter \#1 \$objectOrClass of class ReflectionClass constructor expects class\-string\<T of object\>\|T of object, string given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Application/Service/EntityManagerService.php
+			path: src/Application/Mapper/ObjectToDtoMapper.php
 
 		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<App\\Domain\\User\\Entity\\User\> and ''App\\\\Domain\\\\User\\\\Entity\\\\User'' will always evaluate to true\.$#'
@@ -107,6 +83,12 @@ parameters:
 			identifier: staticMethod.alreadyNarrowedType
 			count: 2
 			path: src/Domain/Conversation/Repository/Elastica/ElasticaConversationRepository.php
+
+		-
+			message: '#^Parameter \#1 \$data of class Symfony\\Component\\HttpFoundation\\ServerEvent constructor expects iterable\<string\>\|string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/Conversation/Service/ConversationStreamService.php
 
 		-
 			message: '#^Property App\\Domain\\Conversation\\Service\\ConversationStreamService\:\:\$date \(DateTimeImmutable\|null\) is never assigned null so it can be removed from the property type\.$#'
@@ -175,6 +157,12 @@ parameters:
 			path: src/Domain/Event/Facade/EventCalendarFacade.php
 
 		-
+			message: '#^Method App\\Domain\\Event\\Http\\Api\\EventCreateHandle\:\:__invoke\(\) should return App\\Domain\\Event\\DTO\\Api\\EventDTO but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Domain/Event/Http/Api/EventCreateHandle.php
+
+		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allInteger\(\) with array\<int\> will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
@@ -223,6 +211,84 @@ parameters:
 			path: src/Domain/Task/Repository/TaskRepository.php
 
 		-
+			message: '#^Parameter \#1 \$email of method App\\Domain\\User\\Entity\\User\:\:setEmail\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#1 \$emailCanonical of method App\\Domain\\User\\Entity\\User\:\:setEmailCanonical\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#1 \$firstname of method App\\Domain\\User\\Entity\\User\:\:setFirstname\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#1 \$lastname of method App\\Domain\\User\\Entity\\User\:\:setLastname\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#1 \$username of method App\\Domain\\User\\Command\\UserAddCommand\:\:validateUserData\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#1 \$username of method App\\Domain\\User\\Entity\\User\:\:setUsername\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#2 \$plainPassword of method App\\Domain\\User\\Command\\UserAddCommand\:\:validateUserData\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#2 \$plainPassword of method Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface\:\:hashPassword\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#3 \$email of method App\\Domain\\User\\Command\\UserAddCommand\:\:validateUserData\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#4 \$firstName of method App\\Domain\\User\\Command\\UserAddCommand\:\:validateUserData\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#5 \$lastName of method App\\Domain\\User\\Command\\UserAddCommand\:\:validateUserData\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserAddCommand.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/User/Command/UserDeleteCommand.php
+
+		-
 			message: '#^Negated boolean expression is always true\.$#'
 			identifier: booleanNot.alwaysTrue
 			count: 3
@@ -245,6 +311,12 @@ parameters:
 			identifier: staticMethod.alreadyNarrowedType
 			count: 2
 			path: src/Domain/Widget/Service/WidgetManagerService.php
+
+		-
+			message: '#^Parameter \#1 \$data of class Symfony\\Component\\HttpFoundation\\ServerEvent constructor expects iterable\<string\>\|string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Domain/Widget/Service/WidgetStreamService.php
 
 		-
 			message: '#^While loop condition is always true\.$#'
@@ -313,16 +385,34 @@ parameters:
 			path: src/Domain/Work/Service/WorkService.php
 
 		-
-			message: '#^Parameter \#1 \$entityName of method App\\Application\\Service\\EntityManagerService\:\:getRepository\(\) expects class\-string\<object\>, string given\.$#'
+			message: '#^Parameter \#1 \$sql of method Doctrine\\DBAL\\Connection\:\:prepare\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
-			path: tests/Kernel/Application/Service/EntityManagerServiceTest.php
+			path: src/Infrastructure/Console/ImportSqlCommand.php
 
 		-
-			message: '#^Unable to resolve the template type T in call to method App\\Application\\Service\\EntityManagerService\:\:getRepository\(\)$#'
+			message: '#^Parameter \#1 \$entityName of method Doctrine\\ORM\\EntityManagerInterface\:\:getReference\(\) expects class\-string\<object\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Infrastructure/Service/EntityManagerService.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\ORM\\EntityManagerInterface\:\:getReference\(\)$#'
 			identifier: argument.templateType
 			count: 1
-			path: tests/Kernel/Application/Service/EntityManagerServiceTest.php
+			path: src/Infrastructure/Service/EntityManagerService.php
+
+		-
+			message: '#^Parameter \#1 \$entityName of method App\\Infrastructure\\Service\\EntityManagerService\:\:getRepository\(\) expects class\-string\<object\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Kernel/Infrastructure/Service/EntityManagerServiceTest.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method App\\Infrastructure\\Service\\EntityManagerService\:\:getRepository\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: tests/Kernel/Infrastructure/Service/EntityManagerServiceTest.php
 
 		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:allIsInstanceOf\(\) with array\<Elastica\\Result\> and ''Elastica\\\\Result'' will always evaluate to true\.$#'
@@ -341,4 +431,3 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: tests/Unit/Application/Helper/CloneHelperTest.php
-

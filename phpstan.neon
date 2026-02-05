@@ -13,10 +13,8 @@ parameters:
         - src
         - tests
     excludePaths:
-        - src/Application/Doctrine/DBAL
-        - src/Application/Command
-        - src/Application/OpenTelemetry
-        - src/Domain/User/Command/
+        - src/Infrastructure/Persistence/Doctrine/DBAL
+        - src/Infrastructure/OpenTelemetry
         - tests/bootstrap.php
     ignoreErrors:
        -
