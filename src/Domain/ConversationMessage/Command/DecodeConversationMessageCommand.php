@@ -22,9 +22,7 @@ class DecodeConversationMessageCommand
 {
     final public const string COMMAND_NAME = 'app:html-decode-conversation-message';
 
-    public function __construct(private readonly EntityManagerService $entityManagerService)
-    {
-    }
+    public function __construct(private readonly EntityManagerService $entityManagerService) {}
 
     public function __invoke(SymfonyStyle $io): int
     {

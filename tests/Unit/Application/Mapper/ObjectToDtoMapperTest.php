@@ -31,7 +31,7 @@ class ObjectToDtoMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->mapper = new ObjectToDtoMapper();
+        $this->mapper = new ObjectToDtoMapper;
     }
 
     #[DataProvider('provideBasicMappingTestCases')]

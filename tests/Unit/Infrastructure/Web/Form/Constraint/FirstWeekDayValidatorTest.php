@@ -12,10 +12,6 @@
 
 namespace App\Tests\Unit\Infrastructure\Web\Form\Constraint;
 
-use App\Application\Form\Constraint\{
-    App\Infrastructure\Web\Form\Constraint\FirstWeekDay,
-    App\Infrastructure\Web\Form\Constraint\FirstWeekDayValidator
-};
 use App\Infrastructure\Service\TranslatorService;
 use DateTime;
 use Generator;

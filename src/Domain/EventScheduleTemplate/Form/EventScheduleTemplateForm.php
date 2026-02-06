@@ -84,11 +84,11 @@ class EventScheduleTemplateForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                    'data_class' => EventScheduleTemplate::class,
-                    'constraints' => [
-                        new EventScheduleTemplateTime
-                    ]
+                'data_class' => EventScheduleTemplate::class,
+                'constraints' => [
+                    new EventScheduleTemplateTime
                 ]
+            ]
             )
             ->setRequired([
                 'addresses'

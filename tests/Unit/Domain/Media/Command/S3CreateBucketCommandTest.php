@@ -71,7 +71,7 @@ class S3CreateBucketCommandTest extends TestCase
             ->with('testFolder1');
 
         $input = new ArrayInput([]);
-        $output = new BufferedOutput();
+        $output = new BufferedOutput;
         $io = new SymfonyStyle($input, $output);
 
         $status = ($this->s3CreateBucketCommand)($io);

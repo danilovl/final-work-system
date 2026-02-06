@@ -13,7 +13,6 @@
 namespace App\Tests\Unit\Application\EventDispatcher;
 
 use App\Application\EventDispatcher\EntityEventDispatcher;
-use App\Application\EventDispatcher\GenericEvent\EntityCreateEvent;
 use App\Application\EventSubscriber\Events;
 use App\Infrastructure\Service\EventDispatcherService;
 use Danilovl\AsyncBundle\Service\AsyncService;
@@ -48,7 +47,7 @@ class EntityEventDispatcherTest extends TestCase
                 return $event;
             });
 
-        $this->entityEventDispatcher->onCreate(new class {});
+        $this->entityEventDispatcher->onCreate(new class() {});
         $this->asyncService->call();
 
         $this->assertCount(2, $dispatchedEvents);

@@ -16,10 +16,6 @@ use App\Application\Constant\{
     AjaxJsonTypeConstant,
     FlashTypeConstant
 };
-use App\Application\Service\{
-    App\Infrastructure\Service\RequestService,
-    App\Infrastructure\Service\TranslatorService
-};
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

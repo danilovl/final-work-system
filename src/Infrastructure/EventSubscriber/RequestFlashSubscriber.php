@@ -68,5 +68,3 @@ readonly class RequestFlashSubscriber implements EventSubscriberInterface
         $this->requestService->addFlashTransAutoType(FlashTypeConstant::DELETE_ERROR);
     }
 }
-
-

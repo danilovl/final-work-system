@@ -17,15 +17,12 @@ enum FlashTypeConstant: string
     case SUCCESS = 'success';
     case WARNING = 'warning';
     case ERROR = 'error';
-
     case CREATE_SUCCESS = 'create.success';
     case CREATE_WARNING = 'create.warning';
     case CREATE_ERROR = 'create.error';
-
     case SAVE_SUCCESS = 'save.success';
     case SAVE_WARNING = 'save.warning';
     case SAVE_ERROR = 'save.failure';
-
     case DELETE_SUCCESS = 'delete.success';
     case DELETE_WARNING = 'delete.warning';
     case DELETE_ERROR = 'delete.error';

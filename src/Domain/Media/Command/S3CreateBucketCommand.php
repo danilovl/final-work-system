@@ -40,6 +40,7 @@ class S3CreateBucketCommand
             $doesBucketExist = $this->s3ClientService->doesBucketExist($folder);
             if ($doesBucketExist) {
                 $io->info(sprintf('Bucket "%s" already exists, skipping', $folder));
+
                 continue;
             }
 

@@ -194,5 +194,4 @@ class UserAddCommand
                $lastName !== null && 
                $roles !== null;
     }
-
 }
