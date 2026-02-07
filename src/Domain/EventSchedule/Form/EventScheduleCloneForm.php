@@ -40,10 +40,9 @@ class EventScheduleCloneForm extends AbstractType
     #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver
-            ->setDefaults([
-                'data_class' => EventScheduleCloneModel::class
-            ]);
+        $resolver->setDefaults([
+            'data_class' => EventScheduleCloneModel::class
+        ]);
     }
 
     #[Override]

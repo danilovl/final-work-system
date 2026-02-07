@@ -14,10 +14,7 @@ namespace App\Domain\Task\Http;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\EditTask\EditTaskCommand;
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
@@ -62,21 +59,15 @@ readonly class TaskEditHandle
             'work' => $work
         ]);
 
-        $form = $this->taskFormFactory->getTaskForm($taskFormFactoryData)
+        $form = $this->taskFormFactory
+            ->getTaskForm($taskFormFactoryData)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = EditTaskCommand::create($taskModel, $task);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditTaskCommand::create($taskModel, $task);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('task_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('task_list');
         }
 
         if ($request->isXmlHttpRequest()) {

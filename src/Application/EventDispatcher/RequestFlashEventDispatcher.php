@@ -25,12 +25,12 @@ readonly class RequestFlashEventDispatcher
         $this->eventDispatcher->dispatch(new stdClass, Events::REQUEST_FLASH_CREATE_FAILURE);
     }
 
-    public function onRemoveFailure(): void
+    public function onSaveFailure(): void
     {
         $this->eventDispatcher->dispatch(new stdClass, Events::REQUEST_FLASH_SAVE_FAILURE);
     }
 
-    public function onSaveFailure(): void
+    public function onRemoveFailure(): void
     {
         $this->eventDispatcher->dispatch(new stdClass, Events::REQUEST_FLASH_DELETE_FAILURE);
     }

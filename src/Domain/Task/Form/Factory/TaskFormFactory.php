@@ -12,7 +12,10 @@
 
 namespace App\Domain\Task\Form\Factory;
 
-use App\Application\Constant\ControllerMethodConstant;
+use App\Application\Constant\{
+    ControllerMethodConstant,
+    FormOperationTypeConstant
+};
 use App\Application\Exception\{
     ConstantNotFoundException,
     RuntimeException
@@ -99,7 +102,14 @@ class TaskFormFactory
                 throw new ConstantNotFoundException('Controller method type constant not found');
         }
 
+        $operationType = match ($taskFormFactoryData->type) {
+            ControllerMethodConstant::EDIT => FormOperationTypeConstant::EDIT,
+            ControllerMethodConstant::CREATE, ControllerMethodConstant::CREATE_SEVERAL => FormOperationTypeConstant::CREATE,
+            default => null
+        };
+
         $options = array_merge($options, $typeOptions);
+        $options['operationType'] = $operationType;
 
         return $this->formFactory->create($formTypeClass, $taskModel, $options);
     }

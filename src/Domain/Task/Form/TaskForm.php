@@ -12,7 +12,10 @@
 
 namespace App\Domain\Task\Form;
 
-use App\Application\Constant\DateFormatConstant;
+use App\Application\Constant\{
+    DateFormatConstant,
+    FormOperationTypeConstant
+};
 use App\Domain\Task\Model\TaskModel;
 use Override;
 use Symfony\Component\Form\{
@@ -40,7 +43,8 @@ class TaskForm extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('description', TextareaType::class, [
                 'required' => false
@@ -65,9 +69,14 @@ class TaskForm extends AbstractType
     #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => TaskModel::class
-        ]);
+        $resolver
+            ->setDefaults([
+                'data_class' => TaskModel::class
+            ])
+            ->setRequired([
+                'operationType'
+            ])
+            ->setAllowedTypes('operationType', FormOperationTypeConstant::class);
     }
 
     #[Override]

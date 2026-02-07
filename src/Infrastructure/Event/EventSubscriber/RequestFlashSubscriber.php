@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Infrastructure\EventSubscriber;
+namespace App\Infrastructure\Event\EventSubscriber;
 
 use App\Application\Constant\FlashTypeConstant;
 use App\Application\EventSubscriber\Events;
