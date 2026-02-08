@@ -51,7 +51,7 @@ class ValidationListenerExtension extends AbstractTypeExtension
         }
 
         /** @var FormOperationTypeConstant|null $operationType */
-        $operationType = $form->getConfig()->getOption('operationType');
+        $operationType = $form->getConfig()->getOption(FormOperationTypeConstant::OPTION_KEY);
         if (!$operationType instanceof FormOperationTypeConstant) {
             return;
         }

@@ -109,7 +109,7 @@ class TaskFormFactory
         };
 
         $options = array_merge($options, $typeOptions);
-        $options['operationType'] = $operationType;
+        $options[FormOperationTypeConstant::OPTION_KEY] = $operationType;
 
         return $this->formFactory->create($formTypeClass, $taskModel, $options);
     }

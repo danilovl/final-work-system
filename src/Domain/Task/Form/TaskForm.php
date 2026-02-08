@@ -71,12 +71,13 @@ class TaskForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => TaskModel::class
+                'data_class' => TaskModel::class,
+                 FormOperationTypeConstant::OPTION_KEY => FormOperationTypeConstant::CREATE
             ])
             ->setRequired([
-                'operationType'
+                FormOperationTypeConstant::OPTION_KEY
             ])
-            ->setAllowedTypes('operationType', FormOperationTypeConstant::class);
+            ->setAllowedTypes(FormOperationTypeConstant::OPTION_KEY, FormOperationTypeConstant::class);
     }
 
     #[Override]

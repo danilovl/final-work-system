@@ -14,6 +14,8 @@ namespace App\Application\Constant;
 
 enum FormOperationTypeConstant: string
 {
+    const string OPTION_KEY = 'operationType';
+
     case CREATE = 'create';
     case EDIT = 'edit';
     case DELETE = 'delete';
