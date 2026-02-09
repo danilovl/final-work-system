@@ -34,7 +34,8 @@ class WorkCategoryForm extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('sorting', TextType::class, [
                 'required' => false

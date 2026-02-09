@@ -39,7 +39,8 @@ class CommentForm extends AbstractType
             'required' => true,
             'constraints' => [
                 new NotBlank
-            ]
+            ],
+            'empty_data' => ''
         ]);
 
         $user = $options['user'];

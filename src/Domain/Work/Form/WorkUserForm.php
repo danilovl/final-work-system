@@ -40,13 +40,15 @@ class WorkUserForm extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('lastName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('degreeAfter', TextType::class, [
                 'required' => false
@@ -59,7 +61,8 @@ class WorkUserForm extends AbstractType
                 'constraints' => [
                     new NotBlank,
                     new Email
-                ]
+                ],
+                'empty_data' => ''
             ]);
     }
 

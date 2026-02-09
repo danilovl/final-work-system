@@ -41,7 +41,8 @@ class ConversationMessageForm extends AbstractType
             'data' => $user->getMessageHeaderFooter(),
             'constraints' => [
                 new NotBlank
-            ]
+            ],
+            'empty_data' => ''
         ]);
     }
 

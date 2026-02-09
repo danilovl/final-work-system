@@ -62,7 +62,8 @@ class WorkForm extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('shortcut', TextType::class, [
                 'required' => false

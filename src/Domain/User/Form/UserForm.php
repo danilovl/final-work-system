@@ -43,13 +43,15 @@ class UserForm extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('lastName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('degreeAfter', TextType::class, [
                 'required' => false
@@ -62,13 +64,15 @@ class UserForm extends AbstractType
                 'constraints' => [
                     new NotBlank,
                     new Email
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('username', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('role', UserRoleType::class, [
                 'required' => true,

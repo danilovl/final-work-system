@@ -82,7 +82,7 @@ class EventForm extends AbstractType
                 'html5' => false,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
             ])
             ->add('end', DateType::class, [
                 'widget' => 'single_text',

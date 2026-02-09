@@ -67,7 +67,8 @@ class ConversationComposeMessageForm extends AbstractType
                 'data' => $user->getMessageHeaderFooter(),
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ]);
 
         if (!UserRoleHelper::isSupervisor($user)) {

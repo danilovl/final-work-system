@@ -39,7 +39,8 @@ class EventAddressForm extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('description', TextareaType::class, [
                 'required' => false
