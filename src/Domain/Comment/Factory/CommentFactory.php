@@ -25,7 +25,11 @@ class CommentFactory extends BaseModelFactory
         $comment ??= new Comment;
         $comment = $this->fromModel($comment, $commentModel);
 
-        $this->entityManagerService->persistAndFlush($comment);
+        if ($comment->isNewObject()) {
+            $this->entityManagerService->persistAndFlush($comment);
+        } else {
+            $this->entityManagerService->flush();
+        }
 
         return $comment;
     }
