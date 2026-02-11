@@ -22,6 +22,8 @@ use Symfony\Component\Form\{
     FormBuilderInterface
 };
 use App\Application\EventDispatcher\RequestFlashEventDispatcher;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ValidationListenerExtension extends AbstractTypeExtension
 {
@@ -30,7 +32,18 @@ class ValidationListenerExtension extends AbstractTypeExtension
     #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::POST_SET_DATA, $this->onPostSubmit(...));
+        if ($builder->getDataClass() === null) {
+            return;
+        }
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, $this->onPostSubmit(...), -100);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefined(FormOperationTypeConstant::OPTION_KEY);
+        $resolver->setDefault(FormOperationTypeConstant::OPTION_KEY, null);
+        $resolver->setAllowedTypes(FormOperationTypeConstant::OPTION_KEY, [FormOperationTypeConstant::class, 'null']);
     }
 
     #[Override]
@@ -42,17 +55,26 @@ class ValidationListenerExtension extends AbstractTypeExtension
     private function onPostSubmit(FormEvent $event): void
     {
         $form = $event->getForm();
-        if ($form->getParent() !== null || !$form->isSubmitted()) {
-            return;
-        }
-
-        if ($form->isValid()) {
+        if (!$form->isSubmitted() || $form->isValid()) {
             return;
         }
 
         /** @var FormOperationTypeConstant|null $operationType */
         $operationType = $form->getConfig()->getOption(FormOperationTypeConstant::OPTION_KEY);
+
         if (!$operationType instanceof FormOperationTypeConstant) {
+            $object = $form->getData();
+
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+            if ($propertyAccessor->isReadable($object, 'id') === false) {
+                return;
+            }
+
+            $id = $propertyAccessor->getValue($object, 'id');
+            $operationType = $id === null ? FormOperationTypeConstant::CREATE : FormOperationTypeConstant::EDIT;
+        }
+
+        if ($operationType === null) {
             return;
         }
 

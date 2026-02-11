@@ -26,6 +26,8 @@ class TaskModel
 {
     use ActiveTrait;
 
+    public ?int $id = null;
+
     public string $name;
 
     public ?string $description = null;
@@ -51,6 +53,7 @@ class TaskModel
     public static function fromTask(Task $task): self
     {
         $model = new self;
+        $model->id = $task->getId();
         $model->name = $task->getName();
         $model->description = $task->getDescription();
         $model->complete = $task->isComplete();

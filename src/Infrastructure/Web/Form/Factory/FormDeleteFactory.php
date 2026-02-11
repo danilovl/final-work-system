@@ -12,6 +12,7 @@
 
 namespace App\Infrastructure\Web\Form\Factory;
 
+use App\Application\Constant\FormOperationTypeConstant;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Form\{
@@ -35,10 +36,15 @@ readonly class FormDeleteFactory
             throw new RuntimeException(sprintf('Object "%s" does not contains method getId.', $entity::class));
         }
 
-        return $this->formFactory->createBuilder()
-            ->setAction($this->router->generate($route, [
-                'id' => $this->hashidsService->encode($entity->getId())
-            ]))
+        $action = $this->router->generate($route, [
+            'id' => $this->hashidsService->encode($entity->getId())
+        ]);
+
+        return $this->formFactory
+            ->createBuilder(options: [
+                FormOperationTypeConstant::OPTION_KEY => FormOperationTypeConstant::DELETE
+            ])
+            ->setAction($action)
             ->setMethod(Request::METHOD_POST)
             ->getForm();
     }

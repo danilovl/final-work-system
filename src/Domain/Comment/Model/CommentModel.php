@@ -21,15 +21,17 @@ class CommentModel
     public function __construct(
         public User $owner,
         public Event $event,
-        public string $content = ''
+        public string $content = '',
+        public ?int $id = null
     ) {}
 
     public static function fromComment(Comment $comment): self
     {
         return new self(
-            $comment->getOwner(),
-            $comment->getEvent(),
-            $comment->getContent()
+            owner: $comment->getOwner(),
+            event: $comment->getEvent(),
+            content: $comment->getContent(),
+            id: $comment->getId()
         );
     }
 }

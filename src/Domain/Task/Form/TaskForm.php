@@ -12,10 +12,7 @@
 
 namespace App\Domain\Task\Form;
 
-use App\Application\Constant\{
-    DateFormatConstant,
-    FormOperationTypeConstant
-};
+use App\Application\Constant\DateFormatConstant;
 use App\Domain\Task\Model\TaskModel;
 use Override;
 use Symfony\Component\Form\{
@@ -69,15 +66,9 @@ class TaskForm extends AbstractType
     #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver
-            ->setDefaults([
-                'data_class' => TaskModel::class,
-                 FormOperationTypeConstant::OPTION_KEY => FormOperationTypeConstant::CREATE
-            ])
-            ->setRequired([
-                FormOperationTypeConstant::OPTION_KEY
-            ])
-            ->setAllowedTypes(FormOperationTypeConstant::OPTION_KEY, FormOperationTypeConstant::class);
+        $resolver->setDefaults([
+            'data_class' => TaskModel::class
+        ]);
     }
 
     #[Override]

@@ -12,7 +12,6 @@
 
 namespace App\Domain\Task\Http;
 
-use App\Application\EventDispatcher\RequestFlashEventDispatcher;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
 use App\Application\Constant\ControllerMethodConstant;
@@ -43,8 +42,7 @@ readonly class TaskCreateHandle
         private TaskFormFactory $taskFormFactory,
         private TaskDeadlineFacade $taskDeadlineFacade,
         private HashidsServiceInterface $hashidsService,
-        private CommandBusInterface $commandBus,
-        private RequestFlashEventDispatcher $requestFlashEventDispatcher
+        private CommandBusInterface $commandBus
     ) {}
 
     public function __invoke(Request $request, Work $work): Response
@@ -71,17 +69,13 @@ readonly class TaskCreateHandle
             ->getTaskForm($taskFormFactoryData)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = CreateTaskCommand::create($taskModel);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = CreateTaskCommand::create($taskModel);
+            $this->commandBus->dispatch($command);
 
-                return $this->requestService->redirectToRoute('work_detail', [
-                    'id' => $this->hashidsService->encode($work->getId())
-                ]);
-            }
-
-            $this->requestFlashEventDispatcher->onCreateFailure();
+            return $this->requestService->redirectToRoute('work_detail', [
+                'id' => $this->hashidsService->encode($work->getId())
+            ]);
         }
 
         if ($request->isXmlHttpRequest()) {

@@ -12,10 +12,8 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
-    RequestService,
     SeoPageService,
     TwigRenderService
 };
@@ -36,7 +34,6 @@ use Symfony\Component\HttpFoundation\{
 readonly class EventDetailHandle
 {
     public function __construct(
-        private RequestService $requestService,
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private CommentFacade $commentFacade,
@@ -53,7 +50,7 @@ readonly class EventDetailHandle
         $eventCommentExist = $this->commentFacade
             ->getCommentByOwnerEvent($user, $event);
 
-        $eventCommentModel = new CommentModel($user, $event);
+        $eventCommentModel = new CommentModel(owner: $user, event: $event);
 
         if ($eventCommentExist !== null) {
             $eventCommentModel = CommentModel::fromComment($eventCommentExist);
@@ -69,8 +66,6 @@ readonly class EventDetailHandle
         if ($form->isSubmitted() && $form->isValid()) {
             $command = CreateCommentCommand::create($eventCommentModel, $eventCommentExist);
             $this->commandBus->dispatch($command);
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
         }
 
         $eventAddressSkype = $this->eventAddressFacade
