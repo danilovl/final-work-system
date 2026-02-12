@@ -26,6 +26,8 @@ class ConversationMessageModel
     use ContentAwareTrait;
     use OwnerAwareTrait;
 
+    public ?int $id = null;
+
     public Conversation $conversation;
 
     public Collection $statuses;
@@ -38,6 +40,7 @@ class ConversationMessageModel
     public static function fromConversationMessage(ConversationMessage $conversationMessage): self
     {
         $model = new self;
+        $model->id = $conversationMessage->getId();
         $model->conversation = $conversationMessage->getConversation();
         $model->content = $conversationMessage->getContent();
         $model->owner = $conversationMessage->getOwner();

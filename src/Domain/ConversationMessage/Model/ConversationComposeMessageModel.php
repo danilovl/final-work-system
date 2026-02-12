@@ -14,6 +14,8 @@ namespace App\Domain\ConversationMessage\Model;
 
 class ConversationComposeMessageModel
 {
+    public ?int $id = null;
+
     public ?string $name = null;
 
     public array $conversation = [];

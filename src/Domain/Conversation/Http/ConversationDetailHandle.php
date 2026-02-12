@@ -12,13 +12,11 @@
 
 namespace App\Domain\Conversation\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Application\Model\SearchModel;
 use App\Infrastructure\Service\{
     PaginatorService,
-    RequestService,
     SeoPageService,
     TwigRenderService
 };
@@ -44,7 +42,6 @@ use Symfony\Component\HttpFoundation\{
 readonly class ConversationDetailHandle
 {
     public function __construct(
-        private RequestService $requestService,
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private ConversationMessageFacade $conversationMessageFacade,
@@ -91,18 +88,11 @@ readonly class ConversationDetailHandle
                 ->handleRequest($request);
         }
 
-        if ($form !== null && $form->isSubmitted()) {
-            if ($form->isValid()) {
-                $conversation->createUpdateAblePreUpdate();
+        if ($form !== null && $form->isSubmitted() && $form->isValid()) {
+            $conversation->createUpdateAblePreUpdate();
 
-                $command = CreateConversationMessageCommand::create($conversation, $conversationMessageModel, $user);
-                $this->commandBus->dispatch($command);
-
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-            } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
-            }
+            $command = CreateConversationMessageCommand::create($conversation, $conversationMessageModel, $user);
+            $this->commandBus->dispatch($command);
         }
 
         ConversationHelper::getConversationOpposite([$conversation], $user);
