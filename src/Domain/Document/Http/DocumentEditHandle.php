@@ -52,18 +52,11 @@ readonly class DocumentEditHandle
             ->getDocumentForm(ControllerMethodConstant::EDIT, $mediaModel, $media)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = EditDocumentCommand::create($mediaModel, $media);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditDocumentCommand::create($mediaModel, $media);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('document_edit', ['id' => $media->getId()]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            return $this->requestService->redirectToRoute('document_edit', ['id' => $media->getId()]);
         }
 
         if ($request->isXmlHttpRequest()) {
