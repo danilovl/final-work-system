@@ -51,18 +51,11 @@ readonly class DocumentCategoryEditHandle
         );
         $form = $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = EditDocumentCategoryCommand::create($mediaCategoryModel, $mediaCategory);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditDocumentCategoryCommand::create($mediaCategoryModel, $mediaCategory);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('document_category_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('document_category_list');
         }
 
         if ($request->isXmlHttpRequest()) {
