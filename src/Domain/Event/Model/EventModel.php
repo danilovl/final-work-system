@@ -21,6 +21,8 @@ use DateTime;
 
 class EventModel
 {
+    public ?int $id = null;
+
     public EventType $type;
 
     public ?string $name = null;
@@ -38,6 +40,7 @@ class EventModel
     public static function fromEvent(Event $event): self
     {
         $model = new self;
+        $model->id = $event->getId();
         $model->type = $event->getType();
         $model->name = $event->getName();
         $model->address = $event->getAddress();

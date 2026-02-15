@@ -33,9 +33,7 @@ readonly class EventSwitchToSkypeHandle
         $command = EventSwitchToSkypeCommand::create($event);
         $updatedEvent = $this->commandBus->dispatchResult($command);
 
-        if ($updatedEvent !== null) {
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-        } else {
+        if ($updatedEvent === null) {
             $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
             $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
         }

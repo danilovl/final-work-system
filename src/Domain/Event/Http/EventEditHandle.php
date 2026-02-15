@@ -12,7 +12,6 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     EntityManagerService,
@@ -66,24 +65,17 @@ readonly class EventEditHandle
             ])
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                if ($event->getParticipant() !== null) {
-                    $this->entityManagerService->remove($event->getParticipant());
-                }
-
-                $command = EditEventCommand::create($eventModel, $event);
-                $this->commandBus->dispatch($command);
-
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('event_detail', [
-                    'id' => $this->hashidsService->encode($event->getId())
-                ]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($event->getParticipant() !== null) {
+                $this->entityManagerService->remove($event->getParticipant());
             }
 
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            $command = EditEventCommand::create($eventModel, $event);
+            $this->commandBus->dispatch($command);
+
+            return $this->requestService->redirectToRoute('event_detail', [
+                'id' => $this->hashidsService->encode($event->getId())
+            ]);
         }
 
         if ($request->isXmlHttpRequest()) {

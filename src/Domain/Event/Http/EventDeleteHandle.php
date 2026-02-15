@@ -12,7 +12,6 @@
 
 namespace App\Domain\Event\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Event\Bus\Command\DeleteEvent\DeleteEventCommand;
@@ -44,13 +43,8 @@ readonly class EventDeleteHandle
                 $command = DeleteEventCommand::create($event);
                 $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
-
                 return $this->requestService->redirectToRoute('event_calendar_manage');
             }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
 
             return $this->requestService->redirectToRoute('event_detail', [
                 'id' => $this->hashidsService->encode($event->getId())
