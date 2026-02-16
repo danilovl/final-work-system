@@ -13,10 +13,7 @@
 namespace App\Domain\EventAddress\Http;
 
 use App\Domain\EventAddress\Entity\EventAddress;
-use App\Application\Constant\{
-    FlashTypeConstant,
-    ControllerMethodConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
@@ -61,8 +58,6 @@ readonly class EventAddressCreateHandle
             $command = CreateEventAddressCommand::create($eventAddressModel);
             /** @var EventAddress $eventAddress */
             $eventAddress = $this->commandBus->dispatchResult($command);
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
 
             return $this->requestService->redirectToRoute('event_address_detail', [
                 'id' => $this->hashidsService->encode($eventAddress->getId())

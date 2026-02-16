@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventAddress\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\EventAddress\Bus\Command\DeleteEventAddress\DeleteEventAddressCommand;
 use App\Domain\EventAddress\Entity\EventAddress;
@@ -37,18 +36,11 @@ readonly class EventAddressDeleteHandle
             ->createDeleteForm($eventAddress, 'event_address_delete')
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = DeleteEventAddressCommand::create($eventAddress);
-                $this->messageBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = DeleteEventAddressCommand::create($eventAddress);
+            $this->messageBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.success');
-
-                return $this->requestService->redirectToRoute('event_address_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
+            return $this->requestService->redirectToRoute('event_address_list');
         }
 
         return $this->requestService->redirectToRoute('event_address_list');
