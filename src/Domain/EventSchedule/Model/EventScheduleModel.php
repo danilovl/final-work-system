@@ -21,6 +21,8 @@ use Doctrine\Common\Collections\{
 
 class EventScheduleModel
 {
+    public ?int $id = null;
+
     public string $name;
 
     public ?string $description = null;
@@ -37,6 +39,7 @@ class EventScheduleModel
     public static function fromEventSchedule(EventSchedule $eventSchedule): self
     {
         $model = new self;
+        $model->id = $eventSchedule->getId();
         $model->name = $eventSchedule->getName();
         $model->description = $eventSchedule->getDescription();
         $model->owner = $eventSchedule->getOwner();

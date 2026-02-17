@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventSchedule\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\{
     RequestService,
     SeoPageService,
@@ -54,22 +53,15 @@ readonly class EventScheduleCloneHandle
             ->create(EventScheduleCloneForm::class, $eventScheduleCloneModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = CloneEventScheduleCommand::create(
-                    $user,
-                    $eventSchedule,
-                    $eventScheduleCloneModel
-                );
-                $this->messageBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = CloneEventScheduleCommand::create(
+                $user,
+                $eventSchedule,
+                $eventScheduleCloneModel
+            );
+            $this->messageBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-
-                return $this->requestService->redirectToRoute('event_schedule_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            return $this->requestService->redirectToRoute('event_schedule_list');
         }
 
         if ($request->isXmlHttpRequest()) {

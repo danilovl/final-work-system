@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventSchedule\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\EventSchedule\Command\DeleteEventSchedule\DeleteEventScheduleCommand;
 use App\Domain\EventSchedule\Entity\EventSchedule;
@@ -37,18 +36,11 @@ readonly class EventScheduleDeleteHandle
             ->createDeleteForm($eventSchedule, 'event_schedule_delete')
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = DeleteEventScheduleCommand::create($eventSchedule);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = DeleteEventScheduleCommand::create($eventSchedule);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
-
-                return $this->requestService->redirectToRoute('event_schedule_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
+            return $this->requestService->redirectToRoute('event_schedule_list');
         }
 
         return $this->requestService->redirectToRoute('event_schedule_list');

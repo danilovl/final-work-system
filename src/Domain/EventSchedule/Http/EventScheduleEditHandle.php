@@ -12,7 +12,6 @@
 
 namespace App\Domain\EventSchedule\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Infrastructure\Service\{
     RequestService,
     SeoPageService,
@@ -53,20 +52,12 @@ readonly class EventScheduleEditHandle
             ])
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $this->eventScheduleFactory
-                    ->flushFromModel($eventScheduleModel, $eventSchedule);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->eventScheduleFactory->flushFromModel($eventScheduleModel, $eventSchedule);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('event_schedule_detail', [
-                    'id' => $this->hashidsService->encode($eventSchedule->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('event_schedule_detail', [
+                'id' => $this->hashidsService->encode($eventSchedule->getId())
+            ]);
         }
 
         $this->seoPageService->setTitle($eventSchedule->getName());
