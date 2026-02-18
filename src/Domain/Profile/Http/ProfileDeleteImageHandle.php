@@ -35,8 +35,6 @@ readonly class ProfileDeleteImageHandle
         try {
             $command = ProfileDeleteImageCommand::create($user);
             $this->commandBus->dispatch($command);
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
         } catch (Exception) {
             $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
             $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.delete.error');

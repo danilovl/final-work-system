@@ -12,12 +12,8 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Infrastructure\Service\{
-    RequestService,
-    TwigRenderService
-};
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Profile\Bus\Command\ProfileChangePassword\ProfileChangePasswordCommand;
 use App\Domain\ResetPassword\Form\ProfileChangePasswordFormType;
 use App\Domain\User\Model\UserModel;
@@ -31,7 +27,6 @@ use Symfony\Component\HttpFoundation\{
 readonly class ProfileChangePasswordHandle
 {
     public function __construct(
-        private RequestService $requestService,
         private TwigRenderService $twigRenderService,
         private UserService $userService,
         private FormFactoryInterface $formFactory,
@@ -47,19 +42,12 @@ readonly class ProfileChangePasswordHandle
             ->create(ProfileChangePasswordFormType::class, $userModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                /** @var string $plainPassword */
-                $plainPassword = $form->get('plainPassword')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
 
-                $command = ProfileChangePasswordCommand::create($user, $plainPassword);
-                $this->commandBus->dispatch($command);
-
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-            } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
-            }
+            $command = ProfileChangePasswordCommand::create($user, $plainPassword);
+            $this->commandBus->dispatch($command);
         }
 
         return $this->twigRenderService->renderToResponse('domain/profile/change_password.html.twig', [

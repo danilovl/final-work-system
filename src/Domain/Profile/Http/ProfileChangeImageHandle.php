@@ -12,12 +12,8 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Infrastructure\Service\{
-    RequestService,
-    TwigRenderService
-};
+use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\Media\Model\MediaModel;
 use App\Domain\Profile\Bus\Command\ProfileChangeImage\ProfileChangeImageCommand;
 use App\Domain\Profile\Form\ProfileMediaForm;
@@ -31,7 +27,6 @@ use Symfony\Component\HttpFoundation\{
 readonly class ProfileChangeImageHandle
 {
     public function __construct(
-        private RequestService $requestService,
         private UserService $userService,
         private TwigRenderService $twigRenderService,
         private FormFactoryInterface $formFactory,
@@ -47,16 +42,9 @@ readonly class ProfileChangeImageHandle
             ->create(ProfileMediaForm::class, $mediaModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = ProfileChangeImageCommand::create($mediaModel, $user);
-                $this->commandBus->dispatch($command);
-
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-            } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = ProfileChangeImageCommand::create($mediaModel, $user);
+            $this->commandBus->dispatch($command);
         }
 
         return $this->twigRenderService->renderToResponse('domain/profile/edit_image.html.twig', [

@@ -12,7 +12,6 @@
 
 namespace App\Domain\Profile\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
@@ -47,23 +46,16 @@ readonly class ProfileEditHandle
             ->create(ProfileFormType::class, $userModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $refreshPage = $userModel->locale !== null && $userModel->locale !== $user->getLocale();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $refreshPage = $userModel->locale !== null && $userModel->locale !== $user->getLocale();
 
-                $command = EditProfileCommand::create($userModel, $user);
-                $this->commandBus->dispatch($command);
+            $command = EditProfileCommand::create($userModel, $user);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                if ($refreshPage) {
-                    return $this->requestService->redirectToRoute('profile_edit', [
-                        '_locale' => $user->getLocale()
-                    ]);
-                }
-            } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            if ($refreshPage) {
+                return $this->requestService->redirectToRoute('profile_edit', [
+                    '_locale' => $user->getLocale()
+                ]);
             }
         }
 
