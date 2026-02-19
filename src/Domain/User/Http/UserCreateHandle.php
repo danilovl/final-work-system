@@ -49,21 +49,14 @@ readonly class UserCreateHandle
             ->getUserForm(ControllerMethodConstant::CREATE, $userModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = CreateUserCommand::create($userModel);
-                /** @var User|null $user */
-                $user = $this->commandBus->dispatchResult($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = CreateUserCommand::create($userModel);
+            /** @var User|null $user */
+            $user = $this->commandBus->dispatchResult($command);
 
-                if ($user === null) {
-                    $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.user.create.error');
-                    $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.user.create.warning');
-                } else {
-                    $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.user.create.success');
-                }
-            } else {
-                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            if ($user === null) {
+                $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.user.create.error');
+                $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.user.create.warning');
             }
         }
 

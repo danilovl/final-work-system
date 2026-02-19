@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\Collection;
 
 class UserModel
 {
+    public ?int $id = null;
+
     public ?string $degreeBefore = null;
 
     public string $firstName;
@@ -62,6 +64,7 @@ class UserModel
     public static function fromUser(User $user): self
     {
         $model = new self;
+        $model->id = $user->getId();
         $model->degreeBefore = $user->getDegreeBefore();
         $model->firstName = $user->getFirstname();
         $model->lastName = $user->getLastname();

@@ -14,7 +14,6 @@ namespace App\Domain\User\Http;
 
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant,
     SeoPageConstant
 };
 use App\Application\Interfaces\Bus\CommandBusInterface;
@@ -54,20 +53,13 @@ readonly class UserEditHandle
             ->getUserForm(ControllerMethodConstant::EDIT, $userModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = EditUserCommand::create($userModel, $user);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditUserCommand::create($userModel, $user);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('user_edit', [
-                    'id' => $this->hashidsService->encode($user->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('user_edit', [
+                'id' => $this->hashidsService->encode($user->getId())
+            ]);
         }
 
         if ($request->isXmlHttpRequest()) {
