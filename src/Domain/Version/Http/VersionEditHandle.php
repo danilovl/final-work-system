@@ -64,22 +64,13 @@ readonly class VersionEditHandle
             )
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $user = $this->userService->getUser();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditVersionCommand::create($media, $mediaModel, $user);
+            $this->commandBus->dispatch($command);
 
-                $command = EditVersionCommand::create($media, $mediaModel, $user);
-                $this->commandBus->dispatch($command);
-
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('work_detail', [
-                    'id' => $this->hashidsService->encode($work->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            return $this->requestService->redirectToRoute('work_detail', [
+                'id' => $this->hashidsService->encode($work->getId())
+            ]);
         }
 
         if ($request->isXmlHttpRequest()) {

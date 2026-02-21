@@ -16,7 +16,6 @@ use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Version\Bus\Command\CreateVersion\CreateVersionCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant,
     SeoPageConstant
 };
 use App\Infrastructure\Service\{
@@ -69,20 +68,13 @@ readonly class VersionCreateHandle
             )
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = CreateVersionCommand::create($mediaModel);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = CreateVersionCommand::create($mediaModel);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-
-                return $this->requestService->redirectToRoute('work_detail', [
-                    'id' => $this->hashidsService->encode($work->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            return $this->requestService->redirectToRoute('work_detail', [
+                'id' => $this->hashidsService->encode($work->getId())
+            ]);
         }
 
         if ($request->isXmlHttpRequest()) {
