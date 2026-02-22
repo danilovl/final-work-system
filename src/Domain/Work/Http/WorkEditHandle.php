@@ -14,10 +14,7 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Work\Bus\Command\EditWork\EditWorkCommand;
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
@@ -58,20 +55,13 @@ readonly class WorkEditHandle
             ->getWorkForm($user, ControllerMethodConstant::EDIT, $workModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = EditWorkCommand::create($work, $workModel);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditWorkCommand::create($work, $workModel);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('work_edit', [
-                    'id' => $this->hashidsService->encode($work->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('work_edit', [
+                'id' => $this->hashidsService->encode($work->getId())
+            ]);
         }
 
         $workDeadLineService = $this->workDeadlineFacade;

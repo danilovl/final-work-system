@@ -14,10 +14,7 @@ namespace App\Domain\Work\Http;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Work\Bus\Command\EditAuthor\EditAuthorCommand;
-use App\Application\Constant\{
-    FlashTypeConstant,
-    SeoPageConstant
-};
+use App\Application\Constant\SeoPageConstant;
 use App\Infrastructure\Service\{
     RequestService,
     SeoPageService,
@@ -55,20 +52,13 @@ readonly class WorkEditAuthorHandle
             ->create(UserEditForm::class, $userModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = EditAuthorCommand::create($author, $userModel, $work);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = EditAuthorCommand::create($author, $userModel, $work);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('work_edit_author', [
-                    'id' => $this->hashidsService->encode($work->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('work_edit_author', [
+                'id' => $this->hashidsService->encode($work->getId())
+            ]);
         }
 
         $this->seoPageService->addTitle($work->getTitle(), SeoPageConstant::DASH_SEPARATOR->value);

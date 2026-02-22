@@ -15,10 +15,7 @@ namespace App\Domain\Work\Http;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Work\Bus\Command\CreateWork\CreateWorkCommand;
 use App\Domain\Work\Entity\Work;
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
@@ -60,21 +57,14 @@ readonly class WorkCreateHandle
             ->getWorkForm($user, ControllerMethodConstant::CREATE, $workModel)
             ->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = CreateWorkCommand::create($workModel);
-                /** @var Work $work */
-                $work = $this->commandBus->dispatchResult($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = CreateWorkCommand::create($workModel);
+            /** @var Work $work */
+            $work = $this->commandBus->dispatchResult($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-
-                return $this->requestService->redirectToRoute('work_detail', [
-                    'id' => $this->hashidsService->encode($work->getId())
-                ]);
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            return $this->requestService->redirectToRoute('work_detail', [
+                'id' => $this->hashidsService->encode($work->getId())
+            ]);
         }
 
         $workDeadLineService = $this->workDeadlineFacade;

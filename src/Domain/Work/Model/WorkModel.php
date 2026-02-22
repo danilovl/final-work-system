@@ -24,6 +24,8 @@ use Doctrine\Common\Collections\{
 
 class WorkModel
 {
+    public ?int $id = null;
+
     public string $title;
 
     public ?string $shortcut = null;
@@ -55,6 +57,7 @@ class WorkModel
     public static function fromWork(Work $work): self
     {
         $model = new self;
+        $model->id = $work->getId();
         $model->title = $work->getTitle();
         $model->shortcut = $work->getShortcut();
         $model->type = $work->getType();

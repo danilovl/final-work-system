@@ -12,7 +12,6 @@
 
 namespace App\Domain\Work\Http;
 
-use App\Application\Constant\FlashTypeConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Work\Bus\Command\DeleteWork\DeleteWorkCommand;
@@ -45,14 +44,10 @@ readonly class WorkDeleteHandle
                 $command = DeleteWorkCommand::create($work);
                 $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.delete.success');
-
                 return $this->requestService->redirectToRoute('work_list', [
                     'type' => WorkUserTypeConstant::SUPERVISOR->value
                 ]);
             }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.delete.error');
 
             return $this->requestService->redirectToRoute('work_detail', [
                 'id' => $this->hashidsService->encode($work->getId())
