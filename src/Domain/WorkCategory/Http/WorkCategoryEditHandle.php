@@ -12,10 +12,7 @@
 
 namespace App\Domain\WorkCategory\Http;
 
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
@@ -50,18 +47,10 @@ readonly class WorkCategoryEditHandle
         );
         $form = $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $this->workCategoryFactory
-                    ->flushFromModel($workCategoryModel, $workCategory);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->workCategoryFactory->flushFromModel($workCategoryModel, $workCategory);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.save.success');
-
-                return $this->requestService->redirectToRoute('work_category_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.save.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.save.error');
+            return $this->requestService->redirectToRoute('work_category_list');
         }
 
         if ($request->isXmlHttpRequest()) {

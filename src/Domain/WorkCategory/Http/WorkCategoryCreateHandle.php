@@ -12,10 +12,7 @@
 
 namespace App\Domain\WorkCategory\Http;
 
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Infrastructure\Service\{
     RequestService,
@@ -53,18 +50,11 @@ readonly class WorkCategoryCreateHandle
         );
         $form = $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $command = CreateWorkCategoryCommand::create($workCategoryModel);
-                $this->commandBus->dispatch($command);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = CreateWorkCategoryCommand::create($workCategoryModel);
+            $this->commandBus->dispatch($command);
 
-                $this->requestService->addFlashTrans(FlashTypeConstant::SUCCESS->value, 'app.flash.form.create.success');
-
-                return $this->requestService->redirectToRoute('work_category_list');
-            }
-
-            $this->requestService->addFlashTrans(FlashTypeConstant::WARNING->value, 'app.flash.form.create.warning');
-            $this->requestService->addFlashTrans(FlashTypeConstant::ERROR->value, 'app.flash.form.create.error');
+            return $this->requestService->redirectToRoute('work_category_list');
         }
 
         if ($request->isXmlHttpRequest()) {

@@ -21,6 +21,8 @@ use Doctrine\Common\Collections\{
 
 class WorkCategoryModel
 {
+    public ?int $id = null;
+
     public string $name;
 
     public ?string $description = null;
@@ -39,6 +41,7 @@ class WorkCategoryModel
     public static function fromMedia(WorkCategory $workCategory): self
     {
         $model = new self;
+        $model->id = $workCategory->getId();
         $model->name = $workCategory->getName();
         $model->description = $workCategory->getDescription();
         $model->sorting = $workCategory->getSorting();
