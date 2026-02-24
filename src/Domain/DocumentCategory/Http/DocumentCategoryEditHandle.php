@@ -14,10 +14,7 @@ namespace App\Domain\DocumentCategory\Http;
 
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\DocumentCategory\Bus\Command\EditDocumentCategory\EditDocumentCategoryCommand;
-use App\Application\Constant\{
-    ControllerMethodConstant,
-    FlashTypeConstant
-};
+use App\Application\Constant\ControllerMethodConstant;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,

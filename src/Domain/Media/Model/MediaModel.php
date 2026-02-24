@@ -25,6 +25,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaModel
 {
+    public ?int $id = null;
+
     public string $name;
 
     public ?string $description = null;
@@ -60,6 +62,7 @@ class MediaModel
     public static function fromMedia(Media $media): self
     {
         $model = new self;
+        $model->id = $media->getId();
         $model->name = $media->getName();
         $model->description = $media->getDescription();
         $model->owner = $media->getOwner();

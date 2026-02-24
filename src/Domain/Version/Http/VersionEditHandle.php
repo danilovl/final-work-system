@@ -16,7 +16,6 @@ use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Version\Bus\Command\EditVersion\EditVersionCommand;
 use App\Application\Constant\{
     ControllerMethodConstant,
-    FlashTypeConstant,
     SeoPageConstant
 };
 use App\Infrastructure\Service\{
