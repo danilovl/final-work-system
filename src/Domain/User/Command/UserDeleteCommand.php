@@ -42,6 +42,7 @@ class UserDeleteCommand
     ): int {
         if ($username === null) {
             $io->title('Delete user command');
+            /** @var string $username */
             $username = $io->ask('Username', null, [$this->validator, 'validateUsernameExist']);
         }
 
@@ -58,7 +59,15 @@ class UserDeleteCommand
 
         $this->entityManager->remove($user);
 
-        $io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted', $user->getUsername(), $user->getId(), $user->getEmail()));
+        $userId = $user->getId();
+
+        $message = sprintf(
+            'User "%s" (ID: %d, email: %s) was successfully deleted',
+            $user->getUsername(),
+            $userId,
+            $user->getEmail()
+        );
+        $io->success($message);
 
         return Command::SUCCESS;
     }

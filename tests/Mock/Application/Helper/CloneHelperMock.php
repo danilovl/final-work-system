@@ -10,13 +10,11 @@
  *
  */
 
-namespace App\Application\Constant;
+namespace App\Tests\Mock\Application\Helper;
 
-enum FormOperationTypeConstant: string
+class CloneHelperMock
 {
-    public const string OPTION_KEY = 'operationType';
+    public string $property1;
 
-    case CREATE = 'create';
-    case EDIT = 'edit';
-    case DELETE = 'delete';
+    public string $property2;
 }

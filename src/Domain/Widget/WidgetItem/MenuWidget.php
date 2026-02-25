@@ -24,7 +24,7 @@ class MenuWidget extends BaseWidget
 {
     private ?array $factory = null;
 
-    private ?User $user;
+    private User $user;
 
     private string $menu;
 

@@ -27,6 +27,7 @@ readonly class WorkSearch
 
     /**
      * @param array<string, mixed> $filters
+     * @return ArrayIterator<int|string, Work>
      */
     public function filterWorkList(
         User $user,
@@ -35,11 +36,12 @@ readonly class WorkSearch
     ): ArrayIterator {
         $query = $this->createQuery($user, $type, $filters);
 
+        /** @var Work[] $works */
         $works = $this->transformedFinderWork->find($query);
         $works = new ArrayCollection($works);
 
         $collator = new Collator('cs_CZ.UTF-8');
-        /** @var ArrayIterator $iterator */
+        /** @var ArrayIterator<int|string, Work> $iterator */
         $iterator = $works->getIterator();
 
         $iterator->uasort(static function (Work $first, Work $second) use ($collator): int {

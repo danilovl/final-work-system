@@ -65,6 +65,9 @@ readonly class EventCreateHandle
 
         $this->eventEventDispatcher->onEventCalendarCreate($event);
 
-        return $this->objectToDtoMapper->map($event, EventDTO::class);
+        /** @var EventDTO $eventDTO */
+        $eventDTO = $this->objectToDtoMapper->map($event, EventDTO::class);
+
+        return $eventDTO;
     }
 }

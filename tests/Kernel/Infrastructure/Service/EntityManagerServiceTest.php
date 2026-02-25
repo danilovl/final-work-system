@@ -35,6 +35,10 @@ class EntityManagerServiceTest extends KernelTestCase
         $this->entityManagerService = $kernel->getContainer()->get(EntityManagerService::class);
     }
 
+    /**
+     * @param class-string<object> $entityClass
+     * @param class-string $repositoryClass
+     */
     #[DataProvider('repositoryProvider')]
     public function testRepository(string $entityClass, string $repositoryClass): void
     {
@@ -42,11 +46,14 @@ class EntityManagerServiceTest extends KernelTestCase
         $this->assertEquals(get_class($repository), $repositoryClass);
     }
 
+    /**
+     * @param class-string<object> $entityClass
+     */
     #[DataProvider('referenceProvider')]
     public function testReference(string $entityClass): void
     {
-        /** @var object $reference */
         $reference = $this->entityManagerService->getReference($entityClass, 1);
+        $this->assertNotNull($reference, "Reference should not be null");
         $this->assertEquals(get_parent_class($reference), $entityClass);
     }
 

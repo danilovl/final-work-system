@@ -49,6 +49,10 @@ class ImportSqlCommand
             $output->writeln(sprintf("Processing file '<info>%s</info>' ", $filePath));
             $sql = file_get_contents($filePath);
 
+            if ($sql === false) {
+                throw new InvalidArgumentException(sprintf("Could not read SQL file '<info>%s</info>'.", $filePath));
+            }
+
             $stmt = $connection->prepare($sql);
             $stmt->executeStatement();
 

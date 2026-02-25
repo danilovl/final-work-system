@@ -14,6 +14,10 @@ namespace App\Domain\Work\Service;
 
 use App\Application\Constant\TabTypeConstant;
 use App\Application\Exception\RuntimeException;
+use App\Domain\ConversationMessage\Repository\ConversationMessageRepository;
+use App\Domain\Event\Repository\EventRepository;
+use App\Domain\Media\Repository\MediaRepository;
+use App\Domain\Task\Repository\TaskRepository;
 use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
@@ -74,9 +78,11 @@ class WorkDetailTabService
         $this->setActiveTabByPagination($tab, $paginator);
 
         if ($tab === TabTypeConstant::TAB_MESSAGE->value) {
-            if ($paginator->count() > 0) {
+            if ($paginator->count() > 0 && $user !== null) {
+                /** @var ConversationMessage $message */
+                $message = $paginator[0];
                 ConversationHelper::getConversationOpposite(
-                    [$paginator[0]->getConversation()],
+                    [$message->getConversation()],
                     $user
                 );
             }
@@ -113,24 +119,16 @@ class WorkDetailTabService
         $isSupervisor = $user !== null && WorkRoleHelper::isSupervisor($work, $user);
 
         $queryPagination = match ($tab) {
-            TabTypeConstant::TAB_TASK->value => $this->entityManagerService
-                ->getRepository(Task::class)
-                ->allByWork($work, !$isSupervisor)
-                ->getQuery(),
-            TabTypeConstant::TAB_VERSION->value => $this->entityManagerService
-                ->getRepository(Media::class)
-                ->allByWork($work)
-                ->getQuery(),
-            TabTypeConstant::TAB_EVENT->value => $this->entityManagerService
-                ->getRepository(Event::class)
-                ->allByWork($work)
-                ->getQuery(),
-            TabTypeConstant::TAB_MESSAGE->value => $this->entityManagerService
-                ->getRepository(ConversationMessage::class)
-                ->allByWorkUser($work, $user)
-                ->getQuery(),
-            default => null
+            TabTypeConstant::TAB_TASK->value => $this->getTaskQuery($work, $isSupervisor),
+            TabTypeConstant::TAB_VERSION->value => $this->getVersionQuery($work),
+            TabTypeConstant::TAB_EVENT->value => $this->getEventQuery($work),
+            TabTypeConstant::TAB_MESSAGE->value => $this->getMessageQuery($work, $user),
+            default => null,
         };
+
+        if ($queryPagination === null) {
+            throw new RuntimeException('Query for tab pagination was not created');
+        }
 
         if ($setHydrationMode) {
             switch ($tab) {
@@ -151,10 +149,6 @@ class WorkDetailTabService
 
                     break;
             }
-        }
-
-        if ($queryPagination === null) {
-            throw new RuntimeException('Query for tab pagination was not created');
         }
 
         return $queryPagination;
@@ -180,5 +174,41 @@ class WorkDetailTabService
             PaginatorInterface::FILTER_VALUE_PARAMETER_NAME => 'filterValue_' . $prefix,
             PaginatorInterface::DISTINCT => true
         ];
+    }
+
+    private function getTaskQuery(Work $work, bool $isSupervisor): Query
+    {
+        /** @var TaskRepository $taskRepository */
+        $taskRepository = $this->entityManagerService->getRepository(Task::class);
+
+        return $taskRepository->allByWork($work, !$isSupervisor)->getQuery();
+    }
+
+    private function getVersionQuery(Work $work): Query
+    {
+        /** @var MediaRepository $mediaRepository */
+        $mediaRepository = $this->entityManagerService->getRepository(Media::class);
+
+        return $mediaRepository->allByWork($work)->getQuery();
+    }
+
+    private function getEventQuery(Work $work): Query
+    {
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $this->entityManagerService->getRepository(Event::class);
+
+        return $eventRepository->allByWork($work)->getQuery();
+    }
+
+    private function getMessageQuery(Work $work, ?User $user): Query
+    {
+        if ($user === null) {
+            throw new RuntimeException('User is required for message tab');
+        }
+
+        /** @var ConversationMessageRepository $conversationMessageRepository */
+        $conversationMessageRepository = $this->entityManagerService->getRepository(ConversationMessage::class);
+
+        return $conversationMessageRepository->allByWorkUser($work, $user)->getQuery();
     }
 }

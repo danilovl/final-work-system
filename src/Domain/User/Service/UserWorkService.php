@@ -29,6 +29,9 @@ use Doctrine\Common\Collections\{
 
 class UserWorkService
 {
+    /**
+     * @return ArrayCollection<User>
+     */
     public function getActiveSupervisor(
         User $user,
         string $userType

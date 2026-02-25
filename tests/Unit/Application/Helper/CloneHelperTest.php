@@ -13,6 +13,7 @@
 namespace App\Tests\Unit\Application\Helper;
 
 use App\Application\Helper\CloneHelper;
+use App\Tests\Mock\Application\Helper\CloneHelperMock;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -20,14 +21,14 @@ class CloneHelperTest extends TestCase
 {
     public function testSimpleCloneObject(): void
     {
-        $originalObject = new stdClass;
+        $originalObject = new CloneHelperMock;
         $originalObject->property1 = 'property1';
         $originalObject->property2 = 'property2';
 
+        /** @var CloneHelperMock $clonedObject */
         $clonedObject = CloneHelper::simpleCloneObject($originalObject);
 
         $this->assertNotSame($originalObject, $clonedObject);
-
         $this->assertSame($originalObject->property1, $clonedObject->property1);
         $this->assertSame($originalObject->property2, $clonedObject->property2);
     }

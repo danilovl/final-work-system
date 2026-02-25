@@ -74,9 +74,24 @@ class WidgetStreamService
         $sleepSecond = $this->parameterService->getInt('event_source.widget.top_nav.sleep');
 
         return function () use ($sleepSecond): Generator {
+            $count = 0;
+
             while (true) {
-                yield new ServerEvent(json_encode($this->getData()), type: 'jobs');
+                if ($count >= 3_600) {
+                    break;
+                }
+
+                $data = json_encode($this->getData());
+                if ($data === false) {
+                    $count += $sleepSecond;
+
+                    continue;
+                }
+
+                yield new ServerEvent($data, type: 'jobs');
                 sleep($sleepSecond);
+
+                $count += $sleepSecond;
             }
         };
     }

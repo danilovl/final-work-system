@@ -13,7 +13,7 @@
 namespace App\Domain\Conversation\Entity;
 
 use App\Application\Constant\TranslationConstant;
-use App\Application\Exception\PropertyValueIsNullException;
+use App\Application\Exception\{LogicException, PropertyValueIsNullException};
 use App\Application\Helper\ArrayMapHelper;
 use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Domain\Work\Entity\Work;
@@ -147,7 +147,11 @@ class Conversation
         $ids = ArrayMapHelper::getObjectsIds($users);
 
         /** @var Collection<ConversationParticipant> $participants */
-        $participants = $this->participants->filter(static function (ConversationParticipant $participant) use ($ids): bool {
+        $participants = $this->participants->filter(static function ($participant) use ($ids): bool {
+            if (!$participant instanceof ConversationParticipant) {
+                throw new LogicException('Participant must be instance of ConversationParticipant.');
+            }
+
             return !in_array($participant->getUser()->getId(), $ids, true);
         });
 

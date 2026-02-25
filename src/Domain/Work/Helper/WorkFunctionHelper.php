@@ -19,7 +19,7 @@ use App\Domain\WorkCategory\Entity\WorkCategory;
 class WorkFunctionHelper
 {
     /**
-     * @return array<string, array{works: Work[]}>>
+     * @return array<string, array{works: Work[]}>
      */
     public static function groupWorksByDeadline(iterable $works): array
     {

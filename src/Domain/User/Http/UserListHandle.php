@@ -118,10 +118,7 @@ readonly class UserListHandle
                 ]);
 
                 $paginationUserWorks = $this->workFacade->getWorksByAuthorSupervisorStatus($workData);
-
-                if ($works->get($paginationUser->getId()) === null) {
-                    $works->set($paginationUser->getId(), $paginationUserWorks);
-                }
+                $works->set($paginationUser->getId(), $paginationUserWorks);
 
                 $workStatusData = WorkStatusRepositoryData::createFromArray([
                     'user' => $paginationUser,
@@ -131,10 +128,7 @@ readonly class UserListHandle
                 ]);
 
                 $workStatusCount = $this->workStatusFacade->getCountByUser($workStatusData);
-
-                if ($userStatusWorkCounts->get($paginationUser->getId()) === null) {
-                    $userStatusWorkCounts->set($paginationUser->getId(), $workStatusCount);
-                }
+                $userStatusWorkCounts->set($paginationUser->getId(), $workStatusCount);
             }
         }
 

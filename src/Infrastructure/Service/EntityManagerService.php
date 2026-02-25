@@ -28,6 +28,11 @@ readonly class EntityManagerService
         private EntityEventDispatcher $entityEventDispatcher
     ) {}
 
+    /**
+     * @template T of object
+     * @param class-string<T> $entityName
+     * @return T|null
+     */
     public function getReference(string $entityName, int $id): ?object
     {
         return $this->entityManager->getReference($entityName, $id);
@@ -49,6 +54,9 @@ readonly class EntityManagerService
         $this->entityEventDispatcher->onRemove();
     }
 
+    /**
+     * @param class-string $entity
+     */
     public function removeNativeSql(string $entity, int $id): void
     {
         $tableName = AttributeHelper::getEntityTableName($entity);

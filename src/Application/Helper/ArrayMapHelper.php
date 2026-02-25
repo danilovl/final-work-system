@@ -17,13 +17,22 @@ use Webmozart\Assert\Assert;
 class ArrayMapHelper
 {
     /**
-     * @param object[] $objects
+     * @template T of object
+     * @param array<T> $objects
      * @return int[]
      */
     public static function getObjectsIds(array $objects): array
     {
         Assert::allMethodExists($objects, 'getId');
 
-        return array_map(static fn (object $object): int => $object->getId(), $objects);
+        /** @var callable(T): int $callback */
+        $callback = static function (object $object): int {
+            /** @var callable(): int $getId */
+            $getId = [$object, 'getId'];
+
+            return $getId();
+        };
+
+        return array_map($callback, $objects);
     }
 }

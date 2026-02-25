@@ -21,6 +21,7 @@ use Symfony\Component\PropertyAccess\{
     PropertyAccess,
     PropertyAccessor
 };
+use Webmozart\Assert\Assert;
 
 readonly class ObjectToDtoMapper
 {
@@ -32,10 +33,16 @@ readonly class ObjectToDtoMapper
     }
 
     /**
+     * @template T of object
+     * @param object $entity
+     * @param class-string<T> $dtoClass
+     * @return T
      * @throws ReflectionException
      */
     public function map(object $entity, string $dtoClass): object
     {
+        Assert::classExists($dtoClass, 'DTO class must exist: %s');
+
         $dtoReflection = new ReflectionClass($dtoClass);
         $constructor = $dtoReflection->getConstructor();
 
@@ -71,6 +78,7 @@ readonly class ObjectToDtoMapper
 
                 if (count($attributes) > 0) {
                     $attribute = $attributes[0]->newInstance();
+                    /** @var class-string $targetDtoClass */
                     $targetDtoClass = $attribute->dtoClass;
                     $args[] = $this->mapCollection($value, $targetDtoClass);
 
@@ -79,8 +87,14 @@ readonly class ObjectToDtoMapper
             }
 
             if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
+                /** @var class-string $typeName */
                 $typeName = $type->getName();
-                $args[] = $this->map($value, $typeName);
+
+                if (is_object($value)) {
+                    $args[] = $this->map($value, $typeName);
+                } else {
+                    $args[] = null;
+                }
 
                 continue;
             }
@@ -92,13 +106,21 @@ readonly class ObjectToDtoMapper
     }
 
     /**
+     * @template T of object
+     * @param iterable<object|mixed> $collection
+     * @param class-string<T> $dtoClass
+     * @return array<T>
      * @throws ReflectionException
      */
     private function mapCollection(iterable $collection, string $dtoClass): array
     {
+        Assert::classExists($dtoClass, 'DTO class must exist: %s');
+
         $result = [];
         foreach ($collection as $item) {
-            $result[] = $this->map($item, $dtoClass);
+            if (is_object($item)) {
+                $result[] = $this->map($item, $dtoClass);
+            }
         }
 
         return $result;

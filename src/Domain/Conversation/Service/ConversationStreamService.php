@@ -22,30 +22,44 @@ use Symfony\Component\HttpFoundation\ServerEvent;
 
 class ConversationStreamService
 {
-    private ?DateTimeImmutable $date;
+    private DateTimeImmutable $date;
 
     public function __construct(
         private readonly ParameterServiceInterface $parameterService,
         private readonly TwigRenderService $twigRenderService,
         private readonly ConversationMessageFacade $conversationMessageFacade
-    ) {}
+    ) {
+        $this->date = new DateTimeImmutable;
+    }
 
     public function handle(Conversation $conversation): callable
     {
+        /** @var positive-int $sleepSecond */
         $sleepSecond = $this->parameterService->getInt('event_source.conversation.detail.sleep');
 
         return function () use ($conversation, $sleepSecond): Generator {
+            $count = 0;
             while (true) {
-                yield new ServerEvent($this->getLastMessage($conversation), type: 'jobs');
+                if ($count >= 3_600) {
+                    break;
+                }
+
+                $message = $this->getLastMessage($conversation);
+                if ($message === null) {
+                    $count += $sleepSecond;
+
+                    continue;
+                }
+
+                yield new ServerEvent($message, type: 'jobs');
                 sleep($sleepSecond);
+                $count += $sleepSecond;
             }
         };
     }
 
     private function getLastMessage(Conversation $conversation): ?string
     {
-        $this->date ??= new DateTimeImmutable;
-
         $messages = $this->conversationMessageFacade->getMessagesByConversationAfterDate(
             $conversation,
             $this->date

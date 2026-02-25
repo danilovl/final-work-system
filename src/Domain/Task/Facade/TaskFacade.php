@@ -89,13 +89,11 @@ readonly class TaskFacade
         User $user,
         bool $isComplete
     ): array {
-        /** @var array $result */
+        /** @var Task[] $result */
         $result = $this->taskRepository
             ->allByOwnerComplete($user, $isComplete)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, Task::class);
 
         return $result;
     }
@@ -107,12 +105,8 @@ readonly class TaskFacade
     {
         Assert::allIsInstanceOf($works, Work::class);
 
-        $result = $this->taskRepository
+        return $this->taskRepository
             ->allByWorks($works)
             ->getQuery();
-
-        Assert::allIsInstanceOf($result, Work::class);
-
-        return $result;
     }
 }

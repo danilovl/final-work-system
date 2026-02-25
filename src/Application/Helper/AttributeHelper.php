@@ -18,6 +18,9 @@ use ReflectionClass;
 
 class AttributeHelper
 {
+    /**
+     * @param class-string $entity
+     */
     public static function getEntityTableName(string $entity): string
     {
         $reflectionClass = new ReflectionClass($entity);

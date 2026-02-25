@@ -65,6 +65,10 @@ class ValidationListenerExtension extends AbstractTypeExtension
         if (!$operationType instanceof FormOperationTypeConstant) {
             $object = $form->getData();
 
+            if (!is_array($object) && !is_object($object)) {
+                return;
+            }
+
             $propertyAccessor = PropertyAccess::createPropertyAccessor();
             if ($propertyAccessor->isReadable($object, 'id') === false) {
                 return;
@@ -72,10 +76,6 @@ class ValidationListenerExtension extends AbstractTypeExtension
 
             $id = $propertyAccessor->getValue($object, 'id');
             $operationType = $id === null ? FormOperationTypeConstant::CREATE : FormOperationTypeConstant::EDIT;
-        }
-
-        if ($operationType === null) {
-            return;
         }
 
         switch ($operationType) {

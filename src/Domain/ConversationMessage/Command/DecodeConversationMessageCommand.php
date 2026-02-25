@@ -32,7 +32,7 @@ class DecodeConversationMessageCommand
         do {
             $query = "SELECT id, content FROM conversation_message LIMIT $offset, $limit";
 
-            /** @var array{id: int, content: string} $messages */
+            /** @var array<array{id: int, content: string}> $messages */
             $messages = $this->entityManagerService
                 ->getConnection()
                 ->executeQuery($query)

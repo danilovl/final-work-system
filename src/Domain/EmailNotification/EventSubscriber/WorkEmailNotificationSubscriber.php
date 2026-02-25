@@ -38,20 +38,14 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $opponent = $work->getOpponent();
         $consultant = $work->getConsultant();
 
-        $to = null;
-        $locale = $this->locale;
+        $to = $author->getEmail();
+        $locale = $author->getLocale() ?? $this->locale;
 
         $templateParameters = [
             'workId' => $work->getId(),
             'workSupervisor' => $work->getSupervisor()->getFullNameDegree(),
+            'role' => $this->translator->trans('app.text.author_like', locale: $locale)
         ];
-
-        if ($author !== null) {
-            $to = $author->getEmail();
-            $locale = $author->getLocale() ?? $locale;
-
-            $templateParameters['role'] = $this->translator->trans('app.text.author_like', locale: $locale);
-        }
 
         if ($opponent !== null) {
             $to = $opponent->getEmail();

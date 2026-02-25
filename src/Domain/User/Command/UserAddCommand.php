@@ -87,42 +87,67 @@ class UserAddCommand
             if ($username !== null) {
                 $io->text(' > <info>Username</info>: ' . $username);
             } else {
+                /** @var string $username */
                 $username = $io->ask('Username', null, [$this->validator, 'validateUsername']);
             }
 
             if ($email !== null) {
                 $io->text(' > <info>Email</info>: ' . $email);
             } else {
+                /** @var string $email */
                 $email = $io->ask('Email', null, [$this->validator, 'validateEmail']);
             }
 
             if ($password !== null) {
                 $io->text(' > <info>Password</info>: ' . str_repeat('*', mb_strlen($password)));
             } else {
+                /** @var string $password */
                 $password = $io->askHidden('Password (your type will be hidden)', [$this->validator, 'validatePassword']);
             }
 
             if ($firstName !== null) {
                 $io->text(' > <info>First Name</info>: ' . $firstName);
             } else {
+                /** @var string $firstName */
                 $firstName = $io->ask('First Name', null, [$this->validator, 'validateFullName']);
             }
 
             if ($lastName !== null) {
                 $io->text(' > <info>Last Name</info>: ' . $lastName);
             } else {
+                /** @var string $lastName */
                 $lastName = $io->ask('Last Name', null, [$this->validator, 'validateFullName']);
             }
 
             if ($roles !== null) {
                 $io->text(' > <info>Roles(ROLE_USER,ROLE_ADMIN)</info>: ' . $roles);
             } else {
+                /** @var string $roles */
                 $roles = $io->ask('Roles', null, [$this->validator, 'validateRoles']);
             }
         }
 
         $stopwatch = new Stopwatch;
         $stopwatch->start('add-user-command');
+
+        if ($username === null) {
+            throw new RuntimeException('Username cannot be null');
+        }
+        if ($password === null) {
+            throw new RuntimeException('Password cannot be null');
+        }
+        if ($email === null) {
+            throw new RuntimeException('Email cannot be null');
+        }
+        if ($firstName === null) {
+            throw new RuntimeException('First name cannot be null');
+        }
+        if ($lastName === null) {
+            throw new RuntimeException('Last name cannot be null');
+        }
+        if ($roles === null) {
+            throw new RuntimeException('Roles cannot be null');
+        }
 
         $this->validateUserData($username, $password, $email, $firstName, $lastName);
 
@@ -187,11 +212,11 @@ class UserAddCommand
         ?string $lastName,
         ?string $roles
     ): bool {
-        return $username !== null && 
-               $password !== null && 
-               $email !== null && 
-               $firstName !== null && 
-               $lastName !== null && 
-               $roles !== null;
+        return $username !== null &&
+            $password !== null &&
+            $email !== null &&
+            $firstName !== null &&
+            $lastName !== null &&
+            $roles !== null;
     }
 }

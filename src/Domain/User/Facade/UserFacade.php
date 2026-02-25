@@ -49,6 +49,7 @@ readonly class UserFacade
      */
     public function getAllUserActiveSupervisors(User $user): ArrayCollection
     {
+        /** @var ArrayCollection<User> $userActiveSupervisors */
         $userActiveSupervisors = new ArrayCollection;
 
         if (UserRoleHelper::isAuthor($user)) {

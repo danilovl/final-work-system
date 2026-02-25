@@ -23,3 +23,7 @@ parameters:
            identifier: missingType.generics
        -
            identifier: varTag.nativeType
+       -
+           identifier: staticMethod.alreadyNarrowedType
+       -
+           identifier: new.static

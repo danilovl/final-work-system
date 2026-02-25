@@ -10,23 +10,28 @@
  *
  */
 
-namespace App\Tests\Unit\Infrastructure\Web\Form\Factory;
+namespace App\Tests\Kernel\Infrastructure\Web\Form\Factory;
 
 use App\Domain\User\Entity\User;
 use App\Infrastructure\Web\Form\Factory\FormDeleteFactory;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use stdClass;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Exception\RuntimeException;
-use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class FormDeleteFactoryTest extends TypeTestCase
+class FormDeleteFactoryTest extends KernelTestCase
 {
     private FormDeleteFactory $formDeleteFactory;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        self::bootKernel();
+
+        $kernel = self::bootKernel();
+        /** @var FormFactoryInterface $formFactory */
+        $formFactory = $kernel->getContainer()->get('form.factory');
 
         $router = $this->createMock(RouterInterface::class);
         $router->expects($this->any())
@@ -39,7 +44,7 @@ class FormDeleteFactoryTest extends TypeTestCase
             ->willReturn('Kt49gnG3');
 
         $this->formDeleteFactory = new FormDeleteFactory(
-            $this->factory,
+            $formFactory,
             $router,
             $hashids
         );

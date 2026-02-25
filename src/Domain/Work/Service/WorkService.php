@@ -49,7 +49,7 @@ class WorkService
     ): array {
         $users = [];
 
-        if ($author === true && $work->getAuthor() !== null) {
+        if ($author === true) {
             $users[] = $work->getAuthor();
         }
 
@@ -57,7 +57,7 @@ class WorkService
             $users[] = $work->getOpponent();
         }
 
-        if ($supervisor === true && $work->getSupervisor() !== null) {
+        if ($supervisor === true) {
             $users[] = $work->getSupervisor();
         }
 

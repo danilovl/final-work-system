@@ -22,6 +22,7 @@ use App\Tests\Mock\Application\Mapper\{
     MockDtoWithCollection,
     MockEntityWithCollection
 };
+use Webmozart\Assert\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -37,6 +38,8 @@ class ObjectToDtoMapperTest extends TestCase
     #[DataProvider('provideBasicMappingTestCases')]
     public function testBasicMapping(object $entity, string $dtoClass, object $expectedDto): void
     {
+        Assert::classExists($dtoClass, 'DTO class must exist: %s');
+
         $result = $this->mapper->map($entity, $dtoClass);
 
         $this->assertEquals($expectedDto, $result);
@@ -45,6 +48,8 @@ class ObjectToDtoMapperTest extends TestCase
     #[DataProvider('provideCollectionMappingTestCases')]
     public function testCollectionMapping(object $entity, string $dtoClass, object $expectedDto): void
     {
+        Assert::classExists($dtoClass, 'DTO class must exist: %s');
+
         $result = $this->mapper->map($entity, $dtoClass);
 
         $this->assertEquals($expectedDto, $result);
@@ -53,6 +58,8 @@ class ObjectToDtoMapperTest extends TestCase
     #[DataProvider('provideNestedObjectMappingTestCases')]
     public function testNestedObjectMapping(object $entity, string $dtoClass, object $expectedDto): void
     {
+        Assert::classExists($dtoClass, 'DTO class must exist: %s');
+
         $result = $this->mapper->map($entity, $dtoClass);
 
         $this->assertEquals($expectedDto, $result);
