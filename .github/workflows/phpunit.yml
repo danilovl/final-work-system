@@ -41,7 +41,7 @@ jobs:
         uses: ./.github/actions/run-unit-test
 
       - name: Run kernel tests
-        uses: ./.github/actions/run-kernel-test
+        uses: ./.github/actions/run-integration-test
 
       - name: View dev log file
         if: always()

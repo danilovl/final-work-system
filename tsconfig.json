@@ -8,8 +8,8 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@playwright-test/*": ["tests/Playwright/*"],
-            "@cypress-test/*": ["tests/Cypress/*"]
+            "@playwright-test/*": ["tests/EndToEnd/Playwright/*"],
+            "@cypress-test/*": ["tests/EndToEnd/Cypress/*"]
         },
         "types": [
             "node",

@@ -1,0 +1,9 @@
+name: Run integration
+description: Run integration
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run integration
+      shell: bash
+      run: docker compose exec -T php composer test-integration

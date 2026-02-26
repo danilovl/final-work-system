@@ -142,13 +142,13 @@
     },
     "scripts": {
         "test-unit": "bash bin/phpunit.sh tests/Unit",
-        "test-kernel": [
+        "test-integration": [
             "@php bin/console cache:warmup --env=dev",
-            "bash bin/phpunit.sh tests/Kernel"
+            "bash bin/phpunit.sh tests/integration"
         ],
         "test-all": [
             "@php bin/console cache:warmup --env=dev",
-            "bash bin/phpunit.sh '--testsuite tests-unit,tests-kernel'"
+            "bash bin/phpunit.sh '--testsuite tests-unit,tests-integration,tests-functional'"
         ],
         "test-web": [
             "@php bin/console cache:warmup --env=dev",

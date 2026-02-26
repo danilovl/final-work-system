@@ -24,6 +24,15 @@
         <testsuite name="tests-kernel">
             <directory>tests/Kernel</directory>
         </testsuite>
+        <testsuite name="tests-integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="tests-functional">
+            <directory>tests/Functional/Infrastructure</directory>
+        </testsuite>
+        <testsuite name="tests-functional-web">
+            <directory>tests/Functional/Web</directory>
+        </testsuite>
         <testsuite name="tests-unit">
             <directory>tests/Unit</directory>
         </testsuite>
@@ -35,13 +44,13 @@
         <exclude>
             <directory suffix=".php">src/Application/Controller</directory>
             <directory suffix=".php">src/Application/Constant</directory>
-            <directory suffix=".php">src/Application/Doctrine</directory>
             <directory suffix=".php">src/Application/Exception</directory>
-            <directory suffix=".php">src/Application/GraphQL</directory>
             <directory suffix=".php">src/Application/Interfaces</directory>
             <directory suffix=".php">src/Application/Migrations</directory>
             <directory suffix=".php">src/Application/Redis</directory>
             <directory suffix=".php">src/Application/OpenTelemetry</directory>
+            <directory suffix=".php">src/Infrastructure/GraphQL</directory>
+            <directory suffix=".php">src/Infrastructure/Persistence/Doctrine</directory>
             <file>src/Application/Service/IniService.php</file>
             <file>src/Application/EventListener/LoggableListener.php</file>
         </exclude>

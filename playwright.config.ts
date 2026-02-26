@@ -2,7 +2,7 @@ import {defineConfig, devices} from '@playwright/test';
 
 export default defineConfig({
     testMatch: [
-        '/tests/Playwright/tests.ts'
+        '/tests/EndToEnd/Playwright/tests.ts'
     ],
     fullyParallel: false,
     forbidOnly: !!process.env.CI,
