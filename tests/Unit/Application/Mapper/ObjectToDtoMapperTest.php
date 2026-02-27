@@ -20,8 +20,13 @@ use App\Tests\Mock\Application\Mapper\{
     MockNestedDto,
     MockNestedEntity,
     MockDtoWithCollection,
-    MockEntityWithCollection
+    MockEntityWithCollection,
+    MockDtoWithoutConstructor,
+    MockEntityWithNonReadableProperty,
+    MockDtoForNonReadableTest,
+    MockDtoWithDefaultValue
 };
+use RuntimeException;
 use Webmozart\Assert\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -35,7 +40,17 @@ class ObjectToDtoMapperTest extends TestCase
         $this->mapper = new ObjectToDtoMapper;
     }
 
-    #[DataProvider('provideBasicMappingTestCases')]
+    public function testConstructorException(): void
+    {
+        $entity = new MockEntity('John Doe', 30, 'john@example.com');
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('DTO class must have a constructor: App\Tests\Mock\Application\Mapper\MockDtoWithoutConstructor');
+
+        $this->mapper->map($entity, MockDtoWithoutConstructor::class);
+    }
+
+    #[DataProvider('provideBasicMapping')]
     public function testBasicMapping(object $entity, string $dtoClass, object $expectedDto): void
     {
         Assert::classExists($dtoClass, 'DTO class must exist: %s');
@@ -45,7 +60,7 @@ class ObjectToDtoMapperTest extends TestCase
         $this->assertEquals($expectedDto, $result);
     }
 
-    #[DataProvider('provideCollectionMappingTestCases')]
+    #[DataProvider('provideCollectionMapping')]
     public function testCollectionMapping(object $entity, string $dtoClass, object $expectedDto): void
     {
         Assert::classExists($dtoClass, 'DTO class must exist: %s');
@@ -55,7 +70,7 @@ class ObjectToDtoMapperTest extends TestCase
         $this->assertEquals($expectedDto, $result);
     }
 
-    #[DataProvider('provideNestedObjectMappingTestCases')]
+    #[DataProvider('provideNestedObjectMapping')]
     public function testNestedObjectMapping(object $entity, string $dtoClass, object $expectedDto): void
     {
         Assert::classExists($dtoClass, 'DTO class must exist: %s');
@@ -65,7 +80,7 @@ class ObjectToDtoMapperTest extends TestCase
         $this->assertEquals($expectedDto, $result);
     }
 
-    public static function provideBasicMappingTestCases(): Generator
+    public static function provideBasicMapping(): Generator
     {
         $entity = new MockEntity('John Doe', 30, 'john@example.com');
         $expectedDto = new MockDto('John Doe', 30, 'john@example.com');
@@ -86,7 +101,7 @@ class ObjectToDtoMapperTest extends TestCase
         ];
     }
 
-    public static function provideCollectionMappingTestCases(): Generator
+    public static function provideCollectionMapping(): Generator
     {
         $items = [
             new MockEntity('Item 1', 1, 'item1@example.com'),
@@ -117,7 +132,7 @@ class ObjectToDtoMapperTest extends TestCase
         ];
     }
 
-    public static function provideNestedObjectMappingTestCases(): Generator
+    public static function provideNestedObjectMapping(): Generator
     {
         $nestedEntity = new MockEntity('Nested', 5, 'nested@example.com');
         $entity = new MockNestedEntity('Parent', $nestedEntity);
@@ -128,6 +143,37 @@ class ObjectToDtoMapperTest extends TestCase
         yield 'Mapping nested object' => [
             $entity,
             MockNestedDto::class,
+            $expectedDto
+        ];
+    }
+
+    #[DataProvider('provideNonReadableProperty')]
+    public function testNonReadableProperty(object $entity, string $dtoClass, object $expectedDto): void
+    {
+        Assert::classExists($dtoClass, 'DTO class must exist: %s');
+
+        $result = $this->mapper->map($entity, $dtoClass);
+
+        $this->assertEquals($expectedDto, $result);
+    }
+
+    public static function provideNonReadableProperty(): Generator
+    {
+        $entity = new MockEntityWithNonReadableProperty('John Doe', 30, 'john@example.com');
+        $expectedDto = new MockDtoForNonReadableTest('John Doe', 30, null);
+
+        yield 'Mapping with non-readable property' => [
+            $entity,
+            MockDtoForNonReadableTest::class,
+            $expectedDto
+        ];
+
+        $entity = new MockEntityWithNonReadableProperty('Jane Doe', 25, 'jane@example.com');
+        $expectedDto = new MockDtoWithDefaultValue('Jane Doe', 25, 'default@example.com');
+
+        yield 'Mapping with non-readable property using default value' => [
+            $entity,
+            MockDtoWithDefaultValue::class,
             $expectedDto
         ];
     }

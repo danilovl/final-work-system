@@ -92,8 +92,6 @@ readonly class ObjectToDtoMapper
 
                 if (is_object($value)) {
                     $args[] = $this->map($value, $typeName);
-                } else {
-                    $args[] = null;
                 }
 
                 continue;
