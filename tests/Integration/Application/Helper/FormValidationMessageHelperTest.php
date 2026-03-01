@@ -18,12 +18,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\Extension\Core\Type\{
     DateType,
-    TextType};
+    TextType
+};
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints\{
     Date,
-    NotBlank};
+    NotBlank
+};
 
 class FormValidationMessageHelperTest extends KernelTestCase
 {

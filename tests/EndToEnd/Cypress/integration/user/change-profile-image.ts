@@ -8,7 +8,7 @@ describe('Change user profile image test', () => {
 
         cy
             .get('#user_profile_image_uploadMedia')
-            .selectFile('tests/Cypress/fixtures/user/image/profile.jpg')
+            .selectFile('tests/EndToEnd/Cypress/fixtures/user/image/profile.jpg')
 
         cy
             .get('#upload-profile-image-button-action')

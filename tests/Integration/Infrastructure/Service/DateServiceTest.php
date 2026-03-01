@@ -14,7 +14,8 @@ namespace App\Tests\Integration\Infrastructure\Service;
 
 use App\Infrastructure\Service\{
     DateService,
-    TranslatorService};
+    TranslatorService
+};
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

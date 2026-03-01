@@ -10,7 +10,7 @@ export default function createTests() {
 
         await page
             .locator('#user_profile_image_uploadMedia')
-            .setInputFiles('tests/Cypress/fixtures/user/image/profile.jpg')
+            .setInputFiles('tests/EndToEnd/Cypress/fixtures/user/image/profile.jpg')
 
         await page.locator('#upload-profile-image-button-action').click()
         await page.waitForTimeout(1000)
