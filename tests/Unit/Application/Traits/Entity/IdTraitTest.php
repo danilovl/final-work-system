@@ -30,4 +30,16 @@ class IdTraitTest extends TestCase
 
         $this->assertSame(0, $class->getId());
     }
+
+    public function testIsNewObject(): void
+    {
+        $class = new class() {
+            use IdTrait;
+        };
+
+        $this->assertTrue($class->isNewObject());
+
+        $class->setId(1);
+        $this->assertFalse($class->isNewObject());
+    }
 }
