@@ -10,9 +10,9 @@
  *
  */
 
-namespace App\Tests\Unit\Infrastructure\Web\Form\Constraint;
+namespace App\Tests\Unit\Infrastructure\Validation\Constraint;
 
-use App\Infrastructure\Web\Form\Constraint\FirstWeekDay;
+use App\Infrastructure\Validation\Constraint\FirstWeekDay;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraint;
 

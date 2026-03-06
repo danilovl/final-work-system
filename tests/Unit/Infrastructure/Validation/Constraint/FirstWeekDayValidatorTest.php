@@ -10,9 +10,13 @@
  *
  */
 
-namespace App\Tests\Unit\Infrastructure\Web\Form\Constraint;
+namespace App\Tests\Unit\Infrastructure\Validation\Constraint;
 
 use App\Infrastructure\Service\TranslatorService;
+use App\Infrastructure\Validation\Constraint\{
+    FirstWeekDay,
+    FirstWeekDayValidator
+};
 use DateTime;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -24,9 +28,9 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
 {
     private const string MESSAGE = 'It is not first day of the week';
 
-    protected function createValidator(): \App\Infrastructure\Web\Form\Constraint\FirstWeekDayValidator
+    protected function createValidator(): FirstWeekDayValidator
     {
-        return new \App\Infrastructure\Web\Form\Constraint\FirstWeekDayValidator($this->getTransMock());
+        return new FirstWeekDayValidator($this->getTransMock());
     }
 
     private function getTransMock(): TranslatorService
@@ -44,7 +48,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
     {
         $date = new DateTime($startDate);
         $this->validator->initialize($this->context);
-        $this->validator->validate($date, new \App\Infrastructure\Web\Form\Constraint\FirstWeekDay);
+        $this->validator->validate($date, new FirstWeekDay);
 
         $this->assertNoViolation();
     }
@@ -54,7 +58,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
     {
         $date = new DateTime($startDate);
         $this->validator->initialize($this->context);
-        $this->validator->validate($date, new \App\Infrastructure\Web\Form\Constraint\FirstWeekDay);
+        $this->validator->validate($date, new FirstWeekDay);
 
         $this->assertEquals(1, $this->context->getViolations()->count());
     }
@@ -62,7 +66,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
     public function testValueNull(): void
     {
         $this->validator->initialize($this->context);
-        $this->validator->validate(null, new \App\Infrastructure\Web\Form\Constraint\FirstWeekDay);
+        $this->validator->validate(null, new FirstWeekDay);
 
         $this->assertNoViolation();
     }
@@ -80,7 +84,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->expectException(UnexpectedTypeException::class);
 
         $this->validator->initialize($this->context);
-        $this->validator->validate(1_234, new \App\Infrastructure\Web\Form\Constraint\FirstWeekDay);
+        $this->validator->validate(1_234, new FirstWeekDay);
     }
 
     public static function validateSuccessProvider(): Generator

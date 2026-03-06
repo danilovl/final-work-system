@@ -13,7 +13,7 @@
 namespace App\Infrastructure\Web\Form\Type;
 
 use App\Application\Constant\DateFormatConstant;
-use App\Infrastructure\Web\Form\Constraint\FirstWeekDay;
+use App\Infrastructure\Validation\Constraint\FirstWeekDay;
 use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;

@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Infrastructure\Web\Form\Constraint;
+namespace App\Infrastructure\Validation\Constraint;
 
 use App\Application\Constant\CompareConstant;
 use App\Application\Helper\{
