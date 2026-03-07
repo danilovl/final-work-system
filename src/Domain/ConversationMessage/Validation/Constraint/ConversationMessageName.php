@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\ConversationMessage\Form\Constraint;
+namespace App\Domain\ConversationMessage\Validation\Constraint;
 
 use Override;
 use Symfony\Component\Validator\Constraint;

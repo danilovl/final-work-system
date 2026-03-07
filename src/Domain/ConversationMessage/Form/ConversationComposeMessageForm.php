@@ -14,8 +14,8 @@ namespace App\Domain\ConversationMessage\Form;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Domain\Conversation\Entity\Conversation;
-use App\Domain\ConversationMessage\Form\Constraint\ConversationMessageName;
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
+use App\Domain\ConversationMessage\Validation\Constraint\ConversationMessageName;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Helper\UserRoleHelper;
 use Override;

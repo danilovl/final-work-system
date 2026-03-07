@@ -10,17 +10,17 @@
  *
  */
 
-namespace App\Tests\Unit\Domain\ConversationMessage\Form;
+namespace App\Tests\Unit\Domain\ConversationMessage\Validation\Constraint;
 
-use App\Domain\ConversationMessage\Form\Constraint\{
+use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
+use App\Domain\ConversationMessage\Validation\Constraint\{
     ConversationMessageName,
     ConversationMessageNameValidator
 };
-use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\FormInterface;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase

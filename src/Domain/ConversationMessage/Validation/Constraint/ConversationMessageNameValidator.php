@@ -10,15 +10,15 @@
  *
  */
 
-namespace App\Domain\ConversationMessage\Form\Constraint;
+namespace App\Domain\ConversationMessage\Validation\Constraint;
 
 use App\Domain\ConversationMessage\Model\ConversationComposeMessageModel;
+use Override;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
 };
-use Override;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class ConversationMessageNameValidator extends ConstraintValidator
