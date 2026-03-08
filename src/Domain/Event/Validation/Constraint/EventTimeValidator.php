@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Event\Form\Constraint;
+namespace App\Domain\Event\Validation\Constraint;
 
 use App\Application\Constant\{
     CompareConstant,
@@ -19,11 +19,11 @@ use App\Application\Constant\{
 use App\Application\Helper\CompareHelper;
 use App\Domain\Event\Model\EventModel;
 use App\Domain\EventType\Constant\EventTypeConstant;
+use Override;
 use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
 };
-use Override;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EventTimeValidator extends ConstraintValidator

@@ -16,8 +16,8 @@ use App\Application\Constant\{
     DateFormatConstant,
     FormConstant
 };
-use App\Domain\Event\Form\Constraint\EventTime;
 use App\Domain\Event\Model\EventModel;
+use App\Domain\Event\Validation\Constraint\EventTime;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventType\Entity\EventType;

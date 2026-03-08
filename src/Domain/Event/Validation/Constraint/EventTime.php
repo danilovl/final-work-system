@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Event\Form\Constraint;
+namespace App\Domain\Event\Validation\Constraint;
 
 use Override;
 use Symfony\Component\Validator\Constraint;
