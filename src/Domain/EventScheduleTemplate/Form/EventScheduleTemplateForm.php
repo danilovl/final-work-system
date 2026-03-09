@@ -14,7 +14,7 @@ namespace App\Domain\EventScheduleTemplate\Form;
 
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
-use App\Domain\EventScheduleTemplate\Form\Constraint\EventScheduleTemplateTime;
+use App\Domain\EventScheduleTemplate\Validation\Constraint\EventScheduleTemplateTime;
 use App\Domain\EventType\Entity\EventType;
 use App\Infrastructure\Web\Form\Type\WeekDaysType;
 use Override;

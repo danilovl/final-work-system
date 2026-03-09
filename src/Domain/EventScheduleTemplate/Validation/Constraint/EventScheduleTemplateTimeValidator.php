@@ -10,14 +10,12 @@
  *
  */
 
-namespace App\Domain\EventScheduleTemplate\Form\Constraint;
+namespace App\Domain\EventScheduleTemplate\Validation\Constraint;
 
 use App\Application\Constant\CompareConstant;
 use App\Application\Helper\CompareHelper;
 use App\Domain\EventScheduleTemplate\Entity\EventScheduleTemplate;
-use App\Domain\EventType\Constant\{
-    EventTypeConstant
-};
+use App\Domain\EventType\Constant\EventTypeConstant;
 use Symfony\Component\Validator\{
     Constraint,
     ConstraintValidator
