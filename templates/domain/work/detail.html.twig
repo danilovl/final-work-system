@@ -69,11 +69,6 @@
                 }
             });
 
-            if ($('.progress .progress-bar')[0]) {
-                $('.progress .progress-bar').progressbar();
-                NProgress.start();
-            }
-
             function showRemaining(deadline, id) {
                 let now = new Date();
                 let distance = deadline - now;
@@ -120,10 +115,6 @@
             }, 1000, endProgram);
 
             {% endif %}
-        });
-
-        $(window).ready(() => {
-            NProgress.done();
         });
 
         (function ($) {

@@ -70,7 +70,6 @@ Encore
                     './node_modules/switchery-latest/dist/switchery.min.js',
                     './node_modules/icheck/icheck.min.js',
                     './node_modules/sticky-js/dist/sticky.min.js',
-                    './node_modules/nprogress/nprogress.js',
                     './node_modules/bootstrap-progressbar/bootstrap-progressbar.min.js',
                     './node_modules/jszip/dist/jszip.js',
                     './assets/js/collection/jquery.collection.js',

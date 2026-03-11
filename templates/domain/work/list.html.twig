@@ -144,7 +144,8 @@
                                                         <div class="progress progress_sm">
                                                             <div class="progress-bar bg-green"
                                                                  role="progressbar"
-                                                                 data-transitiongoal="{{ task_work_complete_percentage(work, activeTask) }}">
+                                                                 style="width: {{ task_work_complete_percentage(work, activeTask) }}%"
+                                                            >
                                                             </div>
                                                         </div>
                                                         <small>
@@ -210,17 +211,4 @@
             {% endif %}
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script>
-        jQuery(function ($) {
-            if ($('.progress .progress-bar')[0]) {
-                $('.progress .progress-bar').progressbar();
-                NProgress.start();
-            }
-
-            NProgress.done();
-        })
-    </script>
 {% endblock %}
