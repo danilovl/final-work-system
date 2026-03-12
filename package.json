@@ -20,7 +20,6 @@
         "@fullcalendar/vue3": "^6.1.17",
         "animate.css": "^3.5.1",
         "bootstrap": "^3.3.7",
-        "bootstrap-progressbar": "^0.9.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.47",
         "fastclick": "^1.0.6",
         "font-awesome": "^4.6.1",
