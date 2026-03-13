@@ -59,7 +59,6 @@ Encore
                     './node_modules/bootstrap/dist/js/bootstrap.min.js',
                     './node_modules/tinymce/tinymce.min.js',
                     './node_modules/tinymce/themes/modern/theme.js',
-                    './node_modules/fastclick/lib/fastclick.js',
                     './node_modules/pnotify/dist/pnotify.js',
                     './node_modules/pnotify/dist/pnotify.buttons.js',
                     './node_modules/pnotify/dist/pnotify.nonblock.js',
