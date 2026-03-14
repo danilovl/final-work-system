@@ -68,7 +68,6 @@ Encore
                     './node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                     './node_modules/switchery-latest/dist/switchery.min.js',
                     './node_modules/icheck/icheck.min.js',
-                    './node_modules/sticky-js/dist/sticky.min.js',
                     './node_modules/jszip/dist/jszip.js',
                     './assets/js/collection/jquery.collection.js',
                     './assets/js/optgroup/select2.optgroupSelect.js',
