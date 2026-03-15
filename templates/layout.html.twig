@@ -166,12 +166,17 @@
             500: '{{ 'app.flash.error.500' | trans([], 'flashes') }}'
         };
 
-        window.fetch = async (...args) => {
+        window.fetch = async (input, init = {}) => {
             activeRequests++;
             document.getElementById('ajax-loader').style.display = 'block';
 
+            init.headers = {
+                ...(init.headers || {}),
+                'X-Requested-With': 'XMLHttpRequest'
+            };
+
             try {
-                const response = await originalFetch(...args);
+                const response = await originalFetch(input, init);
                 activeRequests--;
 
                 if (activeRequests === 0) {
