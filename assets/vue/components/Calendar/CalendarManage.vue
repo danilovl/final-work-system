@@ -101,7 +101,7 @@ function handleEventDrop(info: EventDropInfo): void {
         }
       })
       .catch((error) => {
-        failureCallback(error);
+       console.error(error);
       });
 }
 
@@ -114,7 +114,9 @@ function createEvent(): void {
   const button = document.getElementById('event_create') as HTMLButtonElement;
   const loading = document.getElementById('event_create_load');
 
-  if (!form || !button || !loading) return;
+  if (!form || !button || !loading) {
+    return;
+  }
 
   button.disabled = true;
   loading.classList.remove('hide');
@@ -130,10 +132,10 @@ function createEvent(): void {
         }
       })
       .then((response: ApiResponse) => {
-        $('#create-new-event-modal').modal('hide');
-
         const calendarApi = fullCalendar.value?.getApi();
-        if (calendarApi) {
+        if (calendarApi && response.event) {
+          $('#create-new-event-modal').modal('hide');
+
           calendarApi.addEvent({
             id: response.event.id,
             title: response.event.title,
@@ -148,12 +150,14 @@ function createEvent(): void {
           });
         }
 
+        processCalendarManagerCreateNotValidFormResponse(response)
+
         for (const type in response.notifyMessage) {
           notifyMessage(type, response.notifyMessage[type]);
         }
       })
       .catch((error) => {
-        failureCallback(error);
+        console.error(error);
       })
       .finally(() => {
         loading.classList.add('hide');

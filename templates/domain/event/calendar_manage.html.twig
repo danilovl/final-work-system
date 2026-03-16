@@ -46,9 +46,9 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="testmodal" style="padding: 5px 20px;">
+                                        <div style="padding: 5px 20px;">
 
-                                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                            {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'calendar-manager-create-form'}}) }}
                                             <div class="item form-group">
                                                 {{ form_label(form.type,  'app.form.label.type' , {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
                                                 <div class="col-md-9 col-sm-9 col-xs-12">

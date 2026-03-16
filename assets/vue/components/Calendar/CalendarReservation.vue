@@ -69,7 +69,9 @@ function handleEventClick(clickInfo: ClickInfo): void {
   const eventDetail = document.getElementById('event-detail');
   const eventReservation = document.getElementById('event-reservation');
 
-  if (modalTitle) modalTitle.innerHTML = event.title.replace(/\n/g, '<br>');
+  if (modalTitle){
+    modalTitle.innerHTML = event.title.replace(/\n/g, '<br>');
+  }
 
   if (event.extendedProps.detail_url) {
     $('#event-detail').show();

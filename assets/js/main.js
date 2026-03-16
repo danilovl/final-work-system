@@ -308,6 +308,22 @@ function showArchiveContent(archiveUrl, idContent, idContentInfo) {
         });
 }
 
+const processCalendarManagerCreateNotValidFormResponse = function (response) {
+    const form = $('#calendar-manager-create-form');
+    console.log(form)
+    processNotValidFormResponse(form, response)
+}
+
+const processNotValidFormResponse = function (form, response) {
+    if (!response.data) {
+        return
+    }
+
+    for (const key in response.data) {
+        $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
+    }
+}
+
 function createEditContentAjax(buttonId, close = false, reload = false) {
     let buttonCreate = $(buttonId),
         loadingIcon = $(buttonCreate.children()[0]),
@@ -315,9 +331,7 @@ function createEditContentAjax(buttonId, close = false, reload = false) {
 
     const processResponse = function (response) {
         if (response.valid === false) {
-            for (const key in response.data) {
-                $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
-            }
+            processNotValidFormResponse(form, response)
         }
 
         for (let type in response.notifyMessage) {
@@ -384,9 +398,7 @@ function createEditContentFileAjax(buttonId, close = false, reload = false) {
 
     const processResponse = function (response) {
         if (response.valid === false) {
-            for (const key in response.data) {
-                $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
-            }
+            processNotValidFormResponse(form, response)
         }
         for (let type in response.notifyMessage) {
             notifyMessage(type, response.notifyMessage[type]);
@@ -449,12 +461,6 @@ function initAjaxChangeStatus() {
             });
 
         const processResponse = function (response) {
-            if (response.valid === false) {
-                for (const key in response.data) {
-                    $(form.find('[name*="' + key + '"]')[0]).after('<div class="col-md-12 col-sm-12 col-xs-12 validation-error red">' + response.data[key] + '</div>');
-                }
-            }
-
             for (let type in response.notifyMessage) {
                 notifyMessage(type, response.notifyMessage[type]);
             }
