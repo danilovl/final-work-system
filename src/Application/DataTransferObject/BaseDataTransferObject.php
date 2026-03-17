@@ -14,6 +14,7 @@ namespace App\Application\DataTransferObject;
 
 use App\Application\Exception\PropertyNotExistException;
 use App\Application\Interfaces\DataTransferObject\DataTransferObjectInterface;
+use ReflectionClass;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class BaseDataTransferObject implements DataTransferObjectInterface
@@ -22,20 +23,25 @@ abstract class BaseDataTransferObject implements DataTransferObjectInterface
         array $params,
         array|bool $requiredParamNames = true
     ): static {
-        $dataTransferObject = new static;
-
-        foreach ($params as $key => $value) {
-            static::setValue($dataTransferObject, $key, $value);
-        }
-
         $requiredParamNames = is_array($requiredParamNames) ? $requiredParamNames : ($requiredParamNames === true ? array_keys($params) : null);
-        if ($requiredParamNames === null) {
-            return $dataTransferObject;
+        if ($requiredParamNames !== null) {
+            $resolver = new OptionsResolver;
+            static::configureResolver($resolver, $requiredParamNames);
+            $resolver->resolve($params);
         }
 
-        $resolver = new OptionsResolver;
-        static::configureResolver($resolver, $requiredParamNames);
-        $resolver->resolve($params);
+        $reflection = new ReflectionClass(static::class);
+        $constructor = $reflection->getConstructor();
+
+        if ($constructor && $constructor->getNumberOfParameters() > 0) {
+            $dataTransferObject = new static(...$params);
+        } else {
+            $dataTransferObject = new static;
+
+            foreach ($params as $key => $value) {
+                static::setValue($dataTransferObject, $key, $value);
+            }
+        }
 
         return $dataTransferObject;
     }
