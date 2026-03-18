@@ -52,12 +52,12 @@ readonly class TaskEditHandle
         $user = $this->userService->getUser();
         $taskModel = TaskModel::fromTask($task);
 
-        $taskFormFactoryData = TaskFormFactoryData::createFromArray([
-            'type' => ControllerMethodConstant::EDIT,
-            'taskModel' => $taskModel,
-            'task' => $task,
-            'work' => $work
-        ]);
+        $taskFormFactoryData = new TaskFormFactoryData(
+            type: ControllerMethodConstant::EDIT,
+            taskModel: $taskModel,
+            task: $task,
+            work: $work
+        );
 
         $form = $this->taskFormFactory
             ->getTaskForm($taskFormFactoryData)

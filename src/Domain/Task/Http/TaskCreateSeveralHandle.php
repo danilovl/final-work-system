@@ -50,13 +50,13 @@ readonly class TaskCreateSeveralHandle
         $taskModel->active = true;
         $taskModel->owner = $user;
 
-        $taskFormFactoryData = TaskFormFactoryData::createFromArray([
-            'type' => ControllerMethodConstant::CREATE_SEVERAL,
-            'taskModel' => $taskModel,
-            'options' => [
+        $taskFormFactoryData = new TaskFormFactoryData(
+            type: ControllerMethodConstant::CREATE_SEVERAL,
+            taskModel: $taskModel,
+            options: [
                 'supervisor' => $user
             ]
-        ]);
+        );
 
         $form = $this->taskFormFactory
             ->getTaskForm($taskFormFactoryData)

@@ -59,11 +59,11 @@ readonly class TaskCreateHandle
             $taskModel->name = $taskName;
         }
 
-        $taskFormFactoryData = TaskFormFactoryData::createFromArray([
-            'type' => ControllerMethodConstant::CREATE,
-            'taskModel' => $taskModel,
-            'work' => $work
-        ]);
+        $taskFormFactoryData = new TaskFormFactoryData(
+            type: ControllerMethodConstant::CREATE,
+            taskModel: $taskModel,
+            work: $work
+        );
 
         $form = $this->taskFormFactory
             ->getTaskForm($taskFormFactoryData)
