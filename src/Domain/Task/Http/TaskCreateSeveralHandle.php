@@ -12,19 +12,19 @@
 
 namespace App\Domain\Task\Http;
 
+use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
-use App\Application\Constant\ControllerMethodConstant;
+use App\Domain\Task\DTO\Form\Factory\TaskFormFactoryDTO;
+use App\Domain\Task\Facade\TaskDeadlineFacade;
+use App\Domain\Task\Form\Factory\TaskFormFactory;
+use App\Domain\Task\Model\TaskModel;
+use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\{
     RequestService,
     TranslatorService,
     TwigRenderService
 };
-use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
-use App\Domain\Task\Facade\TaskDeadlineFacade;
-use App\Domain\Task\Form\Factory\TaskFormFactory;
-use App\Domain\Task\Model\TaskModel;
-use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\{
     Request,
     Response
@@ -50,7 +50,7 @@ readonly class TaskCreateSeveralHandle
         $taskModel->active = true;
         $taskModel->owner = $user;
 
-        $taskFormFactoryData = new TaskFormFactoryData(
+        $taskFormFactoryDTO = new TaskFormFactoryDTO(
             type: ControllerMethodConstant::CREATE_SEVERAL,
             taskModel: $taskModel,
             options: [
@@ -59,7 +59,7 @@ readonly class TaskCreateSeveralHandle
         );
 
         $form = $this->taskFormFactory
-            ->getTaskForm($taskFormFactoryData)
+            ->getTaskForm($taskFormFactoryDTO)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

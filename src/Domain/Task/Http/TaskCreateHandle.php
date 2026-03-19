@@ -12,20 +12,20 @@
 
 namespace App\Domain\Task\Http;
 
+use App\Application\Constant\ControllerMethodConstant;
 use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
-use App\Application\Constant\ControllerMethodConstant;
-use App\Infrastructure\Service\{
-    RequestService,
-    TranslatorService,
-    TwigRenderService
-};
-use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
+use App\Domain\Task\DTO\Form\Factory\TaskFormFactoryDTO;
 use App\Domain\Task\Facade\TaskDeadlineFacade;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
+use App\Infrastructure\Service\{
+    RequestService,
+    TranslatorService,
+    TwigRenderService
+};
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -59,14 +59,14 @@ readonly class TaskCreateHandle
             $taskModel->name = $taskName;
         }
 
-        $taskFormFactoryData = new TaskFormFactoryData(
+        $taskFormFactoryDTO = new TaskFormFactoryDTO(
             type: ControllerMethodConstant::CREATE,
             taskModel: $taskModel,
             work: $work
         );
 
         $form = $this->taskFormFactory
-            ->getTaskForm($taskFormFactoryData)
+            ->getTaskForm($taskFormFactoryDTO)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

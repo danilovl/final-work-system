@@ -17,7 +17,7 @@ use App\Application\Exception\{
     ConstantNotFoundException,
     RuntimeException
 };
-use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
+use App\Domain\Task\DTO\Form\Factory\TaskFormFactoryDTO;
 use App\Domain\Task\Form\{
     TaskForm,
     TaskSeveralForm
@@ -38,16 +38,16 @@ class TaskFormFactory
         private readonly FormFactoryInterface $formFactory
     ) {}
 
-    public function getTaskForm(TaskFormFactoryData $taskFormFactoryData): FormInterface
+    public function getTaskForm(TaskFormFactoryDTO $taskFormFactoryDTO): FormInterface
     {
         $formTypeClass = TaskForm::class;
-        $taskModel = $taskFormFactoryData->taskModel;
-        $work = $taskFormFactoryData->work;
-        $task = $taskFormFactoryData->task;
-        $options = $taskFormFactoryData->options;
+        $taskModel = $taskFormFactoryDTO->taskModel;
+        $work = $taskFormFactoryDTO->work;
+        $task = $taskFormFactoryDTO->task;
+        $options = $taskFormFactoryDTO->options;
         $typeOptions = [];
 
-        switch ($taskFormFactoryData->type) {
+        switch ($taskFormFactoryDTO->type) {
             case ControllerMethodConstant::EDIT:
             case ControllerMethodConstant::CREATE:
                 break;

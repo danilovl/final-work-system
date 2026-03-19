@@ -18,12 +18,12 @@ use App\Application\Constant\{
 };
 use App\Application\Helper\FormValidationMessageHelper;
 use App\Application\Interfaces\Bus\CommandBusInterface;
-use App\Infrastructure\Service\RequestService;
 use App\Domain\Task\Bus\Command\CreateTask\CreateTaskCommand;
-use App\Domain\Task\DataTransferObject\Form\Factory\TaskFormFactoryData;
+use App\Domain\Task\DTO\Form\Factory\TaskFormFactoryDTO;
 use App\Domain\Task\Form\Factory\TaskFormFactory;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\RequestService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
     Request
@@ -46,7 +46,7 @@ readonly class TaskCreateSeveralHandle
         $taskModel->active = true;
         $taskModel->owner = $user;
 
-        $taskFormFactoryData = new TaskFormFactoryData(
+        $taskFormFactoryDTO = new TaskFormFactoryDTO(
             type: ControllerMethodConstant::CREATE_SEVERAL_AJAX,
             taskModel: $taskModel,
             options: [
@@ -55,7 +55,7 @@ readonly class TaskCreateSeveralHandle
         );
 
         $form = $this->taskFormFactory
-            ->getTaskForm($taskFormFactoryData)
+            ->getTaskForm($taskFormFactoryDTO)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

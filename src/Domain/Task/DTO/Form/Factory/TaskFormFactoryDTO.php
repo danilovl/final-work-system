@@ -10,15 +10,14 @@
  *
  */
 
-namespace App\Domain\Task\DataTransferObject\Form\Factory;
+namespace App\Domain\Task\DTO\Form\Factory;
 
 use App\Application\Constant\ControllerMethodConstant;
-use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Model\TaskModel;
 use App\Domain\Work\Entity\Work;
 
-class TaskFormFactoryData extends BaseDataTransferObject
+class TaskFormFactoryDTO
 {
     public function __construct(
         public ControllerMethodConstant $type,
