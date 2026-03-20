@@ -12,7 +12,7 @@
 
 namespace App\Domain\Work\Facade;
 
-use App\Domain\Work\DataTransferObject\WorkRepositoryData;
+use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Repository\WorkRepository;
 use Doctrine\ORM\{
@@ -50,15 +50,31 @@ readonly class WorkFacade
         return $result;
     }
 
-    public function getQueryBuilderWorksBySupervisor(WorkRepositoryData $workData): QueryBuilder
+    public function getQueryBuilderWorksBySupervisor(WorkRepositoryDTO $workRepositoryDTO): QueryBuilder
     {
-        return $this->workRepository->allByUserStatus($workData);
+        return $this->workRepository->allByUserStatus($workRepositoryDTO);
     }
 
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorSupervisorStatus(WorkRepositoryData $workData): array
+    public function getWorksByAuthorSupervisorStatus(WorkRepositoryDTO $workRepositoryDTO): array
+    {
+        /** @var array $result */
+        $result = $this->workRepository
+            ->allByUserStatus($workRepositoryDTO)
+            ->getQuery()
+            ->getResult();
+
+        Assert::allIsInstanceOf($result, Work::class);
+
+        return $result;
+    }
+
+    /**
+     * @return Work[]
+     */
+    public function getWorksByAuthorStatus(WorkRepositoryDTO $workData): array
     {
         /** @var array $result */
         $result = $this->workRepository
@@ -71,23 +87,7 @@ readonly class WorkFacade
         return $result;
     }
 
-    /**
-     * @return Work[]
-     */
-    public function getWorksByAuthorStatus(WorkRepositoryData $workData): array
-    {
-        /** @var array $result */
-        $result = $this->workRepository
-            ->allByUserStatus($workData)
-            ->getQuery()
-            ->getResult();
-
-        Assert::allIsInstanceOf($result, Work::class);
-
-        return $result;
-    }
-
-    public function queryAllByUserStatus(WorkRepositoryData $workData): Query
+    public function queryAllByUserStatus(WorkRepositoryDTO $workData): Query
     {
         return $this->workRepository
             ->allByUserStatus($workData)

@@ -19,7 +19,7 @@ use App\Infrastructure\Service\{
 use App\Domain\User\Helper\UserRoleHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\DataTransferObject\WorkRepositoryData;
+use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Service\WorkService;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
@@ -43,14 +43,14 @@ class WorkDeadlineNotifyWidget extends BaseWidget
             return null;
         }
 
-        $workData = WorkRepositoryData::createFromArray([
-            'user' => $user,
-            'supervisor' => null,
-            'type' => WorkUserTypeConstant::AUTHOR->value,
-            'workStatus' => [WorkStatusConstant::ACTIVE->value]
-        ]);
+        $workRepositoryDTO = new WorkRepositoryDTO(
+            user: $user,
+            supervisor: null,
+            type: WorkUserTypeConstant::AUTHOR->value,
+            workStatus: [WorkStatusConstant::ACTIVE->value]
+        );
 
-        $works = $this->workFacade->getWorksByAuthorStatus($workData);
+        $works = $this->workFacade->getWorksByAuthorStatus($workRepositoryDTO);
         if (count($works) === 0) {
             return null;
         }

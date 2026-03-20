@@ -26,7 +26,7 @@ use App\Infrastructure\Service\{
 use App\Domain\User\Helper\UserHelper;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Constant\WorkUserTypeConstant;
-use App\Domain\Work\DataTransferObject\WorkRepositoryData;
+use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Form\WorkSearchStatusForm;
 use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
@@ -110,14 +110,14 @@ readonly class UserListHandle
 
         if ($getUserWorkAndStatus === true) {
             foreach ($result->users as $paginationUser) {
-                $workData = WorkRepositoryData::createFromArray([
-                    'user' => $paginationUser,
-                    'supervisor' => $user,
-                    'type' => $type,
-                    'workStatus' => $workStatus
-                ]);
+                $workRepositoryDTO = new WorkRepositoryDTO(
+                    user: $paginationUser,
+                    supervisor: $user,
+                    type: $type,
+                    workStatus: $workStatus
+                );
 
-                $paginationUserWorks = $this->workFacade->getWorksByAuthorSupervisorStatus($workData);
+                $paginationUserWorks = $this->workFacade->getWorksByAuthorSupervisorStatus($workRepositoryDTO);
                 $works->set($paginationUser->getId(), $paginationUserWorks);
 
                 $workStatusData = WorkStatusRepositoryData::createFromArray([

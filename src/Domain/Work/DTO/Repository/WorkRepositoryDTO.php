@@ -10,19 +10,17 @@
  *
  */
 
-namespace App\Domain\Work\DataTransferObject;
+namespace App\Domain\Work\DTO\Repository;
 
-use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\User\Entity\User;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 
-class WorkRepositoryData extends BaseDataTransferObject
+class WorkRepositoryDTO
 {
-    public ?User $user = null;
-
-    public ?User $supervisor = null;
-
-    public ?string $type = null;
-
-    public WorkStatus|iterable|null $workStatus = null;
+    public function __construct(
+        public ?User $user = null,
+        public ?User $supervisor = null,
+        public ?string $type = null,
+        public WorkStatus|iterable|null $workStatus = null
+    ) {}
 }

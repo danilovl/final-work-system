@@ -12,16 +12,15 @@
 
 namespace App\Domain\Work\Http\Api;
 
-use App\Infrastructure\Service\PaginatorService;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\DataTransferObject\WorkRepositoryData;
+use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
+use App\Infrastructure\Service\PaginatorService;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class WorkListHandle
 {
@@ -36,13 +35,13 @@ readonly class WorkListHandle
     {
         $user = $this->userService->getUser();
 
-        $workData = WorkRepositoryData::createFromArray([
-            'user' => $user,
-            'type' => $type,
-            'workStatus' => [WorkStatusConstant::ACTIVE->value]
-        ]);
+        $workRepositoryDTO = new WorkRepositoryDTO(
+            user: $user,
+            type: $type,
+            workStatus: [WorkStatusConstant::ACTIVE->value]
+        );
 
-        $worksQuery = $this->workFacade->queryAllByUserStatus($workData);
+        $worksQuery = $this->workFacade->queryAllByUserStatus($workRepositoryDTO);
         $pagination = $this->paginatorService->createPaginationRequest($request, $worksQuery);
 
         $works = [];
