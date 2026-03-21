@@ -2,7 +2,7 @@
 
 namespace App\Domain\Event\Bus\Query\EventList;
 
-use App\Domain\Event\DataTransferObject\EventRepositoryData;
+use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\EventFacade;
 use App\Infrastructure\Service\PaginatorService;
@@ -18,8 +18,9 @@ readonly class GetEventListQueryHandler
 
     public function __invoke(GetEventListQuery $query): GetEventListQueryResult
     {
-        $eventRepositoryData = new EventRepositoryData;
-        $eventRepositoryData->user = $query->user;;
+        $eventRepositoryData = new EventRepositoryDTO(
+            user: $query->user
+        );
 
         $eventsQuery = $this->eventFacade->getEventsByOwnerQuery($eventRepositoryData);
         $eventsQuery->setHydrationMode(Event::class);

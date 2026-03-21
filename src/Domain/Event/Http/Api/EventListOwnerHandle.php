@@ -13,13 +13,13 @@
 namespace App\Domain\Event\Http\Api;
 
 use App\Application\Mapper\ObjectToDtoMapper;
-use App\Infrastructure\Service\PaginatorService;
-use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
 use App\Domain\Event\DTO\Api\EventDTO;
+use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
+use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\EventFacade;
-use App\Domain\Event\DataTransferObject\EventRepositoryData;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\HttpFoundation\Request;
 
 readonly class EventListOwnerHandle
@@ -35,8 +35,9 @@ readonly class EventListOwnerHandle
     {
         $user = $this->userService->getUser();
 
-        $eventData = new EventRepositoryData;
-        $eventData->user = $user;
+        $eventData = new EventRepositoryDTO(
+            user: $user
+        );
 
         $eventsQuery = $this->eventFacade
             ->getEventsByOwnerQuery($eventData);

@@ -13,14 +13,14 @@
 namespace App\Domain\Event\Http\Ajax;
 
 use App\Application\Constant\AjaxJsonTypeConstant;
-use App\Infrastructure\Service\RequestService;
-use App\Domain\Event\DataTransferObject\EventRepositoryData;
+use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Facade\{
     EventFacade,
     EventCalendarFacade
 };
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\RequestService;
 use DateTime;
 use Symfony\Component\HttpFoundation\{
     Request,
@@ -43,11 +43,11 @@ readonly class EventGetEventHandle
         $startDate = new DateTime($request->request->getString('start'));
         $endDate = new DateTime($request->request->getString('end'));
 
-        $mediaData = EventRepositoryData::createFromArray([
-            'user' => $user,
-            'startDate' => $startDate,
-            'endDate' => $endDate
-        ]);
+        $mediaData = new EventRepositoryDTO(
+            user: $user,
+            startDate: $startDate,
+            endDate: $endDate
+        );
 
         if ($event->isOwner($user)) {
             $userEvents = $this->eventFacade->getEventsByOwner($mediaData);

@@ -10,20 +10,18 @@
  *
  */
 
-namespace App\Domain\Event\DataTransferObject;
+namespace App\Domain\Event\DTO\Repository;
 
-use App\Application\DataTransferObject\BaseDataTransferObject;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
 use DateTime;
 
-class EventRepositoryData extends BaseDataTransferObject
+class EventRepositoryDTO
 {
-    public ?User $user = null;
-
-    public ?DateTime $startDate = null;
-
-    public ?DateTime $endDate = null;
-
-    public ?EventType $eventType = null;
+    public function __construct(
+        public ?User $user = null,
+        public ?DateTime $startDate = null,
+        public ?DateTime $endDate = null,
+        public ?EventType $eventType = null,
+    ) {}
 }

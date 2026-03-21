@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Repository;
 
-use App\Domain\Event\DataTransferObject\EventRepositoryData;
+use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -42,7 +42,7 @@ class EventRepository extends ServiceEntityRepository
             ->setParameter('work', $work);
     }
 
-    public function allByOwner(EventRepositoryData $eventData): QueryBuilder
+    public function allByOwner(EventRepositoryDTO $eventData): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->addSelect('participant, work, address, user')
@@ -58,7 +58,7 @@ class EventRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-    public function allByParticipant(EventRepositoryData $eventData): QueryBuilder
+    public function allByParticipant(EventRepositoryDTO $eventData): QueryBuilder
     {
         $queryBuilder = $this->baseQueryBuilder()
             ->where('participant.user = :participant')
@@ -71,7 +71,7 @@ class EventRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-    private function filterByBetweenDate(QueryBuilder $queryBuilder, EventRepositoryData $eventData): void
+    private function filterByBetweenDate(QueryBuilder $queryBuilder, EventRepositoryDTO $eventData): void
     {
         if ($eventData->startDate === null || $eventData->endDate === null) {
             return;
@@ -86,7 +86,7 @@ class EventRepository extends ServiceEntityRepository
             ->setParameter('end', $eventData->endDate);
     }
 
-    private function filterByEventType(QueryBuilder $queryBuilder, EventRepositoryData $eventData): void
+    private function filterByEventType(QueryBuilder $queryBuilder, EventRepositoryDTO $eventData): void
     {
         if ($eventData->eventType === null) {
             return;

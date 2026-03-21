@@ -15,8 +15,7 @@ namespace App\Domain\Event\Facade;
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\ConstantNotFoundException;
 use App\Application\Helper\DateHelper;
-use App\Infrastructure\Service\EntityManagerService;
-use App\Domain\Event\DataTransferObject\EventRepositoryData;
+use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
 use App\Domain\EventCalendar\Constant\EventCalendarActionTypeConstant;
@@ -28,6 +27,7 @@ use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
 use App\Domain\WorkStatus\Entity\WorkStatus;
+use App\Infrastructure\Service\EntityManagerService;
 use Danilovl\HashidsBundle\Interfaces\HashidsServiceInterface;
 use Danilovl\ParameterBundle\Interfaces\ParameterServiceInterface;
 use DateTime;
@@ -65,11 +65,11 @@ class EventCalendarFacade
 
         switch ($type) {
             case EventCalendarActionTypeConstant::MANAGE->value:
-                $mediaData = EventRepositoryData::createFromArray([
-                    'user' => $user,
-                    'startDate' => $startDate,
-                    'endDate' => $endDate
-                ]);
+                $mediaData = new EventRepositoryDTO(
+                    user: $user,
+                    startDate: $startDate,
+                    endDate: $endDate
+                );
 
                 /** @var Event[] $userEvents */
                 $userEvents = $this->eventRepository
@@ -125,12 +125,12 @@ class EventCalendarFacade
 
                 /** @var User $supervisor */
                 foreach ($supervisors as $supervisor) {
-                    $mediaData = EventRepositoryData::createFromArray([
-                        'user' => $supervisor,
-                        'startDate' => $startDate,
-                        'endDate' => $endDate,
-                        'eventType' => $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION->value)
-                    ]);
+                    $mediaData = new EventRepositoryDTO(
+                        user: $supervisor,
+                        startDate: $startDate,
+                        endDate: $endDate,
+                        eventType: $this->entityManager->getReference(EventType::class, EventTypeConstant::CONSULTATION->value)
+                    );
 
                     /** @var Event[] $supervisorAppointments */
                     $supervisorAppointments = $this->eventRepository
