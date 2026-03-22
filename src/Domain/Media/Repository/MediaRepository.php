@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Repository;
 
-use App\Domain\Media\DataTransferObject\MediaRepositoryData;
+use App\Domain\Media\DTO\Repository\MediaRepositoryDTO;
 use App\Domain\Media\Entity\Media;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
@@ -36,7 +36,7 @@ class MediaRepository extends ServiceEntityRepository
             ->leftJoin('media.categories', 'categories');
     }
 
-    public function mediaListByUserFilter(MediaRepositoryData $mediaData): QueryBuilder
+    public function mediaListByUserFilter(MediaRepositoryDTO $mediaData): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('media')
             ->leftJoin('media.mimeType', 'mime_type')->addSelect('mime_type')

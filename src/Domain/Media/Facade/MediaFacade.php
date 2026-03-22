@@ -12,7 +12,7 @@
 
 namespace App\Domain\Media\Facade;
 
-use App\Domain\Media\DataTransferObject\MediaRepositoryData;
+use App\Domain\Media\DTO\Repository\MediaRepositoryDTO;
 use App\Domain\Media\Entity\Media;
 use App\Domain\Media\Repository\MediaRepository;
 use App\Domain\MediaType\Entity\MediaType;
@@ -67,7 +67,7 @@ readonly class MediaFacade
             ->getQuery();
     }
 
-    public function getMediaListQueryByUserFilter(MediaRepositoryData $mediaData): Query
+    public function getMediaListQueryByUserFilter(MediaRepositoryDTO $mediaData): Query
     {
         return $this->mediaRepository
             ->mediaListByUserFilter($mediaData)

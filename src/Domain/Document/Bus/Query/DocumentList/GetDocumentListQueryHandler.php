@@ -2,11 +2,11 @@
 
 namespace App\Domain\Document\Bus\Query\DocumentList;
 
+use App\Domain\Media\DTO\Repository\MediaRepositoryDTO;
 use App\Infrastructure\Service\{
     PaginatorService,
     EntityManagerService
 };
-use App\Domain\Media\DataTransferObject\MediaRepositoryData;
 use App\Domain\Media\Facade\MediaFacade;
 use App\Domain\MediaType\Constant\MediaTypeConstant;
 use App\Domain\MediaType\Entity\MediaType;
@@ -26,12 +26,12 @@ readonly class GetDocumentListQueryHandler
         /** @var MediaType $type */
         $type = $this->entityManagerService->getReference(MediaType::class, MediaTypeConstant::INFORMATION_MATERIAL->value);
 
-        $mediaData = MediaRepositoryData::createFromArray([
-            'users' => $query->users,
-            'type' => $type,
-            'active' => $query->active,
-            'criteria' => $query->criteria
-        ]);
+        $mediaData = new MediaRepositoryDTO(
+            users: $query->users,
+            active: $query->active,
+            type: $type,
+            criteria: $query->criteria
+        );
 
         $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
         $pagination = $this->paginatorService->createPaginationRequest(
