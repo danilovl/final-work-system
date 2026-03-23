@@ -12,7 +12,7 @@
 
 namespace App\Domain\WorkStatus\Facade;
 
-use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
+use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
 use Webmozart\Assert\Assert;
@@ -49,7 +49,7 @@ readonly class WorkStatusFacade
     /**
      * @return array<string, int>
      */
-    public function getCountByUser(WorkStatusRepositoryData $workStatusData): array
+    public function getCountByUser(WorkStatusRepositoryDTO $workStatusData): array
     {
         /** @var array<string, int> $result */
         $result = $this->workStatusRepository

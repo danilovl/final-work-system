@@ -29,7 +29,7 @@ use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
 use App\Domain\Work\Form\WorkSearchStatusForm;
-use App\Domain\WorkStatus\DataTransferObject\WorkStatusRepositoryData;
+use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;;
 use App\Domain\WorkStatus\Facade\WorkStatusFacade;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -120,12 +120,12 @@ readonly class UserListHandle
                 $paginationUserWorks = $this->workFacade->getWorksByAuthorSupervisorStatus($workRepositoryDTO);
                 $works->set($paginationUser->getId(), $paginationUserWorks);
 
-                $workStatusData = WorkStatusRepositoryData::createFromArray([
-                    'user' => $paginationUser,
-                    'supervisor' => $user,
-                    'type' => $type,
-                    'workStatus' => $workStatus
-                ]);
+                $workStatusData = new WorkStatusRepositoryDTO(
+                    user: $paginationUser,
+                    supervisor: $user,
+                    type: $type,
+                    workStatus: $workStatus
+                );
 
                 $workStatusCount = $this->workStatusFacade->getCountByUser($workStatusData);
                 $userStatusWorkCounts->set($paginationUser->getId(), $workStatusCount);
