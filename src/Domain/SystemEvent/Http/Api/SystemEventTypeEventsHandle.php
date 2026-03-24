@@ -14,17 +14,16 @@ namespace App\Domain\SystemEvent\Http\Api;
 
 use App\Application\Constant\DateFormatConstant;
 use App\Application\Exception\InvalidArgumentException;
-use App\Infrastructure\Service\PaginatorService;
 use App\Domain\SystemEvent\Constant\SystemEventStatusConstant;
-use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
+use App\Domain\SystemEvent\DTO\Repository\SystemEventRepositoryDTO;
 use App\Domain\SystemEvent\Facade\SystemEventRecipientFacade;
 use App\Domain\SystemEvent\Service\SystemEventLinkGeneratorService;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Service\UserService;
+use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\HttpFoundation\{
-    Request,
-    JsonResponse
-};
+    JsonResponse,
+    Request};
 
 readonly class SystemEventTypeEventsHandle
 {
@@ -44,9 +43,10 @@ readonly class SystemEventTypeEventsHandle
             default => throw new InvalidArgumentException(sprintf('Status %s not exist', $type))
         };
 
-        $systemEventRepositoryData = new SystemEventRepositoryData;
-        $systemEventRepositoryData->viewed = $viewed;
-        $systemEventRepositoryData->recipient = $this->userService->getUser();
+        $systemEventRepositoryData = new SystemEventRepositoryDTO(
+            recipient: $this->userService->getUser(),
+            viewed: $viewed
+        );
 
         $worksQuery = $this->systemEventRecipientFacade->querySystemEventsByStatus($systemEventRepositoryData);
         $pagination = $this->paginatorService->createPaginationRequest($request, $worksQuery);

@@ -12,13 +12,13 @@
 
 namespace App\Domain\SystemEventRecipient\Repository;
 
-use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
+use App\Domain\SystemEvent\DTO\Repository\SystemEventRepositoryDTO;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 class SystemEventRecipientRepository extends ServiceEntityRepository
 {
@@ -27,7 +27,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
         parent::__construct($registry, SystemEventRecipient::class);
     }
 
-    private function baseQueryBuilder(?SystemEventRepositoryData $systemEventsByTypeRecipient = null): QueryBuilder
+    private function baseQueryBuilder(?SystemEventRepositoryDTO $systemEventsByTypeRecipient = null): QueryBuilder
     {
         $builder = $this->createQueryBuilder('system_event_recipient')
             ->leftJoin('system_event_recipient.systemEvent', 'systemEvent')
@@ -82,7 +82,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function systemEventsByStatus(SystemEventRepositoryData $systemEventsByTypeRecipient): QueryBuilder
+    public function systemEventsByStatus(SystemEventRepositoryDTO $systemEventsByTypeRecipient): QueryBuilder
     {
         $builder = $this->baseQueryBuilder()
             ->andWhere('system_event_recipient.recipient = :recipient')

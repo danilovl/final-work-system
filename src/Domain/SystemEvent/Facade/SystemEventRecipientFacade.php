@@ -12,7 +12,7 @@
 
 namespace App\Domain\SystemEvent\Facade;
 
-use App\Domain\SystemEvent\DataTransferObject\SystemEventRepositoryData;
+use App\Domain\SystemEvent\DTO\Repository\SystemEventRepositoryDTO;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\Repository\SystemEventRecipientRepository;
 use App\Domain\User\Entity\User;
@@ -62,7 +62,7 @@ readonly class SystemEventRecipientFacade
         $this->systemEventRecipientRepository->updateViewedAll($recipient);
     }
 
-    public function querySystemEventsByStatus(SystemEventRepositoryData $systemEventRepositoryData): Query
+    public function querySystemEventsByStatus(SystemEventRepositoryDTO $systemEventRepositoryData): Query
     {
         return $this->systemEventRecipientRepository
             ->systemEventsByStatus($systemEventRepositoryData)
