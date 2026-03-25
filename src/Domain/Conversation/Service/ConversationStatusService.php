@@ -12,15 +12,15 @@
 
 namespace App\Domain\Conversation\Service;
 
-use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessageStatus\DataTransferObject\ConversationMessageStatusRepositoryData;
+use App\Domain\ConversationMessageStatus\DTO\Repository\ConversationMessageStatusRepositoryDTO;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatus\Repository\ConversationMessageStatusRepository;
 use App\Domain\ConversationMessageStatusType\Constant\ConversationMessageStatusTypeConstant;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
+use App\Infrastructure\Service\EntityManagerService;
 
 readonly class ConversationStatusService
 {
@@ -45,11 +45,11 @@ readonly class ConversationStatusService
             $conversation->getId()
         );
 
-        $conversationMessageStatusData = ConversationMessageStatusRepositoryData::createFromArray([
-            'user' => $user,
-            'conversation' => $conversation,
-            'type' => $type
-        ]);
+        $conversationMessageStatusData = new ConversationMessageStatusRepositoryDTO(
+            user: $user,
+            conversation: $conversation,
+            type: $type
+        );
 
         $conversationStatus = $this->conversationMessageStatusRepository
             ->oneByConversationUserType($conversationMessageStatusData)

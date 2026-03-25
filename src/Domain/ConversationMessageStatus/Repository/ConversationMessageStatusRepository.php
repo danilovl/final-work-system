@@ -14,7 +14,7 @@ namespace App\Domain\ConversationMessageStatus\Repository;
 
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationMessageStatus\DataTransferObject\ConversationMessageStatusRepositoryData;
+use App\Domain\ConversationMessageStatus\DTO\Repository\ConversationMessageStatusRepositoryDTO;
 use App\Domain\ConversationMessageStatus\Entity\ConversationMessageStatus;
 use App\Domain\ConversationMessageStatusType\Entity\ConversationMessageStatusType;
 use App\Domain\User\Entity\User;
@@ -48,7 +48,7 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
             ->setParameter('conversation', $conversation);
     }
 
-    public function oneByConversationUserType(ConversationMessageStatusRepositoryData $data): QueryBuilder
+    public function oneByConversationUserType(ConversationMessageStatusRepositoryDTO $data): QueryBuilder
     {
         return $this->baseQueryBuilder()
             ->where('conversation_message_status.user = :user')
