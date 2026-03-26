@@ -34,14 +34,14 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
     {
         parent::setUp();
 
-        $this->emailNotificationMessage = EmailNotificationMessage::createFromArray([
-            'locale' => 'en',
-            'subject' => 'subject.document_create',
-            'to' => 'test@example.com',
-            'from' => 'test@example.com',
-            'template' => 'document_create',
-            'templateParameters' => []
-        ]);
+        $this->emailNotificationMessage = new EmailNotificationMessage(
+            locale: 'en',
+            subject: 'subject.document_create',
+            to: 'test@example.com',
+            from: 'test@example.com',
+            template: 'document_create',
+            templateParameters: []
+        );
 
         $this->subscriber = new class (
             $this->userFacade,

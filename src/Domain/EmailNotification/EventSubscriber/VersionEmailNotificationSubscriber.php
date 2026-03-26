@@ -79,19 +79,19 @@ class VersionEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
                 continue;
             }
 
-            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-                'locale' => $user->getLocale() ?? $this->locale,
-                'subject' => $subject,
-                'to' => $user->getEmail(),
-                'from' => $this->sender,
-                'template' => $template,
-                'templateParameters' => [
+            $emailNotificationToQueueData = new EmailNotificationMessage(
+                locale: $user->getLocale() ?? $this->locale,
+                subject: $subject,
+                to: $user->getEmail(),
+                from: $this->sender,
+                template: $template,
+                templateParameters: [
                     'mediaOwner' => $media->getOwner()->getFullNameDegree(),
                     'mediaName' => $media->getName(),
                     'workTitle' => $work->getTitle(),
                     'workId' => $work->getId()
                 ]
-            ]);
+            );
 
             $this->addEmailNotificationToQueue($emailNotificationToQueueData);
         }

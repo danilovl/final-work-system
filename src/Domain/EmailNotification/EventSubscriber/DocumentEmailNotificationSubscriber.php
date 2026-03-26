@@ -78,14 +78,14 @@ class DocumentEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         ];
 
         foreach ($recipientArray as $user) {
-            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-                'locale' => $user->getLocale() ?? $this->locale,
-                'subject' => 'subject.document_create',
-                'to' => $user->getEmail(),
-                'from' => $this->sender,
-                'template' => 'document_create',
-                'templateParameters' => $templateParameters
-            ]);
+            $emailNotificationToQueueData = new EmailNotificationMessage(
+                locale: $user->getLocale() ?? $this->locale,
+                subject: 'subject.document_create',
+                to: $user->getEmail(),
+                from: $this->sender,
+                template: 'document_create',
+                templateParameters: $templateParameters
+            );
 
             $this->addEmailNotificationToQueue($emailNotificationToQueueData);
         }

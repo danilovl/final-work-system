@@ -33,17 +33,17 @@ class SecurityEmailNotificationSubscriber extends BaseEmailNotificationSubscribe
         $resetPassword = $genericEvent->resetPassword;
         $toUser = $resetPassword->getUser();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.event_reservation',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'reset_password_token_create',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.event_reservation',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'reset_password_token_create',
+            templateParameters: [
                 'hashedToken' => $resetPassword->getHashedToken(),
                 'tokenLifetime' => $genericEvent->tokenLifetime
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }

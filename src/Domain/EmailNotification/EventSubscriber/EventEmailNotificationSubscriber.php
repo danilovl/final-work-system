@@ -45,17 +45,17 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
 
         $toUser = $event->getParticipantMust()->getUserMust();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.event_create',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'event_create',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.event_create',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'event_create',
+            templateParameters: [
                 'eventOwner' => $event->getOwner()->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -69,17 +69,17 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
 
         $toUser = $event->getParticipantMust()->getUserMust();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.event_edit',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'event_edit',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.event_edit',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'event_edit',
+            templateParameters: [
                 'eventOwner' => $event->getOwner()->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -89,17 +89,17 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getOwner();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.event_switch_skype',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'event_switch_skype',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.event_switch_skype',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'event_switch_skype',
+            templateParameters: [
                 'eventParticipant' => $event->getParticipantMust()->getUserMust()->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -122,17 +122,17 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $locale ?? $this->locale,
-            'subject' => 'subject.event_comment_create',
-            'to' => $to,
-            'from' => $this->sender,
-            'template' => 'event_comment_create',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $locale ?? $this->locale,
+            subject: 'subject.event_comment_create',
+            to: $to,
+            from: $this->sender,
+            template: 'event_comment_create',
+            templateParameters: [
                 'commentOwner' => $user->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -155,17 +155,17 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
             $locale = $eventComment->getOwner()->getLocale();
         }
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $locale ?? $this->locale,
-            'subject' => 'subject.event_comment_edit',
-            'to' => $to,
-            'from' => $this->sender,
-            'template' => 'event_comment_edit',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $locale ?? $this->locale,
+            subject: 'subject.event_comment_edit',
+            to: $to,
+            from: $this->sender,
+            template: 'event_comment_edit',
+            templateParameters: [
                 'commentOwner' => $user->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -175,17 +175,17 @@ class EventEmailNotificationSubscriber extends BaseEmailNotificationSubscriber i
         $event = $genericEvent->event;
         $toUser = $event->getOwner();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.event_reservation',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'event_create',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.event_reservation',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'event_create',
+            templateParameters: [
                 'eventOwner' => $event->getOwner()->getFullNameDegree(),
                 'eventId' => $event->getId()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }

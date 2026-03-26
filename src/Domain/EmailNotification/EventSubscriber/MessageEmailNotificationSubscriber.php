@@ -39,17 +39,17 @@ class MessageEmailNotificationSubscriber extends BaseEmailNotificationSubscriber
         foreach ($participants as $participant) {
             $toUser = $participant->getUser();
 
-            $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-                'locale' => $toUser->getLocale() ?? $this->locale,
-                'subject' => 'subject.message_create',
-                'to' => $toUser->getEmail(),
-                'from' => $this->sender,
-                'template' => 'message_create',
-                'templateParameters' => [
+            $emailNotificationToQueueData = new EmailNotificationMessage(
+                locale: $toUser->getLocale() ?? $this->locale,
+                subject: 'subject.message_create',
+                to: $toUser->getEmail(),
+                from: $this->sender,
+                template: 'message_create',
+                templateParameters: [
                     'messageOwner' => $conversationMessage->getOwner()->getFullNameDegree(),
                     'conversationId' => $conversation->getId()
                 ]
-            ]);
+            );
 
             $this->addEmailNotificationToQueue($emailNotificationToQueueData);
         }

@@ -52,14 +52,14 @@ class TaskEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
             'workAuthor' => $work->getAuthor()->getFullNameDegree()
         ];
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => $subject,
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => $template,
-            'templateParameters' => $templateParameters
-        ]);
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: $subject,
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: $template,
+            templateParameters: $templateParameters
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }

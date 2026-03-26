@@ -33,17 +33,17 @@ class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     {
         $user = $event->user;
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $user->getLocale() ?? $this->locale,
-            'subject' => 'subject.user_create',
-            'to' => $user->getEmail(),
-            'from' => $this->sender,
-            'template' => 'user_create',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $user->getLocale() ?? $this->locale,
+            subject: 'subject.user_create',
+            to: $user->getEmail(),
+            from: $this->sender,
+            template: 'user_create',
+            templateParameters: [
                 'username' => $user->getUsername(),
                 'password' => $user->getPlainPassword()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -52,13 +52,13 @@ class UserEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
     {
         $user = $event->user;
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $this->locale,
-            'subject' => 'subject.user_edit',
-            'to' => $user->getEmail(),
-            'from' => $this->sender,
-            'template' => 'user_edit'
-        ]);
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $this->locale,
+            subject: 'subject.user_edit',
+            to: $user->getEmail(),
+            from: $this->sender,
+            template: 'user_edit'
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }

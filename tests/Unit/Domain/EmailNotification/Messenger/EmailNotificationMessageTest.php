@@ -19,17 +19,17 @@ class EmailNotificationMessageTest extends TestCase
 {
     public function testGenerateUuid(): void
     {
-        $emailNotificationMessage = EmailNotificationMessage::createFromArray([
-            'subject' => 'subject',
-            'template' => 'template',
-            'templateParameters' => [
+        $emailNotificationMessage = new EmailNotificationMessage(
+            locale: 'en',
+            subject: 'subject',
+            to: 'test@example.com',
+            from: 'test@example.com',
+            template: 'template',
+            templateParameters: [
                 'key' => 'value',
             ],
-            'locale' => 'en',
-            'from' => 'test@example.com',
-            'to' => 'test@example.com',
-            'uuid' => 'uuid',
-        ]);
+            uuid: 'uuid'
+        );
 
         $emailNotificationMessage->generateUuid();
 

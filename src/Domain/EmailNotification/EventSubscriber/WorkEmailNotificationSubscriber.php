@@ -61,14 +61,14 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
             $templateParameters['role'] = $this->translator->trans('app.text.consultant_like', locale: $locale);
         }
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $locale,
-            'subject' => 'subject.work_create',
-            'to' => $to,
-            'from' => $this->sender,
-            'template' => 'work_create',
-            'templateParameters' => $templateParameters
-        ]);
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $locale,
+            subject: 'subject.work_create',
+            to: $to,
+            from: $this->sender,
+            template: 'work_create',
+            templateParameters: $templateParameters
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -78,17 +78,17 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $work = $event->work;
         $toUser = $work->getAuthor();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.work_edit',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'work_edit',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.work_edit',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'work_edit',
+            templateParameters: [
                 'workId' => $work->getId(),
                 'workSupervisor' => $work->getSupervisor()->getFullNameDegree()
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }
@@ -98,16 +98,16 @@ class WorkEmailNotificationSubscriber extends BaseEmailNotificationSubscriber im
         $work = $event->work;
         $toUser = $work->getAuthor();
 
-        $emailNotificationToQueueData = EmailNotificationMessage::createFromArray([
-            'locale' => $toUser->getLocale() ?? $this->locale,
-            'subject' => 'subject.work_reminder_deadline',
-            'to' => $toUser->getEmail(),
-            'from' => $this->sender,
-            'template' => 'work_reminder_deadline',
-            'templateParameters' => [
+        $emailNotificationToQueueData = new EmailNotificationMessage(
+            locale: $toUser->getLocale() ?? $this->locale,
+            subject: 'subject.work_reminder_deadline',
+            to: $toUser->getEmail(),
+            from: $this->sender,
+            template: 'work_reminder_deadline',
+            templateParameters: [
                 'workId' => $work->getId(),
             ]
-        ]);
+        );
 
         $this->addEmailNotificationToQueue($emailNotificationToQueueData);
     }

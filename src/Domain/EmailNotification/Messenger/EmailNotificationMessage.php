@@ -12,23 +12,18 @@
 
 namespace App\Domain\EmailNotification\Messenger;
 
-use App\Application\DataTransferObject\BaseDataTransferObject;
-
-class EmailNotificationMessage extends BaseDataTransferObject
+class EmailNotificationMessage
 {
-    public string $locale;
-
-    public string $subject;
-
-    public string $to;
-
-    public string $from;
-
-    public string $template;
-
-    public array $templateParameters = [];
-
-    public string $uuid;
+    public function __construct(
+        public string $locale,
+        public string $subject,
+        public string $to,
+        public string $from,
+        public string $template,
+        public array $templateParameters = [],
+        public string $uuid = ''
+    ) {
+    }
 
     public function generateUuid(): void
     {

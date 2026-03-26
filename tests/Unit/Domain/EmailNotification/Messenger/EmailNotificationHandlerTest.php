@@ -78,17 +78,17 @@ class EmailNotificationHandlerTest extends TestCase
             $this->emailNotificationSendProvider,
         );
 
-        $this->emailNotificationMessage = EmailNotificationMessage::createFromArray([
-            'subject' => 'subject',
-            'template' => 'template',
-            'templateParameters' => [
+        $this->emailNotificationMessage = new EmailNotificationMessage(
+            subject: 'subject',
+            template: 'template',
+            templateParameters: [
                 'key' => 'value',
             ],
-            'locale' => 'en',
-            'from' => 'test@example.com',
-            'to' => 'test@example.com',
-            'uuid' => 'uuid',
-        ]);
+            locale: 'en',
+            from: 'test@example.com',
+            to: 'test@example.com',
+            uuid: 'uuid'
+        );
     }
 
     public function testInvokeNotEnable(): void

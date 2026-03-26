@@ -49,6 +49,7 @@ services:
     resource: '../src/Domain'
     exclude:
       - '../src/Domain/*/Bus/Query/*/*QueryResult.php'
+      - '../src/Domain/*/DataTransferObject/'
       - '../src/Domain/*/DTO/'
       - '../src/Domain/*/Entity/'
       - '../src/Domain/*/Exception'
@@ -61,6 +62,7 @@ services:
       - '../src/Domain/*/EventDispatcher/GenericEvent'
       - '../src/Domain/Comment/Form/EventSubscriber'
       - '../src/Domain/Widget/WidgetItem'
+      - '../src/Domain/EmailNotification/Messenger/EmailNotificationMessage.php'
 
   App\Domain\Work\Repository\Elastica\WorkSearch:
     arguments:
