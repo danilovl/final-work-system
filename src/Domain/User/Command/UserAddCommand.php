@@ -16,10 +16,10 @@ use App\Application\Helper\HashHelper;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
+use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -39,45 +39,39 @@ class UserAddCommand
     public function __invoke(
         SymfonyStyle $io,
         OutputInterface $output,
-        #[InputArgument(
-            name: 'username',
-            mode: InputArgument::OPTIONAL,
-            description: 'The username of the new user'
+        #[Argument(
+            description: 'The username of the new user',
+            name: 'username'
         )]
         ?string $username = null,
 
-        #[InputArgument(
-            name: 'password',
-            mode: InputArgument::OPTIONAL,
-            description: 'The plain password of the new user'
+        #[Argument(
+            description: 'The plain password of the new user',
+            name: 'password'
         )]
         ?string $password = null,
 
-        #[InputArgument(
-            name: 'email',
-            mode: InputArgument::OPTIONAL,
-            description: 'The email of the new user'
+        #[Argument(
+            description: 'The email of the new user',
+            name: 'email'
         )]
         ?string $email = null,
 
-        #[InputArgument(
-            name: 'first-name',
-            mode: InputArgument::OPTIONAL,
-            description: 'The first name of the new user'
+        #[Argument(
+            description: 'The first name of the new user',
+            name: 'first-name'
         )]
         ?string $firstName = null,
 
-        #[InputArgument(
-            name: 'last-name',
-            mode: InputArgument::OPTIONAL,
-            description: 'The last name of the new user'
+        #[Argument(
+            description: 'The last name of the new user',
+            name: 'last-name'
         )]
         ?string $lastName = null,
 
-        #[InputArgument(
-            name: 'roles',
-            mode: InputArgument::OPTIONAL,
-            description: 'Roles'
+        #[Argument(
+            description: 'Roles',
+            name: 'roles'
         )]
         ?string $roles = null
     ): int {
