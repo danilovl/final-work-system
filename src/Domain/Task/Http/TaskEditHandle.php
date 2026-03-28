@@ -71,9 +71,9 @@ readonly class TaskEditHandle
         }
 
         if ($request->isXmlHttpRequest()) {
-            $taskFormFactoryData->type = ControllerMethodConstant::EDIT_AJAX;
+            $taskFormFactoryDTO->type = ControllerMethodConstant::EDIT_AJAX;
 
-            $form = $this->taskFormFactory->getTaskForm($taskFormFactoryData);
+            $form = $this->taskFormFactory->getTaskForm($taskFormFactoryDTO);
         }
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/task/task.html.twig');

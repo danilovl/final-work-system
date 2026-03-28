@@ -39,7 +39,6 @@ class ValidationListenerExtensionTest extends TestCase
     public function testGetExtendedTypes(): void
     {
         $extendedTypes = ValidationListenerExtension::getExtendedTypes();
-        $this->assertIsIterable($extendedTypes);
 
         $types = iterator_to_array($extendedTypes);
         $this->assertCount(1, $types);

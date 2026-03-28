@@ -74,9 +74,9 @@ readonly class TaskCreateSeveralHandle
         }
 
         if ($request->isXmlHttpRequest()) {
-            $taskFormFactoryData->type = ControllerMethodConstant::CREATE_SEVERAL_AJAX;
+            $taskFormFactoryDTO->type = ControllerMethodConstant::CREATE_SEVERAL_AJAX;
 
-            $form = $this->taskFormFactory->getTaskForm($taskFormFactoryData);
+            $form = $this->taskFormFactory->getTaskForm($taskFormFactoryDTO);
         }
 
         $template = $this->twigRenderService->ajaxOrNormalFolder($request, 'domain/task/task.html.twig');

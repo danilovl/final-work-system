@@ -39,7 +39,7 @@ readonly class ConversationStatusService
             ConversationMessageStatusTypeConstant::UNREAD->value
         );
 
-        /** @var Conversation $type */
+        /** @var Conversation $conversation */
         $conversation = $this->entityManagerService->getReference(
             Conversation::class,
             $conversation->getId()
