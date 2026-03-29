@@ -20,10 +20,10 @@ readonly class ArticleFacade
 {
     public function __construct(private ArticleRepository $articleRepository) {}
 
-    public function queryArticlesByCategory(ArticleCategory $articleCategory): Query
+    public function queryAllByCategory(ArticleCategory $articleCategory): Query
     {
         return $this->articleRepository
-            ->allByArticleCategory($articleCategory)
+            ->byArticleCategory($articleCategory)
             ->getQuery();
     }
 }

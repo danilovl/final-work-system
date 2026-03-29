@@ -27,7 +27,7 @@ readonly class GetArticleCategoryArticleListQueryHandler implements QueryHandler
 
     public function __invoke(GetArticleCategoryArticleListQuery $query): GetArticleCategoryArticleListQueryResult
     {
-        $articlesQuery = $this->articleFacade->queryArticlesByCategory($query->articleCategory);
+        $articlesQuery = $this->articleFacade->queryAllByCategory($query->articleCategory);
         $articles = $this->paginatorService->createPaginationRequest($query->request, $articlesQuery);
 
         return new GetArticleCategoryArticleListQueryResult($articles);

@@ -26,7 +26,7 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function allByArticleCategory(ArticleCategory $articleCategory): QueryBuilder
+    public function byArticleCategory(ArticleCategory $articleCategory): QueryBuilder
     {
         return $this->createQueryBuilder('article')
             ->distinct()
