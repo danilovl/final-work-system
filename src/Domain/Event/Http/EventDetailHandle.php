@@ -48,7 +48,7 @@ readonly class EventDetailHandle
     {
         $user = $this->userService->getUser();
         $eventCommentExist = $this->commentFacade
-            ->getCommentByOwnerEvent($user, $event);
+            ->findByOwnerEvent($user, $event);
 
         $eventCommentModel = new CommentModel(owner: $user, event: $event);
 

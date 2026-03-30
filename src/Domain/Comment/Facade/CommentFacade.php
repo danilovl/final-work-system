@@ -21,7 +21,7 @@ readonly class CommentFacade
 {
     public function __construct(private CommentRepository $commentRepository) {}
 
-    public function getCommentByOwnerEvent(
+    public function findByOwnerEvent(
         User $user,
         Event $event
     ): ?Comment {
