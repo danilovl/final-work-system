@@ -47,14 +47,14 @@ readonly class ConversationFacade
         private ConversationRepository $conversationRepository
     ) {}
 
-    public function queryConversationsByParticipantUser(User $user): Query
+    public function queryAllByParticipantUser(User $user): Query
     {
         return $this->conversationRepository
             ->allByParticipantUser($user)
             ->getQuery();
     }
 
-    public function queryConversationsByParticipantUserTypes(User $user, array $types = []): Query
+    public function queryAllByParticipantUserTypes(User $user, array $types = []): Query
     {
         Assert::allIsInstanceOf($types, ConversationType::class);
 
@@ -69,7 +69,7 @@ readonly class ConversationFacade
     /**
      * @param int[] $ids
      */
-    public function queryConversationsByIds(array $ids): Query
+    public function queryAllByIds(array $ids): Query
     {
         Assert::allInteger($ids);
 
@@ -99,7 +99,7 @@ readonly class ConversationFacade
     /**
      * @return Conversation[]
      */
-    public function getConversationParticipants(User $user): array
+    public function listConversationParticipants(User $user): array
     {
         $conversationArray = [];
         /** @var WorkStatus $workStatus */
@@ -154,8 +154,7 @@ readonly class ConversationFacade
         ConversationComposeMessageModel $conversationComposeMessageModel
     ): void {
         /** @var Conversation[] $conversations */
-        $conversations = $this->queryConversationsByParticipantUser($user)
-            ->getResult();
+        $conversations = $this->queryAllByParticipantUser($user)->getResult();
 
         $modelConversation = $conversationComposeMessageModel->conversation;
         $content = $conversationComposeMessageModel->content;

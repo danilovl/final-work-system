@@ -52,7 +52,7 @@ readonly class ConversationCreateHandle
         $user = $this->userService->getUser();
 
         $conversationParticipants = $this->conversationFacade
-            ->getConversationParticipants($user);
+            ->listConversationParticipants($user);
 
         ConversationHelper::getConversationOpposite($conversationParticipants, $user);
         ConversationHelper::usortCzechArray($conversationParticipants);

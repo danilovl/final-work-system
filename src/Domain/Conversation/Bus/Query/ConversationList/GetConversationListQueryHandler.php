@@ -49,7 +49,7 @@ readonly class GetConversationListQueryHandler
             $types[] = $this->entityManagerService->getReference(ConversationType::class, $typeId);
         }
 
-        $conversationsQuery = $this->conversationFacade->queryConversationsByParticipantUserTypes($user, $types);
+        $conversationsQuery = $this->conversationFacade->queryAllByParticipantUserTypes($user, $types);
 
         if ($query->search) {
             $messageIds = $this->elasticaConversationMessageRepository
@@ -58,7 +58,7 @@ readonly class GetConversationListQueryHandler
             $conversationIds = $this->elasticaConversationRepository
                 ->getIdsByParticipantAndSearch($user, $messageIds, $query->search);
 
-            $conversationsQuery = $this->conversationFacade->queryConversationsByIds($conversationIds);
+            $conversationsQuery = $this->conversationFacade->queryAllByIds($conversationIds);
         }
 
         $conversationsQuery->setHydrationMode(Conversation::class);
