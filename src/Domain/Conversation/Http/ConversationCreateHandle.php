@@ -79,7 +79,7 @@ readonly class ConversationCreateHandle
         $isUnreadMessages = $this->conversationMessageFacade
             ->isUnreadMessagesByRecipient($user);
 
-        $conversationTypes = $this->conversationTypeFacade->getAll();
+        $conversationTypes = $this->conversationTypeFacade->list();
 
         return $this->twigRenderService->renderToResponse('domain/conversation/create.html.twig', [
             'isUnreadMessages' => $isUnreadMessages,

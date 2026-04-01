@@ -51,7 +51,7 @@ readonly class ConversationListHandle
 
         $isUnreadMessages = $this->conversationMessageFacade->isUnreadMessagesByRecipient($user);
 
-        $conversationTypes = $this->conversationTypeFacade->getAll();
+        $conversationTypes = $this->conversationTypeFacade->list();
 
         $query = GetConversationListQuery::create(
             request: $request,

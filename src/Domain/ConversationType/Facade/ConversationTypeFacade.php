@@ -23,7 +23,7 @@ readonly class ConversationTypeFacade
     /**
      * @return ConversationType[]
      */
-    public function getAll(): array
+    public function list(): array
     {
         /** @var array $result */
         $result = $this->conversationTypeRepository->findAll();
