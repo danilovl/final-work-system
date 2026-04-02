@@ -82,7 +82,7 @@ readonly class EmailNotificationHandler
         string $body,
         bool $success
     ): void {
-        $emailNotification = $this->emailNotificationFacade->getOneByUuid($message->uuid);
+        $emailNotification = $this->emailNotificationFacade->findByUuid($message->uuid);
         if ($emailNotification !== null) {
             if (!$success) {
                 return;

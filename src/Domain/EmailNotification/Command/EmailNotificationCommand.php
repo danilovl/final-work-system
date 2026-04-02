@@ -42,7 +42,7 @@ class EmailNotificationCommand
         }
 
         $emailNotification = $this->emailNotificationFacade
-            ->getOneReadyForSender();
+            ->findReadyForSender();
 
         if ($emailNotification === null) {
             $io->error('Email notification queue is empty.');

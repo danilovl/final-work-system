@@ -123,7 +123,7 @@ class EmailNotificationHandlerTest extends TestCase
 
         $this->emailNotificationFacade
             ->expects($this->once())
-            ->method('getOneByUuid')
+            ->method('findByUuid')
             ->willReturn($emailNotification);
 
         $this->expectOutputString('Failed send email to test@example.com. ' . PHP_EOL);
@@ -151,7 +151,7 @@ class EmailNotificationHandlerTest extends TestCase
 
         $this->emailNotificationFacade
             ->expects($this->once())
-            ->method('getOneByUuid')
+            ->method('findByUuid')
             ->willReturn($emailNotification);
 
         $result = 'Success send email to test@example.com. ' . PHP_EOL;
@@ -182,7 +182,7 @@ class EmailNotificationHandlerTest extends TestCase
 
         $this->emailNotificationFacade
             ->expects($this->once())
-            ->method('getOneByUuid')
+            ->method('findByUuid')
             ->willReturn(null);
 
         $result = 'Success send email to test@example.com. ' . PHP_EOL;

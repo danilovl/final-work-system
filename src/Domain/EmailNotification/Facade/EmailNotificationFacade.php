@@ -19,7 +19,7 @@ readonly class EmailNotificationFacade
 {
     public function __construct(private EmailNotificationRepository $emailNotificationRepository) {}
 
-    public function getOneReadyForSender(): ?EmailNotification
+    public function findReadyForSender(): ?EmailNotification
     {
         /** @var EmailNotification|null $result */
         $result = $this->emailNotificationRepository
@@ -31,7 +31,7 @@ readonly class EmailNotificationFacade
         return $result;
     }
 
-    public function getOneByUuid(string $uuid): ?EmailNotification
+    public function findByUuid(string $uuid): ?EmailNotification
     {
         /** @var EmailNotification|null $result */
         $result = $this->emailNotificationRepository
