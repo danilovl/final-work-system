@@ -55,7 +55,7 @@ class EventCalendarFacade
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getEventsByOwner(
+    public function listEventsByOwner(
         User $user,
         string $type,
         DateTime $startDate,

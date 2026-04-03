@@ -40,7 +40,7 @@ readonly class EventListOwnerHandle
         );
 
         $eventsQuery = $this->eventFacade
-            ->getEventsByOwnerQuery($eventData);
+            ->queryEventsByOwner($eventData);
 
         $pagination = $this->paginatorService->createPaginationRequest($request, $eventsQuery, limit: 1);
 

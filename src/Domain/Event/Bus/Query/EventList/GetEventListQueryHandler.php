@@ -22,7 +22,7 @@ readonly class GetEventListQueryHandler
             user: $query->user
         );
 
-        $eventsQuery = $this->eventFacade->getEventsByOwnerQuery($eventRepositoryData);
+        $eventsQuery = $this->eventFacade->queryEventsByOwner($eventRepositoryData);
         $eventsQuery->setHydrationMode(Event::class);
 
         $pagination = $this->paginatorService->createPaginationRequest($query->request, $eventsQuery);

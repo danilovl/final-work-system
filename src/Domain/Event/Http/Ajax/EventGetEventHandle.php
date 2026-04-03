@@ -50,9 +50,9 @@ readonly class EventGetEventHandle
         );
 
         if ($event->isOwner($user)) {
-            $userEvents = $this->eventFacade->getEventsByOwner($mediaData);
+            $userEvents = $this->eventFacade->listEventsByOwner($mediaData);
         } else {
-            $userEvents = $this->eventFacade->getEventsByParticipant($mediaData);
+            $userEvents = $this->eventFacade->listByParticipant($mediaData);
         }
 
         $events = $this->eventCalendarFacade

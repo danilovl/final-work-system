@@ -32,10 +32,8 @@ readonly class EventParticipantFacade
     /**
      * @return EventParticipant[]
      */
-    public function getEventParticipantsByUserEvent(
-        User $user,
-        Event $event
-    ): array {
+    public function listByUserEvent(User $user, Event $event): array
+    {
         /** @var WorkStatus $workStatus */
         $workStatus = $this->entityManagerService->getReference(WorkStatus::class, WorkStatusConstant::ACTIVE->value);
 

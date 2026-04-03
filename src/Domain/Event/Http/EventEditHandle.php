@@ -52,7 +52,7 @@ readonly class EventEditHandle
     {
         $user = $this->userService->getUser();
         $eventParticipantArray = $this->eventParticipantFacade
-            ->getEventParticipantsByUserEvent($user, $event);
+            ->listByUserEvent($user, $event);
 
         $eventModel = EventModel::fromEvent($event);
         $eventModel->setActualParticipant($eventParticipantArray);

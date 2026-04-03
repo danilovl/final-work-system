@@ -22,7 +22,7 @@ readonly class EventFacade
 {
     public function __construct(private EventRepository $eventRepository) {}
 
-    public function find(int $id): ?Event
+    public function findById(int $id): ?Event
     {
         /** @var Event|null $result */
         $result = $this->eventRepository->find($id);
@@ -33,7 +33,7 @@ readonly class EventFacade
     /**
      * @return Event[]
      */
-    public function getEventsByOwner(EventRepositoryDTO $eventData): array
+    public function listEventsByOwner(EventRepositoryDTO $eventData): array
     {
         /** @var array $result */
         $result = $this->eventRepository
@@ -46,7 +46,7 @@ readonly class EventFacade
         return $result;
     }
 
-    public function getEventsByOwnerQuery(EventRepositoryDTO $eventData): Query
+    public function queryEventsByOwner(EventRepositoryDTO $eventData): Query
     {
         return $this->eventRepository
             ->allByOwner($eventData)
@@ -56,7 +56,7 @@ readonly class EventFacade
     /**
      * @return Event[]
      */
-    public function getEventsByParticipant(EventRepositoryDTO $eventData): array
+    public function listByParticipant(EventRepositoryDTO $eventData): array
     {
         /** @var array $result */
         $result = $this->eventRepository

@@ -35,7 +35,7 @@ readonly class EventCalendarGetEventHandle
         $startDate = new DateTime($getEventRequest->start);
         $endDate = new DateTime($getEventRequest->end);
 
-        $events = $this->eventCalendarFacade->getEventsByOwner(
+        $events = $this->eventCalendarFacade->listEventsByOwner(
             $this->userService->getUser(),
             $request->attributes->getString('type'),
             $startDate,
