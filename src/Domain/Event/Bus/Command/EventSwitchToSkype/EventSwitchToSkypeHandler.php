@@ -29,7 +29,7 @@ readonly class EventSwitchToSkypeHandler implements CommandHandlerInterface
     public function __invoke(EventSwitchToSkypeCommand $command): ?Event
     {
         $event = $command->event;
-        $eventAddressSkype = $this->eventAddressFacade->getSkypeByOwner($event->getOwner());
+        $eventAddressSkype = $this->eventAddressFacade->findSkypeByOwner($event->getOwner());
 
         if ($eventAddressSkype === null) {
             return null;

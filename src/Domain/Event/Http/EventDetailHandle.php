@@ -69,7 +69,7 @@ readonly class EventDetailHandle
         }
 
         $eventAddressSkype = $this->eventAddressFacade
-            ->getSkypeByOwner($event->getOwner());
+            ->findSkypeByOwner($event->getOwner());
 
         $this->seoPageService->setTitle($event->toString());
 
