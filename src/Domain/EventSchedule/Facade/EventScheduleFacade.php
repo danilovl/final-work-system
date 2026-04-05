@@ -20,7 +20,7 @@ readonly class EventScheduleFacade
 {
     public function __construct(private EventScheduleRepository $eventScheduleRepository) {}
 
-    public function queryEventSchedulesByOwner(User $user): Query
+    public function queryByOwner(User $user): Query
     {
         return $this->eventScheduleRepository
             ->allByOwner($user)

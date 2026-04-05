@@ -26,7 +26,7 @@ readonly class GetEventScheduleListQueryHandler
 
     public function __invoke(GetEventScheduleListQuery $query): GetEventScheduleListQueryResult
     {
-        $eventSchedulesQuery = $this->eventScheduleFacade->queryEventSchedulesByOwner($query->user);
+        $eventSchedulesQuery = $this->eventScheduleFacade->queryByOwner($query->user);
         $pagination = $this->paginatorService->createPaginationRequest($query->request, $eventSchedulesQuery);
 
         return new GetEventScheduleListQueryResult($pagination);
