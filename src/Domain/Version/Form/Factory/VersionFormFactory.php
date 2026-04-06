@@ -46,7 +46,7 @@ class VersionFormFactory
         ?Work $work = null
     ): FormInterface {
         $mimeTypes = $this->mediaMimeTypeFacade
-            ->getFormValidationMimeTypes(true);
+            ->list(true);
 
         $parameters = [
             'mimeTypes' => $mimeTypes

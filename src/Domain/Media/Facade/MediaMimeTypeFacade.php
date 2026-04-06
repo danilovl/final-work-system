@@ -24,7 +24,7 @@ readonly class MediaMimeTypeFacade
     /**
      * @return MediaMimeType[]|string[]
      */
-    public function getFormValidationMimeTypes(bool $onlyKey = false): array
+    public function list(bool $onlyKey = false): array
     {
         /** @var MediaMimeType[] $mimeTypes */
         $mimeTypes = $this->mediaMimeTypeRepository
@@ -42,7 +42,7 @@ readonly class MediaMimeTypeFacade
     /**
      * @return MediaMimeType[]|string[]
      */
-    public function getMimeTypesByOwner(
+    public function listByOwner(
         iterable|User $user,
         iterable|MediaType|int|null $mediaType = null,
         bool $onlyKey = false
@@ -60,7 +60,7 @@ readonly class MediaMimeTypeFacade
         return $mimeTypes;
     }
 
-    public function getMimeTypeByName(string $name): ?MediaMimeType
+    public function listByName(string $name): ?MediaMimeType
     {
         /** @var MediaMimeType|null $result */
         $result = $this->mediaMimeTypeRepository

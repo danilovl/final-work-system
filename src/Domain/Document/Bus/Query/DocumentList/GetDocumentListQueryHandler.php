@@ -33,7 +33,7 @@ readonly class GetDocumentListQueryHandler
             criteria: $query->criteria
         );
 
-        $documents = $this->mediaFacade->getMediaListQueryByUserFilter($mediaData);
+        $documents = $this->mediaFacade->queryByUserFilter($mediaData);
         $pagination = $this->paginatorService->createPaginationRequest(
             $query->request,
             $documents,

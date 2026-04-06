@@ -51,7 +51,7 @@ class S3CreateBucketCommandTest extends TestCase
         $mediaType2->method('getFolder')->willReturn('testFolder2');
 
         $this->mediaTypeFacade
-            ->method('findAll')
+            ->method('list')
             ->willReturn([$mediaType1, $mediaType2]);
 
         $this->s3ClientService

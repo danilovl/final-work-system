@@ -43,7 +43,7 @@ readonly class ProfileCreateImageWebCameraHandler implements CommandHandlerInter
         $media = $profileImage ?? new Media;
         if ($profileImage === null) {
             /** @var MediaType $mediaType */
-            $mediaType = $this->mediaTypeFacade->find(MediaTypeConstant::USER_PROFILE_IMAGE->value);
+            $mediaType = $this->mediaTypeFacade->findById(MediaTypeConstant::USER_PROFILE_IMAGE->value);
 
             $media = new Media;
             $media->setType($mediaType);

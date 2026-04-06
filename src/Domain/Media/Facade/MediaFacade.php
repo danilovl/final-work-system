@@ -24,7 +24,7 @@ readonly class MediaFacade
 {
     public function __construct(private MediaRepository $mediaRepository) {}
 
-    public function find(int $id): ?Media
+    public function findById(int $id): ?Media
     {
         /** @var Media|null $result */
         $result = $this->mediaRepository->find($id);
@@ -45,7 +45,7 @@ readonly class MediaFacade
     /**
      * @return Media[]
      */
-    public function findAll(int $offset, int $limit): array
+    public function list(int $offset, int $limit): array
     {
         /** @var array $result */
         $result = $this->mediaRepository
@@ -67,7 +67,7 @@ readonly class MediaFacade
             ->getQuery();
     }
 
-    public function getMediaListQueryByUserFilter(MediaRepositoryDTO $mediaData): Query
+    public function queryByUserFilter(MediaRepositoryDTO $mediaData): Query
     {
         return $this->mediaRepository
             ->mediaListByUserFilter($mediaData)

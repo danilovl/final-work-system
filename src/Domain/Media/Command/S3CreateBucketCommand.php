@@ -30,7 +30,7 @@ class S3CreateBucketCommand
 
     public function __invoke(SymfonyStyle $io): int
     {
-        $mediaTypes = $this->mediaTypeFacade->findAll();
+        $mediaTypes = $this->mediaTypeFacade->list();
 
         $io->title('Creating S3 buckets');
 

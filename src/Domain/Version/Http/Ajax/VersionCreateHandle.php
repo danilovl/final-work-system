@@ -57,7 +57,7 @@ readonly class VersionCreateHandle
         $form = $this->formFactory
             ->create(VersionForm::class, $mediaModel, [
                 'uploadMedia' => true,
-                'mimeTypes' => $this->mediaMimeTypeFacade->getFormValidationMimeTypes(true)
+                'mimeTypes' => $this->mediaMimeTypeFacade->list(true)
             ])
             ->handleRequest($request);
 

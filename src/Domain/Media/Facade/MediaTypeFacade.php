@@ -20,7 +20,7 @@ readonly class MediaTypeFacade
 {
     public function __construct(private MediaTypeRepository $mediaTypeRepository) {}
 
-    public function find(int $id): ?MediaType
+    public function findById(int $id): ?MediaType
     {
         /** @var MediaType|null $result */
         $result = $this->mediaTypeRepository->find($id);
@@ -31,7 +31,7 @@ readonly class MediaTypeFacade
     /**
      * @return MediaType[]
      */
-    public function findAll(): array
+    public function list(): array
     {
         /** @var array $result */
         $result = $this->mediaTypeRepository->findAll();

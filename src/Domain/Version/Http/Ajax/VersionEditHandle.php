@@ -43,7 +43,7 @@ readonly class VersionEditHandle
         $mediaModel = MediaModel::fromMedia($media);
         $form = $this->formFactory
             ->create(VersionForm::class, $mediaModel, [
-                'mimeTypes' => $this->mediaMimeTypeFacade->getFormValidationMimeTypes(true)
+                'mimeTypes' => $this->mediaMimeTypeFacade->list(true)
             ])
             ->handleRequest($request);
 

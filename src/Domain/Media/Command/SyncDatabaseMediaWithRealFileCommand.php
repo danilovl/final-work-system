@@ -59,7 +59,7 @@ class SyncDatabaseMediaWithRealFileCommand
         $offset = 0;
         $count = 0;
         while (true) {
-            $medias = $this->mediaFacade->findAll($offset, self::LIMIT);
+            $medias = $this->mediaFacade->list($offset, self::LIMIT);
             if (count($medias) === 0) {
                 break;
             }
@@ -87,7 +87,7 @@ class SyncDatabaseMediaWithRealFileCommand
     private function syncMediaFile(SymfonyStyle $io): void
     {
         $uploadFolder = $this->parameterService->getString('upload_directory');
-        $mediaTypes = $this->mediaTypeFacade->findAll();
+        $mediaTypes = $this->mediaTypeFacade->list();
 
         $count = 0;
         foreach ($mediaTypes as $mediaType) {
@@ -117,7 +117,7 @@ class SyncDatabaseMediaWithRealFileCommand
         $finder = new Finder;
         $finder->directories()->in($uploadFolder)->depth(0);
 
-        $mediaTypes = $this->mediaTypeFacade->findAll();
+        $mediaTypes = $this->mediaTypeFacade->list();
         $mediaTypeFolders = array_map(static fn (MediaType $mediaType): string => $mediaType->getFolder(), $mediaTypes);
 
         $progressBar = new ProgressBar($output, $finder->count());

@@ -63,7 +63,7 @@ class DocumentFormFactory
     ): FormInterface {
         $user = $this->user;
         $formClass = DocumentForm::class;
-        $mimeTypes = $this->mediaMimeTypeFacade->getFormValidationMimeTypes(true);
+        $mimeTypes = $this->mediaMimeTypeFacade->list(true);
 
         switch ($type) {
             case ControllerMethodConstant::CREATE:
@@ -124,7 +124,7 @@ class DocumentFormFactory
                     ->getMediaCategoriesByOwners($userActiveSupervisors);
 
                 $mimeType = $this->mediaMimeTypeFacade
-                    ->getMimeTypesByOwner($userActiveSupervisors, MediaTypeConstant::INFORMATION_MATERIAL->value);
+                    ->listByOwner($userActiveSupervisors, MediaTypeConstant::INFORMATION_MATERIAL->value);
 
                 $formClass = DocumentSearchForm::class;
                 $parameters = [
@@ -138,7 +138,7 @@ class DocumentFormFactory
                     ->getMediaCategoriesByOwner($user);
 
                 $mimeType = $this->mediaMimeTypeFacade
-                    ->getMimeTypesByOwner($user, MediaTypeConstant::INFORMATION_MATERIAL->value);
+                    ->listByOwner($user, MediaTypeConstant::INFORMATION_MATERIAL->value);
 
                 $formClass = DocumentSearchForm::class;
                 $parameters = [
