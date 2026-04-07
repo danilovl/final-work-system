@@ -20,7 +20,7 @@ readonly class GetDocumentCategoryListQueryHandler
     {
         $pagination = $this->paginatorService->createPaginationRequest(
             $query->request,
-            $this->mediaCategoryFacade->queryMediaCategoriesByOwner($query->user),
+            $this->mediaCategoryFacade->queryByOwner($query->user),
             $this->parameterService->getInt('pagination.default.page'),
             $this->parameterService->getInt('pagination.document_category.limit'),
             detachEntity: true

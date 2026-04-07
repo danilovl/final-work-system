@@ -121,7 +121,7 @@ class DocumentFormFactory
                     ->getAllUserActiveSupervisors($user);
 
                 $categories = $this->mediaCategoryFacade
-                    ->getMediaCategoriesByOwners($userActiveSupervisors);
+                    ->listByOwners($userActiveSupervisors);
 
                 $mimeType = $this->mediaMimeTypeFacade
                     ->listByOwner($userActiveSupervisors, MediaTypeConstant::INFORMATION_MATERIAL->value);
@@ -135,7 +135,7 @@ class DocumentFormFactory
                 break;
             case ControllerMethodConstant::LIST_OWNER:
                 $categories = $this->mediaCategoryFacade
-                    ->getMediaCategoriesByOwner($user);
+                    ->listByOwner($user);
 
                 $mimeType = $this->mediaMimeTypeFacade
                     ->listByOwner($user, MediaTypeConstant::INFORMATION_MATERIAL->value);

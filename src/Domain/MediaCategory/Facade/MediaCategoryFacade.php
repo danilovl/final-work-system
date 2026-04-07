@@ -22,7 +22,7 @@ readonly class MediaCategoryFacade
 {
     public function __construct(private MediaCategoryRepository $mediaCategoryRepository) {}
 
-    public function queryMediaCategoriesByOwner(User $user): Query
+    public function queryByOwner(User $user): Query
     {
         return $this->mediaCategoryRepository
             ->allByOwner($user)
@@ -32,7 +32,7 @@ readonly class MediaCategoryFacade
     /**
      * @return MediaCategory[]
      */
-    public function getMediaCategoriesByOwner(User $user): array
+    public function listByOwner(User $user): array
     {
         /** @var array $result */
         $result = $this->mediaCategoryRepository
@@ -48,7 +48,7 @@ readonly class MediaCategoryFacade
     /**
      * @return MediaCategory[]
      */
-    public function getMediaCategoriesByOwners(iterable $users): array
+    public function listByOwners(iterable $users): array
     {
         /** @var array $result */
         $result = $this->mediaCategoryRepository
