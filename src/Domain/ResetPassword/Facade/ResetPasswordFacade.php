@@ -21,7 +21,7 @@ readonly class ResetPasswordFacade
 {
     public function __construct(private ResetPasswordRepository $resetPasswordRepository) {}
 
-    public function find(int $id): ?ResetPassword
+    public function findById(int $id): ?ResetPassword
     {
         /** @var ResetPassword|null $result */
         $result = $this->resetPasswordRepository->find($id);
@@ -29,7 +29,7 @@ readonly class ResetPasswordFacade
         return $result;
     }
 
-    public function findResetPasswordByToken(string $token): ?ResetPassword
+    public function findByToken(string $token): ?ResetPassword
     {
         /** @var ResetPassword|null $result */
         $result = $this->resetPasswordRepository
@@ -40,7 +40,7 @@ readonly class ResetPasswordFacade
         return $result;
     }
 
-    public function removeResetPassword(ResetPassword $resetPassword): void
+    public function remove(ResetPassword $resetPassword): void
     {
         $this->resetPasswordRepository
             ->baseQueryBuilder()
@@ -51,7 +51,7 @@ readonly class ResetPasswordFacade
             ->execute();
     }
 
-    public function getMostRecentNonExpiredRequestDate(User $user): ?DateTime
+    public function findMostRecentNonExpiredRequestDate(User $user): ?DateTime
     {
         /** @var ResetPassword|null $resetPassword */
         $resetPassword = $this->resetPasswordRepository

@@ -108,17 +108,17 @@ readonly class ResetPasswordService
             throw new InvalidResetPasswordTokenException;
         }
 
-        $this->resetPasswordFacade->removeResetPassword($request);
+        $this->resetPasswordFacade->remove($request);
     }
 
     private function findResetPasswordRequest(string $token): ?ResetPassword
     {
-        return $this->resetPasswordFacade->findResetPasswordByToken($token);
+        return $this->resetPasswordFacade->findByToken($token);
     }
 
     private function hasUserHitThrottling(User $user): ?DateTime
     {
-        $lastRequestDate = $this->resetPasswordFacade->getMostRecentNonExpiredRequestDate($user);
+        $lastRequestDate = $this->resetPasswordFacade->findMostRecentNonExpiredRequestDate($user);
         if ($lastRequestDate === null) {
             return null;
         }
