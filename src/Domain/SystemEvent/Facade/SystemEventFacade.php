@@ -19,7 +19,7 @@ readonly class SystemEventFacade
 {
     public function __construct(private SystemEventRepository $systemEventRepository) {}
 
-    public function getTotalUnreadSystemEventsByRecipient(User $user): ?int
+    public function getTotalUnreadSystemEventsByRecipient(User $user): int
     {
         return (int) $this->systemEventRepository
             ->countUnreadByRecipient($user)
