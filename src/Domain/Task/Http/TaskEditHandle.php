@@ -83,7 +83,7 @@ readonly class TaskEditHandle
             'task' => $task,
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.task_edit'),
-            'taskDeadlines' => $this->taskDeadlineFacade->getDeadlinesByOwner($user),
+            'taskDeadlines' => $this->taskDeadlineFacade->listByOwner($user),
             'buttonActionTitle' => $this->translatorService->trans('app.form.action.update'),
             'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.update_and_close')
         ]);

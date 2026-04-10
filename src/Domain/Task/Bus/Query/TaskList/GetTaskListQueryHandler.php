@@ -28,7 +28,7 @@ readonly class GetTaskListQueryHandler implements QueryHandlerInterface
     public function __invoke(GetTaskListQuery $query): GetTaskListQueryResult
     {
         $user = $query->user;
-        $tasksQuery = $this->taskFacade->queryTasksByOwner($user);
+        $tasksQuery = $this->taskFacade->queryByOwner($user);
 
         if ($query->search) {
             $taskIds = $this->elasticaTaskRepository->getIdsByOwnerAndSearch($user, $query->search);

@@ -90,7 +90,7 @@ readonly class TaskCreateHandle
             'work' => $work,
             'form' => $form->createView(),
             'title' => $this->translatorService->trans('app.page.task_create'),
-            'taskDeadlines' => $this->taskDeadlineFacade->getDeadlinesByOwner($user),
+            'taskDeadlines' => $this->taskDeadlineFacade->listByOwner($user),
             'buttonActionTitle' => $this->translatorService->trans('app.form.action.create'),
             'buttonActionCloseTitle' => $this->translatorService->trans('app.form.action.create_and_close')
         ]);

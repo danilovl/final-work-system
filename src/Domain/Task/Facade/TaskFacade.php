@@ -23,7 +23,7 @@ readonly class TaskFacade
 {
     public function __construct(private TaskRepository $taskRepository) {}
 
-    public function find(int $id): ?Task
+    public function findById(int $id): ?Task
     {
         /** @var Task|null $result */
         $result = $this->taskRepository->find($id);
@@ -34,7 +34,7 @@ readonly class TaskFacade
     /**
      * @return Task[]
      */
-    public function findAll(?int $limit = null): array
+    public function list(?int $limit = null): array
     {
         /** @var Task[] $result */
         $result = $this->taskRepository
@@ -46,7 +46,7 @@ readonly class TaskFacade
         return $result;
     }
 
-    public function queryTasksByOwner(User $user): Query
+    public function queryByOwner(User $user): Query
     {
         return $this->taskRepository
             ->allByOwner($user)
@@ -85,7 +85,7 @@ readonly class TaskFacade
     /**
      * @return Task[]
      */
-    public function findAllByOwnerComplete(
+    public function listByOwnerComplete(
         User $user,
         bool $isComplete
     ): array {
@@ -101,7 +101,7 @@ readonly class TaskFacade
     /**
      * @param Work[] $works
      */
-    public function queryTasksByWorks(array $works): Query
+    public function queryByWorks(array $works): Query
     {
         Assert::allIsInstanceOf($works, Work::class);
 

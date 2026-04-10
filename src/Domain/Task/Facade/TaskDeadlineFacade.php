@@ -25,7 +25,7 @@ readonly class TaskDeadlineFacade
         private ParameterServiceInterface $parameterService
     ) {}
 
-    public function getDeadlinesByOwner(
+    public function listByOwner(
         User $user,
         ?int $limit = null
     ): array {
@@ -49,7 +49,7 @@ readonly class TaskDeadlineFacade
     /**
      * @return Task[]
      */
-    public function getTasksAfterDeadline(int $offset, int $limit): array
+    public function listAfterDeadline(int $offset, int $limit): array
     {
         /** @var array $result */
         $result = $this->taskRepository

@@ -37,7 +37,7 @@ readonly class TaskListSolverHandle
         /** @var Work[] $authorWorks */
         $authorWorks = $authorWorksCollection->toArray();
 
-        $tasksQuery = $this->taskFacade->queryTasksByWorks($authorWorks);
+        $tasksQuery = $this->taskFacade->queryByWorks($authorWorks);
 
         $tasksQuery->setHydrationMode(Task::class);
 

@@ -46,7 +46,7 @@ final class TaskRemindDeadlineCommand
         $offset = 0;
         $count = 0;
         while (true) {
-            $tasks = $this->taskDeadlineFacade->getTasksAfterDeadline($offset, self::LIMIT);
+            $tasks = $this->taskDeadlineFacade->listAfterDeadline($offset, self::LIMIT);
             if (count($tasks) === 0) {
                 break;
             }

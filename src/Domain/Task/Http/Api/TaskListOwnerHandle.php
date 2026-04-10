@@ -33,7 +33,7 @@ readonly class TaskListOwnerHandle
     {
         $user = $this->userService->getUser();
         $tasksQuery = $this->taskFacade
-            ->queryTasksByOwner($user);
+            ->queryByOwner($user);
 
         $tasksQuery->setHydrationMode(Task::class);
 

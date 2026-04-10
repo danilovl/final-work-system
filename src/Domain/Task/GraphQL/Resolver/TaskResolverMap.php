@@ -29,13 +29,13 @@ class TaskResolverMap extends ResolverMap
                     /** @var int $id */
                     $id = $args['id'];
 
-                    return $this->taskService->find($id);
+                    return $this->taskService->findById($id);
                 },
                 'taskList' => function ($value, ArgumentInterface $args): array {
                     /** @var int|null $limit */
                     $limit = $args['limit'] ?? null;
 
-                    return $this->taskService->findAll($limit);
+                    return $this->taskService->list($limit);
                 },
             ]
         ];
