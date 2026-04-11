@@ -106,7 +106,7 @@ class ApiAuthenticator extends AbstractAuthenticator
             $username = $apiKeyCredentialModel->authUserUsername;
             $userToken = $apiKeyCredentialModel->authUserToken;
 
-            $user = $this->userFacade->findOneByToken($username, $userToken);
+            $user = $this->userFacade->findByToken($username, $userToken);
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException('Username by token could not be found.');
             }

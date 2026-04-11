@@ -28,7 +28,7 @@ readonly class UserFacade
         private UserWorkService $userWorkService
     ) {}
 
-    public function find(int $id): ?User
+    public function findById(int $id): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository->find($id);
@@ -36,7 +36,7 @@ readonly class UserFacade
         return $result;
     }
 
-    public function findNotNull(int $id): User
+    public function getById(int $id): User
     {
         /** @var User $user */
         $user = $this->userRepository->find($id);
@@ -47,7 +47,7 @@ readonly class UserFacade
     /**
      * @return ArrayCollection<User>
      */
-    public function getAllUserActiveSupervisors(User $user): ArrayCollection
+    public function listUserActiveSupervisors(User $user): ArrayCollection
     {
         /** @var ArrayCollection<User> $userActiveSupervisors */
         $userActiveSupervisors = new ArrayCollection;
@@ -85,7 +85,7 @@ readonly class UserFacade
         return $userActiveSupervisors;
     }
 
-    public function getUsersQueryBySupervisor(
+    public function queryBySupervisor(
         User $user,
         string $type,
         iterable|WorkStatus|null $workStatus = null
@@ -102,7 +102,7 @@ readonly class UserFacade
             ->getQuery();
     }
 
-    public function findOneByUsername(string $username, ?bool $enable = null): ?User
+    public function findByUsername(string $username, ?bool $enable = null): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository
@@ -113,7 +113,7 @@ readonly class UserFacade
         return $result;
     }
 
-    public function findOneByEmail(string $email, ?bool $enable = null): ?User
+    public function findByEmail(string $email, ?bool $enable = null): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository
@@ -124,7 +124,7 @@ readonly class UserFacade
         return $result;
     }
 
-    public function findOneByToken(string $username, string $token, ?bool $enable = null): ?User
+    public function findByToken(string $username, string $token, ?bool $enable = null): ?User
     {
         /** @var User|null $result */
         $result = $this->userRepository

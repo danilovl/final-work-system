@@ -61,6 +61,6 @@ readonly class UserService
             return $user;
         }
 
-        return $this->userFacade->findNotNull($user->getId());
+        return $this->userFacade->getById($user->getId());
     }
 }

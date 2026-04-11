@@ -54,7 +54,7 @@ class AppUserProviderTest extends TestCase
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByUsername')
+            ->method('findByUsername')
             ->willReturn($user);
 
         $result = $this->appUserProvider->loadUserByIdentifier('identifier');
@@ -66,7 +66,7 @@ class AppUserProviderTest extends TestCase
     {
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByUsername')
+            ->method('findByUsername')
             ->willReturn(null);
 
         $this->expectException(UserNotFoundException::class);
@@ -81,7 +81,7 @@ class AppUserProviderTest extends TestCase
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByUsername')
+            ->method('findByUsername')
             ->willReturn($user);
 
         $result = $this->appUserProvider->refreshUser($user);

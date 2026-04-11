@@ -86,7 +86,7 @@ class AppAuthenticator extends AbstractAuthenticator implements AuthenticationEn
                 throw new CustomUserMessageAuthenticationException('Invalid credentials.');
             }
 
-            $user = $this->userFacade->findOneByUsername($credentials['username']);
+            $user = $this->userFacade->findByUsername($credentials['username']);
             if ($user === null) {
                 throw new CustomUserMessageAuthenticationException('Invalid credentials.');
             }

@@ -30,7 +30,7 @@ readonly class GetUserListQueryHandler implements QueryHandlerInterface
         $usersQuery = match ($query->type) {
             WorkUserTypeConstant::AUTHOR->value,
             WorkUserTypeConstant::OPPONENT->value,
-            WorkUserTypeConstant::CONSULTANT->value => $this->userFacade->getUsersQueryBySupervisor(
+            WorkUserTypeConstant::CONSULTANT->value => $this->userFacade->queryBySupervisor(
                 $query->user,
                 $query->type,
                 $query->workStatus

@@ -35,7 +35,7 @@ readonly class SecurityController
         $username = $request->request->getString('username');
         $password = $request->request->getString('password');
 
-        $user = $this->userFacade->findOneByUsername($username);
+        $user = $this->userFacade->findByUsername($username);
         if ($user === null) {
             throw new CustomUserMessageAuthenticationException('User could not be found.');
         }

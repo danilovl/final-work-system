@@ -29,7 +29,7 @@ class UserResolverMap extends ResolverMap
                     /** @var int $id */
                     $id = $args['id'];
 
-                    return $this->userService->find($id);
+                    return $this->userService->findById($id);
                 }
             ]
         ];

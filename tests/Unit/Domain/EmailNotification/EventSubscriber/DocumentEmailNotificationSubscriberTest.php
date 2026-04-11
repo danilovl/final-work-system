@@ -68,7 +68,7 @@ class DocumentEmailNotificationSubscriberTest extends AbstractBaseEmailNotificat
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByEmail')
+            ->method('findByEmail')
             ->willReturn($user);
 
         $this->documentEmailNotificationSubscriber->onDocumentCreate($event);

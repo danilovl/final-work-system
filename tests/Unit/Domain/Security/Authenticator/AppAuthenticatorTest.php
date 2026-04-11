@@ -112,7 +112,7 @@ class AppAuthenticatorTest extends TestCase
     {
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByUsername')
+            ->method('findByUsername')
             ->willReturn(new User);
 
         $callback = $this->authenticator->getUser(['username' => 'username']);
@@ -132,7 +132,7 @@ class AppAuthenticatorTest extends TestCase
     {
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByUsername')
+            ->method('findByUsername')
             ->willReturn(null);
 
         $this->expectException(CustomUserMessageAuthenticationException::class);
@@ -146,7 +146,7 @@ class AppAuthenticatorTest extends TestCase
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByUsername')
+            ->method('findByUsername')
             ->willReturn($user);
 
         $result = $this->authenticator->authenticate($this->request);

@@ -68,7 +68,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $this->userFacade
             ->expects($this->never())
-            ->method('findOneByEmail');
+            ->method('findByEmail');
 
         $emailNotificationMessage = $this->createMock(EmailNotificationMessage::class);
 
@@ -86,7 +86,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByEmail')
+            ->method('findByEmail')
             ->willReturn($user);
 
         $this->baseEmailNotificationSubscriber->addEmailNotificationToQueue($this->emailNotificationMessage);
@@ -115,7 +115,7 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByEmail')
+            ->method('findByEmail')
             ->willReturn($user);
 
         $this->emailNotificationFactory

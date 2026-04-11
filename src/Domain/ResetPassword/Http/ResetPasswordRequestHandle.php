@@ -62,7 +62,7 @@ readonly class ResetPasswordRequestHandle
 
     private function processSendingPasswordResetEmail(string $email): RedirectResponse
     {
-        $user = $this->userFacade->findOneByEmail($email, true);
+        $user = $this->userFacade->findByEmail($email, true);
 
         $this->requestService
             ->getSession()

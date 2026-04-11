@@ -51,7 +51,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
 
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userFacade->findOneByUsername($username);
+        $user = $this->userFacade->findByUsername($username);
 
         return $user ?? throw new UserNotFoundException;
     }
@@ -59,7 +59,7 @@ class AppUserProvider implements UserProviderInterface, PasswordUpgraderInterfac
     #[Override]
     public function refreshUser(UserInterface $user): UserInterface
     {
-        $user = $this->userFacade->findOneByUsername($user->getUserIdentifier());
+        $user = $this->userFacade->findByUsername($user->getUserIdentifier());
 
         return $user ?? throw new UserNotFoundException;
     }

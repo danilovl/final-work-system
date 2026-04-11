@@ -50,7 +50,7 @@ readonly class DocumentListHandle
             $openSearchTab = true;
         }
 
-        $users = $this->userFacade->getAllUserActiveSupervisors($user);
+        $users = $this->userFacade->listUserActiveSupervisors($user);
         /** @var User[] $usersArray */
         $usersArray = $users->toArray();
         /** @var array<string, mixed>|null $criteria */

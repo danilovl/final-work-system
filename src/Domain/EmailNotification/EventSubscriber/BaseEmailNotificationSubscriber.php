@@ -76,7 +76,7 @@ class BaseEmailNotificationSubscriber
 
         $emailNotificationMessage->generateUuid();
         $to = $emailNotificationMessage->to;
-        $userTo = $this->userFacade->findOneByEmail($to);
+        $userTo = $this->userFacade->findByEmail($to);
 
         if ($userTo && !$userTo->isEnabledEmailNotification()) {
             return;

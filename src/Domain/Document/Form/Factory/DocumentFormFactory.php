@@ -118,7 +118,7 @@ class DocumentFormFactory
                 break;
             case ControllerMethodConstant::LIST:
                 $userActiveSupervisors = $this->userService
-                    ->getAllUserActiveSupervisors($user);
+                    ->listUserActiveSupervisors($user);
 
                 $categories = $this->mediaCategoryFacade
                     ->listByOwners($userActiveSupervisors);

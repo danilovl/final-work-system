@@ -95,7 +95,7 @@ class ApiAuthenticatorTest extends TestCase
 
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByToken')
+            ->method('findByToken')
             ->willReturn($user);
 
         $result = $this->authenticator->authenticate($this->request);
@@ -107,7 +107,7 @@ class ApiAuthenticatorTest extends TestCase
     {
         $this->userFacade
             ->expects($this->once())
-            ->method('findOneByToken')
+            ->method('findByToken')
             ->willReturn(null);
 
         $this->expectException(CustomUserMessageAuthenticationException::class);

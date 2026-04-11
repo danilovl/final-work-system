@@ -32,7 +32,7 @@ readonly class CreateUserHandler implements CommandHandlerInterface
         $email = $userModel->email;
         $username = $userModel->username;
 
-        if ($this->userFacade->findOneByUsername($username) || $this->userFacade->findOneByEmail($email)) {
+        if ($this->userFacade->findByUsername($username) || $this->userFacade->findByEmail($email)) {
             return null;
         }
 
