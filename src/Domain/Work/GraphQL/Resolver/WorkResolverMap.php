@@ -36,7 +36,7 @@ class WorkResolverMap extends ResolverMap
                     /** @var int $id */
                     $id = $args['id'];
 
-                    return $this->workFacade->find($id);
+                    return $this->workFacade->findById($id);
                 },
                 'workStatus' => function ($value, ArgumentInterface $args): ?WorkStatus {
                     /** @var int $id */

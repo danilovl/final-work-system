@@ -84,7 +84,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
         $this->workFacade
             ->expects($this->any())
-            ->method('getWorksByAuthorStatus')
+            ->method('listByAuthorStatus')
             ->willReturn([$work]);
 
         $this->workService
@@ -120,7 +120,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
         $this->workFacade
             ->expects($this->any())
-            ->method('getWorksByAuthorStatus')
+            ->method('listByAuthorStatus')
             ->willReturn([]);
 
         $this->assertNull($this->widget->render());
@@ -141,7 +141,7 @@ class WorkDeadlineNotifyWidgetTest extends TestCase
 
         $this->workFacade
             ->expects($this->any())
-            ->method('getWorksByAuthorStatus')
+            ->method('listByAuthorStatus')
             ->willReturn([$work]);
 
         $this->workService

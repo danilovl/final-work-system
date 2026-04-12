@@ -23,7 +23,7 @@ readonly class WorkDeadlineFacade
     /**
      * @return Work[]
      */
-    public function getWorksAfterDeadline(int $offset, int $limit): array
+    public function listAfterDeadline(int $offset, int $limit): array
     {
         /** @var array $result */
         $result = $this->workRepository

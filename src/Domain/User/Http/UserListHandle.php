@@ -117,7 +117,7 @@ readonly class UserListHandle
                     workStatus: $workStatus
                 );
 
-                $paginationUserWorks = $this->workFacade->getWorksByAuthorSupervisorStatus($workRepositoryDTO);
+                $paginationUserWorks = $this->workFacade->listByAuthorSupervisorStatus($workRepositoryDTO);
                 $works->set($paginationUser->getId(), $paginationUserWorks);
 
                 $workStatusData = new WorkStatusRepositoryDTO(

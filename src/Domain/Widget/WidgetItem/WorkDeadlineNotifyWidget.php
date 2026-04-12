@@ -50,7 +50,7 @@ class WorkDeadlineNotifyWidget extends BaseWidget
             workStatus: [WorkStatusConstant::ACTIVE->value]
         );
 
-        $works = $this->workFacade->getWorksByAuthorStatus($workRepositoryDTO);
+        $works = $this->workFacade->listByAuthorStatus($workRepositoryDTO);
         if (count($works) === 0) {
             return null;
         }

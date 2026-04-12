@@ -41,7 +41,7 @@ readonly class WorkListHandle
             workStatus: [WorkStatusConstant::ACTIVE->value]
         );
 
-        $worksQuery = $this->workFacade->queryAllByUserStatus($workRepositoryDTO);
+        $worksQuery = $this->workFacade->queryByUserStatus($workRepositoryDTO);
         $pagination = $this->paginatorService->createPaginationRequest($request, $worksQuery);
 
         $works = [];

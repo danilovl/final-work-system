@@ -30,6 +30,6 @@ class TaskDataGrid
             workStatus: $workStatus
         );
 
-        return $this->workFacade->getQueryBuilderWorksBySupervisor($workData);
+        return $this->workFacade->queryBuilderBySupervisor($workData);
     }
 }

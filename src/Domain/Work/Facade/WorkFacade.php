@@ -25,7 +25,7 @@ readonly class WorkFacade
 {
     public function __construct(private WorkRepository $workRepository) {}
 
-    public function find(int $id): ?Work
+    public function findById(int $id): ?Work
     {
         /** @var Work|null $result */
         $result = $this->workRepository->find($id);
@@ -36,7 +36,7 @@ readonly class WorkFacade
     /**
      * @return Work[]
      */
-    public function findAll(?int $limit = null): array
+    public function list(?int $limit = null): array
     {
         /** @var array $result */
         $result = $this->workRepository
@@ -50,7 +50,7 @@ readonly class WorkFacade
         return $result;
     }
 
-    public function getQueryBuilderWorksBySupervisor(WorkRepositoryDTO $workRepositoryDTO): QueryBuilder
+    public function queryBuilderBySupervisor(WorkRepositoryDTO $workRepositoryDTO): QueryBuilder
     {
         return $this->workRepository->allByUserStatus($workRepositoryDTO);
     }
@@ -58,7 +58,7 @@ readonly class WorkFacade
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorSupervisorStatus(WorkRepositoryDTO $workRepositoryDTO): array
+    public function listByAuthorSupervisorStatus(WorkRepositoryDTO $workRepositoryDTO): array
     {
         /** @var array $result */
         $result = $this->workRepository
@@ -74,7 +74,7 @@ readonly class WorkFacade
     /**
      * @return Work[]
      */
-    public function getWorksByAuthorStatus(WorkRepositoryDTO $workData): array
+    public function listByAuthorStatus(WorkRepositoryDTO $workData): array
     {
         /** @var array $result */
         $result = $this->workRepository
@@ -87,7 +87,7 @@ readonly class WorkFacade
         return $result;
     }
 
-    public function queryAllByUserStatus(WorkRepositoryDTO $workData): Query
+    public function queryByUserStatus(WorkRepositoryDTO $workData): Query
     {
         return $this->workRepository
             ->allByUserStatus($workData)

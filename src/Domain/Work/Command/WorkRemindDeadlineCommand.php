@@ -42,7 +42,7 @@ class WorkRemindDeadlineCommand
         $count = 0;
 
         while (true) {
-            $works = $this->workDeadlineFacade->getWorksAfterDeadline($offset, self::LIMIT);
+            $works = $this->workDeadlineFacade->listAfterDeadline($offset, self::LIMIT);
             if (count($works) === 0) {
                 break;
             }
