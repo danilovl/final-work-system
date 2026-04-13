@@ -26,7 +26,7 @@ readonly class GetWorkCategoryListQueryHandler
 
     public function __invoke(GetWorkCategoryListQuery $query): GetWorkCategoryListQueryResult
     {
-        $workCategoriesByOwnerQuery = $this->workCategoryFacade->queryWorkCategoriesByOwner($query->user);
+        $workCategoriesByOwnerQuery = $this->workCategoryFacade->queryByOwner($query->user);
 
         $pagination = $this->paginatorService->createPaginationRequest(
             $query->request,

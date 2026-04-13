@@ -20,7 +20,7 @@ readonly class WorkCategoryFacade
 {
     public function __construct(private WorkCategoryRepository $workCategoryRepository) {}
 
-    public function queryWorkCategoriesByOwner(User $user): Query
+    public function queryByOwner(User $user): Query
     {
         return $this->workCategoryRepository
             ->allByOwner($user)
