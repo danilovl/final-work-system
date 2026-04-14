@@ -66,13 +66,13 @@ readonly class WorkEditHandle
 
         $workDeadLineService = $this->workDeadlineFacade;
         $workDeadLines = $workDeadLineService
-            ->getWorkDeadlinesBySupervisor(
+            ->listWorkDeadlinesBySupervisor(
                 $user,
                 $this->parameterService->getInt('pagination.work.deadline_limit')
             )->toArray();
 
         $workProgramDeadLines = $workDeadLineService
-            ->getWorkProgramDeadlinesBySupervisor(
+            ->listWorkProgramDeadlinesBySupervisor(
                 $user,
                 $this->parameterService->getInt('pagination.work.program_deadline_limit')
             )->toArray();
