@@ -42,13 +42,13 @@ class WorkResolverMap extends ResolverMap
                     /** @var int $id */
                     $id = $args['id'];
 
-                    return $this->workStatusFacade->find($id);
+                    return $this->workStatusFacade->findById($id);
                 },
                 'workStatusList' => function ($value, ArgumentInterface $args): array {
                     /** @var int|null $limit */
                     $limit = $args['limit'] ?? null;
 
-                    return $this->workStatusFacade->findAll($limit);
+                    return $this->workStatusFacade->list($limit);
                 }
             ]
         ];

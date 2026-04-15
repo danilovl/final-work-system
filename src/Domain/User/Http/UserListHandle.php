@@ -127,7 +127,7 @@ readonly class UserListHandle
                     workStatus: $workStatus
                 );
 
-                $workStatusCount = $this->workStatusFacade->getCountByUser($workStatusData);
+                $workStatusCount = $this->workStatusFacade->listCountByUser($workStatusData);
                 $userStatusWorkCounts->set($paginationUser->getId(), $workStatusCount);
             }
         }

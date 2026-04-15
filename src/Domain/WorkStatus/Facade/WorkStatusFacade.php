@@ -21,7 +21,7 @@ readonly class WorkStatusFacade
 {
     public function __construct(private WorkStatusRepository $workStatusRepository) {}
 
-    public function find(int $id): ?WorkStatus
+    public function findById(int $id): ?WorkStatus
     {
         /** @var WorkStatus|null $result */
         $result = $this->workStatusRepository->find($id);
@@ -32,7 +32,7 @@ readonly class WorkStatusFacade
     /**
      * @return WorkStatus[]
      */
-    public function findAll(?int $limit = null): array
+    public function list(?int $limit = null): array
     {
         /** @var array $result */
         $result = $this->workStatusRepository
@@ -49,7 +49,7 @@ readonly class WorkStatusFacade
     /**
      * @return array<string, int>
      */
-    public function getCountByUser(WorkStatusRepositoryDTO $workStatusData): array
+    public function listCountByUser(WorkStatusRepositoryDTO $workStatusData): array
     {
         /** @var array<string, int> $result */
         $result = $this->workStatusRepository
