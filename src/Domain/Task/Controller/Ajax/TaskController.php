@@ -70,13 +70,13 @@ readonly class TaskController
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     public function changeStatus(
-        Request $request,
+        string $type,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
-        return $this->taskChangeStatusHandle->__invoke($request, $task);
+        return $this->taskChangeStatusHandle->__invoke($type, $task);
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]

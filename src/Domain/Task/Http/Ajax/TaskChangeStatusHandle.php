@@ -17,10 +17,7 @@ use App\Application\Interfaces\Bus\CommandBusInterface;
 use App\Domain\Task\Bus\Command\ChangeStatusTask\ChangeStatusTaskCommand;
 use App\Infrastructure\Service\RequestService;
 use App\Domain\Task\Entity\Task;
-use Symfony\Component\HttpFoundation\{
-    JsonResponse,
-    Request
-};
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class TaskChangeStatusHandle
 {
@@ -29,16 +26,11 @@ readonly class TaskChangeStatusHandle
         private CommandBusInterface $commandBus
     ) {}
 
-    public function __invoke(Request $request, Task $task): JsonResponse
+    public function __invoke(string $type, Task $task): JsonResponse
     {
-        $type = $request->attributes->getString('type');
-        if (!empty($type)) {
-            $command = ChangeStatusTaskCommand::create($type, $task);
-            $this->commandBus->dispatch($command);
+        $command = ChangeStatusTaskCommand::create($type, $task);
+        $this->commandBus->dispatch($command);
 
-            return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
-        }
-
-        return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_FAILURE);
+        return $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
     }
 }
