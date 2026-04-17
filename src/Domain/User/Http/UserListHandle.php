@@ -51,11 +51,10 @@ readonly class UserListHandle
         private QueryBusInterface $queryBus
     ) {}
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, string $type): Response
     {
         $user = $this->userService->getUser();
 
-        $type = $request->attributes->getString('type');
         $openSearchTab = false;
         $showSearchTab = true;
         $workStatus = null;

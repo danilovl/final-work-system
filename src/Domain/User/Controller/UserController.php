@@ -41,8 +41,8 @@ readonly class UserController
         return $this->userEditHandle->__invoke($request, $user);
     }
 
-    public function list(Request $request): Response
+    public function list(Request $request, string $type): Response
     {
-        return $this->userListHandle->__invoke($request);
+        return $this->userListHandle->__invoke($request, $type);
     }
 }
