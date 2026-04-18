@@ -47,9 +47,9 @@ readonly class EventCalendarController
     #[PermissionMiddleware(service: [
         'name' => GetEventMiddleware::class
     ])]
-    public function getEvent(GetEventRequest $request): JsonResponse
+    public function getEvent(GetEventRequest $request, string $type): JsonResponse
     {
-        return $this->eventCalendarGetEventHandle->__invoke($request);
+        return $this->eventCalendarGetEventHandle->__invoke($request, $type);
     }
 
     public function create(Request $request): JsonResponse
