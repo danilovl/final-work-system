@@ -12,6 +12,7 @@
 
 namespace App\Domain\Task\Controller;
 
+use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
@@ -57,6 +58,7 @@ readonly class TaskController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
