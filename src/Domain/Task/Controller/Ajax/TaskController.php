@@ -12,6 +12,7 @@
 
 namespace App\Domain\Task\Controller\Ajax;
 
+use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Task\Entity\Task;
@@ -58,6 +59,7 @@ readonly class TaskController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -69,6 +71,7 @@ readonly class TaskController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function changeStatus(
         string $type,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -80,6 +83,7 @@ readonly class TaskController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function notifyComplete(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
@@ -90,6 +94,7 @@ readonly class TaskController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function delete(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task

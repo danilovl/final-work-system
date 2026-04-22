@@ -12,6 +12,7 @@
 
 namespace App\Domain\Task\Controller\Api;
 
+use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Task\DTO\Api\Output\{
@@ -53,6 +54,7 @@ readonly class TaskController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function detail(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
