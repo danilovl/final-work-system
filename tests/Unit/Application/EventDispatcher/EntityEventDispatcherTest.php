@@ -47,7 +47,7 @@ class EntityEventDispatcherTest extends TestCase
                 return $event;
             });
 
-        $this->entityEventDispatcher->onCreate(new class() {});
+        $this->entityEventDispatcher->onCreate(new class ( ) {});
         $this->asyncService->call();
 
         $this->assertCount(2, $dispatchedEvents);

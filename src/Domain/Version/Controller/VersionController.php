@@ -12,6 +12,7 @@
 
 namespace App\Domain\Version\Controller;
 
+use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Media\Entity\Media;
@@ -54,6 +55,7 @@ readonly class VersionController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Media::class, targetEntity: Work::class)]
     public function edit(
         Request $request,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
@@ -78,6 +80,7 @@ readonly class VersionController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Media::class, targetEntity: Work::class)]
     public function download(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_media' => 'id'])] Media $media
@@ -92,6 +95,7 @@ readonly class VersionController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_media'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Media::class, targetEntity: Work::class)]
     public function downloadGoogle(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_media' => 'id'])] Media $media

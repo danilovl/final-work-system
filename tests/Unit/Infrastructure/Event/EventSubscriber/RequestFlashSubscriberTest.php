@@ -22,6 +22,7 @@ use PHPUnit\Framework\TestCase;
 class RequestFlashSubscriberTest extends TestCase
 {
     private MockObject&RequestService $requestService;
+
     private RequestFlashSubscriber $subscriber;
 
     protected function setUp(): void

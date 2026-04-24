@@ -20,7 +20,8 @@ use App\Infrastructure\Service\PaginatorService;
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class WorkListHandle
 {

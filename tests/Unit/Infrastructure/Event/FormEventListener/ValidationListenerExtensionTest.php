@@ -19,15 +19,17 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormConfigInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\{
+    FormBuilderInterface,
+    FormConfigInterface,
+    FormEvent,
+    FormInterface};
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ValidationListenerExtensionTest extends TestCase
 {
     private MockObject&RequestFlashEventDispatcher $requestFlashEventDispatcher;
+
     private ValidationListenerExtension $validationListenerExtension;
 
     protected function setUp(): void
@@ -93,7 +95,7 @@ class ValidationListenerExtensionTest extends TestCase
             ->method('addEventListener')
             ->with(
                 $this->equalTo('form.post_submit'),
-                $this->callback(function ($callback) {
+                $this->callback(static function ($callback) {
                     return is_callable($callback);
                 }),
                 $this->equalTo(-100)
@@ -234,7 +236,7 @@ class ValidationListenerExtensionTest extends TestCase
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
-        $object = new class {
+        $object = new class() {
             public ?int $id = null;
         };
 
@@ -275,7 +277,7 @@ class ValidationListenerExtensionTest extends TestCase
         $form = $this->createMock(FormInterface::class);
         $formConfig = $this->createMock(FormConfigInterface::class);
         $event = $this->createMock(FormEvent::class);
-        $object = new class {
+        $object = new class() {
             public ?int $id = 1;
         };
 
@@ -359,8 +361,9 @@ class ValidationListenerExtensionTest extends TestCase
         $eventCallback = null;
         $builder->expects($this->once())
             ->method('addEventListener')
-            ->willReturnCallback(function ($eventName, $callback) use (&$eventCallback, $builder) {
+            ->willReturnCallback(static function ($eventName, $callback) use (&$eventCallback, $builder) {
                 $eventCallback = $callback;
+
                 return $builder;
             });
 

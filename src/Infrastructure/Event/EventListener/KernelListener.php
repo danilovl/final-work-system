@@ -64,6 +64,7 @@ readonly class KernelListener implements EventSubscriberInterface
 
             if (is_object($propertyValue) && is_a($propertyValue, $targetEntityClass)) {
                 $relatedEntity = $propertyValue;
+
                 break;
             }
         }

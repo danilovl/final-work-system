@@ -13,7 +13,10 @@
 namespace App\Domain\Conversation\Entity;
 
 use App\Application\Constant\TranslationConstant;
-use App\Application\Exception\{LogicException, PropertyValueIsNullException};
+use App\Application\Exception\{
+    LogicException,
+    PropertyValueIsNullException
+};
 use App\Application\Helper\ArrayMapHelper;
 use App\Domain\User\Traits\Entity\IsOwnerTrait;
 use App\Domain\Work\Entity\Work;

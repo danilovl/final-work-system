@@ -23,7 +23,8 @@ use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\PaginatorService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
-    Request};
+    Request
+};
 
 readonly class SystemEventTypeEventsHandle
 {

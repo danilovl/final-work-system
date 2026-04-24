@@ -13,8 +13,9 @@
 namespace App\Tests\Unit\Application\DataTransferObject;
 
 use App\Application\Exception\PropertyNotExistException;
-use App\Tests\Mock\Unit\Application\DataTransferObject\DataTransferObjectWithConstructor;
-use App\Tests\Mock\Unit\Application\DataTransferObject\DataTransferObjectWithoutConstructor;
+use App\Tests\Mock\Unit\Application\DataTransferObject\{
+    DataTransferObjectWithConstructor,
+    DataTransferObjectWithoutConstructor};
 use PHPUnit\Framework\TestCase;
 
 class BaseDataTransferObjectTest extends TestCase

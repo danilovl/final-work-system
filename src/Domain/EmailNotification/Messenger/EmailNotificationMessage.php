@@ -22,8 +22,7 @@ class EmailNotificationMessage
         public string $template,
         public array $templateParameters = [],
         public string $uuid = ''
-    ) {
-    }
+    ) {}
 
     public function generateUuid(): void
     {

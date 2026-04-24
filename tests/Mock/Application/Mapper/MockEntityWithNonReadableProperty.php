@@ -15,7 +15,9 @@ namespace App\Tests\Mock\Application\Mapper;
 class MockEntityWithNonReadableProperty
 {
     public string $name;
+
     public int $age;
+
     private ?string $email;
 
     public function __construct(string $name, int $age, ?string $email = null)

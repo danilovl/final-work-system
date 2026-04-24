@@ -16,8 +16,10 @@ use App\Application\Helper\HashHelper;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Command\Validator\UserValidator;
 use App\Domain\User\Entity\User;
-use Symfony\Component\Console\Attribute\Argument;
-use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\{
+    Argument,
+    AsCommand
+};
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Output\OutputInterface;

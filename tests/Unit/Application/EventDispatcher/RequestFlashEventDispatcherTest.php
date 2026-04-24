@@ -22,6 +22,7 @@ use stdClass;
 class RequestFlashEventDispatcherTest extends TestCase
 {
     private MockObject&EventDispatcherService $eventDispatcher;
+
     private RequestFlashEventDispatcher $requestFlashEventDispatcher;
 
     protected function setUp(): void

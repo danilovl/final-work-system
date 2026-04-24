@@ -15,6 +15,8 @@ namespace App\Tests\Mock\Application\Mapper;
 class MockDtoWithoutConstructor
 {
     public string $name;
+
     public int $age;
+
     public ?string $email = null;
 }

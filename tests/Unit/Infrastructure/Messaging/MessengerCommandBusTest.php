@@ -17,8 +17,9 @@ use App\Infrastructure\Messaging\MessengerCommandBus;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\{
+    Envelope,
+    MessageBusInterface};
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class MessengerCommandBusTest extends TestCase
