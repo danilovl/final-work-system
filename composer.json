@@ -141,6 +141,7 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "warm-up-container": "bash bin/warm-up-container.sh",
         "test-unit": "bash bin/phpunit.sh tests/Unit",
         "test-integration": [
             "@php bin/console cache:warmup --env=dev",
