@@ -19,6 +19,7 @@ readonly class KernelListener implements EventSubscriberInterface
             return;
         }
 
+        /** @var array{object, string} $controller */
         [$controllerObject, $methodName] = $controller;
         $reflectionMethod = new ReflectionMethod($controllerObject, $methodName);
 
@@ -69,11 +70,30 @@ readonly class KernelListener implements EventSubscriberInterface
             }
         }
 
-        if ($relatedEntity === null || $relatedEntity->getId() !== $targetEntity->getId()) {
+        if ($relatedEntity === null) {
             $message = sprintf(
-                'Entity "%s" is not related to entity "%s"',
+                'Entity "%s" is not related to entity "%s": related entity is null.',
+                $sourceEntity::class,
+                $targetEntity::class
+            );
+
+            throw new BadRequestException($message);
+        }
+
+        if (!method_exists($relatedEntity, 'getId') || !method_exists($targetEntity, 'getId')) {
+            throw new BadRequestException('Method "getId" not found.');
+        }
+
+        $relatedEntityId = $relatedEntity->getId();
+        $targetEntityId = $targetEntity->getId();
+
+        if ($relatedEntityId !== $targetEntityId) {
+            $message = sprintf(
+                'Entity "%s" is not related to entity "%s": IDs do not match (%s !== %s).',
                 get_class($sourceEntity),
-                get_class($targetEntity)
+                get_class($targetEntity),
+                $relatedEntityId,
+                $targetEntityId
             );
 
             throw new BadRequestException($message);

@@ -57,7 +57,7 @@ readonly class EventAddressEditHandle
         if ($form->isSubmitted() && $form->isValid()) {
             if ($eventAddress->isSkype()) {
                 $eventAddressSkype = $this->eventAddressFacade
-                    ->getSkypeByOwner($user);
+                    ->findSkypeByOwner($user);
 
                 $eventAddressSkype?->setSkype(false);
             }
