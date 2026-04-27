@@ -41,7 +41,7 @@ class UnreadSystemEventWidgetTest extends TestCase
         $systemEventFacade = $this->createMock(SystemEventFacade::class);
         $systemEventFacade->expects($this->any())
             ->method('getTotalUnreadSystemEventsByRecipient')
-            ->willReturn(null);
+            ->willReturn(1);
 
         $systemEventRecipientFacade = $this->createMock(SystemEventRecipientFacade::class);
         $systemEventRecipientFacade->expects($this->any())
