@@ -145,7 +145,7 @@
         "test-unit": "bash bin/phpunit.sh tests/Unit",
         "test-integration": [
             "@php bin/console cache:warmup --env=dev",
-            "bash bin/phpunit.sh tests/integration"
+            "bash bin/phpunit.sh tests/Integration"
         ],
         "test-all": [
             "@php bin/console cache:warmup --env=dev",
