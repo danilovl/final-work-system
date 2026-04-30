@@ -15,6 +15,6 @@ export default function createTests() {
         await page.locator('#upload-profile-image-button-action').click()
         await page.waitForTimeout(1000)
 
-        await expect(page.locator('.alert-success')).toBeVisible()
+        await expect(page.locator('.alert-success').first()).toBeVisible()
     })
 }
