@@ -13,6 +13,7 @@ services:
       $domain: '%domain%'
       $container: '@service_container'
       $systemInfo: '%system_info%'
+      $kernelEnvironment: '%kernel.environment%'
 
   App\Infrastructure\:
     resource: '../src/Infrastructure'
