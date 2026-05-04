@@ -24,6 +24,7 @@ return [
     Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
     Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+    Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
     Danilovl\ParameterBundle\ParameterBundle::class => ['all' => true],
     Danilovl\TranslatorBundle\TranslatorBundle::class => ['all' => true],
     Danilovl\RenderServiceTwigExtensionBundle\RenderServiceTwigExtensionBundle::class => ['all' => true],
