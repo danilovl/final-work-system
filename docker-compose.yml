@@ -181,3 +181,9 @@ services:
     depends_on:
       - elasticsearch
       - kibana
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    ports:
+      - '7150:8080'
