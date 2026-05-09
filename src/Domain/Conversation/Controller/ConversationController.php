@@ -12,7 +12,6 @@
 
 namespace App\Domain\Conversation\Controller;
 
-use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Entity\Conversation;
@@ -62,7 +61,6 @@ readonly class ConversationController
     }
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_user_one', 'id_user_two'])]
-    #[EntityRelationValidatorAttribute(sourceEntity: User::class, targetEntity: Work::class)]
     public function createWorkConversation(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_user_one' => 'id'])] User $userOne,
