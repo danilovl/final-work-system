@@ -13,6 +13,7 @@
 namespace App\Domain\Conversation\Repository;
 
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -35,7 +36,15 @@ class ConversationRepository extends ServiceEntityRepository
 
     public function allByParticipantUser(User $user): QueryBuilder
     {
-        return $this->baseQueryBuilder()
+        $sub = $this->getEntityManager()->createQueryBuilder()
+            ->select('1')
+            ->from(ConversationParticipant::class, 'p')
+            ->where('p.conversation = conversation')
+            ->andWhere('p.user = :user');
+
+        $queryBuilder = $this->baseQueryBuilder();
+
+        return $queryBuilder
             ->addSelect('messages, type, work, participants, participantsUser, messagesOwner')
             ->join('conversation.type', 'type')
             ->leftJoin('conversation.work', 'work')
@@ -43,7 +52,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoin('participants.user', 'participantsUser')
             ->leftJoin('conversation.messages', 'messages')
             ->leftJoin('messages.owner', 'messagesOwner')
-            ->where('participants.user = :user')
+            ->where($queryBuilder->expr()->exists($sub->getDQL()))
             ->orderBy('messages.createdAt', Order::Descending->value)
             ->setParameter('user', $user);
     }
