@@ -31,7 +31,7 @@ class EmailNotificationMessage
             'to' => $this->to,
             'template' => $this->template,
             'templateParameters' => $this->templateParameters,
-            'time' => time()
+            'time' => microtime(true)
         ]));
     }
 }
