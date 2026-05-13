@@ -156,16 +156,15 @@ readonly class ConversationFacade
         /** @var Conversation[] $conversations */
         $conversations = $this->queryAllByParticipantUser($user)->getResult();
 
-        $modelConversation = $conversationComposeMessageModel->conversation;
+        $modelConversation = $conversationComposeMessageModel->getConversations();
         $content = $conversationComposeMessageModel->content;
-        $createNewConversation = false;
+        $createdNewConversation = false;
 
         if (count($modelConversation) > 1) {
             $name = $conversationComposeMessageModel->name;
             $conversationParticipantArray = [];
             $conversationParticipantArray[] = $user;
 
-            /** @var Conversation $conversation */
             foreach ($modelConversation as $conversation) {
                 if (!in_array($conversation->getRecipient(), $conversationParticipantArray, true)) {
                     $conversationParticipantArray[] = $conversation->getRecipient();
@@ -219,7 +218,7 @@ readonly class ConversationFacade
                             $participants,
                             ConversationMessageStatusTypeConstant::UNREAD->value
                         );
-                    $createNewConversation = true;
+                    $createdNewConversation = true;
 
                     $message = $this->conversationMessageFacade
                         ->getConversationMessage($conversationMessage->getId());
@@ -228,33 +227,35 @@ readonly class ConversationFacade
                 }
             }
 
-            if ($createNewConversation === false) {
-                $name = $modelConversation->getName();
-                $work = $modelConversation->getWork();
-                $participants = $modelConversation->getParticipants();
-
-                $newConversation = $this->conversationFactory->createConversation(
-                    $user,
-                    ConversationTypeConstant::WORK->value,
-                    $work,
-                    $name
-                );
-                $this->conversationFactory
-                    ->createConversationParticipant($newConversation, $participants);
-
-                $conversationMessage = $this->conversationFactory
-                    ->createConversationMessage($newConversation, $user, $content);
-
-                $this->conversationFactory->createConversationMessageStatus(
-                    $newConversation,
-                    $conversationMessage,
-                    $user,
-                    $participants,
-                    ConversationMessageStatusTypeConstant::UNREAD->value
-                );
-
-                $this->entityManagerService->clear();
+            if ($createdNewConversation) {
+                return;
             }
+
+            $name = $modelConversation->getName();
+            $work = $modelConversation->getWork();
+            $participants = $modelConversation->getParticipants();
+
+            $newConversation = $this->conversationFactory->createConversation(
+                $user,
+                ConversationTypeConstant::WORK->value,
+                $work,
+                $name
+            );
+            $this->conversationFactory
+                ->createConversationParticipant($newConversation, $participants);
+
+            $conversationMessage = $this->conversationFactory
+                ->createConversationMessage($newConversation, $user, $content);
+
+            $this->conversationFactory->createConversationMessageStatus(
+                $newConversation,
+                $conversationMessage,
+                $user,
+                $participants,
+                ConversationMessageStatusTypeConstant::UNREAD->value
+            );
+
+            $this->entityManagerService->clear();
         }
     }
 }

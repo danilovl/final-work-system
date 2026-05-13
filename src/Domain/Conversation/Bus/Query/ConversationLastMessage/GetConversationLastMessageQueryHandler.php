@@ -28,11 +28,9 @@ readonly class GetConversationLastMessageQueryHandler
 
     public function __invoke(GetConversationLastMessageQuery $query): GetConversationLastMessageQueryResult
     {
-        $conversationMessages = $this->conversationMessageFacade->getMessagesByConversation(
-            $query->conversation,
-            $this->parameterService->getInt('pagination.conversation.message_list')
-        );
+        $limit = $this->parameterService->getInt('pagination.conversation.message_list');
 
+        $conversationMessages = $this->conversationMessageFacade->getMessagesByConversation($query->conversation, $limit);
         if ($query->search) {
             $this->messageHighlightService->addHighlight($conversationMessages, $query->search);
         }
