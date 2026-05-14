@@ -202,6 +202,10 @@
     visibility: hidden
 }
 
+.right_col {
+    height: 100vh;
+}
+
 .nav-sm .container.body .right_col {
     padding: 10px 20px;
     margin-left: 70px;

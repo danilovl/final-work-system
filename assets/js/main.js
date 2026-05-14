@@ -31,24 +31,8 @@ function initSidebar() {
     const bodyElement = $('body');
     const menuToggleElement = $('#menu_toggle');
     const sidebarMenuElement = $('#sidebar-menu');
-    const sidebarFooterElement = $('.sidebar-footer');
-    const leftColElement = $('.left_col');
-    const rightColElement = $('.right_col');
-    const navMenuElement = $('.nav_menu');
-    const footerElement = $('footer');
 
-    let setContentHeight = function () {
-        rightColElement.css('min-height', $(window).height());
-
-        let bodyHeight = bodyElement.outerHeight(),
-            footerHeight = bodyElement.hasClass('footer_fixed') ? -10 : footerElement.height(),
-            leftColHeight = leftColElement.eq(1).height() + sidebarFooterElement.height(),
-            contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
-        contentHeight -= navMenuElement.height() + footerHeight;
-
-        rightColElement.css('min-height', contentHeight);
-    };
+    let setContentHeight = function () {};
 
     sidebarMenuElement.find('a').on('click', function () {
         let $li = $(this).parent();
