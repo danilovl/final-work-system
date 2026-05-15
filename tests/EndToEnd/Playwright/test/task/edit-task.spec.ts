@@ -26,6 +26,8 @@ export default function createTests() {
             (window as any).tinymce.activeEditor.setContent(`<strong>${content}</strong>`)
         }, taskData.description.text)
 
+        await page.keyboard.press('Escape')
+
         await page.click('#task-button-action')
         await page.waitForTimeout(1000)
 
@@ -52,6 +54,8 @@ export default function createTests() {
         await page.evaluate((content) => {
             (window as any).tinymce.activeEditor.setContent(`<strong>${content}</strong>`)
         }, taskData.description.text)
+
+        await page.keyboard.press('Escape')
 
         await page.click('#task-button-action')
         await page.waitForTimeout(1000)
