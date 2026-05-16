@@ -6,7 +6,13 @@ FinalWork web application
 
 Thesis management system based on Symfony 7.2
 
-![Alt text](/git/readme/demo.gif?raw=true "Project example")
+Demonstration of the system from the student's perspective.
+
+https://github.com/user-attachments/assets/af8f4974-0edf-427f-8500-b405aef98d8e
+
+Demonstration of the system from the supervisor's perspective.
+
+https://github.com/user-attachments/assets/f351cfd2-2f8e-4583-8d7f-0c942c45b259
 
 Who is it for?
 ------------
