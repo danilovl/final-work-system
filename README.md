@@ -1,5 +1,6 @@
 [![phpunit|phpstan|cs-fixer](https://github.com/danilovl/final-work-system/actions/workflows/phpunit.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/phpunit.yml)
 [![cypress](https://github.com/danilovl/final-work-system/actions/workflows/cypress.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/cypress.yml)
+[![playwright](https://github.com/danilovl/final-work-system/actions/workflows/playwright.yml/badge.svg)](https://github.com/danilovl/final-work-system/actions/workflows/playwright.yml)
 
 FinalWork web application
 ========================
