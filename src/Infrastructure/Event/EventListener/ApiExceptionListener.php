@@ -16,6 +16,7 @@ use Doctrine\ORM\{
     NonUniqueResultException,
     NoResultException
 };
+use Psr\Log\LoggerInterface;
 use Stringable;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\{
@@ -34,7 +35,10 @@ use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 readonly class ApiExceptionListener implements EventSubscriberInterface
 {
-    public function __construct(private string $kernelEnvironment) {}
+    public function __construct(
+        private string $kernelEnvironment,
+        private LoggerInterface $logger
+    ) {}
 
     public static function getSubscribedEvents(): array
     {
@@ -57,6 +61,8 @@ readonly class ApiExceptionListener implements EventSubscriberInterface
 
         $exception = $event->getThrowable();
         $previous = $exception->getPrevious();
+
+        $this->logger->error($exception);
 
         $message = match (true) {
             $exception instanceof NotFoundHttpException,

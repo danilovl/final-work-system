@@ -32,8 +32,8 @@ readonly class SecurityController
 
     public function generateToken(Request $request): JsonResponse
     {
-        $username = $request->request->getString('username');
-        $password = $request->request->getString('password');
+        $username = $request->getPayload()->getString('username');
+        $password = $request->getPayload()->getString('password');
 
         $user = $this->userFacade->findByUsername($username);
         if ($user === null) {

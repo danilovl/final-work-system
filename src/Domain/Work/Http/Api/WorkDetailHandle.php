@@ -22,8 +22,8 @@ readonly class WorkDetailHandle
 
     public function __invoke(Work $work): JsonResponse
     {
-        return new JsonResponse([
-            'work' => $this->objectToArrayTransformService->transform('api_key_field', $work)
-        ]);
+        $result = $this->objectToArrayTransformService->transform('api_key_field', $work);
+
+        return new JsonResponse($result);
     }
 }

@@ -57,7 +57,7 @@ readonly class SystemEventTypeEventsHandle
         foreach ($pagination as $systemEEventRecipient) {
             $systemEvents[] = [
                 'id' => $systemEEventRecipient->getSystemEvent()->getId(),
-                'title' => $this->systemEventLinkGeneratorService->generateText($systemEEventRecipient),
+                'title' => strip_tags($this->systemEventLinkGeneratorService->generateText($systemEEventRecipient)),
                 'owner' => $systemEEventRecipient->getSystemEvent()->getOwner()->getFullNameDegree(),
                 'createdAt' => $systemEEventRecipient->getSystemEvent()->getCreatedAt()->format(DateFormatConstant::DATABASE->value),
             ];
