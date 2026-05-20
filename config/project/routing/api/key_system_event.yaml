@@ -1,7 +1,21 @@
-api_key_event_system_list:
+api_key_system_event_list:
   path: /{type}/list
   requirements:
     type: 'read|unread|all'
   defaults:
     _controller: App\Domain\SystemEvent\Controller\Api\SystemEventController::list
   methods: [GET, POST]
+
+api_key_system_event_change_viewed:
+  path: /{id}/viewed
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\SystemEvent\Controller\Api\SystemEventController::viewed
+  methods: [PUT]
+
+api_key_system_event_all_change_viewed:
+  path: /viewed-all
+  defaults:
+    _controller: App\Domain\SystemEvent\Controller\Api\SystemEventController::viewedAll
+  methods: [PUT]

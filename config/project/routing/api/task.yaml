@@ -1,0 +1,7 @@
+#api_post_task_create:
+#  path: /work/{id}
+#  requirements:
+#    id: '\d+'
+#  defaults:
+#    _controller: App\Domain\Task\Controller\Api\TaskController::create
+#  methods: [POST]

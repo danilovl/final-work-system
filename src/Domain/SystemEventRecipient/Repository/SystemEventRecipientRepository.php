@@ -86,6 +86,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
     {
         $builder = $this->baseQueryBuilder()
             ->andWhere('system_event_recipient.recipient = :recipient')
+            ->orderBy('systemEvent.createdAt', Order::Descending->value)
             ->setParameter('recipient', $systemEventsByTypeRecipient->recipient);
 
         if ($systemEventsByTypeRecipient->viewed !== null) {

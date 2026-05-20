@@ -53,13 +53,14 @@ readonly class SystemEventTypeEventsHandle
         $pagination = $this->paginatorService->createPaginationRequest($request, $worksQuery);
 
         $systemEvents = [];
-        /** @var SystemEventRecipient $systemEEventRecipient */
-        foreach ($pagination as $systemEEventRecipient) {
+        /** @var SystemEventRecipient $systemEventRecipient */
+        foreach ($pagination as $systemEventRecipient) {
             $systemEvents[] = [
-                'id' => $systemEEventRecipient->getSystemEvent()->getId(),
-                'title' => strip_tags($this->systemEventLinkGeneratorService->generateText($systemEEventRecipient)),
-                'owner' => $systemEEventRecipient->getSystemEvent()->getOwner()->getFullNameDegree(),
-                'createdAt' => $systemEEventRecipient->getSystemEvent()->getCreatedAt()->format(DateFormatConstant::DATABASE->value),
+                'id' => $systemEventRecipient->getId(),
+                'title' => strip_tags($this->systemEventLinkGeneratorService->generateText($systemEventRecipient)),
+                'owner' => $systemEventRecipient->getSystemEvent()->getOwner()->getFullNameDegree(),
+                'viewed' => $systemEventRecipient->isViewed(),
+                'createdAt' => $systemEventRecipient->getSystemEvent()->getCreatedAt()->format(DateFormatConstant::DATABASE->value),
             ];
         }
 
