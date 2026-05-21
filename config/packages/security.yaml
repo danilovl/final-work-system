@@ -39,6 +39,13 @@ security:
       custom_authenticators:
         - app.authenticator.api_key
 
+    api_platform:
+      pattern: ^/api-platform/
+      context: user
+      provider: user_provider
+      custom_authenticators:
+        - app.authenticator.api_key
+
     main:
       pattern: ^/(.*)
       lazy: true
@@ -62,6 +69,7 @@ security:
 
     # API only by token key
     - { path: ^/api/,  roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api-platform/,  roles: IS_AUTHENTICATED_FULLY }
 
     # Admin login page needs to be access without credential
     - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
