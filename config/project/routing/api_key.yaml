@@ -25,7 +25,7 @@ api_key_version:
 api_key_conversation:
   resource: api/key_conversation.yaml
   prefix: /api/key/conversation
-#
-#api_task:
-#  resource: api/task.yaml
-#  prefix: /api/task
+
+api_task:
+  resource: api/key_task.yaml
+  prefix: /api/task

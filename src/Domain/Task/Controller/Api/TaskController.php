@@ -15,6 +15,7 @@ namespace App\Domain\Task\Controller\Api;
 use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Domain\Task\DTO\Api\Output\{
     TaskDetailOutput,
     TaskListWorkOutput,
@@ -25,6 +26,7 @@ use App\Domain\Task\Entity\Task;
 use Danilovl\HashidsBundle\Attribute\HashidsRequestConverterAttribute;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Domain\Task\Http\Api\{
+    TaskDetailApiPlatformHandle,
     TaskDetailHandle,
     TaskListWorkHandle,
     TaskListOwnerHandle,
@@ -39,6 +41,7 @@ readonly class TaskController
         private AuthorizationCheckerService $authorizationCheckerService,
         private TaskListOwnerHandle $taskListHandle,
         private TaskListSolverHandle $taskListSolverHandle,
+        private TaskDetailApiPlatformHandle $taskDetailApiPlatformHandle,
         private TaskDetailHandle $taskDetailHandle,
         private TaskListWorkHandle $taskListWorkHandle
     ) {}
@@ -55,10 +58,21 @@ readonly class TaskController
 
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
-    public function detail(
+    public function detailApiPlatform(
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
         #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
     ): TaskDetailOutput {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
+
+        return $this->taskDetailApiPlatformHandle->__invoke($task);
+    }
+
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
+    public function detail(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $task);
 
         return $this->taskDetailHandle->__invoke($task);

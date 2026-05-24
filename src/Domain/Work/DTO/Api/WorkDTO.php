@@ -13,7 +13,6 @@
 namespace App\Domain\Work\DTO\Api;
 
 use App\Domain\User\DTO\Api\UserDTO;
-use DateTime;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class WorkDTO
@@ -26,9 +25,9 @@ readonly class WorkDTO
         #[Groups(['work:read'])]
         public ?string $shortcut,
         #[Groups(['work:read'])]
-        public DateTime $deadline,
+        public string $deadline,
         #[Groups(['work:read'])]
-        public ?DateTime $deadlineProgram,
+        public ?string $deadlineProgram,
         #[Groups(['user:read:author'])]
         public ?UserDTO $author,
         #[Groups(['user:read:supervisor'])]

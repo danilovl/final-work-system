@@ -53,7 +53,7 @@ resources:
         requirements:
           id_work: '\d+'
           id_task: '\d+'
-        controller: App\Domain\Task\Controller\Api\TaskController::detail
+        controller: App\Domain\Task\Controller\Api\TaskController::detailApiPlatform
         output: App\Domain\Task\DTO\Api\Output\TaskDetailOutput
         read: false
         openapi:

@@ -13,7 +13,6 @@
 namespace App\Domain\Task\DTO\Api;
 
 use App\Domain\Work\DTO\Api\WorkDTO;
-use DateTime;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class TaskDTO
@@ -32,7 +31,7 @@ readonly class TaskDTO
         #[Groups(['task:read'])]
         public bool $notifyComplete,
         #[Groups(['task:read'])]
-        public ?DateTime $deadline,
+        public ?string $deadline,
         #[Groups(['work:read'])]
         public ?WorkDTO $work
     ) {}

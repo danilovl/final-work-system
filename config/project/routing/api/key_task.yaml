@@ -1,0 +1,8 @@
+api_key_get_task_detail:
+  path: /work/{id_work}/task/{id_task}/detail
+  requirements:
+    id_work: '\d+'
+    id_task: '\d+'
+  defaults:
+    _controller: App\Domain\Task\Controller\Api\TaskController::detail
+  methods: [GET]

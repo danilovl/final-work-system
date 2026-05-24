@@ -12,21 +12,21 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Helper\SerializerHelper;
-use App\Domain\Task\DTO\Api\Output\TaskDetailOutput;
+use App\Application\Mapper\ObjectToDtoMapper;
 use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Domain\Task\Entity\Task;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class TaskDetailHandle
 {
-    public function __invoke(Task $task): TaskDetailOutput
+    public function __construct(private ObjectToDtoMapper $objectToDtoMapper) {}
+
+    public function __invoke(Task $task): JsonResponse
     {
-        $serializeContext[AbstractNormalizer::IGNORED_ATTRIBUTES] = ['owner', 'work', 'systemEvents'];
-
+        $ignoreAttributes = ['user:read:author', 'user:read:supervisor', 'user:read:opponent', 'user:read:consultant'];
         /** @var TaskDTO $result */
-        $result = SerializerHelper::convertToObject($task, TaskDTO::class, $serializeContext);
+        $result = $this->objectToDtoMapper->map($task, TaskDTO::class, $ignoreAttributes);
 
-        return new TaskDetailOutput($result);
+        return new JsonResponse($result);
     }
 }
