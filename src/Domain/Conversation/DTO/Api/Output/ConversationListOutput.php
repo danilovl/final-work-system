@@ -10,15 +10,15 @@
  *
  */
 
-namespace App\Domain\Task\DTO\Api\Output;
+namespace App\Domain\Conversation\DTO\Api\Output;
 
 use App\Application\DTO\Api\Output\BaseListOutput;
-use App\Domain\Task\DTO\Api\TaskDTO;
+use App\Domain\Conversation\DTO\Api\ConversationDTO;
 
-readonly class TaskListSolverOutput extends BaseListOutput
+readonly class ConversationListOutput extends BaseListOutput
 {
     /**
-     * @return TaskDTO[]
+     * @return ConversationDTO[]
      */
     public function getResult(): array
     {

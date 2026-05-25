@@ -1,3 +1,9 @@
+api_key_conversations:
+  path: /
+  defaults:
+    _controller: App\Domain\Conversation\Controller\Api\ConversationController::list
+  methods: [GET]
+
 api_key_conversation_message_work_list:
   path: /work/{id}/message/list
   requirements:

@@ -12,16 +12,28 @@
 
 namespace App\Domain\Conversation\Controller\Api;
 
-use App\Domain\Conversation\Http\Api\ConversationWorkMessageListHandle;
+use App\Domain\Conversation\Http\Api\{
+    ConversationListHandle,
+    ConversationWorkMessageListHandle
+};
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    Response,
+    JsonResponse
 };
 
 readonly class ConversationController
 {
-    public function __construct(private ConversationWorkMessageListHandle $conversionWorkHandle) {}
+    public function __construct(
+        private ConversationWorkMessageListHandle $conversionWorkHandle,
+        private ConversationListHandle $conversationListHandle
+    ) {}
+
+    public function list(Request $request): JsonResponse
+    {
+        return $this->conversationListHandle->__invoke($request);
+    }
 
     public function listWorkMessage(Request $request, Work $work): Response
     {

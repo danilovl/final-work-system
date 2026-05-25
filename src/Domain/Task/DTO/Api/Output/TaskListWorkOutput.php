@@ -12,6 +12,7 @@
 
 namespace App\Domain\Task\DTO\Api\Output;
 
+use App\Application\DTO\Api\Output\BaseListOutput;
 use App\Domain\Task\DTO\Api\TaskDTO;
 
 readonly class TaskListWorkOutput extends BaseListOutput

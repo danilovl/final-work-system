@@ -10,17 +10,19 @@
  *
  */
 
-namespace App\Domain\Task\DTO\Api\Output;
+namespace App\Domain\ConversationMessage\DTO\Api;
 
+use App\Domain\User\DTO\Api\UserDTO;
 use Symfony\Component\Serializer\Attribute\Groups;
 
-#[Groups(['output'])]
-readonly class BaseListOutput
+readonly class ConversationMessageDTO
 {
     public function __construct(
-        public int $numItemsPerPage,
-        public int $totalCount,
-        public int $currentItemCount,
-        public array $result
+        #[Groups(['conversation:read'])]
+        public int $id,
+        #[Groups(['conversation:read'])]
+        public UserDTO $owner,
+        #[Groups(['conversation:read'])]
+        public string $createdAt
     ) {}
 }
