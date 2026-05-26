@@ -4,8 +4,16 @@ api_key_conversations:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::list
   methods: [GET]
 
-api_key_conversation_message_work_list:
-  path: /work/{id}/message/list
+api_key_conversation_detail:
+  path: /{id}
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Conversation\Controller\Api\ConversationController::detail
+  methods: [GET]
+
+api_key_conversation_work_messages:
+  path: /work/{id}/messages
   requirements:
     id: '\d+'
   defaults:
