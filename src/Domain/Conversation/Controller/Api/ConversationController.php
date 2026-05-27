@@ -16,8 +16,9 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Http\Api\{
-    ConversationDetailHandle,
     ConversationListHandle,
+    ConversationDetailHandle,
+    ConversationMessageListHandle,
     ConversationWorkMessageListHandle
 };
 use App\Domain\Work\Entity\Work;
@@ -33,7 +34,8 @@ readonly class ConversationController
         private AuthorizationCheckerService $authorizationCheckerService,
         private ConversationWorkMessageListHandle $conversionWorkHandle,
         private ConversationListHandle $conversationListHandle,
-        private ConversationDetailHandle $conversationDetailHandle
+        private ConversationDetailHandle $conversationDetailHandle,
+        private ConversationMessageListHandle $conversationMessageListHandle
     ) {}
 
     public function list(Request $request): JsonResponse
@@ -46,6 +48,13 @@ readonly class ConversationController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationDetailHandle->__invoke($request, $conversation);
+    }
+
+    public function messages(Request $request, Conversation $conversation): Response
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
+
+        return $this->conversationMessageListHandle->__invoke($request, $conversation);
     }
 
     public function listWorkMessage(Request $request, Work $work): Response
