@@ -18,6 +18,7 @@ use Doctrine\ORM\{
     NonUniqueResultException
 };
 use Exception;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\{
@@ -43,11 +44,11 @@ class ApiExceptionListenerTest extends TestCase
 {
     private ApiExceptionListener $listener;
 
-    private HttpKernelInterface $kernel;
+    private MockObject&HttpKernelInterface $kernel;
 
     private Request $request;
 
-    private LoggerInterface $logger;
+    private MockObject&LoggerInterface $logger;
 
     protected function setUp(): void
     {

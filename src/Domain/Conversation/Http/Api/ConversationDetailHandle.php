@@ -44,6 +44,7 @@ readonly class ConversationDetailHandle
             ->queryMessagesByConversation($conversation);
 
         $conversationMessagesQuery->setHydrationMode(ConversationMessage::class);
+        /** @var ConversationMessage[] $conversationMessages */
         $conversationMessages = $conversationMessagesQuery->getResult();
 
         $this->conversationMessageFacade->setIsReadToConversationMessages($conversationMessages, $user);
