@@ -96,10 +96,6 @@ readonly class ConversationListHandle
             result: $conversations
         );
 
-        return new JsonResponse([
-            'count' => $output->currentItemCount,
-            'totalCount' => $output->totalCount,
-            'result' => $output->result
-        ]);
+        return new JsonResponse($output);
     }
 }
