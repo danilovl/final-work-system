@@ -18,6 +18,8 @@ use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
+use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\DTO\Api\WorkDTO;
@@ -49,6 +51,19 @@ readonly class ConversationDetailHandle
 
         $this->conversationMessageFacade->setIsReadToConversationMessages($conversationMessages, $user);
 
+        $participantsCollection = $conversation->getParticipantsExceptUsers([$user]);
+        $participants = [];
+        
+        /** @var ConversationParticipant $participant */
+        foreach ($participantsCollection as $participant) {
+            $userDto = $this->objectToDtoMapper->map($participant->getUser(), UserDTO::class);
+            
+            $participants[] = new ParticipantDTO(
+                id: $participant->getId(),
+                user: $userDto
+            );
+        }
+
         $recipientDto = null;
         if ($conversation->getRecipient() !== null) {
             $recipientDto = $this->objectToDtoMapper->map($conversation->getRecipient(), UserDTO::class);
@@ -69,7 +84,7 @@ readonly class ConversationDetailHandle
             isRead: $conversation->isRead(),
             recipient: $recipientDto,
             work: $workDto,
-            lastMessage: null
+            participants: $participants
         );
 
         return new JsonResponse($conversationDto);

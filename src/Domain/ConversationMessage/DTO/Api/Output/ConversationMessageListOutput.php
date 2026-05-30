@@ -27,4 +27,3 @@ readonly class ConversationMessageListOutput extends BaseListOutput
         return $this->result;
     }
 }
-

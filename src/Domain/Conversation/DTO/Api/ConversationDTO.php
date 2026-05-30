@@ -15,10 +15,14 @@ namespace App\Domain\Conversation\DTO\Api;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDTO;
+use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class ConversationDTO
 {
+    /**
+     * @param ParticipantDTO[] $participants
+     */
     public function __construct(
         #[Groups(['conversation:read'])]
         public int $id,
@@ -31,6 +35,8 @@ readonly class ConversationDTO
         #[Groups(['work:read'])]
         public ?WorkDTO $work,
         #[Groups(['conversation:read'])]
-        public ?ConversationMessageDTO $lastMessage
+        public ?array $participants = [],
+        #[Groups(['conversation:read'])]
+        public ?ConversationMessageDTO $lastMessage = null
     ) {}
 }

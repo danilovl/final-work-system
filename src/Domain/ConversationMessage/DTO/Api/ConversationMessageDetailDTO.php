@@ -25,6 +25,8 @@ readonly class ConversationMessageDetailDTO
         #[Groups(['conversation:read'])]
         public string $content,
         #[Groups(['conversation:read'])]
+        public bool $isRead,
+        #[Groups(['conversation:read'])]
         public string $createdAt
     ) {}
 }
