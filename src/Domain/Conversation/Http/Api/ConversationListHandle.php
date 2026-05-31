@@ -22,6 +22,7 @@ use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\Conversation\DTO\Api\Output\ConversationListOutput;
 use App\Domain\Conversation\Service\ConversationService;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDTO;
+use App\Domain\ConversationType\DTO\Api\ConversationTypeDTO;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\DTO\Api\WorkDTO;
@@ -79,13 +80,23 @@ readonly class ConversationListHandle
                 $workDto = $this->objectToDtoMapper->map($conversation->getWork(), WorkDTO::class);
             }
             
+            $typeDto = null;
+            if ($conversation->getType() !== null) {
+                $typeDto = new ConversationTypeDTO(
+                    id: $conversation->getType()->getId(),
+                    name: $conversation->getType()->getName(),
+                    constant: $conversation->getType()->getConstant()
+                );
+            }
+            
             $conversations[] = new ConversationDTO(
                 id: $conversation->getId(),
                 name: $conversation->getName(),
                 isRead: $conversation->isRead(),
                 recipient: $recipientDto,
                 work: $workDto,
-                lastMessage: $lastMessageDto
+                lastMessage: $lastMessageDto,
+                type: $typeDto
             );
         }
 

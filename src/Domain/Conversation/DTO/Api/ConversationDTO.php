@@ -16,6 +16,7 @@ use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDTO;
 use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
+use App\Domain\ConversationType\DTO\Api\ConversationTypeDTO;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class ConversationDTO
@@ -37,6 +38,8 @@ readonly class ConversationDTO
         #[Groups(['conversation:read'])]
         public ?array $participants = [],
         #[Groups(['conversation:read'])]
-        public ?ConversationMessageDTO $lastMessage = null
+        public ?ConversationMessageDTO $lastMessage = null,
+        #[Groups(['conversation:read', 'conversation_type:read'])]
+        public ?ConversationTypeDTO $type = null
     ) {}
 }

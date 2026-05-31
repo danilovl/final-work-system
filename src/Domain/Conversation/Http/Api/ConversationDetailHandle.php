@@ -20,6 +20,7 @@ use App\Domain\Conversation\Helper\ConversationHelper;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
+use App\Domain\ConversationType\DTO\Api\ConversationTypeDTO;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\DTO\Api\WorkDTO;
@@ -78,13 +79,23 @@ readonly class ConversationDetailHandle
             );
         }
 
+        $typeDto = null;
+        if ($conversation->getType() !== null) {
+            $typeDto = new ConversationTypeDTO(
+                id: $conversation->getType()->getId(),
+                name: $conversation->getType()->getName(),
+                constant: $conversation->getType()->getConstant()
+            );
+        }
+
         $conversationDto = new ConversationDTO(
             id: $conversation->getId(),
             name: $conversation->getName(),
             isRead: $conversation->isRead(),
             recipient: $recipientDto,
             work: $workDto,
-            participants: $participants
+            participants: $participants,
+            type: $typeDto
         );
 
         return new JsonResponse($conversationDto);
