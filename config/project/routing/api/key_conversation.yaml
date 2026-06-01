@@ -20,6 +20,14 @@ api_key_conversation_messages:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::messages
   methods: [GET]
 
+api_key_conversation_message_create:
+  path: /{id}/message
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Conversation\Controller\Api\ConversationController::createMessage
+  methods: [POST]
+
 api_key_conversation_work_messages:
   path: /work/{id}/messages
   requirements:

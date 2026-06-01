@@ -13,13 +13,15 @@
 namespace App\Domain\Conversation\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
+use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Http\Api\{
     ConversationListHandle,
     ConversationDetailHandle,
     ConversationMessageListHandle,
-    ConversationWorkMessageListHandle
+    ConversationWorkMessageListHandle,
+    ConversationCreateMessageHandle
 };
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
@@ -27,6 +29,7 @@ use Symfony\Component\HttpFoundation\{
     Response,
     JsonResponse
 };
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 readonly class ConversationController
 {
@@ -35,7 +38,8 @@ readonly class ConversationController
         private ConversationWorkMessageListHandle $conversionWorkHandle,
         private ConversationListHandle $conversationListHandle,
         private ConversationDetailHandle $conversationDetailHandle,
-        private ConversationMessageListHandle $conversationMessageListHandle
+        private ConversationMessageListHandle $conversationMessageListHandle,
+        private ConversationCreateMessageHandle $conversationCreateMessageHandle
     ) {}
 
     public function list(Request $request): JsonResponse
@@ -55,6 +59,16 @@ readonly class ConversationController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationMessageListHandle->__invoke($request, $conversation);
+    }
+
+    public function createMessage(
+        Conversation $conversation,
+        #[MapRequestPayload] ConversationMessageInput $conversationMessageInput,
+    ): Response
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
+
+        return $this->conversationCreateMessageHandle->__invoke($conversation, $conversationMessageInput);
     }
 
     public function listWorkMessage(Request $request, Work $work): Response
