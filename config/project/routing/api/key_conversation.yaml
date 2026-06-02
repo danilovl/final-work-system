@@ -35,3 +35,18 @@ api_key_conversation_work_messages:
   defaults:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::listWorkMessage
   methods: [GET, POST]
+
+api_key_conversation_message_change_read_status:
+  path: /{id_conversation}/message/{id_message}/change/read/status
+  requirements:
+    id_conversation: '\d+'
+    id_message: '\d+'
+  defaults:
+    _controller: App\Domain\Conversation\Controller\Api\ConversationController::changeMessageReadStatus
+  methods: [PUT]
+
+api_key_conversation_message_change_all_to_read:
+  path: /messages/change-all-to-read
+  defaults:
+    _controller: App\Domain\Conversation\Controller\Api\ConversationController::allMessageToRead
+  methods: [PUT]

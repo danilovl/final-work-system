@@ -15,13 +15,16 @@ namespace App\Domain\Conversation\Controller\Api;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Http\Api\{
     ConversationListHandle,
     ConversationDetailHandle,
     ConversationMessageListHandle,
     ConversationWorkMessageListHandle,
-    ConversationCreateMessageHandle
+    ConversationCreateMessageHandle,
+    ConversationChangeMessageReadStatusHandle,
+    ConversationChangeAllMessageToReadHandle
 };
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
@@ -39,7 +42,9 @@ readonly class ConversationController
         private ConversationListHandle $conversationListHandle,
         private ConversationDetailHandle $conversationDetailHandle,
         private ConversationMessageListHandle $conversationMessageListHandle,
-        private ConversationCreateMessageHandle $conversationCreateMessageHandle
+        private ConversationCreateMessageHandle $conversationCreateMessageHandle,
+        private ConversationChangeMessageReadStatusHandle $conversationChangeMessageReadStatusHandle,
+        private ConversationChangeAllMessageToReadHandle $conversationChangeAllMessageToReadHandle
     ) {}
 
     public function list(Request $request): JsonResponse
@@ -74,5 +79,17 @@ readonly class ConversationController
     public function listWorkMessage(Request $request, Work $work): Response
     {
         return $this->conversionWorkHandle->__invoke($request, $work);
+    }
+
+    public function changeMessageReadStatus(ConversationMessage $conversationMessage): Response
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversationMessage->getConversation());
+
+        return $this->conversationChangeMessageReadStatusHandle->__invoke($conversationMessage);
+    }
+
+    public function allMessageToRead(): Response
+    {
+        return $this->conversationChangeAllMessageToReadHandle->__invoke();
     }
 }
