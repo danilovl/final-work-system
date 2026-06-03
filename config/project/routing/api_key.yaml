@@ -4,7 +4,7 @@ api_key_user:
 
 api_key_work:
   resource: api/key_work.yaml
-  prefix: /api/key/work
+  prefix: /api/key/works
 
 api_key_endpoint:
   resource: api/key_endpoint.yaml
@@ -12,15 +12,15 @@ api_key_endpoint:
 
 api_key_system_event:
   resource: api/key_system_event.yaml
-  prefix: /api/key/system-event
+  prefix: /api/key/system-events
 
 api_key_event:
   resource: api/key_event.yaml
-  prefix: /api/key/event
+  prefix: /api/key/events
 
 api_key_version:
   resource: api/key_version.yaml
-  prefix: /api/key/version
+  prefix: /api/key/versions
 
 api_key_conversation:
   resource: api/key_conversation.yaml
@@ -28,4 +28,4 @@ api_key_conversation:
 
 api_task:
   resource: api/key_task.yaml
-  prefix: /api/task
+  prefix: /api/tasks

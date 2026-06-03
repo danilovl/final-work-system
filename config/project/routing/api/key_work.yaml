@@ -1,5 +1,5 @@
 api_key_work_list:
-  path: /{type}/list
+  path: /{type}
   requirements:
     type: 'author|opponent|consultant|unused'
   defaults:
@@ -7,7 +7,7 @@ api_key_work_list:
   methods: [GET, POST]
 
 api_key_work_detail:
-  path: /detail/{id}
+  path: /{id}/detail
   requirements:
     id: '\d+'
   defaults:

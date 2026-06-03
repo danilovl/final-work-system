@@ -1,5 +1,5 @@
 api_key_event_work_list:
-  path: /work/{id}/list
+  path: /works/{id}
   requirements:
     id: '\d+'
   defaults:

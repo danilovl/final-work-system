@@ -1,5 +1,5 @@
 api_key_system_event_list:
-  path: /{type}/list
+  path: /{type}
   requirements:
     type: 'read|unread|all'
   defaults:
