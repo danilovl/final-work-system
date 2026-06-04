@@ -3,3 +3,11 @@ api_key_user_info:
   defaults:
     _controller: App\Domain\User\Controller\Api\UserController::detail
   methods: [GET, POST]
+
+api_key_user_list:
+  path: /{type}
+  requirements:
+    type: 'author|opponent|consultant|unused'
+  defaults:
+    _controller: App\Domain\User\Controller\Api\UserController::list
+  methods: [GET]

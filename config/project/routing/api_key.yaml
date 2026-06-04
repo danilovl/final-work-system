@@ -1,6 +1,6 @@
 api_key_user:
   resource: api/key_user.yaml
-  prefix: /api/key/user
+  prefix: /api/key/users
 
 api_key_work:
   resource: api/key_work.yaml

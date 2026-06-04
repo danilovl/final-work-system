@@ -12,15 +12,34 @@
 
 namespace App\Domain\User\Controller\Api;
 
-use App\Domain\User\Http\Api\UserDetailHandle;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Domain\User\Constant\UserRoleConstant;
+use App\Domain\User\Http\Api\{
+    UserListHandle,
+    UserDetailHandle
+};
+use App\Infrastructure\Service\AuthorizationCheckerService;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
 
 readonly class UserController
 {
-    public function __construct(private UserDetailHandle $userDetailHandle) {}
+    public function __construct(
+        private AuthorizationCheckerService $authorizationCheckerService,
+        private UserDetailHandle $userDetailHandle,
+        private UserListHandle $userListHandle
+    ) {}
 
     public function detail(): JsonResponse
     {
         return $this->userDetailHandle->__invoke();
+    }
+
+    public function list(Request $request, string $type): JsonResponse
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(UserRoleConstant::SUPERVISOR->value);
+
+        return $this->userListHandle->__invoke($request, $type);
     }
 }
