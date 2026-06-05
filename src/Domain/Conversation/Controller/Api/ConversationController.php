@@ -12,6 +12,7 @@
 
 namespace App\Domain\Conversation\Controller\Api;
 
+use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;
@@ -32,6 +33,7 @@ use Symfony\Component\HttpFoundation\{
     Response,
     JsonResponse
 };
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 readonly class ConversationController
@@ -69,8 +71,7 @@ readonly class ConversationController
     public function createMessage(
         Conversation $conversation,
         #[MapRequestPayload] ConversationMessageInput $conversationMessageInput,
-    ): Response
-    {
+    ): Response {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationCreateMessageHandle->__invoke($conversation, $conversationMessageInput);
@@ -81,8 +82,11 @@ readonly class ConversationController
         return $this->conversionWorkHandle->__invoke($request, $work);
     }
 
-    public function changeMessageReadStatus(ConversationMessage $conversationMessage): Response
-    {
+    #[EntityRelationValidatorAttribute(sourceEntity: ConversationMessage::class, targetEntity: Conversation::class)]
+    public function changeMessageReadStatus(
+        #[MapEntity(mapping: ['id_conversation' => 'id'])] Conversation $conversation,
+        #[MapEntity(mapping: ['id_message' => 'id'])] ConversationMessage $conversationMessage
+    ): Response {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversationMessage->getConversation());
 
         return $this->conversationChangeMessageReadStatusHandle->__invoke($conversationMessage);
