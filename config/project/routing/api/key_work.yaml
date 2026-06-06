@@ -1,7 +1,7 @@
 api_key_work_list:
   path: /{type}
   requirements:
-    type: 'author|opponent|consultant|unused'
+    type: 'author|opponent|consultant|supervisor'
   defaults:
     _controller: App\Domain\Work\Controller\Api\WorkController::list
   methods: [GET, POST]
