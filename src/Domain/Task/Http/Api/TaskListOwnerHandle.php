@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Helper\SerializerHelper;
+use App\Application\Mapper\ObjectToDtoMapper;
 use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Task\DTO\Api\Output\TaskListOwnerOutput;
 use App\Domain\Task\DTO\Api\TaskDTO;
@@ -26,7 +26,8 @@ readonly class TaskListOwnerHandle
     public function __construct(
         private UserService $userService,
         private TaskFacade $taskFacade,
-        private PaginatorService $paginatorService
+        private PaginatorService $paginatorService,
+        private ObjectToDtoMapper $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request): TaskListOwnerOutput
@@ -43,8 +44,7 @@ readonly class TaskListOwnerHandle
 
         /** @var Task $task */
         foreach ($pagination->getItems() as $task) {
-            $taskDTO = SerializerHelper::convertToObject($task, TaskDTO::class);
-            $result[] = $taskDTO;
+            $result[] = $this->objectToDtoMapper->map($task, TaskDTO::class);
         }
 
         return new TaskListOwnerOutput(

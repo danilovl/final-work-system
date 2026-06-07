@@ -13,6 +13,8 @@
 namespace App\Domain\Work\DTO\Api;
 
 use App\Domain\User\DTO\Api\UserDTO;
+use App\Domain\WorkStatus\DTO\Api\WorkStatusDTO;
+use App\Domain\WorkType\DTO\Api\WorkTypeDTO;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class WorkDTO
@@ -28,6 +30,10 @@ readonly class WorkDTO
         public string $deadline,
         #[Groups(['work:read'])]
         public ?string $deadlineProgram,
+        #[Groups(['work_status:read'])]
+        public WorkStatusDTO $status,
+        #[Groups(['work_type:read'])]
+        public WorkTypeDTO $type,
         #[Groups(['user:read:author'])]
         public ?UserDTO $author,
         #[Groups(['user:read:supervisor'])]

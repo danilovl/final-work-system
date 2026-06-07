@@ -42,8 +42,12 @@ class TaskRepository extends ServiceEntityRepository
     {
         return $this->createTaskQueryBuilder()
             ->selectWork()
+            ->selectWorkStatus()
+            ->selectWorkType()
             ->selectWorkAuthor()
             ->joinWork()
+            ->joinWorkStatus()
+            ->joinWorkTypes()
             ->joinWorkAuthor()
             ->byOwner($user)
             ->orderByCreatedAt()

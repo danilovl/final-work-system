@@ -27,6 +27,20 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
+    public function selectWorkStatus(): self
+    {
+        $this->queryBuilder->addSelect('work_status');
+
+        return $this;
+    }
+
+    public function selectWorkType(): self
+    {
+        $this->queryBuilder->addSelect('work_type');
+
+        return $this;
+    }
+
     public function selectWorkAuthor(): self
     {
         $this->queryBuilder->addSelect('author');
@@ -37,6 +51,20 @@ class TaskQueryBuilder extends BaseQueryBuilder
     public function joinWork(): self
     {
         $this->queryBuilder->join('task.work', 'work');
+
+        return $this;
+    }
+
+    public function joinWorkStatus(): self
+    {
+        $this->queryBuilder->join('work.status', 'work_status');
+
+        return $this;
+    }
+
+    public function joinWorkTypes(): self
+    {
+        $this->queryBuilder->join('work.type', 'work_type');
 
         return $this;
     }
