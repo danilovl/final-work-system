@@ -29,7 +29,7 @@ api_key_conversation_message_create:
   methods: [POST]
 
 api_key_conversation_work_messages:
-  path: /work/{id}/messages
+  path: /works/{id}/messages
   requirements:
     id: '\d+'
   defaults:
@@ -37,7 +37,7 @@ api_key_conversation_work_messages:
   methods: [GET, POST]
 
 api_key_conversation_message_change_read_status:
-  path: /{id_conversation}/message/{id_message}/change/read/status
+  path: /{id_conversation}/messages/{id_message}/change/read/status
   requirements:
     id_conversation: '\d+'
     id_message: '\d+'
