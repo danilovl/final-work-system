@@ -34,10 +34,11 @@ readonly class ConversationWorkMessageListHandle
     {
         $user = $this->userService->getUser();
         $pagination = $this->workDetailTabService->getTabPagination(
-            $request,
-            TabTypeConstant::TAB_MESSAGE->value,
-            $work,
-            $user
+            request: $request,
+            tab: TabTypeConstant::TAB_MESSAGE->value,
+            work: $work,
+            user: $user,
+            isApi: true
         );
 
         $messages = [];

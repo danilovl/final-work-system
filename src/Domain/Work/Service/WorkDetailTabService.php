@@ -65,14 +65,15 @@ class WorkDetailTabService
         string $tab,
         Work $work,
         ?User $user = null,
-        bool $setHydrationMode = false
+        bool $setHydrationMode = false,
+        bool $isApi = false
     ): PaginationInterface {
         $paginator = $this->paginator->createPaginationRequest(
             $request,
             $this->getQueryPagination($tab, $work, $user, $setHydrationMode),
             $this->getPaginationPage($tab),
             $this->getPaginationLimit($tab),
-            $this->getOptions($tab)
+            $isApi ? [PaginatorInterface::DISTINCT => true] : $this->getOptions($tab)
         );
 
         $this->setActiveTabByPagination($tab, $paginator);
