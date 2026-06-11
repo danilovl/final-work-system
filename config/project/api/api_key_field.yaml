@@ -116,6 +116,7 @@ parameters:
         - content
         - owner
         - statuses
+        - createdAt
     ConversationMessageStatus:
       fields:
         - id
