@@ -78,6 +78,7 @@ readonly class ObjectToDtoMapper
                 }
                 if (!empty(array_intersect($ignoreGroups, $propertyGroups))) {
                     $args[] = $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null;
+
                     continue;
                 }
             }

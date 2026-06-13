@@ -43,7 +43,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         return $mockObject;
     }
 
-    #[DataProvider('validateSuccessProvider')]
+    #[DataProvider('provideValidateSuccessCases')]
     public function testValidateSuccess(string $startDate): void
     {
         $date = new DateTime($startDate);
@@ -53,7 +53,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    #[DataProvider('validateFailedProvider')]
+    #[DataProvider('provideValidateFailedCases')]
     public function testValidateFailed(string $startDate): void
     {
         $date = new DateTime($startDate);
@@ -87,7 +87,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate(1_234, new FirstWeekDay);
     }
 
-    public static function validateSuccessProvider(): Generator
+    public static function provideValidateSuccessCases(): Generator
     {
         yield ['2019-01-07'];
         yield ['2019-01-14'];
@@ -95,7 +95,7 @@ class FirstWeekDayValidatorTest extends ConstraintValidatorTestCase
         yield ['2019-01-28'];
     }
 
-    public static function validateFailedProvider(): Generator
+    public static function provideValidateFailedCases(): Generator
     {
         yield ['2019-01-05'];
         yield ['2019-02-14'];

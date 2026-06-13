@@ -29,7 +29,7 @@ class TaskSearchTest extends TestCase
         $this->taskSearch = new TaskSearch($transformedFinder);
     }
 
-    #[DataProvider('createQueryProvider')]
+    #[DataProvider('provideCreateQueryCases')]
     public function testCreateQuery(
         User $user,
         string $search,
@@ -40,7 +40,7 @@ class TaskSearchTest extends TestCase
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public static function createQueryProvider(): Generator
+    public static function provideCreateQueryCases(): Generator
     {
         $user = new User;
         $user->setId(1);

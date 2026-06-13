@@ -30,7 +30,7 @@ class DateServiceTest extends KernelTestCase
         $this->translator = $kernel->getContainer()->get(TranslatorService::class);
     }
 
-    #[DataProvider('weekDaysProvider')]
+    #[DataProvider('provideGetWeekDaysArrayCases')]
     public function testGetWeekDaysArray(string $locale, array $arrayWeek): void
     {
         $dateService = new DateService($this->translator);
@@ -38,7 +38,7 @@ class DateServiceTest extends KernelTestCase
         $this->assertEquals($dateService->getWeekDaysArray($locale), $arrayWeek);
     }
 
-    public static function weekDaysProvider(): Generator
+    public static function provideGetWeekDaysArrayCases(): Generator
     {
         yield ['cs', [
             0 => 'Po',

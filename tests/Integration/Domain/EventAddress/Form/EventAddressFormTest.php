@@ -29,7 +29,7 @@ class EventAddressFormTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    #[DataProvider('dataProvider')]
+    #[DataProvider('provideSubmitValidDataCases')]
     public function testSubmitValidData(
         array $data,
         bool $isValid
@@ -43,7 +43,7 @@ class EventAddressFormTest extends KernelTestCase
         $this->assertEquals($isValid, $form->isValid());
     }
 
-    public static function dataProvider(): Generator
+    public static function provideSubmitValidDataCases(): Generator
     {
         yield [
             [

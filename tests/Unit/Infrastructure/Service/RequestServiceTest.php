@@ -91,7 +91,7 @@ class RequestServiceTest extends TestCase
         $this->requestService->getSession();
     }
 
-    #[DataProvider('createAjaxJsonProvider')]
+    #[DataProvider('provideCreateAjaxJsonCases')]
     public function testCreateAjaxJson(AjaxJsonTypeConstant $type, array $expectedResult): void
     {
         $expectedResult = array_merge($expectedResult, ['test' => 'test']);
@@ -102,7 +102,7 @@ class RequestServiceTest extends TestCase
         $this->assertSame($expectedResult, json_decode($content, true));
     }
 
-    public static function createAjaxJsonProvider(): Generator
+    public static function provideCreateAjaxJsonCases(): Generator
     {
         yield [
             AjaxJsonTypeConstant::CREATE_SUCCESS,

@@ -19,21 +19,21 @@ use PHPUnit\Framework\TestCase;
 
 class IpHelperTest extends TestCase
 {
-    #[DataProvider('ipInRangeProvider')]
+    #[DataProvider('provideIsIpInRangeCases')]
     public function testIsIpInRange(string $ip, string $range, bool $result): void
     {
         $isIpInRange = IpHelper::isIpInRange($ip, $range);
         $this->assertEquals($isIpInRange, $result);
     }
 
-    #[DataProvider('ipAllowedProvider')]
+    #[DataProvider('provideIsIpAllowedCases')]
     public function testisIpAllowed(string $ip, array $whiteList, bool $result): void
     {
         $isIpAllowed = IpHelper::isIpAllowed($ip, $whiteList);
         $this->assertEquals($isIpAllowed, $result);
     }
 
-    public static function ipInRangeProvider(): Generator
+    public static function provideIsIpInRangeCases(): Generator
     {
         yield ['127.0.0.1', '127.0.0.1/24', true];
         yield ['127.0.0.1', '127.0.0.1', true];
@@ -41,7 +41,7 @@ class IpHelperTest extends TestCase
         yield ['192.0.0.60', '192.0.0.60', true];
     }
 
-    public static function ipAllowedProvider(): Generator
+    public static function provideIsIpAllowedCases(): Generator
     {
         yield ['127.0.0.1', ['127.0.0.1/24'], true];
         yield ['192.0.0.60', ['127.0.0.1/24'], false];

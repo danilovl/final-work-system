@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class FunctionHelperTest extends TestCase
 {
-    #[DataProvider('randomPasswordProvider')]
+    #[DataProvider('provideRandomPasswordCases')]
     public function testRandomPassword(int $length): void
     {
         $passwordLength = mb_strlen(FunctionHelper::randomPassword($length));
@@ -28,7 +28,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($length, $passwordLength);
     }
 
-    public static function randomPasswordProvider(): Generator
+    public static function provideRandomPasswordCases(): Generator
     {
         yield [1];
         yield [2];
@@ -36,7 +36,7 @@ class FunctionHelperTest extends TestCase
         yield [100];
     }
 
-    #[DataProvider('compareSimpleTwoArrayProvider')]
+    #[DataProvider('provideCompareSimpleTwoArrayCases')]
     public function testCompareSimpleTwoArray(array $one, array $two, bool $isValid): void
     {
         $compare = FunctionHelper::compareSimpleTwoArray($one, $two);
@@ -44,7 +44,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($compare, $isValid);
     }
 
-    public static function compareSimpleTwoArrayProvider(): Generator
+    public static function provideCompareSimpleTwoArrayCases(): Generator
     {
         yield [[1, 2, 3], [2, 1, 3], true];
         yield [['a', 'b', 'c'], ['b', 'a', 'c'], true];
@@ -52,7 +52,7 @@ class FunctionHelperTest extends TestCase
         yield [[1, 2, 3], ['a', 'b', 'c'], false];
     }
 
-    #[DataProvider('checkIntersectTwoArrayProvider')]
+    #[DataProvider('provideCheckIntersectTwoArrayCases')]
     public function testCheckIntersectTwoArray(array $one, array $two, bool $isValid): void
     {
         $check = FunctionHelper::checkIntersectTwoArray($one, $two);
@@ -60,14 +60,14 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($check, $isValid);
     }
 
-    public static function checkIntersectTwoArrayProvider(): Generator
+    public static function provideCheckIntersectTwoArrayCases(): Generator
     {
         yield [[2, 2, 2], [2, 2, 3], true];
         yield [[2, 2, 2], [2, 2, 2], true];
         yield [[2, 2, 2], [3, 3, 3], false];
     }
 
-    #[DataProvider('sanitizeFileNameProvider')]
+    #[DataProvider('provideSanitizeFileNameCases')]
     public function testSanitizeFileName(
         string $dangerousFilename,
         PlatformConstant $platform,
@@ -78,7 +78,7 @@ class FunctionHelperTest extends TestCase
         $this->assertEquals($sanitizeFileName, $result);
     }
 
-    public static function sanitizeFileNameProvider(): Generator
+    public static function provideSanitizeFileNameCases(): Generator
     {
         yield ['test?test?file.pdf', PlatformConstant::UNIX, 'test_test_file.pdf'];
         yield ['test#test?test/file.pdf', PlatformConstant::LINUX, 'test_test_test_file.pdf'];

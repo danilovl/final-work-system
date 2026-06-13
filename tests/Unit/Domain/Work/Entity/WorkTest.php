@@ -24,7 +24,7 @@ use PHPUnit\Framework\TestCase;
 
 class WorkTest extends TestCase
 {
-    #[DataProvider('gettersAndSettersProvider')]
+    #[DataProvider('provideGettersAndSettersCases')]
     public function testGettersAndSetters(
         mixed $value,
         string $set,
@@ -36,7 +36,7 @@ class WorkTest extends TestCase
         $this->assertEquals($value, $entity->$get());
     }
 
-    public static function gettersAndSettersProvider(): Generator
+    public static function provideGettersAndSettersCases(): Generator
     {
         yield [1, 'setId', 'getId'];
         yield ['Work title', 'setTitle', 'getTitle'];

@@ -19,13 +19,13 @@ use PHPUnit\Framework\TestCase;
 
 class RegexHelperTest extends TestCase
 {
-    #[DataProvider('textProvider')]
+    #[DataProvider('provideAllLinksCases')]
     public function testAllLinks(string $text, mixed $result): void
     {
         $this->assertEquals(RegexHelper::allLinks($text), $result);
     }
 
-    public static function textProvider(): Generator
+    public static function provideAllLinksCases(): Generator
     {
         yield [
             'Now the widgets are ready to go. The engine combines the entire tree into a <a href="www.w3.com">Visit W3</a>  render-able view and tells the operating system to display it. 

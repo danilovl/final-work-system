@@ -32,7 +32,7 @@ class FirstWeekDayTypeTest extends KernelTestCase
             ->getForm();
     }
 
-    #[DataProvider('successDateProvider')]
+    #[DataProvider('provideSubmitSuccessCases')]
     public function testSubmitSuccess(string $date): void
     {
         $this->form->submit(['start' => $date]);
@@ -41,7 +41,7 @@ class FirstWeekDayTypeTest extends KernelTestCase
         $this->assertTrue($this->form->isValid());
     }
 
-    #[DataProvider('failedDateProvider')]
+    #[DataProvider('provideSubmitFailedCases')]
     public function testSubmitFailed(string $date): void
     {
         $this->form->submit(['start' => $date]);
@@ -57,7 +57,7 @@ class FirstWeekDayTypeTest extends KernelTestCase
         $this->assertSame(FirstWeekDayType::NAME, $userRoleType->getBlockPrefix());
     }
 
-    public static function successDateProvider(): Generator
+    public static function provideSubmitSuccessCases(): Generator
     {
         yield ['2023-07-03'];
         yield ['2023-07-10'];
@@ -66,7 +66,7 @@ class FirstWeekDayTypeTest extends KernelTestCase
         yield ['2023-07-31'];
     }
 
-    public static function failedDateProvider(): Generator
+    public static function provideSubmitFailedCases(): Generator
     {
         yield ['2023-07-05'];
         yield ['2023-07-14'];

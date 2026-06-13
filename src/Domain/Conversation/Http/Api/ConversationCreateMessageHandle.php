@@ -44,6 +44,6 @@ readonly class ConversationCreateMessageHandle
         $command = CreateConversationMessageCommand::create($conversation, $conversationMessageModel, $user);
         $this->commandBus->dispatch($command);
 
-        return new JsonResponse(status:  Response::HTTP_CREATED);
+        return new JsonResponse(status: Response::HTTP_CREATED);
     }
 }

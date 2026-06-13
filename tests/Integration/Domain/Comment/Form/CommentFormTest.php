@@ -55,7 +55,7 @@ class CommentFormTest extends KernelTestCase
         return $event;
     }
 
-    #[DataProvider('commentProvider')]
+    #[DataProvider('provideSubmitValidDataCases')]
     public function testSubmitValidData(
         bool $isOwner,
         int $userId,
@@ -83,7 +83,7 @@ class CommentFormTest extends KernelTestCase
         $this->assertEquals($isContentShow, $isContentFieldExist);
     }
 
-    public static function commentProvider(): Generator
+    public static function provideSubmitValidDataCases(): Generator
     {
         yield [true, 1, '2016-04-06 10:00:00', ['content' => 'text'], true];
         yield [false, 2, '2016-04-06 10:00:00', [], false];

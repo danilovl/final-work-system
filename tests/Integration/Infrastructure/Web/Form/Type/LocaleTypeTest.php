@@ -33,7 +33,7 @@ class LocaleTypeTest extends KernelTestCase
             ->getForm();
     }
 
-    #[DataProvider('localeDateProvider')]
+    #[DataProvider('provideSubmitSuccessCases')]
     public function testSubmitSuccess(string $locale): void
     {
         $this->form->submit(['locale' => $locale]);
@@ -58,7 +58,7 @@ class LocaleTypeTest extends KernelTestCase
         $this->assertSame(LocaleType::NAME, $userRoleType->getBlockPrefix());
     }
 
-    public static function localeDateProvider(): Generator
+    public static function provideSubmitSuccessCases(): Generator
     {
         foreach (LocaleConstant::values() as $locale) {
             yield [$locale];

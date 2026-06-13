@@ -77,7 +77,7 @@ class WorkListServiceTest extends TestCase
         $this->user->setAuthorWorks($authorWorks);
     }
 
-    #[DataProvider('workListDataProvider')]
+    #[DataProvider('provideGetWorkListCases')]
     public function testGetWorkList(string $type, int $expectedCount): void
     {
         $result = $this->workListService->getWorkList($this->user, $type);
@@ -85,7 +85,7 @@ class WorkListServiceTest extends TestCase
         $this->assertCount($expectedCount, $result);
     }
 
-    #[DataProvider('getUserAuthorsProvider')]
+    #[DataProvider('provideGetUserAuthorsCases')]
     public function testGetUserAuthors(string $type, int $expectedCount): void
     {
         $result = $this->workListService->getUserAuthors($this->user, $type);
@@ -93,7 +93,7 @@ class WorkListServiceTest extends TestCase
         $this->assertCount($expectedCount, $result);
     }
 
-    #[DataProvider('getUserSupervisorsProvider')]
+    #[DataProvider('provideGetUserSupervisorsCases')]
     public function testGetUserSupervisors(string $type, int $expectedCount): void
     {
         $result = $this->workListService->getUserSupervisors($this->user, $type);
@@ -101,7 +101,7 @@ class WorkListServiceTest extends TestCase
         $this->assertCount($expectedCount, $result);
     }
 
-    #[DataProvider('getUserOpponentsProvider')]
+    #[DataProvider('provideGetUserOpponentsCases')]
     public function testGetUserOpponents(string $type, int $expectedCount): void
     {
         $result = $this->workListService->getUserOpponents($this->user, $type);
@@ -109,7 +109,7 @@ class WorkListServiceTest extends TestCase
         $this->assertCount($expectedCount, $result);
     }
 
-    #[DataProvider('getUserConsultantsProvider')]
+    #[DataProvider('provideGetUserConsultantsCases')]
     public function testGetUserConsultants(string $type, int $expectedCount): void
     {
         $result = $this->workListService->getUserConsultants($this->user, $type);
@@ -117,7 +117,7 @@ class WorkListServiceTest extends TestCase
         $this->assertCount($expectedCount, $result);
     }
 
-    public static function workListDataProvider(): Generator
+    public static function provideGetWorkListCases(): Generator
     {
         yield [WorkUserTypeConstant::SUPERVISOR->value, 3];
         yield [WorkUserTypeConstant::AUTHOR->value, 1];
@@ -125,7 +125,7 @@ class WorkListServiceTest extends TestCase
         yield [WorkUserTypeConstant::CONSULTANT->value, 0];
     }
 
-    public static function getUserAuthorsProvider(): Generator
+    public static function provideGetUserAuthorsCases(): Generator
     {
         yield [WorkUserTypeConstant::SUPERVISOR->value, 2];
         yield [WorkUserTypeConstant::AUTHOR->value, 0];
@@ -133,7 +133,7 @@ class WorkListServiceTest extends TestCase
         yield [WorkUserTypeConstant::CONSULTANT->value, 0];
     }
 
-    public static function getUserSupervisorsProvider(): Generator
+    public static function provideGetUserSupervisorsCases(): Generator
     {
         yield [WorkUserTypeConstant::SUPERVISOR->value, 0];
         yield [WorkUserTypeConstant::AUTHOR->value, 1];
@@ -141,7 +141,7 @@ class WorkListServiceTest extends TestCase
         yield [WorkUserTypeConstant::CONSULTANT->value, 0];
     }
 
-    public static function getUserOpponentsProvider(): Generator
+    public static function provideGetUserOpponentsCases(): Generator
     {
         yield [WorkUserTypeConstant::SUPERVISOR->value, 1];
         yield [WorkUserTypeConstant::AUTHOR->value, 1];
@@ -149,7 +149,7 @@ class WorkListServiceTest extends TestCase
         yield [WorkUserTypeConstant::CONSULTANT->value, 0];
     }
 
-    public static function getUserConsultantsProvider(): Generator
+    public static function provideGetUserConsultantsCases(): Generator
     {
         yield [WorkUserTypeConstant::SUPERVISOR->value, 1];
         yield [WorkUserTypeConstant::AUTHOR->value, 1];

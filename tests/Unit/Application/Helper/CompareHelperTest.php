@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class CompareHelperTest extends TestCase
 {
-    #[DataProvider('compareProvider')]
+    #[DataProvider('provideCompareCases')]
     public function testCompare(
         mixed $value1,
         mixed $value2,
@@ -32,7 +32,7 @@ class CompareHelperTest extends TestCase
         $this->assertEquals($expectedValue, $result);
     }
 
-    public static function compareProvider(): Generator
+    public static function provideCompareCases(): Generator
     {
         yield [1, 0, CompareConstant::MORE, true];
         yield [0, 1, CompareConstant::MORE, false];

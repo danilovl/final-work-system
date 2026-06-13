@@ -33,7 +33,7 @@ class UserRoleTypeTest extends KernelTestCase
             ->getForm();
     }
 
-    #[DataProvider('roleDateProvider')]
+    #[DataProvider('provideSubmitSuccessCases')]
     public function testSubmitSuccess(string $role): void
     {
         $this->form->submit(['role' => $role]);
@@ -58,7 +58,7 @@ class UserRoleTypeTest extends KernelTestCase
         $this->assertSame(UserRoleType::NAME, $userRoleType->getBlockPrefix());
     }
 
-    public static function roleDateProvider(): Generator
+    public static function provideSubmitSuccessCases(): Generator
     {
         yield [UserRoleConstant::STUDENT->value];
         yield [UserRoleConstant::OPPONENT->value];

@@ -27,42 +27,42 @@ class ParametersServiceTest extends KernelTestCase
         $this->parametersService = $kernel->getContainer()->get(ParameterService::class);
     }
 
-    #[DataProvider('keyIntegerProvider')]
+    #[DataProvider('provideKeyIntegerCases')]
     public function testKeyInteger(string $key, int $result): void
     {
         $param = $this->parametersService->get($key);
         $this->assertEquals($param, $result);
     }
 
-    #[DataProvider('keyStringProvider')]
+    #[DataProvider('provideKeyStringCases')]
     public function testKeyString(string $key, string $result): void
     {
         $param = $this->parametersService->get($key);
         $this->assertEquals($param, $result);
     }
 
-    #[DataProvider('keyArrayProvider')]
+    #[DataProvider('provideKeyArrayCases')]
     public function testKeyArray(string $key, array $result): void
     {
         $param = $this->parametersService->get($key);
         $this->assertEquals($param, $result);
     }
 
-    public static function keyIntegerProvider(): Generator
+    public static function provideKeyIntegerCases(): Generator
     {
         yield ['pagination.default.page', 1];
         yield ['pagination.default.limit', 25];
         yield ['pagination.home.limit', 100];
     }
 
-    public static function keyStringProvider(): Generator
+    public static function provideKeyStringCases(): Generator
     {
         yield ['template.ajax', 'ajax/'];
         yield ['locale', 'en'];
         yield ['locales', 'en|cs|ru'];
     }
 
-    public static function keyArrayProvider(): Generator
+    public static function provideKeyArrayCases(): Generator
     {
         yield ['pagination.default', ['page' => 1, 'limit' => 25]];
     }

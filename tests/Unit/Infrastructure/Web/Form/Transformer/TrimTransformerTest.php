@@ -26,19 +26,19 @@ class TrimTransformerTest extends TestCase
         $this->commaDotTransformer = new TrimTransformer;
     }
 
-    #[DataProvider('transformProvider')]
+    #[DataProvider('provideTransformCases')]
     public function testTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->transform($replace));
     }
 
-    #[DataProvider('reverseTransformProvider')]
+    #[DataProvider('provideReverseTransformCases')]
     public function testReverseTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->reverseTransform($replace));
     }
 
-    public static function transformProvider(): Generator
+    public static function provideTransformCases(): Generator
     {
         yield [' text', 'text'];
         yield ['text ', 'text'];
@@ -46,7 +46,7 @@ class TrimTransformerTest extends TestCase
         yield [' ', ''];
     }
 
-    public static function reverseTransformProvider(): Generator
+    public static function provideReverseTransformCases(): Generator
     {
         yield ['text ', 'text '];
     }

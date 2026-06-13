@@ -36,7 +36,7 @@ class ConversationMessageFormTest extends TypeTestCase
         return $user;
     }
 
-    #[DataProvider('messageProvider')]
+    #[DataProvider('provideSubmitValidDataCases')]
     public function testSubmitValidData(
         array $data,
         bool $isValid
@@ -55,7 +55,7 @@ class ConversationMessageFormTest extends TypeTestCase
         $this->assertEquals($isValid, $form->isValid());
     }
 
-    public static function messageProvider(): Generator
+    public static function provideSubmitValidDataCases(): Generator
     {
         yield [['content' => 'text'], true];
         yield [['content' => null], true];

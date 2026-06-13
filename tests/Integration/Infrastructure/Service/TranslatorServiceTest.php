@@ -27,28 +27,28 @@ class TranslatorServiceTest extends KernelTestCase
         $this->translatorService = $kernel->getContainer()->get(TranslatorService::class);
     }
 
-    #[DataProvider('idProvider')]
+    #[DataProvider('provideIdCases')]
     public function testId(string $key, string $result): void
     {
         $trans = $this->translatorService->trans($key);
         $this->assertEquals($trans, $result);
     }
 
-    #[DataProvider('transProvider')]
+    #[DataProvider('provideTransCases')]
     public function testTrans(string $key, string $domain, string $locale, string $result): void
     {
         $trans = $this->translatorService->trans($key, [], $domain, $locale);
         $this->assertEquals($trans, $result);
     }
 
-    public static function idProvider(): Generator
+    public static function provideIdCases(): Generator
     {
         yield ['app.system_name', 'System for conducting bachelor and diploma theses'];
         yield ['app.text.author', 'Author'];
         yield ['app.error.500', 'Internal Server Error'];
     }
 
-    public static function transProvider(): Generator
+    public static function provideTransCases(): Generator
     {
         yield ['app.email_notification.subject.user_create', 'email_notification', 'en', 'Create a new account'];
         yield ['app.email_notification.subject.user_create', 'email_notification', 'ru', 'Создание новой учетной записи'];

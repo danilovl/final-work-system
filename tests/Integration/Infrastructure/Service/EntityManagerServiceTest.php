@@ -39,7 +39,7 @@ class EntityManagerServiceTest extends KernelTestCase
      * @param class-string<object> $entityClass
      * @param class-string $repositoryClass
      */
-    #[DataProvider('repositoryProvider')]
+    #[DataProvider('provideRepositoryCases')]
     public function testRepository(string $entityClass, string $repositoryClass): void
     {
         $repository = $this->entityManagerService->getRepository($entityClass);
@@ -49,7 +49,7 @@ class EntityManagerServiceTest extends KernelTestCase
     /**
      * @param class-string<object> $entityClass
      */
-    #[DataProvider('referenceProvider')]
+    #[DataProvider('provideReferenceCases')]
     public function testReference(string $entityClass): void
     {
         $reference = $this->entityManagerService->getReference($entityClass, 1);
@@ -57,7 +57,7 @@ class EntityManagerServiceTest extends KernelTestCase
         $this->assertEquals(get_parent_class($reference), $entityClass);
     }
 
-    public static function repositoryProvider(): Generator
+    public static function provideRepositoryCases(): Generator
     {
         yield [User::class, UserRepository::class];
         yield [Work::class, WorkRepository::class];
@@ -65,7 +65,7 @@ class EntityManagerServiceTest extends KernelTestCase
         yield [Conversation::class, ConversationRepository::class];
     }
 
-    public static function referenceProvider(): Generator
+    public static function provideReferenceCases(): Generator
     {
         yield [User::class];
         yield [Work::class];

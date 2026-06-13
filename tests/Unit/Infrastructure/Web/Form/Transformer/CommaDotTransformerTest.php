@@ -28,13 +28,13 @@ class CommaDotTransformerTest extends TestCase
         $this->commaDotTransformer = new CommaDotTransformer;
     }
 
-    #[DataProvider('transformProvider')]
+    #[DataProvider('provideTransformCases')]
     public function testTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->transform($replace));
     }
 
-    #[DataProvider('reverseTransformProvider')]
+    #[DataProvider('provideReverseTransformCases')]
     public function testReverseTransform(string $replace, string $expected): void
     {
         $this->assertEquals($expected, $this->commaDotTransformer->reverseTransform($replace));
@@ -49,14 +49,14 @@ class CommaDotTransformerTest extends TestCase
         $this->commaDotTransformer->reverseTransform('not numeric');
     }
 
-    public static function transformProvider(): Generator
+    public static function provideTransformCases(): Generator
     {
         yield ['11111,11111', '11111.11111'];
         yield ['50,0527973', '50.0527973'];
         yield ['50,05,27,97,3', '50.05.27.97.3'];
     }
 
-    public static function reverseTransformProvider(): Generator
+    public static function provideReverseTransformCases(): Generator
     {
         yield ['50.0527973', '50.0527973'];
         yield ['1', '1'];

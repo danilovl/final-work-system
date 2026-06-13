@@ -32,7 +32,7 @@ class ConversationSearchTest extends TestCase
     /**
      * @param int[] $messageIds
      */
-    #[DataProvider('createQueryGetIdsByParticipantAndSearchProvider')]
+    #[DataProvider('provideCreateQueryGetIdsByParticipantAndSearchCases')]
     public function testCreateQueryGetIdsByParticipantAndSearch(
         User $user,
         array $messageIds,
@@ -44,7 +44,7 @@ class ConversationSearchTest extends TestCase
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public static function createQueryGetIdsByParticipantAndSearchProvider(): Generator
+    public static function provideCreateQueryGetIdsByParticipantAndSearchCases(): Generator
     {
         foreach (['test', 'apple'] as $search) {
             $user = new User;

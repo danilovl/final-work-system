@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormInterface;
 
 class WorkSearchTest extends KernelTestCase
 {
-    #[DataProvider('createQueryProvider')]
+    #[DataProvider('provideCreateQueryCases')]
     public function testCreateQuery(
         User $user,
         string $type,
@@ -48,7 +48,7 @@ class WorkSearchTest extends KernelTestCase
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public static function createQueryProvider(): Generator
+    public static function provideCreateQueryCases(): Generator
     {
         $user = new User;
         $user->setId(1);

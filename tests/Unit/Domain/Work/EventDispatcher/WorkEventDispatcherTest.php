@@ -40,7 +40,7 @@ class WorkEventDispatcherTest extends TestCase
         $this->workEventDispatcher = new WorkEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
-    #[DataProvider('dispatchProvider')]
+    #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
         $work = $this->createMock(Work::class);
@@ -64,7 +64,7 @@ class WorkEventDispatcherTest extends TestCase
         });
     }
 
-    public static function dispatchProvider(): Generator
+    public static function provideDispatchCases(): Generator
     {
         yield ['onWorkCreate', 1,
             [

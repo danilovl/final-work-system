@@ -40,7 +40,7 @@ class EventEventDispatcherTest extends TestCase
         $this->eventEventDispatcher = new EventEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
-    #[DataProvider('dispatchProvider')]
+    #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
         $event = $this->createMock(Event::class);
@@ -68,7 +68,7 @@ class EventEventDispatcherTest extends TestCase
         });
     }
 
-    public static function dispatchProvider(): Generator
+    public static function provideDispatchCases(): Generator
     {
         yield ['onEventEdit', 1,
             [

@@ -18,8 +18,6 @@ use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDetailDTO;
 use App\Domain\ConversationMessage\DTO\Api\Output\ConversationMessageListOutput;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
-use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
-use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\PaginatorService;

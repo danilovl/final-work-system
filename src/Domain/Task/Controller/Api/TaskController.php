@@ -15,7 +15,7 @@ namespace App\Domain\Task\Controller\Api;
 use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\{JsonResponse, Request};
 use App\Domain\Task\DTO\Api\Output\{
     TaskDetailOutput,
     TaskListWorkOutput,
@@ -33,7 +33,6 @@ use App\Domain\Task\Http\Api\{
     TaskListSolverHandle
 };
 use App\Domain\Work\Entity\Work;
-use Symfony\Component\HttpFoundation\Request;
 
 readonly class TaskController
 {

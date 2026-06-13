@@ -39,7 +39,7 @@ class UserEventDispatcherTest extends TestCase
         $this->userEventDispatcher = new UserEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
-    #[DataProvider('dispatchProvider')]
+    #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
         $user = $this->createMock(User::class);
@@ -63,7 +63,7 @@ class UserEventDispatcherTest extends TestCase
         });
     }
 
-    public static function dispatchProvider(): Generator
+    public static function provideDispatchCases(): Generator
     {
         yield ['onUserCreate', 1,
             [

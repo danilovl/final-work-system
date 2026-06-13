@@ -28,7 +28,7 @@ use PHPUnit\Framework\TestCase;
 
 class ObjectHelperTest extends TestCase
 {
-    #[DataProvider('classProvider')]
+    #[DataProvider('provideClassUsesDeepCases')]
     public function testClassUsesDeep(string|object $class, array $expectedTraits): void
     {
         $result = ObjectHelper::classUsesDeep($class);
@@ -36,7 +36,7 @@ class ObjectHelperTest extends TestCase
         $this->assertEquals($expectedTraits, $result);
     }
 
-    public static function classProvider(): Generator
+    public static function provideClassUsesDeepCases(): Generator
     {
         yield [
             new class ( ) {}, []

@@ -19,14 +19,14 @@ use PHPUnit\Framework\TestCase;
 
 class SluggerUtilTest extends TestCase
 {
-    #[DataProvider('slugifyDataProvider')]
+    #[DataProvider('provideSlugifyCases')]
     public function testSlugify(string $input, string $expectedOutput): void
     {
         $slugger = new SluggerUtil;
         $this->assertEquals($expectedOutput, $slugger->slugify($input));
     }
 
-    public static function slugifyDataProvider(): Generator
+    public static function provideSlugifyCases(): Generator
     {
         yield ['Hello World', 'hello-world'];
         yield ['Lorem Ipsum Dolor Sit Amet', 'lorem-ipsum-dolor-sit-amet'];

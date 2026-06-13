@@ -19,14 +19,14 @@ use PHPUnit\Framework\TestCase;
 
 class MomentFormatConverterUtilTest extends TestCase
 {
-    #[DataProvider('convertDataProvider')]
+    #[DataProvider('provideConvertCases')]
     public function testConvert(string $format, string $expectedOutput): void
     {
         $slugger = new MomentFormatConverterUtil;
         $this->assertEquals($expectedOutput, $slugger->convert($format));
     }
 
-    public static function convertDataProvider(): Generator
+    public static function provideConvertCases(): Generator
     {
         yield ['yyyy-MM-dd', 'YYYY-MM-DD'];
         yield ['dd.MM.yy', 'DD.MM.YY'];

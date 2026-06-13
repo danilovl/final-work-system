@@ -43,7 +43,7 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
         return $mockObject;
     }
 
-    #[DataProvider('validProvider')]
+    #[DataProvider('provideIsValidCases')]
     public function testIsValid(?string $value, array $data): void
     {
         $this->setRoot($this->getFormMock($data));
@@ -54,7 +54,7 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    #[DataProvider('notValidProvider')]
+    #[DataProvider('provideIsNotValidCases')]
     public function testIsNotValid(?string $value, array $data): void
     {
         $this->setRoot($this->getFormMock($data));
@@ -65,13 +65,13 @@ class ConversationMessageNameValidatorTest extends ConstraintValidatorTestCase
         $this->buildViolation('This value should not be blank.')->assertRaised();
     }
 
-    public static function validProvider(): Generator
+    public static function provideIsValidCases(): Generator
     {
         yield ['name', ['conversation' => [1]]];
         yield ['name', ['conversation' => [1, 2]]];
     }
 
-    public static function notValidProvider(): Generator
+    public static function provideIsNotValidCases(): Generator
     {
         yield ['', ['conversation' => [1, 2]]];
         yield [null, ['conversation' => [1, 2, 3]]];

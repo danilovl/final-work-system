@@ -39,7 +39,7 @@ class VersionEventDispatcherServiceTest extends TestCase
         $this->versionEventDispatcherService = new VersionEventDispatcherService($this->eventDispatcher, $this->asyncService);
     }
 
-    #[DataProvider('dispatchProvider')]
+    #[DataProvider('provideDispatchCases')]
     public function testDispatch(string $method, int $exactly, array $expectEvents, array $expectNames): void
     {
         $media = $this->createMock(Media::class);
@@ -63,7 +63,7 @@ class VersionEventDispatcherServiceTest extends TestCase
         });
     }
 
-    public static function dispatchProvider(): Generator
+    public static function provideDispatchCases(): Generator
     {
         yield ['onVersionCreate', 1,
             [

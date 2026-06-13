@@ -30,7 +30,7 @@ class ConversationSearchTest extends TestCase
         $this->conversationMessageSearch = new ConversationMessageSearch($transformedFinder);
     }
 
-    #[DataProvider('createQueryGetMessageIdsByConversationAndSearchProvider')]
+    #[DataProvider('provideCreateQueryGetMessageIdsByConversationAndSearchCases')]
     public function testCreateQueryGetMessageIdsByConversationAndSearch(
         Conversation $conversation,
         string $search,
@@ -41,7 +41,7 @@ class ConversationSearchTest extends TestCase
         $this->assertEquals($expectedQuery, $result);
     }
 
-    #[DataProvider('createQueryGetIdsByParticipantAndSearchProvider')]
+    #[DataProvider('provideCreateQueryGetIdsByParticipantAndSearchCases')]
     public function testCreateQueryGetIdsByParticipantAndSearch(
         User $user,
         string $search,
@@ -52,7 +52,7 @@ class ConversationSearchTest extends TestCase
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public static function createQueryGetMessageIdsByConversationAndSearchProvider(): Generator
+    public static function provideCreateQueryGetMessageIdsByConversationAndSearchCases(): Generator
     {
         foreach (['test', 'apple'] as $search) {
             $conversation = new Conversation;
@@ -90,7 +90,7 @@ class ConversationSearchTest extends TestCase
         }
     }
 
-    public static function createQueryGetIdsByParticipantAndSearchProvider(): Generator
+    public static function provideCreateQueryGetIdsByParticipantAndSearchCases(): Generator
     {
         foreach (['test', 'apple'] as $search) {
             $user = new User;

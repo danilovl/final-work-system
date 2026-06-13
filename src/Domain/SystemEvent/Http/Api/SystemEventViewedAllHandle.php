@@ -14,13 +14,12 @@ namespace App\Domain\SystemEvent\Http\Api;
 
 use App\Application\Constant\CacheKeyConstant;
 use App\Application\EventDispatcher\CacheEventDispatcher;
-use Symfony\Component\HttpFoundation\Response;
 use App\Domain\SystemEvent\Facade\{
     SystemEventFacade,
     SystemEventRecipientFacade
 };
 use App\Domain\User\Service\UserService;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\{JsonResponse, Response};
 
 readonly class SystemEventViewedAllHandle
 {

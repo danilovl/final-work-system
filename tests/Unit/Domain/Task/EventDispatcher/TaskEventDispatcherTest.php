@@ -41,7 +41,7 @@ class TaskEventDispatcherTest extends TestCase
         $this->taskEventDispatcher = new TaskEventDispatcher($this->eventDispatcher, $this->asyncService);
     }
 
-    #[DataProvider('dispatchProvider')]
+    #[DataProvider('provideDispatchCases')]
     public function testDispatch(
         string $method,
         int $exactly,
@@ -79,7 +79,7 @@ class TaskEventDispatcherTest extends TestCase
         });
     }
 
-    public static function dispatchProvider(): Generator
+    public static function provideDispatchCases(): Generator
     {
         yield ['onTaskCreate', 1, [],
             [

@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 
 class TextHighlightWordTest extends TestCase
 {
-    #[DataProvider('highlightEntireWordsDataProvider')]
+    #[DataProvider('provideHighlightEntireWordsCases')]
     public function testHighlightEntireWords(string $text, array $words, string $expectedResult): void
     {
         $highlightedText = TextHighlightWordUtil::highlightEntireWords($text, $words);
@@ -27,7 +27,7 @@ class TextHighlightWordTest extends TestCase
         $this->assertEquals($expectedResult, $highlightedText);
     }
 
-    #[DataProvider('highlightPartWordsDataProvider')]
+    #[DataProvider('provideHighlightPartWordsCases')]
     public function testHighlightPartWords(string $text, array $words, string $expectedResult): void
     {
         $highlightedText = TextHighlightWordUtil::highlightPartWords($text, $words);
@@ -35,7 +35,7 @@ class TextHighlightWordTest extends TestCase
         $this->assertEquals($expectedResult, $highlightedText);
     }
 
-    public static function highlightEntireWordsDataProvider(): Generator
+    public static function provideHighlightEntireWordsCases(): Generator
     {
         yield ['Lorem ipsum dolor sit amet', ['ipsum'], 'Lorem <span style="background-color: yellow;">ipsum</span> dolor sit amet'];
         yield ['Lorem ipsum dolor sit amet', ['Lorem', 'sit'], '<span style="background-color: yellow;">Lorem</span> ipsum dolor <span style="background-color: yellow;">sit</span> amet'];
@@ -45,7 +45,7 @@ class TextHighlightWordTest extends TestCase
         yield ['která bude souviset s náplní mé prace v ŠA', ['ša', 'amet'], 'která bude souviset s náplní mé prace v <span style="background-color: yellow;">ŠA</span>'];
     }
 
-    public static function highlightPartWordsDataProvider(): Generator
+    public static function provideHighlightPartWordsCases(): Generator
     {
         yield ['Lorem ipsumdolor sit amet', ['ipsum'], 'Lorem <span style="background-color: yellow;">ipsum</span>dolor sit amet'];
         yield ['Lorem ipsum dolor sitamet', ['Lorem', 'sit'], '<span style="background-color: yellow;">Lorem</span> ipsum dolor <span style="background-color: yellow;">sit</span>amet'];

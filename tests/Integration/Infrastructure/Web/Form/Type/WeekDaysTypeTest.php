@@ -32,7 +32,7 @@ class WeekDaysTypeTest extends KernelTestCase
             ->getForm();
     }
 
-    #[DataProvider('dayDateProvider')]
+    #[DataProvider('provideSubmitSuccessCases')]
     public function testSubmitSuccess(int $number): void
     {
         $this->form->submit(['day' => $number]);
@@ -57,7 +57,7 @@ class WeekDaysTypeTest extends KernelTestCase
         $this->assertSame(WeekDaysType::NAME, $userRoleType->getBlockPrefix());
     }
 
-    public static function dayDateProvider(): Generator
+    public static function provideSubmitSuccessCases(): Generator
     {
         foreach (range(0, 6) as $number) {
             yield [$number];

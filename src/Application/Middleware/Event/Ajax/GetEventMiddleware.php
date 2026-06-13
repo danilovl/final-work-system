@@ -26,7 +26,7 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class GetEventMiddleware
 {
-    public function __construct(readonly private TranslatorService $translator) {}
+    public function __construct(private readonly TranslatorService $translator) {}
 
     public function __invoke(ControllerEvent $event): bool
     {

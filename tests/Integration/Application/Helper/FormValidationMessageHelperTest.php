@@ -37,7 +37,7 @@ class FormValidationMessageHelperTest extends KernelTestCase
         $this->formFactory = $kernel->getContainer()->get('form.factory');
     }
 
-    #[DataProvider('dataProvider')]
+    #[DataProvider('provideGetErrorMessagesCases')]
     public function testGetErrorMessages(array $submitData, array $expectedErrors): void
     {
         $form = $this->formFactory
@@ -64,7 +64,7 @@ class FormValidationMessageHelperTest extends KernelTestCase
         $this->assertEquals($expectedErrors, $result);
     }
 
-    public static function dataProvider(): Generator
+    public static function provideGetErrorMessagesCases(): Generator
     {
         yield [
             ['text' => null, 'date' => null],

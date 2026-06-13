@@ -19,7 +19,7 @@ use App\Domain\User\Bus\Query\UserList\{
     GetUserListQuery,
     GetUserListQueryResult
 };
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\{JsonResponse, Request};
 use App\Domain\User\DTO\Api\Output\{
     UserListOutput,
     UserListItemDTO
@@ -30,7 +30,6 @@ use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Facade\WorkFacade;
-use Symfony\Component\HttpFoundation\Request;
 
 readonly class UserListHandle
 {
