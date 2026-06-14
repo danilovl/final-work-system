@@ -23,6 +23,7 @@ use App\Domain\Conversation\Http\Api\{
     ConversationDetailHandle,
     ConversationMessageListHandle,
     ConversationWorkMessageListHandle,
+    ConversationWorkHandle,
     ConversationCreateMessageHandle,
     ConversationChangeMessageReadStatusHandle,
     ConversationChangeAllMessageToReadHandle
@@ -30,7 +31,6 @@ use App\Domain\Conversation\Http\Api\{
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response,
     JsonResponse
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -40,7 +40,8 @@ readonly class ConversationController
 {
     public function __construct(
         private AuthorizationCheckerService $authorizationCheckerService,
-        private ConversationWorkMessageListHandle $conversionWorkHandle,
+        private ConversationWorkMessageListHandle $conversationWorkMessageListHandle,
+        private ConversationWorkHandle $conversationWorkHandle,
         private ConversationListHandle $conversationListHandle,
         private ConversationDetailHandle $conversationDetailHandle,
         private ConversationMessageListHandle $conversationMessageListHandle,
@@ -54,14 +55,14 @@ readonly class ConversationController
         return $this->conversationListHandle->__invoke($request);
     }
 
-    public function detail(Request $request, Conversation $conversation): Response
+    public function detail(Request $request, Conversation $conversation): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationDetailHandle->__invoke($request, $conversation);
     }
 
-    public function messages(Request $request, Conversation $conversation): Response
+    public function messages(Request $request, Conversation $conversation): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
@@ -71,28 +72,33 @@ readonly class ConversationController
     public function createMessage(
         Conversation $conversation,
         #[MapRequestPayload] ConversationMessageInput $conversationMessageInput,
-    ): Response {
+    ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
         return $this->conversationCreateMessageHandle->__invoke($conversation, $conversationMessageInput);
     }
 
-    public function listWorkMessage(Request $request, Work $work): Response
+    public function listWorkMessage(Request $request, Work $work): JsonResponse
     {
-        return $this->conversionWorkHandle->__invoke($request, $work);
+        return $this->conversationWorkMessageListHandle->__invoke($request, $work);
+    }
+
+    public function conversationWork(Request $request, Work $work): JsonResponse
+    {
+        return $this->conversationWorkHandle->__invoke($request, $work);
     }
 
     #[EntityRelationValidatorAttribute(sourceEntity: ConversationMessage::class, targetEntity: Conversation::class)]
     public function changeMessageReadStatus(
         #[MapEntity(mapping: ['id_conversation' => 'id'])] Conversation $conversation,
         #[MapEntity(mapping: ['id_message' => 'id'])] ConversationMessage $conversationMessage
-    ): Response {
+    ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversationMessage->getConversation());
 
         return $this->conversationChangeMessageReadStatusHandle->__invoke($conversationMessage);
     }
 
-    public function allMessageToRead(): Response
+    public function allMessageToRead(): JsonResponse
     {
         return $this->conversationChangeAllMessageToReadHandle->__invoke();
     }

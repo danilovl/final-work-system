@@ -12,8 +12,10 @@
 
 namespace App\Domain\Event\Http\Api;
 
+use App\Application\Mapper\ObjectToDtoMapper;
+use App\Domain\Event\DTO\Api\EventDTO;
+use App\Domain\Event\Entity\Event;
 use App\Domain\Work\Service\WorkDetailTabService;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use App\Application\Constant\TabTypeConstant;
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
@@ -25,16 +27,22 @@ readonly class EventListHandle
 {
     public function __construct(
         private WorkDetailTabService $workDetailTabService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private ObjectToDtoMapper $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
     {
-        $pagination = $this->workDetailTabService->getTabPagination($request, TabTypeConstant::TAB_EVENT->value, $work);
+        $pagination = $this->workDetailTabService->getTabPagination(
+            request: $request,
+            tab: TabTypeConstant::TAB_EVENT->value,
+            work: $work,
+            isApi: true
+        );
 
         $events = [];
+        /** @var Event $event */
         foreach ($pagination as $event) {
-            $events[] = $this->objectToArrayTransformService->transform('api_key_field', $event);
+            $events[] = $this->objectToDtoMapper->map($event, EventDTO::class);
         }
 
         return new JsonResponse([

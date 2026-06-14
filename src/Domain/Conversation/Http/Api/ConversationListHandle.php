@@ -58,11 +58,11 @@ readonly class ConversationListHandle
         $conversations = [];
         foreach ($pagination as $conversation) {
             $lastMessage = $this->conversationService->getLastMessage($conversation);
-            
+
             $lastMessageDto = null;
             if ($lastMessage !== null) {
                 $ownerDto = $this->objectToDtoMapper->map($lastMessage->getOwner(), UserDTO::class);
-              
+
                 $lastMessageDto = new ConversationMessageDTO(
                     id: $lastMessage->getId(),
                     owner: $ownerDto,
@@ -79,16 +79,13 @@ readonly class ConversationListHandle
             if ($conversation->getWork() !== null) {
                 $workDto = $this->objectToDtoMapper->map($conversation->getWork(), WorkDTO::class);
             }
-            
-            $typeDto = null;
-            if ($conversation->getType() !== null) {
-                $typeDto = new ConversationTypeDTO(
-                    id: $conversation->getType()->getId(),
-                    name: $conversation->getType()->getName(),
-                    constant: $conversation->getType()->getConstant()
-                );
-            }
-            
+
+            $typeDto = new ConversationTypeDTO(
+                id: $conversation->getType()->getId(),
+                name: $conversation->getType()->getName(),
+                constant: $conversation->getType()->getConstant()
+            );
+
             $conversations[] = new ConversationDTO(
                 id: $conversation->getId(),
                 name: $conversation->getName(),

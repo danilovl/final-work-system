@@ -24,6 +24,7 @@ readonly class UserDTO
         public string $lastname,
         public string $email,
         public ?string $degreeBefore,
-        public ?string $degreeAfter
+        public ?string $degreeAfter,
+        public array $roles = [],
     ) {}
 }

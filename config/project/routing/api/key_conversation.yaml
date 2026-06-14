@@ -50,3 +50,11 @@ api_key_conversation_message_change_all_to_read:
   defaults:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::allMessageToRead
   methods: [PUT]
+
+api_key_conversation_work:
+  path: /works/{id}
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Conversation\Controller\Api\ConversationController::conversationWork
+  methods: [GET]

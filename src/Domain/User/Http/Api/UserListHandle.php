@@ -44,13 +44,10 @@ readonly class UserListHandle
     {
         $user = $this->userService->getUser();
 
-        $workStatus = $request->get('workStatus');
-
         $query = GetUserListQuery::create(
             request: $request,
             user: $user,
-            type: $type,
-            workStatus: $workStatus
+            type: $type
         );
 
         /** @var GetUserListQueryResult $result */
@@ -69,8 +66,7 @@ readonly class UserListHandle
                 $workRepositoryDTO = new WorkRepositoryDTO(
                     user: $paginationUser,
                     supervisor: $user,
-                    type: $type,
-                    workStatus: $workStatus
+                    type: $type
                 );
 
                 $paginationUserWorks = $this->workFacade->listByAuthorSupervisorStatus($workRepositoryDTO);

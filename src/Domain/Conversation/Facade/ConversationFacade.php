@@ -78,6 +78,17 @@ readonly class ConversationFacade
             ->getQuery();
     }
 
+    public function findByWorkUser(Work $work, User $user): ?Conversation
+    {
+        /** @var Conversation|null $result */
+        $result = $this->conversationRepository
+            ->oneByWorkUser($work, $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result;
+    }
+
     /**
      * @param Conversation[] $conversations
      */

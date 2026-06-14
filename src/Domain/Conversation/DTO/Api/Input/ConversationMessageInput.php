@@ -18,6 +18,6 @@ readonly class ConversationMessageInput
 {
     public function __construct(
         #[Assert\NotBlank]
-        public ?string $message
+        public string $message
     ) {}
 }

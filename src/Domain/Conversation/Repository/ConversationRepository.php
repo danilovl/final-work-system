@@ -16,6 +16,7 @@ use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\ConversationParticipant\Entity\ConversationParticipant;
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
+use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
@@ -77,6 +78,28 @@ class ConversationRepository extends ServiceEntityRepository
             ->where('conversation.id IN (:ids)')
             ->orderBy('messages.createdAt', Order::Descending->value)
             ->setParameter('ids', $ids);
+    }
+
+    public function oneByWorkUser(
+        Work $work,
+        User $user
+    ): QueryBuilder {
+        return $this->baseQueryBuilder()
+            ->addSelect('messages, type, work, work_status, work_type, participants, participantsUser, messagesOwner')
+            ->join('conversation.type', 'type')
+            ->leftJoin('conversation.work', 'work')
+            ->leftJoin('work.status', 'work_status')
+            ->leftJoin('work.type', 'work_type')
+            ->leftJoin('conversation.participants', 'participants')
+            ->leftJoin('participants.user', 'participantsUser')
+            ->leftJoin('conversation.messages', 'messages')
+            ->leftJoin('messages.owner', 'messagesOwner')
+            ->where('conversation.work = :work')
+            ->andWhere('participants.user = :user')
+            ->setParameter('work', $work)
+            ->setParameter('user', $user)
+            ->orderBy('messages.createdAt', Order::Descending->value)
+            ->setMaxResults(1);
     }
 
     /**
