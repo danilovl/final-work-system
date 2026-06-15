@@ -361,7 +361,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, LegacyP
 
         $roles = array_merge($roles, $this->additionRoles);
 
-        return array_unique($roles);
+        return array_values(array_unique($roles));
     }
 
     public function setRoles(array $roles): self
