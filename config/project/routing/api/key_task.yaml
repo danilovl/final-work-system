@@ -6,3 +6,13 @@ api_key_get_task_detail:
   defaults:
     _controller: App\Domain\Task\Controller\Api\TaskController::detail
   methods: [GET]
+
+api_key_put_task_change_status:
+  path: /{id_task}/works/{id_work}/change/{type}
+  requirements:
+    id_task: '\d+'
+    id_work: '\d+'
+    type: "complete|active|notify"
+  defaults:
+    _controller: App\Domain\Task\Controller\Api\TaskController::changeStatus
+  methods: [PUT]

@@ -15,7 +15,10 @@ namespace App\Domain\Task\Controller\Api;
 use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Infrastructure\Service\AuthorizationCheckerService;
-use Symfony\Component\HttpFoundation\{JsonResponse, Request};
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
 use App\Domain\Task\DTO\Api\Output\{
     TaskDetailOutput,
     TaskListWorkOutput,
@@ -30,7 +33,8 @@ use App\Domain\Task\Http\Api\{
     TaskDetailHandle,
     TaskListWorkHandle,
     TaskListOwnerHandle,
-    TaskListSolverHandle
+    TaskListSolverHandle,
+    TaskChangeStatusHandle
 };
 use App\Domain\Work\Entity\Work;
 
@@ -42,7 +46,8 @@ readonly class TaskController
         private TaskListSolverHandle $taskListSolverHandle,
         private TaskDetailApiPlatformHandle $taskDetailApiPlatformHandle,
         private TaskDetailHandle $taskDetailHandle,
-        private TaskListWorkHandle $taskListWorkHandle
+        private TaskListWorkHandle $taskListWorkHandle,
+        private TaskChangeStatusHandle $taskChangeStatusHandle
     ) {}
 
     public function listOwner(Request $request): TaskListOwnerOutput
@@ -82,5 +87,17 @@ readonly class TaskController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $work);
 
         return $this->taskListWorkHandle->__invoke($request, $work);
+    }
+
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
+    public function changeStatus(
+        string $type,
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
+
+        return $this->taskChangeStatusHandle->__invoke($type, $task);
     }
 }
