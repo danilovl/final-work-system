@@ -34,7 +34,8 @@ use App\Domain\Task\Http\Api\{
     TaskListWorkHandle,
     TaskListOwnerHandle,
     TaskListSolverHandle,
-    TaskChangeStatusHandle
+    TaskChangeStatusHandle,
+    TaskNotifyCompleteHandle
 };
 use App\Domain\Work\Entity\Work;
 
@@ -47,7 +48,8 @@ readonly class TaskController
         private TaskDetailApiPlatformHandle $taskDetailApiPlatformHandle,
         private TaskDetailHandle $taskDetailHandle,
         private TaskListWorkHandle $taskListWorkHandle,
-        private TaskChangeStatusHandle $taskChangeStatusHandle
+        private TaskChangeStatusHandle $taskChangeStatusHandle,
+        private TaskNotifyCompleteHandle $taskNotifyCompleteHandle
     ) {}
 
     public function listOwner(Request $request): TaskListOwnerOutput
@@ -99,5 +101,16 @@ readonly class TaskController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::EDIT->value, $task);
 
         return $this->taskChangeStatusHandle->__invoke($type, $task);
+    }
+
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
+    public function notifyComplete(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE->value, $task);
+
+        return $this->taskNotifyCompleteHandle->__invoke($task);
     }
 }

@@ -16,3 +16,12 @@ api_key_put_task_change_status:
   defaults:
     _controller: App\Domain\Task\Controller\Api\TaskController::changeStatus
   methods: [PUT]
+
+api_key_put_task_notify_complete:
+  path: /{id_task}/works/{id_work}/notify/complete
+  requirements:
+    id_task: '\d+'
+    id_work: '\d+'
+  defaults:
+    _controller: App\Domain\Task\Controller\Api\TaskController::notifyComplete
+  methods: [PUT]
