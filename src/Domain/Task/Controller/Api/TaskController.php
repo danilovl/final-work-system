@@ -35,7 +35,8 @@ use App\Domain\Task\Http\Api\{
     TaskListOwnerHandle,
     TaskListSolverHandle,
     TaskChangeStatusHandle,
-    TaskNotifyCompleteHandle
+    TaskNotifyCompleteHandle,
+    TaskDeleteHandle
 };
 use App\Domain\Work\Entity\Work;
 
@@ -49,7 +50,8 @@ readonly class TaskController
         private TaskDetailHandle $taskDetailHandle,
         private TaskListWorkHandle $taskListWorkHandle,
         private TaskChangeStatusHandle $taskChangeStatusHandle,
-        private TaskNotifyCompleteHandle $taskNotifyCompleteHandle
+        private TaskNotifyCompleteHandle $taskNotifyCompleteHandle,
+        private TaskDeleteHandle $taskDeleteHandle
     ) {}
 
     public function listOwner(Request $request): TaskListOwnerOutput
@@ -112,5 +114,16 @@ readonly class TaskController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::TASK_NOTIFY_COMPLETE->value, $task);
 
         return $this->taskNotifyCompleteHandle->__invoke($task);
+    }
+
+    #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
+    #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
+    public function delete(
+        #[MapEntity(mapping: ['id_work' => 'id'])] Work $work,
+        #[MapEntity(mapping: ['id_task' => 'id'])] Task $task
+    ): JsonResponse {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $task);
+
+        return $this->taskDeleteHandle->__invoke($task);
     }
 }

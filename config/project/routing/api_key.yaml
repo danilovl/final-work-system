@@ -28,4 +28,4 @@ api_key_conversation:
 
 api_task:
   resource: api/key_task.yaml
-  prefix: /api/tasks
+  prefix: /api/key/tasks
