@@ -1,0 +1,7 @@
+api_key_get_event_calendar:
+  path: /{type}
+  requirements:
+    type: "manage|reservation|detail"
+  defaults:
+    _controller: App\Domain\EventCalendar\Controller\Api\EventCalendarController::getEvent
+  methods: [GET]

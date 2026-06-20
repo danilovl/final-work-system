@@ -18,6 +18,10 @@ api_key_event:
   resource: api/key_event.yaml
   prefix: /api/key/events
 
+api_key_event_calendar:
+  resource: api/key_event_calendar.yaml
+  prefix: /api/key/events/calendar
+
 api_key_version:
   resource: api/key_version.yaml
   prefix: /api/key/versions

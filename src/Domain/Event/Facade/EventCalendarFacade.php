@@ -53,13 +53,23 @@ class EventCalendarFacade
     }
 
     /**
-     * @return array<int, array<string, mixed>>
+     * @return array<int, array{
+     *     id: int|string,
+     *     title: string,
+     *     color: string,
+     *     start: string,
+     *     end: string,
+     *     detail_url?: string,
+     *     delete_url?: string,
+     *     reservation_url?: string
+     * }>
      */
     public function listEventsByOwner(
         User $user,
         string $type,
         DateTime $startDate,
-        DateTime $endDate
+        DateTime $endDate,
+        bool $isApi = false
     ): array {
         $events = [];
 
@@ -78,8 +88,10 @@ class EventCalendarFacade
                     ->getResult();
 
                 foreach ($userEvents as $appointment) {
+                    $id = $isApi === false ? $this->hashIds->encode($appointment->getId()) : $appointment->getId();
+                    
                     $event = [];
-                    $event['id'] = $this->hashIds->encode($appointment->getId());
+                    $event['id'] = $id;
                     $event['title'] = (string) $appointment;
                     $event['color'] = $appointment->getType()->getColor();
                     $event['start'] = $appointment->getStart()->format(DateFormatConstant::DATABASE->value);
@@ -139,8 +151,10 @@ class EventCalendarFacade
                         ->getResult();
 
                     foreach ($supervisorAppointments as $supervisorAppointment) {
+                        $id = $isApi === false ? $this->hashIds->encode($supervisorAppointment->getId()) : $supervisorAppointment->getId();
+
                         $event = [];
-                        $event['id'] = $this->hashIds->encode($supervisorAppointment->getId());
+                        $event['id'] = $id;
                         $event['start'] = $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE->value);
                         $event['end'] = $supervisorAppointment->getEnd()->format(DateFormatConstant::DATABASE->value);
 
