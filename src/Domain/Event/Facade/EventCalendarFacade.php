@@ -38,6 +38,8 @@ class EventCalendarFacade
 {
     private string $calendarEventReservedColor;
 
+    private string $calendarEvenFreeColor;
+
     private string $calendarEventDetailReservedColor;
 
     public function __construct(
@@ -49,6 +51,7 @@ class EventCalendarFacade
         ParameterServiceInterface $parameterService
     ) {
         $this->calendarEventReservedColor = $parameterService->getString('event_calendar.reserved_color');
+        $this->calendarEvenFreeColor = $parameterService->getString('event_calendar.free_color');
         $this->calendarEventDetailReservedColor = $parameterService->getString('event_calendar.detail_reserved_color');
     }
 
@@ -89,7 +92,7 @@ class EventCalendarFacade
 
                 foreach ($userEvents as $appointment) {
                     $id = $isApi === false ? $this->hashIds->encode($appointment->getId()) : $appointment->getId();
-                    
+
                     $event = [];
                     $event['id'] = $id;
                     $event['title'] = (string) $appointment;
@@ -155,6 +158,7 @@ class EventCalendarFacade
 
                         $event = [];
                         $event['id'] = $id;
+                        $event['color'] = $this->calendarEvenFreeColor;
                         $event['start'] = $supervisorAppointment->getStart()->format(DateFormatConstant::DATABASE->value);
                         $event['end'] = $supervisorAppointment->getEnd()->format(DateFormatConstant::DATABASE->value);
 

@@ -69,6 +69,7 @@ parameters:
   hashid: '^[a-zA-Z0-9]{10}$'
   default_user_image: 'images/user.png'
   event_calendar:
+    free_color: '#3b91ad'
     reserved_color: '#f00'
     detail_reserved_color: '#4bd44d'
   constraints:
