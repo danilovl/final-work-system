@@ -13,18 +13,29 @@
 namespace App\Domain\EventCalendar\Controller\Api;
 
 use App\Domain\EventCalendar\DTO\Api\Input\EventCalendarGetEventInput;
-use App\Domain\EventCalendar\Http\Api\EventCalendarGetEventHandle;
+use App\Domain\EventCalendar\Http\Api\{
+    EventCalendarGetEventHandle,
+    EventCalendarUserReservationWorksHandle
+};
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 
 readonly class EventCalendarController
 {
-    public function __construct(private EventCalendarGetEventHandle $eventCalendarGetEventHandle) {}
+    public function __construct(
+        private EventCalendarGetEventHandle $eventCalendarGetEventHandle,
+        private EventCalendarUserReservationWorksHandle $eventCalendarUserReservationWorksHandle
+    ) {}
 
     public function getEvent(
         #[MapQueryString] EventCalendarGetEventInput $input,
         string $type
     ): JsonResponse {
         return $this->eventCalendarGetEventHandle->__invoke($type, $input->start, $input->end);
+    }
+
+    public function getUserReservationWorks(): JsonResponse
+    {
+        return $this->eventCalendarUserReservationWorksHandle->__invoke();
     }
 }

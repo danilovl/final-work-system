@@ -5,3 +5,9 @@ api_key_get_event_calendar:
   defaults:
     _controller: App\Domain\EventCalendar\Controller\Api\EventCalendarController::getEvent
   methods: [GET]
+
+api_key_get_event_calendar_user_work:
+  path: /reservation/user/works
+  defaults:
+    _controller: App\Domain\EventCalendar\Controller\Api\EventCalendarController::getUserReservationWorks
+  methods: [GET]
