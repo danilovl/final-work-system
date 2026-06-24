@@ -20,7 +20,8 @@ use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\EventCalendar\Http\Api\{
     EventCalendarGetEventHandle,
     EventCalendarUserReservationWorksHandle,
-    EventCalendarUserReservationWorkHandle
+    EventCalendarUserReservationWorkHandle,
+    EventCalendarManageCreateDataHandle
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,7 +33,8 @@ readonly class EventCalendarController
         private AuthorizationCheckerService $authorizationCheckerService,
         private EventCalendarGetEventHandle $eventCalendarGetEventHandle,
         private EventCalendarUserReservationWorksHandle $eventCalendarUserReservationWorksHandle,
-        private EventCalendarUserReservationWorkHandle $eventCalendarUserReservationWorkHandle
+        private EventCalendarUserReservationWorkHandle $eventCalendarUserReservationWorkHandle,
+        private EventCalendarManageCreateDataHandle $eventCalendarManageCreateDataHandle
     ) {}
 
     public function getEvent(
@@ -54,5 +56,10 @@ readonly class EventCalendarController
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::RESERVATION->value, $event);
 
         return $this->eventCalendarUserReservationWorkHandle->__invoke($event, $work);
+    }
+
+    public function getManageCreateData(): JsonResponse
+    {
+        return $this->eventCalendarManageCreateDataHandle->__invoke();
     }
 }

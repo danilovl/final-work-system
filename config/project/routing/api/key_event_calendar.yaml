@@ -20,3 +20,9 @@ api_key_post_event_calendar_reservation_user_work:
   defaults:
     _controller: App\Domain\EventCalendar\Controller\Api\EventCalendarController::postUserReservationWork
   methods: [POST]
+
+api_key_get_event_calendar_manage_create_data:
+  path: /manage/create/data
+  defaults:
+    _controller: App\Domain\EventCalendar\Controller\Api\EventCalendarController::getManageCreateData
+  methods: [GET]
