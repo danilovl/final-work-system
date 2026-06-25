@@ -67,10 +67,6 @@ security:
     # API public
     - { path: ^/api/public/, roles: PUBLIC_ACCESS }
 
-    # API only by token key
-    - { path: ^/api/,  roles: IS_AUTHENTICATED_FULLY }
-    - { path: ^/api-platform/,  roles: IS_AUTHENTICATED_FULLY }
-
     # Admin login page needs to be access without credential
     - { path: ^/(%locales%)/admin/, roles: [ROLE_ADMIN] }
 
@@ -134,6 +130,17 @@ security:
 
     # Autocompleter pages
     - { path: ^/(%locales%)/select-autocompleter/(\w+)/autocomplete, roles: [IS_AUTHENTICATED_FULLY] }
+
+    # API
+    - { path: ^/api/key/events/calendar/manage,                                 roles: [ROLE_SUPERVISOR] }
+    - { path: ^/api/key/events/calendar/manage/create/data,                     roles: [ROLE_SUPERVISOR] }
+    - { path: ^/api/key/events/calendar/reservation/user/works,                 roles: [ROLE_STUDENT] }
+    - { path: ^/api/key/events/calendar/reservation,                            roles: [ROLE_STUDENT] }
+    - { path: ^/api/key/events/calendar/reservation/events/(\d+)/works/(\d+),   roles: [ROLE_STUDENT] }
+
+    # API only by token key
+    - { path: ^/api/,  roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api-platform/,  roles: IS_AUTHENTICATED_FULLY }
 
     # All pages
     - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY  }
