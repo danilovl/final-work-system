@@ -92,7 +92,7 @@ class EventCalendarFacade
 
                 foreach ($userEvents as $appointment) {
                     $id = $isApi === false ? $this->hashIds->encode($appointment->getId()) : $appointment->getId();
-
+                    
                     $event = [];
                     $event['id'] = $id;
                     $event['title'] = (string) $appointment;

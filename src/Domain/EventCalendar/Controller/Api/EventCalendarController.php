@@ -14,18 +14,23 @@ namespace App\Domain\EventCalendar\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Event\Entity\Event;
-use App\Domain\EventCalendar\DTO\Api\Input\EventCalendarGetEventInput;
+use App\Domain\EventCalendar\DTO\Api\Input\{
+    EventCalendarGetEventInput,
+    EventCalendarEventInput
+};
 use App\Domain\Work\Entity\Work;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\EventCalendar\Http\Api\{
     EventCalendarGetEventHandle,
     EventCalendarUserReservationWorksHandle,
     EventCalendarUserReservationWorkHandle,
-    EventCalendarManageCreateDataHandle
+    EventCalendarManageCreateDataHandle,
+    EventCalendarManageCreateEventHandle
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 readonly class EventCalendarController
 {
@@ -34,7 +39,8 @@ readonly class EventCalendarController
         private EventCalendarGetEventHandle $eventCalendarGetEventHandle,
         private EventCalendarUserReservationWorksHandle $eventCalendarUserReservationWorksHandle,
         private EventCalendarUserReservationWorkHandle $eventCalendarUserReservationWorkHandle,
-        private EventCalendarManageCreateDataHandle $eventCalendarManageCreateDataHandle
+        private EventCalendarManageCreateDataHandle $eventCalendarManageCreateDataHandle,
+        private EventCalendarManageCreateEventHandle $eventCalendarManageCreateEventHandle
     ) {}
 
     public function getEvent(
@@ -61,5 +67,11 @@ readonly class EventCalendarController
     public function getManageCreateData(): JsonResponse
     {
         return $this->eventCalendarManageCreateDataHandle->__invoke();
+    }
+
+    public function postEventCreate(
+        #[MapRequestPayload] EventCalendarEventInput $input
+    ): JsonResponse {
+        return $this->eventCalendarManageCreateEventHandle->__invoke($input);
     }
 }

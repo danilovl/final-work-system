@@ -20,6 +20,14 @@ readonly class EventAddressFacade
 {
     public function __construct(private EventAddressRepository $eventAddressRepository) {}
 
+    public function findById(int $id): ?EventAddress
+    {
+        /** @var EventAddress|null $result */
+        $result = $this->eventAddressRepository->find($id);
+
+        return $result;
+    }
+
     public function findSkypeByOwner(User $user): ?EventAddress
     {
         /** @var EventAddress|null $result */
