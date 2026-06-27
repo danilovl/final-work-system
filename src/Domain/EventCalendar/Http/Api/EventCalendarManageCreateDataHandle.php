@@ -16,6 +16,8 @@ use App\Application\Mapper\ObjectToDtoMapper;
 use App\Domain\EventAddress\DTO\Api\EventAddressDTO;
 use App\Domain\EventCalendar\DTO\Api\Output\EventCalendarManageCreateDataOutput;
 use App\Domain\EventParticipant\DTO\Api\EventParticipantDTO;
+use App\Domain\EventType\DTO\Api\EventTypeDTO;
+use App\Domain\EventType\Facade\EventTypeFacade;
 use App\Domain\EventParticipant\Entity\EventParticipant;
 use App\Domain\EventParticipant\Helper\SortFunctionHelper;
 use App\Domain\User\Service\{
@@ -35,7 +37,8 @@ readonly class EventCalendarManageCreateDataHandle
         private EntityManagerService $entityManagerService,
         private UserService $userService,
         private UserWorkService $userWorkService,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapper $objectToDtoMapper,
+        private EventTypeFacade $eventTypeFacade
     ) {}
 
     public function __invoke(): JsonResponse
@@ -73,7 +76,14 @@ readonly class EventCalendarManageCreateDataHandle
             $addresses[] = $this->objectToDtoMapper->map($address, EventAddressDTO::class);
         }
 
+        $eventTypes = $this->eventTypeFacade->findAll();
+        $types = [];
+        foreach ($eventTypes as $eventType) {
+            $types[] = $this->objectToDtoMapper->map($eventType, EventTypeDTO::class);
+        }
+
         $output = new EventCalendarManageCreateDataOutput(
+            types: $types,
             addresses: $addresses,
             participants: $participants
         );

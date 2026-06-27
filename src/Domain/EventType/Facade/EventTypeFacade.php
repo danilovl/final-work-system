@@ -28,4 +28,17 @@ readonly class EventTypeFacade
 
         return $result;
     }
+
+    /**
+     * @return EventType[]
+     */
+    public function findAll(): array
+    {
+        /** @var EventType[] $result */
+        $result = $this->entityManagerService
+            ->getRepository(EventType::class)
+            ->findAll();
+
+        return $result;
+    }
 }
