@@ -56,9 +56,9 @@ class EventCalendarFacade
     }
 
     /**
-     * @return array<int, array{
+     * @return array<array{
      *     id: int|string,
-     *     title: string,
+     *     title?: string,
      *     color: string,
      *     start: string,
      *     end: string,
@@ -95,7 +95,7 @@ class EventCalendarFacade
                     
                     $event = [];
                     $event['id'] = $id;
-                    $event['title'] = (string) $appointment;
+                    $event['title'] = $appointment->toString();
                     $event['color'] = $appointment->getType()->getColor();
                     $event['start'] = $appointment->getStart()->format(DateFormatConstant::DATABASE->value);
                     $event['end'] = $appointment->getEnd()->format(DateFormatConstant::DATABASE->value);
@@ -165,7 +165,7 @@ class EventCalendarFacade
                         if ($supervisorAppointment->getAddress()) {
                             $event['title'] = $supervisorAppointment->getAddress()->getName() . "\n" . $supervisorAppointment->getOwner();
                         } else {
-                            $event['title'] = $supervisorAppointment->getOwner();
+                            $event['title'] = $supervisorAppointment->getOwner()->getFullNameDegree();
                         }
 
                         $participant = $supervisorAppointment->getParticipant();

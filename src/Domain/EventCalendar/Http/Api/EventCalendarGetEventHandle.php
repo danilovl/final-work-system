@@ -42,8 +42,8 @@ readonly class EventCalendarGetEventHandle
      
         foreach ($events as $event) {
             $eventDTOs[] = new EventCalendarDTO(
-                id: $event['id'],
-                title: $event['title'],
+                id: (int) $event['id'],
+                title: $event['title'] ?? 'no title',
                 color: $event['color'],
                 start: $event['start'],
                 end: $event['end']

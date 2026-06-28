@@ -56,13 +56,10 @@ readonly class EventCalendarManageCreateEventHandle
             throw new NotFoundHttpException('Event type not found');
         }
 
-        $eventAddress = null;
-        if ($input->addressId !== null) {
-            /** @var EventAddress|null $eventAddress */
-            $eventAddress = $this->eventAddressFacade->findById($input->addressId);
-            if ($eventAddress === null) {
-                throw new NotFoundHttpException('Event address not found');
-            }
+        /** @var EventAddress|null $eventAddress */
+        $eventAddress = $this->eventAddressFacade->findById($input->addressId);
+        if ($eventAddress === null) {
+            throw new NotFoundHttpException('Event address not found');
         }
 
         /** @var User|null $participantUser */

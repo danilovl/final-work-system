@@ -29,8 +29,7 @@ use App\Domain\EventCalendar\Http\Api\{
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Attribute\MapQueryString;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Attribute\{MapQueryString, MapRequestPayload};
 
 readonly class EventCalendarController
 {
