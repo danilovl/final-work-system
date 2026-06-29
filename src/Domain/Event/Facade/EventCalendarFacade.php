@@ -203,9 +203,9 @@ class EventCalendarFacade
     /**
      * @return array<string, string>
      */
-    public function convertEventCreateToArray(Event $event): array
+    public function convertEventCreateToArray(Event $event, bool $isApi = false): array
     {
-        $eventCalendar = $this->baseEventArray($event);
+        $eventCalendar = $this->baseEventArray($event, $isApi);
 
         $eventCalendar['detail_url'] = $this->router->generate('event_detail', [
             'id' => $this->hashIds->encode($event->getId())
@@ -284,10 +284,12 @@ class EventCalendarFacade
      *     end: string
      * }
      */
-    private function baseEventArray(Event $event): array
+    private function baseEventArray(Event $event, bool $isApi = false): array
     {
+        $id = $isApi === false ? $this->hashIds->encode($event->getId()) : $event->getId();
+
         return [
-            'id' => $this->hashIds->encode($event->getId()),
+            'id' => $id,
             'title' => $event->toString(),
             'color' => $event->getType()->getColor(),
             'start' => $event->getStart()->format(DateFormatConstant::DATABASE->value),

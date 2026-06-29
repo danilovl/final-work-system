@@ -98,7 +98,7 @@ readonly class EventCalendarManageCreateEventHandle
         $event->setParticipant($eventParticipant);
 
         $this->eventEventDispatcher->onEventCalendarCreate($event);
-        $event = $this->eventCalendarFacade->convertEventCreateToArray($event);
+        $event = $this->eventCalendarFacade->convertEventCreateToArray(event: $event, isApi: true);;
 
         return new JsonResponse($event);
     }
