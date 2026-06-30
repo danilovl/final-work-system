@@ -13,13 +13,17 @@
 namespace App\Domain\Event\Controller\Api;
 
 use ApiPlatform\Validator\Exception\ValidationException;
+use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
+use App\Domain\Event\Entity\Event;
+use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Event\Http\Api\{
     EventListHandle,
     EventListOwnerHandle,
-    EventCreateHandle
+    EventCreateHandle,
+    EventDeleteHandle
 };
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
@@ -31,9 +35,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 readonly class EventController
 {
     public function __construct(
+        private AuthorizationCheckerService $authorizationCheckerService,
         private EventListHandle $eventListHandle,
         private EventListOwnerHandle $eventListOwnerHandle,
         private EventCreateHandle $eventCreateHandle,
+        private EventDeleteHandle $eventDeleteHandle,
         private ValidatorInterface $validator
     ) {}
 
@@ -55,5 +61,12 @@ readonly class EventController
         }
 
         return $this->eventCreateHandle->__invoke($input);
+    }
+
+    public function delete(Event $event): JsonResponse
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
+
+        return $this->eventDeleteHandle->__invoke($event);
     }
 }

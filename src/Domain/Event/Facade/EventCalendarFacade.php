@@ -201,7 +201,7 @@ class EventCalendarFacade
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, int|string>
      */
     public function convertEventCreateToArray(Event $event, bool $isApi = false): array
     {
@@ -225,7 +225,7 @@ class EventCalendarFacade
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, int|string>
      */
     public function convertEventReservationToArray(Event $event): array
     {
@@ -277,7 +277,7 @@ class EventCalendarFacade
 
     /**
      * @return array{
-     *     id: string,
+     *     id: int|string,
      *     title: string,
      *     color: string,
      *     start: string,

@@ -5,3 +5,11 @@ api_key_event_work_list:
   defaults:
     _controller: App\Domain\Event\Controller\Api\EventController::list
   methods: [GET, POST]
+
+api_key_delete_event:
+  path: /{id}
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Event\Controller\Api\EventController::delete
+  methods: [DELETE]
