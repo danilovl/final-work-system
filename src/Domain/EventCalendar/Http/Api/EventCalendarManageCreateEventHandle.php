@@ -62,21 +62,25 @@ readonly class EventCalendarManageCreateEventHandle
             throw new NotFoundHttpException('Event address not found');
         }
 
-        /** @var User|null $participantUser */
-        $participantUser = $this->userFacade->findById($input->userId);
-        if ($participantUser === null) {
-            throw new NotFoundHttpException('Participant user not found');
-        }
+        $eventParticipant = null;
 
-        /** @var Work|null $participantWork */
-        $participantWork = $this->workFacade->findById($input->workId);
-        if ($participantWork === null) {
-            throw new NotFoundHttpException('Participant work not found');
-        }
+        if ($input->userId !== null && $input->workId !== null) {
+            /** @var User|null $participantUser */
+            $participantUser = $this->userFacade->findById($input->userId);
+            if ($participantUser === null) {
+                throw new NotFoundHttpException('Participant user not found');
+            }
 
-        $eventParticipant = new EventParticipant;
-        $eventParticipant->setUser($participantUser);
-        $eventParticipant->setWork($participantWork);
+            /** @var Work|null $participantWork */
+            $participantWork = $this->workFacade->findById($input->workId);
+            if ($participantWork === null) {
+                throw new NotFoundHttpException('Participant work not found');
+            }
+
+            $eventParticipant = new EventParticipant;
+            $eventParticipant->setUser($participantUser);
+            $eventParticipant->setWork($participantWork);
+        }
 
         $startDateTime = new DateTime($input->start);
         $endDateTime = new DateTime($input->end);
@@ -92,10 +96,11 @@ readonly class EventCalendarManageCreateEventHandle
 
         $event = $this->eventFactory->flushFromModel($eventModel);
 
-        $eventParticipant->setEvent($event);
-        $this->entityManagerService->flush();
-
-        $event->setParticipant($eventParticipant);
+        if ($eventParticipant !== null) {
+            $eventParticipant->setEvent($event);
+            $this->entityManagerService->flush();
+            $event->setParticipant($eventParticipant);
+        }
 
         $this->eventEventDispatcher->onEventCalendarCreate($event);
         $event = $this->eventCalendarFacade->convertEventCreateToArray(event: $event, isApi: true);;

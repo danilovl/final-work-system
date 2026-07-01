@@ -26,10 +26,10 @@ readonly class EventCalendarEventInput
         public int $addressId,
 
         #[Assert\Positive]
-        public int $userId,
+        public ?int $userId,
 
         #[Assert\Positive]
-        public int $workId,
+        public ?int $workId,
 
         #[Assert\NotBlank]
         #[Assert\DateTime]
