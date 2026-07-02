@@ -63,7 +63,7 @@ readonly class EventCalendarManageCreateEventHandle
         }
 
         $eventParticipant = null;
-
+        
         if ($input->userId !== null && $input->workId !== null) {
             /** @var User|null $participantUser */
             $participantUser = $this->userFacade->findById($input->userId);

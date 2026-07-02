@@ -62,6 +62,7 @@ class EventCalendarFacade
      *     color: string,
      *     start: string,
      *     end: string,
+     *     hasParticipant: bool,
      *     detail_url?: string,
      *     delete_url?: string,
      *     reservation_url?: string
@@ -92,7 +93,7 @@ class EventCalendarFacade
 
                 foreach ($userEvents as $appointment) {
                     $id = $isApi === false ? $this->hashIds->encode($appointment->getId()) : $appointment->getId();
-                    
+
                     $event = [];
                     $event['id'] = $id;
                     $event['title'] = $appointment->toString();
@@ -106,7 +107,9 @@ class EventCalendarFacade
                         'id' => $this->hashIds->encode($appointment->getId())
                     ]);
 
+
                     $participant = $appointment->getParticipant();
+                    $event['hasParticipant'] = $participant !== null;
 
                     if ($participant) {
                         $event['color'] = $this->calendarEventReservedColor;
@@ -169,6 +172,8 @@ class EventCalendarFacade
                         }
 
                         $participant = $supervisorAppointment->getParticipant();
+                        $event['hasParticipant'] = $participant !== null;
+
                         if ($participant) {
                             if ($participant->getUserMust()->getId() === $user->getId()) {
                                 $event['color'] = $this->calendarEventReservedColor;

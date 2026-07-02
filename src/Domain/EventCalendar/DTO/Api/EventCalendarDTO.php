@@ -22,6 +22,7 @@ readonly class EventCalendarDTO
         public string $title,
         public string $color,
         public string $start,
-        public string $end
+        public string $end,
+        public bool $hasParticipant,
     ) {}
 }

@@ -46,7 +46,8 @@ readonly class EventCalendarGetEventHandle
                 title: $event['title'] ?? 'no title',
                 color: $event['color'],
                 start: $event['start'],
-                end: $event['end']
+                end: $event['end'],
+                hasParticipant: $event['hasParticipant']
             );
         }
 
