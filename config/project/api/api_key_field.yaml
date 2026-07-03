@@ -25,7 +25,6 @@ parameters:
         - degreeBefore
         - degreeAfter
         - email
-        - token
         - roles
     WorkType:
       fields:
