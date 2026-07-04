@@ -12,22 +12,23 @@
 
 namespace App\Domain\User\Http\Api;
 
+use App\Application\Mapper\ObjectToDtoMapper;
+use App\Domain\User\DTO\Api\UserDetailDTO;
 use App\Domain\User\Service\UserService;
-use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class UserDetailHandle
 {
     public function __construct(
         private UserService $userService,
-        private ObjectToArrayTransformService $objectToArrayTransformService
+        private ObjectToDtoMapper $objectToDtoMapper
     ) {}
 
     public function __invoke(): JsonResponse
     {
         $user = $this->userService->getUser();
-        $data = $this->objectToArrayTransformService->transform('api_key_field', $user);
+        $userDTO = $this->objectToDtoMapper->map($user, UserDetailDTO::class);
 
-        return new JsonResponse($data);
+        return new JsonResponse($userDTO);
     }
 }

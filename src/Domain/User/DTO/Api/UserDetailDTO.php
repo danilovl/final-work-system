@@ -15,7 +15,7 @@ namespace App\Domain\User\DTO\Api;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[Groups(['user:read'])]
-readonly class UserDTO
+readonly class UserDetailDTO
 {
     /**
      * @param string[] $roles
@@ -27,6 +27,7 @@ readonly class UserDTO
         public string $lastname,
         public string $fullName,
         public string $email,
+        public string $token,
         public ?string $degreeBefore,
         public ?string $degreeAfter,
         public array $roles = [],
