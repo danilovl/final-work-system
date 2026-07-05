@@ -10,12 +10,12 @@
  *
  */
 
-namespace App\Domain\Work\Bus\Query\WorkList;
+namespace App\Domain\Work\Bus\Query\GroupWorkList;
 
 use App\Domain\Work\Entity\Work;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
-readonly class GetWorkListQueryResult
+readonly class GetGroupWorkListQueryResult
 {
     /**
      * @param PaginationInterface<string, array{works?: Work[]}> $workGroups

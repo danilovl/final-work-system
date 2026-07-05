@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Work\Bus\Query\WorkList;
+namespace App\Domain\Work\Bus\Query\GroupWorkList;
 
 use App\Application\Interfaces\Bus\QueryHandlerInterface;
 use App\Infrastructure\Service\PaginatorService;
@@ -18,14 +18,14 @@ use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\Helper\WorkFunctionHelper;
 use App\Domain\Work\Repository\Elastica\ElasticaWorkRepository;
 
-readonly class GetWorkListQueryHandler implements QueryHandlerInterface
+readonly class GetGroupWorkListQueryHandler implements QueryHandlerInterface
 {
     public function __construct(
         private PaginatorService $paginatorService,
         private ElasticaWorkRepository $elasticaWorkRepository
     ) {}
 
-    public function __invoke(GetWorkListQuery $query): GetWorkListQueryResult
+    public function __invoke(GetGroupWorkListQuery $query): GetGroupWorkListQueryResult
     {
         $works = $this->elasticaWorkRepository->filterWorkList(
             $query->user,
@@ -40,6 +40,6 @@ readonly class GetWorkListQueryHandler implements QueryHandlerInterface
 
         $pagination = $this->paginatorService->createPaginationRequest($query->request, $workGroups);
 
-        return new GetWorkListQueryResult(workGroups: $pagination);
+        return new GetGroupWorkListQueryResult(workGroups: $pagination);
     }
 }

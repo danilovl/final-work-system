@@ -10,7 +10,7 @@
  *
  */
 
-namespace App\Domain\Work\Bus\Query\WorkList;
+namespace App\Domain\Work\Bus\Query\GroupWorkList;
 
 use App\Application\Interfaces\Bus\QueryInterface;
 use App\Domain\User\Entity\User;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
 #[AsMessage('sync')]
-readonly class GetWorkListQuery implements QueryInterface
+readonly class GetGroupWorkListQuery implements QueryInterface
 {
     private function __construct(
         public Request $request,

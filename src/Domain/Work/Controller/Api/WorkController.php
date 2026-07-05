@@ -13,6 +13,7 @@
 namespace App\Domain\Work\Controller\Api;
 
 use App\Domain\Work\Entity\Work;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use App\Domain\Work\Http\Api\{
     WorkListHandle,
     WorkDetailHandle
@@ -29,9 +30,13 @@ readonly class WorkController
         private WorkDetailHandle $workDetailHandle
     ) {}
 
-    public function list(Request $request, string $type): JsonResponse
+    public function list(
+        Request $request,
+        string $type,
+        #[MapQueryString] $search = null
+    ): JsonResponse
     {
-        return $this->workListHandle->__invoke($request, $type);
+        return $this->workListHandle->__invoke($request, $type, $search);
     }
 
     public function detail(Work $work): JsonResponse

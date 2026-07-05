@@ -32,7 +32,7 @@ readonly class WorkListHandle
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
-    public function __invoke(Request $request, string $type): JsonResponse
+    public function __invoke(Request $request, string $type, ?string $search = null): JsonResponse
     {
         $user = $this->userService->getUser();
 

@@ -15,9 +15,9 @@ namespace App\Domain\Work\Http;
 use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Infrastructure\Service\TwigRenderService;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\Bus\Query\WorkList\{
-    GetWorkListQuery,
-    GetWorkListQueryResult
+use App\Domain\Work\Bus\Query\GroupWorkList\{
+    GetGroupWorkListQuery,
+    GetGroupWorkListQueryResult
 };
 use App\Domain\Work\Entity\Work;
 use App\Domain\Work\Form\Factory\WorkFormFactory;
@@ -47,14 +47,14 @@ readonly class WorkListHandle
             ->getSearchForm($type, $data)
             ->handleRequest($request);
 
-        $query = GetWorkListQuery::create(
+        $query = GetGroupWorkListQuery::create(
             request: $request,
             user: $user,
             type: $type,
             searchData: $form->isSubmitted() && $form->isValid() ? (array) $form->getData() : []
         );
 
-        /** @var GetWorkListQueryResult $result */
+        /** @var GetGroupWorkListQueryResult $result */
         $result = $this->queryBus->handle($query);
 
         $deleteForms = [];
