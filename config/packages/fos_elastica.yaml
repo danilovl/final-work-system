@@ -10,13 +10,35 @@ fos_elastica:
     work:
       client: default
       index_name: work_index
+      settings:
+        index:
+          analysis:
+            analyzer:
+              lowercase_shingle_analyzer:
+                type: custom
+                tokenizer: standard
+                filter:
+                  - lowercase
+                  - shingle_filter
+                  - asciifolding
+            filter:
+              shingle_filter:
+                type: shingle
+                min_shingle_size: 2
+                max_shingle_size: 4
+                output_unigrams: true
+
       properties:
         id:
           type: integer
         title:
           type: text
+          analyzer: lowercase_shingle_analyzer
+          search_analyzer: lowercase_shingle_analyzer
         shortcut:
           type: text
+          analyzer: lowercase_shingle_analyzer
+          search_analyzer: lowercase_shingle_analyzer
         deadline:
           type: date
         deadlineProgram:
@@ -76,6 +98,7 @@ fos_elastica:
                 filter:
                   - lowercase
                   - shingle_filter
+                  - asciifolding
             filter:
               shingle_filter:
                 type: shingle
@@ -88,6 +111,7 @@ fos_elastica:
         name:
           type: text
           analyzer: lowercase_shingle_analyzer
+          search_analyzer: lowercase_shingle_analyzer
         work:
           type: nested
           properties:
@@ -96,6 +120,7 @@ fos_elastica:
             title:
               type: text
               analyzer: lowercase_shingle_analyzer
+              search_analyzer: lowercase_shingle_analyzer
         messages:
           type: nested
           properties:
@@ -186,6 +211,7 @@ fos_elastica:
                 filter:
                   - lowercase
                   - shingle_filter
+                  - asciifolding
             filter:
               shingle_filter:
                 type: shingle
@@ -198,9 +224,11 @@ fos_elastica:
         name:
           type: text
           analyzer: lowercase_shingle_analyzer
+          search_analyzer: lowercase_shingle_analyzer
         description:
           type: text
           analyzer: lowercase_shingle_analyzer
+          search_analyzer: lowercase_shingle_analyzer
         owner:
           type: nested
           properties:
