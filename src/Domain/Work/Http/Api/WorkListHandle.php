@@ -12,11 +12,12 @@
 
 namespace App\Domain\Work\Http\Api;
 
+use App\Application\Interfaces\Bus\QueryBusInterface;
 use App\Domain\User\Service\UserService;
-use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
-use App\Domain\Work\Facade\WorkFacade;
-use App\Domain\WorkStatus\Constant\WorkStatusConstant;
-use App\Infrastructure\Service\PaginatorService;
+use App\Domain\Work\Bus\Query\WorkList\{
+    GetWorkListQuery,
+    GetWorkListQueryResult
+};
 use Danilovl\ObjectToArrayTransformBundle\Service\ObjectToArrayTransformService;
 use Symfony\Component\HttpFoundation\{
     JsonResponse,
@@ -27,8 +28,7 @@ readonly class WorkListHandle
 {
     public function __construct(
         private UserService $userService,
-        private WorkFacade $workFacade,
-        private PaginatorService $paginatorService,
+        private QueryBusInterface $queryBus,
         private ObjectToArrayTransformService $objectToArrayTransformService
     ) {}
 
@@ -36,23 +36,29 @@ readonly class WorkListHandle
     {
         $user = $this->userService->getUser();
 
-        $workRepositoryDTO = new WorkRepositoryDTO(
+        $searchParams = [];
+        if ($search !== null) {
+            $searchParams = ['title' => $search];
+        }
+
+        $query = GetWorkListQuery::create(
+            request: $request,
             user: $user,
             type: $type,
-            workStatus: [WorkStatusConstant::ACTIVE->value]
+            search: $searchParams
         );
 
-        $worksQuery = $this->workFacade->queryByUserStatus($workRepositoryDTO);
-        $pagination = $this->paginatorService->createPaginationRequest($request, $worksQuery);
+        /** @var GetWorkListQueryResult $result */
+        $result = $this->queryBus->handle($query);
 
         $works = [];
-        foreach ($pagination as $work) {
+        foreach ($result->works as $work) {
             $works[] = $this->objectToArrayTransformService->transform('api_key_field', $work);
         }
 
         return new JsonResponse([
-            'count' => $pagination->count(),
-            'totalCount' => $pagination->getTotalItemCount(),
+            'count' => $result->works->count(),
+            'totalCount' => $result->works->getTotalItemCount(),
             'success' => true,
             'result' => $works
         ]);

@@ -31,7 +31,7 @@ readonly class GetWorkListQueryHandler implements QueryHandlerInterface
             $query->search
         );
 
-        $pagination = $this->paginatorService->createPaginationRequest($query->request, $works);
+        $pagination = $this->paginatorService->createPaginationRequest($query->request, $works->getArrayCopy());
 
         return new GetWorkListQueryResult(works: $pagination);
     }
