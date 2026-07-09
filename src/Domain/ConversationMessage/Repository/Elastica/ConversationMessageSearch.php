@@ -57,11 +57,11 @@ readonly class ConversationMessageSearch
                                     ]
                                 ]
                             ]
-                        ]
-                    ],
-                    'filter' => [
-                        'wildcard' => [
-                            'content' => '*' . $this->transformSearch($search) . '*'
+                        ],
+                        [
+                            'wildcard' => [
+                                'content.normalized' => '*' . $this->transformSearch($search) . '*'
+                            ]
                         ]
                     ]
                 ]
@@ -118,12 +118,8 @@ readonly class ConversationMessageSearch
                             ]
                         ],
                         [
-                            'bool' => [
-                                'should' => [
-                                    'wildcard' => [
-                                        'content' => '*' . $search . '*'
-                                    ]
-                                ]
+                            'wildcard' => [
+                                'content.normalized' => '*' . $search . '*'
                             ]
                         ]
                     ]

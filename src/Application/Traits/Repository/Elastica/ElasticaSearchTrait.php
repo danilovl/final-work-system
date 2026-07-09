@@ -19,7 +19,16 @@ trait ElasticaSearchTrait
 {
     private function transformSearch(string $search): string
     {
-        return mb_strtolower($search);
+        $search = mb_strtolower($search);
+
+        return $this->removeAccents($search);
+    }
+
+    private function removeAccents(string $string): string
+    {
+        $transliterated = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
+
+        return $transliterated !== false ? $transliterated : $string;
     }
 
     /**

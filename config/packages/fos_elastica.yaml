@@ -159,7 +159,14 @@ fos_elastica:
                 tokenizer: standard
                 filter:
                   - lowercase
+                  - asciifolding
                   - shingle_filter
+              simple_normalized_analyzer:
+                type: custom
+                tokenizer: keyword
+                filter:
+                  - lowercase
+                  - asciifolding
             filter:
               shingle_filter:
                 type: shingle
@@ -172,6 +179,10 @@ fos_elastica:
         content:
           type: text
           analyzer: lowercase_shingle_analyzer
+          fields:
+            normalized:
+              type: text
+              analyzer: simple_normalized_analyzer
         created_at:
           type: date
         updated_at:
