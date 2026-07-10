@@ -34,7 +34,7 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Attribute\{MapQueryParameter, MapRequestPayload};
 
 readonly class ConversationController
 {
@@ -62,11 +62,14 @@ readonly class ConversationController
         return $this->conversationDetailHandle->__invoke($request, $conversation);
     }
 
-    public function messages(Request $request, Conversation $conversation): JsonResponse
-    {
+    public function messages(
+        Request $request,
+        Conversation $conversation,
+        #[MapQueryParameter] ?string $search = null
+    ): JsonResponse {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
 
-        return $this->conversationMessageListHandle->__invoke($request, $conversation);
+        return $this->conversationMessageListHandle->__invoke($request, $conversation, $search);
     }
 
     public function createMessage(

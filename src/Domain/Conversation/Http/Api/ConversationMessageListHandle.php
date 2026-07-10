@@ -18,6 +18,7 @@ use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDetailDTO;
 use App\Domain\ConversationMessage\DTO\Api\Output\ConversationMessageListOutput;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use App\Domain\ConversationMessage\Repository\Elastica\ElasticaConversationMessageRepository;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\User\Service\UserService;
 use App\Infrastructure\Service\PaginatorService;
@@ -33,15 +34,24 @@ readonly class ConversationMessageListHandle
         private UserService $userService,
         private ConversationMessageFacade $conversationMessageFacade,
         private ObjectToDtoMapper $objectToDtoMapper,
-        private PaginatorService $paginatorService
+        private PaginatorService $paginatorService,
+        private ElasticaConversationMessageRepository $elasticaConversationMessageRepository
     ) {}
 
-    public function __invoke(Request $request, Conversation $conversation): JsonResponse
+    public function __invoke(Request $request, Conversation $conversation, ?string $search = null): JsonResponse
     {
         $user = $this->userService->getUser();
 
         $conversationMessagesQuery = $this->conversationMessageFacade
             ->queryMessagesByConversation($conversation);
+
+        $search ??= '';
+        if (!empty(mb_trim($search))) {
+            $conversationMessageIds = $this->elasticaConversationMessageRepository
+                ->getMessageIdsByConversationAndSearch($conversation, $search);
+
+            $conversationMessagesQuery = $this->conversationMessageFacade->queryByIds($conversationMessageIds);
+        }
 
         $conversationMessagesQuery->setHydrationMode(ConversationMessage::class);
 
