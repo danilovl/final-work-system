@@ -41,14 +41,14 @@ readonly class ConversationListHandle
         private ConversationService $conversationService
     ) {}
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request, ?string $search = null): JsonResponse
     {
         $user = $this->userService->getUser();
 
         $query = GetConversationListQuery::create(
             request: $request,
             user: $user,
-            search: $request->query->get('search')
+            search: $search
         );
 
         /** @var GetConversationListQueryResult $result */

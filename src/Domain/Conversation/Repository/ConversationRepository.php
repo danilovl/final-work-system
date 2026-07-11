@@ -68,9 +68,11 @@ class ConversationRepository extends ServiceEntityRepository
         Assert::allInteger($ids);
 
         return $this->baseQueryBuilder()
-            ->addSelect('messages, type, work, participants, participantsUser, messagesOwner')
+            ->addSelect('messages, type, work, work_status, work_type, participants, participantsUser, messagesOwner')
             ->join('conversation.type', 'type')
             ->leftJoin('conversation.work', 'work')
+            ->leftJoin('work.status', 'work_status')
+            ->leftJoin('work.type', 'work_type')
             ->leftJoin('conversation.participants', 'participants')
             ->leftJoin('participants.user', 'participantsUser')
             ->leftJoin('conversation.messages', 'messages')

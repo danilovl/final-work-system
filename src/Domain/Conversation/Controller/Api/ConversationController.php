@@ -34,7 +34,9 @@ use Symfony\Component\HttpFoundation\{
     JsonResponse
 };
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Component\HttpKernel\Attribute\{MapQueryParameter, MapRequestPayload};
+use Symfony\Component\HttpKernel\Attribute\{
+    MapQueryParameter,
+    MapRequestPayload};
 
 readonly class ConversationController
 {
@@ -50,9 +52,11 @@ readonly class ConversationController
         private ConversationChangeAllMessageToReadHandle $conversationChangeAllMessageToReadHandle
     ) {}
 
-    public function list(Request $request): JsonResponse
-    {
-        return $this->conversationListHandle->__invoke($request);
+    public function list(
+        Request $request,
+        #[MapQueryParameter] ?string $search = null
+    ): JsonResponse {
+        return $this->conversationListHandle->__invoke($request, $search);
     }
 
     public function detail(Request $request, Conversation $conversation): JsonResponse
