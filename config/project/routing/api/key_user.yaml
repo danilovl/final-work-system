@@ -11,3 +11,9 @@ api_key_user_list:
   defaults:
     _controller: App\Domain\User\Controller\Api\UserController::list
   methods: [GET]
+
+api_key_get_user_profile_image:
+  path: /{id}/profile/image
+  defaults:
+    _controller: App\Domain\Profile\Controller\Api\ProfileController::image
+  methods: [GET]
