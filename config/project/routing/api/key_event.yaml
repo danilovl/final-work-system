@@ -13,3 +13,11 @@ api_key_delete_event:
   defaults:
     _controller: App\Domain\Event\Controller\Api\EventController::delete
   methods: [DELETE]
+
+api_key_get_event:
+  path: /{id}
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: App\Domain\Event\Controller\Api\EventController::detail
+  methods: [GET]

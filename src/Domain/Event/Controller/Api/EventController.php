@@ -23,7 +23,8 @@ use App\Domain\Event\Http\Api\{
     EventListHandle,
     EventListOwnerHandle,
     EventCreateHandle,
-    EventDeleteHandle
+    EventDeleteHandle,
+    EventDetailHandler
 };
 use App\Domain\Work\Entity\Work;
 use Symfony\Component\HttpFoundation\{
@@ -40,8 +41,16 @@ readonly class EventController
         private EventListOwnerHandle $eventListOwnerHandle,
         private EventCreateHandle $eventCreateHandle,
         private EventDeleteHandle $eventDeleteHandle,
+        private EventDetailHandler $eventDetailApiHandle,
         private ValidatorInterface $validator
     ) {}
+
+    public function detail(Event $event): JsonResponse
+    {
+        $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
+
+        return $this->eventDetailApiHandle->__invoke($event);
+    }
 
     public function list(Request $request, Work $work): JsonResponse
     {
