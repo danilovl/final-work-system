@@ -13,15 +13,15 @@
 namespace App\Domain\Profile\Bus\Command\ProfileChangePassword;
 
 use App\Application\Interfaces\Bus\CommandHandlerInterface;
-use App\Infrastructure\Service\EntityManagerService;
+use App\Domain\User\Factory\UserFactory;
 use App\Domain\User\Model\UserModel;
 use App\Domain\User\Service\PasswordUpdater;
 
 readonly class ProfileChangePasswordHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private EntityManagerService $entityManagerService,
-        private PasswordUpdater $passwordUpdater
+        private PasswordUpdater $passwordUpdater,
+        private UserFactory $userFactory
     ) {}
 
     public function __invoke(ProfileChangePasswordCommand $command): void
@@ -34,6 +34,6 @@ readonly class ProfileChangePasswordHandler implements CommandHandlerInterface
             $userModel
         );
 
-        $this->entityManagerService->flush();
+        $this->userFactory->flushFromModel($userModel, $command->user);
     }
 }
