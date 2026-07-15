@@ -30,8 +30,8 @@ readonly class EventCalendarGetEventHandle
 
     public function __invoke(GetEventRequest $getEventRequest, string $type): JsonResponse
     {
-        $startDate = new DateTime($getEventRequest->start);
-        $endDate = new DateTime($getEventRequest->end);
+        $startDate = new DateTime($getEventRequest->start)->setTime(23, 59, 59);
+        $endDate = new DateTime($getEventRequest->end)->setTime(23, 59, 59);
 
         $events = $this->eventCalendarFacade->listEventsByOwner(
             $this->userService->getUser(),
