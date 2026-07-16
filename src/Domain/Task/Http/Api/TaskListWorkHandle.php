@@ -38,6 +38,7 @@ readonly class TaskListWorkHandle
             work: $task,
             user: $user,
             setHydrationMode: true,
+            isApi: true
         );
 
         $result = [];
