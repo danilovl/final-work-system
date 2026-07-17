@@ -18,8 +18,8 @@ https://github.com/user-attachments/assets/f351cfd2-2f8e-4583-8d7f-0c942c45b259
 Who is it for?
 ------------
 
-This project is for teachers and students whose interest is to streamline the process of leading the final work.
-This is especially true for those teachers who carry out the final theses of several dozen students a year.
+This project is for teachers and students interested in streamlining the process of supervising final theses.
+It is especially useful for teachers who supervise the final theses of several dozen students each year.
 
 Requirements
 ------------
@@ -27,58 +27,58 @@ Requirements
 * PHP 8.4 or higher
 * MySQL
 * Redis
-* RabbitMq
+* RabbitMQ
 * Elasticsearch
 * Composer
 * NPM
 * Mercure
 * Minio
 * Kibana
-* or you can use docker
+* Or you can use Docker
 
 Features
 ------------
 
 * Administration panel
-* Management of users(student, opponent, consultant)
-* Management of thesis
+* Management of users (students, opponents, consultants)
+* Thesis management
 * Assigning tasks to students
-* Scheduling of meetings by the supervisor
-* Uploading unfinished/finished versions of final thesis and downloading them
+* Scheduling meetings by the supervisor
+* Uploading and downloading draft and final versions of theses
 * Chat communication between the supervisor and others
-* Sending a bulk message to users
-* Email notification of new events in the system
-* Multi languages
+* Sending bulk messages to users
+* Email notifications about new events in the system
+* Multiple languages
 * An API that covers most of the data
-* Unit test
-* Cypress test
-* and more other features
+* Unit tests
+* Cypress tests
+* and many other features
 
 Project uses extra bundles
 ------------
 * [API Platform](https://github.com/api-platform/api-platform) - API Platform is a next-generation web framework designed to easily create API-first projects
-* [EasyAdmin](https://github.com/EasyCorp/EasyAdminBundle) - EasyAdmin creates administration backends. erd diagram
+* [EasyAdmin](https://github.com/EasyCorp/EasyAdminBundle) - EasyAdmin creates administration backends.
 * [KnpMenuBundle](https://github.com/KnpLabs/KnpMenuBundle) - The KnpMenuBundle integrates the KnpMenu PHP library with Symfony
-* [KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) - Provide markdown conversion (based on Michel Fortin work) to your Symfony projects
+* [KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) - Provides Markdown conversion (based on Michel Fortin's work) to your Symfony projects
 * [RedisBundle](https://github.com/snc/SncRedisBundle) - This bundle integrates Predis and phpredis into your Symfony application
-* [OverblogGraphQLBundle](https://github.com/overblog/GraphQLBundle) - This Symfony bundle provides integration of GraphQL
-* [OverblogGraphiQLBundle](https://github.com/overblog/GraphiQLBundle) - This Symfony bundle provides integration of GraphiQL interface to your Symfony application
-* [Doctrine Behavioral Extensions](https://github.com/Atlantic18/DoctrineExtensions) - This package contains extensions tools to use Doctrine more efficiently
+* [OverblogGraphQLBundle](https://github.com/overblog/GraphQLBundle) - This Symfony bundle provides integration with GraphQL
+* [OverblogGraphiQLBundle](https://github.com/overblog/GraphiQLBundle) - This Symfony bundle provides integration of the GraphiQL interface into your Symfony application
+* [Doctrine Behavioral Extensions](https://github.com/Atlantic18/DoctrineExtensions) - This package contains extensions that help use Doctrine more efficiently
 * [RabbitMqBundle](https://github.com/php-amqplib/RabbitMqBundle) - Incorporates messaging in your application via RabbitMQ using the php-amqplib library
-* [FOSElasticaBundle](https://github.com/FriendsOfSymfony/FOSElasticaBundle) - his bundle provides integration with Elasticsearch and Elastica
+* [FOSElasticaBundle](https://github.com/FriendsOfSymfony/FOSElasticaBundle) - This bundle provides integration with Elasticsearch and Elastica
 
-Project uses own bundles
+Project uses custom bundles
 ------------
-* [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle provides simple delayed function call
-* [CacheResponseBundle](https://github.com/danilovl/cache-response-bundle) - Symfony bundle provides cache controller response
+* [AsyncBundle](https://github.com/danilovl/async-bundle) - Symfony bundle that provides simple delayed function calls
+* [CacheResponseBundle](https://github.com/danilovl/cache-response-bundle) - Symfony bundle provides caching of controller responses
 * [DoctrineEntityDtoBundle](https://github.com/danilovl/doctrine-entity-dto-bundle) - The Symfony bundle provides a simple mechanism to convert Doctrine entities to DTO objects
 * [HashidsBundle](https://github.com/danilovl/hashids-bundle) - Integrates hashids/hashids in a Symfony project
-* [ObjectToArrayTransformBundle](https://github.com/danilovl/object-to-array-transform-bundle) - Symfony bundle provides convert object to an array by configuration fields
-* [ParameterBundle](https://github.com/danilovl/parameter-bundle) - Symfony bundle provides comfortable getting parameters from config
-* [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides simple mechanism control permission for class or his method
-* [RenderServiceTwigExtensionBundle](https://github.com/danilovl/render-service-twig-extension-bundle) - Symfony twig extension bundle provides rendering service method
-* [SelectAutocompleterBundle](https://github.com/danilovl/select-autocompleter-bundle) - Symfony bundle provides simple integration with select2
-* [Symfony console input validation](https://github.com/danilovl/symfony-console-input-validation) - Provide a simple method for adding input validation to Symfony console commands
+* [ObjectToArrayTransformBundle](https://github.com/danilovl/object-to-array-transform-bundle) - Symfony bundle provides conversion of an object to an array based on configured fields
+* [ParameterBundle](https://github.com/danilovl/parameter-bundle) - Symfony bundle provides convenient access to parameters from the config
+* [PermissionMiddlewareBundle](https://github.com/danilovl/permission-middleware-bundle) - Symfony bundle provides a simple mechanism to control permissions for a class or its methods
+* [RenderServiceTwigExtensionBundle](https://github.com/danilovl/render-service-twig-extension-bundle) - Symfony Twig extension bundle provides rendering of service methods
+* [SelectAutocompleterBundle](https://github.com/danilovl/select-autocompleter-bundle) - Symfony bundle provides simple integration with Select2
+* [Symfony console input validation](https://github.com/danilovl/symfony-console-input-validation) - Provides a simple method for adding input validation to Symfony console commands
 * [TranslatorBundle](https://github.com/danilovl/translator-bundle) - Symfony bundle provides simple management of system translations
 
 ERD diagram
@@ -96,19 +96,19 @@ Test coverage
 Kibana
 ------------
 
-This project utilizes the `OpenTelemetry API SDK`, manually configured specifically for this project using hooks.
+This project utilizes the OpenTelemetry API SDK, manually configured for this project using hooks.
 
 ![Alt text](/git/readme/kibana.png?raw=true "Kibana")
 
-Configuration environment
+Environment configuration
 ------------
 
-You can change configuration in the file:
+You can change the configuration in the following files:
 
 ```text
 file: .env or .env.local
 ```
-Configure the database connection, SMTP and other connection:
+Configure the database connection, SMTP, and other connections:
 
 ``` env
 DATABASE_URL=mysql://root:@mysql:3306/final_work_system
@@ -117,9 +117,9 @@ ELASTICSEARCH_URL=http://elasticsearch:9200/
 MAILER_DSN=smtp://user:pass@localhost:25
 REDIS_HOST=redis
 REDIS_PORT=6379
-``````
+```
 
-Google api keys:
+Google API keys:
 
 ``` env
 GOOGLE_ANALYTICS_CODE=GOOGLE_ANALYTICS_CODE
@@ -143,7 +143,7 @@ Install all the necessary npm dependencies:
 ```bash
 $ bin/npm-first-install.sh
 ```
-Install all the necessary php dependencies:
+Install all the necessary PHP dependencies:
 
 ```bash
 $ bin/composer-first-install.sh
@@ -157,7 +157,7 @@ Create user
 ```bash
 $ bin/console app:user-add
 ```
-or you can import test data dump.sql
+or you can import test data from dump.sql
 
 ```bash
 $ bin/console app:import-sql docker/mysql/data/dump.sql
@@ -166,19 +166,19 @@ $ bin/console app:import-sql docker/mysql/data/dump.sql
 Docker
 ------------
 
-Run docker:
+Run Docker:
 
 ```bash
 docker-compose -f docker-compose.yml up -d
 ```
 
-Run command under node image CLI or you can docker-compose:
+Run the command inside the Node container:
 
 ```bash
 docker-compose exec -T node sh bin/npm-first-install.sh
 ```
 
-Run command under php image CLI or you can docker-compose:
+Run the command inside the PHP container:
 
 ```bash
 docker-compose exec -T php sh bin/composer-first-install.sh
