@@ -40,7 +40,7 @@
         "gedmo/doctrine-extensions": "^3.14",
         "hashids/hashids": "^5.0.0",
         "knplabs/knp-paginator-bundle": "^6.0.1",
-        "nelmio/api-doc-bundle": "^5.4.0",
+        "nelmio/api-doc-bundle": "^5.5",
         "nelmio/cors-bundle": "^2.2",
         "open-telemetry/api": "dev-main#04c85a1",
         "open-telemetry/exporter-otlp": "dev-main#9b6de12",
