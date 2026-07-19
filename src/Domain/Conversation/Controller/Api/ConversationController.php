@@ -16,6 +16,7 @@ use App\Application\Attribute\EntityRelationValidatorAttribute;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;
+use App\Domain\Conversation\DTO\Api\Output\ConversationListOutput;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Http\Api\{
@@ -29,6 +30,8 @@ use App\Domain\Conversation\Http\Api\{
     ConversationChangeAllMessageToReadHandle
 };
 use App\Domain\Work\Entity\Work;
+use Nelmio\ApiDocBundle\Attribute\Model;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
@@ -36,7 +39,8 @@ use Symfony\Component\HttpFoundation\{
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpKernel\Attribute\{
     MapQueryParameter,
-    MapRequestPayload};
+    MapRequestPayload
+};
 
 readonly class ConversationController
 {
@@ -52,6 +56,37 @@ readonly class ConversationController
         private ConversationChangeAllMessageToReadHandle $conversationChangeAllMessageToReadHandle
     ) {}
 
+    #[OA\Get(
+        path: '/api/key/conversations',
+        description: 'Retrieves paginated list of conversations for current user.',
+        summary: 'List conversations'
+    )]
+    #[OA\Parameter(
+        name: 'search',
+        description: 'Search term to filter conversations',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'string')
+    )]
+    #[OA\Parameter(
+        name: 'page',
+        description: 'Page number (starts from 1)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Parameter(
+        name: 'limit',
+        description: 'Items per page',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 20)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Paginated conversations list',
+        content: new OA\JsonContent(ref: new Model(type: ConversationListOutput::class))
+    )]
     public function list(
         Request $request,
         #[MapQueryParameter] ?string $search = null
