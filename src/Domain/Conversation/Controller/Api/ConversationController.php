@@ -18,6 +18,7 @@ use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\DTO\Api\Output\ConversationListOutput;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
+use App\Domain\ConversationMessage\DTO\Api\Output\ConversationMessageListOutput;
 use App\Infrastructure\Service\AuthorizationCheckerService;
 use App\Domain\Conversation\Http\Api\{
     ConversationListHandle,
@@ -101,6 +102,44 @@ readonly class ConversationController
         return $this->conversationDetailHandle->__invoke($request, $conversation);
     }
 
+    #[OA\Get(
+        path: '/api/key/conversations/{id}/messages',
+        description: 'Retrieves paginated list of messages for a conversation.',
+        summary: 'List conversation messages'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Conversation ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Parameter(
+        name: 'search',
+        description: 'Search term to filter messages within the conversation',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'string')
+    )]
+    #[OA\Parameter(
+        name: 'page',
+        description: 'Page number (starts from 1)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Parameter(
+        name: 'limit',
+        description: 'Items per page',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 20)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Paginated conversation messages list',
+        content: new OA\JsonContent(ref: new Model(type: ConversationMessageListOutput::class))
+    )]
     public function messages(
         Request $request,
         Conversation $conversation,
