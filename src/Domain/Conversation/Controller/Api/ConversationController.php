@@ -150,6 +150,26 @@ readonly class ConversationController
         return $this->conversationMessageListHandle->__invoke($request, $conversation, $search);
     }
 
+    #[OA\Post(
+        path: '/api/key/conversations/{id}/message',
+        description: 'Create a new message in the conversation.',
+        summary: 'Create conversation message'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Conversation ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(ref: new Model(type: ConversationMessageInput::class))
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Message created'
+    )]
     public function createMessage(
         Conversation $conversation,
         #[MapRequestPayload] ConversationMessageInput $conversationMessageInput,
