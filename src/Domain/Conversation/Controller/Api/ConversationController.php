@@ -43,6 +43,7 @@ use Symfony\Component\HttpKernel\Attribute\{
     MapRequestPayload
 };
 
+#[OA\Tag(name: 'Conversation')]
 readonly class ConversationController
 {
     public function __construct(
@@ -58,7 +59,7 @@ readonly class ConversationController
     ) {}
 
     #[OA\Get(
-        path: '/api/key/conversations',
+        path: '/api/key/conversations/',
         description: 'Retrieves paginated list of conversations for current user.',
         summary: 'List conversations'
     )]
@@ -179,6 +180,49 @@ readonly class ConversationController
         return $this->conversationCreateMessageHandle->__invoke($conversation, $conversationMessageInput);
     }
 
+    #[OA\Get(
+        path: '/api/key/conversations/works/{id}/messages',
+        description: 'Retrieves paginated list of messages related to the specific work for the current user.',
+        summary: 'List work messages'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Parameter(
+        name: 'page',
+        description: 'Page number (starts from 1)',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Parameter(
+        name: 'limit',
+        description: 'Items per page',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 20)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Paginated work messages list',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'count', type: 'integer', example: 10),
+                new OA\Property(property: 'totalCount', type: 'integer', example: 42),
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(
+                    property: 'result',
+                    type: 'array',
+                    items: new OA\Items(type: 'object')
+                )
+            ],
+            type: 'object'
+        )
+    )]
     public function listWorkMessage(Request $request, Work $work): JsonResponse
     {
         return $this->conversationWorkMessageListHandle->__invoke($request, $work);
