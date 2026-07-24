@@ -17,6 +17,7 @@ use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Conversation\DTO\Api\Input\ConversationMessageInput;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\DTO\Api\Output\ConversationListOutput;
+use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\ConversationMessage\Entity\ConversationMessage;
 use App\Domain\ConversationMessage\DTO\Api\Output\ConversationMessageListOutput;
 use App\Infrastructure\Service\AuthorizationCheckerService;
@@ -96,6 +97,23 @@ readonly class ConversationController
         return $this->conversationListHandle->__invoke($request, $search);
     }
 
+    #[OA\Get(
+        path: '/api/key/conversations/{id}',
+        description: 'Retrieves conversation details for the given ID.',
+        summary: 'Conversation detail'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Conversation ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Conversation detail',
+        content: new OA\JsonContent(ref: new Model(type: ConversationDTO::class))
+    )]
     public function detail(Request $request, Conversation $conversation): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $conversation);
