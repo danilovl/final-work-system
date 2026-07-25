@@ -246,6 +246,23 @@ readonly class ConversationController
         return $this->conversationWorkMessageListHandle->__invoke($request, $work);
     }
 
+    #[OA\Get(
+        path: '/api/key/conversations/works/{id}',
+        description: 'Retrieves conversation associated with the specified work for the current user.',
+        summary: 'Work conversation'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Work conversation detail',
+        content: new OA\JsonContent(ref: new Model(type: ConversationDTO::class))
+    )]
     public function conversationWork(Request $request, Work $work): JsonResponse
     {
         return $this->conversationWorkHandle->__invoke($request, $work);
