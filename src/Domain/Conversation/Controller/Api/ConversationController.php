@@ -268,6 +268,29 @@ readonly class ConversationController
         return $this->conversationWorkHandle->__invoke($request, $work);
     }
 
+    #[OA\Put(
+        path: '/api/key/conversations/{id_conversation}/messages/{id_message}/change/read/status',
+        description: 'Change read status of a specific conversation message for the current user.',
+        summary: 'Change message read status'
+    )]
+    #[OA\Parameter(
+        name: 'id_conversation',
+        description: 'Conversation ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Parameter(
+        name: 'id_message',
+        description: 'Message ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Message read status updated'
+    )]
     #[EntityRelationValidatorAttribute(sourceEntity: ConversationMessage::class, targetEntity: Conversation::class)]
     public function changeMessageReadStatus(
         #[MapEntity(mapping: ['id_conversation' => 'id'])] Conversation $conversation,
