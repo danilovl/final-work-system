@@ -34,7 +34,7 @@ api_key_conversation_work_messages:
     id: '\d+'
   defaults:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::listWorkMessage
-  methods: [GET, POST]
+  methods: [GET]
 
 api_key_conversation_message_change_read_status:
   path: /{id_conversation}/messages/{id_message}/change/read/status
