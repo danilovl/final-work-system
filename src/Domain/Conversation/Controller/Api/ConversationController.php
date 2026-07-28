@@ -301,6 +301,15 @@ readonly class ConversationController
         return $this->conversationChangeMessageReadStatusHandle->__invoke($conversationMessage);
     }
 
+    #[OA\Put(
+        path: '/api/key/conversations/messages/change-all-to-read',
+        description: 'Marks all unread messages as read for the current user.',
+        summary: 'Mark all messages as read'
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'All unread messages have been marked as read'
+    )]
     public function allMessageToRead(): JsonResponse
     {
         return $this->conversationChangeAllMessageToReadHandle->__invoke();
