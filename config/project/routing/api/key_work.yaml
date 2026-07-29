@@ -4,7 +4,7 @@ api_key_work_list:
     type: 'author|opponent|consultant|supervisor'
   defaults:
     _controller: App\Domain\Work\Controller\Api\WorkController::list
-  methods: [GET, POST]
+  methods: [GET]
 
 api_key_work_detail:
   path: /{id}/detail
@@ -12,4 +12,4 @@ api_key_work_detail:
     id: '\d+'
   defaults:
     _controller: App\Domain\Work\Controller\Api\WorkController::detail
-  methods: [GET, POST]
+  methods: [GET]
