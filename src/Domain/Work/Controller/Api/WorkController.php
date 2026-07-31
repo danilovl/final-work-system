@@ -92,6 +92,27 @@ readonly class WorkController
         return $this->workListHandle->__invoke($request, $type, $search);
     }
 
+    #[OA\Get(
+        path: '/api/key/works/{id}/detail',
+        description: 'Retrieves detailed information about a work item.',
+        summary: 'Work detail'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 123)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Work detail',
+        content: new OA\JsonContent(ref: new Model(type: WorkDTO::class))
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Work not found'
+    )]
     public function detail(Work $work): JsonResponse
     {
         return $this->workDetailHandle->__invoke($work);
