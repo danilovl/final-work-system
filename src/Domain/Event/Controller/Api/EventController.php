@@ -15,6 +15,7 @@ namespace App\Domain\Event\Controller\Api;
 use ApiPlatform\Validator\Exception\ValidationException;
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Event\DTO\Api\EventDTO;
+use App\Domain\Event\DTO\Api\EventDetailDTO;
 use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
 use App\Domain\Event\Entity\Event;
@@ -27,12 +28,15 @@ use App\Domain\Event\Http\Api\{
     EventDetailHandler
 };
 use App\Domain\Work\Entity\Work;
+use Nelmio\ApiDocBundle\Attribute\Model;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[OA\Tag(name: 'Event')]
 readonly class EventController
 {
     public function __construct(
@@ -45,6 +49,23 @@ readonly class EventController
         private ValidatorInterface $validator
     ) {}
 
+    #[OA\Get(
+        path: '/api/key/events/{id}',
+        description: 'Retrieves detailed information about an event.',
+        summary: 'Event detail'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Event ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Event detail',
+        content: new OA\JsonContent(ref: new Model(type: EventDetailDTO::class))
+    )]
     public function detail(Event $event): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::VIEW->value, $event);
