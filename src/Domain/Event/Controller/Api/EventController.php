@@ -136,6 +136,30 @@ readonly class EventController
         return $this->eventCreateHandle->__invoke($input);
     }
 
+    #[OA\Delete(
+        path: '/api/key/events/{id}',
+        description: 'Deletes the specified event.',
+        summary: 'Delete event'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'Event ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 1)
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Event deleted successfully'
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Access denied'
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Event not found'
+    )]
     public function delete(Event $event): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::DELETE->value, $event);
