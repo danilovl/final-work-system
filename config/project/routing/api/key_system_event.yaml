@@ -4,7 +4,7 @@ api_key_system_event_list:
     type: 'read|unread|all'
   defaults:
     _controller: App\Domain\SystemEvent\Controller\Api\SystemEventController::list
-  methods: [GET, POST]
+  methods: [GET]
 
 api_key_system_event_change_viewed:
   path: /{id}/viewed
