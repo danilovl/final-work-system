@@ -20,11 +20,13 @@ use App\Domain\SystemEvent\Http\Api\{
 };
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Infrastructure\Service\AuthorizationCheckerService;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\{
     Request,
     JsonResponse
 };
 
+#[OA\Tag(name: 'SystemEvent')]
 readonly class SystemEventController
 {
     public function __construct(
@@ -34,6 +36,58 @@ readonly class SystemEventController
         private SystemEventViewedAllHandle $systemEventViewedAllHandle
     ) {}
 
+    #[OA\Get(
+        path: '/api/key/system-events/{type}',
+        description: 'Retrieves a paginated list of system events filtered by status (read, unread, all).',
+        summary: 'System event list'
+    )]
+    #[OA\Parameter(
+        name: 'type',
+        description: 'System event status to filter by',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'string', enum: ['read', 'unread', 'all'])
+    )]
+    #[OA\Parameter(
+        name: 'page',
+        description: 'Page number for pagination',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1)
+    )]
+    #[OA\Parameter(
+        name: 'limit',
+        description: 'Items per page for pagination',
+        in: 'query',
+        required: false,
+        schema: new OA\Schema(type: 'integer', minimum: 1)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'System event list',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'count', type: 'integer', example: 10),
+                new OA\Property(property: 'totalCount', type: 'integer', example: 42),
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(
+                    property: 'result',
+                    type: 'array',
+                    items: new OA\Items(
+                        properties: [
+                            new OA\Property(property: 'id', type: 'integer', example: 123),
+                            new OA\Property(property: 'title', type: 'string', example: 'New comment on your work'),
+                            new OA\Property(property: 'owner', type: 'string', example: 'John Doe, PhD'),
+                            new OA\Property(property: 'viewed', type: 'boolean', example: false),
+                            new OA\Property(property: 'createdAt', type: 'string', example: '2024-10-05 12:34:56')
+                        ],
+                        type: 'object'
+                    )
+                )
+            ],
+            type: 'object'
+        )
+    )]
     public function list(Request $request, string $type): JsonResponse
     {
         return $this->systemEventTypeEventsHandle->__invoke($request, $type);
