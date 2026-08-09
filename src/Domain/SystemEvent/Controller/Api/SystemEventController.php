@@ -93,6 +93,30 @@ readonly class SystemEventController
         return $this->systemEventTypeEventsHandle->__invoke($request, $type);
     }
 
+    #[OA\Put(
+        path: '/api/key/system-events/{id}/viewed',
+        description: 'Marks a specific system event as viewed.',
+        summary: 'Mark system event as viewed'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        description: 'System event recipient ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', minimum: 1, example: 123)
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'System event marked as viewed successfully'
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Access denied'
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'System event not found'
+    )]
     public function viewed(SystemEventRecipient $systemEventRecipient): JsonResponse
     {
         $this->authorizationCheckerService->denyAccessUnlessGranted(VoterSupportConstant::CHANGE_VIEWED->value, $systemEventRecipient);
