@@ -124,6 +124,19 @@ readonly class SystemEventController
         return $this->systemEventViewedHandle->__invoke($systemEventRecipient);
     }
 
+    #[OA\Put(
+        path: '/api/key/system-events/viewed-all',
+        description: 'Marks all system events as viewed.',
+        summary: 'Mark all system events as viewed'
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'All system events marked as viewed successfully'
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Access denied'
+    )]
     public function viewedAll(): JsonResponse
     {
         return $this->systemEventViewedAllHandle->__invoke();
