@@ -33,7 +33,9 @@ use Symfony\Component\HttpKernel\Attribute\{
     MapQueryString,
     MapRequestPayload
 };
+use OpenApi\Attributes as OA;
 
+#[OA\Tag(name: 'EventCalendar')]
 readonly class EventCalendarController
 {
     public function __construct(
@@ -45,6 +47,50 @@ readonly class EventCalendarController
         private EventCalendarManageCreateEventHandle $eventCalendarManageCreateEventHandle
     ) {}
 
+    #[OA\Get(
+        path: '/api/key/events/calendar/{type}',
+        description: 'Retrieves calendar events for the specified type within the given date range.',
+        summary: 'Calendar events by type and date range'
+    )]
+    #[OA\Parameter(
+        name: 'type',
+        description: 'Calendar type',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'string', enum: ['manage', 'reservation', 'detail'])
+    )]
+    #[OA\Parameter(
+        name: 'start',
+        description: 'Start date (YYYY-MM-DD)',
+        in: 'query',
+        required: true,
+        schema: new OA\Schema(type: 'string', example: '2024-01-01')
+    )]
+    #[OA\Parameter(
+        name: 'end',
+        description: 'End date (YYYY-MM-DD)',
+        in: 'query',
+        required: true,
+        schema: new OA\Schema(type: 'string', example: '2024-01-31')
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Calendar events list',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(
+                properties: [
+                    new OA\Property(property: 'id', type: 'integer', example: 123),
+                    new OA\Property(property: 'title', type: 'string', example: 'Meeting with advisor'),
+                    new OA\Property(property: 'color', type: 'string', example: '#ff0000'),
+                    new OA\Property(property: 'start', type: 'string', example: '2024-01-10 09:00:00'),
+                    new OA\Property(property: 'end', type: 'string', example: '2024-01-10 10:00:00'),
+                    new OA\Property(property: 'hasParticipant', type: 'boolean', example: true)
+                ],
+                type: 'object'
+            )
+        )
+    )]
     public function getEvent(
         #[MapQueryString] EventCalendarGetEventInput $input,
         string $type
