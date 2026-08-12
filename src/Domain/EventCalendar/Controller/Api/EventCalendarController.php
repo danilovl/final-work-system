@@ -14,6 +14,7 @@ namespace App\Domain\EventCalendar\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Event\Entity\Event;
+use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\EventCalendar\DTO\Api\Input\{
     EventCalendarGetEventInput,
     EventCalendarEventInput
@@ -27,6 +28,7 @@ use App\Domain\EventCalendar\Http\Api\{
     EventCalendarManageCreateDataHandle,
     EventCalendarManageCreateEventHandle
 };
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\{
@@ -98,6 +100,19 @@ readonly class EventCalendarController
         return $this->eventCalendarGetEventHandle->__invoke($type, $input->start, $input->end);
     }
 
+    #[OA\Get(
+        path: '/api/key/events/calendar/reservation/user/works',
+        description: 'Retrieves active works of the current user available for event reservation.',
+        summary: 'User reservation works'
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'List of user works available for reservation',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: WorkDTO::class))
+        )
+    )]
     public function getUserReservationWorks(): JsonResponse
     {
         return $this->eventCalendarUserReservationWorksHandle->__invoke();
