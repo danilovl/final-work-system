@@ -118,6 +118,41 @@ readonly class EventCalendarController
         return $this->eventCalendarUserReservationWorksHandle->__invoke();
     }
 
+    #[OA\Post(
+        path: '/api/key/events/calendar/reservation/events/{id_event}/works/{id_work}',
+        description: 'Reserves a work of the event owner for the current user in the specified event.',
+        summary: 'Reserve work for event'
+    )]
+    #[OA\Parameter(
+        name: 'id_event',
+        description: 'Event ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 123)
+    )]
+    #[OA\Parameter(
+        name: 'id_work',
+        description: 'Work ID (must belong to the event owner as supervisor work)',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 456)
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Reservation successful (no content)'
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Invalid reservation: the selected work cannot be reserved for this event'
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Access denied'
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Event or Work not found'
+    )]
     public function postUserReservationWork(
         #[MapEntity(mapping: ['id_event' => 'id'])] Event $event,
         #[MapEntity(mapping: ['id_work' => 'id'])] Work $work
