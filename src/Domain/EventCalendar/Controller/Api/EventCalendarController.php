@@ -14,6 +14,7 @@ namespace App\Domain\EventCalendar\Controller\Api;
 
 use App\Application\Constant\VoterSupportConstant;
 use App\Domain\Event\Entity\Event;
+use App\Domain\EventCalendar\DTO\Api\Output\EventCalendarManageCreateDataOutput;
 use App\Domain\Work\DTO\Api\WorkDTO;
 use App\Domain\EventCalendar\DTO\Api\Input\{
     EventCalendarGetEventInput,
@@ -162,6 +163,16 @@ readonly class EventCalendarController
         return $this->eventCalendarUserReservationWorkHandle->__invoke($event, $work);
     }
 
+    #[OA\Get(
+        path: '/api/key/events/calendar/manage/create/data',
+        description: 'Retrieves data required to render the event creation form in Manage calendar: event types, user addresses and available participants (students by supervisor works).',
+        summary: 'Manage create: preload data'
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Preloaded data for event creation',
+        content: new OA\JsonContent(ref: new Model(type: EventCalendarManageCreateDataOutput::class))
+    )]
     public function getManageCreateData(): JsonResponse
     {
         return $this->eventCalendarManageCreateDataHandle->__invoke();
