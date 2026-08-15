@@ -178,6 +178,43 @@ readonly class EventCalendarController
         return $this->eventCalendarManageCreateDataHandle->__invoke();
     }
 
+    #[OA\Post(
+        path: '/api/key/events/calendar/manage/create',
+        description: 'Creates a new event in the Manage calendar using the provided payload.',
+        summary: 'Manage create: create event'
+    )]
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(ref: new Model(type: EventCalendarEventInput::class))
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Event successfully created',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'id', type: 'integer', example: 123),
+                new OA\Property(property: 'title', type: 'string', example: 'Consultation with student'),
+                new OA\Property(property: 'color', type: 'string', example: '#00aa88'),
+                new OA\Property(property: 'start', type: 'string', example: '2024-01-10 09:00:00'),
+                new OA\Property(property: 'end', type: 'string', example: '2024-01-10 10:00:00'),
+                new OA\Property(property: 'detail_url', type: 'string', example: '/events/AbC123/detail'),
+                new OA\Property(property: 'delete_url', type: 'string', example: '/events/AbC123/delete')
+            ],
+            type: 'object'
+        )
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Validation error'
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Access denied'
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Related entity not found (event type, address, participant user or work)'
+    )]
     public function postEventCreate(
         #[MapRequestPayload] EventCalendarEventInput $input
     ): JsonResponse {
