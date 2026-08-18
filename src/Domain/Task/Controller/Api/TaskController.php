@@ -39,7 +39,10 @@ use App\Domain\Task\Http\Api\{
     TaskDeleteHandle
 };
 use App\Domain\Work\Entity\Work;
+use Nelmio\ApiDocBundle\Attribute\Model;
+use OpenApi\Attributes as OA;
 
+#[OA\Tag(name: 'Task')]
 readonly class TaskController
 {
     public function __construct(
@@ -75,6 +78,30 @@ readonly class TaskController
         return $this->taskDetailApiPlatformHandle->__invoke($task);
     }
 
+    #[OA\Get(
+        path: '/api/key/tasks/{id_task}/works/{id_work}',
+        description: 'Retrieves detailed information about a task by task and work IDs.',
+        summary: 'Task detail'
+    )]
+    #[OA\Parameter(
+        name: 'id_task',
+        description: 'Task ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 123)
+    )]
+    #[OA\Parameter(
+        name: 'id_work',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 456)
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Task detail',
+        content: new OA\JsonContent(ref: new Model(type: TaskDetailOutput::class))
+    )]
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function detail(
