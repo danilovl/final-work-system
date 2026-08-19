@@ -120,6 +120,36 @@ readonly class TaskController
         return $this->taskListWorkHandle->__invoke($request, $work);
     }
 
+    #[OA\Put(
+        path: '/api/key/tasks/{id_task}/works/{id_work}/change/{type}',
+        description: 'Changes the status of the specified task. Available types: complete, active, notify',
+        summary: 'Change task status'
+    )]
+    #[OA\Parameter(
+        name: 'id_task',
+        description: 'Task ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 123)
+    )]
+    #[OA\Parameter(
+        name: 'id_work',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 456)
+    )]
+    #[OA\Parameter(
+        name: 'type',
+        description: 'New status for the task',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'string', enum: ['complete', 'active', 'notify'], example: 'complete')
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Status changed successfully (No Content)'
+    )]
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function changeStatus(
