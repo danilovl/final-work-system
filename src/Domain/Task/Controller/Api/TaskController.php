@@ -162,6 +162,33 @@ readonly class TaskController
         return $this->taskChangeStatusHandle->__invoke($type, $task);
     }
 
+    #[OA\Put(
+        path: '/api/key/tasks/{id_task}/works/{id_work}/notify/complete',
+        description: 'Marks the task to notify as complete (sends notifications). Returns 409 if already notified.',
+        summary: 'Notify task complete'
+    )]
+    #[OA\Parameter(
+        name: 'id_task',
+        description: 'Task ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 123)
+    )]
+    #[OA\Parameter(
+        name: 'id_work',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 456)
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Notification marked successfully (No Content)'
+    )]
+    #[OA\Response(
+        response: 409,
+        description: 'Notification already set (Conflict)'
+    )]
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function notifyComplete(
