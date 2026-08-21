@@ -200,6 +200,29 @@ readonly class TaskController
         return $this->taskNotifyCompleteHandle->__invoke($task);
     }
 
+    #[OA\Delete(
+        path: '/api/key/tasks/{id_task}/works/{id_work}',
+        description: 'Deletes the specified task.',
+        summary: 'Delete task'
+    )]
+    #[OA\Parameter(
+        name: 'id_task',
+        description: 'Task ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 123)
+    )]
+    #[OA\Parameter(
+        name: 'id_work',
+        description: 'Work ID',
+        in: 'path',
+        required: true,
+        schema: new OA\Schema(type: 'integer', example: 456)
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Deleted successfully (No Content)'
+    )]
     #[HashidsRequestConverterAttribute(requestAttributesKeys: ['id_work', 'id_task'])]
     #[EntityRelationValidatorAttribute(sourceEntity: Task::class, targetEntity: Work::class)]
     public function delete(
