@@ -67,7 +67,7 @@ readonly class VersionController
                             new OA\Property(property: 'id', type: 'integer', example: 101),
                             new OA\Property(property: 'originalMediaName', type: 'string', example: 'thesis_v1.pdf'),
                             new OA\Property(property: 'originalExtension', type: 'string', example: 'pdf'),
-                            new OA\Property(property: 'mediaSize', type: 'integer', example: 2048000),
+                            new OA\Property(property: 'mediaSize', type: 'integer', example: 2_048_000),
                             new OA\Property(property: 'createdAt', type: 'string', example: '2024-01-10 12:00:00')
                         ],
                         type: 'object'

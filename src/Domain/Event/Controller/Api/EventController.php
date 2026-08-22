@@ -14,8 +14,7 @@ namespace App\Domain\Event\Controller\Api;
 
 use ApiPlatform\Validator\Exception\ValidationException;
 use App\Application\Constant\VoterSupportConstant;
-use App\Domain\Event\DTO\Api\EventDTO;
-use App\Domain\Event\DTO\Api\EventDetailDTO;
+use App\Domain\Event\DTO\Api\{EventDTO, EventDetailDTO};
 use App\Domain\Event\DTO\Api\Input\EventCreateInput;
 use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
 use App\Domain\Event\Entity\Event;
