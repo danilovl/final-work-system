@@ -17,21 +17,6 @@ use App\Application\DTO\Api\Output\BaseListOutput;
 readonly class UserListOutput extends BaseListOutput
 {
     /**
-     * @param int $numItemsPerPage
-     * @param int $totalCount
-     * @param int $currentItemCount
-     * @param UserListItemDTO[] $result
-     */
-    public function __construct(
-        int $numItemsPerPage,
-        int $totalCount,
-        int $currentItemCount,
-        array $result
-    ) {
-        parent::__construct($numItemsPerPage, $totalCount, $currentItemCount, $result);
-    }
-
-    /**
      * @return UserListItemDTO[]
      */
     public function getResult(): array
