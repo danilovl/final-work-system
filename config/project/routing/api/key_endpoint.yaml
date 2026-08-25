@@ -2,4 +2,4 @@ api_key_get_endpoint:
   path: /list
   defaults:
     _controller: App\Infrastructure\Api\Controller\EndpointController::list
-  methods: [GET, POST]
+  methods: [GET]
