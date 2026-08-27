@@ -96,9 +96,16 @@ Test coverage
 Kibana
 ------------
 
-This project utilizes the OpenTelemetry API SDK, manually configured for this project using hooks.
+This project uses the OpenTelemetry API SDK, manually configured with hooks.
 
 ![Alt text](/git/readme/kibana.png?raw=true "Kibana")
+
+Swagger
+------------
+
+Interactive API documentation and the OpenAPI specification are available in this project.
+
+![Alt text](/git/readme/swagger.png?raw=true "Swagger")
 
 Environment configuration
 ------------
