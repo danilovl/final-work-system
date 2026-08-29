@@ -1,4 +1,4 @@
-api_key_version_work_list:
+api_key_get_version_work_list:
   path: /works/{id}
   requirements:
     id: '\d+'

@@ -1,10 +1,10 @@
-api_key_conversations:
+api_key_get_conversations:
   path: /
   defaults:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::list
   methods: [GET]
 
-api_key_conversation_detail:
+api_key_get_conversation_detail:
   path: /{id}
   requirements:
     id: '\d+'
@@ -12,7 +12,7 @@ api_key_conversation_detail:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::detail
   methods: [GET]
 
-api_key_conversation_messages:
+api_key_get_conversation_messages:
   path: /{id}/messages
   requirements:
     id: '\d+'
@@ -20,7 +20,7 @@ api_key_conversation_messages:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::messages
   methods: [GET]
 
-api_key_conversation_message_create:
+api_key_post_conversation_message_create:
   path: /{id}/message
   requirements:
     id: '\d+'
@@ -28,7 +28,7 @@ api_key_conversation_message_create:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::createMessage
   methods: [POST]
 
-api_key_conversation_work_messages:
+api_key_get_conversation_work_messages:
   path: /works/{id}/messages
   requirements:
     id: '\d+'
@@ -36,7 +36,7 @@ api_key_conversation_work_messages:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::listWorkMessage
   methods: [GET]
 
-api_key_conversation_message_change_read_status:
+api_key_put_conversation_message_change_read_status:
   path: /{id_conversation}/messages/{id_message}/change/read/status
   requirements:
     id_conversation: '\d+'
@@ -45,13 +45,13 @@ api_key_conversation_message_change_read_status:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::changeMessageReadStatus
   methods: [PUT]
 
-api_key_conversation_message_change_all_to_read:
+api_key_put_conversation_message_change_all_to_read:
   path: /messages/change-all-to-read
   defaults:
     _controller: App\Domain\Conversation\Controller\Api\ConversationController::allMessageToRead
   methods: [PUT]
 
-api_key_conversation_work:
+api_key_get_conversation_work:
   path: /works/{id}
   requirements:
     id: '\d+'

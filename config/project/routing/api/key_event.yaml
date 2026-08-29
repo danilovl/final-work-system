@@ -1,4 +1,4 @@
-api_key_event_work_list:
+api_key_get_event_work_list:
   path: /works/{id}
   requirements:
     id: '\d+'

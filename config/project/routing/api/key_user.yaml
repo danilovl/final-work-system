@@ -1,10 +1,10 @@
-api_key_user_info:
+api_key_get_user_info:
   path: /detail
   defaults:
     _controller: App\Domain\User\Controller\Api\UserController::detail
   methods: [GET]
 
-api_key_user_list:
+api_key_get_user_list:
   path: /{type}
   requirements:
     type: 'author|opponent|consultant|unused'

@@ -1,4 +1,4 @@
-api_key_work_list:
+api_key_get_work_list:
   path: /{type}
   requirements:
     type: 'author|opponent|consultant|supervisor'
@@ -6,7 +6,7 @@ api_key_work_list:
     _controller: App\Domain\Work\Controller\Api\WorkController::list
   methods: [GET]
 
-api_key_work_detail:
+api_key_get_work_detail:
   path: /{id}/detail
   requirements:
     id: '\d+'
