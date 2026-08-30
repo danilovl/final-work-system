@@ -26,6 +26,10 @@ trait ElasticaSearchTrait
 
     private function removeAccents(string $string): string
     {
+        if (preg_match('~\p{Cyrillic}~u', $string)) {
+            return $string;
+        }
+
         $transliterated = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
 
         return $transliterated !== false ? $transliterated : $string;
