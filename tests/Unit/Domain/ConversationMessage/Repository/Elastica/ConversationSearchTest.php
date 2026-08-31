@@ -76,11 +76,11 @@ class ConversationSearchTest extends TestCase
                                             ]
                                         ],
                                     ]
-                                ]
-                            ],
-                            'filter' => [
-                                'wildcard' => [
-                                    'content' => '*' . $search . '*'
+                                ],
+                                [
+                                    'wildcard' => [
+                                        'content.normalized' => '*' . $search . '*'
+                                    ]
                                 ]
                             ]
                         ]
@@ -126,12 +126,8 @@ class ConversationSearchTest extends TestCase
                                     ]
                                 ],
                                 [
-                                    'bool' => [
-                                        'should' => [
-                                            'wildcard' => [
-                                                'content' => '*' . $search . '*'
-                                            ]
-                                        ]
+                                    'wildcard' => [
+                                        'content.normalized' => '*' . $search . '*'
                                     ]
                                 ]
                             ]

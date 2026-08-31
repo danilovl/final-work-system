@@ -31,7 +31,7 @@ class ElasticaSearchTraitTest extends TestCase
     {
         $this->assertSame('some search text', $this->mockObject->testTransformSearch('Some SEARCH TeXt'));
         $this->assertSame('какой-то текст для поиска', $this->mockObject->testTransformSearch('какой-ТО ТЕКСТ для поиска'));
-        $this->assertSame('nějaký text hledání', $this->mockObject->testTransformSearch('NĚJAKÝ text hledání'));
+        $this->assertSame('nejaky text hledani', $this->mockObject->testTransformSearch('NĚJAKÝ text hledání'));
     }
 
     public function testGetDocumentIds(): void
