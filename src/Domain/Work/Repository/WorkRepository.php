@@ -13,11 +13,9 @@
 namespace App\Domain\Work\Repository;
 
 use App\Domain\User\Entity\User;
-use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\Work\DTO\Repository\WorkRepositoryDTO;
 use App\Domain\Work\Entity\Work;
 use App\Domain\WorkStatus\Constant\WorkStatusConstant;
-use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
@@ -30,6 +28,11 @@ class WorkRepository extends ServiceEntityRepository
         parent::__construct($registry, Work::class);
     }
 
+    private function createWorkQueryBuilder(): WorkQueryBuilder
+    {
+        return new WorkQueryBuilder($this->createQueryBuilder('work'));
+    }
+
     public function baseQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('work');
@@ -37,83 +40,56 @@ class WorkRepository extends ServiceEntityRepository
 
     public function workDeadlineBySupervisor(User $user): QueryBuilder
     {
-        return $this->createQueryBuilder('work')
-            ->select('DISTINCT work.deadline')
-            ->leftJoin('work.supervisor', 'supervisor')
-            ->where('supervisor.id = :userId')
-            ->orderBy('work.deadline', Order::Descending->value)
-            ->setParameter('userId', $user->getId());
+        return $this->createWorkQueryBuilder()
+            ->selectDistinctDeadline()
+            ->leftJoinSupervisor()
+            ->bySupervisor($user)
+            ->orderByDeadline(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function workProgramDeadlineBySupervisor(User $user): QueryBuilder
     {
-        return $this->createQueryBuilder('work')
-            ->select('work.deadlineProgram')
-            ->select('DISTINCT work.deadlineProgram')
-            ->leftJoin('work.supervisor', 'supervisor')
-            ->where('supervisor.id = :userId')
-            ->andWhere('work.deadlineProgram is NOT NULL')
-            ->orderBy('work.deadlineProgram', Order::Descending->value)
-            ->setParameter('userId', $user->getId());
+        return $this->createWorkQueryBuilder()
+            ->selectDistinctProgramDeadline()
+            ->leftJoinSupervisor()
+            ->bySupervisor($user)
+            ->andWhereProgramDeadlineNotNull()
+            ->orderByProgramDeadline(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function allByUserStatus(WorkRepositoryDTO $workData): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('work')
-            ->addSelect('status')
-            ->innerJoin('work.status', 'status');
-
-        if ($workData->user !== null) {
-            $queryBuilder->setParameter('userId', $workData->user->getId());
-        }
+        $builder = $this->createWorkQueryBuilder()
+            ->selectStatus()
+            ->joinStatus();
 
         if ($workData->supervisor !== null) {
-            $queryBuilder->leftJoin('work.supervisor', 'supervisor')
-                ->where('supervisor.id = :supervisorId')
-                ->setParameter('supervisorId', $workData->supervisor->getId());
+            $builder = $builder
+                ->leftJoinSupervisor()
+                ->bySupervisorFilter($workData->supervisor);
         }
 
-        switch ($workData->type) {
-            case WorkUserTypeConstant::AUTHOR->value:
-                $queryBuilder->leftJoin('work.author', 'author')
-                    ->andWhere('author.id = :userId');
+        $builder = $builder
+            ->byUserAndType($workData->type, $workData->user)
+            ->byWorkStatus($workData->workStatus);
 
-                break;
-            case WorkUserTypeConstant::OPPONENT->value:
-                $queryBuilder->leftJoin('work.opponent', 'opponent')
-                    ->andWhere('opponent.id = :userId');
-
-                break;
-            case WorkUserTypeConstant::CONSULTANT->value:
-                $queryBuilder->leftJoin('work.consultant', 'consultant')
-                    ->andWhere('consultant.id = :userId');
-
-                break;
-            case WorkUserTypeConstant::SUPERVISOR->value:
-                $queryBuilder->leftJoin('work.supervisor', 'supervisor')
-                    ->andWhere('supervisor.id = :userId');
-
-                break;
-        }
-
-        $workStatus = $workData->workStatus;
-        if ($workStatus instanceof WorkStatus) {
-            $queryBuilder->andWhere('status = :status')
-                ->setParameter('status', $workStatus);
-        } elseif (is_iterable($workStatus)) {
-            $queryBuilder->andWhere($queryBuilder->expr()->in('status', ':statuses'))
-                ->setParameter('statuses', $workStatus);
-        }
-
-        return $queryBuilder;
+        return $builder->getQueryBuilder();
     }
 
     public function getWorksAfterDeadline(): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->join('work.status', 'status')
-            ->andWhere('work.deadline < CURRENT_DATE()')
-            ->andWhere('status.id = :workStatusId')
-            ->setParameter('workStatusId', WorkStatusConstant::ACTIVE);
+        $callback = static function (QueryBuilder $queryBuilder): void {
+            $queryBuilder
+                ->andWhere('work.deadline < CURRENT_DATE()')
+                ->andWhere('status.id = :workStatusId')
+                ->setParameter('workStatusId', WorkStatusConstant::ACTIVE);
+        };
+
+        return $this->createWorkQueryBuilder()
+            ->joinStatus()
+            ->byCallback($callback)
+            ->getQueryBuilder();
     }
 }
