@@ -24,23 +24,17 @@ class ArticleCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ArticleCategory::class);
     }
 
+    private function createArticleCategoryQueryBuilder(): ArticleCategoryQueryBuilder
+    {
+        return new ArticleCategoryQueryBuilder($this->createQueryBuilder('article_category'));
+    }
+
     public function allByRoles(iterable $roles): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('article_category')
-            ->distinct();
-
-        foreach ($roles as $key => $role) {
-            if ($key === 0) {
-                $queryBuilder->andWhere("article_category.access LIKE :value_{$key}");
-            } else {
-                $queryBuilder->orWhere("article_category.access LIKE :value_{$key}");
-            }
-            $queryBuilder->setParameter("value_{$key}", "%{$role}%");
-        }
-
-        $queryBuilder->andWhere('article_category.active = :active')
-            ->setParameter('active', true);
-
-        return $queryBuilder;
+        return $this->createArticleCategoryQueryBuilder()
+            ->distinct()
+            ->byRoles($roles)
+            ->byActive(true)
+            ->getQueryBuilder();
     }
 }
