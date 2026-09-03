@@ -26,17 +26,16 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    private function createCommentQueryBuilder(): CommentQueryBuilder
     {
-        return $this->createQueryBuilder('comment');
+        return new CommentQueryBuilder($this->createQueryBuilder('comment'));
     }
 
     public function allByOwnerEvent(User $user, Event $event): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('comment.event = :event')
-            ->andWhere('comment.owner = :user')
-            ->setParameter('user', $user)
-            ->setParameter('event', $event);
+        return $this->createCommentQueryBuilder()
+            ->byEvent($event)
+            ->byOwner($user)
+            ->getQueryBuilder();
     }
 }
