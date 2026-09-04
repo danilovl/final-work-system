@@ -18,7 +18,6 @@ use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Webmozart\Assert\Assert;
@@ -30,34 +29,39 @@ class ConversationRepository extends ServiceEntityRepository
         parent::__construct($registry, Conversation::class);
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    private function createConversationQueryBuilder(): ConversationQueryBuilder
     {
-        return $this->createQueryBuilder('conversation');
+        return new ConversationQueryBuilder($this->createQueryBuilder('conversation'));
     }
 
     public function allByParticipantUser(User $user): QueryBuilder
     {
-        $sub = $this->getEntityManager()->createQueryBuilder()
+        $sub = $this->getEntityManager()
+            ->createQueryBuilder()
             ->select('1')
             ->from(ConversationParticipant::class, 'p')
             ->where('p.conversation = conversation')
             ->andWhere('p.user = :user');
 
-        $queryBuilder = $this->baseQueryBuilder();
+        $callback = static function (QueryBuilder $qb) use ($sub, $user): void {
+            $qb
+                ->where($qb->expr()->exists($sub->getDQL()))
+                ->setParameter('user', $user);
+        };
 
-        return $queryBuilder
-            ->addSelect('messages, type, work, work_status, work_type, participants, participantsUser, messagesOwner')
-            ->join('conversation.type', 'type')
-            ->leftJoin('conversation.work', 'work')
-            ->leftJoin('work.status', 'work_status')
-            ->leftJoin('work.type', 'work_type')
-            ->leftJoin('conversation.participants', 'participants')
-            ->leftJoin('participants.user', 'participantsUser')
-            ->leftJoin('conversation.messages', 'messages')
-            ->leftJoin('messages.owner', 'messagesOwner')
-            ->where($queryBuilder->expr()->exists($sub->getDQL()))
-            ->orderBy('messages.createdAt', Order::Descending->value)
-            ->setParameter('user', $user);
+        return $this->createConversationQueryBuilder()
+            ->selectRelations()
+            ->joinType()
+            ->leftJoinWork()
+            ->leftJoinWorkStatus()
+            ->leftJoinWorkType()
+            ->leftJoinParticipants()
+            ->leftJoinParticipantsUser()
+            ->leftJoinMessages()
+            ->leftJoinMessagesOwner()
+            ->byCallback($callback)
+            ->orderByMessagesCreatedAt()
+            ->getQueryBuilder();
     }
 
     /**
@@ -67,41 +71,39 @@ class ConversationRepository extends ServiceEntityRepository
     {
         Assert::allInteger($ids);
 
-        return $this->baseQueryBuilder()
-            ->addSelect('messages, type, work, work_status, work_type, participants, participantsUser, messagesOwner')
-            ->join('conversation.type', 'type')
-            ->leftJoin('conversation.work', 'work')
-            ->leftJoin('work.status', 'work_status')
-            ->leftJoin('work.type', 'work_type')
-            ->leftJoin('conversation.participants', 'participants')
-            ->leftJoin('participants.user', 'participantsUser')
-            ->leftJoin('conversation.messages', 'messages')
-            ->leftJoin('messages.owner', 'messagesOwner')
-            ->where('conversation.id IN (:ids)')
-            ->orderBy('messages.createdAt', Order::Descending->value)
-            ->setParameter('ids', $ids);
+        return $this->createConversationQueryBuilder()
+            ->selectRelations()
+            ->joinType()
+            ->leftJoinWork()
+            ->leftJoinWorkStatus()
+            ->leftJoinWorkType()
+            ->leftJoinParticipants()
+            ->leftJoinParticipantsUser()
+            ->leftJoinMessages()
+            ->leftJoinMessagesOwner()
+            ->byIds($ids)
+            ->orderByMessagesCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function oneByWorkUser(
         Work $work,
         User $user
     ): QueryBuilder {
-        return $this->baseQueryBuilder()
-            ->addSelect('messages, type, work, work_status, work_type, participants, participantsUser, messagesOwner')
-            ->join('conversation.type', 'type')
-            ->leftJoin('conversation.work', 'work')
-            ->leftJoin('work.status', 'work_status')
-            ->leftJoin('work.type', 'work_type')
-            ->leftJoin('conversation.participants', 'participants')
-            ->leftJoin('participants.user', 'participantsUser')
-            ->leftJoin('conversation.messages', 'messages')
-            ->leftJoin('messages.owner', 'messagesOwner')
-            ->where('conversation.work = :work')
-            ->andWhere('participants.user = :user')
-            ->setParameter('work', $work)
-            ->setParameter('user', $user)
-            ->orderBy('messages.createdAt', Order::Descending->value)
-            ->setMaxResults(1);
+        return $this->createConversationQueryBuilder()
+            ->selectRelations()
+            ->joinType()
+            ->leftJoinWork()
+            ->leftJoinWorkStatus()
+            ->leftJoinWorkType()
+            ->leftJoinParticipants()
+            ->leftJoinParticipantsUser()
+            ->leftJoinMessages()
+            ->leftJoinMessagesOwner()
+            ->byWorkAndParticipantUser($work, $user)
+            ->orderByMessagesCreatedAt()
+            ->setMaxResultsOne()
+            ->getQueryBuilder();
     }
 
     /**
