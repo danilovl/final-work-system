@@ -30,58 +30,56 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
         parent::__construct($registry, ConversationMessageStatus::class);
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    private function createConversationMessageStatusQueryBuilder(): ConversationMessageQueryBuilder
     {
-        return $this->createQueryBuilder('conversation_message_status')
-            ->leftJoin('conversation_message_status.message', 'message');
+        return new ConversationMessageQueryBuilder($this->createQueryBuilder('conversation_message_status'));
     }
 
     public function allByConversation(
         Conversation $conversation,
         User $user
     ): QueryBuilder {
-        return $this->baseQueryBuilder()
-            ->where('conversation_message_status.user = :user')
-            ->andWhere('conversation_message_status.conversation = :conversation')
-            ->orderBy('message.createdAt', Order::Descending->value)
-            ->setParameter('user', $user)
-            ->setParameter('conversation', $conversation);
+        return $this->createConversationMessageStatusQueryBuilder()
+            ->leftJoinMessage()
+            ->byUser($user)
+            ->byConversation($conversation)
+            ->orderByMessageCreatedAt(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function oneByConversationUserType(ConversationMessageStatusRepositoryDTO $data): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('conversation_message_status.user = :user')
-            ->andWhere('conversation_message_status.conversation = :conversation')
-            ->andWhere('conversation_message_status.type = :type')
-            ->orderBy('message.createdAt', Order::Descending->value)
-            ->setParameter('user', $data->user)
-            ->setParameter('conversation', $data->conversation)
-            ->setParameter('type', $data->type);
+        return $this->createConversationMessageStatusQueryBuilder()
+            ->leftJoinMessage()
+            ->byUser($data->user)
+            ->byConversation($data->conversation)
+            ->byType($data->type)
+            ->orderByMessageCreatedAt(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function oneByConversationUser(
         Conversation $conversation,
         User $user
     ): QueryBuilder {
-        return $this->baseQueryBuilder()
-            ->where('conversation_message_status.user = :user')
-            ->andWhere('conversation_message_status.conversation = :conversation')
-            ->orderBy('message.createdAt', Order::Descending->value)
-            ->setParameter('user', $user)
-            ->setParameter('conversation', $conversation);
+        return $this->createConversationMessageStatusQueryBuilder()
+            ->leftJoinMessage()
+            ->byUser($user)
+            ->byConversation($conversation)
+            ->orderByMessageCreatedAt(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function oneByMessageUser(
         ConversationMessage $conversationMessage,
         User $user
     ): QueryBuilder {
-        return $this->baseQueryBuilder()
-            ->where('conversation_message_status.user = :user')
-            ->andWhere('message = :conversationMessage')
-            ->orderBy('message.createdAt', Order::Descending->value)
-            ->setParameter('user', $user)
-            ->setParameter('conversationMessage', $conversationMessage);
+        return $this->createConversationMessageStatusQueryBuilder()
+            ->leftJoinMessage()
+            ->byUser($user)
+            ->byMessage($conversationMessage)
+            ->orderByMessageCreatedAt(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function updateAllToStatus(
