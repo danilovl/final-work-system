@@ -27,8 +27,14 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    private function createEventQueryBuilder(): EventQueryBuilder
+    {
+        return new EventQueryBuilder($this->createQueryBuilder('event'));
+    }
+
     private function baseQueryBuilder(): QueryBuilder
     {
+        // Preserve method in case it's used elsewhere; align with new QueryBuilder usage
         return $this->createQueryBuilder('event')
             ->leftJoin('event.participant', 'participant')
             ->leftJoin('event.address', 'address');
@@ -36,63 +42,52 @@ class EventRepository extends ServiceEntityRepository
 
     public function allByWork(Work $work): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('participant.work = :work')
-            ->orderBy('event.start', Order::Descending->value)
-            ->setParameter('work', $work);
+        return $this->createEventQueryBuilder()
+            ->leftJoinParticipant()
+            ->leftJoinAddress()
+            ->byParticipantWork($work)
+            ->orderByStart(Order::Descending->value)
+            ->getQueryBuilder();
     }
 
     public function allByOwner(EventRepositoryDTO $eventData): QueryBuilder
     {
-        $queryBuilder = $this->baseQueryBuilder()
-            ->addSelect('participant, work, address, user')
-            ->leftJoin('participant.work', 'work')
-            ->leftJoin('participant.user', 'user')
-            ->where('event.owner = :owner')
-            ->orderBy('event.createdAt', Order::Descending->value)
-            ->setParameter('owner', $eventData->user);
+        $builder = $this->createEventQueryBuilder()
+            ->leftJoinParticipant()
+            ->leftJoinAddress()
+            ->selectParticipantWorkAddressUser()
+            ->leftJoinParticipantWork()
+            ->leftJoinParticipantUser()
+            ->byOwner($eventData->user)
+            ->orderByCreatedAt(Order::Descending->value);
 
-        $this->filterByBetweenDate($queryBuilder, $eventData);
-        $this->filterByEventType($queryBuilder, $eventData);
+        if ($eventData->startDate !== null && $eventData->endDate !== null) {
+            $builder = $builder->byBetweenDate($eventData->startDate, $eventData->endDate);
+        }
 
-        return $queryBuilder;
+        if ($eventData->eventType !== null) {
+            $builder = $builder->byEventType($eventData->eventType);
+        }
+
+        return $builder->getQueryBuilder();
     }
 
     public function allByParticipant(EventRepositoryDTO $eventData): QueryBuilder
     {
-        $queryBuilder = $this->baseQueryBuilder()
-            ->where('participant.user = :participant')
-            ->groupBy('event.id')
-            ->setParameter('participant', $eventData->user);
+        $builder = $this->createEventQueryBuilder()
+            ->leftJoinParticipant()
+            ->leftJoinAddress()
+            ->byParticipantUser($eventData->user)
+            ->groupByEventId();
 
-        $this->filterByBetweenDate($queryBuilder, $eventData);
-        $this->filterByEventType($queryBuilder, $eventData);
-
-        return $queryBuilder;
-    }
-
-    private function filterByBetweenDate(QueryBuilder $queryBuilder, EventRepositoryDTO $eventData): void
-    {
-        if ($eventData->startDate === null || $eventData->endDate === null) {
-            return;
+        if ($eventData->startDate !== null && $eventData->endDate !== null) {
+            $builder = $builder->byBetweenDate($eventData->startDate, $eventData->endDate);
         }
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->andX(
-                $queryBuilder->expr()->gte('event.start', ':start'),
-                $queryBuilder->expr()->lte('event.end', ':end')
-            ))
-            ->setParameter('start', $eventData->startDate)
-            ->setParameter('end', $eventData->endDate);
-    }
-
-    private function filterByEventType(QueryBuilder $queryBuilder, EventRepositoryDTO $eventData): void
-    {
-        if ($eventData->eventType === null) {
-            return;
+        if ($eventData->eventType !== null) {
+            $builder = $builder->byEventType($eventData->eventType);
         }
 
-        $queryBuilder->andWhere('event.type = :eventType')
-            ->setParameter('eventType', $eventData->eventType);
+        return $builder->getQueryBuilder();
     }
 }
