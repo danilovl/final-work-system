@@ -30,12 +30,15 @@ class EventAddressRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('event_address');
     }
 
+    private function createEventAddressQueryBuilder(): EventAddressQueryBuilder
+    {
+        return new EventAddressQueryBuilder($this->baseQueryBuilder());
+    }
+
     public function skypeByOwner(User $user): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('event_address.skype = :skype')
-            ->andWhere('event_address.owner = :user')
-            ->setParameter('skype', true)
-            ->setParameter('user', $user);
+        return $this->createEventAddressQueryBuilder()
+            ->skypeByOwner($user)
+            ->getQueryBuilder();
     }
 }
