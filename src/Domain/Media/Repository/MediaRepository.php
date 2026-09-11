@@ -18,7 +18,6 @@ use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,6 +26,11 @@ class MediaRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Media::class);
+    }
+
+    private function createMediaBuilder(): MediaQueryBuilder
+    {
+        return new MediaQueryBuilder($this->createQueryBuilder('media'));
     }
 
     public function baseQueryBuilder(): QueryBuilder
@@ -38,85 +42,67 @@ class MediaRepository extends ServiceEntityRepository
 
     public function mediaListByUserFilter(MediaRepositoryDTO $mediaData): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('media')
-            ->leftJoin('media.mimeType', 'mime_type')->addSelect('mime_type')
-            ->leftJoin('media.categories', 'categories')->addSelect('categories')
-            ->orderBy('media.createdAt', Order::Descending->value);
+        $builder = $this->createMediaBuilder()
+            ->joinMimeType()->selectMimeType()
+            ->joinCategories()->selectCategories()
+            ->orderByCreatedAt();
 
         if ($mediaData->users !== null) {
-            $queryBuilder
-                ->andWhere(
-                    $queryBuilder->expr()->in('media.owner', ':users')
-                )
-                ->setParameter('users', $mediaData->users);
+            $builder = $builder->byUsers($mediaData->users);
         }
 
         if ($mediaData->criteria !== null) {
             foreach ($mediaData->criteria as $field => $value) {
                 if ($field === 'name' && !empty($value)) {
-                    $queryBuilder->andWhere('media.name LIKE :m_name')
-                        ->setParameter('m_name', '%' . $value . '%');
+                    $builder = $builder->byNameLike((string) $value);
                 }
 
                 if ($field === 'categories' && !empty($value)) {
-                    $queryBuilder
-                        ->andWhere(
-                            $queryBuilder->expr()->in('categories.id', ':c_category')
-                        )
-                        ->setParameter('c_category', $value);
+                    $builder = $builder->byCategoriesIds($value);
                 }
 
                 if ($field === 'mimeType' && !empty($value)) {
-                    $queryBuilder
-                        ->andWhere(
-                            $queryBuilder->expr()->in('mime_type.id', ':m_mimeType')
-                        )
-                        ->setParameter('m_mimeType', $value);
+                    $builder = $builder->byMimeTypeIds($value);
                 }
             }
         }
 
         if ($mediaData->type !== null) {
-            $queryBuilder->andWhere('media.type = :type')
-                ->setParameter('type', $mediaData->type);
+            $builder = $builder->byType($mediaData->type);
         }
 
         if ($mediaData->active) {
-            $queryBuilder->andWhere('media.active = :active')
-                ->setParameter('active', $mediaData->active);
+            $builder = $builder->byActive($mediaData->active);
         }
 
-        return $queryBuilder;
+        return $builder->getQueryBuilder();
     }
 
     public function allByWork(Work $work): QueryBuilder
     {
-        return $this->createQueryBuilder('media')
-            ->where('media.work = :work')
-            ->orderBy('media.createdAt', Order::Descending->value)
-            ->setParameter('work', $work);
+        return $this->createMediaBuilder()
+            ->byWork($work)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function allByUser(User $user, ?MediaType $type = null): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('media')
-            ->where('media.owner = :user')
-            ->orderBy('media.createdAt', Order::Descending->value)
-            ->setParameter('user', $user);
+        $builder = $this->createMediaBuilder()
+            ->byOwner($user)
+            ->orderByCreatedAt();
 
         if ($type !== null) {
-            $queryBuilder->leftJoin('media.type', 'type')->addSelect('type')
-                ->andWhere('type = :type')
-                ->setParameter('type', $type);
+            $builder = $builder->joinType()->selectType()->byTypeAliasEquals($type);
         }
 
-        return $queryBuilder;
+        return $builder->getQueryBuilder();
     }
 
     public function allByType(MediaType $mediaType): QueryBuilder
     {
-        return $this->createQueryBuilder('media')
-            ->where('media.type = :type')
-            ->setParameter('type', $mediaType);
+        return $this->createMediaBuilder()
+            ->byType($mediaType)
+            ->getQueryBuilder();
     }
 }
