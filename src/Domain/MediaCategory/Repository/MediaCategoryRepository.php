@@ -15,7 +15,6 @@ namespace App\Domain\MediaCategory\Repository;
 use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -26,44 +25,44 @@ class MediaCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, MediaCategory::class);
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    private function createMediaCategoryQueryBuilder(): MediaCategoryQueryBuilder
     {
-        return $this->createQueryBuilder('media_category');
+        return new MediaCategoryQueryBuilder($this->createQueryBuilder('media_category'));
     }
 
     public function allByOwner(User $user): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->addSelect('medias')
-            ->leftJoin('media_category.medias', 'medias')
-            ->where('media_category.owner = :user')
-            ->orderBy('media_category.name', Order::Ascending->value)
-            ->setParameter('user', $user);
+        return $this->createMediaCategoryQueryBuilder()
+            ->selectMedias()
+            ->leftJoinMedias()
+            ->byOwner($user)
+            ->orderByName()
+            ->getQueryBuilder();
     }
 
     public function allByOwners(iterable $users): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('media_category.owner IN(:users)')
-            ->orderBy('media_category.createdAt', Order::Descending->value)
-            ->setParameter('users', $users);
+        return $this->createMediaCategoryQueryBuilder()
+            ->byOwners($users)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function allByMediaOwner(User $user): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->leftJoin('media_category.medias', 'medias')
-            ->where('medias.owner = :user')
-            ->orderBy('media_category.createdAt', Order::Descending->value)
-            ->setParameter('user', $user);
+        return $this->createMediaCategoryQueryBuilder()
+            ->leftJoinMedias()
+            ->byMediaOwner($user)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function allByMediaOwners(iterable $users): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->leftJoin('media_category.medias', 'medias')
-            ->where('medias.owner IN(:users)')
-            ->orderBy('media_category.createdAt', Order::Descending->value)
-            ->setParameter('users', $users);
+        return $this->createMediaCategoryQueryBuilder()
+            ->leftJoinMedias()
+            ->byMediaOwners($users)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 }
