@@ -16,8 +16,8 @@ use App\Domain\MediaMimeType\Entity\MediaMimeType;
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 class MediaMimeTypeRepository extends ServiceEntityRepository
 {
@@ -26,51 +26,47 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, MediaMimeType::class);
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    private function createMediaMimeTypeQueryBuilder(?string $indexBy = null): MediaMimeTypeQueryBuilder
     {
-        return $this->createQueryBuilder('media_mime_type');
+        return new MediaMimeTypeQueryBuilder($this->createQueryBuilder('media_mime_type', $indexBy));
     }
 
     public function allBy(
         iterable|User $user,
         iterable|MediaType|int|null $mediaType = null
     ): QueryBuilder {
-        $queryBuilder = $this->baseQueryBuilder()
-            ->leftJoin('media_mime_type.medias', 'medias');
+        $builder = $this->createMediaMimeTypeQueryBuilder()
+            ->leftJoinMedias();
 
         if (is_iterable($user)) {
-            $queryBuilder->where('medias.owner IN(:user)')
-                ->setParameter('user', $user);
+            $builder = $builder->byMediaOwners($user);
         } else {
-            $queryBuilder->where('medias.owner = :user')
-                ->setParameter('user', $user);
+            $builder = $builder->byMediaOwner($user);
         }
 
         if ($mediaType !== null) {
             if (is_iterable($mediaType)) {
-                $queryBuilder->andWhere('medias.type IN(:mediaType)')
-                    ->setParameter('mediaType', $mediaType);
+                $builder = $builder->byMediaTypes($mediaType);
             } else {
-                $queryBuilder->andWhere('medias.type = :mediaType')
-                    ->setParameter('mediaType', $mediaType);
+                $builder = $builder->byMediaType($mediaType);
             }
         }
 
-        return $queryBuilder;
+        return $builder->getQueryBuilder();
     }
 
     public function byName(string $name): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('media_mime_type.name = :name')
-            ->setParameter('name', $name);
+        return $this->createMediaMimeTypeQueryBuilder()
+            ->byName($name)
+            ->getQueryBuilder();
     }
 
     public function formValidationMimeTypeName(): QueryBuilder
     {
-        return $this->createQueryBuilder('media_mime_type', 'media_mime_type.name')
-            ->select('media_mime_type.name')
-            ->where('media_mime_type.active = :active')
-            ->setParameter('active', true);
+        return $this->createMediaMimeTypeQueryBuilder('media_mime_type.name')
+            ->selectName()
+            ->byActive(true)
+            ->getQueryBuilder();
     }
 }
