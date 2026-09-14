@@ -15,9 +15,8 @@ namespace App\Domain\ResetPassword\Repository;
 use App\Domain\ResetPassword\Entity\ResetPassword;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method ResetPassword|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,6 +31,11 @@ class ResetPasswordRepository extends ServiceEntityRepository
         parent::__construct($registry, ResetPassword::class);
     }
 
+    private function createResetPasswordBuilder(): ResetPasswordQueryBuilder
+    {
+        return new ResetPasswordQueryBuilder($this->createQueryBuilder('reset_password'));
+    }
+
     public function baseQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('reset_password');
@@ -39,17 +43,17 @@ class ResetPasswordRepository extends ServiceEntityRepository
 
     public function byToken(string $token): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->andWhere('reset_password.hashedToken =:token')
-            ->setParameter('token', $token);
+        return $this->createResetPasswordBuilder()
+            ->byToken($token)
+            ->getQueryBuilder();
     }
 
     public function mostRecentNonExpiredRequestDate(User $user): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('reset_password.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('reset_password.createdAt', Order::Descending->value)
-            ->setMaxResults(1);
+        return $this->createResetPasswordBuilder()
+            ->byUser($user)
+            ->orderByCreatedAt()
+            ->limit(1)
+            ->getQueryBuilder();
     }
 }
