@@ -16,7 +16,6 @@ use App\Domain\SystemEvent\DTO\Repository\SystemEventRepositoryDTO;
 use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,51 +26,34 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
         parent::__construct($registry, SystemEventRecipient::class);
     }
 
-    private function baseQueryBuilder(?SystemEventRepositoryDTO $systemEventsByTypeRecipient = null): QueryBuilder
+    private function createSystemEventRecipientQueryBuilder(): SystemEventRecipientQueryBuilder
     {
-        $builder = $this->createQueryBuilder('system_event_recipient')
-            ->leftJoin('system_event_recipient.systemEvent', 'systemEvent')
-            ->leftJoin('systemEvent.type', 'type')
-            ->leftJoin('systemEvent.conversation', 'conversation')
-            ->leftJoin('systemEvent.event', 'event')
-            ->leftJoin('systemEvent.owner', 'owner')
-            ->leftJoin('systemEvent.task', 'task')
-            ->leftJoin('systemEvent.work', 'work');
-
-        if ($systemEventsByTypeRecipient !== null) {
-            if ($systemEventsByTypeRecipient->limit !== null) {
-                $builder->setMaxResults($systemEventsByTypeRecipient->limit);
-            }
-
-            if ($systemEventsByTypeRecipient->offset !== null) {
-                $builder->setFirstResult($systemEventsByTypeRecipient->offset);
-            }
-        }
-
-        return $builder;
+        return new SystemEventRecipientQueryBuilder($this->createQueryBuilder('system_event_recipient'));
     }
 
     public function allByRecipient(User $recipient): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('system_event_recipient.recipient = :recipient')
-            ->orderBy('systemEvent.createdAt', Order::Descending->value)
-            ->setParameter('recipient', $recipient);
+        return $this->createSystemEventRecipientQueryBuilder()
+            ->leftJoinAll()
+            ->byRecipient($recipient)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function allUnreadByRecipient(User $recipient): QueryBuilder
     {
-        return $this->baseQueryBuilder()
-            ->where('system_event_recipient.recipient = :recipient')
-            ->andWhere('system_event_recipient.viewed = :viewed')
-            ->orderBy('systemEvent.createdAt', Order::Descending->value)
-            ->setParameter('viewed', false)
-            ->setParameter('recipient', $recipient);
+        return $this->createSystemEventRecipientQueryBuilder()
+            ->leftJoinAll()
+            ->byRecipient($recipient)
+            ->byViewed(false)
+            ->orderByCreatedAt()
+            ->getQueryBuilder();
     }
 
     public function updateViewedAll(User $recipient): void
     {
-        $this->createQueryBuilder('system_event_recipient')
+        $this->createSystemEventRecipientQueryBuilder()
+            ->getQueryBuilder()
             ->update()
             ->set('system_event_recipient.viewed', true)
             ->andWhere('system_event_recipient.recipient = :recipient')
@@ -84,16 +66,16 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
 
     public function systemEventsByStatus(SystemEventRepositoryDTO $systemEventsByTypeRecipient): QueryBuilder
     {
-        $builder = $this->baseQueryBuilder()
-            ->andWhere('system_event_recipient.recipient = :recipient')
-            ->orderBy('systemEvent.createdAt', Order::Descending->value)
-            ->setParameter('recipient', $systemEventsByTypeRecipient->recipient);
+        $builder = $this->createSystemEventRecipientQueryBuilder()
+            ->leftJoinAll()
+            ->byRecipient($systemEventsByTypeRecipient->recipient)
+            ->orderByCreatedAt()
+            ->paginate($systemEventsByTypeRecipient->limit, $systemEventsByTypeRecipient->offset);
 
         if ($systemEventsByTypeRecipient->viewed !== null) {
-            $builder->andWhere('system_event_recipient.viewed = :viewed')
-                ->setParameter('viewed', $systemEventsByTypeRecipient->viewed);
+            $builder = $builder->byViewed($systemEventsByTypeRecipient->viewed);
         }
 
-        return $builder;
+        return $builder->getQueryBuilder();
     }
 }
