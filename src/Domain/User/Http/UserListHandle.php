@@ -67,8 +67,9 @@ readonly class UserListHandle
             $openSearchTab = true;
 
             if ($form->isValid()) {
-                /** @var WorkStatus[] $workStatus */
+                /** @var ArrayCollection<WorkStatus> $workStatus */
                 $workStatus = $form->get('status')->getData();
+                $workStatus = $workStatus->toArray();
             }
         }
 
