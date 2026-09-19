@@ -26,13 +26,18 @@ class WorkCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, WorkCategory::class);
     }
 
+    private function createWorkCategoryQueryBuilder(): WorkCategoryQueryBuilder
+    {
+        return new WorkCategoryQueryBuilder($this->createQueryBuilder('work_category'));
+    }
+
     public function allByOwner(User $user): QueryBuilder
     {
-        return $this->createQueryBuilder('work_category')
-            ->addSelect('works')
-            ->leftJoin('work_category.works', 'works')
-            ->where('work_category.owner = :user')
-            ->orderBy('work_category.name', Order::Ascending->value)
-            ->setParameter('user', $user);
+        return $this->createWorkCategoryQueryBuilder()
+            ->selectWorks()
+            ->leftJoinWorks()
+            ->byOwner($user)
+            ->orderByName(Order::Ascending->value)
+            ->getQueryBuilder();
     }
 }
