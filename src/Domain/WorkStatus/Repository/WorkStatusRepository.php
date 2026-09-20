@@ -12,7 +12,6 @@
 
 namespace App\Domain\WorkStatus\Repository;
 
-use App\Domain\Work\Constant\WorkUserTypeConstant;
 use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -26,6 +25,11 @@ class WorkStatusRepository extends ServiceEntityRepository
         parent::__construct($registry, WorkStatus::class);
     }
 
+    private function createWorkStatusQueryBuilder(): WorkStatusQueryBuilder
+    {
+        return new WorkStatusQueryBuilder($this->createQueryBuilder('work_status'));
+    }
+
     public function baseQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('work_status');
@@ -33,42 +37,14 @@ class WorkStatusRepository extends ServiceEntityRepository
 
     public function countByUser(WorkStatusRepositoryDTO $workStatusData): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('work_status')
-            ->select('work_status.name, COUNT(work.id) as count')
-            ->leftJoin('work_status.works', 'work')
-            ->leftJoin('work.supervisor', 'supervisor')
-            ->where('supervisor = :supervisor')
-            ->setParameter('user', $workStatusData->user)
-            ->setParameter('supervisor', $workStatusData->supervisor)
-            ->groupBy('work_status.name');
-
-        switch ($workStatusData->type) {
-            case WorkUserTypeConstant::AUTHOR->value:
-                $queryBuilder->leftJoin('work.author', 'author')
-                    ->andWhere('author = :user');
-
-                break;
-            case WorkUserTypeConstant::OPPONENT->value:
-                $queryBuilder->leftJoin('work.opponent', 'opponent')
-                    ->andWhere('opponent = :user');
-
-                break;
-            case WorkUserTypeConstant::CONSULTANT->value:
-                $queryBuilder->leftJoin('work.consultant', 'consultant')
-                    ->andWhere('consultant = :user');
-
-                break;
-        }
-
-        $workStatus = $workStatusData->workStatus;
-        if ($workStatus instanceof WorkStatus) {
-            $queryBuilder->andWhere('work_status = :status')
-                ->setParameter('status', $workStatus);
-        } elseif (is_iterable($workStatus)) {
-            $queryBuilder->andWhere($queryBuilder->expr()->in('work_status', ':statuses'))
-                ->setParameter('statuses', $workStatus);
-        }
-
-        return $queryBuilder;
+        return $this->createWorkStatusQueryBuilder()
+            ->selectNameAndCount()
+            ->leftJoinWorks()
+            ->leftJoinSupervisor()
+            ->bySupervisor($workStatusData->supervisor)
+            ->byUserAndType($workStatusData->type, $workStatusData->user)
+            ->byWorkStatusRoot($workStatusData->workStatus)
+            ->groupByName()
+            ->getQueryBuilder();
     }
 }
