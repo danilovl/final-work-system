@@ -59,8 +59,8 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoinParticipantsUser()
             ->leftJoinMessages()
             ->leftJoinMessagesOwner()
-            ->byCallback($callback)
             ->orderByMessagesCreatedAt()
+            ->byCallback($callback)
             ->getQueryBuilder();
     }
 

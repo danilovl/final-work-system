@@ -25,9 +25,9 @@ class SystemEventRepository extends ServiceEntityRepository
         parent::__construct($registry, SystemEvent::class);
     }
 
-    private function createSystemEventBuilder(): SystemEventBuilder
+    private function createSystemEventBuilder(): SystemEventQueryBuilder
     {
-        return new SystemEventBuilder($this->createQueryBuilder('system_event'));
+        return new SystemEventQueryBuilder($this->createQueryBuilder('system_event'));
     }
 
     public function allByRecipient(User $recipient): QueryBuilder

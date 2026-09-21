@@ -13,11 +13,16 @@
 namespace App\Domain\Media\DTO\Repository;
 
 use App\Domain\MediaType\Entity\MediaType;
+use App\Domain\User\Entity\User;
 
 class MediaRepositoryDTO
 {
+    /**
+     * @param User[]|null $users
+     * @param array|null $criteria
+     */
     public function __construct(
-        public mixed $users = null,
+        public ?array $users = null,
         public ?bool $active = null,
         public MediaType|iterable|null $type = null,
         public ?array $criteria = null

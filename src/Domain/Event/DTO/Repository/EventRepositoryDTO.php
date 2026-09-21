@@ -15,6 +15,7 @@ namespace App\Domain\Event\DTO\Repository;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Entity\User;
 use DateTime;
+use InvalidArgumentException;
 
 class EventRepositoryDTO
 {
@@ -24,4 +25,13 @@ class EventRepositoryDTO
         public ?DateTime $endDate = null,
         public ?EventType $eventType = null,
     ) {}
+
+    public function getUserNotNull(): User
+    {
+        if ($this->user === null) {
+            throw new InvalidArgumentException('User is null');
+        }
+
+        return $this->user;
+    }
 }

@@ -16,7 +16,6 @@ use App\Domain\User\Entity\User;
 use App\Domain\Work\Entity\Work;
 use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 use Doctrine\Common\Collections\Order;
-use Doctrine\ORM\QueryBuilder;
 
 class MediaQueryBuilder extends BaseQueryBuilder
 {

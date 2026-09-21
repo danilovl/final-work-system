@@ -12,6 +12,7 @@
 
 namespace App\Domain\SystemEvent\DTO\Repository;
 
+use App\Application\Exception\InvalidArgumentException;
 use App\Domain\User\Entity\User;
 
 class SystemEventRepositoryDTO
@@ -22,4 +23,13 @@ class SystemEventRepositoryDTO
         public ?int $limit = null,
         public ?int $offset = null
     ) {}
+
+     public function getRecipientNotNull(): User
+     {
+         if ($this->recipient === null) {
+             throw new InvalidArgumentException('Recipient is null');
+         }
+
+         return $this->recipient;
+     }
 }

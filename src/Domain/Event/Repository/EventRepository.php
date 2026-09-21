@@ -27,14 +27,13 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    private function createEventQueryBuilder(): EventQueryBuilder
+    public function createEventQueryBuilder(): EventQueryBuilder
     {
-        return new EventQueryBuilder($this->createQueryBuilder('event'));
+        return new EventQueryBuilder($this->baseQueryBuilder());
     }
 
-    private function baseQueryBuilder(): QueryBuilder
+    public function baseQueryBuilder(): QueryBuilder
     {
-        // Preserve method in case it's used elsewhere; align with new QueryBuilder usage
         return $this->createQueryBuilder('event')
             ->leftJoin('event.participant', 'participant')
             ->leftJoin('event.address', 'address');
@@ -43,8 +42,6 @@ class EventRepository extends ServiceEntityRepository
     public function allByWork(Work $work): QueryBuilder
     {
         return $this->createEventQueryBuilder()
-            ->leftJoinParticipant()
-            ->leftJoinAddress()
             ->byParticipantWork($work)
             ->orderByStart(Order::Descending->value)
             ->getQueryBuilder();
@@ -53,12 +50,10 @@ class EventRepository extends ServiceEntityRepository
     public function allByOwner(EventRepositoryDTO $eventData): QueryBuilder
     {
         $builder = $this->createEventQueryBuilder()
-            ->leftJoinParticipant()
-            ->leftJoinAddress()
             ->selectParticipantWorkAddressUser()
             ->leftJoinParticipantWork()
             ->leftJoinParticipantUser()
-            ->byOwner($eventData->user)
+            ->byOwner($eventData->getUserNotNull())
             ->orderByCreatedAt(Order::Descending->value);
 
         if ($eventData->startDate !== null && $eventData->endDate !== null) {
@@ -75,9 +70,7 @@ class EventRepository extends ServiceEntityRepository
     public function allByParticipant(EventRepositoryDTO $eventData): QueryBuilder
     {
         $builder = $this->createEventQueryBuilder()
-            ->leftJoinParticipant()
-            ->leftJoinAddress()
-            ->byParticipantUser($eventData->user)
+            ->byParticipantUser($eventData->getUserNotNull())
             ->groupByEventId();
 
         if ($eventData->startDate !== null && $eventData->endDate !== null) {

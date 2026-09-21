@@ -30,9 +30,9 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
         parent::__construct($registry, ConversationMessageStatus::class);
     }
 
-    private function createConversationMessageStatusQueryBuilder(): ConversationMessageQueryBuilder
+    private function createConversationMessageStatusQueryBuilder(): ConversationMessageStatusQueryBuilder
     {
-        return new ConversationMessageQueryBuilder($this->createQueryBuilder('conversation_message_status'));
+        return new ConversationMessageStatusQueryBuilder($this->createQueryBuilder('conversation_message_status'));
     }
 
     public function allByConversation(
@@ -51,9 +51,9 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
     {
         return $this->createConversationMessageStatusQueryBuilder()
             ->leftJoinMessage()
-            ->byUser($data->user)
-            ->byConversation($data->conversation)
-            ->byType($data->type)
+            ->byUser($data->getUserNotNull())
+            ->byConversation($data->getConversationNotNull())
+            ->byType($data->getTypeNotNull())
             ->orderByMessageCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }

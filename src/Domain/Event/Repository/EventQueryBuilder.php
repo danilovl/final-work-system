@@ -21,20 +21,6 @@ use Doctrine\Common\Collections\Order;
 
 class EventQueryBuilder extends BaseQueryBuilder
 {
-    public function leftJoinParticipant(): self
-    {
-        $this->queryBuilder->leftJoin('event.participant', 'participant');
-
-        return $this;
-    }
-
-    public function leftJoinAddress(): self
-    {
-        $this->queryBuilder->leftJoin('event.address', 'address');
-
-        return $this;
-    }
-
     public function leftJoinParticipantWork(): self
     {
         $this->queryBuilder->leftJoin('participant.work', 'work');
@@ -51,7 +37,6 @@ class EventQueryBuilder extends BaseQueryBuilder
 
     public function selectParticipantWorkAddressUser(): self
     {
-        // Keep the same select string as in original repository to avoid any change in logic
         $this->queryBuilder->addSelect('participant, work, address, user');
 
         return $this;

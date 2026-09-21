@@ -68,7 +68,7 @@ class SystemEventRecipientRepository extends ServiceEntityRepository
     {
         $builder = $this->createSystemEventRecipientQueryBuilder()
             ->leftJoinAll()
-            ->byRecipient($systemEventsByTypeRecipient->recipient)
+            ->byRecipient($systemEventsByTypeRecipient->getRecipientNotNull())
             ->orderByCreatedAt()
             ->paginate($systemEventsByTypeRecipient->limit, $systemEventsByTypeRecipient->offset);
 
