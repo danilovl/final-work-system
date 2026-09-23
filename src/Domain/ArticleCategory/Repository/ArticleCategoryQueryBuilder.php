@@ -23,7 +23,7 @@ class ArticleCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byRoles(iterable $roles): self
+    public function whereByRoles(iterable $roles): self
     {
         $i = 0;
         foreach ($roles as $role) {
@@ -43,7 +43,7 @@ class ArticleCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byActive(bool $active): self
+    public function whereByActive(bool $active): self
     {
         $this->queryBuilder
             ->andWhere('article_category.active = :active')

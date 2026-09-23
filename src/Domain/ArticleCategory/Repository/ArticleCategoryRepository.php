@@ -33,8 +33,8 @@ class ArticleCategoryRepository extends ServiceEntityRepository
     {
         return $this->createArticleCategoryQueryBuilder()
             ->distinct()
-            ->byRoles($roles)
-            ->byActive(true)
+            ->whereByRoles($roles)
+            ->whereByActive(true)
             ->getQueryBuilder();
     }
 }
