@@ -18,7 +18,7 @@ use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 
 class CommentQueryBuilder extends BaseQueryBuilder
 {
-    public function byEvent(Event $event): self
+    public function whereByEvent(Event $event): self
     {
         $this->queryBuilder
             ->andWhere('comment.event = :event')
@@ -27,7 +27,7 @@ class CommentQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byOwner(User $user): self
+    public function whereByOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('comment.owner = :user')

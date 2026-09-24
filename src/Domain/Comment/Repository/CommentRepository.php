@@ -34,8 +34,8 @@ class CommentRepository extends ServiceEntityRepository
     public function allByOwnerEvent(User $user, Event $event): QueryBuilder
     {
         return $this->createCommentQueryBuilder()
-            ->byEvent($event)
-            ->byOwner($user)
+            ->whereByEvent($event)
+            ->whereByOwner($user)
             ->getQueryBuilder();
     }
 }
