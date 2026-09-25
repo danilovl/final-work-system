@@ -81,7 +81,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoinParticipantsUser()
             ->leftJoinMessages()
             ->leftJoinMessagesOwner()
-            ->byIds($ids)
+            ->whereByIds($ids)
             ->orderByMessagesCreatedAt()
             ->getQueryBuilder();
     }
@@ -100,7 +100,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->leftJoinParticipantsUser()
             ->leftJoinMessages()
             ->leftJoinMessagesOwner()
-            ->byWorkAndParticipantUser($work, $user)
+            ->whereByWorkAndParticipantUser($work, $user)
             ->orderByMessagesCreatedAt()
             ->setMaxResultsOne()
             ->getQueryBuilder();

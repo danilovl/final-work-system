@@ -94,7 +94,7 @@ class ConversationQueryBuilder extends BaseQueryBuilder
     /**
      * @param int[] $ids
      */
-    public function byIds(array $ids): self
+    public function whereByIds(array $ids): self
     {
         $this->queryBuilder
             ->andWhere('conversation.id IN (:ids)')
@@ -103,7 +103,7 @@ class ConversationQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byWorkAndParticipantUser(Work $work, User $user): self
+    public function whereByWorkAndParticipantUser(Work $work, User $user): self
     {
         $this->queryBuilder
             ->andWhere('conversation.work = :work')
