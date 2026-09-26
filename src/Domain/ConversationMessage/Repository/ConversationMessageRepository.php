@@ -46,8 +46,8 @@ class ConversationMessageRepository extends ServiceEntityRepository
         return $this->createConversationMessageQueryBuilder()
             ->innerJoinConversation()
             ->leftJoinConversationParticipants()
-            ->byConversationWork($work)
-            ->byParticipantsUser($user)
+            ->whereByConversationWork($work)
+            ->whereByParticipantsUser($user)
             ->orderByCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -59,10 +59,10 @@ class ConversationMessageRepository extends ServiceEntityRepository
         return $this->createConversationMessageQueryBuilder()
             ->selectCountId()
             ->leftJoinStatuses()
-            ->byStatusType($statusType)
-            ->byStatusUser($user)
-            ->byStatusMessageNotNull()
-            ->byStatusConversationNotNull()
+            ->whereByStatusType($statusType)
+            ->whereByStatusUser($user)
+            ->whereByStatusMessageNotNull()
+            ->whereByStatusConversationNotNull()
             ->getQueryBuilder();
     }
 
@@ -72,10 +72,10 @@ class ConversationMessageRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createConversationMessageQueryBuilder()
             ->leftJoinStatuses()
-            ->byStatusType($statusType)
-            ->byStatusUser($user)
-            ->byStatusMessageNotNull()
-            ->byStatusConversationNotNull()
+            ->whereByStatusType($statusType)
+            ->whereByStatusUser($user)
+            ->whereByStatusMessageNotNull()
+            ->whereByStatusConversationNotNull()
             ->orderByCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -87,7 +87,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->selectConversation()
             ->joinOwner()
             ->joinConversation()
-            ->byConversation($conversation)
+            ->whereByConversation($conversation)
             ->orderByCreatedAt(Order::Descending->value);
 
         if ($limit !== null) {
@@ -109,7 +109,7 @@ class ConversationMessageRepository extends ServiceEntityRepository
             ->selectConversation()
             ->joinOwner()
             ->joinConversation()
-            ->byIds($ids)
+            ->whereByIds($ids)
             ->orderByCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -119,13 +119,13 @@ class ConversationMessageRepository extends ServiceEntityRepository
         ConversationMessageStatusType $statusType
     ): QueryBuilder {
         return $this->createConversationMessageQueryBuilder()
-            ->makeDistinct()
+            ->distinct()
             ->selectCountId()
             ->leftJoinStatuses()
-            ->byStatusType($statusType)
-            ->byStatusUser($user)
-            ->byStatusMessageNotNull()
-            ->byStatusConversationNotNull()
+            ->whereByStatusType($statusType)
+            ->whereByStatusUser($user)
+            ->whereByStatusMessageNotNull()
+            ->whereByStatusConversationNotNull()
             ->orderByCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -136,8 +136,8 @@ class ConversationMessageRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createConversationMessageQueryBuilder()
             ->selectMessageOnly()
-            ->byConversation($conversation)
-            ->byCreatedAfter($date)
+            ->whereByConversation($conversation)
+            ->whereByCreatedAfter($date)
             ->orderByCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }

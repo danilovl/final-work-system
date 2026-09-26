@@ -37,7 +37,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byConversationWork(Work $work): self
+    public function whereByConversationWork(Work $work): self
     {
         $this->queryBuilder
             ->andWhere('conversation.work = :work')
@@ -46,7 +46,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byParticipantsUser(User $user): self
+    public function whereByParticipantsUser(User $user): self
     {
         $this->queryBuilder
             ->andWhere('participants.user = :user')
@@ -76,7 +76,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byStatusType(ConversationMessageStatusType $statusType): self
+    public function whereByStatusType(ConversationMessageStatusType $statusType): self
     {
         $this->queryBuilder
             ->andWhere('status.type = :type')
@@ -85,7 +85,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byStatusUser(User $user): self
+    public function whereByStatusUser(User $user): self
     {
         $this->queryBuilder
             ->andWhere('status.user = :user')
@@ -94,14 +94,14 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byStatusMessageNotNull(): self
+    public function whereByStatusMessageNotNull(): self
     {
         $this->queryBuilder->andWhere('status.message IS NOT NULL');
 
         return $this;
     }
 
-    public function byStatusConversationNotNull(): self
+    public function whereByStatusConversationNotNull(): self
     {
         $this->queryBuilder->andWhere('status.conversation IS NOT NULL');
 
@@ -136,7 +136,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byConversation(Conversation $conversation): self
+    public function whereByConversation(Conversation $conversation): self
     {
         $this->queryBuilder
             ->andWhere('conversation_message.conversation = :conversation')
@@ -155,7 +155,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
     /**
      * @param int[] $ids
      */
-    public function byIds(array $ids): self
+    public function whereByIds(array $ids): self
     {
         Assert::allInteger($ids);
 
@@ -166,7 +166,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function makeDistinct(): self
+    public function distinct(): self
     {
         $this->queryBuilder->distinct();
 
@@ -180,7 +180,7 @@ class ConversationMessageQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byCreatedAfter(DateTimeImmutable $date): self
+    public function whereByCreatedAfter(DateTimeImmutable $date): self
     {
         $this->queryBuilder
             ->andWhere('conversation_message.createdAt > :date')
