@@ -41,8 +41,8 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createConversationMessageStatusQueryBuilder()
             ->leftJoinMessage()
-            ->byUser($user)
-            ->byConversation($conversation)
+            ->whereByUser($user)
+            ->whereByConversation($conversation)
             ->orderByMessageCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -51,9 +51,9 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
     {
         return $this->createConversationMessageStatusQueryBuilder()
             ->leftJoinMessage()
-            ->byUser($data->getUserNotNull())
-            ->byConversation($data->getConversationNotNull())
-            ->byType($data->getTypeNotNull())
+            ->whereByUser($data->getUserNotNull())
+            ->whereByConversation($data->getConversationNotNull())
+            ->whereByType($data->getTypeNotNull())
             ->orderByMessageCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -64,8 +64,8 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createConversationMessageStatusQueryBuilder()
             ->leftJoinMessage()
-            ->byUser($user)
-            ->byConversation($conversation)
+            ->whereByUser($user)
+            ->whereByConversation($conversation)
             ->orderByMessageCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -76,8 +76,8 @@ class ConversationMessageStatusRepository extends ServiceEntityRepository
     ): QueryBuilder {
         return $this->createConversationMessageStatusQueryBuilder()
             ->leftJoinMessage()
-            ->byUser($user)
-            ->byMessage($conversationMessage)
+            ->whereByUser($user)
+            ->whereByMessage($conversationMessage)
             ->orderByMessageCreatedAt(Order::Descending->value)
             ->getQueryBuilder();
     }

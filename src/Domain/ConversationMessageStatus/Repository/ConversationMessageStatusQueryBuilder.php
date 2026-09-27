@@ -28,7 +28,7 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUser(User $user): self
+    public function whereByUser(User $user): self
     {
         $this->queryBuilder
             ->andWhere('conversation_message_status.user = :user')
@@ -37,7 +37,7 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byConversation(Conversation $conversation): self
+    public function whereByConversation(Conversation $conversation): self
     {
         $this->queryBuilder
             ->andWhere('conversation_message_status.conversation = :conversation')
@@ -46,7 +46,7 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byType(ConversationMessageStatusType $type): self
+    public function whereByType(ConversationMessageStatusType $type): self
     {
         $this->queryBuilder
             ->andWhere('conversation_message_status.type = :type')
@@ -55,7 +55,7 @@ class ConversationMessageStatusQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMessage(ConversationMessage $conversationMessage): self
+    public function whereByMessage(ConversationMessage $conversationMessage): self
     {
         $this->queryBuilder
             ->andWhere('message = :conversationMessage')
