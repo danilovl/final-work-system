@@ -44,7 +44,7 @@ class EmailNotificationRepository extends ServiceEntityRepository
     public function byUuid(string $uuid): QueryBuilder
     {
         return $this->createEmailNotificationQueryBuilder()
-            ->byUuid($uuid)
+            ->whereByUuid($uuid)
             ->getQueryBuilder();
     }
 }

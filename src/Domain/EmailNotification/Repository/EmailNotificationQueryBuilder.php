@@ -26,7 +26,7 @@ class EmailNotificationQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUuid(string $uuid): self
+    public function whereByUuid(string $uuid): self
     {
         $this->queryBuilder
             ->andWhere('email_notification.uuid = :uuid')
