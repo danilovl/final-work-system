@@ -42,7 +42,7 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byParticipantWork(Work $work): self
+    public function whereByParticipantWork(Work $work): self
     {
         $this->queryBuilder
             ->andWhere('participant.work = :work')
@@ -51,7 +51,7 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byOwner(User $user): self
+    public function whereByOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('event.owner = :owner')
@@ -60,7 +60,7 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byParticipantUser(User $user): self
+    public function whereByParticipantUser(User $user): self
     {
         $this->queryBuilder
             ->andWhere('participant.user = :participant')
@@ -90,7 +90,7 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byBetweenDate(DateTimeInterface $start, DateTimeInterface $end): self
+    public function whereByBetweenDate(DateTimeInterface $start, DateTimeInterface $end): self
     {
         $this->queryBuilder
             ->andWhere($this->queryBuilder->expr()->andX(
@@ -103,7 +103,7 @@ class EventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byEventType(EventType $eventType): self
+    public function whereByEventType(EventType $eventType): self
     {
         $this->queryBuilder
             ->andWhere('event.type = :eventType')

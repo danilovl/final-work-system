@@ -42,7 +42,7 @@ class EventRepository extends ServiceEntityRepository
     public function allByWork(Work $work): QueryBuilder
     {
         return $this->createEventQueryBuilder()
-            ->byParticipantWork($work)
+            ->whereByParticipantWork($work)
             ->orderByStart(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -53,15 +53,15 @@ class EventRepository extends ServiceEntityRepository
             ->selectParticipantWorkAddressUser()
             ->leftJoinParticipantWork()
             ->leftJoinParticipantUser()
-            ->byOwner($eventData->getUserNotNull())
+            ->whereByOwner($eventData->getUserNotNull())
             ->orderByCreatedAt(Order::Descending->value);
 
         if ($eventData->startDate !== null && $eventData->endDate !== null) {
-            $builder = $builder->byBetweenDate($eventData->startDate, $eventData->endDate);
+            $builder = $builder->whereByBetweenDate($eventData->startDate, $eventData->endDate);
         }
 
         if ($eventData->eventType !== null) {
-            $builder = $builder->byEventType($eventData->eventType);
+            $builder = $builder->whereByEventType($eventData->eventType);
         }
 
         return $builder->getQueryBuilder();
@@ -70,15 +70,15 @@ class EventRepository extends ServiceEntityRepository
     public function allByParticipant(EventRepositoryDTO $eventData): QueryBuilder
     {
         $builder = $this->createEventQueryBuilder()
-            ->byParticipantUser($eventData->getUserNotNull())
+            ->whereByParticipantUser($eventData->getUserNotNull())
             ->groupByEventId();
 
         if ($eventData->startDate !== null && $eventData->endDate !== null) {
-            $builder = $builder->byBetweenDate($eventData->startDate, $eventData->endDate);
+            $builder = $builder->whereByBetweenDate($eventData->startDate, $eventData->endDate);
         }
 
         if ($eventData->eventType !== null) {
-            $builder = $builder->byEventType($eventData->eventType);
+            $builder = $builder->whereByEventType($eventData->eventType);
         }
 
         return $builder->getQueryBuilder();
