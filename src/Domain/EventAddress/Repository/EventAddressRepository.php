@@ -38,7 +38,7 @@ class EventAddressRepository extends ServiceEntityRepository
     public function skypeByOwner(User $user): QueryBuilder
     {
         return $this->createEventAddressQueryBuilder()
-            ->skypeByOwner($user)
+            ->whereBySkypeOwner($user)
             ->getQueryBuilder();
     }
 }

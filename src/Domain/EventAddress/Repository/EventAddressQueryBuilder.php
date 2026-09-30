@@ -17,7 +17,7 @@ use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 
 class EventAddressQueryBuilder extends BaseQueryBuilder
 {
-    public function skypeByOwner(User $user): self
+    public function whereBySkypeOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('event_address.skype = :skype')
