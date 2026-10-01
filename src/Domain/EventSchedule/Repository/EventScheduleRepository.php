@@ -38,7 +38,7 @@ class EventScheduleRepository extends ServiceEntityRepository
     public function allByOwner(User $user): QueryBuilder
     {
         return $this->createEventScheduleQueryBuilder()
-            ->byOwner($user)
+            ->whereByOwner($user)
             ->getQueryBuilder();
     }
 }

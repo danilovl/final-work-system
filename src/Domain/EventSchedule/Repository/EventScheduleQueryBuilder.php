@@ -17,7 +17,7 @@ use App\Infrastructure\Persistence\Doctrine\Repository\BaseQueryBuilder;
 
 class EventScheduleQueryBuilder extends BaseQueryBuilder
 {
-    public function byOwner(User $user): self
+    public function whereByOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('event_schedule.owner = :user')
