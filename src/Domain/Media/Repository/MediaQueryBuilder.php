@@ -68,7 +68,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUsers(iterable $users): self
+    public function whereByUsers(iterable $users): self
     {
         $this->queryBuilder
             ->andWhere($this->queryBuilder->expr()->in('media.owner', ':users'))
@@ -77,7 +77,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byNameLike(string $name): self
+    public function whereByNameLike(string $name): self
     {
         $this->queryBuilder
             ->andWhere('media.name LIKE :m_name')
@@ -86,7 +86,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byCategoriesIds(iterable $ids): self
+    public function whereByCategoriesIds(iterable $ids): self
     {
         $this->queryBuilder
             ->andWhere($this->queryBuilder->expr()->in('categories.id', ':c_category'))
@@ -95,7 +95,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMimeTypeIds(iterable $ids): self
+    public function whereByMimeTypeIds(iterable $ids): self
     {
         $this->queryBuilder
             ->andWhere($this->queryBuilder->expr()->in('mime_type.id', ':m_mimeType'))
@@ -104,7 +104,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byType(mixed $type): self
+    public function whereByType(mixed $type): self
     {
         $this->queryBuilder
             ->andWhere('media.type = :type')
@@ -113,7 +113,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byTypeAliasEquals(mixed $type): self
+    public function whereByTypeAliasEquals(mixed $type): self
     {
         $this->queryBuilder
             ->andWhere('type = :type')
@@ -122,7 +122,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byActive(bool $active): self
+    public function whereByActive(bool $active): self
     {
         $this->queryBuilder
             ->andWhere('media.active = :active')
@@ -131,7 +131,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byWork(Work $work): self
+    public function whereByWork(Work $work): self
     {
         $this->queryBuilder
             ->andWhere('media.work = :work')
@@ -140,7 +140,7 @@ class MediaQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byOwner(User $user): self
+    public function whereByOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('media.owner = :user')

@@ -48,31 +48,31 @@ class MediaRepository extends ServiceEntityRepository
             ->orderByCreatedAt();
 
         if ($mediaData->users !== null) {
-            $builder = $builder->byUsers($mediaData->users);
+            $builder = $builder->whereByUsers($mediaData->users);
         }
 
         if ($mediaData->criteria !== null) {
             foreach ($mediaData->criteria as $field => $value) {
                 if ($field === 'name' && !empty($value)) {
-                    $builder = $builder->byNameLike((string) $value);
+                    $builder = $builder->whereByNameLike((string) $value);
                 }
 
                 if ($field === 'categories' && !empty($value)) {
-                    $builder = $builder->byCategoriesIds($value);
+                    $builder = $builder->whereByCategoriesIds($value);
                 }
 
                 if ($field === 'mimeType' && !empty($value)) {
-                    $builder = $builder->byMimeTypeIds($value);
+                    $builder = $builder->whereByMimeTypeIds($value);
                 }
             }
         }
 
         if ($mediaData->type !== null) {
-            $builder = $builder->byType($mediaData->type);
+            $builder = $builder->whereByType($mediaData->type);
         }
 
         if ($mediaData->active) {
-            $builder = $builder->byActive($mediaData->active);
+            $builder = $builder->whereByActive($mediaData->active);
         }
 
         return $builder->getQueryBuilder();
@@ -81,7 +81,7 @@ class MediaRepository extends ServiceEntityRepository
     public function allByWork(Work $work): QueryBuilder
     {
         return $this->createMediaBuilder()
-            ->byWork($work)
+            ->whereByWork($work)
             ->orderByCreatedAt()
             ->getQueryBuilder();
     }
@@ -89,11 +89,11 @@ class MediaRepository extends ServiceEntityRepository
     public function allByUser(User $user, ?MediaType $type = null): QueryBuilder
     {
         $builder = $this->createMediaBuilder()
-            ->byOwner($user)
+            ->whereByOwner($user)
             ->orderByCreatedAt();
 
         if ($type !== null) {
-            $builder = $builder->joinType()->selectType()->byTypeAliasEquals($type);
+            $builder = $builder->joinType()->selectType()->whereByTypeAliasEquals($type);
         }
 
         return $builder->getQueryBuilder();
@@ -102,7 +102,7 @@ class MediaRepository extends ServiceEntityRepository
     public function allByType(MediaType $mediaType): QueryBuilder
     {
         return $this->createMediaBuilder()
-            ->byType($mediaType)
+            ->whereByType($mediaType)
             ->getQueryBuilder();
     }
 }
