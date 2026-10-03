@@ -35,7 +35,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
         return $this->createMediaCategoryQueryBuilder()
             ->selectMedias()
             ->leftJoinMedias()
-            ->byOwner($user)
+            ->whereByOwner($user)
             ->orderByName()
             ->getQueryBuilder();
     }
@@ -43,7 +43,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
     public function allByOwners(iterable $users): QueryBuilder
     {
         return $this->createMediaCategoryQueryBuilder()
-            ->byOwners($users)
+            ->whereByOwners($users)
             ->orderByCreatedAt()
             ->getQueryBuilder();
     }
@@ -52,7 +52,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
     {
         return $this->createMediaCategoryQueryBuilder()
             ->leftJoinMedias()
-            ->byMediaOwner($user)
+            ->whereByMediaOwner($user)
             ->orderByCreatedAt()
             ->getQueryBuilder();
     }
@@ -61,7 +61,7 @@ class MediaCategoryRepository extends ServiceEntityRepository
     {
         return $this->createMediaCategoryQueryBuilder()
             ->leftJoinMedias()
-            ->byMediaOwners($users)
+            ->whereByMediaOwners($users)
             ->orderByCreatedAt()
             ->getQueryBuilder();
     }

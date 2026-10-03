@@ -46,7 +46,7 @@ class MediaCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byOwner(User $user): self
+    public function whereByOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('media_category.owner = :user')
@@ -55,7 +55,7 @@ class MediaCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byOwners(iterable $users): self
+    public function whereByOwners(iterable $users): self
     {
         $this->queryBuilder
             ->andWhere('media_category.owner IN(:users)')
@@ -64,7 +64,7 @@ class MediaCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMediaOwner(User $user): self
+    public function whereByMediaOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('medias.owner = :user')
@@ -73,7 +73,7 @@ class MediaCategoryQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMediaOwners(iterable $users): self
+    public function whereByMediaOwners(iterable $users): self
     {
         $this->queryBuilder
             ->andWhere('medias.owner IN(:users)')
