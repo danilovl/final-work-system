@@ -39,16 +39,16 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
             ->leftJoinMedias();
 
         if (is_iterable($user)) {
-            $builder = $builder->byMediaOwners($user);
+            $builder = $builder->whereByMediaOwners($user);
         } else {
-            $builder = $builder->byMediaOwner($user);
+            $builder = $builder->whereByMediaOwner($user);
         }
 
         if ($mediaType !== null) {
             if (is_iterable($mediaType)) {
-                $builder = $builder->byMediaTypes($mediaType);
+                $builder = $builder->whereByMediaTypes($mediaType);
             } else {
-                $builder = $builder->byMediaType($mediaType);
+                $builder = $builder->whereByMediaType($mediaType);
             }
         }
 
@@ -58,7 +58,7 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
     public function byName(string $name): QueryBuilder
     {
         return $this->createMediaMimeTypeQueryBuilder()
-            ->byName($name)
+            ->whereByName($name)
             ->getQueryBuilder();
     }
 
@@ -66,7 +66,7 @@ class MediaMimeTypeRepository extends ServiceEntityRepository
     {
         return $this->createMediaMimeTypeQueryBuilder('media_mime_type.name')
             ->selectName()
-            ->byActive(true)
+            ->whereByActive(true)
             ->getQueryBuilder();
     }
 }

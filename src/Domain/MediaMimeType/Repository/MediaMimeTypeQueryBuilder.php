@@ -25,7 +25,7 @@ class MediaMimeTypeQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMediaOwner(User $user): self
+    public function whereByMediaOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('medias.owner = :user')
@@ -34,7 +34,7 @@ class MediaMimeTypeQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMediaOwners(iterable $users): self
+    public function whereByMediaOwners(iterable $users): self
     {
         $this->queryBuilder
             ->andWhere('medias.owner IN(:user)')
@@ -43,7 +43,7 @@ class MediaMimeTypeQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMediaType(MediaType|int $mediaType): self
+    public function whereByMediaType(MediaType|int $mediaType): self
     {
         $this->queryBuilder
             ->andWhere('medias.type = :mediaType')
@@ -52,7 +52,7 @@ class MediaMimeTypeQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byMediaTypes(iterable $mediaTypes): self
+    public function whereByMediaTypes(iterable $mediaTypes): self
     {
         $this->queryBuilder
             ->andWhere('medias.type IN(:mediaType)')
@@ -61,7 +61,7 @@ class MediaMimeTypeQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byName(string $name): self
+    public function whereByName(string $name): self
     {
         $this->queryBuilder
             ->andWhere('media_mime_type.name = :name')
@@ -77,7 +77,7 @@ class MediaMimeTypeQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byActive(bool $active): self
+    public function whereByActive(bool $active): self
     {
         $this->queryBuilder
             ->andWhere('media_mime_type.active = :active')
