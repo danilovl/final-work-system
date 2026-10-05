@@ -44,14 +44,14 @@ class ResetPasswordRepository extends ServiceEntityRepository
     public function byToken(string $token): QueryBuilder
     {
         return $this->createResetPasswordBuilder()
-            ->byToken($token)
+            ->whereByToken($token)
             ->getQueryBuilder();
     }
 
     public function mostRecentNonExpiredRequestDate(User $user): QueryBuilder
     {
         return $this->createResetPasswordBuilder()
-            ->byUser($user)
+            ->whereByUser($user)
             ->orderByCreatedAt()
             ->limit(1)
             ->getQueryBuilder();

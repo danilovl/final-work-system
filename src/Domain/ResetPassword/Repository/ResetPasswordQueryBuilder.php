@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Order;
 
 class ResetPasswordQueryBuilder extends BaseQueryBuilder
 {
-    public function byToken(string $token): self
+    public function whereByToken(string $token): self
     {
         $this->queryBuilder
             ->andWhere('reset_password.hashedToken = :token')
@@ -27,7 +27,7 @@ class ResetPasswordQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUser(User $user): self
+    public function whereByUser(User $user): self
     {
         $this->queryBuilder
             ->andWhere('reset_password.user = :user')
