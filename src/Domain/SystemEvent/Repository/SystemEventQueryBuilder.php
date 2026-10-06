@@ -46,7 +46,7 @@ class SystemEventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byRecipient(User $recipient): self
+    public function whereByRecipient(User $recipient): self
     {
         $this->queryBuilder
             ->where('recipient.recipient = :recipient')
@@ -55,7 +55,7 @@ class SystemEventQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byRecipientViewed(bool $viewed): self
+    public function whereByRecipientViewed(bool $viewed): self
     {
         $this->queryBuilder
             ->andWhere('recipient.viewed = :viewed')
