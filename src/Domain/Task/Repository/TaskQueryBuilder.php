@@ -97,7 +97,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byWork(Work $work): self
+    public function whereByWork(Work $work): self
     {
         $this->queryBuilder
             ->andWhere('task.work = :work')
@@ -109,7 +109,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
     /**
      * @param Work[] $works
      */
-    public function byWorks(array $works): self
+    public function whereByWorks(array $works): self
     {
         Assert::allIsInstanceOf($works, Work::class);
 
@@ -120,7 +120,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byOwner(User $user): self
+    public function whereByOwner(User $user): self
     {
         $this->queryBuilder
             ->andWhere('task.owner = :user')
@@ -129,7 +129,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byActive(bool $active): self
+    public function whereByActive(bool $active): self
     {
         $this->queryBuilder
             ->andWhere('task.active = :active')
@@ -138,7 +138,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byComplete(bool $isComplete): self
+    public function whereByComplete(bool $isComplete): self
     {
         $this->queryBuilder
             ->andWhere('task.complete = :isComplete')
@@ -147,7 +147,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byNotifyComplete(bool $isComplete): self
+    public function whereByNotifyComplete(bool $isComplete): self
     {
         $this->queryBuilder
             ->andWhere('task.notifyComplete = :notifyComplete')
@@ -159,7 +159,7 @@ class TaskQueryBuilder extends BaseQueryBuilder
     /**
      * @param int[] $ids
      */
-    public function byIds(array $ids): self
+    public function whereByIds(array $ids): self
     {
         Assert::allInteger($ids);
 

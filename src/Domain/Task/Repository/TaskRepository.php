@@ -49,7 +49,7 @@ class TaskRepository extends ServiceEntityRepository
             ->joinWorkStatus()
             ->joinWorkTypes()
             ->joinWorkAuthor()
-            ->byOwner($user)
+            ->whereByOwner($user)
             ->orderByCreatedAt()
             ->getQueryBuilder();
     }
@@ -63,7 +63,7 @@ class TaskRepository extends ServiceEntityRepository
 
         return $this->createTaskQueryBuilder()
             ->joinWork()
-            ->byIds($ids)
+            ->whereByIds($ids)
             ->orderByCreatedAt()
             ->getQueryBuilder();
     }
@@ -72,10 +72,10 @@ class TaskRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createTaskQueryBuilder()
             ->joinWork()
-            ->byWork($work);
+            ->whereByWork($work);
 
         if ($active === true) {
-            $queryBuilder = $queryBuilder->byActive($active);
+            $queryBuilder = $queryBuilder->whereByActive($active);
         }
 
         return $queryBuilder->getQueryBuilder();
@@ -88,7 +88,7 @@ class TaskRepository extends ServiceEntityRepository
         };
 
         return $this->createTaskQueryBuilder()
-            ->byOwner($user)
+            ->whereByOwner($user)
             ->orderByDeadline()
             ->byCallback($callback)
             ->getQueryBuilder();
@@ -97,8 +97,8 @@ class TaskRepository extends ServiceEntityRepository
     public function allByOwnerComplete(User $user, bool $isComplete): QueryBuilder
     {
         return $this->createTaskQueryBuilder()
-            ->byOwner($user)
-            ->byComplete($isComplete)
+            ->whereByOwner($user)
+            ->whereByComplete($isComplete)
             ->getQueryBuilder();
     }
 
@@ -111,8 +111,8 @@ class TaskRepository extends ServiceEntityRepository
         };
 
         return $this->createTaskQueryBuilder()
-            ->byOwner($user)
-            ->byComplete($isComplete)
+            ->whereByOwner($user)
+            ->whereByComplete($isComplete)
             ->byCallback($callback)
             ->getQueryBuilder();
     }
@@ -129,9 +129,9 @@ class TaskRepository extends ServiceEntityRepository
         return $this->createTaskQueryBuilder()
             ->joinWork()
             ->joinStatus()
-            ->byActive(true)
-            ->byComplete(false)
-            ->byNotifyComplete(false)
+            ->whereByActive(true)
+            ->whereByComplete(false)
+            ->whereByNotifyComplete(false)
             ->byCallback($callback)
             ->getQueryBuilder();
     }
@@ -146,12 +146,12 @@ class TaskRepository extends ServiceEntityRepository
         $queryBuilder = $this->createTaskQueryBuilder()
             ->selectWork()
             ->joinWork()
-            ->byWorks($works)
+            ->whereByWorks($works)
             ->orderByCreatedAt()
             ->orderByDeadline();
 
         if ($active === true) {
-            $queryBuilder = $queryBuilder->byActive($active);
+            $queryBuilder = $queryBuilder->whereByActive($active);
         }
 
         return $queryBuilder->getQueryBuilder();
