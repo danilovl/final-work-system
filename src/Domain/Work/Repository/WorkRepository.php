@@ -43,7 +43,7 @@ class WorkRepository extends ServiceEntityRepository
         return $this->createWorkQueryBuilder()
             ->selectDistinctDeadline()
             ->leftJoinSupervisor()
-            ->bySupervisor($user)
+            ->whereBySupervisor($user)
             ->orderByDeadline(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -53,8 +53,8 @@ class WorkRepository extends ServiceEntityRepository
         return $this->createWorkQueryBuilder()
             ->selectDistinctProgramDeadline()
             ->leftJoinSupervisor()
-            ->bySupervisor($user)
-            ->andWhereProgramDeadlineNotNull()
+            ->whereBySupervisor($user)
+            ->whereProgramDeadlineNotNull()
             ->orderByProgramDeadline(Order::Descending->value)
             ->getQueryBuilder();
     }
@@ -68,12 +68,12 @@ class WorkRepository extends ServiceEntityRepository
         if ($workData->supervisor !== null) {
             $builder = $builder
                 ->leftJoinSupervisor()
-                ->bySupervisorFilter($workData->supervisor);
+                ->whereBySupervisorFilter($workData->supervisor);
         }
 
         $builder = $builder
-            ->byUserAndType($workData->type, $workData->user)
-            ->byWorkStatus($workData->workStatus);
+            ->whereByUserAndType($workData->type, $workData->user)
+            ->whereByWorkStatus($workData->workStatus);
 
         return $builder->getQueryBuilder();
     }

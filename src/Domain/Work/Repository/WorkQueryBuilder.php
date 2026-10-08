@@ -76,7 +76,7 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function bySupervisor(User $user): self
+    public function whereBySupervisor(User $user): self
     {
         $this->queryBuilder
             ->andWhere('supervisor.id = :userId')
@@ -85,7 +85,7 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function bySupervisorFilter(User $supervisor): self
+    public function whereBySupervisorFilter(User $supervisor): self
     {
         $this->queryBuilder
             ->andWhere('supervisor.id = :supervisorId')
@@ -94,7 +94,7 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byUserAndType(?string $type, ?User $user): self
+    public function whereByUserAndType(?string $type, ?User $user): self
     {
         if ($type === null || $user === null) {
             return $this;
@@ -130,7 +130,7 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function byWorkStatus(WorkStatus|iterable|null $workStatus): self
+    public function whereByWorkStatus(WorkStatus|iterable|null $workStatus): self
     {
         if ($workStatus instanceof WorkStatus) {
             $this->queryBuilder
@@ -145,7 +145,7 @@ class WorkQueryBuilder extends BaseQueryBuilder
         return $this;
     }
 
-    public function andWhereProgramDeadlineNotNull(): self
+    public function whereProgramDeadlineNotNull(): self
     {
         $this->queryBuilder->andWhere('work.deadlineProgram is NOT NULL');
 
