@@ -100,13 +100,11 @@ readonly class ConversationMessageFacade
      */
     public function getMessagesByConversation(Conversation $conversation, int $limit): array
     {
-        /** @var array $result */
+        /** @var ConversationMessage[] $result */
         $result = $this->conversationMessageRepository
             ->allByConversation($conversation, $limit)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, ConversationMessage::class);
 
         return $result;
     }
@@ -150,10 +148,8 @@ readonly class ConversationMessageFacade
             $conversationMessage->setMaxResults($limit);
         }
 
-        /** @var array $result */
+        /** @var ConversationMessage[] $result */
         $result = $conversationMessage->getQuery()->getResult();
-
-        Assert::allIsInstanceOf($result, ConversationMessage::class);
 
         return $result;
     }
@@ -201,13 +197,11 @@ readonly class ConversationMessageFacade
         Conversation $conversation,
         DateTimeImmutable $date
     ): array {
-        /** @var array $result */
+        /** @var ConversationMessage[] $result */
         $result = $this->conversationMessageRepository
             ->allByConversationAfterDate($conversation, $date)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, ConversationMessage::class);
 
         return $result;
     }
