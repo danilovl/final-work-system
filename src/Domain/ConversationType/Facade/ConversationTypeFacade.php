@@ -14,7 +14,6 @@ namespace App\Domain\ConversationType\Facade;
 
 use App\Domain\ConversationType\Entity\ConversationType;
 use App\Domain\ConversationType\Repository\ConversationTypeRepository;
-use Webmozart\Assert\Assert;
 
 readonly class ConversationTypeFacade
 {
@@ -25,10 +24,8 @@ readonly class ConversationTypeFacade
      */
     public function list(): array
     {
-        /** @var array $result */
+        /** @var ConversationType[] $result */
         $result = $this->conversationTypeRepository->findAll();
-
-        Assert::allIsInstanceOf($result, ConversationType::class);
 
         return $result;
     }
