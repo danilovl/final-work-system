@@ -16,7 +16,6 @@ use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Event\Repository\EventRepository;
 use Doctrine\ORM\Query;
-use Webmozart\Assert\Assert;
 
 readonly class EventFacade
 {
@@ -35,13 +34,11 @@ readonly class EventFacade
      */
     public function listEventsByOwner(EventRepositoryDTO $eventData): array
     {
-        /** @var array $result */
+        /** @var Event[] $result */
         $result = $this->eventRepository
             ->allByOwner($eventData)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, Event::class);
 
         return $result;
     }
@@ -58,13 +55,11 @@ readonly class EventFacade
      */
     public function listByParticipant(EventRepositoryDTO $eventData): array
     {
-        /** @var array $result */
+        /** @var Event[] $result */
         $result = $this->eventRepository
             ->allByParticipant($eventData)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, Event::class);
 
         return $result;
     }
