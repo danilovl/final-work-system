@@ -14,7 +14,6 @@ namespace App\Domain\Media\Facade;
 
 use App\Domain\MediaType\Entity\MediaType;
 use App\Domain\MediaType\Repository\MediaTypeRepository;
-use Webmozart\Assert\Assert;
 
 readonly class MediaTypeFacade
 {
@@ -33,10 +32,8 @@ readonly class MediaTypeFacade
      */
     public function list(): array
     {
-        /** @var array $result */
+        /** @var MediaType[] $result */
         $result = $this->mediaTypeRepository->findAll();
-
-        Assert::allIsInstanceOf($result, MediaType::class);
 
         return $result;
     }
