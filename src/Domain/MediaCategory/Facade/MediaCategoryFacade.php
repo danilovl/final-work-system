@@ -16,7 +16,6 @@ use App\Domain\MediaCategory\Entity\MediaCategory;
 use App\Domain\MediaCategory\Repository\MediaCategoryRepository;
 use Doctrine\ORM\Query;
 use App\Domain\User\Entity\User;
-use Webmozart\Assert\Assert;
 
 readonly class MediaCategoryFacade
 {
@@ -34,13 +33,11 @@ readonly class MediaCategoryFacade
      */
     public function listByOwner(User $user): array
     {
-        /** @var array $result */
+        /** @var MediaCategory[] $result */
         $result = $this->mediaCategoryRepository
             ->allByOwner($user)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, MediaCategory::class);
 
         return $result;
     }
@@ -50,13 +47,11 @@ readonly class MediaCategoryFacade
      */
     public function listByOwners(iterable $users): array
     {
-        /** @var array $result */
+        /** @var MediaCategory[] $result */
         $result = $this->mediaCategoryRepository
             ->allByOwners($users)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, MediaCategory::class);
 
         return $result;
     }
