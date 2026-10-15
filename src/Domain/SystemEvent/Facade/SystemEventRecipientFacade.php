@@ -17,7 +17,6 @@ use App\Domain\SystemEventRecipient\Entity\SystemEventRecipient;
 use App\Domain\SystemEventRecipient\Repository\SystemEventRecipientRepository;
 use App\Domain\User\Entity\User;
 use Doctrine\ORM\Query;
-use Webmozart\Assert\Assert;
 
 readonly class SystemEventRecipientFacade
 {
@@ -42,10 +41,8 @@ readonly class SystemEventRecipientFacade
             $systemEvents->setMaxResults($limit);
         }
 
-        /** @var array $result */
+        /** @var SystemEventRecipient[] $result */
         $result = $systemEvents->getQuery()->getResult();
-
-        Assert::allIsInstanceOf($result, SystemEventRecipient::class);
 
         return $result;
     }
