@@ -15,7 +15,6 @@ namespace App\Domain\WorkStatus\Facade;
 use App\Domain\WorkStatus\DTO\Repository\WorkStatusRepositoryDTO;
 use App\Domain\WorkStatus\Entity\WorkStatus;
 use App\Domain\WorkStatus\Repository\WorkStatusRepository;
-use Webmozart\Assert\Assert;
 
 readonly class WorkStatusFacade
 {
@@ -34,14 +33,12 @@ readonly class WorkStatusFacade
      */
     public function list(?int $limit = null): array
     {
-        /** @var array $result */
+        /** @var WorkStatus[] $result */
         $result = $this->workStatusRepository
             ->baseQueryBuilder()
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
-
-        Assert::allIsInstanceOf($result, WorkStatus::class);
 
         return $result;
     }
