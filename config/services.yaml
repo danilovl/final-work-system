@@ -99,3 +99,9 @@ services:
     App\Application\Interfaces\Bus\QueryHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
+
+  Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapper:
+    arguments:
+      $container: '@service_container'
+
+  Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface: '@Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapper'

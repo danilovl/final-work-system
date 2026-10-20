@@ -25,6 +25,7 @@
         "danilovl/cache-response-bundle": "^0.7.1",
         "danilovl/doctrine-entity-dto-bundle": "^0.2.3",
         "danilovl/hashids-bundle": "^1.7.2",
+        "danilovl/object-dto-mapper": "^0.0.1",
         "danilovl/object-to-array-transform-bundle": "^3.5.7",
         "danilovl/parameter-bundle": "^4.4.5",
         "danilovl/permission-middleware-bundle": "^2.7.8",

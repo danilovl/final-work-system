@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9d3b62db5451bb553b6a15836bbac72",
+    "content-hash": "6cfc5c809f36b3326d650476f1d6a7c1",
     "packages": [
         {
             "name": "api-platform/core",
@@ -919,6 +919,60 @@
                 "source": "https://github.com/danilovl/hashids-bundle/tree/v1.7.2"
             },
             "time": "2024-11-24T13:03:05+00:00"
+        },
+        {
+            "name": "danilovl/object-dto-mapper",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danilovl/object-dto-mapper.git",
+                "reference": "de3452c33c0e9ec30872df63de275136e9bfc9c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danilovl/object-dto-mapper/zipball/de3452c33c0e9ec30872df63de275136e9bfc9c9",
+                "reference": "de3452c33c0e9ec30872df63de275136e9bfc9c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "symfony/property-access": "^7.0",
+                "symfony/serializer": "^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.86",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.0.1",
+                "phpstan/phpstan-symfony": "^2.0.0",
+                "phpunit/phpunit": "^10.2"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Danilovl\\ObjectDtoMapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Danilov"
+                }
+            ],
+            "description": "Mapper that converts an object to a DTO.",
+            "keywords": [
+                "dto",
+                "object mapper",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/danilovl/object-dto-mapper/issues",
+                "source": "https://github.com/danilovl/object-dto-mapper/tree/v0.0.1"
+            },
+            "time": "2025-09-14T07:56:07+00:00"
         },
         {
             "name": "danilovl/object-to-array-transform-bundle",
