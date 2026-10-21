@@ -13,7 +13,7 @@
 namespace App\Domain\Conversation\Http\Api;
 
 use App\Application\Interfaces\Bus\QueryBusInterface;
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\Bus\Query\ConversationList\{
     GetConversationListQuery,
     GetConversationListQueryResult
@@ -37,7 +37,7 @@ readonly class ConversationListHandle
     public function __construct(
         private UserService $userService,
         private QueryBusInterface $queryBus,
-        private ObjectToDtoMapper $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
         private ConversationService $conversationService
     ) {}
 

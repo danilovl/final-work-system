@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\Entity\Conversation;
 use App\Domain\Conversation\Facade\ConversationMessageFacade;
 use App\Domain\ConversationMessage\DTO\Api\ConversationMessageDetailDTO;
@@ -33,7 +33,7 @@ readonly class ConversationMessageListHandle
     public function __construct(
         private UserService $userService,
         private ConversationMessageFacade $conversationMessageFacade,
-        private ObjectToDtoMapper $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
         private PaginatorService $paginatorService,
         private ElasticaConversationMessageRepository $elasticaConversationMessageRepository
     ) {}

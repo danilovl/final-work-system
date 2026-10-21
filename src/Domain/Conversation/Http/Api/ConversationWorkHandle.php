@@ -12,7 +12,7 @@
 
 namespace App\Domain\Conversation\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Conversation\DTO\Api\ConversationDTO;
 use App\Domain\Conversation\Facade\ConversationFacade;
 use App\Domain\ConversationParticipant\DTO\Api\ParticipantDTO;
@@ -33,7 +33,7 @@ readonly class ConversationWorkHandle
     public function __construct(
         private UserService $userService,
         private ConversationFacade $conversationFacade,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse
@@ -66,8 +66,8 @@ readonly class ConversationWorkHandle
         $workDto = null;
         if ($conversation->getWork() !== null) {
             $workDto = $this->objectToDtoMapper->map(
-                entity: $conversation->getWork(),
-                dtoClass: WorkDTO::class,
+                $conversation->getWork(),
+                WorkDTO::class,
                 ignoreGroups: ['user:read:author', 'user:read:supervisor', 'user:read:opponent', 'user:read:consultant']
             );
         }
