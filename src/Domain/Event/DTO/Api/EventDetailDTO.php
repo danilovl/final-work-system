@@ -12,12 +12,12 @@
 
 namespace App\Domain\Event\DTO\Api;
 
-use App\Application\Mapper\Attribute\MapToDto;
 use App\Domain\EventType\DTO\Api\EventTypeDTO;
 use App\Domain\User\DTO\Api\UserDTO;
 use App\Domain\EventAddress\DTO\Api\EventAddressDTO;
 use App\Domain\EventParticipant\DTO\Api\EventParticipantDTO;
 use App\Domain\Comment\DTO\Api\CommentDTO;
+use Danilovl\ObjectDtoMapper\Attribute\Map;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 readonly class EventDetailDTO
@@ -39,7 +39,7 @@ readonly class EventDetailDTO
         public ?EventAddressDTO $address = null,
         #[Groups(['event:event-participant:read'])]
         public ?EventParticipantDTO $participant = null,
-        #[MapToDto(CommentDTO::class)]
+        #[Map(target: CommentDTO::class)]
         #[Groups(['event:comment:read'])]
         public array $comment = []
     ) {}

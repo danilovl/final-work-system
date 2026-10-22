@@ -12,19 +12,19 @@
 
 namespace App\Domain\Event\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Event\DTO\Api\EventDetailDTO;
 use App\Domain\Event\Entity\Event;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class EventDetailHandler
 {
-    public function __construct(private ObjectToDtoMapper $objectToDtoMapper) {}
+    public function __construct(private ObjectToDtoMapperInterface $objectToDtoMapper) {}
 
     public function __invoke(Event $event): JsonResponse
     {
         $ignoreAttributes = ['user:read:author', 'user:read:supervisor', 'user:read:opponent', 'user:read:consultant'];
-        $eventDetailDTO = $this->objectToDtoMapper->map($event, EventDetailDTO::class, $ignoreAttributes);
+        $eventDetailDTO = $this->objectToDtoMapper->map($event, EventDetailDTO::class, ignoreGroups: $ignoreAttributes);
 
         return new JsonResponse($eventDetailDTO);
     }

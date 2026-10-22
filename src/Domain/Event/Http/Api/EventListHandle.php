@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\Entity\Event;
 use App\Domain\Work\Service\WorkDetailTabService;
@@ -27,7 +27,7 @@ readonly class EventListHandle
 {
     public function __construct(
         private WorkDetailTabService $workDetailTabService,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request, Work $work): JsonResponse

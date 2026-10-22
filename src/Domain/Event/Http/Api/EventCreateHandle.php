@@ -21,7 +21,7 @@ use App\Domain\Event\Model\EventModel;
 use App\Domain\EventAddress\Entity\EventAddress;
 use App\Domain\EventType\Entity\EventType;
 use App\Domain\User\Service\UserService;
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 readonly class EventCreateHandle
@@ -30,7 +30,7 @@ readonly class EventCreateHandle
         private EntityManagerService $entityManagerService,
         private UserService $userService,
         private EventFactory $eventFactory,
-        private ObjectToDtoMapper $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
         private EventEventDispatcher $eventEventDispatcher
     ) {}
 

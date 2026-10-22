@@ -12,7 +12,7 @@
 
 namespace App\Domain\Event\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Event\DTO\Api\EventDTO;
 use App\Domain\Event\DTO\Api\Output\EventListOwnerOutput;
 use App\Domain\Event\DTO\Repository\EventRepositoryDTO;
@@ -28,7 +28,7 @@ readonly class EventListOwnerHandle
         private UserService $userService,
         private EventFacade $eventFacade,
         private PaginatorService $paginatorService,
-        private ObjectToDtoMapper $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
     ) {}
 
     public function __invoke(Request $request): EventListOwnerOutput
