@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Infrastructure\Service\EntityManagerService;
 use App\Domain\User\Service\{
     UserService,
@@ -30,7 +30,7 @@ readonly class EventCalendarUserReservationWorksHandle
         private EntityManagerService $entityManagerService,
         private UserService $userService,
         private UserWorkService $userWorkService,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(): JsonResponse

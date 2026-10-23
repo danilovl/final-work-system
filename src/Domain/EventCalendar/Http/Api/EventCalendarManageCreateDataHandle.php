@@ -12,7 +12,7 @@
 
 namespace App\Domain\EventCalendar\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\EventAddress\DTO\Api\EventAddressDTO;
 use App\Domain\EventCalendar\DTO\Api\Output\EventCalendarManageCreateDataOutput;
 use App\Domain\EventParticipant\DTO\Api\EventParticipantDTO;
@@ -37,7 +37,7 @@ readonly class EventCalendarManageCreateDataHandle
         private EntityManagerService $entityManagerService,
         private UserService $userService,
         private UserWorkService $userWorkService,
-        private ObjectToDtoMapper $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
         private EventTypeFacade $eventTypeFacade
     ) {}
 
