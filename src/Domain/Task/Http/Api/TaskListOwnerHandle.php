@@ -12,7 +12,7 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Task\DTO\Api\Output\TaskListOwnerOutput;
 use App\Domain\Task\DTO\Api\TaskDTO;
@@ -27,7 +27,7 @@ readonly class TaskListOwnerHandle
         private UserService $userService,
         private TaskFacade $taskFacade,
         private PaginatorService $paginatorService,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request): TaskListOwnerOutput

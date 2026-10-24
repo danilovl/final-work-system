@@ -12,20 +12,20 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\Task\DTO\Api\TaskDTO;
 use App\Domain\Task\Entity\Task;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 readonly class TaskDetailHandle
 {
-    public function __construct(private ObjectToDtoMapper $objectToDtoMapper) {}
+    public function __construct(private ObjectToDtoMapperInterface $objectToDtoMapper) {}
 
     public function __invoke(Task $task): JsonResponse
     {
         $ignoreAttributes = ['user:read:author', 'user:read:supervisor', 'user:read:opponent', 'user:read:consultant'];
         /** @var TaskDTO $result */
-        $result = $this->objectToDtoMapper->map($task, TaskDTO::class, $ignoreAttributes);
+        $result = $this->objectToDtoMapper->map($task, TaskDTO::class, ignoreGroups: $ignoreAttributes);
 
         return new JsonResponse($result);
     }

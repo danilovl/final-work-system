@@ -12,7 +12,6 @@
 
 namespace App\Domain\Task\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
 use App\Infrastructure\Service\PaginatorService;
 use App\Domain\Task\DTO\Api\Output\TaskListSolverOutput;
 use App\Domain\Task\DTO\Api\TaskDTO;
@@ -20,6 +19,7 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\Task\Facade\TaskFacade;
 use App\Domain\User\Service\UserService;
 use App\Domain\Work\Entity\Work;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 readonly class TaskListSolverHandle
@@ -28,7 +28,7 @@ readonly class TaskListSolverHandle
         private UserService $userService,
         private TaskFacade $taskFacade,
         private PaginatorService $paginatorService,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(Request $request): TaskListSolverOutput
