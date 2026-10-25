@@ -13,8 +13,8 @@
 namespace App\Domain\User\Http\Api;
 
 use App\Application\Interfaces\Bus\QueryBusInterface;
-use App\Application\Mapper\ObjectToDtoMapper;
 use App\Domain\User\Entity\User;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\User\Bus\Query\UserList\{
     GetUserListQuery,
     GetUserListQueryResult
@@ -37,7 +37,7 @@ readonly class UserListHandle
         private UserService $userService,
         private WorkFacade $workFacade,
         private QueryBusInterface $queryBus,
-        private ObjectToDtoMapper $objectToDtoMapper,
+        private ObjectToDtoMapperInterface $objectToDtoMapper,
     ) {}
 
     public function __invoke(Request $request, string $type): JsonResponse

@@ -12,7 +12,7 @@
 
 namespace App\Domain\User\Http\Api;
 
-use App\Application\Mapper\ObjectToDtoMapper;
+use Danilovl\ObjectDtoMapper\Service\ObjectToDtoMapperInterface;
 use App\Domain\User\DTO\Api\UserDetailDTO;
 use App\Domain\User\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,7 +21,7 @@ readonly class UserDetailHandle
 {
     public function __construct(
         private UserService $userService,
-        private ObjectToDtoMapper $objectToDtoMapper
+        private ObjectToDtoMapperInterface $objectToDtoMapper
     ) {}
 
     public function __invoke(): JsonResponse
