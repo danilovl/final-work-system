@@ -47,11 +47,8 @@ class ImportSqlCommand
             $this->validationFilePath($filePath);
 
             $output->writeln(sprintf("Processing file '<info>%s</info>' ", $filePath));
+            /** @var string $sql */
             $sql = file_get_contents($filePath);
-
-            if ($sql === false) {
-                throw new InvalidArgumentException(sprintf("Could not read SQL file '<info>%s</info>'.", $filePath));
-            }
 
             $stmt = $connection->prepare($sql);
             $stmt->executeStatement();
