@@ -16,6 +16,11 @@ use App\Application\Constant\{
     AjaxJsonTypeConstant,
     FlashTypeConstant
 };
+use App\Application\Exception\ConstantNotFoundException;
+use App\Infrastructure\Service\{
+    RequestService,
+    TranslatorService
+};
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -31,12 +36,16 @@ class RequestServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    private \App\Infrastructure\Service\RequestService $requestService;
+    private RequestService $requestService;
 
     protected function setUp(): void
     {
+        $session = new Session;
+        $session->clear();
+        $session->getFlashBag()->clear();
+
         $request = new Request;
-        $request->setSession(new Session);
+        $request->setSession($session);
 
         $this->requestStack = new RequestStack;
         $this->requestStack->push($request);
@@ -46,12 +55,12 @@ class RequestServiceTest extends TestCase
             ->method('generate')
             ->willReturn('url');
 
-        $translator = $this->createMock(\App\Infrastructure\Service\TranslatorService::class);
+        $translator = $this->createMock(TranslatorService::class);
         $translator->expects($this->any())
             ->method('trans')
             ->willReturn('trans');
 
-        $this->requestService = new \App\Infrastructure\Service\RequestService($this->requestStack, $router, $translator);
+        $this->requestService = new RequestService($this->requestStack, $router, $translator);
     }
 
     public function testAddFlash(): void
@@ -92,7 +101,7 @@ class RequestServiceTest extends TestCase
     }
 
     #[DataProvider('provideCreateAjaxJsonCases')]
-    public function testCreateAjaxJson(AjaxJsonTypeConstant $type, array $expectedResult): void
+    public function testCreateAjaxJson(AjaxJsonTypeConstant $type, array $expectedResult, int $expectedStatus): void
     {
         $expectedResult = array_merge($expectedResult, ['test' => 'test']);
         $result = $this->requestService->createAjaxJson($type, ['test' => 'test']);
@@ -100,6 +109,107 @@ class RequestServiceTest extends TestCase
         $content = $result->getContent();
 
         $this->assertSame($expectedResult, json_decode($content, true));
+        $this->assertSame($expectedStatus, $result->getStatusCode());
+    }
+
+    public function testStatusCodeOverride(): void
+    {
+        $result = $this->requestService->createAjaxJson(
+            type: AjaxJsonTypeConstant::CREATE_FAILURE,
+            statusCode: Response::HTTP_I_AM_A_TEAPOT
+        );
+
+        $this->assertSame(Response::HTTP_I_AM_A_TEAPOT, $result->getStatusCode());
+    }
+
+    public function testExtraDataMergingAndOverride(): void
+    {
+        $extra = [
+            'valid' => false,
+            'extraKey' => 'extraValue'
+        ];
+        $response = $this->requestService->createAjaxJson(AjaxJsonTypeConstant::CREATE_SUCCESS, $extra);
+        /** @var array $data */
+        $data = json_decode((string) $response->getContent(), true);
+
+        $this->assertFalse($data['valid']);
+        $this->assertSame('extraValue', $data['extraKey']);
+        $this->assertArrayHasKey('notifyMessage', $data);
+    }
+
+    public function testWithoutExtraData(): void
+    {
+        $response = $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS);
+        /** @var array $dataNull */
+        $dataNull = json_decode((string) $response->getContent(), true);
+
+        $expected = [
+            'valid' => true,
+            'notifyMessage' => [
+                FlashTypeConstant::SUCCESS->value => 'trans'
+            ]
+        ];
+        $this->assertSame($expected, $dataNull);
+
+        $responseEmpty = $this->requestService->createAjaxJson(AjaxJsonTypeConstant::SAVE_SUCCESS, []);
+        $dataEmpty = json_decode((string) $responseEmpty->getContent(), true);
+
+        $this->assertSame($expected, $dataEmpty);
+    }
+
+    public function testFlashWithMainType(): void
+    {
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::SAVE_ERROR);
+
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $messages = $session->getFlashBag()->get(FlashTypeConstant::ERROR->value);
+
+        $this->assertCount(1, $messages);
+        $this->assertSame('trans', $messages[0]);
+    }
+
+    public function testIdempotentForSameType(): void
+    {
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::CREATE_SUCCESS);
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::CREATE_SUCCESS);
+
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $messages = $session->getFlashBag()->get(FlashTypeConstant::SUCCESS->value);
+
+        $this->assertCount(1, $messages);
+        $this->assertSame('trans', $messages[0]);
+    }
+
+    public function testAddedSeparately(): void
+    {
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::CREATE_SUCCESS);
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::DELETE_WARNING);
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::DELETE_ERROR);
+
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+
+        $success = $session->getFlashBag()->get(FlashTypeConstant::SUCCESS->value);
+        $warning = $session->getFlashBag()->get(FlashTypeConstant::DELETE_WARNING->value);
+        $error = $session->getFlashBag()->get(FlashTypeConstant::ERROR->value);
+
+        $this->assertCount(1, $success);
+        $this->assertSame('trans', $success[0]);
+
+        $this->assertCount(1, $warning);
+        $this->assertSame('trans', $warning[0]);
+
+        $this->assertCount(1, $error);
+        $this->assertSame('trans', $error[0]);
+    }
+
+    public function testNotFound(): void
+    {
+        $this->expectException(ConstantNotFoundException::class);
+
+        $this->requestService->addFlashTransAutoType(FlashTypeConstant::SUCCESS);
     }
 
     public static function provideCreateAjaxJsonCases(): Generator
@@ -111,7 +221,8 @@ class RequestServiceTest extends TestCase
                 'notifyMessage' => [
                     FlashTypeConstant::SUCCESS->value => 'trans'
                 ]
-            ]
+            ],
+            Response::HTTP_CREATED
         ];
 
         yield [
@@ -122,7 +233,8 @@ class RequestServiceTest extends TestCase
                     FlashTypeConstant::ERROR->value => 'trans',
                     FlashTypeConstant::WARNING->value => 'trans'
                 ]
-            ]
+            ],
+            Response::HTTP_BAD_REQUEST
         ];
 
         yield [
@@ -132,7 +244,8 @@ class RequestServiceTest extends TestCase
                 'notifyMessage' => [
                     FlashTypeConstant::SUCCESS->value => 'trans'
                 ]
-            ]
+            ],
+            Response::HTTP_OK
         ];
 
         yield [
@@ -143,7 +256,8 @@ class RequestServiceTest extends TestCase
                     FlashTypeConstant::ERROR->value => 'trans',
                     FlashTypeConstant::WARNING->value => 'trans'
                 ]
-            ]
+            ],
+            Response::HTTP_BAD_REQUEST
         ];
 
         yield [
@@ -153,7 +267,8 @@ class RequestServiceTest extends TestCase
                 'notifyMessage' => [
                     FlashTypeConstant::SUCCESS->value => 'trans'
                 ]
-            ]
+            ],
+            Response::HTTP_OK
         ];
 
         yield [
@@ -164,7 +279,8 @@ class RequestServiceTest extends TestCase
                     FlashTypeConstant::ERROR->value => 'trans',
                     FlashTypeConstant::WARNING->value => 'trans'
                 ]
-            ]
+            ],
+            Response::HTTP_BAD_REQUEST
         ];
     }
 }
