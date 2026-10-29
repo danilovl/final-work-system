@@ -19,7 +19,8 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Messenger\{
     Envelope,
-    MessageBusInterface};
+    MessageBusInterface
+};
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class MessengerCommandBusTest extends TestCase
