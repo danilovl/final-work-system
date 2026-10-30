@@ -23,7 +23,8 @@ use Symfony\Component\Form\{
     FormBuilderInterface,
     FormConfigInterface,
     FormEvent,
-    FormInterface};
+    FormInterface
+};
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ValidationListenerExtensionTest extends TestCase
