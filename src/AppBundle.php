@@ -13,6 +13,7 @@
 namespace App;
 
 use App\Infrastructure\Config\DependencyInjection\Boot\OpenTelemetryBoot;
+use App\Infrastructure\Provider\OpenTelemetryExtensionProvider;
 use App\Infrastructure\Config\DependencyInjection\Compiler\{
     WidgetCompilerPass,
     OpenTelemetryCompilerPass,
@@ -28,7 +29,7 @@ class AppBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new OpenTelemetryCompilerPass);
+        $container->addCompilerPass(new OpenTelemetryCompilerPass(new OpenTelemetryExtensionProvider));
         $container->addCompilerPass(new ServicePublicCompilerPass);
         $container->addCompilerPass(new WidgetCompilerPass);
     }
