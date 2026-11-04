@@ -12,6 +12,7 @@
 
 namespace App\Infrastructure\Config\DependencyInjection\Compiler;
 
+use App\Infrastructure\Provider\OpenTelemetryExtensionProvider;
 use App\Infrastructure\OpenTelemetry\{
     OpenTelemetryRegistrationInterface
 };
@@ -20,12 +21,14 @@ use Override;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class OpenTelemetryCompilerPass implements CompilerPassInterface
+readonly class OpenTelemetryCompilerPass implements CompilerPassInterface
 {
+    public function __construct(private OpenTelemetryExtensionProvider $openTelemetryExtensionProvider) {}
+
     #[Override]
     public function process(ContainerBuilder $container): void
     {
-        if (!extension_loaded('opentelemetry')) {
+        if (!$this->openTelemetryExtensionProvider->isExtensionLoaded()) {
             return;
         }
 
