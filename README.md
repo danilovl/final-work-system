@@ -92,6 +92,7 @@ Test coverage
 ------------
 
 ![Alt text](/git/readme/test_coverage_application.png?raw=true "Test coverage application")
+![Alt text](/git/readme/test_coverage_infrastructure.png?raw=true "Test coverage infrastructure")
 
 Kibana
 ------------
