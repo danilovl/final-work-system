@@ -5,7 +5,7 @@
 FinalWork web application
 ========================
 
-Thesis management system based on Symfony 7.2
+Thesis management system based on Symfony 7.4
 
 Demonstration of the system from the student's perspective.
 
