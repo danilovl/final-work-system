@@ -25,9 +25,6 @@
             "config/packages/aws.yaml"
         ]
     },
-    "behat/transliterator": {
-        "version": "v1.3.0"
-    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.3"
     },
