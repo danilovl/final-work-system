@@ -84,42 +84,54 @@ class UserAddCommand
                 $io->text(' > <info>Username</info>: ' . $username);
             } else {
                 /** @var string $username */
-                $username = $io->ask('Username', null, [$this->validator, 'validateUsername']);
+                $username = $io->ask('Username', null, function (mixed $value): string {
+                    return $this->validator->validateUsername(is_string($value) ? $value : null);
+                });
             }
 
             if ($email !== null) {
                 $io->text(' > <info>Email</info>: ' . $email);
             } else {
                 /** @var string $email */
-                $email = $io->ask('Email', null, [$this->validator, 'validateEmail']);
+                $email = $io->ask('Email', null, function (mixed $value) {
+                    return $this->validator->validateEmail(is_string($value) ? $value : null);
+                });
             }
 
             if ($password !== null) {
                 $io->text(' > <info>Password</info>: ' . str_repeat('*', mb_strlen($password)));
             } else {
                 /** @var string $password */
-                $password = $io->askHidden('Password (your type will be hidden)', [$this->validator, 'validatePassword']);
+                $password = $io->askHidden('Password (your type will be hidden)', function (mixed $value): string {
+                    return $this->validator->validatePassword(is_string($value) ? $value : null);
+                });
             }
 
             if ($firstName !== null) {
                 $io->text(' > <info>First Name</info>: ' . $firstName);
             } else {
                 /** @var string $firstName */
-                $firstName = $io->ask('First Name', null, [$this->validator, 'validateFullName']);
+                $firstName = $io->ask('First Name', null, function (mixed $value): string {
+                    return $this->validator->validateFullName(is_string($value) ? $value : null);
+                });
             }
 
             if ($lastName !== null) {
                 $io->text(' > <info>Last Name</info>: ' . $lastName);
             } else {
                 /** @var string $lastName */
-                $lastName = $io->ask('Last Name', null, [$this->validator, 'validateFullName']);
+                $lastName = $io->ask('Last Name', null, function (mixed $value): string {
+                    return $this->validator->validateFullName(is_string($value) ? $value : null);
+                });
             }
 
             if ($roles !== null) {
                 $io->text(' > <info>Roles(ROLE_USER,ROLE_ADMIN)</info>: ' . $roles);
             } else {
                 /** @var string $roles */
-                $roles = $io->ask('Roles', null, [$this->validator, 'validateRoles']);
+                $roles = $io->ask('Roles', null, function (mixed $value): string {
+                    return $this->validator->validateRoles(is_string($value) ? $value : null);
+                });
             }
         }
 

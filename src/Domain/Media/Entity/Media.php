@@ -240,11 +240,12 @@ class Media
     public function getMediaSizeFormatted(): string
     {
         $size = $this->getMediaSize();
+        /** @var int $power */
         $power = $size > 0 ? floor(log($size, 1_024)) : 0;
 
         $number = number_format($size / (1_024 ** $power), 2);
 
-        return sprintf('%s %s', $number, FileSizeConstant::FILE_SIZES[$power]);
+        return sprintf('%f %s', $number, FileSizeConstant::FILE_SIZES[$power] ?? 'Unknown');
     }
 
     public function changeActive(): void

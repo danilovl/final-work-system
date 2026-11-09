@@ -43,7 +43,9 @@ class UserDeleteCommand
         if ($username === null) {
             $io->title('Delete user command');
             /** @var string $username */
-            $username = $io->ask('Username', null, [$this->validator, 'validateUsernameExist']);
+            $username = $io->ask('Username', null, function (mixed $value): string {
+                return $this->validator->validateUsernameExist(is_string($value) ? $value : null);
+            });
         }
 
         /** @var User|null $user */
