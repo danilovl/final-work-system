@@ -1,4 +1,4 @@
-FROM php:8.4-fpm AS final-work-system-php
+FROM php:8.5-fpm AS final-work-system-php
 
 RUN apt-get update \
   && apt-get install -y \
@@ -27,14 +27,12 @@ RUN apt-get update \
      libonig-dev \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && pecl install redis \
-  && pecl install -f xdebug-3.4.0 \
+  && pecl install -f xdebug-3.5.0 \
   && pecl install -f opentelemetry \
   && pecl install -f protobuf
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-
 RUN docker-php-ext-install mysqli \
-    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install intl \
@@ -45,7 +43,6 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install exif \
     && docker-php-ext-install gettext \
     && docker-php-ext-install gmp \
-    && docker-php-ext-install mbstring \
     && docker-php-ext-install pcntl \
     && docker-php-ext-install shmop \
     && docker-php-ext-install sockets \
@@ -54,23 +51,22 @@ RUN docker-php-ext-install mysqli \
     && docker-php-ext-install sysvshm \
     && docker-php-ext-install tidy \
     && docker-php-ext-install xsl \
-    && docker-php-ext-install opcache \
     && docker-php-source delete \
-    && docker-php-ext-enable redis \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-enable opentelemetry \
-    && docker-php-ext-enable protobuf
+    && docker-php-ext-enable protobuf \
+    && docker-php-ext-enable redis
 
 RUN mkdir -p /usr/src/php/ext/redis \
-    && curl -L https://github.com/phpredis/phpredis/archive/6.1.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && curl -L https://github.com/phpredis/phpredis/archive/6.3.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
     && echo 'redis' >> /usr/src/php-available-exts \
-    && docker-php-ext-install redis
+    && docker-php-ext-install redis \
+    && docker-php-ext-enable redis
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions amqp
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && install-php-extensions amqp
 
 RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
-    && "date"
+    && "date" \

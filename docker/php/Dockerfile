@@ -1,4 +1,4 @@
-FROM danilovl/final-work-system:php AS final-work-system-php
+FROM danilovl/final-work-system:php8.5 AS final-work-system-php
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

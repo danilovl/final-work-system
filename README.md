@@ -5,7 +5,7 @@
 FinalWork web application
 ========================
 
-Thesis management system based on Symfony 7.4
+Thesis management system based on Symfony 7.4 and PHP 8.5
 
 Demonstration of the system from the student's perspective.
 
@@ -24,7 +24,7 @@ It is especially useful for teachers who supervise the final theses of several d
 Requirements
 ------------
 
-* PHP 8.4 or higher
+* PHP 8.5 or higher
 * MySQL
 * Redis
 * RabbitMQ
