@@ -14,7 +14,7 @@ namespace App\Domain\Widget\Interfaces;
 
 interface WidgetInterface
 {
-    public function getName(): ?string;
+    public function getName(): string;
 
     public function setName(string $name): void;
 

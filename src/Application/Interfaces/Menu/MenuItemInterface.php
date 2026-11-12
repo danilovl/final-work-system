@@ -14,7 +14,7 @@ namespace App\Application\Interfaces\Menu;
 
 interface MenuItemInterface
 {
-    public function getName(): ?string;
+    public function getName(): string;
 
     public function setName(string $name): self;
 

@@ -31,7 +31,7 @@ class MenuItem implements MenuItemInterface
 
     public function __construct(private string $name) {}
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
