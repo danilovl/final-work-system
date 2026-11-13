@@ -10,7 +10,6 @@ doctrine:
     types:
       array: App\Infrastructure\Persistence\Doctrine\DBAL\Types\ArrayType
   orm:
-    auto_generate_proxy_classes: true
     entity_managers:
       default:
         mappings:
