@@ -79,7 +79,7 @@
                                         <td>
                                             {% set simpleSearch = '' %}
                                             {% if enableClearSearch %}
-                                                {% set simpleSearch = '?simple_search[search]=' ~ app.request.get('simple_search')['search'] %}
+                                                {% set simpleSearch = '?simple_search[search]=' ~ app.request.attributes.get('simple_search')['search'] %}
                                             {% endif %}
 
                                             <a data-toggle="modal"

@@ -18,7 +18,7 @@
                         aria-checked="false"
                     {% endif %} role="menuitem"
             >
-                <a href="{{ path(app.request.get('_route', 'homepage'), app.request.get('_route_params', []) | merge({ _locale: locale.code })) }}">
+                <a href="{{ path(app.request.attributes.get('_route', 'homepage'), app.request.attributes.get('_route_params', []) | merge({ _locale: locale.code })) }}">
                     {{ locale.name | capitalize }}
                 </a>
             </li>
