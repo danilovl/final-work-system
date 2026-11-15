@@ -144,12 +144,6 @@
     "elasticsearch/elasticsearch": {
         "version": "v7.13.1"
     },
-    "ezimuel/guzzlestreams": {
-        "version": "3.0.1"
-    },
-    "ezimuel/ringphp": {
-        "version": "1.1.2"
-    },
     "fig/link-util": {
         "version": "1.2.0"
     },
@@ -164,9 +158,6 @@
         "files": [
             ".php-cs-fixer.dist.php"
         ]
-    },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.3"
     },
     "friendsofsymfony/elastica-bundle": {
         "version": "5.0",
@@ -192,14 +183,8 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.2.0"
     },
-    "laminas/laminas-code": {
-        "version": "3.4.1"
-    },
     "monolog/monolog": {
         "version": "2.1.0"
-    },
-    "murtukov/php-code-generator": {
-        "version": "v0.1.6"
     },
     "myclabs/deep-copy": {
         "version": "1.9.5"
@@ -231,23 +216,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.5.0"
-    },
-    "nyholm/dsn": {
-        "version": "2.0.0"
-    },
-    "overblog/graphql-bundle": {
-        "version": "0.12",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "0.12",
-            "ref": "c01dcfb85a6e93f1a43ef36151fcff11cf17f791"
-        },
-        "files": [
-            "./config/graphql/types/.gitignore",
-            "./config/packages/graphql.yaml",
-            "./config/routes/graphql.yaml"
-        ]
     },
     "pagerfanta/pagerfanta": {
         "version": "v3.2.0"
@@ -346,12 +314,6 @@
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
-    },
-    "sebastian/code-unit": {
-        "version": "1.0.3"
-    },
-    "sebastian/code-unit-reverse-lookup": {
-        "version": "2.0.1"
     },
     "sebastian/comparator": {
         "version": "4.0.2"
@@ -642,9 +604,6 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.17.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.17.0"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.17.0"
     },
@@ -662,9 +621,6 @@
     },
     "symfony/property-info": {
         "version": "v5.1.1"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v5.2.4"
     },
     "symfony/routing": {
         "version": "5.1",
