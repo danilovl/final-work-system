@@ -188,7 +188,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         only_exceptions?: bool|Param, // Default: false
  *         only_main_requests?: bool|Param, // Default: false
  *         dsn?: scalar|null|Param, // Default: "file:%kernel.cache_dir%/profiler"
- *         collect_serializer_data?: bool|Param, // Enables the serializer data collector and profiler panel. // Default: false
+ *         collect_serializer_data?: true|Param, // Default: true
  *     },
  *     workflows?: bool|array{
  *         enabled?: bool|Param, // Default: false
@@ -232,7 +232,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *         resource: scalar|null|Param,
  *         type?: scalar|null|Param,
- *         cache_dir?: scalar|null|Param, // Deprecated: Setting the "framework.router.cache_dir.cache_dir" configuration option is deprecated. It will be removed in version 8.0. // Default: "%kernel.build_dir%"
  *         default_uri?: scalar|null|Param, // The default URI used to generate URLs in a non-HTTP context. // Default: null
  *         http_port?: scalar|null|Param, // Default: 80
  *         https_port?: scalar|null|Param, // Default: 443
@@ -256,8 +255,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         gc_maxlifetime?: scalar|null|Param,
  *         save_path?: scalar|null|Param, // Defaults to "%kernel.cache_dir%/sessions" if the "handler_id" option is not null.
  *         metadata_update_threshold?: int|Param, // Seconds to wait between 2 session metadata updates. // Default: 0
- *         sid_length?: int|Param, // Deprecated: Setting the "framework.session.sid_length.sid_length" configuration option is deprecated. It will be removed in version 8.0. No alternative is provided as PHP 8.4 has deprecated the related option.
- *         sid_bits_per_character?: int|Param, // Deprecated: Setting the "framework.session.sid_bits_per_character.sid_bits_per_character" configuration option is deprecated. It will be removed in version 8.0. No alternative is provided as PHP 8.4 has deprecated the related option.
  *     },
  *     request?: bool|array{ // Request configuration
  *         enabled?: bool|Param, // Default: false
@@ -331,11 +328,10 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     validation?: bool|array{ // Validation configuration
  *         enabled?: bool|Param, // Default: true
- *         cache?: scalar|null|Param, // Deprecated: Setting the "framework.validation.cache.cache" configuration option is deprecated. It will be removed in version 8.0.
  *         enable_attributes?: bool|Param, // Default: true
  *         static_method?: list<scalar|null|Param>,
  *         translation_domain?: scalar|null|Param, // Default: "validators"
- *         email_validation_mode?: "html5"|"html5-allow-no-tld"|"strict"|"loose"|Param, // Default: "html5"
+ *         email_validation_mode?: "html5"|"html5-allow-no-tld"|"strict"|Param, // Default: "html5"
  *         mapping?: array{
  *             paths?: list<scalar|null|Param>,
  *         },
@@ -347,9 +343,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         auto_mapping?: array<string, array{ // Default: []
  *             services?: list<scalar|null|Param>,
  *         }>,
- *     },
- *     annotations?: bool|array{
- *         enabled?: bool|Param, // Default: false
  *     },
  *     serializer?: bool|array{ // Serializer configuration
  *         enabled?: bool|Param, // Default: true
@@ -382,7 +375,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     property_info?: bool|array{ // Property info configuration
  *         enabled?: bool|Param, // Default: true
- *         with_constructor_extractor?: bool|Param, // Registers the constructor extractor.
+ *         with_constructor_extractor?: bool|Param, // Registers the constructor extractor. // Default: true
  *     },
  *     cache?: array{ // Cache configuration
  *         prefix_seed?: scalar|null|Param, // Used to namespace cache keys when using several apps with the same shared backend. // Default: "_%kernel.project_dir%.%kernel.container_class%"
@@ -699,7 +692,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     autoescape_service?: scalar|null|Param, // Default: null
  *     autoescape_service_method?: scalar|null|Param, // Default: null
- *     base_template_class?: scalar|null|Param, // Deprecated: The child node "base_template_class" at path "twig.base_template_class" is deprecated.
  *     cache?: scalar|null|Param, // Default: true
  *     charset?: scalar|null|Param, // Default: "%kernel.charset%"
  *     debug?: bool|Param, // Default: "%kernel.debug%"
@@ -981,7 +973,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type SecurityConfig = array{
  *     access_denied_url?: scalar|null|Param, // Default: null
  *     session_fixation_strategy?: "none"|"migrate"|"invalidate"|Param, // Default: "migrate"
- *     hide_user_not_found?: bool|Param, // Deprecated: The "hide_user_not_found" option is deprecated and will be removed in 8.0. Use the "expose_security_errors" option instead.
  *     expose_security_errors?: \Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::None|\Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::AccountStatus|\Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::All|Param, // Default: "none"
  *     erase_credentials?: bool|Param, // Default: true
  *     access_decision_manager?: array{
@@ -1217,9 +1208,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *                     claim?: scalar|null|Param, // Claim which contains the user identifier (e.g.: sub, email..). // Default: "sub"
  *                     audience: scalar|null|Param, // Audience set in the token, for validation purpose.
  *                     issuers: list<scalar|null|Param>,
- *                     algorithm?: array<mixed>,
  *                     algorithms: list<scalar|null|Param>,
- *                     key?: scalar|null|Param, // Deprecated: The "key" option is deprecated and will be removed in 8.0. Use the "keyset" option instead. // JSON-encoded JWK used to sign the token (must contain a "kty" key).
  *                     keyset?: scalar|null|Param, // JSON-encoded JWKSet used to sign the token (must contain a list of valid public keys).
  *                     encryption?: bool|array{
  *                         enabled?: bool|Param, // Default: false
@@ -1309,7 +1298,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         bubble?: bool|Param, // Default: true
  *         interactive_only?: bool|Param, // Default: false
  *         app_name?: scalar|null|Param, // Default: null
- *         fill_extra_context?: bool|Param, // Default: false
  *         include_stacktraces?: bool|Param, // Default: false
  *         process_psr_3_messages?: array{
  *             enabled?: bool|null|Param, // Default: null
@@ -1329,7 +1317,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         activation_strategy?: scalar|null|Param, // Default: null
  *         stop_buffering?: bool|Param, // Default: true
  *         passthru_level?: scalar|null|Param, // Default: null
- *         excluded_404s?: list<scalar|null|Param>,
  *         excluded_http_codes?: list<array{ // Default: []
  *             code?: scalar|null|Param,
  *             urls?: list<scalar|null|Param>,
@@ -1343,9 +1330,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         url?: scalar|null|Param,
  *         exchange?: scalar|null|Param,
  *         exchange_name?: scalar|null|Param, // Default: "log"
- *         room?: scalar|null|Param,
- *         message_format?: scalar|null|Param, // Default: "text"
- *         api_version?: scalar|null|Param, // Default: null
  *         channel?: scalar|null|Param, // Default: null
  *         bot_name?: scalar|null|Param, // Default: "Monolog"
  *         use_attachment?: scalar|null|Param, // Default: true
@@ -1354,9 +1338,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         icon_emoji?: scalar|null|Param, // Default: null
  *         webhook_url?: scalar|null|Param,
  *         exclude_fields?: list<scalar|null|Param>,
- *         team?: scalar|null|Param,
- *         notify?: scalar|null|Param, // Default: false
- *         nickname?: scalar|null|Param, // Default: "Monolog"
  *         token?: scalar|null|Param,
  *         region?: scalar|null|Param,
  *         source?: scalar|null|Param,
@@ -1374,12 +1355,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         store?: scalar|null|Param, // Default: null
  *         connection_timeout?: scalar|null|Param,
  *         persistent?: bool|Param,
- *         dsn?: scalar|null|Param,
- *         hub_id?: scalar|null|Param, // Default: null
- *         client_id?: scalar|null|Param, // Default: null
- *         auto_log_stacks?: scalar|null|Param, // Default: false
- *         release?: scalar|null|Param, // Default: null
- *         environment?: scalar|null|Param, // Default: null
  *         message_type?: scalar|null|Param, // Default: 0
  *         parse_mode?: scalar|null|Param, // Default: null
  *         disable_webpage_preview?: bool|null|Param, // Default: null
@@ -1389,7 +1364,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         topic?: int|Param, // Default: null
  *         factor?: int|Param, // Default: 1
  *         tags?: list<scalar|null|Param>,
- *         console_formater_options?: mixed, // Deprecated: "monolog.handlers..console_formater_options.console_formater_options" is deprecated, use "monolog.handlers..console_formater_options.console_formatter_options" instead.
  *         console_formatter_options?: mixed, // Default: []
  *         formatter?: scalar|null|Param,
  *         nested?: bool|Param, // Default: false
@@ -1399,15 +1373,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             port?: scalar|null|Param, // Default: 12201
  *             chunk_size?: scalar|null|Param, // Default: 1420
  *             encoder?: "json"|"compressed_json"|Param,
- *         },
- *         mongo?: string|array{
- *             id?: scalar|null|Param,
- *             host?: scalar|null|Param,
- *             port?: scalar|null|Param, // Default: 27017
- *             user?: scalar|null|Param,
- *             pass?: scalar|null|Param,
- *             database?: scalar|null|Param, // Default: "monolog"
- *             collection?: scalar|null|Param, // Default: "logs"
  *         },
  *         mongodb?: string|array{
  *             id?: scalar|null|Param, // ID of a MongoDB\Client service
@@ -1451,7 +1416,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             id: scalar|null|Param,
  *             method?: scalar|null|Param, // Default: null
  *         },
- *         lazy?: bool|Param, // Default: true
  *         verbosity_levels?: array{
  *             VERBOSITY_QUIET?: scalar|null|Param, // Default: "ERROR"
  *             VERBOSITY_NORMAL?: scalar|null|Param, // Default: "WARNING"
@@ -1509,114 +1473,28 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     script_attributes?: array<string, scalar|null|Param>,
  *     link_attributes?: array<string, scalar|null|Param>,
  * }
- * @psalm-type OverblogGraphqlConfig = array{
- *     batching_method?: "relay"|"apollo"|Param, // Default: "relay"
- *     definitions?: array{
- *         argument_class?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\Definition\\Argument"
- *         default_field_resolver?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\Resolver\\FieldResolver"
- *         class_namespace?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\__DEFINITIONS__"
- *         cache_dir?: scalar|null|Param, // Default: null
- *         cache_dir_permissions?: scalar|null|Param, // Default: null
- *         use_classloader_listener?: bool|Param, // Default: true
- *         auto_compile?: scalar|null|Param, // Default: true
- *         show_debug_info?: bool|Param, // Show some performance stats in extensions // Default: false
- *         config_validation?: bool|Param, // Default: true
- *         schema?: array<string, array{ // Default: []
- *             query?: scalar|null|Param, // Default: null
- *             mutation?: scalar|null|Param, // Default: null
- *             subscription?: scalar|null|Param, // Default: null
- *             types?: list<scalar|null|Param>,
- *         }>,
- *         mappings?: array{
- *             auto_discover?: array{
- *                 bundles?: bool|Param, // Default: false
- *                 root_dir?: bool|Param, // Default: false
- *                 built_in?: bool|Param, // Default: true
- *             },
- *             types?: list<array{ // Default: []
- *                 types?: list<"yaml"|"graphql"|"annotation"|"attribute"|Param>,
- *                 dir?: scalar|null|Param, // Default: null
- *                 suffix?: scalar|null|Param, // Default: ".types"
- *             }>,
- *         },
- *         builders?: array{
- *             field?: list<array{ // Default: []
- *                 alias: scalar|null|Param,
- *                 class: scalar|null|Param,
- *             }>,
- *             fields?: list<array{ // Default: []
- *                 alias: scalar|null|Param,
- *                 class: scalar|null|Param,
- *             }>,
- *             args?: list<array{ // Default: []
- *                 alias: scalar|null|Param,
- *                 class: scalar|null|Param,
- *             }>,
- *         },
- *     },
- *     errors_handler?: array{
- *         enabled?: bool|Param, // Default: true
- *         internal_error_message?: scalar|null|Param, // Default: "Internal server Error"
- *         rethrow_internal_exceptions?: bool|Param, // Default: false
- *         debug?: bool|Param, // Default: true
- *         log?: bool|Param, // Default: true
- *         logger_service?: scalar|null|Param, // Default: "logger"
- *         map_exceptions_to_parent?: bool|Param, // Default: false
- *         exceptions?: array{
- *             warnings?: list<scalar|null|Param>,
- *             errors?: list<scalar|null|Param>,
- *         },
- *     },
- *     services?: array{
- *         executor?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\Executor\\Executor"
- *         promise_adapter?: scalar|null|Param, // Default: "GraphQL\\Executor\\Promise\\Adapter\\SyncPromiseAdapter"
- *         expression_language?: scalar|null|Param, // Default: "Overblog\\GraphQLBundle\\ExpressionLanguage\\ExpressionLanguage"
- *         cache_expression_language_parser?: scalar|null|Param,
- *     },
- *     security?: array{
- *         query_max_depth?: scalar|null|Param, // Disabled if equal to false. // Default: 0
- *         query_max_complexity?: scalar|null|Param, // Disabled if equal to false. // Default: 0
- *         enable_introspection?: bool|Param, // Default: true
- *         handle_cors?: bool|Param, // Default: false
- *     },
- *     doctrine?: array{
- *         types_mapping?: list<scalar|null|Param>,
- *     },
- *     profiler?: array{
- *         query_match?: scalar|null|Param, // Default: null
- *     },
- * }
  * @psalm-type FosElasticaConfig = array{
  *     clients?: array<string, array{ // Default: []
- *         connections?: list<array{ // Default: []
- *             url?: scalar|null|Param,
- *             username?: scalar|null|Param,
- *             password?: scalar|null|Param,
- *             host?: scalar|null|Param,
- *             port?: scalar|null|Param,
- *             proxy?: scalar|null|Param,
- *             auth_type?: scalar|null|Param,
- *             http_error_codes?: list<scalar|null|Param>,
- *             aws_access_key_id?: scalar|null|Param,
- *             aws_secret_access_key?: scalar|null|Param,
- *             aws_region?: scalar|null|Param,
- *             aws_session_token?: scalar|null|Param,
- *             aws_credential_provider?: scalar|null|Param,
- *             ssl?: bool|Param, // Default: false
- *             logger?: scalar|null|Param, // Default: "fos_elastica.logger"
- *             compression?: bool|Param, // Default: false
- *             headers?: array<string, scalar|null|Param>,
- *             curl?: array<string, scalar|null|Param>,
- *             transport?: scalar|null|Param,
- *             timeout?: scalar|null|Param,
- *             connectTimeout?: scalar|null|Param,
- *             retryOnConflict?: scalar|null|Param, // Default: 0
- *             persistent?: bool|Param, // Default: true
- *         }>,
- *         timeout?: scalar|null|Param,
- *         connectTimeout?: scalar|null|Param,
- *         headers?: scalar|null|Param,
- *         connectionStrategy?: scalar|null|Param, // Default: "Simple"
+ *         hosts?: list<scalar|null|Param>,
+ *         username?: scalar|null|Param,
+ *         password?: scalar|null|Param,
+ *         http_client?: scalar|null|Param,
+ *         cloud_id?: scalar|null|Param,
+ *         retries?: scalar|null|Param,
+ *         api_key?: scalar|null|Param,
+ *         http_error_codes?: list<scalar|null|Param>,
+ *         logger?: scalar|null|Param, // Default: "fos_elastica.logger"
+ *         client_config?: array{
+ *             ssl_cert?: scalar|null|Param,
+ *             ssl_key?: scalar|null|Param,
+ *             ssl_verify?: scalar|null|Param,
+ *             ssl_ca?: scalar|null|Param,
+ *         },
+ *         client_options?: array<string, scalar|null|Param>,
+ *         headers?: array<string, scalar|null|Param>,
+ *         timeout?: scalar|null|Param, // Default: 30
+ *         retry_on_conflict?: scalar|null|Param, // Default: 0
+ *         connection_strategy?: scalar|null|Param, // Default: "Simple"
  *     }>,
  *     indexes?: array<string, array{ // Default: []
  *         index_name?: scalar|null|Param, // Defaults to the name of the index, but can be modified if the index name is different in ElasticSearch
@@ -1758,7 +1636,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     index_templates?: array<string, null|array{ // Default: []
  *         template_name?: scalar|null|Param, // Defaults to the name of the index template, but can be modified if the index name is different in ElasticSearch
- *         template?: scalar|null|Param,
  *         index_patterns?: list<scalar|null|Param>,
  *         client?: scalar|null|Param,
  *         settings?: mixed, // Default: []
@@ -14578,7 +14455,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     secret?: scalar|null|Param, // The secret used to compute fingerprints and checksums // Default: "%kernel.secret%"
  * }
  * @psalm-type NelmioApiDocConfig = array{
- *     type_info?: bool|Param, // Use the symfony/type-info component for determining types. // Default: false
+ *     type_info?: bool|Param, // Use the symfony/type-info component for determining types. // Default: true
  *     use_validation_groups?: bool|Param, // If true, `groups` passed to #[Model] attributes will be used to limit validation constraints // Default: false
  *     operation_id_generation?: \Nelmio\ApiDocBundle\Describer\OperationIdGeneration::ALWAYS_PREPEND|\Nelmio\ApiDocBundle\Describer\OperationIdGeneration::CONDITIONALLY_PREPEND|\Nelmio\ApiDocBundle\Describer\OperationIdGeneration::NO_PREPEND|"always_prepend"|"conditionally_prepend"|"no_prepend"|Param, // How to generate operation ids // Default: "always_prepend"
  *     cache?: array{
@@ -14632,6 +14509,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type DanilovlTranslatorConfig = array{
  *     enabled?: scalar|null|Param, // Default: true
  *     enabledAutoAdminRefreshCache?: scalar|null|Param, // Default: false
+ *     enabledDashboardController?: scalar|null|Param, // Default: true
  *     locale?: list<scalar|null|Param>,
  *     domain?: list<scalar|null|Param>,
  * }
@@ -14961,7 +14839,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     debug?: DebugConfig,
  *     knp_paginator?: KnpPaginatorConfig,
  *     webpack_encore?: WebpackEncoreConfig,
- *     overblog_graphql?: OverblogGraphqlConfig,
  *     fos_elastica?: FosElasticaConfig,
  *     nelmio_cors?: NelmioCorsConfig,
  *     api_platform?: ApiPlatformConfig,
@@ -14995,7 +14872,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         maker?: MakerConfig,
  *         knp_paginator?: KnpPaginatorConfig,
  *         webpack_encore?: WebpackEncoreConfig,
- *         overblog_graphql?: OverblogGraphqlConfig,
  *         fos_elastica?: FosElasticaConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         api_platform?: ApiPlatformConfig,
@@ -15029,7 +14905,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         debug?: DebugConfig,
  *         knp_paginator?: KnpPaginatorConfig,
  *         webpack_encore?: WebpackEncoreConfig,
- *         overblog_graphql?: OverblogGraphqlConfig,
  *         fos_elastica?: FosElasticaConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         api_platform?: ApiPlatformConfig,

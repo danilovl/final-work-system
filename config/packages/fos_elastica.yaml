@@ -1,8 +1,7 @@
 fos_elastica:
   clients:
     default:
-      host: '%env(ELASTICSEARCH_HOST)%'
-      port: '%env(ELASTICSEARCH_PORT)%'
+      hosts: ['%env(ELASTICSEARCH_URL)%']
       username: '%env(ELASTICSEARCH_USERNAME)%'
       password: '%env(ELASTICSEARCH_PASSWORD)%'
 
