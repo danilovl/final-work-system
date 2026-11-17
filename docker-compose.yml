@@ -6,7 +6,7 @@ services:
 
   elasticsearch:
     build: docker/elasticsearch
-    restart: always
+#    restart: always
     ports:
       - '7103:9200'
       - '7104:9300'
@@ -15,8 +15,8 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
-  #    volumes:
-  #      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
+    volumes:
+      - ./docker-data/elasticsearch/data:/usr/share/elasticsearch/data
 
   rabbitmq:
     build: docker/rabbitmq
@@ -129,7 +129,7 @@ services:
       - elasticsearch
 
   apm-server:
-    image: elastic/apm-server:8.16.2
+    image: elastic/apm-server:9.0.0
     depends_on:
       - elasticsearch
       - kibana
@@ -138,7 +138,7 @@ services:
     ports:
       - '7120:8200'
     command: >
-      apm-server -e
+      -e
         -E setup.kibana.host=kibana:5601
         -E setup.template.settings.index.number_of_replicas=0
         -E apm-server.rum.enabled=true
@@ -160,7 +160,7 @@ services:
       context: ./
       dockerfile: ./docker/php/Dockerfile
       target: final-work-system-php-supervisor
-    restart: always
+#    restart: always
     ports:
       - '7130:9001'
     depends_on:
