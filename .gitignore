@@ -1,5 +1,7 @@
 .idea
-docker-data/
+docker-data/elasticsearch/data/*
+!docker-data/elasticsearch/data/node.lock
+!docker-data/elasticsearch/data/nodes
 
 .phpunit
 .phpunit.result.cache
