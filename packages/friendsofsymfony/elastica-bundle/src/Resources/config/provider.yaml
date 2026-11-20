@@ -1,0 +1,5 @@
+services:
+    fos_elastica.pager_provider_registry:
+        class: FOS\ElasticaBundle\Provider\PagerProviderRegistry
+        arguments:
+            - !tagged_locator { tag: fos_elastica.pager_provider, index_by: index }

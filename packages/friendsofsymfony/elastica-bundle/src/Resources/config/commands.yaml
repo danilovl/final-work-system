@@ -1,0 +1,50 @@
+services:
+    fos_elastica.command.create:
+        class: FOS\ElasticaBundle\Command\CreateCommand
+        arguments:
+            - '@fos_elastica.index_manager'
+            - '@fos_elastica.mapping_builder'
+            - '@fos_elastica.config_manager'
+            - '@fos_elastica.alias_processor'
+        tags:
+            - { name: console.command, command: fos:elastica:create }
+
+    fos_elastica.command.delete:
+        class: FOS\ElasticaBundle\Command\DeleteCommand
+        arguments:
+            - '@fos_elastica.index_manager'
+        tags:
+            - { name: console.command, command: fos:elastica:delete }
+
+    fos_elastica.command.populate:
+        class: FOS\ElasticaBundle\Command\PopulateCommand
+        arguments:
+            - '@event_dispatcher'
+            - '@fos_elastica.index_manager'
+            - '@fos_elastica.pager_provider_registry'
+            - '@fos_elastica.pager_persister_registry'
+            - '@fos_elastica.resetter'
+        tags:
+            - { name: console.command, command: fos:elastica:populate }
+
+    fos_elastica.command.reset:
+        class: FOS\ElasticaBundle\Command\ResetCommand
+        arguments:
+            - '@fos_elastica.index_manager'
+            - '@fos_elastica.resetter'
+        tags:
+            - { name: console.command, command: fos:elastica:reset }
+
+    fos_elastica.command.templates_reset:
+        class: FOS\ElasticaBundle\Command\ResetTemplatesCommand
+        arguments:
+            - '@fos_elastica.template_resetter'
+        tags:
+            - { name: console.command, command: fos:elastica:reset-templates }
+
+    fos_elastica.command.search:
+        class: FOS\ElasticaBundle\Command\SearchCommand
+        arguments:
+            - '@fos_elastica.index_manager'
+        tags:
+            - { name: console.command, command: fos:elastica:search }

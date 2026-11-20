@@ -1,0 +1,67 @@
+parameters:
+    fos_elastica.property_accessor.magicCall: false
+    fos_elastica.property_accessor.throwExceptionOnInvalidIndex: false
+
+services:
+    fos_elastica.client_prototype:
+        class: FOS\ElasticaBundle\Elastica\Client
+        abstract: true
+        arguments:
+            $config: 'configuration for Ruflin Client'
+            $forbiddenCodes: 'list of forbidden codes for Client'
+            $logger: 'logger for Ruflin Client'
+        calls:
+            - [setStopwatch, ['@?debug.stopwatch']]
+            - [setEventDispatcher, ['@?event_dispatcher']]
+
+    FOS\ElasticaBundle\Elastica\NodePool\RoundRobinResurrect:
+        factory: ['FOS\ElasticaBundle\Elastica\NodePool\RoundRobinResurrect', create]
+
+    FOS\ElasticaBundle\Elastica\NodePool\RoundRobinNoResurrect:
+        factory: ['FOS\ElasticaBundle\Elastica\NodePool\RoundRobinNoResurrect', create]
+
+    fos_elastica.config_manager:
+        class: FOS\ElasticaBundle\Configuration\ConfigManager
+        arguments:
+            - [] # collection of SourceInterface services
+
+    FOS\ElasticaBundle\Configuration\ConfigManager:
+        alias: fos_elastica.config_manager
+
+    fos_elastica.config_manager.index_templates:
+        class: FOS\ElasticaBundle\Configuration\ConfigManager
+        arguments:
+            - [] # collection of SourceInterface services
+
+    fos_elastica.data_collector:
+        class: FOS\ElasticaBundle\DataCollector\ElasticaDataCollector
+        arguments:
+            - '@fos_elastica.logger'
+        tags:
+            - { name: data_collector, template: '@FOSElastica/Collector/elastica.html.twig', id: elastica }
+
+    fos_elastica.paginator.subscriber:
+        class: FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber
+        arguments:
+            - '@request_stack'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    fos_elastica.logger:
+        class: FOS\ElasticaBundle\Logger\ElasticaLogger
+        arguments:
+            - '@?logger'
+            - '%kernel.debug%'
+        tags:
+            - { name: monolog.logger, channel: elastica }
+
+    fos_elastica.mapping_builder:
+        class: FOS\ElasticaBundle\Index\MappingBuilder
+        arguments:
+            - '@event_dispatcher'
+
+    fos_elastica.property_accessor:
+        class: Symfony\Component\PropertyAccess\PropertyAccessor
+        arguments:
+            - '%fos_elastica.property_accessor.magicCall%'
+            - '%fos_elastica.property_accessor.throwExceptionOnInvalidIndex%'

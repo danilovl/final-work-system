@@ -1,0 +1,14 @@
+services:
+    fos_elastica.config_source.container:
+        class: FOS\ElasticaBundle\Configuration\Source\ContainerSource
+        arguments:
+            - [] # index configs
+        tags:
+            - { name: fos_elastica.config_source }
+
+    fos_elastica.config_source.template_container:
+        class: FOS\ElasticaBundle\Configuration\Source\TemplateContainerSource
+        arguments:
+            - [] # index configs
+        tags:
+            - { name: fos_elastica.config_source, source: index_template }

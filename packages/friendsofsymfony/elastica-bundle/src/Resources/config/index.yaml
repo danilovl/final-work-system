@@ -1,0 +1,69 @@
+services:
+    fos_elastica.repository_manager:
+        class: FOS\ElasticaBundle\Manager\RepositoryManager
+
+    fos_elastica.alias_processor:
+        class: FOS\ElasticaBundle\Index\AliasProcessor
+
+    fos_elastica.indexable:
+        class: FOS\ElasticaBundle\Provider\Indexable
+        arguments:
+            - [] # array of indexable callbacks keyed by type name
+
+    fos_elastica.index_prototype:
+        class: FOS\ElasticaBundle\Elastica\Index
+        abstract: true
+        arguments:
+            - ~ # index name
+
+    fos_elastica.index_template_prototype:
+        class: FOS\ElasticaBundle\Elastica\IndexTemplate
+        abstract: true
+        arguments:
+            - ~ # index template name
+
+    fos_elastica.index_manager:
+        class: FOS\ElasticaBundle\Index\IndexManager
+        arguments:
+            - ~ # indexes
+            - '@fos_elastica.index' # default index
+
+    FOS\ElasticaBundle\Index\IndexManager:
+        alias: fos_elastica.index_manager
+
+    fos_elastica.index_template_manager:
+        class: FOS\ElasticaBundle\Index\IndexTemplateManager
+        arguments:
+            - ~ # indexes templates
+
+    FOS\ElasticaBundle\Index\IndexTemplateManager:
+        alias: fos_elastica.index_template_manager
+
+    fos_elastica.resetter:
+        class: FOS\ElasticaBundle\Index\Resetter
+        arguments:
+            - '@fos_elastica.config_manager'
+            - '@fos_elastica.index_manager'
+            - '@fos_elastica.alias_processor'
+            - '@fos_elastica.mapping_builder'
+            - '@event_dispatcher'
+
+    FOS\ElasticaBundle\Index\Resetter:
+        alias: fos_elastica.resetter
+
+    fos_elastica.template_resetter:
+        class: FOS\ElasticaBundle\Index\TemplateResetter
+        arguments:
+            - '@fos_elastica.config_manager.index_templates'
+            - '@fos_elastica.mapping_builder'
+            - '@fos_elastica.index_template_manager'
+
+    FOS\ElasticaBundle\Index\TemplateResetter:
+        alias: fos_elastica.template_resetter
+
+    fos_elastica.finder:
+        class: FOS\ElasticaBundle\Finder\TransformedFinder
+        abstract: true
+        arguments:
+            - ~ # searchable
+            - ~ # transformer

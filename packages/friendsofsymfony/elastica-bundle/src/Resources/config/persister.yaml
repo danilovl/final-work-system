@@ -1,0 +1,45 @@
+services:
+    fos_elastica.in_place_pager_persister:
+        class: FOS\ElasticaBundle\Persister\InPlacePagerPersister
+        arguments:
+            - '@fos_elastica.persister_registry'
+            - '@event_dispatcher'
+        tags:
+            - { name: fos_elastica.pager_persister, persisterName: in_place }
+
+    fos_elastica.pager_persister_registry:
+        class: FOS\ElasticaBundle\Persister\PagerPersisterRegistry
+        arguments:
+            - !tagged_locator { tag: fos_elastica.pager_persister, index_by: persisterName }
+
+    fos_elastica.persister_registry:
+        class: FOS\ElasticaBundle\Persister\PersisterRegistry
+        arguments:
+            - !tagged_locator { tag: fos_elastica.persister, index_by: index }
+
+    fos_elastica.filter_objects_listener:
+        class: FOS\ElasticaBundle\Persister\Listener\FilterObjectsListener
+        arguments:
+            - '@fos_elastica.indexable'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    fos_elastica.object_persister:
+        class: FOS\ElasticaBundle\Persister\ObjectPersister
+        abstract: true
+        arguments:
+            - ~ # index
+            - ~ # model to elastica transformer
+            - ~ # model
+            - ~ # properties mapping
+            - ~ # options
+
+    fos_elastica.object_serializer_persister:
+        class: FOS\ElasticaBundle\Persister\ObjectSerializerPersister
+        abstract: true
+        arguments:
+            - ~ # type
+            - ~ # model to elastica transformer
+            - ~ # model
+            - ~ # serializer
+            - ~ # options

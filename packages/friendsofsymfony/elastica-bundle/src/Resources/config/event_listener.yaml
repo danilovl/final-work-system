@@ -1,0 +1,7 @@
+services:
+    fos_elastica.populate_listener:
+        class: FOS\ElasticaBundle\EventListener\PopulateListener
+        arguments:
+            - '@fos_elastica.resetter'
+        tags:
+            - { name: kernel.event_listener, event: FOS\ElasticaBundle\Event\PostIndexPopulateEvent, method: onPostIndexPopulate, priority: -9999 }
