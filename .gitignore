@@ -1,7 +1,12 @@
 .idea
+
+docker-data/*
+!docker-data/elasticsearch/
+!docker-data/elasticsearch/**
 docker-data/elasticsearch/data/*
 !docker-data/elasticsearch/data/node.lock
 !docker-data/elasticsearch/data/nodes
+docker-data/mysql/
 
 .phpunit
 .phpunit.result.cache
