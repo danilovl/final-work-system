@@ -56,7 +56,7 @@ final class MediaFileType extends AbstractType
     private function uploadMediaConstraints(Options $options): array
     {
         $constraints = [
-            new File(['mimeTypes' => $options['mimeTypes']])
+            new File(mimeTypes: $options['mimeTypes'])
         ];
 
         if (!empty($options['uploadMedia'])) {

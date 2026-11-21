@@ -40,8 +40,8 @@ class ProfileMediaForm extends AbstractType
             'required' => true,
             'constraints' => [
                 new NotBlank,
-                new File($this->parameterService->getArray('constraints.profile.file')),
-                new Image($this->parameterService->getArray('constraints.profile.image'))
+                new File(...$this->parameterService->getArray('constraints.profile.file')),
+                new Image(...$this->parameterService->getArray('constraints.profile.image'))
             ]
         ]);
     }
