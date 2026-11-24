@@ -17,11 +17,11 @@ use App\Domain\Media\Entity\Media;
 use App\Domain\Version\EventDispatcher\GenericEvent\VersionGenericEvent;
 use App\Domain\Version\EventDispatcher\VersionEventDispatcherService;
 use App\Infrastructure\Service\EventDispatcherService;
+use Closure;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use PHPUnit\Framework\TestCase;
 
 class VersionEventDispatcherServiceTest extends TestCase
@@ -47,20 +47,20 @@ class VersionEventDispatcherServiceTest extends TestCase
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
             ->method('dispatch')
-            ->will($this->createReturnCallback($expectEvents, $expectNames));
+            ->willReturnCallback($this->createReturnCallback($expectEvents, $expectNames));
 
         $this->versionEventDispatcherService->{$method}($media);
         $this->asyncService->call();
     }
 
-    private function createReturnCallback(array $expectEvents, array $expectNames): ReturnCallback
+    private function createReturnCallback(array $expectEvents, array $expectNames): Closure
     {
-        return $this->returnCallback(function (VersionGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): VersionGenericEvent {
+        return function (VersionGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): VersionGenericEvent {
             $this->assertTrue(in_array(get_class($event), $expectEvents, true));
             $this->assertTrue(in_array($eventName, $expectNames, true));
 
             return $event;
-        });
+        };
     }
 
     public static function provideDispatchCases(): Generator
