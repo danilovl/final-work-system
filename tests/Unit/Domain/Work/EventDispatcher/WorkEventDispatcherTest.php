@@ -18,11 +18,11 @@ use App\Domain\Work\Entity\Work;
 use App\Domain\Work\EventDispatcher\GenericEvent\WorkGenericEvent;
 use App\Domain\Work\EventDispatcher\WorkEventDispatcher;
 use App\Infrastructure\Service\EventDispatcherService;
+use Closure;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use PHPUnit\Framework\TestCase;
 
 class WorkEventDispatcherTest extends TestCase
@@ -48,20 +48,20 @@ class WorkEventDispatcherTest extends TestCase
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
             ->method('dispatch')
-            ->will($this->createReturnCallback($expectEvents, $expectNames));
+            ->willReturnCallback($this->createReturnCallback($expectEvents, $expectNames));
 
         $this->workEventDispatcher->{$method}($work);
         $this->asyncService->call();
     }
 
-    private function createReturnCallback(array $expectEvents, array $expectNames): ReturnCallback
+    private function createReturnCallback(array $expectEvents, array $expectNames): Closure
     {
-        return $this->returnCallback(function (WorkGenericEvent|UserGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): WorkGenericEvent|UserGenericEvent {
+        return function (WorkGenericEvent|UserGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): WorkGenericEvent|UserGenericEvent {
             $this->assertTrue(in_array(get_class($event), $expectEvents, true));
             $this->assertTrue(in_array($eventName, $expectNames, true));
 
             return $event;
-        });
+        };
     }
 
     public static function provideDispatchCases(): Generator
