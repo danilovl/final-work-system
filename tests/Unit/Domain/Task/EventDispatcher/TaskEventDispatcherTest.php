@@ -18,12 +18,12 @@ use App\Domain\Task\Entity\Task;
 use App\Domain\Task\EventDispatcher\GenericEvent\TaskGenericEvent;
 use App\Domain\Task\EventDispatcher\TaskEventDispatcher;
 use App\Infrastructure\Service\EventDispatcherService;
+use Closure;
 use Danilovl\AsyncBundle\Service\AsyncService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use PHPUnit\Framework\TestCase;
 
 class TaskEventDispatcherTest extends TestCase
@@ -61,7 +61,7 @@ class TaskEventDispatcherTest extends TestCase
         $this->eventDispatcher
             ->expects($this->exactly($exactly))
             ->method('dispatch')
-            ->will($this->createReturnCallback($expectEvents, $expectNames));
+            ->willReturnCallback($this->createReturnCallback($expectEvents, $expectNames));
 
         $arguments = array_merge([$task], $otherArguments);
 
@@ -69,14 +69,14 @@ class TaskEventDispatcherTest extends TestCase
         $this->asyncService->call();
     }
 
-    private function createReturnCallback(array $expectEvents, array $expectNames): ReturnCallback
+    private function createReturnCallback(array $expectEvents, array $expectNames): Closure
     {
-        return $this->returnCallback(function (TaskGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): TaskGenericEvent {
+        return function (TaskGenericEvent $event, string $eventName) use ($expectEvents, $expectNames): TaskGenericEvent {
             $this->assertTrue(in_array(get_class($event), $expectEvents, true));
             $this->assertTrue(in_array($eventName, $expectNames, true));
 
             return $event;
-        });
+        };
     }
 
     public static function provideDispatchCases(): Generator
