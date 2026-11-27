@@ -54,7 +54,7 @@ class EntityManagerServiceTest extends KernelTestCase
     {
         $reference = $this->entityManagerService->getReference($entityClass, 1);
         $this->assertNotNull($reference, "Reference should not be null");
-        $this->assertEquals(get_parent_class($reference), $entityClass);
+        $this->assertInstanceOf($entityClass, $reference);
     }
 
     public static function provideRepositoryCases(): Generator
