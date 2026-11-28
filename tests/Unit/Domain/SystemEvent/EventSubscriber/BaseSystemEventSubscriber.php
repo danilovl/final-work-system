@@ -60,7 +60,8 @@ class BaseSystemEventSubscriber extends TestCase
         $this->assertFalse($this->dispatcher->hasListeners($eventKey));
     }
 
-    public function testCountEvent(): void
+    #[DataProvider('subscribedEvents')]
+    public function testCountEvent(string $eventKey): void
     {
         $this->assertCount(
             count($this->subscriber::getSubscribedEvents()),
@@ -71,7 +72,7 @@ class BaseSystemEventSubscriber extends TestCase
     public static function subscribedEvents(): Generator
     {
         foreach ((static::$classSubscriber)::getSubscribedEvents() as $eventKey => $event) {
-            yield [$eventKey, $event];
+            yield [$eventKey];
         }
     }
 }

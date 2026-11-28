@@ -145,13 +145,13 @@ class BaseEmailNotificationSubscriberTest extends AbstractBaseEmailNotificationS
     }
 
     #[DataProvider('subscribedEvents')]
-    public function testCountEvent(): void
+    public function testCountEvent(string $eventKey): void
     {
         $this->expectNotToPerformAssertions();
     }
 
     public static function subscribedEvents(): Generator
     {
-        yield ['subscribedEvents'];
+        yield ['key'];
     }
 }
