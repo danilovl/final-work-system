@@ -62,16 +62,16 @@ class DoctrineExtensionListenerTest extends TestCase
 
         $userService = new UserService($tokenStorage, $entityManagerService, $userFacade);
         $this->loggableListener = $this->createMock(LoggableListener::class);
-        $this->loggableListener->expects($this->any())
-            ->method('setUsername')
-            ->with($user->getUsername());
 
         $this->listener = new DoctrineExtensionListener($userService, $this->loggableListener);
     }
 
     public function testOnKernelRequest(): void
     {
-        $this->expectNotToPerformAssertions();
+        $this->loggableListener
+            ->expects($this->once())
+            ->method('setUsername')
+            ->with('username');
 
         $this->listener->onKernelRequest();
     }
