@@ -34,7 +34,7 @@ class CommentFormTest extends KernelTestCase
 
     private function getUserMock(int $id): User
     {
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')
             ->willReturn($id);
 
@@ -43,13 +43,11 @@ class CommentFormTest extends KernelTestCase
 
     private function getEventMock(bool $isOwner, string $dateTime): Event
     {
-        $event = $this->createMock(Event::class);
-        $event->expects($this->any())
-            ->method('getStart')
+        $event = $this->createStub(Event::class);
+        $event->method('getStart')
             ->willReturn(new DateTime($dateTime));
 
-        $event->expects($this->any())
-            ->method('isOwner')
+        $event->method('isOwner')
             ->willReturn($isOwner);
 
         return $event;
