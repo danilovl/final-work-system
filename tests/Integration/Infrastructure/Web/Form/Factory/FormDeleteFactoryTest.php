@@ -27,20 +27,16 @@ class FormDeleteFactoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        self::bootKernel();
-
         $kernel = self::bootKernel();
         /** @var FormFactoryInterface $formFactory */
         $formFactory = $kernel->getContainer()->get('form.factory');
 
-        $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->any())
-            ->method('generate')
+        $router = $this->createStub(RouterInterface::class);
+        $router->method('generate')
             ->willReturn('url');
 
-        $hashids = $this->createMock(HashidsServiceInterface::class);
-        $hashids->expects($this->any())
-            ->method('encode')
+        $hashids = $this->createStub(HashidsServiceInterface::class);
+        $hashids->method('encode')
             ->willReturn('Kt49gnG3');
 
         $this->formDeleteFactory = new FormDeleteFactory(
