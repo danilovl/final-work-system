@@ -17,6 +17,10 @@ parameters:
         - src/Infrastructure/OpenTelemetry
         - tests/bootstrap.php
         - tests/Mock
+        - src/Infrastructure/GraphQL/Resolver/NotDoctrineResolverMap.php
+        - src/Domain/User/GraphQL/Resolver/UserResolverMap.php
+        - src/Domain/Work/GraphQL/Resolver/WorkResolverMap.php
+        - src/Domain/Task/GraphQL/Resolver/TaskResolverMap.php
     ignoreErrors:
        -
            identifier: missingType.iterableValue
